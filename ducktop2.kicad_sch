@@ -1,0 +1,190 @@
+(kicad_sch
+  (version 20260306)
+  (generator "eeschema")
+  (generator_version "10.0")
+  (uuid ac5e7d25-6b8b-4b10-b3c9-6531b0b8ae17)
+  (paper "A3")
+  (lib_symbols
+  )
+(sheet
+  (at 50 50)
+  (size 60 80)
+  (stroke (width 0.1524) (type solid))
+  (fill (color 0 0 0 0.0))
+  (uuid d1b467fd-4ad6-48a3-bd9e-8afbe2d7116b)
+  (property "Sheetname" "Power & Battery"
+    (at 50 49 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (property "Sheetfile" "01_power_battery.kicad_sch"
+    (at 50 131 0)
+    (effects (font (size 1.27 1.27)) (justify left top))
+  )
+  (pin "I2C_SCL" bidirectional
+    (at 110 55 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e061942d-4761-4ec9-b38a-67a13540ac2a)
+  )
+  (pin "I2C_SDA" bidirectional
+    (at 110 61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 67985671-a514-47b1-963c-84226db84896)
+  )
+  (pin "BQ_ALERT" bidirectional
+    (at 110 67 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid a65ddca0-11a4-4f22-b0c0-bffbd7256c56)
+  )
+  (pin "CHG_INT_N" bidirectional
+    (at 110 73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 947a0ad7-ed52-4573-9401-c6488949a186)
+  )
+  (pin "PMIC_QON" bidirectional
+    (at 110 79 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7cb3eeca-7a3a-48d2-918e-e302dedbce47)
+  )
+  (pin "CHG_CE_N" bidirectional
+    (at 110 85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 5fa215d4-0183-41cd-b667-e192bda1b42a)
+  )
+  (pin "VSYS" bidirectional
+    (at 110 91 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 06648a56-986a-4ea4-9b60-570cc0cdbcac)
+  )
+  (pin "VBUS_PD1" bidirectional
+    (at 110 97 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6077b5d2-4aca-4e57-b330-f075691b723b)
+  )
+  (pin "VBUS_PD2" bidirectional
+    (at 110 103 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 67d9fbb6-14fc-490b-b107-d418bc0cab0b)
+  )
+  (pin "VBUS_PD3" bidirectional
+    (at 110 109 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2adaba98-9551-4d56-b737-9c2c32840939)
+  )
+  (pin "USB_DP1" bidirectional
+    (at 110 115 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid ae099040-b115-4404-a363-e33382a516e0)
+  )
+  (pin "USB_DM1" bidirectional
+    (at 110 121 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 3e5a9e0d-de56-4ffb-a71c-b81e054cf6ac)
+  )
+)
+(sheet
+  (at 180 50)
+  (size 60 70)
+  (stroke (width 0.1524) (type solid))
+  (fill (color 0 0 0 0.0))
+  (uuid f74ea344-c889-4313-b50c-02e58554db37)
+  (property "Sheetname" "EC & MCU"
+    (at 180 49 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (property "Sheetfile" "02_ec_mcu.kicad_sch"
+    (at 180 121 0)
+    (effects (font (size 1.27 1.27)) (justify left top))
+  )
+  (pin "I2C_SCL" bidirectional
+    (at 240 55 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d854ecaa-184d-4a40-b2ee-f7c49e2804ba)
+  )
+  (pin "I2C_SDA" bidirectional
+    (at 240 61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid aa3083e5-53c1-44e2-a77f-60d8ec5f5389)
+  )
+  (pin "BQ_ALERT" bidirectional
+    (at 240 67 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d32e59ae-5ce4-4d2b-8701-532b554e9eb6)
+  )
+  (pin "CHG_INT_N" bidirectional
+    (at 240 73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 8d53b1b7-9a96-4853-a1e2-1612d16964a9)
+  )
+  (pin "PMIC_QON" bidirectional
+    (at 240 79 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d42f3da4-45af-4007-9d1a-01ecc4310801)
+  )
+  (pin "CHG_CE_N" bidirectional
+    (at 240 85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9a79d8b2-d140-46f5-a210-005ff8b1ee5f)
+  )
+  (pin "VSYS" bidirectional
+    (at 240 91 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid a0ad5114-0369-4fa5-89bb-f04561ecb96c)
+  )
+  (pin "MCU_USB_DP" bidirectional
+    (at 240 97 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid ba9209f6-cdcb-48ac-8faa-5ec6e2b551ce)
+  )
+  (pin "MCU_USB_DM" bidirectional
+    (at 240 103 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6ef2a986-705a-4954-be5d-30fffc288b1e)
+  )
+  (pin "MCU_3V3" bidirectional
+    (at 240 109 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7a0f5500-4fe4-4a7b-89ce-acbb513774e3)
+  )
+)
+(wire
+  (pts (xy 110 55) (xy 240 55))
+  (stroke (width 0) (type default))
+  (uuid f2343d10-efb2-46b5-9152-9141d22d2314)
+)
+(wire
+  (pts (xy 110 61) (xy 240 61))
+  (stroke (width 0) (type default))
+  (uuid 86d1bb58-161a-4c7b-bdff-d6c8f5207795)
+)
+(wire
+  (pts (xy 110 67) (xy 240 67))
+  (stroke (width 0) (type default))
+  (uuid 4aaeda10-b43c-4779-8694-4ecdbdf697c7)
+)
+(wire
+  (pts (xy 110 73) (xy 240 73))
+  (stroke (width 0) (type default))
+  (uuid 9278b9d7-c42c-42f3-bad2-b7ffc6901192)
+)
+(wire
+  (pts (xy 110 79) (xy 240 79))
+  (stroke (width 0) (type default))
+  (uuid bef2c6d5-c692-4741-ba14-203cec5ce237)
+)
+(wire
+  (pts (xy 110 85) (xy 240 85))
+  (stroke (width 0) (type default))
+  (uuid f8d7c765-7737-4ed4-9b9b-1528963a3ea0)
+)
+(wire
+  (pts (xy 110 91) (xy 240 91))
+  (stroke (width 0) (type default))
+  (uuid a0a2429d-1d92-4047-8cad-a0c768d1aa2b)
+)
+  (sheet_instances
+    (path "/"
+      (page "1")
+    )
+  )
+  (embedded_fonts no)
+)

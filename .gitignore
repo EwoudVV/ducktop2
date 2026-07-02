@@ -1,0 +1,27 @@
+# KiCad backups/autosave/locks
+*.bak
+*-bak
+_autosave-*
+*-save.kicad_pcb
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*-backups/
+fp-info-cache
+*.lck
+*.000
+
+# KiCad plot/fab/export output
+gerbers/
+plot/
+*.pos
+*.drl
+*.gbr
+*.gbrjob
+
+# Python
+__pycache__/
+*.pyc
+
+# Generated/scratch reports (regenerate via gen/ scripts + kicad-cli sch erc)
+gen/erc_*.json
+gen/netlist.net
