@@ -1,18 +1,15 @@
 (kicad_symbol_lib
- (version 20251024)
- (generator "kicad_symbol_editor")
- (generator_version "10.0")
- (symbol "AP2112K-3.3"
-		(pin_names
-			(offset 0.254)
-		)
+	(version 20251024)
+	(generator "kicad_symbol_editor")
+	(generator_version "10.0")
+	(symbol "TPS2052B"
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(duplicate_pin_numbers_are_jumpers no)
 		(property "Reference" "U"
-			(at -5.08 5.715 0)
+			(at -7.62 6.35 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -22,8 +19,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "AP2112K\-3\.3"
-			(at 0 5.715 0)
+		(property "Value" "TPS2052B"
+			(at 0 6.35 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -33,8 +30,21 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT\-23\-5"
-			(at 0 8.255 0)
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
+			(at 0.635 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2052b.pdf"
+			(at -2.54 2.54 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(hide yes)
@@ -44,18 +54,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www\.diodes\.com/assets/Datasheets/AP2112\.pdf"
-			(at 0 2.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "600mA\ low\ dropout\ linear\ regulator,\ with\ enable\ pin,\ 3\.8V\-6V\ input\ voltage\ range,\ 3\.3V\ fixed\ positive\ output,\ SOT\-23\-5"
+		(property "Description" "Dual-channel USB power distribution switch, SOIC-8 (D package), 500mA/ch continuous, 0.75-1.25A current limit, internal charge pump. EN1/EN2 active-high inputs, OC1/OC2 open-drain active-low overcurrent flags (deglitched). Feeds VL822-Q7 downstream ports 1 & 2 (2x external USB3-A connectors): EN1/EN2 driven by VL822 USBPE1/USBPE2, OC1/OC2 read by VL822 USBOC1/USBOC2."
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -66,7 +65,7 @@
 				)
 			)
 		)
-		(property "ki_keywords" "linear regulator ldo fixed positive"
+		(property "ki_keywords" "usb power distribution switch current limit power switch"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -77,7 +76,7 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "SOT?23?5*"
+		(property "ki_fp_filters" "SOIC*3.9x4.9*"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -88,10 +87,10 @@
 				)
 			)
 		)
-		(symbol "AP2112K-3.3_0_1"
+		(symbol "TPS2052B_0_1"
 			(rectangle
-				(start -5.08 4.445)
-				(end 5.08 -5.08)
+				(start -7.62 5.08)
+				(end 7.62 -5.08)
 				(stroke
 					(width 0.254)
 					(type default)
@@ -101,11 +100,11 @@
 				)
 			)
 		)
-		(symbol "AP2112K-3.3_1_1"
+		(symbol "TPS2052B_1_1"
 			(pin power_in line
-				(at -7.62 2.54 0)
+				(at -10.16 3.81 0)
 				(length 2.54)
-				(name "VIN"
+				(name "GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -121,9 +120,9 @@
 				)
 			)
 			(pin power_in line
-				(at 0 -7.62 90)
+				(at -10.16 1.27 0)
 				(length 2.54)
-				(name "GND"
+				(name "IN"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -139,9 +138,9 @@
 				)
 			)
 			(pin input line
-				(at -7.62 0 0)
+				(at -10.16 -1.27 0)
 				(length 2.54)
-				(name "EN"
+				(name "EN1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -156,11 +155,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at 5.08 0 180)
+			(pin input line
+				(at -10.16 -3.81 0)
 				(length 2.54)
-				(hide yes)
-				(name "NC"
+				(name "EN2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -175,10 +173,10 @@
 					)
 				)
 			)
-			(pin power_out line
-				(at 7.62 2.54 180)
+			(pin open_collector line
+				(at 10.16 -3.81 180)
 				(length 2.54)
-				(name "VOUT"
+				(name "OC2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -186,6 +184,60 @@
 					)
 				)
 				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_out line
+				(at 10.16 -1.27 180)
+				(length 2.54)
+				(name "OUT2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_out line
+				(at 10.16 1.27 180)
+				(length 2.54)
+				(name "OUT1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin open_collector line
+				(at 10.16 3.81 180)
+				(length 2.54)
+				(name "OC1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
 					(effects
 						(font
 							(size 1.27 1.27)
