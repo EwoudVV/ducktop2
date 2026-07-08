@@ -2,7 +2,7 @@
   (version 20260306)
   (generator "eeschema")
   (generator_version "10.0")
-  (uuid d44a4d52-4db5-40b9-802e-d3caecb52f8a)
+  (uuid 2580ffa4-35b2-58e1-9443-cb85896fa38d)
   (paper "A2")
   (lib_symbols
 (symbol "Audio:PCM2902"
@@ -1633,10 +1633,10 @@
 		(embedded_fonts no)
 	)
   )
-(text "== USB radio audio codec for DRA818 APRS/voice ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid b9c4d9a4-5230-4c5a-b428-681e49e9f3cf))
-(text "PCM2902 appears to the host as a USB audio device on Mu USB2_P5." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 49968b4a-58ff-4192-9444-e2866f8f2061))
-(text "VHF/UHF receive feed stereo inputs; left DAC output feeds both radio mic inputs through isolation resistors." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 4c1150ea-97d6-4a02-8133-fdc33a5de54a))
-(text "== U330 PCM2902 USB audio codec ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 97d5b828-eddc-4460-84a2-a5aec15a2fba))
+(text "== USB radio audio codec for DRA818 APRS/voice ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 7c8e4d2a-3bf3-59f6-9aad-ff9e102cf165))
+(text "PCM2902 appears to the host as a USB audio device on Mu USB2_P5." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 876524b5-a83d-5f51-b3ca-c1231a9afc79))
+(text "VHF/UHF receive feed stereo inputs; left DAC output feeds both radio mic inputs through isolation resistors." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid d1f4aced-cfdb-561f-804f-49547c0a35c9))
+(text "== U330 PCM2902 USB audio codec ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 60e0e0d4-314f-53b5-9449-83220afa75ee))
 (symbol
   (lib_id "Audio:PCM2902")
   (at 190.5 144.78 0)
@@ -1645,42 +1645,42 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid f634b90d-bbf5-47f3-9482-4c231a5eee90)
+  (uuid a871db2c-9760-5628-a69c-4bbc6802d53f)
   (property "Reference" "U330" (at 190.5 142.24 0) (effects (font (size 1.27 1.27))))
   (property "Value" "PCM2902 USB audio codec" (at 190.5 147.32 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:SSOP-28_5.3x10.2mm_P0.65mm" (at 190.5 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 190.5 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0a2ecadc-cbf6-45e5-bf63-eede6c053b3c))
-  (pin "2" (uuid 93a2479a-d759-410d-a6d4-d9ba68fda075))
-  (pin "3" (uuid ccab91ce-560f-499d-9675-37720ef4b406))
-  (pin "4" (uuid 6bf03d2d-87f9-460c-8cff-2b507a10165d))
-  (pin "5" (uuid 522a9f4e-39f0-4073-9799-5c2d836d1aa0))
-  (pin "6" (uuid 7aea3735-be34-4a36-975f-88ceee319710))
-  (pin "7" (uuid c789c92a-8489-4654-b912-19658edcd681))
-  (pin "8" (uuid aa1d10e1-2baa-40d1-b0ac-8a340960107e))
-  (pin "9" (uuid cfea1947-2c16-4d6d-a503-d96eee4eb83a))
-  (pin "10" (uuid f7c69ebe-6c29-4c27-87af-45ff83c533a0))
-  (pin "11" (uuid f720f4de-0041-4697-944a-64dfddee97bb))
-  (pin "12" (uuid cec96fb4-c93e-47e0-9cd3-f04d99c849b4))
-  (pin "13" (uuid 606398e7-5927-43fe-8bb5-8ae09985d8eb))
-  (pin "14" (uuid fb8100ae-e00e-4f1f-8b94-2ea87c5d772d))
-  (pin "15" (uuid c6c8b3c4-b298-4ac6-a30f-c5f63f897474))
-  (pin "16" (uuid 087a132f-7509-4a77-8ef7-4929c26375ef))
-  (pin "17" (uuid d739a12a-7ed6-4bd2-9d5d-f86884bd1a5c))
-  (pin "18" (uuid b71eadc0-305b-4ecb-a5b2-262adeea6712))
-  (pin "19" (uuid 7df1e156-eaa6-442c-9dc8-b3a50ddee2f7))
-  (pin "20" (uuid 73dc8603-c739-4a14-8676-9d78281eb9f5))
-  (pin "21" (uuid 96817d13-e2d4-4bb5-9d7f-5b324f7bcd08))
-  (pin "22" (uuid 6ed5a4ae-97ff-4f32-a9da-3ced51d978f3))
-  (pin "23" (uuid 5356cd2b-91ec-4d63-8ee3-6ed63cbfb78d))
-  (pin "24" (uuid 13163143-3ff1-4dd4-9ace-08fd2d753b62))
-  (pin "25" (uuid 550e2ffe-125d-4fb5-acbe-54bba4683988))
-  (pin "26" (uuid db331d5b-7647-40b3-9918-d7988326d4a4))
-  (pin "27" (uuid 3d1d11ac-9b54-43d9-88f2-27e983470e2d))
-  (pin "28" (uuid 952c2f6d-697a-4364-8781-a7a56b3f9f86))
+  (pin "1" (uuid 2f6bed1c-a553-5803-abee-54ceffc62ec9))
+  (pin "2" (uuid bf6daa66-17dd-5715-9302-e6d993838b26))
+  (pin "3" (uuid d9541797-45a7-5552-90b4-b8e16586572d))
+  (pin "4" (uuid 22cc4207-bf0c-5204-89ac-0d40c8f80a06))
+  (pin "5" (uuid d0c3e2d8-3bbf-5991-9f9f-ae9cb78c00af))
+  (pin "6" (uuid e34f2720-d8ad-570e-8510-b3509e0ad180))
+  (pin "7" (uuid 862d9086-287d-5f29-9805-7e7e52d0023b))
+  (pin "8" (uuid 33e71bc0-48bf-542b-b2f0-ec7ca35a8667))
+  (pin "9" (uuid c4665d22-75b1-5bfa-aa5f-bbf9b4658eca))
+  (pin "10" (uuid f323b65f-5b6a-5bb8-9fee-e7c0802619a6))
+  (pin "11" (uuid 294efeb0-84c4-566d-bbab-993a2d0b19cd))
+  (pin "12" (uuid 9b78bfa5-f2d8-5b28-a01d-3ceaa55044b3))
+  (pin "13" (uuid 2d55fde4-c745-55de-9c74-ebfa66ef4665))
+  (pin "14" (uuid afb78d8f-f04a-5bed-bcc8-759b3f512aad))
+  (pin "15" (uuid 887886b3-2b1d-54aa-92f8-4521e3549dd6))
+  (pin "16" (uuid bb47c8da-56fe-58a8-afc1-5936a811e634))
+  (pin "17" (uuid 6e684685-1783-5d01-91d5-fdf4d4559dc3))
+  (pin "18" (uuid 16455389-bbec-53dd-83df-6ed718741cd0))
+  (pin "19" (uuid ac708b79-3b4b-5a36-b4ec-1c2f48924b22))
+  (pin "20" (uuid d0c92ac8-ee2a-550a-ac8f-69b038b24ac4))
+  (pin "21" (uuid c25c5f2b-7253-5593-a3e5-e4770d1c0239))
+  (pin "22" (uuid f1423ef8-ce23-5358-89eb-fb8967ebc690))
+  (pin "23" (uuid b78c2eaf-872f-5776-8a5f-fa9d84ff826d))
+  (pin "24" (uuid fe7b910e-bdda-5b16-b38e-6267589ba115))
+  (pin "25" (uuid 5ae2e29a-3c3f-5d73-a7fd-3739efd31a8d))
+  (pin "26" (uuid da0d9fd3-45f2-5c68-b268-569167487f50))
+  (pin "27" (uuid 686d2159-8d9d-594e-89ee-0782d5d0da10))
+  (pin "28" (uuid 28a953d4-d34c-5cb8-a7d3-894bd552236f))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "U330")
         (unit 1)
       )
@@ -1690,128 +1690,128 @@
 (label "CODEC_USB_DP"
   (at 172.72 160.02 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 47ffc42f-6948-4373-9e55-98daf62d21ca)
+  (uuid fc2fec61-6ac1-5c55-9eaa-a070867ac9d2)
 )
 (label "CODEC_USB_DM"
   (at 172.72 162.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5c4d65eb-8683-482f-85f9-c4b0a6321fbb)
+  (uuid 7d1d69d8-db20-5627-8d75-0804d7758e4f)
 )
 (hierarchical_label "SYS_5V"
   (shape bidirectional)
   (at 190.5 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 07a97db3-ef04-4e16-b718-5bed1483cee1)
+  (uuid be70c364-feaf-5047-9602-338684fa15ef)
 )
 (label "GND"
   (at 185.42 167.64 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ad30504b-9a23-4020-baa5-efdcd40f0194)
+  (uuid 73efaf8c-a6b2-5882-a22b-4c67369abbb1)
 )
 (label "GND"
   (at 172.72 149.86 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ca68c662-b385-4c7a-802f-58a43a9e3da5)
+  (uuid e7e60c6d-b215-5e21-9cf9-f7614fc92e26)
 )
 (label "GND"
   (at 172.72 152.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7ea85b7b-f155-4c13-b83f-9c4f5d6aba9a)
+  (uuid 9c5e473a-cb2f-5e5b-95c4-88ed09ae4fb1)
 )
 (label "GND"
   (at 172.72 154.94 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d3df131b-0b2d-49a6-9cec-82fa25389256)
+  (uuid 7d33183f-ef5e-5a62-8355-68308d624e9a)
 )
 (label "GND"
   (at 172.72 139.7 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1608ee48-3038-4d8b-9fb9-0f84550d54a4)
+  (uuid 035bed32-3693-520a-a53d-b6a4f9ea1612)
 )
 (label "GND"
   (at 172.72 142.24 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4493c9ba-0f87-4a05-ad05-b5101af5ec0c)
+  (uuid 02a6637a-ad06-571f-86c7-93824e212690)
 )
 (label "CODEC_3V3"
   (at 208.28 152.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 04a3be9d-5860-46a7-9948-94d4d0fcca74)
+  (uuid fe1322d1-76b1-5cfd-9731-5acd96186279)
 )
 (label "GND"
   (at 190.5 167.64 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f1597cdc-10b4-42ab-980e-6bc06c9aba55)
+  (uuid 67ff198e-8e4e-513c-a612-1640e9f2519b)
 )
 (label "CODEC_LINEIN_L"
   (at 172.72 127 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5688ef05-a20d-49af-a4b4-3fcffe87fc4f)
+  (uuid 7c718fc8-bba2-5c82-bd47-d43dff7255c7)
 )
 (label "CODEC_LINEIN_R"
   (at 172.72 129.54 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3a01e8b2-a00f-4e84-81d5-ff26c1c81591)
+  (uuid e546fb88-1aeb-5654-bae8-8a1d4ac7f836)
 )
 (label "CODEC_VCOM"
   (at 208.28 154.94 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2095736f-789b-42b3-a0a0-23996ac325f6)
+  (uuid 248055e0-c12c-56c6-8827-7572eb204cd3)
 )
-(no_connect (at 208.28 129.54) (uuid 2b3bc376-cfd8-4b55-8e41-b77828128c30))
+(no_connect (at 208.28 129.54) (uuid d7703164-c579-5f7a-b3ce-79366a09c01e))
 (label "CODEC_TX_L"
   (at 208.28 127 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 07f38ead-2a53-46a9-95da-33ed4c3af67f)
+  (uuid b8e7dfc2-2ba6-5c0e-b41c-c306fc32b8a8)
 )
 (label "CODEC_3V3"
   (at 208.28 157.48 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f647b2bd-da87-4042-82a3-ad49d730e39c)
+  (uuid 0ae0f650-30c1-5097-a050-06df1b946caf)
 )
 (label "GND"
   (at 193.04 167.64 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2b8e4223-1133-43fc-95b7-5bcc2b5c60db)
+  (uuid e3e6abcc-cdc0-59bf-8dec-39f3415fd6dc)
 )
 (label "CODEC_3V3"
   (at 208.28 160.02 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3bbd86c9-7bdb-4eba-aed8-fdbd998eed76)
+  (uuid e290aeaa-c7d3-54ae-9b84-33787bd26f38)
 )
 (label "CODEC_XTO"
   (at 208.28 147.32 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a6388031-5b50-40b2-b4bf-d8abb24129c2)
+  (uuid 6fe7bd89-78ec-55f5-9f2b-9ba64d4f6881)
 )
 (label "CODEC_XTI"
   (at 208.28 139.7 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6d935d75-1d32-4c09-9092-2af400dd1f5b)
+  (uuid 0d203fa9-0c74-5239-890e-1d657f05e822)
 )
 (label "GND"
   (at 195.58 167.64 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 565e2cf5-0aae-4560-ab30-15a23e095bf6)
+  (uuid 33060da9-6b1e-5bd6-a944-f76e3825ab49)
 )
 (label "CODEC_3V3"
   (at 208.28 162.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 51ffa94d-4ed3-4074-97eb-347c28bcc64f)
+  (uuid 82fad9d6-ad81-54a1-9274-f0fafe6d6087)
 )
-(no_connect (at 172.72 134.62) (uuid 2b88c55d-1e7a-4e7b-b1c0-096695b32680))
-(no_connect (at 208.28 134.62) (uuid fbcbb449-3c7d-4b58-af60-e75d7e6189ed))
+(no_connect (at 172.72 134.62) (uuid a49a0f1a-6516-5e45-802d-9f3d4905f28f))
+(no_connect (at 208.28 134.62) (uuid 159c556c-24d5-50cd-b341-917727307ed7))
 (label "GND"
   (at 187.96 167.64 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8c1f9712-047b-4e7a-8eb4-25a6a9f86db9)
+  (uuid 766c6e68-7f39-5641-b9e9-93166228adf2)
 )
 (label "CODEC_3V3"
   (at 187.96 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e9fd4c02-d131-4ea1-9012-fce74b290fae)
+  (uuid 295621ea-02c2-5a07-984e-c294221e626d)
 )
-(no_connect (at 172.72 147.32) (uuid ca1d56c2-08e2-49e1-8205-c078dafa306f))
+(no_connect (at 172.72 147.32) (uuid dd6ab1e5-ff90-5899-87a8-6745b1c94055))
 (symbol
   (lib_id "Device:R")
   (at 20.32 90.17 0)
@@ -1820,16 +1820,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid fb2c4213-ccb0-4fd4-9513-a4b16d55b0f4)
+  (uuid cb536124-3213-5181-9e03-659686ae963c)
   (property "Reference" "R330" (at 20.32 87.63 0) (effects (font (size 1.27 1.27))))
   (property "Value" "22R USB DP series" (at 20.32 92.71 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid eab723c5-0496-4f70-ba63-5c410b8caebe))
-  (pin "2" (uuid dcecb857-4497-4943-93aa-a5c12603e4dc))
+  (pin "1" (uuid de17e1f1-4e14-58de-94c7-f7cf454f9ccf))
+  (pin "2" (uuid 0b592515-d3e1-5e56-9571-e0105e1eb53c))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "R330")
         (unit 1)
       )
@@ -1840,12 +1840,12 @@
   (shape bidirectional)
   (at 20.32 86.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 640f49f1-0332-4dc8-8a7a-ff48532ca826)
+  (uuid f3303c8b-1490-5f1c-a2b6-1e69d916e33d)
 )
 (label "CODEC_USB_DP"
   (at 20.32 93.98 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a13d3612-329b-47dd-8ae9-10e03bc79b04)
+  (uuid 0496bb2a-fe92-560d-9099-7b8fd7b6cfd9)
 )
 (symbol
   (lib_id "Device:R")
@@ -1855,16 +1855,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 470967d3-894d-464a-9eef-85b0aadc4cd4)
+  (uuid 75ce50b7-7f15-5ba0-bb38-eaa214373ec4)
   (property "Reference" "R331" (at 20.32 100.33 0) (effects (font (size 1.27 1.27))))
   (property "Value" "22R USB DM series" (at 20.32 105.41 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b9018663-732a-4a61-b104-f871c411a2ee))
-  (pin "2" (uuid d3408f0a-9985-4f49-8c8e-7da2fbd9e4c9))
+  (pin "1" (uuid b89a3670-973f-56b2-8736-8a37946d6ef8))
+  (pin "2" (uuid 9e5d76e5-7305-59a1-bbd7-2b7850f142c1))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "R331")
         (unit 1)
       )
@@ -1875,12 +1875,12 @@
   (shape bidirectional)
   (at 20.32 99.06 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 36d0aff6-7e18-41d4-a270-1a3be3d02a22)
+  (uuid c1665989-0a30-515f-9380-0f89689bb41a)
 )
 (label "CODEC_USB_DM"
   (at 20.32 106.68 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d5f551ea-9a47-41fa-a00c-005f1ec3ee05)
+  (uuid f52d080f-7760-5745-b51e-f451fb1e2541)
 )
 (symbol
   (lib_id "Device:C")
@@ -1890,16 +1890,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 322f6a0a-ec30-42d9-8a33-b526768f6a01)
+  (uuid e4a82912-cabf-5b76-b12a-3a859c451017)
   (property "Reference" "C330" (at 20.32 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10u codec VBUS" (at 20.32 128.27 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 20.32 125.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 125.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid e60126f2-0817-461a-97ed-4f6e6b230dc2))
-  (pin "2" (uuid 25e22458-faef-4624-a8a7-e22b66d56722))
+  (pin "1" (uuid a5a116f7-2647-59c6-a433-a96df0ada2de))
+  (pin "2" (uuid 12170a42-35bb-5193-a8a1-c19771636af0))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C330")
         (unit 1)
       )
@@ -1910,12 +1910,12 @@
   (shape bidirectional)
   (at 20.32 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ac8a48c7-a854-414b-8f49-7e111b7cda7e)
+  (uuid 35395353-6c9a-5c5c-846c-92dc40675d3c)
 )
 (label "GND"
   (at 20.32 129.54 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e8bb8bc8-9031-4b8c-9ae8-2c523f6a0155)
+  (uuid 5d659338-5f12-5179-9c20-9ead75b758e8)
 )
 (symbol
   (lib_id "Device:C")
@@ -1925,16 +1925,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid f306b3c6-3597-4097-8741-bfd148d668a2)
+  (uuid 74772cf0-5582-5187-87a7-71723cd74358)
   (property "Reference" "C331" (at 20.32 135.89 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n codec VBUS" (at 20.32 140.97 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 20.32 138.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 138.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 1eab0440-081e-43e9-b62a-3c3ca867309b))
-  (pin "2" (uuid 2ed65625-2c17-48ee-afa0-181640affa87))
+  (pin "1" (uuid 0c354055-bd4d-5949-a52e-5dbda5869319))
+  (pin "2" (uuid 205ba1a6-4dab-5f2c-abc1-0226f8a948dc))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C331")
         (unit 1)
       )
@@ -1945,12 +1945,12 @@
   (shape bidirectional)
   (at 20.32 134.62 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cbd01146-7248-4ea3-a46b-941f202a2833)
+  (uuid c20d03e2-f942-57e5-9d48-bd4dea4e440c)
 )
 (label "GND"
   (at 20.32 142.24 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 54288f6d-98c0-4937-9b9c-dcf0ce2c6558)
+  (uuid b78c80b2-7c0a-5d8a-97d2-5e6660cc19f6)
 )
 (symbol
   (lib_id "Device:C")
@@ -1960,16 +1960,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 0a8556f1-0bad-4550-8bb3-d26a836ff183)
+  (uuid 234a53de-53de-5651-b1cd-62f25c08e93c)
   (property "Reference" "C332" (at 330.2 73.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n codec 3V3" (at 330.2 78.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9ed877b1-b16d-4461-8864-188bd6cb4f76))
-  (pin "2" (uuid 7d9d2bc5-09a7-4c2c-b753-64ea2c61e440))
+  (pin "1" (uuid 12c078d4-3b07-513b-bd4a-a7cd45bad933))
+  (pin "2" (uuid 0b4f471b-f6c6-5a83-ab2e-20bdbe951419))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C332")
         (unit 1)
       )
@@ -1979,12 +1979,12 @@
 (label "CODEC_3V3"
   (at 330.2 72.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b654238c-b25d-4fd3-aba5-ec4e402b7639)
+  (uuid 1ae77536-05c3-5101-b59f-8e1b1fdb3245)
 )
 (label "GND"
   (at 330.2 80.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 87f5286e-36d8-46ed-84de-78f0a961f16b)
+  (uuid 1c414d73-cb2e-5d87-a7fd-b2a2e585aa45)
 )
 (symbol
   (lib_id "Device:C")
@@ -1994,16 +1994,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid d02ca0e2-c3a0-45f0-a16f-89b6dd4d22f4)
+  (uuid 55fc4f30-da05-5a79-9119-8895e6db7eae)
   (property "Reference" "C333" (at 330.2 86.36 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n codec 3V3" (at 330.2 91.44 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9ce81aa8-fb80-4086-ae65-6cbab334a4de))
-  (pin "2" (uuid fb113fff-d35c-48ee-bc6e-63a0572f9af8))
+  (pin "1" (uuid bd214582-af81-54fa-8380-4603d673354b))
+  (pin "2" (uuid 97f6ac01-b189-5fa9-8187-f5811440f599))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C333")
         (unit 1)
       )
@@ -2013,12 +2013,12 @@
 (label "CODEC_3V3"
   (at 330.2 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c35b9885-47fe-4b99-83d6-749d2b60e8b0)
+  (uuid c933b4ae-95fd-5a00-81ff-4027bb266cb0)
 )
 (label "GND"
   (at 330.2 92.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cb77ee98-31dd-4d0a-828c-c3e553e9df3f)
+  (uuid 7f1e77b5-5427-5de4-9871-7d850bb88f58)
 )
 (symbol
   (lib_id "Device:C")
@@ -2028,16 +2028,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 570c39f9-8ca5-4315-a28c-c0cde8662969)
+  (uuid c1e7cd7f-1cb0-58fa-be90-59204f8bb27f)
   (property "Reference" "C334" (at 330.2 99.06 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n codec 3V3" (at 330.2 104.14 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 7527042c-e2b6-443b-bd18-b01c809b3ac2))
-  (pin "2" (uuid c341b3de-a6d7-4900-b8cf-2bb8e793d4b4))
+  (pin "1" (uuid 673529ab-bdbd-5fcf-a701-f87821edc2a0))
+  (pin "2" (uuid 2f855dd9-93cb-5648-9122-4f50aacd9e62))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C334")
         (unit 1)
       )
@@ -2047,12 +2047,12 @@
 (label "CODEC_3V3"
   (at 330.2 97.79 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a81396e9-6c0e-446b-af60-e302b1d9b8b1)
+  (uuid fa99e0ba-2e04-5357-b544-3ad11e5e1d5f)
 )
 (label "GND"
   (at 330.2 105.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 78eb1151-899c-4111-8d12-6293be963cfe)
+  (uuid bcea79a1-7b73-5f86-96c1-dd1a8218a8ee)
 )
 (symbol
   (lib_id "Device:C")
@@ -2062,16 +2062,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 5a688909-270f-4d5c-be63-88271c38e048)
+  (uuid ad13734b-235b-5ceb-ae5b-61224a1fab69)
   (property "Reference" "C335" (at 330.2 111.76 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n codec 3V3" (at 330.2 116.84 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c529da09-50e3-4195-94e3-ed2e022e391b))
-  (pin "2" (uuid 1b116b02-800e-44fc-96ba-b594985375bb))
+  (pin "1" (uuid c7bc5c56-d510-5a1e-a939-6fda87fb465e))
+  (pin "2" (uuid 39b75b9d-d7a9-59af-b70c-318a5914413f))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C335")
         (unit 1)
       )
@@ -2081,12 +2081,12 @@
 (label "CODEC_3V3"
   (at 330.2 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d84aec74-c461-46b1-a1ac-d7a3c08557d7)
+  (uuid a9682dc4-dc02-549d-b3ef-f832d4c08196)
 )
 (label "GND"
   (at 330.2 118.11 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 55b1dd89-b9f7-4faa-983c-ee51bb3cecb7)
+  (uuid 6c9f613d-55c7-5025-a6ec-a876909aedaa)
 )
 (symbol
   (lib_id "Device:C")
@@ -2096,16 +2096,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 2320c690-f42a-4b0d-b76e-cc5302d00b3a)
+  (uuid d80201c6-46b7-54a9-ad48-b26a6e29ac7b)
   (property "Reference" "C336" (at 330.2 124.46 0) (effects (font (size 1.27 1.27))))
   (property "Value" "4.7u codec 3V3 bulk" (at 330.2 129.54 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 330.2 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0b31888f-8c2a-44c0-bce4-0f9736305097))
-  (pin "2" (uuid 7b188669-b881-4ea7-9ccf-aa37db1ad651))
+  (pin "1" (uuid abb3203e-0c38-5c8b-adab-b7a5bedbe94e))
+  (pin "2" (uuid ca3fcdbd-63dc-52be-84f2-1647ee3bbbb0))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C336")
         (unit 1)
       )
@@ -2115,12 +2115,12 @@
 (label "CODEC_3V3"
   (at 330.2 123.19 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 15996f6d-ef22-44b9-bcd6-5e138197c6fc)
+  (uuid 47f45ce7-5c71-5244-b9de-ad8735c3b17d)
 )
 (label "GND"
   (at 330.2 130.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5dcb9678-d884-45e1-ac6b-e9190f9d7380)
+  (uuid 2745325d-d090-5547-a404-aecec871768e)
 )
 (symbol
   (lib_id "Device:C")
@@ -2130,16 +2130,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid acd31f70-0659-48e9-ad8a-d699e912373d)
+  (uuid ea92a3c9-8166-5093-a6a1-b43ceb775eab)
   (property "Reference" "C337" (at 330.2 147.32 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u VCOM" (at 330.2 152.4 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 330.2 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 45903a9f-0a5c-4b27-82bc-018b017528ac))
-  (pin "2" (uuid 6fb2aa67-8428-46f4-ba03-3f6ab9788732))
+  (pin "1" (uuid 27f6ca33-6d62-5e9a-acce-9beed1e0e4e6))
+  (pin "2" (uuid 005d262d-3727-5388-bcdb-a25c49a6be45))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C337")
         (unit 1)
       )
@@ -2149,12 +2149,12 @@
 (label "CODEC_VCOM"
   (at 330.2 146.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7b6aad85-6e87-4cb5-87f7-635f219421d5)
+  (uuid 2d8c122a-0426-5715-99c3-5ad4d354094b)
 )
 (label "GND"
   (at 330.2 153.67 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4bb2bc1d-3564-408c-9036-53a51e832e26)
+  (uuid 525d3c4f-2410-5ff9-a18b-86af03405f81)
 )
 (symbol
   (lib_id "Device:Crystal_GND24")
@@ -2164,18 +2164,18 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 06818545-4bae-423d-9d9b-ae7aecd2319e)
+  (uuid c009f679-09fc-5d0d-8696-122c51feccdc)
   (property "Reference" "Y330" (at 330.2 177.8 0) (effects (font (size 1.27 1.27))))
   (property "Value" "12MHz PCM2902" (at 330.2 182.88 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm" (at 330.2 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c989e6fc-b05a-45d8-b797-a8a7ee83605d))
-  (pin "2" (uuid aff01d7d-b2a5-4bd0-acb0-a0dc2da609d5))
-  (pin "3" (uuid f26d33cf-eade-4284-a9ca-95b7412406a9))
-  (pin "4" (uuid 304df7c5-a951-4def-8965-ff08f716ca72))
+  (pin "1" (uuid 6bfa5ec9-dcb5-542c-a09b-c95cdb7faedb))
+  (pin "2" (uuid 49a29fcf-ba02-589c-b5ff-a2106954dbdc))
+  (pin "3" (uuid 2e9c3eac-5497-524c-bc3b-4c0c069f8f2e))
+  (pin "4" (uuid 8c9ab243-a065-549f-b64b-4a81279246e9))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "Y330")
         (unit 1)
       )
@@ -2185,17 +2185,17 @@
 (label "CODEC_XTI"
   (at 326.39 180.34 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f52c30f5-62f8-410d-959a-0713a9351682)
+  (uuid 1776ef7c-9dea-5d0f-ad09-2eb3397d8800)
 )
 (label "GND"
   (at 330.2 185.42 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5da229ee-ecdd-4fc1-bdd8-a8591be1bbdf)
+  (uuid 8666a4f4-6892-5979-9452-9d7372ec8d02)
 )
 (label "CODEC_XTO"
   (at 334.01 180.34 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 56bb6cf6-3c03-4c3e-89d6-da4e2d7f8de7)
+  (uuid b0afb05e-5b6e-5865-a5f6-35f5fcf70e22)
 )
 (symbol
   (lib_id "Device:C")
@@ -2205,16 +2205,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 914d507b-2391-4a93-902f-3de3ad2c20c3)
+  (uuid d3287167-b5fc-5e39-b5cd-37ec2246d6a3)
   (property "Reference" "C338" (at 330.2 198.12 0) (effects (font (size 1.27 1.27))))
   (property "Value" "18p" (at 330.2 203.2 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 200.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 200.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d02ecdd4-aa6b-46f3-8b21-a3a252623275))
-  (pin "2" (uuid 62775691-9087-40b3-b7ae-963e84227bec))
+  (pin "1" (uuid 119a37c2-f67e-5786-b000-86b0e388561a))
+  (pin "2" (uuid 15f3c254-f98a-5c64-866c-33efd1b960f6))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C338")
         (unit 1)
       )
@@ -2224,12 +2224,12 @@
 (label "CODEC_XTI"
   (at 330.2 196.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 86826790-8c9e-4237-a2bc-846ac76201bb)
+  (uuid b9107573-b207-51b8-b69c-4c93b8bf0411)
 )
 (label "GND"
   (at 330.2 204.47 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9d6f9dfe-5560-4cda-975f-79ea5cc4a377)
+  (uuid dcf74291-1dec-5f82-a9e5-5a84b73f1fe1)
 )
 (symbol
   (lib_id "Device:C")
@@ -2239,16 +2239,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid dadd07dd-9aef-408d-9899-df22945bb132)
+  (uuid 6d4d168e-876b-5ddb-a456-1330e25803b6)
   (property "Reference" "C339" (at 330.2 210.82 0) (effects (font (size 1.27 1.27))))
   (property "Value" "18p" (at 330.2 215.9 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 213.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 213.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid ab0829d0-4863-4a23-a55a-2f5f906ed786))
-  (pin "2" (uuid ba10e200-996f-43b8-bfcb-b124fe451e2a))
+  (pin "1" (uuid 1020822f-48f5-5f76-9be0-b53eb254bfd2))
+  (pin "2" (uuid 3a3b132e-3efb-516b-ba66-aef3f263e327))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C339")
         (unit 1)
       )
@@ -2258,14 +2258,14 @@
 (label "CODEC_XTO"
   (at 330.2 209.55 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 755c6e70-c960-48ac-9703-506bb525a15a)
+  (uuid 2f490d68-2233-5dff-9585-06ce39c9f5ee)
 )
 (label "GND"
   (at 330.2 217.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6dcff78d-cdfd-479d-b48e-c3db3f852378)
+  (uuid efe2ac87-a6f6-524a-abf5-602704b1e589)
 )
-(text "== Radio receive audio into codec line inputs ==" (at 20.32 250.19 0) (effects (font (size 1.27 1.27))) (uuid f65aba99-585d-4b60-9305-30631d58067b))
+(text "== Radio receive audio into codec line inputs ==" (at 20.32 250.19 0) (effects (font (size 1.27 1.27))) (uuid 839ed049-514e-5a4e-91a1-238d8475aee3))
 (symbol
   (lib_id "Device:C")
   (at 20.32 275.59 0)
@@ -2274,16 +2274,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 5209f30a-a34a-4f55-9b60-5c1431bdd290)
+  (uuid d1775018-42e5-554c-a5bc-a127950aae0f)
   (property "Reference" "C340" (at 20.32 273.05 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u VHF RX AC couple" (at 20.32 278.13 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 24ccbc1d-c980-4b4e-bea0-831dc727ca63))
-  (pin "2" (uuid c5a4150e-89c8-452a-aa5f-e758514a9527))
+  (pin "1" (uuid e2cace47-6be0-5333-8781-4de7d93de2e9))
+  (pin "2" (uuid 68797947-28e0-5829-bdb0-a6c083d6ce0e))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C340")
         (unit 1)
       )
@@ -2294,12 +2294,12 @@
   (shape bidirectional)
   (at 20.32 271.78 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c3716235-43e2-430b-8f8b-bb2d25586f19)
+  (uuid 24ca8081-e473-50fd-98d2-be61e90dfaa5)
 )
 (label "CODEC_LINEIN_L"
   (at 20.32 279.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid efe7489d-03c3-4a5a-8da6-e0977c64a2ad)
+  (uuid 53ab2550-530a-56b7-abbc-ce05539e4065)
 )
 (symbol
   (lib_id "Device:C")
@@ -2309,16 +2309,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 0589f278-2f9f-41a0-81bf-7684fa6f6559)
+  (uuid faf2e7ec-a318-542f-a9fe-30a76b48f0d8)
   (property "Reference" "C341" (at 20.32 285.75 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u UHF RX AC couple" (at 20.32 290.83 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 288.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 288.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d49052d6-630c-4025-a4d9-2fac47f4cd0a))
-  (pin "2" (uuid 811b5945-c0ab-4d23-9a6e-88252502022d))
+  (pin "1" (uuid c423ae66-0e64-511f-9a1d-9e56b2bf00f6))
+  (pin "2" (uuid 11c31d03-d295-5f63-8096-85c2ef32a4b6))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C341")
         (unit 1)
       )
@@ -2329,12 +2329,12 @@
   (shape bidirectional)
   (at 20.32 284.48 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0571d4ab-4902-4e18-8e60-77797462b910)
+  (uuid 07e1d00b-5775-532f-88fb-5232a27a2584)
 )
 (label "CODEC_LINEIN_R"
   (at 20.32 292.1 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b2278094-ddd4-4716-b6be-cbb1fe202e9c)
+  (uuid ca4745d0-499a-5234-bca1-37b092e4c29e)
 )
 (symbol
   (lib_id "Device:R")
@@ -2344,16 +2344,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 31e2fa04-493b-445c-93fb-6797a3dfa1fd)
+  (uuid 5eaf9536-2c99-52e5-9d84-9fe3c6be93df)
   (property "Reference" "R332" (at 149.86 273.05 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k line-in L bleed" (at 149.86 278.13 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 149.86 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 149.86 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6c3ed4e5-7428-4bf4-b718-03fd3a2bdfaa))
-  (pin "2" (uuid 8a773914-7581-4ede-91c1-2bee70aa89e1))
+  (pin "1" (uuid 17044efa-3808-59ba-919c-1edfffed75d1))
+  (pin "2" (uuid af557807-4d6b-598f-a3bf-3811a4856e02))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "R332")
         (unit 1)
       )
@@ -2363,12 +2363,12 @@
 (label "CODEC_LINEIN_L"
   (at 149.86 271.78 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 81e7b0df-8d51-4e3c-b8e6-1465f7bd7adc)
+  (uuid 1b144896-7f0b-5868-871a-f5635837f216)
 )
 (label "GND"
   (at 149.86 279.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e66eebb4-afe7-42ac-8f85-123ca5cb1d03)
+  (uuid 253a19d3-be16-54c1-857b-0f11050a156c)
 )
 (symbol
   (lib_id "Device:R")
@@ -2378,16 +2378,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 16aa7f30-e30e-4cab-814e-87cfa51f6736)
+  (uuid db6da1fd-1e62-5c85-8df1-a2ddda08b81c)
   (property "Reference" "R333" (at 149.86 285.75 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k line-in R bleed" (at 149.86 290.83 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 149.86 288.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 149.86 288.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8b29e50b-8d0b-42f1-8685-eafdb4e4ae33))
-  (pin "2" (uuid 94f8c44c-4c5b-497b-af39-7a42a09398e8))
+  (pin "1" (uuid 9b45f836-adb6-55a8-8e86-d61da7680161))
+  (pin "2" (uuid 9517ae4f-ba71-59d9-baef-6567cc24c40b))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "R333")
         (unit 1)
       )
@@ -2397,14 +2397,14 @@
 (label "CODEC_LINEIN_R"
   (at 149.86 284.48 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 60783988-ab35-4896-8e89-52c7fe921dbc)
+  (uuid 89f44bf9-0438-5b66-a078-416c733a3fb6)
 )
 (label "GND"
   (at 149.86 292.1 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f8532ece-1899-4a3f-9ca8-bef87d15ba90)
+  (uuid 61c7f282-3c1f-5ebc-9c0c-135c58c2597b)
 )
-(text "== Codec transmit audio to radio mic inputs ==" (at 389.89 250.19 0) (effects (font (size 1.27 1.27))) (uuid 5d04e580-b3db-4062-9574-69326501a8e1))
+(text "== Codec transmit audio to radio mic inputs ==" (at 389.89 250.19 0) (effects (font (size 1.27 1.27))) (uuid c6fc7989-fd50-5699-b7c0-a8bc918c2426))
 (symbol
   (lib_id "Device:C")
   (at 389.89 275.59 0)
@@ -2413,16 +2413,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid fed8b9ae-03d2-4569-adf1-332289815050)
+  (uuid a763c0ba-887a-5639-9cf8-a187e5179fe1)
   (property "Reference" "C342" (at 389.89 273.05 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u TX audio AC couple" (at 389.89 278.13 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 389.89 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 389.89 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 32f19f54-9bd0-4fb9-a272-f1c41ea31d40))
-  (pin "2" (uuid 38aef5c8-5c00-46c7-8a51-ac0bd6b882ca))
+  (pin "1" (uuid 8d5b2acd-23f3-5182-96ea-52dca9609a0e))
+  (pin "2" (uuid 20a68d5f-34bc-5b73-ae18-a03a68acf396))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "C342")
         (unit 1)
       )
@@ -2432,12 +2432,12 @@
 (label "CODEC_TX_L"
   (at 389.89 271.78 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 41a2f86f-7797-4c9a-a594-96de881f67ca)
+  (uuid 934e7c5c-dcfc-5bae-842d-e36a7278e190)
 )
 (label "RADIO_TX_AUDIO"
   (at 389.89 279.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ae2f26f7-8a66-456d-89c4-fae691b29853)
+  (uuid 0b7fc5f0-338b-5000-9e9b-0c57791cf8a7)
 )
 (symbol
   (lib_id "Device:R")
@@ -2447,16 +2447,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 2686aac0-d6da-4544-be92-f4aae86e3fa7)
+  (uuid 1ccc4412-0b84-5655-a740-129e59879f2a)
   (property "Reference" "R334" (at 519.43 257.81 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10k VHF mic feed" (at 519.43 262.89 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a224d27f-73f8-46c7-beb5-a325f134ad13))
-  (pin "2" (uuid 28fecd70-df16-417b-a050-f2192e893d95))
+  (pin "1" (uuid b65a6d9c-e00e-5e52-9d70-23263aa54bd9))
+  (pin "2" (uuid 34aa622f-b974-5108-89c5-ab6ec89c04ed))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "R334")
         (unit 1)
       )
@@ -2466,13 +2466,13 @@
 (label "RADIO_TX_AUDIO"
   (at 519.43 256.54 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8bec8e07-1ea7-46ee-8a92-e14a953a9211)
+  (uuid 05602abe-031d-589f-b5fe-66f79ac7bea4)
 )
 (hierarchical_label "RADIO_VHF_MIC_IN"
   (shape bidirectional)
   (at 519.43 264.16 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b2e79e7d-4e15-49fb-8fef-4edd7d712a7d)
+  (uuid 147dc34e-175d-5055-a3f0-7c02363e13c6)
 )
 (symbol
   (lib_id "Device:R")
@@ -2482,16 +2482,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid ddd5c366-86b2-480f-bf80-6f987c395378)
+  (uuid 611afe25-8a35-59c5-bcd8-858f90f90547)
   (property "Reference" "R335" (at 519.43 270.51 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10k UHF mic feed" (at 519.43 275.59 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 273.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 273.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 2d5b30da-ef6e-4488-882f-a963f43197a6))
-  (pin "2" (uuid 4b6c69f5-cbb6-443b-9c84-d66e80860466))
+  (pin "1" (uuid c96cd307-6e74-5222-8295-8c3463626b17))
+  (pin "2" (uuid d135dfac-a06f-5e8a-b18a-c0ff17b37010))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "R335")
         (unit 1)
       )
@@ -2501,13 +2501,13 @@
 (label "RADIO_TX_AUDIO"
   (at 519.43 269.24 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2cf3908a-b3ef-49f2-a596-0e072061e962)
+  (uuid f1fb0a5c-9ff4-580d-82e7-3e4f21310afb)
 )
 (hierarchical_label "RADIO_UHF_MIC_IN"
   (shape bidirectional)
   (at 519.43 276.86 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53507f0f-a5dd-49b9-9d98-9239e61331de)
+  (uuid ac9cf336-d504-55de-baa0-67ff70573e55)
 )
 (symbol
   (lib_id "Device:R")
@@ -2517,16 +2517,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 13219563-16c5-4e30-a3c3-376c07581ce6)
+  (uuid 9b84251a-f3cd-5b83-98ee-ae48efaeddb7)
   (property "Reference" "R336" (at 389.89 295.91 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k TX audio bleed" (at 389.89 300.99 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 389.89 298.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 389.89 298.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 19069645-193f-489a-9a96-8a18ddd9c07f))
-  (pin "2" (uuid baff10cf-5614-4dfd-a05a-a686ac4e1bf6))
+  (pin "1" (uuid 9a7f33be-2e36-5eba-a82b-7a4efb481d45))
+  (pin "2" (uuid ef7b9306-f717-53c1-aa3e-daac726ad127))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "R336")
         (unit 1)
       )
@@ -2536,12 +2536,12 @@
 (label "RADIO_TX_AUDIO"
   (at 389.89 294.64 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fe92b243-28a2-491c-95db-a8dcc21ff6d4)
+  (uuid 8a118d61-764d-5a71-acb7-922e43dcec0a)
 )
 (label "GND"
   (at 389.89 302.26 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 43857b7b-69f2-4741-b287-7f843eef221c)
+  (uuid fc2639d6-a8c6-589b-886e-fd42b966a05e)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x08")
@@ -2551,22 +2551,22 @@
   (in_bom no)
   (on_board yes)
   (dnp yes)
-  (uuid 25927a73-d0a6-4621-9f89-3dcd2f6be309)
+  (uuid c7b07524-d848-5bf8-bff2-847e959d365e)
   (property "Reference" "J330" (at 519.43 327.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP radio audio codec probe" (at 519.43 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" (at 519.43 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 4b77df58-5abf-4fef-95a3-692186b0e94c))
-  (pin "2" (uuid e92e4631-b7c4-4977-a3e6-4b7e195a8977))
-  (pin "3" (uuid 791c313c-66df-45de-b854-29dc61929042))
-  (pin "4" (uuid ccc7c8d8-2844-40e5-a7f8-923832bdbf89))
-  (pin "5" (uuid 2cf28d68-d072-4ce2-87c4-ea6a10388bf9))
-  (pin "6" (uuid 659f649b-1250-4818-989f-9bb03285217f))
-  (pin "7" (uuid 2f5f826d-a2c6-4ee7-8a7b-5886e6be5265))
-  (pin "8" (uuid bd7d03af-9607-493b-a843-3c777cdf8721))
+  (pin "1" (uuid c0d43724-dd08-5ba9-a37c-0da1dda62807))
+  (pin "2" (uuid 516b85f2-cb91-5ec1-9bb7-36f3eaef95ea))
+  (pin "3" (uuid a970dc33-bf1e-5a65-9282-67d6b61d0e5d))
+  (pin "4" (uuid ed2d39eb-77b2-5cd1-8c71-2027edc7b3c5))
+  (pin "5" (uuid 156d96bc-2701-53aa-9e0f-3683cdede2c1))
+  (pin "6" (uuid 05421ee8-6c75-5029-b118-7fd6b3fc2c24))
+  (pin "7" (uuid d536e3e4-0a83-5328-bf38-2d75911119dc))
+  (pin "8" (uuid a16e6a2e-cdaa-54dc-8ce1-b1a916bb1e90))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "J330")
         (unit 1)
       )
@@ -2576,47 +2576,47 @@
 (label "GND"
   (at 514.35 322.58 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 18588cc5-54dd-4ca9-8b77-955712d8b7ec)
+  (uuid dd80dd40-f2bd-5f4b-a6ac-a311f61bf80c)
 )
 (hierarchical_label "RADIO_VHF_AUDIO_OUT"
   (shape bidirectional)
   (at 514.35 325.12 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9e4c4b48-748d-4a5e-871c-69fb357c6a48)
+  (uuid 9efd1bd6-5dcc-534b-8120-11723e1995da)
 )
 (hierarchical_label "RADIO_UHF_AUDIO_OUT"
   (shape bidirectional)
   (at 514.35 327.66 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1da056a5-7f09-4fc4-9743-8d706bef835d)
+  (uuid cb966b9a-8959-5234-9023-f74e288e164d)
 )
 (label "RADIO_TX_AUDIO"
   (at 514.35 330.2 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cd3b6798-0756-4227-869f-aafc31476b0f)
+  (uuid 68a61898-0191-55e7-8d8d-6dec90d706a2)
 )
 (hierarchical_label "RADIO_VHF_MIC_IN"
   (shape bidirectional)
   (at 514.35 332.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ffd286e6-127f-4a6d-b85d-652380835221)
+  (uuid 98480273-02d4-5880-947a-34b4dee62bf0)
 )
 (hierarchical_label "RADIO_UHF_MIC_IN"
   (shape bidirectional)
   (at 514.35 335.28 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bf1ff0ef-b096-4ee0-9713-c7198086a324)
+  (uuid b51a6f07-8d8c-5159-9ad4-ebd0435e858d)
 )
 (hierarchical_label "SYS_5V"
   (shape bidirectional)
   (at 514.35 337.82 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 84d3473e-33ca-4e6e-ad81-3b454193361e)
+  (uuid ea434165-215d-59e8-b9af-6dc811c8859e)
 )
 (label "GND"
   (at 514.35 340.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dd38305a-5301-420a-816a-be8d523aea19)
+  (uuid b6884e3c-54a2-5320-8290-1e70ca5ffefa)
 )
 (symbol
   (lib_id "power:GND")
@@ -2626,15 +2626,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 544e2110-4bb1-468e-b2d7-08dcf3b7a004)
+  (uuid 31af4277-9509-58e0-beb3-bb05af687359)
   (property "Reference" "#PWR341" (at 624.84 377.19 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 624.84 382.27 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 624.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 624.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 399fa37e-727d-4882-938e-a428f7710ddf))
+  (pin "1" (uuid 86f60342-e16b-52c5-a68a-283605386bd7))
   (instances
     (project "ducktop2"
-      (path "/12891140-7ff2-4769-a961-98722565bbde"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
         (reference "#PWR341")
         (unit 1)
       )
@@ -2644,14 +2644,14 @@
 (label "GND"
   (at 624.84 379.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a409f6f4-0614-4722-8d79-c833da701961)
+  (uuid c1d1328c-3e7d-58e7-be89-13b5eacb16eb)
 )
-(text "NOTES:" (at 20.32 360.68 0) (effects (font (size 1.27 1.27))) (uuid 724d5014-c177-49bd-9532-da39d9973d7a))
-(text "Host software handles APRS/audio decoding through USB audio; EC GPIO still owns PTT, PD, SQL, and antenna select." (at 20.32 368.3 0) (effects (font (size 1.27 1.27))) (uuid a88ca7d3-a473-4360-8055-a0dd9eec2869))
-(text "Only assert one PTT at a time; both radio mic inputs receive the same isolated DAC audio through large resistors." (at 20.32 375.92 0) (effects (font (size 1.27 1.27))) (uuid 266a96c5-bcc1-4483-b6ef-a6bd17a18a5d))
-(text "Final DRA818 audio gain/attenuation values require bench measurements; current values are safe first-pass starts." (at 20.32 383.54 0) (effects (font (size 1.27 1.27))) (uuid 94c830a1-c604-4bdd-8d73-d51abf1be1e8))
+(text "NOTES:" (at 20.32 360.68 0) (effects (font (size 1.27 1.27))) (uuid cf1bc812-fb5c-50e0-85cd-f0dcfac4017e))
+(text "Host software handles APRS/audio decoding through USB audio; EC GPIO still owns PTT, PD, SQL, and antenna select." (at 20.32 368.3 0) (effects (font (size 1.27 1.27))) (uuid e9cc4625-3272-5082-8491-99c3556a1e39))
+(text "Only assert one PTT at a time; both radio mic inputs receive the same isolated DAC audio through large resistors." (at 20.32 375.92 0) (effects (font (size 1.27 1.27))) (uuid aecae194-d347-5f3f-a91b-3bd705f4814a))
+(text "Final DRA818 audio gain/attenuation values require bench measurements; current values are safe first-pass starts." (at 20.32 383.54 0) (effects (font (size 1.27 1.27))) (uuid ba1b779a-07cd-519c-ae41-8a4a7794d9cc))
 (sheet_instances
-  (path "/12891140-7ff2-4769-a961-98722565bbde"
+  (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
     (page "14")
   )
 )

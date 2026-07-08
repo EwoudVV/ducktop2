@@ -1,7 +1,10 @@
 import os
 
 import genlib
-from build_ducktop2 import Sheet, U, PROJDIR, FOOTPRINTS, fmt_coord, snap_coord
+from build_ducktop2 import (
+    Sheet, U, PROJDIR, FOOTPRINTS, fmt_coord, snap_coord,
+    reset_uuid_sequence, stable_uuid, uuid_scope,
+)
 
 
 def symbol_pins(name):
@@ -382,90 +385,73 @@ def main():
     import generate_radio_audio_codec_sheet as audio
     import generate_maker_mcu_sheet as maker
 
-    power_sheet_uuid = U()
-    ec_sheet_uuid = U()
-    mu_sheet_uuid = U()
-    usb_sheet_uuid = U()
-    pwrin_sheet_uuid = U()
-    tcp0_sheet_uuid = U()
-    radio_sheet_uuid = U()
-    internal_sheet_uuid = U()
-    ham_sheet_uuid = U()
-    display_sheet_uuid = U()
-    intehill_sheet_uuid = U()
-    keyboard_sheet_uuid = U()
-    audio_sheet_uuid = U()
-    maker_sheet_uuid = U()
+    power_sheet_uuid = stable_uuid("sheet-symbol:01_power_battery")
+    ec_sheet_uuid = stable_uuid("sheet-symbol:02_ec_mcu")
+    mu_sheet_uuid = stable_uuid("sheet-symbol:03_mu_carrier")
+    usb_sheet_uuid = stable_uuid("sheet-symbol:04_usb_c_io")
+    pwrin_sheet_uuid = stable_uuid("sheet-symbol:05_power_inputs")
+    tcp0_sheet_uuid = stable_uuid("sheet-symbol:06_tcp0_external_hdmi")
+    radio_sheet_uuid = stable_uuid("sheet-symbol:07_radio_oled_gps")
+    internal_sheet_uuid = stable_uuid("sheet-symbol:08_internal_services")
+    ham_sheet_uuid = stable_uuid("sheet-symbol:09_ham_radio")
+    display_sheet_uuid = stable_uuid("sheet-symbol:10_internal_display")
+    intehill_sheet_uuid = stable_uuid("sheet-symbol:11_intehill_monitor_interface")
+    keyboard_sheet_uuid = stable_uuid("sheet-symbol:12_keyboard_daughterboard")
+    audio_sheet_uuid = stable_uuid("sheet-symbol:13_radio_audio_codec")
+    maker_sheet_uuid = stable_uuid("sheet-symbol:14_maker_mcu")
 
-    power_s = ps.build(power_sheet_uuid)
-    power_text = power_s.render(U(), page_number="2")
-    with open(os.path.join(PROJDIR, "01_power_battery.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(power_text)
+    def write_generated_sheet(context, filename, builder, page_number):
+        with uuid_scope(context):
+            sheet = builder()
+            text = sheet.render(stable_uuid(f"{context}:self"), page_number=page_number)
+        with open(os.path.join(PROJDIR, filename), "w", encoding="utf-8") as f:
+            f.write(text)
+        return sheet
 
-    ec_s = ec.build(ec_sheet_uuid)
-    ec_text = ec_s.render(U(), page_number="3")
-    with open(os.path.join(PROJDIR, "02_ec_mcu.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(ec_text)
-
-    mu_s = build(mu_sheet_uuid)
-    mu_text = mu_s.render(U(), page_number="4")
-    with open(os.path.join(PROJDIR, "03_mu_carrier.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(mu_text)
-
-    usb_s = usb.build(usb_sheet_uuid)
-    usb_text = usb_s.render(U(), page_number="5")
-    with open(os.path.join(PROJDIR, "04_usb_c_io.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(usb_text)
-
-    pwrin_s = pwrin.build(pwrin_sheet_uuid)
-    pwrin_text = pwrin_s.render(U(), page_number="6")
-    with open(os.path.join(PROJDIR, "05_power_inputs.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(pwrin_text)
-
-    tcp0_s = tcp0.build(tcp0_sheet_uuid)
-    tcp0_text = tcp0_s.render(U(), page_number="7")
-    with open(os.path.join(PROJDIR, "06_tcp0_external_hdmi.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(tcp0_text)
-
-    radio_s = radio.build(radio_sheet_uuid)
-    radio_text = radio_s.render(U(), page_number="8")
-    with open(os.path.join(PROJDIR, "07_radio_oled_gps.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(radio_text)
-
-    internal_s = internal.build(internal_sheet_uuid)
-    internal_text = internal_s.render(U(), page_number="9")
-    with open(os.path.join(PROJDIR, "08_internal_services.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(internal_text)
-
-    ham_s = ham.build(ham_sheet_uuid)
-    ham_text = ham_s.render(U(), page_number="10")
-    with open(os.path.join(PROJDIR, "09_ham_radio.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(ham_text)
-
-    display_s = display.build(display_sheet_uuid)
-    display_text = display_s.render(U(), page_number="11")
-    with open(os.path.join(PROJDIR, "10_internal_display.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(display_text)
-
-    intehill_s = intehill.build(intehill_sheet_uuid)
-    intehill_text = intehill_s.render(U(), page_number="12")
-    with open(os.path.join(PROJDIR, "11_intehill_monitor_interface.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(intehill_text)
-
-    keyboard_s = keyboard.build(keyboard_sheet_uuid)
-    keyboard_text = keyboard_s.render(U(), page_number="13")
-    with open(os.path.join(PROJDIR, "12_keyboard_daughterboard.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(keyboard_text)
-
-    audio_s = audio.build(audio_sheet_uuid)
-    audio_text = audio_s.render(U(), page_number="14")
-    with open(os.path.join(PROJDIR, "13_radio_audio_codec.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(audio_text)
-
-    maker_s = maker.build(maker_sheet_uuid)
-    maker_text = maker_s.render(U(), page_number="15")
-    with open(os.path.join(PROJDIR, "14_maker_mcu.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(maker_text)
+    power_s = write_generated_sheet(
+        "01_power_battery", "01_power_battery.kicad_sch", lambda: ps.build(power_sheet_uuid), "2"
+    )
+    ec_s = write_generated_sheet(
+        "02_ec_mcu", "02_ec_mcu.kicad_sch", lambda: ec.build(ec_sheet_uuid), "3"
+    )
+    mu_s = write_generated_sheet(
+        "03_mu_carrier", "03_mu_carrier.kicad_sch", lambda: build(mu_sheet_uuid), "4"
+    )
+    usb_s = write_generated_sheet(
+        "04_usb_c_io", "04_usb_c_io.kicad_sch", lambda: usb.build(usb_sheet_uuid), "5"
+    )
+    pwrin_s = write_generated_sheet(
+        "05_power_inputs", "05_power_inputs.kicad_sch", lambda: pwrin.build(pwrin_sheet_uuid), "6"
+    )
+    tcp0_s = write_generated_sheet(
+        "06_tcp0_external_hdmi", "06_tcp0_external_hdmi.kicad_sch", lambda: tcp0.build(tcp0_sheet_uuid), "7"
+    )
+    radio_s = write_generated_sheet(
+        "07_radio_oled_gps", "07_radio_oled_gps.kicad_sch", lambda: radio.build(radio_sheet_uuid), "8"
+    )
+    internal_s = write_generated_sheet(
+        "08_internal_services", "08_internal_services.kicad_sch", lambda: internal.build(internal_sheet_uuid), "9"
+    )
+    ham_s = write_generated_sheet(
+        "09_ham_radio", "09_ham_radio.kicad_sch", lambda: ham.build(ham_sheet_uuid), "10"
+    )
+    display_s = write_generated_sheet(
+        "10_internal_display", "10_internal_display.kicad_sch", lambda: display.build(display_sheet_uuid), "11"
+    )
+    intehill_s = write_generated_sheet(
+        "11_intehill_monitor_interface", "11_intehill_monitor_interface.kicad_sch",
+        lambda: intehill.build(intehill_sheet_uuid), "12"
+    )
+    keyboard_s = write_generated_sheet(
+        "12_keyboard_daughterboard", "12_keyboard_daughterboard.kicad_sch",
+        lambda: keyboard.build(keyboard_sheet_uuid), "13"
+    )
+    audio_s = write_generated_sheet(
+        "13_radio_audio_codec", "13_radio_audio_codec.kicad_sch", lambda: audio.build(audio_sheet_uuid), "14"
+    )
+    maker_s = write_generated_sheet(
+        "14_maker_mcu", "14_maker_mcu.kicad_sch", lambda: maker.build(maker_sheet_uuid), "15"
+    )
 
     power_hier_nets = [
         "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON", "CHG_CE_N",
@@ -566,6 +552,8 @@ def main():
     maker_hier_nets = [
         "SYS_5V", "MAKER_USB_DP", "MAKER_USB_DM",
     ]
+
+    reset_uuid_sequence("root")
 
     power_block, power_pins = sheet_block(
         power_sheet_uuid, 30, 40, 60, 80, "Power & Battery", "01_power_battery.kicad_sch",

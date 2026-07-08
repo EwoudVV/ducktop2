@@ -1,11 +1,36 @@
+import contextlib
 import uuid, os
 import genlib
 
 GRID_MM = 1.27
 
+UUID_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, "ducktop2/kicad/generated")
+_uuid_stack = [{"context": "global", "counter": 0}]
 
-def U():
-    return str(uuid.uuid4())
+
+@contextlib.contextmanager
+def uuid_scope(context):
+    _uuid_stack.append({"context": context, "counter": 0})
+    try:
+        yield
+    finally:
+        _uuid_stack.pop()
+
+
+def stable_uuid(name):
+    return str(uuid.uuid5(UUID_NAMESPACE, str(name)))
+
+
+def reset_uuid_sequence(context="global"):
+    _uuid_stack[-1] = {"context": context, "counter": 0}
+
+
+def U(label=None):
+    frame = _uuid_stack[-1]
+    frame["counter"] += 1
+    suffix = f":{label}" if label is not None else ""
+    seed = f'{frame["context"]}:{frame["counter"]:06d}{suffix}'
+    return stable_uuid(seed)
 
 
 def snap_coord(value, grid=GRID_MM):
