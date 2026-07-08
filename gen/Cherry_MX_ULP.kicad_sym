@@ -1,0 +1,132 @@
+(kicad_symbol_lib
+  (version 20251024)
+  (generator "codex")
+  (generator_version "10.0")
+  (symbol "Cherry_MX_ULP"
+    (pin_names
+      (offset 1.016)
+      (hide yes)
+    )
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (property "Reference" "SW"
+      (at 0 5.08 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "Cherry_MX_ULP"
+      (at 0 -5.08 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD"
+      (at 0 0 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "https://www.cherry.de/en-us/product/mx-ulp-tactile"
+      (at 0 0 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Description" "Cherry MX Ultra Low Profile tactile switch, schematic contact pins only; SMD frame pads are unnumbered mechanical pads in the project footprint."
+      (at 0 0 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (symbol "Cherry_MX_ULP_0_1"
+      (circle
+        (center -1.27 0)
+        (radius 0.381)
+        (stroke
+          (width 0.1524)
+          (type default)
+        )
+        (fill
+          (type none)
+        )
+      )
+      (circle
+        (center 1.27 0)
+        (radius 0.381)
+        (stroke
+          (width 0.1524)
+          (type default)
+        )
+        (fill
+          (type none)
+        )
+      )
+      (polyline
+        (pts
+          (xy -0.889 0.508)
+          (xy 1.016 1.778)
+        )
+        (stroke
+          (width 0.1524)
+          (type default)
+        )
+        (fill
+          (type none)
+        )
+      )
+    )
+    (symbol "Cherry_MX_ULP_1_1"
+      (pin passive line
+        (at -5.08 0 0)
+        (length 3.429)
+        (name "A"
+          (effects
+            (font
+              (size 1.27 1.27)
+            )
+          )
+        )
+        (number "1"
+          (effects
+            (font
+              (size 1.27 1.27)
+            )
+          )
+        )
+      )
+      (pin passive line
+        (at 5.08 0 180)
+        (length 3.429)
+        (name "B"
+          (effects
+            (font
+              (size 1.27 1.27)
+            )
+          )
+        )
+        (number "2"
+          (effects
+            (font
+              (size 1.27 1.27)
+            )
+          )
+        )
+      )
+    )
+  )
+)

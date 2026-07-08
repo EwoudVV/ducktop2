@@ -1,0 +1,1466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ducktop2 Mechanical Layout Planner</title>
+  <style>
+    :root {
+      --bg: #0f1114;
+      --top: #151a20;
+      --panel: #171c22;
+      --panel-2: #202730;
+      --line: #333d49;
+      --line-soft: #26303a;
+      --text: #f0f3f7;
+      --muted: #aab4c0;
+      --accent: #68d8b0;
+      --accent-2: #7db8ff;
+      --danger: #ff7e75;
+      --grid: rgba(255, 255, 255, 0.08);
+      --grid-major: rgba(255, 255, 255, 0.16);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel-2);
+      color: var(--text);
+      padding: 5px 9px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+    }
+
+    button:disabled {
+      cursor: default;
+      opacity: 0.45;
+    }
+
+    button.primary {
+      background: #153d34;
+      border-color: #2b8068;
+    }
+
+    button.active {
+      color: #06120e;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #10151a;
+      color: var(--text);
+      padding: 5px 7px;
+    }
+
+    textarea {
+      height: 130px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+    }
+
+    label {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      grid-template-rows: auto minmax(0, 1fr);
+      height: 100vh;
+    }
+
+    .app.panel-collapsed {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .topbar {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      background: var(--top);
+    }
+
+    .brand {
+      width: 145px;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6px;
+      align-items: center;
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .spacer {
+      flex: 1;
+    }
+
+    .status {
+      max-width: 190px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .stage {
+      min-width: 0;
+      min-height: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #101419;
+      cursor: crosshair;
+    }
+
+    svg.panning {
+      cursor: grab;
+    }
+
+    svg.dragging {
+      cursor: grabbing;
+    }
+
+    .side {
+      min-height: 0;
+      overflow: auto;
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      padding: 12px;
+      border-left: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .app.panel-collapsed .side {
+      display: none;
+    }
+
+    .group {
+      display: grid;
+      gap: 10px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #13181e;
+    }
+
+    .group h2 {
+      margin: 0;
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .toggle input {
+      width: auto;
+      min-height: auto;
+    }
+
+    .part-list {
+      display: grid;
+      gap: 5px;
+      max-height: 330px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    .list-item {
+      display: grid;
+      grid-template-columns: 13px minmax(0, 1fr) auto auto;
+      align-items: center;
+      gap: 7px;
+      min-height: 34px;
+      border: 1px solid var(--line-soft);
+      border-radius: 6px;
+      padding: 6px 7px;
+      background: #10151a;
+      cursor: pointer;
+    }
+
+    .list-item.selected {
+      border-color: var(--accent);
+      background: #14231f;
+    }
+
+    .list-item.hidden {
+      opacity: 0.45;
+    }
+
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .mini {
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .icon-button {
+      width: 27px;
+      min-height: 26px;
+      padding: 0;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 2px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: #10151a;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .help {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .plane-label {
+      fill: #dce4ed;
+      font-size: 5px;
+      font-weight: 800;
+      pointer-events: none;
+    }
+
+    .plane-dims {
+      fill: #aab4c0;
+      font-size: 4px;
+      pointer-events: none;
+    }
+
+    .part-shape {
+      stroke: rgba(255, 255, 255, 0.56);
+      stroke-width: 0.8;
+      vector-effect: non-scaling-stroke;
+      cursor: grab;
+    }
+
+    .part-shape.locked {
+      stroke-dasharray: 3 2;
+      opacity: 0.76;
+    }
+
+    .part-shape.hidden {
+      display: none;
+    }
+
+    .part-label {
+      fill: #0a1015;
+      font-size: 4px;
+      font-weight: 850;
+      pointer-events: none;
+    }
+
+    .part-label.light {
+      fill: #eef5ff;
+    }
+
+    .part-meta {
+      fill: rgba(10, 16, 21, 0.72);
+      font-size: 3.2px;
+      font-weight: 650;
+      pointer-events: none;
+    }
+
+    .part-meta.light {
+      fill: rgba(238, 245, 255, 0.78);
+    }
+
+    .selection-outline {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 1.15;
+      vector-effect: non-scaling-stroke;
+      pointer-events: none;
+    }
+
+    .selection-outline.group {
+      stroke: var(--accent);
+      stroke-dasharray: 4 2;
+    }
+
+    .handle {
+      fill: #ffffff;
+      stroke: #0f1114;
+      stroke-width: 0.8;
+      vector-effect: non-scaling-stroke;
+      cursor: nwse-resize;
+    }
+
+    .handle.n,
+    .handle.s {
+      cursor: ns-resize;
+    }
+
+    .handle.e,
+    .handle.w {
+      cursor: ew-resize;
+    }
+
+    .handle.ne,
+    .handle.sw {
+      cursor: nesw-resize;
+    }
+
+    .marquee {
+      fill: rgba(104, 216, 176, 0.12);
+      stroke: var(--accent);
+      stroke-width: 0.9;
+      vector-effect: non-scaling-stroke;
+      pointer-events: none;
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .side {
+        display: none;
+      }
+
+      .brand {
+        width: 118px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .brand {
+        width: auto;
+      }
+
+      .toolbar {
+        grid-column: 1 / -1;
+        order: 3;
+      }
+
+      .status {
+        max-width: 120px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .topbar,
+      .side {
+        display: none !important;
+      }
+
+      .app {
+        display: block;
+      }
+
+      .stage {
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="app" class="app">
+    <header class="topbar">
+      <div class="brand">ducktop2 floorplan</div>
+      <div class="toolbar">
+        <button id="selectModeBtn" class="active" type="button">Select</button>
+        <button id="panModeBtn" type="button">Pan</button>
+        <button id="fitBtn" type="button">Fit</button>
+        <button id="zoomOutBtn" type="button">-</button>
+        <button id="zoomInBtn" type="button">+</button>
+        <button id="saveBtn" class="primary" type="button">Save</button>
+        <button id="exportBtn" type="button">Export</button>
+        <button id="importBtn" type="button">Import</button>
+        <button id="resetBtn" type="button">Reset</button>
+        <button id="panelBtn" type="button">Panel</button>
+      </div>
+      <div class="spacer"></div>
+      <div id="status" class="status">Ready</div>
+    </header>
+
+    <section class="stage">
+      <svg id="canvas" xmlns="http://www.w3.org/2000/svg" aria-label="ducktop2 mechanical layout canvas"></svg>
+    </section>
+
+    <aside class="side">
+      <section class="group">
+        <h2>View</h2>
+        <div class="grid-2">
+          <label>Grid mm<input id="gridInput" type="number" min="1" max="25" step="1"></label>
+          <label>Zoom<input id="zoomReadout" type="text" readonly></label>
+        </div>
+        <label class="toggle"><input id="snapToggle" type="checkbox"> Snap to grid</label>
+        <div class="button-row">
+          <button id="fitBaseBtn" type="button">Fit Base</button>
+          <button id="fitLidBtn" type="button">Fit Lid</button>
+          <button id="fitAllBtn" type="button">Fit All</button>
+        </div>
+      </section>
+
+      <section class="group">
+        <h2 id="selectedTitle">Selected</h2>
+        <div id="selectionSummary" class="pill-row"></div>
+        <label>Name<input id="partName" type="text"></label>
+        <div class="grid-3">
+          <label>X<input id="partX" type="number" step="0.5"></label>
+          <label>Y<input id="partY" type="number" step="0.5"></label>
+          <label>Zone<select id="partZone">
+            <option value="base">base</option>
+            <option value="lid">lid</option>
+            <option value="tray">tray</option>
+          </select></label>
+        </div>
+        <div class="grid-3">
+          <label>W<input id="partW" type="number" step="0.5"></label>
+          <label>H<input id="partH" type="number" step="0.5"></label>
+          <label>Kind<select id="partKind">
+            <option value="display">display</option>
+            <option value="board">board</option>
+            <option value="power">power</option>
+            <option value="input">input</option>
+            <option value="thermal">thermal</option>
+            <option value="audio">audio</option>
+            <option value="port">port</option>
+            <option value="rf">rf</option>
+            <option value="keepout">keepout</option>
+            <option value="ghost">ghost</option>
+          </select></label>
+        </div>
+        <div class="button-row">
+          <button id="focusBtn" type="button">Focus</button>
+          <button id="rotateBtn" type="button">Rotate</button>
+          <button id="duplicateBtn" type="button">Duplicate</button>
+          <button id="deleteBtn" type="button">Delete</button>
+          <button id="lockBtn" type="button">Lock</button>
+          <button id="hideBtn" type="button">Hide</button>
+        </div>
+      </section>
+
+      <section class="group">
+        <h2>Parts</h2>
+        <div class="button-row">
+          <button id="addPartBtn" type="button">Add Part</button>
+          <button id="selectAllBtn" type="button">Select All</button>
+          <button id="clearSelectionBtn" type="button">Clear</button>
+          <button id="frontBtn" type="button">Front</button>
+          <button id="backBtn" type="button">Back</button>
+        </div>
+        <div id="partList" class="part-list"></div>
+      </section>
+
+      <section class="group">
+        <h2>JSON</h2>
+        <textarea id="jsonBox" spellcheck="false"></textarea>
+        <div class="help">
+          Mouse wheel zooms at cursor. Drag empty space to box-select. Spacebar
+          or Pan mode drags the view. Shift/Command-click adds to selection.
+          White handles resize one unlocked part.
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <script>
+    const storageKey = "ducktop2-floorplan-v3";
+    const svgNS = "http://www.w3.org/2000/svg";
+
+    const colors = {
+      display: "#6ab7ff",
+      board: "#8bdc7b",
+      power: "#f6c453",
+      input: "#c197ff",
+      thermal: "#ffb26b",
+      audio: "#ff8fc7",
+      port: "#63d6e8",
+      rf: "#d4ed6b",
+      keepout: "rgba(255, 126, 117, 0.34)",
+      ghost: "rgba(210, 222, 235, 0.23)"
+    };
+
+    const lightTextKinds = new Set(["keepout", "ghost"]);
+
+    const defaultState = {
+      version: 3,
+      mode: "select",
+      grid: 5,
+      snap: true,
+      view: { x: -18, y: -18, w: 650, h: 590 },
+      planes: {
+        base: { label: "Base / Keyboard Deck", x: 0, y: 0, w: 390, h: 250 },
+        lid: { label: "Lid / Display", x: 0, y: 290, w: 390, h: 245 },
+        tray: { label: "Parking / Unplaced", x: 430, y: 0, w: 180, h: 535 }
+      },
+      selectedIds: [],
+      parts: [
+        { id: "keyboard", name: "thin keyboard zone", zone: "base", x: 35, y: 18, w: 300, h: 80, kind: "input" },
+        { id: "battery-1", name: "3.7V cell A", zone: "base", x: 45, y: 106, w: 100, h: 60, kind: "power" },
+        { id: "battery-2", name: "3.7V cell B", zone: "base", x: 150, y: 106, w: 100, h: 60, kind: "power" },
+        { id: "battery-3", name: "3.7V cell C", zone: "base", x: 255, y: 106, w: 100, h: 60, kind: "power" },
+        { id: "palm-rest", name: "palm-rest comfort zone", zone: "base", x: 70, y: 166, w: 250, h: 78, kind: "keepout", locked: true },
+        { id: "trackpad-target", name: "JOMAA / large trackpad bay", zone: "base", x: 128, y: 170, w: 135, h: 74, kind: "input" },
+        { id: "mnt-trackpad", name: "MNT trackpad size ref", zone: "base", x: 162, y: 188, w: 65, h: 49, kind: "ghost", locked: true },
+        { id: "tpad-usbc-conn", name: "trackpad USB-C receptacle", zone: "base", x: 104, y: 184, w: 18, h: 10, kind: "port" },
+        { id: "tpad-usbc-cable", name: "trackpad USB-C cable path", zone: "base", x: 122, y: 187, w: 44, h: 4, kind: "ghost" },
+        { id: "speaker-left", name: "front speaker L", zone: "base", x: 20, y: 226, w: 38, h: 18, kind: "audio" },
+        { id: "speaker-right", name: "front speaker R", zone: "base", x: 332, y: 226, w: 38, h: 18, kind: "audio" },
+        { id: "left-ports", name: "left side ports", zone: "base", x: 0, y: 70, w: 12, h: 66, kind: "port" },
+        { id: "right-ports", name: "right side ports", zone: "base", x: 378, y: 70, w: 12, h: 66, kind: "port" },
+        { id: "rear-antennas", name: "rear antenna connectors", zone: "base", x: 252, y: 0, w: 86, h: 12, kind: "rf" },
+        { id: "mu-module", name: "LattePanda Mu module", zone: "base", x: 290, y: 86, w: 70, h: 60, kind: "board" },
+        { id: "cold-plate", name: "Mu copper cold plate", zone: "base", x: 286, y: 82, w: 74, h: 64, kind: "thermal" },
+        { id: "heatpipe", name: "121721 heatpipe 150mm", zone: "base", x: 226, y: 112, w: 150, h: 8.1, kind: "thermal" },
+        { id: "fin-stack", name: "SKV505014-AL fin stack", zone: "base", x: 334, y: 42, w: 50, h: 50, kind: "thermal" },
+        { id: "blower", name: "5V blower", zone: "base", x: 338, y: 94, w: 45, h: 45, kind: "thermal" },
+        { id: "exhaust", name: "side exhaust keepout", zone: "base", x: 378, y: 40, w: 12, h: 104, kind: "thermal" },
+        { id: "nvme", name: "M.2 2280 SSD", zone: "base", x: 356, y: 160, w: 22, h: 80, kind: "board" },
+        { id: "panel-outline", name: "B160QAN03.K panel", zone: "lid", x: 20, y: 12, w: 350, h: 225, kind: "display" },
+        { id: "panel-active", name: "2560x1600 active area", zone: "lid", x: 23, y: 18, w: 345, h: 215, kind: "ghost", locked: true },
+        { id: "screen-pcb", name: "Intehill controller PCB", zone: "tray", x: 15, y: 18, w: 114, h: 70, kind: "board" },
+        { id: "screen-usbc", name: "display USB-C/FPC harness", zone: "tray", x: 15, y: 100, w: 92, h: 12, kind: "port" },
+        { id: "screen-hdmi", name: "internal HDMI harness", zone: "tray", x: 15, y: 120, w: 92, h: 12, kind: "port" },
+        { id: "charger-zone", name: "charger / power zone", zone: "tray", x: 15, y: 155, w: 120, h: 58, kind: "power" },
+        { id: "radio-zone", name: "ham radio / GNSS zone", zone: "tray", x: 15, y: 230, w: 120, h: 70, kind: "rf" },
+        { id: "maker-zone", name: "maker MCU header zone", zone: "tray", x: 15, y: 318, w: 120, h: 45, kind: "board" },
+        { id: "oled-zone", name: "dual SSD1306 headers", zone: "tray", x: 15, y: 380, w: 120, h: 35, kind: "display" }
+      ]
+    };
+
+    let state = loadState();
+    let drag = null;
+    let spaceDown = false;
+
+    const app = document.getElementById("app");
+    const svg = document.getElementById("canvas");
+    const els = {
+      status: document.getElementById("status"),
+      gridInput: document.getElementById("gridInput"),
+      zoomReadout: document.getElementById("zoomReadout"),
+      snapToggle: document.getElementById("snapToggle"),
+      partName: document.getElementById("partName"),
+      partX: document.getElementById("partX"),
+      partY: document.getElementById("partY"),
+      partW: document.getElementById("partW"),
+      partH: document.getElementById("partH"),
+      partZone: document.getElementById("partZone"),
+      partKind: document.getElementById("partKind"),
+      selectedTitle: document.getElementById("selectedTitle"),
+      selectionSummary: document.getElementById("selectionSummary"),
+      partList: document.getElementById("partList"),
+      jsonBox: document.getElementById("jsonBox")
+    };
+
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey));
+        if (saved && Array.isArray(saved.parts)) return normalize(saved);
+      } catch (err) {
+        console.warn(err);
+      }
+      return normalize(clone(defaultState));
+    }
+
+    function normalize(next) {
+      next.version = 3;
+      next.mode = next.mode === "pan" ? "pan" : "select";
+      next.grid = Number(next.grid) || defaultState.grid;
+      next.snap = next.snap !== false;
+      next.planes = clone(defaultState.planes);
+      next.view ||= clone(defaultState.view);
+      next.selectedIds = Array.isArray(next.selectedIds) ? next.selectedIds : [];
+      next.parts = next.parts.map(part => ({
+        locked: false,
+        hidden: false,
+        kind: "board",
+        zone: "base",
+        ...part,
+        x: Number(part.x) || 0,
+        y: Number(part.y) || 0,
+        w: Math.max(1, Number(part.w) || 1),
+        h: Math.max(1, Number(part.h) || 1)
+      }));
+      for (const part of defaultState.parts) {
+        if (!next.parts.some(existing => existing.id === part.id)) next.parts.push(clone(part));
+      }
+      const valid = new Set(next.parts.map(part => part.id));
+      next.selectedIds = [...new Set(next.selectedIds)].filter(id => valid.has(id));
+      return next;
+    }
+
+    function saveState() {
+      localStorage.setItem(storageKey, JSON.stringify(state));
+      setStatus("Saved");
+    }
+
+    function setStatus(text) {
+      els.status.textContent = text;
+      clearTimeout(setStatus.timer);
+      setStatus.timer = setTimeout(() => {
+        els.status.textContent = `${state.mode === "pan" || spaceDown ? "Pan" : "Select"} mode`;
+      }, 1800);
+    }
+
+    function mm(value) {
+      return Math.round(Number(value) * 10) / 10;
+    }
+
+    function snap(value) {
+      if (!state.snap) return mm(value);
+      return mm(Math.round(value / state.grid) * state.grid);
+    }
+
+    function planeFor(zone) {
+      return state.planes[zone] || state.planes.base;
+    }
+
+    function toWorldPart(part) {
+      const plane = planeFor(part.zone);
+      return {
+        x: plane.x + part.x,
+        y: plane.y + part.y,
+        w: part.w,
+        h: part.h
+      };
+    }
+
+    function fromWorld(part, x, y) {
+      const plane = planeFor(part.zone);
+      part.x = snap(x - plane.x);
+      part.y = snap(y - plane.y);
+      clampPart(part);
+    }
+
+    function byId(id) {
+      return state.parts.find(part => part.id === id);
+    }
+
+    function selectedParts() {
+      return state.selectedIds.map(byId).filter(Boolean);
+    }
+
+    function selectedPart() {
+      const parts = selectedParts();
+      return parts.length === 1 ? parts[0] : null;
+    }
+
+    function setSelection(ids) {
+      const valid = new Set(state.parts.map(part => part.id));
+      state.selectedIds = [...new Set(ids)].filter(id => valid.has(id));
+      render();
+    }
+
+    function toggleSelection(id) {
+      if (state.selectedIds.includes(id)) {
+        setSelection(state.selectedIds.filter(item => item !== id));
+      } else {
+        setSelection([...state.selectedIds, id]);
+      }
+    }
+
+    function selectionBounds(parts = selectedParts()) {
+      const visible = parts.filter(part => !part.hidden);
+      if (!visible.length) return null;
+      const rects = visible.map(toWorldPart);
+      const x1 = Math.min(...rects.map(rect => rect.x));
+      const y1 = Math.min(...rects.map(rect => rect.y));
+      const x2 = Math.max(...rects.map(rect => rect.x + rect.w));
+      const y2 = Math.max(...rects.map(rect => rect.y + rect.h));
+      return { x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
+    }
+
+    function clampPart(part) {
+      const plane = planeFor(part.zone);
+      part.w = Math.max(1, mm(part.w));
+      part.h = Math.max(1, mm(part.h));
+      part.x = mm(Math.max(0, Math.min(part.x, plane.w - part.w)));
+      part.y = mm(Math.max(0, Math.min(part.y, plane.h - part.h)));
+    }
+
+    function screenToWorld(event) {
+      const rect = svg.getBoundingClientRect();
+      return {
+        x: state.view.x + ((event.clientX - rect.left) / rect.width) * state.view.w,
+        y: state.view.y + ((event.clientY - rect.top) / rect.height) * state.view.h
+      };
+    }
+
+    function setView(view) {
+      state.view = {
+        x: mm(view.x),
+        y: mm(view.y),
+        w: Math.max(50, mm(view.w)),
+        h: Math.max(50, mm(view.h))
+      };
+      render();
+    }
+
+    function fitRect(rect, pad = 18, alignY = "center") {
+      const svgRect = svg.getBoundingClientRect();
+      const aspect = Math.max(1, svgRect.width) / Math.max(1, svgRect.height);
+      let w = rect.w + pad * 2;
+      let h = rect.h + pad * 2;
+      if (w / h > aspect) h = w / aspect;
+      else w = h * aspect;
+      const y = alignY === "top" ? rect.y - pad : rect.y + rect.h / 2 - h / 2;
+      setView({ x: rect.x + rect.w / 2 - w / 2, y, w, h });
+    }
+
+    function fitPlane(zone) {
+      const plane = planeFor(zone);
+      fitRect(plane, 20, "top");
+    }
+
+    function fitAll() {
+      const planes = Object.values(state.planes);
+      const x1 = Math.min(...planes.map(p => p.x));
+      const y1 = Math.min(...planes.map(p => p.y));
+      const x2 = Math.max(...planes.map(p => p.x + p.w));
+      const y2 = Math.max(...planes.map(p => p.y + p.h));
+      fitRect({ x: x1, y: y1, w: x2 - x1, h: y2 - y1 }, 22);
+    }
+
+    function fitSelection() {
+      const bounds = selectionBounds();
+      if (bounds) fitRect(bounds, 24);
+    }
+
+    function zoomAt(factor, center) {
+      const c = center || { x: state.view.x + state.view.w / 2, y: state.view.y + state.view.h / 2 };
+      const nextW = state.view.w / factor;
+      const nextH = state.view.h / factor;
+      setView({
+        x: c.x - ((c.x - state.view.x) / state.view.w) * nextW,
+        y: c.y - ((c.y - state.view.y) / state.view.h) * nextH,
+        w: nextW,
+        h: nextH
+      });
+    }
+
+    function svgEl(tag, attrs = {}, children = []) {
+      const node = document.createElementNS(svgNS, tag);
+      for (const [key, value] of Object.entries(attrs)) {
+        if (value !== undefined && value !== null) node.setAttribute(key, String(value));
+      }
+      for (const child of children) node.appendChild(child);
+      return node;
+    }
+
+    function textNode(tag, text, attrs = {}) {
+      const node = svgEl(tag, attrs);
+      node.textContent = text;
+      return node;
+    }
+
+    function render() {
+      svg.classList.toggle("panning", state.mode === "pan" || spaceDown);
+      svg.setAttribute("viewBox", `${state.view.x} ${state.view.y} ${state.view.w} ${state.view.h}`);
+      svg.innerHTML = "";
+
+      const defs = svgEl("defs");
+      defs.innerHTML = `
+        <pattern id="grid-small" width="${state.grid}" height="${state.grid}" patternUnits="userSpaceOnUse">
+          <path d="M ${state.grid} 0 L 0 0 0 ${state.grid}" fill="none" stroke="var(--grid)" stroke-width="0.25"/>
+        </pattern>
+        <pattern id="grid-major" width="${state.grid * 5}" height="${state.grid * 5}" patternUnits="userSpaceOnUse">
+          <rect width="${state.grid * 5}" height="${state.grid * 5}" fill="url(#grid-small)"/>
+          <path d="M ${state.grid * 5} 0 L 0 0 0 ${state.grid * 5}" fill="none" stroke="var(--grid-major)" stroke-width="0.35"/>
+        </pattern>
+      `;
+      svg.appendChild(defs);
+
+      svg.appendChild(svgEl("rect", {
+        x: state.view.x - state.view.w,
+        y: state.view.y - state.view.h,
+        width: state.view.w * 3,
+        height: state.view.h * 3,
+        fill: "url(#grid-major)"
+      }));
+
+      for (const [zone, plane] of Object.entries(state.planes)) drawPlane(zone, plane);
+      for (const part of state.parts) drawPart(part);
+      drawSelection();
+      if (drag?.type === "marquee") drawMarquee();
+
+      renderSide();
+    }
+
+    function drawPlane(zone, plane) {
+      const group = svgEl("g", { "data-zone": zone, class: "plane-group" });
+      group.appendChild(svgEl("rect", {
+        x: plane.x,
+        y: plane.y,
+        width: plane.w,
+        height: plane.h,
+        rx: 3,
+        fill: zone === "lid" ? "#1d2633" : zone === "tray" ? "#151b22" : "#222a33",
+        stroke: "#43505f",
+        "stroke-width": 0.75,
+        "vector-effect": "non-scaling-stroke"
+      }));
+      group.appendChild(svgEl("rect", {
+        x: plane.x,
+        y: plane.y,
+        width: plane.w,
+        height: 8,
+        fill: "rgba(104, 216, 176, 0.18)"
+      }));
+      group.appendChild(textNode("text", plane.label, {
+        x: plane.x + 4,
+        y: plane.y - 5,
+        class: "plane-label"
+      }));
+      group.appendChild(textNode("text", `${plane.w} x ${plane.h} mm`, {
+        x: plane.x + 72,
+        y: plane.y - 5,
+        class: "plane-dims"
+      }));
+      svg.appendChild(group);
+    }
+
+    function drawPart(part) {
+      if (part.hidden) return;
+      const rect = toWorldPart(part);
+      const group = svgEl("g", { "data-id": part.id, class: "part-node" });
+      const selected = state.selectedIds.includes(part.id);
+      const shapeAttrs = {
+        x: rect.x,
+        y: rect.y,
+        width: rect.w,
+        height: rect.h,
+        rx: Math.min(3, Math.min(rect.w, rect.h) / 5),
+        fill: colors[part.kind] || colors.board,
+        class: `part-shape${part.locked ? " locked" : ""}`,
+        "data-id": part.id,
+        "data-hit": "part"
+      };
+      if (part.locked && (part.kind === "ghost" || part.kind === "keepout")) {
+        shapeAttrs["pointer-events"] = "none";
+      }
+      const shape = svgEl("rect", shapeAttrs);
+      if (selected) {
+        shape.setAttribute("stroke", "#ffffff");
+        shape.setAttribute("stroke-width", "1.5");
+      }
+      group.appendChild(shape);
+
+      const labelClass = lightTextKinds.has(part.kind) ? "part-label light" : "part-label";
+      const metaClass = lightTextKinds.has(part.kind) ? "part-meta light" : "part-meta";
+      group.appendChild(textNode("text", part.name, {
+        x: rect.x + 3,
+        y: rect.y + 6,
+        class: labelClass
+      }));
+      group.appendChild(textNode("text", `${mm(part.w)} x ${mm(part.h)} mm${part.locked ? " locked" : ""}`, {
+        x: rect.x + 3,
+        y: rect.y + Math.max(11, rect.h - 3),
+        class: metaClass
+      }));
+      svg.appendChild(group);
+    }
+
+    function drawSelection() {
+      const parts = selectedParts().filter(part => !part.hidden);
+      const bounds = selectionBounds(parts);
+      if (!bounds) return;
+      svg.appendChild(svgEl("rect", {
+        x: bounds.x,
+        y: bounds.y,
+        width: bounds.w,
+        height: bounds.h,
+        class: `selection-outline${parts.length > 1 ? " group" : ""}`
+      }));
+      if (parts.length !== 1 || parts[0].locked) return;
+      const handles = [
+        ["nw", bounds.x, bounds.y],
+        ["n", bounds.x + bounds.w / 2, bounds.y],
+        ["ne", bounds.x + bounds.w, bounds.y],
+        ["e", bounds.x + bounds.w, bounds.y + bounds.h / 2],
+        ["se", bounds.x + bounds.w, bounds.y + bounds.h],
+        ["s", bounds.x + bounds.w / 2, bounds.y + bounds.h],
+        ["sw", bounds.x, bounds.y + bounds.h],
+        ["w", bounds.x, bounds.y + bounds.h / 2]
+      ];
+      for (const [name, x, y] of handles) {
+        svg.appendChild(svgEl("rect", {
+          x: x - 2,
+          y: y - 2,
+          width: 4,
+          height: 4,
+          rx: 0.9,
+          class: `handle ${name}`,
+          "data-hit": "handle",
+          "data-handle": name
+        }));
+      }
+    }
+
+    function drawMarquee() {
+      const x = Math.min(drag.start.x, drag.current.x);
+      const y = Math.min(drag.start.y, drag.current.y);
+      const w = Math.abs(drag.current.x - drag.start.x);
+      const h = Math.abs(drag.current.y - drag.start.y);
+      svg.appendChild(svgEl("rect", { x, y, width: w, height: h, class: "marquee" }));
+    }
+
+    function renderSide() {
+      els.gridInput.value = state.grid;
+      els.snapToggle.checked = state.snap;
+      const svgRect = svg.getBoundingClientRect();
+      els.zoomReadout.value = `${Math.round(svgRect.width / state.view.w * 10) / 10} px/mm`;
+      document.getElementById("selectModeBtn").classList.toggle("active", state.mode === "select");
+      document.getElementById("panModeBtn").classList.toggle("active", state.mode === "pan");
+
+      const parts = selectedParts();
+      const single = selectedPart();
+      const bounds = selectionBounds(parts);
+      els.selectedTitle.textContent = parts.length ? `Selected (${parts.length})` : "Selected";
+      els.selectionSummary.innerHTML = parts.length
+        ? `<span class="pill">${parts.filter(p => p.zone === "base").length} base</span><span class="pill">${parts.filter(p => p.zone === "lid").length} lid</span><span class="pill">${parts.filter(p => p.zone === "tray").length} tray</span><span class="pill">${parts.filter(p => p.locked).length} locked</span>`
+        : `<span class="pill">click or box-select</span>`;
+
+      for (const el of [els.partName, els.partX, els.partY, els.partW, els.partH, els.partZone, els.partKind]) {
+        el.disabled = !single;
+      }
+      for (const id of ["focusBtn", "rotateBtn", "duplicateBtn", "deleteBtn", "lockBtn", "hideBtn", "frontBtn", "backBtn"]) {
+        document.getElementById(id).disabled = !parts.length;
+      }
+      document.getElementById("lockBtn").textContent = parts.length && parts.every(part => part.locked) ? "Unlock" : "Lock";
+      document.getElementById("hideBtn").textContent = parts.length && parts.every(part => part.hidden) ? "Show" : "Hide";
+
+      if (single) {
+        els.partName.value = single.name;
+        els.partX.value = single.x;
+        els.partY.value = single.y;
+        els.partW.value = single.w;
+        els.partH.value = single.h;
+        els.partZone.value = single.zone;
+        els.partKind.value = single.kind;
+      } else if (bounds) {
+        els.partName.value = `${parts.length} parts`;
+        els.partX.value = mm(bounds.x);
+        els.partY.value = mm(bounds.y);
+        els.partW.value = mm(bounds.w);
+        els.partH.value = mm(bounds.h);
+      } else {
+        for (const el of [els.partName, els.partX, els.partY, els.partW, els.partH]) el.value = "";
+      }
+
+      els.partList.innerHTML = "";
+      for (const part of state.parts) {
+        const item = document.createElement("div");
+        item.className = `list-item${state.selectedIds.includes(part.id) ? " selected" : ""}${part.hidden ? " hidden" : ""}`;
+        item.innerHTML = `
+          <span class="swatch" style="background:${colors[part.kind] || colors.board}"></span>
+          <span class="name" title="${escapeHtml(part.name)}">${escapeHtml(part.name)}</span>
+          <span class="mini">${part.zone} ${mm(part.w)}x${mm(part.h)}</span>
+          <span class="mini">${part.locked ? "lock" : ""}${part.hidden ? " hide" : ""}</span>
+        `;
+        item.addEventListener("click", event => {
+          if (event.shiftKey || event.metaKey || event.ctrlKey) toggleSelection(part.id);
+          else setSelection([part.id]);
+        });
+        item.addEventListener("dblclick", () => {
+          setSelection([part.id]);
+          fitSelection();
+        });
+        els.partList.appendChild(item);
+      }
+      els.jsonBox.value = JSON.stringify(state, null, 2);
+    }
+
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function updateSingle(mutator) {
+      const part = selectedPart();
+      if (!part || part.locked) return;
+      mutator(part);
+      clampPart(part);
+      render();
+    }
+
+    function rotatePart(part) {
+      if (part.locked || part.hidden) return;
+      const centerX = part.x + part.w / 2;
+      const centerY = part.y + part.h / 2;
+      const nextW = part.h;
+      const nextH = part.w;
+      part.w = nextW;
+      part.h = nextH;
+      part.x = state.snap ? snap(centerX - nextW / 2) : mm(centerX - nextW / 2);
+      part.y = state.snap ? snap(centerY - nextH / 2) : mm(centerY - nextH / 2);
+      clampPart(part);
+    }
+
+    function rotateSelection() {
+      const parts = selectedParts().filter(part => !part.locked && !part.hidden);
+      if (!parts.length) return;
+      parts.forEach(rotatePart);
+      setStatus(`Rotated ${parts.length}`);
+      render();
+    }
+
+    function pointerDown(event) {
+      const hit = event.target.dataset.hit;
+      const point = screenToWorld(event);
+      if (state.mode === "pan" || spaceDown || event.button === 1) {
+        drag = {
+          type: "pan",
+          startClient: { x: event.clientX, y: event.clientY },
+          startView: clone(state.view)
+        };
+        svg.classList.add("dragging");
+        svg.setPointerCapture(event.pointerId);
+        return;
+      }
+
+      if (hit === "handle") {
+        const part = selectedPart();
+        if (!part || part.locked) return;
+        drag = {
+          type: "resize",
+          handle: event.target.dataset.handle,
+          start: point,
+          partId: part.id,
+          original: clone(part)
+        };
+        svg.setPointerCapture(event.pointerId);
+        return;
+      }
+
+      if (hit === "part") {
+        const id = event.target.dataset.id;
+        const additive = event.shiftKey || event.metaKey || event.ctrlKey;
+        if (additive) {
+          toggleSelection(id);
+          return;
+        }
+        if (!state.selectedIds.includes(id)) state.selectedIds = [id];
+        const moving = selectedParts().filter(part => !part.locked && !part.hidden);
+        drag = {
+          type: "move",
+          start: point,
+          parts: moving.map(part => ({ id: part.id, x: part.x, y: part.y }))
+        };
+        svg.classList.add("dragging");
+        svg.setPointerCapture(event.pointerId);
+        render();
+        return;
+      }
+
+      if (!(event.shiftKey || event.metaKey || event.ctrlKey)) state.selectedIds = [];
+      drag = {
+        type: "marquee",
+        start: point,
+        current: point,
+        additive: event.shiftKey || event.metaKey || event.ctrlKey
+      };
+      svg.setPointerCapture(event.pointerId);
+      render();
+    }
+
+    function pointerMove(event) {
+      const point = screenToWorld(event);
+      if (!drag) {
+        setStatus(`${mm(point.x)}, ${mm(point.y)} mm`);
+        return;
+      }
+
+      if (drag.type === "pan") {
+        const rect = svg.getBoundingClientRect();
+        const dx = (event.clientX - drag.startClient.x) / rect.width * drag.startView.w;
+        const dy = (event.clientY - drag.startClient.y) / rect.height * drag.startView.h;
+        state.view.x = mm(drag.startView.x - dx);
+        state.view.y = mm(drag.startView.y - dy);
+        render();
+        return;
+      }
+
+      if (drag.type === "move") {
+        const dx = point.x - drag.start.x;
+        const dy = point.y - drag.start.y;
+        for (const start of drag.parts) {
+          const part = byId(start.id);
+          if (!part) continue;
+          part.x = state.snap ? snap(start.x + dx) : mm(start.x + dx);
+          part.y = state.snap ? snap(start.y + dy) : mm(start.y + dy);
+          clampPart(part);
+        }
+        render();
+        return;
+      }
+
+      if (drag.type === "resize") {
+        resizePart(point);
+        render();
+        return;
+      }
+
+      if (drag.type === "marquee") {
+        drag.current = point;
+        render();
+      }
+    }
+
+    function pointerUp(event) {
+      if (drag?.type === "marquee") {
+        const x1 = Math.min(drag.start.x, drag.current.x);
+        const y1 = Math.min(drag.start.y, drag.current.y);
+        const x2 = Math.max(drag.start.x, drag.current.x);
+        const y2 = Math.max(drag.start.y, drag.current.y);
+        const hits = state.parts
+          .filter(part => !part.hidden)
+          .filter(part => {
+            const rect = toWorldPart(part);
+            return rect.x < x2 && rect.x + rect.w > x1 && rect.y < y2 && rect.y + rect.h > y1;
+          })
+          .map(part => part.id);
+        state.selectedIds = drag.additive ? [...new Set([...state.selectedIds, ...hits])] : hits;
+        setStatus(`Selected ${hits.length}`);
+      } else if (drag?.type === "move") {
+        setStatus(`Moved ${drag.parts.length}`);
+      } else if (drag?.type === "resize") {
+        setStatus("Resized");
+      }
+      drag = null;
+      svg.classList.remove("dragging");
+      try { svg.releasePointerCapture(event.pointerId); } catch {}
+      render();
+    }
+
+    function resizePart(point) {
+      const part = byId(drag.partId);
+      if (!part) return;
+      const plane = planeFor(part.zone);
+      const original = drag.original;
+      const startWorld = { x: plane.x + original.x, y: plane.y + original.y };
+      let left = startWorld.x;
+      let top = startWorld.y;
+      let right = startWorld.x + original.w;
+      let bottom = startWorld.y + original.h;
+      if (drag.handle.includes("w")) left = point.x;
+      if (drag.handle.includes("e")) right = point.x;
+      if (drag.handle.includes("n")) top = point.y;
+      if (drag.handle.includes("s")) bottom = point.y;
+      if (right < left) [left, right] = [right, left];
+      if (bottom < top) [top, bottom] = [bottom, top];
+      part.x = state.snap ? snap(left - plane.x) : mm(left - plane.x);
+      part.y = state.snap ? snap(top - plane.y) : mm(top - plane.y);
+      part.w = state.snap ? snap(right - left) : mm(right - left);
+      part.h = state.snap ? snap(bottom - top) : mm(bottom - top);
+      clampPart(part);
+    }
+
+    function bindChange(el, fn) {
+      el.addEventListener("change", () => fn(el.value));
+    }
+
+    bindChange(els.gridInput, value => {
+      state.grid = Math.max(1, Number(value) || 5);
+      render();
+    });
+    els.snapToggle.addEventListener("change", () => {
+      state.snap = els.snapToggle.checked;
+      render();
+    });
+    bindChange(els.partName, value => updateSingle(part => part.name = value || part.name));
+    bindChange(els.partX, value => updateSingle(part => part.x = Number(value) || 0));
+    bindChange(els.partY, value => updateSingle(part => part.y = Number(value) || 0));
+    bindChange(els.partW, value => updateSingle(part => part.w = Number(value) || 1));
+    bindChange(els.partH, value => updateSingle(part => part.h = Number(value) || 1));
+    bindChange(els.partZone, value => updateSingle(part => part.zone = value));
+    bindChange(els.partKind, value => updateSingle(part => part.kind = value));
+
+    document.getElementById("selectModeBtn").onclick = () => { state.mode = "select"; render(); };
+    document.getElementById("panModeBtn").onclick = () => { state.mode = "pan"; render(); };
+    document.getElementById("fitBtn").onclick = fitAll;
+    document.getElementById("fitAllBtn").onclick = fitAll;
+    document.getElementById("fitBaseBtn").onclick = () => fitPlane("base");
+    document.getElementById("fitLidBtn").onclick = () => fitPlane("lid");
+    document.getElementById("focusBtn").onclick = fitSelection;
+    document.getElementById("rotateBtn").onclick = rotateSelection;
+    document.getElementById("zoomInBtn").onclick = () => zoomAt(1.2);
+    document.getElementById("zoomOutBtn").onclick = () => zoomAt(1 / 1.2);
+    document.getElementById("saveBtn").onclick = saveState;
+    document.getElementById("panelBtn").onclick = () => {
+      app.classList.toggle("panel-collapsed");
+      setTimeout(() => render(), 50);
+    };
+
+    document.getElementById("selectAllBtn").onclick = () => setSelection(state.parts.filter(p => !p.hidden).map(p => p.id));
+    document.getElementById("clearSelectionBtn").onclick = () => setSelection([]);
+    document.getElementById("duplicateBtn").onclick = () => {
+      const copies = selectedParts().map(part => {
+        const copy = clone(part);
+        copy.id = `${part.id}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+        copy.name = `${part.name} copy`;
+        copy.x = snap(copy.x + 8);
+        copy.y = snap(copy.y + 8);
+        copy.locked = false;
+        clampPart(copy);
+        return copy;
+      });
+      state.parts.push(...copies);
+      state.selectedIds = copies.map(part => part.id);
+      render();
+    };
+    document.getElementById("deleteBtn").onclick = () => {
+      const selected = new Set(state.selectedIds);
+      state.parts = state.parts.filter(part => !selected.has(part.id) || part.locked);
+      state.selectedIds = [];
+      render();
+    };
+    document.getElementById("lockBtn").onclick = () => {
+      const parts = selectedParts();
+      const unlock = parts.every(part => part.locked);
+      parts.forEach(part => part.locked = !unlock);
+      render();
+    };
+    document.getElementById("hideBtn").onclick = () => {
+      const parts = selectedParts();
+      const show = parts.every(part => part.hidden);
+      parts.forEach(part => part.hidden = !show);
+      if (!show) state.selectedIds = [];
+      render();
+    };
+    document.getElementById("frontBtn").onclick = () => {
+      const selected = new Set(state.selectedIds);
+      state.parts = state.parts.filter(part => !selected.has(part.id)).concat(state.parts.filter(part => selected.has(part.id)));
+      render();
+    };
+    document.getElementById("backBtn").onclick = () => {
+      const selected = new Set(state.selectedIds);
+      state.parts = state.parts.filter(part => selected.has(part.id)).concat(state.parts.filter(part => !selected.has(part.id)));
+      render();
+    };
+    document.getElementById("addPartBtn").onclick = () => {
+      const part = {
+        id: `part-${Date.now().toString(36)}`,
+        name: "new part",
+        zone: "tray",
+        x: 20,
+        y: 440,
+        w: 45,
+        h: 25,
+        kind: "board",
+        locked: false,
+        hidden: false
+      };
+      state.parts.push(part);
+      state.selectedIds = [part.id];
+      render();
+    };
+    document.getElementById("exportBtn").onclick = async () => {
+      const text = JSON.stringify(state, null, 2);
+      els.jsonBox.value = text;
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("Copied JSON");
+      } catch {
+        setStatus("JSON ready");
+      }
+    };
+    document.getElementById("importBtn").onclick = () => {
+      try {
+        const next = JSON.parse(els.jsonBox.value);
+        state = normalize(next);
+        saveState();
+        render();
+      } catch (err) {
+        console.error(err);
+        setStatus("Import failed");
+      }
+    };
+    document.getElementById("resetBtn").onclick = () => {
+      if (!confirm("Reset the floorplan to the new clean default?")) return;
+      state = normalize(clone(defaultState));
+      saveState();
+      render();
+    };
+
+    svg.addEventListener("pointerdown", pointerDown);
+    svg.addEventListener("pointermove", pointerMove);
+    svg.addEventListener("pointerup", pointerUp);
+    svg.addEventListener("pointercancel", pointerUp);
+    svg.addEventListener("wheel", event => {
+      event.preventDefault();
+      zoomAt(event.deltaY < 0 ? 1.12 : 1 / 1.12, screenToWorld(event));
+    }, { passive: false });
+
+    window.addEventListener("resize", render);
+    window.addEventListener("keydown", event => {
+      if (event.target.matches("input, textarea, select")) return;
+      if (event.code === "Space") {
+        event.preventDefault();
+        spaceDown = true;
+        render();
+        return;
+      }
+      if (event.key === "Escape") {
+        state.selectedIds = [];
+        drag = null;
+        render();
+        return;
+      }
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "a") {
+        event.preventDefault();
+        setSelection(state.parts.filter(p => !p.hidden).map(p => p.id));
+        return;
+      }
+      if ((event.key === "Backspace" || event.key === "Delete") && state.selectedIds.length) {
+        event.preventDefault();
+        document.getElementById("deleteBtn").click();
+        return;
+      }
+      if (event.key.toLowerCase() === "r" && state.selectedIds.length) {
+        event.preventDefault();
+        rotateSelection();
+        return;
+      }
+      const moving = selectedParts().filter(part => !part.locked && !part.hidden);
+      if (!moving.length) return;
+      const step = event.shiftKey ? 10 : 1;
+      let moved = true;
+      if (event.key === "ArrowLeft") moving.forEach(part => part.x -= step);
+      else if (event.key === "ArrowRight") moving.forEach(part => part.x += step);
+      else if (event.key === "ArrowUp") moving.forEach(part => part.y -= step);
+      else if (event.key === "ArrowDown") moving.forEach(part => part.y += step);
+      else moved = false;
+      if (moved) {
+        event.preventDefault();
+        moving.forEach(clampPart);
+        render();
+      }
+    });
+    window.addEventListener("keyup", event => {
+      if (event.code === "Space") {
+        spaceDown = false;
+        render();
+      }
+    });
+
+    fitPlane("base");
+  </script>
+</body>
+</html>

@@ -2,7 +2,7 @@ import os
 from build_ducktop2 import Sheet, U, PROJDIR, FOOTPRINTS
 
 
-def build(sheet_symbol_uuid, pwr_start=3, flg_start=4):
+def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
     s = Sheet(f"/{sheet_symbol_uuid}")
     # continue global numbering for #PWR/#FLG pseudo-refs so they don't collide
     # with the ones already used on the Power & Battery sheet.
@@ -24,36 +24,43 @@ def build(sheet_symbol_uuid, pwr_start=3, flg_start=4):
     s.place("U4", "STM32F407VGTx", "STM32F407VGTx", 250, 400,
             footprint="Package_QFP:LQFP-100_14x14mm_P0.5mm",
             pin_nets={
-                "1": ("KB_ROW2", "local"), "2": ("KB_ROW3", "local"), "3": ("KB_ROW4", "local"),
-                "4": ("KB_ROW5", "local"), "5": ("KB_ROW6", "local"), "6": ("MCU_3V3", "hier"),
-                "7": ("", "nc"), "8": ("LSE_IN", "local"), "9": ("LSE_OUT", "local"),
+                "1": ("KB_ROW2", "hier"), "2": ("KB_ROW3", "hier"), "3": ("KB_ROW4", "hier"),
+                "4": ("KB_ROW5", "hier"), "5": ("KB_ROW6", "hier"), "6": ("MCU_3V3", "hier"),
+                "7": ("USER_GPIO4", "local"), "8": ("LSE_IN", "local"), "9": ("LSE_OUT", "local"),
                 "10": ("GND", "local"), "11": ("MCU_3V3", "hier"), "12": ("HSE_IN", "local"),
-                "13": ("HSE_OUT", "local"), "14": ("NRST_NET", "local"), "15": ("", "nc"),
-                "16": ("", "nc"), "17": ("", "nc"), "18": ("", "nc"), "19": ("MCU_3V3", "hier"),
+                "13": ("HSE_OUT", "local"), "14": ("NRST_NET", "local"), "15": ("USER_GPIO0_SPI_SCK", "local"),
+                "16": ("USER_GPIO1_SPI_MISO", "local"), "17": ("USER_GPIO2_SPI_MOSI", "local"),
+                "18": ("USER_GPIO3_SPI_CS_N", "local"), "19": ("MCU_3V3", "hier"),
                 "20": ("GND", "local"), "21": ("MCU_3V3", "hier"), "22": ("MCU_3V3", "hier"),
-                "23": ("EC_GPIO0", "local"), "24": ("BQ_ALERT", "hier"), "25": ("CHG_INT_N", "hier"),
+                "23": ("MU_PWRBTN_N", "hier"), "24": ("BQ_ALERT", "hier"), "25": ("CHG_INT_N", "hier"),
                 "26": ("PMIC_QON", "hier"), "27": ("GND", "local"), "28": ("MCU_3V3", "hier"),
-                "29": ("CHG_CE_N", "hier"), "30": ("EC_GPIO1", "local"), "31": ("EC_GPIO2", "local"),
-                "32": ("EC_GPIO3", "local"), "33": ("", "nc"), "34": ("", "nc"),
-                "35": ("EC_GPIO8", "local"), "36": ("EC_GPIO9", "local"), "37": ("EC_GPIO10", "local"),
-                "38": ("KB_ROW7", "local"), "39": ("", "nc"), "40": ("", "nc"), "41": ("", "nc"),
-                "42": ("", "nc"), "43": ("", "nc"), "44": ("", "nc"), "45": ("", "nc"), "46": ("", "nc"),
-                "47": ("", "nc"), "48": ("", "nc"), "49": ("VCAP1_NODE", "local"), "50": ("MCU_3V3", "hier"),
-                "51": ("EC_GPIO13", "local"), "52": ("EC_GPIO14", "local"), "53": ("EC_GPIO15", "local"),
-                "54": ("", "nc"), "55": ("KB_COL8", "local"), "56": ("KB_COL9", "local"),
-                "57": ("KB_COL10", "local"), "58": ("KB_COL11", "local"), "59": ("KB_COL12", "local"),
-                "60": ("KB_COL13", "local"), "61": ("KB_COL14", "local"), "62": ("KB_COL15", "local"),
-                "63": ("", "nc"), "64": ("", "nc"), "65": ("", "nc"), "66": ("", "nc"),
-                "67": ("EC_GPIO4", "local"), "68": ("EC_GPIO5", "local"), "69": ("EC_GPIO6", "local"),
+                "29": ("CHG_CE_N", "hier"), "30": ("MU_RSTBTN_N", "hier"), "31": ("AUX_DC_ADC", "hier"),
+                "32": ("THERM_SKIN_ADC", "hier"), "33": ("FAN_PWM", "hier"), "34": ("FAN_TACH", "hier"),
+                "35": ("THERM_MU_ADC", "hier"), "36": ("TPAD_INT_N", "hier"), "37": ("EC_SPARE_GPIO5", "local"),
+                "38": ("KB_ROW7", "hier"), "39": ("LCD_BL_PWM", "hier"), "40": ("LCD_BL_EN", "hier"),
+                "41": ("LID_CLOSED_N", "hier"), "42": ("TPAD_RESET_N", "hier"),
+                "43": ("TOUCH_RESET_N", "hier"), "44": ("PANEL_PWR_EN", "hier"),
+                "45": ("PANEL_RESET_N", "hier"), "46": ("TOUCH_INT_N", "hier"),
+                "47": ("RADIO_VHF_UART_TX", "hier"), "48": ("RADIO_VHF_UART_RX", "hier"),
+                "49": ("VCAP1_NODE", "local"), "50": ("MCU_3V3", "hier"),
+                "51": ("OLED_RESET_N", "hier"), "52": ("GNSS_RESET_N", "hier"), "53": ("GNSS_PPS", "hier"),
+                "54": ("RADIO_UHF_UART_TX", "hier"), "55": ("KB_COL8", "hier"), "56": ("KB_COL9", "hier"),
+                "57": ("KB_COL10", "hier"), "58": ("KB_COL11", "hier"), "59": ("KB_COL12", "hier"),
+                "60": ("KB_COL13", "hier"), "61": ("KB_COL14", "hier"), "62": ("KB_COL15", "hier"),
+                "63": ("RADIO_UHF_UART_RX", "hier"), "64": ("RADIO_VHF_PTT_N", "hier"),
+                "65": ("RADIO_UHF_PTT_N", "hier"), "66": ("RADIO_VHF_PD_N", "hier"),
+                "67": ("WIFI_W_DISABLE1_N", "hier"), "68": ("WIFI_W_DISABLE2_N", "hier"), "69": ("GNSS_UART_RX", "hier"),
                 "70": ("MCU_USB_DM", "hier"), "71": ("MCU_USB_DP", "hier"), "72": ("SWDIO_NET", "local"),
                 "73": ("VCAP2_NODE", "local"), "74": ("GND", "local"), "75": ("MCU_3V3", "hier"),
-                "76": ("SWCLK_NET", "local"), "77": ("EC_GPIO7", "local"), "78": ("", "nc"),
-                "79": ("", "nc"), "80": ("", "nc"), "81": ("KB_COL0", "local"), "82": ("KB_COL1", "local"),
-                "83": ("KB_COL2", "local"), "84": ("KB_COL3", "local"), "85": ("KB_COL4", "local"),
-                "86": ("KB_COL5", "local"), "87": ("KB_COL6", "local"), "88": ("KB_COL7", "local"),
-                "89": ("", "nc"), "90": ("", "nc"), "91": ("", "nc"), "92": ("I2C_SCL", "hier"),
-                "93": ("I2C_SDA", "hier"), "94": ("BOOT0_NET", "local"), "95": ("EC_GPIO11", "local"),
-                "96": ("EC_GPIO12", "local"), "97": ("KB_ROW0", "local"), "98": ("KB_ROW1", "local"),
+                "76": ("SWCLK_NET", "local"), "77": ("GNSS_UART_TX", "hier"), "78": ("RADIO_UHF_PD_N", "hier"),
+                "79": ("RADIO_VHF_SQL", "hier"), "80": ("RADIO_UHF_SQL", "hier"),
+                "81": ("KB_COL0", "hier"), "82": ("KB_COL1", "hier"),
+                "83": ("KB_COL2", "hier"), "84": ("KB_COL3", "hier"), "85": ("KB_COL4", "hier"),
+                "86": ("KB_COL5", "hier"), "87": ("KB_COL6", "hier"), "88": ("KB_COL7", "hier"),
+                "89": ("RADIO_VHF_RF_SEL", "hier"), "90": ("RADIO_UHF_RF_SEL", "hier"),
+                "91": ("RADIO_AUDIO_SEL", "hier"), "92": ("I2C_SCL", "hier"),
+                "93": ("I2C_SDA", "hier"), "94": ("BOOT0_NET", "local"), "95": ("GNSS_EXTINT", "hier"),
+                "96": ("RADIO_GPIO0", "hier"), "97": ("KB_ROW0", "hier"), "98": ("KB_ROW1", "hier"),
                 "99": ("GND", "local"), "100": ("MCU_3V3", "hier"),
             })
 
@@ -89,8 +96,8 @@ def build(sheet_symbol_uuid, pwr_start=3, flg_start=4):
     # ---------------- HSE / LSE crystals ----------------
     s.text(20, 230, "-- HSE 8MHz + LSE 32.768kHz crystals --")
     c3 = Cur(20, 240)
-    s.place("Y1", "Crystal", "8MHz HSE", *c3.next(), footprint=FOOTPRINTS["Crystal_HSE"],
-            pin_nets={"1": ("HSE_IN", "local"), "2": ("HSE_OUT", "local")})
+    s.place("Y1", "Crystal_GND24", "8MHz HSE", *c3.next(), footprint=FOOTPRINTS["Crystal_HSE"],
+            pin_nets={"1": ("HSE_IN", "local"), "2": ("GND", "local"), "3": ("HSE_OUT", "local")})
     s.place("C32", "C", "18p", *c3.next(), footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("HSE_IN", "local"), "2": ("GND", "local")})
     s.place("C33", "C", "18p", *c3.next(), footprint=FOOTPRINTS["C_100n"],
@@ -113,36 +120,85 @@ def build(sheet_symbol_uuid, pwr_start=3, flg_start=4):
     s.pwrflag(20, 380, "MCU_3V3")
 
     # ---------------- Keyboard matrix headers ----------------
-    s.text(450, 20, "== Keyboard Matrix (8 rows x 16 cols, diodes on membrane PCB) ==")
-    s.place("J5", "Conn_01x08", "KB rows (PE0-7)", 450, 60,
+    s.text(450, 20, "== Keyboard Matrix GPIO bank (MX ULP rev A uses 5 rows x 14 cols) ==")
+    s.place("J5", "Conn_01x08", "DNP KB row probe; R5-R7 spare in MX ULP rev A", 450, 60,
             footprint=FOOTPRINTS["Conn_01x08"],
             pin_nets={
-                "1": ("KB_ROW0", "local"), "2": ("KB_ROW1", "local"), "3": ("KB_ROW2", "local"),
-                "4": ("KB_ROW3", "local"), "5": ("KB_ROW4", "local"), "6": ("KB_ROW5", "local"),
-                "7": ("KB_ROW6", "local"), "8": ("KB_ROW7", "local"),
+                "1": ("KB_ROW0", "hier"), "2": ("KB_ROW1", "hier"), "3": ("KB_ROW2", "hier"),
+                "4": ("KB_ROW3", "hier"), "5": ("KB_ROW4", "hier"), "6": ("KB_ROW5", "hier"),
+                "7": ("KB_ROW6", "hier"), "8": ("KB_ROW7", "hier"),
             })
-    s.place("J6", "Conn_01x16", "KB columns (PD0-15)", 450, 140,
+    s.place("J6", "Conn_01x16", "DNP KB column probe; C14-C15 spare in MX ULP rev A", 450, 140,
             footprint=FOOTPRINTS["Conn_01x16"],
             pin_nets={
-                "1": ("KB_COL0", "local"), "2": ("KB_COL1", "local"), "3": ("KB_COL2", "local"),
-                "4": ("KB_COL3", "local"), "5": ("KB_COL4", "local"), "6": ("KB_COL5", "local"),
-                "7": ("KB_COL6", "local"), "8": ("KB_COL7", "local"), "9": ("KB_COL8", "local"),
-                "10": ("KB_COL9", "local"), "11": ("KB_COL10", "local"), "12": ("KB_COL11", "local"),
-                "13": ("KB_COL12", "local"), "14": ("KB_COL13", "local"), "15": ("KB_COL14", "local"),
-                "16": ("KB_COL15", "local"),
+                "1": ("KB_COL0", "hier"), "2": ("KB_COL1", "hier"), "3": ("KB_COL2", "hier"),
+                "4": ("KB_COL3", "hier"), "5": ("KB_COL4", "hier"), "6": ("KB_COL5", "hier"),
+                "7": ("KB_COL6", "hier"), "8": ("KB_COL7", "hier"), "9": ("KB_COL8", "hier"),
+                "10": ("KB_COL9", "hier"), "11": ("KB_COL10", "hier"), "12": ("KB_COL11", "hier"),
+                "13": ("KB_COL12", "hier"), "14": ("KB_COL13", "hier"), "15": ("KB_COL14", "hier"),
+                "16": ("KB_COL15", "hier"),
             })
 
     # ---------------- GPIO expansion header ----------------
-    s.text(450, 260, "== EC_GPIO expansion header (16 spare GPIO) ==")
-    s.place("J7", "Conn_01x16", "EC_GPIO0-15 expansion", 450, 300,
+    s.text(450, 260, "== EC GPIO expansion / laptop power controls ==")
+    s.place("J7", "Conn_01x16", "EC power controls + spare GPIO expansion", 450, 300,
             footprint=FOOTPRINTS["Conn_01x16"],
             pin_nets={
-                "1": ("EC_GPIO0", "local"), "2": ("EC_GPIO1", "local"), "3": ("EC_GPIO2", "local"),
-                "4": ("EC_GPIO3", "local"), "5": ("EC_GPIO4", "local"), "6": ("EC_GPIO5", "local"),
-                "7": ("EC_GPIO6", "local"), "8": ("EC_GPIO7", "local"), "9": ("EC_GPIO8", "local"),
-                "10": ("EC_GPIO9", "local"), "11": ("EC_GPIO10", "local"), "12": ("EC_GPIO11", "local"),
-                "13": ("EC_GPIO12", "local"), "14": ("EC_GPIO13", "local"), "15": ("EC_GPIO14", "local"),
-                "16": ("EC_GPIO15", "local"),
+                "1": ("MU_PWRBTN_N", "hier"), "2": ("MU_RSTBTN_N", "hier"),
+                "3": ("AUX_DC_ADC", "hier"), "4": ("TPAD_RESET_N", "hier"),
+                "5": ("TPAD_INT_N", "hier"), "6": ("EC_SPARE_GPIO5", "local"),
+                "7": ("THERM_MU_ADC", "hier"), "8": ("WIFI_W_DISABLE1_N", "hier"),
+                "9": ("WIFI_W_DISABLE2_N", "hier"), "10": ("GNSS_UART_RX", "hier"),
+                "11": ("GNSS_UART_TX", "hier"), "12": ("OLED_RESET_N", "hier"),
+                "13": ("GNSS_RESET_N", "hier"), "14": ("GNSS_PPS", "hier"),
+                "15": ("GNSS_EXTINT", "hier"), "16": ("RADIO_GPIO0", "hier"),
+            })
+
+    s.place("J13", "Conn_01x16", "Laptop service GPIO map", 590, 300,
+            footprint=FOOTPRINTS["Conn_01x16"],
+            pin_nets={
+                "1": ("FAN_PWM", "hier"), "2": ("FAN_TACH", "hier"),
+                "3": ("LCD_BL_PWM", "hier"), "4": ("LCD_BL_EN", "hier"),
+                "5": ("LID_CLOSED_N", "hier"), "6": ("THERM_SKIN_ADC", "hier"),
+                "7": ("THERM_MU_ADC", "hier"), "8": ("TOUCH_RESET_N", "hier"),
+                "9": ("TOUCH_INT_N", "hier"), "10": ("PANEL_PWR_EN", "hier"),
+                "11": ("PANEL_RESET_N", "hier"), "12": ("MCU_USB_DP", "hier"),
+                "13": ("MCU_USB_DM", "hier"), "14": ("MCU_3V3", "hier"),
+                "15": ("VSYS", "hier"), "16": ("GND", "local"),
+            })
+
+    s.place("J14", "Conn_01x16", "Ham radio EC GPIO map", 590, 420,
+            footprint=FOOTPRINTS["Conn_01x16"],
+            pin_nets={
+                "1": ("RADIO_VHF_UART_TX", "hier"), "2": ("RADIO_VHF_UART_RX", "hier"),
+                "3": ("RADIO_UHF_UART_TX", "hier"), "4": ("RADIO_UHF_UART_RX", "hier"),
+                "5": ("RADIO_VHF_PTT_N", "hier"), "6": ("RADIO_UHF_PTT_N", "hier"),
+                "7": ("RADIO_VHF_PD_N", "hier"), "8": ("RADIO_UHF_PD_N", "hier"),
+                "9": ("RADIO_VHF_SQL", "hier"), "10": ("RADIO_UHF_SQL", "hier"),
+                "11": ("RADIO_VHF_RF_SEL", "hier"), "12": ("RADIO_UHF_RF_SEL", "hier"),
+                "13": ("RADIO_AUDIO_SEL", "hier"), "14": ("RADIO_GPIO0", "hier"),
+                "15": ("MCU_3V3", "hier"), "16": ("GND", "local"),
+            })
+
+    s.place("J15", "Conn_01x16", "Exposed EC-owned GPIO header", 450, 420,
+            footprint=FOOTPRINTS["Conn_01x16"],
+            pin_nets={
+                "1": ("MCU_3V3", "hier"), "2": ("GND", "local"),
+                "3": ("I2C_SCL", "hier"), "4": ("I2C_SDA", "hier"),
+                "5": ("USER_GPIO0_SPI_SCK", "local"), "6": ("USER_GPIO1_SPI_MISO", "local"),
+                "7": ("USER_GPIO2_SPI_MOSI", "local"), "8": ("USER_GPIO3_SPI_CS_N", "local"),
+                "9": ("USER_GPIO4", "local"), "10": ("RADIO_GPIO0", "hier"),
+                "11": ("MCU_3V3", "hier"), "12": ("GND", "local"),
+                "13": ("", "nc"), "14": ("", "nc"), "15": ("", "nc"), "16": ("GND", "local"),
+            })
+
+    s.place("J16", "Conn_01x04", "Case power/reset button harness", 450, 535,
+            footprint=FOOTPRINTS["Conn_01x04"],
+            pin_nets={
+                "1": ("GND", "local"),
+                "2": ("MU_PWRBTN_N", "hier"),
+                "3": ("MU_RSTBTN_N", "hier"),
+                "4": ("MCU_3V3", "hier"),
             })
 
     # ---------------- U5: TPS54202DDC VSYS -> 3.3V buck ----------------
@@ -162,21 +218,27 @@ def build(sheet_symbol_uuid, pwr_start=3, flg_start=4):
             pin_nets={"1": ("VSYS", "hier"), "2": ("BUCK_EN", "local")})
     s.place("C38", "C", "100n (BOOT cap)", *c4.next(), footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("BUCK_BOOT", "local"), "2": ("BUCK_SW", "local")})
-    s.place("L3", "L", "3.3uH (typ, verify per fsw)", *c4.next(), footprint=FOOTPRINTS["L_buck"],
+    s.place("L3", "L", "3.3uH >=3A", *c4.next(), footprint=FOOTPRINTS["L_buck"],
             pin_nets={"1": ("BUCK_SW", "local"), "2": ("MCU_3V3", "hier")})
-    s.place("R35", "R", "31.6k (FB divider hi)", *c4.next(), footprint=FOOTPRINTS["R"],
+    s.place("R35", "R", "45.3k 1% (3.3V FB hi)", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("BUCK_FB", "local")})
-    s.place("R36", "R", "10k (FB divider lo)", *c4.next(), footprint=FOOTPRINTS["R"],
+    s.place("R36", "R", "10k 1% (3.3V FB lo)", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK_FB", "local"), "2": ("GND", "local")})
-    s.place("C39", "C", "22u (TBD - verify output ripple)", *c4.next(), footprint=FOOTPRINTS["C_10u"],
+    s.place("C39", "C", "22u MCU_3V3 output", *c4.next(), footprint=FOOTPRINTS["C_10u"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
 
     s.gnd(650, 200)
 
     s.text(20, 340, "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice).")
     s.text(20, 346, "EC_GPIOx numbering is a local convenience mapping - see U4 pin_nets for actual STM32 pin/net cross-ref.")
-    s.text(20, 352, "Anti-ghosting diodes for the keyboard matrix live on the keyboard membrane PCB, not this board.")
+    s.text(20, 352, "Anti-ghosting diodes for the keyboard matrix live on the separate MX ULP keyboard PCB.")
     s.text(20, 358, "MCU_USB_DP/DM (PA12/PA11, OTG_FS device mode) intentionally distinct from Power sheet's USB_DP1/DM1 (PD sink port).")
+    s.text(20, 364, "EC can assert Mu PWRBTN_N/RSTBTN_N as open-drain GPIOs; J16 also allows physical case buttons.")
+    s.text(20, 370, "Second spare GPIO bank is assigned to E-key radio disables, GNSS UART/control/PPS, OLED reset, trackpad reset/INT, and one spare radio GPIO.")
+    s.text(20, 376, "AUX_DC_ADC monitors the screw-terminal wide-DC input so firmware can classify and current-limit that source.")
+    s.text(20, 383.54, "PA7/PB0 are assigned to skin and Mu-heatsink thermistors; fan PWM/tach remain EC-owned.")
+    s.text(20, 391.16, "J15 is the user-facing EC GPIO header: EC I2C, five GPIO/SPI-capable signals, power, and grounds.")
+    s.text(20, 398.78, "U5 uses TPS54202/TPS54302-style 0.596V feedback; R35/R36 set MCU_3V3 to about 3.30V.")
 
     return s
 
@@ -205,11 +267,16 @@ def main():
     # ---- Root sheet (both sheets + cross-sheet wiring for shared nets) ----
     power_hier_nets = [
         "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON", "CHG_CE_N",
-        "VSYS", "VBUS_PD1", "VBUS_PD2", "VBUS_PD3", "USB_DP1", "USB_DM1",
+        "VSYS", "MCU_3V3", "AUX_DC_ADC", "VBUS_PD1", "VBUS_PD2", "VBUS_PD3", "USB_DP1", "USB_DM1",
     ]
     ec_hier_nets = [
         "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON", "CHG_CE_N",
-        "VSYS", "MCU_USB_DP", "MCU_USB_DM", "MCU_3V3",
+        "VSYS", "MCU_USB_DP", "MCU_USB_DM", "MCU_3V3", "AUX_DC_ADC",
+        "FAN_PWM", "FAN_TACH", "LCD_BL_PWM", "LCD_BL_EN", "LID_CLOSED_N",
+        "THERM_SKIN_ADC", "THERM_MU_ADC", "TOUCH_RESET_N", "TOUCH_INT_N", "PANEL_PWR_EN", "PANEL_RESET_N",
+        "RADIO_VHF_UART_TX", "RADIO_VHF_UART_RX", "RADIO_UHF_UART_TX", "RADIO_UHF_UART_RX",
+        "RADIO_VHF_PTT_N", "RADIO_UHF_PTT_N", "RADIO_VHF_PD_N", "RADIO_UHF_PD_N",
+        "RADIO_VHF_SQL", "RADIO_UHF_SQL", "RADIO_VHF_RF_SEL", "RADIO_UHF_RF_SEL", "RADIO_AUDIO_SEL",
     ]
     shared_nets = [n for n in ec_hier_nets if n in power_hier_nets]
 
