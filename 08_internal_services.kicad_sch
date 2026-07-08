@@ -2,7 +2,7 @@
   (version 20260306)
   (generator "eeschema")
   (generator_version "10.0")
-  (uuid 1b5ac689-5339-4641-8dda-16d99bd302b8)
+  (uuid eff338ed-5134-5a48-be94-cee1046e93fe)
   (paper "A2")
   (lib_symbols
 (symbol "Connector_Generic:Conn_01x02"
@@ -3845,10 +3845,10 @@
 		(embedded_fonts no)
 	)
   )
-(text "== Internal laptop services: EC USB, touch, trackpad, fan, lid, display service ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 0a276bf9-aa44-4ad0-8934-a98ebb280cd1))
-(text "This sheet turns spare Mu USB2 ports and EC GPIO into internal laptop plumbing." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid e559239d-c224-4575-be1c-3e1a12876f18))
-(text "Display-specific retained-controller and raw-panel paths live on sheets 10 and 11." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid ca5769e7-d0d8-415f-b3ed-a5eb86391a21))
-(text "== EC USB device link to host Mu USB2_P3 ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid dae29269-ddd5-423e-81b9-81eddedfd581))
+(text "== Internal laptop services: EC USB, touch, trackpad, fan, lid, display service ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 6e9de324-4803-5197-a554-1feb6ff9bca9))
+(text "This sheet turns spare Mu USB2 ports and EC GPIO into internal laptop plumbing." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 36148e92-219d-5040-9c1a-55aad0d34f3b))
+(text "Display-specific retained-controller and raw-panel paths live on sheets 10 and 11." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 7dcfafaa-1762-5701-b092-8c4c7399a65b))
+(text "== EC USB device link to host Mu USB2_P3 ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 4c6b986a-7bfd-5ea9-9cb8-bf374f565f36))
 (symbol
   (lib_id "Device:R")
   (at 20.32 76.2 0)
@@ -3857,16 +3857,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 732e8f3d-a1a4-4fa2-8fc8-c6f39abc37e0)
+  (uuid 295882f7-ee0e-53ea-9b02-4f410183f488)
   (property "Reference" "R200" (at 20.32 73.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "22R USB DP series" (at 20.32 78.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d2b3694f-ce93-4920-bbac-37c6710faef2))
-  (pin "2" (uuid 4a761616-17a0-4ee7-adf7-bf8855b387b8))
+  (pin "1" (uuid 8f42f421-de90-5ab0-896c-4a03dabeab4b))
+  (pin "2" (uuid 4ef0b0dd-7c09-5d75-9b9f-e6f57db2de72))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R200")
         (unit 1)
       )
@@ -3877,13 +3877,13 @@
   (shape bidirectional)
   (at 20.32 72.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 64eeed43-f51d-4de0-897d-a87efb20e70a)
+  (uuid b7694bc1-dce0-5735-8ecf-f8e7d2c9eb4d)
 )
 (hierarchical_label "MCU_USB_DP"
   (shape bidirectional)
   (at 20.32 80.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0461e493-77fe-411a-9a6b-539fb3c207cd)
+  (uuid 48fdd7c7-dff4-561c-ba32-5219f94b0edd)
 )
 (symbol
   (lib_id "Device:R")
@@ -3893,16 +3893,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 31177a82-738a-47c5-af6c-5ef8c075b5ac)
+  (uuid c0df1490-07cf-5946-b9a7-ced5ede969e6)
   (property "Reference" "R201" (at 20.32 86.36 0) (effects (font (size 1.27 1.27))))
   (property "Value" "22R USB DM series" (at 20.32 91.44 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a7a8ce92-f3a2-4ae6-8d46-cf27b8ec79aa))
-  (pin "2" (uuid cc2d9cfc-7364-4187-ab3d-26d3ca01ad4e))
+  (pin "1" (uuid 4561e1a5-9ef3-56bc-b68b-074fe75135b2))
+  (pin "2" (uuid e8e88775-4bc8-57fd-9a78-6f6df3630c14))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R201")
         (unit 1)
       )
@@ -3913,13 +3913,13 @@
   (shape bidirectional)
   (at 20.32 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d63c8e84-f7c4-4485-a407-96230c6e02be)
+  (uuid 8dba4740-d680-5864-8370-7bab72d171b3)
 )
 (hierarchical_label "MCU_USB_DM"
   (shape bidirectional)
   (at 20.32 92.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b19addb2-3a69-4fbf-9579-f227cd225386)
+  (uuid af43c8a1-6519-5e74-82de-5c2a50a19ef7)
 )
 (symbol
   (lib_id "Power_Protection:USBLC6-2P6")
@@ -3929,20 +3929,20 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 561e7dcf-7da8-4aee-80e7-eed2391a8560)
+  (uuid 12d76f50-0341-56b7-bd39-1b2d3964e1fb)
   (property "Reference" "U60" (at 110.49 80.01 0) (effects (font (size 1.27 1.27))))
   (property "Value" "USBLC6-2P6 EC USB ESD" (at 110.49 85.09 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-666" (at 110.49 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 110.49 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 3824ca6f-b7a7-4f5f-9b18-043935a86ea2))
-  (pin "2" (uuid b0fb631c-1539-4d06-b3e8-8f7f8a92802c))
-  (pin "3" (uuid d2d98800-148d-4133-aff6-4525ea09aa44))
-  (pin "4" (uuid 948db02e-de3d-459d-974c-c976344ebe88))
-  (pin "5" (uuid 787f3554-e72d-4aca-9da6-2cde64d2977d))
-  (pin "6" (uuid c5ed9771-a423-45ba-901c-a50ad5a5e4b5))
+  (pin "1" (uuid 724d53dd-8c2e-579d-97fe-308d1195e4f5))
+  (pin "2" (uuid e35b54a7-d62e-5265-9522-09d360d379bb))
+  (pin "3" (uuid 0dfe4c4f-4c1c-50d0-9a61-771ede74ee26))
+  (pin "4" (uuid b516dd02-4408-565d-bf9e-444db86f8479))
+  (pin "5" (uuid 1aeb87a4-a081-57a3-a4cc-741454ca6436))
+  (pin "6" (uuid 7711bae3-472d-5be5-9b7e-f4db8aea3777))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "U60")
         (unit 1)
       )
@@ -3952,33 +3952,33 @@
 (label "EC_HOST_USB_DP"
   (at 105.41 82.55 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2fc5ce5c-5512-4c86-9182-5b7c8a7e030a)
+  (uuid ffa7005f-3137-5efe-aa6b-4edf372a2219)
 )
 (label "EC_HOST_USB_DP"
   (at 115.57 82.55 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bb0ae655-c64c-45b6-8018-72f3bd4e254e)
+  (uuid e771f33a-92fa-5281-813e-27e89c7898a6)
 )
 (label "EC_HOST_USB_DM"
   (at 105.41 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 225fcc62-d32b-4e09-a49e-82ed54b97724)
+  (uuid 4755d3a9-f749-5eb1-8c39-d53f00fea9fc)
 )
 (label "EC_HOST_USB_DM"
   (at 115.57 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ad33c238-dc62-4e1f-94fb-f475c902d4bc)
+  (uuid eeccd8df-896a-5de4-92da-fa41303eec70)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
   (at 110.49 77.47 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4835beec-d1dd-4ac8-975d-44882e749805)
+  (uuid 389801b3-bcbf-5522-a636-a5e36ccedfc6)
 )
 (label "GND"
   (at 110.49 90.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5a29cb26-8baa-4cd5-8989-821ad5ed9227)
+  (uuid 23cac28d-d1ba-56a6-90e5-ea10d6890e12)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x04")
@@ -3988,18 +3988,18 @@
   (in_bom no)
   (on_board yes)
   (dnp yes)
-  (uuid a3b93bdf-0a1f-4903-a2a8-fe14b8dcbf4c)
+  (uuid 41a6e749-09e6-53d6-9fe5-fb28c79753f0)
   (property "Reference" "J50" (at 204.47 80.01 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP EC USB probe" (at 204.47 85.09 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" (at 204.47 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid ff9fe449-6919-41ed-bf79-0eed0ad28d7d))
-  (pin "2" (uuid ee82aba3-d7bd-48cb-93b0-158c2c7418fd))
-  (pin "3" (uuid 59860caa-d068-4ff6-80ca-121f1bebeebc))
-  (pin "4" (uuid 5347e58e-6dda-46b2-a12b-549ed61840ea))
+  (pin "1" (uuid 03cabd3b-2d17-5e9a-8fe0-44db81f12c24))
+  (pin "2" (uuid a2676935-4ccf-5c4a-adb0-fe66efaaeea6))
+  (pin "3" (uuid d0f063fd-3664-5b26-91d2-c803edaadddd))
+  (pin "4" (uuid 7f5494a3-fd30-5f47-876b-654fe9d03714))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J50")
         (unit 1)
       )
@@ -4009,27 +4009,27 @@
 (label "GND"
   (at 199.39 80.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8efc82d9-04e8-42c1-a437-5eb5866abbbe)
+  (uuid fe45e277-be49-5c6f-96e8-f3c4da734b2f)
 )
 (hierarchical_label "EC_HOST_USB_DM"
   (shape bidirectional)
   (at 199.39 82.55 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d39b0ad6-99af-45b4-afb7-07749e089198)
+  (uuid 3d171cf4-64ae-5a90-9191-7d39f3d81519)
 )
 (hierarchical_label "EC_HOST_USB_DP"
   (shape bidirectional)
   (at 199.39 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ead39465-cf6c-49ab-ae8e-a2a61fe00d9e)
+  (uuid 2dc69c3a-16b7-5bb4-a23f-d524b6f5993a)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
   (at 199.39 87.63 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid aad3b711-02d9-4e5b-90f9-143f7e73fd3a)
+  (uuid 3b3e9eba-422c-5bdc-9d64-18eedab33fc1)
 )
-(text "== Internal touchscreen USB2 link on Mu USB2_P4 ==" (at 20.32 135.89 0) (effects (font (size 1.27 1.27))) (uuid 39580317-e3f3-4995-8dd8-ddce61b7ba55))
+(text "== Internal touchscreen USB2 link on Mu USB2_P4 ==" (at 20.32 135.89 0) (effects (font (size 1.27 1.27))) (uuid ec880aa5-a2fe-5864-a2b0-40c071e8f02a))
 (symbol
   (lib_id "Device:R")
   (at 20.32 160.02 0)
@@ -4038,16 +4038,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 009e6f4a-5592-4a36-87dc-9c2a246db51c)
+  (uuid b077a486-801b-5458-9869-479512fa6268)
   (property "Reference" "R202" (at 20.32 157.48 0) (effects (font (size 1.27 1.27))))
   (property "Value" "22R touch DP series" (at 20.32 162.56 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9ed231d9-9dff-4e1d-a503-26e49dd4cc62))
-  (pin "2" (uuid fb678471-0c26-49b3-8778-5755cbf6d656))
+  (pin "1" (uuid 031a8cf6-8c52-59f7-add1-ddc8f70a1e51))
+  (pin "2" (uuid 2e25aae1-2968-5517-ab00-4a2689010476))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R202")
         (unit 1)
       )
@@ -4058,12 +4058,12 @@
   (shape bidirectional)
   (at 20.32 156.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 70452263-915f-4a2f-8495-aa529c602780)
+  (uuid bbf8abe1-b75e-5fe9-abe3-b7e3dc2ab498)
 )
 (label "TOUCH_CONN_DP"
   (at 20.32 163.83 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8afb2d2c-f951-4668-b2ee-e982b093d3ff)
+  (uuid 85dcb717-95e4-526c-9ad7-d28d22209c59)
 )
 (symbol
   (lib_id "Device:R")
@@ -4073,16 +4073,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 4135d788-3691-4abe-9ee4-e963f9e5232c)
+  (uuid dc8a8311-8fb4-5bc3-9b30-247fe962a5e5)
   (property "Reference" "R203" (at 20.32 170.18 0) (effects (font (size 1.27 1.27))))
   (property "Value" "22R touch DM series" (at 20.32 175.26 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 172.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 172.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a4f9934e-a544-479e-acbb-f889685e10b8))
-  (pin "2" (uuid 7ae471e7-ea5d-4a36-9d00-c8b9e786b50f))
+  (pin "1" (uuid 9ca0a669-13e1-5a14-9aca-99240bcba076))
+  (pin "2" (uuid 3b29c757-d714-5f7e-9bf5-453725a6784f))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R203")
         (unit 1)
       )
@@ -4093,12 +4093,12 @@
   (shape bidirectional)
   (at 20.32 168.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bc1f811c-b00d-4361-8a06-96eefd560b78)
+  (uuid 44d7994a-bc11-5f7b-b914-3e73cb591232)
 )
 (label "TOUCH_CONN_DM"
   (at 20.32 176.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cc10814d-a1ec-4647-a339-d7b4bc3fb330)
+  (uuid fefb1ca9-d02c-52d9-b2f8-2f26a54b4d98)
 )
 (symbol
   (lib_id "Power_Protection:USBLC6-2P6")
@@ -4108,20 +4108,20 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 0212e980-bd82-4e80-8424-a3fb71bce730)
+  (uuid a9e1cea9-19c0-5d9d-a9d4-3e4804a45099)
   (property "Reference" "U61" (at 110.49 163.83 0) (effects (font (size 1.27 1.27))))
   (property "Value" "USBLC6-2P6 touch USB ESD" (at 110.49 168.91 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-666" (at 110.49 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 110.49 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6a70a37b-61b4-4408-8518-c11ab16ce5e4))
-  (pin "2" (uuid 0e563793-efd5-489a-ab51-b1e1e50529aa))
-  (pin "3" (uuid bf8ebe20-123a-4e9d-877f-fa19437e19e5))
-  (pin "4" (uuid 2cc738d8-b68f-46a4-9fb9-d109cdeb362c))
-  (pin "5" (uuid f7cf9614-b40b-4dac-a56e-3b29a9d7cb62))
-  (pin "6" (uuid f9bd75df-b0da-4628-bfab-8eaa9f700649))
+  (pin "1" (uuid a5229906-acdf-5291-a913-b67db3b2a3d5))
+  (pin "2" (uuid 0c5bc703-8339-5d31-a439-f4cd9d59a09b))
+  (pin "3" (uuid b406b656-c2a5-5a48-a5c7-6ea53e0a9506))
+  (pin "4" (uuid 071d4bec-c193-57c0-964b-6b610bcd9928))
+  (pin "5" (uuid d749a4ee-cb73-5efe-af09-410d7fe3bbc0))
+  (pin "6" (uuid eade8d60-dfae-5e31-9b23-34db63b58596))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "U61")
         (unit 1)
       )
@@ -4131,33 +4131,33 @@
 (label "TOUCH_CONN_DP"
   (at 105.41 166.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2c375b98-af1e-4389-8b66-b485be10a724)
+  (uuid 610a2e9b-1731-5cf8-9495-2c6ea6e60749)
 )
 (label "TOUCH_CONN_DP"
   (at 115.57 166.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8915bffd-b283-4e78-a9f8-9eebf74dc9a0)
+  (uuid 0363ecf2-2043-52d6-89b3-64c9e3288db5)
 )
 (label "TOUCH_CONN_DM"
   (at 105.41 168.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 628723a1-7373-44ca-beeb-3bda6f74662e)
+  (uuid b614cdca-a3a2-5c04-a68e-4521a61bf19f)
 )
 (label "TOUCH_CONN_DM"
   (at 115.57 168.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2de43bf2-b55e-43ea-9a44-d2f028e5eba9)
+  (uuid 2b4d910a-1b2f-533f-8011-ff8fd40f7d6d)
 )
 (hierarchical_label "SYS_5V"
   (shape bidirectional)
   (at 110.49 161.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f74838ad-e938-4d07-b091-d4a9fda8139c)
+  (uuid 72c041c6-7f8e-5ce9-9cd8-d762c32104a6)
 )
 (label "GND"
   (at 110.49 173.99 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8fdd8569-7719-4e08-944a-735f796c3feb)
+  (uuid fc1cc862-69fe-55f8-af4f-35eea25f7378)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x06")
@@ -4167,20 +4167,20 @@
   (in_bom no)
   (on_board yes)
   (dnp yes)
-  (uuid bf232947-ccc5-4113-98e4-bd0dc24f3e24)
+  (uuid f8d74cc4-48f2-529b-ba7c-dfa7d2521738)
   (property "Reference" "J51" (at 204.47 163.83 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP alternate touchscreen USB/control" (at 204.47 168.91 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" (at 204.47 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9eb1348c-21ae-4d4f-8d3d-475ec6700c3a))
-  (pin "2" (uuid 6905b5a4-29ec-4470-8470-0a7882906ca8))
-  (pin "3" (uuid 71247d17-63c6-40c8-a20a-c786f0cc210f))
-  (pin "4" (uuid b2795402-9fdb-4755-8c2c-d4209ed65aad))
-  (pin "5" (uuid 8af45780-9c38-4b1e-868f-7dd9d65a3d5c))
-  (pin "6" (uuid 5eb507a8-6719-4ca9-b2c3-c7795d96a5a7))
+  (pin "1" (uuid 02b3251c-b032-5681-afdb-45787a0c4e19))
+  (pin "2" (uuid 2a2c1ff7-e1d4-57eb-95f0-3db1db4e68b5))
+  (pin "3" (uuid efc7f989-ec82-5c6d-b1a0-65a34a1ee936))
+  (pin "4" (uuid 27ee3941-f367-5087-a2db-785e9c98085c))
+  (pin "5" (uuid 49e6600c-6382-5e4f-8268-7fdc0e404fa0))
+  (pin "6" (uuid 388fb37a-43d8-510a-a8ed-92b57674929d))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J51")
         (unit 1)
       )
@@ -4190,35 +4190,35 @@
 (label "GND"
   (at 199.39 161.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2829af7c-5c1e-423f-b995-d0ad2fbd43dc)
+  (uuid f60731ad-3d80-51a5-bcd1-4b7b13fe038e)
 )
 (hierarchical_label "SYS_5V"
   (shape bidirectional)
   (at 199.39 163.83 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f1355965-3c47-4bbf-b504-323b8b6d43bf)
+  (uuid 5da08f0d-ec8c-56ef-a5d2-b1797e89e1c8)
 )
 (label "TOUCH_CONN_DM"
   (at 199.39 166.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d187201f-10d4-495e-a4dd-872ef0ef4608)
+  (uuid 0ff56630-7919-5762-ba1e-ed464d09e8d9)
 )
 (label "TOUCH_CONN_DP"
   (at 199.39 168.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b3b9fca2-2a60-4cb6-bfd5-7e0c36f798c0)
+  (uuid 13219364-0d4d-5497-86cb-c8e23f44e7c5)
 )
 (hierarchical_label "TOUCH_RESET_N"
   (shape bidirectional)
   (at 199.39 171.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9e9e6360-4321-479f-847e-05b03a189160)
+  (uuid e16df047-d6d1-5f89-92a4-5e1f5ea81cf5)
 )
 (hierarchical_label "TOUCH_INT_N"
   (shape bidirectional)
   (at 199.39 173.99 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 63f859a6-647c-40ec-a849-5134c92d16a0)
+  (uuid 7b16709b-ab5c-567a-8adb-a6ee395ab1d0)
 )
 (symbol
   (lib_id "Device:C")
@@ -4228,16 +4228,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid e6f03f1d-5bac-4be0-82eb-127295027d1a)
+  (uuid faea2ac5-7ee7-5e44-87b5-1a70f59b940d)
   (property "Reference" "C200" (at 204.47 195.58 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10u touch VBUS local" (at 204.47 200.66 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 204.47 198.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 198.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 459df78b-4147-41b6-9c02-461e04770f6c))
-  (pin "2" (uuid a5432a54-9e2b-437b-bd8f-54d570e97421))
+  (pin "1" (uuid 5165c40b-ac9b-5666-9229-5014e6aa27fb))
+  (pin "2" (uuid bc6bf850-bfc5-5d60-b300-3ef025cb84d6))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C200")
         (unit 1)
       )
@@ -4248,12 +4248,12 @@
   (shape bidirectional)
   (at 204.47 194.31 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4690a43a-6d05-46da-8844-ea60e10f9157)
+  (uuid 9c234888-ca00-5f40-992e-7904f54369f5)
 )
 (label "GND"
   (at 204.47 201.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 04d0ab9e-b78a-47f4-8c20-7c427b604ec0)
+  (uuid 9e8b980c-ccf4-515a-80e6-9d53fccc2192)
 )
 (symbol
   (lib_id "Device:C")
@@ -4263,16 +4263,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 66932543-fca5-489d-b19f-8f10c10799b6)
+  (uuid 71499fff-06b5-5ce1-bd8a-de9d61ed429e)
   (property "Reference" "C201" (at 204.47 208.28 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n touch local" (at 204.47 213.36 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 204.47 210.82 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 210.82 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 7710083c-637d-450a-be6a-671d6269c830))
-  (pin "2" (uuid 7d22c0bc-76d0-48e2-b4e2-bf76799b1cdf))
+  (pin "1" (uuid f4cf17af-26ec-56ea-923b-b86a0aab2347))
+  (pin "2" (uuid 402c6c32-5d43-530b-99a3-099380f70a6c))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C201")
         (unit 1)
       )
@@ -4283,12 +4283,12 @@
   (shape bidirectional)
   (at 204.47 207.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0222b9f4-8132-42fe-a2c9-407d17918abe)
+  (uuid 16812451-47cf-520a-90b1-597b5eed4aac)
 )
 (label "GND"
   (at 204.47 214.63 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c136e4cb-1420-4602-bbd2-2047c4bb78b5)
+  (uuid 846f1365-93fc-5f60-a6c2-fa04120732b4)
 )
 (symbol
   (lib_id "Device:R")
@@ -4298,16 +4298,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 1d7ce55c-d38e-4340-a287-2b58d9dbe137)
+  (uuid f59acde2-bd1b-5eda-86f1-928bcf762c88)
   (property "Reference" "R204" (at 20.32 187.96 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k touch reset pull-up" (at 20.32 193.04 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 217d6f99-cf3e-4ee4-b096-6c0ead8062b4))
-  (pin "2" (uuid 2727c881-eed7-4e8b-9d86-b194007abb9b))
+  (pin "1" (uuid cb3de753-8e95-57bc-8e9b-5402c6f0a971))
+  (pin "2" (uuid a9d11ce1-d7c7-5589-b80c-5ce5079cdf92))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R204")
         (unit 1)
       )
@@ -4318,13 +4318,13 @@
   (shape bidirectional)
   (at 20.32 186.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a60f65cc-b85f-4957-bb3a-97f9f983fd4e)
+  (uuid b0ebe255-3cc8-556a-9cf6-6035dc6b10ef)
 )
 (hierarchical_label "TOUCH_RESET_N"
   (shape bidirectional)
   (at 20.32 194.31 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5cb69437-f35e-4eac-b757-4dea8c0cbd5c)
+  (uuid 2e8b36c2-fea3-5021-ba3f-50bde0e0ba98)
 )
 (symbol
   (lib_id "Device:R")
@@ -4334,16 +4334,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c2852ca7-ef3a-4f6d-8c25-71321c304be5)
+  (uuid fcd2fdb0-9e67-519b-94d8-84c1cca1f776)
   (property "Reference" "R205" (at 20.32 200.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k touch INT pull-up" (at 20.32 205.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 203.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 203.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 536e527b-b6ee-4f7a-b677-207574f862b4))
-  (pin "2" (uuid 251ecf06-cf0d-46df-88f0-8fcd7b887596))
+  (pin "1" (uuid ad9f77a2-9a3a-5499-94a9-a396c56f6b49))
+  (pin "2" (uuid 2c5cbe2f-63f1-5669-8b2e-ba7e9a9eb673))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R205")
         (unit 1)
       )
@@ -4354,15 +4354,15 @@
   (shape bidirectional)
   (at 20.32 199.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3a92dddf-93e5-403e-885d-80bb9b418910)
+  (uuid 864d9404-7a4c-57ed-922c-920deb017d3f)
 )
 (hierarchical_label "TOUCH_INT_N"
   (shape bidirectional)
   (at 20.32 207.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 15608a08-3e78-4fdf-8c10-48e7cf53a37c)
+  (uuid 1e70c045-1765-5c07-bc3a-fc813e61b98d)
 )
-(text "== Required internal trackpad on Mu USB2_P8 ==" (at 20.32 234.95 0) (effects (font (size 1.27 1.27))) (uuid ac87b10f-7411-4599-8441-b29fdc98edbb))
+(text "== Required internal trackpad on Mu USB2_P8 ==" (at 20.32 234.95 0) (effects (font (size 1.27 1.27))) (uuid 3598ff52-fd7c-5a47-92da-e8a2d1fdebf8))
 (symbol
   (lib_id "Device:R")
   (at 20.32 259.08 0)
@@ -4371,16 +4371,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 2b88e406-7298-4738-9c51-c732eff39f0c)
+  (uuid 062d90db-4dca-525b-9204-9c134aef4f66)
   (property "Reference" "R250" (at 20.32 256.54 0) (effects (font (size 1.27 1.27))))
   (property "Value" "22R trackpad DP series" (at 20.32 261.62 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 259.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 259.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 21d159c9-2cc0-44d1-8f89-7fb37a05116e))
-  (pin "2" (uuid 1cef7efd-e27a-4274-8ea9-929db83536ab))
+  (pin "1" (uuid 404a53cc-ea96-5db6-bcc4-37973c619a99))
+  (pin "2" (uuid 359c9688-b32b-5ad5-aedf-5c33e5de0605))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R250")
         (unit 1)
       )
@@ -4391,12 +4391,12 @@
   (shape bidirectional)
   (at 20.32 255.27 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c9548612-44bd-4a2a-a987-0c7d40b422ec)
+  (uuid a66676bd-1dc7-54d7-aba1-098339f1dc58)
 )
 (label "TPAD_CONN_DP"
   (at 20.32 262.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b0934625-f93b-4732-a5dc-553617ed3cbd)
+  (uuid 208b803d-9d06-5761-bf26-52aaaf4a4489)
 )
 (symbol
   (lib_id "Device:R")
@@ -4406,16 +4406,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid a5c9a249-ac84-404d-bc22-27b58f5ab3c6)
+  (uuid b61e3c69-9bf2-5d93-84c7-72a18b3eb47d)
   (property "Reference" "R251" (at 20.32 269.24 0) (effects (font (size 1.27 1.27))))
   (property "Value" "22R trackpad DM series" (at 20.32 274.32 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c667b0be-9f73-4661-b998-5d5101b70f50))
-  (pin "2" (uuid 8d3f61f6-3d4f-48d8-986d-ce5e86db8222))
+  (pin "1" (uuid 890d07db-3a29-54fe-9cb5-46d288a94d6e))
+  (pin "2" (uuid 570dfdc2-1049-5915-bd95-1fdf9affdcff))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R251")
         (unit 1)
       )
@@ -4426,12 +4426,12 @@
   (shape bidirectional)
   (at 20.32 267.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ef930039-1ee6-4e45-8275-7084b93ba124)
+  (uuid a274ff14-776f-526d-86e7-ceb8bf1baf45)
 )
 (label "TPAD_CONN_DM"
   (at 20.32 275.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 187a6adb-7db5-44ab-be09-2a50d77224d5)
+  (uuid fe8af2d8-14d3-5a36-a16c-327eabf7216c)
 )
 (symbol
   (lib_id "Power_Protection:USBLC6-2P6")
@@ -4441,20 +4441,20 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid dae4154e-c5bd-4766-b855-810f22409c0e)
+  (uuid cdace445-21b6-5b0d-a8bb-254404e6182d)
   (property "Reference" "U62" (at 110.49 262.89 0) (effects (font (size 1.27 1.27))))
   (property "Value" "USBLC6-2P6 trackpad USB ESD" (at 110.49 267.97 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-666" (at 110.49 265.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 110.49 265.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 651900a6-42af-4439-88c2-42797547d710))
-  (pin "2" (uuid 1e056816-b010-49dd-a923-335f737f014d))
-  (pin "3" (uuid 3c324bee-ab63-4ebf-a4a6-6537f0283ba8))
-  (pin "4" (uuid 7395c5aa-4339-49ad-96e4-194600382054))
-  (pin "5" (uuid f46dfcba-5353-442b-95e0-7e3e869ddea3))
-  (pin "6" (uuid 0b9408cf-b6ba-4fc4-80fa-9b7953acc470))
+  (pin "1" (uuid c6616cf1-3994-5ccb-a92e-c15b9cde3105))
+  (pin "2" (uuid b6d1eee0-2e2d-5829-bf38-21da8ce5b03e))
+  (pin "3" (uuid f63cffc9-2c63-58c8-b746-cbaadbee6b3f))
+  (pin "4" (uuid 527d6834-584f-5f2c-9ea9-ec991995c960))
+  (pin "5" (uuid 9b7479f5-86fe-5364-a236-963cf6adb937))
+  (pin "6" (uuid cf90db4a-66fa-5f7a-8eb9-9dbd2caf885f))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "U62")
         (unit 1)
       )
@@ -4464,33 +4464,33 @@
 (label "TPAD_CONN_DP"
   (at 105.41 265.43 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5e6642ae-6ab0-4d03-84c9-3367eefc09ea)
+  (uuid f8400114-776b-5cbf-9029-d2430b1b1660)
 )
 (label "TPAD_CONN_DP"
   (at 115.57 265.43 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 66bc9379-490b-4347-959f-6b788aed5766)
+  (uuid f36346bb-7cfd-5ce7-a629-3811f538d06c)
 )
 (label "TPAD_CONN_DM"
   (at 105.41 267.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f32ab7e1-ef73-4eac-b41e-ad9cdbbb753a)
+  (uuid 390613ac-5f04-52d6-9f65-5eb5c61701ee)
 )
 (label "TPAD_CONN_DM"
   (at 115.57 267.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8f8fdd85-e845-4e7e-a0eb-6d38c5e34af0)
+  (uuid 7334b346-dac8-5c56-9365-3784061c4469)
 )
 (hierarchical_label "SYS_5V"
   (shape bidirectional)
   (at 110.49 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 639542b2-ea67-4577-9a21-cdf55be4cd54)
+  (uuid bb4a652f-f6e1-5663-bcef-1fa1479ede05)
 )
 (label "GND"
   (at 110.49 273.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 44ae9631-2a09-4d25-abeb-0f6654df34cf)
+  (uuid 294b43c1-d98e-56e5-b493-00cb86445352)
 )
 (symbol
   (lib_id "Device:Fuse")
@@ -4500,16 +4500,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 16857f2d-16af-43d6-aa27-486719cfb017)
+  (uuid 78cf2a3d-175b-56fb-bf74-d5a8bb1b607d)
   (property "Reference" "F201" (at 20.32 294.64 0) (effects (font (size 1.27 1.27))))
   (property "Value" "500mA trackpad 5V polyfuse" (at 20.32 299.72 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Fuse:Fuse_1206_3216Metric" (at 20.32 297.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 297.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a628579f-e21d-437d-b6ee-d6968b742f2e))
-  (pin "2" (uuid 886d0225-a459-4b75-a458-6f2957d1cc29))
+  (pin "1" (uuid f44aee7f-fa2b-58ff-b140-766afeee516e))
+  (pin "2" (uuid 354499aa-d43b-5a55-bd9c-379e37055923))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "F201")
         (unit 1)
       )
@@ -4520,12 +4520,12 @@
   (shape bidirectional)
   (at 20.32 293.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8e77e8ba-bf8e-4b34-b750-3513ca6b2ec7)
+  (uuid 188ee0e8-e528-51ea-8ce1-fc3593fe7580)
 )
 (label "TPAD_5V"
   (at 20.32 300.99 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d122595d-27bb-4c5a-abc2-b2cc5f4e5505)
+  (uuid a3b6588f-49f8-5446-a584-6b9d4709ea24)
 )
 (symbol
   (lib_id "USB_C_Receptacle_Passive:USB_C_Receptacle_Passive")
@@ -4535,39 +4535,39 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 262037a3-89da-4675-835b-21f2cf65b606)
+  (uuid 6ab8c2a0-4e0c-539e-94a3-46a4d1df86a2)
   (property "Reference" "J58" (at 204.47 275.59 0) (effects (font (size 1.27 1.27))))
   (property "Value" "Internal USB-C receptacle for cable-attached USB trackpad" (at 204.47 280.67 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_USB:USB_C_Receptacle_Molex_105450-0101" (at 204.47 278.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 278.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "A1" (uuid fbcd7f6c-b331-4f8e-b69c-05d221252f0f))
-  (pin "A2" (uuid ac30319f-441d-4aaa-a185-6c14bd8b8b72))
-  (pin "A3" (uuid fc6a4234-31e4-4568-9735-3a6b222322cc))
-  (pin "A4" (uuid dae540b8-1e8c-4520-b9a8-137e23916c88))
-  (pin "A5" (uuid ce93c460-01eb-4cd4-8ca2-9db9d02510be))
-  (pin "A6" (uuid bdd31428-5e19-499b-8877-6385d86ff10a))
-  (pin "A7" (uuid dba30ce3-5797-49b6-bd3d-c4731fd918a0))
-  (pin "A8" (uuid 8816aea2-4db7-4b94-acd2-01a6680d86e8))
-  (pin "A9" (uuid 9acc0720-8a88-4431-9e2a-34c6856b8970))
-  (pin "A10" (uuid 5c015d68-3fd5-4318-93ea-5c6a38905fdc))
-  (pin "A11" (uuid d5f1284a-35cf-4e24-8d21-01faa69b9d45))
-  (pin "A12" (uuid 5f5a62cd-e983-447d-8d1a-b6406a7ddf95))
-  (pin "B1" (uuid b4883f60-6429-4322-a6b6-1abb08f07c32))
-  (pin "B2" (uuid 5d18916d-647b-4e9d-a4d3-6646ec1d8101))
-  (pin "B3" (uuid 23758728-6f0e-42d1-ad7c-37eca7052a1a))
-  (pin "B4" (uuid 605a693e-523c-4e3b-aceb-8d1d919be4c8))
-  (pin "B5" (uuid e1fc8219-a9c6-4eeb-9050-a0d47ee536a5))
-  (pin "B6" (uuid daf2a2d5-3590-41bc-99bb-012e3d6e0fcb))
-  (pin "B7" (uuid a9bc1000-a355-4eb7-8db4-a3ba990a7838))
-  (pin "B8" (uuid 58c9c6b9-0a47-4040-8fa3-cf5bcc8e657b))
-  (pin "B9" (uuid 1addb6c4-dde8-47b8-992d-35298a917046))
-  (pin "B10" (uuid dc5d9be8-677b-4eff-8bb0-2f8c9524c7a9))
-  (pin "B11" (uuid ae4eeee8-ee54-4ba3-aa60-2df0766bf8c5))
-  (pin "B12" (uuid 5c06dc4b-e34d-4192-965f-04ff848a2517))
-  (pin "SH" (uuid e3032906-721c-4274-bd60-bedc2325e4ac))
+  (pin "A1" (uuid 9a239c36-7486-585b-8d02-ba8e7f82e0e3))
+  (pin "A2" (uuid d5cc09c5-e899-58ca-82a5-ad29f731302d))
+  (pin "A3" (uuid bdd38173-76ec-5c7b-a56f-116cb0a85577))
+  (pin "A4" (uuid 4497f3f3-0093-5807-94ba-2e6f14ad6fc0))
+  (pin "A5" (uuid 7021ba1d-55b8-5278-88a8-b956a25c1a7c))
+  (pin "A6" (uuid 9c6832ca-62f8-564b-8f72-95c3ac46a335))
+  (pin "A7" (uuid 8a1f7717-393b-5898-b3dc-af92b7a68c50))
+  (pin "A8" (uuid 734f6a96-e974-5613-9cd7-ae8acbf1fc8d))
+  (pin "A9" (uuid b9c98127-663c-51d0-9870-ac0124af4b64))
+  (pin "A10" (uuid b6d17d77-052d-590c-961b-d0c1dc00c44a))
+  (pin "A11" (uuid b3bc2fb0-3365-5550-944a-7c82ca3ed1e0))
+  (pin "A12" (uuid 5acf4637-3661-51b7-8a7d-41a6ede72d1d))
+  (pin "B1" (uuid a3f50b0b-0fed-5af1-9417-c9e1724737e8))
+  (pin "B2" (uuid 3b7906b3-c230-55d7-a59a-b1f0f8acd0c5))
+  (pin "B3" (uuid 42f487c3-d860-5f6a-88a4-f24b16d72554))
+  (pin "B4" (uuid db9b5868-08aa-5671-a485-5d4b4f272168))
+  (pin "B5" (uuid b32eb0e4-396e-5339-bc45-b82d5645fd3a))
+  (pin "B6" (uuid 383b2e2b-a9fc-5305-80d1-69bc4dc2d296))
+  (pin "B7" (uuid f6477222-03d7-5eb6-99e6-dd20aa5c97b4))
+  (pin "B8" (uuid f241ed04-519b-5e87-b7fe-bebbb3ca4799))
+  (pin "B9" (uuid 238e3df6-9eae-59e9-a3a2-4dd2a19152ff))
+  (pin "B10" (uuid 47040efa-43c3-5805-b043-eb5e83673767))
+  (pin "B11" (uuid 2b8a558a-9978-5439-8636-e3387cba5848))
+  (pin "B12" (uuid a3436988-db30-5e7a-a85e-161f9a36f2e2))
+  (pin "SH" (uuid a71b2a3b-ed57-5516-ab74-4ec30b79084d))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J58")
         (unit 1)
       )
@@ -4577,88 +4577,88 @@
 (label "GND"
   (at 204.47 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0c606a72-432b-4347-8bde-50fff198597d)
+  (uuid f2677942-d7fd-5af0-9c02-bff461e35470)
 )
 (label "GND"
   (at 204.47 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 55a043f8-671b-476f-a25a-edb6a2fa6182)
+  (uuid 7640e017-0f0c-5863-8e58-3495a201e03c)
 )
 (label "GND"
   (at 204.47 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a2b5a28a-079a-4fd0-b527-cc6e1674da40)
+  (uuid 2ecc8e0b-c7fa-59e3-b6a7-e810030b96d6)
 )
 (label "GND"
   (at 204.47 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 88c3af4f-b14b-4ce0-80b3-06c294a42fbb)
+  (uuid d7cf2085-8b4a-55e5-ac5c-02a5c4a01139)
 )
 (label "GND"
   (at 196.85 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3098a1ad-e212-4c4c-8be5-d4f19ec7568f)
+  (uuid 6716372d-b010-5e55-b940-516b4c836e3b)
 )
 (label "TPAD_5V"
   (at 219.71 252.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9ce31241-86f7-4fd5-b915-ae980db5aa2e)
+  (uuid af2d39f3-41ea-51d1-b871-18937c182cad)
 )
 (label "TPAD_5V"
   (at 219.71 252.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 02e7d554-7b13-4e9c-9364-9f7e895521f1)
+  (uuid d6589add-990e-5b34-941f-691d508e66f5)
 )
 (label "TPAD_5V"
   (at 219.71 252.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8f0213b6-74b2-44be-83b6-db7db7ae024f)
+  (uuid 74a3da42-e842-5604-8a6b-6268b60ddcaa)
 )
 (label "TPAD_5V"
   (at 219.71 252.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f895580f-1a6d-4713-871c-0bae237948c1)
+  (uuid 88945689-4197-5c19-a875-2c6306b7f843)
 )
 (label "TPAD_CC1"
   (at 219.71 257.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d61a2b5c-537b-4d2a-ad42-e4623a14b21a)
+  (uuid a2306828-3985-521a-b12f-d2a6c861896d)
 )
 (label "TPAD_CC2"
   (at 219.71 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 95575e76-68bf-413a-894a-119a6d6b4e9f)
+  (uuid df30910d-9ad7-569d-8e0b-3c2be731b24d)
 )
 (label "TPAD_CONN_DP"
   (at 219.71 270.51 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d290293b-2f4b-44da-8f62-46ca6cd21d53)
+  (uuid 954304f8-8970-56c2-bbe5-107d4cf07f1b)
 )
 (label "TPAD_CONN_DP"
   (at 219.71 273.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9d0e2297-3ced-447d-8dd7-c0cb27b934b8)
+  (uuid 052bff6d-5cbb-5dbe-b786-e6f4599e83bd)
 )
 (label "TPAD_CONN_DM"
   (at 219.71 265.43 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1b65e45f-c08b-4cf1-a3bd-e2c1ca42546b)
+  (uuid 162b0ce6-e9eb-556e-8f08-807d6387b035)
 )
 (label "TPAD_CONN_DM"
   (at 219.71 267.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 28016757-9541-4167-9a8e-d7c807fe3aab)
+  (uuid 50d3bc7a-b280-54f0-bb79-1d981e210ab4)
 )
-(no_connect (at 219.71 288.29) (uuid 196be712-0000-4fe2-9c16-0a85bd9085f2))
-(no_connect (at 219.71 285.75) (uuid 031f3606-d696-433b-b085-33bdc95aecfb))
-(no_connect (at 219.71 293.37) (uuid d02824ef-6a20-4050-9feb-0ef7670166e5))
-(no_connect (at 219.71 295.91) (uuid b65c4288-7523-4942-acab-795097f7ea76))
-(no_connect (at 219.71 303.53) (uuid 5ed9fb20-44f6-41a1-a1f0-c5168dd2e94a))
-(no_connect (at 219.71 300.99) (uuid 0242a377-1569-4269-ac4b-3d1d18e331c1))
-(no_connect (at 219.71 278.13) (uuid 7045eff6-b6c5-4c68-9dcd-ecee67784204))
-(no_connect (at 219.71 280.67) (uuid 14b1b8cd-3b2f-466b-b5c4-c9387ae7ae2c))
-(no_connect (at 219.71 308.61) (uuid 63e97310-5aeb-4fcc-8bd2-ca8f1c7f16e2))
-(no_connect (at 219.71 311.15) (uuid 9af1d7d5-eb78-4afe-b963-bdc985faa57c))
+(no_connect (at 219.71 288.29) (uuid 32187b84-5f53-553b-8360-44fae6ca4479))
+(no_connect (at 219.71 285.75) (uuid 911f18c0-3b47-57e0-9ebb-637d8ebe31a6))
+(no_connect (at 219.71 293.37) (uuid 8527c065-f64e-5f44-b810-4a2016378174))
+(no_connect (at 219.71 295.91) (uuid 90a00ec2-e28d-5e39-838f-810ecd60f139))
+(no_connect (at 219.71 303.53) (uuid 95817d91-37c0-51bd-bad0-114a46f169f3))
+(no_connect (at 219.71 300.99) (uuid 502f30d1-a645-5760-a508-41ede102e9e4))
+(no_connect (at 219.71 278.13) (uuid 8f631a07-0e54-59e5-b7fc-08cc73336dfd))
+(no_connect (at 219.71 280.67) (uuid 62fc5534-1605-5a53-a633-883338cacffd))
+(no_connect (at 219.71 308.61) (uuid f241f7fd-fdb8-5083-99b7-54c14b434c15))
+(no_connect (at 219.71 311.15) (uuid 223d8bd8-4de7-51c7-9208-defb739f9031))
 (symbol
   (lib_id "Device:R")
   (at 330.2 246.38 0)
@@ -4667,16 +4667,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c1bedb02-034b-40b1-b884-0df23ed84b8d)
+  (uuid 52ba6ee0-056b-5ca0-9a52-e0347be723c2)
   (property "Reference" "R254" (at 330.2 243.84 0) (effects (font (size 1.27 1.27))))
   (property "Value" "56k USB-C Rp default current CC1" (at 330.2 248.92 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 246.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 246.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6dae0fe1-a59f-4e28-9865-40a3e8fcbdad))
-  (pin "2" (uuid 3d1e816d-72d6-45ce-ab9f-cc6d73954e0f))
+  (pin "1" (uuid fa872001-202a-5f56-a3f3-7e00726f5b40))
+  (pin "2" (uuid 8f6ba39a-97cc-5c74-b87b-83bd69206b59))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R254")
         (unit 1)
       )
@@ -4686,12 +4686,12 @@
 (label "TPAD_5V"
   (at 330.2 242.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8a42e20b-7843-4dd2-aa16-d4881394533d)
+  (uuid 7eaa6f30-46b9-5e15-b531-0e42f1e67962)
 )
 (label "TPAD_CC1"
   (at 330.2 250.19 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d637ae72-b363-4c27-b20c-99657375619e)
+  (uuid 9045544c-8365-5c72-98af-7e1453dac092)
 )
 (symbol
   (lib_id "Device:R")
@@ -4701,16 +4701,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 9b665403-a89f-4afb-af58-230b819ee4ba)
+  (uuid 481d5591-dc65-5ab7-896e-e364a06c6a55)
   (property "Reference" "R255" (at 330.2 256.54 0) (effects (font (size 1.27 1.27))))
   (property "Value" "56k USB-C Rp default current CC2" (at 330.2 261.62 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 259.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 259.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 346cc27b-e999-4716-8409-2ebb0a600e2d))
-  (pin "2" (uuid e01beab2-594e-420c-9f14-dc255f3e63de))
+  (pin "1" (uuid 14a5a2e8-2b17-5981-88bd-d963d1daa80e))
+  (pin "2" (uuid 68421aba-ba73-5c91-bbe1-36727e7f63d8))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R255")
         (unit 1)
       )
@@ -4720,12 +4720,12 @@
 (label "TPAD_5V"
   (at 330.2 255.27 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dae55668-fe54-4751-98b8-5d9d79505b8b)
+  (uuid 8e34438e-8212-55cb-8909-c28635918c1c)
 )
 (label "TPAD_CC2"
   (at 330.2 262.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 219240b5-3ecc-4089-a063-4ece68fe16d6)
+  (uuid 824bd1e4-966d-5336-b34d-5f3a4c1bac76)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x10")
@@ -4735,24 +4735,24 @@
   (in_bom no)
   (on_board yes)
   (dnp yes)
-  (uuid bbc03564-4446-4270-9c22-308b4b213cae)
+  (uuid dc1fb155-dc6b-52ef-8c83-6038f15b06b5)
   (property "Reference" "J57" (at 204.47 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP trackpad FFC fallback: USB HID plus optional EC I2C/control" (at 204.47 337.82 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_FFC-FPC:Hirose_FH12-10S-0.5SH_1x10-1MP_P0.50mm_Horizontal" (at 204.47 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 90de4426-a0d1-4ff1-8937-6a5d7c59d851))
-  (pin "2" (uuid 998375eb-a7b4-483a-8f90-aba6f45b20d6))
-  (pin "3" (uuid 9559a7dd-fb8e-4ef6-8390-08dfda31f1eb))
-  (pin "4" (uuid f94ea6f5-2063-4b28-8830-0c3f9f62bb42))
-  (pin "5" (uuid a0669f74-68da-4a44-a368-0dd876668d16))
-  (pin "6" (uuid d3344a90-a865-46fe-86ec-06dbb89eb4ae))
-  (pin "7" (uuid ac932e87-896a-47df-9339-f7951c5ef6e9))
-  (pin "8" (uuid b19ce9ac-51db-4c95-b7a0-3616801c00f1))
-  (pin "9" (uuid bb4c1774-2f39-4aac-8f40-836de811f150))
-  (pin "10" (uuid ba6eab5e-1c33-4b63-965d-108dda58ae1a))
+  (pin "1" (uuid 99813804-a815-5225-9784-39d89d7445a8))
+  (pin "2" (uuid 6c2976f6-8575-51ba-993b-c590ed846c3d))
+  (pin "3" (uuid 9a7be5a6-7730-5a22-ba4c-ebb115a3985d))
+  (pin "4" (uuid 604945bc-a3f7-508a-b556-f7127d9486ed))
+  (pin "5" (uuid 017e7e5b-f746-51ea-bb0e-cb1340fd8786))
+  (pin "6" (uuid db18f926-f8df-5713-8dad-6b6c87afeb3c))
+  (pin "7" (uuid 96b709f1-e616-5834-9ba2-57274e872028))
+  (pin "8" (uuid b2e3902c-47b7-5583-ae4f-76217d3404a0))
+  (pin "9" (uuid 21e5fe3e-57fd-576c-b757-ebfc6253e028))
+  (pin "10" (uuid ffa65f00-c6e9-5cc5-9fcc-b000a47b95c6))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J57")
         (unit 1)
       )
@@ -4762,57 +4762,57 @@
 (label "GND"
   (at 199.39 325.12 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 092288ff-6475-4618-b416-48f224d19042)
+  (uuid ed6f292f-0507-55c1-9bea-e9e23b025a8b)
 )
 (label "TPAD_5V"
   (at 199.39 327.66 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 068b6952-bc91-49a8-b5b5-330aa71adc40)
+  (uuid 7f8cb420-f1e9-5fd7-95a1-caed963d76d8)
 )
 (label "TPAD_CONN_DM"
   (at 199.39 330.2 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bab5cf52-2950-42c3-b833-d471613ecf5a)
+  (uuid ad721d62-7540-53d6-bc69-5afc16579d36)
 )
 (label "TPAD_CONN_DP"
   (at 199.39 332.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c4b9d56a-cade-4fe8-87e7-804d99e6e0c3)
+  (uuid e8514f72-4a7c-5b0c-b7e6-ea8e5fdcb854)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
   (at 199.39 335.28 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid eaa1f06c-b99b-4cc0-a7a4-14c030a333ac)
+  (uuid a3adf402-b6b3-5f55-814b-eed45019cf83)
 )
 (hierarchical_label "I2C_SCL"
   (shape bidirectional)
   (at 199.39 337.82 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 81b30c59-30ee-4590-89d5-025e1102bf9b)
+  (uuid e12d4843-702f-5732-a14b-a33f5bdd8ade)
 )
 (hierarchical_label "I2C_SDA"
   (shape bidirectional)
   (at 199.39 340.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9fde273c-9f6f-4306-a14a-6f58d99dd1db)
+  (uuid d6d74699-ed6c-5057-8d99-c6faba8c5d59)
 )
 (hierarchical_label "TPAD_INT_N"
   (shape bidirectional)
   (at 199.39 342.9 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0b69e6f7-9fb8-4a6d-87b1-097ff55205c1)
+  (uuid 343d5701-564c-56cf-ab3a-5558a85ae2c7)
 )
 (hierarchical_label "TPAD_RESET_N"
   (shape bidirectional)
   (at 199.39 345.44 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 526f8588-afb4-41ff-9920-e1272c7a2bf4)
+  (uuid 5da24c38-d5a4-5774-bf61-3e8bcf2e7586)
 )
 (label "GND"
   (at 199.39 347.98 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a73ae28b-9341-4e4c-9552-b292add8aedb)
+  (uuid 8c5490af-5cff-53b8-a405-c9e982274e9f)
 )
 (symbol
   (lib_id "Device:C")
@@ -4822,16 +4822,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 9fec1f66-2251-47de-af3b-520de111cd11)
+  (uuid c7dabb21-3752-57f2-9d6a-4495a705f7f5)
   (property "Reference" "C280" (at 330.2 281.94 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10u trackpad 5V local" (at 330.2 287.02 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 330.2 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 5e8b0dc7-2fd7-45e1-9b61-b523be056144))
-  (pin "2" (uuid 7a4f3298-35b3-4873-8d82-db62a8af9c00))
+  (pin "1" (uuid 2296da88-8a61-5429-83c4-3027668f4b04))
+  (pin "2" (uuid b3b0ae93-0b7c-536a-b507-ccd07e53baa8))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C280")
         (unit 1)
       )
@@ -4841,12 +4841,12 @@
 (label "TPAD_5V"
   (at 330.2 280.67 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f573ab1c-c548-475a-ae60-1cf7f0ca5dbc)
+  (uuid ffccea97-9f33-5046-b8ee-f5323877df7c)
 )
 (label "GND"
   (at 330.2 288.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3e64f91f-9a76-435f-9600-36e292067cee)
+  (uuid 5b1e6313-7275-5689-a1d5-1a42f412729b)
 )
 (symbol
   (lib_id "Device:C")
@@ -4856,16 +4856,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 1bd896fe-aba6-4f06-9f43-be3b11d4c11e)
+  (uuid ed09bbc3-164e-5f5e-87b3-c63d0f8625b8)
   (property "Reference" "C281" (at 330.2 294.64 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n trackpad 3V3 sideband" (at 330.2 299.72 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 297.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 297.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 7a4aae25-e007-40be-9ef0-3efb444da1a9))
-  (pin "2" (uuid 5c0d3852-0452-481f-8302-b1846720507e))
+  (pin "1" (uuid baf3fabb-3f3a-5aac-a9a1-3c7bd0f45051))
+  (pin "2" (uuid 5fb22507-73fe-5987-a2af-aeee486d8e15))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C281")
         (unit 1)
       )
@@ -4876,12 +4876,12 @@
   (shape bidirectional)
   (at 330.2 293.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d85207b7-b967-42be-af2f-ccdac1ef2d6a)
+  (uuid a363fc95-197a-5567-a5d4-40bdf406975c)
 )
 (label "GND"
   (at 330.2 300.99 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b1696816-044f-4925-8a1a-7ed419d79b68)
+  (uuid a83bd2c6-5af2-51e3-a040-a68a70b4c486)
 )
 (symbol
   (lib_id "Device:R")
@@ -4891,16 +4891,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 23df0234-69eb-4eb3-bf4a-ecd92c0eb76f)
+  (uuid a63dd52d-64af-51af-85a4-4e13d05de757)
   (property "Reference" "R252" (at 20.32 307.34 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10k trackpad INT pull-up" (at 20.32 312.42 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 309.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 309.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 1d90c9b6-f52d-46af-b83d-534909d22f1a))
-  (pin "2" (uuid e00f8bcf-3ec8-4457-9dbe-efb35d3228f8))
+  (pin "1" (uuid 035d8752-6c65-56a9-ae11-5b8426a89f5c))
+  (pin "2" (uuid fe15f8c9-4358-5039-b8f8-4bbc1f0c8aee))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R252")
         (unit 1)
       )
@@ -4911,13 +4911,13 @@
   (shape bidirectional)
   (at 20.32 306.07 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bc1e280e-6c3e-40e1-b426-d7459cd61c70)
+  (uuid aa11a995-32c6-555b-839b-ffb6422f14fa)
 )
 (hierarchical_label "TPAD_INT_N"
   (shape bidirectional)
   (at 20.32 313.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid acbda824-d442-4520-916d-fc04d7c9ffd5)
+  (uuid 900bd836-6d3c-5cec-a0c8-ae072e05b716)
 )
 (symbol
   (lib_id "Device:R")
@@ -4927,16 +4927,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 6ce3a0f6-df96-4c68-811e-2a8425ee2dc4)
+  (uuid 1f9b3e4b-c3a9-5055-8014-52ccbeddce4d)
   (property "Reference" "R253" (at 20.32 320.04 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k trackpad reset pull-up" (at 20.32 325.12 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 98949f74-7175-49a0-9fd7-347f5f30ee36))
-  (pin "2" (uuid f0ccd974-ddaf-4f55-9c68-a883b5b1ad3f))
+  (pin "1" (uuid 4a02ec46-253b-5136-b3f7-891a21afc1a1))
+  (pin "2" (uuid c652af0d-abc6-50a9-8538-df0e5f864e05))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R253")
         (unit 1)
       )
@@ -4947,16 +4947,16 @@
   (shape bidirectional)
   (at 20.32 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0b6df760-5be4-46bb-b929-74a31a4f0af8)
+  (uuid 5713b5c3-17c0-59b8-8fd6-e2485108c867)
 )
 (hierarchical_label "TPAD_RESET_N"
   (shape bidirectional)
   (at 20.32 326.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f926ed61-3cd0-42fb-b6a6-d81320b17f59)
+  (uuid 75db3901-94ac-5a62-843d-0dcf235998c4)
 )
-(text "J58 is the normal trackpad connector for a USB-C cable trackpad. J57 is DNP fallback only if the trackpad is gutted to FFC/wires." (at 20.32 345.44 0) (effects (font (size 1.27 1.27))) (uuid 9f8c924f-1d83-4df3-a48e-6b39f9b032a4))
-(text "== Fan, lid, and thermal service ==" (at 330.2 50.8 0) (effects (font (size 1.27 1.27))) (uuid cf19bad9-4d83-4372-97ee-d94a965351a4))
+(text "J58 is the normal trackpad connector for a USB-C cable trackpad. J57 is DNP fallback only if the trackpad is gutted to FFC/wires." (at 20.32 345.44 0) (effects (font (size 1.27 1.27))) (uuid 22cb9b74-55f0-54eb-8daa-9f0cc25b18d9))
+(text "== Fan, lid, and thermal service ==" (at 330.2 50.8 0) (effects (font (size 1.27 1.27))) (uuid 0e100764-9755-56f0-9669-aecb18ea9adc))
 (symbol
   (lib_id "Connector_Generic:Conn_01x04")
   (at 410.21 82.55 0)
@@ -4965,18 +4965,18 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid b4a6e443-076e-4036-a54c-69216cce48bf)
+  (uuid ba7e3574-2db3-5daa-99c6-63ddc699d0c0)
   (property "Reference" "J52" (at 410.21 80.01 0) (effects (font (size 1.27 1.27))))
   (property "Value" "4-wire 5V PWM blower/fan: GND, fused 5V, tach, PWM" (at 410.21 85.09 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" (at 410.21 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 410.21 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid bb4a3fdf-13ff-4167-a94f-d444a1f2877b))
-  (pin "2" (uuid d8a2e918-5031-49c2-9908-aec68fe717dd))
-  (pin "3" (uuid 4bf08f50-dc42-4583-967b-7a8dd132c133))
-  (pin "4" (uuid 3d651dd4-6dd9-43eb-9db7-1b03657b3d60))
+  (pin "1" (uuid 8fd9dd51-9c57-5f93-be5d-c25be56d45a8))
+  (pin "2" (uuid 1d5f3648-9b56-5953-a3a1-f3c14928803c))
+  (pin "3" (uuid fa9ab9ed-106b-5c86-81e3-3f8d0ba21c28))
+  (pin "4" (uuid 20785b3b-eaee-57cd-8d3a-4dc58cd28ccb))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J52")
         (unit 1)
       )
@@ -4986,23 +4986,23 @@
 (label "GND"
   (at 405.13 80.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ae92866d-09f9-4f3b-b52a-2dda528cf26d)
+  (uuid da34996b-1c01-57cf-bdbc-781122c1280e)
 )
 (label "FAN_5V"
   (at 405.13 82.55 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fe42eb21-5926-4829-8de9-631fd0e5da6e)
+  (uuid f764b57a-73db-5d65-bc82-2a4d0b0a88de)
 )
 (hierarchical_label "FAN_TACH"
   (shape bidirectional)
   (at 405.13 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 610aaca1-0c5f-481b-b8ed-06a46e114cfc)
+  (uuid a78ebc2c-e37b-54ec-bde4-a59a07660e6f)
 )
 (label "FAN_PWM_CONN"
   (at 405.13 87.63 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 82e56c32-10a7-495b-917e-1fc95376876f)
+  (uuid 473f60c2-e7c9-5663-8e91-4c3ce1a64c77)
 )
 (symbol
   (lib_id "Device:Fuse")
@@ -5012,16 +5012,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid dafdb51c-f64a-4ab7-bd69-6ae7b3504c89)
+  (uuid a187b672-d419-5d0e-8ec5-fb5c2ae9e647)
   (property "Reference" "F200" (at 330.2 60.96 0) (effects (font (size 1.27 1.27))))
   (property "Value" "750mA fan polyfuse" (at 330.2 66.04 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Fuse:Fuse_1206_3216Metric" (at 330.2 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 39e96c1c-c98e-40ed-9be4-75c3c98a6bfc))
-  (pin "2" (uuid 55e2f2b1-a2c7-4646-880c-63a5b4d6475c))
+  (pin "1" (uuid b7f8e7b9-bdb1-5099-a006-8245c97acaa2))
+  (pin "2" (uuid 0fa4db0b-70db-5b37-9d65-eab1049feef4))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "F200")
         (unit 1)
       )
@@ -5032,12 +5032,12 @@
   (shape bidirectional)
   (at 330.2 59.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 30bec1e8-c613-4bff-afe5-332673ec7f4e)
+  (uuid 030061d7-e61b-58fa-aaa8-9fcbac16e235)
 )
 (label "FAN_5V"
   (at 330.2 67.31 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a6fc9c1b-801c-4e77-830f-8e1ca260af67)
+  (uuid fa9697c5-4210-54ba-808b-001fd95e76fe)
 )
 (symbol
   (lib_id "Device:C")
@@ -5047,16 +5047,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 5341f464-a1e7-47cd-a63a-8c1e9d9b7972)
+  (uuid 2d568584-e7d8-5fd7-9f72-b50b240540be)
   (property "Reference" "C205" (at 330.2 111.76 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10u fan local bulk" (at 330.2 116.84 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 330.2 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 60db9334-64d8-4322-a4e9-9b588062a985))
-  (pin "2" (uuid 76b71a73-1134-42d1-a000-3445babfaf22))
+  (pin "1" (uuid 40efd0c8-90d2-5df1-aa7b-d676554b84cb))
+  (pin "2" (uuid 66f4570c-6645-5a09-b30a-db5cac766cab))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C205")
         (unit 1)
       )
@@ -5066,12 +5066,12 @@
 (label "FAN_5V"
   (at 330.2 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 347f0d0c-fb33-4c0d-bada-215ec736609f)
+  (uuid bb8e3979-16c2-585d-8d17-cb5af8c0ebf2)
 )
 (label "GND"
   (at 330.2 118.11 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e85442fe-6612-4358-8d1f-146de91b65f4)
+  (uuid da4418af-3b74-5cb0-95be-e4145b674e08)
 )
 (symbol
   (lib_id "Device:C")
@@ -5081,16 +5081,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 03775f73-e0fd-47a9-94f0-865d78f39d19)
+  (uuid 6126e2c5-8ac0-5922-aed5-06da406fa963)
   (property "Reference" "C206" (at 330.2 124.46 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n fan local" (at 330.2 129.54 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid dfb07c89-0556-4663-bb85-89685a2d2942))
-  (pin "2" (uuid 76ef7538-1a9a-4897-9288-06fe531e6e34))
+  (pin "1" (uuid 238195d0-f0a2-51aa-bdf5-17c42b9c3988))
+  (pin "2" (uuid 626e9b5f-bc4b-5678-9474-7c5efcc1437d))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C206")
         (unit 1)
       )
@@ -5100,12 +5100,12 @@
 (label "FAN_5V"
   (at 330.2 123.19 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6307fee8-40a9-40bd-a651-b1b2c3333606)
+  (uuid 054e3655-16ab-5a2d-af30-5ef40f2ccc64)
 )
 (label "GND"
   (at 330.2 130.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f8b71c0f-0b83-4250-b4d6-e8380590005c)
+  (uuid b676adad-45e8-5ee9-94ba-e3ab07d74357)
 )
 (symbol
   (lib_id "Device:R")
@@ -5115,16 +5115,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 10c3c7b2-e9f1-4c73-a5e6-1bdcac0f2fbe)
+  (uuid 1ebfb903-1a2f-5721-bfb8-88f71f3c20ee)
   (property "Reference" "R206" (at 330.2 73.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10k fan tach pull-up" (at 330.2 78.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 4844feab-c9e5-4e93-9959-0d035af1f2b7))
-  (pin "2" (uuid ac3e6f56-3955-4447-b60e-a63685340be9))
+  (pin "1" (uuid 88d29eda-fa5d-5a4f-abb5-9c1385bd2c0c))
+  (pin "2" (uuid cbe0c32b-efd7-5292-83fb-9cfae3920cb4))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R206")
         (unit 1)
       )
@@ -5135,13 +5135,13 @@
   (shape bidirectional)
   (at 330.2 72.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5575e49c-b78e-4d44-a2c4-246c22edc9a0)
+  (uuid 18fcb4fd-982e-5e34-8673-d0ae07464b4b)
 )
 (hierarchical_label "FAN_TACH"
   (shape bidirectional)
   (at 330.2 80.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9b708e5c-2f20-4beb-b8a3-83648f47d02d)
+  (uuid 17eacd8d-e02c-52f8-ab94-08c8fb02e591)
 )
 (symbol
   (lib_id "Device:R")
@@ -5151,16 +5151,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 11fdc4bb-962b-4eb0-9e16-086da01fda0e)
+  (uuid 6a84cffe-8648-5369-b360-b4e61abbe9f7)
   (property "Reference" "R207" (at 330.2 86.36 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100R fan PWM gate series" (at 330.2 91.44 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 3d6b1b87-f68f-4fa7-9a8a-bf70f483195d))
-  (pin "2" (uuid 56819d82-73a9-4215-ac97-ac379497eca1))
+  (pin "1" (uuid aa45274c-06c4-5b0a-8ff9-890ec82c162e))
+  (pin "2" (uuid b2f909ef-5c31-518d-8071-32108d4ac8f8))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R207")
         (unit 1)
       )
@@ -5171,12 +5171,12 @@
   (shape bidirectional)
   (at 330.2 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a7adb43c-9b37-493b-9b3a-bfada739984b)
+  (uuid f2ad3240-747b-5a13-9fc1-c5f4ed34cf90)
 )
 (label "FAN_PWM_GATE"
   (at 330.2 92.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e487b9d7-35b6-4ce7-abd9-55a171ef249d)
+  (uuid 37ee2acf-d058-5332-955a-95fdebb8c29f)
 )
 (symbol
   (lib_id "Device:R")
@@ -5186,16 +5186,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 4ebdd2c2-68cf-427b-832d-a34d4ba8e5db)
+  (uuid 3927ed23-e3e3-5091-b5a9-42ef36f2fb24)
   (property "Reference" "R208" (at 330.2 99.06 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k fan PWM default off" (at 330.2 104.14 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0328220a-f96e-4b40-be4d-d7cd7637314f))
-  (pin "2" (uuid 30b8276c-925e-4726-8894-5ed6a6b07acd))
+  (pin "1" (uuid bb55d361-4546-5e3e-9f75-173bcc45776c))
+  (pin "2" (uuid aefd42b9-884c-5c47-8723-83aa53e311a6))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R208")
         (unit 1)
       )
@@ -5205,12 +5205,12 @@
 (label "FAN_PWM_GATE"
   (at 330.2 97.79 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f1381ecf-87a8-48b6-9abf-9651a2069890)
+  (uuid 613fe896-fcc5-5735-86ab-dc4af1ed055c)
 )
 (label "GND"
   (at 330.2 105.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid df67903e-fe97-41f8-817d-5b888b1aa3b2)
+  (uuid f531f09a-4d80-5238-99a8-8978a5507837)
 )
 (symbol
   (lib_id "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD")
@@ -5220,17 +5220,17 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c3314bf6-574c-4d0b-a90d-58cc3d80202a)
+  (uuid f534a4b5-07e2-5b90-a901-01379bd62bb4)
   (property "Reference" "Q200" (at 519.43 86.36 0) (effects (font (size 1.27 1.27))))
   (property "Value" "Fan PWM open-drain sink" (at 519.43 91.44 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 519.43 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 322e5fd7-305e-44ef-9963-b85275db571a))
-  (pin "2" (uuid 4e992d1c-4158-47e1-bf1c-79dd9c46c656))
-  (pin "3" (uuid b45313ca-ab14-4984-8ff6-b13c702b2cb3))
+  (pin "1" (uuid 96e33244-07a6-5497-bae5-0284ebed1aea))
+  (pin "2" (uuid 59298c77-2d56-534e-8a8c-7c666d4dee96))
+  (pin "3" (uuid 9ed071c2-952b-584f-b332-afad3241ec55))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "Q200")
         (unit 1)
       )
@@ -5240,17 +5240,17 @@
 (label "FAN_PWM_GATE"
   (at 514.35 88.9 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e09eaf6d-88e0-43be-85d7-d87d25c8fdd2)
+  (uuid e7c72be2-2690-545e-87ef-09bc5760acc7)
 )
 (label "GND"
   (at 521.97 93.98 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 555f1e6b-bd73-4723-8fe5-badd5028415f)
+  (uuid e8e85152-f9ea-558b-a30f-16899d33c3be)
 )
 (label "FAN_PWM_CONN"
   (at 521.97 83.82 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 445393c4-5a0e-4e3d-8535-8adef8ad4e1d)
+  (uuid 738d460f-eaa5-54c5-8052-68e031cbe585)
 )
 (symbol
   (lib_id "Device:R")
@@ -5260,16 +5260,16 @@
   (in_bom no)
   (on_board yes)
   (dnp yes)
-  (uuid 8c89a01b-be26-4fe2-9fc7-6e563147405f)
+  (uuid e091ef39-243b-553b-80d5-c1179f918ee7)
   (property "Reference" "R216" (at 519.43 111.76 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP 10k fan PWM pull-up" (at 519.43 116.84 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 2de85e4e-b476-4f81-a9d5-928c86837a9a))
-  (pin "2" (uuid f08d9aa0-b1c7-491e-9d8a-798687aae152))
+  (pin "1" (uuid ac0e85eb-a63a-53c6-9c53-9647ce4ea3f9))
+  (pin "2" (uuid e1207351-0a18-58c1-b863-212d3f9cbfc5))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R216")
         (unit 1)
       )
@@ -5279,12 +5279,12 @@
 (label "FAN_5V"
   (at 519.43 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2fd7d4ad-1931-45e1-8ed8-c0eb783ea5a8)
+  (uuid 9e7c06d6-2e7b-5acc-b1c6-8def728b919c)
 )
 (label "FAN_PWM_CONN"
   (at 519.43 118.11 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dda67186-53b8-4325-9d41-7a0c6f3a8a52)
+  (uuid a980e842-0f38-5979-8038-253278a3b292)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x02")
@@ -5294,16 +5294,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 8527a645-37a9-47c9-b70f-b8be07515647)
+  (uuid 1ea9d9bf-b0f5-508b-8710-846960e4b5b9)
   (property "Reference" "J53" (at 410.21 128.27 0) (effects (font (size 1.27 1.27))))
   (property "Value" "Lid/hall switch" (at 410.21 133.35 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 410.21 130.81 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 410.21 130.81 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 21824744-ccaf-47dd-84db-56cdfefae28b))
-  (pin "2" (uuid b2f2fa18-bfeb-4ff2-a0a8-f847bbcdbd94))
+  (pin "1" (uuid 6b127878-1d60-56be-86fb-77a1e6eb4de6))
+  (pin "2" (uuid 5632a142-eeea-53f3-834a-0ea463330886))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J53")
         (unit 1)
       )
@@ -5314,12 +5314,12 @@
   (shape bidirectional)
   (at 405.13 130.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 04c4d06c-c1ac-4e4b-812b-77735abcec35)
+  (uuid bd01e15c-d8f6-5bdf-bc53-3653eb0a7b9c)
 )
 (label "GND"
   (at 405.13 133.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a1d0de53-365d-4223-afdc-75507e3acf29)
+  (uuid 5b534687-e234-5557-aa46-b3e6862a9633)
 )
 (symbol
   (lib_id "Device:R")
@@ -5329,16 +5329,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 941deb39-fa7f-401c-a5be-ee5ba8058829)
+  (uuid c30e993e-efb7-5fac-8a5e-b7c72e779705)
   (property "Reference" "R209" (at 330.2 128.27 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10k lid pull-up" (at 330.2 133.35 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 130.81 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 130.81 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid f08e6870-d409-48d3-a07c-cc2c8e4845db))
-  (pin "2" (uuid def86a43-d510-41ad-afa9-fdcd593bae9e))
+  (pin "1" (uuid a0db88f5-38d9-5b94-a554-b6544e6217fa))
+  (pin "2" (uuid 0cd69897-e3ad-5dc8-88c3-b37bd65f9008))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R209")
         (unit 1)
       )
@@ -5349,13 +5349,13 @@
   (shape bidirectional)
   (at 330.2 127 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 80ab4f24-5622-4eab-95ef-07f756ac9faf)
+  (uuid 7dd9122c-1e60-50dc-b487-4990d3d0e892)
 )
 (hierarchical_label "LID_CLOSED_N"
   (shape bidirectional)
   (at 330.2 134.62 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d6ff86ec-afa0-4abd-85d3-33d9a217cd4c)
+  (uuid c2f40b03-f634-52dc-8974-3f7c123fdbaa)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x02")
@@ -5365,16 +5365,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 5062219d-b50f-42ad-b797-b16761152024)
+  (uuid bb994395-363d-5a6f-9fce-f407f36cedc2)
   (property "Reference" "J54" (at 410.21 157.48 0) (effects (font (size 1.27 1.27))))
   (property "Value" "Skin/hinge NTC" (at 410.21 162.56 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 410.21 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 410.21 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 715b8897-8d77-474c-a0d7-0d42eb3bad02))
-  (pin "2" (uuid 7423b1da-e5e5-4567-bf5f-52be05565c2a))
+  (pin "1" (uuid 708688a7-aae4-5f48-b94c-849adc11eefc))
+  (pin "2" (uuid 307baf7d-6719-5d61-aa15-49a2a7155d18))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J54")
         (unit 1)
       )
@@ -5385,12 +5385,12 @@
   (shape bidirectional)
   (at 405.13 160.02 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 363c7e28-89db-4e05-af99-14e4ee76143b)
+  (uuid e0982e9c-92ea-5d2c-9038-dc39b38d0584)
 )
 (label "GND"
   (at 405.13 162.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7d16766f-8ccd-4caf-9755-5c50bc84e197)
+  (uuid e19e4132-d4f8-5a2c-8490-7504f55323d1)
 )
 (symbol
   (lib_id "Device:R")
@@ -5400,16 +5400,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 4704c543-bf9f-4e26-8f78-0cf57eb01d6b)
+  (uuid ca5b28be-7063-5635-9747-d8ef6c5ca81e)
   (property "Reference" "R210" (at 330.2 157.48 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10k thermal divider pull-up" (at 330.2 162.56 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 4d1fe8bb-fd8f-4832-aa3d-41612ffef0a6))
-  (pin "2" (uuid 7a59ffd3-aa23-4048-a7be-9b699de9140a))
+  (pin "1" (uuid 29b99f7d-20bb-5d38-b0df-c6c3afa5ebda))
+  (pin "2" (uuid 714163e3-cf09-5c3e-bee6-4db9a4b30be0))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R210")
         (unit 1)
       )
@@ -5420,13 +5420,13 @@
   (shape bidirectional)
   (at 330.2 156.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 17d0ce8a-97c2-4c50-b176-fa8979ee709b)
+  (uuid 1f6cc32f-873b-599c-9800-4eca242046a7)
 )
 (hierarchical_label "THERM_SKIN_ADC"
   (shape bidirectional)
   (at 330.2 163.83 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c5adb0d4-1ab6-498d-bca3-d022c8d04282)
+  (uuid 1a817b5c-4b6a-58e0-afa3-268a052ca0cb)
 )
 (symbol
   (lib_id "Device:C")
@@ -5436,16 +5436,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid ae7288fb-9e01-47f7-8437-b1876252f898)
+  (uuid 3f173c31-9c6e-5436-91fe-a26d9385231c)
   (property "Reference" "C202" (at 330.2 170.18 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n thermal ADC filter" (at 330.2 175.26 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 172.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 172.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6bbc81cf-b204-4aeb-97f9-70cccd81f82b))
-  (pin "2" (uuid c4a31eb8-081d-4bb6-b290-845b3475992a))
+  (pin "1" (uuid c6bad91e-86c2-59b9-98a2-c30bdf3232c8))
+  (pin "2" (uuid 4d609fa5-41a5-581a-9346-a668a8d39241))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C202")
         (unit 1)
       )
@@ -5456,12 +5456,12 @@
   (shape bidirectional)
   (at 330.2 168.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 80ead6d1-0373-4407-9d14-aa65a7663a93)
+  (uuid 3f24e913-4119-57f2-978f-1d643fd0b6c8)
 )
 (label "GND"
   (at 330.2 176.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bba3465d-0328-447a-b5e0-321ea6baffcd)
+  (uuid 6de7a7ea-dcef-5806-8fe4-4a2623c1f5bb)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x02")
@@ -5471,16 +5471,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c5f57531-f596-4e3a-8bbe-030cdaef3276)
+  (uuid 3fe174f5-10f0-533d-8e82-58960580bbe0)
   (property "Reference" "J56" (at 570.23 157.48 0) (effects (font (size 1.27 1.27))))
   (property "Value" "Mu heatsink/spreader NTC" (at 570.23 162.56 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (at 570.23 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 570.23 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 80fe4b4b-725a-4c1d-9d9d-fd9a29941342))
-  (pin "2" (uuid abfcfa95-0d10-4131-829e-83ac82886c80))
+  (pin "1" (uuid 38feb92f-af80-5792-849b-a71331dc5a1b))
+  (pin "2" (uuid c39a33c9-c68d-5a7c-9efa-2b89b0737ab1))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J56")
         (unit 1)
       )
@@ -5491,12 +5491,12 @@
   (shape bidirectional)
   (at 565.15 160.02 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 27299e65-347d-4ff7-92ae-0d4c8b5d25ea)
+  (uuid 004ba7dc-56d4-5df7-a4e8-0e388a5aff47)
 )
 (label "GND"
   (at 565.15 162.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e1fcf193-7796-4702-b9b9-b2ca83e5751f)
+  (uuid 4ccf1d6f-bcef-5a23-837b-55758682a590)
 )
 (symbol
   (lib_id "Device:R")
@@ -5506,16 +5506,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid e262fe72-2b59-4660-8102-c3e6b81a1dee)
+  (uuid 332f9497-de0d-5e34-bb42-d9c8f9bf8c8b)
   (property "Reference" "R215" (at 490.22 157.48 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10k Mu thermal pull-up" (at 490.22 162.56 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 490.22 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 490.22 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 43b12172-0700-4cc2-b24d-b703eb8c8227))
-  (pin "2" (uuid 9956b219-86fc-4277-beda-b03b430cdc35))
+  (pin "1" (uuid 11d6f5b1-8b06-5a20-a375-409314a65aee))
+  (pin "2" (uuid bef5d9bd-62ce-571e-b85b-220c3bddcd10))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R215")
         (unit 1)
       )
@@ -5526,13 +5526,13 @@
   (shape bidirectional)
   (at 490.22 156.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 951df68f-bccf-43b6-b8a9-4ad802c00849)
+  (uuid e6193567-885a-5686-8f5a-d385f9bb4596)
 )
 (hierarchical_label "THERM_MU_ADC"
   (shape bidirectional)
   (at 490.22 163.83 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 212a08c1-e7f0-4838-9b6e-e59abd15dcb1)
+  (uuid 9b1c68a8-4f56-5109-8a33-0a85d8bb21f4)
 )
 (symbol
   (lib_id "Device:C")
@@ -5542,16 +5542,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid aed87143-4223-47e8-82e8-450fe1fe20b4)
+  (uuid 998b3ed0-083e-58d0-b190-c4138355311a)
   (property "Reference" "C207" (at 490.22 170.18 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n Mu thermal ADC filter" (at 490.22 175.26 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 490.22 172.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 490.22 172.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d9dec63c-7c82-4596-90be-33435aa5f48c))
-  (pin "2" (uuid c3a72b25-df1b-4c91-a956-428401406c41))
+  (pin "1" (uuid 863d3a4c-4ecb-5a7b-8a84-eb9b3e57ebb6))
+  (pin "2" (uuid 9202c643-0328-54d4-ba78-70cd59e738be))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C207")
         (unit 1)
       )
@@ -5562,14 +5562,14 @@
   (shape bidirectional)
   (at 490.22 168.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 19c162a3-df3c-43f8-86f8-10b245badee8)
+  (uuid 60856e9f-2714-5891-9d9f-834bdf2a91f1)
 )
 (label "GND"
   (at 490.22 176.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 537abbed-d1a6-40ea-b116-2d0970007ea1)
+  (uuid 7d344503-7186-5757-b62b-40dcd31eb604)
 )
-(text "== DNP low-speed display/backlight service harness ==" (at 330.2 220.98 0) (effects (font (size 1.27 1.27))) (uuid 0ba37495-a31a-4342-ada3-696352ca1870))
+(text "== DNP low-speed display/backlight service harness ==" (at 330.2 220.98 0) (effects (font (size 1.27 1.27))) (uuid d492ad01-8afc-56cd-87ea-c9f221f4787d))
 (symbol
   (lib_id "Connector_Generic:Conn_01x20")
   (at 435.61 285.75 0)
@@ -5578,34 +5578,34 @@
   (in_bom no)
   (on_board yes)
   (dnp yes)
-  (uuid 16a2bafd-79b6-4bb1-ba0d-e29851a12ee5)
+  (uuid 6c0f668d-aa75-5b84-80bc-93675574b23c)
   (property "Reference" "J55" (at 435.61 283.21 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP low-speed display/backlight service FFC" (at 435.61 288.29 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_FFC-FPC:Hirose_FH12-20S-0.5SH_1x20-1MP_P0.50mm_Horizontal" (at 435.61 285.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 435.61 285.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid f319c547-4e7a-4e31-8785-efd58f86b887))
-  (pin "2" (uuid 5858ae6d-8cec-4153-a398-e94c5e8d5ea2))
-  (pin "3" (uuid bed69e61-8d00-425f-ad3d-ef332dc5b50d))
-  (pin "4" (uuid 84beccc5-0224-493f-90d3-6c1bc1837a79))
-  (pin "5" (uuid 8d841f1d-a65c-422a-8754-68bdc884ce04))
-  (pin "6" (uuid 53272b4c-2d5e-4adc-87a7-89f6f632cfa1))
-  (pin "7" (uuid 94051545-3a10-443c-bafe-6b04362b0f57))
-  (pin "8" (uuid f2cd4b8a-c7fd-45d5-aad9-16bdb224d392))
-  (pin "9" (uuid 88b17e2a-1054-4c2c-926b-3604b0c8d206))
-  (pin "10" (uuid f7c04394-645a-496c-bc39-7ec48caa53a9))
-  (pin "11" (uuid 0a9a0def-01a6-4d56-a8d4-0827c43b0394))
-  (pin "12" (uuid 793771e0-6bd3-4ae5-a26b-756cea70279d))
-  (pin "13" (uuid 22556b4a-24ad-4f48-8d15-218093b05f1e))
-  (pin "14" (uuid 30ad6488-15ca-47be-84de-069d3595bd38))
-  (pin "15" (uuid f99b2665-77b5-4e29-9b3c-2a8a1ec37d37))
-  (pin "16" (uuid 8f5677d0-2a2a-448f-beac-5884dfae9061))
-  (pin "17" (uuid d6e97ca7-2a8a-4e05-8516-9d55e94bc795))
-  (pin "18" (uuid 19117257-6c37-4882-bdec-a79beb9e49f6))
-  (pin "19" (uuid 99b4b16b-745e-4d57-ad56-65082b18b5cf))
-  (pin "20" (uuid 214051f3-a2ac-428f-8197-05b90a1f1181))
+  (pin "1" (uuid 06c1a79b-3570-5b95-9799-faab63724371))
+  (pin "2" (uuid 94942bed-1ded-5475-8c1f-e0bddafcdc07))
+  (pin "3" (uuid 3439079b-aefa-5bd5-b496-35eece7f1622))
+  (pin "4" (uuid 855c5e98-0d72-5cf1-a01e-2d4df28b63e3))
+  (pin "5" (uuid d031b575-2da7-5cbc-8a58-1d1548345a8d))
+  (pin "6" (uuid bde5c033-f557-5da7-aa4f-3d5058f51c90))
+  (pin "7" (uuid 3d0d77ae-6728-59ce-9c41-7d2de78aab83))
+  (pin "8" (uuid 8a3d06e0-20ea-5f23-9ce8-fd8abaf5e95b))
+  (pin "9" (uuid a450733a-dbb5-5fd2-ab6a-28b8fa3a1ad3))
+  (pin "10" (uuid abf872c8-ae31-54f7-a487-c3d9fc38fdbb))
+  (pin "11" (uuid f365d34e-9af1-557c-b347-80a616a42421))
+  (pin "12" (uuid ac1a7d55-1f1d-57c6-883c-4b45d31513c7))
+  (pin "13" (uuid b9660f8e-0c40-5042-a419-c1aa54905f7d))
+  (pin "14" (uuid 8d29abe4-c407-50c6-9432-668bf73f0622))
+  (pin "15" (uuid 114ddc52-8547-5ffd-9117-c29f94d718c4))
+  (pin "16" (uuid a10c902c-628e-5f34-8f9c-2526c45a5411))
+  (pin "17" (uuid 6ad51712-353a-5146-b1c3-5838428647ba))
+  (pin "18" (uuid 870189da-cb7f-5213-a1bc-e165ac018aef))
+  (pin "19" (uuid 05198643-4bfa-5862-80fe-df89503c23d8))
+  (pin "20" (uuid 492c1c1c-5a78-51b0-903d-53875aba1fb1))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "J55")
         (unit 1)
       )
@@ -5615,80 +5615,80 @@
 (label "GND"
   (at 430.53 262.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 56246803-3172-4140-849b-569314e6c197)
+  (uuid 5ee0466b-9b1e-5752-b39e-7df06fb42e2b)
 )
 (hierarchical_label "SYS_5V"
   (shape bidirectional)
   (at 430.53 265.43 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a611e8f2-7b02-4717-a496-e6969e5c3178)
+  (uuid 0a2d28a5-a456-5cfe-8364-5dff1c3b378c)
 )
 (hierarchical_label "SYS_3V3"
   (shape bidirectional)
   (at 430.53 267.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b1ad1f0c-0b86-4dcd-b2ec-93f0518e030a)
+  (uuid 11aaea8e-207e-5e15-8038-f9db3d934965)
 )
 (hierarchical_label "I2C_SCL"
   (shape bidirectional)
   (at 430.53 270.51 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ee143aa2-4bf0-4a0f-a11d-5c66b8e5e637)
+  (uuid 76fcb1e0-691f-5ca7-b27a-3cb3ba2ecb35)
 )
 (hierarchical_label "I2C_SDA"
   (shape bidirectional)
   (at 430.53 273.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 430c967b-a42a-4bbf-8432-16ebc5469cee)
+  (uuid 20d732f6-cef6-5422-a176-8a053e370d51)
 )
 (label "LCD_BL_PWM_FFC"
   (at 430.53 275.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 545d5915-17b3-433e-af7f-34e0b80c55f4)
+  (uuid cbed5e2f-8ad6-51b9-becb-51fe58c6837c)
 )
 (hierarchical_label "LCD_BL_EN"
   (shape bidirectional)
   (at 430.53 278.13 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2c61dc40-a839-4c0a-932b-ee17a4ed635a)
+  (uuid 6e7f8201-ebb4-5334-817e-6878b8ea10d9)
 )
 (hierarchical_label "PANEL_PWR_EN"
   (shape bidirectional)
   (at 430.53 280.67 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid aded6cc4-cb6a-4b07-a7d6-56716b5ad4a1)
+  (uuid 933e9104-65f8-5759-8fdf-7b6ab33f396a)
 )
 (hierarchical_label "PANEL_RESET_N"
   (shape bidirectional)
   (at 430.53 283.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9a488e05-6764-43db-a9dc-479d91ac16ae)
+  (uuid 07bde0d5-26ca-52f4-87af-832bd11c0d24)
 )
 (hierarchical_label "TOUCH_INT_N"
   (shape bidirectional)
   (at 430.53 285.75 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 93ea3987-eaba-4ca5-a9a1-729f5909b874)
+  (uuid b93e6a45-1a64-50d3-b959-f69fa509fe2c)
 )
 (hierarchical_label "TOUCH_RESET_N"
   (shape bidirectional)
   (at 430.53 288.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0851eae3-5c14-46b8-af4c-f1de939d2a13)
+  (uuid 34f1c299-059f-5a0a-92ea-b6c24bc5d361)
 )
 (label "GND"
   (at 430.53 290.83 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bd5f2cab-fb6a-495c-aaa7-11743729b730)
+  (uuid f4804344-4267-5095-bb44-ebf984d4d0d7)
 )
-(no_connect (at 430.53 293.37) (uuid f9b6aa43-17ce-4e47-be3a-0615129eea00))
-(no_connect (at 430.53 295.91) (uuid c970fe36-a439-4f32-a8fc-8cd2f52e72c5))
-(no_connect (at 430.53 298.45) (uuid 8c54c48e-c430-4690-a62b-03e9b39ba658))
-(no_connect (at 430.53 300.99) (uuid 32ac030d-b02d-4273-ab19-3de4cc79e2c1))
-(no_connect (at 430.53 303.53) (uuid da216f7c-f2ec-41e1-bdf9-e12a2e42d380))
-(no_connect (at 430.53 306.07) (uuid fbdf2314-3465-4146-932d-ed7fd93b5bb4))
-(no_connect (at 430.53 308.61) (uuid 095de6eb-3cf3-4e4b-95c7-87c260b85f6c))
-(no_connect (at 430.53 311.15) (uuid 18199f21-6425-4fb0-82aa-c3d801c99f1b))
+(no_connect (at 430.53 293.37) (uuid 97253778-b565-5464-89f0-7dbc137e603d))
+(no_connect (at 430.53 295.91) (uuid e682beb9-c095-50d5-bc43-f8f48095e6cb))
+(no_connect (at 430.53 298.45) (uuid ba370de4-f346-5cd9-9561-ea361b0d27f9))
+(no_connect (at 430.53 300.99) (uuid 19a880ea-49cf-5ef9-960d-2c5971ae0bd2))
+(no_connect (at 430.53 303.53) (uuid ad7debc9-4795-59f3-82c7-051927676554))
+(no_connect (at 430.53 306.07) (uuid 73282620-21b8-51bf-bb3a-f7df4837b49f))
+(no_connect (at 430.53 308.61) (uuid 4c888a56-dbbc-59f8-81d0-2e6e8a2f6aab))
+(no_connect (at 430.53 311.15) (uuid cc0c0052-d84b-5911-b7bd-6294e4149f40))
 (symbol
   (lib_id "Device:R")
   (at 330.2 246.38 0)
@@ -5697,16 +5697,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid e58eccb7-eaf5-45cf-8058-1bdf54d2bbf5)
+  (uuid 32698dc0-062e-59eb-86df-04add2883b12)
   (property "Reference" "R211" (at 330.2 243.84 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k panel power default off" (at 330.2 248.92 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 246.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 246.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d94ce0d6-efef-4684-96f5-b7d133384be4))
-  (pin "2" (uuid e3e3391b-32b3-40f6-947d-d888182f17cb))
+  (pin "1" (uuid 1a7a438f-64d0-5970-b802-b7ccc3240256))
+  (pin "2" (uuid d0a53092-8977-558b-a7ca-4b1369235c7c))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R211")
         (unit 1)
       )
@@ -5717,12 +5717,12 @@
   (shape bidirectional)
   (at 330.2 242.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 814d38b9-4503-4d2f-b7d9-cf474214abce)
+  (uuid 14db8cdb-6bfa-543f-82b1-e1a4b68da304)
 )
 (label "GND"
   (at 330.2 250.19 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 93844a57-31b8-4973-a16a-44403844193b)
+  (uuid d994169a-078d-531e-902f-01f6b35cfd85)
 )
 (symbol
   (lib_id "Device:R")
@@ -5732,16 +5732,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid d6fb2fa2-da19-4997-ac88-e3a884463715)
+  (uuid 021f0ff0-a926-50d6-a9be-4f5b7414f054)
   (property "Reference" "R212" (at 330.2 256.54 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k backlight EN default off" (at 330.2 261.62 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 259.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 259.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid e80638c3-f448-463d-ba40-d863996ab8b9))
-  (pin "2" (uuid 57775968-11be-44dd-9bc0-ecb6744b39e6))
+  (pin "1" (uuid 07182a08-cc01-5065-9865-1796a3324d71))
+  (pin "2" (uuid 78f6b784-9063-5377-b4e7-0e9707101199))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R212")
         (unit 1)
       )
@@ -5752,12 +5752,12 @@
   (shape bidirectional)
   (at 330.2 255.27 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 281cc772-2827-4e8a-b1a7-387404b03684)
+  (uuid 71f131ee-64fc-5fce-b13b-77bf486b4e26)
 )
 (label "GND"
   (at 330.2 262.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0fd2c718-04b1-48cb-ba42-b44502873f4e)
+  (uuid 0aa795f6-697f-5258-ad7a-163fadf029e5)
 )
 (symbol
   (lib_id "Device:R")
@@ -5767,16 +5767,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid be457bfa-5018-4222-83d6-9e504c5e8a2f)
+  (uuid 49daf169-724b-5c7f-8886-b7c8c4ca2b79)
   (property "Reference" "R213" (at 330.2 269.24 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100R backlight PWM series" (at 330.2 274.32 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid de04c939-30ac-4e72-a768-5538d2497d14))
-  (pin "2" (uuid 32997c52-7de6-49c6-b91e-735a93bb38d6))
+  (pin "1" (uuid c6e2b023-7592-5a64-8c6a-3a87e6b34802))
+  (pin "2" (uuid 28094978-7ed4-54d2-a1b1-ba9de5e78e5e))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R213")
         (unit 1)
       )
@@ -5787,12 +5787,12 @@
   (shape bidirectional)
   (at 330.2 267.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f33dce0e-84e6-45e4-9ca8-80084971d7b5)
+  (uuid 570c23e3-e443-5d48-82be-67f79e028b1f)
 )
 (label "LCD_BL_PWM_FFC"
   (at 330.2 275.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 11985ad6-31e4-41c2-9fed-747af576e44d)
+  (uuid 37ed41d5-ef8c-59a3-8619-eab928959ebe)
 )
 (symbol
   (lib_id "Device:R")
@@ -5802,16 +5802,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 048bac8b-b2ff-4d3b-b843-e403aea30445)
+  (uuid 85e2e68a-abbc-5dd1-8ca1-f271cbd99d0c)
   (property "Reference" "R214" (at 330.2 281.94 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k panel reset pull-up" (at 330.2 287.02 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid f0d3dcdb-efec-4d97-9693-5144a37792d4))
-  (pin "2" (uuid 79ccba5a-b358-4fa7-8b4d-223c4fda0724))
+  (pin "1" (uuid f7f81873-18eb-568d-beb0-76e21bd8b722))
+  (pin "2" (uuid 9191704a-8941-5262-8ac1-77f8859dc0c9))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "R214")
         (unit 1)
       )
@@ -5822,13 +5822,13 @@
   (shape bidirectional)
   (at 330.2 280.67 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b2312a5a-4c25-488d-ad52-a9b95293de98)
+  (uuid 12bb7aac-7e46-555e-8374-cef39c222b31)
 )
 (hierarchical_label "PANEL_RESET_N"
   (shape bidirectional)
   (at 330.2 288.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 727dbcc0-4b09-4dac-8d72-aedc33df93c3)
+  (uuid 6303c9ce-fff5-523b-b4d1-d291570bfa29)
 )
 (symbol
   (lib_id "Device:C")
@@ -5838,16 +5838,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 829e1c21-f40f-4f59-9802-ca883042d71b)
+  (uuid 25be9a53-4bad-5686-87c2-65d56afdf6d9)
   (property "Reference" "C203" (at 330.2 304.8 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10u display service bulk" (at 330.2 309.88 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 330.2 307.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 307.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a9817df8-b285-4d58-97c4-f247cc5037af))
-  (pin "2" (uuid c2f3b40a-c67f-499f-a576-e66f54817025))
+  (pin "1" (uuid d8b3780a-0ae2-5c83-a9ae-aa72635f08b3))
+  (pin "2" (uuid 3b4ac36d-abc1-539f-90a7-d212b0cd8488))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C203")
         (unit 1)
       )
@@ -5858,12 +5858,12 @@
   (shape bidirectional)
   (at 330.2 303.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0efdb580-61bc-4355-941c-4a4c98cdfe4e)
+  (uuid 09f572b6-d845-5ee4-afaa-21b56b303f09)
 )
 (label "GND"
   (at 330.2 311.15 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b2bd70b2-20a5-436e-8726-9fc065278c04)
+  (uuid 19077cdb-d070-50df-823d-cb34f013f599)
 )
 (symbol
   (lib_id "Device:C")
@@ -5873,16 +5873,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid bbd1aab1-c25c-4ffb-a1af-57e754233310)
+  (uuid 6ada6570-37c3-54ac-80a4-6ee264b38425)
   (property "Reference" "C204" (at 330.2 317.5 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n display service" (at 330.2 322.58 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 320.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 320.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 2d7d06e8-d00a-4c9e-bed7-cafb3e733ee1))
-  (pin "2" (uuid a1dc8ea4-3138-4603-8a5c-69e4e37adf23))
+  (pin "1" (uuid 2ca5faa7-054f-5c19-b03c-7606ebb59e70))
+  (pin "2" (uuid eeebd75a-ccba-5bb4-a637-2cbdeaec59ff))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "C204")
         (unit 1)
       )
@@ -5893,12 +5893,12 @@
   (shape bidirectional)
   (at 330.2 316.23 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4b80a7f8-7211-4884-905e-134ad5658d8d)
+  (uuid cc33eb31-4341-57dd-a6e7-2c72820acde6)
 )
 (label "GND"
   (at 330.2 323.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 84f39788-b19b-4a38-9d42-b517caf75a5f)
+  (uuid de164487-8e2e-5143-8246-eafef8712f08)
 )
 (symbol
   (lib_id "power:GND")
@@ -5908,15 +5908,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 3e91d385-b8b9-4c3d-b40d-91d4e462f019)
+  (uuid a5925c17-8bfb-5a65-ac33-9e615d1e6c65)
   (property "Reference" "#PWR101" (at 519.43 356.87 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 519.43 361.95 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 519.43 359.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 359.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid ba1f3f11-692f-4eb2-ab9f-ce6ac490a795))
+  (pin "1" (uuid 83967902-65c1-5276-8442-c9fca608a7e9))
   (instances
     (project "ducktop2"
-      (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
         (reference "#PWR101")
         (unit 1)
       )
@@ -5926,19 +5926,19 @@
 (label "GND"
   (at 519.43 359.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 34baaf1c-a7d4-4303-a2be-6fc48b80dc0a)
+  (uuid a5d6c2ca-1e5d-54a4-8f02-08b8cc99a099)
 )
-(text "NOTES:" (at 20.32 355.6 0) (effects (font (size 1.27 1.27))) (uuid 5de01167-b40c-4b8a-91ed-b1ff2091df81))
-(text "EC enumerates to the x86 host as a plain USB device over Mu USB2_P3; firmware exposes keyboard/power/telemetry." (at 20.32 363.22 0) (effects (font (size 1.27 1.27))) (uuid 1690881c-2b95-4ec9-9d06-9403fe2f5489))
-(text "Touchscreen USB is separate on Mu USB2_P4; sheet 11 owns the retained Intehill USB-C touch/power path." (at 20.32 370.84 0) (effects (font (size 1.27 1.27))) (uuid 43b87bea-d55a-4bb2-bb61-d422be3f2593))
-(text "Trackpad uses Mu USB2_P8 as a direct internal USB HID pointing device; EC only owns reset/interrupt/sideband." (at 20.32 378.46 0) (effects (font (size 1.27 1.27))) (uuid c8460a3c-bd42-4141-add4-ca17ec51b189))
-(text "J51 and J55 are DNP alternate/service harnesses; sheets 10/11 own the real display video paths." (at 20.32 386.08 0) (effects (font (size 1.27 1.27))) (uuid 7aa97ecd-bf8e-4e23-bdbd-0157eb1fa24b))
-(text "Fan PWM/tach are EC-owned. J52 uses fused 5V, 3.3V tach pull-up, and an open-drain PWM sink." (at 20.32 393.7 0) (effects (font (size 1.27 1.27))) (uuid 44617be2-bae5-4a8c-8d7b-5331c38f4873))
-(text "Thermal control has separate skin/hinge and Mu heatsink NTCs on ADC-capable EC pins." (at 20.32 401.32 0) (effects (font (size 1.27 1.27))) (uuid 3690b5ae-a712-4ad0-aeac-da41166e6ba6))
-(text "Cooling default is copper spreader/heatpipe/vapor chamber plus quiet blower; no Peltier/TEC in the base design." (at 20.32 408.94 0) (effects (font (size 1.27 1.27))) (uuid 8e5f76ff-13e6-4a52-92a6-76d54d55b57a))
-(text "Solid-state AirJet-style modules are a future mechanical option, not the assumed electrical baseline." (at 20.32 416.56 0) (effects (font (size 1.27 1.27))) (uuid f14ed42a-d6dc-4a6c-ba7f-18fafa9575dd))
+(text "NOTES:" (at 20.32 355.6 0) (effects (font (size 1.27 1.27))) (uuid 66ffce45-f94d-5b6d-ae70-09c92111cedc))
+(text "EC enumerates to the x86 host as a plain USB device over Mu USB2_P3; firmware exposes keyboard/power/telemetry." (at 20.32 363.22 0) (effects (font (size 1.27 1.27))) (uuid 7010e283-8f33-50de-856b-a0a136f2982e))
+(text "Touchscreen USB is separate on Mu USB2_P4; sheet 11 owns the retained Intehill USB-C touch/power path." (at 20.32 370.84 0) (effects (font (size 1.27 1.27))) (uuid 76d157e1-0c56-5601-95c5-958673d96d04))
+(text "Trackpad uses Mu USB2_P8 as a direct internal USB HID pointing device; EC only owns reset/interrupt/sideband." (at 20.32 378.46 0) (effects (font (size 1.27 1.27))) (uuid 14827447-0331-5454-b1eb-499fe49d09aa))
+(text "J51 and J55 are DNP alternate/service harnesses; sheets 10/11 own the real display video paths." (at 20.32 386.08 0) (effects (font (size 1.27 1.27))) (uuid 6f156181-dc4f-5408-a01f-51646881e5de))
+(text "Fan PWM/tach are EC-owned. J52 uses fused 5V, 3.3V tach pull-up, and an open-drain PWM sink." (at 20.32 393.7 0) (effects (font (size 1.27 1.27))) (uuid e4f4a84c-f0b7-57bb-81e2-5b8bd992a118))
+(text "Thermal control has separate skin/hinge and Mu heatsink NTCs on ADC-capable EC pins." (at 20.32 401.32 0) (effects (font (size 1.27 1.27))) (uuid 9840ee37-e770-5e9f-acfb-193591c259b1))
+(text "Cooling default is copper spreader/heatpipe/vapor chamber plus quiet blower; no Peltier/TEC in the base design." (at 20.32 408.94 0) (effects (font (size 1.27 1.27))) (uuid 3ef78352-823e-5845-8945-b4ef8f1243b1))
+(text "Solid-state AirJet-style modules are a future mechanical option, not the assumed electrical baseline." (at 20.32 416.56 0) (effects (font (size 1.27 1.27))) (uuid a1b9a9c9-5d89-51bf-9b29-2641197e211b))
 (sheet_instances
-  (path "/450f09c0-9e1d-4e8d-a91e-c407b4349481"
+  (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
     (page "9")
   )
 )
