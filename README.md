@@ -18,7 +18,7 @@ low-profile mechanical keyboard.
 
 ## Hardware
 
-- LattePanda Mu with an Intel N305 or N100-class module
+- LattePanda Mu with an Intel N305 module
 - 16-inch AUO B160QAN03.K panel, 2560x1600 at 120 Hz over direct eDP
 - M.2 M-key NVMe storage and M.2 E-key Wi-Fi/Bluetooth
 - Two native USB-C 10 Gbit/s host ports, external HDMI-A, and Gigabit Ethernet
@@ -110,6 +110,3 @@ This repository is public so the design can be reviewed while it develops.
 It is not an ordering package for the mainboard. Part selection, placement,
 routing, stackup, enclosure work, firmware integration, and first-article
 testing are still active work.
-
-The project does not currently have an open-source license. Please ask before
-reusing the design or manufacturing from it.
