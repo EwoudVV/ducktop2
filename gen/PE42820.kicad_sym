@@ -1,0 +1,166 @@
+(kicad_symbol_lib
+  (version 20251024)
+  (generator "codex")
+  (generator_version "10.0")
+  (symbol "PE42820"
+    (pin_names (offset 1.016))
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (property "Reference" "U"
+      (at 0 24.13 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "PE42820"
+      (at 0 -24.13 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "ducktop2:PE42820_QFN-32-1EP_5x5mm_P0.5mm"
+      (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "https://www.psemi.com/pdf/datasheets/pe42820ds.pdf"
+      (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Description" "pSemi PE42820 30MHz to 2.7GHz high-power reflective SPDT RF switch, PE42820B-X 32-lead 5x5mm QFN."
+      (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (hide yes)))
+    (symbol "PE42820_0_1"
+      (rectangle
+        (start -10.16 21.59)
+        (end 10.16 -21.59)
+        (stroke (width 0.254) (type default))
+        (fill (type background))))
+    (symbol "PE42820_1_1"
+      (pin power_in line
+        (at -12.7 20.32 0) (length 2.54)
+        (name "VDD" (effects (font (size 1.27 1.27))))
+        (number "12" (effects (font (size 1.27 1.27)))))
+      (pin input line
+        (at -12.7 17.78 0) (length 2.54)
+        (name "V1" (effects (font (size 1.27 1.27))))
+        (number "13" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 15.24 0) (length 2.54)
+        (name "VSS_EXT" (effects (font (size 1.27 1.27))))
+        (number "16" (effects (font (size 1.27 1.27)))))
+      (pin passive line
+        (at -12.7 12.7 0) (length 2.54)
+        (name "RFC" (effects (font (size 1.27 1.27))))
+        (number "28" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 10.16 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "1" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 7.62 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "3" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 5.08 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "4" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 2.54 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "5" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 0 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "6" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 -2.54 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "7" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 -5.08 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "8" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 -7.62 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "9" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 -10.16 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "10" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 -12.7 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "11" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 -15.24 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "14" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 -17.78 0) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "15" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at -12.7 -20.32 0) (length 2.54)
+        (name "EP_GND" (effects (font (size 1.27 1.27))))
+        (number "33" (effects (font (size 1.27 1.27)))))
+      (pin passive line
+        (at 12.7 20.32 180) (length 2.54)
+        (name "RF1" (effects (font (size 1.27 1.27))))
+        (number "2" (effects (font (size 1.27 1.27)))))
+      (pin passive line
+        (at 12.7 17.78 180) (length 2.54)
+        (name "RF2" (effects (font (size 1.27 1.27))))
+        (number "23" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 15.24 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "17" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 12.7 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "18" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 10.16 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "19" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 7.62 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "20" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 5.08 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "21" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 2.54 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "22" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 0 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "24" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 -2.54 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "25" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 -5.08 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "26" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 -7.62 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "27" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 -10.16 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "29" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 -12.7 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "30" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 -15.24 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "31" (effects (font (size 1.27 1.27)))))
+      (pin power_in line
+        (at 12.7 -17.78 180) (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "32" (effects (font (size 1.27 1.27)))))
+    )
+  )
+)

@@ -2,13 +2,13 @@
   (version 20260306)
   (generator "eeschema")
   (generator_version "10.0")
-  (uuid 57bf2ac5-9dd3-52e8-94e3-11b57a79faee)
+  (uuid f69f472e-f035-560c-871f-5c7cdd4157be)
   (paper "A1")
   (lib_symbols
   )
 (sheet
   (at 30.48 39.37)
-  (size 59.69 80.01)
+  (size 59.69 149.86)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 577b7ab7-60d3-5949-82f8-bb269dce837a)
@@ -17,7 +17,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
   )
   (property "Sheetfile" "01_power_battery.kicad_sch"
-    (at 30.48 120.65 0)
+    (at 30.48 190.5 0)
     (effects (font (size 1.27 1.27)) (justify left top))
   )
   (pin "I2C_SCL" bidirectional
@@ -40,60 +40,105 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid fd1cee6d-fcdc-58aa-baf4-9841f78c6aff)
   )
-  (pin "PMIC_QON" bidirectional
+  (pin "PMIC_QON_ASSERT" bidirectional
     (at 90.17 64.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d8de4edd-1313-5377-a8dd-9a1a9cc1c676)
   )
-  (pin "CHG_CE_N" bidirectional
+  (pin "CHG_ENABLE" bidirectional
     (at 90.17 69.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid afabd392-2ce8-58b4-8ccf-12e3d91506a6)
   )
-  (pin "VSYS" bidirectional
+  (pin "CASE_PWRBTN_N" bidirectional
     (at 90.17 74.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e15dcb41-7794-5302-b42f-bb735cdee252)
   )
-  (pin "MCU_3V3" bidirectional
+  (pin "MU_PWRBTN_N" bidirectional
     (at 90.17 80.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 72fd45a3-b0ae-5906-b8fe-2230e2df7c32)
   )
-  (pin "AUX_DC_ADC" bidirectional
+  (pin "VSYS" bidirectional
     (at 90.17 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e5ce16f4-545c-5665-ad8b-3a199ebeede3)
   )
-  (pin "VBUS_PD1" bidirectional
+  (pin "MCU_3V3" bidirectional
     (at 90.17 90.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 795a960a-7231-52b2-8576-75de131643bc)
   )
-  (pin "VBUS_PD2" bidirectional
+  (pin "EC_AON_IN" bidirectional
     (at 90.17 95.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d92e2fe4-0d21-5785-a4f6-31ebeed8fcdd)
   )
-  (pin "VBUS_PD3" bidirectional
+  (pin "AUX_DC_ADC" bidirectional
     (at 90.17 100.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 411d60cf-974b-5410-a874-f52827711883)
   )
-  (pin "USB_DP1" bidirectional
+  (pin "USB_PD_SELECTED" bidirectional
     (at 90.17 105.41 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 8f0ed96b-1655-57be-b014-f0fd4d9fad75)
   )
-  (pin "USB_DM1" bidirectional
+  (pin "PD1_VBUS_RAW" bidirectional
     (at 90.17 110.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 9fe92136-5bdf-51b5-871d-2437ef76a59f)
   )
+  (pin "PD2_VBUS_RAW" bidirectional
+    (at 90.17 115.57 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 00d78522-fb58-511a-853d-432a7ea7fe43)
+  )
+  (pin "PD3_VBUS_RAW" bidirectional
+    (at 90.17 120.65 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 32a009d7-1b67-57d7-921c-be1f1b8dfd4d)
+  )
+  (pin "PACK_FAULT_N" bidirectional
+    (at 90.17 125.73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f6e8a828-46dd-55b1-beb2-5662182cb96a)
+  )
+  (pin "PACK_RETRY_PULSE" bidirectional
+    (at 90.17 130.81 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid cf380c04-5331-5d00-8b3c-42bb88a5c897)
+  )
+  (pin "AUX_FAULT_N" bidirectional
+    (at 90.17 135.89 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 55457332-64ef-543b-ab16-fcfa6b7afba4)
+  )
+  (pin "AUX_PGOOD" bidirectional
+    (at 90.17 140.97 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 56193749-41e1-5dd5-9e56-c74f71951613)
+  )
+  (pin "MAIN_USB_VALID_N" bidirectional
+    (at 90.17 146.05 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2952273e-2e23-5be0-a50b-b16f00ed7011)
+  )
+  (pin "MAIN_AUX_VALID_N" bidirectional
+    (at 90.17 151.13 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 5e9cc1bb-aebb-5eed-9039-368396b18058)
+  )
+  (pin "AON_FAULT_N" bidirectional
+    (at 90.17 156.21 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 28c8e290-4664-5301-9afe-541def85db6d)
+  )
 )
 (sheet
   (at 160.02 39.37)
-  (size 59.69 400.05)
+  (size 59.69 480.06)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8)
@@ -102,368 +147,458 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
   )
   (property "Sheetfile" "02_ec_mcu.kicad_sch"
-    (at 160.02 440.69 0)
+    (at 160.02 520.7 0)
     (effects (font (size 1.27 1.27)) (justify left top))
   )
   (pin "I2C_SCL" bidirectional
     (at 219.71 44.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 00d78522-fb58-511a-853d-432a7ea7fe43)
+    (uuid 507d1857-051c-57d8-acd1-73596cc073aa)
   )
   (pin "I2C_SDA" bidirectional
     (at 219.71 49.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 32a009d7-1b67-57d7-921c-be1f1b8dfd4d)
+    (uuid 0555b9a4-b56f-5ab2-ab50-2b05d91ebe4a)
   )
   (pin "BQ_ALERT" bidirectional
     (at 219.71 54.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid f6e8a828-46dd-55b1-beb2-5662182cb96a)
+    (uuid 8d3d2363-033f-537f-a2de-176c3ab48ed4)
   )
   (pin "CHG_INT_N" bidirectional
     (at 219.71 59.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid cf380c04-5331-5d00-8b3c-42bb88a5c897)
-  )
-  (pin "PMIC_QON" bidirectional
-    (at 219.71 64.77 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 55457332-64ef-543b-ab16-fcfa6b7afba4)
-  )
-  (pin "CHG_CE_N" bidirectional
-    (at 219.71 69.85 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 56193749-41e1-5dd5-9e56-c74f71951613)
-  )
-  (pin "VSYS" bidirectional
-    (at 219.71 74.93 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 2952273e-2e23-5be0-a50b-b16f00ed7011)
-  )
-  (pin "MCU_USB_DP" bidirectional
-    (at 219.71 80.01 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 5e9cc1bb-aebb-5eed-9039-368396b18058)
-  )
-  (pin "MCU_USB_DM" bidirectional
-    (at 219.71 85.09 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 28c8e290-4664-5301-9afe-541def85db6d)
-  )
-  (pin "MCU_3V3" bidirectional
-    (at 219.71 90.17 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 507d1857-051c-57d8-acd1-73596cc073aa)
-  )
-  (pin "AUX_DC_ADC" bidirectional
-    (at 219.71 95.25 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0555b9a4-b56f-5ab2-ab50-2b05d91ebe4a)
-  )
-  (pin "MU_PWRBTN_N" bidirectional
-    (at 219.71 100.33 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 8d3d2363-033f-537f-a2de-176c3ab48ed4)
-  )
-  (pin "MU_RSTBTN_N" bidirectional
-    (at 219.71 105.41 0)
-    (effects (font (size 1.27 1.27)) (justify left))
     (uuid bdfecf24-ea5d-5be4-86f2-64bcdd89ff5c)
   )
-  (pin "WIFI_W_DISABLE1_N" bidirectional
-    (at 219.71 110.49 0)
+  (pin "PMIC_QON_ASSERT" bidirectional
+    (at 219.71 64.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 51ffb1d0-529e-551e-88a3-6d8356ae6f89)
   )
-  (pin "WIFI_W_DISABLE2_N" bidirectional
-    (at 219.71 115.57 0)
+  (pin "CHG_ENABLE" bidirectional
+    (at 219.71 69.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid fcb2fc55-9767-59f6-a1cb-0e625cbd9198)
   )
-  (pin "OLED_RESET_N" bidirectional
-    (at 219.71 120.65 0)
+  (pin "CASE_PWRBTN_N" bidirectional
+    (at 219.71 74.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b419281e-88ba-5d67-8d64-ea5732b007f8)
   )
-  (pin "GNSS_UART_RX" bidirectional
-    (at 219.71 125.73 0)
+  (pin "EC_AON_IN" bidirectional
+    (at 219.71 80.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid cc9c7e36-d4e6-5845-a26d-9b1727775dec)
   )
-  (pin "GNSS_UART_TX" bidirectional
-    (at 219.71 130.81 0)
+  (pin "MCU_USB_DP" bidirectional
+    (at 219.71 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 231d8ed6-0588-5c9e-87fc-434b2c93b0ff)
   )
-  (pin "GNSS_RESET_N" bidirectional
-    (at 219.71 135.89 0)
+  (pin "MCU_USB_DM" bidirectional
+    (at 219.71 90.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 25fb5882-7576-5e91-944d-2f47551d4142)
   )
-  (pin "GNSS_PPS" bidirectional
-    (at 219.71 140.97 0)
+  (pin "MCU_3V3" bidirectional
+    (at 219.71 95.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 807133d8-fa89-5693-a9d7-1967e1000cce)
   )
-  (pin "GNSS_EXTINT" bidirectional
-    (at 219.71 146.05 0)
+  (pin "AUX_DC_ADC" bidirectional
+    (at 219.71 100.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 04f9e619-6453-5e4a-9071-76a204023a64)
   )
-  (pin "RADIO_GPIO0" bidirectional
-    (at 219.71 151.13 0)
+  (pin "MU_PWRBTN_N" bidirectional
+    (at 219.71 105.41 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid edc26e11-7118-5869-87c2-f8e6ca0658d9)
   )
-  (pin "FAN_PWM" bidirectional
-    (at 219.71 156.21 0)
+  (pin "MU_RSTBTN_N" bidirectional
+    (at 219.71 110.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 62d0df39-d677-536f-96de-1090f1f4a093)
   )
-  (pin "FAN_TACH" bidirectional
-    (at 219.71 161.29 0)
+  (pin "WIFI_W_DISABLE1_N_EC" bidirectional
+    (at 219.71 115.57 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid a915612b-5ae5-585d-b772-0a12c401ad9e)
   )
-  (pin "LCD_BL_PWM" bidirectional
-    (at 219.71 166.37 0)
+  (pin "WIFI_W_DISABLE2_N_EC" bidirectional
+    (at 219.71 120.65 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d8f93d5d-eaf6-58db-889b-a86ab9b79181)
   )
-  (pin "LCD_BL_EN" bidirectional
-    (at 219.71 171.45 0)
+  (pin "SERVICE_MUX_RESET_N" bidirectional
+    (at 219.71 125.73 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 56a9d48f-f667-5d0b-8118-93e42e65badf)
   )
-  (pin "LID_CLOSED_N" bidirectional
-    (at 219.71 176.53 0)
+  (pin "GNSS_UART_RX" bidirectional
+    (at 219.71 130.81 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid efa9cf9b-7e1c-53e8-8bb8-945aa3d9b4f3)
   )
-  (pin "THERM_SKIN_ADC" bidirectional
-    (at 219.71 181.61 0)
+  (pin "GNSS_UART_TX" bidirectional
+    (at 219.71 135.89 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 0fba36c0-fc56-5660-b2e9-f435038a786c)
   )
-  (pin "THERM_MU_ADC" bidirectional
-    (at 219.71 186.69 0)
+  (pin "GNSS_RESET_N" bidirectional
+    (at 219.71 140.97 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 15bea65a-01f9-5c47-911b-a32501a919a8)
   )
-  (pin "TOUCH_RESET_N" bidirectional
-    (at 219.71 191.77 0)
+  (pin "GNSS_PPS" bidirectional
+    (at 219.71 146.05 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d8045c72-1b40-5a8d-9258-ebb4d1fc13ff)
   )
-  (pin "TOUCH_INT_N" bidirectional
-    (at 219.71 196.85 0)
+  (pin "GNSS_EXTINT" bidirectional
+    (at 219.71 151.13 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 4cdc61b9-23cb-50ed-9b87-7646dc1f18db)
   )
-  (pin "PANEL_PWR_EN" bidirectional
-    (at 219.71 201.93 0)
+  (pin "RADIO_GPIO0" bidirectional
+    (at 219.71 156.21 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 4f8adea1-1514-5a60-aed4-c0ed56d4b657)
   )
-  (pin "PANEL_RESET_N" bidirectional
-    (at 219.71 207.01 0)
+  (pin "FAN_PWM" bidirectional
+    (at 219.71 161.29 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid aa0a3d73-c0f6-5018-8470-3c1f8b3a43fd)
   )
-  (pin "TPAD_RESET_N" bidirectional
-    (at 219.71 212.09 0)
+  (pin "FAN_TACH" bidirectional
+    (at 219.71 166.37 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid f1efac75-e583-5121-9abc-1d19646ac722)
   )
-  (pin "TPAD_INT_N" bidirectional
-    (at 219.71 217.17 0)
+  (pin "LID_CLOSED_N" bidirectional
+    (at 219.71 171.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid ec645b43-2a36-514c-9f1f-1e5361a953c6)
   )
-  (pin "RADIO_VHF_UART_TX" bidirectional
-    (at 219.71 222.25 0)
+  (pin "THERM_SKIN_ADC" bidirectional
+    (at 219.71 176.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d4b72df2-adb2-570d-9c82-d41bc6548c6f)
   )
-  (pin "RADIO_VHF_UART_RX" bidirectional
-    (at 219.71 227.33 0)
+  (pin "THERM_MU_ADC" bidirectional
+    (at 219.71 181.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 105c2bbf-d81a-5d47-b57b-cf256e09d870)
   )
-  (pin "RADIO_UHF_UART_TX" bidirectional
-    (at 219.71 232.41 0)
+  (pin "TRACKPAD_FAULT_N" bidirectional
+    (at 219.71 186.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 68dca6d8-5442-53eb-a1d9-69ba6c433c53)
   )
-  (pin "RADIO_UHF_UART_RX" bidirectional
-    (at 219.71 237.49 0)
+  (pin "MU_S0_HIGH" bidirectional
+    (at 219.71 191.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 1443849c-b7c4-577c-9f4b-35e3a68f4eb1)
   )
-  (pin "RADIO_VHF_PTT_N" bidirectional
-    (at 219.71 242.57 0)
+  (pin "PD1_VALID_N" bidirectional
+    (at 219.71 196.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 88174a80-4a83-5f1d-980d-5469cea898ec)
   )
-  (pin "RADIO_UHF_PTT_N" bidirectional
-    (at 219.71 247.65 0)
+  (pin "PD2_VALID_N" bidirectional
+    (at 219.71 201.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 23526287-537e-556e-b65a-5d0485e0928d)
   )
-  (pin "RADIO_VHF_PD_N" bidirectional
-    (at 219.71 252.73 0)
+  (pin "PD3_VALID_N" bidirectional
+    (at 219.71 207.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 645b2511-3162-5d7e-9f2a-8c246cf62fed)
   )
-  (pin "RADIO_UHF_PD_N" bidirectional
-    (at 219.71 257.81 0)
+  (pin "RADIO_VHF_UART_TX" bidirectional
+    (at 219.71 212.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e9e73091-5ec4-5592-a163-598412bc31a9)
   )
-  (pin "RADIO_VHF_SQL" bidirectional
-    (at 219.71 262.89 0)
+  (pin "RADIO_VHF_UART_RX" bidirectional
+    (at 219.71 217.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 455e3bae-a69a-5e67-95d5-e0798f547ed3)
   )
-  (pin "RADIO_UHF_SQL" bidirectional
-    (at 219.71 267.97 0)
+  (pin "RADIO_UHF_UART_TX" bidirectional
+    (at 219.71 222.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 62f95333-5654-5099-a31c-d8977a6ea6d5)
   )
-  (pin "RADIO_VHF_RF_SEL" bidirectional
-    (at 219.71 273.05 0)
+  (pin "RADIO_UHF_UART_RX" bidirectional
+    (at 219.71 227.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 231c54e2-c5a7-5009-ae7e-6882b300b8de)
   )
-  (pin "RADIO_UHF_RF_SEL" bidirectional
-    (at 219.71 278.13 0)
+  (pin "RADIO_VHF_PTT_N" bidirectional
+    (at 219.71 232.41 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 8e03c1a0-3fb6-5a58-bfc0-66267a64551b)
   )
-  (pin "RADIO_AUDIO_SEL" bidirectional
-    (at 219.71 283.21 0)
+  (pin "RADIO_UHF_PTT_N" bidirectional
+    (at 219.71 237.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 671bda42-216e-5068-bab0-46c95890833e)
   )
-  (pin "KB_ROW0" bidirectional
-    (at 219.71 288.29 0)
+  (pin "RADIO_VHF_PD_N" bidirectional
+    (at 219.71 242.57 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 71880fa0-78f1-53bb-aebb-79fea8c9a217)
   )
-  (pin "KB_ROW1" bidirectional
-    (at 219.71 293.37 0)
+  (pin "RADIO_UHF_PD_N" bidirectional
+    (at 219.71 247.65 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 03e3df14-756d-5b2b-ab4d-933f5b37a469)
   )
-  (pin "KB_ROW2" bidirectional
-    (at 219.71 298.45 0)
+  (pin "RADIO_VHF_SQL" bidirectional
+    (at 219.71 252.73 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b651e0fe-f0aa-5ea8-b3d5-d6060675fc99)
   )
-  (pin "KB_ROW3" bidirectional
-    (at 219.71 303.53 0)
+  (pin "RADIO_UHF_SQL" bidirectional
+    (at 219.71 257.81 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c0d90dbb-2bac-5838-bb02-ea6723136f00)
   )
-  (pin "KB_ROW4" bidirectional
-    (at 219.71 308.61 0)
+  (pin "RADIO_VHF_RF_SEL_3V3" bidirectional
+    (at 219.71 262.89 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 0dbbfb87-707e-5c72-942a-86ce93150a35)
   )
-  (pin "KB_ROW5" bidirectional
-    (at 219.71 313.69 0)
+  (pin "RADIO_UHF_RF_SEL_3V3" bidirectional
+    (at 219.71 267.97 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 7691dcd6-0f6a-598b-b894-7ddc04cc16ee)
   )
-  (pin "KB_ROW6" bidirectional
-    (at 219.71 318.77 0)
+  (pin "RADIO_AUDIO_SEL" bidirectional
+    (at 219.71 273.05 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid aa4e8d53-c63c-5fef-beda-7b9e0819cd2a)
   )
-  (pin "KB_ROW7" bidirectional
-    (at 219.71 323.85 0)
+  (pin "AUDIO_AMP_EC_EN" bidirectional
+    (at 219.71 278.13 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 68b74d5e-1b83-5855-a128-c89d387ecee5)
   )
-  (pin "KB_COL0" bidirectional
-    (at 219.71 328.93 0)
+  (pin "AUDIO_MIC_EN" bidirectional
+    (at 219.71 283.21 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 36ddeb29-794c-51e0-8adc-db59796c8cb8)
   )
-  (pin "KB_COL1" bidirectional
-    (at 219.71 334.01 0)
+  (pin "INTERNAL_USB_VBUS_FAULT_N" bidirectional
+    (at 219.71 288.29 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 2105e8e9-904b-58bc-99f0-0a6eeae58acc)
   )
-  (pin "KB_COL2" bidirectional
-    (at 219.71 339.09 0)
+  (pin "MU_12V_ENABLE" bidirectional
+    (at 219.71 293.37 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 430fd6c0-002f-5654-b7de-bc22dac30fff)
   )
-  (pin "KB_COL3" bidirectional
-    (at 219.71 344.17 0)
+  (pin "MU_12V_PG" bidirectional
+    (at 219.71 298.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 687c1853-ca03-5d76-8602-e339b1343333)
   )
-  (pin "KB_COL4" bidirectional
-    (at 219.71 349.25 0)
+  (pin "KB_RGB_PWR_EN" bidirectional
+    (at 219.71 303.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 6ef691bc-09a7-509f-8f70-cb4aa05a9399)
   )
-  (pin "KB_COL5" bidirectional
-    (at 219.71 354.33 0)
+  (pin "KB_RGB_FAULT_N" bidirectional
+    (at 219.71 308.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c2defc6f-ea91-57b3-9ea1-bfcaae258c34)
   )
-  (pin "KB_COL6" bidirectional
-    (at 219.71 359.41 0)
+  (pin "KB_RGB_DATA_3V3" bidirectional
+    (at 219.71 313.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 7c330f20-10f2-5f7e-a25d-8f66686638ae)
   )
-  (pin "KB_COL7" bidirectional
-    (at 219.71 364.49 0)
+  (pin "KB_ROW0" bidirectional
+    (at 219.71 318.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d5516721-6c04-5a9a-aa77-223d4134991c)
   )
-  (pin "KB_COL8" bidirectional
-    (at 219.71 369.57 0)
+  (pin "KB_ROW1" bidirectional
+    (at 219.71 323.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 3bc8aa12-ef02-5f1f-bc8f-baec20ff9b6d)
   )
-  (pin "KB_COL9" bidirectional
-    (at 219.71 374.65 0)
+  (pin "KB_ROW2" bidirectional
+    (at 219.71 328.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 6ff27895-dee5-5d1c-8294-165ca8e7ab0b)
   )
-  (pin "KB_COL10" bidirectional
-    (at 219.71 379.73 0)
+  (pin "KB_ROW3" bidirectional
+    (at 219.71 334.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c4998d6a-919a-530c-bcf9-c19e5ef9541b)
   )
-  (pin "KB_COL11" bidirectional
-    (at 219.71 384.81 0)
+  (pin "KB_ROW4" bidirectional
+    (at 219.71 339.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid f8c5bfa3-b3f9-5ce9-b321-2b208c9862d5)
   )
-  (pin "KB_COL12" bidirectional
-    (at 219.71 389.89 0)
+  (pin "KB_ROW5" bidirectional
+    (at 219.71 344.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid a515549d-b808-5985-99b8-476d742996ba)
   )
-  (pin "KB_COL13" bidirectional
-    (at 219.71 394.97 0)
+  (pin "KB_ROW6" bidirectional
+    (at 219.71 349.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 1f10fde1-c72f-5ae4-92ec-a7801936b0b2)
   )
-  (pin "KB_COL14" bidirectional
-    (at 219.71 400.05 0)
+  (pin "KB_ROW7" bidirectional
+    (at 219.71 354.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid cd2102b6-d369-594f-bf4b-4c36e1afe2ef)
   )
-  (pin "KB_COL15" bidirectional
-    (at 219.71 405.13 0)
+  (pin "KB_COL0" bidirectional
+    (at 219.71 359.41 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 81acf8f4-603e-5e23-9ef9-be91f840da96)
+  )
+  (pin "KB_COL1" bidirectional
+    (at 219.71 364.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7a3debf6-02bc-5924-996b-9116ec3df6bc)
+  )
+  (pin "KB_COL2" bidirectional
+    (at 219.71 369.57 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid b3ec0aad-c602-5245-a64d-1a1c94be25f9)
+  )
+  (pin "KB_COL3" bidirectional
+    (at 219.71 374.65 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 33badb64-10fa-5bc8-9762-6f0c7c463444)
+  )
+  (pin "KB_COL4" bidirectional
+    (at 219.71 379.73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 8188f283-b44e-50f6-b104-e73cce9ef44b)
+  )
+  (pin "KB_COL5" bidirectional
+    (at 219.71 384.81 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid dbf2f4e2-4685-513f-8680-f11ec75104b6)
+  )
+  (pin "KB_COL6" bidirectional
+    (at 219.71 389.89 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d752e4e7-eaf7-579b-ae2e-f7b2531e4644)
+  )
+  (pin "KB_COL7" bidirectional
+    (at 219.71 394.97 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9c0ab580-1240-53ef-8728-61be37a7354a)
+  )
+  (pin "KB_COL8" bidirectional
+    (at 219.71 400.05 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 10d67618-2527-519f-9345-c5889dd1db19)
+  )
+  (pin "KB_COL9" bidirectional
+    (at 219.71 405.13 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e59d51cd-6fa5-50f1-b33d-6c27d8c88a1b)
+  )
+  (pin "KB_COL10" bidirectional
+    (at 219.71 410.21 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2cd4223d-7eb0-5f54-a1b9-7fcc7c29db08)
+  )
+  (pin "KB_COL11" bidirectional
+    (at 219.71 415.29 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6009a923-8cfc-530c-b9c0-48b8b980c22d)
+  )
+  (pin "KB_COL12" bidirectional
+    (at 219.71 420.37 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 4e6f113d-231e-5e8f-871a-eb5edc1a92fb)
+  )
+  (pin "KB_COL13" bidirectional
+    (at 219.71 425.45 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 08616aae-8ad1-5340-886e-0fee42eb3e3f)
+  )
+  (pin "KB_COL14" bidirectional
+    (at 219.71 430.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6e19abd1-2f17-5650-8782-1c7864e96156)
+  )
+  (pin "PD1_PATH_EN" bidirectional
+    (at 219.71 435.61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid dd83d70e-a6ac-5cfe-b408-9a33990155a8)
+  )
+  (pin "PD2_PATH_EN" bidirectional
+    (at 219.71 440.69 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6db0168b-15aa-5f5e-864a-37f15d58acb3)
+  )
+  (pin "PD3_PATH_EN" bidirectional
+    (at 219.71 445.77 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7dd5f606-0130-5d6b-bde5-1b01f08db113)
+  )
+  (pin "PD1_EFUSE_FAULT_N" bidirectional
+    (at 219.71 450.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid eeb2e0da-1339-5baa-966c-907ad8a3948a)
+  )
+  (pin "PD2_EFUSE_FAULT_N" bidirectional
+    (at 219.71 455.93 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 0d9b0eac-84ff-5c47-98f2-a921a9f2bd36)
+  )
+  (pin "PD3_EFUSE_FAULT_N" bidirectional
+    (at 219.71 461.01 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9506423a-163d-5b50-95f0-0a670db06c75)
+  )
+  (pin "PACK_FAULT_N" bidirectional
+    (at 219.71 466.09 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d4a1ddf7-0076-5445-a9de-5a6748cd9192)
+  )
+  (pin "PACK_RETRY_PULSE" bidirectional
+    (at 219.71 471.17 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 172f3a25-abe9-58fd-9a2f-2e91910d74fe)
+  )
+  (pin "AUX_FAULT_N" bidirectional
+    (at 219.71 476.25 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 4083aa81-e241-5ae7-973f-27c8832b5949)
+  )
+  (pin "AUX_PGOOD" bidirectional
+    (at 219.71 481.33 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 63b8799d-bf3c-531f-b8a3-b2a1df6770f4)
+  )
+  (pin "MAIN_USB_VALID_N" bidirectional
+    (at 219.71 486.41 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 39fbb969-416a-5a72-b4f9-a535cc269472)
+  )
+  (pin "MAIN_AUX_VALID_N" bidirectional
+    (at 219.71 491.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e869f280-c082-58b5-80ee-acb07a0adf2c)
+  )
+  (pin "AON_FAULT_N" bidirectional
+    (at 219.71 496.57 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid c66e710b-5ac2-56ac-8699-68fad70c58e6)
   )
 )
 (sheet
@@ -483,467 +618,532 @@
   (pin "VSYS" bidirectional
     (at 359.41 44.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7a3debf6-02bc-5924-996b-9116ec3df6bc)
+    (uuid 259d1761-a9cc-5386-ba64-9feede1c691d)
   )
   (pin "SYS_5V" bidirectional
     (at 359.41 49.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid b3ec0aad-c602-5245-a64d-1a1c94be25f9)
+    (uuid 81e772de-fb5e-5b84-9ec0-2fcbde2cb6e6)
   )
   (pin "SYS_3V3" bidirectional
     (at 359.41 54.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 33badb64-10fa-5bc8-9762-6f0c7c463444)
-  )
-  (pin "MU_PWRBTN_N" bidirectional
-    (at 359.41 59.69 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 8188f283-b44e-50f6-b104-e73cce9ef44b)
-  )
-  (pin "MU_RSTBTN_N" bidirectional
-    (at 359.41 64.77 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid dbf2f4e2-4685-513f-8680-f11ec75104b6)
-  )
-  (pin "EC_HOST_USB_DP" bidirectional
-    (at 359.41 69.85 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d752e4e7-eaf7-579b-ae2e-f7b2531e4644)
-  )
-  (pin "EC_HOST_USB_DM" bidirectional
-    (at 359.41 74.93 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9c0ab580-1240-53ef-8728-61be37a7354a)
-  )
-  (pin "TOUCH_USB_DP" bidirectional
-    (at 359.41 80.01 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 10d67618-2527-519f-9345-c5889dd1db19)
-  )
-  (pin "TOUCH_USB_DM" bidirectional
-    (at 359.41 85.09 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid e59d51cd-6fa5-50f1-b33d-6c27d8c88a1b)
-  )
-  (pin "AUDIO_USB_DP" bidirectional
-    (at 359.41 90.17 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 2cd4223d-7eb0-5f54-a1b9-7fcc7c29db08)
-  )
-  (pin "AUDIO_USB_DM" bidirectional
-    (at 359.41 95.25 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6009a923-8cfc-530c-b9c0-48b8b980c22d)
-  )
-  (pin "TRACKPAD_USB_DP" bidirectional
-    (at 359.41 100.33 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 4e6f113d-231e-5e8f-871a-eb5edc1a92fb)
-  )
-  (pin "TRACKPAD_USB_DM" bidirectional
-    (at 359.41 105.41 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 08616aae-8ad1-5340-886e-0fee42eb3e3f)
-  )
-  (pin "MAKER_USB_DP" bidirectional
-    (at 359.41 110.49 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6e19abd1-2f17-5650-8782-1c7864e96156)
-  )
-  (pin "MAKER_USB_DM" bidirectional
-    (at 359.41 115.57 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid dd83d70e-a6ac-5cfe-b408-9a33990155a8)
-  )
-  (pin "HUB1_PE" bidirectional
-    (at 359.41 120.65 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6db0168b-15aa-5f5e-864a-37f15d58acb3)
-  )
-  (pin "HUB1_OC_N" bidirectional
-    (at 359.41 125.73 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7dd5f606-0130-5d6b-bde5-1b01f08db113)
-  )
-  (pin "HUB1_SSTX_P" bidirectional
-    (at 359.41 130.81 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid eeb2e0da-1339-5baa-966c-907ad8a3948a)
-  )
-  (pin "HUB1_SSTX_N" bidirectional
-    (at 359.41 135.89 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0d9b0eac-84ff-5c47-98f2-a921a9f2bd36)
-  )
-  (pin "HUB1_SSRX_P" bidirectional
-    (at 359.41 140.97 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9506423a-163d-5b50-95f0-0a670db06c75)
-  )
-  (pin "HUB1_SSRX_N" bidirectional
-    (at 359.41 146.05 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d4a1ddf7-0076-5445-a9de-5a6748cd9192)
-  )
-  (pin "HUB1_DP" bidirectional
-    (at 359.41 151.13 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 172f3a25-abe9-58fd-9a2f-2e91910d74fe)
-  )
-  (pin "HUB1_DM" bidirectional
-    (at 359.41 156.21 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 4083aa81-e241-5ae7-973f-27c8832b5949)
-  )
-  (pin "HUB2_PE" bidirectional
-    (at 359.41 161.29 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 63b8799d-bf3c-531f-b8a3-b2a1df6770f4)
-  )
-  (pin "HUB2_OC_N" bidirectional
-    (at 359.41 166.37 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 39fbb969-416a-5a72-b4f9-a535cc269472)
-  )
-  (pin "HUB2_SSTX_P" bidirectional
-    (at 359.41 171.45 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid e869f280-c082-58b5-80ee-acb07a0adf2c)
-  )
-  (pin "HUB2_SSTX_N" bidirectional
-    (at 359.41 176.53 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c66e710b-5ac2-56ac-8699-68fad70c58e6)
-  )
-  (pin "HUB2_SSRX_P" bidirectional
-    (at 359.41 181.61 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 259d1761-a9cc-5386-ba64-9feede1c691d)
-  )
-  (pin "HUB2_SSRX_N" bidirectional
-    (at 359.41 186.69 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 81e772de-fb5e-5b84-9ec0-2fcbde2cb6e6)
-  )
-  (pin "HUB2_DP" bidirectional
-    (at 359.41 191.77 0)
-    (effects (font (size 1.27 1.27)) (justify left))
     (uuid ce0061b8-15a9-5e1f-a82b-89caa6e8392c)
   )
-  (pin "HUB2_DM" bidirectional
-    (at 359.41 196.85 0)
+  (pin "MCU_3V3" bidirectional
+    (at 359.41 59.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid f84308b0-f49d-5bc2-83c9-45c55cd6fa30)
   )
-  (pin "TCP0_DDC_SDA" bidirectional
-    (at 359.41 201.93 0)
+  (pin "MU_12V" bidirectional
+    (at 359.41 64.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 66ae848c-d889-5707-ad9a-a816d1a8cabd)
   )
-  (pin "TCP0_DDC_SCL" bidirectional
-    (at 359.41 207.01 0)
+  (pin "MU_PWRBTN_N" bidirectional
+    (at 359.41 69.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 3c1c5f93-6a37-597e-8dc0-7939af84fad1)
   )
-  (pin "TCP0_HPD" bidirectional
-    (at 359.41 212.09 0)
+  (pin "MU_RSTBTN_N" bidirectional
+    (at 359.41 74.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b5f99ad8-f7c2-54bf-9962-800dc0b1e4f2)
   )
-  (pin "TCP0_TX0_P" bidirectional
-    (at 359.41 217.17 0)
+  (pin "MU_S0_HIGH" bidirectional
+    (at 359.41 80.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e852a6cf-517b-524c-b6be-8a32a92f93fc)
   )
-  (pin "TCP0_TX0_N" bidirectional
-    (at 359.41 222.25 0)
+  (pin "MU_HOST_ACTIVE" bidirectional
+    (at 359.41 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e0a50257-eae0-5989-a7c7-0f5b78c20361)
   )
-  (pin "TCP0_TX1_P" bidirectional
-    (at 359.41 227.33 0)
+  (pin "PCIE_3V3" bidirectional
+    (at 359.41 90.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 5f67246d-dcc0-5e0f-bb7c-8e37bb11050e)
   )
-  (pin "TCP0_TX1_N" bidirectional
-    (at 359.41 232.41 0)
+  (pin "INTERNAL_USB_VBUS_VALID" bidirectional
+    (at 359.41 95.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 45d9bde2-0b2b-5a39-a9ec-b179bff1c42c)
   )
-  (pin "TCP0_TXRX0_P" bidirectional
-    (at 359.41 237.49 0)
+  (pin "INTERNAL_USB_VBUS_FAULT_N" bidirectional
+    (at 359.41 100.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 933cf76e-eba2-583f-a071-ca330abab2d4)
   )
-  (pin "TCP0_TXRX0_N" bidirectional
-    (at 359.41 242.57 0)
+  (pin "MU_12V_ENABLE" bidirectional
+    (at 359.41 105.41 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid a9d496c8-f71d-5b3d-ba96-fbbba8a7a173)
   )
-  (pin "TCP0_TXRX1_P" bidirectional
-    (at 359.41 247.65 0)
+  (pin "MU_12V_PG" bidirectional
+    (at 359.41 110.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e8993c6f-6232-52fb-aa02-74901ea8a668)
   )
-  (pin "TCP0_TXRX1_N" bidirectional
-    (at 359.41 252.73 0)
+  (pin "EC_HOST_USB_DP" bidirectional
+    (at 359.41 115.57 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 9c4aaf3e-3cef-5bf8-82bd-0c38b67f8e09)
   )
-  (pin "DDIB_DDC_SDA" bidirectional
-    (at 359.41 257.81 0)
+  (pin "EC_HOST_USB_DM" bidirectional
+    (at 359.41 120.65 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d2555809-c011-5415-bd07-1808e1634e50)
   )
-  (pin "DDIB_DDC_SCL" bidirectional
-    (at 359.41 262.89 0)
+  (pin "AUDIO_USB_DP" bidirectional
+    (at 359.41 125.73 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 6da33d66-4a65-5d60-a644-5aeb06898b2b)
   )
-  (pin "DDIB_HPD" bidirectional
-    (at 359.41 267.97 0)
+  (pin "AUDIO_USB_DM" bidirectional
+    (at 359.41 130.81 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid a7714b15-79f2-51ba-b131-24e12eed8ae7)
   )
-  (pin "DDIB_TX0_P" bidirectional
-    (at 359.41 273.05 0)
+  (pin "TRACKPAD_USB_DP" bidirectional
+    (at 359.41 135.89 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b8f5eaa3-320b-5430-96a8-49568a74a903)
   )
-  (pin "DDIB_TX0_N" bidirectional
-    (at 359.41 278.13 0)
+  (pin "TRACKPAD_USB_DM" bidirectional
+    (at 359.41 140.97 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 97ba86db-5855-5407-9c71-dd53f75a66d5)
   )
-  (pin "DDIB_TX1_P" bidirectional
-    (at 359.41 283.21 0)
+  (pin "MAKER_USB_DP" bidirectional
+    (at 359.41 146.05 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c69a3542-7d19-53a2-843b-4766720f078e)
   )
-  (pin "DDIB_TX1_N" bidirectional
-    (at 359.41 288.29 0)
+  (pin "MAKER_USB_DM" bidirectional
+    (at 359.41 151.13 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b0402477-c3ae-5cb2-a32b-e18d7aa30921)
   )
-  (pin "DDIB_TX2_P" bidirectional
-    (at 359.41 293.37 0)
+  (pin "USBC1_SSTX_P" bidirectional
+    (at 359.41 156.21 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e3c36eee-0081-5fc5-a03a-f698033583b0)
   )
-  (pin "DDIB_TX2_N" bidirectional
-    (at 359.41 298.45 0)
+  (pin "USBC1_SSTX_N" bidirectional
+    (at 359.41 161.29 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid a40f5000-a2ac-505c-80fe-122de95aa36c)
   )
-  (pin "DDIB_TX3_P" bidirectional
-    (at 359.41 303.53 0)
+  (pin "USBC1_SSRX_P" bidirectional
+    (at 359.41 166.37 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 4991c2bf-e0bd-5a80-9f66-206feddc3a9d)
   )
-  (pin "DDIB_TX3_N" bidirectional
-    (at 359.41 308.61 0)
+  (pin "USBC1_SSRX_N" bidirectional
+    (at 359.41 171.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 29102460-b885-53fa-9fa7-0f9209bf0c09)
   )
-  (pin "WIFI_PCIE_TX_P" bidirectional
-    (at 359.41 313.69 0)
+  (pin "USBC1_DP" bidirectional
+    (at 359.41 176.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 146d1f2d-d992-56f3-b37e-c5ff0391c285)
   )
-  (pin "WIFI_PCIE_TX_N" bidirectional
-    (at 359.41 318.77 0)
+  (pin "USBC1_DM" bidirectional
+    (at 359.41 181.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b1ae3af0-231e-5c5f-928a-f6730cc65a9c)
   )
-  (pin "WIFI_PCIE_RX_P" bidirectional
-    (at 359.41 323.85 0)
+  (pin "USBC2_SSTX_P" bidirectional
+    (at 359.41 186.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 6dc68d1a-f84c-5b57-acea-11138c1f9f1e)
   )
-  (pin "WIFI_PCIE_RX_N" bidirectional
-    (at 359.41 328.93 0)
+  (pin "USBC2_SSTX_N" bidirectional
+    (at 359.41 191.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 0095d623-3c74-5192-a276-6813896a8b99)
   )
-  (pin "WIFI_USB_DN" bidirectional
-    (at 359.41 334.01 0)
+  (pin "USBC2_SSRX_P" bidirectional
+    (at 359.41 196.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid a5a24b1b-9776-5425-828e-fcb3e8987dca)
   )
-  (pin "WIFI_USB_DP" bidirectional
-    (at 359.41 339.09 0)
+  (pin "USBC2_SSRX_N" bidirectional
+    (at 359.41 201.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 2b7697c0-2fc4-5d94-af24-9c95bdcbc610)
   )
-  (pin "WIFI_REFCLK_P" bidirectional
-    (at 359.41 344.17 0)
+  (pin "USBC2_DP" bidirectional
+    (at 359.41 207.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 7cc9275b-d87d-573c-9607-698345ac0065)
   )
-  (pin "WIFI_REFCLK_N" bidirectional
-    (at 359.41 349.25 0)
+  (pin "USBC2_DM" bidirectional
+    (at 359.41 212.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 0a86ff28-643f-5722-b9a7-fbb87725357c)
   )
-  (pin "WIFI_CLKREQ_N" bidirectional
-    (at 359.41 354.33 0)
+  (pin "MU_USB_OC_N" bidirectional
+    (at 359.41 217.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid dd16d23a-0c0b-5915-9873-68bc377dce62)
   )
-  (pin "PCIE_WAKE_N" bidirectional
-    (at 359.41 359.41 0)
+  (pin "TCP0_DDC_SDA" bidirectional
+    (at 359.41 222.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 203132e3-dd84-5498-82a9-36e503fafac7)
   )
-  (pin "PLTRST_SRC_N" bidirectional
-    (at 359.41 364.49 0)
+  (pin "TCP0_DDC_SCL" bidirectional
+    (at 359.41 227.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 02962d42-ed24-5c92-8dca-fae6834927f4)
   )
+  (pin "TCP0_HPD" bidirectional
+    (at 359.41 232.41 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e937ead4-5ae6-5bb0-89ec-a6199d9b1bbf)
+  )
+  (pin "TCP0_TX0_P" bidirectional
+    (at 359.41 237.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid cf23c51b-c2a2-59e2-ab17-65a98dc44811)
+  )
+  (pin "TCP0_TX0_N" bidirectional
+    (at 359.41 242.57 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d416c52c-a8fc-5ac6-9113-88418f4ce931)
+  )
+  (pin "TCP0_TX1_P" bidirectional
+    (at 359.41 247.65 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e72d5b81-9518-5872-96c8-1d6f72c0403e)
+  )
+  (pin "TCP0_TX1_N" bidirectional
+    (at 359.41 252.73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid df861bec-f90b-52f5-87ca-1cd8ba8725e1)
+  )
+  (pin "TCP0_TXRX0_P" bidirectional
+    (at 359.41 257.81 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 20ac008b-86cb-58bf-b177-0fe34e606779)
+  )
+  (pin "TCP0_TXRX0_N" bidirectional
+    (at 359.41 262.89 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 8f001875-ef70-5d12-a97a-2f92317c9f06)
+  )
+  (pin "TCP0_TXRX1_P" bidirectional
+    (at 359.41 267.97 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 74f6b9f0-f667-548c-a242-1de747d81bee)
+  )
+  (pin "TCP0_TXRX1_N" bidirectional
+    (at 359.41 273.05 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 0dad4871-2c4b-5430-a3a0-ec8f032243e0)
+  )
+  (pin "WIFI_PCIE_TX_P" bidirectional
+    (at 359.41 278.13 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid cfecd829-64e9-5e54-9cb1-c8a056d0d63b)
+  )
+  (pin "WIFI_PCIE_TX_N" bidirectional
+    (at 359.41 283.21 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 89b359f2-4cba-58aa-9645-71329ca97e9a)
+  )
+  (pin "WIFI_PCIE_RX_P" bidirectional
+    (at 359.41 288.29 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 1b4df70c-119b-5059-868a-d5a3369c7f42)
+  )
+  (pin "WIFI_PCIE_RX_N" bidirectional
+    (at 359.41 293.37 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 83ac5281-9b3a-5f5b-87c5-2d3641c19e66)
+  )
+  (pin "WIFI_USB_DN" bidirectional
+    (at 359.41 298.45 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 49bfc56b-413d-5ac3-b075-fb772887173d)
+  )
+  (pin "WIFI_USB_DP" bidirectional
+    (at 359.41 303.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid b07ffc77-c1ad-5948-8c5f-e36e950f48be)
+  )
+  (pin "WIFI_REFCLK_P" bidirectional
+    (at 359.41 308.61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9c5044cc-8d27-55eb-b162-3d3cd8847321)
+  )
+  (pin "WIFI_REFCLK_N" bidirectional
+    (at 359.41 313.69 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 213dfa48-f876-52a8-989c-2f27ecd0c8b0)
+  )
+  (pin "WIFI_CLKREQ_N" bidirectional
+    (at 359.41 318.77 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 39e3003f-1e7b-51fa-a6f5-1ec8bf513f6b)
+  )
+  (pin "PCIE_WAKE_N" bidirectional
+    (at 359.41 323.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid c9efc57b-79a4-5d0d-ad25-536dd38fc4b1)
+  )
+  (pin "PLTRST_SRC_N" bidirectional
+    (at 359.41 328.93 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f61d88a9-25a3-5227-9f8a-30b67a1edc97)
+  )
+  (pin "GBE_HOST_TX_P" bidirectional
+    (at 359.41 334.01 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 42c42b99-a728-5d81-bbc2-1594da05955b)
+  )
+  (pin "GBE_HOST_TX_N" bidirectional
+    (at 359.41 339.09 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7627c2db-9cb3-5ffd-8e8e-1ac89608a39e)
+  )
+  (pin "GBE_HOST_RX_P" bidirectional
+    (at 359.41 344.17 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid a6d100e8-13b6-5515-9bd5-71dde46c43dc)
+  )
+  (pin "GBE_HOST_RX_N" bidirectional
+    (at 359.41 349.25 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6ab199a4-bd5c-5230-a1a1-24100e5d160a)
+  )
+  (pin "GBE_REFCLK_P" bidirectional
+    (at 359.41 354.33 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 0850e7ef-bda4-51ee-b7b7-aaa716a809fa)
+  )
+  (pin "GBE_REFCLK_N" bidirectional
+    (at 359.41 359.41 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid fbb08dae-2f84-54fd-af87-aa23d3a30515)
+  )
+  (pin "GBE_CLKREQ_N" bidirectional
+    (at 359.41 364.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7dd92c9d-8cdc-5df0-beb1-7536ca05a44a)
+  )
 )
 (sheet
-  (at 30.48 149.86)
+  (at 30.48 199.39)
   (size 90.17 124.46)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 30db74da-1f83-533d-806d-fc7ae010cbe5)
-  (property "Sheetname" "USB-C Hub I/O"
-    (at 30.48 148.59 0)
+  (property "Sheetname" "Native USB-C I/O"
+    (at 30.48 198.12 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
   )
   (property "Sheetfile" "04_usb_c_io.kicad_sch"
-    (at 30.48 275.59 0)
+    (at 30.48 325.12 0)
     (effects (font (size 1.27 1.27)) (justify left top))
   )
   (pin "SYS_5V" bidirectional
-    (at 120.65 154.94 0)
+    (at 120.65 204.47 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid e937ead4-5ae6-5bb0-89ec-a6199d9b1bbf)
+    (uuid 4ffb11a0-baf6-5a36-9a94-2e33d0575a04)
   )
   (pin "SYS_3V3" bidirectional
-    (at 120.65 160.02 0)
+    (at 120.65 209.55 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid cf23c51b-c2a2-59e2-ab17-65a98dc44811)
+    (uuid 6ec4612a-3eeb-535c-b426-65c67da55a83)
   )
-  (pin "HUB1_PE" bidirectional
-    (at 120.65 165.1 0)
+  (pin "MU_HOST_ACTIVE" bidirectional
+    (at 120.65 214.63 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d416c52c-a8fc-5ac6-9113-88418f4ce931)
+    (uuid d594cb6e-b8bb-5699-ab85-2f5323d38095)
   )
-  (pin "HUB1_OC_N" bidirectional
-    (at 120.65 170.18 0)
+  (pin "MU_USB_OC_N" bidirectional
+    (at 120.65 219.71 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid e72d5b81-9518-5872-96c8-1d6f72c0403e)
+    (uuid ad2571d7-3282-57b1-9172-b80dd6b24496)
   )
-  (pin "HUB1_SSTX_P" bidirectional
-    (at 120.65 175.26 0)
+  (pin "USBC1_SSTX_P" bidirectional
+    (at 120.65 224.79 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid df861bec-f90b-52f5-87ca-1cd8ba8725e1)
+    (uuid 4336a6ae-9d36-59f5-ba75-ac19f7cce758)
   )
-  (pin "HUB1_SSTX_N" bidirectional
-    (at 120.65 180.34 0)
+  (pin "USBC1_SSTX_N" bidirectional
+    (at 120.65 229.87 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 20ac008b-86cb-58bf-b177-0fe34e606779)
+    (uuid 23792283-d364-5dd9-8616-a968b9eb1f40)
   )
-  (pin "HUB1_SSRX_P" bidirectional
-    (at 120.65 185.42 0)
+  (pin "USBC1_SSRX_P" bidirectional
+    (at 120.65 234.95 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 8f001875-ef70-5d12-a97a-2f92317c9f06)
+    (uuid e36cd036-4336-5ce9-9f43-997899e7653c)
   )
-  (pin "HUB1_SSRX_N" bidirectional
-    (at 120.65 190.5 0)
+  (pin "USBC1_SSRX_N" bidirectional
+    (at 120.65 240.03 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 74f6b9f0-f667-548c-a242-1de747d81bee)
+    (uuid 0baefde2-2c2d-528e-8679-8b1464dcab12)
   )
-  (pin "HUB1_DP" bidirectional
-    (at 120.65 195.58 0)
+  (pin "USBC1_DP" bidirectional
+    (at 120.65 245.11 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0dad4871-2c4b-5430-a3a0-ec8f032243e0)
+    (uuid 1dfeb7a9-2534-55b4-9ff6-e6e8bc8d75bc)
   )
-  (pin "HUB1_DM" bidirectional
-    (at 120.65 200.66 0)
+  (pin "USBC1_DM" bidirectional
+    (at 120.65 250.19 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid cfecd829-64e9-5e54-9cb1-c8a056d0d63b)
+    (uuid cfceea97-d13f-5ef0-942c-64ece75c20f8)
   )
-  (pin "HUB2_PE" bidirectional
-    (at 120.65 205.74 0)
+  (pin "USBC2_SSTX_P" bidirectional
+    (at 120.65 255.27 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 89b359f2-4cba-58aa-9645-71329ca97e9a)
+    (uuid ab0d811d-73f0-50e3-8cee-c8993a9fef5d)
   )
-  (pin "HUB2_OC_N" bidirectional
-    (at 120.65 210.82 0)
+  (pin "USBC2_SSTX_N" bidirectional
+    (at 120.65 260.35 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 1b4df70c-119b-5059-868a-d5a3369c7f42)
+    (uuid 1ba5bd85-b641-5446-a8ec-a0b543b90be5)
   )
-  (pin "HUB2_SSTX_P" bidirectional
-    (at 120.65 215.9 0)
+  (pin "USBC2_SSRX_P" bidirectional
+    (at 120.65 265.43 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 83ac5281-9b3a-5f5b-87c5-2d3641c19e66)
+    (uuid 1c81a0f0-d6b4-52e7-a626-82d2ad2b07d5)
   )
-  (pin "HUB2_SSTX_N" bidirectional
-    (at 120.65 220.98 0)
+  (pin "USBC2_SSRX_N" bidirectional
+    (at 120.65 270.51 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 49bfc56b-413d-5ac3-b075-fb772887173d)
+    (uuid ea83045c-6bc3-5d01-b6b8-7f4006124ea6)
   )
-  (pin "HUB2_SSRX_P" bidirectional
-    (at 120.65 226.06 0)
+  (pin "USBC2_DP" bidirectional
+    (at 120.65 275.59 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid b07ffc77-c1ad-5948-8c5f-e36e950f48be)
+    (uuid fd53b954-4541-5b58-8f3e-81c635f56785)
   )
-  (pin "HUB2_SSRX_N" bidirectional
-    (at 120.65 231.14 0)
+  (pin "USBC2_DM" bidirectional
+    (at 120.65 280.67 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9c5044cc-8d27-55eb-b162-3d3cd8847321)
-  )
-  (pin "HUB2_DP" bidirectional
-    (at 120.65 236.22 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 213dfa48-f876-52a8-989c-2f27ecd0c8b0)
-  )
-  (pin "HUB2_DM" bidirectional
-    (at 120.65 241.3 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 39e3003f-1e7b-51fa-a6f5-1ec8bf513f6b)
+    (uuid edcf26bf-5636-5e6c-8d60-0e090630868b)
   )
 )
 (sheet
-  (at 30.48 299.72)
-  (size 90.17 59.69)
+  (at 549.91 500.38)
+  (size 90.17 139.7)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid ecc991b5-12ab-53c3-80f1-080be4d1146d)
   (property "Sheetname" "Power Inputs"
-    (at 30.48 298.45 0)
+    (at 549.91 499.11 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
   )
   (property "Sheetfile" "05_power_inputs.kicad_sch"
-    (at 30.48 360.68 0)
+    (at 549.91 641.35 0)
     (effects (font (size 1.27 1.27)) (justify left top))
   )
-  (pin "VBUS_PD1" bidirectional
-    (at 120.65 304.8 0)
+  (pin "MCU_3V3" bidirectional
+    (at 640.08 505.46 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c9efc57b-79a4-5d0d-ad25-536dd38fc4b1)
+    (uuid dfacfdd3-6591-559e-9458-be299193c868)
   )
-  (pin "VBUS_PD2" bidirectional
-    (at 120.65 309.88 0)
+  (pin "USB_PD_SELECTED" bidirectional
+    (at 640.08 510.54 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid f61d88a9-25a3-5227-9f8a-30b67a1edc97)
+    (uuid 98f52ba8-55b9-57eb-ab30-ba7d0e256db6)
   )
-  (pin "VBUS_PD3" bidirectional
-    (at 120.65 314.96 0)
+  (pin "PD1_VALID_N" bidirectional
+    (at 640.08 515.62 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 42c42b99-a728-5d81-bbc2-1594da05955b)
+    (uuid 12008195-fad0-5b2d-9dd4-7999ae3cec06)
   )
-  (pin "USB_DP1" bidirectional
-    (at 120.65 320.04 0)
+  (pin "PD2_VALID_N" bidirectional
+    (at 640.08 520.7 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7627c2db-9cb3-5ffd-8e8e-1ac89608a39e)
+    (uuid 9a9ccb77-418b-510e-af0e-e6be98d25834)
   )
-  (pin "USB_DM1" bidirectional
-    (at 120.65 325.12 0)
+  (pin "PD3_VALID_N" bidirectional
+    (at 640.08 525.78 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid a6d100e8-13b6-5515-9bd5-71dde46c43dc)
+    (uuid 8e405b5a-d23f-55d0-8ffb-ec1f61ad4f64)
+  )
+  (pin "PD1_VBUS_RAW" bidirectional
+    (at 640.08 530.86 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid ef5a6605-32c8-55da-93f7-d50a08399ee5)
+  )
+  (pin "PD2_VBUS_RAW" bidirectional
+    (at 640.08 535.94 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f3d22c15-1620-53ee-9a5c-3e2988af9041)
+  )
+  (pin "PD3_VBUS_RAW" bidirectional
+    (at 640.08 541.02 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 62bd9954-b502-52ea-80e9-d18ceff7c350)
+  )
+  (pin "PD1_PATH_EN" bidirectional
+    (at 640.08 546.1 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid fabdcbab-c3d2-506b-9f36-bdcc52643607)
+  )
+  (pin "PD2_PATH_EN" bidirectional
+    (at 640.08 551.18 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid a6258002-2630-59e5-9fa4-cf72268859a4)
+  )
+  (pin "PD3_PATH_EN" bidirectional
+    (at 640.08 556.26 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d8a768a9-884a-500c-a7ec-0823cb18bc9f)
+  )
+  (pin "PD1_EFUSE_FAULT_N" bidirectional
+    (at 640.08 561.34 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 71d39096-bbea-513b-85d1-33b8d048b93b)
+  )
+  (pin "PD2_EFUSE_FAULT_N" bidirectional
+    (at 640.08 566.42 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d1ea69a9-2e43-5132-be3f-6ea7704ab047)
+  )
+  (pin "PD3_EFUSE_FAULT_N" bidirectional
+    (at 640.08 571.5 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 078c79bb-5609-58e5-b31e-49933dab85f5)
+  )
+  (pin "PD1_I2C_SCL" bidirectional
+    (at 640.08 576.58 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 96bdbb41-9cc8-5e79-b443-75d060376922)
+  )
+  (pin "PD1_I2C_SDA" bidirectional
+    (at 640.08 581.66 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid c060ba2a-7404-5f11-a47e-c6f1e6354895)
+  )
+  (pin "PD2_I2C_SCL" bidirectional
+    (at 640.08 586.74 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid a7ebbc5a-5e49-54cd-a935-16147f1fdba6)
+  )
+  (pin "PD2_I2C_SDA" bidirectional
+    (at 640.08 591.82 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid cd1ca893-05b5-5add-9e6f-a4475751f60f)
+  )
+  (pin "PD3_I2C_SCL" bidirectional
+    (at 640.08 596.9 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 50df55fe-0293-5282-9653-1bdb1865d032)
+  )
+  (pin "PD3_I2C_SDA" bidirectional
+    (at 640.08 601.98 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 40b5ee98-dbdb-5d48-9304-fe796f915cb4)
   )
 )
 (sheet
@@ -963,62 +1163,72 @@
   (pin "SYS_5V" bidirectional
     (at 525.78 44.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6ab199a4-bd5c-5230-a1a1-24100e5d160a)
+    (uuid 1c0d8aab-06e8-5e2f-86c4-e7ad42987760)
   )
-  (pin "TCP0_HPD" bidirectional
+  (pin "SYS_3V3" bidirectional
     (at 525.78 49.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0850e7ef-bda4-51ee-b7b7-aaa716a809fa)
+    (uuid 5b5abf95-540d-5304-a97a-9575644cf22b)
   )
-  (pin "TCP0_DDC_SDA" bidirectional
+  (pin "MU_HOST_ACTIVE" bidirectional
     (at 525.78 54.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid fbb08dae-2f84-54fd-af87-aa23d3a30515)
+    (uuid b72594fe-6997-516d-8809-34e62cb2990b)
   )
-  (pin "TCP0_DDC_SCL" bidirectional
+  (pin "TCP0_HPD" bidirectional
     (at 525.78 59.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7dd92c9d-8cdc-5df0-beb1-7536ca05a44a)
+    (uuid 7ec74e87-b2ba-5625-80d8-d376622015d0)
   )
-  (pin "TCP0_TX0_P" bidirectional
+  (pin "TCP0_DDC_SDA" bidirectional
     (at 525.78 64.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 4ffb11a0-baf6-5a36-9a94-2e33d0575a04)
+    (uuid 7d8091cc-fe00-55a2-aa70-42d8c167db96)
   )
-  (pin "TCP0_TX0_N" bidirectional
+  (pin "TCP0_DDC_SCL" bidirectional
     (at 525.78 69.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6ec4612a-3eeb-535c-b426-65c67da55a83)
+    (uuid d9916f0f-84d9-593b-a056-763c91dc79f9)
   )
-  (pin "TCP0_TX1_P" bidirectional
+  (pin "TCP0_TX0_P" bidirectional
     (at 525.78 74.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d594cb6e-b8bb-5699-ab85-2f5323d38095)
+    (uuid 2fae26df-0311-5e96-a601-e3014edfcfc8)
   )
-  (pin "TCP0_TX1_N" bidirectional
+  (pin "TCP0_TX0_N" bidirectional
     (at 525.78 80.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid ad2571d7-3282-57b1-9172-b80dd6b24496)
+    (uuid 54d6a6cd-8778-5d0d-9d32-b1a7519760ee)
   )
-  (pin "TCP0_TXRX0_P" bidirectional
+  (pin "TCP0_TX1_P" bidirectional
     (at 525.78 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 4336a6ae-9d36-59f5-ba75-ac19f7cce758)
+    (uuid 49e91e6a-e1d8-53a7-884c-bb34eddb23f3)
   )
-  (pin "TCP0_TXRX0_N" bidirectional
+  (pin "TCP0_TX1_N" bidirectional
     (at 525.78 90.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 23792283-d364-5dd9-8616-a968b9eb1f40)
+    (uuid 88df2052-004c-51f6-8754-2b7a0cb12faf)
   )
-  (pin "TCP0_TXRX1_P" bidirectional
+  (pin "TCP0_TXRX0_P" bidirectional
     (at 525.78 95.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid e36cd036-4336-5ce9-9f43-997899e7653c)
+    (uuid c96321a6-521e-5dce-ac30-bf9af1186363)
   )
-  (pin "TCP0_TXRX1_N" bidirectional
+  (pin "TCP0_TXRX0_N" bidirectional
     (at 525.78 100.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0baefde2-2c2d-528e-8679-8b1464dcab12)
+    (uuid a30344b0-9534-5e96-aea8-493590df0e9d)
+  )
+  (pin "TCP0_TXRX1_P" bidirectional
+    (at 525.78 105.41 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 0f5db673-010b-5a49-93c2-b4b2d63bbdac)
+  )
+  (pin "TCP0_TXRX1_N" bidirectional
+    (at 525.78 110.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 85afb8fb-1593-5c5d-aa49-825c569d19d9)
   )
 )
 (sheet
@@ -1035,125 +1245,155 @@
     (at 30.48 535.94 0)
     (effects (font (size 1.27 1.27)) (justify left top))
   )
-  (pin "SYS_3V3" bidirectional
+  (pin "PCIE_3V3" bidirectional
     (at 135.89 384.81 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 1dfeb7a9-2534-55b4-9ff6-e6e8bc8d75bc)
+    (uuid 641e740c-2174-5f05-aa14-1bc25061321b)
   )
   (pin "MCU_3V3" bidirectional
     (at 135.89 389.89 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid cfceea97-d13f-5ef0-942c-64ece75c20f8)
+    (uuid 54da9e5a-1d86-507b-8e6a-50c436fedad3)
   )
   (pin "I2C_SCL" bidirectional
     (at 135.89 394.97 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid ab0d811d-73f0-50e3-8cee-c8993a9fef5d)
+    (uuid 14b9345b-3f23-52ca-aab0-35b76cdee907)
   )
   (pin "I2C_SDA" bidirectional
     (at 135.89 400.05 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 1ba5bd85-b641-5446-a8ec-a0b543b90be5)
+    (uuid 47187b36-9cb7-53cf-9a00-782084d2ea45)
   )
   (pin "WIFI_PCIE_TX_P" bidirectional
     (at 135.89 405.13 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 1c81a0f0-d6b4-52e7-a626-82d2ad2b07d5)
+    (uuid 2483d449-3127-57be-a809-6ada4eb7f958)
   )
   (pin "WIFI_PCIE_TX_N" bidirectional
     (at 135.89 410.21 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid ea83045c-6bc3-5d01-b6b8-7f4006124ea6)
+    (uuid c5675151-ba90-5dd3-bbfb-93b7380d9e17)
   )
   (pin "WIFI_PCIE_RX_P" bidirectional
     (at 135.89 415.29 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid fd53b954-4541-5b58-8f3e-81c635f56785)
+    (uuid 4656e071-23b6-536a-9999-81be48beaed9)
   )
   (pin "WIFI_PCIE_RX_N" bidirectional
     (at 135.89 420.37 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid edcf26bf-5636-5e6c-8d60-0e090630868b)
+    (uuid dbf76de9-33de-5cfa-96b1-88c8f54dfc88)
   )
   (pin "WIFI_USB_DN" bidirectional
     (at 135.89 425.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid dfacfdd3-6591-559e-9458-be299193c868)
+    (uuid 71559b57-f385-5d1c-8662-1f2d1835d41f)
   )
   (pin "WIFI_USB_DP" bidirectional
     (at 135.89 430.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 98f52ba8-55b9-57eb-ab30-ba7d0e256db6)
+    (uuid 793002f5-f6fb-55a3-a987-de5a8aee3dbb)
   )
   (pin "WIFI_REFCLK_P" bidirectional
     (at 135.89 435.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 12008195-fad0-5b2d-9dd4-7999ae3cec06)
+    (uuid cde10dcd-192e-51c6-b7b0-70a053f5b500)
   )
   (pin "WIFI_REFCLK_N" bidirectional
     (at 135.89 440.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9a9ccb77-418b-510e-af0e-e6be98d25834)
+    (uuid 82a2ce7a-37ad-54f9-b381-6069a0a605e2)
   )
   (pin "WIFI_CLKREQ_N" bidirectional
     (at 135.89 445.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 8e405b5a-d23f-55d0-8ffb-ec1f61ad4f64)
+    (uuid 459849be-195a-5f1d-9784-d94164acfa16)
   )
   (pin "PCIE_WAKE_N" bidirectional
     (at 135.89 450.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid ef5a6605-32c8-55da-93f7-d50a08399ee5)
+    (uuid 11bea817-f931-5572-a793-b3ba80c2bb20)
   )
   (pin "PLTRST_SRC_N" bidirectional
     (at 135.89 455.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid f3d22c15-1620-53ee-9a5c-3e2988af9041)
+    (uuid 3fc10b26-7c12-5df3-a6b0-0bb358508fec)
   )
-  (pin "WIFI_W_DISABLE1_N" bidirectional
+  (pin "WIFI_W_DISABLE1_N_EC" bidirectional
     (at 135.89 461.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 62bd9954-b502-52ea-80e9-d18ceff7c350)
+    (uuid 2fff5b95-58e2-5507-bc32-eef5c116eb8a)
   )
-  (pin "WIFI_W_DISABLE2_N" bidirectional
+  (pin "WIFI_W_DISABLE2_N_EC" bidirectional
     (at 135.89 466.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid fabdcbab-c3d2-506b-9f36-bdcc52643607)
+    (uuid bce66db8-a4ed-5e45-8678-39433f93cc9e)
   )
-  (pin "OLED_RESET_N" bidirectional
+  (pin "SERVICE_MUX_RESET_N" bidirectional
     (at 135.89 471.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid a6258002-2630-59e5-9fa4-cf72268859a4)
+    (uuid ca6143e1-1b57-572d-9baf-89b8d0a15f5e)
   )
   (pin "GNSS_UART_RX" bidirectional
     (at 135.89 476.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d8a768a9-884a-500c-a7ec-0823cb18bc9f)
+    (uuid a6788418-5de8-54ad-b3ae-e7eb0939df6e)
   )
   (pin "GNSS_UART_TX" bidirectional
     (at 135.89 481.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 71d39096-bbea-513b-85d1-33b8d048b93b)
+    (uuid dc9f4185-953f-5b3d-b792-1df9cd7a8aa5)
   )
   (pin "GNSS_RESET_N" bidirectional
     (at 135.89 486.41 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d1ea69a9-2e43-5132-be3f-6ea7704ab047)
+    (uuid 9550f087-5974-5a98-9c97-75b5f582286b)
   )
   (pin "GNSS_PPS" bidirectional
     (at 135.89 491.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 078c79bb-5609-58e5-b31e-49933dab85f5)
+    (uuid 0fe7fa08-d514-549d-8088-0b85acc0055d)
   )
   (pin "GNSS_EXTINT" bidirectional
     (at 135.89 496.57 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 96bdbb41-9cc8-5e79-b443-75d060376922)
+    (uuid c8acecfd-f2aa-54ff-891a-225ed1dd854a)
   )
   (pin "RADIO_GPIO0" bidirectional
     (at 135.89 501.65 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c060ba2a-7404-5f11-a47e-c6f1e6354895)
+    (uuid 4f3c514b-f51c-5da7-8c00-2d69a07d011b)
+  )
+  (pin "PD1_I2C_SCL" bidirectional
+    (at 135.89 506.73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9a8a7f10-50be-5927-9e43-c0249c9a1855)
+  )
+  (pin "PD1_I2C_SDA" bidirectional
+    (at 135.89 511.81 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 25de7f89-db17-5132-9234-f2034c1686a2)
+  )
+  (pin "PD2_I2C_SCL" bidirectional
+    (at 135.89 516.89 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 0586e057-748c-5e1a-ad91-1b9f1b3f3bc8)
+  )
+  (pin "PD2_I2C_SDA" bidirectional
+    (at 135.89 521.97 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7886b73f-3cfa-5cf6-8f38-c3b747e6570a)
+  )
+  (pin "PD3_I2C_SCL" bidirectional
+    (at 135.89 527.05 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 592772f3-01d3-5d12-8d54-60009c831d48)
+  )
+  (pin "PD3_I2C_SDA" bidirectional
+    (at 135.89 532.13 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 16cd99cd-b83a-5438-80e6-e03a614a8bde)
   )
 )
 (sheet
@@ -1173,132 +1413,92 @@
   (pin "SYS_5V" bidirectional
     (at 405.13 394.97 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid a7ebbc5a-5e49-54cd-a935-16147f1fdba6)
+    (uuid 62a1cbc7-7341-5a07-809e-82826c337b09)
   )
   (pin "SYS_3V3" bidirectional
     (at 405.13 400.05 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid cd1ca893-05b5-5add-9e6f-a4475751f60f)
+    (uuid c9f8c68c-def1-53ac-8726-486a9bcf9d05)
   )
   (pin "MCU_3V3" bidirectional
     (at 405.13 405.13 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 50df55fe-0293-5282-9653-1bdb1865d032)
+    (uuid 3cfb99d8-e594-5666-9645-bd00e3cbe599)
   )
-  (pin "I2C_SCL" bidirectional
+  (pin "MU_12V" bidirectional
     (at 405.13 410.21 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 40b5ee98-dbdb-5d48-9304-fe796f915cb4)
+    (uuid 6f413229-9a86-51a9-9f7b-967124c4787b)
   )
-  (pin "I2C_SDA" bidirectional
+  (pin "MU_HOST_ACTIVE" bidirectional
     (at 405.13 415.29 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 1c0d8aab-06e8-5e2f-86c4-e7ad42987760)
+    (uuid 7d682c8b-a98f-5ee8-a32e-2b5448374e58)
   )
-  (pin "EC_HOST_USB_DP" bidirectional
+  (pin "INTERNAL_USB_VBUS_VALID" bidirectional
     (at 405.13 420.37 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 5b5abf95-540d-5304-a97a-9575644cf22b)
+    (uuid a079067b-1a32-5527-a33d-074ec8aa066c)
   )
-  (pin "EC_HOST_USB_DM" bidirectional
+  (pin "EC_HOST_USB_DP" bidirectional
     (at 405.13 425.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid b72594fe-6997-516d-8809-34e62cb2990b)
+    (uuid 8a438728-3ec3-5d8c-8b9e-280e210e27eb)
   )
-  (pin "MCU_USB_DP" bidirectional
+  (pin "EC_HOST_USB_DM" bidirectional
     (at 405.13 430.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7ec74e87-b2ba-5625-80d8-d376622015d0)
+    (uuid 78d73cc7-a772-5074-82d9-8bfcfe1e3be6)
   )
-  (pin "MCU_USB_DM" bidirectional
+  (pin "MCU_USB_DP" bidirectional
     (at 405.13 435.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7d8091cc-fe00-55a2-aa70-42d8c167db96)
+    (uuid bc73e40f-684e-5f97-92f9-ee89311086c6)
   )
-  (pin "TOUCH_USB_DP" bidirectional
+  (pin "MCU_USB_DM" bidirectional
     (at 405.13 440.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d9916f0f-84d9-593b-a056-763c91dc79f9)
-  )
-  (pin "TOUCH_USB_DM" bidirectional
-    (at 405.13 445.77 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 2fae26df-0311-5e96-a601-e3014edfcfc8)
-  )
-  (pin "TOUCH_RESET_N" bidirectional
-    (at 405.13 450.85 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 54d6a6cd-8778-5d0d-9d32-b1a7519760ee)
-  )
-  (pin "TOUCH_INT_N" bidirectional
-    (at 405.13 455.93 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 49e91e6a-e1d8-53a7-884c-bb34eddb23f3)
+    (uuid 1bba4fea-26d3-529c-802d-6529d3fbce55)
   )
   (pin "TRACKPAD_USB_DP" bidirectional
-    (at 405.13 461.01 0)
+    (at 405.13 445.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 88df2052-004c-51f6-8754-2b7a0cb12faf)
+    (uuid f6ebd416-2c77-5c11-8e6e-c0ab5b3836ae)
   )
   (pin "TRACKPAD_USB_DM" bidirectional
-    (at 405.13 466.09 0)
+    (at 405.13 450.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c96321a6-521e-5dce-ac30-bf9af1186363)
-  )
-  (pin "TPAD_RESET_N" bidirectional
-    (at 405.13 471.17 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid a30344b0-9534-5e96-aea8-493590df0e9d)
-  )
-  (pin "TPAD_INT_N" bidirectional
-    (at 405.13 476.25 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0f5db673-010b-5a49-93c2-b4b2d63bbdac)
+    (uuid 8a39bad8-f535-5c2a-a19f-ed6daf88e225)
   )
   (pin "FAN_PWM" bidirectional
-    (at 405.13 481.33 0)
+    (at 405.13 455.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 85afb8fb-1593-5c5d-aa49-825c569d19d9)
+    (uuid bd608472-f253-5961-a093-5d228073e9be)
   )
   (pin "FAN_TACH" bidirectional
-    (at 405.13 486.41 0)
+    (at 405.13 461.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 641e740c-2174-5f05-aa14-1bc25061321b)
-  )
-  (pin "LCD_BL_PWM" bidirectional
-    (at 405.13 491.49 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 54da9e5a-1d86-507b-8e6a-50c436fedad3)
-  )
-  (pin "LCD_BL_EN" bidirectional
-    (at 405.13 496.57 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 14b9345b-3f23-52ca-aab0-35b76cdee907)
+    (uuid 41891919-1a16-5b86-8eb3-d332dce9c949)
   )
   (pin "LID_CLOSED_N" bidirectional
-    (at 405.13 501.65 0)
+    (at 405.13 466.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 47187b36-9cb7-53cf-9a00-782084d2ea45)
+    (uuid eabc32b3-96f7-5aa5-a210-b6619ef5d333)
   )
   (pin "THERM_SKIN_ADC" bidirectional
-    (at 405.13 506.73 0)
+    (at 405.13 471.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 2483d449-3127-57be-a809-6ada4eb7f958)
+    (uuid 50a1f4c5-0238-5817-85c0-f44b84ccb6e4)
   )
   (pin "THERM_MU_ADC" bidirectional
-    (at 405.13 511.81 0)
+    (at 405.13 476.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c5675151-ba90-5dd3-bbfb-93b7380d9e17)
+    (uuid 47664d48-2c67-529e-8019-4acc05c13bd3)
   )
-  (pin "PANEL_PWR_EN" bidirectional
-    (at 405.13 516.89 0)
+  (pin "TRACKPAD_FAULT_N" bidirectional
+    (at 405.13 481.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 4656e071-23b6-536a-9999-81be48beaed9)
-  )
-  (pin "PANEL_RESET_N" bidirectional
-    (at 405.13 521.97 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid dbf76de9-33de-5cfa-96b1-88c8f54dfc88)
+    (uuid ea9f7382-d9c9-59fd-b23a-b86c75c3397a)
   )
 )
 (sheet
@@ -1318,262 +1518,102 @@
   (pin "SYS_5V" bidirectional
     (at 535.94 224.79 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 71559b57-f385-5d1c-8662-1f2d1835d41f)
+    (uuid 5f3a59d2-cee2-516b-a465-fe30f11eaa4d)
   )
   (pin "MCU_3V3" bidirectional
     (at 535.94 229.87 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 793002f5-f6fb-55a3-a987-de5a8aee3dbb)
+    (uuid dd110041-3eb0-59c5-938d-d3509d6e9c6c)
   )
   (pin "RADIO_VHF_UART_TX" bidirectional
     (at 535.94 234.95 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid cde10dcd-192e-51c6-b7b0-70a053f5b500)
+    (uuid c4f36b81-0f81-5067-88bd-85f3e8914cd8)
   )
   (pin "RADIO_VHF_UART_RX" bidirectional
     (at 535.94 240.03 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 82a2ce7a-37ad-54f9-b381-6069a0a605e2)
+    (uuid 8670d7b9-6a9f-5a3a-9ee7-802bfcb7d953)
   )
   (pin "RADIO_UHF_UART_TX" bidirectional
     (at 535.94 245.11 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 459849be-195a-5f1d-9784-d94164acfa16)
+    (uuid aaa6e16e-609b-5293-a301-4ba9fdea90e7)
   )
   (pin "RADIO_UHF_UART_RX" bidirectional
     (at 535.94 250.19 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 11bea817-f931-5572-a793-b3ba80c2bb20)
+    (uuid e6c2c2aa-f64a-5919-ba20-00f3512edd22)
   )
   (pin "RADIO_VHF_PTT_N" bidirectional
     (at 535.94 255.27 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 3fc10b26-7c12-5df3-a6b0-0bb358508fec)
+    (uuid 9ccb651d-c44e-5b03-abd5-6fd002e4e41f)
   )
   (pin "RADIO_UHF_PTT_N" bidirectional
     (at 535.94 260.35 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 2fff5b95-58e2-5507-bc32-eef5c116eb8a)
+    (uuid b7cd7fac-58ce-5536-aed8-8380a99748f8)
   )
   (pin "RADIO_VHF_PD_N" bidirectional
     (at 535.94 265.43 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid bce66db8-a4ed-5e45-8678-39433f93cc9e)
+    (uuid 1d6b026c-3958-5804-8327-e8f96aa7159c)
   )
   (pin "RADIO_UHF_PD_N" bidirectional
     (at 535.94 270.51 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid ca6143e1-1b57-572d-9baf-89b8d0a15f5e)
+    (uuid 49934924-2080-5254-b6eb-5809bf07949f)
   )
   (pin "RADIO_VHF_SQL" bidirectional
     (at 535.94 275.59 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid a6788418-5de8-54ad-b3ae-e7eb0939df6e)
+    (uuid 75ac0f0b-d0d1-563f-958d-e25eaaeafbf9)
   )
   (pin "RADIO_UHF_SQL" bidirectional
     (at 535.94 280.67 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid dc9f4185-953f-5b3d-b792-1df9cd7a8aa5)
+    (uuid 883862e0-b237-57f4-8c8a-72f758637d5e)
   )
-  (pin "RADIO_VHF_RF_SEL" bidirectional
+  (pin "RADIO_VHF_RF_SEL_3V3" bidirectional
     (at 535.94 285.75 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9550f087-5974-5a98-9c97-75b5f582286b)
+    (uuid 6a7b2bc5-cb09-56a1-b9f5-09be995f4205)
   )
-  (pin "RADIO_UHF_RF_SEL" bidirectional
+  (pin "RADIO_UHF_RF_SEL_3V3" bidirectional
     (at 535.94 290.83 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0fe7fa08-d514-549d-8088-0b85acc0055d)
+    (uuid 9764e5ae-6980-55ef-ac43-263434bbb325)
   )
   (pin "RADIO_AUDIO_SEL" bidirectional
     (at 535.94 295.91 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c8acecfd-f2aa-54ff-891a-225ed1dd854a)
+    (uuid 2cfedb49-15fc-5438-b80f-f6f92c9c5921)
   )
   (pin "RADIO_GPIO0" bidirectional
     (at 535.94 300.99 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 4f3c514b-f51c-5da7-8c00-2d69a07d011b)
+    (uuid c5bee4a8-332a-5d7b-bdef-3d8fe351e2cc)
   )
   (pin "RADIO_VHF_AUDIO_OUT" bidirectional
     (at 535.94 306.07 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9a8a7f10-50be-5927-9e43-c0249c9a1855)
+    (uuid 9cefbc2f-5d26-5529-a076-4bd901e451da)
   )
   (pin "RADIO_UHF_AUDIO_OUT" bidirectional
     (at 535.94 311.15 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 25de7f89-db17-5132-9234-f2034c1686a2)
+    (uuid 10f4c0ed-70b5-5fb6-8777-9d2ebf3ca3ce)
   )
   (pin "RADIO_VHF_MIC_IN" bidirectional
     (at 535.94 316.23 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0586e057-748c-5e1a-ad91-1b9f1b3f3bc8)
+    (uuid 535ac7ca-10c3-50d0-b95d-cda90de02d69)
   )
   (pin "RADIO_UHF_MIC_IN" bidirectional
     (at 535.94 321.31 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7886b73f-3cfa-5cf6-8f38-c3b747e6570a)
-  )
-)
-(sheet
-  (at 549.91 39.37)
-  (size 115.57 110.49)
-  (stroke (width 0.1524) (type solid))
-  (fill (color 0 0 0 0.0))
-  (uuid 4a9833a7-cac7-5d00-bce1-22e2befbbd79)
-  (property "Sheetname" "Internal Display"
-    (at 549.91 38.1 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-  )
-  (property "Sheetfile" "10_internal_display.kicad_sch"
-    (at 549.91 151.13 0)
-    (effects (font (size 1.27 1.27)) (justify left top))
-  )
-  (pin "VSYS" bidirectional
-    (at 665.48 44.45 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 592772f3-01d3-5d12-8d54-60009c831d48)
-  )
-  (pin "SYS_3V3" bidirectional
-    (at 665.48 49.53 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 16cd99cd-b83a-5438-80e6-e03a614a8bde)
-  )
-  (pin "MCU_3V3" bidirectional
-    (at 665.48 54.61 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 62a1cbc7-7341-5a07-809e-82826c337b09)
-  )
-  (pin "I2C_SCL" bidirectional
-    (at 665.48 59.69 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c9f8c68c-def1-53ac-8726-486a9bcf9d05)
-  )
-  (pin "I2C_SDA" bidirectional
-    (at 665.48 64.77 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 3cfb99d8-e594-5666-9645-bd00e3cbe599)
-  )
-  (pin "LCD_BL_PWM" bidirectional
-    (at 665.48 69.85 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6f413229-9a86-51a9-9f7b-967124c4787b)
-  )
-  (pin "LCD_BL_EN" bidirectional
-    (at 665.48 74.93 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7d682c8b-a98f-5ee8-a32e-2b5448374e58)
-  )
-  (pin "PANEL_PWR_EN" bidirectional
-    (at 665.48 80.01 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid a079067b-1a32-5527-a33d-074ec8aa066c)
-  )
-  (pin "PANEL_RESET_N" bidirectional
-    (at 665.48 85.09 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 8a438728-3ec3-5d8c-8b9e-280e210e27eb)
-  )
-  (pin "TOUCH_RESET_N" bidirectional
-    (at 665.48 90.17 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 78d73cc7-a772-5074-82d9-8bfcfe1e3be6)
-  )
-  (pin "TOUCH_INT_N" bidirectional
-    (at 665.48 95.25 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid bc73e40f-684e-5f97-92f9-ee89311086c6)
-  )
-)
-(sheet
-  (at 549.91 180.34)
-  (size 124.46 124.46)
-  (stroke (width 0.1524) (type solid))
-  (fill (color 0 0 0 0.0))
-  (uuid a98514f5-4d8c-56db-9f02-eea4136ac421)
-  (property "Sheetname" "Intehill Monitor Interface"
-    (at 549.91 179.07 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-  )
-  (property "Sheetfile" "11_intehill_monitor_interface.kicad_sch"
-    (at 549.91 306.07 0)
-    (effects (font (size 1.27 1.27)) (justify left top))
-  )
-  (pin "SYS_5V" bidirectional
-    (at 674.37 185.42 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 1bba4fea-26d3-529c-802d-6529d3fbce55)
-  )
-  (pin "PANEL_PWR_EN" bidirectional
-    (at 674.37 190.5 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid f6ebd416-2c77-5c11-8e6e-c0ab5b3836ae)
-  )
-  (pin "TOUCH_USB_DP" bidirectional
-    (at 674.37 195.58 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 8a39bad8-f535-5c2a-a19f-ed6daf88e225)
-  )
-  (pin "TOUCH_USB_DM" bidirectional
-    (at 674.37 200.66 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid bd608472-f253-5961-a093-5d228073e9be)
-  )
-  (pin "DDIB_DDC_SDA" bidirectional
-    (at 674.37 205.74 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 41891919-1a16-5b86-8eb3-d332dce9c949)
-  )
-  (pin "DDIB_DDC_SCL" bidirectional
-    (at 674.37 210.82 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid eabc32b3-96f7-5aa5-a210-b6619ef5d333)
-  )
-  (pin "DDIB_HPD" bidirectional
-    (at 674.37 215.9 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 50a1f4c5-0238-5817-85c0-f44b84ccb6e4)
-  )
-  (pin "DDIB_TX0_P" bidirectional
-    (at 674.37 220.98 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 47664d48-2c67-529e-8019-4acc05c13bd3)
-  )
-  (pin "DDIB_TX0_N" bidirectional
-    (at 674.37 226.06 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid ea9f7382-d9c9-59fd-b23a-b86c75c3397a)
-  )
-  (pin "DDIB_TX1_P" bidirectional
-    (at 674.37 231.14 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 5f3a59d2-cee2-516b-a465-fe30f11eaa4d)
-  )
-  (pin "DDIB_TX1_N" bidirectional
-    (at 674.37 236.22 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid dd110041-3eb0-59c5-938d-d3509d6e9c6c)
-  )
-  (pin "DDIB_TX2_P" bidirectional
-    (at 674.37 241.3 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c4f36b81-0f81-5067-88bd-85f3e8914cd8)
-  )
-  (pin "DDIB_TX2_N" bidirectional
-    (at 674.37 246.38 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 8670d7b9-6a9f-5a3a-9ee7-802bfcb7d953)
-  )
-  (pin "DDIB_TX3_P" bidirectional
-    (at 674.37 251.46 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid aaa6e16e-609b-5293-a301-4ba9fdea90e7)
-  )
-  (pin "DDIB_TX3_N" bidirectional
-    (at 674.37 256.54 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid e6c2c2aa-f64a-5919-ba20-00f3512edd22)
+    (uuid 4de8d5ca-3c4c-5c9e-bd56-cca38bca4ae4)
   )
 )
 (sheet
@@ -1581,154 +1621,164 @@
   (size 119.38 170.18)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
-  (uuid e5f63080-4501-5e30-a9d3-cbf1e4a2a151)
-  (property "Sheetname" "Keyboard Daughterboard"
+  (uuid cb7351cd-fcb6-573d-ba16-39cf42fd14a4)
+  (property "Sheetname" "Keyboard Mainboard FFC"
     (at 420.37 408.94 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
   )
-  (property "Sheetfile" "12_keyboard_daughterboard.kicad_sch"
+  (property "Sheetfile" "12_keyboard_interface.kicad_sch"
     (at 420.37 581.66 0)
     (effects (font (size 1.27 1.27)) (justify left top))
   )
   (pin "MCU_3V3" bidirectional
     (at 539.75 415.29 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9ccb651d-c44e-5b03-abd5-6fd002e4e41f)
+    (uuid 746447c9-687b-5418-8837-0d54d6eb589e)
   )
   (pin "SYS_5V" bidirectional
     (at 539.75 420.37 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid b7cd7fac-58ce-5536-aed8-8380a99748f8)
+    (uuid 432a177e-b204-5250-b528-4773f33de2ba)
   )
   (pin "I2C_SCL" bidirectional
     (at 539.75 425.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 1d6b026c-3958-5804-8327-e8f96aa7159c)
+    (uuid 6250c55c-7ad0-5524-893e-d82a6e6d9904)
   )
   (pin "I2C_SDA" bidirectional
     (at 539.75 430.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 49934924-2080-5254-b6eb-5809bf07949f)
-  )
-  (pin "KB_ROW0" bidirectional
-    (at 539.75 435.61 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 75ac0f0b-d0d1-563f-958d-e25eaaeafbf9)
-  )
-  (pin "KB_ROW1" bidirectional
-    (at 539.75 440.69 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 883862e0-b237-57f4-8c8a-72f758637d5e)
-  )
-  (pin "KB_ROW2" bidirectional
-    (at 539.75 445.77 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6a7b2bc5-cb09-56a1-b9f5-09be995f4205)
-  )
-  (pin "KB_ROW3" bidirectional
-    (at 539.75 450.85 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9764e5ae-6980-55ef-ac43-263434bbb325)
-  )
-  (pin "KB_ROW4" bidirectional
-    (at 539.75 455.93 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 2cfedb49-15fc-5438-b80f-f6f92c9c5921)
-  )
-  (pin "KB_ROW5" bidirectional
-    (at 539.75 461.01 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c5bee4a8-332a-5d7b-bdef-3d8fe351e2cc)
-  )
-  (pin "KB_ROW6" bidirectional
-    (at 539.75 466.09 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9cefbc2f-5d26-5529-a076-4bd901e451da)
-  )
-  (pin "KB_ROW7" bidirectional
-    (at 539.75 471.17 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 10f4c0ed-70b5-5fb6-8777-9d2ebf3ca3ce)
-  )
-  (pin "KB_COL0" bidirectional
-    (at 539.75 476.25 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 535ac7ca-10c3-50d0-b95d-cda90de02d69)
-  )
-  (pin "KB_COL1" bidirectional
-    (at 539.75 481.33 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 4de8d5ca-3c4c-5c9e-bd56-cca38bca4ae4)
-  )
-  (pin "KB_COL2" bidirectional
-    (at 539.75 486.41 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 746447c9-687b-5418-8837-0d54d6eb589e)
-  )
-  (pin "KB_COL3" bidirectional
-    (at 539.75 491.49 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 432a177e-b204-5250-b528-4773f33de2ba)
-  )
-  (pin "KB_COL4" bidirectional
-    (at 539.75 496.57 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6250c55c-7ad0-5524-893e-d82a6e6d9904)
-  )
-  (pin "KB_COL5" bidirectional
-    (at 539.75 501.65 0)
-    (effects (font (size 1.27 1.27)) (justify left))
     (uuid 729b6969-213d-5850-9f25-02d3392aa98c)
   )
-  (pin "KB_COL6" bidirectional
-    (at 539.75 506.73 0)
+  (pin "KB_RGB_PWR_EN" bidirectional
+    (at 539.75 435.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c4c1d5be-014e-54a0-a6a2-e653f1f3b776)
   )
-  (pin "KB_COL7" bidirectional
-    (at 539.75 511.81 0)
+  (pin "KB_RGB_FAULT_N" bidirectional
+    (at 539.75 440.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 80d7fc29-f23c-587b-b3d7-e7d25d1cc6ad)
   )
-  (pin "KB_COL8" bidirectional
-    (at 539.75 516.89 0)
+  (pin "KB_RGB_DATA_3V3" bidirectional
+    (at 539.75 445.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 9bc5d429-56cf-5671-ae79-5b6b891c8f4a)
   )
-  (pin "KB_COL9" bidirectional
-    (at 539.75 521.97 0)
+  (pin "KB_ROW0" bidirectional
+    (at 539.75 450.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e1162429-e3d4-5af7-beed-b1aac88beaa6)
   )
-  (pin "KB_COL10" bidirectional
-    (at 539.75 527.05 0)
+  (pin "KB_ROW1" bidirectional
+    (at 539.75 455.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 2ac9ad9c-211a-54fc-a818-562199004dee)
   )
-  (pin "KB_COL11" bidirectional
-    (at 539.75 532.13 0)
+  (pin "KB_ROW2" bidirectional
+    (at 539.75 461.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid a1b76567-116a-5c88-b122-f8ac4d22bb8a)
   )
-  (pin "KB_COL12" bidirectional
-    (at 539.75 537.21 0)
+  (pin "KB_ROW3" bidirectional
+    (at 539.75 466.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d2e356b4-c947-55a9-9658-b262c504a13a)
   )
-  (pin "KB_COL13" bidirectional
-    (at 539.75 542.29 0)
+  (pin "KB_ROW4" bidirectional
+    (at 539.75 471.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 1cfb5c71-eb93-55fb-bada-5eac803c90a2)
   )
-  (pin "KB_COL14" bidirectional
-    (at 539.75 547.37 0)
+  (pin "KB_ROW5" bidirectional
+    (at 539.75 476.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 848e32b6-ccd5-52eb-92cc-ec3bc77e8abf)
   )
-  (pin "KB_COL15" bidirectional
-    (at 539.75 552.45 0)
+  (pin "KB_ROW6" bidirectional
+    (at 539.75 481.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 8ef0f76e-be5a-593d-b013-43306cdcc6ff)
+  )
+  (pin "KB_ROW7" bidirectional
+    (at 539.75 486.41 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e8e2bf5f-ffa8-52a6-baf1-a0c2de8e04b5)
+  )
+  (pin "KB_COL0" bidirectional
+    (at 539.75 491.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 312ce9d6-6486-5bbc-84cd-ff41353eefa6)
+  )
+  (pin "KB_COL1" bidirectional
+    (at 539.75 496.57 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e5552ca2-07fc-51a6-a7d1-6e97cbc052c4)
+  )
+  (pin "KB_COL2" bidirectional
+    (at 539.75 501.65 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9938427a-d9fa-5269-8158-0b7bc49ee55c)
+  )
+  (pin "KB_COL3" bidirectional
+    (at 539.75 506.73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 124135b1-a11a-502a-80e6-c4f9ff847c39)
+  )
+  (pin "KB_COL4" bidirectional
+    (at 539.75 511.81 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid fd0f511a-b8bb-5af3-8f0e-bc5db6ef8f82)
+  )
+  (pin "KB_COL5" bidirectional
+    (at 539.75 516.89 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 72dff0f2-40e1-580b-825e-da9a1cb2b13e)
+  )
+  (pin "KB_COL6" bidirectional
+    (at 539.75 521.97 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid dae25277-e2a1-5eb6-8a3d-fb31dd88e12b)
+  )
+  (pin "KB_COL7" bidirectional
+    (at 539.75 527.05 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 0e40b8e3-d6d7-59e5-a2e5-6c2346783892)
+  )
+  (pin "KB_COL8" bidirectional
+    (at 539.75 532.13 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6acb4d3b-42f4-5018-aebf-ccf4090308dc)
+  )
+  (pin "KB_COL9" bidirectional
+    (at 539.75 537.21 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2f6bab34-1728-541c-a8b4-92e00ca18616)
+  )
+  (pin "KB_COL10" bidirectional
+    (at 539.75 542.29 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e56fb165-6ce5-5347-a0d4-bb6225265505)
+  )
+  (pin "KB_COL11" bidirectional
+    (at 539.75 547.37 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 15f93c59-a26d-514b-8b5f-b545e47ee3e2)
+  )
+  (pin "KB_COL12" bidirectional
+    (at 539.75 552.45 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 62f0ad92-9787-577e-8ae0-d1ef4dd337da)
+  )
+  (pin "KB_COL13" bidirectional
+    (at 539.75 557.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid bcc5b30d-739a-5b62-b520-d6b6e1a34fe5)
+  )
+  (pin "KB_COL14" bidirectional
+    (at 539.75 562.61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid b9172245-e8de-5fa6-8207-29fb3a13ecd3)
   )
 )
 (sheet
@@ -1745,40 +1795,55 @@
     (at 549.91 416.56 0)
     (effects (font (size 1.27 1.27)) (justify left top))
   )
-  (pin "SYS_5V" bidirectional
+  (pin "MCU_3V3" bidirectional
     (at 674.37 335.28 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid e8e2bf5f-ffa8-52a6-baf1-a0c2de8e04b5)
+    (uuid 802e69ae-8c84-503e-89a1-ffacca188ed3)
   )
-  (pin "AUDIO_USB_DP" bidirectional
+  (pin "RADIO_CODEC_USB_DP" bidirectional
     (at 674.37 340.36 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 312ce9d6-6486-5bbc-84cd-ff41353eefa6)
+    (uuid d9b604c4-712e-5ca7-825e-1280f1a3ba69)
   )
-  (pin "AUDIO_USB_DM" bidirectional
+  (pin "RADIO_CODEC_USB_DM" bidirectional
     (at 674.37 345.44 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid e5552ca2-07fc-51a6-a7d1-6e97cbc052c4)
+    (uuid 0268f0bc-bc66-5c57-847a-95a6c92fcd16)
   )
-  (pin "RADIO_VHF_AUDIO_OUT" bidirectional
+  (pin "RADIO_CODEC_USB_VBUS" bidirectional
     (at 674.37 350.52 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9938427a-d9fa-5269-8158-0b7bc49ee55c)
+    (uuid 7db53b8b-3368-5f07-93f5-bc9ca7f15fb0)
   )
-  (pin "RADIO_UHF_AUDIO_OUT" bidirectional
+  (pin "RADIO_VHF_AUDIO_OUT" bidirectional
     (at 674.37 355.6 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 124135b1-a11a-502a-80e6-c4f9ff847c39)
+    (uuid df80dc07-0228-5450-ae08-1d10e7a2030f)
   )
-  (pin "RADIO_VHF_MIC_IN" bidirectional
+  (pin "RADIO_UHF_AUDIO_OUT" bidirectional
     (at 674.37 360.68 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid fd0f511a-b8bb-5af3-8f0e-bc5db6ef8f82)
+    (uuid 1abade8f-00e3-5b09-a977-d38b657bce26)
   )
-  (pin "RADIO_UHF_MIC_IN" bidirectional
+  (pin "RADIO_VHF_MIC_IN" bidirectional
     (at 674.37 365.76 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 72dff0f2-40e1-580b-825e-da9a1cb2b13e)
+    (uuid 15462c15-6464-5ae3-b435-1741c0040448)
+  )
+  (pin "RADIO_UHF_MIC_IN" bidirectional
+    (at 674.37 370.84 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 0b8df510-36ed-545b-a718-1763bd14637f)
+  )
+  (pin "RADIO_VHF_PTT_N" bidirectional
+    (at 674.37 375.92 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 4c0e33f3-fabf-5ef1-bc5b-40b62990f746)
+  )
+  (pin "RADIO_UHF_PTT_N" bidirectional
+    (at 674.37 381 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 76eb1ec3-d28d-5ad1-baa0-ba5db1338b29)
   )
 )
 (sheet
@@ -1798,1613 +1863,1948 @@
   (pin "SYS_5V" bidirectional
     (at 674.37 444.5 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid dae25277-e2a1-5eb6-8a3d-fb31dd88e12b)
+    (uuid d846acbe-5dfb-5397-a317-c3934c89c504)
   )
-  (pin "MAKER_USB_DP" bidirectional
+  (pin "INTERNAL_USB_VBUS_VALID" bidirectional
     (at 674.37 449.58 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0e40b8e3-d6d7-59e5-a2e5-6c2346783892)
+    (uuid 0a7357d0-ce2f-577f-b869-95ebfe7d0634)
   )
-  (pin "MAKER_USB_DM" bidirectional
+  (pin "MAKER_USB_DP" bidirectional
     (at 674.37 454.66 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6acb4d3b-42f4-5018-aebf-ccf4090308dc)
+    (uuid 068ff8d4-fb95-564c-8453-7928fa94f9e1)
+  )
+  (pin "MAKER_USB_DM" bidirectional
+    (at 674.37 459.74 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 4ab50933-332f-5543-8ac0-379784b152e6)
+  )
+)
+(sheet
+  (at 679.45 330.2)
+  (size 134.62 59.69)
+  (stroke (width 0.1524) (type solid))
+  (fill (color 0 0 0 0.0))
+  (uuid 5a262a39-3888-5c6d-ad36-52d5f9c459dd)
+  (property "Sheetname" "System Audio"
+    (at 679.45 328.93 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (property "Sheetfile" "15_system_audio.kicad_sch"
+    (at 679.45 391.16 0)
+    (effects (font (size 1.27 1.27)) (justify left top))
+  )
+  (pin "SYS_5V" bidirectional
+    (at 814.07 335.28 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e80370db-780c-5671-aef9-15dc5437c126)
+  )
+  (pin "SYS_3V3" bidirectional
+    (at 814.07 340.36 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 19c90a5a-8da5-5df6-8fd6-ab985a36eb88)
+  )
+  (pin "INTERNAL_USB_VBUS_VALID" bidirectional
+    (at 814.07 345.44 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d87d678e-ee7f-51ed-8d60-01d733c975ce)
+  )
+  (pin "AUDIO_USB_DP" bidirectional
+    (at 814.07 350.52 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 244a6018-025c-5516-b6b5-8e4f00d277cb)
+  )
+  (pin "AUDIO_USB_DM" bidirectional
+    (at 814.07 355.6 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d5ce43ba-1a3d-50d5-b14e-baa832260dcc)
+  )
+  (pin "RADIO_CODEC_USB_DP" bidirectional
+    (at 814.07 360.68 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7637684c-3cf0-579a-a856-692f395f103b)
+  )
+  (pin "RADIO_CODEC_USB_DM" bidirectional
+    (at 814.07 365.76 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid c1f372a9-862e-5a11-814c-a5d053c8013d)
+  )
+  (pin "RADIO_CODEC_USB_VBUS" bidirectional
+    (at 814.07 370.84 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 037f48f3-a3ed-50ce-af6e-3621b82f8fc0)
+  )
+  (pin "AUDIO_AMP_EC_EN" bidirectional
+    (at 814.07 375.92 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2e424005-7e22-5228-a83a-f2e483d91e34)
+  )
+  (pin "AUDIO_MIC_EN" bidirectional
+    (at 814.07 381 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 3d8f4251-e922-5014-a8ab-b85f06f30f0f)
+  )
+)
+(sheet
+  (at 679.45 420.37)
+  (size 134.62 64.77)
+  (stroke (width 0.1524) (type solid))
+  (fill (color 0 0 0 0.0))
+  (uuid cad276a5-1875-508a-a276-e7a25b24fbd3)
+  (property "Sheetname" "Gigabit Ethernet"
+    (at 679.45 419.1 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (property "Sheetfile" "16_gigabit_ethernet.kicad_sch"
+    (at 679.45 486.41 0)
+    (effects (font (size 1.27 1.27)) (justify left top))
+  )
+  (pin "PCIE_3V3" bidirectional
+    (at 814.07 425.45 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 45825bb0-bf19-56e3-90a8-b62e2b72e4a9)
+  )
+  (pin "GBE_HOST_TX_P" bidirectional
+    (at 814.07 430.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 82235c8d-9825-5e8f-b374-a6cdc31d0311)
+  )
+  (pin "GBE_HOST_TX_N" bidirectional
+    (at 814.07 435.61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid ba6dd3aa-9dbb-58d9-ac98-28ef65e66bdd)
+  )
+  (pin "GBE_HOST_RX_P" bidirectional
+    (at 814.07 440.69 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 95c58f3a-7f37-5266-bd6e-be30e9a5c448)
+  )
+  (pin "GBE_HOST_RX_N" bidirectional
+    (at 814.07 445.77 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 05f60d0b-fc1f-5005-94cf-67959db221ce)
+  )
+  (pin "GBE_REFCLK_P" bidirectional
+    (at 814.07 450.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7c347a04-feae-5bd4-8a25-13e4cb863f98)
+  )
+  (pin "GBE_REFCLK_N" bidirectional
+    (at 814.07 455.93 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6896602c-d1fb-565d-a1c7-c25645a94884)
+  )
+  (pin "GBE_CLKREQ_N" bidirectional
+    (at 814.07 461.01 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid df8e73a7-f006-5c59-9bd6-f15e2fc3410c)
+  )
+  (pin "PLTRST_SRC_N" bidirectional
+    (at 814.07 466.09 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 19a452f5-d281-5e81-9d03-fc6ae8e77994)
+  )
+  (pin "PCIE_WAKE_N" bidirectional
+    (at 814.07 471.17 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2278dde0-ebc7-52e5-97d7-f777ebf5142e)
   )
 )
 (label "I2C_SCL"
   (at 90.17 44.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2f6bab34-1728-541c-a8b4-92e00ca18616)
+  (uuid 0f9912d5-e2c5-59ae-bc84-0be76e8cbb90)
 )
 (label "I2C_SCL"
   (at 219.71 44.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e56fb165-6ce5-5347-a0d4-bb6225265505)
+  (uuid 4b3e8768-2869-5fc9-9cc1-13d39d56fa13)
 )
 (label "I2C_SDA"
   (at 90.17 49.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 15f93c59-a26d-514b-8b5f-b545e47ee3e2)
+  (uuid 79df79fd-3af3-5d0f-87d4-e43383561bf5)
 )
 (label "I2C_SDA"
   (at 219.71 49.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 62f0ad92-9787-577e-8ae0-d1ef4dd337da)
+  (uuid e3d548a9-b863-5494-9d6c-c3e6c4d0cfcc)
 )
 (label "BQ_ALERT"
   (at 90.17 54.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bcc5b30d-739a-5b62-b520-d6b6e1a34fe5)
+  (uuid 3ac19ce1-7c6b-5217-bc96-864de97ff605)
 )
 (label "BQ_ALERT"
   (at 219.71 54.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b9172245-e8de-5fa6-8207-29fb3a13ecd3)
+  (uuid 1b4b89c4-8560-58b1-82d5-90a395a86f51)
 )
 (label "CHG_INT_N"
   (at 90.17 59.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 802e69ae-8c84-503e-89a1-ffacca188ed3)
+  (uuid 1dc1b649-158a-59fa-a67f-732b30f0225c)
 )
 (label "CHG_INT_N"
   (at 219.71 59.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d9b604c4-712e-5ca7-825e-1280f1a3ba69)
+  (uuid 1ad629bb-17e4-5c1a-80ca-4c84af81f441)
 )
-(label "PMIC_QON"
+(label "PMIC_QON_ASSERT"
   (at 90.17 64.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0268f0bc-bc66-5c57-847a-95a6c92fcd16)
+  (uuid a5325027-5bbc-5402-9f29-6865221335ad)
 )
-(label "PMIC_QON"
+(label "PMIC_QON_ASSERT"
   (at 219.71 64.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7db53b8b-3368-5f07-93f5-bc9ca7f15fb0)
+  (uuid 8832e039-e156-57d0-b8d3-9eb74842d77d)
 )
-(label "CHG_CE_N"
+(label "CHG_ENABLE"
   (at 90.17 69.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid df80dc07-0228-5450-ae08-1d10e7a2030f)
+  (uuid e976c26e-f5e9-5d33-9d7f-608ed8d7875e)
 )
-(label "CHG_CE_N"
+(label "CHG_ENABLE"
   (at 219.71 69.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1abade8f-00e3-5b09-a977-d38b657bce26)
+  (uuid 196b7110-18bb-54cb-9f7c-be10c32263c7)
 )
-(label "VSYS"
+(label "CASE_PWRBTN_N"
   (at 90.17 74.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 15462c15-6464-5ae3-b435-1741c0040448)
+  (uuid b342205d-a1e0-5a55-a0bd-d803d340ea32)
 )
-(label "VSYS"
+(label "CASE_PWRBTN_N"
   (at 219.71 74.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0b8df510-36ed-545b-a718-1763bd14637f)
+  (uuid 790f8e87-9347-58e6-8fb7-7bbba592249d)
+)
+(label "EC_AON_IN"
+  (at 90.17 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid facca0ce-3df4-5138-8b07-56cd62bad4c0)
+)
+(label "EC_AON_IN"
+  (at 219.71 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 971320e1-f5a3-5601-8ad1-b3121811adf3)
 )
 (label "MCU_3V3"
-  (at 90.17 80.01 0)
+  (at 90.17 90.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4c0e33f3-fabf-5ef1-bc5b-40b62990f746)
+  (uuid 7d11af38-b145-5f07-9e81-b887939bbd01)
 )
 (label "MCU_3V3"
-  (at 219.71 90.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 76eb1ec3-d28d-5ad1-baa0-ba5db1338b29)
-)
-(label "AUX_DC_ADC"
-  (at 90.17 85.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d846acbe-5dfb-5397-a317-c3934c89c504)
-)
-(label "AUX_DC_ADC"
   (at 219.71 95.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0a7357d0-ce2f-577f-b869-95ebfe7d0634)
+  (uuid fc6e9f52-5b0d-50ae-831c-34c849a41b50)
+)
+(label "AUX_DC_ADC"
+  (at 90.17 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 29126289-3901-5425-8e0a-3520fa651517)
+)
+(label "AUX_DC_ADC"
+  (at 219.71 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 19d7bc1f-5f2b-523a-a219-825e1d903fe3)
+)
+(label "MU_PWRBTN_N"
+  (at 90.17 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 119a317a-1249-556f-a074-ab3db8fa0300)
+)
+(label "MU_PWRBTN_N"
+  (at 219.71 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 21ed6678-07e9-57f2-8f6f-51c4e3f976e8)
+)
+(label "PACK_FAULT_N"
+  (at 90.17 125.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 13a4292a-9486-527f-a2b6-3938e62ab94c)
+)
+(label "PACK_FAULT_N"
+  (at 219.71 466.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2ecce6d0-e91a-5d9c-a20b-9f5e38ee1bef)
+)
+(label "PACK_RETRY_PULSE"
+  (at 90.17 130.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e9a79d35-c475-5933-9db5-9b2bd9ec15b4)
+)
+(label "PACK_RETRY_PULSE"
+  (at 219.71 471.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 10bf0c89-7fdf-51c3-a00c-50e1c8dfad05)
+)
+(label "AUX_FAULT_N"
+  (at 90.17 135.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 040ac9f6-e984-579d-83e8-9180471db0b7)
+)
+(label "AUX_FAULT_N"
+  (at 219.71 476.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3b4cc6dd-7cbe-5c69-9dbe-36a7a129129d)
+)
+(label "AUX_PGOOD"
+  (at 90.17 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 53082f6a-6c36-58a7-892a-a4e944e82642)
+)
+(label "AUX_PGOOD"
+  (at 219.71 481.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c95c81e1-baee-5652-ac64-e1594e452ad7)
+)
+(label "MAIN_USB_VALID_N"
+  (at 90.17 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 81ac7ba8-83e7-5d27-b9cf-e801119a25d4)
+)
+(label "MAIN_USB_VALID_N"
+  (at 219.71 486.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid af4eadb2-dd3a-552f-9f39-c06f997ab7ae)
+)
+(label "MAIN_AUX_VALID_N"
+  (at 90.17 151.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 36e95002-e7a1-583b-9ed6-a7906c3eeb69)
+)
+(label "MAIN_AUX_VALID_N"
+  (at 219.71 491.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 20f58166-04d1-56f4-aa6a-5b72cd9b1d2f)
+)
+(label "AON_FAULT_N"
+  (at 90.17 156.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b277503d-8ee7-5563-83ec-f146d808be9a)
+)
+(label "AON_FAULT_N"
+  (at 219.71 496.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 15804f88-04d1-54d1-b16e-471b09387dae)
+)
+(label "VSYS"
+  (at 90.17 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4ed865dd-e95d-5a5d-8a1d-c3990e6f945f)
 )
 (label "VSYS"
   (at 359.41 44.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 068ff8d4-fb95-564c-8453-7928fa94f9e1)
+  (uuid b4a8402d-7c30-5045-a3fb-c3929358c269)
 )
-(label "MU_PWRBTN_N"
-  (at 219.71 100.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4ab50933-332f-5543-8ac0-379784b152e6)
-)
-(label "MU_PWRBTN_N"
+(label "MCU_3V3"
   (at 359.41 59.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e80370db-780c-5671-aef9-15dc5437c126)
+  (uuid 84728335-18a7-5f8f-aa71-cf76c03f8eb4)
+)
+(label "MU_PWRBTN_N"
+  (at 359.41 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fcfbfec6-3567-53a2-85ee-38233b906b7a)
 )
 (label "MU_RSTBTN_N"
-  (at 219.71 105.41 0)
+  (at 219.71 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 19c90a5a-8da5-5df6-8fd6-ab985a36eb88)
+  (uuid 7c526753-843a-51f7-9fcd-eae25b579bb0)
 )
 (label "MU_RSTBTN_N"
-  (at 359.41 64.77 0)
+  (at 359.41 74.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d87d678e-ee7f-51ed-8d60-01d733c975ce)
+  (uuid 3456aabd-c61c-5ae8-b6c4-9815f17d1001)
+)
+(label "MU_12V_ENABLE"
+  (at 219.71 293.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b8411f0d-a6f8-5217-bd85-63b11eb235e0)
+)
+(label "MU_12V_ENABLE"
+  (at 359.41 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fe1adf24-6e51-56eb-82cd-0d763ca2c646)
+)
+(label "MU_12V_PG"
+  (at 219.71 298.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 24963bf7-09d6-5426-a474-6eb39542cf6c)
+)
+(label "MU_12V_PG"
+  (at 359.41 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ce665f61-2a8c-5021-b6c8-1a7b9b3ef53b)
+)
+(label "MU_S0_HIGH"
+  (at 219.71 191.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1b2069d0-8afb-56b7-92f0-be7ac2129c81)
+)
+(label "MU_S0_HIGH"
+  (at 359.41 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ecbff41e-ec41-5c84-8ac2-ed2f797092ae)
+)
+(label "INTERNAL_USB_VBUS_FAULT_N"
+  (at 219.71 288.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8938993f-fa65-5e67-b148-b80a49e853ab)
+)
+(label "INTERNAL_USB_VBUS_FAULT_N"
+  (at 359.41 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 99ad933e-c690-5155-8fef-9abe0bbb90fc)
 )
 (label "SYS_5V"
   (at 359.41 49.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 244a6018-025c-5516-b6b5-8e4f00d277cb)
-)
-(label "SYS_5V"
-  (at 120.65 154.94 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d5ce43ba-1a3d-50d5-b14e-baa832260dcc)
-)
-(label "SYS_3V3"
-  (at 359.41 54.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7637684c-3cf0-579a-a856-692f395f103b)
-)
-(label "SYS_3V3"
-  (at 120.65 160.02 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c1f372a9-862e-5a11-814c-a5d053c8013d)
-)
-(label "HUB1_PE"
-  (at 359.41 120.65 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 037f48f3-a3ed-50ce-af6e-3621b82f8fc0)
-)
-(label "HUB1_PE"
-  (at 120.65 165.1 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2e424005-7e22-5228-a83a-f2e483d91e34)
-)
-(label "HUB1_OC_N"
-  (at 359.41 125.73 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3d8f4251-e922-5014-a8ab-b85f06f30f0f)
-)
-(label "HUB1_OC_N"
-  (at 120.65 170.18 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 45825bb0-bf19-56e3-90a8-b62e2b72e4a9)
-)
-(label "HUB1_SSTX_P"
-  (at 359.41 130.81 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 82235c8d-9825-5e8f-b374-a6cdc31d0311)
-)
-(label "HUB1_SSTX_P"
-  (at 120.65 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ba6dd3aa-9dbb-58d9-ac98-28ef65e66bdd)
-)
-(label "HUB1_SSTX_N"
-  (at 359.41 135.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 95c58f3a-7f37-5266-bd6e-be30e9a5c448)
-)
-(label "HUB1_SSTX_N"
-  (at 120.65 180.34 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 05f60d0b-fc1f-5005-94cf-67959db221ce)
-)
-(label "HUB1_SSRX_P"
-  (at 359.41 140.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7c347a04-feae-5bd4-8a25-13e4cb863f98)
-)
-(label "HUB1_SSRX_P"
-  (at 120.65 185.42 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6896602c-d1fb-565d-a1c7-c25645a94884)
-)
-(label "HUB1_SSRX_N"
-  (at 359.41 146.05 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid df8e73a7-f006-5c59-9bd6-f15e2fc3410c)
-)
-(label "HUB1_SSRX_N"
-  (at 120.65 190.5 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 19a452f5-d281-5e81-9d03-fc6ae8e77994)
-)
-(label "HUB1_DP"
-  (at 359.41 151.13 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2278dde0-ebc7-52e5-97d7-f777ebf5142e)
-)
-(label "HUB1_DP"
-  (at 120.65 195.58 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0f9912d5-e2c5-59ae-bc84-0be76e8cbb90)
-)
-(label "HUB1_DM"
-  (at 359.41 156.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4b3e8768-2869-5fc9-9cc1-13d39d56fa13)
-)
-(label "HUB1_DM"
-  (at 120.65 200.66 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 79df79fd-3af3-5d0f-87d4-e43383561bf5)
-)
-(label "HUB2_PE"
-  (at 359.41 161.29 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e3d548a9-b863-5494-9d6c-c3e6c4d0cfcc)
-)
-(label "HUB2_PE"
-  (at 120.65 205.74 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3ac19ce1-7c6b-5217-bc96-864de97ff605)
-)
-(label "HUB2_OC_N"
-  (at 359.41 166.37 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1b4b89c4-8560-58b1-82d5-90a395a86f51)
-)
-(label "HUB2_OC_N"
-  (at 120.65 210.82 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1dc1b649-158a-59fa-a67f-732b30f0225c)
-)
-(label "HUB2_SSTX_P"
-  (at 359.41 171.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1ad629bb-17e4-5c1a-80ca-4c84af81f441)
-)
-(label "HUB2_SSTX_P"
-  (at 120.65 215.9 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a5325027-5bbc-5402-9f29-6865221335ad)
-)
-(label "HUB2_SSTX_N"
-  (at 359.41 176.53 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8832e039-e156-57d0-b8d3-9eb74842d77d)
-)
-(label "HUB2_SSTX_N"
-  (at 120.65 220.98 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e976c26e-f5e9-5d33-9d7f-608ed8d7875e)
-)
-(label "HUB2_SSRX_P"
-  (at 359.41 181.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 196b7110-18bb-54cb-9f7c-be10c32263c7)
-)
-(label "HUB2_SSRX_P"
-  (at 120.65 226.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b342205d-a1e0-5a55-a0bd-d803d340ea32)
-)
-(label "HUB2_SSRX_N"
-  (at 359.41 186.69 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 790f8e87-9347-58e6-8fb7-7bbba592249d)
-)
-(label "HUB2_SSRX_N"
-  (at 120.65 231.14 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid facca0ce-3df4-5138-8b07-56cd62bad4c0)
-)
-(label "HUB2_DP"
-  (at 359.41 191.77 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 971320e1-f5a3-5601-8ad1-b3121811adf3)
-)
-(label "HUB2_DP"
-  (at 120.65 236.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7d11af38-b145-5f07-9e81-b887939bbd01)
-)
-(label "HUB2_DM"
-  (at 359.41 196.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fc6e9f52-5b0d-50ae-831c-34c849a41b50)
-)
-(label "HUB2_DM"
-  (at 120.65 241.3 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 29126289-3901-5425-8e0a-3520fa651517)
-)
-(label "VBUS_PD1"
-  (at 90.17 90.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 19d7bc1f-5f2b-523a-a219-825e1d903fe3)
-)
-(label "VBUS_PD1"
-  (at 120.65 304.8 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 119a317a-1249-556f-a074-ab3db8fa0300)
-)
-(label "VBUS_PD2"
-  (at 90.17 95.25 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 21ed6678-07e9-57f2-8f6f-51c4e3f976e8)
-)
-(label "VBUS_PD2"
-  (at 120.65 309.88 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 13a4292a-9486-527f-a2b6-3938e62ab94c)
-)
-(label "VBUS_PD3"
-  (at 90.17 100.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2ecce6d0-e91a-5d9c-a20b-9f5e38ee1bef)
-)
-(label "VBUS_PD3"
-  (at 120.65 314.96 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e9a79d35-c475-5933-9db5-9b2bd9ec15b4)
-)
-(label "USB_DP1"
-  (at 90.17 105.41 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 10bf0c89-7fdf-51c3-a00c-50e1c8dfad05)
-)
-(label "USB_DP1"
-  (at 120.65 320.04 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 040ac9f6-e984-579d-83e8-9180471db0b7)
-)
-(label "USB_DM1"
-  (at 90.17 110.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3b4cc6dd-7cbe-5c69-9dbe-36a7a129129d)
-)
-(label "USB_DM1"
-  (at 120.65 325.12 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53082f6a-6c36-58a7-892a-a4e944e82642)
-)
-(label "SYS_5V"
-  (at 525.78 44.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c95c81e1-baee-5652-ac64-e1594e452ad7)
-)
-(label "TCP0_HPD"
-  (at 525.78 49.53 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 81ac7ba8-83e7-5d27-b9cf-e801119a25d4)
-)
-(label "TCP0_HPD"
-  (at 359.41 212.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid af4eadb2-dd3a-552f-9f39-c06f997ab7ae)
-)
-(label "TCP0_DDC_SDA"
-  (at 525.78 54.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 36e95002-e7a1-583b-9ed6-a7906c3eeb69)
-)
-(label "TCP0_DDC_SDA"
-  (at 359.41 201.93 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 20f58166-04d1-56f4-aa6a-5b72cd9b1d2f)
-)
-(label "TCP0_DDC_SCL"
-  (at 525.78 59.69 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b277503d-8ee7-5563-83ec-f146d808be9a)
-)
-(label "TCP0_DDC_SCL"
-  (at 359.41 207.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 15804f88-04d1-54d1-b16e-471b09387dae)
-)
-(label "TCP0_TX0_P"
-  (at 525.78 64.77 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4ed865dd-e95d-5a5d-8a1d-c3990e6f945f)
-)
-(label "TCP0_TX0_P"
-  (at 359.41 217.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b4a8402d-7c30-5045-a3fb-c3929358c269)
-)
-(label "TCP0_TX0_N"
-  (at 525.78 69.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 84728335-18a7-5f8f-aa71-cf76c03f8eb4)
-)
-(label "TCP0_TX0_N"
-  (at 359.41 222.25 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fcfbfec6-3567-53a2-85ee-38233b906b7a)
-)
-(label "TCP0_TX1_P"
-  (at 525.78 74.93 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7c526753-843a-51f7-9fcd-eae25b579bb0)
-)
-(label "TCP0_TX1_P"
-  (at 359.41 227.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3456aabd-c61c-5ae8-b6c4-9815f17d1001)
-)
-(label "TCP0_TX1_N"
-  (at 525.78 80.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b8411f0d-a6f8-5217-bd85-63b11eb235e0)
-)
-(label "TCP0_TX1_N"
-  (at 359.41 232.41 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fe1adf24-6e51-56eb-82cd-0d763ca2c646)
-)
-(label "TCP0_TXRX0_P"
-  (at 525.78 85.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 24963bf7-09d6-5426-a474-6eb39542cf6c)
-)
-(label "TCP0_TXRX0_P"
-  (at 359.41 237.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ce665f61-2a8c-5021-b6c8-1a7b9b3ef53b)
-)
-(label "TCP0_TXRX0_N"
-  (at 525.78 90.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1b2069d0-8afb-56b7-92f0-be7ac2129c81)
-)
-(label "TCP0_TXRX0_N"
-  (at 359.41 242.57 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ecbff41e-ec41-5c84-8ac2-ed2f797092ae)
-)
-(label "TCP0_TXRX1_P"
-  (at 525.78 95.25 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8938993f-fa65-5e67-b148-b80a49e853ab)
-)
-(label "TCP0_TXRX1_P"
-  (at 359.41 247.65 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 99ad933e-c690-5155-8fef-9abe0bbb90fc)
-)
-(label "TCP0_TXRX1_N"
-  (at 525.78 100.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid be420f3e-29b7-5004-a274-642868fa00b2)
 )
-(label "TCP0_TXRX1_N"
-  (at 359.41 252.73 0)
+(label "SYS_5V"
+  (at 120.65 204.47 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d92285e8-2680-51a2-afca-ba51c7d577d5)
 )
 (label "SYS_3V3"
-  (at 135.89 384.81 0)
+  (at 359.41 54.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 95aefbf0-dae6-5e13-9844-feeb3ab1531b)
+)
+(label "SYS_3V3"
+  (at 120.65 209.55 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ca959d6d-37fd-557c-a335-3bda094f3725)
+)
+(label "MU_HOST_ACTIVE"
+  (at 359.41 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 21cb35a9-e93d-5f12-a95f-38f852a278a2)
+)
+(label "MU_HOST_ACTIVE"
+  (at 120.65 214.63 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dc9aaf29-698f-51ff-8628-084daf9995a4)
+)
+(label "MU_USB_OC_N"
+  (at 359.41 217.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 09167894-1c8a-506a-ada6-2595ba41f63a)
+)
+(label "MU_USB_OC_N"
+  (at 120.65 219.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 95f42160-7fed-53a3-a8a5-ab4641fe6cc7)
+)
+(label "USBC1_SSTX_P"
+  (at 359.41 156.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cab88505-452c-564b-93f3-cda4941150b9)
+)
+(label "USBC1_SSTX_P"
+  (at 120.65 224.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ea91a8fe-2c0c-55e7-b180-ad73eac2ad47)
+)
+(label "USBC1_SSTX_N"
+  (at 359.41 161.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 53eb3f72-e227-51ee-b871-824ec8ef487d)
+)
+(label "USBC1_SSTX_N"
+  (at 120.65 229.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 11340e70-636f-5999-a30b-e2de5952a06e)
+)
+(label "USBC1_SSRX_P"
+  (at 359.41 166.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c7e27a8f-4efa-5713-9d79-9e4dceceb336)
+)
+(label "USBC1_SSRX_P"
+  (at 120.65 234.95 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7faa1592-8698-5287-8dcc-6d923c8b512c)
+)
+(label "USBC1_SSRX_N"
+  (at 359.41 171.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d2c2028d-875a-59cd-9856-d5b4e9312382)
+)
+(label "USBC1_SSRX_N"
+  (at 120.65 240.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 98c7015d-055d-52c6-9791-98854d88eb7c)
+)
+(label "USBC1_DP"
+  (at 359.41 176.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0d5d41e5-3c47-54d9-bb85-46c922d03d34)
+)
+(label "USBC1_DP"
+  (at 120.65 245.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 01b50d8d-f5d6-511a-a45a-f8049bc36648)
+)
+(label "USBC1_DM"
+  (at 359.41 181.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8d2f425f-2a73-532c-9e17-4a3c36053031)
+)
+(label "USBC1_DM"
+  (at 120.65 250.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ce615d29-5e4c-5cb2-84a3-7734c915828e)
+)
+(label "USBC2_SSTX_P"
+  (at 359.41 186.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9dfabf74-e717-5af5-866a-14ca667e868e)
+)
+(label "USBC2_SSTX_P"
+  (at 120.65 255.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e33d954d-d70d-5521-b46b-72d4d075f471)
+)
+(label "USBC2_SSTX_N"
+  (at 359.41 191.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 34f0086b-458f-5e49-ba9f-70b6cdc0647a)
+)
+(label "USBC2_SSTX_N"
+  (at 120.65 260.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fb702aac-d7c1-55e4-b758-a0026dd4c73b)
+)
+(label "USBC2_SSRX_P"
+  (at 359.41 196.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 52475e61-57b7-564c-af04-21b2e4041eb8)
+)
+(label "USBC2_SSRX_P"
+  (at 120.65 265.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7080ba01-0255-57c1-9e72-77a5e6f52369)
+)
+(label "USBC2_SSRX_N"
+  (at 359.41 201.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5cad0aff-cb16-5cd7-b5c3-aeca4e6bb857)
+)
+(label "USBC2_SSRX_N"
+  (at 120.65 270.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 880090e7-fd5a-57ba-ab1c-b8cc773a5f71)
+)
+(label "USBC2_DP"
+  (at 359.41 207.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 498fb427-87e2-5467-9ec7-2e5cce7e1007)
+)
+(label "USBC2_DP"
+  (at 120.65 275.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5d36b359-b451-5cef-b4b0-733b1d8f9d55)
+)
+(label "USBC2_DM"
+  (at 359.41 212.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid de39356c-e757-5441-b238-37a7cfd4217f)
+)
+(label "USBC2_DM"
+  (at 120.65 280.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7f76cfed-8839-5dc4-bf9a-d7fa1f49716b)
+)
+(label "MCU_3V3"
+  (at 640.08 505.46 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7280ac23-cf76-5eca-b5af-23857880cdf7)
 )
 (label "MCU_3V3"
   (at 135.89 389.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ca959d6d-37fd-557c-a335-3bda094f3725)
+  (uuid b05239b4-300e-5a5c-bbd5-0c9a2f3c0bda)
+)
+(label "USB_PD_SELECTED"
+  (at 640.08 510.54 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c2280a1a-68a5-5108-afbe-1d2018cea264)
+)
+(label "USB_PD_SELECTED"
+  (at 90.17 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d5268b9e-cbec-5722-9a04-53bbaeaf13b3)
+)
+(label "PD1_VALID_N"
+  (at 640.08 515.62 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 798f3884-2b52-5dfb-b2bf-48f2147cff84)
+)
+(label "PD1_VALID_N"
+  (at 219.71 196.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 99dec613-22a6-5d38-963c-7bda28c6d404)
+)
+(label "PD2_VALID_N"
+  (at 640.08 520.7 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 50e0938e-256d-5303-beef-09ba9261946f)
+)
+(label "PD2_VALID_N"
+  (at 219.71 201.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0771b017-2a37-52f5-afe6-459f4ea6bf1d)
+)
+(label "PD3_VALID_N"
+  (at 640.08 525.78 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6e86f9bf-42a7-5039-91ed-518490e04ff6)
+)
+(label "PD3_VALID_N"
+  (at 219.71 207.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1a15283c-c066-5b5e-ab18-f76be32066e4)
+)
+(label "PD1_VBUS_RAW"
+  (at 640.08 530.86 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b536a088-3762-5deb-9fa5-341ff3baf02e)
+)
+(label "PD1_VBUS_RAW"
+  (at 90.17 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 56525a6d-3913-59ae-8b6d-5bf055ad53d8)
+)
+(label "PD2_VBUS_RAW"
+  (at 640.08 535.94 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b743343b-bec1-572b-9720-03400f64452e)
+)
+(label "PD2_VBUS_RAW"
+  (at 90.17 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d36dcb31-7e95-5519-8753-468286987063)
+)
+(label "PD3_VBUS_RAW"
+  (at 640.08 541.02 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2ff8ee73-2dd3-5a5e-9bc6-413319fa2648)
+)
+(label "PD3_VBUS_RAW"
+  (at 90.17 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5f8aeb9c-ddef-573b-b76f-2db0720bdba7)
+)
+(label "PD1_PATH_EN"
+  (at 640.08 546.1 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a0cd78e0-3ab4-59c7-a975-ed36a5670f80)
+)
+(label "PD1_PATH_EN"
+  (at 219.71 435.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c0df859c-6ae7-594f-80f4-778a396bb30e)
+)
+(label "PD2_PATH_EN"
+  (at 640.08 551.18 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9ec1546d-8ad2-5fec-aeb2-1b8b79c9267f)
+)
+(label "PD2_PATH_EN"
+  (at 219.71 440.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 627953db-9a42-5aba-9a8b-e0e48884e838)
+)
+(label "PD3_PATH_EN"
+  (at 640.08 556.26 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 662ded5b-486a-512a-aee6-359e25f11855)
+)
+(label "PD3_PATH_EN"
+  (at 219.71 445.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bb75d7d7-a679-592e-b289-c0e1c1712fd2)
+)
+(label "PD1_EFUSE_FAULT_N"
+  (at 640.08 561.34 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3d5b3500-4647-5d2e-8c2c-5ebb27b25bc3)
+)
+(label "PD1_EFUSE_FAULT_N"
+  (at 219.71 450.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fbdab82f-9dea-5bb8-8d69-fd57ff1aa55b)
+)
+(label "PD2_EFUSE_FAULT_N"
+  (at 640.08 566.42 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 55580799-fe52-5424-bc93-2a0c04ee8396)
+)
+(label "PD2_EFUSE_FAULT_N"
+  (at 219.71 455.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9df271ce-c710-5cdf-a8cd-521c26da0b33)
+)
+(label "PD3_EFUSE_FAULT_N"
+  (at 640.08 571.5 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0bb5c8e7-b23b-5913-bed4-c21e47619682)
+)
+(label "PD3_EFUSE_FAULT_N"
+  (at 219.71 461.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 70287036-cd8f-59e6-8916-483f6a831733)
+)
+(label "PD1_I2C_SCL"
+  (at 640.08 576.58 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 08507af3-0091-5b40-abca-2cf96c3c5847)
+)
+(label "PD1_I2C_SCL"
+  (at 135.89 506.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a670a662-f348-5b50-ac0d-9860c274c50f)
+)
+(label "PD1_I2C_SDA"
+  (at 640.08 581.66 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid da48c92b-0884-5c0a-92db-cba39054c6aa)
+)
+(label "PD1_I2C_SDA"
+  (at 135.89 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 005ab3e5-cbb1-5e2b-8ff9-e041650eb64e)
+)
+(label "PD2_I2C_SCL"
+  (at 640.08 586.74 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0244ad3f-9800-5507-80f2-ae869c7aef7e)
+)
+(label "PD2_I2C_SCL"
+  (at 135.89 516.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c536d0a9-4001-58ea-b806-56be0182c32c)
+)
+(label "PD2_I2C_SDA"
+  (at 640.08 591.82 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3a404c97-ee0e-5a65-b68a-9d7da10403ba)
+)
+(label "PD2_I2C_SDA"
+  (at 135.89 521.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7036bedc-3457-58f2-8547-cb044cd1fcb4)
+)
+(label "PD3_I2C_SCL"
+  (at 640.08 596.9 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a07bf96a-108a-5d7e-bed6-2a43f1bee322)
+)
+(label "PD3_I2C_SCL"
+  (at 135.89 527.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bce7677f-dac1-5e7c-9b2e-5be50eb9c09b)
+)
+(label "PD3_I2C_SDA"
+  (at 640.08 601.98 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fe934e04-8f80-5db2-ab81-c939f8f503aa)
+)
+(label "PD3_I2C_SDA"
+  (at 135.89 532.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4dc7c36f-4e2b-5119-ad5e-43b4de084f10)
+)
+(label "SYS_5V"
+  (at 525.78 44.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0afb29bb-9d15-57ef-9492-63ecdba80a4f)
+)
+(label "SYS_3V3"
+  (at 525.78 49.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e43d24c8-3118-5603-a0f7-1d645fd088a7)
+)
+(label "MU_HOST_ACTIVE"
+  (at 525.78 54.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2e897dac-ce9e-59de-a82d-33e4d7d97423)
+)
+(label "TCP0_HPD"
+  (at 525.78 59.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7eec316a-25d2-57a6-88dc-b3392d7b9624)
+)
+(label "TCP0_HPD"
+  (at 359.41 232.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 757b6ef1-d34a-5b58-b303-29b337c545b9)
+)
+(label "TCP0_DDC_SDA"
+  (at 525.78 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f6bb8874-d37a-5be9-9d34-7f2c15b0b523)
+)
+(label "TCP0_DDC_SDA"
+  (at 359.41 222.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e4bac42d-3a6d-51aa-b85c-9a2892fffc8a)
+)
+(label "TCP0_DDC_SCL"
+  (at 525.78 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 104ec4e3-c09b-5c1d-9e4c-97542eefb59d)
+)
+(label "TCP0_DDC_SCL"
+  (at 359.41 227.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7ba7f109-be53-5329-b2be-e1e1cb9216ab)
+)
+(label "TCP0_TX0_P"
+  (at 525.78 74.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b2eec4c7-5751-5c55-9dd6-632259467467)
+)
+(label "TCP0_TX0_P"
+  (at 359.41 237.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2b293b1e-f419-5ee6-90a0-4f1093e2e27e)
+)
+(label "TCP0_TX0_N"
+  (at 525.78 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 193a39fd-070a-52dd-89a7-e67a017408e0)
+)
+(label "TCP0_TX0_N"
+  (at 359.41 242.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 83c0f9bb-37d8-5acb-b5b8-97609945b1f0)
+)
+(label "TCP0_TX1_P"
+  (at 525.78 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 16112185-060e-55a5-80c3-0a02f14004b0)
+)
+(label "TCP0_TX1_P"
+  (at 359.41 247.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1c028b68-2598-510e-8f51-f47891884405)
+)
+(label "TCP0_TX1_N"
+  (at 525.78 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 20a470e8-5a9b-5940-8678-a90ac3836627)
+)
+(label "TCP0_TX1_N"
+  (at 359.41 252.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 27962373-bfdc-5728-af64-2d142d4a4641)
+)
+(label "TCP0_TXRX0_P"
+  (at 525.78 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4f2b1283-ea7d-56b4-922b-5ae83eac57f6)
+)
+(label "TCP0_TXRX0_P"
+  (at 359.41 257.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c08906b2-5280-5cdc-9e1b-4ee3a7d9fc0f)
+)
+(label "TCP0_TXRX0_N"
+  (at 525.78 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 53dede60-2bdb-58d3-b510-655bca0a07a5)
+)
+(label "TCP0_TXRX0_N"
+  (at 359.41 262.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4d0118bf-d6da-5b02-bf0f-7c58c2c83b20)
+)
+(label "TCP0_TXRX1_P"
+  (at 525.78 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 35b64748-ab1f-5b81-8f95-848fd9b54e48)
+)
+(label "TCP0_TXRX1_P"
+  (at 359.41 267.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bb296ae9-f844-5148-9ce3-365bf179fefd)
+)
+(label "TCP0_TXRX1_N"
+  (at 525.78 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2b1d1f24-1977-5a26-aec5-8cfcdc890ff2)
+)
+(label "TCP0_TXRX1_N"
+  (at 359.41 273.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 744b61b2-cd30-5d87-825c-123f100e2452)
+)
+(label "PCIE_3V3"
+  (at 135.89 384.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 78d7d19f-72b6-5448-9b46-9c2267976924)
+)
+(label "PCIE_3V3"
+  (at 359.41 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8436c89c-8dd8-5d77-8362-4172abcf1feb)
 )
 (label "I2C_SCL"
   (at 135.89 394.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 21cb35a9-e93d-5f12-a95f-38f852a278a2)
+  (uuid d63425a1-cb1d-5266-8001-4d2e5ea30b4d)
 )
 (label "I2C_SDA"
   (at 135.89 400.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dc9aaf29-698f-51ff-8628-084daf9995a4)
+  (uuid 6b22065f-adbe-53a1-9f87-054c4f51bb51)
 )
 (label "WIFI_PCIE_TX_P"
   (at 135.89 405.13 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 09167894-1c8a-506a-ada6-2595ba41f63a)
+  (uuid 5d53615b-5037-5aa2-b67f-6923d8d458dc)
 )
 (label "WIFI_PCIE_TX_P"
-  (at 359.41 313.69 0)
+  (at 359.41 278.13 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 95f42160-7fed-53a3-a8a5-ab4641fe6cc7)
+  (uuid abde4896-03cc-5aaf-bd5c-20ad010543da)
 )
 (label "WIFI_PCIE_TX_N"
   (at 135.89 410.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cab88505-452c-564b-93f3-cda4941150b9)
+  (uuid ac4455ec-9e7b-5f4e-9198-a4d335115735)
 )
 (label "WIFI_PCIE_TX_N"
-  (at 359.41 318.77 0)
+  (at 359.41 283.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ea91a8fe-2c0c-55e7-b180-ad73eac2ad47)
+  (uuid b80f93bf-22cd-5c85-ac17-c22815ea782d)
 )
 (label "WIFI_PCIE_RX_P"
   (at 135.89 415.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53eb3f72-e227-51ee-b871-824ec8ef487d)
+  (uuid 8a51cd02-0bc5-5bb4-8684-0bb76e2bcb00)
 )
 (label "WIFI_PCIE_RX_P"
-  (at 359.41 323.85 0)
+  (at 359.41 288.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 11340e70-636f-5999-a30b-e2de5952a06e)
+  (uuid d3fa16c5-f8d5-54aa-a9a2-dd73d1c7dc62)
 )
 (label "WIFI_PCIE_RX_N"
   (at 135.89 420.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c7e27a8f-4efa-5713-9d79-9e4dceceb336)
+  (uuid 980ca4ff-5387-50c5-bfaf-e9bfe6f00322)
 )
 (label "WIFI_PCIE_RX_N"
-  (at 359.41 328.93 0)
+  (at 359.41 293.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7faa1592-8698-5287-8dcc-6d923c8b512c)
+  (uuid 0a5c299b-a598-511a-8e83-e2b95d6acb63)
 )
 (label "WIFI_USB_DN"
   (at 135.89 425.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d2c2028d-875a-59cd-9856-d5b4e9312382)
+  (uuid cafc6691-052d-5754-8c1e-03cc54d65a51)
 )
 (label "WIFI_USB_DN"
-  (at 359.41 334.01 0)
+  (at 359.41 298.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 98c7015d-055d-52c6-9791-98854d88eb7c)
+  (uuid 0502b3f1-6361-5679-ad40-d355d470a8e6)
 )
 (label "WIFI_USB_DP"
   (at 135.89 430.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0d5d41e5-3c47-54d9-bb85-46c922d03d34)
+  (uuid 72345d0e-fe0a-5bc3-a031-ed2e0717957f)
 )
 (label "WIFI_USB_DP"
-  (at 359.41 339.09 0)
+  (at 359.41 303.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 01b50d8d-f5d6-511a-a45a-f8049bc36648)
+  (uuid b64f0065-f7a8-5aa5-888f-a8569c496426)
 )
 (label "WIFI_REFCLK_P"
   (at 135.89 435.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8d2f425f-2a73-532c-9e17-4a3c36053031)
+  (uuid f282c6c0-7e0e-5cab-bd1b-1ed938b39f1c)
 )
 (label "WIFI_REFCLK_P"
-  (at 359.41 344.17 0)
+  (at 359.41 308.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ce615d29-5e4c-5cb2-84a3-7734c915828e)
+  (uuid 9115ddbf-833e-554d-b971-1025a630763a)
 )
 (label "WIFI_REFCLK_N"
   (at 135.89 440.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9dfabf74-e717-5af5-866a-14ca667e868e)
+  (uuid a39a7002-f7fb-54f7-92dd-157496aff7f4)
 )
 (label "WIFI_REFCLK_N"
-  (at 359.41 349.25 0)
+  (at 359.41 313.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e33d954d-d70d-5521-b46b-72d4d075f471)
+  (uuid 45aa7bca-b893-5cd4-a32b-f13c84f11e75)
 )
 (label "WIFI_CLKREQ_N"
   (at 135.89 445.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 34f0086b-458f-5e49-ba9f-70b6cdc0647a)
+  (uuid b10f8a40-4f47-567d-b29f-589d2523a12c)
 )
 (label "WIFI_CLKREQ_N"
-  (at 359.41 354.33 0)
+  (at 359.41 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fb702aac-d7c1-55e4-b758-a0026dd4c73b)
+  (uuid 7d38fe52-087d-5c8e-a807-3717bb700409)
 )
 (label "PCIE_WAKE_N"
   (at 135.89 450.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 52475e61-57b7-564c-af04-21b2e4041eb8)
+  (uuid 1e167bac-e892-59c9-950f-1640dc952219)
 )
 (label "PCIE_WAKE_N"
-  (at 359.41 359.41 0)
+  (at 359.41 323.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7080ba01-0255-57c1-9e72-77a5e6f52369)
+  (uuid 1b51dd7d-3084-5398-95eb-f45fbe9d03af)
 )
 (label "PLTRST_SRC_N"
   (at 135.89 455.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5cad0aff-cb16-5cd7-b5c3-aeca4e6bb857)
+  (uuid 699a99e3-8ebe-5f98-b2b5-ceeee3926339)
 )
 (label "PLTRST_SRC_N"
-  (at 359.41 364.49 0)
+  (at 359.41 328.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 880090e7-fd5a-57ba-ab1c-b8cc773a5f71)
+  (uuid b009896f-184c-5c87-b1e2-6b8aefdfe5c0)
 )
-(label "WIFI_W_DISABLE1_N"
+(label "WIFI_W_DISABLE1_N_EC"
   (at 135.89 461.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 498fb427-87e2-5467-9ec7-2e5cce7e1007)
+  (uuid 62d6eea1-3835-5af2-95d8-2b13a0f7b8ff)
 )
-(label "WIFI_W_DISABLE1_N"
-  (at 219.71 110.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5d36b359-b451-5cef-b4b0-733b1d8f9d55)
-)
-(label "WIFI_W_DISABLE2_N"
-  (at 135.89 466.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid de39356c-e757-5441-b238-37a7cfd4217f)
-)
-(label "WIFI_W_DISABLE2_N"
+(label "WIFI_W_DISABLE1_N_EC"
   (at 219.71 115.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7f76cfed-8839-5dc4-bf9a-d7fa1f49716b)
+  (uuid 8ddf5ac5-4982-59ca-9306-d7863ea7bad7)
 )
-(label "OLED_RESET_N"
-  (at 135.89 471.17 0)
+(label "WIFI_W_DISABLE2_N_EC"
+  (at 135.89 466.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7280ac23-cf76-5eca-b5af-23857880cdf7)
+  (uuid 2d365c9a-d573-5ec6-a187-11f5474d5000)
 )
-(label "OLED_RESET_N"
+(label "WIFI_W_DISABLE2_N_EC"
   (at 219.71 120.65 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b05239b4-300e-5a5c-bbd5-0c9a2f3c0bda)
+  (uuid f3b1e750-f397-53bd-b791-19d09e3f488b)
+)
+(label "SERVICE_MUX_RESET_N"
+  (at 135.89 471.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f25b02f1-75f3-5d4e-a807-28804561decc)
+)
+(label "SERVICE_MUX_RESET_N"
+  (at 219.71 125.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b7bc4266-f8f9-5bef-93f2-62570aeb00d1)
 )
 (label "GNSS_UART_RX"
   (at 135.89 476.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c2280a1a-68a5-5108-afbe-1d2018cea264)
+  (uuid 2d5ce556-fb22-5b91-bc06-9e9dc604f08a)
 )
 (label "GNSS_UART_RX"
-  (at 219.71 125.73 0)
+  (at 219.71 130.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d5268b9e-cbec-5722-9a04-53bbaeaf13b3)
+  (uuid f10d6cec-73c0-5ab4-88f0-e4cc45dffded)
 )
 (label "GNSS_UART_TX"
   (at 135.89 481.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 798f3884-2b52-5dfb-b2bf-48f2147cff84)
+  (uuid 062dc623-5962-5013-9961-aed1d5354bd2)
 )
 (label "GNSS_UART_TX"
-  (at 219.71 130.81 0)
+  (at 219.71 135.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 99dec613-22a6-5d38-963c-7bda28c6d404)
+  (uuid 4ef12409-ad65-5f0e-a5f7-34f5e462c17a)
 )
 (label "GNSS_RESET_N"
   (at 135.89 486.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 50e0938e-256d-5303-beef-09ba9261946f)
+  (uuid fee6d759-a770-52fd-a434-ec8a87bafb50)
 )
 (label "GNSS_RESET_N"
-  (at 219.71 135.89 0)
+  (at 219.71 140.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0771b017-2a37-52f5-afe6-459f4ea6bf1d)
+  (uuid 61544710-8358-58d2-bcde-52412f488852)
 )
 (label "GNSS_PPS"
   (at 135.89 491.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6e86f9bf-42a7-5039-91ed-518490e04ff6)
+  (uuid 629fdc2f-d9aa-56e8-b3c4-fdf1ba007840)
 )
 (label "GNSS_PPS"
-  (at 219.71 140.97 0)
+  (at 219.71 146.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1a15283c-c066-5b5e-ab18-f76be32066e4)
+  (uuid 1bb03124-41ac-58ee-ac1c-2b79814c705b)
 )
 (label "GNSS_EXTINT"
   (at 135.89 496.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b536a088-3762-5deb-9fa5-341ff3baf02e)
+  (uuid 7e78fbc4-e305-5eb0-9525-8cbcbd744e62)
 )
 (label "GNSS_EXTINT"
-  (at 219.71 146.05 0)
+  (at 219.71 151.13 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 56525a6d-3913-59ae-8b6d-5bf055ad53d8)
+  (uuid 47b0736a-68db-5352-a310-4976a770ed6a)
 )
 (label "RADIO_GPIO0"
   (at 135.89 501.65 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b743343b-bec1-572b-9720-03400f64452e)
+  (uuid 9a4086b9-19e0-5de0-bb74-520a3fa1bf21)
 )
 (label "RADIO_GPIO0"
-  (at 219.71 151.13 0)
+  (at 219.71 156.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d36dcb31-7e95-5519-8753-468286987063)
+  (uuid 45fd10e0-191a-5dbc-a221-439683b92568)
 )
 (label "SYS_5V"
   (at 405.13 394.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2ff8ee73-2dd3-5a5e-9bc6-413319fa2648)
+  (uuid 070b5af7-853c-5fa8-a827-7ad8ec88d892)
 )
 (label "SYS_3V3"
   (at 405.13 400.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5f8aeb9c-ddef-573b-b76f-2db0720bdba7)
+  (uuid da5b9a9c-50d3-5d22-9ed3-0e6d425a3708)
 )
 (label "MCU_3V3"
   (at 405.13 405.13 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a0cd78e0-3ab4-59c7-a975-ed36a5670f80)
+  (uuid eed81973-c1a5-5672-bc0c-5328b8a05b00)
 )
-(label "I2C_SCL"
+(label "MU_12V"
   (at 405.13 410.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c0df859c-6ae7-594f-80f4-778a396bb30e)
+  (uuid 6059770a-e9f4-56e6-a1c0-5090e764ab71)
 )
-(label "I2C_SDA"
+(label "MU_12V"
+  (at 359.41 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9b06f3d8-5dbe-52b7-817a-8d9994067a2f)
+)
+(label "MU_HOST_ACTIVE"
   (at 405.13 415.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9ec1546d-8ad2-5fec-aeb2-1b8b79c9267f)
+  (uuid 57606650-0283-54c0-a77e-cf669a04ae74)
 )
-(label "EC_HOST_USB_DP"
+(label "INTERNAL_USB_VBUS_VALID"
   (at 405.13 420.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 627953db-9a42-5aba-9a8b-e0e48884e838)
+  (uuid bd2c8a00-26c9-54d3-aeb0-927230b1fafe)
+)
+(label "INTERNAL_USB_VBUS_VALID"
+  (at 359.41 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 490f994e-b539-5279-b243-b15bb0e672db)
 )
 (label "EC_HOST_USB_DP"
-  (at 359.41 69.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 662ded5b-486a-512a-aee6-359e25f11855)
-)
-(label "EC_HOST_USB_DM"
   (at 405.13 425.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bb75d7d7-a679-592e-b289-c0e1c1712fd2)
+  (uuid 7d02f301-18b8-593e-912f-c1410dbd0ccb)
+)
+(label "EC_HOST_USB_DP"
+  (at 359.41 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e0723242-dfe5-5073-acd6-2a06859a43a6)
 )
 (label "EC_HOST_USB_DM"
-  (at 359.41 74.93 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3d5b3500-4647-5d2e-8c2c-5ebb27b25bc3)
-)
-(label "MCU_USB_DP"
   (at 405.13 430.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fbdab82f-9dea-5bb8-8d69-fd57ff1aa55b)
+  (uuid 931900ee-686a-52d5-b88f-73acce1439ba)
+)
+(label "EC_HOST_USB_DM"
+  (at 359.41 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 23a703ab-549a-5a81-9ac3-266e8b29e48f)
 )
 (label "MCU_USB_DP"
-  (at 219.71 80.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 55580799-fe52-5424-bc93-2a0c04ee8396)
-)
-(label "MCU_USB_DM"
   (at 405.13 435.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9df271ce-c710-5cdf-a8cd-521c26da0b33)
+  (uuid aec60847-19d7-5841-9eec-946f017655e8)
 )
-(label "MCU_USB_DM"
+(label "MCU_USB_DP"
   (at 219.71 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0bb5c8e7-b23b-5913-bed4-c21e47619682)
+  (uuid f0a29c71-fe65-5df0-aecb-75fe1842dfd8)
 )
-(label "TOUCH_USB_DP"
+(label "MCU_USB_DM"
   (at 405.13 440.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 70287036-cd8f-59e6-8916-483f6a831733)
+  (uuid f50119c1-1ef8-5694-96cf-4a8e43940ea4)
 )
-(label "TOUCH_USB_DP"
-  (at 359.41 80.01 0)
+(label "MCU_USB_DM"
+  (at 219.71 90.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 08507af3-0091-5b40-abca-2cf96c3c5847)
+  (uuid 7a6368f4-798a-53b4-b3e3-51259b2342e3)
 )
-(label "TOUCH_USB_DM"
+(label "TRACKPAD_USB_DP"
   (at 405.13 445.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a670a662-f348-5b50-ac0d-9860c274c50f)
+  (uuid 3688640a-a46d-52c6-a7ae-fa964491be5a)
 )
-(label "TOUCH_USB_DM"
-  (at 359.41 85.09 0)
+(label "TRACKPAD_USB_DP"
+  (at 359.41 135.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid da48c92b-0884-5c0a-92db-cba39054c6aa)
+  (uuid f6670798-203d-55dd-b4c4-d7e5c67bdc8e)
 )
-(label "TOUCH_RESET_N"
+(label "TRACKPAD_USB_DM"
   (at 405.13 450.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 005ab3e5-cbb1-5e2b-8ff9-e041650eb64e)
+  (uuid be0e2f3d-332b-5ff7-baba-fcc24eb27d22)
 )
-(label "TOUCH_RESET_N"
-  (at 219.71 191.77 0)
+(label "TRACKPAD_USB_DM"
+  (at 359.41 140.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0244ad3f-9800-5507-80f2-ae869c7aef7e)
+  (uuid 1a58497e-66df-5c16-af85-5f13ddb63821)
 )
-(label "TOUCH_INT_N"
+(label "FAN_PWM"
   (at 405.13 455.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c536d0a9-4001-58ea-b806-56be0182c32c)
-)
-(label "TOUCH_INT_N"
-  (at 219.71 196.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3a404c97-ee0e-5a65-b68a-9d7da10403ba)
-)
-(label "TRACKPAD_USB_DP"
-  (at 405.13 461.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7036bedc-3457-58f2-8547-cb044cd1fcb4)
-)
-(label "TRACKPAD_USB_DP"
-  (at 359.41 100.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a07bf96a-108a-5d7e-bed6-2a43f1bee322)
-)
-(label "TRACKPAD_USB_DM"
-  (at 405.13 466.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bce7677f-dac1-5e7c-9b2e-5be50eb9c09b)
-)
-(label "TRACKPAD_USB_DM"
-  (at 359.41 105.41 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fe934e04-8f80-5db2-ab81-c939f8f503aa)
-)
-(label "TPAD_RESET_N"
-  (at 405.13 471.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4dc7c36f-4e2b-5119-ad5e-43b4de084f10)
-)
-(label "TPAD_RESET_N"
-  (at 219.71 212.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0afb29bb-9d15-57ef-9492-63ecdba80a4f)
-)
-(label "TPAD_INT_N"
-  (at 405.13 476.25 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e43d24c8-3118-5603-a0f7-1d645fd088a7)
-)
-(label "TPAD_INT_N"
-  (at 219.71 217.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2e897dac-ce9e-59de-a82d-33e4d7d97423)
+  (uuid cb66db34-1419-5318-a26f-3f4b6e9fbbd3)
 )
 (label "FAN_PWM"
-  (at 405.13 481.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7eec316a-25d2-57a6-88dc-b3392d7b9624)
-)
-(label "FAN_PWM"
-  (at 219.71 156.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 757b6ef1-d34a-5b58-b303-29b337c545b9)
-)
-(label "FAN_TACH"
-  (at 405.13 486.41 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f6bb8874-d37a-5be9-9d34-7f2c15b0b523)
-)
-(label "FAN_TACH"
   (at 219.71 161.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e4bac42d-3a6d-51aa-b85c-9a2892fffc8a)
+  (uuid 217af2f4-a9fd-5658-a915-308815886914)
 )
-(label "LCD_BL_PWM"
-  (at 405.13 491.49 0)
+(label "FAN_TACH"
+  (at 405.13 461.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 104ec4e3-c09b-5c1d-9e4c-97542eefb59d)
+  (uuid 11327181-f687-5027-97ad-7e9afc21dd2f)
 )
-(label "LCD_BL_PWM"
+(label "FAN_TACH"
   (at 219.71 166.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7ba7f109-be53-5329-b2be-e1e1cb9216ab)
+  (uuid cb827b41-3d6f-51a2-ba47-aa6d8599a33b)
 )
-(label "LCD_BL_EN"
-  (at 405.13 496.57 0)
+(label "LID_CLOSED_N"
+  (at 405.13 466.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b2eec4c7-5751-5c55-9dd6-632259467467)
+  (uuid c62b4b22-7aba-50ba-8bd6-59a39fcdd446)
 )
-(label "LCD_BL_EN"
+(label "LID_CLOSED_N"
   (at 219.71 171.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2b293b1e-f419-5ee6-90a0-4f1093e2e27e)
+  (uuid 08232791-0f19-55df-ab84-f44914168405)
 )
-(label "LID_CLOSED_N"
-  (at 405.13 501.65 0)
+(label "THERM_SKIN_ADC"
+  (at 405.13 471.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 193a39fd-070a-52dd-89a7-e67a017408e0)
+  (uuid 5f2b4bf6-e7c7-57e6-872d-8fc7b7480b8e)
 )
-(label "LID_CLOSED_N"
+(label "THERM_SKIN_ADC"
   (at 219.71 176.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 83c0f9bb-37d8-5acb-b5b8-97609945b1f0)
+  (uuid 57f01766-ae05-5957-9106-9b0f9d974851)
 )
-(label "THERM_SKIN_ADC"
-  (at 405.13 506.73 0)
+(label "THERM_MU_ADC"
+  (at 405.13 476.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 16112185-060e-55a5-80c3-0a02f14004b0)
+  (uuid 6bc42edb-bc4d-5d04-bfdb-b0f91dce565a)
 )
-(label "THERM_SKIN_ADC"
+(label "THERM_MU_ADC"
   (at 219.71 181.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1c028b68-2598-510e-8f51-f47891884405)
+  (uuid 20c22d86-9a53-5460-9b9f-f66f72cbef52)
 )
-(label "THERM_MU_ADC"
-  (at 405.13 511.81 0)
+(label "TRACKPAD_FAULT_N"
+  (at 405.13 481.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 20a470e8-5a9b-5940-8678-a90ac3836627)
+  (uuid 8348c136-1397-52a9-9989-db85ebba6c81)
 )
-(label "THERM_MU_ADC"
+(label "TRACKPAD_FAULT_N"
   (at 219.71 186.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 27962373-bfdc-5728-af64-2d142d4a4641)
-)
-(label "PANEL_PWR_EN"
-  (at 405.13 516.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4f2b1283-ea7d-56b4-922b-5ae83eac57f6)
-)
-(label "PANEL_PWR_EN"
-  (at 219.71 201.93 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c08906b2-5280-5cdc-9e1b-4ee3a7d9fc0f)
-)
-(label "PANEL_RESET_N"
-  (at 405.13 521.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53dede60-2bdb-58d3-b510-655bca0a07a5)
-)
-(label "PANEL_RESET_N"
-  (at 219.71 207.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4d0118bf-d6da-5b02-bf0f-7c58c2c83b20)
+  (uuid 8f8a8524-b218-5634-91ae-7c01e27fb4fe)
 )
 (label "SYS_5V"
   (at 535.94 224.79 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 35b64748-ab1f-5b81-8f95-848fd9b54e48)
+  (uuid 2a1cf8f6-7e7a-5660-af0c-313c409e4cb2)
 )
 (label "MCU_3V3"
   (at 535.94 229.87 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bb296ae9-f844-5148-9ce3-365bf179fefd)
+  (uuid fe9f7a8b-ea02-56f5-9cd0-eb2e891e6a67)
 )
 (label "RADIO_VHF_UART_TX"
   (at 535.94 234.95 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2b1d1f24-1977-5a26-aec5-8cfcdc890ff2)
+  (uuid 06fa52e7-66a8-5bc1-962e-3ff574d77198)
 )
 (label "RADIO_VHF_UART_TX"
-  (at 219.71 222.25 0)
+  (at 219.71 212.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 744b61b2-cd30-5d87-825c-123f100e2452)
+  (uuid e9fe2c58-684c-567d-b92d-09a4ad8094bd)
 )
 (label "RADIO_VHF_UART_RX"
   (at 535.94 240.03 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 78d7d19f-72b6-5448-9b46-9c2267976924)
+  (uuid d6ef89a6-45e0-502c-b9ed-dde02fe5dfa9)
 )
 (label "RADIO_VHF_UART_RX"
-  (at 219.71 227.33 0)
+  (at 219.71 217.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8436c89c-8dd8-5d77-8362-4172abcf1feb)
+  (uuid 332a72d6-7653-58b7-ba8f-17842c094dbe)
 )
 (label "RADIO_UHF_UART_TX"
   (at 535.94 245.11 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d63425a1-cb1d-5266-8001-4d2e5ea30b4d)
+  (uuid 7c69a386-2a29-5bda-a69e-8e1217889d26)
 )
 (label "RADIO_UHF_UART_TX"
-  (at 219.71 232.41 0)
+  (at 219.71 222.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6b22065f-adbe-53a1-9f87-054c4f51bb51)
+  (uuid 7fb54493-a326-54e8-952d-33eeec4d74de)
 )
 (label "RADIO_UHF_UART_RX"
   (at 535.94 250.19 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5d53615b-5037-5aa2-b67f-6923d8d458dc)
+  (uuid 62d2c47b-41e3-5724-a566-acbda59032c0)
 )
 (label "RADIO_UHF_UART_RX"
-  (at 219.71 237.49 0)
+  (at 219.71 227.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid abde4896-03cc-5aaf-bd5c-20ad010543da)
+  (uuid 57b314fd-2587-5a19-97e2-c3c9e5cb76cd)
 )
 (label "RADIO_VHF_PTT_N"
   (at 535.94 255.27 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ac4455ec-9e7b-5f4e-9198-a4d335115735)
+  (uuid 40d7f96e-64c6-520e-8cf2-d97d73c917c6)
 )
 (label "RADIO_VHF_PTT_N"
-  (at 219.71 242.57 0)
+  (at 219.71 232.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b80f93bf-22cd-5c85-ac17-c22815ea782d)
+  (uuid bf608f5a-54f8-500f-8ffe-a00954aae76e)
 )
 (label "RADIO_UHF_PTT_N"
   (at 535.94 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8a51cd02-0bc5-5bb4-8684-0bb76e2bcb00)
+  (uuid 61a7ead4-fb92-53fb-90e1-92c04ec4850a)
 )
 (label "RADIO_UHF_PTT_N"
-  (at 219.71 247.65 0)
+  (at 219.71 237.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d3fa16c5-f8d5-54aa-a9a2-dd73d1c7dc62)
+  (uuid 22d7f13f-6177-53c6-a5c2-7ca83b1fff9d)
 )
 (label "RADIO_VHF_PD_N"
   (at 535.94 265.43 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 980ca4ff-5387-50c5-bfaf-e9bfe6f00322)
+  (uuid f366155c-b994-5569-848e-bba91a1bffa5)
 )
 (label "RADIO_VHF_PD_N"
-  (at 219.71 252.73 0)
+  (at 219.71 242.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0a5c299b-a598-511a-8e83-e2b95d6acb63)
+  (uuid be02c895-0e2b-5687-8849-f1b7b65b114b)
 )
 (label "RADIO_UHF_PD_N"
   (at 535.94 270.51 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cafc6691-052d-5754-8c1e-03cc54d65a51)
+  (uuid 17860e6d-638c-5609-87f0-2d43aa9c92fb)
 )
 (label "RADIO_UHF_PD_N"
-  (at 219.71 257.81 0)
+  (at 219.71 247.65 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0502b3f1-6361-5679-ad40-d355d470a8e6)
+  (uuid 8f458688-623b-583f-b2c4-a3d1d2d77b22)
 )
 (label "RADIO_VHF_SQL"
   (at 535.94 275.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 72345d0e-fe0a-5bc3-a031-ed2e0717957f)
+  (uuid f746d9d9-cbc3-50f7-9392-bb6fc3d4a2ef)
 )
 (label "RADIO_VHF_SQL"
-  (at 219.71 262.89 0)
+  (at 219.71 252.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b64f0065-f7a8-5aa5-888f-a8569c496426)
+  (uuid 33695614-81ea-5d9e-9760-5cba3ce9adce)
 )
 (label "RADIO_UHF_SQL"
   (at 535.94 280.67 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f282c6c0-7e0e-5cab-bd1b-1ed938b39f1c)
+  (uuid 1d3b2d36-059b-5756-8ead-d3d7aea152a5)
 )
 (label "RADIO_UHF_SQL"
-  (at 219.71 267.97 0)
+  (at 219.71 257.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9115ddbf-833e-554d-b971-1025a630763a)
+  (uuid 74168d23-1bc8-5026-a917-7e0a5ca4769c)
 )
-(label "RADIO_VHF_RF_SEL"
+(label "RADIO_VHF_RF_SEL_3V3"
   (at 535.94 285.75 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a39a7002-f7fb-54f7-92dd-157496aff7f4)
+  (uuid 0f741614-613b-52a2-9852-6eb28ae02a73)
 )
-(label "RADIO_VHF_RF_SEL"
-  (at 219.71 273.05 0)
+(label "RADIO_VHF_RF_SEL_3V3"
+  (at 219.71 262.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 45aa7bca-b893-5cd4-a32b-f13c84f11e75)
+  (uuid b96cab69-5c36-5934-9ac7-bdaf8ecfd0b1)
 )
-(label "RADIO_UHF_RF_SEL"
+(label "RADIO_UHF_RF_SEL_3V3"
   (at 535.94 290.83 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b10f8a40-4f47-567d-b29f-589d2523a12c)
+  (uuid 0ebd08a0-bb91-50e5-9182-696b5c387f97)
 )
-(label "RADIO_UHF_RF_SEL"
-  (at 219.71 278.13 0)
+(label "RADIO_UHF_RF_SEL_3V3"
+  (at 219.71 267.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7d38fe52-087d-5c8e-a807-3717bb700409)
+  (uuid 51f00757-284b-504b-88ce-c1d5502434a8)
 )
 (label "RADIO_AUDIO_SEL"
   (at 535.94 295.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1e167bac-e892-59c9-950f-1640dc952219)
+  (uuid 98f017e2-8e0d-5791-b59a-f4d47d0f4abb)
 )
 (label "RADIO_AUDIO_SEL"
-  (at 219.71 283.21 0)
+  (at 219.71 273.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1b51dd7d-3084-5398-95eb-f45fbe9d03af)
+  (uuid a28659fe-5af3-5db4-8d00-01e658639087)
 )
 (label "RADIO_GPIO0"
   (at 535.94 300.99 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 699a99e3-8ebe-5f98-b2b5-ceeee3926339)
+  (uuid 77d8192a-4e50-5ded-aab5-c9f0e8e3fa69)
 )
 (label "RADIO_VHF_AUDIO_OUT"
   (at 535.94 306.07 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b009896f-184c-5c87-b1e2-6b8aefdfe5c0)
+  (uuid 450b65eb-d4fc-525b-be36-a6667b09c7b0)
 )
 (label "RADIO_UHF_AUDIO_OUT"
   (at 535.94 311.15 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 62d6eea1-3835-5af2-95d8-2b13a0f7b8ff)
+  (uuid dfae98d5-589f-5492-a987-567859f57994)
 )
 (label "RADIO_VHF_MIC_IN"
   (at 535.94 316.23 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8ddf5ac5-4982-59ca-9306-d7863ea7bad7)
+  (uuid 0ae2b25b-0da7-5976-b2da-24e8563021f2)
 )
 (label "RADIO_UHF_MIC_IN"
   (at 535.94 321.31 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2d365c9a-d573-5ec6-a187-11f5474d5000)
-)
-(label "VSYS"
-  (at 665.48 44.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f3b1e750-f397-53bd-b791-19d09e3f488b)
-)
-(label "SYS_3V3"
-  (at 665.48 49.53 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f25b02f1-75f3-5d4e-a807-28804561decc)
-)
-(label "MCU_3V3"
-  (at 665.48 54.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b7bc4266-f8f9-5bef-93f2-62570aeb00d1)
-)
-(label "I2C_SCL"
-  (at 665.48 59.69 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2d5ce556-fb22-5b91-bc06-9e9dc604f08a)
-)
-(label "I2C_SDA"
-  (at 665.48 64.77 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f10d6cec-73c0-5ab4-88f0-e4cc45dffded)
-)
-(label "LCD_BL_PWM"
-  (at 665.48 69.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 062dc623-5962-5013-9961-aed1d5354bd2)
-)
-(label "LCD_BL_EN"
-  (at 665.48 74.93 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4ef12409-ad65-5f0e-a5f7-34f5e462c17a)
-)
-(label "PANEL_PWR_EN"
-  (at 665.48 80.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fee6d759-a770-52fd-a434-ec8a87bafb50)
-)
-(label "PANEL_RESET_N"
-  (at 665.48 85.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 61544710-8358-58d2-bcde-52412f488852)
-)
-(label "TOUCH_RESET_N"
-  (at 665.48 90.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 629fdc2f-d9aa-56e8-b3c4-fdf1ba007840)
-)
-(label "TOUCH_INT_N"
-  (at 665.48 95.25 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1bb03124-41ac-58ee-ac1c-2b79814c705b)
-)
-(label "SYS_5V"
-  (at 674.37 185.42 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7e78fbc4-e305-5eb0-9525-8cbcbd744e62)
-)
-(label "PANEL_PWR_EN"
-  (at 674.37 190.5 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 47b0736a-68db-5352-a310-4976a770ed6a)
-)
-(label "TOUCH_USB_DP"
-  (at 674.37 195.58 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9a4086b9-19e0-5de0-bb74-520a3fa1bf21)
-)
-(label "TOUCH_USB_DM"
-  (at 674.37 200.66 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 45fd10e0-191a-5dbc-a221-439683b92568)
-)
-(label "DDIB_DDC_SDA"
-  (at 674.37 205.74 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 070b5af7-853c-5fa8-a827-7ad8ec88d892)
-)
-(label "DDIB_DDC_SDA"
-  (at 359.41 257.81 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid da5b9a9c-50d3-5d22-9ed3-0e6d425a3708)
-)
-(label "DDIB_DDC_SCL"
-  (at 674.37 210.82 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid eed81973-c1a5-5672-bc0c-5328b8a05b00)
-)
-(label "DDIB_DDC_SCL"
-  (at 359.41 262.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6059770a-e9f4-56e6-a1c0-5090e764ab71)
-)
-(label "DDIB_HPD"
-  (at 674.37 215.9 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9b06f3d8-5dbe-52b7-817a-8d9994067a2f)
-)
-(label "DDIB_HPD"
-  (at 359.41 267.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 57606650-0283-54c0-a77e-cf669a04ae74)
-)
-(label "DDIB_TX0_P"
-  (at 674.37 220.98 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bd2c8a00-26c9-54d3-aeb0-927230b1fafe)
-)
-(label "DDIB_TX0_P"
-  (at 359.41 273.05 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 490f994e-b539-5279-b243-b15bb0e672db)
-)
-(label "DDIB_TX0_N"
-  (at 674.37 226.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7d02f301-18b8-593e-912f-c1410dbd0ccb)
-)
-(label "DDIB_TX0_N"
-  (at 359.41 278.13 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e0723242-dfe5-5073-acd6-2a06859a43a6)
-)
-(label "DDIB_TX1_P"
-  (at 674.37 231.14 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 931900ee-686a-52d5-b88f-73acce1439ba)
-)
-(label "DDIB_TX1_P"
-  (at 359.41 283.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 23a703ab-549a-5a81-9ac3-266e8b29e48f)
-)
-(label "DDIB_TX1_N"
-  (at 674.37 236.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid aec60847-19d7-5841-9eec-946f017655e8)
-)
-(label "DDIB_TX1_N"
-  (at 359.41 288.29 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f0a29c71-fe65-5df0-aecb-75fe1842dfd8)
-)
-(label "DDIB_TX2_P"
-  (at 674.37 241.3 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f50119c1-1ef8-5694-96cf-4a8e43940ea4)
-)
-(label "DDIB_TX2_P"
-  (at 359.41 293.37 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7a6368f4-798a-53b4-b3e3-51259b2342e3)
-)
-(label "DDIB_TX2_N"
-  (at 674.37 246.38 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3688640a-a46d-52c6-a7ae-fa964491be5a)
-)
-(label "DDIB_TX2_N"
-  (at 359.41 298.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f6670798-203d-55dd-b4c4-d7e5c67bdc8e)
-)
-(label "DDIB_TX3_P"
-  (at 674.37 251.46 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid be0e2f3d-332b-5ff7-baba-fcc24eb27d22)
-)
-(label "DDIB_TX3_P"
-  (at 359.41 303.53 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1a58497e-66df-5c16-af85-5f13ddb63821)
-)
-(label "DDIB_TX3_N"
-  (at 674.37 256.54 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cb66db34-1419-5318-a26f-3f4b6e9fbbd3)
-)
-(label "DDIB_TX3_N"
-  (at 359.41 308.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 217af2f4-a9fd-5658-a915-308815886914)
+  (uuid e9dd1916-75b6-5043-b600-00d5bd9ddf15)
 )
 (label "MCU_3V3"
   (at 539.75 415.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 11327181-f687-5027-97ad-7e9afc21dd2f)
+  (uuid 34e253ca-01e6-5161-8a1c-199d3cde733a)
 )
 (label "SYS_5V"
   (at 539.75 420.37 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cb827b41-3d6f-51a2-ba47-aa6d8599a33b)
+  (uuid ba4d5a00-19a0-59ca-b251-7584c074853a)
 )
 (label "I2C_SCL"
   (at 539.75 425.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c62b4b22-7aba-50ba-8bd6-59a39fcdd446)
+  (uuid 6aa862a5-a201-5a31-9a0c-7dac4701e849)
 )
 (label "I2C_SDA"
   (at 539.75 430.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 08232791-0f19-55df-ab84-f44914168405)
-)
-(label "KB_ROW0"
-  (at 539.75 435.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5f2b4bf6-e7c7-57e6-872d-8fc7b7480b8e)
-)
-(label "KB_ROW0"
-  (at 219.71 288.29 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 57f01766-ae05-5957-9106-9b0f9d974851)
-)
-(label "KB_ROW1"
-  (at 539.75 440.69 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6bc42edb-bc4d-5d04-bfdb-b0f91dce565a)
-)
-(label "KB_ROW1"
-  (at 219.71 293.37 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 20c22d86-9a53-5460-9b9f-f66f72cbef52)
-)
-(label "KB_ROW2"
-  (at 539.75 445.77 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8348c136-1397-52a9-9989-db85ebba6c81)
-)
-(label "KB_ROW2"
-  (at 219.71 298.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8f8a8524-b218-5634-91ae-7c01e27fb4fe)
-)
-(label "KB_ROW3"
-  (at 539.75 450.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2a1cf8f6-7e7a-5660-af0c-313c409e4cb2)
-)
-(label "KB_ROW3"
-  (at 219.71 303.53 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fe9f7a8b-ea02-56f5-9cd0-eb2e891e6a67)
-)
-(label "KB_ROW4"
-  (at 539.75 455.93 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 06fa52e7-66a8-5bc1-962e-3ff574d77198)
-)
-(label "KB_ROW4"
-  (at 219.71 308.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e9fe2c58-684c-567d-b92d-09a4ad8094bd)
-)
-(label "KB_ROW5"
-  (at 539.75 461.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d6ef89a6-45e0-502c-b9ed-dde02fe5dfa9)
-)
-(label "KB_ROW5"
-  (at 219.71 313.69 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 332a72d6-7653-58b7-ba8f-17842c094dbe)
-)
-(label "KB_ROW6"
-  (at 539.75 466.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7c69a386-2a29-5bda-a69e-8e1217889d26)
-)
-(label "KB_ROW6"
-  (at 219.71 318.77 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7fb54493-a326-54e8-952d-33eeec4d74de)
-)
-(label "KB_ROW7"
-  (at 539.75 471.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 62d2c47b-41e3-5724-a566-acbda59032c0)
-)
-(label "KB_ROW7"
-  (at 219.71 323.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 57b314fd-2587-5a19-97e2-c3c9e5cb76cd)
-)
-(label "KB_COL0"
-  (at 539.75 476.25 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 40d7f96e-64c6-520e-8cf2-d97d73c917c6)
-)
-(label "KB_COL0"
-  (at 219.71 328.93 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bf608f5a-54f8-500f-8ffe-a00954aae76e)
-)
-(label "KB_COL1"
-  (at 539.75 481.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 61a7ead4-fb92-53fb-90e1-92c04ec4850a)
-)
-(label "KB_COL1"
-  (at 219.71 334.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 22d7f13f-6177-53c6-a5c2-7ca83b1fff9d)
-)
-(label "KB_COL2"
-  (at 539.75 486.41 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f366155c-b994-5569-848e-bba91a1bffa5)
-)
-(label "KB_COL2"
-  (at 219.71 339.09 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid be02c895-0e2b-5687-8849-f1b7b65b114b)
-)
-(label "KB_COL3"
-  (at 539.75 491.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 17860e6d-638c-5609-87f0-2d43aa9c92fb)
-)
-(label "KB_COL3"
-  (at 219.71 344.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8f458688-623b-583f-b2c4-a3d1d2d77b22)
-)
-(label "KB_COL4"
-  (at 539.75 496.57 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f746d9d9-cbc3-50f7-9392-bb6fc3d4a2ef)
-)
-(label "KB_COL4"
-  (at 219.71 349.25 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 33695614-81ea-5d9e-9760-5cba3ce9adce)
-)
-(label "KB_COL5"
-  (at 539.75 501.65 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1d3b2d36-059b-5756-8ead-d3d7aea152a5)
-)
-(label "KB_COL5"
-  (at 219.71 354.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 74168d23-1bc8-5026-a917-7e0a5ca4769c)
-)
-(label "KB_COL6"
-  (at 539.75 506.73 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0f741614-613b-52a2-9852-6eb28ae02a73)
-)
-(label "KB_COL6"
-  (at 219.71 359.41 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b96cab69-5c36-5934-9ac7-bdaf8ecfd0b1)
-)
-(label "KB_COL7"
-  (at 539.75 511.81 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0ebd08a0-bb91-50e5-9182-696b5c387f97)
-)
-(label "KB_COL7"
-  (at 219.71 364.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 51f00757-284b-504b-88ce-c1d5502434a8)
-)
-(label "KB_COL8"
-  (at 539.75 516.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 98f017e2-8e0d-5791-b59a-f4d47d0f4abb)
-)
-(label "KB_COL8"
-  (at 219.71 369.57 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a28659fe-5af3-5db4-8d00-01e658639087)
-)
-(label "KB_COL9"
-  (at 539.75 521.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 77d8192a-4e50-5ded-aab5-c9f0e8e3fa69)
-)
-(label "KB_COL9"
-  (at 219.71 374.65 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 450b65eb-d4fc-525b-be36-a6667b09c7b0)
-)
-(label "KB_COL10"
-  (at 539.75 527.05 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dfae98d5-589f-5492-a987-567859f57994)
-)
-(label "KB_COL10"
-  (at 219.71 379.73 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0ae2b25b-0da7-5976-b2da-24e8563021f2)
-)
-(label "KB_COL11"
-  (at 539.75 532.13 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e9dd1916-75b6-5043-b600-00d5bd9ddf15)
-)
-(label "KB_COL11"
-  (at 219.71 384.81 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 34e253ca-01e6-5161-8a1c-199d3cde733a)
-)
-(label "KB_COL12"
-  (at 539.75 537.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ba4d5a00-19a0-59ca-b251-7584c074853a)
-)
-(label "KB_COL12"
-  (at 219.71 389.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6aa862a5-a201-5a31-9a0c-7dac4701e849)
-)
-(label "KB_COL13"
-  (at 539.75 542.29 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid b8d63669-aecb-56ed-90bb-05590015b252)
 )
-(label "KB_COL13"
-  (at 219.71 394.97 0)
+(label "KB_RGB_PWR_EN"
+  (at 539.75 435.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6561c771-cd91-5539-843d-31caf5dfbfc0)
 )
-(label "KB_COL14"
-  (at 539.75 547.37 0)
+(label "KB_RGB_PWR_EN"
+  (at 219.71 303.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid b7c2552a-b631-5012-814d-33be9fafe31e)
 )
-(label "KB_COL14"
-  (at 219.71 400.05 0)
+(label "KB_RGB_FAULT_N"
+  (at 539.75 440.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 77d353c0-8e20-5a24-b856-fbe35ea6e378)
 )
-(label "KB_COL15"
-  (at 539.75 552.45 0)
+(label "KB_RGB_FAULT_N"
+  (at 219.71 308.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 95382619-12dc-501f-8fd1-b1a83e20308f)
 )
-(label "KB_COL15"
-  (at 219.71 405.13 0)
+(label "KB_RGB_DATA_3V3"
+  (at 539.75 445.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid fa4d44f2-bea5-5955-8dbd-51604cddba85)
 )
-(label "SYS_5V"
-  (at 674.37 335.28 0)
+(label "KB_RGB_DATA_3V3"
+  (at 219.71 313.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 3e0326c2-7e99-5e59-ab15-ca11e1248cb4)
 )
-(label "AUDIO_USB_DP"
-  (at 674.37 340.36 0)
+(label "KB_ROW0"
+  (at 539.75 450.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid b5be1edf-608d-5990-9f1a-e43053d7490d)
 )
-(label "AUDIO_USB_DP"
-  (at 359.41 90.17 0)
+(label "KB_ROW0"
+  (at 219.71 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 79616440-4666-5c0b-99ca-338e6ff5868f)
 )
-(label "AUDIO_USB_DM"
-  (at 674.37 345.44 0)
+(label "KB_ROW1"
+  (at 539.75 455.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6d2b313a-967d-59f6-b70c-03d93f7b55a9)
 )
-(label "AUDIO_USB_DM"
-  (at 359.41 95.25 0)
+(label "KB_ROW1"
+  (at 219.71 323.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid bd7cda50-43ae-5819-8255-072629a672b4)
 )
-(label "RADIO_VHF_AUDIO_OUT"
-  (at 674.37 350.52 0)
+(label "KB_ROW2"
+  (at 539.75 461.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 4dac2f78-ea06-557c-9516-2ce099bb0cb6)
 )
-(label "RADIO_UHF_AUDIO_OUT"
-  (at 674.37 355.6 0)
+(label "KB_ROW2"
+  (at 219.71 328.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6237d6d1-8c20-5e46-8677-57034faa6f9f)
 )
-(label "RADIO_VHF_MIC_IN"
-  (at 674.37 360.68 0)
+(label "KB_ROW3"
+  (at 539.75 466.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 66775d44-a89e-5eb0-866a-2f1b35995faf)
 )
-(label "RADIO_UHF_MIC_IN"
-  (at 674.37 365.76 0)
+(label "KB_ROW3"
+  (at 219.71 334.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d77a1988-3efe-5ce4-9199-2958932093e1)
+)
+(label "KB_ROW4"
+  (at 539.75 471.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bd9a0ee6-5ca3-56a6-8c45-16bef07ed380)
+)
+(label "KB_ROW4"
+  (at 219.71 339.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d62580d2-6b89-5b76-894d-513aec1c767b)
+)
+(label "KB_ROW5"
+  (at 539.75 476.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 971b4f7a-b313-568d-bf8c-e47f1eb1666c)
+)
+(label "KB_ROW5"
+  (at 219.71 344.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 224c9711-6c9b-5250-b80e-df553d5b0ec6)
+)
+(label "KB_ROW6"
+  (at 539.75 481.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a5ae7ae5-efbe-52c3-b4c5-e6c47f80b4dc)
+)
+(label "KB_ROW6"
+  (at 219.71 349.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 57bf2ac5-9dd3-52e8-94e3-11b57a79faee)
+)
+(label "KB_ROW7"
+  (at 539.75 486.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6872641e-f0a9-5e8f-99be-a9fb19bc036e)
+)
+(label "KB_ROW7"
+  (at 219.71 354.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fdc26d78-7c95-503d-9845-4e30a3eb7203)
+)
+(label "KB_COL0"
+  (at 539.75 491.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8d364e78-bcca-5432-b4a1-e03372f0fc26)
+)
+(label "KB_COL0"
+  (at 219.71 359.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dab6fd64-262a-5571-9a4c-c6b2bd8ecfe3)
+)
+(label "KB_COL1"
+  (at 539.75 496.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f3741447-634e-554a-a1bd-a9414449c7a3)
+)
+(label "KB_COL1"
+  (at 219.71 364.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 970673ce-eb0f-5ed1-94b3-96190e769863)
+)
+(label "KB_COL2"
+  (at 539.75 501.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6630e603-1f6b-504a-97be-e4ec8d1725d1)
+)
+(label "KB_COL2"
+  (at 219.71 369.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2a46b85c-6f31-5397-a392-76671d0268e3)
+)
+(label "KB_COL3"
+  (at 539.75 506.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d7b809b4-2e3b-521d-b748-1c4543a96bd6)
+)
+(label "KB_COL3"
+  (at 219.71 374.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e0789a92-7030-5f05-832f-1bbf593a96f3)
+)
+(label "KB_COL4"
+  (at 539.75 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d7e0c512-3250-55d3-8de6-fdcb4f3328e0)
+)
+(label "KB_COL4"
+  (at 219.71 379.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 05f1c1ae-34fd-508b-b923-45a0d8458d8f)
+)
+(label "KB_COL5"
+  (at 539.75 516.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 91e80633-65af-5e2b-b805-643e4fdbfbf9)
+)
+(label "KB_COL5"
+  (at 219.71 384.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6ebfc9d6-fb96-5100-808a-fa9e2bf6c9ab)
+)
+(label "KB_COL6"
+  (at 539.75 521.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 755761c9-49a4-5e2b-aeb6-d5ebb4762a04)
+)
+(label "KB_COL6"
+  (at 219.71 389.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8791d943-12c3-527b-87fc-1e4f76109bcd)
+)
+(label "KB_COL7"
+  (at 539.75 527.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b21264fb-8e2f-5c5a-ae1a-a87eb4b2d661)
+)
+(label "KB_COL7"
+  (at 219.71 394.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e0c35064-275e-5d9a-b6df-752e28855c94)
+)
+(label "KB_COL8"
+  (at 539.75 532.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e2448295-b002-53b3-8932-bde0f674f0a7)
+)
+(label "KB_COL8"
+  (at 219.71 400.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d0d566d1-d88f-5697-9863-b286341b2aef)
+)
+(label "KB_COL9"
+  (at 539.75 537.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 70abd61d-364b-5cdc-b8d7-b8f7437af0a3)
+)
+(label "KB_COL9"
+  (at 219.71 405.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 75d17314-3cc9-58d1-90b8-a31a3fb27b44)
+)
+(label "KB_COL10"
+  (at 539.75 542.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 867040dc-84d2-571b-85ec-8c4f22e3c7db)
+)
+(label "KB_COL10"
+  (at 219.71 410.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b319d162-8499-52ae-b0c9-fce22b3a3a0e)
+)
+(label "KB_COL11"
+  (at 539.75 547.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b5c6dcb6-e68f-5bda-85ab-a8ad363da487)
+)
+(label "KB_COL11"
+  (at 219.71 415.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 46c270db-472a-53e7-ab45-3a773980971a)
+)
+(label "KB_COL12"
+  (at 539.75 552.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4c7e321a-0faa-5370-8fec-6ce9527cf6b0)
+)
+(label "KB_COL12"
+  (at 219.71 420.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dcd5972e-506b-5b3e-81fe-39c08cbb8ef8)
+)
+(label "KB_COL13"
+  (at 539.75 557.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 90d60ef3-51b7-5a9c-b76a-1c8368afbc74)
+)
+(label "KB_COL13"
+  (at 219.71 425.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid df491f05-c9a6-5d85-8b34-244934a8866d)
+)
+(label "KB_COL14"
+  (at 539.75 562.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 84fa4756-11ed-509b-8d44-f13f4657e1d5)
+)
+(label "KB_COL14"
+  (at 219.71 430.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5fbadfa0-2967-5bb3-90ee-48c90b023dd3)
+)
+(label "MCU_3V3"
+  (at 674.37 335.28 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f96b73c7-d25b-54f2-85f0-cb227f8184e1)
+)
+(label "RADIO_CODEC_USB_DP"
+  (at 674.37 340.36 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid aa5600f5-2d14-5e17-9a0e-bf3c92c4674a)
+)
+(label "RADIO_CODEC_USB_DP"
+  (at 814.07 360.68 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4cd19896-e76b-5d1c-9af8-bf7b0aec6ad1)
+)
+(label "RADIO_CODEC_USB_DM"
+  (at 674.37 345.44 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e73b0776-e534-52b4-af66-f809c1ad123f)
+)
+(label "RADIO_CODEC_USB_DM"
+  (at 814.07 365.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3d7f2f17-c1d4-50dc-907f-098baf7fcc06)
+)
+(label "RADIO_CODEC_USB_VBUS"
+  (at 674.37 350.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5c92e73d-4fbc-5b83-8a12-63966affe3c1)
+)
+(label "RADIO_CODEC_USB_VBUS"
+  (at 814.07 370.84 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a19de80b-6cca-55b6-a1e3-8d715765ca5a)
+)
+(label "RADIO_VHF_AUDIO_OUT"
+  (at 674.37 355.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 24c1e7d9-83c2-5d48-957c-4fc3210a37e9)
+)
+(label "RADIO_UHF_AUDIO_OUT"
+  (at 674.37 360.68 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0b3ddab3-b56f-5718-8eb0-dae43d6dd392)
+)
+(label "RADIO_VHF_MIC_IN"
+  (at 674.37 365.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 76c89a78-05ff-5362-90b3-057dfdfd0fad)
+)
+(label "RADIO_UHF_MIC_IN"
+  (at 674.37 370.84 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f713ff0c-17fb-5c29-978a-3d58179942ed)
+)
+(label "RADIO_VHF_PTT_N"
+  (at 674.37 375.92 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 81f22c28-0b59-5b5e-8a7a-978cd0bfa92a)
+)
+(label "RADIO_UHF_PTT_N"
+  (at 674.37 381 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4b3deef1-18ca-5d04-a54b-4dcb822d8cf7)
 )
 (label "SYS_5V"
   (at 674.37 444.5 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bd9a0ee6-5ca3-56a6-8c45-16bef07ed380)
+  (uuid d87065a7-98c5-5865-a0bc-66d0ac1dbb92)
 )
-(label "MAKER_USB_DP"
+(label "INTERNAL_USB_VBUS_VALID"
   (at 674.37 449.58 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d62580d2-6b89-5b76-894d-513aec1c767b)
+  (uuid bc4e5ba5-f7cc-55b7-9187-ed1bde3a6d37)
 )
 (label "MAKER_USB_DP"
-  (at 359.41 110.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 971b4f7a-b313-568d-bf8c-e47f1eb1666c)
-)
-(label "MAKER_USB_DM"
   (at 674.37 454.66 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 224c9711-6c9b-5250-b80e-df553d5b0ec6)
+  (uuid 4bb5d903-6728-52bf-b614-2da7e799a351)
+)
+(label "MAKER_USB_DP"
+  (at 359.41 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5c797e69-0302-5601-a6d1-a1b8fe7a51df)
 )
 (label "MAKER_USB_DM"
-  (at 359.41 115.57 0)
+  (at 674.37 459.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a5ae7ae5-efbe-52c3-b4c5-e6c47f80b4dc)
+  (uuid 560a4ec9-18e9-5145-8453-a3655fe4d02a)
+)
+(label "MAKER_USB_DM"
+  (at 359.41 151.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8abb933f-a86c-5c73-95f0-4788ae3c4e95)
+)
+(label "SYS_5V"
+  (at 814.07 335.28 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c1374aa4-4883-5384-912a-f2c70fecbfea)
+)
+(label "SYS_3V3"
+  (at 814.07 340.36 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7e4cf7d4-66b4-516c-95fa-cf22b87ce0a7)
+)
+(label "INTERNAL_USB_VBUS_VALID"
+  (at 814.07 345.44 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 286ee002-1a67-5ab1-b32f-5c4e53e52cca)
+)
+(label "AUDIO_USB_DP"
+  (at 814.07 350.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c414454d-d8d8-5b25-a2d8-2e61f06df940)
+)
+(label "AUDIO_USB_DP"
+  (at 359.41 125.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 53a15325-72ee-5417-8cf7-521b280f98c3)
+)
+(label "AUDIO_USB_DM"
+  (at 814.07 355.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d5e4977d-6f97-5aac-98ec-a59f0d86b7f8)
+)
+(label "AUDIO_USB_DM"
+  (at 359.41 130.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5787febc-3e8e-5dfa-88af-436397ae417d)
+)
+(label "AUDIO_AMP_EC_EN"
+  (at 814.07 375.92 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 572a573f-dd4d-59a1-8ddf-bde0a6105cfa)
+)
+(label "AUDIO_AMP_EC_EN"
+  (at 219.71 278.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 864d372d-2e6f-5780-acf7-38529c2dfd8e)
+)
+(label "AUDIO_MIC_EN"
+  (at 814.07 381 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 03320a47-886a-5517-8fc6-2ea9a9e8df9b)
+)
+(label "AUDIO_MIC_EN"
+  (at 219.71 283.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 45918361-5249-5048-9b3f-0769b7223914)
+)
+(label "PCIE_3V3"
+  (at 814.07 425.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fad407af-a3b3-5b92-a93c-123334d1933b)
+)
+(label "GBE_HOST_TX_P"
+  (at 814.07 430.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9edea8bf-c8b7-5be6-a270-345fd1338110)
+)
+(label "GBE_HOST_TX_P"
+  (at 359.41 334.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3644caf9-7a71-54c7-863b-76afa278cc65)
+)
+(label "GBE_HOST_TX_N"
+  (at 814.07 435.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 34ce134c-c5bf-5f89-94ce-5b618e403c94)
+)
+(label "GBE_HOST_TX_N"
+  (at 359.41 339.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid af9c5dfa-5ba9-52c8-80ae-1d90938d0f45)
+)
+(label "GBE_HOST_RX_P"
+  (at 814.07 440.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5bf65fcf-0a9f-581b-bb8a-e22cdb571353)
+)
+(label "GBE_HOST_RX_P"
+  (at 359.41 344.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid eb517f75-b010-5240-9dcf-d5365d55a900)
+)
+(label "GBE_HOST_RX_N"
+  (at 814.07 445.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 531e5c09-8664-5343-96d4-5b5e00e54abf)
+)
+(label "GBE_HOST_RX_N"
+  (at 359.41 349.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e53e1058-965c-5ed4-be48-3355b00b714e)
+)
+(label "GBE_REFCLK_P"
+  (at 814.07 450.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0497a639-0bb3-50fc-a5c3-e3ed9f47c1ed)
+)
+(label "GBE_REFCLK_P"
+  (at 359.41 354.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3a021e7d-405f-5db1-a7ff-34838dd8fe6c)
+)
+(label "GBE_REFCLK_N"
+  (at 814.07 455.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 926dff22-bfbc-55cf-9e73-c6a4c43c408f)
+)
+(label "GBE_REFCLK_N"
+  (at 359.41 359.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e4989859-768e-581b-9eb0-49d4e82ee7f9)
+)
+(label "GBE_CLKREQ_N"
+  (at 814.07 461.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c67a6b18-be41-5d47-91aa-a73e35a6a075)
+)
+(label "GBE_CLKREQ_N"
+  (at 359.41 364.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 362812e9-5f36-59c2-bcd9-34783ca7dfdd)
+)
+(label "PLTRST_SRC_N"
+  (at 814.07 466.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid abc242a0-0d90-5765-86c5-fc3414795c08)
+)
+(label "PCIE_WAKE_N"
+  (at 814.07 471.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0ad7230d-1906-5e50-b1d0-a40251b13770)
 )
 
   (sheet_instances

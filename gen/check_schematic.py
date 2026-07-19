@@ -6,7 +6,7 @@ import re
 import subprocess
 import sys
 import tempfile
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 
@@ -37,12 +37,55 @@ EXPECTED_SHEETS = [
     "07_radio_oled_gps.kicad_sch",
     "08_internal_services.kicad_sch",
     "09_ham_radio.kicad_sch",
-    "10_internal_display.kicad_sch",
-    "11_intehill_monitor_interface.kicad_sch",
-    "12_keyboard_daughterboard.kicad_sch",
+    "12_keyboard_interface.kicad_sch",
     "13_radio_audio_codec.kicad_sch",
     "14_maker_mcu.kicad_sch",
+    "15_system_audio.kicad_sch",
+    "16_gigabit_ethernet.kicad_sch",
 ]
+
+# These symbols are stock KiCad `extends` variants.  The generator deliberately
+# embeds their complete flattened parent geometry so generated schematics are
+# self-contained, which makes KiCad compare the flattened copy against the
+# property-only stock child and report lib_symbol_mismatch.  Match the complete
+# warning signature and reference so no unrelated warning can pass unnoticed.
+ALLOWED_ERC_WARNINGS = Counter({
+    (
+        "warning", "lib_symbol_mismatch",
+        "Symbol '74AHCT1G126' doesn't match copy in library '74xGxx'",
+        ("Symbol U311 [74AHCT1G126]",),
+    ): 1,
+    (
+        "warning", "lib_symbol_mismatch",
+        "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
+        ("Symbol U123 [TPD4E05U06DQA]",),
+    ): 1,
+    (
+        "warning", "lib_symbol_mismatch",
+        "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
+        ("Symbol U133 [TPD4E05U06DQA]",),
+    ): 1,
+    (
+        "warning", "lib_symbol_mismatch",
+        "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
+        ("Symbol U143 [TPD4E05U06DQA]",),
+    ): 1,
+    (
+        "warning", "lib_symbol_mismatch",
+        "Symbol 'TLV9061xDBV' doesn't match copy in library 'Amplifier_Operational'",
+        ("Symbol U431 [TLV9061xDBV]",),
+    ): 1,
+})
+
+# The user-facing maker header adds eight more instances of the same flattened
+# stock TPD4E05U06 variant. Keep the allowlist reference-specific so a warning
+# on any other symbol or failure mode still fails the check.
+for ref in ("U914", "U915", "U916", "U917", "U918", "U919", "U920", "U921"):
+    ALLOWED_ERC_WARNINGS[(
+        "warning", "lib_symbol_mismatch",
+        "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
+        (f"Symbol {ref} [TPD4E05U06DQA]",),
+    )] += 1
 
 
 def fail(message):
@@ -83,6 +126,20 @@ def collect_erc_items(path):
 
     walk(data)
     return items
+
+
+def erc_signature(item):
+    child_descriptions = tuple(sorted(
+        child.get("description", "")
+        for child in item.get("items", [])
+        if isinstance(child, dict)
+    ))
+    return (
+        item.get("severity", ""),
+        item.get("type", ""),
+        item.get("description") or item.get("message") or "",
+        child_descriptions,
+    )
 
 
 def iter_symbol_blocks(text):
@@ -157,6 +214,36 @@ def check_duplicate_refs():
         for ref, entries in problems:
             print(f"duplicate ref {ref}: {entries}", file=sys.stderr)
         fail("duplicate concrete schematic references found")
+
+
+def check_label_coordinate_collisions():
+    """Reject different net names attached to the same schematic coordinate.
+
+    KiCad electrically joins labels that land on one pin endpoint.  Generated
+    sheets therefore must never place two different labels at an identical
+    coordinate, even though ERC may report only the resulting merged net.
+    Repeated labels with the same name are harmless and are allowed.
+    """
+    problems = []
+    label_re = re.compile(r'\((label|hierarchical_label|global_label)\s+"([^"]+)"')
+    at_re = re.compile(r'\(at\s+([-0-9.]+)\s+([-0-9.]+)')
+
+    for sch in sorted(PROJDIR.glob("*.kicad_sch")):
+        text = sch.read_text(errors="ignore")
+        names_by_coord = defaultdict(set)
+        for match in label_re.finditer(text):
+            block = sexpr_block_at(text, match.start())
+            at = at_re.search(block)
+            if at:
+                names_by_coord[(at.group(1), at.group(2))].add(match.group(2))
+        for coord, names in names_by_coord.items():
+            if len(names) > 1:
+                problems.append((sch.name, coord, sorted(names)))
+
+    if problems:
+        for sheet, coord, names in problems[:40]:
+            print(f"label collision {sheet} at {coord}: {names}", file=sys.stderr)
+        fail(f"found {len(problems)} coordinate(s) carrying different net labels")
 
 
 def property_value(block, name):
@@ -266,11 +353,26 @@ def check_root_sheets():
         fail(f"expected 0 root no-connects, found {root_ncs}")
 
 
-def check_blank_pcb():
+def check_main_pcb_contract():
     pcb = PROJDIR / "ducktop2.kicad_pcb"
-    size = pcb.stat().st_size
-    if size != 79:
-        fail(f"expected blank 79-byte PCB, found {size} bytes")
+    text = pcb.read_text(errors="ignore")
+    if '"Edge.Cuts"' not in text:
+        fail("main PCB has no Edge.Cuts outline")
+    if '"J310"' not in text:
+        fail("main PCB is missing the keyboard FFC connector J310")
+    keyboard_daughterboard_markers = [
+        '"J320"',
+        '"SW320"',
+        '"D320"',
+        "12_keyboard_daughterboard.kicad_sch",
+        "Cherry_MX_ULP",
+    ]
+    for marker in keyboard_daughterboard_markers:
+        if marker in text:
+            fail(f"main PCB includes keyboard daughterboard marker {marker}")
+    copper_layers = re.findall(r'\(\d+\s+"(?:F|B|In\d)\.Cu"\s+\w+\)', text)
+    if len(copper_layers) != 6:
+        fail(f"expected 6 copper layers in main PCB, found {len(copper_layers)}")
 
 
 def main():
@@ -280,20 +382,32 @@ def main():
     run([sys.executable, str(GEN_DIR / "generate_mu_carrier_sheet.py")])
     check_root_sheets()
     check_duplicate_refs()
+    check_label_coordinate_collisions()
     check_footprint_pad_matches()
-    check_blank_pcb()
+    check_main_pcb_contract()
 
     kicad_cli = find_kicad_cli()
-    erc_path = GEN_DIR / "erc_self_check.json"
-    run([kicad_cli, "sch", "erc", "--severity-error", "--format", "json", "--output", str(erc_path), "ducktop2.kicad_sch"])
-    erc_items = collect_erc_items(erc_path)
-    if erc_items:
-        for item in erc_items[:20]:
-            print(f"{item.get('severity')} {item.get('type')}: {item.get('description')}", file=sys.stderr)
-        fail(f"ERC reported {len(erc_items)} violation(s)")
+    with tempfile.TemporaryDirectory(prefix="ducktop2_self_check_") as temp_dir:
+        erc_path = Path(temp_dir) / "erc.json"
+        run([kicad_cli, "sch", "erc", "--format", "json", "--output", str(erc_path), "ducktop2.kicad_sch"])
+        erc_items = collect_erc_items(erc_path)
+        actual = Counter(erc_signature(item) for item in erc_items)
+        unexpected = actual - ALLOWED_ERC_WARNINGS
+        if unexpected:
+            for signature, count in unexpected.items():
+                severity, item_type, description, children = signature
+                print(
+                    f"{count}x {severity} {item_type}: {description}; items={children}",
+                    file=sys.stderr,
+                )
+            fail(f"ERC reported {sum(unexpected.values())} unexpected violation(s)")
+        if erc_items:
+            print(
+                f"ERC: 0 errors, {len(erc_items)} classified flattened-symbol warning(s)"
+            )
 
-    with tempfile.NamedTemporaryFile(prefix="ducktop2_", suffix=".net") as netlist:
-        run([kicad_cli, "sch", "export", "netlist", "--output", netlist.name, "ducktop2.kicad_sch"])
+        netlist_path = Path(temp_dir) / "ducktop2.net"
+        run([kicad_cli, "sch", "export", "netlist", "--output", str(netlist_path), "ducktop2.kicad_sch"])
 
     print("ducktop2 schematic self-check OK")
 

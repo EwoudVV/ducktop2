@@ -1,0 +1,33 @@
+(version 1)
+
+# POWER_5A and POWER_10A_PACK intentionally use generous routing clearance,
+# but those netclass values cannot physically fit between adjacent pads in the
+# vendor land patterns below.  Keep 0.30/0.50 mm between routed copper while
+# allowing the 0.15 mm minimum already built into these specific packages.
+(rule "Audited intra-footprint power-pad clearance"
+    (condition "(A.memberOfFootprint('A1') && B.memberOfFootprint('A1')) || (A.memberOfFootprint('J21') && B.memberOfFootprint('J21')) || (A.memberOfFootprint('J22') && B.memberOfFootprint('J22')) || (A.memberOfFootprint('J23') && B.memberOfFootprint('J23')) || (A.memberOfFootprint('U2') && B.memberOfFootprint('U2')) || (A.memberOfFootprint('U4') && B.memberOfFootprint('U4')) || (A.memberOfFootprint('U6') && B.memberOfFootprint('U6')) || (A.memberOfFootprint('U7') && B.memberOfFootprint('U7')) || (A.memberOfFootprint('U11') && B.memberOfFootprint('U11')) || (A.memberOfFootprint('U12') && B.memberOfFootprint('U12')) || (A.memberOfFootprint('U14') && B.memberOfFootprint('U14')) || (A.memberOfFootprint('U15') && B.memberOfFootprint('U15')) || (A.memberOfFootprint('U22') && B.memberOfFootprint('U22')) || (A.memberOfFootprint('U32') && B.memberOfFootprint('U32')) || (A.memberOfFootprint('U50') && B.memberOfFootprint('U50')) || (A.memberOfFootprint('U54') && B.memberOfFootprint('U54')) || (A.memberOfFootprint('U55') && B.memberOfFootprint('U55')) || (A.memberOfFootprint('U400') && B.memberOfFootprint('U400')) || (A.memberOfFootprint('U720') && B.memberOfFootprint('U720')) || (A.memberOfFootprint('U721') && B.memberOfFootprint('U721')) || (A.memberOfFootprint('U722') && B.memberOfFootprint('U722')) || (A.memberOfFootprint('U750') && B.memberOfFootprint('U750')) || (A.memberOfFootprint('U772') && B.memberOfFootprint('U772'))")
+    (constraint clearance (min 0.15mm)))
+
+# Infineon Figure 13 places the 0.6 mm bottom acoustic port inside the pad-4
+# ground ring. The measured copper-to-hole gap is about 0.19 mm. Keep the
+# project-wide 0.25 mm rule everywhere else.
+(rule "IM68A130 reference acoustic-port clearance"
+    (condition "A.memberOfFootprint('MK430') && B.memberOfFootprint('MK430')")
+    (constraint hole_clearance (min 0.15mm))
+    (constraint physical_hole_clearance (min 0.15mm)))
+
+# The Molex 73251-1153 SMA footprints are intentional edge launches. Only
+# their edge-facing pads may cross the nominal copper-to-edge boundary.
+(rule "J241 intentional SMA edge launch"
+    (condition "A.memberOfFootprint('J241') && B.Layer == 'Edge.Cuts'")
+    (constraint edge_clearance (min -0.1mm)))
+
+(rule "J251 intentional SMA edge launch"
+    (condition "A.memberOfFootprint('J251') && B.Layer == 'Edge.Cuts'")
+    (constraint edge_clearance (min -0.1mm)))
+
+# H1/H2 are soldered M2 standoffs that intentionally occupy the Mu module's
+# retention area. This only permits their courtyard overlap with A1.
+(rule "Mu socket and retention-stack courtyard overlap"
+    (condition "(((A.Reference == 'H1') || (A.Reference == 'H2')) && (B.Reference == 'A1')) || ((A.Reference == 'A1') && ((B.Reference == 'H1') || (B.Reference == 'H2')))")
+    (constraint courtyard_clearance (min -1mm)))

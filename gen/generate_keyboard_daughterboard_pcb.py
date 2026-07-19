@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""Generate an unreleased keyboard-layout candidate without touching Rev A."""
+
+import argparse
 import re
 import sys
 from pathlib import Path
@@ -6,13 +9,31 @@ from pathlib import Path
 from build_ducktop2 import U, reset_uuid_sequence
 from generate_keyboard_daughterboard_sheet import (
     KEY_ROWS,
+    RELEASED_BOARD_H_MM,
+    RELEASED_BOARD_W_MM,
     keyboard_connector_nets,
     safe_net_token,
 )
 
 
 PROJDIR = Path(__file__).resolve().parent.parent
-OUT = PROJDIR / "12_keyboard_daughterboard.kicad_pcb"
+DEFAULT_OUT = (
+    PROJDIR
+    / "tmp"
+    / "keyboard_generator_candidates"
+    / "12_keyboard_daughterboard_UNRELEASED_candidate.kicad_pcb"
+)
+PROTECTED_OUTPUTS = {
+    (PROJDIR / "12_keyboard_daughterboard.kicad_pcb").resolve(),
+    (
+        PROJDIR
+        / "manufacturing"
+        / "keyboard_revA_jlcpcb"
+        / "reference"
+        / "12_keyboard_daughterboard.kicad_pcb"
+    ).resolve(),
+}
+MANUFACTURING_ROOT = (PROJDIR / "manufacturing").resolve()
 
 KICAD_FOOTPRINTS = Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints")
 FOOTPRINT_SOURCES = {
@@ -23,8 +44,8 @@ FOOTPRINT_SOURCES = {
     ),
 }
 
-BOARD_W = 300.0
-BOARD_H = 80.0
+BOARD_W = RELEASED_BOARD_W_MM
+BOARD_H = RELEASED_BOARD_H_MM
 UNIT = 18.0
 ROW_PITCH = 16.0
 ROW_Y0 = 8.0
@@ -287,7 +308,38 @@ def gr_text(text, x, y, layer="Cmts.User"):
     )
 
 
-def main():
+def safe_output_path(path: Path, overwrite_candidate: bool) -> Path:
+    output = path.expanduser().resolve()
+    if output.suffix != ".kicad_pcb":
+        raise SystemExit("candidate output must end in .kicad_pcb")
+    if output in PROTECTED_OUTPUTS or output.is_relative_to(MANUFACTURING_ROOT):
+        raise SystemExit(
+            "refusing to overwrite a released keyboard PCB or manufacturing artifact: "
+            f"{output}"
+        )
+    if output.exists() and not overwrite_candidate:
+        raise SystemExit(
+            f"candidate already exists: {output}; pass --overwrite-candidate to replace it"
+        )
+    return output
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DEFAULT_OUT,
+        help="unreleased candidate destination (default: project tmp/)",
+    )
+    parser.add_argument(
+        "--overwrite-candidate",
+        action="store_true",
+        help="allow replacing an existing non-release candidate only",
+    )
+    args = parser.parse_args(argv)
+    output = safe_output_path(args.output, args.overwrite_candidate)
+
     reset_uuid_sequence("12_keyboard_daughterboard_pcb")
     schematic_path_by_ref = schematic_paths()
 
@@ -348,7 +400,7 @@ def main():
         "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
         "J320",
         "Keyboard FFC",
-        292.0,
+        BOARD_W - 8.0,
         40.0,
         90,
         connector_nets,
@@ -365,9 +417,10 @@ def main():
     ]
 
     comments = [
-        gr_text("Ducktop2 MX ULP keyboard daughterboard rev A: 300 x 80 mm Edge.Cuts", 4, 86),
-        gr_text("Switches use 18 mm X pitch / 16 mm row pitch. Dashed rectangles are intended keycap envelopes.", 4, 91),
-        gr_text("J320 is parked in the right margin as a routing anchor; move only if the final flex exit requires it.", 4, 96),
+        gr_text("UNRELEASED generator candidate; manufactured Rev A authority is not this file", 4, 86),
+        gr_text(f"Candidate Edge.Cuts: {BOARD_W:g} x {BOARD_H:g} mm", 4, 91),
+        gr_text("Switches use 18 mm X pitch / 16 mm row pitch. Dashed rectangles are intended keycap envelopes.", 4, 96),
+        gr_text("J320 is parked in the right margin as a routing anchor; move only if a future revision requires it.", 4, 101),
     ]
 
     body = [board_header()]
@@ -379,8 +432,9 @@ def main():
     body.extend(drawings)
     body.extend(comments)
     body.append(")")
-    OUT.write_text("\n".join(body) + "\n", encoding="utf-8")
-    print(f"wrote {OUT}")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text("\n".join(body) + "\n", encoding="utf-8")
+    print(f"wrote unreleased candidate {output}")
     print(f"switches={sum(1 for _ in key_placements())} diodes={sum(1 for _ in key_placements())} outline={BOARD_W:g}x{BOARD_H:g}mm")
 
 

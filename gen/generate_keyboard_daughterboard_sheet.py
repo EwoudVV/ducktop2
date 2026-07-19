@@ -3,6 +3,10 @@ import re
 from build_ducktop2 import Sheet, FOOTPRINTS
 
 
+RELEASED_BOARD_W_MM = 273.5
+RELEASED_BOARD_H_MM = 80.0
+
+
 KEY_ROWS = [
     [
         (0, "ESC", "Esc 1u"),
@@ -103,6 +107,9 @@ def keyboard_connector_nets():
         "29": ("SYS_5V", "hier"),
         "30": ("GND", "local"),
     })
+    # The two J320 hold-down pads are mechanical-only and are netless on the
+    # manufactured Rev A PCB. Leaving MP absent here makes that released state
+    # authoritative instead of inventing a ground bond during regeneration.
     return nets
 
 
@@ -143,7 +150,7 @@ def build(sheet_symbol_uuid):
 
     s.text(20, 12.7, "== Ducktop2 MX ULP keyboard daughterboard ==")
     s.text(20, 20.32, "65-key compact laptop-style layout, Cherry MX Ultra Low Profile tactile switches, one diode per key.")
-    s.text(20, 27.94, "Target physical envelope is about 300 x 80 mm using roughly 18.0-18.5 mm horizontal pitch and 16 mm row pitch.")
+    s.text(20, 27.94, "Manufactured Rev A envelope is 273.5 x 80.0 mm; this schematic records its released population and connector contract.")
     s.text(20, 35.56, "This sheet is the keyboard PCB itself: switches, matrix diodes, EC FFC, and bring-up notes.")
 
     s.text(20, 55.88, "== 5x14 switch matrix, diode direction locked for EC firmware ==")
@@ -152,16 +159,20 @@ def build(sheet_symbol_uuid):
         add_key_cell(s, idx, *key)
 
     s.text(20, 250.19, "== J320 keyboard FFC / board-to-board connector ==")
-    s.place("J320", "Conn_01x30", "Keyboard FFC: MX ULP 5x14 matrix on 30-pin EC contract", 165, 340,
-            footprint=FOOTPRINTS["Conn_01x30_FFC"], pin_nets=keyboard_connector_nets())
+    s.place("J320", "Conn_01x30_FFC_MP", "Keyboard FFC: MX ULP 5x14 matrix on 30-pin EC contract", 165, 340,
+            footprint=FOOTPRINTS["Conn_01x30_FFC"], pin_nets=keyboard_connector_nets(),
+            extra_props={"ReleasedRevA": "Populated; MP hold-down pads are mechanical and netless"})
     s.place("C320", "C", "DNP 100n keyboard 3V3 reserve", 350, 276.86,
-            footprint=FOOTPRINTS["C_100n"], dnp=True,
+            footprint=FOOTPRINTS["C_100n"], dnp=True, in_bom=False, on_board=False,
+            extra_props={"ReleasedRevA": "Not fitted; footprint omitted from manufactured PCB"},
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
     s.place("C321", "C", "DNP 10u optional 5V/backlight", 350, 292.1,
-            footprint=FOOTPRINTS["C_10u"], dnp=True,
+            footprint=FOOTPRINTS["C_10u"], dnp=True, in_bom=False, on_board=False,
+            extra_props={"ReleasedRevA": "Not fitted; footprint omitted from manufactured PCB"},
             pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local")})
     s.place("J321", "Conn_01x04", "DNP keyboard bring-up/debug", 350, 340,
-            footprint=FOOTPRINTS["Conn_01x04_Header"], dnp=True,
+            footprint=FOOTPRINTS["Conn_01x04_Header"], dnp=True, in_bom=False, on_board=False,
+            extra_props={"ReleasedRevA": "Not fitted; footprint omitted from manufactured PCB"},
             pin_nets={
                 "1": ("GND", "local"),
                 "2": ("MCU_3V3", "hier"),
@@ -173,7 +184,7 @@ def build(sheet_symbol_uuid):
     s.text(20, 421.64, "NOTES:")
     s.text(20, 429.26, "Use MX6C-T3NB Cherry MX ULP tactile switches. The project footprint has unnumbered mechanical solder tabs; only switch pins 1/2 enter the matrix.")
     s.text(20, 436.88, "D320-D384 are 1N4148W/SOD-323 class signal diodes. Diode pin 2 is anode on KB_ROWn; pin 1 is cathode at the per-key switch node.")
-    s.text(20, 444.5, "J320 keeps the current 30-pin motherboard connector. KB_ROW5..7 and KB_COL14..15 are unused on this 65-key layout and may become spare EC GPIO.")
+    s.text(20, 444.5, "J320 mirrors mainboard J310. Its MP hold-down pads are intentionally netless on manufactured Rev A; C320/C321/J321 are DNP and excluded from that PCB.")
     s.text(20, 452.12, "MX ULP hotswap is not planned: use stencil + reflow/hot plate for production and validate rework on a small coupon first.")
     s.text(20, 459.74, "Use split space in rev A. Treat Backspace, Enter, left Shift, and both Space keys as mechanical stabilizer/keycap-risk items before full board release.")
     s.text(20, 467.36, "Legends/keycaps are mechanical deliverables: prototype blank resin/MJF caps and clip coupons before final legends or stabilizer bars.")

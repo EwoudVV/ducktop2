@@ -5,6 +5,223 @@
   (uuid 2846af78-3f09-5613-b355-5a2bb3de575c)
   (paper "A2")
   (lib_symbols
+(symbol "74xGxx:74LVC1G17"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "74LVC1G17"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at -2.54 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc1g17.pdf"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" "Single Schmitt Buffer Gate, Low-Voltage CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "Single Gate Buff Schmitt LVC CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23* SOT?553* Texas?R-PDSO-G5?DCK* Texas?R-PDSO-N5?DRL* Texas?X2SON*0.8x0.8mm*P0.48mm*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "74LVC1G17_0_1"
+			(polyline
+				(pts
+					(xy -7.62 6.35) (xy -7.62 -6.35) (xy 5.08 0) (xy -7.62 6.35)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy -3.81 -1.27) (xy -2.54 -1.27) (xy -2.54 1.27) (xy -1.27 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 -1.27) (xy -1.27 -1.27) (xy -1.27 1.27) (xy 0 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "74LVC1G17_1_1"
+			(pin no_connect line
+				(at -7.62 5.08 180)
+				(length 5.08)
+				(hide yes)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -12.7 0 0)
+				(length 5.08)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -5.08 -10.16 90)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 10.16 0 180)
+				(length 5.08)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -5.08 10.16 270)
+				(length 5.08)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 (symbol "Connector:HDMI_A"
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -696,20 +913,21 @@
 		)
 		(embedded_fonts no)
 	)
-(symbol "Device:Fuse"
+(symbol "Device:D_TVS"
 		(pin_numbers
 			(hide yes)
 		)
 		(pin_names
-			(offset 0)
+			(offset 1.016)
+			(hide yes)
 		)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "F"
-			(at 2.032 0 90)
+		(property "Reference" "D"
+			(at 0 2.54 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -718,8 +936,8 @@
 				)
 			)
 		)
-		(property "Value" "Fuse"
-			(at -1.905 0 90)
+		(property "Value" "D_TVS"
+			(at 0 -2.54 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -729,7 +947,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at -1.778 0 90)
+			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(hide yes)
@@ -750,7 +968,7 @@
 				)
 			)
 		)
-		(property "Description" "Fuse"
+		(property "Description" "Bidirectional transient-voltage-suppression diode"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -761,7 +979,7 @@
 				)
 			)
 		)
-		(property "ki_keywords" "fuse"
+		(property "ki_keywords" "diode TVS thyrector"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -772,7 +990,7 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "*Fuse*"
+		(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -783,10 +1001,11 @@
 				)
 			)
 		)
-		(symbol "Fuse_0_1"
-			(rectangle
-				(start -0.762 -2.54)
-				(end 0.762 2.54)
+		(symbol "D_TVS_0_1"
+			(polyline
+				(pts
+					(xy -2.54 1.27) (xy -2.54 -1.27) (xy 2.54 1.27) (xy 2.54 -1.27) (xy -2.54 1.27)
+				)
 				(stroke
 					(width 0.254)
 					(type default)
@@ -797,7 +1016,19 @@
 			)
 			(polyline
 				(pts
-					(xy 0 2.54) (xy 0 -2.54)
+					(xy 0.508 1.27) (xy 0 1.27) (xy 0 -1.27) (xy -0.508 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.27 0) (xy -1.27 0)
 				)
 				(stroke
 					(width 0)
@@ -808,11 +1039,11 @@
 				)
 			)
 		)
-		(symbol "Fuse_1_1"
+		(symbol "D_TVS_1_1"
 			(pin passive line
-				(at 0 3.81 270)
-				(length 1.27)
-				(name ""
+				(at -3.81 0 0)
+				(length 2.54)
+				(name "A1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -828,9 +1059,9 @@
 				)
 			)
 			(pin passive line
-				(at 0 -3.81 90)
-				(length 1.27)
-				(name ""
+				(at 3.81 0 180)
+				(length 2.54)
+				(name "A2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -988,64 +1219,58 @@
 		)
 		(embedded_fonts no)
 	)
-(symbol "Power_Protection:TPD4E02B04DQA"
+(symbol "PCA9306DCTR:PCA9306DCTR"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "PCA9306DCTR" (at 0 6.35 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_SO:SSOP-8_2.95x2.8mm_P0.65mm" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/pca9306.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "Dual bidirectional I2C/SMBus voltage-level translator, DCT SSOP-8" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "PCA9306DCTR_0_1"
+			(rectangle (start -5.08 5.08) (end 5.08 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "PCA9306DCTR_1_1"
+			(pin power_in line (at 0 -7.62 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -7.62 3.81 0) (length 2.54) (name "VREF1" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -7.62 1.27 0) (length 2.54) (name "SCL1" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -7.62 -1.27 0) (length 2.54) (name "SDA1" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 7.62 -1.27 180) (length 2.54) (name "SDA2" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 7.62 1.27 180) (length 2.54) (name "SCL2" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 7.62 3.81 180) (length 2.54) (name "VREF2" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 0 7.62 270) (length 2.54) (name "EN" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD"
+		(pin_numbers
+			(hide yes)
+		)
 		(pin_names
+			(offset 0)
 			(hide yes)
 		)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
-		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "U"
-			(at 2.54 -11.43 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "TPD4E02B04DQA"
-			(at 7.62 1.905 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm"
-			(at 7.62 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tpd4e02b04.pdf"
-			(at 2.54 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
+		(property "Reference" "Q"
+			(at 5.08 1.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Description" "4-Channel ESD Protection Diode for USB Type-C and HDMI 2.0, USON-10"
+		(property "Value" "Q_NMOS_SOT23_GSD"
+			(at 5.08 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
 			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
 			(hide yes)
 			(effects
 				(font
@@ -1053,10 +1278,8 @@
 				)
 			)
 		)
-		(property "ki_keywords" "ESD protection USB HDMI"
+		(property "Datasheet" ""
 			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
 			(hide yes)
 			(effects
 				(font
@@ -1064,10 +1287,8 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "USON*2.5x1.0mm*P0.5mm*"
+		(property "Description" "N-MOSFET, numbered for common SOT-23 1=G 2=S 3=D pinout"
 			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
 			(hide yes)
 			(effects
 				(font
@@ -1075,44 +1296,25 @@
 				)
 			)
 		)
-		(symbol "TPD4E02B04DQA_0_0"
-			(pin passive line
-				(at 2.54 -15.24 90)
-				(length 2.54)
-				(name "G"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
+		(symbol "Q_NMOS_SOT23_GSD_0_1"
+			(polyline
+				(pts
+					(xy -0.508 1.905) (xy -0.508 -1.905)
 				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(symbol "TPD4E02B04DQA_0_1"
-			(rectangle
-				(start -5.08 12.7)
-				(end 5.08 -12.7)
 				(stroke
 					(width 0.254)
 					(type default)
 				)
 				(fill
-					(type background)
+					(type none)
 				)
 			)
 			(polyline
 				(pts
-					(xy -5.08 10.16) (xy 2.54 10.16)
+					(xy 0.254 1.27) (xy 2.54 2.54)
 				)
 				(stroke
-					(width 0)
+					(width 0.254)
 					(type default)
 				)
 				(fill
@@ -1121,235 +1323,22 @@
 			)
 			(polyline
 				(pts
-					(xy -5.08 5.08) (xy 2.54 5.08)
+					(xy 0.254 -1.27) (xy 2.54 -2.54)
 				)
 				(stroke
-					(width 0)
+					(width 0.254)
 					(type default)
 				)
 				(fill
 					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -5.08 -2.54) (xy 2.54 -2.54)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -5.08 -7.62) (xy 2.54 -7.62)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.27 10.16) (xy 0 9.525) (xy 0 10.795) (xy -1.27 10.16)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.27 5.08) (xy 0 4.445) (xy 0 5.715) (xy -1.27 5.08)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.27 -2.54) (xy 0 -3.175) (xy 0 -1.905) (xy -1.27 -2.54)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.27 -7.62) (xy 0 -8.255) (xy 0 -6.985) (xy -1.27 -7.62)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 2.54 10.16) (xy 2.54 -12.7)
-				)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(circle
-				(center 2.54 5.08)
-				(radius 0.254)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type outline)
-				)
-			)
-			(circle
-				(center 2.54 -2.54)
-				(radius 0.254)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type outline)
-				)
-			)
-			(circle
-				(center 2.54 -7.62)
-				(radius 0.254)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type outline)
 				)
 			)
 		)
-		(symbol "TPD4E02B04DQA_1_1"
-			(polyline
-				(pts
-					(xy -1.524 9.525) (xy -1.27 9.779) (xy -1.27 10.541) (xy -1.016 10.795)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.524 4.445) (xy -1.27 4.699) (xy -1.27 5.461) (xy -1.016 5.715)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.524 -3.175) (xy -1.27 -2.921) (xy -1.27 -2.159) (xy -1.016 -1.905)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.524 -8.255) (xy -1.27 -8.001) (xy -1.27 -7.239) (xy -1.016 -6.985)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.27 10.16) (xy -2.54 9.525) (xy -2.54 10.795) (xy -1.27 10.16)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.27 5.08) (xy -2.54 4.445) (xy -2.54 5.715) (xy -1.27 5.08)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.27 -2.54) (xy -2.54 -3.175) (xy -2.54 -1.905) (xy -1.27 -2.54)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy -1.27 -7.62) (xy -2.54 -8.255) (xy -2.54 -6.985) (xy -1.27 -7.62)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(pin passive line
-				(at -7.62 10.16 0)
-				(length 2.54)
-				(name "IO1"
+		(symbol "Q_NMOS_SOT23_GSD_1_1"
+			(pin input line
+				(at -5.08 0 0)
+				(length 4.572)
+				(name "G"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1365,9 +1354,9 @@
 				)
 			)
 			(pin passive line
-				(at -7.62 5.08 0)
+				(at 2.54 -5.08 90)
 				(length 2.54)
-				(name "IO2"
+				(name "S"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1383,125 +1372,16 @@
 				)
 			)
 			(pin passive line
-				(at -7.62 -2.54 0)
+				(at 2.54 5.08 270)
 				(length 2.54)
-				(name "IO3"
+				(name "D"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -7.62 -7.62 0)
-				(length 2.54)
-				(name "IO4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin free line
-				(at -7.62 -10.16 0)
-				(length 2.54)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "6"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin free line
-				(at -7.62 -5.08 0)
-				(length 2.54)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 2.54 -15.24 90)
-				(length 2.54)
-				(hide yes)
-				(name "G"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin free line
-				(at -7.62 2.54 0)
-				(length 2.54)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin free line
-				(at -7.62 7.62 0)
-				(length 2.54)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "10"
+				(number "3"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1510,7 +1390,61 @@
 				)
 			)
 		)
-		(embedded_fonts no)
+	)
+(symbol "TPD13S523PWR:TPD13S523PWR"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 11.43 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "TPD13S523PWR" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd13s523.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "HDMI source-side control-line ESD and current-limited reverse-blocking 5 V switch, PW TSSOP-16" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "TPD13S523PWR_0_1"
+			(rectangle (start -6.35 7.62) (end 6.35 -7.62) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "TPD13S523PWR_1_1"
+			(pin bidirectional line (at -8.89 5.08 0) (length 2.54) (name "CTRL1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -8.89 2.54 0) (length 2.54) (name "CTRL2" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -8.89 0 0) (length 2.54) (name "CTRL3" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -8.89 -2.54 0) (length 2.54) (name "CTRL4" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -8.89 -5.08 0) (length 2.54) (name "5V_SUPPLY" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin power_out line (at 8.89 -5.08 180) (length 2.54) (name "5V_OUT" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -8.89 -7.62 0) (length 2.54) (name "CTRL5" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0 -10.16 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 8.89 -7.62 180) (length 2.54) (name "D3-" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 8.89 -2.54 180) (length 2.54) (name "D3+" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 8.89 0 180) (length 2.54) (name "D2-" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 8.89 2.54 180) (length 2.54) (name "D2+" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 8.89 5.08 180) (length 2.54) (name "D1-" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 8.89 7.62 180) (length 2.54) (name "D1+" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 8.89 10.16 180) (length 2.54) (name "D0-" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 8.89 12.7 180) (length 2.54) (name "D0+" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "TPS22975N:TPS22975N"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 7.62 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "TPS22975N" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_SON:Texas_DSG0008A_WSON-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22975.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "6A 5.7V load switch without output discharge, WSON-8 DSG" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "TPS22975N_0_1"
+			(rectangle (start -5.08 3.81) (end 5.08 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "TPS22975N_1_1"
+			(pin power_in line (at -7.62 2.54 0) (length 2.54) (name "VIN" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -7.62 1.27 0) (length 2.54) (name "VIN" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 -1.27 0) (length 2.54) (name "ON" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -7.62 -2.54 0) (length 2.54) (name "VBIAS" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0 -7.62 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 7.62 -2.54 180) (length 2.54) (name "CT" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin power_out line (at 7.62 1.27 180) (length 2.54) (name "VOUT" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 7.62 2.54 180) (length 2.54) (name "VOUT" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0 -7.62 90) (length 2.54) (name "EP" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+		)
 	)
 (symbol "power:GND"
 		(power global)
@@ -1627,125 +1561,10 @@
 		)
 		(embedded_fonts no)
 	)
-(symbol "power:PWR_FLAG"
-		(power global)
-		(pin_numbers
-			(hide yes)
-		)
-		(pin_names
-			(offset 0)
-			(hide yes)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "#FLG"
-			(at 0 1.905 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 0 3.81 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "flag power"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(symbol "PWR_FLAG_0_0"
-			(pin power_out line
-				(at 0 0 90)
-				(length 0)
-				(name ""
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(symbol "PWR_FLAG_0_1"
-			(polyline
-				(pts
-					(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
   )
 (text "== TCP0 external HDMI 2.0 output ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 745c093a-4329-5430-b44c-2462356ec3b8))
-(text "LattePanda Mu default BIOS maps TCP0 as HDMI 2.0; DDIB remains the internal Intehill display." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 0fa84a0f-b26f-52de-9085-4013f57fff57))
-(text "This sheet is the user-accessible external HDMI-A connector for a second monitor." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 888cdb08-9ce1-5dbe-a82f-997f836f3fc8))
+(text "LattePanda Mu default BIOS maps TCP0 as HDMI 2.0; the internal panel uses the Mu module's onboard eDP connector." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 0fa84a0f-b26f-52de-9085-4013f57fff57))
+(text "Lane map, AC coupling, bias gating, DDC/HPD translation, and 5V isolation follow the Mu reference." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 888cdb08-9ce1-5dbe-a82f-997f836f3fc8))
 (text "== J30 external HDMI-A connector ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 67f2e1cc-417e-57ff-bd65-389e59f5eef9))
 (symbol
   (lib_id "Connector:HDMI_A")
@@ -1760,6 +1579,8 @@
   (property "Value" "External HDMI-A from TCP0" (at 115.57 127 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_Video:HDMI_A_Molex_208658-1001_Horizontal" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Molex" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "208658-1001" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 620100e5-14fd-500f-b21d-ae1532f6ad10))
   (pin "2" (uuid e6e133c5-d407-593e-972e-37328fe4baba))
   (pin "3" (uuid 5b9e3686-57b3-58a4-ad31-d31da06bcf60))
@@ -1849,11 +1670,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid ca9b7fda-3494-5eb9-978a-7a6b5858db1f)
 )
-(label "EXT_HDMI_CEC"
-  (at 105.41 127 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 88b4dc80-981f-5c11-bd79-8cc925e71cb6)
-)
+(no_connect (at 105.41 127) (uuid 88b4dc80-981f-5c11-bd79-8cc925e71cb6))
 (no_connect (at 105.41 139.7) (uuid 6f390baa-5c5a-546d-8605-0812915462f1))
 (label "EXT_HDMI_SCL_CONN"
   (at 105.41 132.08 0)
@@ -1895,9 +1712,11 @@
   (dnp no)
   (uuid 2df1e916-31fa-5e45-b108-ffc7b2b64d32)
   (property "Reference" "C150" (at 250.19 80.01 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n HDMI AC cap" (at 250.19 85.09 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 250.19 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "100n 16V HDMI AC coupling" (at 250.19 85.09 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 250.19 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 250.19 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 250.19 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 250.19 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 640012c6-6a18-5ec3-b87f-b09357255f8d))
   (pin "2" (uuid 86d5a402-ea72-5eed-ad23-219bd1b2b51f))
   (instances
@@ -1909,7 +1728,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TXRX0_P"
+(hierarchical_label "TCP0_TX0_P"
   (shape bidirectional)
   (at 250.19 78.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -1930,9 +1749,11 @@
   (dnp no)
   (uuid 19a19786-88b2-5455-921b-85e566424fa9)
   (property "Reference" "R150" (at 250.19 90.17 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "470R HDMI bias per Mu ref" (at 250.19 95.25 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 250.19 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "470R 1% HDMI bias" (at 250.19 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 250.19 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 250.19 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 250.19 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07470RL" (at 250.19 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 0c50c489-4041-5a8d-938b-73207838ccc6))
   (pin "2" (uuid abd248f5-9c57-5735-87a6-1326e690d421))
   (instances
@@ -1949,10 +1770,47 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 975509e1-d4bd-5954-b9f0-8cfd87668874)
 )
-(label "GND"
+(label "EXT_HDMI_BIAS_RETURN"
   (at 250.19 96.52 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 44dda8ea-2aa3-54ff-b65e-f00c4ae09e15)
+)
+(symbol
+  (lib_id "Device:D_TVS")
+  (at 250.19 102.87 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 61e62e2e-f28e-50a9-80e5-3f6a5fa04c9f)
+  (property "Reference" "D150" (at 250.19 100.33 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD1E0B04DPLR HDMI TMDS ESD (0.15pF max)" (at 250.19 105.41 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_0201_0603Metric" (at 250.19 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 250.19 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 250.19 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD1E0B04DPLR" (at 250.19 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf" (at 250.19 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 58f9e7d6-5383-5903-9c97-c0bddb7a9977))
+  (pin "2" (uuid f72c3a33-0c3a-5fa8-9429-72ffa5bf8454))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "D150")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_D2_P"
+  (at 246.38 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 533fd24e-3ca4-5aa7-b5b8-5ee2741a47d8)
+)
+(label "GND"
+  (at 254 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 03cd1e03-ea7e-5121-b1ee-44954500f93c)
 )
 (symbol
   (lib_id "Device:C")
@@ -1962,13 +1820,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 61e62e2e-f28e-50a9-80e5-3f6a5fa04c9f)
+  (uuid aab14fc5-be16-54c4-aaf9-5d718efcc440)
   (property "Reference" "C151" (at 304.8 80.01 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n HDMI AC cap" (at 304.8 85.09 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 304.8 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "100n 16V HDMI AC coupling" (at 304.8 85.09 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 304.8 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 304.8 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 58f9e7d6-5383-5903-9c97-c0bddb7a9977))
-  (pin "2" (uuid f72c3a33-0c3a-5fa8-9429-72ffa5bf8454))
+  (property "Manufacturer" "Murata" (at 304.8 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 304.8 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 7122ed47-210a-5601-854e-804bcaee49dc))
+  (pin "2" (uuid 48fdfa5c-9c3a-5565-abc9-e19650892784))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -1978,16 +1838,16 @@
     )
   )
 )
-(hierarchical_label "TCP0_TXRX0_N"
+(hierarchical_label "TCP0_TX0_N"
   (shape bidirectional)
   (at 304.8 78.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 533fd24e-3ca4-5aa7-b5b8-5ee2741a47d8)
+  (uuid f6578aaf-c265-52e7-975c-265a2f0c59a7)
 )
 (label "EXT_HDMI_D2_N"
   (at 304.8 86.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 03cd1e03-ea7e-5121-b1ee-44954500f93c)
+  (uuid e70212f9-eaa6-5f78-8bc7-2ff16e3b5777)
 )
 (symbol
   (lib_id "Device:R")
@@ -1997,13 +1857,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid aab14fc5-be16-54c4-aaf9-5d718efcc440)
+  (uuid 7d1e9f14-b9f4-55a5-8526-bb3d9acc6022)
   (property "Reference" "R151" (at 304.8 90.17 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "470R HDMI bias per Mu ref" (at 304.8 95.25 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 304.8 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "470R 1% HDMI bias" (at 304.8 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 304.8 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 304.8 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 7122ed47-210a-5601-854e-804bcaee49dc))
-  (pin "2" (uuid 48fdfa5c-9c3a-5565-abc9-e19650892784))
+  (property "Manufacturer" "Yageo" (at 304.8 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07470RL" (at 304.8 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 569e70ea-c93b-592b-893b-c29420f60566))
+  (pin "2" (uuid 4859597c-7a54-5796-9efb-54a6367753ce))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2016,12 +1878,49 @@
 (label "EXT_HDMI_D2_N"
   (at 304.8 88.9 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f6578aaf-c265-52e7-975c-265a2f0c59a7)
+  (uuid ead0894d-31d3-57a0-bbef-d7fabb1211de)
 )
-(label "GND"
+(label "EXT_HDMI_BIAS_RETURN"
   (at 304.8 96.52 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e70212f9-eaa6-5f78-8bc7-2ff16e3b5777)
+  (uuid 18b1b8e6-ca42-54b6-ae8b-3aa21e4ad923)
+)
+(symbol
+  (lib_id "Device:D_TVS")
+  (at 304.8 102.87 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 66dacc8c-53b2-5042-9d57-dfecad4e7f3b)
+  (property "Reference" "D151" (at 304.8 100.33 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD1E0B04DPLR HDMI TMDS ESD (0.15pF max)" (at 304.8 105.41 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_0201_0603Metric" (at 304.8 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 304.8 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 304.8 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD1E0B04DPLR" (at 304.8 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf" (at 304.8 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 77828197-d3dd-5572-94b3-8d4906d47d7f))
+  (pin "2" (uuid 5bad4ae7-ef6c-5f40-b116-ef8d6cf34b64))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "D151")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_D2_N"
+  (at 300.99 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 67c36af7-f0ef-50c0-b6a7-7e08753bb6c7)
+)
+(label "GND"
+  (at 308.61 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 41dcc580-3ba6-547a-9fa6-786b59ca4154)
 )
 (symbol
   (lib_id "Device:C")
@@ -2031,13 +1930,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 7d1e9f14-b9f4-55a5-8526-bb3d9acc6022)
+  (uuid c197dbb9-f3c7-5a56-87d1-16392e9b782e)
   (property "Reference" "C152" (at 359.41 80.01 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n HDMI AC cap" (at 359.41 85.09 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 359.41 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "100n 16V HDMI AC coupling" (at 359.41 85.09 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 359.41 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 359.41 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 569e70ea-c93b-592b-893b-c29420f60566))
-  (pin "2" (uuid 4859597c-7a54-5796-9efb-54a6367753ce))
+  (property "Manufacturer" "Murata" (at 359.41 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 359.41 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 46023fd8-ad79-5edd-8bc1-4dd8258faea0))
+  (pin "2" (uuid ba8bf01b-1c74-5306-9c7c-263161b08b35))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2047,16 +1948,16 @@
     )
   )
 )
-(hierarchical_label "TCP0_TX1_P"
+(hierarchical_label "TCP0_TXRX0_P"
   (shape bidirectional)
   (at 359.41 78.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ead0894d-31d3-57a0-bbef-d7fabb1211de)
+  (uuid 0e2c1377-15c0-52b3-af5f-b6507d2288ee)
 )
 (label "EXT_HDMI_D1_P"
   (at 359.41 86.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 18b1b8e6-ca42-54b6-ae8b-3aa21e4ad923)
+  (uuid 322bf438-2805-5e5b-b5af-f1eb6bb6c1d8)
 )
 (symbol
   (lib_id "Device:R")
@@ -2066,13 +1967,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 66dacc8c-53b2-5042-9d57-dfecad4e7f3b)
+  (uuid c82e26a5-0355-5136-a127-9a106b184cbb)
   (property "Reference" "R152" (at 359.41 90.17 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "470R HDMI bias per Mu ref" (at 359.41 95.25 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 359.41 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "470R 1% HDMI bias" (at 359.41 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 359.41 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 359.41 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 77828197-d3dd-5572-94b3-8d4906d47d7f))
-  (pin "2" (uuid 5bad4ae7-ef6c-5f40-b116-ef8d6cf34b64))
+  (property "Manufacturer" "Yageo" (at 359.41 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07470RL" (at 359.41 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c639d49f-c9b3-5dba-bbdc-c3553bf5c649))
+  (pin "2" (uuid 0b70593e-3984-5ebc-93fa-800efe4c0538))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2085,12 +1988,49 @@
 (label "EXT_HDMI_D1_P"
   (at 359.41 88.9 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 67c36af7-f0ef-50c0-b6a7-7e08753bb6c7)
+  (uuid 83a73dcb-466c-5b05-8a69-0d1db0595f79)
 )
-(label "GND"
+(label "EXT_HDMI_BIAS_RETURN"
   (at 359.41 96.52 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 41dcc580-3ba6-547a-9fa6-786b59ca4154)
+  (uuid 8257df3c-bdf3-58ae-9b3b-e90bf5f53c06)
+)
+(symbol
+  (lib_id "Device:D_TVS")
+  (at 359.41 102.87 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 7d888410-4aa6-57b8-b743-76c3697b541f)
+  (property "Reference" "D152" (at 359.41 100.33 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD1E0B04DPLR HDMI TMDS ESD (0.15pF max)" (at 359.41 105.41 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_0201_0603Metric" (at 359.41 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 359.41 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 359.41 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD1E0B04DPLR" (at 359.41 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf" (at 359.41 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 92904130-dfab-533d-8cef-095f0ed16f44))
+  (pin "2" (uuid 7d4fac7d-25be-500f-86b0-7be2c657ebab))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "D152")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_D1_P"
+  (at 355.6 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 12519c55-9ff3-5f97-95d6-47bd39cb9e23)
+)
+(label "GND"
+  (at 363.22 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c48d1020-e46f-5be9-ad25-2442c9be6613)
 )
 (symbol
   (lib_id "Device:C")
@@ -2100,13 +2040,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c197dbb9-f3c7-5a56-87d1-16392e9b782e)
+  (uuid a3f0c5a3-b986-56bc-885d-4063baa646c8)
   (property "Reference" "C153" (at 415.29 80.01 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n HDMI AC cap" (at 415.29 85.09 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 415.29 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "100n 16V HDMI AC coupling" (at 415.29 85.09 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 415.29 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 415.29 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 46023fd8-ad79-5edd-8bc1-4dd8258faea0))
-  (pin "2" (uuid ba8bf01b-1c74-5306-9c7c-263161b08b35))
+  (property "Manufacturer" "Murata" (at 415.29 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 415.29 82.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cfe3510b-97b9-5b2a-8c91-6d1fcab70573))
+  (pin "2" (uuid a0c3cb41-1791-5ceb-8be3-f244a0d1153d))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2116,16 +2058,16 @@
     )
   )
 )
-(hierarchical_label "TCP0_TX1_N"
+(hierarchical_label "TCP0_TXRX0_N"
   (shape bidirectional)
   (at 415.29 78.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0e2c1377-15c0-52b3-af5f-b6507d2288ee)
+  (uuid c997e745-2e90-5815-9d8e-e5edb8d022fe)
 )
 (label "EXT_HDMI_D1_N"
   (at 415.29 86.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 322bf438-2805-5e5b-b5af-f1eb6bb6c1d8)
+  (uuid a2f69925-8d61-5f10-afb0-1a65e5e31a72)
 )
 (symbol
   (lib_id "Device:R")
@@ -2135,13 +2077,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c82e26a5-0355-5136-a127-9a106b184cbb)
+  (uuid 54f378fc-824c-5b02-b652-561bc5d85857)
   (property "Reference" "R153" (at 415.29 90.17 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "470R HDMI bias per Mu ref" (at 415.29 95.25 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 415.29 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "470R 1% HDMI bias" (at 415.29 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 415.29 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 415.29 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c639d49f-c9b3-5dba-bbdc-c3553bf5c649))
-  (pin "2" (uuid 0b70593e-3984-5ebc-93fa-800efe4c0538))
+  (property "Manufacturer" "Yageo" (at 415.29 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07470RL" (at 415.29 92.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 72959c26-8f17-5bf5-a4fb-a125389072d8))
+  (pin "2" (uuid 8cb747f8-db80-565e-83ca-b0c0d085fc82))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2154,12 +2098,49 @@
 (label "EXT_HDMI_D1_N"
   (at 415.29 88.9 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 83a73dcb-466c-5b05-8a69-0d1db0595f79)
+  (uuid 7b6a0a39-0133-5b7b-a667-89b09e7c24f5)
 )
-(label "GND"
+(label "EXT_HDMI_BIAS_RETURN"
   (at 415.29 96.52 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8257df3c-bdf3-58ae-9b3b-e90bf5f53c06)
+  (uuid e2636f6b-dded-58b0-a549-1f2c3885aca4)
+)
+(symbol
+  (lib_id "Device:D_TVS")
+  (at 415.29 102.87 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid cefc52a6-06ca-5821-b96b-a334f9dc59a5)
+  (property "Reference" "D153" (at 415.29 100.33 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD1E0B04DPLR HDMI TMDS ESD (0.15pF max)" (at 415.29 105.41 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_0201_0603Metric" (at 415.29 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 415.29 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 415.29 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD1E0B04DPLR" (at 415.29 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf" (at 415.29 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid eea0d59f-9df6-5dd9-94eb-fd55304f9f4e))
+  (pin "2" (uuid e8873398-0c4b-51e9-a07d-4f69a1ddeaa3))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "D153")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_D1_N"
+  (at 411.48 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e2be01ae-a8c5-5a3c-bf7f-b44f12200dcb)
+)
+(label "GND"
+  (at 419.1 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6a752751-081c-5441-a5dd-9e99cdce06e2)
 )
 (symbol
   (lib_id "Device:C")
@@ -2169,13 +2150,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 7d888410-4aa6-57b8-b743-76c3697b541f)
+  (uuid 14031f59-a802-5b2b-9acd-985adf6123bf)
   (property "Reference" "C154" (at 250.19 105.41 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n HDMI AC cap" (at 250.19 110.49 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 250.19 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "100n 16V HDMI AC coupling" (at 250.19 110.49 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 250.19 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 250.19 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 92904130-dfab-533d-8cef-095f0ed16f44))
-  (pin "2" (uuid 7d4fac7d-25be-500f-86b0-7be2c657ebab))
+  (property "Manufacturer" "Murata" (at 250.19 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 250.19 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 241793aa-33ba-5c80-bac1-69a128ece73d))
+  (pin "2" (uuid 1584bcf3-6be8-552d-ada7-6a879f9eb1eb))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2185,16 +2168,16 @@
     )
   )
 )
-(hierarchical_label "TCP0_TX0_P"
+(hierarchical_label "TCP0_TX1_P"
   (shape bidirectional)
   (at 250.19 104.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 12519c55-9ff3-5f97-95d6-47bd39cb9e23)
+  (uuid c7e83a40-35d2-54ee-87c5-f55e20beeb87)
 )
 (label "EXT_HDMI_D0_P"
   (at 250.19 111.76 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c48d1020-e46f-5be9-ad25-2442c9be6613)
+  (uuid 4451a760-7d31-52b3-bffe-f89c3ea4b147)
 )
 (symbol
   (lib_id "Device:R")
@@ -2204,13 +2187,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid a3f0c5a3-b986-56bc-885d-4063baa646c8)
+  (uuid 59f6de0f-07c5-56a2-ada3-1173e17cdf57)
   (property "Reference" "R154" (at 250.19 115.57 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "470R HDMI bias per Mu ref" (at 250.19 120.65 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 250.19 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "470R 1% HDMI bias" (at 250.19 120.65 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 250.19 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 250.19 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid cfe3510b-97b9-5b2a-8c91-6d1fcab70573))
-  (pin "2" (uuid a0c3cb41-1791-5ceb-8be3-f244a0d1153d))
+  (property "Manufacturer" "Yageo" (at 250.19 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07470RL" (at 250.19 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ba541b99-1031-50be-8722-97361a7c0da2))
+  (pin "2" (uuid 6b9b7a50-8be0-5525-b158-aaa8a2c3b38a))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2223,12 +2208,49 @@
 (label "EXT_HDMI_D0_P"
   (at 250.19 114.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c997e745-2e90-5815-9d8e-e5edb8d022fe)
+  (uuid a1de4cdd-c17b-5409-87ae-baa4291c6053)
 )
-(label "GND"
+(label "EXT_HDMI_BIAS_RETURN"
   (at 250.19 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a2f69925-8d61-5f10-afb0-1a65e5e31a72)
+  (uuid 77e4cec9-cff2-5550-a156-fa1b3e668704)
+)
+(symbol
+  (lib_id "Device:D_TVS")
+  (at 250.19 128.27 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8ac12b0c-eb01-5e32-a1d9-ca9d18bb1749)
+  (property "Reference" "D154" (at 250.19 125.73 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD1E0B04DPLR HDMI TMDS ESD (0.15pF max)" (at 250.19 130.81 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_0201_0603Metric" (at 250.19 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 250.19 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 250.19 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD1E0B04DPLR" (at 250.19 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf" (at 250.19 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 0b26c954-a989-5d91-8bd3-2e5470dde838))
+  (pin "2" (uuid c611fa67-34d7-5579-8301-4054f5df92b3))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "D154")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_D0_P"
+  (at 246.38 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ef535a35-958f-5565-a5f4-4b1402bf7f7c)
+)
+(label "GND"
+  (at 254 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9f024c24-f549-5e3f-81aa-e6b20653c9a4)
 )
 (symbol
   (lib_id "Device:C")
@@ -2238,13 +2260,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 54f378fc-824c-5b02-b652-561bc5d85857)
+  (uuid 60eb073a-5416-5b12-a8d5-2cac74cc007d)
   (property "Reference" "C155" (at 304.8 105.41 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n HDMI AC cap" (at 304.8 110.49 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 304.8 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "100n 16V HDMI AC coupling" (at 304.8 110.49 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 304.8 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 304.8 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 72959c26-8f17-5bf5-a4fb-a125389072d8))
-  (pin "2" (uuid 8cb747f8-db80-565e-83ca-b0c0d085fc82))
+  (property "Manufacturer" "Murata" (at 304.8 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 304.8 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 65fbbbf1-b9b4-5bac-a749-2d36cfca64af))
+  (pin "2" (uuid ae95d5eb-b5f9-5598-84d2-688047774e2c))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2254,16 +2278,16 @@
     )
   )
 )
-(hierarchical_label "TCP0_TX0_N"
+(hierarchical_label "TCP0_TX1_N"
   (shape bidirectional)
   (at 304.8 104.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7b6a0a39-0133-5b7b-a667-89b09e7c24f5)
+  (uuid 5678af7e-0b45-5b46-881c-0283388020ad)
 )
 (label "EXT_HDMI_D0_N"
   (at 304.8 111.76 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e2636f6b-dded-58b0-a549-1f2c3885aca4)
+  (uuid 820d6c2a-4514-571c-95d2-5747e6adae63)
 )
 (symbol
   (lib_id "Device:R")
@@ -2273,13 +2297,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid cefc52a6-06ca-5821-b96b-a334f9dc59a5)
+  (uuid 7bf57b99-dbec-513b-beb0-9a076dda884c)
   (property "Reference" "R155" (at 304.8 115.57 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "470R HDMI bias per Mu ref" (at 304.8 120.65 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 304.8 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "470R 1% HDMI bias" (at 304.8 120.65 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 304.8 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 304.8 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid eea0d59f-9df6-5dd9-94eb-fd55304f9f4e))
-  (pin "2" (uuid e8873398-0c4b-51e9-a07d-4f69a1ddeaa3))
+  (property "Manufacturer" "Yageo" (at 304.8 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07470RL" (at 304.8 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 75270884-4679-5830-90ac-4ab00c2ad6d5))
+  (pin "2" (uuid c8f5413e-3d96-5ea5-854c-a8c22c22721a))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2292,12 +2318,49 @@
 (label "EXT_HDMI_D0_N"
   (at 304.8 114.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e2be01ae-a8c5-5a3c-bf7f-b44f12200dcb)
+  (uuid 993edf28-0ee8-5d06-b46e-06e197144091)
 )
-(label "GND"
+(label "EXT_HDMI_BIAS_RETURN"
   (at 304.8 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6a752751-081c-5441-a5dd-9e99cdce06e2)
+  (uuid cc5956cb-7b28-58e8-bc9d-b81a00a4b164)
+)
+(symbol
+  (lib_id "Device:D_TVS")
+  (at 304.8 128.27 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 6433eb32-89ab-5e7a-b186-576519d2e505)
+  (property "Reference" "D155" (at 304.8 125.73 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD1E0B04DPLR HDMI TMDS ESD (0.15pF max)" (at 304.8 130.81 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_0201_0603Metric" (at 304.8 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 304.8 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 304.8 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD1E0B04DPLR" (at 304.8 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf" (at 304.8 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 10428165-ff8c-534d-a63d-7db9d7cd98a2))
+  (pin "2" (uuid 27133611-10b1-5c09-b0a9-8a8aee8fe9de))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "D155")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_D0_N"
+  (at 300.99 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a340af49-4c97-5db0-bd6a-b8623fe9a9d8)
+)
+(label "GND"
+  (at 308.61 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 26967ae5-2340-5137-a06c-0a6869929752)
 )
 (symbol
   (lib_id "Device:C")
@@ -2307,13 +2370,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 14031f59-a802-5b2b-9acd-985adf6123bf)
+  (uuid 1113257a-e93c-5753-a465-54d0ff8aa626)
   (property "Reference" "C156" (at 359.41 105.41 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n HDMI AC cap" (at 359.41 110.49 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 359.41 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "100n 16V HDMI AC coupling" (at 359.41 110.49 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 359.41 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 359.41 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 241793aa-33ba-5c80-bac1-69a128ece73d))
-  (pin "2" (uuid 1584bcf3-6be8-552d-ada7-6a879f9eb1eb))
+  (property "Manufacturer" "Murata" (at 359.41 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 359.41 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid aab7f98e-a766-5a9c-a66a-2a7cd0d977d9))
+  (pin "2" (uuid ce82551e-b62f-5876-a724-cabef5919485))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2327,12 +2392,12 @@
   (shape bidirectional)
   (at 359.41 104.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c7e83a40-35d2-54ee-87c5-f55e20beeb87)
+  (uuid 409fc957-2396-5477-87aa-2089849636fe)
 )
 (label "EXT_HDMI_CK_P"
   (at 359.41 111.76 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4451a760-7d31-52b3-bffe-f89c3ea4b147)
+  (uuid d743b1ed-63f5-547e-ae96-b037caf37570)
 )
 (symbol
   (lib_id "Device:R")
@@ -2342,13 +2407,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 59f6de0f-07c5-56a2-ada3-1173e17cdf57)
+  (uuid 0b5edf85-5b5a-5cf0-924f-b7bf18dec88b)
   (property "Reference" "R156" (at 359.41 115.57 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "470R HDMI bias per Mu ref" (at 359.41 120.65 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 359.41 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "470R 1% HDMI bias" (at 359.41 120.65 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 359.41 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 359.41 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid ba541b99-1031-50be-8722-97361a7c0da2))
-  (pin "2" (uuid 6b9b7a50-8be0-5525-b158-aaa8a2c3b38a))
+  (property "Manufacturer" "Yageo" (at 359.41 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07470RL" (at 359.41 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b43032a6-371c-537c-b3a3-1ae0a67df589))
+  (pin "2" (uuid abe5e995-7522-5dbe-b68b-99fc61f7504c))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2361,12 +2428,49 @@
 (label "EXT_HDMI_CK_P"
   (at 359.41 114.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a1de4cdd-c17b-5409-87ae-baa4291c6053)
+  (uuid 0cec7746-a107-551f-ab68-3a3ee4d405ce)
 )
-(label "GND"
+(label "EXT_HDMI_BIAS_RETURN"
   (at 359.41 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 77e4cec9-cff2-5550-a156-fa1b3e668704)
+  (uuid a735974a-fac0-557f-9662-b6796dbe0563)
+)
+(symbol
+  (lib_id "Device:D_TVS")
+  (at 359.41 128.27 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid cc2a2f41-0c50-52fc-86d7-aa82804bdf92)
+  (property "Reference" "D156" (at 359.41 125.73 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD1E0B04DPLR HDMI TMDS ESD (0.15pF max)" (at 359.41 130.81 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_0201_0603Metric" (at 359.41 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 359.41 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 359.41 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD1E0B04DPLR" (at 359.41 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf" (at 359.41 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 6a38b898-5e31-5611-ae55-a1a17c46b6ea))
+  (pin "2" (uuid 56b4f996-969f-5237-921a-fee5d17e9466))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "D156")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_CK_P"
+  (at 355.6 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 35979e6d-e4e9-59bc-a9ac-45bf53b80a30)
+)
+(label "GND"
+  (at 363.22 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 95d8c0e0-51e2-512d-8a93-b13e7ef0120c)
 )
 (symbol
   (lib_id "Device:C")
@@ -2376,13 +2480,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 8ac12b0c-eb01-5e32-a1d9-ca9d18bb1749)
+  (uuid 28e9a02c-65d5-582c-8fb6-1a425674f76b)
   (property "Reference" "C157" (at 415.29 105.41 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n HDMI AC cap" (at 415.29 110.49 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 415.29 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "100n 16V HDMI AC coupling" (at 415.29 110.49 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 415.29 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 415.29 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0b26c954-a989-5d91-8bd3-2e5470dde838))
-  (pin "2" (uuid c611fa67-34d7-5579-8301-4054f5df92b3))
+  (property "Manufacturer" "Murata" (at 415.29 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 415.29 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a2658a42-d885-5a64-b840-d1a22ca8267d))
+  (pin "2" (uuid c608b067-1c9f-539d-ab11-156a5ce79c8e))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2396,12 +2502,12 @@
   (shape bidirectional)
   (at 415.29 104.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ef535a35-958f-5565-a5f4-4b1402bf7f7c)
+  (uuid 2fea2c31-9c7b-5c8c-93fe-9af3a4d3b168)
 )
 (label "EXT_HDMI_CK_N"
   (at 415.29 111.76 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9f024c24-f549-5e3f-81aa-e6b20653c9a4)
+  (uuid 9c87547a-b0bb-5f69-9c59-cc19cf80fbb3)
 )
 (symbol
   (lib_id "Device:R")
@@ -2411,13 +2517,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 60eb073a-5416-5b12-a8d5-2cac74cc007d)
+  (uuid cb2c5976-d7ae-567e-bb63-fbc03a2d2299)
   (property "Reference" "R157" (at 415.29 115.57 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "470R HDMI bias per Mu ref" (at 415.29 120.65 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 415.29 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "470R 1% HDMI bias" (at 415.29 120.65 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 415.29 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 415.29 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 65fbbbf1-b9b4-5bac-a749-2d36cfca64af))
-  (pin "2" (uuid ae95d5eb-b5f9-5598-84d2-688047774e2c))
+  (property "Manufacturer" "Yageo" (at 415.29 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07470RL" (at 415.29 118.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b42e7255-7633-5505-8c38-81876b5bc0b7))
+  (pin "2" (uuid c24a6939-d29c-5585-b6cf-74f6bbf1f6bf))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2430,36 +2538,530 @@
 (label "EXT_HDMI_CK_N"
   (at 415.29 114.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5678af7e-0b45-5b46-881c-0283388020ad)
+  (uuid be240677-daaa-5915-9b28-6aa0b7d6d923)
 )
-(label "GND"
+(label "EXT_HDMI_BIAS_RETURN"
   (at 415.29 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 820d6c2a-4514-571c-95d2-5747e6adae63)
+  (uuid 71f84c6a-c4af-581a-adcf-b19111d90a0c)
 )
 (symbol
-  (lib_id "Power_Protection:TPD4E02B04DQA")
-  (at 250.19 160.02 0)
+  (lib_id "Device:D_TVS")
+  (at 415.29 128.27 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 7bf57b99-dbec-513b-beb0-9a076dda884c)
-  (property "Reference" "U50" (at 250.19 157.48 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E02B04DQA HDMI2.0 TMDS ESD A" (at 250.19 162.56 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 250.19 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 250.19 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "3" (uuid 75270884-4679-5830-90ac-4ab00c2ad6d5))
-  (pin "1" (uuid c8f5413e-3d96-5ea5-854c-a8c22c22721a))
-  (pin "2" (uuid 993edf28-0ee8-5d06-b46e-06e197144091))
-  (pin "4" (uuid cc5956cb-7b28-58e8-bc9d-b81a00a4b164))
-  (pin "5" (uuid 6433eb32-89ab-5e7a-b186-576519d2e505))
-  (pin "6" (uuid 10428165-ff8c-534d-a63d-7db9d7cd98a2))
-  (pin "7" (uuid 27133611-10b1-5c09-b0a9-8a8aee8fe9de))
-  (pin "8" (uuid a340af49-4c97-5db0-bd6a-b8623fe9a9d8))
-  (pin "9" (uuid 26967ae5-2340-5137-a06c-0a6869929752))
-  (pin "10" (uuid 1113257a-e93c-5753-a465-54d0ff8aa626))
+  (uuid 0811d362-4b47-507f-af5c-605c75fc1510)
+  (property "Reference" "D157" (at 415.29 125.73 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD1E0B04DPLR HDMI TMDS ESD (0.15pF max)" (at 415.29 130.81 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_0201_0603Metric" (at 415.29 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 415.29 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 415.29 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD1E0B04DPLR" (at 415.29 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf" (at 415.29 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4cc7f2ca-018a-5d88-9faa-c231024016b8))
+  (pin "2" (uuid ff4ed0e1-c251-53d4-8e8e-742560e92499))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "D157")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_CK_N"
+  (at 411.48 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0f593819-0497-5be2-8c7e-dbf5df413d90)
+)
+(label "GND"
+  (at 419.1 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fc61a9e1-ccfe-513e-9a22-5857771790c5)
+)
+(symbol
+  (lib_id "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD")
+  (at 474.98 180.34 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid e47fedec-7ffb-5bd4-bbc3-6481e5d51c8e)
+  (property "Reference" "Q50" (at 474.98 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BSS138 HDMI bias gate" (at 474.98 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 474.98 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 474.98 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "onsemi" (at 474.98 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BSS138LT1G" (at 474.98 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 7d613677-e988-5ca5-a4f0-be0b40da4c50))
+  (pin "2" (uuid 06475650-1e0d-58a5-8201-f29825b8cf7a))
+  (pin "3" (uuid 819ac222-eeec-56ba-abbc-780684687b8b))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "Q50")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_BIAS_GATE"
+  (at 469.9 180.34 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9c278992-caeb-5cca-ac49-af2c7c9822d2)
+)
+(label "GND"
+  (at 477.52 185.42 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 11ffdca6-f296-5492-bf78-1dbbd9f2fc4c)
+)
+(label "EXT_HDMI_BIAS_RETURN"
+  (at 477.52 175.26 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a393fb60-59ce-586a-a89d-4a3731ea9b8a)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 529.59 177.8 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 3fcad62b-4f8e-5724-a702-652881306d6e)
+  (property "Reference" "R165" (at 529.59 175.26 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2.2k S0 bias-gate series" (at 529.59 180.34 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 529.59 177.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 529.59 177.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 86b47d27-396b-5f42-b41d-3788c893c4ea))
+  (pin "2" (uuid 35017a45-18ec-55a9-8656-b974e6e8dae9))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R165")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MU_HOST_ACTIVE"
+  (shape bidirectional)
+  (at 529.59 173.99 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5ba53a8a-5406-5244-957f-bc41517dc4c3)
+)
+(label "EXT_HDMI_BIAS_GATE"
+  (at 529.59 181.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 372919e1-96ec-5475-b336-3c2ea6615c1e)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 529.59 190.5 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a70a5535-490e-5a71-aac2-4b8ef09dc0ff)
+  (property "Reference" "R166" (at 529.59 187.96 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k bias-gate default off" (at 529.59 193.04 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 529.59 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 529.59 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5654a753-3803-57ab-b837-58b45b1b25d7))
+  (pin "2" (uuid df54c90c-de56-55d8-8589-f841af85ff49))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R166")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_BIAS_GATE"
+  (at 529.59 186.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 226c9cd8-7e77-52b9-b594-f42fbd496392)
+)
+(label "GND"
+  (at 529.59 194.31 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0fa4d1a5-592a-5906-be82-f2cc640200e3)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 599.44 180.34 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom no)
+  (on_board yes)
+  (dnp yes)
+  (uuid ee1924e4-e704-5f91-af71-324552842e6e)
+  (property "Reference" "R167" (at 599.44 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "0R DNP HDMI bias always-on option" (at 599.44 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 599.44 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 599.44 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 2bb7eca7-bbdd-56cd-8572-210e989561e9))
+  (pin "2" (uuid 29ea1fac-0be2-549e-be44-570640fb9cf1))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R167")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_BIAS_RETURN"
+  (at 599.44 176.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ddb9dd6a-93b0-55ed-99cc-871cfefebda5)
+)
+(label "GND"
+  (at 599.44 184.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6e5d11a0-fd8c-508f-a499-166b7a1ba5c7)
+)
+(symbol
+  (lib_id "TPS22975N:TPS22975N")
+  (at 405.13 38.1 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 945d792d-0c9d-5e9a-a463-f7b0a5cd0c4a)
+  (property "Reference" "U54" (at 405.13 35.56 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS22975NDSGR host-active SYS_5V switch" (at 405.13 40.64 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_SON:Texas_DSG0008A_WSON-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPS22975NDSGR" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22975.pdf" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "PowerOffContract" "OUTPUT_OFF_WHEN_MU_HOST_ACTIVE_LOW; NO_REVERSE_BLOCK_GUARANTEE" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 55065edb-9c09-5fdc-a14e-4c61bd3fdb1f))
+  (pin "2" (uuid 98260466-7ab1-572d-85cb-855d6bc24d0b))
+  (pin "3" (uuid e485b0af-ff7c-5e6b-b083-d80cbfe9dbd4))
+  (pin "4" (uuid 22816911-44a3-570d-91d9-ba5263c0605d))
+  (pin "5" (uuid b92c7794-59c2-55e1-aeac-715cc60f51bf))
+  (pin "6" (uuid 33765bc0-fda7-5394-83a1-8a20b0b5051a))
+  (pin "7" (uuid f3426730-9cec-5875-83c1-ec798cc66263))
+  (pin "8" (uuid 59855274-2e65-5114-a9fb-839674c14411))
+  (pin "9" (uuid bda0cf16-92ac-5ce2-9884-c38dc80a57a3))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "U54")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_5V"
+  (shape bidirectional)
+  (at 397.51 35.56 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ec946479-af13-5d38-9ef2-076b61c168a4)
+)
+(hierarchical_label "SYS_5V"
+  (shape bidirectional)
+  (at 397.51 36.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 83fc000e-a516-5a37-90c5-113279a37589)
+)
+(hierarchical_label "MU_HOST_ACTIVE"
+  (shape bidirectional)
+  (at 397.51 39.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a6e27801-5420-54a6-a28d-87e9afeaa9f4)
+)
+(hierarchical_label "SYS_5V"
+  (shape bidirectional)
+  (at 397.51 40.64 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4a672023-d615-5821-819f-ac55c093b2ac)
+)
+(label "GND"
+  (at 405.13 45.72 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 811b7c40-495c-58e1-a70e-94410c43ce88)
+)
+(label "HDMI_5V_SWITCH_CT"
+  (at 412.75 40.64 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bc7fcd35-61c1-579a-a974-ea03abce312e)
+)
+(label "HDMI_SOURCE_5V"
+  (at 412.75 36.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 80668f16-8289-538e-96d8-f839191ca372)
+)
+(label "HDMI_SOURCE_5V"
+  (at 412.75 35.56 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 241dd1da-092f-5438-9a5a-17bce8a18d9a)
+)
+(label "GND"
+  (at 405.13 45.72 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8db9a598-ed40-562f-a1d8-09bf9f7f11ad)
+)
+(symbol
+  (lib_id "TPS22975N:TPS22975N")
+  (at 405.13 101.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ee4f0a26-9cd3-5fa4-8156-03518da17e79)
+  (property "Reference" "U55" (at 405.13 99.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS22975NDSGR host-active SYS_3V3 switch" (at 405.13 104.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_SON:Texas_DSG0008A_WSON-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPS22975NDSGR" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22975.pdf" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "PowerOffContract" "OUTPUT_OFF_WHEN_MU_HOST_ACTIVE_LOW; NO_REVERSE_BLOCK_GUARANTEE" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 10270cf6-8d5f-5349-a355-facbd713bb4c))
+  (pin "2" (uuid fe079b07-ddcc-5354-be03-c6939b771db9))
+  (pin "3" (uuid 77e6de36-0e74-58e7-93f5-30525064cd36))
+  (pin "4" (uuid b4ae6ad6-26ab-5bb2-8606-849892ecc5be))
+  (pin "5" (uuid 33d240f7-04d2-5157-a0a2-a3aabe332115))
+  (pin "6" (uuid 315f82c0-963f-5caa-b83e-9ff433030e8b))
+  (pin "7" (uuid cc406306-bc1f-5810-a4b5-b08714e0721e))
+  (pin "8" (uuid 6f19e8e9-c049-5c94-9ab4-6ac86a09f12d))
+  (pin "9" (uuid 929d91b1-5040-5196-a1cb-97798fffcabf))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "U55")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 397.51 99.06 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3637f17d-0e8c-5f01-b967-3ed78874d29f)
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 397.51 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f2ec9c32-6f6f-57c2-a955-b277fa4a53c7)
+)
+(hierarchical_label "MU_HOST_ACTIVE"
+  (shape bidirectional)
+  (at 397.51 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 40684f58-34c9-5829-b91c-9e170ec859cd)
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 397.51 104.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 027b97aa-ae04-5582-9741-be4a92b23d7f)
+)
+(label "GND"
+  (at 405.13 109.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 126d34c5-d649-573f-bdc5-d5ad90f76a9a)
+)
+(label "HDMI_3V3_SWITCH_CT"
+  (at 412.75 104.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a809a98c-8ef6-56e5-a8e2-717e2e85a694)
+)
+(label "HDMI_HOST_3V3"
+  (at 412.75 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e2a2b876-e10b-5f04-89b3-875c7bb1dce4)
+)
+(label "HDMI_HOST_3V3"
+  (at 412.75 99.06 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c043467f-5a20-536c-977a-fc41c4acb205)
+)
+(label "GND"
+  (at 405.13 109.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6045907f-0e2c-5118-a627-ca6dbb522809)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 454.66 38.1 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 890590ba-80b4-5091-b594-d61b1ccaca0c)
+  (property "Reference" "C164" (at 454.66 35.56 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7n HDMI 5V switch rise-time" (at 454.66 40.64 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 454.66 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 454.66 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 346d1aef-9a33-598e-a6d8-48c313a931d4))
+  (pin "2" (uuid 9556d350-e670-58d4-a89e-4cd855c3fdf7))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "C164")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_5V_SWITCH_CT"
+  (at 454.66 34.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 521bd8e5-5169-5c15-8fe1-a9eaecd085bd)
+)
+(label "GND"
+  (at 454.66 41.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8e867282-3e2d-557b-882d-36eca8883cac)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 454.66 101.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 05f9840e-8e5c-58f4-845e-de50b07796fb)
+  (property "Reference" "C165" (at 454.66 99.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7n HDMI 3V3 switch rise-time" (at 454.66 104.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 454.66 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 454.66 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 3e3ffd0b-478e-59c7-94b9-be3bdd09284e))
+  (pin "2" (uuid f3200669-f29f-5752-85a2-2eafc4f02e90))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "C165")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_3V3_SWITCH_CT"
+  (at 454.66 97.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ba2f0499-5969-55b7-b9ad-5cdf829a817b)
+)
+(label "GND"
+  (at 454.66 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid df9e5d9b-4de5-5c3a-94a3-00d2ece0a0f2)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 454.66 50.8 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 78f8ac5f-1239-5b58-9c87-338dc1e68ef5)
+  (property "Reference" "R168" (at 454.66 48.26 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k HDMI switched 5V discharge" (at 454.66 53.34 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 454.66 50.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 454.66 50.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid acfaa5e5-0fa0-520e-a221-5469fb7e1103))
+  (pin "2" (uuid 798fe069-7b21-59ef-8abb-397d16adc86e))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R168")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_SOURCE_5V"
+  (at 454.66 46.99 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 00a9faa2-fefa-50ae-88e7-b277c8b5ca86)
+)
+(label "GND"
+  (at 454.66 54.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 305cdb05-2bce-5d83-a8c9-fe81fc002861)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 454.66 114.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b8353da7-aaa6-5b37-b136-221ff1dc8b11)
+  (property "Reference" "R169" (at 454.66 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k HDMI switched 3V3 discharge" (at 454.66 116.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 454.66 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 454.66 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 26e3293f-d2e1-5a82-859e-73f7b0156106))
+  (pin "2" (uuid d1489b53-d59a-5a3b-b745-a0f8fd584a21))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R169")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_HOST_3V3"
+  (at 454.66 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c29a96a6-bbb0-5f32-bf32-0af37f4276de)
+)
+(label "GND"
+  (at 454.66 118.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dbb76a9e-2470-5b54-acd3-8af30593b6f3)
+)
+(symbol
+  (lib_id "TPD13S523PWR:TPD13S523PWR")
+  (at 500.38 63.5 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 7faa5647-ec15-570b-b767-2cac4c6b226b)
+  (property "Reference" "U50" (at 500.38 60.96 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD13S523PWR HDMI control ESD / 5V switch" (at 500.38 66.04 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPD13S523PWR" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 234d2b04-e442-5c37-8308-a0f71c1daaee))
+  (pin "2" (uuid 2f22b11e-9f36-51e8-b6f5-78f682c60e53))
+  (pin "3" (uuid c66b17c0-08df-50e4-a519-33e4914eba49))
+  (pin "4" (uuid 534de078-05e8-5f6c-b8f4-c014697cd8e5))
+  (pin "5" (uuid 0d3b884e-acdb-593d-ac95-c23f0f93dfcc))
+  (pin "6" (uuid 57f11848-0290-5286-9ad8-23f1d3727eab))
+  (pin "7" (uuid ba6b3dcc-4115-5843-987c-0a83c70472f6))
+  (pin "8" (uuid a5b09f9d-63d8-560e-b4bd-3d095613389d))
+  (pin "9" (uuid fe4dce95-1bd0-56e8-acb8-cdb6bc61b405))
+  (pin "10" (uuid a074c9d1-f0af-5f7f-bbe2-efd451be4e78))
+  (pin "11" (uuid 1923a823-e309-5643-b840-6ba7ae4803df))
+  (pin "12" (uuid b75bb134-c939-5568-81c8-96b40ff71443))
+  (pin "13" (uuid 918f8449-7775-5046-9bea-59adbd893eaf))
+  (pin "14" (uuid 343ec88b-2930-5155-b57a-b3612c2a6a24))
+  (pin "15" (uuid f5d7a945-d115-5913-80d6-a0f0592f7b0c))
+  (pin "16" (uuid ce297a9c-2a8a-5009-9643-85b07f155a3a))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2469,222 +3071,103 @@
     )
   )
 )
-(label "EXT_HDMI_D2_P"
-  (at 242.57 149.86 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid aab7f98e-a766-5a9c-a66a-2a7cd0d977d9)
-)
-(label "EXT_HDMI_D2_N"
-  (at 242.57 154.94 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ce82551e-b62f-5876-a724-cabef5919485)
-)
-(label "GND"
-  (at 252.73 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 409fc957-2396-5477-87aa-2089849636fe)
-)
-(label "EXT_HDMI_D1_P"
-  (at 242.57 162.56 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d743b1ed-63f5-547e-ae96-b037caf37570)
-)
-(label "EXT_HDMI_D1_N"
-  (at 242.57 167.64 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0b5edf85-5b5a-5cf0-924f-b7bf18dec88b)
-)
-(no_connect (at 242.57 170.18) (uuid b43032a6-371c-537c-b3a3-1ae0a67df589))
-(no_connect (at 242.57 165.1) (uuid abe5e995-7522-5dbe-b68b-99fc61f7504c))
-(label "GND"
-  (at 252.73 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0cec7746-a107-551f-ab68-3a3ee4d405ce)
-)
-(no_connect (at 242.57 157.48) (uuid a735974a-fac0-557f-9662-b6796dbe0563))
-(no_connect (at 242.57 152.4) (uuid cc2a2f41-0c50-52fc-86d7-aa82804bdf92))
-(symbol
-  (lib_id "Power_Protection:TPD4E02B04DQA")
-  (at 389.89 160.02 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 6a38b898-5e31-5611-ae55-a1a17c46b6ea)
-  (property "Reference" "U51" (at 389.89 157.48 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E02B04DQA HDMI2.0 TMDS ESD B" (at 389.89 162.56 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 389.89 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 389.89 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "3" (uuid 56b4f996-969f-5237-921a-fee5d17e9466))
-  (pin "1" (uuid 35979e6d-e4e9-59bc-a9ac-45bf53b80a30))
-  (pin "2" (uuid 95d8c0e0-51e2-512d-8a93-b13e7ef0120c))
-  (pin "4" (uuid 28e9a02c-65d5-582c-8fb6-1a425674f76b))
-  (pin "5" (uuid a2658a42-d885-5a64-b840-d1a22ca8267d))
-  (pin "6" (uuid c608b067-1c9f-539d-ab11-156a5ce79c8e))
-  (pin "7" (uuid 2fea2c31-9c7b-5c8c-93fe-9af3a4d3b168))
-  (pin "8" (uuid 9c87547a-b0bb-5f69-9c59-cc19cf80fbb3))
-  (pin "9" (uuid cb2c5976-d7ae-567e-bb63-fbc03a2d2299))
-  (pin "10" (uuid b42e7255-7633-5505-8c38-81876b5bc0b7))
-  (instances
-    (project "ducktop2"
-      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
-        (reference "U51")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "EXT_HDMI_D0_P"
-  (at 382.27 149.86 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c24a6939-d29c-5585-b6cf-74f6bbf1f6bf)
-)
-(label "EXT_HDMI_D0_N"
-  (at 382.27 154.94 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid be240677-daaa-5915-9b28-6aa0b7d6d923)
-)
-(label "GND"
-  (at 392.43 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 71f84c6a-c4af-581a-adcf-b19111d90a0c)
-)
-(label "EXT_HDMI_CK_P"
-  (at 382.27 162.56 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0811d362-4b47-507f-af5c-605c75fc1510)
-)
-(label "EXT_HDMI_CK_N"
-  (at 382.27 167.64 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4cc7f2ca-018a-5d88-9faa-c231024016b8)
-)
-(no_connect (at 382.27 170.18) (uuid ff4ed0e1-c251-53d4-8e8e-742560e92499))
-(no_connect (at 382.27 165.1) (uuid 0f593819-0497-5be2-8c7e-dbf5df413d90))
-(label "GND"
-  (at 392.43 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fc61a9e1-ccfe-513e-9a22-5857771790c5)
-)
-(no_connect (at 382.27 157.48) (uuid e47fedec-7ffb-5bd4-bbc3-6481e5d51c8e))
-(no_connect (at 382.27 152.4) (uuid 7d613677-e988-5ca5-a4f0-be0b40da4c50))
-(symbol
-  (lib_id "Power_Protection:TPD4E02B04DQA")
-  (at 529.59 160.02 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 06475650-1e0d-58a5-8201-f29825b8cf7a)
-  (property "Reference" "U52" (at 529.59 157.48 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E02B04DQA HDMI sideband ESD" (at 529.59 162.56 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 529.59 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 529.59 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "3" (uuid 819ac222-eeec-56ba-abbc-780684687b8b))
-  (pin "1" (uuid 9c278992-caeb-5cca-ac49-af2c7c9822d2))
-  (pin "2" (uuid 11ffdca6-f296-5492-bf78-1dbbd9f2fc4c))
-  (pin "4" (uuid a393fb60-59ce-586a-a89d-4a3731ea9b8a))
-  (pin "5" (uuid 3fcad62b-4f8e-5724-a702-652881306d6e))
-  (pin "6" (uuid 86b47d27-396b-5f42-b41d-3788c893c4ea))
-  (pin "7" (uuid 35017a45-18ec-55a9-8656-b974e6e8dae9))
-  (pin "8" (uuid 5ba53a8a-5406-5244-957f-bc41517dc4c3))
-  (pin "9" (uuid 372919e1-96ec-5475-b336-3c2ea6615c1e))
-  (pin "10" (uuid a70a5535-490e-5a71-aac2-4b8ef09dc0ff))
-  (instances
-    (project "ducktop2"
-      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
-        (reference "U52")
-        (unit 1)
-      )
-    )
-  )
-)
 (label "EXT_HDMI_SCL_CONN"
-  (at 521.97 149.86 0)
+  (at 491.49 58.42 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5654a753-3803-57ab-b837-58b45b1b25d7)
+  (uuid bc1425ad-e22f-5c40-871f-f6bae6405516)
 )
 (label "EXT_HDMI_SDA_CONN"
-  (at 521.97 154.94 0)
+  (at 491.49 60.96 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid df54c90c-de56-55d8-8589-f841af85ff49)
-)
-(label "GND"
-  (at 532.13 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 226c9cd8-7e77-52b9-b594-f42fbd496392)
+  (uuid ed70ccac-cae7-537b-9a94-780a70565d3c)
 )
 (label "EXT_HDMI_HPD_CONN"
-  (at 521.97 162.56 0)
+  (at 491.49 63.5 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0fa4d1a5-592a-5906-be82-f2cc640200e3)
+  (uuid 727a7645-0b5e-51b4-87d9-657f9f516f27)
 )
-(label "EXT_HDMI_CEC"
-  (at 521.97 167.64 0)
+(label "HDMI_TPD_D0_UNUSED"
+  (at 491.49 66.04 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ee1924e4-e704-5f91-af71-324552842e6e)
+  (uuid 071b7be1-4dfa-574e-b393-461f178d22ee)
 )
-(no_connect (at 521.97 170.18) (uuid 2bb7eca7-bbdd-56cd-8572-210e989561e9))
-(no_connect (at 521.97 165.1) (uuid 29ea1fac-0be2-549e-be44-570640fb9cf1))
-(label "GND"
-  (at 532.13 175.26 0)
+(label "HDMI_SOURCE_5V"
+  (at 491.49 68.58 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ddb9dd6a-93b0-55ed-99cc-871cfefebda5)
-)
-(no_connect (at 521.97 157.48) (uuid 6e5d11a0-fd8c-508f-a499-166b7a1ba5c7))
-(no_connect (at 521.97 152.4) (uuid 945d792d-0c9d-5e9a-a463-f7b0a5cd0c4a))
-(symbol
-  (lib_id "Device:Fuse")
-  (at 519.43 76.2 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 55065edb-9c09-5fdc-a14e-4c61bd3fdb1f)
-  (property "Reference" "F150" (at 519.43 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100mA HDMI 5V detect fuse" (at 519.43 78.74 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Fuse:Fuse_1206_3216Metric" (at 519.43 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 519.43 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 98260466-7ab1-572d-85cb-855d6bc24d0b))
-  (pin "2" (uuid e485b0af-ff7c-5e6b-b083-d80cbfe9dbd4))
-  (instances
-    (project "ducktop2"
-      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
-        (reference "F150")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "SYS_5V"
-  (shape bidirectional)
-  (at 519.43 72.39 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 22816911-44a3-570d-91d9-ba5263c0605d)
+  (uuid be166de7-d050-5f81-8103-7f026716746f)
 )
 (label "EXT_HDMI_5V"
-  (at 519.43 80.01 0)
+  (at 509.27 68.58 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b92c7794-59c2-55e1-aeac-715cc60f51bf)
+  (uuid 033bcbb0-4a8c-5415-891e-d600ef0293cd)
+)
+(label "HDMI_TPD_D1_UNUSED"
+  (at 491.49 71.12 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4fc8e0e1-2f1a-58d3-bcb2-6ffe7033a875)
+)
+(label "GND"
+  (at 500.38 73.66 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c0f2d022-81fe-5a88-acbc-8d2b2298176e)
+)
+(label "HDMI_TPD_D2_UNUSED"
+  (at 509.27 71.12 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1a036ee3-4e57-5caf-9cc0-02cc9a01e328)
+)
+(label "HDMI_TPD_D3_UNUSED"
+  (at 509.27 66.04 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7ecabee2-b66d-583d-9d5c-30edae2e3a59)
+)
+(label "HDMI_TPD_D4_UNUSED"
+  (at 509.27 63.5 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 77cd4bbb-34b9-5b02-b271-f1ef3520a27d)
+)
+(label "HDMI_TPD_D5_UNUSED"
+  (at 509.27 60.96 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b4fb0e13-cb36-53b8-b69c-6f4eae8b43bd)
+)
+(label "HDMI_TPD_D6_UNUSED"
+  (at 509.27 58.42 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1ce72948-a026-53ca-9db2-a1c70a01d735)
+)
+(label "HDMI_TPD_D7_UNUSED"
+  (at 509.27 55.88 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cda7c1b3-59bf-5373-9202-db96e8aa2feb)
+)
+(label "HDMI_TPD_D8_UNUSED"
+  (at 509.27 53.34 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid af6c3c46-91d9-50fc-a02b-b952225f81a4)
+)
+(label "HDMI_TPD_D9_UNUSED"
+  (at 509.27 50.8 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 27e2082c-2538-58ff-b386-225fb8df6e6e)
 )
 (symbol
   (lib_id "Device:C")
-  (at 599.44 76.2 0)
+  (at 570.23 58.42 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 33765bc0-fda7-5394-83a1-8a20b0b5051a)
-  (property "Reference" "C158" (at 599.44 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "1u HDMI 5V" (at 599.44 78.74 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 599.44 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 599.44 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid f3426730-9cec-5875-83c1-ec798cc66263))
-  (pin "2" (uuid 59855274-2e65-5114-a9fb-839674c14411))
+  (uuid 3c51fb25-3d6b-5919-9e05-7e150b2d314a)
+  (property "Reference" "C158" (at 570.23 55.88 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u 10V X7R HDMI 5V switch input" (at 570.23 60.96 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 570.23 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 570.23 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 570.23 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71A105KA61D" (at 570.23 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 957c982a-cc9c-5809-a083-4181dfe55683))
+  (pin "2" (uuid 96ecd254-82b9-58d3-b2ff-825088b00585))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2694,31 +3177,575 @@
     )
   )
 )
-(label "EXT_HDMI_5V"
-  (at 599.44 72.39 0)
+(label "HDMI_SOURCE_5V"
+  (at 570.23 54.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bda0cf16-92ac-5ce2-9884-c38dc80a57a3)
+  (uuid 356874bf-ff75-50f6-a7cf-74248f67e834)
 )
 (label "GND"
-  (at 599.44 80.01 0)
+  (at 570.23 62.23 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ec946479-af13-5d38-9ef2-076b61c168a4)
+  (uuid 0cb2b8a8-cd82-5512-b809-dd4223311e48)
 )
 (symbol
-  (lib_id "Device:R")
-  (at 519.43 101.6 0)
+  (lib_id "Device:C")
+  (at 570.23 68.58 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 83fc000e-a516-5a37-90c5-113279a37589)
-  (property "Reference" "R158" (at 519.43 99.06 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "2.2k HDMI DDC SCL pull-up" (at 519.43 104.14 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 519.43 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a6e27801-5420-54a6-a28d-87e9afeaa9f4))
-  (pin "2" (uuid 4a672023-d615-5821-819f-ac55c093b2ac))
+  (uuid c3fac1d7-3173-5729-b6b1-3fa194aef450)
+  (property "Reference" "C159" (at 570.23 66.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u 10V X7R HDMI 5V switch output" (at 570.23 71.12 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 570.23 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 570.23 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 570.23 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71A105KA61D" (at 570.23 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 64907a2a-417c-5b7b-b9b3-f19376ba80d9))
+  (pin "2" (uuid 8519be6e-3560-5612-9065-36f563c44a31))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "C159")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_5V"
+  (at 570.23 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7dc88bc4-f5b5-568b-b063-21d3ddac2164)
+)
+(label "GND"
+  (at 570.23 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9aed6918-9aab-5e3d-be51-c93df4191b1f)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 619.76 58.42 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f71b6bfb-c598-5d84-a791-865d387d8e8b)
+  (property "Reference" "C162" (at 619.76 55.88 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 10V X7R HDMI 5V switch input HF" (at 619.76 60.96 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 619.76 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 619.76 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 619.76 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71A104KA01D" (at 619.76 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b52dafa5-df56-5695-8a8b-6d1aaf41f341))
+  (pin "2" (uuid 7b1d19f6-0d35-5eba-9f3a-780f320ca6a0))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "C162")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_SOURCE_5V"
+  (at 619.76 54.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ebaa9cc1-8d11-5260-b77b-b97d3e29c3ab)
+)
+(label "GND"
+  (at 619.76 62.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d9d63430-918b-59a1-a712-659684735b8e)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 619.76 68.58 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f36ef6b6-a3a3-5831-bb14-3216152dabe0)
+  (property "Reference" "C163" (at 619.76 66.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 10V X7R HDMI 5V switch output HF" (at 619.76 71.12 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 619.76 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 619.76 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 619.76 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71A104KA01D" (at 619.76 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 84192961-c3dd-5b3a-ad65-e319cbcf2031))
+  (pin "2" (uuid c13c3f8a-0a1e-5fb6-9268-fe431aaeb944))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "C163")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_5V"
+  (at 619.76 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b988ee4a-ae42-5adf-bea7-d0a633dc1173)
+)
+(label "GND"
+  (at 619.76 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d5aaf566-7549-5bd8-9505-b0c489019fd3)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 699.77 55.88 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4063e1b0-02be-5f7d-b11c-bdb48f22ff5a)
+  (property "Reference" "R570" (at 699.77 53.34 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 699.77 58.42 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 699.77 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 699.77 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 699.77 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 699.77 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e9e3af7b-7f6b-56bb-8c0c-caaa7b5e846c))
+  (pin "2" (uuid 7514f7ae-6617-5d04-a551-d81953034727))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R570")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D0_UNUSED"
+  (at 699.77 52.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e78f2713-18f5-53e0-b967-7f4e09917d30)
+)
+(label "GND"
+  (at 699.77 59.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a0f5bc46-a4f7-5a46-890c-02e02a2d953c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 745.49 55.88 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid fb9589a5-a9e1-54b1-982f-10cdd75a50a4)
+  (property "Reference" "R571" (at 745.49 53.34 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 745.49 58.42 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 745.49 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 745.49 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 745.49 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 745.49 55.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4f3b1d78-a878-56a3-9172-860456657f83))
+  (pin "2" (uuid 6312ce23-2c71-5ab0-b17e-33c4d11aaf8e))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R571")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D1_UNUSED"
+  (at 745.49 52.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3051a1e9-1ff8-5729-8c91-f1c9761d1f18)
+)
+(label "GND"
+  (at 745.49 59.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 388efdd8-af59-5d0d-a4d9-57306d905702)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 699.77 68.58 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 95f0aa0d-614c-5f33-92ea-565c377d5279)
+  (property "Reference" "R572" (at 699.77 66.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 699.77 71.12 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 699.77 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 699.77 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 699.77 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 699.77 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ba425b53-ea1f-5092-9dc8-21c712e83384))
+  (pin "2" (uuid 16ea0e8e-0c5e-5266-8188-f74b88a7f323))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R572")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D2_UNUSED"
+  (at 699.77 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 138e3b88-101c-5cd0-b0d5-79ed61d34032)
+)
+(label "GND"
+  (at 699.77 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3c789ea2-4f3a-5fe9-b64d-5e86567af6c5)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 745.49 68.58 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid d571f029-555e-5f6b-b0d4-b2eb5d21abe2)
+  (property "Reference" "R573" (at 745.49 66.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 745.49 71.12 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 745.49 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 745.49 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 745.49 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 745.49 68.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4ec7f2d3-1db9-5b1c-9fca-6050bbe6983e))
+  (pin "2" (uuid 7f980824-71c4-55de-a88d-4d7e29e705b0))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R573")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D3_UNUSED"
+  (at 745.49 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fc1097ed-f8d6-5b06-8531-84908c73b2eb)
+)
+(label "GND"
+  (at 745.49 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5713f826-66c4-5c1a-a14d-535b830c094d)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 699.77 81.28 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f6817930-8485-5fe5-8e8f-c705cb071d9f)
+  (property "Reference" "R574" (at 699.77 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 699.77 83.82 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 699.77 81.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 699.77 81.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 699.77 81.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 699.77 81.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cd5ea5f8-44c8-5e0c-93d7-920730a1731d))
+  (pin "2" (uuid 2dcb441c-8faf-56b0-b624-8a9698fd2061))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R574")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D4_UNUSED"
+  (at 699.77 77.47 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 86d0a385-7b9e-51ca-ad0b-3cb610d704d1)
+)
+(label "GND"
+  (at 699.77 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a5eaed01-8eab-50c4-8a68-b58ec64e88da)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 745.49 81.28 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 76a9649d-26f8-5c6e-b9a3-ddbe69a1b251)
+  (property "Reference" "R575" (at 745.49 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 745.49 83.82 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 745.49 81.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 745.49 81.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 745.49 81.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 745.49 81.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a33b2acb-bafe-5518-a438-8ca33ef20abb))
+  (pin "2" (uuid 6f9c9653-311e-5521-b4bc-86e7b55c3bc4))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R575")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D5_UNUSED"
+  (at 745.49 77.47 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9fefad5b-8582-5bde-b177-b119be92d265)
+)
+(label "GND"
+  (at 745.49 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7573312e-2f22-550e-9385-4bce9b4a019f)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 699.77 93.98 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid da88b649-b052-540d-9f05-2d3f5c386ddf)
+  (property "Reference" "R576" (at 699.77 91.44 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 699.77 96.52 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 699.77 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 699.77 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 699.77 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 699.77 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 761308b5-6ebd-5c42-8ae1-6bd642bca24e))
+  (pin "2" (uuid 49e0d940-4ef4-5118-a968-4b1fb4796d69))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R576")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D6_UNUSED"
+  (at 699.77 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bb1bd5bc-95e1-504f-9d46-74609139f2e8)
+)
+(label "GND"
+  (at 699.77 97.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d60ced75-286f-5fd2-b5ce-88ef5cf508be)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 745.49 93.98 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8fa2de00-d964-500d-983f-7a08bddda2f0)
+  (property "Reference" "R577" (at 745.49 91.44 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 745.49 96.52 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 745.49 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 745.49 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 745.49 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 745.49 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a8054c80-4066-5f73-bbc2-fa365d9d1a1d))
+  (pin "2" (uuid 4cc96ac8-fe60-5ce5-a584-e8dd6f70c0ba))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R577")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D7_UNUSED"
+  (at 745.49 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f0c60663-10e8-513b-9a9a-a8e0752f6b90)
+)
+(label "GND"
+  (at 745.49 97.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ef466b9f-4147-5a20-8088-e6172cbbf86a)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 699.77 106.68 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f905174f-a495-50a0-91e1-47a67dc8bd9a)
+  (property "Reference" "R578" (at 699.77 104.14 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 699.77 109.22 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 699.77 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 699.77 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 699.77 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 699.77 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ea2d0bf2-fa52-5abb-8b1f-0c0ad4dcc26f))
+  (pin "2" (uuid b8bdcc69-a121-5063-af2e-6ccb9f1476fb))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R578")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D8_UNUSED"
+  (at 699.77 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e9fa802c-e26c-504a-8996-e03fb8af04c6)
+)
+(label "GND"
+  (at 699.77 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 91dc5785-ac2d-548b-9907-7f5fe1d992aa)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 745.49 106.68 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2febe21a-6032-57d6-8544-a2dffe0c83fb)
+  (property "Reference" "R579" (at 745.49 104.14 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% unused TPD13S523 channel termination" (at 745.49 109.22 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 745.49 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 745.49 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 745.49 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-0775RL" (at 745.49 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 82b187e8-c9d3-5fc8-bdfd-87db55cbcaeb))
+  (pin "2" (uuid 7e06a9a8-6986-5099-b993-361aa316a8d1))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R579")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_TPD_D9_UNUSED"
+  (at 745.49 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8067b1b5-9732-5fab-be9d-6c9a7c0713c5)
+)
+(label "GND"
+  (at 745.49 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5df0a41f-a02b-54b7-95f2-e1983fc99337)
+)
+(symbol
+  (lib_id "PCA9306DCTR:PCA9306DCTR")
+  (at 500.38 119.38 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 49850b00-47b0-56a4-a423-decd7e87669e)
+  (property "Reference" "U51" (at 500.38 116.84 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PCA9306DCTR HDMI DDC level translator" (at 500.38 121.92 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_SO:SSOP-8_2.95x2.8mm_P0.65mm" (at 500.38 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 500.38 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "PCA9306DCTR" (at 500.38 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b0e15c76-e248-5bc5-8dbc-aa7462c6d63a))
+  (pin "2" (uuid 63650c36-3435-5818-bdcb-dbbddef04354))
+  (pin "3" (uuid 55975502-3c42-528d-a3a6-f11d7448267d))
+  (pin "4" (uuid 2337aa7a-3286-5660-9f94-3d6b18d75cd4))
+  (pin "5" (uuid aa2af23a-2e61-5f2c-af54-a49215eca2e7))
+  (pin "6" (uuid 7a69abe9-4881-539b-9f11-b0a3d637f6bc))
+  (pin "7" (uuid ccc78406-02d3-53fc-ad6c-e20894d94b70))
+  (pin "8" (uuid 4279dc6e-3055-5498-a8bd-7cf57420eaac))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "U51")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GND"
+  (at 500.38 127 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6f2e6018-6c71-5d98-ba85-0117a3d0b59a)
+)
+(label "HDMI_HOST_3V3"
+  (at 492.76 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 34301fcf-df7a-530a-881e-ce5d09943c20)
+)
+(hierarchical_label "TCP0_DDC_SCL"
+  (shape bidirectional)
+  (at 492.76 118.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3d12e5f6-7a25-56e3-8fd6-93b70851f3b5)
+)
+(hierarchical_label "TCP0_DDC_SDA"
+  (shape bidirectional)
+  (at 492.76 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 51a3c50c-6c8c-588f-ba14-cff43e9088d7)
+)
+(label "EXT_HDMI_SDA_CONN"
+  (at 508 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a1611f2d-9f9a-5393-bbe6-425338e987bb)
+)
+(label "EXT_HDMI_SCL_CONN"
+  (at 508 118.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d7d8f2ea-a3e5-5567-a35d-64ab00e34f17)
+)
+(label "HDMI_DDC_REF5"
+  (at 508 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a320de57-58bf-5342-9695-e3317143c11d)
+)
+(label "HDMI_DDC_REF5"
+  (at 500.38 111.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d1ca0ae4-06f7-5887-a1fb-fae15609e09f)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 575.31 96.52 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 67e68812-fd92-504d-934b-e995e9fff1d6)
+  (property "Reference" "R158" (at 575.31 93.98 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2.2k HDMI DDC pull-up" (at 575.31 99.06 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 575.31 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 575.31 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 575.31 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-072K2L" (at 575.31 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 33009cb9-8551-58da-9cc5-6da6291b2087))
+  (pin "2" (uuid ba249d72-765e-5715-9038-c90fde5f27d4))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2728,31 +3755,34 @@
     )
   )
 )
-(label "EXT_HDMI_5V"
-  (at 519.43 97.79 0)
+(label "HDMI_HOST_3V3"
+  (at 575.31 92.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 811b7c40-495c-58e1-a70e-94410c43ce88)
+  (uuid 8725d9d1-91ae-5191-9b82-06b3b56506cf)
 )
-(label "EXT_HDMI_SCL_CONN"
-  (at 519.43 105.41 0)
+(hierarchical_label "TCP0_DDC_SCL"
+  (shape bidirectional)
+  (at 575.31 100.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bc7fcd35-61c1-579a-a974-ea03abce312e)
+  (uuid ef5b2273-476c-5af3-9411-71c8785182b0)
 )
 (symbol
   (lib_id "Device:R")
-  (at 519.43 114.3 0)
+  (at 575.31 109.22 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 80668f16-8289-538e-96d8-f839191ca372)
-  (property "Reference" "R159" (at 519.43 111.76 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "2.2k HDMI DDC SDA pull-up" (at 519.43 116.84 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 519.43 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 241dd1da-092f-5438-9a5a-17bce8a18d9a))
-  (pin "2" (uuid 8db9a598-ed40-562f-a1d8-09bf9f7f11ad))
+  (uuid 848056ac-015a-5d9f-887c-11620fb9a1f1)
+  (property "Reference" "R159" (at 575.31 106.68 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2.2k HDMI DDC pull-up" (at 575.31 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 575.31 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 575.31 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 575.31 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-072K2L" (at 575.31 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 66432795-f99e-5d06-8f0d-e0edef1ed650))
+  (pin "2" (uuid 8df744bf-ba2c-5a3a-aaff-2d6833d23601))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2762,31 +3792,34 @@
     )
   )
 )
-(label "EXT_HDMI_5V"
-  (at 519.43 110.49 0)
+(label "HDMI_HOST_3V3"
+  (at 575.31 105.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ee4f0a26-9cd3-5fa4-8156-03518da17e79)
+  (uuid 4292d6d8-8196-5e49-8670-b58a05b170ae)
 )
-(label "EXT_HDMI_SDA_CONN"
-  (at 519.43 118.11 0)
+(hierarchical_label "TCP0_DDC_SDA"
+  (shape bidirectional)
+  (at 575.31 113.03 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 10270cf6-8d5f-5349-a355-facbd713bb4c)
+  (uuid 9cadede8-c194-50a8-a95b-f3b5653b499c)
 )
 (symbol
   (lib_id "Device:R")
-  (at 519.43 127 0)
+  (at 575.31 121.92 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid fe079b07-ddcc-5354-be03-c6939b771db9)
-  (property "Reference" "R160" (at 519.43 124.46 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100R HPD series" (at 519.43 129.54 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 519.43 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 77e6de36-0e74-58e7-93f5-30525064cd36))
-  (pin "2" (uuid b4ae6ad6-26ab-5bb2-8606-849892ecc5be))
+  (uuid a55f64b4-6495-5151-b8e4-20ced2367126)
+  (property "Reference" "R160" (at 575.31 119.38 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1.8k HDMI DDC pull-up" (at 575.31 124.46 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 575.31 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 575.31 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 575.31 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-071K8L" (at 575.31 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b01824c0-6703-5e1d-91ee-50aa2d3232a8))
+  (pin "2" (uuid 9d985020-bc29-5dc0-819b-756fb5c9cd71))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2796,32 +3829,33 @@
     )
   )
 )
-(hierarchical_label "TCP0_HPD"
-  (shape bidirectional)
-  (at 519.43 123.19 0)
+(label "EXT_HDMI_5V"
+  (at 575.31 118.11 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 33d240f7-04d2-5157-a0a2-a3aabe332115)
+  (uuid 491442fd-db14-5218-a681-2addac1149ee)
 )
-(label "EXT_HDMI_HPD_CONN"
-  (at 519.43 130.81 0)
+(label "EXT_HDMI_SCL_CONN"
+  (at 575.31 125.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 315f82c0-963f-5caa-b83e-9ff433030e8b)
+  (uuid 5a60a36d-3f57-58e7-9718-78d19d2a21ab)
 )
 (symbol
   (lib_id "Device:R")
-  (at 519.43 139.7 0)
+  (at 575.31 134.62 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid cc406306-bc1f-5810-a4b5-b08714e0721e)
-  (property "Reference" "R161" (at 519.43 137.16 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100R DDC SCL series" (at 519.43 142.24 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 519.43 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6f19e8e9-c049-5c94-9ab4-6ac86a09f12d))
-  (pin "2" (uuid 929d91b1-5040-5196-a1cb-97798fffcabf))
+  (uuid f53b91ca-ea30-5f1c-9d84-db4256b7fb76)
+  (property "Reference" "R161" (at 575.31 132.08 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1.8k HDMI DDC pull-up" (at 575.31 137.16 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 575.31 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 575.31 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 575.31 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-071K8L" (at 575.31 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4185645b-f566-5e82-bfc4-54f6525a25ae))
+  (pin "2" (uuid 94f2923f-804e-5d22-9958-277ba7945db5))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2831,32 +3865,33 @@
     )
   )
 )
-(hierarchical_label "TCP0_DDC_SCL"
-  (shape bidirectional)
-  (at 519.43 135.89 0)
+(label "EXT_HDMI_5V"
+  (at 575.31 130.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3637f17d-0e8c-5f01-b967-3ed78874d29f)
+  (uuid 55b4ef5d-4dde-59a0-b808-fb4037d7efe8)
 )
-(label "EXT_HDMI_SCL_CONN"
-  (at 519.43 143.51 0)
+(label "EXT_HDMI_SDA_CONN"
+  (at 575.31 138.43 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f2ec9c32-6f6f-57c2-a955-b277fa4a53c7)
+  (uuid 4e47b1ec-2c43-59e3-ba53-a3bfdb3522e0)
 )
 (symbol
   (lib_id "Device:R")
-  (at 519.43 152.4 0)
+  (at 650.24 96.52 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 40684f58-34c9-5829-b91c-9e170ec859cd)
-  (property "Reference" "R162" (at 519.43 149.86 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100R DDC SDA series" (at 519.43 154.94 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 519.43 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 027b97aa-ae04-5582-9741-be4a92b23d7f))
-  (pin "2" (uuid 126d34c5-d649-573f-bdc5-d5ad90f76a9a))
+  (uuid 4bf88457-ad07-5afe-aaf3-5ea6df79b571)
+  (property "Reference" "R162" (at 650.24 93.98 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "200k PCA9306 VREF2/EN bias" (at 650.24 99.06 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 650.24 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 650.24 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-07200KL" (at 650.24 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1bb7a647-cdbd-55ea-9c03-e3dde901fe6d))
+  (pin "2" (uuid 4d40ca60-4322-5818-becc-bd3aae85f050))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2866,59 +3901,223 @@
     )
   )
 )
-(hierarchical_label "TCP0_DDC_SDA"
-  (shape bidirectional)
-  (at 519.43 148.59 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a809a98c-8ef6-56e5-a8e2-717e2e85a694)
-)
-(label "EXT_HDMI_SDA_CONN"
-  (at 519.43 156.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e2a2b876-e10b-5f04-89b3-875c7bb1dce4)
-)
-(symbol
-  (lib_id "power:PWR_FLAG")
-  (at 665.48 76.2 0)
-  (unit 0)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid c043467f-5a20-536c-977a-fc41c4acb205)
-  (property "Reference" "#FLG081" (at 665.48 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "PWR_FLAG" (at 665.48 78.74 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 665.48 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 665.48 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6045907f-0e2c-5118-a627-ca6dbb522809))
-  (instances
-    (project "ducktop2"
-      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
-        (reference "#FLG081")
-        (unit 0)
-      )
-    )
-  )
-)
 (label "EXT_HDMI_5V"
-  (at 665.48 76.2 0)
+  (at 650.24 92.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 890590ba-80b4-5091-b594-d61b1ccaca0c)
+  (uuid 6fa67e2f-da53-5098-a112-24b5d5525bdf)
+)
+(label "HDMI_DDC_REF5"
+  (at 650.24 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e12950ca-e25f-5d04-bc2c-e2b2ba404a08)
 )
 (symbol
-  (lib_id "power:GND")
-  (at 665.48 101.6 0)
+  (lib_id "Device:C")
+  (at 650.24 106.68 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 346d1aef-9a33-598e-a6d8-48c313a931d4)
-  (property "Reference" "#PWR081" (at 665.48 99.06 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "GND" (at 665.48 104.14 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 665.48 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 665.48 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9556d350-e670-58d4-a89e-4cd855c3fdf7))
+  (uuid 93eff149-8ca8-5760-a098-59891fafcb20)
+  (property "Reference" "C160" (at 650.24 104.14 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100p PCA9306 VREF2/EN filter" (at 650.24 109.22 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 650.24 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 650.24 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM1555C1H101JA01D" (at 650.24 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 692e91bd-7c16-51b6-826e-11700d9afe54))
+  (pin "2" (uuid 614e338e-049e-5255-8405-d040c494b071))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "C160")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_DDC_REF5"
+  (at 650.24 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 39b0efb9-70a5-5e7d-8716-89f23460a7a5)
+)
+(label "GND"
+  (at 650.24 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3da80812-f07e-520b-999e-7c7c098bcc6f)
+)
+(symbol
+  (lib_id "74xGxx:74LVC1G17")
+  (at 500.38 157.48 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c65fe857-88ea-5096-84ed-76a171059ef6)
+  (property "Reference" "U53" (at 500.38 154.94 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74LVC1G17DBVR HDMI HPD buffer" (at 500.38 160.02 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 500.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 500.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "SN74LVC1G17DBVR" (at 500.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 45163222-32c2-5039-b1a9-97c003f4d84a))
+  (pin "2" (uuid 288bbb10-fe87-5a2a-86c7-f9e289219b8f))
+  (pin "3" (uuid 0903d695-0abf-5797-a2e3-c8d3d6e509c7))
+  (pin "4" (uuid 6e9f6618-1619-5c1b-ad4b-7f1d0ece111d))
+  (pin "5" (uuid 2c1a34a6-23c2-5906-863d-17079d2b766d))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "U53")
+        (unit 1)
+      )
+    )
+  )
+)
+(no_connect (at 492.76 152.4) (uuid 8020f079-2589-5f6c-89ed-7213b0ea59b3))
+(label "EXT_HDMI_HPD_NODE"
+  (at 487.68 157.48 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8d215937-35be-5e0b-be5f-e38061cc6c23)
+)
+(label "GND"
+  (at 495.3 167.64 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 737dde89-5b61-5fdd-87e2-9e5fb8faf03c)
+)
+(hierarchical_label "TCP0_HPD"
+  (shape bidirectional)
+  (at 510.54 157.48 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d0901f59-e931-52c2-acf2-83b1e72891fe)
+)
+(label "HDMI_HOST_3V3"
+  (at 495.3 147.32 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 820b7311-6107-5a07-9d69-a223ff613046)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 650.24 119.38 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 37a9185b-936e-56a8-b8fe-67dca33a0bd2)
+  (property "Reference" "R163" (at 650.24 116.84 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1k HPD input series" (at 650.24 121.92 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 650.24 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 650.24 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-071KL" (at 650.24 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 66ceab9c-66b2-54c8-9b4e-5a2dd121e5b3))
+  (pin "2" (uuid d2e9c1ad-c193-5800-b6d2-d68fa40921c0))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R163")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_HPD_CONN"
+  (at 650.24 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0e6f7d0e-830a-53a6-a0c1-242fe48cb1dd)
+)
+(label "EXT_HDMI_HPD_NODE"
+  (at 650.24 123.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b56f052a-53f9-559a-978c-5299380f6ce3)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 650.24 132.08 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 469a11ec-bdec-53d1-85d5-7f5e3d1818a6)
+  (property "Reference" "R164" (at 650.24 129.54 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k HPD input pull-down" (at 650.24 134.62 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 650.24 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid fbfcfbac-e689-57a3-b62b-23144078592a))
+  (pin "2" (uuid 4462eb0d-545c-5f42-aba5-e18df26b5bc9))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "R164")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "EXT_HDMI_HPD_NODE"
+  (at 650.24 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e49e2f71-7307-5633-b3a7-2aca6eb58abc)
+)
+(label "GND"
+  (at 650.24 135.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0fb64161-1f9e-5071-9632-0b085cae8705)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 650.24 144.78 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 02f75b07-3142-5636-bd6d-12aeaaf6346b)
+  (property "Reference" "C161" (at 650.24 142.24 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n HPD buffer local" (at 650.24 147.32 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 650.24 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 650.24 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71A104KA01D" (at 650.24 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e9f98b10-781b-55bf-9258-8f440bfe458b))
+  (pin "2" (uuid db082e0f-f731-51fe-ba12-aaf3663b4315))
+  (instances
+    (project "ducktop2"
+      (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
+        (reference "C161")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HDMI_HOST_3V3"
+  (at 650.24 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 453a464c-6f34-5994-b380-6553308aae6e)
+)
+(label "GND"
+  (at 650.24 148.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 60ffbfec-f134-5a31-92d4-fd0890cb539d)
+)
+(symbol
+  (lib_id "power:GND")
+  (at 704.85 190.5 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c2cf4ee3-4d7b-57f1-a663-4764f465c50d)
+  (property "Reference" "#PWR081" (at 704.85 187.96 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "GND" (at 704.85 193.04 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 704.85 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 704.85 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid dd9c83d2-99c9-5c5e-94af-31bb107abf2a))
   (instances
     (project "ducktop2"
       (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
@@ -2929,16 +4128,16 @@
   )
 )
 (label "GND"
-  (at 665.48 101.6 0)
+  (at 704.85 190.5 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 521bd8e5-5169-5c15-8fe1-a9eaecd085bd)
+  (uuid d5226c63-e9fe-5d0b-8d06-21a07b554338)
 )
-(text "NOTES:" (at 20.32 220.98 0) (effects (font (size 1.27 1.27))) (uuid 8e867282-3e2d-557b-882d-36eca8883cac))
-(text "J30 is the outside-world HDMI jack; sheet 11 J300 remains only the internal Intehill HDMI plug." (at 20.32 228.6 0) (effects (font (size 1.27 1.27))) (uuid 05f9840e-8e5c-58f4-845e-de50b07796fb))
-(text "CEC is ESD-protected but not connected to the Mu or EC in this pass." (at 20.32 236.22 0) (effects (font (size 1.27 1.27))) (uuid 3e3ffd0b-478e-59c7-94b9-be3bdd09284e))
-(text "Pre-layout must verify TCP0 HDMI lane order/polarity against the selected Mu BIOS/reference design." (at 20.32 243.84 0) (effects (font (size 1.27 1.27))) (uuid f3200669-f29f-5752-85a2-2eafc4f02e90))
-(text "Treat this as HDMI 2.0/18Gbps capable: short routing, low-cap ESD, solid return path, no HDMI 1.4-only parts." (at 20.32 251.46 0) (effects (font (size 1.27 1.27))) (uuid ba2f0499-5969-55b7-b9ad-5cdf829a817b))
-(text "TCP1 remains the better future candidate for a Type-C video/PD port if a later BIOS/display plan needs it." (at 20.32 259.08 0) (effects (font (size 1.27 1.27))) (uuid df9e5d9b-4de5-5c3a-94a3-00d2ece0a0f2))
+(text "NOTES:" (at 20.32 228.6 0) (effects (font (size 1.27 1.27))) (uuid de7365e8-6302-58bb-88cc-8142bd7042b5))
+(text "J30 is the outside-world HDMI jack. The retired Intehill controller is a bench-test/fallback fixture, not motherboard circuitry." (at 20.32 236.22 0) (effects (font (size 1.27 1.27))) (uuid ab256c5f-ccad-53b8-8805-a50520eea80f))
+(text "TMDS ESD uses 0.15pF-max, +/-3.6V TPD1E0B04DPLR single-line parts; route each shunt at J30 with no stub." (at 20.32 243.84 0) (effects (font (size 1.27 1.27))) (uuid 29c03f97-3db4-5b7d-ba0d-b318e9429fb1))
+(text "CEC and utility are explicitly NC; unused TPD13S523 legacy channels use the datasheet 75R-to-GND termination." (at 20.32 251.46 0) (effects (font (size 1.27 1.27))) (uuid ef1d7178-5ceb-5f45-8815-a37d569c5c53))
+(text "U54/U55 remove 5V/DDC/HPD power while the Mu is off; PCA9306 translates DDC/SCDC and U53 buffers HPD." (at 20.32 259.08 0) (effects (font (size 1.27 1.27))) (uuid 38aa3fef-f0aa-55ad-8fa8-22a49504c81b))
+(text "Release gate: verify >=4.8V at J30 pin 18 under 55mA and validate the finished 100-ohm HDMI 2.0 layout on hardware." (at 20.32 266.7 0) (effects (font (size 1.27 1.27))) (uuid 2bd5c9db-a3ac-563a-a325-87d2cac8d2b5))
 (sheet_instances
   (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
     (page "7")

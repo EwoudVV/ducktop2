@@ -1,0 +1,11 @@
+id,stimulus,interlock_ready,power_authorized,io_authorized,power_fault_n,watchdog_healthy,expected_rails,expected_io_default,expected_fault
+MK-BOOT-001,cold_boot,false,false,false,true,true,off,high_z,NONE
+MK-PWR-001,request_without_authorization,true,false,false,true,true,off,high_z,USER_POWER
+MK-PWR-002,request_with_authorization,true,true,false,true,true,on,high_z,NONE
+MK-IO-001,request_io_without_authorization,true,false,false,true,true,off,high_z,IO_AUTHORIZATION
+MK-IO-002,request_io_with_authorization,true,false,true,true,true,off,requested,NONE
+MK-INT-001,interlock_lost_while_active,false,true,true,true,true,off,high_z,INTERLOCK
+MK-AUTH-001,io_authorization_lost_while_active,true,true,false,true,true,off,high_z,IO_AUTHORIZATION
+MK-FAULT-001,power_fault,true,true,true,false,true,off,high_z,USER_POWER
+MK-WDG-001,watchdog_trip,true,true,true,true,false,off,high_z,WATCHDOG
+MK-RST-001,reset_after_outputs_active,true,true,true,true,true,off,high_z,NONE

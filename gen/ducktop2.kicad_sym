@@ -4135,7 +4135,7 @@
 				)
 			)
 		)
-		(property "Description" "Dual-channel USB power distribution switch, SOIC-8 (D package), 500mA/ch continuous, 0.75-1.25A current limit, internal charge pump. EN1/EN2 active-high inputs, OC1/OC2 open-drain active-low overcurrent flags (deglitched). Feeds VL822-Q7 downstream ports 1 & 2 (2x external USB3-A connectors): EN1/EN2 driven by VL822 USBPE1/USBPE2, OC1/OC2 read by VL822 USBOC1/USBOC2."
+		(property "Description" "Dual-channel USB power distribution switch, SOIC-8 (D package), 500mA/ch continuous, 0.75-1.25A current limit, internal charge pump. EN1/EN2 are active-high; OC1/OC2 are deglitched open-drain active-low overcurrent outputs."
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)

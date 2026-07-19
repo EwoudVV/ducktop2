@@ -1,0 +1,28 @@
+(kicad_symbol_lib
+	(version 20251024)
+	(generator "kicad_symbol_editor")
+	(generator_version "10.0")
+	(symbol "PCA9306DCTR"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "PCA9306DCTR" (at 0 6.35 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_SO:SSOP-8_2.95x2.8mm_P0.65mm" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/pca9306.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "Dual bidirectional I2C/SMBus voltage-level translator, DCT SSOP-8" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "PCA9306DCTR_0_1"
+			(rectangle (start -5.08 5.08) (end 5.08 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "PCA9306DCTR_1_1"
+			(pin power_in line (at 0 -7.62 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -7.62 3.81 0) (length 2.54) (name "VREF1" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -7.62 1.27 0) (length 2.54) (name "SCL1" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -7.62 -1.27 0) (length 2.54) (name "SDA1" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 7.62 -1.27 180) (length 2.54) (name "SDA2" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at 7.62 1.27 180) (length 2.54) (name "SCL2" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 7.62 3.81 180) (length 2.54) (name "VREF2" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 0 7.62 270) (length 2.54) (name "EN" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+		)
+	)
+)

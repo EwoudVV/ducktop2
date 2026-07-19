@@ -1,0 +1,260 @@
+(kicad_symbol_lib
+  (version 20251024)
+  (generator "codex")
+  (generator_version "10.0")
+  (symbol "DRA818"
+    (pin_names
+      (offset 1.016)
+    )
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (property "Reference" "J"
+      (at 0 15.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "DRA818"
+      (at 0 -15.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" "ducktop2:DRA818_Castellated"
+      (at 0 0 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "https://www.dorji.com/docs/data/DRA818V.pdf"
+      (at 0 0 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "DRA818U Datasheet" "https://www.dorji.com/docs/data/DRA818U.pdf"
+      (at 0 0 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Description" "Dorji DRA818V/DRA818U 35.60x19.00mm castellated FM transceiver module; pins 2,4,11,13,14,15 are vendor NC."
+      (at 0 0 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (symbol "DRA818_0_1"
+      (rectangle
+        (start -10.16 12.7)
+        (end 10.16 -12.7)
+        (stroke
+          (width 0.254)
+          (type default)
+        )
+        (fill
+          (type background)
+        )
+      )
+    )
+    (symbol "DRA818_1_1"
+      (pin power_in line
+        (at -12.7 11.43 0)
+        (length 2.54)
+        (name "VBAT"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "8"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin input line
+        (at -12.7 8.89 0)
+        (length 2.54)
+        (name "PTT_N"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "5"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin input line
+        (at -12.7 6.35 0)
+        (length 2.54)
+        (name "PD"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "6"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin input line
+        (at -12.7 3.81 0)
+        (length 2.54)
+        (name "H/L"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "7"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin input line
+        (at -12.7 1.27 0)
+        (length 2.54)
+        (name "RXD"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "16"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin input line
+        (at -12.7 -1.27 0)
+        (length 2.54)
+        (name "MIC_IN"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "18"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin power_in line
+        (at -12.7 -8.89 0)
+        (length 2.54)
+        (name "GND"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "9"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin power_in line
+        (at -12.7 -11.43 0)
+        (length 2.54)
+        (name "GND"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "10"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin output line
+        (at 12.7 11.43 180)
+        (length 2.54)
+        (name "SQ"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "1"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin output line
+        (at 12.7 8.89 180)
+        (length 2.54)
+        (name "AF_OUT"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "3"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin passive line
+        (at 12.7 6.35 180)
+        (length 2.54)
+        (name "ANT"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "12"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin output line
+        (at 12.7 3.81 180)
+        (length 2.54)
+        (name "TXD"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "17"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin no_connect line
+        (at 12.7 1.27 180)
+        (length 2.54)
+        (name "NC"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "2"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin no_connect line
+        (at 12.7 -1.27 180)
+        (length 2.54)
+        (name "NC"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "4"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin no_connect line
+        (at 12.7 -3.81 180)
+        (length 2.54)
+        (name "NC"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "11"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin no_connect line
+        (at 12.7 -6.35 180)
+        (length 2.54)
+        (name "NC"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "13"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin no_connect line
+        (at 12.7 -8.89 180)
+        (length 2.54)
+        (name "NC"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "14"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+      (pin no_connect line
+        (at 12.7 -11.43 180)
+        (length 2.54)
+        (name "NC"
+          (effects (font (size 1.27 1.27)))
+        )
+        (number "15"
+          (effects (font (size 1.27 1.27)))
+        )
+      )
+    )
+  )
+)

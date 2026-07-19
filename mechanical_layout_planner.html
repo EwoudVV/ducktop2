@@ -539,7 +539,11 @@
         </div>
         <div class="button-row">
           <button id="focusBtn" type="button">Focus</button>
+          <button id="centerHBtn" type="button">Center H</button>
+          <button id="centerVBtn" type="button">Center V</button>
           <button id="rotateBtn" type="button">Rotate</button>
+          <button id="rotateCcwBtn" type="button">-45</button>
+          <button id="rotateCwBtn" type="button">+45</button>
           <button id="duplicateBtn" type="button">Duplicate</button>
           <button id="deleteBtn" type="button">Delete</button>
           <button id="lockBtn" type="button">Lock</button>
@@ -566,6 +570,18 @@
           Mouse wheel zooms at cursor. Drag empty space to box-select. Spacebar
           or Pan mode drags the view. Shift/Command-click adds to selection.
           White handles resize one unlocked part.
+        </div>
+      </section>
+
+      <section class="group">
+        <h2>Build Next</h2>
+        <div class="help">
+          Keyboard rev A is now a real 273.5 x 80.0 mm MX ULP daughterboard.
+          Its J320 connector is a Hirose FH12-30S-0.5SH(55), 30-pin 0.5 mm
+          right-angle FFC. Use this planner to freeze the mainboard envelope,
+          side/rear connector zones, thermal stack, battery clearances, display
+          direct-eDP hinge route, recessed Ethernet jack, microphone opening,
+          and cable paths before freezing the main PCB outline.
         </div>
       </section>
     </aside>
@@ -595,45 +611,76 @@
       mode: "select",
       grid: 5,
       snap: true,
-      view: { x: -18, y: -18, w: 650, h: 590 },
+      view: { x: -18, y: -18, w: 625, h: 575 },
       planes: {
-        base: { label: "Base / Keyboard Deck", x: 0, y: 0, w: 390, h: 250 },
-        lid: { label: "Lid / Display", x: 0, y: 290, w: 390, h: 245 },
-        tray: { label: "Parking / Unplaced", x: 430, y: 0, w: 180, h: 535 }
+        base: { label: "Base / Keyboard Deck", x: 0, y: 0, w: 358, h: 248 },
+        lid: { label: "Lid / Direct-eDP Display", x: 0, y: 288, w: 358, h: 248 },
+        tray: { label: "Parking / Unplaced", x: 398, y: 0, w: 190, h: 536 }
       },
       selectedIds: [],
       parts: [
-        { id: "keyboard", name: "thin keyboard zone", zone: "base", x: 35, y: 18, w: 300, h: 80, kind: "input" },
-        { id: "battery-1", name: "3.7V cell A", zone: "base", x: 45, y: 106, w: 100, h: 60, kind: "power" },
-        { id: "battery-2", name: "3.7V cell B", zone: "base", x: 150, y: 106, w: 100, h: 60, kind: "power" },
-        { id: "battery-3", name: "3.7V cell C", zone: "base", x: 255, y: 106, w: 100, h: 60, kind: "power" },
-        { id: "palm-rest", name: "palm-rest comfort zone", zone: "base", x: 70, y: 166, w: 250, h: 78, kind: "keepout", locked: true },
-        { id: "trackpad-target", name: "JOMAA / large trackpad bay", zone: "base", x: 128, y: 170, w: 135, h: 74, kind: "input" },
-        { id: "mnt-trackpad", name: "MNT trackpad size ref", zone: "base", x: 162, y: 188, w: 65, h: 49, kind: "ghost", locked: true },
-        { id: "tpad-usbc-conn", name: "trackpad USB-C receptacle", zone: "base", x: 104, y: 184, w: 18, h: 10, kind: "port" },
-        { id: "tpad-usbc-cable", name: "trackpad USB-C cable path", zone: "base", x: 122, y: 187, w: 44, h: 4, kind: "ghost" },
-        { id: "speaker-left", name: "front speaker L", zone: "base", x: 20, y: 226, w: 38, h: 18, kind: "audio" },
-        { id: "speaker-right", name: "front speaker R", zone: "base", x: 332, y: 226, w: 38, h: 18, kind: "audio" },
-        { id: "left-ports", name: "left side ports", zone: "base", x: 0, y: 70, w: 12, h: 66, kind: "port" },
-        { id: "right-ports", name: "right side ports", zone: "base", x: 378, y: 70, w: 12, h: 66, kind: "port" },
-        { id: "rear-antennas", name: "rear antenna connectors", zone: "base", x: 252, y: 0, w: 86, h: 12, kind: "rf" },
-        { id: "mu-module", name: "LattePanda Mu module", zone: "base", x: 290, y: 86, w: 70, h: 60, kind: "board" },
-        { id: "cold-plate", name: "Mu copper cold plate", zone: "base", x: 286, y: 82, w: 74, h: 64, kind: "thermal" },
-        { id: "heatpipe", name: "121721 heatpipe 150mm", zone: "base", x: 226, y: 112, w: 150, h: 8.1, kind: "thermal" },
-        { id: "fin-stack", name: "SKV505014-AL fin stack", zone: "base", x: 334, y: 42, w: 50, h: 50, kind: "thermal" },
-        { id: "blower", name: "5V blower", zone: "base", x: 338, y: 94, w: 45, h: 45, kind: "thermal" },
-        { id: "exhaust", name: "side exhaust keepout", zone: "base", x: 378, y: 40, w: 12, h: 104, kind: "thermal" },
-        { id: "nvme", name: "M.2 2280 SSD", zone: "base", x: 356, y: 160, w: 22, h: 80, kind: "board" },
-        { id: "panel-outline", name: "B160QAN03.K panel", zone: "lid", x: 20, y: 12, w: 350, h: 225, kind: "display" },
-        { id: "panel-active", name: "2560x1600 active area", zone: "lid", x: 23, y: 18, w: 345, h: 215, kind: "ghost", locked: true },
-        { id: "screen-pcb", name: "Intehill controller PCB", zone: "tray", x: 15, y: 18, w: 114, h: 70, kind: "board" },
-        { id: "screen-usbc", name: "display USB-C/FPC harness", zone: "tray", x: 15, y: 100, w: 92, h: 12, kind: "port" },
-        { id: "screen-hdmi", name: "internal HDMI harness", zone: "tray", x: 15, y: 120, w: 92, h: 12, kind: "port" },
-        { id: "charger-zone", name: "charger / power zone", zone: "tray", x: 15, y: 155, w: 120, h: 58, kind: "power" },
-        { id: "radio-zone", name: "ham radio / GNSS zone", zone: "tray", x: 15, y: 230, w: 120, h: 70, kind: "rf" },
-        { id: "maker-zone", name: "maker MCU header zone", zone: "tray", x: 15, y: 318, w: 120, h: 45, kind: "board" },
-        { id: "oled-zone", name: "dual SSD1306 headers", zone: "tray", x: 15, y: 380, w: 120, h: 35, kind: "display" }
+        { id: "keyboard", name: "MX ULP keyboard PCB rev A", zone: "base", x: 42.25, y: 20, w: 273.5, h: 80, kind: "input" },
+        { id: "keyboard-ffc", name: "J310 mainboard keyboard FFC connector", zone: "base", x: 310, y: 56, w: 18, h: 8, kind: "port" },
+        { id: "keyboard-ffc-keepout", name: "keyboard FFC bend / exit keepout", zone: "base", x: 300, y: 48, w: 45, h: 24, kind: "ghost" },
+        { id: "battery-1", name: "3.7V cell A (measured)", zone: "base", x: 38, y: 105, w: 60, h: 100, kind: "power" },
+        { id: "battery-2", name: "3.7V cell B (measured)", zone: "base", x: 129, y: 105, w: 100, h: 60, kind: "power" },
+        { id: "battery-3", name: "3.7V cell C (measured)", zone: "base", x: 260, y: 105, w: 60, h: 100, kind: "power" },
+        { id: "palm-rest", name: "palm-rest comfort zone", zone: "base", x: 50, y: 165, w: 258, h: 80, kind: "keepout", locked: true },
+        { id: "trackpad-target", name: "JOMAA trackpad (140 W x 105 D mm)", zone: "base", x: 109, y: 143, w: 140, h: 105, kind: "input" },
+        { id: "mnt-trackpad", name: "MNT trackpad size ref", zone: "base", x: 146.5, y: 190, w: 65, h: 49, kind: "ghost", locked: true },
+        { id: "tpad-usbc-conn", name: "trackpad USB-C receptacle", zone: "base", x: 91, y: 186, w: 18, h: 10, kind: "port" },
+        { id: "tpad-usbc-cable", name: "trackpad USB-C cable path", zone: "base", x: 105, y: 189, w: 44, h: 4, kind: "ghost" },
+        { id: "speaker-left", name: "front speaker L", zone: "base", x: 3, y: 227, w: 38, h: 18, kind: "audio" },
+        { id: "speaker-right", name: "front speaker R", zone: "base", x: 317, y: 227, w: 38, h: 18, kind: "audio" },
+        { id: "microphone", name: "IM68A130 microphone acoustic opening", zone: "base", x: 55, y: 235, w: 8, h: 8, kind: "audio" },
+        { id: "left-ports", name: "left side connector corridor", zone: "base", x: 2, y: 20, w: 12, h: 185, kind: "port" },
+        { id: "right-ports", name: "right side connector corridor", zone: "base", x: 344, y: 20, w: 12, h: 185, kind: "port" },
+        { id: "ethernet-jack", name: "JXD1-1022NL recessed Ethernet jack", zone: "base", x: 329.94, y: 109, w: 26.06, h: 17.58, kind: "port" },
+        { id: "rear-antennas", name: "rear antenna connector recess", zone: "base", x: 220, y: 3, w: 86, h: 17, kind: "rf" },
+        { id: "hinge-left", name: "left hinge keepout", zone: "base", x: 8, y: 0, w: 50, h: 20, kind: "keepout", locked: true },
+        { id: "hinge-right", name: "right hinge keepout", zone: "base", x: 310, y: 0, w: 40, h: 20, kind: "keepout", locked: true },
+        { id: "edp-chase", name: "direct-eDP hinge cable chase", zone: "base", x: 190, y: 0, w: 28, h: 30, kind: "ghost" },
+        { id: "mu-module", name: "LattePanda Mu carrier courtyard", zone: "base", x: 125, y: 30, w: 77.5, h: 65.5, kind: "board" },
+        { id: "cold-plate", name: "Mu copper cold plate", zone: "base", x: 126.75, y: 30.75, w: 74, h: 64, kind: "thermal" },
+        { id: "heatpipe", name: "121721 heatpipe 150mm", zone: "base", x: 70, y: 31, w: 150, h: 8.1, kind: "thermal" },
+        { id: "fin-stack", name: "SKV505014-AL fin stack", zone: "base", x: 70, y: 3, w: 50, h: 50, kind: "thermal" },
+        { id: "blower", name: "5V blower", zone: "base", x: 73, y: 56, w: 45, h: 45, kind: "thermal" },
+        { id: "exhaust", name: "rear exhaust opening keepout", zone: "base", x: 70, y: 0, w: 50, h: 12, kind: "thermal" },
+        { id: "nvme", name: "M.2 2280 SSD", zone: "base", x: 215, y: 75, w: 80, h: 22, kind: "board" },
+        { id: "panel-outline", name: "B160QAN03.K panel (measured)", zone: "lid", x: 3, y: 10.5, w: 352, h: 227, kind: "display" },
+        { id: "panel-active", name: "2560x1600 active area (approximate)", zone: "lid", x: 6.5, y: 16.5, w: 345, h: 215, kind: "ghost", locked: true },
+        { id: "charger-zone", name: "charger / power zone", zone: "tray", x: 15, y: 20, w: 120, h: 58, kind: "power" },
+        { id: "radio-zone", name: "ham radio / GNSS zone", zone: "tray", x: 15, y: 95, w: 120, h: 70, kind: "rf" },
+        { id: "maker-zone", name: "maker MCU header zone", zone: "tray", x: 15, y: 183, w: 120, h: 45, kind: "board" },
+        { id: "oled-zone", name: "dual SSD1306 headers", zone: "tray", x: 15, y: 245, w: 120, h: 35, kind: "display" }
       ]
+    };
+
+    const productionFacts = {
+      keyboard: {
+        name: "MX ULP keyboard PCB rev A",
+        w: 273.5,
+        h: 80,
+        kind: "input"
+      },
+      "keyboard-ffc": {
+        name: "J310 mainboard keyboard FFC connector",
+        w: 18,
+        h: 8,
+        kind: "port"
+      },
+      "keyboard-ffc-keepout": {
+        name: "keyboard FFC bend / exit keepout",
+        w: 45,
+        h: 24,
+        kind: "ghost"
+      },
+      "trackpad-target": {
+        name: "JOMAA trackpad (140 W x 105 D mm)",
+        w: 140,
+        h: 105,
+        kind: "input"
+      }
     };
 
     let state = loadState();
@@ -687,15 +734,21 @@
         hidden: false,
         kind: "board",
         zone: "base",
+        rot: 0,
         ...part,
         x: Number(part.x) || 0,
         y: Number(part.y) || 0,
         w: Math.max(1, Number(part.w) || 1),
-        h: Math.max(1, Number(part.h) || 1)
+        h: Math.max(1, Number(part.h) || 1),
+        rot: normalizeAngle(Number(part.rot) || 0)
       }));
+      for (const part of next.parts) {
+        if (productionFacts[part.id]) Object.assign(part, productionFacts[part.id]);
+      }
       for (const part of defaultState.parts) {
         if (!next.parts.some(existing => existing.id === part.id)) next.parts.push(clone(part));
       }
+      for (const part of next.parts) clampPart(part, next.planes);
       const valid = new Set(next.parts.map(part => part.id));
       next.selectedIds = [...new Set(next.selectedIds)].filter(id => valid.has(id));
       return next;
@@ -723,8 +776,17 @@
       return mm(Math.round(value / state.grid) * state.grid);
     }
 
-    function planeFor(zone) {
-      return state.planes[zone] || state.planes.base;
+    function planeFor(zone, planes = state.planes) {
+      return planes[zone] || planes.base;
+    }
+
+    function zoneAtPoint(x, y) {
+      for (const [zone, plane] of Object.entries(state.planes)) {
+        if (x >= plane.x && x <= plane.x + plane.w && y >= plane.y && y <= plane.y + plane.h) {
+          return zone;
+        }
+      }
+      return null;
     }
 
     function toWorldPart(part) {
@@ -782,8 +844,8 @@
       return { x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
     }
 
-    function clampPart(part) {
-      const plane = planeFor(part.zone);
+    function clampPart(part, planes = state.planes) {
+      const plane = planeFor(part.zone, planes);
       part.w = Math.max(1, mm(part.w));
       part.h = Math.max(1, mm(part.h));
       part.x = mm(Math.max(0, Math.min(part.x, plane.w - part.w)));
@@ -934,7 +996,13 @@
     function drawPart(part) {
       if (part.hidden) return;
       const rect = toWorldPart(part);
-      const group = svgEl("g", { "data-id": part.id, class: "part-node" });
+      const cx = rect.x + rect.w / 2;
+      const cy = rect.y + rect.h / 2;
+      const group = svgEl("g", {
+        "data-id": part.id,
+        class: "part-node",
+        transform: part.rot ? `rotate(${part.rot} ${cx} ${cy})` : null
+      });
       const selected = state.selectedIds.includes(part.id);
       const shapeAttrs = {
         x: rect.x,
@@ -976,14 +1044,18 @@
       const parts = selectedParts().filter(part => !part.hidden);
       const bounds = selectionBounds(parts);
       if (!bounds) return;
-      svg.appendChild(svgEl("rect", {
+      const outlineAttrs = {
         x: bounds.x,
         y: bounds.y,
         width: bounds.w,
         height: bounds.h,
         class: `selection-outline${parts.length > 1 ? " group" : ""}`
-      }));
-      if (parts.length !== 1 || parts[0].locked) return;
+      };
+      if (parts.length === 1 && parts[0].rot) {
+        outlineAttrs.transform = `rotate(${parts[0].rot} ${bounds.x + bounds.w / 2} ${bounds.y + bounds.h / 2})`;
+      }
+      svg.appendChild(svgEl("rect", outlineAttrs));
+      if (parts.length !== 1 || parts[0].locked || parts[0].rot) return;
       const handles = [
         ["nw", bounds.x, bounds.y],
         ["n", bounds.x + bounds.w / 2, bounds.y],
@@ -1035,7 +1107,7 @@
       for (const el of [els.partName, els.partX, els.partY, els.partW, els.partH, els.partZone, els.partKind]) {
         el.disabled = !single;
       }
-      for (const id of ["focusBtn", "rotateBtn", "duplicateBtn", "deleteBtn", "lockBtn", "hideBtn", "frontBtn", "backBtn"]) {
+      for (const id of ["focusBtn", "centerHBtn", "centerVBtn", "rotateBtn", "rotateCcwBtn", "rotateCwBtn", "duplicateBtn", "deleteBtn", "lockBtn", "hideBtn", "frontBtn", "backBtn"]) {
         document.getElementById(id).disabled = !parts.length;
       }
       document.getElementById("lockBtn").textContent = parts.length && parts.every(part => part.locked) ? "Unlock" : "Lock";
@@ -1066,7 +1138,7 @@
         item.innerHTML = `
           <span class="swatch" style="background:${colors[part.kind] || colors.board}"></span>
           <span class="name" title="${escapeHtml(part.name)}">${escapeHtml(part.name)}</span>
-          <span class="mini">${part.zone} ${mm(part.w)}x${mm(part.h)}</span>
+          <span class="mini">${part.zone} ${mm(part.w)}x${mm(part.h)}${part.rot ? ` r${part.rot}` : ""}</span>
           <span class="mini">${part.locked ? "lock" : ""}${part.hidden ? " hide" : ""}</span>
         `;
         item.addEventListener("click", event => {
@@ -1090,6 +1162,10 @@
         '"': "&quot;",
         "'": "&#039;"
       }[char]));
+    }
+
+    function normalizeAngle(value) {
+      return ((Math.round(value) % 360) + 360) % 360;
     }
 
     function updateSingle(mutator) {
@@ -1118,6 +1194,40 @@
       if (!parts.length) return;
       parts.forEach(rotatePart);
       setStatus(`Rotated ${parts.length}`);
+      render();
+    }
+
+    function angleSelection(delta) {
+      const parts = selectedParts().filter(part => !part.locked && !part.hidden);
+      if (!parts.length) return;
+      parts.forEach(part => part.rot = normalizeAngle((part.rot || 0) + delta));
+      setStatus(`${delta > 0 ? "+" : ""}${delta} deg ${parts.length}`);
+      render();
+    }
+
+    function centerSelection(axis) {
+      const parts = selectedParts().filter(part => !part.locked && !part.hidden);
+      if (!parts.length) return;
+      const zones = new Set(parts.map(part => part.zone));
+      if (zones.size === 1) {
+        const plane = planeFor(parts[0].zone);
+        const bounds = selectionBounds(parts);
+        const dx = axis === "h" ? plane.x + plane.w / 2 - (bounds.x + bounds.w / 2) : 0;
+        const dy = axis === "v" ? plane.y + plane.h / 2 - (bounds.y + bounds.h / 2) : 0;
+        for (const part of parts) {
+          part.x = state.snap ? snap(part.x + dx) : mm(part.x + dx);
+          part.y = state.snap ? snap(part.y + dy) : mm(part.y + dy);
+          clampPart(part);
+        }
+      } else {
+        for (const part of parts) {
+          const plane = planeFor(part.zone);
+          if (axis === "h") part.x = state.snap ? snap((plane.w - part.w) / 2) : mm((plane.w - part.w) / 2);
+          if (axis === "v") part.y = state.snap ? snap((plane.h - part.h) / 2) : mm((plane.h - part.h) / 2);
+          clampPart(part);
+        }
+      }
+      setStatus(axis === "h" ? `Centered horizontally ${parts.length}` : `Centered vertically ${parts.length}`);
       render();
     }
 
@@ -1161,7 +1271,7 @@
         drag = {
           type: "move",
           start: point,
-          parts: moving.map(part => ({ id: part.id, x: part.x, y: part.y }))
+          parts: moving.map(part => ({ id: part.id, zone: part.zone, x: part.x, y: part.y }))
         };
         svg.classList.add("dragging");
         svg.setPointerCapture(event.pointerId);
@@ -1203,8 +1313,14 @@
         for (const start of drag.parts) {
           const part = byId(start.id);
           if (!part) continue;
-          part.x = state.snap ? snap(start.x + dx) : mm(start.x + dx);
-          part.y = state.snap ? snap(start.y + dy) : mm(start.y + dy);
+          const originalPlane = planeFor(start.zone);
+          const worldX = originalPlane.x + start.x + dx;
+          const worldY = originalPlane.y + start.y + dy;
+          const targetZone = zoneAtPoint(worldX + part.w / 2, worldY + part.h / 2) || part.zone;
+          const targetPlane = planeFor(targetZone);
+          part.zone = targetZone;
+          part.x = state.snap ? snap(worldX - targetPlane.x) : mm(worldX - targetPlane.x);
+          part.y = state.snap ? snap(worldY - targetPlane.y) : mm(worldY - targetPlane.y);
           clampPart(part);
         }
         render();
@@ -1299,7 +1415,11 @@
     document.getElementById("fitBaseBtn").onclick = () => fitPlane("base");
     document.getElementById("fitLidBtn").onclick = () => fitPlane("lid");
     document.getElementById("focusBtn").onclick = fitSelection;
+    document.getElementById("centerHBtn").onclick = () => centerSelection("h");
+    document.getElementById("centerVBtn").onclick = () => centerSelection("v");
     document.getElementById("rotateBtn").onclick = rotateSelection;
+    document.getElementById("rotateCcwBtn").onclick = () => angleSelection(-45);
+    document.getElementById("rotateCwBtn").onclick = () => angleSelection(45);
     document.getElementById("zoomInBtn").onclick = () => zoomAt(1.2);
     document.getElementById("zoomOutBtn").onclick = () => zoomAt(1 / 1.2);
     document.getElementById("saveBtn").onclick = saveState;
