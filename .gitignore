@@ -1,7 +1,7 @@
 # KiCad backups/autosave/locks
 .DS_Store
 .history/
-12_keyboard_daughterboard.kicad_prl
+*.kicad_prl
 *.bak
 *-bak
 _autosave-*
@@ -12,6 +12,10 @@ _autosave-*
 fp-info-cache
 *.lck
 *.000
+
+# Local-only archives and scratch work
+.local/
+tmp/
 
 # KiCad plot/fab/export output
 gerbers/
@@ -24,7 +28,20 @@ plot/
 # Python
 __pycache__/
 *.pyc
+*.egg-info/
 
 # Generated/scratch reports (regenerate via gen/ scripts + kicad-cli sch erc)
 gen/erc_*.json
 gen/netlist.net
+*.rpt
+*.plist
+verification/*.xml
+verification/*.csv
+verification/*.json
+verification/release_inventory/
+!verification/hardware_validation_release.json
+
+# Local dependency and high-resolution source caches
+software/**/.venv/
+software/**/node_modules/
+software/os-theme/wallpapers/masters/

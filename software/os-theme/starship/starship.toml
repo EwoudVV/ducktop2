@@ -1,0 +1,67 @@
+add_newline = true
+command_timeout = 1200
+palette = "ducktop"
+
+format = """
+$username$hostname$directory$git_branch$git_status$python$nodejs$rust$cmd_duration$battery
+$character"""
+
+[palettes.ducktop]
+amber = "#ffb000"
+cyan = "#00d7ff"
+green = "#44d66f"
+red = "#ff4d4f"
+muted = "#8b949b"
+text = "#e4e8e6"
+
+[username]
+format = "[$user]($style)"
+show_always = false
+style_user = "bold amber"
+style_root = "bold red"
+
+[hostname]
+format = "[@$hostname ]($style)"
+ssh_only = true
+style = "bold cyan"
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+read_only = " ro"
+style = "bold cyan"
+truncation_length = 4
+truncate_to_repo = false
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+style = "amber"
+symbol = "git:"
+
+[git_status]
+format = "([$all_status$ahead_behind]($style) )"
+style = "red"
+
+[cmd_duration]
+format = "[$duration]($style) "
+min_time = 1000
+style = "muted"
+
+[battery]
+format = "[$symbol$percentage]($style) "
+full_symbol = "bat:"
+charging_symbol = "chg:"
+discharging_symbol = "bat:"
+unknown_symbol = "bat:"
+empty_symbol = "bat:"
+
+[[battery.display]]
+threshold = 15
+style = "bold red"
+
+[[battery.display]]
+threshold = 40
+style = "amber"
+
+[character]
+error_symbol = "[x](bold red) "
+success_symbol = "[>](bold amber) "

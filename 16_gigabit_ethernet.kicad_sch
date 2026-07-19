@@ -1,0 +1,2824 @@
+(kicad_sch
+  (version 20260306)
+  (generator "eeschema")
+  (generator_version "10.0")
+  (uuid 5c8582c4-160f-5863-aa03-445004d23e4d)
+  (paper "A2")
+  (lib_symbols
+(symbol "Device:C"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0.254)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "C"
+			(at 0.635 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "C"
+			(at 0.635 -2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 0.9652 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "cap capacitor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "C_0_1"
+			(polyline
+				(pts
+					(xy -2.032 0.762) (xy 2.032 0.762)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.032 -0.762) (xy 2.032 -0.762)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "C_1_1"
+			(pin passive line
+				(at 0 3.81 270)
+				(length 2.794)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -3.81 90)
+				(length 2.794)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Device:Crystal_GND24"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "Y"
+			(at 3.175 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Crystal_GND24"
+			(at 3.175 3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Four pin crystal, GND on pins 2 and 4"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property private "KLC_S3.3" "The rectangle is not a symbol body but a graphical element"
+			(at 0 -12.7 0)
+			(show_name yes)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property private "KLC_S4.1" "Some pins are on 50mil grid to make the symbol small"
+			(at 0 -15.24 0)
+			(show_name yes)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "quartz ceramic resonator oscillator"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Crystal*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Crystal_GND24_0_1"
+			(polyline
+				(pts
+					(xy -2.54 2.286) (xy -2.54 3.556) (xy 2.54 3.556) (xy 2.54 2.286)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 0) (xy -2.032 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 -2.286) (xy -2.54 -3.556) (xy 2.54 -3.556) (xy 2.54 -2.286)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.032 -1.27) (xy -2.032 1.27)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.143 2.54)
+				(end 1.143 -2.54)
+				(stroke
+					(width 0.3048)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 -3.81) (xy 0 -3.556)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.032 0) (xy 2.54 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.032 -1.27) (xy 2.032 1.27)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "Crystal_GND24_1_1"
+			(pin passive line
+				(at -3.81 0 0)
+				(length 1.27)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -5.08 90)
+				(length 1.27)
+				(name "G"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 3.81 0 180)
+				(length 1.27)
+				(name "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -5.08 90)
+				(length 1.27)
+				(hide yes)
+				(name "G"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Device:R"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "R"
+			(at 2.032 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "R"
+			(at 0 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -1.778 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "R res resistor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "R_0_1"
+			(rectangle
+				(start -1.016 -2.54)
+				(end 1.016 2.54)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "R_1_1"
+			(pin passive line
+				(at 0 3.81 270)
+				(length 1.27)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -3.81 90)
+				(length 1.27)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "JXD1-1022NL:JXD1-1022NL"
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (property "Reference" "J" (at 0 22.86 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "JXD1-1022NL" (at 0 20.32 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "ducktop2:JXD1-1022NL_MidMount"
+      (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+    (property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/DATASHEET_J513"
+      (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+    (property "Description" "Mid-mount 10/100/1000BASE-T RJ45 with integrated magnetics and dual LEDs"
+      (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+    (symbol "JXD1-1022NL_0_1"
+      (rectangle (start -10.16 19.05) (end 10.16 -19.05)
+        (stroke (width 0.254) (type default)) (fill (type background)))
+    )
+    (symbol "JXD1-1022NL_1_1"
+      (pin passive line (at -12.7 16.51 0) (length 2.54) (name "MD1+" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at -12.7 13.97 0) (length 2.54) (name "MD1-" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 12.7 15.24 180) (length 2.54) (name "CT1" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at -12.7 10.16 0) (length 2.54) (name "MD2+" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at -12.7 7.62 0) (length 2.54) (name "MD2-" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 12.7 8.89 180) (length 2.54) (name "CT2" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at -12.7 3.81 0) (length 2.54) (name "MD3+" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at -12.7 1.27 0) (length 2.54) (name "MD3-" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 12.7 2.54 180) (length 2.54) (name "CT3" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at -12.7 -2.54 0) (length 2.54) (name "MD4+" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at -12.7 -5.08 0) (length 2.54) (name "MD4-" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 12.7 -3.81 180) (length 2.54) (name "CT4" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 12.7 -8.89 180) (length 2.54) (name "YELLOW_K" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 12.7 -11.43 180) (length 2.54) (name "YELLOW_A" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 12.7 -13.97 180) (length 2.54) (name "GREEN_K" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 12.7 -16.51 180) (length 2.54) (name "GREEN_A" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 0 -21.59 90) (length 2.54) (name "SHIELD" (effects (font (size 1.27 1.27)))) (number "SH" (effects (font (size 1.27 1.27)))))
+    )
+  )
+(symbol "Power_Protection:D3V3XA4B10LP"
+		(pin_names
+			(offset 0)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at -0.635 8.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "D3V3XA4B10LP"
+			(at 8.89 -10.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DFN_QFN:Diodes_UDFN-10_1x2.5mm_P0.5mm"
+			(at -24.13 -10.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/D3V3XA4B10LP.pdf"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "4-Channel Low Capacitance TVS Diode Array, DFN-10 / USON-10"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "ESD protection TVS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Diodes*UDFN*1x2.5mm*P0.5mm*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "D3V3XA4B10LP_0_0"
+			(rectangle
+				(start -5.715 6.477)
+				(end 5.715 -6.604)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -3.175 -6.604) (xy -3.175 6.477)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.127 6.477) (xy 0.127 -6.604)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.175 6.477) (xy 3.175 -6.604)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "D3V3XA4B10LP_0_1"
+			(polyline
+				(pts
+					(xy -7.747 2.54) (xy -3.175 2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -7.62 7.62)
+				(end 7.62 -7.62)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy -7.62 -2.54) (xy -5.715 -2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center -5.715 -2.54)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy -5.08 5.08) (xy -6.35 5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -5.08 3.81) (xy -6.35 3.81) (xy -5.715 5.08) (xy -5.08 3.81)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -5.08 -3.81) (xy -6.35 -3.81)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -5.08 -5.08) (xy -6.35 -5.08) (xy -5.715 -3.81) (xy -5.08 -5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center -3.175 6.477)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(circle
+				(center -3.175 2.54)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(circle
+				(center -3.175 -6.604)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 5.08) (xy -3.81 5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 3.81) (xy -3.81 3.81) (xy -3.175 5.08) (xy -2.54 3.81)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 -3.81) (xy -3.81 -3.81)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 -5.08) (xy -3.81 -5.08) (xy -3.175 -3.81) (xy -2.54 -5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.508 0.889) (xy -0.889 0.635)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 0 6.477)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 -6.604) (xy 0 -7.62)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 0 -6.604)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.762 0.889) (xy -0.508 0.889)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.762 0.889) (xy 1.143 1.143)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.762 -0.381) (xy -0.508 -0.381) (xy 0.127 0.889) (xy 0.762 -0.381)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 3.175 6.477)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(circle
+				(center 3.175 -2.54)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(circle
+				(center 3.175 -6.604)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.81 5.08) (xy 2.54 5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.81 3.81) (xy 2.54 3.81) (xy 3.175 5.08) (xy 3.81 3.81)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.81 -3.81) (xy 2.54 -3.81)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.81 -5.08) (xy 2.54 -5.08) (xy 3.175 -3.81) (xy 3.81 -5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 5.715 2.54)
+				(radius 0.2794)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy 6.35 5.08) (xy 5.08 5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 6.35 3.81) (xy 5.08 3.81) (xy 5.715 5.08) (xy 6.35 3.81)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 6.35 -3.81) (xy 5.08 -3.81)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 6.35 -5.08) (xy 5.08 -5.08) (xy 5.715 -3.81) (xy 6.35 -5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.62 2.54) (xy 5.715 2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.62 -2.54) (xy 3.175 -2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "D3V3XA4B10LP_1_1"
+			(pin passive line
+				(at -12.7 2.54 0)
+				(length 5.08)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -12.7 -2.54 0)
+				(length 5.08)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 -12.7 90)
+				(length 5.08)
+				(name "VSS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 2.54 180)
+				(length 5.08)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 -2.54 180)
+				(length 5.08)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin free line
+				(at 12.7 -7.62 180)
+				(length 5.08)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin free line
+				(at 12.7 7.62 180)
+				(length 5.08)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -12.7 90)
+				(length 5.08)
+				(hide yes)
+				(name "VSS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin free line
+				(at -12.7 -7.62 0)
+				(length 5.08)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin free line
+				(at -12.7 7.62 0)
+				(length 5.08)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "RTL8111H:RTL8111H"
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (property "Reference" "U" (at 0 30.48 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "RTL8111H-CG-RH" (at 0 27.94 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "Package_DFN_QFN:QFN-32-1EP_4x4mm_P0.4mm_EP2.65x2.65mm"
+      (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+    (property "Datasheet" "https://www.realtek.com/Product/Index?id=3632"
+      (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+    (property "Description" "Realtek PCIe Gigabit Ethernet controller, QFN-32 exposed pad"
+      (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+    (symbol "RTL8111H_0_1"
+      (rectangle (start -11.43 26.67) (end 11.43 -26.67)
+        (stroke (width 0.254) (type default)) (fill (type background)))
+    )
+    (symbol "RTL8111H_1_1"
+      (pin bidirectional line (at 13.97 24.13 180) (length 2.54) (name "MDIP0" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 13.97 21.59 180) (length 2.54) (name "MDIN0" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+      (pin power_in line (at -2.54 -29.21 90) (length 2.54) (name "AVDD10" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 13.97 19.05 180) (length 2.54) (name "MDIP1" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 13.97 16.51 180) (length 2.54) (name "MDIN1" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 13.97 13.97 180) (length 2.54) (name "MDIP2" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 13.97 11.43 180) (length 2.54) (name "MDIN2" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+      (pin power_in line (at 0 -29.21 90) (length 2.54) (name "AVDD10" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 13.97 8.89 180) (length 2.54) (name "MDIP3" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 13.97 6.35 180) (length 2.54) (name "MDIN3" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+      (pin power_in line (at -13.97 24.13 0) (length 2.54) (name "AVDD33" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+      (pin output line (at -13.97 -24.13 0) (length 2.54) (name "CLKREQB_OD" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+      (pin input line (at -13.97 13.97 0) (length 2.54) (name "HSIP" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+      (pin input line (at -13.97 11.43 0) (length 2.54) (name "HSIN" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+      (pin input line (at -13.97 8.89 0) (length 2.54) (name "REFCLK_P" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+      (pin input line (at -13.97 6.35 0) (length 2.54) (name "REFCLK_N" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+      (pin output line (at -13.97 3.81 0) (length 2.54) (name "HSOP" (effects (font (size 1.27 1.27)))) (number "17" (effects (font (size 1.27 1.27)))))
+      (pin output line (at -13.97 1.27 0) (length 2.54) (name "HSON" (effects (font (size 1.27 1.27)))) (number "18" (effects (font (size 1.27 1.27)))))
+      (pin input line (at -13.97 -1.27 0) (length 2.54) (name "PERSTB" (effects (font (size 1.27 1.27)))) (number "19" (effects (font (size 1.27 1.27)))))
+      (pin input line (at -13.97 -3.81 0) (length 2.54) (name "ISOLATEB" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
+      (pin open_collector line (at -13.97 -6.35 0) (length 2.54) (name "LANWAKEB" (effects (font (size 1.27 1.27)))) (number "21" (effects (font (size 1.27 1.27)))))
+      (pin power_in line (at 2.54 -29.21 90) (length 2.54) (name "DVDD10" (effects (font (size 1.27 1.27)))) (number "22" (effects (font (size 1.27 1.27)))))
+      (pin power_in line (at -13.97 21.59 0) (length 2.54) (name "VDDREG" (effects (font (size 1.27 1.27)))) (number "23" (effects (font (size 1.27 1.27)))))
+      (pin power_out line (at -13.97 19.05 0) (length 2.54) (name "REGOUT" (effects (font (size 1.27 1.27)))) (number "24" (effects (font (size 1.27 1.27)))))
+      (pin output line (at 13.97 -1.27 180) (length 2.54) (name "LED2" (effects (font (size 1.27 1.27)))) (number "25" (effects (font (size 1.27 1.27)))))
+      (pin output line (at 13.97 -3.81 180) (length 2.54) (name "LED1" (effects (font (size 1.27 1.27)))) (number "26" (effects (font (size 1.27 1.27)))))
+      (pin output line (at 13.97 -6.35 180) (length 2.54) (name "LED0" (effects (font (size 1.27 1.27)))) (number "27" (effects (font (size 1.27 1.27)))))
+      (pin input line (at 13.97 -11.43 180) (length 2.54) (name "CKXTAL1" (effects (font (size 1.27 1.27)))) (number "28" (effects (font (size 1.27 1.27)))))
+      (pin output line (at 13.97 -13.97 180) (length 2.54) (name "CKXTAL2" (effects (font (size 1.27 1.27)))) (number "29" (effects (font (size 1.27 1.27)))))
+      (pin power_in line (at 5.08 -29.21 90) (length 2.54) (name "AVDD10" (effects (font (size 1.27 1.27)))) (number "30" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 13.97 -19.05 180) (length 2.54) (name "RSET" (effects (font (size 1.27 1.27)))) (number "31" (effects (font (size 1.27 1.27)))))
+      (pin power_in line (at -13.97 16.51 0) (length 2.54) (name "AVDD33" (effects (font (size 1.27 1.27)))) (number "32" (effects (font (size 1.27 1.27)))))
+      (pin power_in line (at 7.62 -29.21 90) (length 2.54) (hide yes) (name "GND" (effects (font (size 1.27 1.27)))) (number "33" (effects (font (size 1.27 1.27)))))
+    )
+  )
+  )
+(text "== Native PCIe Gigabit Ethernet on LattePanda Mu default HSIO6 ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid f099f1c8-50a2-57e9-b085-2261176d13a2))
+(text "RTL8111H support circuit follows LattePanda's DFR1142 Mu carrier reference: HSIO6, REFCLK4, CLKREQ4, and PLT_RST." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 020ef5b9-7ab3-5b7f-8627-eb10bc1a08b4))
+(text "JXD1-1022NL is a true recessed through-hole mid-mount RJ45 with integrated magnetics; no external transformer is required." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid b03c4efc-d539-580f-ad90-7728c24a83f5))
+(symbol
+  (lib_id "RTL8111H:RTL8111H")
+  (at 279.4 160.02 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b09edb17-04ac-5fa3-928f-403489fc6e9b)
+  (property "Reference" "U500" (at 279.4 157.48 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "RTL8111H-CG-RH PCIe Gigabit Ethernet" (at 279.4 162.56 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_DFN_QFN:QFN-32-1EP_4x4mm_P0.4mm_EP2.65x2.65mm" (at 279.4 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 279.4 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Realtek" (at 279.4 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RTL8111H-CG-RH" (at 279.4 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReferenceCircuit" "LattePanda Mu DFR1142 Gigabit Ethernet sheet" (at 279.4 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HostInterface" "Default BIOS HSIO6 PCIe host lane with REFCLK4 and CLKREQ4; endpoint negotiates supported PCIe speed" (at 279.4 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 7728f60f-6d2b-5785-8c6d-38c56d90d8d0))
+  (pin "2" (uuid 0e970b85-9484-5aaa-9ef5-331487816481))
+  (pin "3" (uuid c5a49c7c-9e05-579c-a627-c2019c413d31))
+  (pin "4" (uuid d5ab9229-237f-52d4-a288-ad9727040ef1))
+  (pin "5" (uuid ba78ebc9-5c5b-59f7-9d37-a28b6e1f5e79))
+  (pin "6" (uuid ee22018b-5637-5a03-a84b-6b7f1eca23d6))
+  (pin "7" (uuid 0719f15a-3dc0-5fa9-8915-33437b7524a0))
+  (pin "8" (uuid 8e58a23f-3c27-5887-8c20-eca33d4b0ae6))
+  (pin "9" (uuid bc5e7925-daa3-5cef-b700-62e9c6341fe3))
+  (pin "10" (uuid 12086da4-882e-5c51-acc5-05a4cebd4e3a))
+  (pin "11" (uuid b1e1fd32-6b4e-583c-8d03-1d5ed2926ec0))
+  (pin "12" (uuid 8cb7dffa-e141-5464-ac23-dd5c56ae994c))
+  (pin "13" (uuid 9b3ddf0f-cede-5650-90ee-608fa25af9fa))
+  (pin "14" (uuid 3516dadd-c8da-5aa3-bd06-89bc15da11df))
+  (pin "15" (uuid 5b9a296f-35fd-54c9-acdb-0c375f7e4774))
+  (pin "16" (uuid 1075f828-7d53-53f3-b1b9-fbdb57d5167f))
+  (pin "17" (uuid 87049b4d-8627-595d-8e22-24f4c699854e))
+  (pin "18" (uuid 8bd1ff56-3c9e-52a1-9a88-80c7be94fc32))
+  (pin "19" (uuid 9835b87a-921f-57a6-b08b-8b0d5391b141))
+  (pin "20" (uuid 74123f39-81f3-5dc5-bb02-0638d89aa511))
+  (pin "21" (uuid 42ecb94b-4780-5d6d-b2e6-3a7eca7eca11))
+  (pin "22" (uuid 642dd04b-ada2-53e2-a52e-e77053ef0768))
+  (pin "23" (uuid 1e48ea88-875f-58e2-8cdb-62a6658c8f59))
+  (pin "24" (uuid 9ed14666-2644-5d91-98dc-03bae783d67a))
+  (pin "25" (uuid c7818f37-86fc-57cd-8b6b-869755035f1f))
+  (pin "26" (uuid 66bcd27b-9a13-5f60-8c27-c2322c26874f))
+  (pin "27" (uuid b247420b-e434-536c-b774-78ff862ed594))
+  (pin "28" (uuid c65dbd48-fa9f-5012-892d-378e0de516aa))
+  (pin "29" (uuid ba8b8f52-48b1-5aad-9331-912f40c49729))
+  (pin "30" (uuid 8d5aabd3-5c8f-50bf-b5bf-c11ea27e7191))
+  (pin "31" (uuid 7d5aaf8c-1cfb-5cab-8f0a-28a34ea45466))
+  (pin "32" (uuid 4511d852-b1de-5f72-85b4-22f63e5da165))
+  (pin "33" (uuid 72d12039-bcce-5a23-8bc4-df65d3e36c4b))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "U500")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_MDI0_P"
+  (at 293.37 135.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 891f2d13-2b30-57be-a2f0-b87bbde17328)
+)
+(label "ETH_MDI0_N"
+  (at 293.37 138.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 84678a4f-c908-5449-90fc-91a9d4df2f48)
+)
+(label "ETH_1V0"
+  (at 276.86 189.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5ed86776-74b3-5e55-9aca-7de20b3c0036)
+)
+(label "ETH_MDI1_P"
+  (at 293.37 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a3e376bd-428b-58f8-9452-ab8e863ccc32)
+)
+(label "ETH_MDI1_N"
+  (at 293.37 143.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 45707c82-233a-5f2d-9bc3-f31f6d73e4cc)
+)
+(label "ETH_MDI2_P"
+  (at 293.37 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 650fccb6-dfbf-5286-a461-ec3e264d8dc2)
+)
+(label "ETH_MDI2_N"
+  (at 293.37 148.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5d61af18-5cbc-556f-8fe5-65802a54aea9)
+)
+(label "ETH_1V0"
+  (at 279.4 189.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c3f4cffd-e0ea-58ab-8d02-da7f9a02f358)
+)
+(label "ETH_MDI3_P"
+  (at 293.37 151.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid aa32acf2-5b48-57f1-8f0b-95fcae5b39c5)
+)
+(label "ETH_MDI3_N"
+  (at 293.37 153.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 73a78848-f978-5e0c-a40a-c71473b43003)
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 265.43 135.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 82e2e3dd-d699-597a-a000-4507ae9856fe)
+)
+(hierarchical_label "GBE_CLKREQ_N"
+  (shape bidirectional)
+  (at 265.43 184.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b8b7b452-96d7-5f15-9ef3-3ade26449aab)
+)
+(label "GBE_HSI_P"
+  (at 265.43 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f6e044ff-464a-5403-b497-13ee200eeeb9)
+)
+(label "GBE_HSI_N"
+  (at 265.43 148.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c3eff321-f2eb-58d8-81e6-fff712c412f5)
+)
+(hierarchical_label "GBE_REFCLK_P"
+  (shape bidirectional)
+  (at 265.43 151.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b9c542f6-5db2-5541-9881-43d8cfd473f3)
+)
+(hierarchical_label "GBE_REFCLK_N"
+  (shape bidirectional)
+  (at 265.43 153.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 194b526d-c8a8-5849-99df-5f2ef46aa9de)
+)
+(label "GBE_HSO_P"
+  (at 265.43 156.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1ea02085-6510-5207-afd5-efa0fb1e28a2)
+)
+(label "GBE_HSO_N"
+  (at 265.43 158.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7a5bfd2e-3a6e-5a20-ad9c-5bcedc83bc13)
+)
+(hierarchical_label "PLTRST_SRC_N"
+  (shape bidirectional)
+  (at 265.43 161.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0621b074-480c-5a4a-8732-8cd0b307fa2f)
+)
+(label "GBE_ISOLATE_N"
+  (at 265.43 163.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5437b128-a3f9-58b3-ae63-195a6a028d9f)
+)
+(hierarchical_label "PCIE_WAKE_N"
+  (shape bidirectional)
+  (at 265.43 166.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid da01ee01-2ab2-5c59-9a0e-8e063e4d25f5)
+)
+(label "ETH_1V0"
+  (at 281.94 189.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 079f0453-f14e-562e-a592-df342b6430f4)
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 265.43 138.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 72045c9e-d18f-5d73-b76b-fe76b882bfbf)
+)
+(label "ETH_1V0"
+  (at 265.43 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 695e72b2-83bb-556a-88ae-7585d77f0226)
+)
+(label "ETH_LED_ACT_N"
+  (at 293.37 161.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d57401c9-fee5-5465-b187-6e3471cd951f)
+)
+(label "ETH_LED_1000_N"
+  (at 293.37 163.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 846e37be-15a9-597e-bb4f-a647048ec74b)
+)
+(no_connect (at 293.37 166.37) (uuid 3aa6dfac-ee70-5b72-84b7-5447ab63607e))
+(label "ETH_XI"
+  (at 293.37 171.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1a65781f-1ec9-5530-9eba-43e8e5f7077f)
+)
+(label "ETH_XO"
+  (at 293.37 173.99 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e858c25d-db73-5436-9f82-9a4cd40f0f61)
+)
+(label "ETH_1V0"
+  (at 284.48 189.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6e0c79ef-c98f-581f-8e36-43a9c42b1d8a)
+)
+(label "ETH_RSET"
+  (at 293.37 179.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b20d1f4c-be4b-5c8d-b0fd-72a1bea90fb3)
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 265.43 143.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5975573e-542c-530a-8a35-6b73d8a657b8)
+)
+(label "GND"
+  (at 287.02 189.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7dd10a17-3b03-5b9a-8283-122e945a4585)
+)
+(text "== PCIe x1 host interface; AC capacitors belong at the transmitting endpoint ==" (at 20.32 55.88 0) (effects (font (size 1.27 1.27))) (uuid d2942d2d-c3d9-51ae-9263-1ec70d9f898f))
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 76.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2cf5c4fe-79e1-52ea-8608-ac56a9e11329)
+  (property "Reference" "C500" (at 20.32 73.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "220n 16V X7R PCIe TX AC per current Mu guide" (at 20.32 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C224KA12D" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "DesignAuthority" "Current LattePanda Mu PCIe design guide; 220n in both directions" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ea9bc48e-5d1a-58b8-8cc3-9c19537cff0e))
+  (pin "2" (uuid 3756ddbf-c43a-550e-9cea-0e5f5c397f6c))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C500")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GBE_HOST_TX_P"
+  (shape bidirectional)
+  (at 20.32 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 168ead37-eec6-530d-8b50-27691693dbb7)
+)
+(label "GBE_HSI_P"
+  (at 20.32 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d4602452-9379-5fd8-a826-e79be23a53cf)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 88.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8dd063ab-33f6-5f90-aa4b-801fddd0fc9a)
+  (property "Reference" "C501" (at 20.32 86.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "220n 16V X7R PCIe TX AC per current Mu guide" (at 20.32 91.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C224KA12D" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "DesignAuthority" "Current LattePanda Mu PCIe design guide; 220n in both directions" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 9911bb92-fca9-552b-a1bc-59bd4afb8b91))
+  (pin "2" (uuid 8eaa066d-cd71-54d4-a3d0-5da06fa8b22a))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C501")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GBE_HOST_TX_N"
+  (shape bidirectional)
+  (at 20.32 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a0cfb655-32ce-56f5-ae07-f3b9f93c20f2)
+)
+(label "GBE_HSI_N"
+  (at 20.32 92.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 381fe663-6274-57fb-bb15-027f703cc6a7)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 149.86 76.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid e007d31a-e713-527f-b803-d33b22f5d858)
+  (property "Reference" "C502" (at 149.86 73.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "220n 16V X7R PCIe TX AC per current Mu guide" (at 149.86 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 149.86 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 149.86 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 149.86 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C224KA12D" (at 149.86 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "DesignAuthority" "Current LattePanda Mu PCIe design guide; 220n in both directions" (at 149.86 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ba4f7de4-3882-5d4b-9c59-0834a7a06632))
+  (pin "2" (uuid 62fcc2ab-5165-5017-a8a4-fadd6c5d39b6))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C502")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GBE_HSO_P"
+  (at 149.86 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4a5aaa39-9dfd-52ac-8dee-9cc73c4e8363)
+)
+(hierarchical_label "GBE_HOST_RX_P"
+  (shape bidirectional)
+  (at 149.86 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 002b9b3f-d4e5-5590-a1e6-d152e3f3180d)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 149.86 88.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 42236d07-0d97-5b6c-ade2-022d1d724977)
+  (property "Reference" "C503" (at 149.86 86.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "220n 16V X7R PCIe TX AC per current Mu guide" (at 149.86 91.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 149.86 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 149.86 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 149.86 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C224KA12D" (at 149.86 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "DesignAuthority" "Current LattePanda Mu PCIe design guide; 220n in both directions" (at 149.86 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid eb0d3111-e7b9-5365-85a7-8d191ce37415))
+  (pin "2" (uuid f7c8d264-2305-5f7c-8fda-ab73d66620f7))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C503")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GBE_HSO_N"
+  (at 149.86 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8a320c26-616a-51be-b05f-f6c662d34170)
+)
+(hierarchical_label "GBE_HOST_RX_N"
+  (shape bidirectional)
+  (at 149.86 92.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7acfa841-a957-528c-9003-3614fc048944)
+)
+(text "== RTL8111H 3.3V / internal 1.0V rails and reset-side straps ==" (at 20.32 116.84 0) (effects (font (size 1.27 1.27))) (uuid 09b7aa11-afea-5e00-a995-ad0469bdb900))
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 137.16 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 234ae5a2-917f-5730-96a9-64d958527113)
+  (property "Reference" "C504" (at 20.32 134.62 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R local decoupling" (at 20.32 139.7 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 20.32 137.16 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 137.16 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1113bfad-2411-5bbf-8d1b-48cefcd8ce3c))
+  (pin "2" (uuid bd009ba1-8e52-595c-8380-4922da6ced4c))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C504")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 20.32 133.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 368f200c-815f-582c-a32b-b66cef695526)
+)
+(label "GND"
+  (at 20.32 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5808b044-b609-5f1e-a0e7-fb6b786ef06c)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 149.86 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8bdbb89c-564d-5b9c-9ac7-081d9ea3541c)
+  (property "Reference" "C505" (at 20.32 147.32 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R local decoupling" (at 20.32 152.4 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 20.32 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 326d6bdf-c4d4-5be5-98a2-a300334a6110))
+  (pin "2" (uuid 9602de47-9c21-5ad5-b6fa-773fa5c1bda2))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C505")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 20.32 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 40b166ed-fe6d-5d9d-862b-1b86117ff461)
+)
+(label "GND"
+  (at 20.32 153.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 503c0314-654b-58a2-a7bc-76733b7b698d)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 162.56 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid af443a1a-f088-5264-b147-0170a2dba5cd)
+  (property "Reference" "C506" (at 20.32 160.02 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R local decoupling" (at 20.32 165.1 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 20.32 162.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 162.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 90f33361-bd62-5005-ae5e-2b2a1d4ac50a))
+  (pin "2" (uuid ebcd6ba9-0e46-592b-b0e1-c989517d67af))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C506")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 20.32 158.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 40a2d097-dfc9-5414-b81d-7eaa0869ed4a)
+)
+(label "GND"
+  (at 20.32 166.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f59a7ee6-c89b-58e1-a337-c57c85411c78)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 129.54 137.16 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 99140dda-91d4-58bb-857f-e47bc257239f)
+  (property "Reference" "C507" (at 129.54 134.62 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R local decoupling" (at 129.54 139.7 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 129.54 137.16 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 129.54 137.16 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 98e15335-6a4c-57f6-beff-586c68801e2c))
+  (pin "2" (uuid cb87b9f0-25df-5ece-89e2-431e27ec5993))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C507")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_1V0"
+  (at 129.54 133.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c96df09d-e0bc-5f05-8315-d081caaa2e99)
+)
+(label "GND"
+  (at 129.54 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ebf77a02-945c-5d77-b8a9-adc67bf5984c)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 129.54 149.86 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid e0e00020-44aa-5481-8f5b-afe4b38555e5)
+  (property "Reference" "C508" (at 129.54 147.32 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R local decoupling" (at 129.54 152.4 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 129.54 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 129.54 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cbe00dbe-ba8f-5aa8-b723-f8b4afa5f320))
+  (pin "2" (uuid 56a70ed3-61de-547a-8bbc-9bf4f9d9f97f))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C508")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_1V0"
+  (at 129.54 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9ce2a652-e888-503a-b1af-d8b0f43f13b6)
+)
+(label "GND"
+  (at 129.54 153.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7d94aec2-e8a4-574c-9cdc-d27a5c47b3ce)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 129.54 162.56 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 32f462ce-011c-5d20-a0b2-4cec2af099fb)
+  (property "Reference" "C509" (at 129.54 160.02 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R local decoupling" (at 129.54 165.1 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 129.54 162.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 129.54 162.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f1744696-725e-590c-9735-5d98f86ec92c))
+  (pin "2" (uuid cbc8d761-8d06-5d30-aeb8-a6da17e76349))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C509")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_1V0"
+  (at 129.54 158.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ccf9362e-ae79-5f98-986f-a0d05ec41c49)
+)
+(label "GND"
+  (at 129.54 166.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b779a983-9bc0-5bba-b6e1-bf019ad39ae1)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 129.54 175.26 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9436f51e-9aa2-5771-a1c3-6aeaed7b5c33)
+  (property "Reference" "C510" (at 129.54 172.72 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R local decoupling" (at 129.54 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 129.54 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 129.54 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid beec8f6b-39dc-577d-aa8b-886d40ed2982))
+  (pin "2" (uuid 38f7472a-0859-5aaa-bd2c-53b4b710529e))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C510")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_1V0"
+  (at 129.54 171.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 21b5d459-c1e0-590b-bc76-7523391b0b6c)
+)
+(label "GND"
+  (at 129.54 179.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4c7090cc-cec5-50c2-8b22-524709628e6b)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 129.54 187.96 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 694f9be2-811b-55f2-99be-a603baf73f1f)
+  (property "Reference" "C511" (at 129.54 185.42 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R local decoupling" (at 129.54 190.5 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 129.54 187.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 129.54 187.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 378ad92f-5963-59a2-9c59-c504ebf30583))
+  (pin "2" (uuid 04c656f2-70d1-5883-9f34-1d6744508351))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C511")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_1V0"
+  (at 129.54 184.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f4379412-db82-5b3b-a72c-ca9165291427)
+)
+(label "GND"
+  (at 129.54 191.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7a1250c5-21ac-5535-a66b-dbe1b58098dc)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 129.54 200.66 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9badc0b0-f25f-503b-9acf-21da82a8183d)
+  (property "Reference" "C512" (at 129.54 198.12 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10u 6.3V X7R RTL8111H REGOUT bulk" (at 129.54 203.2 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 129.54 200.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 129.54 200.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 749179e1-579f-5f05-a1fb-1a401bd9f615))
+  (pin "2" (uuid 4e988f9c-a82b-532f-b151-a1ebc7e0ea6f))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C512")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_1V0"
+  (at 129.54 196.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 44085e06-bc43-5926-b2a4-31494863be80)
+)
+(label "GND"
+  (at 129.54 204.47 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5e698310-a919-5780-ad66-6aa583e7bb88)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 187.96 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid de521468-b340-543f-b460-f9cbbff10011)
+  (property "Reference" "R501" (at 20.32 185.42 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2.49k 1% RTL8111H RSET" (at 20.32 190.5 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 20.32 187.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 187.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 187.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0402FR-072K49L" (at 20.32 187.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 714c5a83-80bc-5e0b-8559-03808207a287))
+  (pin "2" (uuid 5d1c42fb-83db-5ab1-a48c-c2575b6d294b))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "R501")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_RSET"
+  (at 20.32 184.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ac42cab0-2fb9-53d9-879c-94e4cd1ee465)
+)
+(label "GND"
+  (at 20.32 191.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e4b88729-dbf9-5e7c-b710-92d04c8aedf2)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 200.66 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2e932dd0-5a16-567e-b50a-00953b3669f5)
+  (property "Reference" "R502" (at 20.32 198.12 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k 1% ISOLATEB pull-up" (at 20.32 203.2 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 20.32 200.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 200.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a1b9e66e-85d6-5a31-9537-2ba4c20533f5))
+  (pin "2" (uuid e4fbe76c-2e62-5845-a70b-3b8062aca4a3))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "R502")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 20.32 196.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ac3c7ae6-9876-5c39-8051-2bb593d018fb)
+)
+(label "GBE_ISOLATE_N"
+  (at 20.32 204.47 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1bd83147-ec95-5b66-861c-02acfc18d6ab)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 213.36 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 07bd49fa-abcd-5525-94b9-add99ae727b0)
+  (property "Reference" "R503" (at 20.32 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k 1% PCIe WAKE# pull-up" (at 20.32 215.9 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 20.32 213.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 213.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 828599c5-33a2-5bf1-922d-1664ec8a63f5))
+  (pin "2" (uuid 13f08cbd-ba19-5cb2-b57b-5e5735765a5b))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "R503")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 20.32 209.55 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 538377d1-9c4c-5c2f-a006-4c10cb86d8aa)
+)
+(hierarchical_label "PCIE_WAKE_N"
+  (shape bidirectional)
+  (at 20.32 217.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid de7f5951-d7ee-522e-9d73-c4a870d79298)
+)
+(text "== 25MHz reference crystal; 12pF legs implement the qualified 8pF load including about 2pF stray ==" (at 20.32 243.84 0) (effects (font (size 1.27 1.27))) (uuid f4aa21a7-e1b9-5ac4-a777-59df1962de66))
+(symbol
+  (lib_id "Device:Crystal_GND24")
+  (at 80.01 271.78 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 820ceb74-07af-51e4-aa17-c2fd42ff349d)
+  (property "Reference" "Y500" (at 80.01 269.24 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "ECS-250-8-33-AGN-TR 25MHz 8pF crystal" (at 80.01 274.32 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm" (at 80.01 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 80.01 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "ECS Inc." (at 80.01 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "ECS-250-8-33-AGN-TR" (at 80.01 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Specification" "25MHz fundamental, 8pF CL, 40R max ESR, -40C to +85C" (at 80.01 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "LoadCalculation" "12pF each leg with about 2pF pin/PCB stray gives 8pF effective load" (at 80.01 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid fcd78502-f588-5968-a761-0796c814285e))
+  (pin "2" (uuid d9989715-4d0e-5971-a3ec-ea4d853bc1e5))
+  (pin "3" (uuid 9a94f466-cb6a-50d4-ab12-4cb1238498c7))
+  (pin "4" (uuid 1e09675e-c4fa-554e-ac6b-70cf55a3faab))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "Y500")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_XI"
+  (at 76.2 271.78 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 68e5924c-4d71-52ea-8fd6-d84174984b86)
+)
+(label "GND"
+  (at 80.01 276.86 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6f2d952c-abf4-5257-b6b4-b81267fc074a)
+)
+(label "ETH_XO"
+  (at 83.82 271.78 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4feae984-7ec8-5f27-b385-c0ecc2f37c4e)
+)
+(label "GND"
+  (at 80.01 276.86 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid aa4ca005-8328-5b45-ab72-53aa7f6a7c47)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 149.86 271.78 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 47094a14-69e7-5d85-9f52-de01359f2557)
+  (property "Reference" "R500" (at 149.86 269.24 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1M 1% crystal feedback" (at 149.86 274.32 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 149.86 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 149.86 271.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cfbe56b9-eb63-591f-b487-7e366984b6c3))
+  (pin "2" (uuid 53d20dd2-7efd-5aa0-adf7-a1ea8edad652))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "R500")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_XI"
+  (at 149.86 267.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 63a669f1-01d0-5db6-b13e-2107584e466f)
+)
+(label "ETH_XO"
+  (at 149.86 275.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 764b813f-b397-5ca7-87d0-8c680f7d86e1)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 266.7 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 102c72f0-8f27-5d20-8ef6-0080c9adb8bb)
+  (property "Reference" "C515" (at 20.32 264.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "12p C0G 5% crystal load" (at 20.32 269.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 20.32 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid af9829d6-da80-5f09-87d9-71ecab5fa5c2))
+  (pin "2" (uuid ee369eca-9a87-504b-882e-d6d0c3e43f5b))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C515")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_XI"
+  (at 20.32 262.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 20022fff-439a-54f5-b63b-a07dcd677a3d)
+)
+(label "GND"
+  (at 20.32 270.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0f662f82-8e79-5487-ad28-ac2dcf076c28)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 279.4 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid d68a412e-a896-5ff5-af6e-002a8fcc0365)
+  (property "Reference" "C516" (at 20.32 276.86 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "12p C0G 5% crystal load" (at 20.32 281.94 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 20.32 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 3f47ae41-4754-57be-8e21-4b3efa970f08))
+  (pin "2" (uuid ad14b5c2-289b-5263-bd89-bd35648784ce))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C516")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_XO"
+  (at 20.32 275.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8050a5c1-95b9-5e66-8302-46b0d7887c59)
+)
+(label "GND"
+  (at 20.32 283.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5ce919b4-3485-51ce-99cf-c0a4ef32745b)
+)
+(text "== Four 100-ohm MDI pairs, low-capacitance ESD, and integrated-magnetics RJ45 ==" (at 389.89 55.88 0) (effects (font (size 1.27 1.27))) (uuid 2eae6783-d54d-5dcb-bad0-f5c80a108411))
+(symbol
+  (lib_id "Power_Protection:D3V3XA4B10LP")
+  (at 454.66 105.41 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 79dba81f-0c71-56c5-8151-cead45cbdd00)
+  (property "Reference" "U501" (at 454.66 102.87 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "D3V3XA4B10LP-7 four-channel 0.3pF Ethernet ESD" (at 454.66 107.95 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_DFN_QFN:Diodes_UDFN-10_1x2.5mm_P0.5mm" (at 454.66 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 454.66 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Diodes Incorporated" (at 454.66 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "D3V3XA4B10LP-7" (at 454.66 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 6142d471-591f-5127-97a3-d06f0ed92d86))
+  (pin "2" (uuid cfb0ec2d-ce20-5ceb-b973-ba3abf2407d4))
+  (pin "3" (uuid a603f231-8e2d-5403-a933-9462c4581ea9))
+  (pin "4" (uuid 087de691-13b8-5004-a35b-aedc717863bc))
+  (pin "5" (uuid 85e76c74-b36d-5ab6-8bea-edf1285e2e02))
+  (pin "6" (uuid 4765c3e4-d1f3-5d45-9631-e0ede1f70220))
+  (pin "7" (uuid 400b056c-6d25-5259-b3ab-a08b4649ad4e))
+  (pin "8" (uuid 2f280192-ed98-5077-831e-4889fa83ad80))
+  (pin "9" (uuid 69b036e7-ea5e-5441-9f25-fde7d2c8240e))
+  (pin "10" (uuid cb2d648c-b40e-52fc-bdf4-276d59b2714a))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "U501")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_MDI0_P"
+  (at 441.96 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 43b360a0-7460-5867-b941-ddbc521e0a3d)
+)
+(label "ETH_MDI0_N"
+  (at 441.96 107.95 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7f7c575c-f33e-5b70-8c70-bd1eb57e6c6e)
+)
+(label "GND"
+  (at 454.66 118.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 026e0a80-b555-56b3-b0a6-8461ebc832c1)
+)
+(label "ETH_MDI1_P"
+  (at 467.36 102.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bba3e086-611f-55d3-91a3-bd94727579d7)
+)
+(label "ETH_MDI1_N"
+  (at 467.36 107.95 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5cbe1089-d050-5387-936d-de27cf485565)
+)
+(no_connect (at 467.36 113.03) (uuid 2e64dc13-1c65-5e91-ab56-7421a9b95ec7))
+(no_connect (at 467.36 97.79) (uuid f7b5745a-6538-58db-95cb-4d24c7ca37f4))
+(label "GND"
+  (at 454.66 118.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 03f6c737-adcc-5058-8a41-21d5e99ae39f)
+)
+(no_connect (at 441.96 113.03) (uuid 9344ce27-a18b-5622-9586-42d67a7f1cd4))
+(no_connect (at 441.96 97.79) (uuid bb98006e-f1f3-5e8e-b6ac-85a296035bdc))
+(symbol
+  (lib_id "Power_Protection:D3V3XA4B10LP")
+  (at 454.66 185.42 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c1b2c07a-1a33-52f4-9d45-bf1538c5d11d)
+  (property "Reference" "U502" (at 454.66 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "D3V3XA4B10LP-7 four-channel 0.3pF Ethernet ESD" (at 454.66 187.96 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_DFN_QFN:Diodes_UDFN-10_1x2.5mm_P0.5mm" (at 454.66 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 454.66 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Diodes Incorporated" (at 454.66 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "D3V3XA4B10LP-7" (at 454.66 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5525c7b8-8307-5e0a-a9de-7ee6dfddc830))
+  (pin "2" (uuid 69697073-22c1-579d-989b-e0cea732f2b1))
+  (pin "3" (uuid b900dc23-f75a-5598-9c8c-cc8571fe25d9))
+  (pin "4" (uuid 3d630acf-60ad-56b3-bfe2-bfb7b8026e6d))
+  (pin "5" (uuid 5a8d16da-a321-57a0-8b5e-06c8850c3f28))
+  (pin "6" (uuid aeda7622-7736-5ce6-9ea5-03e4fcd960e4))
+  (pin "7" (uuid aa743cc9-a570-5c5f-b41f-c1ed52d0f137))
+  (pin "8" (uuid e0f0efe3-db90-543c-b3fb-b6d7fd903801))
+  (pin "9" (uuid 6a250225-37e4-5194-9d0f-7428527e72d5))
+  (pin "10" (uuid b9e4ccee-a732-51e2-bf59-71667ef24dd2))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "U502")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_MDI2_P"
+  (at 441.96 182.88 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1075787b-c72a-5140-bfc9-bfe939da4876)
+)
+(label "ETH_MDI2_N"
+  (at 441.96 187.96 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0c24060c-8026-5645-b869-3045e3b9986e)
+)
+(label "GND"
+  (at 454.66 198.12 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5946c1c3-9264-5d7f-8d2f-8b44e0d4be67)
+)
+(label "ETH_MDI3_P"
+  (at 467.36 182.88 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4ce1ed63-0c9f-5944-ba0d-0c5ae07b1a9f)
+)
+(label "ETH_MDI3_N"
+  (at 467.36 187.96 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2cdc195d-5332-51b8-8bfa-098c4e4a9d11)
+)
+(no_connect (at 467.36 193.04) (uuid 77d0ab13-7d6f-51ae-bd0f-31389e2a658e))
+(no_connect (at 467.36 177.8) (uuid 0ba1b714-7598-5ee5-ba42-8cd04a968e56))
+(label "GND"
+  (at 454.66 198.12 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 660e223b-0a38-5587-9ac5-0c6b76896491)
+)
+(no_connect (at 441.96 193.04) (uuid 70d9a3b4-15d9-569f-a8e8-f8ae38d15362))
+(no_connect (at 441.96 177.8) (uuid 6fc88852-d8fb-569e-9b1a-2133515adceb))
+(symbol
+  (lib_id "JXD1-1022NL:JXD1-1022NL")
+  (at 635 149.86 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 470bdcff-689e-5a74-b35e-d4553b9a5481)
+  (property "Reference" "J500" (at 635 147.32 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "JXD1-1022NL recessed 1GbE RJ45" (at 635 152.4 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:JXD1-1022NL_MidMount" (at 635 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 635 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Pulse Electronics / Yageo" (at 635 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "JXD1-1022NL" (at 635 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MechanicalDrawing" "Yageo J513.C page 2" (at 635 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "AssemblyGate" "CONFIRM_THR_MIDMOUNT_SUPPORT_AND_SAMPLE_LED_LANDS" (at 635 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cf10c5a6-5745-57ea-a278-dbcd138b30f3))
+  (pin "2" (uuid e879bb8c-d1f2-5e1f-a2d7-641611184afc))
+  (pin "3" (uuid 4aa3e2e9-6bce-5b02-9c47-1c163334be51))
+  (pin "4" (uuid 8042f9c0-8412-56a4-9a39-5e97337a6116))
+  (pin "5" (uuid e74d0e10-9fe6-5d1d-a665-bead128b4429))
+  (pin "6" (uuid ce133979-6cba-5944-81f6-bc97556bae91))
+  (pin "7" (uuid 50c674ce-91ad-5717-a087-ab95fcb175a1))
+  (pin "8" (uuid 709c0a08-6bf2-562d-b83d-706d2a0b86a3))
+  (pin "9" (uuid 7b0340e1-1188-5c64-af08-878f4f43251a))
+  (pin "10" (uuid b332f1f1-2d56-59cf-bb0c-ce8fa257b6ae))
+  (pin "11" (uuid b6a3e699-22bb-52ef-8fa4-a491058c42e6))
+  (pin "12" (uuid e2eab2b6-f419-5cc6-a1e7-035321b1d306))
+  (pin "13" (uuid 8e9754f6-4224-5f91-9120-ef4a05166719))
+  (pin "14" (uuid b99d2749-4f4e-512d-8374-87e2943a7b1d))
+  (pin "15" (uuid 9f8af3cb-7da5-5b08-aa11-2604743e0f36))
+  (pin "16" (uuid 11e2de94-72e3-51b5-a489-67b2d6cf2d00))
+  (pin "SH" (uuid 2b67e04f-467f-536b-8443-817fe850f965))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "J500")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_MDI0_P"
+  (at 622.3 133.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 877abfbe-9e0b-57ce-b41c-a34bc7bc9634)
+)
+(label "ETH_MDI0_N"
+  (at 622.3 135.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8e0740f2-5ee5-501f-97ac-900be9e020c0)
+)
+(label "ETH_CT"
+  (at 647.7 134.62 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 88a8b3f2-5cc9-5e53-8ccd-db78ac0f8a5f)
+)
+(label "ETH_MDI1_P"
+  (at 622.3 139.7 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d833541b-0ebb-54ce-9f26-04def3e33d2f)
+)
+(label "ETH_MDI1_N"
+  (at 622.3 142.24 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a2b27250-0645-5644-a644-b97e2f82a31c)
+)
+(label "ETH_CT"
+  (at 647.7 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 14de2c7b-b2bf-59c1-9adc-b3eae743df9c)
+)
+(label "ETH_MDI2_P"
+  (at 622.3 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 20194f99-cafa-5d00-8ff0-c52b2a91ea2c)
+)
+(label "ETH_MDI2_N"
+  (at 622.3 148.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a8fad7e0-53a6-5bf8-bc03-706c0973a9e2)
+)
+(label "ETH_CT"
+  (at 647.7 147.32 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a1f210d1-4343-5651-8423-79573f8ebfaa)
+)
+(label "ETH_MDI3_P"
+  (at 622.3 152.4 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a5cd29ec-3d9e-5325-b57d-2f6d5aa03a7f)
+)
+(label "ETH_MDI3_N"
+  (at 622.3 154.94 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 57550b83-0845-5013-9f8f-deab9f5228d5)
+)
+(label "ETH_CT"
+  (at 647.7 153.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 39a5110b-8fe9-50e0-9a87-76058163bd2b)
+)
+(label "ETH_LED_ACT_N"
+  (at 647.7 158.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 04eea023-b0f8-5bf5-9f88-01fe6dbf0bf9)
+)
+(label "ETH_LED_ACT_A"
+  (at 647.7 161.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7896f4e5-27a8-517f-bbc7-095cbe3ba559)
+)
+(label "ETH_LED_1000_N"
+  (at 647.7 163.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 96698b31-4fbc-5348-b3cf-ab76191a8f27)
+)
+(label "ETH_LED_1000_A"
+  (at 647.7 166.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 68443075-ac36-574b-8424-8d0dee589ab0)
+)
+(label "ETH_CHASSIS"
+  (at 635 171.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 30002fda-51fd-5789-812e-33e993c9d062)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 519.43 243.84 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 77b70582-e0b2-536e-8eaa-92e97e617825)
+  (property "Reference" "C513" (at 519.43 241.3 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R magnetics center-tap bypass" (at 519.43 246.38 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 519.43 243.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 519.43 243.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c6e8c356-f072-5628-a72e-59751e266bf2))
+  (pin "2" (uuid 79fd0427-99b9-5957-b5e5-e7be9020194d))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C513")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_CT"
+  (at 519.43 240.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 94ba6597-1ee5-5a19-9aeb-28ad7891db50)
+)
+(label "GND"
+  (at 519.43 247.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c3637568-3b43-5bfd-8e4b-ed17247236ac)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 570.23 256.54 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2d482442-bd4d-5c0b-8e07-7ddd0c14f669)
+  (property "Reference" "R504" (at 570.23 254 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "470R 1% yellow activity LED" (at 570.23 259.08 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 570.23 256.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 570.23 256.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c1b81b15-2d88-55b5-be76-06bef005c330))
+  (pin "2" (uuid ed919083-525b-5541-aa0a-e777ec21a2b2))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "R504")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 570.23 252.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f588a2bf-a10b-515b-9db5-460a3e214c59)
+)
+(label "ETH_LED_ACT_A"
+  (at 570.23 260.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f3422347-55ac-58fe-a5be-73be355d7fc1)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 570.23 269.24 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c1b6c3f2-eb7c-5bb8-bfeb-57ec6dd86a4b)
+  (property "Reference" "R505" (at 570.23 266.7 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "470R 1% green 1000M indicator LED" (at 570.23 271.78 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 570.23 269.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 570.23 269.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 872939ed-7ce8-5f40-9d2b-2372630e14a4))
+  (pin "2" (uuid a38116c7-1fb8-5f38-9cb1-cb975e1b94d0))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "R505")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 570.23 265.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fd3bd366-4a2c-500a-b746-9e66cb317dd9)
+)
+(label "ETH_LED_1000_A"
+  (at 570.23 273.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 07e3636d-1cdc-5130-a6fa-6110c3ae7bbc)
+)
+(text "== Connector shield / aluminum chassis interface ==" (at 389.89 302.26 0) (effects (font (size 1.27 1.27))) (uuid b5b37e32-3153-5f2b-a333-333b9fcd4109))
+(symbol
+  (lib_id "Device:C")
+  (at 389.89 322.58 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b4933dda-08e1-5062-aebf-adc460c04db1)
+  (property "Reference" "C514" (at 389.89 320.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1n 2kV X7R 10% shield-to-digital return" (at 389.89 325.12 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_1812_4532Metric" (at 389.89 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "KEMET" (at 389.89 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "C1812C102KGRACTU" (at 389.89 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Specification" "1000pF 10% 2000VDC X7R 1812" (at 389.89 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReleaseGate" "VERIFY_CHASSIS_BONDING_AND_ESD_BEHAVIOR" (at 389.89 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 0056164e-70aa-55e9-a2b9-c74b348cdb4c))
+  (pin "2" (uuid 5769040b-737e-54a6-904a-c82c6a75e266))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "C514")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_CHASSIS"
+  (at 389.89 318.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6f77c806-c850-5838-95d5-474f03007e73)
+)
+(label "GND"
+  (at 389.89 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1caa27d1-dbce-5834-8125-549e789081fe)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 519.43 322.58 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom no)
+  (on_board yes)
+  (dnp yes)
+  (uuid cac5436b-f367-5744-8ccb-7a9a48392510)
+  (property "Reference" "R506" (at 519.43 320.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "DNP 0R direct shield-to-GND option" (at 519.43 325.12 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_1206_3216Metric" (at 519.43 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 519.43 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 2d9b6cef-1667-5a29-a5b0-33c02d01be9c))
+  (pin "2" (uuid d5918fac-0cde-5f94-b6e1-3643069acde1))
+  (instances
+    (project "ducktop2"
+      (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+        (reference "R506")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "ETH_CHASSIS"
+  (at 519.43 318.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0ad43c61-68ed-5fc9-809d-0895757c1d04)
+)
+(label "GND"
+  (at 519.43 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid acdca870-deb1-5f1a-aa78-caf821bb5078)
+)
+(text "LAYOUT: PCIe Gen3 pairs are 85-ohm differential; for this on-board PCIe device, place C500-C503 beside U500 per the Mu guide and route over an uninterrupted reference plane." (at 20.32 350.52 0) (effects (font (size 1.27 1.27))) (uuid c154adcd-069e-5bc6-9831-864822f9aba5))
+(text "LAYOUT: MDI pairs are 100-ohm differential. Put U501/U502 immediately behind J500, avoid stubs, and do not route digital signals under the magnetics." (at 20.32 358.14 0) (effects (font (size 1.27 1.27))) (uuid 95200262-aa7b-5c4e-86f0-c2bcd6dd2898))
+(text "MECHANICAL: manufacturer body 17.58 x 26.06 x 11.30mm; PCB/panel plane is 2.03mm behind the front face; panel opening 17.98 x 9.69mm." (at 20.32 365.76 0) (effects (font (size 1.27 1.27))) (uuid 19904441-e30a-581c-89f2-823fac557462))
+(text "RELEASE HOLD: verify all four unnumbered shell stakes are common and confirm LED copper lands on one physical JXD1 sample before ordering the motherboard." (at 20.32 373.38 0) (effects (font (size 1.27 1.27))) (uuid caf6b767-5d36-5464-a0bd-830f92d9b97d))
+(text "ASSEMBLY HOLD: ask the assembler to confirm through-hole mid-mount RJ45 support and whether J500 is manual/post-reflow insertion." (at 20.32 381 0) (effects (font (size 1.27 1.27))) (uuid c326dcd3-7520-550b-840a-f0934068bef5))
+(text "LED HOLD: RTL8111H pin 26 is the default 1000M indication, not a generic link LED. Verify both jack LEDs at 10/100/1000 on hardware." (at 20.32 388.62 0) (effects (font (size 1.27 1.27))) (uuid f6081197-b33f-56fc-909e-649e3e6e44e8))
+(sheet_instances
+  (path "/cad276a5-1875-508a-a276-e7a25b24fbd3"
+    (page "16")
+  )
+)
+  (embedded_fonts no)
+)

@@ -1,0 +1,35 @@
+wallpaper = Image("assets/wallpaper.png");
+wallpaper_sprite = Sprite(wallpaper);
+wallpaper_sprite.SetZ(-100);
+
+logo = Image.Text("DUCKTOP2", 1, 1, 1);
+logo_sprite = Sprite(logo);
+logo_sprite.SetZ(100);
+
+progress_bg = Image.Rectangle(360, 3, 156 / 255, 109 / 255, 0, 0.55);
+progress_fg = Image.Rectangle(1, 3, 1, 176 / 255, 0, 0.95);
+progress_bg_sprite = Sprite(progress_bg);
+progress_fg_sprite = Sprite(progress_fg);
+progress_bg_sprite.SetZ(101);
+progress_fg_sprite.SetZ(102);
+
+fun refresh_callback()
+{
+  screen_w = Window.GetWidth();
+  screen_h = Window.GetHeight();
+
+  wallpaper_sprite.SetScale(screen_w / wallpaper.GetWidth(), screen_h / wallpaper.GetHeight());
+  logo_sprite.SetX(72);
+  logo_sprite.SetY(screen_h - 104);
+
+  progress_bg_sprite.SetX(72);
+  progress_bg_sprite.SetY(screen_h - 64);
+
+  progress = Plymouth.GetBootProgress();
+  progress_fg = Image.Rectangle(Math.Int(360 * progress), 3, 1, 176 / 255, 0, 0.95);
+  progress_fg_sprite.SetImage(progress_fg);
+  progress_fg_sprite.SetX(72);
+  progress_fg_sprite.SetY(screen_h - 64);
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);

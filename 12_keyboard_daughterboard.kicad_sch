@@ -132,223 +132,7 @@
       )
     )
   )
-(symbol "Connector_Generic:Conn_01x04"
-		(pin_names
-			(offset 1.016)
-			(hide yes)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "J"
-			(at 0 5.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x04"
-			(at 0 -7.62 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "connector"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "Connector*:*_1x??_*"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(symbol "Conn_01x04_1_1"
-			(rectangle
-				(start -1.27 3.81)
-				(end 1.27 -6.35)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type background)
-				)
-			)
-			(rectangle
-				(start -1.27 2.667)
-				(end 0 2.413)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 0.127)
-				(end 0 -0.127)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 -2.413)
-				(end 0 -2.667)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 -4.953)
-				(end 0 -5.207)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(pin passive line
-				(at -5.08 2.54 0)
-				(length 3.81)
-				(name "Pin_1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 0 0)
-				(length 3.81)
-				(name "Pin_2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -2.54 0)
-				(length 3.81)
-				(name "Pin_3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -5.08 0)
-				(length 3.81)
-				(name "Pin_4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
-(symbol "Connector_Generic:Conn_01x30"
+(symbol "Conn_01x30_FFC_MP:Conn_01x30_FFC_MP"
 		(pin_names
 			(offset 1.016)
 			(hide yes)
@@ -368,7 +152,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_01x30"
+		(property "Value" "Conn_01x30_FFC_MP"
 			(at 0 -40.64 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -433,7 +217,7 @@
 				)
 			)
 		)
-		(symbol "Conn_01x30_1_1"
+		(symbol "Conn_01x30_FFC_MP_1_1"
 			(rectangle
 				(start -1.27 36.83)
 				(end 1.27 -39.37)
@@ -1315,6 +1099,240 @@
 					)
 				)
 			)
+			(pin passive line
+				(at 5.08 -40.64 180)
+				(length 2.54)
+				(name "MP"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "MP"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Connector_Generic:Conn_01x04"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x04"
+			(at 0 -7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x04_1_1"
+			(rectangle
+				(start -1.27 3.81)
+				(end 1.27 -6.35)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 2.667)
+				(end 0 2.413)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -4.953)
+				(end 0 -5.207)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 2.54 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -5.08 0)
+				(length 3.81)
+				(name "Pin_4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 		)
 		(embedded_fonts no)
 	)
@@ -1779,7 +1797,7 @@
   )
 (text "== Ducktop2 MX ULP keyboard daughterboard ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 379e8de9-2761-5681-93e7-0c81483e60cc))
 (text "65-key compact laptop-style layout, Cherry MX Ultra Low Profile tactile switches, one diode per key." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 10f001d2-6c56-52f4-ab95-20d362e8e5b4))
-(text "Target physical envelope is about 300 x 80 mm using roughly 18.0-18.5 mm horizontal pitch and 16 mm row pitch." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 33f32eaf-6758-50ac-a69e-94fa8ef3a2fa))
+(text "Manufactured Rev A envelope is 273.5 x 80.0 mm; this schematic records its released population and connector contract." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 33f32eaf-6758-50ac-a69e-94fa8ef3a2fa))
 (text "This sheet is the keyboard PCB itself: switches, matrix diodes, EC FFC, and bring-up notes." (at 20.32 35.56 0) (effects (font (size 1.27 1.27))) (uuid e5cbfb5a-9b1f-576f-8ad1-dee956ba20a3))
 (text "== 5x14 switch matrix, diode direction locked for EC firmware ==" (at 20.32 55.88 0) (effects (font (size 1.27 1.27))) (uuid 85f0066d-7001-5086-a996-e88248a631a1))
 (text "Scan assumption: EC drives one column low at a time and reads rows with pull-ups. Each key path is ROW -> diode anode -> diode cathode -> switch -> COL." (at 20.32 63.5 0) (effects (font (size 1.27 1.27))) (uuid 5b8b2ebd-d2c1-5599-8580-eb3489fcc29f))
@@ -6335,7 +6353,7 @@
 )
 (text "== J320 keyboard FFC / board-to-board connector ==" (at 20.32 250.19 0) (effects (font (size 1.27 1.27))) (uuid b22138a8-206f-59a9-9849-1e756074177e))
 (symbol
-  (lib_id "Connector_Generic:Conn_01x30")
+  (lib_id "Conn_01x30_FFC_MP:Conn_01x30_FFC_MP")
   (at 165.1 340.36 0)
   (unit 1)
   (exclude_from_sim no)
@@ -6347,6 +6365,7 @@
   (property "Value" "Keyboard FFC: MX ULP 5x14 matrix on 30-pin EC contract" (at 165.1 342.9 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal" (at 165.1 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 165.1 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReleasedRevA" "Populated; MP hold-down pads are mechanical and netless" (at 165.1 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 6df4efe6-d72c-5a90-99c2-7a9e1541b6f0))
   (pin "2" (uuid ec119f55-3307-5037-b966-a56edb5b325f))
   (pin "3" (uuid de87092e-4f98-580a-81a6-83926d1ef7d3))
@@ -6377,6 +6396,7 @@
   (pin "28" (uuid 9ba9b547-2ce4-5b59-85e1-8fb69a3a9b13))
   (pin "29" (uuid a19f7b0b-a7c7-561a-8047-d83ae6cb37e3))
   (pin "30" (uuid 2139f0a7-af1f-582b-9230-0ff1059f2db4))
+  (pin "MP" (uuid 07b9875e-9461-5e7a-a606-23e7f942e060))
   (instances
     (project "ducktop2"
       (path "/e5f63080-4501-5e30-a9d3-cbf1e4a2a151"
@@ -6389,180 +6409,180 @@
 (label "GND"
   (at 160.02 304.8 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 07b9875e-9461-5e7a-a606-23e7f942e060)
+  (uuid 56d4cc15-8ed1-5f2a-a348-6839bde1d45c)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
   (at 160.02 307.34 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 56d4cc15-8ed1-5f2a-a348-6839bde1d45c)
+  (uuid 34782c82-f3ea-5730-8803-8e1376df681a)
 )
 (hierarchical_label "I2C_SCL"
   (shape bidirectional)
   (at 160.02 309.88 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 34782c82-f3ea-5730-8803-8e1376df681a)
+  (uuid 02959149-b796-5cae-9e95-aebe123e2994)
 )
 (hierarchical_label "I2C_SDA"
   (shape bidirectional)
   (at 160.02 312.42 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 02959149-b796-5cae-9e95-aebe123e2994)
+  (uuid 162431f6-e3a8-5973-9fe4-ab290764eae1)
 )
 (hierarchical_label "KB_ROW0"
   (shape bidirectional)
   (at 160.02 314.96 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 162431f6-e3a8-5973-9fe4-ab290764eae1)
+  (uuid feff2d66-4ea7-5193-9cd5-daeb68cc3191)
 )
 (hierarchical_label "KB_ROW1"
   (shape bidirectional)
   (at 160.02 317.5 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid feff2d66-4ea7-5193-9cd5-daeb68cc3191)
+  (uuid 3f4d4c9a-816a-54bc-9ca3-0d059814d2ee)
 )
 (hierarchical_label "KB_ROW2"
   (shape bidirectional)
   (at 160.02 320.04 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3f4d4c9a-816a-54bc-9ca3-0d059814d2ee)
+  (uuid e429e35f-ddbe-5210-8915-f79742ef606d)
 )
 (hierarchical_label "KB_ROW3"
   (shape bidirectional)
   (at 160.02 322.58 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e429e35f-ddbe-5210-8915-f79742ef606d)
+  (uuid 99f40d16-a4b3-5f4e-8b92-470d8fb9bc7d)
 )
 (hierarchical_label "KB_ROW4"
   (shape bidirectional)
   (at 160.02 325.12 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 99f40d16-a4b3-5f4e-8b92-470d8fb9bc7d)
+  (uuid ca6f983f-c6a2-5118-8f54-ac5fc5a10030)
 )
 (hierarchical_label "KB_ROW5"
   (shape bidirectional)
   (at 160.02 327.66 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ca6f983f-c6a2-5118-8f54-ac5fc5a10030)
+  (uuid 880f09eb-2f95-5b8e-a759-9e99b2758545)
 )
 (hierarchical_label "KB_ROW6"
   (shape bidirectional)
   (at 160.02 330.2 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 880f09eb-2f95-5b8e-a759-9e99b2758545)
+  (uuid 134ac238-f295-5d97-afcd-6b30b641ab0e)
 )
 (hierarchical_label "KB_ROW7"
   (shape bidirectional)
   (at 160.02 332.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 134ac238-f295-5d97-afcd-6b30b641ab0e)
+  (uuid 7abf6175-eb44-5581-937b-f40dfe6c50e3)
 )
 (hierarchical_label "KB_COL0"
   (shape bidirectional)
   (at 160.02 335.28 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7abf6175-eb44-5581-937b-f40dfe6c50e3)
+  (uuid c40b43d4-503c-5a12-a37e-4edf0326498f)
 )
 (hierarchical_label "KB_COL1"
   (shape bidirectional)
   (at 160.02 337.82 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c40b43d4-503c-5a12-a37e-4edf0326498f)
+  (uuid 32ddd1f4-2790-58a9-9e8d-b4da4a9601ec)
 )
 (hierarchical_label "KB_COL2"
   (shape bidirectional)
   (at 160.02 340.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 32ddd1f4-2790-58a9-9e8d-b4da4a9601ec)
+  (uuid 171fe021-e247-5110-8eba-4d596ed75f8a)
 )
 (hierarchical_label "KB_COL3"
   (shape bidirectional)
   (at 160.02 342.9 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 171fe021-e247-5110-8eba-4d596ed75f8a)
+  (uuid 60ff57a9-f6b1-51c2-b92d-a84e4d303db4)
 )
 (hierarchical_label "KB_COL4"
   (shape bidirectional)
   (at 160.02 345.44 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 60ff57a9-f6b1-51c2-b92d-a84e4d303db4)
+  (uuid 1331b9b0-3deb-53d1-814f-96a3285540f7)
 )
 (hierarchical_label "KB_COL5"
   (shape bidirectional)
   (at 160.02 347.98 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1331b9b0-3deb-53d1-814f-96a3285540f7)
+  (uuid 14ea3b4f-4107-5529-a364-49785b53f1c9)
 )
 (hierarchical_label "KB_COL6"
   (shape bidirectional)
   (at 160.02 350.52 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 14ea3b4f-4107-5529-a364-49785b53f1c9)
+  (uuid 285e8896-d4ce-595d-9b30-5956cb6b30dd)
 )
 (hierarchical_label "KB_COL7"
   (shape bidirectional)
   (at 160.02 353.06 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 285e8896-d4ce-595d-9b30-5956cb6b30dd)
+  (uuid d0a30f2d-9e8f-5eb4-bfd6-6ad0a05545fc)
 )
 (hierarchical_label "KB_COL8"
   (shape bidirectional)
   (at 160.02 355.6 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d0a30f2d-9e8f-5eb4-bfd6-6ad0a05545fc)
+  (uuid f41992d0-428d-51bc-a1af-2bdc3d32eac4)
 )
 (hierarchical_label "KB_COL9"
   (shape bidirectional)
   (at 160.02 358.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f41992d0-428d-51bc-a1af-2bdc3d32eac4)
+  (uuid ad01c119-0b0e-5584-a521-06b3454db17d)
 )
 (hierarchical_label "KB_COL10"
   (shape bidirectional)
   (at 160.02 360.68 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ad01c119-0b0e-5584-a521-06b3454db17d)
+  (uuid 4ae3612c-4b8f-50ed-ae2b-ff3755d27f42)
 )
 (hierarchical_label "KB_COL11"
   (shape bidirectional)
   (at 160.02 363.22 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4ae3612c-4b8f-50ed-ae2b-ff3755d27f42)
+  (uuid ac1a5e77-db30-5a5a-b74e-5effa36ba308)
 )
 (hierarchical_label "KB_COL12"
   (shape bidirectional)
   (at 160.02 365.76 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ac1a5e77-db30-5a5a-b74e-5effa36ba308)
+  (uuid 7f734bf6-7503-5458-9b9d-45422a6efa5c)
 )
 (hierarchical_label "KB_COL13"
   (shape bidirectional)
   (at 160.02 368.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7f734bf6-7503-5458-9b9d-45422a6efa5c)
+  (uuid 7fcb19f7-166b-526e-aab3-a8b764f4702f)
 )
 (hierarchical_label "KB_COL14"
   (shape bidirectional)
   (at 160.02 370.84 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7fcb19f7-166b-526e-aab3-a8b764f4702f)
+  (uuid a971334a-ed50-503e-b25d-7d74c0ca5b24)
 )
 (hierarchical_label "KB_COL15"
   (shape bidirectional)
   (at 160.02 373.38 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a971334a-ed50-503e-b25d-7d74c0ca5b24)
+  (uuid 0f3f663d-f385-508f-962b-89e977268b5b)
 )
 (hierarchical_label "SYS_5V"
   (shape bidirectional)
   (at 160.02 375.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0f3f663d-f385-508f-962b-89e977268b5b)
+  (uuid 2d1a2fed-f9e3-5625-a59b-cf3808589b7c)
 )
 (label "GND"
   (at 160.02 378.46 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2d1a2fed-f9e3-5625-a59b-cf3808589b7c)
+  (uuid 3e2f3c33-0a0c-5d90-aa73-5c22ae903845)
 )
 (symbol
   (lib_id "Device:C")
@@ -6570,15 +6590,16 @@
   (unit 1)
   (exclude_from_sim no)
   (in_bom no)
-  (on_board yes)
+  (on_board no)
   (dnp yes)
-  (uuid 3e2f3c33-0a0c-5d90-aa73-5c22ae903845)
+  (uuid 6ae7571b-a860-5e99-b91b-1d393177c602)
   (property "Reference" "C320" (at 350.52 274.32 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP 100n keyboard 3V3 reserve" (at 350.52 279.4 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 350.52 276.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 350.52 276.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6ae7571b-a860-5e99-b91b-1d393177c602))
-  (pin "2" (uuid a8cae4db-815c-5fd2-9e2f-0d4c02e28230))
+  (property "ReleasedRevA" "Not fitted; footprint omitted from manufactured PCB" (at 350.52 276.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a8cae4db-815c-5fd2-9e2f-0d4c02e28230))
+  (pin "2" (uuid caed87d7-c1e7-549d-a027-e4178bf1ac57))
   (instances
     (project "ducktop2"
       (path "/e5f63080-4501-5e30-a9d3-cbf1e4a2a151"
@@ -6592,12 +6613,12 @@
   (shape bidirectional)
   (at 350.52 273.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid caed87d7-c1e7-549d-a027-e4178bf1ac57)
+  (uuid 1e7ec369-058b-578c-be23-abd0e3a88abb)
 )
 (label "GND"
   (at 350.52 280.67 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1e7ec369-058b-578c-be23-abd0e3a88abb)
+  (uuid ec5e9a0f-cecd-5f88-bb0c-fa1fecbed51a)
 )
 (symbol
   (lib_id "Device:C")
@@ -6605,15 +6626,16 @@
   (unit 1)
   (exclude_from_sim no)
   (in_bom no)
-  (on_board yes)
+  (on_board no)
   (dnp yes)
-  (uuid ec5e9a0f-cecd-5f88-bb0c-fa1fecbed51a)
+  (uuid bad97b11-ddcc-5aaf-9658-441d048a74c1)
   (property "Reference" "C321" (at 350.52 289.56 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP 10u optional 5V/backlight" (at 350.52 294.64 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 350.52 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 350.52 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid bad97b11-ddcc-5aaf-9658-441d048a74c1))
-  (pin "2" (uuid aea09fb6-3f6c-5f23-9f7a-37c4c5565683))
+  (property "ReleasedRevA" "Not fitted; footprint omitted from manufactured PCB" (at 350.52 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid aea09fb6-3f6c-5f23-9f7a-37c4c5565683))
+  (pin "2" (uuid 14b4259c-c09b-578e-b137-25f51977fa29))
   (instances
     (project "ducktop2"
       (path "/e5f63080-4501-5e30-a9d3-cbf1e4a2a151"
@@ -6627,12 +6649,12 @@
   (shape bidirectional)
   (at 350.52 288.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 14b4259c-c09b-578e-b137-25f51977fa29)
+  (uuid 8d16688d-b5ec-52fd-a924-d5602c9d976a)
 )
 (label "GND"
   (at 350.52 295.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8d16688d-b5ec-52fd-a924-d5602c9d976a)
+  (uuid d6327969-20e7-59cc-8608-87a633a19c9a)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x04")
@@ -6640,17 +6662,18 @@
   (unit 1)
   (exclude_from_sim no)
   (in_bom no)
-  (on_board yes)
+  (on_board no)
   (dnp yes)
-  (uuid d6327969-20e7-59cc-8608-87a633a19c9a)
+  (uuid 44679dcb-f93a-56cc-8276-738ee08e551f)
   (property "Reference" "J321" (at 350.52 337.82 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP keyboard bring-up/debug" (at 350.52 342.9 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" (at 350.52 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 350.52 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 44679dcb-f93a-56cc-8276-738ee08e551f))
-  (pin "2" (uuid 5cd5fd51-00d0-5341-9db3-c2e8680ee90e))
-  (pin "3" (uuid d81a8a90-c085-5073-8ea8-c4edd51808f3))
-  (pin "4" (uuid b2edaf89-7b18-5651-8691-fdd84c1f9d45))
+  (property "ReleasedRevA" "Not fitted; footprint omitted from manufactured PCB" (at 350.52 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5cd5fd51-00d0-5341-9db3-c2e8680ee90e))
+  (pin "2" (uuid d81a8a90-c085-5073-8ea8-c4edd51808f3))
+  (pin "3" (uuid b2edaf89-7b18-5651-8691-fdd84c1f9d45))
+  (pin "4" (uuid 774461ba-5780-50fc-ab7f-b041438b1f34))
   (instances
     (project "ducktop2"
       (path "/e5f63080-4501-5e30-a9d3-cbf1e4a2a151"
@@ -6663,25 +6686,25 @@
 (label "GND"
   (at 345.44 337.82 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 774461ba-5780-50fc-ab7f-b041438b1f34)
+  (uuid d77e2a93-0940-536d-ae8f-f54b1db638db)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
   (at 345.44 340.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d77e2a93-0940-536d-ae8f-f54b1db638db)
+  (uuid f6ac93af-75c0-5cf8-a7ef-28d0333148c2)
 )
 (hierarchical_label "I2C_SCL"
   (shape bidirectional)
   (at 345.44 342.9 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f6ac93af-75c0-5cf8-a7ef-28d0333148c2)
+  (uuid 66dd1719-b231-523c-a47f-49923de201d4)
 )
 (hierarchical_label "I2C_SDA"
   (shape bidirectional)
   (at 345.44 345.44 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 66dd1719-b231-523c-a47f-49923de201d4)
+  (uuid b71f67cb-6f20-599d-b9d5-3d92f6c18a7e)
 )
 (symbol
   (lib_id "power:GND")
@@ -6691,12 +6714,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid b71f67cb-6f20-599d-b9d5-3d92f6c18a7e)
+  (uuid 193555e5-8fa6-581f-b1e9-59164f92a2d0)
   (property "Reference" "#PWR321" (at 420.37 386.08 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 420.37 391.16 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 420.37 388.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 420.37 388.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 193555e5-8fa6-581f-b1e9-59164f92a2d0))
+  (pin "1" (uuid bf998a04-0c35-5691-a0bb-2eed4176aec1))
   (instances
     (project "ducktop2"
       (path "/e5f63080-4501-5e30-a9d3-cbf1e4a2a151"
@@ -6709,18 +6732,18 @@
 (label "GND"
   (at 420.37 388.62 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bf998a04-0c35-5691-a0bb-2eed4176aec1)
+  (uuid 91d58ffd-f8d7-53d8-9212-404a5641b14b)
 )
-(text "NOTES:" (at 20.32 421.64 0) (effects (font (size 1.27 1.27))) (uuid 91d58ffd-f8d7-53d8-9212-404a5641b14b))
-(text "Use MX6C-T3NB Cherry MX ULP tactile switches. The project footprint has unnumbered mechanical solder tabs; only switch pins 1/2 enter the matrix." (at 20.32 429.26 0) (effects (font (size 1.27 1.27))) (uuid 7701a6cc-c1bc-5a20-8f30-9f39a796f73b))
-(text "D320-D384 are 1N4148W/SOD-323 class signal diodes. Diode pin 2 is anode on KB_ROWn; pin 1 is cathode at the per-key switch node." (at 20.32 436.88 0) (effects (font (size 1.27 1.27))) (uuid 5e97e690-d320-5d0b-bccb-65050110eada))
-(text "J320 keeps the current 30-pin motherboard connector. KB_ROW5..7 and KB_COL14..15 are unused on this 65-key layout and may become spare EC GPIO." (at 20.32 444.5 0) (effects (font (size 1.27 1.27))) (uuid 847e62bf-bdfc-527e-8d8c-34ad1e39a7c0))
-(text "MX ULP hotswap is not planned: use stencil + reflow/hot plate for production and validate rework on a small coupon first." (at 20.32 452.12 0) (effects (font (size 1.27 1.27))) (uuid 6ee4f2ed-1e20-5595-99d4-0241f5840ab8))
-(text "Use split space in rev A. Treat Backspace, Enter, left Shift, and both Space keys as mechanical stabilizer/keycap-risk items before full board release." (at 20.32 459.74 0) (effects (font (size 1.27 1.27))) (uuid ab57e815-5b0d-54ed-b615-ccba7eec8443))
-(text "Legends/keycaps are mechanical deliverables: prototype blank resin/MJF caps and clip coupons before final legends or stabilizer bars." (at 20.32 467.36 0) (effects (font (size 1.27 1.27))) (uuid ee0704da-42cb-5b88-814a-4282f624b5f2))
+(text "NOTES:" (at 20.32 421.64 0) (effects (font (size 1.27 1.27))) (uuid 7701a6cc-c1bc-5a20-8f30-9f39a796f73b))
+(text "Use MX6C-T3NB Cherry MX ULP tactile switches. The project footprint has unnumbered mechanical solder tabs; only switch pins 1/2 enter the matrix." (at 20.32 429.26 0) (effects (font (size 1.27 1.27))) (uuid 5e97e690-d320-5d0b-bccb-65050110eada))
+(text "D320-D384 are 1N4148W/SOD-323 class signal diodes. Diode pin 2 is anode on KB_ROWn; pin 1 is cathode at the per-key switch node." (at 20.32 436.88 0) (effects (font (size 1.27 1.27))) (uuid 847e62bf-bdfc-527e-8d8c-34ad1e39a7c0))
+(text "J320 mirrors mainboard J310. Its MP hold-down pads are intentionally netless on manufactured Rev A; C320/C321/J321 are DNP and excluded from that PCB." (at 20.32 444.5 0) (effects (font (size 1.27 1.27))) (uuid 6ee4f2ed-1e20-5595-99d4-0241f5840ab8))
+(text "MX ULP hotswap is not planned: use stencil + reflow/hot plate for production and validate rework on a small coupon first." (at 20.32 452.12 0) (effects (font (size 1.27 1.27))) (uuid ab57e815-5b0d-54ed-b615-ccba7eec8443))
+(text "Use split space in rev A. Treat Backspace, Enter, left Shift, and both Space keys as mechanical stabilizer/keycap-risk items before full board release." (at 20.32 459.74 0) (effects (font (size 1.27 1.27))) (uuid ee0704da-42cb-5b88-814a-4282f624b5f2))
+(text "Legends/keycaps are mechanical deliverables: prototype blank resin/MJF caps and clip coupons before final legends or stabilizer bars." (at 20.32 467.36 0) (effects (font (size 1.27 1.27))) (uuid 2824b5c8-e4ac-57b8-bb80-3046602a97f0))
 (sheet_instances
   (path "/e5f63080-4501-5e30-a9d3-cbf1e4a2a151"
-    (page "13")
+    (page "K1")
   )
 )
   (embedded_fonts no)

@@ -1377,6 +1377,172 @@
 		)
 		(embedded_fonts no)
 	)
+(symbol "Device:D_Schottky"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "D"
+			(at 0 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "D_Schottky"
+			(at 0 -2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Schottky diode"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "diode Schottky"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "D_Schottky_0_1"
+			(polyline
+				(pts
+					(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.27 0) (xy -1.27 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "D_Schottky_1_1"
+			(pin passive line
+				(at -3.81 0 0)
+				(length 2.54)
+				(name "K"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 3.81 0 180)
+				(length 2.54)
+				(name "A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 (symbol "Device:R"
 		(pin_numbers
 			(hide yes)
@@ -1517,6 +1683,456 @@
 		)
 		(embedded_fonts no)
 	)
+(symbol "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "Q"
+			(at 5.08 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Q_NMOS_SOT23_GSD"
+			(at 5.08 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "N-MOSFET, numbered for common SOT-23 1=G 2=S 3=D pinout"
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Q_NMOS_SOT23_GSD_0_1"
+			(polyline
+				(pts
+					(xy -0.508 1.905) (xy -0.508 -1.905)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.254 1.27) (xy 2.54 2.54)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.254 -1.27) (xy 2.54 -2.54)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "Q_NMOS_SOT23_GSD_1_1"
+			(pin input line
+				(at -5.08 0 0)
+				(length 4.572)
+				(name "G"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 -5.08 90)
+				(length 2.54)
+				(name "S"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 5.08 270)
+				(length 2.54)
+				(name "D"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+(symbol "Transistor_FET:Q_PMOS_GSD"
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "Q"
+			(at 5.08 1.905 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Q_PMOS_GSD"
+			(at 5.08 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 5.08 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "P-MOSFET transistor, gate/source/drain"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "transistor PMOS P-MOS P-MOSFET"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Q_PMOS_GSD_0_1"
+			(polyline
+				(pts
+					(xy 0.254 1.905) (xy 0.254 -1.905)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.254 0) (xy -2.54 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.762 2.286) (xy 0.762 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.762 1.778) (xy 3.302 1.778) (xy 3.302 -1.778) (xy 0.762 -1.778)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.762 0.508) (xy 0.762 -0.508)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.762 -1.27) (xy 0.762 -2.286)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 1.651 0)
+				(radius 2.794)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.286 0) (xy 1.27 0.381) (xy 1.27 -0.381) (xy 2.286 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.54 2.54) (xy 2.54 1.778)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 2.54 1.778)
+				(radius 0.254)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(circle
+				(center 2.54 -1.778)
+				(radius 0.254)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.921 -0.381) (xy 3.683 -0.381)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.302 -0.381) (xy 2.921 0.254) (xy 3.683 0.254) (xy 3.302 -0.381)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "Q_PMOS_GSD_1_1"
+			(pin input line
+				(at -5.08 0 0)
+				(length 2.54)
+				(name "G"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 -5.08 90)
+				(length 2.54)
+				(name "S"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 5.08 270)
+				(length 2.54)
+				(name "D"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 (symbol "power:GND"
 		(power global)
 		(pin_numbers
@@ -1632,11 +2248,126 @@
 		)
 		(embedded_fonts no)
 	)
+(symbol "power:PWR_FLAG"
+		(power global)
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#FLG"
+			(at 0 1.905 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "flag power"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "PWR_FLAG_0_0"
+			(pin power_out line
+				(at 0 0 90)
+				(length 0)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "PWR_FLAG_0_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
   )
 (text "== USB radio audio codec for DRA818 APRS/voice ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 7c8e4d2a-3bf3-59f6-9aad-ff9e102cf165))
-(text "PCM2902 appears to the host as a USB audio device on Mu USB2_P5." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 876524b5-a83d-5f51-b3ca-c1231a9afc79))
-(text "VHF/UHF receive feed stereo inputs; left DAC output feeds both radio mic inputs through isolation resistors." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid d1f4aced-cfdb-561f-804f-49547c0a35c9))
-(text "== U330 PCM2902 USB audio codec ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 60e0e0d4-314f-53b5-9449-83220afa75ee))
+(text "PCM2902CDBR is downstream port 1 of the internal system-audio hub on Mu USB2_P5." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 876524b5-a83d-5f51-b3ca-c1231a9afc79))
+(text "VHF/UHF use independent stereo ADC/DAC channels; each TX path is attenuated and fail-muted by its PTT_N signal." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid d1f4aced-cfdb-561f-804f-49547c0a35c9))
+(text "== U330 PCM2902CDBR USB audio codec; TI Figure 39 core network ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 60e0e0d4-314f-53b5-9449-83220afa75ee))
 (symbol
   (lib_id "Audio:PCM2902")
   (at 190.5 144.78 0)
@@ -1647,9 +2378,12 @@
   (dnp no)
   (uuid a871db2c-9760-5628-a69c-4bbc6802d53f)
   (property "Reference" "U330" (at 190.5 142.24 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "PCM2902 USB audio codec" (at 190.5 147.32 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PCM2902CDBR USB audio codec" (at 190.5 147.32 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:SSOP-28_5.3x10.2mm_P0.65mm" (at 190.5 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 190.5 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 190.5 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "PCM2902CDBR" (at 190.5 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReferenceCircuit" "PCM2902C Figure 39 bus-powered configuration" (at 190.5 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 2f6bed1c-a553-5803-abee-54ceffc62ec9))
   (pin "2" (uuid bf6daa66-17dd-5715-9302-e6d993838b26))
   (pin "3" (uuid d9541797-45a7-5552-90b4-b8e16586572d))
@@ -1697,8 +2431,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 7d1d69d8-db20-5627-8d75-0804d7758e4f)
 )
-(hierarchical_label "SYS_5V"
-  (shape bidirectional)
+(label "CODEC_VBUS"
   (at 190.5 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid be70c364-feaf-5047-9602-338684fa15ef)
@@ -1708,32 +2441,20 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 73efaf8c-a6b2-5882-a22b-4c67369abbb1)
 )
-(label "GND"
-  (at 172.72 149.86 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e7e60c6d-b215-5e21-9cf9-f7614fc92e26)
-)
-(label "GND"
-  (at 172.72 152.4 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9c5e473a-cb2f-5e5b-95c4-88ed09ae4fb1)
-)
-(label "GND"
-  (at 172.72 154.94 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7d33183f-ef5e-5a62-8355-68308d624e9a)
-)
-(label "GND"
+(no_connect (at 172.72 149.86) (uuid e7e60c6d-b215-5e21-9cf9-f7614fc92e26))
+(no_connect (at 172.72 152.4) (uuid 9c5e473a-cb2f-5e5b-95c4-88ed09ae4fb1))
+(no_connect (at 172.72 154.94) (uuid 7d33183f-ef5e-5a62-8355-68308d624e9a))
+(label "CODEC_VDDI"
   (at 172.72 139.7 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 035bed32-3693-520a-a53d-b6a4f9ea1612)
 )
-(label "GND"
+(label "CODEC_VDDI"
   (at 172.72 142.24 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 02a6637a-ad06-571f-86c7-93824e212690)
 )
-(label "CODEC_3V3"
+(label "CODEC_VCCCI"
   (at 208.28 152.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid fe1322d1-76b1-5cfd-9731-5acd96186279)
@@ -1758,13 +2479,17 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 248055e0-c12c-56c6-8827-7572eb204cd3)
 )
-(no_connect (at 208.28 129.54) (uuid d7703164-c579-5f7a-b3ce-79366a09c01e))
-(label "CODEC_TX_L"
+(label "CODEC_TX_UHF"
+  (at 208.28 129.54 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d7703164-c579-5f7a-b3ce-79366a09c01e)
+)
+(label "CODEC_TX_VHF"
   (at 208.28 127 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid b8e7dfc2-2ba6-5c0e-b41c-c306fc32b8a8)
 )
-(label "CODEC_3V3"
+(label "CODEC_VCCP1I"
   (at 208.28 157.48 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0ae0f650-30c1-5097-a050-06df1b946caf)
@@ -1774,7 +2499,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e3e6abcc-cdc0-59bf-8dec-39f3415fd6dc)
 )
-(label "CODEC_3V3"
+(label "CODEC_VCCP2I"
   (at 208.28 160.02 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e290aeaa-c7d3-54ae-9b84-33787bd26f38)
@@ -1794,7 +2519,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 33060da9-6b1e-5bd6-a944-f76e3825ab49)
 )
-(label "CODEC_3V3"
+(label "CODEC_VCCXI"
   (at 208.28 162.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 82fad9d6-ad81-54a1-9274-f0fafe6d6087)
@@ -1806,12 +2531,16 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 766c6e68-7f39-5641-b9e9-93166228adf2)
 )
-(label "CODEC_3V3"
+(label "CODEC_VDDI"
   (at 187.96 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 295621ea-02c2-5a07-984e-c294221e626d)
 )
-(no_connect (at 172.72 147.32) (uuid dd6ab1e5-ff90-5899-87a8-6745b1c94055))
+(label "CODEC_SSPND"
+  (at 172.72 147.32 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dd6ab1e5-ff90-5899-87a8-6745b1c94055)
+)
 (symbol
   (lib_id "Device:R")
   (at 20.32 90.17 0)
@@ -1836,7 +2565,7 @@
     )
   )
 )
-(hierarchical_label "AUDIO_USB_DP"
+(hierarchical_label "RADIO_CODEC_USB_DP"
   (shape bidirectional)
   (at 20.32 86.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -1871,7 +2600,7 @@
     )
   )
 )
-(hierarchical_label "AUDIO_USB_DM"
+(hierarchical_label "RADIO_CODEC_USB_DM"
   (shape bidirectional)
   (at 20.32 99.06 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -1883,7 +2612,7 @@
   (uuid f52d080f-7760-5745-b51e-f451fb1e2541)
 )
 (symbol
-  (lib_id "Device:C")
+  (lib_id "Device:R")
   (at 20.32 125.73 0)
   (unit 1)
   (exclude_from_sim no)
@@ -1891,31 +2620,59 @@
   (on_board yes)
   (dnp no)
   (uuid e4a82912-cabf-5b76-b12a-3a859c451017)
-  (property "Reference" "C330" (at 20.32 123.19 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10u codec VBUS" (at 20.32 128.27 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 20.32 125.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Reference" "R337" (at 20.32 123.19 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2.2R PCM2902C VBUS filter" (at 20.32 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 125.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 125.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid a5a116f7-2647-59c6-a433-a96df0ada2de))
   (pin "2" (uuid 12170a42-35bb-5193-a8a1-c19771636af0))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "C330")
+        (reference "R337")
         (unit 1)
       )
     )
   )
 )
-(hierarchical_label "SYS_5V"
+(hierarchical_label "RADIO_CODEC_USB_VBUS"
   (shape bidirectional)
   (at 20.32 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 35395353-6c9a-5c5c-846c-92dc40675d3c)
 )
-(label "GND"
+(label "CODEC_VBUS"
   (at 20.32 129.54 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 5d659338-5f12-5179-9c20-9ead75b758e8)
+)
+(symbol
+  (lib_id "power:PWR_FLAG")
+  (at 20.32 132.08 0)
+  (unit 0)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 74772cf0-5582-5187-87a7-71723cd74358)
+  (property "Reference" "#FLG341" (at 20.32 129.54 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PWR_FLAG" (at 20.32 134.62 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 20.32 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 0c354055-bd4d-5949-a52e-5dbda5869319))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "#FLG341")
+        (unit 0)
+      )
+    )
+  )
+)
+(label "CODEC_VBUS"
+  (at 20.32 132.08 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 205ba1a6-4dab-5f2c-abc1-0226f8a948dc)
 )
 (symbol
   (lib_id "Device:C")
@@ -1925,32 +2682,65 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 74772cf0-5582-5187-87a7-71723cd74358)
-  (property "Reference" "C331" (at 20.32 135.89 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n codec VBUS" (at 20.32 140.97 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 20.32 138.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (uuid c20d03e2-f942-57e5-9d48-bd4dea4e440c)
+  (property "Reference" "C330" (at 20.32 135.89 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u PCM2902C VBUS" (at 20.32 140.97 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 138.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 138.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0c354055-bd4d-5949-a52e-5dbda5869319))
-  (pin "2" (uuid 205ba1a6-4dab-5f2c-abc1-0226f8a948dc))
+  (pin "1" (uuid b78c80b2-7c0a-5d8a-97d2-5e6660cc19f6))
+  (pin "2" (uuid 234a53de-53de-5651-b1cd-62f25c08e93c))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "C331")
+        (reference "C330")
         (unit 1)
       )
     )
   )
 )
-(hierarchical_label "SYS_5V"
-  (shape bidirectional)
+(label "CODEC_VBUS"
   (at 20.32 134.62 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c20d03e2-f942-57e5-9d48-bd4dea4e440c)
+  (uuid 12c078d4-3b07-513b-bd4a-a7cd45bad933)
 )
 (label "GND"
   (at 20.32 142.24 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b78c80b2-7c0a-5d8a-97d2-5e6660cc19f6)
+  (uuid 0b4f471b-f6c6-5a83-ab2e-20bdbe951419)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 151.13 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 1ae77536-05c3-5101-b59f-8e1b1fdb3245)
+  (property "Reference" "R338" (at 20.32 148.59 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1.5k USB D+ pull-up per TI Figure 39" (at 20.32 153.67 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 151.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 151.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1c414d73-cb2e-5d87-a7fd-b2a2e585aa45))
+  (pin "2" (uuid 55fc4f30-da05-5a79-9119-8895e6db7eae))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "R338")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CODEC_VDDI"
+  (at 20.32 147.32 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bd214582-af81-54fa-8380-4603d673354b)
+)
+(label "CODEC_USB_DP"
+  (at 20.32 154.94 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 97f6ac01-b189-5fa9-8187-f5811440f599)
 )
 (symbol
   (lib_id "Device:C")
@@ -1960,31 +2750,31 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 234a53de-53de-5651-b1cd-62f25c08e93c)
-  (property "Reference" "C332" (at 330.2 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n codec 3V3" (at 330.2 78.74 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (uuid c933b4ae-95fd-5a00-81ff-4027bb266cb0)
+  (property "Reference" "C331" (at 330.2 73.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10u VCCCI" (at 330.2 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 330.2 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 12c078d4-3b07-513b-bd4a-a7cd45bad933))
-  (pin "2" (uuid 0b4f471b-f6c6-5a83-ab2e-20bdbe951419))
+  (pin "1" (uuid 7f1e77b5-5427-5de4-9871-7d850bb88f58))
+  (pin "2" (uuid c1e7cd7f-1cb0-58fa-be90-59204f8bb27f))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "C332")
+        (reference "C331")
         (unit 1)
       )
     )
   )
 )
-(label "CODEC_3V3"
+(label "CODEC_VCCCI"
   (at 330.2 72.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1ae77536-05c3-5101-b59f-8e1b1fdb3245)
+  (uuid 673529ab-bdbd-5fcf-a701-f87821edc2a0)
 )
 (label "GND"
   (at 330.2 80.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1c414d73-cb2e-5d87-a7fd-b2a2e585aa45)
+  (uuid 2f855dd9-93cb-5648-9122-4f50aacd9e62)
 )
 (symbol
   (lib_id "Device:C")
@@ -1994,31 +2784,31 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 55fc4f30-da05-5a79-9119-8895e6db7eae)
-  (property "Reference" "C333" (at 330.2 86.36 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n codec 3V3" (at 330.2 91.44 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (uuid fa99e0ba-2e04-5357-b544-3ad11e5e1d5f)
+  (property "Reference" "C332" (at 330.2 86.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u VCCP1I (<2u)" (at 330.2 91.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 330.2 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid bd214582-af81-54fa-8380-4603d673354b))
-  (pin "2" (uuid 97f6ac01-b189-5fa9-8187-f5811440f599))
+  (pin "1" (uuid bcea79a1-7b73-5f86-96c1-dd1a8218a8ee))
+  (pin "2" (uuid ad13734b-235b-5ceb-ae5b-61224a1fab69))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "C333")
+        (reference "C332")
         (unit 1)
       )
     )
   )
 )
-(label "CODEC_3V3"
+(label "CODEC_VCCP1I"
   (at 330.2 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c933b4ae-95fd-5a00-81ff-4027bb266cb0)
+  (uuid c7bc5c56-d510-5a1e-a939-6fda87fb465e)
 )
 (label "GND"
   (at 330.2 92.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7f1e77b5-5427-5de4-9871-7d850bb88f58)
+  (uuid 39b75b9d-d7a9-59af-b70c-318a5914413f)
 )
 (symbol
   (lib_id "Device:C")
@@ -2028,31 +2818,31 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c1e7cd7f-1cb0-58fa-be90-59204f8bb27f)
-  (property "Reference" "C334" (at 330.2 99.06 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n codec 3V3" (at 330.2 104.14 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (uuid a9682dc4-dc02-549d-b3ef-f832d4c08196)
+  (property "Reference" "C333" (at 330.2 99.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u VCCP2I (<2u)" (at 330.2 104.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 330.2 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 673529ab-bdbd-5fcf-a701-f87821edc2a0))
-  (pin "2" (uuid 2f855dd9-93cb-5648-9122-4f50aacd9e62))
+  (pin "1" (uuid 6c9f613d-55c7-5025-a6ec-a876909aedaa))
+  (pin "2" (uuid d80201c6-46b7-54a9-ad48-b26a6e29ac7b))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "C334")
+        (reference "C333")
         (unit 1)
       )
     )
   )
 )
-(label "CODEC_3V3"
+(label "CODEC_VCCP2I"
   (at 330.2 97.79 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fa99e0ba-2e04-5357-b544-3ad11e5e1d5f)
+  (uuid abb3203e-0c38-5c8b-adab-b7a5bedbe94e)
 )
 (label "GND"
   (at 330.2 105.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bcea79a1-7b73-5f86-96c1-dd1a8218a8ee)
+  (uuid ca3fcdbd-63dc-52be-84f2-1647ee3bbbb0)
 )
 (symbol
   (lib_id "Device:C")
@@ -2062,31 +2852,31 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid ad13734b-235b-5ceb-ae5b-61224a1fab69)
-  (property "Reference" "C335" (at 330.2 111.76 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n codec 3V3" (at 330.2 116.84 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (uuid 47f45ce7-5c71-5244-b9de-ad8735c3b17d)
+  (property "Reference" "C334" (at 330.2 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u VCCXI (<2u)" (at 330.2 116.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 330.2 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c7bc5c56-d510-5a1e-a939-6fda87fb465e))
-  (pin "2" (uuid 39b75b9d-d7a9-59af-b70c-318a5914413f))
+  (pin "1" (uuid 2745325d-d090-5547-a404-aecec871768e))
+  (pin "2" (uuid ea92a3c9-8166-5093-a6a1-b43ceb775eab))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "C335")
+        (reference "C334")
         (unit 1)
       )
     )
   )
 )
-(label "CODEC_3V3"
+(label "CODEC_VCCXI"
   (at 330.2 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a9682dc4-dc02-549d-b3ef-f832d4c08196)
+  (uuid 27f6ca33-6d62-5e9a-acce-9beed1e0e4e6)
 )
 (label "GND"
   (at 330.2 118.11 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6c9f613d-55c7-5025-a6ec-a876909aedaa)
+  (uuid 005d262d-3727-5388-bcdb-a25c49a6be45)
 )
 (symbol
   (lib_id "Device:C")
@@ -2096,31 +2886,31 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid d80201c6-46b7-54a9-ad48-b26a6e29ac7b)
-  (property "Reference" "C336" (at 330.2 124.46 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "4.7u codec 3V3 bulk" (at 330.2 129.54 0) (effects (font (size 1.27 1.27))))
+  (uuid 2d8c122a-0426-5715-99c3-5ad4d354094b)
+  (property "Reference" "C335" (at 330.2 124.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u VDDI (<2u)" (at 330.2 129.54 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 330.2 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid abb3203e-0c38-5c8b-adab-b7a5bedbe94e))
-  (pin "2" (uuid ca3fcdbd-63dc-52be-84f2-1647ee3bbbb0))
+  (pin "1" (uuid 525d3c4f-2410-5ff9-a18b-86af03405f81))
+  (pin "2" (uuid c009f679-09fc-5d0d-8696-122c51feccdc))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "C336")
+        (reference "C335")
         (unit 1)
       )
     )
   )
 )
-(label "CODEC_3V3"
+(label "CODEC_VDDI"
   (at 330.2 123.19 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 47f45ce7-5c71-5244-b9de-ad8735c3b17d)
+  (uuid 6bfa5ec9-dcb5-542c-a09b-c95cdb7faedb)
 )
 (label "GND"
   (at 330.2 130.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2745325d-d090-5547-a404-aecec871768e)
+  (uuid 49a29fcf-ba02-589c-b5ff-a2106954dbdc)
 )
 (symbol
   (lib_id "Device:C")
@@ -2130,13 +2920,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid ea92a3c9-8166-5093-a6a1-b43ceb775eab)
+  (uuid 2e9c3eac-5497-524c-bc3b-4c0c069f8f2e)
   (property "Reference" "C337" (at 330.2 147.32 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "1u VCOM" (at 330.2 152.4 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 330.2 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Value" "10u VCOM" (at 330.2 152.4 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 330.2 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 27f6ca33-6d62-5e9a-acce-9beed1e0e4e6))
-  (pin "2" (uuid 005d262d-3727-5388-bcdb-a25c49a6be45))
+  (pin "1" (uuid 8c9ab243-a065-549f-b64b-4a81279246e9))
+  (pin "2" (uuid 1776ef7c-9dea-5d0f-ad09-2eb3397d8800))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2149,12 +2939,12 @@
 (label "CODEC_VCOM"
   (at 330.2 146.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2d8c122a-0426-5715-99c3-5ad4d354094b)
+  (uuid 8666a4f4-6892-5979-9452-9d7372ec8d02)
 )
 (label "GND"
   (at 330.2 153.67 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 525d3c4f-2410-5ff9-a18b-86af03405f81)
+  (uuid b0afb05e-5b6e-5865-a5f6-35f5fcf70e22)
 )
 (symbol
   (lib_id "Device:Crystal_GND24")
@@ -2164,15 +2954,18 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c009f679-09fc-5d0d-8696-122c51feccdc)
+  (uuid d3287167-b5fc-5e39-b5cd-37ec2246d6a3)
   (property "Reference" "Y330" (at 330.2 177.8 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "12MHz PCM2902" (at 330.2 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "ABM8G-106-12.000MHZ-T 12MHz 10pF CL" (at 330.2 182.88 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm" (at 330.2 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6bfa5ec9-dcb5-542c-a09b-c95cdb7faedb))
-  (pin "2" (uuid 49a29fcf-ba02-589c-b5ff-a2106954dbdc))
-  (pin "3" (uuid 2e9c3eac-5497-524c-bc3b-4c0c069f8f2e))
-  (pin "4" (uuid 8c9ab243-a065-549f-b64b-4a81279246e9))
+  (property "Manufacturer" "Abracon" (at 330.2 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "ABM8G-106-12.000MHZ-T" (at 330.2 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "LoadCalculation" "18pF each leg gives about 10pF with approximately 1pF pin/PCB stray" (at 330.2 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 119a37c2-f67e-5786-b000-86b0e388561a))
+  (pin "2" (uuid 15f3c254-f98a-5c64-866c-33efd1b960f6))
+  (pin "3" (uuid b9107573-b207-51b8-b69c-4c93b8bf0411))
+  (pin "4" (uuid dcf74291-1dec-5f82-a9e5-5a84b73f1fe1))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2185,17 +2978,56 @@
 (label "CODEC_XTI"
   (at 326.39 180.34 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1776ef7c-9dea-5d0f-ad09-2eb3397d8800)
+  (uuid 6d4d168e-876b-5ddb-a456-1330e25803b6)
 )
 (label "GND"
   (at 330.2 185.42 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8666a4f4-6892-5979-9452-9d7372ec8d02)
+  (uuid 1020822f-48f5-5f76-9be0-b53eb254bfd2)
 )
 (label "CODEC_XTO"
   (at 334.01 180.34 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b0afb05e-5b6e-5865-a5f6-35f5fcf70e22)
+  (uuid 3a3b132e-3efb-516b-ba66-aef3f263e327)
+)
+(label "GND"
+  (at 330.2 185.42 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2f490d68-2233-5dff-9585-06ce39c9f5ee)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 389.89 180.34 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid efe2ac87-a6f6-524a-abf5-602704b1e589)
+  (property "Reference" "R340" (at 389.89 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1M crystal feedback" (at 389.89 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 389.89 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 839ed049-514e-5a4e-91a1-238d8475aee3))
+  (pin "2" (uuid d1775018-42e5-554c-a5bc-a127950aae0f))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "R340")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CODEC_XTI"
+  (at 389.89 176.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e2cace47-6be0-5333-8781-4de7d93de2e9)
+)
+(label "CODEC_XTO"
+  (at 389.89 184.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 68797947-28e0-5829-bdb0-a6c083d6ce0e)
 )
 (symbol
   (lib_id "Device:C")
@@ -2205,13 +3037,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid d3287167-b5fc-5e39-b5cd-37ec2246d6a3)
+  (uuid 24ca8081-e473-50fd-98d2-be61e90dfaa5)
   (property "Reference" "C338" (at 330.2 198.12 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "18p" (at 330.2 203.2 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "18p C0G 5% PCM2902 crystal load" (at 330.2 203.2 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 200.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 200.66 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 119a37c2-f67e-5786-b000-86b0e388561a))
-  (pin "2" (uuid 15f3c254-f98a-5c64-866c-33efd1b960f6))
+  (pin "1" (uuid 53ab2550-530a-56b7-abbc-ce05539e4065))
+  (pin "2" (uuid faf2e7ec-a318-542f-a9fe-30a76b48f0d8))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2224,12 +3056,12 @@
 (label "CODEC_XTI"
   (at 330.2 196.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b9107573-b207-51b8-b69c-4c93b8bf0411)
+  (uuid c423ae66-0e64-511f-9a1d-9e56b2bf00f6)
 )
 (label "GND"
   (at 330.2 204.47 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dcf74291-1dec-5f82-a9e5-5a84b73f1fe1)
+  (uuid 11c31d03-d295-5f63-8096-85c2ef32a4b6)
 )
 (symbol
   (lib_id "Device:C")
@@ -2239,13 +3071,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 6d4d168e-876b-5ddb-a456-1330e25803b6)
+  (uuid 07e1d00b-5775-532f-88fb-5232a27a2584)
   (property "Reference" "C339" (at 330.2 210.82 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "18p" (at 330.2 215.9 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "18p C0G 5% PCM2902 crystal load" (at 330.2 215.9 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 330.2 213.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 213.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 1020822f-48f5-5f76-9be0-b53eb254bfd2))
-  (pin "2" (uuid 3a3b132e-3efb-516b-ba66-aef3f263e327))
+  (pin "1" (uuid ca4745d0-499a-5234-bca1-37b092e4c29e))
+  (pin "2" (uuid 5eaf9536-2c99-52e5-9d84-9fe3c6be93df))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2258,14 +3090,14 @@
 (label "CODEC_XTO"
   (at 330.2 209.55 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2f490d68-2233-5dff-9585-06ce39c9f5ee)
+  (uuid 17044efa-3808-59ba-919c-1edfffed75d1)
 )
 (label "GND"
   (at 330.2 217.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid efe2ac87-a6f6-524a-abf5-602704b1e589)
+  (uuid af557807-4d6b-598f-a3bf-3811a4856e02)
 )
-(text "== Radio receive audio into codec line inputs ==" (at 20.32 250.19 0) (effects (font (size 1.27 1.27))) (uuid 839ed049-514e-5a4e-91a1-238d8475aee3))
+(text "== Radio receive audio into codec line inputs ==" (at 20.32 250.19 0) (effects (font (size 1.27 1.27))) (uuid 1b144896-7f0b-5868-871a-f5635837f216))
 (symbol
   (lib_id "Device:C")
   (at 20.32 275.59 0)
@@ -2274,13 +3106,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid d1775018-42e5-554c-a5bc-a127950aae0f)
+  (uuid 253a19d3-be16-54c1-857b-0f11050a156c)
   (property "Reference" "C340" (at 20.32 273.05 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u VHF RX AC couple" (at 20.32 278.13 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid e2cace47-6be0-5333-8781-4de7d93de2e9))
-  (pin "2" (uuid 68797947-28e0-5829-bdb0-a6c083d6ce0e))
+  (pin "1" (uuid db6da1fd-1e62-5c85-8df1-a2ddda08b81c))
+  (pin "2" (uuid 9b45f836-adb6-55a8-8e86-d61da7680161))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2294,12 +3126,12 @@
   (shape bidirectional)
   (at 20.32 271.78 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 24ca8081-e473-50fd-98d2-be61e90dfaa5)
+  (uuid 9517ae4f-ba71-59d9-baef-6567cc24c40b)
 )
 (label "CODEC_LINEIN_L"
   (at 20.32 279.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53ab2550-530a-56b7-abbc-ce05539e4065)
+  (uuid 89f44bf9-0438-5b66-a078-416c733a3fb6)
 )
 (symbol
   (lib_id "Device:C")
@@ -2309,13 +3141,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid faf2e7ec-a318-542f-a9fe-30a76b48f0d8)
+  (uuid 61c7f282-3c1f-5ebc-9c0c-135c58c2597b)
   (property "Reference" "C341" (at 20.32 285.75 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u UHF RX AC couple" (at 20.32 290.83 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 288.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 288.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c423ae66-0e64-511f-9a1d-9e56b2bf00f6))
-  (pin "2" (uuid 11c31d03-d295-5f63-8096-85c2ef32a4b6))
+  (pin "1" (uuid c6fc7989-fd50-5699-b7c0-a8bc918c2426))
+  (pin "2" (uuid a763c0ba-887a-5639-9cf8-a187e5179fe1))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2329,97 +3161,30 @@
   (shape bidirectional)
   (at 20.32 284.48 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 07e1d00b-5775-532f-88fb-5232a27a2584)
+  (uuid 8d5b2acd-23f3-5182-96ea-52dca9609a0e)
 )
 (label "CODEC_LINEIN_R"
   (at 20.32 292.1 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ca4745d0-499a-5234-bca1-37b092e4c29e)
+  (uuid 20a68d5f-34bc-5b73-ae18-a03a68acf396)
 )
-(symbol
-  (lib_id "Device:R")
-  (at 149.86 275.59 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 5eaf9536-2c99-52e5-9d84-9fe3c6be93df)
-  (property "Reference" "R332" (at 149.86 273.05 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k line-in L bleed" (at 149.86 278.13 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 149.86 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 149.86 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 17044efa-3808-59ba-919c-1edfffed75d1))
-  (pin "2" (uuid af557807-4d6b-598f-a3bf-3811a4856e02))
-  (instances
-    (project "ducktop2"
-      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "R332")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "CODEC_LINEIN_L"
-  (at 149.86 271.78 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1b144896-7f0b-5868-871a-f5635837f216)
-)
-(label "GND"
-  (at 149.86 279.4 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 253a19d3-be16-54c1-857b-0f11050a156c)
-)
-(symbol
-  (lib_id "Device:R")
-  (at 149.86 288.29 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid db6da1fd-1e62-5c85-8df1-a2ddda08b81c)
-  (property "Reference" "R333" (at 149.86 285.75 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k line-in R bleed" (at 149.86 290.83 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 149.86 288.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 149.86 288.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9b45f836-adb6-55a8-8e86-d61da7680161))
-  (pin "2" (uuid 9517ae4f-ba71-59d9-baef-6567cc24c40b))
-  (instances
-    (project "ducktop2"
-      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-        (reference "R333")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "CODEC_LINEIN_R"
-  (at 149.86 284.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 89f44bf9-0438-5b66-a078-416c733a3fb6)
-)
-(label "GND"
-  (at 149.86 292.1 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 61c7f282-3c1f-5ebc-9c0c-135c58c2597b)
-)
-(text "== Codec transmit audio to radio mic inputs ==" (at 389.89 250.19 0) (effects (font (size 1.27 1.27))) (uuid c6fc7989-fd50-5699-b7c0-a8bc918c2426))
+(text "No codec-side bleed: PCM2902 biases VINL/VINR internally to VCOM through 30k." (at 149.86 275.59 0) (effects (font (size 1.27 1.27))) (uuid 934e7c5c-dcfc-5bae-842d-e36a7278e190))
+(text "== Codec transmit audio to radio mic inputs ==" (at 389.89 250.19 0) (effects (font (size 1.27 1.27))) (uuid 0b7fc5f0-338b-5000-9e9b-0c57791cf8a7))
 (symbol
   (lib_id "Device:C")
-  (at 389.89 275.59 0)
+  (at 389.89 266.7 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid a763c0ba-887a-5639-9cf8-a187e5179fe1)
-  (property "Reference" "C342" (at 389.89 273.05 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "1u TX audio AC couple" (at 389.89 278.13 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 389.89 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 389.89 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8d5b2acd-23f3-5182-96ea-52dca9609a0e))
-  (pin "2" (uuid 20a68d5f-34bc-5b73-ae18-a03a68acf396))
+  (uuid 1ccc4412-0b84-5655-a740-129e59879f2a)
+  (property "Reference" "C342" (at 389.89 264.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u VHF TX audio AC couple" (at 389.89 269.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 389.89 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b65a6d9c-e00e-5e52-9d70-23263aa54bd9))
+  (pin "2" (uuid 34aa622f-b974-5108-89c5-ab6ec89c04ed))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2429,15 +3194,49 @@
     )
   )
 )
-(label "CODEC_TX_L"
-  (at 389.89 271.78 0)
+(label "CODEC_TX_VHF"
+  (at 389.89 262.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 934e7c5c-dcfc-5bae-842d-e36a7278e190)
+  (uuid 05602abe-031d-589f-b5fe-66f79ac7bea4)
 )
-(label "RADIO_TX_AUDIO"
-  (at 389.89 279.4 0)
+(label "VHF_TX_AUDIO"
+  (at 389.89 270.51 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0b7fc5f0-338b-5000-9e9b-0c57791cf8a7)
+  (uuid 147dc34e-175d-5055-a3f0-7c02363e13c6)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 389.89 279.4 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 611afe25-8a35-59c5-bcd8-858f90f90547)
+  (property "Reference" "C343" (at 389.89 276.86 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u UHF TX audio AC couple" (at 389.89 281.94 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 389.89 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c96cd307-6e74-5222-8295-8c3463626b17))
+  (pin "2" (uuid d135dfac-a06f-5e8a-b18a-c0ff17b37010))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "C343")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CODEC_TX_UHF"
+  (at 389.89 275.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f1fb0a5c-9ff4-580d-82e7-3e4f21310afb)
+)
+(label "UHF_TX_AUDIO"
+  (at 389.89 283.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ac9cf336-d504-55de-baa0-67ff70573e55)
 )
 (symbol
   (lib_id "Device:R")
@@ -2447,13 +3246,14 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 1ccc4412-0b84-5655-a740-129e59879f2a)
+  (uuid 9b84251a-f3cd-5b83-98ee-ae48efaeddb7)
   (property "Reference" "R334" (at 519.43 257.81 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10k VHF mic feed" (at 519.43 262.89 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "82k 1% VHF mic attenuator series" (at 519.43 262.89 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b65a6d9c-e00e-5e52-9d70-23263aa54bd9))
-  (pin "2" (uuid 34aa622f-b974-5108-89c5-ab6ec89c04ed))
+  (property "ReleaseGate" "CALIBRATE_DEVIATION_AND_LOCK_DRA818_MIC_INPUT_IMPEDANCE" (at 519.43 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 9a7f33be-2e36-5eba-a82b-7a4efb481d45))
+  (pin "2" (uuid ef7b9306-f717-53c1-aa3e-daac726ad127))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2463,16 +3263,16 @@
     )
   )
 )
-(label "RADIO_TX_AUDIO"
+(label "VHF_TX_AUDIO"
   (at 519.43 256.54 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 05602abe-031d-589f-b5fe-66f79ac7bea4)
+  (uuid 8a118d61-764d-5a71-acb7-922e43dcec0a)
 )
 (hierarchical_label "RADIO_VHF_MIC_IN"
   (shape bidirectional)
   (at 519.43 264.16 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 147dc34e-175d-5055-a3f0-7c02363e13c6)
+  (uuid fc2639d6-a8c6-589b-886e-fd42b966a05e)
 )
 (symbol
   (lib_id "Device:R")
@@ -2482,13 +3282,14 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 611afe25-8a35-59c5-bcd8-858f90f90547)
+  (uuid c7b07524-d848-5bf8-bff2-847e959d365e)
   (property "Reference" "R335" (at 519.43 270.51 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10k UHF mic feed" (at 519.43 275.59 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "82k 1% UHF mic attenuator series" (at 519.43 275.59 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 273.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 273.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c96cd307-6e74-5222-8295-8c3463626b17))
-  (pin "2" (uuid d135dfac-a06f-5e8a-b18a-c0ff17b37010))
+  (property "ReleaseGate" "CALIBRATE_DEVIATION_AND_LOCK_DRA818_MIC_INPUT_IMPEDANCE" (at 519.43 273.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c0d43724-dd08-5ba9-a37c-0da1dda62807))
+  (pin "2" (uuid 516b85f2-cb91-5ec1-9bb7-36f3eaef95ea))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2498,32 +3299,32 @@
     )
   )
 )
-(label "RADIO_TX_AUDIO"
+(label "UHF_TX_AUDIO"
   (at 519.43 269.24 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f1fb0a5c-9ff4-580d-82e7-3e4f21310afb)
+  (uuid a970dc33-bf1e-5a65-9282-67d6b61d0e5d)
 )
 (hierarchical_label "RADIO_UHF_MIC_IN"
   (shape bidirectional)
   (at 519.43 276.86 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ac9cf336-d504-55de-baa0-67ff70573e55)
+  (uuid ed2d39eb-77b2-5cd1-8c71-2027edc7b3c5)
 )
 (symbol
   (lib_id "Device:R")
-  (at 389.89 298.45 0)
+  (at 519.43 285.75 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 9b84251a-f3cd-5b83-98ee-ae48efaeddb7)
-  (property "Reference" "R336" (at 389.89 295.91 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k TX audio bleed" (at 389.89 300.99 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 389.89 298.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 389.89 298.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9a7f33be-2e36-5eba-a82b-7a4efb481d45))
-  (pin "2" (uuid ef7b9306-f717-53c1-aa3e-daac726ad127))
+  (uuid 156d96bc-2701-53aa-9e0f-3683cdede2c1)
+  (property "Reference" "R336" (at 519.43 283.21 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1k 1% VHF mic attenuator shunt" (at 519.43 288.29 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 285.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 519.43 285.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 05421ee8-6c75-5029-b118-7fd6b3fc2c24))
+  (pin "2" (uuid d536e3e4-0a83-5328-bf38-2d75911119dc))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2533,15 +3334,464 @@
     )
   )
 )
-(label "RADIO_TX_AUDIO"
-  (at 389.89 294.64 0)
+(hierarchical_label "RADIO_VHF_MIC_IN"
+  (shape bidirectional)
+  (at 519.43 281.94 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8a118d61-764d-5a71-acb7-922e43dcec0a)
+  (uuid a16e6a2e-cdaa-54dc-8ce1-b1a916bb1e90)
 )
 (label "GND"
-  (at 389.89 302.26 0)
+  (at 519.43 289.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fc2639d6-a8c6-589b-886e-fd42b966a05e)
+  (uuid dd80dd40-f2bd-5f4b-a6ac-a311f61bf80c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 519.43 298.45 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9efd1bd6-5dcc-534b-8120-11723e1995da)
+  (property "Reference" "R341" (at 519.43 295.91 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1k 1% UHF mic attenuator shunt" (at 519.43 300.99 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 519.43 298.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 519.43 298.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cb966b9a-8959-5234-9023-f74e288e164d))
+  (pin "2" (uuid 68a61898-0191-55e7-8d8d-6dec90d706a2))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "R341")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_MIC_IN"
+  (shape bidirectional)
+  (at 519.43 294.64 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 98480273-02d4-5880-947a-34b4dee62bf0)
+)
+(label "GND"
+  (at 519.43 302.26 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b51a6f07-8d8c-5159-9ad4-ebd0435e858d)
+)
+(symbol
+  (lib_id "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD")
+  (at 650.24 266.7 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ea434165-215d-59e8-b9af-6dc811c8859e)
+  (property "Reference" "Q330" (at 650.24 264.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2N7002KT1G VHF PTT/suspend fail-mute shunt" (at 650.24 269.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 650.24 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "onsemi" (at 650.24 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2N7002KT1G" (at 650.24 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MuteLogic" "MUTE_GATE=PTT_N_OR_NOT_CODEC_SSPND" (at 650.24 266.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b6884e3c-54a2-5320-8290-1e70ca5ffefa))
+  (pin "2" (uuid 31af4277-9509-58e0-beb3-bb05af687359))
+  (pin "3" (uuid 86f60342-e16b-52c5-a68a-283605386bd7))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "Q330")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "VHF_MUTE_GATE"
+  (at 645.16 266.7 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c1d1328c-3e7d-58e7-be89-13b5eacb16eb)
+)
+(label "GND"
+  (at 652.78 271.78 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cf1bc812-fb5c-50e0-85cd-f0dcfac4017e)
+)
+(hierarchical_label "RADIO_VHF_MIC_IN"
+  (shape bidirectional)
+  (at 652.78 261.62 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e9cc4625-3272-5082-8491-99c3556a1e39)
+)
+(symbol
+  (lib_id "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD")
+  (at 650.24 292.1 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid aecae194-d347-5f3f-a91b-3bd705f4814a)
+  (property "Reference" "Q331" (at 650.24 289.56 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2N7002KT1G UHF PTT/suspend fail-mute shunt" (at 650.24 294.64 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "onsemi" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2N7002KT1G" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MuteLogic" "MUTE_GATE=PTT_N_OR_NOT_CODEC_SSPND" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ba1b779a-07cd-519c-ae41-8a4a7794d9cc))
+  (pin "2" (uuid 277c8390-53e2-5435-a9f8-5fb689cc1685))
+  (pin "3" (uuid b058f2ab-fd18-5858-a914-9b66b62ae9e2))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "Q331")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "UHF_MUTE_GATE"
+  (at 645.16 292.1 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8ed93798-811c-5220-b59c-90a991e74ffd)
+)
+(label "GND"
+  (at 652.78 297.18 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d815ddce-41c3-5d73-a1ba-22183443d259)
+)
+(hierarchical_label "RADIO_UHF_MIC_IN"
+  (shape bidirectional)
+  (at 652.78 287.02 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e063cd0c-402c-5edb-b040-f94b645dc5e7)
+)
+(symbol
+  (lib_id "Transistor_FET:Q_PMOS_GSD")
+  (at 650.24 317.5 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid fc632958-0d33-51b0-8700-775a1e23cabd)
+  (property "Reference" "Q332" (at 650.24 314.96 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BSS84LT1G codec-loss force-mute" (at 650.24 320.04 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 650.24 317.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 317.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "onsemi" (at 650.24 317.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BSS84LT1G" (at 650.24 317.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d2244d7f-2c53-598a-a48c-2402a4ca96ef))
+  (pin "2" (uuid 4bec1e27-ff6a-540c-ba09-5a49c4e5ba11))
+  (pin "3" (uuid 97672a0a-4ca2-563b-afe3-13c8c8d4e04a))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "Q332")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CODEC_SSPND"
+  (at 645.16 317.5 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a47d64e9-ad5e-5f4c-b37f-5d9a53c9b58b)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 652.78 322.58 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2a23098a-b414-5312-a680-bb1339243f58)
+)
+(label "CODEC_FORCE_MUTE"
+  (at 652.78 312.42 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b74d6086-25bd-55d2-8353-e0b25e653075)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 699.77 304.8 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 96c24481-3f6d-587a-a36d-f085392bd1ae)
+  (property "Reference" "R342" (at 699.77 302.26 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k SSPND fail-low pull-down" (at 699.77 307.34 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 699.77 304.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 699.77 304.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d9e59665-f66e-5463-adeb-f10cfd531b31))
+  (pin "2" (uuid 16e15991-438e-5a59-979d-d40b4f43d77c))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "R342")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CODEC_SSPND"
+  (at 699.77 300.99 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f7c4d9dd-8441-5446-bb6b-17d5f44927e9)
+)
+(label "GND"
+  (at 699.77 308.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b4b7bd77-0e66-5b28-8e30-3813a2f71a7c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 699.77 317.5 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 79f5ce5a-bb5c-5367-ae76-9944fc69a1f5)
+  (property "Reference" "R343" (at 699.77 314.96 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k force-mute pull-down" (at 699.77 320.04 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 699.77 317.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 699.77 317.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 078f467a-71af-57db-9abc-58c08b400f5f))
+  (pin "2" (uuid 7ff500cc-51b6-549d-a690-b8ae9704aece))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "R343")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CODEC_FORCE_MUTE"
+  (at 699.77 313.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 40b5ef33-0711-54e6-b52d-3661d7defa16)
+)
+(label "GND"
+  (at 699.77 321.31 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 60bddf36-5073-5731-b9f6-8941c27635a1)
+)
+(symbol
+  (lib_id "Device:D_Schottky")
+  (at 650.24 330.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid dcdb6d15-51ed-586d-a36c-2f47be63792c)
+  (property "Reference" "D390" (at 650.24 327.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BAT54WS PTT/suspend mute OR" (at 650.24 332.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_SOD-323" (at 650.24 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Diodes Incorporated" (at 650.24 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BAT54WS-7-F" (at 650.24 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ea4cfa11-3595-5ed2-906f-794a479c9cfb))
+  (pin "2" (uuid fe71f082-3488-52f2-ba67-b18302c4a400))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "D390")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "VHF_MUTE_GATE"
+  (at 646.43 330.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ea7bbc08-abba-5014-9687-4aa6de28c1ee)
+)
+(hierarchical_label "RADIO_VHF_PTT_N"
+  (shape bidirectional)
+  (at 654.05 330.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ffcf943d-aaf7-5116-95e0-6a01c1d7be1b)
+)
+(symbol
+  (lib_id "Device:D_Schottky")
+  (at 650.24 342.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 396fb19a-41f6-57fc-8965-22dc1e7680a2)
+  (property "Reference" "D391" (at 650.24 340.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BAT54WS PTT/suspend mute OR" (at 650.24 345.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_SOD-323" (at 650.24 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Diodes Incorporated" (at 650.24 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BAT54WS-7-F" (at 650.24 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4101119e-f3b0-5a36-83b3-42bceb3e4442))
+  (pin "2" (uuid 4679a3af-e39f-50f4-9e94-af6e7378d083))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "D391")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "VHF_MUTE_GATE"
+  (at 646.43 342.9 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3642183f-13ad-565f-b056-8676d4c19032)
+)
+(label "CODEC_FORCE_MUTE"
+  (at 654.05 342.9 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 891b2fe3-b1a8-5227-80b3-2be516b41fe1)
+)
+(symbol
+  (lib_id "Device:D_Schottky")
+  (at 650.24 355.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 7f2f2722-d4b9-5e51-9e98-4b980c2a79f7)
+  (property "Reference" "D392" (at 650.24 353.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BAT54WS PTT/suspend mute OR" (at 650.24 358.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_SOD-323" (at 650.24 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Diodes Incorporated" (at 650.24 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BAT54WS-7-F" (at 650.24 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid af9b07d3-4528-576e-89ab-223137593742))
+  (pin "2" (uuid 75c75241-1c17-59c5-bd29-a39d14de2b76))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "D392")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "UHF_MUTE_GATE"
+  (at 646.43 355.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f6e8c2f4-5d5a-54f9-977d-c9e24c017f31)
+)
+(hierarchical_label "RADIO_UHF_PTT_N"
+  (shape bidirectional)
+  (at 654.05 355.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 84e5da33-f5a6-5121-82e5-768e71d29683)
+)
+(symbol
+  (lib_id "Device:D_Schottky")
+  (at 650.24 368.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c4328455-2d48-5cb6-ba6f-b18b9ab62d64)
+  (property "Reference" "D393" (at 650.24 365.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BAT54WS PTT/suspend mute OR" (at 650.24 370.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Diode_SMD:D_SOD-323" (at 650.24 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Diodes Incorporated" (at 650.24 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BAT54WS-7-F" (at 650.24 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cb4f7591-fa48-58e5-b83c-d8ee2436d414))
+  (pin "2" (uuid ec81283e-f44d-5395-a905-1225c3260baa))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "D393")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "UHF_MUTE_GATE"
+  (at 646.43 368.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d59f25ad-304f-55b7-b2ad-30b1e9d923a6)
+)
+(label "CODEC_FORCE_MUTE"
+  (at 654.05 368.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d7bd59fb-8d20-52b6-9e6c-29fa04dfe5a3)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 745.49 330.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f5b74a25-079e-5829-99ae-2d575389fb93)
+  (property "Reference" "R344" (at 745.49 327.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k VHF mute-gate pull-down" (at 745.49 332.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 745.49 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 745.49 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 90cc6ee0-fc05-58b6-b722-e89dd1795fe1))
+  (pin "2" (uuid a2a2bc8a-9283-5827-9d40-0e90c4a3a0c5))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "R344")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "VHF_MUTE_GATE"
+  (at 745.49 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid da4246a0-a724-5ed5-8b5b-4778254306f8)
+)
+(label "GND"
+  (at 745.49 334.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 22243ab0-90e1-533b-ae5f-d65f3bc86cc5)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 745.49 342.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a237cf7f-7d0c-56a8-8656-b64d884f72ca)
+  (property "Reference" "R345" (at 745.49 340.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k UHF mute-gate pull-down" (at 745.49 345.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 745.49 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 745.49 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ad48d1d9-2471-52e7-a204-d16aa68c62eb))
+  (pin "2" (uuid a1183527-c532-5853-b79e-d9e6488bd863))
+  (instances
+    (project "ducktop2"
+      (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
+        (reference "R345")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "UHF_MUTE_GATE"
+  (at 745.49 339.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b6bb1252-5cd6-558c-b60f-783058b12fa9)
+)
+(label "GND"
+  (at 745.49 346.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b46f85d3-f1bf-5269-a7ed-83a17833eb96)
 )
 (symbol
   (lib_id "Connector_Generic:Conn_01x08")
@@ -2549,21 +3799,21 @@
   (unit 1)
   (exclude_from_sim no)
   (in_bom no)
-  (on_board yes)
+  (on_board no)
   (dnp yes)
-  (uuid c7b07524-d848-5bf8-bff2-847e959d365e)
+  (uuid 7cbb8685-ed57-5365-8977-23593f2ac16b)
   (property "Reference" "J330" (at 519.43 327.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "DNP radio audio codec probe" (at 519.43 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" (at 519.43 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c0d43724-dd08-5ba9-a37c-0da1dda62807))
-  (pin "2" (uuid 516b85f2-cb91-5ec1-9bb7-36f3eaef95ea))
-  (pin "3" (uuid a970dc33-bf1e-5a65-9282-67d6b61d0e5d))
-  (pin "4" (uuid ed2d39eb-77b2-5cd1-8c71-2027edc7b3c5))
-  (pin "5" (uuid 156d96bc-2701-53aa-9e0f-3683cdede2c1))
-  (pin "6" (uuid 05421ee8-6c75-5029-b118-7fd6b3fc2c24))
-  (pin "7" (uuid d536e3e4-0a83-5328-bf38-2d75911119dc))
-  (pin "8" (uuid a16e6a2e-cdaa-54dc-8ce1-b1a916bb1e90))
+  (pin "1" (uuid 6fdef20c-3215-58c6-8571-8272dcbacc96))
+  (pin "2" (uuid a3e5408e-cad1-5b5c-b719-23493f92e010))
+  (pin "3" (uuid f9ff7241-5bf3-55a2-932c-ef4c107e1f7e))
+  (pin "4" (uuid a4ea6831-998d-5878-8de2-4066b094e8e3))
+  (pin "5" (uuid 9a75dbb8-2e03-5efc-adef-3954727081cf))
+  (pin "6" (uuid 2108b15a-4a71-5035-9bb2-b4d6e5fc419c))
+  (pin "7" (uuid 7dad22b8-17e7-57cb-80b1-fe8dcd9dd0b4))
+  (pin "8" (uuid 0f4d40e6-acb8-598d-8951-ff508ac274a6))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2576,47 +3826,46 @@
 (label "GND"
   (at 514.35 322.58 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dd80dd40-f2bd-5f4b-a6ac-a311f61bf80c)
+  (uuid 61f691f4-27aa-523d-a1ce-8bae54a1c5b6)
 )
 (hierarchical_label "RADIO_VHF_AUDIO_OUT"
   (shape bidirectional)
   (at 514.35 325.12 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9efd1bd6-5dcc-534b-8120-11723e1995da)
+  (uuid af9e596e-de1b-5ee6-a8ac-292e9d7b7c2d)
 )
 (hierarchical_label "RADIO_UHF_AUDIO_OUT"
   (shape bidirectional)
   (at 514.35 327.66 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cb966b9a-8959-5234-9023-f74e288e164d)
+  (uuid 74d52ae9-abe2-5bdd-b3f0-f08b41401437)
 )
-(label "RADIO_TX_AUDIO"
+(label "VHF_TX_AUDIO"
   (at 514.35 330.2 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 68a61898-0191-55e7-8d8d-6dec90d706a2)
+  (uuid 6407544a-a705-50a7-95f3-5ff90aa06012)
+)
+(label "UHF_TX_AUDIO"
+  (at 514.35 332.74 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 585e8d65-a5fa-5dbb-86cd-9dd8440080cc)
 )
 (hierarchical_label "RADIO_VHF_MIC_IN"
   (shape bidirectional)
-  (at 514.35 332.74 0)
+  (at 514.35 335.28 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 98480273-02d4-5880-947a-34b4dee62bf0)
+  (uuid e53901a1-b4c1-5fdd-8fc4-42e4e09c7a1d)
 )
 (hierarchical_label "RADIO_UHF_MIC_IN"
   (shape bidirectional)
-  (at 514.35 335.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b51a6f07-8d8c-5159-9ad4-ebd0435e858d)
-)
-(hierarchical_label "SYS_5V"
-  (shape bidirectional)
   (at 514.35 337.82 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ea434165-215d-59e8-b9af-6dc811c8859e)
+  (uuid ea87faff-61cd-52f6-88a9-fe9927b37b49)
 )
 (label "GND"
   (at 514.35 340.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b6884e3c-54a2-5320-8290-1e70ca5ffefa)
+  (uuid 759f9683-863e-5ab1-82a9-596f6d8f2e95)
 )
 (symbol
   (lib_id "power:GND")
@@ -2626,12 +3875,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 31af4277-9509-58e0-beb3-bb05af687359)
+  (uuid 4cb857be-4662-5251-8f5d-93f9b482e25d)
   (property "Reference" "#PWR341" (at 624.84 377.19 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 624.84 382.27 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 624.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 624.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 86f60342-e16b-52c5-a68a-283605386bd7))
+  (pin "1" (uuid e3f7347f-b551-5aec-a857-c89949637436))
   (instances
     (project "ducktop2"
       (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
@@ -2644,15 +3893,15 @@
 (label "GND"
   (at 624.84 379.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c1d1328c-3e7d-58e7-be89-13b5eacb16eb)
+  (uuid 3cde0f0f-c1b1-50d1-b97b-12d2d134c154)
 )
-(text "NOTES:" (at 20.32 360.68 0) (effects (font (size 1.27 1.27))) (uuid cf1bc812-fb5c-50e0-85cd-f0dcfac4017e))
-(text "Host software handles APRS/audio decoding through USB audio; EC GPIO still owns PTT, PD, SQL, and antenna select." (at 20.32 368.3 0) (effects (font (size 1.27 1.27))) (uuid e9cc4625-3272-5082-8491-99c3556a1e39))
-(text "Only assert one PTT at a time; both radio mic inputs receive the same isolated DAC audio through large resistors." (at 20.32 375.92 0) (effects (font (size 1.27 1.27))) (uuid aecae194-d347-5f3f-a91b-3bd705f4814a))
-(text "Final DRA818 audio gain/attenuation values require bench measurements; current values are safe first-pass starts." (at 20.32 383.54 0) (effects (font (size 1.27 1.27))) (uuid ba1b779a-07cd-519c-ae41-8a4a7794d9cc))
+(text "NOTES:" (at 20.32 360.68 0) (effects (font (size 1.27 1.27))) (uuid 7484c01d-df5d-5d09-a141-021429e39748))
+(text "TI Figure 39 core is implemented: SEL0/SEL1 direct-high, 1.5k D+ pull-up, filtered VBUS, and separate rail capacitors." (at 20.32 368.3 0) (effects (font (size 1.27 1.27))) (uuid a5f73b0d-19e6-51a3-883d-e4418bdbeea8))
+(text "Independent 82k/1k dividers produce about 8.4mVrms open-circuit; Q330/Q331 mute on PTT_N high, USB suspend, or codec power loss." (at 20.32 375.92 0) (effects (font (size 1.27 1.27))) (uuid 2cecf882-2083-5227-adf3-3d690eda821a))
+(text "RELEASE GATE: measure MIC impedance and deviation per band; preserve Ham R223/R224 pull-ups and hard-interlock both PTT_N signals." (at 20.32 383.54 0) (effects (font (size 1.27 1.27))) (uuid 15b7c63f-2820-53f2-bc7a-fa227fc464cf))
 (sheet_instances
   (path "/4a545404-5bff-53af-9c18-f3347cbfa4cd"
-    (page "14")
+    (page "13")
   )
 )
   (embedded_fonts no)

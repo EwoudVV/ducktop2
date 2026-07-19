@@ -1,0 +1,27 @@
+(kicad_symbol_lib
+	(version 20251024)
+	(generator "kicad_symbol_editor")
+	(generator_version "10.0")
+	(symbol "MiniCircuits_ULP"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "FL" (at 0 7.62 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "MiniCircuits_ULP" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "ducktop2:MiniCircuits_QA2224_PL484" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "Mini-Circuits six-terminal QA2224 low-pass filter; RF pins 1/3 and ground pins 2/4/5/6" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "MiniCircuits_ULP_0_1"
+			(rectangle (start -5.08 3.81) (end 5.08 -3.81) (stroke (width 0.254) (type default)) (fill (type background)))
+			(polyline (pts (xy -2.54 0) (xy -1.27 1.27) (xy 0 -1.27) (xy 1.27 1.27) (xy 2.54 0)) (stroke (width 0.254) (type default)) (fill (type none)))
+		)
+		(symbol "MiniCircuits_ULP_1_1"
+			(pin passive line (at -7.62 0 0) (length 2.54) (name "RF1" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -3.81 -6.35 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 7.62 0 180) (length 2.54) (name "RF2" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -1.27 -6.35 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 1.27 -6.35 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 3.81 -6.35 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+		)
+	)
+)
