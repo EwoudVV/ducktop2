@@ -143,11 +143,6 @@ maintained ERC screenshot.
 | Schematic-to-PCB parity | 997 of 997 references with no pad-net or metadata drift |
 | Host firmware policy tests | Pass |
 
-The remaining pin-review rows are broad Mu, M.2, MCU, spare, NC, and ground-pin
-classifications that still need human context. The PCB currently has 499
-unrouted connections and placement-stage silkscreen warnings. Those are tracked
-separately from schematic correctness.
-
 The project has also been reviewed repeatedly against component datasheets.
 The current summaries show what was checked and what remains uncertain; they
 are not a substitute for target firmware, signal-integrity work, thermal and RF
