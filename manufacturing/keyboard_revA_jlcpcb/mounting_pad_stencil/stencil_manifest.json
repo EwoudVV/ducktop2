@@ -1,0 +1,113 @@
+{
+  "design": "Ducktop2 Rev A MX ULP fixation-pad microstencil",
+  "generated_from": {
+    "pcb": "12_keyboard_daughterboard.kicad_pcb",
+    "pcb_sha256": "624eeb6e5fc40e2c4dd62753ed08124cde2932e0503e4b64c932b76ccd37efe2",
+    "footprint": "ducktop2.pretty/Cherry_MX_ULP_SMD.kicad_mod",
+    "footprint_sha256": "1d8ba042df3bd143fa9b89ad318c8d139dcf14662afac699436ddeea2f1984ab",
+    "switch_count": 65,
+    "diode_count": 65,
+    "pcb_thickness_mm": 0.8
+  },
+  "validation": {
+    "stl": "ducktop2_mx_ulp_fixation_microstencil_revA.stl",
+    "dimensions_print_orientation_mm": [
+      17.45,
+      13.5,
+      0.77
+    ],
+    "membrane_thickness_mm": 0.12,
+    "peg_length_mm": 0.65,
+    "aperture_inset_per_edge_mm": 0.2,
+    "diode_body_clearance_nominal_mm": 0.4,
+    "diode_courtyard_clearance_mm": 0.15,
+    "fixation_apertures": [
+      {
+        "board_center_mm": [
+          -6.2,
+          -3.9
+        ],
+        "copper_pad_mm": [
+          1.6,
+          3.8
+        ],
+        "aperture_mm": [
+          1.2,
+          3.4
+        ],
+        "area_coverage_percent": 67.1
+      },
+      {
+        "board_center_mm": [
+          -6.2,
+          4.5
+        ],
+        "copper_pad_mm": [
+          1.6,
+          3.0
+        ],
+        "aperture_mm": [
+          1.2,
+          2.6
+        ],
+        "area_coverage_percent": 65.0
+      },
+      {
+        "board_center_mm": [
+          6.2,
+          -5.025
+        ],
+        "copper_pad_mm": [
+          1.6,
+          1.8
+        ],
+        "aperture_mm": [
+          1.2,
+          1.4
+        ],
+        "area_coverage_percent": 58.3
+      },
+      {
+        "board_center_mm": [
+          6.2,
+          0.0
+        ],
+        "copper_pad_mm": [
+          1.6,
+          2.6
+        ],
+        "aperture_mm": [
+          1.2,
+          2.2
+        ],
+        "area_coverage_percent": 63.5
+      },
+      {
+        "board_center_mm": [
+          6.2,
+          5.025
+        ],
+        "copper_pad_mm": [
+          1.6,
+          1.8
+        ],
+        "aperture_mm": [
+          1.2,
+          1.4
+        ],
+        "area_coverage_percent": 58.3
+      }
+    ],
+    "watertight": true,
+    "winding_consistent": true,
+    "connected_bodies": 1,
+    "triangle_count": 412,
+    "volume_mm3": 23.9086
+  },
+  "print_orientation": {
+    "stl_is_pre_mirrored": true,
+    "bed_side": "flat membrane",
+    "pins": "up while printing; down against PCB while using"
+  },
+  "stl_sha256": "428211cb3481a48d7732a54aa5fdc5db15615f22cb1f6b9ad4af7ee3af3593da"
+}

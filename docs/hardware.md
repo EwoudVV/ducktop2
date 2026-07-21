@@ -32,17 +32,18 @@ placement windows before those interfaces are routed.
 
 ## External I/O
 
-- Two native Mu USB 3.2 Type-C host ports
-- TPS25810 Type-C source control and protected 5 V VBUS per port
-- HD3SS6126 orientation muxes on the SuperSpeed lanes
+- Five USB-C host/data ports through native Mu links and a USB7206C hub
+- One rear data/charging port per side with TPS25751A USB-PD control
+- Three host/data ports with a source-only power role and protected 5 V VBUS
 - External HDMI-A from Mu TCP0
-- Three USB-C PD charging inputs
+- Two 15 V USB-C PD charging inputs
 - Protected AUX/DC input for bench supplies or occasional solar use
 - Gigabit Ethernet
 - Rear radio and wireless antenna connections
 
-The earlier VL822 USB hub and USB-C video-port plans are gone. The two user
-USB-C ports now use native Mu links, and the external video connector is HDMI.
+The earlier VL822 USB hub and USB-C video-port plans are gone. The two rear
+PD/data ports use native Mu links, the other three ports remain data-capable,
+and the external video connector is HDMI.
 
 ## Battery and Power
 
@@ -54,7 +55,7 @@ Ducktop2 uses three 3.7 V pouch cells in series. The motherboard contains:
 - LTC4368-1 whole-pack protection, a second shunt, and a replaceable 10 A fuse
 - BQ25798 buck-boost charger and NVDC power path
 - BQ34Z100-G1 pack fuel gauge
-- Three CH224A USB-C PD sinks strapped to request 15 V
+- Two TPS25751A USB-C PD controllers with released EEPROM policy
 - Default-off input eFuses and an always-on source manager
 - TPS552892 regulated 12 V rail plus system 5 V and 3.3 V rails
 

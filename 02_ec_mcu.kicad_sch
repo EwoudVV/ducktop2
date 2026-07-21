@@ -5399,7 +5399,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 22ea3ad3-112d-5cce-8a6a-d9eefef60658)
 )
-(hierarchical_label "PD3_VALID_N"
+(hierarchical_label "PD1_TCPC_IRQ_N"
   (shape bidirectional)
   (at 224.79 379.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -5699,8 +5699,13 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 47c4e6d3-cda7-55c4-822b-fc5929ff143d)
 )
-(no_connect (at 275.59 389.89) (uuid a83142bf-81fa-5361-9d00-29473be28595))
-(hierarchical_label "RADIO_AUDIO_SEL"
+(hierarchical_label "PD2_TCPC_IRQ_N"
+  (shape bidirectional)
+  (at 275.59 389.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a83142bf-81fa-5361-9d00-29473be28595)
+)
+(hierarchical_label "RADIO_DB_PWR_EN"
   (shape bidirectional)
   (at 275.59 392.43 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -5729,7 +5734,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6ccacd96-76f5-57cb-97cb-e8b533a1399c)
 )
-(hierarchical_label "RADIO_GPIO0"
+(hierarchical_label "PD_PROTECT_FAULT_N"
   (shape bidirectional)
   (at 275.59 402.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -7141,12 +7146,13 @@
   (dnp no)
   (uuid aa551651-495d-5540-8de8-9b3fd1ec4bf2)
   (property "Reference" "U44" (at 699.77 327.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TCA9539PWR resettable source manager @0x20" (at 699.77 332.74 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TCA9539PWR resettable source manager @0x74" (at 699.77 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm" (at 699.77 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 699.77 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 699.77 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "TCA9539PWR" (at 699.77 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tca9539.pdf" (at 699.77 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "I2CAddress7Bit" "0x74" (at 699.77 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ResetContract" "Pin 3 follows EC NRST; all P-ports reset to inputs and external SHDN pulldowns force every PD path off" (at 699.77 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid c02941c4-c290-5f5d-ae5b-5e852c73acdf))
   (pin "2" (uuid 15ae88e4-1a4d-5202-bc24-303728ba943f))
@@ -7208,8 +7214,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 12125aff-f3f5-599e-b6a2-5c5ee10d26a3)
 )
-(hierarchical_label "PD3_PATH_EN"
-  (shape bidirectional)
+(label "SOURCE_MGR_SPARE1"
   (at 712.47 314.96 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 005d16b3-3ba3-5a59-a24c-9bbae3f5ca0e)
@@ -7226,8 +7231,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 064069d6-9821-500c-bd19-c989edd0e247)
 )
-(hierarchical_label "PD3_EFUSE_FAULT_N"
-  (shape bidirectional)
+(label "SOURCE_MGR_SPARE2"
   (at 712.47 322.58 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 3dd0db71-8e30-5d22-a733-29b94cb3a572)
@@ -7279,17 +7283,20 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 5259bbd2-a9d4-59b4-8e96-07d16b3d2809)
 )
-(label "SOURCE_MGR_SPARE1"
+(hierarchical_label "RADIO_DB_PG"
+  (shape bidirectional)
   (at 712.47 345.44 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid a531953e-5045-5239-abcc-f2d362177248)
 )
-(label "SOURCE_MGR_SPARE2"
+(hierarchical_label "RADIO_DB_FAULT_N"
+  (shape bidirectional)
   (at 712.47 347.98 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 04e805ee-444e-57ae-8542-97c63bfa2f18)
 )
-(label "SOURCE_MGR_SPARE3"
+(hierarchical_label "RADIO_DB_PRESENT_N"
+  (shape bidirectional)
   (at 712.47 350.52 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 39be7976-8059-5e39-a4f4-f28fc03409ce)
@@ -7457,40 +7464,6 @@
   (uuid 0c046664-57b5-596d-817c-d7cd859c692b)
 )
 (symbol
-  (lib_id "Device:R")
-  (at 650.24 312.42 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 55922077-e584-53eb-bf2a-279f3877d1a5)
-  (property "Reference" "R784" (at 650.24 309.88 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k unused source-manager I/O pulldown" (at 650.24 314.96 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 650.24 312.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 650.24 312.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid fd3a0d79-d8b3-5859-ac91-f626730fc572))
-  (pin "2" (uuid 927a7da8-7d40-50ba-a3eb-6664892f5466))
-  (instances
-    (project "ducktop2"
-      (path "/ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8"
-        (reference "R784")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "SOURCE_MGR_SPARE3"
-  (at 650.24 308.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c05c08a5-3689-5d02-8e16-5f7510e0c24e)
-)
-(label "GND"
-  (at 650.24 316.23 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 330d66ed-9ac3-5a15-9c52-02b9542e2b48)
-)
-(symbol
   (lib_id "Device:C")
   (at 650.24 322.58 0)
   (unit 1)
@@ -7498,13 +7471,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 0ac35c26-8434-59a7-a1c1-d0a4a6e7081b)
+  (uuid 55922077-e584-53eb-bf2a-279f3877d1a5)
   (property "Reference" "C780" (at 650.24 320.04 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n source-manager local" (at 650.24 325.12 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 650.24 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 1575e5e3-99b9-532d-a663-ecd962257b7d))
-  (pin "2" (uuid 48aec5b8-6b91-52af-a7e1-01b29507a03e))
+  (pin "1" (uuid fd3a0d79-d8b3-5859-ac91-f626730fc572))
+  (pin "2" (uuid 927a7da8-7d40-50ba-a3eb-6664892f5466))
   (instances
     (project "ducktop2"
       (path "/ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8"
@@ -7518,12 +7491,12 @@
   (shape bidirectional)
   (at 650.24 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cb7b8e22-6e8d-5a11-a230-cd81c0353a27)
+  (uuid c05c08a5-3689-5d02-8e16-5f7510e0c24e)
 )
 (label "GND"
   (at 650.24 326.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 146d2670-6784-5f0f-94f7-3279f4603038)
+  (uuid 330d66ed-9ac3-5a15-9c52-02b9542e2b48)
 )
 (symbol
   (lib_id "Device:R")
@@ -7533,15 +7506,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 23eebc67-215b-5f08-8216-ae95fd49ed91)
+  (uuid 0ac35c26-8434-59a7-a1c1-d0a4a6e7081b)
   (property "Reference" "R172" (at 650.24 342.9 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k service mux reset-request pull-up" (at 650.24 347.98 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 650.24 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 650.24 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "RC0603FR-07100KL" (at 650.24 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid ec781b53-adff-5c71-8528-8dcbae1084ad))
-  (pin "2" (uuid a6e4cdb0-9be2-52df-adcb-dbadb5da4205))
+  (pin "1" (uuid 1575e5e3-99b9-532d-a663-ecd962257b7d))
+  (pin "2" (uuid 48aec5b8-6b91-52af-a7e1-01b29507a03e))
   (instances
     (project "ducktop2"
       (path "/ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8"
@@ -7555,12 +7528,12 @@
   (shape bidirectional)
   (at 650.24 341.63 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 019f8ddc-c573-5e58-b657-5e7b66c84e3d)
+  (uuid cb7b8e22-6e8d-5a11-a230-cd81c0353a27)
 )
 (label "SERVICE_MUX_RESET_REQ_N"
   (at 650.24 349.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 81038434-0303-5320-98dc-6440227b4d66)
+  (uuid 146d2670-6784-5f0f-94f7-3279f4603038)
 )
 (symbol
   (lib_id "74xGxx:74LVC1G08")
@@ -7570,7 +7543,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid fdb50d0a-77bc-52bc-b09e-9b9e3b6d8b5a)
+  (uuid 23eebc67-215b-5f08-8216-ae95fd49ed91)
   (property "Reference" "U46" (at 699.77 367.03 0) (effects (font (size 1.27 1.27))))
   (property "Value" "SN74LVC1G08DBVR EC-reset-qualified service mux reset" (at 699.77 372.11 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 699.77 369.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7578,11 +7551,11 @@
   (property "Manufacturer" "Texas Instruments" (at 699.77 369.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "SN74LVC1G08DBVR" (at 699.77 369.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ResetContract" "U45 RESET_N = EC NRST AND firmware reset request" (at 699.77 369.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid adb33594-8eac-504c-b8bd-03dbff4ff90d))
-  (pin "2" (uuid 59b13781-dcd8-532c-bbe9-639b29d853c2))
-  (pin "3" (uuid 4f5057ac-34c8-5e2e-ae73-b7865f61c8d9))
-  (pin "4" (uuid 23f5b9c8-a4e8-5f70-b0ed-96c22426e376))
-  (pin "5" (uuid f8061c6a-589f-5f0e-8d73-8c8ed8c3edd1))
+  (pin "1" (uuid ec781b53-adff-5c71-8528-8dcbae1084ad))
+  (pin "2" (uuid a6e4cdb0-9be2-52df-adcb-dbadb5da4205))
+  (pin "3" (uuid 019f8ddc-c573-5e58-b657-5e7b66c84e3d))
+  (pin "4" (uuid 81038434-0303-5320-98dc-6440227b4d66))
+  (pin "5" (uuid fdb50d0a-77bc-52bc-b09e-9b9e3b6d8b5a))
   (instances
     (project "ducktop2"
       (path "/ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8"
@@ -7595,29 +7568,29 @@
 (label "NRST_NET"
   (at 684.53 367.03 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1b3ea9f5-867f-5691-97ad-8cca317817cd)
+  (uuid adb33594-8eac-504c-b8bd-03dbff4ff90d)
 )
 (label "SERVICE_MUX_RESET_REQ_N"
   (at 684.53 372.11 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid af87feda-00bb-5d33-b903-e81d7b782f76)
+  (uuid 59b13781-dcd8-532c-bbe9-639b29d853c2)
 )
 (label "GND"
   (at 699.77 379.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 83b5b2a4-9d41-5ecc-b9f1-d5169420b1a8)
+  (uuid 4f5057ac-34c8-5e2e-ae73-b7865f61c8d9)
 )
 (hierarchical_label "SERVICE_MUX_RESET_N"
   (shape bidirectional)
   (at 712.47 369.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 678d6655-dcbb-5eae-b5f5-d7423d076831)
+  (uuid 23f5b9c8-a4e8-5f70-b0ed-96c22426e376)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
   (at 699.77 359.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bcec2950-bad7-5867-a973-3a43959e956e)
+  (uuid f8061c6a-589f-5f0e-8d73-8c8ed8c3edd1)
 )
 (symbol
   (lib_id "Device:C")
@@ -7627,13 +7600,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 2b2407a4-8d75-562a-8271-abcc1e59685d)
+  (uuid 1b3ea9f5-867f-5691-97ad-8cca317817cd)
   (property "Reference" "C781" (at 650.24 355.6 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n service-mux reset gate local" (at 650.24 360.68 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 650.24 358.14 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 358.14 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 946e573b-3801-5eb1-882b-e4f66cdc3ebe))
-  (pin "2" (uuid 3e858f6a-5056-5ba2-ab6b-31941c79d894))
+  (pin "1" (uuid af87feda-00bb-5d33-b903-e81d7b782f76))
+  (pin "2" (uuid 83b5b2a4-9d41-5ecc-b9f1-d5169420b1a8))
   (instances
     (project "ducktop2"
       (path "/ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8"
@@ -7647,12 +7620,12 @@
   (shape bidirectional)
   (at 650.24 354.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 438168fb-7a42-558c-9de2-1a5721f2c475)
+  (uuid 678d6655-dcbb-5eae-b5f5-d7423d076831)
 )
 (label "GND"
   (at 650.24 361.95 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9b70ab15-4e2b-5c4f-9100-d29a39104c69)
+  (uuid bcec2950-bad7-5867-a973-3a43959e956e)
 )
 (symbol
   (lib_id "power:GND")
@@ -7662,12 +7635,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid d331d168-3b56-53ee-83e2-6eedf3edfaf3)
+  (uuid 2b2407a4-8d75-562a-8271-abcc1e59685d)
   (property "Reference" "#PWR022" (at 650.24 196.85 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 650.24 201.93 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 650.24 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d3379e3f-d76a-52f2-b171-7a2a76a20a30))
+  (pin "1" (uuid 946e573b-3801-5eb1-882b-e4f66cdc3ebe))
   (instances
     (project "ducktop2"
       (path "/ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8"
@@ -7680,7 +7653,7 @@
 (label "GND"
   (at 650.24 199.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cebf10f6-6072-5c24-a444-051fc0d250b3)
+  (uuid 3e858f6a-5056-5ba2-ab6b-31941c79d894)
 )
 (symbol
   (lib_id "power:PWR_FLAG")
@@ -7690,12 +7663,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 1dd041b8-621a-55e5-92cf-b5d8f06717f6)
+  (uuid 438168fb-7a42-558c-9de2-1a5721f2c475)
   (property "Reference" "#FLG021" (at 650.24 217.17 0) (effects (font (size 1.27 1.27))))
   (property "Value" "PWR_FLAG" (at 650.24 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 650.24 219.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 219.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 5add4773-63ef-5640-8a6d-c0ae6dfd5505))
+  (pin "1" (uuid 9b70ab15-4e2b-5c4f-9100-d29a39104c69))
   (instances
     (project "ducktop2"
       (path "/ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8"
@@ -7708,20 +7681,20 @@
 (label "MCU_3V3"
   (at 650.24 219.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e274a8fd-629f-5d29-8538-79b68a43751b)
+  (uuid d331d168-3b56-53ee-83e2-6eedf3edfaf3)
 )
-(text "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice)." (at 20.32 340.36 0) (effects (font (size 1.27 1.27))) (uuid 8baddcb6-50ab-5d39-b7d0-54417d7deaba))
-(text "EC_GPIOx numbering is a local convenience mapping - see U4 pin_nets for actual STM32 pin/net cross-ref." (at 20.32 345.44 0) (effects (font (size 1.27 1.27))) (uuid 712d3b3d-6095-5ef8-9b1a-9de471453604))
-(text "Anti-ghosting diodes for the keyboard matrix live on the separate MX ULP keyboard PCB." (at 20.32 351.79 0) (effects (font (size 1.27 1.27))) (uuid 1a73e688-7554-50fc-9018-c97cbf537d17))
-(text "MCU_USB_DP/DM (PA12/PA11, OTG_FS device mode) are unrelated to the power-only USB-C PD sink ports." (at 20.32 358.14 0) (effects (font (size 1.27 1.27))) (uuid 29798bb2-42f5-5e2c-8b1d-ce70d51ff164))
-(text "EC can assert Mu PWRBTN_N/RSTBTN_N; J16 case power is diode-isolated to Mu PWRBTN and charger QON." (at 20.32 364.49 0) (effects (font (size 1.27 1.27))) (uuid 40e3be7a-78e6-516f-8d73-f49a01726162))
-(text "Hardware UARTs: VHF USART3 on PB10/PB11, UHF USART6 on PC6/PC7, GNSS USART1 on PA9/PA10." (at 20.32 369.57 0) (effects (font (size 1.27 1.27))) (uuid 1fd75630-94c8-5128-b1d2-fbb76f07afb8))
-(text "AUX_DC_ADC monitors the screw-terminal wide-DC input so firmware can classify and current-limit that source." (at 20.32 375.92 0) (effects (font (size 1.27 1.27))) (uuid 1f96f8e3-fd56-5104-b8fd-26a0e9fd9059))
-(text "PA7/PB0 are thermal ADCs; fan PWM uses timer-capable PE9/TIM1_CH1 and tach remains EC-owned." (at 20.32 383.54 0) (effects (font (size 1.27 1.27))) (uuid 3ab6abdf-22f1-5264-8b9e-23a61bfa48f8))
-(text "The EC has no user GPIO header; all tinkering I/O is isolated to the integrated RP2350 maker domain." (at 20.32 391.16 0) (effects (font (size 1.27 1.27))) (uuid c186018a-1e01-507c-8ff6-6f2251e69dc0))
-(text "U5 follows the TPS54202 3.3V table and runs from EC_AON_IN so source validation firmware can execute before arbitration." (at 20.32 398.78 0) (effects (font (size 1.27 1.27))) (uuid 6b2abd84-a8b3-5256-8f41-606d87a3de34))
-(text "U5 EN is intentionally floated: TI specifies an internal pull-up that enables the converter when EN is open." (at 20.32 414.02 0) (effects (font (size 1.27 1.27))) (uuid c70680c9-6ccf-5800-b630-e92e4c5fae04))
-(text "PE13 drives active-high MU_12V_ENABLE; PE14 reads MU_S0_HIGH; PE15 reads MU_12V_PG; PB1 reads TRACKPAD_FAULT_N." (at 20.32 406.4 0) (effects (font (size 1.27 1.27))) (uuid 29063ceb-3ecf-5e25-9488-5ef6d461ebe8))
+(text "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice)." (at 20.32 340.36 0) (effects (font (size 1.27 1.27))) (uuid d3379e3f-d76a-52f2-b171-7a2a76a20a30))
+(text "EC_GPIOx numbering is a local convenience mapping - see U4 pin_nets for actual STM32 pin/net cross-ref." (at 20.32 345.44 0) (effects (font (size 1.27 1.27))) (uuid cebf10f6-6072-5c24-a444-051fc0d250b3))
+(text "Anti-ghosting diodes for the keyboard matrix live on the separate MX ULP keyboard PCB." (at 20.32 351.79 0) (effects (font (size 1.27 1.27))) (uuid 1dd041b8-621a-55e5-92cf-b5d8f06717f6))
+(text "MCU_USB_DP/DM (PA12/PA11, OTG_FS device mode) are unrelated to the power-only USB-C PD sink ports." (at 20.32 358.14 0) (effects (font (size 1.27 1.27))) (uuid 5add4773-63ef-5640-8a6d-c0ae6dfd5505))
+(text "EC can assert Mu PWRBTN_N/RSTBTN_N; J16 case power is diode-isolated to Mu PWRBTN and charger QON." (at 20.32 364.49 0) (effects (font (size 1.27 1.27))) (uuid e274a8fd-629f-5d29-8538-79b68a43751b))
+(text "Hardware UARTs: VHF USART3 on PB10/PB11, UHF USART6 on PC6/PC7, GNSS USART1 on PA9/PA10." (at 20.32 369.57 0) (effects (font (size 1.27 1.27))) (uuid 8baddcb6-50ab-5d39-b7d0-54417d7deaba))
+(text "AUX_DC_ADC monitors the screw-terminal wide-DC input so firmware can classify and current-limit that source." (at 20.32 375.92 0) (effects (font (size 1.27 1.27))) (uuid 712d3b3d-6095-5ef8-9b1a-9de471453604))
+(text "PA7/PB0 are thermal ADCs; fan PWM uses timer-capable PE9/TIM1_CH1 and tach remains EC-owned." (at 20.32 383.54 0) (effects (font (size 1.27 1.27))) (uuid 1a73e688-7554-50fc-9018-c97cbf537d17))
+(text "The EC has no user GPIO header; all tinkering I/O is isolated to the integrated RP2350 maker domain." (at 20.32 391.16 0) (effects (font (size 1.27 1.27))) (uuid 29798bb2-42f5-5e2c-8b1d-ce70d51ff164))
+(text "U5 follows the TPS54202 3.3V table and runs from EC_AON_IN so source validation firmware can execute before arbitration." (at 20.32 398.78 0) (effects (font (size 1.27 1.27))) (uuid 40e3be7a-78e6-516f-8d73-f49a01726162))
+(text "U5 EN is intentionally floated: TI specifies an internal pull-up that enables the converter when EN is open." (at 20.32 414.02 0) (effects (font (size 1.27 1.27))) (uuid 1fd75630-94c8-5128-b1d2-fbb76f07afb8))
+(text "PE13 drives active-high MU_12V_ENABLE; PE14 reads MU_S0_HIGH; PE15 reads MU_12V_PG; PB1 reads TRACKPAD_FAULT_N." (at 20.32 406.4 0) (effects (font (size 1.27 1.27))) (uuid 1f96f8e3-fd56-5104-b8fd-26a0e9fd9059))
 (sheet_instances
   (path "/ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8"
     (page "3")

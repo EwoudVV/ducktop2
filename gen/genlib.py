@@ -27,8 +27,10 @@ LIBMAP = {
     "Conn_01x10": "Connector_Generic", "Conn_01x18": "Connector_Generic",
     "Conn_01x20": "Connector_Generic", "Conn_01x30": "Connector_Generic",
     "Conn_01x40": "Connector_Generic", "Conn_02x03_Odd_Even": "Connector_Generic",
+    "Conn_02x30_Odd_Even": "Connector_Generic",
     "Conn_01x10_FFC_MP": "Conn_01x10_FFC_MP",
     "Conn_01x30_FFC_MP": "Conn_01x30_FFC_MP",
+    "Conn_02x30_MP": "Conn_02x30_MP",
     "Conn_02x20_Odd_Even": "Connector_Generic",
     "BQ76920PW": "ducktop2", "BQ25798": "ducktop2", "BQ24650": "ducktop2",
     "BQ34Z100-G1": "BQ34Z100-G1", "BQ77915": "BQ77915", "LTC4368-1": "LTC4368-1",
@@ -39,7 +41,7 @@ LIBMAP = {
     "W25Q32JVZP": "Memory_Flash",
     "RT6150BGQW": "RT6150BGQW",
     "TPS54202DDC": "ducktop2",
-    "Crystal": "Device", "Crystal_GND24": "Device", "SW_Push": "Switch",
+    "Crystal": "Device", "Crystal_GND24": "Device", "ASDMB-xxxMHz": "Oscillator", "SW_Push": "Switch",
     "Conn_01x06": "Connector_Generic", "Conn_01x08": "Connector_Generic",
     "Conn_01x16": "Connector_Generic",
     "Conn_Coaxial": "Connector",
@@ -66,7 +68,9 @@ LIBMAP = {
     "VL822-Q7": "ducktop2",
     "TPS7A0210": "ducktop2",
     "TUSB8020BIPHP": "TUSB8020BIPHP",
+    "USB7206C": "USB7206C",
     "TPS62821DLC": "TPS62821DLC",
+    "TPS62823DLC": "Regulator_Switching",
     "TPS2553D": "TPS2553D",
     "TPS552892": "TPS552892",
     "TLV803EA29RDBZR": "TLV803EA29RDBZR",
@@ -77,6 +81,7 @@ LIBMAP = {
     "74LVC1G08": "74xGxx",
     "74LVC1G373": "74xGxx",
     "74LVC2G04": "74xGxx",
+    "74LVC2G07": "74xGxx",
     "74LVC2G32": "74xGxx",
     "74LVC3G34": "74xGxx",
     "74LVC1G17": "74xGxx",
@@ -90,6 +95,14 @@ LIBMAP = {
     "TS3USB30EDGSR": "Interface_USB",
     "TPS25810RVC": "Interface_USB",
     "HD3SS6126": "Interface_USB",
+    "TPS25751AD": "TPS25751AD",
+    "TUSB1142": "TUSB1142",
+    "TPD1E0B04": "TPD1E0B04",
+    "TPD4S201": "TPD4S201",
+    "TPD1S514_1YZR": "TPD1S514_1YZR",
+    "TVS2200DRV": "Power_Protection",
+    "SST26VF016B": "SST26VF016B",
+    "CAT24C256": "Memory_EEPROM",
     "CH224K": "Interface_USB", "CH224A": "CH224A",
     "TPD12S520DBT": "Interface_HDMI",
     "TPD13S523PWR": "TPD13S523PWR",
@@ -175,6 +188,12 @@ def symbol_file_for(lib, name):
 FFC_MP_SYMBOLS = {
     "Conn_01x10_FFC_MP": ("Conn_01x10", -15.24),
     "Conn_01x30_FFC_MP": ("Conn_01x30", -40.64),
+    "Conn_02x30_MP": ("Conn_02x30_Odd_Even", -40.64),
+}
+
+LOCAL_SYMBOL_SOURCE_NAMES = {
+    "TPD1S514_1YZR": "TPD1S514_1YZR",
+    "SST26VF016B": "SST26VF016B-104I_SM",
 }
 
 
@@ -253,9 +272,12 @@ def load_renamed_symbol(name):
         source_name, mp_y = FFC_MP_SYMBOLS[name]
         source_lib = "Connector_Generic"
     else:
-        source_name = "USB_C_Receptacle" if name == "USB_C_Receptacle_Passive" else name
+        source_name = LOCAL_SYMBOL_SOURCE_NAMES.get(
+            name,
+            "USB_C_Receptacle" if name == "USB_C_Receptacle_Passive" else name,
+        )
         source_lib = "Connector" if name == "USB_C_Receptacle_Passive" else lib
-    path = symbol_file_for(source_lib, source_name)
+    path = symbol_file_for(source_lib, name if name in LOCAL_SYMBOL_SOURCE_NAMES else source_name)
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
     block = extract_symbol_block(text, source_name)
@@ -298,8 +320,20 @@ def load_renamed_symbol(name):
         # VOUT is a supply/sense input connected to the external MOSFET output;
         # the controller does not source the selected rail through this pin.
         block = override_pin_types(block, {"15": "power_in"})
+    if name in LOCAL_SYMBOL_SOURCE_NAMES:
+        # KiCad requires every graphical/unit sub-symbol identifier to use the
+        # same base name as the outer symbol.  Local libraries often name the
+        # source after the full orderable part (for example TPD1E0B04DPLR),
+        # while the generated library uses a shorter project-facing name.
+        block = block.replace(f'"{source_name}_', f'"{name}_')
+    # Transformations above may already rename the outer symbol (for example
+    # the passive USB-C and FFC-with-mounting-pad variants).  Replacing the
+    # complete outer identifier is robust; slicing by the original source-name
+    # length corrupts any variant whose generated name has a different length.
     qualified = f'(symbol "{lib}:{name}"'
-    renamed = qualified + block[len(f'(symbol "{name}"'):]
+    renamed = re.sub(r'^\(symbol "[^"]+"', qualified, block, count=1)
+    if renamed == block:
+        raise ValueError(f"could not qualify outer symbol name for {name}")
     return lib, renamed
 
 PIN_RE = re.compile(

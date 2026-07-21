@@ -24,8 +24,8 @@ static bool desired_is_valid(const ec_outputs_t *desired) {
   }
   controlled_load_enabled =
       desired->charger_enable || desired->mu_12v_enable ||
-      desired->keyboard_rgb_power_enable || desired->radio_vhf_power_enable ||
-      desired->radio_uhf_power_enable || desired->audio_amp_enable ||
+      desired->keyboard_rgb_power_enable || desired->radio_db_power_enable ||
+      desired->audio_amp_enable ||
       desired->audio_mic_enable;
   if (enabled_paths != 0u && desired->charger_iindpm_ma == 0u &&
       (controlled_load_enabled || desired->charge_power_budget_mw != 0u ||
@@ -53,15 +53,13 @@ static bool write_safe_sequence(const ec_commit_driver_t *driver) {
   bool ok = true;
 
   ok = write_value(driver, EC_COMMIT_KEYBOARD_RGB_ENABLE, 0u) && ok;
-  ok = write_value(driver, EC_COMMIT_RADIO_VHF_ENABLE, 0u) && ok;
-  ok = write_value(driver, EC_COMMIT_RADIO_UHF_ENABLE, 0u) && ok;
+  ok = write_value(driver, EC_COMMIT_RADIO_DB_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_AUDIO_AMP_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_AUDIO_MIC_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_MU_12V_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_CHARGER_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_PD1_PATH_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_PD2_PATH_ENABLE, 0u) && ok;
-  ok = write_value(driver, EC_COMMIT_PD3_PATH_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_CHARGER_IINDPM_MA, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_CHARGE_BUDGET_MW, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_MU_EDP_BUDGET_MW, 0u) && ok;
@@ -111,8 +109,7 @@ static bool controlled_state_equal(const ec_outputs_t *applied,
          applied->mu_edp_budget_mw == desired->mu_edp_budget_mw &&
          applied->keyboard_rgb_power_enable ==
              desired->keyboard_rgb_power_enable &&
-         applied->radio_vhf_power_enable == desired->radio_vhf_power_enable &&
-         applied->radio_uhf_power_enable == desired->radio_uhf_power_enable &&
+         applied->radio_db_power_enable == desired->radio_db_power_enable &&
          applied->audio_amp_enable == desired->audio_amp_enable &&
          applied->audio_mic_enable == desired->audio_mic_enable;
 }
@@ -196,15 +193,10 @@ ec_commit_result_t ec_commit_apply(ec_commit_state_t *state,
     COMMIT_OR_SAFE(EC_COMMIT_KEYBOARD_RGB_ENABLE, 1u, 0u);
     current.keyboard_rgb_power_enable = false;
   }
-  if (current.radio_vhf_power_enable &&
-      (sequencing_change || !desired->radio_vhf_power_enable)) {
-    COMMIT_OR_SAFE(EC_COMMIT_RADIO_VHF_ENABLE, 1u, 0u);
-    current.radio_vhf_power_enable = false;
-  }
-  if (current.radio_uhf_power_enable &&
-      (sequencing_change || !desired->radio_uhf_power_enable)) {
-    COMMIT_OR_SAFE(EC_COMMIT_RADIO_UHF_ENABLE, 1u, 0u);
-    current.radio_uhf_power_enable = false;
+  if (current.radio_db_power_enable &&
+      (sequencing_change || !desired->radio_db_power_enable)) {
+    COMMIT_OR_SAFE(EC_COMMIT_RADIO_DB_ENABLE, 1u, 0u);
+    current.radio_db_power_enable = false;
   }
   if (current.audio_amp_enable &&
       (sequencing_change || !desired->audio_amp_enable)) {
@@ -249,12 +241,9 @@ ec_commit_result_t ec_commit_apply(ec_commit_state_t *state,
   COMMIT_OR_SAFE(EC_COMMIT_KEYBOARD_RGB_ENABLE,
                  current.keyboard_rgb_power_enable,
                  desired->keyboard_rgb_power_enable);
-  COMMIT_OR_SAFE(EC_COMMIT_RADIO_VHF_ENABLE,
-                 current.radio_vhf_power_enable,
-                 desired->radio_vhf_power_enable);
-  COMMIT_OR_SAFE(EC_COMMIT_RADIO_UHF_ENABLE,
-                 current.radio_uhf_power_enable,
-                 desired->radio_uhf_power_enable);
+  COMMIT_OR_SAFE(EC_COMMIT_RADIO_DB_ENABLE,
+                 current.radio_db_power_enable,
+                 desired->radio_db_power_enable);
   COMMIT_OR_SAFE(EC_COMMIT_AUDIO_AMP_ENABLE, current.audio_amp_enable,
                  desired->audio_amp_enable);
   COMMIT_OR_SAFE(EC_COMMIT_AUDIO_MIC_ENABLE, current.audio_mic_enable,

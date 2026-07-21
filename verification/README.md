@@ -8,13 +8,14 @@ locally outside the public working tree.
 
 | Check | Current result |
 | --- | --- |
-| KiCad ERC | 0 errors, 13 classified flattened-library warnings |
+| KiCad ERC | 0 errors, 13 library-copy and 14 intentional grounded-pin warnings |
 | Generated schematic self-check | Pass |
 | Schematic design contracts | Pass |
-| Independent netlist closure | 386 pass, 0 fail |
-| Electrical calculations | 129 pass, 0 fail |
-| Pin review | 2,410 pass, 0 fail, 351 review |
-| Mainboard schematic/PCB parity | 997 of 997 references, no pad-net or metadata drift |
+| Independent netlist closure | 1,571 pass, 0 fail |
+| Electrical calculations | 123 pass, 0 fail |
+| Pin review | 2,298 pass, 0 fail, 344 review |
+| Mainboard schematic/PCB parity | 1,173 of 1,173 references, no pad-net or metadata drift |
+| Radio daughterboard ERC | 0 errors, 0 warnings |
 | Host firmware policy tests | Pass |
 
 The schematic result means the current generated netlist is internally
@@ -27,17 +28,17 @@ tracked separately from schematic correctness.
 
 ## Current Evidence
 
-- [`SCHEMATIC_CLOSURE_2026-07-19.md`](SCHEMATIC_CLOSURE_2026-07-19.md) - closed
+- [`SCHEMATIC_CLOSURE_2026-07-20.md`](SCHEMATIC_CLOSURE_2026-07-20.md) - closed
   electrical findings and current endpoint measurements
-- [`ELECTRICAL_CALCULATIONS_2026-07-19.md`](ELECTRICAL_CALCULATIONS_2026-07-19.md)
+- [`ELECTRICAL_CALCULATIONS_2026-07-20.md`](ELECTRICAL_CALCULATIONS_2026-07-20.md)
   - bounded threshold, current, power, and timing calculations
-- [`PIN_BY_PIN_REVIEW_2026-07-19.md`](PIN_BY_PIN_REVIEW_2026-07-19.md) - pin
+- [`PIN_BY_PIN_REVIEW_2026-07-20.md`](PIN_BY_PIN_REVIEW_2026-07-20.md) - pin
   classification summary
-- [`INVENTORY_MANIFEST_2026-07-19.md`](INVENTORY_MANIFEST_2026-07-19.md) - active
+- [`INVENTORY_MANIFEST_2026-07-20.md`](INVENTORY_MANIFEST_2026-07-20.md) - active
   component and net inventory
-- [`BOM_RELEASE_GAPS_2026-07-19.md`](BOM_RELEASE_GAPS_2026-07-19.md) - procurement
+- [`BOM_RELEASE_GAPS_2026-07-20.md`](BOM_RELEASE_GAPS_2026-07-20.md) - procurement
   fields that still need exact identities
-- [`SCHEMATIC_TO_PCB_ECO_2026-07-18.md`](SCHEMATIC_TO_PCB_ECO_2026-07-18.md) -
+- [`SCHEMATIC_TO_PCB_ECO_2026-07-20.md`](SCHEMATIC_TO_PCB_ECO_2026-07-20.md) -
   current reference and pad-net comparison
 - [`KEYBOARD_FFC_ASSEMBLY_CONTRACT_2026-07-15.md`](KEYBOARD_FFC_ASSEMBLY_CONTRACT_2026-07-15.md)
   - keyboard cable orientation and continuity checks

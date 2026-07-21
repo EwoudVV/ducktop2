@@ -53,9 +53,10 @@ kicad-cli sch erc --severity-all --exit-code-violations \
   --output /tmp/ducktop2-erc.rpt ducktop2.kicad_sch
 ```
 
-The current expected result is zero errors and 13 classified flattened-library
-warnings. A different warning class or count should be reviewed rather than
-silenced.
+The current expected result is zero errors and 27 exact-reference warnings:
+13 flattened-library copy notices and 14 intentional bidirectional pins tied to
+ground. A different warning class, reference, pin, or count should be reviewed
+rather than silenced.
 
 ## Firmware Policy Tests
 

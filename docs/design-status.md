@@ -1,36 +1,38 @@
 # Current Design Status
 
-Updated: 2026-07-19
+Updated: 2026-07-20
 
 ## Schematic
 
-The active motherboard hierarchy contains 14 generated child sheets and 1,004
-components. The retired Intehill-controller, VL822 hub, carrier-eDP, and USB-C
-video sheets are not part of the root design.
+The active motherboard hierarchy contains 14 generated child sheets, 1,176
+components, 1,378 nets, and 4,565 connected pins. The retired Intehill
+controller, VL822 hub, carrier-eDP, and USB-C video sheets are not part of the
+root design.
 
 Current automated results:
 
 | Check | Result |
 | --- | --- |
-| KiCad ERC | 0 errors; 13 classified `lib_symbol_mismatch` warnings |
-| Independent netlist closure | 386 pass, 0 fail |
-| Bounded electrical calculations | 129 pass, 0 fail |
-| Pin review | 2,410 pass, 0 fail, 351 review |
-| Schematic-to-PCB reference/pad-net parity | 997 of 997, no drift |
+| KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
+| Independent netlist closure | 1,571 pass, 0 fail |
+| Bounded electrical calculations | 123 pass, 0 fail |
+| Pin review | 2,298 pass, 0 fail, 344 review |
+| Schematic-to-PCB reference/pad-net parity | 1,173 of 1,173, no drift |
 | Host firmware policy tests | Pass |
 
 The remaining pin-review rows are broad Mu, M.2, MCU, spare, NC, and ground-pin
 classifications that require human context; they are not detected electrical
-failures. The ERC warnings come from flattened copies of KiCad symbols that use
-`extends` and have been checked separately.
+failures. The ERC warning allowlist is tied to exact references and pins. It
+covers 13 flattened KiCad symbol copies and 14 required GPIO/strap ties that
+KiCad sees sharing the global ground power flag.
 
 The latest closure summary is in
-[`verification/SCHEMATIC_CLOSURE_2026-07-19.md`](../verification/SCHEMATIC_CLOSURE_2026-07-19.md).
+[`verification/SCHEMATIC_CLOSURE_2026-07-20.md`](../verification/SCHEMATIC_CLOSURE_2026-07-20.md).
 
 ## PCB
 
 The mainboard is six layers and currently measures 358 x 185 mm, including the
-fin-stack notch. It contains 997 footprints and 14 zones. The schematic and PCB
+fin-stack notch. It contains 1,173 footprints and 14 zones. The schematic and PCB
 agree on references, footprints, pad nets, BOM flags, and DNP flags.
 
 Routing has not started. The current 3D renders show placement only.
@@ -44,8 +46,13 @@ reference for high-speed routing.
 The current DRC findings are placement-stage items:
 
 - 499 unrouted connections
-- 409 silkscreen overlap, over-copper, or edge-clearance warnings
+- 410 silkscreen, edge-clearance, or text-size warnings
 - no current schematic-to-PCB parity findings
+
+The removable radio/GNSS/audio daughterboard has 126 placed footprints. Its
+schematic passes ERC with no warnings, and its mainboard interface defaults off
+so the laptop, system audio, microphone, charging, and boot path do not depend
+on the daughterboard being installed.
 
 ## Mechanical
 

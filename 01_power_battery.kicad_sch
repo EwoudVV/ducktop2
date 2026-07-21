@@ -9930,17 +9930,17 @@
 )
 (symbol
   (lib_id "power:PWR_FLAG")
-  (at 650.24 74.93 0)
+  (at 650.24 90.17 0)
   (unit 0)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
   (uuid b4d88c26-ad59-5352-9de2-d27c43463fec)
-  (property "Reference" "#FLG007" (at 650.24 72.39 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "PWR_FLAG" (at 650.24 77.47 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 650.24 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 650.24 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Reference" "#FLG007" (at 650.24 87.63 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PWR_FLAG" (at 650.24 92.71 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 650.24 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 0668b772-ee3c-56d1-b434-ca023b1e1908))
   (instances
     (project "ducktop2"
@@ -9951,24 +9951,24 @@
     )
   )
 )
-(label "USB_PD_SELECTED"
-  (at 650.24 74.93 0)
+(label "VBUS_COMBINED"
+  (at 650.24 90.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid f6e75493-9657-5d16-baf1-9e0190dcbee1)
 )
 (symbol
   (lib_id "power:PWR_FLAG")
-  (at 650.24 90.17 0)
+  (at 650.24 44.45 0)
   (unit 0)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
   (uuid ef2ca66f-ac54-5c47-9b31-2bc9548a8f8c)
-  (property "Reference" "#FLG008" (at 650.24 87.63 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "PWR_FLAG" (at 650.24 92.71 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 650.24 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 650.24 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Reference" "#FLG008" (at 650.24 41.91 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PWR_FLAG" (at 650.24 46.99 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 650.24 44.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 44.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 894ade7a-2022-54fd-9890-a75ba5a16b8f))
   (instances
     (project "ducktop2"
@@ -9979,24 +9979,24 @@
     )
   )
 )
-(label "VBUS_COMBINED"
-  (at 650.24 90.17 0)
+(label "AUX_DC_FUSED"
+  (at 650.24 44.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e13cf0f5-faed-5223-820f-0f985b03c437)
 )
 (symbol
   (lib_id "power:PWR_FLAG")
-  (at 650.24 44.45 0)
+  (at 650.24 59.69 0)
   (unit 0)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
   (uuid e6d9cc21-c77b-52c4-be3b-4bba6975fd8f)
-  (property "Reference" "#FLG009" (at 650.24 41.91 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "PWR_FLAG" (at 650.24 46.99 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 650.24 44.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 650.24 44.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Reference" "#FLG009" (at 650.24 57.15 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PWR_FLAG" (at 650.24 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 650.24 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 650.24 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 5467c761-d281-571d-80ca-a176ab678e39))
   (instances
     (project "ducktop2"
@@ -10007,38 +10007,10 @@
     )
   )
 )
-(label "AUX_DC_FUSED"
-  (at 650.24 44.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 50c4d623-661e-5371-b476-2ff1f136ae22)
-)
-(symbol
-  (lib_id "power:PWR_FLAG")
-  (at 650.24 59.69 0)
-  (unit 0)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 875af184-1e23-5bee-8cdf-bbc916ee0215)
-  (property "Reference" "#FLG010" (at 650.24 57.15 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "PWR_FLAG" (at 650.24 62.23 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 650.24 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 650.24 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9cde9aea-189d-5bd1-814c-d4864f08389d))
-  (instances
-    (project "ducktop2"
-      (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
-        (reference "#FLG010")
-        (unit 0)
-      )
-    )
-  )
-)
 (label "AUX_EFUSE_IN_SYS"
   (at 650.24 59.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ef22e296-ad3c-5048-a87c-d7e4d1b9b61c)
+  (uuid 50c4d623-661e-5371-b476-2ff1f136ae22)
 )
 (symbol
   (lib_id "Device:D_Schottky")
@@ -10048,15 +10020,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 50010a2e-9a5d-5acc-bb24-c1d747910da8)
+  (uuid 875af184-1e23-5bee-8cdf-bbc916ee0215)
   (property "Reference" "D710" (at 650.24 312.42 0) (effects (font (size 1.27 1.27))))
   (property "Value" "B340A 3A 40V EC always-on OR" (at 650.24 317.5 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Diode_SMD:D_SMA" (at 650.24 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Diodes Incorporated" (at 650.24 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "B340A-13-F" (at 650.24 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c7ff8252-fe55-5b05-b6cb-c1d057c8f39a))
-  (pin "2" (uuid de7d58df-42df-5fd2-96e1-9088282f20ed))
+  (pin "1" (uuid 9cde9aea-189d-5bd1-814c-d4864f08389d))
+  (pin "2" (uuid ef22e296-ad3c-5048-a87c-d7e4d1b9b61c))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10069,12 +10041,12 @@
 (label "AON_OR_RAW"
   (at 646.43 314.96 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bdcdb364-24ae-5a80-ad81-ea04fe7aa243)
+  (uuid 50010a2e-9a5d-5acc-bb24-c1d747910da8)
 )
 (label "BAT_CHARGER"
   (at 654.05 314.96 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 394ed447-59b1-5466-b9b5-96a75cd85646)
+  (uuid c7ff8252-fe55-5b05-b6cb-c1d057c8f39a)
 )
 (symbol
   (lib_id "Device:D_Schottky")
@@ -10084,15 +10056,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid a1417336-9a76-5483-96fb-3e7df720b10f)
+  (uuid de7d58df-42df-5fd2-96e1-9088282f20ed)
   (property "Reference" "D711" (at 650.24 322.58 0) (effects (font (size 1.27 1.27))))
   (property "Value" "B340A 3A 40V EC always-on OR" (at 650.24 327.66 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Diode_SMD:D_SMA" (at 650.24 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Diodes Incorporated" (at 650.24 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "B340A-13-F" (at 650.24 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8475245c-270c-50d3-aa10-57ce2568cebe))
-  (pin "2" (uuid e8e35aed-7b0e-5cdf-9bba-d376d39d6241))
+  (pin "1" (uuid bdcdb364-24ae-5a80-ad81-ea04fe7aa243))
+  (pin "2" (uuid 394ed447-59b1-5466-b9b5-96a75cd85646))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10105,12 +10077,12 @@
 (label "AON_OR_RAW"
   (at 646.43 325.12 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4e4e92f7-a0b9-5b60-aaff-eb3d44189741)
+  (uuid a1417336-9a76-5483-96fb-3e7df720b10f)
 )
 (label "AUX_DC_PROTECTED"
   (at 654.05 325.12 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 79b909cb-546c-5657-8384-491e0c947015)
+  (uuid 8475245c-270c-50d3-aa10-57ce2568cebe)
 )
 (symbol
   (lib_id "Device:D_Schottky")
@@ -10120,15 +10092,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 34e00a2c-c68c-58da-9ab7-15813730bc01)
+  (uuid e8e35aed-7b0e-5cdf-9bba-d376d39d6241)
   (property "Reference" "D712" (at 650.24 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Value" "B340A 3A 40V EC always-on OR" (at 650.24 337.82 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Diode_SMD:D_SMA" (at 650.24 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Diodes Incorporated" (at 650.24 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "B340A-13-F" (at 650.24 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid ed4a07df-66c7-5368-a01b-06c63d732217))
-  (pin "2" (uuid 9f8bc791-d807-52a5-a610-b5a9ab868b4d))
+  (pin "1" (uuid 4e4e92f7-a0b9-5b60-aaff-eb3d44189741))
+  (pin "2" (uuid 79b909cb-546c-5657-8384-491e0c947015))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10141,13 +10113,13 @@
 (label "AON_OR_RAW"
   (at 646.43 335.28 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1ca5ba59-6344-5865-b192-18e45783f7cc)
+  (uuid 34e00a2c-c68c-58da-9ab7-15813730bc01)
 )
 (hierarchical_label "PD1_VBUS_RAW"
   (shape bidirectional)
   (at 654.05 335.28 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cc3d85fc-5f8a-5334-b964-fd3e2f6ab406)
+  (uuid ed4a07df-66c7-5368-a01b-06c63d732217)
 )
 (symbol
   (lib_id "Device:D_Schottky")
@@ -10157,15 +10129,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 89c6a0ba-39dd-5a2f-a518-650785d56357)
+  (uuid 9f8bc791-d807-52a5-a610-b5a9ab868b4d)
   (property "Reference" "D713" (at 650.24 342.9 0) (effects (font (size 1.27 1.27))))
   (property "Value" "B340A 3A 40V EC always-on OR" (at 650.24 347.98 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Diode_SMD:D_SMA" (at 650.24 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Diodes Incorporated" (at 650.24 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "B340A-13-F" (at 650.24 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 5f6ee110-2749-534a-96bf-2faa9561c417))
-  (pin "2" (uuid 630d3799-82ff-5650-a9ba-c7ad3e5149d6))
+  (pin "1" (uuid 1ca5ba59-6344-5865-b192-18e45783f7cc))
+  (pin "2" (uuid cc3d85fc-5f8a-5334-b964-fd3e2f6ab406))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10178,50 +10150,13 @@
 (label "AON_OR_RAW"
   (at 646.43 345.44 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dbad5958-9be8-5667-883a-c0e0574f0a79)
+  (uuid 89c6a0ba-39dd-5a2f-a518-650785d56357)
 )
 (hierarchical_label "PD2_VBUS_RAW"
   (shape bidirectional)
   (at 654.05 345.44 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4ac053e4-493a-5179-b4e3-feaf7841159f)
-)
-(symbol
-  (lib_id "Device:D_Schottky")
-  (at 650.24 355.6 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 1933b2c9-532d-58c7-8d34-a28c045fff21)
-  (property "Reference" "D714" (at 650.24 353.06 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "B340A 3A 40V EC always-on OR" (at 650.24 358.14 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Diode_SMD:D_SMA" (at 650.24 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 650.24 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Diodes Incorporated" (at 650.24 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "B340A-13-F" (at 650.24 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 2dc832b1-a202-54cd-899b-d65c488811b6))
-  (pin "2" (uuid eb282b2f-e6a7-5fb5-bca5-5b36d25519a5))
-  (instances
-    (project "ducktop2"
-      (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
-        (reference "D714")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "AON_OR_RAW"
-  (at 646.43 355.6 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b5fddebe-2574-58d6-811a-c64f62b2ff31)
-)
-(hierarchical_label "PD3_VBUS_RAW"
-  (shape bidirectional)
-  (at 654.05 355.6 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dbd4b383-fb6d-566f-91ef-e2ab998bd808)
+  (uuid 5f6ee110-2749-534a-96bf-2faa9561c417)
 )
 (symbol
   (lib_id "TPS259470A:TPS259470A")
@@ -10231,7 +10166,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid a3a4bd1b-49a2-5176-b7c3-5528f05b2d50)
+  (uuid 630d3799-82ff-5650-a9ba-c7ad3e5149d6)
   (property "Reference" "U718" (at 704.85 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Value" "TPS259470ARPW aggregate EC AON eFuse" (at 704.85 337.82 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Texas_RPW0010A_VQFN-HR-10_2x2mm" (at 704.85 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -10239,16 +10174,16 @@
   (property "Manufacturer" "Texas Instruments" (at 704.85 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "TPS259470ARPW" (at 704.85 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps25947.pdf" (at 704.85 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8bb4e6b6-437c-5caf-aeb2-49d7f70c5915))
-  (pin "2" (uuid 15a59a59-2ae0-5d14-a38a-aba7dac20b3b))
-  (pin "3" (uuid cee59ae5-6f89-5095-865d-f61e07878ba1))
-  (pin "4" (uuid 21262af3-ec65-5b8f-8f9a-9d13647584bc))
-  (pin "5" (uuid 9c8eb872-f247-5ea9-8d19-36a089fc092f))
-  (pin "6" (uuid 82adaa04-35f3-547f-9653-a3bafa1b21c5))
-  (pin "7" (uuid 83bd11ed-53fa-51bc-89f4-532569d6365b))
-  (pin "8" (uuid f6dfe21a-eabf-5166-a4a0-702fec9d82b4))
-  (pin "9" (uuid cf4bfb72-db43-5c0a-b6e1-f8ee12014fde))
-  (pin "10" (uuid 8ffaa2c7-399f-558d-b5d0-64d21ec625df))
+  (pin "1" (uuid dbad5958-9be8-5667-883a-c0e0574f0a79))
+  (pin "2" (uuid 4ac053e4-493a-5179-b4e3-feaf7841159f))
+  (pin "3" (uuid 1933b2c9-532d-58c7-8d34-a28c045fff21))
+  (pin "4" (uuid 2dc832b1-a202-54cd-899b-d65c488811b6))
+  (pin "5" (uuid eb282b2f-e6a7-5fb5-bca5-5b36d25519a5))
+  (pin "6" (uuid b5fddebe-2574-58d6-811a-c64f62b2ff31))
+  (pin "7" (uuid dbd4b383-fb6d-566f-91ef-e2ab998bd808))
+  (pin "8" (uuid a3a4bd1b-49a2-5176-b7c3-5528f05b2d50))
+  (pin "9" (uuid 8bb4e6b6-437c-5caf-aeb2-49d7f70c5915))
+  (pin "10" (uuid 15a59a59-2ae0-5d14-a38a-aba7dac20b3b))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10261,47 +10196,47 @@
 (label "AON_EFUSE_UV"
   (at 697.23 331.47 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 64230e87-228e-5962-82f5-2672014202b1)
+  (uuid cee59ae5-6f89-5095-865d-f61e07878ba1)
 )
 (label "AON_EFUSE_OV"
   (at 697.23 334.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 976855ee-a807-5187-bbb4-a2ebec2fb37c)
+  (uuid 21262af3-ec65-5b8f-8f9a-9d13647584bc)
 )
-(no_connect (at 712.47 331.47) (uuid 75722779-2db2-5a9b-9ba7-8191643cbb76))
+(no_connect (at 712.47 331.47) (uuid 9c8eb872-f247-5ea9-8d19-36a089fc092f))
 (hierarchical_label "AON_FAULT_N"
   (shape bidirectional)
   (at 712.47 334.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 02700e06-df94-532f-b254-3a8b2817c9e1)
+  (uuid 82adaa04-35f3-547f-9653-a3bafa1b21c5)
 )
 (label "AON_OR_RAW"
   (at 697.23 336.55 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 70696e0d-13d2-551e-b97a-97d907b7af49)
+  (uuid 83bd11ed-53fa-51bc-89f4-532569d6365b)
 )
 (hierarchical_label "EC_AON_IN"
   (shape bidirectional)
   (at 712.47 336.55 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 48527394-b79f-57f1-8cd0-9917fcb20df0)
+  (uuid f6dfe21a-eabf-5166-a4a0-702fec9d82b4)
 )
 (label "AON_EFUSE_DVDT"
   (at 697.23 339.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 88d49a59-ba42-5ae0-986e-317f18292caa)
+  (uuid cf4bfb72-db43-5c0a-b6e1-f8ee12014fde)
 )
 (label "GND"
   (at 704.85 342.9 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3969a36c-3b33-5d44-84c9-6012e54ccf71)
+  (uuid 8ffaa2c7-399f-558d-b5d0-64d21ec625df)
 )
 (label "AON_EFUSE_ILM"
   (at 712.47 339.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ef379c9b-ff69-5fc7-b03b-dd1efae9cff0)
+  (uuid 64230e87-228e-5962-82f5-2672014202b1)
 )
-(no_connect (at 704.85 327.66) (uuid 667d4494-cc23-560d-8a5b-faec9ec98b7c))
+(no_connect (at 704.85 327.66) (uuid 976855ee-a807-5187-bbb4-a2ebec2fb37c))
 (symbol
   (lib_id "Device:R")
   (at 754.38 314.96 0)
@@ -10310,15 +10245,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 3b076bcd-a9f0-5371-8190-370690527f77)
+  (uuid 75722779-2db2-5a9b-9ba7-8191643cbb76)
   (property "Reference" "R795" (at 754.38 312.42 0) (effects (font (size 1.27 1.27))))
   (property "Value" "301k 0.1% AON UV/OV top" (at 754.38 317.5 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 754.38 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 754.38 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 754.38 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "RT0603BRD07301KL" (at 754.38 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 753addb7-74a3-5955-8d44-d0650954496c))
-  (pin "2" (uuid 43bcc5c4-c3b9-575c-9bfc-ffaf9a3204ea))
+  (pin "1" (uuid 02700e06-df94-532f-b254-3a8b2817c9e1))
+  (pin "2" (uuid 70696e0d-13d2-551e-b97a-97d907b7af49))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10331,12 +10266,12 @@
 (label "AON_OR_RAW"
   (at 754.38 311.15 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 22c5523b-4011-5344-86fc-7a6f2fb11d04)
+  (uuid 48527394-b79f-57f1-8cd0-9917fcb20df0)
 )
 (label "AON_EFUSE_UV"
   (at 754.38 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6d5c8332-09aa-59bf-9272-fe3888174006)
+  (uuid 88d49a59-ba42-5ae0-986e-317f18292caa)
 )
 (symbol
   (lib_id "Device:R")
@@ -10346,15 +10281,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid f1564d3a-3b9a-5a96-93f6-21f22f990d41)
+  (uuid 3969a36c-3b33-5d44-84c9-6012e54ccf71)
   (property "Reference" "R796" (at 754.38 322.58 0) (effects (font (size 1.27 1.27))))
   (property "Value" "52.3k 0.1% AON UV/OV middle" (at 754.38 327.66 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 754.38 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 754.38 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 754.38 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "RT0603BRD0752K3L" (at 754.38 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 462eb061-0ad8-57db-a920-105984159989))
-  (pin "2" (uuid 9232f25b-6165-5881-8446-aeebf46c410d))
+  (pin "1" (uuid ef379c9b-ff69-5fc7-b03b-dd1efae9cff0))
+  (pin "2" (uuid 667d4494-cc23-560d-8a5b-faec9ec98b7c))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10367,12 +10302,12 @@
 (label "AON_EFUSE_UV"
   (at 754.38 321.31 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2b8de09f-333d-5812-800c-6c5a644619fa)
+  (uuid 3b076bcd-a9f0-5371-8190-370690527f77)
 )
 (label "AON_EFUSE_OV"
   (at 754.38 328.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2dd63b36-a8c9-5e19-a397-32d9299c5158)
+  (uuid 753addb7-74a3-5955-8d44-d0650954496c)
 )
 (symbol
   (lib_id "Device:R")
@@ -10382,15 +10317,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 3c861c1a-51a4-5adf-85c2-fd0582aa8d5a)
+  (uuid 43bcc5c4-c3b9-575c-9bfc-ffaf9a3204ea)
   (property "Reference" "R797" (at 754.38 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Value" "20.0k 0.1% AON UV/OV bottom" (at 754.38 337.82 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 754.38 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 754.38 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 754.38 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "RT0603BRD0720KL" (at 754.38 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 05e7564c-cb66-5029-b6e1-ac99351f8eb2))
-  (pin "2" (uuid ce78b6e5-48ef-5186-bafc-12bb363a12af))
+  (pin "1" (uuid 22c5523b-4011-5344-86fc-7a6f2fb11d04))
+  (pin "2" (uuid 6d5c8332-09aa-59bf-9272-fe3888174006))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10403,12 +10338,12 @@
 (label "AON_EFUSE_OV"
   (at 754.38 331.47 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 041d9a3e-d5a4-52d9-ba3c-59a325af72d5)
+  (uuid f1564d3a-3b9a-5a96-93f6-21f22f990d41)
 )
 (label "GND"
   (at 754.38 339.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5dd1bc46-3ef7-56ce-afcc-16214a099ba3)
+  (uuid 462eb061-0ad8-57db-a920-105984159989)
 )
 (symbol
   (lib_id "Device:R")
@@ -10418,13 +10353,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 8b56ce2d-fade-5872-9c3a-f525818b7c56)
+  (uuid 9232f25b-6165-5881-8446-aeebf46c410d)
   (property "Reference" "R798" (at 754.38 342.9 0) (effects (font (size 1.27 1.27))))
   (property "Value" "2.21k 0.1% AON ILM 1.51A typ" (at 754.38 347.98 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 754.38 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 754.38 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8e55dadb-6853-5a80-a8bc-44699f1a328c))
-  (pin "2" (uuid fda3a590-e520-52f6-ad98-2e3e1da59e7b))
+  (pin "1" (uuid 2b8de09f-333d-5812-800c-6c5a644619fa))
+  (pin "2" (uuid 2dd63b36-a8c9-5e19-a397-32d9299c5158))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10437,12 +10372,12 @@
 (label "AON_EFUSE_ILM"
   (at 754.38 341.63 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a58a6114-2501-587b-aa10-6e006010a57f)
+  (uuid 3c861c1a-51a4-5adf-85c2-fd0582aa8d5a)
 )
 (label "GND"
   (at 754.38 349.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cc1d8662-cc44-584c-8706-5399e5c6966d)
+  (uuid 05e7564c-cb66-5029-b6e1-ac99351f8eb2)
 )
 (symbol
   (lib_id "Device:C")
@@ -10452,13 +10387,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 47bdaaf8-3930-5dd8-b6de-9884138ac2d3)
+  (uuid ce78b6e5-48ef-5186-bafc-12bb363a12af)
   (property "Reference" "C795" (at 805.18 312.42 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u 25V AON eFuse input" (at 805.18 317.5 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 805.18 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 805.18 314.96 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 1c4bef9c-8f8c-5e1b-b738-00afe1072991))
-  (pin "2" (uuid e034c776-a776-570c-bdf7-8cea12433f69))
+  (pin "1" (uuid 041d9a3e-d5a4-52d9-ba3c-59a325af72d5))
+  (pin "2" (uuid 5dd1bc46-3ef7-56ce-afcc-16214a099ba3))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10471,12 +10406,12 @@
 (label "AON_OR_RAW"
   (at 805.18 311.15 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8de30fe9-dfe7-5bf5-a0c0-61e7bbc48f38)
+  (uuid 8b56ce2d-fade-5872-9c3a-f525818b7c56)
 )
 (label "GND"
   (at 805.18 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3eb39a95-edb3-5075-a4f3-e81568c87afc)
+  (uuid 8e55dadb-6853-5a80-a8bc-44699f1a328c)
 )
 (symbol
   (lib_id "Device:C")
@@ -10486,13 +10421,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid cb79acd7-5504-54ad-b479-35a20138ec7b)
+  (uuid fda3a590-e520-52f6-ad98-2e3e1da59e7b)
   (property "Reference" "C796" (at 805.18 322.58 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n 50V AON eFuse input local" (at 805.18 327.66 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 805.18 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 805.18 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b7c56c15-5630-5109-a989-93797c8a256e))
-  (pin "2" (uuid 71c708d3-e7ca-5dc4-84ae-dd008bf75117))
+  (pin "1" (uuid a58a6114-2501-587b-aa10-6e006010a57f))
+  (pin "2" (uuid cc1d8662-cc44-584c-8706-5399e5c6966d))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10505,12 +10440,12 @@
 (label "AON_OR_RAW"
   (at 805.18 321.31 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e8998ee1-b97c-5fb8-915b-198990f1b703)
+  (uuid 47bdaaf8-3930-5dd8-b6de-9884138ac2d3)
 )
 (label "GND"
   (at 805.18 328.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c09f8a57-d24a-5ab8-b790-f038d3edbe77)
+  (uuid 1c4bef9c-8f8c-5e1b-b738-00afe1072991)
 )
 (symbol
   (lib_id "Device:C")
@@ -10520,13 +10455,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 2fccba47-247d-54bd-a49f-72a2c42ddbfe)
+  (uuid e034c776-a776-570c-bdf7-8cea12433f69)
   (property "Reference" "C797" (at 805.18 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Value" "10u 25V AON eFuse output" (at 805.18 337.82 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 805.18 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 805.18 335.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a938125a-5bdf-5650-b14a-f945fe1b1501))
-  (pin "2" (uuid 8fb58fb2-2bc2-53cb-b65f-38753f3237f2))
+  (pin "1" (uuid 8de30fe9-dfe7-5bf5-a0c0-61e7bbc48f38))
+  (pin "2" (uuid 3eb39a95-edb3-5075-a4f3-e81568c87afc))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10540,12 +10475,12 @@
   (shape bidirectional)
   (at 805.18 331.47 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 31c7b6cd-2b9a-5b71-aafe-03aa43c9f991)
+  (uuid cb79acd7-5504-54ad-b479-35a20138ec7b)
 )
 (label "GND"
   (at 805.18 339.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 44b21034-5eb8-5a44-b873-182a9c4808da)
+  (uuid b7c56c15-5630-5109-a989-93797c8a256e)
 )
 (symbol
   (lib_id "Device:C")
@@ -10555,13 +10490,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 91229f4b-2695-5685-95d7-34e879b31a60)
+  (uuid 71c708d3-e7ca-5dc4-84ae-dd008bf75117)
   (property "Reference" "C798" (at 805.18 342.9 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n 50V AON eFuse output local" (at 805.18 347.98 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 805.18 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 805.18 345.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 5dc8b63a-a8ca-5bc3-9328-8add1e9b0385))
-  (pin "2" (uuid 9bea279e-faaf-5cca-a8a2-96d6ba72fb67))
+  (pin "1" (uuid e8998ee1-b97c-5fb8-915b-198990f1b703))
+  (pin "2" (uuid c09f8a57-d24a-5ab8-b790-f038d3edbe77))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10575,12 +10510,12 @@
   (shape bidirectional)
   (at 805.18 341.63 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 20067ba3-410d-57d2-a797-b6de804a8141)
+  (uuid 2fccba47-247d-54bd-a49f-72a2c42ddbfe)
 )
 (label "GND"
   (at 805.18 349.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7f8209a7-efe0-5c60-91c4-1a0280fcd681)
+  (uuid a938125a-5bdf-5650-b14a-f945fe1b1501)
 )
 (symbol
   (lib_id "Device:C")
@@ -10590,13 +10525,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 5d7d8e5e-b125-5eb6-accd-58b60d7cd003)
+  (uuid 8fb58fb2-2bc2-53cb-b65f-38753f3237f2)
   (property "Reference" "C799" (at 805.18 353.06 0) (effects (font (size 1.27 1.27))))
   (property "Value" "3.3n AON eFuse dVdt" (at 805.18 358.14 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 805.18 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 805.18 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 363bc1a6-5855-50a4-8450-784b24d1da69))
-  (pin "2" (uuid aee725d4-8321-5336-b188-f652580eba5f))
+  (pin "1" (uuid 31c7b6cd-2b9a-5b71-aafe-03aa43c9f991))
+  (pin "2" (uuid 44b21034-5eb8-5a44-b873-182a9c4808da))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10609,12 +10544,12 @@
 (label "AON_EFUSE_DVDT"
   (at 805.18 351.79 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53b6b2d4-4dc9-5e96-b7fb-66fb229a0e00)
+  (uuid 91229f4b-2695-5685-95d7-34e879b31a60)
 )
 (label "GND"
   (at 805.18 359.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53e262ee-6f18-55d7-9da9-1fdd66988ddc)
+  (uuid 5dc8b63a-a8ca-5bc3-9328-8add1e9b0385)
 )
 (symbol
   (lib_id "power:PWR_FLAG")
@@ -10624,16 +10559,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 84a5b0d8-a894-5118-acb7-33972f9c253f)
-  (property "Reference" "#FLG011" (at 650.24 367.03 0) (effects (font (size 1.27 1.27))))
+  (uuid 9bea279e-faaf-5cca-a8a2-96d6ba72fb67)
+  (property "Reference" "#FLG010" (at 650.24 367.03 0) (effects (font (size 1.27 1.27))))
   (property "Value" "PWR_FLAG" (at 650.24 372.11 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 650.24 369.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 369.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b4d1618f-7b7f-57ab-83c7-8bfb73f43b23))
+  (pin "1" (uuid 20067ba3-410d-57d2-a797-b6de804a8141))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
-        (reference "#FLG011")
+        (reference "#FLG010")
         (unit 0)
       )
     )
@@ -10642,33 +10577,33 @@
 (label "AON_OR_RAW"
   (at 650.24 369.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3663f882-3329-5ed9-b8a0-081632f4d2d3)
+  (uuid 7f8209a7-efe0-5c60-91c4-1a0280fcd681)
 )
-(text "J190 is the single AUX/SOLAR physical input; USB-C PD negotiation remains only on sheet 5." (at 379.73 20.32 0) (effects (font (size 1.27 1.27))) (uuid cc55da9e-c8fe-5ccc-8c30-314dd0d48b44))
-(text "TPS26630 accepts 7-22V nominal; 0.1% ladder targets 5.53V/22.99V rising UV/OV and a 3A limit." (at 379.73 25.4 0) (effects (font (size 1.27 1.27))) (uuid 13f6e1f1-2910-5f24-a11b-f4afb40e6673))
-(text "U15 validates USB near 15V and AUX across 7-22V, gives USB priority, and prevents inactive-source backfeed." (at 379.73 31.75 0) (effects (font (size 1.27 1.27))) (uuid f21564c0-a551-579e-9d22-5950d9dc372a))
-(text "SMCJ24CA protects the 67V eFuse input; active OVP protects the BQ25798 24V recommended input limit." (at 379.73 38.1 0) (effects (font (size 1.27 1.27))) (uuid 51212ce9-85fe-5def-a313-3d453f8ab492))
-(text "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice)." (at 20.32 219.71 0) (effects (font (size 1.27 1.27))) (uuid b8044c0e-cf7a-5d5d-8390-c883a9c8b63b))
-(text "J2: pins 1/2 PACK+, pins 3/4 PACK-, pin 5 cell1 tap, pin 6 cell2 tap. Verify harness order before first connection." (at 20.32 226.06 0) (effects (font (size 1.27 1.27))) (uuid 04ee52a1-7095-5e58-a101-9355f7e7f46c))
-(text "U719 BQ7791500 autonomously protects each cell at 4.20V OV / 2.90V UV and drives back-to-back low-side FETs." (at 20.32 232.41 0) (effects (font (size 1.27 1.27))) (uuid 2ba4bd7c-36f1-54f5-b1fe-630ff6d90cd2))
-(text "RS11=8mOhm gives 7.5A nominal OCD and 15A nominal SCD; U11/RS10 and F1 remain independent tighter/secondary protection." (at 20.32 237.49 0) (effects (font (size 1.27 1.27))) (uuid 96336d88-1b61-56d8-a5da-3c82257979e7))
-(text "No motherboard battery thermistors are fitted. U719 TS uses TI's 10k-to-VSS unused-function connection; VTB is NC." (at 20.32 243.84 0) (effects (font (size 1.27 1.27))) (uuid 0465a2c2-7401-5309-bbd1-0b89be29779e))
-(text "BQ25798 /CE is fail-off: REGN pulls it high; active-high CHG_ENABLE turns Q700 on only after EC source validation." (at 20.32 250.19 0) (effects (font (size 1.27 1.27))) (uuid 6ed72109-69cf-5916-a7a2-af20f29893a8))
-(text "U2 ILIM_HIZ divider is a 3.0A hardware ceiling; EC programs a lower IINDPM from the selected CH224A PDO current." (at 20.32 256.54 0) (effects (font (size 1.27 1.27))) (uuid f1cd8f94-109c-5106-9290-df41f702b833))
-(text "J190 is the one 7-22V nominal AUX/solar input; TPS26630 protects it before BQ25798." (at 20.32 264.16 0) (effects (font (size 1.27 1.27))) (uuid c933fb36-fa1d-5e10-b206-1deea656b0e0))
-(text "Solar MPPT is implemented by BQ25798 firmware on this same input; there is no second charger path." (at 20.32 271.78 0) (effects (font (size 1.27 1.27))) (uuid 5b74542e-39da-5e9c-b76b-1a8f433b7459))
-(text "AUX_DC_ADC measures the post-reverse-FET input so firmware can detect droop and reduce BQ25798 input current." (at 20.32 287.02 0) (effects (font (size 1.27 1.27))) (uuid 4b344e1f-7c75-533a-9025-8cbf23f06efd))
-(text "U2 VAC1/VAC2 tie to VBUS_COMBINED in no-external-mux mode; ACDRV1/2 go to GND." (at 20.32 294.64 0) (effects (font (size 1.27 1.27))) (uuid 48796e0a-d850-5417-864e-fdca2efce441))
-(text "Q25 follows BQ25798EVM-842: SDRV disconnects pack discharge for electronic ship/hard-off while adapter charging can wake the pack." (at 20.32 302.26 0) (effects (font (size 1.27 1.27))) (uuid 1dcdaabc-4c0e-5e1e-b96c-44ba84c2e406))
-(text "U11 accepts about 8.45-13.57V nominal; 11mOhm RS10 gives 4.55A nominal and <=5.51A worst-case trips." (at 20.32 309.88 0) (effects (font (size 1.27 1.27))) (uuid 8ae99781-7322-5345-963d-c3e33c644c40))
-(text "BQ25798 TS is fixed at 58.9% REGN by 5.24k/7.50k; firmware sets TS_IGNORE=1. BQ34Z100 TS has 10k to VSS; set TEMPS=0." (at 20.32 317.5 0) (effects (font (size 1.27 1.27))) (uuid 6227fd87-6e66-5567-a1a7-c482f562e927))
-(text "MANDATORY STARTUP: hold MU_12V_ENABLE low; require selected-source VALID; read CH224A PDO current; program VSYSMIN and IINDPM <= min(PDO-0.25A, 2.75A); require VSYS >=10.0V." (at 20.32 325.12 0) (effects (font (size 1.27 1.27))) (uuid c0b5ca8a-a0c0-5396-b0e4-3e3d31163d38))
-(text "Then assert MU_12V_ENABLE and require MU_12V_PG within 20ms. Any PG timeout, source-invalid, charger fault, watchdog fault, or VSYS<10V disables the Mu rail." (at 20.32 332.74 0) (effects (font (size 1.27 1.27))) (uuid 4021802b-c2c9-534d-97c1-9af1bc5ca762))
-(text "BQ25798 firmware must set STOP_WD_CHG=1 and TS_IGNORE=1, service faults, validate PDO current, and assert CHG_ENABLE only after safe limits are programmed." (at 20.32 340.36 0) (effects (font (size 1.27 1.27))) (uuid bb20f4c7-f627-5824-854d-7259768fad1b))
-(text "U718 is the aggregate AON safety boundary: 1.51A typical limit, true reverse blocking, 6.20V nominal UVLO, and 22.40V nominal OVLO." (at 20.32 347.98 0) (effects (font (size 1.27 1.27))) (uuid 183b70d2-57f2-533b-887f-d42c731380f3))
-(text "AON UVLO corners are 6.06-6.36V: default 5V USB-C is negotiation-only; CH224A must autonomously obtain its strapped 15V PDO before EC_AON_IN starts." (at 20.32 355.6 0) (effects (font (size 1.27 1.27))) (uuid b41fc3c3-fec9-5782-8280-999e3be7d1ac))
-(text "A 5V-only USB-C source leaves the laptop off. AON_FAULT_N inhibits charging and Mu start; the service connector remains the assembly hard disconnect." (at 20.32 363.22 0) (effects (font (size 1.27 1.27))) (uuid d91de871-db82-5527-bb45-629c2b27726a))
-(text "C746 provides low-ESR hold-up through LTC4418 break-before-make source switching." (at 20.32 370.84 0) (effects (font (size 1.27 1.27))) (uuid 3549db32-ce4f-5239-abef-af28b1376b3d))
+(text "J190 is the single AUX/SOLAR physical input; USB-C PD negotiation remains only on sheet 5." (at 379.73 20.32 0) (effects (font (size 1.27 1.27))) (uuid 5d7d8e5e-b125-5eb6-accd-58b60d7cd003))
+(text "TPS26630 accepts 7-22V nominal; 0.1% ladder targets 5.53V/22.99V rising UV/OV and a 3A limit." (at 379.73 25.4 0) (effects (font (size 1.27 1.27))) (uuid 363bc1a6-5855-50a4-8450-784b24d1da69))
+(text "U15 validates USB near 15V and AUX across 7-22V, gives USB priority, and prevents inactive-source backfeed." (at 379.73 31.75 0) (effects (font (size 1.27 1.27))) (uuid aee725d4-8321-5336-b188-f652580eba5f))
+(text "SMCJ24CA protects the 67V eFuse input; active OVP protects the BQ25798 24V recommended input limit." (at 379.73 38.1 0) (effects (font (size 1.27 1.27))) (uuid 53b6b2d4-4dc9-5e96-b7fb-66fb229a0e00))
+(text "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice)." (at 20.32 219.71 0) (effects (font (size 1.27 1.27))) (uuid 53e262ee-6f18-55d7-9da9-1fdd66988ddc))
+(text "J2: pins 1/2 PACK+, pins 3/4 PACK-, pin 5 cell1 tap, pin 6 cell2 tap. Verify harness order before first connection." (at 20.32 226.06 0) (effects (font (size 1.27 1.27))) (uuid 84a5b0d8-a894-5118-acb7-33972f9c253f))
+(text "U719 BQ7791500 autonomously protects each cell at 4.20V OV / 2.90V UV and drives back-to-back low-side FETs." (at 20.32 232.41 0) (effects (font (size 1.27 1.27))) (uuid b4d1618f-7b7f-57ab-83c7-8bfb73f43b23))
+(text "RS11=8mOhm gives 7.5A nominal OCD and 15A nominal SCD; U11/RS10 and F1 remain independent tighter/secondary protection." (at 20.32 237.49 0) (effects (font (size 1.27 1.27))) (uuid 3663f882-3329-5ed9-b8a0-081632f4d2d3))
+(text "No motherboard battery thermistors are fitted. U719 TS uses TI's 10k-to-VSS unused-function connection; VTB is NC." (at 20.32 243.84 0) (effects (font (size 1.27 1.27))) (uuid cc55da9e-c8fe-5ccc-8c30-314dd0d48b44))
+(text "BQ25798 /CE is fail-off: REGN pulls it high; active-high CHG_ENABLE turns Q700 on only after EC source validation." (at 20.32 250.19 0) (effects (font (size 1.27 1.27))) (uuid 13f6e1f1-2910-5f24-a11b-f4afb40e6673))
+(text "U2 ILIM_HIZ divider is a 3.0A hardware ceiling; EC programs a lower IINDPM from the selected TPS25751A Active PDO Contract (0x31)." (at 20.32 256.54 0) (effects (font (size 1.27 1.27))) (uuid f21564c0-a551-579e-9d22-5950d9dc372a))
+(text "J190 is the one 7-22V nominal AUX/solar input; TPS26630 protects it before BQ25798." (at 20.32 264.16 0) (effects (font (size 1.27 1.27))) (uuid 51212ce9-85fe-5def-a313-3d453f8ab492))
+(text "Solar MPPT is implemented by BQ25798 firmware on this same input; there is no second charger path." (at 20.32 271.78 0) (effects (font (size 1.27 1.27))) (uuid b8044c0e-cf7a-5d5d-8390-c883a9c8b63b))
+(text "AUX_DC_ADC measures the post-reverse-FET input so firmware can detect droop and reduce BQ25798 input current." (at 20.32 287.02 0) (effects (font (size 1.27 1.27))) (uuid 04ee52a1-7095-5e58-a101-9355f7e7f46c))
+(text "U2 VAC1/VAC2 tie to VBUS_COMBINED in no-external-mux mode; ACDRV1/2 go to GND." (at 20.32 294.64 0) (effects (font (size 1.27 1.27))) (uuid 2ba4bd7c-36f1-54f5-b1fe-630ff6d90cd2))
+(text "Q25 follows BQ25798EVM-842: SDRV disconnects pack discharge for electronic ship/hard-off while adapter charging can wake the pack." (at 20.32 302.26 0) (effects (font (size 1.27 1.27))) (uuid 96336d88-1b61-56d8-a5da-3c82257979e7))
+(text "U11 accepts about 8.45-13.57V nominal; 11mOhm RS10 gives 4.55A nominal and <=5.51A worst-case trips." (at 20.32 309.88 0) (effects (font (size 1.27 1.27))) (uuid 0465a2c2-7401-5309-bbd1-0b89be29779e))
+(text "BQ25798 TS is fixed at 58.9% REGN by 5.24k/7.50k; firmware sets TS_IGNORE=1. BQ34Z100 TS has 10k to VSS; set TEMPS=0." (at 20.32 317.5 0) (effects (font (size 1.27 1.27))) (uuid 6ed72109-69cf-5916-a7a2-af20f29893a8))
+(text "MANDATORY STARTUP: hold MU_12V_ENABLE low; read TPS25751A PD Status 0x35 plus Active PDO/RDO 0x31/0x32; program VSYSMIN and IINDPM <= min(PDO-0.25A, 2.75A); require VSYS >=10.0V." (at 20.32 325.12 0) (effects (font (size 1.27 1.27))) (uuid f1cd8f94-109c-5106-9290-df41f702b833))
+(text "Then assert MU_12V_ENABLE and require MU_12V_PG within 20ms. Any PG timeout, source-invalid, charger fault, watchdog fault, or VSYS<10V disables the Mu rail." (at 20.32 332.74 0) (effects (font (size 1.27 1.27))) (uuid c933fb36-fa1d-5e10-b206-1deea656b0e0))
+(text "BQ25798 firmware must set STOP_WD_CHG=1 and TS_IGNORE=1, service faults, validate PDO current, and assert CHG_ENABLE only after safe limits are programmed." (at 20.32 340.36 0) (effects (font (size 1.27 1.27))) (uuid 5b74542e-39da-5e9c-b76b-1a8f433b7459))
+(text "U718 is the aggregate AON safety boundary: 1.51A typical limit, true reverse blocking, 6.20V nominal UVLO, and 22.40V nominal OVLO." (at 20.32 347.98 0) (effects (font (size 1.27 1.27))) (uuid 4b344e1f-7c75-533a-9025-8cbf23f06efd))
+(text "AON UVLO corners are 6.06-6.36V: default 5V USB-C is negotiation-only; TPS25751A dead-battery boot must obtain a valid higher-voltage PDO before EC_AON_IN starts." (at 20.32 355.6 0) (effects (font (size 1.27 1.27))) (uuid 48796e0a-d850-5417-864e-fdca2efce441))
+(text "A 5V-only USB-C source leaves the laptop off. AON_FAULT_N inhibits charging and Mu start; the service connector remains the assembly hard disconnect." (at 20.32 363.22 0) (effects (font (size 1.27 1.27))) (uuid 1dcdaabc-4c0e-5e1e-b96c-44ba84c2e406))
+(text "C746 provides low-ESR hold-up through LTC4418 break-before-make source switching." (at 20.32 370.84 0) (effects (font (size 1.27 1.27))) (uuid 8ae99781-7322-5345-963d-c3e33c644c40))
 (symbol
   (lib_id "Connector:TestPoint")
   (at 859.79 260.35 0)
@@ -10677,13 +10612,13 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid 106a09ef-1147-5e9d-9754-43a6381bf3cd)
+  (uuid 6227fd87-6e66-5567-a1a7-c482f562e927)
   (property "Reference" "TP1" (at 859.79 257.81 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND test" (at 859.79 262.89 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 859.79 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 859.79 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 859.79 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 17c0c682-246b-538c-a71a-a519e9f9c953))
+  (pin "1" (uuid c0b5ca8a-a0c0-5396-b0e4-3e3d31163d38))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10696,7 +10631,7 @@
 (label "GND"
   (at 859.79 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 241184eb-95b4-5e0f-94d0-4f47164e833c)
+  (uuid 4021802b-c2c9-534d-97c1-9af1bc5ca762)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -10706,13 +10641,13 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid d42ae41d-63ae-5962-ad79-1756b1b94314)
+  (uuid bb20f4c7-f627-5824-854d-7259768fad1b)
   (property "Reference" "TP2" (at 880.11 257.81 0) (effects (font (size 1.27 1.27))))
   (property "Value" "PACK_POS_FUSED test" (at 880.11 262.89 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 880.11 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 880.11 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 880.11 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b4766f03-5f14-5a4a-90f1-7fc07c68e8c2))
+  (pin "1" (uuid 183b70d2-57f2-533b-887f-d42c731380f3))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10725,7 +10660,7 @@
 (label "PACK_POS_FUSED"
   (at 880.11 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ec65d0c2-e6f6-57f1-a5ee-6b0c37b3f543)
+  (uuid b41fc3c3-fec9-5782-8280-999e3be7d1ac)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -10735,13 +10670,13 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid ed4a65be-c2f5-529e-8541-70b0ab562401)
+  (uuid d91de871-db82-5527-bb45-629c2b27726a)
   (property "Reference" "TP3" (at 900.43 257.81 0) (effects (font (size 1.27 1.27))))
   (property "Value" "VSYS test" (at 900.43 262.89 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 900.43 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 900.43 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 900.43 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c0646789-38a6-5eaf-b59a-9a29002777d2))
+  (pin "1" (uuid 3549db32-ce4f-5239-abef-af28b1376b3d))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10755,7 +10690,7 @@
   (shape bidirectional)
   (at 900.43 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 446a73a1-bf55-5a6a-aed0-744e0a55f41e)
+  (uuid 106a09ef-1147-5e9d-9754-43a6381bf3cd)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -10765,13 +10700,13 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid 48006d24-fd2f-54de-b182-b3b136069e98)
+  (uuid 17c0c682-246b-538c-a71a-a519e9f9c953)
   (property "Reference" "TP4" (at 919.48 257.81 0) (effects (font (size 1.27 1.27))))
   (property "Value" "EC_AON_IN test" (at 919.48 262.89 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 919.48 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 919.48 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 919.48 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid beee6904-5fc2-52a7-bef4-1f4f353ab596))
+  (pin "1" (uuid 241184eb-95b4-5e0f-94d0-4f47164e833c))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10785,7 +10720,7 @@
   (shape bidirectional)
   (at 919.48 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 55155bcd-e0fd-5b72-bed1-dd98092d4df5)
+  (uuid d42ae41d-63ae-5962-ad79-1756b1b94314)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -10795,13 +10730,13 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid c2a602c9-b303-51a6-8cef-64b2bfd5a629)
+  (uuid b4766f03-5f14-5a4a-90f1-7fc07c68e8c2)
   (property "Reference" "TP7" (at 980.44 257.81 0) (effects (font (size 1.27 1.27))))
   (property "Value" "MCU_3V3 test" (at 980.44 262.89 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 980.44 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 980.44 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 980.44 260.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6f0fb702-9d9c-51b7-8423-eeb54636c3de))
+  (pin "1" (uuid ec65d0c2-e6f6-57f1-a5ee-6b0c37b3f543))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10815,7 +10750,7 @@
   (shape bidirectional)
   (at 980.44 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4d9c3aff-2465-5d59-94ad-e2f72b41629b)
+  (uuid ed4a65be-c2f5-529e-8541-70b0ab562401)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -10825,13 +10760,13 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid 95afb8e1-883b-571c-8f92-087150b526f4)
+  (uuid c0646789-38a6-5eaf-b59a-9a29002777d2)
   (property "Reference" "TP9" (at 859.79 276.86 0) (effects (font (size 1.27 1.27))))
   (property "Value" "CHG_INT_N test" (at 859.79 281.94 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 859.79 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 859.79 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 859.79 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 4bd8d09e-5613-5c66-affd-210734d4724c))
+  (pin "1" (uuid 446a73a1-bf55-5a6a-aed0-744e0a55f41e))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10845,7 +10780,7 @@
   (shape bidirectional)
   (at 859.79 279.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 327902f9-3375-59ab-8785-d15f908f5a42)
+  (uuid 48006d24-fd2f-54de-b182-b3b136069e98)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -10855,13 +10790,13 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid 1132c9d3-6127-5017-b42e-1da99f763d7d)
+  (uuid beee6904-5fc2-52a7-bef4-1f4f353ab596)
   (property "Reference" "TP10" (at 890.27 276.86 0) (effects (font (size 1.27 1.27))))
   (property "Value" "PACK_FAULT_N test" (at 890.27 281.94 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 890.27 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 890.27 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 890.27 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8f9c04e6-50b6-5630-b750-edad490329c1))
+  (pin "1" (uuid 55155bcd-e0fd-5b72-bed1-dd98092d4df5))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10875,7 +10810,7 @@
   (shape bidirectional)
   (at 890.27 279.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 13d92bdc-f283-5b04-b0f7-1eec972a3d9c)
+  (uuid c2a602c9-b303-51a6-8cef-64b2bfd5a629)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -10885,13 +10820,13 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid e10f4c84-c95b-5d23-8834-c7ccc29f42dc)
+  (uuid 6f0fb702-9d9c-51b7-8423-eeb54636c3de)
   (property "Reference" "TP11" (at 919.48 276.86 0) (effects (font (size 1.27 1.27))))
   (property "Value" "AON_FAULT_N test" (at 919.48 281.94 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 919.48 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 919.48 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 919.48 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8b2a29a7-5cfe-5bf2-b3c2-007584d68990))
+  (pin "1" (uuid 4d9c3aff-2465-5d59-94ad-e2f72b41629b))
   (instances
     (project "ducktop2"
       (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"
@@ -10905,7 +10840,7 @@
   (shape bidirectional)
   (at 919.48 279.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid aacf4fa0-bb88-5687-81f7-44dce5260ed6)
+  (uuid 95afb8e1-883b-571c-8f92-087150b526f4)
 )
 (sheet_instances
   (path "/577b7ab7-60d3-5949-82f8-bb269dce837a"

@@ -3287,8 +3287,8 @@
 	)
   )
 (text "== System audio: embedded two-port USB hub, playback/record codec, microphone, and stereo BTL amplifier ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 6252131d-3cc0-501b-bde4-ff73c60d8e8c))
-(text "Mu USB2_P5 feeds a self-powered USB2512B multi-TT hub. Port 1 is the existing radio codec; port 2 is the PCM2900C system codec." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid fb97264b-8cc8-52ea-a7a8-7486a9472cdc))
-(text "Both downstream devices are non-removable. TPS2052B implements host-controlled VBUS and individual overcurrent feedback." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 5764ee74-3a15-5973-a0c8-d20e6c70e446))
+(text "Mu USB2_P5 feeds a self-powered USB2512B multi-TT hub. Port 1 is the fixed PCM2900C system codec; port 2 is the optional radio daughterboard." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid fb97264b-8cc8-52ea-a7a8-7486a9472cdc))
+(text "Port 1 is non-removable. Port 2 is removable and may be empty; TPS2052B provides individual protected VBUS outputs." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 5764ee74-3a15-5973-a0c8-d20e6c70e446))
 (text "== Protected 5V audio branch and downstream USB power ==" (at 20.32 45.72 0) (effects (font (size 1.27 1.27))) (uuid 1d0d7f08-3bf3-5a25-8a04-f440882c9a31))
 (symbol
   (lib_id "Device:Fuse")
@@ -3510,13 +3510,13 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 78a51a9e-ba17-5951-9d93-451c61df9d51)
 )
-(label "SYSTEM_DAC_USB_VBUS"
+(hierarchical_label "RADIO_CODEC_USB_VBUS_HOST"
+  (shape bidirectional)
   (at 289.56 64.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 598105bd-6477-5941-a0dd-f24991962ced)
 )
-(hierarchical_label "RADIO_CODEC_USB_VBUS"
-  (shape bidirectional)
+(label "SYSTEM_DAC_USB_VBUS"
   (at 289.56 62.23 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid efaf4a7e-974a-51ef-b510-0a5a3623829f)
@@ -3570,7 +3570,7 @@
   (dnp no)
   (uuid 2e189641-6100-5032-8c63-c873bc8c7ac2)
   (property "Reference" "C403" (at 500.38 60.96 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10u radio-codec VBUS" (at 500.38 66.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10u radio-codec host VBUS" (at 500.38 66.04 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 189296ef-ad6b-5683-af83-c20d033e9fe3))
@@ -3584,7 +3584,7 @@
     )
   )
 )
-(hierarchical_label "RADIO_CODEC_USB_VBUS"
+(hierarchical_label "RADIO_CODEC_USB_VBUS_HOST"
   (shape bidirectional)
   (at 500.38 59.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -3656,7 +3656,7 @@
     )
   )
 )
-(hierarchical_label "RADIO_CODEC_USB_VBUS"
+(hierarchical_label "RADIO_CODEC_USB_VBUS_HOST"
   (shape bidirectional)
   (at 500.38 72.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -3704,7 +3704,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9e6dbdf5-2bd2-50db-9451-3cebdf9a4dc9)
 )
-(text "== U400 USB2512B-AEZG-TR: self-powered, strap-configured, both ports non-removable ==" (at 20.32 93.98 0) (effects (font (size 1.27 1.27))) (uuid 91fb295b-7356-52cf-88df-e375921dc0b4))
+(text "== U400 USB2512B-AEZG-TR: self-powered, port 1 non-removable, port 2 removable ==" (at 20.32 93.98 0) (effects (font (size 1.27 1.27))) (uuid 91fb295b-7356-52cf-88df-e375921dc0b4))
 (symbol
   (lib_id "USB2512B:USB2512B")
   (at 299.72 160.02 0)
@@ -3720,7 +3720,7 @@
   (property "Datasheet" "" (at 299.72 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Microchip Technology" (at 299.72 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "USB2512B-AEZG-TR" (at 299.72 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Configuration" "CFG_SEL[1:0]=00 self-powered straps; NON_REM[1:0]=10" (at 299.72 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Configuration" "CFG_SEL[1:0]=00 self-powered; system-codec port 1 non-removable; radio port 2 removable" (at 299.72 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ReferenceCircuit" "Current DS00001692 plus DS00004539A hardware checklist" (at 299.72 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 999ff31e-4b13-5dae-96df-50cc991bdb07))
   (pin "2" (uuid 49651181-cb4e-5864-9264-913944ccc006))
@@ -3768,24 +3768,24 @@
     )
   )
 )
-(hierarchical_label "RADIO_CODEC_USB_DM"
-  (shape bidirectional)
+(label "SYSTEM_DAC_USB_DM"
   (at 317.5 144.78 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 7613d822-b6d8-5d9c-834d-50c9c74f357b)
 )
-(hierarchical_label "RADIO_CODEC_USB_DP"
-  (shape bidirectional)
+(label "SYSTEM_DAC_USB_DP"
   (at 317.5 147.32 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 27777f2b-c9f1-51b4-b820-d4ba0c83f21c)
 )
-(label "SYSTEM_DAC_USB_DM"
+(hierarchical_label "RADIO_CODEC_USB_DM_HOST"
+  (shape bidirectional)
   (at 317.5 149.86 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid b1be65d7-722d-5d12-b00d-89b1512b2c6f)
 )
-(label "SYSTEM_DAC_USB_DP"
+(hierarchical_label "RADIO_CODEC_USB_DP_HOST"
+  (shape bidirectional)
   (at 317.5 152.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0b5fed08-97db-5326-8be0-039029e8b792)
@@ -4518,7 +4518,7 @@
   (dnp no)
   (uuid eef4dff2-f045-5e21-a8c9-6415cc47da95)
   (property "Reference" "R402" (at 20.32 175.26 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10k NON_REM1 strap high" (at 20.32 180.34 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k NON_REM1 strap low" (at 20.32 180.34 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 177.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 177.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 67ac4b35-8e01-5733-b2e4-16b3a1f771a5))
@@ -4537,8 +4537,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 00bb6baf-03de-5ded-a2cc-fba8c1121d62)
 )
-(hierarchical_label "SYS_3V3"
-  (shape bidirectional)
+(label "GND"
   (at 20.32 181.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 01436200-8991-5b4c-97be-079eb53b5eeb)
@@ -4553,7 +4552,7 @@
   (dnp no)
   (uuid bc6121c2-c9e2-58d9-a95e-ba9327c271a0)
   (property "Reference" "R403" (at 149.86 175.26 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k NON_REM0 strap low" (at 149.86 180.34 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k NON_REM0 strap high" (at 149.86 180.34 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 149.86 177.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 149.86 177.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 2533e443-b9db-5389-ab4c-6f65a98b331a))
@@ -4572,7 +4571,8 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid b3b2e0ec-b180-5276-a462-4653fee63d0e)
 )
-(label "GND"
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
   (at 149.86 181.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid fd4c2ade-e3f8-5d8d-a402-a093c980219e)

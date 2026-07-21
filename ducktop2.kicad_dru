@@ -1,11 +1,15 @@
 (version 1)
 
-# POWER_5A and POWER_10A_PACK intentionally use generous routing clearance,
-# but those netclass values cannot physically fit between adjacent pads in the
-# vendor land patterns below.  Keep 0.30/0.50 mm between routed copper while
-# allowing the 0.15 mm minimum already built into these specific packages.
+# The power netclasses intentionally keep generous spacing between routed
+# copper. These audited vendor packages have smaller clearances between pads
+# inside one footprint, so constrain only pairs belonging to the same exact
+# reference. Cross-footprint copper still uses the full netclass clearance.
+(rule "TPS25751 audited intra-footprint clearance"
+    (condition "((A.Reference == 'U41') && (B.Reference == 'U41')) || ((A.Reference == 'U42') && (B.Reference == 'U42'))")
+    (constraint clearance (min 0.12mm)))
+
 (rule "Audited intra-footprint power-pad clearance"
-    (condition "(A.memberOfFootprint('A1') && B.memberOfFootprint('A1')) || (A.memberOfFootprint('J21') && B.memberOfFootprint('J21')) || (A.memberOfFootprint('J22') && B.memberOfFootprint('J22')) || (A.memberOfFootprint('J23') && B.memberOfFootprint('J23')) || (A.memberOfFootprint('U2') && B.memberOfFootprint('U2')) || (A.memberOfFootprint('U4') && B.memberOfFootprint('U4')) || (A.memberOfFootprint('U6') && B.memberOfFootprint('U6')) || (A.memberOfFootprint('U7') && B.memberOfFootprint('U7')) || (A.memberOfFootprint('U11') && B.memberOfFootprint('U11')) || (A.memberOfFootprint('U12') && B.memberOfFootprint('U12')) || (A.memberOfFootprint('U14') && B.memberOfFootprint('U14')) || (A.memberOfFootprint('U15') && B.memberOfFootprint('U15')) || (A.memberOfFootprint('U22') && B.memberOfFootprint('U22')) || (A.memberOfFootprint('U32') && B.memberOfFootprint('U32')) || (A.memberOfFootprint('U50') && B.memberOfFootprint('U50')) || (A.memberOfFootprint('U54') && B.memberOfFootprint('U54')) || (A.memberOfFootprint('U55') && B.memberOfFootprint('U55')) || (A.memberOfFootprint('U400') && B.memberOfFootprint('U400')) || (A.memberOfFootprint('U720') && B.memberOfFootprint('U720')) || (A.memberOfFootprint('U721') && B.memberOfFootprint('U721')) || (A.memberOfFootprint('U722') && B.memberOfFootprint('U722')) || (A.memberOfFootprint('U750') && B.memberOfFootprint('U750')) || (A.memberOfFootprint('U772') && B.memberOfFootprint('U772'))")
+    (condition "((A.Reference == 'A1') && (B.Reference == 'A1')) || ((A.Reference == 'J11') && (B.Reference == 'J11')) || ((A.Reference == 'J21') && (B.Reference == 'J21')) || ((A.Reference == 'U2') && (B.Reference == 'U2')) || ((A.Reference == 'U4') && (B.Reference == 'U4')) || ((A.Reference == 'U6') && (B.Reference == 'U6')) || ((A.Reference == 'U7') && (B.Reference == 'U7')) || ((A.Reference == 'U11') && (B.Reference == 'U11')) || ((A.Reference == 'U12') && (B.Reference == 'U12')) || ((A.Reference == 'U14') && (B.Reference == 'U14')) || ((A.Reference == 'U15') && (B.Reference == 'U15')) || ((A.Reference == 'U54') && (B.Reference == 'U54')) || ((A.Reference == 'U55') && (B.Reference == 'U55')) || ((A.Reference == 'U400') && (B.Reference == 'U400')) || ((A.Reference == 'U720') && (B.Reference == 'U720')) || ((A.Reference == 'U721') && (B.Reference == 'U721')) || ((A.Reference == 'U750') && (B.Reference == 'U750')) || ((A.Reference == 'U772') && (B.Reference == 'U772')) || ((A.Reference == 'U1700') && (B.Reference == 'U1700')) || ((A.Reference == 'U1701') && (B.Reference == 'U1701')) || ((A.Reference == 'U1703') && (B.Reference == 'U1703')) || ((A.Reference == 'U1742') && (B.Reference == 'U1742')) || ((A.Reference == 'U1762') && (B.Reference == 'U1762')) || ((A.Reference == 'U1782') && (B.Reference == 'U1782')) || ((A.Reference == 'U2000') && (B.Reference == 'U2000')) || ((A.Reference == 'U2003') && (B.Reference == 'U2003')) || ((A.Reference == 'U2005') && (B.Reference == 'U2005')) || ((A.Reference == 'U2010') && (B.Reference == 'U2010')) || ((A.Reference == 'U2013') && (B.Reference == 'U2013')) || ((A.Reference == 'U2015') && (B.Reference == 'U2015')) || ((A.Reference == 'U2300') && (B.Reference == 'U2300'))")
     (constraint clearance (min 0.15mm)))
 
 # Infineon Figure 13 places the 0.6 mm bottom acoustic port inside the pad-4
@@ -16,15 +20,18 @@
     (constraint hole_clearance (min 0.15mm))
     (constraint physical_hole_clearance (min 0.15mm)))
 
-# The Molex 73251-1153 SMA footprints are intentional edge launches. Only
-# their edge-facing pads may cross the nominal copper-to-edge boundary.
-(rule "J241 intentional SMA edge launch"
-    (condition "A.memberOfFootprint('J241') && B.Layer == 'Edge.Cuts'")
-    (constraint edge_clearance (min -0.1mm)))
+# Wurth 9774055243R specifies a 3.0 mm non-plated locating hole centered
+# inside its 5.3 mm solder land. The shared mask opening and zero internal
+# hole-to-land clearance are therefore intentional for H1/H2 only.
+(rule "Mu standoff locating hole inside solder land"
+    (condition "((A.Reference == 'H1') && (B.Reference == 'H1')) || ((A.Reference == 'H2') && (B.Reference == 'H2'))")
+    (constraint hole_clearance (min 0mm))
+    (constraint physical_hole_clearance (min 0mm)))
 
-(rule "J251 intentional SMA edge launch"
-    (condition "A.memberOfFootprint('J251') && B.Layer == 'Edge.Cuts'")
-    (constraint edge_clearance (min -0.1mm)))
+(rule "Mu standoff shared mask aperture"
+    (condition "A.intersectsCourtyard('H1') || A.intersectsCourtyard('H2')")
+    (constraint bridged_mask)
+    (severity ignore))
 
 # H1/H2 are soldered M2 standoffs that intentionally occupy the Mu module's
 # retention area. This only permits their courtyard overlap with A1.

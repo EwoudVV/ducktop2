@@ -86,6 +86,7 @@ static ec_outputs_t powered_pd2_outputs(void) {
   outputs.charger_enable = true;
   outputs.mu_12v_enable = true;
   outputs.keyboard_rgb_power_enable = true;
+  outputs.radio_db_power_enable = true;
   return outputs;
 }
 
@@ -152,6 +153,7 @@ static void test_staged_adapter_only_commit(void) {
   CHECK(iindpm < charge);
   CHECK(power_budget < mu);
   CHECK(mu < optional_load);
+  CHECK(mu < find_command(&mock, EC_COMMIT_RADIO_DB_ENABLE, 1u));
   CHECK(state.applied.pd_path_enable[1]);
   CHECK(state.applied.charger_enable);
   CHECK(state.applied.mu_12v_enable);
@@ -176,20 +178,20 @@ static void test_transfer_disables_old_path_first(void) {
   mock_init(&mock);
   memset(&off, 0, sizeof(off));
   memset(&bootstrap, 0, sizeof(bootstrap));
-  bootstrap.pd_path_enable[2] = true;
+  bootstrap.pd_path_enable[0] = true;
   CHECK(ec_commit_apply(&state, &driver, &off) == EC_COMMIT_OK);
   CHECK(ec_commit_apply(&state, &driver, &bootstrap) == EC_COMMIT_OK);
   second.pd_path_enable[1] = false;
-  second.pd_path_enable[2] = true;
+  second.pd_path_enable[0] = true;
   second.charger_iindpm_ma = 2750u;
   CHECK(ec_commit_apply(&state, &driver, &second) == EC_COMMIT_OK);
   old_off = find_command(&mock, EC_COMMIT_PD2_PATH_ENABLE, 0u);
   iindpm = find_command(&mock, EC_COMMIT_CHARGER_IINDPM_MA, 2750u);
-  new_on = find_command(&mock, EC_COMMIT_PD3_PATH_ENABLE, 1u);
+  new_on = find_command(&mock, EC_COMMIT_PD1_PATH_ENABLE, 1u);
   CHECK(old_off < new_on);
   CHECK(new_on < iindpm);
   CHECK(!state.applied.pd_path_enable[1]);
-  CHECK(state.applied.pd_path_enable[2]);
+  CHECK(state.applied.pd_path_enable[0]);
 }
 
 static void test_unstaged_powered_path_is_rejected(void) {
@@ -223,7 +225,6 @@ static void test_invalid_desired_state_is_forced_safe(void) {
   CHECK(outputs_are_safe(&state.applied));
   CHECK(find_command(&mock, EC_COMMIT_PD1_PATH_ENABLE, 0u) < LOG_CAPACITY);
   CHECK(find_command(&mock, EC_COMMIT_PD2_PATH_ENABLE, 0u) < LOG_CAPACITY);
-  CHECK(find_command(&mock, EC_COMMIT_PD3_PATH_ENABLE, 0u) < LOG_CAPACITY);
 }
 
 static void test_load_enables_require_committed_limits(void) {
@@ -258,7 +259,7 @@ static void test_io_error_rolls_back_to_safe(void) {
   mock_init(&mock);
   driver = driver_for(&mock);
   CHECK(ec_commit_apply(&state, &driver, &(ec_outputs_t){
-      .pd_path_enable = {false, true, false},
+      .pd_path_enable = {false, true},
   }) == EC_COMMIT_OK);
   mock_init(&mock);
   mock.fail_call = 0u;

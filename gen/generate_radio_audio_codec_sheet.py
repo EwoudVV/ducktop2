@@ -34,7 +34,7 @@ def pcm2902c_nets():
     }
 
 
-def build(sheet_symbol_uuid):
+def build(sheet_symbol_uuid, logic_3v3="MCU_3V3"):
     s = Sheet(f"/{sheet_symbol_uuid}")
     s.refcounters["#PWR"] = 340
     s.refcounters["#FLG"] = 340
@@ -143,7 +143,7 @@ def build(sheet_symbol_uuid):
     s.place("Q332", "Q_PMOS_GSD", "BSS84LT1G codec-loss force-mute", 650, 317.5,
             footprint=FOOTPRINTS["Q_NMOS"],
             pin_nets={
-                "1": ("CODEC_SSPND", "local"), "2": ("MCU_3V3", "hier"),
+                "1": ("CODEC_SSPND", "local"), "2": (logic_3v3, "hier"),
                 "3": ("CODEC_FORCE_MUTE", "local"),
             }, extra_props={"Manufacturer": "onsemi", "MPN": "BSS84LT1G"})
     s.place("R342", "R", "100k SSPND fail-low pull-down", 700, 305, footprint=FOOTPRINTS["R"],
@@ -181,6 +181,6 @@ def build(sheet_symbol_uuid):
     s.text(20, 360.68, "NOTES:")
     s.text(20, 368.3, "TI Figure 39 core is implemented: SEL0/SEL1 direct-high, 1.5k D+ pull-up, filtered VBUS, and separate rail capacitors.")
     s.text(20, 375.92, "Independent 82k/1k dividers produce about 8.4mVrms open-circuit; Q330/Q331 mute on PTT_N high, USB suspend, or codec power loss.")
-    s.text(20, 383.54, "RELEASE GATE: measure MIC impedance and deviation per band; preserve Ham R223/R224 pull-ups and hard-interlock both PTT_N signals.")
+    s.text(20, 383.54, "RELEASE GATE: measure MIC impedance and deviation per band; preserve mainboard PTT defaults and hard-interlock both PTT_N signals.")
 
     return s

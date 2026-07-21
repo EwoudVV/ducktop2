@@ -1,15 +1,15 @@
-id,initial_source,stimulus,negotiated_current_ma,applied_iindpm_ma,elapsed_ms,expected_state,expected_pd_enable,expected_iindpm_ma,expected_fault
+id,initial_source,stimulus,qualified_input_current_ma,applied_iindpm_ma,elapsed_ms,expected_state,expected_pd_enable,expected_iindpm_ma,expected_fault
 EC-BOOT-001,NONE,cold_boot,0,0,0,OFF,none,0,NONE
 EC-PD-001,PD1,valid_pdo_issue_iindpm,3000,0,20,VALIDATING,none,2750,NONE
 EC-PD-002,PD1,iindpm_acknowledged,3000,2750,22,VALIDATING,PD1,2750,NONE
 EC-PD-003,PD1,path_good_after_ack,3000,2750,23,ACTIVE,PD1,2750,NONE
-EC-PD-004,PD1,current_not_valid,0,0,1000,FAULT,none,0,NEGOTIATED_CURRENT_INVALID
+EC-PD-004,PD1,input_current_not_qualified,0,0,1000,FAULT,none,0,INPUT_CURRENT_INVALID
 EC-PD-005,PD2,iindpm_ack_missing,2000,0,120,FAULT,none,0,IINDPM_APPLY_TIMEOUT
 EC-PD-006,PD2,iindpm_ack_mismatch,2000,1800,21,FAULT,none,0,IINDPM_MISMATCH
-EC-PD-007,PD3,path_good_missing_after_ack,3000,2750,271,FAULT,none,0,PATH_GOOD_TIMEOUT
+EC-PD-007,PD1,path_good_missing_after_ack,3000,2750,271,FAULT,none,0,PATH_GOOD_TIMEOUT
 EC-PWR-001,PD1,source_aware_charge_budget_3312mW,2000,1750,23,ACTIVE,PD1,1750,NONE
 EC-PWR-002,PD1,charge_budget_2312mW_disables_charger,2000,1750,24,ACTIVE,PD1,1750,NONE
-EC-PWR-003,PD3,weak_contract_mu_start_denied,500,250,24,FAULT,none,0,POWER_POLICY
+EC-PWR-003,PD2,weak_contract_mu_start_denied,500,250,24,FAULT,none,0,POWER_POLICY
 EC-XFER-001,PD1,request_PD2_before_deadtime,2000,0,119,VALIDATING,none,0,NONE
 EC-XFER-002,PD1,request_PD2_issue_iindpm,2000,0,120,VALIDATING,none,1750,NONE
 EC-XFER-003,PD1,request_PD2_acknowledged,2000,1750,121,VALIDATING,PD2,1750,NONE
@@ -19,3 +19,6 @@ EC-LOW-002,PACK,pack_low_request_15001mW,0,0,0,FAULT,none,0,POWER_POLICY
 EC-LOW-004,PACK,pack_low_pack_only_false_request_15000mW,0,0,0,ACTIVE,none,0,NONE
 EC-LOW-003,PACK,power_policy_ack_missing,0,0,271,FAULT,none,0,POWER_POLICY_APPLY_TIMEOUT
 EC-MUPG-001,PACK,mu_pg_missing,0,0,20,FAULT,none,0,MU_POWER_GOOD_TIMEOUT
+EC-AUX-001,AUX,input_current_not_qualified,0,0,1000,FAULT,none,0,INPUT_CURRENT_INVALID
+EC-AUX-002,AUX,ico_start_500mA_issue_iindpm,500,0,20,VALIDATING,none,250,NONE
+EC-AUX-003,AUX,ico_start_500mA_acknowledged,500,250,21,ACTIVE,none,250,NONE

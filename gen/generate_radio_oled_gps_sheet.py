@@ -27,9 +27,9 @@ def build(sheet_symbol_uuid):
     s.refcounters["#PWR"] = 90
     s.refcounters["#FLG"] = 90
 
-    s.text(20, 12.7, "== Radio, OLED, and GNSS peripherals ==")
-    s.text(20, 20.32, "M.2 E-key is the main Wi-Fi/Bluetooth path; OLED and GNSS stay on EC-controlled low-speed interfaces.")
-    s.text(20, 27.94, "RF stays inside modules for this pass; antenna, keepout, and exact module qualification are layout-stage work.")
+    s.text(20, 12.7, "== Wi-Fi/Bluetooth and dual OLED peripherals ==")
+    s.text(20, 20.32, "M.2 E-key remains on the mainboard; GNSS and amateur-radio hardware moved to the optional radio daughterboard.")
+    s.text(20, 27.94, "Both SSD1306 displays remain on the always-on EC service bus and work without the radio daughterboard.")
 
     # ---------------- J40: M.2 E-key Wi-Fi/Bluetooth module ----------------
     s.text(20, 50.8, "== J40 M.2 E-key Wi-Fi/Bluetooth module ==")
@@ -140,8 +140,8 @@ def build(sheet_symbol_uuid):
                 "10": ("PD2_I2C_SDA", "hier"),
                 "11": ("PD2_I2C_SCL", "hier"),
                 "12": ("GND", "local"),
-                "13": ("PD3_I2C_SDA", "hier"),
-                "14": ("PD3_I2C_SCL", "hier"),
+                "13": ("", "nc"),
+                "14": ("", "nc"),
                 "15": ("", "nc"),
                 "16": ("", "nc"),
                 "17": ("", "nc"),
@@ -197,82 +197,19 @@ def build(sheet_symbol_uuid):
                 "MechanicalEnvelope": "27.0x27.0mm module; verify owned sample before enclosure release",
             })
 
-    # ---------------- U40: u-blox MAX-M10S GNSS ----------------
-    s.text(330, 50.8, "== U40 u-blox MAX-M10S GNSS module ==")
-    s.place("U40", "MAX-M10S", "MAX-M10S GNSS", 410, 110,
-            footprint=FOOTPRINTS["MAX-M10S"],
-            pin_nets={
-                "1": ("GND", "local"),
-                "2": ("GNSS_UART_RX", "hier"),
-                "3": ("GNSS_UART_TX", "hier"),
-                "4": ("GNSS_PPS", "hier"),
-                "5": ("GNSS_EXTINT", "hier"),
-                "6": ("MCU_3V3", "hier"),
-                "7": ("MCU_3V3", "hier"),
-                "8": ("MCU_3V3", "hier"),
-                "9": ("GNSS_RESET_N", "hier"),
-                "10": ("GND", "local"),
-                "11": ("GNSS_RF_IN", "local"),
-                "12": ("GND", "local"),
-                "13": ("", "nc"),
-                "14": ("", "nc"),
-                "15": ("", "nc"),
-                "16": ("", "nc"),
-                "17": ("", "nc"),
-                "18": ("", "nc"),
-            },
-            extra_props={"Manufacturer": "u-blox", "MPN": "MAX-M10S-00B"})
-    s.place("J42", "Conn_Coaxial", "GNSS passive antenna U.FL", 520, 110,
-            footprint=FOOTPRINTS["Conn_Coaxial_UFL"],
-            pin_nets={"1": ("GNSS_RF_IN", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Hirose", "MPN": "U.FL-R-SMT-1(01)"})
-    s.place("J44", "Conn_01x06", "DNP MAX-M10S debug/program", 410, 190,
-            footprint=FOOTPRINTS["Conn_01x06"],
-            pin_nets={
-                "1": ("MCU_3V3", "hier"),
-                "2": ("GND", "local"),
-                "3": ("GNSS_UART_RX", "hier"),
-                "4": ("GNSS_UART_TX", "hier"),
-                "5": ("GNSS_PPS", "hier"),
-                "6": ("GNSS_RESET_N", "hier"),
-            }, on_board=False)
-    s.place("C172", "C", "10u GNSS local", 330, 83.82, footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
-    s.place("C173", "C", "100n GNSS local", 330, 96.52, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
-    s.place("C186", "C", "1u MAX-M10S V_BCKP local decoupling", 330, 109.22, footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
-    s.place("R174", "R", "100k GNSS reset pull-up", 330, 121.92, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GNSS_RESET_N", "hier")})
-
-    # ---------------- J43: reserved low-speed radio/debug expansion ----------------
-    s.text(330, 200.66, "== J43 low-speed radio/debug expansion ==")
-    s.place("J43", "Conn_01x08", "DNP radio/debug expansion", 410, 250,
-            footprint=FOOTPRINTS["Conn_01x08"],
-            pin_nets={
-                "1": ("MCU_3V3", "hier"),
-                "2": ("GND", "local"),
-                "3": ("I2C_SCL", "hier"),
-                "4": ("I2C_SDA", "hier"),
-                "5": ("RADIO_GPIO0", "hier"),
-                "6": ("GNSS_EXTINT", "hier"),
-                "7": ("GNSS_UART_TX", "hier"),
-                "8": ("GNSS_UART_RX", "hier"),
-            }, on_board=False)
-
     s.gnd(520, 300)
     s.text(20, 350.52, "NOTES:")
     s.text(20, 358.14, "M.2 E-key directions are host TX->PET35/37 and PER41/43->host RX; Mu-side TX has 220n AC coupling.")
     s.text(20, 365.76, "USB2_P1 carries Bluetooth; default-BIOS HSIO3/REFCLK3/CLKREQ3 carry the E-key PCIe function.")
     s.text(20, 373.38, "Qualified radio is Intel AX210.NGWGIE.NV M.2 2230 Key-E: Wi-Fi over PCIe and Bluetooth over USB; AX211/CNVio2 is prohibited.")
     s.text(20, 381, "OLED headers match common 4-pin SSD1306 modules: GND, VDD/3V3, SCK/SCL, SDA. Use 3.3V modules only.")
-    s.text(20, 388.62, "MAX-M10S V_BCKP, VCC, and VCC_IO use always-on MCU_3V3 so I/O cannot back-power an unpowered GNSS domain.")
-    s.text(20, 396.24, "TCA9548A channels 0/1 isolate the identical 0x3C OLEDs; channels 2/3/4 isolate the three CH224A sinks.")
-    s.text(20, 403.86, "Hardware-gated SERVICE_MUX_RESET_N asserts during every EC reset; firmware selects only a powered, VALID CH224A channel.")
-    s.text(20, 411.48, "GNSS RF layout: place U.FL near board edge, route RF_IN as 50 ohm, and keep it away from Wi-Fi antennas/noisy bucks.")
+    s.text(20, 388.62, "GNSS, amateur-radio modules, RF switching, and the dedicated radio codec are isolated on the removable daughterboard.")
+    s.text(20, 396.24, "TCA9548A channels 0/1 isolate the identical 0x3C OLEDs; channels 2/3 isolate the two TPS25751A service buses.")
+    s.text(20, 403.86, "Hardware-gated SERVICE_MUX_RESET_N asserts during every EC reset; firmware selects one TPS25751A channel and validates PD Status 0x35 plus PDO/RDO 0x31/0x32.")
+    s.text(20, 411.48, "The mainboard OLED and Wi-Fi functions do not depend on radio-daughterboard presence or power.")
     s.text(20, 419.1, "U170 isolates powered-off E-key controls; R198/R199 keep WLAN and Bluetooth disabled until EC firmware explicitly enables them.")
-    s.text(20, 426.72, "J42 is passive-antenna-only. Active antenna bias requires a complete u-blox short-protected supervisor, not a bias-tee strap.")
+    s.text(20, 426.72, "Channels 4-7 remain unused and explicitly no-connected for future service expansion.")
     s.text(20, 434.34, "SUSCLK, SDIO, PCM/I2S, UIM, and vendor-defined E-key pins remain NC for the AX210-class module target.")
-    s.text(20, 441.96, "GNSS_EXTINT has no external pulldown; the MAX-M10S internal pull-up defines its reset state. EC firmware must leave the pin high-impedance until configured.")
+    s.text(20, 441.96, "The optional-board interface provides independent safe defaults for every radio/GNSS signal.")
 
     return s

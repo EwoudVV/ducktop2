@@ -1,0 +1,39 @@
+{
+  "type": "process",
+  "name": "Ducktop2 MX ULP microstencil - P1S 0.4",
+  "inherits": "0.08mm Extra Fine @BBL X1C",
+  "from": "User",
+  "instantiation": "true",
+  "compatible_printers": [
+    "Bambu Lab P1S 0.4 nozzle"
+  ],
+  "layer_height": "0.08",
+  "initial_layer_print_height": "0.12",
+  "initial_layer_line_width": "0.35",
+  "outer_wall_line_width": "0.35",
+  "inner_wall_line_width": "0.35",
+  "sparse_infill_line_width": "0.35",
+  "internal_solid_infill_line_width": "0.35",
+  "top_surface_line_width": "0.35",
+  "wall_generator": "arachne",
+  "elefant_foot_compensation": "0.10",
+  "initial_layer_speed": [
+    "20"
+  ],
+  "initial_layer_infill_speed": [
+    "20"
+  ],
+  "outer_wall_speed": [
+    "30"
+  ],
+  "inner_wall_speed": [
+    "40"
+  ],
+  "top_surface_speed": [
+    "25"
+  ],
+  "brim_type": "no_brim",
+  "skirt_loops": "2",
+  "enable_support": "0",
+  "ironing_type": "no ironing"
+}

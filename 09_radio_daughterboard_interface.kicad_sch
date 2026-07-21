@@ -1,0 +1,6216 @@
+(kicad_sch
+  (version 20260306)
+  (generator "eeschema")
+  (generator_version "10.0")
+  (uuid dc055c16-63b1-57c7-a6c9-be1e02c75fec)
+  (paper "A2")
+  (lib_symbols
+(symbol "74xGxx:74LVC1G17"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "74LVC1G17"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at -2.54 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc1g17.pdf"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" "Single Schmitt Buffer Gate, Low-Voltage CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "Single Gate Buff Schmitt LVC CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23* SOT?553* Texas?R-PDSO-G5?DCK* Texas?R-PDSO-N5?DRL* Texas?X2SON*0.8x0.8mm*P0.48mm*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "74LVC1G17_0_1"
+			(polyline
+				(pts
+					(xy -7.62 6.35) (xy -7.62 -6.35) (xy 5.08 0) (xy -7.62 6.35)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy -3.81 -1.27) (xy -2.54 -1.27) (xy -2.54 1.27) (xy -1.27 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 -1.27) (xy -1.27 -1.27) (xy -1.27 1.27) (xy 0 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "74LVC1G17_1_1"
+			(pin no_connect line
+				(at -7.62 5.08 180)
+				(length 5.08)
+				(hide yes)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -12.7 0 0)
+				(length 5.08)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -5.08 -10.16 90)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 10.16 0 180)
+				(length 5.08)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -5.08 10.16 270)
+				(length 5.08)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Conn_02x30_MP:Conn_02x30_MP"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 1.27 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_02x30_MP"
+			(at 1.27 -40.64 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, double row, 02x30, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_2x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_02x30_MP_1_1"
+			(rectangle
+				(start -1.27 36.83)
+				(end 3.81 -39.37)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 35.687)
+				(end 0 35.433)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 33.147)
+				(end 0 32.893)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 30.607)
+				(end 0 30.353)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 28.067)
+				(end 0 27.813)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 25.527)
+				(end 0 25.273)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 22.987)
+				(end 0 22.733)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 20.447)
+				(end 0 20.193)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 17.907)
+				(end 0 17.653)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 15.367)
+				(end 0 15.113)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 12.827)
+				(end 0 12.573)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 10.287)
+				(end 0 10.033)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 7.747)
+				(end 0 7.493)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 5.207)
+				(end 0 4.953)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 2.667)
+				(end 0 2.413)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -4.953)
+				(end 0 -5.207)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -7.493)
+				(end 0 -7.747)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -10.033)
+				(end 0 -10.287)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -12.573)
+				(end 0 -12.827)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -15.113)
+				(end 0 -15.367)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -17.653)
+				(end 0 -17.907)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -20.193)
+				(end 0 -20.447)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -22.733)
+				(end 0 -22.987)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -25.273)
+				(end 0 -25.527)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -27.813)
+				(end 0 -28.067)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -30.353)
+				(end 0 -30.607)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -32.893)
+				(end 0 -33.147)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -35.433)
+				(end 0 -35.687)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -37.973)
+				(end 0 -38.227)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 35.687)
+				(end 2.54 35.433)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 33.147)
+				(end 2.54 32.893)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 30.607)
+				(end 2.54 30.353)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 28.067)
+				(end 2.54 27.813)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 25.527)
+				(end 2.54 25.273)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 22.987)
+				(end 2.54 22.733)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 20.447)
+				(end 2.54 20.193)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 17.907)
+				(end 2.54 17.653)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 15.367)
+				(end 2.54 15.113)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 12.827)
+				(end 2.54 12.573)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 10.287)
+				(end 2.54 10.033)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 7.747)
+				(end 2.54 7.493)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 5.207)
+				(end 2.54 4.953)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 2.667)
+				(end 2.54 2.413)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 0.127)
+				(end 2.54 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -2.413)
+				(end 2.54 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -4.953)
+				(end 2.54 -5.207)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -7.493)
+				(end 2.54 -7.747)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -10.033)
+				(end 2.54 -10.287)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -12.573)
+				(end 2.54 -12.827)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -15.113)
+				(end 2.54 -15.367)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -17.653)
+				(end 2.54 -17.907)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -20.193)
+				(end 2.54 -20.447)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -22.733)
+				(end 2.54 -22.987)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -25.273)
+				(end 2.54 -25.527)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -27.813)
+				(end 2.54 -28.067)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -30.353)
+				(end 2.54 -30.607)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -32.893)
+				(end 2.54 -33.147)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -35.433)
+				(end 2.54 -35.687)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -37.973)
+				(end 2.54 -38.227)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 35.56 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 35.56 180)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 33.02 0)
+				(length 3.81)
+				(name "Pin_3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 33.02 180)
+				(length 3.81)
+				(name "Pin_4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 30.48 0)
+				(length 3.81)
+				(name "Pin_5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 30.48 180)
+				(length 3.81)
+				(name "Pin_6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 27.94 0)
+				(length 3.81)
+				(name "Pin_7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 27.94 180)
+				(length 3.81)
+				(name "Pin_8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 25.4 0)
+				(length 3.81)
+				(name "Pin_9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 25.4 180)
+				(length 3.81)
+				(name "Pin_10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 22.86 0)
+				(length 3.81)
+				(name "Pin_11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 22.86 180)
+				(length 3.81)
+				(name "Pin_12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 20.32 0)
+				(length 3.81)
+				(name "Pin_13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 20.32 180)
+				(length 3.81)
+				(name "Pin_14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 17.78 0)
+				(length 3.81)
+				(name "Pin_15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 17.78 180)
+				(length 3.81)
+				(name "Pin_16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 15.24 0)
+				(length 3.81)
+				(name "Pin_17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 15.24 180)
+				(length 3.81)
+				(name "Pin_18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 12.7 0)
+				(length 3.81)
+				(name "Pin_19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 12.7 180)
+				(length 3.81)
+				(name "Pin_20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 10.16 0)
+				(length 3.81)
+				(name "Pin_21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 10.16 180)
+				(length 3.81)
+				(name "Pin_22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 7.62 0)
+				(length 3.81)
+				(name "Pin_23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 7.62 180)
+				(length 3.81)
+				(name "Pin_24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 5.08 0)
+				(length 3.81)
+				(name "Pin_25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 5.08 180)
+				(length 3.81)
+				(name "Pin_26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 2.54 0)
+				(length 3.81)
+				(name "Pin_27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 2.54 180)
+				(length 3.81)
+				(name "Pin_28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_29"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "29"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 0 180)
+				(length 3.81)
+				(name "Pin_30"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "30"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_31"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "31"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -2.54 180)
+				(length 3.81)
+				(name "Pin_32"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "32"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -5.08 0)
+				(length 3.81)
+				(name "Pin_33"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "33"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -5.08 180)
+				(length 3.81)
+				(name "Pin_34"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "34"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -7.62 0)
+				(length 3.81)
+				(name "Pin_35"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "35"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -7.62 180)
+				(length 3.81)
+				(name "Pin_36"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "36"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -10.16 0)
+				(length 3.81)
+				(name "Pin_37"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "37"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -10.16 180)
+				(length 3.81)
+				(name "Pin_38"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "38"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -12.7 0)
+				(length 3.81)
+				(name "Pin_39"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "39"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -12.7 180)
+				(length 3.81)
+				(name "Pin_40"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "40"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -15.24 0)
+				(length 3.81)
+				(name "Pin_41"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "41"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -15.24 180)
+				(length 3.81)
+				(name "Pin_42"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "42"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -17.78 0)
+				(length 3.81)
+				(name "Pin_43"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "43"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -17.78 180)
+				(length 3.81)
+				(name "Pin_44"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "44"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -20.32 0)
+				(length 3.81)
+				(name "Pin_45"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "45"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -20.32 180)
+				(length 3.81)
+				(name "Pin_46"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "46"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -22.86 0)
+				(length 3.81)
+				(name "Pin_47"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "47"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -22.86 180)
+				(length 3.81)
+				(name "Pin_48"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "48"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -25.4 0)
+				(length 3.81)
+				(name "Pin_49"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "49"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -25.4 180)
+				(length 3.81)
+				(name "Pin_50"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "50"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -27.94 0)
+				(length 3.81)
+				(name "Pin_51"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "51"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -27.94 180)
+				(length 3.81)
+				(name "Pin_52"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "52"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -30.48 0)
+				(length 3.81)
+				(name "Pin_53"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "53"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -30.48 180)
+				(length 3.81)
+				(name "Pin_54"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "54"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -33.02 0)
+				(length 3.81)
+				(name "Pin_55"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "55"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -33.02 180)
+				(length 3.81)
+				(name "Pin_56"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "56"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -35.56 0)
+				(length 3.81)
+				(name "Pin_57"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "57"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -35.56 180)
+				(length 3.81)
+				(name "Pin_58"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "58"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -38.1 0)
+				(length 3.81)
+				(name "Pin_59"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "59"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -38.1 180)
+				(length 3.81)
+				(name "Pin_60"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "60"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 -40.64 180)
+				(length 2.54)
+				(name "MP"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "MP"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Device:C"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0.254)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "C"
+			(at 0.635 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "C"
+			(at 0.635 -2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 0.9652 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "cap capacitor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "C_0_1"
+			(polyline
+				(pts
+					(xy -2.032 0.762) (xy 2.032 0.762)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.032 -0.762) (xy 2.032 -0.762)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "C_1_1"
+			(pin passive line
+				(at 0 3.81 270)
+				(length 2.794)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -3.81 90)
+				(length 2.794)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Device:R"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "R"
+			(at 2.032 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "R"
+			(at 0 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -1.778 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "R res resistor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "R_0_1"
+			(rectangle
+				(start -1.016 -2.54)
+				(end 1.016 2.54)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "R_1_1"
+			(pin passive line
+				(at 0 3.81 270)
+				(length 1.27)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -3.81 90)
+				(length 1.27)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Interface_USB:TS3USB30EDGSR"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at -6.35 8.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TS3USB30EDGSR"
+			(at 8.89 8.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:TSSOP-10_3x3mm_P0.5mm"
+			(at 20.32 -8.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/ts3usb30e.pdf"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "ESD-Protected, High-Speed USB 2.0 (480-Mbps) 1:2 Multiplexer/Demultiplexer Switch With Single Enable, TSSOP-10 (Texas DGS0010A / VSSOP)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "usb mux"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "*TSSOP*3x3mm?P0.5mm*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "TS3USB30EDGSR_1_1"
+			(rectangle
+				(start -7.62 7.62)
+				(end 7.62 -7.62)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(pin input line
+				(at -10.16 -5.08 0)
+				(length 2.54)
+				(name "S"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at 10.16 5.08 180)
+				(length 2.54)
+				(name "D1+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at 10.16 -2.54 180)
+				(length 2.54)
+				(name "D2+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -10.16 5.08 0)
+				(length 2.54)
+				(name "D+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 -10.16 90)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at -10.16 2.54 0)
+				(length 2.54)
+				(name "D-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at 10.16 -5.08 180)
+				(length 2.54)
+				(name "D2-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin bidirectional line
+				(at 10.16 2.54 180)
+				(length 2.54)
+				(name "D1-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -10.16 -2.54 0)
+				(length 2.54)
+				(name "~{OE}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 10.16 270)
+				(length 2.54)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Power_Protection:USBLC6-2P6"
+		(pin_names
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at 0.635 5.715 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "USBLC6-2P6"
+			(at 0.635 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-666"
+			(at 1.016 -6.731 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/usblc6-2.pdf"
+			(at 1.016 -8.636 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" "Very low capacitance ESD protection diode, 2 data-line, SOT-666"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "usb ethernet video"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?666*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "USBLC6-2P6_0_0"
+			(circle
+				(center -1.524 0)
+				(radius 0.0001)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center -0.508 2.032)
+				(radius 0.0001)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center -0.508 -4.572)
+				(radius 0.0001)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 0.508 2.032)
+				(radius 0.0001)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 0.508 -4.572)
+				(radius 0.0001)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 1.524 -2.54)
+				(radius 0.0001)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "USBLC6-2P6_0_1"
+			(polyline
+				(pts
+					(xy -2.54 0) (xy 2.54 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.54 -2.54) (xy 2.54 -2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.032 0.508) (xy -1.016 0.508) (xy -1.524 1.524) (xy -2.032 0.508)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.032 -3.048) (xy -1.016 -3.048)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.016 1.524) (xy -2.032 1.524)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.016 -4.064) (xy -2.032 -4.064) (xy -1.524 -3.048) (xy -1.016 -4.064)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.508 -1.143) (xy -0.508 -0.762) (xy 0.508 -0.762)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 2.54) (xy -0.508 2.032) (xy 0.508 2.032) (xy 0 1.524) (xy 0 -4.064) (xy -0.508 -4.572) (xy 0.508 -4.572)
+					(xy 0 -5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.508 -1.778) (xy -0.508 -1.778) (xy 0 -0.762) (xy 0.508 -1.778)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.016 1.524) (xy 2.032 1.524)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.016 -3.048) (xy 2.032 -3.048)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.032 0.508) (xy 1.016 0.508) (xy 1.524 1.524) (xy 2.032 0.508)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.032 -4.064) (xy 1.016 -4.064) (xy 1.524 -3.048) (xy 2.032 -4.064)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "USBLC6-2P6_1_1"
+			(rectangle
+				(start -2.54 2.794)
+				(end 2.54 -5.334)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.508 2.032) (xy -1.524 2.032) (xy -1.524 -4.572) (xy -0.508 -4.572)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.508 -4.572) (xy 1.524 -4.572) (xy 1.524 2.032) (xy 0.508 2.032)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 2.54)
+				(name "I/O1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -7.62 90)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 2.54)
+				(name "I/O2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 -2.54 180)
+				(length 2.54)
+				(name "I/O2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 5.08 270)
+				(length 2.54)
+				(name "VBUS"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 0 180)
+				(length 2.54)
+				(name "I/O1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "Q"
+			(at 5.08 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Q_NMOS_SOT23_GSD"
+			(at 5.08 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "N-MOSFET, numbered for common SOT-23 1=G 2=S 3=D pinout"
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Q_NMOS_SOT23_GSD_0_1"
+			(polyline
+				(pts
+					(xy -0.508 1.905) (xy -0.508 -1.905)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.254 1.27) (xy 2.54 2.54)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.254 -1.27) (xy 2.54 -2.54)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "Q_NMOS_SOT23_GSD_1_1"
+			(pin input line
+				(at -5.08 0 0)
+				(length 4.572)
+				(name "G"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 -5.08 90)
+				(length 2.54)
+				(name "S"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 5.08 270)
+				(length 2.54)
+				(name "D"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+(symbol "TLV803EA43RDBZR:TLV803EA43RDBZR"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "TLV803EA43RDBZR" (at 0 2.54 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv803e.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "4.38V open-drain active-low supervisor, 200ms delay, R-pinout SOT-23-3" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "TLV803EA43RDBZR_0_1"
+			(rectangle (start -3.81 1.27) (end 3.81 -3.81) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "TLV803EA43RDBZR_1_1"
+			(pin open_collector line (at 6.35 0 180) (length 2.54) (name "RESETz" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0 -6.35 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -6.35 0 0) (length 2.54) (name "VDD" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "TPS2553D:TPS2553D"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "TPS2553D" (at 0 6.35 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2553d.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "Active-high precision current-limited power switch with reverse-voltage blocking, DBV SOT-23-6" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "TPS2553D_0_1"
+			(rectangle (start -5.08 5.08) (end 5.08 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "TPS2553D_1_1"
+			(pin power_in line (at -7.62 3.81 0) (length 2.54) (name "IN" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0 -7.62 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 1.27 0) (length 2.54) (name "EN" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 7.62 -1.27 180) (length 2.54) (name "~{FAULT}" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at -7.62 -1.27 0) (length 2.54) (name "ILIM" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin power_out line (at 7.62 3.81 180) (length 2.54) (name "OUT" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "TPS259470A:TPS259470A"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "TPS259470A" (at 0 6.35 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "ducktop2:Texas_RPW0010A_VQFN-HR-10_2x2mm" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps25947.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "2.7V to 23V, 5.5A true-reverse-blocking eFuse, adjustable UVLO/OVLO and active current limit, RPW-10" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "TPS259470A_0_1"
+			(rectangle (start -5.08 5.08) (end 5.08 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "TPS259470A_1_1"
+			(pin input line (at -7.62 3.81 0) (length 2.54) (name "EN/UVLO" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 1.27 0) (length 2.54) (name "OVLO" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 7.62 3.81 180) (length 2.54) (name "AUXOFF" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 7.62 1.27 180) (length 2.54) (name "~{FLT}" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -7.62 -1.27 0) (length 2.54) (name "IN" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin power_out line (at 7.62 -1.27 180) (length 2.54) (name "OUT" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at -7.62 -3.81 0) (length 2.54) (name "dVdt" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0 -7.62 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 7.62 -3.81 180) (length 2.54) (name "ILM" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 0 7.62 270) (length 2.54) (name "ITIMER" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "power:GND"
+		(power global)
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#PWR"
+			(at 0 -6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 0 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "global power"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "GND_0_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "GND_1_1"
+			(pin power_in line
+				(at 0 0 270)
+				(length 0)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+  )
+(text "== Optional radio/GNSS/audio daughterboard interface ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid e074db0b-8ae0-5cac-bef4-22462f028b8c))
+(text "The main laptop cold-boots and operates normally with J2300 completely unpopulated." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid c582f7ff-b285-5d52-8bbe-65e3842408e6))
+(text "Firmware may enable RADIO_DB_5V only after the passive PRESENT_N strap is detected." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid c0d3a448-248b-5ddb-bc61-6a7629e6fa0e))
+(text "== Default-off protected daughterboard power ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 0d2b1710-9047-5bc6-9cfd-35481ce466ea))
+(symbol
+  (lib_id "TPS259470A:TPS259470A")
+  (at 129.54 105.41 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 815a366f-09e5-5ad2-a797-19f11e658b33)
+  (property "Reference" "U2300" (at 129.54 102.87 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS259470ARPW 2A reverse-blocking radio eFuse" (at 129.54 107.95 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:Texas_RPW0010A_VQFN-HR-10_2x2mm" (at 129.54 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 129.54 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 129.54 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPS259470ARPW" (at 129.54 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps25947.pdf" (at 129.54 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "SafetyContract" "DEFAULT_OFF;REVERSE_BLOCKING;APPROX_2A_CURRENT_LIMIT" (at 129.54 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 457a3cd2-fbe7-54f3-afa9-4af506f45b6d))
+  (pin "2" (uuid 794bf981-d842-5580-ba38-ace033727655))
+  (pin "3" (uuid 8af0125c-d875-57e3-a184-eb15c5b8b714))
+  (pin "4" (uuid b1f228f8-551d-542f-b015-f37ba3727824))
+  (pin "5" (uuid 7d43a596-9140-52bc-b569-e1d45c9b6fa1))
+  (pin "6" (uuid 47d774de-d984-5257-90b2-9314e9087a3c))
+  (pin "7" (uuid 57436dfe-b1ee-565d-86a9-96ee8542a495))
+  (pin "8" (uuid bfd502d1-27ca-5767-b9bc-bcdbbaa3951e))
+  (pin "9" (uuid bb49c3d1-9b30-5c96-94be-4aed7c0a79f3))
+  (pin "10" (uuid 93443ff3-ad11-5676-9019-11517f32d233))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "U2300")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_DB_PWR_EN"
+  (shape bidirectional)
+  (at 121.92 101.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c0ecfb68-fd12-578c-a844-f9f7a677a4c9)
+)
+(label "GND"
+  (at 121.92 104.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 52e56935-e84f-5fd3-9348-4409ea79876d)
+)
+(no_connect (at 137.16 101.6) (uuid 85a607d0-dd86-575f-b2ab-d3eb11dadc60))
+(hierarchical_label "RADIO_DB_FAULT_N"
+  (shape bidirectional)
+  (at 137.16 104.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e03053f6-fce6-5cb6-92e6-d87ce9aad2b5)
+)
+(hierarchical_label "SYS_5V"
+  (shape bidirectional)
+  (at 121.92 106.68 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4129a5d0-616b-5ccd-8ad2-abee96c27142)
+)
+(label "RADIO_DB_5V"
+  (at 137.16 106.68 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 077d2cc9-0b63-51db-9f3e-a9605a42b060)
+)
+(label "RADIO_DB_DVDT"
+  (at 121.92 109.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7c274b26-7d79-5817-bb84-20cc2e5457e1)
+)
+(label "GND"
+  (at 129.54 113.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fb8aa754-37c2-535f-a99a-4f8a808a0ef9)
+)
+(label "RADIO_DB_ILM"
+  (at 137.16 109.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 984c6bbc-1190-5453-bab5-df75122356af)
+)
+(no_connect (at 129.54 97.79) (uuid 4c48c23b-4629-53a8-aa42-c438e002d30f))
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 76.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid d000968e-7eca-5f03-b4bb-1e184afa1ebe)
+  (property "Reference" "R2300" (at 20.32 73.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k radio eFuse enable pulldown" (at 20.32 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 515a6007-c351-50ee-a694-2de6525e2d8b))
+  (pin "2" (uuid cdf29b11-402e-57c7-a6e2-4c34b80c9862))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2300")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_DB_PWR_EN"
+  (shape bidirectional)
+  (at 20.32 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ccfb0f70-6bcb-57ed-ba3e-1b8cbffc8198)
+)
+(label "GND"
+  (at 20.32 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2993ebf6-b87f-5e21-9cd5-3d7a37f0ab54)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 88.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2ead322e-7999-5f20-ad1b-29a6f0665f24)
+  (property "Reference" "R2301" (at 20.32 86.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1.65k 0.1% radio eFuse ILM about 2.0A" (at 20.32 91.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ce46e7b8-7297-56ce-a649-484911560b11))
+  (pin "2" (uuid df248ba6-f651-552e-85fd-65b5aa735126))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2301")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_ILM"
+  (at 20.32 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 24d1732d-70eb-574a-bfab-50e1c2357a5f)
+)
+(label "GND"
+  (at 20.32 92.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f347b722-8799-51fc-a83f-fa5cefab75a2)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 101.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 76b3398d-c14c-5f13-9501-039874796ec0)
+  (property "Reference" "C2300" (at 20.32 99.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7n radio eFuse controlled rise" (at 20.32 104.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 20.32 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 87acbd37-c001-580a-8e01-3bfe1a85c35a))
+  (pin "2" (uuid 000d4593-caa9-56ca-86f2-38bac3919896))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2300")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_DVDT"
+  (at 20.32 97.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 180720ab-7cbc-5c88-9e7f-c5a0d7f6f8ce)
+)
+(label "GND"
+  (at 20.32 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7af4a143-a546-5ad1-a5dd-34cc199e4d85)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 114.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 756ec274-4aab-5f2e-adb4-a8d6c822ac4d)
+  (property "Reference" "C2301" (at 20.32 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10u SYS_5V radio eFuse input" (at 20.32 116.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 20.32 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 863baa64-f066-5686-8947-e6b6b6a6d223))
+  (pin "2" (uuid e32c3db8-9787-56dc-84f8-651b65d42802))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2301")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_5V"
+  (shape bidirectional)
+  (at 20.32 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fb6850d6-ca97-5bc0-8514-051a80a2ad6b)
+)
+(label "GND"
+  (at 20.32 118.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 68e70b98-d77d-5518-b0f3-b5edc8eeaaf9)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 127 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 698007bb-2731-5bb3-8b69-6953f0b96ba1)
+  (property "Reference" "C2302" (at 20.32 124.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n SYS_5V radio eFuse input HF" (at 20.32 129.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 20.32 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 170b73ea-612a-5221-9470-8fba58fdb8f4))
+  (pin "2" (uuid 2a4bcec2-c89c-534d-bdd6-06b0ee2e3cd4))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2302")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_5V"
+  (shape bidirectional)
+  (at 20.32 123.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f4a2a9de-575d-5e3e-8203-33fa09d061dd)
+)
+(label "GND"
+  (at 20.32 130.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8093f69a-dc3e-5d9b-88c5-2c32d33133a6)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 139.7 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid af5a919c-aa4b-59e3-b063-ed1b7f299e4f)
+  (property "Reference" "C2303" (at 20.32 137.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "22u RADIO_DB_5V output bulk" (at 20.32 142.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 20.32 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d527fbd6-46e3-591e-b0e8-03fcd8e07e97))
+  (pin "2" (uuid 1bb723aa-9f0d-52c5-9fcf-eae019783414))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2303")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_5V"
+  (at 20.32 135.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f830d5b1-e378-567c-8fba-e4af9c705404)
+)
+(label "GND"
+  (at 20.32 143.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6afa4bb6-dd2f-5330-90cd-03bdebf377a4)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 152.4 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a0a81415-2020-5d76-a53c-7272fc33a60a)
+  (property "Reference" "C2304" (at 20.32 149.86 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n RADIO_DB_5V output HF" (at 20.32 154.94 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 20.32 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 750c2e47-4e19-52f5-a08f-9bad670b3309))
+  (pin "2" (uuid f91232b4-d067-5ccc-a614-66bf35cf89df))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2304")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_5V"
+  (at 20.32 148.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4b9dfabd-0372-5b7f-bde7-2771fc52eaf4)
+)
+(label "GND"
+  (at 20.32 156.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 32c2932c-058f-5dd8-bc23-87eac979cac9)
+)
+(symbol
+  (lib_id "TLV803EA43RDBZR:TLV803EA43RDBZR")
+  (at 260.35 90.17 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid eaac64e9-3f89-58f2-b148-2e9ffec33fdf)
+  (property "Reference" "U2301" (at 260.35 87.63 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TLV803EA43 4.3V radio rail supervisor" (at 260.35 92.71 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-3" (at 260.35 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 260.35 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 260.35 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TLV803EA43RDBZR" (at 260.35 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e2ff9fc0-7f03-57cb-83f5-bd817f14b04f))
+  (pin "2" (uuid 4d8d5fa4-cbcd-5e6d-a384-54fa6173dbb8))
+  (pin "3" (uuid 53067aca-ae80-596a-9432-660fa311bb74))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "U2301")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_PG_RAW"
+  (at 266.7 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 918ce774-462e-58c2-8152-c31eb7ca28b0)
+)
+(label "GND"
+  (at 260.35 96.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 25fd07f7-de69-5178-b84f-96e795c62d72)
+)
+(label "RADIO_DB_5V"
+  (at 254 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6c6018f7-0fac-59f3-b77d-3433b4269d1b)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 224.79 115.57 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f9453da4-ca3b-52ac-8fe5-a937702e4d61)
+  (property "Reference" "R2302" (at 224.79 113.03 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2.2k supervisor pull-up to switched 5V" (at 224.79 118.11 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 224.79 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 224.79 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f1596df0-75f0-520c-aa75-5cb29a3469b7))
+  (pin "2" (uuid eddc39f5-3275-50a1-a1ce-471d73f73313))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2302")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_5V"
+  (at 224.79 111.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 972e4b8e-5336-57a7-aa6d-35c4d8fddd26)
+)
+(label "RADIO_DB_PG_RAW"
+  (at 224.79 119.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 15957c97-9c13-5184-9b91-c7fdbd8d08ad)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 260.35 115.57 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 3d31cf37-4931-50d9-9a42-82ef646da28a)
+  (property "Reference" "R2303" (at 260.35 113.03 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k radio PG level-divider top" (at 260.35 118.11 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 260.35 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 260.35 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 857c5215-c74f-50b8-bb80-4e6d2208be1e))
+  (pin "2" (uuid 8ab88ca6-3b08-59bf-8bf8-8994b3c24eb2))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2303")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_PG_RAW"
+  (at 260.35 111.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 194c5ae9-b0d2-50df-a719-1e1a1e2787aa)
+)
+(label "RADIO_DB_PG_DIV"
+  (at 260.35 119.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d530feb1-c2f0-5985-89cd-b1332858ff43)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 299.72 115.57 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 05036208-c130-590c-ac6d-beb7248ebd8b)
+  (property "Reference" "R2304" (at 299.72 113.03 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "20k radio PG level-divider bottom" (at 299.72 118.11 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 299.72 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 299.72 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 34922dbb-672e-540c-b1e0-45368e7f2195))
+  (pin "2" (uuid 83a7498a-8245-5cc0-8c3a-76a0039bae6b))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2304")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_PG_DIV"
+  (at 299.72 111.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f3c010d8-95b5-5684-97dd-6c0bcba63254)
+)
+(label "GND"
+  (at 299.72 119.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid de354781-4cdc-5f1d-bd54-318e2fd13cd9)
+)
+(symbol
+  (lib_id "74xGxx:74LVC1G17")
+  (at 350.52 100.33 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 57f1455f-4b53-5e5f-8501-a62e75df6e81)
+  (property "Reference" "U2302" (at 350.52 97.79 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74LVC1G17DBVR radio PG level restore" (at 350.52 102.87 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 350.52 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 350.52 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 350.52 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "SN74LVC1G17DBVR" (at 350.52 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a8cc9e88-2dde-5f45-923c-d7af649c588f))
+  (pin "2" (uuid 668de10d-7817-534d-b2ae-6d19fedad234))
+  (pin "3" (uuid e47c5ed9-7346-5c00-8f50-bfeaf131caf2))
+  (pin "4" (uuid 18d7f715-a8f7-50d9-ab6c-d73766f14c43))
+  (pin "5" (uuid 806a17df-82ce-5fd5-83bd-972b53cf4cb2))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "U2302")
+        (unit 1)
+      )
+    )
+  )
+)
+(no_connect (at 342.9 95.25) (uuid aa66480a-7698-5635-9095-1a33b9d1cb0e))
+(label "RADIO_DB_PG_DIV"
+  (at 337.82 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fd315d70-061b-5331-9b53-831d7acecd28)
+)
+(label "GND"
+  (at 345.44 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 08502ae5-3853-569e-b60b-cd219c10b20f)
+)
+(hierarchical_label "RADIO_DB_PG"
+  (shape bidirectional)
+  (at 360.68 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dd5bcc5e-02c3-5ab5-835e-f98f1481b1e1)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 345.44 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c8fa31a2-972d-5eb0-bc85-5173fabe0d83)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 350.52 124.46 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 7afaab8f-a08b-50cd-8e7c-91811bad09e4)
+  (property "Reference" "C2305" (at 350.52 121.92 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n radio PG buffer local" (at 350.52 127 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 350.52 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 350.52 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a8da0ccf-e252-55ac-8968-bad712c661f2))
+  (pin "2" (uuid 75609a3f-79d6-5d17-8420-88fae6888c97))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2305")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 350.52 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2250c99a-e8fb-59fa-b9d0-9cfee3897004)
+)
+(label "GND"
+  (at 350.52 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 21fcec6f-b17e-566b-a1d8-41c313bbc42f)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 420.37 76.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid e513147b-a0d7-5dc3-87fc-c1ff470faca8)
+  (property "Reference" "R2305" (at 420.37 73.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k radio eFuse/shared fault pull-up" (at 420.37 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 420.37 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 420.37 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 2d849fd8-b8fd-5724-9dd7-d40255b17234))
+  (pin "2" (uuid 791aa4f0-a978-51ee-803f-c2d618962545))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2305")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 420.37 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8d3aeca1-55bf-507f-a799-fec0a33c9cdf)
+)
+(hierarchical_label "RADIO_DB_FAULT_N"
+  (shape bidirectional)
+  (at 420.37 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 86453654-b40a-5149-8671-3b4d2135fd21)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 420.37 88.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4fff5745-1884-5607-a3c8-97e2da337757)
+  (property "Reference" "R2306" (at 420.37 86.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k daughterboard-present pull-up; absent=high" (at 420.37 91.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 420.37 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 420.37 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 13b294cc-33fc-5107-a727-1a9614f6342d))
+  (pin "2" (uuid cfe4c5bb-0b12-5900-bf22-c9bcfd7eb3fd))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2306")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 420.37 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 06b54fde-8a89-5c58-a274-c7b098f16365)
+)
+(hierarchical_label "RADIO_DB_PRESENT_N"
+  (shape bidirectional)
+  (at 420.37 92.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bd8053a8-5b51-5122-a32d-4a4d0eccbbb0)
+)
+(text "== USB codec isolation: no phantom device or back-power when daughterboard is absent ==" (at 20.32 190.5 0) (effects (font (size 1.27 1.27))) (uuid 7f417461-d334-5877-b28e-c0b6d154e0d0))
+(symbol
+  (lib_id "Interface_USB:TS3USB30EDGSR")
+  (at 149.86 245.11 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 1a754d2a-8cab-5c1b-b1ea-d285b79735b0)
+  (property "Reference" "U2303" (at 149.86 242.57 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TS3USB30E default-disconnected radio codec USB switch" (at 149.86 247.65 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_SO:TSSOP-10_3x3mm_P0.5mm" (at 149.86 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 149.86 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 149.86 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TS3USB30EDGSR" (at 149.86 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "PowerOffContract" "USB_DP_DM_DISCONNECTED_UNLESS_RADIO_DB_PG_IS_HIGH" (at 149.86 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid bd5e6d90-d28f-56af-a8fe-0fafbe9f779e))
+  (pin "2" (uuid b0fd480c-5b99-53c0-83b5-8a886852a8f7))
+  (pin "3" (uuid a72d86f8-0607-55fb-b636-78e6734b43e1))
+  (pin "4" (uuid 83f3b3db-052d-5237-b9ea-7c7188337976))
+  (pin "5" (uuid c0f5dff1-ecd6-59bd-a107-74fe357c24fe))
+  (pin "6" (uuid 3fc966dc-6977-58c1-9d10-b6d537357e9a))
+  (pin "7" (uuid ab8706df-b716-5726-924d-56aebb8400fa))
+  (pin "8" (uuid 697968c2-b12a-586a-94bc-b3aa27f741b6))
+  (pin "9" (uuid bb98fcce-c058-50eb-95aa-8a0164e3150d))
+  (pin "10" (uuid b78f3fe6-0f60-58a7-8917-f2aad93a95e5))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "U2303")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GND"
+  (at 139.7 250.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7bcf5752-6f75-54dd-a484-aaf09ba3ced3)
+)
+(hierarchical_label "RADIO_CODEC_USB_DP_HOST"
+  (shape bidirectional)
+  (at 160.02 240.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0cc2bc03-252a-5f63-acbd-5829493d662b)
+)
+(no_connect (at 160.02 247.65) (uuid 0ddcb5de-e4f7-5c3a-a8e7-0e202ee7bc6f))
+(label "RADIO_CODEC_USB_DP_DB"
+  (at 139.7 240.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a8d65d6b-5f3e-56a6-af54-d70d9d5b0294)
+)
+(label "GND"
+  (at 149.86 255.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5163e9ef-9ad7-5b8f-946b-d2437cc71062)
+)
+(label "RADIO_CODEC_USB_DM_DB"
+  (at 139.7 242.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 16db7ed7-35d2-5214-afea-e36920b5eafc)
+)
+(no_connect (at 160.02 250.19) (uuid 8d08fa2f-b423-5786-8210-4538f0de0f03))
+(hierarchical_label "RADIO_CODEC_USB_DM_HOST"
+  (shape bidirectional)
+  (at 160.02 242.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid db938fc9-49b1-569a-a649-6b71201b3af7)
+)
+(label "RADIO_USB_OE_N"
+  (at 139.7 247.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dc7875d8-e4ff-568d-909c-437f07c9b16a)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 149.86 234.95 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 41040c00-5f4c-5de6-acec-a50f3247b0bd)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 228.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 5b29a4cf-92b8-53df-8919-d14211f1b3fd)
+  (property "Reference" "R2307" (at 20.32 226.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k USB switch disable pull-up" (at 20.32 231.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 228.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 228.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 359e51aa-c325-50a8-9a1d-9aa98c7e52c3))
+  (pin "2" (uuid bca64fc4-be38-53b1-b787-8696246c3808))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2307")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 20.32 224.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fff1f836-ca53-525e-a7b6-da3c69e1ea7c)
+)
+(label "RADIO_USB_OE_N"
+  (at 20.32 232.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fe068a8b-ba21-5dcb-8a73-099c32c79238)
+)
+(symbol
+  (lib_id "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD")
+  (at 20.32 241.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid acd4542a-8a20-5549-84b5-bf65105bda29)
+  (property "Reference" "Q2300" (at 20.32 238.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2N7002K radio-PG USB enable" (at 20.32 243.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 20.32 241.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 241.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "onsemi" (at 20.32 241.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2N7002KT1G" (at 20.32 241.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1937e46e-d4d6-5fbc-ac25-0753898b5a1f))
+  (pin "2" (uuid 5d6df2c6-929e-52ea-ba7d-3c89f14ec033))
+  (pin "3" (uuid ea064460-6b08-562c-b008-0d88647944e8))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "Q2300")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_DB_PG"
+  (shape bidirectional)
+  (at 15.24 241.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1e155f94-4124-502b-8fc1-982b8c396552)
+)
+(label "GND"
+  (at 22.86 246.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ad79dbcf-0799-5567-a450-37a600f64adc)
+)
+(label "RADIO_USB_OE_N"
+  (at 22.86 236.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b10dd721-c2b6-5052-8437-806550ca62d6)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 254 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 6e5382f5-9d58-523e-87ac-fe021d69839c)
+  (property "Reference" "C2306" (at 20.32 251.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n USB switch local" (at 20.32 256.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 20.32 254 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 254 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 97e0fdf6-04fd-528e-854d-bc3e69ea8bc3))
+  (pin "2" (uuid 613c08a6-b8ef-5d93-83d9-999de9cc40b4))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2306")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 20.32 250.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 29822550-1970-5720-80c8-a330f507f366)
+)
+(label "GND"
+  (at 20.32 257.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid da1a7555-155c-568d-a9c4-302886bda5ce)
+)
+(symbol
+  (lib_id "TPS2553D:TPS2553D")
+  (at 330.2 245.11 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 784a3422-5afe-5e04-a20d-0b656b0604a0)
+  (property "Reference" "U2304" (at 330.2 242.57 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS2553D radio codec VBUS gate 0.20A" (at 330.2 247.65 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 330.2 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 330.2 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 330.2 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPS2553DBVR" (at 330.2 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b0ef8520-a2d8-5797-b2b2-169eb4f606ab))
+  (pin "2" (uuid 41cdba41-fcac-5e40-a08d-2928f3840b39))
+  (pin "3" (uuid df1cc093-b2e2-5d07-b0e7-67f44ad2b8f8))
+  (pin "4" (uuid 4f12bb32-86fd-53ce-b029-95e3af3ddf33))
+  (pin "5" (uuid 34917cea-baf6-5bb4-bf46-108cfa7ad44b))
+  (pin "6" (uuid bf481bc0-6b1c-5da9-b78e-ff8e47f1a162))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "U2304")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_CODEC_USB_VBUS_HOST"
+  (shape bidirectional)
+  (at 322.58 241.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 504db8dd-aed7-5d4e-a157-4ef76066af76)
+)
+(label "GND"
+  (at 330.2 252.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a47949d1-509b-596c-8cf6-9c51134872bf)
+)
+(hierarchical_label "RADIO_DB_PG"
+  (shape bidirectional)
+  (at 322.58 243.84 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 323f2616-4d0a-5e16-af30-b8ae9f98c91f)
+)
+(hierarchical_label "RADIO_DB_FAULT_N"
+  (shape bidirectional)
+  (at 337.82 246.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 063ee41d-21d3-5ff0-a8af-7a637e7d5f63)
+)
+(label "RADIO_CODEC_ILIM"
+  (at 322.58 246.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 20567873-bb7f-5860-bbcc-23d75d39cb69)
+)
+(label "RADIO_CODEC_USB_VBUS_DB"
+  (at 337.82 241.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4066ca90-2c75-530d-85bd-cc8f5afd32d6)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 430.53 228.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 0f1f20a1-de0e-5628-818a-221c5df1537a)
+  (property "Reference" "R2308" (at 430.53 226.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "133k 1% TPS2553 current limit about 0.20A" (at 430.53 231.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 430.53 228.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 430.53 228.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 430.53 228.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07133KL" (at 430.53 228.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4670babf-f893-5ca4-b771-22369b8ce0af))
+  (pin "2" (uuid 40d99845-6642-5ffa-8cd7-4e72e5202899))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2308")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_CODEC_ILIM"
+  (at 430.53 224.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a3150ba3-db8a-5e67-baca-27039fa76674)
+)
+(label "GND"
+  (at 430.53 232.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid eb5f8d18-12c6-50c8-9f70-3d5691585c07)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 430.53 241.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 50ac7fc8-ef5e-5327-9cd2-8d02cdab56d9)
+  (property "Reference" "C2307" (at 430.53 238.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u radio codec VBUS gate input" (at 430.53 243.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 430.53 241.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 430.53 241.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c128cf59-361b-5a01-ba1a-1accc65bf3fc))
+  (pin "2" (uuid 9138fc0b-66c4-52a0-8d42-20fca3db5bf3))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2307")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_CODEC_USB_VBUS_HOST"
+  (shape bidirectional)
+  (at 430.53 237.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7df42a7f-186a-576a-a989-0e503922037a)
+)
+(label "GND"
+  (at 430.53 245.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a419ada1-26f4-5ac8-950f-c81f6a205b36)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 430.53 254 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 546ae2f2-f86b-5558-9497-7f016e7f60cd)
+  (property "Reference" "C2308" (at 430.53 251.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10u radio codec VBUS gate output" (at 430.53 256.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 430.53 254 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 430.53 254 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 97381ed3-b1fc-543b-a66b-98269e68dc43))
+  (pin "2" (uuid c630e1be-e65b-53f4-9274-994fa232c4af))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "C2308")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_CODEC_USB_VBUS_DB"
+  (at 430.53 250.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1a95d862-31c9-58f0-9854-fc03d4d33d83)
+)
+(label "GND"
+  (at 430.53 257.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f5ad8b22-248c-5b7a-acc5-f8bca09b7a97)
+)
+(symbol
+  (lib_id "Power_Protection:USBLC6-2P6")
+  (at 519.43 245.11 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid daec877c-a8e1-5af0-aeb3-d3e75850ca53)
+  (property "Reference" "U2305" (at 519.43 242.57 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "USBLC6-2P6 radio codec USB ESD" (at 519.43 247.65 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-666" (at 519.43 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 519.43 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "STMicroelectronics" (at 519.43 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "USBLC6-2P6" (at 519.43 245.11 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ccd9d57b-5d27-5425-ba59-6335bd9bb750))
+  (pin "2" (uuid b06381e8-c3ff-50a3-a6ab-f19c6e3d8bfa))
+  (pin "3" (uuid 297b4418-e8dd-52ab-b279-27d066b3d772))
+  (pin "4" (uuid 4f84f297-01ff-5199-b16a-987e81f75e8b))
+  (pin "5" (uuid e0b51435-65d6-5489-a621-1ba82f9b55c1))
+  (pin "6" (uuid 1da0ff9c-a030-5488-8f1d-f26b9a69b588))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "U2305")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_CODEC_USB_DP_DB"
+  (at 514.35 245.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 97154ed4-7bee-55f1-ba71-04e6b64804ea)
+)
+(label "RADIO_CODEC_USB_DP_DB"
+  (at 524.51 245.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a3817697-a525-5d89-ad3b-b1b51700860b)
+)
+(label "RADIO_CODEC_USB_DM_DB"
+  (at 514.35 247.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7308b747-b774-54b2-9b56-ab5151a49f9e)
+)
+(label "RADIO_CODEC_USB_DM_DB"
+  (at 524.51 247.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 36e23793-b40e-54c9-bc94-6bb74fdf0ad1)
+)
+(label "GND"
+  (at 519.43 252.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cda8f7ee-ca22-557a-9cc2-13925b7d8a7b)
+)
+(label "RADIO_CODEC_USB_VBUS_DB"
+  (at 519.43 240.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0edd9267-8b22-5db5-bbe5-11441f78a498)
+)
+(text "== Safe defaults for every off-board control ==" (at 20.32 304.8 0) (effects (font (size 1.27 1.27))) (uuid cf0a1402-815f-5a3b-9733-3125c8d06681))
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 330.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ebe61823-5d6a-53df-9cad-fa9e824bdab4)
+  (property "Reference" "R2310" (at 20.32 327.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k VHF PTT inactive" (at 20.32 332.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 20.32 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 6dc80cd9-4313-539c-933b-fa1b2009a75a))
+  (pin "2" (uuid ec207f8d-fe77-5c51-802e-746a138be7ca))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2310")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_PTT_N"
+  (shape bidirectional)
+  (at 20.32 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 65159d52-2ce5-584c-a775-30b4d328e31f)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 20.32 334.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 94a33a39-9750-5217-ae80-c950a4a2d318)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 342.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a3618a6d-1652-50cb-a3b1-0cbb8aa6c646)
+  (property "Reference" "R2311" (at 20.32 340.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k UHF PTT inactive" (at 20.32 345.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 20.32 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c4305fbd-63c6-55b1-954a-b52dcdd5e436))
+  (pin "2" (uuid b31b5f95-4f68-5f89-aad7-11d395489b57))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2311")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_PTT_N"
+  (shape bidirectional)
+  (at 20.32 339.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0ee2eb83-d277-5861-9c3a-f52c8299cc65)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 20.32 346.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 58ac7a64-08f5-52b1-9295-0ec48a596350)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 355.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid dc911457-87dd-578b-878e-6a7a4743b6ca)
+  (property "Reference" "R2312" (at 20.32 353.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k VHF asleep" (at 20.32 358.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 20.32 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 3da6e113-6bbc-5ee4-9634-b2137ae1a6ba))
+  (pin "2" (uuid 69ae99c2-86a0-5c75-96b5-08bed2c89b2e))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2312")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_PD_N"
+  (shape bidirectional)
+  (at 20.32 351.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c7a47f77-dd3f-58b6-accf-d78ce8e98bba)
+)
+(label "GND"
+  (at 20.32 359.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e1bd34b0-f4a6-55ee-b937-33c95a32b6b2)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 368.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 96f1c0f3-6853-525b-b9d6-0e2a4aafa3a9)
+  (property "Reference" "R2313" (at 20.32 365.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k UHF asleep" (at 20.32 370.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 20.32 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 64ae54f7-38fd-5ea6-88f6-aa79e0a6cdb3))
+  (pin "2" (uuid 2cd98c5a-4377-5d4b-bbd3-1e04c874b046))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2313")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_PD_N"
+  (shape bidirectional)
+  (at 20.32 364.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cfae2bda-e4b2-5de2-b728-af9921946e35)
+)
+(label "GND"
+  (at 20.32 372.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 716e39e3-1514-51a1-98ed-c458a63c4ec7)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 381 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8425a9e8-9683-5049-9d4e-299373a25ef2)
+  (property "Reference" "R2314" (at 20.32 378.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k VHF internal antenna" (at 20.32 383.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 381 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 381 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 381 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 20.32 381 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f6f276b4-44fc-5e79-b7e5-fac38c5fb46e))
+  (pin "2" (uuid eeaf5293-6fee-558e-8bf1-51fd5887d538))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2314")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_RF_SEL_3V3"
+  (shape bidirectional)
+  (at 20.32 377.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f2ac223a-608a-54b7-8ea3-698163681407)
+)
+(label "GND"
+  (at 20.32 384.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4da07a2d-988e-537b-9107-9ff215655978)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 229.87 330.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f988354a-96bd-50e0-86fd-e11d84a83361)
+  (property "Reference" "R2315" (at 229.87 327.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k UHF internal antenna" (at 229.87 332.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 229.87 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 229.87 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 229.87 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 871ffddd-b21b-5351-8843-533e640b045d))
+  (pin "2" (uuid 83925cd7-a5b8-50b2-a29f-769ba2b26193))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2315")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_RF_SEL_3V3"
+  (shape bidirectional)
+  (at 229.87 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f0267077-1684-5895-be2a-5cd1f849eed0)
+)
+(label "GND"
+  (at 229.87 334.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e2acb0b3-7353-5056-bbe1-7b41c6b2f0b3)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 229.87 342.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 194f12a7-5553-5e6f-b754-7fd9f10c12e9)
+  (property "Reference" "R2316" (at 229.87 340.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k VHF UART idle-high while absent" (at 229.87 345.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 229.87 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 229.87 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 229.87 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 99848ebb-72be-522c-a9f4-0f6e6a7598b1))
+  (pin "2" (uuid 50efb25a-c391-5ede-ada5-bd111b316338))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2316")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_UART_TX"
+  (shape bidirectional)
+  (at 229.87 339.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e7ac5428-e179-5ce8-ba4f-6a5146dab8f4)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 229.87 346.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b9372f8a-5f06-51d8-b254-f885b85dba60)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 229.87 355.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 6f391dc4-97c0-50d6-b4d6-b1f3b14f727e)
+  (property "Reference" "R2317" (at 229.87 353.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k UHF UART idle-high while absent" (at 229.87 358.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 229.87 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 229.87 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 229.87 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 28f0f5a2-e4e7-5c50-9017-1931f1d089a0))
+  (pin "2" (uuid 1193fa4e-b8ed-581c-a2ea-0af68fc3eba9))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2317")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_UART_TX"
+  (shape bidirectional)
+  (at 229.87 351.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 69e0dde4-b33a-5c8c-bf3c-eb40b4aa8705)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 229.87 359.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f293ffe1-6232-5247-b28b-f92ae42b638f)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 229.87 368.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid cbc463f3-842f-5762-9392-5cd9edcf1cb6)
+  (property "Reference" "R2318" (at 229.87 365.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k GNSS RX idle-high while absent" (at 229.87 370.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 229.87 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 229.87 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 229.87 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f6615d8a-eefc-536e-a8ed-f1db0f987dfa))
+  (pin "2" (uuid 721e7be4-851a-57be-b33e-615261b3be8c))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2318")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_UART_RX"
+  (shape bidirectional)
+  (at 229.87 364.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 279cad85-28ac-587c-b0da-4bd5da408160)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 229.87 372.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0e3294be-4cab-5773-a718-a3f5a785ee86)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 229.87 381 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c8d6072e-a63a-52ba-bfdd-a4e839d0f273)
+  (property "Reference" "R2319" (at 229.87 378.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k GNSS reset released while absent" (at 229.87 383.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 229.87 381 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 381 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 229.87 381 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 229.87 381 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d9c696c6-7c5c-5603-8f33-37734da7b34f))
+  (pin "2" (uuid 1db2803f-a4b8-526b-8063-2de6cd805dca))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2319")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_RESET_N"
+  (shape bidirectional)
+  (at 229.87 377.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d19fefc0-9fdf-5c07-adfe-cd9811358c84)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 229.87 384.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 07010ba7-4dfe-54af-8c32-11ff9a6094ef)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 439.42 330.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f686b6de-3786-58e6-b1d2-7bb9e3000f38)
+  (property "Reference" "R2320" (at 439.42 327.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k VHF RX default low while daughterboard absent" (at 439.42 332.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 439.42 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 439.42 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 439.42 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 439.42 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 86385759-a1e6-5f19-b126-b7f4f0d38b0d))
+  (pin "2" (uuid 654755d9-063d-5558-b716-85a4031daabb))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2320")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_UART_RX"
+  (shape bidirectional)
+  (at 439.42 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 54406050-fd53-575a-a3c9-e8e84656691c)
+)
+(label "GND"
+  (at 439.42 334.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 04934af9-09bb-5ea1-ae64-3692bb108328)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 439.42 342.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b3dc3d0c-0659-5ad6-b1d0-931d58a96c61)
+  (property "Reference" "R2321" (at 439.42 340.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k UHF RX default low while daughterboard absent" (at 439.42 345.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 439.42 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 439.42 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 439.42 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 439.42 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f3270499-32aa-5cd5-a934-cefeb1cb3311))
+  (pin "2" (uuid 6beec079-d4a3-5a68-9467-303088062f62))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2321")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_UART_RX"
+  (shape bidirectional)
+  (at 439.42 339.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9b6c6ef4-88a6-5280-aab6-4b794afeac4a)
+)
+(label "GND"
+  (at 439.42 346.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6a3ad032-6444-5421-9d64-b07b82f5f16b)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 439.42 355.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f8034ac8-4803-55a1-8022-54cf4138a9c4)
+  (property "Reference" "R2322" (at 439.42 353.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k VHF SQL default low while daughterboard absent" (at 439.42 358.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 439.42 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 439.42 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 439.42 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 439.42 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d3aef953-3cfb-57cc-ae6f-7543f15a0342))
+  (pin "2" (uuid 1bc5ace2-5309-5d3b-a2f2-7dd829afcf6a))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2322")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_SQL"
+  (shape bidirectional)
+  (at 439.42 351.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid df452026-aef9-5352-961a-1d9aab232c92)
+)
+(label "GND"
+  (at 439.42 359.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 336fab13-e765-59ee-8e26-edd83065fe05)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 439.42 368.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 7138cacd-33e0-5095-b2de-a49c0c29e420)
+  (property "Reference" "R2323" (at 439.42 365.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k UHF SQL default low while daughterboard absent" (at 439.42 370.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 439.42 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 439.42 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 439.42 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 439.42 368.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 317f7a16-00af-57f6-83bd-1b7359146641))
+  (pin "2" (uuid 76dc2165-9c1d-5bee-af7d-fd47bc04434f))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2323")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_SQL"
+  (shape bidirectional)
+  (at 439.42 364.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ef404f89-c041-5547-a726-35d6495be315)
+)
+(label "GND"
+  (at 439.42 372.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9adf39a8-f1bd-51e6-966e-ad9aaaa5b7f9)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 629.92 330.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid dcf592e8-0eb4-5b44-b2c1-aff0147eea70)
+  (property "Reference" "R2324" (at 629.92 327.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k GNSS TX default low while daughterboard absent" (at 629.92 332.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 629.92 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 629.92 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 629.92 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 629.92 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b2ca2fbb-9302-51f5-8a09-5c3da85995fc))
+  (pin "2" (uuid c2171198-1ee6-5a71-95ea-a60ef9eabb87))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2324")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_UART_TX"
+  (shape bidirectional)
+  (at 629.92 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d72939d0-e781-55d2-8bd6-a6b70ffd56f2)
+)
+(label "GND"
+  (at 629.92 334.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6fa62443-7f52-5a80-be40-5657cca9960a)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 629.92 342.9 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid d7f5179d-5449-5ee5-b265-fc80ad463c21)
+  (property "Reference" "R2325" (at 629.92 340.36 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k GNSS PPS default low while daughterboard absent" (at 629.92 345.44 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 629.92 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 629.92 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 629.92 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 629.92 342.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b8164174-5c2b-5dd5-9a39-f193352b8b81))
+  (pin "2" (uuid e0abda7d-7cd5-51ae-b08f-d26b9dccd3cf))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2325")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_PPS"
+  (shape bidirectional)
+  (at 629.92 339.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ac5ca565-6860-567f-80bb-87ec7d4bae1e)
+)
+(label "GND"
+  (at 629.92 346.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 45324fae-8a14-5421-a597-715c7b5f86d8)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 629.92 355.6 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f1eac892-3276-5ffe-9b82-fb32ad41a664)
+  (property "Reference" "R2326" (at 629.92 353.06 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k GNSS EXTINT default low while daughterboard absent" (at 629.92 358.14 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 629.92 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 629.92 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 629.92 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 629.92 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid af55fc2b-3a86-56fd-8239-a792292a9249))
+  (pin "2" (uuid 2bca2a93-00c3-5669-af5d-e0c15cacc3ed))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2326")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_EXTINT"
+  (shape bidirectional)
+  (at 629.92 351.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 952750c0-8f68-52b6-8c57-fce852b292ce)
+)
+(label "GND"
+  (at 629.92 359.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0a4214f1-4c93-5c38-b6b2-46850a028234)
+)
+(text "== Fault-isolating series resistors at the removable-board boundary ==" (at 20.32 398.78 0) (effects (font (size 1.27 1.27))) (uuid 8cb41d22-d07d-56a8-a869-6eee186afef2))
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 426.72 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c9ca32b2-747d-5f21-9064-00b6a515f49f)
+  (property "Reference" "R2340" (at 20.32 424.18 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 23 signal isolation" (at 20.32 429.26 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 89b0b525-2f43-5f5f-858c-c5e5ec21019e))
+  (pin "2" (uuid 6e643bb5-4677-5b01-bd9b-15c495b33044))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2340")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_UART_TX"
+  (shape bidirectional)
+  (at 20.32 422.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e1561de2-7437-59bb-b48e-5c41d666b758)
+)
+(label "RADIO_VHF_UART_TX_DB"
+  (at 20.32 430.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cb736c17-66c4-5067-885c-2e7938f5cd0d)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 436.88 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid bfadbfd4-5b63-506d-9996-e18fe0112952)
+  (property "Reference" "R2341" (at 20.32 434.34 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 24 signal isolation" (at 20.32 439.42 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid eb071ecc-8cdf-5302-b782-3b3d629eeeab))
+  (pin "2" (uuid 1cb2f706-92ca-5acd-893b-230d2b5d5cec))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2341")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_UART_RX"
+  (shape bidirectional)
+  (at 20.32 433.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c9a9204d-e504-50d4-8011-b3de7c298349)
+)
+(label "RADIO_VHF_UART_RX_DB"
+  (at 20.32 440.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0490eac3-b1bf-59ac-b6aa-48dc8f254058)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 447.04 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 0e833e95-3afe-50ce-a8e2-1b4e525b833e)
+  (property "Reference" "R2342" (at 20.32 444.5 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 25 signal isolation" (at 20.32 449.58 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 544b96f4-2c6d-59a6-abd1-0d1d8ea1f681))
+  (pin "2" (uuid f60314ba-2f4b-58af-a238-d112597e5aaa))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2342")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_UART_TX"
+  (shape bidirectional)
+  (at 20.32 443.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 53b34bc2-9f92-5763-aec1-456bdd382ac2)
+)
+(label "RADIO_UHF_UART_TX_DB"
+  (at 20.32 450.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ffdc27f6-82aa-5326-ab91-50052d37f45c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 457.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid fc917248-2b16-5416-904e-463cf04f214e)
+  (property "Reference" "R2343" (at 20.32 454.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 26 signal isolation" (at 20.32 459.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e99e6268-2b40-59dd-86f0-13b96d82d34a))
+  (pin "2" (uuid a5ed88b5-4904-5f8b-9802-486f7307c19a))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2343")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_UART_RX"
+  (shape bidirectional)
+  (at 20.32 453.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a1104895-dc74-56e6-9811-66d4aee5100a)
+)
+(label "RADIO_UHF_UART_RX_DB"
+  (at 20.32 461.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 89b886fe-5137-53cb-ba4a-9e39a429715c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 467.36 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 336b80ad-31e5-50d0-b5bd-b41886dc1442)
+  (property "Reference" "R2344" (at 20.32 464.82 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 28 signal isolation" (at 20.32 469.9 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 19837daf-84c3-5453-8d8a-47cfe21c592b))
+  (pin "2" (uuid d6260d89-b957-5214-b73b-9c69d96a20c7))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2344")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_PTT_N"
+  (shape bidirectional)
+  (at 20.32 463.55 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 60c7c206-a88f-5fa2-a3f3-18cc65fcfbcd)
+)
+(label "RADIO_VHF_PTT_N_DB"
+  (at 20.32 471.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 02337db0-f44e-565c-a0eb-4d1494af1746)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 477.52 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b4a077a4-52a8-5203-ba12-a87a3199bec1)
+  (property "Reference" "R2345" (at 20.32 474.98 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 29 signal isolation" (at 20.32 480.06 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 3a3a0459-9c94-5664-942e-ce15923e4050))
+  (pin "2" (uuid 291dd516-16d8-5d0d-a37c-ee302f2602e8))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2345")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_PTT_N"
+  (shape bidirectional)
+  (at 20.32 473.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 13763619-f2a0-574d-bd64-ef6745931fbb)
+)
+(label "RADIO_UHF_PTT_N_DB"
+  (at 20.32 481.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9250ee04-71e5-58a8-836e-a6a35df1ae61)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 487.68 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b318cf2b-1e7c-5718-be49-23f4f4d9637a)
+  (property "Reference" "R2346" (at 20.32 485.14 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 30 signal isolation" (at 20.32 490.22 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1c168cd9-0789-5168-b1f8-316ec5a06cd1))
+  (pin "2" (uuid 4f4874f5-6d1e-553c-9c69-018c82a2c2a0))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2346")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_PD_N"
+  (shape bidirectional)
+  (at 20.32 483.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a5befa0a-f418-502e-966d-fb83f0360e0b)
+)
+(label "RADIO_VHF_PD_N_DB"
+  (at 20.32 491.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b50cfeec-1ce5-53c7-a38e-f429bddc6828)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 497.84 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 5d1f3391-f4d5-5f50-9ef0-4f4db0dce2ad)
+  (property "Reference" "R2347" (at 20.32 495.3 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 31 signal isolation" (at 20.32 500.38 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f677e806-bd10-5250-a90e-63677f62ef7e))
+  (pin "2" (uuid 5055aafe-f305-5041-8850-25f286196915))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2347")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_PD_N"
+  (shape bidirectional)
+  (at 20.32 494.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fc5a7787-eaa5-583f-a8a8-23b12b9a7d47)
+)
+(label "RADIO_UHF_PD_N_DB"
+  (at 20.32 501.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 47469c28-ffef-5f2b-abd9-83649c787bff)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 508 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4687ee81-cf1f-5306-9342-8d6bb0420305)
+  (property "Reference" "R2348" (at 20.32 505.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 33 signal isolation" (at 20.32 510.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 20.32 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 20.32 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 10a27e0e-400e-5261-aa66-4414f09b0077))
+  (pin "2" (uuid ad1e3e9f-5420-5ef2-86db-68a8c7eafc90))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2348")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_SQL"
+  (shape bidirectional)
+  (at 20.32 504.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1f6c72a3-6279-51e4-b8f4-cdddac2e02a8)
+)
+(label "RADIO_VHF_SQL_DB"
+  (at 20.32 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 26a5809b-d6d5-500c-92b6-e3389238354c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 320.04 426.72 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 52b6ed1b-3a7e-599b-843e-b1b14e36e862)
+  (property "Reference" "R2349" (at 320.04 424.18 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 34 signal isolation" (at 320.04 429.26 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 320.04 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 320.04 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 320.04 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 320.04 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 320.04 426.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 01b90fe8-5bfa-5132-93cb-2eb15ca2c21a))
+  (pin "2" (uuid 0f582555-1e8e-52fa-aefc-7895a40eece0))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2349")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_SQL"
+  (shape bidirectional)
+  (at 320.04 422.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ef783b49-7eb6-5ede-99ab-648e5d03d7ca)
+)
+(label "RADIO_UHF_SQL_DB"
+  (at 320.04 430.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0d500e51-6d92-52c4-b91b-7ac6c8f839f4)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 320.04 436.88 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4a05a61b-08af-5ceb-a9b5-28c78c5149fd)
+  (property "Reference" "R2350" (at 320.04 434.34 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 35 signal isolation" (at 320.04 439.42 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 320.04 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 320.04 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 320.04 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 320.04 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 320.04 436.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ca89b276-b1b3-550e-994d-f1d93053010b))
+  (pin "2" (uuid 7fc615a7-66be-5fe4-a14f-bcd4f8851f31))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2350")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_VHF_RF_SEL_3V3"
+  (shape bidirectional)
+  (at 320.04 433.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 57284e41-37e3-5294-8c64-e0853f786292)
+)
+(label "RADIO_VHF_RF_SEL_3V3_DB"
+  (at 320.04 440.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 894fea43-a6c3-5f27-9526-21c8f352a1d9)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 320.04 447.04 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 42b72f44-d88a-578e-98bb-fbb078bd766c)
+  (property "Reference" "R2351" (at 320.04 444.5 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 36 signal isolation" (at 320.04 449.58 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 320.04 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 320.04 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 320.04 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 320.04 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 320.04 447.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a13070b7-604d-50cd-9ae8-ed841e52f9ab))
+  (pin "2" (uuid 7883d934-a72b-5c2d-9257-244c8879a7a5))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2351")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "RADIO_UHF_RF_SEL_3V3"
+  (shape bidirectional)
+  (at 320.04 443.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dd8f9dd9-8053-58de-9ace-5f42a651d5ae)
+)
+(label "RADIO_UHF_RF_SEL_3V3_DB"
+  (at 320.04 450.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 10f18e1b-b2bb-59fa-9d75-9913ceca4613)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 320.04 457.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 749079d6-0c4a-5469-a7dd-78e3f60f1220)
+  (property "Reference" "R2352" (at 320.04 454.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 38 signal isolation" (at 320.04 459.74 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 320.04 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 320.04 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 320.04 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 320.04 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 320.04 457.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 32ff2625-2f1d-5cc8-8f14-7f2e08d84b70))
+  (pin "2" (uuid fa09a695-fe7d-5a8d-957e-ce3fd8ce31af))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2352")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_UART_RX"
+  (shape bidirectional)
+  (at 320.04 453.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 29a7feb3-34bd-5adc-bd95-96c986e159bf)
+)
+(label "GNSS_UART_RX_DB"
+  (at 320.04 461.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b717b266-5340-54bb-91bb-61ff81f138c8)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 320.04 467.36 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c15a5c35-a834-58ab-9e70-02d1b0f8d0a0)
+  (property "Reference" "R2353" (at 320.04 464.82 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 39 signal isolation" (at 320.04 469.9 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 320.04 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 320.04 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 320.04 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 320.04 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 320.04 467.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 2a0552ee-dbf0-593e-b0fa-b7bb1085c083))
+  (pin "2" (uuid ffdf1a34-eb55-57c1-b5f0-ab2161c235b7))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2353")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_UART_TX"
+  (shape bidirectional)
+  (at 320.04 463.55 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid da40dbfb-4382-5590-bea8-9797db19f07a)
+)
+(label "GNSS_UART_TX_DB"
+  (at 320.04 471.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e2ed0ee1-7b8f-575a-822a-c124621b1a7f)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 320.04 477.52 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 1423d7b7-a2c2-5e81-8962-7d4a4fc75e1c)
+  (property "Reference" "R2354" (at 320.04 474.98 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 40 signal isolation" (at 320.04 480.06 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 320.04 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 320.04 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 320.04 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 320.04 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 320.04 477.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e890ddf1-ebfb-5936-bafd-4c38df659e3a))
+  (pin "2" (uuid ab1a4552-19ad-5f21-9d05-9ff503fb83d3))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2354")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_RESET_N"
+  (shape bidirectional)
+  (at 320.04 473.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 84eadc7d-4dc8-5f1d-a291-daae0a65c32d)
+)
+(label "GNSS_RESET_N_DB"
+  (at 320.04 481.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d3771d31-5422-5eab-94fd-8fa38b55bf4a)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 320.04 487.68 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid bb45de09-67c4-56d6-af86-e43f0c4d8aec)
+  (property "Reference" "R2355" (at 320.04 485.14 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 41 signal isolation" (at 320.04 490.22 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 320.04 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 320.04 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 320.04 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 320.04 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 320.04 487.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5fc90de5-9198-503a-8381-c1e912aa0457))
+  (pin "2" (uuid bd80c41a-f381-5d39-8569-d059ad3887c9))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2355")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_PPS"
+  (shape bidirectional)
+  (at 320.04 483.87 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b54ffa53-f8d8-5570-8c0e-945af8d38ab2)
+)
+(label "GNSS_PPS_DB"
+  (at 320.04 491.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 28d545d6-5779-5126-a0e4-ea3b1cf8027f)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 320.04 497.84 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 725e1334-62cd-5b9a-8990-402386889ce5)
+  (property "Reference" "R2356" (at 320.04 495.3 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7k J2300 pin 42 signal isolation" (at 320.04 500.38 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 320.04 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 320.04 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 320.04 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K7L" (at 320.04 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "BoundaryContract" "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED" (at 320.04 497.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 66e43808-f94e-5a31-afff-920cc14c32cf))
+  (pin "2" (uuid b04d09b0-fa2d-5b12-93e4-51474054f581))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "R2356")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "GNSS_EXTINT"
+  (shape bidirectional)
+  (at 320.04 494.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 10066bb0-08d4-5646-9110-45c8aff73a4b)
+)
+(label "GNSS_EXTINT_DB"
+  (at 320.04 501.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5aec0719-ea64-551e-a66c-3038c9795cf6)
+)
+(text "== J2300 Hirose DF40 removable radio daughterboard connector ==" (at 20.32 414.02 0) (effects (font (size 1.27 1.27))) (uuid 901eda1b-d46d-53a6-aa6b-901e0b280d3a))
+(symbol
+  (lib_id "Conn_02x30_MP:Conn_02x30_MP")
+  (at 369.57 539.75 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 400e4a5d-bd1a-5675-a288-8b5e7858addf)
+  (property "Reference" "J2300" (at 369.57 537.21 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "DF40C 60-pin optional radio daughterboard plug" (at 369.57 542.29 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Connector_Hirose_DF40:Hirose_DF40C-60DP-0.4V_2x30-1MP_P0.4mm" (at 369.57 539.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 369.57 539.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Hirose Electric" (at 369.57 539.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "DF40C-60DP-0.4V(51)" (at 369.57 539.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatingConnector" "DF40C(2.0)-60DS-0.4V(51)" (at 369.57 539.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "StackHeight" "2.0mm" (at 369.57 539.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "AbsentBoardContract" "NO_RADIO_BOARD_REQUIRED_FOR_BOOT_OR_PRIMARY_LAPTOP_OPERATION" (at 369.57 539.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a3efbcee-ee18-518e-a229-e75a7610c713))
+  (pin "2" (uuid a5e45cdf-434c-53eb-94d0-153314be8f39))
+  (pin "3" (uuid 826fd9e8-f8bf-5fff-8a8e-e793a761b231))
+  (pin "4" (uuid 6a1d9fa8-8e2b-557c-b69d-19df180dde1a))
+  (pin "5" (uuid 7b58a94c-bed6-5d2b-94ee-a9aa43b8990a))
+  (pin "6" (uuid 90217724-b268-5b57-84a8-8a77a0632545))
+  (pin "7" (uuid 0dca150a-ce99-52ac-b034-d7011a1ee2b9))
+  (pin "8" (uuid 40427045-39c9-54ab-8c3f-0be9d7538c1c))
+  (pin "9" (uuid a31814c3-cfe9-513e-a134-e2e9186acd8b))
+  (pin "10" (uuid dd001518-913a-5844-97e9-ba37c43eaf2a))
+  (pin "11" (uuid f188bb15-cda1-54f2-849f-04e229024087))
+  (pin "12" (uuid 60f5339b-f299-5639-9442-b39f884bf83d))
+  (pin "13" (uuid ca4c42bc-b8f0-5823-9d0f-bc345a208a23))
+  (pin "14" (uuid 9c8998fb-f204-5ec0-aa26-b06938e279ed))
+  (pin "15" (uuid 47e45a4b-5268-58f4-b4ff-12d962949fe7))
+  (pin "16" (uuid fc8af93b-e53a-58c4-b497-7d3f00a10549))
+  (pin "17" (uuid 2129e9b9-a119-5ecd-866e-713336ef1cba))
+  (pin "18" (uuid c26c2196-bfb1-5795-a525-6580adc2a9f5))
+  (pin "19" (uuid eee808e3-042f-5cd8-9aa7-a39cb77ef674))
+  (pin "20" (uuid 7fd2e1f5-cd2f-54d4-915d-ffe77eddd820))
+  (pin "21" (uuid 04e7a889-f9f9-53c8-b88e-51b6cc49443d))
+  (pin "22" (uuid 9adb6499-d339-53bd-bbb7-04171a03f486))
+  (pin "23" (uuid 1c0a6f2f-7601-5440-b11a-295b6c766830))
+  (pin "24" (uuid 8de1048d-424d-52af-9bb2-344b2b1f09f7))
+  (pin "25" (uuid cfaf3bdf-2da3-5323-a7e4-5a837c9a6165))
+  (pin "26" (uuid 9d2ffa75-4e92-5ce1-8ed1-cd9a005caac4))
+  (pin "27" (uuid 1dc43736-9405-5fd9-ad1f-6cd2baa52d8b))
+  (pin "28" (uuid 442c5c17-21a2-5662-baf0-c28c46c24044))
+  (pin "29" (uuid 2046213c-e6b7-5713-ad76-d4023adc71ce))
+  (pin "30" (uuid fa1b9125-2c66-52e9-910c-18f4e0f9d8c7))
+  (pin "31" (uuid bd0ed4fb-c722-5276-9c04-44193ed854fc))
+  (pin "32" (uuid d8614200-6cdc-5532-833b-dd33d654405f))
+  (pin "33" (uuid 1550c6e7-110b-56cf-8f0a-292af6ede110))
+  (pin "34" (uuid 15fd51b1-c334-537b-bc86-713a730a0daf))
+  (pin "35" (uuid 1b9a5223-3ec2-57bb-b3ec-38026c2b7f04))
+  (pin "36" (uuid 55d9c357-db9e-5eeb-902f-3a676b1e743b))
+  (pin "37" (uuid e73415cb-a4af-5889-95a4-b817be7a52fb))
+  (pin "38" (uuid 3e3b8dd0-c73a-5d24-aa8d-5a8e38639446))
+  (pin "39" (uuid b2507e67-b216-53b7-b3ba-ffb33fca4ec5))
+  (pin "40" (uuid dfb29ffe-6b93-548a-ac50-d3fef67faf6d))
+  (pin "41" (uuid 07bfb149-b456-5c44-a04e-2cd24dab1b51))
+  (pin "42" (uuid 0c1dd153-ac2b-5bce-821f-1105d249621f))
+  (pin "43" (uuid b95f21b5-4585-56a8-92fe-93f30a84cdb5))
+  (pin "44" (uuid 15a0de1e-0d8d-562e-a958-0974f986d436))
+  (pin "45" (uuid ece2dd73-b8fe-57e4-a081-9847c2b655f6))
+  (pin "46" (uuid 0b970e3c-71ec-5fa8-a98e-e2bb22e8522a))
+  (pin "47" (uuid 051020af-6ed6-5c7c-a4c4-9bee7ca3745d))
+  (pin "48" (uuid 4c8f98bd-c20d-57ac-9646-3f40b4b7aa53))
+  (pin "49" (uuid ec7c163d-f6bd-5c40-b3ac-a6cee26808a7))
+  (pin "50" (uuid 71727c77-3689-52c4-b0d2-27d03ba3e124))
+  (pin "51" (uuid d06295ca-1ec5-540f-b9fd-889aadf5e54b))
+  (pin "52" (uuid 185a5bb8-7680-5264-bd2d-98ec1554287b))
+  (pin "53" (uuid 2d203658-afac-5a87-8295-5d45925666e1))
+  (pin "54" (uuid 1b30f05d-cd18-5f2c-acec-ffb3ba638a42))
+  (pin "55" (uuid a8320146-9d8d-5383-9137-99c24944b9e7))
+  (pin "56" (uuid c84b2a96-012d-5759-afff-77ec18fb05d7))
+  (pin "57" (uuid af62a946-c6bc-556e-a079-646a75052476))
+  (pin "58" (uuid 8283a2e0-bc76-51f1-abb7-baeb1a6a6dfa))
+  (pin "59" (uuid ee672173-decd-54da-be05-828daa5304ca))
+  (pin "60" (uuid 786d4628-8ffc-5e25-a1e7-e1b50efd5aa0))
+  (pin "MP" (uuid f8a82fa6-6e7e-57e0-92e2-0d5b54396350))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "J2300")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "RADIO_DB_5V"
+  (at 364.49 504.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6fc08f9c-db40-54e0-852d-3ce8aac33d44)
+)
+(label "RADIO_DB_5V"
+  (at 377.19 504.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5b64c9f4-ff53-5c04-abc2-fb3345fa9d23)
+)
+(label "RADIO_DB_5V"
+  (at 364.49 506.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ba6bc1a3-36a0-5ef0-9a5c-a6bc26730230)
+)
+(label "RADIO_DB_5V"
+  (at 377.19 506.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 91a8319e-69db-514b-b43d-a48bb25d930c)
+)
+(label "RADIO_DB_5V"
+  (at 364.49 509.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6ff93292-b088-57e6-a077-feaf05ae4027)
+)
+(label "RADIO_DB_5V"
+  (at 377.19 509.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 49fda51a-8562-5eaf-b902-b36e73ed4942)
+)
+(label "RADIO_DB_5V"
+  (at 364.49 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 42a55319-09c2-54c1-bbfd-2971db3fc133)
+)
+(label "RADIO_DB_5V"
+  (at 377.19 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3cfc0766-b235-5de7-a087-4464c4d0eb85)
+)
+(label "GND"
+  (at 364.49 514.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 672d2796-545b-5ae4-9ab1-f9604b8f9b3a)
+)
+(label "GND"
+  (at 377.19 514.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cd1a7dec-b4f0-5d9a-8569-4d5a31368d2d)
+)
+(label "GND"
+  (at 364.49 516.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 454983cd-2629-5ff1-bb87-501a616c8319)
+)
+(label "GND"
+  (at 377.19 516.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f9014d0c-e34b-5a68-9024-2b83f385d8eb)
+)
+(label "GND"
+  (at 364.49 519.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0b630aeb-40f5-5382-9efd-049d0f090c12)
+)
+(label "GND"
+  (at 377.19 519.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d1e579c3-503c-52ac-af9d-17b2f19457eb)
+)
+(label "GND"
+  (at 364.49 521.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1d6bedd0-ecb3-58fc-810e-12442c9c2ccf)
+)
+(label "GND"
+  (at 377.19 521.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4342cace-3840-5f66-9587-e1acaa839c9d)
+)
+(label "RADIO_CODEC_USB_VBUS_DB"
+  (at 364.49 524.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 48d2dfe7-3fe2-50f6-bfdc-c5be97854965)
+)
+(label "RADIO_CODEC_USB_VBUS_DB"
+  (at 377.19 524.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 95662c27-b958-5c7c-8161-d775348e7a6e)
+)
+(label "RADIO_CODEC_USB_DP_DB"
+  (at 364.49 527.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 62b25a15-fe7a-50fd-b36a-27759aabffb5)
+)
+(label "RADIO_CODEC_USB_DM_DB"
+  (at 377.19 527.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid aab4f65a-2666-5fbf-b84f-9e2a8f9ddd3c)
+)
+(label "GND"
+  (at 364.49 529.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 76c14e45-a16c-527e-b671-758e25fe129a)
+)
+(label "GND"
+  (at 377.19 529.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 26cb55fb-dabc-5c82-a4ae-4d7c7f75b0a5)
+)
+(label "RADIO_VHF_UART_TX_DB"
+  (at 364.49 532.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cc062c74-4626-5ee9-8b00-ca0315fa0cc2)
+)
+(label "RADIO_VHF_UART_RX_DB"
+  (at 377.19 532.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 537e6abe-5e34-542b-afa2-1a0f2f327e40)
+)
+(label "RADIO_UHF_UART_TX_DB"
+  (at 364.49 534.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c6e58919-b4ba-50d7-b6ee-759f64a6af48)
+)
+(label "RADIO_UHF_UART_RX_DB"
+  (at 377.19 534.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e597feb8-467b-59c5-85bd-bd05bb41802e)
+)
+(label "RADIO_VHF_PTT_N_DB"
+  (at 377.19 537.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d043b8a5-6aa0-5032-acee-943f9184b5c6)
+)
+(label "RADIO_UHF_PTT_N_DB"
+  (at 364.49 539.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ebfb3b88-f41a-5ab1-a1ec-d99d59d6a8a6)
+)
+(label "RADIO_VHF_PD_N_DB"
+  (at 377.19 539.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a77dcf92-d4f4-5c7c-a91c-1a9519d99fe9)
+)
+(label "RADIO_UHF_PD_N_DB"
+  (at 364.49 542.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 94741214-2c13-5fa0-8d10-117b091a4000)
+)
+(label "RADIO_VHF_SQL_DB"
+  (at 364.49 544.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cbd426d0-9248-5f16-94bf-f98b076ab207)
+)
+(label "RADIO_UHF_SQL_DB"
+  (at 377.19 544.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 11c10631-e73c-589c-b8d1-3362aa8c1243)
+)
+(label "RADIO_VHF_RF_SEL_3V3_DB"
+  (at 364.49 547.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 03f025d0-f662-572c-b85f-fabe63d367e0)
+)
+(label "RADIO_UHF_RF_SEL_3V3_DB"
+  (at 377.19 547.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 15f7acd7-67dc-5da7-a4e5-62e2c6c82ab1)
+)
+(label "GNSS_UART_RX_DB"
+  (at 377.19 549.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f518ad71-cc69-5849-ac3f-4b2be1408405)
+)
+(label "GNSS_UART_TX_DB"
+  (at 364.49 552.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f7185da6-83d1-56bd-b557-6205afba121a)
+)
+(label "GNSS_RESET_N_DB"
+  (at 377.19 552.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 123d340c-1277-5de3-8ed6-47392af2066b)
+)
+(label "GNSS_PPS_DB"
+  (at 364.49 554.99 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 29c4b5d5-df94-5df7-adc8-01771a8be5dd)
+)
+(label "GNSS_EXTINT_DB"
+  (at 377.19 554.99 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d8385e3c-ac0b-5372-ab1a-399caae7e59b)
+)
+(label "GND"
+  (at 364.49 537.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d557b274-f3a0-5422-aa2a-a397725ad143)
+)
+(label "GND"
+  (at 377.19 542.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5e5f02b5-d2c5-52bb-b9e8-cf2cc926da29)
+)
+(label "GND"
+  (at 364.49 549.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dd63dd23-8647-569e-aad8-a4b07b899064)
+)
+(label "GND"
+  (at 364.49 557.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a6e13771-8635-54a5-848b-52751504ba74)
+)
+(hierarchical_label "RADIO_DB_PRESENT_N"
+  (shape bidirectional)
+  (at 377.19 557.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3e27e562-c3ab-51f8-98e1-4b25f300f9e3)
+)
+(label "GND"
+  (at 364.49 560.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 57ee78ed-3f8f-5c6d-a67a-05b3a06b49e5)
+)
+(label "GND"
+  (at 377.19 560.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a464951a-6f40-5980-857d-6044c41fd912)
+)
+(label "GND"
+  (at 364.49 562.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e1555696-91c1-5b8e-9b6c-31cc3a179e2c)
+)
+(label "GND"
+  (at 377.19 562.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d32f597a-1904-5286-be4b-6b043e96eaa3)
+)
+(label "GND"
+  (at 364.49 565.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8326c05c-33df-5102-92c1-0a702596d7ac)
+)
+(label "GND"
+  (at 377.19 565.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5d98da53-b859-5282-a2f1-51f668df8841)
+)
+(label "GND"
+  (at 364.49 567.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 28ba430a-10c0-5c12-807b-c390fc9bd25d)
+)
+(label "GND"
+  (at 377.19 567.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid da88b9f3-d3ee-5d5e-ab70-59cdc515d9b6)
+)
+(label "GND"
+  (at 364.49 570.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6c18701a-e0d3-500a-b39a-e56910cae482)
+)
+(label "GND"
+  (at 377.19 570.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a900e92d-e8b9-5b4f-8834-6733e225c46d)
+)
+(label "GND"
+  (at 364.49 572.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0a45c95d-8544-5ce6-895d-ae943a11969b)
+)
+(label "GND"
+  (at 377.19 572.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fb060e57-d854-527f-b814-d66c1df65690)
+)
+(label "GND"
+  (at 364.49 575.31 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ec856d84-e8ca-5a33-8010-131620d94b82)
+)
+(label "GND"
+  (at 377.19 575.31 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8b3ea4e0-5661-597a-8f8a-51ae4fe5fd61)
+)
+(label "GND"
+  (at 364.49 577.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7af627bc-0eac-524f-ae71-cdab30dfcb4d)
+)
+(label "GND"
+  (at 377.19 577.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4794c7da-5318-5c85-a62d-429b75b88606)
+)
+(label "GND"
+  (at 374.65 580.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 681580b7-e7b1-5c03-b411-20c92993fc74)
+)
+(symbol
+  (lib_id "power:GND")
+  (at 689.61 599.44 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4ce7b1d1-21bb-5948-b8df-b01d4e102d92)
+  (property "Reference" "#PWR2301" (at 689.61 596.9 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "GND" (at 689.61 601.98 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 689.61 599.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 689.61 599.44 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid b584308f-a51b-5ca4-8243-52f571757a17))
+  (instances
+    (project "ducktop2"
+      (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+        (reference "#PWR2301")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GND"
+  (at 689.61 599.44 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 27602215-6f86-5d2d-bcb6-494fab0d108c)
+)
+(text "NOTES:" (at 20.32 640.08 0) (effects (font (size 1.27 1.27))) (uuid 29558797-eadc-58cb-8891-ada8ff207898))
+(text "Eight DF40 contacts share RADIO_DB_5V and thirty contacts are ground; route them as short, wide pours with stitching vias." (at 20.32 647.7 0) (effects (font (size 1.27 1.27))) (uuid e0c60fe0-acb7-5c8d-a15a-cc3da6fa9e22))
+(text "J2300 pin 44 is passively grounded only on the daughterboard. High means absent; low means physically installed." (at 20.32 655.32 0) (effects (font (size 1.27 1.27))) (uuid 485c895b-884b-5b54-a4bd-4dc8fdfed77e))
+(text "The system-audio hub keeps its own codec on port 2; optional radio codec port 1 may remain empty without blocking enumeration." (at 20.32 662.94 0) (effects (font (size 1.27 1.27))) (uuid 24e5afa9-bc25-5f0a-8933-560c56dd01eb))
+(text "USB data and VBUS remain physically disconnected until RADIO_DB_PG is valid; daughterboard faults cannot back-power the mainboard." (at 20.32 670.56 0) (effects (font (size 1.27 1.27))) (uuid e29e7dc0-4479-5780-8334-f05d0b93791d))
+(text "Firmware must require PRESENT_N low and FAULT_N high before asserting PWR_EN, then require PG high within a timeout." (at 20.32 678.18 0) (effects (font (size 1.27 1.27))) (uuid 1dce51ff-ba9f-517b-85fc-b599e5eb0af7))
+(text "R2340-R2356 limit fault current on every removable-board GPIO/UART/control line; no signal pin directly crosses J2300." (at 20.32 685.8 0) (effects (font (size 1.27 1.27))) (uuid 857487e2-1928-5e0e-baa5-92efaf475c6f))
+(sheet_instances
+  (path "/c1b99a0d-daca-57b5-85ae-3ffd9c9575e8"
+    (page "10")
+  )
+)
+  (embedded_fonts no)
+)

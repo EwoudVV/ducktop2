@@ -283,7 +283,13 @@ def run_checks(a: ClosureAudit) -> None:
         "3": "/EC & MCU/NRST_NET",
         "4": "/PD1_PATH_EN",
         "5": "/PD2_PATH_EN",
-        "6": "/PD3_PATH_EN",
+        "6": "/EC & MCU/SOURCE_MGR_SPARE1",
+        "7": "/PD1_EFUSE_FAULT_N",
+        "8": "/PD2_EFUSE_FAULT_N",
+        "9": "/EC & MCU/SOURCE_MGR_SPARE2",
+        "18": "/RADIO_DB_PG",
+        "19": "/RADIO_DB_FAULT_N",
+        "20": "/RADIO_DB_PRESENT_N",
         "22": "/I2C_SCL",
         "23": "/I2C_SDA",
         "24": "/MCU_3V3",
@@ -292,57 +298,68 @@ def run_checks(a: ClosureAudit) -> None:
         a.pin("U44", pin, net)
     a.prop_eq("U44", "MPN", "TCA9539PWR")
 
-    # CH224A autonomous 15 V request, low-margin fix, and unattached capacitance.
-    cold_start = (
-        "RAW_VBUS_4_TO_30V;CFG1_56K_REQUESTS_15V_WITHOUT_EC;"
-        "15V_PDO_REQUIRED_FOR_SYSTEM_BOOT"
-    )
-    for index, uref in enumerate(("U41", "U42", "U43"), start=1):
-        base = 120 + (index - 1) * 10
-        prefix = f"/Power Inputs/PD{index}_"
-        raw = f"/PD{index}_VBUS_RAW"
-        a.prop_eq(uref, "AutonomousColdStartContract", cold_start)
-        a.pin(uref, "2", prefix + "CH224_SCL")
-        a.pin(uref, "3", prefix + "CH224_SDA")
-        a.pin(uref, "9", prefix + "CFG1")
-        a.value_starts(f"R{base + 2}", "56k")
-        a.pin(f"R{base + 2}", "1", prefix + "CFG1")
-        a.pin(f"R{base + 2}", "2", "GND")
-        for offset, upstream, downstream in (
-            (3, f"/PD{index}_I2C_SCL", prefix + "CH224_SCL"),
-            (4, f"/PD{index}_I2C_SDA", prefix + "CH224_SDA"),
-        ):
-            ref = f"R{base + offset}"
-            a.value_starts(ref, "100R")
-            a.pin(ref, "1", upstream)
-            a.pin(ref, "2", downstream)
-        for ref, value, rail in (
-            (f"C{base + 1}", "1u 50V X7R", raw),
-            (f"C{800 + (index - 1) * 10}", "1u 50V", raw),
-            (f"C{801 + (index - 1) * 10}", "100n 50V", raw),
-        ):
-            a.value_starts(ref, value)
-            a.pin(ref, "1", rail)
-            a.pin(ref, "2", "GND")
+    # Exactly two dual-role Type-C ports negotiate input power and remain
+    # default-off until the resettable source manager validates a path.
+    for port, tcpc, base in ((1, "U41", 2000), (2, "U42", 2010)):
+        local = f"/Power Inputs/PD{port}_"
+        raw = f"/PD{port}_VBUS_RAW"
+        a.value_starts(tcpc, "TPS25751AD")
+        a.prop_eq(tcpc, "MPN", "TPS25751ADREFR")
+        a.prop_eq(
+            tcpc,
+            "PortPolicy",
+            "DRP_PREFER_SINK;HOST_DATA_ONLY;15V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP",
+        )
+        a.pin(tcpc, "20", local + "PPHV")
+        a.pin(tcpc, "23", raw)
+        a.pin(tcpc, "32", raw)
+        a.pin(tcpc, "34", "/USB_PORT_5V")
+        a.pin(tcpc, "36", local + "GPIO_ATTACH")
+        a.pin(tcpc, "37", local + "GPIO_FLIP")
+        a.pin(f"U{719 + port}", "12", local + "EFUSE_SHDN")
+        a.value_starts(f"R{2084 + (port - 1) * 10}", "47k")
+        a.value_starts(f"C{2000 + (port - 1) * 40 + 15}", "4.7u 25V")
+        a.prop_eq(
+            f"U{base + 3}",
+            "DataRoleContract",
+            "DEFAULT_DISCONNECTED;ENABLE_ONLY_AFTER_CONFIRMED_DFP",
+        )
+        a.prop_eq(
+            f"U{base + 2}",
+            "ProgrammingState",
+            "PROGRAM_BEFORE_ASSEMBLY_OR_VIA_TP;READBACK_VERIFY_RELEASE_IMAGE",
+        )
+    a.absent("U43")
+    for ref, component in a.components.items():
+        a.check("CH224" not in str(component["value"]), f"obsolete CH224 controller {ref} must be absent")
 
-    # Downstream and internal Type-C input reservoirs stay behind default-off switches.
-    for branch, tps, ilim, pre, output, bulk_in, bulk_out in (
-        ("U20", "U21", "/Native USB-C I/O/USB1_ILIM", "/Native USB-C I/O/USB1_5V_PRE", "/Native USB-C I/O/USB1_VBUS", "C78", "C75"),
-        ("U30", "U31", "/Native USB-C I/O/USB2_ILIM", "/Native USB-C I/O/USB2_5V_PRE", "/Native USB-C I/O/USB2_VBUS", "C98", "C95"),
-        ("U64", "U63", "/Internal Services/TPAD_ILIM", "/Internal Services/TPAD_5V_PRE", "/Internal Services/TPAD_5V", "C284", "C283"),
+    # Three additional source-only ports still carry USB 2 and SuperSpeed data.
+    for connector, controller, mux, protector in (
+        ("J22", "U1781", "U1782", "U1783"),
+        ("J23", "U1741", "U1742", "U1743"),
+        ("J12", "U1761", "U1762", "U1763"),
     ):
-        a.pin(branch, "5", ilim)
-        a.pin(branch, "6", pre)
-        for pin in ("2", "3", "4"):
-            a.pin(tps, pin, pre)
-        for pin in ("14", "15"):
-            a.pin(tps, pin, output)
-        a.value_starts(bulk_in, "150u")
-        a.pin(bulk_in, "1", pre)
-        a.pin(bulk_in, "2", "GND")
-        a.value_starts(bulk_out, "10u")
-        a.pin(bulk_out, "1", output)
-        a.pin(bulk_out, "2", "GND")
+        a.value_starts(controller, "TPS25810")
+        a.value_starts(mux, "HD3SS6126")
+        a.pin(mux, "6", "GND")
+        a.prop_eq(mux, "EnableState", "HS_OE_GND_NORMAL_OPERATION")
+        a.value_starts(protector, "TPD1S514")
+        for pin in ("A6", "A7", "B6", "B7", "A2", "A3", "B2", "B3", "A10", "A11", "B10", "B11"):
+            a.check((connector, pin) in a.pin_nets, f"{connector}.{pin} must carry data")
+
+    # The internal trackpad branch retains its switched input reservoir.
+    for pin in ("2", "3", "4"):
+        a.pin("U63", pin, "/Internal Services/TPAD_5V_PRE")
+    for pin in ("14", "15"):
+        a.pin("U63", pin, "/Internal Services/TPAD_5V")
+    a.pin("U64", "5", "/Internal Services/TPAD_ILIM")
+    a.pin("U64", "6", "/Internal Services/TPAD_5V_PRE")
+    a.value_starts("C284", "150u")
+    a.pin("C284", "1", "/Internal Services/TPAD_5V_PRE")
+    a.pin("C284", "2", "GND")
+    a.value_starts("C283", "10u")
+    a.pin("C283", "1", "/Internal Services/TPAD_5V")
+    a.pin("C283", "2", "GND")
 
     # Host-active gating and the corrected PCIe coupling values.
     for ref, source, output in (
@@ -357,19 +374,23 @@ def run_checks(a: ClosureAudit) -> None:
         a.value_starts(ref, "220n")
         a.prop_eq(ref, "MPN", "GRM155R71C224KA12D")
 
-    # PE42820 controls stay inside their 4 V domain; powered-down radios are isolated.
-    for ref, band in (("U240", "VHF"), ("U250", "UHF")):
-        a.pin(ref, "12", "/Ham Radio/RADIO_4V0")
-        a.pin(ref, "13", f"/Ham Radio/RADIO_{band}_RF_SEL_4V0")
-    for ref, band in (("U242", "VHF"), ("U252", "UHF")):
-        a.pin(ref, "4", "GND")
-        a.pin(ref, "8", "/Ham Radio/RADIO_4V0")
-        a.pin(ref, "1", f"/RADIO_{band}_UART_TX")
-        a.pin(ref, "7", f"/Ham Radio/RADIO_{band}_UART_RXD")
-        a.prop_eq(ref, "MPN", "SN74LVC3G34DCUR")
-    a.prop_eq("U261", "MPN", "SN74LVC2G32DCUR")
-    a.prop_eq("FL240", "MPN", "LFCN-160+")
-    a.prop_eq("FL250", "MPN", "ULP-470+")
+    # The removable radio board is optional: its power and USB are disconnected
+    # by default, and every returning signal has a mainboard-side safe bias.
+    a.prop_eq("J2300", "AbsentBoardContract", "NO_RADIO_BOARD_REQUIRED_FOR_BOOT_OR_PRIMARY_LAPTOP_OPERATION")
+    a.prop_eq("U2300", "SafetyContract", "DEFAULT_OFF;REVERSE_BLOCKING;APPROX_2A_CURRENT_LIMIT")
+    a.pin("U2300", "1", "/RADIO_DB_PWR_EN")
+    a.pin("U2300", "6", "/Optional Radio Daughterboard Interface/RADIO_DB_5V")
+    a.value_starts("R2300", "100k")
+    a.pin("R2300", "2", "GND")
+    a.prop_eq("U2303", "PowerOffContract", "USB_DP_DM_DISCONNECTED_UNLESS_RADIO_DB_PG_IS_HIGH")
+    a.pin("U2304", "3", "/RADIO_DB_PG")
+    for obsolete in ("J70", "J71", "U240", "U250", "U330", "FL240", "FL250"):
+        a.absent(obsolete)
+    for ref in ("R2310", "R2311", "R2312", "R2313"):
+        a.value_starts(ref, "10k")
+    for ref in ("R2314", "R2315", "R2316", "R2317", "R2318", "R2319", "R2320",
+                "R2321", "R2322", "R2323", "R2324", "R2325", "R2326"):
+        a.value_starts(ref, "100k")
 
     # Exact endpoint identity and retention contracts.
     a.prop_eq("J40", "QualifiedModuleMPN", "AX210.NGWGIE.NV")

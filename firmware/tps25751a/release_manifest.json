@@ -1,0 +1,26 @@
+{
+  "tool": "TI USB-C/PD Application Customization Tool",
+  "tool_version": "2.0.0",
+  "device": "TPS25751A",
+  "base_firmware": "FB09.17.02__RC5.bin",
+  "source": {
+    "path": "ducktop2_dual_role_config.json",
+    "sha256": "14dcc9b9e631ea6c9cc4a7233ca2672b26aed38d0d699bf868ce8dbf9fc7c423"
+  },
+  "generated": {
+    "ducktop2_dual_role_raw.json": {
+      "sha256": "9d4376ddd54b84a2a19e86a0c8b9aea12bc258aff42a13b5b7186b2f50f716c7"
+    },
+    "ducktop2_dual_role_vif.xml": {
+      "sha256": "811af79fb497372e548b1197c20e4584a2e54ad37cc127a02111d7be482da183"
+    },
+    "ducktop2_dual_role_lowRegion.bin": {
+      "sha256": "0578c6e49782d6c8df305390e1aea8d028893f2c0f7401faccc9e023f8ba719a",
+      "bytes": 4992
+    },
+    "ducktop2_dual_role_fullFlash.bin": {
+      "sha256": "279e0a59f72271a7f0c1e6cf2b6e52e501517764b7bddc6a9661177365d6aa2d",
+      "bytes": 22400
+    }
+  }
+}

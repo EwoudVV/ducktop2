@@ -20,10 +20,10 @@ POLYFUSE_FOOTPRINT = "Fuse:Fuse_1812_4532Metric"
 
 def usb2512b_nets():
     return {
-        "1": ("RADIO_CODEC_USB_DM", "hier"),
-        "2": ("RADIO_CODEC_USB_DP", "hier"),
-        "3": ("SYSTEM_DAC_USB_DM", "local"),
-        "4": ("SYSTEM_DAC_USB_DP", "local"),
+        "1": ("SYSTEM_DAC_USB_DM", "local"),
+        "2": ("SYSTEM_DAC_USB_DP", "local"),
+        "3": ("RADIO_CODEC_USB_DM_HOST", "hier"),
+        "4": ("RADIO_CODEC_USB_DP_HOST", "hier"),
         "5": ("SYS_3V3", "hier"),
         "6": ("", "nc"),
         "7": ("", "nc"),
@@ -127,8 +127,8 @@ def build(sheet_symbol_uuid):
     s.refcounters["#FLG"] = 1500
 
     s.text(20, 12.7, "== System audio: embedded two-port USB hub, playback/record codec, microphone, and stereo BTL amplifier ==")
-    s.text(20, 20.32, "Mu USB2_P5 feeds a self-powered USB2512B multi-TT hub. Port 1 is the existing radio codec; port 2 is the PCM2900C system codec.")
-    s.text(20, 27.94, "Both downstream devices are non-removable. TPS2052B implements host-controlled VBUS and individual overcurrent feedback.")
+    s.text(20, 20.32, "Mu USB2_P5 feeds a self-powered USB2512B multi-TT hub. Port 1 is the fixed PCM2900C system codec; port 2 is the optional radio daughterboard.")
+    s.text(20, 27.94, "Port 1 is non-removable. Port 2 is removable and may be empty; TPS2052B provides individual protected VBUS outputs.")
 
     s.text(20, 45.72, "== Protected 5V audio branch and downstream USB power ==")
     s.place(
@@ -165,8 +165,8 @@ def build(sheet_symbol_uuid):
             "3": ("HUB_PORT1_EN", "local"),
             "4": ("HUB_PORT2_EN", "local"),
             "5": ("HUB_PORT2_OC_N", "local"),
-            "6": ("SYSTEM_DAC_USB_VBUS", "local"),
-            "7": ("RADIO_CODEC_USB_VBUS", "hier"),
+            "6": ("RADIO_CODEC_USB_VBUS_HOST", "hier"),
+            "7": ("SYSTEM_DAC_USB_VBUS", "local"),
             "8": ("HUB_PORT1_OC_N", "local"),
         },
         extra_props={
@@ -177,22 +177,22 @@ def build(sheet_symbol_uuid):
     )
     for ref, value, net, x in [
         ("C402", "1u TPS2052B input", "AUDIO_5V", 400),
-        ("C403", "10u radio-codec VBUS", "RADIO_CODEC_USB_VBUS", 500),
+        ("C403", "10u radio-codec host VBUS", "RADIO_CODEC_USB_VBUS_HOST", 500),
         ("C404", "10u system-DAC VBUS", "SYSTEM_DAC_USB_VBUS", 600),
     ]:
         s.place(
             ref, "C", value, x, 63.5,
             footprint=FOOTPRINTS["C_10u"] if "10u" in value else FOOTPRINTS["C_1u"],
-            pin_nets={"1": (net, "hier" if net == "RADIO_CODEC_USB_VBUS" else "local"), "2": ("GND", "local")},
+            pin_nets={"1": (net, "hier" if net == "RADIO_CODEC_USB_VBUS_HOST" else "local"), "2": ("GND", "local")},
         )
     for ref, net, x in [
-        ("C446", "RADIO_CODEC_USB_VBUS", 500),
+        ("C446", "RADIO_CODEC_USB_VBUS_HOST", 500),
         ("C447", "SYSTEM_DAC_USB_VBUS", 600),
     ]:
         s.place(
             ref, "C_Polarized", "100u 10V polymer downstream VBUS bulk", x, 76.2,
             footprint="Capacitor_Tantalum_SMD:CP_EIA-3528-21_Kemet-B",
-            pin_nets={"1": (net, "hier" if net == "RADIO_CODEC_USB_VBUS" else "local"), "2": ("GND", "local")},
+            pin_nets={"1": (net, "hier" if net == "RADIO_CODEC_USB_VBUS_HOST" else "local"), "2": ("GND", "local")},
             extra_props={
                 "Manufacturer": "KEMET",
                 "MPN": "T520B107M010ATE070",
@@ -200,7 +200,7 @@ def build(sheet_symbol_uuid):
             },
         )
 
-    s.text(20, 93.98, "== U400 USB2512B-AEZG-TR: self-powered, strap-configured, both ports non-removable ==")
+    s.text(20, 93.98, "== U400 USB2512B-AEZG-TR: self-powered, port 1 non-removable, port 2 removable ==")
     s.place(
         "U400", "USB2512B", "USB2512B-AEZG-TR two-port HS multi-TT hub",
         300, 160.02, footprint=USB2512B_FOOTPRINT,
@@ -208,7 +208,7 @@ def build(sheet_symbol_uuid):
         extra_props={
             "Manufacturer": "Microchip Technology",
             "MPN": "USB2512B-AEZG-TR",
-            "Configuration": "CFG_SEL[1:0]=00 self-powered straps; NON_REM[1:0]=10",
+            "Configuration": "CFG_SEL[1:0]=00 self-powered; system-codec port 1 non-removable; radio port 2 removable",
             "ReferenceCircuit": "Current DS00001692 plus DS00004539A hardware checklist",
         },
     )
@@ -298,8 +298,8 @@ def build(sheet_symbol_uuid):
     )
 
     for ref, value, pin_net, rail_net, rail_kind, x, y in [
-        ("R402", "10k NON_REM1 strap high", "HUB_NON_REM1", "SYS_3V3", "hier", 20, 177.8),
-        ("R403", "100k NON_REM0 strap low", "HUB_NON_REM0", "GND", "local", 150, 177.8),
+        ("R402", "100k NON_REM1 strap low", "HUB_NON_REM1", "GND", "local", 20, 177.8),
+        ("R403", "10k NON_REM0 strap high", "HUB_NON_REM0", "SYS_3V3", "hier", 150, 177.8),
         ("R404", "100k CFG_SEL0 strap low", "HUB_CFG_SEL0", "GND", "local", 280, 177.8),
         ("R405", "100k CFG_SEL1 strap low", "HUB_CFG_SEL1", "GND", "local", 410, 177.8),
     ]:

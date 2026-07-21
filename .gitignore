@@ -35,9 +35,14 @@ gen/erc_*.json
 gen/netlist.net
 *.rpt
 *.plist
+*-erc.json
+*-drc.json
+*.net
+result.json
 verification/*.xml
 verification/*.csv
 verification/*.json
+verification/*.png
 verification/release_inventory/
 !verification/hardware_validation_release.json
 
@@ -45,3 +50,6 @@ verification/release_inventory/
 software/**/.venv/
 software/**/node_modules/
 software/os-theme/wallpapers/masters/
+
+# TI TPS25751A tool output (recreate from the tracked source configuration)
+firmware/tps25751a/generated/

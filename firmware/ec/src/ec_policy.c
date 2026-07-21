@@ -8,7 +8,30 @@ static bool source_is_valid(ec_source_id_t source) {
 }
 
 static bool source_is_pd(ec_source_id_t source) {
-  return source >= EC_SOURCE_PD1 && source <= EC_SOURCE_PD3;
+  return source >= EC_SOURCE_PD1 && source <= EC_SOURCE_PD2;
+}
+
+static bool source_uses_charger_input(ec_source_id_t source) {
+  return source == EC_SOURCE_AUX || source_is_pd(source);
+}
+
+static bool input_current_is_qualified(const ec_controller_t *controller,
+                                       const ec_source_observation_t *source,
+                                       ec_source_id_t source_id) {
+  if (!source_uses_charger_input(source_id)) {
+    return true;
+  }
+  if (!source->qualified_input_current_valid ||
+      ec_policy_iindpm_ma(&controller->config,
+                          source->qualified_input_current_ma) == 0u) {
+    return false;
+  }
+  if (source_is_pd(source_id)) {
+    return source->negotiated_voltage_mv != 0u &&
+           source->qualified_input_current_ma >=
+               controller->config.minimum_pd_current_ma;
+  }
+  return true;
 }
 
 static size_t pd_index(ec_source_id_t source) {
@@ -57,6 +80,7 @@ static void runtime_safe_reset(ec_controller_t *controller, uint32_t now_ms) {
   controller->iindpm_command_started_ms = now_ms;
   controller->power_policy_started_ms = now_ms;
   controller->mu_enable_started_ms = now_ms;
+  controller->radio_db_enable_started_ms = now_ms;
   controller->path_commanded = false;
   controller->iindpm_commanded = false;
   controller->power_policy_waiting = false;
@@ -64,6 +88,9 @@ static void runtime_safe_reset(ec_controller_t *controller, uint32_t now_ms) {
   controller->reset_interlock_confirmed = false;
   controller->mu_waiting_for_pg = false;
   controller->mu_pg_confirmed = false;
+  controller->radio_db_waiting_for_pg = false;
+  controller->radio_db_pg_confirmed = false;
+  controller->radio_db_request_blocked = false;
 }
 
 static void enter_fault(ec_controller_t *controller, ec_source_id_t source,
@@ -84,6 +111,9 @@ static void enter_fault(ec_controller_t *controller, ec_source_id_t source,
   controller->reset_interlock_confirmed = false;
   controller->mu_waiting_for_pg = false;
   controller->mu_pg_confirmed = false;
+  controller->radio_db_waiting_for_pg = false;
+  controller->radio_db_pg_confirmed = false;
+  controller->radio_db_request_blocked = false;
 }
 
 ec_policy_config_t ec_policy_default_config(void) {
@@ -95,6 +125,7 @@ ec_policy_config_t ec_policy_default_config(void) {
   config.path_good_timeout_ms = 250u;
   config.power_policy_apply_timeout_ms = 250u;
   config.mu_power_good_timeout_ms = 20u;
+  config.radio_db_power_good_timeout_ms = 250u;
   config.minimum_pd_current_ma = 500u;
   config.iindpm_margin_ma = 250u;
   config.iindpm_cap_ma = 2750u;
@@ -118,6 +149,8 @@ void ec_inputs_init(ec_inputs_t *inputs) {
   inputs->watchdog_healthy = true;
   inputs->charger_fault_n = true;
   inputs->thermal_ok = true;
+  inputs->radio_db_present_n = true;
+  inputs->radio_db_fault_n = true;
   for (index = 0; index < EC_SOURCE_COUNT; ++index) {
     inputs->source[index].fault_n = true;
   }
@@ -131,13 +164,15 @@ void ec_controller_init(ec_controller_t *controller,
 }
 
 uint16_t ec_policy_iindpm_ma(const ec_policy_config_t *config,
-                             uint16_t negotiated_current_ma) {
+                             uint16_t qualified_input_current_ma) {
   uint16_t available_ma;
 
-  if (config == NULL || negotiated_current_ma <= config->iindpm_margin_ma) {
+  if (config == NULL ||
+      qualified_input_current_ma <= config->iindpm_margin_ma) {
     return 0u;
   }
-  available_ma = (uint16_t)(negotiated_current_ma - config->iindpm_margin_ma);
+  available_ma =
+      (uint16_t)(qualified_input_current_ma - config->iindpm_margin_ma);
   return available_ma < config->iindpm_cap_ma ? available_ma
                                               : config->iindpm_cap_ma;
 }
@@ -168,13 +203,13 @@ static uint32_t source_input_power_mw(const ec_controller_t *controller,
                                       const ec_source_observation_t *source,
                                       ec_source_id_t source_id) {
   if (source_is_pd(source_id)) {
-    if (!source->negotiated_current_valid ||
+    if (!source->qualified_input_current_valid ||
         source->negotiated_voltage_mv == 0u) {
       return 0u;
     }
     return ec_policy_pd_input_power_mw(&controller->config,
                                        source->negotiated_voltage_mv,
-                                       source->negotiated_current_ma);
+                                       source->qualified_input_current_ma);
   }
   return source->available_power_valid ? source->available_power_mw : 0u;
 }
@@ -310,25 +345,23 @@ static void step_validating(ec_controller_t *controller,
     return;
   }
 
-  if (source_is_pd(source)) {
-    if (!observation->negotiated_current_valid ||
-        observation->negotiated_voltage_mv == 0u ||
-        observation->negotiated_current_ma <
-            controller->config.minimum_pd_current_ma ||
-        ec_policy_iindpm_ma(&controller->config,
-                            observation->negotiated_current_ma) == 0u) {
+  if (source_uses_charger_input(source)) {
+    if (!input_current_is_qualified(controller, observation, source)) {
       if (controller->path_commanded) {
-        enter_fault(controller, source, EC_FAULT_NEGOTIATED_CURRENT_INVALID);
+        enter_fault(controller, source, EC_FAULT_INPUT_CURRENT_INVALID);
       } else if (time_reached(now_ms,
                               controller->validation_started_ms +
                                   controller->config.validation_timeout_ms)) {
-        enter_fault(controller, source, EC_FAULT_NEGOTIATED_CURRENT_INVALID);
+        enter_fault(controller, source, EC_FAULT_INPUT_CURRENT_INVALID);
       }
       return;
     }
 
     expected_iindpm_ma = ec_policy_iindpm_ma(
-        &controller->config, observation->negotiated_current_ma);
+        &controller->config, observation->qualified_input_current_ma);
+  }
+
+  if (source_is_pd(source)) {
     if (!controller->path_commanded) {
       if (observation->path_good) {
         enter_fault(controller, source, EC_FAULT_PATH_GOOD_STUCK_HIGH);
@@ -346,6 +379,15 @@ static void step_validating(ec_controller_t *controller,
       }
       return;
     }
+  } else if (!observation->path_good) {
+    if (time_reached(now_ms, controller->validation_started_ms +
+                                 controller->config.validation_timeout_ms)) {
+      enter_fault(controller, source, EC_FAULT_VALIDATION_TIMEOUT);
+    }
+    return;
+  }
+
+  if (source_uses_charger_input(source)) {
     controller->outputs.charger_iindpm_ma = expected_iindpm_ma;
     if (!controller->iindpm_commanded) {
       controller->iindpm_commanded = true;
@@ -363,17 +405,63 @@ static void step_validating(ec_controller_t *controller,
       enter_fault(controller, source, EC_FAULT_IINDPM_MISMATCH);
       return;
     }
-  } else if (!observation->path_good) {
-    if (time_reached(now_ms, controller->validation_started_ms +
-                                 controller->config.validation_timeout_ms)) {
-      enter_fault(controller, source, EC_FAULT_VALIDATION_TIMEOUT);
-    }
-    return;
   }
 
   controller->source_state[source] = EC_SOURCE_STATE_ACTIVE;
   controller->active_source = source;
   controller->candidate_source = EC_SOURCE_NONE;
+}
+
+static void apply_radio_db_policy(ec_controller_t *controller,
+                                  const ec_inputs_t *inputs,
+                                  bool optional_loads_permitted,
+                                  uint32_t now_ms) {
+  if (!inputs->request_radio_db) {
+    controller->outputs.radio_db_power_enable = false;
+    controller->radio_db_waiting_for_pg = false;
+    controller->radio_db_pg_confirmed = false;
+    controller->radio_db_request_blocked = false;
+    return;
+  }
+  if (inputs->radio_db_present_n || !inputs->radio_db_fault_n) {
+    controller->outputs.radio_db_power_enable = false;
+    controller->radio_db_waiting_for_pg = false;
+    controller->radio_db_pg_confirmed = false;
+    controller->radio_db_request_blocked = true;
+    return;
+  }
+  if (!optional_loads_permitted || controller->radio_db_request_blocked) {
+    controller->outputs.radio_db_power_enable = false;
+    controller->radio_db_waiting_for_pg = false;
+    controller->radio_db_pg_confirmed = false;
+    return;
+  }
+  if (!controller->outputs.radio_db_power_enable &&
+      inputs->radio_db_power_good) {
+    controller->radio_db_waiting_for_pg = false;
+    controller->radio_db_pg_confirmed = false;
+    controller->radio_db_request_blocked = true;
+    return;
+  }
+  if (!controller->outputs.radio_db_power_enable) {
+    controller->outputs.radio_db_power_enable = true;
+    controller->radio_db_waiting_for_pg = true;
+    controller->radio_db_pg_confirmed = false;
+    controller->radio_db_enable_started_ms = now_ms;
+  }
+  if (inputs->radio_db_power_good) {
+    controller->radio_db_waiting_for_pg = false;
+    controller->radio_db_pg_confirmed = true;
+  } else if (controller->radio_db_pg_confirmed ||
+             (controller->radio_db_waiting_for_pg &&
+              time_reached(now_ms, controller->radio_db_enable_started_ms +
+                                       controller->config
+                                           .radio_db_power_good_timeout_ms))) {
+    controller->outputs.radio_db_power_enable = false;
+    controller->radio_db_waiting_for_pg = false;
+    controller->radio_db_pg_confirmed = false;
+    controller->radio_db_request_blocked = true;
+  }
 }
 
 static void apply_load_policy(ec_controller_t *controller,
@@ -405,9 +493,10 @@ static void apply_load_policy(ec_controller_t *controller,
   }
   mu_budget_mw = minimum_u32(system_budget_mw, ceiling_mw);
 
-  if (source_external && active->negotiated_current_valid) {
+  if (source_external && active->qualified_input_current_valid) {
     controller->outputs.charger_iindpm_ma =
-        ec_policy_iindpm_ma(&controller->config, active->negotiated_current_ma);
+        ec_policy_iindpm_ma(&controller->config,
+                            active->qualified_input_current_ma);
   } else {
     controller->outputs.charger_iindpm_ma = 0u;
   }
@@ -442,7 +531,8 @@ static void apply_load_policy(ec_controller_t *controller,
 
   controller->outputs.charger_enable =
       inputs->request_charger && source_external && inputs->charger_fault_n &&
-      inputs->charger_config_valid && active->negotiated_current_valid &&
+      inputs->charger_config_valid &&
+      active->qualified_input_current_valid &&
       controller->outputs.charger_iindpm_ma > 0u &&
       inputs->charger_iindpm_applied &&
       inputs->applied_charger_iindpm_ma ==
@@ -460,10 +550,7 @@ static void apply_load_policy(ec_controller_t *controller,
                              !low_pack_mode;
   controller->outputs.keyboard_rgb_power_enable =
       inputs->request_keyboard_rgb && optional_loads_permitted;
-  controller->outputs.radio_vhf_power_enable =
-      inputs->request_radio_vhf && optional_loads_permitted;
-  controller->outputs.radio_uhf_power_enable =
-      inputs->request_radio_uhf && optional_loads_permitted;
+  apply_radio_db_policy(controller, inputs, optional_loads_permitted, now_ms);
   controller->outputs.audio_amp_enable =
       inputs->request_audio_amp && optional_loads_permitted;
   controller->outputs.audio_mic_enable =
@@ -565,14 +652,8 @@ static void step_active(ec_controller_t *controller, const ec_inputs_t *inputs,
     enter_fault(controller, source, EC_FAULT_PATH_GOOD_LOST);
     return;
   }
-  if (source_is_pd(source) &&
-      (!observation->negotiated_current_valid ||
-       observation->negotiated_voltage_mv == 0u ||
-       observation->negotiated_current_ma <
-           controller->config.minimum_pd_current_ma ||
-       ec_policy_iindpm_ma(&controller->config,
-                           observation->negotiated_current_ma) == 0u)) {
-    enter_fault(controller, source, EC_FAULT_NEGOTIATED_CURRENT_INVALID);
+  if (!input_current_is_qualified(controller, observation, source)) {
+    enter_fault(controller, source, EC_FAULT_INPUT_CURRENT_INVALID);
     return;
   }
   if (!inputs->charger_fault_n) {
@@ -598,9 +679,9 @@ static void step_active(ec_controller_t *controller, const ec_inputs_t *inputs,
     return;
   }
 
-  if (source_is_pd(source)) {
+  if (source_uses_charger_input(source)) {
     const uint16_t expected_iindpm_ma = ec_policy_iindpm_ma(
-        &controller->config, observation->negotiated_current_ma);
+        &controller->config, observation->qualified_input_current_ma);
 
     controller->outputs.charger_iindpm_ma = expected_iindpm_ma;
     if (!inputs->charger_iindpm_applied) {
@@ -611,7 +692,9 @@ static void step_active(ec_controller_t *controller, const ec_inputs_t *inputs,
       enter_fault(controller, source, EC_FAULT_IINDPM_MISMATCH);
       return;
     }
-    controller->outputs.pd_path_enable[pd_index(source)] = true;
+    if (source_is_pd(source)) {
+      controller->outputs.pd_path_enable[pd_index(source)] = true;
+    }
   }
   apply_load_policy(controller, inputs, now_ms);
 }

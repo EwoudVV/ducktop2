@@ -68,7 +68,10 @@ def local_net(sheet: str, name: str) -> str:
 
 
 def expect_unconnected(components, ref: str, pin: str) -> None:
-    expect_prefix(net(components, ref, pin), f"unconnected-({ref}-", f"{ref} pin {pin}")
+    got = net(components, ref, pin)
+    pattern = rf"unconnected-\({re.escape(ref)}[A-Z]*-.*-Pad{re.escape(pin)}\)"
+    if got is None or re.fullmatch(pattern, got) is None:
+        fail(f"{ref} pin {pin}: expected an exact KiCad unconnected net, got {got!r}")
 
 
 def expect_value_prefix(components, ref: str, prefix: str, label: str | None = None) -> None:
@@ -313,8 +316,8 @@ def check_oled(components, fps=None):
     expect(comp(components, "J45").footprint, "ducktop2:SSD1306_0.96in_Module_4Pin", "J45 footprint")
     expect(comp(components, "U45").footprint, "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm", "U45 footprint")
     for ref, sda, scl in [
-        ("J41", "/Radio{slash}OLED{slash}GNSS/OLED_A_SDA", "/Radio{slash}OLED{slash}GNSS/OLED_A_SCL"),
-        ("J45", "/Radio{slash}OLED{slash}GNSS/OLED_B_SDA", "/Radio{slash}OLED{slash}GNSS/OLED_B_SCL"),
+        ("J41", "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_A_SDA", "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_A_SCL"),
+        ("J45", "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_B_SDA", "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_B_SCL"),
     ]:
         expect(net(components, ref, "1"), "GND", f"{ref} pin 1")
         expect(net(components, ref, "2"), "/MCU_3V3", f"{ref} pin 2")
@@ -334,9 +337,11 @@ def check_oled(components, fps=None):
     expect(net(components, "U45", "22"), "/I2C_SCL", "U45 upstream SCL")
     expect(net(components, "U45", "23"), "/I2C_SDA", "U45 upstream SDA")
     expect(net(components, "U45", "24"), "/MCU_3V3", "U45 VCC")
-    for idx, (sda_pin, scl_pin) in enumerate((("8", "9"), ("10", "11"), ("13", "14")), start=1):
+    for idx, (sda_pin, scl_pin) in enumerate((("8", "9"), ("10", "11")), start=1):
         expect(net(components, "U45", sda_pin), f"/PD{idx}_I2C_SDA", f"U45 PD{idx} downstream SDA")
         expect(net(components, "U45", scl_pin), f"/PD{idx}_I2C_SCL", f"U45 PD{idx} downstream SCL")
+    for pin in ("13", "14", "15", "16", "17", "18", "19", "20"):
+        expect_unconnected(components, "U45", pin)
     expect(net(components, "C185", "1"), "/MCU_3V3", "C185 pin 1")
     expect(net(components, "C185", "2"), "GND", "C185 pin 2")
 
@@ -692,7 +697,6 @@ def check_battery_and_charger(components):
         ("D711", "/Power & Battery/AUX_DC_PROTECTED"),
         ("D712", "/PD1_VBUS_RAW"),
         ("D713", "/PD2_VBUS_RAW"),
-        ("D714", "/PD3_VBUS_RAW"),
     ):
         expect(net(components, ref, "1"), "/Power & Battery/AON_OR_RAW", f"{ref} always-on OR cathode")
         expect(net(components, ref, "2"), source, f"{ref} always-on OR source")
@@ -797,14 +801,20 @@ def check_ec_core(components):
     expect(net(components, "U4", "26"), "/PMIC_QON_ASSERT",
            "STM32 active-high open-drain QON pulse control")
     expect(net(components, "U4", "51"), "/EC & MCU/SERVICE_MUX_RESET_REQ_N", "STM32 service-mux reset request")
-    for pin, want in (("33", "/PD1_VALID_N"), ("37", "/PD2_VALID_N"), ("39", "/PD3_VALID_N")):
-        expect(net(components, "U4", pin), want, f"STM32 qualified PD source input {pin}")
+    for pin, want, note in (
+        ("33", "/PD1_VALID_N", "left dual-role source-qualified input"),
+        ("37", "/PD2_VALID_N", "right dual-role source-qualified input"),
+        ("39", "/PD1_TCPC_IRQ_N", "left TPS25751A interrupt"),
+        ("90", "/PD2_TCPC_IRQ_N", "right TPS25751A interrupt"),
+        ("91", "/RADIO_DB_PWR_EN", "optional radio daughterboard power enable"),
+        ("96", "/PD_PROTECT_FAULT_N", "dual-role protection aggregate fault"),
+    ):
+        expect(net(components, "U4", pin), want, f"STM32 source/radio allocation {note}")
     for obsolete in ("J5", "J6", "J7", "J13", "J14", "J15"):
         if obsolete in components:
             fail(f"obsolete EC map/probe header {obsolete} is still present")
     expect(net(components, "U4", "89"), "/INTERNAL_USB_VBUS_FAULT_N",
            "STM32 internal USB power-switch fault input")
-    expect_unconnected(components, "U4", "90")
     expect(net(components, "R34", "1"), "/MCU_3V3", "EC SWD VTref source")
     expect(net(components, "R34", "2"), "/EC & MCU/EC_SWD_VTREF", "EC SWD VTref isolated target")
     expect_value_prefix(components, "R34", "0R", "EC SWD VTref link")
@@ -889,18 +899,20 @@ def check_ec_core(components):
 
     source_manager_pins = {
         "1": "/EC & MCU/SOURCE_MGR_INT_N", "2": "GND", "3": "/EC & MCU/NRST_NET",
-        "4": "/PD1_PATH_EN", "5": "/PD2_PATH_EN", "6": "/PD3_PATH_EN",
+        "4": "/PD1_PATH_EN", "5": "/PD2_PATH_EN",
+        "6": "/EC & MCU/SOURCE_MGR_SPARE1",
         "7": "/PD1_EFUSE_FAULT_N", "8": "/PD2_EFUSE_FAULT_N",
-        "9": "/PD3_EFUSE_FAULT_N", "10": "/PACK_FAULT_N",
+        "9": "/EC & MCU/SOURCE_MGR_SPARE2", "10": "/PACK_FAULT_N",
         "11": "/AUX_FAULT_N", "12": "GND", "13": "/PACK_RETRY_PULSE",
         "14": "/AUX_PGOOD", "15": "/MAIN_USB_VALID_N",
         "16": "/MAIN_AUX_VALID_N", "17": "/AON_FAULT_N",
-        "18": "/EC & MCU/SOURCE_MGR_SPARE1", "19": "/EC & MCU/SOURCE_MGR_SPARE2",
-        "20": "/EC & MCU/SOURCE_MGR_SPARE3", "21": "GND",
+        "18": "/RADIO_DB_PG", "19": "/RADIO_DB_FAULT_N",
+        "20": "/RADIO_DB_PRESENT_N", "21": "GND",
         "22": "/I2C_SCL", "23": "/I2C_SDA", "24": "/MCU_3V3",
     }
     expect_contains(comp(components, "U44").value, "TCA9539PWR", "resettable always-on source manager")
     expect(prop(components, "U44", "MPN"), "TCA9539PWR", "source-manager exact MPN")
+    expect(prop(components, "U44", "I2CAddress7Bit"), "0x74", "source-manager 7-bit I2C address")
     for pin, want in source_manager_pins.items():
         expect(net(components, "U44", pin), want, f"TCA9539 source-manager pin {pin}")
     expect_value_prefix(components, "R780", "10k", "source-manager interrupt pull-up")
@@ -909,7 +921,7 @@ def check_ec_core(components):
     expect_value_prefix(components, "R781", "10k", "aggregate AON fault pull-up")
     expect(net(components, "R781", "1"), "/MCU_3V3", "aggregate AON fault pull-up rail")
     expect(net(components, "R781", "2"), "/AON_FAULT_N", "aggregate AON fault input")
-    for index in range(1, 4):
+    for index in range(1, 3):
         ref = f"R{781 + index}"
         expect_value_prefix(components, ref, "100k", f"{ref} source-manager spare pull-down")
         expect(net(components, ref, "1"), f"/EC & MCU/SOURCE_MGR_SPARE{index}", f"{ref} spare signal")
@@ -1176,7 +1188,7 @@ def check_mu_carrier(components, pin_names):
         "19": "/Mu Carrier/USBC2_SSTX_RAW_P", "21": "/Mu Carrier/USBC2_SSTX_RAW_N",
         "22": "/USBC2_SSRX_P", "24": "/USBC2_SSRX_N",
         "70": "/USBC2_DP", "72": "/USBC2_DM",
-        "129": "/MU_USB_OC_N",
+        "129": "/PD_PROTECT_FAULT_N",
         "31": "/Mu Carrier/WIFI_PCIE_TX_RAW_P", "33": "/Mu Carrier/WIFI_PCIE_TX_RAW_N",
         "34": "/WIFI_PCIE_RX_P", "36": "/WIFI_PCIE_RX_N",
         "67": "/WIFI_USB_DN", "69": "/WIFI_USB_DP",
@@ -1311,7 +1323,7 @@ def check_mu_carrier(components, pin_names):
             fail(f"obsolete external USB-hub component {obsolete} is still in the schematic")
 
 
-def check_native_usb_c_ports(components):
+def _check_legacy_native_usb_c_ports(components):
     for port in (1, 2):
         branch = f"U{port * 10 + 10}"
         tps = f"U{port * 10 + 11}"
@@ -1408,7 +1420,7 @@ def check_native_usb_c_ports(components):
         expect(net(components, jref, "B7"), f"{native}_DM", f"{jref} D- B")
 
 
-def check_ch224_inputs(components):
+def _check_legacy_ch224_inputs(components):
     cold_start_contract = (
         "RAW_VBUS_4_TO_30V;CFG1_56K_REQUESTS_15V_WITHOUT_EC;"
         "15V_PDO_REQUIRED_FOR_SYSTEM_BOOT"
@@ -1560,6 +1572,215 @@ def check_ch224_inputs(components):
     expect(net(components, "C737", "1"), "/USB_PD_SELECTED", "LTC4417 output hold-up rail")
     expect(net(components, "C737", "2"), "GND", "LTC4417 output hold-up return")
     expect(net(components, "C736", "1"), "/USB_PD_SELECTED", "selected-PD output capacitor")
+
+
+def check_five_port_usb_c_architecture(components):
+    """Assert the complete five-port data map and the two dual-role power paths."""
+    pd_sheet = "Power Inputs"
+    hub_sheet = "Native USB-C I/O"
+
+    dual_role = (
+        (1, "J21", "U41", 2000, {
+            "dp": "/USBC1_DP", "dm": "/USBC1_DM",
+            "sstx_p": "/USBC1_SSTX_P", "sstx_n": "/USBC1_SSTX_N",
+            "ssrx_p": "/USBC1_SSRX_P", "ssrx_n": "/USBC1_SSRX_N",
+        }),
+        (2, "J11", "U42", 2010, {
+            "dp": "/HUB_DS1_DP", "dm": "/HUB_DS1_DM",
+            "sstx_p": "/HUB_DS1_SSTX_P", "sstx_n": "/HUB_DS1_SSTX_N",
+            "ssrx_p": "/HUB_DS1_SSRX_P", "ssrx_n": "/HUB_DS1_SSRX_N",
+        }),
+    )
+
+    # End-to-end host-TX contract for the Mu-native left charging/data port.
+    # The Mu has no onboard TX coupling capacitors: C66/C67 are the one and
+    # only 100 nF series pair between A1 and the TUSB1142 SSTX inputs.
+    for mu_pin, capacitor, redriver_pin, raw_net, coupled_net in (
+        ("13", "C66", "16", "/Mu Carrier/USBC1_SSTX_RAW_P", "/USBC1_SSTX_P"),
+        ("15", "C67", "15", "/Mu Carrier/USBC1_SSTX_RAW_N", "/USBC1_SSTX_N"),
+    ):
+        expect(net(components, "A1", mu_pin), raw_net, f"Mu USB-C TX pin {mu_pin} raw side")
+        expect_value_prefix(components, capacitor, "100n", f"{capacitor} Mu USB-C TX coupling")
+        expect(net(components, capacitor, "1"), raw_net, f"{capacitor} Mu side")
+        expect(net(components, capacitor, "2"), coupled_net, f"{capacitor} redriver side")
+        expect(net(components, "U2000", redriver_pin), coupled_net,
+               f"U2000 pin {redriver_pin} receives coupled Mu TX")
+
+    for port, jref, tcpc, ubase, host in dual_role:
+        raw = f"/PD{port}_VBUS_RAW"
+        local = lambda name: local_net(pd_sheet, f"PD{port}_{name}")
+        expect(comp(components, jref).footprint,
+               "Connector_USB:USB_C_Receptacle_Molex_105450-0101", f"{jref} exact connector")
+        expect(prop(components, jref, "MPN"), "105450-0101", f"{jref} exact MPN")
+        for pin in ("A4", "A9", "B4", "B9"):
+            expect(net(components, jref, pin), raw, f"{jref} dual-role VBUS {pin}")
+        for pin, want in {
+            "A5": local("CC1_CONN"), "B5": local("CC2_CONN"),
+            "A6": local("DP_CONN"), "B6": local("DP_CONN"),
+            "A7": local("DM_CONN"), "B7": local("DM_CONN"),
+            "A2": local("TX1_P"), "A3": local("TX1_N"),
+            "B2": local("TX2_P"), "B3": local("TX2_N"),
+            "B11": local("RX1_P"), "B10": local("RX1_N"),
+            "A11": local("RX2_P"), "A10": local("RX2_N"),
+        }.items():
+            expect(net(components, jref, pin), want, f"{jref} data pin {pin}")
+
+        expect_contains(comp(components, tcpc).value, "TPS25751AD", f"{tcpc} DRP controller")
+        expect(prop(components, tcpc, "MPN"), "TPS25751ADREFR", f"{tcpc} exact MPN")
+        expect(prop(components, tcpc, "PortPolicy"),
+               "DRP_PREFER_SINK;HOST_DATA_ONLY;15V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP",
+               f"{tcpc} released port policy")
+        expect(prop(components, tcpc, "EEPROMSource"),
+               "firmware/tps25751a/ducktop2_dual_role_config.json",
+               f"{tcpc} versioned EEPROM source")
+        for pin in ("23", "32"):
+            expect(net(components, tcpc, pin), raw, f"{tcpc} raw VBUS pin {pin}")
+        for pin in ("20",):
+            expect(net(components, tcpc, pin), local("PPHV"), f"{tcpc} protected PPHV pin {pin}")
+        expect(net(components, tcpc, "34"), "/USB_PORT_5V", f"{tcpc} source PP5V land")
+        expect(net(components, tcpc, "28"), local("CC1_SYS"), f"{tcpc} CC1")
+        expect(net(components, tcpc, "29"), local("CC2_SYS"), f"{tcpc} CC2")
+        expect(net(components, tcpc, "26"), local("GPIO_DFP"), f"{tcpc} DFP-role output")
+        expect(net(components, tcpc, "36"), local("GPIO_ATTACH"), f"{tcpc} attach output")
+        expect(net(components, tcpc, "37"), local("GPIO_FLIP"), f"{tcpc} orientation output")
+
+        qualifier = f"U{ubase + 6}"
+        expect_contains(comp(components, qualifier).value, "SN74LVC1G08",
+                        f"{qualifier} DFP-and-attach qualifier")
+        expect(prop(components, qualifier, "MPN"), "SN74LVC1G08DBVR",
+               f"{qualifier} exact MPN")
+        for pin, want in {
+            "1": local("GPIO_DFP"), "2": local("GPIO_ATTACH"),
+            "3": "GND", "4": local("HOST_ATTACHED"), "5": "/SYS_3V3",
+        }.items():
+            expect(net(components, qualifier, pin), want, f"{qualifier} pin {pin}")
+        expect(prop(components, qualifier, "DefaultState"),
+               "LOW_WHEN_CONTROLLER_UNPOWERED_RESET_DETACHED_OR_SINK",
+               f"{qualifier} fail-off contract")
+        expect_value_prefix(components, f"R{2000 + (port - 1) * 40 + 14}", "100k",
+                            f"PD{port} attach input default-low")
+        expect_value_prefix(components, f"R{2000 + (port - 1) * 40 + 18}", "100k",
+                            f"PD{port} DFP input default-low")
+
+        protector = f"U{ubase + 1}"
+        expect_contains(comp(components, protector).value, "TPD4S201", f"{protector} CC/USB2 protector")
+        expect(prop(components, protector, "ChannelUse"),
+               "CC1_CC2_AND_USB2_DP_DM;DEAD_BATTERY_RD_ENABLED",
+               f"{protector} protected-channel contract")
+        expect(net(components, protector, "14"), local("DM_HOST_SWITCHED"), f"{protector} USB2 D-")
+        expect(net(components, protector, "15"), local("DP_HOST_SWITCHED"), f"{protector} USB2 D+")
+
+        usb2_switch = f"U{ubase + 3}"
+        expect_contains(comp(components, usb2_switch).value, "TS3USB30E", f"{usb2_switch} USB2 disconnect")
+        expect(prop(components, usb2_switch, "DataRoleContract"),
+               "DEFAULT_DISCONNECTED;ENABLE_ONLY_AFTER_CONFIRMED_DFP",
+               f"{usb2_switch} fail-safe data role")
+        expect(net(components, usb2_switch, "2"), host["dp"], f"{usb2_switch} host D+")
+        expect(net(components, usb2_switch, "8"), host["dm"], f"{usb2_switch} host D-")
+        expect(net(components, usb2_switch, "9"), local("USB2_OE_N"), f"{usb2_switch} default-off enable")
+        expect_value_prefix(components, f"R{2000 + (port - 1) * 40 + 16}", "100k",
+                            f"PD{port} USB2 default-disable pull-up")
+
+        mux_control = f"U{ubase + 4}"
+        expect(net(components, mux_control, "3"), local("HOST_ATTACHED"),
+               f"{mux_control} qualified role/attach input")
+        expect(net(components, mux_control, "4"), local("MUX_EN"),
+               f"{mux_control} SuperSpeed enable output")
+
+        redriver = f"U{ubase}"
+        expect_contains(comp(components, redriver).value, "TUSB1142", f"{redriver} Gen2 redriver")
+        expect(prop(components, redriver, "MPN"), "TUSB1142IRNQR", f"{redriver} exact MPN")
+        expect(prop(components, redriver, "StrapMode"),
+               "GPIO_MODE;FULL_AEQ;4P5DB_HOST_EQ;VIO_3V3", f"{redriver} strap policy")
+        expect(net(components, redriver, "15"), host["sstx_n"], f"{redriver} host TX-")
+        expect(net(components, redriver, "16"), host["sstx_p"], f"{redriver} host TX+")
+        expect(net(components, redriver, "18"), local("SSRX_RAW_N"), f"{redriver} host RX-")
+        expect(net(components, redriver, "19"), local("SSRX_RAW_P"), f"{redriver} host RX+")
+        expect(net(components, redriver, "21"), local("MUX_FLIP"), f"{redriver} orientation")
+        expect(net(components, redriver, "26"), local("MUX_EN"), f"{redriver} role enable")
+
+        eeprom = f"U{ubase + 2}"
+        expect_contains(comp(components, eeprom).value, "CAT24C256", f"{eeprom} TCPC EEPROM")
+        expect(prop(components, eeprom, "ProgrammingState"),
+               "PROGRAM_BEFORE_ASSEMBLY_OR_VIA_TP;READBACK_VERIFY_RELEASE_IMAGE",
+               f"{eeprom} release-image contract")
+        efuse = f"U{719 + port}"
+        expect_contains(comp(components, efuse).value, "TPS26630", f"{efuse} sink eFuse")
+        expect(prop(components, efuse, "SafetyState"),
+               "MODE_GND_AUTORETRY;PGTH_GND_PGOOD_UNUSED;SHDN_47K_PULLDOWN",
+               f"{efuse} default-off safety state")
+        expect(net(components, efuse, "12"), local("EFUSE_SHDN"), f"{efuse} shutdown")
+        expect_value_prefix(components, f"R{2084 + (port - 1) * 10}", "47k",
+                            f"PD{port} eFuse default-off pull-down")
+        expect_value_prefix(components, f"C{2000 + (port - 1) * 40 + 15}", "4.7u 25V",
+                            f"{jref} pre-attach capacitance")
+
+    expect_contains(comp(components, "U14").value, "LTC4418", "two-input PD selector")
+    expect(net(components, "U14", "15"), "/USB_PD_SELECTED", "selected PD output")
+    expect(net(components, "U14", "17"), local_net(pd_sheet, "PD1_VBUS_GATED"), "PD1 selector input")
+    expect(net(components, "U14", "16"), local_net(pd_sheet, "PD2_VBUS_GATED"), "PD2 selector input")
+    for component in components.values():
+        if "CH224" in component.value:
+            fail(f"obsolete CH224 power-only controller remains: {component.ref}")
+
+    expect_contains(comp(components, "U1700").value, "USB7206C", "six-port Gen2 hub")
+    expect(prop(components, "U1700", "MPN"), "USB7206C-I/KDX", "hub exact MPN")
+    for pin, want in {
+        "2": "/INTERNAL_USB_VBUS_VALID",
+        "89": "/USBC2_DP", "90": "/USBC2_DM",
+        "94": "/USBC2_SSTX_P", "95": "/USBC2_SSTX_N",
+        "5": "/HUB_DS1_DP", "6": "/HUB_DS1_DM",
+        "10": "/HUB_DS1_SSRX_P", "11": "/HUB_DS1_SSRX_N",
+    }.items():
+        expect(net(components, "U1700", pin), want, f"USB7206C pin {pin}")
+    disable_straps = {
+        "41": ("R1733", "HUB_DIS6_DM"),
+        "42": ("R1732", "HUB_DIS6_DP"),
+        "81": ("R1730", "HUB_DIS5_DP"),
+        "82": ("R1731", "HUB_DIS5_DM"),
+    }
+    for pin, (ref, local_name) in disable_straps.items():
+        strap_net = local_net(hub_sheet, local_name)
+        expect(net(components, "U1700", pin), strap_net,
+               f"USB7206C unused port-disable strap pin {pin}")
+        expect_value_prefix(components, ref, "0R", f"{ref} unused-port disable link")
+        expect(net(components, ref, "1"), "/SYS_3V3", f"{ref} strap source")
+        expect(net(components, ref, "2"), strap_net, f"{ref} strap destination")
+        expect(prop(components, ref, "MPN"), "RC0603JR-070RL", f"{ref} exact strap MPN")
+
+    source_ports = (("J22", 2, 1780), ("J23", 3, 1740), ("J12", 4, 1760))
+    for jref, port, base in source_ports:
+        local = lambda name: local_net(hub_sheet, name)
+        expect(comp(components, jref).footprint,
+               "Connector_USB:USB_C_Receptacle_Molex_105450-0101", f"{jref} exact connector")
+        expect_contains(comp(components, f"U{base + 1}").value, "TPS25810", f"{jref} DFP controller")
+        expect_contains(comp(components, f"U{base + 2}").value, "HD3SS6126", f"{jref} orientation mux")
+        expect(net(components, f"U{base + 2}", "6"), "GND",
+               f"{jref} HD3SS6126 HS_OE low for normal USB3 operation")
+        expect(prop(components, f"U{base + 2}", "EnableState"),
+               "HS_OE_GND_NORMAL_OPERATION", f"{jref} mux enable contract")
+        expect_contains(comp(components, f"U{base + 3}").value, "TPD1S514", f"{jref} VBUS OVP")
+        expect(net(components, f"U{base + 3}", "B3"), local(f"J{jref[1:]}_VBUS"),
+               f"{jref} protected connector VBUS")
+        for pin in ("A4", "A9", "B4", "B9"):
+            expect(net(components, jref, pin), local(f"J{jref[1:]}_VBUS"), f"{jref} VBUS {pin}")
+        for pin, want in {
+            "A6": local(f"HUB_DS{port}_DP"), "B6": local(f"HUB_DS{port}_DP"),
+            "A7": local(f"HUB_DS{port}_DM"), "B7": local(f"HUB_DS{port}_DM"),
+            "A2": local(f"J{jref[1:]}_TX1_P"), "A3": local(f"J{jref[1:]}_TX1_N"),
+            "B2": local(f"J{jref[1:]}_TX2_P"), "B3": local(f"J{jref[1:]}_TX2_N"),
+            "B11": local(f"J{jref[1:]}_RX1_P"), "B10": local(f"J{jref[1:]}_RX1_N"),
+            "A11": local(f"J{jref[1:]}_RX2_P"), "A10": local(f"J{jref[1:]}_RX2_N"),
+        }.items():
+            expect(net(components, jref, pin), want, f"{jref} data pin {pin}")
+
+    external_ports = {"J11", "J12", "J21", "J22", "J23"}
+    found_ports = {
+        ref for ref, item in components.items()
+        if item.value.startswith("USB-C ") and ref in external_ports
+    }
+    expect(",".join(sorted(found_ports)), ",".join(sorted(external_ports)),
+           "complete five-port external USB-C set")
 
 
 def check_external_hdmi_path(components):
@@ -1879,7 +2100,7 @@ def check_keyboard_interface(components):
         fail("C319 keyboard RGB output bulk must be populated")
 
 
-def check_radio_gnss_audio(components):
+def _check_legacy_monolithic_radio_gnss_audio(components):
     expect(net(components, "F10", "1"), "/PCIE_3V3",
            "E-key fuse uses the S0-switched PCIe endpoint rail")
     expect(net(components, "F10", "2"), local_net("Radio/OLED/GNSS", "WIFI_3V3"),
@@ -2155,6 +2376,139 @@ def check_radio_gnss_audio(components):
             fail(f"{ref} radio H/L strap must be fitted for the low-power prototype")
 
 
+def check_optional_radio_interface(components):
+    """Require a usable laptop and electrically quiet nets with no radio board fitted."""
+    wifi_sheet = "Wi-Fi/Bluetooth & OLEDs"
+    radio_sheet = "Optional Radio Daughterboard Interface"
+    rloc = lambda name: local_net(radio_sheet, name)
+
+    expect(net(components, "F10", "1"), "/PCIE_3V3", "E-key switched endpoint input")
+    expect(net(components, "F10", "2"), local_net(wifi_sheet, "WIFI_3V3"),
+           "E-key local fused rail")
+    expect(prop(components, "J40", "QualifiedModuleMPN"), "AX210.NGWGIE.NV",
+           "E-key qualified module")
+    expect(prop(components, "J40", "QualifiedModuleContract"),
+           "M2_2230_KEY_E_PCIE_WIFI_USB_BLUETOOTH_NOT_CNVIO2",
+           "E-key electrical contract")
+    for ref, signal in (("R170", "WIFI_W_DISABLE1_N"), ("R171", "WIFI_W_DISABLE2_N")):
+        expect(net(components, ref, "1"), local_net(wifi_sheet, "WIFI_3V3"),
+               f"{ref} powered-slot pull-up")
+        expect(net(components, ref, "2"), local_net(wifi_sheet, signal), f"{ref} disable output")
+    for pin, want in {
+        "1": "/WIFI_W_DISABLE1_N_EC", "7": local_net(wifi_sheet, "WIFI_W_DISABLE1_N"),
+        "6": "/WIFI_W_DISABLE2_N_EC", "2": local_net(wifi_sheet, "WIFI_W_DISABLE2_N"),
+        "3": "GND", "4": "GND", "8": local_net(wifi_sheet, "WIFI_3V3"),
+    }.items():
+        expect(net(components, "U170", pin), want, f"E-key powered-off isolator pin {pin}")
+
+    expect(comp(components, "J2300").footprint,
+           "Connector_Hirose_DF40:Hirose_DF40C-60DP-0.4V_2x30-1MP_P0.4mm",
+           "radio daughterboard mainboard connector")
+    expect(prop(components, "J2300", "MPN"), "DF40C-60DP-0.4V(51)",
+           "radio daughterboard connector MPN")
+    expect(prop(components, "J2300", "MatingConnector"), "DF40C(2.0)-60DS-0.4V(51)",
+           "radio daughterboard mating connector")
+    expect(prop(components, "J2300", "AbsentBoardContract"),
+           "NO_RADIO_BOARD_REQUIRED_FOR_BOOT_OR_PRIMARY_LAPTOP_OPERATION",
+           "radio daughterboard absent-board contract")
+    for pin in range(1, 9):
+        expect(net(components, "J2300", str(pin)), rloc("RADIO_DB_5V"),
+               f"J2300 shared 5V pin {pin}")
+    for pin in (*range(9, 17), 21, 22, 27, 32, 37, 43, *range(45, 61)):
+        expect(net(components, "J2300", str(pin)), "GND", f"J2300 ground pin {pin}")
+    for pin in ("17", "18"):
+        expect(net(components, "J2300", pin), rloc("RADIO_CODEC_USB_VBUS_DB"),
+               f"J2300 codec VBUS pin {pin}")
+    expect(net(components, "J2300", "19"), rloc("RADIO_CODEC_USB_DP_DB"), "J2300 codec D+")
+    expect(net(components, "J2300", "20"), rloc("RADIO_CODEC_USB_DM_DB"), "J2300 codec D-")
+    expect(net(components, "J2300", "44"), "/RADIO_DB_PRESENT_N", "J2300 passive presence strap")
+    expect(net(components, "J2300", "MP"), "GND", "J2300 mounting-pad ground")
+
+    expect_contains(comp(components, "U2300").value, "TPS259470", "radio daughterboard eFuse")
+    expect(prop(components, "U2300", "SafetyContract"),
+           "DEFAULT_OFF;REVERSE_BLOCKING;APPROX_2A_CURRENT_LIMIT",
+           "radio daughterboard power isolation")
+    for pin, want in {
+        "1": "/RADIO_DB_PWR_EN", "2": "GND", "4": "/RADIO_DB_FAULT_N",
+        "5": "/SYS_5V", "6": rloc("RADIO_DB_5V"),
+        "7": rloc("RADIO_DB_DVDT"), "8": "GND", "9": rloc("RADIO_DB_ILM"),
+    }.items():
+        expect(net(components, "U2300", pin), want, f"U2300 pin {pin}")
+    expect_value_prefix(components, "R2300", "100k", "radio eFuse default-off pull-down")
+    expect(net(components, "R2300", "1"), "/RADIO_DB_PWR_EN", "radio eFuse enable")
+    expect(net(components, "R2300", "2"), "GND", "radio eFuse fail-off return")
+    expect_value_prefix(components, "R2306", "10k", "radio board presence pull-up")
+    expect(net(components, "R2306", "1"), "/MCU_3V3", "presence pull-up rail")
+    expect(net(components, "R2306", "2"), "/RADIO_DB_PRESENT_N", "presence sense")
+
+    expect_contains(comp(components, "U2301").value, "TLV803EA43", "radio rail supervisor")
+    expect_contains(comp(components, "U2302").value, "74LVC1G17", "radio PG level restore")
+    expect(net(components, "U2302", "4"), "/RADIO_DB_PG", "qualified radio power-good")
+    expect(net(components, "U2302", "5"), "/MCU_3V3", "radio PG logic rail")
+
+    expect_contains(comp(components, "U2303").value, "TS3USB30E", "radio codec USB disconnect")
+    expect(prop(components, "U2303", "PowerOffContract"),
+           "USB_DP_DM_DISCONNECTED_UNLESS_RADIO_DB_PG_IS_HIGH",
+           "radio codec data isolation")
+    expect(net(components, "U2303", "9"), rloc("RADIO_USB_OE_N"), "radio USB switch enable")
+    expect_value_prefix(components, "R2307", "100k", "radio USB default-disconnect pull-up")
+    expect(net(components, "Q2300", "1"), "/RADIO_DB_PG", "radio USB PG gate")
+    expect(net(components, "Q2300", "3"), rloc("RADIO_USB_OE_N"), "radio USB active-low enable")
+    expect_contains(comp(components, "U2304").value, "TPS2553D", "radio codec VBUS gate")
+    expect(net(components, "U2304", "3"), "/RADIO_DB_PG", "radio codec VBUS qualified enable")
+    expect(net(components, "U2304", "5"), rloc("RADIO_CODEC_ILIM"), "radio codec VBUS ILIM")
+    expect(net(components, "U2304", "6"), rloc("RADIO_CODEC_USB_VBUS_DB"), "radio codec switched VBUS")
+    expect_value_prefix(components, "R2308", "133k 1%", "radio codec 200mA current limit")
+    expect(prop(components, "R2308", "MPN"), "RC0603FR-07133KL", "radio codec ILIM exact MPN")
+
+    radio_signals = {
+        "23": "RADIO_VHF_UART_TX", "24": "RADIO_VHF_UART_RX",
+        "25": "RADIO_UHF_UART_TX", "26": "RADIO_UHF_UART_RX",
+        "28": "RADIO_VHF_PTT_N", "29": "RADIO_UHF_PTT_N",
+        "30": "RADIO_VHF_PD_N", "31": "RADIO_UHF_PD_N",
+        "33": "RADIO_VHF_SQL", "34": "RADIO_UHF_SQL",
+        "35": "RADIO_VHF_RF_SEL_3V3", "36": "RADIO_UHF_RF_SEL_3V3",
+        "38": "GNSS_UART_RX", "39": "GNSS_UART_TX", "40": "GNSS_RESET_N",
+        "41": "GNSS_PPS", "42": "GNSS_EXTINT",
+    }
+    for index, (pin, signal) in enumerate(radio_signals.items()):
+        boundary = rloc(f"{signal}_DB")
+        resistor = f"R{2340 + index}"
+        expect(net(components, "J2300", pin), boundary, f"J2300 isolated signal pin {pin}")
+        expect_value_prefix(components, resistor, "4.7k", f"{resistor} daughterboard fault isolation")
+        expect(prop(components, resistor, "MPN"), "RC0603FR-074K7L", f"{resistor} exact MPN")
+        expect(net(components, resistor, "1"), f"/{signal}", f"{resistor} mainboard side")
+        expect(net(components, resistor, "2"), boundary, f"{resistor} connector side")
+
+    defaults = {
+        "R2310": ("/RADIO_VHF_PTT_N", "/MCU_3V3", "10k"),
+        "R2311": ("/RADIO_UHF_PTT_N", "/MCU_3V3", "10k"),
+        "R2312": ("/RADIO_VHF_PD_N", "GND", "10k"),
+        "R2313": ("/RADIO_UHF_PD_N", "GND", "10k"),
+        "R2314": ("/RADIO_VHF_RF_SEL_3V3", "GND", "100k"),
+        "R2315": ("/RADIO_UHF_RF_SEL_3V3", "GND", "100k"),
+        "R2316": ("/RADIO_VHF_UART_TX", "/MCU_3V3", "100k"),
+        "R2317": ("/RADIO_UHF_UART_TX", "/MCU_3V3", "100k"),
+        "R2318": ("/GNSS_UART_RX", "/MCU_3V3", "100k"),
+        "R2319": ("/GNSS_RESET_N", "/MCU_3V3", "100k"),
+        "R2320": ("/RADIO_VHF_UART_RX", "GND", "100k"),
+        "R2321": ("/RADIO_UHF_UART_RX", "GND", "100k"),
+        "R2322": ("/RADIO_VHF_SQL", "GND", "100k"),
+        "R2323": ("/RADIO_UHF_SQL", "GND", "100k"),
+        "R2324": ("/GNSS_UART_TX", "GND", "100k"),
+        "R2325": ("/GNSS_PPS", "GND", "100k"),
+        "R2326": ("/GNSS_EXTINT", "GND", "100k"),
+    }
+    for ref, (signal, default, value) in defaults.items():
+        expect_value_prefix(components, ref, value, f"{ref} absent-board default")
+        expect(net(components, ref, "1"), signal, f"{ref} signal")
+        expect(net(components, ref, "2"), default, f"{ref} safe default")
+
+    for obsolete in ("U70", "J70", "J71", "U240", "U250", "U330", "U40", "J42"):
+        if obsolete in components:
+            fail(f"radio/GNSS daughterboard component {obsolete} remains on the mainboard")
+
+
 def check_system_audio(components):
     sheet = "System Audio"
     loc = lambda name: local_net(sheet, name)
@@ -2167,8 +2521,8 @@ def check_system_audio(components):
     expect(net(components, "F400", "2"), loc("AUDIO_5V"), "audio branch fuse output")
 
     hub_pins = {
-        "1": "/RADIO_CODEC_USB_DM", "2": "/RADIO_CODEC_USB_DP",
-        "3": loc("SYSTEM_DAC_USB_DM"), "4": loc("SYSTEM_DAC_USB_DP"),
+        "1": loc("SYSTEM_DAC_USB_DM"), "2": loc("SYSTEM_DAC_USB_DP"),
+        "3": "/RADIO_CODEC_USB_DM_HOST", "4": "/RADIO_CODEC_USB_DP_HOST",
         "5": "/SYS_3V3", "10": "/SYS_3V3", "12": loc("HUB_PORT1_EN"),
         "13": loc("HUB_PORT1_OC_N"), "14": loc("HUB_CRFILT"),
         "15": "/SYS_3V3", "16": loc("HUB_PORT2_EN"),
@@ -2186,18 +2540,18 @@ def check_system_audio(components):
     for pin in ("6", "7", "8", "9", "11", "18", "19", "20", "21"):
         expect_unconnected(components, "U400", pin)
 
-    # Strap mode: self-powered, individual switching/OC, both internal devices
-    # non-removable. VBUS_DET follows the supervised physical carrier VBUS.
+    # Strap mode: self-powered, individual switching/OC, fixed system codec on
+    # non-removable port 1 and optional radio codec on removable port 2.
     for ref, pin_net, rail in (
-        ("R402", loc("HUB_NON_REM1"), "/SYS_3V3"),
-        ("R403", loc("HUB_NON_REM0"), "GND"),
+        ("R402", loc("HUB_NON_REM1"), "GND"),
+        ("R403", loc("HUB_NON_REM0"), "/SYS_3V3"),
         ("R404", loc("HUB_CFG_SEL0"), "GND"),
         ("R405", loc("HUB_CFG_SEL1"), "GND"),
     ):
         expect(net(components, ref, "1"), pin_net, f"{ref} strap pin 1")
         expect(net(components, ref, "2"), rail, f"{ref} strap pin 2")
-    expect_value_prefix(components, "R402", "10k", "NON_REM1 high strap")
-    for ref in ("R403", "R404", "R405"):
+    expect_value_prefix(components, "R403", "10k", "NON_REM0 high strap")
+    for ref in ("R402", "R404", "R405"):
         expect_value_prefix(components, ref, "100k", f"{ref} low strap")
     expect_value_prefix(components, "R417", "0R", "physical internal VBUS-valid hub link")
     expect(net(components, "R417", "1"), "/INTERNAL_USB_VBUS_VALID", "audio-hub physical VBUS-valid input")
@@ -2211,7 +2565,7 @@ def check_system_audio(components):
     for pin, want in {
         "1": "GND", "2": loc("AUDIO_5V"), "3": loc("HUB_PORT1_EN"),
         "4": loc("HUB_PORT2_EN"), "5": loc("HUB_PORT2_OC_N"),
-        "6": loc("SYSTEM_DAC_USB_VBUS"), "7": "/RADIO_CODEC_USB_VBUS",
+        "6": "/RADIO_CODEC_USB_VBUS_HOST", "7": loc("SYSTEM_DAC_USB_VBUS"),
         "8": loc("HUB_PORT1_OC_N"),
     }.items():
         expect(net(components, "U402", pin), want, f"TPS2052B pin {pin}")
@@ -2722,11 +3076,6 @@ def check_main_pcb_contract(components, fps, pcb_text):
         rot %= 360
         if x < 348 or abs(rot - 90) > 0.01:
             fail(f"{ref} should face right edge; got x={x}, rot={rot}")
-    for ref in ("J241", "J251"):
-        x, y, rot = at_tuple(fps[ref].text)
-        rot %= 360
-        if y > 3 or abs(rot - 270) > 0.01:
-            fail(f"{ref} SMA should face rear edge; got x={x}, y={y}, rot={rot}")
     for layer in ('(0 "F.Cu"', '(4 "In1.Cu"', '(6 "In2.Cu"', '(8 "In3.Cu"', '(10 "In4.Cu"', '(2 "B.Cu"'):
         if layer not in pcb_text:
             fail(f"missing expected 6-layer stack entry {layer}")
@@ -2760,12 +3109,7 @@ def check_drc_fatal_categories(report: Path):
         descriptions = " ".join(
             item.get("description", "") for item in violation.get("items", [])
         )
-        refs = set(re.findall(r"\bJ\d+\b", descriptions))
-        if not refs or not refs <= {"J241", "J251"}:
-            fail(
-                "unexpected copper-to-edge violation outside intentional rear "
-                f"SMA launch pads: {descriptions}"
-            )
+        fail(f"unexpected mainboard copper-to-edge violation: {descriptions}")
 
 
 def parse_args() -> argparse.Namespace:
@@ -2793,12 +3137,11 @@ def main() -> int:
     check_dnp_metadata(components)
     check_ec_core(components)
     check_mu_carrier(components, pin_names)
-    check_native_usb_c_ports(components)
-    check_ch224_inputs(components)
+    check_five_port_usb_c_architecture(components)
     check_external_hdmi_path(components)
     check_internal_services(components)
     check_keyboard_interface(components)
-    check_radio_gnss_audio(components)
+    check_optional_radio_interface(components)
     check_system_audio(components)
     check_ethernet(components)
     check_maker_mcu(components)

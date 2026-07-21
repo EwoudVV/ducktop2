@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime as dt
+import re
 import subprocess
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -89,6 +90,24 @@ CRITICAL_REFS = [
     *[f"R{ref}" for ref in range(932, 962)],
 ]
 
+# Current high-risk parts that must exist in the active design.  The historical
+# CRITICAL_REFS list is retained as review history, but it contains retired
+# architecture references and is no longer used as the netlist authority.
+CURRENT_REQUIRED_REFS = {
+    # Battery protection, power path, charger, and always-on control.
+    "J2", "F1", "RS1", "RS11", "U719", "Q703", "Q704", "U2", "U10", "U11", "Q25", "J190",
+    # EC, source manager, Mu, storage, and Wi-Fi.
+    "U4", "U44", "A1", "A2", "J9", "F10", "U170",
+    # Five external USB-C ports: two dual-role PD/data and three source/data-only.
+    "U14", "U41", "U42", "U720", "U721",
+    "U2000", "U2010", "U2001", "U2011", "U2002", "U2012", "U2003", "U2013",
+    "U2004", "U2014", "U2006", "U2016",
+    "J21", "J11", "J22", "J23", "J12", "U1700", "R1730", "R1731", "R1732", "R1733",
+    # User I/O, audio, keyboard, maker MCU, and optional radio boundary.
+    "U45", "J41", "J45", "U400", "U402", "U430", "MK430", "J310", "U500", "U501", "U502",
+    "J2300", "U2300", "U2303", "U2304",
+}
+
 
 contracts: dict[tuple[str, str], Contract] = {}
 
@@ -108,6 +127,13 @@ def add_many(ref: str, pins, expected: str, requirement: str, source: str) -> No
 
 def local(sheet: str, name: str) -> str:
     return f"/{sheet}/{name}"
+
+
+def clear_ref_contracts(*refs: str) -> None:
+    ref_set = set(refs)
+    for key in list(contracts):
+        if key[0] in ref_set:
+            del contracts[key]
 
 
 def load_contracts() -> None:
@@ -463,9 +489,12 @@ def load_contracts() -> None:
         (15, "/KB_RGB_PWR_EN", "PC0 enables both the current-limited keyboard RGB rail and its level buffer."),
         (16, "/KB_RGB_FAULT_N", "PC1 reads the active-low keyboard RGB power-switch fault output."),
         (62, "/KB_RGB_DATA_3V3", "PD15/TIM4_CH4 emits the future keyboard addressable-RGB data stream."),
-        (33, "/PD1_VALID_N", "PC4 reads LTC4417 VALID1 before querying CH224A channel 2."),
-        (37, "/PD2_VALID_N", "PB2 reads LTC4417 VALID2 before querying CH224A channel 3."),
-        (39, "/PD3_VALID_N", "PE8 reads LTC4417 VALID3 before querying CH224A channel 4."),
+        (33, "/PD1_VALID_N", "PC4 reads the left dual-role sink-path validity input."),
+        (37, "/PD2_VALID_N", "PB2 reads the right dual-role sink-path validity input."),
+        (39, "/PD1_TCPC_IRQ_N", "PE8 receives the left TPS25751A interrupt."),
+        (90, "/PD2_TCPC_IRQ_N", "PB4 receives the right TPS25751A interrupt."),
+        (91, "/RADIO_DB_PWR_EN", "PB5 enables the optional radio daughterboard power switch."),
+        (96, "/PD_PROTECT_FAULT_N", "PB8 receives the aggregate dual-role protection fault."),
         (7, "/EC & MCU/SOURCE_MGR_INT_N", "PE5 receives the always-on source-manager interrupt."),
         (17, "/RADIO_VHF_RF_SEL_3V3", "PC2 drives the VHF RF-select level shifter."),
         (18, "/RADIO_UHF_RF_SEL_3V3", "PC3 drives the UHF RF-select level shifter."),
@@ -475,7 +504,6 @@ def load_contracts() -> None:
         (89, "/INTERNAL_USB_VBUS_FAULT_N", "PB3 reads the physical internal-host VBUS switch fault output."),
     ]:
         add("U4", pin, net, requirement, stm)
-    add_nc("U4", 90, "Unused EC GPIO is intentionally NC after removing redundant service headers.", stm)
     for pin, net in {1: "GND", 2: "/EC & MCU/BUCK_SW", 3: "/EC_AON_IN", 4: "/EC & MCU/BUCK_FB", 6: "/EC & MCU/BUCK_BOOT"}.items():
         add("U5", pin, net, "TPS54202 generates MCU_3V3 from the diode-ORed always-on source.", "TI TPS54202 datasheet plus Ducktop2 EC buck contract")
     add_nc("U5", 5, "TPS54202 EN is intentionally floated; its internal pull-up enables the always-on EC rail.", "TI TPS54202 datasheet")
@@ -484,13 +512,13 @@ def load_contracts() -> None:
     source_mgr = "TI TCA9539 datasheet plus Ducktop2 warm-reset fail-off source-manager contract"
     for pin, net in {
         1: "/EC & MCU/SOURCE_MGR_INT_N", 2: "GND", 3: "/EC & MCU/NRST_NET",
-        4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/PD3_PATH_EN",
-        7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/PD3_EFUSE_FAULT_N",
+        4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/EC & MCU/SOURCE_MGR_SPARE1",
+        7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/EC & MCU/SOURCE_MGR_SPARE2",
         10: "/PACK_FAULT_N", 11: "/AUX_FAULT_N", 12: "GND",
         13: "/PACK_RETRY_PULSE", 14: "/AUX_PGOOD",
         15: "/MAIN_USB_VALID_N", 16: "/MAIN_AUX_VALID_N",
-        17: "/AON_FAULT_N", 18: "/EC & MCU/SOURCE_MGR_SPARE1",
-        19: "/EC & MCU/SOURCE_MGR_SPARE2", 20: "/EC & MCU/SOURCE_MGR_SPARE3",
+        17: "/AON_FAULT_N", 18: "/RADIO_DB_PG",
+        19: "/RADIO_DB_FAULT_N", 20: "/RADIO_DB_PRESENT_N",
         21: "GND", 22: "/I2C_SCL", 23: "/I2C_SDA", 24: "/MCU_3V3",
     }.items():
         add("U44", pin, net,
@@ -757,48 +785,6 @@ def load_contracts() -> None:
         add_nc(conn, "A8", "SBU unused on native host data port.", conn_src)
         add_nc(conn, "B8", "SBU unused on native host data port.", conn_src)
 
-    # CH224A PD input ports.
-    for idx, uref in enumerate(["U41", "U42", "U43"], start=1):
-        src = "WCH CH224A/CH224Q datasheet V2.1 plus Ducktop2 autonomous 15 V cold-start contract"
-        prefix = f"/Power Inputs/PD{idx}_"
-        for pin, net in {
-            1: f"{prefix}CH224_VHV", 2: f"{prefix}CH224_SCL", 3: f"{prefix}CH224_SDA",
-            6: f"{prefix}CC2", 7: f"{prefix}CC1", 8: f"{prefix}CH224_VBUS_SENSE", 9: f"{prefix}CFG1", 11: "GND",
-        }.items():
-            add(uref, pin, net, "Raw 5V powers CH224A; its 56k strap requests 15V without the EC, then isolated I2C reports PDO current.", src)
-        add_nc(uref, 4, "D+ is left open for PD-only operation.", src)
-        add_nc(uref, 5, "D- is left open for PD-only operation.", src)
-        add_nc(uref, 10, "PG status not currently consumed.", src)
-        base = 120 + (idx - 1) * 10
-        raw = f"/PD{idx}_VBUS_RAW"
-        for ref, target, note in (
-            (f"C{base}", f"{prefix}CH224_VHV", "1u CH224A VHV bypass behind a zero-ohm raw-VBUS link."),
-            (f"C{base + 1}", raw, "1u raw receptacle VBUS capacitor."),
-            (f"C{800 + (idx - 1) * 10}", raw, "1u raw eFuse input capacitor."),
-            (f"C{801 + (idx - 1) * 10}", raw, "100n raw eFuse high-frequency bypass."),
-        ):
-            add(ref, 1, target, note, src)
-            add(ref, 2, "GND", "Pre-attach VBUS capacitor return.", src)
-
-    for idx, jref in enumerate(["J21", "J22", "J23"], start=1):
-        src = "USB Type-C receptacle pinout plus Ducktop2 PD-input contract"
-        add_many(jref, ["A1", "A12", "B1", "B12", "SH"], "GND", "USB-C shell/ground pins.", src)
-        add_many(jref, ["A4", "A9", "B4", "B9"], f"/PD{idx}_VBUS_RAW", "Negotiated PD VBUS is exported only to the always-on OR and its default-off eFuse input.", src)
-        add(jref, "A5", f"/Power Inputs/PD{idx}_CC1", "USB-C CC1 to CH224A.", src)
-        add(jref, "B5", f"/Power Inputs/PD{idx}_CC2", "USB-C CC2 to CH224A.", src)
-        for pin in ["A6", "B6", "A7", "B7"]:
-            add_nc(jref, pin, "PD inputs are power-only; USB2 is intentionally NC.", src)
-        for pin in ["A2", "A3", "A8", "A10", "A11", "B2", "B3", "B8", "B10", "B11"]:
-            add_nc(jref, pin, "PD input port does not use SuperSpeed/SBU.", src)
-
-    cc_esd = "TI TPD4E05U06 datasheet plus Ducktop2 connector-side CC ESD contract"
-    for idx, ref in enumerate(("U123", "U133", "U143"), start=1):
-        add(ref, 1, f"/Power Inputs/PD{idx}_CC1", "First protected channel clamps connector CC1.", cc_esd)
-        add(ref, 2, f"/Power Inputs/PD{idx}_CC2", "Second protected channel clamps connector CC2.", cc_esd)
-        add_many(ref, (3, 8), "GND", "ESD array ground pins return through a short local path.", cc_esd)
-        for pin in (4, 5, 6, 7, 9, 10):
-            add_nc(ref, pin, "Unused TPD4E05U06 channel or package pin is intentionally NC.", cc_esd)
-
     pd_selector = "ADI LTC4417 Rev G plus Vishay SiSS4409DN datasheets"
     for pin, net in {
         3: "GND", 4: "/Power Inputs/PD1_UV", 5: "/Power Inputs/PD1_OV",
@@ -1013,17 +999,26 @@ def load_contracts() -> None:
     for pin, net in {1: local("Internal Services", "FAN_PWM_GATE"), 2: "GND", 3: local("Internal Services", "FAN_PWM_CONN")}.items():
         add("Q200", pin, net, "Fan PWM is open-drain sink style.", project)
 
-    # OLED, radio, GNSS, audio, keyboard, maker.
-    tca = "TI TCA9548A datasheet plus OLED and CH224A isolated-I2C contract"
-    for pin, net in {1: "GND", 2: "GND", 3: "/SERVICE_MUX_RESET_N", 4: "/Radio/OLED/GNSS/OLED_A_SDA", 5: "/Radio/OLED/GNSS/OLED_A_SCL", 6: "/Radio/OLED/GNSS/OLED_B_SDA", 7: "/Radio/OLED/GNSS/OLED_B_SCL", 8: "/PD1_I2C_SDA", 9: "/PD1_I2C_SCL", 10: "/PD2_I2C_SDA", 11: "/PD2_I2C_SCL", 12: "GND", 13: "/PD3_I2C_SDA", 14: "/PD3_I2C_SCL", 21: "GND", 22: "/I2C_SCL", 23: "/I2C_SDA", 24: "/MCU_3V3"}.items():
-        add("U45", pin, net, "TCA9548A isolates two OLEDs and three identical-address CH224A controllers; address pins strap to 0x70.", tca)
-    for pin in [15, 16, 17, 18, 19, 20]:
+    # OLED and dual TPS25751A service buses.
+    tca = "TI TCA9548A datasheet plus Ducktop2 OLED and TPS25751A service-I2C contract"
+    for pin, net in {
+        1: "GND", 2: "GND", 3: "/SERVICE_MUX_RESET_N",
+        4: "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_A_SDA",
+        5: "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_A_SCL",
+        6: "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_B_SDA",
+        7: "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_B_SCL",
+        8: "/PD1_I2C_SDA", 9: "/PD1_I2C_SCL",
+        10: "/PD2_I2C_SDA", 11: "/PD2_I2C_SCL",
+        12: "GND", 21: "GND", 22: "/I2C_SCL", 23: "/I2C_SDA", 24: "/MCU_3V3",
+    }.items():
+        add("U45", pin, net, "TCA9548A isolates two OLEDs and the two TPS25751A service buses; address pins strap to 0x70.", tca)
+    for pin in [13, 14, 15, 16, 17, 18, 19, 20]:
         add_nc("U45", pin, "Unused TCA9548A downstream channels intentionally NC.", tca)
     for ref, suffix in [("J41", "A"), ("J45", "B")]:
         add(ref, 1, "GND", "SSD1306 module pin 1 is GND.", "Common 4-pin SSD1306 module pinout from user photo")
         add(ref, 2, "/MCU_3V3", "SSD1306 module pin 2 is VDD; use 3.3 V modules.", "Common 4-pin SSD1306 module pinout from user photo")
-        add(ref, 3, f"/Radio/OLED/GNSS/OLED_{suffix}_SCL", "SSD1306 module pin 3 is SCK/SCL.", "Common 4-pin SSD1306 module pinout from user photo")
-        add(ref, 4, f"/Radio/OLED/GNSS/OLED_{suffix}_SDA", "SSD1306 module pin 4 is SDA.", "Common 4-pin SSD1306 module pinout from user photo")
+        add(ref, 3, f"/Wi-Fi{{slash}}Bluetooth & OLEDs/OLED_{suffix}_SCL", "SSD1306 module pin 3 is SCK/SCL.", "Common 4-pin SSD1306 module pinout from user photo")
+        add(ref, 4, f"/Wi-Fi{{slash}}Bluetooth & OLEDs/OLED_{suffix}_SDA", "SSD1306 module pin 4 is SDA.", "Common 4-pin SSD1306 module pinout from user photo")
 
     gnss = "u-blox MAX-M10S datasheet plus Ducktop2 GNSS contract"
     for pin, net in {1: "GND", 2: "/GNSS_UART_RX", 3: "/GNSS_UART_TX", 4: "/GNSS_PPS", 5: "/GNSS_EXTINT", 6: "/MCU_3V3", 7: "/MCU_3V3", 8: "/MCU_3V3", 9: "/GNSS_RESET_N", 10: "GND", 11: "/Radio/OLED/GNSS/GNSS_RF_IN", 12: "GND"}.items():
@@ -1185,8 +1180,8 @@ def load_contracts() -> None:
     add("F400", 1, "/SYS_5V", "Protected system-audio branch enters from SYS_5V.", audio)
     add("F400", 2, local(sa, "AUDIO_5V"), "Audio branch fuse feeds the local amplifier and downstream-port switch.", audio)
     hub = {
-        1: "/RADIO_CODEC_USB_DM", 2: "/RADIO_CODEC_USB_DP",
-        3: local(sa, "SYSTEM_DAC_USB_DM"), 4: local(sa, "SYSTEM_DAC_USB_DP"),
+        1: local(sa, "SYSTEM_DAC_USB_DM"), 2: local(sa, "SYSTEM_DAC_USB_DP"),
+        3: "/RADIO_CODEC_USB_DM_HOST", 4: "/RADIO_CODEC_USB_DP_HOST",
         5: "/SYS_3V3", 10: "/SYS_3V3", 12: local(sa, "HUB_PORT1_EN"),
         13: local(sa, "HUB_PORT1_OC_N"), 14: local(sa, "HUB_CRFILT"),
         15: "/SYS_3V3", 16: local(sa, "HUB_PORT2_EN"),
@@ -1208,7 +1203,7 @@ def load_contracts() -> None:
     for pin, net in {
         1: "GND", 2: local(sa, "AUDIO_5V"), 3: local(sa, "HUB_PORT1_EN"),
         4: local(sa, "HUB_PORT2_EN"), 5: local(sa, "HUB_PORT2_OC_N"),
-        6: local(sa, "SYSTEM_DAC_USB_VBUS"), 7: "/RADIO_CODEC_USB_VBUS",
+        6: "/RADIO_CODEC_USB_VBUS_HOST", 7: local(sa, "SYSTEM_DAC_USB_VBUS"),
         8: local(sa, "HUB_PORT1_OC_N"),
     }.items():
         add("U402", pin, net, "TPS2052B implements individual downstream-port power and OC feedback.", audio)
@@ -1487,6 +1482,367 @@ def load_contracts() -> None:
     add_nc("J902", 6, "SWO is not available on RP2350 SWD.", "Tag-Connect TC2030-CTX pinout")
 
 
+def load_current_architecture_overrides() -> None:
+    """Replace retired contracts for references reused by the current design."""
+    project = "Ducktop2 released five-port USB-C and optional-radio architecture"
+
+    # Pins reused by the current EC/source-manager allocation.
+    for pin in (33, 37, 39, 90, 91, 96):
+        contracts.pop(("U4", str(pin)), None)
+    for pin, net in {
+        33: "/PD1_VALID_N", 37: "/PD2_VALID_N",
+        39: "/PD1_TCPC_IRQ_N", 90: "/PD2_TCPC_IRQ_N",
+        91: "/RADIO_DB_PWR_EN", 96: "/PD_PROTECT_FAULT_N",
+    }.items():
+        add("U4", pin, net, "Current STM32 source-manager and optional-radio allocation.", project)
+
+    clear_ref_contracts("U44")
+    for pin, net in {
+        1: "/EC & MCU/SOURCE_MGR_INT_N", 2: "GND", 3: "/EC & MCU/NRST_NET",
+        4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/EC & MCU/SOURCE_MGR_SPARE1",
+        7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/EC & MCU/SOURCE_MGR_SPARE2",
+        10: "/PACK_FAULT_N", 11: "/AUX_FAULT_N", 12: "GND", 13: "/PACK_RETRY_PULSE",
+        14: "/AUX_PGOOD", 15: "/MAIN_USB_VALID_N", 16: "/MAIN_AUX_VALID_N",
+        17: "/AON_FAULT_N", 18: "/RADIO_DB_PG", 19: "/RADIO_DB_FAULT_N",
+        20: "/RADIO_DB_PRESENT_N", 21: "GND", 22: "/I2C_SCL", 23: "/I2C_SDA", 24: "/MCU_3V3",
+    }.items():
+        add("U44", pin, net, "TCA9535 source manager and optional-radio status allocation.", project)
+
+    contracts.pop(("A1", "129"), None)
+    add("A1", 129, "/PD_PROTECT_FAULT_N", "Mu input receives the combined USB-C connector-protection fault.", project)
+
+    # Current Wi-Fi/OLED sheet path.  These references survived the sheet rename.
+    clear_ref_contracts("F10", "R170", "R171", "U170", "C187")
+    wifi = "Ducktop2 Wi-Fi powered-off isolation contract"
+    add("F10", 1, "/PCIE_3V3", "E-key rail fuse input.", wifi)
+    add("F10", 2, local("Wi-Fi/Bluetooth & OLEDs", "WIFI_3V3"), "Fused E-key local rail.", wifi)
+    for ref, signal in (("R170", "WIFI_W_DISABLE1_N"), ("R171", "WIFI_W_DISABLE2_N")):
+        add(ref, 1, local("Wi-Fi/Bluetooth & OLEDs", "WIFI_3V3"), "Radio-disable pull-up follows E-key power.", wifi)
+        add(ref, 2, local("Wi-Fi/Bluetooth & OLEDs", signal), "Module-side radio-disable signal.", wifi)
+    for pin, net in {
+        1: "/WIFI_W_DISABLE1_N_EC", 7: local("Wi-Fi/Bluetooth & OLEDs", "WIFI_W_DISABLE1_N"),
+        6: "/WIFI_W_DISABLE2_N_EC", 2: local("Wi-Fi/Bluetooth & OLEDs", "WIFI_W_DISABLE2_N"),
+        3: "GND", 4: "GND", 8: local("Wi-Fi/Bluetooth & OLEDs", "WIFI_3V3"),
+    }.items():
+        add("U170", pin, net, "Ioff buffer prevents back-power through E-key control pins.", wifi)
+    add_nc("U170", 5, "Unused SN74LVC3G34 channel pin.", wifi)
+    add("C187", 1, local("Wi-Fi/Bluetooth & OLEDs", "WIFI_3V3"), "E-key isolator bypass rail.", wifi)
+    add("C187", 2, "GND", "E-key isolator bypass return.", wifi)
+
+    # Two default-off PD input paths selected by LTC4418.
+    clear_ref_contracts("U14", "U41", "U42", "U720", "U721", "Q15", "Q16", "Q17", "Q18")
+    selector = "LTC4418 two-input prioritized USB-PD selector"
+    for pin, net in {
+        1: local("Power Inputs", "PD_SEL_TMR"), 2: local("Power Inputs", "PD1_SEL_UV"),
+        3: local("Power Inputs", "PD1_SEL_OV"), 4: local("Power Inputs", "PD2_SEL_UV"),
+        5: local("Power Inputs", "PD2_SEL_OV"), 7: "GND", 8: local("Power Inputs", "PD_SEL_INTVCC"),
+        9: "/PD1_VALID_N", 10: "/PD2_VALID_N", 11: local("Power Inputs", "PD2_SEL_GATE"),
+        12: local("Power Inputs", "PD2_SEL_FET_COMMON"), 13: local("Power Inputs", "PD1_SEL_GATE"),
+        14: local("Power Inputs", "PD1_SEL_FET_COMMON"), 15: "/USB_PD_SELECTED",
+        16: local("Power Inputs", "PD2_VBUS_GATED"), 17: local("Power Inputs", "PD1_VBUS_GATED"),
+        18: local("Power Inputs", "PD_SEL_INTVCC"), 19: local("Power Inputs", "PD_SEL_INTVCC"),
+        20: "GND", 21: "GND",
+    }.items():
+        add("U14", pin, net, "Two-input PD selector connection.", selector)
+    add_nc("U14", 6, "LTC4418 cascade input is unused.", selector)
+
+    for port, input_ref, output_ref in ((1, "Q15", "Q16"), (2, "Q17", "Q18")):
+        for ref in (input_ref, output_ref):
+            add(ref, 1, local("Power Inputs", f"PD{port}_SEL_GATE"), "LTC4418 selector FET gate.", selector)
+            add_many(ref, (2, 3, 4), local("Power Inputs", f"PD{port}_SEL_FET_COMMON"), "Back-to-back selector FET common source.", selector)
+        add(input_ref, 5, local("Power Inputs", f"PD{port}_VBUS_GATED"), "Selected input-side drain.", selector)
+        add(output_ref, 5, "/USB_PD_SELECTED", "Common selected USB-PD output.", selector)
+
+    for port, ref in ((1, "U41"), (2, "U42")):
+        prefix = f"PD{port}"
+        tps = "TI TPS25751A dead-battery DRP controller reference connection"
+        pin_map = {
+            1: local("Power Inputs", f"{prefix}_LDO3V3"),
+            2: local("Power Inputs", f"{prefix}_LDO3V3") if port == 1 else "GND",
+            3: "GND", 4: local("Power Inputs", f"{prefix}_LDO1V5"),
+            5: "GND", 6: "GND", 7: "GND", 8: f"/{prefix}_I2C_SDA", 9: f"/{prefix}_I2C_SCL",
+            10: f"/{prefix}_TCPC_IRQ_N", 11: "GND", 12: "GND", 13: "GND", 14: "GND",
+            15: local("Power Inputs", f"{prefix}_DRAIN_THERMAL"),
+            16: local("Power Inputs", f"{prefix}_EEPROM_SDA"),
+            17: local("Power Inputs", f"{prefix}_EEPROM_SCL"),
+            18: local("Power Inputs", f"{prefix}_EEPROM_IRQ_N"), 19: "GND",
+            20: local("Power Inputs", f"{prefix}_PPHV"), 23: f"/{prefix}_VBUS_RAW",
+            26: local("Power Inputs", f"{prefix}_GPIO_DFP"), 27: "GND",
+            28: local("Power Inputs", f"{prefix}_CC1_SYS"),
+            29: local("Power Inputs", f"{prefix}_CC2_SYS"),
+            30: local("Power Inputs", f"{prefix}_DRAIN_THERMAL"), 31: "GND",
+            32: f"/{prefix}_VBUS_RAW", 34: "/USB_PORT_5V",
+            36: local("Power Inputs", f"{prefix}_GPIO_ATTACH"),
+            37: local("Power Inputs", f"{prefix}_GPIO_FLIP"), 38: "/MCU_3V3", 39: "GND",
+            40: local("Power Inputs", f"{prefix}_DRAIN_THERMAL"),
+        }
+        for pin, net in pin_map.items():
+            add(ref, pin, net, "TPS25751A port controller pin contract.", tps)
+
+    for port, ref in ((1, "U720"), (2, "U721")):
+        prefix = f"PD{port}"
+        efuse = "TI TPS26630 default-off negotiated-input protection contract"
+        for pin in (1, 2, 5):
+            add(ref, pin, local("Power Inputs", f"{prefix}_PPHV"), "Protected-input source pins.", efuse)
+        for pin, net in {
+            6: local("Power Inputs", f"{prefix}_EFUSE_UV"), 7: local("Power Inputs", f"{prefix}_EFUSE_OV"),
+            8: "GND", 9: local("Power Inputs", f"{prefix}_EFUSE_DVDT"),
+            10: local("Power Inputs", f"{prefix}_EFUSE_ILIM"), 11: "GND",
+            12: local("Power Inputs", f"{prefix}_EFUSE_SHDN"), 14: f"/{prefix}_EFUSE_FAULT_N",
+            15: "GND", 17: local("Power Inputs", f"{prefix}_VBUS_GATED"),
+            18: local("Power Inputs", f"{prefix}_VBUS_GATED"), 25: "GND",
+        }.items():
+            add(ref, pin, net, "Default-off negotiated-input eFuse connection.", efuse)
+        for pin in (3, 4, 13, 16, 19, 20, 21, 22, 23, 24):
+            add_nc(ref, pin, "Unused TPS26630 function is explicitly NC.", efuse)
+
+    # Dual-role connector, redriver, CC/USB2 protector, EEPROM, and USB2 gate.
+    dual_ports = {
+        1: {"j": "J21", "mux": "U2000", "protect": "U2001", "eeprom": "U2002", "usb2": "U2003",
+            "control": "U2004", "qualifier": "U2006",
+            "host_dp": "/USBC1_DP", "host_dm": "/USBC1_DM", "host_tx_p": "/USBC1_SSTX_P", "host_tx_n": "/USBC1_SSTX_N"},
+        2: {"j": "J11", "mux": "U2010", "protect": "U2011", "eeprom": "U2012", "usb2": "U2013",
+            "control": "U2014", "qualifier": "U2016",
+            "host_dp": "/HUB_DS1_DP", "host_dm": "/HUB_DS1_DM", "host_tx_p": "/HUB_DS1_SSTX_P", "host_tx_n": "/HUB_DS1_SSTX_N"},
+    }
+    clear_ref_contracts(*(value for cfg in dual_ports.values() for value in (
+        cfg["j"], cfg["mux"], cfg["protect"], cfg["eeprom"], cfg["usb2"],
+        cfg["control"], cfg["qualifier"],
+    )))
+    for port, cfg in dual_ports.items():
+        prefix = f"PD{port}"
+        source = "Ducktop2 dual-role USB 3.2 Gen 2 plus USB-PD port contract"
+        jref = cfg["j"]
+        add_many(jref, ("A1", "A12", "B1", "B12", "SH"), "GND", "Connector grounds and shield.", source)
+        add_many(jref, ("A4", "A9", "B4", "B9"), f"/{prefix}_VBUS_RAW", "Raw connector VBUS before the default-off eFuse.", source)
+        for pin, net in {
+            "A5": local("Power Inputs", f"{prefix}_CC1_CONN"), "B5": local("Power Inputs", f"{prefix}_CC2_CONN"),
+            "A6": local("Power Inputs", f"{prefix}_DP_CONN"), "B6": local("Power Inputs", f"{prefix}_DP_CONN"),
+            "A7": local("Power Inputs", f"{prefix}_DM_CONN"), "B7": local("Power Inputs", f"{prefix}_DM_CONN"),
+            "A2": local("Power Inputs", f"{prefix}_TX1_P"), "A3": local("Power Inputs", f"{prefix}_TX1_N"),
+            "B2": local("Power Inputs", f"{prefix}_TX2_P"), "B3": local("Power Inputs", f"{prefix}_TX2_N"),
+            "B11": local("Power Inputs", f"{prefix}_RX1_P"), "B10": local("Power Inputs", f"{prefix}_RX1_N"),
+            "A11": local("Power Inputs", f"{prefix}_RX2_P"), "A10": local("Power Inputs", f"{prefix}_RX2_N"),
+        }.items():
+            add(jref, pin, net, "Dual-role connector signal.", source)
+        add_nc(jref, "A8", "SBU1 is unused.", source)
+        add_nc(jref, "B8", "SBU2 is unused.", source)
+
+        mux = cfg["mux"]
+        mux_map = {
+            1: "/SYS_3V3", 2: local("Power Inputs", f"{prefix}_MUX_SSEQ1"),
+            3: local("Power Inputs", f"{prefix}_MUX_EQCFG"), 4: local("Power Inputs", f"{prefix}_MUX_SLEEP_N"),
+            6: "/SYS_3V3", 14: local("Power Inputs", f"{prefix}_MUX_VIO"),
+            15: cfg["host_tx_n"], 16: cfg["host_tx_p"], 17: local("Power Inputs", f"{prefix}_MUX_MODE"),
+            18: local("Power Inputs", f"{prefix}_SSRX_RAW_N"), 19: local("Power Inputs", f"{prefix}_SSRX_RAW_P"),
+            20: "/SYS_3V3", 21: local("Power Inputs", f"{prefix}_MUX_FLIP"), 22: "GND",
+            26: local("Power Inputs", f"{prefix}_MUX_EN"), 27: "GND", 28: "/SYS_3V3",
+            30: local("Power Inputs", f"{prefix}_RX1_P"), 31: local("Power Inputs", f"{prefix}_RX1_N"),
+            33: local("Power Inputs", f"{prefix}_CTX1_RAW_P"), 34: local("Power Inputs", f"{prefix}_CTX1_RAW_N"),
+            36: local("Power Inputs", f"{prefix}_RX2_N"), 37: local("Power Inputs", f"{prefix}_RX2_P"),
+            39: local("Power Inputs", f"{prefix}_CTX2_RAW_N"), 40: local("Power Inputs", f"{prefix}_CTX2_RAW_P"), 41: "GND",
+        }
+        for pin, net in mux_map.items():
+            add(mux, pin, net, "TUSB1142 orientation and Gen 2 redriver signal.", source)
+        for pin in (5, 7, 8, 9, 10, 11, 12, 13, 23, 24, 25, 29, 32, 35, 38):
+            add_nc(mux, pin, "Unused TUSB1142 pin is explicitly NC.", source)
+
+        protect = cfg["protect"]
+        for pin, net in {
+            1: local("Power Inputs", f"{prefix}_DP_CONN"), 2: local("Power Inputs", f"{prefix}_DM_CONN"),
+            3: local("Power Inputs", f"{prefix}_CC_ESD_VBIAS"), 4: local("Power Inputs", f"{prefix}_CC1_CONN"),
+            5: local("Power Inputs", f"{prefix}_CC2_CONN"), 6: local("Power Inputs", f"{prefix}_CC2_CONN"),
+            7: local("Power Inputs", f"{prefix}_CC1_CONN"), 8: "GND",
+            9: local("Power Inputs", f"{prefix}_CC_FAULT_LOCAL_N"), 10: local("Power Inputs", f"{prefix}_LDO3V3"),
+            11: local("Power Inputs", f"{prefix}_CC2_SYS"), 12: local("Power Inputs", f"{prefix}_CC1_SYS"),
+            13: "GND", 14: local("Power Inputs", f"{prefix}_DM_HOST_SWITCHED"),
+            15: local("Power Inputs", f"{prefix}_DP_HOST_SWITCHED"), 18: "GND", 21: "GND",
+        }.items():
+            add(protect, pin, net, "TPD4S201 CC and USB2 short-to-VBUS protection path.", source)
+        for pin in (16, 17, 19, 20):
+            add_nc(protect, pin, "Unused TPD4S201 pin is explicitly NC.", source)
+
+        eeprom = cfg["eeprom"]
+        for pin in (1, 2, 3, 4, 7):
+            add(eeprom, pin, "GND", "Private TCPC EEPROM address/write-protect strap.", source)
+        add(eeprom, 5, local("Power Inputs", f"{prefix}_EEPROM_SDA"), "Private TCPC EEPROM SDA.", source)
+        add(eeprom, 6, local("Power Inputs", f"{prefix}_EEPROM_SCL"), "Private TCPC EEPROM SCL.", source)
+        add(eeprom, 8, local("Power Inputs", f"{prefix}_LDO3V3"), "Private EEPROM follows TCPC LDO.", source)
+
+        usb2 = cfg["usb2"]
+        for pin, net in {
+            1: "GND", 2: cfg["host_dp"], 4: local("Power Inputs", f"{prefix}_DP_HOST_SWITCHED"),
+            5: "GND", 6: local("Power Inputs", f"{prefix}_DM_HOST_SWITCHED"), 8: cfg["host_dm"],
+            9: local("Power Inputs", f"{prefix}_USB2_OE_N"), 10: "/SYS_3V3",
+        }.items():
+            add(usb2, pin, net, "USB2 remains disconnected until DFP data role is confirmed.", source)
+        add_nc(usb2, 3, "Unused TS3USB30E throw.", source)
+        add_nc(usb2, 7, "Unused TS3USB30E throw.", source)
+
+        control = cfg["control"]
+        for pin, net in {
+            1: local("Power Inputs", f"{prefix}_GPIO_FLIP"),
+            2: "GND",
+            3: local("Power Inputs", f"{prefix}_HOST_ATTACHED"),
+            4: local("Power Inputs", f"{prefix}_MUX_EN"),
+            5: "/SYS_3V3",
+            6: local("Power Inputs", f"{prefix}_MUX_FLIP"),
+        }.items():
+            add(control, pin, net, "Partial-power-down mux controls fail off when the TCPC is unavailable.", source)
+
+        qualifier = cfg["qualifier"]
+        for pin, net in {
+            1: local("Power Inputs", f"{prefix}_GPIO_DFP"),
+            2: local("Power Inputs", f"{prefix}_GPIO_ATTACH"),
+            3: "GND",
+            4: local("Power Inputs", f"{prefix}_HOST_ATTACHED"),
+            5: "/SYS_3V3",
+        }.items():
+            add(qualifier, pin, net, "Host data is enabled only when TPS25751A reports both DFP role and attachment.", source)
+
+    # Four-port hub. Downstream port 1 feeds J11; ports 2/3/4 feed J22/J23/J12.
+    clear_ref_contracts("U1700", "J22", "J23", "J12")
+    hub_sheet = "Native USB-C I/O"
+    hub = "Microchip USB7206C four-active-port USB 3.2 hub contract"
+    for pin, net in {
+        2: "/INTERNAL_USB_VBUS_VALID",
+        5: "/HUB_DS1_DP", 6: "/HUB_DS1_DM", 7: local(hub_sheet, "HUB_DS1_TX_RAW_P"),
+        8: local(hub_sheet, "HUB_DS1_TX_RAW_N"), 10: "/HUB_DS1_SSRX_P", 11: "/HUB_DS1_SSRX_N",
+        14: local(hub_sheet, "HUB_DS2_DP"), 15: local(hub_sheet, "HUB_DS2_DM"),
+        16: local(hub_sheet, "HUB_DS2_TX_RAW_P"), 17: local(hub_sheet, "HUB_DS2_TX_RAW_N"),
+        19: local(hub_sheet, "HUB_DS2_SSRX_P"), 20: local(hub_sheet, "HUB_DS2_SSRX_N"),
+        27: local(hub_sheet, "HUB_DS3_DP"), 28: local(hub_sheet, "HUB_DS3_DM"),
+        29: local(hub_sheet, "HUB_DS3_TX_RAW_P"), 30: local(hub_sheet, "HUB_DS3_TX_RAW_N"),
+        32: local(hub_sheet, "HUB_DS3_SSRX_P"), 33: local(hub_sheet, "HUB_DS3_SSRX_N"),
+        34: local(hub_sheet, "HUB_DS4_DP"), 35: local(hub_sheet, "HUB_DS4_DM"),
+        36: local(hub_sheet, "HUB_DS4_TX_RAW_P"), 37: local(hub_sheet, "HUB_DS4_TX_RAW_N"),
+        39: local(hub_sheet, "HUB_DS4_SSRX_P"), 40: local(hub_sheet, "HUB_DS4_SSRX_N"),
+        89: "/USBC2_DP", 90: "/USBC2_DM", 91: local(hub_sheet, "HUB_UP_TX_RAW_P"),
+        92: local(hub_sheet, "HUB_UP_TX_RAW_N"), 94: "/USBC2_SSTX_P", 95: "/USBC2_SSTX_N",
+    }.items():
+        add("U1700", pin, net, "Hub upstream or active downstream data lane.", hub)
+    for pin, ref, name in (
+        (41, "R1733", "HUB_DIS6_DM"),
+        (42, "R1732", "HUB_DIS6_DP"),
+        (81, "R1730", "HUB_DIS5_DP"),
+        (82, "R1731", "HUB_DIS5_DM"),
+    ):
+        strap_net = local(hub_sheet, name)
+        add("U1700", pin, strap_net, "Unused USB7206C downstream port strap is held high through a dedicated zero-ohm link.", hub)
+        add(ref, 1, "/SYS_3V3", "Zero-ohm source for the mandatory high port-disable strap.", hub)
+        add(ref, 2, strap_net, "Zero-ohm destination at the USB7206C D+/D- strap pin.", hub)
+    for pin in (83, 84, 86, 87):
+        add_nc("U1700", pin, "Unused hub downstream port is explicitly disabled and NC.", hub)
+
+    for jref, ds in (("J22", 2), ("J23", 3), ("J12", 4)):
+        source = "Ducktop2 source-only USB 3.2 Gen 2 port contract"
+        add_many(jref, ("A1", "A12", "B1", "B12", "SH"), "GND", "Connector grounds and shield.", source)
+        add_many(jref, ("A4", "A9", "B4", "B9"), local(hub_sheet, f"{jref}_VBUS"), "Current-limited source VBUS.", source)
+        for pin, net in {
+            "A5": local(hub_sheet, f"{jref}_CC1"), "B5": local(hub_sheet, f"{jref}_CC2"),
+            "A6": local(hub_sheet, f"HUB_DS{ds}_DP"), "B6": local(hub_sheet, f"HUB_DS{ds}_DP"),
+            "A7": local(hub_sheet, f"HUB_DS{ds}_DM"), "B7": local(hub_sheet, f"HUB_DS{ds}_DM"),
+            "A2": local(hub_sheet, f"{jref}_TX1_P"), "A3": local(hub_sheet, f"{jref}_TX1_N"),
+            "B2": local(hub_sheet, f"{jref}_TX2_P"), "B3": local(hub_sheet, f"{jref}_TX2_N"),
+            "B11": local(hub_sheet, f"{jref}_RX1_P"), "B10": local(hub_sheet, f"{jref}_RX1_N"),
+            "A11": local(hub_sheet, f"{jref}_RX2_P"), "A10": local(hub_sheet, f"{jref}_RX2_N"),
+        }.items():
+            add(jref, pin, net, "Source-only connector data or CC signal.", source)
+        add_nc(jref, "A8", "SBU1 is unused.", source)
+        add_nc(jref, "B8", "SBU2 is unused.", source)
+
+    # Two four-pin OLED modules behind dedicated TCA9548A channels.
+    clear_ref_contracts("U45", "J41", "J45")
+    oled = "Dual four-pin SSD1306 modules through TCA9548A"
+    for pin, net in {
+        1: "GND", 2: "GND", 3: "/SERVICE_MUX_RESET_N",
+        4: local("Wi-Fi/Bluetooth & OLEDs", "OLED_A_SDA"), 5: local("Wi-Fi/Bluetooth & OLEDs", "OLED_A_SCL"),
+        6: local("Wi-Fi/Bluetooth & OLEDs", "OLED_B_SDA"), 7: local("Wi-Fi/Bluetooth & OLEDs", "OLED_B_SCL"),
+        8: "/PD1_I2C_SDA", 9: "/PD1_I2C_SCL", 10: "/PD2_I2C_SDA", 11: "/PD2_I2C_SCL",
+        12: "GND", 21: "GND", 22: "/I2C_SCL", 23: "/I2C_SDA", 24: "/MCU_3V3",
+    }.items():
+        add("U45", pin, net, "OLED and two TCPC I2C channel allocation.", oled)
+    for pin in range(13, 21):
+        add_nc("U45", pin, "Unused TCA9548A channel is explicitly NC.", oled)
+    for ref, suffix in (("J41", "A"), ("J45", "B")):
+        for pin, net in {
+            1: "GND", 2: "/MCU_3V3", 3: local("Wi-Fi/Bluetooth & OLEDs", f"OLED_{suffix}_SCL"),
+            4: local("Wi-Fi/Bluetooth & OLEDs", f"OLED_{suffix}_SDA"),
+        }.items():
+            add(ref, pin, net, "User-supplied SSD1306 module pinout GND/VDD/SCK/SDA.", oled)
+
+    # The radio/GNSS/codec assembly is optional. The mainboard boundary must be
+    # inert when J2300 is empty and may not back-power an absent daughterboard.
+    clear_ref_contracts("J2300", "U2300", "U2303", "U2304")
+    radio = "Ducktop2 optional radio daughterboard fail-safe interface"
+    add_many("J2300", range(1, 9), local("Optional Radio Daughterboard Interface", "RADIO_DB_5V"), "Parallel current-sharing radio-board supply contacts.", radio)
+    add_many("J2300", (9, 10, 11, 12, 13, 14, 15, 16, 21, 22, 27, 32, 37, 43, *range(45, 61), "MP"), "GND", "Ground and return contacts remain harmless with the daughterboard absent.", radio)
+    for pin in (17, 18):
+        add("J2300", pin, local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_VBUS_DB"), "Current-limited codec USB VBUS contacts.", radio)
+    radio_header = {
+        19: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DP_DB"),
+        20: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DM_DB"),
+        23: local("Optional Radio Daughterboard Interface", "RADIO_VHF_UART_TX_DB"),
+        24: local("Optional Radio Daughterboard Interface", "RADIO_VHF_UART_RX_DB"),
+        25: local("Optional Radio Daughterboard Interface", "RADIO_UHF_UART_TX_DB"),
+        26: local("Optional Radio Daughterboard Interface", "RADIO_UHF_UART_RX_DB"),
+        28: local("Optional Radio Daughterboard Interface", "RADIO_VHF_PTT_N_DB"),
+        29: local("Optional Radio Daughterboard Interface", "RADIO_UHF_PTT_N_DB"),
+        30: local("Optional Radio Daughterboard Interface", "RADIO_VHF_PD_N_DB"),
+        31: local("Optional Radio Daughterboard Interface", "RADIO_UHF_PD_N_DB"),
+        33: local("Optional Radio Daughterboard Interface", "RADIO_VHF_SQL_DB"),
+        34: local("Optional Radio Daughterboard Interface", "RADIO_UHF_SQL_DB"),
+        35: local("Optional Radio Daughterboard Interface", "RADIO_VHF_RF_SEL_3V3_DB"),
+        36: local("Optional Radio Daughterboard Interface", "RADIO_UHF_RF_SEL_3V3_DB"),
+        38: local("Optional Radio Daughterboard Interface", "GNSS_UART_RX_DB"),
+        39: local("Optional Radio Daughterboard Interface", "GNSS_UART_TX_DB"),
+        40: local("Optional Radio Daughterboard Interface", "GNSS_RESET_N_DB"),
+        41: local("Optional Radio Daughterboard Interface", "GNSS_PPS_DB"),
+        42: local("Optional Radio Daughterboard Interface", "GNSS_EXTINT_DB"),
+        44: "/RADIO_DB_PRESENT_N",
+    }
+    for pin, net in radio_header.items():
+        add("J2300", pin, net, "Optional daughterboard signal boundary.", radio)
+    radio_signals = {
+        23: "RADIO_VHF_UART_TX", 24: "RADIO_VHF_UART_RX",
+        25: "RADIO_UHF_UART_TX", 26: "RADIO_UHF_UART_RX",
+        28: "RADIO_VHF_PTT_N", 29: "RADIO_UHF_PTT_N",
+        30: "RADIO_VHF_PD_N", 31: "RADIO_UHF_PD_N",
+        33: "RADIO_VHF_SQL", 34: "RADIO_UHF_SQL",
+        35: "RADIO_VHF_RF_SEL_3V3", 36: "RADIO_UHF_RF_SEL_3V3",
+        38: "GNSS_UART_RX", 39: "GNSS_UART_TX", 40: "GNSS_RESET_N",
+        41: "GNSS_PPS", 42: "GNSS_EXTINT",
+    }
+    for index, (pin, signal) in enumerate(radio_signals.items()):
+        ref = f"R{2340 + index}"
+        add(ref, 1, f"/{signal}", "Mainboard side of removable-radio fault isolation.", radio)
+        add(ref, 2, radio_header[pin], "Connector side of removable-radio fault isolation.", radio)
+    for pin, net in {
+        1: "/RADIO_DB_PWR_EN", 2: "GND", 4: "/RADIO_DB_FAULT_N", 5: "/SYS_5V",
+        6: local("Optional Radio Daughterboard Interface", "RADIO_DB_5V"),
+        7: local("Optional Radio Daughterboard Interface", "RADIO_DB_DVDT"), 8: "GND",
+        9: local("Optional Radio Daughterboard Interface", "RADIO_DB_ILM"),
+    }.items():
+        add("U2300", pin, net, "Default-off radio daughterboard load switch.", radio)
+    add_nc("U2300", 3, "AUXOFF is unused.", radio)
+    add_nc("U2300", 10, "ITIMER is unused for the released radio branch.", radio)
+    for pin, net in {
+        1: "GND", 2: "/RADIO_CODEC_USB_DP_HOST",
+        4: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DP_DB"), 5: "GND",
+        6: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DM_DB"),
+        8: "/RADIO_CODEC_USB_DM_HOST", 9: local("Optional Radio Daughterboard Interface", "RADIO_USB_OE_N"),
+        10: "/MCU_3V3",
+    }.items():
+        add("U2303", pin, net, "USB2 disconnect prevents an absent radio codec from loading or back-powering the host.", radio)
+    add_nc("U2303", 3, "Unused USB switch throw.", radio)
+    add_nc("U2303", 7, "Unused USB switch throw.", radio)
+    for pin, net in {
+        1: "/RADIO_CODEC_USB_VBUS_HOST", 2: "GND", 3: "/RADIO_DB_PG", 4: "/RADIO_DB_FAULT_N",
+        5: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_ILIM"),
+        6: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_VBUS_DB"),
+    }.items():
+        add("U2304", pin, net, "Codec VBUS is separately current-limited and off when the radio board is absent.", radio)
+
 def export_netlist() -> None:
     NETLIST.parent.mkdir(exist_ok=True)
     subprocess.run(
@@ -1566,6 +1922,15 @@ def pin_sort_key(pin: str):
     return (2, pin)
 
 
+def ref_sort_key(ref: str):
+    split = 0
+    while split < len(ref) and not ref[split].isdigit():
+        split += 1
+    prefix = ref[:split]
+    suffix = ref[split:]
+    return (prefix, int(suffix) if suffix.isdigit() else 10**9, suffix)
+
+
 def row_status(ref: str, pin: str, actual: str, contract: Contract | None):
     if contract is None:
         return (
@@ -1575,7 +1940,10 @@ def row_status(ref: str, pin: str, actual: str, contract: Contract | None):
             "Not yet contract-checked",
         )
     if contract.mode == "unconnected":
-        passed = actual.startswith(f"unconnected-({ref}-")
+        passed = re.fullmatch(
+            rf"unconnected-\({re.escape(ref)}[A-Z]?-.*Pad{re.escape(pin)}\)",
+            actual,
+        ) is not None
     else:
         passed = actual == contract.expected
     return (
@@ -1588,11 +1956,14 @@ def row_status(ref: str, pin: str, actual: str, contract: Contract | None):
 
 def generate_rows(comp_meta, comp_pins):
     rows = []
-    missing_refs = []
-    for ref in CRITICAL_REFS:
+    missing_refs = sorted(CURRENT_REQUIRED_REFS - set(comp_meta), key=ref_sort_key)
+    selected_refs = sorted(
+        CURRENT_REQUIRED_REFS | {ref for ref, _pin in contracts if ref in comp_meta},
+        key=ref_sort_key,
+    )
+    for ref in selected_refs:
         meta = comp_meta.get(ref)
         if not meta:
-            missing_refs.append(ref)
             continue
         all_pins = set(meta["libpins"]) | set(comp_pins.get(ref, {})) | {
             pin for (r, pin) in contracts
@@ -1697,7 +2068,9 @@ def write_md(rows, missing_refs) -> None:
         "- Battery fuse/shunt path, BQ25798 single-input wiring, and BQ34Z100 fuel gauge pins are contracted.",
         "- STM32 power, reset, boot, SWD, VCAP, and EC buck pins are contracted; general GPIO allocation rows remain REVIEW.",
         "- LattePanda Mu VIN, USB2 allocation, native USB3 pairs, NVMe PCIe lanes, and exposed display outputs are contracted; the rest of the module pins remain REVIEW.",
-        "- TPS25810, HD3SS6126, CH224A, USB-C connectors, external HDMI, SSD1306 headers, TCA9548A, GNSS, RF switch, radio sockets, keyboard FFC, and maker headers are contracted where the project has a clear decision.",
+        "- Both TPS25751A dual-role ports, three source-only USB-C ports, USB7206C hub, redrivers, protectors, EEPROMs, and default-off input paths are contracted.",
+        "- The optional radio daughterboard boundary is contracted so an absent board cannot block normal laptop operation or receive back-power.",
+        "- External HDMI, four-pin SSD1306 headers, TCA9548A, keyboard FFC, audio, and maker headers are contracted where the project has a clear decision.",
         "- PCM2900C playback/record, IM68A130 microphone, privacy-enable path, speaker BTL outputs, RTL8111H HSIO6 PCIe, MDI ESD, and JXD1 integrated-magnetics jack pins are explicitly contracted.",
         "- The native Mu eDP connector and panel harness are release-gated in docs/display-direct-edp.md because neither connector is routed through the carrier-board netlist.",
         "- REVIEW is not failure. It is a deliberate flag for independent review.",
@@ -1728,6 +2101,7 @@ def main() -> int:
     CSV_OUT = ROOT / "verification" / f"pin_by_pin_review_{args.report_date}.csv"
     MD_OUT = ROOT / "verification" / f"PIN_BY_PIN_REVIEW_{args.report_date}.md"
     load_contracts()
+    load_current_architecture_overrides()
     export_netlist()
     comp_meta, comp_pins = parse_netlist()
     rows, missing_refs = generate_rows(comp_meta, comp_pins)

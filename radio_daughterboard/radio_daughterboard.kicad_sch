@@ -1,0 +1,635 @@
+(kicad_sch
+  (version 20260306)
+  (generator "eeschema")
+  (generator_version "10.0")
+  (uuid 723c36f1-1bae-596d-ba5b-ab686438b659)
+  (paper "A2")
+  (lib_symbols
+  )
+(sheet
+  (at 30.48 39.37)
+  (size 119.38 149.86)
+  (stroke (width 0.1524) (type solid))
+  (fill (color 0 0 0 0.0))
+  (uuid 07edb036-1bb6-5266-86cd-88d2d04aecef)
+  (property "Sheetname" "Core & Mainboard Connector"
+    (at 30.48 38.1 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (property "Sheetfile" "01_core.kicad_sch"
+    (at 30.48 190.5 0)
+    (effects (font (size 1.27 1.27)) (justify left top))
+  )
+  (pin "RADIO_DB_5V" bidirectional
+    (at 149.86 44.45 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f00b99ed-95c6-5f37-a91b-36c8c8294120)
+  )
+  (pin "RADIO_CODEC_USB_VBUS" bidirectional
+    (at 149.86 49.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 614dfef9-984a-58c0-a456-0b483492db97)
+  )
+  (pin "RADIO_CODEC_USB_DP" bidirectional
+    (at 149.86 54.61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 24d902f3-4390-58aa-95cd-ce0dbb2c501d)
+  )
+  (pin "RADIO_CODEC_USB_DM" bidirectional
+    (at 149.86 59.69 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid eb44ece7-3766-5a3a-ac73-11f665990370)
+  )
+  (pin "RADIO_VHF_UART_TX" bidirectional
+    (at 149.86 64.77 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9506d11c-38a2-5a0d-b051-4012b3c61ec4)
+  )
+  (pin "RADIO_VHF_UART_RX" bidirectional
+    (at 149.86 69.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid b5f464f4-461a-588c-812d-508423807796)
+  )
+  (pin "RADIO_UHF_UART_TX" bidirectional
+    (at 149.86 74.93 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid c2c5d7a7-9b51-530b-a798-cfbabfc70854)
+  )
+  (pin "RADIO_UHF_UART_RX" bidirectional
+    (at 149.86 80.01 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7f14a873-82e4-5172-9e7b-5e6156c0cd95)
+  )
+  (pin "RADIO_VHF_PTT_N" bidirectional
+    (at 149.86 85.09 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid fc674d04-211c-54e0-bb32-4cc179c6af84)
+  )
+  (pin "RADIO_UHF_PTT_N" bidirectional
+    (at 149.86 90.17 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 059da550-e26d-52cc-aa68-5b30de0b2afc)
+  )
+  (pin "RADIO_VHF_PD_N" bidirectional
+    (at 149.86 95.25 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 5e0746b8-9fa5-52b7-9938-c3418b05352d)
+  )
+  (pin "RADIO_UHF_PD_N" bidirectional
+    (at 149.86 100.33 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9c8089fd-9c92-5748-a532-7da4a1c06f82)
+  )
+  (pin "RADIO_VHF_SQL" bidirectional
+    (at 149.86 105.41 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 27dc1eea-6b04-54f3-9275-d71202809b2d)
+  )
+  (pin "RADIO_UHF_SQL" bidirectional
+    (at 149.86 110.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 12ad30d2-450e-50a3-be17-af14823cf003)
+  )
+  (pin "RADIO_VHF_RF_SEL_3V3" bidirectional
+    (at 149.86 115.57 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid cc053cc7-162b-5bee-bd35-e9781187b11a)
+  )
+  (pin "RADIO_UHF_RF_SEL_3V3" bidirectional
+    (at 149.86 120.65 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid b4da6a9d-a707-52cf-b134-8fa7745feafe)
+  )
+  (pin "GNSS_UART_RX" bidirectional
+    (at 149.86 125.73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid affd20ad-c506-5f69-a7ee-bec393ed1a18)
+  )
+  (pin "GNSS_UART_TX" bidirectional
+    (at 149.86 130.81 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid c0291e91-e5b4-58b6-8044-6e7830af3bdf)
+  )
+  (pin "GNSS_RESET_N" bidirectional
+    (at 149.86 135.89 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f24e8eca-d7e9-597b-9d7e-185a2ec9a863)
+  )
+  (pin "GNSS_PPS" bidirectional
+    (at 149.86 140.97 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e6e4a045-e6b2-52f9-af75-b1998e67755e)
+  )
+  (pin "GNSS_EXTINT" bidirectional
+    (at 149.86 146.05 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid aeaea252-ab20-5209-912d-d6d736c4e1c3)
+  )
+  (pin "RADIO_DB_3V3" bidirectional
+    (at 149.86 151.13 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9174db0b-b819-5572-9c8b-9a80409129b7)
+  )
+)
+(sheet
+  (at 180.34 39.37)
+  (size 119.38 149.86)
+  (stroke (width 0.1524) (type solid))
+  (fill (color 0 0 0 0.0))
+  (uuid fda02120-a83a-5ebb-baa8-77248c1d9158)
+  (property "Sheetname" "VHF & UHF Radios"
+    (at 180.34 38.1 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (property "Sheetfile" "02_radios.kicad_sch"
+    (at 180.34 190.5 0)
+    (effects (font (size 1.27 1.27)) (justify left top))
+  )
+  (pin "RADIO_DB_5V" bidirectional
+    (at 299.72 44.45 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 961b2bf3-69bd-5af1-bc44-efcec10fa22d)
+  )
+  (pin "RADIO_VHF_SQL" bidirectional
+    (at 299.72 49.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid fe6ae4b5-1282-5862-8e1b-28955a12d06c)
+  )
+  (pin "RADIO_VHF_MIC_IN" bidirectional
+    (at 299.72 54.61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 86fb9a22-c899-5d83-b724-fd23d8e0547e)
+  )
+  (pin "RADIO_UHF_SQL" bidirectional
+    (at 299.72 59.69 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 1af9c8bf-e8df-504f-888b-3e248510cd32)
+  )
+  (pin "RADIO_UHF_MIC_IN" bidirectional
+    (at 299.72 64.77 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 8c840db3-4665-5d79-a65e-e4cc74500111)
+  )
+  (pin "RADIO_VHF_PTT_N" bidirectional
+    (at 299.72 69.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 8c1cdb28-6147-53ef-8f90-4e58b07e95bd)
+  )
+  (pin "RADIO_UHF_PTT_N" bidirectional
+    (at 299.72 74.93 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f236e014-6e47-5e8c-b083-2f4f2d61dfb3)
+  )
+  (pin "RADIO_DB_3V3" bidirectional
+    (at 299.72 80.01 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 68d81834-787f-5341-b5b3-97cbb28015f6)
+  )
+  (pin "RADIO_VHF_UART_TX" bidirectional
+    (at 299.72 85.09 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 22de499d-6e63-521e-8849-c4b91f2f7aee)
+  )
+  (pin "RADIO_VHF_PD_N" bidirectional
+    (at 299.72 90.17 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 12d4c06b-8b9a-56cc-bbd6-d91339916d8a)
+  )
+  (pin "RADIO_VHF_UART_RX" bidirectional
+    (at 299.72 95.25 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f253e661-cb69-5a4a-afe2-61dacc6a151e)
+  )
+  (pin "RADIO_UHF_UART_TX" bidirectional
+    (at 299.72 100.33 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 57a1426f-d2cd-5ea5-b392-54b35420e3ba)
+  )
+  (pin "RADIO_UHF_PD_N" bidirectional
+    (at 299.72 105.41 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 44951566-8bd0-5d0e-bebf-1b3d04dce821)
+  )
+  (pin "RADIO_UHF_UART_RX" bidirectional
+    (at 299.72 110.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 27becce2-45f5-55f3-b387-585cba747594)
+  )
+  (pin "RADIO_VHF_RF_SEL_3V3" bidirectional
+    (at 299.72 115.57 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 618e9a30-c872-5996-951d-6b5610eba33c)
+  )
+  (pin "RADIO_UHF_RF_SEL_3V3" bidirectional
+    (at 299.72 120.65 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6ec8c7ee-86e0-5f5f-8ed0-816156dd8451)
+  )
+  (pin "RADIO_VHF_AUDIO_OUT" bidirectional
+    (at 299.72 125.73 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 1a53a570-b5c9-5c43-93bc-9a3eeaa31826)
+  )
+  (pin "RADIO_UHF_AUDIO_OUT" bidirectional
+    (at 299.72 130.81 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6e17b5c1-47bc-5963-8f38-998d2cc4bba0)
+  )
+)
+(sheet
+  (at 330.2 39.37)
+  (size 119.38 149.86)
+  (stroke (width 0.1524) (type solid))
+  (fill (color 0 0 0 0.0))
+  (uuid b8998dd0-fd02-5c89-b51a-c8f136024c79)
+  (property "Sheetname" "GNSS"
+    (at 330.2 38.1 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (property "Sheetfile" "03_gnss.kicad_sch"
+    (at 330.2 190.5 0)
+    (effects (font (size 1.27 1.27)) (justify left top))
+  )
+  (pin "RADIO_DB_3V3" bidirectional
+    (at 449.58 44.45 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7338e4bf-1c20-57a6-bbe8-1a81986e6b2c)
+  )
+  (pin "GNSS_UART_TX" bidirectional
+    (at 449.58 49.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 86f94182-cb19-59ec-b2e8-9e9569b0760f)
+  )
+  (pin "GNSS_RESET_N" bidirectional
+    (at 449.58 54.61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid cd4813e2-dd61-5ea4-be13-7297981b9c6f)
+  )
+  (pin "GNSS_EXTINT" bidirectional
+    (at 449.58 59.69 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid b03d2af3-464f-504a-afba-06a99d618e51)
+  )
+  (pin "GNSS_UART_RX" bidirectional
+    (at 449.58 64.77 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 0c8d981d-2665-5dce-9d90-35e4b3f5b295)
+  )
+  (pin "GNSS_PPS" bidirectional
+    (at 449.58 69.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 08e427b0-ba58-5943-a38c-7d4c26f941d6)
+  )
+)
+(sheet
+  (at 480.06 39.37)
+  (size 119.38 149.86)
+  (stroke (width 0.1524) (type solid))
+  (fill (color 0 0 0 0.0))
+  (uuid 1d8c5d7c-d61c-50d6-b8b2-81577330717e)
+  (property "Sheetname" "USB Radio Audio"
+    (at 480.06 38.1 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+  )
+  (property "Sheetfile" "04_codec.kicad_sch"
+    (at 480.06 190.5 0)
+    (effects (font (size 1.27 1.27)) (justify left top))
+  )
+  (pin "RADIO_CODEC_USB_DP" bidirectional
+    (at 599.44 44.45 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 87fbdb62-fbaa-51ef-826f-8917e5f55614)
+  )
+  (pin "RADIO_CODEC_USB_DM" bidirectional
+    (at 599.44 49.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f7f0d235-9265-5107-a9e1-6be2052a84f6)
+  )
+  (pin "RADIO_CODEC_USB_VBUS" bidirectional
+    (at 599.44 54.61 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid aa785af4-aff4-5150-b611-8af7c1d4163b)
+  )
+  (pin "RADIO_VHF_AUDIO_OUT" bidirectional
+    (at 599.44 59.69 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid b2116daa-7246-5695-8ef0-80971dba7dcd)
+  )
+  (pin "RADIO_UHF_AUDIO_OUT" bidirectional
+    (at 599.44 64.77 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid eb68825e-add4-525e-8d3e-2e00665ad3b6)
+  )
+  (pin "RADIO_VHF_MIC_IN" bidirectional
+    (at 599.44 69.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 43353181-5183-586c-a40f-1460cdc26b34)
+  )
+  (pin "RADIO_UHF_MIC_IN" bidirectional
+    (at 599.44 74.93 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 4db7f6a0-67a7-5e70-be84-e476699fdec2)
+  )
+  (pin "RADIO_DB_3V3" bidirectional
+    (at 599.44 80.01 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 84c10212-cee2-56c2-9b1d-9ef1b4d66b80)
+  )
+  (pin "RADIO_VHF_PTT_N" bidirectional
+    (at 599.44 85.09 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 5d4a8778-661b-5aab-b203-bd725a109398)
+  )
+  (pin "RADIO_UHF_PTT_N" bidirectional
+    (at 599.44 90.17 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 6fc3467a-089b-5a33-9bb9-5195ec4c4704)
+  )
+)
+(label "RADIO_DB_5V"
+  (at 149.86 44.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 958f822a-c198-5fff-8bbb-48613372faf8)
+)
+(label "RADIO_DB_5V"
+  (at 299.72 44.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 78f86b28-001e-5c91-b613-0c1b16e6dad3)
+)
+(label "RADIO_CODEC_USB_VBUS"
+  (at 149.86 49.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b0331111-6ff1-5c3a-b668-a1c2fc28eb9f)
+)
+(label "RADIO_CODEC_USB_VBUS"
+  (at 599.44 54.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 36248841-2181-59a2-a3d1-626569e09aa0)
+)
+(label "RADIO_CODEC_USB_DP"
+  (at 149.86 54.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 37e38e55-3245-5a2f-ba9f-c9dc888371da)
+)
+(label "RADIO_CODEC_USB_DP"
+  (at 599.44 44.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8f8bca88-5b8c-595c-b90f-d281f90782ae)
+)
+(label "RADIO_CODEC_USB_DM"
+  (at 149.86 59.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 083938b2-fb7f-5d15-aeca-0b6613367323)
+)
+(label "RADIO_CODEC_USB_DM"
+  (at 599.44 49.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1be1891a-7cb1-512a-9cf0-0d8ce90b4cad)
+)
+(label "RADIO_VHF_UART_TX"
+  (at 149.86 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dd81b7ed-c213-5b24-82bf-5125c9f298a2)
+)
+(label "RADIO_VHF_UART_TX"
+  (at 299.72 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 83f1eef1-60f3-5a86-9620-dae891fee0c6)
+)
+(label "RADIO_VHF_UART_RX"
+  (at 149.86 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 040e58a8-ded8-5ee0-8779-eb9219b3957c)
+)
+(label "RADIO_VHF_UART_RX"
+  (at 299.72 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1813d776-4829-529e-af5d-74399ae21c0a)
+)
+(label "RADIO_UHF_UART_TX"
+  (at 149.86 74.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d7e9c1e7-f08f-5dc9-b12c-ad26e5d4da6a)
+)
+(label "RADIO_UHF_UART_TX"
+  (at 299.72 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 183622bf-4640-5efd-9c7f-34e899fc90c4)
+)
+(label "RADIO_UHF_UART_RX"
+  (at 149.86 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7eeee63e-bc2a-5b7c-b4e3-d4f5aefa9933)
+)
+(label "RADIO_UHF_UART_RX"
+  (at 299.72 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fd7c9998-ddfc-585f-85d5-e72b51895bff)
+)
+(label "RADIO_VHF_PTT_N"
+  (at 149.86 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 37d2192c-b20a-5315-b6eb-47f7f0e3041c)
+)
+(label "RADIO_VHF_PTT_N"
+  (at 299.72 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 52a931bd-815e-512c-83f7-09f391ad2ea5)
+)
+(label "RADIO_VHF_PTT_N"
+  (at 599.44 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 37e9661a-5149-59b8-a1f0-06edb9a1e9d3)
+)
+(label "RADIO_UHF_PTT_N"
+  (at 149.86 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fca3c8d4-7b82-565a-a0fa-a94588b7b46b)
+)
+(label "RADIO_UHF_PTT_N"
+  (at 299.72 74.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f1bd6829-75d3-5afd-92e4-d4af747240f8)
+)
+(label "RADIO_UHF_PTT_N"
+  (at 599.44 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a5ee0112-7d7e-5cf1-8493-8d48747cd7be)
+)
+(label "RADIO_VHF_PD_N"
+  (at 149.86 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 28c46243-dc80-51c9-bbac-b718b82bbcf2)
+)
+(label "RADIO_VHF_PD_N"
+  (at 299.72 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid eb2ecb62-cbf5-5e0e-9574-d829ce4ecf6c)
+)
+(label "RADIO_UHF_PD_N"
+  (at 149.86 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cf0d8988-b5be-5f06-98da-bb31fde64576)
+)
+(label "RADIO_UHF_PD_N"
+  (at 299.72 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 58ebad18-7829-5c5f-a12f-b6f1292d4bf3)
+)
+(label "RADIO_VHF_SQL"
+  (at 149.86 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 625ddc2d-44df-5c7c-9c95-14998ccff9e6)
+)
+(label "RADIO_VHF_SQL"
+  (at 299.72 49.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ef671145-dd28-594e-bcc7-e9ae300ea303)
+)
+(label "RADIO_UHF_SQL"
+  (at 149.86 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b3f71af2-eb89-51e7-9a59-4c12e689eb41)
+)
+(label "RADIO_UHF_SQL"
+  (at 299.72 59.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c76224f0-ce0e-5f31-9938-4488afa5e65e)
+)
+(label "RADIO_VHF_RF_SEL_3V3"
+  (at 149.86 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 34b4410c-9b1a-5d10-ab0e-e8ee85b74e9a)
+)
+(label "RADIO_VHF_RF_SEL_3V3"
+  (at 299.72 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2b2338a6-4a43-5dc4-b30a-af9fe55ff74e)
+)
+(label "RADIO_UHF_RF_SEL_3V3"
+  (at 149.86 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 36c91539-b171-5791-99df-482eafa4f6b7)
+)
+(label "RADIO_UHF_RF_SEL_3V3"
+  (at 299.72 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a7965122-1ed1-52df-b5aa-c45b6b8128ac)
+)
+(label "GNSS_UART_RX"
+  (at 149.86 125.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 78d04285-d5d9-5e02-a888-c11c2274c9b3)
+)
+(label "GNSS_UART_RX"
+  (at 449.58 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a9785197-b057-5d8f-977c-dbf719e20b0a)
+)
+(label "GNSS_UART_TX"
+  (at 149.86 130.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ebfa1fe9-e2df-54b4-8397-41f2fa805563)
+)
+(label "GNSS_UART_TX"
+  (at 449.58 49.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 04f57022-2065-54b8-8cb7-6c1b29cca8d4)
+)
+(label "GNSS_RESET_N"
+  (at 149.86 135.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4da8298c-d22d-5eec-9e8d-5379d9b1eb57)
+)
+(label "GNSS_RESET_N"
+  (at 449.58 54.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4d979b13-4344-5a73-b7b0-62429cb8ac62)
+)
+(label "GNSS_PPS"
+  (at 149.86 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 53c14696-b1fe-5f85-9aba-cd5088d85145)
+)
+(label "GNSS_PPS"
+  (at 449.58 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 77e133b4-7c8b-51bb-9b9f-6c06489ea5e2)
+)
+(label "GNSS_EXTINT"
+  (at 149.86 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 31db6eca-0f89-5e9d-be63-a33ffe32b13c)
+)
+(label "GNSS_EXTINT"
+  (at 449.58 59.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 30367c55-66e9-5311-aee7-3ce0bfb1f381)
+)
+(label "RADIO_DB_3V3"
+  (at 149.86 151.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e9ac5677-43e8-54d4-b715-dfb60d029a7f)
+)
+(label "RADIO_DB_3V3"
+  (at 299.72 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ea85622f-183e-5b07-872b-fed3b2b904d0)
+)
+(label "RADIO_DB_3V3"
+  (at 449.58 44.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 29f15b42-b3b1-547b-a1ca-2903087116a4)
+)
+(label "RADIO_DB_3V3"
+  (at 599.44 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d700350e-0e0a-52c3-97b5-838c491e9dca)
+)
+(label "RADIO_VHF_MIC_IN"
+  (at 299.72 54.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 057f81da-4580-537a-ba44-24f530619794)
+)
+(label "RADIO_VHF_MIC_IN"
+  (at 599.44 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ab55d25a-3716-58c2-abc3-8f4aeb888d9e)
+)
+(label "RADIO_UHF_MIC_IN"
+  (at 299.72 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2f8eb5b6-7ce2-5857-8f31-d4ffff434f57)
+)
+(label "RADIO_UHF_MIC_IN"
+  (at 599.44 74.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b45bf748-1d81-5896-a7d6-a1c2968526fc)
+)
+(label "RADIO_VHF_AUDIO_OUT"
+  (at 299.72 125.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bcd8ed7f-5499-57e9-987a-007323fb2520)
+)
+(label "RADIO_VHF_AUDIO_OUT"
+  (at 599.44 59.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 27a0dce3-77f5-5cb0-b89e-5ca456ef9121)
+)
+(label "RADIO_UHF_AUDIO_OUT"
+  (at 299.72 130.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 78fc0edc-c842-5045-a1d8-24ee2c6ccf62)
+)
+(label "RADIO_UHF_AUDIO_OUT"
+  (at 599.44 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cd581837-eca5-557a-9c46-139e83feca54)
+)
+  (sheet_instances
+    (path "/"
+      (page "1")
+    )
+  )
+  (embedded_fonts no)
+)

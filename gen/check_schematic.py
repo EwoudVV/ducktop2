@@ -36,9 +36,8 @@ EXPECTED_SHEETS = [
     "06_tcp0_external_hdmi.kicad_sch",
     "07_radio_oled_gps.kicad_sch",
     "08_internal_services.kicad_sch",
-    "09_ham_radio.kicad_sch",
+    "09_radio_daughterboard_interface.kicad_sch",
     "12_keyboard_interface.kicad_sch",
-    "13_radio_audio_codec.kicad_sch",
     "14_maker_mcu.kicad_sch",
     "15_system_audio.kicad_sch",
     "16_gigabit_ethernet.kicad_sch",
@@ -80,11 +79,40 @@ ALLOWED_ERC_WARNINGS = Counter({
 # The user-facing maker header adds eight more instances of the same flattened
 # stock TPD4E05U06 variant. Keep the allowlist reference-specific so a warning
 # on any other symbol or failure mode still fails the check.
-for ref in ("U914", "U915", "U916", "U917", "U918", "U919", "U920", "U921"):
+for ref in ("U914", "U915", "U916", "U917", "U918", "U919", "U920", "U921",
+            "U1745", "U1765", "U1785"):
     ALLOWED_ERC_WARNINGS[(
         "warning", "lib_symbol_mismatch",
         "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
         (f"Symbol {ref} [TPD4E05U06DQA]",),
+    )] += 1
+
+# The TPS25751A unused GPIO/USB pins and the TUSB1142 GPIO-mode SDA strap are
+# tied to ground exactly as required by their datasheets. KiCad reports the
+# intentional connection only because the global GND PWR_FLAG is a power-output
+# pin. Keep every allowed warning tied to one physical reference and pin.
+for ref in ("U41", "U42"):
+    for pin, name in (
+        ("5", "GPIO0/LD1"), ("6", "GPIO1"), ("7", "GPIO2/LD2"),
+        ("13", "GPIO11"), ("19", "GPIO3"),
+        ("27", "GPIO5/USB_N"),
+    ):
+        ALLOWED_ERC_WARNINGS[(
+            "warning", "pin_to_pin",
+            "Pins of type Bidirectional and Power output are connected",
+            (
+                "Symbol #FLG005 Pin 1 [Power output, Line]",
+                f"Symbol {ref} Pin {pin} [{name}, Bidirectional, Line]",
+            ),
+        )] += 1
+for ref in ("U2000", "U2010"):
+    ALLOWED_ERC_WARNINGS[(
+        "warning", "pin_to_pin",
+        "Pins of type Bidirectional and Power output are connected",
+        (
+            "Symbol #FLG005 Pin 1 [Power output, Line]",
+            f"Symbol {ref} Pin 22 [AEQENZ/SDA, Bidirectional, Line]",
+        ),
     )] += 1
 
 
@@ -379,7 +407,10 @@ def main():
     if not compileall.compile_dir(GEN_DIR, quiet=1):
         fail("Python compile check failed")
 
+    run([sys.executable, str(PROJDIR / "firmware" / "tps25751a" / "verify_config.py")])
     run([sys.executable, str(GEN_DIR / "generate_mu_carrier_sheet.py")])
+    run([sys.executable, str(GEN_DIR / "generate_radio_daughterboard_project.py")])
+    run([sys.executable, str(GEN_DIR / "verify_radio_daughterboard.py"), "--schematic-only"])
     check_root_sheets()
     check_duplicate_refs()
     check_label_coordinate_collisions()
@@ -403,7 +434,7 @@ def main():
             fail(f"ERC reported {sum(unexpected.values())} unexpected violation(s)")
         if erc_items:
             print(
-                f"ERC: 0 errors, {len(erc_items)} classified flattened-symbol warning(s)"
+                f"ERC: 0 errors, {len(erc_items)} classified intentional warning(s)"
             )
 
         netlist_path = Path(temp_dir) / "ducktop2.net"
