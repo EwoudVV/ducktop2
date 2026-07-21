@@ -118,6 +118,7 @@ FOOTPRINTS = {
     "MiniCircuits_LFCN_FV1206": "Filter:Filter_Mini-Circuits_FV1206",
     "Crystal_HSE": "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm",
     "Crystal_LSE": "Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm",
+    "Oscillator_ASDMB": "Oscillator:Oscillator_SMD_Abracon_ASDMB-4Pin_2.5x2.0mm",
     "SW_Push": "Button_Switch_SMD:SW_SPST_B3S-1000",
     "L_buck": "Inductor_SMD:L_1210_3225Metric",
     "L_XGL4020": "ducktop2:Coilcraft_XGL4020",
@@ -136,6 +137,7 @@ FOOTPRINTS = {
     "Mu_M2_Standoff_H5.5": "ducktop2:Wurth_9774055243R_M2_H5.5",
     "M2_Card_Standoff_H2.5": "ducktop2:SMT_Standoff_M2_H2.5_C4_Tail2.7x1.5",
     "Mainboard_M2.5_Hole": "MountingHole:MountingHole_2.7mm_M2.5",
+    "Radio_DB_M2_Hole": "MountingHole:MountingHole_2.2mm_M2",
     "USB3_A": "Connector_USB:USB3_A_Receptacle_Wuerth_692122030100",
     "HDMI_A": "Connector_Video:HDMI_A_Molex_208658-1001_Horizontal",
     "Q_NMOS": "Package_TO_SOT_SMD:SOT-23",
@@ -146,7 +148,9 @@ FOOTPRINTS = {
     "VL822-Q7": "ducktop2:QFN-76-1EP_9x9mm_P0.4mm_EP6.3x6.3mm",
     "TPS7A0210": "Package_SON:Texas_X2SON-4_1x1mm_P0.65mm",
     "TUSB8020BIPHP": "Package_QFP:Texas_PHP0048E_HTQFP-48-1EP_7x7mm_P0.5mm_EP6.5x6.5mm_Mask3.62x3.62mm_ThermalVias",
+    "USB7206C": "Package_DFN_QFN:VQFN-100-1EP_12x12mm_P0.4mm_EP8x8mm_ThermalVias",
     "TPS62821DLC": "Package_SON:Texas_VSON-HR-8_1.5x2mm_P0.5mm",
+    "TPS62823DLC": "Package_SON:Texas_VSON-HR-8_1.5x2mm_P0.5mm",
     "TPS2553DDBV": "Package_TO_SOT_SMD:SOT-23-6",
     "L_TFM201610": "ducktop2:TDK_TFM201610",
     "TPS552892": "ducktop2:Texas_RYQ0021A_VQFN-HR-21_3x5mm",
@@ -155,6 +159,7 @@ FOOTPRINTS = {
     "C_68u_50V_hybrid": "Capacitor_SMD:CP_Elec_8x10",
     "C_100u_35V_hybrid": "Capacitor_SMD:CP_Elec_6.3x5.8",
     "R_1206": "Resistor_SMD:R_1206_3216Metric",
+    "C_1210": "Capacitor_SMD:C_1210_3225Metric",
     "TLV803EA29RDBZR": "Package_TO_SOT_SMD:SOT-23-3",
     "TLV803EA43RDBZR": "Package_TO_SOT_SMD:SOT-23-3",
     "L_DFE201610": "Inductor_SMD:L_Murata_DFE201610P",
@@ -174,6 +179,14 @@ FOOTPRINTS = {
     "TS3USB30EDGSR": "Package_SO:TSSOP-10_3x3mm_P0.5mm",
     "TPS25810RVC": "Package_DFN_QFN:Texas_RVC0020A_WQFN-20-1EP_3x4mm_P0.5mm_EP1.6x2.6mm",
     "HD3SS6126": "Package_DFN_QFN:WQFN-42-1EP_3.5x9mm_P0.5mm_EP2.05x7.55mm_ThermalVias",
+    "TPS25751AD": "Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4",
+    "TUSB1142": "Package_DFN_QFN:Texas_RNQ0040A_WQFN-40-1EP_6x4mm_P0.4mm_EP4.7x2.7mm_ThermalVias",
+    "SN74LVC2G07DCK": "Package_TO_SOT_SMD:SOT-363_SC-70-6",
+    "TPD4S201": "Package_DFN_QFN:Texas_RUK0020B_WQFN-20-1EP_3x3mm_P0.4mm_EP1.7x1.7mm_ThermalVias",
+    "TPD1S514_YZ": "ducktop2:Texas_TPD1S514_YZ_WCSP-12_1.99x1.29mm_P0.5mm",
+    "TVS2200DRV": "Package_SON:WSON-6-1EP_2x2mm_P0.65mm_EP1x1.6mm",
+    "SST26VF016B": "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm",
+    "CAT24C256": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
     "CH224K": "Package_SO:SSOP-10-1EP_3.9x4.9mm_P1mm_EP2.1x3.3mm",
     "CH224A": "Package_SO:SSOP-10-1EP_3.9x4.9mm_P1mm_EP2.1x3.3mm",
     "TPD12S520DBT": "Package_SO:TSSOP-38_4.4x9.7mm_P0.5mm",
@@ -189,6 +202,8 @@ FOOTPRINTS = {
     "TPD4E02B04DQA": "Package_SON:USON-10_2.5x1.0mm_P0.5mm",
     "TPD4E05U06DQA": "Package_SON:USON-10_2.5x1.0mm_P0.5mm",
     "TPD1E0B04DPL": "Diode_SMD:D_0201_0603Metric",
+    "Radio_DB_Main": "Connector_Hirose_DF40:Hirose_DF40C-60DP-0.4V_2x30-1MP_P0.4mm",
+    "Radio_DB_Daughter": "Connector_Hirose_DF40:Hirose_DF40C(2.0)-60DS-0.4V_2x30_P0.4mm",
     "PESD4V0Y1BCSF": "Diode_SMD:Nexperia_DSN0603-2_0.6x0.3mm_P0.4mm",
     "PESD7V0R1BSF": "Diode_SMD:Nexperia_DSN0603-2_0.6x0.3mm_P0.4mm",
     "TPD4EUSB30": "Package_SON:USON-10_2.5x1.0mm_P0.5mm",
@@ -210,6 +225,7 @@ class Sheet:
         self.lib_symbols = {}
         self.body = []
         self.refcounters = {}
+        self.ref_units = {}
 
     def _use_symbol(self, name):
         lib, text = genlib.load_renamed_symbol(name)
@@ -241,6 +257,19 @@ class Sheet:
             else:
                 raise ValueError(f"{symname} has multiple units {units_present}, must specify unit=")
         pins = {n: p for n, p in all_pins.items() if p["unit"] in (0, unit)}
+
+        prior = self.ref_units.get(ref)
+        if prior is None:
+            self.ref_units[ref] = {"symname": symname, "footprint": footprint, "units": {unit}}
+        else:
+            if prior["symname"] != symname or prior["footprint"] != footprint:
+                raise ValueError(
+                    f"{ref} reused with a different symbol or footprint: "
+                    f"{prior['symname']} / {prior['footprint']} vs {symname} / {footprint}"
+                )
+            if unit in prior["units"]:
+                raise ValueError(f"{ref} ({symname}) unit {unit} placed more than once")
+            prior["units"].add(unit)
 
         sym_uuid = U()
         is_dnp = ("DNP" in value.upper()) if dnp is None else bool(dnp)

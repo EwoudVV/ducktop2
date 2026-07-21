@@ -68,6 +68,8 @@ Minimum checks:
 - PCIe/USB/HDMI/Ethernet coupling, clocks, reset, sideband, and ESD
 - STM32 and RP2350 boot, clock, reset, USB, debug, and exposed-I/O contracts
 - keyboard/trackpad/OLED/audio/radio/GNSS/fan signal and power boundaries
+- boot, system audio, microphone, USB, and charging behavior with the removable
+  radio/GNSS/audio daughterboard physically absent
 - custom symbol-to-footprint pin maps and exact active package suffixes
 - DNP metadata and mutually exclusive population options
 - schematic-to-PCB reference, footprint, pad-net, BOM, and DNP parity

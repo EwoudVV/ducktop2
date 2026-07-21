@@ -1,6 +1,6 @@
 # Ducktop2 controller firmware policy
 
-Version: `0.2.2-policy`
+Version: `0.3.0-policy`
 
 This tree contains deterministic, allocation-free C11 policy cores for the
 Ducktop2 STM32F407 embedded controller and integrated RP2350 maker controller.
@@ -9,25 +9,32 @@ safety transitions can be reviewed and tested on a host compiler first.
 
 ## What is implemented
 
-- EC outputs start passive: all three `PDx_PATH_EN` controls, `CHG_ENABLE`,
-  `MU_12V_ENABLE`, keyboard RGB, both radio power requests, and audio requests
+- EC outputs start passive: both `PDx_PATH_EN` controls, `CHG_ENABLE`,
+  `MU_12V_ENABLE`, keyboard RGB, the radio daughterboard rail, and audio requests
   are off.
-- PACK, AUX, and PD1-PD3 use one mutually exclusive source-state model with
+- PACK, AUX, PD1, and PD2 use one mutually exclusive source-state model with
   `OFF`, `VALIDATING`, `ACTIVE`, and `FAULT` states.
-- Before the EC can boot from USB-C, raw 5 V powers the CH224A directly and its
-  56 kOhm CFG1 strap autonomously requests 15 V. The 6.06-6.36 V hardware AON
-  UVLO intentionally rejects a 5 V-only source; no firmware action is possible
-  or required until a source offers the strapped 15 V PDO.
-- A PD path cannot be enabled until its CH224A negotiated voltage/current
-  contract is valid. The qualified path first powers the otherwise-unpowered
-  BQ25798 while the charger, Mu, and optional loads remain off. After path-good,
+- PD1 and PD2 use TPS25751A controllers on separate service-mux channels. A PD
+  path cannot be enabled until its negotiated voltage/current contract is valid.
+  Their target addresses are the 7-bit values `0x20` for PD1 and `0x21` for
+  PD2; target drivers must not store the shifted 8-bit bus bytes as addresses.
+  Contract telemetry comes from `Active PDO Contract` (`0x31`), `Active RDO
+  Contract` (`0x32`), and `PD Status` (`0x35`). A valid sink contract must be
+  confirmed from those live registers before its current limit is used.
+  The qualified path first powers the otherwise-unpowered BQ25798 while the
+  charger, Mu, and optional loads remain off. After path-good,
   charger IINDPM is set to `min(PDO current - 250 mA, 2750 mA)` and must be
   acknowledged exactly before charging or downstream loads can start. A
   missing or mismatched acknowledgement turns the path back off and latches a
   fault.
 - Reset-domain release, an all-paths-off observation, service-bus health,
   charger fault state, thermal validity, and source telemetry are qualified
-  before activation. PACK/AUX/PD1/PD2/PD3 still share one one-hot state model.
+  before activation. PACK, AUX, PD1, and PD2 share one one-hot state model.
+- AUX current is never described as negotiated. Target firmware must begin with
+  a conservative 500 mA qualification, command the resulting 250 mA IINDPM,
+  and verify the charger readback before AUX becomes active. It may raise that
+  qualification only from BQ25798 ICO/VINDPM results and a measured input-power
+  limit; a missing, stale, or invalid result fails the source off.
 - Transfers impose a 20 ms all-off deadtime. Validation, path-good, and
   `MU_12V_PG` timeouts fail safe and latch a fault.
 - Low-SOC pack operation limits the Mu plus eDP request to 15 W and
@@ -41,6 +48,19 @@ safety transitions can be reviewed and tested on a host compiler first.
   and disables charging when less than 2.5 W remains.
 - Reset and watchdog paths remove every controlled load. Fault recovery always
   returns to `OFF` and requires deliberate source revalidation.
+- The radio/GNSS/audio daughterboard is optional. Its active-low presence and
+  fault inputs default safe when the connector is empty. An absent, faulted, or
+  timed-out board keeps only `RADIO_DB_PWR_EN` low and does not block the Mu,
+  display, keyboard, trackpad, system audio, Ethernet, Wi-Fi, maker controller,
+  OLEDs, charging, or source selection. Rejected requests are not queued.
+- `ec_telemetry_build_snapshot()` prepares bounded, validity-qualified data for
+  the two SSD1306 displays: SOC, pack voltage/current, charge or discharge
+  power, time remaining, capacity, cycle count, health, active input, and both
+  TPS25751A negotiated contracts. BQ34Z100 current is positive while charging
+  and negative while discharging. BQ34Z100 time values are minutes on the bus;
+  `ec_telemetry_bq34z100_minutes_to_seconds()` rejects `0xffff` and converts
+  valid values before they enter the OLED snapshot. Cell protection handles
+  pack temperature, so the OLED model has no pack-temperature field.
 - The host-tested EC commit adapter rejects impossible output combinations and
   direct source-to-source changes, forces a passive state before source
   changes, requires a separate path-only bootstrap commit, writes current and
@@ -86,7 +106,8 @@ them before starting a new command.
 
 This is not a production firmware release. It does not yet include STM32 or
 RP2350 startup files, linker scripts, board pin initialization, ADC/I2C/USB
-drivers, BQ25798/CH224A transactions, USB descriptors, target watchdog setup,
+drivers, BQ25798/TPS25751A transactions, USB descriptors, OLED rendering,
+target watchdog setup,
 thermal characterization, signed images, or factory `.elf`, `.bin`, and `.uf2`
 artifacts. Those items remain blocked until target integration and the HIL
 matrix in `release/hil_matrix.csv` is completed with recorded evidence. See

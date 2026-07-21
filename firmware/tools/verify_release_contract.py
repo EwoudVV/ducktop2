@@ -51,6 +51,8 @@ policy_header = read_text("ec/include/ducktop2/ec/ec_policy.h")
 policy_source = read_text("ec/src/ec_policy.c")
 commit_header = read_text("ec/include/ducktop2/ec/ec_commit.h")
 commit_source = read_text("ec/src/ec_commit.c")
+telemetry_header = read_text("ec/include/ducktop2/ec/ec_telemetry.h")
+telemetry_source = read_text("ec/src/ec_telemetry.c")
 maker_header = read_text("maker/include/ducktop2/maker/maker_policy.h")
 maker_source = read_text("maker/src/maker_policy.c")
 
@@ -64,6 +66,10 @@ required_policy_tokens = {
     "service bus fault": "EC_FAULT_SERVICE_BUS",
     "power policy acknowledgement": "power_limits_applied",
     "pack telemetry validity": "pack_telemetry_valid",
+    "two PD ports": "EC_PD_PORT_COUNT 2u",
+    "four source states": "EC_SOURCE_COUNT 4u",
+    "optional radio request": "request_radio_db",
+    "optional radio output": "radio_db_power_enable",
 }
 for label, token in required_policy_tokens.items():
     require(token in policy_header, f"policy missing {label}")
@@ -75,6 +81,9 @@ for token in (
     "source_input_power_mw",
     "ec_policy_usable_power_mw",
     "!controller->path_commanded && !inputs->all_pd_paths_off",
+    "apply_radio_db_policy",
+    "radio_db_request_blocked",
+    "radio_db_power_good_timeout_ms",
 ):
     require(token in policy_source, f"policy source missing {token}")
 
@@ -119,6 +128,32 @@ require("test_path_bootstrap_precedes_iindpm_ack" in
 require("test_unstaged_powered_path_is_rejected" in
         read_text("tests/test_ec_commit.c"),
         "commit tests must reject unstaged powered-path requests")
+require("test_optional_radio_daughterboard_is_isolated" in
+        read_text("tests/test_ec_policy.c"),
+        "policy tests must prove radio-board absence isolation")
+require("test_radio_daughterboard_power_good_timeout" in
+        read_text("tests/test_ec_policy.c"),
+        "policy tests must cover radio-board power-good timeout")
+require("test_radio_daughterboard_stuck_good_and_reset_fail_off" in
+        read_text("tests/test_ec_policy.c"),
+        "policy tests must cover radio-board stuck-good and reset fail-off")
+
+for label, token in {
+    "PD1 7-bit target address":
+        "EC_PD1_TCPC_I2C_ADDRESS_7BIT 0x20u",
+    "PD2 7-bit target address":
+        "EC_PD2_TCPC_I2C_ADDRESS_7BIT 0x21u",
+    "PD1 service-mux channel": "EC_PD1_SERVICE_MUX_CHANNEL 2u",
+    "PD2 service-mux channel": "EC_PD2_SERVICE_MUX_CHANNEL 3u",
+    "battery snapshot helper": "ec_telemetry_build_snapshot",
+    "active input telemetry": "EC_TELEMETRY_VALID_ACTIVE_INPUT",
+    "charge power telemetry": "charge_power_mw",
+    "discharge power telemetry": "discharge_power_mw",
+}.items():
+    require(token in telemetry_header or token in telemetry_source,
+            f"telemetry model missing {label}")
+require("temperature" not in telemetry_header.lower(),
+        "OLED telemetry model must not expose pack temperature")
 
 for token in (
     "hardware_interlock_ready",
@@ -139,7 +174,8 @@ ec_ids = {row["id"] for row in ec_vectors}
 maker_ids = {row["id"] for row in maker_vectors}
 require({"EC-BOOT-001", "EC-PD-001", "EC-PWR-001", "EC-PWR-002",
          "EC-PWR-003", "EC-XFER-001", "EC-LOW-001", "EC-LOW-002",
-         "EC-LOW-004", "EC-MUPG-001"}.issubset(ec_ids),
+         "EC-LOW-004", "EC-MUPG-001", "EC-AUX-001", "EC-AUX-002",
+         "EC-AUX-003"}.issubset(ec_ids),
         "EC vectors are missing required release cases")
 require({"MK-BOOT-001", "MK-INT-001", "MK-AUTH-001", "MK-WDG-001"}
         .issubset(maker_ids),
@@ -172,19 +208,53 @@ for relative in (
             "24000" not in contract_text and "24 W" not in contract_text,
             f"{relative}: stale low-pack contract")
 
+for relative in (
+    "ec/include/ducktop2/ec/ec_policy.h",
+    "ec/include/ducktop2/ec/ec_commit.h",
+    "ec/src/ec_policy.c",
+    "ec/src/ec_commit.c",
+    "tests/test_ec_policy.c",
+    "tests/test_ec_commit.c",
+    "tests/vectors/ec_policy_vectors.csv",
+    "README.md",
+    "release/README.md",
+    "release/hil_matrix.csv",
+):
+    contract_text = read_text(relative)
+    require("PD3" not in contract_text and "pd3" not in contract_text,
+            f"{relative}: stale third PD path")
+    require("radio_vhf" not in contract_text and
+            "radio_uhf" not in contract_text and
+            "RADIO_VHF" not in contract_text and
+            "RADIO_UHF" not in contract_text,
+            f"{relative}: stale split radio controls")
+for relative in (
+    "ec/include/ducktop2/ec/ec_telemetry.h",
+    "tests/test_ec_telemetry.c",
+    "README.md",
+    "release/README.md",
+    "release/hil_matrix.csv",
+):
+    contract_text = read_text(relative)
+    require("0x40" not in contract_text and "0x41" not in contract_text,
+            f"{relative}: shifted TPS25751A address used as 7-bit address")
+
 hil_rows = read_csv("release/hil_matrix.csv")
 verify_unique_ids(hil_rows, "HIL matrix")
 required_hil = {
     "PROG-EC-001", "PROG-MK-001", "EC-BOOT-001", "EC-NRST-001",
     "EC-WDG-001", "EC-BROWN-001", "EC-SVC-001", "EC-I2C-001",
-    "EC-PD1-001", "EC-PD2-001", "EC-PD3-001", "EC-PD-INVALID-001",
+    "EC-PD1-001", "EC-PD2-001", "EC-PD-INVALID-001",
     "EC-PD-COLD-001", "EC-PD-5V-001",
+    "EC-PD-SVC-001",
     "EC-IINDPM-ACK-001", "EC-IINDPM-MISMATCH-001",
     "EC-COMMIT-FAIL-001", "EC-PD-DROP-001", "EC-PD-FAULT-001",
     "EC-XFER-001", "EC-PATH-PG-001", "EC-MU-PG-001", "EC-MU-PG-002",
     "EC-CHG-FAULT-001", "EC-THERM-001", "EC-PWRLIM-001",
     "EC-LOW-001", "EC-LOW-002", "EC-LOW-ACK-001", "EC-TRIP-001",
-    "EC-RECOVER-001", "MK-BOOT-001", "MK-RUN-001", "MK-BOOTSEL-001",
+    "EC-RECOVER-001", "EC-RADIO-ABSENT-001", "EC-RADIO-PG-001",
+    "EC-RADIO-FAULT-001", "EC-OLED-TLM-001",
+    "MK-BOOT-001", "MK-RUN-001", "MK-BOOTSEL-001",
     "MK-WDG-001", "MK-PWR-FAULT-001", "MK-AUTH-001", "MK-GPIO-001",
 }
 require(required_hil.issubset({row["id"] for row in hil_rows}),

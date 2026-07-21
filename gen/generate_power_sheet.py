@@ -565,7 +565,6 @@ def build(sheet_symbol_uuid):
     s.gnd(400, 120)
     # The switched rails are physically driven through passive external FETs;
     # both selector VOUT pins are supply/sense inputs rather than power sources.
-    s.pwrflag(650, 75, "USB_PD_SELECTED")
     s.pwrflag(650, 90, "VBUS_COMBINED")
     s.pwrflag(650, 45, "AUX_DC_FUSED")
     s.pwrflag(650, 60, "AUX_EFUSE_IN_SYS")
@@ -577,7 +576,6 @@ def build(sheet_symbol_uuid):
         ("D711", "AUX_DC_PROTECTED", "local", 325),
         ("D712", "PD1_VBUS_RAW", "hier", 335),
         ("D713", "PD2_VBUS_RAW", "hier", 345),
-        ("D714", "PD3_VBUS_RAW", "hier", 355),
     ):
         s.place(ref, "D_Schottky", "B340A 3A 40V EC always-on OR", 650, y,
                 footprint=FOOTPRINTS["D_Schottky_SMA"],
@@ -629,7 +627,7 @@ def build(sheet_symbol_uuid):
     s.text(20, 238, "RS11=8mOhm gives 7.5A nominal OCD and 15A nominal SCD; U11/RS10 and F1 remain independent tighter/secondary protection.")
     s.text(20, 244, "No motherboard battery thermistors are fitted. U719 TS uses TI's 10k-to-VSS unused-function connection; VTB is NC.")
     s.text(20, 250, "BQ25798 /CE is fail-off: REGN pulls it high; active-high CHG_ENABLE turns Q700 on only after EC source validation.")
-    s.text(20, 256, "U2 ILIM_HIZ divider is a 3.0A hardware ceiling; EC programs a lower IINDPM from the selected CH224A PDO current.")
+    s.text(20, 256, "U2 ILIM_HIZ divider is a 3.0A hardware ceiling; EC programs a lower IINDPM from the selected TPS25751A Active PDO Contract (0x31).")
     s.text(20, 263.62, "J190 is the one 7-22V nominal AUX/solar input; TPS26630 protects it before BQ25798.")
     s.text(20, 271.24, "Solar MPPT is implemented by BQ25798 firmware on this same input; there is no second charger path.")
     s.text(20, 286.48, "AUX_DC_ADC measures the post-reverse-FET input so firmware can detect droop and reduce BQ25798 input current.")
@@ -637,11 +635,11 @@ def build(sheet_symbol_uuid):
     s.text(20, 301.72, "Q25 follows BQ25798EVM-842: SDRV disconnects pack discharge for electronic ship/hard-off while adapter charging can wake the pack.")
     s.text(20, 309.34, "U11 accepts about 8.45-13.57V nominal; 11mOhm RS10 gives 4.55A nominal and <=5.51A worst-case trips.")
     s.text(20, 316.96, "BQ25798 TS is fixed at 58.9% REGN by 5.24k/7.50k; firmware sets TS_IGNORE=1. BQ34Z100 TS has 10k to VSS; set TEMPS=0.")
-    s.text(20, 324.58, "MANDATORY STARTUP: hold MU_12V_ENABLE low; require selected-source VALID; read CH224A PDO current; program VSYSMIN and IINDPM <= min(PDO-0.25A, 2.75A); require VSYS >=10.0V.")
+    s.text(20, 324.58, "MANDATORY STARTUP: hold MU_12V_ENABLE low; read TPS25751A PD Status 0x35 plus Active PDO/RDO 0x31/0x32; program VSYSMIN and IINDPM <= min(PDO-0.25A, 2.75A); require VSYS >=10.0V.")
     s.text(20, 332.2, "Then assert MU_12V_ENABLE and require MU_12V_PG within 20ms. Any PG timeout, source-invalid, charger fault, watchdog fault, or VSYS<10V disables the Mu rail.")
     s.text(20, 339.82, "BQ25798 firmware must set STOP_WD_CHG=1 and TS_IGNORE=1, service faults, validate PDO current, and assert CHG_ENABLE only after safe limits are programmed.")
     s.text(20, 347.44, "U718 is the aggregate AON safety boundary: 1.51A typical limit, true reverse blocking, 6.20V nominal UVLO, and 22.40V nominal OVLO.")
-    s.text(20, 355.06, "AON UVLO corners are 6.06-6.36V: default 5V USB-C is negotiation-only; CH224A must autonomously obtain its strapped 15V PDO before EC_AON_IN starts.")
+    s.text(20, 355.06, "AON UVLO corners are 6.06-6.36V: default 5V USB-C is negotiation-only; TPS25751A dead-battery boot must obtain a valid higher-voltage PDO before EC_AON_IN starts.")
     s.text(20, 362.68, "A 5V-only USB-C source leaves the laptop off. AON_FAULT_N inhibits charging and Mu start; the service connector remains the assembly hard disconnect.")
     s.text(20, 370.3, "C746 provides low-ESR hold-up through LTC4418 break-before-make source switching.")
 
@@ -683,7 +681,7 @@ def main():
         "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "VSYS", "MCU_3V3", "EC_AON_IN", "AUX_DC_ADC", "USB_PD_SELECTED",
-        "PD1_VBUS_RAW", "PD2_VBUS_RAW", "PD3_VBUS_RAW",
+        "PD1_VBUS_RAW", "PD2_VBUS_RAW",
         "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]

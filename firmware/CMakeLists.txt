@@ -42,6 +42,10 @@ add_library(ducktop2_ec_commit STATIC ec/src/ec_commit.c)
 target_include_directories(ducktop2_ec_commit PUBLIC ec/include)
 ducktop2_target_defaults(ducktop2_ec_commit)
 
+add_library(ducktop2_ec_telemetry STATIC ec/src/ec_telemetry.c)
+target_include_directories(ducktop2_ec_telemetry PUBLIC ec/include)
+ducktop2_target_defaults(ducktop2_ec_telemetry)
+
 add_library(ducktop2_maker_policy STATIC maker/src/maker_policy.c)
 target_include_directories(ducktop2_maker_policy PUBLIC maker/include)
 ducktop2_target_defaults(ducktop2_maker_policy)
@@ -55,6 +59,11 @@ add_executable(ec_commit_tests tests/test_ec_commit.c)
 target_link_libraries(ec_commit_tests PRIVATE ducktop2_ec_commit)
 ducktop2_target_defaults(ec_commit_tests)
 add_test(NAME ec_commit_tests COMMAND ec_commit_tests)
+
+add_executable(ec_telemetry_tests tests/test_ec_telemetry.c)
+target_link_libraries(ec_telemetry_tests PRIVATE ducktop2_ec_telemetry)
+ducktop2_target_defaults(ec_telemetry_tests)
+add_test(NAME ec_telemetry_tests COMMAND ec_telemetry_tests)
 
 add_executable(maker_policy_tests tests/test_maker_policy.c)
 target_link_libraries(maker_policy_tests PRIVATE ducktop2_maker_policy)

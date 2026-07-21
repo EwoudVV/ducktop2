@@ -75,7 +75,7 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         "24": ("USBC2_SSRX_N", "hier"),
         "70": ("USBC2_DP", "hier"),
         "72": ("USBC2_DM", "hier"),
-        "129": ("MU_USB_OC_N", "hier"),
+        "129": ("PD_PROTECT_FAULT_N", "hier"),
     })
 
     # Default-BIOS HSIO3 + USB2_P1 feed the M.2 E-key Wi-Fi/Bluetooth module.
@@ -833,10 +833,9 @@ def main():
     import generate_tcp0_external_hdmi_sheet as tcp0
     import generate_radio_oled_gps_sheet as radio
     import generate_internal_services_sheet as internal
-    import generate_ham_radio_sheet as ham
+    import generate_radio_daughterboard_interface_sheet as radio_db
     import generate_keyboard_interface_sheet as keyboard_if
     import generate_keyboard_daughterboard_sheet as keyboard
-    import generate_radio_audio_codec_sheet as audio
     import generate_maker_mcu_sheet as maker
     import generate_system_audio_sheet as system_audio
     import generate_ethernet_sheet as ethernet
@@ -849,10 +848,9 @@ def main():
     tcp0_sheet_uuid = stable_uuid("sheet-symbol:06_tcp0_external_hdmi")
     radio_sheet_uuid = stable_uuid("sheet-symbol:07_radio_oled_gps")
     internal_sheet_uuid = stable_uuid("sheet-symbol:08_internal_services")
-    ham_sheet_uuid = stable_uuid("sheet-symbol:09_ham_radio")
+    radio_db_sheet_uuid = stable_uuid("sheet-symbol:09_radio_daughterboard_interface")
     keyboard_interface_sheet_uuid = stable_uuid("sheet-symbol:12_keyboard_interface")
     keyboard_daughterboard_sheet_uuid = stable_uuid("sheet-symbol:12_keyboard_daughterboard")
-    audio_sheet_uuid = stable_uuid("sheet-symbol:13_radio_audio_codec")
     maker_sheet_uuid = stable_uuid("sheet-symbol:14_maker_mcu")
     system_audio_sheet_uuid = stable_uuid("sheet-symbol:15_system_audio")
     ethernet_sheet_uuid = stable_uuid("sheet-symbol:16_gigabit_ethernet")
@@ -889,8 +887,9 @@ def main():
     internal_s = write_generated_sheet(
         "08_internal_services", "08_internal_services.kicad_sch", lambda: internal.build(internal_sheet_uuid), "9"
     )
-    ham_s = write_generated_sheet(
-        "09_ham_radio", "09_ham_radio.kicad_sch", lambda: ham.build(ham_sheet_uuid), "10"
+    radio_db_s = write_generated_sheet(
+        "09_radio_daughterboard_interface", "09_radio_daughterboard_interface.kicad_sch",
+        lambda: radio_db.build(radio_db_sheet_uuid), "10"
     )
     keyboard_if_s = write_generated_sheet(
         "12_keyboard_interface", "12_keyboard_interface.kicad_sch",
@@ -899,9 +898,6 @@ def main():
     keyboard_daughterboard_s = write_generated_sheet(
         "12_keyboard_daughterboard", "12_keyboard_daughterboard.kicad_sch",
         lambda: keyboard.build(keyboard_daughterboard_sheet_uuid), "K1"
-    )
-    audio_s = write_generated_sheet(
-        "13_radio_audio_codec", "13_radio_audio_codec.kicad_sch", lambda: audio.build(audio_sheet_uuid), "13"
     )
     maker_s = write_generated_sheet(
         "14_maker_mcu", "14_maker_mcu.kicad_sch", lambda: maker.build(maker_sheet_uuid), "14"
@@ -915,11 +911,24 @@ def main():
         lambda: ethernet.build(ethernet_sheet_uuid), "16"
     )
 
+    def generated_hier_nets(sheet):
+        nets = []
+        seen = set()
+        prefix = '(hierarchical_label "'
+        for item in sheet.body:
+            if not item.startswith(prefix):
+                continue
+            name = item[len(prefix):].split('"', 1)[0]
+            if name not in seen:
+                seen.add(name)
+                nets.append(name)
+        return nets
+
     power_hier_nets = [
         "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "VSYS", "MCU_3V3", "EC_AON_IN", "AUX_DC_ADC", "USB_PD_SELECTED",
-        "PD1_VBUS_RAW", "PD2_VBUS_RAW", "PD3_VBUS_RAW",
+        "PD1_VBUS_RAW", "PD2_VBUS_RAW",
         "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]
@@ -931,7 +940,8 @@ def main():
         "RADIO_GPIO0",
         "FAN_PWM", "FAN_TACH", "LID_CLOSED_N",
         "THERM_SKIN_ADC", "THERM_MU_ADC", "TRACKPAD_FAULT_N", "MU_S0_HIGH",
-        "PD1_VALID_N", "PD2_VALID_N", "PD3_VALID_N",
+        "PD1_VALID_N", "PD2_VALID_N", "PD1_TCPC_IRQ_N", "PD2_TCPC_IRQ_N",
+        "PD_PROTECT_FAULT_N",
         "RADIO_VHF_UART_TX", "RADIO_VHF_UART_RX", "RADIO_UHF_UART_TX", "RADIO_UHF_UART_RX",
         "RADIO_VHF_PTT_N", "RADIO_UHF_PTT_N", "RADIO_VHF_PD_N", "RADIO_UHF_PD_N",
         "RADIO_VHF_SQL", "RADIO_UHF_SQL", "RADIO_VHF_RF_SEL_3V3", "RADIO_UHF_RF_SEL_3V3", "RADIO_AUDIO_SEL",
@@ -941,8 +951,9 @@ def main():
         "KB_ROW0", "KB_ROW1", "KB_ROW2", "KB_ROW3", "KB_ROW4", "KB_ROW5", "KB_ROW6", "KB_ROW7",
         "KB_COL0", "KB_COL1", "KB_COL2", "KB_COL3", "KB_COL4", "KB_COL5", "KB_COL6", "KB_COL7",
         "KB_COL8", "KB_COL9", "KB_COL10", "KB_COL11", "KB_COL12", "KB_COL13", "KB_COL14",
-        "PD1_PATH_EN", "PD2_PATH_EN", "PD3_PATH_EN",
-        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N", "PD3_EFUSE_FAULT_N",
+        "PD1_PATH_EN", "PD2_PATH_EN",
+        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N",
+        "RADIO_DB_PWR_EN", "RADIO_DB_PG", "RADIO_DB_FAULT_N", "RADIO_DB_PRESENT_N",
         "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]
@@ -955,7 +966,7 @@ def main():
         "MAKER_USB_DP", "MAKER_USB_DM",
         "USBC1_SSTX_P", "USBC1_SSTX_N", "USBC1_SSRX_P", "USBC1_SSRX_N", "USBC1_DP", "USBC1_DM",
         "USBC2_SSTX_P", "USBC2_SSTX_N", "USBC2_SSRX_P", "USBC2_SSRX_N", "USBC2_DP", "USBC2_DM",
-        "MU_USB_OC_N",
+        "PD_PROTECT_FAULT_N",
         "TCP0_DDC_SDA", "TCP0_DDC_SCL", "TCP0_HPD",
         "TCP0_TX0_P", "TCP0_TX0_N", "TCP0_TX1_P", "TCP0_TX1_N",
         "TCP0_TXRX0_P", "TCP0_TXRX0_N", "TCP0_TXRX1_P", "TCP0_TXRX1_N",
@@ -966,17 +977,17 @@ def main():
         "GBE_REFCLK_P", "GBE_REFCLK_N", "GBE_CLKREQ_N",
     ]
     usb_hier_nets = [
-        "SYS_5V", "SYS_3V3", "MU_HOST_ACTIVE", "MU_USB_OC_N",
+        "SYS_5V", "SYS_3V3", "MU_HOST_ACTIVE", "PD_PROTECT_FAULT_N",
         "USBC1_SSTX_P", "USBC1_SSTX_N", "USBC1_SSRX_P", "USBC1_SSRX_N", "USBC1_DP", "USBC1_DM",
         "USBC2_SSTX_P", "USBC2_SSTX_N", "USBC2_SSRX_P", "USBC2_SSRX_N", "USBC2_DP", "USBC2_DM",
     ]
     pwrin_hier_nets = [
-        "MCU_3V3", "USB_PD_SELECTED", "PD1_VALID_N", "PD2_VALID_N", "PD3_VALID_N",
-        "PD1_VBUS_RAW", "PD2_VBUS_RAW", "PD3_VBUS_RAW",
-        "PD1_PATH_EN", "PD2_PATH_EN", "PD3_PATH_EN",
-        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N", "PD3_EFUSE_FAULT_N",
+        "MCU_3V3", "USB_PD_SELECTED", "PD1_VALID_N", "PD2_VALID_N",
+        "PD1_VBUS_RAW", "PD2_VBUS_RAW",
+        "PD1_PATH_EN", "PD2_PATH_EN",
+        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N",
+        "PD1_TCPC_IRQ_N", "PD2_TCPC_IRQ_N", "PD_PROTECT_FAULT_N",
         "PD1_I2C_SCL", "PD1_I2C_SDA", "PD2_I2C_SCL", "PD2_I2C_SDA",
-        "PD3_I2C_SCL", "PD3_I2C_SDA",
     ]
     tcp0_hier_nets = [
         "SYS_5V", "SYS_3V3", "MU_HOST_ACTIVE", "TCP0_HPD", "TCP0_DDC_SDA", "TCP0_DDC_SCL",
@@ -992,7 +1003,6 @@ def main():
         "SERVICE_MUX_RESET_N", "GNSS_UART_RX", "GNSS_UART_TX", "GNSS_RESET_N",
         "GNSS_PPS", "GNSS_EXTINT", "RADIO_GPIO0",
         "PD1_I2C_SCL", "PD1_I2C_SDA", "PD2_I2C_SCL", "PD2_I2C_SDA",
-        "PD3_I2C_SCL", "PD3_I2C_SDA",
     ]
     internal_hier_nets = [
         "SYS_5V", "SYS_3V3", "MCU_3V3", "MU_12V", "MU_HOST_ACTIVE",
@@ -1019,7 +1029,7 @@ def main():
     ]
     audio_hier_nets = [
         "MCU_3V3",
-        "RADIO_CODEC_USB_DP", "RADIO_CODEC_USB_DM", "RADIO_CODEC_USB_VBUS",
+        "RADIO_CODEC_USB_DP_HOST", "RADIO_CODEC_USB_DM_HOST", "RADIO_CODEC_USB_VBUS_HOST",
         "RADIO_VHF_AUDIO_OUT", "RADIO_UHF_AUDIO_OUT", "RADIO_VHF_MIC_IN", "RADIO_UHF_MIC_IN",
         "RADIO_VHF_PTT_N", "RADIO_UHF_PTT_N",
     ]
@@ -1028,7 +1038,7 @@ def main():
     ]
     system_audio_hier_nets = [
         "SYS_5V", "SYS_3V3", "INTERNAL_USB_VBUS_VALID", "AUDIO_USB_DP", "AUDIO_USB_DM",
-        "RADIO_CODEC_USB_DP", "RADIO_CODEC_USB_DM", "RADIO_CODEC_USB_VBUS",
+        "RADIO_CODEC_USB_DP_HOST", "RADIO_CODEC_USB_DM_HOST", "RADIO_CODEC_USB_VBUS_HOST",
         "AUDIO_AMP_EC_EN", "AUDIO_MIC_EN",
     ]
     ethernet_hier_nets = [
@@ -1037,6 +1047,23 @@ def main():
         "GBE_REFCLK_P", "GBE_REFCLK_N", "GBE_CLKREQ_N",
         "PLTRST_SRC_N", "PCIE_WAKE_N",
     ]
+
+    # The generated child sheets are the authority for the root pin contract.
+    # Deriving these lists prevents a removed port or daughterboard signal from
+    # surviving only in a stale handwritten hierarchy list.
+    power_hier_nets = generated_hier_nets(power_s)
+    ec_hier_nets = generated_hier_nets(ec_s)
+    mu_hier_nets = generated_hier_nets(mu_s)
+    usb_hier_nets = generated_hier_nets(usb_s)
+    pwrin_hier_nets = generated_hier_nets(pwrin_s)
+    tcp0_hier_nets = generated_hier_nets(tcp0_s)
+    radio_hier_nets = generated_hier_nets(radio_s)
+    internal_hier_nets = generated_hier_nets(internal_s)
+    radio_db_hier_nets = generated_hier_nets(radio_db_s)
+    keyboard_hier_nets = generated_hier_nets(keyboard_if_s)
+    maker_hier_nets = generated_hier_nets(maker_s)
+    system_audio_hier_nets = generated_hier_nets(system_audio_s)
+    ethernet_hier_nets = generated_hier_nets(ethernet_s)
 
     reset_uuid_sequence("root")
 
@@ -1057,7 +1084,7 @@ def main():
         usb_hier_nets,
     )
     pwrin_block, pwrin_pins = sheet_block(
-        pwrin_sheet_uuid, 550, 500, 90, 140, "Power Inputs", "05_power_inputs.kicad_sch",
+        pwrin_sheet_uuid, 550, 490, 90, 165, "Power Inputs", "05_power_inputs.kicad_sch",
         pwrin_hier_nets,
     )
     tcp0_block, tcp0_pins = sheet_block(
@@ -1065,24 +1092,20 @@ def main():
         tcp0_hier_nets,
     )
     radio_block, radio_pins = sheet_block(
-        radio_sheet_uuid, 30, 380, 105, 155, "Radio/OLED/GNSS", "07_radio_oled_gps.kicad_sch",
+        radio_sheet_uuid, 30, 380, 105, 155, "Wi-Fi/Bluetooth & OLEDs", "07_radio_oled_gps.kicad_sch",
         radio_hier_nets,
     )
     internal_block, internal_pins = sheet_block(
         internal_sheet_uuid, 290, 390, 115, 155, "Internal Services", "08_internal_services.kicad_sch",
         internal_hier_nets,
     )
-    ham_block, ham_pins = sheet_block(
-        ham_sheet_uuid, 420, 220, 115, 170, "Ham Radio", "09_ham_radio.kicad_sch",
-        ham_hier_nets,
+    radio_db_block, radio_db_pins = sheet_block(
+        radio_db_sheet_uuid, 420, 220, 115, 170, "Optional Radio Daughterboard Interface",
+        "09_radio_daughterboard_interface.kicad_sch", radio_db_hier_nets,
     )
     keyboard_block, keyboard_pins = sheet_block(
         keyboard_interface_sheet_uuid, 420, 410, 120, 170, "Keyboard Mainboard FFC", "12_keyboard_interface.kicad_sch",
         keyboard_hier_nets,
-    )
-    audio_block, audio_pins = sheet_block(
-        audio_sheet_uuid, 550, 330, 125, 85, "Radio Audio Codec", "13_radio_audio_codec.kicad_sch",
-        audio_hier_nets,
     )
     maker_block, maker_pins = sheet_block(
         maker_sheet_uuid, 550, 440, 125, 45, "Maker MCU", "14_maker_mcu.kicad_sch",
@@ -1107,102 +1130,39 @@ def main():
             root_labels.append(root_label(coord, net))
             seen_root_labels.add(key)
 
-    for net in [n for n in ec_hier_nets if n in power_hier_nets]:
-        add_root_label(power_pins, net)
-        add_root_label(ec_pins, net)
-    add_root_label(power_pins, "VSYS")
-    add_root_label(mu_pins, "VSYS")
-    add_root_label(power_pins, "MCU_3V3")
-    add_root_label(ec_pins, "MCU_3V3")
-    add_root_label(mu_pins, "MCU_3V3")
-    for net in ["MU_PWRBTN_N", "MU_RSTBTN_N"]:
-        add_root_label(ec_pins, net)
-        add_root_label(mu_pins, net)
-    for net in ["MU_12V_ENABLE", "MU_12V_PG"]:
-        add_root_label(ec_pins, net)
-        add_root_label(mu_pins, net)
-    for net in ["MU_S0_HIGH", "INTERNAL_USB_VBUS_FAULT_N"]:
-        add_root_label(ec_pins, net)
-        add_root_label(mu_pins, net)
-    for net in usb_hier_nets:
-        add_root_label(mu_pins, net)
-        add_root_label(usb_pins, net)
-    for net in pwrin_hier_nets:
-        add_root_label(pwrin_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
-        if net in ec_hier_nets:
-            add_root_label(ec_pins, net)
-        if net in radio_hier_nets:
-            add_root_label(radio_pins, net)
-    for net in tcp0_hier_nets:
-        add_root_label(tcp0_pins, net)
-        if net in mu_hier_nets:
-            add_root_label(mu_pins, net)
-        if net in ec_hier_nets:
-            add_root_label(ec_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
-    for net in radio_hier_nets:
-        add_root_label(radio_pins, net)
-        if net in mu_hier_nets:
-            add_root_label(mu_pins, net)
-        if net in ec_hier_nets:
-            add_root_label(ec_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
-    for net in internal_hier_nets:
-        add_root_label(internal_pins, net)
-        if net in mu_hier_nets:
-            add_root_label(mu_pins, net)
-        if net in ec_hier_nets:
-            add_root_label(ec_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
-    for net in ham_hier_nets:
-        add_root_label(ham_pins, net)
-        if net in mu_hier_nets:
-            add_root_label(mu_pins, net)
-        if net in ec_hier_nets:
-            add_root_label(ec_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
-    for net in keyboard_hier_nets:
-        add_root_label(keyboard_pins, net)
-        if net in ec_hier_nets:
-            add_root_label(ec_pins, net)
-        if net in mu_hier_nets:
-            add_root_label(mu_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
-    for net in audio_hier_nets:
-        add_root_label(audio_pins, net)
-        if net in ham_hier_nets:
-            add_root_label(ham_pins, net)
-        if net in system_audio_hier_nets:
-            add_root_label(system_audio_pins, net)
-    for net in maker_hier_nets:
-        add_root_label(maker_pins, net)
-        if net in mu_hier_nets:
-            add_root_label(mu_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
-    for net in system_audio_hier_nets:
-        add_root_label(system_audio_pins, net)
-        if net in mu_hier_nets:
-            add_root_label(mu_pins, net)
-        if net in ec_hier_nets:
-            add_root_label(ec_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
-        if net in audio_hier_nets:
-            add_root_label(audio_pins, net)
-    for net in ethernet_hier_nets:
-        add_root_label(ethernet_pins, net)
-        if net in mu_hier_nets:
-            add_root_label(mu_pins, net)
-        if net in power_hier_nets:
-            add_root_label(power_pins, net)
+    sheet_contracts = (
+        ("power", power_pins, power_hier_nets),
+        ("ec", ec_pins, ec_hier_nets),
+        ("mu", mu_pins, mu_hier_nets),
+        ("usb", usb_pins, usb_hier_nets),
+        ("power_inputs", pwrin_pins, pwrin_hier_nets),
+        ("external_hdmi", tcp0_pins, tcp0_hier_nets),
+        ("wifi_oled", radio_pins, radio_hier_nets),
+        ("internal_services", internal_pins, internal_hier_nets),
+        ("radio_daughterboard", radio_db_pins, radio_db_hier_nets),
+        ("keyboard", keyboard_pins, keyboard_hier_nets),
+        ("maker", maker_pins, maker_hier_nets),
+        ("system_audio", system_audio_pins, system_audio_hier_nets),
+        ("ethernet", ethernet_pins, ethernet_hier_nets),
+    )
+    all_nets = []
+    seen_nets = set()
+    for _sheet_name, _pins, nets in sheet_contracts:
+        for net in nets:
+            if net not in seen_nets:
+                seen_nets.add(net)
+                all_nets.append(net)
+    orphan_nets = []
+    for net in all_nets:
+        users = [(name, pins) for name, pins, nets in sheet_contracts if net in nets]
+        if len(users) < 2:
+            orphan_nets.append((net, users[0][0]))
+            continue
+        for _name, pins in users:
+            add_root_label(pins, net)
+    if orphan_nets:
+        details = ", ".join(f"{net} only on {sheet}" for net, sheet in orphan_nets)
+        raise ValueError(f"orphan hierarchical nets: {details}")
 
     root_ncs = []
     root_text = (
@@ -1221,9 +1181,8 @@ def main():
         f'{tcp0_block}\n'
         f'{radio_block}\n'
         f'{internal_block}\n'
-        f'{ham_block}\n'
+        f'{radio_db_block}\n'
         f'{keyboard_block}\n'
-        f'{audio_block}\n'
         f'{maker_block}\n'
         f'{system_audio_block}\n'
         f'{ethernet_block}\n'

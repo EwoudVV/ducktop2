@@ -93,6 +93,13 @@ def lpf_and_antennas(s, refbase, prefix, x, y, nets, band_label):
     rf_filtered = nets["rf_filtered"]
     onboard = f"{prefix}_ANT_ONBOARD"
     external = f"{prefix}_ANT_EXTERNAL"
+    rf_switch_rfc = f"{prefix}_RF_SWITCH_RFC"
+    rf_switch_rf1 = f"{prefix}_RF_SWITCH_RF1"
+    rf_switch_rf2 = f"{prefix}_RF_SWITCH_RF2"
+    dc_block_refs = {
+        "VHF": ("C270", "C271", "C272"),
+        "UHF": ("C273", "C274", "C275"),
+    }[prefix]
     part = LPF_PARTS[prefix]
     filter_nets = {
         pin: ((rf_raw if name == "rf_raw" else rf_filtered) if name != "GND" else "GND", "local")
@@ -108,7 +115,7 @@ def lpf_and_antennas(s, refbase, prefix, x, y, nets, band_label):
             })
     s.place(f"U{refbase}", "PE42820", f"PE42820B-X {band_label} 43dBm-CW RF switch", x + 112, y + 5.08,
             footprint=FOOTPRINTS["PE42820"],
-            pin_nets=pe42820_nets(rf_filtered, external, onboard, nets["rf_sel"]),
+            pin_nets=pe42820_nets(rf_switch_rfc, rf_switch_rf1, rf_switch_rf2, nets["rf_sel"]),
             dnp=False, in_bom=True,
             extra_props={
                 "Manufacturer": "pSemi (Murata)",
@@ -126,12 +133,27 @@ def lpf_and_antennas(s, refbase, prefix, x, y, nets, band_label):
             pin_nets={"1": (nets["rf_sel"], "local"), "2": ("GND", "local")})
     s.place(f"C{refbase+5}", "C", "DNP 0.2p PE42820 RFC match candidate", x + 75, y + 35.56,
             footprint=FOOTPRINTS["C_RF"],
-            pin_nets={"1": (rf_filtered, "local"), "2": ("GND", "local")},
+            pin_nets={"1": (rf_switch_rfc, "local"), "2": ("GND", "local")},
             dnp=True, in_bom=False,
             extra_props={
                 "CandidateValue": "0.2pF",
                 "ReleaseGate": "FIT_ONLY_AFTER_BOARD_SPARAMETER_AND_VNA_MATCHING",
             })
+    dc_block_props = {
+        "Manufacturer": "KYOCERA AVX",
+        "MPN": "600S101JT250XTV",
+        "DatasheetURL": "https://www.kyocera-avx.com/products/rfmicrowave/capacitors/600-series/600s-series/",
+        "RFContract": "100PF_C0G_250V_HIGH_Q_SERIES_DC_BLOCK;VERIFY_FINAL_50OHM_LAYOUT_WITH_VNA",
+    }
+    for ref, net_a, net_b, role, dx, dy in (
+        (dc_block_refs[0], rf_filtered, rf_switch_rfc, "RFC", 88.9, 0),
+        (dc_block_refs[1], rf_switch_rf1, external, "RF1_EXTERNAL", 142.24, 27.94),
+        (dc_block_refs[2], rf_switch_rf2, onboard, "RF2_INTERNAL", 142.24, 0),
+    ):
+        s.place(ref, "C", f"100p C0G 250V {prefix} PE42820 {role} DC block", x + dx, y + dy,
+                footprint="Capacitor_SMD:C_0603_1608Metric",
+                pin_nets={"1": (net_a, "local"), "2": (net_b, "local")},
+                extra_props=dc_block_props)
     s.place(f"J{refbase}", "Conn_Coaxial", f"{band_label} internal/PCB antenna feed U.FL", x + 170, y,
             footprint=FOOTPRINTS["Conn_Coaxial_UFL"],
             pin_nets={"1": (onboard, "local"), "2": ("GND", "local")},
@@ -142,7 +164,7 @@ def lpf_and_antennas(s, refbase, prefix, x, y, nets, band_label):
             extra_props={"Manufacturer": "Molex", "MPN": "73251-1153"})
 
 
-def build(sheet_symbol_uuid):
+def build(sheet_symbol_uuid, supply_5v="SYS_5V", logic_3v3="MCU_3V3"):
     s = Sheet(f"/{sheet_symbol_uuid}")
     s.refcounters["#PWR"] = 120
     s.refcounters["#FLG"] = 120
@@ -152,13 +174,13 @@ def build(sheet_symbol_uuid):
     s.text(20, 27.94, "RF output must pass real low-pass filters before either internal or rear external antenna selection.")
 
     # ---------------- Radio 4 V rail ----------------
-    s.text(20, 50.8, "== RADIO_4V0 rail from SYS_5V ==")
-    s.place("U70", "TPS54302", "TPS54302 SYS_5V -> RADIO_4V0", 80, 100,
+    s.text(20, 50.8, f"== RADIO_4V0 rail from {supply_5v} ==")
+    s.place("U70", "TPS54302", f"TPS54302 {supply_5v} -> RADIO_4V0", 80, 100,
             footprint=FOOTPRINTS["U_SOT23_6"],
             pin_nets={
                 "1": ("GND", "local"),
                 "2": ("RADIO_BUCK_SW", "local"),
-                "3": ("SYS_5V", "hier"),
+                "3": (supply_5v, "hier"),
                 "4": ("RADIO_BUCK_FB", "local"),
                 "5": ("RADIO_BUCK_EN", "local"),
                 "6": ("RADIO_BUCK_BOOT", "local"),
@@ -169,9 +191,9 @@ def build(sheet_symbol_uuid):
                 "Datasheet": "https://www.ti.com/lit/ds/symlink/tps54302.pdf",
             })
     s.place("R220", "R", "100k radio rail enable", 20, 76.2, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("SYS_5V", "hier"), "2": ("RADIO_BUCK_EN", "local")})
+            pin_nets={"1": (supply_5v, "hier"), "2": ("RADIO_BUCK_EN", "local")})
     s.place("C220", "C", "10u 25V X7R radio VIN", 20, 88.9, footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local")},
+            pin_nets={"1": (supply_5v, "hier"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM31CR71E106KA12L"})
     s.place("C221", "C", "100n BOOT", 20, 101.6, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("RADIO_BUCK_BOOT", "local"), "2": ("RADIO_BUCK_SW", "local")})
@@ -231,7 +253,7 @@ def build(sheet_symbol_uuid):
             extra_props=inverter_props)
     s.place("U260", "74LVC2G04", "SN74LVC2G04DCKR PTT request inverter", 140, 185.42,
             unit=3, footprint=FOOTPRINTS["SN74LVC2G04DCK"],
-            pin_nets={"2": ("GND", "local"), "5": ("MCU_3V3", "hier")},
+            pin_nets={"2": ("GND", "local"), "5": (logic_3v3, "hier")},
             extra_props=inverter_props)
     s.place("U261", "74LVC2G32", "SN74LVC2G32DCUR dual-radio PTT interlock", 170, 185.42,
             unit=1, footprint=FOOTPRINTS["SN74LVC2G32DCU"],
@@ -247,20 +269,20 @@ def build(sheet_symbol_uuid):
             }, extra_props={**interlock_props, "MPN": "SN74LVC2G32DCUR"})
     s.place("U261", "74LVC2G32", "SN74LVC2G32DCUR dual-radio PTT interlock", 230, 185.42,
             unit=3, footprint=FOOTPRINTS["SN74LVC2G32DCU"],
-            pin_nets={"4": ("GND", "local"), "8": ("MCU_3V3", "hier")},
+            pin_nets={"4": ("GND", "local"), "8": (logic_3v3, "hier")},
             extra_props={**interlock_props, "MPN": "SN74LVC2G32DCUR"})
     for ref, x in (("C260", 170), ("C261", 205)):
         s.place(ref, "C", "100n PTT interlock local", x, 198.12,
                 footprint=FOOTPRINTS["C_100n"],
-                pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
+                pin_nets={"1": (logic_3v3, "hier"), "2": ("GND", "local")})
 
     # A radio-powered LVC buffer isolates every module input from the always-on
     # EC domain. SN74LVC3G34 specifies Ioff partial-power-down behavior, so its
     # outputs are high impedance while RADIO_4V0 is absent. Module TXD remains
     # an output and reaches the EC through a current-limiting series resistor.
-    for ref, prefix, y, bypass, tx_series, uart_default, nets in (
-        ("U242", "VHF", 205.74, "C246", "R243", "R244", vhf),
-        ("U252", "UHF", 256.54, "C256", "R261", "R262", uhf),
+    for ref, prefix, y, bypass, translator, tx_series, tx_bypass_a, tx_bypass_b, nets in (
+        ("U242", "VHF", 205.74, "C246", "U243", "R243", "C247", "C248", vhf),
+        ("U252", "UHF", 256.54, "C256", "U253", "R261", "C257", "C258", uhf),
     ):
         common = {
             "Manufacturer": "Texas Instruments", "MPN": "SN74LVC3G34DCUR",
@@ -287,13 +309,40 @@ def build(sheet_symbol_uuid):
         s.place(bypass, "C", f"100n {prefix} fail-safe buffer local", 220, y,
                 footprint=FOOTPRINTS["C_100n"],
                 pin_nets={"1": ("RADIO_4V0", "local"), "2": ("GND", "local")})
-        s.place(tx_series, "R", f"1k {prefix} module TXD isolation", 80, y + 15.24,
+        # Translate the module's RADIO_4V0 UART output into the local 3.3 V
+        # logic domain. The LVC1T45 has Ioff, so an unpowered daughterboard
+        # cannot inject the always-on EC through its receive pin.
+        translated_txd = f"RADIO_{prefix}_UART_TXD_3V3"
+        s.place(translator, "SN74LVC1T45DBV", f"SN74LVC1T45 {prefix} TXD 4V-to-3V3 translator", 80, y + 15.24,
+                footprint=FOOTPRINTS["SN74LVC1T45DBV"],
+                pin_nets={
+                    "1": ("RADIO_4V0", "local"), "2": ("GND", "local"),
+                    "3": (nets["uart_txd"], "local"), "4": (translated_txd, "local"),
+                    "5": ("RADIO_4V0", "local"), "6": (logic_3v3, "hier"),
+                }, extra_props={
+                    "Manufacturer": "Texas Instruments", "MPN": "SN74LVC1T45DBVR",
+                    "PowerOffContract": "IOFF_PREVENTS_EC_INJECTION_WHEN_RADIO_RAILS_ARE_OFF",
+                })
+        s.place(tx_series, "R", f"100R {prefix} translated TXD series", 120, y + 15.24,
                 footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (nets["uart_txd"], "local"),
+                pin_nets={"1": (translated_txd, "local"),
                           "2": (f"RADIO_{prefix}_UART_RX", "hier")})
-        s.place(uart_default, "R", f"100k {prefix} EC TX default low", 120, y + 15.24,
+        s.place(tx_bypass_a, "C", f"100n {prefix} UART translator RADIO_4V0", 160, y + 15.24,
+                footprint=FOOTPRINTS["C_100n"],
+                pin_nets={"1": ("RADIO_4V0", "local"), "2": ("GND", "local")})
+        s.place(tx_bypass_b, "C", f"100n {prefix} UART translator 3V3", 200, y + 15.24,
+                footprint=FOOTPRINTS["C_100n"],
+                pin_nets={"1": (logic_3v3, "hier"), "2": ("GND", "local")})
+    for ref, net, rail, value in (
+        ("R235", vhf["ptt_local_n"], "RADIO_4V0", "10k VHF local PTT inactive"),
+        ("R236", uhf["ptt_local_n"], "RADIO_4V0", "10k UHF local PTT inactive"),
+        ("R237", vhf["pd_local_n"], "GND", "10k VHF local sleep"),
+        ("R238", uhf["pd_local_n"], "GND", "10k UHF local sleep"),
+    ):
+        s.place(ref, "R", value, 20, 299.72 + (int(ref[1:]) - 235) * 10.16,
                 footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (f"RADIO_{prefix}_UART_TX", "hier"), "2": ("GND", "local")})
+                pin_nets={"1": (net, "local"), "2": (rail, "local")},
+                extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
 
     # A radio-powered transparent latch follows antenna selection only while
     # PTT_SAFE_N is high. Once transmission starts, LE goes low and freezes the
@@ -326,14 +375,10 @@ def build(sheet_symbol_uuid):
                 footprint=FOOTPRINTS["R"],
                 pin_nets={"1": (f"RADIO_{prefix}_RF_SEL_3V3", "hier"), "2": ("GND", "local")})
 
-    # Module control defaults. PTT_N is pulled high (inactive), while PD_N is
-    # pulled low so blank/reset EC firmware leaves both receiver modules asleep.
-    for i, (net, label) in enumerate([
-        ("RADIO_VHF_PTT_N", "VHF PTT default inactive"),
-        ("RADIO_UHF_PTT_N", "UHF PTT default inactive"),
-    ]):
-        s.place(f"R{223+i}", "R", f"100k {label}", 250, 220.98 + i * 12.7, footprint=FOOTPRINTS["R"],
-                pin_nets={"1": ("MCU_3V3", "hier"), "2": (net, "hier")})
+    # The mainboard owns reset-safe defaults for every signal crossing the
+    # daughterboard connector. Do not duplicate pull-ups to RADIO_DB_3V3 here:
+    # they would weakly phantom-power the switched-off daughterboard rail.
+    # Module-side defaults remain after the Ioff isolation buffers below.
     for i, (net, label) in enumerate([
         ("RADIO_VHF_PD_N", "VHF default sleep"),
         ("RADIO_UHF_PD_N", "UHF default sleep"),
@@ -379,9 +424,9 @@ def build(sheet_symbol_uuid):
                 "3": ("RADIO_UHF_AUDIO_OUT", "hier"),
                 "4": (vhf["mic_in"], "hier"),
                 "5": (uhf["mic_in"], "hier"),
-                "6": ("RADIO_AUDIO_SEL", "hier"),
-                "7": ("MCU_3V3", "hier"),
-                "8": ("RADIO_GPIO0", "hier"),
+                "6": ("", "nc"),
+                "7": (logic_3v3, "hier"),
+                "8": ("", "nc"),
                 "9": ("GND", "local"),
                 "10": ("GND", "local"),
             }, on_board=False)
@@ -402,6 +447,8 @@ def build(sheet_symbol_uuid):
     s.text(20, 259.08, "GPS APRS support is software/audio-path work using the MAX-M10S sheet and the VHF radio path.")
     s.text(20, 266.7, "U260/U261 force both radios out of TX for simultaneous requests; U241/U251 freeze antenna selection for the full transmit interval.")
     s.text(20, 274.32, "R229/R231 select 0.5W prototype power. Filter ratings do not prove emissions compliance; verify both outputs on a spectrum analyzer.")
-    s.text(20, 281.94, "R225/R226 set safe EC defaults; radio-powered Ioff buffers prevent injection into unpowered DRA818 inputs.")
+    s.text(20, 281.94, "R225/R226 and R235-R238 keep both modules asleep and PTT inactive through connector faults, reset, and rail ramp.")
+    s.text(20, 289.56, "Firmware wake sequence: assert PD high, wait at least 500ms, complete/retry DMOCONNECT plus configuration, then allow PTT.")
+    s.text(20, 297.18, "C270-C275 guarantee 0VDC at all PE42820 RF ports; verify their 50-ohm launches and both antenna paths with a VNA.")
 
     return s

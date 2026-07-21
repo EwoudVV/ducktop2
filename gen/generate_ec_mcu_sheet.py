@@ -38,7 +38,7 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
                 "29": ("CHG_ENABLE", "hier"), "30": ("MU_RSTBTN_N", "hier"), "31": ("AUX_DC_ADC", "hier"),
                 "32": ("THERM_SKIN_ADC", "hier"), "33": ("PD1_VALID_N", "hier"), "34": ("FAN_TACH", "hier"),
                 "35": ("THERM_MU_ADC", "hier"), "36": ("TRACKPAD_FAULT_N", "hier"), "37": ("PD2_VALID_N", "hier"),
-                "38": ("KB_ROW7", "hier"), "39": ("PD3_VALID_N", "hier"), "40": ("FAN_PWM", "hier"),
+                "38": ("KB_ROW7", "hier"), "39": ("PD1_TCPC_IRQ_N", "hier"), "40": ("FAN_PWM", "hier"),
                 "41": ("LID_CLOSED_N", "hier"), "42": ("AUDIO_MIC_EN", "hier"),
                 "43": ("AUDIO_AMP_EC_EN", "hier"), "44": ("MU_12V_ENABLE", "hier"),
                 "45": ("MU_S0_HIGH", "hier"), "46": ("MU_12V_PG", "hier"),
@@ -59,10 +59,10 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
                 "81": ("KB_COL0", "hier"), "82": ("KB_COL1", "hier"),
                 "83": ("KB_COL2", "hier"), "84": ("KB_COL3", "hier"), "85": ("KB_COL4", "hier"),
                 "86": ("KB_COL5", "hier"), "87": ("KB_COL6", "hier"), "88": ("KB_COL7", "hier"),
-                "89": ("INTERNAL_USB_VBUS_FAULT_N", "hier"), "90": ("", "nc"),
-                "91": ("RADIO_AUDIO_SEL", "hier"), "92": ("I2C_SCL", "hier"),
+                "89": ("INTERNAL_USB_VBUS_FAULT_N", "hier"), "90": ("PD2_TCPC_IRQ_N", "hier"),
+                "91": ("RADIO_DB_PWR_EN", "hier"), "92": ("I2C_SCL", "hier"),
                 "93": ("I2C_SDA", "hier"), "94": ("BOOT0_NET", "local"), "95": ("GNSS_EXTINT", "hier"),
-                "96": ("RADIO_GPIO0", "hier"), "97": ("KB_ROW0", "hier"), "98": ("KB_ROW1", "hier"),
+                "96": ("PD_PROTECT_FAULT_N", "hier"), "97": ("KB_ROW0", "hier"), "98": ("KB_ROW1", "hier"),
                 "99": ("GND", "local"), "100": ("MCU_3V3", "hier"),
             },
             extra_props={"Manufacturer": "STMicroelectronics", "MPN": "STM32F407VGT6"})
@@ -208,24 +208,25 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
     # stay off until restarted firmware deliberately reconfigures and validates
     # one source. This closes the warm-reset state-retention hole in TCA9535.
     s.text(650, 250, "== U44 resettable always-on source manager I/O expander ==")
-    s.place("U44", "PCA9539xD", "TCA9539PWR resettable source manager @0x20", 700, 330,
+    s.place("U44", "PCA9539xD", "TCA9539PWR resettable source manager @0x74", 700, 330,
             footprint=FOOTPRINTS["TCA9539PWR"],
             pin_nets={
                 "1": ("SOURCE_MGR_INT_N", "local"), "2": ("GND", "local"), "3": ("NRST_NET", "local"),
                 "4": ("PD1_PATH_EN", "hier"), "5": ("PD2_PATH_EN", "hier"),
-                "6": ("PD3_PATH_EN", "hier"), "7": ("PD1_EFUSE_FAULT_N", "hier"),
-                "8": ("PD2_EFUSE_FAULT_N", "hier"), "9": ("PD3_EFUSE_FAULT_N", "hier"),
+                "6": ("SOURCE_MGR_SPARE1", "local"), "7": ("PD1_EFUSE_FAULT_N", "hier"),
+                "8": ("PD2_EFUSE_FAULT_N", "hier"), "9": ("SOURCE_MGR_SPARE2", "local"),
                 "10": ("PACK_FAULT_N", "hier"), "11": ("AUX_FAULT_N", "hier"),
                 "12": ("GND", "local"), "13": ("PACK_RETRY_PULSE", "hier"),
                 "14": ("AUX_PGOOD", "hier"), "15": ("MAIN_USB_VALID_N", "hier"),
                 "16": ("MAIN_AUX_VALID_N", "hier"), "17": ("AON_FAULT_N", "hier"),
-                "18": ("SOURCE_MGR_SPARE1", "local"), "19": ("SOURCE_MGR_SPARE2", "local"),
-                "20": ("SOURCE_MGR_SPARE3", "local"), "21": ("GND", "local"),
+                "18": ("RADIO_DB_PG", "hier"), "19": ("RADIO_DB_FAULT_N", "hier"),
+                "20": ("RADIO_DB_PRESENT_N", "hier"), "21": ("GND", "local"),
                 "22": ("I2C_SCL", "hier"), "23": ("I2C_SDA", "hier"),
                 "24": ("MCU_3V3", "hier"),
             }, extra_props={
                 "Manufacturer": "Texas Instruments", "MPN": "TCA9539PWR",
                 "Datasheet": "https://www.ti.com/lit/ds/symlink/tca9539.pdf",
+                "I2CAddress7Bit": "0x74",
                 "ResetContract": "Pin 3 follows EC NRST; all P-ports reset to inputs and external SHDN pulldowns force every PD path off",
             })
     s.place("R780", "R", "10k source-manager INT pull-up", 650, 270, footprint=FOOTPRINTS["R"],
@@ -233,7 +234,7 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
     s.place("R781", "R", "10k aggregate AON fault pull-up", 650, 282.7,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("AON_FAULT_N", "hier")})
-    for idx in range(1, 4):
+    for idx in range(1, 3):
         s.place(f"R{781 + idx}", "R", "100k unused source-manager I/O pulldown", 650, 282.7 + idx * 10,
                 footprint=FOOTPRINTS["R"],
                 pin_nets={"1": (f"SOURCE_MGR_SPARE{idx}", "local"), "2": ("GND", "local")})
@@ -321,8 +322,10 @@ def main():
         "RADIO_VHF_SQL", "RADIO_UHF_SQL", "RADIO_VHF_RF_SEL_3V3", "RADIO_UHF_RF_SEL_3V3", "RADIO_AUDIO_SEL",
         "AUDIO_MIC_EN", "INTERNAL_USB_VBUS_FAULT_N",
         "SERVICE_MUX_RESET_N",
-        "PD1_PATH_EN", "PD2_PATH_EN", "PD3_PATH_EN",
-        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N", "PD3_EFUSE_FAULT_N",
+        "PD1_PATH_EN", "PD2_PATH_EN",
+        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N",
+        "RADIO_DB_PWR_EN", "RADIO_DB_PG", "RADIO_DB_FAULT_N", "RADIO_DB_PRESENT_N",
+        "PD1_TCPC_IRQ_N", "PD2_TCPC_IRQ_N", "PD_PROTECT_FAULT_N",
         "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD", "AON_FAULT_N",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N",
     ]

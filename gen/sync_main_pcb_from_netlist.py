@@ -683,6 +683,16 @@ def update_pad_nets(block: str, comp: Component) -> tuple[str, int]:
     updates = 0
     new_block = block
     for start, end, pad in reversed(pad_blocks(block)):
+        # NPTH pads are mechanical holes, even when a library gives a
+        # concentric electrical pad the same number.  Assigning the symbol net
+        # to the NPTH causes KiCad to clear its number on load while retaining
+        # a stale net, creating a permanent schematic-parity mismatch.
+        if re.search(r'^\s*\(pad\s+(?:"[^"]*"|[^\s\)]+)\s+np_thru_hole\b', pad):
+            new_pad = clear_pad_net(pad)
+            if new_pad != pad:
+                updates += 1
+            new_block = new_block[:start] + new_pad + new_block[end:]
+            continue
         pin = pad_name(pad)
         if pin not in comp.pin_nets:
             continue

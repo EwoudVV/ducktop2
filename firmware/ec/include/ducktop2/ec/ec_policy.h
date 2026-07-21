@@ -9,8 +9,8 @@
 extern "C" {
 #endif
 
-#define EC_PD_PORT_COUNT 3u
-#define EC_SOURCE_COUNT 5u
+#define EC_PD_PORT_COUNT 2u
+#define EC_SOURCE_COUNT 4u
 
 #define EC_DEFAULT_LOW_PACK_MU_EDP_BUDGET_MW 15000u
 #define EC_DEFAULT_NORMAL_MU_EDP_BUDGET_MW 30000u
@@ -22,7 +22,6 @@ typedef enum {
   EC_SOURCE_AUX,
   EC_SOURCE_PD1,
   EC_SOURCE_PD2,
-  EC_SOURCE_PD3,
   EC_SOURCE_NONE = 0xff
 } ec_source_id_t;
 
@@ -38,7 +37,7 @@ typedef enum {
   EC_FAULT_WATCHDOG,
   EC_FAULT_SOURCE_MISSING,
   EC_FAULT_SOURCE_REPORTED,
-  EC_FAULT_NEGOTIATED_CURRENT_INVALID,
+  EC_FAULT_INPUT_CURRENT_INVALID,
   EC_FAULT_VALIDATION_TIMEOUT,
   EC_FAULT_IINDPM_APPLY_TIMEOUT,
   EC_FAULT_IINDPM_MISMATCH,
@@ -63,8 +62,8 @@ typedef struct {
   bool present;
   bool path_good;
   bool fault_n;
-  bool negotiated_current_valid;
-  uint16_t negotiated_current_ma;
+  bool qualified_input_current_valid;
+  uint16_t qualified_input_current_ma;
   uint16_t negotiated_voltage_mv;
   bool available_power_valid;
   uint32_t available_power_mw;
@@ -94,8 +93,10 @@ typedef struct {
   bool request_charger;
   bool request_mu_12v;
   bool request_keyboard_rgb;
-  bool request_radio_vhf;
-  bool request_radio_uhf;
+  bool radio_db_present_n;
+  bool radio_db_power_good;
+  bool radio_db_fault_n;
+  bool request_radio_db;
   bool request_audio_amp;
   bool request_audio_mic;
   bool estimated_mu_edp_power_valid;
@@ -121,8 +122,7 @@ typedef struct {
   bool power_budget_limited;
   bool power_policy_confirmed;
   bool keyboard_rgb_power_enable;
-  bool radio_vhf_power_enable;
-  bool radio_uhf_power_enable;
+  bool radio_db_power_enable;
   bool audio_amp_enable;
   bool audio_mic_enable;
 } ec_outputs_t;
@@ -134,6 +134,7 @@ typedef struct {
   uint32_t path_good_timeout_ms;
   uint32_t power_policy_apply_timeout_ms;
   uint32_t mu_power_good_timeout_ms;
+  uint32_t radio_db_power_good_timeout_ms;
   uint16_t minimum_pd_current_ma;
   uint16_t iindpm_margin_ma;
   uint16_t iindpm_cap_ma;
@@ -159,6 +160,7 @@ typedef struct {
   uint32_t iindpm_command_started_ms;
   uint32_t power_policy_started_ms;
   uint32_t mu_enable_started_ms;
+  uint32_t radio_db_enable_started_ms;
   bool path_commanded;
   bool iindpm_commanded;
   bool power_policy_waiting;
@@ -166,6 +168,9 @@ typedef struct {
   bool reset_interlock_confirmed;
   bool mu_waiting_for_pg;
   bool mu_pg_confirmed;
+  bool radio_db_waiting_for_pg;
+  bool radio_db_pg_confirmed;
+  bool radio_db_request_blocked;
   ec_outputs_t outputs;
 } ec_controller_t;
 
@@ -183,7 +188,7 @@ bool ec_controller_clear_fault(ec_controller_t *controller,
                                bool root_cause_removed, uint32_t now_ms);
 
 uint16_t ec_policy_iindpm_ma(const ec_policy_config_t *config,
-                             uint16_t negotiated_current_ma);
+                             uint16_t qualified_input_current_ma);
 uint32_t ec_policy_pd_input_power_mw(const ec_policy_config_t *config,
                                      uint16_t negotiated_voltage_mv,
                                      uint16_t negotiated_current_ma);

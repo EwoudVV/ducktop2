@@ -13,7 +13,7 @@ display connection, and a separate low-profile mechanical keyboard.
 ![Top view of the Ducktop2 motherboard at placement stage](docs/images/ducktop2-pcb-top.png)
 
 > **Current state, July 2026:** the generated motherboard schematic passes ERC
-> and the project checks. The six-layer PCB has its outline and 997 synchronized
+> and the project checks. The six-layer PCB has its outline and 1,173 synchronized
 > footprints. High-speed placement is still being revised and routing has not
 > started. The board images in this repository are placement-stage renders.
 
@@ -64,9 +64,9 @@ charging, or system power sequencing.
 | Internal display | AUO B160QAN03.K, 2560x1600 at 120 Hz through the Mu's onboard 40-pin eDP output |
 | Storage | PCIe Gen3 x4 M.2 M-key 2280 NVMe plus onboard eMMC fallback |
 | Networking | M.2 E-key 2230 Wi-Fi/Bluetooth and RTL8111H Gigabit Ethernet |
-| User I/O | Two native 10 Gbit/s USB-C ports, HDMI-A, Ethernet, trackpad, keyboard, and two OLEDs |
+| User I/O | Five USB-C data ports, HDMI-A, Ethernet, trackpad, keyboard, and two OLEDs |
 | Battery | Three 3.7 V pouch cells in series with cell-level and whole-pack protection |
-| Charging | Three 15 V USB-C PD sink inputs plus a protected variable-voltage AUX/DC input |
+| Charging | One rear USB-C PD data/charging port per side plus a protected variable-voltage AUX/DC input |
 | Laptop controller | STM32F407 EC for power policy, keyboard, cooling, controls, radios, and status displays |
 | Maker controller | Chip-down RP2350 exposed as an independent USB device with protected power and GPIO |
 | Audio | Internal USB audio, stereo amplifier and speakers, digital microphone, and a separate radio audio path |
@@ -79,7 +79,9 @@ Ducktop2 uses a 3S lithium-ion pack. The battery path includes a replaceable
 back-to-back MOSFET disconnects, a second whole-pack protection layer, a
 BQ25798 buck-boost charger and NVDC power path, and a BQ34Z100-G1 fuel gauge.
 
-Three CH224A controllers request 15 V from USB-C PD sources. A separate AUX/DC
+The two rear TPS25751A ports negotiate up to 15 V from USB-C PD sources while
+also carrying USB data. The other three USB-C ports are protected host/data
+ports and safely ignore a connected charger. A separate AUX/DC
 input accepts a wider range of ordinary DC or occasional solar sources through
 its own qualification and protection path. A regulated 12 V rail supplies the
 LattePanda Mu; local converters generate the system 5 V and 3.3 V rails.
@@ -136,11 +138,11 @@ maintained ERC screenshot.
 
 | Check | Current result |
 | --- | --- |
-| KiCad ERC | 0 errors; 13 classified flattened-library warnings |
-| Independent netlist closure | 386 pass, 0 fail |
-| Bounded electrical calculations | 129 pass, 0 fail |
-| Pin review | 2,410 pass, 0 fail, 351 review |
-| Schematic-to-PCB parity | 997 of 997 references with no pad-net or metadata drift |
+| KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
+| Independent netlist closure | 1,571 pass, 0 fail |
+| Bounded electrical calculations | 123 pass, 0 fail |
+| Pin review | 2,298 pass, 0 fail, 344 review |
+| Schematic-to-PCB parity | 1,173 of 1,173 references with no pad-net or metadata drift |
 | Host firmware policy tests | Pass |
 
 The project has also been reviewed repeatedly against component datasheets.
@@ -185,6 +187,7 @@ schematics or comparing the PCB to the netlist.
 | `firmware/` | Host-tested EC and maker-controller policy cores |
 | `mechanical/` | Current dimensions, floorplans, and retention contracts |
 | `manufacturing/` | Keyboard rev-A production package and release gates |
+| `radio_daughterboard/` | Removable VHF/UHF, GNSS, and radio-audio board |
 | `software/os-theme/` | Early Fedora KDE theme work |
 | `verification/` | Current checks and concise verification evidence |
 | `docs/` | Architecture, status, renders, schematic exports, and project background |
@@ -196,6 +199,7 @@ schematics or comparing the PCB to the netlist.
 - [Direct-eDP panel and cable work](docs/display-direct-edp.md)
 - [Mechanical measurements](docs/mechanical.md)
 - [Firmware policy](firmware/README.md)
+- [Radio/GNSS daughterboard](radio_daughterboard/README.md)
 - [Keyboard production package](manufacturing/keyboard_revA_jlcpcb/README_JLCPCB.md)
 - [Verification summary](verification/README.md)
 - [Selected schematic export](docs/exports/ducktop2-selected-schematics.pdf)

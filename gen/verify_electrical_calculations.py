@@ -24,6 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMATIC = ROOT / "ducktop2.kicad_sch"
+RADIO_SCHEMATIC = ROOT / "radio_daughterboard" / "radio_daughterboard.kicad_sch"
 KICAD_CLI = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
 EC_POLICY_HEADER = ROOT / "firmware/ec/include/ducktop2/ec/ec_policy.h"
 
@@ -60,7 +61,7 @@ def parse_engineering(value: str) -> float:
     return number * multiplier
 
 
-def export_netlist(path: Path) -> None:
+def export_netlist(schematic: Path, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         [
@@ -72,7 +73,7 @@ def export_netlist(path: Path) -> None:
             "kicadxml",
             "--output",
             str(path),
-            str(SCHEMATIC),
+            str(schematic),
         ],
         check=True,
         cwd=ROOT,
@@ -159,7 +160,7 @@ def add_window(checks: list[Check], name: str, refs: tuple[str, str, str],
               f"VREF*(Rtop+Rmid+Rbot)/Rbot, {refs_text}"),
     ])
 
-def build_checks(values: dict[str, str]) -> list[Check]:
+def build_checks(values: dict[str, str], radio_values: dict[str, str]) -> list[Check]:
     checks: list[Check] = []
 
     pack_uv, _ = three_resistor_window(
@@ -262,42 +263,36 @@ def build_checks(values: dict[str, str]) -> list[Check]:
         Check("TPS259470A aggregate AON output slew", aon_slew, "V/ms", 0.55, 0.67,
               "2000/C799(pF), TI Equation 4"),
     ])
-    for index, refs in enumerate((("R800", "R801", "R802"),
-                                  ("R810", "R811", "R812"),
-                                  ("R820", "R821", "R822")), start=1):
+    pd_ports = (
+        (1, ("R2080", "R2081", "R2082"), "R2083", 2000),
+        (2, ("R2090", "R2091", "R2092"), "R2093", 2040),
+    )
+    for index, refs, ilim_ref, _cbase in pd_ports:
         add_window(checks, f"TPS26630 PD{index} eFuse acceptance", refs, values, 1.2,
                    (12.1, 12.6), (17.0, 17.6))
-        pd_efuse_limit = 18.0 / (resistor(values, f"R{800 + (index - 1) * 10 + 3}") / 1e3)
+        pd_efuse_limit = 18.0 / (resistor(values, ilim_ref) / 1e3)
         checks.append(Check(f"TPS26630 PD{index} eFuse current limit", pd_efuse_limit, "A",
-                            2.9, 3.1, f"18/R{800 + (index - 1) * 10 + 3}(kOhm)"))
+                            2.9, 3.1, f"18/{ilim_ref}(kOhm)"))
     # USB Type-C limits sink-side VBUS capacitance to 10 uF before attachment.
     # Count all direct raw-port capacitors plus the shared AON input reached
     # through the Schottky OR. Apply +20% capacitance tolerance and reserve an
     # additional 0.5 uF for IC, diode, connector, and layout parasitics.
     shared_raw_cap = capacitor(values, "C795") + capacitor(values, "C796")
-    for index in range(1, 4):
-        base = 120 + (index - 1) * 10
-        ebase = 800 + (index - 1) * 10
-        nominal = (
-            capacitor(values, f"C{base}")
-            + capacitor(values, f"C{base + 1}")
-            + capacitor(values, f"C{ebase}")
-            + capacitor(values, f"C{ebase + 1}")
-            + shared_raw_cap
-        )
+    for index, _refs, _ilim_ref, cbase in pd_ports:
+        raw_caps = tuple(f"C{cbase + offset}" for offset in range(15, 20))
+        nominal = sum(capacitor(values, ref) for ref in raw_caps) + shared_raw_cap
         worst_case = nominal * 1.20 + 0.5e-6
         checks.extend([
             Check(f"USB-C PD{index} nominal pre-attach VBUS capacitance",
-                  nominal * 1e6, "uF", 4.1, 4.3,
-                  f"C{base}+C{base + 1}+C{ebase}+C{ebase + 1}+C795+C796"),
+                  nominal * 1e6, "uF", 5.8, 5.9,
+                  "+".join((*raw_caps, "C795", "C796"))),
             Check(f"USB-C PD{index} worst-case pre-attach VBUS capacitance",
                   worst_case * 1e6, "uF", 0.0, 10.0,
                   "nominal*1.20 + 0.5uF conservative unmodeled allowance; USB Type-C max 10uF"),
         ])
-    for index, refs in enumerate((("R720", "R721", "R722"),
-                                  ("R723", "R724", "R725"),
-                                  ("R726", "R727", "R728")), start=1):
-        add_window(checks, f"LTC4417 PD{index} acceptance", refs, values, 1.0,
+    for index, refs in enumerate((("R2140", "R2141", "R2142"),
+                                  ("R2143", "R2144", "R2145")), start=1):
+        add_window(checks, f"LTC4418 PD{index} selector acceptance", refs, values, 1.0,
                    (12.8, 13.3), (16.7, 17.5))
     add_window(checks, "LTC4418 USB acceptance", ("R730", "R731", "R732"),
                values, 1.0, (12.8, 13.3), (16.7, 17.5))
@@ -331,26 +326,7 @@ def build_checks(values: dict[str, str]) -> list[Check]:
                         "(5V*R190/(R17+R190)-1V)/(0.8V/A)"))
     qualified_pd_power = 15.0 * (bq_ilim - 0.25)
     checks.append(Check("15V PD usable input budget with firmware reserve", qualified_pd_power, "W", 40.0, 42.0,
-                        "15V*(ILIM ceiling-0.25A); actual IINDPM is also capped by CH224A PDO current"))
-
-    # The CH224A branches share the upstream 4.7k pull-ups through U45.  A
-    # large series resistor becomes a DC divider while CH224A holds the bus
-    # low; use worst-case rail/resistor corners to keep that added voltage
-    # comfortably below the STM32 I2C input-low limit.  CH224A VOL and mux
-    # resistance still require first-hardware measurement because WCH does not
-    # publish a production VOL limit for this telemetry interface.
-    ch224_series_refs = ("R123", "R124", "R133", "R134", "R143", "R144")
-    ch224_series_max = max(resistor(values, ref) for ref in ch224_series_refs)
-    i2c_pullup_min = min(resistor(values, "R30"), resistor(values, "R31"))
-    ch224_divider_low_max = 3.6 * (ch224_series_max * 1.01) / (
-        i2c_pullup_min * 0.99 + ch224_series_max * 1.01
-    )
-    checks.extend([
-        Check("CH224A I2C maximum series damping", ch224_series_max, "ohm", 0.0, 100.0,
-              "max(R123/R124/R133/R134/R143/R144)"),
-        Check("CH224A I2C worst-case divider low contribution", ch224_divider_low_max, "V", 0.0, 0.10,
-              "3.6V*Rseries(max*1.01)/(Rpullup(min*0.99)+Rseries(max*1.01)); excludes endpoint VOL and mux RON"),
-    ])
+                        "15V*(ILIM ceiling-0.25A); firmware also caps IINDPM from the active TPS25751A PDO/RDO"))
 
     sys_5v = 0.6 * (1.0 + resistor(values, "R40") / resistor(values, "R41"))
     sys_5v_min = 0.591 * (
@@ -378,8 +354,9 @@ def build_checks(values: dict[str, str]) -> list[Check]:
     ])
 
     for name, ref in (
-        ("Native USB-C port 1", "R70"),
-        ("Native USB-C port 2", "R90"),
+        ("Hub USB-C J22", "R1780"),
+        ("Hub USB-C J23", "R1740"),
+        ("Hub USB-C J12", "R1760"),
         ("Internal trackpad", "R252"),
     ):
         r_kohm = resistor(values, ref) / 1e3
@@ -428,22 +405,26 @@ def build_checks(values: dict[str, str]) -> list[Check]:
               "C292; TI 3.3V recommended-component table"),
     ])
 
-    radio_vout = 0.596 * (1.0 + resistor(values, "R221") / resistor(values, "R222"))
+    radio_vout = 0.596 * (
+        1.0 + resistor(radio_values, "R221") / resistor(radio_values, "R222")
+    )
     radio_vout_max = 0.611 * (
-        1.0 + resistor(values, "R221") * 1.01 / (resistor(values, "R222") * 0.99)
+        1.0 + resistor(radio_values, "R221") * 1.01 /
+        (resistor(radio_values, "R222") * 0.99)
     )
     pe42820_control_max = radio_vout_max * (
-        resistor(values, "R227") * 1.01 /
-        (resistor(values, "R242") * 0.99 + resistor(values, "R227") * 1.01)
+        resistor(radio_values, "R227") * 1.01 /
+        (resistor(radio_values, "R242") * 0.99 +
+         resistor(radio_values, "R227") * 1.01)
     )
-    radio_inductor = parse_engineering(values["L70"])
+    radio_inductor = parse_engineering(radio_values["L70"])
     radio_vin_max = sys_5v_max
     radio_ripple_worst = radio_vout * (radio_vin_max - radio_vout) / (
         radio_vin_max * radio_inductor * 0.80 * 290e3
     )
     radio_peak = 3.0 + radio_ripple_worst / 2.0
     radio_rms = math.sqrt(3.0**2 + radio_ripple_worst**2 / 12.0)
-    radio_cout = capacitor(values, "C222") + capacitor(values, "C225")
+    radio_cout = capacitor(radio_values, "C222") + capacitor(radio_values, "C225")
     checks.extend([
         Check("TPS54302 RADIO_4V0 set-point", radio_vout, "V", 3.95, 4.08,
               "0.596V*(1+R221/R222)"),
@@ -459,7 +440,7 @@ def build_checks(values: dict[str, str]) -> list[Check]:
               "Worst-case peak current; XGL5030-332 20%-drop Isat is 6.0A"),
         Check("TPS54302 nominal ceramic output capacitance", radio_cout * 1e6, "uF", 43.0, 45.0,
               "C222+C225; DC-bias derating remains a layout/bench hold"),
-        Check("TPS54302 feed-forward capacitor", capacitor(values, "C224") * 1e12, "pF", 53.0, 59.0,
+        Check("TPS54302 feed-forward capacitor", capacitor(radio_values, "C224") * 1e12, "pF", 53.0, 59.0,
               "C224; interpolated starting point between TI 3.3V and 5V table rows"),
     ])
 
@@ -575,14 +556,14 @@ def build_checks(values: dict[str, str]) -> list[Check]:
               "(C515*C516)/(C515+C516)+2.0pF assumed pin/PCB stray; Y500 CL=8pF")
     )
 
-    pd_hold_up = capacitor(values, "C737")
+    pd_hold_up = capacitor(values, "C2146")
     main_hold_up = capacitor(values, "C746")
-    pd_droop = bq_ilim * (13e-6 + 3.2e-6) / pd_hold_up
+    pd_droop = bq_ilim * (7e-6 + 4e-6) / pd_hold_up
     main_droop = bq_ilim * (7e-6 + 4e-6) / main_hold_up
     checks.extend([
-        Check("LTC4417 ideal-cap selector handoff droop", pd_droop, "V", 0.0, 0.55,
-              "BQ ILIM ceiling*(13us+3.2us)/C737; ESR and adapter loss excluded"),
-        Check("LTC4418 ideal-cap selector handoff droop", main_droop, "V", 0.0, 0.40,
+        Check("LTC4418 dual-PD selector handoff droop", pd_droop, "V", 0.0, 0.40,
+              "BQ ILIM ceiling*(7us VALID-off max+4us break-before-make max)/C2146; ESR and adapter loss excluded"),
+        Check("LTC4418 PD/AUX selector handoff droop", main_droop, "V", 0.0, 0.40,
               "BQ ILIM ceiling*(7us+4us)/C746; ESR and source loss excluded"),
     ])
 
@@ -620,7 +601,7 @@ def build_checks(values: dict[str, str]) -> list[Check]:
     return checks
 
 
-def render_report(checks: list[Check], netlist: Path) -> str:
+def render_report(checks: list[Check], netlist: Path, radio_netlist: Path) -> str:
     lines = [
         "# Ducktop2 Electrical Calculations",
         "",
@@ -650,8 +631,8 @@ def render_report(checks: list[Check], netlist: Path) -> str:
         "- The two selector droop rows use the 3 A hardware ceiling, datasheet maximum validation-off plus break-before-make times, and only the dedicated 100 uF hybrid capacitor; ESR is still excluded.",
         "- The oscillator rows use ST AN2867's negative-resistance screen with assumed total PCB/pin stray capacitance of 3.0 pF for HSE and 2.6 pF for LSE. These are starting-value calculations, not measured qualification.",
         "- Verify HSE/LSE startup time, frequency error, and crystal drive level on assembled hardware across supply voltage and temperature before release.",
-        "- CH224A current telemetry and firmware policy are functional requirements: keep the Mu rail disabled until the selected source is VALID, program VSYSMIN/IINDPM, require VSYS >=10.0 V, and hold IINDPM no higher than the reported PDO current minus 0.25 A with a 2.75 A ceiling.",
-        "- The CH224A I2C divider row checks only the contribution from the series damping resistor at worst-case rail/resistor corners. Confirm endpoint VOL, mux resistance, rise time, powered-off leakage, and stuck-low recovery on all three assembled ports at 100 kHz and 400 kHz.",
+        "- TPS25751A power telemetry and firmware policy are functional requirements: keep the Mu rail disabled until the selected source is valid, read Active PDO (0x31), Active RDO (0x32), and PD Status (0x35), program VSYSMIN/IINDPM, require VSYS >=10.0 V, and cap IINDPM below the negotiated current with a 2.75 A ceiling.",
+        "- Verify both TPS25751A service-I2C channels for rise time, powered-off leakage, stale-read rejection, interrupt recovery, and negotiated-contract decoding at 100 kHz and 400 kHz.",
         "- TPS552892 compensation and current-sense filtering must still be reviewed against the final layout and measured on first hardware.",
         "- The tolerance-aware MU_12V ceiling is approximately 38 to 42.5 W and is shared by the complete Mu module, eDP backlight, and Delta blower. The normal 30 W Mu/eDP budget leaves about 4.8 W at the low current-limit corner after the fan's 0.26 A maximum. Measure all three loads and lock BIOS PL1/PL2 accordingly.",
         "- The 6 W firmware system reserve explicitly includes the Delta blower's approximately 3.15 W worst-case rail draw, leaving about 2.85 W for mandatory support loads in the low-pack calculation. HIL power measurements must confirm that assumption with optional loads shed.",
@@ -684,13 +665,14 @@ def render_report(checks: list[Check], netlist: Path) -> str:
         "- Epson FC-135R crystal: https://download.epsondevice.com/td/pdf/td_xtal_32khz/FC-135R_X1A0001410006_en.pdf",
         "- Coilcraft XGL5030: https://www.coilcraft.com/getmedia/e64ac115-95f2-45c7-b798-1b3769b91583/xgl5030.pdf",
         "- Coilcraft XGL5030-332: https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xgl/xgl5030/xgl5030-332/",
-        "- WCH CH224A/CH224Q: https://www.wch-ic.com/downloads/CH224DS1_PDF.html",
+        "- Texas Instruments TPS25751A: https://www.ti.com/lit/ds/symlink/tps25751a.pdf",
         "- USB-IF USB Type-C Cable and Connector Specification: https://www.usb.org/sites/default/files/USB%20Type-C%20Spec%20R2.0%20-%20August%202019.pdf",
         "- Texas Instruments TCA9548A: https://www.ti.com/lit/ds/symlink/tca9548a.pdf",
         "- ECS ECS-250-8-33-AGN-TR crystal: https://ecsxtal.com/products/crystals/surface-mount-crystals/ecs-250-8-33-agn-tr/",
         "- ECS ECX-32 crystal datasheet: https://ecsxtal.com/store/pdf/ecx-32.pdf",
         "",
-        f"Netlist evidence: `{netlist.relative_to(ROOT)}`",
+        f"Mainboard netlist evidence: `{netlist.relative_to(ROOT)}`",
+        f"Radio daughterboard netlist evidence: `{radio_netlist.relative_to(ROOT)}`",
         "",
     ])
     return "\n".join(lines)
@@ -704,9 +686,11 @@ def main() -> None:
     args = parser.parse_args()
 
     netlist = ROOT / "verification" / "electrical_calculations_netlist.xml"
-    export_netlist(netlist)
-    checks = build_checks(component_values(netlist))
-    report = render_report(checks, netlist)
+    radio_netlist = ROOT / "verification" / "radio_electrical_calculations_netlist.xml"
+    export_netlist(SCHEMATIC, netlist)
+    export_netlist(RADIO_SCHEMATIC, radio_netlist)
+    checks = build_checks(component_values(netlist), component_values(radio_netlist))
+    report = render_report(checks, netlist, radio_netlist)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(report, encoding="utf-8")
 
