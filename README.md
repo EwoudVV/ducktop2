@@ -141,7 +141,7 @@ maintained ERC screenshot.
 | KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
 | Independent netlist closure | 1,571 pass, 0 fail |
 | Bounded electrical calculations | 123 pass, 0 fail |
-| Pin review | 2,298 pass, 0 fail, 344 review |
+| Pin review | 2,642 pass, 0 fail, 0 review |
 | Schematic-to-PCB parity | 1,173 of 1,173 references with no pad-net or metadata drift |
 | Host firmware policy tests | Pass |
 
