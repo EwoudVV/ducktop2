@@ -6,8 +6,8 @@ generated unconnected-net names to a single NC state.
 
 ## Safety Check
 
-- PCB bytes before/after: `5355787` / `5355787`
-- PCB SHA-256 before/after: `b01b917665cb4631a3df28e41a38ae34bb3a555ba46d14226d542ab60db59f4b` / `b01b917665cb4631a3df28e41a38ae34bb3a555ba46d14226d542ab60db59f4b`
+- PCB bytes before/after: `5355932` / `5355932`
+- PCB SHA-256 before/after: `98833db14f444c9d2499ffd2eb1723ff3e4e601e96098a795d6d617c29eecd43` / `98833db14f444c9d2499ffd2eb1723ff3e4e601e96098a795d6d617c29eecd43`
 - Result: PCB was not modified.
 
 ## Summary

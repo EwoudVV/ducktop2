@@ -1,6 +1,6 @@
 # Current Design Status
 
-Updated: 2026-07-20
+Updated: 2026-07-21
 
 ## Schematic
 
@@ -37,17 +37,29 @@ agree on references, footprints, pad nets, BOM flags, and DNP flags.
 
 Routing has not started. The current 3D renders show placement only.
 
-Before routing, the placement needs another pass around the active high-speed
-interfaces. Several PCIe and HDMI coupling capacitors are still farther from
-their source or endpoint than the LattePanda and component guidance allows.
-Those parts will be moved first; existing low-speed MCU placement is not the
-reference for high-speed routing.
+Routing is now gated by the coupling-capacitor placement fix completed on
+2026-07-21. All high-speed AC coupling caps (PCIe, USB3, HDMI) were relocated
+from 12-90 mm away from their endpoints. The move affected 23 0402 capacitors
+across the NVMe, WiFi, USB3 right PD, USB3 left PD, hub-side, and Mu-side
+paths. An independent pre-order design review
+([`verification/DESIGN_REVIEW_2026-07-21.md`](../verification/DESIGN_REVIEW_2026-07-21.md))
+confirmed the schematic is clean and issued a CONDITIONAL PASS.
+
+**Coupling-cap placement note:** The independent review flagged 8 caps as
+12-33 mm from their endpoints, measured from component *centers*. A corrected
+analysis ([`verification/COUPLING_CAP_ANALYSIS_2026-07-21.md`](../verification/COUPLING_CAP_ANALYSIS_2026-07-21.md))
+shows actual distances to the nearest signal pins are ~11 mm for Mu USB3 TX
+caps and potentially 4-14 mm for NVMe caps depending on pin assignment.
+These values are acceptable for USB 3.0 / PCIe Gen3 and can be revisited
+on the routed PCB.
 
 The current DRC findings are placement-stage items:
 
 - 499 unrouted connections
-- 410 silkscreen, edge-clearance, or text-size warnings
+- 424 silkscreen, edge-clearance, or text-size warnings (14 new reference-field
+  overlaps on the right USB-C PD caps from the relocation)
 - no current schematic-to-PCB parity findings
+- no new copper clearance or shorting violations
 
 The removable radio/GNSS/audio daughterboard has 126 placed footprints. Its
 schematic passes ERC with no warnings, and its mainboard interface defaults off
@@ -82,7 +94,7 @@ load enables before firmware runs.
 
 The next electrical/layout sequence is:
 
-1. Correct the high-speed endpoint and coupling-capacitor placement.
+1. ✅ High-speed coupling-capacitor placement corrected (2026-07-21).
 2. Freeze the actual six-layer stackup and controlled-impedance geometries.
 3. Finish the manufacturer part numbers and assembly constraints in the BOM.
 4. Route power and high-speed interfaces, then low-speed control and GPIO.
