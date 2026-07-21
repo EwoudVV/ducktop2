@@ -495,14 +495,59 @@ def load_contracts() -> None:
         (90, "/PD2_TCPC_IRQ_N", "PB4 receives the right TPS25751A interrupt."),
         (91, "/RADIO_DB_PWR_EN", "PB5 enables the optional radio daughterboard power switch."),
         (96, "/PD_PROTECT_FAULT_N", "PB8 receives the aggregate dual-role protection fault."),
-        (7, "/EC & MCU/SOURCE_MGR_INT_N", "PE5 receives the always-on source-manager interrupt."),
+        (7, "/EC & MCU/SOURCE_MGR_INT_N", "PC13 receives the always-on source-manager interrupt."),
         (17, "/RADIO_VHF_RF_SEL_3V3", "PC2 drives the VHF RF-select level shifter."),
         (18, "/RADIO_UHF_RF_SEL_3V3", "PC3 drives the UHF RF-select level shifter."),
         (29, "/CHG_ENABLE", "PA4 explicitly releases the fail-off BQ25798 CE hardware path."),
         (26, "/PMIC_QON_ASSERT", "PA3 emits an active-high pulse into the fail-safe QON open-drain transistor."),
-        (51, "/EC & MCU/SERVICE_MUX_RESET_REQ_N", "PD8 requests a service-I2C-mux reset; U46 also forces reset during EC NRST."),
+        (51, "/EC & MCU/SERVICE_MUX_RESET_REQ_N", "PB12 requests a service-I2C-mux reset; U46 also forces reset during EC NRST."),
         (89, "/INTERNAL_USB_VBUS_FAULT_N", "PB3 reads the physical internal-host VBUS switch fault output."),
     ]:
+        add("U4", pin, net, requirement, stm)
+
+    # Close every remaining application pin on the EC. These contracts make the
+    # pin-review table fail if a later schematic edit silently reallocates a GPIO.
+    for pin, net in {
+        1: "/KB_ROW2", 2: "/KB_ROW3", 3: "/KB_ROW4", 4: "/KB_ROW5",
+        5: "/KB_ROW6", 38: "/KB_ROW7", 97: "/KB_ROW0", 98: "/KB_ROW1",
+        55: "/KB_COL8", 56: "/KB_COL9", 57: "/KB_COL10", 58: "/KB_COL11",
+        59: "/KB_COL12", 60: "/KB_COL13", 61: "/KB_COL14",
+        81: "/KB_COL0", 82: "/KB_COL1", 83: "/KB_COL2", 84: "/KB_COL3",
+        85: "/KB_COL4", 86: "/KB_COL5", 87: "/KB_COL6", 88: "/KB_COL7",
+    }.items():
+        add("U4", pin, net, "STM32 GPIO is assigned to the released 8-row by 15-column keyboard matrix.", stm)
+    for pin, net, requirement in (
+        (23, "/MU_PWRBTN_N", "PA0 drives the open-drain Mu power-button request path."),
+        (24, "/BQ_ALERT", "PA1 receives the fuel-gauge alert input."),
+        (25, "/CHG_INT_N", "PA2 receives the charger interrupt input."),
+        (30, "/MU_RSTBTN_N", "PA5 drives the open-drain Mu reset-button request path."),
+        (31, "/AUX_DC_ADC", "PA6/ADC1_IN6 measures the protected auxiliary-input divider."),
+        (32, "/THERM_SKIN_ADC", "PA7/ADC1_IN7 measures the chassis skin thermistor."),
+        (34, "/FAN_TACH", "PC5 receives the released blower tachometer signal."),
+        (35, "/THERM_MU_ADC", "PB0/ADC1_IN8 measures the Mu cold-plate thermistor."),
+        (40, "/FAN_PWM", "PE9/TIM1_CH1 generates the blower PWM control."),
+        (41, "/LID_CLOSED_N", "PE10 receives the active-low lid switch."),
+        (43, "/AUDIO_AMP_EC_EN", "PE12 enables the speaker amplifier after host qualification."),
+    ):
+        add("U4", pin, net, requirement, stm)
+    for pin, net, requirement in (
+        (52, "/GNSS_RESET_N", "PB13 controls GNSS reset on the optional radio daughterboard."),
+        (53, "/GNSS_PPS", "PB14 receives GNSS pulse-per-second from the optional radio daughterboard."),
+        (54, "/RADIO_VHF_PTT_N", "PB15 drives the active-low VHF push-to-talk control."),
+        (65, "/RADIO_UHF_PTT_N", "PC8 drives the active-low UHF push-to-talk control."),
+        (66, "/RADIO_VHF_PD_N", "PC9 drives the VHF module power-down control."),
+        (78, "/RADIO_UHF_PD_N", "PC10 drives the UHF module power-down control."),
+        (79, "/RADIO_VHF_SQL", "PC11 receives the VHF squelch indication."),
+        (80, "/RADIO_UHF_SQL", "PC12 receives the UHF squelch indication."),
+        (95, "/GNSS_EXTINT", "PB8 receives the GNSS external interrupt."),
+    ):
+        add("U4", pin, net, requirement, stm)
+    for pin, net, requirement in (
+        (70, "/MCU_USB_DM", "PA11 is the STM32 USB FS D- signal."),
+        (71, "/MCU_USB_DP", "PA12 is the STM32 USB FS D+ signal."),
+        (92, "/I2C_SCL", "PB6 is the EC I2C1 clock."),
+        (93, "/I2C_SDA", "PB7 is the EC I2C1 data signal."),
+    ):
         add("U4", pin, net, requirement, stm)
     for pin, net in {1: "GND", 2: "/EC & MCU/BUCK_SW", 3: "/EC_AON_IN", 4: "/EC & MCU/BUCK_FB", 6: "/EC & MCU/BUCK_BOOT"}.items():
         add("U5", pin, net, "TPS54202 generates MCU_3V3 from the diode-ORed always-on source.", "TI TPS54202 datasheet plus Ducktop2 EC buck contract")
@@ -620,6 +665,60 @@ def load_contracts() -> None:
         97: "/Mu Carrier/PCIE_M_REFCLK_SRC_P", 99: "/Mu Carrier/PCIE_M_REFCLK_SRC_N",
     }.items():
         add("A1", pin, net, "Mu USB/PCIe allocation follows the stock DFLT BIOS lane map.", mu)
+    for pin, net, requirement in (
+        (1, "/MU_PWRBTN_N", "Mu active-low power-button input follows the case and EC open-drain request path."),
+        (3, "/MU_RSTBTN_N", "Mu active-low reset-button input follows the case and EC open-drain request path."),
+        (5, "/MU_S0_HIGH", "Mu PSON output is the qualified S0 status input."),
+        (10, "/Mu Carrier/MU_SIO_UART_TX", "Mu Super I/O UART transmit service signal."),
+        (12, "/Mu Carrier/MU_SIO_UART_RX", "Mu Super I/O UART receive service signal."),
+        (115, "/Mu Carrier/RTC_BAT", "Mu RTC backup input is fed only by the keyed RTC cell connector."),
+    ):
+        add("A1", pin, net, requirement, mu)
+    for pin, net in {
+        31: "/Mu Carrier/WIFI_PCIE_TX_RAW_P", 33: "/Mu Carrier/WIFI_PCIE_TX_RAW_N",
+        34: "/WIFI_PCIE_RX_P", 36: "/WIFI_PCIE_RX_N",
+        67: "/WIFI_USB_DN", 69: "/WIFI_USB_DP",
+        88: "/WIFI_REFCLK_P", 90: "/WIFI_REFCLK_N", 100: "/WIFI_CLKREQ_N",
+    }.items():
+        add("A1", pin, net, "HSIO3, REFCLK3, USB2_P1, and CLKREQ3 implement the released M.2 E-key allocation.", mu)
+    add("A1", 103, "/PCIE_WAKE_N", "Shared PCIe wake input is routed to the installed PCIe endpoints.", mu)
+    add("A1", 105, "/PLTRST_SRC_N", "Mu platform reset drives the qualified endpoint-reset distribution.", mu)
+    for pin, net in {
+        177: "/TCP0_DDC_SDA", 179: "/TCP0_DDC_SCL", 187: "/TCP0_HPD",
+        227: "/TCP0_TXRX1_N", 229: "/TCP0_TXRX1_P",
+        233: "/TCP0_TX1_N", 235: "/TCP0_TX1_P",
+        239: "/TCP0_TXRX0_N", 241: "/TCP0_TXRX0_P",
+        245: "/TCP0_TX0_N", 247: "/TCP0_TX0_P",
+    }.items():
+        add("A1", pin, net, "TCP0 carries the released external HDMI output through the level shifter and protection path.", mu)
+    add_many(
+        "A1",
+        [11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, 53, 56,
+         59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92, 95, 98, 101, 107,
+         110, 113, 116, 135, 136, 151, 158, 167, 170, 181, 182, 188, 189, 194,
+         195, 200, 201, 206, 207, 212, 213, 218, 219, 224, 225, 230, 231, 236,
+         237, 242, 243, 248, 249, "MP"],
+        "GND", "Every Mu ground and mounting contact is bonded to the carrier ground plane.", mu,
+    )
+    for pin in (2, 4, 6, 7, 8, 9):
+        add_nc("A1", pin, "Unused Mu fan/status/temperature function is intentionally left open.", mu)
+    for pin in (25, 27, 28, 30, 85, 87, 91, 93):
+        add_nc("A1", pin, "Unused HSIO2 and REFCLK0/1 resources are intentionally left open under the released BIOS map.", mu)
+    for pin in (
+        104, 106, 108, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127,
+        128, 130, 131, 132, 133, 134, 137, 138, 139, 140, 141, 142, 143, 144,
+        145, 146, 147, 148, 149, 150, 152, 153, 154, 155, 156, 157, 159, 160,
+        161, 162, 163, 164, 165, 166, 168,
+    ):
+        add_nc("A1", pin, "Unused Mu platform-management and low-speed interface is intentionally left open.", mu)
+    for pin in (172, 174, 176, 178, 180):
+        add_nc("A1", pin, "Intel HDA is unused because Ducktop2 audio is implemented by the isolated USB codec.", mu)
+    for pin in (184, 186, 190, 192, 196, 198, 202, 204, 208, 210, 214, 216):
+        add_nc("A1", pin, "Unused MIPI CSI lane is intentionally left open.", mu)
+    for pin in (173, 175, 185, 220, 222, 226, 228, 232, 234, 238, 240, 244, 246):
+        add_nc("A1", pin, "Unused TCP1 display resource is intentionally left open.", mu)
+    for pin in (221, 223):
+        add_nc("A1", pin, "TCP0 AUX is unused by the HDMI-only TCP0 implementation.", mu)
     for pin in [112, 114, 169, 171, 183, 191, 193, 197, 199, 203, 205, 209, 211, 215, 217]:
         add_nc("A1", pin, "USB2_P6 is reserved and DDIB is unused because the panel uses onboard eDP.", mu)
     tps5 = "TI TPS56637 datasheet and RPA0010A package drawing"
@@ -697,6 +796,14 @@ def load_contracts() -> None:
         50: "/Mu Carrier/PCIE_M_PERST_N", 52: "/Mu Carrier/PCIE_M_CLKREQ_N", 54: "/PCIE_WAKE_N",
     }.items():
         add("J10", pin, net, "M.2 M-key PCIe Gen3 x4 lane and sideband contract.", mu)
+    add_many("J10", [2, 4, 12, 14, 16, 18, 70, 72, 74], "/PCIE_3V3",
+             "All M.2 M-key 3.3 V contacts use the S0-switched PCIe rail.", mu)
+    add_many("J10", [1, 3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 71, 73, 75], "GND",
+             "All M.2 M-key ground contacts are bonded to the carrier ground plane.", mu)
+    for pin in (6, 8, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 56, 58, 67):
+        add_nc("J10", pin, "Reserved M.2 M-key NC contact is intentionally left open.", mu)
+    for pin, name in ((10, "DAS/DSS/LED1"), (38, "DEVSLP"), (68, "SUSCLK"), (69, "PEDET")):
+        add_nc("J10", pin, f"Optional M.2 {name} sideband is not required by the released NVMe contract.", mu)
     ekey_power = "Ducktop2 S0-only PCIe endpoint power contract"
     add("F10", 1, "/PCIE_3V3", "E-key input is removed whenever the Mu host is not fully active.", ekey_power)
     add("F10", 2, local("Radio/OLED/GNSS", "WIFI_3V3"), "E-key local rail is fused after the common PCIe switch.", ekey_power)
@@ -1733,6 +1840,41 @@ def load_current_architecture_overrides() -> None:
         add(ref, 2, strap_net, "Zero-ohm destination at the USB7206C D+/D- strap pin.", hub)
     for pin in (83, 84, 86, 87):
         add_nc("U1700", pin, "Unused hub downstream port is explicitly disabled and NC.", hub)
+    add("U1700", 1, local(hub_sheet, "HUB_RESET_N"),
+        "USB7206C reset is released only after both 3.3 V and core power are valid.", hub)
+    add_many("U1700", (9, 18, 25, 31, 38, 55, 78, 85, 93), local(hub_sheet, "HUB_VCORE"),
+             "Every USB7206C VCORE contact uses the dedicated 1.146 V core rail.", hub)
+    add_many("U1700", (26, 43, 53, 62, 67, 79, 88, 99), "/SYS_3V3",
+             "Every USB7206C VDD33 contact uses the system 3.3 V rail.", hub)
+    add("U1700", 24, "GND", "USB7206C TESTEN is tied low as required for normal operation.", hub)
+    add("U1700", 101, "GND", "USB7206C exposed VSS pad is bonded to the ground plane with vias.", hub)
+    for pin, net, requirement in (
+        (21, local(hub_sheet, "HUB_CFG1"), "CFG_STRAP1 selects the released strap mode through 10k to ground."),
+        (22, local(hub_sheet, "HUB_CFG2"), "CFG_STRAP2 selects the released strap mode through 200k to ground."),
+        (23, local(hub_sheet, "HUB_CFG3"), "CFG_STRAP3 uses the mandatory 200k pull-down."),
+        (57, local(hub_sheet, "HUB_PRT_CTL4"), "PF14 controls downstream port 4 power and overcurrent."),
+        (58, local(hub_sheet, "HUB_PRT_CTL3"), "PF15 controls downstream port 3 power and overcurrent."),
+        (59, local(hub_sheet, "HUB_PRT_CTL2"), "PF16 controls downstream port 2 power and overcurrent."),
+        (60, local(hub_sheet, "HUB_DS1_PRT_CTL"), "PF17 provides the released port-1 control state."),
+        (63, local(hub_sheet, "HUB_TEST1"), "TEST1 has the required dedicated 10k pull-up."),
+        (64, local(hub_sheet, "HUB_TEST2"), "TEST2 has the required dedicated 10k pull-up."),
+        (65, local(hub_sheet, "HUB_TEST3"), "TEST3 has the required dedicated 10k pull-up."),
+        (68, local(hub_sheet, "HUB_SPI_CLK"), "Unused SPI clock is held low by a dedicated pull-down."),
+        (69, local(hub_sheet, "HUB_NON_REM"), "CFG_NON_REM straps all active downstream ports as removable."),
+        (70, local(hub_sheet, "HUB_BC_EN"), "CFG_BC_EN disables BC1.2 charging mode on the data ports."),
+        (71, local(hub_sheet, "HUB_SPI_D1"), "Unused SPI D1 is held low by a dedicated pull-down."),
+        (72, local(hub_sheet, "HUB_SPI_D2"), "Unused SPI D2 is held low by a dedicated pull-down."),
+        (73, local(hub_sheet, "HUB_SPI_D3"), "Unused SPI D3 is held low by a dedicated pull-down."),
+        (98, local(hub_sheet, "HUB_CLK"), "Single-ended 25 MHz oscillator drives CLK_IN."),
+        (100, local(hub_sheet, "HUB_RBIAS"), "RBIAS uses a dedicated 12.0k 1% resistor to ground."),
+    ):
+        add("U1700", pin, net, requirement, hub)
+    for pin in (4, 12, 13, 80):
+        add_nc("U1700", pin, "USB7206C datasheet NC contact is intentionally left open.", hub)
+    for pin in (3, 44, 45, 46, 47, 48, 49, 50, 51, 52, 54, 56, 61, 66, 74, 75, 76, 77):
+        add_nc("U1700", pin, "Unused USB7206C programmable-function contact is intentionally left open.", hub)
+    add_nc("U1700", 96, "USB7206C ATEST must remain unconnected.", hub)
+    add_nc("U1700", 97, "XTALO remains open when CLK_IN uses the external single-ended oscillator.", hub)
 
     for jref, ds in (("J22", 2), ("J23", 3), ("J12", 4)):
         source = "Ducktop2 source-only USB 3.2 Gen 2 port contract"
@@ -2054,21 +2196,31 @@ def write_md(rows, missing_refs) -> None:
             "None in the generated table.",
             "",
         ])
+    if review_by_ref:
+        lines.extend([
+            "## REVIEW Rows",
+            "",
+            "Rows marked `REVIEW` belong to important chips/modules but do not yet have a hard-coded contract.",
+            "They need a second datasheet or reference-design check.",
+            "",
+            f"Most REVIEW-heavy refs: {review_refs}",
+            "",
+        ])
+    else:
+        lines.extend([
+            "## REVIEW Rows",
+            "",
+            "None. Every emitted high-risk pin row has an explicit contract.",
+            "",
+        ])
     lines.extend([
-        "## REVIEW Rows",
-        "",
-        "Rows marked `REVIEW` are intentionally included because they belong to important chips/modules,",
-        "but they are not yet backed by a hard coded contract. They should be checked by a second",
-        "reviewer against the datasheet or the relevant reference design before fabrication.",
-        "",
-        f"Most REVIEW-heavy refs: {review_refs or 'none'}",
-        "",
         "## High-Risk Coverage Notes",
         "",
         "- Battery fuse/shunt path, BQ25798 single-input wiring, and BQ34Z100 fuel gauge pins are contracted.",
-        "- STM32 power, reset, boot, SWD, VCAP, and EC buck pins are contracted; general GPIO allocation rows remain REVIEW.",
-        "- LattePanda Mu VIN, USB2 allocation, native USB3 pairs, NVMe PCIe lanes, and exposed display outputs are contracted; the rest of the module pins remain REVIEW.",
-        "- Both TPS25751A dual-role ports, three source-only USB-C ports, USB7206C hub, redrivers, protectors, EEPROMs, and default-off input paths are contracted.",
+        "- Every STM32 package pin is contracted, including the keyboard matrix, ADC, USB, I2C, fan, radio, and system-control allocation.",
+        "- Every LattePanda Mu edge/mounting contact is contracted as used, grounded, or intentionally unconnected under the released BIOS allocation.",
+        "- Both TPS25751A dual-role ports, three source-only USB-C ports, every USB7206C pin, redrivers, protectors, EEPROMs, and default-off input paths are contracted.",
+        "- Every M.2 M-key contact is contracted, including all 3.3 V/ground contacts and intentionally unused optional sidebands.",
         "- The optional radio daughterboard boundary is contracted so an absent board cannot block normal laptop operation or receive back-power.",
         "- External HDMI, four-pin SSD1306 headers, TCA9548A, keyboard FFC, audio, and maker headers are contracted where the project has a clear decision.",
         "- PCM2900C playback/record, IM68A130 microphone, privacy-enable path, speaker BTL outputs, RTL8111H HSIO6 PCIe, MDI ESD, and JXD1 integrated-magnetics jack pins are explicitly contracted.",

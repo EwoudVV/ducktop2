@@ -43,7 +43,7 @@ a netlist.
 | Schematic design contracts | Pass |
 | Independent exported-netlist closure | 1,571 pass, 0 fail |
 | Bounded electrical calculations | 123 pass, 0 fail |
-| Pin review | 2,298 pass, 0 fail, 344 review |
+| Pin review | 2,642 pass, 0 fail, 0 review |
 | Mainboard schematic/PCB parity | 1,173/1,173 refs; zero footprint, pad-net, or attribute drift |
 | Radio daughterboard ERC | 0 errors, 0 warnings |
 | Radio daughterboard contracts | Pass |

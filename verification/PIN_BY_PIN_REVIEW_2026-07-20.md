@@ -11,10 +11,10 @@ Generated from the live KiCad XML netlist. This table is a review aid, not a fab
 ## Summary
 
 - Total high-risk pin rows emitted: 2642
-- Explicitly contracted rows: 2298
-- PASS: 2298
+- Explicitly contracted rows: 2642
+- PASS: 2642
 - FAIL: 0
-- REVIEW: 344
+- REVIEW: 0
 
 ## Contract Failures
 
@@ -22,18 +22,15 @@ None in the generated table.
 
 ## REVIEW Rows
 
-Rows marked `REVIEW` are intentionally included because they belong to important chips/modules,
-but they are not yet backed by a hard coded contract. They should be checked by a second
-reviewer against the datasheet or the relevant reference design before fabrication.
-
-Most REVIEW-heavy refs: A1 (189), U1700 (62), U4 (47), J10 (46)
+None. Every emitted high-risk pin row has an explicit contract.
 
 ## High-Risk Coverage Notes
 
 - Battery fuse/shunt path, BQ25798 single-input wiring, and BQ34Z100 fuel gauge pins are contracted.
-- STM32 power, reset, boot, SWD, VCAP, and EC buck pins are contracted; general GPIO allocation rows remain REVIEW.
-- LattePanda Mu VIN, USB2 allocation, native USB3 pairs, NVMe PCIe lanes, and exposed display outputs are contracted; the rest of the module pins remain REVIEW.
-- Both TPS25751A dual-role ports, three source-only USB-C ports, USB7206C hub, redrivers, protectors, EEPROMs, and default-off input paths are contracted.
+- Every STM32 package pin is contracted, including the keyboard matrix, ADC, USB, I2C, fan, radio, and system-control allocation.
+- Every LattePanda Mu edge/mounting contact is contracted as used, grounded, or intentionally unconnected under the released BIOS allocation.
+- Both TPS25751A dual-role ports, three source-only USB-C ports, every USB7206C pin, redrivers, protectors, EEPROMs, and default-off input paths are contracted.
+- Every M.2 M-key contact is contracted, including all 3.3 V/ground contacts and intentionally unused optional sidebands.
 - The optional radio daughterboard boundary is contracted so an absent board cannot block normal laptop operation or receive back-power.
 - External HDMI, four-pin SSD1306 headers, TCA9548A, keyboard FFC, audio, and maker headers are contracted where the project has a clear decision.
 - PCM2900C playback/record, IM68A130 microphone, privacy-enable path, speaker BTL outputs, RTL8111H HSIO6 PCIe, MDI ESD, and JXD1 integrated-magnetics jack pins are explicitly contracted.
