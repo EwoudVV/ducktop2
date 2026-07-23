@@ -14,8 +14,10 @@ display connection, and a separate low-profile mechanical keyboard.
 
 > **Current state, July 2026:** the generated motherboard schematic passes ERC
 > and the project checks. The six-layer PCB has its outline and 1,173 synchronized
-> footprints. High-speed placement is still being revised and routing has not
-> started. The board images in this repository are placement-stage renders.
+> footprints. High-speed placement is complete (23 AC coupling caps relocated on
+> 2026-07-21) and the design issued a CONDITIONAL PASS at independent pre-route
+> review. Routing has not started. The board images in this repository are
+> placement-stage renders.
 
 ## What I Am Building
 
@@ -143,9 +145,13 @@ maintained ERC screenshot.
 | Bounded electrical calculations | 123 pass, 0 fail |
 | Pin review | 2,642 pass, 0 fail, 0 review |
 | Schematic-to-PCB parity | 1,173 of 1,173 references with no pad-net or metadata drift |
+| PCB DRC | 0 copper violations (424 placement-stage silk/clearance warnings) |
+| Independent design review | CONDITIONAL PASS (2026-07-21) |
 | Host firmware policy tests | Pass |
 
 The project has also been reviewed repeatedly against component datasheets.
+An independent pre-route design review (2026-07-21) independently confirmed every
+automated result and issued a CONDITIONAL PASS before routing.
 The current summaries show what was checked and what remains uncertain; they
 are not a substitute for target firmware, signal-integrity work, thermal and RF
 measurements, or first-article testing.
@@ -208,8 +214,8 @@ schematics or comparing the PCB to the netlist.
 
 ## Roadmap
 
-1. Finish high-speed placement around PCIe, HDMI, Ethernet, USB, and their
-   coupling/protection parts.
+1. ✅ High-speed placement — 23 AC coupling caps relocated and design review
+   completed (2026-07-21).
 2. Freeze the six-layer stackup and controlled-impedance geometries with the
    board manufacturer.
 3. Complete manufacturer part numbers and assembly constraints in the BOM.

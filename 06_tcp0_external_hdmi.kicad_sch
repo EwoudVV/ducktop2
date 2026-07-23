@@ -4137,7 +4137,9 @@
 (text "TMDS ESD uses 0.15pF-max, +/-3.6V TPD1E0B04DPLR single-line parts; route each shunt at J30 with no stub." (at 20.32 243.84 0) (effects (font (size 1.27 1.27))) (uuid 29c03f97-3db4-5b7d-ba0d-b318e9429fb1))
 (text "CEC and utility are explicitly NC; unused TPD13S523 legacy channels use the datasheet 75R-to-GND termination." (at 20.32 251.46 0) (effects (font (size 1.27 1.27))) (uuid ef1d7178-5ceb-5f45-8815-a37d569c5c53))
 (text "U54/U55 remove 5V/DDC/HPD power while the Mu is off; PCA9306 translates DDC/SCDC and U53 buffers HPD." (at 20.32 259.08 0) (effects (font (size 1.27 1.27))) (uuid 38aa3fef-f0aa-55ad-8fa8-22a49504c81b))
-(text "Release gate: verify >=4.8V at J30 pin 18 under 55mA and validate the finished 100-ohm HDMI 2.0 layout on hardware." (at 20.32 266.7 0) (effects (font (size 1.27 1.27))) (uuid 2bd5c9db-a3ac-563a-a325-87d2cac8d2b5))
+(text "LAYOUT: HDMI TMDS pairs are 100-ohm differential. Match pair skew to under 10 mil per Mu HDMI guide (current ~495 mil)." (at 20.32 266.7 0) (effects (font (size 1.27 1.27))) (uuid 2bd5c9db-a3ac-563a-a325-87d2cac8d2b5))
+(text "LAYOUT: PCIe Gen3 pairs are 85-ohm differential. Match data-pair skew under 5 mil and refclock under 5 mil per Mu PCIe guide." (at 20.32 274.32 0) (effects (font (size 1.27 1.27))) (uuid 81a1cb1d-e8b3-5b00-a820-2f7ea8443ad9))
+(text "Release gate: verify >=4.8V at J30 pin 18 under 55mA and validate the finished HDMI 2.0 layout on hardware." (at 20.32 281.94 0) (effects (font (size 1.27 1.27))) (uuid 79215d01-3828-5d99-9cd2-a7c0b833dcf7))
 (sheet_instances
   (path "/f0ae9354-2124-5719-9bb0-6fdcc1f0d78d"
     (page "7")

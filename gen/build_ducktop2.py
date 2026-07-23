@@ -162,6 +162,7 @@ FOOTPRINTS = {
     "C_1210": "Capacitor_SMD:C_1210_3225Metric",
     "TLV803EA29RDBZR": "Package_TO_SOT_SMD:SOT-23-3",
     "TLV803EA43RDBZR": "Package_TO_SOT_SMD:SOT-23-3",
+	"TPS3897ADRYR": "Package_SON:Texas_USON-6_1x1.45mm_P0.5mm_SMD",
     "L_DFE201610": "Inductor_SMD:L_Murata_DFE201610P",
     "TPS2052B": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
     "TPS2592xx": "Package_SON:VSON-10-1EP_3x3mm_P0.5mm_EP1.2x2mm_ThermalVias",

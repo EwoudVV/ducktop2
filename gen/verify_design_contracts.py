@@ -1121,24 +1121,34 @@ def check_mu_carrier(components, pin_names):
     expect_value_prefix(components, "R774", "10k", "internal VBUS fault pull-up")
     expect(net(components, "R774", "1"), "/MCU_3V3", "internal VBUS fault pull-up rail")
     expect(net(components, "R774", "2"), "/INTERNAL_USB_VBUS_FAULT_N", "internal VBUS fault signal")
+    # U771 is always powered from MCU_3V3 (TPS3897 VCC), so SENSE_OUT
+    # is deterministic even when VBUS is absent.
     for pin, want in {
-        "1": "/INTERNAL_USB_VBUS_VALID", "2": "GND",
-        "3": "/Mu Carrier/INTERNAL_USB_VBUS",
+        "1": "/MCU_3V3", "2": "GND", "3": local_net("Mu Carrier", "INTERNAL_USB_VBUS_SENSE"),
+        "4": "/INTERNAL_USB_VBUS_VALID", "6": "/MCU_3V3",
     }.items():
         expect(net(components, "U771", pin), want, f"physical internal VBUS supervisor pin {pin}")
-    expect_value_prefix(components, "U771", "TLV803EA43RDBZR", "4.38V physical internal VBUS supervisor")
-    expect(prop(components, "U771", "MPN"), "TLV803EA43RDBZR", "physical internal VBUS supervisor orderable")
+    expect_unconnected(components, "U771", "5")
+    expect_value_prefix(components, "U771", "TPS3897ADRYR", "always-powered internal VBUS supervisor")
+    expect(prop(components, "U771", "MPN"), "TPS3897ADRYR", "physical internal VBUS supervisor orderable")
     expect_value_prefix(components, "R775", "10k", "internal VBUS valid pull-up")
     expect(net(components, "R775", "1"), "/MCU_3V3", "internal VBUS valid pull-up rail")
     expect(net(components, "R775", "2"), "/INTERNAL_USB_VBUS_VALID", "internal VBUS valid signal")
     for ref, value, rail in (
         ("C794", "1u", "/SYS_5V"),
         ("C830", "10u", "/Mu Carrier/INTERNAL_USB_VBUS"),
-        ("C831", "100n", "/Mu Carrier/INTERNAL_USB_VBUS"),
+        ("C831", "100n", "/MCU_3V3"),
     ):
         expect_value_prefix(components, ref, value, f"{ref} internal host-VBUS support")
         expect(net(components, ref, "1"), rail, f"{ref} internal host-VBUS rail")
         expect(net(components, ref, "2"), "GND", f"{ref} internal host-VBUS return")
+    # TPS3897 divider: 78.7k/10.0k sets VBUS trip at ~4.44V (0.5V at SENSE)
+    expect_value_prefix(components, "R777", "78.7k", "VBUS sense top divider")
+    expect(net(components, "R777", "1"), local_net("Mu Carrier", "INTERNAL_USB_VBUS"), "VBUS sense top input")
+    expect(net(components, "R777", "2"), local_net("Mu Carrier", "INTERNAL_USB_VBUS_SENSE"), "VBUS sense divider mid")
+    expect_value_prefix(components, "R778", "10.0k", "VBUS sense bottom divider")
+    expect(net(components, "R778", "1"), local_net("Mu Carrier", "INTERNAL_USB_VBUS_SENSE"), "VBUS sense divider mid")
+    expect(net(components, "R778", "2"), "GND", "VBUS sense bottom return")
     for ref, want in (
         ("TP13", "/Mu Carrier/INTERNAL_USB_VBUS"),
         ("TP14", "/INTERNAL_USB_VBUS_VALID"),

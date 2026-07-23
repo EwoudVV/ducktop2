@@ -39,25 +39,17 @@ FOOTPRINT_DIRS = [
 ]
 
 CURRENT_ECO_ADD_ONLY = {
-    # July 19 battery protection and subsystem-closure ECO.
-    "C840", "C841", "C842", "C843", "C844", "C845", "C846", "C847", "C848",
-    "Q703", "Q704",
-    "R840", "R841", "R842", "R843", "R844", "R845", "R846", "R847",
-    "R848", "R849", "R850", "R851", "R852", "R853", "R854", "R855",
-    "RS11", "U719",
-    "C164", "C165", "R168", "R169", "U54", "U55",
-    "C187", "R198", "R199", "U170",
-    "C209",
-    "C260", "C261", "R230", "R232", "U260", "U261",
+    # July 23 USB_PORT_5V over-voltage fix and U771 always-powered supervisor.
+    "R777", "R778",
 }
-CURRENT_ECO_REPLACE_ONLY = {"FL240", "U241", "U251"}
+CURRENT_ECO_REPLACE_ONLY = {"U771"}
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
-POST_ADD_FOOTPRINT_REFRESH = {"C842", "C843", "C844", "C848"}
+POST_ADD_FOOTPRINT_REFRESH = set()
 
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
-ALLOWED_REMOVE_ONLY = {"C241", "C251"}
+ALLOWED_REMOVE_ONLY: set[str] = set()
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()
 
@@ -188,6 +180,8 @@ ANCHORS_MM.update({
     "U771": (207.0, 90.0, 0.0),
     "R775": (210.5, 88.0, 0.0),
     "C831": (207.0, 95.0, 0.0),
+    "R777": (204.0, 92.0, 0.0),
+    "R778": (204.0, 95.0, 0.0),
     "C832": (214.0, 88.0, 0.0),
     "U772": (217.0, 93.0, 0.0),
     "R776": (221.0, 88.0, 0.0),

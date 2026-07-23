@@ -1644,7 +1644,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 7dd10a17-3b03-5b9a-8283-122e945a4585)
 )
-(text "== PCIe x1 host interface; AC capacitors belong at the transmitting endpoint ==" (at 20.32 55.88 0) (effects (font (size 1.27 1.27))) (uuid d2942d2d-c3d9-51ae-9263-1ec70d9f898f))
+(text "== PCIe x1 host TX from Mu to RTL8111H; C500/C501 are at the Mu transmitter pads, not by U500 ==" (at 20.32 55.88 0) (effects (font (size 1.27 1.27))) (uuid d2942d2d-c3d9-51ae-9263-1ec70d9f898f))
 (symbol
   (lib_id "Device:C")
   (at 20.32 76.2 0)

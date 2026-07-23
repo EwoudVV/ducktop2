@@ -744,22 +744,28 @@ def load_contracts() -> None:
         4: "/MU_HOST_ACTIVE", 5: "/MCU_3V3",
     }.items():
         add("U769", pin, net, "Host-dependent loads enable only when Mu S0 and the regulated Mu rail are both valid.", host_active)
-    internal_vbus = "TI TPS2553D and TLV803EA43RDBZR datasheets plus Ducktop2 4.38V physical internal-host VBUS contract"
+    internal_vbus = "TI TPS2553D and TPS3897ADRYR datasheets plus Ducktop2 always-powered internal-host VBUS contract"
     for pin, net in {
         1: "/SYS_5V", 2: "GND", 3: "/MU_HOST_ACTIVE",
         4: "/INTERNAL_USB_VBUS_FAULT_N", 5: local("Mu Carrier", "INTERNAL_USB_VBUS_ILIM"),
         6: local("Mu Carrier", "INTERNAL_USB_VBUS"),
     }.items():
         add("U770", pin, net, "Carrier creates a protected physical upstream VBUS for permanently attached Mu USB devices.", internal_vbus)
-    for pin, net in {1: "/INTERNAL_USB_VBUS_VALID", 2: "GND", 3: local("Mu Carrier", "INTERNAL_USB_VBUS")}.items():
-        add("U771", pin, net, "4.38V supervisor qualifies the actual carrier-generated internal USB VBUS.", internal_vbus)
+    for pin, net in {
+        1: "/MCU_3V3", 2: "GND", 3: local("Mu Carrier", "INTERNAL_USB_VBUS_SENSE"),
+        4: "/INTERNAL_USB_VBUS_VALID", 6: "/MCU_3V3",
+    }.items():
+        add("U771", pin, net, "TPS3897A always-powered supervisor qualifies actual carrier-generated internal USB VBUS via 78.7k/10.0k divider.", internal_vbus)
+    add_nc("U771", 5, "CT left floating for default 40us delay.", internal_vbus)
     for ref, net_a, net_b in (
         ("R773", local("Mu Carrier", "INTERNAL_USB_VBUS_ILIM"), "GND"),
         ("R774", "/MCU_3V3", "/INTERNAL_USB_VBUS_FAULT_N"),
         ("R775", "/MCU_3V3", "/INTERNAL_USB_VBUS_VALID"),
         ("C794", "/SYS_5V", "GND"),
         ("C830", local("Mu Carrier", "INTERNAL_USB_VBUS"), "GND"),
-        ("C831", local("Mu Carrier", "INTERNAL_USB_VBUS"), "GND"),
+        ("C831", "/MCU_3V3", "GND"),
+        ("R777", local("Mu Carrier", "INTERNAL_USB_VBUS"), local("Mu Carrier", "INTERNAL_USB_VBUS_SENSE")),
+        ("R778", local("Mu Carrier", "INTERNAL_USB_VBUS_SENSE"), "GND"),
     ):
         add(ref, 1, net_a, "Physical internal-host VBUS support network.", internal_vbus)
         add(ref, 2, net_b, "Physical internal-host VBUS support network.", internal_vbus)

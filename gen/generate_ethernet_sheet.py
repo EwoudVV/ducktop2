@@ -56,7 +56,7 @@ def build(sheet_symbol_uuid):
         },
     )
 
-    s.text(20, 55.88, "== PCIe x1 host interface; AC capacitors belong at the transmitting endpoint ==")
+    s.text(20, 55.88, "== PCIe x1 host TX from Mu to RTL8111H; C500/C501 are at the Mu transmitter pads, not by U500 ==")
     for ref, source, sink, x, y in [
         ("C500", "GBE_HOST_TX_P", "GBE_HSI_P", 20, 76.2),
         ("C501", "GBE_HOST_TX_N", "GBE_HSI_N", 20, 88.9),

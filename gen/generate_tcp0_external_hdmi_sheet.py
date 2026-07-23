@@ -268,6 +268,8 @@ def build(sheet_symbol_uuid):
     s.text(20, 243.84, "TMDS ESD uses 0.15pF-max, +/-3.6V TPD1E0B04DPLR single-line parts; route each shunt at J30 with no stub.")
     s.text(20, 251.46, "CEC and utility are explicitly NC; unused TPD13S523 legacy channels use the datasheet 75R-to-GND termination.")
     s.text(20, 259.08, "U54/U55 remove 5V/DDC/HPD power while the Mu is off; PCA9306 translates DDC/SCDC and U53 buffers HPD.")
-    s.text(20, 266.7, "Release gate: verify >=4.8V at J30 pin 18 under 55mA and validate the finished 100-ohm HDMI 2.0 layout on hardware.")
+    s.text(20, 266.7, "LAYOUT: HDMI TMDS pairs are 100-ohm differential. Match pair skew to under 10 mil per Mu HDMI guide (current ~495 mil).")
+    s.text(20, 274.32, "LAYOUT: PCIe Gen3 pairs are 85-ohm differential. Match data-pair skew under 5 mil and refclock under 5 mil per Mu PCIe guide.")
+    s.text(20, 281.94, "Release gate: verify >=4.8V at J30 pin 18 under 55mA and validate the finished HDMI 2.0 layout on hardware.")
 
     return s

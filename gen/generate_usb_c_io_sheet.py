@@ -58,8 +58,8 @@ def add_hub_supplies(s):
             extra_props=props("Coilcraft", "XAL7070-332MEC"))
     resistor(s, "R1710", "169k 1% USB5 EN top", 38.1, 106.68, "VSYS", "USB5_EN", a_kind="hier", mpn="RC0603FR-07169KL")
     resistor(s, "R1711", "36.1k 1% USB5 EN bottom", 63.5, 106.68, "USB5_EN", "GND", mpn="RC0603FR-0736K1L")
-    resistor(s, "R1712", "76.8k 1% USB5 FB top", 101.6, 106.68, "USB_PORT_5V", "USB5_FB", a_kind="hier", mpn="RC0603FR-0776K8L")
-    resistor(s, "R1713", "10.0k 1% USB5 FB bottom", 127, 106.68, "USB5_FB", "GND", mpn="RC0603FR-0710KL")
+    resistor(s, "R1712", "74.3k 0.1% USB5 FB top", 101.6, 106.68, "USB_PORT_5V", "USB5_FB", a_kind="hier", mpn="RT0603BRD0743KL")
+    resistor(s, "R1713", "10.0k 0.1% USB5 FB bottom", 127, 106.68, "USB5_FB", "GND", mpn="RT0603BRD0710KL")
     resistor(s, "R1714", "100k USB5 PG pull-up", 152.4, 106.68, "SYS_3V3", "USB5_PG", a_kind="hier", mpn="RC0603FR-07100KL")
     s.place("C1710", "C", "100n USB5 bootstrap", 101.6, 91.44,
             footprint=FOOTPRINTS["C_100n"], pin_nets={"1": ("USB5_BOOT", "local"), "2": ("USB5_SW", "local")},
