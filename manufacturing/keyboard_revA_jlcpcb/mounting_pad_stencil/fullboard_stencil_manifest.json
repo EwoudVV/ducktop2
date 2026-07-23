@@ -1,0 +1,103 @@
+{
+  "design": "Ducktop2 Rev A full-board MX ULP paste stencil",
+  "generated_from": {
+    "pcb": "12_keyboard_daughterboard.kicad_pcb",
+    "pcb_sha256": "624eeb6e5fc40e2c4dd62753ed08124cde2932e0503e4b64c932b76ccd37efe2",
+    "footprint": "ducktop2.pretty/Cherry_MX_ULP_SMD.kicad_mod",
+    "footprint_sha256": "1d8ba042df3bd143fa9b89ad318c8d139dcf14662afac699436ddeea2f1984ab",
+    "switch_count": 65,
+    "diode_count": 65,
+    "pcb_thickness_mm": 0.8
+  },
+  "validation": {
+    "stl": "ducktop2_fullboard_stencil_revA.stl",
+    "dimensions_print_orientation_mm": [
+      294.5,
+      86.0,
+      0.42
+    ],
+    "membrane_thickness_mm": 0.12,
+    "aperture_inset_per_edge_mm": 0.2,
+    "diode_cutout_mm": [
+      2.0,
+      3.4
+    ],
+    "diode_body_clearance_nominal_mm": 0.4,
+    "diode_courtyard_clearance_mm": 0.15,
+    "board_border_mm": 3.0,
+    "alignment_nibs": 3,
+    "nib_height_mm": 0.3,
+    "switch_count": 65,
+    "fixation_apertures_per_switch": 5,
+    "fixation_apertures": [
+      {
+        "copper_pad_mm": [
+          1.6,
+          3.8
+        ],
+        "aperture_mm": [
+          1.2,
+          3.4
+        ],
+        "area_coverage_percent": 67.1
+      },
+      {
+        "copper_pad_mm": [
+          1.6,
+          3.0
+        ],
+        "aperture_mm": [
+          1.2,
+          2.6
+        ],
+        "area_coverage_percent": 65.0
+      },
+      {
+        "copper_pad_mm": [
+          1.6,
+          1.8
+        ],
+        "aperture_mm": [
+          1.2,
+          1.4
+        ],
+        "area_coverage_percent": 58.3
+      },
+      {
+        "copper_pad_mm": [
+          1.6,
+          2.6
+        ],
+        "aperture_mm": [
+          1.2,
+          2.2
+        ],
+        "area_coverage_percent": 63.5
+      },
+      {
+        "copper_pad_mm": [
+          1.6,
+          1.8
+        ],
+        "aperture_mm": [
+          1.2,
+          1.4
+        ],
+        "area_coverage_percent": 58.3
+      }
+    ],
+    "diode_cutouts": 65,
+    "watertight": true,
+    "winding_consistent": true,
+    "connected_bodies": 1,
+    "triangle_count": 8142,
+    "volume_mm3": 2746.804
+  },
+  "print_orientation": {
+    "stl_is_pre_mirrored": true,
+    "bed_side": "flat membrane",
+    "nibs": "up while printing; down against PCB while using",
+    "bed_fit": "273.5 x 80 mm board fits diagonally on 256 mm P1S bed"
+  },
+  "stl_sha256": "fefb08ded7cbcbd9cc1c13ec5b9704a20c40bfeaf1d23d3b05982b615a730d75"
+}

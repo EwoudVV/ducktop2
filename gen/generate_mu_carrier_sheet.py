@@ -541,24 +541,36 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             footprint=FOOTPRINTS["C_10u"],
             pin_nets={"1": ("INTERNAL_USB_VBUS", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM21BR61A106KE19L"})
-    s.place("U771", "TLV803EA43RDBZR", "TLV803EA43RDBZR 4.38V physical internal VBUS supervisor", 900, 370,
-            footprint=FOOTPRINTS["TLV803EA43RDBZR"],
+    # TPS3897A is powered from MCU_3V3 (always-defined), not from VBUS,
+    # so its SENSE_OUT is always valid even when VBUS is absent.
+    s.place("U771", "TPS3897ADRYR", "TPS3897ADRYR internal VBUS supervisor (always-powered)", 900, 370,
+            footprint=FOOTPRINTS["TPS3897ADRYR"],
             pin_nets={
-                "1": ("INTERNAL_USB_VBUS_VALID", "hier"), "2": ("GND", "local"),
-                "3": ("INTERNAL_USB_VBUS", "local"),
+                "1": ("MCU_3V3", "hier"), "2": ("GND", "local"),
+                "3": ("INTERNAL_USB_VBUS_SENSE", "local"), "4": ("INTERNAL_USB_VBUS_VALID", "hier"),
+                "5": ("", "nc"), "6": ("MCU_3V3", "hier"),
             }, extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "TLV803EA43RDBZR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/tlv803e.pdf",
-                "Function": "Assert valid only after carrier-generated host VBUS exceeds the 4.38V falling threshold",
+                "Manufacturer": "Texas Instruments", "MPN": "TPS3897ADRYR",
+                "Datasheet": "https://www.ti.com/lit/ds/symlink/tps3897.pdf",
+                "Function": "Assert VBUS valid only after SENSE (divided INTERNAL_USB_VBUS) exceeds 0.5V threshold; VCC always on MCU_3V3 for deterministic output",
             })
     s.place("R775", "R", "10k internal host VBUS valid pull-up", 955, 370,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("INTERNAL_USB_VBUS_VALID", "hier")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
-    s.place("C831", "C", "100n internal VBUS supervisor local", 955, 382.7,
+    s.place("C831", "C", "100n TPS3897 VCC bypass", 955, 382.7,
             footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("INTERNAL_USB_VBUS", "local"), "2": ("GND", "local")},
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71A104KA01D"})
+    # Resistor divider: 78.7k/10.0k sets VBUS trip at ~4.44V (0.5V at SENSE)
+    s.place("R777", "R", "78.7k 1% VBUS sense top divider", 900, 395.4,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("INTERNAL_USB_VBUS", "local"), "2": ("INTERNAL_USB_VBUS_SENSE", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0778K7L"})
+    s.place("R778", "R", "10.0k 1% VBUS sense bottom divider", 900, 408.1,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("INTERNAL_USB_VBUS_SENSE", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
     for ref, label, x, y, net_name, scope in (
         ("TP13", "Internal USB VBUS test", 1005, 325, "INTERNAL_USB_VBUS", "local"),
         ("TP14", "Internal USB VBUS valid test", 1005, 337.7, "INTERNAL_USB_VBUS_VALID", "hier"),
