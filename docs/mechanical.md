@@ -27,8 +27,14 @@ trackpad without making the six-layer board cover the full base.
 
 The Cherry MX ULP keyboard is a separate two-layer PCB. Its 30-pin FFC reaches
 J310 on the motherboard without another controller board or internal USB cable.
-The trackpad is a complete USB device and needs room for its USB-C plug, cable
-bend, mounting lip, and click travel.
+The trackpad is a complete USB device. Its device-side USB-C receptacle uses a
+compliant USB 2.0 USB-C-to-Standard-A cable; the USB-C plug remains at the
+trackpad and the cut Standard-A end is hand-soldered to J58 on the motherboard.
+J58 is four through-hole solder lands, not a USB-C receptacle: pin 1 is GND,
+pin 2 is D-, pin 3 is D+, and pin 4 is VBUS. Verify continuity before
+assembly—wire colours are not authoritative. Reserve room for the device-side
+plug, cable bend, mounting lip, and click travel, and retain the cable so its
+four solder joints cannot carry service load.
 
 Keyboard, motherboard, and cooling parts may overlap in XY only when the final
 Z stack gives each one a supported and insulated plane. Batteries and trackpad

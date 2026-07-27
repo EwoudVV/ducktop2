@@ -347,16 +347,18 @@ def run_checks(a: ClosureAudit) -> None:
         for pin in ("A6", "A7", "B6", "B7", "A2", "A3", "B2", "B3", "A10", "A11", "B10", "B11"):
             a.check((connector, pin) in a.pin_nets, f"{connector}.{pin} must carry data")
 
-    # The internal trackpad branch retains its switched input reservoir.
-    for pin in ("2", "3", "4"):
-        a.pin("U63", pin, "/Internal Services/TPAD_5V_PRE")
-    for pin in ("14", "15"):
-        a.pin("U63", pin, "/Internal Services/TPAD_5V")
+    # The internal trackpad uses a cut USB2 Standard-A-to-C cable and has no
+    # board-side Type-C attach controller.  VBUS remains host-gated and
+    # current-limited before reaching the four field-soldered wire pads.
+    a.absent("U63")
+    for ref in ("R254", "C281", "C282", "C284"):
+        a.absent(ref)
+    a.pin("J58", "1", "GND")
+    a.pin("J58", "2", "/Internal Services/TPAD_CONN_DM")
+    a.pin("J58", "3", "/Internal Services/TPAD_CONN_DP")
+    a.pin("J58", "4", "/Internal Services/TPAD_5V")
     a.pin("U64", "5", "/Internal Services/TPAD_ILIM")
-    a.pin("U64", "6", "/Internal Services/TPAD_5V_PRE")
-    a.value_starts("C284", "150u")
-    a.pin("C284", "1", "/Internal Services/TPAD_5V_PRE")
-    a.pin("C284", "2", "GND")
+    a.pin("U64", "6", "/Internal Services/TPAD_5V")
     a.value_starts("C283", "10u")
     a.pin("C283", "1", "/Internal Services/TPAD_5V")
     a.pin("C283", "2", "GND")

@@ -42,14 +42,14 @@ CURRENT_ECO_ADD_ONLY = {
     # July 23 USB_PORT_5V over-voltage fix and U771 always-powered supervisor.
     "R777", "R778",
 }
-CURRENT_ECO_REPLACE_ONLY = {"U771"}
+CURRENT_ECO_REPLACE_ONLY = {"U771", "J58"}
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
 POST_ADD_FOOTPRINT_REFRESH = set()
 
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
-ALLOWED_REMOVE_ONLY: set[str] = set()
+ALLOWED_REMOVE_ONLY = {"U63", "R254", "C281", "C282", "C284"}
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()
 
@@ -225,6 +225,10 @@ ANCHORS_MM.update({
     # Keyed maker I/O connector in the rear service area.  This avoids both
     # full-size SSD1306 module courtyards and remains reachable under a hatch.
     "J901": (190.0, 10.0, 0.0),
+    # Direct-soldered USB2 cable pads must use the annotated trackpad-cable
+    # area.  The inherited USB-C footprint anchor overlapped C1720 once the
+    # four 2.54 mm wire lands replaced its fine-pitch pad field.
+    "J58": (171.2, 130.0, 0.0),
 })
 
 ANCHORS_MM.update({
@@ -827,9 +831,19 @@ def main(argv: list[str] | None = None) -> int:
     text = pcb_path.read_text(encoding="utf-8")
     fps = footprints(text)
     existing = {fp.ref: fp for fp in fps}
+    duplicate_refs = sorted({fp.ref for fp in fps if sum(item.ref == fp.ref for item in fps) > 1})
 
-    if len(existing) != len(fps):
-        raise RuntimeError("duplicate footprint references are present on the PCB")
+    if duplicate_refs:
+        targeted_duplicates = duplicate_refs if selected_refs is None else sorted(set(duplicate_refs) & selected_refs)
+        if targeted_duplicates:
+            raise RuntimeError(
+                "duplicate footprint references are present on the PCB targets: "
+                f"{targeted_duplicates}"
+            )
+        print(
+            "WARNING: preserving non-target duplicate footprint references during scoped ECO: "
+            f"{', '.join(duplicate_refs)}"
+        )
 
     if selected_refs is None:
         actual_missing = set(components) - set(existing)

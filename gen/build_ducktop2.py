@@ -177,6 +177,7 @@ FOOTPRINTS = {
     "D3V3XA4B10LP": "Package_DFN_QFN:Diodes_UDFN-10_1x2.5mm_P0.5mm",
     "JXD1-1022NL": "ducktop2:JXD1-1022NL_MidMount",
     "USB_C_Receptacle": "Connector_USB:USB_C_Receptacle_Molex_105450-0101",
+    "Trackpad_USB2_Wired": "ducktop2:USB2_Trackpad_Cable_SolderPads_1x04_P2.54mm",
     "TS3USB30EDGSR": "Package_SO:TSSOP-10_3x3mm_P0.5mm",
     "TPS25810RVC": "Package_DFN_QFN:Texas_RVC0020A_WQFN-20-1EP_3x4mm_P0.5mm_EP1.6x2.6mm",
     "HD3SS6126": "Package_DFN_QFN:WQFN-42-1EP_3.5x9mm_P0.5mm_EP2.05x7.55mm_ThermalVias",

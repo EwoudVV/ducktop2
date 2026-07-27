@@ -1940,26 +1940,24 @@ def check_internal_services(components):
     for obsolete in ("F201", "R253", "R255", "J57"):
         if obsolete in components:
             fail(f"obsolete passive/fallback trackpad part {obsolete} is still present")
-    tps_trackpad = {
-        "2": local_net(sheet, "TPAD_5V_PRE"), "3": local_net(sheet, "TPAD_5V_PRE"),
-        "4": local_net(sheet, "TPAD_5V_PRE"), "5": "/SYS_3V3",
-        "6": "/MU_HOST_ACTIVE", "7": "GND", "8": "GND",
-        "9": local_net(sheet, "TPAD_REF_RTN"), "10": local_net(sheet, "TPAD_REF"),
-        "11": local_net(sheet, "TPAD_CC1"), "12": "GND", "13": local_net(sheet, "TPAD_CC2"),
-        "14": local_net(sheet, "TPAD_5V"), "15": local_net(sheet, "TPAD_5V"), "21": "GND",
-    }
-    expect_value_prefix(components, "U63", "TPS25810", "trackpad attach-controlled source")
-    expect(prop(components, "U63", "MPN"), "TPS25810RVCR", "trackpad source-controller MPN")
-    for pin, want in tps_trackpad.items():
-        expect(net(components, "U63", pin), want, f"trackpad TPS25810 pin {pin}")
-    expect(net(components, "U63", "1"), "/TRACKPAD_FAULT_N", "trackpad TPS25810 active-low fault")
-    for pin in ("16", "17", "18", "19", "20"):
-        expect_unconnected(components, "U63", pin)
+    for ref in ("U63", "R254", "C281", "C282", "C284"):
+        if ref in components:
+            fail(f"obsolete Type-C-only trackpad component {ref} remains")
+    expect(comp(components, "J58").footprint,
+           "ducktop2:USB2_Trackpad_Cable_SolderPads_1x04_P2.54mm",
+           "trackpad field-solder pad footprint")
+    expect(prop(components, "J58", "AssemblyID"), "TRACKPAD_USBA2_CUT_CABLE",
+           "trackpad wired-cable assembly identity")
+    for pin, want in {
+        "1": "GND", "2": local_net(sheet, "TPAD_CONN_DM"),
+        "3": local_net(sheet, "TPAD_CONN_DP"), "4": local_net(sheet, "TPAD_5V"),
+    }.items():
+        expect(net(components, "J58", pin), want, f"trackpad field-solder pad {pin}")
     expect_contains(comp(components, "U64").value, "TPS2553D", "trackpad branch switch")
     for pin, want in {
         "1": "/SYS_5V", "2": "GND", "3": "/MU_HOST_ACTIVE",
         "4": "/TRACKPAD_FAULT_N", "5": local_net(sheet, "TPAD_ILIM"),
-        "6": local_net(sheet, "TPAD_5V_PRE"),
+        "6": local_net(sheet, "TPAD_5V"),
     }.items():
         expect(net(components, "U64", pin), want, f"trackpad branch switch pin {pin}")
     expect_value_prefix(components, "R252", "43.2k 1%", "trackpad branch ILIM resistor")
@@ -1968,28 +1966,20 @@ def check_internal_services(components):
     expect_value_prefix(components, "R256", "10k", "trackpad fault pull-up")
     expect(net(components, "R256", "1"), "/MCU_3V3", "trackpad fault pull-up rail")
     expect(net(components, "R256", "2"), "/TRACKPAD_FAULT_N", "trackpad fault signal")
-    expect_value_prefix(components, "R254", "100k 1%", "trackpad TPS25810 REF resistor")
-    expect(net(components, "R254", "1"), local_net(sheet, "TPAD_REF"), "trackpad REF resistor top")
-    expect(net(components, "R254", "2"), local_net(sheet, "TPAD_REF_RTN"), "trackpad REF resistor return")
     for ref, value, rail in (
         ("C280", "100n", "/SYS_5V"),
-        ("C281", "100n", local_net(sheet, "TPAD_5V_PRE")),
-        ("C282", "100n", "/SYS_3V3"), ("C283", "10u", local_net(sheet, "TPAD_5V")),
-        ("C284", "150u", local_net(sheet, "TPAD_5V_PRE")),
+        ("C283", "10u", local_net(sheet, "TPAD_5V")),
     ):
         expect_value_prefix(components, ref, value, f"{ref} trackpad source capacitance")
         expect(net(components, ref, "1"), rail, f"{ref} trackpad source rail")
         expect(net(components, ref, "2"), "GND", f"{ref} trackpad source return")
     for pin, want in {
         "1": local_net(sheet, "TPAD_CONN_DP"), "2": local_net(sheet, "TPAD_CONN_DM"),
-        "3": "GND", "4": local_net(sheet, "TPAD_CC1"),
-        "5": local_net(sheet, "TPAD_CC2"), "8": "GND",
+        "3": "GND", "8": "GND",
     }.items():
         expect(net(components, "U62", pin), want, f"trackpad USB2/CC ESD pin {pin}")
-    for pin in ("6", "7", "9", "10"):
+    for pin in ("4", "5", "6", "7", "9", "10"):
         expect_unconnected(components, "U62", pin)
-    for pin in ("A4", "A9", "B4", "B9"):
-        expect(net(components, "J58", pin), local_net(sheet, "TPAD_5V"), f"trackpad USB-C VBUS {pin}")
     expect(net(components, "J52", "1"), "GND", "fan connector ground")
     expect(net(components, "J52", "2"), local_net(sheet, "FAN_12V"), "fan connector fused 12V")
     expect(net(components, "J52", "3"), "/FAN_TACH", "fan tach")
