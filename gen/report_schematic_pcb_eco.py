@@ -222,7 +222,7 @@ def main() -> None:
         "# Schematic-to-PCB ECO Report",
         "",
         "This report is read-only with respect to `ducktop2.kicad_pcb`. It compares a fresh",
-        "KiCad XML schematic netlist with the protected placement-stage board and normalizes KiCad's",
+        "KiCad XML schematic netlist with the protected current board and normalizes KiCad's",
         "generated unconnected-net names to a single NC state.",
         "",
         "## Safety Check",

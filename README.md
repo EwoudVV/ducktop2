@@ -10,14 +10,17 @@ worked, but HDMI and USB-C cables had to loop around the outside of the case.
 Ducktop2 replaces that stack with one purpose-built motherboard, a direct eDP
 display connection, and a separate low-profile mechanical keyboard.
 
-![Top view of the Ducktop2 motherboard at placement stage](docs/images/ducktop2-pcb-top.png)
+![Top view of the Ducktop2 motherboard with routing in progress](docs/images/ducktop2-pcb-top.png)
 
-> **Current state, July 2026:** the generated motherboard schematic passes ERC
-> and the project checks. The six-layer PCB has its outline and 1,173 synchronized
-> footprints. High-speed placement is complete (23 AC coupling caps relocated on
-> 2026-07-21) and the design issued a CONDITIONAL PASS at independent pre-route
-> review. Routing has not started. The board images in this repository are
-> placement-stage renders.
+> **Current state, 27 July 2026:** the generated motherboard schematic passes
+> its ERC and copied-project checks. The six-layer PCB has 1,170 physical
+> footprints and routing is in progress. The current independent verdict is
+> **SCHEMATIC BLOCKED**: the trackpad-zone P0, the R250/R251 trackpad USB
+> short, and three duplicate physical references are closed, but routing,
+> DRC/parity, SI, battery, mechanical,
+> procurement, and target-firmware evidence still block an order. The board
+> images in this repository are current routed-in-progress renders, not a
+> fabrication release.
 
 ## What I Am Building
 
@@ -141,20 +144,20 @@ maintained ERC screenshot.
 | Check | Current result |
 | --- | --- |
 | KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
-| Independent netlist closure | 1,571 pass, 0 fail |
+| Independent netlist closure | 1,569 pass, 0 fail |
 | Bounded electrical calculations | 123 pass, 0 fail |
-| Pin review | 2,642 pass, 0 fail, 0 review |
-| Schematic-to-PCB parity | 1,173 of 1,173 references with no pad-net or metadata drift |
-| PCB DRC | 0 copper violations (424 placement-stage silk/clearance warnings) |
-| Independent design review | CONDITIONAL PASS (2026-07-21) |
-| Host firmware policy tests | Pass |
+| Pin review | 2,603 pass, 0 fail, 0 review |
+| Mainboard duplicate references | 0; checked by the release gate |
+| PCB DRC / parity | 1,404 all-track violations, 499 unconnected items, 199 parity observations; routing review required |
+| BOM procurement completeness | 370 unresolved items |
+| Independent design review | **SCHEMATIC BLOCKED** (2026-07-27) |
+| Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
 
 The project has also been reviewed repeatedly against component datasheets.
-An independent pre-route design review (2026-07-21) independently confirmed every
-automated result and issued a CONDITIONAL PASS before routing.
 The current summaries show what was checked and what remains uncertain; they
 are not a substitute for target firmware, signal-integrity work, thermal and RF
-measurements, or first-article testing.
+measurements, or first-article testing. The current PCB DRC counts are an
+in-progress routing baseline, not waived release exceptions.
 
 ## Open and Check the Project
 
@@ -208,21 +211,29 @@ schematics or comparing the PCB to the netlist.
 - [Radio/GNSS daughterboard](radio_daughterboard/README.md)
 - [Keyboard production package](manufacturing/keyboard_revA_jlcpcb/README_JLCPCB.md)
 - [Verification summary](verification/README.md)
-- [Selected schematic export](docs/exports/ducktop2-selected-schematics.pdf)
+- [Current full schematic export](docs/exports/ducktop2-selected-schematics.pdf)
+- [Current independent review](verification/INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
+- [Current post-fix audit](verification/INDEPENDENT_REVIEW_2026-07-27_postfix.md)
 - [Independent review prompt](docs/review-prompt.md)
 - [Ducktop1 background](docs/ducktop1.md)
 
 ## Roadmap
 
-1. ✅ High-speed placement — 23 AC coupling caps relocated and design review
-   completed (2026-07-21).
-2. Freeze the six-layer stackup and controlled-impedance geometries with the
+1. ✅ Remove the three verified duplicate physical PCB references and their
+   duplicate-only copper, and separate the overlapping unrouted R251 trackpad
+   USB resistor from R250 (2026-07-27).
+2. Classify and resolve the 1,404 current PCB DRC findings, 499 unconnected
+   items, and 199 schematic-parity observations as routing continues.
+3. Freeze the six-layer stackup and controlled-impedance geometries with the
    board manufacturer.
-3. Complete manufacturer part numbers and assembly constraints in the BOM.
-4. Route power and high-speed interfaces, followed by control, audio, and GPIO.
-5. Refill zones, clean silkscreen, run full DRC, and review every exception.
-6. Finalize the eDP harness, battery pack, cooling stack, and enclosure model.
-7. Assemble the first article, bring up one rail at a time, and record the test
+4. Complete manufacturer part numbers and assembly constraints in the BOM.
+5. Route and review power and high-speed interfaces, followed by control,
+   audio, and GPIO.
+6. Refill zones only in a copied board, clean silkscreen, run full DRC, and
+   review every exception.
+7. Finalize the eDP harness, battery pack, trackpad-cable retention, cooling
+   stack, and enclosure model.
+8. Assemble the first article, bring up one rail at a time, and record the test
    results before installing the compute module or cells permanently.
 
 ## Reviews and Contributions

@@ -242,6 +242,24 @@ def offboard_footprint_anchors(board_text: str) -> list[str]:
     return sorted(outside)
 
 
+def duplicate_footprint_references(board_text: str) -> list[str]:
+    """Return repeated physical reference designators on the main PCB.
+
+    A multi-unit schematic symbol legitimately shares a reference across its
+    units.  A PCB has exactly one physical footprint for that reference.  This
+    check therefore operates on top-level footprint blocks rather than on the
+    generated netlist.
+    """
+    references: list[str] = []
+    ref_re = re.compile(r'\(property\s+"Reference"\s+"([^"]+)"')
+    for block in top_level_blocks(board_text, "(footprint"):
+        match = ref_re.search(block)
+        if not match:
+            raise RuntimeError("PCB footprint is missing a Reference property")
+        references.append(match.group(1))
+    return sorted(ref for ref, count in Counter(references).items() if count > 1)
+
+
 def report_unexpected(label: str, actual: Counter, allowed: Counter) -> int:
     unexpected = actual - allowed
     if not unexpected:
@@ -435,6 +453,16 @@ def main(argv=None) -> int:
     before = hash_snapshot(watched)
     cli = find_kicad_cli()
     failures = 0
+
+    duplicate_refs = duplicate_footprint_references(pcb.read_text(encoding="utf-8"))
+    if duplicate_refs:
+        failures += len(duplicate_refs)
+        print(
+            "PCB footprint references: FAIL, duplicate physical references: "
+            + ", ".join(duplicate_refs)
+        )
+    else:
+        print("PCB footprint references: unique")
 
     with tempfile.TemporaryDirectory(prefix="ducktop2-release-check-") as temp:
         tempdir = Path(temp)

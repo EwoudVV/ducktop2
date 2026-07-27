@@ -1,24 +1,43 @@
 # Current Design Status
 
-Updated: 2026-07-21
+Updated: 2026-07-27
+
+## Release Boundary
+
+**Verdict: SCHEMATIC BLOCKED.** The generated schematic is internally
+consistent under the checks in this repository. That does not establish a
+fabrication-ready PCB, safe battery system, released enclosure, or working
+target firmware. The 2026-07-27 independent review and its post-fix audit are
+the current release record: [`full review`](../verification/INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
+and [`post-fix audit`](../verification/INDEPENDENT_REVIEW_2026-07-27_postfix.md).
+
+The relocated direct-solder trackpad lands `J58` no longer overlap stale GND
+zone fill, the three duplicate physical PCB references `U170`, `U2004`, and
+`U2014` were removed with their duplicate-only copper, and R251 was moved clear
+of R250 to remove a physical D+/D- short. Those fixes close the corresponding
+P0 and P1 findings. They do not waive the remaining routing,
+signal-integrity, battery, mechanical, procurement, or HIL holds below.
 
 ## Schematic
 
-The active motherboard hierarchy contains 14 generated child sheets, 1,176
-components, 1,378 nets, and 4,565 connected pins. The retired Intehill
+The active motherboard hierarchy contains 14 generated child sheets, 1,173
+components, 1,362 nets, and 4,522 connected pins. The retired Intehill
 controller, VL822 hub, carrier-eDP, and USB-C video sheets are not part of the
 root design.
 
-Current automated results:
+The current copied-project schematic gate reports:
 
 | Check | Result |
 | --- | --- |
 | KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
-| Independent netlist closure | 1,571 pass, 0 fail |
+| Generated schematic self-check | Pass |
+| Schematic design contracts | Pass |
+| Independent netlist closure | 1,569 pass, 0 fail |
 | Bounded electrical calculations | 123 pass, 0 fail |
-| Pin review | 2,642 pass, 0 fail, 0 review |
-| Schematic-to-PCB reference/pad-net parity | 1,173 of 1,173, no drift |
-| Host firmware policy tests | Pass |
+| Pin review | 2,603 pass, 0 fail, 0 review |
+| Mainboard duplicate physical references | 0 |
+| BOM procurement gaps | 370 |
+| Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
 
 The remaining pin-review rows are broad Mu, M.2, MCU, spare, NC, and ground-pin
 classifications that require human context; they are not detected electrical
@@ -26,40 +45,42 @@ failures. The ERC warning allowlist is tied to exact references and pins. It
 covers 13 flattened KiCad symbol copies and 14 required GPIO/strap ties that
 KiCad sees sharing the global ground power flag.
 
-The latest closure summary is in
-[`verification/SCHEMATIC_CLOSURE_2026-07-20.md`](../verification/SCHEMATIC_CLOSURE_2026-07-20.md).
-
 ## PCB
 
-The mainboard is six layers and currently measures 358 x 185 mm, including the
-fin-stack notch. It contains 1,173 footprints and 14 zones. The schematic and PCB
-agree on references, footprints, pad nets, BOM flags, and DNP flags.
+The reviewed PCB SHA-256 is
+`25d06e11208187f597514f593d12ef28a139f637f6f02362e2592c7d4c6f4501`.
+The mainboard is six layers and measures 358 x 185 mm, including the fin-stack
+notch. It now contains 1,170 physical footprints, 4,527 routed segments, 52
+arcs, 855 vias, and five top-level zones. Routing is in progress; these numbers
+are a snapshot, not a release claim.
 
-Routing has not started. The current 3D renders show placement only.
+The final all-track PCB DRC baseline contains 1,404 violations (948 errors and
+456 warnings), 499 unconnected items, and 199 schematic-parity observations.
+The principal categories are 203 solder-mask bridges, 199 shorting-item
+findings, 199 courtyard overlaps, 156 clearance violations, 153 starved
+thermals, and 38 dangling track/via objects. Those findings need individual
+classification and correction as routing continues. They are not accepted
+fabrication waivers. The duplicate-removal candidate introduced no new dangling
+track or via objects, but it does not make the existing routing clean.
 
-Routing is now gated by the coupling-capacitor placement fix completed on
-2026-07-21. All high-speed AC coupling caps (PCIe, USB3, HDMI) were relocated
-from 12-90 mm away from their endpoints. The move affected 23 0402 capacitors
-across the NVMe, WiFi, USB3 right PD, USB3 left PD, hub-side, and Mu-side
-paths. An independent pre-order design review
-([`verification/DESIGN_REVIEW_2026-07-21.md`](../verification/DESIGN_REVIEW_2026-07-21.md))
-confirmed the schematic is clean and issued a CONDITIONAL PASS.
+R251 had no attached routing, so it was moved from `(179.3, 88.6)` to
+`(180.3, 90.3)` without disturbing routed copper. That removed its overlap with
+R250, which had shorted `/TRACKPAD_USB_DP` to
+`/Internal Services/TPAD_CONN_DM`; only the five top-level zone blocks were
+refilled in a copied candidate before installation. The final DRC contains no
+entry matching `TPAD_CONN`, `TRACKPAD_USB`, `J58`, or `C1720`. This closes that
+local defect only, not the remaining board-wide DRC baseline.
 
-**Coupling-cap placement note:** The independent review flagged 8 caps as
-12-33 mm from their endpoints, measured from component *centers*. A corrected
-analysis ([`verification/COUPLING_CAP_ANALYSIS_2026-07-21.md`](../verification/COUPLING_CAP_ANALYSIS_2026-07-21.md))
-shows actual distances to the nearest signal pins are ~11 mm for Mu USB3 TX
-caps and potentially 4-14 mm for NVMe caps depending on pin assignment.
-These values are acceptable for USB 3.0 / PCIe Gen3 and can be revisited
-on the routed PCB.
+The direct trackpad connection is now four `J58` through-hole solder lands:
+pin 1 GND, pin 2 D-, pin 3 D+, and pin 4 VBUS. It uses a cut USB 2.0
+Standard-A-to-USB-C cable, not an internal USB-C receptacle. Cable gauge,
+length, bend path, retention hardware, and pull/strain testing are still
+unreleased.
 
-The current DRC findings are placement-stage items:
-
-- 499 unrouted connections
-- 424 silkscreen, edge-clearance, or text-size warnings (14 new reference-field
-  overlaps on the right USB-C PD caps from the relocation)
-- no current schematic-to-PCB parity findings
-- no new copper clearance or shorting violations
+The PCB is not ready for fabrication. In particular, it still requires a
+reviewed controlled-impedance stackup; high-speed routing and SI constraints;
+power-loop, thermal, and back-power review; a complete orderable BOM; a clean
+final DRC/parity result; and physical validation.
 
 The removable radio/GNSS/audio daughterboard has 126 placed footprints. Its
 schematic passes ERC with no warnings, and its mainboard interface defaults off
@@ -78,9 +99,10 @@ Confirmed plan-view measurements:
 - speakers: 38 x 18 mm each
 
 The battery, trackpad, cooling, and hinge stack still need a physical Z-height
-model. The panel and trackpad dimensions changed after the earliest floorplans,
-so the final enclosure and board-support web cannot be frozen from the old JSON
-alone.
+model. The J58 cable has no released clamp, tie point, service loop, adhesive
+specification, cable part number, or pull-test result. The floorplan cable
+corridors are therefore explicitly provisional, not a released mechanical
+route.
 
 ## Firmware
 
@@ -88,19 +110,26 @@ The repository contains deterministic C11 policy cores and host tests for the
 STM32 EC and RP2350 maker controller. It does not yet contain target startup,
 USB descriptors, board drivers, vendor SDK integration, final binaries, or HIL
 results. The hardware defaults were designed so reset removes source-path and
-load enables before firmware runs.
+load enables before firmware runs, but target behavior must still be proved on
+the first article.
 
 ## Work in Progress
 
-The next electrical/layout sequence is:
-
-1. ✅ High-speed coupling-capacitor placement corrected (2026-07-21).
-2. Freeze the actual six-layer stackup and controlled-impedance geometries.
-3. Finish the manufacturer part numbers and assembly constraints in the BOM.
-4. Route power and high-speed interfaces, then low-speed control and GPIO.
-5. Refill zones, clean silkscreen, run full DRC, and review every exception.
-6. Complete the eDP harness, battery-pack, thermal, RF, and enclosure measurements.
-7. Build target firmware and run the hardware-in-the-loop bring-up matrix.
+1. ✅ Correct the J58 stored-zone failure without moving unrelated routing.
+2. ✅ Remove duplicate physical `U170`, `U2004`, and `U2014` footprints and
+   duplicate-only copper; add a release-gate uniqueness check.
+3. ✅ Move unconnected R251 clear of R250, verify the trackpad D+/D- physical
+   short and local solder-mask bridge are absent, and preserve existing routing.
+4. Classify and resolve all remaining PCB DRC, unconnected, and parity findings.
+5. Freeze the six-layer stackup and controlled-impedance geometries.
+6. Complete manufacturer part numbers, ratings, assembly constraints, and
+   alternate sourcing for the remaining BOM gaps.
+7. Finish reviewed power, PCIe, USB, HDMI, Ethernet, audio, and control routing.
+8. Refill zones only in a copied board, clean silkscreen, run full DRC, and
+   review every exception.
+9. Complete eDP harness, battery-pack, trackpad-cable retention, thermal, RF,
+   and enclosure measurements.
+10. Build target firmware and run the hardware-in-the-loop bring-up matrix.
 
 The repository is useful for review now, but the mainboard files are not an
 ordering package.

@@ -280,7 +280,7 @@ PLACEMENTS: dict[str, tuple[float, float, float | None]] = {
     "U303": (224, 116, 0),
     "F300": (214, 116, 0),
     # Trackpad, touch, fan/cooling
-    "J58": (197.5, 127.5, 0),
+    "J58": (171.2, 130.0, 0),
     "J57": (182, 133, 0),
     "U62": (208, 128, 0),
     "F201": (197, 140, 0),
@@ -875,7 +875,7 @@ SAFE_ANCHORS: dict[str, tuple[float, float, float | None]] = {
     "J301": (188, 96, 0),
     "J302": (218, 90, 0),
     "J303": (218, 106, 0),
-    "J58": (197.5, 127.5, 0),
+    "J58": (171.2, 130.0, 0),
     "J310": (334, 89, 0),
     # Major compute/storage/mechanical anchors.
     "A1": (305, 185, 0),

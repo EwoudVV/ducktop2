@@ -4,7 +4,9 @@ Date: 2026-07-18
 
 This document controls the PCB-side mechanical features for the LattePanda Mu,
 the two M.2 cards, and the mainboard-to-chassis interface. It does not release
-the enclosure or authorize fabrication by itself.
+the enclosure or authorize fabrication by itself. The direct-soldered trackpad
+cable is explicitly not released by this document until the additional contract
+below is completed.
 
 ## LattePanda Mu Retention
 
@@ -79,6 +81,21 @@ This pattern supports the long 358 x 185 mm board near its ends, center, side
 connectors, Mu/cooling area, and M.2 area without placing bosses inside the
 battery, trackpad, hinge, antenna, or cooling envelopes.
 
+## Trackpad Cable Retention — Not Released
+
+`J58` is four 1.0 mm drill / 2.2 mm land through-hole solder pads at PCB datum
+`(171.2, 130.0)`. It accepts the cut Standard-A end of a USB 2.0
+Standard-A-to-USB-C trackpad cable: pad 1 GND, pad 2 D-, pad 3 D+, and pad 4
+VBUS. The solder joints must not carry cable pull, flex, vibration, or service
+load.
+
+No clamp, cable tie, adhesive, service loop, cable part number, conductor
+gauge, bend radius, chassis datum, or pull-test result is released. Do not use
+the floorplan cable corridor as evidence of retention. Release requires a
+reviewed physical retention feature, cable identification, continuity/polarity
+inspection, bend clearance at the trackpad USB-C plug, and a documented pull
+and vibration test on a representative assembly.
+
 ## Assembly Sequence
 
 1. Inspect the mainboard NPTHs and the soldered standoff joints before fitting
@@ -133,6 +150,8 @@ Still required before mechanical release:
 4. Check the first article with physical Mu, SSD, Wi-Fi card, cold plate, heat
    pipe, keyboard, trackpad, batteries, cables, and enclosure.
 5. Run fit, bow, connector-engagement, thermal-cycle, vibration, and drop tests.
+6. Define and validate J58 cable strain relief, service access, and pull-test
+   acceptance before allowing the trackpad cable into an assembly build.
 
 ## Primary References
 
