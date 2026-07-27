@@ -14,22 +14,6 @@ def usblc6(s, ref, value, x, y, dp, dm, rail):
             })
 
 
-def trackpad_usb_c_nets():
-    return {
-        "A1": ("GND", "local"), "A12": ("GND", "local"),
-        "B1": ("GND", "local"), "B12": ("GND", "local"),
-        "SH": ("GND", "local"),
-        "A4": ("TPAD_5V", "local"), "A9": ("TPAD_5V", "local"),
-        "B4": ("TPAD_5V", "local"), "B9": ("TPAD_5V", "local"),
-        "A5": ("TPAD_CC1", "local"), "B5": ("TPAD_CC2", "local"),
-        "A6": ("TPAD_CONN_DP", "local"), "B6": ("TPAD_CONN_DP", "local"),
-        "A7": ("TPAD_CONN_DM", "local"), "B7": ("TPAD_CONN_DM", "local"),
-        "A2": ("", "nc"), "A3": ("", "nc"), "A10": ("", "nc"), "A11": ("", "nc"),
-        "B2": ("", "nc"), "B3": ("", "nc"), "B10": ("", "nc"), "B11": ("", "nc"),
-        "A8": ("", "nc"), "B8": ("", "nc"),
-    }
-
-
 def build(sheet_symbol_uuid):
     s = Sheet(f"/{sheet_symbol_uuid}")
     s.refcounters["#PWR"] = 100
@@ -85,65 +69,49 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("TRACKPAD_USB_DP", "hier"), "2": ("TPAD_CONN_DP", "local")})
     s.place("R251", "R", "22R trackpad DM series", 20, 271.78, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("TRACKPAD_USB_DM", "hier"), "2": ("TPAD_CONN_DM", "local")})
-    s.place("U62", "TPD4EUSB30", "TPD4E05U06 trackpad USB2/CC ESD", 110, 265.43,
+    s.place("U62", "TPD4EUSB30", "TPD4E05U06 wired trackpad USB2 ESD", 110, 265.43,
             footprint=FOOTPRINTS["TPD4E05U06DQA"],
             pin_nets={
                 "1": ("TPAD_CONN_DP", "local"), "2": ("TPAD_CONN_DM", "local"),
-                "3": ("GND", "local"), "4": ("TPAD_CC1", "local"),
-                "5": ("TPAD_CC2", "local"), "6": ("", "nc"),
+                "3": ("GND", "local"), "4": ("", "nc"),
+                "5": ("", "nc"), "6": ("", "nc"),
                 "7": ("", "nc"), "8": ("GND", "local"),
                 "9": ("", "nc"), "10": ("", "nc"),
             }, extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPD4E05U06DQAR"})
-    s.place("U63", "TPS25810RVC", "TPS25810 attach-controlled trackpad Type-C source", 20, 310,
-            footprint=FOOTPRINTS["TPS25810RVC"],
-            pin_nets={
-                "1": ("TRACKPAD_FAULT_N", "hier"),
-                "2": ("TPAD_5V_PRE", "local"), "3": ("TPAD_5V_PRE", "local"),
-                "4": ("TPAD_5V_PRE", "local"), "5": ("SYS_3V3", "hier"),
-                "6": ("MU_HOST_ACTIVE", "hier"),
-                "7": ("GND", "local"), "8": ("GND", "local"),
-                "9": ("TPAD_REF_RTN", "local"), "10": ("TPAD_REF", "local"),
-                "11": ("TPAD_CC1", "local"), "12": ("GND", "local"),
-                "13": ("TPAD_CC2", "local"),
-                "14": ("TPAD_5V", "local"), "15": ("TPAD_5V", "local"),
-                "16": ("", "nc"), "17": ("", "nc"), "18": ("", "nc"),
-                "19": ("", "nc"), "20": ("", "nc"), "21": ("GND", "local"),
-            }, extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPS25810RVCR"})
     s.place("U64", "TPS2553D", "TPS2553DDBVR trackpad 0.61A branch switch", 470, 322.58,
             footprint=FOOTPRINTS["TPS2553DDBV"],
             pin_nets={
                 "1": ("SYS_5V", "hier"), "2": ("GND", "local"),
                 "3": ("MU_HOST_ACTIVE", "hier"), "4": ("TRACKPAD_FAULT_N", "hier"),
-                "5": ("TPAD_ILIM", "local"), "6": ("TPAD_5V_PRE", "local"),
+                "5": ("TPAD_ILIM", "local"), "6": ("TPAD_5V", "local"),
             }, extra_props={
                 "Manufacturer": "Texas Instruments", "MPN": "TPS2553DDBVR",
                 "Datasheet": "https://www.ti.com/lit/ds/symlink/tps2553.pdf",
             })
-    s.place("J58", "USB_C_Receptacle_Passive", "Internal USB-C receptacle for cable-attached USB trackpad", 205, 278.13,
-            footprint=FOOTPRINTS["USB_C_Receptacle"], pin_nets=trackpad_usb_c_nets(),
-            extra_props={"Manufacturer": "Molex", "MPN": "105450-0101"})
-    s.place("R254", "R", "100k 1% <=100ppm TPS25810 REF", 330, 246.38, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("TPAD_REF", "local"), "2": ("TPAD_REF_RTN", "local")})
+    s.place("J58", "Conn_01x04", "Field-soldered trackpad USB2 cable: GND/D-/D+/VBUS", 205, 278.13,
+            footprint=FOOTPRINTS["Trackpad_USB2_Wired"], in_bom=False,
+            pin_nets={
+                "1": ("GND", "local"), "2": ("TPAD_CONN_DM", "local"),
+                "3": ("TPAD_CONN_DP", "local"), "4": ("TPAD_5V", "local"),
+            }, extra_props={
+                "AssemblyMethod": "Hand-solder the cut USB 2.0 Standard-A-to-USB-C trackpad cable; do not fit a receptacle",
+                "EndpointWireMap": "1=GND/BLACK;2=D-/WHITE;3=D+/GREEN;4=VBUS/RED; verify continuity because colours are not authoritative",
+                "CableRequirement": "USB-IF-compliant USB-C plug to USB 2.0 Standard-A cable with 56k +/-5% Rp from CC to VBUS in the USB-C plug",
+                "ProcurementClass": "OWNER_SUPPLIED_CABLE",
+                "AssemblyID": "TRACKPAD_USBA2_CUT_CABLE",
+            })
     s.place("R252", "R", "43.2k 1% TPS2553 trackpad ILIM 0.61A nominal", 380, 271.78,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("TPAD_ILIM", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0743K2L"})
     s.place("C280", "C", "100n TPS2553 input bypass", 330, 271.78, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local")})
-    s.place("C281", "C", "100n TPS25810 input", 330, 284.48, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("TPAD_5V_PRE", "local"), "2": ("GND", "local")})
-    s.place("C282", "C", "100n TPS25810 AUX", 330, 297.18, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("SYS_3V3", "hier"), "2": ("GND", "local")})
-    s.place("C283", "C", "10u trackpad VBUS", 330, 309.88, footprint=FOOTPRINTS["C_10u"],
+    s.place("C283", "C", "10u trackpad cable VBUS", 330, 309.88, footprint=FOOTPRINTS["C_10u"],
             pin_nets={"1": ("TPAD_5V", "local"), "2": ("GND", "local")})
-    s.place("C284", "C_Polarized", "150u 10V TPS25810 input reservoir", 330, 322.58,
-            footprint="Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D",
-            pin_nets={"1": ("TPAD_5V_PRE", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "KEMET", "MPN": "T520D157M010ATE025"})
     s.place("R256", "R", "10k trackpad fault pull-up", 380, 322.58,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("TRACKPAD_FAULT_N", "hier")})
-    s.text(20, 345.44, "J58 is the only trackpad connector. TPS2553 isolates the 150uF input reservoir; TPS25810 applies connector VBUS only after attach.")
+    s.text(20, 345.44, "J58 is four field-soldered pads for a cut USB 2.0 Standard-A-to-USB-C cable: 1=GND, 2=D-, 3=D+, 4=VBUS. The USB-C plug's compliant 56k Rp handles trackpad-side CC; U64 provides current limiting and host-off isolation.")
 
     # ---------------- Fan and thermal service ----------------
     s.text(330, 50.8, "== Fan, lid, and thermal service ==")

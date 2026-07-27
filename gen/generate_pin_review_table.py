@@ -71,8 +71,8 @@ CRITICAL_REFS = [
     "R150", "R151", "R152", "R153", "R154", "R155", "R156", "R157",
     "D150", "D151", "D152", "D153", "D154", "D155", "D156", "D157",
     "R570", "R571", "R572", "R573", "R574", "R575", "R576", "R577", "R578", "R579",
-    "U61", "Q60", "R202", "J58", "U62", "U63", "U64",
-    "R252", "C280", "C281", "C283", "C284", "R256", "J52", "J53", "J54", "J56", "Q200",
+    "U61", "Q60", "R202", "J58", "U62", "U64",
+    "R252", "C280", "C283", "R256", "J52", "J53", "J54", "J56", "Q200",
     "U45", "J41", "J45",
     "U40", "J42", "U70", "L70", "FL240", "FL250", "U240", "U241", "R242", "R227", "U260", "U261",
     "U242", "C246", "R243", "R244", "U250", "U251", "R260", "R228",
@@ -481,7 +481,7 @@ def load_contracts() -> None:
         (68, "/GNSS_UART_TX", "PA9 is USART1_TX for GNSS hardware UART."),
         (69, "/GNSS_UART_RX", "PA10 is USART1_RX for GNSS hardware UART."),
         (77, "/WIFI_W_DISABLE2_N_EC", "PA15 drives the powered-off-isolated Bluetooth disable input."),
-        (36, "/TRACKPAD_FAULT_N", "PB1 reads the trackpad Type-C power-switch fault output."),
+        (36, "/TRACKPAD_FAULT_N", "PB1 reads the trackpad current-limited branch fault output."),
         (44, "/MU_12V_ENABLE", "PE13 explicitly enables the regulated Mu 12 V rail after source qualification."),
         (45, "/MU_S0_HIGH", "PE14 reads the Mu PSON/S0 status signal."),
         (46, "/MU_12V_PG", "PE15 reads the regulated Mu 12 V power-good signal."),
@@ -1046,51 +1046,31 @@ def load_contracts() -> None:
     add("R202", 1, "/MCU_3V3", "USB switch enable defaults high/disconnected.", ec_usb_src)
     add("R202", 2, local("Internal Services", "EC_USB_OE_N"), "USB switch default-disconnect control.", ec_usb_src)
 
-    trackpad_src = "USB Type-C receptacle pinout plus internal USB2 trackpad cable contract"
-    add_many("J58", ["A1", "A12", "B1", "B12", "SH"], "GND", "Trackpad USB-C shell/ground pins.", trackpad_src)
-    add_many("J58", ["A4", "A9", "B4", "B9"], local("Internal Services", "TPAD_5V"), "Trackpad USB-C VBUS pins.", trackpad_src)
-    add("J58", "A5", local("Internal Services", "TPAD_CC1"), "Trackpad USB-C CC1.", trackpad_src)
-    add("J58", "B5", local("Internal Services", "TPAD_CC2"), "Trackpad USB-C CC2.", trackpad_src)
-    add_many("J58", ["A6", "B6"], local("Internal Services", "TPAD_CONN_DP"), "Trackpad USB2 D+ tied to both orientations.", trackpad_src)
-    add_many("J58", ["A7", "B7"], local("Internal Services", "TPAD_CONN_DM"), "Trackpad USB2 D- tied to both orientations.", trackpad_src)
-    for pin in ["A2", "A3", "A8", "A10", "A11", "B2", "B3", "B8", "B10", "B11"]:
-        add_nc("J58", pin, "Internal trackpad cable does not use SuperSpeed/SBU.", trackpad_src)
-    for pin, net in {
-        1: "/TRACKPAD_FAULT_N", 2: local("Internal Services", "TPAD_5V_PRE"),
-        3: local("Internal Services", "TPAD_5V_PRE"), 4: local("Internal Services", "TPAD_5V_PRE"),
-        5: "/SYS_3V3", 6: "/MU_HOST_ACTIVE",
-        7: "GND", 8: "GND", 9: local("Internal Services", "TPAD_REF_RTN"),
-        10: local("Internal Services", "TPAD_REF"), 11: local("Internal Services", "TPAD_CC1"),
-        12: "GND", 13: local("Internal Services", "TPAD_CC2"),
-        14: local("Internal Services", "TPAD_5V"), 15: local("Internal Services", "TPAD_5V"), 21: "GND",
-    }.items():
-        add("U63", pin, net, "TPS25810 provides attach-controlled, reverse-blocked trackpad VBUS and Type-C CC handling.", "TI TPS25810 datasheet")
-    for pin in [16, 17, 18, 19, 20]:
-        add_nc("U63", pin, "Unused trackpad TPS25810 status/strap output.", "TI TPS25810 datasheet")
-    trackpad_branch = "TI TPS2553 datasheet plus TPS25810 input-capacitance isolation contract"
+    trackpad_src = "USB-IF USB-C-to-USB 2.0 Standard-A cable assembly plus field-soldered trackpad cable contract"
+    add("J58", "1", "GND", "Trackpad cable GND conductor; confirm continuity before soldering.", trackpad_src)
+    add("J58", "2", local("Internal Services", "TPAD_CONN_DM"), "Trackpad cable D- conductor; confirm continuity before soldering.", trackpad_src)
+    add("J58", "3", local("Internal Services", "TPAD_CONN_DP"), "Trackpad cable D+ conductor; confirm continuity before soldering.", trackpad_src)
+    add("J58", "4", local("Internal Services", "TPAD_5V"), "Trackpad cable VBUS conductor from the current-limited branch.", trackpad_src)
+    trackpad_branch = "TI TPS2553 datasheet plus direct wired USB2 trackpad branch contract"
     for pin, net in {
         1: "/SYS_5V", 2: "GND", 3: "/MU_HOST_ACTIVE", 4: "/TRACKPAD_FAULT_N",
-        5: local("Internal Services", "TPAD_ILIM"), 6: local("Internal Services", "TPAD_5V_PRE"),
+        5: local("Internal Services", "TPAD_ILIM"), 6: local("Internal Services", "TPAD_5V"),
     }.items():
-        add("U64", pin, net, "Current-limited branch isolates the trackpad TPS25810 input reservoir from shared SYS_5V.", trackpad_branch)
+        add("U64", pin, net, "Current-limited branch drives the direct wired trackpad cable from SYS_5V only while the Mu host is active.", trackpad_branch)
     add("R252", 1, local("Internal Services", "TPAD_ILIM"), "Trackpad TPS2553 current-limit programming resistor.", trackpad_branch)
     add("R252", 2, "GND", "Trackpad TPS2553 current-limit resistor return.", trackpad_branch)
     for ref, net, note in (
         ("C280", "/SYS_5V", "trackpad TPS2553 input bypass"),
-        ("C281", local("Internal Services", "TPAD_5V_PRE"), "trackpad TPS25810 input bypass"),
-        ("C283", local("Internal Services", "TPAD_5V"), "trackpad connector-side VBUS capacitance"),
-        ("C284", local("Internal Services", "TPAD_5V_PRE"), "isolated trackpad TPS25810 input reservoir"),
+        ("C283", local("Internal Services", "TPAD_5V"), "trackpad cable-side VBUS capacitance"),
     ):
         add(ref, 1, net, f"{note} positive rail.", trackpad_branch)
         add(ref, 2, "GND", f"{note} return.", trackpad_branch)
-    add("R256", 1, "/MCU_3V3", "Trackpad fault open-drain output requires an always-on pull-up.", "TI TPS25810 datasheet")
-    add("R256", 2, "/TRACKPAD_FAULT_N", "Trackpad fault reaches the EC as an active-low signal.", "TI TPS25810 datasheet")
+    add("R256", 1, "/MCU_3V3", "Trackpad branch-switch FAULT open-drain output requires an always-on pull-up.", "TI TPS2553 datasheet")
+    add("R256", 2, "/TRACKPAD_FAULT_N", "Trackpad branch fault reaches the EC as an active-low signal.", "TI TPS2553 datasheet")
     for pin, net in {1: local("Internal Services", "TPAD_CONN_DP"),
-                     2: local("Internal Services", "TPAD_CONN_DM"), 3: "GND",
-                     4: local("Internal Services", "TPAD_CC1"),
-                     5: local("Internal Services", "TPAD_CC2"), 8: "GND"}.items():
-        add("U62", pin, net, "Trackpad USB2 and CC connector-side ESD protection.", "TI TPD4E05U06 datasheet")
-    for pin in [6, 7, 9, 10]:
+                     2: local("Internal Services", "TPAD_CONN_DM"), 3: "GND", 8: "GND"}.items():
+        add("U62", pin, net, "Trackpad wired USB2 data-pair ESD protection.", "TI TPD4E05U06 datasheet")
+    for pin in [4, 5, 6, 7, 9, 10]:
         add_nc("U62", pin, "Unused TPD4E05U06 package pin.", "TI TPD4E05U06 datasheet")
 
     delta_fan = "Delta BFB04512HHA-CZ0T specification"

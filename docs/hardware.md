@@ -85,7 +85,10 @@ The keyboard is a separate 273.5 x 80 mm, two-layer board with 65 Cherry MX
 Ultra Low Profile switches in a 5x14 matrix. It connects to the mainboard over a
 30-pin FFC. The rev-A keyboard production files are already generated.
 
-The trackpad is a 140 x 105 mm USB unit. System audio uses an internal USB hub,
+The trackpad is a 140 x 105 mm USB unit. Its USB-C plug is retained at the
+trackpad; a cut USB 2.0 Standard-A-to-USB-C cable is soldered directly to the
+four labelled J58 lands on the motherboard (GND, D-, D+, VBUS), with continuity
+checked before power-up. System audio uses an internal USB hub,
 a PCM2900-family codec, a TPA2012D2 stereo amplifier, two front speakers, and a
 chip-down digital microphone/preamp path. A second USB audio codec handles the
 radio receive/transmit audio path.

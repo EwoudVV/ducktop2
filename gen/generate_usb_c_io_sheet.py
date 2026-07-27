@@ -45,7 +45,7 @@ def usb2_cc_esd(s, ref, x, y, dp, dm, cc1, cc2):
 
 def add_hub_supplies(s):
     s.text(20, 45.72, "== Dedicated 6A-class port rail and 1.15V hub-core rail ==")
-    s.place("U1703", "TPS56637", "TPS56637RPAR VSYS to USB_PORT_5V 5.21V", 63.5, 73.66,
+    s.place("U1703", "TPS56637", "TPS56637RPAR VSYS to USB_PORT_5V 5.06V nominal", 63.5, 73.66,
             footprint=FOOTPRINTS["TPS56637"], pin_nets={
                 "1": ("USB5_EN", "local"), "2": ("USB5_FB", "local"),
                 "3": ("GND", "local"), "4": ("USB5_PG", "local"), "5": ("", "nc"),
