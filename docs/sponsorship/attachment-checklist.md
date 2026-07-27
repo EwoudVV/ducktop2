@@ -18,9 +18,10 @@ the frame. A plain background and daylight are enough.
 - `docs/images/ducktop2-keyboard-pcb.png`
 - `docs/exports/ducktop2-selected-schematics.pdf`
 
-The top and perspective motherboard images show placement in progress. The
-schematic PDF contains the root, battery/power, USB-C I/O, embedded controller,
-Mu carrier, charging-input, system-audio, and Ethernet sheets.
+The top and perspective motherboard images show routing in progress and are not
+fabrication-release evidence. The schematic PDF is a current 14-page export of
+the active root hierarchy, including the Internal Services sheet and direct-
+soldered trackpad connection.
 
 Seven attachments is enough for the first email. The complete KiCad source,
 firmware policy code, mechanical notes, and verification summaries are in the

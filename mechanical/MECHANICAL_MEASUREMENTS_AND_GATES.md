@@ -14,6 +14,9 @@ dimensions or PCB `Edge.Cuts`.
 - JOMAA USB trackpad outer envelope: **140 mm wide x 105 mm front-to-back**
   (user measured as 105 x 140 mm; thickness, USB-C datum, click travel, and
   mounting details are not yet measured).
+- `J58` trackpad cable solder-land PCB datum: **(171.2, 130.0) mm**. This is
+  an electrical-board datum only; it is not a released cable-route or chassis
+  retention datum.
 - Front speakers: **38 x 18 mm each** in plan view.
 - Intehill controller PCB: removed from the production architecture. The panel
   connects directly to the LattePanda Mu module's onboard 40-pin eDP connector.
@@ -54,8 +57,9 @@ outside the chassis envelope are not allowed.
    radii.
 4. Full keyboard keycap/switch/plate stack, underside protrusions, support rails,
    and the J320-to-J310 FFC datum and bend envelope.
-5. Trackpad thickness, click travel, USB-C position, plug body, cable exit, and
-   mounts.
+5. Trackpad thickness, click travel, USB-C position, plug body, cable exit,
+   mounts, cable part number, conductor gauge, bend radius, retained cable
+   path, strain-relief hardware, and pull/vibration acceptance.
 6. Speaker thickness, wire exit, mounting points, outlet direction, and required
    acoustic back volume.
 7. Mu/module height and service clearance; coldplate/TIM/clamp stack; exact

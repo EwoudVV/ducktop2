@@ -79,19 +79,24 @@ firmware, peripheral-driver tests, watchdog tests, or hardware-in-the-loop work.
 
 ## PCB Checks
 
-The PCB is synchronized but intentionally unrouted. The normal DRC therefore
-contains unrouted and silkscreen findings. Run it to catch new copper,
-clearance, hole, mask, and parity problems, not to hide the expected routing
-count:
+The PCB has partial routing in progress. Its current DRC has unresolved copper,
+clearance, mask, silkscreen, unrouted, and schematic-parity findings. Run DRC
+to classify and fix them; do not treat the current count as an allowlist or
+fabrication waiver:
 
 ```sh
 kicad-cli pcb drc --format json \
   --output /tmp/ducktop2-drc.json ducktop2.kicad_pcb
 ```
 
+Do not add duplicate physical references: one footprint is required for each
+schematic reference, even when that reference is a multi-unit symbol. The
+copied-project release gate checks this before its schematic checks begin.
+
 Before applying an ECO, use the report and candidate checkers in `gen/`. Keep a
 snapshot for any operation that changes references, footprints, pad nets, board
-outline, or routing.
+outline, or routing. Operations that refill zones or save a board must run in a
+copy first; merge only a reviewed, object-level diff into the live PCB.
 
 ## Mainboard Render
 

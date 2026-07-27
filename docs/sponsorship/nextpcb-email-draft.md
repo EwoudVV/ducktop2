@@ -29,14 +29,14 @@ The replacement display panel is working at its full resolution and refresh
 rate. The separate 65-key Cherry MX Ultra Low Profile keyboard PCB has already
 been sent to production, and Cherry is providing 70 switch samples. The
 motherboard schematic passes the current ERC, netlist, electrical-calculation,
-and host firmware checks. Its PCB is at placement stage, as marked on the
-attached renders; high-speed placement and routing are the next steps.
+and host firmware checks. Its PCB has routing in progress, as marked on the
+attached renders, and is not yet a fabrication or assembly order package.
 
-I expect to complete placement, routing, DRC, and the manufacturing review in
-about four to six weeks. I would like the two-week ordering window to begin
-when I send the completed manufacturing package. After receiving the boards, I
-can publish an initial assembly and bring-up update within one month, followed
-by a fuller report after testing.
+I would like the two-week ordering window to begin only when I send a completed
+manufacturing package. That package still needs clean routing/DRC evidence,
+stackup and SI sign-off, a complete orderable BOM, and the remaining mechanical
+and validation gates. I will send an updated schedule once those gates are
+closed rather than promising a fabrication date from the in-progress PCB.
 
 I understand that the proposed $300 credit covers fabrication, assembly,
 components, and shipping through NextPCB. I am happy to share the project

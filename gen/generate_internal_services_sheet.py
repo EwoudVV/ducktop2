@@ -105,9 +105,11 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("TPAD_ILIM", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0743K2L"})
     s.place("C280", "C", "100n TPS2553 input bypass", 330, 271.78, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local")})
+            pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71E104KA01D"})
     s.place("C283", "C", "10u trackpad cable VBUS", 330, 309.88, footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("TPAD_5V", "local"), "2": ("GND", "local")})
+            pin_nets={"1": ("TPAD_5V", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM31CR71E106KA12L"})
     s.place("R256", "R", "10k trackpad fault pull-up", 380, 322.58,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("TRACKPAD_FAULT_N", "hier")})

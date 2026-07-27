@@ -11,20 +11,23 @@ locally outside the public working tree.
 | KiCad ERC | 0 errors, 13 library-copy and 14 intentional grounded-pin warnings |
 | Generated schematic self-check | Pass |
 | Schematic design contracts | Pass |
-| Independent netlist closure | 1,571 pass, 0 fail |
+| Independent netlist closure | 1,569 pass, 0 fail |
 | Electrical calculations | 123 pass, 0 fail |
-| Pin review | 2,642 pass, 0 fail, 0 review |
-| Mainboard schematic/PCB parity | 1,173 of 1,173 references, no pad-net or metadata drift |
+| Pin review | 2,603 pass, 0 fail, 0 review |
+| Mainboard physical reference uniqueness | 0 duplicate references |
+| Mainboard PCB DRC / parity baseline | 1,404 all-track violations, 499 unconnected items, 199 parity observations |
+| BOM procurement gaps | 370 |
 | Radio daughterboard ERC | 0 errors, 0 warnings |
-| Host firmware policy tests | Pass |
+| Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
 
 The schematic result means the current generated netlist is internally
 consistent under the checks implemented here. It does not substitute for target
 firmware, SI simulation, RF measurements, thermal testing, a complete
 manufacturer BOM, or first-article bring-up.
 
-The PCB is still at placement stage. Its unrouted and silkscreen findings are
-tracked separately from schematic correctness.
+The PCB has active routing in progress. Its DRC, unrouted, and parity findings
+are tracked separately from schematic correctness and are not release waivers.
+The current independent verdict remains **SCHEMATIC BLOCKED**.
 
 ## Current Evidence
 
@@ -40,6 +43,14 @@ tracked separately from schematic correctness.
   fields that still need exact identities
 - [`SCHEMATIC_TO_PCB_ECO_2026-07-20.md`](SCHEMATIC_TO_PCB_ECO_2026-07-20.md) -
   current reference and pad-net comparison
+- [`SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md`](SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md)
+  - copied-project post-fix reference, footprint, pad-net, and DNP comparison
+- [`INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md`](INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
+  - current independent review, closed J58 P0, duplicate-reference fix, and
+  remaining release holds
+- [`INDEPENDENT_REVIEW_2026-07-27_postfix.md`](INDEPENDENT_REVIEW_2026-07-27_postfix.md)
+  - post-fix audit: closed R250/R251 trackpad USB physical short, current PCB
+  integrity, and the remaining release holds
 - [`KEYBOARD_FFC_ASSEMBLY_CONTRACT_2026-07-15.md`](KEYBOARD_FFC_ASSEMBLY_CONTRACT_2026-07-15.md)
   - keyboard cable orientation and continuity checks
 - [`MECHANICAL_RETENTION_VALIDATION_2026-07-18.md`](MECHANICAL_RETENTION_VALIDATION_2026-07-18.md)

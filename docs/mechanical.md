@@ -34,7 +34,9 @@ J58 is four through-hole solder lands, not a USB-C receptacle: pin 1 is GND,
 pin 2 is D-, pin 3 is D+, and pin 4 is VBUS. Verify continuity before
 assembly—wire colours are not authoritative. Reserve room for the device-side
 plug, cable bend, mounting lip, and click travel, and retain the cable so its
-four solder joints cannot carry service load.
+four solder joints cannot carry service load. No clamp, tie point, adhesive,
+service-loop datum, cable part number, or pull-test acceptance criterion is
+released yet; the floorplan cable corridor is only a provisional keepout.
 
 Keyboard, motherboard, and cooling parts may overlap in XY only when the final
 Z stack gives each one a supported and insulated plane. Batteries and trackpad

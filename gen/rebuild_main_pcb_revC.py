@@ -105,7 +105,9 @@ ANCHORS: dict[str, tuple[float, float, float]] = {
     "J42": (305.0, 15.0, 0.0),
 
     # Internal physical interfaces.
-    "J58": (179.0, 130.0, 0.0),
+    # Direct-soldered USB2 trackpad cable lands; kept aligned with the
+    # reviewed live-board ECO anchor in sync_main_pcb_from_netlist.py.
+    "J58": (171.2, 130.0, 0.0),
     "J52": (61.0, 120.0, 180.0),
     "J2": (178.0, 170.0, 0.0),
     "J420": (18.0, 180.0, 0.0),

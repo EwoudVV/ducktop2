@@ -26,9 +26,10 @@ be confirmed before ordering the final harness. See
 - RTL8111H PCIe Gigabit Ethernet with a mid-mount integrated-magnetics jack
 - External antenna connections at the rear of the case
 
-The current placement still needs a high-speed pass. AC-coupling capacitors,
-clocks, and endpoint support parts must be moved into their manufacturer
-placement windows before those interfaces are routed.
+High-speed placement and routing are in progress. AC-coupling capacitors,
+clocks, endpoint support parts, controlled impedance, return paths, length
+matching, and final termination still require an interface-by-interface review
+before those links can be released.
 
 ## External I/O
 
@@ -88,7 +89,9 @@ Ultra Low Profile switches in a 5x14 matrix. It connects to the mainboard over a
 The trackpad is a 140 x 105 mm USB unit. Its USB-C plug is retained at the
 trackpad; a cut USB 2.0 Standard-A-to-USB-C cable is soldered directly to the
 four labelled J58 lands on the motherboard (GND, D-, D+, VBUS), with continuity
-checked before power-up. System audio uses an internal USB hub,
+checked before power-up. This is an assembly contract, not a released cable
+assembly: cable part number, conductor gauge, length, bend radius, strain
+relief, retention hardware, and pull test remain open. System audio uses an internal USB hub,
 a PCM2900-family codec, a TPA2012D2 stereo amplifier, two front speakers, and a
 chip-down digital microphone/preamp path. A second USB audio codec handles the
 radio receive/transmit audio path.

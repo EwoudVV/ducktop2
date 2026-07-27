@@ -1,5 +1,13 @@
 # Ducktop2 Mainboard Pre-Order Design Review
 
+> **Historical pre-routing snapshot — superseded.** This report records the
+> 2026-07-21 placement review. The board has since entered routing, received
+> scoped J58 and duplicate-reference repairs, and remains blocked from
+> fabrication. Use
+> [`INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md`](INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
+> and [`../docs/design-status.md`](../docs/design-status.md) for the current
+> release status.
+
 Date: 2026-07-21
 Reviewer: Independent hardware engineer (no context from prior sessions)
 Board: Ducktop2 laptop mainboard, 358 x 185 mm, 6 layers, 1,173 footprints, 1,378 nets
