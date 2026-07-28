@@ -97,7 +97,7 @@ def find_3d_model_path(lib: str, name: str) -> str | None:
             step_name = FOOTPRINT_TO_MODEL[name]
         project_model = DUCK2_3D / step_name
         if project_model.exists():
-            return f"${{KICAD10_3DMODEL_DIR}}/ducktop2.3dshapes/{step_name}"
+            return f"${{KIPRJMOD}}/ducktop2.3dshapes/{step_name}"
 
         # Fall back to KiCad standard library
         model_path = os.path.join(KICAD_3D, f"{lib}.3dshapes", step_name)
@@ -112,7 +112,7 @@ def find_3d_model_path(lib: str, name: str) -> str | None:
             step_name = FOOTPRINT_TO_MODEL[name]
             model_path = DUCK2_3D / step_name
             if model_path.exists():
-                return f"${{KICAD10_3DMODEL_DIR}}/ducktop2.3dshapes/{step_name}"
+                return f"${{KIPRJMOD}}/ducktop2.3dshapes/{step_name}"
             return None
 
         # Check explicit KiCad standard library mapping
@@ -123,7 +123,7 @@ def find_3d_model_path(lib: str, name: str) -> str | None:
         step_name = f"{name}.step"
         model_path = DUCK2_3D / step_name
         if model_path.exists():
-            return f"${{KICAD10_3DMODEL_DIR}}/ducktop2.3dshapes/{step_name}"
+            return f"${{KIPRJMOD}}/ducktop2.3dshapes/{step_name}"
         return None
 
     # Mounting hole, test point, etc. (no library prefix)
