@@ -20325,14 +20325,14 @@
 		)
 	)
 	(footprint "Connector_Hirose_DF40:Hirose_DF40C(2.0)-60DS-0.4V_2x30_P0.4mm"
-		(layer "F.Cu")
+		(layer "B.Cu")
 		(uuid "ce320efd-0e19-5429-9be2-8d43af03c11f")
 		(at 140.5 89.11 180)
 		(descr "0.4mm Pitch, Stacking Height 2.000000mm, Receptacle, vertical (source: https://www.hirose.com/en/product/document?clcode=&productname=&series=DF40&documenttype=Catalog&lang=en&documentid=en_DF40_CAT)")
 		(tags "conn hirose board-to-board mezzanine stacking receptacle")
 		(property "Reference" "J1"
 			(at 0 -3.09 0)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "f7b964fc-9abf-4043-bc33-7cf42b2de3cd")
 			(effects
 				(font
@@ -20343,7 +20343,7 @@
 		)
 		(property "Value" "DF40C 60-pin radio daughterboard receptacle"
 			(at 0 3.09 0)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(uuid "d6dfdae5-0ad2-42fa-9837-079a7b55644a")
 			(effects
 				(font
@@ -20354,7 +20354,7 @@
 		)
 		(property "Datasheet" ""
 			(at 0 0 0)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(hide yes)
 			(uuid "1d4613c4-5fe3-597d-95d1-72a7c3148704")
 			(effects
@@ -20366,7 +20366,7 @@
 		)
 		(property "Description" ""
 			(at 0 0 0)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(hide yes)
 			(uuid "7df14bdb-ce6d-514c-9e5d-f11c373e67e8")
 			(effects
@@ -20378,7 +20378,7 @@
 		)
 		(property "KiLib_Generator" "connector/generator"
 			(at 0 0 0)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(hide yes)
 			(uuid "9b1a144e-d32d-4f21-be21-2c10c8ab3986")
 			(effects
@@ -20390,7 +20390,7 @@
 		)
 		(property "MPN" "DF40C(2.0)-60DS-0.4V(51)"
 			(at 0 0 0)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(hide yes)
 			(uuid "31850d62-8724-50a7-8c52-fd7542e6d343")
 			(effects
@@ -20402,7 +20402,7 @@
 		)
 		(property "Manufacturer" "Hirose Electric"
 			(at 0 0 0)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(hide yes)
 			(uuid "7dec4c29-f27b-51de-a2e7-4bbd9f7dfc61")
 			(effects
@@ -20414,7 +20414,7 @@
 		)
 		(property "MatingConnector" "DF40C-60DP-0.4V(51)"
 			(at 0 0 0)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(hide yes)
 			(uuid "c32f56db-97b1-5ca0-a043-91bba2796513")
 			(effects
@@ -20426,7 +20426,7 @@
 		)
 		(property "StackHeight" "2.0mm"
 			(at 0 0 0)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(hide yes)
 			(uuid "759d6dfa-fdb0-586f-85e8-5b6d9dcd2ccb")
 			(effects
@@ -20448,7 +20448,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "9dafb696-e875-4036-93d4-0a38d9ee7238")
 		)
 		(fp_line
@@ -20458,7 +20458,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "424c2d4d-74e1-46ad-a388-d8ddddddaf66")
 		)
 		(fp_line
@@ -20468,7 +20468,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "3fc44026-5b7a-4c03-8b73-11903674485c")
 		)
 		(fp_line
@@ -20478,7 +20478,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "baa11cab-74c2-4ba4-a181-5174f0699361")
 		)
 		(fp_line
@@ -20488,7 +20488,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "e1a519e7-a7f4-4642-b12d-016a7df9720b")
 		)
 		(fp_line
@@ -20498,7 +20498,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "caa45d90-5ea6-4471-a902-5341dbc7a8d4")
 		)
 		(fp_line
@@ -20508,7 +20508,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "61d1d9fe-aa17-4c42-9573-068ea79f473d")
 		)
 		(fp_line
@@ -20518,7 +20518,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "cbdcff9b-300d-4b28-aa59-8c61716345bb")
 		)
 		(fp_line
@@ -20528,7 +20528,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
+			(layer "B.SilkS")
 			(uuid "c31951d3-cbee-498b-8cc6-2bc77d26ea7f")
 		)
 		(fp_rect
@@ -20539,7 +20539,7 @@
 				(type solid)
 			)
 			(fill no)
-			(layer "F.CrtYd")
+			(layer "B.CrtYd")
 			(uuid "53751364-95df-4a8f-af21-02fad2c646a3")
 		)
 		(fp_line
@@ -20549,7 +20549,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(uuid "5d7a8195-3d95-498a-bf3a-0058ca9038be")
 		)
 		(fp_line
@@ -20559,7 +20559,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(uuid "b0d72f09-0282-444e-a358-b04034bc62fe")
 		)
 		(fp_line
@@ -20569,7 +20569,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(uuid "438588ba-3654-434b-a915-c287312d8941")
 		)
 		(fp_line
@@ -20579,7 +20579,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(uuid "2fc1c111-d1f3-4c59-92ef-119a88cd28ae")
 		)
 		(fp_line
@@ -20589,7 +20589,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(uuid "c8748bba-9b03-468f-b264-f3742a6011d6")
 		)
 		(fp_line
@@ -20599,12 +20599,12 @@
 				(width 0.1)
 				(type solid)
 			)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(uuid "428486bc-f703-485a-896a-6fca136f62aa")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 0)
-			(layer "F.Fab")
+			(layer "B.Fab")
 			(uuid "5026e77f-f9d9-42f7-8628-22449c999d63")
 			(effects
 				(font
@@ -20616,7 +20616,7 @@
 		(pad "1" smd roundrect
 			(at -5.8 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_DB_5V")
 			(uuid "f9a6042f-5237-4cd9-bd8a-caba0c840c73")
@@ -20624,7 +20624,7 @@
 		(pad "2" smd roundrect
 			(at -5.8 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_DB_5V")
 			(uuid "d1a6d9d4-c3ef-426f-bd72-2233848faae6")
@@ -20632,7 +20632,7 @@
 		(pad "3" smd roundrect
 			(at -5.4 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_DB_5V")
 			(uuid "5861b955-a368-41d5-ae29-b6bbf888a0ce")
@@ -20640,7 +20640,7 @@
 		(pad "4" smd roundrect
 			(at -5.4 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_DB_5V")
 			(uuid "5d5a8fbf-c50a-4bc8-a54e-ddb760c2c554")
@@ -20648,7 +20648,7 @@
 		(pad "5" smd roundrect
 			(at -5 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_DB_5V")
 			(uuid "10aeaa11-90bf-4d36-b553-ccccfc76f6ee")
@@ -20656,7 +20656,7 @@
 		(pad "6" smd roundrect
 			(at -5 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_DB_5V")
 			(uuid "576b8270-7a29-446e-aa41-b2d7d95be76d")
@@ -20664,7 +20664,7 @@
 		(pad "7" smd roundrect
 			(at -4.6 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_DB_5V")
 			(uuid "33421276-bf95-44cf-8b5d-306f044840fa")
@@ -20672,7 +20672,7 @@
 		(pad "8" smd roundrect
 			(at -4.6 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_DB_5V")
 			(uuid "0c66cba2-9c8f-43d0-b49a-2cca03a39805")
@@ -20680,7 +20680,7 @@
 		(pad "9" smd roundrect
 			(at -4.2 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "ffd8dbba-654d-4978-8443-fa44f1d24912")
@@ -20688,7 +20688,7 @@
 		(pad "10" smd roundrect
 			(at -4.2 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "23a7b5e6-1c63-4b3f-b275-d68fdceca153")
@@ -20696,7 +20696,7 @@
 		(pad "11" smd roundrect
 			(at -3.8 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "701fed05-904b-445f-ad56-a3013df67935")
@@ -20704,7 +20704,7 @@
 		(pad "12" smd roundrect
 			(at -3.8 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "ee7b775f-07a4-49d0-9bc7-8c9e0292f980")
@@ -20712,7 +20712,7 @@
 		(pad "13" smd roundrect
 			(at -3.4 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "fd452826-241c-4d93-ad9e-43721ce4aaad")
@@ -20720,7 +20720,7 @@
 		(pad "14" smd roundrect
 			(at -3.4 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "8985c2ac-859e-4f9f-90de-19517ad08e5e")
@@ -20728,7 +20728,7 @@
 		(pad "15" smd roundrect
 			(at -3 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "ba864d1a-8d5f-4a1b-b858-78454e5e3008")
@@ -20736,7 +20736,7 @@
 		(pad "16" smd roundrect
 			(at -3 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "47c5c1ad-74ff-4d1b-8902-ca73ac2c4f78")
@@ -20744,7 +20744,7 @@
 		(pad "17" smd roundrect
 			(at -2.6 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_CODEC_USB_VBUS")
 			(uuid "17b07395-5a82-490a-a8ec-788e2579267b")
@@ -20752,7 +20752,7 @@
 		(pad "18" smd roundrect
 			(at -2.6 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_CODEC_USB_VBUS")
 			(uuid "83660290-0abd-417a-9e6d-a06b40716bef")
@@ -20760,7 +20760,7 @@
 		(pad "19" smd roundrect
 			(at -2.2 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_CODEC_USB_DP")
 			(uuid "9e02a90f-fa8f-4298-abea-b7ba556f527f")
@@ -20768,7 +20768,7 @@
 		(pad "20" smd roundrect
 			(at -2.2 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_CODEC_USB_DM")
 			(uuid "acb6d319-1bdf-406f-ae69-98de9508f7cd")
@@ -20776,7 +20776,7 @@
 		(pad "21" smd roundrect
 			(at -1.8 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "385ff1ee-b7f7-4313-81c2-4564ae482ff7")
@@ -20784,7 +20784,7 @@
 		(pad "22" smd roundrect
 			(at -1.8 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "c5474668-193f-4ed0-bebe-e0eb2703df6a")
@@ -20792,7 +20792,7 @@
 		(pad "23" smd roundrect
 			(at -1.4 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_VHF_UART_TX")
 			(uuid "84c39749-c1ac-41de-bb8c-731aaecec8b7")
@@ -20800,7 +20800,7 @@
 		(pad "24" smd roundrect
 			(at -1.4 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_VHF_UART_RX")
 			(uuid "89d9dbb5-0252-4518-b6f0-2a9e813b5155")
@@ -20808,7 +20808,7 @@
 		(pad "25" smd roundrect
 			(at -1 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_UHF_UART_TX")
 			(uuid "fc5d6f1d-d52e-4407-a7bf-f818d2fa8c3f")
@@ -20816,7 +20816,7 @@
 		(pad "26" smd roundrect
 			(at -1 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_UHF_UART_RX")
 			(uuid "f2344be6-88e7-4415-badf-c21c4ce70f1b")
@@ -20824,7 +20824,7 @@
 		(pad "27" smd roundrect
 			(at -0.6 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "1e760c4a-7eaf-4589-b0c7-1136721ba2b1")
@@ -20832,7 +20832,7 @@
 		(pad "28" smd roundrect
 			(at -0.6 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_VHF_PTT_N")
 			(uuid "a9b970a8-bb23-4330-a9b9-af88e3d09c63")
@@ -20840,7 +20840,7 @@
 		(pad "29" smd roundrect
 			(at -0.2 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_UHF_PTT_N")
 			(uuid "3e4a9e78-390b-49fb-ae36-41cc0c4d67ce")
@@ -20848,7 +20848,7 @@
 		(pad "30" smd roundrect
 			(at -0.2 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_VHF_PD_N")
 			(uuid "da86b88a-395c-42eb-aff5-58e6c7f0e060")
@@ -20856,7 +20856,7 @@
 		(pad "31" smd roundrect
 			(at 0.2 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_UHF_PD_N")
 			(uuid "a33e7a70-7f6b-4b15-98d3-d36383ec1418")
@@ -20864,7 +20864,7 @@
 		(pad "32" smd roundrect
 			(at 0.2 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "b0b747f6-ad5b-420b-bd6f-d0f6c72eecc2")
@@ -20872,7 +20872,7 @@
 		(pad "33" smd roundrect
 			(at 0.6 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_VHF_SQL")
 			(uuid "d5030d29-a235-484c-882a-1c2267f74b44")
@@ -20880,7 +20880,7 @@
 		(pad "34" smd roundrect
 			(at 0.6 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_UHF_SQL")
 			(uuid "e0dfb029-fd10-4b62-8b48-0cae456067c1")
@@ -20888,7 +20888,7 @@
 		(pad "35" smd roundrect
 			(at 1 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_VHF_RF_SEL_3V3")
 			(uuid "c63bb294-9320-46b4-8c3e-5e6335b77fdb")
@@ -20896,7 +20896,7 @@
 		(pad "36" smd roundrect
 			(at 1 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/RADIO_UHF_RF_SEL_3V3")
 			(uuid "b885c95f-1942-46cd-aa30-3b87e4c9d513")
@@ -20904,7 +20904,7 @@
 		(pad "37" smd roundrect
 			(at 1.4 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "848bcc38-1f24-496e-a5fd-ea795fb24ac2")
@@ -20912,7 +20912,7 @@
 		(pad "38" smd roundrect
 			(at 1.4 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/GNSS_UART_RX")
 			(uuid "0c3ca415-873a-4642-9501-0526e512e4a2")
@@ -20920,7 +20920,7 @@
 		(pad "39" smd roundrect
 			(at 1.8 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/GNSS_UART_TX")
 			(uuid "b6eca753-a92f-4622-9e6f-fa3a3f8c1511")
@@ -20928,7 +20928,7 @@
 		(pad "40" smd roundrect
 			(at 1.8 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/GNSS_RESET_N")
 			(uuid "d9810f78-39f3-404f-98ff-8589da46a7fd")
@@ -20936,7 +20936,7 @@
 		(pad "41" smd roundrect
 			(at 2.2 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/GNSS_PPS")
 			(uuid "6f44ab85-c9c0-4eea-9128-8ce3b07e1b0d")
@@ -20944,7 +20944,7 @@
 		(pad "42" smd roundrect
 			(at 2.2 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "/GNSS_EXTINT")
 			(uuid "7d7577e7-bff8-45f3-80ec-f4400ab374d1")
@@ -20952,7 +20952,7 @@
 		(pad "43" smd roundrect
 			(at 2.6 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "f4a97d09-8d07-4085-a8ee-4e3223b14f34")
@@ -20960,7 +20960,7 @@
 		(pad "44" smd roundrect
 			(at 2.6 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "43c26f03-6003-4441-8c14-9f8f65f2b0d4")
@@ -20968,7 +20968,7 @@
 		(pad "45" smd roundrect
 			(at 3 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "9f5d96d1-89d1-4355-9cf3-1b1a9c556066")
@@ -20976,7 +20976,7 @@
 		(pad "46" smd roundrect
 			(at 3 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "f59e7830-f62a-4f5c-86b1-6b9f34201de0")
@@ -20984,7 +20984,7 @@
 		(pad "47" smd roundrect
 			(at 3.4 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "f514a072-60b6-45c9-91fa-5ba459943a57")
@@ -20992,7 +20992,7 @@
 		(pad "48" smd roundrect
 			(at 3.4 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "d817265d-eea5-4b06-88d0-ee48a3e0f3be")
@@ -21000,7 +21000,7 @@
 		(pad "49" smd roundrect
 			(at 3.8 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "2d54a8bb-c794-4514-aba0-7eacca4cc195")
@@ -21008,7 +21008,7 @@
 		(pad "50" smd roundrect
 			(at 3.8 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "5ccd0641-14ea-4bb7-8de5-14cb65997ace")
@@ -21016,7 +21016,7 @@
 		(pad "51" smd roundrect
 			(at 4.2 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "a11e0fc9-568e-436f-a10d-1ae8a77646d8")
@@ -21024,7 +21024,7 @@
 		(pad "52" smd roundrect
 			(at 4.2 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "afcf97c5-9cf4-4782-b0d1-8a4e19ab14a4")
@@ -21032,7 +21032,7 @@
 		(pad "53" smd roundrect
 			(at 4.6 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "ed73277e-5e1f-4f49-b2b3-f46bc56e20ec")
@@ -21040,7 +21040,7 @@
 		(pad "54" smd roundrect
 			(at 4.6 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "1f3a91a4-b7e2-4870-bbf4-0486059d8c14")
@@ -21048,7 +21048,7 @@
 		(pad "55" smd roundrect
 			(at 5 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "d05c65fa-921d-478c-89a8-b723679b680b")
@@ -21056,7 +21056,7 @@
 		(pad "56" smd roundrect
 			(at 5 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "479af573-0938-4530-b1d0-4728c5e0b852")
@@ -21064,7 +21064,7 @@
 		(pad "57" smd roundrect
 			(at 5.4 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "f05f3e46-abf0-4689-9a55-55c825df63a3")
@@ -21072,7 +21072,7 @@
 		(pad "58" smd roundrect
 			(at 5.4 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "df4c33e4-fe11-482b-a881-451f67a67f7f")
@@ -21080,7 +21080,7 @@
 		(pad "59" smd roundrect
 			(at 5.8 1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "f35fea37-4c0e-41fb-b21b-cbb7411e2fa4")
@@ -21088,7 +21088,7 @@
 		(pad "60" smd roundrect
 			(at 5.8 -1.54 180)
 			(size 0.2 0.7)
-			(layers "F.Cu" "F.Mask" "F.Paste")
+			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
 			(net "GND")
 			(uuid "9c9f49c0-7913-4cb0-961c-66cd2dbe8772")
