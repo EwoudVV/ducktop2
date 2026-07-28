@@ -17,6 +17,16 @@ ROOT = Path(__file__).resolve().parents[1]
 DUCK2_3D = ROOT / "ducktop2.3dshapes"
 KICAD_3D = "/Applications/KiCad/KiCad.app/Contents/SharedSupport/3dmodels"
 
+# Mapping from ducktop2 footprint names to model filenames where they differ
+FOOTPRINT_TO_MODEL = {
+    "LattePanda_Module_H8.0mm_Horizontal": "LattePanda_Mu_H8.0_Horizontal.step",
+}
+
+# Mapping from ducktop2 footprint names to standard KiCad 3D library paths
+FOOTPRINT_TO_KICAD_MODEL = {
+    "PE42820_QFN-32-1EP_5x5mm_P0.5mm": "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-32-1EP_5x5mm_P0.5mm_EP3.3x3.3mm.step",
+}
+
 
 def find_footprints(content: str) -> list[dict]:
     """Parse all (footprint ...) blocks from PCB content."""
@@ -81,22 +91,40 @@ def find_3d_model_path(lib: str, name: str) -> str | None:
     """
     # Standard KiCad library footprint
     if lib and lib != "ducktop2":
-        # Model path: ${KICAD10_3DMODEL_DIR}/<lib>.3dshapes/<name>.step
+        # Check ducktop2.3dshapes/ first (for project-specific models)
         step_name = f"{name}.step"
+        if name in FOOTPRINT_TO_MODEL:
+            step_name = FOOTPRINT_TO_MODEL[name]
+        project_model = DUCK2_3D / step_name
+        if project_model.exists():
+            return f"${{KICAD10_3DMODEL_DIR}}/ducktop2.3dshapes/{step_name}"
+
+        # Fall back to KiCad standard library
         model_path = os.path.join(KICAD_3D, f"{lib}.3dshapes", step_name)
         if os.path.exists(model_path):
             return f'${{KICAD10_3DMODEL_DIR}}/{lib}.3dshapes/{step_name}'
-        else:
-            return None
+        return None
 
     # Custom ducktop2 footprint
     if lib == "ducktop2":
+        # Check explicit mapping first
+        if name in FOOTPRINT_TO_MODEL:
+            step_name = FOOTPRINT_TO_MODEL[name]
+            model_path = DUCK2_3D / step_name
+            if model_path.exists():
+                return f"${{KICAD10_3DMODEL_DIR}}/ducktop2.3dshapes/{step_name}"
+            return None
+
+        # Check explicit KiCad standard library mapping
+        if name in FOOTPRINT_TO_KICAD_MODEL:
+            return FOOTPRINT_TO_KICAD_MODEL[name]
+
+        # Try matching by footprint name
         step_name = f"{name}.step"
         model_path = DUCK2_3D / step_name
         if model_path.exists():
             return f"${{KICAD10_3DMODEL_DIR}}/ducktop2.3dshapes/{step_name}"
-        else:
-            return None
+        return None
 
     # Mounting hole, test point, etc. (no library prefix)
     if not lib:
