@@ -27,6 +27,25 @@ FOOTPRINT_TO_KICAD_MODEL = {
     "PE42820_QFN-32-1EP_5x5mm_P0.5mm": "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-32-1EP_5x5mm_P0.5mm_EP3.3x3.3mm.step",
 }
 
+# 3D model offset/rotation corrections (x, y, z) for each model filename.
+# Calculated by analyzing each STEP file's bounding box relative to KiCad's convention:
+#   - z=0 at PCB surface (bottom of component)
+#   - x,y origin at footprint origin (center for symmetrical parts, pin 1 for connectors)
+# z_offset = -z_min (brings bottom of model to z=0)
+# x,y_offset = -center (centers symmetric models at origin)
+MODEL_OFFSETS = {
+    "Coilcraft_XGL5030": (0, -1.45, +2.84),
+    "Cherry_MX_ULP_SMD": (0, +5.50, +3.40),
+    "DRA818_Castellated": (0, -2.00, +9.50),
+    "JXD1-1022NL_MidMount": (0, 0, +21.45),
+    "Amphenol_MDT420E01001_H4.2": (0, 0, +3.95),
+    "Amphenol_MDT420M01001_H4.2": (0, 0, +22.00),
+    "SSD1306_0.96in_Module_4Pin": (0, 0, +8.50),
+    "ublox_MAX": (0.15, -0.06, +0.40),
+    "LattePanda_Mu_H8.0_Horizontal": (0, 0, +27.91),
+    "Hirose_DF40C(2.0)-60DS-0.4V_2x30_P0.4mm": (0, 0, +9.42),
+}
+
 
 def find_footprints(content: str) -> list[dict]:
     """Parse all (footprint ...) blocks from PCB content."""
@@ -144,15 +163,21 @@ def find_3d_model_path(lib: str, name: str) -> str | None:
 
 def add_model_to_block(block: str, model_path: str) -> str:
     """Add a (model ...) entry to a footprint block, before the closing paren."""
-    # Find the last ) that closes the footprint
     last_close = block.rstrip().rfind(")")
     if last_close < 0:
         return block
 
-    indent = "  "
-    model_line = f'{indent}(model "{model_path}"\n{indent}  (offset (xyz 0 0 0))\n{indent}  (scale (xyz 1 1 1))\n{indent})'
+    model_name = Path(model_path).stem
+    ox, oy, oz = MODEL_OFFSETS.get(model_name, (0, 0, 0))
 
-    # Insert before the final closing paren
+    indent = "  "
+    model_line = (
+        f'{indent}(model "{model_path}"\n'
+        f'{indent}  (offset (xyz {ox} {oy} {oz}))\n'
+        f'{indent}  (scale (xyz 1 1 1))\n'
+        f'{indent})'
+    )
+
     new_block = block[:last_close] + model_line + "\n" + block[last_close:]
     return new_block
 

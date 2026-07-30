@@ -15,12 +15,40 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "DUCKTOP2_STRICT_WARNINGS": "ON"
       }
+    },
+    {
+      "name": "arm-gcc-debug",
+      "displayName": "Ducktop2 EC firmware (ARM GCC debug)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/arm-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ec_target/arm-none-eabi-toolchain.cmake"
+      }
+    },
+    {
+      "name": "arm-gcc-release",
+      "displayName": "Ducktop2 EC firmware (ARM GCC release)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/arm-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/ec_target/arm-none-eabi-toolchain.cmake"
+      }
     }
   ],
   "buildPresets": [
     {
       "name": "host-debug",
       "configurePreset": "host-debug"
+    },
+    {
+      "name": "arm-gcc-debug",
+      "configurePreset": "arm-gcc-debug"
+    },
+    {
+      "name": "arm-gcc-release",
+      "configurePreset": "arm-gcc-release"
     }
   ],
   "testPresets": [
