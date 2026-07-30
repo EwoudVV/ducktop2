@@ -31,7 +31,7 @@ The schematic is **SCHEMATIC INTERNALLY CONSISTENT — PHYSICAL VALIDATION REQUI
 | PCB SHA-256 (end) | `d872b6b77a47df3d4cf9349ba5c52e14f35c349b31466529ac19dda55d1c72b5` |
 | Schematic SHA-256 | `18aac2e427bfc6bddec8835db228733ed933163734fb7e38f1e3279f5f77b2ab` |
 | Board size | ~358 × 185 mm |
-| Layers | 6 (F.Cu, In1.Cu/PWR, In2.Cu, In3.Cu, In4.Cu/PWR, B.Cu) |
+| Layers | 6 (F.Cu, In1.Cu/GND, In2.Cu, In3.Cu, In4.Cu/GND, B.Cu) — In1/In4 updated to signal type (GND pours) via P1.4 |
 | Footprints (PCB) | 1179 |
 | Components (schematic) | 1178 |
 | Segments | 3679 (F.Cu: 2579, B.Cu: 750, In3.Cu: 350) |
@@ -171,20 +171,15 @@ All 375 non-DNP passives, connectors, and ICs lack MPN assignments. The verifica
 **Verification:** Re-run BOM gap check — target 0 gaps for active parts.  
 **Confidence:** HIGH — this is a data-entry task.
 
-### P2.2 — PCB Lacks Controlled-Impedance Stackup Specification
+### ~~P2.2 — PCB Lacks Controlled-Impedance Stackup Specification~~ [CLOSED via P1.4]
 
-The 6-layer stackup (F.Cu/In1.Cu/In2.Cu/In3.Cu/In4.Cu/B.Cu) has no defined:
-- Dielectric material and thickness
-- Target impedance for PCIe (85Ω differential), USB3 (90Ω differential), HDMI (100Ω differential)
-- Copper weight per layer
-- Prepreg/core build-up
-
-High-speed interfaces (PCIe Gen3, USB 3.0, HDMI 2.0) require controlled impedance. Without a specified stackup, the PCB fabricator cannot guarantee impedance.
-
-**Evidence:** `ducktop2.kicad_pcb` — no impedance rules set in `(setup)` section  
-**Correction:** Specify stackup and set impedance rules in KiCad design rules.  
-**Verification:** Review PCB fabricator impedance test coupon results.  
-**Confidence:** MEDIUM — can be resolved before final fab order.
+**Update (2026-07-30):** Stackup now committed to `ducktop2.kicad_pcb`. See comprehensive review §9 for full specification:
+- 6-layer 1.6mm, 1oz all layers
+- 2116 prepreg outer (0.125mm, εr=4.2), 2313 center (0.103mm, εr=4.2)
+- Dual solid GND planes (L2, L5), power islands on L3/L4
+- ENIG surface finish
+- Single-sided assembly (top only)
+- Targets: 50Ω SE, 85/90/100Ω diff — pending NextPCB impedance calculator verification
 
 ### P2.3 — 199 Silk Screen Overlap / Over-Copper Warnings
 
@@ -315,7 +310,7 @@ All prior P0/P1 schematic findings appear closed:
 - [ ] Hardware-in-the-loop bring-up matrix results
 
 ### SI / Thermal / RF — must be simulated or measured
-- [ ] Controlled impedance stackup specification
+- [x] ~~Controlled impedance stackup specification~~ — Committed to `ducktop2.kicad_pcb`
 - [ ] PCIe Gen3 eye diagram / BER
 - [ ] USB 3.0 signal integrity
 - [ ] HDMI 2.0 TMDS compliance
@@ -332,7 +327,7 @@ All prior P0/P1 schematic findings appear closed:
 - [ ] Resolve all 76 DRC shorting items
 - [ ] Resolve all 483 DRC errors, 444 warnings
 - [ ] Assign MPNs to all 375 BOM gaps
-- [ ] Specify PCB stackup, impedance rules, solder mask color, surface finish
+- [x] ~~Specify PCB stackup, impedance rules, solder mask color, surface finish~~ — Stackup + ENIG specified in board setup
 - [ ] Generate Gerber / ODB++ output and review with fabricator DFM
 - [ ] Generate pick-and-place file and review with assembler
 

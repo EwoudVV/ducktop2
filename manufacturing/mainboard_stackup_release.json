@@ -3,10 +3,10 @@
   "board": "ducktop2 mainboard",
   "layers": 6,
   "fabricator": "NextPCB",
-  "finished_thickness_mm": null,
-  "copper_weights": null,
-  "dielectric_materials": null,
-  "dielectric_thicknesses_mm": null,
+  "finished_thickness_mm": 1.6,
+  "copper_weights": "1 oz all layers",
+  "dielectric_materials": "2116 prepreg outer, 2313 prepreg center, 0.8mm FR4 core (2x)",
+  "dielectric_thicknesses_mm": [0.125, 0.736, 0.103, 0.736, 0.125],
   "controlled_impedance": {
     "pcie_diff_ohm": 85,
     "usb3_diff_ohm": 90,
@@ -18,5 +18,5 @@
   "fabricator_quote_or_drawing": null,
   "approved_by": null,
   "approved_utc": null,
-  "note": "Do not change status to APPROVED until NextPCB supplies and approves the exact production stackup and impedance geometries."
+  "note": "Stackup design committed to ducktop2.kicad_pcb (2026-07-30). Run NextPCB impedance calculator to verify trace widths for each target. Do not change status to APPROVED until NextPCB supplies and approves the exact production stackup and impedance geometries."
 }

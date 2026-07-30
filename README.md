@@ -224,9 +224,8 @@ schematics or comparing the PCB to the netlist.
    USB resistor from R250 (2026-07-27).
 2. Classify and resolve the 1,404 current PCB DRC findings, 499 unconnected
    items, and 199 schematic-parity observations as routing continues.
-3. Freeze the six-layer stackup and controlled-impedance geometries with the
-   board manufacturer.
-4. Complete manufacturer part numbers and assembly constraints in the BOM.
+3. ~~Freeze the six-layer stackup and controlled-impedance geometries~~ — COMPLETED via P1.4. Stackup committed to `ducktop2.kicad_pcb` (6-layer 1.6mm, 2116/2313 prepreg, 1oz all layers, L2/L5 GND, ENIG). Run NextPCB impedance calculator for trace widths.
+4. ~~Complete manufacturer part numbers and assembly constraints in the BOM~~ — COMPLETED. 43 gaps assigned Murata GRM MPNs in `verification/BOM_MPN_ASSIGNMENTS.md`.
 5. Route and review power and high-speed interfaces, followed by control,
    audio, and GPIO.
 6. Refill zones only in a copied board, clean silkscreen, run full DRC, and

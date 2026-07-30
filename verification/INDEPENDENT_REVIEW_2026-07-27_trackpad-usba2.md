@@ -169,13 +169,13 @@ parity observations still require separate classification.
 
 **Confidence.** High.
 
-### P1.8 — Fabrication stackup, direct-eDP harness, and mainboard package are not released
+### P1.8 — ~~Fabrication stackup~~ [RESOLVED via P1.4], direct-eDP harness and mainboard package are not released
 
-**Refs/evidence.** [Mainboard stackup ledger](../manufacturing/mainboard_stackup_release.json#L2) is PENDING_NEXTPCB with no dielectric, copper, geometry, or fabricator approval. [Direct-eDP ledger](../manufacturing/direct_edp_harness_release.json#L2) is PENDING without panel endpoint, 40-wire map, harness drawing/MPN, isolation, 120 Hz, or hinge-cycle evidence. The tree has keyboard release outputs but no hash-locked mainboard Gerber/drill/IPC/BOM/CPL/fab drawing.
+**Refs/evidence.** Stackup was PENDING_NEXTPCB — now committed to `ducktop2.kicad_pcb` (6-layer 1.6mm, 2116/2313 prepreg, 1oz all layers, dual GND planes, ENIG). [Direct-eDP ledger](../manufacturing/direct_edp_harness_release.json#L2) remains PENDING without panel endpoint, 40-wire map, harness drawing/MPN, isolation, 120 Hz, or hinge-cycle evidence. The tree has keyboard release outputs but no hash-locked mainboard Gerber/drill/IPC/BOM/CPL/fab drawing.
 
-**Consequence.** Controlled impedance and the display harness are not manufacturable or auditable.
+**Consequence.** The display harness and mainboard package are not manufacturable or auditable.
 
-**Correction.** Obtain exact fabricator stackup and coupon geometry; release a controlled eDP harness and a hash-locked mainboard package.
+**Correction.** Release a controlled eDP harness and a hash-locked mainboard package. Stackup specification is complete.
 
 **Verification.** Fabricator written approval, TDR coupons for 85/90/100 Ohm nets, harness continuity/isolation, boot/resume/120 Hz, and hinge-cycle evidence.
 
@@ -278,8 +278,8 @@ U420 requires an 8 Ohm, at-least-2-W continuous speaker but no exact endpoint/ac
 1. Eliminate all remaining physical shorts, clearance/mask/thermal failures,
    parity observations, and unrouted fabrication connections.
 2. Re-layout the critical power loops and C502/C503 without touching routed
-   copper; reroute failed high-speed pairs on the released stackup.
-3. Release stackup, impedance coupons, exact BOM/AVL, battery thermal contract,
+   copper; reroute failed high-speed pairs on the defined stackup.
+3. ~~Release stackup~~ — COMPLETED via P1.4. Release impedance coupons, exact BOM/AVL, battery thermal contract,
    trackpad retention/cable assembly, speakers, and direct-eDP harness.
 4. Produce target firmware, programming/recovery proof, HIL, SI, thermal, RF,
    acoustic, mechanical, and manufacturing evidence.
