@@ -104,9 +104,9 @@ in-progress board, not an accepted exception list.
 
 1. Remove or classify every DRC, unconnected, and parity observation; none is
    waived by the static schematic checks.
-2. Freeze the fabrication stackup and impedance geometries, then reroute and
-   review HDMI, PCIe/NVMe/E-key, USB3, eDP, Ethernet, and USB2 paths against
-   their primary module/vendor requirements.
+2. ~~Freeze the fabrication stackup and impedance geometries~~ — COMPLETED via P1.4.
+   Now reroute and review HDMI, PCIe/NVMe/E-key, USB3, eDP, Ethernet, and USB2
+   paths against their primary module/vendor requirements.
 3. Re-layout C502/C503 and critical power loops only after proving the existing
    attached routing can be safely removed and rerouted. No blind move was made.
 

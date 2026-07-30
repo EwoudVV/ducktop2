@@ -210,10 +210,9 @@ Spot-checked by reading the PCB file for critical footprints:
 All within the 358×185mm board area. No unexpected component overlap.
 
 ### 3.6 Stackup
-**INFO.** Documented as `PENDING_NEXTPCB` in design-status.md. The six-layer
-stackup and controlled-impedance geometries are not yet frozen. This is
-acceptable before routing begins but must be finalized before impedance
-calculations and fab release.
+**UPDATE (2026-07-30):** RESOLVED via P1.4. Stackup now committed to `ducktop2.kicad_pcb`:
+6-layer 1.6mm, 2116/2313 prepreg, 1oz all layers, L2/L5 solid GND planes,
+ENIG surface finish. Targets: 50Ω SE, 85/90/100Ω diff. Single-sided assembly.
 
 ---
 
@@ -297,11 +296,11 @@ feedback dividers, pre-attach VBUS caps) for MPN assignment first.
    mechanically verified. No schematic respin is required.
 
 2. **Before fab order**, close these items:
-   - Freeze the 6-layer stackup and calculate controlled impedances
-   - Verify the 4 NVMe PCIe coupling caps at >12mm (Issue 1)
-   - Verify the 4 Mu USB3 TX coupling caps at >24mm (Issue 2)
-   - Or document why the longer distance is acceptable
-   - Assign MPNs to critical passives (375 gaps)
+   - ~~Freeze the 6-layer stackup and calculate controlled impedances~~ — COMPLETED via P1.4
+   - ~~Verify the 4 NVMe PCIe coupling caps at >12mm (Issue 1)~~ — RESOLVED (P1.3 pass 2, moved to 6/4mm)
+   - ~~Verify the 4 Mu USB3 TX coupling caps at >24mm (Issue 2)~~ — These are actually Mu PCIe TX caps; moved to 6/4mm
+   - ~~Or document why the longer distance is acceptable~~ — Caps now within spec; no waiver needed
+   - ~~Assign MPNs to critical passives (375 gaps)~~ — COMPLETED (43 remaining gaps assigned Murata GRM)
    - Clean 3 text-height silkscreen violations
    - Run final DRC after routing and refilling zones
 

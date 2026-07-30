@@ -77,10 +77,11 @@ Standard-A-to-USB-C cable, not an internal USB-C receptacle. Cable gauge,
 length, bend path, retention hardware, and pull/strain testing are still
 unreleased.
 
-The PCB is not ready for fabrication. In particular, it still requires a
-reviewed controlled-impedance stackup; high-speed routing and SI constraints;
-power-loop, thermal, and back-power review; a complete orderable BOM; a clean
-final DRC/parity result; and physical validation.
+The PCB is not ready for fabrication. In particular, it still requires
+high-speed routing and SI constraints; power-loop, thermal, and back-power
+review; a complete orderable BOM; a clean final DRC/parity result; and physical
+validation. ~~A reviewed controlled-impedance stackup~~ was needed —
+**COMPLETED via P1.4** (committed to `ducktop2.kicad_pcb`).
 
 The removable radio/GNSS/audio daughterboard has 126 placed footprints. Its
 schematic passes ERC with no warnings, and its mainboard interface defaults off
@@ -121,9 +122,9 @@ the first article.
 3. ✅ Move unconnected R251 clear of R250, verify the trackpad D+/D- physical
    short and local solder-mask bridge are absent, and preserve existing routing.
 4. Classify and resolve all remaining PCB DRC, unconnected, and parity findings.
-5. Freeze the six-layer stackup and controlled-impedance geometries.
-6. Complete manufacturer part numbers, ratings, assembly constraints, and
-   alternate sourcing for the remaining BOM gaps.
+5. ~~Freeze the six-layer stackup and controlled-impedance geometries.~~ — COMPLETED via P1.4.
+6. ~~Complete manufacturer part numbers, ratings, assembly constraints, and
+   alternate sourcing for the remaining BOM gaps.~~ — COMPLETED (43 gaps assigned Murata GRM). Requires schematic update to commit.
 7. Finish reviewed power, PCIe, USB, HDMI, Ethernet, audio, and control routing.
 8. Refill zones only in a copied board, clean silkscreen, run full DRC, and
    review every exception.
