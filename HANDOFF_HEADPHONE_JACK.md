@@ -1,5 +1,46 @@
 # Headphone Jack Implementation — Handoff
 
+## Status — IMPLEMENTED (2026-07-31, commits c329f95 + fae06d4)
+
+Done on sheet 15 (`gen/generate_system_audio_sheet.py`). The schematic release
+check passes: ERC 0 errors / 27 intentional warnings, schematic closure
+1580/0, pin review 2603/2603, Generated-source identity PASS. Datasheet
+verification corrected several assumptions in the original plan below:
+
+- **Amp is I2C, not hardware-gain.** TPA6130A2RTJR (QFN-20/RTJ, fixed I2C
+  address 0x60) has SDA/SCL + /SD, NOT G0/G1/SHUTDOWN strap/VREG/SNS. 64-step
+  I2C volume; power-on default = muted, outputs disabled (fail-safe OFF until
+  EC firmware unmutes/enables). Reuses the TPA2012D2 WQFN-20-1EP 4x4mm
+  EP2.7x2.7 footprint (same package).
+- **Detect is RN, not SN.** CUI SJ1-3535NG has pads T/R/S/TN/RN — no sleeve
+  switch. The ring-normalling contact RN is the detect: unplugged shorts RN to
+  R (amp DirectPath 0V) -> low; plugged floats -> R782 100k pull-up -> high.
+  Symbol is `AudioJack3_SwitchTR` (matches the 5-pad footprint), not the
+  dual-jack `AudioJack3_Dual_Ground_Switch`.
+- **No free STM32 GPIO.** All 100 LQFP-100 pins are assigned. HP_DETECT uses a
+  recovered spare INPUT on the TCA9539 source-manager expander (U44 pin 6,
+  ex-SOURCE_MGR_SPARE1) with R782 as the pull-up; EC reads it over I2C (bonus:
+  edge-triggered plug interrupt via U44 INT).
+- **/SD tied to MU_HOST_ACTIVE** (not always-on VDD) so U425 draws 0.4uA in S3.
+- **Single-ended input** per datasheet 9.2.2.1: signal -> INM via 0.47uF, INP
+  AC-grounded. Charge pump: 1uF flying CPP-CPN, 1uF CPVSS, 1uF + 100n VDD bypass.
+- **EC-mute reuses the existing AND gate.** No new gate; EC drives
+  AUDIO_AMP_EC_EN low on plug-in so U421 mutes the TPA2012D2; I2C unmutes U425.
+- **Gotcha: sheet-pin overflow.** The System Audio root sheet block was 60mm
+  (fit ~11 pins); adding 4 hier nets overflowed pins below the rectangle and
+  KiCad clamped them to the edge, merging I2C_SCL/HP_DETECT/AUDIO_MIC_EN into
+  one net. Fixed by enlarging the block to 85mm in `generate_mu_carrier_sheet.py`.
+  Watch this for any sheet that gains nets.
+
+Files: `gen/TPA6130A2.kicad_sym` (new), `genlib.py` LIBMAP, `generate_ec_mcu_sheet.py`
+(U44 pin6 + R782), `generate_system_audio_sheet.py` (U425/J422/caps),
+`generate_mu_carrier_sheet.py` (block height), 3 contract files
+(`verify_design_contracts`/`generate_pin_review_table` x2/`verify_schematic_closure`),
+`sym-lib-table`. Contracts updated SOURCE_MGR_SPARE1 -> HP_DETECT. Docs updated:
+`verification/USER_FACING_BEHAVIOR_2026-07-31.md` (row 12 + item 5),
+`docs/design-status.md`. Remaining work for this feature is EC firmware
+(I2C enable/unmute/volume on U425, read HP_DETECT, drive AUDIO_AMP_EC_EN).
+
 ## Goal
 
 Add a 3.5mm stereo headphone jack to the Ducktop2 motherboard (sheet 15, system audio). Jack plugs in → speakers mute automatically. Jack unplugged → speakers play. User confirmed: rear edge, auto-mute, TPA6130A2-class amp.

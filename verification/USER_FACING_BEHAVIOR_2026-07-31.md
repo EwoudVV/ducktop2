@@ -31,10 +31,14 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
    it. Design range: "AUX/SOLAR protected screw terminal 6-22V nominal" — 3 A
    fuse, SMCJ24CA 24 V bidirectional clamp, 100 V reverse FET, TPS26630 eFuse,
    then BQ25798 (01, 05).
-5. **Headphone output (ACTION):** there is no headphone jack on the
-   motherboard; user expects one. Confirmed design: 3.5 mm stereo jack on the
-   **rear edge**, plug-detect mutes the speakers, TPA6130A2-class headphone
-   amp driven from the PCM2900C line-out (sheet 15).
+5. **Headphone output (RESOLVED):** the 3.5 mm stereo jack is now on sheet 15
+   on the **rear edge** (J422, CUI SJ1-3535NG) driven by a TPA6130A2RTJR
+   DirectPath headphone amp (U425) fed from the PCM2900C line-out. Plug-detect
+   mutes the speakers: the jack ring-normalling contact (RN) = HP_DETECT, read
+   by the EC on U44 pin 6 (a recovered source-manager spare); on plug-in the EC
+   drives AUDIO_AMP_EC_EN low (U421 AND gate mutes TPA2012D2) and I2C-unmutes
+   U425. /SD is tied to MU_HOST_ACTIVE (S0-only, 0.4 uA in S3); power-on default
+   is muted with outputs disabled (fail-safe OFF until EC firmware enables it).
 6. **Keyboard layout (VERIFIED, locked):** 65-key compact layout, **no
    function-key row**, split spacebar, arrows in the bottom-right cluster.
    User confirmed on 2026-07-31 — and the keyboard PCB is **already
@@ -68,7 +72,7 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
 | 9 | use the screen | full res, smooth 120 Hz, OS brightness control | Mu 40-pin eDP -> AUO B160QAN03.K (03, docs/display-direct-edp.md) | VERIFIED |
 | 10 | type | layout is what I expect (confirmed; board already fabricated) | 65-key matrix, no F-row, split space; Fn layers = firmware | VERIFIED |
 | 11 | use the trackpad | cursor, tap, click, scroll, gestures like a normal laptop | J58 direct-solder USB (GND/D-/D+/VBUS) -> hub (08, docs) | VERIFIED |
-| 12 | listen to speakers / headphones | speakers work with volume control; headphones when plugged in | PCM2900CDBR -> TPA2012D2 -> speakers (15); **jack MISSING — ACTION** | ACTION |
+| 12 | listen to speakers / headphones | speakers work with volume control; headphones when plugged in (jack auto-mutes speakers) | PCM2900CDBR -> TPA2012D2 -> speakers; J422 SJ1-3535NG + U425 TPA6130A2 headphone amp with HP_DETECT plug-mute (15); mute firmware pending | RESOLVED |
 | 13 | do a call / recording | onboard mic works like any laptop mic | chip-down digital mic path (15) | VERIFIED |
 | 14 | load it hard | fan runs under load, quiet at idle, never throttles | EC FAN_PWM (Q200) + FAN_TACH + skin/Mu NTCs (02, 08); curve is firmware | RESOLVED |
 | 15 | glance at the status displays | all laptop statistics shown | J41/J45 SSD1306 on always-on EC bus (07); content spec below | RESOLVED |
