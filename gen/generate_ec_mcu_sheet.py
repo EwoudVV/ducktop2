@@ -213,7 +213,7 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
             pin_nets={
                 "1": ("SOURCE_MGR_INT_N", "local"), "2": ("GND", "local"), "3": ("NRST_NET", "local"),
                 "4": ("PD1_PATH_EN", "hier"), "5": ("PD2_PATH_EN", "hier"),
-                "6": ("SOURCE_MGR_SPARE1", "local"), "7": ("PD1_EFUSE_FAULT_N", "hier"),
+                "6": ("HP_DETECT", "hier"), "7": ("PD1_EFUSE_FAULT_N", "hier"),
                 "8": ("PD2_EFUSE_FAULT_N", "hier"), "9": ("SOURCE_MGR_SPARE2", "local"),
                 "10": ("PACK_FAULT_N", "hier"), "11": ("AUX_FAULT_N", "hier"),
                 "12": ("GND", "local"), "13": ("PACK_RETRY_PULSE", "hier"),
@@ -234,7 +234,15 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
     s.place("R781", "R", "10k aggregate AON fault pull-up", 650, 282.7,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("AON_FAULT_N", "hier")})
-    for idx in range(1, 3):
+    # R782 is the rear 3.5 mm headphone jack detect pull-up.  The jack ring
+    # normalling contact (RN, on sheet 15) holds HP_DETECT low while unplugged
+    # and floats it high on insertion; the EC reads this bit from U44 pin 6
+    # (a recovered source-manager spare input) over the shared I2C bus.
+    s.place("R782", "R", "100k HP_DETECT pull-up", 650, 292.7,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("HP_DETECT", "hier")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
+    for idx in range(2, 3):
         s.place(f"R{781 + idx}", "R", "100k unused source-manager I/O pulldown", 650, 282.7 + idx * 10,
                 footprint=FOOTPRINTS["R"],
                 pin_nets={"1": (f"SOURCE_MGR_SPARE{idx}", "local"), "2": ("GND", "local")})

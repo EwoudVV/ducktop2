@@ -401,6 +401,289 @@
 		)
 		(embedded_fonts no)
 	)
+(symbol "Connector_Audio:AudioJack3_SwitchTR"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 8.89 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AudioJack3_SwitchTR"
+			(at 0 6.35 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Audio Jack, 3 Poles (Stereo / TRS), Switched TR Poles (Normalling)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "audio jack receptacle stereo headphones phones TRS connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Jack*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "AudioJack3_SwitchTR_0_1"
+			(rectangle
+				(start -5.08 -5.08)
+				(end -6.35 -7.62)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.905 -5.08) (xy -1.27 -5.715) (xy -0.635 -5.08) (xy -0.635 0) (xy 2.54 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 -5.08) (xy 0.635 -5.715) (xy 1.27 -5.08) (xy 2.54 -5.08)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.508 -0.254) (xy 0.762 -0.762)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.778 -5.334) (xy 2.032 -5.842)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 2.54 3.81)
+				(end -5.08 -10.16)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.54 2.54) (xy -2.54 2.54) (xy -2.54 -5.08) (xy -3.175 -5.715) (xy -3.81 -5.08)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.54 -2.54) (xy 0.508 -2.54) (xy 0.508 -0.254) (xy 0.254 -0.762)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.54 -7.62) (xy 1.778 -7.62) (xy 1.778 -5.334) (xy 1.524 -5.842)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "AudioJack3_SwitchTR_1_1"
+			(pin passive line
+				(at 5.08 0 180)
+				(length 2.54)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "R"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 -2.54 180)
+				(length 2.54)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "RN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 2.54 180)
+				(length 2.54)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "S"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 -5.08 180)
+				(length 2.54)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "T"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 5.08 -7.62 180)
+				(length 2.54)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "TN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 (symbol "Connector_Generic:Conn_01x02"
 		(pin_names
 			(offset 1.016)
@@ -2755,6 +3038,42 @@
 			(pin input line (at -12.7 5.08 0) (length 2.54) (name "INL-" (effects (font (size 1.27 1.27)))) (number "19" (effects (font (size 1.27 1.27)))))
 			(pin input line (at -12.7 7.62 0) (length 2.54) (name "INL+" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
 			(pin power_in line (at 2.54 -17.78 90) (length 2.54) (name "THERMAL_PAD" (effects (font (size 1.27 1.27)))) (number "21" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "TPA6130A2:TPA6130A2"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 17.78 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "TPA6130A2RTJR" (at 0 15.24 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "Package_DFN_QFN:WQFN-20-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpa6130a2.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "TI DirectPath I2C-controlled stereo headphone amplifier; 64-step volume, capless ground-referenced outputs, 20-pin RTJ WQFN + EP. Pinout per TPA6130A2 datasheet QFN-20 (RTJ): 1 LEFTINM 2 LEFTINP 3 GND 4 RIGHTINP 5 RIGHTINM 6 /SD 7 SDA 8 SCL 9 GND 10 GND 11 HPRIGHT 12 VDD 13 GND 14 HPLEFT 15 CPVSS 16 CPVSS 17 CPN 18 CPP 19 GND 20 VDD. Power-on default: not in shutdown but muted with outputs disabled; firmware unmutes/enables over I2C. Supply 2.5-5.5V. Fixed I2C address 0x60." (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "TPA6130A2_0_1"
+			(rectangle (start -10.16 12.7) (end 10.16 -15.24) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "TPA6130A2_1_1"
+			(pin input line (at -12.7 -10.16 0) (length 2.54) (name "LEFTINM" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -12.7 -7.62 0) (length 2.54) (name "LEFTINP" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -12.7 -5.08 0) (length 2.54) (name "RIGHTINP" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -12.7 -2.54 0) (length 2.54) (name "RIGHTINM" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -12.7 0 0) (length 2.54) (name "~{SD}" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -12.7 2.54 0) (length 2.54) (name "SDA" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -12.7 5.08 0) (length 2.54) (name "SCL" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 12.7 10.16 180) (length 2.54) (name "HPRIGHT" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 12.7 7.62 180) (length 2.54) (name "HPLEFT" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 12.7 2.54 180) (length 2.54) (name "CPVSS" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 12.7 0 180) (length 2.54) (name "CPVSS" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 12.7 -2.54 180) (length 2.54) (name "CPN" (effects (font (size 1.27 1.27)))) (number "17" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 12.7 -5.08 180) (length 2.54) (name "CPP" (effects (font (size 1.27 1.27)))) (number "18" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -2.54 15.24 270) (length 2.54) (name "VDD" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 2.54 15.24 270) (length 2.54) (name "VDD" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -7.62 -17.78 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -5.08 -17.78 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -2.54 -17.78 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0 -17.78 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 2.54 -17.78 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "19" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 5.08 -17.78 90) (length 2.54) (name "PAD" (effects (font (size 1.27 1.27)))) (number "21" (effects (font (size 1.27 1.27)))))
 		)
 	)
 (symbol "USB2512B:USB2512B"
@@ -6492,7 +6811,532 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 88586cf6-3c93-51a6-b238-4cfa96c31795)
 )
-(text "== Built-in mono microphone: IM68A130 + low-noise 2.8V rail + low-noise preamp ==" (at 20.32 538.48 0) (effects (font (size 1.27 1.27))) (uuid ec3bc93a-f98a-5463-b725-135bb4b6e220))
+(text "== Rear 3.5 mm headphone jack: TPA6130A2 DirectPath I2C headphone amp + plug-detect speaker mute ==" (at 20.32 459.74 0) (effects (font (size 1.27 1.27))) (uuid ec3bc93a-f98a-5463-b725-135bb4b6e220))
+(text "U425 taps the PCM2900C DAC_VOUT_L/R line outputs single-ended (0.47u coupling into LEFTINM/RIGHTINM, INP AC-grounded)." (at 20.32 467.36 0) (effects (font (size 1.27 1.27))) (uuid c50d17ab-34ac-529a-ab4a-ee0992c2347d))
+(text "DirectPath capless outputs HPLEFT/HPRIGHT drive jack J422 T/R. RN (ring normalling) = HP_DETECT: unplugged shorts RN to R (amp 0V) -> low; plugged floats -> R782 100k pull-up (sheet 02) -> high." (at 20.32 474.98 0) (effects (font (size 1.27 1.27))) (uuid 81c62f0a-5b03-564c-99d5-6bc118662ccb))
+(text "EC reads HP_DETECT via U44 pin 6 over I2C; on plug-in it drives AUDIO_AMP_EC_EN low (U421 mutes speakers) and I2C-unmutes U425. /SD tied to MU_HOST_ACTIVE so U425 is in hardware shutdown (0.4uA) outside S0." (at 20.32 482.6 0) (effects (font (size 1.27 1.27))) (uuid f82c6a1f-5080-516d-86ca-c0de8c895a6c))
+(text "TPA6130A2 @0x60 (fixed). Power-on default = muted, outputs disabled (fail-safe OFF until EC firmware unmutes/enables over I2C). No G0/G1 hardware gain; 64-step I2C volume gives independent headphone level." (at 20.32 490.22 0) (effects (font (size 1.27 1.27))) (uuid fb0d4f3d-6109-5fad-94d5-745f1734aa3b))
+(symbol
+  (lib_id "TPA6130A2:TPA6130A2")
+  (at 389.89 500.38 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 3a48f109-9ad4-5fc5-ab49-1d5717a72352)
+  (property "Reference" "U425" (at 389.89 497.84 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPA6130A2RTJR DirectPath stereo headphone amp" (at 389.89 502.92 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_DFN_QFN:WQFN-20-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPA6130A2RTJR" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "I2CAddress7Bit" "0x60" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpa6130a2.pdf" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReferenceCircuit" "TPA6130A2 QFN-20 (RTJ) typical single-ended application (datasheet 9.2.2.1/9.2.2.2)" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "PowerOnDefault" "Not in hardware shutdown but muted with outputs disabled; EC firmware unmutes/enables over I2C" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "DetectContract" "HP_DETECT (jack RN) read on U44 pin 6; EC mutes speakers via AUDIO_AMP_EC_EN and unmutes U425 on plug-in" (at 389.89 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid aebbbd8e-5401-5dd0-9b88-9b07026aa4f0))
+  (pin "2" (uuid a55768e7-764e-5830-bc1b-ad81c1f327a0))
+  (pin "4" (uuid 7cdd64fc-d464-54e8-aae1-4c203b4e83b5))
+  (pin "5" (uuid 29b094d1-0ce7-5815-9690-82a635569e01))
+  (pin "6" (uuid 205505f1-31cc-51f5-9f4d-27ec472f3994))
+  (pin "7" (uuid ff5567aa-7ea2-5949-83ad-a19a69eb64c3))
+  (pin "8" (uuid dd6ba00a-ea12-542e-a1e2-c87b3767266d))
+  (pin "11" (uuid 595565c1-6023-5d0a-abf2-9b2d0287d085))
+  (pin "14" (uuid 8ed680d9-8ad8-5aa7-b803-5797db2cf380))
+  (pin "15" (uuid 22806013-aeba-58b1-b025-6cb7fd8a08fe))
+  (pin "16" (uuid b2a5abbf-6ee4-5c4c-a29e-44279042f5e6))
+  (pin "17" (uuid 2cc02f85-a9ca-55d6-b9eb-44a6a474ec85))
+  (pin "18" (uuid 32b20ff9-03e4-52c7-83b0-75082af683b1))
+  (pin "12" (uuid 57f97922-e56a-51f1-91f5-3a741454c134))
+  (pin "20" (uuid ccf3fdd0-8233-5bb2-9990-945a4202f2a8))
+  (pin "3" (uuid c59dd8ca-8bb0-510d-977a-c17bc188b811))
+  (pin "9" (uuid faaf8e72-56c4-5de3-9731-093c034ff20d))
+  (pin "10" (uuid 2c71db0d-3dc3-57f2-b647-b42efbcd2416))
+  (pin "13" (uuid 1f949e51-85e9-5287-a62a-5531218497d8))
+  (pin "19" (uuid 8ddec37f-5d8a-51b7-8d7e-c8a3b41cf191))
+  (pin "21" (uuid 13c8ad93-5195-57ec-83db-95a86e3e550e))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "U425")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HP_INM_L"
+  (at 377.19 510.54 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 25a218a5-ded7-5e12-9ee9-ae22d8964e6d)
+)
+(label "HP_INP_L"
+  (at 377.19 508 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c6f82e8a-e23a-5210-808c-e1489d2ed630)
+)
+(label "GND"
+  (at 382.27 518.16 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b37a20ea-ff49-5ef4-a97e-3804c9b17e50)
+)
+(label "HP_INP_R"
+  (at 377.19 505.46 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 53a48589-7922-57c4-8f4e-d264a5b60415)
+)
+(label "HP_INM_R"
+  (at 377.19 502.92 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1017e1bf-b705-5554-85d4-176e95fce1d5)
+)
+(hierarchical_label "MU_HOST_ACTIVE"
+  (shape bidirectional)
+  (at 377.19 500.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 66904864-99b0-5e6e-b59b-da3941435a53)
+)
+(hierarchical_label "I2C_SDA"
+  (shape bidirectional)
+  (at 377.19 497.84 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7b6efa3f-108f-5d8f-ad60-3ed49ef6faf5)
+)
+(hierarchical_label "I2C_SCL"
+  (shape bidirectional)
+  (at 377.19 495.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d776b7a5-b190-5fe6-b677-263d4b69120f)
+)
+(label "GND"
+  (at 384.81 518.16 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 68659da3-4d29-576a-b56a-79452b1033a4)
+)
+(label "GND"
+  (at 387.35 518.16 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 155f865e-4ae1-5541-8ebb-168b8d2742a2)
+)
+(label "HP_OUT_R"
+  (at 402.59 490.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2b22bfac-0c98-5580-a309-6997f7b356cf)
+)
+(label "AUDIO_5V"
+  (at 387.35 485.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4d4aba5b-623b-5935-ad01-7864a692161a)
+)
+(label "GND"
+  (at 389.89 518.16 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8ce0f7ca-2c80-57d6-b43a-c147726122a8)
+)
+(label "HP_OUT_L"
+  (at 402.59 492.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d4400cba-afd1-55f3-b7e6-86c8032d4793)
+)
+(label "CPVSS"
+  (at 402.59 497.84 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e00ec11a-a8d6-5305-a9b2-69224061234e)
+)
+(label "CPVSS"
+  (at 402.59 500.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 96fb71be-3407-5210-b2b7-2324da73489c)
+)
+(label "CPN"
+  (at 402.59 502.92 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a68153db-26dc-58a4-b505-1db4f6fcdb90)
+)
+(label "CPP"
+  (at 402.59 505.46 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a6d2714e-b7c6-5970-8386-5e0cc8b3bfa7)
+)
+(label "GND"
+  (at 392.43 518.16 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8a934d71-e2ec-569b-a621-b3b1771c7dcf)
+)
+(label "AUDIO_5V"
+  (at 392.43 485.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 09013025-41ba-5b15-bed7-71e86bd4265d)
+)
+(label "GND"
+  (at 394.97 518.16 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7a5d5350-2558-5164-a6a4-beac97efe6a4)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 508 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 199cde29-64ab-5059-8ec8-e801351da590)
+  (property "Reference" "C457" (at 20.32 505.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "0.47u L input coupling to LEFTINM" (at 20.32 510.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 8bbbb576-640a-5f91-8e8b-ccbf3458b085))
+  (pin "2" (uuid 9d7494a2-353e-53e4-a555-9bd57a0aa58b))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C457")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "DAC_VOUT_L"
+  (at 20.32 504.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 121469af-56cd-55af-aa71-0768f0f272b9)
+)
+(label "HP_INM_L"
+  (at 20.32 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b37b10f0-736f-56df-b075-5cfa3108c375)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 110.49 508 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 5c5a7214-fefa-5ccc-88fb-80e27dc0974e)
+  (property "Reference" "C458" (at 110.49 505.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "0.47u L INP AC-ground reference" (at 110.49 510.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 110.49 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 110.49 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cc1a3bbb-76e3-571a-a5eb-c3d5d7fbdb25))
+  (pin "2" (uuid 9db50bda-88eb-5da8-8ec4-e25dab97a8d6))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C458")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HP_INP_L"
+  (at 110.49 504.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9c3f717c-d57b-53f3-ae23-90726900a3cf)
+)
+(label "GND"
+  (at 110.49 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5f932593-a3c6-51f9-a435-9ac7cbdd9709)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 520.7 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 3ed46008-ff59-5d1f-8960-173a3d986f7f)
+  (property "Reference" "C459" (at 20.32 518.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "0.47u R input coupling to RIGHTINM" (at 20.32 523.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 520.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 520.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5fa6a45c-0d49-5a34-bf1a-626b7ee32b8c))
+  (pin "2" (uuid 1e64d53a-bafa-5750-92fc-f7d97064c5d7))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C459")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "DAC_VOUT_R"
+  (at 20.32 516.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 07931156-163a-5216-9d4e-76dc3608cf2d)
+)
+(label "HP_INM_R"
+  (at 20.32 524.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 74ba7211-0eb5-56b3-93c7-5ab380f8cb8b)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 110.49 520.7 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 498dd588-ec96-571d-bd1b-464defb33fae)
+  (property "Reference" "C460" (at 110.49 518.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "0.47u R INP AC-ground reference" (at 110.49 523.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 110.49 520.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 110.49 520.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid bcd2615a-fd39-58cf-9ceb-69120eef844d))
+  (pin "2" (uuid 3a8b03f9-a515-5139-82fb-6ee2b9ca0029))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C460")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HP_INP_R"
+  (at 110.49 516.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 076a8cfe-1dc8-503c-83a7-d7467d954945)
+)
+(label "GND"
+  (at 110.49 524.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 926232c4-effd-52e2-8315-feb90a9371a6)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 500.38 508 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a2989a98-6fb8-570a-a193-10e00b2deca8)
+  (property "Reference" "C461" (at 500.38 505.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u charge-pump flying CPP-CPN" (at 500.38 510.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 500.38 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d6f0b375-6cf9-5357-b91e-f10caf42a82c))
+  (pin "2" (uuid eb8b966f-5d8d-51bf-841f-3ad4f198c54a))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C461")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CPP"
+  (at 500.38 504.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 53a1d589-b2c5-5ae6-9040-fcd6be9aed76)
+)
+(label "CPN"
+  (at 500.38 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 27bcb582-cbb6-5331-ad23-2f1f041c07c6)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 500.38 520.7 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 5752ec73-14e4-5046-ada4-c5f545784bb9)
+  (property "Reference" "C462" (at 500.38 518.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u CPVSS negative-rail decoupling" (at 500.38 523.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 500.38 520.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 520.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 73f9c05b-eedc-5b9e-b7e1-d9712a1bd3ca))
+  (pin "2" (uuid 04890c52-7170-545d-bd6d-529b407e2355))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C462")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CPVSS"
+  (at 500.38 516.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 136c8d97-273f-5529-b887-7b85fb095870)
+)
+(label "GND"
+  (at 500.38 524.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8c3e195e-077d-50da-b752-704517706bba)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 560.07 508 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid bdff74d8-3457-546a-9ddc-ace3e493b98a)
+  (property "Reference" "C463" (at 560.07 505.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u VDD pin 12 analog bypass" (at 560.07 510.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 560.07 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 560.07 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4fabcd3b-bc64-5fc1-b976-0c261ce263a5))
+  (pin "2" (uuid 8943a11c-bc25-5ad6-8de0-a7772740e415))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C463")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "AUDIO_5V"
+  (at 560.07 504.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 75f3a503-413e-5e4d-ab06-0c9f36d7ae98)
+)
+(label "GND"
+  (at 560.07 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f881e820-7e74-500b-9beb-4ae263af0a3a)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 560.07 520.7 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8cbfa5f8-0de7-5aed-b63e-fd82127debaa)
+  (property "Reference" "C464" (at 560.07 518.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u VDD pin 20 charge-pump supply bypass" (at 560.07 523.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 560.07 520.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 560.07 520.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 92b397b8-ba4c-5107-b3af-c9fdcf8876ea))
+  (pin "2" (uuid 2083e190-b16f-57a0-9919-68d8fe7fc76b))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C464")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "AUDIO_5V"
+  (at 560.07 516.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a05a170a-c6a6-5903-8a41-49694558c6ce)
+)
+(label "GND"
+  (at 560.07 524.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5e836185-f538-5304-b3ff-0e9ce762cdd4)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 619.76 508 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid deafafef-5487-5977-a3fe-ca7e28be013c)
+  (property "Reference" "C465" (at 619.76 505.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n VDD high-frequency bypass" (at 619.76 510.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 619.76 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 619.76 508 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 8186d772-ad28-5175-99c2-3e12d42d4ba4))
+  (pin "2" (uuid 9aeb939f-33b9-5452-a0f2-a733c6a295d3))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "C465")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "AUDIO_5V"
+  (at 619.76 504.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 71f0b943-40e6-5c56-9b87-dda85436ad58)
+)
+(label "GND"
+  (at 619.76 511.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid baefbcdb-2891-56aa-818e-1cac898e03e4)
+)
+(symbol
+  (lib_id "Connector_Audio:AudioJack3_SwitchTR")
+  (at 699.77 500.38 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f8d921d4-7c1b-5d87-82aa-372e1427015f)
+  (property "Reference" "J422" (at 699.77 497.84 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "CUI SJ1-3535NG rear 3.5mm stereo headphone jack" (at 699.77 502.92 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Connector_Audio:Jack_3.5mm_CUI_SJ1-3535NG_Horizontal" (at 699.77 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 699.77 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "CUI Devices" (at 699.77 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "SJ1-3535NG" (at 699.77 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.cui.com/product/resource/sj1-353xng.pdf" (at 699.77 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Detect" "RN ring normalling switch: closed to R (amp 0V) when unplugged, open when plugged -> R782 pull-up drives HP_DETECT high on insertion" (at 699.77 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "SpeakerMute" "EC reads HP_DETECT (U44 pin 6) and drives AUDIO_AMP_EC_EN low to mute the TPA2012D2 speaker amp via U421" (at 699.77 500.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "R" (uuid a84083e9-1ede-51d3-a44e-d7b41d3f8a65))
+  (pin "RN" (uuid c088948e-f105-5c1f-98a5-96a3eed86fb9))
+  (pin "S" (uuid 2a5cb74d-094d-5eb4-afb2-7e003ee74fd1))
+  (pin "T" (uuid ceafb51b-c9f4-5534-ace2-9c1cd01fa540))
+  (pin "TN" (uuid 4af07aad-dbed-5d78-9912-1a912ef67707))
+  (instances
+    (project "ducktop2"
+      (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
+        (reference "J422")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "HP_OUT_L"
+  (at 704.85 505.46 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c33d1594-7f01-50c9-8976-03953c0d8ea8)
+)
+(label "HP_OUT_R"
+  (at 704.85 500.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cd47f521-7390-586d-960d-ef2e217f2bd5)
+)
+(label "GND"
+  (at 704.85 497.84 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 759be962-e6c9-54d5-8156-800df18bfac7)
+)
+(no_connect (at 704.85 508) (uuid 799f6d47-c2f1-589f-a920-6e53db66b74e))
+(hierarchical_label "HP_DETECT"
+  (shape bidirectional)
+  (at 704.85 502.92 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0e840851-bb27-53eb-ab53-4ae04b2bbf6b)
+)
+(text "HEADPHONE LAYOUT: keep the jack, VDD bypass, and charge-pump caps away from the mic preamp (MK430) and class-D speaker outputs." (at 20.32 528.32 0) (effects (font (size 1.27 1.27))) (uuid bf0ca4b5-cd79-5954-b357-6f10870ac6d3))
+(text "HEADPHONE STANDBY: /SD tied to MU_HOST_ACTIVE (S0-only) so U425 draws 0.4uA in S3; EC unmutes/enables over I2C only while host active." (at 20.32 533.4 0) (effects (font (size 1.27 1.27))) (uuid 97782f66-e608-5d6b-817e-9875f00916a3))
+(text "== Built-in mono microphone: IM68A130 + low-noise 2.8V rail + low-noise preamp ==" (at 20.32 538.48 0) (effects (font (size 1.27 1.27))) (uuid 8d7578cc-29e1-5325-a27f-c9b51c6ff846))
 (symbol
   (lib_id "Regulator_Linear:LP5907MFX-2.8")
   (at 90.17 574.04 0)
@@ -6501,7 +7345,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c50d17ab-34ac-529a-ab4a-ee0992c2347d)
+  (uuid 58095205-15bf-520a-8937-7c5e51c6b0f0)
   (property "Reference" "U430" (at 90.17 571.5 0) (effects (font (size 1.27 1.27))))
   (property "Value" "LP5907MFX-2.8/NOPB low-noise microphone LDO" (at 90.17 576.58 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 90.17 574.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6509,11 +7353,11 @@
   (property "Manufacturer" "Texas Instruments" (at 90.17 574.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "LP5907MFX-2.8/NOPB" (at 90.17 574.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Function" "Keep IM68A130 below its 3.3V operating maximum with a quiet rail" (at 90.17 574.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 81c62f0a-5b03-564c-99d5-6bc118662ccb))
-  (pin "2" (uuid f82c6a1f-5080-516d-86ca-c0de8c895a6c))
-  (pin "3" (uuid fb0d4f3d-6109-5fad-94d5-745f1734aa3b))
-  (pin "4" (uuid 3a48f109-9ad4-5fc5-ab49-1d5717a72352))
-  (pin "5" (uuid aebbbd8e-5401-5dd0-9b88-9b07026aa4f0))
+  (pin "1" (uuid 5bcd65cd-b3e1-5e76-8b01-9113f06f31c9))
+  (pin "2" (uuid fbc47aa9-bb5d-5fe9-8c47-22ef90ed83ee))
+  (pin "3" (uuid 5bb6169a-83a0-55d9-9286-9ab88fedd4db))
+  (pin "4" (uuid 8af26dbf-5cf2-506b-90d1-3f578b105dba))
+  (pin "5" (uuid 989779c0-aff8-51d2-9e47-b1249d66bc4e))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6527,24 +7371,24 @@
   (shape bidirectional)
   (at 82.55 571.5 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a55768e7-764e-5830-bc1b-ad81c1f327a0)
+  (uuid 00efd3f2-04c9-549c-ab42-a926b9d95995)
 )
 (label "GND"
   (at 90.17 581.66 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7cdd64fc-d464-54e8-aae1-4c203b4e83b5)
+  (uuid e5e3f2e3-f5aa-5fba-9c55-20b66f63fdd9)
 )
 (hierarchical_label "AUDIO_MIC_EN"
   (shape bidirectional)
   (at 82.55 574.04 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 29b094d1-0ce7-5815-9690-82a635569e01)
+  (uuid 558ab92b-ae85-50b8-a9d7-a22b4ef1d52d)
 )
-(no_connect (at 95.25 574.04) (uuid 205505f1-31cc-51f5-9f4d-27ec472f3994))
+(no_connect (at 95.25 574.04) (uuid b4070de5-7616-5a2f-833c-309dc4a9c5b0))
 (label "MIC_2V8"
   (at 97.79 571.5 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ff5567aa-7ea2-5949-83ad-a19a69eb64c3)
+  (uuid ea0f55f7-fd76-561a-bef3-2d3e6ff8abe2)
 )
 (symbol
   (lib_id "Device:C")
@@ -6554,13 +7398,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid dd6ba00a-ea12-542e-a1e2-c87b3767266d)
+  (uuid 8909c5b3-7b6d-5fcb-9701-1d0ad7499aa5)
   (property "Reference" "C448" (at 20.32 556.26 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u LP5907 input" (at 20.32 561.34 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 558.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 558.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 595565c1-6023-5d0a-abf2-9b2d0287d085))
-  (pin "2" (uuid 8ed680d9-8ad8-5aa7-b803-5797db2cf380))
+  (pin "1" (uuid 40407d77-47e5-579a-a7ca-f1ae0c73c1a1))
+  (pin "2" (uuid 37f5112b-e77f-53ab-8797-3965c6958587))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6574,12 +7418,12 @@
   (shape bidirectional)
   (at 20.32 554.99 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 22806013-aeba-58b1-b025-6cb7fd8a08fe)
+  (uuid 18fa82fe-55d2-5f99-9c1d-d3b624a4523d)
 )
 (label "GND"
   (at 20.32 562.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b2a5abbf-6ee4-5c4c-a29e-44279042f5e6)
+  (uuid b96f8fae-953d-55af-b7e0-63aa0aa06b60)
 )
 (symbol
   (lib_id "Device:C")
@@ -6589,13 +7433,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 2cc02f85-a9ca-55d6-b9eb-44a6a474ec85)
+  (uuid 7bd53f3d-864a-5786-bf7a-e03cd8ad7ba1)
   (property "Reference" "C449" (at 20.32 568.96 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u LP5907 output" (at 20.32 574.04 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 571.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 571.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 32b20ff9-03e4-52c7-83b0-75082af683b1))
-  (pin "2" (uuid 57f97922-e56a-51f1-91f5-3a741454c134))
+  (pin "1" (uuid 09448a8b-e477-5cf1-81bf-dd12ddc0c9b6))
+  (pin "2" (uuid 9683a13e-b383-5316-aad7-a228f061d838))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6608,12 +7452,12 @@
 (label "MIC_2V8"
   (at 20.32 567.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ccf3fdd0-8233-5bb2-9990-945a4202f2a8)
+  (uuid 65119d83-0770-5433-af01-e695f23a2556)
 )
 (label "GND"
   (at 20.32 575.31 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c59dd8ca-8bb0-510d-977a-c17bc188b811)
+  (uuid 9bb26c73-9004-57a9-b336-8fbefb7c8d37)
 )
 (symbol
   (lib_id "Device:R")
@@ -6623,13 +7467,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid faaf8e72-56c4-5de3-9731-093c034ff20d)
+  (uuid cdd5112c-cb9f-5e52-8fb8-d91d1994e883)
   (property "Reference" "R434" (at 20.32 581.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100k microphone enable fail-off pull-down" (at 20.32 586.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 584.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 584.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 2c71db0d-3dc3-57f2-b647-b42efbcd2416))
-  (pin "2" (uuid 1f949e51-85e9-5287-a62a-5531218497d8))
+  (pin "1" (uuid deeb10df-81fa-5f96-9ca1-64c0c16fd4c3))
+  (pin "2" (uuid 84d5c9f5-ebcd-54b8-8b0b-e0c393d30797))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6643,12 +7487,12 @@
   (shape bidirectional)
   (at 20.32 580.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8ddec37f-5d8a-51b7-8d7e-c8a3b41cf191)
+  (uuid 3d1ed9cd-e68b-5a52-962c-ded30ffaca6e)
 )
 (label "GND"
   (at 20.32 588.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 13c8ad93-5195-57ec-83db-95a86e3e550e)
+  (uuid f4a20dda-0d90-5472-89e5-684b2f2b310f)
 )
 (symbol
   (lib_id "Device:R")
@@ -6658,13 +7502,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 25a218a5-ded7-5e12-9ee9-ae22d8964e6d)
+  (uuid 7c79ced5-9ac8-5558-aee1-ad26d366c3b6)
   (property "Reference" "R435" (at 129.54 581.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "2.2k microphone-active indicator" (at 129.54 586.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 129.54 584.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 129.54 584.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid c6f82e8a-e23a-5210-808c-e1489d2ed630))
-  (pin "2" (uuid b37a20ea-ff49-5ef4-a97e-3804c9b17e50))
+  (pin "1" (uuid bf04ba45-c976-5055-b87a-06f134a0933f))
+  (pin "2" (uuid b99aa595-35cd-5b2f-82bd-8068a9a4be4b))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6677,12 +7521,12 @@
 (label "MIC_2V8"
   (at 129.54 580.39 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53a48589-7922-57c4-8f4e-d264a5b60415)
+  (uuid f1ad2010-5157-5ab5-933b-bf2eb285e7de)
 )
 (label "MIC_LED_A"
   (at 129.54 588.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1017e1bf-b705-5554-85d4-176e95fce1d5)
+  (uuid 6698bd3d-d432-5c9d-a69d-349f68f75263)
 )
 (symbol
   (lib_id "Device:LED")
@@ -6692,7 +7536,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 66904864-99b0-5e6e-b59b-da3941435a53)
+  (uuid 3ee90f84-d9b7-5b8a-bc4f-331a347a1e65)
   (property "Reference" "LED430" (at 240.03 581.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "green microphone-active indicator" (at 240.03 586.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 240.03 584.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6701,8 +7545,8 @@
   (property "MPN" "APT1608SGC" (at 240.03 584.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.kingbrightusa.com/images/catalog/SPEC/APT1608SGC.pdf" (at 240.03 584.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Function" "Indicator is supplied by the actual microphone rail, not only its enable command" (at 240.03 584.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 7b6efa3f-108f-5d8f-ad60-3ed49ef6faf5))
-  (pin "2" (uuid d776b7a5-b190-5fe6-b677-263d4b69120f))
+  (pin "1" (uuid 25939c98-77f2-5f61-a4c7-0a608e71ccfe))
+  (pin "2" (uuid 1f860737-5210-5891-b001-921b3f09b69e))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6715,12 +7559,12 @@
 (label "GND"
   (at 236.22 584.2 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 68659da3-4d29-576a-b56a-79452b1033a4)
+  (uuid 09789867-0dba-57d6-ad06-c7cdbd128835)
 )
 (label "MIC_LED_A"
   (at 243.84 584.2 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 155f865e-4ae1-5541-8ebb-168b8d2742a2)
+  (uuid bb6d9285-2ab7-5fe3-9573-1a56426a0cdc)
 )
 (symbol
   (lib_id "IM68A130V01:IM68A130V01")
@@ -6730,7 +7574,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 2b22bfac-0c98-5580-a309-6997f7b356cf)
+  (uuid 8edbbc1a-a618-5bd7-9e63-173fe69acbac)
   (property "Reference" "MK430" (at 219.71 571.5 0) (effects (font (size 1.27 1.27))))
   (property "Value" "IM68A130V01 bottom-port analog MEMS microphone" (at 219.71 576.58 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Infineon_IM68A130V01" (at 219.71 574.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6738,10 +7582,10 @@
   (property "Manufacturer" "Infineon Technologies" (at 219.71 574.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "IM68A130V01XTMA1" (at 219.71 574.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "AcousticPort" "0.6mm NPTH through PCB; keep paste/copper/debris out of port" (at 219.71 574.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 4d4aba5b-623b-5935-ad01-7864a692161a))
-  (pin "2" (uuid 8ce0f7ca-2c80-57d6-b43a-c147726122a8))
-  (pin "3" (uuid d4400cba-afd1-55f3-b7e6-86c8032d4793))
-  (pin "4" (uuid e00ec11a-a8d6-5305-a9b2-69224061234e))
+  (pin "1" (uuid 7a9dcb7b-3a4b-5cd8-8b3d-9217434f0bc8))
+  (pin "2" (uuid 72f514d3-8378-5ebc-9e7e-f7b65efdbbb6))
+  (pin "3" (uuid bac3885f-28f9-5e69-83cd-77c19410d047))
+  (pin "4" (uuid 760e14f9-7564-5eb9-96c9-546d425be344))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6754,22 +7598,22 @@
 (label "MIC_RAW"
   (at 227.33 574.04 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 96fb71be-3407-5210-b2b7-2324da73489c)
+  (uuid dba52f8c-d33e-58dd-9a01-a8fb2f5a0f35)
 )
 (label "GND"
   (at 219.71 581.66 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a68153db-26dc-58a4-b505-1db4f6fcdb90)
+  (uuid 7d3c05eb-e573-5734-ab72-4533d5b18129)
 )
 (label "MIC_2V8"
   (at 219.71 566.42 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a6d2714e-b7c6-5970-8386-5e0cc8b3bfa7)
+  (uuid f425d550-3f23-5acb-bf46-470803befbb5)
 )
 (label "GND"
   (at 212.09 574.04 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8a934d71-e2ec-569b-a621-b3b1771c7dcf)
+  (uuid eb037c08-991a-5b93-a265-cbd9f4ccd61b)
 )
 (symbol
   (lib_id "Device:C")
@@ -6779,13 +7623,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 09013025-41ba-5b15-bed7-71e86bd4265d)
+  (uuid 7ae64c9e-58dd-5cd0-83de-17458dfa2db3)
   (property "Reference" "C450" (at 309.88 556.26 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n microphone VDD at pin 3" (at 309.88 561.34 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 309.88 558.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 309.88 558.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 7a5d5350-2558-5164-a6a4-beac97efe6a4))
-  (pin "2" (uuid 199cde29-64ab-5059-8ec8-e801351da590))
+  (pin "1" (uuid 84f3e215-60b6-5811-9411-2819aa0e0eea))
+  (pin "2" (uuid 074f0c8f-20fd-5eb5-b736-56025e423420))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6798,14 +7642,14 @@
 (label "MIC_2V8"
   (at 309.88 554.99 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8bbbb576-640a-5f91-8e8b-ccbf3458b085)
+  (uuid 1fd2a692-2d25-599b-8c2a-75be60185881)
 )
 (label "GND"
   (at 309.88 562.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9d7494a2-353e-53e4-a555-9bd57a0aa58b)
+  (uuid 10280ed7-b746-5a44-b856-fd71b44b7ba9)
 )
-(text "U431 has DC gain 1 and audio-band gain 5.99V/V; the microphone's 1.3V output bias sets the quiescent output." (at 20.32 607.06 0) (effects (font (size 1.27 1.27))) (uuid 121469af-56cd-55af-aa71-0768f0f272b9))
+(text "U431 has DC gain 1 and audio-band gain 5.99V/V; the microphone's 1.3V output bias sets the quiescent output." (at 20.32 607.06 0) (effects (font (size 1.27 1.27))) (uuid f878cb7e-d6c3-5364-94a6-96622099164f))
 (symbol
   (lib_id "Amplifier_Operational:TLV9061xDBV")
   (at 439.42 631.19 0)
@@ -6814,18 +7658,18 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid b37b10f0-736f-56df-b075-5cfa3108c375)
+  (uuid fbcd57e3-6701-5a1d-adf5-bea19539bfac)
   (property "Reference" "U431" (at 439.42 628.65 0) (effects (font (size 1.27 1.27))))
   (property "Value" "TLV9061IDBVR microphone preamplifier" (at 439.42 633.73 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 439.42 631.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 439.42 631.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 439.42 631.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "TLV9061IDBVR" (at 439.42 631.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "2" (uuid 5c5a7214-fefa-5ccc-88fb-80e27dc0974e))
-  (pin "5" (uuid cc1a3bbb-76e3-571a-a5eb-c3d5d7fbdb25))
-  (pin "1" (uuid 9db50bda-88eb-5da8-8ec4-e25dab97a8d6))
-  (pin "3" (uuid 9c3f717c-d57b-53f3-ae23-90726900a3cf))
-  (pin "4" (uuid 5f932593-a3c6-51f9-a435-9ac7cbdd9709))
+  (pin "2" (uuid ee8e184a-21bd-5a1e-9999-34928f542ff4))
+  (pin "5" (uuid f45630db-4f6b-597a-a83d-517c0af87059))
+  (pin "1" (uuid 10d1c15b-c851-5977-883c-372fd49eacd6))
+  (pin "3" (uuid fe6e857b-7cb2-5431-82ad-543bf0c97954))
+  (pin "4" (uuid 84e9b25f-343a-53c6-8333-7ceeb1a524cd))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6838,28 +7682,28 @@
 (label "MIC_PREAMP"
   (at 447.04 631.19 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3ed46008-ff59-5d1f-8960-173a3d986f7f)
+  (uuid 53cd2d44-83a7-5c30-b530-bf69b6190bec)
 )
 (label "GND"
   (at 436.88 638.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5fa6a45c-0d49-5a34-bf1a-626b7ee32b8c)
+  (uuid 55fdf676-927a-5fa7-8c9b-3a22910a4b6b)
 )
 (label "MIC_RAW"
   (at 431.8 628.65 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1e64d53a-bafa-5750-92fc-f7d97064c5d7)
+  (uuid 65f8576a-1fdc-56d4-bf99-9d949069c9bc)
 )
 (label "MIC_FB"
   (at 431.8 633.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 07931156-163a-5216-9d4e-76dc3608cf2d)
+  (uuid 8f28915d-e530-5945-9cbf-dac86ebb3479)
 )
 (hierarchical_label "SYS_3V3"
   (shape bidirectional)
   (at 436.88 623.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 74ba7211-0eb5-56b3-93c7-5ab380f8cb8b)
+  (uuid 0b929e20-1f91-5099-b3e1-6c4e0662184e)
 )
 (symbol
   (lib_id "Device:C")
@@ -6869,13 +7713,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 498dd588-ec96-571d-bd1b-464defb33fae)
+  (uuid 76276f44-1da5-5622-bd27-bd0112e3e48c)
   (property "Reference" "C452" (at 670.56 622.3 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n TLV9061 local bypass" (at 670.56 627.38 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 670.56 624.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 670.56 624.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid bcd2615a-fd39-58cf-9ceb-69120eef844d))
-  (pin "2" (uuid 3a8b03f9-a515-5139-82fb-6ee2b9ca0029))
+  (pin "1" (uuid ca5132b0-b3d1-5d3f-beb3-41c572c8b50c))
+  (pin "2" (uuid 85ab1720-4fae-5b6a-9d5e-fb4eece9ddd2))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6889,12 +7733,12 @@
   (shape bidirectional)
   (at 670.56 621.03 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 076a8cfe-1dc8-503c-83a7-d7467d954945)
+  (uuid fcd7f905-9e45-52cd-88d4-0e95fd86c487)
 )
 (label "GND"
   (at 670.56 628.65 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 926232c4-effd-52e2-8315-feb90a9371a6)
+  (uuid ff056aa3-9808-5735-824d-ebb0f6f9aa20)
 )
 (symbol
   (lib_id "Device:R")
@@ -6904,13 +7748,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid a2989a98-6fb8-570a-a193-10e00b2deca8)
+  (uuid 18aa90ca-06e9-5512-b60f-4182b3910387)
   (property "Reference" "R432" (at 330.2 657.86 0) (effects (font (size 1.27 1.27))))
   (property "Value" "4.99k 1% microphone feedback" (at 330.2 662.94 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 660.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 660.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d6f0b375-6cf9-5357-b91e-f10caf42a82c))
-  (pin "2" (uuid eb8b966f-5d8d-51bf-841f-3ad4f198c54a))
+  (pin "1" (uuid 8abbab95-dc36-5e02-b13d-121c4c19a810))
+  (pin "2" (uuid db5b6348-f739-5dc3-b51a-4e2727651c42))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6923,12 +7767,12 @@
 (label "MIC_PREAMP"
   (at 330.2 656.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53a1d589-b2c5-5ae6-9040-fcd6be9aed76)
+  (uuid 5501ad3c-d80a-516e-aa61-27d513c65274)
 )
 (label "MIC_FB"
   (at 330.2 664.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 27bcb582-cbb6-5331-ad23-2f1f041c07c6)
+  (uuid 1ec3ce7d-4255-5693-ae7a-e48be025c90f)
 )
 (symbol
   (lib_id "Device:C")
@@ -6938,13 +7782,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 5752ec73-14e4-5046-ada4-c5f545784bb9)
+  (uuid 7e11ef16-e647-5b96-a854-8c9b66bf5f13)
   (property "Reference" "C453" (at 439.42 657.86 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1.2n C0G feedback low-pass" (at 439.42 662.94 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 439.42 660.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 439.42 660.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 73f9c05b-eedc-5b9e-b7e1-d9712a1bd3ca))
-  (pin "2" (uuid 04890c52-7170-545d-bd6d-529b407e2355))
+  (pin "1" (uuid 10955573-5b5b-54c7-b9fc-af951c72459a))
+  (pin "2" (uuid 7d3e2c64-f335-51a2-a359-f09dcf382efc))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6957,12 +7801,12 @@
 (label "MIC_PREAMP"
   (at 439.42 656.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 136c8d97-273f-5529-b887-7b85fb095870)
+  (uuid 6573797a-80e9-5fa8-8771-bce23cabc08e)
 )
 (label "MIC_FB"
   (at 439.42 664.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8c3e195e-077d-50da-b752-704517706bba)
+  (uuid 4361b96e-63b0-5322-8928-6fb67499a9b4)
 )
 (symbol
   (lib_id "Device:R")
@@ -6972,13 +7816,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid bdff74d8-3457-546a-9ddc-ace3e493b98a)
+  (uuid b6533ada-ba55-5716-bbc0-f723f510205a)
   (property "Reference" "R433" (at 330.2 670.56 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1.00k 1% microphone gain leg" (at 330.2 675.64 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 330.2 673.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 330.2 673.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 4fabcd3b-bc64-5fc1-b976-0c261ce263a5))
-  (pin "2" (uuid 8943a11c-bc25-5ad6-8de0-a7772740e415))
+  (pin "1" (uuid 897f6bbe-3669-5e3f-98ce-5e29ce331c0b))
+  (pin "2" (uuid 7e98fb22-82d0-59e3-95f5-66276d8451d1))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -6991,12 +7835,12 @@
 (label "MIC_FB"
   (at 330.2 669.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 75f3a503-413e-5e4d-ab06-0c9f36d7ae98)
+  (uuid 026bfa17-e682-51e0-bff0-0048039eb13a)
 )
 (label "MIC_HP_NODE"
   (at 330.2 676.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f881e820-7e74-500b-9beb-4ae263af0a3a)
+  (uuid bff7b865-dbd8-5dda-953b-fbd482bef9be)
 )
 (symbol
   (lib_id "Device:C")
@@ -7006,13 +7850,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 8cbfa5f8-0de7-5aed-b63e-fd82127debaa)
+  (uuid 47478124-ddb8-5eea-85c7-5a93dd5c4053)
   (property "Reference" "C454" (at 439.42 670.56 0) (effects (font (size 1.27 1.27))))
   (property "Value" "4.7u microphone gain-leg AC coupling" (at 439.42 675.64 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 439.42 673.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 439.42 673.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 92b397b8-ba4c-5107-b3af-c9fdcf8876ea))
-  (pin "2" (uuid 2083e190-b16f-57a0-9919-68d8fe7fc76b))
+  (pin "1" (uuid badce5cf-e2cf-574f-bd8b-66d39b3129ef))
+  (pin "2" (uuid 538920ab-32a3-5b7c-9d1b-09d85c868c2b))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -7025,12 +7869,12 @@
 (label "MIC_HP_NODE"
   (at 439.42 669.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a05a170a-c6a6-5903-8a41-49694558c6ce)
+  (uuid 1b684e2a-31f7-5ead-94bc-3e673ec4971c)
 )
 (label "GND"
   (at 439.42 676.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5e836185-f538-5304-b3ff-0e9ce762cdd4)
+  (uuid 99ec49d9-f405-519c-8d08-df04f1d44dee)
 )
 (symbol
   (lib_id "Device:C")
@@ -7040,13 +7884,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid deafafef-5487-5977-a3fe-ca7e28be013c)
+  (uuid 6b83d697-17d2-5569-9a4e-5e17e8bdf16f)
   (property "Reference" "C455" (at 570.23 657.86 0) (effects (font (size 1.27 1.27))))
   (property "Value" "4.7u microphone to PCM2900 VINL per TI analog front-end" (at 570.23 662.94 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 570.23 660.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 570.23 660.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8186d772-ad28-5175-99c2-3e12d42d4ba4))
-  (pin "2" (uuid 9aeb939f-33b9-5452-a0f2-a733c6a295d3))
+  (pin "1" (uuid 72b6a4f8-2fef-5ded-a96e-b7ad0537599f))
+  (pin "2" (uuid b58b886c-2fdf-5030-a084-b987e9572be7))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -7059,12 +7903,12 @@
 (label "MIC_PREAMP"
   (at 570.23 656.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 71f0b943-40e6-5c56-9b87-dda85436ad58)
+  (uuid 9d015f6b-679e-5a17-a1ec-66f477e3d495)
 )
 (label "MIC_ADC_L"
   (at 570.23 664.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid baefbcdb-2891-56aa-818e-1cac898e03e4)
+  (uuid 3e969de7-253e-55c6-86a3-167251672334)
 )
 (symbol
   (lib_id "Device:C")
@@ -7074,13 +7918,13 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid f8d921d4-7c1b-5d87-82aa-372e1427015f)
+  (uuid 611a3bb3-aa2e-5e83-9ac9-a60f8c4113a6)
   (property "Reference" "C456" (at 570.23 670.56 0) (effects (font (size 1.27 1.27))))
   (property "Value" "4.7u microphone to PCM2900 VINR per TI analog front-end" (at 570.23 675.64 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 570.23 673.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 570.23 673.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a84083e9-1ede-51d3-a44e-d7b41d3f8a65))
-  (pin "2" (uuid c088948e-f105-5c1f-98a5-96a3eed86fb9))
+  (pin "1" (uuid aa356008-2399-5739-ac75-3f386cc60618))
+  (pin "2" (uuid f0e1acdf-a152-5f59-811c-fdd774a6c0ef))
   (instances
     (project "ducktop2"
       (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
@@ -7093,25 +7937,25 @@
 (label "MIC_PREAMP"
   (at 570.23 669.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2a5cb74d-094d-5eb4-afb2-7e003ee74fd1)
+  (uuid 8fef97cd-a18a-5c92-a51c-72906878c801)
 )
 (label "MIC_ADC_R"
   (at 570.23 676.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ceafb51b-c9f4-5534-ace2-9c1cd01fa540)
+  (uuid 6af6c4c1-066f-5229-a6cd-2e16be306392)
 )
-(text "MIC PERFORMANCE: DC gain 1, audio-band gain 5.99V/V; shelving pole about 34Hz; feedback pole about 27kHz." (at 20.32 698.5 0) (effects (font (size 1.27 1.27))) (uuid 4af07aad-dbed-5d78-9912-1a912ef67707))
-(text "MIC TARGET: voice/conference capture up to about 105dBSPL. Expected analog clipping near 112-113dBSPL; this assembly is not a high-SPL recorder." (at 20.32 702.31 0) (effects (font (size 1.27 1.27))) (uuid c33d1594-7f01-50c9-8976-03953c0d8ea8))
-(text "MIC LAYOUT: microphone and preamp are chip-down on the main PCB. Place at a front/top acoustic opening, far from blower, class-D outputs, RF PAs, and switching inductors." (at 20.32 706.12 0) (effects (font (size 1.27 1.27))) (uuid cd47f521-7390-586d-960d-ef2e217f2bd5))
-(text "MIC RELEASE GATE: verify footprint/stencil with assembler, seal the acoustic path, and test clipping/noise/echo with fans, radios, speakers, USB, and charging active." (at 20.32 713.74 0) (effects (font (size 1.27 1.27))) (uuid 759be962-e6c9-54d5-8156-800df18bfac7))
-(text "RELEASE GATES:" (at 20.32 736.6 0) (effects (font (size 1.27 1.27))) (uuid 799f6d47-c2f1-589f-a920-6e53db66b74e))
-(text "1. Initial speakers: 8 ohm nominal and >=2W continuous each. Never join either BTL output to GND or use a shared speaker return." (at 20.32 744.22 0) (effects (font (size 1.27 1.27))) (uuid 0e840851-bb27-53eb-ab53-4ae04b2bbf6b))
-(text "2. A 4-ohm speaker is allowed only after amplifier/PCB thermal test, excursion test, current-budget check, and enforced host volume limiting." (at 20.32 751.84 0) (effects (font (size 1.27 1.27))) (uuid bf0ca4b5-cd79-5954-b357-6f10870ac6d3))
-(text "3. Measure both crystal frequencies/startup margin, USB2 90-ohm routing, reset timing, and P5 enumeration on the production Mu BIOS." (at 20.32 759.46 0) (effects (font (size 1.27 1.27))) (uuid 97782f66-e608-5d6b-817e-9875f00916a3))
-(text "4. Confirm the OS enumerates distinct PCM2900C system audio and PCM2902C radio audio devices across cold boot and suspend/resume." (at 20.32 767.08 0) (effects (font (size 1.27 1.27))) (uuid 8d7578cc-29e1-5325-a27f-c9b51c6ff846))
-(text "5. Verify fail-off AUDIO_MIC_EN and the actual MIC_2V8-rail indicator; then run pop, echo, privacy, fan/charger noise, excursion, and RF-desense tests." (at 20.32 774.7 0) (effects (font (size 1.27 1.27))) (uuid 58095205-15bf-520a-8937-7c5e51c6b0f0))
-(text "LAYOUT: place hub bypass/RBIAS/crystal at U400; codec crystal/decoupling at U410; mic chain at MK430; keep BTL pairs away from RF and mic input." (at 20.32 782.32 0) (effects (font (size 1.27 1.27))) (uuid 5bcd65cd-b3e1-5e76-8b01-9113f06f31c9))
-(text "HUB_VBUS_DET follows the supervised carrier-generated physical INTERNAL_USB_VBUS. The audio hub cannot wake S3 and must re-enumerate after resume." (at 20.32 789.94 0) (effects (font (size 1.27 1.27))) (uuid fbc47aa9-bb5d-5fe9-8c47-22ef90ed83ee))
+(text "MIC PERFORMANCE: DC gain 1, audio-band gain 5.99V/V; shelving pole about 34Hz; feedback pole about 27kHz." (at 20.32 698.5 0) (effects (font (size 1.27 1.27))) (uuid 19e855ad-26dd-5890-a928-0f5cb03ebed9))
+(text "MIC TARGET: voice/conference capture up to about 105dBSPL. Expected analog clipping near 112-113dBSPL; this assembly is not a high-SPL recorder." (at 20.32 702.31 0) (effects (font (size 1.27 1.27))) (uuid 2760d903-986b-5224-9bf5-d37f12c451bb))
+(text "MIC LAYOUT: microphone and preamp are chip-down on the main PCB. Place at a front/top acoustic opening, far from blower, class-D outputs, RF PAs, and switching inductors." (at 20.32 706.12 0) (effects (font (size 1.27 1.27))) (uuid db2fef19-40de-5ab9-97ab-71d8a8963eb1))
+(text "MIC RELEASE GATE: verify footprint/stencil with assembler, seal the acoustic path, and test clipping/noise/echo with fans, radios, speakers, USB, and charging active." (at 20.32 713.74 0) (effects (font (size 1.27 1.27))) (uuid 815a2096-8c50-5d16-a00d-7ea3ace1da83))
+(text "RELEASE GATES:" (at 20.32 736.6 0) (effects (font (size 1.27 1.27))) (uuid 2234e58e-3553-566a-825e-946b9e5d6f5a))
+(text "1. Initial speakers: 8 ohm nominal and >=2W continuous each. Never join either BTL output to GND or use a shared speaker return." (at 20.32 744.22 0) (effects (font (size 1.27 1.27))) (uuid 1ea79e6d-72b5-501b-ba35-f133fa9b524d))
+(text "2. A 4-ohm speaker is allowed only after amplifier/PCB thermal test, excursion test, current-budget check, and enforced host volume limiting." (at 20.32 751.84 0) (effects (font (size 1.27 1.27))) (uuid f67d1728-0cc0-5238-8fa7-a1cca36d42c6))
+(text "3. Measure both crystal frequencies/startup margin, USB2 90-ohm routing, reset timing, and P5 enumeration on the production Mu BIOS." (at 20.32 759.46 0) (effects (font (size 1.27 1.27))) (uuid 0bcf2463-3d06-5ff8-8ae1-8aa49d70e5ed))
+(text "4. Confirm the OS enumerates distinct PCM2900C system audio and PCM2902C radio audio devices across cold boot and suspend/resume." (at 20.32 767.08 0) (effects (font (size 1.27 1.27))) (uuid f5eccca5-0148-519f-9021-966f91d3b602))
+(text "5. Verify fail-off AUDIO_MIC_EN and the actual MIC_2V8-rail indicator; then run pop, echo, privacy, fan/charger noise, excursion, and RF-desense tests." (at 20.32 774.7 0) (effects (font (size 1.27 1.27))) (uuid b3da8644-e6cd-51ae-a32b-3a415f217ec4))
+(text "LAYOUT: place hub bypass/RBIAS/crystal at U400; codec crystal/decoupling at U410; mic chain at MK430; keep BTL pairs away from RF and mic input." (at 20.32 782.32 0) (effects (font (size 1.27 1.27))) (uuid 768c4a89-7ee1-5bdd-b787-313fc1706c1f))
+(text "HUB_VBUS_DET follows the supervised carrier-generated physical INTERNAL_USB_VBUS. The audio hub cannot wake S3 and must re-enumerate after resume." (at 20.32 789.94 0) (effects (font (size 1.27 1.27))) (uuid 0f3aa572-8093-51cb-92ae-8dc53810713b))
 (sheet_instances
   (path "/5a262a39-3888-5c6d-ad36-52d5f9c459dd"
     (page "15")

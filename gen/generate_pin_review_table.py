@@ -557,7 +557,7 @@ def load_contracts() -> None:
     source_mgr = "TI TCA9539 datasheet plus Ducktop2 warm-reset fail-off source-manager contract"
     for pin, net in {
         1: "/EC & MCU/SOURCE_MGR_INT_N", 2: "GND", 3: "/EC & MCU/NRST_NET",
-        4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/EC & MCU/SOURCE_MGR_SPARE1",
+        4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/HP_DETECT",
         7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/EC & MCU/SOURCE_MGR_SPARE2",
         10: "/PACK_FAULT_N", 11: "/AUX_FAULT_N", 12: "GND",
         13: "/PACK_RETRY_PULSE", 14: "/AUX_PGOOD",
@@ -1592,7 +1592,7 @@ def load_current_architecture_overrides() -> None:
     clear_ref_contracts("U44")
     for pin, net in {
         1: "/EC & MCU/SOURCE_MGR_INT_N", 2: "GND", 3: "/EC & MCU/NRST_NET",
-        4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/EC & MCU/SOURCE_MGR_SPARE1",
+        4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/HP_DETECT",
         7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/EC & MCU/SOURCE_MGR_SPARE2",
         10: "/PACK_FAULT_N", 11: "/AUX_FAULT_N", 12: "GND", 13: "/PACK_RETRY_PULSE",
         14: "/AUX_PGOOD", 15: "/MAIN_USB_VALID_N", 16: "/MAIN_AUX_VALID_N",

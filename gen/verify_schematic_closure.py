@@ -283,7 +283,7 @@ def run_checks(a: ClosureAudit) -> None:
         "3": "/EC & MCU/NRST_NET",
         "4": "/PD1_PATH_EN",
         "5": "/PD2_PATH_EN",
-        "6": "/EC & MCU/SOURCE_MGR_SPARE1",
+        "6": "/HP_DETECT",
         "7": "/PD1_EFUSE_FAULT_N",
         "8": "/PD2_EFUSE_FAULT_N",
         "9": "/EC & MCU/SOURCE_MGR_SPARE2",

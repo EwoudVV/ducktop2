@@ -7214,7 +7214,8 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 12125aff-f3f5-599e-b6a2-5c5ee10d26a3)
 )
-(label "SOURCE_MGR_SPARE1"
+(hierarchical_label "HP_DETECT"
+  (shape bidirectional)
   (at 712.47 314.96 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 005d16b3-3ba3-5a59-a24c-9bbae3f5ca0e)
@@ -7405,9 +7406,11 @@
   (dnp no)
   (uuid f10c0f47-ff81-54c1-b548-ac3f2a6b920d)
   (property "Reference" "R782" (at 650.24 289.56 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k unused source-manager I/O pulldown" (at 650.24 294.64 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k HP_DETECT pull-up" (at 650.24 294.64 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 650.24 292.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 8a8b0c5a-56ab-5dee-a559-3f0cf46da253))
   (pin "2" (uuid 88fd6c1e-2ecd-5f3e-97b6-c929169f14fb))
   (instances
@@ -7419,12 +7422,14 @@
     )
   )
 )
-(label "SOURCE_MGR_SPARE1"
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
   (at 650.24 288.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d104e1d9-4cdc-5532-a87e-3b12cd8854dd)
 )
-(label "GND"
+(hierarchical_label "HP_DETECT"
+  (shape bidirectional)
   (at 650.24 295.91 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 964cef88-c10e-5f3b-bf05-71cfbb44f0b9)
