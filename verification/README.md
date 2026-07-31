@@ -51,6 +51,9 @@ The current independent verdict remains **SCHEMATIC BLOCKED**.
 - [`INDEPENDENT_REVIEW_2026-07-27_postfix.md`](INDEPENDENT_REVIEW_2026-07-27_postfix.md)
   - post-fix audit: closed R250/R251 trackpad USB physical short, current PCB
   integrity, and the remaining release holds
+- [`USER_FACING_BEHAVIOR_2026-07-31.md`](USER_FACING_BEHAVIOR_2026-07-31.md) -
+  user-visible feature checklist: intended behavior and schematic evidence for
+  every user-facing function (lid, USB-C roles, boot, audio, display, input)
 - [`KEYBOARD_FFC_ASSEMBLY_CONTRACT_2026-07-15.md`](KEYBOARD_FFC_ASSEMBLY_CONTRACT_2026-07-15.md)
   - keyboard cable orientation and continuity checks
 - [`MECHANICAL_RETENTION_VALIDATION_2026-07-18.md`](MECHANICAL_RETENTION_VALIDATION_2026-07-18.md)

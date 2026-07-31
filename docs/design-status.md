@@ -1,6 +1,6 @@
 # Current Design Status
 
-Updated: 2026-07-27
+Updated: 2026-07-31
 
 ## Release Boundary
 
@@ -10,6 +10,8 @@ fabrication-ready PCB, safe battery system, released enclosure, or working
 target firmware. The 2026-07-27 independent review and its post-fix audit are
 the current release record: [`full review`](../verification/INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
 and [`post-fix audit`](../verification/INDEPENDENT_REVIEW_2026-07-27_postfix.md).
+User-facing behavior intent is recorded in
+[`USER_FACING_BEHAVIOR_2026-07-31.md`](../verification/USER_FACING_BEHAVIOR_2026-07-31.md).
 
 The relocated direct-solder trackpad lands `J58` no longer overlap stale GND
 zone fill, the three duplicate physical PCB references `U170`, `U2004`, and
@@ -36,6 +38,7 @@ The current copied-project schematic gate reports:
 | Bounded electrical calculations | 123 pass, 0 fail |
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard duplicate physical references | 0 |
+| User-facing behavior checklist | 25 of 25 rows have schematic evidence; firmware/ACPI items held |
 | BOM procurement gaps | 370 |
 | Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
 
