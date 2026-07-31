@@ -32,10 +32,15 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
    fuse, SMCJ24CA 24 V bidirectional clamp, 100 V reverse FET, TPS26630 eFuse,
    then BQ25798 (01, 05).
 5. **Headphone output (ACTION):** there is no headphone jack on the
-   motherboard; user expects one. Must be added to sheet 15 (system audio).
-6. **Keyboard layout (VERIFIED, review pending):** 65-key compact layout with
-   **no function-key row** (see layout below) — user wants the exact key
-   layout verified before release.
+   motherboard; user expects one. Confirmed design: 3.5 mm stereo jack on the
+   **rear edge**, plug-detect mutes the speakers, TPA6130A2-class headphone
+   amp driven from the PCM2900C line-out (sheet 15).
+6. **Keyboard layout (VERIFIED, locked):** 65-key compact layout, **no
+   function-key row**, split spacebar, arrows in the bottom-right cluster.
+   User confirmed on 2026-07-31 — and the keyboard PCB is **already
+   fabricated**, so the layout is locked. Fn layers (F1-F10, `~, brightness,
+   volume) remain a firmware assignment, not a board change. See rendered
+   board: `docs/images/keyboard-layout-2026-07-31.png`.
 7. **Fan policy (RESOLVED):** fan is controlled by the STM32 EC; the curve must
    never be annoyingly loud at idle but must not throttle under load either —
    "I'll take the noise if it's more performing" (performance-biased curve).
@@ -61,7 +66,7 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
 | 7 | check battery | trusted OS percentage + OLED status of all system components | BQ34Z100-G1 gauge (01); OLED content spec below | RESOLVED |
 | 8 | use the AUX connector | it accepts any voltage in range and charges | 6-22V nominal: fuse + 24V clamp + eFuse -> BQ25798 (01) | RESOLVED |
 | 9 | use the screen | full res, smooth 120 Hz, OS brightness control | Mu 40-pin eDP -> AUO B160QAN03.K (03, docs/display-direct-edp.md) | VERIFIED |
-| 10 | type | layout is what I expect (verified before release) | 65-key matrix, no F-row; see layout below | PENDING |
+| 10 | type | layout is what I expect (confirmed; board already fabricated) | 65-key matrix, no F-row, split space; Fn layers = firmware | VERIFIED |
 | 11 | use the trackpad | cursor, tap, click, scroll, gestures like a normal laptop | J58 direct-solder USB (GND/D-/D+/VBUS) -> hub (08, docs) | VERIFIED |
 | 12 | listen to speakers / headphones | speakers work with volume control; headphones when plugged in | PCM2900CDBR -> TPA2012D2 -> speakers (15); **jack MISSING — ACTION** | ACTION |
 | 13 | do a call / recording | onboard mic works like any laptop mic | chip-down digital mic path (15) | VERIFIED |
@@ -85,9 +90,10 @@ Row 2: `Caps(1.5u) A S D F G H J K L ; ' Enter(1.75u)`
 Row 3: `Shift(1.75u) Z X C V B N M , . / Up Shift(1.25u)`
 Row 4: `Ctrl Fn Super Alt Space(2.25u) Space(2.25u) Alt Menu Left Down Right`
 
-Notes: no F1-F12, no dedicated `~, no volume/brightness keys — these need Fn
+Notes: no F1-F12, no dedicated `~, no volume/brightness keys — these are Fn
 layers in EC firmware (e.g., Fn+1..0 = F1..F10, Fn+Esc = `~, Fn+arrows =
-brightness/volume). **Pending user confirmation before release.**
+brightness/volume). Layout is locked: the keyboard PCB is already fabricated.
+Rendered board: `docs/images/keyboard-layout-2026-07-31.png`.
 
 ## OLED content spec (2x SSD1306)
 
@@ -98,11 +104,11 @@ EC firmware version.
 
 ## Action Items
 
-1. **Add headphone jack to the motherboard** (sheet 15): headphone amp +
-   3.5 mm jack with plug-detect that mutes the speakers (normal laptop
-   behavior). Placement and jack style to be confirmed.
-2. **Confirm keyboard layout** (see above) — especially the missing F-row,
-   `~ key, and Fn-layer assignments.
+1. **Add headphone jack to the motherboard** (sheet 15): 3.5 mm stereo jack,
+   rear edge, plug-detect mutes speakers, TPA6130A2-class amp from the
+   PCM2900C line-out. User-confirmed on 2026-07-31.
+2. **Keyboard Fn-layer assignments** (firmware only — board is fabricated and
+   layout is locked): F1-F10, `~, brightness, volume.
 3. OLED content is a firmware spec; record confirmed above.
 
 ## Held Items (not waived)
