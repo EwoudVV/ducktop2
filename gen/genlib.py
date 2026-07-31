@@ -79,6 +79,8 @@ LIBMAP = {
     "USB2512B": "USB2512B",
     "PCM2704C": "PCM2704C",
     "TPA2012D2": "TPA2012D2",
+    "TPA6130A2": "TPA6130A2",
+    "AudioJack3_SwitchTR": "Connector_Audio",
     "74LVC1G08": "74xGxx",
     "74LVC1G373": "74xGxx",
     "74LVC2G04": "74xGxx",

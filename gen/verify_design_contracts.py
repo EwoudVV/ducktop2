@@ -900,7 +900,7 @@ def check_ec_core(components):
     source_manager_pins = {
         "1": "/EC & MCU/SOURCE_MGR_INT_N", "2": "GND", "3": "/EC & MCU/NRST_NET",
         "4": "/PD1_PATH_EN", "5": "/PD2_PATH_EN",
-        "6": "/EC & MCU/SOURCE_MGR_SPARE1",
+        "6": "/HP_DETECT",
         "7": "/PD1_EFUSE_FAULT_N", "8": "/PD2_EFUSE_FAULT_N",
         "9": "/EC & MCU/SOURCE_MGR_SPARE2", "10": "/PACK_FAULT_N",
         "11": "/AUX_FAULT_N", "12": "GND", "13": "/PACK_RETRY_PULSE",
@@ -921,7 +921,10 @@ def check_ec_core(components):
     expect_value_prefix(components, "R781", "10k", "aggregate AON fault pull-up")
     expect(net(components, "R781", "1"), "/MCU_3V3", "aggregate AON fault pull-up rail")
     expect(net(components, "R781", "2"), "/AON_FAULT_N", "aggregate AON fault input")
-    for index in range(1, 3):
+    expect_value_prefix(components, "R782", "100k", "HP_DETECT pull-up")
+    expect(net(components, "R782", "1"), "/MCU_3V3", "HP_DETECT pull-up rail")
+    expect(net(components, "R782", "2"), "/HP_DETECT", "HP_DETECT jack-detect signal (U44 pin 6, sheet 15 jack RN)")
+    for index in range(2, 3):
         ref = f"R{781 + index}"
         expect_value_prefix(components, ref, "100k", f"{ref} source-manager spare pull-down")
         expect(net(components, ref, "1"), f"/EC & MCU/SOURCE_MGR_SPARE{index}", f"{ref} spare signal")

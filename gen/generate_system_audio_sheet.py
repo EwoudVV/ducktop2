@@ -12,6 +12,12 @@ TPA2012D2_FOOTPRINT = (
     "Package_DFN_QFN:WQFN-20-1EP_4x4mm_P0.5mm_"
     "EP2.7x2.7mm_ThermalVias"
 )
+# TPA6130A2 RTJ (WQFN-20, 4x4mm, EP 2.7x2.7mm, 0.5mm pitch) shares the exact
+# same land pattern as the TPA2012D2 RTJ package already used for the speaker amp.
+TPA6130A2_FOOTPRINT = (
+    "Package_DFN_QFN:WQFN-20-1EP_4x4mm_P0.5mm_"
+    "EP2.7x2.7mm_ThermalVias"
+)
 SINGLE_AND_FOOTPRINT = "Package_TO_SOT_SMD:SOT-23-5"
 SPEAKER_FOOTPRINT = FOOTPRINTS["Conn_01x02_Service_GH"]
 FERRITE_FOOTPRINT = "Inductor_SMD:L_0603_1608Metric"
@@ -535,6 +541,91 @@ def build(sheet_symbol_uuid):
             "Warning": "BTL OUTPUT: NEITHER PIN IS GROUND",
         },
     )
+
+    s.text(20, 459.74, "== Rear 3.5 mm headphone jack: TPA6130A2 DirectPath I2C headphone amp + plug-detect speaker mute ==")
+    s.text(20, 467.36, "U425 taps the PCM2900C DAC_VOUT_L/R line outputs single-ended (0.47u coupling into LEFTINM/RIGHTINM, INP AC-grounded).")
+    s.text(20, 474.98, "DirectPath capless outputs HPLEFT/HPRIGHT drive jack J422 T/R. RN (ring normalling) = HP_DETECT: unplugged shorts RN to R (amp 0V) -> low; plugged floats -> R782 100k pull-up (sheet 02) -> high.")
+    s.text(20, 482.6, "EC reads HP_DETECT via U44 pin 6 over I2C; on plug-in it drives AUDIO_AMP_EC_EN low (U421 mutes speakers) and I2C-unmutes U425. /SD tied to MU_HOST_ACTIVE so U425 is in hardware shutdown (0.4uA) outside S0.")
+    s.text(20, 490.22, "TPA6130A2 @0x60 (fixed). Power-on default = muted, outputs disabled (fail-safe OFF until EC firmware unmutes/enables over I2C). No G0/G1 hardware gain; 64-step I2C volume gives independent headphone level.")
+
+    s.place(
+        "U425", "TPA6130A2", "TPA6130A2RTJR DirectPath stereo headphone amp", 390, 500.38,
+        footprint=TPA6130A2_FOOTPRINT,
+        pin_nets={
+            "1": ("HP_INM_L", "local"), "2": ("HP_INP_L", "local"),
+            "3": ("GND", "local"),
+            "4": ("HP_INP_R", "local"), "5": ("HP_INM_R", "local"),
+            "6": ("MU_HOST_ACTIVE", "hier"),
+            "7": ("I2C_SDA", "hier"), "8": ("I2C_SCL", "hier"),
+            "9": ("GND", "local"), "10": ("GND", "local"),
+            "11": ("HP_OUT_R", "local"),
+            "12": ("AUDIO_5V", "local"),
+            "13": ("GND", "local"),
+            "14": ("HP_OUT_L", "local"),
+            "15": ("CPVSS", "local"), "16": ("CPVSS", "local"),
+            "17": ("CPN", "local"), "18": ("CPP", "local"),
+            "19": ("GND", "local"),
+            "20": ("AUDIO_5V", "local"),
+            "21": ("GND", "local"),
+        },
+        extra_props={
+            "Manufacturer": "Texas Instruments",
+            "MPN": "TPA6130A2RTJR",
+            "I2CAddress7Bit": "0x60",
+            "Datasheet": "https://www.ti.com/lit/ds/symlink/tpa6130a2.pdf",
+            "ReferenceCircuit": "TPA6130A2 QFN-20 (RTJ) typical single-ended application (datasheet 9.2.2.1/9.2.2.2)",
+            "PowerOnDefault": "Not in hardware shutdown but muted with outputs disabled; EC firmware unmutes/enables over I2C",
+            "DetectContract": "HP_DETECT (jack RN) read on U44 pin 6; EC mutes speakers via AUDIO_AMP_EC_EN and unmutes U425 on plug-in",
+        },
+    )
+
+    # Single-ended inputs per datasheet 9.2.2.1: signal -> INM, INP AC-grounded
+    # to ground through a matched cap for CMRR (Rin min 37k -> ~20 Hz corner).
+    s.place("C457", "C", "0.47u L input coupling to LEFTINM", 20, 508.0,
+            footprint=FOOTPRINTS["C_1u"],
+            pin_nets={"1": ("DAC_VOUT_L", "local"), "2": ("HP_INM_L", "local")})
+    s.place("C458", "C", "0.47u L INP AC-ground reference", 110, 508.0,
+            footprint=FOOTPRINTS["C_1u"],
+            pin_nets={"1": ("HP_INP_L", "local"), "2": ("GND", "local")})
+    s.place("C459", "C", "0.47u R input coupling to RIGHTINM", 20, 520.7,
+            footprint=FOOTPRINTS["C_1u"],
+            pin_nets={"1": ("DAC_VOUT_R", "local"), "2": ("HP_INM_R", "local")})
+    s.place("C460", "C", "0.47u R INP AC-ground reference", 110, 520.7,
+            footprint=FOOTPRINTS["C_1u"],
+            pin_nets={"1": ("HP_INP_R", "local"), "2": ("GND", "local")})
+
+    # Charge pump (DirectPath negative rail) and VDD bypass per datasheet 9.2.2.2/9.2.2.3.
+    s.place("C461", "C", "1u charge-pump flying CPP-CPN", 500, 508.0,
+            footprint=FOOTPRINTS["C_1u"], pin_nets={"1": ("CPP", "local"), "2": ("CPN", "local")})
+    s.place("C462", "C", "1u CPVSS negative-rail decoupling", 500, 520.7,
+            footprint=FOOTPRINTS["C_1u"], pin_nets={"1": ("CPVSS", "local"), "2": ("GND", "local")})
+    s.place("C463", "C", "1u VDD pin 12 analog bypass", 560, 508.0,
+            footprint=FOOTPRINTS["C_1u"], pin_nets={"1": ("AUDIO_5V", "local"), "2": ("GND", "local")})
+    s.place("C464", "C", "1u VDD pin 20 charge-pump supply bypass", 560, 520.7,
+            footprint=FOOTPRINTS["C_1u"], pin_nets={"1": ("AUDIO_5V", "local"), "2": ("GND", "local")})
+    s.place("C465", "C", "100n VDD high-frequency bypass", 620, 508.0,
+            footprint=FOOTPRINTS["C_100n"], pin_nets={"1": ("AUDIO_5V", "local"), "2": ("GND", "local")})
+
+    s.place(
+        "J422", "AudioJack3_SwitchTR", "CUI SJ1-3535NG rear 3.5mm stereo headphone jack", 700, 500.38,
+        footprint="Connector_Audio:Jack_3.5mm_CUI_SJ1-3535NG_Horizontal",
+        pin_nets={
+            "T": ("HP_OUT_L", "local"),
+            "R": ("HP_OUT_R", "local"),
+            "S": ("GND", "local"),
+            "TN": ("", "nc"),
+            "RN": ("HP_DETECT", "hier"),
+        },
+        extra_props={
+            "Manufacturer": "CUI Devices", "MPN": "SJ1-3535NG",
+            "Datasheet": "https://www.cui.com/product/resource/sj1-353xng.pdf",
+            "Detect": "RN ring normalling switch: closed to R (amp 0V) when unplugged, open when plugged -> R782 pull-up drives HP_DETECT high on insertion",
+            "SpeakerMute": "EC reads HP_DETECT (U44 pin 6) and drives AUDIO_AMP_EC_EN low to mute the TPA2012D2 speaker amp via U421",
+        },
+    )
+
+    s.text(20, 528.32, "HEADPHONE LAYOUT: keep the jack, VDD bypass, and charge-pump caps away from the mic preamp (MK430) and class-D speaker outputs.")
+    s.text(20, 533.4, "HEADPHONE STANDBY: /SD tied to MU_HOST_ACTIVE (S0-only) so U425 draws 0.4uA in S3; EC unmutes/enables over I2C only while host active.")
 
     s.text(20, 538.48, "== Built-in mono microphone: IM68A130 + low-noise 2.8V rail + low-noise preamp ==")
     s.place(

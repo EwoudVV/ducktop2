@@ -1124,7 +1124,7 @@ def main():
         maker_hier_nets,
     )
     system_audio_block, system_audio_pins = sheet_block(
-        system_audio_sheet_uuid, 680, 330, 135, 60, "System Audio", "15_system_audio.kicad_sch",
+        system_audio_sheet_uuid, 680, 330, 135, 85, "System Audio", "15_system_audio.kicad_sch",
         system_audio_hier_nets,
     )
     ethernet_block, ethernet_pins = sheet_block(
