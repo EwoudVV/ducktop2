@@ -129,6 +129,8 @@ the first article.
 6. ~~Complete manufacturer part numbers, ratings, assembly constraints, and
    alternate sourcing for the remaining BOM gaps.~~ — COMPLETED (43 gaps assigned Murata GRM). Requires schematic update to commit.
 7. Finish reviewed power, PCIe, USB, HDMI, Ethernet, audio, and control routing.
+8. Add headphone jack with plug-detect (mutes speakers) to the system audio
+   sheet per the user-facing behavior checklist.
 8. Refill zones only in a copied board, clean silkscreen, run full DRC, and
    review every exception.
 9. Complete eDP harness, battery-pack, trackpad-cable retention, thermal, RF,
