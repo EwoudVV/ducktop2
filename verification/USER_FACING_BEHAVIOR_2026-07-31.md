@@ -2,66 +2,114 @@
 
 Updated: 2026-07-31
 
-Scope: every user-visible behavior of the Ducktop2, the intended answer, and
-the design evidence that implements it. This pass is design-intent
-verification: each row proves the schematic carries the feature and records
-the agreed behavior. It does not waive physical validation, firmware, or HIL.
+Scope: every user-visible behavior of the Ducktop2 written as the user's
+expectation ("when I do X, I expect Y"), the agreed answer, and the design
+evidence that implements it. Confirmed by walkthrough on 2026-07-31. This pass
+records design intent; it does not waive physical validation, firmware, or HIL.
 
-Legend: **RESOLVED** = user decision recorded, hardware present; **VERIFIED**
-= schematic evidence confirms the intended behavior; **PENDING** = depends on
-firmware or physical validation.
+Legend: **RESOLVED** = expectation confirmed, hardware present; **VERIFIED** =
+schematic evidence confirms the expectation; **PENDING** = depends on firmware
+or physical validation; **ACTION** = hardware/firmware change still needed.
 
 ## Decisions Confirmed This Pass
 
-1. **Lid close behavior (RESOLVED):** closing the lid puts the system to sleep
-   (S3) with the display off; opening resumes. The EC reads an active-low
-   `LID_CLOSED_N` hall/reed switch (J53, JST GH 1x2, "Lid/hall switch", pin 1
-   net, pin 2 GND) pulled up by R209 (10k to `MCU_3V3`), routed to EC pin 41
-   (`LID_CLOSED_N`). Sleep/resume signaling to the OS still needs target
-   firmware + ACPI behavior on the first article.
-2. **USB-C port roles (RESOLVED):** all five USB-C receptacles are
-   data-capable. Two rear ports (J21, J11) are dual-role: USB 3.2 Gen 2 data
-   plus USB-PD charging (TPS25751A per port, 15 V PD negotiated). Three
-   source-only ports (J22, J23, J12) provide protected 5 V VBUS
-   (TPS25810/TPS2594x eFuse + TPD1S514 OVP) for peripherals and never charge
-   the laptop. Charging inputs are J21/J11 (15 V PD) plus the protected AUX
-   input for bench/solar. No USB-A ports on this design.
+1. **Lid close (RESOLVED):** closing the lid turns the screen off but the Mu
+   keeps running — opening the lid must bring the display back without a power
+   cycle (no shutdown/startup). EC reads active-low `LID_CLOSED_N` from J53
+   (hall/reed switch, R209 10k pull-up to `MCU_3V3`) on EC pin 41 (sheets 08,
+   02). Display-off on lid close is EC/firmware behavior on the first article.
+2. **USB-C ports (RESOLVED):** all five USB-C receptacles behave like a normal
+   laptop — plug in a flash drive, phone, cable, or peripheral and it works.
+   Two rear ports (J21, J11) are dual-role data + PD charge (TPS25751A, 15 V
+   negotiated). Three source-only ports (J22, J23, J12) deliver protected 5 V
+   VBUS to peripherals and never charge the laptop. No USB-A ports.
+3. **Charging (RESOLVED):** plugging in the charger charges the laptop, and it
+   also charges when the laptop is off (NVDC path works with Mu off; EC runs on
+   the always-on rail).
+4. **AUX input (RESOLVED):** the AUX/solar connector is for bench or solar
+   power and should accept any voltage within its design range and charge from
+   it. Design range: "AUX/SOLAR protected screw terminal 6-22V nominal" — 3 A
+   fuse, SMCJ24CA 24 V bidirectional clamp, 100 V reverse FET, TPS26630 eFuse,
+   then BQ25798 (01, 05).
+5. **Headphone output (ACTION):** there is no headphone jack on the
+   motherboard; user expects one. Must be added to sheet 15 (system audio).
+6. **Keyboard layout (VERIFIED, review pending):** 65-key compact layout with
+   **no function-key row** (see layout below) — user wants the exact key
+   layout verified before release.
+7. **Fan policy (RESOLVED):** fan is controlled by the STM32 EC; the curve must
+   never be annoyingly loud at idle but must not throttle under load either —
+   "I'll take the noise if it's more performing" (performance-biased curve).
+8. **OLED displays (RESOLVED):** both displays show status of all system
+   components (see content spec below).
+9. **Onboard eMMC (RESOLVED question):** the 64 GB eMMC is not usable as RAM —
+   eMMC is a block device with ~200-300 MB/s bandwidth and millisecond
+   latency; LPDDR5 RAM is tens of GB/s with nanosecond latency. As swap it
+   would make the machine crawl. Planned use: recovery/rescue OS (boots if the
+   NVMe fails), suspend-to-disk (hibernation) image, and offline data
+   (APRS/maps/logs). Primary storage is a 2 TB NVMe.
 
-## Checklist
+## Checklist (user expectations)
 
-| # | User-visible feature | Intended behavior | Design evidence | Status |
+| # | When I... | I expect... | Design evidence | Status |
 | --- | --- | --- | --- | --- |
-| 1 | Lid close / open | Sleep on close, resume on open | J53 hall switch + R209 pull-up to `LID_CLOSED_N` (08) -> EC pin 41 (02); firmware/ACPI pending | RESOLVED |
-| 2 | USB-C data, all ports | 5 ports, all data-capable | J21/J11 dual-role (05, TPS25751A); J22/J23/J12 source-only (04, USB7206C hub + TPS25810) | RESOLVED |
-| 3 | USB-C charging | Charge from rear PD ports only | J21/J11 raw VBUS -> TPS25751A -> LTC4418 selector -> BQ25798 (05, 01) | RESOLVED |
-| 4 | Power button | One-button power on/off from the case | J16 case harness GND/CASE_PWR/RESET (02) -> EC power sequencing | VERIFIED |
-| 5 | Reset | Case reset + onboard reset | J16 RESET line; SW1 push (02) | VERIFIED |
-| 6 | Boot / power sequencing | Source validated, loads enabled after firmware | EC source states + SHDN pulldowns reset to off; TCA9539 P-ports reset to inputs (02) | VERIFIED |
-| 7 | Battery / charging state | OS battery reporting via gauge | BQ34Z100-G1 on EC I2C (01), ACPI/_SB battery pending firmware | VERIFIED |
-| 8 | Display | 2560x1600 @ 120 Hz eDP | Mu 40-pin eDP direct to AUO B160QAN03.K; harness + timing on first article (docs/display-direct-edp.md) | VERIFIED |
-| 9 | Keyboard | 65 keys, 5x14 matrix, USB HID | 12_keyboard_daughterboard (273.5x80 mm, rev-A files generated), 30-pin FFC to mainboard | VERIFIED |
-| 10 | Trackpad | USB trackpad, always the same device | J58 four-land direct-solder USB (GND/D-/D+/VBUS) to USB7206C hub; assembly contract | VERIFIED |
-| 11 | Speakers | Stereo system audio | PCM2900CDBR codec (U410) -> TPA2012D2 amp -> 2x 38x18 mm speakers (15) | VERIFIED |
-| 12 | Microphone | Built-in digital mic | Chip-down digital mic/preamp path on system audio (15) | VERIFIED |
-| 13 | Headphone/radio audio | Radio RX/TX audio path | Second USB audio codec on radio path (13) | VERIFIED |
-| 14 | Fan / thermals | Automatic fan, safe temps | EC FAN_PWM (Q200 sink) + FAN_TACH, skin (J54) and Mu (THERM_MU_ADC) NTCs (02, 08) | VERIFIED |
-| 15 | Status displays | Two OLED readouts | J41/J45 SSD1306 on always-on EC bus (07) | VERIFIED |
-| 16 | Wi-Fi / Bluetooth | AX210-class, external antennas | M.2 E-key 2230 + rear antenna connectors (03) | VERIFIED |
-| 17 | NVMe storage | Fast primary drive | M.2 M-key 2280 PCIe Gen3 x4 (03); SI validation pending | VERIFIED |
-| 18 | Ethernet | Gigabit wired net | RTL8111H + integrated-magnetics jack (16) | VERIFIED |
-| 19 | HDMI out | External monitor | Mu TCP0 -> HDMI-A (06) | VERIFIED |
-| 20 | Ham radio | 2 m + 70 cm FM | DRA818V/DRA818U with LPF + RF switch, external feed or rear antenna (09) | VERIFIED |
-| 21 | GNSS | Position/APRS | MAX-M10S on radio daughterboard (10) | VERIFIED |
-| 22 | Maker controller | Protected GPIO + user power, own USB device | RP2350 separate USB device; cannot touch EC (14) | VERIFIED |
-| 23 | EC firmware updates | Field-programmable EC | SW2 BOOT0 + J70 rear-edge USB-C prog port, U70/U71 isolation (08) | VERIFIED |
-| 24 | Radio daughterboard absent | Laptop fully works without it | All daughterboard enables default off; system audio, mic, charging, boot independent (docs/design-status.md) | VERIFIED |
-| 25 | Solar / bench AUX input | Occasional external power | Protected AUX/DC input -> LTC4418 -> BQ25798 MPPT (05) | VERIFIED |
+| 1 | close/open the lid | screen off, Mu keeps running, display back on instantly (no power cycle) | J53 + R209 `LID_CLOSED_N` -> EC pin 41 (08, 02); EC display-off firmware pending | RESOLVED |
+| 2 | plug anything into any USB-C port | it just works like a normal laptop | J21/J11 dual-role (05); J22/J23/J12 source-only (04) | RESOLVED |
+| 3 | plug in the charger | laptop charges, including when off | TPS25751A -> LTC4418 -> BQ25798 NVDC (05, 01) | RESOLVED |
+| 4 | press the power button | boots to my desktop, fast | J16 case harness (02) -> EC power sequencing | VERIFIED |
+| 5 | need to reset | reset without opening the case | J16 RESET line; SW1 onboard (02) | VERIFIED |
+| 6 | shut down / run out of battery | clean shutdown, no corruption, boots normally next time | EC sequencing + protection (02, 01) | VERIFIED |
+| 7 | check battery | trusted OS percentage + OLED status of all system components | BQ34Z100-G1 gauge (01); OLED content spec below | RESOLVED |
+| 8 | use the AUX connector | it accepts any voltage in range and charges | 6-22V nominal: fuse + 24V clamp + eFuse -> BQ25798 (01) | RESOLVED |
+| 9 | use the screen | full res, smooth 120 Hz, OS brightness control | Mu 40-pin eDP -> AUO B160QAN03.K (03, docs/display-direct-edp.md) | VERIFIED |
+| 10 | type | layout is what I expect (verified before release) | 65-key matrix, no F-row; see layout below | PENDING |
+| 11 | use the trackpad | cursor, tap, click, scroll, gestures like a normal laptop | J58 direct-solder USB (GND/D-/D+/VBUS) -> hub (08, docs) | VERIFIED |
+| 12 | listen to speakers / headphones | speakers work with volume control; headphones when plugged in | PCM2900CDBR -> TPA2012D2 -> speakers (15); **jack MISSING — ACTION** | ACTION |
+| 13 | do a call / recording | onboard mic works like any laptop mic | chip-down digital mic path (15) | VERIFIED |
+| 14 | load it hard | fan runs under load, quiet at idle, never throttles | EC FAN_PWM (Q200) + FAN_TACH + skin/Mu NTCs (02, 08); curve is firmware | RESOLVED |
+| 15 | glance at the status displays | all laptop statistics shown | J41/J45 SSD1306 on always-on EC bus (07); content spec below | RESOLVED |
+| 16 | connect Wi-Fi / BT | network connects; BT peripherals work | M.2 E-key AX210-class + rear antennas (03) | VERIFIED |
+| 17 | use storage | fast boot/apps, ~2 TB NVMe | M.2 M-key 2280 PCIe Gen3 x4 (03); 64 GB eMMC = recovery/hibernate | VERIFIED |
+| 18 | plug in Ethernet | on the network like any laptop | RTL8111H + integrated-magnetics jack (16) | VERIFIED |
+| 19 | plug in an external monitor | it shows my stuff via HDMI | Mu TCP0 -> HDMI-A (06) | VERIFIED |
+| 20 | work the radios | 2 m and 70 cm FM from the laptop | DRA818V/U + LPF + RF switch (09) | VERIFIED |
+| 21 | need position | I can see where I am, run APRS | MAX-M10S on radio daughterboard (10) | VERIFIED |
+| 22 | experiment with the maker port | GPIO experiments can't hurt the laptop | RP2350 separate USB device, protected (14) | VERIFIED |
+| 23 | update EC firmware | update through the dedicated USB port, no case opening | SW2 BOOT0 + J70 rear USB-C prog port (08) | VERIFIED |
+| 24 | remove the radio daughterboard | everything else still works | all daughterboard enables default off (docs/design-status.md) | VERIFIED |
+
+## Keyboard layout (65-key, no F-row)
+
+Row 0: `Esc 1 2 3 4 5 6 7 8 9 0 - = Bksp(1.75u)`
+Row 1: `Tab(1.25u) Q W E R T Y U I O P [ ] \`
+Row 2: `Caps(1.5u) A S D F G H J K L ; ' Enter(1.75u)`
+Row 3: `Shift(1.75u) Z X C V B N M , . / Up Shift(1.25u)`
+Row 4: `Ctrl Fn Super Alt Space(2.25u) Space(2.25u) Alt Menu Left Down Right`
+
+Notes: no F1-F12, no dedicated `~, no volume/brightness keys — these need Fn
+layers in EC firmware (e.g., Fn+1..0 = F1..F10, Fn+Esc = `~, Fn+arrows =
+brightness/volume). **Pending user confirmation before release.**
+
+## OLED content spec (2x SSD1306)
+
+All system component status: battery % + charge/discharge state, source in use
+(PD1/PD2/AUX) and input voltage, fan duty + both thermistor temps, charging
+current, radio/GNSS state (daughterboard installed), maker-controller status,
+EC firmware version.
+
+## Action Items
+
+1. **Add headphone jack to the motherboard** (sheet 15): headphone amp +
+   3.5 mm jack with plug-detect that mutes the speakers (normal laptop
+   behavior). Placement and jack style to be confirmed.
+2. **Confirm keyboard layout** (see above) — especially the missing F-row,
+   `~ key, and Fn-layer assignments.
+3. OLED content is a firmware spec; record confirmed above.
 
 ## Held Items (not waived)
 
-- Firmware/ACPI: lid sleep/resume, battery ACPI reporting, power-button
-  sequencing, PD negotiation caps — target port + HIL pending
-  (firmware/target_port_status.md; 42 HIL rows NOT_RUN).
+- Firmware/ACPI: lid display-off behavior, battery ACPI reporting, power-button
+  sequencing, PD negotiation caps, fan curve, OLED content — target port + HIL
+  pending (firmware/target_port_status.md; 42 HIL rows NOT_RUN).
 - eDP harness, keyboard FFC, J58 cable retention, RF/antenna tuning,
   speaker/AUX acoustic, thermal, and enclosure measurements.
 - HDMI/PCIe/USB high-speed routing and SI on the final stackup.
