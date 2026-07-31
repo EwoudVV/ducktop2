@@ -22,8 +22,8 @@ signal-integrity, battery, mechanical, procurement, or HIL holds below.
 
 ## Schematic
 
-The active motherboard hierarchy contains 14 generated child sheets, 1,173
-components, 1,362 nets, and 4,522 connected pins. The retired Intehill
+The active motherboard hierarchy contains 14 generated child sheets, 1,184
+components, 1,372 nets, and 4,566 connected pins. The retired Intehill
 controller, VL822 hub, carrier-eDP, and USB-C video sheets are not part of the
 root design.
 
@@ -34,12 +34,12 @@ The current copied-project schematic gate reports:
 | KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
 | Generated schematic self-check | Pass |
 | Schematic design contracts | Pass |
-| Independent netlist closure | 1,569 pass, 0 fail |
+| Independent netlist closure | 1,580 pass, 0 fail |
 | Bounded electrical calculations | 123 pass, 0 fail |
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard duplicate physical references | 0 |
 | User-facing behavior checklist | 25 of 25 rows have schematic evidence; firmware/ACPI items held |
-| BOM procurement gaps | 370 |
+| BOM procurement gaps | 378 |
 | Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
 
 The remaining pin-review rows are broad Mu, M.2, MCU, spare, NC, and ground-pin
@@ -47,6 +47,19 @@ classifications that require human context; they are not detected electrical
 failures. The ERC warning allowlist is tied to exact references and pins. It
 covers 13 flattened KiCad symbol copies and 14 required GPIO/strap ties that
 KiCad sees sharing the global ground power flag.
+
+Sheet 15 now carries the rear 3.5 mm headphone jack the user-verified behavior
+required (row 12): J422 CUI SJ1-3535NG driven by U425 TPA6130A2RTJR DirectPath
+I2C headphone amp (fixed address 0x60) from the PCM2900C line-out. Plug-detect
+is the jack ring-normalling contact (RN = HP_DETECT) read by the EC on U44 pin
+6 (a recovered source-manager spare input) with R782 100k pull-up; on plug-in
+the EC drives AUDIO_AMP_EC_EN low so the existing U421 AND gate mutes the
+TPA2012D2 speaker amp, and I2C-unmutes U425. /SD is tied to MU_HOST_ACTIVE
+(S0-only, 0.4 uA in S3) and the amp powers up muted with outputs disabled
+(fail-safe OFF). ERC stays 0 errors / 27 intentional warnings and closure rose
+to 1,580 nets. U425/J422 carry their MPN properties; the 9 new small caps do
+not, which is why BOM procurement gaps moved 370 -> 378 (pending the separate
+BOM-assignment pass).
 
 ## PCB
 

@@ -106,7 +106,7 @@ Full record: `verification/USER_FACING_BEHAVIOR_2026-07-31.md` (25 rows, all con
 | 8 | Keyboard | 65-key compact, NO F-row, NO `~ key, split spacebar. Fn layers handle F1–F10/`~/brightness/volume. **BOARD IS ALREADY FABRICATED — layout locked.** |
 | 9 | Trackpad | USB via J58 direct-solder, like normal laptop. |
 | 10 | Speakers | PCM2900C → TPA2012D2 → 2 speakers. |
-| 11 | Headphone jack | **MISSING — must add.** Rear edge, plug-detect mutes speakers, TPA6130A2-class amp. THIS IS THE NEXT HARDWARE TASK. |
+| 11 | Headphone jack | **DONE (2026-07-31, fae06d4).** Rear 3.5mm CUI SJ1-3535NG + TPA6130A2RTJR DirectPath I2C headphone amp; plug-detect (RN) mutes speakers via existing AUDIO_AMP_EC_EN/U421 AND gate. See `HANDOFF_HEADPHONE_JACK.md` Status. Firmware (I2C unmute/volume, read HP_DETECT) is the remaining work. |
 | 12 | Onboard mic | Works like any laptop mic. |
 | 13 | eMMC | 64 GB = recovery/rescue OS + hibernation image. NOT usable as RAM. Primary = 2 TB NVMe. |
 | 14 | Ethernet | RTL8111H gigabit, like normal laptop. |
@@ -196,6 +196,7 @@ e8a8249 Add 3D STEP models for remaining components
 - **BOM MPN assignments:** 327 MPNs assigned (370→43 gaps). Commit `57008c8`.
 - **6-layer stackup:** Committed to `ducktop2.kicad_pcb`. Commit `dc019f9`.
 - **Trackpad USB fix:** J58 lands relocated, R250/R251 physical short removed, duplicate refs (U170, U2004, U2014) removed. Commit `66c243f`.
+- **Rear 3.5mm headphone jack:** J422 CUI SJ1-3535NG + U425 TPA6130A2RTJR DirectPath I2C headphone amp on sheet 15, plug-detect (HP_DETECT on recovered U44 spare input) auto-mutes speakers via the existing U421 AND gate; new TPA6130A2 symbol + LIBMAP + sym-lib-table, contracts updated SOURCE_MGR_SPARE1->HP_DETECT, System Audio root block enlarged to fit new hier pins. Commits `c329f95` (stale-MPN schematic sync) + `fae06d4`.
 
 ---
 
@@ -203,7 +204,7 @@ e8a8249 Add 3D STEP models for remaining components
 
 ### High Priority (Next Session)
 
-1. **Headphone jack** — Add 3.5 mm rear jack + TPA6130A2 amp + plug-detect to `15_system_audio`. Full handoff: `HANDOFF_HEADPHONE_JACK.md` (design, parts, steps, file locations, gotchas).
+1. **Headphone jack — DONE (fae06d4).** Schematic on sheet 15 (J422 SJ1-3535NG + U425 TPA6130A2RTJR + HP_DETECT on U44 spare input); EC firmware (I2C enable/unmute/volume, read HP_DETECT, drive AUDIO_AMP_EC_EN) is the remaining work. See `HANDOFF_HEADPHONE_JACK.md` Status section.
 2. **Keyboard Fn-layer firmware** — F1–F10, `~, brightness, volume assignments for the fabricated 65-key board.
 3. **Fan curve firmware** — STM32 EC, quiet idle, performance-biased under load, no throttle.
 4. **OLED content firmware** — All system component status.
