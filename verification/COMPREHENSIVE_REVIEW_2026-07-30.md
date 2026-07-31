@@ -158,6 +158,22 @@ This is a sophisticated, well-documented custom laptop design built around the L
 - EC controls: power sequencing, keyboard scan, fan, thermal, lid switch, OLEDs, radio enables. If EC fails to boot, the laptop is bricked.
 - STM32F407's USB peripheral requires careful clock configuration — verify that HSE crystal frequency and PLL settings are correct in firmware for USB operation.
 
+### EC Programming & Debug Access (2026-07-31 update)
+
+**Closed gap: EC was previously SWD-only (TC2030 J4) with BOOT0 strapped low — no field/bench reprogramming path if SWD is unavailable. Resolved with two additions:**
+
+1. **Dedicated rear-edge USB-C programming port (J70, 08_internal_services.kicad_sch)** — new section "Programming USB-C port section (DFU bootloader access)":
+   - J70 Molex 105450-0101 USB-C receptacle (rear PCB edge, visually differentiated from side data/PD ports) → U70 USBLC6-2P6 ESD + R222/R223 22Ω series tapped onto MCU_USB_DP/DM (STM32F407 PA11/PA12, OTG_FS device mode).
+   - VBUS → U71 AP2112K-3.3 LDO (600 mA) → D70 BAT54WS Schottky diode-OR into MCU_3V3 rail. The LDO powers only the EC domain — the diode and rail topology prevent the host Mac from back-driving/starting the rest of the system (Mu, charger, VSYS).
+   - U61 (TS3USB30E hub mux) is high-Z when unpowered, so the DFU port shares PA11/PA12 without bus conflict while the system is off.
+   - R220/R221 5.1 kΩ CC pulldowns (source-only role); C220 1 µF input / C221 100 nF output.
+   - Entry: hold BOOT0 (SW2) + tap Reset (SW1) at power-up → STM32 system bootloader DFU over USB.
+2. **SW2 BOOT0 button (02_ec_mcu.kicad_sch)** — Omron B3S-1000 SMD tactile switch between MCU_3V3 and BOOT0_NET; R33 10 kΩ pull-down retained so default boot is flash.
+
+**Maker MCU (RP2350) upload path reviewed and accepted as-is:** internal hub route (USB → TS3USB30E → USB7206C hub → external USB-C) is sufficient — the board enumerates normally in the device list when the laptop is on, which is the upload scenario. No additional port added.
+
+**Verification status:** structural checks pass (balanced s-expressions, unique UUIDs, all 10 new references J70/U70/U71/R220–R223/C220/C221/D70 present, hierarchical labels MCU_USB_DP/DM + MCU_3V3 match sheet connectivity). **Pending:** KiCad ERC on both sheets, footprint review, and net-class assignment for the two 22 Ω USB data stubs before committing to the PCB.
+
 ---
 
 ## 5. Audio System (15_system_audio.kicad_sch)
