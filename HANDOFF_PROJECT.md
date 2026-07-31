@@ -50,13 +50,41 @@ and push to origin every 5–10 commits.
 
 ---
 
-## 2. Workflow Rules
+## 2. How the AI Should Work
+
+### Project Rules (from AGENTS.md — re-read after any compaction)
+
+This is a very high stakes project. Everything matters.
+
+- **Always know the roadmap.** Understand the full context, architecture, and goals before acting. Infer what you can; only ask if you truly can't proceed.
+- **Plan before executing.** Think through each step, consider alternatives and edge cases, then execute deliberately. Never rush.
+- **Be autonomous.** Don't ask for confirmation on obvious steps, small decisions, or routine things. Just do them. If you're reasonably confident about what to do, do it and show the result. Save questions for when you genuinely can't proceed without input.
+- **Work carefully and thoroughly.** Check your work. Verify assumptions. Don't cut corners.
+- **Take as much time as you need.** There is no time pressure. Doing it right is the only priority.
+
+### User's Workflow Rules
 
 1. **Always update the todo list** when starting/completing work items.
 2. **Commit as work completes** — atomic commits with clear messages.
 3. **Push to origin every 5–10 commits** — don't let local history diverge too far.
 4. **Keep documentation current** — update design-status.md, verification records, README.md as things change.
 5. **Don't touch `radio_daughterboard/radio_daughterboard.kicad_pcb`** — it has pre-existing unrelated uncommitted changes. Leave it alone.
+
+### Communication Style
+
+- **Plain language.** Ellie communicates in plain English, not engineering jargon. Match that style.
+- **Don't over-ask.** Only ask questions when you genuinely can't proceed. Prefer proposed defaults over open-ended questions.
+- **Show, don't tell.** Do the work, show the result, commit. Don't explain what you're going to do — just do it.
+- **Ask first when resuming.** If you're unsure whether you remember context from a previous session, ask before acting. Ellie said: "ask first because i dont know if you remember."
+- **Update docs as you go.** Don't batch documentation at the end — keep design-status.md, verification records, and README.md current throughout.
+
+### Compaction Survival
+
+After conversation compaction, you will receive a summary instead of the full history. To counteract this:
+1. Re-read AGENTS.md (re-injected after compaction).
+2. Assume the summary is incomplete. If unsure about context, **ask the user** — but only after exhausting what you can infer.
+3. Do not get sloppy. Compaction is when mistakes happen. Double-check every assumption.
+4. Re-establish the roadmap before taking any action after a compaction boundary.
 
 ---
 
