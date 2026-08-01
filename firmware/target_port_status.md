@@ -115,7 +115,7 @@ The EC uses a single I2C1 peripheral (PB6=SCL, PB7=SDA) with a TCA9548A mux to i
 ### ADC (Thermal)
 | Pin | Signal | ADC Channel | Notes |
 |-----|--------|------------|-------|
-| PA6 | AUX_DC_ADC | ADC1_IN3 | AUX DC input voltage |
+| PA6 | AUX_DC_ADC | ADC1_IN6 | AUX DC input voltage |
 | PA7 | THERM_SKIN_ADC | ADC1_IN7 | Skin temperature |
 | PB0 | THERM_MU_ADC | ADC1_IN8 | Mu coldplate temperature |
 

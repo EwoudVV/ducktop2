@@ -191,8 +191,10 @@ typedef struct {
 
 #define ADC_CR1_RES_12BIT   (0u << 24)
 #define ADC_CR2_CONT        (1u << 1)
+#define ADC_CR2_CAL         (1u << 2)
 #define ADC_CR2_ADON        (1u << 0)
 #define ADC_CR2_SWSTART     (1u << 30)
+#define ADC_CCR_ADCPRE_DIV4 (1u << 16)
 #define ADC_SR_EOC          (1u << 1)
 
 typedef struct {
@@ -302,6 +304,7 @@ typedef struct {
 #define RCC_AHB1ENR_DMA1EN    (1u << 21)
 #define RCC_AHB1ENR_DMA2EN    (1u << 22)
 
+#define RCC_APB1ENR_TIM2EN   (1u << 0)
 #define RCC_APB1ENR_I2C1EN   (1u << 21)
 #define RCC_APB1ENR_USART2EN (1u << 17)
 #define RCC_APB1ENR_USART3EN (1u << 18)
@@ -379,6 +382,7 @@ typedef struct {
 #define NVIC_ICER2          (*((__IO uint32_t *)0xE000E188u))
 #define NVIC_ICER3          (*((__IO uint32_t *)0xE000E18Cu))
 #define NVIC_IPR_BASE       0xE000E400u
+#define NVIC_IPR(irqn)      (*((__IO uint8_t *)(NVIC_IPR_BASE + (irqn))))
 
 typedef struct {
     __IO uint32_t KR;

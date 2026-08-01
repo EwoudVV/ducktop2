@@ -161,6 +161,7 @@ Default_Handler:
 .macro irq_handler name
 .thumb_func
 .type \name, %function
+.weak \name
 \name:
     b Default_Handler
 .endm
