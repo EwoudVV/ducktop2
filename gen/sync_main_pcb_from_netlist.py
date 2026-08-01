@@ -39,17 +39,22 @@ FOOTPRINT_DIRS = [
 ]
 
 CURRENT_ECO_ADD_ONLY = {
-    # July 23 USB_PORT_5V over-voltage fix and U771 always-powered supervisor.
-    "R777", "R778",
+    # 2026-08-01: rear headphone-jack section + debug headers that were
+    # added to the schematic (fae06d4, 07-31 DFU work) but never synced to
+    # the PCB.  Anchors are PROPOSED placements in the free rear-edge
+    # region (x 110..240, y 150..185); review before routing.
+    "C457", "C458", "C459", "C460",
+    "C461", "C462", "C463", "C464", "C465",
+    "J422", "U425",
 }
-CURRENT_ECO_REPLACE_ONLY = {"U771", "J58"}
+CURRENT_ECO_REPLACE_ONLY = set()  # past replacements (U771/J58) settled
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
 POST_ADD_FOOTPRINT_REFRESH = set()
 
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
-ALLOWED_REMOVE_ONLY = {"U63", "R254", "C281", "C282", "C284"}
+ALLOWED_REMOVE_ONLY = set()  # past removals (U63/R254/C281/C282/C284) settled
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()
 
@@ -65,6 +70,22 @@ ANCHORS_MM = {
     # Mu guide; the current placement is a release hold and has no approved anchor.
     "C502": (314.5, 105.0, 0.0),
     "C503": (314.5, 103.8, 0.0),
+
+    # 2026-08-01 proposed rear headphone section (rear edge, free x 110..240):
+    # J422 SJ1-3535NG body spans local y[-5.2, 12.8]; rot 0 exits the plug
+    # through the top edge (y=185).  U425 WQFN-20 below it; 0805 caps in two
+    # 2x2 blocks either side; C465 0603 under U425.
+    "J422": (140.0, 172.2, 0.0),
+    "U425": (140.0, 158.0, 0.0),
+    "C465": (140.6, 152.0, 0.0),
+    "C461": (130.5, 163.0, 0.0),
+    "C462": (130.5, 159.5, 0.0),
+    "C463": (133.6, 163.0, 0.0),
+    "C464": (133.6, 159.5, 0.0),
+    "C457": (146.4, 163.0, 0.0),
+    "C458": (146.4, 159.5, 0.0),
+    "C459": (149.5, 163.0, 0.0),
+    "C460": (149.5, 159.5, 0.0),
 
     "U45": (296.0, 33.0, 0.0),
     "C185": (296.0, 42.0, 0.0),
@@ -858,7 +879,7 @@ def main(argv: list[str] | None = None) -> int:
                 f"missing_allowed={sorted(CURRENT_ECO_ADD_ONLY - actual_missing)} "
                 f"unexpected={sorted(actual_missing - CURRENT_ECO_ADD_ONLY)}"
             )
-        if actual_extra != ALLOWED_REMOVE_ONLY:
+        if set(actual_extra) != ALLOWED_REMOVE_ONLY:
             raise RuntimeError(f"unexpected remove ECO: {sorted(actual_extra)}")
         if actual_replacements != CURRENT_ECO_REPLACE_ONLY:
             raise RuntimeError(
