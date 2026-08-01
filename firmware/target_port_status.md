@@ -15,6 +15,45 @@ machine). Nine host suites + the release contract pass via
 `tools/run_host_tests.sh`. The remaining work in every step below is
 target-side: drivers, transports, and HIL evidence.
 
+**2026-08-01 Addition: EC target driver stack + keyboard path DONE.** The
+review's HANDED OFF driver stack is complete and integrated into
+`ec_target/` (binary now 17,320 bytes):
+
+- **BQ25798 charger driver** (`bq25798.c/h`, I2C 0x6B, datasheet-verified
+  SLUSDV2C register map): probe/init, charge current/voltage/input current
+  setters with readback, charge status, one-shot ADC telemetry
+  (Vbus/Vbat/Ibat/Ibus), watchdog pet. 225 host checks (incl. a scriptable
+  `i2c_mock` bus for full transaction-path testing).
+- **BQ34Z100 fuel gauge driver** (`bq34z100.c/h`, I2C 0x55, SLUSBZ5D):
+  SBS reads (SOC, voltage, current, temps, capacities, times, cycle count,
+  flags), control commands, 8-bit block-protocol checksum (host-verified).
+- **Thermal ADC hardening** (`gpio.c`): fixed a real bug — AUX_DC read
+  channel 3 (PA3 = PMIC_QON_ASSERT output) instead of PA6/ADC1_IN6;
+  calibration once, 84-cycle sample time, bounded EOC wait.
+- **Fan PWM/tach** (`gpio.c`, `fan_math.c`): corrected to the Delta
+  BFB04512HHA-CZ0T contract — 25 kHz (was 1 kHz), PE9/TIM1_CH1 AF1,
+  complement encoding for the Q200 gate, no illegal CH1N write (PB13 is
+  GNSS_RESET_N); tach = EXTI + 1 MHz TIM2 period with 2-pulse/rev RPM math.
+- **App glue** (`ec_app.c/h`, `ec_app_math.c`): binds drivers to the policy
+  contracts; NTC ADC -> decidegrees via a fixed integer lookup table
+  (freestanding target has no libm); fan spin-up holds 35% for 1 s (Delta
+  start duty vs 30% policy floor); IINDPM commit wired to the charger.
+- **Keyboard matrix scan** (`matrix_scan.c/h`, `matrix_debounce.c`):
+  5x14 scan per the locked schematic contract (drive columns low, read rows
+  with pull-ups; KB_ROW0-4 = PE0-4, KB_COL0-13 = PD0-13), 15 ms debounce
+  state machine (host-tested), scanned from the 1 ms SysTick.
+- **USB HID keyboard device stack** (`usb_hid.c/h`, `usb_hid_desc.c/h`):
+  OTG_FS device mode on PA11/PA12, boot-protocol keyboard + consumer
+  interfaces, EP1/EP2 interrupt IN, full EP0 control state machine
+  (descriptors, SET_ADDRESS deferral, configuration), descriptors +
+  report-size walker host-tested (32 checks).
+- 16 host suites pass (policy cores, keymap, fan, lid, battery, bq drivers,
+  fan math, app math, matrix debounce, usb descriptors, maker) + the
+  release contract, and the target builds clean with -Werror.
+
+Remaining target-side: OS battery/telemetry transport (ec_battery report +
+telemetry forwarding to the Mu over USB), SWD/DFU bring-up, and HIL.
+
 **2026-07-30 Completion: Steps 1–4 (foundation) are DONE.** A working ARM GCC toolchain was set up, the firmware compiles cleanly with `-Wall -Wextra -Wpedantic -Werror` on GCC 16.1.0, and produces `ducktop2_ec.bin` (9,228 bytes). The binary initializes the STM32F407VGT6 with HSE 8 MHz → PLL → 168 MHz core, SysTick 1 ms tick, I2C1 master at 400 kHz, GPIO safe-state on all pins, and calls `ec_controller_step()` at 50 Hz. See below for file inventory.
 
 **2026-07-31 Addition: host-tested keyboard Fn-layer keymap.** `ec/src/ec_keymap.c`
