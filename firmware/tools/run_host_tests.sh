@@ -86,6 +86,13 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
     "$ROOT/tests/test_maker_policy.c" \
     -o "$BUILD_DIR/maker_policy_tests"
 
+"$CC_BIN" $COMMON_FLAGS \
+    -I"$ROOT/ec_target" \
+    -I"$ROOT/ec/include" \
+    "$ROOT/ec_target/matrix_debounce.c" \
+    "$ROOT/tests/test_matrix_debounce.c" \
+    -o "$BUILD_DIR/matrix_debounce_tests"
+
 "$BUILD_DIR/ec_policy_tests"
 "$BUILD_DIR/ec_commit_tests"
 "$BUILD_DIR/ec_telemetry_tests"
@@ -98,6 +105,7 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
 "$BUILD_DIR/fan_math_tests"
 "$BUILD_DIR/ec_app_math_tests"
 "$BUILD_DIR/maker_policy_tests"
+"$BUILD_DIR/matrix_debounce_tests"
 python3 "$ROOT/tools/verify_release_contract.py"
 
 printf '%s\n' "host tests: PASS ($CC_BIN)"

@@ -76,6 +76,10 @@ add_library(ducktop2_maker_policy STATIC maker/src/maker_policy.c)
 target_include_directories(ducktop2_maker_policy PUBLIC maker/include)
 ducktop2_target_defaults(ducktop2_maker_policy)
 
+add_library(ducktop2_matrix_debounce STATIC ec_target/matrix_debounce.c)
+target_include_directories(ducktop2_matrix_debounce PUBLIC ec_target ec/include)
+ducktop2_target_defaults(ducktop2_matrix_debounce)
+
 add_executable(ec_policy_tests tests/test_ec_policy.c)
 target_link_libraries(ec_policy_tests PRIVATE ducktop2_ec_policy)
 ducktop2_target_defaults(ec_policy_tests)
@@ -135,6 +139,11 @@ add_executable(maker_policy_tests tests/test_maker_policy.c)
 target_link_libraries(maker_policy_tests PRIVATE ducktop2_maker_policy)
 ducktop2_target_defaults(maker_policy_tests)
 add_test(NAME maker_policy_tests COMMAND maker_policy_tests)
+
+add_executable(matrix_debounce_tests tests/test_matrix_debounce.c)
+target_link_libraries(matrix_debounce_tests PRIVATE ducktop2_matrix_debounce)
+ducktop2_target_defaults(matrix_debounce_tests)
+add_test(NAME matrix_debounce_tests COMMAND matrix_debounce_tests)
 
 find_package(Python3 COMPONENTS Interpreter QUIET)
 if(Python3_Interpreter_FOUND)
