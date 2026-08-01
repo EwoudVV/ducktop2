@@ -27,6 +27,8 @@ set(CMAKE_C_FLAGS_DEBUG "-Og -g3 -DDEBUG")
 set(CMAKE_C_FLAGS_RELEASE "-O2 -g0 -DNDEBUG")
 set(CMAKE_EXE_LINKER_FLAGS "${COMMON_FLAGS} -Wl,--gc-sections -Wl,-Map=${CMAKE_PROJECT_NAME}.map")
 set(CMAKE_ASM_FLAGS "-mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16")
+set(CMAKE_ASM_FLAGS_DEBUG "-g")
+set(CMAKE_ASM_FLAGS_RELEASE "")
 
 file(STRINGS "${CMAKE_CURRENT_LIST_DIR}/../VERSION" DUCKTOP2_FIRMWARE_VERSION
      LIMIT_COUNT 1)
@@ -47,6 +49,11 @@ set(TARGET_SOURCES
     system_stm32f4xx.c
     gpio.c
     i2c.c
+    bq25798.c
+    bq34z100.c
+    ec_app.c
+    ec_app_math.c
+    fan_math.c
     libc_stubs.c
 )
 
@@ -56,6 +63,7 @@ set(POLICY_SOURCES
     "${EC_SRC_DIR}/ec/src/ec_policy.c"
     "${EC_SRC_DIR}/ec/src/ec_commit.c"
     "${EC_SRC_DIR}/ec/src/ec_telemetry.c"
+    "${EC_SRC_DIR}/ec/src/ec_fan.c"
 )
 
 add_executable(ducktop2_ec ${TARGET_SOURCES} ${POLICY_SOURCES})

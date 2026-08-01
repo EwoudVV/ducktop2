@@ -1,6 +1,7 @@
 #include "ducktop2/ec/ec_policy.h"
 #include "ducktop2/ec/ec_commit.h"
 #include "ducktop2/ec/ec_telemetry.h"
+#include "ec_app.h"
 #include "gpio.h"
 #include "i2c.h"
 #include "stm32f4xx.h"
@@ -91,10 +92,12 @@ static bool commit_write(void *context, ec_commit_command_t command, uint32_t va
         return true;
 
     case EC_COMMIT_CHARGER_IINDPM_MA:
-        return true;
+        return ec_app_apply_charger_iindpm_ma((uint16_t)value);
 
     case EC_COMMIT_CHARGE_BUDGET_MW:
-
+        /* Charge-current setpoint from the budget needs a pack-voltage
+         * reference; the gauge telemetry feeds it in a later pass.  The
+         * policy still validates and reports the budget through telemetry. */
         return true;
 
     case EC_COMMIT_MU_EDP_BUDGET_MW:
@@ -195,21 +198,10 @@ static void read_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *telemetry)
     inputs->all_pd_paths_off = true;
 
     inputs->charger_fault_n = gpio_get_charger_int_n();
-    inputs->charger_config_valid = false;
-    inputs->charger_iindpm_applied = false;
-    inputs->applied_charger_iindpm_ma = 0;
 
-    inputs->vsys_valid = true;
-    inputs->vsys_mv = 19000;
+    ec_app_read_power_inputs(inputs, telemetry);
 
     inputs->mu_12v_pg = gpio_get_mu_12v_pg();
-
-    inputs->thermal_ok = true;
-    inputs->thermal_data_valid = true;
-
-    inputs->pack_telemetry_valid = false;
-    inputs->pack_low = false;
-    inputs->pack_only = false;
 
     inputs->estimated_mu_edp_power_valid = false;
     inputs->estimated_mu_edp_power_mw = 0;
@@ -241,6 +233,8 @@ int main(void)
 
     i2c1_init();
 
+    ec_app_init();
+
     gpio_set_gnss_reset_n(false);
     gpio_set_service_mux_reset(false);
 
@@ -250,6 +244,9 @@ int main(void)
     ec_telemetry_inputs_t telemetry_inputs;
     ec_telemetry_snapshot_t telemetry_snapshot;
     ec_inputs_t inputs;
+    ec_fan_config_t fan_config = ec_fan_default_config();
+    ec_fan_state_t fan_state;
+    ec_fan_state_init(&fan_state);
 
     ec_controller_init(&controller, &config, 0);
     ec_commit_state_init(&commit_state);
@@ -283,6 +280,11 @@ int main(void)
 
         const ec_outputs_t *outputs = ec_controller_outputs(&controller);
         ec_commit_apply(&commit_state, &commit_driver, outputs);
+
+        uint16_t fan_rpm;
+        uint8_t fan_duty = ec_app_fan_step(&fan_config, &fan_state, now_ms, &fan_rpm);
+        (void)fan_duty;
+        (void)fan_rpm;
 
         ec_telemetry_build_snapshot(&telemetry_snapshot, &telemetry_inputs);
 
