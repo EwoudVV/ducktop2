@@ -54,6 +54,8 @@ set(TARGET_SOURCES
     ec_app.c
     ec_app_math.c
     fan_math.c
+    matrix_scan.c
+    matrix_debounce.c
     libc_stubs.c
 )
 
@@ -64,6 +66,7 @@ set(POLICY_SOURCES
     "${EC_SRC_DIR}/ec/src/ec_commit.c"
     "${EC_SRC_DIR}/ec/src/ec_telemetry.c"
     "${EC_SRC_DIR}/ec/src/ec_fan.c"
+    "${EC_SRC_DIR}/ec/src/ec_keymap.c"
 )
 
 add_executable(ducktop2_ec ${TARGET_SOURCES} ${POLICY_SOURCES})

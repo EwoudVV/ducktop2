@@ -1,9 +1,11 @@
 #include "ducktop2/ec/ec_policy.h"
 #include "ducktop2/ec/ec_commit.h"
 #include "ducktop2/ec/ec_telemetry.h"
+#include "ducktop2/ec/ec_keymap.h"
 #include "ec_app.h"
 #include "gpio.h"
 #include "i2c.h"
+#include "matrix_scan.h"
 #include "stm32f4xx.h"
 
 static volatile uint32_t g_tick_ms = 0;
@@ -11,6 +13,7 @@ static volatile uint32_t g_tick_ms = 0;
 void SysTick_Handler(void)
 {
     g_tick_ms++;
+    matrix_scan_tick(g_tick_ms);
 }
 
 static inline uint32_t read_primask(void)
@@ -231,6 +234,8 @@ int main(void)
 
     gpio_init_all();
 
+    matrix_scan_init();
+
     i2c1_init();
 
     ec_app_init();
@@ -285,6 +290,15 @@ int main(void)
         uint8_t fan_duty = ec_app_fan_step(&fan_config, &fan_state, now_ms, &fan_rpm);
         (void)fan_duty;
         (void)fan_rpm;
+
+        ec_keymap_matrix_t matrix;
+        ec_hid_keyboard_report_t keyboard_report;
+        ec_hid_consumer_report_t consumer_report;
+        matrix_scan_get_matrix(&matrix);
+        ec_keymap_process(&matrix, &keyboard_report, &consumer_report);
+        /* Reports are staged for the USB HID transport (usb_hid.c). */
+        (void)keyboard_report;
+        (void)consumer_report;
 
         ec_telemetry_build_snapshot(&telemetry_snapshot, &telemetry_inputs);
 
