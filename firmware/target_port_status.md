@@ -11,6 +11,20 @@ All 42 HIL rows in `release/hil_matrix.csv` are **NOT_RUN**. No HIL evidence yet
 
 **2026-07-30 Completion: Steps 1–4 (foundation) are DONE.** A working ARM GCC toolchain was set up, the firmware compiles cleanly with `-Wall -Wextra -Wpedantic -Werror` on GCC 16.1.0, and produces `ducktop2_ec.bin` (9,228 bytes). The binary initializes the STM32F407VGT6 with HSE 8 MHz → PLL → 168 MHz core, SysTick 1 ms tick, I2C1 master at 400 kHz, GPIO safe-state on all pins, and calls `ec_controller_step()` at 50 Hz. See below for file inventory.
 
+**2026-07-31 Addition: host-tested keyboard Fn-layer keymap.** `ec/src/ec_keymap.c`
+(+ `ec/include/ducktop2/ec/ec_keymap.h`) translates the fabricated 5×14 MX ULP
+matrix state into a USB HID boot-6KRO keyboard report plus a 4-slot consumer
+report, applying the user-confirmed Fn layer: Fn+1..0→F1..F10, Fn+Esc→grave,
+Fn+Bksp→Delete, Fn+Up/Down→Brightness ±, Fn+Left/Right→Volume ∓. Pure C, no
+hardware dependence; 22 host tests in `tests/test_ec_keymap.c` cover every
+mapping, Fn passthrough, modifier combine, 6KRO overflow (ErrorRollOver),
+consumer concurrency, and report reset. Wired into `run_host_tests.sh` and
+`CMakeLists.txt` (new `ducktop2_ec_keymap` library + `ec_keymap_tests`).
+Remaining target-side work for the keyboard is the matrix scan (drive rows/read
+cols per the diode orientation in `generate_keyboard_daughterboard_sheet.py`)
+and the USB HID interface — both target-only steps; the keymap logic itself is
+complete and host-verified.
+
 ---
 
 ## 1. I2C Bus Topology

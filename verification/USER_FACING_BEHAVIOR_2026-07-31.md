@@ -112,7 +112,10 @@ EC firmware version.
    rear edge, plug-detect mutes speakers, TPA6130A2-class amp from the
    PCM2900C line-out. User-confirmed on 2026-07-31.
 2. **Keyboard Fn-layer assignments** (firmware only — board is fabricated and
-   layout is locked): F1-F10, `~, brightness, volume.
+   layout is locked): F1-F10, `~, brightness, volume — **host-tested keymap core
+   DONE** in `firmware/ec/src/ec_keymap.c` (commit pending): Fn+1..0=F1..F10,
+   Fn+Esc=`~, Fn+Bksp=Delete, Fn+Up/Down=brightness, Fn+Left/Right=volume.
+   22 host tests pass; remaining is the target-side matrix scan + USB HID.
 3. OLED content is a firmware spec; record confirmed above.
 
 ## Held Items (not waived)

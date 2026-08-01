@@ -61,6 +61,17 @@ to 1,580 nets. U425/J422 carry their MPN properties; the 9 new small caps do
 not, which is why BOM procurement gaps moved 370 -> 378 (pending the separate
 BOM-assignment pass).
 
+The host-tested EC firmware gained a keyboard Fn-layer keymap module
+(`firmware/ec/src/ec_keymap.c` + `ec_keymap.h`) — pure C that translates the
+fabricated 5×14 MX ULP matrix state into a USB HID boot-6KRO report plus a
+4-slot consumer report, applying the user-confirmed Fn layer (Fn+1..0=F1..F10,
+Fn+Esc=`~, Fn+Bksp=Delete, Fn+Up/Down=brightness, Fn+Left/Right=volume). 22
+host tests pass in `tests/test_ec_keymap.c`, wired into `run_host_tests.sh` and
+`CMakeLists.txt` as `ducktop2_ec_keymap` / `ec_keymap_tests`. The target-side
+matrix scan (drive rows, read columns per the diode orientation in
+`generate_keyboard_daughterboard_sheet.py`) and the USB HID interface remain;
+the keymap logic itself is host-verified.
+
 ## PCB
 
 The reviewed PCB SHA-256 is
