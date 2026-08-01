@@ -81,6 +81,16 @@ flag at 80C for PL1 reduction; fail-safe 100% on invalid temps. 16 host tests
 pass (`tests/test_ec_fan.c`), wired as `ducktop2_ec_fan` / `ec_fan_tests`. The
 target side (NTC ADC→decidegrees + TIM1_CH1 PWM duty write) remains.
 
+The host-tested OLED content composer (`firmware/ec/src/ec_oled.c` + `ec_oled.h`)
+implements the user-verified "all system component status" spec (row 7/15) as
+two 8-line text buffers: left = power/battery (source+V, SOC+state, pack V/I/P,
+TTE/TTF, capacity, cycles+health), right = thermal/fan/system (fan duty+state,
+skin/Mu temps, throttle flag, radio DB state, maker, EC version, EC fault).
+Invalid data renders as dashes (no misleading zero/stale). 16 host tests pass
+(`tests/test_ec_oled.c`), wired as `ducktop2_ec_oled` / `ec_oled_tests`. The
+target side (SSD1306 I2C behind TCA9548A ch0/ch1 + 5x8 glyph rasterisation
+into the 128x64 1bpp page buffers) remains.
+
 ## PCB
 
 The reviewed PCB SHA-256 is
