@@ -78,6 +78,30 @@ Enable them later, once the Fedora NVMe is easy to recover:
 sudo bash install/system-theme.sh --enable-sddm --enable-plymouth
 ```
 
+## eMMC Recovery And Hibernate
+
+The 64 GB onboard eMMC is the recovery/rescue OS + hibernation image target.
+Design and setup tooling:
+
+- [`docs/emmc-recovery.md`](docs/emmc-recovery.md) — layout, sizing math, boot
+  flow, hibernate config, recovery procedures.
+- [`install/emmc-recovery-setup.sh`](install/emmc-recovery-setup.sh) — guarded
+  setup (partition, build recovery OS, bootloader, hibernate resume). It
+  requires `--device` and `--yes`, and has `--check` / `--dry-run` preview
+  modes. Execute during Mu bring-up (roadmap Phase 5):
+
+```bash
+sudo bash install/emmc-recovery-setup.sh --device /dev/mmcblk0 --check
+sudo bash install/emmc-recovery-setup.sh --device /dev/mmcblk0 --dry-run
+sudo bash install/emmc-recovery-setup.sh --device /dev/mmcblk0 --yes
+```
+
+After the daily driver runs, configure hibernate resume onto the eMMC swap:
+
+```bash
+sudo bash install/emmc-recovery-setup.sh --configure-hibernate
+```
+
 ## Design Rule
 
 Ducktop2 should feel like a real laptop with a cyberdeck-native shell, not a novelty desktop. Keep live-looking telemetry out of static images. Real status belongs in widgets and the future EC daemon.

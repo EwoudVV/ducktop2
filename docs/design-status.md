@@ -183,6 +183,16 @@ results. The hardware defaults were designed so reset removes source-path and
 load enables before firmware runs, but target behavior must still be proved on
 the first article.
 
+## Software
+
+The 64 GB eMMC recovery/hibernate design and setup tooling are done:
+`software/os-theme/docs/emmc-recovery.md` (GPT layout, sizing math, boot flow,
+hibernate resume config, recovery procedures) plus the guarded installer
+`software/os-theme/install/emmc-recovery-setup.sh` (`--check`/`--dry-run`
+preview modes; refuses non-eMMC devices, mounted partitions, and the running
+root). Execution happens at Mu bring-up, which is not possible before the
+hardware exists.
+
 ## Work in Progress
 
 1. ✅ Correct the J58 stored-zone failure without moving unrelated routing.

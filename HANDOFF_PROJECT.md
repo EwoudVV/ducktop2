@@ -212,8 +212,8 @@ e8a8249 Add 3D STEP models for remaining components
 
 ### Medium Priority
 
-- Battery reporting firmware/ACPI
-- eMMC role: recovery/rescue OS + hibernation image setup
+- Battery reporting firmware/ACPI — **DONE (f223750)** host-tested `ec_battery` state machine (UNKNOWN/NOT_PRESENT/DISCHARGING/CHARGING/FULL with hysteresis, 18 tests); target-side BQ34Z100 I2C + report transport to Mu OS `power_supply` remains
+- eMMC role: recovery/rescue OS + hibernation image setup — **DONE** design + guarded setup script (`software/os-theme/docs/emmc-recovery.md`, `install/emmc-recovery-setup.sh`); execute at Mu bring-up
 - Documentation updates (design-status.md date is 2026-07-31, verify current state)
 - Complete BOM/orderable BOM (370 gaps remain)
 
