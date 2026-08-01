@@ -73,6 +73,10 @@ def parse_board(board_text: str) -> dict[str, dict]:
                     nums = re.match(r"\(size\s+([-0-9.eE]+)\s+([-0-9.eE]+)", board_text[i:])
                     if nums:
                         pad["size"] = (float(nums.group(1)), float(nums.group(2)))
+                elif token == "net":
+                    nm = re.match(r'\(net\s+"([^"]+)"', board_text[i:])
+                    if nm:
+                        pad["net"] = nm.group(1)
             i += len(m.group(0)) if m else 1
         elif c == ")":
             depth -= 1
