@@ -14,9 +14,21 @@
     "ethernet_mdi_diff_ohm": 100,
     "rf_single_ended_ohm": 50
   },
+  "proposed_trace_geometries": {
+    "source": "gen/compute_impedance.py (Hammerstad/Jensen + IPC-2141, 2026-08-01)",
+    "reference": "L1 microstrip to L2 GND, 2116 prepreg h=0.125mm eps_r=4.2, 1oz",
+    "candidates": {
+      "pcie_diff_85": {"width_mm": 0.29, "spacing_mm": 0.8, "model_z_ohm": 84.8},
+      "usb3_diff_90": {"width_mm": 0.26, "spacing_mm": 0.612, "model_z_ohm": 90.0},
+      "hdmi_diff_100": {"width_mm": 0.215, "spacing_mm": 0.679, "model_z_ohm": 100.0},
+      "ethernet_mdi_diff_100": {"width_mm": 0.215, "spacing_mm": 0.679, "model_z_ohm": 100.0},
+      "general_se_50": {"width_mm": 0.216, "model_z_ohm": 50.0},
+      "usb2_se_45": {"width_mm": 0.262, "model_z_ohm": 45.0}
+    }
+  },
   "approved_trace_geometries": null,
   "fabricator_quote_or_drawing": null,
   "approved_by": null,
   "approved_utc": null,
-  "note": "Stackup design committed to ducktop2.kicad_pcb (2026-07-30). Run NextPCB impedance calculator to verify trace widths for each target. Do not change status to APPROVED until NextPCB supplies and approves the exact production stackup and impedance geometries."
+  "note": "Stackup design committed to ducktop2.kicad_pcb (2026-07-30). Candidate trace geometries computed 2026-08-01 (verification/IMPEDANCE_VERIFICATION_2026-08-01.md). Submit to NextPCB engineering review for field-solver confirmation; do not change status to APPROVED until NextPCB supplies and approves the exact production stackup and impedance geometries."
 }

@@ -44,6 +44,10 @@ The current independent verdict remains **SCHEMATIC BLOCKED**.
 - [`BOM_RELEASE_GAPS_2026-08-01.md`](BOM_RELEASE_GAPS_2026-08-01.md) -
   procurement identity gaps: 0 (closed 2026-08-01; all passives stamped at
   generation time from [`gen/bom_catalog.py`](../gen/bom_catalog.py))
+- [`IMPEDANCE_VERIFICATION_2026-08-01.md`](IMPEDANCE_VERIFICATION_2026-08-01.md)
+  - candidate 50/85/90/100 Ω trace geometries on the committed stackup
+  (reproducible via [`gen/compute_impedance.py`](../gen/compute_impedance.py));
+  pending NextPCB field-solver confirmation
 - [`SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md`](SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md)
   - copied-project post-fix reference, footprint, pad-net, and DNP comparison
 - [`INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md`](INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)

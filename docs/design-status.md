@@ -150,7 +150,11 @@ The PCB is not ready for fabrication. In particular, it still requires
 high-speed routing and SI constraints; power-loop, thermal, and back-power
 review; a complete orderable BOM; a clean final DRC/parity result; and physical
 validation. ~~A reviewed controlled-impedance stackup~~ was needed —
-**COMPLETED via P1.4** (committed to `ducktop2.kicad_pcb`).
+**COMPLETED via P1.4** (committed to `ducktop2.kicad_pcb`). Candidate trace
+geometries for 50/85/90/100 Ω were computed 2026-08-01
+(`verification/IMPEDANCE_VERIFICATION_2026-08-01.md`,
+`gen/compute_impedance.py`) and are pending the NextPCB engineering review
+before routing starts.
 
 The removable radio/GNSS/audio daughterboard has 126 placed footprints. Its
 schematic passes ERC with no warnings, and its mainboard interface defaults off
