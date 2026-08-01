@@ -1,6 +1,6 @@
 # Current Design Status
 
-Updated: 2026-07-31
+Updated: 2026-08-01
 
 ## Release Boundary
 
@@ -31,7 +31,7 @@ The current copied-project schematic gate reports:
 
 | Check | Result |
 | --- | --- |
-| KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
+| KiCad ERC | 0 errors; 27 intentional warnings (13 library-copy + 14 grounded-pin ties) |
 | Generated schematic self-check | Pass |
 | Schematic design contracts | Pass |
 | Independent netlist closure | 1,580 pass, 0 fail |
@@ -200,18 +200,23 @@ hardware exists.
    duplicate-only copper; add a release-gate uniqueness check.
 3. ✅ Move unconnected R251 clear of R250, verify the trackpad D+/D- physical
    short and local solder-mask bridge are absent, and preserve existing routing.
-4. Classify and resolve all remaining PCB DRC, unconnected, and parity findings.
-5. ~~Freeze the six-layer stackup and controlled-impedance geometries.~~ — COMPLETED via P1.4.
-6. ~~Complete manufacturer part numbers, ratings, assembly constraints, and
-   alternate sourcing for the remaining BOM gaps.~~ — COMPLETED (43 gaps assigned Murata GRM). Requires schematic update to commit.
-7. Finish reviewed power, PCIe, USB, HDMI, Ethernet, audio, and control routing.
-8. Add headphone jack with plug-detect (mutes speakers) to the system audio
-   sheet per the user-facing behavior checklist.
-8. Refill zones only in a copied board, clean silkscreen, run full DRC, and
-   review every exception.
-9. Complete eDP harness, battery-pack, trackpad-cable retention, thermal, RF,
-   and enclosure measurements.
-10. Build target firmware and run the hardware-in-the-loop bring-up matrix.
+4. ✅ Add the rear 3.5 mm headphone jack with plug-detect speaker mute to the
+   system audio sheet per the user-facing behavior checklist (`fae06d4`).
+5. ✅ Complete and host-test the firmware policy cores: keyboard Fn layer,
+   fan policy, OLED content, lid debounce, battery state machine
+   (`d0991b3`/`d1396d0`/`d95d9f2`/`22a966d`/`f223750`).
+6. ✅ eMMC recovery/hibernation design and setup tooling
+   (`software/os-theme/docs/emmc-recovery.md` + `install/emmc-recovery-setup.sh`).
+7. Classify and resolve all remaining PCB DRC, unconnected, and parity findings.
+8. ~~Freeze the six-layer stackup and controlled-impedance geometries.~~ — COMPLETED via P1.4.
+9. ~~Complete manufacturer part numbers, ratings, assembly constraints, and
+   alternate sourcing for the remaining BOM gaps.~~ — COMPLETED (43 gaps assigned Murata GRM; schematic sync `c329f95`). Current 378 gaps are the new headphone-jack passives (pending the BOM-assignment pass).
+10. Finish reviewed power, PCIe, USB, HDMI, Ethernet, audio, and control routing.
+11. Refill zones only in a copied board, clean silkscreen, run full DRC, and
+    review every exception.
+12. Complete eDP harness, battery-pack, trackpad-cable retention, thermal, RF,
+    and enclosure measurements.
+13. Build target firmware and run the hardware-in-the-loop bring-up matrix.
 
 The repository is useful for review now, but the mainboard files are not an
 ordering package.

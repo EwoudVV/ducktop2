@@ -63,7 +63,7 @@ rather than silenced.
 The EC and maker-controller policy cores build on a host compiler:
 
 ```sh
-firmware/tools/run_host_tests.sh
+sh firmware/tools/run_host_tests.sh
 ```
 
 Or with CMake presets:
