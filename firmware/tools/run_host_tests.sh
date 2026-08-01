@@ -53,6 +53,13 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
     -o "$BUILD_DIR/ec_lid_tests"
 
 "$CC_BIN" $COMMON_FLAGS \
+    -I"$ROOT/ec/include" \
+    "$ROOT/ec/src/ec_telemetry.c" \
+    "$ROOT/ec/src/ec_battery.c" \
+    "$ROOT/tests/test_ec_battery.c" \
+    -o "$BUILD_DIR/ec_battery_tests"
+
+"$CC_BIN" $COMMON_FLAGS \
     -I"$ROOT/maker/include" \
     "$ROOT/maker/src/maker_policy.c" \
     "$ROOT/tests/test_maker_policy.c" \
@@ -65,6 +72,7 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
 "$BUILD_DIR/ec_fan_tests"
 "$BUILD_DIR/ec_oled_tests"
 "$BUILD_DIR/ec_lid_tests"
+"$BUILD_DIR/ec_battery_tests"
 "$BUILD_DIR/maker_policy_tests"
 python3 "$ROOT/tools/verify_release_contract.py"
 

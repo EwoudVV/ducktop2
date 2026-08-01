@@ -355,6 +355,15 @@ The TPS25751A EEPROM configuration is **released** — the JSON source config `d
 - Use correct sign convention: Current() positive=charging, negative=discharging
 - TimeToEmpty/TimeToFull: reject 0xffff before converting minutes→seconds
 - **Note**: BQ34Z100 may share same bus as BQ25798
+- **Battery state machine DONE (2026-07-31)** in `ec/src/ec_battery.c` (+ `ec_battery.h`): pure-C, host-tested.
+  Consumes the telemetry snapshot from step 9 + `pack_present` + `charger_enable` from step 7/8, runs a
+  hysteresis state machine (UNKNOWN → DISCHARGING/CHARGING → FULL with 2 s confirmation timer;
+  thresholds: charge > 50 mA, discharge < -50 mA, full < 30 mA + SOC ≥ 95%), and outputs an
+  `ec_battery_report_t` that the target forwards to the Mu OS as
+  `/sys/class/power_supply/BAT0/` (USB CDC or I2C-target transport — target-only).
+  NOT_PRESENT overrides all; invalid data → UNKNOWN. 18 host tests pass
+  (`tests/test_ec_battery.c`). The flicker-at-near-zero current that ad-hoc
+  sign inference (ec_oled) cannot handle is the gap this fills.
 - **Dependency**: step 4 (I2C)
 
 ### Step 10: ADC, PWM, Fan, Thermal (trivial-moderate)
