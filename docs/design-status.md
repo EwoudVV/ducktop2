@@ -91,6 +91,17 @@ Invalid data renders as dashes (no misleading zero/stale). 16 host tests pass
 target side (SSD1306 I2C behind TCA9548A ch0/ch1 + 5x8 glyph rasterisation
 into the 128x64 1bpp page buffers) remains.
 
+The host-tested lid switch debouncer (`firmware/ec/src/ec_lid.c` + `ec_lid.h`)
+implements the user-verified lid behavior (row 1): 30 ms debounce of the
+LID_CLOSED_N hall/reed input (J53 + R209 10k pull-up, PE10) with one-shot edge
+flags (just_closed/just_opened) for ACPI lid events. Bounce cancels and
+restarts the timer; fail-safe reads "open" on sensor disconnect (R209 pull-up).
+The EC never sequences Mu power on lid events — display-off is an OS-side ACPI
+policy (HandleLidSwitch=lock or ignore in systemd-logind, NOT suspend). 12
+host tests pass (`tests/test_ec_lid.c`), wired as `ducktop2_ec_lid` /
+`ec_lid_tests`. The target side (reading PE10 + forwarding the edge as an
+ACPI lid switch input to the Mu OS) remains.
+
 ## PCB
 
 The reviewed PCB SHA-256 is

@@ -25,6 +25,18 @@ cols per the diode orientation in `generate_keyboard_daughterboard_sheet.py`)
 and the USB HID interface — both target-only steps; the keymap logic itself is
 complete and host-verified.
 
+**2026-07-31 Addition: host-tested lid switch debouncer.** `ec/src/ec_lid.c`
+(+ `ec/include/ducktop2/ec/ec_lid.h`) debounces the LID_CLOSED_N hall/reed
+input (J53 + R209 10k pull-up, PE10) into a stable `lid_closed` bool with
+one-shot edge flags (just_closed/just_opened) for ACPI lid events. 30 ms
+default debounce; bounce cancels and restarts the timer; fail-safe reads
+"open" when the sensor disconnects (R209 pull-up). 12 host tests pass. The
+EC never sequences the Mu power on lid events — display-off is an OS-side
+ACPI policy (HandleLidSwitch=lock or ignore in systemd-logind, NOT suspend),
+keeping the Mu running per the user-verified behavior. Remaining target-side
+work: reading PE10 + forwarding the edge as an ACPI lid switch input to the
+Mu OS.
+
 ---
 
 ## 1. I2C Bus Topology
@@ -191,7 +203,7 @@ The EC uses a single I2C1 peripheral (PB6=SCL, PB7=SDA) with a TCA9548A mux to i
 | PB3 | INTERNAL_USB_VBUS_FAULT_N | Input | USB hub fault |
 | PA8 | WIFI_W_DISABLE1_N_EC | Output | Wi-Fi disable |
 | PA15 | WIFI_W_DISABLE2_N_EC | Output | Bluetooth disable |
-| PE10 | LID_CLOSED_N | Input | Lid switch |
+| PE10 | LID_CLOSED_N | Input | Lid switch (active-low; R209 10k pull-up; J53 hall/reed) — **debouncer core DONE** in `ec/src/ec_lid.c` |
 | PC5 | FAN_TACH | Input | Fan tachometer |
 | PC13 | (SOURCE_MGR_INT_N) | Input | TCA9539 interrupt |
 
