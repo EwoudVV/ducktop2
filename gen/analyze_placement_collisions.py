@@ -27,12 +27,13 @@ FOOTPRINT_RE = re.compile(r"^Footprint ")
 
 
 def parse_board(board_text: str) -> dict[str, dict]:
-    """Return ref -> {at, uuid, pads: [ {at, size, layer, drill, type} ]}."""
+    """Return ref -> {at, uuid, pads: [ {at, size} ]} (F.Cu pads only)."""
     footprints: dict[str, dict] = {}
     depth = 0
     i = 0
     n = len(board_text)
     current = None
+    pad_depth = 0
     while i < n:
         c = board_text[i]
         if c == '"':
@@ -46,18 +47,32 @@ def parse_board(board_text: str) -> dict[str, dict]:
             m = re.match(r"\(([A-Za-z0-9_.]+)", board_text[i:])
             token = m.group(1) if m else "?"
             if depth == 2 and token == "footprint":
-                current = {"pads": [], "text": None}
+                current = {"pads": []}
             elif depth == 3 and current is not None:
                 if token == "at":
                     nums = re.match(r"\(at\s+([-0-9.eE]+)\s+([-0-9.eE]+)(?:\s+([-0-9.eE]+))?", board_text[i:])
                     if nums:
                         current["at"] = tuple(float(x) for x in nums.groups() if x is not None)
+                        end = re.search(r"\)", board_text[i:]).end()
+                        current["at_span"] = (i, i + end)
                 elif token == "property":
                     pm = re.match(r'\(property\s+"Reference"\s+"([^"]+)"', board_text[i:])
                     if pm:
                         current["ref"] = pm.group(1)
                 elif token == "pad":
-                    current["pads"].append({"at": None, "size": None, "layer": None})
+                    pad = {"at": None, "size": None}
+                    current["pads"].append(pad)
+                    pad_depth = depth
+            elif depth == 4 and current is not None and current["pads"]:
+                pad = current["pads"][-1]
+                if token == "at":
+                    nums = re.match(r"\(at\s+([-0-9.eE]+)\s+([-0-9.eE]+)(?:\s+([-0-9.eE]+))?", board_text[i:])
+                    if nums:
+                        pad["at"] = tuple(float(x) for x in nums.groups() if x is not None)
+                elif token == "size":
+                    nums = re.match(r"\(size\s+([-0-9.eE]+)\s+([-0-9.eE]+)", board_text[i:])
+                    if nums:
+                        pad["size"] = (float(nums.group(1)), float(nums.group(2)))
             i += len(m.group(0)) if m else 1
         elif c == ")":
             depth -= 1
