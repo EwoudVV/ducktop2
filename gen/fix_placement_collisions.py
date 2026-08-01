@@ -33,8 +33,34 @@ from pathlib import Path
 from analyze_placement_collisions import parse_board
 
 GRID = 1.27
+
+# Board outline (with the left-edge fin-stack notch), for bounds checks.
+BOARD_OUTLINE = [(0, 0), (0, 124), (51, 124), (51, 176), (0, 176),
+                 (0, 185), (358, 185), (358, 0)]
+BOARD_MARGIN = 1.5
+
+
+def point_in_polygon(x: float, y: float, poly: list[tuple[float, float]]) -> bool:
+    inside = False
+    j = len(poly) - 1
+    for i in range(len(poly)):
+        xi, yi = poly[i]
+        xj, yj = poly[j]
+        if ((yi > y) != (yj > y)) and (x < (xj - xi) * (y - yi) / (yj - yi) + xi):
+            inside = not inside
+        j = i
+    return inside
+
+
+def fp_in_bounds(fps: dict, ref: str) -> bool:
+    box = fp_bbox(fps, ref)
+    for corner in ((box[0], box[1]), (box[2], box[1]), (box[0], box[3]), (box[2], box[3])):
+        if not point_in_polygon(corner[0], corner[1], BOARD_OUTLINE):
+            return False
+    return True
+
 MIN_GAP = 0.25
-MAX_STEPS = 4
+MAX_STEPS = 8
 MAX_ITERATIONS = 40
 CELL = 5.0
 
@@ -158,6 +184,42 @@ def main() -> int:
 
     move_log: list[dict] = []
     accumulated: dict[str, list[float]] = {}
+
+    # Recovery pass: bring small parts that are outside the board outline
+    # back to the nearest in-bounds grid position.
+    for ref in sorted(small):
+        if fp_in_bounds(fps, ref):
+            continue
+        old_at = fps[ref]["at"]
+        placed = False
+        for radius in range(1, 12):
+            for dxs, dys in (
+                (radius, 0), (-radius, 0), (0, radius), (0, -radius),
+                (radius, radius), (radius, -radius), (-radius, radius), (-radius, -radius),
+            ):
+                dx, dy = dxs * GRID, dys * GRID
+                fps[ref]["at"] = (old_at[0] + dx, old_at[1] + dy,
+                                  old_at[2] if len(old_at) > 2 else 0.0)
+                if fp_in_bounds(fps, ref) and all(
+                        not grid.pad_collides(ref, other, MIN_GAP)
+                        for other in grid.neighbors(ref)):
+                    grid.refresh_ref(ref)
+                    acc = accumulated.setdefault(ref, [0.0, 0.0])
+                    acc[0] += dx
+                    acc[1] += dy
+                    move_log.append({
+                        "ref": ref, "from": list(old_at[:2]),
+                        "to": [old_at[0] + dx, old_at[1] + dy],
+                        "delta": [dx, dy], "collided_with": None,
+                        "reason": "off-board recovery",
+                    })
+                    placed = True
+                    break
+                fps[ref]["at"] = old_at
+            if placed:
+                break
+        if not placed:
+            print(f"note: {ref} could not be recovered on-board")
     for iteration in range(MAX_ITERATIONS):
         collisions = grid.collisions()
         if not collisions:
@@ -193,7 +255,7 @@ def main() -> int:
                         not grid.pad_collides(ra, other, MIN_GAP)
                         for other in grid.neighbors(ra)
                     )
-                    if ok:
+                    if ok and fp_in_bounds(fps, ra):
                         grid.refresh_ref(ra)
                         acc = accumulated.setdefault(ra, [0.0, 0.0])
                         acc[0] += dx
