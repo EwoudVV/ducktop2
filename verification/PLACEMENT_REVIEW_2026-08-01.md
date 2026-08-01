@@ -29,15 +29,16 @@ U46, U501 (Ethernet PHY).
 Hotspots: J11/C1764-C1765, J2 area, MK430/U410 (mic + codec — check acoustic
 port keepout), U170/U46, RS10/U11, U1781/C1722, C501/C508, C423/C441/C722.
 
-### 29 off-board anchors (outside 358×185 outline)
+### 27 off-board anchors remaining (after passes 2-4)
 
-Right edge (x > 358): C506, C515, D151, D153, D154, D2127, D712, D715, D716,
-F200, J16, J53, J56, Q200, Q50, Q702, R156, R159, R166, R167, R501, SW1,
-U2016, U62.
-Top edge (y > 185): LED1, Q14, Q22, Q24, U421.
+C1760, C415, C435, C506, C515, D151, D153, D154, D2127, D715, D716, F200,
+J16, J53, J56, Q14, Q200, Q22, Q24, Q50, Q702, R167, R501, SW1, U2016,
+U421, U62.
 
-These are parked off the board outline (x up to 399.7, y up to 212.3) —
-confirm whether they should be placed on-board or are deliberately stowed.
+The fixer now enforces board bounds (pass 4, c555bf9) and recovered the
+caps it had pushed off in earlier passes. These 27 remain parked outside the
+outline (x up to 399.7, y up to 212.3) because their natural edge regions
+are fully occupied — place them manually during the placement review.
 
 ### Courtyard overlaps (199)
 
