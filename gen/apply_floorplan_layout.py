@@ -24,7 +24,14 @@ from pathlib import Path
 
 from analyze_placement_collisions import parse_board
 
-BOARD_OFFSET_Y = 0.0   # base-plane y of the mainboard front edge
+BOARD_OFFSET_Y = 0.0   # base y == board y (mainboard outline at y=0)
+
+BOARD_BOUNDS = (2.0, 2.0, 356.0, 183.0)  # (x0,y0,x1,y1) with margin
+
+
+def in_bounds(board_x: float, board_y: float) -> bool:
+    return (BOARD_BOUNDS[0] <= board_x <= BOARD_BOUNDS[2] and
+            BOARD_BOUNDS[1] <= board_y <= BOARD_BOUNDS[3])
 
 # Floorplan part id -> (footprint ref, board x offset, board y offset)
 # Offsets place the floorplan part rectangle center on the footprint anchor.
@@ -80,6 +87,9 @@ def main() -> int:
             continue
         board_x = part["x"] + ox
         board_y = part["y"] - BOARD_OFFSET_Y + oy
+        if not in_bounds(board_x, board_y):
+            print(f"WARNING: {pid} -> {ref} at ({board_x:.1f},{board_y:.1f}) is OFF the board — skipped")
+            continue
         old = fps[ref]["at"]
         moves.append({
             "part": pid, "ref": ref, "span": fps[ref]["at_span"],
