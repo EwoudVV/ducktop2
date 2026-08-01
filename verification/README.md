@@ -48,6 +48,9 @@ The current independent verdict remains **SCHEMATIC BLOCKED**.
   - candidate 50/85/90/100 Ω trace geometries on the committed stackup
   (reproducible via [`gen/compute_impedance.py`](../gen/compute_impedance.py));
   pending NextPCB field-solver confirmation
+- [`HIGH_SPEED_ROUTING_PLAN_2026-08-01.md`](HIGH_SPEED_ROUTING_PLAN_2026-08-01.md)
+  - net classes committed to the board (85/90/100 Ω diff + 45 Ω USB2),
+  skew budgets, routing order (HDMI -> PCIe -> USB3 -> Ethernet -> USB2)
 - [`SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md`](SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md)
   - copied-project post-fix reference, footprint, pad-net, and DNP comparison
 - [`INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md`](INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
