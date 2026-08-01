@@ -135,6 +135,11 @@ target_include_directories(ec_app_math_tests PRIVATE ec_target ec/include)
 ducktop2_target_defaults(ec_app_math_tests)
 add_test(NAME ec_app_math_tests COMMAND ec_app_math_tests)
 
+add_executable(usb_hid_desc_tests tests/test_usb_hid_desc.c ec_target/usb_hid_desc.c)
+target_include_directories(usb_hid_desc_tests PRIVATE ec_target)
+ducktop2_target_defaults(usb_hid_desc_tests)
+add_test(NAME usb_hid_desc_tests COMMAND usb_hid_desc_tests)
+
 add_executable(maker_policy_tests tests/test_maker_policy.c)
 target_link_libraries(maker_policy_tests PRIVATE ducktop2_maker_policy)
 ducktop2_target_defaults(maker_policy_tests)

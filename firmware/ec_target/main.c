@@ -7,6 +7,7 @@
 #include "i2c.h"
 #include "matrix_scan.h"
 #include "stm32f4xx.h"
+#include "usb_hid.h"
 
 static volatile uint32_t g_tick_ms = 0;
 
@@ -240,6 +241,8 @@ int main(void)
 
     ec_app_init();
 
+    usb_hid_init();
+
     gpio_set_gnss_reset_n(false);
     gpio_set_service_mux_reset(false);
 
@@ -296,9 +299,9 @@ int main(void)
         ec_hid_consumer_report_t consumer_report;
         matrix_scan_get_matrix(&matrix);
         ec_keymap_process(&matrix, &keyboard_report, &consumer_report);
-        /* Reports are staged for the USB HID transport (usb_hid.c). */
-        (void)keyboard_report;
-        (void)consumer_report;
+        usb_hid_send_keyboard(&keyboard_report);
+        usb_hid_send_consumer(&consumer_report);
+        usb_hid_poll();
 
         ec_telemetry_build_snapshot(&telemetry_snapshot, &telemetry_inputs);
 
