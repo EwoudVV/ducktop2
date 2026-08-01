@@ -24,7 +24,7 @@ from pathlib import Path
 
 from analyze_placement_collisions import parse_board
 
-BOARD_OFFSET_Y = 63.0   # base-plane y of the mainboard front edge
+BOARD_OFFSET_Y = 0.0   # base-plane y of the mainboard front edge
 
 # Floorplan part id -> (footprint ref, board x offset, board y offset)
 # Offsets place the floorplan part rectangle center on the footprint anchor.
