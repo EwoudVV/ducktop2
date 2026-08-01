@@ -56,7 +56,12 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
    tests pass; remaining is the target-side NTC ADC→decidegrees conversion and
    the TIM1_CH1 PWM duty write.
 8. **OLED displays (RESOLVED):** both displays show status of all system
-   components (see content spec below).
+   components (see content spec below). **Host-tested content composer DONE**
+   in `firmware/ec/src/ec_oled.c`: left screen = power & battery (source+V,
+   SOC+state, pack V/I/P, TTE/TTF, capacity, cycles+health); right screen =
+   thermal/fan/system (fan duty+state, skin/Mu temps, throttle flag, radio DB
+   state, maker, EC version, EC fault). Invalid data renders as dashes. 16 host
+   tests pass; remaining is the target-side SSD1306 I2C + glyph rasterisation.
 9. **Onboard eMMC (RESOLVED question):** the 64 GB eMMC is not usable as RAM —
    eMMC is a block device with ~200-300 MB/s bandwidth and millisecond
    latency; LPDDR5 RAM is tens of GB/s with nanosecond latency. As swap it
@@ -112,6 +117,18 @@ All system component status: battery % + charge/discharge state, source in use
 (PD1/PD2/AUX) and input voltage, fan duty + both thermistor temps, charging
 current, radio/GNSS state (daughterboard installed), maker-controller status,
 EC firmware version.
+
+**Implemented (host-tested)** in `firmware/ec/src/ec_oled.c` — two 8-line text
+buffers (6x8 font, 21 chars/line):
+- Left SSD1306 (power/battery): `SRC <source> <V>` · `BAT <N>% CHG/DISC/IDLE`
+  · `V <pack>` · `I <±mA>` · `P <mW> CHG/DISC/IDLE` · `TTE/TTF <h m>` ·
+  `CAP <rem>/<full>mAh` · `CYC <n> H <health>%`
+- Right SSD1306 (thermal/fan/system): `FAN <%> RUN/STOP/FAULT` · `TSKIN <C>`
+  · `TMU <C>` · `THROTTLE ok/WARN` · `RAD DB OK/no DB/FAULT` ·
+  `MAKER online/offline` · `EC <version>` · `FAULT <name>`
+
+Invalid data renders as dashes. 16 host tests pass; target-side SSD1306 I2C +
+glyph rasterisation remains.
 
 ## Action Items
 

@@ -383,6 +383,15 @@ The TPS25751A EEPROM configuration is **released** — the JSON source config `d
 ### Step 13: OLED Display Driver (trivial)
 - Create `ec_target/oled.c/h` — SSD1306 I2C driver behind TCA9548A ch0/ch1
 - Use `ec_telemetry_snapshot_t` to render fields with validity-bit checks
+- **OLED content composer DONE (2026-07-31)** in `ec/src/ec_oled.c` (+ `ec_oled.h`):
+  pure-C, host-tested. Composes the user-verified "all system component status"
+  spec into two 8-line text buffers (left = power/battery: source+V, SOC+state,
+  pack V/I/P, TTE/TTF, capacity, cycles+health; right = thermal/fan/system: fan
+  duty+state, skin/Mu temps, throttle flag, radio DB state, maker, EC version,
+  EC fault). Invalid data renders as dashes (never misleading zero/stale).
+  16 host tests pass (`tests/test_ec_oled.c`). Remaining target-side work: the
+  SSD1306 I2C transaction + 5x8 glyph rasterisation of each line buffer into the
+  128x64 1bpp page buffers, behind TCA9548A ch0/ch1.
 - **Dependency**: step 4 (I2C), step 11 (telemetry)
 
 ### Step 14: Optional Loads and Radio (trivial-moderate)

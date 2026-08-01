@@ -54,6 +54,10 @@ add_library(ducktop2_ec_fan STATIC ec/src/ec_fan.c)
 target_include_directories(ducktop2_ec_fan PUBLIC ec/include)
 ducktop2_target_defaults(ducktop2_ec_fan)
 
+add_library(ducktop2_ec_oled STATIC ec/src/ec_oled.c)
+target_include_directories(ducktop2_ec_oled PUBLIC ec/include)
+ducktop2_target_defaults(ducktop2_ec_oled)
+
 add_library(ducktop2_maker_policy STATIC maker/src/maker_policy.c)
 target_include_directories(ducktop2_maker_policy PUBLIC maker/include)
 ducktop2_target_defaults(ducktop2_maker_policy)
@@ -82,6 +86,11 @@ add_executable(ec_fan_tests tests/test_ec_fan.c)
 target_link_libraries(ec_fan_tests PRIVATE ducktop2_ec_fan)
 ducktop2_target_defaults(ec_fan_tests)
 add_test(NAME ec_fan_tests COMMAND ec_fan_tests)
+
+add_executable(ec_oled_tests tests/test_ec_oled.c)
+target_link_libraries(ec_oled_tests PRIVATE ducktop2_ec_oled)
+ducktop2_target_defaults(ec_oled_tests)
+add_test(NAME ec_oled_tests COMMAND ec_oled_tests)
 
 add_executable(maker_policy_tests tests/test_maker_policy.c)
 target_link_libraries(maker_policy_tests PRIVATE ducktop2_maker_policy)
