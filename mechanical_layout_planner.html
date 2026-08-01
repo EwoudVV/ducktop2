@@ -621,7 +621,7 @@
       parts: [
         { id: "mainboard-guide", name: "mainboard outline (358x185, left fin-stack notch)", zone: "base", x: 0, y: 0, w: 358, h: 185, kind: "ghost" },
         { id: "keyboard", name: "MX ULP keyboard PCB rev A", zone: "base", x: 42.3, y: 20, w: 273.5, h: 80, kind: "input" },
-        { id: "keyboard-ffc", name: "J310 mainboard keyboard FFC connector", zone: "base", x: 320, y: 50, w: 8, h: 18, kind: "port" },
+        { id: "keyboard-ffc", name: "J310 mainboard keyboard FFC connector", zone: "base", x: 320, y: 50, w: 18, h: 8, kind: "port" },
         { id: "battery-1", name: "3.7V cell A (measured)", zone: "base", x: 25, y: 188, w: 100, h: 60, kind: "power" },
         { id: "battery-2", name: "3.7V cell B (measured)", zone: "base", x: 130, y: 188, w: 100, h: 60, kind: "power" },
         { id: "battery-3", name: "3.7V cell C (measured)", zone: "base", x: 235, y: 188, w: 100, h: 60, kind: "power" },
@@ -631,12 +631,10 @@
         { id: "speaker-right", name: "front speaker R", zone: "base", x: 337, y: 205, w: 18, h: 38, kind: "audio" },
         { id: "left-ports", name: "left side connector corridor", zone: "base", x: 0, y: 20, w: 10, h: 160, kind: "port" },
         { id: "right-ports", name: "right side connector corridor", zone: "base", x: 348, y: 20, w: 10, h: 160, kind: "port" },
-        { id: "usb-c-right", name: "J11 USB-C port (right)", zone: "base", x: 347.4, y: 93, w: 10.6, h: 9.5, kind: "port" },
-        { id: "headphone-jack", name: "J422 rear 3.5mm headphone jack", zone: "base", x: 50, y: 0, w: 10, h: 20, kind: "port" },
         { id: "battery-connector", name: "J2 Mega-Fit battery connector", zone: "base", x: 95, y: 165, w: 25.8, h: 15, kind: "power" },
         { id: "rear-antennas", name: "rear antenna connector recess", zone: "base", x: 15, y: 231, w: 86, h: 17, kind: "rf" },
-        { id: "hinge-left", name: "Framework 13 hinge keepout L", zone: "base", x: 8, y: 0, w: 40, h: 20, kind: "keepout" },
-        { id: "hinge-right", name: "Framework 13 hinge keepout R", zone: "base", x: 310, y: 0, w: 40, h: 20, kind: "keepout" },
+        { id: "hinge-left", name: "Framework 13 hinge keepout L (module ~30x12 + margin)", zone: "base", x: 8, y: 0, w: 40, h: 20, kind: "keepout" },
+        { id: "hinge-right", name: "Framework 13 hinge keepout R (module ~30x12 + margin)", zone: "base", x: 310, y: 0, w: 40, h: 20, kind: "keepout" },
         { id: "mu-module", name: "LattePanda Mu carrier (77x65; drag to upper middle)", zone: "base", x: 180, y: 30, w: 77, h: 65, kind: "board" },
         { id: "cold-plate", name: "Mu copper cold plate (74x64)", zone: "base", x: 180, y: 30, w: 74, h: 64, kind: "thermal" },
         { id: "heatpipe", name: "121721 heatpipe to left fin stack", zone: "base", x: 85, y: 60, w: 150, h: 8.1, kind: "thermal" },
@@ -647,7 +645,7 @@
         { id: "m2-wifi", name: "J40 M.2 E-key Wi-Fi (2230 card)", zone: "base", x: 265, y: 85, w: 30, h: 22, kind: "board" },
         { id: "oled-a", name: "SSD1306 0.96in OLED A (J41)", zone: "base", x: 310, y: 155, w: 27.3, h: 27.3, kind: "display" },
         { id: "oled-b", name: "SSD1306 0.96in OLED B (J45)", zone: "base", x: 280, y: 155, w: 27.3, h: 27.3, kind: "display" },
-        { id: "radio-daughterboard", name: "radio/GNSS/audio daughterboard PCB (120x40.5 over J2300)", zone: "base", x: 0, y: 207.5, w: 120, h: 40.5, kind: "board" },
+        { id: "radio-daughterboard", name: "radio/GNSS/audio daughterboard PCB (120x40.5 over J2300)", zone: "base", x: 2.5, y: 205, w: 120, h: 40.5, kind: "board" },
         { id: "panel-outline", name: "B160QAN03.K panel (measured)", zone: "lid", x: 3, y: 10.5, w: 352, h: 227, kind: "display" },
         { id: "panel-active", name: "2560x1600 active area (approximate)", zone: "lid", x: 6.5, y: 16.5, w: 345, h: 215, kind: "ghost" }
       ]    };
