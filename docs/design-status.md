@@ -102,6 +102,18 @@ host tests pass (`tests/test_ec_lid.c`), wired as `ducktop2_ec_lid` /
 `ec_lid_tests`. The target side (reading PE10 + forwarding the edge as an
 ACPI lid switch input to the Mu OS) remains.
 
+The host-tested battery state machine (`firmware/ec/src/ec_battery.c` +
+`ec_battery.h`) implements the "trusted OS percentage" half of row 5/7: a
+hysteresis state machine (UNKNOWN/NOT_PRESENT/DISCHARGING/CHARGING/FULL) that
+consumes the telemetry snapshot + pack_present + charger_enable and outputs
+an `ec_battery_report_t` the target forwards to the Mu OS as
+`/sys/class/power_supply/BAT0/`. Hysteresis (charge > 50 mA, discharge < -50 mA,
+full < 30 mA + SOC ≥ 95% with a 2 s confirmation timer) prevents the near-zero
+flicker that ad-hoc current-sign inference cannot avoid. NOT_PRESENT overrides
+all when the BQ34Z100 probe fails. 18 host tests pass (`tests/test_ec_battery.c`),
+wired as `ducktop2_ec_battery` / `ec_battery_tests`. The target side (BQ34Z100
+I2C driver + the USB/I2C-target transport to the Mu OS) remains.
+
 ## PCB
 
 The reviewed PCB SHA-256 is

@@ -62,6 +62,10 @@ add_library(ducktop2_ec_lid STATIC ec/src/ec_lid.c)
 target_include_directories(ducktop2_ec_lid PUBLIC ec/include)
 ducktop2_target_defaults(ducktop2_ec_lid)
 
+add_library(ducktop2_ec_battery STATIC ec/src/ec_battery.c)
+target_include_directories(ducktop2_ec_battery PUBLIC ec/include)
+ducktop2_target_defaults(ducktop2_ec_battery)
+
 add_library(ducktop2_maker_policy STATIC maker/src/maker_policy.c)
 target_include_directories(ducktop2_maker_policy PUBLIC maker/include)
 ducktop2_target_defaults(ducktop2_maker_policy)
@@ -100,6 +104,11 @@ add_executable(ec_lid_tests tests/test_ec_lid.c)
 target_link_libraries(ec_lid_tests PRIVATE ducktop2_ec_lid)
 ducktop2_target_defaults(ec_lid_tests)
 add_test(NAME ec_lid_tests COMMAND ec_lid_tests)
+
+add_executable(ec_battery_tests tests/test_ec_battery.c)
+target_link_libraries(ec_battery_tests PRIVATE ducktop2_ec_battery ducktop2_ec_telemetry)
+ducktop2_target_defaults(ec_battery_tests)
+add_test(NAME ec_battery_tests COMMAND ec_battery_tests)
 
 add_executable(maker_policy_tests tests/test_maker_policy.c)
 target_link_libraries(maker_policy_tests PRIVATE ducktop2_maker_policy)

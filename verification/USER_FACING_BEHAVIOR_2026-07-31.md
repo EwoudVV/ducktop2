@@ -85,7 +85,7 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
 | 4 | press the power button | boots to my desktop, fast | J16 case harness (02) -> EC power sequencing | VERIFIED |
 | 5 | need to reset | reset without opening the case | J16 RESET line; SW1 onboard (02) | VERIFIED |
 | 6 | shut down / run out of battery | clean shutdown, no corruption, boots normally next time | EC sequencing + protection (02, 01) | VERIFIED |
-| 7 | check battery | trusted OS percentage + OLED status of all system components | BQ34Z100-G1 gauge (01); OLED content spec below | RESOLVED |
+| 7 | check battery | trusted OS percentage + OLED status of all system components | BQ34Z100-G1 gauge (01); OLED content composer host-tested DONE (ec_oled); battery state machine host-tested DONE (ec_battery, 18 tests); target-side BQ34Z100 I2C + report transport pending | RESOLVED |
 | 8 | use the AUX connector | it accepts any voltage in range and charges | 6-22V nominal: fuse + 24V clamp + eFuse -> BQ25798 (01) | RESOLVED |
 | 9 | use the screen | full res, smooth 120 Hz, OS brightness control | Mu 40-pin eDP -> AUO B160QAN03.K (03, docs/display-direct-edp.md) | VERIFIED |
 | 10 | type | layout is what I expect (confirmed; board already fabricated) | 65-key matrix, no F-row, split space; Fn layers = firmware | VERIFIED |
@@ -160,8 +160,8 @@ USB HID, matrix scan, SSD1306 rasterisation, ACPI event forwarding) remains.
   TPS25751A, SSD1306), GPIO reads (lid, thermal ADCs), PWM write (fan),
   USB HID (keyboard), matrix scan, ACPI event forwarding (lid) — target port +
   HIL pending (firmware/target_port_status.md; 42 HIL rows NOT_RUN).
-- Battery ACPI reporting, power-button sequencing, PD negotiation caps —
-  firmware/code pending.
+- Battery ACPI reporting: report producer host-tested DONE (`ec_battery`); transport and Mu-side driver pending.
+  Power-button sequencing, PD negotiation caps — firmware/code pending.
 - eDP harness, keyboard FFC, J58 cable retention, RF/antenna tuning,
   speaker/AUX acoustic, thermal, and enclosure measurements.
 - HDMI/PCIe/USB high-speed routing and SI on the final stackup.
