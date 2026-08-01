@@ -72,6 +72,15 @@ matrix scan (drive rows, read columns per the diode orientation in
 `generate_keyboard_daughterboard_sheet.py`) and the USB HID interface remain;
 the keymap logic itself is host-verified.
 
+The host-tested fan policy core (`firmware/ec/src/ec_fan.c` + `ec_fan.h`)
+implements the user-verified fan behaviour (quiet idle, performance-biased,
+never throttles): control temp = max(skin, Mu coldplate) in decidegrees C;
+hysteresis at 40/45C; 2s anti-cycling; linear 30%→100% ramp across 45→70C;
+100% duty at/above 70C (25-35C below the Mu throttle point); throttle_imminent
+flag at 80C for PL1 reduction; fail-safe 100% on invalid temps. 16 host tests
+pass (`tests/test_ec_fan.c`), wired as `ducktop2_ec_fan` / `ec_fan_tests`. The
+target side (NTC ADC→decidegrees + TIM1_CH1 PWM duty write) remains.
+
 ## PCB
 
 The reviewed PCB SHA-256 is

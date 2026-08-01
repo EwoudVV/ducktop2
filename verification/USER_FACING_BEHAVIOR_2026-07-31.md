@@ -48,6 +48,13 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
 7. **Fan policy (RESOLVED):** fan is controlled by the STM32 EC; the curve must
    never be annoyingly loud at idle but must not throttle under load either —
    "I'll take the noise if it's more performing" (performance-biased curve).
+   **Host-tested core DONE** in `firmware/ec/src/ec_fan.c`: control temp =
+   max(skin, Mu coldplate) in decidegrees C; hysteresis (off < 40C, spin-up at
+   45C); 2s anti-cycling; linear 30%→100% ramp across 45→70C; 100% at/above 70C
+   (25-35C below the Mu throttle point → never throttles); throttle_imminent
+   flag at 80C for PL1 reduction; fail-safe 100% on invalid temps. 16 host
+   tests pass; remaining is the target-side NTC ADC→decidegrees conversion and
+   the TIM1_CH1 PWM duty write.
 8. **OLED displays (RESOLVED):** both displays show status of all system
    components (see content spec below).
 9. **Onboard eMMC (RESOLVED question):** the 64 GB eMMC is not usable as RAM —
