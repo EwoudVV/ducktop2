@@ -156,7 +156,7 @@ geometries for 50/85/90/100 Ω were computed 2026-08-01
 `gen/compute_impedance.py`) and are pending the NextPCB engineering review
 before routing starts.
 
-The removable radio/GNSS/audio daughterboard has 126 placed footprints. Its
+The rear headphone-jack work and BOM are complete; the mechanical integration review item is resolved: trackpad/battery overlap accepted as a design decision (2026-08-01), and the IM68A130 bottom-port mic (MK430) acoustic opening analyzed (`verification/MECHANICAL_INTEGRATION_2026-08-01.md`): the mic sits 14 mm below the left-edge fin-stack notch, so the sealed acoustic channel must route away from the blower zone; MK430/U410 pad collision is on the placement review list. The removable radio/GNSS/audio daughterboard has 126 placed footprints. Its
 schematic passes ERC with no warnings, and its mainboard interface defaults off
 so the laptop, system audio, microphone, charging, and boot path do not depend
 on the daughterboard being installed.
