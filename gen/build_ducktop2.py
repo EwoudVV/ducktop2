@@ -1,8 +1,13 @@
 import contextlib
 import uuid, os
 import genlib
+import bom_catalog
 
 GRID_MM = 1.27
+
+# Stamp reviewed Manufacturer/MPN onto passives at place() time (main board).
+# Disabled by the radio-daughterboard build, whose BOM is patched separately.
+PROCUREMENT_STAMP = True
 
 UUID_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, "ducktop2/kicad/generated")
 _uuid_stack = [{"context": "global", "counter": 0}]
@@ -285,6 +290,16 @@ class Sheet:
         if extra_props:
             for k, v in extra_props.items():
                 props.append(f'(property "{k}" "{v}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
+        if (
+            in_bom
+            and PROCUREMENT_STAMP
+            and not (extra_props and "MPN" in extra_props)
+        ):
+            stamped = bom_catalog.resolve(ref, value, footprint)
+            if stamped is not None:
+                manufacturer, mpn = stamped
+                props.append(f'(property "Manufacturer" "{manufacturer}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
+                props.append(f'(property "MPN" "{mpn}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
 
         pin_lines = [f'(pin "{num}" (uuid {U()}))' for num in pins]
 

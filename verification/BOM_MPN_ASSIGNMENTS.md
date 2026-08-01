@@ -1,5 +1,11 @@
 # BOM MPN Assignments — P1.3 Item 3
 
+> **SUPERSEDED (2026-08-01):** These hold suggestions are now stamped into the
+> schematics at generation time by [`gen/bom_catalog.py`](../gen/bom_catalog.py)
+> (which also inverts `apply_bom_catalog.py`'s per-ref assignments and records
+> MCP-verified LCSC alternates). BOM procurement gaps: 0. Kept as the review
+> record.
+
 Generated: 2026-07-30
 Source: `BOM_RELEASE_GAPS_2026-07-28.md` — 43 missing Manufacturer/MPN
 
