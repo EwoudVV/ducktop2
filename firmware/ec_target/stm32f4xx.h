@@ -404,6 +404,185 @@ typedef struct {
 #define IWDG_PR_DIV128      5u
 #define IWDG_PR_DIV256      6u
 
+/* ===========================================================================
+ * OTG_FS (USB full-speed core, device mode).  RM0090 section 31.6.
+ * ========================================================================= */
+
+typedef struct {
+    __IO uint32_t GOTGCTL;      /* 0x000 */
+    __IO uint32_t GOTGINT;      /* 0x004 */
+    __IO uint32_t GAHBCFG;      /* 0x008 */
+    __IO uint32_t GUSBCFG;      /* 0x00C */
+    __IO uint32_t GRSTCTL;      /* 0x010 */
+    __IO uint32_t GINTSTS;      /* 0x014 */
+    __IO uint32_t GINTMSK;      /* 0x018 */
+    __IO uint32_t GRXSTSR;      /* 0x01C */
+    __IO uint32_t GRXSTSP;      /* 0x020 */
+    __IO uint32_t GRXFSIZ;      /* 0x024 */
+    __IO uint32_t GNPTXFSIZ;    /* 0x028 */
+    __IO uint32_t GNPTXSTS;     /* 0x02C */
+    __IO uint32_t GI2CCTL;      /* 0x030 */
+    __IO uint32_t GMIS;         /* 0x034 */
+    __IO uint32_t GCCFG;        /* 0x038 */
+    __IO uint32_t CID;          /* 0x03C */
+    __IO uint32_t HPTXFSIZ;     /* 0x100 */
+    __IO uint32_t DIEPTXF1;     /* 0x104 */
+    __IO uint32_t DIEPTXF2;     /* 0x108 */
+    __IO uint32_t DIEPTXF3;     /* 0x10C */
+} OTG_CORE_TypeDef;
+
+typedef struct {
+    __IO uint32_t DCFG;         /* 0x400 */
+    __IO uint32_t DCTL;         /* 0x404 */
+    __IO uint32_t DSTS;         /* 0x408 */
+    __IO uint32_t DIEPMSK;      /* 0x414 */
+    __IO uint32_t DOEPMSK;      /* 0x418 */
+    __IO uint32_t DAINT;        /* 0x41C */
+    __IO uint32_t DAINTMSK;     /* 0x420 */
+    __IO uint32_t DVBUSDIS;     /* 0x428 */
+    __IO uint32_t DVBUSPULSE;   /* 0x42C */
+    __IO uint32_t DTHRCTL;      /* 0x430 */
+    __IO uint32_t DIEPEMPMSK;   /* 0x434 */
+    __IO uint32_t DEACHINT;     /* 0x438 */
+    __IO uint32_t DEACHINTMSK;  /* 0x43C */
+    __IO uint32_t DIEACHINT;    /* 0x440 */
+    __IO uint32_t DOPCTL;       /* 0x444 */
+    __IO uint32_t DOEACHINT;    /* 0x448 */
+    __IO uint32_t DOEACHINTMSK; /* 0x44C */
+    __IO uint32_t DIEPCTL0;     /* 0x500 */
+    __IO uint32_t DIEPTSIZ0;    /* 0x510 */
+    __IO uint32_t DIEPINT0;     /* 0x518 */
+    __IO uint32_t DTXFSTS0;     /* 0x520 */
+} OTG_DEV_TypeDef;
+
+typedef struct {
+    __IO uint32_t DIEPCTL;      /* 0x500/0x520/0x540 ... */
+    __IO uint32_t DIEPTSIZ;
+    __IO uint32_t DIEPINT;
+    __IO uint32_t DTXFSTS;
+} OTG_IN_EP_TypeDef;
+
+typedef struct {
+    __IO uint32_t DOEPCTL;      /* 0x900/0x920/0x940 ... */
+    __IO uint32_t DOEPTSIZ;
+    __IO uint32_t DOEPINT;
+    __IO uint32_t DOEPRES;
+} OTG_OUT_EP_TypeDef;
+
+#define OTG_FS                   ((OTG_CORE_TypeDef *) 0x50000000u)
+#define OTG_FS_DEV               ((OTG_DEV_TypeDef *) 0x50000400u)
+#define OTG_FS_IN_EP(n)          ((OTG_IN_EP_TypeDef *) (0x50000500u + 0x20u * (n)))
+#define OTG_FS_OUT_EP(n)         ((OTG_OUT_EP_TypeDef *) (0x50000900u + 0x20u * (n)))
+#define OTG_FS_FIFO(n)           ((volatile uint32_t *) (0x50001000u + 0x1000u * (n)))
+#define OTG_FS_EP0_TXFIFO        ((volatile uint32_t *) 0x50001100u)
+
+/* GRXSTSP/GRXSTSR packet status field */
+#define OTG_FS_GRXSTSP_PKTSTS_Pos   17u
+#define OTG_FS_GRXSTSP_PKTSTS_Msk   (0xFu << OTG_FS_GRXSTSP_PKTSTS_Pos)
+#define OTG_FS_GRXSTSP_BCNT_Pos     4u
+#define OTG_FS_GRXSTSP_BCNT_Msk     (0x7FFu << OTG_FS_GRXSTSP_BCNT_Pos)
+#define OTG_FS_GRXSTSP_EPID_Pos     0u
+#define OTG_FS_GRXSTSP_EPID_Msk     (0xFu)
+
+/* GINTSTS/GINTMSK bits */
+#define OTG_FS_GINT_MSK_SOF       (1u << 3u)
+#define OTG_FS_GINT_MSK_RXFLVL    (1u << 4u)
+#define OTG_FS_GINT_MSK_USBRST    (1u << 21u)
+#define OTG_FS_GINT_MSK_ENUMDNE   (1u << 13u)
+#define OTG_FS_GINT_MSK_USBSUSP   (1u << 11u)
+#define OTG_FS_GINT_MSK_IEPINT    (1u << 18u)
+#define OTG_FS_GINT_MSK_OEPINT    (1u << 19u)
+#define OTG_FS_GINT_MSK_OTGINT    (1u << 2u)
+
+/* GRSTCTL */
+#define OTG_FS_GRSTCTL_CSRST      (1u << 0u)
+#define OTG_FS_GRSTCTL_AHBIDL     (1u << 31u)
+
+/* GCCFG */
+#define OTG_FS_GCCFG_PWRDWN       (1u << 16u)
+#define OTG_FS_GCCFG_NOVBUSSENS   (1u << 21u)
+
+/* DCFG */
+#define OTG_FS_DCFG_DAD_Pos       4u
+#define OTG_FS_DCFG_DAD_Msk       (0x7Fu << OTG_FS_DCFG_DAD_Pos)
+#define OTG_FS_DCFG_EP0MPS_Pos    11u
+#define OTG_FS_DCFG_EP0MPS_64     (3u << OTG_FS_DCFG_EP0MPS_Pos)
+#define OTG_FS_DCFG_DSPD_FS       (3u << 0u)
+
+/* DCTL */
+#define OTG_FS_DCTL_SDIS          (1u << 11u)
+#define OTG_FS_DCTL_CGINAK        (1u << 1u)
+
+/* DIEPMSK/DOEPMSK */
+#define OTG_FS_DIEPMSK_XFRC       (1u << 0u)
+#define OTG_FS_DIEPMSK_EPDISD     (1u << 1u)
+#define OTG_FS_DIEPMSK_NAK        (1u << 13u)
+#define OTG_FS_DOEPMSK_XFRC       (1u << 0u)
+#define OTG_FS_DOEPMSK_EPDISD     (1u << 1u)
+
+/* DAINT/DAINTMSK: IN endpoints in bits 15:0, OUT in 31:16 */
+#define OTG_FS_DAINT_INEPS_Msk    (0xFFFFu)
+#define OTG_FS_DAINT_INEPS(n)     (1u << (n))
+#define OTG_FS_DAINT_OUTEPS_Msk   (0xFFFFu << 16u)
+#define OTG_FS_DAINT_OUTEPS(n)    (1u << (16u + (n)))
+
+/* DIEPCTL */
+#define OTG_FS_DIEPCTL_MPSIZ_Pos  0u
+#define OTG_FS_DIEPCTL_MPSIZ_Msk  (0x3u << OTG_FS_DIEPCTL_MPSIZ_Pos)
+#define OTG_FS_DIEPCTL_MPSIZ_64   (0u << OTG_FS_DIEPCTL_MPSIZ_Pos)
+#define OTG_FS_DIEPCTL_MPSIZ_8    (3u << OTG_FS_DIEPCTL_MPSIZ_Pos)
+#define OTG_FS_DIEPCTL_EPTYP_Pos  18u
+#define OTG_FS_DIEPCTL_EPTYP_CTL  (0u << OTG_FS_DIEPCTL_EPTYP_Pos)
+#define OTG_FS_DIEPCTL_EPTYP_INT  (2u << OTG_FS_DIEPCTL_EPTYP_Pos)
+#define OTG_FS_DIEPCTL_USBAEP     (1u << 15u)
+#define OTG_FS_DIEPCTL_EPENA      (1u << 31u)
+#define OTG_FS_DIEPCTL_CNAK       (1u << 26u)
+#define OTG_FS_DIEPCTL_SNAK       (1u << 27u)
+#define OTG_FS_DIEPCTL_STALL      (1u << 21u)
+#define OTG_FS_DIEPCTL_SD0PID     (1u << 29u)
+#define OTG_FS_DIEPCTL_TXFNUM_Pos 22u
+#define OTG_FS_DIEPCTL_TXFNUM_Msk (0xFu << OTG_FS_DIEPCTL_TXFNUM_Pos)
+#define OTG_FS_DIEPCTL_NAKSTS     (1u << 17u)
+#define OTG_FS_DIEPCTL_EPDIS      (1u << 30u)
+
+/* DIEPTSIZ */
+#define OTG_FS_DIEPTSIZ_XFRSIZ_Pos 0u
+#define OTG_FS_DIEPTSIZ_XFRSIZ_Msk (0x7FFFFu)
+#define OTG_FS_DIEPTSIZ_PKTCNT_Pos 19u
+#define OTG_FS_DIEPTSIZ_PKTCNT_Msk (0x3Fu << OTG_FS_DIEPTSIZ_PKTCNT_Pos)
+
+/* DOEPCTL */
+#define OTG_FS_DOEPCTL_MPSIZ_Pos  0u
+#define OTG_FS_DOEPCTL_MPSIZ_Msk  (0x3u << OTG_FS_DOEPCTL_MPSIZ_Pos)
+#define OTG_FS_DOEPCTL_EPTYP_Pos  18u
+#define OTG_FS_DOEPCTL_EPTYP_CTL  (0u << OTG_FS_DOEPCTL_EPTYP_Pos)
+#define OTG_FS_DOEPCTL_USBAEP     (1u << 15u)
+#define OTG_FS_DOEPCTL_EPENA      (1u << 31u)
+#define OTG_FS_DOEPCTL_CNAK       (1u << 26u)
+#define OTG_FS_DOEPCTL_SNAK       (1u << 27u)
+#define OTG_FS_DOEPCTL_STALL      (1u << 21u)
+#define OTG_FS_DOEPCTL_NAKSTS     (1u << 17u)
+
+/* DOEPTSIZ */
+#define OTG_FS_DOEPTSIZ_XFRSIZ_Pos 0u
+#define OTG_FS_DOEPTSIZ_XFRSIZ_Msk (0x7FFFFu)
+#define OTG_FS_DOEPTSIZ_PKTCNT_Pos 19u
+#define OTG_FS_DOEPTSIZ_PKTCNT_Msk (0x3Fu << OTG_FS_DOEPTSIZ_PKTCNT_Pos)
+
+/* DIEPINT bits (write 1 to clear) */
+#define OTG_FS_DIEPINT_XFRC       (1u << 0u)
+#define OTG_FS_DIEPINT_EPDISD     (1u << 1u)
+#define OTG_FS_DIEPINT_NAK        (1u << 13u)
+#define OTG_FS_DOEPINT_XFRC       (1u << 0u)
+#define OTG_FS_DOEPINT_EPDISD     (1u << 1u)
+
+/* RCC */
+#define RCC_AHB1ENR_OTGFSEN       (1u << 12u)
+#define RCC_AHB1RSTR_OTGFSRST     (1u << 12u)
+
+/* OTG_FS IRQ = 67 -> ISER[2] bit 3 (NVIC_ISER2 defined above). */
+#define NVIC_OTG_FS_IRQ_BIT      (1u << (67u - 64u))
+
 void SystemInit(void);
 void SystemCoreClockUpdate(void);
 uint32_t GetTick(void);

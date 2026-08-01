@@ -81,6 +81,12 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
     -o "$BUILD_DIR/ec_app_math_tests"
 
 "$CC_BIN" $COMMON_FLAGS \
+    -I"$ROOT/ec_target" \
+    "$ROOT/ec_target/usb_hid_desc.c" \
+    "$ROOT/tests/test_usb_hid_desc.c" \
+    -o "$BUILD_DIR/usb_hid_desc_tests"
+
+"$CC_BIN" $COMMON_FLAGS \
     -I"$ROOT/maker/include" \
     "$ROOT/maker/src/maker_policy.c" \
     "$ROOT/tests/test_maker_policy.c" \
@@ -104,6 +110,7 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
 "$BUILD_DIR/bq_driver_tests"
 "$BUILD_DIR/fan_math_tests"
 "$BUILD_DIR/ec_app_math_tests"
+"$BUILD_DIR/usb_hid_desc_tests"
 "$BUILD_DIR/maker_policy_tests"
 "$BUILD_DIR/matrix_debounce_tests"
 python3 "$ROOT/tools/verify_release_contract.py"
