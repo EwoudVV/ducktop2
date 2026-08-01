@@ -43,6 +43,8 @@ MAPPING: dict[str, tuple[str, float, float]] = {
     "microphone":          ("MK430", 0.0, 0.0),
     "m2-nvme":             ("J10", 0.0, 0.0),
     "m2-wifi":             ("J40", 0.0, 0.0),
+    "oled-a":              ("J41", 0.0, 0.0),
+    "oled-b":              ("J45", 0.0, 0.0),
     "radio-daughterboard": ("J2300", 0.0, 0.0),
 }
 

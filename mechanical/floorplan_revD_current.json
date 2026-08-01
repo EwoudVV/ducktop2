@@ -1,124 +1,493 @@
 {
+ "version": 4,
+ "mode": "select",
+ "grid": 5,
+ "snap": true,
+ "view": {
+  "x": -18,
+  "y": -18,
+  "w": 625,
+  "h": 575
+ },
+ "planes": {
+  "base": {
+   "label": "Base",
+   "x": 0,
+   "y": 0,
+   "w": 358,
+   "h": 248
+  }
+ },
  "parts": [
   {
-   "id": "mu-module",
+   "id": "mainboard-guide",
+   "name": "mainboard outline (358x185, left fin-stack notch)",
    "zone": "base",
-   "x": 105.2,
-   "y": 206.8,
-   "w": 77.5,
-   "h": 65.5
+   "x": 0,
+   "y": 63,
+   "w": 358,
+   "h": 185,
+   "kind": "ghost"
   },
   {
-   "id": "ethernet-jack",
+   "id": "keyboard",
+   "name": "MX ULP keyboard PCB rev A",
    "zone": "base",
-   "x": 337.2,
-   "y": 167.0,
-   "w": 26.06,
-   "h": 17.58
-  },
-  {
-   "id": "usb-c-right",
-   "zone": "base",
-   "x": 353.5,
-   "y": 93.0,
-   "w": 12,
-   "h": 8
-  },
-  {
-   "id": "usb-c-left-1",
-   "zone": "base",
-   "x": 4.5,
-   "y": 111.0,
-   "w": 12,
-   "h": 8
-  },
-  {
-   "id": "usb-c-left-2",
-   "zone": "base",
-   "x": 4.5,
-   "y": 129.0,
-   "w": 12,
-   "h": 8
-  },
-  {
-   "id": "headphone-jack",
-   "zone": "base",
-   "x": 140.0,
-   "y": 235.2,
-   "w": 8.2,
-   "h": 18
-  },
-  {
-   "id": "battery-connector",
-   "zone": "base",
-   "x": 74.3,
-   "y": 238.8,
-   "w": 12,
-   "h": 20
-  },
-  {
-   "id": "fan-connector",
-   "zone": "base",
-   "x": 61.0,
-   "y": 183.0,
-   "w": 10,
-   "h": 8
+   "x": 42.25,
+   "y": 20,
+   "w": 273.5,
+   "h": 80,
+   "kind": "input"
   },
   {
    "id": "keyboard-ffc",
+   "name": "J310 keyboard FFC connector",
    "zone": "base",
-   "x": 319.0,
-   "y": 122.0,
-   "w": 18,
-   "h": 8
+   "x": 319,
+   "y": 122,
+   "w": 21.1,
+   "h": 7.9,
+   "kind": "port"
   },
   {
-   "id": "speaker-connector",
+   "id": "keyboard-ffc-keepout",
+   "name": "keyboard FFC bend / exit keepout",
    "zone": "base",
-   "x": 18.0,
-   "y": 243.0,
-   "w": 10,
-   "h": 8
+   "x": 300,
+   "y": 110,
+   "w": 45,
+   "h": 24,
+   "kind": "ghost"
+  },
+  {
+   "id": "battery-1",
+   "name": "3.7V cell A (measured)",
+   "zone": "base",
+   "x": 38,
+   "y": 105,
+   "w": 60,
+   "h": 100,
+   "kind": "power"
+  },
+  {
+   "id": "battery-2",
+   "name": "3.7V cell B (measured)",
+   "zone": "base",
+   "x": 129,
+   "y": 105,
+   "w": 100,
+   "h": 60,
+   "kind": "power"
+  },
+  {
+   "id": "battery-3",
+   "name": "3.7V cell C (measured)",
+   "zone": "base",
+   "x": 260,
+   "y": 105,
+   "w": 60,
+   "h": 100,
+   "kind": "power"
+  },
+  {
+   "id": "palm-rest",
+   "name": "palm-rest comfort zone",
+   "zone": "base",
+   "x": 50,
+   "y": 165,
+   "w": 258,
+   "h": 80,
+   "kind": "keepout"
+  },
+  {
+   "id": "trackpad-target",
+   "name": "JOMAA trackpad (140 W x 105 D mm)",
+   "zone": "base",
+   "x": 109,
+   "y": 143,
+   "w": 140,
+   "h": 105,
+   "kind": "input"
+  },
+  {
+   "id": "mnt-trackpad",
+   "name": "MNT trackpad size ref",
+   "zone": "base",
+   "x": 146.5,
+   "y": 190,
+   "w": 65,
+   "h": 49,
+   "kind": "ghost"
+  },
+  {
+   "id": "tpad-usbc-conn",
+   "name": "trackpad USB-C receptacle",
+   "zone": "base",
+   "x": 91,
+   "y": 186,
+   "w": 18,
+   "h": 10,
+   "kind": "port"
+  },
+  {
+   "id": "tpad-usbc-cable",
+   "name": "trackpad USB-C cable path",
+   "zone": "base",
+   "x": 105,
+   "y": 189,
+   "w": 44,
+   "h": 4,
+   "kind": "ghost"
   },
   {
    "id": "trackpad-lands",
+   "name": "J58 trackpad solder lands",
    "zone": "base",
    "x": 171.2,
-   "y": 193.0,
-   "w": 4,
-   "h": 3
+   "y": 193,
+   "w": 10.7,
+   "h": 3.1,
+   "kind": "port"
+  },
+  {
+   "id": "speaker-left",
+   "name": "front speaker L",
+   "zone": "base",
+   "x": 3,
+   "y": 227,
+   "w": 38,
+   "h": 18,
+   "kind": "audio"
+  },
+  {
+   "id": "speaker-right",
+   "name": "front speaker R",
+   "zone": "base",
+   "x": 317,
+   "y": 227,
+   "w": 38,
+   "h": 18,
+   "kind": "audio"
+  },
+  {
+   "id": "speaker-connector",
+   "name": "J420 speaker connector",
+   "zone": "base",
+   "x": 18,
+   "y": 243,
+   "w": 7,
+   "h": 6.4,
+   "kind": "port"
   },
   {
    "id": "microphone",
+   "name": "MK430 IM68A130 mic (3.5x3.5 pkg)",
    "zone": "base",
-   "x": 40.0,
-   "y": 173.0,
-   "w": 8,
-   "h": 8
+   "x": 40,
+   "y": 173,
+   "w": 3.5,
+   "h": 3.5,
+   "kind": "audio"
+  },
+  {
+   "id": "left-ports",
+   "name": "left side connector corridor",
+   "zone": "base",
+   "x": 2,
+   "y": 20,
+   "w": 12,
+   "h": 185,
+   "kind": "port"
+  },
+  {
+   "id": "right-ports",
+   "name": "right side connector corridor",
+   "zone": "base",
+   "x": 344,
+   "y": 20,
+   "w": 12,
+   "h": 185,
+   "kind": "port"
+  },
+  {
+   "id": "usb-c-left-1",
+   "name": "J22 USB-C port (left)",
+   "zone": "base",
+   "x": 4.5,
+   "y": 111,
+   "w": 10.6,
+   "h": 9.5,
+   "kind": "port"
+  },
+  {
+   "id": "usb-c-left-2",
+   "name": "J23 USB-C port (left)",
+   "zone": "base",
+   "x": 4.5,
+   "y": 129,
+   "w": 10.6,
+   "h": 9.5,
+   "kind": "port"
+  },
+  {
+   "id": "usb-c-right",
+   "name": "J11 USB-C port (right)",
+   "zone": "base",
+   "x": 353.5,
+   "y": 93,
+   "w": 10.6,
+   "h": 9.5,
+   "kind": "port"
+  },
+  {
+   "id": "ethernet-jack",
+   "name": "J500 JXD1-1022NL recessed Ethernet jack",
+   "zone": "base",
+   "x": 337.2,
+   "y": 167,
+   "w": 26.06,
+   "h": 17.58,
+   "kind": "port"
+  },
+  {
+   "id": "headphone-jack",
+   "name": "J422 rear 3.5mm headphone jack",
+   "zone": "base",
+   "x": 140,
+   "y": 235.2,
+   "w": 8.2,
+   "h": 18,
+   "kind": "port"
+  },
+  {
+   "id": "battery-connector",
+   "name": "J2 Mega-Fit battery connector",
+   "zone": "base",
+   "x": 74.3,
+   "y": 238.8,
+   "w": 25.8,
+   "h": 15,
+   "kind": "power"
+  },
+  {
+   "id": "fan-connector",
+   "name": "J52 blower connector (12V 4-wire)",
+   "zone": "base",
+   "x": 61,
+   "y": 183,
+   "w": 9.5,
+   "h": 6.4,
+   "kind": "port"
+  },
+  {
+   "id": "rear-antennas",
+   "name": "rear antenna connector recess",
+   "zone": "base",
+   "x": 220,
+   "y": 3,
+   "w": 86,
+   "h": 17,
+   "kind": "rf"
+  },
+  {
+   "id": "hinge-left",
+   "name": "left hinge keepout (PLACEHOLDER - hinge not selected)",
+   "zone": "base",
+   "x": 8,
+   "y": 0,
+   "w": 60,
+   "h": 20,
+   "kind": "keepout"
+  },
+  {
+   "id": "hinge-right",
+   "name": "right hinge keepout (PLACEHOLDER - hinge not selected)",
+   "zone": "base",
+   "x": 290,
+   "y": 0,
+   "w": 60,
+   "h": 20,
+   "kind": "keepout"
+  },
+  {
+   "id": "edp-chase",
+   "name": "direct-eDP hinge cable chase",
+   "zone": "base",
+   "x": 190,
+   "y": 0,
+   "w": 28,
+   "h": 30,
+   "kind": "ghost"
+  },
+  {
+   "id": "mu-module",
+   "name": "LattePanda Mu carrier (77x65; drag to upper middle)",
+   "zone": "base",
+   "x": 105.2,
+   "y": 206.8,
+   "w": 77,
+   "h": 65,
+   "kind": "board"
+  },
+  {
+   "id": "cold-plate",
+   "name": "Mu copper cold plate (74x64)",
+   "zone": "base",
+   "x": 106,
+   "y": 207.6,
+   "w": 74,
+   "h": 64,
+   "kind": "thermal"
+  },
+  {
+   "id": "heatpipe",
+   "name": "121721 heatpipe to left fin stack",
+   "zone": "base",
+   "x": 60,
+   "y": 208,
+   "w": 150,
+   "h": 8.1,
+   "kind": "thermal"
+  },
+  {
+   "id": "fin-stack",
+   "name": "SKV505014-AL fin stack (at board notch)",
+   "zone": "base",
+   "x": 2,
+   "y": 187,
+   "w": 50,
+   "h": 50,
+   "kind": "thermal"
+  },
+  {
+   "id": "blower",
+   "name": "12V Delta blower (45x45)",
+   "zone": "base",
+   "x": 6,
+   "y": 190,
+   "w": 45,
+   "h": 45,
+   "kind": "thermal"
+  },
+  {
+   "id": "exhaust",
+   "name": "rear exhaust opening keepout",
+   "zone": "base",
+   "x": 2,
+   "y": 182,
+   "w": 50,
+   "h": 12,
+   "kind": "thermal"
   },
   {
    "id": "m2-nvme",
+   "name": "J10 M.2 2280 NVMe (socket 22x12, card 80x22)",
    "zone": "base",
    "x": 196.4,
    "y": 188.2,
    "w": 80,
-   "h": 22
+   "h": 22,
+   "kind": "board"
   },
   {
    "id": "m2-wifi",
+   "name": "J40 M.2 E-key Wi-Fi (2230 card)",
    "zone": "base",
    "x": 263.6,
    "y": 200.5,
    "w": 22,
-   "h": 30
+   "h": 30,
+   "kind": "board"
+  },
+  {
+   "id": "oled-a",
+   "name": "SSD1306 0.96in OLED A (J41)",
+   "zone": "base",
+   "x": 312.5,
+   "y": 201.6,
+   "w": 27.3,
+   "h": 27.3,
+   "kind": "display"
+  },
+  {
+   "id": "oled-b",
+   "name": "SSD1306 0.96in OLED B (J45)",
+   "zone": "base",
+   "x": 340.3,
+   "y": 201.6,
+   "w": 27.3,
+   "h": 27.3,
+   "kind": "display"
   },
   {
    "id": "radio-daughterboard",
+   "name": "radio/GNSS/audio daughterboard PCB (120x40.5 over J2300)",
    "zone": "base",
    "x": 288.4,
    "y": 212.1,
-   "w": 115,
-   "h": 36
+   "w": 120,
+   "h": 40.5,
+   "kind": "board"
+  },
+  {
+   "id": "panel-outline",
+   "name": "B160QAN03.K panel (measured)",
+   "zone": "lid",
+   "x": 3,
+   "y": 10.5,
+   "w": 352,
+   "h": 227,
+   "kind": "display"
+  },
+  {
+   "id": "panel-active",
+   "name": "2560x1600 active area (approximate)",
+   "zone": "lid",
+   "x": 6.5,
+   "y": 16.5,
+   "w": 345,
+   "h": 215,
+   "kind": "ghost"
+  },
+  {
+   "id": "charger-zone",
+   "name": "charger / power zone",
+   "zone": "tray",
+   "x": 15,
+   "y": 20,
+   "w": 120,
+   "h": 58,
+   "kind": "power"
+  },
+  {
+   "id": "radio-zone",
+   "name": "ham radio / GNSS zone",
+   "zone": "tray",
+   "x": 15,
+   "y": 95,
+   "w": 120,
+   "h": 70,
+   "kind": "rf"
+  },
+  {
+   "id": "maker-zone",
+   "name": "maker MCU header zone",
+   "zone": "tray",
+   "x": 15,
+   "y": 183,
+   "w": 120,
+   "h": 45,
+   "kind": "board"
+  },
+  {
+   "id": "oled-zone",
+   "name": "spare OLED zone (two 27.3mm modules)",
+   "zone": "tray",
+   "x": 15,
+   "y": 245,
+   "w": 58,
+   "h": 28,
+   "kind": "display"
   }
  ]
 }
