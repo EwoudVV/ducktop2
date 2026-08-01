@@ -1,6 +1,6 @@
 # Ducktop2 Target Port Status
 
-Generated: 2026-07-30
+Generated: 2026-08-01
 Version: `0.3.0-policy`
 EC: STM32F407VGT6 (LQFP-100)
 Maker: RP2350A
@@ -8,6 +8,12 @@ Maker: RP2350A
 ## Current Status
 
 All 42 HIL rows in `release/hil_matrix.csv` are **NOT_RUN**. No HIL evidence yet.
+
+**All six EC policy cores are DONE and host-tested** (power/source policy,
+keyboard Fn layer, fan policy, OLED content, lid debounce, battery state
+machine). Nine host suites + the release contract pass via
+`tools/run_host_tests.sh`. The remaining work in every step below is
+target-side: drivers, transports, and HIL evidence.
 
 **2026-07-30 Completion: Steps 1–4 (foundation) are DONE.** A working ARM GCC toolchain was set up, the firmware compiles cleanly with `-Wall -Wextra -Wpedantic -Werror` on GCC 16.1.0, and produces `ducktop2_ec.bin` (9,228 bytes). The binary initializes the STM32F407VGT6 with HSE 8 MHz → PLL → 168 MHz core, SysTick 1 ms tick, I2C1 master at 400 kHz, GPIO safe-state on all pins, and calls `ec_controller_step()` at 50 Hz. See below for file inventory.
 

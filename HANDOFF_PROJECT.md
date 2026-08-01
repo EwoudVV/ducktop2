@@ -1,6 +1,6 @@
 # Ducktop2 — Full Project Handoff
 
-Generated: 2026-07-31
+Generated: 2026-08-01
 
 This document transfers complete project context so a new AI session can
 continue without prior conversation history.
@@ -33,7 +33,7 @@ and Cherry MX Ultra Low Profile keyboard.
 | Keyboard | 65-key compact, Cherry MX Ultra Low Profile, 5×14 matrix, 30-pin FFC (REV-ALREADY FABRICATED — layout locked) |
 | Trackpad | USB via J58 direct-solder (GND/D-/D+/VBUS), like normal laptop |
 | Speakers | PCM2900C USB codec → TPA2012D2 Class-D amp → 2 speakers |
-| Headphone | **MISSING — next hardware task** (rear 3.5 mm, plug-detect mutes speakers, TPA6130A2-class amp) |
+| Headphone | **DONE (fae06d4).** Rear 3.5 mm J422 SJ1-3535NG + U425 TPA6130A2RTJR I2C amp (sheet 15); plug-detect (HP_DETECT on U44 spare input) auto-mutes speakers via U421 AND gate. EC firmware (I2C unmute/volume, read HP_DETECT, drive AUDIO_AMP_EC_EN) remains |
 | Mic | Onboard digital mic (IM68A130), works like any laptop mic |
 | OLEDs | 2× SSD1306 on I2C behind TCA9548A mux (battery, source, temps, fan, radio, EC version) |
 | Ham radio | DRA818V (2 m) + DRA818U (70 cm) on removable daughterboard |
@@ -100,15 +100,15 @@ Full record: `verification/USER_FACING_BEHAVIOR_2026-07-31.md` (25 rows, all con
 | 2 | USB-C ports | All 5 are data-capable. 2 rear PD ports charge. 3 source-only don't. No USB-A. |
 | 3 | Charging | Charges from PD ports AND AUX connector (6–22 V nominal). Charges when laptop is off (NVDC path). |
 | 4 | Power button | Boots to desktop fast. |
-| 5 | Battery | Trusted OS percentage + OLED status. BQ34Z100 gauge. |
-| 6 | Fan | STM32-controlled, quiet at idle, performance-biased under load, never throttles. |
-| 7 | OLEDs | All system component status (battery %, source, temps, fan %, radio state, EC version). |
-| 8 | Keyboard | 65-key compact, NO F-row, NO `~ key, split spacebar. Fn layers handle F1–F10/`~/brightness/volume. **BOARD IS ALREADY FABRICATED — layout locked.** |
+| 5 | Battery | Trusted OS percentage + OLED status. BQ34Z100 gauge. State machine host-tested DONE (`ec_battery`, f223750). |
+| 6 | Fan | STM32-controlled, quiet at idle, performance-biased under load, never throttles. Policy core host-tested DONE (`ec_fan`, d1396d0). |
+| 7 | OLEDs | All system component status (battery %, source, temps, fan %, radio state, EC version). Content composer host-tested DONE (`ec_oled`, d95d9f2). |
+| 8 | Keyboard | 65-key compact, NO F-row, NO `~ key, split spacebar. Fn layers handle F1–F10/`~/brightness/volume. **BOARD IS ALREADY FABRICATED — layout locked.** Fn keymap host-tested DONE (`ec_keymap`, d0991b3). |
 | 9 | Trackpad | USB via J58 direct-solder, like normal laptop. |
 | 10 | Speakers | PCM2900C → TPA2012D2 → 2 speakers. |
 | 11 | Headphone jack | **DONE (2026-07-31, fae06d4).** Rear 3.5mm CUI SJ1-3535NG + TPA6130A2RTJR DirectPath I2C headphone amp; plug-detect (RN) mutes speakers via existing AUDIO_AMP_EC_EN/U421 AND gate. See `HANDOFF_HEADPHONE_JACK.md` Status. Firmware (I2C unmute/volume, read HP_DETECT) is the remaining work. |
 | 12 | Onboard mic | Works like any laptop mic. |
-| 13 | eMMC | 64 GB = recovery/rescue OS + hibernation image. NOT usable as RAM. Primary = 2 TB NVMe. |
+| 13 | eMMC | 64 GB = recovery/rescue OS + hibernation image. NOT usable as RAM. Primary = 2 TB NVMe. Design + setup tooling DONE (e2c594f); execute at Mu bring-up. |
 | 14 | Ethernet | RTL8111H gigabit, like normal laptop. |
 | 15 | HDMI | Mu TCP0 → HDMI-A. |
 | 16 | Wi-Fi/BT | AX210-class, rear antennas. |
@@ -122,14 +122,10 @@ Full record: `verification/USER_FACING_BEHAVIOR_2026-07-31.md` (25 rows, all con
 
 ## 4. Current Git State
 
-### Unpushed Commits (5 ahead of origin/main)
+### Unpushed Commits (1 ahead of origin/main)
 
 ```
-6fe853f Handoff: headphone jack implementation plan for next session
-2ff5b2b Lock keyboard layout (board already fabricated), record headphone jack design
-db86159 Record user-confirmed behavior expectations: lid=display-off, wide-range AUX, headphone jack
-fbc8981 P1.6: Add user-facing behavior verification checklist
-744f320 Fix ERC + annotation issues in EC DFU programming section (08)
+e2c594f Add eMMC recovery/hibernate setup design and tooling
 ```
 
 ### Dirty Files
@@ -143,6 +139,17 @@ fbc8981 P1.6: Add user-facing behavior verification checklist
 ### Recent History (last 20)
 
 ```
+e2c594f Add eMMC recovery/hibernate setup design and tooling
+f223750 Add host-tested battery state machine (ec_battery)
+22a966d Add host-tested lid switch debouncer (ec_lid)
+d95d9f2 Add host-tested OLED status content composer (ec_oled)
+d1396d0 Add host-tested EC fan policy core (ec_fan)
+d0991b3 Add host-tested keyboard Fn-layer keymap (ec_keymap)
+70811a2 Document headphone jack completion (verification, design-status, handoffs)
+fae06d4 Add rear 3.5mm headphone jack with plug-detect speaker mute (sheet 15)
+c329f95 Regenerate child schematics to sync with current generators
+5a8d9c9 Add AI behavior rules to project handoff
+90f3521 Full project handoff for next session
 6fe853f Handoff: headphone jack implementation plan for next session
 2ff5b2b Lock keyboard layout (board already fabricated), record headphone jack design
 db86159 Record user-confirmed behavior expectations
@@ -152,37 +159,26 @@ dc893b5 P1.5: Add EC DFU programming path: BOOT0 button + rear USB-C prog port
 ab1ab99 P1.2: Add STM32F407 EC target firmware port
 5fe84ee P1.3: Add power loop relocation scripts and BOM MPN assignments
 cbbc6c9 Fix 3D model paths and update PCB format to KiCad 10.0
-dc019f9 P1.4: Define 6-layer fabrication stackup for NextPCB
-b4d83e6 Fix 3D model paths and relocate mezzanine stack traces
-9a02516 Fix radio DB J1 layer for mezzanine stack
-015e06f Add Amphenol MDT420M01001 3D model
-e8a8249 Add 3D STEP models for remaining components
-059dbb2 Add 3D models for 9 more footprints
-3271f16 Apply BOM to radio + keyboard daughterboards
-57008c8 Assign 327 BOM MPNs (370→43 gaps)
-66c243f Fix trackpad USB and duplicate footprints
-8f2b992 Wire the trackpad directly over USB2 and record audit holds
-764558d Refresh repository with updated PCB renders
 ```
 
 ---
 
 ## 5. What's Done
 
-### Schematic (14 generated child sheets, 1,173 components, 1,362 nets, 4,522 pins)
+### Schematic (14 generated child sheets, 1,184 components, 1,372 nets, 4,566 pins)
 
 | Check | Result |
 | --- | --- |
-| KiCad ERC | 0 errors; 13 library-copy + 14 intentional grounded-pin warnings |
+| KiCad ERC | 0 errors; 27 intentional warnings (13 library-copy + 14 grounded-pin ties) |
 | Generated schematic self-check | Pass |
 | Schematic design contracts | Pass |
-| Independent netlist closure | 1,569 pass, 0 fail |
+| Independent netlist closure | 1,580 pass, 0 fail |
 | Bounded electrical calculations | 123 pass, 0 fail |
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard duplicate references | 0 |
-| User-facing behavior checklist | 25/25 rows have schematic evidence |
-| BOM procurement gaps | 370 |
-| Host firmware policy tests | Pass on host; 42 HIL rows NOT_RUN |
+| User-facing behavior checklist | 25/25 rows have schematic evidence; firmware cores for rows 1/5/6/7/8/12/15 host-tested DONE |
+| BOM procurement gaps | 378 |
+| Host firmware policy tests | Pass on host (9 suites); 42 HIL rows NOT_RUN |
 
 ### Completed Work Items
 
@@ -197,25 +193,27 @@ e8a8249 Add 3D STEP models for remaining components
 - **6-layer stackup:** Committed to `ducktop2.kicad_pcb`. Commit `dc019f9`.
 - **Trackpad USB fix:** J58 lands relocated, R250/R251 physical short removed, duplicate refs (U170, U2004, U2014) removed. Commit `66c243f`.
 - **Rear 3.5mm headphone jack:** J422 CUI SJ1-3535NG + U425 TPA6130A2RTJR DirectPath I2C headphone amp on sheet 15, plug-detect (HP_DETECT on recovered U44 spare input) auto-mutes speakers via the existing U421 AND gate; new TPA6130A2 symbol + LIBMAP + sym-lib-table, contracts updated SOURCE_MGR_SPARE1->HP_DETECT, System Audio root block enlarged to fit new hier pins. Commits `c329f95` (stale-MPN schematic sync) + `fae06d4`.
+- **Host-tested EC firmware cores (2026-07-31/08-01):** keyboard Fn layer `ec_keymap` (`d0991b3`, 22 tests), fan policy `ec_fan` (`d1396d0`, 16 tests), OLED content composer `ec_oled` (`d95d9f2`, 16 tests), lid debouncer `ec_lid` (`22a966d`, 12 tests), battery state machine `ec_battery` (`f223750`, 18 tests). All wired into `run_host_tests.sh` + `CMakeLists.txt`; all 9 host suites and the release contract pass. Target-side drivers (matrix scan, USB HID, NTC ADC, TIM1 PWM, SSD1306 I2C, PE10 ACPI events, BQ34Z100 I2C, report transport) remain.
+- **eMMC recovery/hibernate design + tooling (`e2c594f`):** `software/os-theme/docs/emmc-recovery.md` (GPT layout, sizing math, boot flow, hibernate config, recovery procedures) + guarded installer `software/os-theme/install/emmc-recovery-setup.sh` (`--check`/`--dry-run`, refuses non-eMMC/mounted/running-root devices; `--configure-hibernate`). Execute at Mu bring-up.
 
 ---
 
 ## 6. What's NOT Done
 
-### High Priority (Next Session)
+### High Priority (Next Session) — all five items are now DONE (host-tested cores; target-side work remains)
 
 1. **Headphone jack — DONE (fae06d4).** Schematic on sheet 15 (J422 SJ1-3535NG + U425 TPA6130A2RTJR + HP_DETECT on U44 spare input); EC firmware (I2C enable/unmute/volume, read HP_DETECT, drive AUDIO_AMP_EC_EN) is the remaining work. See `HANDOFF_HEADPHONE_JACK.md` Status section.
-2. **Keyboard Fn-layer firmware** — F1–F10, `~, brightness, volume assignments for the fabricated 65-key board.
-3. **Fan curve firmware** — STM32 EC, quiet idle, performance-biased under load, no throttle.
-4. **OLED content firmware** — All system component status.
-5. **Lid behavior firmware/ACPI** — Display off on close, Mu running, instant resume.
+2. **Keyboard Fn-layer firmware — DONE (d0991b3).** Host-tested `ec_keymap` core (F1–F10, `~, Delete, brightness, volume; 22 tests). Target-side matrix scan + USB HID remain.
+3. **Fan curve firmware — DONE (d1396d0).** Host-tested `ec_fan` core (quiet idle, performance-biased, never throttles; 16 tests). Target-side NTC ADC + PWM write remain.
+4. **OLED content firmware — DONE (d95d9f2).** Host-tested `ec_oled` content composer (2×8 lines, all system component status; 16 tests). Target-side SSD1306 I2C + glyph rasterisation remain.
+5. **Lid behavior firmware/ACPI — DONE (22a966d).** Host-tested `ec_lid` debouncer (30 ms, one-shot ACPI edges; 12 tests). Target-side PE10 read + ACPI event forwarding remain.
 
 ### Medium Priority
 
 - Battery reporting firmware/ACPI — **DONE (f223750)** host-tested `ec_battery` state machine (UNKNOWN/NOT_PRESENT/DISCHARGING/CHARGING/FULL with hysteresis, 18 tests); target-side BQ34Z100 I2C + report transport to Mu OS `power_supply` remains
-- eMMC role: recovery/rescue OS + hibernation image setup — **DONE** design + guarded setup script (`software/os-theme/docs/emmc-recovery.md`, `install/emmc-recovery-setup.sh`); execute at Mu bring-up
-- Documentation updates (design-status.md date is 2026-07-31, verify current state)
-- Complete BOM/orderable BOM (370 gaps remain)
+- eMMC role: recovery/rescue OS + hibernation image setup — **DONE (e2c594f)** design + guarded setup script (`software/os-theme/docs/emmc-recovery.md`, `install/emmc-recovery-setup.sh`); execute at Mu bring-up
+- Documentation updates — **DONE (2026-08-01)** full sweep: README, design-status, handoff, verification summary, firmware README/status, dated records
+- Complete BOM/orderable BOM (378 gaps remain)
 
 ### Lower Priority / Blocked
 
@@ -288,7 +286,7 @@ e8a8249 Add 3D STEP models for remaining components
 │   └── target_port_status.md       # Full target port roadmap and status
 ├── docs/                           # Architecture, status, renders
 │   ├── hardware.md                 # Full hardware architecture
-│   ├── design-status.md            # Current design status (updated 2026-07-31)
+│   ├── design-status.md            # Current design status (updated 2026-08-01)
 │   ├── build-and-verify.md         # Build/verification commands
 │   ├── review-prompt.md            # Independent review prompt
 │   ├── display-direct-edp.md       # eDP panel/cable work
@@ -369,7 +367,7 @@ python3 gen/check_release_candidate.py --stage schematic
 ### Firmware Policy Tests
 
 ```sh
-firmware/tools/run_host_tests.sh
+sh firmware/tools/run_host_tests.sh
 ```
 
 ### Compile-Check Generators
@@ -480,33 +478,21 @@ mapping before assigning HP_DETECT.
 
 ---
 
-## 11. Headphone Jack — The Next Task
+## 11. Headphone Jack — DONE (schematic); EC firmware remains
 
 Full handoff: `HANDOFF_HEADPHONE_JACK.md`
 
 ### Summary
 
-- **Add:** 3.5 mm stereo jack (CUI SJ1-3535NG) on rear edge + TPA6130A2 headphone amp + plug-detect circuit
+- **DONE (2026-07-31, fae06d4):** rear 3.5 mm stereo jack (CUI SJ1-3535NG) on
+  the rear edge + TPA6130A2RTJR headphone amp + plug-detect on sheet 15
 - **Where:** `gen/generate_system_audio_sheet.py` (sheet 15)
-- **Detect:** SN pin + 100k pullup to MCU_3V3 → HP_DETECT → EC GPIO
+- **Detect:** RN ring-normal contact + 100k pullup to MCU_3V3 → HP_DETECT → EC U44 spare input
 - **Mute:** EC firmware drives AUDIO_AMP_EC_EN low → existing AND gate (U421) mutes speakers
-- **Amp:** TPA6130A2 from PCM2900C DAC_VOUT_L/R via 1µF coupling, capless output to jack T/R
-- **New files needed:** `gen/TPA6130A2.kicad_sym`
-- **LIBMAP entries needed:** `"TPA6130A2": "TPA6130A2"` and `"AudioJack3_Dual_Ground_Switch": "Connector_Audio"`
+- **Amp:** TPA6130A2RTJR from PCM2900C line-out via 1µF coupling, capless output to jack T/R; /SD tied to MU_HOST_ACTIVE (S0-only)
+- **Remaining:** EC firmware — I2C unmute/volume, read HP_DETECT, drive AUDIO_AMP_EC_EN
 
-### Implementation Steps (from handoff doc)
-
-1. Research TPA6130A2 pinout/gain from datasheet, verify SJ1-3535NG footprint
-2. Create TPA6130A2 symbol → `gen/TPA6130A2.kicad_sym`
-3. Add to LIBMAP in `gen/genlib.py`
-4. Assign EC GPIO for HP_DETECT in `gen/generate_ec_mcu_sheet.py`
-5. Implement in `gen/generate_system_audio_sheet.py` (jack + amp + detect)
-6. Regenerate schematics
-7. Run ERC + netlist + release checks
-8. Update verification record
-9. Commit
-
-### Key Gotchas
+### Implementation Steps (from handoff doc) — steps 1–8 complete
 
 - TPA6130A2 and TPA2012D2 share DAC_VOUT_L/R — avoid doubling the load
 - Pin review table and verify_design_contracts.py reference TPA2012D2 hardcoded nets — may need updating
@@ -553,7 +539,7 @@ All child sheets are generated by Python scripts in `gen/`. The key files:
 | File | Contents |
 | --- | --- |
 | `hardware.md` | Full hardware architecture (compute, power, I/O, controllers, audio, radio) |
-| `design-status.md` | Current design status, release boundary, work-in-progress (updated 2026-07-31) |
+| `design-status.md` | Current design status, release boundary, work-in-progress (updated 2026-08-01) |
 | `build-and-verify.md` | Build commands, ERC, netlist, firmware tests, PCB checks |
 | `review-prompt.md` | Independent review prompt (4-reviewer framework) |
 | `display-direct-edp.md` | Direct eDP panel and cable work |
@@ -572,7 +558,7 @@ All child sheets are generated by Python scripts in `gen/`. The key files:
 | `SCHEMATIC_CLOSURE_*.md` | Netlist closure evidence |
 | `PIN_BY_PIN_REVIEW_*.md` | Pin classification |
 | `ELECTRICAL_CALCULATIONS_*.md` | Bounded threshold/current/power/timing calculations |
-| `BOM_MPN_ASSIGNMENTS.md` | 327 assigned MPNs (370→43 gaps) |
+| `BOM_MPN_ASSIGNMENTS.md` | 327 assigned MPNs (370→43 gaps, later 43→0 pending schematic sync; current gaps 378 with headphone-jack caps) |
 | `INVENTORY_MANIFEST_*.md` | Component inventory |
 | `SCHEMATIC_TO_PCB_ECO_*.md` | Reference/footprint/net parity |
 | `KEYBOARD_FFC_ASSEMBLY_CONTRACT_*.md` | Keyboard cable orientation |
@@ -591,13 +577,13 @@ All child sheets are generated by Python scripts in `gen/`. The key files:
 
 ## 14. Open Design Questions
 
-1. **Headphone jack mute:** EC-driven firmware mute vs hardware-only? **Recommendation:** firmware (simpler, consistent with EC-controlled design philosophy). See `HANDOFF_HEADPHONE_JACK.md`.
-2. **TPA6130A2 gain setting:** Check datasheet G0/G1 pin configuration. Must match PCM2900C line-out level.
-3. **TPA6130A2 SHUTDOWN pin:** Tie always-on (MCU_3V3, ~7 mA idle) or EC-controlled HP_EN for power saving?
-4. **eMMC use:** Recovery/rescue OS + hibernation image (64 GB can hold 32 GB RAM hibernate).
-5. **F-key layout:** Standard 65% Fn layers (Fn+1..0=F1–F10, Fn+Esc=`, Fn+arrows=brightness/volume). User confirmed no change needed. Board is fabricated.
-6. **OLED content:** Exact fields — battery %, source, temps, fan %, radio state, EC version. Needs firmware spec.
-7. **Fan curve thresholds:** Specific temps for spin-up/noise/no-throttle. Needs thermal model first.
+1. ~~**Headphone jack mute:** EC-driven firmware mute vs hardware-only?~~ **RESOLVED (fae06d4):** firmware — EC drives AUDIO_AMP_EC_EN low via the existing U421 AND gate.
+2. **TPA6130A2 gain setting:** Check datasheet G0/G1 pin configuration. Must match PCM2900C line-out level. (Gain pins landed per datasheet default; audible level check is first-article work.)
+3. ~~**TPA6130A2 SHUTDOWN pin:** Tie always-on or EC-controlled?~~ **RESOLVED (fae06d4):** /SD tied to MU_HOST_ACTIVE (S0-only, ~0.4 uA in S3); amp powers up muted with outputs disabled.
+4. ~~**eMMC use:** Recovery/rescue OS + hibernation image (64 GB can hold 32 GB RAM hibernate).~~ **RESOLVED (e2c594f):** GPT layout with auto-sized hibernate swap; design + guarded setup script in `software/os-theme/`.
+5. ~~**F-key layout:** Standard 65% Fn layers.~~ **RESOLVED:** user confirmed; implemented host-tested in `ec_keymap` (d0991b3). Board is fabricated.
+6. ~~**OLED content:** Exact fields.~~ **RESOLVED (d95d9f2):** spec implemented in `ec_oled` (left power/battery, right thermal/fan/system, dashes on invalid).
+7. ~~**Fan curve thresholds.**~~ **RESOLVED (d1396d0):** 40/45C hysteresis, 45→70C linear 30→100%, 100% ≥70C, throttle_imminent at 80C; thermal model remains a first-article refinement.
 8. **BQ25798/BQ34Z100 I2C bus:** Verify if on EC I2C1 or separate bus. Needs PCB netlist verification.
 9. **FAN_TACH (PC5):** Not a timer input on STM32F407. Consider timer capture pin if RPM measurement needed.
 10. **Mu PL1/PL2:** Must be locked in BIOS. TPS552892 12V rail has only 4.58W headroom.

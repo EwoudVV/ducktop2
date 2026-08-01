@@ -12,11 +12,15 @@ display connection, and a separate low-profile mechanical keyboard.
 
 ![Top view of the Ducktop2 motherboard with routing in progress](docs/images/ducktop2-pcb-top.png)
 
-> **Current state, 27 July 2026:** the generated motherboard schematic passes
-> its ERC and copied-project checks. The six-layer PCB has 1,170 physical
+> **Current state, 1 August 2026:** the generated motherboard schematic passes
+> its ERC, netlist-closure, calculation, and pin-review checks, and sheet 15
+> now carries the rear 3.5 mm headphone jack with plug-detect speaker mute.
+> Six EC firmware policy cores are complete and host-tested (power/source
+> policy, keyboard Fn layer, fan policy, OLED content, lid debounce, battery
+> state machine), and the eMMC recovery/hibernation design and setup tooling
+> are done. The six-layer PCB has 1,170 physical
 > footprints and routing is in progress. The current independent verdict is
-> **SCHEMATIC BLOCKED**: the trackpad-zone P0, the R250/R251 trackpad USB
-> short, and three duplicate physical references are closed, but routing,
+> still **SCHEMATIC BLOCKED**: routing,
 > DRC/parity, SI, battery, mechanical,
 > procurement, and target-firmware evidence still block an order. The board
 > images in this repository are current routed-in-progress renders, not a
@@ -143,15 +147,15 @@ maintained ERC screenshot.
 
 | Check | Current result |
 | --- | --- |
-| KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
-| Independent netlist closure | 1,569 pass, 0 fail |
+| KiCad ERC | 0 errors; 27 intentional warnings (13 library-copy + 14 grounded-pin ties) |
+| Independent netlist closure | 1,580 pass, 0 fail |
 | Bounded electrical calculations | 123 pass, 0 fail |
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard duplicate references | 0; checked by the release gate |
 | PCB DRC / parity | 1,404 all-track violations, 499 unconnected items, 199 parity observations; routing review required |
-| BOM procurement completeness | 370 unresolved items |
-| Independent design review | **SCHEMATIC BLOCKED** (2026-07-27) |
-| Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
+| BOM procurement completeness | 378 unresolved items |
+| Independent design review | **SCHEMATIC BLOCKED** (2026-07-27; closed findings recorded) |
+| Host firmware policy tests | Pass on host (9 suites); 42 HIL rows remain `NOT_RUN` |
 
 The project has also been reviewed repeatedly against component datasheets.
 The current summaries show what was checked and what remains uncertain; they
@@ -179,7 +183,7 @@ python3 gen/check_release_candidate.py --stage schematic
 The host-side firmware policy tests do not require a vendor SDK:
 
 ```sh
-firmware/tools/run_host_tests.sh
+sh firmware/tools/run_host_tests.sh
 ```
 
 See [build and verification](docs/build-and-verify.md) before regenerating the
@@ -211,6 +215,9 @@ schematics or comparing the PCB to the netlist.
 - [Radio/GNSS daughterboard](radio_daughterboard/README.md)
 - [Keyboard production package](manufacturing/keyboard_revA_jlcpcb/README_JLCPCB.md)
 - [Verification summary](verification/README.md)
+- [OS theme work](software/os-theme/README.md)
+- [eMMC recovery/hibernation design](software/os-theme/docs/emmc-recovery.md)
+- [Project handoff for the next session](HANDOFF_PROJECT.md)
 - [Current full schematic export](docs/exports/ducktop2-selected-schematics.pdf)
 - [Current independent review](verification/INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
 - [Current post-fix audit](verification/INDEPENDENT_REVIEW_2026-07-27_postfix.md)
@@ -222,18 +229,28 @@ schematics or comparing the PCB to the netlist.
 1. ✅ Remove the three verified duplicate physical PCB references and their
    duplicate-only copper, and separate the overlapping unrouted R251 trackpad
    USB resistor from R250 (2026-07-27).
-2. Classify and resolve the 1,404 current PCB DRC findings, 499 unconnected
+2. ✅ Add the rear 3.5 mm headphone jack with plug-detect speaker mute to sheet
+   15 (`fae06d4`); EC headphone firmware (I2C unmute/volume, HP_DETECT) remains
+   target-side work.
+3. ✅ Host-tested firmware policy cores: keyboard Fn layer (`d0991b3`), fan
+   policy (`d1396d0`), OLED content (`d95d9f2`), lid debounce (`22a966d`),
+   battery state machine (`f223750`); target-side drivers, transports, and the
+   42 HIL rows remain.
+4. ✅ eMMC recovery/hibernation design and setup tooling
+   (`software/os-theme/docs/emmc-recovery.md` + `install/emmc-recovery-setup.sh`,
+   `e2c594f`); execution happens at Mu bring-up.
+5. Classify and resolve the 1,404 current PCB DRC findings, 499 unconnected
    items, and 199 schematic-parity observations as routing continues.
-3. ~~Freeze the six-layer stackup and controlled-impedance geometries~~ — COMPLETED via P1.4. Stackup committed to `ducktop2.kicad_pcb` (6-layer 1.6mm, 2116/2313 prepreg, 1oz all layers, L2/L5 GND, ENIG). Run NextPCB impedance calculator for trace widths.
-4. ~~Complete manufacturer part numbers and assembly constraints in the BOM~~ — COMPLETED. 43 gaps assigned Murata GRM MPNs in `verification/BOM_MPN_ASSIGNMENTS.md`.
-5. Route and review power and high-speed interfaces, followed by control,
+6. ~~Freeze the six-layer stackup and controlled-impedance geometries~~ — COMPLETED via P1.4. Stackup committed to `ducktop2.kicad_pcb` (6-layer 1.6mm, 2116/2313 prepreg, 1oz all layers, L2/L5 GND, ENIG). Run NextPCB impedance calculator for trace widths.
+7. ~~Complete manufacturer part numbers and assembly constraints in the BOM~~ — COMPLETED. 43 gaps assigned Murata GRM MPNs in `verification/BOM_MPN_ASSIGNMENTS.md`.
+8. Route and review power and high-speed interfaces, followed by control,
    audio, and GPIO.
-6. Refill zones only in a copied board, clean silkscreen, run full DRC, and
+9. Refill zones only in a copied board, clean silkscreen, run full DRC, and
    review every exception.
-7. Finalize the eDP harness, battery pack, trackpad-cable retention, cooling
-   stack, and enclosure model.
-8. Assemble the first article, bring up one rail at a time, and record the test
-   results before installing the compute module or cells permanently.
+10. Finalize the eDP harness, battery pack, trackpad-cable retention, cooling
+    stack, and enclosure model.
+11. Assemble the first article, bring up one rail at a time, and record the test
+    results before installing the compute module or cells permanently.
 
 ## Reviews and Contributions
 

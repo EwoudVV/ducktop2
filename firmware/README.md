@@ -66,6 +66,29 @@ safety transitions can be reviewed and tested on a host compiler first.
   changes, requires a separate path-only bootstrap commit, writes current and
   power limits before charger/load enables, commits optional loads last, and
   attempts a full safe-state rollback after any driver error.
+- The host-tested keyboard Fn layer (`ec_keymap`) translates the fabricated
+  5×14 MX ULP matrix state into a USB HID boot-6KRO report plus a 4-slot
+  consumer report: Fn+1..0→F1..F10, Fn+Esc→grave, Fn+Bksp→Delete,
+  Fn+Up/Down→Brightness, Fn+Left/Right→Volume. 22 host tests.
+- The host-tested fan policy (`ec_fan`) is quiet at idle, performance-biased
+  under load, and never throttles: control temp = max(skin, Mu) in
+  decidegrees C, 40/45 °C hysteresis, 2 s anti-cycling, linear 30→100 % across
+  45→70 °C, 100 % at ≥70 °C, `throttle_imminent` at 80 °C, fail-safe 100 % on
+  invalid temps. 16 host tests.
+- The host-tested OLED content composer (`ec_oled`) renders the user-verified
+  "all system component status" spec into two 8-line text buffers (left:
+  power/battery; right: thermal/fan/system), with dashes for invalid data.
+  16 host tests.
+- The host-tested lid debouncer (`ec_lid`) debounces LID_CLOSED_N (30 ms,
+  R209 pull-up fail-safe open) and emits one-shot just_closed/just_opened
+  edges for ACPI events; it never sequences Mu power on lid events. 12 host
+  tests.
+- The host-tested battery state machine (`ec_battery`) turns the telemetry
+  snapshot + pack_present + charger_enable into a
+  UNKNOWN/NOT_PRESENT/DISCHARGING/CHARGING/FULL report with hysteresis
+  (charge >50 mA, discharge <−50 mA, full <30 mA + SOC ≥95 % with 2 s
+  confirmation) for the Mu OS as `/sys/class/power_supply/BAT0/`. 18 host
+  tests.
 - Maker user rails start off and require an explicit request, independent
   authorization, and a hardware-interlock observation. All 26 exported RP2350
   user I/O signals separately require I/O authorization; they start high
@@ -87,12 +110,13 @@ On a machine without CMake, the same strict C11 tests can be run without
 creating repository build artifacts:
 
 ```sh
-firmware/tools/run_host_tests.sh
+sh firmware/tools/run_host_tests.sh
 ```
 
-The runner also executes `tools/verify_release_contract.py`, which checks
-version consistency, required safety constants and vectors, and the evidence
-rules for `release/hil_matrix.csv`.
+The runner executes nine suites (policy, commit, telemetry, keymap, fan,
+oled, lid, battery, maker) and then `tools/verify_release_contract.py`, which
+checks version consistency, required safety constants and vectors, and the
+evidence rules for `release/hil_matrix.csv`.
 
 The implementation has no network dependencies and uses only the C standard
 library in host tests.

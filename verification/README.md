@@ -8,17 +8,17 @@ locally outside the public working tree.
 
 | Check | Current result |
 | --- | --- |
-| KiCad ERC | 0 errors, 13 library-copy and 14 intentional grounded-pin warnings |
+| KiCad ERC | 0 errors, 27 intentional warnings (13 library-copy + 14 grounded-pin ties) |
 | Generated schematic self-check | Pass |
 | Schematic design contracts | Pass |
-| Independent netlist closure | 1,569 pass, 0 fail |
+| Independent netlist closure | 1,580 pass, 0 fail |
 | Electrical calculations | 123 pass, 0 fail |
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard physical reference uniqueness | 0 duplicate references |
 | Mainboard PCB DRC / parity baseline | 1,404 all-track violations, 499 unconnected items, 199 parity observations |
-| BOM procurement gaps | 370 |
+| BOM procurement gaps | 378 |
 | Radio daughterboard ERC | 0 errors, 0 warnings |
-| Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
+| Host firmware policy tests | Pass on host (9 suites: policy, commit, telemetry, keymap, fan, oled, lid, battery, maker); 42 HIL rows remain `NOT_RUN` |
 
 The schematic result means the current generated netlist is internally
 consistent under the checks implemented here. It does not substitute for target
@@ -31,18 +31,18 @@ The current independent verdict remains **SCHEMATIC BLOCKED**.
 
 ## Current Evidence
 
+- [`COMPREHENSIVE_REVIEW_2026-07-30.md`](COMPREHENSIVE_REVIEW_2026-07-30.md) -
+  full hardware review (9 P1 items: 3 closed, 1 handed off, 3 resolved, 2 open)
 - [`SCHEMATIC_CLOSURE_2026-07-20.md`](SCHEMATIC_CLOSURE_2026-07-20.md) - closed
   electrical findings and current endpoint measurements
-- [`ELECTRICAL_CALCULATIONS_2026-07-20.md`](ELECTRICAL_CALCULATIONS_2026-07-20.md)
-  - bounded threshold, current, power, and timing calculations
-- [`PIN_BY_PIN_REVIEW_2026-07-20.md`](PIN_BY_PIN_REVIEW_2026-07-20.md) - pin
-  classification summary
-- [`INVENTORY_MANIFEST_2026-07-20.md`](INVENTORY_MANIFEST_2026-07-20.md) - active
-  component and net inventory
-- [`BOM_RELEASE_GAPS_2026-07-20.md`](BOM_RELEASE_GAPS_2026-07-20.md) - procurement
-  fields that still need exact identities
-- [`SCHEMATIC_TO_PCB_ECO_2026-07-20.md`](SCHEMATIC_TO_PCB_ECO_2026-07-20.md) -
-  current reference and pad-net comparison
+- [`ELECTRICAL_CALCULATIONS_2026-07-25.md`](ELECTRICAL_CALCULATIONS_2026-07-25.md)
+  - bounded threshold, current, power, and timing calculations (current series)
+- [`PIN_BY_PIN_REVIEW_2026-07-25.md`](PIN_BY_PIN_REVIEW_2026-07-25.md) - pin
+  classification summary (current series)
+- [`INVENTORY_MANIFEST_2026-07-28.md`](INVENTORY_MANIFEST_2026-07-28.md) - active
+  component and net inventory (current series)
+- [`BOM_RELEASE_GAPS_2026-07-28.md`](BOM_RELEASE_GAPS_2026-07-28.md) - procurement
+  fields that still need exact identities (current series; 378 gaps)
 - [`SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md`](SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md)
   - copied-project post-fix reference, footprint, pad-net, and DNP comparison
 - [`INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md`](INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
@@ -53,7 +53,8 @@ The current independent verdict remains **SCHEMATIC BLOCKED**.
   integrity, and the remaining release holds
 - [`USER_FACING_BEHAVIOR_2026-07-31.md`](USER_FACING_BEHAVIOR_2026-07-31.md) -
   user-visible feature checklist: intended behavior and schematic evidence for
-  every user-facing function (lid, USB-C roles, boot, audio, display, input)
+  every user-facing function (lid, USB-C roles, boot, audio, display, input);
+  firmware cores for rows 1/5/6/7/8/12/15 are host-tested DONE
 - [`KEYBOARD_FFC_ASSEMBLY_CONTRACT_2026-07-15.md`](KEYBOARD_FFC_ASSEMBLY_CONTRACT_2026-07-15.md)
   - keyboard cable orientation and continuity checks
 - [`MECHANICAL_RETENTION_VALIDATION_2026-07-18.md`](MECHANICAL_RETENTION_VALIDATION_2026-07-18.md)
@@ -74,7 +75,7 @@ unchanged.
 To run the firmware policy tests separately:
 
 ```sh
-firmware/tools/run_host_tests.sh
+sh firmware/tools/run_host_tests.sh
 ```
 
 For an independent review, use [`docs/review-prompt.md`](../docs/review-prompt.md)
