@@ -350,6 +350,15 @@ The TPS25751A EEPROM configuration is **released** — the JSON source config `d
 - Create `ec_target/pwm.c/h` — TIM1_CH1 on PE9 for 25 kHz fan PWM
 - Create `ec_target/tach.c/h` — PC5 as GPIO input for fan tach (or timer capture if re-pinned)
 - Populate `ec_inputs_t.thermal_ok` and `.thermal_data_valid`
+- **Fan policy core DONE (2026-07-31)** in `ec/src/ec_fan.c` (+ `ec_fan.h`):
+  pure-C, host-tested. Control temp = max(skin, Mu coldplate) in decidegrees C;
+  hysteresis (idle_off 40C / spin_up 45C); 2s anti-cycling minimum runtime;
+  linear ramp 30%→100% across 45C→70C; 100% duty at/above 70C (25-35C below the
+  Mu throttle point → never throttles); throttle_imminent flag at 80C for
+  higher-level PL1 reduction; fail-safe 100% duty on invalid temperature data.
+  16 host tests pass (`tests/test_ec_fan.c`). Remaining target-side work: NTC
+  ADC→decidegrees conversion feeding `ec_fan_inputs_t`, and writing
+  `ec_fan_output_t.duty_pct` to TIM1_CH1.
 - **Dependency**: step 2 (clock)
 
 ### Step 11: Main Firmware Loop (complex)
