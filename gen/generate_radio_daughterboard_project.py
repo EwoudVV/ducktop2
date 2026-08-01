@@ -1,6 +1,7 @@
 import os
 import shutil
 
+import build_ducktop2
 from build_ducktop2 import (
     PROJDIR,
     U,
@@ -64,6 +65,9 @@ def write_project_file():
 
 
 def main():
+    # The radio daughterboard BOM is patched by apply_bom_radio_daughterboard.py;
+    # keep this build from stamping main-board catalog parts onto its passives.
+    build_ducktop2.PROCUREMENT_STAMP = False
     os.makedirs(BOARD_DIR, exist_ok=True)
 
     core_uuid = stable_uuid("radio_daughterboard:sheet-symbol:01_core")

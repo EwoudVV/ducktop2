@@ -18,7 +18,8 @@ zone fill, the three duplicate physical PCB references `U170`, `U2004`, and
 `U2014` were removed with their duplicate-only copper, and R251 was moved clear
 of R250 to remove a physical D+/D- short. Those fixes close the corresponding
 P0 and P1 findings. They do not waive the remaining routing,
-signal-integrity, battery, mechanical, procurement, or HIL holds below.
+signal-integrity, battery, mechanical, or HIL holds below. Procurement
+identity is complete (0 gaps, stamped at generation time).
 
 ## Schematic
 
@@ -39,7 +40,7 @@ The current copied-project schematic gate reports:
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard duplicate physical references | 0 |
 | User-facing behavior checklist | 25 of 25 rows have schematic evidence; firmware/ACPI items held |
-| BOM procurement gaps | 378 |
+| BOM procurement gaps | 0 |
 | Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
 
 The remaining pin-review rows are broad Mu, M.2, MCU, spare, NC, and ground-pin
@@ -57,9 +58,8 @@ the EC drives AUDIO_AMP_EC_EN low so the existing U421 AND gate mutes the
 TPA2012D2 speaker amp, and I2C-unmutes U425. /SD is tied to MU_HOST_ACTIVE
 (S0-only, 0.4 uA in S3) and the amp powers up muted with outputs disabled
 (fail-safe OFF). ERC stays 0 errors / 27 intentional warnings and closure rose
-to 1,580 nets. U425/J422 carry their MPN properties; the 9 new small caps do
-not, which is why BOM procurement gaps moved 370 -> 378 (pending the separate
-BOM-assignment pass).
+to 1,580 nets. U425/J422 carry their MPN properties; the 9 new small caps were
+stamped through the generation-time catalog, so BOM procurement gaps are now 0.
 
 The host-tested EC firmware gained a keyboard Fn-layer keymap module
 (`firmware/ec/src/ec_keymap.c` + `ec_keymap.h`) — pure C that translates the
@@ -209,8 +209,13 @@ hardware exists.
    (`software/os-theme/docs/emmc-recovery.md` + `install/emmc-recovery-setup.sh`).
 7. Classify and resolve all remaining PCB DRC, unconnected, and parity findings.
 8. ~~Freeze the six-layer stackup and controlled-impedance geometries.~~ — COMPLETED via P1.4.
-9. ~~Complete manufacturer part numbers, ratings, assembly constraints, and
-   alternate sourcing for the remaining BOM gaps.~~ — COMPLETED (43 gaps assigned Murata GRM; schematic sync `c329f95`). Current 378 gaps are the new headphone-jack passives (pending the BOM-assignment pass).
+9. ✅ Complete manufacturer part numbers, ratings, assembly constraints, and
+   alternate sourcing for the remaining BOM gaps. — COMPLETED. All 378 gap
+   refs (204 resistors + 174 capacitors) now stamp Manufacturer/MPN at
+   generation time from `gen/bom_catalog.py` (inverted from the reviewed
+   `apply_bom_catalog.py` assignments + the 2026-07-30 Murata GRM hold
+   suggestions + MCP-verified LCSC alternates); regeneration can no longer
+   lose procurement identity. BOM release gate PASS, 0 gaps.
 10. Finish reviewed power, PCIe, USB, HDMI, Ethernet, audio, and control routing.
 11. Refill zones only in a copied board, clean silkscreen, run full DRC, and
     review every exception.

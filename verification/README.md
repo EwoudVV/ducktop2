@@ -16,7 +16,7 @@ locally outside the public working tree.
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard physical reference uniqueness | 0 duplicate references |
 | Mainboard PCB DRC / parity baseline | 1,404 all-track violations, 499 unconnected items, 199 parity observations |
-| BOM procurement gaps | 378 |
+| BOM procurement gaps | 0 (378 closed via generation-time catalog) |
 | Radio daughterboard ERC | 0 errors, 0 warnings |
 | Host firmware policy tests | Pass on host (9 suites: policy, commit, telemetry, keymap, fan, oled, lid, battery, maker); 42 HIL rows remain `NOT_RUN` |
 
@@ -41,8 +41,9 @@ The current independent verdict remains **SCHEMATIC BLOCKED**.
   classification summary (current series)
 - [`INVENTORY_MANIFEST_2026-07-28.md`](INVENTORY_MANIFEST_2026-07-28.md) - active
   component and net inventory (current series)
-- [`BOM_RELEASE_GAPS_2026-07-28.md`](BOM_RELEASE_GAPS_2026-07-28.md) - procurement
-  fields that still need exact identities (current series; 378 gaps)
+- [`BOM_RELEASE_GAPS_2026-08-01.md`](BOM_RELEASE_GAPS_2026-08-01.md) -
+  procurement identity gaps: 0 (closed 2026-08-01; all passives stamped at
+  generation time from [`gen/bom_catalog.py`](../gen/bom_catalog.py))
 - [`SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md`](SCHEMATIC_TO_PCB_ECO_2026-07-27_postfix.md)
   - copied-project post-fix reference, footprint, pad-net, and DNP comparison
 - [`INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md`](INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
