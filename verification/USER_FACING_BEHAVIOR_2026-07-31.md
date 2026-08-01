@@ -95,7 +95,7 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
 | 14 | load it hard | fan runs under load, quiet at idle, never throttles | EC FAN_PWM (Q200) + FAN_TACH + skin/Mu NTCs (02, 08); curve is firmware | RESOLVED |
 | 15 | glance at the status displays | all laptop statistics shown | J41/J45 SSD1306 on always-on EC bus (07); content spec below | RESOLVED |
 | 16 | connect Wi-Fi / BT | network connects; BT peripherals work | M.2 E-key AX210-class + rear antennas (03) | VERIFIED |
-| 17 | use storage | fast boot/apps, ~2 TB NVMe | M.2 M-key 2280 PCIe Gen3 x4 (03); 64 GB eMMC = recovery/hibernate | VERIFIED |
+| 17 | use storage | fast boot/apps, ~2 TB NVMe | M.2 M-key 2280 PCIe Gen3 x4 (03); 64 GB eMMC = recovery/hibernate; design + setup script DONE (`software/os-theme/docs/emmc-recovery.md`, `install/emmc-recovery-setup.sh`) | VERIFIED |
 | 18 | plug in Ethernet | on the network like any laptop | RTL8111H + integrated-magnetics jack (16) | VERIFIED |
 | 19 | plug in an external monitor | it shows my stuff via HDMI | Mu TCP0 -> HDMI-A (06) | VERIFIED |
 | 20 | work the radios | 2 m and 70 cm FM from the laptop | DRA818V/U + LPF + RF switch (09) | VERIFIED |

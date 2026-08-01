@@ -9,6 +9,9 @@ Status: started.
 - Build KDE color scheme.
 - Build Konsole and Starship themes.
 - Keep SDDM/Plymouth staged until recovery is easy.
+- Prepare the recovery path early: `docs/emmc-recovery.md` + `install/emmc-recovery-setup.sh`
+  define the 64 GB eMMC layout (ESP + minimal recovery root + hibernate swap + offline
+  data) and are executed at Mu bring-up (Phase 5), before any SDDM/Plymouth enabling.
 
 Exit criteria:
 
