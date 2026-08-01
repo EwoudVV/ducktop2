@@ -17,7 +17,13 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
    keeps running — opening the lid must bring the display back without a power
    cycle (no shutdown/startup). EC reads active-low `LID_CLOSED_N` from J53
    (hall/reed switch, R209 10k pull-up to `MCU_3V3`) on EC pin 41 (sheets 08,
-   02). Display-off on lid close is EC/firmware behavior on the first article.
+   02). **Host-tested lid debouncer DONE** in `firmware/ec/src/ec_lid.c`:
+   30 ms debounce, one-shot edge flags for ACPI events, fail-safe "open" on
+   sensor disconnect (R209 pull-up), 12 host tests pass. The EC never sequences
+   Mu power on lid events — display-off is an OS-side ACPI policy
+   (`HandleLidSwitch=lock` or `ignore` in systemd-logind, NOT suspend),
+   keeping the Mu running per the user-verified behavior. Remaining: target
+   reads PE10 + forwards edge as ACPI lid switch input to the Mu OS.
 2. **USB-C ports (RESOLVED):** all five USB-C receptacles behave like a normal
    laptop — plug in a flash drive, phone, cable, or peripheral and it works.
    Two rear ports (J21, J11) are dual-role data + PD charge (TPS25751A, 15 V
@@ -73,7 +79,7 @@ or physical validation; **ACTION** = hardware/firmware change still needed.
 
 | # | When I... | I expect... | Design evidence | Status |
 | --- | --- | --- | --- | --- |
-| 1 | close/open the lid | screen off, Mu keeps running, display back on instantly (no power cycle) | J53 + R209 `LID_CLOSED_N` -> EC pin 41 (08, 02); EC display-off firmware pending | RESOLVED |
+| 1 | close/open the lid | screen off, Mu keeps running, display back on instantly (no power cycle) | J53 + R209 `LID_CLOSED_N` -> EC pin 41 (08, 02); **ec_lid debouncer host-tested DONE** (12 tests); ACPI event forwarding + OS config pending | RESOLVED |
 | 2 | plug anything into any USB-C port | it just works like a normal laptop | J21/J11 dual-role (05); J22/J23/J12 source-only (04) | RESOLVED |
 | 3 | plug in the charger | laptop charges, including when off | TPS25751A -> LTC4418 -> BQ25798 NVDC (05, 01) | RESOLVED |
 | 4 | press the power button | boots to my desktop, fast | J16 case harness (02) -> EC power sequencing | VERIFIED |
@@ -132,21 +138,30 @@ glyph rasterisation remains.
 
 ## Action Items
 
-1. **Add headphone jack to the motherboard** (sheet 15): 3.5 mm stereo jack,
-   rear edge, plug-detect mutes speakers, TPA6130A2-class amp from the
-   PCM2900C line-out. User-confirmed on 2026-07-31.
+1. **Add headphone jack to the motherboard** (sheet 15) — **DONE** (fae06d4):
+   J422 CUI SJ1-3535NG + U425 TPA6130A2RTJR; see item 5 above.
 2. **Keyboard Fn-layer assignments** (firmware only — board is fabricated and
    layout is locked): F1-F10, `~, brightness, volume — **host-tested keymap core
-   DONE** in `firmware/ec/src/ec_keymap.c` (commit pending): Fn+1..0=F1..F10,
+   DONE** in `firmware/ec/src/ec_keymap.c` (d0991b3): Fn+1..0=F1..F10,
    Fn+Esc=`~, Fn+Bksp=Delete, Fn+Up/Down=brightness, Fn+Left/Right=volume.
    22 host tests pass; remaining is the target-side matrix scan + USB HID.
-3. OLED content is a firmware spec; record confirmed above.
+3. OLED content is a firmware spec; record confirmed above — **host-tested
+   content composer DONE** in `firmware/ec/src/ec_oled.c` (d95d9f2). 16 tests
+   pass; remaining is target-side SSD1306 I2C + glyph rasterisation.
+
+All five high-priority items from the 2026-07-31 handoff now have
+host-tested firmware cores (headphone hardware, keymap, fan policy, OLED
+content, lid debouncer). Target-side integration (I2C drivers, GPIO reads,
+USB HID, matrix scan, SSD1306 rasterisation, ACPI event forwarding) remains.
 
 ## Held Items (not waived)
 
-- Firmware/ACPI: lid display-off behavior, battery ACPI reporting, power-button
-  sequencing, PD negotiation caps, fan curve, OLED content — target port + HIL
-  pending (firmware/target_port_status.md; 42 HIL rows NOT_RUN).
+- Firmware target-side integration: I2C drivers (BQ25798, BQ34Z100, TCA9539,
+  TPS25751A, SSD1306), GPIO reads (lid, thermal ADCs), PWM write (fan),
+  USB HID (keyboard), matrix scan, ACPI event forwarding (lid) — target port +
+  HIL pending (firmware/target_port_status.md; 42 HIL rows NOT_RUN).
+- Battery ACPI reporting, power-button sequencing, PD negotiation caps —
+  firmware/code pending.
 - eDP harness, keyboard FFC, J58 cable retention, RF/antenna tuning,
   speaker/AUX acoustic, thermal, and enclosure measurements.
 - HDMI/PCIe/USB high-speed routing and SI on the final stackup.
