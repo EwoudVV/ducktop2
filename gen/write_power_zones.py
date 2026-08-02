@@ -151,6 +151,7 @@ def main() -> int:
     def add(net, layer, outline):
         nonlocal stamp
         stamp += 1
+        outline = clip(outline)
         blocks.append(zone_block(net, layer, outline, stamp))
 
     # GND planes on L2 and L5
@@ -177,13 +178,13 @@ def main() -> int:
             continue
         ax, ay = fps[ref]["at"][0], fps[ref]["at"][1]
         for layer in ("F.Cu", "In1.Cu", "In2.Cu", "In3.Cu", "In4.Cu", "B.Cu"):
-            blocks.append(keepout_block(layer, circle(ax, ay, KEEPOUT_RADIUS), stamp))
+            blocks.append(keepout_block(layer, clip(circle(ax, ay, KEEPOUT_RADIUS)), stamp))
             stamp += 1
 
     # Mic acoustic keepout (F.Cu only, radius 5mm)
     mic = fps.get("MK430")
     if mic:
-        blocks.append(keepout_block("F.Cu", circle(mic["at"][0], mic["at"][1], 5.0), stamp))
+        blocks.append(keepout_block("F.Cu", clip(circle(mic["at"][0], mic["at"][1], 5.0)), stamp))
 
     # Insert before the final kicad_pcb close
     insert = text.rfind("\n)")
