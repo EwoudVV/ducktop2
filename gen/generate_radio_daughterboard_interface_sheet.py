@@ -2,42 +2,40 @@ from build_ducktop2 import Sheet, FOOTPRINTS
 
 
 RADIO_DB_SIGNAL_PINS = {
-    "23": "RADIO_VHF_UART_TX",
-    "24": "RADIO_VHF_UART_RX",
-    "25": "RADIO_UHF_UART_TX",
-    "26": "RADIO_UHF_UART_RX",
-    "28": "RADIO_VHF_PTT_N",
-    "29": "RADIO_UHF_PTT_N",
-    "30": "RADIO_VHF_PD_N",
-    "31": "RADIO_UHF_PD_N",
-    "33": "RADIO_VHF_SQL",
-    "34": "RADIO_UHF_SQL",
-    "35": "RADIO_VHF_RF_SEL_3V3",
-    "36": "RADIO_UHF_RF_SEL_3V3",
-    "38": "GNSS_UART_RX",
-    "39": "GNSS_UART_TX",
-    "40": "GNSS_RESET_N",
-    "41": "GNSS_PPS",
-    "42": "GNSS_EXTINT",
+    "11": "RADIO_VHF_UART_TX",
+    "12": "RADIO_VHF_UART_RX",
+    "13": "RADIO_UHF_UART_TX",
+    "14": "RADIO_UHF_UART_RX",
+    "15": "RADIO_VHF_PTT_N",
+    "16": "RADIO_UHF_PTT_N",
+    "17": "RADIO_VHF_PD_N",
+    "18": "RADIO_UHF_PD_N",
+    "20": "RADIO_VHF_SQL",
+    "21": "RADIO_UHF_SQL",
+    "22": "RADIO_VHF_RF_SEL_3V3",
+    "23": "RADIO_UHF_RF_SEL_3V3",
+    "24": "GNSS_UART_RX",
+    "25": "GNSS_UART_TX",
+    "27": "GNSS_RESET_N",
+    "28": "GNSS_PPS",
+    "29": "GNSS_EXTINT",
 }
 
-
 RADIO_DB_PIN_NETS = {
-    **{str(pin): ("RADIO_DB_5V", "local") for pin in range(1, 9)},
-    **{str(pin): ("GND", "local") for pin in range(9, 17)},
-    "17": ("RADIO_CODEC_USB_VBUS_DB", "local"),
-    "18": ("RADIO_CODEC_USB_VBUS_DB", "local"),
-    "19": ("RADIO_CODEC_USB_DP_DB", "local"),
-    "20": ("RADIO_CODEC_USB_DM_DB", "local"),
-    "21": ("GND", "local"),
-    "22": ("GND", "local"),
+    "1":  ("GND", "local"),
+    "2":  ("RADIO_DB_5V", "local"),
+    "3":  ("RADIO_DB_5V", "local"),
+    "4":  ("GND", "local"),
+    "5":  ("RADIO_CODEC_USB_VBUS_DB", "local"),
+    "6":  ("RADIO_DB_5V", "local"),
+    "7":  ("GND", "local"),
+    "8":  ("RADIO_CODEC_USB_DP_DB", "local"),
+    "9":  ("RADIO_CODEC_USB_DM_DB", "local"),
+    "10": ("GND", "local"),
     **{pin: (f"{net}_DB", "local") for pin, net in RADIO_DB_SIGNAL_PINS.items()},
-    "27": ("GND", "local"),
-    "32": ("GND", "local"),
-    "37": ("GND", "local"),
-    "43": ("GND", "local"),
-    "44": ("RADIO_DB_PRESENT_N", "hier"),
-    **{str(pin): ("GND", "local") for pin in range(45, 61)},
+    "19": ("GND", "local"),
+    "26": ("GND", "local"),
+    "30": ("RADIO_DB_PRESENT_N", "hier"),
     "MP": ("GND", "local"),
 }
 
@@ -237,7 +235,7 @@ def build(sheet_symbol_uuid):
 
     s.text(20, 414.02, "== J2300 Hirose DF40 removable radio daughterboard connector ==")
     s.place(
-        "J2300", "Conn_02x30_MP", "DF40C 60-pin optional radio daughterboard plug", 370, 540,
+        "J2300", "Conn_01x30_FFC_MP", "FH12-30S 30-pin radio daughterboard FFC", 370, 540,
         footprint=FOOTPRINTS["Radio_DB_Main"], pin_nets=RADIO_DB_PIN_NETS,
         extra_props={
             "Manufacturer": "Hirose Electric", "MPN": "DF40C-60DP-0.4V(51)",
@@ -248,11 +246,11 @@ def build(sheet_symbol_uuid):
     )
     s.gnd(690, 600)
     s.text(20, 640, "NOTES:")
-    s.text(20, 647.62, "Eight DF40 contacts share RADIO_DB_5V and thirty contacts are ground; route them as short, wide pours with stitching vias.")
-    s.text(20, 655.24, "J2300 pin 44 is passively grounded only on the daughterboard. High means absent; low means physically installed.")
+    s.text(20, 647.62, "FH12-30S 30-pin FFC: three 5V pins, interleaved GND for return/shielding; route them as short, wide pours with stitching vias.")
+    s.text(20, 655.24, "J2300 pin 30 is passively grounded on the daughterboard. High means absent; low means physically installed.")
     s.text(20, 662.86, "The system-audio hub keeps its own codec on port 2; optional radio codec port 1 may remain empty without blocking enumeration.")
     s.text(20, 670.48, "USB data and VBUS remain physically disconnected until RADIO_DB_PG is valid; daughterboard faults cannot back-power the mainboard.")
     s.text(20, 678.1, "Firmware must require PRESENT_N low and FAULT_N high before asserting PWR_EN, then require PG high within a timeout.")
-    s.text(20, 685.72, "R2340-R2356 limit fault current on every removable-board GPIO/UART/control line; no signal pin directly crosses J2300.")
+    s.text(20, 685.72, "R2340-R2352 limit fault current on every GPIO/UART/control line crossing the FFC.")
 
     return s

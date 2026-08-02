@@ -47,7 +47,7 @@ CURRENT_ECO_ADD_ONLY = {
     "C461", "C462", "C463", "C464", "C465",
     "J422", "U425",
 }
-CURRENT_ECO_REPLACE_ONLY = set()  # past replacements (U771/J58) settled
+CURRENT_ECO_REPLACE_ONLY = {"J2300"}  # DF40 -> FH12-30S FFC swap
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
 POST_ADD_FOOTPRINT_REFRESH = set()
@@ -70,6 +70,7 @@ ANCHORS_MM = {
     # Mu guide; the current placement is a release hold and has no approved anchor.
     "C502": (314.5, 105.0, 0.0),
     "C503": (314.5, 103.8, 0.0),
+    "J2300": (288.4, 149.1, 0.0),
 
     # 2026-08-01 proposed rear headphone section (rear edge, free x 110..240):
     # J422 SJ1-3535NG body spans local y[-5.2, 12.8]; rot 0 exits the plug
