@@ -678,46 +678,6 @@
 			)
 		)
 	)
-(gr_line
-		(start 0.0 0.0)
-		(end 358.0 0.0)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Edge.Cuts")
-		(uuid "271d81b7-961b-58af-a54f-ca8a02b6338f")
-	)
-(gr_line
-		(start 358.0 0.0)
-		(end 358.0 185.0)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Edge.Cuts")
-		(uuid "271d81b7-961b-58af-a54f-ca8a02b6338f")
-	)
-(gr_line
-		(start 358.0 185.0)
-		(end 0.0 185.0)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Edge.Cuts")
-		(uuid "271d81b7-961b-58af-a54f-ca8a02b6338f")
-	)
-(gr_line
-		(start 0.0 185.0)
-		(end 0.0 0.0)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Edge.Cuts")
-		(uuid "271d81b7-961b-58af-a54f-ca8a02b6338f")
-	)
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "003303c7-3cbc-5eb5-9655-d1a7e480b19a")
@@ -61136,7 +61096,7 @@
 	(footprint "Connector_Hirose_DF40:Hirose_DF40C-60DP-0.4V_2x30-1MP_P0.4mm"
 		(layer "F.Cu")
 		(uuid "3bf14112-0038-5ca6-86b1-a8f69d4f6f43")
-		(at 288.4160 149.0500 0.0)
+		(at 0.0000 207.5000 180.0)
 		(descr "0.4mm Pitch, Plug, vertical (source: https://www.hirose.com/en/product/document?clcode=&productname=&series=DF40&documenttype=Catalog&lang=en&documentid=en_DF40_CAT)")
 		(tags "conn hirose board-to-board mezzanine stacking plug")
 		(property "Reference" "J2300"
@@ -261612,45 +261572,260 @@
 			)
 		)
 	)
-	
+	(gr_rect
+		(start 0 125)
+		(end 12 175)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "3f0f78d3-d712-561b-b635-7042bd613e6f")
 	)
-	
+	(gr_rect
+		(start 0 125)
+		(end 50 175)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "5967285d-7e58-5d16-a816-5713d90cb3ff")
 	)
-	
+	(gr_rect
+		(start 2.5 207.5)
+		(end 20.5 245.5)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "ecb45f9f-2f93-5a6c-bb68-0cb2e272b6da")
 	)
-	
+	(gr_rect
+		(start 8 0)
+		(end 58 20)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "a1e3cae8-0af5-52d2-a18f-f0811adb6c94")
 	)
-	
+	(gr_rect
+		(start 15 145)
+		(end 165 153.1)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "b448e72f-c2d3-525e-bb42-f72c58413c7b")
 	)
-	
+	(gr_rect
+		(start 25 185)
+		(end 125 245)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "ea1fdffc-bd40-5c62-96c5-428853fdd4a7")
 	)
-	
+	(gr_rect
+		(start 25.99 32.5)
+		(end 299.49 112.5)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "e877e083-0917-5f9c-bff3-7900b2e73168")
 	)
-	
+	(gr_rect
+		(start 40 110)
+		(end 48 118)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "5455f8a2-e482-5fb5-8415-92e8a8aed29a")
 	)
-	
+	(gr_rect
+		(start 51 125)
+		(end 96 170)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "cb0c5b64-6cd8-5960-ae19-98cf096b2030")
 	)
-	
+	(gr_rect
+		(start 97.5 115)
+		(end 171.5 179)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "ec238273-3706-53fc-918b-911253a096b0")
 	)
-	
+	(gr_rect
+		(start 100 105)
+		(end 165.5 182.5)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "9599353c-cd90-5e40-8b89-0426da3c90ed")
 	)
-	
+	(gr_rect
+		(start 110 135)
+		(end 250 240)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "93829d62-616c-5035-9e54-34052e242e79")
 	)
-	
+	(gr_rect
+		(start 130 185)
+		(end 230 245)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "f8724df8-bc22-5545-a70d-b5e564d16ad5")
 	)
-	
+	(gr_rect
+		(start 170 125)
+		(end 188 135)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "fb41f46e-d347-5e88-ae97-7d1bf52ee572")
 	)
-	
+	(gr_rect
+		(start 200 105)
+		(end 280 127)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "83b1de19-d45e-5374-98c5-0d7f00ecee12")
 	)
-	
+	(gr_rect
+		(start 235 185)
+		(end 335 245)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "49d785c7-0d69-531d-bba1-758c76dad657")
 	)
-	
+	(gr_rect
+		(start 310 0)
+		(end 350 20)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "aa73e669-cec9-5fbe-a783-332e6e24b806")
 	)
-	
+	(gr_rect
+		(start 315 50)
+		(end 323 68)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "9bf4f672-bc38-546b-9d60-b2a73f5cdf2f")
 	)
-	
+	(gr_rect
+		(start 337.5 206.5)
+		(end 355.5 244.5)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "ce712c79-e8bf-5cf2-b474-2114e2160074")
 	)
-	
+	(gr_line
+		(start 0 0)
+		(end 358 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "271d81b7-961b-58af-a54f-ca8a02b6338f")
+	)
+(gr_line
+		(start 358 0)
+		(end 358 185)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "e3124bee-b552-534a-85c0-f11c21ff2c9f")
+	)
+(gr_line
+		(start 358 185)
+		(end 0 185)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "1df47d6b-2f83-5ae5-9eb0-578422aeb732")
+	)
+(gr_line
+		(start 0.0 185.0)
+		(end 0.0 0.0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "bcfe7766-e2c4-4bc3-95b3-d3c308f26e84")
+	)
+
+	(gr_text "MECH: SKV505014-AL fin stack"
+		(at 1.2 127.0 0)
+		(layer "Dwgs.User")
+		(uuid "205560cc-4fe1-54c2-88c6-d88fcdd08deb")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261659,7 +261834,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: front speaker L"
+		(at 3.7 209.5 0)
+		(layer "Dwgs.User")
+		(uuid "3fdb247c-329c-5d87-9f6f-d4d69a2fb128")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261668,7 +261846,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: left hinge keepout"
+		(at 9.2 2.0 0)
+		(layer "Dwgs.User")
+		(uuid "59d6ca00-9c56-5b51-83af-2285a40f7a1f")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261677,7 +261858,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: 121721 heatpipe 150mm"
+		(at 16.2 147.0 0)
+		(layer "Dwgs.User")
+		(uuid "dfeedfb3-28dc-5ed5-bd1a-1e7bd89c2eae")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261686,7 +261870,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: 3.7V cell A (measured)"
+		(at 26.2 187.0 0)
+		(layer "Dwgs.User")
+		(uuid "73277299-f9ac-54f9-aa82-50046b1ebc6d")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261695,7 +261882,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: MX ULP keyboard PCB rev A"
+		(at 26.6 34.0 0)
+		(layer "Dwgs.User")
+		(uuid "1b7cf391-c00e-5998-86b6-bf0edf022356")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261704,7 +261894,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: IM68A130 microphone acoustic opening"
+		(at 41.2 112.0 0)
+		(layer "Dwgs.User")
+		(uuid "67510503-6e9e-5295-911f-735b43bb4063")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261713,7 +261906,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: 5V blower"
+		(at 52.2 127.0 0)
+		(layer "Dwgs.User")
+		(uuid "44739815-71fd-5fc8-9796-504b68e2e2a9")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261722,7 +261918,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: Mu copper cold plate"
+		(at 98.7 117.0 0)
+		(layer "Dwgs.User")
+		(uuid "570efeab-f4b3-56e9-b795-bb46bb7b5498")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261731,7 +261930,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: LattePanda Mu carrier courtyard"
+		(at 101.2 107.0 0)
+		(layer "Dwgs.User")
+		(uuid "273b59dc-85f4-53f7-9ab8-620a07bfc801")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261740,7 +261942,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: JOMAA trackpad (measured)"
+		(at 111.2 137.0 0)
+		(layer "Dwgs.User")
+		(uuid "5b609946-7d28-579d-a636-893881a6b795")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261749,7 +261954,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: 3.7V cell B (measured)"
+		(at 131.2 187.0 0)
+		(layer "Dwgs.User")
+		(uuid "a2c3c987-3a38-51a9-b31f-77a677f42e06")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261758,7 +261966,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: trackpad cable solder lands"
+		(at 171.2 127.0 0)
+		(layer "Dwgs.User")
+		(uuid "b7c08ffc-9f3b-5dbb-a28b-b16abcdcebc0")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261767,7 +261978,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: M.2 2280 SSD"
+		(at 201.2 107.0 0)
+		(layer "Dwgs.User")
+		(uuid "fb19c379-050f-5c5e-98e2-72978c357e73")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261776,7 +261990,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: 3.7V cell C (measured)"
+		(at 236.2 187.0 0)
+		(layer "Dwgs.User")
+		(uuid "d99fb22e-d4c9-5ad7-b45f-21af1dce082c")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261785,7 +262002,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: right hinge keepout"
+		(at 311.2 2.0 0)
+		(layer "Dwgs.User")
+		(uuid "9e7c67e7-7572-503a-bde0-a85b21ae80d1")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261794,7 +262014,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: J310 mainboard keyboard FFC connector"
+		(at 316.2 52.0 0)
+		(layer "Dwgs.User")
+		(uuid "4f04c896-97d1-5580-9532-0d473340e324")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261803,7 +262026,10 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: front speaker R"
+		(at 338.7 208.5 0)
+		(layer "Dwgs.User")
+		(uuid "f90a85e6-6004-5067-8eb5-61093b9eb03a")
 		(effects
 			(font
 				(size 1.15 1.15)
@@ -261812,7 +262038,28 @@
 			(justify left)
 		)
 	)
-	
+	(gr_text "MECH: rear exhaust opening keepout"
+		(at 1.4 165.9 90)
+		(layer "Dwgs.User")
+		(uuid "b07b9efd-f7c5-5276-b39e-faaa7d21b947")
+		(effects
+			(font
+				(size 1.15 1.15)
+				(thickness 0.16)
+			)
+			(justify left)
+		)
+	)
+	(gr_rect
+		(start 257.3625 73.805)
+		(end 377.3625 114.255)
+		(stroke
+			(width 0.12)
+			(type dash)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "radio_db_outline")
 	)
 	
 	
@@ -263454,7 +263701,13 @@
 	
 	
 
+
+
 	
+
+
+
+
 
 	
 
@@ -264698,6 +264951,20 @@
 	
 	
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 	
@@ -272113,6 +272380,68 @@
 		)
 	)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (zone
 	(net "GND")
 	(layer "In1.Cu")
@@ -272877,58 +273206,4 @@
 	(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 	(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
 )
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-	)
-	 (effects (font (size 1.27 1.27) thickness 0.15)))
-
-	(gr_rect (start 208.5 80.9) (end 358.0 165.1) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "1e0cd419-4532-45ff-ae9c-44f9826c4d83"))
-	(gr_text "" (at 208.5 166.1) (layer "Dwgs.User") (uuid "78039bcc-8071-4a46-9bd0-3a1804fa8f7e") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 104.5 44.0) (end 358.0 156.1) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "c133742a-30e6-44da-b0af-e1bc6a3c93a8"))
-	(gr_text "" (at 104.5 157.1) (layer "Dwgs.User") (uuid "ef30e46e-de1a-4105-8982-5069329cc6c4") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 59.0 8.0) (end 358.0 163.0) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "c5729078-2920-451b-8836-91efd0800c2e"))
-	(gr_text "" (at 59.0 164.0) (layer "Dwgs.User") (uuid "0e0a9650-be5a-426f-909d-8f872cbdcfc3") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 299.0 40.5) (end 357.0 82.5) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "95a55b7a-cc8a-47ea-99e4-f24360992599"))
-	(gr_text "" (at 299.0 83.5) (layer "Dwgs.User") (uuid "82355dd4-ab54-410f-9720-7c5532d2592d") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 222.0 2.4) (end 334.1 165.1) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "f93e4690-b592-4746-8a49-b732991ede99"))
-	(gr_text "" (at 222.0 166.1) (layer "Dwgs.User") (uuid "36cafb46-b3f0-414c-9a85-462d9f4b7924") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 16.5 8.0) (end 357.6 184.6) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "0e6bf321-49d5-4d4d-84c3-69d54cb807f2"))
-	(gr_text "" (at 16.5 185.0) (layer "Dwgs.User") (uuid "2648c412-de23-4465-8cb8-aa0713205986") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 2.5 0.0) (end 357.0 143.8) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "b3f77805-c2f5-4ae7-8122-192ca8858594"))
-	(gr_text "" (at 2.5 144.8) (layer "Dwgs.User") (uuid "dd21585d-912b-4a12-8761-cb1d6bb2120f") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 199.5 41.0) (end 346.9 165.1) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "fccf5d65-be39-4736-95d8-f1c795e3b51a"))
-	(gr_text "" (at 199.5 166.1) (layer "Dwgs.User") (uuid "f57fb4b7-5f6b-48ec-b734-fb688a2607aa") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 2.6 8.0) (end 358.0 185.0) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "cd1a3ac3-262f-40e6-af8b-ea08291b94e2"))
-	(gr_text "" (at 2.6 185.0) (layer "Dwgs.User") (uuid "7741a6e3-0513-4c98-9fcf-29139f4ba336") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 2.0 16.6) (end 358.0 141.3) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "b080701f-a077-4776-8d71-33cf0fee3714"))
-	(gr_text "" (at 2.0 142.3) (layer "Dwgs.User") (uuid "6327af0e-8f74-483f-bff0-932dcb5231dd") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 9.5 50.9) (end 334.7 185.0) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "5202703f-332a-4048-899f-113532688872"))
-	(gr_text "" (at 9.5 185.0) (layer "Dwgs.User") (uuid "8e2f81f7-12a2-45ac-889f-aedcfc55923f") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 291.0 8.8) (end 358.0 93.0) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "d7f6bdf6-7388-486a-b6d9-e9efc547d147"))
-	(gr_text "" (at 291.0 94.0) (layer "Dwgs.User") (uuid "649776f7-0c75-4b7c-aa8b-5c5a0429cad6") (effects (font (size 1.27 1.27) thickness 0.15)))
-	(gr_rect (start 199.0 20.0) (end 336.2 179.4) (stroke (width 0.15) (type dash)) (fill none) (layer "Dwgs.User") (uuid "41fd7770-c7f4-4038-9cdf-e54c43414ba0"))
-	(gr_text "" (at 199.0 180.4) (layer "Dwgs.User") (uuid "25a73814-3781-4a99-8d63-2755d8522e15") (effects (font (size 1.27 1.27) thickness 0.15)))
-
 )
