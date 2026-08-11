@@ -34,7 +34,8 @@ def in_bounds(board_x: float, board_y: float) -> bool:
             BOARD_BOUNDS[1] <= board_y <= BOARD_BOUNDS[3])
 
 # Floorplan part id -> (footprint ref, board x offset, board y offset)
-# Offsets place the floorplan part rectangle center on the footprint anchor.
+# Offsets map the floorplan rectangle top-left to the footprint anchor point.
+# Calculated from footprint pad/courtyard bbox relative to physical part outline.
 MAPPING: dict[str, tuple[str, float, float]] = {
     "mu-module":           ("A1", 0.0, 0.0),
     "ethernet-jack":       ("J500", 0.0, 0.0),
@@ -53,6 +54,7 @@ MAPPING: dict[str, tuple[str, float, float]] = {
     "oled-a":              ("J41", 0.0, 0.0),
     "oled-b":              ("J45", 0.0, 0.0),
     "radio-daughterboard": ("J2300", 0.0, 0.0),
+    "headphone-amp":       ("U425", 0.0, 0.0),
 }
 
 
