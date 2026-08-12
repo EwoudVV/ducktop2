@@ -70,7 +70,7 @@ ANCHORS_MM = {
     # Mu guide; the current placement is a release hold and has no approved anchor.
     "C502": (314.5, 105.0, 0.0),
     "C503": (314.5, 103.8, 0.0),
-    "J2300": (288.4, 149.1, 0.0),
+    "J2300": (62.5, 183.0, 0.0),  # radio DB FFC at bottom edge (matches radio DB placement)
 
     # 2026-08-01 proposed rear headphone section (rear edge, free x 110..240):
     # J422 SJ1-3535NG body spans local y[-5.2, 12.8]; rot 0 exits the plug
