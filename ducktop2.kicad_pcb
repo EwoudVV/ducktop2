@@ -35928,7 +35928,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "25aaae3f-2053-5e0e-b656-571266ae55ef")
-		(at 231.5 157.05)
+		(at 234.9000 150.7000)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R178"
@@ -124345,7 +124345,7 @@
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "77d99f0c-5f39-5272-94af-6dee5daf035e")
-		(at 355.01 87.25)
+		(at 355.0000 85.0000)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R504"
@@ -178831,7 +178831,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "a8ec672d-fc40-559e-ad72-a47c054cad0c")
-		(at 352.4600 105.6700 0.0)
+		(at 349.0000 108.5000 0.0)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C290"
@@ -214531,7 +214531,7 @@
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "d217943f-7550-598a-b13b-71800b7ccb51")
-		(at 355.5 106.75)
+		(at 344.6000 110.6000)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R505"
@@ -218404,7 +218404,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "d5997a13-8bdc-5582-9d8a-78b7dfdc376e")
-		(at 228.5 157.05)
+		(at 221.2000 152.6000)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R177"
@@ -261583,14 +261583,54 @@
 		(uuid "271d81b7-961b-58af-a54f-ca8a02b6338f")
 	)
 (gr_line
+		(start 358 88)
+		(end 352.78 88)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "c9147fa9-5a68-4a38-905a-85aee34d904d")
+	)
+(gr_line
+		(start 352.78 88)
+		(end 352.78 107)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "db2956a0-78ad-4da9-8ae3-448c41bc9dac")
+	)
+(gr_line
+		(start 352.78 107)
+		(end 358 107)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "78f14aca-fdff-4ae8-bbaf-847ed196432a")
+	)
+(gr_line
 		(start 358 0)
+		(end 358 88)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "226f6290-f8ac-4074-85f2-5e8eac3b68e4")
+	)
+(gr_line
+		(start 358 107)
 		(end 358 185)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
 		(layer "Edge.Cuts")
-		(uuid "e3124bee-b552-534a-85c0-f11c21ff2c9f")
+		(uuid "741938a8-cd63-4041-835e-930f969a4b2a")
 	)
 (gr_line
 		(start 358 185)
