@@ -32,9 +32,10 @@ dimensions or PCB `Edge.Cuts`.
   135 x 74 mm trackpad placeholder. The measured 140 x 105 mm trackpad overlaps
   the center cell when centered at the front edge, so battery and trackpad
   placement must now be redone before the envelope can be frozen.
-- The main PCB outline remains intentionally unchanged until these dimensions
-  are checked against physical parts and the routed board is ready for a
-  controlled ECO.
+- The main PCB outline was revised 2026-08-12: the left fin-stack notch was
+  removed (32a29a8) and a right-edge recess for the mid-mount ethernet jack was
+  added (a283abc): x 352.78-358, y 88-107. The final outline must still be
+  checked against physical parts and the routed board before the enclosure ECO.
 
 ## Allowed XY Overlap Only With Separate Z Planes
 
@@ -69,9 +70,13 @@ outside the chassis envelope are not allowed.
    latch/finger clearance, and mated-cable sweep.
 9. JXD1-1022NL physical sample dimensions, PCB-thickness compatibility, THR
    holes/slots, panel datum, and whether the assembly vendor supports the
-   recessed through-hole jack.
+   recessed through-hole jack. The board now carries the mid-mount recess
+   (Edge.Cuts x 352.78-358, y 88-107); the chassis/panel must cut out to match
+   (jack opening at the recess, body extends 2.1 mm into it).
 10. Main PCB mounting holes, bosses, structural web widths, cutout clearances,
-    component-height map, and copper-to-cutout rules.
+    component-height map, and copper-to-cutout rules. The mounting-hole pattern
+    was revised 2026-08-12 to match the rev-D layout (see
+    RETENTION_AND_MOUNTING_RELEASE.md; the board is canonical).
 
 ## Known Part Envelopes To Verify Physically
 
