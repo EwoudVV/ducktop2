@@ -233,13 +233,13 @@ def build(sheet_symbol_uuid):
                 extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-074K7L",
                              "BoundaryContract": "LIMIT_FAULT_CURRENT_IF_DAUGHTERBOARD_IS_OFF_ABSENT_OR_DAMAGED"})
 
-    s.text(20, 414.02, "== J2300 Hirose DF40 removable radio daughterboard connector ==")
+    s.text(20, 414.02, "== J2300 Hirose FH12-30S removable radio daughterboard FFC connector ==")
     s.place(
         "J2300", "Conn_01x30_FFC_MP", "FH12-30S 30-pin radio daughterboard FFC", 370, 540,
         footprint=FOOTPRINTS["Radio_DB_Main"], pin_nets=RADIO_DB_PIN_NETS,
         extra_props={
-            "Manufacturer": "Hirose Electric", "MPN": "DF40C-60DP-0.4V(51)",
-            "MatingConnector": "DF40C(2.0)-60DS-0.4V(51)",
+            "Manufacturer": "Hirose Electric", "MPN": "FH12-30S-0.5SH(55)",
+            "MatingConnector": "FH12 series 30-pin 0.5mm-pitch FFC cable",
             "StackHeight": "2.0mm",
             "AbsentBoardContract": "NO_RADIO_BOARD_REQUIRED_FOR_BOOT_OR_PRIMARY_LAPTOP_OPERATION",
         },
