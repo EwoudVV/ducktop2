@@ -68,14 +68,22 @@ separately after the enclosure material and EMC strategy are frozen.
 
 | Ref | X (mm) | Y (mm) |
 |---|---:|---:|
-| `H10` | 20.000 | 28.000 |
-| `H11` | 110.000 | 10.000 |
-| `H12` | 180.000 | 10.000 |
-| `H13` | 20.000 | 115.000 |
+| `H10` | 355.560 | 182.550 |
+| `H11` | 240.460 | 182.550 |
+| `H12` | 355.560 | 147.000 |
+| `H13` | 240.460 | 147.050 |
 | `H14` | 120.000 | 70.000 |
-| `H15` | 240.000 | 70.000 |
+| `H15` | 252.000 | 70.000 |
 | `H16` | 342.000 | 120.000 |
-| `H17` | 300.000 | 175.000 |
+| `H17` | 332.000 | 175.000 |
+
+NOTE: H10-H13/H15/H17 were revised 2026-08-12 to match the rev-D layout
+(Mu moved to the upper-middle at (180, 40), Wi-Fi M.2 to the bottom area).
+The original pattern (H10 20,28 / H11 110,10 / H12 180,10 / H13 20,115 /
+H15 240,70 / H17 300,175) was validated for the pre-rev-D layout and now
+conflicts with the left-port PD controllers, the audio codec cluster, the
+Mu standoffs (H1/H2 at (237, 71.8)/(237, 8.2)), and the SSD1306 OLED
+courtyards. The board is canonical; the chassis must follow it.
 
 This pattern supports the long 358 x 185 mm board near its ends, center, side
 connectors, Mu/cooling area, and M.2 area without placing bosses inside the
