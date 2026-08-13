@@ -1,104 +1,79 @@
-# Ducktop2 — Electronics-Correctness Review (v2)
+# Ducktop2 — Electronics-Correctness Review (v3, FINAL)
 
-Generated: 2026-08-13 (revised after full schematic-vs-board net audit)
+Generated: 2026-08-13 — net-level audit. This review covers electrical
+correctness only (nets, power, integrity). Routing state is covered in
+HANDOFF_ELECTRONICS_REVIEW.md §0 and is excluded here by request.
 
-This review hunts the electrical bugs that survive routing — wrong nets,
-broken connections, dead rails — not placement cosmetics.
-
----
-
-## VERDICT: ONE BOARD-KILLING DEFECT FOUND (fix before routing)
-
-### 1. J2300 (radio daughterboard FFC) — 26 of 30 pins on the WRONG NETS
-
-The board's J2300 pad nets do not match the current schematic.
-
-| Board pad | Board net (WRONG) | Schematic net (correct) |
-| --- | --- | --- |
-| 1 | RADIO_DB_5V | GND |
-| 4 | RADIO_DB_5V | GND |
-| 5 | RADIO_DB_5V | RADIO_CODEC_USB_DM_DB |
-| 8 | RADIO_DB_5V | RADIO_CODEC_USB_DP_DB |
-| 9 | GND | RADIO_CODEC_USB_VBUS_DB |
-| 11 | GND | RADIO_VHF_UART_RX_DB |
-| 13 | GND | RADIO_UHF_UART_RX_DB |
-| 15 | GND | RADIO_VHF_PTT_N_DB |
-| 17 | RADIO_CODEC_USB_* | RADIO_VHF_PD_N_DB |
-| 19 | RADIO_CODEC_USB_* | GND |
-| 21 | GND | RADIO_UHF_SQL_DB |
-| 23 | RADIO_VHF_UART_TX_DB | RADIO_UHF_RF_SEL_3V3_DB |
-| 24 | RADIO_VHF_UART_TX_DB | GNSS_UART_RX_DB |
-| 25 | RADIO_UHF_UART_TX_DB | GNSS_UART_TX_DB |
-| 27 | GND | GNSS_RESET_N_DB |
-| 28 | RADIO_VHF_PTT_N_DB | GNSS_PPS_DB |
-| 29 | RADIO_UHF_PTT_N_DB | GNSS_EXTINT_DB |
-| 30 | RADIO_VHF_PD_N_DB | RADIO_DB_PRESENT_N |
-| … | (26 pads total) | |
-
-**Effect if routed as-is:** every VHF/UHF/GNSS/codec signal and the DB power
-pins land on the wrong FFC pin — the radio daughterboard is completely
-miswired. Radios dead, GNSS dead, codec USB wrong, and RADIO_DB_5V shorted
-onto pads that the schematic says are GND.
-
-**Fix:** `Update PCB from Schematic` (Tools → Update PCB from Schematic), then
-re-verify the J2300 footprint pad↔pin map (J2300 is a customized FH12-30S
-with remapped pins — do NOT replace the footprint from library, only refresh
-nets). After sync, re-check the 16 remaining clearances near J310 and the
-R374/R375 pair.
+Method: schematic ERC + full sexpr netlist audit (1372 nets) vs board
+(4076 pads, ref-count based — immune to the pinfunction parsing trap that
+caused two false alarms in v2, both retracted below).
 
 ---
 
-## Verified CORRECT (no action needed)
+## 1. BLOCKER — J2300 radio FFC: 26 of 30 board pads on the WRONG NETS
 
-- **Schematic ERC: clean** — 0 errors (unconnected-pin and power-pin checks
-  are enabled at error severity). The 14 pin-to-pin warnings are benign
-  GPIO+power-flag strapping.
-- **No multi-driver (output/output) net conflicts** anywhere.
-- **Power tree complete:** all bucks have inductors + correct output rails
-  (VSYS→U6/U7/U750/U1703; BUCK5_SW→L4→SYS_5V; BUCK33_SW→L5→SYS_3V3;
-  HUB_CORE_SW→L1700→HUB_VCORE; USB5_SW→L1701→USB_PORT_5V;
-  MAKER_3V3_SW→L900→MAKER_3V3_CORE; BUCK_SW→L3→MCU_3V3).
-- **MU_12V rail:** fed correctly by U750 (TPS552892) VOUT through RS750
-  sense resistor + R751/R752 divider + C763 — 12V for the Mu module is real.
-- **Battery chain:** J2 PACK_POS_RAW → F1 fuse → BAT_PROT_VIN → Q11/Q12 +
-  U11 (LTC4368) → PACK_POS_FUSED → Q25 → BAT_CHARGER → U2 (BQ25798) BAT —
-  charge/discharge via NVDC is complete and correct.
-- **EC (STM32) boot chain:** HSE/LSE crystals with correct load caps, NRST
-  with pull-up + reset button + reset drivers, BOOT0 strap, VCAP caps, buck
-  feedback divider — all sound.
-- **Differential pairs:** USB-C SSTX/SSRX (J12/J22/J23), HDMI D0-D2/CK, GbE
-  MDI0-3 — all P/N paired correctly on the connectors.
-- **PD controllers (U41/U42):** GPIO config straps on GND per TPS25751A
-  practice; LDO3V3/LDO1V5 outputs present.
-- **INTERNAL_USB_VBUS cluster:** board nets match schematic
-  (SENSE/VALID/FAULT_N/ILIM all on the right pins).
-- **Board↔schematic parity (DRC): clean** — no missing/extra/mismatched
-  footprints; 4050 of 4076 board pads match the schematic netlist exactly
-  (the 26 exceptions are all J2300).
+Board vs current schematic, verified pad-by-pad (ref+pin on both sides):
 
-## Known non-blocking issues
+- Board pin 1 = RADIO_DB_5V — schematic says GND
+- Board pins 4, 7 = RADIO_DB_5V — schematic says GND
+- Board pins 5, 8 = RADIO_DB_5V — schematic says RADIO_CODEC_USB_DM/DP_DB
+- Board pin 9 = GND — schematic says RADIO_CODEC_USB_VBUS_DB
+- Board pins 11–16 = GND / RADIO_CODEC_* — schematic says the four radio
+  UART/PTT/PD/SQL signals
+- Board pins 17–30 = shifted one position vs schematic (VHF/UHF/GNSS/DB_PRESENT)
+- Board pin 23–25 = VHF/UHF TX — schematic says UHF_RF_SEL / GNSS_UART_RX/TX
+- Board pin 30 = RADIO_VHF_PD_N_DB — schematic says RADIO_DB_PRESENT_N
 
-- **MU_SIO_UART_RX/TX dead-end:** A1 pins 10/12 are single-node nets; the
-  nearby labels and J8 debug header are floating (not wired). The Mu SIO
-  debug UART is unavailable and J8 does nothing. Harmless to boot; fix the
-  wiring if the SIO UART or J8 is ever needed.
-- **U10 (BQ34Z100) VEN pin is no-connect** — verify against the G1 datasheet
-  that VEN may float (G1 allows this); if the variant needs VEN = VSS/BAT,
-  tie it.
-- **Board has never contained routing** (see HANDOFF_ELECTRONICS_REVIEW.md):
-  890 nets, 2030 airwires, 0 tracks, unfilled planes. Routing is the
-  remaining task.
-- **lib_footprint_mismatch severity = ignore** (set during the DRC cleanup):
-  re-enable after the re-sync; the J2300 pin-net issue is separate from
-  footprint geometry and would NOT have been caught by that check anyway.
+**Impact: the radio daughterboard is completely miswired when routed as-is —
+VHF, UHF, GNSS, codec-USB, DB power, DB-present all land on the wrong FFC
+pins; RADIO_DB_5V would sit on pads the schematic grounds. Radios/GPS dead,
+possible 5V→GND stress.**
 
-## Pre-flight checklist before fabrication
+**Fix:** `Update PCB from Schematic`, then re-verify J2300's pad↔pin map
+(J2300 is a customized FH12-30S — update nets only, never the footprint).
 
-1. Run `Update PCB from Schematic`; confirm J2300's 26 nets change to match
-   the schematic (and that nothing else changes).
-2. Route all signals; fill the inner-layer planes (GND / SYS_3V3 / SYS_5V /
-   VSYS / MCU_3V3 / VBUS_RAW / MU_12V / USB_PORT_5V / INTERNAL_USB_VBUS).
-3. DRC after fill — shorts/clearances only fully appear with copper.
-4. Re-enable lib_footprint_mismatch; update the 2.5–5 µm pad drift by
-   refreshing footprints (or accept and document).
-5. Decide on MU_SIO_UART/J8 (wire or formally drop).
+## 2. MINOR — MU_SIO_UART_RX / MU_SIO_UART_TX are dead-end nets
+
+A1 pins 10/12 connect to nothing else; the J8 debug header and nearby labels
+are floating. The Mu SIO debug UART is unavailable. Not boot-blocking; wire
+it or drop it deliberately.
+
+## 3. Verified CLEAN (netlist-level, no action)
+
+- **ERC: 0 errors** (pin-not-connected and power-pin checks at error severity;
+  the all-passive keyboard chain is why ERC alone can't catch floating nets)
+- **Power tree complete:** VSYS → U6/U7/U1703/U750 bucks; BUCK5_SW→L4→SYS_5V,
+  BUCK33_SW→L5→SYS_3V3, HUB_CORE_SW→L1700→HUB_VCORE, USB5_SW→L1701→
+  USB_PORT_5V, MAKER_3V3_SW→L900→MAKER_3V3_CORE, BUCK_SW→L3→MCU_3V3
+- **MU_12V fed correctly:** U750 (TPS552892) VOUT → caps → RS750 sense →
+  MU_12V → A1 VIN (+R751/R752 divider, C763 bulk)
+- **Battery chain complete:** J2 → F1 → BAT_PROT_VIN → Q11/Q12+U11 (LTC4368)
+  → PACK_POS_FUSED → Q25 → BAT_CHARGER → U2 (BQ25798), with RS10 sense and
+  D710→AON_OR_RAW
+- **Keyboard matrix connected:** U4 ↔ R360–R383 (1k series) ↔ J310 FFC
+  (rows, cols, RGB data/pwr/fault all bridged)
+- **Trackpad connected:** A1 USB2_P8 ↔ R250/R251 ↔ J58 (+U62 ESD/mux)
+- **EC boot chain sound:** HSE/LSE crystals + load caps, NRST (pull-up, SW1,
+  reset drivers), BOOT0 strap, VCAP caps
+- **Differential pairs P/N-correct:** J11/J21/J12/J22/J23 USB3,
+  HDMI D0–D2+CK, GbE MDI0–3
+- **No multi-driver (out/out or power-out/power-out) net conflicts**
+- **INTERNAL_USB_VBUS sensing cluster:** SENSE/VALID/FAULT_N/ILIM on the right
+  pins (v2 alarm retracted — exact-net check is clean)
+- **Board↔schematic parity: 4050/4076 pads match; the 26 exceptions are all
+  J2300**
+
+## 4. Notes
+
+- `lib_footprint_mismatch` severity is `ignore` in the project (set during DRC
+  cleanup). Re-enable after the J2300 re-sync. It checks footprint geometry,
+  not pin nets — it never would have caught the J2300 issue.
+- U10 (BQ34Z100) VEN pin is no-connect — confirm acceptable for the G1.
+- Retractions from v2 (parsing bug, now verified correct): MU_12V *is* fed;
+  keyboard and trackpad *are* connected.
+
+## Pre-fabrication sequence
+
+1. Update PCB from Schematic → confirm J2300's 26 nets change (and nothing else).
+2. Route signals; fill inner planes; DRC with copper.
+3. Re-enable lib-footprint parity.
