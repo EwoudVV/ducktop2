@@ -220,7 +220,7 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
                 "1": ("SOURCE_MGR_INT_N", "local"), "2": ("GND", "local"), "3": ("NRST_NET", "local"),
                 "4": ("PD1_PATH_EN", "hier"), "5": ("PD2_PATH_EN", "hier"),
                 "6": ("HP_DETECT", "hier"), "7": ("PD1_EFUSE_FAULT_N", "hier"),
-                "8": ("PD2_EFUSE_FAULT_N", "hier"), "9": ("SOURCE_MGR_SPARE2", "local"),
+                "8": ("PD2_EFUSE_FAULT_N", "hier"), "9": ("SLS_S3", "hier"),
                 "10": ("PACK_FAULT_N", "hier"), "11": ("AUX_FAULT_N", "hier"),
                 "12": ("GND", "local"), "13": ("PACK_RETRY_PULSE", "hier"),
                 "14": ("AUX_PGOOD", "hier"), "15": ("MAIN_USB_VALID_N", "hier"),
@@ -248,10 +248,12 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("HP_DETECT", "hier")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
-    for idx in range(2, 3):
-        s.place(f"R{781 + idx}", "R", "100k unused source-manager I/O pulldown", 650, 282.7 + idx * 10,
-                footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (f"SOURCE_MGR_SPARE{idx}", "local"), "2": ("GND", "local")})
+    # The TCA9539 pin-9 input observes the Mu SLS_S3 status output (SoC GPD5,
+    # high while the platform is in S0 or S3).  R783 defaults the line low
+    # when the Mu module is absent so S4/S5-class behavior is never gated on.
+    s.place("R783", "R", "100k SLS_S3 default-low pull-down", 650, 302.7,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("SLS_S3", "hier"), "2": ("GND", "local")})
     s.place("C780", "C", "100n source-manager local", 650, 322.7,
             footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})

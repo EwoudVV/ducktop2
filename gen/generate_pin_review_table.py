@@ -558,7 +558,7 @@ def load_contracts() -> None:
     for pin, net in {
         1: "/EC & MCU/SOURCE_MGR_INT_N", 2: "GND", 3: "/EC & MCU/NRST_NET",
         4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/HP_DETECT",
-        7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/EC & MCU/SOURCE_MGR_SPARE2",
+        7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/SLS_S3",
         10: "/PACK_FAULT_N", 11: "/AUX_FAULT_N", 12: "GND",
         13: "/PACK_RETRY_PULSE", 14: "/AUX_PGOOD",
         15: "/MAIN_USB_VALID_N", 16: "/MAIN_AUX_VALID_N",
@@ -669,8 +669,8 @@ def load_contracts() -> None:
         (1, "/MU_PWRBTN_N", "Mu active-low power-button input follows the case and EC open-drain request path."),
         (3, "/MU_RSTBTN_N", "Mu active-low reset-button input follows the case and EC open-drain request path."),
         (5, "/MU_S0_HIGH", "Mu PSON output is the qualified S0 status input."),
-        (10, "/Mu Carrier/MU_SIO_UART_TX", "Mu Super I/O UART transmit service signal."),
-        (12, "/Mu Carrier/MU_SIO_UART_RX", "Mu Super I/O UART receive service signal."),
+        (10, "/Mu Carrier/MU_SIO_UART_TX", "Mu Super I/O UART transmit (3.3V console, SIO JP3) exposed on the TP16 probe pad with a 100k idle pull-up."),
+        (12, "/Mu Carrier/MU_SIO_UART_RX", "Mu Super I/O UART receive (3.3V, SIO GP41) exposed on the TP17 probe pad with a 100k idle pull-up."),
         (115, "/Mu Carrier/RTC_BAT", "Mu RTC backup input is fed only by the keyed RTC cell connector."),
     ):
         add("A1", pin, net, requirement, mu)
@@ -700,8 +700,14 @@ def load_contracts() -> None:
          237, 242, 243, 248, 249, "MP"],
         "GND", "Every Mu ground and mounting contact is bonded to the carrier ground plane.", mu,
     )
-    for pin in (2, 4, 6, 7, 8, 9):
+    for pin in (2, 6, 8, 9):
         add_nc("A1", pin, "Unused Mu fan/status/temperature function is intentionally left open.", mu)
+    add("A1", 4, "/FAN_TACH",
+        "Mu FAN1_TAC CPU-fan tachometer input (SIO GP52) receives the fan FG open-collector tach (8.2k MCU_3V3 pull-up) so the module's thermal policy sees the real fan speed.",
+        mu)
+    add("A1", 7, "/SLS_S3",
+        "Mu SLS_S3 power-status output (SoC GPD5, high while S0 or S3) is observed on the source-manager spare input; R783 defaults the line low when the module is absent.",
+        mu)
     for pin in (25, 27, 28, 30, 85, 87, 91, 93):
         add_nc("A1", pin, "Unused HSIO2 and REFCLK0/1 resources are intentionally left open under the released BIOS map.", mu)
     for pin in (
@@ -1593,7 +1599,7 @@ def load_current_architecture_overrides() -> None:
     for pin, net in {
         1: "/EC & MCU/SOURCE_MGR_INT_N", 2: "GND", 3: "/EC & MCU/NRST_NET",
         4: "/PD1_PATH_EN", 5: "/PD2_PATH_EN", 6: "/HP_DETECT",
-        7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/EC & MCU/SOURCE_MGR_SPARE2",
+        7: "/PD1_EFUSE_FAULT_N", 8: "/PD2_EFUSE_FAULT_N", 9: "/SLS_S3",
         10: "/PACK_FAULT_N", 11: "/AUX_FAULT_N", 12: "GND", 13: "/PACK_RETRY_PULSE",
         14: "/AUX_PGOOD", 15: "/MAIN_USB_VALID_N", 16: "/MAIN_AUX_VALID_N",
         17: "/AON_FAULT_N", 18: "/RADIO_DB_PG", 19: "/RADIO_DB_FAULT_N",

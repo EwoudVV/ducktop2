@@ -56,6 +56,8 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     mu_nets["1"] = ("MU_PWRBTN_N", "hier")
     mu_nets["3"] = ("MU_RSTBTN_N", "hier")
     mu_nets["5"] = ("MU_S0_HIGH", "hier")
+    mu_nets["4"] = ("FAN_TACH", "hier")
+    mu_nets["7"] = ("SLS_S3", "hier")
     mu_nets["10"] = ("MU_SIO_UART_TX", "local")
     mu_nets["12"] = ("MU_SIO_UART_RX", "local")
 
@@ -197,11 +199,30 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.place("SW3", "SW_Push", "Mu Reset", 30, 70, footprint=FOOTPRINTS["SW_Push"],
             pin_nets={"1": ("MU_RSTBTN_N", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Omron", "MPN": "B3S-1000"})
-    s.place("J8", "Conn_01x04", "DNP Mu SIO UART debug (IO voltage unverified)", 30, 100,
+    s.place("J8", "Conn_01x04", "DNP Mu SIO UART debug header (3.3V, SIO console; probe via TP16/TP17)", 30, 100,
             footprint=FOOTPRINTS["Conn_01x04_Header"],
             pin_nets={"1": ("GND", "local"), "2": ("MU_SIO_UART_TX", "local"),
                       "3": ("MU_SIO_UART_RX", "local"), "4": ("GND", "local")},
             on_board=False)
+    # The Mu SIO console (Super I/O UART, 3.3V, SIO JP3/GP41 per the
+    # LattePanda Mu pin tables) is exposed on on-board test pads so bring-up
+    # can probe it with a logic analyzer/scope.  The EC (STM32F407) has no
+    # spare UART-capable pin to capture it.  100k pull-ups keep both lines
+    # idle-high when nothing is probed.
+    s.place("TP16", "TestPoint", "Mu SIO UART TX probe pad", 40, 100,
+            footprint=FOOTPRINTS["TestPoint_Pad"],
+            pin_nets={"1": ("MU_SIO_UART_TX", "local")},
+            extra_props={"ProcurementClass": "PCB copper test feature"}, in_bom=False)
+    s.place("TP17", "TestPoint", "Mu SIO UART RX probe pad", 50, 100,
+            footprint=FOOTPRINTS["TestPoint_Pad"],
+            pin_nets={"1": ("MU_SIO_UART_RX", "local")},
+            extra_props={"ProcurementClass": "PCB copper test feature"}, in_bom=False)
+    s.place("R779", "R", "100k MU_SIO_UART_TX idle pull-up", 40, 110,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MU_SIO_UART_TX", "local")})
+    s.place("R784", "R", "100k MU_SIO_UART_RX idle pull-up", 50, 110,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MU_SIO_UART_RX", "local")})
     s.place("J9", "Conn_01x02", "RTC backup coin-cell header", 30, 130,
             footprint=FOOTPRINTS["Conn_01x02_Service_GH"],
             pin_nets={"1": ("RTC_BAT", "local"), "2": ("GND", "local")},
@@ -767,6 +788,9 @@ def sheet_block(uuid_, x, y, w, h, name, filename, pins):
     h = snap_coord(h)
     pins_sexpr = []
     pin_coords = {}
+    needed_h = snap_coord(5.08 * (len(pins) + 1) + 5.08)
+    if h < needed_h:
+        h = needed_h
     for i, pin_name in enumerate(pins):
         py = snap_coord(y + 5.08 + i * 5.08)
         px = snap_coord(x + w)
@@ -1084,7 +1108,7 @@ def main():
         power_hier_nets,
     )
     ec_block, ec_pins = sheet_block(
-        ec_sheet_uuid, 160, 40, 60, 480, "EC & MCU", "02_ec_mcu.kicad_sch",
+        ec_sheet_uuid, 160, 40, 60, 490, "EC & MCU", "02_ec_mcu.kicad_sch",
         ec_hier_nets,
     )
     mu_block, mu_pins = sheet_block(

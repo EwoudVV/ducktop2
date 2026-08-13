@@ -39,17 +39,12 @@ FOOTPRINT_DIRS = [
 ]
 
 CURRENT_ECO_ADD_ONLY = {
-    # 2026-08-01: rear headphone-jack section + debug headers that were
-    # added to the schematic (fae06d4, 07-31 DFU work) but never synced to
-    # the PCB.  Anchors are PROPOSED placements in the free rear-edge
-    # region (x 110..240, y 150..185); review before routing.
-    "C457", "C458", "C459", "C460",
-    "C461", "C462", "C463", "C464", "C465",
-    "J422", "U425",
-    # 2026-08-13: rear EC DFU programming port + BOOT0 case switch.
-    "J73", "U63", "Q60B", "R203", "R204", "R205", "R211", "SW4", "R212",
+    # 2026-08-13: Mu SIO console probe pads + idle pull-ups.
+    # (Earlier ECO batches -- rear jack section, EC DFU port, BOOT0 switch --
+    # were synced in prior commits and are no longer pending.)
+    "TP16", "TP17", "R779", "R784",
 }
-CURRENT_ECO_REPLACE_ONLY = {"J2300"}  # DF40 -> FH12-30S FFC swap
+CURRENT_ECO_REPLACE_ONLY = set()  # DF40 -> FH12-30S J2300 swap completed (b13a110)
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
 POST_ADD_FOOTPRINT_REFRESH = set()
@@ -166,8 +161,13 @@ ANCHORS_MM.update({
     "R205": (308.0, 181.5, 90.0),
     "R211": (310.5, 181.5, 90.0),
     "Q60B": (170.0, 55.0, 0.0),
-    "SW4": (135.0, 195.0, 0.0),   # BOOT0 pinhole switch near EC sheet cluster
-    "R212": (140.0, 200.0, 0.0),
+    "SW4": (185.0, 180.0, 0.0),   # BOOT0 pinhole switch on the rear service edge
+    "R212": (192.0, 180.0, 0.0),
+    # Mu SIO console probe pads beside the existing top-left test-point row.
+    "TP16": (172.0, 16.0, 0.0),
+    "TP17": (178.0, 16.0, 0.0),
+    "R779": (172.0, 20.0, 0.0),
+    "R784": (178.0, 20.0, 0.0),
     # July 19 audit remediation.  Keep the LTC4368 VOUT capacitor and QON
     # open-drain network local to the charger/protector cluster.  The two
     # button-isolation diodes sit beside that network, while the USB service
