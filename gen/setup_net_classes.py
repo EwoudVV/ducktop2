@@ -31,18 +31,18 @@ BOARD = ROOT / "ducktop2.kicad_pcb"
 NET_RE = re.compile(r'\(net "([^"]+)"\)')
 
 DEFAULT_CLASS = {
-    "clearance": 0.2,
-    "track_width": 0.25,
+    "clearance": 0.15,
+    "track_width": 0.2,
     "via_dia": 0.6,
     "via_drill": 0.3,
     "diff_pair_gap": 0.25,
 }
 
 CLASSES: dict[str, dict] = {
-    "DIFF_85": {"description": "PCIe Gen3 85 ohm differential (NVMe x4, Wi-Fi x1, REFCLK)", "clearance": 0.2, "track_width": 0.29, "diff_pair_width": 0.29, "diff_pair_gap": 0.8},
-    "DIFF_90": {"description": "USB 3.x / USB-C 90 ohm differential", "clearance": 0.2, "track_width": 0.26, "diff_pair_width": 0.26, "diff_pair_gap": 0.612},
-    "DIFF_100": {"description": "HDMI + Ethernet MDI 100 ohm differential", "clearance": 0.2, "track_width": 0.215, "diff_pair_width": 0.215, "diff_pair_gap": 0.679},
-    "USB2_45": {"description": "USB 2.0 D+/D- 45 ohm single-ended", "clearance": 0.2, "track_width": 0.262},
+    "DIFF_85": {"description": "PCIe Gen3 85 ohm differential (NVMe x4, Wi-Fi x1, REFCLK)", "clearance": 0.15, "track_width": 0.29, "diff_pair_width": 0.29, "diff_pair_gap": 0.8},
+    "DIFF_90": {"description": "USB 3.x / USB-C 90 ohm differential", "clearance": 0.15, "track_width": 0.26, "diff_pair_width": 0.26, "diff_pair_gap": 0.612},
+    "DIFF_100": {"description": "HDMI + Ethernet MDI 100 ohm differential", "clearance": 0.15, "track_width": 0.215, "diff_pair_width": 0.215, "diff_pair_gap": 0.679},
+    "USB2_45": {"description": "USB 2.0 D+/D- 45 ohm single-ended", "clearance": 0.15, "track_width": 0.262},
 }
 
 SHEET_PREFIXES = (
@@ -66,7 +66,7 @@ LEAF_CLASSIFIERS: list[tuple[str, re.Pattern]] = [
     # 100-ohm differential (HDMI + Ethernet MDI / host / REFCLK / HSI-HSO)
     ("DIFF_100", re.compile(r"^(EXT_HDMI_(CK|D[0-9])|ETH_MDI[0-9]|GBE_HOST_(RX|TX)|GBE_REFCLK|GBE_HS(I|O))_(N|P)$")),
     # 45-ohm single-ended (USB 2.0 D+/D-)
-    ("USB2_45", re.compile(r"^(USBC[12]|HUB_DS[0-9]|HUB_DIS[0-9]|AUDIO_USB|EC_HOST_USB|MAKER_USB|MCU_USB|EC_USB_ISO|TPAD_CONN|MAKER_USB_ISO|CODEC_USB|SYSTEM_DAC_USB|TRACKPAD_USB|WIFI_USB)_(DP|DM)$")),
+    ("USB2_45", re.compile(r"^(USBC[12]|HUB_DS[0-9]|HUB_DIS[0-9]|AUDIO_USB|EC_HOST_USB|MAKER_USB|MCU_USB|EC_USB_ISO|TPAD_CONN|MAKER_USB_ISO|CODEC_USB|SYSTEM_DAC_USB|TRACKPAD_USB|WIFI_USB|DFU_CONN|EC_DFU)_(DP|DM)$")),
 ]
 
 
@@ -182,6 +182,15 @@ def apply(classes: dict[str, list[str]]) -> None:
 
     _setup_open, setup_close = block_bounds(text, "setup")
     rendered = render_classes(classes)
+
+    # Idempotent: drop any previously inserted net_class blocks first.
+    while True:
+        try:
+            s, e = block_bounds(text, "net_class")
+        except SystemExit:
+            break
+        text = text[:s] + text[e + 1:].lstrip("\n")
+
     text = text[:setup_close + 1] + "\n" + rendered + text[setup_close + 1:]
 
     shutil.copyfile(BOARD, BOARD.with_suffix(".kicad_pcb.bak"))

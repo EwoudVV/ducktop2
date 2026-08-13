@@ -7347,7 +7347,8 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid a531953e-5045-5239-abcc-f2d362177248)
 )
-(label "SOURCE_MGR_SPARE2"
+(hierarchical_label "SLS_S3"
+  (shape bidirectional)
   (at 712.47 322.58 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 04e805ee-444e-57ae-8542-97c63bfa2f18)
@@ -7563,7 +7564,7 @@
   (dnp no)
   (uuid 0ac35c26-8434-59a7-a1c1-d0a4a6e7081b)
   (property "Reference" "R783" (at 650.24 299.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k unused source-manager I/O pulldown" (at 650.24 304.8 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k SLS_S3 default-low pull-down" (at 650.24 304.8 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 650.24 302.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 302.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 650.24 302.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7579,7 +7580,8 @@
     )
   )
 )
-(label "SOURCE_MGR_SPARE2"
+(hierarchical_label "SLS_S3"
+  (shape bidirectional)
   (at 650.24 298.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid cb7b8e22-6e8d-5a11-a230-cd81c0353a27)

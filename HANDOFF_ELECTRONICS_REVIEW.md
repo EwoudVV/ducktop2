@@ -33,11 +33,14 @@ Fixed by replacing the footprint with the schematic's 30-pin
   pins 1/5/11/20/23/30/MP correct; DRC: 164 courtyards / 16 clearance /
   8 silk-edge / 1 npth, 0 shorts, 0 mask bridges
 
-## 2. MINOR — MU_SIO_UART_RX / MU_SIO_UART_TX are dead-end nets
+## 2. FIXED 2026-08-13 — MU_SIO_UART_RX / MU_SIO_UART_TX were dead-end nets
 
-A1 pins 10/12 connect to nothing else (J8 header no longer exists). The Mu
-SIO debug UART is unavailable. Not boot-blocking; wire it or drop it
-deliberately.
+The Mu SIO console is the 3.3 V Super I/O UART (SIO JP3/GP41 per the
+LattePanda-Mu `Electricals/Pinouts` tables). It is now exposed on on-board
+test pads TP16 (SIO_UART_TX) and TP17 (SIO_UART_RX) on the rear service edge
+with 100k MCU_3V3 idle pull-ups (R779/R784). The EC (STM32F407) has no spare
+UART-capable pin to capture the console; probing via pads + the DNP J8 header
+is the deliberate design termination.
 
 ## 3. Notes from the independent review (2026-08-13)
 
@@ -112,22 +115,26 @@ DB-removal defaults.
 GAPS:
 - P0-1 (mainboard J2300) — FIXED 2026-08-13 (FH12-30S swap + pin resync,
   see §1). Pads fully on-board (max y 182.9).
-- P0-2 (radio daughterboard J1 = DF40C-60DS) — OPEN. Cannot mate with the
-  30-pin FH12. Requires DB rework: J1 → FH12-30S-0.5SH, pin map matched to
-  mainboard, DB-local 3V3 from RADIO_DB_5V (30-pin map carries 5V/GND/signals
-  only), PCB re-layout.
-- P1-1 (EC update port) — OPEN. J70/SW2-BOOT0 mechanism gone; SW2 is Mu
-  power, BOOT0 fixed 10k pull-down, EC USB host-only. Options: restore a
-  rear prog port w/ BOOT0 access, or re-baseline to host-USB flashing (EC
-  DFU firmware).
-- P2-1 (always-on S5 load) — OPEN. SYS_5V/3V3 always on from VSYS; hub,
-  audio hub/codec, RP2350 never power down → 100–250 mA S5 drain. Gate from
-  MU_HOST_ACTIVE (EC) or accept.
-- P2-2 (Mu FAN1_TAC unconnected) — OPEN. Mu may derate without tach; loop EC
-  tach into A1 FAN1_TAC (confirm vs Mu datasheet first).
-- P3-2 (SLP_S3 unobserved) — OPEN. Wire A1.7 to a spare EC GPIO if S3-aware
-  behavior wanted.
-- P3-1 (MU_SIO_UART dead-ends) — confirmed, see §2.
+- P0-2 (radio daughterboard J1 = DF40C-60DS) — FIXED 2026-08-13. DB J1 is
+  now FH12-30S-0.5SH (30+MP), pin map matches mainboard J2300 net-for-net
+  (DB pin 30 grounds the MB RADIO_DB_PRESENT_N pull-up as the presence
+  detect), DB-local 3V3 regulator from RADIO_DB_5V, DB verify gate passes.
+- P1-1 (EC update port) — FIXED 2026-08-13. Rear USB-C J73 UFP/DFU port
+  (USBLC6 ESD, 5.1k CC Rd, 22R series D+/D-) with EC_DFU_SEL/BOOT0 forcing
+  the USB mux onto the port. EC DFU firmware is the remaining firmware-side
+  follow-up.
+- P2-1 (always-on S5 load) — FIXED 2026-08-13. DB rails gated behind
+  RADIO_DB_PWR_EN (EC, PG/FAULT contract); headphone amp /SD shutdown via
+  MU_HOST_ACTIVE (0.4 uA in S3); retired hub is out of the design; EC's own
+  always-on 3.3 V is intentional.
+- P2-2 (Mu FAN1_TAC unconnected) — FIXED 2026-08-13. FAN_TACH (fan FG,
+  open-collector, 8.2k MCU_3V3 pull-up) now feeds A1 FAN1_TAC (SIO GP52
+  tachometer input per the Mu pin tables).
+- P3-2 (SLP_S3 unobserved) — FIXED 2026-08-13. A1 SLS_S3 (SoC GPD5, high in
+  S0/S3 per the Mu pin tables) observed on the TCA9539 spare input with
+  R783 100k default-low pull-down (absent Mu reads off).
+- P3-1 (MU_SIO_UART dead-ends) — FIXED 2026-08-13. See §2 (TP16/TP17 probe
+  pads + idle pull-ups; EC has no spare UART pin).
 
 Verified clean (no alarms): TPS26630 floating B_GATE/DRV correct; TPS25751A
 DRAIN thermal island correct; U170 gate pairing valid; keyboard FFC reversed
