@@ -23,14 +23,14 @@ dimensions or PCB `Edge.Cuts`.
 
 ## Provisional Envelope
 
-- Envelope resolved 2026-08-13 in `ENCLOSURE_AND_STACK_DESIGN.md`: the
-  358x248 base cannot hold the three 100x60 cells AND the measured
-  140x105 trackpad with the 185-deep board. Working envelope is now
-  **base 358 x 362 mm, lid 358 x 248 mm**. Battery band Y 187-247 (three
-  cells), trackpad Y 249-354 front-center, hinges in the rear corners
-  (Framework 13 hinge kit, keepouts 40x20 at (8,0) and (310,0)), rear
-  exhaust x 70-120. The radio DB overhang (Y 185-222) is Z-stacked above
-  the battery band (see section 4.1 of the stack design).
+- Envelope resolved 2026-08-13 in `ENCLOSURE_AND_STACK_DESIGN.md` (rev 2):
+  **base and lid 358 x 248 mm**. Battery row Y 188-248 (three 100x60
+  cells side by side), trackpad X 109-249 Y 143-248 at palmrest height
+  ABOVE the battery row on a stiffener plate (click travel and cell
+  swelling separated in Z). Hinges in the rear corners (Framework 13
+  hinge kit, keepouts 40x20 at (8,0) and (310,0)), rear exhaust x 70-120.
+  The radio DB overhang (Y 185-222) is Z-stacked above cell A. SW4/BOOT0
+  pinhole moved to board (249,171) to clear the trackpad's right edge.
 - Panel location in lid: `(3, 10.5)`, leaving 3 mm nominal side margin and
   10.5 mm nominal front/rear margin before wall thickness, tolerance, hinge,
   and cable allowances.
