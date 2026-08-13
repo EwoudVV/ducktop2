@@ -7,7 +7,14 @@ positions below are KiCad board coords (origin top-left, y down).
 
 ## CRITICAL
 
-### F1 — A1 Mu carrier is non-mountable
+### F1 — FIXED 2026-08-13 — A1 Mu carrier is non-mountable
+A1 now sits at (181.3, 45) rot 90 with all pads on-board (0
+copper_edge_clearance items). Standoffs H1/H2 were re-placed onto the module's
+M2 hole datums: H1 (238.3, 76.8), H2 (238.3, 13.2) — RETENTION_AND_MOUNTING_RELEASE.md
+updated to match. Remaining A1-courtyard overlaps are the low-profile AC caps
+under the module's 8 mm standoff (pre-existing pattern).
+
+Original finding (as reviewed):
 Pads, mounting holes, and module body are off-board, and standoffs H1/H2 are
 orphaned.
 
@@ -40,7 +47,13 @@ orphaned.
 - Fix: move U170, R2316, U46 (and re-check anything else under J40) clear of
   the socket body + pin field; or reposition J40.
 
-### F3 — Keyboard FFC connector J310 pad field overlaps its series resistors
+### F3 — FIXED 2026-08-13 — Keyboard FFC connector J310 pad field overlaps its series resistors
+
+R374/R375 moved west of the FFC pad field (R374 (315.5,50.8), R375 (315.5,48.5));
+R386 stays at (329.5,41.5). All J310 pad-field clearance items are cleared
+(board-wide clearance count is now 0); the resistors remain inside J310's
+connector-body courtyard, which is inherent to keeping the series terminations
+near the connector.
 - Location: J310 (320,50) rot −90 (FH12-30S, pads at x=321.85, y 40.85–59.15);
   R374 (323,53), R375, R386.
 - Evidence: 9 clearance items — R374.1/2 ↔ J310 pads 19–24 (0.025–0.118 mm),
