@@ -10595,7 +10595,7 @@
   (dnp no)
   (uuid d5ce68b3-d862-5040-a4e8-31484d1d9312)
   (property "Reference" "R42" (at 299.72 121.92 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "169k 1% TPS56637 EN high" (at 299.72 127 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k 1% TPS56637 EN high (host-active gate)" (at 299.72 127 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 299.72 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 299.72 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 299.72 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -10611,7 +10611,7 @@
     )
   )
 )
-(hierarchical_label "VSYS"
+(hierarchical_label "MU_HOST_ACTIVE"
   (shape bidirectional)
   (at 299.72 120.65 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -10632,7 +10632,7 @@
   (dnp no)
   (uuid 7f34cd9c-5ce9-52a9-83ee-45e2235d71af)
   (property "Reference" "R45" (at 299.72 132.08 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "36.1k 1% TPS56637 EN low" (at 299.72 137.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k 1% TPS56637 EN low" (at 299.72 137.16 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 299.72 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 299.72 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 299.72 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11116,7 +11116,7 @@
   (dnp no)
   (uuid f1a49830-605a-53d8-a77e-94771a467d03)
   (property "Reference" "R770" (at 355.6 52.07 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "169k 1% TPS56637 EN high" (at 355.6 57.15 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k 1% TPS56637 EN high (host-active gate)" (at 355.6 57.15 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 355.6 54.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 355.6 54.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 355.6 54.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11132,7 +11132,7 @@
     )
   )
 )
-(hierarchical_label "VSYS"
+(hierarchical_label "MU_HOST_ACTIVE"
   (shape bidirectional)
   (at 355.6 50.8 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -11153,7 +11153,7 @@
   (dnp no)
   (uuid f01c9170-ecd6-503f-8ed9-0dcd5b6fd1cf)
   (property "Reference" "R771" (at 355.6 62.23 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "36.1k 1% TPS56637 EN low" (at 355.6 67.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k 1% TPS56637 EN low" (at 355.6 67.31 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 355.6 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 355.6 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 355.6 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))

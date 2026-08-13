@@ -45,10 +45,10 @@ def build(sheet_symbol_uuid):
     s.text(20, 20.32, "J1 pin 30 is the passive PRESENT_N strap: this board hard-connects it to GND.")
     s.place(
         "J1", "Conn_01x30_FFC_MP", "FH12-30S 30-pin radio daughterboard FFC", 180, 185,
-        footprint=FOOTPRINTS["Radio_DB_Daughter"], pin_nets=connector_pin_nets(),
+        footprint=FOOTPRINTS["Radio_DB_Daughter"], pin_nets=connector_pin_nets() | {"MP": ("GND", "local")},
         extra_props={
-            "Manufacturer": "Hirose Electric", "MPN": "DF40C(2.0)-60DS-0.4V(51)",
-            "MatingConnector": "DF40C-60DP-0.4V(51)", "StackHeight": "2.0mm",
+            "Manufacturer": "Hirose Electric", "MPN": "FH12-30S-0.5SH(55)",
+            "MatingConnector": "FH12 series 30-pin 0.5mm-pitch FFC cable", "StackHeight": "2.0mm",
         },
     )
 

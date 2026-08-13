@@ -1264,8 +1264,8 @@ def check_mu_carrier(components, pin_names):
         expect(net(components, ref, "2"), "GND", f"{ref} TPS56637 output return")
     expect_value_prefix(components, "R40", "76.8k 0.1%", "SYS_5V HDMI-headroom FB top value")
     expect_value_prefix(components, "R41", "10k 0.1%", "SYS_5V HDMI-headroom FB bottom value")
-    expect_value_prefix(components, "R42", "169k 1%", "TPS56637 enable divider top")
-    expect_value_prefix(components, "R45", "36.1k 1%", "TPS56637 enable divider bottom")
+    expect_value_prefix(components, "R42", "100k 1%", "TPS56637 enable divider top (host-active gate)")
+    expect_value_prefix(components, "R45", "100k 1%", "TPS56637 enable divider bottom")
     expect_value_prefix(components, "R46", "100k", "TPS56637 power-good pull-up")
 
     expect_contains(comp(components, "U7").value, "TPS56637RPAR", "SYS_3V3 regulator exact part")
@@ -1284,8 +1284,8 @@ def check_mu_carrier(components, pin_names):
     expect(net(components, "L5", "2"), "/SYS_3V3", "SYS_3V3 inductor output side")
     expect_value_prefix(components, "R43", "45.3k", "SYS_3V3 FB top value")
     expect_value_prefix(components, "R44", "10k", "SYS_3V3 FB bottom value")
-    expect_value_prefix(components, "R770", "169k", "SYS_3V3 enable top value")
-    expect_value_prefix(components, "R771", "36.1k", "SYS_3V3 enable bottom value")
+    expect_value_prefix(components, "R770", "100k", "SYS_3V3 enable top value (host-active gate)")
+    expect_value_prefix(components, "R771", "100k", "SYS_3V3 enable bottom value")
     expect_value_prefix(components, "R772", "100k", "SYS_3V3 power-good pull-up")
     for ref in ("C46", "C790", "C791"):
         expect(net(components, ref, "1"), "/VSYS", f"{ref} SYS_3V3 input rail")
@@ -2405,11 +2405,11 @@ def check_optional_radio_interface(components):
         expect(net(components, "U170", pin), want, f"E-key powered-off isolator pin {pin}")
 
     expect(comp(components, "J2300").footprint,
-           "Connector_Hirose_DF40:Hirose_DF40C-60DP-0.4V_2x30-1MP_P0.4mm",
+           "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
            "radio daughterboard mainboard connector")
-    expect(prop(components, "J2300", "MPN"), "DF40C-60DP-0.4V(51)",
+    expect(prop(components, "J2300", "MPN"), "FH12-30S-0.5SH(55)",
            "radio daughterboard connector MPN")
-    expect(prop(components, "J2300", "MatingConnector"), "DF40C(2.0)-60DS-0.4V(51)",
+    expect(prop(components, "J2300", "MatingConnector"), "FH12 series 30-pin 0.5mm-pitch FFC cable",
            "radio daughterboard mating connector")
     expect(prop(components, "J2300", "AbsentBoardContract"),
            "NO_RADIO_BOARD_REQUIRED_FOR_BOOT_OR_PRIMARY_LAPTOP_OPERATION",

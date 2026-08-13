@@ -30,7 +30,7 @@ MODEL_OFFSETS = {
     "SSD1306_0.96in_Module_4Pin": (0, 0, +8.50),   # symmetric module, centered ok
     "ublox_MAX":              (0,     0, +0.40),    # GPS module, origin at pin 1
     "LattePanda_Mu_H8.0_Horizontal": (0, 0, +27.91),  # socket connector
-    "Hirose_DF40C(2.0)-60DS-0.4V_2x30_P0.4mm": (0, 0, +9.42),  # board-to-board connector
+    "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal": (0, 0, 0),  # FFC connector, standard model
 }
 
 # Models in ducktop2.3dshapes/ that should use KIPRJMOD paths
