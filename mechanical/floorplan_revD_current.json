@@ -15,7 +15,7 @@
    "x": 0,
    "y": 0,
    "w": 358,
-   "h": 362
+   "h": 248
   },
   "lid": {
    "label": "Lid / Direct-eDP Display",
@@ -80,9 +80,9 @@
    "zone": "base",
    "rot": 0,
    "id": "battery-1",
-   "name": "3.7V cell A (measured) - battery band left",
+   "name": "3.7V cell A - battery row left",
    "x": 5,
-   "y": 187,
+   "y": 188,
    "w": 100,
    "h": 60
   },
@@ -93,9 +93,9 @@
    "zone": "base",
    "rot": 0,
    "id": "battery-2",
-   "name": "3.7V cell B (measured) - battery band center",
+   "name": "3.7V cell B - battery row center (under trackpad Z)",
    "x": 129,
-   "y": 187,
+   "y": 188,
    "w": 100,
    "h": 60
   },
@@ -106,9 +106,9 @@
    "zone": "base",
    "rot": 0,
    "id": "battery-3",
-   "name": "3.7V cell C (measured) - battery band right",
+   "name": "3.7V cell C - battery row right",
    "x": 253,
-   "y": 187,
+   "y": 188,
    "w": 100,
    "h": 60
   },
@@ -119,9 +119,9 @@
    "zone": "base",
    "rot": 0,
    "id": "trackpad-target",
-   "name": "JOMAA trackpad (140x105, front-center)",
+   "name": "JOMAA trackpad (140x105) - palmrest height above battery row",
    "x": 109,
-   "y": 249,
+   "y": 143,
    "w": 140,
    "h": 105
   },
@@ -134,7 +134,7 @@
    "id": "speaker-left",
    "name": "front speaker L",
    "x": 3,
-   "y": 330,
+   "y": 205,
    "w": 18,
    "h": 38
   },
@@ -147,7 +147,7 @@
    "id": "speaker-right",
    "name": "front speaker R",
    "x": 337,
-   "y": 330,
+   "y": 205,
    "w": 18,
    "h": 38
   },
@@ -366,7 +366,7 @@
    "zone": "base",
    "rot": 0,
    "id": "radio-daughterboard",
-   "name": "radio DB overhang (Z-stacked above battery band)",
+   "name": "radio DB overhang (Z-stacked above cell A)",
    "x": 2.5,
    "y": 185,
    "w": 120,
