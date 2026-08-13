@@ -94,3 +94,41 @@ deliberately.
 1. Update PCB from Schematic → confirm J2300's 26 nets change (and nothing else).
 2. Route signals; fill inner planes; DRC with copper.
 3. Re-enable lib-footprint parity.
+
+---
+
+## 5. User-Functionality review (independent, 2026-08-13)
+
+/ tmp/ducktop2_review/REPORT_USER_FUNCTIONALITY.md — requirements verification,
+20 user expectations. Summary:
+
+DELIVERED (hardware, EC-firmware pending): power-on/recovery-from-dead-battery
+(QON + AON OR), reset, lid, keyboard (65-key contract verified vs fabricated
+board), trackpad, all 5 USB-C (2× PD dual-role + 3× source-only with
+charger-refusal), off-state charging, battery gauge, audio (jack auto-mute,
+fail-safe muted), fan, OLEDs, Wi-Fi/BT/GbE/HDMI, NVMe x4, maker isolation,
+DB-removal defaults.
+
+GAPS:
+- P0-1 (mainboard J2300) — FIXED 2026-08-13 (FH12-30S swap + pin resync,
+  see §1). Pads fully on-board (max y 182.9).
+- P0-2 (radio daughterboard J1 = DF40C-60DS) — OPEN. Cannot mate with the
+  30-pin FH12. Requires DB rework: J1 → FH12-30S-0.5SH, pin map matched to
+  mainboard, DB-local 3V3 from RADIO_DB_5V (30-pin map carries 5V/GND/signals
+  only), PCB re-layout.
+- P1-1 (EC update port) — OPEN. J70/SW2-BOOT0 mechanism gone; SW2 is Mu
+  power, BOOT0 fixed 10k pull-down, EC USB host-only. Options: restore a
+  rear prog port w/ BOOT0 access, or re-baseline to host-USB flashing (EC
+  DFU firmware).
+- P2-1 (always-on S5 load) — OPEN. SYS_5V/3V3 always on from VSYS; hub,
+  audio hub/codec, RP2350 never power down → 100–250 mA S5 drain. Gate from
+  MU_HOST_ACTIVE (EC) or accept.
+- P2-2 (Mu FAN1_TAC unconnected) — OPEN. Mu may derate without tach; loop EC
+  tach into A1 FAN1_TAC (confirm vs Mu datasheet first).
+- P3-2 (SLP_S3 unobserved) — OPEN. Wire A1.7 to a spare EC GPIO if S3-aware
+  behavior wanted.
+- P3-1 (MU_SIO_UART dead-ends) — confirmed, see §2.
+
+Verified clean (no alarms): TPS26630 floating B_GATE/DRV correct; TPS25751A
+DRAIN thermal island correct; U170 gate pairing valid; keyboard FFC reversed
+pin map intentional (n→31−n contract).
