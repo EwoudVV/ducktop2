@@ -29,7 +29,9 @@ long-term bending loads.
 - Maximum spacer torque: 0.2 N*m per Wurth. This is a component maximum, not a
   production assembly torque; the latter remains to be established by sample
   fit and assembler approval.
-- Board references: `H1`, `H2`.
+- Board references: `H1` (238.300, 76.800), `H2` (238.300, 13.200) — on the
+  module's M2 hole positions for the Mu socket at (181.3, 45) rot 90
+  (verified against the LattePanda-Mu footprint hole datums).
 - Electrical treatment: both standoffs connect to `GND`, matching the official
   reference carrier.
 
@@ -82,7 +84,7 @@ NOTE: H10-H13/H15/H17 were revised 2026-08-12 to match the rev-D layout
 The original pattern (H10 20,28 / H11 110,10 / H12 180,10 / H13 20,115 /
 H15 240,70 / H17 300,175) was validated for the pre-rev-D layout and now
 conflicts with the left-port PD controllers, the audio codec cluster, the
-Mu standoffs (H1/H2 at (237, 71.8)/(237, 8.2)), and the SSD1306 OLED
+Mu standoffs (H1/H2 at (238.3, 76.8)/(238.3, 13.2)), and the SSD1306 OLED
 courtyards. The board is canonical; the chassis must follow it.
 
 This pattern supports the long 358 x 185 mm board near its ends, center, side
