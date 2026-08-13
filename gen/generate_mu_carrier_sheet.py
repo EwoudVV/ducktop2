@@ -252,9 +252,9 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.place("R41", "R", "10k 0.1% TPS56637 FB low", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK5_FB", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0710KL"})
-    s.place("R42", "R", "169k 1% TPS56637 EN high", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("VSYS", "hier"), "2": ("BUCK5_EN", "local")})
-    s.place("R45", "R", "36.1k 1% TPS56637 EN low", *p.next(), footprint=FOOTPRINTS["R"],
+    s.place("R42", "R", "100k 1% TPS56637 EN high (host-active gate)", *p.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("BUCK5_EN", "local")})
+    s.place("R45", "R", "100k 1% TPS56637 EN low", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK5_EN", "local"), "2": ("GND", "local")})
     s.place("R46", "R", "100k SYS_5V PG pull-up", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("SYS_5V_PG", "local")})
@@ -297,9 +297,9 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             pin_nets={"1": ("SYS_3V3", "local"), "2": ("BUCK33_FB", "local")})
     s.place("R44", "R", "10k 1% TPS56637 FB low", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK33_FB", "local"), "2": ("GND", "local")})
-    s.place("R770", "R", "169k 1% TPS56637 EN high", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("VSYS", "hier"), "2": ("BUCK33_EN", "local")})
-    s.place("R771", "R", "36.1k 1% TPS56637 EN low", *p.next(), footprint=FOOTPRINTS["R"],
+    s.place("R770", "R", "100k 1% TPS56637 EN high (host-active gate)", *p.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("BUCK33_EN", "local")})
+    s.place("R771", "R", "100k 1% TPS56637 EN low", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK33_EN", "local"), "2": ("GND", "local")})
     s.place("R772", "R", "100k SYS_3V3 PG pull-up", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("SYS_3V3_PG", "local")})

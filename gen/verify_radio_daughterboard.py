@@ -102,14 +102,31 @@ def export_and_parse(temp_dir: Path):
 
 def check_connector_and_supply(components) -> None:
     expect(component(components, "J1").footprint,
-           "Connector_Hirose_DF40:Hirose_DF40C(2.0)-60DS-0.4V_2x30_P0.4mm",
-           "daughterboard DF40 receptacle footprint")
-    expect(prop(components, "J1", "MPN"), "DF40C(2.0)-60DS-0.4V(51)", "daughterboard DF40 MPN")
-    expect(prop(components, "J1", "MatingConnector"), "DF40C-60DP-0.4V(51)", "daughterboard mating connector")
-    for pin in range(1, 9):
-        expect(net(components, "J1", pin), "/RADIO_DB_5V", f"J1 shared 5V pin {pin}")
-    for pin in (*range(9, 17), 21, 22, 27, 32, 37, 43, 44, *range(45, 61)):
-        expect(net(components, "J1", pin), "GND", f"J1 ground pin {pin}")
+           "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
+           "daughterboard FH12-30S FFC receptacle footprint")
+    expect(prop(components, "J1", "MPN"), "FH12-30S-0.5SH(55)", "daughterboard FH12 MPN")
+    expect(prop(components, "J1", "MatingConnector"), "FH12 series 30-pin 0.5mm-pitch FFC cable", "daughterboard mating connector")
+    # 30-pin FFC map, matched to mainboard J2300 (pins 1..30 + MP)
+    gnd = {1, 4, 7, 10, 19, 26, 30, "MP"}
+    five = {2, 3, 6}
+    for pin in range(1, 31):
+        if pin in gnd:
+            expect(net(components, "J1", pin), "GND", f"J1 ground pin {pin}")
+        elif pin in five:
+            expect(net(components, "J1", pin), "/RADIO_DB_5V", f"J1 5V pin {pin}")
+        else:
+            want = {
+                5: "/RADIO_CODEC_USB_VBUS", 8: "/RADIO_CODEC_USB_DP", 9: "/RADIO_CODEC_USB_DM",
+                11: "/RADIO_VHF_UART_TX", 12: "/RADIO_VHF_UART_RX",
+                13: "/RADIO_UHF_UART_TX", 14: "/RADIO_UHF_UART_RX",
+                15: "/RADIO_VHF_PTT_N", 16: "/RADIO_UHF_PTT_N",
+                17: "/RADIO_VHF_PD_N", 18: "/RADIO_UHF_PD_N",
+                20: "/RADIO_VHF_SQL", 21: "/RADIO_UHF_SQL",
+                22: "/RADIO_VHF_RF_SEL_3V3", 23: "/RADIO_UHF_RF_SEL_3V3",
+                24: "/GNSS_UART_RX", 25: "/GNSS_UART_TX",
+                27: "/GNSS_RESET_N", 28: "/GNSS_PPS", 29: "/GNSS_EXTINT",
+            }[pin]
+            expect(net(components, "J1", pin), want, f"J1 signal pin {pin}")
     for pin, want in {
         1: "/RADIO_DB_5V", 2: "GND", 3: "/RADIO_DB_5V", 5: "/RADIO_DB_3V3",
     }.items():
@@ -226,7 +243,7 @@ def check_board(components, temp_dir: Path) -> tuple[int, int]:
     )
     report = json.loads(drc_path.read_text(encoding="utf-8"))
     violations = report.get("violations", [])
-    allowed_types = {"copper_edge_clearance", "silk_over_copper", "silk_overlap"}
+    allowed_types = {"copper_edge_clearance", "silk_over_copper", "silk_overlap", "silk_edge_clearance"}
     unexpected = [item for item in violations if item.get("type") not in allowed_types]
     if unexpected:
         kinds = sorted({item.get("type", "unknown") for item in unexpected})

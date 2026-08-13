@@ -43,7 +43,7 @@ MODEL_OFFSETS = {
     "SSD1306_0.96in_Module_4Pin": (0, 0, +8.50),
     "ublox_MAX": (0.15, -0.06, +0.40),
     "LattePanda_Mu_H8.0_Horizontal": (0, 0, +27.91),
-    "Hirose_DF40C(2.0)-60DS-0.4V_2x30_P0.4mm": (0, 0, +9.42),
+    "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal": (0, 0, 0),
 }
 
 

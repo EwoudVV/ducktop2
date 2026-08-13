@@ -35,7 +35,7 @@ MODELS_CORRECT = {
     "JXD1-1022NL_MidMount",
     "LattePanda_Mu_H8.0_Horizontal",
     "SSD1306_0.96in_Module_4Pin",
-    "Hirose_DF40C(2.0)-60DS-0.4V_2x30_P0.4mm",
+    "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
     "Infineon_IM68A130V01",
     "MiniCircuits_QA2224_PL484",
     "TDK_TFM201610",

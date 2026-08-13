@@ -32,10 +32,10 @@ def build(sheet_symbol_uuid):
     s.place("U61", "TS3USB30EDGSR", "TS3USB30EDGSR EC USB host-state isolation", 70, 82.55,
             footprint=FOOTPRINTS["TS3USB30EDGSR"],
             pin_nets={
-                "1": ("GND", "local"),
-                "2": ("EC_HOST_USB_DP", "hier"), "3": ("", "nc"),
+                "1": ("EC_DFU_SEL", "hier"),
+                "2": ("EC_HOST_USB_DP", "hier"), "3": ("EC_DFU_DP", "local"),
                 "4": ("EC_USB_ISO_DP", "local"), "5": ("GND", "local"),
-                "6": ("EC_USB_ISO_DM", "local"), "7": ("", "nc"),
+                "6": ("EC_USB_ISO_DM", "local"), "7": ("EC_DFU_DM", "local"),
                 "8": ("EC_HOST_USB_DM", "hier"), "9": ("EC_USB_OE_N", "local"),
                 "10": ("MCU_3V3", "hier"),
             }, extra_props={
@@ -50,6 +50,11 @@ def build(sheet_symbol_uuid):
     s.place("R202", "R", "10k EC USB default-disconnect pull-up", 195, 63.5,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("EC_USB_OE_N", "local")})
+    s.place("Q60B", "Q_NMOS_SOT23_GSD", "2N7002 DFU-mode USB mux force-enable", 235, 63.5,
+            footprint=FOOTPRINTS["Q_NMOS"],
+            pin_nets={"1": ("EC_DFU_SEL", "hier"), "2": ("GND", "local"),
+                      "3": ("EC_USB_OE_N", "local")},
+            extra_props={"Manufacturer": "onsemi", "MPN": "2N7002KT1G"})
     s.place("C208", "C", "100n EC USB switch local", 285, 63.5,
             footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
@@ -62,6 +67,36 @@ def build(sheet_symbol_uuid):
                 "3": ("EC_HOST_USB_DP", "hier"),
                 "4": ("MCU_3V3", "hier"),
             }, on_board=False)
+
+    # ---------------- Rear EC DFU prog port (J70) ----------------
+    s.text(20, 190.0, "== Rear USB-C EC firmware programming port (DFU) ==")
+    s.text(20, 197.0, "BOOT0 (EC_DFU_SEL) high at EC reset selects this port and forces the USB mux on.")
+    s.place("R203", "R", "22R DFU USB DP series", 40, 210.0, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("EC_DFU_DP", "local"), "2": ("DFU_CONN_DP", "local")})
+    s.place("R204", "R", "22R DFU USB DM series", 40, 222.0, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("EC_DFU_DM", "local"), "2": ("DFU_CONN_DM", "local")})
+    usblc6(s, "U63", "USBLC6-2P6 EC DFU USB ESD", 150, 216.0, "DFU_CONN_DP", "DFU_CONN_DM", "GND")
+    s.place("R205", "R", "5.1k USB-C CC1 Rd (UFP)", 200, 210.0, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("J73_CC1", "local"), "2": ("GND", "local")})
+    s.place("R211", "R", "5.1k USB-C CC2 Rd (UFP)", 200, 222.0, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("J73_CC2", "local"), "2": ("GND", "local")})
+    s.place("J73", "USB_C_Receptacle", "Rear USB-C EC firmware programming port (UFP/DFU)", 310, 216.0,
+            footprint=FOOTPRINTS["USB_C_Receptacle"],
+            pin_nets={
+                "A6": ("DFU_CONN_DP", "local"), "B6": ("DFU_CONN_DP", "local"),
+                "A7": ("DFU_CONN_DM", "local"), "B7": ("DFU_CONN_DM", "local"),
+                "A5": ("J73_CC1", "local"), "B5": ("J73_CC2", "local"),
+                "A1": ("GND", "local"), "B1": ("GND", "local"),
+                "A12": ("GND", "local"), "B12": ("GND", "local"),
+                "SH": ("GND", "local"),
+                "A2": ("", "nc"), "A3": ("", "nc"), "B2": ("", "nc"), "B3": ("", "nc"),
+                "A10": ("", "nc"), "A11": ("", "nc"), "B10": ("", "nc"), "B11": ("", "nc"),
+                "A8": ("", "nc"), "B8": ("", "nc"), "A4": ("", "nc"), "B4": ("", "nc"),
+                "A9": ("", "nc"), "B9": ("", "nc"),
+            }, extra_props={
+                "Manufacturer": "Molex", "MPN": "105450-0101",
+                "Datasheet": "https://www.molex.com/pdm_docs/sd/1054500101_sd.pdf",
+            })
 
     # ---------------- Internal trackpad USB2/HID link ----------------
     s.text(20, 235.0, "== Required internal trackpad on Mu USB2_P8 ==")

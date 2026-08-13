@@ -98,6 +98,12 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
             extra_props={"Manufacturer": "Omron", "MPN": "B3S-1000"})
     s.place("R33", "R", "10k", *c2.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BOOT0_NET", "local"), "2": ("GND", "local")})
+    s.place("SW4", "SW_Push", "BOOT0 (DFU)", *c2.next(), footprint=FOOTPRINTS["SW_Push"],
+            pin_nets={"1": ("BOOT0_NET", "local"), "2": ("MCU_3V3", "hier")},
+            extra_props={"Manufacturer": "Omron", "MPN": "B3S-1000",
+                         "MechanicalRole": "Case pinhole access; hold at EC reset to enter USB DFU"})
+    s.place("R212", "R", "1k DFU select series", *c2.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("BOOT0_NET", "local"), "2": ("EC_DFU_SEL", "hier")})
 
     # ---------------- HSE / LSE crystals ----------------
     s.text(20, 230, "-- HSE 8MHz + LSE 32.768kHz crystals --")
