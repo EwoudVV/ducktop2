@@ -1,4 +1,4 @@
-# Ducktop2 — Electronics-Correctness Review (v3, FINAL)
+# Ducktop2 — Electronics-Correctness Review (v4, FINAL)
 
 Generated: 2026-08-13 — net-level audit. This review covers electrical
 correctness only (nets, power, integrity). Routing state is covered in
@@ -8,37 +8,54 @@ Method: schematic ERC + full sexpr netlist audit (1372 nets) vs board
 (4076 pads, ref-count based — immune to the pinfunction parsing trap that
 caused two false alarms in v2, both retracted below).
 
+Independent reviewer confirmation (2026-08-13, /tmp/ducktop2-review): P0
+J2300 re-verified with fresh evidence incl. the 60-pin DF40 footprint detail;
+P2 MU_SIO_UART re-verified (J8 no longer exists); P3.1–P3.5 new notes
+(EC VBAT, PRT_CTL pull-ups, BQ25798 BC1.2, BQ34Z100 VEN/TS, TPS25751A straps).
+All verified-clean rows reproduced.
+
 ---
 
-## 1. BLOCKER — J2300 radio FFC: 26 of 30 board pads on the WRONG NETS
+## 1. FIXED — J2300 radio FFC (was P0 blocker, resolved 2026-08-13)
 
-Board vs current schematic, verified pad-by-pad (ref+pin on both sides):
+The board's J2300 was the 60-pin `Hirose_DF40C-60DP` with a stale pin map.
+Fixed by replacing the footprint with the schematic's 30-pin
+`Hirose_FH12-30S-0.5SH` and assigning the schematic's pin nets:
 
-- Board pin 1 = RADIO_DB_5V — schematic says GND
-- Board pins 4, 7 = RADIO_DB_5V — schematic says GND
-- Board pins 5, 8 = RADIO_DB_5V — schematic says RADIO_CODEC_USB_DM/DP_DB
-- Board pin 9 = GND — schematic says RADIO_CODEC_USB_VBUS_DB
-- Board pins 11–16 = GND / RADIO_CODEC_* — schematic says the four radio
-  UART/PTT/PD/SQL signals
-- Board pins 17–30 = shifted one position vs schematic (VHF/UHF/GNSS/DB_PRESENT)
-- Board pin 23–25 = VHF/UHF TX — schematic says UHF_RF_SEL / GNSS_UART_RX/TX
-- Board pin 30 = RADIO_VHF_PD_N_DB — schematic says RADIO_DB_PRESENT_N
-
-**Impact: the radio daughterboard is completely miswired when routed as-is —
-VHF, UHF, GNSS, codec-USB, DB power, DB-present all land on the wrong FFC
-pins; RADIO_DB_5V would sit on pads the schematic grounds. Radios/GPS dead,
-possible 5V→GND stress.**
-
-**Fix:** `Update PCB from Schematic`, then re-verify J2300's pad↔pin map
-(J2300 is a customized FH12-30S — update nets only, never the footprint).
+- Footprint: `Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal`
+  (30 + MP pads, 31 total; DF40 pads 31–60 removed)
+- MPN `FH12-30S-0.5SH(55)`, MatingConnector/StackHeight/AbsentBoardContract
+  properties set per schematic; Reference/Value corrected
+- Position (62.5, 181.5) unchanged
+- C7 (BQ25798 BTST1 bootstrap cap) relocated from under the FFC to
+  (64.3, 136.6) — 4 mm from U2, electrically the correct home
+- **Verified: 0 net conflicts board↔schematic for every ref**; spot checks
+  pins 1/5/11/20/23/30/MP correct; DRC: 164 courtyards / 16 clearance /
+  8 silk-edge / 1 npth, 0 shorts, 0 mask bridges
 
 ## 2. MINOR — MU_SIO_UART_RX / MU_SIO_UART_TX are dead-end nets
 
-A1 pins 10/12 connect to nothing else; the J8 debug header and nearby labels
-are floating. The Mu SIO debug UART is unavailable. Not boot-blocking; wire
-it or drop it deliberately.
+A1 pins 10/12 connect to nothing else (J8 header no longer exists). The Mu
+SIO debug UART is unavailable. Not boot-blocking; wire it or drop it
+deliberately.
 
-## 3. Verified CLEAN (netlist-level, no action)
+## 3. Notes from the independent review (2026-08-13)
+
+- **EC VBAT tied to MCU_3V3** — no EC RTC backup; the coin cell (J9) backs
+  only the Mu. Confirm intentional; add VBAT diode-OR if EC RTC across pack
+  swaps matters.
+- **HUB_PRT_CTL2/3/4 lack pull-ups** — wire-AND of hub GPIO + TPS2553/
+  TPS25810 OC/EN; other fault buses have 10k. Add 10k pull-ups for a defined
+  reset state (recommended).
+- **BQ25798 D+/D− NC** — BC1.2 input detection unused; IINDPM is
+  firmware-only (must not enable DCD/ICO).
+- **BQ34Z100-G1** — VEN floating is datasheet-sanctioned; ALERT on P2 matches
+  the G1 default. Configure the gauge for the internal temperature sensor
+  (TS pulled to VSS).
+- **TPS25751A ADCIN straps valid**; EEPROM image must be programmed at
+  assembly.
+
+## 4. Verified CLEAN (netlist-level, no action)
 
 - **ERC: 0 errors** (pin-not-connected and power-pin checks at error severity;
   the all-passive keyboard chain is why ERC alone can't catch floating nets)
