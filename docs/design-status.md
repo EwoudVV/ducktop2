@@ -212,7 +212,7 @@ hardware exists.
 6. ✅ eMMC recovery/hibernation design and setup tooling
    (`software/os-theme/docs/emmc-recovery.md` + `install/emmc-recovery-setup.sh`).
 7. Classify and resolve all remaining PCB DRC, unconnected, and parity findings.
-8. ~~Freeze the six-layer stackup and controlled-impedance geometries.~~ — COMPLETED via P1.4.
+8. ~~Freeze the six-layer stackup and controlled-impedance geometries.~~ — COMPLETED via P1.4; upgraded to an 8-layer stackup 2026-08-13 (outer microstrip interfaces unchanged, impedance geometries preserved).
 9. ✅ Complete manufacturer part numbers, ratings, assembly constraints, and
    alternate sourcing for the remaining BOM gaps. — COMPLETED. All 378 gap
    refs (204 resistors + 174 capacitors) now stamp Manufacturer/MPN at

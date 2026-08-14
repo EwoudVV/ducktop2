@@ -18,6 +18,8 @@
 		(6 "In2.Cu" signal)
 		(8 "In3.Cu" signal)
 		(10 "In4.Cu" signal)
+		(12 "In5.Cu" signal)
+		(14 "In6.Cu" signal)
 		(2 "B.Cu" signal)
 		(9 "F.Adhes" user "F.Adhesive")
 		(11 "B.Adhes" user "B.Adhesive")
@@ -66,7 +68,7 @@
 			)
 			(layer "dielectric 2"
 				(type "core")
-				(thickness 0.736)
+				(thickness 0.15)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
@@ -88,7 +90,7 @@
 			)
 			(layer "dielectric 4"
 				(type "core")
-				(thickness 0.736)
+				(thickness 0.586)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
@@ -98,6 +100,28 @@
 				(thickness 0.035)
 			)
 			(layer "dielectric 5"
+				(type "prepreg")
+				(thickness 0.103)
+				(material "FR4")
+				(epsilon_r 4.2)
+				(loss_tangent 0.02)
+			)
+			(layer "In5.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "dielectric 6"
+				(type "core")
+				(thickness 0.15)
+				(material "FR4")
+				(epsilon_r 4.5)
+				(loss_tangent 0.02)
+			)
+			(layer "In6.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "dielectric 7"
 				(type "prepreg")
 				(thickness 0.125)
 				(material "FR4")
