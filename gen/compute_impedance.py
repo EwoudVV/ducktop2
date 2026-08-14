@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Compute candidate trace geometries for the Ducktop2 6-layer stackup.
+Compute candidate trace geometries for the Ducktop2 8-layer stackup.
 
 Uses the industry-standard Hammerstad/Jensen microstrip and IPC-2141
 edge-coupled differential approximations for a reproducible engineering
@@ -8,8 +8,11 @@ package.  Final production geometries must come from the fabricator's field
 solver; this tool sizes the starting point and the submission expectations.
 
 Stackup (from manufacturing/mainboard_stackup_release.json + board setup):
-  L1 signal   -- 2116 prepreg h=0.125mm, eps_r=4.2 -- L2 GND
-  All high-speed pairs route on L1 referenced to the solid L2 GND plane.
+  L1 signal -- 2116 prepreg h=0.125mm, eps_r=4.2 -- L2 GND
+  L8 signal -- 2116 prepreg h=0.125mm, eps_r=4.2 -- L7 GND
+  The 2026-08-13 8-layer transition keeps both outer microstrip interfaces
+  identical to the released 6L design, so these geometries are unchanged.
+  High-speed pairs route on L1 (or L8) referenced to the solid GND plane.
   1 oz copper everywhere (t = 35 um).
 
 Run:

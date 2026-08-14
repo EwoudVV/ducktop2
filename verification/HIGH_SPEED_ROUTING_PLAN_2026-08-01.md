@@ -18,6 +18,34 @@ classes are already committed to `ducktop2.kicad_pcb`
 All high-speed pairs route on L1 referenced to the solid L2 GND plane. No vias
 on differential pairs (L2 is the uninterrupted return path).
 
+## 2026-08-13: 8-layer stackup
+
+The board moved to 8 copper layers. The outer microstrip interfaces keep the
+2116 prepreg (h=0.125 mm, Dk=4.2) geometry of the 6L release, so every
+geometry in this plan is unchanged:
+
+| Layer | Assignment |
+| --- | --- |
+| L1 F.Cu | signals — impedance-critical microstrip over L2 |
+| L2 In1.Cu | GND, solid |
+| L3 In2.Cu | signals — GND/GND stripline (L2 above, L4 below) |
+| L4 In3.Cu | GND, solid |
+| L5 In4.Cu | POWER islands (VSYS, SYS_5V, SYS_3V3, MCU_3V3, MU_12V, USB_PORT_5V, ...) |
+| L6 In5.Cu | signals — PWR/GND stripline, general routing |
+| L7 In6.Cu | GND, solid |
+| L8 B.Cu | signals — impedance-critical microstrip over L7 (same geometry as L1) |
+
+Rules:
+- Impedance-critical pairs route on L1 or L8 (identical geometry), or L3
+  (clean GND/GND stripline). L6 is for general routing and must not carry
+  impedance-critical pairs unless the L5 PWR island above is unbroken for
+  the whole run.
+- No differential-pair vias; layer changes (if ever needed) switch between
+  L1 and L3 with a GND stub via adjacent, and only after a field-solver pass.
+- L5 PWR islands: keep island boundaries clear of L6 impedance runs; the
+  power budget (trace/plane widths per rail) is in
+  `verification/POWER_PLAN_8L.md` (see power-plan task list).
+
 ## Skew Budgets (review P1.6)
 
 | Interface | Intra-pair | Inter-pair | Source |
