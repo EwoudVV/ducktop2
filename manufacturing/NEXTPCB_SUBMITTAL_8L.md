@@ -62,6 +62,9 @@ we should target in the Gerbers** (or accept ours within ±10%).
 3. Inner copper weight confirmation (1 oz throughout acceptable?).
 4. Surface finish recommendation for 0.3 mm-pitch connectors + fine-pitch
    QFN: confirm ENIG (we will specify ENIG unless recommended otherwise).
+6. Solder mask color: BLACK (Matte Black preferred if available). All
+   copper spacing >= 0.15 mm (5.9 mil) so the black 5 mil mask-bridge
+   requirement is met with margin.
 5. Confirm the right-edge recess routing (x 352.78-358, y 88-107) and the
    ±0.15 mm outline tolerance are fine for the recess corners.
 
