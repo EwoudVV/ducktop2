@@ -605,8 +605,10 @@ def load_contracts() -> None:
     mu = "Official LattePanda Mu edge pinout, DFLT BIOS mapping, and Ducktop2 allocation"
     for pin in range(250, 261):
         add("A1", pin, "/MU_12V", "Mu VIN is supplied by the regulated 12 V buck-boost stage shared with the released blower.", mu)
-    add("J9", 1, "/Mu Carrier/RTC_BAT", "Keyed RTC backup-cell positive contact.", mu)
-    add("J9", 2, "GND", "RTC backup-cell return.", mu)
+    add("D1824", 1, "/MCU_3V3", "RTC_BAT diode-OR: always-on 3.3V anode (no coin cell).", mu)
+    add("D1824", 2, "/Mu Carrier/RTC_BAT", "RTC_BAT cathode feeds the Mu RTC backup directly; C783 holds through dropouts.", mu)
+    add("U773", 8, "/VSYS", "Dedicated PCIe endpoint buck input from VSYS.", mu)
+    add("U773", 1, "/Mu Carrier/BUCKPE_EN", "Endpoint buck EN gated by MU_HOST_ACTIVE (S0-only, like U6/U7).", mu)
     add("TP5", 1, "/SYS_5V", "System 5 V fixture point.", "Ducktop2 first-article DFT contract")
     add("TP6", 1, "/SYS_3V3", "System 3.3 V fixture point.", "Ducktop2 first-article DFT contract")
     add("TP8", 1, "/MU_12V", "Regulated Mu/fan rail fixture point.", "Ducktop2 first-article DFT contract")
@@ -671,7 +673,7 @@ def load_contracts() -> None:
         (5, "/MU_S0_HIGH", "Mu PSON output is the qualified S0 status input."),
         (10, "/Mu Carrier/MU_SIO_UART_TX", "Mu Super I/O UART transmit (3.3V console, SIO JP3) exposed on the TP16 probe pad with a 100k idle pull-up."),
         (12, "/Mu Carrier/MU_SIO_UART_RX", "Mu Super I/O UART receive (3.3V, SIO GP41) exposed on the TP17 probe pad with a 100k idle pull-up."),
-        (115, "/Mu Carrier/RTC_BAT", "Mu RTC backup input is fed only by the keyed RTC cell connector."),
+        (115, "/Mu Carrier/RTC_BAT", "Mu RTC backup input is diode-OR'd from always-on MCU_3V3 (pack-backed; coin cell removed)."),
     ):
         add("A1", pin, net, requirement, mu)
     for pin, net in {
@@ -781,14 +783,14 @@ def load_contracts() -> None:
         add(ref, 1, target, "First-article physical internal-host VBUS fixture point.", internal_vbus)
     pcie_power = "TI TPS22975N datasheet plus Ducktop2 S0-only PCIe endpoint power contract"
     for pin, net in {
-        1: "/SYS_3V3", 2: "/SYS_3V3", 3: "/MU_HOST_ACTIVE", 4: "/SYS_3V3",
+        1: "/Mu Carrier/PCIE_3V3_IN", 2: "/Mu Carrier/PCIE_3V3_IN", 3: "/MU_HOST_ACTIVE", 4: "/Mu Carrier/PCIE_3V3_IN",
         5: "GND", 6: local("Mu Carrier", "PCIE_3V3_CT"),
         7: "/PCIE_3V3", 8: "/PCIE_3V3", 9: "GND",
     }.items():
         add("U772", pin, net, "All PCIe endpoints are unpowered unless the Mu host is fully active.", pcie_power)
     for ref, first, second in (
         ("R776", "/MU_HOST_ACTIVE", "GND"),
-        ("C832", "/SYS_3V3", "GND"),
+        ("C832", local("Mu Carrier", "PCIE_3V3_IN"), "GND"),
         ("C833", local("Mu Carrier", "PCIE_3V3_CT"), "GND"),
         ("C834", "/PCIE_3V3", "GND"), ("C835", "/PCIE_3V3", "GND"),
         ("C836", "/PCIE_3V3", "GND"), ("C837", "/PCIE_3V3", "GND"),

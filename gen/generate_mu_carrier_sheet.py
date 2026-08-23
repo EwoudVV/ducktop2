@@ -223,15 +223,24 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.place("R784", "R", "100k MU_SIO_UART_RX idle pull-up", 50, 110,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MU_SIO_UART_RX", "local")})
-    s.place("J9", "Conn_01x02", "RTC backup coin-cell header", 30, 130,
-            footprint=FOOTPRINTS["Conn_01x02_Service_GH"],
-            pin_nets={"1": ("RTC_BAT", "local"), "2": ("GND", "local")},
+    # Mu RTC backup is diode-OR'd from the always-on MCU_3V3 rail (BAT54
+    # drop -> ~2.8-3.0V, ideal for the RTC); C782 holds the RTC through
+    # brief rail dropouts. The clock persists while the pack (or AC) is
+    # connected; removing the pack resets it -- the coin-cell header and
+    # holder are gone, saving the board header and chassis cell.
+    s.place("D1824", "D_Schottky", "1N5819HW RTC_BAT diode-OR from MCU_3V3", 30, 130,
+            footprint=FOOTPRINTS["D_Schottky_SOD123W"],
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("RTC_BAT", "local")},
             extra_props={
-                "Manufacturer": "JST", "MPN": "SM02B-GHS-TB",
-                "MatingHousing": "GHR-02V-S", "Contacts": "SSHL-002T-P0.2",
+                "Manufacturer": "STMicroelectronics", "MPN": "1N5819HW",
+                "Datasheet": "https://www.st.com/resource/en/datasheet/1n5819hw.pdf",
             })
-    s.gnd(30, 160)
+    s.place("C783", "C", "1u RTC_BAT hold", 40, 130,
+            footprint=FOOTPRINTS["C_1u"],
+            pin_nets={"1": ("RTC_BAT", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R60J105KA01D"})
     s.pwrflag(30, 180, "RTC_BAT")
+    s.gnd(30, 160)
 
     # ---------------- U6/U7: local buck rails ----------------
     s.text(300, 20, "== Local carrier rails from VSYS ==")
@@ -609,8 +618,8 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.place("U772", "TPS22975N", "TPS22975NDSGR switched PCIe endpoint 3V3", 900, 420,
             footprint=FOOTPRINTS["TPS22975N"],
             pin_nets={
-                "1": ("SYS_3V3", "hier"), "2": ("SYS_3V3", "hier"),
-                "3": ("MU_HOST_ACTIVE", "hier"), "4": ("SYS_3V3", "hier"),
+                "1": ("PCIE_3V3_IN", "local"), "2": ("PCIE_3V3_IN", "local"),
+                "3": ("MU_HOST_ACTIVE", "hier"), "4": ("PCIE_3V3_IN", "local"),
                 "5": ("GND", "local"), "6": ("PCIE_3V3_CT", "local"),
                 "7": ("PCIE_3V3", "hier"), "8": ("PCIE_3V3", "hier"),
                 "9": ("GND", "local"),
@@ -625,8 +634,68 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
     s.place("C832", "C", "1u PCIe endpoint switch input", 955, 432.7,
             footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("SYS_3V3", "hier"), "2": ("GND", "local")},
+            pin_nets={"1": ("PCIE_3V3_IN", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R60J105KA01D"})
+    # Dedicated PCIe endpoint 3.3V buck so NVMe/Wi-Fi/GbE peak currents never
+    # tax the shared SYS_3V3 rail (NVMe x4 write bursts were the tightest
+    # margin in the power audit; this moves ~3A off SYS_3V3). Host-gated the
+    # same way as U6/U7: only fully active in S0.
+    s.place("U773", "TPS56637", "TPS56637RPAR VSYS -> PCIE_3V3_IN (3.32V, 6A class, dedicated endpoint rail)", 1000, 420,
+            footprint=FOOTPRINTS["TPS56637"],
+            pin_nets={
+                "1": ("BUCKPE_EN", "local"), "2": ("BUCKPE_FB", "local"),
+                "3": ("GND", "local"), "4": ("PCIE_3V3_PG", "local"),
+                "5": ("", "nc"), "6": ("BUCKPE_SW", "local"),
+                "7": ("BUCKPE_BOOT", "local"), "8": ("VSYS", "hier"),
+                "9": ("GND", "local"), "10": ("GND", "local"),
+            }, extra_props={
+                "Manufacturer": "Texas Instruments", "MPN": "TPS56637RPAR",
+                "Datasheet": "https://www.ti.com/lit/ds/symlink/tps56637.pdf",
+            })
+    s.place("C776", "C", "10u 50V X7R TPS56637 VIN", 1010, 420,
+            footprint=FOOTPRINTS["C_10u"],
+            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "TDK", "MPN": "CGA5L1X7R1H106K160AC"})
+    s.place("C777", "C", "10u 50V X7R TPS56637 VIN", 1020, 420,
+            footprint=FOOTPRINTS["C_10u"],
+            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "TDK", "MPN": "CGA5L1X7R1H106K160AC"})
+    s.place("C778", "C", "100n 50V X7R TPS56637 VIN HF", 1030, 420,
+            footprint=FOOTPRINTS["C_100n"],
+            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")})
+    s.place("C779", "C", "100n 16V X7R TPS56637 BOOT", 1040, 420,
+            footprint=FOOTPRINTS["C_100n"],
+            pin_nets={"1": ("BUCKPE_BOOT", "local"), "2": ("BUCKPE_SW", "local")})
+    s.place("L1702", "L", "XAL7070-222MEC 2.2uH 19.6A Isat30%", 1050, 420,
+            footprint=FOOTPRINTS["L_XAL7070"],
+            pin_nets={"1": ("BUCKPE_SW", "local"), "2": ("PCIE_3V3_IN", "local")},
+            extra_props={
+                "Manufacturer": "Coilcraft", "MPN": "XAL7070-222MEC",
+                "Datasheet": "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xal/xal7070/",
+            })
+    s.place("R785", "R", "45.3k 1% TPS56637 FB high", 1020, 440,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("PCIE_3V3_IN", "local"), "2": ("BUCKPE_FB", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0745K3L"})
+    s.place("R786", "R", "10k 1% TPS56637 FB low", 1030, 440,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("BUCKPE_FB", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0710KL"})
+    s.place("R787", "R", "100k 1% TPS56637 EN high (host-active gate)", 1040, 440,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("BUCKPE_EN", "local")})
+    s.place("R788", "R", "100k 1% TPS56637 EN low", 1050, 440,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("BUCKPE_EN", "local"), "2": ("GND", "local")})
+    s.place("C782", "C", "47u 6.3V PCIE_3V3_IN rail bulk", 1060, 420,
+            footprint=FOOTPRINTS["C_10u"],
+            pin_nets={"1": ("PCIE_3V3_IN", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER60J476ME20L"})
+    s.place("R789", "R", "100k PCIE_3V3_PG pull-up", 1070, 440,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("PCIE_3V3_PG", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
+    s.pwrflag(1080, 420, "PCIE_3V3_IN")
     s.place("C833", "C", "4.7n PCIe endpoint controlled slew", 955, 445.4,
             footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("PCIE_3V3_CT", "local"), "2": ("GND", "local")},

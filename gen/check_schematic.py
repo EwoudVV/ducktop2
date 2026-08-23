@@ -399,8 +399,8 @@ def check_main_pcb_contract():
         if marker in text:
             fail(f"main PCB includes keyboard daughterboard marker {marker}")
     copper_layers = re.findall(r'\(\d+\s+"(?:F|B|In\d)\.Cu"\s+\w+\)', text)
-    if len(copper_layers) != 6:
-        fail(f"expected 6 copper layers in main PCB, found {len(copper_layers)}")
+    if len(copper_layers) != 8:
+        fail(f"expected 8 copper layers in main PCB, found {len(copper_layers)}")
 
 
 def main():

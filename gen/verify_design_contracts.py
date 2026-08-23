@@ -1167,7 +1167,7 @@ def check_mu_carrier(components, pin_names):
     # prevents powered endpoint I/O from back-powering an unpowered host.
     for pin, want in {
         "1": "/SYS_3V3", "2": "/SYS_3V3", "3": "/MU_HOST_ACTIVE",
-        "4": "/SYS_3V3", "5": "GND",
+        "4": "/Mu Carrier/PCIE_3V3_IN", "5": "GND",
         "6": "/Mu Carrier/PCIE_3V3_CT",
         "7": "/PCIE_3V3", "8": "/PCIE_3V3", "9": "GND",
     }.items():
@@ -3079,9 +3079,10 @@ def check_main_pcb_contract(components, fps, pcb_text):
         rot %= 360
         if x < 348 or abs(rot - 90) > 0.01:
             fail(f"{ref} should face right edge; got x={x}, rot={rot}")
-    for layer in ('(0 "F.Cu"', '(4 "In1.Cu"', '(6 "In2.Cu"', '(8 "In3.Cu"', '(10 "In4.Cu"', '(2 "B.Cu"'):
+    for layer in ('(0 "F.Cu"', '(4 "In1.Cu"', '(6 "In2.Cu"', '(8 "In3.Cu"', '(10 "In4.Cu"',
+                  '(12 "In5.Cu"', '(14 "In6.Cu"', '(2 "B.Cu"'):
         if layer not in pcb_text:
-            fail(f"missing expected 6-layer stack entry {layer}")
+            fail(f"missing expected 8-layer stack entry {layer}")
 
 
 def run_current_drc() -> Path:

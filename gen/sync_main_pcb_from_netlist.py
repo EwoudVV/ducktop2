@@ -39,10 +39,11 @@ FOOTPRINT_DIRS = [
 ]
 
 CURRENT_ECO_ADD_ONLY = {
-    # 2026-08-13: Mu SIO console probe pads + idle pull-ups.
-    # (Earlier ECO batches -- rear jack section, EC DFU port, BOOT0 switch --
-    # were synced in prior commits and are no longer pending.)
-    "TP16", "TP17", "R779", "R784",
+    # 2026-08-13: dedicated PCIe endpoint buck (NVMe headroom) + RTC
+    # diode-OR replacing the coin cell.  (Earlier SIO-probe-pad batch was
+    # synced in the prior commit and is no longer pending.)
+    "U773", "C776", "C777", "C778", "C779", "C782", "L1702",
+    "R785", "R786", "R787", "R788", "R789", "D1824", "C783",
 }
 CURRENT_ECO_REPLACE_ONLY = set()  # DF40 -> FH12-30S J2300 swap completed (b13a110)
 # These parts were added by the current ECO, then corrected from 0603 to 0805
@@ -51,7 +52,7 @@ POST_ADD_FOOTPRINT_REFRESH = set()
 
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
-ALLOWED_REMOVE_ONLY = set()  # past removals (U63/R254/C281/C282/C284) settled
+ALLOWED_REMOVE_ONLY = {"J9"}  # 2026-08-13: RTC coin-cell header removed (pack-backed RTC)
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()
 
@@ -168,6 +169,22 @@ ANCHORS_MM.update({
     "TP17": (178.0, 16.0, 0.0),
     "R779": (172.0, 20.0, 0.0),
     "R784": (178.0, 20.0, 0.0),
+    # Dedicated PCIe endpoint buck (above the M.2 card, clear of everything).
+    "U773": (242.0, 104.0, 0.0),
+    "C776": (236.0, 99.0, 0.0),
+    "C777": (241.0, 99.0, 0.0),
+    "C778": (246.0, 99.0, 0.0),
+    "C779": (238.0, 110.0, 0.0),
+    "C782": (243.0, 110.0, 0.0),
+    "L1702": (252.0, 104.0, 0.0),
+    "R785": (239.0, 96.0, 0.0),
+    "R786": (242.0, 96.0, 0.0),
+    "R787": (245.0, 96.0, 0.0),
+    "R788": (248.0, 96.0, 0.0),
+    # RTC diode-OR on the freed J9 spot.
+    "D1824": (252.0, 89.25, 0.0),
+    "C783": (252.0, 92.5, 0.0),
+    "R789": (247.0, 108.0, 0.0),
     # July 19 audit remediation.  Keep the LTC4368 VOUT capacitor and QON
     # open-drain network local to the charger/protector cluster.  The two
     # button-isolation diodes sit beside that network, while the USB service
