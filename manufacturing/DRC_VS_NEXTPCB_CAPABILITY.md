@@ -18,7 +18,7 @@ NextPCB capability source: https://www.nextpcb.com/pcb-capabilities (fetched
 | NPTH-to-track | 0.15 mm class | 0.2 mm | FLAG (routing rule) — keep 0.2+ from NPTH (mounting holes) |
 | Trace-to-outline | edge_clearance rule (enforced at routing) | 0.2 mm | NOTE — must be enforced in DRC during routing (8 silk-edge items exist; copper is unrouted) |
 | Pad-to-mask clearance | 0.05 mm (was 0, corrected 2026-08-13) | opening >= 0.04 mm | PASS after correction |
-| Solder mask bridge | follows pad/copper spacing | 0.09 mm green | PASS (0.15 min copper spacing > bridge min) |
+| Solder mask bridge | follows pad/copper spacing | 0.09 mm green / 0.127 mm black | PASS — BLACK chosen; 0.15 mm min copper spacing = 5.9 mil > 5 mil black bridge |
 | Silk line width | 0.15 mm strokes | >= 0.12 mm | PASS |
 | Silk text height | 1.0 mm | >= 0.76 mm | PASS |
 | Silk to pad | silk_over_copper DRC class | >= 0.15 mm | 13-16 items pending (cosmetic cleanup) |
@@ -42,5 +42,6 @@ NextPCB capability source: https://www.nextpcb.com/pcb-capabilities (fetched
 
 - Surface finish: ENIG recommended (fine-pitch QFN, 0.3 mm USB-C pads).
   Board currently says "None".
-- Solder mask color (green default recommended for mask-bridge resolution).
+- Solder mask color: BLACK (Matte Black preferred) — resolved 2026-08-13,
+  0.15 mm min copper spacing satisfies the 5 mil black bridge rule.
 - V-score vs CNC (single board -> CNC routing; recess corners need CNC).
