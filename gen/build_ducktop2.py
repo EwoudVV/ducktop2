@@ -67,7 +67,7 @@ FOOTPRINTS = {
     "D_Schottky": "Diode_SMD:D_SMB",
     "D_Schottky_Power_SMC": "Diode_SMD:D_SMC",
     "D_Schottky_SMA": "Diode_SMD:D_SMA",
-    "D_Schottky_SOD123W": "Diode_SMD:D_SOD-123W",
+    "D_Schottky_SOD123W": "Diode_SMD:Nexperia_CFP3_SOD-123W",
     "D_TVS": "Diode_SMD:D_SMC",
     "D_Zener": "Diode_SMD:D_SOD-123",
     "LED": "LED_SMD:LED_0603_1608Metric",
