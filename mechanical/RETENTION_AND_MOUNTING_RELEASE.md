@@ -70,26 +70,37 @@ separately after the enclosure material and EMC strategy are frozen.
 
 | Ref | X (mm) | Y (mm) |
 |---|---:|---:|
-| `H10` | 355.560 | 182.550 |
-| `H11` | 240.460 | 182.550 |
-| `H12` | 355.560 | 147.000 |
-| `H13` | 240.460 | 147.050 |
-| `H14` | 120.000 | 70.000 |
-| `H15` | 252.000 | 70.000 |
-| `H16` | 342.000 | 120.000 |
-| `H17` | 332.000 | 175.000 |
+| `H10` | 28.000 | 158.000 |
+| `H11` | 16.000 | 170.000 |
+| `H12` | 328.000 | 140.000 |
+| `H13` | 280.000 | 124.000 |
+| `H14` | 260.000 | 6.000 |
+| `H15` | 244.000 | 6.000 |
+| `H16` | 40.000 | 146.000 |
+| `H17` | 304.000 | 146.000 |
 
-NOTE: H10-H13/H15/H17 were revised 2026-08-12 to match the rev-D layout
-(Mu moved to the upper-middle at (180, 40), Wi-Fi M.2 to the bottom area).
-The original pattern (H10 20,28 / H11 110,10 / H12 180,10 / H13 20,115 /
-H15 240,70 / H17 300,175) was validated for the pre-rev-D layout and now
-conflicts with the left-port PD controllers, the audio codec cluster, the
-Mu standoffs (H1/H2 at (238.3, 76.8)/(238.3, 13.2)), and the SSD1306 OLED
-courtyards. The board is canonical; the chassis must follow it.
+NOTE: pattern revised 2026-08-24 to "intentional" positions. The previous
+set (H10 355.6,182.6 / H11 240.5,182.6 / H12 355.6,147.0 / H13 240.5,147.1 /
+H14 120,70 / H15 252,70 / H16 342,120 / H17 332,175) had survived the
+rev-D revision but still sat inside mechanical envelopes: H11/H13 under the
+M.2 Wi-Fi card and trackpad, H14 inside the fin-stack/heatpipe envelope,
+H15 under the Mu module/cold-plate, H16 inside the ethernet jack recess,
+and H17 inside the SSD1306 OLED-A courtyard. The 2026-08-24 pattern was
+derived from a full-board clearance scan (component courtyards + all
+mechanical keepouts from `floorplan_revD_current.json`) and verified with
+DRC (zero npth_inside_courtyard / hole_clearance / mask-bridge findings):
 
-This pattern supports the long 358 x 185 mm board near its ends, center, side
-connectors, Mu/cooling area, and M.2 area without placing bosses inside the
-battery, trackpad, hinge, antenna, or cooling envelopes.
+- H10/H16/H11: left rail + bottom-left corner (left edge support; the
+  top-left corner is not usable - hinge bracket, headphone jack, and
+  exhaust keepout occupy it).
+- H14/H15: top edge center-right, clear of the Mu socket (A1) courtyard.
+- H13/H17/H12: right-mid and right-lower, clear of the ethernet jack, M.2
+  sockets, and OLEDs.
+
+This pattern supports the long 358 x 185 mm board near its ends, center,
+side connectors, Mu/cooling area, and M.2 area without placing bosses inside
+the battery, trackpad, hinge, antenna, or cooling envelopes. The board is
+canonical; the chassis must follow it.
 
 ## Trackpad Cable Retention — Not Released
 

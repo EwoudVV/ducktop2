@@ -69,6 +69,7 @@ DRC_ALLOWLIST = Counter({
         ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J25_5V_PRE] of J25 on F.Cu', 'Reference field of C1853')): 1,
         ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 2 [GND] of R1851 on F.Cu', 'Reference field of U1804')): 1,
         ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J25_ILIM] of R1851 on F.Cu', 'Reference field of U1804')): 1,
+        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Reference field of C1741', 'Reference field of H10')): 1,
         ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J24_5V_PRE] of C1850 on F.Cu', 'Segment of J24 on F.Silkscreen')): 2,
 
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint J500', 'Footprint U501')): 1,
