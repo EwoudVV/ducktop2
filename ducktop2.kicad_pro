@@ -615,9 +615,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.679,
+        "diff_pair_gap": 0.254,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.215,
+        "diff_pair_width": 0.1521,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -625,7 +625,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.215,
+        "track_width": 0.1521,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -634,9 +634,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.8,
+        "diff_pair_gap": 0.1524,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.29,
+        "diff_pair_width": 0.2085,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -644,7 +644,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.29,
+        "track_width": 0.2085,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -653,9 +653,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.612,
+        "diff_pair_gap": 0.2032,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.26,
+        "diff_pair_width": 0.1796,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -663,7 +663,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.26,
+        "track_width": 0.1796,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -674,7 +674,7 @@
         "clearance": 0.15,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.262,
+        "diff_pair_width": 0.2248,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -682,7 +682,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.262,
+        "track_width": 0.2248,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -877,6 +877,22 @@
       },
       {
         "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_RX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_RX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_TX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_TX_P"
+      },
+      {
+        "netclass": "DIFF_90",
         "pattern": "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_N"
       },
       {
@@ -994,6 +1010,14 @@
       {
         "netclass": "DIFF_90",
         "pattern": "/Native USB-C I{slash}O/J12_TX2_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J24_SSTX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J24_SSTX_P"
       },
       {
         "netclass": "DIFF_90",
