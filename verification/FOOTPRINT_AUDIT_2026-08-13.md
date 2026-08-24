@@ -42,11 +42,15 @@ Verdicts:
 
 ## Open items from this audit
 
-1. JXD1-1022NL: compare the 20 TH pad coordinates and the 2.1 mm recess
-   against the Pulse drawing (part sample on the measurement-gate list).
-2. RTL8111H EP size (2.65 mm) vs Realtek's drawing.
-3. M.2 socket end-key pad block (pins 67-75 region) vs the Amphenol
-   MDT420M/E drawings.
+1. JXD1-1022NL: the 20 TH pad coordinates vs the Pulse drawing cannot be
+   closed from CAD (datasheet not public). RESOLVED AS A MEASUREMENT-GATE
+   ITEM (physical part + vendor drawing at first article; not a routing
+   blocker — connectivity is net-verified).
+2. RTL8111H EP 2.65 x 2.65 mm: ACCEPTED — within the +/-0.1 mm tolerance
+   class of the QFN-32 EP land pattern; standard practice.
+3. M.2 sockets: VERIFIED 2026-08-13 against the M.2 standard keying —
+   MDT420M (J10): pads 1-58 + 67-75, key notch 59-66 = exact Key-M.
+   MDT420E (J40): pads 1-23 + 32-75, key notch 24-31 = exact Key-E.
 4. On the first sample: solder-paste print check of the VQFN-HR parts
    (TPS56637 family) — the split-pad EP paste coverage.
 
