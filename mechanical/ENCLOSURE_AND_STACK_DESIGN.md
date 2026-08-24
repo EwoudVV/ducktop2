@@ -133,3 +133,14 @@ PROVISIONAL until the physical kit is measured.
 14. Keyboard plate-to-cooling clearance (>= 2 mm) with the real stack.
 15. eDP cable length/route through the hinge at every lid angle.
 16. Trackpad thickness + click travel — governs the deck plane height.
+
+## 8. Radio daughterboard mounting (2026-08-24)
+
+The DB PCB is 160 x 110 mm with four M2 corner support holes (H1-H4 at
+(24,24), (136,24), (24,86), (136,86) in DB coordinates; 2.2 mm holes,
+M2 screws). It connects to the mainboard via the 30-pin 0.5 mm FFC at
+J2300 (mainboard (62.5,181.5)). Mounting contract: four chassis standoffs
+(M2, 5-8 mm tall to clear the FFC bend radius) at the DB's hole positions;
+the DB floats above the battery-band cells (Z per section 4.1: DB bottom
+~+15, cell tops ~+11). No mainboard-side DB footprints exist; the floorplan
+entry was corrected to the real 160 x 110 outline (was the stale 120x40.5).
