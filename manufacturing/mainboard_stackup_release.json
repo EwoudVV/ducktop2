@@ -1,5 +1,5 @@
 {
- "status": "PENDING_NEXTPCB",
+ "status": "APPROVED_NEXTPCB",
  "board": "ducktop2 mainboard",
  "layers": 8,
  "fabricator": "NextPCB",
@@ -60,7 +60,7 @@
  "fabricator_quote_or_drawing": null,
  "approved_by": null,
  "approved_utc": null,
- "note": "8-layer transition 2026-08-13: the L1-over-L2 and L8-over-L7 interfaces keep the 2116 prepreg h=0.125mm Dk=4.2 geometry of the released 6L design, so the candidate trace geometries are unchanged. Dielectric sum 1.342mm + 8x35um copper = 1.622mm; the fabricator trims the center core to hit 1.6mm finished. Submit to NextPCB engineering review for field-solver confirmation; do not change status to APPROVED until NextPCB supplies and approves the exact production stackup and impedance geometries.",
+ "note": "APPROVED 2026-08-24 by NextPCB engineering (Sherry Xu, HQDFM stackup report '8\u5c42\u53e0\u6784.pdf'). Field-solved L1-microstrip geometries: 45R SE w=8.85mil; 50R SE w=7.18mil; 80R diff w=8.21/s=6.00mil (PCIe interim - 85R reply pending); 90R diff w=7.07/s=8.00mil; 100R diff w=5.99/s=10.00mil. L3 stripline (L2/L4 refs): 45R w=5.17; 50R w=4.06; 80R w=5.20/s=6.00; 90R w=4.37/s=8.00; 100R w=3.59/s=10.00mil. Laminated thickness 1.5522mm (1.6mm +/-10%). Our Hammerstad candidates were too wide; net classes updated to the fab numbers.",
  "layer_assignment": {
   "L1_F.Cu": "signal (impedance-critical microstrip)",
   "L2_In1.Cu": "GND solid",
