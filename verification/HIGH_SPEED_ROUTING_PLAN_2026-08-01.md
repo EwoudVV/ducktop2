@@ -87,3 +87,23 @@ Rules:
 - Impedance geometries are candidates pending the NextPCB field-solver
   confirmation (`mainboard_stackup_release.json`); update the net class
   widths/spacings when the fabricator returns production values.
+
+## Execution order (2026-08-13) — do not reorder
+
+1. **L5 power islands** (POWER_PLAN_8L.md): draw the VSYS / MU_12V /
+   SYS_5V / SYS_3V3 / MCU_3V3 / PCIE_3V3_IN / USB_PORT_5V / MAKER islands
+   with >= 1.0 mm gaps. Source via farms per rail.
+2. **GND pours** L2, L4, L7: solid; then board-wide GND stitching on the
+   25 mm grid. Zone priority: L2 > L7 > L4.
+3. **Mu fan-out** (MU_CONNECTOR_FANOUT_8L.md): escape rows on L1/L3/L6,
+   via farms west (X < 177.2) and east (X > 185.4, nudging C586/C587/R1708
+   if needed). The three signal layers' escapes must be registered together.
+4. **Impedance pairs** (this plan's tables): route on L1 (microstrip) with
+   L8/L3 as relief; length-tune per the skew budgets. No pair vias.
+5. **Power + remaining signal**: all other nets, honoring the fab custom
+   rules (PTH >= 0.23, NPTH >= 0.2, via >= 0.18, via-via >= 0.2, TH-TH >=
+   0.4 mm) and the 0.2 mm copper-to-edge.
+6. **Thermal copper** per THERMAL_PLAN_8L.md during steps 1-5 (VRM pours +
+   thermal via farms are part of the island/stitch steps).
+7. **Finish**: refill zones, full DRC, exception review (courtyard/silk
+   backlog is a documented acceptance list), Gerbers + drill + pos.
