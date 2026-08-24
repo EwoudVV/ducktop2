@@ -5,10 +5,10 @@ Set up Ducktop2 mainboard design rules and high-speed net classes.
 Impedance targets -> candidate geometries (see gen/compute_impedance.py and
 verification/IMPEDANCE_VERIFICATION_2026-08-01.md):
 
-  DIFF_85   PCIe Gen3 (NVMe x4, Wi-Fi x1, REFCLK)      w=0.29mm s=0.800mm
-  DIFF_90   USB 3.0 / USB-C SS lanes                    w=0.26mm s=0.612mm
-  DIFF_100  HDMI + Ethernet MDI                         w=0.215mm s=0.679mm
-  USB2_45   USB 2.0 D+/D- single-ended                  w=0.262mm
+  DIFF_85   PCIe Gen3 (NextPCB 80 ohm interim solve)   w=0.2085mm s=0.1524mm
+  DIFF_90   USB 3.0 / USB-C SS lanes                    w=0.1796mm s=0.2032mm
+  DIFF_100  HDMI + Ethernet MDI                         w=0.1521mm s=0.254mm
+  USB2_45   USB 2.0 D+/D- single-ended                  w=0.2248mm
 
 All route on L1 referenced to the solid L2 GND plane.
 
@@ -38,11 +38,18 @@ DEFAULT_CLASS = {
     "diff_pair_gap": 0.25,
 }
 
+# 2026-08-24: NextPCB field-solved geometries (approved stackup report).
+# L1 microstrip over L2 (H1=4.5433mil, Er=4.2, 1oz) and L3 stripline over
+# L2/L4 (H1=4.1732, H2=10.2835).  All widths/gaps are the fabricator's
+# numbers; the earlier Hammerstad candidates were too wide.
+# NOTE: NextPCB's report substituted 80 ohm for the requested 85 ohm PCIe
+# target.  The 80 ohm geometry below is applied as an interim (PCIe Gen3
+# CEM allows 85 +/-15%), pending a field-solve reply for 85 ohm.
 CLASSES: dict[str, dict] = {
-    "DIFF_85": {"description": "PCIe Gen3 85 ohm differential (NVMe x4, Wi-Fi x1, REFCLK)", "clearance": 0.15, "track_width": 0.29, "diff_pair_width": 0.29, "diff_pair_gap": 0.8},
-    "DIFF_90": {"description": "USB 3.x / USB-C 90 ohm differential", "clearance": 0.15, "track_width": 0.26, "diff_pair_width": 0.26, "diff_pair_gap": 0.612},
-    "DIFF_100": {"description": "HDMI + Ethernet MDI 100 ohm differential", "clearance": 0.15, "track_width": 0.215, "diff_pair_width": 0.215, "diff_pair_gap": 0.679},
-    "USB2_45": {"description": "USB 2.0 D+/D- 45 ohm single-ended", "clearance": 0.15, "track_width": 0.262},
+    "DIFF_85": {"description": "PCIe Gen3 85 ohm differential (NextPCB interim 80 ohm solve; 85 ohm reply pending)", "clearance": 0.15, "track_width": 0.2085, "diff_pair_width": 0.2085, "diff_pair_gap": 0.1524},
+    "DIFF_90": {"description": "USB 3.x / USB-C 90 ohm differential (NextPCB approved)", "clearance": 0.15, "track_width": 0.1796, "diff_pair_width": 0.1796, "diff_pair_gap": 0.2032},
+    "DIFF_100": {"description": "HDMI + Ethernet MDI 100 ohm differential (NextPCB approved)", "clearance": 0.15, "track_width": 0.1521, "diff_pair_width": 0.1521, "diff_pair_gap": 0.254},
+    "USB2_45": {"description": "USB 2.0 D+/D- 45 ohm single-ended (NextPCB approved)", "clearance": 0.15, "track_width": 0.2248},
 }
 
 SHEET_PREFIXES = (

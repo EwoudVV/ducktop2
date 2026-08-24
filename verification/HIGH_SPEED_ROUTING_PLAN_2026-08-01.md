@@ -9,14 +9,26 @@ classes are already committed to `ducktop2.kicad_pcb`
 
 | Class | Target | Width | Spacing | Members |
 | --- | --- | --- | --- | --- |
-| `DIFF_85` | PCIe Gen3 85 Ω diff | 0.290 mm | 0.800 mm | 38 nets (NVMe x4 RX/TX, Wi-Fi x1, REFCLK ×2) |
-| `DIFF_90` | USB 3.x 90 Ω diff | 0.260 mm | 0.612 mm | 50 nets (hub DS1-4, USB-C SS, PD1/2, J12) |
-| `DIFF_100` | HDMI + Ethernet 100 Ω diff | 0.215 mm | 0.679 mm | 26 nets (HDMI CK/D0-D2, MDI0-3, GBE host/REFCLK/HSI-HSO) |
-| `USB2_45` | USB 2.0 45 Ω SE | 0.262 mm | — | 37 nets (all D+/D−) |
+| `DIFF_85` | PCIe Gen3 85 Ω diff | 0.2085 mm | 0.1524 mm | 38 nets (NextPCB interim 80 Ω solve; 85 Ω reply pending) |
+| `DIFF_90` | USB 3.x 90 Ω diff | 0.1796 mm | 0.2032 mm | 50 nets (NextPCB approved) |
+| `DIFF_100` | HDMI + Ethernet 100 Ω diff | 0.1521 mm | 0.254 mm | 26 nets (NextPCB approved) |
+| `USB2_45` | USB 2.0 45 Ω SE | 0.2248 mm | — | 37 nets (NextPCB approved) |
 | `Default` | base rules | 0.25 mm | clr 0.2 mm, via 0.6/0.3 | everything else |
 
 All high-speed pairs route on L1 referenced to the solid L2 GND plane. No vias
 on differential pairs (L2 is the uninterrupted return path).
+
+## 2026-08-24: NextPCB approved geometry (fab field-solve)
+
+NextPCB's engineers field-solved the stackup (report on file in
+manufacturing/mainboard_stackup_release.json). L1-microstrip widths/gaps in
+the table above are their numbers. For **L3 (stripline over L2/L4)** the
+fab geometries are: 90 Ω diff w=4.37 mil (0.111) / s=8.00 mil (0.203);
+100 Ω diff w=3.59 mil (0.091) / s=10.00 mil (0.254); 45 Ω SE w=5.17 mil
+(0.131); 50 Ω SE w=4.06 mil (0.103). Routing impedance pairs on L3 uses
+these values. PCIe 85 Ω: their report gave an 80 Ω solve (within PCIe CEM
+85±15%); a one-line follow-up for the exact 85 Ω geometry is pending before
+the PCIe pairs are routed.
 
 ## 2026-08-13: 8-layer stackup
 
