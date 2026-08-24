@@ -38,13 +38,7 @@ FOOTPRINT_DIRS = [
     Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints"),
 ]
 
-CURRENT_ECO_ADD_ONLY = {
-    # 2026-08-13: dedicated PCIe endpoint buck (NVMe headroom) + RTC
-    # diode-OR replacing the coin cell.  (Earlier SIO-probe-pad batch was
-    # synced in the prior commit and is no longer pending.)
-    "U773", "C776", "C777", "C778", "C779", "C782", "L1702",
-    "R785", "R786", "R787", "R788", "R789", "D1824", "C783",
-}
+CURRENT_ECO_ADD_ONLY = set()  # all batches synced as of 2026-08-13
 CURRENT_ECO_REPLACE_ONLY = set()  # DF40 -> FH12-30S J2300 swap completed (b13a110)
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
@@ -52,7 +46,7 @@ POST_ADD_FOOTPRINT_REFRESH = set()
 
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
-ALLOWED_REMOVE_ONLY = {"J9"}  # 2026-08-13: RTC coin-cell header removed (pack-backed RTC)
+ALLOWED_REMOVE_ONLY = set()  # J9 (RTC header) removal completed 2026-08-13
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()
 

@@ -1042,13 +1042,13 @@ def load_contracts() -> None:
 
     ec_usb_src = "TI TS3USB30E and TLV803E datasheets plus Ducktop2 physical internal-host VBUS contract"
     for pin, net in {
-        1: "GND", 2: "/EC_HOST_USB_DP", 4: local("Internal Services", "EC_USB_ISO_DP"),
+        1: "/EC_DFU_SEL", 2: "/EC_HOST_USB_DP", 4: local("Internal Services", "EC_USB_ISO_DP"),
         5: "GND", 6: local("Internal Services", "EC_USB_ISO_DM"), 8: "/EC_HOST_USB_DM",
         9: local("Internal Services", "EC_USB_OE_N"), 10: "/MCU_3V3",
     }.items():
         add("U61", pin, net, "EC USB data is disconnected unless the physical carrier host VBUS is valid.", ec_usb_src)
-    add_nc("U61", 3, "Unused alternate USB D+ input is intentionally NC.", ec_usb_src)
-    add_nc("U61", 7, "Unused alternate USB D- input is intentionally NC.", ec_usb_src)
+    add("U61", 3, local("Internal Services", "EC_DFU_DP"), "DFU-side D+ (rear programming port).", ec_usb_src)
+    add("U61", 7, local("Internal Services", "EC_DFU_DM"), "DFU-side D- (rear programming port).", ec_usb_src)
     for pin, net in {1: "/INTERNAL_USB_VBUS_VALID", 2: "GND", 3: local("Internal Services", "EC_USB_OE_N")}.items():
         add("Q60", pin, net, "NMOS enables EC USB data only after physical host VBUS qualification.", ec_usb_src)
     add("R202", 1, "/MCU_3V3", "USB switch enable defaults high/disconnected.", ec_usb_src)
@@ -1911,43 +1911,45 @@ def load_current_architecture_overrides() -> None:
     # inert when J2300 is empty and may not back-power an absent daughterboard.
     clear_ref_contracts("J2300", "U2300", "U2303", "U2304")
     radio = "Ducktop2 optional radio daughterboard fail-safe interface"
-    add_many("J2300", range(1, 9), local("Optional Radio Daughterboard Interface", "RADIO_DB_5V"), "Parallel current-sharing radio-board supply contacts.", radio)
-    add_many("J2300", (9, 10, 11, 12, 13, 14, 15, 16, 21, 22, 27, 32, 37, 43, *range(45, 61), "MP"), "GND", "Ground and return contacts remain harmless with the daughterboard absent.", radio)
-    for pin in (17, 18):
-        add("J2300", pin, local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_VBUS_DB"), "Current-limited codec USB VBUS contacts.", radio)
+    # 30-pin FH12-30S boundary map (verified 2026-08-13 against the radio DB
+    # J1: 0 mismatches; DB pin 30 grounds the MB presence pull-up as the
+    # mating contract; DB-local 3V3 from the DB's own regulator).
+    add_many("J2300", (1, 4, 7, 10, 19, 26, "MP"), "GND", "Ground and return contacts remain harmless with the daughterboard absent.", radio)
+    add_many("J2300", (2, 3, 6), local("Optional Radio Daughterboard Interface", "RADIO_DB_5V"), "Current-sharing radio-board 5V supply contacts.", radio)
     radio_header = {
-        19: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DP_DB"),
-        20: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DM_DB"),
-        23: local("Optional Radio Daughterboard Interface", "RADIO_VHF_UART_TX_DB"),
-        24: local("Optional Radio Daughterboard Interface", "RADIO_VHF_UART_RX_DB"),
-        25: local("Optional Radio Daughterboard Interface", "RADIO_UHF_UART_TX_DB"),
-        26: local("Optional Radio Daughterboard Interface", "RADIO_UHF_UART_RX_DB"),
-        28: local("Optional Radio Daughterboard Interface", "RADIO_VHF_PTT_N_DB"),
-        29: local("Optional Radio Daughterboard Interface", "RADIO_UHF_PTT_N_DB"),
-        30: local("Optional Radio Daughterboard Interface", "RADIO_VHF_PD_N_DB"),
-        31: local("Optional Radio Daughterboard Interface", "RADIO_UHF_PD_N_DB"),
-        33: local("Optional Radio Daughterboard Interface", "RADIO_VHF_SQL_DB"),
-        34: local("Optional Radio Daughterboard Interface", "RADIO_UHF_SQL_DB"),
-        35: local("Optional Radio Daughterboard Interface", "RADIO_VHF_RF_SEL_3V3_DB"),
-        36: local("Optional Radio Daughterboard Interface", "RADIO_UHF_RF_SEL_3V3_DB"),
-        38: local("Optional Radio Daughterboard Interface", "GNSS_UART_RX_DB"),
-        39: local("Optional Radio Daughterboard Interface", "GNSS_UART_TX_DB"),
-        40: local("Optional Radio Daughterboard Interface", "GNSS_RESET_N_DB"),
-        41: local("Optional Radio Daughterboard Interface", "GNSS_PPS_DB"),
-        42: local("Optional Radio Daughterboard Interface", "GNSS_EXTINT_DB"),
-        44: "/RADIO_DB_PRESENT_N",
+        5: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_VBUS_DB"),
+        8: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DP_DB"),
+        9: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DM_DB"),
+        11: local("Optional Radio Daughterboard Interface", "RADIO_VHF_UART_TX_DB"),
+        12: local("Optional Radio Daughterboard Interface", "RADIO_VHF_UART_RX_DB"),
+        13: local("Optional Radio Daughterboard Interface", "RADIO_UHF_UART_TX_DB"),
+        14: local("Optional Radio Daughterboard Interface", "RADIO_UHF_UART_RX_DB"),
+        15: local("Optional Radio Daughterboard Interface", "RADIO_VHF_PTT_N_DB"),
+        16: local("Optional Radio Daughterboard Interface", "RADIO_UHF_PTT_N_DB"),
+        17: local("Optional Radio Daughterboard Interface", "RADIO_VHF_PD_N_DB"),
+        18: local("Optional Radio Daughterboard Interface", "RADIO_UHF_PD_N_DB"),
+        20: local("Optional Radio Daughterboard Interface", "RADIO_VHF_SQL_DB"),
+        21: local("Optional Radio Daughterboard Interface", "RADIO_UHF_SQL_DB"),
+        22: local("Optional Radio Daughterboard Interface", "RADIO_VHF_RF_SEL_3V3_DB"),
+        23: local("Optional Radio Daughterboard Interface", "RADIO_UHF_RF_SEL_3V3_DB"),
+        24: local("Optional Radio Daughterboard Interface", "GNSS_UART_RX_DB"),
+        25: local("Optional Radio Daughterboard Interface", "GNSS_UART_TX_DB"),
+        27: local("Optional Radio Daughterboard Interface", "GNSS_RESET_N_DB"),
+        28: local("Optional Radio Daughterboard Interface", "GNSS_PPS_DB"),
+        29: local("Optional Radio Daughterboard Interface", "GNSS_EXTINT_DB"),
+        30: "/RADIO_DB_PRESENT_N",
     }
     for pin, net in radio_header.items():
         add("J2300", pin, net, "Optional daughterboard signal boundary.", radio)
     radio_signals = {
-        23: "RADIO_VHF_UART_TX", 24: "RADIO_VHF_UART_RX",
-        25: "RADIO_UHF_UART_TX", 26: "RADIO_UHF_UART_RX",
-        28: "RADIO_VHF_PTT_N", 29: "RADIO_UHF_PTT_N",
-        30: "RADIO_VHF_PD_N", 31: "RADIO_UHF_PD_N",
-        33: "RADIO_VHF_SQL", 34: "RADIO_UHF_SQL",
-        35: "RADIO_VHF_RF_SEL_3V3", 36: "RADIO_UHF_RF_SEL_3V3",
-        38: "GNSS_UART_RX", 39: "GNSS_UART_TX", 40: "GNSS_RESET_N",
-        41: "GNSS_PPS", 42: "GNSS_EXTINT",
+        11: "RADIO_VHF_UART_TX", 12: "RADIO_VHF_UART_RX",
+        13: "RADIO_UHF_UART_TX", 14: "RADIO_UHF_UART_RX",
+        15: "RADIO_VHF_PTT_N", 16: "RADIO_UHF_PTT_N",
+        17: "RADIO_VHF_PD_N", 18: "RADIO_UHF_PD_N",
+        20: "RADIO_VHF_SQL", 21: "RADIO_UHF_SQL",
+        22: "RADIO_VHF_RF_SEL_3V3", 23: "RADIO_UHF_RF_SEL_3V3",
+        24: "GNSS_UART_RX", 25: "GNSS_UART_TX", 27: "GNSS_RESET_N",
+        28: "GNSS_PPS", 29: "GNSS_EXTINT",
     }
     for index, (pin, signal) in enumerate(radio_signals.items()):
         ref = f"R{2340 + index}"

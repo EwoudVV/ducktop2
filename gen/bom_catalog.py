@@ -92,6 +92,18 @@ HOLD_PARTS: dict[str, tuple[str, str]] = {
     "C773": ("Murata", "GRM188R71H104KA93D"),  # 100n 0603 X7R 50V UVLO noise filter (majority-collapsed)
     "C774": ("Murata", "GRM188R71H103KA01"),  # 10n 0603 X7R 50V PG deglitch
     "C775": ("Murata", "GRM188R71H103KA01"),  # 10n 0603 X7R 50V CC deglitch
+    # -- 2026-08-13 additions (DFU port, PCIe endpoint buck, SIO pads, RTC) --
+    "C778": ("Murata", "GRM188R71H104KA93D"),  # 100n 0603 X7R 50V PCIe endpoint buck VIN HF
+    "C779": ("TDK", "C1608X7R1C104K080AA"),  # 100n 0603 X7R 16V PCIe endpoint buck BOOT (matches U7 BOOT C47)
+    "R203": ("Yageo", "RC0603FR-0722RL"),  # 22R DFU USB DP series
+    "R204": ("Yageo", "RC0603FR-0722RL"),  # 22R DFU USB DM series
+    "R205": ("Yageo", "RC0603FR-075K1L"),  # 5.1k USB-C CC1 Rd (UFP)
+    "R211": ("Yageo", "RC0603FR-075K1L"),  # 5.1k USB-C CC2 Rd (UFP)
+    "R212": ("Yageo", "RC0603FR-071KL"),  # 1k DFU select series
+    "R779": ("Yageo", "RC0603FR-07100KL"),  # 100k MU_SIO_UART_TX idle pull-up
+    "R784": ("Yageo", "RC0603FR-07100KL"),  # 100k MU_SIO_UART_RX idle pull-up
+    "R787": ("Yageo", "RC0603FR-07100KL"),  # 100k TPS56637 EN high (host-active gate)
+    "R788": ("Yageo", "RC0603FR-07100KL"),  # 100k TPS56637 EN low
     # -- 14_maker_mcu.kicad_sch --
     "C902": ("Murata", "GRM155R61A475KE15"),  # 4.7u 0402 X5R 10V flash bulk
     "C911": ("Murata", "GRM155R61A475KE15"),  # 4.7u VREG input
