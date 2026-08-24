@@ -38,7 +38,7 @@ FOOTPRINT_DIRS = [
     Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints"),
 ]
 
-CURRENT_ECO_ADD_ONLY = set()  # 2026-08-24 USB-A ports + J8/J50 already synced
+CURRENT_ECO_ADD_ONLY = {"Q60B"}  # restored 2026-08-24 (phantom Q60B1 removed by sync)
 CURRENT_ECO_REPLACE_ONLY = set()  # DF40 -> FH12-30S J2300 swap completed (b13a110)
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
@@ -47,12 +47,10 @@ POST_ADD_FOOTPRINT_REFRESH = set()
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
 ALLOWED_REMOVE_ONLY = {
-    # 2026-08-24: hub DIS5/DIS6 disable straps deleted with the USB-A port
-    # headers (replaced by real ports); Q60B renamed to Q60B1 in schematic.
-    "R1730", "R1731", "R1732", "R1733",
-    "Q60B",
-    # J8/J50 are exclude_from_board probe headers - never belonged on the main PCB.
-    "J8", "J50",
+    # Q60B1 was a phantom footprint from a stale netlist export; Q60B is the
+    # real schematic part and is restored by the sync.
+    # (R1730-R1733 straps, J8/J50, Q60B removed in the 2026-08-24 sync.)
+    "Q60B1",
 }
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()

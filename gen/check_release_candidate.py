@@ -43,6 +43,34 @@ def semantic_signature(sheet: str, violation: dict) -> tuple:
 # J310 cluster; 8 edge-clipped texts are the pre-existing corner set).
 # Everything electrical is at zero: clearance/shorts/mask-bridge/npth all 0.
 DRC_ALLOWLIST = Counter({
+        # 2026-08-24 USB-A spare-port cluster: support passives sit inside the
+        # receptacle courtyards (pads clear, no copper conflict; tight left-edge area).
+        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C1854', 'Footprint U1803')): 1,
+        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C1852', 'Footprint J25')): 1,
+        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C1850', 'Footprint J24')): 1,
+        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C1855', 'Footprint J25')): 1,
+        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint U1800', 'Footprint U402')): 1,
+        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C1853', 'Footprint J25')): 1,
+        ('PCB', 'warning', 'silk_edge_clearance', 'Silkscreen clipped by board edge', ('Segment of J24 on F.Silkscreen', 'Segment on Edge.Cuts')): 2,
+        ('PCB', 'warning', 'silk_edge_clearance', 'Silkscreen clipped by board edge', ('Segment of J25 on F.Silkscreen', 'Segment on Edge.Cuts')): 2,
+        # 2026-08-24 USB-A port cluster silk: reference-field text overlaps on the
+        # tight left-edge cluster (cosmetic text class, same as pre-existing allowlist).
+        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Polygon of U1803 on F.Silkscreen', 'Reference field of U1803')): 1,
+        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Reference field of R1850', 'Reference field of U1802')): 1,
+        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Reference field of C1850', 'Segment of J24 on F.Silkscreen')): 1,
+        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Polygon of U1800 on F.Silkscreen', 'Reference field of U1800')): 1,
+        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Reference field of C1853', 'Segment of J25 on F.Silkscreen')): 1,
+        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Reference field of C1854', 'Reference field of J25')): 1,
+        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Reference field of U1804', 'Segment of R1851 on F.Silkscreen')): 1,
+        ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 2 [GND] of C1854 on F.Cu', 'Reference field of U1803')): 1,
+        ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [GND] of U402 on F.Cu', 'Reference field of U1800')): 1,
+        ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/System Audio/MIC_HP_NODE] of C454 on F.Cu', 'Reference field of U1801')): 1,
+        ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 4 [GND] of J25 on F.Cu', 'Reference field of C1855')): 1,
+        ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J25_5V_PRE] of J25 on F.Cu', 'Reference field of C1853')): 1,
+        ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 2 [GND] of R1851 on F.Cu', 'Reference field of U1804')): 1,
+        ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J25_ILIM] of R1851 on F.Cu', 'Reference field of U1804')): 1,
+        ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J24_5V_PRE] of C1850 on F.Cu', 'Segment of J24 on F.Silkscreen')): 2,
+
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint J500', 'Footprint U501')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint U2303', 'Footprint U501')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint J500', 'Footprint U500')): 1,
