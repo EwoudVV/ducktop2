@@ -109,6 +109,21 @@
           "gap": 0.0,
           "via_gap": 0.25,
           "width": 0.262
+        },
+        {
+          "gap": 0.1524,
+          "via_gap": 0.25,
+          "width": 0.2085
+        },
+        {
+          "gap": 0.2032,
+          "via_gap": 0.25,
+          "width": 0.1796
+        },
+        {
+          "gap": 0.254,
+          "via_gap": 0.25,
+          "width": 0.1521
         }
       ],
       "drc_exclusions": [],
@@ -589,7 +604,7 @@
         "microvia_drill": 0.1,
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 2147483647,
+        "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.2,
         "tuning_profile": "",
@@ -600,153 +615,77 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.15,
-        "diff_pair_via_gap": 0.2,
-        "diff_pair_width": 0.12,
-        "line_style": 0,
-        "microvia_diameter": 0.25,
-        "microvia_drill": 0.1,
-        "name": "ETHERNET_MDI_100R_PROVISIONAL",
-        "pcb_color": "rgba(120, 210, 0, 0.502)",
-        "priority": 22,
-        "schematic_color": "rgba(120, 210, 0, 0.502)",
-        "track_width": 0.12,
-        "tuning_profile": "",
-        "via_diameter": 0.45,
-        "via_drill": 0.2,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.15,
-        "diff_pair_gap": 0.15,
-        "diff_pair_via_gap": 0.2,
-        "diff_pair_width": 0.12,
-        "line_style": 0,
-        "microvia_diameter": 0.25,
-        "microvia_drill": 0.1,
-        "name": "HDMI_100R_PROVISIONAL",
-        "pcb_color": "rgba(255, 160, 0, 0.502)",
-        "priority": 21,
-        "schematic_color": "rgba(255, 160, 0, 0.502)",
-        "track_width": 0.12,
-        "tuning_profile": "",
-        "via_diameter": 0.45,
-        "via_drill": 0.2,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.15,
-        "diff_pair_gap": 0.15,
-        "diff_pair_via_gap": 0.2,
-        "diff_pair_width": 0.12,
-        "line_style": 0,
-        "microvia_diameter": 0.25,
-        "microvia_drill": 0.1,
-        "name": "PCIe_85R",
-        "pcb_color": "rgba(180, 0, 255, 0.502)",
-        "priority": 30,
-        "schematic_color": "rgba(180, 0, 255, 0.502)",
-        "track_width": 0.12,
-        "tuning_profile": "",
-        "via_diameter": 0.45,
-        "via_drill": 0.2,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.5,
-        "diff_pair_gap": 0.3,
-        "diff_pair_via_gap": 0.5,
-        "diff_pair_width": 0.3,
-        "line_style": 0,
-        "microvia_diameter": 0.5,
-        "microvia_drill": 0.2,
-        "name": "POWER_10A_PACK",
-        "pcb_color": "rgba(150, 0, 0, 0.502)",
-        "priority": 60,
-        "schematic_color": "rgba(150, 0, 0, 0.502)",
-        "track_width": 3.0,
-        "tuning_profile": "",
-        "via_diameter": 1.0,
-        "via_drill": 0.5,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.3,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.35,
-        "diff_pair_width": 0.25,
-        "line_style": 0,
-        "microvia_diameter": 0.4,
-        "microvia_drill": 0.15,
-        "name": "POWER_5A",
-        "pcb_color": "rgba(220, 0, 0, 0.502)",
-        "priority": 50,
-        "schematic_color": "rgba(220, 0, 0, 0.502)",
-        "track_width": 1.5,
-        "tuning_profile": "",
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.2,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.3,
-        "diff_pair_width": 0.25,
+        "diff_pair_gap": 0.254,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.1521,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "RF_50R",
-        "pcb_color": "rgba(0, 180, 80, 0.502)",
-        "priority": 40,
-        "schematic_color": "rgba(0, 180, 80, 0.502)",
-        "track_width": 0.25,
+        "name": "DIFF_100",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": -1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1521,
         "tuning_profile": "",
-        "via_diameter": 0.5,
-        "via_drill": 0.25,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
         "wire_width": 6
       },
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.15,
-        "diff_pair_via_gap": 0.2,
-        "diff_pair_width": 0.15,
+        "diff_pair_gap": 0.1524,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2085,
         "line_style": 0,
-        "microvia_diameter": 0.25,
+        "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "USB2_90R",
-        "pcb_color": "rgba(0, 150, 255, 0.502)",
-        "priority": 10,
-        "schematic_color": "rgba(0, 150, 255, 0.502)",
-        "track_width": 0.15,
+        "name": "DIFF_85",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": -1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2085,
         "tuning_profile": "",
-        "via_diameter": 0.45,
-        "via_drill": 0.2,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
         "wire_width": 6
       },
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.15,
-        "diff_pair_via_gap": 0.2,
-        "diff_pair_width": 0.12,
+        "diff_pair_gap": 0.2032,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.1796,
         "line_style": 0,
-        "microvia_diameter": 0.25,
+        "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "USB3_90R_PROVISIONAL",
-        "pcb_color": "rgba(255, 80, 0, 0.502)",
-        "priority": 20,
-        "schematic_color": "rgba(255, 80, 0, 0.502)",
-        "track_width": 0.12,
+        "name": "DIFF_90",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": -1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1796,
         "tuning_profile": "",
-        "via_diameter": 0.45,
-        "via_drill": 0.2,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2248,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "USB2_45",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": -1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2248,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
         "wire_width": 6
       }
     ],
@@ -757,136 +696,620 @@
     "netclass_assignments": null,
     "netclass_patterns": [
       {
-        "netclass": "PCIe_85R",
-        "pattern": "*PCIE_M_L*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L0_RX_N"
       },
       {
-        "netclass": "PCIe_85R",
-        "pattern": "*PCIE_M_REFCLK*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L0_RX_P"
       },
       {
-        "netclass": "PCIe_85R",
-        "pattern": "*WIFI_PCIE_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L0_TX_N"
       },
       {
-        "netclass": "PCIe_85R",
-        "pattern": "/GBE_HOST_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L0_TX_P"
       },
       {
-        "netclass": "USB2_90R",
-        "pattern": "*USB_DP"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L0_TX_RAW_N"
       },
       {
-        "netclass": "USB2_90R",
-        "pattern": "*USB_DM"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L0_TX_RAW_P"
       },
       {
-        "netclass": "USB2_90R",
-        "pattern": "*USB_DN"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L1_RX_N"
       },
       {
-        "netclass": "USB3_90R_PROVISIONAL",
-        "pattern": "/USBC1_SS*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L1_RX_P"
       },
       {
-        "netclass": "USB3_90R_PROVISIONAL",
-        "pattern": "/USBC2_SS*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L1_TX_N"
       },
       {
-        "netclass": "USB3_90R_PROVISIONAL",
-        "pattern": "*/USBC1_SSTX_RAW_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L1_TX_P"
       },
       {
-        "netclass": "USB3_90R_PROVISIONAL",
-        "pattern": "*/USBC2_SSTX_RAW_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L1_TX_RAW_N"
       },
       {
-        "netclass": "USB3_90R_PROVISIONAL",
-        "pattern": "*/USB1_RX*_CONN"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L1_TX_RAW_P"
       },
       {
-        "netclass": "USB3_90R_PROVISIONAL",
-        "pattern": "*/USB1_TX*_CONN"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L2_RX_N"
       },
       {
-        "netclass": "USB3_90R_PROVISIONAL",
-        "pattern": "*/USB2_RX*_CONN"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L2_RX_P"
       },
       {
-        "netclass": "USB3_90R_PROVISIONAL",
-        "pattern": "*/USB2_TX*_CONN"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L2_TX_N"
       },
       {
-        "netclass": "HDMI_100R_PROVISIONAL",
-        "pattern": "/TCP0_TX*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L2_TX_P"
       },
       {
-        "netclass": "HDMI_100R_PROVISIONAL",
-        "pattern": "*/EXT_HDMI_CK_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L2_TX_RAW_N"
       },
       {
-        "netclass": "HDMI_100R_PROVISIONAL",
-        "pattern": "*/EXT_HDMI_D0_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L2_TX_RAW_P"
       },
       {
-        "netclass": "HDMI_100R_PROVISIONAL",
-        "pattern": "*/EXT_HDMI_D1_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L3_RX_N"
       },
       {
-        "netclass": "HDMI_100R_PROVISIONAL",
-        "pattern": "*/EXT_HDMI_D2_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L3_RX_P"
       },
       {
-        "netclass": "ETHERNET_MDI_100R_PROVISIONAL",
-        "pattern": "*/ETH_MDI*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L3_TX_N"
       },
       {
-        "netclass": "RF_50R",
-        "pattern": "*/VHF_RF_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L3_TX_P"
       },
       {
-        "netclass": "RF_50R",
-        "pattern": "*/UHF_RF_*"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L3_TX_RAW_N"
       },
       {
-        "netclass": "RF_50R",
-        "pattern": "*/GNSS_RF_IN"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_L3_TX_RAW_P"
       },
       {
-        "netclass": "POWER_10A_PACK",
-        "pattern": "*/PACK_POS_RAW"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_REFCLK_N"
       },
       {
-        "netclass": "POWER_10A_PACK",
-        "pattern": "*/PACK_POS_FUSED"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_REFCLK_P"
       },
       {
-        "netclass": "POWER_5A",
-        "pattern": "/VSYS"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_REFCLK_SRC_N"
       },
       {
-        "netclass": "POWER_5A",
-        "pattern": "*/MU_12V"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/PCIE_M_REFCLK_SRC_P"
       },
       {
-        "netclass": "POWER_5A",
-        "pattern": "/SYS_5V"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/WIFI_PCIE_TX_RAW_N"
       },
       {
-        "netclass": "POWER_5A",
-        "pattern": "/SYS_3V3"
+        "netclass": "DIFF_85",
+        "pattern": "/Mu Carrier/WIFI_PCIE_TX_RAW_P"
       },
       {
-        "netclass": "POWER_5A",
-        "pattern": "/PD*_VBUS_RAW"
+        "netclass": "DIFF_85",
+        "pattern": "/WIFI_PCIE_RX_N"
       },
       {
-        "netclass": "POWER_5A",
-        "pattern": "*/PD*_VBUS_GATED"
+        "netclass": "DIFF_85",
+        "pattern": "/WIFI_PCIE_RX_P"
       },
       {
-        "netclass": "POWER_5A",
-        "pattern": "*/AUX_DC_*"
+        "netclass": "DIFF_85",
+        "pattern": "/WIFI_PCIE_TX_N"
+      },
+      {
+        "netclass": "DIFF_85",
+        "pattern": "/WIFI_PCIE_TX_P"
+      },
+      {
+        "netclass": "DIFF_85",
+        "pattern": "/WIFI_REFCLK_N"
+      },
+      {
+        "netclass": "DIFF_85",
+        "pattern": "/WIFI_REFCLK_P"
+      },
+      {
+        "netclass": "DIFF_85",
+        "pattern": "slash"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS1_SSRX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS1_SSRX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS1_SSTX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS1_SSTX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Mu Carrier/USBC1_SSTX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Mu Carrier/USBC1_SSTX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Mu Carrier/USBC2_SSTX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Mu Carrier/USBC2_SSTX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS2_SSRX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS2_SSRX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS2_SSTX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS2_SSTX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS2_TX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS2_TX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS3_SSRX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS3_SSRX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS3_SSTX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS3_SSTX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS3_TX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS3_TX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS4_SSRX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS4_SSRX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS4_SSTX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS4_SSTX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS4_TX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS4_TX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_UP_TX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_UP_TX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J12_RX1_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J12_RX1_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J12_RX2_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J12_RX2_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J12_TX1_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J12_TX1_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J12_TX2_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J12_TX2_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Power Inputs/PD1_SSRX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Power Inputs/PD1_SSRX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Power Inputs/PD2_SSRX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Power Inputs/PD2_SSRX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USBC1_SSRX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USBC1_SSRX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USBC1_SSTX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USBC1_SSTX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USBC2_SSRX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USBC2_SSRX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USBC2_SSTX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USBC2_SSTX_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_HOST_RX_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_HOST_RX_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_HOST_TX_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_HOST_TX_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_REFCLK_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_REFCLK_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI0_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI0_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI1_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI1_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI2_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI2_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI3_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI3_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/GBE_HSI_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/GBE_HSI_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/GBE_HSO_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/GBE_HSO_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_P"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/AUDIO_USB_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/AUDIO_USB_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/EC_HOST_USB_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/EC_HOST_USB_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/HUB_DS1_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/HUB_DS1_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Internal Services/DFU_CONN_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Internal Services/DFU_CONN_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Internal Services/EC_DFU_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Internal Services/EC_DFU_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Internal Services/EC_USB_ISO_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Internal Services/EC_USB_ISO_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Internal Services/TPAD_CONN_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Internal Services/TPAD_CONN_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/MAKER_USB_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/MAKER_USB_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/MCU_USB_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/MCU_USB_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Maker MCU/MAKER_USB_ISO_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Maker MCU/MAKER_USB_ISO_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS6_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS6_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS2_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS2_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS3_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS3_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS4_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/Native USB-C I{slash}O/HUB_DS4_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/System Audio/CODEC_USB_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/System Audio/CODEC_USB_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/System Audio/SYSTEM_DAC_USB_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/System Audio/SYSTEM_DAC_USB_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/TRACKPAD_USB_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/TRACKPAD_USB_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/USBC1_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/USBC1_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/USBC2_DM"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/USBC2_DP"
+      },
+      {
+        "netclass": "USB2_45",
+        "pattern": "/WIFI_USB_DP"
       }
     ]
   },

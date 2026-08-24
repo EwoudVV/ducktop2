@@ -38,7 +38,7 @@ FOOTPRINT_DIRS = [
     Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints"),
 ]
 
-CURRENT_ECO_ADD_ONLY = set()  # all batches synced as of 2026-08-13
+CURRENT_ECO_ADD_ONLY = set()  # 2026-08-24 USB-A ports + J8/J50 already synced
 CURRENT_ECO_REPLACE_ONLY = set()  # DF40 -> FH12-30S J2300 swap completed (b13a110)
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
@@ -46,7 +46,14 @@ POST_ADD_FOOTPRINT_REFRESH = set()
 
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
-ALLOWED_REMOVE_ONLY = set()  # J9 (RTC header) removal completed 2026-08-13
+ALLOWED_REMOVE_ONLY = {
+    # 2026-08-24: hub DIS5/DIS6 disable straps deleted with the USB-A port
+    # headers (replaced by real ports); Q60B renamed to Q60B1 in schematic.
+    "R1730", "R1731", "R1732", "R1733",
+    "Q60B",
+    # J8/J50 are exclude_from_board probe headers - never belonged on the main PCB.
+    "J8", "J50",
+}
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()
 
@@ -63,6 +70,29 @@ ANCHORS_MM = {
     "C502": (314.5, 105.0, 0.0),
     "C503": (314.5, 103.8, 0.0),
     "J2300": (62.5, 181.5, 0.0),  # radio DB FFC at bottom edge, FH12 pads fully on-board
+
+    # 2026-08-24 USB-A spare-port row on the left edge, 22.5mm grid below J190.
+    # J24 (USB3-A, hub DIS5) at slot y=115, J25 (USB2-A, hub DIS6) at y=137.5;
+    # rot 270 puts the receptacle opening at the x=0 board edge.  Support parts
+    # cluster inboard: U1800/U1801/U1802 = TPS2553/USBLC6/TPD4E05U06 for J24,
+    # U1803/U1804 = TPS2553/USBLC6 for J25, AC caps C1852/C1853 on SSTX.
+    "J24": (4.5, 115.0, 270.0),
+    "J25": (4.5, 137.5, 270.0),
+    "U1800": (17.0, 118.0, 0.0),
+    "U1801": (17.0, 110.0, 0.0),
+    "U1802": (23.0, 110.0, 0.0),
+    "R1850": (17.0, 124.0, 0.0),
+    "C1850": (14.0, 113.0, 0.0),
+    "C1851": (14.0, 117.0, 0.0),
+    "C1852": (14.0, 121.0, 0.0),
+    "C1853": (14.0, 125.0, 0.0),
+    "U1803": (17.0, 135.0, 0.0),
+    "U1804": (17.0, 143.0, 0.0),
+    "R1851": (17.0, 131.0, 0.0),
+    "C1854": (14.0, 134.0, 0.0),
+    "C1855": (14.0, 138.0, 0.0),
+    "J8": (286.0, 172.0, 0.0),   # DNP Mu SIO UART debug header (per prepare_main_pcb_layout)
+    "J50": (174.0, 144.0, 0.0),  # DNP EC USB probe (per prepare_main_pcb_layout)
 
     # 2026-08-01 proposed rear headphone section (rear edge, free x 110..240):
     # J422 SJ1-3535NG body spans local y[-5.2, 12.8]; rot 0 exits the plug
