@@ -286,7 +286,7 @@ def run_checks(a: ClosureAudit) -> None:
         "6": "/HP_DETECT",
         "7": "/PD1_EFUSE_FAULT_N",
         "8": "/PD2_EFUSE_FAULT_N",
-        "9": "/EC & MCU/SOURCE_MGR_SPARE2",
+        "9": "/SLS_S3",
         "18": "/RADIO_DB_PG",
         "19": "/RADIO_DB_FAULT_N",
         "20": "/RADIO_DB_PRESENT_N",
@@ -350,7 +350,8 @@ def run_checks(a: ClosureAudit) -> None:
     # The internal trackpad uses a cut USB2 Standard-A-to-C cable and has no
     # board-side Type-C attach controller.  VBUS remains host-gated and
     # current-limited before reaching the four field-soldered wire pads.
-    a.absent("U63")
+    # NOTE: U63 was re-used 2026-08-13 for the EC DFU-port USBLC6-2P6 ESD
+    # (the historical U63 was removed earlier; the reference is now live).
     for ref in ("R254", "C281", "C282", "C284"):
         a.absent(ref)
     a.pin("J58", "1", "GND")

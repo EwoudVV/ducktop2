@@ -902,7 +902,7 @@ def check_ec_core(components):
         "4": "/PD1_PATH_EN", "5": "/PD2_PATH_EN",
         "6": "/HP_DETECT",
         "7": "/PD1_EFUSE_FAULT_N", "8": "/PD2_EFUSE_FAULT_N",
-        "9": "/EC & MCU/SOURCE_MGR_SPARE2", "10": "/PACK_FAULT_N",
+        "9": "/SLS_S3", "10": "/PACK_FAULT_N",
         "11": "/AUX_FAULT_N", "12": "GND", "13": "/PACK_RETRY_PULSE",
         "14": "/AUX_PGOOD", "15": "/MAIN_USB_VALID_N",
         "16": "/MAIN_AUX_VALID_N", "17": "/AON_FAULT_N",
@@ -924,11 +924,11 @@ def check_ec_core(components):
     expect_value_prefix(components, "R782", "100k", "HP_DETECT pull-up")
     expect(net(components, "R782", "1"), "/MCU_3V3", "HP_DETECT pull-up rail")
     expect(net(components, "R782", "2"), "/HP_DETECT", "HP_DETECT jack-detect signal (U44 pin 6, sheet 15 jack RN)")
-    for index in range(2, 3):
-        ref = f"R{781 + index}"
-        expect_value_prefix(components, ref, "100k", f"{ref} source-manager spare pull-down")
-        expect(net(components, ref, "1"), f"/EC & MCU/SOURCE_MGR_SPARE{index}", f"{ref} spare signal")
-        expect(net(components, ref, "2"), "GND", f"{ref} spare return")
+    # R783 is now the SLS_S3 default-low pull-down (the old source-manager
+    # spare2 input was repurposed to observe the Mu S0/S3 status).
+    expect_value_prefix(components, "R783", "100k", "R783 SLS_S3 default-low pull-down")
+    expect(net(components, "R783", "1"), "/SLS_S3", "R783 SLS_S3 signal")
+    expect(net(components, "R783", "2"), "GND", "R783 SLS_S3 return")
     expect(net(components, "C780", "1"), "/MCU_3V3", "source-manager bypass rail")
     expect(net(components, "C780", "2"), "GND", "source-manager bypass return")
     expect_value_prefix(components, "R172", "100k", "service-mux reset request pull-up")
@@ -1101,11 +1101,13 @@ def check_mu_carrier(components, pin_names):
     expect(net(components, "C793", "2"), "GND", "host-active gate bypass return")
     for ref in ("SW2", "SW3"):
         expect(prop(components, ref, "MPN"), "B3S-1000", f"{ref} exact switch MPN")
-    expect(comp(components, "J9").footprint,
-           "Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",
-           "RTC connector low-profile keyed footprint")
-    expect(prop(components, "J9", "MPN"), "SM02B-GHS-TB", "RTC connector exact MPN")
-    expect(prop(components, "J9", "MatingHousing"), "GHR-02V-S", "RTC mating housing")
+    # RTC is pack-backed since 2026-08-13: 1N5819HW diode-OR from MCU_3V3
+    # (D1824) + 1u hold cap (C783).  The coin-cell header J9 is removed.
+    expect(net(components, "D1824", "1"), "/MCU_3V3", "RTC diode-OR anode rail")
+    expect(net(components, "D1824", "2"), "/Mu Carrier/RTC_BAT", "RTC diode-OR cathode")
+    expect_value_prefix(components, "D1824", "1N5819HW", "RTC diode-OR part")
+    expect(net(components, "C783", "1"), "/Mu Carrier/RTC_BAT", "RTC hold cap signal")
+    expect(net(components, "C783", "2"), "GND", "RTC hold cap return")
     for ref, want in (
         ("TP5", "/SYS_5V"), ("TP6", "/SYS_3V3"),
         ("TP8", "/MU_12V"), ("TP12", "/MU_12V_PG"),
@@ -1166,7 +1168,7 @@ def check_mu_carrier(components, pin_names):
     # All PCIe endpoints are unpowered unless the Mu is fully in S0. This
     # prevents powered endpoint I/O from back-powering an unpowered host.
     for pin, want in {
-        "1": "/SYS_3V3", "2": "/SYS_3V3", "3": "/MU_HOST_ACTIVE",
+        "1": "/Mu Carrier/PCIE_3V3_IN", "2": "/Mu Carrier/PCIE_3V3_IN", "3": "/MU_HOST_ACTIVE",
         "4": "/Mu Carrier/PCIE_3V3_IN", "5": "GND",
         "6": "/Mu Carrier/PCIE_3V3_CT",
         "7": "/PCIE_3V3", "8": "/PCIE_3V3", "9": "GND",
@@ -1180,7 +1182,7 @@ def check_mu_carrier(components, pin_names):
     expect(net(components, "R776", "1"), "/MU_HOST_ACTIVE", "PCIe switch enable")
     expect(net(components, "R776", "2"), "GND", "PCIe switch fail-low return")
     for ref, value, rail in (
-        ("C832", "1u", "/SYS_3V3"),
+        ("C832", "1u", "/Mu Carrier/PCIE_3V3_IN"),
         ("C833", "4.7n", "/Mu Carrier/PCIE_3V3_CT"),
         ("C834", "47u", "/PCIE_3V3"),
         ("C835", "100n", "/PCIE_3V3"),
@@ -1921,19 +1923,21 @@ def check_internal_services(components):
     expect(net(components, "R201", "2"), "/MCU_USB_DM", "EC USB DM MCU side")
     expect(comp(components, "U61").footprint, "Package_SO:TSSOP-10_3x3mm_P0.5mm", "EC USB isolation switch footprint")
     for pin, want in {
-        "1": "GND", "2": "/EC_HOST_USB_DP", "4": local_net(sheet, "EC_USB_ISO_DP"),
+        "1": "/EC_DFU_SEL", "2": "/EC_HOST_USB_DP", "4": local_net(sheet, "EC_USB_ISO_DP"),
         "5": "GND", "6": local_net(sheet, "EC_USB_ISO_DM"), "8": "/EC_HOST_USB_DM",
         "9": local_net(sheet, "EC_USB_OE_N"), "10": "/MCU_3V3",
     }.items():
         expect(net(components, "U61", pin), want, f"EC USB isolation U61 pin {pin}")
-    for pin in ("3", "7"):
-        expect_unconnected(components, "U61", pin)
+    for pin, want in {"3": local_net(sheet, "EC_DFU_DP"), "7": local_net(sheet, "EC_DFU_DM")}.items():
+        expect(net(components, "U61", pin), want, f"EC USB isolation U61 DFU-side pin {pin}")
     expect(net(components, "Q60", "1"), "/INTERNAL_USB_VBUS_VALID", "EC USB physical VBUS-valid interlock gate")
     expect(net(components, "Q60", "2"), "GND", "EC USB interlock return")
     expect(net(components, "Q60", "3"), local_net(sheet, "EC_USB_OE_N"), "EC USB interlock drain")
     expect(net(components, "R202", "1"), "/MCU_3V3", "EC USB default-disconnect rail")
     expect(net(components, "R202", "2"), local_net(sheet, "EC_USB_OE_N"), "EC USB default-disconnect control")
-    for obsolete in ("Q61", "R203"):
+    # NOTE: R203 was re-used 2026-08-13 as the EC DFU-port 22R series
+    # resistor (the historical status-proxy R203 was removed earlier).
+    for obsolete in ("Q61",):
         if obsolete in components:
             fail(f"obsolete status-proxy EC USB component {obsolete} remains")
     expect(net(components, "R250", "1"), "/TRACKPAD_USB_DP", "trackpad USB DP Mu side")
@@ -1943,7 +1947,9 @@ def check_internal_services(components):
     for obsolete in ("F201", "R253", "R255", "J57"):
         if obsolete in components:
             fail(f"obsolete passive/fallback trackpad part {obsolete} is still present")
-    for ref in ("U63", "R254", "C281", "C282", "C284"):
+    # NOTE: U63 was re-used 2026-08-13 as the EC DFU-port USBLC6-2P6 ESD
+    # (the historical Type-C trackpad U63 was removed earlier).
+    for ref in ("R254", "C281", "C282", "C284"):
         if ref in components:
             fail(f"obsolete Type-C-only trackpad component {ref} remains")
     expect(comp(components, "J58").footprint,
@@ -2414,18 +2420,29 @@ def check_optional_radio_interface(components):
     expect(prop(components, "J2300", "AbsentBoardContract"),
            "NO_RADIO_BOARD_REQUIRED_FOR_BOOT_OR_PRIMARY_LAPTOP_OPERATION",
            "radio daughterboard absent-board contract")
-    for pin in range(1, 9):
-        expect(net(components, "J2300", str(pin)), rloc("RADIO_DB_5V"),
-               f"J2300 shared 5V pin {pin}")
-    for pin in (*range(9, 17), 21, 22, 27, 32, 37, 43, *range(45, 61)):
-        expect(net(components, "J2300", str(pin)), "GND", f"J2300 ground pin {pin}")
-    for pin in ("17", "18"):
-        expect(net(components, "J2300", pin), rloc("RADIO_CODEC_USB_VBUS_DB"),
-               f"J2300 codec VBUS pin {pin}")
-    expect(net(components, "J2300", "19"), rloc("RADIO_CODEC_USB_DP_DB"), "J2300 codec D+")
-    expect(net(components, "J2300", "20"), rloc("RADIO_CODEC_USB_DM_DB"), "J2300 codec D-")
-    expect(net(components, "J2300", "44"), "/RADIO_DB_PRESENT_N", "J2300 passive presence strap")
-    expect(net(components, "J2300", "MP"), "GND", "J2300 mounting-pad ground")
+    # 30-pin FH12-30S map (verified 2026-08-13 against the radio DB J1:
+    # 0 mismatches; DB pin 30 grounds the MB presence pull-up as the
+    # mating contract).  Power plan: 5V on pins 2/3/6, local DB 3V3 from
+    # the DB's own regulator.
+    j2300_map = {
+        "1": "GND", "2": rloc("RADIO_DB_5V"), "3": rloc("RADIO_DB_5V"),
+        "4": "GND", "5": rloc("RADIO_CODEC_USB_VBUS_DB"),
+        "6": rloc("RADIO_DB_5V"), "7": "GND",
+        "8": rloc("RADIO_CODEC_USB_DP_DB"), "9": rloc("RADIO_CODEC_USB_DM_DB"),
+        "10": "GND", "11": rloc("RADIO_VHF_UART_TX_DB"),
+        "12": rloc("RADIO_VHF_UART_RX_DB"), "13": rloc("RADIO_UHF_UART_TX_DB"),
+        "14": rloc("RADIO_UHF_UART_RX_DB"), "15": rloc("RADIO_VHF_PTT_N_DB"),
+        "16": rloc("RADIO_UHF_PTT_N_DB"), "17": rloc("RADIO_VHF_PD_N_DB"),
+        "18": rloc("RADIO_UHF_PD_N_DB"), "19": "GND",
+        "20": rloc("RADIO_VHF_SQL_DB"), "21": rloc("RADIO_UHF_SQL_DB"),
+        "22": rloc("RADIO_VHF_RF_SEL_3V3_DB"), "23": rloc("RADIO_UHF_RF_SEL_3V3_DB"),
+        "24": rloc("GNSS_UART_RX_DB"), "25": rloc("GNSS_UART_TX_DB"),
+        "26": "GND", "27": rloc("GNSS_RESET_N_DB"), "28": rloc("GNSS_PPS_DB"),
+        "29": rloc("GNSS_EXTINT_DB"), "30": "/RADIO_DB_PRESENT_N",
+        "MP": "GND",
+    }
+    for pin, want in j2300_map.items():
+        expect(net(components, "J2300", pin), want, f"J2300 pin {pin}")
 
     expect_contains(comp(components, "U2300").value, "TPS259470", "radio daughterboard eFuse")
     expect(prop(components, "U2300", "SafetyContract"),
@@ -2465,14 +2482,14 @@ def check_optional_radio_interface(components):
     expect(prop(components, "R2308", "MPN"), "RC0603FR-07133KL", "radio codec ILIM exact MPN")
 
     radio_signals = {
-        "23": "RADIO_VHF_UART_TX", "24": "RADIO_VHF_UART_RX",
-        "25": "RADIO_UHF_UART_TX", "26": "RADIO_UHF_UART_RX",
-        "28": "RADIO_VHF_PTT_N", "29": "RADIO_UHF_PTT_N",
-        "30": "RADIO_VHF_PD_N", "31": "RADIO_UHF_PD_N",
-        "33": "RADIO_VHF_SQL", "34": "RADIO_UHF_SQL",
-        "35": "RADIO_VHF_RF_SEL_3V3", "36": "RADIO_UHF_RF_SEL_3V3",
-        "38": "GNSS_UART_RX", "39": "GNSS_UART_TX", "40": "GNSS_RESET_N",
-        "41": "GNSS_PPS", "42": "GNSS_EXTINT",
+        "11": "RADIO_VHF_UART_TX", "12": "RADIO_VHF_UART_RX",
+        "13": "RADIO_UHF_UART_TX", "14": "RADIO_UHF_UART_RX",
+        "15": "RADIO_VHF_PTT_N", "16": "RADIO_UHF_PTT_N",
+        "17": "RADIO_VHF_PD_N", "18": "RADIO_UHF_PD_N",
+        "20": "RADIO_VHF_SQL", "21": "RADIO_UHF_SQL",
+        "22": "RADIO_VHF_RF_SEL_3V3", "23": "RADIO_UHF_RF_SEL_3V3",
+        "24": "GNSS_UART_RX", "25": "GNSS_UART_TX",
+        "27": "GNSS_RESET_N", "28": "GNSS_PPS", "29": "GNSS_EXTINT",
     }
     for index, (pin, signal) in enumerate(radio_signals.items()):
         boundary = rloc(f"{signal}_DB")
