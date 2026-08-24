@@ -10,9 +10,9 @@ Generated from the live KiCad XML netlist. This table is a review aid, not a fab
 
 ## Summary
 
-- Total high-risk pin rows emitted: 2583
-- Explicitly contracted rows: 2575
-- PASS: 2575
+- Total high-risk pin rows emitted: 2575
+- Explicitly contracted rows: 2567
+- PASS: 2567
 - FAIL: 0
 - REVIEW: 8
 
@@ -21,6 +21,10 @@ Generated from the live KiCad XML netlist. This table is a review aid, not a fab
 These requested review references were not found in the netlist:
 
 - `J9`
+- `R1730`
+- `R1731`
+- `R1732`
+- `R1733`
 
 ## Contract Failures
 

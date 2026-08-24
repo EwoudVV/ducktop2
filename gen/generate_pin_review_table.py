@@ -1822,18 +1822,16 @@ def load_current_architecture_overrides() -> None:
         92: local(hub_sheet, "HUB_UP_TX_RAW_N"), 94: "/USBC2_SSTX_P", 95: "/USBC2_SSTX_N",
     }.items():
         add("U1700", pin, net, "Hub upstream or active downstream data lane.", hub)
-    for pin, ref, name in (
-        (41, "R1733", "HUB_DIS6_DM"),
-        (42, "R1732", "HUB_DIS6_DP"),
-        (81, "R1730", "HUB_DIS5_DP"),
-        (82, "R1731", "HUB_DIS5_DM"),
-    ):
-        strap_net = local(hub_sheet, name)
-        add("U1700", pin, strap_net, "Unused USB7206C downstream port strap is held high through a dedicated zero-ohm link.", hub)
-        add(ref, 1, "/SYS_3V3", "Zero-ohm source for the mandatory high port-disable strap.", hub)
-        add(ref, 2, strap_net, "Zero-ohm destination at the USB7206C D+/D- strap pin.", hub)
-    for pin in (83, 84, 86, 87):
-        add_nc("U1700", pin, "Unused hub downstream port is explicitly disabled and NC.", hub)
+    for pin, net in {
+        41: local(hub_sheet, "HUB_DIS6_DM"), 42: local(hub_sheet, "HUB_DIS6_DP"),
+        81: local(hub_sheet, "HUB_DIS5_DP"), 82: local(hub_sheet, "HUB_DIS5_DM"),
+    }.items():
+        add("U1700", pin, net, "Active USB-A downstream port D+/D- lane (J25 on DIS6, J24 on DIS5).", hub)
+    for pin, net in {
+        83: local(hub_sheet, "HUB_DIS5_TX_P"), 84: local(hub_sheet, "HUB_DIS5_TX_N"),
+        86: local(hub_sheet, "HUB_DIS5_RX_P"), 87: local(hub_sheet, "HUB_DIS5_RX_N"),
+    }.items():
+        add("U1700", pin, net, "USB3-A J24 SuperSpeed lanes from active hub downstream port 5.", hub)
     add("U1700", 1, local(hub_sheet, "HUB_RESET_N"),
         "USB7206C reset is released only after both 3.3 V and core power are valid.", hub)
     add_many("U1700", (9, 18, 25, 31, 38, 55, 78, 85, 93), local(hub_sheet, "HUB_VCORE"),

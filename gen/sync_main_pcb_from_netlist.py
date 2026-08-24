@@ -38,7 +38,7 @@ FOOTPRINT_DIRS = [
     Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints"),
 ]
 
-CURRENT_ECO_ADD_ONLY = {"Q60B"}  # restored 2026-08-24 (phantom Q60B1 removed by sync)
+CURRENT_ECO_ADD_ONLY = set()  # Q60B restored 2026-08-24; USB-A pads netted by sync
 CURRENT_ECO_REPLACE_ONLY = set()  # DF40 -> FH12-30S J2300 swap completed (b13a110)
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
@@ -46,12 +46,7 @@ POST_ADD_FOOTPRINT_REFRESH = set()
 
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
-ALLOWED_REMOVE_ONLY = {
-    # Q60B1 was a phantom footprint from a stale netlist export; Q60B is the
-    # real schematic part and is restored by the sync.
-    # (R1730-R1733 straps, J8/J50, Q60B removed in the 2026-08-24 sync.)
-    "Q60B1",
-}
+ALLOWED_REMOVE_ONLY = set()  # Q60B1 phantom, R1730-R1733 straps, J8/J50, Q60B all resolved 2026-08-24
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()
 

@@ -69,7 +69,7 @@ LEAF_CLASSIFIERS: list[tuple[str, re.Pattern]] = [
     # 85-ohm differential (PCIe Gen3: NVMe x4 from Mu, Wi-Fi x1, REFCLK)
     ("DIFF_85", re.compile(r"^(PCIE_M_L[0-3]_(RX|TX)(_RAW)?|PCIE_M_REFCLK(_SRC)?|WIFI_PCIE_(RX|TX)|WIFI_PCIE_TX_RAW|WIFI_REFCLK(_E)?)_(N|P)$")),
     # 90-ohm differential (USB 3.x / USB-C SS lanes)
-    ("DIFF_90", re.compile(r"^(HUB_(DS[0-9]|UP)_(SSRX|SSTX|TX_RAW)|J12_(RX|TX)[0-9]|USBC[12]_SSTX_RAW|USBC[12]_(SSRX|SSTX)|PD[12]_SSRX_RAW)_(N|P)$")),
+    ("DIFF_90", re.compile(r"^(HUB_(DS[0-9]|UP)_(SSRX|SSTX|TX_RAW)|HUB_DIS[0-9]_(TX|RX)|J12_(RX|TX)[0-9]|J24_SSTX|USBC[12]_SSTX_RAW|USBC[12]_(SSRX|SSTX)|PD[12]_SSRX_RAW)_(N|P)$")),
     # 100-ohm differential (HDMI + Ethernet MDI / host / REFCLK / HSI-HSO)
     ("DIFF_100", re.compile(r"^(EXT_HDMI_(CK|D[0-9])|ETH_MDI[0-9]|GBE_HOST_(RX|TX)|GBE_REFCLK|GBE_HS(I|O))_(N|P)$")),
     # 45-ohm single-ended (USB 2.0 D+/D-)

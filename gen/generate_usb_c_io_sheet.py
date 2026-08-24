@@ -143,8 +143,9 @@ def add_hub(s):
     unit4 = {
         "41": ("HUB_DIS6_DM", "local"), "42": ("HUB_DIS6_DP", "local"),
         "81": ("HUB_DIS5_DP", "local"), "82": ("HUB_DIS5_DM", "local"),
-        "83": ("", "nc"), "84": ("", "nc"), "85": ("HUB_VCORE", "local"),
-        "86": ("", "nc"), "87": ("", "nc"),
+        "83": ("HUB_DIS5_TX_P", "local"), "84": ("HUB_DIS5_TX_N", "local"),
+        "85": ("HUB_VCORE", "local"),
+        "86": ("HUB_DIS5_RX_P", "local"), "87": ("HUB_DIS5_RX_N", "local"),
     }
     unit5 = {
         "89": ("USBC2_DP", "hier"), "90": ("USBC2_DM", "hier"),
@@ -233,7 +234,7 @@ def add_usba_ports(s):
                 "3": ("HUB_DIS5_DP", "local"), "4": ("GND", "local"),
                 "5": ("HUB_DIS5_RX_N", "local"), "6": ("HUB_DIS5_RX_P", "local"),
                 "7": ("GND", "local"), "8": ("J24_SSTX_N", "local"),
-                "9": ("J24_SSTX_P", "local"),
+                "9": ("J24_SSTX_P", "local"), "SH": ("GND", "local"),
             }, extra_props=props("XKB Connectivity", "U231-091N-4BLRA00-S",
                                  "https://www.xkb.cn/"))
 
