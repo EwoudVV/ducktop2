@@ -50,6 +50,8 @@ CLASSES: dict[str, dict] = {
     "DIFF_90": {"description": "USB 3.x / USB-C 90 ohm differential (NextPCB approved)", "clearance": 0.15, "track_width": 0.1796, "diff_pair_width": 0.1796, "diff_pair_gap": 0.2032},
     "DIFF_100": {"description": "HDMI + Ethernet MDI 100 ohm differential (NextPCB approved)", "clearance": 0.15, "track_width": 0.1521, "diff_pair_width": 0.1521, "diff_pair_gap": 0.254},
     "USB2_45": {"description": "USB 2.0 D+/D- 45 ohm single-ended (NextPCB approved)", "clearance": 0.15, "track_width": 0.2248},
+    "POWER_HI": {"description": "High-current rails (planes carry bulk; 1.0 mm legs)", "clearance": 0.15, "track_width": 1.0},
+    "POWER_MID": {"description": "Mid-current rails (0.6 mm legs)", "clearance": 0.15, "track_width": 0.6},
 }
 
 SHEET_PREFIXES = (
@@ -74,6 +76,10 @@ LEAF_CLASSIFIERS: list[tuple[str, re.Pattern]] = [
     ("DIFF_100", re.compile(r"^(EXT_HDMI_(CK|D[0-9])|ETH_MDI[0-9]|GBE_HOST_(RX|TX)|GBE_REFCLK|GBE_HS(I|O))_(N|P)$")),
     # 45-ohm single-ended (USB 2.0 D+/D-)
     ("USB2_45", re.compile(r"^(USBC[12]|HUB_DS[0-9]|HUB_DIS[0-9]|AUDIO_USB|EC_HOST_USB|MAKER_USB|MCU_USB|EC_USB_ISO|TPAD_CONN|MAKER_USB_ISO|CODEC_USB|SYSTEM_DAC_USB|TRACKPAD_USB|WIFI_USB|DFU_CONN|EC_DFU)_(DP|DM)$")),
+    # High-current rails: pack bus, system 5 V/3.3 V, VSYS, Mu 12 V, VBUS_RAW
+    ("POWER_HI", re.compile(r"^(VSYS|SYS_5V|SYS_3V3|MU_12V|VBUS_RAW|PACK_POS_RAW|PACK_NEG_RAW|PACK_POS_FUSED)$")),
+    # Mid-current rails
+    ("POWER_MID", re.compile(r"^(MCU_3V3|USB_PORT_5V|INTERNAL_USB_VBUS)$")),
 ]
 
 
