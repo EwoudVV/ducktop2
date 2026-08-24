@@ -175,14 +175,90 @@ def add_hub(s):
         ("R1723", "HUB_SPI_D3", 466.09),
     ):
         resistor(s, ref, "100k unused SPI pull-down", x, 160.02, net, "GND", mpn="RC0603FR-07100KL")
-    for ref, net, x in (
-        ("R1730", "HUB_DIS5_DP", 478.79),
-        ("R1731", "HUB_DIS5_DM", 491.49),
-        ("R1732", "HUB_DIS6_DP", 504.19),
-        ("R1733", "HUB_DIS6_DM", 516.89),
-    ):
-        resistor(s, ref, "0R unused-port disable strap to 3V3", x, 160.02,
-                 "SYS_3V3", net, a_kind="hier", mpn="RC0603JR-070RL")
+    add_usba_ports(s)
+def usblc6_usba(s, ref, value, x, y, dp, dm, rail):
+    s.place(ref, "USBLC6-2P6", value, x, y, footprint=FOOTPRINTS["USBLC6-2P6"],
+            pin_nets={
+                "1": (dp, "local"), "6": (dp, "local"),
+                "3": (dm, "local"), "4": (dm, "local"),
+                "5": (rail, "local"), "2": ("GND", "local"),
+            }, extra_props={
+                "Manufacturer": "STMicroelectronics", "MPN": "USBLC6-2P6",
+                "Datasheet": "https://www.st.com/resource/en/datasheet/usblc6-2.pdf",
+            })
+
+
+    # Hub DIS5 is the remaining SuperSpeed-capable downstream port (its SS
+    # lanes were unwired), DIS6 the spare USB2 port.  The old 0R disable
+    # straps tied DIS5/DIS6 D+/D- to 3V3; they are removed and the ports now
+    # drive two USB-A receptacles on the left edge (J24 USB 3.0, J25 USB 2.0).
+    # VBUS is gated by INTERNAL_USB_VBUS_VALID (host-active qualified).
+def add_usba_ports(s):
+    s.text(20, 320.04, "== Internal USB-A spare ports: hub DIS5 (USB3) + DIS6 (USB2) ==")
+
+    # ---- J24: USB 3.0 Type-A on hub DIS5 ----
+    s.place("U1800", "TPS2553D", "TPS2553DDBVR USB3-A VBUS branch 1.3A", 80, 332.74,
+            footprint=FOOTPRINTS["TPS2553DDBV"], pin_nets={
+                "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"),
+                "3": ("INTERNAL_USB_VBUS_VALID", "hier"), "4": ("", "nc"),
+                "5": ("J24_ILIM", "local"), "6": ("J24_5V_PRE", "local"),
+            }, extra_props=props("Texas Instruments", "TPS2553DDBVR"))
+    resistor(s, "R1850", "20.0k 1% TPS2553 1.3A ILIM", 80, 358.14, "J24_ILIM", "GND",
+             mpn="RC0603FR-0720KL")
+    capacitor(s, "C1850", "10u 10V USB3-A VBUS bulk", 80, 373.38, "J24_5V_PRE", footprint="C_10u",
+              mpn="GRM21BR71A106KA73L")
+    capacitor(s, "C1851", "100n USB3-A VBUS HF", 80, 385.19, "J24_5V_PRE")
+    usblc6_usba(s, "U1801", "USBLC6-2P6 USB3-A D+/D- ESD", 160, 332.74,
+                "HUB_DIS5_DP", "HUB_DIS5_DM", "GND")
+    s.place("U1802", "TPD4EUSB30", "TPD4E05U06 USB3-A SuperSpeed ESD", 250, 332.74,
+            footprint=FOOTPRINTS["TPD4E05U06DQA"], pin_nets={
+                "1": ("HUB_DIS5_TX_P", "local"), "2": ("HUB_DIS5_TX_N", "local"),
+                "3": ("GND", "local"), "4": ("HUB_DIS5_RX_P", "local"),
+                "5": ("HUB_DIS5_RX_N", "local"), "6": ("", "nc"),
+                "7": ("", "nc"), "8": ("GND", "local"),
+                "9": ("", "nc"), "10": ("", "nc"),
+            }, extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPD4E05U06DQAR"})
+    s.place("C1852", "C", "100n C0G USB3-A SSTX+ series AC", 250, 344.17,
+            footprint=FOOTPRINTS["C_0402"],
+            pin_nets={"1": ("HUB_DIS5_TX_P", "local"), "2": ("J24_SSTX_P", "local")},
+            extra_props=props("Murata", "GRM1555C1H101JA01D"))
+    s.place("C1853", "C", "100n C0G USB3-A SSTX- series AC", 250, 355.6,
+            footprint=FOOTPRINTS["C_0402"],
+            pin_nets={"1": ("HUB_DIS5_TX_N", "local"), "2": ("J24_SSTX_N", "local")},
+            extra_props=props("Murata", "GRM1555C1H101JA01D"))
+    s.place("J24", "USB3_A", "USB 3.0 Type-A internal header (hub DIS5)", 340, 340.36,
+            footprint="Connector_USB:USB_A_Receptacle_XKB_U231-091N-4BLRA00-S",
+            pin_nets={
+                "1": ("J24_5V_PRE", "local"), "2": ("HUB_DIS5_DM", "local"),
+                "3": ("HUB_DIS5_DP", "local"), "4": ("GND", "local"),
+                "5": ("HUB_DIS5_RX_N", "local"), "6": ("HUB_DIS5_RX_P", "local"),
+                "7": ("GND", "local"), "8": ("J24_SSTX_N", "local"),
+                "9": ("J24_SSTX_P", "local"),
+            }, extra_props=props("XKB Connectivity", "U231-091N-4BLRA00-S",
+                                 "https://www.xkb.cn/"))
+
+    # ---- J25: USB 2.0 Type-A on hub DIS6 ----
+    s.place("U1803", "TPS2553D", "TPS2553DDBVR USB2-A VBUS branch 1.3A", 80, 401.32,
+            footprint=FOOTPRINTS["TPS2553DDBV"], pin_nets={
+                "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"),
+                "3": ("INTERNAL_USB_VBUS_VALID", "hier"), "4": ("", "nc"),
+                "5": ("J25_ILIM", "local"), "6": ("J25_5V_PRE", "local"),
+            }, extra_props=props("Texas Instruments", "TPS2553DDBVR"))
+    resistor(s, "R1851", "20.0k 1% TPS2553 1.3A ILIM", 80, 426.72, "J25_ILIM", "GND",
+             mpn="RC0603FR-0720KL")
+    capacitor(s, "C1854", "10u 10V USB2-A VBUS bulk", 80, 441.96, "J25_5V_PRE", footprint="C_10u",
+              mpn="GRM21BR71A106KA73L")
+    capacitor(s, "C1855", "100n USB2-A VBUS HF", 80, 453.77, "J25_5V_PRE")
+    usblc6_usba(s, "U1804", "USBLC6-2P6 USB2-A D+/D- ESD", 160, 401.32,
+                "HUB_DIS6_DP", "HUB_DIS6_DM", "GND")
+    s.place("J25", "USB_A", "USB 2.0 Type-A internal header (hub DIS6)", 340, 406.4,
+            footprint="Connector_USB:USB_A_Receptacle_GCT_USB1046",
+            pin_nets={
+                "1": ("J25_5V_PRE", "local"), "2": ("HUB_DIS6_DM", "local"),
+                "3": ("HUB_DIS6_DP", "local"), "4": ("GND", "local"),
+                "SH": ("GND", "local"),
+            }, extra_props=props("GCT", "USB1046-GF-L",
+                                 "https://www.gct.co/connector/usb-a-receptacle/usb1046"))
 
     s.place("U1702", "TLV803EA29RDBZR", "TLV803EA29 USB hub reset supervisor", 459.74, 177.8,
             footprint=FOOTPRINTS["TLV803EA29RDBZR"],
