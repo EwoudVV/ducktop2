@@ -615,9 +615,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.254,
+        "diff_pair_gap": 0.679,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.1521,
+        "diff_pair_width": 0.215,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -625,7 +625,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.1521,
+        "track_width": 0.215,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -634,9 +634,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.1524,
+        "diff_pair_gap": 0.8,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2085,
+        "diff_pair_width": 0.29,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -644,7 +644,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2085,
+        "track_width": 0.29,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -653,9 +653,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.2032,
+        "diff_pair_gap": 0.612,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.1796,
+        "diff_pair_width": 0.26,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -663,7 +663,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.1796,
+        "track_width": 0.26,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -674,7 +674,7 @@
         "clearance": 0.15,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2248,
+        "diff_pair_width": 0.262,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -682,7 +682,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2248,
+        "track_width": 0.262,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -1438,13 +1438,70 @@
       {
         "filename": "ducktop2.kicad_sch",
         "name": "ducktop2",
-        "uuid": "00000000-0000-0000-0000-000000000000"
+        "uuid": "898e349f-792f-5b73-93f6-827ac90c0616"
       }
     ],
-    "used_designators": "",
+    "used_designators": "Q60B1",
     "variants": []
   },
-  "sheets": [],
+  "sheets": [
+    [
+      "898e349f-792f-5b73-93f6-827ac90c0616",
+      "ducktop2"
+    ],
+    [
+      "577b7ab7-60d3-5949-82f8-bb269dce837a",
+      "Power & Battery"
+    ],
+    [
+      "30db74da-1f83-533d-806d-fc7ae010cbe5",
+      "Native USB-C I/O"
+    ],
+    [
+      "c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e",
+      "Wi-Fi/Bluetooth & OLEDs"
+    ],
+    [
+      "ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8",
+      "EC & MCU"
+    ],
+    [
+      "7f3572a2-a529-5ef0-93eb-27f85c0119a9",
+      "Mu Carrier"
+    ],
+    [
+      "6e8963da-1a38-5ee1-aef2-2f991522fe35",
+      "Internal Services"
+    ],
+    [
+      "f0ae9354-2124-5719-9bb0-6fdcc1f0d78d",
+      "TCP0 External HDMI"
+    ],
+    [
+      "c1b99a0d-daca-57b5-85ae-3ffd9c9575e8",
+      "Optional Radio Daughterboard Interface"
+    ],
+    [
+      "cb7351cd-fcb6-573d-ba16-39cf42fd14a4",
+      "Keyboard Mainboard FFC"
+    ],
+    [
+      "2dcf1c62-b988-5976-a24b-47e7fc3c99f8",
+      "Maker MCU"
+    ],
+    [
+      "ecc991b5-12ab-53c3-80f1-080be4d1146d",
+      "Power Inputs"
+    ],
+    [
+      "5a262a39-3888-5c6d-ad36-52d5f9c459dd",
+      "System Audio"
+    ],
+    [
+      "cad276a5-1875-508a-a276-e7a25b24fbd3",
+      "Gigabit Ethernet"
+    ]
+  ],
   "text_variables": {},
   "tuning_profiles": {
     "meta": {
