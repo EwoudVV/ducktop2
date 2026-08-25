@@ -2,9 +2,11 @@
 """
 Write first-pass copper zones and keepouts for the Ducktop2 mainboard.
 
-  L2 (In1.Cu) + L5 (In4.Cu): solid GND planes.
-  L3 (In2.Cu) + L4 (In3.Cu): power-rail islands, clipped to the board
-    outline; no GND base pour (those layers carry signals + islands).
+  L2/L4/L7 (In1/In3/In6): solid GND planes.
+  L5 (In4.Cu): power-rail islands, clipped to the board outline.  In2/In3
+    (L3/L4) stay clear for the impedance pairs and general routing per the
+    HIGH_SPEED_ROUTING_PLAN stackup.  Islands keep (island_removal_mode 2)
+    so unconnected planes survive until the routing phase vias them in.
   Keepouts: mounting-hole screw clearance on all copper layers + mic
     acoustic region on F.Cu.
 
@@ -69,6 +71,11 @@ def zone_block(net, layer, outline, stamp):
         "\t(connect_pads yes (clearance 0.2))\n"
         "\t(min_thickness 0.2)\n"
         "\t(filled_areas_thickness no)\n"
+        "\t(fill yes\n"
+        "\t\t(thermal_gap 0.5)\n"
+        "\t\t(thermal_bridge_width 0.5)\n"
+        "\t\t(island_removal_mode 2)\n"
+        "\t)\n"
         f"\t(polygon (pts {pts}))\n"
         ")"
     )
@@ -154,8 +161,8 @@ def main() -> int:
         outline = clip(outline)
         blocks.append(zone_block(net, layer, outline, stamp))
 
-    # GND planes on L2 and L5
-    for layer in ("In1.Cu", "In4.Cu"):
+    # GND planes on L2/L4/L7 (In1/In3/In6) — solid reference planes
+    for layer in ("In1.Cu", "In3.Cu", "In6.Cu"):
         add("GND", layer, EDGE)
 
     # Power islands on L3 and L4 — clipped to board outline
@@ -169,22 +176,26 @@ def main() -> int:
         outline = [(rect[0], rect[1]), (rect[2], rect[1]),
                    (rect[2], rect[3]), (rect[0], rect[3])]
         clipped = clip(outline)
-        for layer in ("In2.Cu", "In3.Cu"):
-            add(rail, layer, clipped)
+        add(rail, "In4.Cu", clipped)
 
     # Keepouts: mounting holes + mic region
     for ref in fps:
         if not ref.startswith("H"):
             continue
         ax, ay = fps[ref]["at"][0], fps[ref]["at"][1]
-        for layer in ("F.Cu", "In1.Cu", "In2.Cu", "In3.Cu", "In4.Cu", "B.Cu"):
+        for layer in ("F.Cu", "In1.Cu", "In2.Cu", "In3.Cu", "In4.Cu", "In6.Cu", "B.Cu"):
             blocks.append(keepout_block(layer, clip(circle(ax, ay, KEEPOUT_RADIUS)), stamp))
             stamp += 1
 
-    # Mic acoustic keepout (F.Cu only, radius 5mm)
+    # Mic acoustic keepout on every copper layer the pours touch (radius 5mm).
+    # The GND planes (In1/In4) and the power islands (In2/In3) must not bring
+    # copper within the 0.3 mm hole clearance of the bottom-port acoustic
+    # opening (the pad-level DRU rule only covers pad/pad pairs).
     mic = fps.get("MK430")
     if mic:
-        blocks.append(keepout_block("F.Cu", clip(circle(mic["at"][0], mic["at"][1], 5.0)), stamp))
+        for layer in ("F.Cu", "In1.Cu", "In3.Cu", "In4.Cu", "In6.Cu"):
+            blocks.append(keepout_block(layer, clip(circle(mic["at"][0], mic["at"][1], 5.0)), stamp))
+            stamp += 1
 
     # Insert before the final kicad_pcb close
     insert = text.rfind("\n)")
