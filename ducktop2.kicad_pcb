@@ -188,238 +188,6 @@
 			(outputdirectory "")
 		)
 	)
-(net_class "Default" "Default net class"
-	(clearance 0.15)
-	(trace_width 0.2)
-	(via_dia 0.6)
-	(via_drill 0.3)
-	(diff_pair_width 0.2)
-	(diff_pair_gap 0.25)
-)
-(net_class "DIFF_85" "PCIe Gen3 85 ohm differential (NextPCB interim 80 ohm solve; 85 ohm reply pending)"
-	(clearance 0.15)
-	(trace_width 0.2085)
-	(via_dia 0.6)
-	(via_drill 0.3)
-	(diff_pair_width 0.2085)
-	(diff_pair_gap 0.1524)
-	(add_net "/Mu Carrier/PCIE_M_L0_RX_N")
-	(add_net "/Mu Carrier/PCIE_M_L0_RX_P")
-	(add_net "/Mu Carrier/PCIE_M_L0_TX_N")
-	(add_net "/Mu Carrier/PCIE_M_L0_TX_P")
-	(add_net "/Mu Carrier/PCIE_M_L0_TX_RAW_N")
-	(add_net "/Mu Carrier/PCIE_M_L0_TX_RAW_P")
-	(add_net "/Mu Carrier/PCIE_M_L1_RX_N")
-	(add_net "/Mu Carrier/PCIE_M_L1_RX_P")
-	(add_net "/Mu Carrier/PCIE_M_L1_TX_N")
-	(add_net "/Mu Carrier/PCIE_M_L1_TX_P")
-	(add_net "/Mu Carrier/PCIE_M_L1_TX_RAW_N")
-	(add_net "/Mu Carrier/PCIE_M_L1_TX_RAW_P")
-	(add_net "/Mu Carrier/PCIE_M_L2_RX_N")
-	(add_net "/Mu Carrier/PCIE_M_L2_RX_P")
-	(add_net "/Mu Carrier/PCIE_M_L2_TX_N")
-	(add_net "/Mu Carrier/PCIE_M_L2_TX_P")
-	(add_net "/Mu Carrier/PCIE_M_L2_TX_RAW_N")
-	(add_net "/Mu Carrier/PCIE_M_L2_TX_RAW_P")
-	(add_net "/Mu Carrier/PCIE_M_L3_RX_N")
-	(add_net "/Mu Carrier/PCIE_M_L3_RX_P")
-	(add_net "/Mu Carrier/PCIE_M_L3_TX_N")
-	(add_net "/Mu Carrier/PCIE_M_L3_TX_P")
-	(add_net "/Mu Carrier/PCIE_M_L3_TX_RAW_N")
-	(add_net "/Mu Carrier/PCIE_M_L3_TX_RAW_P")
-	(add_net "/Mu Carrier/PCIE_M_REFCLK_N")
-	(add_net "/Mu Carrier/PCIE_M_REFCLK_P")
-	(add_net "/Mu Carrier/PCIE_M_REFCLK_SRC_N")
-	(add_net "/Mu Carrier/PCIE_M_REFCLK_SRC_P")
-	(add_net "/Mu Carrier/WIFI_PCIE_TX_RAW_N")
-	(add_net "/Mu Carrier/WIFI_PCIE_TX_RAW_P")
-	(add_net "/WIFI_PCIE_RX_N")
-	(add_net "/WIFI_PCIE_RX_P")
-	(add_net "/WIFI_PCIE_TX_N")
-	(add_net "/WIFI_PCIE_TX_P")
-	(add_net "/WIFI_REFCLK_N")
-	(add_net "/WIFI_REFCLK_P")
-	(add_net "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_N")
-	(add_net "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_P")
-)
-(net_class "DIFF_90" "USB 3.x / USB-C 90 ohm differential (NextPCB approved)"
-	(clearance 0.15)
-	(trace_width 0.1796)
-	(via_dia 0.6)
-	(via_drill 0.3)
-	(diff_pair_width 0.1796)
-	(diff_pair_gap 0.2032)
-	(add_net "/HUB_DS1_SSRX_N")
-	(add_net "/HUB_DS1_SSRX_P")
-	(add_net "/HUB_DS1_SSTX_N")
-	(add_net "/HUB_DS1_SSTX_P")
-	(add_net "/Mu Carrier/USBC1_SSTX_RAW_N")
-	(add_net "/Mu Carrier/USBC1_SSTX_RAW_P")
-	(add_net "/Mu Carrier/USBC2_SSTX_RAW_N")
-	(add_net "/Mu Carrier/USBC2_SSTX_RAW_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DIS5_RX_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DIS5_RX_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DIS5_TX_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DIS5_TX_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS2_SSRX_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS2_SSRX_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS2_SSTX_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS2_SSTX_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS2_TX_RAW_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS2_TX_RAW_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS3_SSRX_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS3_SSRX_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS3_SSTX_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS3_SSTX_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS3_TX_RAW_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS3_TX_RAW_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS4_SSRX_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS4_SSRX_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS4_SSTX_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS4_SSTX_P")
-	(add_net "/Native USB-C I{slash}O/HUB_DS4_TX_RAW_N")
-	(add_net "/Native USB-C I{slash}O/HUB_DS4_TX_RAW_P")
-	(add_net "/Native USB-C I{slash}O/HUB_UP_TX_RAW_N")
-	(add_net "/Native USB-C I{slash}O/HUB_UP_TX_RAW_P")
-	(add_net "/Native USB-C I{slash}O/J12_RX1_N")
-	(add_net "/Native USB-C I{slash}O/J12_RX1_P")
-	(add_net "/Native USB-C I{slash}O/J12_RX2_N")
-	(add_net "/Native USB-C I{slash}O/J12_RX2_P")
-	(add_net "/Native USB-C I{slash}O/J12_TX1_N")
-	(add_net "/Native USB-C I{slash}O/J12_TX1_P")
-	(add_net "/Native USB-C I{slash}O/J12_TX2_N")
-	(add_net "/Native USB-C I{slash}O/J12_TX2_P")
-	(add_net "/Native USB-C I{slash}O/J24_SSTX_N")
-	(add_net "/Native USB-C I{slash}O/J24_SSTX_P")
-	(add_net "/Power Inputs/PD1_SSRX_RAW_N")
-	(add_net "/Power Inputs/PD1_SSRX_RAW_P")
-	(add_net "/Power Inputs/PD2_SSRX_RAW_N")
-	(add_net "/Power Inputs/PD2_SSRX_RAW_P")
-	(add_net "/USBC1_SSRX_N")
-	(add_net "/USBC1_SSRX_P")
-	(add_net "/USBC1_SSTX_N")
-	(add_net "/USBC1_SSTX_P")
-	(add_net "/USBC2_SSRX_N")
-	(add_net "/USBC2_SSRX_P")
-	(add_net "/USBC2_SSTX_N")
-	(add_net "/USBC2_SSTX_P")
-)
-(net_class "DIFF_100" "HDMI + Ethernet MDI 100 ohm differential (NextPCB approved)"
-	(clearance 0.15)
-	(trace_width 0.1521)
-	(via_dia 0.6)
-	(via_drill 0.3)
-	(diff_pair_width 0.1521)
-	(diff_pair_gap 0.254)
-	(add_net "/GBE_HOST_RX_N")
-	(add_net "/GBE_HOST_RX_P")
-	(add_net "/GBE_HOST_TX_N")
-	(add_net "/GBE_HOST_TX_P")
-	(add_net "/GBE_REFCLK_N")
-	(add_net "/GBE_REFCLK_P")
-	(add_net "/Gigabit Ethernet/ETH_MDI0_N")
-	(add_net "/Gigabit Ethernet/ETH_MDI0_P")
-	(add_net "/Gigabit Ethernet/ETH_MDI1_N")
-	(add_net "/Gigabit Ethernet/ETH_MDI1_P")
-	(add_net "/Gigabit Ethernet/ETH_MDI2_N")
-	(add_net "/Gigabit Ethernet/ETH_MDI2_P")
-	(add_net "/Gigabit Ethernet/ETH_MDI3_N")
-	(add_net "/Gigabit Ethernet/ETH_MDI3_P")
-	(add_net "/Gigabit Ethernet/GBE_HSI_N")
-	(add_net "/Gigabit Ethernet/GBE_HSI_P")
-	(add_net "/Gigabit Ethernet/GBE_HSO_N")
-	(add_net "/Gigabit Ethernet/GBE_HSO_P")
-	(add_net "/TCP0 External HDMI/EXT_HDMI_CK_N")
-	(add_net "/TCP0 External HDMI/EXT_HDMI_CK_P")
-	(add_net "/TCP0 External HDMI/EXT_HDMI_D0_N")
-	(add_net "/TCP0 External HDMI/EXT_HDMI_D0_P")
-	(add_net "/TCP0 External HDMI/EXT_HDMI_D1_N")
-	(add_net "/TCP0 External HDMI/EXT_HDMI_D1_P")
-	(add_net "/TCP0 External HDMI/EXT_HDMI_D2_N")
-	(add_net "/TCP0 External HDMI/EXT_HDMI_D2_P")
-)
-(net_class "USB2_45" "USB 2.0 D+/D- 45 ohm single-ended (NextPCB approved)"
-	(clearance 0.15)
-	(trace_width 0.2248)
-	(via_dia 0.6)
-	(via_drill 0.3)
-	(diff_pair_width 0.2248)
-	(diff_pair_gap 0.25)
-	(add_net "/AUDIO_USB_DM")
-	(add_net "/AUDIO_USB_DP")
-	(add_net "/EC_HOST_USB_DM")
-	(add_net "/EC_HOST_USB_DP")
-	(add_net "/HUB_DS1_DM")
-	(add_net "/HUB_DS1_DP")
-	(add_net "/Internal Services/DFU_CONN_DM")
-	(add_net "/Internal Services/DFU_CONN_DP")
-	(add_net "/Internal Services/EC_DFU_DM")
-	(add_net "/Internal Services/EC_DFU_DP")
-	(add_net "/Internal Services/EC_USB_ISO_DM")
-	(add_net "/Internal Services/EC_USB_ISO_DP")
-	(add_net "/Internal Services/TPAD_CONN_DM")
-	(add_net "/Internal Services/TPAD_CONN_DP")
-	(add_net "/MAKER_USB_DM")
-	(add_net "/MAKER_USB_DP")
-	(add_net "/MCU_USB_DM")
-	(add_net "/MCU_USB_DP")
-	(add_net "/Maker MCU/MAKER_USB_ISO_DM")
-	(add_net "/Maker MCU/MAKER_USB_ISO_DP")
-	(add_net "/Native USB-C I{slash}O/HUB_DIS5_DM")
-	(add_net "/Native USB-C I{slash}O/HUB_DIS5_DP")
-	(add_net "/Native USB-C I{slash}O/HUB_DIS6_DM")
-	(add_net "/Native USB-C I{slash}O/HUB_DIS6_DP")
-	(add_net "/Native USB-C I{slash}O/HUB_DS2_DM")
-	(add_net "/Native USB-C I{slash}O/HUB_DS2_DP")
-	(add_net "/Native USB-C I{slash}O/HUB_DS3_DM")
-	(add_net "/Native USB-C I{slash}O/HUB_DS3_DP")
-	(add_net "/Native USB-C I{slash}O/HUB_DS4_DM")
-	(add_net "/Native USB-C I{slash}O/HUB_DS4_DP")
-	(add_net "/System Audio/CODEC_USB_DM")
-	(add_net "/System Audio/CODEC_USB_DP")
-	(add_net "/System Audio/SYSTEM_DAC_USB_DM")
-	(add_net "/System Audio/SYSTEM_DAC_USB_DP")
-	(add_net "/TRACKPAD_USB_DM")
-	(add_net "/TRACKPAD_USB_DP")
-	(add_net "/USBC1_DM")
-	(add_net "/USBC1_DP")
-	(add_net "/USBC2_DM")
-	(add_net "/USBC2_DP")
-	(add_net "/WIFI_USB_DP")
-)
-(net_class "POWER_HI" "High-current rails (planes carry bulk; 1.0 mm legs)"
-	(clearance 0.15)
-	(trace_width 1.0)
-	(via_dia 0.6)
-	(via_drill 0.3)
-	(diff_pair_width 1.0)
-	(diff_pair_gap 0.25)
-	(add_net "/MU_12V")
-	(add_net "/SYS_3V3")
-	(add_net "/SYS_5V")
-	(add_net "/VSYS")
-	(add_net "MU_12V")
-	(add_net "SYS_3V3")
-	(add_net "SYS_5V")
-	(add_net "VBUS_RAW")
-	(add_net "VSYS")
-)
-(net_class "POWER_MID" "Mid-current rails (0.6 mm legs)"
-	(clearance 0.15)
-	(trace_width 0.6)
-	(via_dia 0.6)
-	(via_drill 0.3)
-	(diff_pair_width 0.6)
-	(diff_pair_gap 0.25)
-	(add_net "/MCU_3V3")
-	(add_net "/Mu Carrier/INTERNAL_USB_VBUS")
-	(add_net "/USB_PORT_5V")
-	(add_net "INTERNAL_USB_VBUS")
-	(add_net "MCU_3V3")
-	(add_net "USB_PORT_5V")
-)
 	(footprint "Package_DFN_QFN:Diodes_UDFN-10_1x2.5mm_P0.5mm"
 		(layer "F.Cu")
 		(uuid "001a9adb-bc54-59fb-a5d0-b3f8adfafd91")
@@ -1150,12 +918,9 @@
 		)
 	)
 	(footprint "Package_TO_SOT_SMD:SOT-23-6"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/7e87f6f1-4635-5fd2-8051-fb0c0d6ca999")
 		(layer "F.Cu")
 		(uuid "00ff16a1-b466-4942-af3a-23a231e64979")
-		(at 20.5 141 0)
+		(at 20.5 141)
 		(descr "SOT, 6 Pin (JEDEC MO-178 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U1803"
@@ -1219,15 +984,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "09bd6b95-54f6-52ba-97e1-94f424a2a7a2")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Texas Instruments"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "63716bda-2888-50cb-a8c4-cf948016d0dc")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/7e87f6f1-4635-5fd2-8051-fb0c0d6ca999")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -17166,7 +16944,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "100c2a12-66d8-5fcc-bd6d-b0916b401d81")
-		(at 345.42 108.5 180)
+		(at 312.745 100.9 180)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R2350"
@@ -17352,6 +17130,129 @@
 				(xyz 0 0 0)
 			)
 		)
+	)
+	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
+		(layer "F.Cu")
+		(uuid "102075e8-8cf5-408f-91fc-edb6676d546e")
+		(at 196.25 179.75)
+		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
+		(tags "mountinghole M2.5")
+		(property "Reference" "H12"
+			(at 0 -3.65 0)
+			(layer "F.SilkS")
+			(uuid "4304b388-3a92-4cb7-884a-8e16505dcf75")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "M2.5 isolated mainboard mounting hole"
+			(at 0 3.65 0)
+			(layer "F.Fab")
+			(uuid "fb3f3846-e105-42d6-8a5d-dce07440408e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "af97b216-3067-4c82-8974-1f796ee5d9bc")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "45525a97-1ce3-4abf-8770-4c064a21df62")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "KiLib_Generator" "mounting_hardware/mounting_hole"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "8b7e438e-05e3-4cd4-996d-4edc863f6cda")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8a09c9dc-f849-4a2a-bbbd-aff7b1c4939c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property ki_fp_filters "MountingHole*")
+		(sheetname "/Mu Carrier/")
+		(sheetfile "03_mu_carrier.kicad_sch")
+		(attr exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2.7 0)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(fill no)
+			(layer "Cmts.User")
+			(uuid "6b7b54ee-f455-421b-a710-8e3c08401930")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 2.95 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "e6d5d028-9789-45fc-a3ad-01d0940b434f")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "bd20dc00-01ff-4fe4-a161-bad85973cc1d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 2.7 2.7)
+			(drill 2.7)
+			(layers "*.Cu" "*.Mask")
+			(uuid "458fdedf-d9ba-4079-9fd2-98212b2bb7b5")
+		)
+		(embedded_fonts no)
 	)
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
@@ -19343,6 +19244,129 @@
 			)
 		)
 	)
+	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
+		(layer "F.Cu")
+		(uuid "134d4be7-9a16-4347-bce6-3d0ab26ee728")
+		(at 110.25 6.05)
+		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
+		(tags "mountinghole M2.5")
+		(property "Reference" "H12"
+			(at 0 -3.65 0)
+			(layer "F.SilkS")
+			(uuid "a8112136-72f5-4bfa-abdd-72d198e84fc9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "M2.5 isolated mainboard mounting hole"
+			(at 0 3.65 0)
+			(layer "F.Fab")
+			(uuid "5bdbd921-b18c-4d73-9a30-f72450dbfb05")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2717ca69-8dd5-49e7-a17c-dffdfe67e8f3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "52060847-6068-4f5f-9cae-2a0a6b8cfa99")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "KiLib_Generator" "mounting_hardware/mounting_hole"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f5590b11-ef0e-4387-83cb-afd2249d5a41")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "32f8b624-053a-4e27-8d59-2a21b4b92660")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property ki_fp_filters "MountingHole*")
+		(sheetname "/Mu Carrier/")
+		(sheetfile "03_mu_carrier.kicad_sch")
+		(attr exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2.7 0)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(fill no)
+			(layer "Cmts.User")
+			(uuid "05b68ed1-1fbc-431a-84fb-b6e20c80484e")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 2.95 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "8d300a24-3995-47ee-b990-30a95c2e7961")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "3e224607-b8c9-455b-b982-2298c3e9e8f6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 2.7 2.7)
+			(drill 2.7)
+			(layers "*.Cu" "*.Mask")
+			(uuid "56dc69bd-ce5a-4ab7-a66c-2f11f5e118b4")
+		)
+		(embedded_fonts no)
+	)
 	(footprint "Inductor_SMD:L_Coilcraft_XAL7030-102"
 		(layer "F.Cu")
 		(uuid "13532c80-951a-5dce-996a-fb870717883f")
@@ -20511,7 +20535,7 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
 		(layer "F.Cu")
 		(uuid "1475aa5e-0b28-560e-a0e9-c154207d9d08")
-		(at 40 146 0)
+		(at 5.0 12.85 0)
 		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2.5")
 		(property "Reference" "H16"
@@ -25055,7 +25079,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "1bca7ddd-19b2-5706-aae2-1db2f9af66f0")
-		(at 355 19.98)
+		(at 326.1 28.53)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R1760"
@@ -25234,7 +25258,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "1bde68e9-e495-5198-8cc9-3597f1fd8d8a")
-		(at 355 15.66)
+		(at 326.1 24.21)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R1761"
@@ -25687,7 +25711,7 @@
 				)
 			)
 		)
-		(path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e/cf627ccd-1a07-5467-9f2a-770163b0e9c3 a51d34eb-66ae-563c-a622-80fad208f519 5c5e760a-d459-5850-a2ea-64b5532f5c9d 2753af35-99cc-5036-9cff-02370ab97a18")
+		(path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e/7c57909d-34ce-4396-a248-7203074e2bba")
 		(sheetname "/Wi-Fi/Bluetooth & OLEDs/")
 		(sheetfile "07_radio_oled_gps.kicad_sch")
 		(attr smd)
@@ -32635,7 +32659,7 @@
 	(footprint "Capacitor_SMD:C_0805_2012Metric"
 		(layer "F.Cu")
 		(uuid "2201359e-e165-56cd-8818-ed6645653664")
-		(at 355 120)
+		(at 322.325 112.4)
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C26"
@@ -36415,7 +36439,7 @@
 	(footprint "Capacitor_SMD:C_0805_2012Metric"
 		(layer "F.Cu")
 		(uuid "2463ff61-7109-5180-ae11-ae72355f864e")
-		(at 350.92 110.17)
+		(at 318.245 102.57)
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C28"
@@ -36945,7 +36969,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "25110777-dd34-5473-91f7-1dfe9e8fa0e5")
-		(at 353.5 41.2 0)
+		(at 353.5 41.2)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1765"
@@ -38891,7 +38915,6 @@
 			)
 		)
 	)
-
 	(footprint "Capacitor_SMD:C_0805_2012Metric"
 		(layer "F.Cu")
 		(uuid "26e62c52-0fb4-5dad-b000-a95184bd7d6e")
@@ -45483,7 +45506,7 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
 		(layer "F.Cu")
 		(uuid "2e2ca96d-ffc2-5307-ac25-030792ebbae5")
-		(at 28 158 0)
+		(at 5.0 150.75 0)
 		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2.5")
 		(property "Reference" "H10"
@@ -50902,7 +50925,7 @@
 				)
 			)
 		)
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/7aa5969b-48cc-5028-9a12-aff186653878 f1483e06-72ab-51f6-8a38-925be84a1c58 188613b5-0b3b-515f-8bd0-f96e279977df 5e4a1a0b-999d-5201-8178-4f65c3e5eec2 075650e9-f310-5cb8-b924-9358cbf64d34")
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/d9f57346-0f74-4ecc-abbc-6e12f8090582")
 		(sheetname "/Native USB-C I/O/")
 		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
@@ -52137,20 +52160,20 @@
 			(size 0.2 1.025)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
+			(net "/Native USB-C I{slash}O/HUB_DIS5_TX_P")
 			(pinfunction "TXDP5_83")
 			(pintype "output+no_connect")
 			(uuid "4f5b5261-d37f-43e8-84ae-d045330e562d")
-			(net "/Native USB-C I{slash}O/HUB_DIS5_TX_P")
 		)
 		(pad "84" smd roundrect
 			(at 1.6 -5.8375)
 			(size 0.2 1.025)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
+			(net "/Native USB-C I{slash}O/HUB_DIS5_TX_N")
 			(pinfunction "TXDM5_84")
 			(pintype "output+no_connect")
 			(uuid "22dcac5e-b1a2-4432-861b-9aaec071ae0e")
-			(net "/Native USB-C I{slash}O/HUB_DIS5_TX_N")
 		)
 		(pad "85" smd roundrect
 			(at 1.2 -5.8375)
@@ -52167,20 +52190,20 @@
 			(size 0.2 1.025)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
+			(net "/Native USB-C I{slash}O/HUB_DIS5_RX_P")
 			(pinfunction "RXDP5_86")
 			(pintype "input+no_connect")
 			(uuid "bec04326-c8e0-45ca-a0e3-b88abc4deef6")
-			(net "/Native USB-C I{slash}O/HUB_DIS5_RX_P")
 		)
 		(pad "87" smd roundrect
 			(at 0.4 -5.8375)
 			(size 0.2 1.025)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
+			(net "/Native USB-C I{slash}O/HUB_DIS5_RX_N")
 			(pinfunction "RXDM5_87")
 			(pintype "input+no_connect")
 			(uuid "e04b1089-e6c3-41ce-b307-1d8cf973606b")
-			(net "/Native USB-C I{slash}O/HUB_DIS5_RX_N")
 		)
 		(pad "88" smd roundrect
 			(at 0 -5.8375)
@@ -59653,7 +59676,6 @@
 			)
 		)
 	)
-
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "37f53277-137c-556c-9674-0c7000b185ca")
@@ -67592,7 +67614,7 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
 		(layer "F.Cu")
 		(uuid "3e9e3a6d-4774-5869-bc70-70b83ad1c1e3")
-		(at 260 6 0)
+		(at 260 6)
 		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2.5")
 		(property "Reference" "H14"
@@ -69054,12 +69076,9 @@
 		)
 	)
 	(footprint "Package_SON:USON-10_2.5x1.0mm_P0.5mm"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/500c2f1d-647d-512d-9720-ef084a45c3c5")
 		(layer "F.Cu")
 		(uuid "3f1ad5b6-4316-4a3c-acca-4a034f51f9ea")
-		(at 22 128 0)
+		(at 22 128)
 		(descr "USON-10 2.5x1.0mm_ Pitch 0.5mm http://www.ti.com/lit/ds/symlink/tpd4e02b04.pdf")
 		(tags "USON-10 2.5x1.0mm Pitch 0.5mm")
 		(property "Reference" "U1802"
@@ -69115,15 +69134,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d2e41f84-10ed-5d3f-9d54-0e4577bc0770")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Texas Instruments"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "63716bda-2888-50cb-a8c4-cf948016d0dc")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/500c2f1d-647d-512d-9720-ef084a45c3c5")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -77008,6 +77040,129 @@
 			)
 		)
 	)
+	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
+		(layer "F.Cu")
+		(uuid "45ff3b9b-795c-417a-9e8e-b252ddac7e64")
+		(at 63.8 6.1)
+		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
+		(tags "mountinghole M2.5")
+		(property "Reference" "H12"
+			(at 0 -3.65 0)
+			(layer "F.SilkS")
+			(uuid "fdd81339-7a3b-483d-802a-e51022f74c90")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "M2.5 isolated mainboard mounting hole"
+			(at 0 3.65 0)
+			(layer "F.Fab")
+			(uuid "19a6caff-d801-4045-8d2b-ca61ec2969d9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b9e00959-fcfd-4274-89f4-390f77ba3d00")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a22d5d4c-20a2-4bbd-9652-e7efaba6b5a1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "KiLib_Generator" "mounting_hardware/mounting_hole"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "fc536abf-8ae1-4068-91e6-211d0554e00b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3f5def8d-edaa-4fbb-8338-1c6a20315b9b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property ki_fp_filters "MountingHole*")
+		(sheetname "/Mu Carrier/")
+		(sheetfile "03_mu_carrier.kicad_sch")
+		(attr exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2.7 0)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(fill no)
+			(layer "Cmts.User")
+			(uuid "4332f121-59a7-4038-bb3f-7f325fe312ea")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 2.95 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "b935099e-46cc-4c34-b511-4ab1ee41ff54")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "dc8a4fca-896a-4573-8ec3-b57de688ade7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 2.7 2.7)
+			(drill 2.7)
+			(layers "*.Cu" "*.Mask")
+			(uuid "7423c6c1-ddcd-406c-b184-d745e1dd16f4")
+		)
+		(embedded_fonts no)
+	)
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "461a6de3-7d70-5dc3-98d6-f8cbc8c82c2a")
@@ -77747,13 +77902,13 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
 		(layer "F.Cu")
 		(uuid "46b1e1a1-2d30-54c8-ad34-bd7171e3cb85")
-		(at 328 140 0)
+		(at 353.316 180.611)
 		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2.5")
 		(property "Reference" "H12"
 			(at 0 -3.65 0)
 			(layer "F.SilkS")
-			(uuid "8b7faf2d-342b-4d9c-9fd6-791049209be5")
+			(uuid "b132b9b5-3e3b-4936-a41d-de065a298e1c")
 			(effects
 				(font
 					(size 1 1)
@@ -77764,7 +77919,7 @@
 		(property "Value" "M2.5 isolated mainboard mounting hole"
 			(at 0 3.65 0)
 			(layer "F.Fab")
-			(uuid "2f2ae80b-d921-407e-9700-63367bb0f26a")
+			(uuid "b399b303-2b3f-472d-91b2-3300b016d638")
 			(effects
 				(font
 					(size 1 1)
@@ -77776,7 +77931,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1d4613c4-5fe3-597d-95d1-72a7c3148704")
+			(uuid "d9870d5c-7549-4430-94a9-84ed36910ce8")
 			(effects
 				(font
 					(size 1 1)
@@ -77788,7 +77943,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "7df14bdb-ce6d-514c-9e5d-f11c373e67e8")
+			(uuid "845b7b27-2133-4a73-8349-99577694369e")
 			(effects
 				(font
 					(size 1 1)
@@ -78935,7 +79090,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "486bf5fa-b74d-59ce-8f6b-4ccd83fef8e1")
-		(at 347.38 21.55)
+		(at 318.48 30.1)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R2058"
@@ -84778,7 +84933,7 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "4d3bc272-e83c-511b-aec5-39c5ece78407")
-		(at 346.8 34.5 0)
+		(at 346.8 34.5)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C2063"
@@ -91593,7 +91748,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "5573f60b-0e1b-548a-82ee-a68ab9bb1e70")
-		(at 355 21.85)
+		(at 326.1 30.4)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R2082"
@@ -93596,7 +93751,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "582e3dbe-393f-5772-b705-81a342c55880")
-		(at 355 58.25)
+		(at 325.475 67.6)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C324"
@@ -93772,7 +93927,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "584df0a8-4bb6-50a2-b066-9fc610cbba91")
-		(at 355 109.85)
+		(at 322.325 102.25)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C36"
@@ -97686,7 +97841,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "5c8f311e-475b-5f05-8b1d-6d11c67ff434")
-		(at 344.92 116.12 180)
+		(at 312.245 108.52 180)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R2353"
@@ -97872,6 +98027,129 @@
 				(xyz 0 0 0)
 			)
 		)
+	)
+	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
+		(layer "F.Cu")
+		(uuid "5c9055f5-02e3-4c09-bab4-6c628af05ead")
+		(at 250.3 124.95)
+		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
+		(tags "mountinghole M2.5")
+		(property "Reference" "H12"
+			(at 0 -3.65 0)
+			(layer "F.SilkS")
+			(uuid "aa1fb45a-0426-41b8-9071-7de3a66d6e9b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "M2.5 isolated mainboard mounting hole"
+			(at 0 3.65 0)
+			(layer "F.Fab")
+			(uuid "c17901a6-d368-4c61-8843-0a625f32b5b0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c9e90c88-2a75-4e85-99e4-13c3649c74df")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9e0067d7-a996-4da0-a931-8832c5f0e3ba")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "KiLib_Generator" "mounting_hardware/mounting_hole"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "fb6f5c3c-6938-4e9a-bc8a-7667f2389dc0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cf24cd90-c0b9-432e-b595-88a42266af07")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property ki_fp_filters "MountingHole*")
+		(sheetname "/Mu Carrier/")
+		(sheetfile "03_mu_carrier.kicad_sch")
+		(attr exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2.7 0)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(fill no)
+			(layer "Cmts.User")
+			(uuid "34d1265b-d97a-499a-bf59-19a01755c85d")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 2.95 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "2f2c8613-923b-4bb9-854e-380aa719d7e1")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "9a2e8bb5-25ea-4ee9-bd44-13909f8a4645")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 2.7 2.7)
+			(drill 2.7)
+			(layers "*.Cu" "*.Mask")
+			(uuid "0b2f1889-bc1a-4d90-8a50-f19d298361d3")
+		)
+		(embedded_fonts no)
 	)
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
@@ -102573,7 +102851,7 @@
 	(footprint "Connector_Audio:Jack_3.5mm_CUI_SJ1-3535NG_Horizontal"
 		(layer "F.Cu")
 		(uuid "616d08c8-b6e7-5cc9-80c7-9bd5e591cf43")
-		(at 50 2)
+		(at 52.95 2)
 		(descr "TRS 3.5mm, horizontal, through-hole, with switch, https://www.cui.com/product/resource/sj1-353xng.pdf")
 		(tags "TRS audio jack stereo horizontal")
 		(property "Reference" "J422"
@@ -105204,7 +105482,6 @@
 			)
 		)
 	)
-
 	(footprint "Inductor_SMD:L_Wuerth_PMFI-201610_PMCI-compatible"
 		(layer "F.Cu")
 		(uuid "65896d47-ce70-557a-81ee-b6ca6ec7773c")
@@ -109377,7 +109654,7 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
 		(layer "F.Cu")
 		(uuid "66c67772-d025-5cd5-b748-0ea1b3534a0d")
-		(at 304 146 0)
+		(at 353.0 112.05 0)
 		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2.5")
 		(property "Reference" "H17"
@@ -109880,12 +110157,9 @@
 		)
 	)
 	(footprint "Resistor_SMD:R_0603_1608Metric"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/9f893513-cdaa-5624-a4b2-c3b417f28692")
 		(layer "F.Cu")
 		(uuid "673ab4b8-6bbd-4c4f-adcd-957ae9cd32b4")
-		(at 19 145 0)
+		(at 19 145)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R1851"
@@ -109949,15 +110223,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "dd442406-2a82-5d96-9443-5092bddcaa8f")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Yageo"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2f64bd96-c5cd-5b8c-adc8-69f89a035b92")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/9f893513-cdaa-5624-a4b2-c3b417f28692")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -117067,7 +117354,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "6d582e75-c87d-50d2-9238-3774bea30f9e")
-		(at 353.5 38.0 0)
+		(at 353.5 38)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1764"
@@ -123164,7 +123451,7 @@
 			)
 		)
 		(property ki_fp_filters "SG-* SOT*")
-		(path "/ecc991b5-12ab-53c3-80f1-080be4d1146d/bce9f8e1-0f4f-5f9a-b3b5-0bdacc583744 50cd02c4-d4fd-525f-a706-928aab581ad0 18fc8863-8eca-5de7-a8c7-6b9d1c49d615")
+		(path "/ecc991b5-12ab-53c3-80f1-080be4d1146d/3935be95-1996-4aef-ab7c-91bb525e9f7d")
 		(sheetname "/Power Inputs/")
 		(sheetfile "05_power_inputs.kicad_sch")
 		(attr smd)
@@ -127493,7 +127780,6 @@
 			)
 		)
 	)
-
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "747f6b44-2c44-554d-b3f2-3057c9dc283b")
@@ -127672,12 +127958,9 @@
 		)
 	)
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/a770365a-157e-536b-84d7-f26873e2807a")
 		(layer "F.Cu")
 		(uuid "74e98b22-842a-4726-9d41-d6629165cc93")
-		(at 14 126 0)
+		(at 14 126)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1851"
@@ -127741,15 +128024,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e1bc4be3-1ee9-5544-81f2-515e8839fdc7")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Murata"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8d83ac9f-9afc-5d1e-8415-59638776102d")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/a770365a-157e-536b-84d7-f26873e2807a")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -128423,7 +128719,7 @@
 				)
 			)
 		)
-		(path "/ecc991b5-12ab-53c3-80f1-080be4d1146d/b5f60eb0-6776-584d-b2ee-e116f4bfad16 849e8230-fda8-54a6-a44e-33ba4e8355e0 2ec0ecb4-e5f0-5d8d-a981-eeee5cb2c0c7")
+		(path "/ecc991b5-12ab-53c3-80f1-080be4d1146d/1f74fcd8-507e-48a6-9639-e93d0826a881")
 		(sheetname "/Power Inputs/")
 		(sheetfile "05_power_inputs.kicad_sch")
 		(attr smd)
@@ -130880,14 +131176,14 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
 		(layer "F.Cu")
 		(uuid "7810c295-8d11-5d1e-8d9b-fafc7152420b")
-		(at 244 6 0)
+		(at 353.0 19.65 0)
 		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2.5")
 		(property "Reference" "H15"
 			(at 0 -3.65 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "7598065e-9ad7-497e-9523-1d7e4c08dbf4")
+			(uuid "d1bab9ad-50a8-4eac-b788-632438784d90")
 			(effects
 				(font
 					(size 1 1)
@@ -130898,7 +131194,7 @@
 		(property "Value" "M2.5 isolated mainboard mounting hole"
 			(at 0 3.65 0)
 			(layer "F.Fab")
-			(uuid "596186be-5c27-4d20-b862-0db8b3f745aa")
+			(uuid "48b1f723-c0e9-4233-bb21-a61b402902bd")
 			(effects
 				(font
 					(size 1 1)
@@ -130910,7 +131206,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1d4613c4-5fe3-597d-95d1-72a7c3148704")
+			(uuid "fbef6a44-b72a-4da1-8f24-85ae43ac0a87")
 			(effects
 				(font
 					(size 1 1)
@@ -130922,7 +131218,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "7df14bdb-ce6d-514c-9e5d-f11c373e67e8")
+			(uuid "6f48823d-4119-4483-8a14-f36312a77c5d")
 			(effects
 				(font
 					(size 1 1)
@@ -131887,7 +132183,6 @@
 			)
 		)
 	)
-
 	(footprint "Package_TO_SOT_SMD:SOT-23-6"
 		(layer "F.Cu")
 		(uuid "79274686-281e-517c-8ae8-a21723a75ea3")
@@ -135160,7 +135455,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "7c02bf7d-f007-58b2-8272-9838d9de128e")
-		(at 345.8 29.5 0)
+		(at 345.8 29.5)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R2096"
@@ -138160,12 +138455,9 @@
 		)
 	)
 	(footprint "Package_TO_SOT_SMD:SOT-666"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/f681e01a-9d87-588a-9e2f-a5fda7452868")
 		(layer "F.Cu")
 		(uuid "7e0db2e8-bb74-4063-b2e6-4fc297651202")
-		(at 18 113 0)
+		(at 18 113)
 		(descr "SOT666")
 		(tags "SOT-666")
 		(property "Reference" "U1801"
@@ -138221,15 +138513,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "278f5fb7-f3be-53a8-800f-fbc30057c4c9")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "STMicroelectronics"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a76ad2d2-f227-5156-93ed-6f36b0780135")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/f681e01a-9d87-588a-9e2f-a5fda7452868")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -138435,6 +138740,129 @@
 				(xyz 0 0 0)
 			)
 		)
+	)
+	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
+		(layer "F.Cu")
+		(uuid "7e8735d8-f3e8-405f-b961-8888ec3c7fd1")
+		(at 208.85 4.95)
+		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
+		(tags "mountinghole M2.5")
+		(property "Reference" "H12"
+			(at 0 -3.65 0)
+			(layer "F.SilkS")
+			(uuid "b50d0267-f386-43ed-b5c8-4e1a3fba8cfb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "M2.5 isolated mainboard mounting hole"
+			(at 0 3.65 0)
+			(layer "F.Fab")
+			(uuid "7e37f05e-4f7c-43ad-b67c-d2e159e86eed")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "06437365-f016-4eb3-8ecd-956d53497a60")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ed19cca6-1d2b-421b-be84-29eea307a955")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "KiLib_Generator" "mounting_hardware/mounting_hole"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f4056116-229a-4b72-999c-256b1f3289b9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b87f5933-b10d-4263-af75-9c0feb963678")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property ki_fp_filters "MountingHole*")
+		(sheetname "/Mu Carrier/")
+		(sheetfile "03_mu_carrier.kicad_sch")
+		(attr exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2.7 0)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(fill no)
+			(layer "Cmts.User")
+			(uuid "07cdd133-7cfc-41c1-b7f4-f63974cb6500")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 2.95 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "55a1db8f-86a3-4660-ad55-c5786f19cd31")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "1c98dc05-db46-4d4b-bb62-6f6f661f1a0d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 2.7 2.7)
+			(drill 2.7)
+			(layers "*.Cu" "*.Mask")
+			(uuid "df42abc1-1d2e-44b9-bd60-b04e243cffab")
+		)
+		(embedded_fonts no)
 	)
 	(footprint "Package_SON:USON-10_2.5x1.0mm_P0.5mm"
 		(layer "F.Cu")
@@ -145391,12 +145819,9 @@
 		)
 	)
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/f762519e-4586-508c-ad6b-936d895c491c")
 		(layer "F.Cu")
 		(uuid "851585ea-cd3f-4381-8414-da0c14143c89")
-		(at 14 130 0)
+		(at 14 130)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1852"
@@ -145460,15 +145885,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "366a228c-4ace-5cdd-b09c-8e45fe9b6b0f")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Murata"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8d83ac9f-9afc-5d1e-8415-59638776102d")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/f762519e-4586-508c-ad6b-936d895c491c")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -150943,7 +151381,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "89b55da4-d3c9-5189-a5d7-6082dbce03de")
-		(at 355 115.25)
+		(at 322.325 107.65)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R34"
@@ -156842,7 +157280,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "8d9d0845-000c-50bf-8917-c8c92a287eb1")
-		(at 355 111.72)
+		(at 322.325 104.12)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C20"
@@ -158234,12 +158672,9 @@
 		)
 	)
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/2e96ea60-e30f-57fa-b123-52dc4935dc8f")
 		(layer "F.Cu")
 		(uuid "8f3877b7-05a0-4548-b640-af1864b332d9")
-		(at 13.5 122 0)
+		(at 13.5 122)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1850"
@@ -158303,15 +158738,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f4b9959e-b94e-5a22-bf35-1b0c97221694")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Murata"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8d83ac9f-9afc-5d1e-8415-59638776102d")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/2e96ea60-e30f-57fa-b123-52dc4935dc8f")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -158909,6 +159357,129 @@
 				(xyz 0 0 0)
 			)
 		)
+	)
+	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
+		(layer "F.Cu")
+		(uuid "8f7b469f-0dcf-43c0-843a-0d6d0988f8ea")
+		(at 119.8 76.95)
+		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
+		(tags "mountinghole M2.5")
+		(property "Reference" "H12"
+			(at 0 -3.65 0)
+			(layer "F.SilkS")
+			(uuid "848a84d3-68c2-41c0-8212-a13d59fe042a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "M2.5 isolated mainboard mounting hole"
+			(at 0 3.65 0)
+			(layer "F.Fab")
+			(uuid "6d172f4d-c783-48af-a404-ba8651b070a5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "acfccf41-e4fd-437b-ad72-af591340bd62")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "88976e01-c414-4a30-8ab9-61364769b428")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "KiLib_Generator" "mounting_hardware/mounting_hole"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "1dc1b466-395a-423c-a043-d2a730889310")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e0220697-5511-40c1-a5dc-cd837de6398f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property ki_fp_filters "MountingHole*")
+		(sheetname "/Mu Carrier/")
+		(sheetfile "03_mu_carrier.kicad_sch")
+		(attr exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2.7 0)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(fill no)
+			(layer "Cmts.User")
+			(uuid "14d0db25-ab59-43f1-bd33-3194d8c840ed")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 2.95 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "6e297491-be68-4eff-9dc5-b2d14d7df076")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "eaeda613-18bb-4ec2-8723-973c9dd2f692")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 2.7 2.7)
+			(drill 2.7)
+			(layers "*.Cu" "*.Mask")
+			(uuid "3bc8b387-a3ff-4b44-a3d4-b7b4aa10b928")
+		)
+		(embedded_fonts no)
 	)
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
@@ -165497,7 +166068,7 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "9520a170-004c-5f98-bb78-bcb3757b3076")
-		(at 349.74 16.92)
+		(at 320.84 25.47)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C2081"
@@ -165851,7 +166422,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "95654890-a74c-58e6-b0ae-7d093430333e")
-		(at 347.38 112.55)
+		(at 314.705 104.95)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C25"
@@ -168818,12 +169389,9 @@
 		)
 	)
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/9c22d1c6-29ab-536c-916b-de83e4c57d76")
 		(layer "F.Cu")
 		(uuid "98acfb65-b93f-484b-9b31-f14a5afa276b")
-		(at 14 143 0)
+		(at 14 143)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1855"
@@ -168887,15 +169455,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e1bc4be3-1ee9-5544-81f2-515e8839fdc7")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Murata"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8d83ac9f-9afc-5d1e-8415-59638776102d")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/9c22d1c6-29ab-536c-916b-de83e4c57d76")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -179456,7 +180037,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "a4786ddf-99db-5c79-872c-0d66e329d8c2")
-		(at 355 18.55)
+		(at 326.1 27.1)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R2053"
@@ -187449,7 +188030,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "a8ec672d-fc40-559e-ad72-a47c054cad0c")
-		(at 349 108.5)
+		(at 316.325 100.9)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C290"
@@ -188400,12 +188981,9 @@
 		)
 	)
 	(footprint "Package_TO_SOT_SMD:SOT-23-6"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/5f99a25e-9466-5490-af64-cff4f486837f")
 		(layer "F.Cu")
 		(uuid "a9e6eb3e-b821-4664-9bde-cd0e9c40c41c")
-		(at 19 120 0)
+		(at 19 120)
 		(descr "SOT, 6 Pin (JEDEC MO-178 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U1800"
@@ -188469,15 +189047,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "09bd6b95-54f6-52ba-97e1-94f424a2a7a2")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Texas Instruments"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "63716bda-2888-50cb-a8c4-cf948016d0dc")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/5f99a25e-9466-5490-af64-cff4f486837f")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -211201,7 +211792,7 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "c32b8f2f-45dc-5fb3-857d-9f450a8fe7fc")
-		(at 355 118.39)
+		(at 322.325 110.79)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R33"
@@ -215281,12 +215872,9 @@
 		)
 	)
 	(footprint "Package_TO_SOT_SMD:SOT-666"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/64aeaecd-04f2-5899-aa7b-a358909c8185")
 		(layer "F.Cu")
 		(uuid "c7a70090-439b-4f16-bde5-4ea2803a1174")
-		(at 19 148 0)
+		(at 19 148)
 		(descr "SOT666")
 		(tags "SOT-666")
 		(property "Reference" "U1804"
@@ -215342,15 +215930,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "278f5fb7-f3be-53a8-800f-fbc30057c4c9")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "STMicroelectronics"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a76ad2d2-f227-5156-93ed-6f36b0780135")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/64aeaecd-04f2-5899-aa7b-a358909c8185")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -217064,7 +217665,7 @@
 	(footprint "Fuse:Fuse_1812_4532Metric"
 		(layer "F.Cu")
 		(uuid "c8b85cf7-4203-5e1c-8cd5-8a769dbee3e6")
-		(at 12 96.5 0)
+		(at 12 96.5)
 		(descr "Fuse SMD 1812 (4532 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: https://www.nikhef.nl/pub/departments/mt/projects/detectorR_D/dtddice/ERJ2G.pdf)")
 		(tags "fuse")
 		(property "Reference" "F400"
@@ -222808,12 +223409,9 @@
 		)
 	)
 	(footprint "Resistor_SMD:R_0603_1608Metric"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/db00d43a-9a67-5a35-afb4-30dbccc58d1f")
 		(layer "F.Cu")
 		(uuid "cdbb8d22-67e0-4cc6-8405-cabe602f6f4e")
-		(at 19 127 0)
+		(at 19 127)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R1850"
@@ -222877,15 +223475,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "dd442406-2a82-5d96-9443-5092bddcaa8f")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Yageo"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2f64bd96-c5cd-5b8c-adc8-69f89a035b92")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/db00d43a-9a67-5a35-afb4-30dbccc58d1f")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -226814,7 +227425,6 @@
 			)
 		)
 	)
-
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "d279bd32-294a-517a-a1af-9cd75340b909")
@@ -229875,7 +230485,6 @@
 			)
 		)
 	)
-
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "d5997a13-8bdc-5582-9d8a-78b7dfdc376e")
@@ -231294,7 +231903,7 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
 		(layer "F.Cu")
 		(uuid "d68750f2-f31f-5a42-9356-7d3fc941264b")
-		(at 16 170 0)
+		(at 5.0 180.75 0)
 		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2.5")
 		(property "Reference" "H11"
@@ -231804,13 +232413,13 @@
 	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
 		(layer "F.Cu")
 		(uuid "d706ad7c-0702-52c7-8661-75ba11df4927")
-		(at 280 124 0)
+		(at 353 58.75)
 		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2.5")
 		(property "Reference" "H13"
 			(at 0 -3.65 0)
 			(layer "F.SilkS")
-			(uuid "0ed81e5a-f86a-4e6c-8c48-9cf3dad77919")
+			(uuid "aef5e2b2-5972-4fc0-94c4-e29ba9309ba3")
 			(effects
 				(font
 					(size 1 1)
@@ -231821,7 +232430,7 @@
 		(property "Value" "M2.5 isolated mainboard mounting hole"
 			(at 0 3.65 0)
 			(layer "F.Fab")
-			(uuid "1fbfdd74-23cc-42c7-9073-9e7864224dc9")
+			(uuid "e7c62581-a1ef-4905-92fe-9f0f6d4418bc")
 			(effects
 				(font
 					(size 1 1)
@@ -231833,7 +232442,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1d4613c4-5fe3-597d-95d1-72a7c3148704")
+			(uuid "d469c9d7-d4c4-4e5c-941b-7518f949f479")
 			(effects
 				(font
 					(size 1 1)
@@ -231845,7 +232454,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "7df14bdb-ce6d-514c-9e5d-f11c373e67e8")
+			(uuid "ed9f3cc2-ed49-4f5c-8e5d-fcbd30c941c0")
 			(effects
 				(font
 					(size 1 1)
@@ -232285,7 +232894,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "d7b31ad6-55fe-5ba3-83c5-959f378c0b33")
-		(at 355 113.15)
+		(at 322.325 105.55)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C27"
@@ -238208,12 +238817,9 @@
 		)
 	)
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/4d7f2ef1-9bbd-5c5d-9717-4a53fb1fce4a")
 		(layer "F.Cu")
 		(uuid "dc6b6aaf-b807-483e-9d8a-369f0fe1d121")
-		(at 16.5 139.5 0)
+		(at 16.5 139.5)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1854"
@@ -238277,15 +238883,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f4b9959e-b94e-5a22-bf35-1b0c97221694")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Murata"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8d83ac9f-9afc-5d1e-8415-59638776102d")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/4d7f2ef1-9bbd-5c5d-9717-4a53fb1fce4a")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -245069,12 +245688,9 @@
 		)
 	)
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/f6f8cc94-24de-5519-b210-29bd51ef38e7")
 		(layer "F.Cu")
 		(uuid "e1c1daa8-d30c-4c5b-96ab-e477bd72f276")
-		(at 14.6 134 0)
+		(at 14.6 134)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1853"
@@ -245138,15 +245754,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "366a228c-4ace-5cdd-b09c-8e45fe9b6b0f")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "Murata"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8d83ac9f-9afc-5d1e-8415-59638776102d")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/f6f8cc94-24de-5519-b210-29bd51ef38e7")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -245231,7 +245860,401 @@
 			)
 		)
 	)
-
+	(footprint "Package_TO_SOT_SMD:SOT-23"
+		(layer "F.Cu")
+		(uuid "e27d2741-8063-5437-9bbd-6819924c950a")
+		(at 170 55)
+		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
+		(tags "SOT TO_SOT_SMD")
+		(property "Reference" "Q60B"
+			(at 0 -2.4 0)
+			(layer "F.SilkS")
+			(uuid "cf729548-b603-4b3c-b56e-ff883605d678")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "2N7002 DFU-mode USB mux force-enable"
+			(at 0 2.4 0)
+			(layer "F.Fab")
+			(uuid "c02f2e3e-171f-4e62-978f-c1e2b3b2736b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1d4613c4-5fe3-597d-95d1-72a7c3148704")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7df14bdb-ce6d-514c-9e5d-f11c373e67e8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "KiLib_Generator" "package/gullwing"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f8ddb72e-e2cf-4cf2-8d30-fbe0179c94c7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "2N7002KT1G"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "285da843-e141-576f-9ee1-fe7883c50db7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer" "onsemi"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b8256941-0a20-5aba-a706-714a662e3cdd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/6e8963da-1a38-5ee1-aef2-2f991522fe35/a9e1cea9-19c0-5d9d-a9d4-3e4804a45099")
+		(sheetname "/Internal Services/")
+		(sheetfile "08_internal_services.kicad_sch")
+		(attr smd)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -0.76 -1.56)
+			(end 0.76 -1.56)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "5cd5e80f-6517-462f-8a8b-b370b87504e9")
+		)
+		(fp_line
+			(start -0.76 -1.51)
+			(end -0.76 -1.56)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "1687a50e-7c05-4122-8107-fdae5a2d9166")
+		)
+		(fp_line
+			(start -0.76 0.39)
+			(end -0.76 -0.39)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "e0244c97-6904-4929-9305-c135078d78e2")
+		)
+		(fp_line
+			(start -0.76 1.56)
+			(end -0.76 1.51)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "52e4ca2f-b6eb-405e-b124-bbaaf1814fef")
+		)
+		(fp_line
+			(start 0.76 -1.56)
+			(end 0.76 -0.56)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "92335667-000a-4361-9cc4-71a87e3dba5c")
+		)
+		(fp_line
+			(start 0.76 0.56)
+			(end 0.76 1.56)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "f76e0689-2e4c-4d5e-9167-82f4a83deea8")
+		)
+		(fp_line
+			(start 0.76 1.56)
+			(end -0.76 1.56)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "4d507df1-f63a-486a-af5c-c5fdfc4241b3")
+		)
+		(fp_poly
+			(pts
+				(xy -1.3 -0.38) (xy -1.06 -0.05) (xy -1.54 -0.05)
+			)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill yes)
+			(layer "F.SilkS")
+			(uuid "fd93a393-7b10-4d07-a8ce-ecc6ab0685b1")
+		)
+		(fp_line
+			(start -1.93 -1.5)
+			(end -0.9 -1.5)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "e050be73-f163-4079-9dfe-03a913c07067")
+		)
+		(fp_line
+			(start -1.93 -0.39)
+			(end -1.93 -1.5)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "05e945db-7e2c-4362-92fe-4cfbed978946")
+		)
+		(fp_line
+			(start -1.93 0.39)
+			(end -0.9 0.39)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "7ab94eee-58f7-44d3-b620-73635f0bf87c")
+		)
+		(fp_line
+			(start -1.93 1.5)
+			(end -1.93 0.39)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "20e77f53-df46-46f2-97ef-2f73b1bf5a0f")
+		)
+		(fp_line
+			(start -0.9 -1.7)
+			(end 0.9 -1.7)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "56edf288-cfe7-4685-bcfd-8b14c1f8d9cb")
+		)
+		(fp_line
+			(start -0.9 -1.5)
+			(end -0.9 -1.7)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "9f6ba6a6-3a4d-4a0f-8da1-77989a3aa31d")
+		)
+		(fp_line
+			(start -0.9 -0.39)
+			(end -1.93 -0.39)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "2439bfcb-d2ae-4869-b413-b95cddecf38a")
+		)
+		(fp_line
+			(start -0.9 0.39)
+			(end -0.9 -0.39)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "f5074062-34e6-4bbb-87ee-bf91752f8c56")
+		)
+		(fp_line
+			(start -0.9 1.5)
+			(end -1.93 1.5)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "d4992ef0-c263-4200-84dd-c5fd5ea79fbe")
+		)
+		(fp_line
+			(start -0.9 1.7)
+			(end -0.9 1.5)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "1f805e97-eba6-4e29-8bce-be08fa861e29")
+		)
+		(fp_line
+			(start 0.9 -1.7)
+			(end 0.9 -0.55)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "8345df30-9c3c-4ad9-a2fc-f7e79df56a8d")
+		)
+		(fp_line
+			(start 0.9 -0.55)
+			(end 1.93 -0.55)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "493f5c18-538b-47f4-9482-4cbe8ce7bd8f")
+		)
+		(fp_line
+			(start 0.9 0.55)
+			(end 0.9 1.7)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "c34b8177-71dd-4882-b0e3-032753d786fa")
+		)
+		(fp_line
+			(start 0.9 1.7)
+			(end -0.9 1.7)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "60e61d46-7079-484b-8449-63a139f43ab0")
+		)
+		(fp_line
+			(start 1.93 -0.55)
+			(end 1.93 0.55)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "ab23a884-0973-4ee8-9224-b74510404b1c")
+		)
+		(fp_line
+			(start 1.93 0.55)
+			(end 0.9 0.55)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "70344d0a-015c-42ec-9b9a-010a61532b23")
+		)
+		(fp_poly
+			(pts
+				(xy -0.325 -1.45) (xy 0.65 -1.45) (xy 0.65 1.45) (xy -0.65 1.45) (xy -0.65 -1.125)
+			)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "1b94f6b5-15eb-416a-9456-6d76107e5219")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(uuid "87d6831b-1920-4bb1-a984-93f9d01e6a9e")
+			(effects
+				(font
+					(size 0.72 0.72)
+					(thickness 0.11)
+				)
+			)
+		)
+		(pad "1" smd roundrect
+			(at -0.9375 -0.95)
+			(size 1.475 0.6)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.25)
+			(net "/EC_DFU_SEL")
+			(uuid "f6555718-3f2f-4feb-a224-3db62488deb5")
+		)
+		(pad "2" smd roundrect
+			(at -0.9375 0.95)
+			(size 1.475 0.6)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.25)
+			(net "GND")
+			(uuid "0b2608c1-7c6f-44b6-adf4-08f8fcd3412f")
+		)
+		(pad "3" smd roundrect
+			(at 0.9375 0)
+			(size 1.475 0.6)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.25)
+			(net "/Internal Services/EC_USB_OE_N")
+			(uuid "2a2138b0-70c1-4d61-8727-3f3c835d6e1d")
+		)
+		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "e2cd3d32-184d-54e7-a630-5e6898d48eef")
@@ -245591,7 +246614,6 @@
 		)
 	)
 	(footprint "ducktop2:Texas_RPW0010A_VQFN-HR-10_2x2mm"
-		(attr )
 		(layer "F.Cu")
 		(uuid "e2ead0d5-5a10-585b-9951-d3e3b1ca747f")
 		(at 201.5 166.05)
@@ -247460,7 +248482,7 @@
 	(footprint "Capacitor_SMD:C_0805_2012Metric"
 		(layer "F.Cu")
 		(uuid "e4060ca6-cdec-56e1-9e58-61fb68d29c78")
-		(at 347.38 111.05)
+		(at 314.705 103.45)
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C29"
@@ -249715,12 +250737,9 @@
 		)
 	)
 	(footprint "Connector_USB:USB_A_Receptacle_GCT_USB1046"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/79ed75b4-c37b-5a26-a1b5-71f1572b177c")
 		(layer "F.Cu")
 		(uuid "e5f3f25c-6798-4b98-aff4-b5cad7c03b4d")
-		(at 4.5 137.5 270)
+		(at 4.5 137.5 -90)
 		(descr "GCT USB1046, USB Type A, https://gct.co/files/drawings/usb1046.pdf")
 		(tags "USB SMD Type-A Receptacle Right Angle")
 		(property "Reference" "J25"
@@ -249776,27 +250795,30 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "09928f1c-c327-50de-92ac-42378c7a55ed")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "GCT"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a9858396-5a7c-5b8d-a3ed-c050cf670911")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/79ed75b4-c37b-5a26-a1b5-71f1572b177c")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -6.58 -6.91)
-			(end -6.58 -5.26)
-			(stroke
-				(width 0.12)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "550fcad1-97ff-4454-85aa-56f45f7c8044")
-		)
 		(fp_line
 			(start -6.58 -1.84)
 			(end -6.58 5.25)
@@ -249806,6 +250828,26 @@
 			)
 			(layer "F.SilkS")
 			(uuid "951f6189-0a4d-4544-be30-11a8bb8a95c3")
+		)
+		(fp_line
+			(start 6.58 -1.84)
+			(end 6.58 5.25)
+			(stroke
+				(width 0.12)
+				(type default)
+			)
+			(layer "F.SilkS")
+			(uuid "c8faf873-645f-4e54-8cab-a8abb959f9fa")
+		)
+		(fp_line
+			(start -6.58 -6.91)
+			(end -6.58 -5.26)
+			(stroke
+				(width 0.12)
+				(type default)
+			)
+			(layer "F.SilkS")
+			(uuid "550fcad1-97ff-4454-85aa-56f45f7c8044")
 		)
 		(fp_line
 			(start -4.41 -6.91)
@@ -249848,16 +250890,6 @@
 			(uuid "71f15ed5-c7e8-408d-bfef-02e06034767b")
 		)
 		(fp_line
-			(start 6.58 -1.84)
-			(end 6.58 5.25)
-			(stroke
-				(width 0.12)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "c8faf873-645f-4e54-8cab-a8abb959f9fa")
-		)
-		(fp_line
 			(start -5 5.45)
 			(end 5 5.45)
 			(stroke
@@ -249866,16 +250898,6 @@
 			)
 			(layer "Dwgs.User")
 			(uuid "cc1c3926-2acc-47a9-97ee-e8398f7fa564")
-		)
-		(fp_line
-			(start -7.75 5.43)
-			(end -7.75 7.23)
-			(stroke
-				(width 0.05)
-				(type default)
-			)
-			(layer "F.CrtYd")
-			(uuid "ee8c1ca6-0835-4265-b2a2-33e1b3b39d28")
 		)
 		(fp_line
 			(start -7.75 7.23)
@@ -249888,14 +250910,14 @@
 			(uuid "3f300b8c-5297-4f50-93e8-06669d94f37a")
 		)
 		(fp_line
-			(start -7.5 -9.25)
-			(end 7.5 -9.25)
+			(start -7.75 5.43)
+			(end -7.75 7.23)
 			(stroke
 				(width 0.05)
-				(type solid)
+				(type default)
 			)
 			(layer "F.CrtYd")
-			(uuid "531d381f-f972-405e-ba96-34987e65c212")
+			(uuid "ee8c1ca6-0835-4265-b2a2-33e1b3b39d28")
 		)
 		(fp_line
 			(start -7.5 5.43)
@@ -249919,16 +250941,6 @@
 		)
 		(fp_line
 			(start 7.5 5.43)
-			(end 7.5 -9.25)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "720ebb10-53a1-4c66-bb28-0a580671af40")
-		)
-		(fp_line
-			(start 7.5 5.43)
 			(end 7.75 5.43)
 			(stroke
 				(width 0.05)
@@ -249936,6 +250948,16 @@
 			)
 			(layer "F.CrtYd")
 			(uuid "5cc97e8e-bab1-4544-bca1-ed87874cbd07")
+		)
+		(fp_line
+			(start 7.5 5.43)
+			(end 7.5 -9.25)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "720ebb10-53a1-4c66-bb28-0a580671af40")
 		)
 		(fp_line
 			(start 7.75 5.43)
@@ -249948,14 +250970,14 @@
 			(uuid "31f9f154-361f-4c88-bc85-d0d6f4ea4fba")
 		)
 		(fp_line
-			(start -7.25 5.93)
-			(end -7.25 6.73)
+			(start -7.5 -9.25)
+			(end 7.5 -9.25)
 			(stroke
-				(width 0.1)
-				(type default)
+				(width 0.05)
+				(type solid)
 			)
-			(layer "F.Fab")
-			(uuid "35876739-5478-4730-92f4-e7e3829c4400")
+			(layer "F.CrtYd")
+			(uuid "531d381f-f972-405e-ba96-34987e65c212")
 		)
 		(fp_line
 			(start -7.25 6.73)
@@ -249968,14 +250990,24 @@
 			(uuid "6d40fb33-3c66-4f31-84e3-c7da03947051")
 		)
 		(fp_line
-			(start -6.4 -6.67)
-			(end -6.4 5.93)
+			(start 7.25 6.73)
+			(end 7.25 5.93)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
 			(layer "F.Fab")
-			(uuid "5517e095-5617-46f1-b112-c31b4fdbe9d7")
+			(uuid "4dfbfd9b-a21f-46f6-8fd5-21c66c36a966")
+		)
+		(fp_line
+			(start -7.25 5.93)
+			(end -7.25 6.73)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "F.Fab")
+			(uuid "35876739-5478-4730-92f4-e7e3829c4400")
 		)
 		(fp_line
 			(start -6.4 5.93)
@@ -249986,36 +251018,6 @@
 			)
 			(layer "F.Fab")
 			(uuid "b449ec8b-b621-47ba-9438-94dc297cb16c")
-		)
-		(fp_line
-			(start -3.75 -6.73)
-			(end -3.5 -6.23)
-			(stroke
-				(width 0.1)
-				(type default)
-			)
-			(layer "F.Fab")
-			(uuid "370fba53-a948-4457-bab8-29718e292269")
-		)
-		(fp_line
-			(start -3.5 -6.23)
-			(end -3.25 -6.73)
-			(stroke
-				(width 0.1)
-				(type default)
-			)
-			(layer "F.Fab")
-			(uuid "a98fbd85-be1a-480c-9770-e28683480a72")
-		)
-		(fp_line
-			(start 6.4 -6.67)
-			(end -6.4 -6.67)
-			(stroke
-				(width 0.1)
-				(type default)
-			)
-			(layer "F.Fab")
-			(uuid "9a8f13f2-2e42-48b5-bad6-d76e9ac3ec20")
 		)
 		(fp_line
 			(start 6.4 5.93)
@@ -250038,14 +251040,44 @@
 			(uuid "c4481c16-7e6e-45be-8f95-d6d1ecddeb1c")
 		)
 		(fp_line
-			(start 7.25 6.73)
-			(end 7.25 5.93)
+			(start -3.5 -6.23)
+			(end -3.25 -6.73)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
 			(layer "F.Fab")
-			(uuid "4dfbfd9b-a21f-46f6-8fd5-21c66c36a966")
+			(uuid "a98fbd85-be1a-480c-9770-e28683480a72")
+		)
+		(fp_line
+			(start -6.4 -6.67)
+			(end -6.4 5.93)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "F.Fab")
+			(uuid "5517e095-5617-46f1-b112-c31b4fdbe9d7")
+		)
+		(fp_line
+			(start 6.4 -6.67)
+			(end -6.4 -6.67)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "F.Fab")
+			(uuid "9a8f13f2-2e42-48b5-bad6-d76e9ac3ec20")
+		)
+		(fp_line
+			(start -3.75 -6.73)
+			(end -3.5 -6.23)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "F.Fab")
+			(uuid "370fba53-a948-4457-bab8-29718e292269")
 		)
 		(fp_text user "PCB Edge"
 			(at 0 4.97 0)
@@ -251415,12 +252447,9 @@
 		)
 	)
 	(footprint "Connector_USB:USB_A_Receptacle_XKB_U231-091N-4BLRA00-S"
-		(sheetfile "04_usb_c_io.kicad_sch")
-		(sheetname "/Native USB-C I/O/")
-		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/ad4977fa-001c-52f8-9746-8ebc5b6d8c74")
 		(layer "F.Cu")
 		(uuid "e7bbfa0b-9203-41e4-833a-9ffef6b07a4d")
-		(at 4.5 115 270)
+		(at 4.5 115 -90)
 		(descr "USB 3.0 Type A, right-angle, SMT, https://datasheet.lcsc.com/lcsc/2110100130_XKB-Connectivity-U231-091N-4BLRA00-S_C2880618.pdf")
 		(tags "USB A Type-A Receptacle SMD")
 		(property "Reference" "J24"
@@ -251475,36 +252504,49 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c2f27701-20d8-5606-923c-346620649bbd")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 		(property "Manufacturer" "XKB Connectivity"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a6c50076-1510-531b-a164-15745ac0ee45")
-			(effects (font (size 1 1) (thickness 0.15)))
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
+		(path "/30db74da-1f83-533d-806d-fc7ae010cbe5/ad4977fa-001c-52f8-9746-8ebc5b6d8c74")
+		(sheetname "/Native USB-C I/O/")
+		(sheetfile "04_usb_c_io.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -6.67 -7.22)
-			(end -4.55 -7.22)
+			(start -6.67 2.48)
+			(end -6.67 6.38)
 			(stroke
 				(width 0.12)
-				(type solid)
+				(type default)
 			)
 			(layer "F.SilkS")
-			(uuid "2b6abc08-007c-4a05-8c00-358ec5855b3e")
+			(uuid "e31dbb9f-31c5-4cfb-8dd0-ee4943c9a275")
 		)
 		(fp_line
-			(start -6.67 -7)
-			(end -6.67 -7.22)
+			(start 6.67 2.48)
+			(end 6.67 6.38)
 			(stroke
 				(width 0.12)
-				(type solid)
+				(type default)
 			)
 			(layer "F.SilkS")
-			(uuid "3516690c-5576-44f3-b3a0-bb8db3b43bcb")
+			(uuid "fd52e07e-44f0-4c48-a591-fd0f65369d4f")
 		)
 		(fp_line
 			(start -6.67 -3.5)
@@ -251517,24 +252559,34 @@
 			(uuid "c29b795f-ffa6-4bc2-9c51-24718e01079e")
 		)
 		(fp_line
-			(start -6.67 2.48)
-			(end -6.67 6.38)
-			(stroke
-				(width 0.12)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "e31dbb9f-31c5-4cfb-8dd0-ee4943c9a275")
-		)
-		(fp_line
-			(start -3.35 -7.4)
-			(end -2.65 -7.4)
+			(start 6.67 -3.5)
+			(end 6.67 -0.58)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "8be624a6-c9b2-4438-8224-2bd69f47c2b2")
+			(uuid "4d6076b6-4fa5-483c-965b-c24d67dc9c6b")
+		)
+		(fp_line
+			(start -6.67 -7)
+			(end -6.67 -7.22)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "3516690c-5576-44f3-b3a0-bb8db3b43bcb")
+		)
+		(fp_line
+			(start -6.67 -7.22)
+			(end -4.55 -7.22)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "2b6abc08-007c-4a05-8c00-358ec5855b3e")
 		)
 		(fp_line
 			(start 4.55 -7.22)
@@ -251557,34 +252609,14 @@
 			(uuid "82e689c9-1069-47ee-b429-d249ee763b79")
 		)
 		(fp_line
-			(start 6.67 -3.5)
-			(end 6.67 -0.58)
+			(start -3.35 -7.4)
+			(end -2.65 -7.4)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4d6076b6-4fa5-483c-965b-c24d67dc9c6b")
-		)
-		(fp_line
-			(start 6.67 2.48)
-			(end 6.67 6.38)
-			(stroke
-				(width 0.12)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "fd52e07e-44f0-4c48-a591-fd0f65369d4f")
-		)
-		(fp_line
-			(start -7.75 -7.7)
-			(end -7.75 7.6)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "685fa681-e2f5-41ab-b611-14446198a99b")
+			(uuid "8be624a6-c9b2-4438-8224-2bd69f47c2b2")
 		)
 		(fp_line
 			(start -7.75 7.6)
@@ -251597,16 +252629,6 @@
 			(uuid "212367c8-6bdd-42a9-a714-71a6f6e5e1e8")
 		)
 		(fp_line
-			(start 7.75 -7.7)
-			(end -7.75 -7.7)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "96630b1f-511c-400a-b00d-46aeec74120d")
-		)
-		(fp_line
 			(start 7.75 7.6)
 			(end 7.75 -7.7)
 			(stroke
@@ -251617,14 +252639,24 @@
 			(uuid "53feef3e-344e-4e7f-ad0f-09e5bcf7d346")
 		)
 		(fp_line
-			(start -7.25 6.5)
-			(end -7.25 7.1)
+			(start -7.75 -7.7)
+			(end -7.75 7.6)
 			(stroke
-				(width 0.1)
+				(width 0.05)
 				(type solid)
 			)
-			(layer "F.Fab")
-			(uuid "941b84d7-e7d0-4ede-80a1-33515de61af6")
+			(layer "F.CrtYd")
+			(uuid "685fa681-e2f5-41ab-b611-14446198a99b")
+		)
+		(fp_line
+			(start 7.75 -7.7)
+			(end -7.75 -7.7)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "96630b1f-511c-400a-b00d-46aeec74120d")
 		)
 		(fp_line
 			(start -7.25 7.1)
@@ -251637,14 +252669,14 @@
 			(uuid "bf6384b8-6572-4c51-8207-e003925e712d")
 		)
 		(fp_line
-			(start -6.55 -7.1)
-			(end -6.55 6.5)
+			(start -7.25 6.5)
+			(end -7.25 7.1)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "95448032-c39b-400a-a440-f83cab5cbbdb")
+			(uuid "941b84d7-e7d0-4ede-80a1-33515de61af6")
 		)
 		(fp_line
 			(start -6.55 6.5)
@@ -251657,34 +252689,14 @@
 			(uuid "d739cacc-e3ca-45ee-9104-1c186f45ed33")
 		)
 		(fp_line
-			(start -3.5 -7.1)
-			(end -3 -6.45)
+			(start 6.55 6.5)
+			(end 7.25 6.5)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "36bccc2e-97b7-4c24-a56b-91c340172711")
-		)
-		(fp_line
-			(start -3 -6.45)
-			(end -2.5 -7.1)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "6d2eec7b-0422-4768-9bf4-13c0ae7d3835")
-		)
-		(fp_line
-			(start 6.55 -7.1)
-			(end -6.55 -7.1)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "9b6477ff-da9a-41cf-acf3-f2b6cc158ffb")
+			(uuid "918e20f9-b2e6-497a-a680-ff890fbe7eb3")
 		)
 		(fp_line
 			(start 6.55 6.5)
@@ -251697,16 +252709,6 @@
 			(uuid "4ca91e66-acaa-4cd3-aafa-f6ff284387fe")
 		)
 		(fp_line
-			(start 6.55 6.5)
-			(end 7.25 6.5)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "918e20f9-b2e6-497a-a680-ff890fbe7eb3")
-		)
-		(fp_line
 			(start 7.25 6.5)
 			(end 7.25 7.1)
 			(stroke
@@ -251715,6 +252717,46 @@
 			)
 			(layer "F.Fab")
 			(uuid "d06b0108-e619-457a-a596-bf3bdcf04a79")
+		)
+		(fp_line
+			(start -3 -6.45)
+			(end -2.5 -7.1)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "6d2eec7b-0422-4768-9bf4-13c0ae7d3835")
+		)
+		(fp_line
+			(start -6.55 -7.1)
+			(end -6.55 6.5)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "95448032-c39b-400a-a440-f83cab5cbbdb")
+		)
+		(fp_line
+			(start -3.5 -7.1)
+			(end -3 -6.45)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "36bccc2e-97b7-4c24-a56b-91c340172711")
+		)
+		(fp_line
+			(start 6.55 -7.1)
+			(end -6.55 -7.1)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "9b6477ff-da9a-41cf-acf3-f2b6cc158ffb")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 -3.45 0)
@@ -251806,17 +252848,17 @@
 			(property pad_prop_mechanical)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(uuid "22c2af95-e179-47f4-8f17-c04d214a82a5")
 			(net "GND")
+			(uuid "22c2af95-e179-47f4-8f17-c04d214a82a5")
 		)
 		(pad "SH" smd roundrect
 			(at -6.4 0.95 270)
 			(size 1.2 2.54)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
+			(net "GND")
 			(thermal_bridge_angle 45)
 			(uuid "5a537c53-b724-4e33-8a38-39a897e2e64c")
-			(net "GND")
 		)
 		(pad "SH" thru_hole oval
 			(at 6.4 -5.25 270)
@@ -251825,17 +252867,17 @@
 			(property pad_prop_mechanical)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(uuid "64feba36-443f-4ef2-8fc4-f15ff16c4bfc")
 			(net "GND")
+			(uuid "64feba36-443f-4ef2-8fc4-f15ff16c4bfc")
 		)
 		(pad "SH" smd roundrect
 			(at 6.4 0.95 270)
 			(size 1.2 2.54)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
+			(net "GND")
 			(thermal_bridge_angle 45)
 			(uuid "d7e28078-2764-41c1-9ef4-ed3d7e60cce7")
-			(net "GND")
 		)
 		(embedded_fonts no)
 		(model "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_A_Receptacle_XKB_U231-091N-4BLRA00-S.step"
@@ -256991,6 +258033,129 @@
 			)
 		)
 	)
+	(footprint "MountingHole:MountingHole_2.7mm_M2.5"
+		(layer "F.Cu")
+		(uuid "ed7913e7-2f70-442a-b73b-92eab42f5995")
+		(at 124.1 180.4)
+		(descr "Mounting Hole 2.7mm, M2.5, no annular, generated by kicad-footprint-generator mountinghole.py")
+		(tags "mountinghole M2.5")
+		(property "Reference" "H12"
+			(at 0 -3.65 0)
+			(layer "F.SilkS")
+			(uuid "508e1bd4-80c4-4557-b76f-94291c3935c6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "M2.5 isolated mainboard mounting hole"
+			(at 0 3.65 0)
+			(layer "F.Fab")
+			(uuid "46a3303f-e2ee-4774-9373-f186d0ebdce6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d2a4ee5d-d91b-42e4-a7c9-c5e3509e57e2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a7577df6-7853-411d-ae0c-96bb124b99ce")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "KiLib_Generator" "mounting_hardware/mounting_hole"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c1cb8e71-8b81-435f-bb91-ab33f37d4cab")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9a8f66c3-15da-4809-89a1-da9510d1d38e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property ki_fp_filters "MountingHole*")
+		(sheetname "/Mu Carrier/")
+		(sheetfile "03_mu_carrier.kicad_sch")
+		(attr exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 2.7 0)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(fill no)
+			(layer "Cmts.User")
+			(uuid "1539aa40-1d11-4225-8865-4ff678bb2bb9")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 2.95 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "19b51a93-1b97-4a6b-bd67-9f710d1897b8")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "880d94cd-14e5-4e3d-9b90-808208e453af")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 2.7 2.7)
+			(drill 2.7)
+			(layers "*.Cu" "*.Mask")
+			(uuid "016539cb-d944-43f0-8061-3bd1ebe0df7d")
+		)
+		(embedded_fonts no)
+	)
 	(footprint "Diode_SMD:D_SMA"
 		(layer "F.Cu")
 		(uuid "ee133904-28a1-5c47-8699-b7d1e0261b71")
@@ -261353,7 +262518,6 @@
 		)
 	)
 	(footprint "ducktop2:Texas_RPW0010A_VQFN-HR-10_2x2mm"
-		(attr )
 		(layer "F.Cu")
 		(uuid "f3e7117e-2ce2-52ff-a215-5bf2fd362de7")
 		(at 210.5 151.05)
@@ -263307,7 +264471,7 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "f5bc7a5d-5c37-51a3-88b0-70b0de672d99")
-		(at 346.18 114.5)
+		(at 313.505 106.9)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C32"
@@ -267216,7 +268380,7 @@
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "f946dfd3-eb21-56d1-b321-99e3fa78cc74")
-		(at 347.0 47.0 0)
+		(at 347 47)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R153"
@@ -275263,7 +276427,7 @@
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "ffd04452-c160-5778-9520-20ae00746807")
-		(at 351.19 22)
+		(at 322.29 30.55)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R154"
@@ -275613,37 +276777,6 @@
 			)
 		)
 	)
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
-
-
-
-
 	(gr_line
 		(start 0 0)
 		(end 10 0)
@@ -275654,7 +276787,17 @@
 		(layer "Edge.Cuts")
 		(uuid "c42ee21a-d609-4ad5-a254-4ab7a5838fb0")
 	)
-(gr_line
+	(gr_line
+		(start 0 185)
+		(end 0 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "bcfe7766-e2c4-4bc3-95b3-d3c308f26e84")
+	)
+	(gr_line
 		(start 10 0)
 		(end 10 18)
 		(stroke
@@ -275664,7 +276807,7 @@
 		(layer "Edge.Cuts")
 		(uuid "8271230f-e98a-4523-9b8b-3efd48cce363")
 	)
-(gr_line
+	(gr_line
 		(start 10 18)
 		(end 48 18)
 		(stroke
@@ -275674,17 +276817,7 @@
 		(layer "Edge.Cuts")
 		(uuid "60e8d30b-4d3b-45e9-8f94-251767039268")
 	)
-(gr_line
-		(start 48 18)
-		(end 48 0)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Edge.Cuts")
-		(uuid "d843df2f-1d8e-46ca-a03f-6ac3bd5320ca")
-	)
-(gr_line
+	(gr_line
 		(start 48 0)
 		(end 310 0)
 		(stroke
@@ -275694,7 +276827,17 @@
 		(layer "Edge.Cuts")
 		(uuid "ac41d790-10d2-4313-ba98-c62143f3a6ad")
 	)
-(gr_line
+	(gr_line
+		(start 48 18)
+		(end 48 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "d843df2f-1d8e-46ca-a03f-6ac3bd5320ca")
+	)
+	(gr_line
 		(start 310 0)
 		(end 310 18)
 		(stroke
@@ -275704,7 +276847,7 @@
 		(layer "Edge.Cuts")
 		(uuid "f3f33304-b63a-4ea7-a0ab-568b8d207dde")
 	)
-(gr_line
+	(gr_line
 		(start 310 18)
 		(end 346 18)
 		(stroke
@@ -275714,17 +276857,7 @@
 		(layer "Edge.Cuts")
 		(uuid "c1a41001-f22b-444d-ac62-9f8fa4cede67")
 	)
-(gr_line
-		(start 346 18)
-		(end 346 0)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "Edge.Cuts")
-		(uuid "2083f82b-3413-4d99-b0f0-13df270416ec")
-	)
-(gr_line
+	(gr_line
 		(start 346 0)
 		(end 358 0)
 		(stroke
@@ -275734,15 +276867,15 @@
 		(layer "Edge.Cuts")
 		(uuid "d7cb4eee-731b-4a2e-a8c0-97106a196560")
 	)
-(gr_line
-		(start 0 185)
-		(end 0 0)
+	(gr_line
+		(start 346 18)
+		(end 346 0)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
 		(layer "Edge.Cuts")
-		(uuid "bcfe7766-e2c4-4bc3-95b3-d3c308f26e84")
+		(uuid "2083f82b-3413-4d99-b0f0-13df270416ec")
 	)
 	(gr_line
 		(start 352.78 88)
@@ -275804,6 +276937,43 @@
 		(layer "Edge.Cuts")
 		(uuid "1df47d6b-2f83-5ae5-9eb0-578422aeb732")
 	)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -277780,539 +278950,6 @@
 			(checksum "28E698F4A09E3FBC6A2F2ADD29A63A1C")
 		)
 	)
-	(footprint "Package_TO_SOT_SMD:SOT-23"
-		(sheetfile "08_internal_services.kicad_sch")
-		(sheetname "/Internal Services/")
-		(path "/6e8963da-1a38-5ee1-aef2-2f991522fe35/a9e1cea9-19c0-5d9d-a9d4-3e4804a45099")
-		(at 170 55 0)
-		(uuid "e27d2741-8063-5437-9bbd-6819924c950a")
-		(version 20260206)
-		(generator "kicad-footprint-generator")
-		(layer "F.Cu")
-		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
-		(tags "SOT TO_SOT_SMD")
-		(property "Reference" "Q60B"
-			(at 0 -2.4 0)
-			(layer "F.SilkS")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "2N7002 DFU-mode USB mux force-enable"
-			(at 0 2.4 0)
-			(layer "F.Fab")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "KiLib_Generator" "package/gullwing"
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1d4613c4-5fe3-597d-95d1-72a7c3148704")
-			(effects (font (size 1 1) (thickness 0.15)))
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "7df14bdb-ce6d-514c-9e5d-f11c373e67e8")
-			(effects (font (size 1 1) (thickness 0.15)))
-		)
-		(property "MPN" "2N7002KT1G"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "285da843-e141-576f-9ee1-fe7883c50db7")
-			(effects (font (size 1 1) (thickness 0.15)))
-		)
-		(property "Manufacturer" "onsemi"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b8256941-0a20-5aba-a706-714a662e3cdd")
-			(effects (font (size 1 1) (thickness 0.15)))
-		)
-		(attr smd)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -0.76 -1.56)
-			(end 0.76 -1.56)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-		)
-		(fp_line
-			(start -0.76 -1.51)
-			(end -0.76 -1.56)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-		)
-		(fp_line
-			(start -0.76 0.39)
-			(end -0.76 -0.39)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-		)
-		(fp_line
-			(start -0.76 1.56)
-			(end -0.76 1.51)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-		)
-		(fp_line
-			(start 0.76 -1.56)
-			(end 0.76 -0.56)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-		)
-		(fp_line
-			(start 0.76 0.56)
-			(end 0.76 1.56)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-		)
-		(fp_line
-			(start 0.76 1.56)
-			(end -0.76 1.56)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-		)
-		(fp_poly
-			(pts
-				(xy -1.3 -0.38)
-				(xy -1.06 -0.05)
-				(xy -1.54 -0.05)
-			)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(fill yes)
-			(layer "F.SilkS")
-		)
-		(fp_line
-			(start -1.93 -1.5)
-			(end -0.9 -1.5)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -1.93 -0.39)
-			(end -1.93 -1.5)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -1.93 0.39)
-			(end -0.9 0.39)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -1.93 1.5)
-			(end -1.93 0.39)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -0.9 -1.7)
-			(end 0.9 -1.7)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -0.9 -1.5)
-			(end -0.9 -1.7)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -0.9 -0.39)
-			(end -1.93 -0.39)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -0.9 0.39)
-			(end -0.9 -0.39)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -0.9 1.5)
-			(end -1.93 1.5)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start -0.9 1.7)
-			(end -0.9 1.5)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start 0.9 -1.7)
-			(end 0.9 -0.55)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start 0.9 -0.55)
-			(end 1.93 -0.55)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start 0.9 0.55)
-			(end 0.9 1.7)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start 0.9 1.7)
-			(end -0.9 1.7)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start 1.93 -0.55)
-			(end 1.93 0.55)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_line
-			(start 1.93 0.55)
-			(end 0.9 0.55)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-		)
-		(fp_poly
-			(pts
-				(xy -0.325 -1.45)
-				(xy 0.65 -1.45)
-				(xy 0.65 1.45)
-				(xy -0.65 1.45)
-				(xy -0.65 -1.125)
-			)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.Fab")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 90)
-			(layer "F.Fab")
-			(effects
-				(font
-					(size 0.72 0.72)
-					(thickness 0.11)
-				)
-			)
-		)
-		(pad "1" smd roundrect
-			(at -0.9375 -0.95)
-			(size 1.475 0.6)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "/EC_DFU_SEL")
-		)
-		(pad "2" smd roundrect
-			(at -0.9375 0.95)
-			(size 1.475 0.6)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "GND")
-		)
-		(pad "3" smd roundrect
-			(at 0.9375 0)
-			(size 1.475 0.6)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "/Internal Services/EC_USB_OE_N")
-		)
-		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-	)
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
 
 	(zone
 		(net "GND")
@@ -278391,7 +279028,7 @@
 			(thermal_bridge_width 0.5)
 			(island_removal_mode 2)
 		)
-		(polygon (pts (xy 1.300 33.025) (xy 358.000 33.025) (xy 358.000 160.250) (xy 1.300 160.250)))
+		(polygon (pts (xy 1.300 33.025) (xy 338.725 33.025) (xy 338.725 160.250) (xy 1.300 160.250)))
 	)
 
 	(zone
@@ -278407,7 +279044,7 @@
 			(thermal_bridge_width 0.5)
 			(island_removal_mode 2)
 		)
-		(polygon (pts (xy 3.745 1.500) (xy 358.000 1.500) (xy 358.000 182.475) (xy 3.745 182.475)))
+		(polygon (pts (xy 3.745 1.500) (xy 355.055 1.500) (xy 355.055 182.475) (xy 3.745 182.475)))
 	)
 
 	(zone
@@ -278439,7 +279076,7 @@
 			(thermal_bridge_width 0.5)
 			(island_removal_mode 2)
 		)
-		(polygon (pts (xy 1.275 7.185) (xy 358.000 7.185) (xy 358.000 185.000) (xy 1.275 185.000)))
+		(polygon (pts (xy 1.275 12.650) (xy 358.000 12.650) (xy 358.000 185.000) (xy 1.275 185.000)))
 	)
 
 	(zone
@@ -278496,7 +279133,7 @@
 		(uuid "d5b0000000000b-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 43.500 146.000) (xy 43.234 147.339) (xy 42.475 148.475) (xy 41.339 149.234) (xy 40.000 149.500) (xy 38.661 149.234) (xy 37.525 148.475) (xy 36.766 147.339) (xy 36.500 146.000) (xy 36.766 144.661) (xy 37.525 143.525) (xy 38.661 142.766) (xy 40.000 142.500) (xy 41.339 142.766) (xy 42.475 143.525) (xy 43.234 144.661)))
+		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
 	)
 
 	(zone
@@ -278505,7 +279142,7 @@
 		(uuid "d5b0000000000c-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 43.500 146.000) (xy 43.234 147.339) (xy 42.475 148.475) (xy 41.339 149.234) (xy 40.000 149.500) (xy 38.661 149.234) (xy 37.525 148.475) (xy 36.766 147.339) (xy 36.500 146.000) (xy 36.766 144.661) (xy 37.525 143.525) (xy 38.661 142.766) (xy 40.000 142.500) (xy 41.339 142.766) (xy 42.475 143.525) (xy 43.234 144.661)))
+		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
 	)
 
 	(zone
@@ -278514,7 +279151,7 @@
 		(uuid "d5b0000000000d-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 43.500 146.000) (xy 43.234 147.339) (xy 42.475 148.475) (xy 41.339 149.234) (xy 40.000 149.500) (xy 38.661 149.234) (xy 37.525 148.475) (xy 36.766 147.339) (xy 36.500 146.000) (xy 36.766 144.661) (xy 37.525 143.525) (xy 38.661 142.766) (xy 40.000 142.500) (xy 41.339 142.766) (xy 42.475 143.525) (xy 43.234 144.661)))
+		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
 	)
 
 	(zone
@@ -278523,7 +279160,7 @@
 		(uuid "d5b0000000000e-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 43.500 146.000) (xy 43.234 147.339) (xy 42.475 148.475) (xy 41.339 149.234) (xy 40.000 149.500) (xy 38.661 149.234) (xy 37.525 148.475) (xy 36.766 147.339) (xy 36.500 146.000) (xy 36.766 144.661) (xy 37.525 143.525) (xy 38.661 142.766) (xy 40.000 142.500) (xy 41.339 142.766) (xy 42.475 143.525) (xy 43.234 144.661)))
+		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
 	)
 
 	(zone
@@ -278532,7 +279169,7 @@
 		(uuid "d5b0000000000f-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 43.500 146.000) (xy 43.234 147.339) (xy 42.475 148.475) (xy 41.339 149.234) (xy 40.000 149.500) (xy 38.661 149.234) (xy 37.525 148.475) (xy 36.766 147.339) (xy 36.500 146.000) (xy 36.766 144.661) (xy 37.525 143.525) (xy 38.661 142.766) (xy 40.000 142.500) (xy 41.339 142.766) (xy 42.475 143.525) (xy 43.234 144.661)))
+		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
 	)
 
 	(zone
@@ -278541,7 +279178,7 @@
 		(uuid "d5b00000000010-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 43.500 146.000) (xy 43.234 147.339) (xy 42.475 148.475) (xy 41.339 149.234) (xy 40.000 149.500) (xy 38.661 149.234) (xy 37.525 148.475) (xy 36.766 147.339) (xy 36.500 146.000) (xy 36.766 144.661) (xy 37.525 143.525) (xy 38.661 142.766) (xy 40.000 142.500) (xy 41.339 142.766) (xy 42.475 143.525) (xy 43.234 144.661)))
+		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
 	)
 
 	(zone
@@ -278550,7 +279187,7 @@
 		(uuid "d5b00000000011-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 43.500 146.000) (xy 43.234 147.339) (xy 42.475 148.475) (xy 41.339 149.234) (xy 40.000 149.500) (xy 38.661 149.234) (xy 37.525 148.475) (xy 36.766 147.339) (xy 36.500 146.000) (xy 36.766 144.661) (xy 37.525 143.525) (xy 38.661 142.766) (xy 40.000 142.500) (xy 41.339 142.766) (xy 42.475 143.525) (xy 43.234 144.661)))
+		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
 	)
 
 	(zone
@@ -278559,7 +279196,7 @@
 		(uuid "d5b00000000012-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 31.500 158.000) (xy 31.234 159.339) (xy 30.475 160.475) (xy 29.339 161.234) (xy 28.000 161.500) (xy 26.661 161.234) (xy 25.525 160.475) (xy 24.766 159.339) (xy 24.500 158.000) (xy 24.766 156.661) (xy 25.525 155.525) (xy 26.661 154.766) (xy 28.000 154.500) (xy 29.339 154.766) (xy 30.475 155.525) (xy 31.234 156.661)))
+		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
 	)
 
 	(zone
@@ -278568,7 +279205,7 @@
 		(uuid "d5b00000000013-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 31.500 158.000) (xy 31.234 159.339) (xy 30.475 160.475) (xy 29.339 161.234) (xy 28.000 161.500) (xy 26.661 161.234) (xy 25.525 160.475) (xy 24.766 159.339) (xy 24.500 158.000) (xy 24.766 156.661) (xy 25.525 155.525) (xy 26.661 154.766) (xy 28.000 154.500) (xy 29.339 154.766) (xy 30.475 155.525) (xy 31.234 156.661)))
+		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
 	)
 
 	(zone
@@ -278577,7 +279214,7 @@
 		(uuid "d5b00000000014-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 31.500 158.000) (xy 31.234 159.339) (xy 30.475 160.475) (xy 29.339 161.234) (xy 28.000 161.500) (xy 26.661 161.234) (xy 25.525 160.475) (xy 24.766 159.339) (xy 24.500 158.000) (xy 24.766 156.661) (xy 25.525 155.525) (xy 26.661 154.766) (xy 28.000 154.500) (xy 29.339 154.766) (xy 30.475 155.525) (xy 31.234 156.661)))
+		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
 	)
 
 	(zone
@@ -278586,7 +279223,7 @@
 		(uuid "d5b00000000015-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 31.500 158.000) (xy 31.234 159.339) (xy 30.475 160.475) (xy 29.339 161.234) (xy 28.000 161.500) (xy 26.661 161.234) (xy 25.525 160.475) (xy 24.766 159.339) (xy 24.500 158.000) (xy 24.766 156.661) (xy 25.525 155.525) (xy 26.661 154.766) (xy 28.000 154.500) (xy 29.339 154.766) (xy 30.475 155.525) (xy 31.234 156.661)))
+		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
 	)
 
 	(zone
@@ -278595,7 +279232,7 @@
 		(uuid "d5b00000000016-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 31.500 158.000) (xy 31.234 159.339) (xy 30.475 160.475) (xy 29.339 161.234) (xy 28.000 161.500) (xy 26.661 161.234) (xy 25.525 160.475) (xy 24.766 159.339) (xy 24.500 158.000) (xy 24.766 156.661) (xy 25.525 155.525) (xy 26.661 154.766) (xy 28.000 154.500) (xy 29.339 154.766) (xy 30.475 155.525) (xy 31.234 156.661)))
+		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
 	)
 
 	(zone
@@ -278604,7 +279241,7 @@
 		(uuid "d5b00000000017-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 31.500 158.000) (xy 31.234 159.339) (xy 30.475 160.475) (xy 29.339 161.234) (xy 28.000 161.500) (xy 26.661 161.234) (xy 25.525 160.475) (xy 24.766 159.339) (xy 24.500 158.000) (xy 24.766 156.661) (xy 25.525 155.525) (xy 26.661 154.766) (xy 28.000 154.500) (xy 29.339 154.766) (xy 30.475 155.525) (xy 31.234 156.661)))
+		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
 	)
 
 	(zone
@@ -278613,7 +279250,7 @@
 		(uuid "d5b00000000018-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 31.500 158.000) (xy 31.234 159.339) (xy 30.475 160.475) (xy 29.339 161.234) (xy 28.000 161.500) (xy 26.661 161.234) (xy 25.525 160.475) (xy 24.766 159.339) (xy 24.500 158.000) (xy 24.766 156.661) (xy 25.525 155.525) (xy 26.661 154.766) (xy 28.000 154.500) (xy 29.339 154.766) (xy 30.475 155.525) (xy 31.234 156.661)))
+		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
 	)
 
 	(zone
@@ -278622,7 +279259,7 @@
 		(uuid "d5b00000000019-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
+		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
 	)
 
 	(zone
@@ -278631,7 +279268,7 @@
 		(uuid "d5b0000000001a-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
+		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
 	)
 
 	(zone
@@ -278640,7 +279277,7 @@
 		(uuid "d5b0000000001b-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
+		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
 	)
 
 	(zone
@@ -278649,7 +279286,7 @@
 		(uuid "d5b0000000001c-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
+		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
 	)
 
 	(zone
@@ -278658,7 +279295,7 @@
 		(uuid "d5b0000000001d-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
+		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
 	)
 
 	(zone
@@ -278667,7 +279304,7 @@
 		(uuid "d5b0000000001e-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
+		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
 	)
 
 	(zone
@@ -278676,7 +279313,7 @@
 		(uuid "d5b0000000001f-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
+		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
 	)
 
 	(zone
@@ -278685,7 +279322,7 @@
 		(uuid "d5b00000000020-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
+		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
 	)
 
 	(zone
@@ -278694,7 +279331,7 @@
 		(uuid "d5b00000000021-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
+		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
 	)
 
 	(zone
@@ -278703,7 +279340,7 @@
 		(uuid "d5b00000000022-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
+		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
 	)
 
 	(zone
@@ -278712,7 +279349,7 @@
 		(uuid "d5b00000000023-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
+		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
 	)
 
 	(zone
@@ -278721,7 +279358,7 @@
 		(uuid "d5b00000000024-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
+		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
 	)
 
 	(zone
@@ -278730,7 +279367,7 @@
 		(uuid "d5b00000000025-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
+		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
 	)
 
 	(zone
@@ -278739,7 +279376,7 @@
 		(uuid "d5b00000000026-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
+		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
 	)
 
 	(zone
@@ -278748,7 +279385,7 @@
 		(uuid "d5b00000000027-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 331.500 140.000) (xy 331.234 141.339) (xy 330.475 142.475) (xy 329.339 143.234) (xy 328.000 143.500) (xy 326.661 143.234) (xy 325.525 142.475) (xy 324.766 141.339) (xy 324.500 140.000) (xy 324.766 138.661) (xy 325.525 137.525) (xy 326.661 136.766) (xy 328.000 136.500) (xy 329.339 136.766) (xy 330.475 137.525) (xy 331.234 138.661)))
+		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
 	)
 
 	(zone
@@ -278757,7 +279394,7 @@
 		(uuid "d5b00000000028-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 331.500 140.000) (xy 331.234 141.339) (xy 330.475 142.475) (xy 329.339 143.234) (xy 328.000 143.500) (xy 326.661 143.234) (xy 325.525 142.475) (xy 324.766 141.339) (xy 324.500 140.000) (xy 324.766 138.661) (xy 325.525 137.525) (xy 326.661 136.766) (xy 328.000 136.500) (xy 329.339 136.766) (xy 330.475 137.525) (xy 331.234 138.661)))
+		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
 	)
 
 	(zone
@@ -278766,7 +279403,7 @@
 		(uuid "d5b00000000029-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 331.500 140.000) (xy 331.234 141.339) (xy 330.475 142.475) (xy 329.339 143.234) (xy 328.000 143.500) (xy 326.661 143.234) (xy 325.525 142.475) (xy 324.766 141.339) (xy 324.500 140.000) (xy 324.766 138.661) (xy 325.525 137.525) (xy 326.661 136.766) (xy 328.000 136.500) (xy 329.339 136.766) (xy 330.475 137.525) (xy 331.234 138.661)))
+		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
 	)
 
 	(zone
@@ -278775,7 +279412,7 @@
 		(uuid "d5b0000000002a-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 331.500 140.000) (xy 331.234 141.339) (xy 330.475 142.475) (xy 329.339 143.234) (xy 328.000 143.500) (xy 326.661 143.234) (xy 325.525 142.475) (xy 324.766 141.339) (xy 324.500 140.000) (xy 324.766 138.661) (xy 325.525 137.525) (xy 326.661 136.766) (xy 328.000 136.500) (xy 329.339 136.766) (xy 330.475 137.525) (xy 331.234 138.661)))
+		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
 	)
 
 	(zone
@@ -278784,7 +279421,7 @@
 		(uuid "d5b0000000002b-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 331.500 140.000) (xy 331.234 141.339) (xy 330.475 142.475) (xy 329.339 143.234) (xy 328.000 143.500) (xy 326.661 143.234) (xy 325.525 142.475) (xy 324.766 141.339) (xy 324.500 140.000) (xy 324.766 138.661) (xy 325.525 137.525) (xy 326.661 136.766) (xy 328.000 136.500) (xy 329.339 136.766) (xy 330.475 137.525) (xy 331.234 138.661)))
+		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
 	)
 
 	(zone
@@ -278793,7 +279430,7 @@
 		(uuid "d5b0000000002c-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 331.500 140.000) (xy 331.234 141.339) (xy 330.475 142.475) (xy 329.339 143.234) (xy 328.000 143.500) (xy 326.661 143.234) (xy 325.525 142.475) (xy 324.766 141.339) (xy 324.500 140.000) (xy 324.766 138.661) (xy 325.525 137.525) (xy 326.661 136.766) (xy 328.000 136.500) (xy 329.339 136.766) (xy 330.475 137.525) (xy 331.234 138.661)))
+		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
 	)
 
 	(zone
@@ -278802,7 +279439,7 @@
 		(uuid "d5b0000000002d-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 331.500 140.000) (xy 331.234 141.339) (xy 330.475 142.475) (xy 329.339 143.234) (xy 328.000 143.500) (xy 326.661 143.234) (xy 325.525 142.475) (xy 324.766 141.339) (xy 324.500 140.000) (xy 324.766 138.661) (xy 325.525 137.525) (xy 326.661 136.766) (xy 328.000 136.500) (xy 329.339 136.766) (xy 330.475 137.525) (xy 331.234 138.661)))
+		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
 	)
 
 	(zone
@@ -278874,7 +279511,7 @@
 		(uuid "d5b00000000035-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 307.500 146.000) (xy 307.234 147.339) (xy 306.475 148.475) (xy 305.339 149.234) (xy 304.000 149.500) (xy 302.661 149.234) (xy 301.525 148.475) (xy 300.766 147.339) (xy 300.500 146.000) (xy 300.766 144.661) (xy 301.525 143.525) (xy 302.661 142.766) (xy 304.000 142.500) (xy 305.339 142.766) (xy 306.475 143.525) (xy 307.234 144.661)))
+		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
 	)
 
 	(zone
@@ -278883,7 +279520,7 @@
 		(uuid "d5b00000000036-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 307.500 146.000) (xy 307.234 147.339) (xy 306.475 148.475) (xy 305.339 149.234) (xy 304.000 149.500) (xy 302.661 149.234) (xy 301.525 148.475) (xy 300.766 147.339) (xy 300.500 146.000) (xy 300.766 144.661) (xy 301.525 143.525) (xy 302.661 142.766) (xy 304.000 142.500) (xy 305.339 142.766) (xy 306.475 143.525) (xy 307.234 144.661)))
+		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
 	)
 
 	(zone
@@ -278892,7 +279529,7 @@
 		(uuid "d5b00000000037-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 307.500 146.000) (xy 307.234 147.339) (xy 306.475 148.475) (xy 305.339 149.234) (xy 304.000 149.500) (xy 302.661 149.234) (xy 301.525 148.475) (xy 300.766 147.339) (xy 300.500 146.000) (xy 300.766 144.661) (xy 301.525 143.525) (xy 302.661 142.766) (xy 304.000 142.500) (xy 305.339 142.766) (xy 306.475 143.525) (xy 307.234 144.661)))
+		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
 	)
 
 	(zone
@@ -278901,7 +279538,7 @@
 		(uuid "d5b00000000038-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 307.500 146.000) (xy 307.234 147.339) (xy 306.475 148.475) (xy 305.339 149.234) (xy 304.000 149.500) (xy 302.661 149.234) (xy 301.525 148.475) (xy 300.766 147.339) (xy 300.500 146.000) (xy 300.766 144.661) (xy 301.525 143.525) (xy 302.661 142.766) (xy 304.000 142.500) (xy 305.339 142.766) (xy 306.475 143.525) (xy 307.234 144.661)))
+		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
 	)
 
 	(zone
@@ -278910,7 +279547,7 @@
 		(uuid "d5b00000000039-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 307.500 146.000) (xy 307.234 147.339) (xy 306.475 148.475) (xy 305.339 149.234) (xy 304.000 149.500) (xy 302.661 149.234) (xy 301.525 148.475) (xy 300.766 147.339) (xy 300.500 146.000) (xy 300.766 144.661) (xy 301.525 143.525) (xy 302.661 142.766) (xy 304.000 142.500) (xy 305.339 142.766) (xy 306.475 143.525) (xy 307.234 144.661)))
+		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
 	)
 
 	(zone
@@ -278919,7 +279556,7 @@
 		(uuid "d5b0000000003a-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 307.500 146.000) (xy 307.234 147.339) (xy 306.475 148.475) (xy 305.339 149.234) (xy 304.000 149.500) (xy 302.661 149.234) (xy 301.525 148.475) (xy 300.766 147.339) (xy 300.500 146.000) (xy 300.766 144.661) (xy 301.525 143.525) (xy 302.661 142.766) (xy 304.000 142.500) (xy 305.339 142.766) (xy 306.475 143.525) (xy 307.234 144.661)))
+		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
 	)
 
 	(zone
@@ -278928,7 +279565,7 @@
 		(uuid "d5b0000000003b-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 307.500 146.000) (xy 307.234 147.339) (xy 306.475 148.475) (xy 305.339 149.234) (xy 304.000 149.500) (xy 302.661 149.234) (xy 301.525 148.475) (xy 300.766 147.339) (xy 300.500 146.000) (xy 300.766 144.661) (xy 301.525 143.525) (xy 302.661 142.766) (xy 304.000 142.500) (xy 305.339 142.766) (xy 306.475 143.525) (xy 307.234 144.661)))
+		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
 	)
 
 	(zone
@@ -278937,7 +279574,7 @@
 		(uuid "d5b0000000003c-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 247.500 6.000) (xy 247.234 7.339) (xy 246.475 8.475) (xy 245.339 9.234) (xy 244.000 9.500) (xy 242.661 9.234) (xy 241.525 8.475) (xy 240.766 7.339) (xy 240.500 6.000) (xy 240.766 4.661) (xy 241.525 3.525) (xy 242.661 2.766) (xy 244.000 2.500) (xy 245.339 2.766) (xy 246.475 3.525) (xy 247.234 4.661)))
+		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
 	)
 
 	(zone
@@ -278946,7 +279583,7 @@
 		(uuid "d5b0000000003d-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 247.500 6.000) (xy 247.234 7.339) (xy 246.475 8.475) (xy 245.339 9.234) (xy 244.000 9.500) (xy 242.661 9.234) (xy 241.525 8.475) (xy 240.766 7.339) (xy 240.500 6.000) (xy 240.766 4.661) (xy 241.525 3.525) (xy 242.661 2.766) (xy 244.000 2.500) (xy 245.339 2.766) (xy 246.475 3.525) (xy 247.234 4.661)))
+		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
 	)
 
 	(zone
@@ -278955,7 +279592,7 @@
 		(uuid "d5b0000000003e-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 247.500 6.000) (xy 247.234 7.339) (xy 246.475 8.475) (xy 245.339 9.234) (xy 244.000 9.500) (xy 242.661 9.234) (xy 241.525 8.475) (xy 240.766 7.339) (xy 240.500 6.000) (xy 240.766 4.661) (xy 241.525 3.525) (xy 242.661 2.766) (xy 244.000 2.500) (xy 245.339 2.766) (xy 246.475 3.525) (xy 247.234 4.661)))
+		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
 	)
 
 	(zone
@@ -278964,7 +279601,7 @@
 		(uuid "d5b0000000003f-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 247.500 6.000) (xy 247.234 7.339) (xy 246.475 8.475) (xy 245.339 9.234) (xy 244.000 9.500) (xy 242.661 9.234) (xy 241.525 8.475) (xy 240.766 7.339) (xy 240.500 6.000) (xy 240.766 4.661) (xy 241.525 3.525) (xy 242.661 2.766) (xy 244.000 2.500) (xy 245.339 2.766) (xy 246.475 3.525) (xy 247.234 4.661)))
+		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
 	)
 
 	(zone
@@ -278973,7 +279610,7 @@
 		(uuid "d5b00000000040-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 247.500 6.000) (xy 247.234 7.339) (xy 246.475 8.475) (xy 245.339 9.234) (xy 244.000 9.500) (xy 242.661 9.234) (xy 241.525 8.475) (xy 240.766 7.339) (xy 240.500 6.000) (xy 240.766 4.661) (xy 241.525 3.525) (xy 242.661 2.766) (xy 244.000 2.500) (xy 245.339 2.766) (xy 246.475 3.525) (xy 247.234 4.661)))
+		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
 	)
 
 	(zone
@@ -278982,7 +279619,7 @@
 		(uuid "d5b00000000041-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 247.500 6.000) (xy 247.234 7.339) (xy 246.475 8.475) (xy 245.339 9.234) (xy 244.000 9.500) (xy 242.661 9.234) (xy 241.525 8.475) (xy 240.766 7.339) (xy 240.500 6.000) (xy 240.766 4.661) (xy 241.525 3.525) (xy 242.661 2.766) (xy 244.000 2.500) (xy 245.339 2.766) (xy 246.475 3.525) (xy 247.234 4.661)))
+		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
 	)
 
 	(zone
@@ -278991,7 +279628,7 @@
 		(uuid "d5b00000000042-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 247.500 6.000) (xy 247.234 7.339) (xy 246.475 8.475) (xy 245.339 9.234) (xy 244.000 9.500) (xy 242.661 9.234) (xy 241.525 8.475) (xy 240.766 7.339) (xy 240.500 6.000) (xy 240.766 4.661) (xy 241.525 3.525) (xy 242.661 2.766) (xy 244.000 2.500) (xy 245.339 2.766) (xy 246.475 3.525) (xy 247.234 4.661)))
+		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
 	)
 
 	(zone
@@ -279063,7 +279700,7 @@
 		(uuid "d5b0000000004a-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 19.500 170.000) (xy 19.234 171.339) (xy 18.475 172.475) (xy 17.339 173.234) (xy 16.000 173.500) (xy 14.661 173.234) (xy 13.525 172.475) (xy 12.766 171.339) (xy 12.500 170.000) (xy 12.766 168.661) (xy 13.525 167.525) (xy 14.661 166.766) (xy 16.000 166.500) (xy 17.339 166.766) (xy 18.475 167.525) (xy 19.234 168.661)))
+		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
 	)
 
 	(zone
@@ -279072,7 +279709,7 @@
 		(uuid "d5b0000000004b-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 19.500 170.000) (xy 19.234 171.339) (xy 18.475 172.475) (xy 17.339 173.234) (xy 16.000 173.500) (xy 14.661 173.234) (xy 13.525 172.475) (xy 12.766 171.339) (xy 12.500 170.000) (xy 12.766 168.661) (xy 13.525 167.525) (xy 14.661 166.766) (xy 16.000 166.500) (xy 17.339 166.766) (xy 18.475 167.525) (xy 19.234 168.661)))
+		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
 	)
 
 	(zone
@@ -279081,7 +279718,7 @@
 		(uuid "d5b0000000004c-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 19.500 170.000) (xy 19.234 171.339) (xy 18.475 172.475) (xy 17.339 173.234) (xy 16.000 173.500) (xy 14.661 173.234) (xy 13.525 172.475) (xy 12.766 171.339) (xy 12.500 170.000) (xy 12.766 168.661) (xy 13.525 167.525) (xy 14.661 166.766) (xy 16.000 166.500) (xy 17.339 166.766) (xy 18.475 167.525) (xy 19.234 168.661)))
+		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
 	)
 
 	(zone
@@ -279090,7 +279727,7 @@
 		(uuid "d5b0000000004d-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 19.500 170.000) (xy 19.234 171.339) (xy 18.475 172.475) (xy 17.339 173.234) (xy 16.000 173.500) (xy 14.661 173.234) (xy 13.525 172.475) (xy 12.766 171.339) (xy 12.500 170.000) (xy 12.766 168.661) (xy 13.525 167.525) (xy 14.661 166.766) (xy 16.000 166.500) (xy 17.339 166.766) (xy 18.475 167.525) (xy 19.234 168.661)))
+		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
 	)
 
 	(zone
@@ -279099,7 +279736,7 @@
 		(uuid "d5b0000000004e-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 19.500 170.000) (xy 19.234 171.339) (xy 18.475 172.475) (xy 17.339 173.234) (xy 16.000 173.500) (xy 14.661 173.234) (xy 13.525 172.475) (xy 12.766 171.339) (xy 12.500 170.000) (xy 12.766 168.661) (xy 13.525 167.525) (xy 14.661 166.766) (xy 16.000 166.500) (xy 17.339 166.766) (xy 18.475 167.525) (xy 19.234 168.661)))
+		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
 	)
 
 	(zone
@@ -279108,7 +279745,7 @@
 		(uuid "d5b0000000004f-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 19.500 170.000) (xy 19.234 171.339) (xy 18.475 172.475) (xy 17.339 173.234) (xy 16.000 173.500) (xy 14.661 173.234) (xy 13.525 172.475) (xy 12.766 171.339) (xy 12.500 170.000) (xy 12.766 168.661) (xy 13.525 167.525) (xy 14.661 166.766) (xy 16.000 166.500) (xy 17.339 166.766) (xy 18.475 167.525) (xy 19.234 168.661)))
+		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
 	)
 
 	(zone
@@ -279117,7 +279754,7 @@
 		(uuid "d5b00000000050-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 19.500 170.000) (xy 19.234 171.339) (xy 18.475 172.475) (xy 17.339 173.234) (xy 16.000 173.500) (xy 14.661 173.234) (xy 13.525 172.475) (xy 12.766 171.339) (xy 12.500 170.000) (xy 12.766 168.661) (xy 13.525 167.525) (xy 14.661 166.766) (xy 16.000 166.500) (xy 17.339 166.766) (xy 18.475 167.525) (xy 19.234 168.661)))
+		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
 	)
 
 	(zone
@@ -279126,7 +279763,7 @@
 		(uuid "d5b00000000051-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 283.500 124.000) (xy 283.234 125.339) (xy 282.475 126.475) (xy 281.339 127.234) (xy 280.000 127.500) (xy 278.661 127.234) (xy 277.525 126.475) (xy 276.766 125.339) (xy 276.500 124.000) (xy 276.766 122.661) (xy 277.525 121.525) (xy 278.661 120.766) (xy 280.000 120.500) (xy 281.339 120.766) (xy 282.475 121.525) (xy 283.234 122.661)))
+		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
 	)
 
 	(zone
@@ -279135,7 +279772,7 @@
 		(uuid "d5b00000000052-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 283.500 124.000) (xy 283.234 125.339) (xy 282.475 126.475) (xy 281.339 127.234) (xy 280.000 127.500) (xy 278.661 127.234) (xy 277.525 126.475) (xy 276.766 125.339) (xy 276.500 124.000) (xy 276.766 122.661) (xy 277.525 121.525) (xy 278.661 120.766) (xy 280.000 120.500) (xy 281.339 120.766) (xy 282.475 121.525) (xy 283.234 122.661)))
+		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
 	)
 
 	(zone
@@ -279144,7 +279781,7 @@
 		(uuid "d5b00000000053-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 283.500 124.000) (xy 283.234 125.339) (xy 282.475 126.475) (xy 281.339 127.234) (xy 280.000 127.500) (xy 278.661 127.234) (xy 277.525 126.475) (xy 276.766 125.339) (xy 276.500 124.000) (xy 276.766 122.661) (xy 277.525 121.525) (xy 278.661 120.766) (xy 280.000 120.500) (xy 281.339 120.766) (xy 282.475 121.525) (xy 283.234 122.661)))
+		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
 	)
 
 	(zone
@@ -279153,7 +279790,7 @@
 		(uuid "d5b00000000054-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 283.500 124.000) (xy 283.234 125.339) (xy 282.475 126.475) (xy 281.339 127.234) (xy 280.000 127.500) (xy 278.661 127.234) (xy 277.525 126.475) (xy 276.766 125.339) (xy 276.500 124.000) (xy 276.766 122.661) (xy 277.525 121.525) (xy 278.661 120.766) (xy 280.000 120.500) (xy 281.339 120.766) (xy 282.475 121.525) (xy 283.234 122.661)))
+		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
 	)
 
 	(zone
@@ -279162,7 +279799,7 @@
 		(uuid "d5b00000000055-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 283.500 124.000) (xy 283.234 125.339) (xy 282.475 126.475) (xy 281.339 127.234) (xy 280.000 127.500) (xy 278.661 127.234) (xy 277.525 126.475) (xy 276.766 125.339) (xy 276.500 124.000) (xy 276.766 122.661) (xy 277.525 121.525) (xy 278.661 120.766) (xy 280.000 120.500) (xy 281.339 120.766) (xy 282.475 121.525) (xy 283.234 122.661)))
+		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
 	)
 
 	(zone
@@ -279171,7 +279808,7 @@
 		(uuid "d5b00000000056-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 283.500 124.000) (xy 283.234 125.339) (xy 282.475 126.475) (xy 281.339 127.234) (xy 280.000 127.500) (xy 278.661 127.234) (xy 277.525 126.475) (xy 276.766 125.339) (xy 276.500 124.000) (xy 276.766 122.661) (xy 277.525 121.525) (xy 278.661 120.766) (xy 280.000 120.500) (xy 281.339 120.766) (xy 282.475 121.525) (xy 283.234 122.661)))
+		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
 	)
 
 	(zone
@@ -279180,7 +279817,7 @@
 		(uuid "d5b00000000057-0000-4000-8000-000000000000")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
-		(polygon (pts (xy 283.500 124.000) (xy 283.234 125.339) (xy 282.475 126.475) (xy 281.339 127.234) (xy 280.000 127.500) (xy 278.661 127.234) (xy 277.525 126.475) (xy 276.766 125.339) (xy 276.500 124.000) (xy 276.766 122.661) (xy 277.525 121.525) (xy 278.661 120.766) (xy 280.000 120.500) (xy 281.339 120.766) (xy 282.475 121.525) (xy 283.234 122.661)))
+		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
 	)
 
 	(zone
@@ -279290,100 +279927,4 @@
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
 	)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 )
