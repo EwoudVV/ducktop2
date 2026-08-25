@@ -275634,17 +275634,107 @@
 	
 	
 	
+	
+
+
+
+
+
+
+
+
+
 	(gr_line
 		(start 0 0)
+		(end 10 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "c42ee21a-d609-4ad5-a254-4ab7a5838fb0")
+	)
+(gr_line
+		(start 10 0)
+		(end 10 18)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "8271230f-e98a-4523-9b8b-3efd48cce363")
+	)
+(gr_line
+		(start 10 18)
+		(end 48 18)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "60e8d30b-4d3b-45e9-8f94-251767039268")
+	)
+(gr_line
+		(start 48 18)
+		(end 48 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "d843df2f-1d8e-46ca-a03f-6ac3bd5320ca")
+	)
+(gr_line
+		(start 48 0)
+		(end 310 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "ac41d790-10d2-4313-ba98-c62143f3a6ad")
+	)
+(gr_line
+		(start 310 0)
+		(end 310 18)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "f3f33304-b63a-4ea7-a0ab-568b8d207dde")
+	)
+(gr_line
+		(start 310 18)
+		(end 346 18)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "c1a41001-f22b-444d-ac62-9f8fa4cede67")
+	)
+(gr_line
+		(start 346 18)
+		(end 346 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "2083f82b-3413-4d99-b0f0-13df270416ec")
+	)
+(gr_line
+		(start 346 0)
 		(end 358 0)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
 		(layer "Edge.Cuts")
-		(uuid "271d81b7-961b-58af-a54f-ca8a02b6338f")
+		(uuid "d7cb4eee-731b-4a2e-a8c0-97106a196560")
 	)
-	(gr_line
+(gr_line
 		(start 0 185)
 		(end 0 0)
 		(stroke
@@ -279200,493 +279290,100 @@
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
 	)
-(gr_text "J22 left USB-C receptacle #1"
-	(at 2.59 21.38 0)
-	(layer "Dwgs.User")
-	(uuid "c7c19bb1-faff-427a-baea-8d88f16c67df")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 2.59 21.88)
-	(end 4.5 25.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "3fbf4e3e-d525-41fc-a793-4694840ac342")
-)
 
-(gr_text "J21 left USB-C receptacle #2"
-	(at 2.59 43.88 0)
-	(layer "Dwgs.User")
-	(uuid "862a3ba8-bcf2-4bc4-9292-cc17f7f4c735")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 2.59 44.38)
-	(end 4.5 47.5)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "f4dc3128-52c4-4b9c-9d79-3c3af0038482")
-)
 
-(gr_text "J23 left USB-C receptacle #3"
-	(at 2.59 66.38 0)
-	(layer "Dwgs.User")
-	(uuid "7960784e-0062-4d16-a59f-4b64e291039e")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 2.59 66.88)
-	(end 4.5 70.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "d2b76187-d645-4f9a-8fed-e5a652e697de")
-)
 
-(gr_text "J420 speaker connector"
-	(at 16.225 179.3 0)
-	(layer "Dwgs.User")
-	(uuid "39a60e35-aadd-459e-8711-7d610abeb2aa")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 16.225 179.8)
-	(end 18.0 180.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "7eb32273-c91c-4083-89c7-5096d2bbde3d")
-)
 
-(gr_text "MK430 MEMS microphone"
-	(at 39.725 110.94 0)
-	(layer "Dwgs.User")
-	(uuid "e3ec5550-5a5a-4ed5-baa4-0d2f9eb67442")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 39.725 111.44)
-	(end 40.0 110.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "bc178553-9c8f-4798-9599-5fc612548629")
-)
 
-(gr_text "J422 3.5mm headphone jack"
-	(at 49.8 3.1 0)
-	(layer "Dwgs.User")
-	(uuid "99ba3f20-a9ce-4632-8de0-fc7be96359d7")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 49.8 3.6)
-	(end 50.0 2.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "7e7f5340-65c4-4bae-927c-fa7826903219")
-)
 
-(gr_text "J2300 radio daughterboard connector"
-	(at 57.25 183.315 0)
-	(layer "Dwgs.User")
-	(uuid "e6a8483b-f65f-4eb3-a449-7f2fee6470e6")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 57.25 183.815)
-	(end 62.5 181.5)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "bffcf446-4165-409c-a258-5a663efc7dd1")
-)
 
-(gr_text "J52 12V fan connector"
-	(at 57.97 119.3 0)
-	(layer "Dwgs.User")
-	(uuid "c563f393-4f07-41a5-8a6a-9c0b5d6a3fa7")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 57.97 119.8)
-	(end 61.0 120.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "e75d4fb8-2ce5-44a9-bbbf-4eac23a10095")
-)
 
-(gr_text "J2 Mega-Fit battery connector"
-	(at 89.53 165.15 0)
-	(layer "Dwgs.User")
-	(uuid "72fa6c7d-a8d4-4eb7-98b5-4501d34ae1a4")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 89.53 165.65)
-	(end 95.0 165.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "ee5dde74-5972-4ab4-bcc2-33e55b381c08")
-)
 
-(gr_text "U425 TPA6130A2 headphone amp"
-	(at 138.825 157.625 0)
-	(layer "Dwgs.User")
-	(uuid "6804ca66-bbbc-40e7-b44a-fb6d98f87f7b")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 138.825 158.125)
-	(end 140.0 158.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "34a8e82c-9eb0-420a-90d2-2ef0be68c286")
-)
 
-(gr_text "J58 trackpad USB2 solder lands"
-	(at 171.3 130.9 0)
-	(layer "Dwgs.User")
-	(uuid "8180499e-98e1-49c8-aba2-99d2a1d5a81b")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 171.3 131.4)
-	(end 171.2 130.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "4008f29f-21b9-4b5c-8ea5-32f5e57b81e6")
-)
 
-(gr_text "A1 LattePanda Mu module"
-	(at 177.075 8.2 0)
-	(layer "Dwgs.User")
-	(uuid "71484056-7db7-44a3-97cb-fbd18e05e0c9")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 177.075 8.7)
-	(end 181.3 45.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "c90f035e-9ef4-4886-9e13-78359fdbcb3f")
-)
 
-(gr_text "J10 M.2 2280 NVMe socket"
-	(at 197.475 106.275 0)
-	(layer "Dwgs.User")
-	(uuid "35bd793f-ea2f-465f-8c3d-f539c325d705")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 197.475 106.775)
-	(end 196.425 125.25)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "94db3ad9-ce2f-4df7-a12c-7f078477ee5d")
-)
 
-(gr_text "J40 M.2 E-key Wi-Fi socket"
-	(at 228.95 157.525 0)
-	(layer "Dwgs.User")
-	(uuid "7e83d478-131f-488c-9400-c6bf2f26b96d")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 228.95 158.025)
-	(end 235.45 158.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "6f10e73b-e528-416d-9d98-a0129b1eeeaf")
-)
 
-(gr_text "J45 SSD1306 OLED B"
-	(at 280.35 156.15 0)
-	(layer "Dwgs.User")
-	(uuid "2368f609-0fb1-4b32-8474-0aa45b68b911")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 280.35 156.65)
-	(end 280.0 155.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "6b39e31c-d9b6-40df-91be-3c3232fc95ef")
-)
 
-(gr_text "J41 SSD1306 OLED A"
-	(at 310.35 156.15 0)
-	(layer "Dwgs.User")
-	(uuid "37a200bd-8da8-4a60-bf06-a330d7e40191")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 310.35 156.65)
-	(end 310.0 155.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "7adac122-50ab-49a6-b942-7261a66ce179")
-)
 
-(gr_text "J310 keyboard FFC connector"
-	(at 318.9 41.75 0)
-	(layer "Dwgs.User")
-	(uuid "4c2c6850-d7a0-4894-b93d-4be715d7bdbf")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 318.9 42.25)
-	(end 320.0 50.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "6850fc7b-e135-47f0-9338-35f72dc579ab")
-)
 
-(gr_text "J500 JXD1-1022NL Ethernet jack (mid-mount)"
-	(at 331.475 88.72 0)
-	(layer "Dwgs.User")
-	(uuid "25793d8b-196d-4f14-b041-e2ecc8f242af")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 331.475 89.22)
-	(end 332.0 104.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "e28faa3e-2bdb-459d-a680-97f66692366f")
-)
 
-(gr_text "J11 right USB-C receptacle"
-	(at 344.5 26.0 0)
-	(layer "Dwgs.User")
-	(uuid "dd9481ae-41a5-46c5-a1e8-cc27d4094472")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 344.5 26.5)
-	(end 353.475 30.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "f8251672-8e27-4d1c-9676-86ebe3330b1c")
-)
 
-(gr_text "J30 HDMI-A receptacle"
-	(at 348.905 66.0 0)
-	(layer "Dwgs.User")
-	(uuid "38efb368-89ba-4d9b-b364-a09b14f7585d")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 348.905 66.5)
-	(end 352.29 72.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "bed4621a-9fea-4a97-88c4-e8f16ebcc240")
-)
 
-(gr_text "J12 right USB-C receptacle (rear)"
-	(at 351.315 44.38 0)
-	(layer "Dwgs.User")
-	(uuid "6951258f-f3ba-4095-bd4d-fd2dfec30ea7")
-	(effects
-		(font
-			(size 1.15 1.15)
-			(thickness 0.16)
-		)
-		(justify left)
-	)
-)
 
-(gr_line
-	(start 351.315 44.88)
-	(end 353.48 48.0)
-	(stroke (width 0.1) (type default))
-	(layer "Dwgs.User")
-	(uuid "ef7e5ac3-d4d8-425b-8ca3-94f6acd37701")
-)
 
-(gr_rect
-	(start 142.55 12.25)
-	(end 220.05 77.75)
-	(stroke (width 0.1) (type dash))
-	(layer "Dwgs.User")
-	(uuid "486b5f9d-c045-44de-9f24-caca9f3e000b")
-)
 
-(gr_rect
-	(start 193.425 114.25)
-	(end 273.425 136.25)
-	(stroke (width 0.1) (type dash))
-	(layer "Dwgs.User")
-	(uuid "fdf3add9-7b75-4b6e-a6ae-3e6432d598ce")
-)
 
-(gr_rect
-	(start 232.45 147.0)
-	(end 262.45 169.0)
-	(stroke (width 0.1) (type dash))
-	(layer "Dwgs.User")
-	(uuid "5e955750-90c9-4d2a-9e78-a77fe356588a")
-)
 
-(gr_rect
-	(start 109 143)
-	(end 249 185)
-	(stroke (width 0.1) (type dash))
-	(layer "Dwgs.User")
-	(uuid "d5e8e038-7076-4976-924e-78c40b62a8da")
-)
 
-(gr_rect
-	(start 8 0)
-	(end 48 20)
-	(stroke (width 0.1) (type dash))
-	(layer "Dwgs.User")
-	(uuid "29f40906-ee0f-4b83-8837-b1ff1d1e2b75")
-)
 
-(gr_rect
-	(start 310 0)
-	(end 350 20)
-	(stroke (width 0.1) (type dash))
-	(layer "Dwgs.User")
-	(uuid "e569b959-fa85-4e28-afd2-e36605eec341")
-)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 )
