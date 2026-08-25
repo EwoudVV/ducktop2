@@ -76,6 +76,41 @@
      "width": 0.0
     },
     {
+     "gap": 0.15,
+     "via_gap": 0.2,
+     "width": 0.12
+    },
+    {
+     "gap": 0.15,
+     "via_gap": 0.2,
+     "width": 0.15
+    },
+    {
+     "gap": 0.25,
+     "via_gap": 0.25,
+     "width": 0.2
+    },
+    {
+     "gap": 0.8,
+     "via_gap": 0.25,
+     "width": 0.29
+    },
+    {
+     "gap": 0.612,
+     "via_gap": 0.25,
+     "width": 0.26
+    },
+    {
+     "gap": 0.679,
+     "via_gap": 0.25,
+     "width": 0.215
+    },
+    {
+     "gap": 0.0,
+     "via_gap": 0.25,
+     "width": 0.262
+    },
+    {
      "gap": 0.1524,
      "via_gap": 0.25,
      "width": 0.2085
@@ -89,11 +124,6 @@
      "gap": 0.254,
      "via_gap": 0.25,
      "width": 0.1521
-    },
-    {
-     "gap": 0.25,
-     "via_gap": 0.25,
-     "width": 0.2248
     }
    ],
    "drc_exclusions": [],
@@ -230,17 +260,20 @@
     }
    ],
    "track_widths": [
-    0.091,
-    0.111,
-    0.1521,
-    0.1796,
-    0.2085,
-    0.2248,
+    0.0,
+    0.1,
+    0.12,
+    0.15,
+    0.2,
     0.25,
     0.3,
     0.4,
-    0.6,
-    1.0
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0,
+    3.0
    ],
    "tuning_pattern_settings": {
     "diff_pair_defaults": {
@@ -298,7 +331,3117 @@
      "drill": 0.75
     }
    ],
-   "zones_allow_external_fillets": false
+   "zones_allow_external_fillets": false,
+   "net_colors": {
+    "/AUDIO_AMP_EC_EN": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/AUDIO_MIC_EN": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/AUDIO_USB_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/AUDIO_USB_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/BQ_ALERT": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/CHG_ENABLE": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/CHG_INT_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/EC_DFU_SEL": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/EC_HOST_USB_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/EC_HOST_USB_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/GBE_CLKREQ_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/GBE_HOST_RX_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/GBE_HOST_RX_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/GBE_HOST_TX_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/GBE_HOST_TX_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/GBE_REFCLK_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/GBE_REFCLK_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_1V0": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_CHASSIS": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_CT": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_LED_1000_A": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_LED_1000_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_LED_ACT_A": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_LED_ACT_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_MDI0_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_MDI0_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_MDI1_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_MDI1_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_MDI2_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_MDI2_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_MDI3_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_MDI3_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_RSET": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_XI": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/ETH_XO": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/GBE_HSI_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/GBE_HSI_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/GBE_HSO_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/GBE_HSO_P": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/Gigabit Ethernet/GBE_ISOLATE_N": [
+     0.3,
+     0.5,
+     1.0,
+     1.0
+    ],
+    "/HUB_DS1_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/HUB_DS1_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/HUB_DS1_SSRX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/HUB_DS1_SSRX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/HUB_DS1_SSTX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/HUB_DS1_SSTX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/I2C_SCL": [
+     0.35,
+     0.45,
+     0.6,
+     1.0
+    ],
+    "/I2C_SDA": [
+     0.35,
+     0.45,
+     0.6,
+     1.0
+    ],
+    "/INTERNAL_USB_VBUS_FAULT_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/INTERNAL_USB_VBUS_VALID": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Internal Services/DFU_CONN_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Internal Services/DFU_CONN_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Internal Services/EC_DFU_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Internal Services/EC_DFU_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Internal Services/EC_USB_ISO_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Internal Services/EC_USB_ISO_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Internal Services/TPAD_CONN_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Internal Services/TPAD_CONN_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/MAKER_USB_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/MAKER_USB_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/MCU_3V3": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/MCU_USB_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/MCU_USB_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/MU_12V": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/MU_12V_ENABLE": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/MU_12V_PG": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Maker MCU/MAKER_3V3_CORE": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Maker MCU/MAKER_3V3_FB": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Maker MCU/MAKER_3V3_ILIM": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Maker MCU/MAKER_3V3_SW": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Maker MCU/MAKER_USB_DM_MCU": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Maker MCU/MAKER_USB_DP_MCU": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Maker MCU/MAKER_USB_ISO_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Maker MCU/MAKER_USB_ISO_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Maker MCU/MAKER_USB_OE_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Mu Carrier/INTERNAL_USB_VBUS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Mu Carrier/INTERNAL_USB_VBUS_ILIM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Mu Carrier/INTERNAL_USB_VBUS_SENSE": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_3V3_CT": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_3V3_IN": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_3V3_PG": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_CLKREQ_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L0_RX_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L0_RX_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L0_TX_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L0_TX_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L0_TX_RAW_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L0_TX_RAW_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L1_RX_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L1_RX_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L1_TX_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L1_TX_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L1_TX_RAW_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L1_TX_RAW_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L2_RX_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L2_RX_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L2_TX_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L2_TX_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L2_TX_RAW_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L2_TX_RAW_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L3_RX_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L3_RX_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L3_TX_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L3_TX_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L3_TX_RAW_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_L3_TX_RAW_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_PERST_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_REFCLK_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_REFCLK_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_REFCLK_SRC_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/PCIE_M_REFCLK_SRC_P": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/SYS_3V3_PG": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/SYS_5V_PG": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/Mu Carrier/USBC1_SSTX_RAW_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Mu Carrier/USBC1_SSTX_RAW_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Mu Carrier/USBC2_SSTX_RAW_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Mu Carrier/USBC2_SSTX_RAW_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Mu Carrier/WIFI_PCIE_TX_RAW_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/Mu Carrier/WIFI_PCIE_TX_RAW_P": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_3V3_OK": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_BC_EN": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_CFG1": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_CFG2": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_CFG3": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_CLK": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_CORE_FB": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_CORE_PG": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_CORE_SW": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DIS5_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DIS5_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DIS5_RX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DIS5_RX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DIS5_TX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DIS5_TX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DIS6_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DIS6_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS1_PRT_CTL": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS2_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS2_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS2_SSRX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS2_SSRX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS2_SSTX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS2_SSTX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS2_TX_RAW_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS2_TX_RAW_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS3_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS3_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS3_SSRX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS3_SSRX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS3_SSTX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS3_SSTX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS3_TX_RAW_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS3_TX_RAW_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS4_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS4_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS4_SSRX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS4_SSRX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS4_SSTX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS4_SSTX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS4_TX_RAW_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_DS4_TX_RAW_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_NON_REM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_PRT_CTL2": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_PRT_CTL3": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_PRT_CTL4": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_RBIAS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_RESET_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_SPI_CLK": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_SPI_D1": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_SPI_D2": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_SPI_D3": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_TEST1": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_TEST2": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_TEST3": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_UP_TX_RAW_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_UP_TX_RAW_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/HUB_VCORE": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_5V_PRE": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_CC1": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_CC2": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_ILIM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_POL_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_REF": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_REF_RTN": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_RX1_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_RX1_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_RX2_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_RX2_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_TX1_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_TX1_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_TX2_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_TX2_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_VBUS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_VBUS_POWER": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J12_VBUS_SYS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_5V_PRE": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_CC1": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_CC2": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_ILIM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_POL_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_REF": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_REF_RTN": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_RX1_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_RX1_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_RX2_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_RX2_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_TX1_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_TX1_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_TX2_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_TX2_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_VBUS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_VBUS_POWER": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J22_VBUS_SYS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_5V_PRE": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_CC1": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_CC2": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_ILIM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_POL_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_REF": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_REF_RTN": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_RX1_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_RX1_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_RX2_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_RX2_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_TX1_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_TX1_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_TX2_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_TX2_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_VBUS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_VBUS_POWER": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J23_VBUS_SYS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J24_5V_PRE": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J24_ILIM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J24_SSTX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J24_SSTX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J25_5V_PRE": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/J25_ILIM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/USB5_BOOT": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/USB5_EN": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/USB5_FB": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/USB5_PG": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/Native USB-C I{slash}O/USB5_SW": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/PACK_FAULT_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PACK_RETRY_PULSE": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PCIE_3V3": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/PCIE_WAKE_N": [
+     0.0,
+     0.7,
+     0.1,
+     1.0
+    ],
+    "/PD1_EFUSE_FAULT_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD1_I2C_SCL": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD1_I2C_SDA": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD1_PATH_EN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD1_TCPC_IRQ_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD1_VALID_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD1_VBUS_RAW": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD2_EFUSE_FAULT_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD2_I2C_SCL": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD2_I2C_SDA": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD2_PATH_EN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD2_TCPC_IRQ_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD2_VALID_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/PD2_VBUS_RAW": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_AVDD": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_CHG_DRV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_CHG_GATE": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_DSG_DRV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_DSG_GATE": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_FET_COMMON": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_LD": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_OCDP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_PRES": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_SENSE_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_SRN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_SRP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_TS_UNUSED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_VC0": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_VC1": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_VC2": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_VC3_TOP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/BMS_VDD": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/CELL1_TAP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/CELL2_TAP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/CHG_CE_HW_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/CHG_TS_FIXED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/PACK_NEG_RAW": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/PACK_POS_FUSED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power & Battery/PACK_POS_RAW": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CC1_CONN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CC1_SYS": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CC2_CONN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CC2_SYS": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CC_ESD_VBIAS": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CC_FAULT_LOCAL_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CTX1_RAW_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CTX1_RAW_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CTX2_RAW_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_CTX2_RAW_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_DM_CONN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_DM_HOST_SWITCHED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_DP_CONN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_DP_HOST_SWITCHED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_DRAIN_THERMAL": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_EEPROM_IRQ_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_EEPROM_SCL": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_EEPROM_SDA": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_EFUSE_DVDT": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_EFUSE_ILIM": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_EFUSE_OV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_EFUSE_SHDN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_EFUSE_UV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_GPIO_ATTACH": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_GPIO_DFP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_GPIO_FLIP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_HOST_ATTACHED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_LDO1V5": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_LDO3V3": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_MUX_EN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_MUX_EQCFG": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_MUX_FLIP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_MUX_MODE": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_MUX_SLEEP_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_MUX_SSEQ1": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_MUX_VIO": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_PPHV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_RX1_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_RX1_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_RX2_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_RX2_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_SEL_FET_COMMON": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_SEL_GATE": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_SEL_OV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_SEL_UV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_SSRX_RAW_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_SSRX_RAW_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_TX1_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_TX1_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_TX2_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_TX2_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_USB2_OE_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD1_VBUS_GATED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CC1_CONN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CC1_SYS": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CC2_CONN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CC2_SYS": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CC_ESD_VBIAS": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CC_FAULT_LOCAL_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CTX1_RAW_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CTX1_RAW_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CTX2_RAW_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_CTX2_RAW_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_DM_CONN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_DM_HOST_SWITCHED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_DP_CONN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_DP_HOST_SWITCHED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_DRAIN_THERMAL": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_EEPROM_IRQ_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_EEPROM_SCL": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_EEPROM_SDA": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_EFUSE_DVDT": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_EFUSE_ILIM": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_EFUSE_OV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_EFUSE_SHDN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_EFUSE_UV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_GPIO_ATTACH": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_GPIO_DFP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_GPIO_FLIP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_HOST_ATTACHED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_LDO1V5": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_LDO3V3": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_MUX_EN": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_MUX_EQCFG": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_MUX_FLIP": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_MUX_MODE": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_MUX_SLEEP_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_MUX_SSEQ1": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_MUX_VIO": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_PPHV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_RX1_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_RX1_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_RX2_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_RX2_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_SEL_FET_COMMON": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_SEL_GATE": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_SEL_OV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_SEL_UV": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_SSRX_RAW_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_SSRX_RAW_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_TX1_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_TX1_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_TX2_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_TX2_P": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_USB2_OE_N": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/Power Inputs/PD2_VBUS_GATED": [
+     0.9,
+     0.7,
+     0.0,
+     1.0
+    ],
+    "/SYS_3V3": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/SYS_5V": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/System Audio/AMP_ENABLE": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AMP_IN_LN": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AMP_IN_LP": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AMP_IN_RN": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AMP_IN_RP": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AMP_OUT_LN": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AMP_OUT_LP": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AMP_OUT_RN": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AMP_OUT_RP": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/AUDIO_5V": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_USB_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/CODEC_USB_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/CODEC_VBUS": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_VCCCI": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_VCCP1I": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_VCCP2I": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_VCCXI": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_VCOM": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_VDDI": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_XTI": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/CODEC_XTO": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/HUB_CFG_SEL0": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_CFG_SEL1": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_CRFILT": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_NON_REM0": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_NON_REM1": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_PLLFILT": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_PORT1_EN": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_PORT1_OC_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_PORT2_EN": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_PORT2_OC_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_RBIAS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_RESET_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_VBUS_DET": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_XI": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/HUB_XO": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/MIC_2V8": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/MIC_ADC_L": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/MIC_ADC_R": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/MIC_FB": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/MIC_HP_NODE": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/MIC_LED_A": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/MIC_PREAMP": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/MIC_RAW": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/SPK_L_N": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/SPK_L_P": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/SPK_R_N": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/SPK_R_P": [
+     0.6,
+     0.1,
+     0.9,
+     1.0
+    ],
+    "/System Audio/SYSTEM_DAC_USB_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/SYSTEM_DAC_USB_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/System Audio/SYSTEM_DAC_USB_VBUS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_5V": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_BIAS_GATE": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_BIAS_RETURN": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_CK_N": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_CK_P": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_D0_N": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_D0_P": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_D1_N": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_D1_P": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_D2_N": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_D2_P": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_HPD_CONN": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_HPD_NODE": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_SCL_CONN": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/EXT_HDMI_SDA_CONN": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_3V3_SWITCH_CT": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_5V_SWITCH_CT": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_DDC_REF5": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_HOST_3V3": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_SOURCE_5V": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D0_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D1_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D2_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D3_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D4_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D5_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D6_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D7_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D8_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TCP0 External HDMI/HDMI_TPD_D9_UNUSED": [
+     0.8,
+     0.2,
+     0.8,
+     1.0
+    ],
+    "/TRACKPAD_USB_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/TRACKPAD_USB_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC1_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC1_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC1_SSRX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC1_SSRX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC1_SSTX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC1_SSTX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC2_DM": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC2_DP": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC2_SSRX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC2_SSRX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC2_SSTX_N": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USBC2_SSTX_P": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "/USB_PORT_5V": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/VSYS": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "/WIFI_CLKREQ_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_PCIE_RX_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_PCIE_RX_P": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_PCIE_TX_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_PCIE_TX_P": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_REFCLK_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_REFCLK_P": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_USB_DN": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_USB_DP": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_W_DISABLE1_N_EC": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/WIFI_W_DISABLE2_N_EC": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_3V3": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_PERST_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_P": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_W_DISABLE1_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_W_DISABLE2_N": [
+     0.0,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "INTERNAL_USB_VBUS": [
+     1.0,
+     0.5,
+     0.0,
+     1.0
+    ],
+    "MCU_3V3": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "MU_12V": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "SYS_3V3": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "SYS_5V": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "USB_PORT_5V": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "VBUS_RAW": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "VSYS": [
+     1.0,
+     0.15,
+     0.1,
+     1.0
+    ],
+    "GND": [
+     0.55,
+     0.55,
+     0.55,
+     1.0
+    ]
+   }
   },
   "ipc2581": {
    "bom_rev": "",
