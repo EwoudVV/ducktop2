@@ -11,8 +11,11 @@ high-speed and power groups are immediately distinguishable:
 
 Nets not in any group keep KiCad's default ratsnest color.
 
-Stored under board.design_settings.net_colors as {netname: [r,g,b,a]}.
-Regenerate with:  python3 gen/assign_net_colors.py
+Stored under board.design_settings.net_colors as {netname: css-string}.
+KiCad's COLOR4D JSON serialization is a CSS string ("rgb(r, g, b)" with
+0-255 ints for opaque colors), NOT an array - see
+common/gal/color4d.cpp to_json/from_json. Regenerate with:
+  python3 gen/assign_net_colors.py
 """
 
 from __future__ import annotations
@@ -59,17 +62,22 @@ def classify(leaf_name: str) -> tuple[float, float, float] | None:
     return None
 
 
+def css(rgb: tuple[float, float, float]) -> str:
+    r, g, b = (round(c * 255) for c in rgb)
+    return f"rgb({r}, {g}, {b})"
+
+
 def main() -> int:
     nets = set(re.findall(r'\(net "([^"]+)"\)', BOARD.read_text(encoding="utf-8")))
-    assignments: dict[str, list[float]] = {}
+    assignments: dict[str, str] = {}
     unmatched = []
     for net in sorted(nets):
         rgb = classify(leaf(net))
         if rgb is None:
             unmatched.append(net)
         else:
-            assignments[net] = [rgb[0], rgb[1], rgb[2], 1.0]
-    assignments["GND"] = [0.55, 0.55, 0.55, 1.0]
+            assignments[net] = css(rgb)
+    assignments["GND"] = css((0.55, 0.55, 0.55))
 
     pro = json.loads(PRO.read_text(encoding="utf-8"))
     pro["board"]["design_settings"]["net_colors"] = assignments
