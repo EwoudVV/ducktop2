@@ -11,7 +11,10 @@ high-speed and power groups are immediately distinguishable:
 
 Nets not in any group keep KiCad's default ratsnest color.
 
-Stored under board.design_settings.net_colors as {netname: css-string}.
+Stored under the pro's top-level net_settings.net_colors as
+{netname: css-string} - the app's authoritative location (proven by the
+app itself: a GUI-assigned color lands there, while a copy under
+board.design_settings is ignored).
 KiCad's COLOR4D JSON serialization is a CSS string ("rgb(r, g, b)" with
 0-255 ints for opaque colors), NOT an array - see
 common/gal/color4d.cpp to_json/from_json. Regenerate with:
@@ -81,7 +84,7 @@ def main() -> int:
     assignments["/AON_FAULT_N"] = "rgb(255, 0, 0)"  # user override: pure red
 
     pro = json.loads(PRO.read_text(encoding="utf-8"))
-    pro["board"]["design_settings"]["net_colors"] = assignments
+    pro.setdefault("net_settings", {}).setdefault("net_colors", {}).update(assignments)
     PRO.write_text(json.dumps(pro, indent=1), encoding="utf-8")
     print(f"{len(assignments)} nets colored; {len(unmatched)} left at default")
     return 0
