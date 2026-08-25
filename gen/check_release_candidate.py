@@ -467,6 +467,7 @@ def duplicate_footprint_references(board_text: str) -> list[str]:
 
 
 def report_unexpected(label: str, actual: Counter, allowed: Counter) -> int:
+    unexpected = actual - allowed
     if not unexpected:
         print(f"{label}: {sum(actual.values())} findings, all exactly allowlisted")
         return 0
