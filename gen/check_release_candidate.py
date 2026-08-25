@@ -467,7 +467,6 @@ def duplicate_footprint_references(board_text: str) -> list[str]:
 
 
 def report_unexpected(label: str, actual: Counter, allowed: Counter) -> int:
-    unexpected = actual - allowed
     if not unexpected:
         print(f"{label}: {sum(actual.values())} findings, all exactly allowlisted")
         return 0
@@ -480,6 +479,37 @@ def report_unexpected(label: str, actual: Counter, allowed: Counter) -> int:
     if len(unexpected) > 20:
         print(f"  ... {len(unexpected) - 20} additional unique signatures")
     return sum(unexpected.values())
+
+
+CANONICAL_FOOTPRINT_POSITIONS = {
+    # J11 is the right-edge USB-C dual-role port; its canonical home is the
+    # top of the right edge, mirroring J22 at the top of the left column
+    # (353.475, 30, 90). Placement passes moved it down twice before
+    # (c3d268c, d5eb9ff, 1360032); this guard makes the release gate fail
+    # if it ever drifts again.
+    "J11": (353.475, 30.0, 90.0),
+}
+
+
+def drifted_footprint_positions(board_text: str) -> list[str]:
+    """Return canonical-position footprints whose (at ...) drifted."""
+    drifted: list[str] = []
+    at_re = re.compile(rf"^\s*\(at\s+({NUMBER})\s+({NUMBER})(?:\s+({NUMBER}))?\)", re.MULTILINE)
+    ref_re = re.compile(r'\(property\s+"Reference"\s+"([^"]+)"')
+    for block in top_level_blocks(board_text, "(footprint"):
+        ref_match = ref_re.search(block)
+        at_match = at_re.search(block)
+        if not ref_match or not at_match:
+            continue
+        ref = ref_match.group(1)
+        if ref not in CANONICAL_FOOTPRINT_POSITIONS:
+            continue
+        x, y = float(at_match.group(1)), float(at_match.group(2))
+        rot = float(at_match.group(3) or 0) % 360
+        cx, cy, crot = CANONICAL_FOOTPRINT_POSITIONS[ref]
+        if abs(x - cx) > 1e-6 or abs(y - cy) > 1e-6 or abs(rot - crot) > 1e-6:
+            drifted.append(f"{ref} at ({x}, {y}) rot {rot}, canonical ({cx}, {cy}) rot {crot}")
+    return drifted
 
 
 def run_command(command: list[str], cwd: Path, label: str) -> None:
@@ -615,6 +645,12 @@ def run_pcb_checks(cli: str, pcb: Path, tempdir: Path) -> int:
         print(f"Off-board footprint anchors: FAIL, {len(outside)}: {', '.join(outside)}")
     else:
         print("Off-board footprint anchors: 0")
+    drifted = drifted_footprint_positions(pcb.read_text(encoding="utf-8"))
+    if drifted:
+        failures += len(drifted)
+        print(f"Canonical footprint positions: FAIL, {len(drifted)}: {', '.join(drifted)}")
+    else:
+        print("Canonical footprint positions: PASS")
     return failures
 
 
