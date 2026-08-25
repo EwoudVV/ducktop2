@@ -78,6 +78,7 @@ def main() -> int:
         else:
             assignments[net] = css(rgb)
     assignments["GND"] = css((0.55, 0.55, 0.55))
+    assignments["/AON_FAULT_N"] = "rgb(255, 0, 0)"  # user override: pure red
 
     pro = json.loads(PRO.read_text(encoding="utf-8"))
     pro["board"]["design_settings"]["net_colors"] = assignments
