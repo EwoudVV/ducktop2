@@ -9,6 +9,8 @@
 
 #include "ec_app_math.h"
 
+#include <stddef.h>
+
 #include "ntc_temp_table.inc"
 
 ec_fan_temp_dc_t ec_app_ntc_counts_to_temp_dc(uint16_t counts)
@@ -48,4 +50,24 @@ uint8_t ec_app_fan_start_duty(uint8_t policy_duty_pct, bool running,
         return EC_APP_FAN_MIN_START_DUTY_PCT;
     }
     return policy_duty_pct;
+}
+
+bool ec_app_aux_counts_to_mv(uint16_t counts, uint16_t *mv_out)
+{
+    /* mv = counts * 3300 mV / 4096 * (top + bot) / bot, rounded.  Ratios
+     * are reduced to kilohms (identical quotient); the intermediate
+     * product needs 64 bits: 4094 * 3300 * 526 ~= 7.11e9. */
+    const uint32_t num = 3300u *
+        ((EC_APP_AUX_DIVIDER_TOP_OHM + EC_APP_AUX_DIVIDER_BOT_OHM) / 1000u);
+    const uint32_t den = 4096u * (EC_APP_AUX_DIVIDER_BOT_OHM / 1000u);
+
+    if (mv_out == NULL || counts == 0u || counts >= 4095u) {
+        if (mv_out != NULL) {
+            *mv_out = 0u;
+        }
+        return false;
+    }
+    *mv_out = (uint16_t)(((uint64_t)counts * num +
+                          (uint64_t)(den / 2u)) / (uint64_t)den);
+    return true;
 }

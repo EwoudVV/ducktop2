@@ -57,3 +57,13 @@ bool tca9539_read_inputs(uint8_t *port0, uint8_t *port1)
            tca9539_read_register(TCA9539_REG_INPUT0, port0) &&
            tca9539_read_register(TCA9539_REG_INPUT1, port1);
 }
+
+bool tca9539_ready(void)
+{
+    return s_initialized;
+}
+
+uint8_t tca9539_output0(void)
+{
+    return s_output0;
+}

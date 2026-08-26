@@ -12,6 +12,7 @@ static bool s_charger_configured = false;
 static bool s_gauge_present = false;
 static bool s_iindpm_applied = false;
 static uint16_t s_iindpm_ma = 0u;
+static bool s_battery_present = false;
 
 /* ------------------------------------------------------------------------- */
 /* Init and probes                                                            */
@@ -35,6 +36,11 @@ bool ec_app_gauge_present(void)
     return s_gauge_present;
 }
 
+bool ec_app_battery_present(void)
+{
+    return s_battery_present;
+}
+
 /* ------------------------------------------------------------------------- */
 /* Power/battery/thermal inputs                                               */
 /* ------------------------------------------------------------------------- */
@@ -46,19 +52,40 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs,
     inputs->charger_iindpm_applied = s_iindpm_applied;
     inputs->applied_charger_iindpm_ma = s_iindpm_ma;
 
-    /* --- Charger / VSYS --- */
+    /* --- Charger / VSYS / pack presence --- */
     if (s_charger_configured) {
         bq25798_telemetry_t charge_telemetry;
         if (bq25798_read_telemetry(&charge_telemetry)) {
-            inputs->vsys_valid = charge_telemetry.vbus_present || charge_telemetry.power_good;
-            inputs->vsys_mv = charge_telemetry.vbus_mv;
+            s_battery_present = charge_telemetry.battery_present;
+
+            /*
+             * No MCU ADC channel senses VSYS on this board (PA6 AUX_DC,
+             * PA7 skin NTC, PB0 Mu NTC only).  In NVDC topology the
+             * charger regulates SYS at or above VBAT, so the fresh
+             * VBAT reading is a conservative lower bound.  It is only
+             * treated as valid with power-good or an attached pack:
+             * a collapsed SYS under current limit can no longer ride a
+             * healthy 15 V VBUS through this gate (the previous code
+             * fed raw VBUS here, which always passed).
+             */
+            inputs->vsys_valid = (charge_telemetry.battery_present ||
+                                  charge_telemetry.power_good);
+            inputs->vsys_mv = charge_telemetry.vbat_mv;
+            /* REG20/REG21 fault status, not the shared INT level: a
+             * serviced interrupt must not read as a charger fault, and
+             * a fault that persists after INT deasserts is caught. */
+            inputs->charger_fault_n = !charge_telemetry.fault;
         } else {
+            s_battery_present = false;
             inputs->vsys_valid = false;
             inputs->vsys_mv = 0u;
+            inputs->charger_fault_n = false; /* unread == unproven */
         }
     } else {
+        s_battery_present = false;
         inputs->vsys_valid = false;
         inputs->vsys_mv = 0u;
+        inputs->charger_fault_n = false;
     }
 
     /* --- Battery gauge --- */
@@ -124,12 +151,24 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs,
 
 bool ec_app_apply_charger_iindpm_ma(uint16_t ma)
 {
+    uint16_t readback_ma;
+
     if (!s_charger_configured) {
         s_iindpm_applied = false;
         s_iindpm_ma = 0u;
         return false;
     }
     if (!bq25798_set_input_current_ma(ma)) {
+        s_iindpm_applied = false;
+        s_iindpm_ma = 0u;
+        return false;
+    }
+    /* An acknowledged write is not an applied limit: read the register
+     * back and confirm it re-encodes to the requested step before the
+     * policy may trust inputs.applied_charger_iindpm_ma. */
+    if (!bq25798_read_input_current_limit_ma(&readback_ma) ||
+        bq25798_encode_input_current(readback_ma) !=
+            bq25798_encode_input_current(ma)) {
         s_iindpm_applied = false;
         s_iindpm_ma = 0u;
         return false;

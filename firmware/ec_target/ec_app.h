@@ -37,6 +37,8 @@ extern "C" {
 void ec_app_init(void);
 bool ec_app_charger_configured(void);
 bool ec_app_gauge_present(void);
+/* Fresh result of the last charger telemetry read (REG1D VBAT present). */
+bool ec_app_battery_present(void);
 
 /*
  * Fill the power/battery/thermal inputs the policy consumes.  PD contract

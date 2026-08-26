@@ -38,6 +38,18 @@ ec_fan_temp_dc_t ec_app_ntc_counts_to_temp_dc(uint16_t counts);
 uint8_t ec_app_fan_start_duty(uint8_t policy_duty_pct, bool running,
                               uint32_t started_ms, uint32_t now_ms);
 
+/*
+ * AUX_DC divider scaling (R191/R192 on sheet 01): 470 k top, 56 k bottom,
+ * so the 12-bit ADC (VREF = 3.3 V) sees the input through a factor of
+ * (470+56)/56.  Full scale is therefore about 31.0 V; counts beyond that
+ * are physically impossible and map to an invalid sentinel of 0 mV plus
+ * false from ec_app_aux_counts_to_mv.
+ */
+#define EC_APP_AUX_DIVIDER_TOP_OHM   470000u
+#define EC_APP_AUX_DIVIDER_BOT_OHM    56000u
+
+bool ec_app_aux_counts_to_mv(uint16_t counts, uint16_t *mv_out);
+
 #ifdef __cplusplus
 }
 #endif
