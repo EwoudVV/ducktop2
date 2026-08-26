@@ -656,7 +656,7 @@ def set_or_insert_top_line(block: str, key: str, line: str) -> str:
     return block[: header_end + 1] + replacement + "\n" + block[header_end + 1 :]
 
 
-def replace_property(block: str, prop: str, value: str) -> str:
+def replace_property(block: str, prop: str, value: str, comp_ref: str = "") -> str:
     pattern = r'(\(property\s+"' + re.escape(prop) + r'"\s+)"[^"]*"'
     if re.search(pattern, block):
         return re.sub(pattern, r'\1"' + q(value) + '"', block, count=1)
@@ -665,12 +665,16 @@ def replace_property(block: str, prop: str, value: str) -> str:
         insert = block.find("\n\t\t(fp_")
     if insert < 0:
         insert = block.rfind("\n\t)")
+    # Property identity must be unique per component: keying only by
+    # name/value made every identical hidden property share one UUID.
+    property_uuid = stable_uuid(f"property:{comp_ref}:{prop}") if comp_ref else \
+        stable_uuid(f"property:{prop}:{value}")
     property_block = (
         f'\n\t\t(property "{q(prop)}" "{q(value)}"\n'
         f'\t\t\t(at 0 0 0)\n'
         f'\t\t\t(layer "F.Fab")\n'
         f'\t\t\t(hide yes)\n'
-        f'\t\t\t(uuid "{stable_uuid(f"property:{prop}:{value}")}")\n'
+        f'\t\t\t(uuid "{property_uuid}")\n'
         f'\t\t\t(effects (font (size 1 1) (thickness 0.15)))\n'
         f'\t\t)'
     )
@@ -850,13 +854,13 @@ def normalize_library_footprint(comp: Component, x: float, y: float, rot: float)
     block = set_or_insert_top_line(block, "at", f"(at {fmt(x)} {fmt(y)} {fmt(rot % 360)})")
     block = rotate_pad_orientations(block, rot)
     block = transform_footprint_zone_coordinates(block, x, y, rot)
-    block = replace_property(block, "Reference", comp.ref)
-    block = replace_property(block, "Value", comp.value)
+    block = replace_property(block, "Reference", comp.ref, comp.ref)
+    block = replace_property(block, "Value", comp.value, comp.ref)
     return block
 
 
 def update_metadata(block: str, comp: Component) -> str:
-    block = replace_property(block, "Value", comp.value)
+    block = replace_property(block, "Value", comp.value, comp.ref)
     internal_properties = {
         "Reference", "Value", "Footprint",
         "Sheetname", "Sheetfile", "exclude_from_board",
@@ -865,7 +869,7 @@ def update_metadata(block: str, comp: Component) -> str:
     for name, value in sorted(comp.properties.items()):
         if name in internal_properties or name.startswith("ki_"):
             continue
-        block = replace_property(block, name, value)
+        block = replace_property(block, name, value, comp.ref)
     block = set_or_insert_top_line(block, "path", f'(path "{q(comp.path)}")')
     block = set_or_insert_top_line(block, "sheetname", f'(sheetname "{q(comp.sheetname)}")')
     block = set_or_insert_top_line(block, "sheetfile", f'(sheetfile "{q(comp.sheetfile)}")')

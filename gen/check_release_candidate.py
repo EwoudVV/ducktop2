@@ -16,6 +16,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import uuid
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -640,6 +641,22 @@ def require_json_status(path: Path, wanted: str, label: str) -> int:
     return 0
 
 
+def pcb_uuid_audit(board_text: str) -> tuple[int, list[str], int]:
+    """Return (invalid_count, duplicate_values, excess_duplicates)."""
+    values = re.findall(r'\(uuid\s+"([^"]+)"\)', board_text)
+    invalid: list[str] = []
+    counts: Counter[str] = Counter()
+    for value in values:
+        try:
+            uuid.UUID(value)
+        except ValueError:
+            invalid.append(value)
+        counts[value] += 1
+    duplicates = sorted(value for value, count in counts.items() if count > 1)
+    excess = sum(count - 1 for count in counts.values() if count > 1)
+    return len(invalid), duplicates, excess
+
+
 def run_pcb_checks(cli: str, pcb: Path, tempdir: Path) -> int:
     failures = 0
     drc_path = tempdir / "drc.json"
@@ -715,6 +732,22 @@ def run_pcb_checks(cli: str, pcb: Path, tempdir: Path) -> int:
         print(f"Off-board footprint anchors: FAIL, {len(outside)}: {', '.join(outside)}")
     else:
         print("Off-board footprint anchors: 0")
+
+    board_text = pcb.read_text(encoding="utf-8")
+    invalid_uuids, duplicate_uuids, excess = pcb_uuid_audit(board_text)
+    if invalid_uuids or duplicate_uuids:
+        failures += len(invalid_uuids) + min(len(duplicate_uuids), 10) + (1 if duplicate_uuids else 0)
+        print(
+            "PCB object UUIDs: FAIL, "
+            f"{invalid_uuids} invalid, {len(duplicate_uuids)} duplicated values "
+            f"({excess} excess occurrences)"
+        )
+        for value in invalid_uuids[:5]:
+            print(f"      invalid: {value}")
+        for value in duplicate_uuids[:5]:
+            print(f"      duplicate: {value}")
+    else:
+        print("PCB object UUIDs: PASS (all valid and globally unique)")
     drifted = drifted_footprint_positions(pcb.read_text(encoding="utf-8"))
     if drifted:
         failures += len(drifted)
