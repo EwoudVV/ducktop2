@@ -137,12 +137,12 @@ commit marker. No routing yet.
 
 ## 6. Impedance geometries (fab numbers)
 
-| Class | L1/L8 microstrip | L3 stripline (GND/GND) |
+| Class | L1/L8 microstrip | L3/L6 stripline (GND/GND) |
 | --- | --- | --- |
 | DIFF_90 (USB 3.x) | w 0.1796 / s 0.2032 | w 4.37 mil (0.111) / s 8.00 mil (0.203) |
 | DIFF_100 (HDMI/ETH) | w 0.1521 / s 0.254 | w 3.59 mil (0.091) / s 10.00 mil (0.254) |
 | USB2_45 | w 0.2248 | w 5.17 mil (0.131) |
-| DIFF_85 (PCIe, interim 80 Ω) | w 0.2085 / s 0.1524 | pending 85 Ω reply; CEM 85 ± 15 % allows 80 |
+| DIFF_85 (PCIe, 2026-08-25 fab reply) | w 7.19 mil (0.183) / s 6.00 mil (0.1524) | w 4.48 mil (0.114) / s 6.00 mil (0.1524) |
 
 Pairs must NOT change layers (L1↔L3 switches need a field-solver pass first).
 
@@ -153,8 +153,9 @@ Pairs must NOT change layers (L1↔L3 switches need a field-solver pass first).
    symmetry is a manual audit step (Phase 4), fixes done interactively.
 3. MCP SWIG session wedged → restart the MCP server; pcbnew-Python pipeline
    is proven and independent of it.
-4. PCIe 85 Ω uses the interim 80 Ω solve — flagged for a final fab reply
-   before the PCIe pairs are routed; widths stay at the approved numbers.
+4. PCIe 85 Ω resolved 2026-08-25: fab geometry is L1/L8 w 0.183 / s 0.1524,
+   L3/L6 w 0.114 / s 0.1524 (all 85.00 Ω ±10 %). DIFF_85 class carries the
+   L1/L8 numbers.
 5. Zone refill can shift DRC counts → refill before the final gate, never
    after.
 6. Fine-pitch convergence (hub 0.4 mm, cluster 1 mm pads): if Freerouting

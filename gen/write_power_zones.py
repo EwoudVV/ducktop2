@@ -36,12 +36,15 @@ def pad_abs(pad, fp):
     return fx + px, fy + py
 
 
-def island_rect(fps, net_prefix):
+def island_rect(fps, net):
     xs, ys = [], []
     for _ref, fp in fps.items():
         for pad in fp["pads"]:
-            net = pad.get("net", "")
-            if net_prefix not in net:
+            # Exact net-name match.  Pads carry hierarchical names
+            # ("/VSYS"); a bare prefix match ("VSYS") would size the island
+            # from the right pads but then write a phantom zone net with
+            # zero connections (2026-08-26 bug: every L5 island was dead).
+            if pad.get("net") != net:
                 continue
             cx, cy = pad_abs(pad, fp)
             w = pad["size"][0] if pad["size"] else 0.5
@@ -165,9 +168,15 @@ def main() -> int:
     for layer in ("In1.Cu", "In3.Cu", "In6.Cu"):
         add("GND", layer, EDGE)
 
-    # Power islands on L3 and L4 — clipped to board outline
-    rails = ["VSYS", "SYS_5V", "MCU_3V3", "MU_12V", "SYS_3V3",
-             "USB_PORT_5V", "VBUS_RAW", "INTERNAL_USB_VBUS"]
+    # Power islands on L5 (In4.Cu) — clipped to board outline.
+    # NOTE: rails MUST be the exact hierarchical net names as written on
+    # the pads ("/VSYS", not "VSYS").  A bare name creates a phantom net
+    # with zero pads: the island fills as isolated dead copper.
+    # VBUS_RAW is two distinct nets on this board (one per PD port) and
+    # cannot share a single zone, so it is listed twice.
+    rails = ["/VSYS", "/SYS_5V", "/MCU_3V3", "/MU_12V", "/SYS_3V3",
+             "/USB_PORT_5V", "/PD1_VBUS_RAW", "/PD2_VBUS_RAW",
+             "/Mu Carrier/INTERNAL_USB_VBUS"]
     for rail in rails:
         rect = island_rect(fps, rail)
         if rect is None:

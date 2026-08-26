@@ -1,10 +1,12 @@
 # Ducktop2 Impedance Verification — 2026-08-01
 
-Status: **CANDIDATE GEOMETRIES READY — awaiting NextPCB engineering review.**
-Completes review item 7 ("Run NextPCB impedance calculator…") up to the
-fabricator hand-off: candidate trace geometries are computed here with
-standard analytic models; the NextPCB field solver is authoritative for the
-final production numbers.
+Status: **RESOLVED — NextPCB 85 Ω reply received 2026-08-25.**
+Completes review item 7 ("Run NextPCB impedance calculator…") and the PCIe
+85 Ω follow-up. Final field-solved geometry (all four structures calculate
+85.00 Ω ±10 %): L1/L8 outer w=7.19 mil (0.183 mm) / s=6.00 mil (0.1524 mm);
+L3/L6 inner w=4.48 mil (0.114 mm) / s=6.00 mil (0.1524 mm). Net class
+DIFF_85 carries the L1/L8 numbers (0.183/0.1524). See
+`manufacturing/mainboard_stackup_release.json` `approved_trace_geometries`.
 
 ## Stackup (L1 microstrip to solid L2 GND)
 
