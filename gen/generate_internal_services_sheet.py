@@ -50,7 +50,7 @@ def build(sheet_symbol_uuid):
     s.place("R202", "R", "10k EC USB default-disconnect pull-up", 195, 63.5,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("EC_USB_OE_N", "local")})
-    s.place("Q60B", "Q_NMOS_SOT23_GSD", "2N7002 DFU-mode USB mux force-enable", 235, 63.5,
+    s.place("Q62", "Q_NMOS_SOT23_GSD", "2N7002 DFU-mode USB mux force-enable", 235, 63.5,
             footprint=FOOTPRINTS["Q_NMOS"],
             pin_nets={"1": ("EC_DFU_SEL", "hier"), "2": ("GND", "local"),
                       "3": ("EC_USB_OE_N", "local")},

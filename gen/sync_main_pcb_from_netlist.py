@@ -38,7 +38,7 @@ FOOTPRINT_DIRS = [
     Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints"),
 ]
 
-CURRENT_ECO_ADD_ONLY = set()  # Q60B restored 2026-08-24; USB-A pads netted by sync
+CURRENT_ECO_ADD_ONLY = set()  # Q62 restored 2026-08-24; USB-A pads netted by sync
 CURRENT_ECO_REPLACE_ONLY = set()  # DF40 -> FH12-30S J2300 swap completed (b13a110)
 # These parts were added by the current ECO, then corrected from 0603 to 0805
 # after the BQ77915 internal-balancing filter requirement was rechecked.
@@ -46,7 +46,7 @@ POST_ADD_FOOTPRINT_REFRESH = set()
 
 ALLOWED_ADD_OR_REPLACE = CURRENT_ECO_REPLACE_ONLY | POST_ADD_FOOTPRINT_REFRESH
 ALLOWED_ADD_ONLY = CURRENT_ECO_ADD_ONLY
-ALLOWED_REMOVE_ONLY = set()  # Q60B1 phantom, R1730-R1733 straps, J8/J50, Q60B all resolved 2026-08-24
+ALLOWED_REMOVE_ONLY = set()  # Q60B1 phantom, R1730-R1733 straps, J8/J50, Q62 all resolved
 FORCE_REPLACE = set(CURRENT_ECO_REPLACE_ONLY)
 REPOSITION_EXISTING: set[str] = set()
 
@@ -178,7 +178,7 @@ ANCHORS_MM.update({
     "R204": (294.5, 181.5, 90.0),
     "R205": (308.0, 181.5, 90.0),
     "R211": (310.5, 181.5, 90.0),
-    "Q60B": (170.0, 55.0, 0.0),
+    "Q62": (170.0, 55.0, 0.0),   # Q60B renamed: letter-suffix ref broke KiCad annotation check (Q61 is the historical status-proxy, contract-forbidden)
     "SW4": (185.0, 180.0, 0.0),   # BOOT0 pinhole switch on the rear service edge
     "R212": (192.0, 180.0, 0.0),
     # Mu SIO console probe pads beside the existing top-left test-point row.
