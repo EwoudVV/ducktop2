@@ -86,9 +86,7 @@ static void ep_arm_in_endpoint(uint32_t ep, uint8_t fifo_num, const uint8_t *dat
     OTG_IN_EP_TypeDef *in = OTG_FS_IN_EP(ep);
     in->DIEPTSIZ = (uint32_t)len | (1u << OTG_FS_DIEPTSIZ_PKTCNT_Pos);
     in->DIEPCTL |= OTG_FS_DIEPCTL_EPENA | OTG_FS_DIEPCTL_CNAK | OTG_FS_DIEPCTL_SD0PID;
-    (void)fifo_num;
-    volatile uint32_t *fifo = (volatile uint32_t *)(0x50001000u + (uint32_t)0x60u * 4u
-                                                    + (ep == USB_HID_EP2 ? 0x20u * 4u : 0u));
+    volatile uint32_t *fifo = OTG_FS_FIFO(fifo_num);
     uint32_t words = (uint32_t)(len + 3u) / 4u;
     uint32_t i;
     for (i = 0u; i < words; i++) {
@@ -209,14 +207,14 @@ static void handle_setup_packet(const uint8_t *setup)
             ep0_stall();
             break;
 
-        case 0x08u:     /* SET_CONFIGURATION */
+        case 0x09u:     /* SET_CONFIGURATION */
             s_pending_configuration = (wValue == 1u);
             s_configured = false;
             s_ctl_state = CTL_STATUS_IN;
             ep0_arm_in(0u, NULL);
             break;
 
-        case 0x09u:     /* GET_CONFIGURATION */
+        case 0x08u:     /* GET_CONFIGURATION */
             if (direction) {
                 static const uint8_t config_value = 1u;
                 s_ctl_data = &config_value;
@@ -254,10 +252,9 @@ static void handle_setup_packet(const uint8_t *setup)
             }
             break;
 
-        case 0x02u:     /* SET_INTERFACE */
-        case 0x0Au:     /* SET_INTERFACE (alt) */
-        case 0x0Bu:     /* GET_INTERFACE */
-            if (bRequest == 0x0Bu && direction) {
+        case 0x0Au:     /* GET_INTERFACE */
+        case 0x0Bu:     /* SET_INTERFACE */
+            if (bRequest == 0x0Au && direction) {
                 static const uint8_t alt = 0u;
                 s_ctl_data = &alt;
                 s_ctl_len = 1u;
@@ -298,7 +295,7 @@ static void handle_setup_packet(const uint8_t *setup)
             }
             break;
 
-        case 0x03u:     /* SET_IDLE */
+        case 0x0Au:     /* SET_IDLE */
             s_ctl_state = CTL_STATUS_IN;
             ep0_arm_in(0u, NULL);
             break;
@@ -322,7 +319,7 @@ static void handle_setup_packet(const uint8_t *setup)
             ep0_arm_in(0u, NULL);
             break;
 
-        case 0x0Au:     /* GET_PROTOCOL */
+        case 0x03u:     /* GET_PROTOCOL */
             if (direction) {
                 s_ctl_data = &s_protocol;
                 s_ctl_len = 1u;
@@ -376,7 +373,7 @@ static void device_reset(void)
     OTG_FS_DEV->DIEPMSK = OTG_FS_DIEPMSK_XFRC;
     OTG_FS_DEV->DOEPMSK = OTG_FS_DOEPMSK_XFRC;
 
-    OTG_FS_DEV->DIEPINT0 = 0xFFFFu;
+    OTG_FS_IN_EP(0)->DIEPINT = 0xFFFFu;
     OTG_FS_OUT_EP(0)->DOEPINT = 0xFFFFu;
 }
 

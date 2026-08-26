@@ -356,7 +356,7 @@ typedef struct {
     __IO uint32_t AIRCR;
     __IO uint32_t SCR;
     __IO uint32_t CCR;
-    __I  uint32_t SHP[3];
+    __IO uint8_t SHP[12];
     __IO uint32_t SHCSR;
     __IO uint32_t CFSR;
     __IO uint32_t HFSR;
@@ -435,10 +435,13 @@ typedef struct {
     __IO uint32_t DCFG;         /* 0x400 */
     __IO uint32_t DCTL;         /* 0x404 */
     __IO uint32_t DSTS;         /* 0x408 */
+    uint32_t RESERVED0;         /* 0x40C */
+    uint32_t RESERVED1;         /* 0x410 */
     __IO uint32_t DIEPMSK;      /* 0x414 */
     __IO uint32_t DOEPMSK;      /* 0x418 */
     __IO uint32_t DAINT;        /* 0x41C */
     __IO uint32_t DAINTMSK;     /* 0x420 */
+    uint32_t RESERVED2;         /* 0x424 */
     __IO uint32_t DVBUSDIS;     /* 0x428 */
     __IO uint32_t DVBUSPULSE;   /* 0x42C */
     __IO uint32_t DTHRCTL;      /* 0x430 */
@@ -449,24 +452,27 @@ typedef struct {
     __IO uint32_t DOPCTL;       /* 0x444 */
     __IO uint32_t DOEACHINT;    /* 0x448 */
     __IO uint32_t DOEACHINTMSK; /* 0x44C */
-    __IO uint32_t DIEPCTL0;     /* 0x500 */
-    __IO uint32_t DIEPTSIZ0;    /* 0x510 */
-    __IO uint32_t DIEPINT0;     /* 0x518 */
-    __IO uint32_t DTXFSTS0;     /* 0x520 */
 } OTG_DEV_TypeDef;
 
 typedef struct {
     __IO uint32_t DIEPCTL;      /* 0x500/0x520/0x540 ... */
-    __IO uint32_t DIEPTSIZ;
+    uint32_t RESERVED0;
     __IO uint32_t DIEPINT;
+    uint32_t RESERVED1;
+    __IO uint32_t DIEPTSIZ;
+    __IO uint32_t DIEPDMA;
     __IO uint32_t DTXFSTS;
+    uint32_t RESERVED2;
 } OTG_IN_EP_TypeDef;
 
 typedef struct {
     __IO uint32_t DOEPCTL;      /* 0x900/0x920/0x940 ... */
-    __IO uint32_t DOEPTSIZ;
+    uint32_t RESERVED0;
     __IO uint32_t DOEPINT;
-    __IO uint32_t DOEPRES;
+    uint32_t RESERVED1;
+    __IO uint32_t DOEPTSIZ;
+    __IO uint32_t DOEPDMA;
+    uint32_t RESERVED2[2];
 } OTG_OUT_EP_TypeDef;
 
 #define OTG_FS                   ((OTG_CORE_TypeDef *) 0x50000000u)
@@ -474,7 +480,7 @@ typedef struct {
 #define OTG_FS_IN_EP(n)          ((OTG_IN_EP_TypeDef *) (0x50000500u + 0x20u * (n)))
 #define OTG_FS_OUT_EP(n)         ((OTG_OUT_EP_TypeDef *) (0x50000900u + 0x20u * (n)))
 #define OTG_FS_FIFO(n)           ((volatile uint32_t *) (0x50001000u + 0x1000u * (n)))
-#define OTG_FS_EP0_TXFIFO        ((volatile uint32_t *) 0x50001100u)
+#define OTG_FS_EP0_TXFIFO        OTG_FS_FIFO(0)
 
 /* GRXSTSP/GRXSTSR packet status field */
 #define OTG_FS_GRXSTSP_PKTSTS_Pos   17u
