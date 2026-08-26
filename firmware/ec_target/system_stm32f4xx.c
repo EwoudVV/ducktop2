@@ -5,6 +5,16 @@
 #define PLL_P 2
 #define PLL_Q 7
 
+#define SYSCLK_HZ ((HSE_VALUE / PLL_M) * PLL_N / PLL_P)
+#define USBCLK_HZ ((HSE_VALUE / PLL_M) * PLL_N / PLL_Q)
+#define PCLK1_HZ (SYSCLK_HZ / 4u)
+#define PCLK2_HZ (SYSCLK_HZ / 2u)
+
+_Static_assert(SYSCLK_HZ == 168000000u, "SYSCLK must be 168 MHz");
+_Static_assert(USBCLK_HZ == 48000000u, "USB clock must be 48 MHz");
+_Static_assert(PCLK1_HZ == 42000000u, "APB1 must be 42 MHz");
+_Static_assert(PCLK2_HZ == 84000000u, "APB2 must be 84 MHz");
+
 static uint32_t SystemCoreClock = 16000000;
 
 void SystemCoreClockUpdate(void)
@@ -14,7 +24,7 @@ void SystemCoreClockUpdate(void)
 
     if ((RCC->CFGR & RCC_CFGR_SWS) == RCC_CFGR_SWS_PLL) {
         hse = HSE_VALUE;
-        pllm = ((RCC->PLLCFGR & RCC_PLLCFGR_PLLM) >> RCC_PLLCFGR_PLLM_Pos) + 1;
+        pllm = (RCC->PLLCFGR & RCC_PLLCFGR_PLLM) >> RCC_PLLCFGR_PLLM_Pos;
         plln = (RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos;
         pllp = (((RCC->PLLCFGR & RCC_PLLCFGR_PLLP) >> RCC_PLLCFGR_PLLP_Pos) * 2) + 2;
         sysclk = (hse / pllm * plln) / pllp;
@@ -49,7 +59,7 @@ void SystemInit(void)
     RCC->CR |= RCC_CR_HSEON;
     while (!(RCC->CR & RCC_CR_HSERDY));
 
-    RCC->PLLCFGR = (PLL_M - 1) << RCC_PLLCFGR_PLLM_Pos
+    RCC->PLLCFGR = PLL_M << RCC_PLLCFGR_PLLM_Pos
                  | PLL_N << RCC_PLLCFGR_PLLN_Pos
                  | ((PLL_P / 2 - 1) & 3u) << RCC_PLLCFGR_PLLP_Pos
                  | PLL_Q << RCC_PLLCFGR_PLLQ_Pos
@@ -61,8 +71,8 @@ void SystemInit(void)
                | FLASH_ACR_PRFTEN;
 
     RCC->CFGR = RCC_CFGR_HPRE_1
-              | RCC_CFGR_PPRE1_2
-              | RCC_CFGR_PPRE2_1;
+              | RCC_CFGR_PPRE1_4
+              | RCC_CFGR_PPRE2_2;
 
     RCC->CR |= RCC_CR_PLLON;
     while (!(RCC->CR & RCC_CR_PLLRDY));

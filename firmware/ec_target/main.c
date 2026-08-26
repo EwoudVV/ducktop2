@@ -231,8 +231,6 @@ static void read_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *telemetry)
 
 int main(void)
 {
-    SystemInit();
-
     gpio_init_all();
 
     matrix_scan_init();
