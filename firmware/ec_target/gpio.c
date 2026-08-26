@@ -437,17 +437,9 @@ bool gpio_adc_init(void)
 
     ADC1->CR2 = ADC_CR2_ADON;
     {
-        /* tSTAB stabilization before calibration (RM0090). */
+        /* RM0090 requires a short stabilization delay after ADON. */
         volatile uint32_t stab = 1000u;
         while (stab-- != 0u) { }
-    }
-    ADC1->CR2 |= ADC_CR2_CAL;
-    {
-        uint32_t timeout = 100000u;
-        while ((ADC1->CR2 & ADC_CR2_CAL) && (timeout-- != 0u)) { }
-        if (ADC1->CR2 & ADC_CR2_CAL) {
-            return false; /* calibration stalled; next read retries */
-        }
     }
     s_adc_ready = true;
     return true;

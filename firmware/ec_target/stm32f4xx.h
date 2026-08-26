@@ -182,16 +182,16 @@ typedef struct {
 } ADC_TypeDef;
 
 typedef struct {
-    uint32_t RESERVED0[4];
+    __IO uint32_t CSR;
     __IO uint32_t CCR;
+    __IO uint32_t CDR;
 } ADC_Common_TypeDef;
 
 #define ADC1                ((ADC_TypeDef *) 0x40012000u)
-#define ADC1_COMMON         ((ADC_Common_TypeDef *) ADC1)
+#define ADC1_COMMON         ((ADC_Common_TypeDef *) 0x40012300u)
 
 #define ADC_CR1_RES_12BIT   (0u << 24)
 #define ADC_CR2_CONT        (1u << 1)
-#define ADC_CR2_CAL         (1u << 2)
 #define ADC_CR2_ADON        (1u << 0)
 #define ADC_CR2_SWSTART     (1u << 30)
 #define ADC_CCR_ADCPRE_DIV4 (1u << 16)
