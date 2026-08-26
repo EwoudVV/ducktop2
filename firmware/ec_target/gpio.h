@@ -36,9 +36,8 @@ void gpio_set_audio_mic_enable(bool enable);
 
 /*
  * One-time ADC1 setup: analog-mode pins, ADC clock, sample times, and
- * calibration.  Self-guarding: the first ADC read calls it lazily and later
- * calls are no-ops.  Returns false only if calibration failed to finish
- * (reads then return 0 and retry on the next call).
+ * stabilization.  Self-guarding: the first ADC read calls it lazily and later
+ * calls are no-ops.
  */
 bool gpio_adc_init(void);
 
