@@ -827,6 +827,14 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         s.place(f"H{index}", "MountingHole", "M2.5 isolated mainboard mounting hole", x, y,
                 footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
                 extra_props=mainboard_hole_props, in_bom=False)
+    # Extra copy-pasted mounting holes (2026-08-25): the user duplicated a
+    # hole when more chassis support points were needed. Keep the schematic
+    # symbols so the board footprints have netlist backing.
+    for index, (x, y) in enumerate(((600, 640), (620, 640), (640, 640), (660, 640),
+                                    (600, 660), (620, 660), (640, 660)), start=21):
+        s.place(f"H{index}", "MountingHole", "M2.5 isolated mainboard mounting hole", x, y,
+                footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
+                extra_props=mainboard_hole_props, in_bom=False)
 
     s.text(20, 330, "NOTES:")
     s.text(20, 338, "Mu VIN and onboard eDP BL_PWR use regulated MU_12V; the exact B160QAN03.K harness/pinout remains a release gate.")
