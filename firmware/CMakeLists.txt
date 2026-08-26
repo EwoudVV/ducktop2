@@ -125,6 +125,14 @@ target_link_libraries(bq_driver_tests PRIVATE ducktop2_bq)
 ducktop2_target_defaults(bq_driver_tests)
 add_test(NAME bq_driver_tests COMMAND bq_driver_tests)
 
+add_executable(tca9539_tests
+    tests/i2c_mock.c
+    tests/test_tca9539.c
+    ec_target/tca9539.c)
+target_include_directories(tca9539_tests PRIVATE ec_target tests)
+ducktop2_target_defaults(tca9539_tests)
+add_test(NAME tca9539_tests COMMAND tca9539_tests)
+
 add_executable(fan_math_tests tests/test_fan_math.c ec_target/fan_math.c)
 target_include_directories(fan_math_tests PRIVATE ec_target)
 ducktop2_target_defaults(fan_math_tests)

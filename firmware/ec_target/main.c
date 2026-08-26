@@ -56,44 +56,10 @@ static bool commit_write(void *context, ec_commit_command_t command, uint32_t va
 
     switch (command) {
     case EC_COMMIT_PD1_PATH_ENABLE:
-        gpio_set_pd_path_enable_a(value ? true : false);
-
-        value = (value ? 1u : 0u);
-        {
-            uint8_t port0;
-            if (!tca9539_read_register(0x06, &port0)) {
-                return false;
-            }
-            if (value) {
-                port0 |= (1u << 0);
-            } else {
-                port0 &= ~(1u << 0);
-            }
-            if (!tca9539_write_register(0x06, port0)) {
-                return false;
-            }
-        }
-        return true;
+        return tca9539_set_pd_path_enable(0u, value != 0u);
 
     case EC_COMMIT_PD2_PATH_ENABLE:
-        gpio_set_pd_path_enable_b(value ? true : false);
-
-        value = (value ? 1u : 0u);
-        {
-            uint8_t port0;
-            if (!tca9539_read_register(0x06, &port0)) {
-                return false;
-            }
-            if (value) {
-                port0 |= (1u << 1);
-            } else {
-                port0 &= ~(1u << 1);
-            }
-            if (!tca9539_write_register(0x06, port0)) {
-                return false;
-            }
-        }
-        return true;
+        return tca9539_set_pd_path_enable(1u, value != 0u);
 
     case EC_COMMIT_CHARGER_IINDPM_MA:
         return ec_app_apply_charger_iindpm_ma((uint16_t)value);
@@ -105,7 +71,6 @@ static bool commit_write(void *context, ec_commit_command_t command, uint32_t va
         return true;
 
     case EC_COMMIT_MU_EDP_BUDGET_MW:
-
         return true;
 
     case EC_COMMIT_CHARGER_ENABLE:
@@ -236,6 +201,11 @@ int main(void)
     matrix_scan_init();
 
     i2c1_init();
+
+    if (!tca9539_init_safe()) {
+        for (;;) {
+        }
+    }
 
     ec_app_init();
 

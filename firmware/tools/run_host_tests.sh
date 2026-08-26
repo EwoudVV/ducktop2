@@ -69,6 +69,14 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
 
 "$CC_BIN" $COMMON_FLAGS \
     -I"$ROOT/ec_target" \
+    -I"$ROOT/tests" \
+    "$ROOT/ec_target/tca9539.c" \
+    "$ROOT/tests/i2c_mock.c" \
+    "$ROOT/tests/test_tca9539.c" \
+    -o "$BUILD_DIR/tca9539_tests"
+
+"$CC_BIN" $COMMON_FLAGS \
+    -I"$ROOT/ec_target" \
     "$ROOT/ec_target/fan_math.c" \
     "$ROOT/tests/test_fan_math.c" \
     -o "$BUILD_DIR/fan_math_tests"
@@ -108,6 +116,7 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
 "$BUILD_DIR/ec_lid_tests"
 "$BUILD_DIR/ec_battery_tests"
 "$BUILD_DIR/bq_driver_tests"
+"$BUILD_DIR/tca9539_tests"
 "$BUILD_DIR/fan_math_tests"
 "$BUILD_DIR/ec_app_math_tests"
 "$BUILD_DIR/usb_hid_desc_tests"

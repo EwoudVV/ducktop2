@@ -49,6 +49,7 @@ set(TARGET_SOURCES
     system_stm32f4xx.c
     gpio.c
     i2c.c
+    tca9539.c
     bq25798.c
     bq34z100.c
     ec_app.c

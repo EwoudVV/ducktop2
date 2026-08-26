@@ -150,3 +150,13 @@ bool i2c1_probe(uint8_t dev_addr)
     }
     return i2c_mock.present;
 }
+
+bool tca9539_write_register(uint8_t reg, uint8_t value)
+{
+    return i2c1_write(0x74u, reg, value);
+}
+
+bool tca9539_read_register(uint8_t reg, uint8_t *value)
+{
+    return i2c1_read(0x74u, reg, value, 1u);
+}
