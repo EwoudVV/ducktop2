@@ -20,12 +20,14 @@ def zone_blocks(text: str) -> list[tuple[int, int, str]]:
     return list(sync.iter_blocks(text, "\n\t(zone"))
 
 
-def signature(block: str) -> tuple[str, str]:
+def signature(block: str) -> tuple[str, str, str]:
     net = sync.extract(r'\(net(?:\s+\d+)?\s+"([^"]*)"\)', block)
     layers = sync.extract(r'\(layers?\s+([^\)]*)\)', block)
-    if not net or not layers:
-        raise RuntimeError("zone block has no net name or layer declaration")
-    return net, layers
+    item_uuid = sync.extract(r'\(uuid\s+"([^"]+)"\)', block)
+    if net is None or not layers or not item_uuid:
+        raise RuntimeError("zone block has no net, layer, or UUID declaration")
+    kind = "keepout" if "(keepout " in block else "copper"
+    return kind, item_uuid, layers
 
 
 def without_zones(text: str) -> str:

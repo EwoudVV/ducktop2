@@ -279160,10 +279160,160 @@
 
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	(zone
 		(net "GND")
 		(layer "In1.Cu")
-		(uuid "d5a00000000001-0000-4000-8000-000000000000")
+		(uuid "2b2248f8-ca58-58f9-9d38-3d264f0b927c")
 		(hatch edge 0.508)
 		(connect_pads yes (clearance 0.2))
 		(min_thickness 0.2)
@@ -279178,7 +279328,7 @@
 	(zone
 		(net "GND")
 		(layer "In3.Cu")
-		(uuid "d5a00000000002-0000-4000-8000-000000000000")
+		(uuid "d02841e6-9f15-5445-b39a-4aea96a75dc8")
 		(hatch edge 0.508)
 		(connect_pads yes (clearance 0.2))
 		(min_thickness 0.2)
@@ -279193,7 +279343,7 @@
 	(zone
 		(net "GND")
 		(layer "In6.Cu")
-		(uuid "d5a00000000003-0000-4000-8000-000000000000")
+		(uuid "b52b930d-044d-5677-ae78-9e9d44a75384")
 		(hatch edge 0.508)
 		(connect_pads yes (clearance 0.2))
 		(min_thickness 0.2)
@@ -279204,101 +279354,11 @@
 			(island_removal_mode 2)
 		)
 		(polygon (pts (xy 0.000 0.000) (xy 358.000 0.000) (xy 358.000 185.000) (xy 0.000 185.000)))
-	)
-	(zone
-		(net "/VSYS")
-		(layer "In4.Cu")
-		(uuid "d5a00000000004-0000-4000-8000-000000000000")
-		(hatch edge 0.508)
-		(connect_pads yes (clearance 0.2))
-		(min_thickness 0.2)
-		(filled_areas_thickness no)
-		(fill yes
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 2)
-		)
-		(polygon (pts (xy 43.630 1.500) (xy 276.905 1.500) (xy 276.905 162.600) (xy 43.630 162.600)))
-	)
-	(zone
-		(net "/SYS_5V")
-		(layer "In4.Cu")
-		(uuid "d5a00000000005-0000-4000-8000-000000000000")
-		(hatch edge 0.508)
-		(connect_pads yes (clearance 0.2))
-		(min_thickness 0.2)
-		(filled_areas_thickness no)
-		(fill yes
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 2)
-		)
-		(polygon (pts (xy 1.300 33.025) (xy 338.725 33.025) (xy 338.725 160.250) (xy 1.300 160.250)))
-	)
-	(zone
-		(net "/MCU_3V3")
-		(layer "In4.Cu")
-		(uuid "d5a00000000006-0000-4000-8000-000000000000")
-		(hatch edge 0.508)
-		(connect_pads yes (clearance 0.2))
-		(min_thickness 0.2)
-		(filled_areas_thickness no)
-		(fill yes
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 2)
-		)
-		(polygon (pts (xy 3.745 1.500) (xy 355.055 1.500) (xy 355.055 182.475) (xy 3.745 182.475)))
-	)
-	(zone
-		(net "/MU_12V")
-		(layer "In4.Cu")
-		(uuid "d5a00000000007-0000-4000-8000-000000000000")
-		(hatch edge 0.508)
-		(connect_pads yes (clearance 0.2))
-		(min_thickness 0.2)
-		(filled_areas_thickness no)
-		(fill yes
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 2)
-		)
-		(polygon (pts (xy 44.975 2.750) (xy 263.105 2.750) (xy 263.105 138.875) (xy 44.975 138.875)))
-	)
-	(zone
-		(net "/SYS_3V3")
-		(layer "In4.Cu")
-		(uuid "d5a00000000008-0000-4000-8000-000000000000")
-		(hatch edge 0.508)
-		(connect_pads yes (clearance 0.2))
-		(min_thickness 0.2)
-		(filled_areas_thickness no)
-		(fill yes
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 2)
-		)
-		(polygon (pts (xy 1.275 12.650) (xy 358.000 12.650) (xy 358.000 185.000) (xy 1.275 185.000)))
-	)
-	(zone
-		(net "/USB_PORT_5V")
-		(layer "In4.Cu")
-		(uuid "d5a00000000009-0000-4000-8000-000000000000")
-		(hatch edge 0.508)
-		(connect_pads yes (clearance 0.2))
-		(min_thickness 0.2)
-		(filled_areas_thickness no)
-		(fill yes
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 2)
-		)
-		(polygon (pts (xy 8.987 15.525) (xy 352.015 15.525) (xy 352.015 148.350) (xy 8.987 148.350)))
 	)
 	(zone
 		(net "/PD1_VBUS_RAW")
 		(layer "In4.Cu")
-		(uuid "d5a0000000000a-0000-4000-8000-000000000000")
+		(uuid "bd6b0384-657c-5811-96ce-7b5d663dd071")
 		(hatch edge 0.508)
 		(connect_pads yes (clearance 0.2))
 		(min_thickness 0.2)
@@ -279308,12 +279368,12 @@
 			(thermal_bridge_width 0.5)
 			(island_removal_mode 2)
 		)
-		(polygon (pts (xy 0.000 18.440) (xy 357.910 18.440) (xy 357.910 176.700) (xy 0.000 176.700)))
+		(polygon (pts (xy 1.000 19.000) (xy 75.000 19.000) (xy 75.000 67.000) (xy 1.000 67.000)))
 	)
 	(zone
 		(net "/PD2_VBUS_RAW")
 		(layer "In4.Cu")
-		(uuid "d5a0000000000b-0000-4000-8000-000000000000")
+		(uuid "56a54720-2a03-5a5d-90b1-b838b125824a")
 		(hatch edge 0.508)
 		(connect_pads yes (clearance 0.2))
 		(min_thickness 0.2)
@@ -279323,12 +279383,72 @@
 			(thermal_bridge_width 0.5)
 			(island_removal_mode 2)
 		)
-		(polygon (pts (xy 17.400 17.850) (xy 358.000 17.850) (xy 358.000 88.360) (xy 17.400 88.360)))
+		(polygon (pts (xy 315.000 19.000) (xy 357.000 19.000) (xy 357.000 84.000) (xy 315.000 84.000)))
+	)
+	(zone
+		(net "/SYS_3V3")
+		(layer "In4.Cu")
+		(uuid "78309deb-8721-51d5-84ae-fee2fdaafa19")
+		(hatch edge 0.508)
+		(connect_pads yes (clearance 0.2))
+		(min_thickness 0.2)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 2)
+		)
+		(polygon (pts (xy 124.000 19.000) (xy 151.000 19.000) (xy 151.000 44.000) (xy 124.000 44.000)))
+	)
+	(zone
+		(net "/USB_PORT_5V")
+		(layer "In4.Cu")
+		(uuid "c3898ccb-dc81-5b7f-800c-2180f76195a8")
+		(hatch edge 0.508)
+		(connect_pads yes (clearance 0.2))
+		(min_thickness 0.2)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 2)
+		)
+		(polygon (pts (xy 157.000 19.000) (xy 181.000 19.000) (xy 181.000 45.000) (xy 157.000 45.000)))
+	)
+	(zone
+		(net "/MU_12V")
+		(layer "In4.Cu")
+		(uuid "1942d92b-f1e9-5698-87a2-1de5809d8291")
+		(hatch edge 0.508)
+		(connect_pads yes (clearance 0.2))
+		(min_thickness 0.2)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 2)
+		)
+		(polygon (pts (xy 145.000 69.000) (xy 181.000 69.000) (xy 181.000 99.000) (xy 145.000 99.000)))
+	)
+	(zone
+		(net "/SYS_5V")
+		(layer "In4.Cu")
+		(uuid "4ec34c67-16c7-5ea9-8955-462717bd71ee")
+		(hatch edge 0.508)
+		(connect_pads yes (clearance 0.2))
+		(min_thickness 0.2)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 2)
+		)
+		(polygon (pts (xy 119.000 83.000) (xy 143.000 83.000) (xy 143.000 109.000) (xy 119.000 109.000)))
 	)
 	(zone
 		(net "/Mu Carrier/INTERNAL_USB_VBUS")
 		(layer "In4.Cu")
-		(uuid "d5a0000000000c-0000-4000-8000-000000000000")
+		(uuid "8a56bf68-2167-5ea8-91f5-a1fa48b982a8")
 		(hatch edge 0.508)
 		(connect_pads yes (clearance 0.2))
 		(min_thickness 0.2)
@@ -279338,12 +279458,72 @@
 			(thermal_bridge_width 0.5)
 			(island_removal_mode 2)
 		)
-		(polygon (pts (xy 157.500 1.500) (xy 211.575 1.500) (xy 211.575 104.900) (xy 157.500 104.900)))
+		(polygon (pts (xy 184.000 83.000) (xy 209.000 83.000) (xy 209.000 101.000) (xy 184.000 101.000)))
+	)
+	(zone
+		(net "/Mu Carrier/PCIE_3V3_IN")
+		(layer "In4.Cu")
+		(uuid "0ac5a921-4271-5f5d-a944-764568e8a634")
+		(hatch edge 0.508)
+		(connect_pads yes (clearance 0.2))
+		(min_thickness 0.2)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 2)
+		)
+		(polygon (pts (xy 210.000 83.000) (xy 265.000 83.000) (xy 265.000 117.000) (xy 210.000 117.000)))
+	)
+	(zone
+		(net "/MCU_3V3")
+		(layer "In4.Cu")
+		(uuid "cc49a0e3-b61e-59f3-8ddc-b3b76ddd5944")
+		(hatch edge 0.508)
+		(connect_pads yes (clearance 0.2))
+		(min_thickness 0.2)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 2)
+		)
+		(polygon (pts (xy 270.000 85.000) (xy 306.000 85.000) (xy 306.000 103.000) (xy 270.000 103.000)))
+	)
+	(zone
+		(net "/VSYS")
+		(layer "In4.Cu")
+		(uuid "eb22e8a6-8bd0-53d1-956f-49c61fb38c85")
+		(hatch edge 0.508)
+		(connect_pads yes (clearance 0.2))
+		(min_thickness 0.2)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 2)
+		)
+		(polygon (pts (xy 54.000 114.000) (xy 119.000 114.000) (xy 119.000 156.000) (xy 54.000 156.000)))
+	)
+	(zone
+		(net "/Maker MCU/MAKER_3V3_CORE")
+		(layer "In4.Cu")
+		(uuid "f994d364-873a-52ad-9da2-ca30bffca148")
+		(hatch edge 0.508)
+		(connect_pads yes (clearance 0.2))
+		(min_thickness 0.2)
+		(filled_areas_thickness no)
+		(fill yes
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 2)
+		)
+		(polygon (pts (xy 247.000 8.000) (xy 308.000 8.000) (xy 308.000 82.000) (xy 247.000 82.000)))
 	)
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b0000000000c-0000-4000-8000-000000000000")
+		(uuid "685e6910-ce7d-5e0b-bf6a-a08ed85d0f2d")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 199.750 179.750) (xy 199.484 181.089) (xy 198.725 182.225) (xy 197.589 182.984) (xy 196.250 183.250) (xy 194.911 182.984) (xy 193.775 182.225) (xy 193.016 181.089) (xy 192.750 179.750) (xy 193.016 178.411) (xy 193.775 177.275) (xy 194.911 176.516) (xy 196.250 176.250) (xy 197.589 176.516) (xy 198.725 177.275) (xy 199.484 178.411)))
@@ -279351,7 +279531,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b0000000000d-0000-4000-8000-000000000000")
+		(uuid "c24f8825-611d-5946-a8dc-7ecbb5bf9e66")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 199.750 179.750) (xy 199.484 181.089) (xy 198.725 182.225) (xy 197.589 182.984) (xy 196.250 183.250) (xy 194.911 182.984) (xy 193.775 182.225) (xy 193.016 181.089) (xy 192.750 179.750) (xy 193.016 178.411) (xy 193.775 177.275) (xy 194.911 176.516) (xy 196.250 176.250) (xy 197.589 176.516) (xy 198.725 177.275) (xy 199.484 178.411)))
@@ -279359,7 +279539,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b0000000000e-0000-4000-8000-000000000000")
+		(uuid "51d75fb1-d5f6-572e-92c1-109f71516245")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 199.750 179.750) (xy 199.484 181.089) (xy 198.725 182.225) (xy 197.589 182.984) (xy 196.250 183.250) (xy 194.911 182.984) (xy 193.775 182.225) (xy 193.016 181.089) (xy 192.750 179.750) (xy 193.016 178.411) (xy 193.775 177.275) (xy 194.911 176.516) (xy 196.250 176.250) (xy 197.589 176.516) (xy 198.725 177.275) (xy 199.484 178.411)))
@@ -279367,7 +279547,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b0000000000f-0000-4000-8000-000000000000")
+		(uuid "86fa19ae-2c2c-5a43-af0d-d17260c39110")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 199.750 179.750) (xy 199.484 181.089) (xy 198.725 182.225) (xy 197.589 182.984) (xy 196.250 183.250) (xy 194.911 182.984) (xy 193.775 182.225) (xy 193.016 181.089) (xy 192.750 179.750) (xy 193.016 178.411) (xy 193.775 177.275) (xy 194.911 176.516) (xy 196.250 176.250) (xy 197.589 176.516) (xy 198.725 177.275) (xy 199.484 178.411)))
@@ -279375,7 +279555,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000010-0000-4000-8000-000000000000")
+		(uuid "b3a9bc1b-a227-5ee7-ad8a-e20c62e8eb83")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 199.750 179.750) (xy 199.484 181.089) (xy 198.725 182.225) (xy 197.589 182.984) (xy 196.250 183.250) (xy 194.911 182.984) (xy 193.775 182.225) (xy 193.016 181.089) (xy 192.750 179.750) (xy 193.016 178.411) (xy 193.775 177.275) (xy 194.911 176.516) (xy 196.250 176.250) (xy 197.589 176.516) (xy 198.725 177.275) (xy 199.484 178.411)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "42387e2d-8759-500f-95b2-655aad1fec76")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 199.750 179.750) (xy 199.484 181.089) (xy 198.725 182.225) (xy 197.589 182.984) (xy 196.250 183.250) (xy 194.911 182.984) (xy 193.775 182.225) (xy 193.016 181.089) (xy 192.750 179.750) (xy 193.016 178.411) (xy 193.775 177.275) (xy 194.911 176.516) (xy 196.250 176.250) (xy 197.589 176.516) (xy 198.725 177.275) (xy 199.484 178.411)))
@@ -279383,7 +279571,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000011-0000-4000-8000-000000000000")
+		(uuid "4cd0b51c-b7bb-59ad-884d-5cd9b67de61a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 199.750 179.750) (xy 199.484 181.089) (xy 198.725 182.225) (xy 197.589 182.984) (xy 196.250 183.250) (xy 194.911 182.984) (xy 193.775 182.225) (xy 193.016 181.089) (xy 192.750 179.750) (xy 193.016 178.411) (xy 193.775 177.275) (xy 194.911 176.516) (xy 196.250 176.250) (xy 197.589 176.516) (xy 198.725 177.275) (xy 199.484 178.411)))
@@ -279391,7 +279579,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000012-0000-4000-8000-000000000000")
+		(uuid "e62c687a-9cb5-53c4-bfe7-9b97754eee09")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 199.750 179.750) (xy 199.484 181.089) (xy 198.725 182.225) (xy 197.589 182.984) (xy 196.250 183.250) (xy 194.911 182.984) (xy 193.775 182.225) (xy 193.016 181.089) (xy 192.750 179.750) (xy 193.016 178.411) (xy 193.775 177.275) (xy 194.911 176.516) (xy 196.250 176.250) (xy 197.589 176.516) (xy 198.725 177.275) (xy 199.484 178.411)))
@@ -279399,7 +279587,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000013-0000-4000-8000-000000000000")
+		(uuid "e0c1b507-4b21-5d9e-9641-eb1bbbdeb77a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 113.750 6.050) (xy 113.484 7.389) (xy 112.725 8.525) (xy 111.589 9.284) (xy 110.250 9.550) (xy 108.911 9.284) (xy 107.775 8.525) (xy 107.016 7.389) (xy 106.750 6.050) (xy 107.016 4.711) (xy 107.775 3.575) (xy 108.911 2.816) (xy 110.250 2.550) (xy 111.589 2.816) (xy 112.725 3.575) (xy 113.484 4.711)))
@@ -279407,7 +279595,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000014-0000-4000-8000-000000000000")
+		(uuid "14ee26c8-b1c9-5e05-b027-4ca289d74ece")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 113.750 6.050) (xy 113.484 7.389) (xy 112.725 8.525) (xy 111.589 9.284) (xy 110.250 9.550) (xy 108.911 9.284) (xy 107.775 8.525) (xy 107.016 7.389) (xy 106.750 6.050) (xy 107.016 4.711) (xy 107.775 3.575) (xy 108.911 2.816) (xy 110.250 2.550) (xy 111.589 2.816) (xy 112.725 3.575) (xy 113.484 4.711)))
@@ -279415,7 +279603,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000015-0000-4000-8000-000000000000")
+		(uuid "91e28c7b-b8e2-5496-ab6f-c5553bc867e7")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 113.750 6.050) (xy 113.484 7.389) (xy 112.725 8.525) (xy 111.589 9.284) (xy 110.250 9.550) (xy 108.911 9.284) (xy 107.775 8.525) (xy 107.016 7.389) (xy 106.750 6.050) (xy 107.016 4.711) (xy 107.775 3.575) (xy 108.911 2.816) (xy 110.250 2.550) (xy 111.589 2.816) (xy 112.725 3.575) (xy 113.484 4.711)))
@@ -279423,7 +279611,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000016-0000-4000-8000-000000000000")
+		(uuid "7008f0c1-3ee5-526d-ba8c-61c0db6907a4")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 113.750 6.050) (xy 113.484 7.389) (xy 112.725 8.525) (xy 111.589 9.284) (xy 110.250 9.550) (xy 108.911 9.284) (xy 107.775 8.525) (xy 107.016 7.389) (xy 106.750 6.050) (xy 107.016 4.711) (xy 107.775 3.575) (xy 108.911 2.816) (xy 110.250 2.550) (xy 111.589 2.816) (xy 112.725 3.575) (xy 113.484 4.711)))
@@ -279431,7 +279619,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000017-0000-4000-8000-000000000000")
+		(uuid "d8a04462-7cb3-55a2-9b3c-0bea16e8c397")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 113.750 6.050) (xy 113.484 7.389) (xy 112.725 8.525) (xy 111.589 9.284) (xy 110.250 9.550) (xy 108.911 9.284) (xy 107.775 8.525) (xy 107.016 7.389) (xy 106.750 6.050) (xy 107.016 4.711) (xy 107.775 3.575) (xy 108.911 2.816) (xy 110.250 2.550) (xy 111.589 2.816) (xy 112.725 3.575) (xy 113.484 4.711)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "e9b87e87-15b9-53bb-91d0-d5fbfca946ce")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 113.750 6.050) (xy 113.484 7.389) (xy 112.725 8.525) (xy 111.589 9.284) (xy 110.250 9.550) (xy 108.911 9.284) (xy 107.775 8.525) (xy 107.016 7.389) (xy 106.750 6.050) (xy 107.016 4.711) (xy 107.775 3.575) (xy 108.911 2.816) (xy 110.250 2.550) (xy 111.589 2.816) (xy 112.725 3.575) (xy 113.484 4.711)))
@@ -279439,7 +279635,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000018-0000-4000-8000-000000000000")
+		(uuid "23ef61a1-105a-56f9-b25e-4aad7dfccc2a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 113.750 6.050) (xy 113.484 7.389) (xy 112.725 8.525) (xy 111.589 9.284) (xy 110.250 9.550) (xy 108.911 9.284) (xy 107.775 8.525) (xy 107.016 7.389) (xy 106.750 6.050) (xy 107.016 4.711) (xy 107.775 3.575) (xy 108.911 2.816) (xy 110.250 2.550) (xy 111.589 2.816) (xy 112.725 3.575) (xy 113.484 4.711)))
@@ -279447,7 +279643,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000019-0000-4000-8000-000000000000")
+		(uuid "9212e5c5-08c5-50d8-963d-85b6e8ce4e69")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 113.750 6.050) (xy 113.484 7.389) (xy 112.725 8.525) (xy 111.589 9.284) (xy 110.250 9.550) (xy 108.911 9.284) (xy 107.775 8.525) (xy 107.016 7.389) (xy 106.750 6.050) (xy 107.016 4.711) (xy 107.775 3.575) (xy 108.911 2.816) (xy 110.250 2.550) (xy 111.589 2.816) (xy 112.725 3.575) (xy 113.484 4.711)))
@@ -279455,7 +279651,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b0000000001a-0000-4000-8000-000000000000")
+		(uuid "2573d786-ad72-52b4-b08c-c197fbf45fd6")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
@@ -279463,7 +279659,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b0000000001b-0000-4000-8000-000000000000")
+		(uuid "39e137ff-177a-5734-b834-517d8c42a341")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
@@ -279471,7 +279667,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b0000000001c-0000-4000-8000-000000000000")
+		(uuid "acd9fd77-7838-583e-9b25-7f8c27a79050")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
@@ -279479,7 +279675,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b0000000001d-0000-4000-8000-000000000000")
+		(uuid "3d4aff52-f389-57d6-aae3-987bd9b914ee")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
@@ -279487,7 +279683,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b0000000001e-0000-4000-8000-000000000000")
+		(uuid "8785f54e-972b-5589-bedd-c4c1a985c15b")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "7dc2e20c-cef1-58b7-8ce8-b91788b5cf12")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
@@ -279495,7 +279699,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b0000000001f-0000-4000-8000-000000000000")
+		(uuid "ac09d308-98f8-5c2d-b482-f5f159135cc9")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
@@ -279503,7 +279707,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000020-0000-4000-8000-000000000000")
+		(uuid "8c0ebaf6-b2c0-566c-88f4-8a187c27977b")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 12.850) (xy 8.234 14.189) (xy 7.475 15.325) (xy 6.339 16.084) (xy 5.000 16.350) (xy 3.661 16.084) (xy 2.525 15.325) (xy 1.766 14.189) (xy 1.500 12.850) (xy 1.766 11.511) (xy 2.525 10.375) (xy 3.661 9.616) (xy 5.000 9.350) (xy 6.339 9.616) (xy 7.475 10.375) (xy 8.234 11.511)))
@@ -279511,7 +279715,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000021-0000-4000-8000-000000000000")
+		(uuid "9011eb3e-3e35-56a6-92f3-3933a397680c")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
@@ -279519,7 +279723,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000022-0000-4000-8000-000000000000")
+		(uuid "59fbfa86-b902-5575-bf3d-7615fc4fc5d1")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
@@ -279527,7 +279731,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000023-0000-4000-8000-000000000000")
+		(uuid "c5f26242-74fb-5d73-a4a3-c807756795a4")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
@@ -279535,7 +279739,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000024-0000-4000-8000-000000000000")
+		(uuid "d9f575b7-c837-5230-93c3-849978a2b69e")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
@@ -279543,7 +279747,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000025-0000-4000-8000-000000000000")
+		(uuid "03b20698-e494-5b3a-93d0-a2bc6314427f")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "f0fb7c42-5cd6-5dc1-9cba-520840106a73")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
@@ -279551,7 +279763,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000026-0000-4000-8000-000000000000")
+		(uuid "4f782e9f-ca32-5eea-9e02-e4fec5f594a1")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
@@ -279559,7 +279771,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000027-0000-4000-8000-000000000000")
+		(uuid "9be3f224-f438-59a5-9916-3d0a96f61b18")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 150.750) (xy 8.234 152.089) (xy 7.475 153.225) (xy 6.339 153.984) (xy 5.000 154.250) (xy 3.661 153.984) (xy 2.525 153.225) (xy 1.766 152.089) (xy 1.500 150.750) (xy 1.766 149.411) (xy 2.525 148.275) (xy 3.661 147.516) (xy 5.000 147.250) (xy 6.339 147.516) (xy 7.475 148.275) (xy 8.234 149.411)))
@@ -279567,7 +279779,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000028-0000-4000-8000-000000000000")
+		(uuid "7f853877-f78f-519c-a167-eecd6d9ce19c")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
@@ -279575,7 +279787,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000029-0000-4000-8000-000000000000")
+		(uuid "c50e9499-d60a-576f-b7d9-97d089a9eb78")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
@@ -279583,7 +279795,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b0000000002a-0000-4000-8000-000000000000")
+		(uuid "c13d06a5-37ff-55cd-8fba-e7e7023a4ae2")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
@@ -279591,7 +279803,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b0000000002b-0000-4000-8000-000000000000")
+		(uuid "1f25f629-cccc-5db8-9393-2ffb219c227d")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
@@ -279599,7 +279811,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b0000000002c-0000-4000-8000-000000000000")
+		(uuid "9567bccb-1419-5304-840e-2e59b113e8e0")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "912f5c17-25b3-56c9-9055-ed4d5e1453e6")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
@@ -279607,7 +279827,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b0000000002d-0000-4000-8000-000000000000")
+		(uuid "3e8f14d0-0269-57d3-bfe9-c39d51ef8a95")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
@@ -279615,7 +279835,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b0000000002e-0000-4000-8000-000000000000")
+		(uuid "895601cc-7cff-5bee-9c48-f83a1af40373")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 265.050 167.250) (xy 264.784 168.589) (xy 264.025 169.725) (xy 262.889 170.484) (xy 261.550 170.750) (xy 260.211 170.484) (xy 259.075 169.725) (xy 258.316 168.589) (xy 258.050 167.250) (xy 258.316 165.911) (xy 259.075 164.775) (xy 260.211 164.016) (xy 261.550 163.750) (xy 262.889 164.016) (xy 264.025 164.775) (xy 264.784 165.911)))
@@ -279623,7 +279843,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b0000000002f-0000-4000-8000-000000000000")
+		(uuid "452c636b-e0ff-5a80-a078-043453f66cf2")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
@@ -279631,7 +279851,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000030-0000-4000-8000-000000000000")
+		(uuid "3bd0f689-f62e-50bf-b2c3-ab7caf586e6a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
@@ -279639,7 +279859,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000031-0000-4000-8000-000000000000")
+		(uuid "8c080d10-a931-50f1-bed5-82119c54b03f")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
@@ -279647,7 +279867,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000032-0000-4000-8000-000000000000")
+		(uuid "708cef2f-49ec-546b-8974-25ac9d2a12ba")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
@@ -279655,7 +279875,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000033-0000-4000-8000-000000000000")
+		(uuid "0c7df543-aa41-59bb-a2ef-bb4442e6adc3")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "0d90c34e-b9fb-545b-a4a4-5cf1fc5c06d0")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
@@ -279663,7 +279891,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000034-0000-4000-8000-000000000000")
+		(uuid "3aaba9c3-4792-5dcb-8b75-b3ea7073973b")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
@@ -279671,7 +279899,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000035-0000-4000-8000-000000000000")
+		(uuid "bb2a3f38-3e9a-5f69-b812-bc3cba58f533")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 263.500 6.000) (xy 263.234 7.339) (xy 262.475 8.475) (xy 261.339 9.234) (xy 260.000 9.500) (xy 258.661 9.234) (xy 257.525 8.475) (xy 256.766 7.339) (xy 256.500 6.000) (xy 256.766 4.661) (xy 257.525 3.525) (xy 258.661 2.766) (xy 260.000 2.500) (xy 261.339 2.766) (xy 262.475 3.525) (xy 263.234 4.661)))
@@ -279679,7 +279907,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000036-0000-4000-8000-000000000000")
+		(uuid "beb7d528-ca52-5a09-a858-5bb4caa339ff")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 67.300 6.100) (xy 67.034 7.439) (xy 66.275 8.575) (xy 65.139 9.334) (xy 63.800 9.600) (xy 62.461 9.334) (xy 61.325 8.575) (xy 60.566 7.439) (xy 60.300 6.100) (xy 60.566 4.761) (xy 61.325 3.625) (xy 62.461 2.866) (xy 63.800 2.600) (xy 65.139 2.866) (xy 66.275 3.625) (xy 67.034 4.761)))
@@ -279687,7 +279915,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000037-0000-4000-8000-000000000000")
+		(uuid "93288183-18bf-5d47-a842-189e2cbf4b36")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 67.300 6.100) (xy 67.034 7.439) (xy 66.275 8.575) (xy 65.139 9.334) (xy 63.800 9.600) (xy 62.461 9.334) (xy 61.325 8.575) (xy 60.566 7.439) (xy 60.300 6.100) (xy 60.566 4.761) (xy 61.325 3.625) (xy 62.461 2.866) (xy 63.800 2.600) (xy 65.139 2.866) (xy 66.275 3.625) (xy 67.034 4.761)))
@@ -279695,7 +279923,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000038-0000-4000-8000-000000000000")
+		(uuid "a9959cfb-33b1-5164-a0f0-d2b04f5b4a5f")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 67.300 6.100) (xy 67.034 7.439) (xy 66.275 8.575) (xy 65.139 9.334) (xy 63.800 9.600) (xy 62.461 9.334) (xy 61.325 8.575) (xy 60.566 7.439) (xy 60.300 6.100) (xy 60.566 4.761) (xy 61.325 3.625) (xy 62.461 2.866) (xy 63.800 2.600) (xy 65.139 2.866) (xy 66.275 3.625) (xy 67.034 4.761)))
@@ -279703,7 +279931,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000039-0000-4000-8000-000000000000")
+		(uuid "3fe0654a-1fe1-5ec4-a454-1f96dc3644be")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 67.300 6.100) (xy 67.034 7.439) (xy 66.275 8.575) (xy 65.139 9.334) (xy 63.800 9.600) (xy 62.461 9.334) (xy 61.325 8.575) (xy 60.566 7.439) (xy 60.300 6.100) (xy 60.566 4.761) (xy 61.325 3.625) (xy 62.461 2.866) (xy 63.800 2.600) (xy 65.139 2.866) (xy 66.275 3.625) (xy 67.034 4.761)))
@@ -279711,7 +279939,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b0000000003a-0000-4000-8000-000000000000")
+		(uuid "158f1a9d-d62d-55ea-bba9-a5532fabcc22")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 67.300 6.100) (xy 67.034 7.439) (xy 66.275 8.575) (xy 65.139 9.334) (xy 63.800 9.600) (xy 62.461 9.334) (xy 61.325 8.575) (xy 60.566 7.439) (xy 60.300 6.100) (xy 60.566 4.761) (xy 61.325 3.625) (xy 62.461 2.866) (xy 63.800 2.600) (xy 65.139 2.866) (xy 66.275 3.625) (xy 67.034 4.761)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "c0e6dbe7-706b-56c2-90f9-38f827750d55")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 67.300 6.100) (xy 67.034 7.439) (xy 66.275 8.575) (xy 65.139 9.334) (xy 63.800 9.600) (xy 62.461 9.334) (xy 61.325 8.575) (xy 60.566 7.439) (xy 60.300 6.100) (xy 60.566 4.761) (xy 61.325 3.625) (xy 62.461 2.866) (xy 63.800 2.600) (xy 65.139 2.866) (xy 66.275 3.625) (xy 67.034 4.761)))
@@ -279719,7 +279955,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b0000000003b-0000-4000-8000-000000000000")
+		(uuid "ef9e3a2c-9d3b-5cc2-b8af-72d8af9974e6")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 67.300 6.100) (xy 67.034 7.439) (xy 66.275 8.575) (xy 65.139 9.334) (xy 63.800 9.600) (xy 62.461 9.334) (xy 61.325 8.575) (xy 60.566 7.439) (xy 60.300 6.100) (xy 60.566 4.761) (xy 61.325 3.625) (xy 62.461 2.866) (xy 63.800 2.600) (xy 65.139 2.866) (xy 66.275 3.625) (xy 67.034 4.761)))
@@ -279727,7 +279963,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b0000000003c-0000-4000-8000-000000000000")
+		(uuid "7232f3d3-afaa-5763-9bfe-9747395ada84")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 67.300 6.100) (xy 67.034 7.439) (xy 66.275 8.575) (xy 65.139 9.334) (xy 63.800 9.600) (xy 62.461 9.334) (xy 61.325 8.575) (xy 60.566 7.439) (xy 60.300 6.100) (xy 60.566 4.761) (xy 61.325 3.625) (xy 62.461 2.866) (xy 63.800 2.600) (xy 65.139 2.866) (xy 66.275 3.625) (xy 67.034 4.761)))
@@ -279735,7 +279971,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b0000000003d-0000-4000-8000-000000000000")
+		(uuid "3e28fc49-0bfe-5cb7-b540-fe7cbf87efad")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.816 180.611) (xy 356.550 181.950) (xy 355.791 183.086) (xy 354.655 183.845) (xy 353.316 184.111) (xy 351.977 183.845) (xy 350.841 183.086) (xy 350.082 181.950) (xy 349.816 180.611) (xy 350.082 179.272) (xy 350.841 178.136) (xy 351.977 177.377) (xy 353.316 177.111) (xy 354.655 177.377) (xy 355.791 178.136) (xy 356.550 179.272)))
@@ -279743,7 +279979,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b0000000003e-0000-4000-8000-000000000000")
+		(uuid "911d6518-26b2-53a0-92fd-b8fb40f5d2a8")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.816 180.611) (xy 356.550 181.950) (xy 355.791 183.086) (xy 354.655 183.845) (xy 353.316 184.111) (xy 351.977 183.845) (xy 350.841 183.086) (xy 350.082 181.950) (xy 349.816 180.611) (xy 350.082 179.272) (xy 350.841 178.136) (xy 351.977 177.377) (xy 353.316 177.111) (xy 354.655 177.377) (xy 355.791 178.136) (xy 356.550 179.272)))
@@ -279751,7 +279987,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b0000000003f-0000-4000-8000-000000000000")
+		(uuid "0a323947-fb38-5c81-8dd7-f422983b8f6a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.816 180.611) (xy 356.550 181.950) (xy 355.791 183.086) (xy 354.655 183.845) (xy 353.316 184.111) (xy 351.977 183.845) (xy 350.841 183.086) (xy 350.082 181.950) (xy 349.816 180.611) (xy 350.082 179.272) (xy 350.841 178.136) (xy 351.977 177.377) (xy 353.316 177.111) (xy 354.655 177.377) (xy 355.791 178.136) (xy 356.550 179.272)))
@@ -279759,7 +279995,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000040-0000-4000-8000-000000000000")
+		(uuid "286d27fd-adce-5dcb-804a-6536c792377f")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.816 180.611) (xy 356.550 181.950) (xy 355.791 183.086) (xy 354.655 183.845) (xy 353.316 184.111) (xy 351.977 183.845) (xy 350.841 183.086) (xy 350.082 181.950) (xy 349.816 180.611) (xy 350.082 179.272) (xy 350.841 178.136) (xy 351.977 177.377) (xy 353.316 177.111) (xy 354.655 177.377) (xy 355.791 178.136) (xy 356.550 179.272)))
@@ -279767,7 +280003,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000041-0000-4000-8000-000000000000")
+		(uuid "2bc6e9fe-5d69-5ec0-9933-60af406aad87")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 356.816 180.611) (xy 356.550 181.950) (xy 355.791 183.086) (xy 354.655 183.845) (xy 353.316 184.111) (xy 351.977 183.845) (xy 350.841 183.086) (xy 350.082 181.950) (xy 349.816 180.611) (xy 350.082 179.272) (xy 350.841 178.136) (xy 351.977 177.377) (xy 353.316 177.111) (xy 354.655 177.377) (xy 355.791 178.136) (xy 356.550 179.272)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "4dc9a39f-f495-56a8-aafb-848ec6280ed8")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.816 180.611) (xy 356.550 181.950) (xy 355.791 183.086) (xy 354.655 183.845) (xy 353.316 184.111) (xy 351.977 183.845) (xy 350.841 183.086) (xy 350.082 181.950) (xy 349.816 180.611) (xy 350.082 179.272) (xy 350.841 178.136) (xy 351.977 177.377) (xy 353.316 177.111) (xy 354.655 177.377) (xy 355.791 178.136) (xy 356.550 179.272)))
@@ -279775,7 +280019,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000042-0000-4000-8000-000000000000")
+		(uuid "78d86eda-794b-5150-9b35-9747ad816f76")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.816 180.611) (xy 356.550 181.950) (xy 355.791 183.086) (xy 354.655 183.845) (xy 353.316 184.111) (xy 351.977 183.845) (xy 350.841 183.086) (xy 350.082 181.950) (xy 349.816 180.611) (xy 350.082 179.272) (xy 350.841 178.136) (xy 351.977 177.377) (xy 353.316 177.111) (xy 354.655 177.377) (xy 355.791 178.136) (xy 356.550 179.272)))
@@ -279783,7 +280027,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000043-0000-4000-8000-000000000000")
+		(uuid "eeba6371-ae0a-577f-b474-cff7f0a1b0d0")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.816 180.611) (xy 356.550 181.950) (xy 355.791 183.086) (xy 354.655 183.845) (xy 353.316 184.111) (xy 351.977 183.845) (xy 350.841 183.086) (xy 350.082 181.950) (xy 349.816 180.611) (xy 350.082 179.272) (xy 350.841 178.136) (xy 351.977 177.377) (xy 353.316 177.111) (xy 354.655 177.377) (xy 355.791 178.136) (xy 356.550 179.272)))
@@ -279791,7 +280035,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000044-0000-4000-8000-000000000000")
+		(uuid "95eb4df8-bead-547e-8dc9-cc97df89276d")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 76.800) (xy 241.534 78.139) (xy 240.775 79.275) (xy 239.639 80.034) (xy 238.300 80.300) (xy 236.961 80.034) (xy 235.825 79.275) (xy 235.066 78.139) (xy 234.800 76.800) (xy 235.066 75.461) (xy 235.825 74.325) (xy 236.961 73.566) (xy 238.300 73.300) (xy 239.639 73.566) (xy 240.775 74.325) (xy 241.534 75.461)))
@@ -279799,7 +280043,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000045-0000-4000-8000-000000000000")
+		(uuid "c9b91867-9843-5ef6-bff9-23131bab36f2")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 76.800) (xy 241.534 78.139) (xy 240.775 79.275) (xy 239.639 80.034) (xy 238.300 80.300) (xy 236.961 80.034) (xy 235.825 79.275) (xy 235.066 78.139) (xy 234.800 76.800) (xy 235.066 75.461) (xy 235.825 74.325) (xy 236.961 73.566) (xy 238.300 73.300) (xy 239.639 73.566) (xy 240.775 74.325) (xy 241.534 75.461)))
@@ -279807,7 +280051,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000046-0000-4000-8000-000000000000")
+		(uuid "6a0c2862-a33a-5e72-a243-cfe43e780c15")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 76.800) (xy 241.534 78.139) (xy 240.775 79.275) (xy 239.639 80.034) (xy 238.300 80.300) (xy 236.961 80.034) (xy 235.825 79.275) (xy 235.066 78.139) (xy 234.800 76.800) (xy 235.066 75.461) (xy 235.825 74.325) (xy 236.961 73.566) (xy 238.300 73.300) (xy 239.639 73.566) (xy 240.775 74.325) (xy 241.534 75.461)))
@@ -279815,7 +280059,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000047-0000-4000-8000-000000000000")
+		(uuid "19c9075d-9b46-59cc-b54c-a7a631fe82a0")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 76.800) (xy 241.534 78.139) (xy 240.775 79.275) (xy 239.639 80.034) (xy 238.300 80.300) (xy 236.961 80.034) (xy 235.825 79.275) (xy 235.066 78.139) (xy 234.800 76.800) (xy 235.066 75.461) (xy 235.825 74.325) (xy 236.961 73.566) (xy 238.300 73.300) (xy 239.639 73.566) (xy 240.775 74.325) (xy 241.534 75.461)))
@@ -279823,7 +280067,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000048-0000-4000-8000-000000000000")
+		(uuid "1e45e668-e256-55b0-8d14-81dff29ebd34")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 241.800 76.800) (xy 241.534 78.139) (xy 240.775 79.275) (xy 239.639 80.034) (xy 238.300 80.300) (xy 236.961 80.034) (xy 235.825 79.275) (xy 235.066 78.139) (xy 234.800 76.800) (xy 235.066 75.461) (xy 235.825 74.325) (xy 236.961 73.566) (xy 238.300 73.300) (xy 239.639 73.566) (xy 240.775 74.325) (xy 241.534 75.461)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "a8cad419-6bb2-5c95-a015-50eb6fdad7a6")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 76.800) (xy 241.534 78.139) (xy 240.775 79.275) (xy 239.639 80.034) (xy 238.300 80.300) (xy 236.961 80.034) (xy 235.825 79.275) (xy 235.066 78.139) (xy 234.800 76.800) (xy 235.066 75.461) (xy 235.825 74.325) (xy 236.961 73.566) (xy 238.300 73.300) (xy 239.639 73.566) (xy 240.775 74.325) (xy 241.534 75.461)))
@@ -279831,7 +280083,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000049-0000-4000-8000-000000000000")
+		(uuid "c5c79f21-f347-5a1a-b6c1-96921b6f9cb9")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 76.800) (xy 241.534 78.139) (xy 240.775 79.275) (xy 239.639 80.034) (xy 238.300 80.300) (xy 236.961 80.034) (xy 235.825 79.275) (xy 235.066 78.139) (xy 234.800 76.800) (xy 235.066 75.461) (xy 235.825 74.325) (xy 236.961 73.566) (xy 238.300 73.300) (xy 239.639 73.566) (xy 240.775 74.325) (xy 241.534 75.461)))
@@ -279839,7 +280091,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b0000000004a-0000-4000-8000-000000000000")
+		(uuid "149e7568-bda9-571d-bcd9-44cbbcbfedf2")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 76.800) (xy 241.534 78.139) (xy 240.775 79.275) (xy 239.639 80.034) (xy 238.300 80.300) (xy 236.961 80.034) (xy 235.825 79.275) (xy 235.066 78.139) (xy 234.800 76.800) (xy 235.066 75.461) (xy 235.825 74.325) (xy 236.961 73.566) (xy 238.300 73.300) (xy 239.639 73.566) (xy 240.775 74.325) (xy 241.534 75.461)))
@@ -279847,7 +280099,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b0000000004b-0000-4000-8000-000000000000")
+		(uuid "1ae8d5a2-af69-5474-bbb8-dd8c145a1ef8")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 253.800 124.950) (xy 253.534 126.289) (xy 252.775 127.425) (xy 251.639 128.184) (xy 250.300 128.450) (xy 248.961 128.184) (xy 247.825 127.425) (xy 247.066 126.289) (xy 246.800 124.950) (xy 247.066 123.611) (xy 247.825 122.475) (xy 248.961 121.716) (xy 250.300 121.450) (xy 251.639 121.716) (xy 252.775 122.475) (xy 253.534 123.611)))
@@ -279855,7 +280107,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b0000000004c-0000-4000-8000-000000000000")
+		(uuid "9d895d32-1260-50a2-91cb-f2e0e30bb1b8")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 253.800 124.950) (xy 253.534 126.289) (xy 252.775 127.425) (xy 251.639 128.184) (xy 250.300 128.450) (xy 248.961 128.184) (xy 247.825 127.425) (xy 247.066 126.289) (xy 246.800 124.950) (xy 247.066 123.611) (xy 247.825 122.475) (xy 248.961 121.716) (xy 250.300 121.450) (xy 251.639 121.716) (xy 252.775 122.475) (xy 253.534 123.611)))
@@ -279863,7 +280115,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b0000000004d-0000-4000-8000-000000000000")
+		(uuid "3d6304b8-46af-5448-be99-b7bb4f19dcaf")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 253.800 124.950) (xy 253.534 126.289) (xy 252.775 127.425) (xy 251.639 128.184) (xy 250.300 128.450) (xy 248.961 128.184) (xy 247.825 127.425) (xy 247.066 126.289) (xy 246.800 124.950) (xy 247.066 123.611) (xy 247.825 122.475) (xy 248.961 121.716) (xy 250.300 121.450) (xy 251.639 121.716) (xy 252.775 122.475) (xy 253.534 123.611)))
@@ -279871,7 +280123,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b0000000004e-0000-4000-8000-000000000000")
+		(uuid "9706b1e4-78bf-5be5-909b-0c210f70216c")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 253.800 124.950) (xy 253.534 126.289) (xy 252.775 127.425) (xy 251.639 128.184) (xy 250.300 128.450) (xy 248.961 128.184) (xy 247.825 127.425) (xy 247.066 126.289) (xy 246.800 124.950) (xy 247.066 123.611) (xy 247.825 122.475) (xy 248.961 121.716) (xy 250.300 121.450) (xy 251.639 121.716) (xy 252.775 122.475) (xy 253.534 123.611)))
@@ -279879,7 +280131,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b0000000004f-0000-4000-8000-000000000000")
+		(uuid "dd2f0cf7-574c-590d-aaef-46d616ace492")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 253.800 124.950) (xy 253.534 126.289) (xy 252.775 127.425) (xy 251.639 128.184) (xy 250.300 128.450) (xy 248.961 128.184) (xy 247.825 127.425) (xy 247.066 126.289) (xy 246.800 124.950) (xy 247.066 123.611) (xy 247.825 122.475) (xy 248.961 121.716) (xy 250.300 121.450) (xy 251.639 121.716) (xy 252.775 122.475) (xy 253.534 123.611)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "5d4bd22c-84ad-5960-9b94-a3100343c9a7")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 253.800 124.950) (xy 253.534 126.289) (xy 252.775 127.425) (xy 251.639 128.184) (xy 250.300 128.450) (xy 248.961 128.184) (xy 247.825 127.425) (xy 247.066 126.289) (xy 246.800 124.950) (xy 247.066 123.611) (xy 247.825 122.475) (xy 248.961 121.716) (xy 250.300 121.450) (xy 251.639 121.716) (xy 252.775 122.475) (xy 253.534 123.611)))
@@ -279887,7 +280147,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000050-0000-4000-8000-000000000000")
+		(uuid "154c0154-4b64-5aeb-bbfb-21d477caa6a5")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 253.800 124.950) (xy 253.534 126.289) (xy 252.775 127.425) (xy 251.639 128.184) (xy 250.300 128.450) (xy 248.961 128.184) (xy 247.825 127.425) (xy 247.066 126.289) (xy 246.800 124.950) (xy 247.066 123.611) (xy 247.825 122.475) (xy 248.961 121.716) (xy 250.300 121.450) (xy 251.639 121.716) (xy 252.775 122.475) (xy 253.534 123.611)))
@@ -279895,7 +280155,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000051-0000-4000-8000-000000000000")
+		(uuid "2f1407bf-cf87-54f4-86f0-b5eb91a35cee")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 253.800 124.950) (xy 253.534 126.289) (xy 252.775 127.425) (xy 251.639 128.184) (xy 250.300 128.450) (xy 248.961 128.184) (xy 247.825 127.425) (xy 247.066 126.289) (xy 246.800 124.950) (xy 247.066 123.611) (xy 247.825 122.475) (xy 248.961 121.716) (xy 250.300 121.450) (xy 251.639 121.716) (xy 252.775 122.475) (xy 253.534 123.611)))
@@ -279903,7 +280163,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000052-0000-4000-8000-000000000000")
+		(uuid "3095b875-f60b-514a-bd7c-a58e1f4d4135")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
@@ -279911,7 +280171,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000053-0000-4000-8000-000000000000")
+		(uuid "fdd4deba-bde0-51c2-8d2b-00842d7cb006")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
@@ -279919,7 +280179,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000054-0000-4000-8000-000000000000")
+		(uuid "0cdd0199-8884-500e-8d49-65212ec16d09")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
@@ -279927,7 +280187,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000055-0000-4000-8000-000000000000")
+		(uuid "7948410c-5c65-5a16-b5c1-c58dcfa69991")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
@@ -279935,7 +280195,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000056-0000-4000-8000-000000000000")
+		(uuid "15d1afec-9783-5d47-a031-b3fbc20520c7")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "dff2d2ec-d632-59f4-93e5-bd23122f923a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
@@ -279943,7 +280211,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000057-0000-4000-8000-000000000000")
+		(uuid "c50e9461-256a-591b-8f67-d6b6f03e9df1")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
@@ -279951,7 +280219,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000058-0000-4000-8000-000000000000")
+		(uuid "90e84a09-f58b-5b73-af01-b017fab1cdc2")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 112.050) (xy 356.234 113.389) (xy 355.475 114.525) (xy 354.339 115.284) (xy 353.000 115.550) (xy 351.661 115.284) (xy 350.525 114.525) (xy 349.766 113.389) (xy 349.500 112.050) (xy 349.766 110.711) (xy 350.525 109.575) (xy 351.661 108.816) (xy 353.000 108.550) (xy 354.339 108.816) (xy 355.475 109.575) (xy 356.234 110.711)))
@@ -279959,7 +280227,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000059-0000-4000-8000-000000000000")
+		(uuid "091cad3b-6cdb-56de-8230-0066f58f6f7a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
@@ -279967,7 +280235,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b0000000005a-0000-4000-8000-000000000000")
+		(uuid "5b46ae5b-646e-582d-b257-71e4c6c624ff")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
@@ -279975,7 +280243,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b0000000005b-0000-4000-8000-000000000000")
+		(uuid "12cee3fd-a320-5a05-b9b3-d48b5222b2d0")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
@@ -279983,7 +280251,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b0000000005c-0000-4000-8000-000000000000")
+		(uuid "a7c677b1-bc48-55c3-abdf-97ff9a93fdbe")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
@@ -279991,7 +280259,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b0000000005d-0000-4000-8000-000000000000")
+		(uuid "96eeb9b4-00ed-5775-bd04-5fa6b7e78d05")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "c27451bb-f38e-5b1a-8ef1-33e3b132dd36")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
@@ -279999,7 +280275,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b0000000005e-0000-4000-8000-000000000000")
+		(uuid "bc2d925e-189e-5103-81c8-56a32c97d6f9")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
@@ -280007,7 +280283,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b0000000005f-0000-4000-8000-000000000000")
+		(uuid "ea92d407-0440-58d4-8a30-bf0b20f5c372")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 19.650) (xy 356.234 20.989) (xy 355.475 22.125) (xy 354.339 22.884) (xy 353.000 23.150) (xy 351.661 22.884) (xy 350.525 22.125) (xy 349.766 20.989) (xy 349.500 19.650) (xy 349.766 18.311) (xy 350.525 17.175) (xy 351.661 16.416) (xy 353.000 16.150) (xy 354.339 16.416) (xy 355.475 17.175) (xy 356.234 18.311)))
@@ -280015,7 +280291,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000060-0000-4000-8000-000000000000")
+		(uuid "469e6b59-e8b1-52ab-8731-3da1a17fadc5")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 212.350 4.950) (xy 212.084 6.289) (xy 211.325 7.425) (xy 210.189 8.184) (xy 208.850 8.450) (xy 207.511 8.184) (xy 206.375 7.425) (xy 205.616 6.289) (xy 205.350 4.950) (xy 205.616 3.611) (xy 206.375 2.475) (xy 207.511 1.716) (xy 208.850 1.450) (xy 210.189 1.716) (xy 211.325 2.475) (xy 212.084 3.611)))
@@ -280023,7 +280299,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000061-0000-4000-8000-000000000000")
+		(uuid "ec9a872c-e2f3-51a8-aa11-2d9f0adc2b56")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 212.350 4.950) (xy 212.084 6.289) (xy 211.325 7.425) (xy 210.189 8.184) (xy 208.850 8.450) (xy 207.511 8.184) (xy 206.375 7.425) (xy 205.616 6.289) (xy 205.350 4.950) (xy 205.616 3.611) (xy 206.375 2.475) (xy 207.511 1.716) (xy 208.850 1.450) (xy 210.189 1.716) (xy 211.325 2.475) (xy 212.084 3.611)))
@@ -280031,7 +280307,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000062-0000-4000-8000-000000000000")
+		(uuid "6864d7a2-06eb-5d08-a7cd-535f203eb32b")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 212.350 4.950) (xy 212.084 6.289) (xy 211.325 7.425) (xy 210.189 8.184) (xy 208.850 8.450) (xy 207.511 8.184) (xy 206.375 7.425) (xy 205.616 6.289) (xy 205.350 4.950) (xy 205.616 3.611) (xy 206.375 2.475) (xy 207.511 1.716) (xy 208.850 1.450) (xy 210.189 1.716) (xy 211.325 2.475) (xy 212.084 3.611)))
@@ -280039,7 +280315,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000063-0000-4000-8000-000000000000")
+		(uuid "5da2de4e-9f76-5399-b31f-dc3ccd908f02")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 212.350 4.950) (xy 212.084 6.289) (xy 211.325 7.425) (xy 210.189 8.184) (xy 208.850 8.450) (xy 207.511 8.184) (xy 206.375 7.425) (xy 205.616 6.289) (xy 205.350 4.950) (xy 205.616 3.611) (xy 206.375 2.475) (xy 207.511 1.716) (xy 208.850 1.450) (xy 210.189 1.716) (xy 211.325 2.475) (xy 212.084 3.611)))
@@ -280047,7 +280323,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000064-0000-4000-8000-000000000000")
+		(uuid "800d2aae-772b-59cc-9575-30257268dd4a")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 212.350 4.950) (xy 212.084 6.289) (xy 211.325 7.425) (xy 210.189 8.184) (xy 208.850 8.450) (xy 207.511 8.184) (xy 206.375 7.425) (xy 205.616 6.289) (xy 205.350 4.950) (xy 205.616 3.611) (xy 206.375 2.475) (xy 207.511 1.716) (xy 208.850 1.450) (xy 210.189 1.716) (xy 211.325 2.475) (xy 212.084 3.611)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "0d6698c9-cb7b-54b6-8015-57ef32a5129d")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 212.350 4.950) (xy 212.084 6.289) (xy 211.325 7.425) (xy 210.189 8.184) (xy 208.850 8.450) (xy 207.511 8.184) (xy 206.375 7.425) (xy 205.616 6.289) (xy 205.350 4.950) (xy 205.616 3.611) (xy 206.375 2.475) (xy 207.511 1.716) (xy 208.850 1.450) (xy 210.189 1.716) (xy 211.325 2.475) (xy 212.084 3.611)))
@@ -280055,7 +280339,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000065-0000-4000-8000-000000000000")
+		(uuid "894add3b-c3fe-5934-9e83-c0cf04b5188a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 212.350 4.950) (xy 212.084 6.289) (xy 211.325 7.425) (xy 210.189 8.184) (xy 208.850 8.450) (xy 207.511 8.184) (xy 206.375 7.425) (xy 205.616 6.289) (xy 205.350 4.950) (xy 205.616 3.611) (xy 206.375 2.475) (xy 207.511 1.716) (xy 208.850 1.450) (xy 210.189 1.716) (xy 211.325 2.475) (xy 212.084 3.611)))
@@ -280063,7 +280347,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000066-0000-4000-8000-000000000000")
+		(uuid "23606eec-32f2-581f-8c6b-0c836675d5b7")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 212.350 4.950) (xy 212.084 6.289) (xy 211.325 7.425) (xy 210.189 8.184) (xy 208.850 8.450) (xy 207.511 8.184) (xy 206.375 7.425) (xy 205.616 6.289) (xy 205.350 4.950) (xy 205.616 3.611) (xy 206.375 2.475) (xy 207.511 1.716) (xy 208.850 1.450) (xy 210.189 1.716) (xy 211.325 2.475) (xy 212.084 3.611)))
@@ -280071,7 +280355,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000067-0000-4000-8000-000000000000")
+		(uuid "0c3c1086-53d5-5417-a35b-74e4632193f8")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 13.200) (xy 241.534 14.539) (xy 240.775 15.675) (xy 239.639 16.434) (xy 238.300 16.700) (xy 236.961 16.434) (xy 235.825 15.675) (xy 235.066 14.539) (xy 234.800 13.200) (xy 235.066 11.861) (xy 235.825 10.725) (xy 236.961 9.966) (xy 238.300 9.700) (xy 239.639 9.966) (xy 240.775 10.725) (xy 241.534 11.861)))
@@ -280079,7 +280363,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000068-0000-4000-8000-000000000000")
+		(uuid "d9fead00-4c96-5854-93b9-ec9934bf5198")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 13.200) (xy 241.534 14.539) (xy 240.775 15.675) (xy 239.639 16.434) (xy 238.300 16.700) (xy 236.961 16.434) (xy 235.825 15.675) (xy 235.066 14.539) (xy 234.800 13.200) (xy 235.066 11.861) (xy 235.825 10.725) (xy 236.961 9.966) (xy 238.300 9.700) (xy 239.639 9.966) (xy 240.775 10.725) (xy 241.534 11.861)))
@@ -280087,7 +280371,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000069-0000-4000-8000-000000000000")
+		(uuid "65dea4d7-1bf5-5910-add1-33c859a0aefc")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 13.200) (xy 241.534 14.539) (xy 240.775 15.675) (xy 239.639 16.434) (xy 238.300 16.700) (xy 236.961 16.434) (xy 235.825 15.675) (xy 235.066 14.539) (xy 234.800 13.200) (xy 235.066 11.861) (xy 235.825 10.725) (xy 236.961 9.966) (xy 238.300 9.700) (xy 239.639 9.966) (xy 240.775 10.725) (xy 241.534 11.861)))
@@ -280095,7 +280379,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b0000000006a-0000-4000-8000-000000000000")
+		(uuid "ab776c90-9cff-5857-baf5-d106cb67eb30")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 13.200) (xy 241.534 14.539) (xy 240.775 15.675) (xy 239.639 16.434) (xy 238.300 16.700) (xy 236.961 16.434) (xy 235.825 15.675) (xy 235.066 14.539) (xy 234.800 13.200) (xy 235.066 11.861) (xy 235.825 10.725) (xy 236.961 9.966) (xy 238.300 9.700) (xy 239.639 9.966) (xy 240.775 10.725) (xy 241.534 11.861)))
@@ -280103,7 +280387,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b0000000006b-0000-4000-8000-000000000000")
+		(uuid "fd1735a2-ad4e-54cd-b41f-43f244334605")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 241.800 13.200) (xy 241.534 14.539) (xy 240.775 15.675) (xy 239.639 16.434) (xy 238.300 16.700) (xy 236.961 16.434) (xy 235.825 15.675) (xy 235.066 14.539) (xy 234.800 13.200) (xy 235.066 11.861) (xy 235.825 10.725) (xy 236.961 9.966) (xy 238.300 9.700) (xy 239.639 9.966) (xy 240.775 10.725) (xy 241.534 11.861)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "b11aef90-5bd6-5d2a-8d01-549e1921de79")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 13.200) (xy 241.534 14.539) (xy 240.775 15.675) (xy 239.639 16.434) (xy 238.300 16.700) (xy 236.961 16.434) (xy 235.825 15.675) (xy 235.066 14.539) (xy 234.800 13.200) (xy 235.066 11.861) (xy 235.825 10.725) (xy 236.961 9.966) (xy 238.300 9.700) (xy 239.639 9.966) (xy 240.775 10.725) (xy 241.534 11.861)))
@@ -280111,7 +280403,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b0000000006c-0000-4000-8000-000000000000")
+		(uuid "ebfff819-8fc8-557a-b466-21b8fabfc482")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 13.200) (xy 241.534 14.539) (xy 240.775 15.675) (xy 239.639 16.434) (xy 238.300 16.700) (xy 236.961 16.434) (xy 235.825 15.675) (xy 235.066 14.539) (xy 234.800 13.200) (xy 235.066 11.861) (xy 235.825 10.725) (xy 236.961 9.966) (xy 238.300 9.700) (xy 239.639 9.966) (xy 240.775 10.725) (xy 241.534 11.861)))
@@ -280119,7 +280411,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b0000000006d-0000-4000-8000-000000000000")
+		(uuid "ed186737-f746-59e0-98d4-c739b55d05c4")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 241.800 13.200) (xy 241.534 14.539) (xy 240.775 15.675) (xy 239.639 16.434) (xy 238.300 16.700) (xy 236.961 16.434) (xy 235.825 15.675) (xy 235.066 14.539) (xy 234.800 13.200) (xy 235.066 11.861) (xy 235.825 10.725) (xy 236.961 9.966) (xy 238.300 9.700) (xy 239.639 9.966) (xy 240.775 10.725) (xy 241.534 11.861)))
@@ -280127,7 +280419,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b0000000006e-0000-4000-8000-000000000000")
+		(uuid "29a10574-bd42-5255-817c-2bca29fd6d3e")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 123.300 76.950) (xy 123.034 78.289) (xy 122.275 79.425) (xy 121.139 80.184) (xy 119.800 80.450) (xy 118.461 80.184) (xy 117.325 79.425) (xy 116.566 78.289) (xy 116.300 76.950) (xy 116.566 75.611) (xy 117.325 74.475) (xy 118.461 73.716) (xy 119.800 73.450) (xy 121.139 73.716) (xy 122.275 74.475) (xy 123.034 75.611)))
@@ -280135,7 +280427,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b0000000006f-0000-4000-8000-000000000000")
+		(uuid "11cc02eb-a750-592d-a99e-faaeb7ba8165")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 123.300 76.950) (xy 123.034 78.289) (xy 122.275 79.425) (xy 121.139 80.184) (xy 119.800 80.450) (xy 118.461 80.184) (xy 117.325 79.425) (xy 116.566 78.289) (xy 116.300 76.950) (xy 116.566 75.611) (xy 117.325 74.475) (xy 118.461 73.716) (xy 119.800 73.450) (xy 121.139 73.716) (xy 122.275 74.475) (xy 123.034 75.611)))
@@ -280143,7 +280435,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000070-0000-4000-8000-000000000000")
+		(uuid "06e832ca-02a1-5c28-b046-6ee02a92c0de")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 123.300 76.950) (xy 123.034 78.289) (xy 122.275 79.425) (xy 121.139 80.184) (xy 119.800 80.450) (xy 118.461 80.184) (xy 117.325 79.425) (xy 116.566 78.289) (xy 116.300 76.950) (xy 116.566 75.611) (xy 117.325 74.475) (xy 118.461 73.716) (xy 119.800 73.450) (xy 121.139 73.716) (xy 122.275 74.475) (xy 123.034 75.611)))
@@ -280151,7 +280443,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000071-0000-4000-8000-000000000000")
+		(uuid "6c904efe-055e-52f1-a659-89a4a3543722")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 123.300 76.950) (xy 123.034 78.289) (xy 122.275 79.425) (xy 121.139 80.184) (xy 119.800 80.450) (xy 118.461 80.184) (xy 117.325 79.425) (xy 116.566 78.289) (xy 116.300 76.950) (xy 116.566 75.611) (xy 117.325 74.475) (xy 118.461 73.716) (xy 119.800 73.450) (xy 121.139 73.716) (xy 122.275 74.475) (xy 123.034 75.611)))
@@ -280159,7 +280451,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000072-0000-4000-8000-000000000000")
+		(uuid "1752bc23-98e0-5461-ab2d-97ef861b41f6")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 123.300 76.950) (xy 123.034 78.289) (xy 122.275 79.425) (xy 121.139 80.184) (xy 119.800 80.450) (xy 118.461 80.184) (xy 117.325 79.425) (xy 116.566 78.289) (xy 116.300 76.950) (xy 116.566 75.611) (xy 117.325 74.475) (xy 118.461 73.716) (xy 119.800 73.450) (xy 121.139 73.716) (xy 122.275 74.475) (xy 123.034 75.611)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "762f51a8-131c-54d2-96b5-3f674827b06a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 123.300 76.950) (xy 123.034 78.289) (xy 122.275 79.425) (xy 121.139 80.184) (xy 119.800 80.450) (xy 118.461 80.184) (xy 117.325 79.425) (xy 116.566 78.289) (xy 116.300 76.950) (xy 116.566 75.611) (xy 117.325 74.475) (xy 118.461 73.716) (xy 119.800 73.450) (xy 121.139 73.716) (xy 122.275 74.475) (xy 123.034 75.611)))
@@ -280167,7 +280467,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000073-0000-4000-8000-000000000000")
+		(uuid "d42202b8-123b-5407-b4c8-f33b222bd4d1")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 123.300 76.950) (xy 123.034 78.289) (xy 122.275 79.425) (xy 121.139 80.184) (xy 119.800 80.450) (xy 118.461 80.184) (xy 117.325 79.425) (xy 116.566 78.289) (xy 116.300 76.950) (xy 116.566 75.611) (xy 117.325 74.475) (xy 118.461 73.716) (xy 119.800 73.450) (xy 121.139 73.716) (xy 122.275 74.475) (xy 123.034 75.611)))
@@ -280175,7 +280475,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000074-0000-4000-8000-000000000000")
+		(uuid "42f3245c-964b-5715-9646-cdddd41c76e5")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 123.300 76.950) (xy 123.034 78.289) (xy 122.275 79.425) (xy 121.139 80.184) (xy 119.800 80.450) (xy 118.461 80.184) (xy 117.325 79.425) (xy 116.566 78.289) (xy 116.300 76.950) (xy 116.566 75.611) (xy 117.325 74.475) (xy 118.461 73.716) (xy 119.800 73.450) (xy 121.139 73.716) (xy 122.275 74.475) (xy 123.034 75.611)))
@@ -280183,7 +280483,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000075-0000-4000-8000-000000000000")
+		(uuid "04d5b5b1-fe5c-5538-b46f-e650ef357fe3")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
@@ -280191,7 +280491,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000076-0000-4000-8000-000000000000")
+		(uuid "25613685-588e-54d1-bfd6-2b4471afce1c")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
@@ -280199,7 +280499,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000077-0000-4000-8000-000000000000")
+		(uuid "368c2730-36c8-5d7a-84ce-1eb0fd896afa")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
@@ -280207,7 +280507,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000078-0000-4000-8000-000000000000")
+		(uuid "fd80fa6a-f99e-5108-a207-5106a8ef1eca")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
@@ -280215,7 +280515,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000079-0000-4000-8000-000000000000")
+		(uuid "36b2dc9e-f601-5282-a5c6-3409082cae4b")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "dbb7bc6c-0769-5987-a6dd-b130e4769051")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
@@ -280223,7 +280531,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b0000000007a-0000-4000-8000-000000000000")
+		(uuid "f8b33b75-ad0b-5c6a-8c53-282cff87f8ec")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
@@ -280231,7 +280539,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b0000000007b-0000-4000-8000-000000000000")
+		(uuid "8bfc2b6b-e2c9-5f8b-953f-9dfa096405fb")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 8.500 180.750) (xy 8.234 182.089) (xy 7.475 183.225) (xy 6.339 183.984) (xy 5.000 184.250) (xy 3.661 183.984) (xy 2.525 183.225) (xy 1.766 182.089) (xy 1.500 180.750) (xy 1.766 179.411) (xy 2.525 178.275) (xy 3.661 177.516) (xy 5.000 177.250) (xy 6.339 177.516) (xy 7.475 178.275) (xy 8.234 179.411)))
@@ -280239,7 +280547,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b0000000007c-0000-4000-8000-000000000000")
+		(uuid "68d16068-5ca5-5a13-9edc-ec8d9b944c73")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
@@ -280247,7 +280555,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b0000000007d-0000-4000-8000-000000000000")
+		(uuid "d654b506-02be-5c01-8789-32365e6ddc47")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
@@ -280255,7 +280563,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b0000000007e-0000-4000-8000-000000000000")
+		(uuid "7f4290e4-15c8-5c26-b6ed-a3f294a07796")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
@@ -280263,7 +280571,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b0000000007f-0000-4000-8000-000000000000")
+		(uuid "79cadbf9-7724-511f-9287-04cf66e63b19")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
@@ -280271,7 +280579,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000080-0000-4000-8000-000000000000")
+		(uuid "a8d2b771-565c-5178-83d5-75ab0940e47b")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "80c53f8e-7bcc-5c20-b7a0-82ef7ee44130")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
@@ -280279,7 +280595,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000081-0000-4000-8000-000000000000")
+		(uuid "080ffeaf-8a43-5b14-9293-1528cf07c75a")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
@@ -280287,7 +280603,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000082-0000-4000-8000-000000000000")
+		(uuid "a8e8a642-f71b-5352-9c75-5c07b26f5fb2")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 356.500 58.750) (xy 356.234 60.089) (xy 355.475 61.225) (xy 354.339 61.984) (xy 353.000 62.250) (xy 351.661 61.984) (xy 350.525 61.225) (xy 349.766 60.089) (xy 349.500 58.750) (xy 349.766 57.411) (xy 350.525 56.275) (xy 351.661 55.516) (xy 353.000 55.250) (xy 354.339 55.516) (xy 355.475 56.275) (xy 356.234 57.411)))
@@ -280295,7 +280611,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000083-0000-4000-8000-000000000000")
+		(uuid "f30a58cd-af34-5905-9ce1-f220706da902")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
@@ -280303,7 +280619,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000084-0000-4000-8000-000000000000")
+		(uuid "a221814f-003c-566f-9b3c-9570415e1475")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
@@ -280311,7 +280627,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b00000000085-0000-4000-8000-000000000000")
+		(uuid "9c5ba9df-a834-5fe8-897a-b738d26929ab")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
@@ -280319,7 +280635,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000086-0000-4000-8000-000000000000")
+		(uuid "4c0e2957-6109-5de5-88d3-2c05d20fe28f")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
@@ -280327,7 +280643,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000087-0000-4000-8000-000000000000")
+		(uuid "6c1d8eda-ed95-535f-b55e-cf672c5e2d26")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "c3ceec32-adbb-527a-9bd7-4ee758b458c0")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
@@ -280335,7 +280659,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000088-0000-4000-8000-000000000000")
+		(uuid "d4654cbc-9b22-5e87-9175-769aa79c3a8f")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
@@ -280343,7 +280667,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000089-0000-4000-8000-000000000000")
+		(uuid "3676f2ee-e4ee-5296-9382-dad64d41e3bd")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 127.600 180.400) (xy 127.334 181.739) (xy 126.575 182.875) (xy 125.439 183.634) (xy 124.100 183.900) (xy 122.761 183.634) (xy 121.625 182.875) (xy 120.866 181.739) (xy 120.600 180.400) (xy 120.866 179.061) (xy 121.625 177.925) (xy 122.761 177.166) (xy 124.100 176.900) (xy 125.439 177.166) (xy 126.575 177.925) (xy 127.334 179.061)))
@@ -280351,7 +280675,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b0000000008a-0000-4000-8000-000000000000")
+		(uuid "2db2e931-b446-5ed7-b55e-195b7beb2399")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 283.480 116.000) (xy 283.214 117.339) (xy 282.455 118.475) (xy 281.319 119.234) (xy 279.980 119.500) (xy 278.641 119.234) (xy 277.505 118.475) (xy 276.746 117.339) (xy 276.480 116.000) (xy 276.746 114.661) (xy 277.505 113.525) (xy 278.641 112.766) (xy 279.980 112.500) (xy 281.319 112.766) (xy 282.455 113.525) (xy 283.214 114.661)))
@@ -280359,7 +280683,7 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b0000000008b-0000-4000-8000-000000000000")
+		(uuid "8128f861-95fa-5cc6-880f-d2e301a73320")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 283.480 116.000) (xy 283.214 117.339) (xy 282.455 118.475) (xy 281.319 119.234) (xy 279.980 119.500) (xy 278.641 119.234) (xy 277.505 118.475) (xy 276.746 117.339) (xy 276.480 116.000) (xy 276.746 114.661) (xy 277.505 113.525) (xy 278.641 112.766) (xy 279.980 112.500) (xy 281.319 112.766) (xy 282.455 113.525) (xy 283.214 114.661)))
@@ -280367,7 +280691,7 @@
 	(zone
 		(net "")
 		(layer "In2.Cu")
-		(uuid "d5b0000000008c-0000-4000-8000-000000000000")
+		(uuid "125ad692-1451-59b4-bbbb-9408e4f7d3d0")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 283.480 116.000) (xy 283.214 117.339) (xy 282.455 118.475) (xy 281.319 119.234) (xy 279.980 119.500) (xy 278.641 119.234) (xy 277.505 118.475) (xy 276.746 117.339) (xy 276.480 116.000) (xy 276.746 114.661) (xy 277.505 113.525) (xy 278.641 112.766) (xy 279.980 112.500) (xy 281.319 112.766) (xy 282.455 113.525) (xy 283.214 114.661)))
@@ -280375,7 +280699,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b0000000008d-0000-4000-8000-000000000000")
+		(uuid "e4ca9589-df56-5987-8a09-41bb7527192c")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 283.480 116.000) (xy 283.214 117.339) (xy 282.455 118.475) (xy 281.319 119.234) (xy 279.980 119.500) (xy 278.641 119.234) (xy 277.505 118.475) (xy 276.746 117.339) (xy 276.480 116.000) (xy 276.746 114.661) (xy 277.505 113.525) (xy 278.641 112.766) (xy 279.980 112.500) (xy 281.319 112.766) (xy 282.455 113.525) (xy 283.214 114.661)))
@@ -280383,7 +280707,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b0000000008e-0000-4000-8000-000000000000")
+		(uuid "2297b752-7c33-543c-b38e-3d3c9ed97510")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 283.480 116.000) (xy 283.214 117.339) (xy 282.455 118.475) (xy 281.319 119.234) (xy 279.980 119.500) (xy 278.641 119.234) (xy 277.505 118.475) (xy 276.746 117.339) (xy 276.480 116.000) (xy 276.746 114.661) (xy 277.505 113.525) (xy 278.641 112.766) (xy 279.980 112.500) (xy 281.319 112.766) (xy 282.455 113.525) (xy 283.214 114.661)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "328619a6-ffaf-5989-9fa0-e1f3895fe21e")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 283.480 116.000) (xy 283.214 117.339) (xy 282.455 118.475) (xy 281.319 119.234) (xy 279.980 119.500) (xy 278.641 119.234) (xy 277.505 118.475) (xy 276.746 117.339) (xy 276.480 116.000) (xy 276.746 114.661) (xy 277.505 113.525) (xy 278.641 112.766) (xy 279.980 112.500) (xy 281.319 112.766) (xy 282.455 113.525) (xy 283.214 114.661)))
@@ -280391,7 +280723,7 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b0000000008f-0000-4000-8000-000000000000")
+		(uuid "e5173393-52fb-5248-a8e8-ecf9bf988408")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 283.480 116.000) (xy 283.214 117.339) (xy 282.455 118.475) (xy 281.319 119.234) (xy 279.980 119.500) (xy 278.641 119.234) (xy 277.505 118.475) (xy 276.746 117.339) (xy 276.480 116.000) (xy 276.746 114.661) (xy 277.505 113.525) (xy 278.641 112.766) (xy 279.980 112.500) (xy 281.319 112.766) (xy 282.455 113.525) (xy 283.214 114.661)))
@@ -280399,7 +280731,7 @@
 	(zone
 		(net "")
 		(layer "B.Cu")
-		(uuid "d5b00000000090-0000-4000-8000-000000000000")
+		(uuid "59708cd7-fad5-588b-86eb-28e03569efdd")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 283.480 116.000) (xy 283.214 117.339) (xy 282.455 118.475) (xy 281.319 119.234) (xy 279.980 119.500) (xy 278.641 119.234) (xy 277.505 118.475) (xy 276.746 117.339) (xy 276.480 116.000) (xy 276.746 114.661) (xy 277.505 113.525) (xy 278.641 112.766) (xy 279.980 112.500) (xy 281.319 112.766) (xy 282.455 113.525) (xy 283.214 114.661)))
@@ -280407,7 +280739,7 @@
 	(zone
 		(net "")
 		(layer "F.Cu")
-		(uuid "d5b00000000091-0000-4000-8000-000000000000")
+		(uuid "a84912d6-886c-5b18-b717-d8bd18f905d1")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
@@ -280415,7 +280747,15 @@
 	(zone
 		(net "")
 		(layer "In1.Cu")
-		(uuid "d5b00000000092-0000-4000-8000-000000000000")
+		(uuid "76822e04-b690-58d7-b386-8326b6189e5a")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
+	)
+	(zone
+		(net "")
+		(layer "In2.Cu")
+		(uuid "da518e3d-c20d-5f29-96e7-bb6230066f03")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
@@ -280423,7 +280763,7 @@
 	(zone
 		(net "")
 		(layer "In3.Cu")
-		(uuid "d5b00000000093-0000-4000-8000-000000000000")
+		(uuid "f12b8371-2827-5f58-b1de-f983dce5622e")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
@@ -280431,7 +280771,15 @@
 	(zone
 		(net "")
 		(layer "In4.Cu")
-		(uuid "d5b00000000094-0000-4000-8000-000000000000")
+		(uuid "5d4e74f6-ddbb-52e9-9bd9-77695cd87503")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
+	)
+	(zone
+		(net "")
+		(layer "In5.Cu")
+		(uuid "0bbff494-8855-563b-9d44-ff07583b8c57")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
@@ -280439,9 +280787,17 @@
 	(zone
 		(net "")
 		(layer "In6.Cu")
-		(uuid "d5b00000000095-0000-4000-8000-000000000000")
+		(uuid "285e8673-2892-52c5-ae6f-1c1c3086522f")
 		(hatch edge 0.508)
 		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
 		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
-)
+	)
+	(zone
+		(net "")
+		(layer "B.Cu")
+		(uuid "bc1fc2d9-d980-5b90-9265-f58d489e8842")
+		(hatch edge 0.508)
+		(keepout (tracks not_allowed) (vias not_allowed) (pads allowed))
+		(polygon (pts (xy 45.000 110.000) (xy 44.619 111.913) (xy 43.536 113.536) (xy 41.913 114.619) (xy 40.000 115.000) (xy 38.087 114.619) (xy 36.464 113.536) (xy 35.381 111.913) (xy 35.000 110.000) (xy 35.381 108.087) (xy 36.464 106.464) (xy 38.087 105.381) (xy 40.000 105.000) (xy 41.913 105.381) (xy 43.536 106.464) (xy 44.619 108.087)))
+	)
 )
