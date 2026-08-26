@@ -12,15 +12,16 @@ display connection, and a separate low-profile mechanical keyboard.
 
 ![Top view of the Ducktop2 motherboard with routing in progress](docs/images/ducktop2-pcb-top.png)
 
-> **Current state, 27 July 2026:** the generated motherboard schematic passes
-> its ERC and copied-project checks. The six-layer PCB has 1,170 physical
-> footprints and routing is in progress. The current independent verdict is
-> **SCHEMATIC BLOCKED**: the trackpad-zone P0, the R250/R251 trackpad USB
-> short, and three duplicate physical references are closed, but routing,
-> DRC/parity, SI, battery, mechanical,
-> procurement, and target-firmware evidence still block an order. The board
-> images in this repository are current routed-in-progress renders, not a
-> fabrication release.
+> **Current state, 1 August 2026:** the generated motherboard schematic passes
+> its ERC and copied-project checks. The rear 3.5 mm headphone jack with
+> plug-detect speaker mute is in sheet 15, and the EC firmware now has
+> host-tested keyboard, fan, OLED, lid, and battery policy cores. The six-layer
+> PCB has 1,170 physical footprints and routing is in progress. The current
+> independent verdict is **SCHEMATIC BLOCKED**: the trackpad-zone P0, the
+> R250/R251 trackpad USB short, and three duplicate physical references are
+> closed, but routing, DRC/parity, SI, battery, mechanical, procurement, and
+> target-firmware evidence still block an order. The board images in this
+> repository are current routed-in-progress renders, not a fabrication release.
 
 ## What I Am Building
 
@@ -144,12 +145,12 @@ maintained ERC screenshot.
 | Check | Current result |
 | --- | --- |
 | KiCad ERC | 0 errors; 13 library-copy and 14 intentional grounded-pin warnings |
-| Independent netlist closure | 1,569 pass, 0 fail |
+| Independent netlist closure | 1,580 pass, 0 fail |
 | Bounded electrical calculations | 123 pass, 0 fail |
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard duplicate references | 0; checked by the release gate |
 | PCB DRC / parity | 1,404 all-track violations, 499 unconnected items, 199 parity observations; routing review required |
-| BOM procurement completeness | 370 unresolved items |
+| BOM procurement completeness | 378 unresolved items |
 | Independent design review | **SCHEMATIC BLOCKED** (2026-07-27) |
 | Host firmware policy tests | Pass on host; 42 HIL rows remain `NOT_RUN` |
 
@@ -158,6 +159,32 @@ The current summaries show what was checked and what remains uncertain; they
 are not a substitute for target firmware, signal-integrity work, thermal and RF
 measurements, or first-article testing. The current PCB DRC counts are an
 in-progress routing baseline, not waived release exceptions.
+
+## Cost and Bill of Materials
+
+The full build is estimated at roughly **$3,560**, dominated by the main PCB
+component sourcing and assembly (~$1,500) and the compute module. The line-item
+breakdown lives in [`docs/bom-and-cost.md`](docs/bom-and-cost.md), and the
+application-pitch version of the rough BOM is in
+[`docs/sponsorship/funding-pitch.md`](docs/sponsorship/funding-pitch.md).
+These are planning estimates, not vendor quotes; re-quote the bare-board fab
+line against the committed six-layer stackup before ordering.
+
+| Item | Cost |
+| --- | --- |
+| LattePanda Mu N305 compute module | $300 |
+| Main PCB fab (358 x 185 mm, NextPCB) | $200 |
+| Main PCB assembly + component sourcing | $1,500 |
+| Radio daughterboard PCB fab + assembly + component sourcing | $600 |
+| Cherry MX ULP keycaps x65 | $50 |
+| 256 GB NVMe SSD 2280 | $50 |
+| Wi-Fi 6E E-key card | $40 |
+| Cooling (blower fan, heatpipe, coldplate) | $50 |
+| CNC aluminum enclosure | $300 |
+| 5000 mAh battery (100 x 60 x 6) | $50 |
+| eDP panel (Samsung ATNA60HU01-0) | $400 |
+| Framework 13 hinges | $20 |
+| **Total** | **~$3,560** |
 
 ## Open and Check the Project
 
@@ -205,6 +232,9 @@ schematics or comparing the PCB to the netlist.
 
 - [Hardware architecture](docs/hardware.md)
 - [Current design status](docs/design-status.md)
+- [Bill of materials and cost breakdown](docs/bom-and-cost.md)
+- [Funding application pitch](docs/sponsorship/funding-pitch.md)
+- [NextPCB sponsorship material](docs/sponsorship/nextpcb-email-draft.md)
 - [Direct-eDP panel and cable work](docs/display-direct-edp.md)
 - [Mechanical measurements](docs/mechanical.md)
 - [Firmware policy](firmware/README.md)
