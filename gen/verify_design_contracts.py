@@ -1748,20 +1748,37 @@ def check_five_port_usb_c_architecture(components):
         "10": "/HUB_DS1_SSRX_P", "11": "/HUB_DS1_SSRX_N",
     }.items():
         expect(net(components, "U1700", pin), want, f"USB7206C pin {pin}")
-    disable_straps = {
-        "41": ("R1733", "HUB_DIS6_DM"),
-        "42": ("R1732", "HUB_DIS6_DP"),
-        "81": ("R1730", "HUB_DIS5_DP"),
-        "82": ("R1731", "HUB_DIS5_DM"),
-    }
-    for pin, (ref, local_name) in disable_straps.items():
-        strap_net = local_net(hub_sheet, local_name)
-        expect(net(components, "U1700", pin), strap_net,
-               f"USB7206C unused port-disable strap pin {pin}")
-        expect_value_prefix(components, ref, "0R", f"{ref} unused-port disable link")
-        expect(net(components, ref, "1"), "/SYS_3V3", f"{ref} strap source")
-        expect(net(components, ref, "2"), strap_net, f"{ref} strap destination")
-        expect(prop(components, ref, "MPN"), "RC0603JR-070RL", f"{ref} exact strap MPN")
+    # 2026-08-24 (92751f9): hub DIS5/DIS6 were repurposed from 0R-strapped
+    # disabled spares into two active internal USB-A spare ports (J24 USB3,
+    # J25 USB2).  The old R1730-R1733 disable-strap contracts are obsolete.
+    spare_ports = (
+        ("J24", "USB 3.0 Type-A internal header (hub DIS5)",
+         {"2": "HUB_DIS5_DM", "3": "HUB_DIS5_DP", "5": "HUB_DIS5_RX_N",
+          "6": "HUB_DIS5_RX_P"}),
+        ("J25", "USB 2.0 Type-A internal header (hub DIS6)",
+         {"2": "HUB_DIS6_DM", "3": "HUB_DIS6_DP"}),
+    )
+    for jref, want_value, data_pins in spare_ports:
+        expect_contains(comp(components, jref).value, "USB",
+                        f"{jref} is an active USB-A spare port")
+        for pin, local_name in data_pins.items():
+            want = local_net(hub_sheet, local_name)
+            expect(net(components, jref, pin), want,
+                   f"{jref} data pin {pin} wired to hub {local_name}")
+        for pin in ("1",):
+            expect(net(components, jref, pin), local_net(hub_sheet, f"J{jref[1:]}_5V_PRE"),
+                   f"{jref} VBUS pre-switch")
+    # DIS5/DIS6 ESD clamp pairs (USBLC6-2P6): clamp the D+/D- lines to GND.
+    for uref, (dp, dm) in (("U1801", ("HUB_DIS5_DP", "HUB_DIS5_DM")),
+                           ("U1804", ("HUB_DIS6_DP", "HUB_DIS6_DM"))):
+        expect_contains(comp(components, uref).value, "USBLC6",
+                        f"{uref} USBLC6-2P6 D+/D- clamp")
+        expect(net(components, uref, "1"), local_net(hub_sheet, dp),
+               f"{uref} DP clamp input")
+        expect(net(components, uref, "3"), local_net(hub_sheet, dm),
+               f"{uref} DM clamp input")
+        for pin in ("2", "5"):
+            expect(net(components, uref, pin), "GND", f"{uref} clamp GND")
 
     source_ports = (("J22", 2, 1780), ("J23", 3, 1740), ("J12", 4, 1760))
     for jref, port, base in source_ports:
