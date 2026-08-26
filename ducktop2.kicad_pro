@@ -78,7 +78,7 @@
     {
      "gap": 0.1524,
      "via_gap": 0.25,
-     "width": 0.2085
+     "width": 0.183
     },
     {
      "gap": 0.2032,
@@ -232,9 +232,10 @@
    "track_widths": [
     0.091,
     0.111,
+    0.114,
     0.1521,
     0.1796,
-    0.2085,
+    0.183,
     0.2248,
     0.25,
     0.3,
@@ -1213,6 +1214,110 @@
   "netclass_assignments": null,
   "netclass_patterns": [
    {
+    "netclass": "DIFF_100",
+    "pattern": "/GBE_HOST_RX_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/GBE_HOST_RX_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/GBE_HOST_TX_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/GBE_HOST_TX_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/GBE_REFCLK_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/GBE_REFCLK_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/ETH_MDI0_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/ETH_MDI0_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/ETH_MDI1_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/ETH_MDI1_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/ETH_MDI2_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/ETH_MDI2_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/ETH_MDI3_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/ETH_MDI3_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/GBE_HSI_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/GBE_HSI_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/GBE_HSO_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/Gigabit Ethernet/GBE_HSO_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_P"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_N"
+   },
+   {
+    "netclass": "DIFF_100",
+    "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_P"
+   },
+   {
     "netclass": "DIFF_85",
     "pattern": "/Mu Carrier/PCIE_M_L0_RX_N"
    },
@@ -1358,7 +1463,11 @@
    },
    {
     "netclass": "DIFF_85",
-    "pattern": "slash"
+    "pattern": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_N"
+   },
+   {
+    "netclass": "DIFF_85",
+    "pattern": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_P"
    },
    {
     "netclass": "DIFF_90",
@@ -1585,108 +1694,60 @@
     "pattern": "/USBC2_SSTX_P"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/GBE_HOST_RX_N"
+    "netclass": "POWER_HI",
+    "pattern": "/MU_12V"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/GBE_HOST_RX_P"
+    "netclass": "POWER_HI",
+    "pattern": "/Mu Carrier/PCIE_3V3_IN"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/GBE_HOST_TX_N"
+    "netclass": "POWER_HI",
+    "pattern": "/PD1_VBUS_RAW"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/GBE_HOST_TX_P"
+    "netclass": "POWER_HI",
+    "pattern": "/PD2_VBUS_RAW"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/GBE_REFCLK_N"
+    "netclass": "POWER_HI",
+    "pattern": "/Power & Battery/PACK_NEG_RAW"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/GBE_REFCLK_P"
+    "netclass": "POWER_HI",
+    "pattern": "/Power & Battery/PACK_POS_FUSED"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/ETH_MDI0_N"
+    "netclass": "POWER_HI",
+    "pattern": "/Power & Battery/PACK_POS_RAW"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/ETH_MDI0_P"
+    "netclass": "POWER_HI",
+    "pattern": "/SYS_3V3"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/ETH_MDI1_N"
+    "netclass": "POWER_HI",
+    "pattern": "/SYS_5V"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/ETH_MDI1_P"
+    "netclass": "POWER_HI",
+    "pattern": "/VSYS"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/ETH_MDI2_N"
+    "netclass": "POWER_MID",
+    "pattern": "/MCU_3V3"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/ETH_MDI2_P"
+    "netclass": "POWER_MID",
+    "pattern": "/Maker MCU/MAKER_3V3_CORE"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/ETH_MDI3_N"
+    "netclass": "POWER_MID",
+    "pattern": "/Mu Carrier/INTERNAL_USB_VBUS"
    },
    {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/ETH_MDI3_P"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/GBE_HSI_N"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/GBE_HSI_P"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/GBE_HSO_N"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/Gigabit Ethernet/GBE_HSO_P"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_N"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_P"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_N"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_P"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_N"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_P"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_N"
-   },
-   {
-    "netclass": "DIFF_100",
-    "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_P"
+    "netclass": "POWER_MID",
+    "pattern": "/USB_PORT_5V"
    },
    {
     "netclass": "USB2_45",
@@ -1850,67 +1911,11 @@
    },
    {
     "netclass": "USB2_45",
+    "pattern": "/WIFI_USB_DN"
+   },
+   {
+    "netclass": "USB2_45",
     "pattern": "/WIFI_USB_DP"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "/MU_12V"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "/SYS_3V3"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "/SYS_5V"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "/VSYS"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "MU_12V"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "SYS_3V3"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "SYS_5V"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "VBUS_RAW"
-   },
-   {
-    "netclass": "POWER_HI",
-    "pattern": "VSYS"
-   },
-   {
-    "netclass": "POWER_MID",
-    "pattern": "/MCU_3V3"
-   },
-   {
-    "netclass": "POWER_MID",
-    "pattern": "/Mu Carrier/INTERNAL_USB_VBUS"
-   },
-   {
-    "netclass": "POWER_MID",
-    "pattern": "/USB_PORT_5V"
-   },
-   {
-    "netclass": "POWER_MID",
-    "pattern": "INTERNAL_USB_VBUS"
-   },
-   {
-    "netclass": "POWER_MID",
-    "pattern": "MCU_3V3"
-   },
-   {
-    "netclass": "POWER_MID",
-    "pattern": "USB_PORT_5V"
    }
   ]
  },

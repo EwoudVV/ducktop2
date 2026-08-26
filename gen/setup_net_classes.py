@@ -20,13 +20,13 @@ Usage:
 from __future__ import annotations
 
 import re
-import shutil
-import subprocess
+import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BOARD = ROOT / "ducktop2.kicad_pcb"
+PROJECT = ROOT / "ducktop2.kicad_pro"
 
 NET_RE = re.compile(r'\(net "([^"]+)"\)')
 
@@ -69,7 +69,16 @@ SHEET_PREFIXES = (
     "Power Inputs/",
     "Wi-Fi{slash}Bluetooth & OLEDs/",
     "Optional Radio Daughterboard Interface/",
+    "Power & Battery/",
 )
+
+EXACT_CLASSES = {
+    "/PD1_VBUS_RAW": "POWER_HI",
+    "/PD2_VBUS_RAW": "POWER_HI",
+    "/Mu Carrier/PCIE_3V3_IN": "POWER_HI",
+    "/Maker MCU/MAKER_3V3_CORE": "POWER_MID",
+    "/WIFI_USB_DN": "USB2_45",
+}
 
 LEAF_CLASSIFIERS: list[tuple[str, re.Pattern]] = [
     # 85-ohm differential (PCIe Gen3: NVMe x4 from Mu, Wi-Fi x1, REFCLK)
@@ -79,7 +88,7 @@ LEAF_CLASSIFIERS: list[tuple[str, re.Pattern]] = [
     # 100-ohm differential (HDMI + Ethernet MDI / host / REFCLK / HSI-HSO)
     ("DIFF_100", re.compile(r"^(EXT_HDMI_(CK|D[0-9])|ETH_MDI[0-9]|GBE_HOST_(RX|TX)|GBE_REFCLK|GBE_HS(I|O))_(N|P)$")),
     # 45-ohm single-ended (USB 2.0 D+/D-)
-    ("USB2_45", re.compile(r"^(USBC[12]|HUB_DS[0-9]|HUB_DIS[0-9]|AUDIO_USB|EC_HOST_USB|MAKER_USB|MCU_USB|EC_USB_ISO|TPAD_CONN|MAKER_USB_ISO|CODEC_USB|SYSTEM_DAC_USB|TRACKPAD_USB|WIFI_USB|DFU_CONN|EC_DFU)_(DP|DM)$")),
+    ("USB2_45", re.compile(r"^(USBC[12]|HUB_DS[0-9]|HUB_DIS[0-9]|AUDIO_USB|EC_HOST_USB|MAKER_USB|MCU_USB|EC_USB_ISO|TPAD_CONN|MAKER_USB_ISO|CODEC_USB|SYSTEM_DAC_USB|TRACKPAD_USB|WIFI_USB|DFU_CONN|EC_DFU)_(DP|DM|DN)$")),
     # High-current rails: pack bus, system 5 V/3.3 V, VSYS, Mu 12 V, VBUS_RAW
     ("POWER_HI", re.compile(r"^(VSYS|SYS_5V|SYS_3V3|MU_12V|VBUS_RAW|PACK_POS_RAW|PACK_NEG_RAW|PACK_POS_FUSED)$")),
     # Mid-current rails
@@ -100,6 +109,10 @@ def classify(nets: set[str]) -> tuple[dict[str, list[str]], list[str]]:
     classes: dict[str, list[str]] = {name: [] for name in CLASSES}
     unclassified_hs: list[str] = []
     for net in sorted(nets):
+        exact_class = EXACT_CLASSES.get(net)
+        if exact_class is not None:
+            classes[exact_class].append(net)
+            continue
         leaf = normalize(net)
         assigned = False
         for cls, pattern in LEAF_CLASSIFIERS:
@@ -120,116 +133,54 @@ def collect_nets() -> set[str]:
     return set(NET_RE.findall(text))
 
 
-def render_classes(classes: dict[str, list[str]]) -> str:
-    """Render KiCad 10 design-rule net_class blocks (top-level in the board
-    file): (net_class "NAME" "DESCRIPTION" (clearance) (trace_width)
-    (via_dia) (via_drill) (diff_pair_width) (diff_pair_gap) (add_net ...)*.
+def expected_project(classes: dict[str, list[str]]) -> dict:
+    project = json.loads(PROJECT.read_text(encoding="utf-8"))
+    net_settings = project.setdefault("net_settings", {})
+    existing = {item["name"]: item for item in net_settings.get("classes", [])}
+    for name, params in [("Default", DEFAULT_CLASS), *CLASSES.items()]:
+        item = existing[name]
+        item["clearance"] = params["clearance"]
+        item["track_width"] = params["track_width"]
+        item["diff_pair_width"] = params.get("diff_pair_width", params["track_width"])
+        item["diff_pair_gap"] = params.get("diff_pair_gap", DEFAULT_CLASS["diff_pair_gap"])
+        item["via_diameter"] = DEFAULT_CLASS["via_dia"]
+        item["via_drill"] = DEFAULT_CLASS["via_drill"]
+    net_settings["classes"] = [existing[name] for name in
+                               ("Default", "DIFF_100", "DIFF_85", "DIFF_90",
+                                "POWER_HI", "POWER_MID", "USB2_45")]
+    net_settings["netclass_patterns"] = [
+        {"netclass": class_name, "pattern": net}
+        for class_name in sorted(classes)
+        for net in sorted(classes[class_name])
+    ]
 
-    The Default net class is included so the board has explicit base rules.
-    """
-    blocks = []
-    all_classes = [("Default", DEFAULT_CLASS)] + list(CLASSES.items())
-    for cls, params in all_classes:
-        lines = [f'(net_class "{cls}" "{params.get("description", "Default net class")}"']
-        lines.append(f'\t(clearance {params["clearance"]})')
-        lines.append(f'\t(trace_width {params["track_width"]})')
-        lines.append(f'\t(via_dia {DEFAULT_CLASS["via_dia"]})')
-        lines.append(f'\t(via_drill {DEFAULT_CLASS["via_drill"]})')
-        lines.append(f'\t(diff_pair_width {params.get("diff_pair_width", params["track_width"])})')
-        lines.append(f'\t(diff_pair_gap {params.get("diff_pair_gap", DEFAULT_CLASS["diff_pair_gap"])})')
-        if cls != "Default":
-            for net in sorted(classes.get(cls, [])):
-                lines.append(f'\t(add_net "{net}")')
-        lines.append(")")
-        blocks.append("\n".join(lines))
-    return "\n".join(blocks)
-
-
-def block_bounds(text: str, token: str) -> tuple[int, int]:
-    """Return (open, close) offsets of the depth-1 block named ``token``,
-    skipping quoted strings (net names contain parens)."""
-    depth = 0
-    i = 0
-    n = len(text)
-    open_at = None
-    while i < n:
-        c = text[i]
-        if c == '"':
-            i += 1
-            while i < n and text[i] != '"':
-                i += 2 if text[i] == "\\" else 1
-            i += 1
-            continue
-        if c == "(":
-            depth += 1
-            m = re.match(r"\(([A-Za-z0-9_.]+)", text[i:])
-            if depth == 2 and m and m.group(1) == token:
-                open_at = i
-                close_at = None
-                d = 1
-                k = i + 1
-                while k < n:
-                    if text[k] == '"':
-                        k += 1
-                        while k < n and text[k] != '"':
-                            k += 2 if text[k] == "\\" else 1
-                        k += 1
-                        continue
-                    if text[k] == "(":
-                        d += 1
-                    elif text[k] == ")":
-                        d -= 1
-                        if d == 0:
-                            close_at = k
-                            break
-                    k += 1
-                if close_at is not None:
-                    return open_at, close_at
-            i += len(m.group(0)) if m else 1
-        elif c == ")":
-            depth -= 1
-            i += 1
-        else:
-            i += 1
-    raise SystemExit(f"block {token!r} not found")
+    settings = project["board"]["design_settings"]
+    settings["track_widths"] = sorted({
+        0.091, 0.111, 0.114, 0.1521, 0.1796, 0.183, 0.2248,
+        0.25, 0.3, 0.4, 0.6, 1.0,
+    })
+    settings["diff_pair_dimensions"] = [
+        {"gap": 0.0, "via_gap": 0.0, "width": 0.0},
+        {"gap": 0.1524, "via_gap": 0.25, "width": 0.183},
+        {"gap": 0.2032, "via_gap": 0.25, "width": 0.1796},
+        {"gap": 0.254, "via_gap": 0.25, "width": 0.1521},
+        {"gap": 0.25, "via_gap": 0.25, "width": 0.2248},
+    ]
+    return project
 
 
-def apply(classes: dict[str, list[str]]) -> None:
-    text = BOARD.read_text(encoding="utf-8")
-
-    _setup_open, setup_close = block_bounds(text, "setup")
-    rendered = render_classes(classes)
-
-    # Idempotent: drop any previously inserted net_class blocks first.
-    while True:
-        try:
-            s, e = block_bounds(text, "net_class")
-        except SystemExit:
-            break
-        text = text[:s] + text[e + 1:].lstrip("\n")
-
-    text = text[:setup_close + 1] + "\n" + rendered + text[setup_close + 1:]
-
-    shutil.copyfile(BOARD, BOARD.with_suffix(".kicad_pcb.bak"))
-    BOARD.write_text(text, encoding="utf-8")
-    print(f"wrote {BOARD.name} (backup: {BOARD.name}.bak)")
-
-
-def validate() -> None:
-    cli = shutil.which("kicad-cli") or "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli"
-    import tempfile
-    with tempfile.TemporaryDirectory(prefix="netclass-check-") as tmp:
-        copy = Path(tmp) / BOARD.name
-        shutil.copyfile(BOARD, copy)
-        result = subprocess.run(
-            [cli, "pcb", "drc", "--output", str(Path(tmp) / "drc.json"), str(copy)],
-            capture_output=True, text=True,
-        )
-        print(result.stdout[-2000:] if result.stdout else "")
-        if result.returncode != 0:
-            print(result.stderr[-2000:])
-            raise SystemExit(f"kicad-cli failed to parse board (rc={result.returncode})")
-        print("board parses OK (kicad-cli drc accepted the net classes)")
+def apply_or_check(classes: dict[str, list[str]], apply: bool) -> bool:
+    expected = expected_project(classes)
+    actual = json.loads(PROJECT.read_text(encoding="utf-8"))
+    if actual == expected:
+        print("project net classes: exact")
+        return True
+    if not apply:
+        print("project net classes: DRIFT")
+        return False
+    PROJECT.write_text(json.dumps(expected, indent=1) + "\n", encoding="utf-8")
+    print(f"wrote {PROJECT.name}")
+    return True
 
 
 def main() -> int:
@@ -244,10 +195,7 @@ def main() -> int:
         for net in unclassified:
             print(f"  {net}")
 
-    if "--apply" in sys.argv:
-        apply(classes)
-        validate()
-    return 0
+    return 0 if apply_or_check(classes, "--apply" in sys.argv) else 1
 
 
 if __name__ == "__main__":
