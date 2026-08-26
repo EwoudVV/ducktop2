@@ -25,6 +25,12 @@ DEFAULT_SCHEMATIC = ROOT / "ducktop2.kicad_sch"
 DEFAULT_PCB = ROOT / "ducktop2.kicad_pcb"
 NUMBER = r"[-+0-9.eE]+"
 
+# Violation types a refill may newly introduce without blocking, because
+# they are direct consequences of unrouted nets on a routing-phase board:
+# isolated islands of unvias'd copper.  Everything else that appears only
+# after refill (placement drift, shorts from fills, etc.) blocks release.
+REFILL_DELTA_TYPES = {"isolated_copper"}
+
 
 def semantic_signature(sheet: str, violation: dict) -> tuple:
     return (
@@ -69,7 +75,6 @@ DRC_ALLOWLIST = Counter({
         ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J25_5V_PRE] of J25 on F.Cu', 'Reference field of C1853')): 1,
         ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 2 [GND] of R1851 on F.Cu', 'Reference field of U1804')): 1,
         ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J25_ILIM] of R1851 on F.Cu', 'Reference field of U1804')): 1,
-        ('PCB', 'warning', 'silk_overlap', 'Silkscreen clearance', ('Reference field of C1741', 'Reference field of H10')): 1,
         ('PCB', 'warning', 'silk_over_copper', 'Silkscreen clipped by solder mask', ('Pad 1 [/Native USB-C I/O/J24_5V_PRE] of C1850 on F.Cu', 'Segment of J24 on F.Silkscreen')): 2,
 
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint J500', 'Footprint U501')): 1,
@@ -111,7 +116,6 @@ DRC_ALLOWLIST = Counter({
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C793', 'Footprint R764')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C762', 'Footprint R764')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C45', 'Footprint C766')): 1,
-        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R1730')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C434', 'Footprint C709')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C714', 'Footprint F200')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C423', 'Footprint J2')): 1,
@@ -135,7 +139,6 @@ DRC_ALLOWLIST = Counter({
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint C1751', 'Footprint R2042')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R2317')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint C1832')): 1,
-        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R1731')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint F10')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint J2300', 'Footprint LED1')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint J45', 'Footprint R204')): 1,
@@ -193,7 +196,6 @@ DRC_ALLOWLIST = Counter({
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint J4', 'Footprint R389')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint U2014')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint C1813')): 1,
-        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R1732')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R2319')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint C1843')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint C586')): 1,
@@ -204,7 +206,6 @@ DRC_ALLOWLIST = Counter({
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R1708')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R179')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R2325')): 1,
-        ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R1733')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R196')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint C587')): 1,
         ('PCB', 'error', 'courtyards_overlap', 'Courtyards overlap', ('Footprint A1', 'Footprint R1717')): 1,
@@ -468,9 +469,24 @@ def duplicate_footprint_references(board_text: str) -> list[str]:
 
 def report_unexpected(label: str, actual: Counter, allowed: Counter) -> int:
     unexpected = actual - allowed
+    stale_allowed = allowed - actual
+    failures = 0
     if not unexpected:
-        print(f"{label}: {sum(actual.values())} findings, all exactly allowlisted")
-        return 0
+        if stale_allowed:
+            failures += sum(stale_allowed.values())
+            print(
+                f"{label}: FAIL, allowlist drift: "
+                f"{sum(stale_allowed.values())} waived finding(s) no longer occur"
+            )
+            for signature, count in stale_allowed.most_common(20):
+                sheet, severity, rule, description, items = signature
+                print(f"  {count}x [{severity}] {sheet} {rule}: {description}")
+                for item in items:
+                    print(f"      {item}")
+        else:
+            print(f"{label}: PASS ({sum(actual.values())} findings, exact allowlist match)")
+        return failures
+
     print(f"{label}: FAIL, {sum(unexpected.values())} non-allowlisted findings")
     for signature, count in unexpected.most_common(20):
         sheet, severity, rule, description, items = signature
@@ -479,7 +495,14 @@ def report_unexpected(label: str, actual: Counter, allowed: Counter) -> int:
             print(f"      {item}")
     if len(unexpected) > 20:
         print(f"  ... {len(unexpected) - 20} additional unique signatures")
-    return sum(unexpected.values())
+    failures += sum(unexpected.values())
+    if stale_allowed:
+        failures += sum(stale_allowed.values())
+        print(
+            f"  additionally, {sum(stale_allowed.values())} waived finding(s) "
+            "no longer occur (stale allowlist entries)"
+        )
+    return failures
 
 
 CANONICAL_FOOTPRINT_POSITIONS = {
@@ -640,6 +663,52 @@ def run_pcb_checks(cli: str, pcb: Path, tempdir: Path) -> int:
         print(f"Unrouted items: FAIL, {len(unconnected)} missing connections")
     else:
         print("Unrouted items: 0")
+
+    # Refilled-state gate: DRC the board as the fabricator will receive it
+    # (zones filled and saved).  Uses the staged project copy so .kicad_pro
+    # and .kicad_dru apply; falls back to staging a minimal copy when this
+    # run is not the canonical project.
+    project_root = tempdir / "project"
+    if not (project_root / "ducktop2.kicad_pro").exists():
+        project_root = tempdir / "refill-project"
+        project_root.mkdir()
+        for name in ("ducktop2.kicad_pro", "ducktop2.kicad_dru"):
+            source = ROOT / name
+            if source.exists():
+                shutil.copyfile(source, project_root / name)
+        shutil.copyfile(pcb, project_root / pcb.name)
+    refill_pcb = project_root / pcb.name
+    refill_path = tempdir / "drc_refilled.json"
+    if refill_pcb.exists():
+        run_command([
+            cli, "pcb", "drc", "--refill-zones", "--save-board",
+            "--severity-all", "--severity-exclusions",
+            "--format", "json", "--output", str(refill_path), str(refill_pcb),
+        ], project_root, "Refilled-state DRC")
+        refilled = json.loads(refill_path.read_text(encoding="utf-8"))
+        refilled_types = Counter(
+            item.get("type", "") for item in refilled.get("violations", [])
+        )
+        saved_types = Counter(item.get("type", "") for item in drc.get("violations", []))
+        added = {
+            category
+            for category in refilled_types - saved_types
+            if category not in REFILL_DELTA_TYPES
+        }
+        isolated = refilled_types.get("isolated_copper", 0)
+        print(
+            f"Refilled fill state: {sum(refilled_types.values())} findings; "
+            f"isolated_copper={isolated} (allowed during unrouted routing), "
+            f"non-consequence additions={len(added)}"
+        )
+        if added:
+            failures += 1
+            for category in sorted(added):
+                print(f"  refill introduced unexpected category: {category}")
+    else:
+        failures += 1
+        print("Refilled fill state: FAIL, staged refill copy was not created")
+
     outside = offboard_footprint_anchors(pcb.read_text(encoding="utf-8"))
     if outside:
         failures += len(outside)
