@@ -96,13 +96,17 @@ CRITICAL_REFS = [
 CURRENT_REQUIRED_REFS = {
     # Battery protection, power path, charger, and always-on control.
     "J2", "F1", "RS1", "RS11", "U719", "Q703", "Q704", "U2", "U10", "U11", "Q25", "J190",
-    # EC, source manager, Mu, storage, and Wi-Fi.
-    "U4", "U44", "A1", "A2", "J9", "F10", "U170",
-    # Five external USB-C ports: two dual-role PD/data and three source/data-only.
+    # EC, source manager, Mu, storage, and Wi-Fi.  J9 and the R1730-R1733
+    # USB-A disable straps are retired by design (87d3dfe): DIS5/DIS6 are
+    # active wired ports now, so they must NOT be required anymore.
+    "U4", "U44", "A1", "A2", "F10", "U170",
+    # Five external USB-C ports: two dual-role PD/data and three source/data-only,
+    # plus the active J24/J25 USB-A cluster on hub ports DIS5/DIS6.
     "U14", "U41", "U42", "U720", "U721",
     "U2000", "U2010", "U2001", "U2011", "U2002", "U2012", "U2003", "U2013",
     "U2004", "U2014", "U2006", "U2016",
-    "J21", "J11", "J22", "J23", "J12", "U1700", "R1730", "R1731", "R1732", "R1733",
+    "J21", "J11", "J22", "J23", "J12", "J24", "J25", "Q62",
+    "U1700", "U1800", "U1801", "U1802", "U1803", "U1804",
     # User I/O, audio, keyboard, maker MCU, and optional radio boundary.
     "U45", "J41", "J45", "U400", "U402", "U430", "MK430", "J310", "U500", "U501", "U502",
     "J2300", "U2300", "U2303", "U2304",
@@ -609,6 +613,76 @@ def load_contracts() -> None:
     add("D1824", 2, "/Mu Carrier/RTC_BAT", "RTC_BAT cathode feeds the Mu RTC backup directly; C783 holds through dropouts.", mu)
     add("U773", 8, "/VSYS", "Dedicated PCIe endpoint buck input from VSYS.", mu)
     add("U773", 1, "/Mu Carrier/BUCKPE_EN", "Endpoint buck EN gated by MU_HOST_ACTIVE (S0-only, like U6/U7).", mu)
+    tps56637_endpoint = "TI TPS56637 datasheet plus Ducktop2 S0-only PCIe endpoint rail contract"
+    for pin, net in {
+        2: "/Mu Carrier/BUCKPE_FB",
+        3: "GND",
+        4: "/Mu Carrier/PCIE_3V3_PG",
+        6: "/Mu Carrier/BUCKPE_SW",
+        7: "/Mu Carrier/BUCKPE_BOOT",
+        9: "GND",
+        10: "GND",
+    }.items():
+        add("U773", pin, net,
+            "TPS56637 dedicated endpoint-rail converter pin follows the U6/U7 topology and the sheet-03 netlist.", tps56637_endpoint)
+    add_nc("U773", 5, "TPS56637 NC pin intentionally left unconnected.", tps56637_endpoint)
+
+    # Active internal USB-A cluster on hub DIS5/DIS6 (2026-08-24 redesign,
+    # commit 87d3dfe): the retired R1730-R1733 straps are NOT here on purpose.
+    usba_sheet = "Native USB-C I/O"
+    usba_src = "TI TPS2553/TPD4E05U06/USBLC6-2P6 datasheets plus the USB-A port-cluster routing plan"
+    add("Q62", 1, "/EC_DFU_SEL",
+        "DFU-mode force-enable gate is driven by the EC DFU select line only.", "onsemi 2N7002KT1G plus EC USB mux contract")
+    add("Q62", 2, "GND", "Force-enable gate source return.", "EC USB mux contract")
+    add("Q62", 3, local("Internal Services", "EC_USB_OE_N"),
+        "Gate clamps the shared default-disconnect node during DFU selection.", "EC USB mux contract")
+    for switch_ref, ilim, pre_vbus in (("U1800", "J24_ILIM", "J24_5V_PRE"),
+                                       ("U1803", "J25_ILIM", "J25_5V_PRE")):
+        for pin, net in {
+            1: "/USB_PORT_5V", 2: "GND", 3: "/INTERNAL_USB_VBUS_VALID",
+            5: local(usba_sheet, ilim), 6: local(usba_sheet, pre_vbus),
+        }.items():
+            add(switch_ref, pin, net, "TPS2553 current-limited USB-A VBUS branch qualified by host-active VALID.", usba_src)
+        add_nc(switch_ref, 4, "TPS2553 FAULT output intentionally left unconnected.", usba_src)
+    for r_ref, ilim in (("R1850", "J24_ILIM"), ("R1851", "J25_ILIM")):
+        add(r_ref, 1, local(usba_sheet, ilim), "TPS2553 ILIM programming resistor sets the released 1.3 A branch limit.", usba_src)
+        add(r_ref, 2, "GND", "ILIM programming resistor return.", usba_src)
+    for c_ref, pre_vbus in (("C1850", "J24_5V_PRE"), ("C1851", "J24_5V_PRE"),
+                            ("C1854", "J25_5V_PRE"), ("C1855", "J25_5V_PRE")):
+        add(c_ref, 1, local(usba_sheet, pre_vbus), "USB-A branch reservoir positive rail.", usba_src)
+        add(c_ref, 2, "GND", "USB-A branch reservoir return.", usba_src)
+    for esd_ref, dp, dm in (("U1801", "HUB_DIS5_DP", "HUB_DIS5_DM"),
+                            ("U1804", "HUB_DIS6_DP", "HUB_DIS6_DM")):
+        for pin, net in {1: dp, 6: dp, 3: dm, 4: dm}.items():
+            add(esd_ref, pin, local(usba_sheet, net), "USBLC6 D+/D- line pair protection.", usba_src)
+        add(esd_ref, 5, "GND", "USBLC6 rail reference.", usba_src)
+        add(esd_ref, 2, "GND", "USBLC6 ground.", usba_src)
+    for pin, net in {
+        1: "HUB_DIS5_TX_P", 2: "HUB_DIS5_TX_N",
+        4: "HUB_DIS5_RX_P", 5: "HUB_DIS5_RX_N", 8: "GND", 3: "GND",
+    }.items():
+        add("U1802", pin, net if net == "GND" else local(usba_sheet, net),
+            "TPD4E05U06 SuperSpeed line protection.", usba_src)
+    for pin in [6, 7, 9, 10]:
+        add_nc("U1802", pin, "Unused TPD4E05U06 channel intentionally NC.", usba_src)
+    for c_ref, ss_in, ss_out in (
+        ("C1852", "HUB_DIS5_TX_P", "J24_SSTX_P"),
+        ("C1853", "HUB_DIS5_TX_N", "J24_SSTX_N"),
+    ):
+        add(c_ref, 1, local(usba_sheet, ss_in), "USB3-A SSTX AC-coupling cap centered on the pair.", usba_src)
+        add(c_ref, 2, local(usba_sheet, ss_out), "SSTX series capacitor connector side.", usba_src)
+    for pin, net in {
+        1: "J24_5V_PRE", 2: "HUB_DIS5_DM", 3: "HUB_DIS5_DP", 4: "GND",
+        5: "HUB_DIS5_RX_N", 6: "HUB_DIS5_RX_P", 7: "GND",
+        8: "J24_SSTX_N", 9: "J24_SSTX_P", "SH": "GND",
+    }.items():
+        add("J24", str(pin), local(usba_sheet, net) if not net.startswith(("GND",)) else net,
+            "USB 3.0 Type-A receptacle on hub DIS5.", usba_src)
+    for pin, net in {
+        1: "J25_5V_PRE", 2: "HUB_DIS6_DM", 3: "HUB_DIS6_DP", 4: "GND", "SH": "GND",
+    }.items():
+        add("J25", str(pin), local(usba_sheet, net) if not net.startswith(("GND",)) else net,
+            "USB 2.0 Type-A receptacle on hub DIS6.", usba_src)
     add("TP5", 1, "/SYS_5V", "System 5 V fixture point.", "Ducktop2 first-article DFT contract")
     add("TP6", 1, "/SYS_3V3", "System 3.3 V fixture point.", "Ducktop2 first-article DFT contract")
     add("TP8", 1, "/MU_12V", "Regulated Mu/fan rail fixture point.", "Ducktop2 first-article DFT contract")
@@ -2257,6 +2331,24 @@ def main() -> int:
     print(f"wrote {CSV_OUT}")
     print(f"wrote {MD_OUT}")
     print(f"rows={len(rows)} pass={counts['PASS']} fail={counts['FAIL']} review={counts['REVIEW']}")
+    if missing_refs:
+        for ref in missing_refs:
+            print(f"required reference missing from netlist: {ref}")
+        return 1
+    # REVIEW rows on safety-critical classes block fabrication-stage gating;
+    # they represent uncontracted pins on power, battery, RF, or module
+    # boundary parts where a wrong net is not a cosmetic gap.
+    blocking_review = sorted({
+        row["ref"] for row in rows
+        if row["status"] == "REVIEW"
+        and (row["ref"].startswith(("U7", "U2", "A1", "U44"))
+             or row["ref"] in {"Q62", "U1800", "U1801", "U1802", "U1803",
+                               "U1804", "J24", "J25"})
+    } - {"U771", "U772"})  # load switches already contracted end-to-end
+    if blocking_review:
+        for ref in blocking_review:
+            print(f"blocking uncontracted pins remain on required component: {ref}")
+        return 1
     if counts["FAIL"]:
         return 1
     return 0
