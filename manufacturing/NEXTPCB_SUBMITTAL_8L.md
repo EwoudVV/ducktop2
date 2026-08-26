@@ -1,7 +1,9 @@
 # Ducktop2 → NextPCB — 8-Layer Stackup + Impedance Submittal
 
-Status: READY TO SEND. Companion to `manufacturing/mainboard_stackup_release.json`
-(which stays PENDING until NextPCB engineering replies).
+Status: SUPERSEDED by the field-solved reply. Companion to
+`manufacturing/mainboard_stackup_release.json`, whose
+`approved_trace_geometries` now carries NextPCB's production values for all
+impedance families (2026-08-24 report + 2026-08-25 85 ohm follow-up).
 
 ## Board facts
 
@@ -39,6 +41,10 @@ L1-over-L2 and L8-over-L7 are the impedance-critical microstrip interfaces
 (2116, 0.125 mm) — identical to the previously released 6L design geometry.
 
 ## Impedance requirements (controlled-impedance option requested)
+
+> Historical request kept for provenance. The shipped geometry table now
+> lives in `mainboard_stackup_release.json` → `approved_trace_geometries`
+> (field-solved 2026-08-24/25). Do not quote the candidate widths below.
 
 | Interface | Target | Tolerance | Our candidate geometry (L1 microstrip, 1 oz) |
 |---|---|---|---|

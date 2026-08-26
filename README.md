@@ -12,14 +12,14 @@ display connection, and a separate low-profile mechanical keyboard.
 
 ![Top view of the Ducktop2 motherboard with routing in progress](docs/images/ducktop2-pcb-top.png)
 
-> **Current state, 1 August 2026:** the generated motherboard schematic passes
-> its ERC, netlist-closure, calculation, and pin-review checks, and sheet 15
-> now carries the rear 3.5 mm headphone jack with plug-detect speaker mute.
-> Six EC firmware policy cores are complete and host-tested (power/source
-> policy, keyboard Fn layer, fan policy, OLED content, lid debounce, battery
-> state machine), and the eMMC recovery/hibernation design and setup tooling
-> are done. The six-layer PCB has 1,170 physical
-> footprints and routing is in progress. The current independent verdict is
+> **Current state, 26 August 2026:** the generated motherboard schematic passes
+> its ERC, netlist-closure, calculation, and pin-review checks (now covering
+> the U773 endpoint buck and the active J24/J25 USB-A cluster), sheet 15
+> carries the rear 3.5 mm headphone jack with plug-detect speaker mute.
+> Six EC firmware policy cores are complete and host-tested, plus fail-safe
+> target drivers for the source manager, clocks, startup, USB HID, and ADC.
+> The eight-layer PCB has 1,225 physical footprints; hand routing is in
+> progress at 3,307 unconnected connections. The current independent verdict is
 > still **SCHEMATIC BLOCKED**: routing,
 > DRC/parity, SI, battery, mechanical,
 > procurement, and target-firmware evidence still block an order. The board
@@ -129,7 +129,7 @@ trackpad, keyboard, cooling stack, hinges, board supports, and display cable.
 
 The keyboard is a separate two-layer PCB with 65 Cherry MX Ultra Low Profile
 switches in a 5 x 14 matrix. It connects to the embedded controller through a
-30-pin FFC, keeping the expensive six-layer motherboard out from underneath
+30-pin FFC, keeping the expensive eight-layer motherboard out from underneath
 most of the switch area.
 
 The rev-A board has already been sent to production, and Cherry is supplying 70
@@ -152,7 +152,7 @@ maintained ERC screenshot.
 | Bounded electrical calculations | 123 pass, 0 fail |
 | Pin review | 2,603 pass, 0 fail, 0 review |
 | Mainboard duplicate references | 0; checked by the release gate |
-| PCB DRC / parity | 1,404 all-track violations, 499 unconnected items, 199 parity observations; routing review required |
+| PCB DRC / parity | 8-layer board in routing: 318 tracked findings (documented placement backlog + USB-A cluster), 3,307 unconnected (499 partial kicad-cli subset), 0 parity; enforced by the release gate allowlist |
 | BOM procurement completeness | 378 unresolved items |
 | Independent design review | **SCHEMATIC BLOCKED** (2026-07-27; closed findings recorded) |
 | Host firmware policy tests | Pass on host (9 suites); 42 HIL rows remain `NOT_RUN` |
@@ -171,7 +171,7 @@ breakdown lives in [`docs/bom-and-cost.md`](docs/bom-and-cost.md), and the
 application-pitch version of the rough BOM is in
 [`docs/sponsorship/funding-pitch.md`](docs/sponsorship/funding-pitch.md).
 These are planning estimates, not vendor quotes; re-quote the bare-board fab
-line against the committed six-layer stackup before ordering.
+line against the committed eight-layer stackup before ordering.
 
 | Item | Cost |
 | --- | --- |
@@ -219,7 +219,7 @@ schematics or comparing the PCB to the netlist.
 
 | Path | Contents |
 | --- | --- |
-| `ducktop2.kicad_*` | Main KiCad project and six-layer motherboard |
+| `ducktop2.kicad_*` | Main KiCad project and eight-layer motherboard |
 | `01_*.kicad_sch` ... `16_*.kicad_sch` | Generated hierarchical sheets |
 | `gen/` | Schematic generators, local symbols, and verification tools |
 | `ducktop2.pretty/` | Project-local footprints |
@@ -270,7 +270,7 @@ schematics or comparing the PCB to the netlist.
    `e2c594f`); execution happens at Mu bring-up.
 5. Classify and resolve the 1,404 current PCB DRC findings, 499 unconnected
    items, and 199 schematic-parity observations as routing continues.
-6. ~~Freeze the six-layer stackup and controlled-impedance geometries~~ — COMPLETED via P1.4. Stackup committed to `ducktop2.kicad_pcb` (6-layer 1.6mm, 2116/2313 prepreg, 1oz all layers, L2/L5 GND, ENIG). Run NextPCB impedance calculator for trace widths.
+6. ~~Freeze the six-layer stackup and controlled-impedance geometries~~ — COMPLETED via P1.4. Six-layer stackup committed at the time (see docs/design-status.md item 8 for the 2026-08-13 upgrade to the current 8-layer stackup). NextPCB field-solve since approved all impedance families (`manufacturing/mainboard_stackup_release.json`).
 7. ~~Complete manufacturer part numbers and assembly constraints in the BOM~~ — COMPLETED. 43 gaps assigned Murata GRM MPNs in `verification/BOM_MPN_ASSIGNMENTS.md`.
 8. Route and review power and high-speed interfaces, followed by control,
    audio, and GPIO.
