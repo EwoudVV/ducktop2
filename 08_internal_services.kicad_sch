@@ -3795,7 +3795,7 @@
   (on_board yes)
   (dnp no)
   (uuid a9e1cea9-19c0-5d9d-a9d4-3e4804a45099)
-  (property "Reference" "Q60B" (at 234.95 60.96 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "Q62" (at 234.95 60.96 0) (effects (font (size 1.27 1.27))))
   (property "Value" "2N7002 DFU-mode USB mux force-enable" (at 234.95 66.04 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 234.95 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 234.95 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3807,7 +3807,7 @@
   (instances
     (project "ducktop2"
       (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
-        (reference "Q60B")
+        (reference "Q62")
         (unit 1)
       )
     )
