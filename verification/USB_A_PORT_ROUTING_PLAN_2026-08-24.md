@@ -1,7 +1,7 @@
 # USB-A Port Cluster Routing Plan (2026-08-24)
 
 Status: PLAN — the cluster is placed and netlist-wired; the routing phase
-(499 unrouted board-wide, including this cluster) is not yet complete. This
+(3,307 unrouted board-wide per pcbnew; the cluster is part of that work) is not yet complete. This
 document captures the exact topology, the verified routing strategy, and the
 blockers, so the routing can be finished with interactive KiCad routing or
 Freerouting (Java) without re-deriving anything.
@@ -50,21 +50,23 @@ Freerouting (Java) without re-deriving anything.
    SH pads ((3.55,108.6),(3.55,121.4),(9.75,121.4),(9.75,108.6)) and J25 SH
    ((8.05,131.1),(8.05,143.9)). Place vias >= 1.2 mm from any pad.
 4. **Pad rotation accounting (critical!)**: J24/J25 pads carry their own
-   270-degree pad rotation on top of the footprint's 270. The combined
-   rotation is 540 = 180 deg, so the pads are 1.6 mm wide x 0.7 mm tall in
-   world coords. Any tooling must add footprint rotation + pad rotation for
-   the pad size, or it will place vias/tracks inside pads.
+   270-degree pad rotation on top of the footprint's 270. World-space pad
+   sizes DIFFER between the receptacles (verified 2026-08-26 via pcbnew):
+   - J24 (USB3-A): signal pads **1.6 mm x 0.7 mm** in world coords.
+   - J25 (USB2-A): signal pads **3.0 mm x 1.3 mm** in world coords.
+   Any tooling must add footprint rotation + pad rotation AND use the
+   per-connector world bounding box, or it will place vias/tracks inside
+   the larger J25 pads.
 5. **Widths**: SS pairs (HUB_DIS5_TX/RX, J24_SSTX) use 0.1796 mm
    (DIFF_90 class); D+/D- (HUB_DIS5_DP/DM, HUB_DIS6_DP/DM) 0.2248
-   (USB2_45); VBUS/power 0.4 mm; ILIM/control 0.25 mm. NOTE: 0.1796 is
-   below the DRU min track width (0.2) - either raise the SS width to
-   0.2 mm or add a net-class override in the .kicad_dru before routing.
+   (USB2_45); VBUS/power 0.4 mm; ILIM/control 0.25 mm. The project
+   min-track floor is 0.09 mm (`ducktop2.kicad_pro`), so no DRU override
+   is needed for class widths below 0.2 mm.
 
 ## Blockers / why scripted routing stopped
 
-- No Java runtime on this machine -> Freerouting CLI unavailable.
-- The KiCad MCP session is wedged (SWIG corruption) -> MCP route tools
-  unavailable.
+- Freerouting does not converge on this board (handoff decision); the
+  manual/interactive finish below is the approved path.
 - Scripted candidate-path routing connected most nets but could not reach
   zero shorts: fine-pitch fanout (0.4 mm hub pins, 1 mm J24/J25 pads) plus
   the dense cluster left no room for the simple L/detour candidate set.
@@ -81,7 +83,7 @@ the release gate's "Unrouted" item to clear.
 
 ## Verify after routing
 
-- `python3 gen/sync_main_pcb_from_netlist.py` (board <-> netlist parity,
-  net names on pads must match)
 - `python3 gen/check_release_candidate.py` (release gate)
-- Check J24 SH pads are GND-connected (they currently have no net).
+
+J24/J25 SH pads are GND nets (verified in the current sync; the earlier
+"no net" note predates the J24 SH pin contract).

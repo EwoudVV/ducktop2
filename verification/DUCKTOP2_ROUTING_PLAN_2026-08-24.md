@@ -7,11 +7,14 @@ Status: PLAN (awaiting user go-ahead). Companion docs:
 
 ## 0. Objective and definition of done
 
-Route the remaining **499 unconnected items** (kicad-cli DRC count) to zero,
-with **zero new DRC findings**:
+Route the remaining **3,307 unconnected items** (pcbnew
+`GetUnconnectedCount(True)`; kicad-cli's DRC reports a partial 499 subset)
+to zero, with **zero new DRC findings beyond the documented routing-phase
+allowlist enforced by `gen/check_release_candidate.py`**:
 
 - 0 shorts, 0 clearance violations, 0 unconnected items
-- DRC findings exactly the existing allowlist (167 courtyard + 30 silk = 197)
+- DRC findings exactly the fabrication allowlist (placement backlog and the
+  2026-08-24 USB-A cluster dispositions; stale entries are pruned on sight)
 - Schematic parity 0; `check_release_candidate.py` PASS on every gate
 - Impedance pairs on approved layers at approved width/gap, no pair vias
 - Power nets sized per `POWER_PLAN_8L.md` budget
@@ -23,10 +26,10 @@ with **zero new DRC findings**:
 | --- | --- |
 | Hub DIS5 SS lanes (pins 83/84/86/87) | Wired to J24 via U1802/C1852/C1853 (was a dead-net bug) |
 | J24 SH pads (4) / J25 SH pads (2) | All on GND (J24 symbol gained SH pin; board synced) |
-| Net classes in board file | DIFF_85 0.2085/0.1524 (38), DIFF_90 0.1796/0.2032 (56), DIFF_100 0.1521/0.254 (26), USB2_45 0.2248 (41), Default 0.2/clr 0.15 |
+| Net classes (KiCad 10, `ducktop2.kicad_pro`; authoritative) | DIFF_85 0.183/0.1524, DIFF_90 0.1796/0.2032, DIFF_100 0.1521/0.254, USB2_45 0.2248; POWER_HI 1.0 mm incl. PACK_*_RAW / PD*_VBUS_RAW / PCIE_3V3_IN, POWER_MID 0.6 mm incl. MAKER_3V3_CORE |
 | DRU rules (ducktop2.kicad_dru) | via↔track 0.18, via↔via 0.2, TH↔TH 0.4, intra-footprint exemptions (U41/U42 0.12, power pads 0.15), MK430 hole 0.15, H1/H2 0 mm hole + mask bridge + courtyard −1 |
 | Project constraints (ducktop2.kicad_pro) | min_track 0.09, min_clearance 0.09, via 0.45/0.2, TH hole 0.2, hole_clearance 0.3, hole_to_hole 0.3, annular 0.1 |
-| ERC / DRC / parity | 0 errors / 197 allowlisted / 0 |
+| ERC / DRC / parity | 0 errors / allowlist-tracked / 0 (see the live gate, not this snapshot) |
 
 Note on the old "min track width 0.2" blocker: it was an artifact of DRC-ing
 board copies **without the project file** (kicad-cli falls back to 0.2 mm
@@ -73,7 +76,8 @@ java -jar ~/.kicad-mcp/freerouting.jar \
 ## 4. Phases (each ends with a verification gate + git commit)
 
 ### Phase 0 — Checkpoint
-Board is clean at 499 unrouted, 197 allowlisted, parity 0. Snapshot PDF,
+Board is at the routing-phase checkpoint: 3,307 unrouted (499 partial
+kicad-cli subset), allowlist-tracked findings, parity 0. Snapshot PDF,
 commit marker. No routing yet.
 
 ### Phase 1 — Power and ground
@@ -122,7 +126,7 @@ commit marker. No routing yet.
 
 ### Phase 7 — Final verification
 - `kicad-cli pcb drc` (cwd = ducktop2) → 0 unconnected / 0 shorts /
-  0 clearance, findings exactly the 197 allowlist
+  0 clearance, findings exactly the enforced fabrication allowlist
 - `sync_main_pcb_from_netlist.py` → parity 0
 - `check_release_candidate.py` → PASS
 - gerbers + drill export test
@@ -165,7 +169,7 @@ Pairs must NOT change layers (L1↔L3 switches need a field-solver pass first).
 ## 8. Definition of done (exact numbers)
 
 - `kicad-cli pcb drc` from the project dir: **0 unconnected items, 0 shorts,
-  0 clearances**, findings = the 197 allowlist only
+  0 clearances**, findings = the enforced fabrication allowlist only
 - release gate: all gates PASS
 - gerbers + drill export to `manufacturing/` without errors
 - one commit per phase; final commit tagged with the DRC report
