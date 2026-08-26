@@ -132,19 +132,19 @@ g_pfnVectors_end:
 .thumb_func
 .type Reset_Handler, %function
 Reset_Handler:
-    ldr r0, =_sidata
-    ldr r1, =_sdata
+    ldr r0, =_sdata
+    ldr r1, =_sidata
     ldr r2, =_edata
-    subs r2, r1
+    subs r2, r0
     ble .L0
     bl memcpy
 
 .L0:
     ldr r0, =_sbss
-    ldr r1, =_ebss
-    subs r1, r0
+    ldr r2, =_ebss
+    subs r2, r0
     ble .L1
-    movs r2, 0
+    movs r1, 0
     bl memset
 
 .L1:
