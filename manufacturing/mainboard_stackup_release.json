@@ -56,11 +56,49 @@
    }
   }
  },
- "approved_trace_geometries": null,
- "fabricator_quote_or_drawing": null,
+ "approved_trace_geometries": {
+  "source": "NextPCB HQDFM stackup-impedance report (follow-up, 2026-08-25) - \"8层叠构.pdf\"",
+  "reference": "Field-solved; all four structures calculate 85.00 ohm at target",
+  "L1_outer_diff_85": {
+   "width_mil": 7.19,
+   "width_mm": 0.183,
+   "spacing_mil": 6.0,
+   "spacing_mm": 0.1524,
+   "ref": "L2",
+   "z_ohm": 85.0
+  },
+  "L8_outer_diff_85": {
+   "width_mil": 7.19,
+   "width_mm": 0.183,
+   "spacing_mil": 6.0,
+   "spacing_mm": 0.1524,
+   "ref": "L7",
+   "z_ohm": 85.0
+  },
+  "L3_inner_diff_85": {
+   "width_mil": 4.48,
+   "width_mm": 0.114,
+   "spacing_mil": 6.0,
+   "spacing_mm": 0.1524,
+   "ref": "L2,L4",
+   "z_ohm": 85.0
+  },
+  "L6_inner_diff_85": {
+   "width_mil": 4.48,
+   "width_mm": 0.114,
+   "spacing_mil": 6.0,
+   "spacing_mm": 0.1524,
+   "ref": "L5,L7",
+   "z_ohm": 85.0
+  },
+  "tolerance_percent": 10,
+  "er": 4.2,
+  "lamination_mm": 1.5522
+ },
+ "fabricator_quote_or_drawing": "NextPCB HQDFM stackup-impedance report \"8层叠构.pdf\" (2026-08-25 follow-up); 85 ohm differential field-solve",
  "approved_by": null,
  "approved_utc": null,
- "note": "APPROVED 2026-08-24 by NextPCB engineering (Sherry Xu, HQDFM stackup report '8\u5c42\u53e0\u6784.pdf'). Field-solved L1-microstrip geometries: 45R SE w=8.85mil; 50R SE w=7.18mil; 80R diff w=8.21/s=6.00mil (PCIe interim - 85R reply pending); 90R diff w=7.07/s=8.00mil; 100R diff w=5.99/s=10.00mil. L3 stripline (L2/L4 refs): 45R w=5.17; 50R w=4.06; 80R w=5.20/s=6.00; 90R w=4.37/s=8.00; 100R w=3.59/s=10.00mil. Laminated thickness 1.5522mm (1.6mm +/-10%). Our Hammerstad candidates were too wide; net classes updated to the fab numbers.",
+ "note": "APPROVED 2026-08-24 by NextPCB engineering (Sherry Xu, HQDFM stackup report '8层叠构.pdf'). Field-solved L1-microstrip geometries: 45R SE w=8.85mil; 50R SE w=7.18mil; 90R diff w=7.07/s=8.00mil; 100R diff w=5.99/s=10.00mil. L3 stripline (L2/L4 refs): 45R w=5.17; 50R w=4.06; 90R w=4.37/s=8.00; 100R w=3.59/s=10.00mil. Laminated thickness 1.5522mm (1.6mm +/-10%). 2026-08-25 follow-up resolved PCIe 85 ohm: L1/L8 w=7.19/s=6.00mil (0.183/0.1524mm), L3/L6 w=4.48/s=6.00mil (0.114/0.1524mm), all calculate 85.00 ohm +/-10%. Our Hammerstad candidates were too wide; net classes updated to the fab numbers.",
  "layer_assignment": {
   "L1_F.Cu": "signal (impedance-critical microstrip)",
   "L2_In1.Cu": "GND solid",

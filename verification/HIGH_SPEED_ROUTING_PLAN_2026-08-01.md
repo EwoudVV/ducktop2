@@ -9,7 +9,7 @@ classes are already committed to `ducktop2.kicad_pcb`
 
 | Class | Target | Width | Spacing | Members |
 | --- | --- | --- | --- | --- |
-| `DIFF_85` | PCIe Gen3 85 Ω diff | 0.2085 mm | 0.1524 mm | 38 nets (NextPCB interim 80 Ω solve; 85 Ω reply pending) |
+| `DIFF_85` | PCIe Gen3 85 Ω diff | 0.183 mm (L1/L8); 0.114 mm (L3/L6) | 0.1524 mm | 38 nets (NextPCB approved 2026-08-25) |
 | `DIFF_90` | USB 3.x 90 Ω diff | 0.1796 mm | 0.2032 mm | 50 nets (NextPCB approved) |
 | `DIFF_100` | HDMI + Ethernet 100 Ω diff | 0.1521 mm | 0.254 mm | 26 nets (NextPCB approved) |
 | `USB2_45` | USB 2.0 45 Ω SE | 0.2248 mm | — | 37 nets (NextPCB approved) |
@@ -17,6 +17,23 @@ classes are already committed to `ducktop2.kicad_pcb`
 
 All high-speed pairs route on L1 referenced to the solid L2 GND plane. No vias
 on differential pairs (L2 is the uninterrupted return path).
+
+## 2026-08-25: PCIe 85 Ω reply received
+
+NextPCB's follow-up HQDFM stackup-impedance report (follow-up to
+manufacturing/mainboard_stackup_release.json) resolves the PCIe 85 Ω
+geometry at exactly 85.00 Ω ±10 % for all four structures:
+
+| Layer | Type | Reference | Width | Spacing | Z |
+| --- | --- | --- | --- | --- | --- |
+| L1 | outer differential | L2 | 7.19 mil (0.183 mm) | 6.00 mil (0.1524 mm) | 85 Ω |
+| L8 | outer differential | L7 | 7.19 mil (0.183 mm) | 6.00 mil (0.1524 mm) | 85 Ω |
+| L3 | inner differential | L2, L4 | 4.48 mil (0.114 mm) | 6.00 mil (0.1524 mm) | 85 Ω |
+| L6 | inner differential | L5, L7 | 4.48 mil (0.114 mm) | 6.00 mil (0.1524 mm) | 85 Ω |
+
+DIFF_85 class updated to the L1/L8 microstrip numbers (0.183 / 0.1524),
+replacing the interim 80 Ω solve (0.2085 / 0.1524). L3/L6 stripline pairs
+use 0.114 / 0.1524. All widths/gaps are the fabricator's field-solved values.
 
 ## 2026-08-24: NextPCB approved geometry (fab field-solve)
 
@@ -26,9 +43,7 @@ the table above are their numbers. For **L3 (stripline over L2/L4)** the
 fab geometries are: 90 Ω diff w=4.37 mil (0.111) / s=8.00 mil (0.203);
 100 Ω diff w=3.59 mil (0.091) / s=10.00 mil (0.254); 45 Ω SE w=5.17 mil
 (0.131); 50 Ω SE w=4.06 mil (0.103). Routing impedance pairs on L3 uses
-these values. PCIe 85 Ω: their report gave an 80 Ω solve (within PCIe CEM
-85±15%); a one-line follow-up for the exact 85 Ω geometry is pending before
-the PCIe pairs are routed.
+these values. PCIe 85 Ω: resolved 2026-08-25 (see above).
 
 ## 2026-08-13: 8-layer stackup
 
