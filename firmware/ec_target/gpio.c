@@ -496,9 +496,9 @@ uint16_t gpio_read_adc_thermal_mu(void)
  * fail-safe by R208 (100k gate pull-down -> FET off -> full speed).
  *
  * PE9 is TIM1_CH1 (AF1, RM0090); there is no complementary-output pin in
- * this design, so CC1NE is not set.  Frequency: 84 MHz / 3360 = 25.0 kHz.
+ * this design, so CC1NE is not set.  Frequency: 168 MHz / 6720 = 25.0 kHz.
  */
-#define FAN_PWM_TIM_HZ          84000000u
+#define FAN_PWM_TIM_HZ          168000000u
 #define FAN_PWM_FREQ_HZ         25000u
 #define FAN_PWM_PERIOD_TICKS    (FAN_PWM_TIM_HZ / FAN_PWM_FREQ_HZ)
 
@@ -518,7 +518,7 @@ static void gpio_fan_pwm_init(void)
     GPIOE->OTYPER &= ~(1u << 9); /* push-pull, not open-drain */
 
     RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
-    TIM1->PSC = 0u;                          /* 84 MHz timer tick */
+    TIM1->PSC = 0u;                          /* 168 MHz timer tick */
     TIM1->ARR = FAN_PWM_PERIOD_TICKS - 1u;   /* 25 kHz PWM */
     TIM1->CCMR1 = TIM_CCMR1_OC1PE | TIM_CCMR1_OC1M_PWM1;
     TIM1->CCER = TIM_CCER_CC1E;              /* CH1 only; no CH1N in design */
@@ -584,9 +584,9 @@ static void gpio_fan_tach_init(void)
     GPIOC->MODER = (GPIOC->MODER & ~(3u << 10)) | (GPIO_MODER_INPUT << 10);
     GPIOC->PUPDR &= ~(3u << 10);
 
-    /* Free-running 32-bit microsecond counter: APB1 = 42 MHz, /42. */
+    /* APB1 is /4, so TIM2 receives 2 * PCLK1 = 84 MHz. */
     RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
-    TIM2->PSC = 42u - 1u;
+    TIM2->PSC = 84u - 1u;
     TIM2->ARR = 0xFFFFFFFFu;
     TIM2->CR1 = TIM_CR1_CEN;
 
