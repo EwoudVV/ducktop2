@@ -75,6 +75,25 @@ static void test_start_duty_at_or_above_floor(void)
     CHECK(ec_app_fan_start_duty(100u, true, 0u, 10u) == 100u);
 }
 
+static void test_aux_mv_conversion(void)
+{
+    uint16_t mv = 0u;
+
+    /* Divider 470k/56k: full scale ~31.0 V; mid counts ~15.5 V. */
+    CHECK(ec_app_aux_counts_to_mv(2048u, &mv));
+    CHECK(mv > 15000u && mv < 16000u);
+    CHECK(ec_app_aux_counts_to_mv(1024u, &mv));
+    CHECK(mv > 7500u && mv < 8000u);
+
+    /* Endpoints are not measurable inputs. */
+    CHECK(!ec_app_aux_counts_to_mv(0u, &mv));
+    CHECK(mv == 0u);
+    CHECK(ec_app_aux_counts_to_mv(4094u, &mv));
+    CHECK(mv > 30500u && mv < 31000u);
+    CHECK(!ec_app_aux_counts_to_mv(4095u, &mv));
+    CHECK(!ec_app_aux_counts_to_mv(100u, NULL));
+}
+
 int main(void)
 {
     test_ntc_midscale_25c();
@@ -85,6 +104,7 @@ int main(void)
     test_start_duty_spin_up_window();
     test_start_duty_after_window();
     test_start_duty_at_or_above_floor();
+    test_aux_mv_conversion();
     printf("ec_app_math_tests: PASS (%d checks)\n", s_checks);
     return 0;
 }

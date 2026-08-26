@@ -35,5 +35,7 @@ bool tca9539_read_register(uint8_t reg, uint8_t *value);
 bool tca9539_init_safe(void);
 bool tca9539_set_pd_path_enable(uint8_t path, bool enable);
 bool tca9539_read_inputs(uint8_t *port0, uint8_t *port1);
+bool tca9539_ready(void);
+uint8_t tca9539_output0(void);
 
 #endif
