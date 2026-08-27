@@ -97,6 +97,16 @@ ordering.
 | USB_PORT_5V | TPS56637 | 6 A class | 3.5 A | 58% |
 | MCU_3V3 | TPS54202 | 2 A | 0.4 A | 20% |
 
+## L5 island architecture (2026-08-26)
+
+The L5 (In4.Cu) power islands are **source-local**: each sits on the rail's
+generator/entry point with local decoupling; all off-island consumers are
+reached by deliberately routed copper (see the island map and per-rail
+off-island counts in `DUCKTOP2_ROUTING_PLAN_2026-08-24.md` §4.1). Rail
+budgets below are what that distribution must deliver. The tightest rail
+is SYS_3V3 (139 off-island pads, up to 98% of converter rating) — route it
+early and at full POWER_HI width.
+
 ## Open items (close before order)
 
 1. NVMe drive selected part's 3.3 V max current (the SYS_3V3 headroom depends on it).

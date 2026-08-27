@@ -68,7 +68,7 @@ java -jar ~/.kicad-mcp/freerouting.jar \
 | L2 | In1.Cu | GND — solid, never routed |
 | L3 | In2.Cu | stripline (GND/GND); impedance pairs ONLY with fab stripline geometry (see §6) |
 | L4 | In3.Cu | GND — solid, never routed |
-| L5 | In4.Cu | POWER islands (VSYS, SYS_5V, SYS_3V3, MCU_3V3, MU_12V, USB_PORT_5V, VBUS_RAW, INTERNAL_USB_VBUS) |
+| L5 | In4.Cu | POWER islands — source-local (11 islands, see §4.1); all other rail copper routed deliberately |
 | L6 | In5.Cu | general routing; NO impedance pairs unless L5 reference unbroken |
 | L7 | In6.Cu | GND — solid, never routed |
 | L8 | B.Cu | long runs (layer is component-free; only ~360 TH pads block it) — the left-edge cluster highway |
@@ -81,10 +81,58 @@ kicad-cli subset), allowlist-tracked findings, parity 0. Snapshot PDF,
 commit marker. No routing yet.
 
 ### Phase 1 — Power and ground
-- 8 rails to all consumers; long legs on B.Cu, short legs on L1/L6, islands
-  on L5 (already defined by the zone set).
-- Widths: VSYS 1.0 mm, SYS_5V 1.0 mm, MU_12V 1.0 mm, VBUS_RAW 1.0 mm,
-  MCU_3V3 0.6 mm, USB_PORT_5V 0.6 mm, INTERNAL_USB_VBUS 0.4 mm, control 0.25 mm.
+
+#### §4.1 L5 source-local islands (2026-08-26 partition)
+
+The L5 islands are **source-local**, not consumer-covering: each sits on the
+rail's generating/entry point (converter output, connector VBUS) with its
+local decoupling. All other rail copper is routed by hand to consumers.
+Island map (mm, In4.Cu; exact net names, from `gen/write_power_zones.py`
+`POWER_ISLANDS` — do not edit the board by hand, regenerate + re-indent):
+
+| Rail | Island rect (x1,y1)-(x2,y2) | On-island (sources) |
+| --- | --- | --- |
+| /PD1_VBUS_RAW | (1,19)-(75,67) | U41 PD controller, J21, C2015-19 |
+| /PD2_VBUS_RAW | (315,19)-(357,84) | J11, C2055 |
+| /SYS_3V3 | (124,19)-(151,44) | L5, R1714/R1718, C1816 |
+| /USB_PORT_5V | (157,19)-(181,45) | L1701, R1712 |
+| /MU_12V | (145,69)-(181,99) | R751, RS750 |
+| /SYS_5V | (119,83)-(143,109) | L4, C45 |
+| /Mu Carrier/INTERNAL_USB_VBUS | (184,83)-(209,101) | U770, R777, C830 |
+| /Mu Carrier/PCIE_3V3_IN | (210,83)-(265,117) | U772, L1702, C782/C832 |
+| /MCU_3V3 | (270,85)-(306,103) | L3, U4, U60, R32/R35/R202 |
+| /VSYS | (54,114)-(119,156) | U2 charger, C706/708/709/710 |
+| /Maker MCU/MAKER_3V3_CORE | (247,8)-(308,82) | U901-913, L900, 46 pads |
+
+Guards in the generator enforce: bounds within board, pairwise island
+separation ≥ 1 mm, and every island net existing on pads.
+
+#### Routing consequence (read before routing Phase 1)
+
+Off-island consumer pads must be reached by **deliberate tracks, not
+island adjacency** (the old bbox islands covered them; the new ones do
+not). Per rail, route the source island to every off-island consumer:
+
+- **VSYS** (40 off-island): U6/U7/U750/U1703 converter inputs, R1710/C750
+  sense cluster, far-side decoupling.
+- **MCU_3V3** (107 off-island): STM32 EC + full peripheral spread.
+- **SYS_3V3** (139 off-island): largest distribution — NVMe J10, Wi-Fi,
+  RTL8111H, hub U1700, muxes/redrivers (see POWER_PLAN_8L.md budget).
+- **SYS_5V** (20 off-island): U6 output to radio/eFuse branch, amp, USB
+  switches.
+- **USB_PORT_5V** (18 off-island): U1703 to TPS2553 branches + PD ports.
+- **MU_12V** (15 off-island): Mu module lands (A1), fan branch.
+- **PD1_VBUS_RAW** (1 off-island): D712 at (348.7,167.8) — long right-edge
+  trunk from the U41 island.
+- **PD2_VBUS_RAW** (10 off-island): D713, C2056-59, U2015, U42 — route
+  from the J11 island (x~356) to the x25-298 scatter.
+- **INTERNAL_USB_VBUS** (1 off-island): TP13.
+- **MAKER_3V3_CORE** (2 off-island): C934, R930.
+
+Widths: VSYS 1.0 mm, SYS_5V 1.0 mm, MU_12V 1.0 mm, VBUS_RAW 1.0 mm,
+MCU_3V3 0.6 mm, USB_PORT_5V 0.6 mm, INTERNAL_USB_VBUS 0.4 mm, control 0.25 mm.
+Long legs on B.Cu, short legs on L1/L6.
+
 - GND: keep L2/L4/L7 solid; add via stitching at cluster boundaries.
 - Gate: DRC shorts=0 clearance=0; parity 0; commit.
 
@@ -120,8 +168,11 @@ commit marker. No routing yet.
 - Gate: DRC 0 new findings; commit.
 
 ### Phase 6 — Zone refill + stitching
-- Refill all 91 zones; add GND stitching vias around hub, connectors, and
-  along B.Cu long-run edges.
+- Refill all zones (11 copper islands + 3 GND planes + keepouts); the gate
+  now DRCs in refilled state and fails on any non-`isolated_copper` category
+  introduced by refill (see `check_release_candidate.py` REFILL_DELTA_TYPES).
+  Add GND stitching vias around hub, connectors, and along B.Cu long-run
+  edges.
 - Gate: DRC (refill can change counts — rerun full gate); commit.
 
 ### Phase 7 — Final verification
