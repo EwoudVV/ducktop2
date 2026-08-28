@@ -80,6 +80,45 @@ Four boards, three FPCs (plus the already-manufactured keyboard FFC):
 4. U14/U719/U2013/U2012 placement (source-select chain) — must be CENTER per
    the frozen assignment; verify physical space.
 
+## Phase 1 RESOLVED (2026-08-28)
+
+### Connector selection (all 0.5mm pitch, Hirose FH12 family — same family
+already used for J2300 radio DB and J310 keyboard FFC)
+
+| FPC | Pins | Connector | Notes |
+| --- | --- | --- | --- |
+| FPC-1 | 75 sig + ~10 pwr | FH12-100S-0.5SH (or 2× FH12-50S) | 90Ω pair + D± on impedance-controlled section |
+| FPC-2 | 83 sig + ~10 pwr | FH12-100S-0.5SH (or 2× FH12-50S) | HDMI 100Ω, GbE 100Ω pairs |
+| FPC-3 | 16 sig + ~6 pwr | FH12-30S (C324727, in stock 14.7k) | plain FFC, no impedance pairs |
+
+Cable spec: impedance-controlled shielded FFC for the differential sections
+(90Ω USB3 upstream, 100Ω HDMI/GbE); plain FFC acceptable for FPC-3. The FH12
+connector is a standard 0.5mm interface — the impedance is set by the cable,
+not the connector. 500mA/pin rating is adequate for SYS_3V3/USB_PORT_5V at
+8-10 parallel pins.
+
+### Mechanical cut validation (PASS)
+
+- Left cut x=70: left board carries H10/H11/H16 (x5). Hinge notch x12-48
+  leaves 22mm (x48-70) clear for the FPC connector. No hole straddles.
+- Right cut x=300: right board carries H13/H15/H17/H27 (x353). Hinge notch
+  x310-346 fully inside, 54mm past the notch for the connector.
+- Center board: H21@110, H22@120, H25@209, H26@253 — all interior.
+- Edge segments crossing the cuts are the top/bottom perimeters — each board
+  gets its own outline on the cut.
+
+### Density check
+
+| Board | Size | Parts | parts/1000mm² |
+| --- | --- | --- | --- |
+| Left | 70×185 | 177 | 13.7 |
+| Center | 230×185 | 681 | 16.0 |
+| Right | 58×185 | 233 | **21.7** ← tightest, watch placement |
+| (current) | 358×185 | 1225 | 18.5 |
+
+Right board is 17% denser than the current whole board — expected (small
+passive cluster) but flagged for careful placement.
+
 ## Generation commands (for reproducibility)
 
 Crossing analysis: from the netlist export, assign anchors per the tables
