@@ -125,8 +125,9 @@ def add_hub(s):
              mpn="RC0603FR-0710KL")
     unit2 = {
         "5": ("HUB_DS1_DP", "hier"), "6": ("HUB_DS1_DM", "hier"),
-        "7": ("HUB_DS1_TX_RAW_P", "local"), "8": ("HUB_DS1_TX_RAW_N", "local"),
-        "9": ("HUB_VCORE", "local"), "10": ("HUB_DS1_SSRX_P", "hier"), "11": ("HUB_DS1_SSRX_N", "hier"),
+        # DS1 is USB2-only (feeds J11 after the split); SS pins retired.
+        "7": ("", "nc"), "8": ("", "nc"),
+        "9": ("HUB_VCORE", "local"), "10": ("", "nc"), "11": ("", "nc"),
         "12": ("", "nc"), "13": ("", "nc"),
         "14": ("HUB_DS2_DP", "local"), "15": ("HUB_DS2_DM", "local"),
         "16": ("HUB_DS2_TX_RAW_P", "local"), "17": ("HUB_DS2_TX_RAW_N", "local"),
@@ -137,8 +138,9 @@ def add_hub(s):
         "29": ("HUB_DS3_TX_RAW_P", "local"), "30": ("HUB_DS3_TX_RAW_N", "local"),
         "31": ("HUB_VCORE", "local"), "32": ("HUB_DS3_SSRX_P", "local"), "33": ("HUB_DS3_SSRX_N", "local"),
         "34": ("HUB_DS4_DP", "local"), "35": ("HUB_DS4_DM", "local"),
-        "36": ("HUB_DS4_TX_RAW_P", "local"), "37": ("HUB_DS4_TX_RAW_N", "local"),
-        "38": ("HUB_VCORE", "local"), "39": ("HUB_DS4_SSRX_P", "local"), "40": ("HUB_DS4_SSRX_N", "local"),
+        # DS4 is USB2-only (feeds J12 after the split); SS pins retired.
+        "36": ("", "nc"), "37": ("", "nc"),
+        "38": ("HUB_VCORE", "local"), "39": ("", "nc"), "40": ("", "nc"),
     }
     unit4 = {
         "41": ("HUB_DIS6_DM", "local"), "42": ("HUB_DIS6_DP", "local"),
@@ -280,14 +282,11 @@ def add_usba_ports(s):
             }, extra_props=props("Abracon", "ASDMB-25.000MHZ-LC-T"))
     capacitor(s, "C1716", "100n oscillator bypass", 571.5, 177.8, "SYS_3V3", kind="hier")
     for ref, raw, coupled, x in (
-        ("C1720", "HUB_DS1_TX_RAW_P", "HUB_DS1_SSTX_P", 424.18),
-        ("C1721", "HUB_DS1_TX_RAW_N", "HUB_DS1_SSTX_N", 436.88),
+        # DS1/DS4 are USB2-only after the split; their SS AC caps are removed.
         ("C1722", "HUB_DS2_TX_RAW_P", "HUB_DS2_SSTX_P", 449.58),
         ("C1723", "HUB_DS2_TX_RAW_N", "HUB_DS2_SSTX_N", 462.28),
         ("C1724", "HUB_DS3_TX_RAW_P", "HUB_DS3_SSTX_P", 474.98),
         ("C1725", "HUB_DS3_TX_RAW_N", "HUB_DS3_SSTX_N", 487.68),
-        ("C1726", "HUB_DS4_TX_RAW_P", "HUB_DS4_SSTX_P", 500.38),
-        ("C1727", "HUB_DS4_TX_RAW_N", "HUB_DS4_SSTX_N", 513.08),
         ("C1728", "HUB_UP_TX_RAW_P", "USBC2_SSRX_P", 525.78),
         ("C1729", "HUB_UP_TX_RAW_N", "USBC2_SSRX_N", 538.48),
     ):
@@ -310,7 +309,7 @@ def add_usba_ports(s):
               kind="hier", footprint="C_0805", mpn="GRM21BR71A106KE51L")
 
 
-def add_source_port(s, *, jref, port, base, x0, y0):
+def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False):
     ctl = f"HUB_PRT_CTL{port}"
     dp = f"HUB_DS{port}_DP"
     dm = f"HUB_DS{port}_DM"
@@ -328,7 +327,7 @@ def add_source_port(s, *, jref, port, base, x0, y0):
     tx1p, tx1n, tx2p, tx2n = (f"J{jref[1:]}_{n}" for n in ("TX1_P", "TX1_N", "TX2_P", "TX2_N"))
     rx1p, rx1n, rx2p, rx2n = (f"J{jref[1:]}_{n}" for n in ("RX1_P", "RX1_N", "RX2_P", "RX2_N"))
     u_sw, u_cc, u_mux, u_ovp = f"U{base}", f"U{base + 1}", f"U{base + 2}", f"U{base + 3}"
-    s.text(x0, y0, f"== {jref}: source-only USB-C data port, USB7206C downstream {port} ==")
+    s.text(x0, y0, f"== {jref}: source-only USB-C data port, USB7206C downstream {port}, {'USB2' if usb2_only else 'USB3'} ==")
     s.place(u_sw, "TPS2553D", "TPS2553DDBVR 1.3A USB branch", x0 + 25.4, y0 + 22.86,
             footprint=FOOTPRINTS["TPS2553DDBV"], pin_nets={
                 "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"), "3": (ctl, "local"),
@@ -344,26 +343,27 @@ def add_source_port(s, *, jref, port, base, x0, y0):
                 "16": ("", "nc"), "17": ("", "nc"), "18": (pol, "local"),
                 "19": ("", "nc"), "20": ("", "nc"), "21": ("GND", "local"),
             }, extra_props=props("Texas Instruments", "TPS25810RVCR"))
-    s.place(u_mux, "HD3SS6126", "HD3SS6126RUAR USB3 orientation mux", x0 + 147.32, y0 + 43.18,
-            footprint=FOOTPRINTS["HD3SS6126"], pin_nets={
-                "1": ("", "nc"), "2": ("", "nc"), "3": ("", "nc"), "4": ("", "nc"), "5": ("", "nc"),
-                "6": ("GND", "local"), "7": ("", "nc"), "8": ("", "nc"), "9": (pol, "local"),
-                "10": ("GND", "local"), "11": (host_tx_p, "local"), "12": (host_tx_n, "local"),
-                "13": ("SYS_3V3", "hier"), "14": ("GND", "local"),
-                "15": (host_rx_p, "local"), "16": (host_rx_n, "local"),
-                "17": ("GND", "local"), "18": ("", "nc"), "19": ("GND", "local"),
-                "20": ("SYS_3V3", "hier"), "21": ("GND", "local"),
-                "22": (rx1n, "local"), "23": (rx1p, "local"), "24": (tx1n, "local"), "25": (tx1p, "local"),
-                "26": (rx2n, "local"), "27": (rx2p, "local"), "28": (tx2n, "local"), "29": (tx2p, "local"),
-                "30": ("SYS_3V3", "hier"), "31": ("", "nc"), "32": ("", "nc"), "33": ("", "nc"),
-                "34": ("", "nc"), "35": ("", "nc"), "36": ("", "nc"), "37": ("", "nc"),
-                "38": ("", "nc"), "39": ("", "nc"), "40": ("", "nc"), "41": ("", "nc"), "42": ("", "nc"),
-                "43": ("GND", "local"),
-            }, extra_props=props(
-                "Texas Instruments", "HD3SS6126RUAR",
-                "https://www.ti.com/lit/ds/symlink/hd3ss6126.pdf",
-                EnableState="HS_OE_GND_NORMAL_OPERATION",
-            ))
+    if not usb2_only:
+        s.place(u_mux, "HD3SS6126", "HD3SS6126RUAR USB3 orientation mux", x0 + 147.32, y0 + 43.18,
+                footprint=FOOTPRINTS["HD3SS6126"], pin_nets={
+                    "1": ("", "nc"), "2": ("", "nc"), "3": ("", "nc"), "4": ("", "nc"), "5": ("", "nc"),
+                    "6": ("GND", "local"), "7": ("", "nc"), "8": ("", "nc"), "9": (pol, "local"),
+                    "10": ("GND", "local"), "11": (host_tx_p, "local"), "12": (host_tx_n, "local"),
+                    "13": ("SYS_3V3", "hier"), "14": ("GND", "local"),
+                    "15": (host_rx_p, "local"), "16": (host_rx_n, "local"),
+                    "17": ("GND", "local"), "18": ("", "nc"), "19": ("GND", "local"),
+                    "20": ("SYS_3V3", "hier"), "21": ("GND", "local"),
+                    "22": (rx1n, "local"), "23": (rx1p, "local"), "24": (tx1n, "local"), "25": (tx1p, "local"),
+                    "26": (rx2n, "local"), "27": (rx2p, "local"), "28": (tx2n, "local"), "29": (tx2p, "local"),
+                    "30": ("SYS_3V3", "hier"), "31": ("", "nc"), "32": ("", "nc"), "33": ("", "nc"),
+                    "34": ("", "nc"), "35": ("", "nc"), "36": ("", "nc"), "37": ("", "nc"),
+                    "38": ("", "nc"), "39": ("", "nc"), "40": ("", "nc"), "41": ("", "nc"), "42": ("", "nc"),
+                    "43": ("GND", "local"),
+                }, extra_props=props(
+                    "Texas Instruments", "HD3SS6126RUAR",
+                    "https://www.ti.com/lit/ds/symlink/hd3ss6126.pdf",
+                    EnableState="HS_OE_GND_NORMAL_OPERATION",
+                ))
     s.place(u_ovp, "TPD1S514_1YZR", "TPD1S514-1YZR 5.9V VBUS OVP", x0 + 203.2, y0 + 20.32,
             footprint=FOOTPRINTS["TPD1S514_YZ"], pin_nets={
                 "A1": ("GND", "local"),
@@ -382,8 +382,14 @@ def add_source_port(s, *, jref, port, base, x0, y0):
                 "SH": ("GND", "local"), "A4": (vbus, "local"), "A9": (vbus, "local"), "B4": (vbus, "local"), "B9": (vbus, "local"),
                 "A5": (cc1, "local"), "B5": (cc2, "local"),
                 "A6": (dp, "local"), "B6": (dp, "local"), "A7": (dm, "local"), "B7": (dm, "local"),
-                "A2": (tx1p, "local"), "A3": (tx1n, "local"), "B2": (tx2p, "local"), "B3": (tx2n, "local"),
-                "B11": (rx1p, "local"), "B10": (rx1n, "local"), "A11": (rx2p, "local"), "A10": (rx2n, "local"),
+                "A2": ("" if usb2_only else tx1p, "nc" if usb2_only else "local"),
+                "A3": ("" if usb2_only else tx1n, "nc" if usb2_only else "local"),
+                "B2": ("" if usb2_only else tx2p, "nc" if usb2_only else "local"),
+                "B3": ("" if usb2_only else tx2n, "nc" if usb2_only else "local"),
+                "B11": ("" if usb2_only else rx1p, "nc" if usb2_only else "local"),
+                "B10": ("" if usb2_only else rx1n, "nc" if usb2_only else "local"),
+                "A11": ("" if usb2_only else rx2p, "nc" if usb2_only else "local"),
+                "A10": ("" if usb2_only else rx2n, "nc" if usb2_only else "local"),
                 "A8": ("", "nc"), "B8": ("", "nc"),
             }, extra_props=props("Molex", "105450-0101"))
     capacitor(s, f"C{base}", "100n branch input", x0 + 25.4, y0 + 68.58, "USB_PORT_5V", kind="hier")
@@ -395,12 +401,13 @@ def add_source_port(s, *, jref, port, base, x0, y0):
     capacitor(s, f"C{base + 3}", "10u protected VBUS_SYS", x0 + 226.06, y0 + 68.58,
               vbus_sys, footprint="C_10u", mpn="GRM31CR71A106KA01L")
     capacitor(s, f"C{base + 4}", "100n TPS25810 AUX", x0 + 91.44, y0 + 78.74, "SYS_3V3", kind="hier")
-    for offset, x in enumerate((132.08, 144.78, 157.48)):
-        capacitor(s, f"C{base + 5 + offset}", "100n mux VDD", x0 + x, y0 + 78.74, "SYS_3V3", kind="hier")
-    capacitor(s, f"C{base + 8}", "1u mux local bulk", x0 + 170.18, y0 + 78.74,
-              "SYS_3V3", kind="hier", footprint="C_100n", mpn="GRM188R71A105KA61D")
-    capacitor(s, f"C{base + 9}", "10n mux HF", x0 + 182.88, y0 + 78.74,
-              "SYS_3V3", kind="hier", footprint="C_0402", mpn="GRM155R71H103KA88D")
+    if not usb2_only:
+        for offset, x in enumerate((132.08, 144.78, 157.48)):
+            capacitor(s, f"C{base + 5 + offset}", "100n mux VDD", x0 + x, y0 + 78.74, "SYS_3V3", kind="hier")
+        capacitor(s, f"C{base + 8}", "1u mux local bulk", x0 + 170.18, y0 + 78.74,
+                  "SYS_3V3", kind="hier", footprint="C_100n", mpn="GRM188R71A105KA61D")
+        capacitor(s, f"C{base + 9}", "10n mux HF", x0 + 182.88, y0 + 78.74,
+                  "SYS_3V3", kind="hier", footprint="C_0402", mpn="GRM155R71H103KA88D")
     resistor(s, f"R{base + 1}", "4.99k POL pull-up", x0 + 116.84, y0 + 68.58, "SYS_3V3", pol, a_kind="hier", mpn="RC0603FR-074K99L")
     resistor(s, f"R{base + 2}", "100k 1% TPS25810 REF", x0 + 101.6, y0 + 78.74, refnet, refrtn, mpn="RC0603FR-07100KL")
     s.place(f"R{base + 10}", "R", "249R 0.25W TPS25810 OUT discharge", x0 + 203.2, y0 + 78.74,
@@ -410,8 +417,9 @@ def add_source_port(s, *, jref, port, base, x0, y0):
               vbus, footprint="C_0805", mpn="GRM21BR71H105KA12L")
     capacitor(s, f"C{base + 11}", "1u TPD1S514 VBUS_POWER stability", x0 + 228.6, y0 + 78.74,
               vbus_power, footprint="C_100n", mpn="GRM188R71A105KA61D")
-    ss_esd(s, 1800 + (port - 2) * 8, x0 + 264.16, y0 + 5.08,
-           [tx1p, tx1n, tx2p, tx2n, rx1p, rx1n, rx2p, rx2n])
+    if not usb2_only:
+        ss_esd(s, 1800 + (port - 2) * 8, x0 + 264.16, y0 + 5.08,
+               [tx1p, tx1n, tx2p, tx2n, rx1p, rx1n, rx2p, rx2n])
     usb2_cc_esd(s, f"U{base + 5}", x0 + 264.16, y0 + 68.58, dp, dm, cc1, cc2)
 
 
@@ -428,7 +436,7 @@ def build(sheet_symbol_uuid):
     add_hub(s)
     add_source_port(s, jref="J22", port=2, base=1780, x0=20.32, y0=238.76)
     add_source_port(s, jref="J23", port=3, base=1740, x0=304.8, y0=238.76)
-    add_source_port(s, jref="J12", port=4, base=1760, x0=20.32, y0=337.82)
+    add_source_port(s, jref="J12", port=4, base=1760, x0=20.32, y0=337.82, usb2_only=True)
     s.pwrflag(571.5, 198.12, "HUB_VCORE")
     s.pwrflag(571.5, 215.9, "USB_PORT_5V")
     s.gnd(571.5, 228.6)

@@ -103,8 +103,8 @@ CURRENT_REQUIRED_REFS = {
     # Five external USB-C ports: two dual-role PD/data and three source/data-only,
     # plus the active J24/J25 USB-A cluster on hub ports DIS5/DIS6.
     "U14", "U41", "U42", "U720", "U721",
-    "U2000", "U2010", "U2001", "U2011", "U2002", "U2012", "U2003", "U2013",
-    "U2004", "U2014", "U2006", "U2016",
+    "U2000", "U2001", "U2002", "U2003", "U2004",
+    "U2006", "U2016",
     "J21", "J11", "J22", "J23", "J12", "J24", "J25", "Q62",
     "U1700", "U1800", "U1801", "U1802", "U1803", "U1804",
     # User I/O, audio, keyboard, maker MCU, and optional radio boundary.
@@ -1776,14 +1776,14 @@ def load_current_architecture_overrides() -> None:
         1: {"j": "J21", "mux": "U2000", "protect": "U2001", "eeprom": "U2002", "usb2": "U2003",
             "control": "U2004", "qualifier": "U2006",
             "host_dp": "/USBC1_DP", "host_dm": "/USBC1_DM", "host_tx_p": "/USBC1_SSTX_P", "host_tx_n": "/USBC1_SSTX_N"},
-        2: {"j": "J11", "mux": "U2010", "protect": "U2011", "eeprom": "U2012", "usb2": "U2013",
+        2: {"j": "J11", "mux": None, "protect": "U2011", "eeprom": "U2012", "usb2": "U2013",
             "control": "U2014", "qualifier": "U2016",
-            "host_dp": "/HUB_DS1_DP", "host_dm": "/HUB_DS1_DM", "host_tx_p": "/HUB_DS1_SSTX_P", "host_tx_n": "/HUB_DS1_SSTX_N"},
+            "host_dp": "/HUB_DS1_DP", "host_dm": "/HUB_DS1_DM", "host_tx_p": None, "host_tx_n": None},
     }
     clear_ref_contracts(*(value for cfg in dual_ports.values() for value in (
         cfg["j"], cfg["mux"], cfg["protect"], cfg["eeprom"], cfg["usb2"],
         cfg["control"], cfg["qualifier"],
-    )))
+    ) if value))
     for port, cfg in dual_ports.items():
         prefix = f"PD{port}"
         source = "Ducktop2 dual-role USB 3.2 Gen 2 plus USB-PD port contract"
@@ -1794,33 +1794,41 @@ def load_current_architecture_overrides() -> None:
             "A5": local("Power Inputs", f"{prefix}_CC1_CONN"), "B5": local("Power Inputs", f"{prefix}_CC2_CONN"),
             "A6": local("Power Inputs", f"{prefix}_DP_CONN"), "B6": local("Power Inputs", f"{prefix}_DP_CONN"),
             "A7": local("Power Inputs", f"{prefix}_DM_CONN"), "B7": local("Power Inputs", f"{prefix}_DM_CONN"),
-            "A2": local("Power Inputs", f"{prefix}_TX1_P"), "A3": local("Power Inputs", f"{prefix}_TX1_N"),
-            "B2": local("Power Inputs", f"{prefix}_TX2_P"), "B3": local("Power Inputs", f"{prefix}_TX2_N"),
-            "B11": local("Power Inputs", f"{prefix}_RX1_P"), "B10": local("Power Inputs", f"{prefix}_RX1_N"),
-            "A11": local("Power Inputs", f"{prefix}_RX2_P"), "A10": local("Power Inputs", f"{prefix}_RX2_N"),
         }.items():
-            add(jref, pin, net, "Dual-role connector signal.", source)
+            add(jref, pin, net, "Dual-role connector USB2/CC signal.", source)
+        if cfg["mux"] is None:
+            for pin in ("A2", "A3", "B2", "B3", "B11", "B10", "A11", "A10"):
+                add_nc(jref, pin, "SuperSpeed pins retired (USB2-only after the board split).", source)
+        else:
+            for pin, net in {
+                "A2": local("Power Inputs", f"{prefix}_TX1_P"), "A3": local("Power Inputs", f"{prefix}_TX1_N"),
+                "B2": local("Power Inputs", f"{prefix}_TX2_P"), "B3": local("Power Inputs", f"{prefix}_TX2_N"),
+                "B11": local("Power Inputs", f"{prefix}_RX1_P"), "B10": local("Power Inputs", f"{prefix}_RX1_N"),
+                "A11": local("Power Inputs", f"{prefix}_RX2_P"), "A10": local("Power Inputs", f"{prefix}_RX2_N"),
+            }.items():
+                add(jref, pin, net, "Dual-role connector SS signal.", source)
         add_nc(jref, "A8", "SBU1 is unused.", source)
         add_nc(jref, "B8", "SBU2 is unused.", source)
 
         mux = cfg["mux"]
-        mux_map = {
-            1: "/SYS_3V3", 2: local("Power Inputs", f"{prefix}_MUX_SSEQ1"),
-            3: local("Power Inputs", f"{prefix}_MUX_EQCFG"), 4: local("Power Inputs", f"{prefix}_MUX_SLEEP_N"),
-            6: "/SYS_3V3", 14: local("Power Inputs", f"{prefix}_MUX_VIO"),
-            15: cfg["host_tx_n"], 16: cfg["host_tx_p"], 17: local("Power Inputs", f"{prefix}_MUX_MODE"),
-            18: local("Power Inputs", f"{prefix}_SSRX_RAW_N"), 19: local("Power Inputs", f"{prefix}_SSRX_RAW_P"),
-            20: "/SYS_3V3", 21: local("Power Inputs", f"{prefix}_MUX_FLIP"), 22: "GND",
-            26: local("Power Inputs", f"{prefix}_MUX_EN"), 27: "GND", 28: "/SYS_3V3",
-            30: local("Power Inputs", f"{prefix}_RX1_P"), 31: local("Power Inputs", f"{prefix}_RX1_N"),
-            33: local("Power Inputs", f"{prefix}_CTX1_RAW_P"), 34: local("Power Inputs", f"{prefix}_CTX1_RAW_N"),
-            36: local("Power Inputs", f"{prefix}_RX2_N"), 37: local("Power Inputs", f"{prefix}_RX2_P"),
-            39: local("Power Inputs", f"{prefix}_CTX2_RAW_N"), 40: local("Power Inputs", f"{prefix}_CTX2_RAW_P"), 41: "GND",
-        }
-        for pin, net in mux_map.items():
-            add(mux, pin, net, "TUSB1142 orientation and Gen 2 redriver signal.", source)
-        for pin in (5, 7, 8, 9, 10, 11, 12, 13, 23, 24, 25, 29, 32, 35, 38):
-            add_nc(mux, pin, "Unused TUSB1142 pin is explicitly NC.", source)
+        if mux is not None:
+            mux_map = {
+                1: "/SYS_3V3", 2: local("Power Inputs", f"{prefix}_MUX_SSEQ1"),
+                3: local("Power Inputs", f"{prefix}_MUX_EQCFG"), 4: local("Power Inputs", f"{prefix}_MUX_SLEEP_N"),
+                6: "/SYS_3V3", 14: local("Power Inputs", f"{prefix}_MUX_VIO"),
+                15: cfg["host_tx_n"], 16: cfg["host_tx_p"], 17: local("Power Inputs", f"{prefix}_MUX_MODE"),
+                18: local("Power Inputs", f"{prefix}_SSRX_RAW_N"), 19: local("Power Inputs", f"{prefix}_SSRX_RAW_P"),
+                20: "/SYS_3V3", 21: local("Power Inputs", f"{prefix}_MUX_FLIP"), 22: "GND",
+                26: local("Power Inputs", f"{prefix}_MUX_EN"), 27: "GND", 28: "/SYS_3V3",
+                30: local("Power Inputs", f"{prefix}_RX1_P"), 31: local("Power Inputs", f"{prefix}_RX1_N"),
+                33: local("Power Inputs", f"{prefix}_CTX1_RAW_P"), 34: local("Power Inputs", f"{prefix}_CTX1_RAW_N"),
+                36: local("Power Inputs", f"{prefix}_RX2_N"), 37: local("Power Inputs", f"{prefix}_RX2_P"),
+                39: local("Power Inputs", f"{prefix}_CTX2_RAW_N"), 40: local("Power Inputs", f"{prefix}_CTX2_RAW_P"), 41: "GND",
+            }
+            for pin, net in mux_map.items():
+                add(mux, pin, net, "TUSB1142 orientation and Gen 2 redriver signal.", source)
+            for pin in (5, 7, 8, 9, 10, 11, 12, 13, 23, 24, 25, 29, 32, 35, 38):
+                add_nc(mux, pin, "Unused TUSB1142 pin is explicitly NC.", source)
 
         protect = cfg["protect"]
         for pin, net in {
@@ -1881,8 +1889,7 @@ def load_current_architecture_overrides() -> None:
     hub = "Microchip USB7206C four-active-port USB 3.2 hub contract"
     for pin, net in {
         2: "/INTERNAL_USB_VBUS_VALID",
-        5: "/HUB_DS1_DP", 6: "/HUB_DS1_DM", 7: local(hub_sheet, "HUB_DS1_TX_RAW_P"),
-        8: local(hub_sheet, "HUB_DS1_TX_RAW_N"), 10: "/HUB_DS1_SSRX_P", 11: "/HUB_DS1_SSRX_N",
+        5: "/HUB_DS1_DP", 6: "/HUB_DS1_DM",
         14: local(hub_sheet, "HUB_DS2_DP"), 15: local(hub_sheet, "HUB_DS2_DM"),
         16: local(hub_sheet, "HUB_DS2_TX_RAW_P"), 17: local(hub_sheet, "HUB_DS2_TX_RAW_N"),
         19: local(hub_sheet, "HUB_DS2_SSRX_P"), 20: local(hub_sheet, "HUB_DS2_SSRX_N"),
@@ -1890,12 +1897,13 @@ def load_current_architecture_overrides() -> None:
         29: local(hub_sheet, "HUB_DS3_TX_RAW_P"), 30: local(hub_sheet, "HUB_DS3_TX_RAW_N"),
         32: local(hub_sheet, "HUB_DS3_SSRX_P"), 33: local(hub_sheet, "HUB_DS3_SSRX_N"),
         34: local(hub_sheet, "HUB_DS4_DP"), 35: local(hub_sheet, "HUB_DS4_DM"),
-        36: local(hub_sheet, "HUB_DS4_TX_RAW_P"), 37: local(hub_sheet, "HUB_DS4_TX_RAW_N"),
-        39: local(hub_sheet, "HUB_DS4_SSRX_P"), 40: local(hub_sheet, "HUB_DS4_SSRX_N"),
         89: "/USBC2_DP", 90: "/USBC2_DM", 91: local(hub_sheet, "HUB_UP_TX_RAW_P"),
         92: local(hub_sheet, "HUB_UP_TX_RAW_N"), 94: "/USBC2_SSTX_P", 95: "/USBC2_SSTX_N",
     }.items():
         add("U1700", pin, net, "Hub upstream or active downstream data lane.", hub)
+    for pin in (7, 8, 10, 11, 36, 37, 39, 40):
+        add_nc("U1700", pin,
+               "DS1/DS4 SS pins retired: J11/J12 are USB2-only after the board split.", hub)
     for pin, net in {
         41: local(hub_sheet, "HUB_DIS6_DM"), 42: local(hub_sheet, "HUB_DIS6_DP"),
         81: local(hub_sheet, "HUB_DIS5_DP"), 82: local(hub_sheet, "HUB_DIS5_DM"),
@@ -1942,20 +1950,29 @@ def load_current_architecture_overrides() -> None:
     add_nc("U1700", 96, "USB7206C ATEST must remain unconnected.", hub)
     add_nc("U1700", 97, "XTALO remains open when CLK_IN uses the external single-ended oscillator.", hub)
 
-    for jref, ds in (("J22", 2), ("J23", 3), ("J12", 4)):
+    for jref, ds, usb2_only in (("J22", 2, False), ("J23", 3, False), ("J12", 4, True)):
         source = "Ducktop2 source-only USB 3.2 Gen 2 port contract"
+        if usb2_only:
+            source = "Ducktop2 source-only USB 2.0 port contract (split)"
         add_many(jref, ("A1", "A12", "B1", "B12", "SH"), "GND", "Connector grounds and shield.", source)
         add_many(jref, ("A4", "A9", "B4", "B9"), local(hub_sheet, f"{jref}_VBUS"), "Current-limited source VBUS.", source)
         for pin, net in {
             "A5": local(hub_sheet, f"{jref}_CC1"), "B5": local(hub_sheet, f"{jref}_CC2"),
             "A6": local(hub_sheet, f"HUB_DS{ds}_DP"), "B6": local(hub_sheet, f"HUB_DS{ds}_DP"),
             "A7": local(hub_sheet, f"HUB_DS{ds}_DM"), "B7": local(hub_sheet, f"HUB_DS{ds}_DM"),
-            "A2": local(hub_sheet, f"{jref}_TX1_P"), "A3": local(hub_sheet, f"{jref}_TX1_N"),
-            "B2": local(hub_sheet, f"{jref}_TX2_P"), "B3": local(hub_sheet, f"{jref}_TX2_N"),
-            "B11": local(hub_sheet, f"{jref}_RX1_P"), "B10": local(hub_sheet, f"{jref}_RX1_N"),
-            "A11": local(hub_sheet, f"{jref}_RX2_P"), "A10": local(hub_sheet, f"{jref}_RX2_N"),
         }.items():
             add(jref, pin, net, "Source-only connector data or CC signal.", source)
+        if usb2_only:
+            for pin in ("A2", "A3", "B2", "B3", "B11", "B10", "A11", "A10"):
+                add_nc(jref, pin, "SuperSpeed pins retired (USB2-only after the board split).", source)
+        else:
+            for pin, net in {
+                "A2": local(hub_sheet, f"{jref}_TX1_P"), "A3": local(hub_sheet, f"{jref}_TX1_N"),
+                "B2": local(hub_sheet, f"{jref}_TX2_P"), "B3": local(hub_sheet, f"{jref}_TX2_N"),
+                "B11": local(hub_sheet, f"{jref}_RX1_P"), "B10": local(hub_sheet, f"{jref}_RX1_N"),
+                "A11": local(hub_sheet, f"{jref}_RX2_P"), "A10": local(hub_sheet, f"{jref}_RX2_N"),
+            }.items():
+                add(jref, pin, net, "Source-only connector data or CC signal.", source)
         add_nc(jref, "A8", "SBU1 is unused.", source)
         add_nc(jref, "B8", "SBU2 is unused.", source)
 
