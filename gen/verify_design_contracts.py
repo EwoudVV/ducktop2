@@ -1599,12 +1599,14 @@ def check_five_port_usb_c_architecture(components):
             "dp": "/USBC1_DP", "dm": "/USBC1_DM",
             "sstx_p": "/USBC1_SSTX_P", "sstx_n": "/USBC1_SSTX_N",
             "ssrx_p": "/USBC1_SSRX_P", "ssrx_n": "/USBC1_SSRX_N",
-        }),
+        }, False),
+        # J11 is USB2-only after the board split (no USB3 host port remains
+        # on the right side); its SS connector pins are no-connect.
         (2, "J11", "U42", 2010, {
             "dp": "/HUB_DS1_DP", "dm": "/HUB_DS1_DM",
-            "sstx_p": "/HUB_DS1_SSTX_P", "sstx_n": "/HUB_DS1_SSTX_N",
-            "ssrx_p": "/HUB_DS1_SSRX_P", "ssrx_n": "/HUB_DS1_SSRX_N",
-        }),
+            "sstx_p": None, "sstx_n": None,
+            "ssrx_p": None, "ssrx_n": None,
+        }, True),
     )
 
     # End-to-end host-TX contract for the Mu-native left charging/data port.
@@ -1621,7 +1623,7 @@ def check_five_port_usb_c_architecture(components):
         expect(net(components, "U2000", redriver_pin), coupled_net,
                f"U2000 pin {redriver_pin} receives coupled Mu TX")
 
-    for port, jref, tcpc, ubase, host in dual_role:
+    for port, jref, tcpc, ubase, host, usb2_only in dual_role:
         raw = f"/PD{port}_VBUS_RAW"
         local = lambda name: local_net(pd_sheet, f"PD{port}_{name}")
         expect(comp(components, jref).footprint,
@@ -1633,12 +1635,15 @@ def check_five_port_usb_c_architecture(components):
             "A5": local("CC1_CONN"), "B5": local("CC2_CONN"),
             "A6": local("DP_CONN"), "B6": local("DP_CONN"),
             "A7": local("DM_CONN"), "B7": local("DM_CONN"),
-            "A2": local("TX1_P"), "A3": local("TX1_N"),
-            "B2": local("TX2_P"), "B3": local("TX2_N"),
-            "B11": local("RX1_P"), "B10": local("RX1_N"),
-            "A11": local("RX2_P"), "A10": local("RX2_N"),
+            "A2": "" if usb2_only else local("TX1_P"), "A3": "" if usb2_only else local("TX1_N"),
+            "B2": "" if usb2_only else local("TX2_P"), "B3": "" if usb2_only else local("TX2_N"),
+            "B11": "" if usb2_only else local("RX1_P"), "B10": "" if usb2_only else local("RX1_N"),
+            "A11": "" if usb2_only else local("RX2_P"), "A10": "" if usb2_only else local("RX2_N"),
         }.items():
-            expect(net(components, jref, pin), want, f"{jref} data pin {pin}")
+            if usb2_only and want == "":
+                expect_unconnected(components, jref, pin)
+            else:
+                expect(net(components, jref, pin), want, f"{jref} data pin {pin}")
 
         expect_contains(comp(components, tcpc).value, "TPS25751AD", f"{tcpc} DRP controller")
         expect(prop(components, tcpc, "MPN"), "TPS25751ADREFR", f"{tcpc} exact MPN")
@@ -1672,10 +1677,11 @@ def check_five_port_usb_c_architecture(components):
         expect(prop(components, qualifier, "DefaultState"),
                "LOW_WHEN_CONTROLLER_UNPOWERED_RESET_DETACHED_OR_SINK",
                f"{qualifier} fail-off contract")
-        expect_value_prefix(components, f"R{2000 + (port - 1) * 40 + 14}", "100k",
-                            f"PD{port} attach input default-low")
-        expect_value_prefix(components, f"R{2000 + (port - 1) * 40 + 18}", "100k",
-                            f"PD{port} DFP input default-low")
+        if not usb2_only:
+            expect_value_prefix(components, f"R{2000 + (port - 1) * 40 + 14}", "100k",
+                                f"PD{port} attach input default-low")
+            expect_value_prefix(components, f"R{2000 + (port - 1) * 40 + 18}", "100k",
+                                f"PD{port} DFP input default-low")
 
         protector = f"U{ubase + 1}"
         expect_contains(comp(components, protector).value, "TPD4S201", f"{protector} CC/USB2 protector")
@@ -1703,16 +1709,17 @@ def check_five_port_usb_c_architecture(components):
                f"{mux_control} SuperSpeed enable output")
 
         redriver = f"U{ubase}"
-        expect_contains(comp(components, redriver).value, "TUSB1142", f"{redriver} Gen2 redriver")
-        expect(prop(components, redriver, "MPN"), "TUSB1142IRNQR", f"{redriver} exact MPN")
-        expect(prop(components, redriver, "StrapMode"),
-               "GPIO_MODE;FULL_AEQ;4P5DB_HOST_EQ;VIO_3V3", f"{redriver} strap policy")
-        expect(net(components, redriver, "15"), host["sstx_n"], f"{redriver} host TX-")
-        expect(net(components, redriver, "16"), host["sstx_p"], f"{redriver} host TX+")
-        expect(net(components, redriver, "18"), local("SSRX_RAW_N"), f"{redriver} host RX-")
-        expect(net(components, redriver, "19"), local("SSRX_RAW_P"), f"{redriver} host RX+")
-        expect(net(components, redriver, "21"), local("MUX_FLIP"), f"{redriver} orientation")
-        expect(net(components, redriver, "26"), local("MUX_EN"), f"{redriver} role enable")
+        if not usb2_only:
+            expect_contains(comp(components, redriver).value, "TUSB1142", f"{redriver} Gen2 redriver")
+            expect(prop(components, redriver, "MPN"), "TUSB1142IRNQR", f"{redriver} exact MPN")
+            expect(prop(components, redriver, "StrapMode"),
+                   "GPIO_MODE;FULL_AEQ;4P5DB_HOST_EQ;VIO_3V3", f"{redriver} strap policy")
+            expect(net(components, redriver, "15"), host["sstx_n"], f"{redriver} host TX-")
+            expect(net(components, redriver, "16"), host["sstx_p"], f"{redriver} host TX+")
+            expect(net(components, redriver, "18"), local("SSRX_RAW_N"), f"{redriver} host RX-")
+            expect(net(components, redriver, "19"), local("SSRX_RAW_P"), f"{redriver} host RX+")
+            expect(net(components, redriver, "21"), local("MUX_FLIP"), f"{redriver} orientation")
+            expect(net(components, redriver, "26"), local("MUX_EN"), f"{redriver} role enable")
 
         eeprom = f"U{ubase + 2}"
         expect_contains(comp(components, eeprom).value, "CAT24C256", f"{eeprom} TCPC EEPROM")
@@ -1745,9 +1752,12 @@ def check_five_port_usb_c_architecture(components):
         "89": "/USBC2_DP", "90": "/USBC2_DM",
         "94": "/USBC2_SSTX_P", "95": "/USBC2_SSTX_N",
         "5": "/HUB_DS1_DP", "6": "/HUB_DS1_DM",
-        "10": "/HUB_DS1_SSRX_P", "11": "/HUB_DS1_SSRX_N",
     }.items():
         expect(net(components, "U1700", pin), want, f"USB7206C pin {pin}")
+    # DS1/DS4 are USB2-only after the board split; their SS pins (7/8/10/11
+    # for DS1, 36/37/39/40 for DS4) are retired no-connects.
+    for pin in ("7", "8", "10", "11", "36", "37", "39", "40"):
+        expect_unconnected(components, "U1700", pin)
     # 2026-08-24 (92751f9): hub DIS5/DIS6 were repurposed from 0R-strapped
     # disabled spares into two active internal USB-A spare ports (J24 USB3,
     # J25 USB2).  The old R1730-R1733 disable-strap contracts are obsolete.
@@ -1780,17 +1790,18 @@ def check_five_port_usb_c_architecture(components):
         for pin in ("2", "5"):
             expect(net(components, uref, pin), "GND", f"{uref} clamp GND")
 
-    source_ports = (("J22", 2, 1780), ("J23", 3, 1740), ("J12", 4, 1760))
-    for jref, port, base in source_ports:
+    source_ports = (("J22", 2, 1780, False), ("J23", 3, 1740, False), ("J12", 4, 1760, True))
+    for jref, port, base, usb2_only in source_ports:
         local = lambda name: local_net(hub_sheet, name)
         expect(comp(components, jref).footprint,
                "Connector_USB:USB_C_Receptacle_Molex_105450-0101", f"{jref} exact connector")
         expect_contains(comp(components, f"U{base + 1}").value, "TPS25810", f"{jref} DFP controller")
-        expect_contains(comp(components, f"U{base + 2}").value, "HD3SS6126", f"{jref} orientation mux")
-        expect(net(components, f"U{base + 2}", "6"), "GND",
-               f"{jref} HD3SS6126 HS_OE low for normal USB3 operation")
-        expect(prop(components, f"U{base + 2}", "EnableState"),
-               "HS_OE_GND_NORMAL_OPERATION", f"{jref} mux enable contract")
+        if not usb2_only:
+            expect_contains(comp(components, f"U{base + 2}").value, "HD3SS6126", f"{jref} orientation mux")
+            expect(net(components, f"U{base + 2}", "6"), "GND",
+                   f"{jref} HD3SS6126 HS_OE low for normal USB3 operation")
+            expect(prop(components, f"U{base + 2}", "EnableState"),
+                   "HS_OE_GND_NORMAL_OPERATION", f"{jref} mux enable contract")
         expect_contains(comp(components, f"U{base + 3}").value, "TPD1S514", f"{jref} VBUS OVP")
         expect(net(components, f"U{base + 3}", "B3"), local(f"J{jref[1:]}_VBUS"),
                f"{jref} protected connector VBUS")
@@ -1799,12 +1810,19 @@ def check_five_port_usb_c_architecture(components):
         for pin, want in {
             "A6": local(f"HUB_DS{port}_DP"), "B6": local(f"HUB_DS{port}_DP"),
             "A7": local(f"HUB_DS{port}_DM"), "B7": local(f"HUB_DS{port}_DM"),
-            "A2": local(f"J{jref[1:]}_TX1_P"), "A3": local(f"J{jref[1:]}_TX1_N"),
-            "B2": local(f"J{jref[1:]}_TX2_P"), "B3": local(f"J{jref[1:]}_TX2_N"),
-            "B11": local(f"J{jref[1:]}_RX1_P"), "B10": local(f"J{jref[1:]}_RX1_N"),
-            "A11": local(f"J{jref[1:]}_RX2_P"), "A10": local(f"J{jref[1:]}_RX2_N"),
         }.items():
             expect(net(components, jref, pin), want, f"{jref} data pin {pin}")
+        if usb2_only:
+            for pin in ("A2", "A3", "B2", "B3", "B11", "B10", "A11", "A10"):
+                expect_unconnected(components, jref, pin)
+        else:
+            for pin, want in {
+                "A2": local(f"J{jref[1:]}_TX1_P"), "A3": local(f"J{jref[1:]}_TX1_N"),
+                "B2": local(f"J{jref[1:]}_TX2_P"), "B3": local(f"J{jref[1:]}_TX2_N"),
+                "B11": local(f"J{jref[1:]}_RX1_P"), "B10": local(f"J{jref[1:]}_RX1_N"),
+                "A11": local(f"J{jref[1:]}_RX2_P"), "A10": local(f"J{jref[1:]}_RX2_N"),
+            }.items():
+                expect(net(components, jref, pin), want, f"{jref} data pin {pin}")
 
     external_ports = {"J11", "J12", "J21", "J22", "J23"}
     found_ports = {

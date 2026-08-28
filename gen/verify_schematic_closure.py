@@ -333,19 +333,30 @@ def run_checks(a: ClosureAudit) -> None:
     for ref, component in a.components.items():
         a.check("CH224" not in str(component["value"]), f"obsolete CH224 controller {ref} must be absent")
 
-    # Three additional source-only ports still carry USB 2 and SuperSpeed data.
-    for connector, controller, mux, protector in (
-        ("J22", "U1781", "U1782", "U1783"),
-        ("J23", "U1741", "U1742", "U1743"),
-        ("J12", "U1761", "U1762", "U1763"),
+    # Three additional source-only ports still carry USB 2 and SuperSpeed data;
+    # J12 is USB2-only after the board split (its mux is retired).
+    for connector, controller, mux, protector, usb2_only in (
+        ("J22", "U1781", "U1782", "U1783", False),
+        ("J23", "U1741", "U1742", "U1743", False),
+        ("J12", "U1761", None, "U1763", True),
     ):
         a.value_starts(controller, "TPS25810")
-        a.value_starts(mux, "HD3SS6126")
-        a.pin(mux, "6", "GND")
-        a.prop_eq(mux, "EnableState", "HS_OE_GND_NORMAL_OPERATION")
+        if mux is not None:
+            a.value_starts(mux, "HD3SS6126")
+            a.pin(mux, "6", "GND")
+            a.prop_eq(mux, "EnableState", "HS_OE_GND_NORMAL_OPERATION")
         a.value_starts(protector, "TPD1S514")
-        for pin in ("A6", "A7", "B6", "B7", "A2", "A3", "B2", "B3", "A10", "A11", "B10", "B11"):
-            a.check((connector, pin) in a.pin_nets, f"{connector}.{pin} must carry data")
+        for pin in ("A6", "A7", "B6", "B7"):
+            a.check((connector, pin) in a.pin_nets, f"{connector}.{pin} must carry USB2 data")
+        if usb2_only:
+            for pin in ("A2", "A3", "B2", "B3", "A10", "A11", "B10", "B11"):
+                a.check(
+                    str(a.pin_nets.get((connector, pin), "")).startswith("unconnected-"),
+                    f"{connector}.{pin} must be NC (USB2-only after the split)",
+                )
+        else:
+            for pin in ("A2", "A3", "B2", "B3", "A10", "A11", "B10", "B11"):
+                a.check((connector, pin) in a.pin_nets, f"{connector}.{pin} must carry data")
 
     # The internal trackpad uses a cut USB2 Standard-A-to-C cable and has no
     # board-side Type-C attach controller.  VBUS remains host-gated and

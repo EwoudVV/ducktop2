@@ -95,7 +95,8 @@ def add_tps26630(s, port, x0, y0, base):
             extra_props=props("Diodes Incorporated", "B340A-13-F"))
 
 
-def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbase, ebase):
+def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbase, ebase,
+                       usb2_only=False):
     raw_vbus = f"PD{port}_VBUS_RAW"
     pphv = f"PD{port}_PPHV"
     ldo3v3 = f"PD{port}_LDO3V3"
@@ -125,7 +126,7 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
     ssrxp, ssrxn = f"PD{port}_SSRX_RAW_P", f"PD{port}_SSRX_RAW_N"
     mode, vio, eqcfg, sseq1 = (f"PD{port}_{name}" for name in ("MUX_MODE", "MUX_VIO", "MUX_EQCFG", "MUX_SSEQ1"))
 
-    s.text(x0, y0, f"== {jref}: USB 3.2 Gen 2 data plus USB-PD charging, side port {port} ==")
+    s.text(x0, y0, f"== {jref}: {'USB 2.0 data plus' if usb2_only else 'USB 3.2 Gen 2 data plus'} USB-PD charging, side port {port} ==")
     s.place(jref, "USB_C_Receptacle", f"USB-C dual-role data/PD port {jref}", x0 + 254, y0 + 55.88,
             footprint=FOOTPRINTS["USB_C_Receptacle"], pin_nets={
                 "A1": ("GND", "local"), "A12": ("GND", "local"),
@@ -135,10 +136,14 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
                 "A5": (cc1_c, "local"), "B5": (cc2_c, "local"),
                 "A6": (dp_c, "local"), "B6": (dp_c, "local"),
                 "A7": (dm_c, "local"), "B7": (dm_c, "local"),
-                "A2": (tx1p, "local"), "A3": (tx1n, "local"),
-                "B2": (tx2p, "local"), "B3": (tx2n, "local"),
-                "B11": (rx1p, "local"), "B10": (rx1n, "local"),
-                "A11": (rx2p, "local"), "A10": (rx2n, "local"),
+                "A2": ("" if usb2_only else tx1p, "nc" if usb2_only else "local"),
+                "A3": ("" if usb2_only else tx1n, "nc" if usb2_only else "local"),
+                "B2": ("" if usb2_only else tx2p, "nc" if usb2_only else "local"),
+                "B3": ("" if usb2_only else tx2n, "nc" if usb2_only else "local"),
+                "B11": ("" if usb2_only else rx1p, "nc" if usb2_only else "local"),
+                "B10": ("" if usb2_only else rx1n, "nc" if usb2_only else "local"),
+                "A11": ("" if usb2_only else rx2p, "nc" if usb2_only else "local"),
+                "A10": ("" if usb2_only else rx2n, "nc" if usb2_only else "local"),
                 "A8": ("", "nc"), "B8": ("", "nc"),
             }, extra_props=props("Molex", "105450-0101"))
 
@@ -278,53 +283,57 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
     capacitor(s, f"C{cbase + 30}", "100n USB2 switch local", x0 + 218.44, y0 + 144.78,
               "SYS_3V3", kind="hier")
 
-    s.place(f"U{ubase}", "TUSB1142", "TUSB1142 USB 3.2 Gen 2 orientation redriver",
-            x0 + 147.32, y0 + 55.88, footprint=FOOTPRINTS["TUSB1142"], pin_nets={
-                "1": ("SYS_3V3", "hier"), "2": (sseq1, "local"), "3": (eqcfg, "local"),
-                "4": (mux_sleep, "local"), "5": ("", "nc"), "6": ("SYS_3V3", "hier"),
-                "7": ("", "nc"), "8": ("", "nc"), "9": ("", "nc"), "10": ("", "nc"),
-                "11": ("", "nc"), "12": ("", "nc"), "13": ("", "nc"),
-                "14": (vio, "local"),
-                "15": (host["sstx_n"], "hier"), "16": (host["sstx_p"], "hier"),
-                "17": (mode, "local"), "18": (ssrxn, "local"), "19": (ssrxp, "local"),
-                "20": ("SYS_3V3", "hier"), "21": (mux_flip, "local"), "22": ("GND", "local"),
-                "23": ("", "nc"), "24": ("", "nc"), "25": ("", "nc"),
-                "26": (mux_en, "local"), "27": ("GND", "local"), "28": ("SYS_3V3", "hier"),
-                "29": ("", "nc"), "30": (rx1p, "local"), "31": (rx1n, "local"),
-                "32": ("", "nc"), "33": (ctx1p, "local"), "34": (ctx1n, "local"),
-                "35": ("", "nc"), "36": (rx2n, "local"), "37": (rx2p, "local"),
-                "38": ("", "nc"), "39": (ctx2n, "local"), "40": (ctx2p, "local"),
-                "41": ("GND", "local"),
-            }, extra_props=props(
-                "Texas Instruments", "TUSB1142IRNQR",
-                "https://www.ti.com/lit/ds/symlink/tusb1142.pdf",
-                StrapMode="GPIO_MODE;FULL_AEQ;4P5DB_HOST_EQ;VIO_3V3",
-            ))
-    for offset, (net, label) in enumerate(((mode, "MODE=0"), (vio, "VIO=3V3"),
-                                           (eqcfg, "EQCFG=0"), (sseq1, "SSEQ1=0"))):
-        resistor(s, f"R{rbase + 8 + offset}", f"1k TUSB1142 {label} strap", x0 + 180.34,
-                 y0 + 119.38 + offset * 10.16, net, "GND", mpn="RC0603FR-071KL")
-    resistor(s, f"R{rbase + 12}", "10k TUSB1142 SLP_S0# pull-up", x0 + 231.14, y0 + 132.08,
-             "SYS_3V3", mux_sleep, a_kind="hier")
-    resistor(s, f"R{rbase + 13}", "100k mux FLIP input default-low", x0 + 109.22, y0 + 142.24,
-             gpio_flip, "GND", mpn="RC0603FR-07100KL")
-    resistor(s, f"R{rbase + 14}", "100k data-attach input default-low", x0 + 139.7, y0 + 142.24,
-             gpio_attach, "GND", mpn="RC0603FR-07100KL")
-    resistor(s, f"R{rbase + 18}", "100k DFP-role input default-low", x0 + 154.94, y0 + 142.24,
-             gpio_dfp, "GND", mpn="RC0603FR-07100KL")
-    capacitor(s, f"C{cbase + 4}", "10u TUSB1142 local", x0 + 147.32, y0 + 160.02,
-              "SYS_3V3", kind="hier", footprint="C_10u", mpn="GRM31CR71A106KA01L")
-    for index in range(4):
-        capacitor(s, f"C{cbase + 5 + index}", "100n TUSB1142 VCC local",
-                  x0 + 172.72 + index * 12.7, y0 + 160.02, "SYS_3V3", kind="hier")
+    if not usb2_only:
+        s.place(f"U{ubase}", "TUSB1142", "TUSB1142 USB 3.2 Gen 2 orientation redriver",
+                x0 + 147.32, y0 + 55.88, footprint=FOOTPRINTS["TUSB1142"], pin_nets={
+                    "1": ("SYS_3V3", "hier"), "2": (sseq1, "local"), "3": (eqcfg, "local"),
+                    "4": (mux_sleep, "local"), "5": ("", "nc"), "6": ("SYS_3V3", "hier"),
+                    "7": ("", "nc"), "8": ("", "nc"), "9": ("", "nc"), "10": ("", "nc"),
+                    "11": ("", "nc"), "12": ("", "nc"), "13": ("", "nc"),
+                    "14": (vio, "local"),
+                    "15": (host["sstx_n"], "hier"), "16": (host["sstx_p"], "hier"),
+                    "17": (mode, "local"), "18": (ssrxn, "local"), "19": (ssrxp, "local"),
+                    "20": ("SYS_3V3", "hier"), "21": (mux_flip, "local"), "22": ("GND", "local"),
+                    "23": ("", "nc"), "24": ("", "nc"), "25": ("", "nc"),
+                    "26": (mux_en, "local"), "27": ("GND", "local"), "28": ("SYS_3V3", "hier"),
+                    "29": ("", "nc"), "30": (rx1p, "local"), "31": (rx1n, "local"),
+                    "32": ("", "nc"), "33": (ctx1p, "local"), "34": (ctx1n, "local"),
+                    "35": ("", "nc"), "36": (rx2n, "local"), "37": (rx2p, "local"),
+                    "38": ("", "nc"), "39": (ctx2n, "local"), "40": (ctx2p, "local"),
+                    "41": ("GND", "local"),
+                }, extra_props=props(
+                    "Texas Instruments", "TUSB1142IRNQR",
+                    "https://www.ti.com/lit/ds/symlink/tusb1142.pdf",
+                    StrapMode="GPIO_MODE;FULL_AEQ;4P5DB_HOST_EQ;VIO_3V3",
+                ))
+        for offset, (net, label) in enumerate(((mode, "MODE=0"), (vio, "VIO=3V3"),
+                                               (eqcfg, "EQCFG=0"), (sseq1, "SSEQ1=0"))):
+            resistor(s, f"R{rbase + 8 + offset}", f"1k TUSB1142 {label} strap", x0 + 180.34,
+                     y0 + 119.38 + offset * 10.16, net, "GND", mpn="RC0603FR-071KL")
+        resistor(s, f"R{rbase + 12}", "10k TUSB1142 SLP_S0# pull-up", x0 + 231.14, y0 + 132.08,
+                 "SYS_3V3", mux_sleep, a_kind="hier")
+        resistor(s, f"R{rbase + 13}", "100k mux FLIP input default-low", x0 + 109.22, y0 + 142.24,
+                 gpio_flip, "GND", mpn="RC0603FR-07100KL")
+        resistor(s, f"R{rbase + 14}", "100k data-attach input default-low", x0 + 139.7, y0 + 142.24,
+                 gpio_attach, "GND", mpn="RC0603FR-07100KL")
+        resistor(s, f"R{rbase + 18}", "100k DFP-role input default-low", x0 + 154.94, y0 + 142.24,
+                 gpio_dfp, "GND", mpn="RC0603FR-07100KL")
+        capacitor(s, f"C{cbase + 4}", "10u TUSB1142 local", x0 + 147.32, y0 + 160.02,
+                  "SYS_3V3", kind="hier", footprint="C_10u", mpn="GRM31CR71A106KA01L")
+        for index in range(4):
+            capacitor(s, f"C{cbase + 5 + index}", "100n TUSB1142 VCC local",
+                      x0 + 172.72 + index * 12.7, y0 + 160.02, "SYS_3V3", kind="hier")
 
-    for offset, (raw, coupled, kind) in enumerate((
-        (ssrxp, host["ssrx_p"], "hier"), (ssrxn, host["ssrx_n"], "hier"),
-        (ctx1p, tx1p, "local"), (ctx1n, tx1n, "local"),
-        (ctx2p, tx2p, "local"), (ctx2n, tx2n, "local"),
-    )):
-        series_capacitor(s, f"C{cbase + 9 + offset}", "220n USB3 TX AC coupling",
-                         x0 + 20.32 + offset * 22.86, y0 + 177.8, raw, coupled, b_kind=kind)
+        for offset, (raw, coupled, kind) in enumerate((
+            (ssrxp, host["ssrx_p"], "hier"), (ssrxn, host["ssrx_n"], "hier"),
+            (ctx1p, tx1p, "local"), (ctx1n, tx1n, "local"),
+            (ctx2p, tx2p, "local"), (ctx2n, tx2n, "local"),
+        )):
+            series_capacitor(s, f"C{cbase + 9 + offset}", "220n USB3 TX AC coupling",
+                             x0 + 20.32 + offset * 22.86, y0 + 177.8, raw, coupled, b_kind=kind)
+
+        ss_esd(s, dbase, x0 + 299.72, y0 + 25.4,
+               (tx1p, tx1n, tx2p, tx2n, rx1p, rx1n, rx2p, rx2n))
 
     s.place(f"U{ubase + 5}", "TVS2200DRV", "TVS2200 22V USB VBUS surge clamp",
             x0 + 279.4, y0 + 104.14, footprint=FOOTPRINTS["TVS2200DRV"], pin_nets={
@@ -363,8 +372,6 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
             extra_props=props("KEMET", "T521V686M025ATE050"))
     capacitor(s, f"C{cbase + 29}", "100n 50V PPHV local", x0 + 88.9, y0 + 195.58, pphv)
 
-    ss_esd(s, dbase, x0 + 299.72, y0 + 25.4,
-           (tx1p, tx1n, tx2p, tx2n, rx1p, rx1n, rx2p, rx2n))
     add_tps26630(s, port, x0 + 355.6, y0 + 93.98, ebase)
     s.pwrflag(x0 + 327.66, y0 + 187.96, raw_vbus)
     s.pwrflag(x0 + 347.98, y0 + 187.96, pphv)
@@ -440,8 +447,8 @@ def build(sheet_symbol_uuid):
     s = Sheet(f"/{sheet_symbol_uuid}")
     s.refcounters["#PWR"] = 2000
     s.refcounters["#FLG"] = 2000
-    s.text(20.32, 12.7, "== Two rear USB-C data/charging ports: J21 left and J11 right ==")
-    s.text(20.32, 20.32, "Both ports carry USB 3.2 Gen 2 plus USB2 and can sink negotiated 15V or source protected default USB current.")
+    s.text(20.32, 12.7, "== Two rear USB-C data/charging ports: J21 left (USB3) and J11 right (USB2) ==")
+    s.text(20.32, 20.32, "J21 carries USB 3.2 Gen 2 plus USB2. J11 is USB2-only (split architecture: no USB3 host port remains on the right side); both can sink negotiated 15V or source protected default USB current.")
     s.text(20.32, 27.94, "TPS25751A loads a versioned 32KB EEPROM image while powered from dead-battery VBUS; no EC is needed to obtain the first 15V contract.")
     s.text(20.32, 35.56, "The raw 5V attach rail stays below the Type-C pre-attach capacitance limit; large sink bulk is behind the integrated PD switch.")
     add_dual_role_port(s, port=1, jref="J21", host={
@@ -451,9 +458,10 @@ def build(sheet_symbol_uuid):
     }, x0=20.32, y0=50.8, rbase=2000, cbase=2000, ubase=2000, dbase=2100, ebase=2080)
     add_dual_role_port(s, port=2, jref="J11", host={
         "dp": "HUB_DS1_DP", "dm": "HUB_DS1_DM",
-        "sstx_p": "HUB_DS1_SSTX_P", "sstx_n": "HUB_DS1_SSTX_N",
-        "ssrx_p": "HUB_DS1_SSRX_P", "ssrx_n": "HUB_DS1_SSRX_N",
-    }, x0=20.32, y0=276.86, rbase=2040, cbase=2040, ubase=2010, dbase=2120, ebase=2090)
+        "sstx_p": None, "sstx_n": None,
+        "ssrx_p": None, "ssrx_n": None,
+    }, x0=20.32, y0=276.86, rbase=2040, cbase=2040, ubase=2010, dbase=2120, ebase=2090,
+    usb2_only=True)
     add_pd_selector(s)
     s.text(20.32, 693.42, "Five-port source budget: 5 x 0.9A maximum advertised load = 4.5A on the dedicated 6A USB_PORT_5V rail.")
     s.text(20.32, 701.04, "Firmware must reject any configuration that advertises more than default USB current and must shed optional ports on rail fault.")
