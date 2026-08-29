@@ -956,9 +956,6 @@ def main():
     power_sheet_uuid = stable_uuid("sheet-symbol:01_power_battery")
     ec_sheet_uuid = stable_uuid("sheet-symbol:02_ec_mcu")
     mu_sheet_uuid = stable_uuid("sheet-symbol:03_mu_carrier")
-    usb_sheet_uuid = stable_uuid("sheet-symbol:04_usb_c_io")
-    pwrin_sheet_uuid = stable_uuid("sheet-symbol:05_power_inputs")
-    tcp0_sheet_uuid = stable_uuid("sheet-symbol:06_tcp0_external_hdmi")
     radio_sheet_uuid = stable_uuid("sheet-symbol:07_radio_oled_gps")
     internal_sheet_uuid = stable_uuid("sheet-symbol:08_internal_services")
     radio_db_sheet_uuid = stable_uuid("sheet-symbol:09_radio_daughterboard_interface")
@@ -966,7 +963,6 @@ def main():
     keyboard_daughterboard_sheet_uuid = stable_uuid("sheet-symbol:12_keyboard_daughterboard")
     maker_sheet_uuid = stable_uuid("sheet-symbol:14_maker_mcu")
     system_audio_sheet_uuid = stable_uuid("sheet-symbol:15_system_audio")
-    ethernet_sheet_uuid = stable_uuid("sheet-symbol:16_gigabit_ethernet")
 
     def write_generated_sheet(context, filename, builder, page_number):
         with uuid_scope(context):
@@ -984,15 +980,6 @@ def main():
     )
     mu_s = write_generated_sheet(
         "03_mu_carrier", "03_mu_carrier.kicad_sch", lambda: build(mu_sheet_uuid), "4"
-    )
-    usb_s = write_generated_sheet(
-        "04_usb_c_io", "04_usb_c_io.kicad_sch", lambda: usb.build(usb_sheet_uuid), "5"
-    )
-    pwrin_s = write_generated_sheet(
-        "05_power_inputs", "05_power_inputs.kicad_sch", lambda: pwrin.build(pwrin_sheet_uuid), "6"
-    )
-    tcp0_s = write_generated_sheet(
-        "06_tcp0_external_hdmi", "06_tcp0_external_hdmi.kicad_sch", lambda: tcp0.build(tcp0_sheet_uuid), "7"
     )
     radio_s = write_generated_sheet(
         "07_radio_oled_gps", "07_radio_oled_gps.kicad_sch", lambda: radio.build(radio_sheet_uuid), "8"
@@ -1018,10 +1005,6 @@ def main():
     system_audio_s = write_generated_sheet(
         "15_system_audio", "15_system_audio.kicad_sch",
         lambda: system_audio.build(system_audio_sheet_uuid), "15"
-    )
-    ethernet_s = write_generated_sheet(
-        "16_gigabit_ethernet", "16_gigabit_ethernet.kicad_sch",
-        lambda: ethernet.build(ethernet_sheet_uuid), "16"
     )
 
     def generated_hier_nets(sheet):
@@ -1089,24 +1072,6 @@ def main():
         "GBE_HOST_TX_P", "GBE_HOST_TX_N", "GBE_HOST_RX_P", "GBE_HOST_RX_N",
         "GBE_REFCLK_P", "GBE_REFCLK_N", "GBE_CLKREQ_N",
     ]
-    usb_hier_nets = [
-        "SYS_5V", "SYS_3V3", "MU_HOST_ACTIVE", "PD_PROTECT_FAULT_N",
-        "USBC1_SSTX_P", "USBC1_SSTX_N", "USBC1_SSRX_P", "USBC1_SSRX_N", "USBC1_DP", "USBC1_DM",
-        "USBC2_SSTX_P", "USBC2_SSTX_N", "USBC2_SSRX_P", "USBC2_SSRX_N", "USBC2_DP", "USBC2_DM",
-    ]
-    pwrin_hier_nets = [
-        "MCU_3V3", "USB_PD_SELECTED", "PD1_VALID_N", "PD2_VALID_N",
-        "PD1_VBUS_RAW", "PD2_VBUS_RAW",
-        "PD1_PATH_EN", "PD2_PATH_EN",
-        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N",
-        "PD1_TCPC_IRQ_N", "PD2_TCPC_IRQ_N", "PD_PROTECT_FAULT_N",
-        "PD1_I2C_SCL", "PD1_I2C_SDA", "PD2_I2C_SCL", "PD2_I2C_SDA",
-    ]
-    tcp0_hier_nets = [
-        "SYS_5V", "SYS_3V3", "MU_HOST_ACTIVE", "TCP0_HPD", "TCP0_DDC_SDA", "TCP0_DDC_SCL",
-        "TCP0_TX0_P", "TCP0_TX0_N", "TCP0_TX1_P", "TCP0_TX1_N",
-        "TCP0_TXRX0_P", "TCP0_TXRX0_N", "TCP0_TXRX1_P", "TCP0_TXRX1_N",
-    ]
     radio_hier_nets = [
         "PCIE_3V3", "MCU_3V3", "I2C_SCL", "I2C_SDA",
         "WIFI_PCIE_TX_P", "WIFI_PCIE_TX_N", "WIFI_PCIE_RX_P", "WIFI_PCIE_RX_N",
@@ -1154,12 +1119,6 @@ def main():
         "RADIO_CODEC_USB_DP_HOST", "RADIO_CODEC_USB_DM_HOST", "RADIO_CODEC_USB_VBUS_HOST",
         "AUDIO_AMP_EC_EN", "AUDIO_MIC_EN",
     ]
-    ethernet_hier_nets = [
-        "PCIE_3V3",
-        "GBE_HOST_TX_P", "GBE_HOST_TX_N", "GBE_HOST_RX_P", "GBE_HOST_RX_N",
-        "GBE_REFCLK_P", "GBE_REFCLK_N", "GBE_CLKREQ_N",
-        "PLTRST_SRC_N", "PCIE_WAKE_N",
-    ]
 
     # The generated child sheets are the authority for the root pin contract.
     # Deriving these lists prevents a removed port or daughterboard signal from
@@ -1167,16 +1126,12 @@ def main():
     power_hier_nets = generated_hier_nets(power_s)
     ec_hier_nets = generated_hier_nets(ec_s)
     mu_hier_nets = generated_hier_nets(mu_s)
-    usb_hier_nets = generated_hier_nets(usb_s)
-    pwrin_hier_nets = generated_hier_nets(pwrin_s)
-    tcp0_hier_nets = generated_hier_nets(tcp0_s)
     radio_hier_nets = generated_hier_nets(radio_s)
     internal_hier_nets = generated_hier_nets(internal_s)
     radio_db_hier_nets = generated_hier_nets(radio_db_s)
     keyboard_hier_nets = generated_hier_nets(keyboard_if_s)
     maker_hier_nets = generated_hier_nets(maker_s)
     system_audio_hier_nets = generated_hier_nets(system_audio_s)
-    ethernet_hier_nets = generated_hier_nets(ethernet_s)
 
     reset_uuid_sequence("root")
 
@@ -1191,18 +1146,6 @@ def main():
     mu_block, mu_pins = sheet_block(
         mu_sheet_uuid, 290, 40, 70, 340, "Mu Carrier", "03_mu_carrier.kicad_sch",
         mu_hier_nets,
-    )
-    usb_block, usb_pins = sheet_block(
-        usb_sheet_uuid, 30, 200, 90, 125, "Native USB-C I/O", "04_usb_c_io.kicad_sch",
-        usb_hier_nets,
-    )
-    pwrin_block, pwrin_pins = sheet_block(
-        pwrin_sheet_uuid, 550, 490, 90, 165, "Power Inputs", "05_power_inputs.kicad_sch",
-        pwrin_hier_nets,
-    )
-    tcp0_block, tcp0_pins = sheet_block(
-        tcp0_sheet_uuid, 420, 40, 105, 80, "TCP0 External HDMI", "06_tcp0_external_hdmi.kicad_sch",
-        tcp0_hier_nets,
     )
     radio_block, radio_pins = sheet_block(
         radio_sheet_uuid, 30, 380, 105, 155, "Wi-Fi/Bluetooth & OLEDs", "07_radio_oled_gps.kicad_sch",
@@ -1228,10 +1171,6 @@ def main():
         system_audio_sheet_uuid, 680, 330, 135, 85, "System Audio", "15_system_audio.kicad_sch",
         system_audio_hier_nets,
     )
-    ethernet_block, ethernet_pins = sheet_block(
-        ethernet_sheet_uuid, 680, 420, 135, 65, "Gigabit Ethernet", "16_gigabit_ethernet.kicad_sch",
-        ethernet_hier_nets,
-    )
 
     root_labels = []
     seen_root_labels = set()
@@ -1243,20 +1182,67 @@ def main():
             root_labels.append(root_label(coord, net))
             seen_root_labels.add(key)
 
+    # ---- Board split Phase 2.4: FPC boundary contracts ----
+    # The left (FPC-1), right (FPC-2), and BMS (FPC-3) daughterboards connect
+    # through these nets. The pins dicts map each net to a root-label coord.
+    fpc1_nets = [
+        "AUX_DC_RAW", "HUB_DS1_DM", "HUB_DS1_DP",
+        "INTERNAL_USB_VBUS_VALID", "MCU_3V3",
+        "PD1_EFUSE_FAULT_N", "PD1_I2C_SCL", "PD1_I2C_SDA", "PD1_PATH_EN",
+        "PD1_TCPC_IRQ_N", "PD1_VALID_N", "PD1_VBUS_RAW", "PD2_VALID_N",
+        "PD_PROTECT_FAULT_N", "SYS_3V3",
+        "USBC1_DM", "USBC1_DP", "USBC1_SSRX_N", "USBC1_SSRX_P",
+        "USBC1_SSTX_N", "USBC1_SSTX_P",
+        "USBC2_DM", "USBC2_DP", "USBC2_SSRX_N", "USBC2_SSRX_P",
+        "USBC2_SSTX_N", "USBC2_SSTX_P",
+        "USB_PD_SELECTED", "USB_PORT_5V", "VSYS",
+    ]
+    fpc2_nets = [
+        "GBE_CLKREQ_N", "GBE_HOST_RX_N", "GBE_HOST_RX_P", "GBE_HOST_TX_N",
+        "GBE_HOST_TX_P", "GBE_REFCLK_N", "GBE_REFCLK_P",
+        "HUB_DS1_DM", "HUB_DS1_DP",
+        "MCU_3V3", "MU_HOST_ACTIVE", "PCIE_3V3", "PCIE_WAKE_N",
+        "PD2_EFUSE_FAULT_N", "PD2_I2C_SCL", "PD2_I2C_SDA", "PD2_PATH_EN",
+        "PD2_TCPC_IRQ_N", "PD2_VBUS_RAW", "PD_PROTECT_FAULT_N", "PLTRST_SRC_N",
+        "SYS_3V3", "SYS_5V",
+        "TCP0_DDC_SCL", "TCP0_DDC_SDA", "TCP0_HPD",
+        "TCP0_TX0_N", "TCP0_TX0_P", "TCP0_TX1_N", "TCP0_TX1_P",
+        "TCP0_TXRX0_N", "TCP0_TXRX0_P", "TCP0_TXRX1_N", "TCP0_TXRX1_P",
+        "USB_PORT_5V",
+    ]
+    fpc3_nets = [
+        "PACK_POS_FUSED", "PACK_FAULT_N", "PACK_RETRY_PULSE", "FG_VSS",
+    ]
+
+    # Build pins dicts (net -> root coord) for the boundary label rows.
+    def fpc_pins(nets, x0, y):
+        pins = {}
+        x = x0
+        for net in nets:
+            pins[net] = (x, y)
+            x = snap_coord(x + 20)
+            if x > 900:
+                x = x0
+                y = snap_coord(y + 10)
+        return pins
+
+    fpc1_pins = fpc_pins(fpc1_nets, 30, 560)
+    fpc2_pins = fpc_pins(fpc2_nets, 350, 560)
+    fpc3_pins = fpc_pins(fpc3_nets, 700, 560)
+
     sheet_contracts = (
         ("power", power_pins, power_hier_nets),
         ("ec", ec_pins, ec_hier_nets),
         ("mu", mu_pins, mu_hier_nets),
-        ("usb", usb_pins, usb_hier_nets),
-        ("power_inputs", pwrin_pins, pwrin_hier_nets),
-        ("external_hdmi", tcp0_pins, tcp0_hier_nets),
+        ("fpc1_left", fpc1_pins, fpc1_nets),
+        ("fpc2_right", fpc2_pins, fpc2_nets),
+        ("fpc3_bms", fpc3_pins, fpc3_nets),
         ("wifi_oled", radio_pins, radio_hier_nets),
         ("internal_services", internal_pins, internal_hier_nets),
         ("radio_daughterboard", radio_db_pins, radio_db_hier_nets),
         ("keyboard", keyboard_pins, keyboard_hier_nets),
         ("maker", maker_pins, maker_hier_nets),
         ("system_audio", system_audio_pins, system_audio_hier_nets),
-        ("ethernet", ethernet_pins, ethernet_hier_nets),
     )
     all_nets = []
     seen_nets = set()
@@ -1271,8 +1257,18 @@ def main():
         if len(users) < 2:
             orphan_nets.append((net, users[0][0]))
             continue
-        for _name, pins in users:
-            add_root_label(pins, net)
+        # Board split Phase 2.4: the FPC boundary contracts (fpc1_left,
+        # fpc2_right, fpc3_bms) declare the nets so they do not orphan, but
+        # their labels are placed only when the net has NO real center-sheet
+        # host yet.  A net hosted by a center sheet gets its label at that
+        # sheet's block pin; the FPC row is only a Phase 4 placeholder.
+        real_users = [u for u in users if not u[0].startswith("fpc")]
+        if real_users:
+            for _name, pins in real_users:
+                add_root_label(pins, net)
+        else:
+            for _name, pins in users:
+                add_root_label(pins, net)
     if orphan_nets:
         details = ", ".join(f"{net} only on {sheet}" for net, sheet in orphan_nets)
         raise ValueError(f"orphan hierarchical nets: {details}")
@@ -1289,16 +1285,12 @@ def main():
         f'{power_block}\n'
         f'{ec_block}\n'
         f'{mu_block}\n'
-        f'{usb_block}\n'
-        f'{pwrin_block}\n'
-        f'{tcp0_block}\n'
         f'{radio_block}\n'
         f'{internal_block}\n'
         f'{radio_db_block}\n'
         f'{keyboard_block}\n'
         f'{maker_block}\n'
         f'{system_audio_block}\n'
-        f'{ethernet_block}\n'
         + "\n".join(root_labels) + "\n"
         + "\n".join(root_ncs) + "\n"
         f'  (sheet_instances\n'

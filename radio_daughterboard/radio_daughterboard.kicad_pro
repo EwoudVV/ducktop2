@@ -76,44 +76,9 @@
           "width": 0.0
         },
         {
-          "gap": 0.15,
-          "via_gap": 0.2,
-          "width": 0.12
-        },
-        {
-          "gap": 0.15,
-          "via_gap": 0.2,
-          "width": 0.15
-        },
-        {
-          "gap": 0.25,
-          "via_gap": 0.25,
-          "width": 0.2
-        },
-        {
-          "gap": 0.8,
-          "via_gap": 0.25,
-          "width": 0.29
-        },
-        {
-          "gap": 0.612,
-          "via_gap": 0.25,
-          "width": 0.26
-        },
-        {
-          "gap": 0.679,
-          "via_gap": 0.25,
-          "width": 0.215
-        },
-        {
-          "gap": 0.0,
-          "via_gap": 0.25,
-          "width": 0.262
-        },
-        {
           "gap": 0.1524,
           "via_gap": 0.25,
-          "width": 0.2085
+          "width": 0.183
         },
         {
           "gap": 0.2032,
@@ -124,6 +89,11 @@
           "gap": 0.254,
           "via_gap": 0.25,
           "width": 0.1521
+        },
+        {
+          "gap": 0.25,
+          "via_gap": 0.25,
+          "width": 0.2248
         }
       ],
       "drc_exclusions": [],
@@ -260,20 +230,18 @@
         }
       ],
       "track_widths": [
-        0.0,
-        0.1,
-        0.12,
-        0.15,
-        0.2,
+        0.091,
+        0.111,
+        0.114,
+        0.1521,
+        0.1796,
+        0.183,
+        0.2248,
         0.25,
         0.3,
         0.4,
-        0.5,
-        0.75,
-        1.0,
-        1.5,
-        2.0,
-        3.0
+        0.6,
+        1.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -588,7 +556,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "radio_daughterboard.kicad_pro",
+    "filename": "ducktop2.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -615,9 +583,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.679,
+        "diff_pair_gap": 0.254,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.215,
+        "diff_pair_width": 0.1521,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -625,7 +593,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.215,
+        "track_width": 0.1521,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -634,9 +602,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.8,
+        "diff_pair_gap": 0.1524,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.29,
+        "diff_pair_width": 0.183,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -644,7 +612,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.29,
+        "track_width": 0.183,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -653,9 +621,9 @@
       {
         "bus_width": 12,
         "clearance": 0.15,
-        "diff_pair_gap": 0.612,
+        "diff_pair_gap": 0.2032,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.26,
+        "diff_pair_width": 0.1796,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -663,7 +631,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.26,
+        "track_width": 0.1796,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -674,7 +642,45 @@
         "clearance": 0.15,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.262,
+        "diff_pair_width": 1.0,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "POWER_HI",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": -1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 1.0,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.6,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "POWER_MID",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": -1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.6,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2248,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -682,7 +688,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.262,
+        "track_width": 0.2248,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -692,9 +698,625 @@
     "meta": {
       "version": 5
     },
-    "net_colors": null,
+    "net_colors": {
+      "/AON_FAULT_N": "rgb(255, 0, 0)",
+      "/AUDIO_AMP_EC_EN": "rgb(153, 26, 230)",
+      "/AUDIO_MIC_EN": "rgb(153, 26, 230)",
+      "/AUDIO_USB_DM": "rgb(255, 128, 0)",
+      "/AUDIO_USB_DP": "rgb(255, 128, 0)",
+      "/BQ_ALERT": "rgb(230, 178, 0)",
+      "/CHG_ENABLE": "rgb(230, 178, 0)",
+      "/CHG_INT_N": "rgb(230, 178, 0)",
+      "/EC_DFU_SEL": "rgb(255, 128, 0)",
+      "/EC_HOST_USB_DM": "rgb(255, 128, 0)",
+      "/EC_HOST_USB_DP": "rgb(255, 128, 0)",
+      "/GBE_CLKREQ_N": "rgb(76, 128, 255)",
+      "/GBE_HOST_RX_N": "rgb(76, 128, 255)",
+      "/GBE_HOST_RX_P": "rgb(76, 128, 255)",
+      "/GBE_HOST_TX_N": "rgb(76, 128, 255)",
+      "/GBE_HOST_TX_P": "rgb(76, 128, 255)",
+      "/GBE_REFCLK_N": "rgb(76, 128, 255)",
+      "/GBE_REFCLK_P": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_1V0": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_CHASSIS": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_CT": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_LED_1000_A": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_LED_1000_N": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_LED_ACT_A": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_LED_ACT_N": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_MDI0_N": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_MDI0_P": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_MDI1_N": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_MDI1_P": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_MDI2_N": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_MDI2_P": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_MDI3_N": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_MDI3_P": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_RSET": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_XI": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/ETH_XO": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/GBE_HSI_N": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/GBE_HSI_P": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/GBE_HSO_N": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/GBE_HSO_P": "rgb(76, 128, 255)",
+      "/Gigabit Ethernet/GBE_ISOLATE_N": "rgb(76, 128, 255)",
+      "/HUB_DS1_DM": "rgb(255, 128, 0)",
+      "/HUB_DS1_DP": "rgb(255, 128, 0)",
+      "/HUB_DS1_SSRX_N": "rgb(255, 128, 0)",
+      "/HUB_DS1_SSRX_P": "rgb(255, 128, 0)",
+      "/HUB_DS1_SSTX_N": "rgb(255, 128, 0)",
+      "/HUB_DS1_SSTX_P": "rgb(255, 128, 0)",
+      "/I2C_SCL": "rgb(89, 115, 153)",
+      "/I2C_SDA": "rgb(89, 115, 153)",
+      "/INTERNAL_USB_VBUS_FAULT_N": "rgb(255, 128, 0)",
+      "/INTERNAL_USB_VBUS_VALID": "rgb(255, 128, 0)",
+      "/Internal Services/DFU_CONN_DM": "rgb(255, 128, 0)",
+      "/Internal Services/DFU_CONN_DP": "rgb(255, 128, 0)",
+      "/Internal Services/EC_DFU_DM": "rgb(255, 128, 0)",
+      "/Internal Services/EC_DFU_DP": "rgb(255, 128, 0)",
+      "/Internal Services/EC_USB_ISO_DM": "rgb(255, 128, 0)",
+      "/Internal Services/EC_USB_ISO_DP": "rgb(255, 128, 0)",
+      "/Internal Services/TPAD_CONN_DM": "rgb(255, 128, 0)",
+      "/Internal Services/TPAD_CONN_DP": "rgb(255, 128, 0)",
+      "/MAKER_USB_DM": "rgb(255, 128, 0)",
+      "/MAKER_USB_DP": "rgb(255, 128, 0)",
+      "/MCU_3V3": "rgb(255, 38, 26)",
+      "/MCU_USB_DM": "rgb(255, 128, 0)",
+      "/MCU_USB_DP": "rgb(255, 128, 0)",
+      "/MU_12V": "rgb(255, 38, 26)",
+      "/MU_12V_ENABLE": "rgb(255, 38, 26)",
+      "/MU_12V_PG": "rgb(255, 38, 26)",
+      "/Maker MCU/MAKER_3V3_CORE": "rgb(255, 38, 26)",
+      "/Maker MCU/MAKER_3V3_FB": "rgb(255, 38, 26)",
+      "/Maker MCU/MAKER_3V3_ILIM": "rgb(255, 38, 26)",
+      "/Maker MCU/MAKER_3V3_SW": "rgb(255, 38, 26)",
+      "/Maker MCU/MAKER_USB_DM_MCU": "rgb(255, 128, 0)",
+      "/Maker MCU/MAKER_USB_DP_MCU": "rgb(255, 128, 0)",
+      "/Maker MCU/MAKER_USB_ISO_DM": "rgb(255, 128, 0)",
+      "/Maker MCU/MAKER_USB_ISO_DP": "rgb(255, 128, 0)",
+      "/Maker MCU/MAKER_USB_OE_N": "rgb(255, 128, 0)",
+      "/Mu Carrier/INTERNAL_USB_VBUS": "rgb(255, 128, 0)",
+      "/Mu Carrier/INTERNAL_USB_VBUS_ILIM": "rgb(255, 128, 0)",
+      "/Mu Carrier/INTERNAL_USB_VBUS_SENSE": "rgb(255, 128, 0)",
+      "/Mu Carrier/PCIE_3V3_CT": "rgb(255, 38, 26)",
+      "/Mu Carrier/PCIE_3V3_IN": "rgb(255, 38, 26)",
+      "/Mu Carrier/PCIE_3V3_PG": "rgb(255, 38, 26)",
+      "/Mu Carrier/PCIE_M_CLKREQ_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L0_RX_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L0_RX_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L0_TX_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L0_TX_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L0_TX_RAW_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L0_TX_RAW_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L1_RX_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L1_RX_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L1_TX_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L1_TX_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L1_TX_RAW_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L1_TX_RAW_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L2_RX_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L2_RX_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L2_TX_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L2_TX_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L2_TX_RAW_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L2_TX_RAW_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L3_RX_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L3_RX_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L3_TX_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L3_TX_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L3_TX_RAW_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_L3_TX_RAW_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_PERST_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_REFCLK_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_REFCLK_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_REFCLK_SRC_N": "rgb(0, 178, 26)",
+      "/Mu Carrier/PCIE_M_REFCLK_SRC_P": "rgb(0, 178, 26)",
+      "/Mu Carrier/SYS_3V3_PG": "rgb(255, 38, 26)",
+      "/Mu Carrier/SYS_5V_PG": "rgb(255, 38, 26)",
+      "/Mu Carrier/USBC1_SSTX_RAW_N": "rgb(255, 128, 0)",
+      "/Mu Carrier/USBC1_SSTX_RAW_P": "rgb(255, 128, 0)",
+      "/Mu Carrier/USBC2_SSTX_RAW_N": "rgb(255, 128, 0)",
+      "/Mu Carrier/USBC2_SSTX_RAW_P": "rgb(255, 128, 0)",
+      "/Mu Carrier/WIFI_PCIE_TX_RAW_N": "rgb(0, 204, 204)",
+      "/Mu Carrier/WIFI_PCIE_TX_RAW_P": "rgb(0, 204, 204)",
+      "/Native USB-C I{slash}O/HUB_3V3_OK": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_BC_EN": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_CFG1": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_CFG2": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_CFG3": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_CLK": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_CORE_FB": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_CORE_PG": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_CORE_SW": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DIS5_DM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DIS5_DP": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DIS5_RX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DIS5_RX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DIS5_TX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DIS5_TX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DIS6_DM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DIS6_DP": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS1_PRT_CTL": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS2_DM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS2_DP": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS2_SSRX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS2_SSRX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS2_SSTX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS2_SSTX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS2_TX_RAW_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS2_TX_RAW_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS3_DM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS3_DP": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS3_SSRX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS3_SSRX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS3_SSTX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS3_SSTX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS3_TX_RAW_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS3_TX_RAW_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS4_DM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS4_DP": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS4_SSRX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS4_SSRX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS4_SSTX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS4_SSTX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS4_TX_RAW_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_DS4_TX_RAW_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_NON_REM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_PRT_CTL2": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_PRT_CTL3": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_PRT_CTL4": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_RBIAS": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_RESET_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_SPI_CLK": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_SPI_D1": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_SPI_D2": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_SPI_D3": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_TEST1": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_TEST2": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_TEST3": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_UP_TX_RAW_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_UP_TX_RAW_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/HUB_VCORE": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_5V_PRE": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_CC1": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_CC2": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_ILIM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_POL_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_REF": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_REF_RTN": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_RX1_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_RX1_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_RX2_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_RX2_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_TX1_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_TX1_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_TX2_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_TX2_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_VBUS": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_VBUS_POWER": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J12_VBUS_SYS": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_5V_PRE": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_CC1": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_CC2": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_ILIM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_POL_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_REF": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_REF_RTN": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_RX1_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_RX1_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_RX2_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_RX2_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_TX1_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_TX1_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_TX2_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_TX2_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_VBUS": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_VBUS_POWER": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J22_VBUS_SYS": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_5V_PRE": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_CC1": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_CC2": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_ILIM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_POL_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_REF": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_REF_RTN": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_RX1_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_RX1_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_RX2_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_RX2_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_TX1_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_TX1_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_TX2_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_TX2_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_VBUS": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_VBUS_POWER": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J23_VBUS_SYS": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J24_5V_PRE": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J24_ILIM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J24_SSTX_N": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J24_SSTX_P": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J25_5V_PRE": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/J25_ILIM": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/USB5_BOOT": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/USB5_EN": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/USB5_FB": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/USB5_PG": "rgb(255, 128, 0)",
+      "/Native USB-C I{slash}O/USB5_SW": "rgb(255, 128, 0)",
+      "/PACK_FAULT_N": "rgb(230, 178, 0)",
+      "/PACK_RETRY_PULSE": "rgb(230, 178, 0)",
+      "/PCIE_3V3": "rgb(0, 178, 26)",
+      "/PCIE_WAKE_N": "rgb(0, 178, 26)",
+      "/PD1_EFUSE_FAULT_N": "rgb(230, 178, 0)",
+      "/PD1_I2C_SCL": "rgb(230, 178, 0)",
+      "/PD1_I2C_SDA": "rgb(230, 178, 0)",
+      "/PD1_PATH_EN": "rgb(230, 178, 0)",
+      "/PD1_TCPC_IRQ_N": "rgb(230, 178, 0)",
+      "/PD1_VALID_N": "rgb(230, 178, 0)",
+      "/PD1_VBUS_RAW": "rgb(230, 178, 0)",
+      "/PD2_EFUSE_FAULT_N": "rgb(230, 178, 0)",
+      "/PD2_I2C_SCL": "rgb(230, 178, 0)",
+      "/PD2_I2C_SDA": "rgb(230, 178, 0)",
+      "/PD2_PATH_EN": "rgb(230, 178, 0)",
+      "/PD2_TCPC_IRQ_N": "rgb(230, 178, 0)",
+      "/PD2_VALID_N": "rgb(230, 178, 0)",
+      "/PD2_VBUS_RAW": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_AVDD": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_CHG_DRV": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_CHG_GATE": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_DSG_DRV": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_DSG_GATE": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_FET_COMMON": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_LD": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_OCDP": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_PRES": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_SENSE_N": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_SRN": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_SRP": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_TS_UNUSED": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_VC0": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_VC1": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_VC2": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_VC3_TOP": "rgb(230, 178, 0)",
+      "/Power & Battery/BMS_VDD": "rgb(230, 178, 0)",
+      "/Power & Battery/CELL1_TAP": "rgb(230, 178, 0)",
+      "/Power & Battery/CELL2_TAP": "rgb(230, 178, 0)",
+      "/Power & Battery/CHG_CE_HW_N": "rgb(230, 178, 0)",
+      "/Power & Battery/CHG_TS_FIXED": "rgb(230, 178, 0)",
+      "/Power & Battery/PACK_NEG_RAW": "rgb(230, 178, 0)",
+      "/Power & Battery/PACK_POS_FUSED": "rgb(230, 178, 0)",
+      "/Power & Battery/PACK_POS_RAW": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CC1_CONN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CC1_SYS": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CC2_CONN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CC2_SYS": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CC_ESD_VBIAS": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CC_FAULT_LOCAL_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CTX1_RAW_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CTX1_RAW_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CTX2_RAW_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_CTX2_RAW_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_DM_CONN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_DM_HOST_SWITCHED": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_DP_CONN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_DP_HOST_SWITCHED": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_DRAIN_THERMAL": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_EEPROM_IRQ_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_EEPROM_SCL": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_EEPROM_SDA": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_EFUSE_DVDT": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_EFUSE_ILIM": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_EFUSE_OV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_EFUSE_SHDN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_EFUSE_UV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_GPIO_ATTACH": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_GPIO_DFP": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_GPIO_FLIP": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_HOST_ATTACHED": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_LDO1V5": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_LDO3V3": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_MUX_EN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_MUX_EQCFG": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_MUX_FLIP": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_MUX_MODE": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_MUX_SLEEP_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_MUX_SSEQ1": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_MUX_VIO": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_PPHV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_RX1_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_RX1_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_RX2_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_RX2_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_SEL_FET_COMMON": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_SEL_GATE": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_SEL_OV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_SEL_UV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_SSRX_RAW_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_SSRX_RAW_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_TX1_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_TX1_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_TX2_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_TX2_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_USB2_OE_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD1_VBUS_GATED": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CC1_CONN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CC1_SYS": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CC2_CONN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CC2_SYS": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CC_ESD_VBIAS": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CC_FAULT_LOCAL_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CTX1_RAW_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CTX1_RAW_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CTX2_RAW_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_CTX2_RAW_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_DM_CONN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_DM_HOST_SWITCHED": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_DP_CONN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_DP_HOST_SWITCHED": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_DRAIN_THERMAL": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_EEPROM_IRQ_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_EEPROM_SCL": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_EEPROM_SDA": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_EFUSE_DVDT": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_EFUSE_ILIM": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_EFUSE_OV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_EFUSE_SHDN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_EFUSE_UV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_GPIO_ATTACH": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_GPIO_DFP": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_GPIO_FLIP": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_HOST_ATTACHED": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_LDO1V5": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_LDO3V3": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_MUX_EN": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_MUX_EQCFG": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_MUX_FLIP": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_MUX_MODE": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_MUX_SLEEP_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_MUX_SSEQ1": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_MUX_VIO": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_PPHV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_RX1_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_RX1_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_RX2_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_RX2_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_SEL_FET_COMMON": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_SEL_GATE": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_SEL_OV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_SEL_UV": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_SSRX_RAW_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_SSRX_RAW_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_TX1_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_TX1_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_TX2_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_TX2_P": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_USB2_OE_N": "rgb(230, 178, 0)",
+      "/Power Inputs/PD2_VBUS_GATED": "rgb(230, 178, 0)",
+      "/SYS_3V3": "rgb(255, 38, 26)",
+      "/SYS_5V": "rgb(255, 38, 26)",
+      "/System Audio/AMP_ENABLE": "rgb(153, 26, 230)",
+      "/System Audio/AMP_IN_LN": "rgb(153, 26, 230)",
+      "/System Audio/AMP_IN_LP": "rgb(153, 26, 230)",
+      "/System Audio/AMP_IN_RN": "rgb(153, 26, 230)",
+      "/System Audio/AMP_IN_RP": "rgb(153, 26, 230)",
+      "/System Audio/AMP_OUT_LN": "rgb(153, 26, 230)",
+      "/System Audio/AMP_OUT_LP": "rgb(153, 26, 230)",
+      "/System Audio/AMP_OUT_RN": "rgb(153, 26, 230)",
+      "/System Audio/AMP_OUT_RP": "rgb(153, 26, 230)",
+      "/System Audio/AUDIO_5V": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_USB_DM": "rgb(255, 128, 0)",
+      "/System Audio/CODEC_USB_DP": "rgb(255, 128, 0)",
+      "/System Audio/CODEC_VBUS": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_VCCCI": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_VCCP1I": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_VCCP2I": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_VCCXI": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_VCOM": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_VDDI": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_XTI": "rgb(153, 26, 230)",
+      "/System Audio/CODEC_XTO": "rgb(153, 26, 230)",
+      "/System Audio/HUB_CFG_SEL0": "rgb(255, 128, 0)",
+      "/System Audio/HUB_CFG_SEL1": "rgb(255, 128, 0)",
+      "/System Audio/HUB_CRFILT": "rgb(255, 128, 0)",
+      "/System Audio/HUB_NON_REM0": "rgb(255, 128, 0)",
+      "/System Audio/HUB_NON_REM1": "rgb(255, 128, 0)",
+      "/System Audio/HUB_PLLFILT": "rgb(255, 128, 0)",
+      "/System Audio/HUB_PORT1_EN": "rgb(255, 128, 0)",
+      "/System Audio/HUB_PORT1_OC_N": "rgb(255, 128, 0)",
+      "/System Audio/HUB_PORT2_EN": "rgb(255, 128, 0)",
+      "/System Audio/HUB_PORT2_OC_N": "rgb(255, 128, 0)",
+      "/System Audio/HUB_RBIAS": "rgb(255, 128, 0)",
+      "/System Audio/HUB_RESET_N": "rgb(255, 128, 0)",
+      "/System Audio/HUB_VBUS_DET": "rgb(255, 128, 0)",
+      "/System Audio/HUB_XI": "rgb(255, 128, 0)",
+      "/System Audio/HUB_XO": "rgb(255, 128, 0)",
+      "/System Audio/MIC_2V8": "rgb(153, 26, 230)",
+      "/System Audio/MIC_ADC_L": "rgb(153, 26, 230)",
+      "/System Audio/MIC_ADC_R": "rgb(153, 26, 230)",
+      "/System Audio/MIC_FB": "rgb(153, 26, 230)",
+      "/System Audio/MIC_HP_NODE": "rgb(153, 26, 230)",
+      "/System Audio/MIC_LED_A": "rgb(153, 26, 230)",
+      "/System Audio/MIC_PREAMP": "rgb(153, 26, 230)",
+      "/System Audio/MIC_RAW": "rgb(153, 26, 230)",
+      "/System Audio/SPK_L_N": "rgb(153, 26, 230)",
+      "/System Audio/SPK_L_P": "rgb(153, 26, 230)",
+      "/System Audio/SPK_R_N": "rgb(153, 26, 230)",
+      "/System Audio/SPK_R_P": "rgb(153, 26, 230)",
+      "/System Audio/SYSTEM_DAC_USB_DM": "rgb(255, 128, 0)",
+      "/System Audio/SYSTEM_DAC_USB_DP": "rgb(255, 128, 0)",
+      "/System Audio/SYSTEM_DAC_USB_VBUS": "rgb(255, 128, 0)",
+      "/TCP0 External HDMI/EXT_HDMI_5V": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_BIAS_GATE": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_BIAS_RETURN": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_CK_N": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_CK_P": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_D0_N": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_D0_P": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_D1_N": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_D1_P": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_D2_N": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_D2_P": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_HPD_CONN": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_HPD_NODE": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_SCL_CONN": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/EXT_HDMI_SDA_CONN": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_3V3_SWITCH_CT": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_5V_SWITCH_CT": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_DDC_REF5": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_HOST_3V3": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_SOURCE_5V": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D0_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D1_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D2_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D3_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D4_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D5_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D6_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D7_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D8_UNUSED": "rgb(204, 51, 204)",
+      "/TCP0 External HDMI/HDMI_TPD_D9_UNUSED": "rgb(204, 51, 204)",
+      "/TRACKPAD_USB_DM": "rgb(255, 128, 0)",
+      "/TRACKPAD_USB_DP": "rgb(255, 128, 0)",
+      "/USBC1_DM": "rgb(255, 128, 0)",
+      "/USBC1_DP": "rgb(255, 128, 0)",
+      "/USBC1_SSRX_N": "rgb(255, 128, 0)",
+      "/USBC1_SSRX_P": "rgb(255, 128, 0)",
+      "/USBC1_SSTX_N": "rgb(255, 128, 0)",
+      "/USBC1_SSTX_P": "rgb(255, 128, 0)",
+      "/USBC2_DM": "rgb(255, 128, 0)",
+      "/USBC2_DP": "rgb(255, 128, 0)",
+      "/USBC2_SSRX_N": "rgb(255, 128, 0)",
+      "/USBC2_SSRX_P": "rgb(255, 128, 0)",
+      "/USBC2_SSTX_N": "rgb(255, 128, 0)",
+      "/USBC2_SSTX_P": "rgb(255, 128, 0)",
+      "/USB_PORT_5V": "rgb(255, 38, 26)",
+      "/VSYS": "rgb(255, 38, 26)",
+      "/WIFI_CLKREQ_N": "rgb(0, 204, 204)",
+      "/WIFI_PCIE_RX_N": "rgb(0, 204, 204)",
+      "/WIFI_PCIE_RX_P": "rgb(0, 204, 204)",
+      "/WIFI_PCIE_TX_N": "rgb(0, 204, 204)",
+      "/WIFI_PCIE_TX_P": "rgb(0, 204, 204)",
+      "/WIFI_REFCLK_N": "rgb(0, 204, 204)",
+      "/WIFI_REFCLK_P": "rgb(0, 204, 204)",
+      "/WIFI_USB_DN": "rgb(0, 204, 204)",
+      "/WIFI_USB_DP": "rgb(0, 204, 204)",
+      "/WIFI_W_DISABLE1_N_EC": "rgb(0, 204, 204)",
+      "/WIFI_W_DISABLE2_N_EC": "rgb(0, 204, 204)",
+      "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_3V3": "rgb(0, 204, 204)",
+      "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_PERST_N": "rgb(0, 204, 204)",
+      "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_N": "rgb(0, 204, 204)",
+      "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_P": "rgb(0, 204, 204)",
+      "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_W_DISABLE1_N": "rgb(0, 204, 204)",
+      "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_W_DISABLE2_N": "rgb(0, 204, 204)",
+      "GND": "rgb(140, 140, 140)"
+    },
     "netclass_assignments": null,
     "netclass_patterns": [
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_HOST_RX_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_HOST_RX_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_HOST_TX_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_HOST_TX_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_REFCLK_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GBE_REFCLK_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI0_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI0_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI1_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI1_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI2_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI2_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI3_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/ETH_MDI3_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/GBE_HSI_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/GBE_HSI_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/GBE_HSO_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Gigabit Ethernet/GBE_HSO_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_P"
+      },
       {
         "netclass": "DIFF_85",
         "pattern": "/Mu Carrier/PCIE_M_L0_RX_N"
@@ -877,6 +1499,22 @@
       },
       {
         "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_RX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_RX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_TX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/HUB_DIS5_TX_P"
+      },
+      {
+        "netclass": "DIFF_90",
         "pattern": "/Native USB-C I{slash}O/HUB_DS1_TX_RAW_N"
       },
       {
@@ -997,6 +1635,14 @@
       },
       {
         "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J24_SSTX_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/Native USB-C I{slash}O/J24_SSTX_P"
+      },
+      {
+        "netclass": "DIFF_90",
         "pattern": "/Power Inputs/PD1_SSRX_RAW_N"
       },
       {
@@ -1044,108 +1690,60 @@
         "pattern": "/USBC2_SSTX_P"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/GBE_HOST_RX_N"
+        "netclass": "POWER_HI",
+        "pattern": "/MU_12V"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/GBE_HOST_RX_P"
+        "netclass": "POWER_HI",
+        "pattern": "/Mu Carrier/PCIE_3V3_IN"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/GBE_HOST_TX_N"
+        "netclass": "POWER_HI",
+        "pattern": "/PD1_VBUS_RAW"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/GBE_HOST_TX_P"
+        "netclass": "POWER_HI",
+        "pattern": "/PD2_VBUS_RAW"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/GBE_REFCLK_N"
+        "netclass": "POWER_HI",
+        "pattern": "/Power & Battery/PACK_NEG_RAW"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/GBE_REFCLK_P"
+        "netclass": "POWER_HI",
+        "pattern": "/Power & Battery/PACK_POS_FUSED"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/ETH_MDI0_N"
+        "netclass": "POWER_HI",
+        "pattern": "/Power & Battery/PACK_POS_RAW"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/ETH_MDI0_P"
+        "netclass": "POWER_HI",
+        "pattern": "/SYS_3V3"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/ETH_MDI1_N"
+        "netclass": "POWER_HI",
+        "pattern": "/SYS_5V"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/ETH_MDI1_P"
+        "netclass": "POWER_HI",
+        "pattern": "/VSYS"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/ETH_MDI2_N"
+        "netclass": "POWER_MID",
+        "pattern": "/MCU_3V3"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/ETH_MDI2_P"
+        "netclass": "POWER_MID",
+        "pattern": "/Maker MCU/MAKER_3V3_CORE"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/ETH_MDI3_N"
+        "netclass": "POWER_MID",
+        "pattern": "/Mu Carrier/INTERNAL_USB_VBUS"
       },
       {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/ETH_MDI3_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/GBE_HSI_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/GBE_HSI_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/GBE_HSO_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/Gigabit Ethernet/GBE_HSO_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0 External HDMI/EXT_HDMI_CK_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0 External HDMI/EXT_HDMI_D0_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0 External HDMI/EXT_HDMI_D1_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0 External HDMI/EXT_HDMI_D2_P"
+        "netclass": "POWER_MID",
+        "pattern": "/USB_PORT_5V"
       },
       {
         "netclass": "USB2_45",
@@ -1309,6 +1907,10 @@
       },
       {
         "netclass": "USB2_45",
+        "pattern": "/WIFI_USB_DN"
+      },
+      {
+        "netclass": "USB2_45",
         "pattern": "/WIFI_USB_DP"
       }
     ]
@@ -1436,8 +2038,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "radio_daughterboard.kicad_sch",
-        "name": "radio_daughterboard",
+        "filename": "ducktop2.kicad_sch",
+        "name": "ducktop2",
         "uuid": "898e349f-792f-5b73-93f6-827ac90c0616"
       }
     ],

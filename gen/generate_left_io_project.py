@@ -91,32 +91,41 @@ def main() -> int:
 
     # Collect the FPC-1 boundary nets = all hier labels across both sheets.
     hier_nets = set()
-    for sheet in (usb_s, pd_s):
+    sheet_nets = {}
+    for key, sheet in (("usb", usb_s), ("pd", pd_s)):
+        nets = set()
         for item in sheet.body:
             if not item.startswith('(hierarchical_label "'):
                 continue
             name = item[len('(hierarchical_label "'):].split('"', 1)[0]
+            nets.add(name)
             hier_nets.add(name)
+        sheet_nets[key] = nets
     print(f"left_io FPC-1 boundary nets: {len(hier_nets)}")
 
     # Build the left_io root.
     usb_uuid = stable_uuid("left_io:sheet:usb")
     pd_uuid = stable_uuid("left_io:sheet:pd")
-    usb_nets = sorted(hier_nets)  # FPC-1 boundary nets on the usb sheet
-    pd_nets = sorted(hier_nets)   # FPC-1 boundary nets on the pd sheet
-    usb_block, _ = sheet_block(usb_uuid, 30.48, 39.37, 119.38, 149.86,
-                               "USB Hub + Ports", "left_usb.kicad_sch", usb_nets)
-    pd_block, _ = sheet_block(pd_uuid, 30.48, 219.71, 119.38, 149.86,
-                              "PD1 Dual-Role", "left_pd.kicad_sch", pd_nets)
+    # Each sheet block declares ONLY the nets its sheet actually hosts.
+    usb_sheet_nets = sorted(sheet_nets['usb'])
+    pd_sheet_nets = sorted(sheet_nets['pd'])
+    usb_block, usb_pins = sheet_block(usb_uuid, 30.48, 39.37, 119.38, 149.86,
+                               "USB Hub + Ports", "left_usb.kicad_sch", usb_sheet_nets)
+    pd_block, pd_pins = sheet_block(pd_uuid, 30.48, 219.71, 119.38, 149.86,
+                              "PD1 Dual-Role", "left_pd.kicad_sch", pd_sheet_nets)
 
     root = []
     root.append(f'(kicad_sch\n  (version 20260306)\n  (generator "eeschema")\n  (generator_version "10.0")\n'
                 f'  (uuid {stable_uuid("left_io:root")})\n  (paper "A2")\n')
     root.append(usb_block)
     root.append(pd_block)
-    # Root labels for the FPC-1 boundary nets (wires the two sheets).
-    for i, net in enumerate(sorted(hier_nets)):
-        root.append(root_label((40 + (i % 15) * 35, 30 + (i // 15) * 20), net))
+    # Root labels for the FPC-1 boundary nets: each sits exactly on the sheet
+    # block pin endpoint of the sheet that hosts it, so KiCad wires the label
+    # to that sheet's hierarchical label (same pattern as the main root).
+    for net in usb_sheet_nets:
+        root.append(root_label(usb_pins[net], net))
+    for net in pd_sheet_nets:
+        root.append(root_label(pd_pins[net], net))
     root.append(f'  (sheet_instances\n    (path "/"\n      (page "1")\n    )\n  )\n  (embedded_fonts no)\n)')
     with open(os.path.join(BOARD_DIR, "left_io.kicad_sch"), "w", encoding="utf-8") as f:
         f.write("\n".join(root))

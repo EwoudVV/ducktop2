@@ -584,14 +584,27 @@ def run_static_checks(tempdir: Path) -> tuple[int, int]:
     failures = 0
     bom_gaps = -1
     copy_root = copy_for_static_checks(tempdir)
+    # Board split Phase 2.4: export the BMS netlist for its pack audit.
+    cli = find_kicad_cli()
+    bms_sch = copy_root / "bms" / "bms.kicad_sch"
+    if bms_sch.exists():
+        subprocess.run(
+            [cli, "sch", "export", "netlist", "--format", "kicadxml",
+             "--output", str(copy_root / "verification" / "bms_netlist.xml"), str(bms_sch)],
+            check=False, capture_output=True, cwd=copy_root,
+        )
     commands = [
         (["python3", "gen/check_schematic.py"], copy_root, "schematic self-check"),
         (["python3", "gen/verify_design_contracts.py", "--schematic-only"], copy_root,
          "schematic design contracts"),
         (["python3", "gen/verify_schematic_closure.py", "verification/ducktop2_netlist.xml"],
-         copy_root, "independent schematic closure audit"),
+         copy_root, "independent schematic closure audit (center)"),
+        (["python3", "gen/verify_schematic_closure.py", "verification/bms_netlist.xml", "--pack"],
+         copy_root, "independent schematic closure audit (bms pack)"),
         (["python3", "gen/verify_electrical_calculations.py"], copy_root,
          "electrical calculations"),
+        (["python3", "gen/verify_electrical_calculations.py", "--project", "bms"], copy_root,
+         "electrical calculations (bms pack)"),
         (["python3", "gen/generate_pin_review_table.py"], copy_root,
          "pin review generation"),
         (["python3", "gen/generate_component_inventory.py", "--output-dir",

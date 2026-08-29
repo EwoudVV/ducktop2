@@ -30,6 +30,15 @@ ROOT = Path(__file__).resolve().parents[1]
 PCB = ROOT / "ducktop2.kicad_pcb"
 SCH = ROOT / "ducktop2.kicad_sch"
 NETLIST = ROOT / "verification" / "ducktop2_netlist.xml"
+
+# Board split projects: left I/O, right I/O, and BMS daughterboards.  Each
+# project has its own schematic root; the netlist path follows the project name.
+PROJECTS = {
+    "ducktop2": (ROOT / "ducktop2.kicad_sch", ROOT / "verification" / "ducktop2_netlist.xml"),
+    "left_io": (ROOT / "left_io" / "left_io.kicad_sch", ROOT / "verification" / "left_io_netlist.xml"),
+    "right_io": (ROOT / "right_io" / "right_io.kicad_sch", ROOT / "verification" / "right_io_netlist.xml"),
+    "bms": (ROOT / "bms" / "bms.kicad_sch", ROOT / "verification" / "bms_netlist.xml"),
+}
 KICAD_CLI = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
 
 FOOTPRINT_DIRS = [
@@ -465,8 +474,9 @@ def extract(pattern: str, text: str, default: str = "") -> str:
     return m.group(1) if m else default
 
 
-def export_netlist() -> None:
-    NETLIST.parent.mkdir(exist_ok=True)
+def export_netlist(project: str = "ducktop2") -> None:
+    sch, netlist = PROJECTS[project]
+    netlist.parent.mkdir(exist_ok=True)
     subprocess.run(
         [
             str(KICAD_CLI),
@@ -476,8 +486,8 @@ def export_netlist() -> None:
             "--format",
             "kicadxml",
             "--output",
-            str(NETLIST),
-            str(SCH),
+            str(netlist),
+            str(sch),
         ],
         check=True,
         cwd=ROOT,
@@ -485,14 +495,21 @@ def export_netlist() -> None:
 
 
 def encode_sheet_local_net(net_name: str, sheetname: str) -> str:
-    if not sheetname or not net_name.startswith(sheetname):
+    if not sheetname or sheetname == "/":
+        return net_name
+    if not net_name.startswith(sheetname):
         return net_name
     encoded_sheet = "/" + sheetname.strip("/").replace("/", "{slash}") + "/"
     return encoded_sheet + net_name[len(sheetname):]
 
 
-def parse_netlist() -> dict[str, Component]:
-    root = ET.parse(NETLIST).getroot()
+def parse_netlist(project: str = "ducktop2") -> dict[str, Component]:
+    if project == "ducktop2" and NETLIST != PROJECTS["ducktop2"][1]:
+        # Caller overrode NETLIST (e.g. radio daughterboard verification).
+        netlist = NETLIST
+    else:
+        _sch, netlist = PROJECTS[project]
+    root = ET.parse(netlist).getroot()
     components: dict[str, Component] = {}
     sheet_by_ref: dict[str, str] = {}
 

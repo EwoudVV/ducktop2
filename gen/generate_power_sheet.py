@@ -33,208 +33,14 @@ def build(sheet_symbol_uuid):
     # The motherboard provides autonomous per-cell protection.  The tiny PCBs
     # attached to the user's cells are thermal-only and are not part of the
     # electrical protection or current path.
-    s.text(20, 20, "== 3S cell entry, autonomous primary protection, fuse and redundant pack protection ==")
-    s.place("F1", "Fuse", "10A MINI pack fuse: Littelfuse 0297010.WXNV", 170, 60,
-            footprint=FOOTPRINTS["Fuse_Pack_Blade_Mini"],
-            pin_nets={"1": ("PACK_POS_RAW", "local"), "2": ("BAT_PROT_VIN", "local")},
-            extra_props={"Manufacturer": "Littelfuse / Keystone", "MPN": "0297010.WXNV + 3568"})
-    s.place("J2", "Conn_02x03_Odd_Even", "3S pack power + cell-tap harness", 170, 80,
-            footprint=FOOTPRINTS["Conn_02x03_Pack_MegaFit"],
-            pin_nets={
-                "1": ("PACK_POS_RAW", "local"), "2": ("PACK_POS_RAW", "local"),
-                "3": ("PACK_NEG_RAW", "local"), "4": ("PACK_NEG_RAW", "local"),
-                "5": ("CELL1_TAP", "local"), "6": ("CELL2_TAP", "local"),
-            },
-            extra_props={"Manufacturer": "Molex", "MPN": "76829-0006"})
-
-    # BQ7791500 is an autonomous primary protector.  For 3S, VC3/VC4/VC5
-    # short together at the top-cell sense node and CCFG is tied to VSS.
-    # Temperature protection is intentionally disabled exactly as TI directs:
-    # TS has 10 kOhm to VSS and VTB is unused.  The user's cell-mounted boards
-    # retain their independent thermal-only cutoff behavior.
-    s.place("U719", "BQ77915", "BQ7791500PWR autonomous 3S primary protector", 80, 105,
-            footprint=FOOTPRINTS["BQ77915"],
-            pin_nets={
-                "1": ("BMS_VDD", "local"), "2": ("BMS_AVDD", "local"),
-                "3": ("BMS_VC3_TOP", "local"), "4": ("BMS_VC3_TOP", "local"),
-                "5": ("BMS_VC3_TOP", "local"), "6": ("BMS_VC2", "local"),
-                "7": ("BMS_VC1", "local"), "8": ("BMS_VC0", "local"),
-                "9": ("PACK_NEG_RAW", "local"), "10": ("BMS_SRP", "local"),
-                "11": ("BMS_SRN", "local"), "12": ("BMS_DSG_DRV", "local"),
-                "13": ("BMS_CHG_DRV", "local"), "14": ("BMS_LD", "local"),
-                "15": ("", "nc"), "16": ("PACK_NEG_RAW", "local"),
-                "17": ("BMS_OCDP", "local"), "18": ("BMS_TS_UNUSED", "local"),
-                "19": ("", "nc"), "20": ("PACK_NEG_RAW", "local"),
-                "21": ("", "nc"), "22": ("BMS_PRES", "local"),
-                "23": ("PACK_NEG_RAW", "local"), "24": ("PACK_NEG_RAW", "local"),
-            },
-            extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "BQ7791500PWR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/bq77915.pdf",
-            })
-    s.place("R840", "R", "1k 1% BQ77915 VDD filter", 20, 35, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_POS_RAW", "local"), "2": ("BMS_VDD", "local")})
-    s.place("C840", "C", "1u 25V X7R BQ77915 VDD", 20, 45, footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("BMS_VDD", "local"), "2": ("PACK_NEG_RAW", "local")})
-    s.place("C841", "C", "1u 10V X7R BQ77915 AVDD", 20, 55, footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("BMS_AVDD", "local"), "2": ("PACK_NEG_RAW", "local")})
-
-    # Internal balancing is intentionally current-limited below TI's 50 mA
-    # maximum.  Two 75-ohm VC resistors plus the internal balance FET target
-    # about 26 mA at 4.2 V.  TI specifies 1 uF VC filtering when internal
-    # balancing is enabled.
-    for ref, source, sense, y in (
-        ("R841", "PACK_NEG_RAW", "BMS_VC0", 65),
-        ("R842", "CELL1_TAP", "BMS_VC1", 75),
-        ("R843", "CELL2_TAP", "BMS_VC2", 85),
-        ("R844", "PACK_POS_RAW", "BMS_VC3_TOP", 95),
-    ):
-        s.place(ref, "R", "75R 1% BQ77915 cell/balance filter", 20, y,
-                footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (source, "local"), "2": (sense, "local")})
-    for ref, upper, lower, y in (
-        ("C842", "BMS_VC0", "PACK_NEG_RAW", 105),
-        ("C843", "BMS_VC1", "BMS_VC0", 115),
-        ("C844", "BMS_VC2", "BMS_VC1", 125),
-        ("C848", "BMS_VC3_TOP", "BMS_VC2", 135),
-    ):
-        s.place(ref, "C", "1u 10V X7R BQ77915 internal-balance filter", 20, y,
-                footprint=FOOTPRINTS["C_1u"],
-                pin_nets={"1": (upper, "local"), "2": (lower, "local")})
-
-    # The 8 mOhm primary-protector shunt gives a 7.5 A nominal OCD threshold
-    # and 15 A nominal short-circuit threshold.  The high-side LTC4368 remains
-    # the tighter normal pack breaker; BQ7791500 is independent backup.
-    s.place("RS11", "R", "8mOhm 1% 2W BQ77915 current shunt", 20, 150,
-            footprint="Resistor_SMD:R_2512_6332Metric",
-            pin_nets={"1": ("PACK_NEG_RAW", "local"), "2": ("BMS_SENSE_N", "local")},
-            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP25128L000FEA"})
-    s.place("R845", "R", "100R BQ77915 SRP filter", 20, 160, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_NEG_RAW", "local"), "2": ("BMS_SRP", "local")})
-    s.place("R846", "R", "100R BQ77915 SRN filter", 20, 170, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BMS_SENSE_N", "local"), "2": ("BMS_SRN", "local")})
-    s.place("C845", "C", "100n BQ77915 SRP-VSS filter", 20, 180,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BMS_SRP", "local"), "2": ("PACK_NEG_RAW", "local")})
-    s.place("C846", "C", "100n BQ77915 differential sense filter", 20, 190,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BMS_SRP", "local"), "2": ("BMS_SRN", "local")})
-    s.place("C847", "C", "100n BQ77915 SRN-VSS filter", 20, 200,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BMS_SRN", "local"), "2": ("PACK_NEG_RAW", "local")})
-
-    # Common-drain, back-to-back low-side FETs support both charging and
-    # discharging while allowing the protector to interrupt either direction.
-    s.place("Q703", "Q_NMOS_123S_4G_5678D", "CSD18540Q5B BQ77915 discharge FET", 80, 160,
-            footprint=FOOTPRINTS["Q_CSD18540Q5B"],
-            pin_nets={
-                "1": ("BMS_SENSE_N", "local"), "2": ("BMS_SENSE_N", "local"),
-                "3": ("BMS_SENSE_N", "local"), "4": ("BMS_DSG_GATE", "local"),
-                "5": ("BMS_FET_COMMON", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    s.place("Q704", "Q_NMOS_123S_4G_5678D", "CSD18540Q5B BQ77915 charge FET", 125, 160,
-            footprint=FOOTPRINTS["Q_CSD18540Q5B"],
-            pin_nets={
-                "1": ("FG_VSS", "local"), "2": ("FG_VSS", "local"),
-                "3": ("FG_VSS", "local"), "4": ("BMS_CHG_GATE", "local"),
-                "5": ("BMS_FET_COMMON", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    for ref, value, net_a, net_b, x, y in (
-        ("R847", "4.53k 1% DSG gate resistor", "BMS_DSG_DRV", "BMS_DSG_GATE", 80, 180),
-        ("R848", "1k 1% CHG gate resistor", "BMS_CHG_DRV", "BMS_CHG_GATE", 125, 180),
-        ("R849", "1M 5% DSG gate-source", "BMS_DSG_GATE", "BMS_SENSE_N", 80, 190),
-        ("R850", "3.3M 5% CHG gate-source", "BMS_CHG_GATE", "FG_VSS", 125, 190),
-        ("R851", "453k 1% load-detect resistor", "BMS_LD", "FG_VSS", 80, 200),
-        ("R852", "10k 5% PRES normal-mode pull-up", "PACK_POS_RAW", "BMS_PRES", 125, 200),
-        ("R853", "10k 1% unused TS to VSS", "BMS_TS_UNUSED", "PACK_NEG_RAW", 80, 210),
-        ("R854", "604k 1% OCD delay program", "BMS_OCDP", "PACK_NEG_RAW", 125, 210),
-    ):
-        s.place(ref, "R", value, x, y, footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (net_a, "local"), "2": (net_b, "local")})
-
-    s.place("RS1", "R", "5mOhm 1% 2W BQ34Z100 Kelvin shunt", 170, 120,
-            footprint="Resistor_SMD:R_2512_6332Metric",
-            pin_nets={"1": ("FG_VSS", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP2512R0050FEA"})
-
-    # Bidirectional battery isolation is mandatory because the charger both charges and discharges the pack.
-    # The LTC4368-1 controls common-source FETs.  Its 50 mV forward/reverse
-    # threshold and the 11 mOhm high-side shunt keep worst-case trips below the
-    # BQ25798 6 A continuous BAT-pin rating.
-    s.place("U11", "LTC4368-1", "LTC4368IMS-1 bidirectional pack protector", 230, 70,
-            footprint=FOOTPRINTS["LTC4368-1"],
-            pin_nets={
-                "1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_UV", "local"),
-                "3": ("BAT_PROT_OV", "local"), "4": ("GND", "local"),
-                "5": ("GND", "local"), "6": ("BAT_PROT_SHDN", "local"),
-                "7": ("PACK_FAULT_N", "hier"), "8": ("PACK_POS_FUSED", "local"),
-                "9": ("BAT_PROT_SENSE", "local"), "10": ("BAT_PROT_GATE", "local"),
-            },
-            extra_props={"Manufacturer": "Analog Devices", "MPN": "LTC4368IMS-1#PBF"})
-    s.place("Q11", "Q_NMOS_123S_4G_5678D", "CSD18540Q5B reverse-pack FET A", 230, 95,
-            footprint=FOOTPRINTS["Q_CSD18540Q5B"],
-            pin_nets={
-                "1": ("BAT_PROT_FET_COMMON", "local"), "2": ("BAT_PROT_FET_COMMON", "local"),
-                "3": ("BAT_PROT_FET_COMMON", "local"), "4": ("BAT_PROT_GATE", "local"),
-                "5": ("BAT_PROT_VIN", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    s.place("Q12", "Q_NMOS_123S_4G_5678D", "CSD18540Q5B reverse-pack FET B", 280, 95,
-            footprint=FOOTPRINTS["Q_CSD18540Q5B"],
-            pin_nets={
-                "1": ("BAT_PROT_FET_COMMON", "local"), "2": ("BAT_PROT_FET_COMMON", "local"),
-                "3": ("BAT_PROT_FET_COMMON", "local"), "4": ("BAT_PROT_GATE", "local"),
-                "5": ("BAT_PROT_SENSE", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    s.place("RS10", "R", "11mOhm 1% 2W LTC4368 bounded pack-current shunt", 335, 60,
-            footprint="Resistor_SMD:R_2512_6332Metric",
-            pin_nets={"1": ("BAT_PROT_SENSE", "local"), "2": ("PACK_POS_FUSED", "local")},
-            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP2512R0110FEA"})
-    # LTC4368 requires at least 1 uF from VOUT to GND.  Keep this capacitor on
-    # the protector side of the BQ25798 ship FET so it remains present when
-    # Q25 disconnects BAT_CHARGER from PACK_POS_FUSED.
-    s.place("C725", "C", "10u 25V X7R LTC4368 VOUT", 390, 60,
-            footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("PACK_POS_FUSED", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM21BZ71E106KE15L"})
-    # The 0.5 V LTC4368 thresholds set an approximately 8.45 V to 13.57 V
-    # accepted pack window.  This keeps the motherboard from relying on the
-    # protection BMS as its normal deep-discharge cutoff.
-    s.place("R700", "R", "3.09M 1% BAT UV/OV top", 335, 70, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_UV", "local")})
-    s.place("R701", "R", "73.2k 1% BAT UV/OV middle", 335, 80, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_UV", "local"), "2": ("BAT_PROT_OV", "local")})
-    s.place("R702", "R", "121k 1% BAT UV/OV bottom", 335, 90, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_OV", "local"), "2": ("GND", "local")})
-    # LTC4368 GATE must connect directly to both FET gates so fault turn-off is not resistor-limited.
-    # R703 is only in series with CGATE; C724 supplies the optional live-mating gate-to-source slew.
-    s.place("R703", "R", "22k LTC4368 CGATE series", 335, 100, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_GATE", "local"), "2": ("BAT_PROT_CGATE", "local")})
-    s.place("C700", "C", "3.3nF >=50V LTC4368 CGATE", 335, 110, footprint=FOOTPRINTS["C_1n"],
-            pin_nets={"1": ("BAT_PROT_CGATE", "local"), "2": ("GND", "local")})
-    s.place("C724", "C", "4.7nF >=50V pack hot-swap slew", 335, 120, footprint=FOOTPRINTS["C_1n"],
-            pin_nets={"1": ("BAT_PROT_GATE", "local"), "2": ("BAT_PROT_FET_COMMON", "local")})
-    s.place("R707", "R", "100k pack protector SHDN pull-up", 390, 70, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_SHDN", "local")})
-    s.place("R708", "R", "10k pack FAULT pull-up", 390, 80, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("PACK_FAULT_N", "hier")})
-    s.place("Q701", "Q_NMOS_SOT23_GSD", "BSS138 pack protector latch reset", 390, 90,
-            footprint=FOOTPRINTS["Q_BSS138"],
-            pin_nets={"1": ("PACK_RETRY_PULSE", "hier"), "2": ("GND", "local"),
-                      "3": ("BAT_PROT_SHDN", "local")},
-            extra_props={"Manufacturer": "onsemi", "MPN": "BSS138LT1G"})
-    s.place("R709", "R", "100k pack retry gate pulldown", 390, 100, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_RETRY_PULSE", "hier"), "2": ("GND", "local")})
-
+    # ---- Board split Phase 2.4: pack protection moved to the BMS board ----
+    # The pack connector, fuse, BQ77915, LTC4368, FETs, and shunts now live
+    # on the BMS daughterboard (bms/bms.kicad_sch). The gauge (U10), charger
+    # (U2), and ship FET (Q25) stay here. FPC-3 boundary nets below.
     s.gnd(200, 90)
-    s.pwrflag(200, 30, "PACK_POS_RAW")
-    s.pwrflag(200, 37.5, "PACK_NEG_RAW")
-    s.pwrflag(200, 42.5, "BMS_VDD")
     s.pwrflag(200, 45, "FG_VSS")
     s.pwrflag(200, 105, "GND")
+    s.text(200, 55, "FPC-3 to BMS: PACK_POS_FUSED / PACK_FAULT_N / PACK_RETRY_PULSE cross here")
     s.pwrflag(650, 30, "BAT_PROT_VIN")
 
     # ---------------- U10: protected-pack fuel gauge ----------------
@@ -249,7 +55,7 @@ def build(sheet_symbol_uuid):
                 "5": ("FG_CE", "local"),
                 "6": ("MCU_3V3", "hier"),
                 "7": ("FG_REG25", "local"),
-                "8": ("FG_VSS", "local"),
+                "8": ("FG_VSS", "hier"),
                 "9": ("FG_SRP", "local"),
                 "10": ("FG_SRN", "local"),
                 "11": ("FG_TS", "local"),
@@ -260,14 +66,22 @@ def build(sheet_symbol_uuid):
             extra_props={"Manufacturer": "Texas Instruments", "MPN": "BQ34Z100PWR-G1"})
     s.place("R180", "R", "220k 0.1% <=25ppm pack divider hi", 170, 150, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("FG_BAT_DIV", "local")})
+    # The gauge's 5 mOhm Kelvin shunt stays on center (Phase 2.4): it measures
+    # the system-side current through FG_VSS, distinct from the pack shunts
+    # (RS10/RS11) which moved to the BMS board.
+    s.place("RS1", "R", "5mOhm 1% 2W BQ34Z100 Kelvin shunt", 170, 120,
+            footprint="Resistor_SMD:R_2512_6332Metric",
+            pin_nets={"1": ("FG_VSS", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP2512R0050FEA"})
+
     s.place("R181", "R", "16.5k 0.1% pack divider lo", 170, 160, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("FG_BAT_DIV", "local"), "2": ("FG_VSS", "local")})
+            pin_nets={"1": ("FG_BAT_DIV", "local"), "2": ("FG_VSS", "hier")})
     s.place("R182", "R", "100R BAT filter", 170, 170, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("FG_BAT_DIV", "local"), "2": ("FG_BAT_SENSE", "local")})
     s.place("C180", "C", "100n BAT filter", 170, 180, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("FG_BAT_SENSE", "local"), "2": ("FG_VSS", "local")})
+            pin_nets={"1": ("FG_BAT_SENSE", "local"), "2": ("FG_VSS", "hier")})
     s.place("R183", "R", "100R SRP filter", 170, 190, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("FG_VSS", "local"), "2": ("FG_SRP", "local")})
+            pin_nets={"1": ("FG_VSS", "hier"), "2": ("FG_SRP", "local")})
     s.place("R184", "R", "100R SRN filter", 170, 200, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("GND", "local"), "2": ("FG_SRN", "local")})
     s.place("C181", "C", "100n sense filter", 170, 210, footprint=FOOTPRINTS["C_100n"],
@@ -277,13 +91,13 @@ def build(sheet_symbol_uuid):
     s.place("R186", "R", "10k gauge ALERT pull-up", 290, 160, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("BQ_ALERT", "hier")})
     s.place("C182", "C", "100n REGIN/VCC", 290, 190, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("FG_VSS", "local")})
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("FG_VSS", "hier")})
     s.place("C183", "C", "1u REG25", 290, 200, footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("FG_REG25", "local"), "2": ("FG_VSS", "local")})
+            pin_nets={"1": ("FG_REG25", "local"), "2": ("FG_VSS", "hier")})
     s.place("R189", "R", "0R P1 not-used tie to VSS", 345, 160, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("FG_P1_TIE", "local"), "2": ("FG_VSS", "local")})
+            pin_nets={"1": ("FG_P1_TIE", "local"), "2": ("FG_VSS", "hier")})
     s.place("R855", "R", "10k unused external TS pulldown", 345, 170, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("FG_TS", "local"), "2": ("FG_VSS", "local")})
+            pin_nets={"1": ("FG_TS", "local"), "2": ("FG_VSS", "hier")})
 
     # ---------------- U2: BQ25798 buck-boost charger / NVDC path ----------------
     s.text(260, 20, "== U2 bq25798 Buck-Boost Charger / NVDC Power Path (VSYS) ==")
@@ -384,14 +198,14 @@ def build(sheet_symbol_uuid):
             pin_nets={
                 "1": ("BAT_CHARGER", "local"), "2": ("BAT_CHARGER", "local"),
                 "3": ("BAT_CHARGER", "local"), "4": ("SDRV_GATE", "local"),
-                "5": ("PACK_POS_FUSED", "local"),
+                "5": ("PACK_POS_FUSED", "hier"),
             },
             extra_props={
                 "Manufacturer": "Texas Instruments", "MPN": "CSD17575Q3",
                 "Datasheet": "https://www.ti.com/lit/ds/symlink/csd17575q3.pdf",
             })
     s.place("R704", "R", "100R BATP Kelvin filter", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_POS_FUSED", "local"), "2": ("BATP_SENSE", "local")})
+            pin_nets={"1": ("PACK_POS_FUSED", "hier"), "2": ("BATP_SENSE", "local")})
 
     # BQ25798 Rev C Figure 8-1 nominal capacitor network. Route the 100 nF parts closest to their pins.
     for ref, net in (("C701", "VBUS_COMBINED"), ("C702", "VBUS_COMBINED")):
@@ -424,13 +238,9 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("VBUS_COMBINED", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D"})
 
-    s.place("J190", "Conn_01x02", "AUX/SOLAR protected screw terminal 6-22V nominal", *c4.next(),
-            footprint=FOOTPRINTS["Terminal_01x02_5.08"],
-            pin_nets={"1": ("AUX_DC_RAW", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Phoenix Contact", "MPN": "1715022"})
     s.place("F190", "Fuse", "3A MINI AUX input fuse: Littelfuse 0297003.WXNV", *c4.next(),
             footprint=FOOTPRINTS["Fuse_Pack_Blade_Mini"],
-            pin_nets={"1": ("AUX_DC_RAW", "local"), "2": ("AUX_DC_FUSED", "local")},
+            pin_nets={"1": ("AUX_DC_RAW", "hier"), "2": ("AUX_DC_FUSED", "local")},
             extra_props={"Manufacturer": "Littelfuse / Keystone", "MPN": "0297003.WXNV + 3568"})
     s.place("D190", "D_TVS", "SMCJ24CA bidirectional AUX surge clamp", *c4.next(), footprint=FOOTPRINTS["D_TVS"],
             pin_nets={"1": ("AUX_DC_FUSED", "local"), "2": ("GND", "local")},

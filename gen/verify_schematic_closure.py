@@ -105,7 +105,105 @@ class ClosureAudit:
         self.check(ref not in self.components, f"obsolete component {ref} must be absent")
 
 
-def run_checks(a: ClosureAudit) -> None:
+def run_pack_checks(a: ClosureAudit) -> None:
+    """BMS daughterboard pack protection regressions (board split Phase 2.4).
+
+    Audits the bms project netlist.  The BMS is a single flat sheet, so net
+    names have no sheet prefix (e.g. /PACK_NEG_RAW rather than
+    /Power & Battery/PACK_NEG_RAW).
+    """
+    a.pin("U11", "8", "/PACK_POS_FUSED")
+    a.value_starts("C725", "10u 25V X7R")
+    a.pin("C725", "1", "/PACK_POS_FUSED")
+    a.pin("C725", "2", "/GND")
+    a.prop_eq("C725", "MPN", "GRM21BZ71E106KE15L")
+    for pin in ("1", "2"):
+        a.pin("J2", pin, "/PACK_POS_RAW")
+    for pin in ("3", "4"):
+        a.pin("J2", pin, "/PACK_NEG_RAW")
+    a.pin("J2", "5", "/CELL1_TAP")
+    a.pin("J2", "6", "/CELL2_TAP")
+    for pin, name, net in (
+        ("1", "VDD", "/BMS_VDD"),
+        ("2", "AVDD", "/BMS_AVDD"),
+        ("3", "VC5", "/BMS_VC3_TOP"),
+        ("4", "VC4", "/BMS_VC3_TOP"),
+        ("5", "VC3", "/BMS_VC3_TOP"),
+        ("6", "VC2", "/BMS_VC2"),
+        ("7", "VC1", "/BMS_VC1"),
+        ("8", "VC0", "/BMS_VC0"),
+        ("9", "VSS", "/PACK_NEG_RAW"),
+        ("10", "SRP", "/BMS_SRP"),
+        ("11", "SRN", "/BMS_SRN"),
+        ("12", "DSG", "/BMS_DSG_DRV"),
+        ("13", "CHG", "/BMS_CHG_DRV"),
+        ("14", "LD", "/BMS_LD"),
+        ("16", "CBI", "/PACK_NEG_RAW"),
+        ("17", "OCDP", "/BMS_OCDP"),
+        ("18", "TS", "/BMS_TS_UNUSED"),
+        ("20", "CCFG", "/PACK_NEG_RAW"),
+        ("22", "PRES", "/BMS_PRES"),
+        ("23", "CTRC", "/PACK_NEG_RAW"),
+        ("24", "CTRD", "/PACK_NEG_RAW"),
+    ):
+        a.pin_name("U719", pin, name)
+        a.pin("U719", pin, net)
+    for pin, name in (("15", "LPWR"), ("19", "VTB"), ("21", "CBO")):
+        a.pin_name("U719", pin, name)
+        a.starts(a.pin_nets.get(("U719", pin), ""), "unconnected-(U719-",
+                 f"U719.{pin} {name} must be explicitly NC")
+    a.eq(a.footprint("U719"), "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm", "U719 footprint")
+    a.prop_eq("U719", "MPN", "BQ7791500PWR")
+    for ref, value, p1, p2 in (
+        ("R840", "1k 1%", "/PACK_POS_RAW", "/BMS_VDD"),
+        ("R841", "75R 1%", "/PACK_NEG_RAW", "/BMS_VC0"),
+        ("R842", "75R 1%", "/CELL1_TAP", "/BMS_VC1"),
+        ("R843", "75R 1%", "/CELL2_TAP", "/BMS_VC2"),
+        ("R844", "75R 1%", "/PACK_POS_RAW", "/BMS_VC3_TOP"),
+        ("R845", "100R", "/PACK_NEG_RAW", "/BMS_SRP"),
+        ("R846", "100R", "/BMS_SENSE_N", "/BMS_SRN"),
+        ("R847", "4.53k 1%", "/BMS_DSG_DRV", "/BMS_DSG_GATE"),
+        ("R848", "1k 1%", "/BMS_CHG_DRV", "/BMS_CHG_GATE"),
+        ("R849", "1M 5%", "/BMS_DSG_GATE", "/BMS_SENSE_N"),
+        ("R850", "3.3M 5%", "/BMS_CHG_GATE", "/FG_VSS"),
+        ("R851", "453k 1%", "/BMS_LD", "/FG_VSS"),
+        ("R852", "10k 5%", "/PACK_POS_RAW", "/BMS_PRES"),
+        ("R853", "10k 1%", "/BMS_TS_UNUSED", "/PACK_NEG_RAW"),
+        ("R854", "604k 1%", "/BMS_OCDP", "/PACK_NEG_RAW"),
+    ):
+        a.value_starts(ref, value)
+        a.pin(ref, "1", p1)
+        a.pin(ref, "2", p2)
+    for ref, value, p1, p2 in (
+        ("C840", "1u 25V", "/BMS_VDD", "/PACK_NEG_RAW"),
+        ("C841", "1u 10V", "/BMS_AVDD", "/PACK_NEG_RAW"),
+        ("C842", "1u 10V X7R", "/BMS_VC0", "/PACK_NEG_RAW"),
+        ("C843", "1u 10V X7R", "/BMS_VC1", "/BMS_VC0"),
+        ("C844", "1u 10V X7R", "/BMS_VC2", "/BMS_VC1"),
+        ("C848", "1u 10V X7R", "/BMS_VC3_TOP", "/BMS_VC2"),
+        ("C845", "100n", "/BMS_SRP", "/PACK_NEG_RAW"),
+        ("C846", "100n", "/BMS_SRP", "/BMS_SRN"),
+        ("C847", "100n", "/BMS_SRN", "/PACK_NEG_RAW"),
+    ):
+        a.value_starts(ref, value)
+        a.pin(ref, "1", p1)
+        a.pin(ref, "2", p2)
+    a.value_starts("RS11", "8mOhm 1% 2W")
+    a.pin("RS11", "1", "/PACK_NEG_RAW")
+    a.pin("RS11", "2", "/BMS_SENSE_N")
+    a.prop_eq("RS11", "MPN", "WSLP25128L000FEA")
+    for ref, source, gate in (
+        ("Q703", "/BMS_SENSE_N", "/BMS_DSG_GATE"),
+        ("Q704", "/FG_VSS", "/BMS_CHG_GATE"),
+    ):
+        for pin in ("1", "2", "3"):
+            a.pin(ref, pin, source)
+        a.pin(ref, "4", gate)
+        a.pin(ref, "5", "/BMS_FET_COMMON")
+        a.prop_eq(ref, "MPN", "CSD18540Q5B")
+    a.absent("NTC2")
+    a.absent("NTC4")
+def run_checks(a: ClosureAudit, skip_pack: bool = False) -> None:
     # TPS2553 regression: ILIM is physical pin 5 and OUT is physical pin 6.
     for pin, name, net in (
         ("1", "IN", "/SYS_5V"),
@@ -118,98 +216,10 @@ def run_checks(a: ClosureAudit) -> None:
         a.pin_name("U770", pin, name)
         a.pin("U770", pin, net)
 
-    # Battery entry, charger mandatory pins, fail-off CE, QON, and ship FET.
-    a.pin("U11", "8", "/Power & Battery/PACK_POS_FUSED")
-    a.value_starts("C725", "10u 25V X7R")
-    a.pin("C725", "1", "/Power & Battery/PACK_POS_FUSED")
-    a.pin("C725", "2", "GND")
-    a.prop_eq("C725", "MPN", "GRM21BZ71E106KE15L")
-    for pin in ("1", "2"):
-        a.pin("J2", pin, "/Power & Battery/PACK_POS_RAW")
-    for pin in ("3", "4"):
-        a.pin("J2", pin, "/Power & Battery/PACK_NEG_RAW")
-    a.pin("J2", "5", "/Power & Battery/CELL1_TAP")
-    a.pin("J2", "6", "/Power & Battery/CELL2_TAP")
-    for pin, name, net in (
-        ("1", "VDD", "/Power & Battery/BMS_VDD"),
-        ("2", "AVDD", "/Power & Battery/BMS_AVDD"),
-        ("3", "VC5", "/Power & Battery/BMS_VC3_TOP"),
-        ("4", "VC4", "/Power & Battery/BMS_VC3_TOP"),
-        ("5", "VC3", "/Power & Battery/BMS_VC3_TOP"),
-        ("6", "VC2", "/Power & Battery/BMS_VC2"),
-        ("7", "VC1", "/Power & Battery/BMS_VC1"),
-        ("8", "VC0", "/Power & Battery/BMS_VC0"),
-        ("9", "VSS", "/Power & Battery/PACK_NEG_RAW"),
-        ("10", "SRP", "/Power & Battery/BMS_SRP"),
-        ("11", "SRN", "/Power & Battery/BMS_SRN"),
-        ("12", "DSG", "/Power & Battery/BMS_DSG_DRV"),
-        ("13", "CHG", "/Power & Battery/BMS_CHG_DRV"),
-        ("14", "LD", "/Power & Battery/BMS_LD"),
-        ("16", "CBI", "/Power & Battery/PACK_NEG_RAW"),
-        ("17", "OCDP", "/Power & Battery/BMS_OCDP"),
-        ("18", "TS", "/Power & Battery/BMS_TS_UNUSED"),
-        ("20", "CCFG", "/Power & Battery/PACK_NEG_RAW"),
-        ("22", "PRES", "/Power & Battery/BMS_PRES"),
-        ("23", "CTRC", "/Power & Battery/PACK_NEG_RAW"),
-        ("24", "CTRD", "/Power & Battery/PACK_NEG_RAW"),
-    ):
-        a.pin_name("U719", pin, name)
-        a.pin("U719", pin, net)
-    for pin, name in (("15", "LPWR"), ("19", "VTB"), ("21", "CBO")):
-        a.pin_name("U719", pin, name)
-        a.starts(a.pin_nets.get(("U719", pin), ""), "unconnected-(U719-",
-                 f"U719.{pin} {name} must be explicitly NC")
-    a.eq(a.footprint("U719"), "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm", "U719 footprint")
-    a.prop_eq("U719", "MPN", "BQ7791500PWR")
-    for ref, value, p1, p2 in (
-        ("R840", "1k 1%", "/Power & Battery/PACK_POS_RAW", "/Power & Battery/BMS_VDD"),
-        ("R841", "75R 1%", "/Power & Battery/PACK_NEG_RAW", "/Power & Battery/BMS_VC0"),
-        ("R842", "75R 1%", "/Power & Battery/CELL1_TAP", "/Power & Battery/BMS_VC1"),
-        ("R843", "75R 1%", "/Power & Battery/CELL2_TAP", "/Power & Battery/BMS_VC2"),
-        ("R844", "75R 1%", "/Power & Battery/PACK_POS_RAW", "/Power & Battery/BMS_VC3_TOP"),
-        ("R845", "100R", "/Power & Battery/PACK_NEG_RAW", "/Power & Battery/BMS_SRP"),
-        ("R846", "100R", "/Power & Battery/BMS_SENSE_N", "/Power & Battery/BMS_SRN"),
-        ("R847", "4.53k 1%", "/Power & Battery/BMS_DSG_DRV", "/Power & Battery/BMS_DSG_GATE"),
-        ("R848", "1k 1%", "/Power & Battery/BMS_CHG_DRV", "/Power & Battery/BMS_CHG_GATE"),
-        ("R849", "1M 5%", "/Power & Battery/BMS_DSG_GATE", "/Power & Battery/BMS_SENSE_N"),
-        ("R850", "3.3M 5%", "/Power & Battery/BMS_CHG_GATE", "/Power & Battery/FG_VSS"),
-        ("R851", "453k 1%", "/Power & Battery/BMS_LD", "/Power & Battery/FG_VSS"),
-        ("R852", "10k 5%", "/Power & Battery/PACK_POS_RAW", "/Power & Battery/BMS_PRES"),
-        ("R853", "10k 1%", "/Power & Battery/BMS_TS_UNUSED", "/Power & Battery/PACK_NEG_RAW"),
-        ("R854", "604k 1%", "/Power & Battery/BMS_OCDP", "/Power & Battery/PACK_NEG_RAW"),
-    ):
-        a.value_starts(ref, value)
-        a.pin(ref, "1", p1)
-        a.pin(ref, "2", p2)
-    for ref, value, p1, p2 in (
-        ("C840", "1u 25V", "/Power & Battery/BMS_VDD", "/Power & Battery/PACK_NEG_RAW"),
-        ("C841", "1u 10V", "/Power & Battery/BMS_AVDD", "/Power & Battery/PACK_NEG_RAW"),
-        ("C842", "1u 10V X7R", "/Power & Battery/BMS_VC0", "/Power & Battery/PACK_NEG_RAW"),
-        ("C843", "1u 10V X7R", "/Power & Battery/BMS_VC1", "/Power & Battery/BMS_VC0"),
-        ("C844", "1u 10V X7R", "/Power & Battery/BMS_VC2", "/Power & Battery/BMS_VC1"),
-        ("C848", "1u 10V X7R", "/Power & Battery/BMS_VC3_TOP", "/Power & Battery/BMS_VC2"),
-        ("C845", "100n", "/Power & Battery/BMS_SRP", "/Power & Battery/PACK_NEG_RAW"),
-        ("C846", "100n", "/Power & Battery/BMS_SRP", "/Power & Battery/BMS_SRN"),
-        ("C847", "100n", "/Power & Battery/BMS_SRN", "/Power & Battery/PACK_NEG_RAW"),
-    ):
-        a.value_starts(ref, value)
-        a.pin(ref, "1", p1)
-        a.pin(ref, "2", p2)
-    a.value_starts("RS11", "8mOhm 1% 2W")
-    a.pin("RS11", "1", "/Power & Battery/PACK_NEG_RAW")
-    a.pin("RS11", "2", "/Power & Battery/BMS_SENSE_N")
-    a.prop_eq("RS11", "MPN", "WSLP25128L000FEA")
-    for ref, source, gate in (
-        ("Q703", "/Power & Battery/BMS_SENSE_N", "/Power & Battery/BMS_DSG_GATE"),
-        ("Q704", "/Power & Battery/FG_VSS", "/Power & Battery/BMS_CHG_GATE"),
-    ):
-        for pin in ("1", "2", "3"):
-            a.pin(ref, pin, source)
-        a.pin(ref, "4", gate)
-        a.pin(ref, "5", "/Power & Battery/BMS_FET_COMMON")
-        a.prop_eq(ref, "MPN", "CSD18540Q5B")
-    a.absent("NTC2")
-    a.absent("NTC4")
+    # Board split Phase 2.4: pack protection regressions (J2/F1/U719/U11/
+    # Q11/Q12/Q703/Q704/RS10/RS11/R700-R709/C700/C724/C840-C848) are
+    # audited against the bms project by run_pack_checks().  The center
+    # keeps the charger (U2), ship FET (Q25), and gauge (U10) checks below.
     for pin in ("2", "3", "8", "9"):
         a.pin("U2", pin, "/Power & Battery/VBUS_COMBINED")
     for pin in ("10", "11", "27"):
@@ -225,7 +235,7 @@ def run_checks(a: ClosureAudit) -> None:
     a.pin("U2", "13", "/Power & Battery/CHG_CE_HW_N")
     a.pin("U2", "24", "/Power & Battery/SDRV_GATE")
     a.pin("Q25", "4", "/Power & Battery/SDRV_GATE")
-    a.pin("Q25", "5", "/Power & Battery/PACK_POS_FUSED")
+    a.pin("Q25", "5", "/PACK_POS_FUSED")
     a.pin("Q702", "1", "/PMIC_QON_ASSERT")
     a.pin("Q702", "2", "GND")
     a.pin("Q702", "3", "/Power & Battery/PMIC_QON_PIN")
@@ -244,7 +254,7 @@ def run_checks(a: ClosureAudit) -> None:
     a.pin("U10", "11", "/Power & Battery/FG_TS")
     a.value_starts("R855", "10k")
     a.pin("R855", "1", "/Power & Battery/FG_TS")
-    a.pin("R855", "2", "/Power & Battery/FG_VSS")
+    a.pin("R855", "2", "/FG_VSS")
 
     # AUX PGOOD and aggregate always-on cold-start boundary.
     a.pin("U12", "15", "/Power & Battery/AUX_PGTH")
@@ -300,6 +310,12 @@ def run_checks(a: ClosureAudit) -> None:
 
     # Exactly two dual-role Type-C ports negotiate input power and remain
     # default-off until the resettable source manager validates a path.
+    # Board split Phase 2.4: the PD chains moved to the left (PD1) and right
+    # (PD2) daughterboards; these audits now run against those projects
+    # (verify_design_contracts --project left_io/right_io).  The center
+    # project skips this block (U41/U42 absent there).
+    if "U41" not in a.components and "U42" not in a.components:
+        return
     for port, tcpc, base in ((1, "U41", 2000), (2, "U42", 2010)):
         local = f"/Power Inputs/PD{port}_"
         raw = f"/PD{port}_VBUS_RAW"
@@ -435,9 +451,14 @@ def run_checks(a: ClosureAudit) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("netlist", type=Path, help="KiCad XML netlist to inspect")
+    parser.add_argument("--pack", action="store_true",
+                        help="audit only the BMS pack protection block (bms project netlist)")
     args = parser.parse_args()
     audit = ClosureAudit(args.netlist)
-    run_checks(audit)
+    if args.pack:
+        run_pack_checks(audit)
+    else:
+        run_checks(audit)
     if audit.failures:
         print(f"Schematic closure audit: {audit.checks - len(audit.failures)} PASS, {len(audit.failures)} FAIL")
         for failure in audit.failures:
