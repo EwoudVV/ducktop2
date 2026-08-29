@@ -81,25 +81,26 @@ def main() -> int:
 
     # Collect the FPC-2 boundary nets = all hier labels across the sheets.
     hier_nets = set()
-    for sheet in (pd_s, hdmi_s, eth_s):
+    pd_sheet_nets, hdmi_sheet_nets, eth_sheet_nets = set(), set(), set()
+    for sheet, sink in ((pd_s, pd_sheet_nets), (hdmi_s, hdmi_sheet_nets), (eth_s, eth_sheet_nets)):
         for item in sheet.body:
             if not item.startswith('(hierarchical_label "'):
                 continue
             name = item[len('(hierarchical_label "'):].split('"', 1)[0]
             hier_nets.add(name)
+            sink.add(name)
     print(f"right_io FPC-2 boundary nets: {len(hier_nets)}")
 
     # Build the right_io root.
     pd_uuid = stable_uuid("right_io:sheet:pd")
     hdmi_uuid = stable_uuid("right_io:sheet:hdmi")
     eth_uuid = stable_uuid("right_io:sheet:eth")
-    nets = sorted(hier_nets)
-    pd_block, _ = sheet_block(pd_uuid, 30.48, 39.37, 119.38, 149.86,
-                              "PD2 Dual-Role", "right_pd.kicad_sch", nets)
-    hdmi_block, _ = sheet_block(hdmi_uuid, 30.48, 219.71, 119.38, 149.86,
-                                "HDMI", "right_hdmi.kicad_sch", nets)
-    eth_block, _ = sheet_block(eth_uuid, 30.48, 400.05, 119.38, 149.86,
-                               "GbE", "right_eth.kicad_sch", nets)
+    pd_block, pd_pins = sheet_block(pd_uuid, 30.48, 39.37, 119.38, 149.86,
+                              "PD2 Dual-Role", "right_pd.kicad_sch", sorted(pd_sheet_nets))
+    hdmi_block, hdmi_pins = sheet_block(hdmi_uuid, 30.48, 219.71, 119.38, 149.86,
+                                "HDMI", "right_hdmi.kicad_sch", sorted(hdmi_sheet_nets))
+    eth_block, eth_pins = sheet_block(eth_uuid, 30.48, 400.05, 119.38, 149.86,
+                               "GbE", "right_eth.kicad_sch", sorted(eth_sheet_nets))
 
     root = []
     root.append(f'(kicad_sch\n  (version 20260306)\n  (generator "eeschema")\n  (generator_version "10.0")\n'
@@ -107,8 +108,14 @@ def main() -> int:
     root.append(pd_block)
     root.append(hdmi_block)
     root.append(eth_block)
-    for i, net in enumerate(sorted(hier_nets)):
-        root.append(root_label((40 + (i % 15) * 35, 30 + (i // 15) * 20), net))
+    # Root labels sit exactly on the hosting sheet's block pin endpoint so
+    # KiCad wires each label to that sheet's hierarchical label.
+    for net in sorted(pd_sheet_nets):
+        root.append(root_label(pd_pins[net], net))
+    for net in sorted(hdmi_sheet_nets):
+        root.append(root_label(hdmi_pins[net], net))
+    for net in sorted(eth_sheet_nets):
+        root.append(root_label(eth_pins[net], net))
     root.append(f'  (sheet_instances\n    (path "/"\n      (page "1")\n    )\n  )\n  (embedded_fonts no)\n)')
     with open(os.path.join(BOARD_DIR, "right_io.kicad_sch"), "w", encoding="utf-8") as f:
         f.write("\n".join(root))

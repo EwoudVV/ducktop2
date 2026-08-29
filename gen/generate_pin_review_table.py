@@ -95,20 +95,21 @@ CRITICAL_REFS = [
 # architecture references and is no longer used as the netlist authority.
 CURRENT_REQUIRED_REFS = {
     # Battery protection, power path, charger, and always-on control.
-    "J2", "F1", "RS1", "RS11", "U719", "Q703", "Q704", "U2", "U10", "U11", "Q25", "J190",
+    # Board split Phase 2.4: the pack board carries J2/F1/U719/Q703/Q704/
+    # U11/RS11 (bms project); the AUX terminal J190 moved to the left I/O
+    # board.  The center keeps the gauge (U10), charger (U2), ship FET
+    # (Q25), and the gauge Kelvin shunt (RS1).
+    "RS1", "U2", "U10", "Q25",
     # EC, source manager, Mu, storage, and Wi-Fi.  J9 and the R1730-R1733
     # USB-A disable straps are retired by design (87d3dfe): DIS5/DIS6 are
     # active wired ports now, so they must NOT be required anymore.
     "U4", "U44", "A1", "A2", "F10", "U170",
-    # Five external USB-C ports: two dual-role PD/data and three source/data-only,
-    # plus the active J24/J25 USB-A cluster on hub ports DIS5/DIS6.
-    "U14", "U41", "U42", "U720", "U721",
-    "U2000", "U2001", "U2002", "U2003", "U2004",
-    "U2006", "U2016",
-    "J21", "J11", "J22", "J23", "J12", "J24", "J25", "Q62",
-    "U1700", "U1800", "U1801", "U1802", "U1803", "U1804",
+    # Board split Phase 2.4: the five external USB-C ports and the hub
+    # moved to the left/right I/O daughterboards (verified by their own
+    # projects).  The center has no USB-C ports.
+    "Q62",
     # User I/O, audio, keyboard, maker MCU, and optional radio boundary.
-    "U45", "J41", "J45", "U400", "U402", "U430", "MK430", "J310", "U500", "U501", "U502",
+    "U45", "J41", "J45", "U400", "U402", "U430", "MK430", "J310",
     "J2300", "U2300", "U2303", "U2304",
 }
 
@@ -152,7 +153,7 @@ def load_contracts() -> None:
     add("J2", 6, "/Power & Battery/CELL2_TAP", "Cell-2 positive / cell-3 negative balance tap.", "TI BQ77915 3S connection contract")
     add("F1", 1, "/Power & Battery/PACK_POS_RAW", "Main pack fuse input is raw pack positive.", "Ducktop2 battery safety review")
     add("F1", 2, "/Power & Battery/BAT_PROT_VIN", "Main pack fuse output enters the high-side reversal/UV/OV protection stage.", "Ducktop2 battery safety review")
-    add("RS1", 1, "/Power & Battery/FG_VSS", "Fuel-gauge pack-side Kelvin return flows through the populated shunt.", "Ducktop2 battery safety review")
+    add("RS1", 1, "/FG_VSS", "Fuel-gauge pack-side Kelvin return flows through the populated shunt.", "Ducktop2 battery safety review")
     add("RS1", 2, "GND", "System side of shunt is board ground.", "Ducktop2 battery safety review")
     bms = "TI BQ77915 Rev L 3S autonomous primary-protector contract"
     for pin, net in {
@@ -213,7 +214,7 @@ def load_contracts() -> None:
     add("LED1", 2, "/Power & Battery/STAT_LED_A", "Charge indicator anode is current-limited from REGN.", "BQ25798 status-indicator contract")
     for ref, expected, note in (
         ("TP1", "GND", "Ground fixture reference."),
-        ("TP2", "/Power & Battery/PACK_POS_FUSED", "Protected pack fixture point."),
+        ("TP2", "/PACK_POS_FUSED", "Protected pack fixture point (FPC-3 boundary)."),
         ("TP3", "/VSYS", "System-power fixture point."),
         ("TP4", "/EC_AON_IN", "Always-on input fixture point."),
         ("TP7", "/MCU_3V3", "EC 3.3 V fixture point."),
@@ -257,7 +258,7 @@ def load_contracts() -> None:
         add(ref, 2, net_b, "LTC4368 pack UV/OV qualification ladder.", "Analog Devices LTC4368-1 datasheet")
     add("J190", 1, "/Power & Battery/AUX_DC_RAW", "Aux/random-DC positive enters before fuse.", project)
     add("J190", 2, "GND", "Aux/random-DC return is board ground.", project)
-    add("F190", 1, "/Power & Battery/AUX_DC_RAW", "Aux input fuse input.", project)
+    add("F190", 1, "/AUX_DC_RAW", "Aux input fuse input.", project)
     add("F190", 2, "/Power & Battery/AUX_DC_FUSED", "Aux input fuse output.", project)
     add("D190", 1, "/Power & Battery/AUX_DC_FUSED", "Aux TVS clamps protected aux input node.", project)
     add("D190", 2, "GND", "Aux TVS returns to ground.", project)
@@ -416,7 +417,7 @@ def load_contracts() -> None:
     for pin in (1, 2, 3):
         add("Q25", pin, "/Power & Battery/BAT_CHARGER", "BQ25798 ship-FET source is on the charger-side BAT node.", bq)
     add("Q25", 4, "/Power & Battery/SDRV_GATE", "BQ25798 SDRV directly controls the qualified ship FET gate.", bq)
-    add("Q25", 5, "/Power & Battery/PACK_POS_FUSED", "Ship-FET drain connects to the protected pack for electronic ship/hard-off.", bq)
+    add("Q25", 5, "/PACK_POS_FUSED", "Ship-FET drain connects to the protected pack for electronic ship/hard-off.", bq)
     for ref, pin, net, note in (
         ("C725", 1, "/Power & Battery/PACK_POS_FUSED", "LTC4368 VOUT retains local capacitance even with the ship FET open."),
         ("C725", 2, "GND", "LTC4368 VOUT capacitor return."),
@@ -452,7 +453,7 @@ def load_contracts() -> None:
         5: "/Power & Battery/FG_CE",
         6: "/MCU_3V3",
         7: "/Power & Battery/FG_REG25",
-        8: "/Power & Battery/FG_VSS",
+        8: "/FG_VSS",
         9: "/Power & Battery/FG_SRP",
         10: "/Power & Battery/FG_SRN",
         11: "/Power & Battery/FG_TS",
@@ -465,7 +466,7 @@ def load_contracts() -> None:
         else:
             add("U10", pin, net, "Fuel gauge uses pack divider, shunt sense, internal temperature mode, 3.3 V host rail, and EC I2C.", fg)
     add("R855", 1, "/Power & Battery/FG_TS", "Unused external fuel-gauge TS input is pulled low.", fg)
-    add("R855", 2, "/Power & Battery/FG_VSS", "TS pulldown returns to the gauge Kelvin VSS node.", fg)
+    add("R855", 2, "/FG_VSS", "TS pulldown returns to the gauge Kelvin VSS node.", fg)
 
     # EC buck and core STM32 pins that are easy to get catastrophically wrong.
     stm = "ST STM32F407 datasheet plus Ducktop2 EC core contract"

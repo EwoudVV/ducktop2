@@ -160,140 +160,78 @@ def add_window(checks: list[Check], name: str, refs: tuple[str, str, str],
               f"VREF*(Rtop+Rmid+Rbot)/Rbot, {refs_text}"),
     ])
 
-def build_checks(values: dict[str, str], radio_values: dict[str, str]) -> list[Check]:
+def build_checks(values: dict[str, str], radio_values: dict[str, str],
+                 project: str = "ducktop2") -> list[Check]:
     checks: list[Check] = []
 
-    pack_uv, _ = three_resistor_window(
-        resistor(values, "R700"), resistor(values, "R701"),
-        resistor(values, "R702"), 0.5,
-    )
-    add_window(checks, "LTC4368 pack acceptance", ("R700", "R701", "R702"),
-               values, 0.5, (8.2, 8.7), (13.2, 13.8))
-    pack_breaker = 0.050 / resistor(values, "RS10")
-    pack_shunt = resistor(values, "RS10")
-    pack_breaker_min = 0.040 / (pack_shunt * 1.01)
-    pack_breaker_max = 0.060 / (pack_shunt * 0.99)
-    bms_shunt = resistor(values, "RS11")
-    bms_ocd_nominal = 0.060 / bms_shunt
-    bms_ocd_min = 0.048 / (bms_shunt * 1.01)
-    bms_ocd_max = 0.072 / (bms_shunt * 0.99)
-    bms_scd_nominal = 0.120 / bms_shunt
-    bms_scd_min = 0.096 / (bms_shunt * 1.01)
-    bms_scd_max = 0.144 / (bms_shunt * 0.99)
-    bms_shunt_power_at_pack_trip = pack_breaker_max ** 2 * bms_shunt
-    bms_balance_resistance = resistor(values, "R841")
-    bms_balance_nominal = 4.2 / (2.0 * bms_balance_resistance + 12.0)
-    bms_balance_worst_max = 4.24 / (2.0 * bms_balance_resistance * 0.99 + 8.0)
+    # Board split Phase 2.4: pack protection calculations (LTC4368 window,
+    # RS10/RS11 breakers, C725, BQ77915 OCD/SCD) moved to the BMS board and
+    # are verified against the bms project netlist.  The center project skips
+    # this section.
+    if project == "bms":
+        pack_uv, _ = three_resistor_window(
+            resistor(values, "R700"), resistor(values, "R701"),
+            resistor(values, "R702"), 0.5,
+        )
+        add_window(checks, "LTC4368 pack acceptance", ("R700", "R701", "R702"),
+                   values, 0.5, (8.2, 8.7), (13.2, 13.8))
+        pack_breaker = 0.050 / resistor(values, "RS10")
+        pack_shunt = resistor(values, "RS10")
+        pack_breaker_min = 0.040 / (pack_shunt * 1.01)
+        pack_breaker_max = 0.060 / (pack_shunt * 0.99)
+        bms_shunt = resistor(values, "RS11")
+        bms_ocd_nominal = 0.060 / bms_shunt
+        bms_ocd_min = 0.048 / (bms_shunt * 1.01)
+        bms_ocd_max = 0.072 / (bms_shunt * 0.99)
+        bms_scd_nominal = 0.120 / bms_shunt
+        bms_scd_min = 0.096 / (bms_shunt * 1.01)
+        bms_scd_max = 0.144 / (bms_shunt * 0.99)
+        bms_shunt_power_at_pack_trip = pack_breaker_max ** 2 * bms_shunt
+        bms_balance_resistance = resistor(values, "R841")
+        bms_balance_nominal = 4.2 / (2.0 * bms_balance_resistance + 12.0)
+        bms_balance_worst_max = 4.24 / (2.0 * bms_balance_resistance * 0.99 + 8.0)
+        checks.extend([
+            Check("LTC4368 bidirectional pack breaker nominal", pack_breaker, "A", 4.4, 4.7,
+                  "50mV/RS10; nominal forward and reverse magnitude"),
+            Check("LTC4368 breaker worst-case minimum", pack_breaker_min, "A", 3.5, 3.7,
+                  "40mV/(RS10*1.01); LTC4368 threshold minimum and shunt +1%"),
+            Check("LTC4368 breaker worst-case maximum", pack_breaker_max, "A", 5.4, 5.6,
+                  "60mV/(RS10*0.99); LTC4368 threshold maximum and shunt -1%"),
+            Check("LTC4368 nominal VOUT capacitance", capacitor(values, "C725") * 1e6,
+                  "uF", 9.9, 10.1,
+                  "C725 on PACK_POS_FUSED; datasheet requires at least 1uF effective at VOUT"),
+            Check("BQ7791500 backup overcurrent nominal", bms_ocd_nominal, "A", 7.4, 7.6,
+                  "BQ7791500PWR 60mV OCD threshold / RS11"),
+            Check("BQ7791500 backup overcurrent worst-case minimum", bms_ocd_min, "A", 5.9, 6.1,
+                  "48mV/(RS11*1.01); protector threshold minimum and shunt +1%"),
+            Check("BQ7791500 backup overcurrent worst-case maximum", bms_ocd_max, "A", 9.0, 9.2,
+                  "72mV/(RS11*0.99); protector threshold maximum and shunt -1%"),
+            Check("BQ7791500 short-circuit nominal", bms_scd_nominal, "A", 14.9, 15.1,
+                  "BQ7791500PWR 120mV SCD threshold / RS11"),
+            Check("BQ7791500 short-circuit worst-case minimum", bms_scd_min, "A", 11.8, 12.0,
+                  "96mV/(RS11*1.01); protector threshold minimum and shunt +1%"),
+            Check("BQ7791500 short-circuit worst-case maximum", bms_scd_max, "A", 18.0, 18.2,
+                  "144mV/(RS11*0.99); protector threshold maximum and shunt -1%"),
+            Check("BQ7791500 shunt power at pack trip", bms_shunt_power_at_pack_trip, "W", 0.0, 0.30,
+                  "I(LTC4368 max)^2*RS11; RS11 is rated 2W"),
+            Check("BQ7791500 balance current nominal", bms_balance_nominal * 1000.0, "mA", 25.0, 27.0,
+                  "4.2V/(2*75R+12R); internal-balance current"),
+            Check("BQ7791500 balance worst-case max", bms_balance_worst_max * 1000.0, "mA", 0.0, 30.0,
+                  "4.24V/(2*75R*0.99+8R); worst-case high balance current"),
+        ])
+        if project == "bms":
+            return checks
     charger_ts_ratio = resistor(values, "R705") / (
         resistor(values, "R16") + resistor(values, "R705")
     )
-    checks.extend([
-        Check("LTC4368 bidirectional pack breaker nominal", pack_breaker, "A", 4.4, 4.7,
-              "50mV/RS10; nominal forward and reverse magnitude"),
-        Check("LTC4368 breaker worst-case minimum", pack_breaker_min, "A", 3.5, 3.7,
-              "40mV/(RS10*1.01); LTC4368 threshold minimum and shunt +1%"),
-        Check("LTC4368 breaker worst-case maximum", pack_breaker_max, "A", 5.4, 5.6,
-              "60mV/(RS10*0.99); LTC4368 threshold maximum and shunt -1%"),
-        Check("LTC4368 nominal VOUT capacitance", capacitor(values, "C725") * 1e6,
-              "uF", 9.9, 10.1,
-              "C725 on PACK_POS_FUSED; datasheet requires at least 1uF effective at VOUT"),
-        Check("BQ7791500 backup overcurrent nominal", bms_ocd_nominal, "A", 7.4, 7.6,
-              "BQ7791500PWR 60mV OCD threshold / RS11"),
-        Check("BQ7791500 backup overcurrent worst-case minimum", bms_ocd_min, "A", 5.9, 6.1,
-              "48mV/(RS11*1.01); protector threshold minimum and shunt +1%"),
-        Check("BQ7791500 backup overcurrent worst-case maximum", bms_ocd_max, "A", 9.0, 9.2,
-              "72mV/(RS11*0.99); protector threshold maximum and shunt -1%"),
-        Check("BQ7791500 short-circuit nominal", bms_scd_nominal, "A", 14.9, 15.1,
-              "BQ7791500PWR 120mV SCD threshold / RS11"),
-        Check("BQ7791500 short-circuit worst-case minimum", bms_scd_min, "A", 11.8, 12.0,
-              "96mV/(RS11*1.01); protector threshold minimum and shunt +1%"),
-        Check("BQ7791500 short-circuit worst-case maximum", bms_scd_max, "A", 18.0, 18.2,
-              "144mV/(RS11*0.99); protector threshold maximum and shunt -1%"),
-        Check("BQ7791500 shunt dissipation at LTC4368 worst-case trip",
-              bms_shunt_power_at_pack_trip, "W", 0.0, 0.30,
-              "I(LTC4368 max)^2*RS11; RS11 is rated 2W"),
-        Check("BQ7791500 internal balance current nominal",
-              bms_balance_nominal * 1000.0, "mA", 25.0, 27.0,
-              "4.2V/(2*R841+12ohm typical internal balance FET)"),
-        Check("BQ7791500 internal balance current worst-case maximum",
-              bms_balance_worst_max * 1000.0, "mA", 0.0, 30.0,
-              "4.24V/(2*R841*0.99+8ohm); below TI 50mA maximum"),
-        Check("BQ7791500 internal balance filter capacitance",
-              capacitor(values, "C842") * 1e6, "uF", 0.99, 1.01,
-              "C842-C844/C848 are contract-checked at TI's 1uF internal-balance value"),
-        Check("BQ25798 fixed TS divider", charger_ts_ratio * 100.0, "% REGN", 58.0, 60.0,
-              "R705/(R16+R705); inside the default 44.8%-68.4% normal-temperature window"),
-    ])
-    aon_top = resistor(values, "R795")
-    aon_middle = resistor(values, "R796")
-    aon_bottom = resistor(values, "R797")
-    aon_uv_min, aon_uv_max, aon_ov_min, aon_ov_max = three_resistor_window_corners(
-        aon_top, aon_middle, aon_bottom, 0.001, 1.183, 1.223, 0.1e-6,
-    )
-    add_window(checks, "TPS259470A aggregate AON acceptance", ("R795", "R796", "R797"),
-               values, 1.2, (6.1, 6.3), (22.1, 22.7))
-    aon_5v_rejection_margin = aon_uv_min - 5.5
-    aon_aux7_accept_margin = (7.0 - 0.5) - aon_uv_max
-    aon_pd15_accept_margin = (15.0 * 0.95 - 0.5) - aon_uv_max
-    aon_current_nominal = 3334.0 / resistor(values, "R798")
-    aon_current_min = 0.850 * 3320.0 / (resistor(values, "R798") * 1.001)
-    aon_current_max = 1.150 * 3320.0 / (resistor(values, "R798") * 0.999)
-    aon_slew = 2000.0 / (capacitor(values, "C799") * 1e12)
-    checks.extend([
-        Check("TPS259470A aggregate AON UV rising worst-case minimum", aon_uv_min, "V", 6.02, 6.10,
-              "R795/R796/R797 at 0.1%, VUV=1.183V, and both pin leakages at corners"),
-        Check("TPS259470A aggregate AON UV rising worst-case maximum", aon_uv_max, "V", 6.32, 6.40,
-              "R795/R796/R797 at 0.1%, VUV=1.223V, and both pin leakages at corners"),
-        Check("TPS259470A aggregate AON OV rising worst-case minimum", aon_ov_min, "V", 21.8, 22.1,
-              "R795/R796/R797 at 0.1%, VOV=1.183V, and both pin leakages at corners"),
-        Check("TPS259470A aggregate AON OV rising worst-case maximum", aon_ov_max, "V", 22.7, 23.0,
-              "R795/R796/R797 at 0.1%, VOV=1.223V, and both pin leakages at corners; below 23V recommended input maximum"),
-        Check("AON rejection margin above USB-C default 5V maximum", aon_5v_rejection_margin, "V", 0.50, 0.70,
-              "AON UVLO worst-case minimum-5.5V; a 5V-only source is negotiation-only and cannot boot the EC"),
-        Check("AON acceptance margin at minimum 7V AUX", aon_aux7_accept_margin, "V", 0.10, 0.30,
-              "7.0V minimum AUX-0.5V conservative Schottky drop-AON UVLO worst-case maximum"),
-        Check("AON acceptance margin at minimum 15V PDO", aon_pd15_accept_margin, "V", 7.0, 8.0,
-              "15V PDO at -5%-0.5V conservative Schottky drop-AON UVLO worst-case maximum"),
-        Check("TPS259470A aggregate AON current limit nominal", aon_current_nominal, "A", 1.45, 1.56,
-              "3334/R798, TI Equation 5"),
-        Check("TPS259470A aggregate AON current limit worst-case minimum", aon_current_min, "A", 1.25, 1.35,
-              "TPS25947 table minimum scaled from 3.32kOhm and R798 +0.1%"),
-        Check("TPS259470A aggregate AON current limit worst-case maximum", aon_current_max, "A", 1.65, 1.75,
-              "TPS25947 table maximum scaled from 3.32kOhm and R798 -0.1%"),
-        Check("TPS259470A aggregate AON output slew", aon_slew, "V/ms", 0.55, 0.67,
-              "2000/C799(pF), TI Equation 4"),
-    ])
-    pd_ports = (
-        (1, ("R2080", "R2081", "R2082"), "R2083", 2000),
-        (2, ("R2090", "R2091", "R2092"), "R2093", 2040),
-    )
-    for index, refs, ilim_ref, _cbase in pd_ports:
-        add_window(checks, f"TPS26630 PD{index} eFuse acceptance", refs, values, 1.2,
-                   (12.1, 12.6), (17.0, 17.6))
-        pd_efuse_limit = 18.0 / (resistor(values, ilim_ref) / 1e3)
-        checks.append(Check(f"TPS26630 PD{index} eFuse current limit", pd_efuse_limit, "A",
-                            2.9, 3.1, f"18/{ilim_ref}(kOhm)"))
-    # USB Type-C limits sink-side VBUS capacitance to 10 uF before attachment.
-    # Count all direct raw-port capacitors plus the shared AON input reached
-    # through the Schottky OR. Apply +20% capacitance tolerance and reserve an
-    # additional 0.5 uF for IC, diode, connector, and layout parasitics.
-    shared_raw_cap = capacitor(values, "C795") + capacitor(values, "C796")
-    for index, _refs, _ilim_ref, cbase in pd_ports:
-        raw_caps = tuple(f"C{cbase + offset}" for offset in range(15, 20))
-        nominal = sum(capacitor(values, ref) for ref in raw_caps) + shared_raw_cap
-        worst_case = nominal * 1.20 + 0.5e-6
-        checks.extend([
-            Check(f"USB-C PD{index} nominal pre-attach VBUS capacitance",
-                  nominal * 1e6, "uF", 5.8, 5.9,
-                  "+".join((*raw_caps, "C795", "C796"))),
-            Check(f"USB-C PD{index} worst-case pre-attach VBUS capacitance",
-                  worst_case * 1e6, "uF", 0.0, 10.0,
-                  "nominal*1.20 + 0.5uF conservative unmodeled allowance; USB Type-C max 10uF"),
-        ])
-    for index, refs in enumerate((("R2140", "R2141", "R2142"),
-                                  ("R2143", "R2144", "R2145")), start=1):
-        add_window(checks, f"LTC4418 PD{index} selector acceptance", refs, values, 1.0,
-                   (12.8, 13.3), (16.7, 17.5))
+
+    # Board split Phase 2.4: the LTC4418 PD selectors (R2140-R2145) moved to
+    # the left I/O board; the USB selector (R730-R732) stays on center.
+    if "R2140" in values:
+        for index, refs in enumerate((("R2140", "R2141", "R2142"),
+                                      ("R2143", "R2144", "R2145")), start=1):
+            add_window(checks, f"LTC4418 PD{index} selector acceptance", refs, values, 1.0,
+                       (12.8, 13.3), (16.7, 17.5))
     add_window(checks, "LTC4418 USB acceptance", ("R730", "R731", "R732"),
                values, 1.0, (12.8, 13.3), (16.7, 17.5))
     add_window(checks, "LTC4418 AUX acceptance", ("R733", "R734", "R735"),
@@ -354,9 +292,6 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str]) -> list[C
     ])
 
     for name, ref in (
-        ("Hub USB-C J22", "R1780"),
-        ("Hub USB-C J23", "R1740"),
-        ("Hub USB-C J12", "R1760"),
         ("Internal trackpad", "R252"),
     ):
         r_kohm = resistor(values, ref) / 1e3
@@ -464,8 +399,11 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str]) -> list[C
     normal_mu_edp_budget = firmware_integer_define("EC_DEFAULT_NORMAL_MU_EDP_BUDGET_MW") / 1000.0
     low_pack_reserve = firmware_integer_define("EC_DEFAULT_SYSTEM_RESERVE_MW") / 1000.0
     source_efficiency = firmware_integer_define("EC_DEFAULT_SOURCE_EFFICIENCY_PERMILLE") / 1000.0
-    low_pack_power = pack_uv * pack_breaker_min
-    low_pack_continuous_power = 0.80 * low_pack_power
+    if project == "bms":
+        low_pack_power = pack_uv * pack_breaker_min
+        low_pack_continuous_power = 0.80 * low_pack_power
+    else:
+        low_pack_power = low_pack_continuous_power = 0.0
     low_pack_required_input = low_pack_budget / source_efficiency + low_pack_reserve
     low_pack_mu_headroom = low_pack_continuous_power - low_pack_required_input
     fan_max_current = 0.26
@@ -511,9 +449,14 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str]) -> list[C
               "8.45V*R761/(R766+R761); reset-state gate divider"),
         Check("TPS552892 switching frequency", mu_fsw / 1e3, "kHz", 380, 420,
               "20e9/R756"),
-        Check("Low-pack derated source power minus enforced firmware budget", low_pack_mu_headroom, "W", 0.5, 10.0,
-              "0.80*LTC4368 pack UV*breaker_min-(EC low-pack Mu+eDP budget/efficiency)-EC system reserve"),
     ])
+    # Board split Phase 2.4: the low-pack budget check uses the pack UV/breaker
+    # capability and runs against the bms project netlist instead.
+    if project == "bms":
+        checks.append(
+            Check("Low-pack derated source power minus enforced firmware budget", low_pack_mu_headroom, "W", 0.5, 10.0,
+                  "0.80*LTC4368 pack UV*breaker_min-(EC low-pack Mu+eDP budget/efficiency)-EC system reserve")
+        )
 
     mic_gain = 1.0 + resistor(values, "R432") / resistor(values, "R433")
     mic_shelf = 1.0 / (
@@ -548,24 +491,30 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str]) -> list[C
               "-(94dBSPL headroom + IM68 68dBA SNR); PCM2900 ADC SNR is 89dB typical"),
     ])
 
-    eth_load_c1 = capacitor(values, "C515")
-    eth_load_c2 = capacitor(values, "C516")
-    eth_load = (eth_load_c1 * eth_load_c2) / (eth_load_c1 + eth_load_c2) + 2.0e-12
-    checks.append(
-        Check("RTL8111H 25MHz crystal effective load", eth_load * 1e12, "pF", 7.8, 8.2,
-              "(C515*C516)/(C515+C516)+2.0pF assumed pin/PCB stray; Y500 CL=8pF")
-    )
+    # Board split Phase 2.4: the RTL8111H crystal load (C515/C516) moved to
+    # the right I/O board; the LTC4418 selector hold-up (C2146) moved left.
+    if "C515" in values:
+        eth_load_c1 = capacitor(values, "C515")
+        eth_load_c2 = capacitor(values, "C516")
+        eth_load = (eth_load_c1 * eth_load_c2) / (eth_load_c1 + eth_load_c2) + 2.0e-12
+        checks.append(
+            Check("RTL8111H 25MHz crystal effective load", eth_load * 1e12, "pF", 7.8, 8.2,
+                  "(C515*C516)/(C515+C516)+2.0pF assumed pin/PCB stray; Y500 CL=8pF")
+        )
 
-    pd_hold_up = capacitor(values, "C2146")
+    pd_hold_up = capacitor(values, "C2146") if "C2146" in values else 0.0
     main_hold_up = capacitor(values, "C746")
-    pd_droop = bq_ilim * (7e-6 + 4e-6) / pd_hold_up
     main_droop = bq_ilim * (7e-6 + 4e-6) / main_hold_up
-    checks.extend([
-        Check("LTC4418 dual-PD selector handoff droop", pd_droop, "V", 0.0, 0.40,
-              "BQ ILIM ceiling*(7us VALID-off max+4us break-before-make max)/C2146; ESR and adapter loss excluded"),
+    if pd_hold_up > 0:
+        pd_droop = bq_ilim * (7e-6 + 4e-6) / pd_hold_up
+        checks.extend([
+            Check("LTC4418 dual-PD selector handoff droop", pd_droop, "V", 0.0, 0.40,
+                  "BQ ILIM ceiling*(7us VALID-off max+4us break-before-make max)/C2146; ESR and adapter loss excluded"),
+        ])
+    checks.append(
         Check("LTC4418 PD/AUX selector handoff droop", main_droop, "V", 0.0, 0.40,
-              "BQ ILIM ceiling*(7us+4us)/C746; ESR and source loss excluded"),
-    ])
+              "BQ ILIM ceiling*(7us+4us)/C746; ESR and source loss excluded")
+    )
 
     # ST AN2867 negative-resistance screening.  Stray capacitance is an
     # explicit prototype assumption until the assembled PCB is measured.
@@ -683,13 +632,21 @@ def main() -> None:
     parser.add_argument("--output", type=Path,
                         default=ROOT / "verification" /
                         f"ELECTRICAL_CALCULATIONS_{dt.date.today().isoformat()}.md")
+    parser.add_argument("--project", choices=("ducktop2", "bms"), default="ducktop2",
+                        help="board split Phase 2.4: which project to verify (bms = pack calculations)")
     args = parser.parse_args()
 
     netlist = ROOT / "verification" / "electrical_calculations_netlist.xml"
     radio_netlist = ROOT / "verification" / "radio_electrical_calculations_netlist.xml"
-    export_netlist(SCHEMATIC, netlist)
-    export_netlist(RADIO_SCHEMATIC, radio_netlist)
-    checks = build_checks(component_values(netlist), component_values(radio_netlist))
+    if args.project == "bms":
+        bms_sch = ROOT / "bms" / "bms.kicad_sch"
+        netlist = ROOT / "verification" / "bms_netlist.xml"
+        export_netlist(bms_sch, netlist)
+        checks = build_checks(component_values(netlist), {}, project="bms")
+    else:
+        export_netlist(SCHEMATIC, netlist)
+        export_netlist(RADIO_SCHEMATIC, radio_netlist)
+        checks = build_checks(component_values(netlist), component_values(radio_netlist))
     report = render_report(checks, netlist, radio_netlist)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(report, encoding="utf-8")

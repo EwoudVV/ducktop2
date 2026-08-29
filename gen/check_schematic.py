@@ -31,16 +31,12 @@ EXPECTED_SHEETS = [
     "01_power_battery.kicad_sch",
     "02_ec_mcu.kicad_sch",
     "03_mu_carrier.kicad_sch",
-    "04_usb_c_io.kicad_sch",
-    "05_power_inputs.kicad_sch",
-    "06_tcp0_external_hdmi.kicad_sch",
     "07_radio_oled_gps.kicad_sch",
     "08_internal_services.kicad_sch",
     "09_radio_daughterboard_interface.kicad_sch",
     "12_keyboard_interface.kicad_sch",
     "14_maker_mcu.kicad_sch",
     "15_system_audio.kicad_sch",
-    "16_gigabit_ethernet.kicad_sch",
 ]
 
 # These symbols are stock KiCad `extends` variants.  The generator deliberately
@@ -75,6 +71,70 @@ ALLOWED_ERC_WARNINGS = Counter({
         ("Symbol U431 [TLV9061xDBV]",),
     ): 1,
 })
+
+# Board split Phase 2.4: the FPC boundary signals moved to the left/right
+# daughterboards.  Their center-side receivers are now driven across the FPCs
+# (and by the FPC connector symbols added in Phase 4), so KiCad reports the
+# inputs as undriven.  Each allowed entry is pinned to the exact physical
+# signal and reference so any NEW undriven input still fails the check.
+for pin, name in (
+    ("16", "HSIO0_RX+"), ("18", "HSIO0_RX-"),
+    ("22", "HSIO1_RX+"), ("24", "HSIO1_RX-"),
+    ("64", "HSIO6_RX+"), ("66", "HSIO6_RX-"),
+    ("102", "~{CLKREQ4}"), ("187", "TCP0_HPD"),
+):
+    ALLOWED_ERC_WARNINGS[(
+        "error", "pin_not_driven",
+        "Input pin not driven by any Output pins",
+        (f"Symbol A1 Pin {pin} [{name}, Input, Line]",),
+    )] += 1
+# U15 (LTC4418 PD selector) V1 input: the selector moved to the left board,
+# so its center-side power input is only connected through the FPC boundary.
+ALLOWED_ERC_WARNINGS[(
+    "error", "power_pin_not_driven",
+    "Input Power pin not driven by any Output Power pins",
+    ("Symbol U15 Pin 17 [V1, Power input, Line]",),
+)] += 1
+
+# Board split Phase 2.4 FPC boundary labels: each root-level hier label on the
+# center connects to exactly one center-side pin today; the other side is the
+# FPC connector symbol added in Phase 4.  Allowlist these exact label names so
+# any OTHER isolated label still fails the check.
+_FPC_BOUNDARY_LABELS = [
+    "AUX_DC_RAW", "GBE_CLKREQ_N", "GBE_HOST_RX_N", "GBE_HOST_RX_P",
+    "GBE_HOST_TX_N", "GBE_HOST_TX_P", "GBE_REFCLK_N", "GBE_REFCLK_P",
+    "PACK_RETRY_PULSE", "PD1_EFUSE_FAULT_N", "PD1_I2C_SCL", "PD1_I2C_SDA",
+    "PD1_PATH_EN", "PD1_TCPC_IRQ_N", "PD1_VALID_N", "PD1_VBUS_RAW",
+    "PD2_EFUSE_FAULT_N", "PD2_I2C_SCL", "PD2_I2C_SDA", "PD2_PATH_EN",
+    "PD2_TCPC_IRQ_N", "PD2_VALID_N", "PD2_VBUS_RAW",
+    "TCP0_DDC_SCL", "TCP0_DDC_SDA", "TCP0_HPD",
+    "TCP0_TX0_N", "TCP0_TX0_P", "TCP0_TX1_N", "TCP0_TX1_P",
+    "TCP0_TXRX0_N", "TCP0_TXRX0_P", "TCP0_TXRX1_N", "TCP0_TXRX1_P",
+    "USBC1_DM", "USBC1_DP", "USBC1_SSRX_N", "USBC1_SSRX_P",
+    "USBC1_SSTX_N", "USBC1_SSTX_P",
+    "USBC2_DM", "USBC2_DP", "USBC2_SSRX_N", "USBC2_SSRX_P",
+    "USBC2_SSTX_N", "USBC2_SSTX_P",
+]
+for _label in _FPC_BOUNDARY_LABELS:
+    for _kind in ("Hierarchical Label", "Label"):
+        ALLOWED_ERC_WARNINGS[(
+            "warning", "isolated_pin_label",
+            "Label connected to only one pin",
+            (f"{_kind} '{_label}'",),
+        )] += 1
+
+# Board split Phase 2.4 pass-through FPC nets: HUB_DS1_DP/DM cross FPC-1 and
+# FPC-2 through the center with no center-side component; FG_VSS and
+# PACK_POS_FUSED are FPC-3 boundary nets whose center-side host is the gauge/
+# ship-FET only; USB_PD_SELECTED and USB_PORT_5V are consumed by the left
+# board's selector now.  Their root labels are Phase 4 connector placeholders.
+for _label in ("HUB_DS1_DM", "HUB_DS1_DP", "FG_VSS", "PACK_POS_FUSED",
+               "USB_PD_SELECTED", "USB_PORT_5V"):
+    ALLOWED_ERC_WARNINGS[(
+        "error", "label_dangling",
+        "Label not connected",
+        (f"Label '{_label}'",),
+    )] += 1
 
 # The user-facing maker header adds eight more instances of the same flattened
 # stock TPD4E05U06 variant. Keep the allowlist reference-specific so a warning

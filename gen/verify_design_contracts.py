@@ -78,8 +78,9 @@ def expect_value_prefix(components, ref: str, prefix: str, label: str | None = N
     expect_prefix(comp(components, ref).value, prefix, label or f"{ref} value")
 
 
-def component_flags() -> tuple[set[str], set[str]]:
-    root = ET.parse(sync.NETLIST).getroot()
+def component_flags(project: str = "ducktop2") -> tuple[set[str], set[str]]:
+    _sch, netlist = sync.PROJECTS[project]
+    root = ET.parse(netlist).getroot()
     dnp: set[str] = set()
     exclude_bom: set[str] = set()
     for node in root.findall(".//comp"):
@@ -291,7 +292,7 @@ def check_custom_footprint_sources() -> None:
             fail(f"IM68A130 source footprint is missing {required}")
 
 
-def check_active_custom_footprint_pin_sets(components) -> None:
+def check_active_custom_footprint_pin_sets(components, min_custom: int = 10) -> None:
     """Require every active project-local symbol pin to exist in its footprint."""
     checked: set[str] = set()
     for component in components.values():
@@ -307,7 +308,7 @@ def check_active_custom_footprint_pin_sets(components) -> None:
         if missing:
             fail(f"{component.ref} symbol pins absent from {path.name}: {missing}")
         checked.add(name)
-    if len(checked) < 10:
+    if len(checked) < min_custom:
         fail(f"unexpectedly few active custom footprints checked: {len(checked)}")
 
 
@@ -347,134 +348,14 @@ def check_oled(components, fps=None):
 
 
 def check_battery_and_charger(components):
-    for pin in ("1", "2"):
-        expect(net(components, "J2", pin), "/Power & Battery/PACK_POS_RAW",
-               f"J2 paired pack-positive pin {pin}")
-    for pin in ("3", "4"):
-        expect(net(components, "J2", pin), "/Power & Battery/PACK_NEG_RAW",
-               f"J2 paired raw pack-negative pin {pin}")
-    expect(net(components, "J2", "5"), "/Power & Battery/CELL1_TAP", "J2 cell-1 tap")
-    expect(net(components, "J2", "6"), "/Power & Battery/CELL2_TAP", "J2 cell-2 tap")
-
-    # Autonomous per-cell primary protection.  These checks deliberately cover
-    # physical pin numbers, sense direction, FET orientation, and every strap.
-    for pin, want in {
-        "1": "/Power & Battery/BMS_VDD", "2": "/Power & Battery/BMS_AVDD",
-        "3": "/Power & Battery/BMS_VC3_TOP", "4": "/Power & Battery/BMS_VC3_TOP",
-        "5": "/Power & Battery/BMS_VC3_TOP", "6": "/Power & Battery/BMS_VC2",
-        "7": "/Power & Battery/BMS_VC1", "8": "/Power & Battery/BMS_VC0",
-        "9": "/Power & Battery/PACK_NEG_RAW", "10": "/Power & Battery/BMS_SRP",
-        "11": "/Power & Battery/BMS_SRN", "12": "/Power & Battery/BMS_DSG_DRV",
-        "13": "/Power & Battery/BMS_CHG_DRV", "14": "/Power & Battery/BMS_LD",
-        "16": "/Power & Battery/PACK_NEG_RAW", "17": "/Power & Battery/BMS_OCDP",
-        "18": "/Power & Battery/BMS_TS_UNUSED", "20": "/Power & Battery/PACK_NEG_RAW",
-        "22": "/Power & Battery/BMS_PRES", "23": "/Power & Battery/PACK_NEG_RAW",
-        "24": "/Power & Battery/PACK_NEG_RAW",
-    }.items():
-        expect(net(components, "U719", pin), want, f"BQ7791500 pin {pin}")
-    for pin in ("15", "19", "21"):
-        expect_unconnected(components, "U719", pin)
-    expect(comp(components, "U719").footprint,
-           "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm", "BQ7791500 exact footprint")
-    expect(prop(components, "U719", "MPN"), "BQ7791500PWR", "BQ7791500 exact MPN")
-
-    for ref, value, p1, p2 in (
-        ("R840", "1k 1%", "/Power & Battery/PACK_POS_RAW", "/Power & Battery/BMS_VDD"),
-        ("R841", "75R 1%", "/Power & Battery/PACK_NEG_RAW", "/Power & Battery/BMS_VC0"),
-        ("R842", "75R 1%", "/Power & Battery/CELL1_TAP", "/Power & Battery/BMS_VC1"),
-        ("R843", "75R 1%", "/Power & Battery/CELL2_TAP", "/Power & Battery/BMS_VC2"),
-        ("R844", "75R 1%", "/Power & Battery/PACK_POS_RAW", "/Power & Battery/BMS_VC3_TOP"),
-        ("R845", "100R", "/Power & Battery/PACK_NEG_RAW", "/Power & Battery/BMS_SRP"),
-        ("R846", "100R", "/Power & Battery/BMS_SENSE_N", "/Power & Battery/BMS_SRN"),
-        ("R847", "4.53k 1%", "/Power & Battery/BMS_DSG_DRV", "/Power & Battery/BMS_DSG_GATE"),
-        ("R848", "1k 1%", "/Power & Battery/BMS_CHG_DRV", "/Power & Battery/BMS_CHG_GATE"),
-        ("R849", "1M 5%", "/Power & Battery/BMS_DSG_GATE", "/Power & Battery/BMS_SENSE_N"),
-        ("R850", "3.3M 5%", "/Power & Battery/BMS_CHG_GATE", "/Power & Battery/FG_VSS"),
-        ("R851", "453k 1%", "/Power & Battery/BMS_LD", "/Power & Battery/FG_VSS"),
-        ("R852", "10k 5%", "/Power & Battery/PACK_POS_RAW", "/Power & Battery/BMS_PRES"),
-        ("R853", "10k 1%", "/Power & Battery/BMS_TS_UNUSED", "/Power & Battery/PACK_NEG_RAW"),
-        ("R854", "604k 1%", "/Power & Battery/BMS_OCDP", "/Power & Battery/PACK_NEG_RAW"),
-    ):
-        expect_value_prefix(components, ref, value, f"{ref} BQ7791500 support value")
-        expect(net(components, ref, "1"), p1, f"{ref} BQ7791500 pin 1")
-        expect(net(components, ref, "2"), p2, f"{ref} BQ7791500 pin 2")
-    for ref, value, p1, p2 in (
-        ("C840", "1u 25V", "/Power & Battery/BMS_VDD", "/Power & Battery/PACK_NEG_RAW"),
-        ("C841", "1u 10V", "/Power & Battery/BMS_AVDD", "/Power & Battery/PACK_NEG_RAW"),
-        ("C842", "1u 10V X7R", "/Power & Battery/BMS_VC0", "/Power & Battery/PACK_NEG_RAW"),
-        ("C843", "1u 10V X7R", "/Power & Battery/BMS_VC1", "/Power & Battery/BMS_VC0"),
-        ("C844", "1u 10V X7R", "/Power & Battery/BMS_VC2", "/Power & Battery/BMS_VC1"),
-        ("C848", "1u 10V X7R", "/Power & Battery/BMS_VC3_TOP", "/Power & Battery/BMS_VC2"),
-        ("C845", "100n", "/Power & Battery/BMS_SRP", "/Power & Battery/PACK_NEG_RAW"),
-        ("C846", "100n", "/Power & Battery/BMS_SRP", "/Power & Battery/BMS_SRN"),
-        ("C847", "100n", "/Power & Battery/BMS_SRN", "/Power & Battery/PACK_NEG_RAW"),
-    ):
-        expect_value_prefix(components, ref, value, f"{ref} BQ7791500 filter value")
-        expect(net(components, ref, "1"), p1, f"{ref} BQ7791500 pin 1")
-        expect(net(components, ref, "2"), p2, f"{ref} BQ7791500 pin 2")
-    expect_value_prefix(components, "RS11", "8mOhm 1% 2W", "BQ7791500 current shunt")
-    expect(net(components, "RS11", "1"), "/Power & Battery/PACK_NEG_RAW", "BQ7791500 SRP shunt side")
-    expect(net(components, "RS11", "2"), "/Power & Battery/BMS_SENSE_N", "BQ7791500 SRN shunt side")
-    expect(prop(components, "RS11", "MPN"), "WSLP25128L000FEA", "BQ7791500 exact shunt")
-    for ref, source, gate in (
-        ("Q703", "/Power & Battery/BMS_SENSE_N", "/Power & Battery/BMS_DSG_GATE"),
-        ("Q704", "/Power & Battery/FG_VSS", "/Power & Battery/BMS_CHG_GATE"),
-    ):
-        for pin in ("1", "2", "3"):
-            expect(net(components, ref, pin), source, f"{ref} source pin {pin}")
-        expect(net(components, ref, "4"), gate, f"{ref} gate")
-        expect(net(components, ref, "5"), "/Power & Battery/BMS_FET_COMMON", f"{ref} common drain")
-        expect(prop(components, ref, "MPN"), "CSD18540Q5B", f"{ref} exact MOSFET")
-
-    expect(net(components, "F1", "1"), "/Power & Battery/PACK_POS_RAW", "F1 input")
-    expect(net(components, "F1", "2"), "/Power & Battery/BAT_PROT_VIN", "F1 protected-entry output")
-    expect(net(components, "RS1", "1"), "/Power & Battery/FG_VSS", "RS1 pack-side Kelvin node")
+    # Board split Phase 2.4: the pack protection contracts (J2, F1, U719
+    # BQ77915, U11 LTC4368, Q11/Q12, Q703/Q704, RS10/RS11, C725, R700-R709,
+    # Q701, C700/C724) moved to the BMS daughterboard (bms/bms.kicad_sch).
+    # They are verified by check_bms_pack() against the bms project netlist.
+    # The center keeps only the gauge (U10), charger (U2), and ship FET (Q25)
+    # contracts below, plus the pack-boundary testpoints that remain here.
+    expect(net(components, "RS1", "1"), "/FG_VSS", "RS1 pack-side Kelvin node (FPC-3 boundary)")
     expect(net(components, "RS1", "2"), "GND", "RS1 system side")
-    for pin, want in {
-        "1": "/Power & Battery/BAT_PROT_VIN", "2": "/Power & Battery/BAT_PROT_UV",
-        "3": "/Power & Battery/BAT_PROT_OV", "4": "GND", "5": "GND",
-        "6": "/Power & Battery/BAT_PROT_SHDN", "7": "/PACK_FAULT_N",
-        "8": "/Power & Battery/PACK_POS_FUSED",
-        "9": "/Power & Battery/BAT_PROT_SENSE", "10": "/Power & Battery/BAT_PROT_GATE",
-    }.items():
-        expect(net(components, "U11", pin), want, f"LTC4368-1 pin {pin}")
-    for ref, drain in (("Q11", "/Power & Battery/BAT_PROT_VIN"),
-                       ("Q12", "/Power & Battery/BAT_PROT_SENSE")):
-        for pin in ("1", "2", "3"):
-            expect(net(components, ref, pin), "/Power & Battery/BAT_PROT_FET_COMMON", f"{ref} common source {pin}")
-        expect(net(components, ref, "4"), "/Power & Battery/BAT_PROT_GATE", f"{ref} gate")
-        expect(net(components, ref, "5"), drain, f"{ref} drain")
-    expect(net(components, "RS10", "1"), "/Power & Battery/BAT_PROT_SENSE", "LTC4368 shunt sense side")
-    expect(net(components, "RS10", "2"), "/Power & Battery/PACK_POS_FUSED", "LTC4368 shunt output side")
-    expect_value_prefix(components, "RS10", "11mOhm", "LTC4368 bounded-current shunt")
-    expect_value_prefix(components, "C725", "10u 25V X7R", "LTC4368 VOUT capacitor")
-    expect(net(components, "C725", "1"), "/Power & Battery/PACK_POS_FUSED",
-           "LTC4368 VOUT capacitor protected rail")
-    expect(net(components, "C725", "2"), "GND", "LTC4368 VOUT capacitor return")
-    expect(prop(components, "C725", "MPN"), "GRM21BZ71E106KE15L",
-           "LTC4368 VOUT capacitor exact MPN")
-    expect_value_prefix(components, "R700", "3.09M 1%", "LTC4368 pack-window top")
-    expect_value_prefix(components, "R701", "73.2k 1%", "LTC4368 pack-window middle")
-    expect_value_prefix(components, "R702", "121k 1%", "LTC4368 pack-window bottom")
-    expect(net(components, "R703", "1"), "/Power & Battery/BAT_PROT_GATE", "LTC4368 CGATE resistor input")
-    expect(net(components, "R703", "2"), "/Power & Battery/BAT_PROT_CGATE", "LTC4368 CGATE resistor output")
-    expect(net(components, "C700", "1"), "/Power & Battery/BAT_PROT_CGATE", "LTC4368 CGATE capacitor")
-    expect(net(components, "C700", "2"), "GND", "LTC4368 CGATE capacitor return")
-    expect(net(components, "C724", "1"), "/Power & Battery/BAT_PROT_GATE", "LTC4368 hot-swap capacitor gate")
-    expect(net(components, "C724", "2"), "/Power & Battery/BAT_PROT_FET_COMMON", "LTC4368 hot-swap capacitor source")
-    expect(net(components, "R707", "1"), "/Power & Battery/BAT_PROT_VIN", "pack protector SHDN pull-up source")
-    expect(net(components, "R707", "2"), "/Power & Battery/BAT_PROT_SHDN", "pack protector SHDN pull-up node")
-    expect_value_prefix(components, "R707", "100k", "pack protector SHDN pull-up")
-    expect(net(components, "R708", "1"), "/MCU_3V3", "pack protector FAULT pull-up rail")
-    expect(net(components, "R708", "2"), "/PACK_FAULT_N", "pack protector FAULT output")
-    expect_value_prefix(components, "R708", "10k", "pack protector FAULT pull-up")
-    for pin, want in {
-        "1": "/PACK_RETRY_PULSE", "2": "GND", "3": "/Power & Battery/BAT_PROT_SHDN",
-    }.items():
-        expect(net(components, "Q701", pin), want, f"pack protector retry transistor pin {pin}")
-    expect_value_prefix(components, "R709", "100k", "pack retry default-off pull-down")
-    expect(net(components, "R709", "1"), "/PACK_RETRY_PULSE", "pack retry pull-down signal")
-    expect(net(components, "R709", "2"), "GND", "pack retry pull-down return")
     for obsolete in ("NTC2", "NTC4"):
         if obsolete in components:
             fail(f"obsolete motherboard battery thermistor {obsolete} remains")
@@ -484,7 +365,7 @@ def check_battery_and_charger(components):
 
     for ref, want in {
         "TP1": "GND",
-        "TP2": "/Power & Battery/PACK_POS_FUSED",
+        "TP2": "/PACK_POS_FUSED",
         "TP3": "/VSYS",
         "TP4": "/EC_AON_IN",
         "TP7": "/MCU_3V3",
@@ -545,7 +426,7 @@ def check_battery_and_charger(components):
     for pin in ("1", "2", "3"):
         expect(net(components, "Q25", pin), "/Power & Battery/BAT_CHARGER", f"ship FET source pin {pin}")
     expect(net(components, "Q25", "4"), "/Power & Battery/SDRV_GATE", "ship FET gate")
-    expect(net(components, "Q25", "5"), "/Power & Battery/PACK_POS_FUSED", "ship FET pack-side drain")
+    expect(net(components, "Q25", "5"), "/PACK_POS_FUSED", "ship FET pack-side drain (FPC-3 boundary)")
     expect(prop(components, "Q25", "MPN"), "CSD17575Q3", "ship FET exact MPN")
     expect(comp(components, "Q25").footprint, "ducktop2:CSD19537Q3_DQG", "ship FET TI DQG footprint")
     expect(net(components, "U2", "25"), "/VSYS", "BQ25798 SYS")
@@ -604,8 +485,7 @@ def check_battery_and_charger(components):
         expect_value_prefix(components, ref, value, f"{ref} BQ25798 support value")
         expect(net(components, ref, "1"), net_a, f"{ref} BQ25798 support pin 1")
         expect(net(components, ref, "2"), net_b, f"{ref} BQ25798 support pin 2")
-    expect(net(components, "J190", "1"), "/Power & Battery/AUX_DC_RAW", "AUX/SOLAR terminal positive")
-    expect(net(components, "F190", "1"), "/Power & Battery/AUX_DC_RAW", "AUX fuse input")
+    expect(net(components, "F190", "1"), "/AUX_DC_RAW", "AUX fuse input (FPC-1 boundary from left board)")
     expect(net(components, "F190", "2"), "/Power & Battery/AUX_DC_FUSED", "AUX fuse output")
     expect(net(components, "D190", "1"), "/Power & Battery/AUX_DC_FUSED", "AUX TVS protected node")
     expect(net(components, "D190", "2"), "GND", "AUX TVS ground")
@@ -737,7 +617,7 @@ def check_battery_and_charger(components):
     expect(net(components, "U10", "1"), "/BQ_ALERT", "BQ34Z100 ALERT output")
     expect(net(components, "U10", "4"), "/Power & Battery/FG_BAT_SENSE", "BQ34Z100 BAT sense")
     expect(net(components, "U10", "6"), "/MCU_3V3", "BQ34Z100 REGIN/VCC")
-    expect(net(components, "U10", "8"), "/Power & Battery/FG_VSS", "BQ34Z100 battery-side VSS")
+    expect(net(components, "U10", "8"), "/FG_VSS", "BQ34Z100 battery-side VSS")
     expect(net(components, "U10", "9"), "/Power & Battery/FG_SRP", "BQ34Z100 SRP")
     expect(net(components, "U10", "10"), "/Power & Battery/FG_SRN", "BQ34Z100 SRN")
     expect(net(components, "U10", "11"), "/Power & Battery/FG_TS", "BQ34Z100 unused external TS pin")
@@ -745,14 +625,14 @@ def check_battery_and_charger(components):
     expect(net(components, "U10", "14"), "/I2C_SDA", "BQ34Z100 SDA")
     expect_value_prefix(components, "R855", "10k", "BQ34Z100 unused TS pulldown")
     expect(net(components, "R855", "1"), "/Power & Battery/FG_TS", "BQ34Z100 TS pulldown input")
-    expect(net(components, "R855", "2"), "/Power & Battery/FG_VSS", "BQ34Z100 TS pulldown return")
+    expect(net(components, "R855", "2"), "/FG_VSS", "BQ34Z100 TS pulldown return")
     expect_value_prefix(components, "R180", "220k", "fuel gauge divider top")
     expect_value_prefix(components, "R181", "16.5k", "fuel gauge divider bottom")
     expect(net(components, "R180", "1"), "/Power & Battery/BAT_PROT_VIN", "fuel gauge divider pack input")
-    expect(net(components, "R181", "2"), "/Power & Battery/FG_VSS", "fuel gauge divider Kelvin return")
+    expect(net(components, "R181", "2"), "/FG_VSS", "fuel gauge divider Kelvin return")
     for ref in ("C180", "C182", "C183", "R189"):
-        expect(net(components, ref, "2"), "/Power & Battery/FG_VSS", f"{ref} fuel-gauge Kelvin return")
-    expect(net(components, "R183", "1"), "/Power & Battery/FG_VSS", "fuel gauge SRP pack-side source")
+        expect(net(components, ref, "2"), "/FG_VSS", f"{ref} fuel-gauge Kelvin return")
+    expect(net(components, "R183", "1"), "/FG_VSS", "fuel gauge SRP pack-side source")
 
 
 def check_dnp_metadata(components):
@@ -1589,10 +1469,15 @@ def _check_legacy_ch224_inputs(components):
     expect(net(components, "C736", "1"), "/USB_PD_SELECTED", "selected-PD output capacitor")
 
 
-def check_five_port_usb_c_architecture(components):
-    """Assert the complete five-port data map and the two dual-role power paths."""
-    pd_sheet = "Power Inputs"
-    hub_sheet = "Native USB-C I/O"
+def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs",
+                                  hub_sheet: str = "Native USB-C I/O",
+                                  ports: tuple = (1, 2)):
+    """Assert the complete five-port data map and the two dual-role power paths.
+
+    Board split Phase 2.4: the five ports are spread across three boards.
+    ports=(1,) runs only the PD1/J21/left contracts (left_io), ports=(2,)
+    only PD2/J11/J12/right contracts (right_io), ports=(1, 2) runs everything.
+    """
 
     dual_role = (
         (1, "J21", "U41", 2000, {
@@ -1608,20 +1493,21 @@ def check_five_port_usb_c_architecture(components):
             "ssrx_p": None, "ssrx_n": None,
         }, True),
     )
+    dual_role = [dr for dr in dual_role if dr[0] in ports]
 
-    # End-to-end host-TX contract for the Mu-native left charging/data port.
-    # The Mu has no onboard TX coupling capacitors: C66/C67 are the one and
-    # only 100 nF series pair between A1 and the TUSB1142 SSTX inputs.
-    for mu_pin, capacitor, redriver_pin, raw_net, coupled_net in (
-        ("13", "C66", "16", "/Mu Carrier/USBC1_SSTX_RAW_P", "/USBC1_SSTX_P"),
-        ("15", "C67", "15", "/Mu Carrier/USBC1_SSTX_RAW_N", "/USBC1_SSTX_N"),
-    ):
-        expect(net(components, "A1", mu_pin), raw_net, f"Mu USB-C TX pin {mu_pin} raw side")
-        expect_value_prefix(components, capacitor, "100n", f"{capacitor} Mu USB-C TX coupling")
-        expect(net(components, capacitor, "1"), raw_net, f"{capacitor} Mu side")
-        expect(net(components, capacitor, "2"), coupled_net, f"{capacitor} redriver side")
-        expect(net(components, "U2000", redriver_pin), coupled_net,
-               f"U2000 pin {redriver_pin} receives coupled Mu TX")
+    # End-to-end host-TX contract for the Mu-native left charging/data port
+    # (center board only: A1 and C66/C67 live on the Mu carrier sheet).
+    if "A1" in components:
+        for mu_pin, capacitor, redriver_pin, raw_net, coupled_net in (
+            ("13", "C66", "16", "/Mu Carrier/USBC1_SSTX_RAW_P", "/USBC1_SSTX_P"),
+            ("15", "C67", "15", "/Mu Carrier/USBC1_SSTX_RAW_N", "/USBC1_SSTX_N"),
+        ):
+            expect(net(components, "A1", mu_pin), raw_net, f"Mu USB-C TX pin {mu_pin} raw side")
+            expect_value_prefix(components, capacitor, "100n", f"{capacitor} Mu USB-C TX coupling")
+            expect(net(components, capacitor, "1"), raw_net, f"{capacitor} Mu side")
+            expect(net(components, capacitor, "2"), coupled_net, f"{capacitor} redriver side")
+            expect(net(components, "U2000", redriver_pin), coupled_net,
+                   f"U2000 pin {redriver_pin} receives coupled Mu TX")
 
     for port, jref, tcpc, ubase, host, usb2_only in dual_role:
         raw = f"/PD{port}_VBUS_RAW"
@@ -1737,62 +1623,69 @@ def check_five_port_usb_c_architecture(components):
         expect_value_prefix(components, f"C{2000 + (port - 1) * 40 + 15}", "4.7u 25V",
                             f"{jref} pre-attach capacitance")
 
-    expect_contains(comp(components, "U14").value, "LTC4418", "two-input PD selector")
-    expect(net(components, "U14", "15"), "/USB_PD_SELECTED", "selected PD output")
-    expect(net(components, "U14", "17"), local_net(pd_sheet, "PD1_VBUS_GATED"), "PD1 selector input")
-    expect(net(components, "U14", "16"), local_net(pd_sheet, "PD2_VBUS_GATED"), "PD2 selector input")
+    if "U14" in components:
+        expect_contains(comp(components, "U14").value, "LTC4418", "two-input PD selector")
+        expect(net(components, "U14", "15"), "/USB_PD_SELECTED", "selected PD output")
+        expect(net(components, "U14", "17"), local_net(pd_sheet, "PD1_VBUS_GATED"), "PD1 selector input")
+        expect(net(components, "U14", "16"), local_net(pd_sheet, "PD2_VBUS_GATED"), "PD2 selector input")
     for component in components.values():
         if "CH224" in component.value:
             fail(f"obsolete CH224 power-only controller remains: {component.ref}")
 
-    expect_contains(comp(components, "U1700").value, "USB7206C", "six-port Gen2 hub")
-    expect(prop(components, "U1700", "MPN"), "USB7206C-I/KDX", "hub exact MPN")
-    for pin, want in {
-        "2": "/INTERNAL_USB_VBUS_VALID",
-        "89": "/USBC2_DP", "90": "/USBC2_DM",
-        "94": "/USBC2_SSTX_P", "95": "/USBC2_SSTX_N",
-        "5": "/HUB_DS1_DP", "6": "/HUB_DS1_DM",
-    }.items():
-        expect(net(components, "U1700", pin), want, f"USB7206C pin {pin}")
-    # DS1/DS4 are USB2-only after the board split; their SS pins (7/8/10/11
-    # for DS1, 36/37/39/40 for DS4) are retired no-connects.
-    for pin in ("7", "8", "10", "11", "36", "37", "39", "40"):
-        expect_unconnected(components, "U1700", pin)
-    # 2026-08-24 (92751f9): hub DIS5/DIS6 were repurposed from 0R-strapped
-    # disabled spares into two active internal USB-A spare ports (J24 USB3,
-    # J25 USB2).  The old R1730-R1733 disable-strap contracts are obsolete.
-    spare_ports = (
-        ("J24", "USB 3.0 Type-A internal header (hub DIS5)",
-         {"2": "HUB_DIS5_DM", "3": "HUB_DIS5_DP", "5": "HUB_DIS5_RX_N",
-          "6": "HUB_DIS5_RX_P"}),
-        ("J25", "USB 2.0 Type-A internal header (hub DIS6)",
-         {"2": "HUB_DIS6_DM", "3": "HUB_DIS6_DP"}),
-    )
-    for jref, want_value, data_pins in spare_ports:
-        expect_contains(comp(components, jref).value, "USB",
-                        f"{jref} is an active USB-A spare port")
-        for pin, local_name in data_pins.items():
-            want = local_net(hub_sheet, local_name)
-            expect(net(components, jref, pin), want,
-                   f"{jref} data pin {pin} wired to hub {local_name}")
-        for pin in ("1",):
-            expect(net(components, jref, pin), local_net(hub_sheet, f"J{jref[1:]}_5V_PRE"),
-                   f"{jref} VBUS pre-switch")
-    # DIS5/DIS6 ESD clamp pairs (USBLC6-2P6): clamp the D+/D- lines to GND.
-    for uref, (dp, dm) in (("U1801", ("HUB_DIS5_DP", "HUB_DIS5_DM")),
-                           ("U1804", ("HUB_DIS6_DP", "HUB_DIS6_DM"))):
-        expect_contains(comp(components, uref).value, "USBLC6",
-                        f"{uref} USBLC6-2P6 D+/D- clamp")
-        expect(net(components, uref, "1"), local_net(hub_sheet, dp),
-               f"{uref} DP clamp input")
-        expect(net(components, uref, "3"), local_net(hub_sheet, dm),
-               f"{uref} DM clamp input")
-        for pin in ("2", "5"):
-            expect(net(components, uref, pin), "GND", f"{uref} clamp GND")
+    if "U1700" in components:
+        expect_contains(comp(components, "U1700").value, "USB7206C", "six-port Gen2 hub")
+        expect(prop(components, "U1700", "MPN"), "USB7206C-I/KDX", "hub exact MPN")
+        for pin, want in {
+            "2": "/INTERNAL_USB_VBUS_VALID",
+            "89": "/USBC2_DP", "90": "/USBC2_DM",
+            "94": "/USBC2_SSTX_P", "95": "/USBC2_SSTX_N",
+            "5": "/HUB_DS1_DP", "6": "/HUB_DS1_DM",
+        }.items():
+            expect(net(components, "U1700", pin), want, f"USB7206C pin {pin}")
+        # DS1/DS4 are USB2-only after the board split; their SS pins (7/8/10/11
+        # for DS1, 36/37/39/40 for DS4) are retired no-connects.
+        for pin in ("7", "8", "10", "11", "36", "37", "39", "40"):
+            expect_unconnected(components, "U1700", pin)
+        # 2026-08-24 (92751f9): hub DIS5/DIS6 were repurposed from 0R-strapped
+        # disabled spares into two active internal USB-A spare ports (J24 USB3,
+        # J25 USB2).  The old R1730-R1733 disable-strap contracts are obsolete.
+        spare_ports = (
+            ("J24", "USB 3.0 Type-A internal header (hub DIS5)",
+             {"2": "HUB_DIS5_DM", "3": "HUB_DIS5_DP", "5": "HUB_DIS5_RX_N",
+              "6": "HUB_DIS5_RX_P"}),
+            ("J25", "USB 2.0 Type-A internal header (hub DIS6)",
+             {"2": "HUB_DIS6_DM", "3": "HUB_DIS6_DP"}),
+        )
+        for jref, want_value, data_pins in spare_ports:
+            expect_contains(comp(components, jref).value, "USB",
+                            f"{jref} is an active USB-A spare port")
+            for pin, local_name in data_pins.items():
+                want = local_net(hub_sheet, local_name)
+                expect(net(components, jref, pin), want,
+                       f"{jref} data pin {pin} wired to hub {local_name}")
+            for pin in ("1",):
+                expect(net(components, jref, pin), local_net(hub_sheet, f"J{jref[1:]}_5V_PRE"),
+                       f"{jref} VBUS pre-switch")
+        # DIS5/DIS6 ESD clamp pairs (USBLC6-2P6): clamp the D+/D- lines to GND.
+        for uref, (dp, dm) in (("U1801", ("HUB_DIS5_DP", "HUB_DIS5_DM")),
+                               ("U1804", ("HUB_DIS6_DP", "HUB_DIS6_DM"))):
+            expect_contains(comp(components, uref).value, "USBLC6",
+                            f"{uref} USBLC6-2P6 D+/D- clamp")
+            expect(net(components, uref, "1"), local_net(hub_sheet, dp),
+                   f"{uref} DP clamp input")
+            expect(net(components, uref, "3"), local_net(hub_sheet, dm),
+                   f"{uref} DM clamp input")
+            for pin in ("2", "5"):
+                expect(net(components, uref, pin), "GND", f"{uref} clamp GND")
 
-    source_ports = (("J22", 2, 1780, False), ("J23", 3, 1740, False), ("J12", 4, 1760, True))
-    for jref, port, base, usb2_only in source_ports:
-        local = lambda name: local_net(hub_sheet, name)
+    source_ports = tuple(
+        sp for sp in (("J22", 2, 1780, False, hub_sheet),
+                      ("J23", 3, 1740, False, hub_sheet),
+                      ("J12", 4, 1760, True, pd_sheet))
+        if sp[0] in components
+    )
+    for jref, port, base, usb2_only, port_sheet in source_ports:
+        local = lambda name, sheet=port_sheet: local_net(sheet, name)
         expect(comp(components, jref).footprint,
                "Connector_USB:USB_C_Receptacle_Molex_105450-0101", f"{jref} exact connector")
         expect_contains(comp(components, f"U{base + 1}").value, "TPS25810", f"{jref} DFP controller")
@@ -1825,16 +1718,16 @@ def check_five_port_usb_c_architecture(components):
                 expect(net(components, jref, pin), want, f"{jref} data pin {pin}")
 
     external_ports = {"J11", "J12", "J21", "J22", "J23"}
+    external_ports = {ref for ref in external_ports if ref in components}
     found_ports = {
         ref for ref, item in components.items()
         if item.value.startswith("USB-C ") and ref in external_ports
     }
     expect(",".join(sorted(found_ports)), ",".join(sorted(external_ports)),
-           "complete five-port external USB-C set")
+           f"complete external USB-C set on this board ({sorted(external_ports)})")
 
 
-def check_external_hdmi_path(components):
-    sheet = "TCP0 External HDMI"
+def check_external_hdmi_path(components, sheet: str = "TCP0 External HDMI"):
     for pin, want in {
         "1": "EXT_HDMI_D2_P", "3": "EXT_HDMI_D2_N", "4": "EXT_HDMI_D1_P", "6": "EXT_HDMI_D1_N",
         "7": "EXT_HDMI_D0_P", "9": "EXT_HDMI_D0_N", "10": "EXT_HDMI_CK_P", "12": "EXT_HDMI_CK_N",
@@ -2735,8 +2628,7 @@ def check_system_audio(components):
     expect(prop(components, "LED430", "MPN"), "APT1608SGC", "microphone indicator exact MPN")
 
 
-def check_ethernet(components):
-    sheet = "Gigabit Ethernet"
+def check_ethernet(components, sheet: str = "Gigabit Ethernet", project: str = "ducktop2"):
     loc = lambda name: local_net(sheet, name)
 
     expect_value_prefix(components, "U500", "RTL8111H-CG-RH", "Ethernet controller")
@@ -2828,7 +2720,7 @@ def check_ethernet(components):
            "Ethernet chassis capacitor manufacturer")
     expect(prop(components, "C514", "MPN"), "C1812C102KGRACTU",
            "Ethernet chassis capacitor MPN")
-    dnp, exclude_bom = component_flags()
+    dnp, exclude_bom = component_flags(project)
     if "R506" not in dnp or "R506" not in exclude_bom:
         fail("R506 direct chassis bond option must be DNP and excluded from BOM")
 
@@ -3175,39 +3067,196 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="run generated-netlist contracts without inspecting the in-progress PCB",
     )
+    parser.add_argument(
+        "--project",
+        choices=("ducktop2", "left_io", "right_io", "bms"),
+        default="ducktop2",
+        help="which board project to verify (board split Phase 2.4)",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    sync.export_netlist()
-    components = sync.parse_netlist()
+    sync.export_netlist(args.project)
+    components = sync.parse_netlist(args.project)
     pin_names = component_pin_names()
     fps = pcb_text = None
-    if not args.schematic_only:
+    if not args.schematic_only and args.project == "ducktop2":
         fps, pcb_text = footprint_map()
-    check_oled(components, fps)
+    if args.project == "bms":
+        check_bms_pack(components)
+        if args.schematic_only:
+            print("bms schematic design contract checks OK")
+        else:
+            print("bms design contract checks OK (PCB checks are center-board only)")
+        return 0
+
     check_custom_footprint_sources()
-    check_active_custom_footprint_pin_sets(components)
-    check_battery_and_charger(components)
-    check_dnp_metadata(components)
-    check_ec_core(components)
-    check_mu_carrier(components, pin_names)
-    check_five_port_usb_c_architecture(components)
-    check_external_hdmi_path(components)
-    check_internal_services(components)
-    check_keyboard_interface(components)
-    check_optional_radio_interface(components)
-    check_system_audio(components)
-    check_ethernet(components)
-    check_maker_mcu(components)
-    if args.schematic_only:
+    min_custom = {"ducktop2": 10, "left_io": 4, "right_io": 2, "bms": 4}[args.project]
+    check_active_custom_footprint_pin_sets(components, min_custom=min_custom)
+    if args.project == "ducktop2":
+        check_oled(components, fps)
+        check_battery_and_charger(components)
+        check_dnp_metadata(components)
+        check_ec_core(components)
+        check_mu_carrier(components, pin_names)
+        check_internal_services(components)
+        check_keyboard_interface(components)
+        check_optional_radio_interface(components)
+        check_system_audio(components)
+        check_maker_mcu(components)
         print("ducktop2 schematic design contract checks OK")
-    else:
+    elif args.project == "left_io":
+        check_five_port_usb_c_architecture(components, pd_sheet="PD1 Dual-Role",
+                                           hub_sheet="USB Hub + Ports", ports=(1,))
+        print("left_io schematic design contract checks OK")
+    elif args.project == "right_io":
+        check_five_port_usb_c_architecture(components, pd_sheet="PD2 Dual-Role",
+                                           hub_sheet="USB Hub + Ports", ports=(2,))
+        check_external_hdmi_path(components, sheet="HDMI")
+        check_ethernet(components, sheet="GbE", project="right_io")
+        print("right_io schematic design contract checks OK")
+    if args.project == "ducktop2" and not args.schematic_only:
         check_main_pcb_contract(components, fps, pcb_text)
         check_drc_fatal_categories(run_current_drc())
         print("ducktop2 full design contract checks OK")
     return 0
+
+def check_bms_pack(components):
+    """BMS daughterboard pack protection contracts (board split Phase 2.4).
+
+    Runs against the bms project netlist (single flat sheet, no sheet prefix).
+    Covers J2, F1, U719 BQ7791500, U11 LTC4368-1, Q11/Q12 reverse FETs,
+    Q703/Q704 charge/discharge FETs, RS10/RS11 shunts, and the full
+    filter/gate/divider/retry network.
+    """
+    for pin in ("1", "2"):
+        expect(net(components, "J2", pin), "/PACK_POS_RAW",
+               f"J2 paired pack-positive pin {pin}")
+    for pin in ("3", "4"):
+        expect(net(components, "J2", pin), "/PACK_NEG_RAW",
+               f"J2 paired raw pack-negative pin {pin}")
+    expect(net(components, "J2", "5"), "/CELL1_TAP", "J2 cell-1 tap")
+    expect(net(components, "J2", "6"), "/CELL2_TAP", "J2 cell-2 tap")
+
+    # Autonomous per-cell primary protection.  These checks deliberately cover
+    # physical pin numbers, sense direction, FET orientation, and every strap.
+    for pin, want in {
+        "1": "/BMS_VDD", "2": "/BMS_AVDD",
+        "3": "/BMS_VC3_TOP", "4": "/BMS_VC3_TOP",
+        "5": "/BMS_VC3_TOP", "6": "/BMS_VC2",
+        "7": "/BMS_VC1", "8": "/BMS_VC0",
+        "9": "/PACK_NEG_RAW", "10": "/BMS_SRP",
+        "11": "/BMS_SRN", "12": "/BMS_DSG_DRV",
+        "13": "/BMS_CHG_DRV", "14": "/BMS_LD",
+        "16": "/PACK_NEG_RAW", "17": "/BMS_OCDP",
+        "18": "/BMS_TS_UNUSED", "20": "/PACK_NEG_RAW",
+        "22": "/BMS_PRES", "23": "/PACK_NEG_RAW",
+        "24": "/PACK_NEG_RAW",
+    }.items():
+        expect(net(components, "U719", pin), want, f"BQ7791500 pin {pin}")
+    for pin in ("15", "19", "21"):
+        expect_unconnected(components, "U719", pin)
+    expect(comp(components, "U719").footprint,
+           "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm", "BQ7791500 exact footprint")
+    expect(prop(components, "U719", "MPN"), "BQ7791500PWR", "BQ7791500 exact MPN")
+
+    for ref, value, p1, p2 in (
+        ("R840", "1k 1%", "/PACK_POS_RAW", "/BMS_VDD"),
+        ("R841", "75R 1%", "/PACK_NEG_RAW", "/BMS_VC0"),
+        ("R842", "75R 1%", "/CELL1_TAP", "/BMS_VC1"),
+        ("R843", "75R 1%", "/CELL2_TAP", "/BMS_VC2"),
+        ("R844", "75R 1%", "/PACK_POS_RAW", "/BMS_VC3_TOP"),
+        ("R845", "100R", "/PACK_NEG_RAW", "/BMS_SRP"),
+        ("R846", "100R", "/BMS_SENSE_N", "/BMS_SRN"),
+        ("R847", "4.53k 1%", "/BMS_DSG_DRV", "/BMS_DSG_GATE"),
+        ("R848", "1k 1%", "/BMS_CHG_DRV", "/BMS_CHG_GATE"),
+        ("R849", "1M 5%", "/BMS_DSG_GATE", "/BMS_SENSE_N"),
+        ("R850", "3.3M 5%", "/BMS_CHG_GATE", "/FG_VSS"),
+        ("R851", "453k 1%", "/BMS_LD", "/FG_VSS"),
+        ("R852", "10k 5%", "/PACK_POS_RAW", "/BMS_PRES"),
+        ("R853", "10k 1%", "/BMS_TS_UNUSED", "/PACK_NEG_RAW"),
+        ("R854", "604k 1%", "/BMS_OCDP", "/PACK_NEG_RAW"),
+    ):
+        expect_value_prefix(components, ref, value, f"{ref} BQ7791500 support value")
+        expect(net(components, ref, "1"), p1, f"{ref} BQ7791500 pin 1")
+        expect(net(components, ref, "2"), p2, f"{ref} BQ7791500 pin 2")
+    for ref, value, p1, p2 in (
+        ("C840", "1u 25V", "/BMS_VDD", "/PACK_NEG_RAW"),
+        ("C841", "1u 10V", "/BMS_AVDD", "/PACK_NEG_RAW"),
+        ("C842", "1u 10V X7R", "/BMS_VC0", "/PACK_NEG_RAW"),
+        ("C843", "1u 10V X7R", "/BMS_VC1", "/BMS_VC0"),
+        ("C844", "1u 10V X7R", "/BMS_VC2", "/BMS_VC1"),
+        ("C848", "1u 10V X7R", "/BMS_VC3_TOP", "/BMS_VC2"),
+        ("C845", "100n", "/BMS_SRP", "/PACK_NEG_RAW"),
+        ("C846", "100n", "/BMS_SRP", "/BMS_SRN"),
+        ("C847", "100n", "/BMS_SRN", "/PACK_NEG_RAW"),
+    ):
+        expect_value_prefix(components, ref, value, f"{ref} BQ7791500 filter value")
+        expect(net(components, ref, "1"), p1, f"{ref} BQ7791500 pin 1")
+        expect(net(components, ref, "2"), p2, f"{ref} BQ7791500 pin 2")
+    expect_value_prefix(components, "RS11", "8mOhm 1% 2W", "BQ7791500 current shunt")
+    expect(net(components, "RS11", "1"), "/PACK_NEG_RAW", "BQ7791500 SRP shunt side")
+    expect(net(components, "RS11", "2"), "/BMS_SENSE_N", "BQ7791500 SRN shunt side")
+    expect(prop(components, "RS11", "MPN"), "WSLP25128L000FEA", "BQ7791500 exact shunt")
+    for ref, source, gate in (
+        ("Q703", "/BMS_SENSE_N", "/BMS_DSG_GATE"),
+        ("Q704", "/FG_VSS", "/BMS_CHG_GATE"),
+    ):
+        for pin in ("1", "2", "3"):
+            expect(net(components, ref, pin), source, f"{ref} source pin {pin}")
+        expect(net(components, ref, "4"), gate, f"{ref} gate")
+        expect(net(components, ref, "5"), "/BMS_FET_COMMON", f"{ref} common drain")
+        expect(prop(components, ref, "MPN"), "CSD18540Q5B", f"{ref} exact MOSFET")
+
+    expect(net(components, "F1", "1"), "/PACK_POS_RAW", "F1 input")
+    expect(net(components, "F1", "2"), "/BAT_PROT_VIN", "F1 protected-entry output")
+    for pin, want in {
+        "1": "/BAT_PROT_VIN", "2": "/BAT_PROT_UV",
+        "3": "/BAT_PROT_OV", "4": "/GND", "5": "/GND",
+        "6": "/BAT_PROT_SHDN", "7": "/PACK_FAULT_N",
+        "8": "/PACK_POS_FUSED",
+        "9": "/BAT_PROT_SENSE", "10": "/BAT_PROT_GATE",
+    }.items():
+        expect(net(components, "U11", pin), want, f"LTC4368-1 pin {pin}")
+    for ref, drain in (("Q11", "/BAT_PROT_VIN"),
+                       ("Q12", "/BAT_PROT_SENSE")):
+        for pin in ("1", "2", "3"):
+            expect(net(components, ref, pin), "/BAT_PROT_FET_COMMON", f"{ref} common source {pin}")
+        expect(net(components, ref, "4"), "/BAT_PROT_GATE", f"{ref} gate")
+        expect(net(components, ref, "5"), drain, f"{ref} drain")
+    expect(net(components, "RS10", "1"), "/BAT_PROT_SENSE", "LTC4368 shunt sense side")
+    expect(net(components, "RS10", "2"), "/PACK_POS_FUSED", "LTC4368 shunt output side")
+    expect_value_prefix(components, "RS10", "11mOhm", "LTC4368 bounded-current shunt")
+    expect_value_prefix(components, "C725", "10u 25V X7R", "LTC4368 VOUT capacitor")
+    expect(net(components, "C725", "1"), "/PACK_POS_FUSED",
+           "LTC4368 VOUT capacitor protected rail")
+    expect(net(components, "C725", "2"), "/GND", "LTC4368 VOUT capacitor return")
+    expect(prop(components, "C725", "MPN"), "GRM21BZ71E106KE15L",
+           "LTC4368 VOUT capacitor exact MPN")
+    expect_value_prefix(components, "R700", "3.09M 1%", "LTC4368 pack-window top")
+    expect_value_prefix(components, "R701", "73.2k 1%", "LTC4368 pack-window middle")
+    expect_value_prefix(components, "R702", "121k 1%", "LTC4368 pack-window bottom")
+    expect(net(components, "R703", "1"), "/BAT_PROT_GATE", "LTC4368 CGATE resistor input")
+    expect(net(components, "R703", "2"), "/BAT_PROT_CGATE", "LTC4368 CGATE resistor output")
+    expect(net(components, "C700", "1"), "/BAT_PROT_CGATE", "LTC4368 CGATE capacitor")
+    expect(net(components, "C700", "2"), "/GND", "LTC4368 CGATE capacitor return")
+    expect(net(components, "C724", "1"), "/BAT_PROT_GATE", "LTC4368 hot-swap capacitor gate")
+    expect(net(components, "C724", "2"), "/BAT_PROT_FET_COMMON", "LTC4368 hot-swap capacitor source")
+    expect(net(components, "R707", "1"), "/BAT_PROT_VIN", "pack protector SHDN pull-up source")
+    expect(net(components, "R707", "2"), "/BAT_PROT_SHDN", "pack protector SHDN pull-up node")
+    expect_value_prefix(components, "R707", "100k", "pack protector SHDN pull-up")
+    expect(net(components, "R708", "1"), "/MCU_3V3", "pack protector FAULT pull-up rail")
+    expect(net(components, "R708", "2"), "/PACK_FAULT_N", "pack protector FAULT output")
+    expect_value_prefix(components, "R708", "10k", "pack protector FAULT pull-up")
+    for pin, want in {
+        "1": "/PACK_RETRY_PULSE", "2": "/GND", "3": "/BAT_PROT_SHDN",
+    }.items():
+        expect(net(components, "Q701", pin), want, f"pack protector retry transistor pin {pin}")
+    expect_value_prefix(components, "R709", "100k", "pack retry default-off pull-down")
+    expect(net(components, "R709", "1"), "/PACK_RETRY_PULSE", "pack retry pull-down signal")
+    expect(net(components, "R709", "2"), "/GND", "pack retry pull-down return")
 
 
 if __name__ == "__main__":
