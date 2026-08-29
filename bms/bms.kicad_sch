@@ -1,0 +1,3039 @@
+(kicad_sch
+  (version 20260306)
+  (generator "eeschema")
+  (generator_version "10.0")
+  (uuid 7e289a08-afcd-5577-84ea-625bf60cf20d)
+  (paper "A2")
+  (lib_symbols
+(symbol "BQ77915:BQ77915"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 19.05 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "BQ77915" (at 0 16.51 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/bq77915.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "3-series to 5-series autonomous primary Li-ion protector with cell balancing" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "BQ77915_0_1"
+			(rectangle (start -5.08 15.24) (end 5.08 -15.24) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "BQ77915_1_1"
+			(pin power_in line (at -7.62 13.97 0) (length 2.54) (name "VDD" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin power_out line (at -7.62 11.43 0) (length 2.54) (name "AVDD" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 8.89 0) (length 2.54) (name "VC5" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 6.35 0) (length 2.54) (name "VC4" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 3.81 0) (length 2.54) (name "VC3" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 1.27 0) (length 2.54) (name "VC2" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 -1.27 0) (length 2.54) (name "VC1" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 -3.81 0) (length 2.54) (name "VC0" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -7.62 -6.35 0) (length 2.54) (name "VSS" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 -8.89 0) (length 2.54) (name "SRP" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 -11.43 0) (length 2.54) (name "SRN" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+			(pin output line (at -7.62 -13.97 0) (length 2.54) (name "DSG" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 13.97 180) (length 2.54) (name "CTRD" (effects (font (size 1.27 1.27)))) (number "24" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 11.43 180) (length 2.54) (name "CTRC" (effects (font (size 1.27 1.27)))) (number "23" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 8.89 180) (length 2.54) (name "PRES" (effects (font (size 1.27 1.27)))) (number "22" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 7.62 6.35 180) (length 2.54) (name "CBO" (effects (font (size 1.27 1.27)))) (number "21" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 3.81 180) (length 2.54) (name "CCFG" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
+			(pin power_out line (at 7.62 1.27 180) (length 2.54) (name "VTB" (effects (font (size 1.27 1.27)))) (number "19" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 -1.27 180) (length 2.54) (name "TS" (effects (font (size 1.27 1.27)))) (number "18" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 -3.81 180) (length 2.54) (name "OCDP" (effects (font (size 1.27 1.27)))) (number "17" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 -6.35 180) (length 2.54) (name "CBI" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 7.62 -8.89 180) (length 2.54) (name "LPWR" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 -11.43 180) (length 2.54) (name "LD" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 7.62 -13.97 180) (length 2.54) (name "CHG" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "Connector_Generic:Conn_02x03_Odd_Even"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 1.27 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_02x03_Odd_Even"
+			(at 1.27 -5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_2x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_02x03_Odd_Even_1_1"
+			(rectangle
+				(start -1.27 3.81)
+				(end 3.81 -3.81)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 2.667)
+				(end 0 2.413)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 2.667)
+				(end 2.54 2.413)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 0.127)
+				(end 2.54 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -2.413)
+				(end 2.54 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 2.54 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 2.54 180)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 0 180)
+				(length 3.81)
+				(name "Pin_4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -2.54 180)
+				(length 3.81)
+				(name "Pin_6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Device:C"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0.254)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "C"
+			(at 0.635 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "C"
+			(at 0.635 -2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 0.9652 -3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "cap capacitor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "C_0_1"
+			(polyline
+				(pts
+					(xy -2.032 0.762) (xy 2.032 0.762)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -2.032 -0.762) (xy 2.032 -0.762)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "C_1_1"
+			(pin passive line
+				(at 0 3.81 270)
+				(length 2.794)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -3.81 90)
+				(length 2.794)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Device:Fuse"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "F"
+			(at 2.032 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Fuse"
+			(at -1.905 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -1.778 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Fuse"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "fuse"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "*Fuse*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Fuse_0_1"
+			(rectangle
+				(start -0.762 -2.54)
+				(end 0.762 2.54)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 2.54) (xy 0 -2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "Fuse_1_1"
+			(pin passive line
+				(at 0 3.81 270)
+				(length 1.27)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -3.81 90)
+				(length 1.27)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Device:R"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "R"
+			(at 2.032 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "R"
+			(at 0 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -1.778 0 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "R res resistor"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "R_0_1"
+			(rectangle
+				(start -1.016 -2.54)
+				(end 1.016 2.54)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "R_1_1"
+			(pin passive line
+				(at 0 3.81 270)
+				(length 1.27)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -3.81 90)
+				(length 1.27)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "LTC4368-1:LTC4368-1"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at 0 10.16 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "LTC4368-1" (at 0 7.62 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC4368.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "100V UV/OV and reverse-protection controller with bidirectional circuit breaker; -50mV reverse threshold option" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "LTC4368-1_0_1"
+			(rectangle (start -5.08 6.35) (end 5.08 -6.35) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "LTC4368-1_1_1"
+			(pin power_in line (at -7.62 5.08 0) (length 2.54) (name "VIN" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 2.54 0) (length 2.54) (name "UV" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 0 0) (length 2.54) (name "OV" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 -2.54 0) (length 2.54) (name "RETRY" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0 -8.89 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 -5.08 0) (length 2.54) (name "SHDN" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 7.62 -5.08 180) (length 2.54) (name "FAULT" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 -2.54 180) (length 2.54) (name "VOUT" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 7.62 0 180) (length 2.54) (name "SENSE" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 7.62 5.08 180) (length 2.54) (name "GATE" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "Q_NMOS_123S_4G_5678D:Q_NMOS_123S_4G_5678D"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "Q" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "Q_NMOS_123S_4G_5678D" (at 0 6.35 0) (effects (font (size 1.27 1.27))))
+		(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "N-channel power MOSFET with NexFET pinout: 1-3 source, 4 gate, unified drain land 5 (physical contacts 5-8)" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(symbol "Q_NMOS_123S_4G_5678D_0_1"
+			(rectangle (start -5.08 5.08) (end 5.08 -5.08) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "Q_NMOS_123S_4G_5678D_1_1"
+			(pin passive line (at -7.62 3.81 0) (length 2.54) (name "S" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at -7.62 1.27 0) (length 2.54) (name "S" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at -7.62 -1.27 0) (length 2.54) (name "S" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -7.62 -3.81 0) (length 2.54) (name "G" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 7.62 0 180) (length 2.54) (name "D(5-8)" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+		)
+	)
+(symbol "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "Q"
+			(at 5.08 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Q_NMOS_SOT23_GSD"
+			(at 5.08 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "N-MOSFET, numbered for common SOT-23 1=G 2=S 3=D pinout"
+			(at 0 0 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Q_NMOS_SOT23_GSD_0_1"
+			(polyline
+				(pts
+					(xy -0.508 1.905) (xy -0.508 -1.905)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.254 1.27) (xy 2.54 2.54)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.254 -1.27) (xy 2.54 -2.54)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "Q_NMOS_SOT23_GSD_1_1"
+			(pin input line
+				(at -5.08 0 0)
+				(length 4.572)
+				(name "G"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 -5.08 90)
+				(length 2.54)
+				(name "S"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 2.54 5.08 270)
+				(length 2.54)
+				(name "D"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+(symbol "power:PWR_FLAG"
+		(power global)
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#FLG"
+			(at 0 1.905 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "flag power"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "PWR_FLAG_0_0"
+			(pin power_out line
+				(at 0 0 90)
+				(length 0)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "PWR_FLAG_0_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+  )
+(text "== 3S pack BMS: fuse, primary protector, redundant LTC4368, FETs ==" (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid b2f88485-b132-5384-a2f9-65d65742a951))
+(text "Board split Phase 2.3: pack measurement + protection live on the pack board;" (at 20.32 30.48 0) (effects (font (size 1.27 1.27))) (uuid b2a319e7-fae4-579c-b5fd-c5bdc78493d5))
+(text "the gauge (U10), charger (U2), and ship FET (Q25) stay on the center board." (at 20.32 39.37 0) (effects (font (size 1.27 1.27))) (uuid 5ef7a4b9-5000-55d0-9ff1-fb7d91ee9d11))
+(symbol
+  (lib_id "Device:Fuse")
+  (at 170.18 59.69 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4a780406-acda-50c4-926d-9c142c0f9c81)
+  (property "Reference" "F1" (at 170.18 57.15 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10A MINI pack fuse: Littelfuse 0297010.WXNV" (at 170.18 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Fuse:Fuseholder_Blade_Mini_Keystone_3568" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Littelfuse / Keystone" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "0297010.WXNV + 3568" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e77faee9-b285-5fb0-ae84-ebf39f103b43))
+  (pin "2" (uuid 267a13ea-bb03-5d27-8d17-bfa7b3a62eb2))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "F1")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_POS_RAW"
+  (at 170.18 55.88 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f3c6d30d-53eb-5899-9b1d-6f07a2713cb8)
+)
+(label "BAT_PROT_VIN"
+  (at 170.18 63.5 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3e04f5b6-32d5-5636-80ef-339e0f8be55c)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_02x03_Odd_Even")
+  (at 170.18 80.01 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 1c90922e-a546-564b-ac5b-bcfd241e1d0f)
+  (property "Reference" "J2" (at 170.18 77.47 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "3S pack power + cell-tap harness" (at 170.18 82.55 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Molex" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "76829-0006" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 0fccb980-83ac-5234-9d76-cde0ef7f15ef))
+  (pin "2" (uuid 192adcb3-3448-5ec7-96ef-bf5c656ddc10))
+  (pin "3" (uuid 373eef7f-a80b-58dc-b1f3-e2705cd6fd92))
+  (pin "4" (uuid 51af6453-0cfd-51ad-b246-64c766898fb0))
+  (pin "5" (uuid d9382f93-c5a4-522a-856f-d0e4ec4a375f))
+  (pin "6" (uuid 7e32b3d0-93ea-5753-83e3-7f0fe17ca612))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "J2")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_POS_RAW"
+  (at 165.1 77.47 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3787afd4-ae21-5dc7-9e66-c5c9e703f549)
+)
+(label "PACK_POS_RAW"
+  (at 177.8 77.47 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3c8a2932-a324-5938-aa39-745bd510e22d)
+)
+(label "PACK_NEG_RAW"
+  (at 165.1 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f21119c0-15ca-56b0-9ad4-6d371215075e)
+)
+(label "PACK_NEG_RAW"
+  (at 177.8 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 951bfc86-cd67-567a-8548-b246b633c338)
+)
+(label "CELL1_TAP"
+  (at 165.1 82.55 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1020edf6-35bf-5c57-aa3b-cfdc30bdfd08)
+)
+(label "CELL2_TAP"
+  (at 177.8 82.55 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4810641f-8c1b-57b8-97ed-6c8be31dd30d)
+)
+(symbol
+  (lib_id "BQ77915:BQ77915")
+  (at 80.01 105.41 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid dfcef911-c747-56a4-8288-f640a7ad444c)
+  (property "Reference" "U719" (at 80.01 102.87 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BQ7791500PWR autonomous 3S primary protector" (at 80.01 107.95 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm" (at 80.01 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 80.01 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 80.01 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BQ7791500PWR" (at 80.01 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/bq77915.pdf" (at 80.01 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 25c13a7b-12ac-5365-9732-dfe285a22140))
+  (pin "2" (uuid 1c3bb759-17a5-5974-9651-47010857a33c))
+  (pin "3" (uuid 070cc127-6797-5187-83d0-f67838973e01))
+  (pin "4" (uuid 0bca6fb4-333a-5024-b585-1395cc32e25d))
+  (pin "5" (uuid 58746c48-f0c7-5aa6-8746-20f6e8ad895c))
+  (pin "6" (uuid 8da94e0e-110c-504d-b65f-2f757406ffb7))
+  (pin "7" (uuid 0c376745-9764-5a0a-91c3-6b0a58f233ea))
+  (pin "8" (uuid 409953af-43b6-5dec-aef1-a689c18fe88c))
+  (pin "9" (uuid 5af8060b-d0ec-5a1d-b4c6-efb5b0622412))
+  (pin "10" (uuid 3bffac03-50b1-5811-9e2b-c7c85fc4a592))
+  (pin "11" (uuid 91aee7f5-1864-5890-8cdc-c6877fb32ccf))
+  (pin "12" (uuid 284028fa-ed35-55a1-ac4b-a53f5e06ebcc))
+  (pin "24" (uuid 9f39a2ca-7484-524d-a537-027e3a7f52bf))
+  (pin "23" (uuid a3e91e81-7635-58c8-be7e-f30988d9d5da))
+  (pin "22" (uuid fc1e71b8-b3d4-5503-a290-eaf4970bd88a))
+  (pin "21" (uuid 07bf87d0-b2c5-5702-ba36-3b86a11afd59))
+  (pin "20" (uuid fe7b9904-1b14-52a6-afee-8b66270bf080))
+  (pin "19" (uuid ea822ac9-d100-5cc0-a92b-3300673c4076))
+  (pin "18" (uuid eb71c682-87c6-54f7-8d4c-0e0b62f2ce9e))
+  (pin "17" (uuid 0a1b24ee-ac4a-5b15-b524-7774a815aa7d))
+  (pin "16" (uuid 4ad3a356-de1c-5934-b703-90018a45e4ab))
+  (pin "15" (uuid 11f8eabe-8726-511f-b316-9c7e56a2b90a))
+  (pin "14" (uuid 008c2c20-c7d8-5e6f-9db1-9b9129be06a3))
+  (pin "13" (uuid 9f6e1af1-7c81-5dec-8113-944050a57a3c))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "U719")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_VDD"
+  (at 72.39 91.44 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cd27580f-126e-51b7-8ecd-9e6dd725d00b)
+)
+(label "BMS_AVDD"
+  (at 72.39 93.98 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 805a1ecd-ed73-5ee6-a117-1921358b65ab)
+)
+(label "BMS_VC3_TOP"
+  (at 72.39 96.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 55dc6074-f145-5505-ad5e-567e7cbc54fd)
+)
+(label "BMS_VC3_TOP"
+  (at 72.39 99.06 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a7498cb7-baf3-5ebd-b84f-7e3a9abc4b82)
+)
+(label "BMS_VC3_TOP"
+  (at 72.39 101.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2d07abbc-eaa6-5da8-93b6-95ec536547c6)
+)
+(label "BMS_VC2"
+  (at 72.39 104.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 859185a6-abcb-5e59-9764-62c998ea744a)
+)
+(label "BMS_VC1"
+  (at 72.39 106.68 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f8d20a54-4e08-58fd-8f36-02cd8ca9e207)
+)
+(label "BMS_VC0"
+  (at 72.39 109.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0a83c786-19cc-579a-ade1-f53b184e69e4)
+)
+(label "PACK_NEG_RAW"
+  (at 72.39 111.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6dd00581-d81e-582b-9dec-2d0799699e95)
+)
+(label "BMS_SRP"
+  (at 72.39 114.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 563217e5-17ec-54e3-a029-d93b137ed6b3)
+)
+(label "BMS_SRN"
+  (at 72.39 116.84 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 69c91590-f830-5990-9519-a6c82e5ce591)
+)
+(label "BMS_DSG_DRV"
+  (at 72.39 119.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9e130bdb-43f4-5c60-a5a4-ef3348a6996a)
+)
+(label "BMS_CHG_DRV"
+  (at 87.63 119.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 60063fc4-6746-5c40-834f-b42eb7a429b9)
+)
+(label "BMS_LD"
+  (at 87.63 116.84 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 462b3b8a-1ad0-5885-8884-ba11f3cde8a7)
+)
+(no_connect (at 87.63 114.3) (uuid c4d0ffea-f8ca-5cf9-9679-c24c4af480af))
+(label "PACK_NEG_RAW"
+  (at 87.63 111.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a9d1d2d2-834d-53a1-b9ad-4f83db617efc)
+)
+(label "BMS_OCDP"
+  (at 87.63 109.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c0018db2-e2e3-5a0e-9611-bf24da59a27c)
+)
+(label "BMS_TS_UNUSED"
+  (at 87.63 106.68 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8e113096-cd48-5c59-9dd6-19a47462c808)
+)
+(no_connect (at 87.63 104.14) (uuid 178fca86-6752-5974-8c0f-646367d886d3))
+(label "PACK_NEG_RAW"
+  (at 87.63 101.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 448601a9-5636-5ceb-807d-9871fcb18239)
+)
+(no_connect (at 87.63 99.06) (uuid 344b9112-e14e-5141-89dc-6dbf1cb8593e))
+(label "BMS_PRES"
+  (at 87.63 96.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2ff83c49-d260-5666-8934-8ba03fd21ebb)
+)
+(label "PACK_NEG_RAW"
+  (at 87.63 93.98 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a5992bf5-9eee-526a-b9d6-ed2d1c5f0728)
+)
+(label "PACK_NEG_RAW"
+  (at 87.63 91.44 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3ebf6f93-769b-5045-b2f7-5b3f7bbba878)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 35.56 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2e46afe2-5d05-5a32-86a2-19485246bf5f)
+  (property "Reference" "R840" (at 20.32 33.02 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1k 1% BQ77915 VDD filter" (at 20.32 38.1 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 35.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 35.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 35.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-071KL" (at 20.32 35.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a13e81df-1c47-50a5-a0e2-4b2a4a6b2e63))
+  (pin "2" (uuid bf846df9-bc40-5637-ba2c-e8d5318abcc4))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R840")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_POS_RAW"
+  (at 20.32 31.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6b218b86-205b-5a0e-95a9-f6bbcbf0e83c)
+)
+(label "BMS_VDD"
+  (at 20.32 39.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8ed5b6e6-60a7-5893-a86c-463f2a6ce445)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 44.45 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ba6d8e60-76e5-5e7d-a927-7a0e02b585fc)
+  (property "Reference" "C840" (at 20.32 41.91 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u 25V X7R BQ77915 VDD" (at 20.32 46.99 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 44.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 44.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 44.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM21BR71H105KA12L" (at 20.32 44.45 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5cf32fda-3187-550f-b1fc-3a311ae109de))
+  (pin "2" (uuid 8ce2b858-7167-5c17-b5b3-42409008200f))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C840")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_VDD"
+  (at 20.32 40.64 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ba5159c3-77a7-58ae-9ac0-354e2ce98637)
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 48.26 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 837f827e-9a65-5e60-83e7-5fbf9fac8007)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 54.61 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 78f5cb4e-eb9c-56af-a321-badb1335501b)
+  (property "Reference" "C841" (at 20.32 52.07 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u 10V X7R BQ77915 AVDD" (at 20.32 57.15 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 54.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 54.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 54.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM21BR71A105KA01L" (at 20.32 54.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 81ab67f5-3bdd-5e21-a81c-efa4c5f29104))
+  (pin "2" (uuid 6643f8d3-16d7-5e8d-8add-d43a45919101))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C841")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_AVDD"
+  (at 20.32 50.8 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3e22b9af-7a19-5d9b-a289-34fcabe63b14)
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 58.42 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5a513390-3f84-50f6-b8a5-62c02542f185)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 64.77 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid da16f315-6172-53cd-bb37-8be78a95bf94)
+  (property "Reference" "R841" (at 20.32 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% BQ77915 cell/balance filter" (at 20.32 67.31 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0775RL" (at 20.32 64.77 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 788caa77-d2e6-5c2a-9d3c-2007c3c0fceb))
+  (pin "2" (uuid 8cf70ad4-783e-5cd3-a2fb-d42cf0b29857))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R841")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 60.96 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3906bb8a-f759-5447-abe6-1ee9d6d84de2)
+)
+(label "BMS_VC0"
+  (at 20.32 68.58 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c530978d-6147-53ed-b15d-e36fd214bd78)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 74.93 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8008c98b-ae47-527c-8007-d5d77e46154f)
+  (property "Reference" "R842" (at 20.32 72.39 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% BQ77915 cell/balance filter" (at 20.32 77.47 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0775RL" (at 20.32 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a12d7e95-decf-5916-b496-cb972e1c1897))
+  (pin "2" (uuid 99c32054-1390-5163-9fba-c7affd58e09b))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R842")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CELL1_TAP"
+  (at 20.32 71.12 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 57ed09a6-e720-56c3-a2fe-a934389affb2)
+)
+(label "BMS_VC1"
+  (at 20.32 78.74 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e25f62f2-bbfa-5938-ab05-d22c6adc1f4e)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 85.09 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f645a241-61db-5040-b30e-be28fbe20874)
+  (property "Reference" "R843" (at 20.32 82.55 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% BQ77915 cell/balance filter" (at 20.32 87.63 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 85.09 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 85.09 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 85.09 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0775RL" (at 20.32 85.09 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 719399d9-c6d1-5dd9-ab19-9d11bbd3a022))
+  (pin "2" (uuid 6860c041-650c-56b0-8d19-3bd7d296c46b))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R843")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "CELL2_TAP"
+  (at 20.32 81.28 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fa2840ed-ceca-5b8e-9e47-836e56e09293)
+)
+(label "BMS_VC2"
+  (at 20.32 88.9 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 82346264-3eee-5e3c-b66e-c75e000c5361)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 95.25 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8c7e9ca5-1c9a-5c92-9546-e3500f1ca08c)
+  (property "Reference" "R844" (at 20.32 92.71 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "75R 1% BQ77915 cell/balance filter" (at 20.32 97.79 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0775RL" (at 20.32 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a5bb750d-bd5b-5f1e-8a67-d4475350a1d9))
+  (pin "2" (uuid 61037c09-5860-5fae-a822-34c2f4d68e23))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R844")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_POS_RAW"
+  (at 20.32 91.44 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1e8845a5-e3ef-5d87-90d3-22472c36b89d)
+)
+(label "BMS_VC3_TOP"
+  (at 20.32 99.06 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 46e26c15-8cf8-5b5b-8130-8fb2f216c414)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 105.41 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 71a368b4-f5c6-5ba9-ad98-81b4167e2bd1)
+  (property "Reference" "C842" (at 20.32 102.87 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u 10V X7R BQ77915 internal-balance filter" (at 20.32 107.95 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM21BR71A105KA01L" (at 20.32 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid bf0dd651-7eaf-5455-8f05-ce22a761b306))
+  (pin "2" (uuid ff1e82c5-7bf8-5eb7-b073-e64918d02100))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C842")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_VC0"
+  (at 20.32 101.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3ea17a53-8f26-52a0-af18-77071001c192)
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 109.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid aef0818f-5db1-57ae-a40a-a5a293f4d474)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 115.57 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ac43ac81-addb-5d89-a956-d67ff10af5e7)
+  (property "Reference" "C843" (at 20.32 113.03 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u 10V X7R BQ77915 internal-balance filter" (at 20.32 118.11 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM21BR71A105KA01L" (at 20.32 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 33578107-a759-5770-933e-4cd5f50a92e2))
+  (pin "2" (uuid 385bb54a-976a-55c0-b77e-146ba2304ed4))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C843")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_VC1"
+  (at 20.32 111.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7b179800-5ba4-53b8-b414-aee03da1e3fd)
+)
+(label "BMS_VC0"
+  (at 20.32 119.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 77759fc8-3db6-545e-82c0-cf658c529644)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 124.46 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 91d9ab13-d792-5a0f-bf7f-5fb4f162aa1b)
+  (property "Reference" "C844" (at 20.32 121.92 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u 10V X7R BQ77915 internal-balance filter" (at 20.32 127 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM21BR71A105KA01L" (at 20.32 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 62a292f0-42f4-549e-98a0-4b329d7ea9b5))
+  (pin "2" (uuid 47c0ae64-cba2-5a66-b050-6e4e81b5da42))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C844")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_VC2"
+  (at 20.32 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0cc73682-c341-50a8-9ba2-aa7a37a8616c)
+)
+(label "BMS_VC1"
+  (at 20.32 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b6ff3034-7156-5f5b-be14-f97a4b0f1b21)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 134.62 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 25b483ee-9585-5040-b051-57f7ee0f27e9)
+  (property "Reference" "C848" (at 20.32 132.08 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u 10V X7R BQ77915 internal-balance filter" (at 20.32 137.16 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 20.32 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM21BR71A105KA01L" (at 20.32 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 0cb391bc-eb67-5e45-8c8a-b334858613be))
+  (pin "2" (uuid fc83963b-f693-5ddf-b073-f007b4c84dc4))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C848")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_VC3_TOP"
+  (at 20.32 130.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ccd9831c-1c58-52b2-accf-9067da0e29d9)
+)
+(label "BMS_VC2"
+  (at 20.32 138.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5e9df115-27df-5839-a658-cdeb328fe181)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 149.86 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a9b28dc0-f2b9-5a62-ae1d-b1b08b974964)
+  (property "Reference" "RS11" (at 20.32 147.32 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "8mOhm 1% 2W BQ77915 current shunt" (at 20.32 152.4 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_2512_6332Metric" (at 20.32 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Vishay Dale" (at 20.32 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "WSLP25128L000FEA" (at 20.32 149.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 723bb4fb-b270-5443-8ba6-1cd26fa8c388))
+  (pin "2" (uuid ac17a413-0f94-5991-bf84-0291f7581cf2))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "RS11")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 146.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 344246fe-03b6-5627-b069-e2f08ebe19c6)
+)
+(label "BMS_SENSE_N"
+  (at 20.32 153.67 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3c05b33a-439f-5cde-938a-13ccfb3bb184)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 160.02 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 1a100f93-1eca-5a65-9c0d-0beef28c100f)
+  (property "Reference" "R845" (at 20.32 157.48 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100R BQ77915 SRP filter" (at 20.32 162.56 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100RL" (at 20.32 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 18c64ab3-acb0-5b73-a4f2-f23181934346))
+  (pin "2" (uuid c0e8b74b-267a-53a4-a5b7-439b91cee963))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R845")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 156.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5b5b3a49-9881-5384-b354-1a18633b8b65)
+)
+(label "BMS_SRP"
+  (at 20.32 163.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 91839cfa-f2a6-533c-a0db-e5c986b6b972)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 20.32 170.18 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 0512cadb-1776-5f98-816e-19466bbd72c7)
+  (property "Reference" "R846" (at 20.32 167.64 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100R BQ77915 SRN filter" (at 20.32 172.72 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 170.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 170.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 20.32 170.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100RL" (at 20.32 170.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e5c7c798-e3ee-5cb9-9c6a-6ed976250c00))
+  (pin "2" (uuid 0f75ce8c-8674-5271-a3f7-5044bfca840a))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R846")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_SENSE_N"
+  (at 20.32 166.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2471e1b9-f17e-5967-9351-eb447d73be59)
+)
+(label "BMS_SRN"
+  (at 20.32 173.99 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8c46a78b-07d4-5cba-9440-6a352820e250)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 180.34 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 72471219-aa3e-52c5-b586-0b08d9769f41)
+  (property "Reference" "C845" (at 20.32 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n BQ77915 SRP-VSS filter" (at 20.32 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 20.32 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 20.32 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid dee27a60-62e6-5967-af91-2aa4d94bff28))
+  (pin "2" (uuid 0345e10c-ac2a-5113-b26f-5a2dd0f1e941))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C845")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_SRP"
+  (at 20.32 176.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4aae5d7f-cd2a-5f37-b116-cdcf9e0de2ce)
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 184.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ad574b2f-ea06-548e-8b1a-18d2d5973756)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 190.5 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8a0c4589-0144-5716-9137-1808e07b8900)
+  (property "Reference" "C846" (at 20.32 187.96 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n BQ77915 differential sense filter" (at 20.32 193.04 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 20.32 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 20.32 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 8740c888-97bf-573c-b3bf-14028f70b9e2))
+  (pin "2" (uuid dc0d51f2-895b-5ad6-bd9f-97c787ab41cd))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C846")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_SRP"
+  (at 20.32 186.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4a83d4c8-b56c-5f5a-bbf8-ebe43def7683)
+)
+(label "BMS_SRN"
+  (at 20.32 194.31 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5c89d9d9-fe07-530b-b3ec-7fec74e66e9f)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 20.32 199.39 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 02fd06d6-386b-5ee5-bb3d-b058495d95d8)
+  (property "Reference" "C847" (at 20.32 196.85 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n BQ77915 SRN-VSS filter" (at 20.32 201.93 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 20.32 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 20.32 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 20.32 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 41fe7087-e4f8-5384-84d9-ae46636d7b96))
+  (pin "2" (uuid d1ec6303-e3fe-512c-bd76-c821f8d3cd7e))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C847")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_SRN"
+  (at 20.32 195.58 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e24206fc-57b7-533a-bf8e-357715946701)
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 203.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 400d53a2-3dd2-59e3-b7a2-1633eff55a5b)
+)
+(symbol
+  (lib_id "Q_NMOS_123S_4G_5678D:Q_NMOS_123S_4G_5678D")
+  (at 80.01 160.02 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 478c7413-fd53-5c7c-b3fc-3db5d9e3cd5e)
+  (property "Reference" "Q703" (at 80.01 157.48 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "CSD18540Q5B BQ77915 discharge FET" (at 80.01 162.56 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:CSD18540Q5B_DNK" (at 80.01 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 80.01 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 80.01 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "CSD18540Q5B" (at 80.01 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 87c43dcf-10e4-53eb-b05c-8382a45d9c29))
+  (pin "2" (uuid efe50d8e-b31e-53b3-8be0-c0906160a75b))
+  (pin "3" (uuid 209bc638-065d-571f-be84-caf873eca2c0))
+  (pin "4" (uuid 206b2bff-dbc4-5ddd-94ce-d2342c2f8426))
+  (pin "5" (uuid 66009504-0298-5e6c-869f-4aff0a4c0042))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "Q703")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_SENSE_N"
+  (at 72.39 156.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e9f07c35-cdec-56e5-865e-97e9db1d743c)
+)
+(label "BMS_SENSE_N"
+  (at 72.39 158.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 908029f9-24f9-5fe2-b868-93f63fbb76a0)
+)
+(label "BMS_SENSE_N"
+  (at 72.39 161.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 58e49e61-8e91-5763-bcd0-7535d773ab72)
+)
+(label "BMS_DSG_GATE"
+  (at 72.39 163.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c1c17d2e-23b8-5387-8c07-2b4aea4e8afb)
+)
+(label "BMS_FET_COMMON"
+  (at 87.63 160.02 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 47211116-8a8d-5be0-a3ba-df60b78e8f1f)
+)
+(symbol
+  (lib_id "Q_NMOS_123S_4G_5678D:Q_NMOS_123S_4G_5678D")
+  (at 124.46 160.02 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c761adc7-bb82-5955-83d6-5af99ff0256b)
+  (property "Reference" "Q704" (at 124.46 157.48 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "CSD18540Q5B BQ77915 charge FET" (at 124.46 162.56 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:CSD18540Q5B_DNK" (at 124.46 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 124.46 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 124.46 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "CSD18540Q5B" (at 124.46 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 379191f4-1043-5236-8e1a-7ba1c7f3a614))
+  (pin "2" (uuid 0ef8ee0f-a3dd-5aa4-8e66-5be0e2aa8dcd))
+  (pin "3" (uuid 36387d33-67bb-5955-bc1e-1fae4deb2480))
+  (pin "4" (uuid c51ac117-35bb-5551-bc3c-3046696ec7cd))
+  (pin "5" (uuid ab80c3e7-40f3-5770-b6fb-b704a671cab4))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "Q704")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "FG_VSS"
+  (at 116.84 156.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 61587b04-a8b3-5149-a429-14cf29b0b15d)
+)
+(label "FG_VSS"
+  (at 116.84 158.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0827cb09-7b91-5131-afb1-5c54d3ebcdf3)
+)
+(label "FG_VSS"
+  (at 116.84 161.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 913d6dc3-fcf4-5025-8043-113e10f84c3d)
+)
+(label "BMS_CHG_GATE"
+  (at 116.84 163.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 62628ae9-27ae-57b5-b88a-c19014e55c18)
+)
+(label "BMS_FET_COMMON"
+  (at 132.08 160.02 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5df6f787-74c3-5943-80d8-9e5f67952ce1)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 80.01 180.34 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid e28ae2cb-0dfd-5444-94c7-1c97b4bffc83)
+  (property "Reference" "R847" (at 80.01 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.53k 1% DSG gate resistor" (at 80.01 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 80.01 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 80.01 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 80.01 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-074K53L" (at 80.01 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 48df0f0c-fda9-525c-9574-2c2d00bc0930))
+  (pin "2" (uuid 9d75e0d7-7d8e-5c9a-9eae-3b3e719527b8))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R847")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_DSG_DRV"
+  (at 80.01 176.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3d1a0bc2-0f34-51c8-8ead-df8150c10c0c)
+)
+(label "BMS_DSG_GATE"
+  (at 80.01 184.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c4b0d354-5820-57e1-88d7-59d2477dfcf9)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 124.46 180.34 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 1583b91c-e1f5-58de-9687-658d48397c36)
+  (property "Reference" "R848" (at 124.46 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1k 1% CHG gate resistor" (at 124.46 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 124.46 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 124.46 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 124.46 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-071KL" (at 124.46 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 40890e9b-6c29-5800-8f06-f10e64d419f9))
+  (pin "2" (uuid c631a2a6-106f-5caa-a801-f5adb3e4c2a1))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R848")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_CHG_DRV"
+  (at 124.46 176.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 004b4351-a385-504c-88a1-e998f007b80f)
+)
+(label "BMS_CHG_GATE"
+  (at 124.46 184.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a8606507-c95f-505e-b319-a8befc4d622c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 80.01 190.5 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 211a6908-8f1b-5681-b9b3-2f9859c30eec)
+  (property "Reference" "R849" (at 80.01 187.96 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1M 5% DSG gate-source" (at 80.01 193.04 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 80.01 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 80.01 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 80.01 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-071ML" (at 80.01 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 84877cba-a03c-5c3f-9b3b-268f73787dea))
+  (pin "2" (uuid dec7883b-c984-5f3f-b179-236dbbb971e5))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R849")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_DSG_GATE"
+  (at 80.01 186.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9b9562e0-13bb-51d4-a432-47418d232526)
+)
+(label "BMS_SENSE_N"
+  (at 80.01 194.31 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b591cb5f-76e2-5af2-ace0-e24276c9b3f4)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 124.46 190.5 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4a9dd79e-2158-53e2-987f-4e5df743fac2)
+  (property "Reference" "R850" (at 124.46 187.96 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "3.3M 5% CHG gate-source" (at 124.46 193.04 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 124.46 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 124.46 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 124.46 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-073M3L" (at 124.46 190.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid fb8dd08c-9432-5cff-af56-84bdb8610298))
+  (pin "2" (uuid ea40dcb9-511b-540b-89a9-159cabe86cbc))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R850")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_CHG_GATE"
+  (at 124.46 186.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0304a68e-f18b-523f-bf2d-2701937405b5)
+)
+(label "FG_VSS"
+  (at 124.46 194.31 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9e1deeae-6c47-5555-aa16-e16b8f7778d2)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 80.01 199.39 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 1eda9b19-50e4-5f47-b07a-ec29417c6578)
+  (property "Reference" "R851" (at 80.01 196.85 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "453k 1% load-detect resistor" (at 80.01 201.93 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 80.01 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 80.01 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 80.01 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07453KL" (at 80.01 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e4a90f08-cd97-52d9-a029-20beb4274c1e))
+  (pin "2" (uuid 8d4937ec-b9f3-5561-8059-7d39fc25c67c))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R851")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_LD"
+  (at 80.01 195.58 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 633d50b0-bd9c-5fa9-824f-cd50e85370eb)
+)
+(label "FG_VSS"
+  (at 80.01 203.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 672b303f-0244-52ec-9a8f-fa45f6451a57)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 124.46 199.39 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a177fb87-8b81-5d6a-b901-2157bade54eb)
+  (property "Reference" "R852" (at 124.46 196.85 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k 5% PRES normal-mode pull-up" (at 124.46 201.93 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 124.46 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 124.46 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 124.46 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 124.46 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cf3e9634-9a75-50b7-b10d-14d96a867df6))
+  (pin "2" (uuid df1783df-7ed6-5fe6-a291-cd4d6384ea66))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R852")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_POS_RAW"
+  (at 124.46 195.58 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e44b9980-7083-5468-a084-c90a38d283a2)
+)
+(label "BMS_PRES"
+  (at 124.46 203.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4ae5f41b-0d75-5999-bded-f2f0923e972c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 80.01 209.55 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid bcbc9269-973d-5f82-b405-5e3613e7bca8)
+  (property "Reference" "R853" (at 80.01 207.01 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k 1% unused TS to VSS" (at 80.01 212.09 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 80.01 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 80.01 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 80.01 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 80.01 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid bfd10713-2d01-5226-8239-519fd129bf56))
+  (pin "2" (uuid c011a198-0758-5f0d-b49d-067897cddac8))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R853")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_TS_UNUSED"
+  (at 80.01 205.74 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 46a6d6cc-2201-5420-b54f-a939ca786e82)
+)
+(label "PACK_NEG_RAW"
+  (at 80.01 213.36 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a7390292-e19b-555d-a6b6-fb8ff9e5c506)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 124.46 209.55 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 6c307d4f-0a2e-5749-a3b2-cc6c64480276)
+  (property "Reference" "R854" (at 124.46 207.01 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "604k 1% OCD delay program" (at 124.46 212.09 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 124.46 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 124.46 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 124.46 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07604KL" (at 124.46 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5e9b171e-e582-5d45-8830-193f023b6d81))
+  (pin "2" (uuid 56d77478-fa08-57c1-be58-bc7884e7a364))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R854")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BMS_OCDP"
+  (at 124.46 205.74 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 33fc97f7-a8da-5777-a38e-3d00a9e543c0)
+)
+(label "PACK_NEG_RAW"
+  (at 124.46 213.36 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 174250a2-f79e-5d62-b169-cae1581847b7)
+)
+(symbol
+  (lib_id "LTC4368-1:LTC4368-1")
+  (at 229.87 69.85 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid be17a800-92f8-533d-a106-a11c8cdeb776)
+  (property "Reference" "U11" (at 229.87 67.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "LTC4368IMS-1 bidirectional pack protector" (at 229.87 72.39 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_SO:MSOP-10_3x3mm_P0.5mm" (at 229.87 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Analog Devices" (at 229.87 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "LTC4368IMS-1#PBF" (at 229.87 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c898c48a-54ed-52dc-bf53-c6b24d6fdfd9))
+  (pin "2" (uuid eea9e936-c3c8-5e4b-ac3a-0d8cee17bdbf))
+  (pin "3" (uuid 2b845f82-aeaf-5704-823d-6134a6ffb306))
+  (pin "4" (uuid d4bed804-3b89-515d-90ca-0fd643cf5edc))
+  (pin "5" (uuid 1baa4be1-0a52-5012-9b55-ca40f240cac5))
+  (pin "6" (uuid 0de0068f-bfcc-54e1-bca0-b74655617ff1))
+  (pin "7" (uuid b202534f-4bc0-598c-999d-f22a17005056))
+  (pin "8" (uuid b575fdab-7123-53df-8c33-326a2413b199))
+  (pin "9" (uuid 54842e76-7137-5572-9b04-019768032be1))
+  (pin "10" (uuid c0e17091-a034-5b39-b536-6e5263fe89ca))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "U11")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_VIN"
+  (at 222.25 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b1d952cf-8154-5208-8e25-a6301fbd4cc9)
+)
+(label "BAT_PROT_UV"
+  (at 222.25 67.31 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 278ff13e-4a02-5762-a939-21201b3f70b1)
+)
+(label "BAT_PROT_OV"
+  (at 222.25 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2dff99ef-704d-5d77-99e0-cd49f3863fdf)
+)
+(label "GND"
+  (at 222.25 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0d15998c-ce7c-5633-a71d-6183ebfbb88f)
+)
+(label "GND"
+  (at 229.87 78.74 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e08359dd-62ad-5c76-b88c-3edfb69d2b4c)
+)
+(label "BAT_PROT_SHDN"
+  (at 222.25 74.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 50df9a3f-1cc3-53bb-9934-d855455c6824)
+)
+(hierarchical_label "PACK_FAULT_N"
+  (shape bidirectional)
+  (at 237.49 74.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d50fa97d-7fca-5090-ae43-2b145e2651ca)
+)
+(label "PACK_POS_FUSED"
+  (at 237.49 72.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f58acc29-7f9e-5359-b6c0-f27309951eb0)
+)
+(label "BAT_PROT_SENSE"
+  (at 237.49 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 63aa02df-9b32-5b35-ae6b-496f0d434fd7)
+)
+(label "BAT_PROT_GATE"
+  (at 237.49 64.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4e3b46fd-368d-5a34-ac8a-0155e8935918)
+)
+(symbol
+  (lib_id "Q_NMOS_123S_4G_5678D:Q_NMOS_123S_4G_5678D")
+  (at 229.87 95.25 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 23f9eebd-2809-5d13-af08-8f16fdc4348a)
+  (property "Reference" "Q11" (at 229.87 92.71 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "CSD18540Q5B reverse-pack FET A" (at 229.87 97.79 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:CSD18540Q5B_DNK" (at 229.87 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 229.87 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "CSD18540Q5B" (at 229.87 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f7bc4c20-14cd-5b7a-b7a0-81712984570b))
+  (pin "2" (uuid 87271d96-63b1-5302-bddb-1b7db8be843f))
+  (pin "3" (uuid babc2651-7b3f-5fc1-8c5c-8a5e62deb3f0))
+  (pin "4" (uuid 4d22b8bf-88f9-544b-9678-d7b11af6959e))
+  (pin "5" (uuid 8da4c144-d218-5503-a6d9-0c4b9bbf0296))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "Q11")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_FET_COMMON"
+  (at 222.25 91.44 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 734b8e49-cdca-544c-9c45-98c21933d5eb)
+)
+(label "BAT_PROT_FET_COMMON"
+  (at 222.25 93.98 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c10c780b-cdc3-5fdc-a2fa-85287c6be921)
+)
+(label "BAT_PROT_FET_COMMON"
+  (at 222.25 96.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d7b5fa73-430b-50f5-b57a-765a042363ce)
+)
+(label "BAT_PROT_GATE"
+  (at 222.25 99.06 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e8a4defb-e94f-51e6-bea4-65904d1195c0)
+)
+(label "BAT_PROT_VIN"
+  (at 237.49 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 90581f0d-3832-5bde-bf55-a5c213093806)
+)
+(symbol
+  (lib_id "Q_NMOS_123S_4G_5678D:Q_NMOS_123S_4G_5678D")
+  (at 279.4 95.25 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b01656d1-43a9-5059-bba1-839eed2f1802)
+  (property "Reference" "Q12" (at 279.4 92.71 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "CSD18540Q5B reverse-pack FET B" (at 279.4 97.79 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:CSD18540Q5B_DNK" (at 279.4 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 279.4 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 279.4 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "CSD18540Q5B" (at 279.4 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 8f264340-7428-5a32-a31b-a8bd6491b93a))
+  (pin "2" (uuid b1490bf9-eb93-5682-b50d-abaef2d4b970))
+  (pin "3" (uuid ee6a6454-a5fa-5868-8f83-580796292e83))
+  (pin "4" (uuid c6f23270-bd62-5211-816b-e110bbe33962))
+  (pin "5" (uuid b3a7a1fe-6881-59ea-8837-d020fa03a2a3))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "Q12")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_FET_COMMON"
+  (at 271.78 91.44 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c145e716-6f62-5df8-964c-e4a577ae2c50)
+)
+(label "BAT_PROT_FET_COMMON"
+  (at 271.78 93.98 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e424a1ef-3f21-57bd-9dfa-aca15746bbdb)
+)
+(label "BAT_PROT_FET_COMMON"
+  (at 271.78 96.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6044145e-50bf-5ab9-8876-5cc90fc65dc5)
+)
+(label "BAT_PROT_GATE"
+  (at 271.78 99.06 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b316d5f5-e00f-5e75-82ec-f83d211bd566)
+)
+(label "BAT_PROT_SENSE"
+  (at 287.02 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7bc7cd82-de87-5655-bb7b-1904f01b155d)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 335.28 59.69 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 65789f60-7d34-599a-8114-ab55c8d7bff2)
+  (property "Reference" "RS10" (at 335.28 57.15 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "11mOhm 1% 2W LTC4368 bounded pack-current shunt" (at 335.28 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_2512_6332Metric" (at 335.28 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 335.28 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Vishay Dale" (at 335.28 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "WSLP2512R0110FEA" (at 335.28 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4999b881-5ada-5246-a760-2212893ae955))
+  (pin "2" (uuid 5f1db631-fb61-5284-9b42-fce30083079a))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "RS10")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_SENSE"
+  (at 335.28 55.88 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b55ff004-59a6-50fe-bfaf-50db7f2c9fca)
+)
+(label "PACK_POS_FUSED"
+  (at 335.28 63.5 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2f394f2a-f5f8-5b3d-9398-fc1fc7296d1f)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 389.89 59.69 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2edb7dc7-af75-54b2-8c45-146430bf0853)
+  (property "Reference" "C725" (at 389.89 57.15 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10u 25V X7R LTC4368 VOUT" (at 389.89 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 389.89 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 389.89 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM21BZ71E106KE15L" (at 389.89 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 15c9daf2-965d-50e5-97de-31960a185d71))
+  (pin "2" (uuid e258376b-d5f4-5b49-8a0e-59e80ace1c37))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C725")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_POS_FUSED"
+  (at 389.89 55.88 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c84621a8-7973-534e-96aa-2fe39bb3fcce)
+)
+(label "GND"
+  (at 389.89 63.5 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 74699e56-640d-57dc-af31-31ca942d3a5c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 335.28 69.85 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid db77ebbc-0f5d-57f3-99eb-384d18724c81)
+  (property "Reference" "R700" (at 335.28 67.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "3.09M 1% BAT UV/OV top" (at 335.28 72.39 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 335.28 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 335.28 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 335.28 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-073M09L" (at 335.28 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid fceaeb32-7332-5cdb-8030-6032dc62fbb9))
+  (pin "2" (uuid f4fef3ab-7873-5b85-bd9c-f1fac252f6e9))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R700")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_VIN"
+  (at 335.28 66.04 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 726efba8-a8c8-5754-b2eb-aede07971ab0)
+)
+(label "BAT_PROT_UV"
+  (at 335.28 73.66 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0fef5b46-10c8-5e23-ad03-fc6421aa0b5b)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 335.28 80.01 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 033db2aa-a5b5-5ee0-b3b8-43788dc21d6f)
+  (property "Reference" "R701" (at 335.28 77.47 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "73.2k 1% BAT UV/OV middle" (at 335.28 82.55 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 335.28 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 335.28 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 335.28 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0773K2L" (at 335.28 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid cef4702c-1b16-556e-90b1-8fb42418d215))
+  (pin "2" (uuid 9fb6c042-b5ef-561e-b6ef-37a346decdd6))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R701")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_UV"
+  (at 335.28 76.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4512109e-70ca-59e0-a552-100f13f26328)
+)
+(label "BAT_PROT_OV"
+  (at 335.28 83.82 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 35307341-2d82-5449-8d3a-8614965e098b)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 335.28 90.17 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid bf572132-25d5-5928-b7ad-e7713e722045)
+  (property "Reference" "R702" (at 335.28 87.63 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "121k 1% BAT UV/OV bottom" (at 335.28 92.71 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 335.28 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 335.28 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 335.28 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07121KL" (at 335.28 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5ffa1b8f-bfed-566d-bb2d-695c4ca14eb7))
+  (pin "2" (uuid ea7048a0-2da8-50d4-9fe8-280329ed1e9a))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R702")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_OV"
+  (at 335.28 86.36 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5e61b836-fd7f-5ca3-a959-165044bbef5e)
+)
+(label "GND"
+  (at 335.28 93.98 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f61b22da-258f-55fb-9104-b9f302957530)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 335.28 100.33 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ebd747ac-1a27-5d29-a592-669b52403f3f)
+  (property "Reference" "R703" (at 335.28 97.79 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "22k LTC4368 CGATE series" (at 335.28 102.87 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 335.28 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 335.28 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 335.28 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0722KL" (at 335.28 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 300deb50-7bd1-5355-92be-1d201c67a2d4))
+  (pin "2" (uuid 381454dd-0f8b-55dc-957d-254efc73e1ff))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R703")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_GATE"
+  (at 335.28 96.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e3e6157b-241e-529f-92c2-e3b1f9d85697)
+)
+(label "BAT_PROT_CGATE"
+  (at 335.28 104.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d4c8d498-883d-5a91-a2be-5033fb9a7393)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 335.28 110.49 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 6dc3d2f7-4770-581e-8bfe-6b3167eca43d)
+  (property "Reference" "C700" (at 335.28 107.95 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "3.3nF >=50V LTC4368 CGATE" (at 335.28 113.03 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 335.28 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 335.28 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 335.28 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71H332KA01" (at 335.28 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 592deba4-365b-5905-ad01-f47c7ca8c979))
+  (pin "2" (uuid 4d0f01a3-7df3-57bb-bd9d-f35bd0cc0096))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C700")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_CGATE"
+  (at 335.28 106.68 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bbc098e0-8dd4-556c-9c2f-3d4893ccf7ec)
+)
+(label "GND"
+  (at 335.28 114.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 011a11b7-c1a7-5daa-9919-55993634efe2)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 335.28 119.38 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid d05d58a6-f034-5607-8e3b-d23dfab1726f)
+  (property "Reference" "C724" (at 335.28 116.84 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7nF >=50V pack hot-swap slew" (at 335.28 121.92 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 335.28 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 335.28 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 335.28 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71H472KA01" (at 335.28 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 99e7a83b-49a6-5940-8827-8bb5234e5f7f))
+  (pin "2" (uuid 930163f5-cba7-5604-ab0e-c6afe10f0058))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "C724")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_GATE"
+  (at 335.28 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ba611f7d-2d73-5ded-9d4a-736843f63df9)
+)
+(label "BAT_PROT_FET_COMMON"
+  (at 335.28 123.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4eb683a5-6938-52c3-b460-45c33de0c139)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 389.89 69.85 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b02a108c-41a5-5009-a954-afc426d4edef)
+  (property "Reference" "R707" (at 389.89 67.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k pack protector SHDN pull-up" (at 389.89 72.39 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 389.89 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 389.89 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 389.89 69.85 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 02070a13-1bc1-5dfe-9f00-55eb2da43931))
+  (pin "2" (uuid 326a87f7-c1c9-5722-9034-26c6a0c75699))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R707")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "BAT_PROT_VIN"
+  (at 389.89 66.04 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3a8aca46-debd-5a12-8f2a-623864a805d8)
+)
+(label "BAT_PROT_SHDN"
+  (at 389.89 73.66 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c203bd57-8ced-51b8-bbc6-3a58d4910f9d)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 389.89 80.01 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 729dd5af-f9d3-531f-bf4b-23ee7ddbd9fd)
+  (property "Reference" "R708" (at 389.89 77.47 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k pack FAULT pull-up" (at 389.89 82.55 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 389.89 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 389.89 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 389.89 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid fa4df04b-2094-570c-b07c-a46899815e9b))
+  (pin "2" (uuid fb2f4eb3-7721-5c5d-8c58-d0dbc19673ea))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R708")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 389.89 76.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 596bf436-a177-5950-9bf9-95eef8b0127c)
+)
+(hierarchical_label "PACK_FAULT_N"
+  (shape bidirectional)
+  (at 389.89 83.82 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5b0ea8e6-4b30-5c71-806e-5d8ae5e9bbd9)
+)
+(symbol
+  (lib_id "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD")
+  (at 389.89 90.17 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 74d2f2bf-eb55-51e4-859b-5003a611b982)
+  (property "Reference" "Q701" (at 389.89 87.63 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BSS138 pack protector latch reset" (at 389.89 92.71 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 389.89 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "onsemi" (at 389.89 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BSS138LT1G" (at 389.89 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 47d3d493-9c8b-5318-8e98-a9c0a4b39adc))
+  (pin "2" (uuid 4eebee45-2d10-5d73-b819-04c97be7a987))
+  (pin "3" (uuid 5203d1de-6480-513e-9b99-a2346fef5696))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "Q701")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PACK_RETRY_PULSE"
+  (shape bidirectional)
+  (at 384.81 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9ae1bcc8-7db0-5941-a076-503984dd7009)
+)
+(label "GND"
+  (at 392.43 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 50ff103e-e56b-52f6-936b-c01588b265b4)
+)
+(label "BAT_PROT_SHDN"
+  (at 392.43 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5d37da30-f6d6-5e83-ba04-2070024606c2)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 389.89 100.33 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid de620723-6af7-52ba-b147-3abdf9567767)
+  (property "Reference" "R709" (at 389.89 97.79 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k pack retry gate pulldown" (at 389.89 102.87 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 389.89 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 389.89 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 389.89 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 389.89 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 041c607a-0ba8-5414-b652-ba0e6ff7fb7c))
+  (pin "2" (uuid b59f6fc2-5414-5aa4-ba40-082d8df0214d))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "R709")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PACK_RETRY_PULSE"
+  (shape bidirectional)
+  (at 389.89 96.52 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8b18eb33-eb93-58fe-a04f-1a7a950cddc3)
+)
+(label "GND"
+  (at 389.89 104.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3669d075-9eb2-593a-97ab-784f503884b1)
+)
+(symbol
+  (lib_id "power:PWR_FLAG")
+  (at 20.32 400.05 0)
+  (unit 0)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4b8e2fb1-770b-5901-84ae-e1e21b2d14d0)
+  (property "Reference" "#FLG701" (at 20.32 397.51 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PWR_FLAG" (at 20.32 402.59 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 20.32 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 98cd2759-d8fb-57ae-8626-b0fab826c7b3))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "#FLG701")
+        (unit 0)
+      )
+    )
+  )
+)
+(label "PACK_POS_FUSED"
+  (at 20.32 400.05 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2f495a03-9628-598b-8e1f-bf6510fa0dc2)
+)
+(symbol
+  (lib_id "power:PWR_FLAG")
+  (at 20.32 420.37 0)
+  (unit 0)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 827f01f3-56a4-57e5-8b66-9d5fa00750ff)
+  (property "Reference" "#FLG702" (at 20.32 417.83 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PWR_FLAG" (at 20.32 422.91 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 20.32 420.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 20.32 420.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid c71ab5aa-2669-5d19-b028-f944213a6400))
+  (instances
+    (project "ducktop2"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "#FLG702")
+        (unit 0)
+      )
+    )
+  )
+)
+(label "PACK_NEG_RAW"
+  (at 20.32 420.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5ab50eef-7694-5268-ada1-faf9d6da9b13)
+)
+(sheet_instances
+  (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+    (page "1")
+  )
+)
+  (embedded_fonts no)
+)
