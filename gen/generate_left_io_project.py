@@ -22,7 +22,8 @@ import generate_usb_c_io_sheet as usb
 import generate_power_inputs_sheet as pwrin
 import build_ducktop2 as b
 from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, U, FOOTPRINTS
-from generate_mu_carrier_sheet import root_label, sheet_block
+from generate_mu_carrier_sheet import root_label, sheet_block, build_fpc_sheet
+import fpc_contract as fpc
 
 BOARD_DIR = os.path.join(PROJDIR, "left_io")
 PROJECT_NAME = "left_io"
@@ -89,6 +90,20 @@ def main() -> int:
     usb_s = write_generated_sheet("usb", "left_usb.kicad_sch", build_left_usb_sheet)
     pd_s = write_generated_sheet("pd", "left_pd.kicad_sch", build_left_pd_sheet)
 
+    # Phase 4a: FPC-1 connector sheet (the physical FH12-100S on the left
+    # board edge).  Pin map from fpc_contract.py -- same conductor order as
+    # the center's FPC1_C.
+    fpc1_sheet_uuid = stable_uuid("left_io:sheet:fpc1")
+    with uuid_scope("left_io:fpc1"):
+        fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC101", "Conn_01x100_FFC_MP",
+                                 fpc.FPC1_PINMAP, "FH12-100S-0.5SH (FPC-1)",
+                                 pwr_base=3400)
+        fpc1_text = fpc1_s.render(stable_uuid("left_io:self:fpc1"),
+                                  page_number=3, paper="A1")
+    with open(os.path.join(BOARD_DIR, "left_fpc.kicad_sch"), "w",
+              encoding="utf-8") as f:
+        f.write(fpc1_text)
+
     # Collect the FPC-1 boundary nets = all hier labels across both sheets.
     hier_nets = set()
     sheet_nets = {}
@@ -113,19 +128,27 @@ def main() -> int:
                                "USB Hub + Ports", "left_usb.kicad_sch", usb_sheet_nets)
     pd_block, pd_pins = sheet_block(pd_uuid, 30.48, 219.71, 119.38, 149.86,
                               "PD1 Dual-Role", "left_pd.kicad_sch", pd_sheet_nets)
+    fpc1_block, fpc1_pins = sheet_block(fpc1_sheet_uuid, 170.0, 39.37, 119.38, 149.86,
+                                 "FPC-1 (to Center)", "left_fpc.kicad_sch",
+                                 fpc.FPC1_NETS)
 
     root = []
     root.append(f'(kicad_sch\n  (version 20260306)\n  (generator "eeschema")\n  (generator_version "10.0")\n'
                 f'  (uuid {stable_uuid("left_io:root")})\n  (paper "A2")\n')
     root.append(usb_block)
     root.append(pd_block)
+    root.append(fpc1_block)
     # Root labels for the FPC-1 boundary nets: each sits exactly on the sheet
     # block pin endpoint of the sheet that hosts it, so KiCad wires the label
     # to that sheet's hierarchical label (same pattern as the main root).
+    # FPC-1 nets are hosted by the usb/pd sheets AND the FPC-1 connector
+    # sheet; labels at both block pins join the nets by name.
     for net in usb_sheet_nets:
         root.append(root_label(usb_pins[net], net))
     for net in pd_sheet_nets:
         root.append(root_label(pd_pins[net], net))
+    for net in fpc.FPC1_NETS:
+        root.append(root_label(fpc1_pins[net], net))
     root.append(f'  (sheet_instances\n    (path "/"\n      (page "1")\n    )\n  )\n  (embedded_fonts no)\n)')
     with open(os.path.join(BOARD_DIR, "left_io.kicad_sch"), "w", encoding="utf-8") as f:
         f.write("\n".join(root))

@@ -628,7 +628,7 @@ def check_battery_and_charger(components):
     expect(net(components, "R855", "2"), "/FG_VSS", "BQ34Z100 TS pulldown return")
     expect_value_prefix(components, "R180", "220k", "fuel gauge divider top")
     expect_value_prefix(components, "R181", "16.5k", "fuel gauge divider bottom")
-    expect(net(components, "R180", "1"), "/Power & Battery/BAT_PROT_VIN", "fuel gauge divider pack input")
+    expect(net(components, "R180", "1"), "/PACK_POS_FUSED", "fuel gauge divider pack input (FPC-3 boundary, Phase 4a reconcile)")
     expect(net(components, "R181", "2"), "/FG_VSS", "fuel gauge divider Kelvin return")
     for ref in ("C180", "C182", "C183", "R189"):
         expect(net(components, ref, "2"), "/FG_VSS", f"{ref} fuel-gauge Kelvin return")
@@ -3086,6 +3086,9 @@ def main() -> int:
         fps, pcb_text = footprint_map()
     if args.project == "bms":
         check_bms_pack(components)
+        check_fpc_connectors(components, "FPC106", "Connector_FFC-FPC",
+                             "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
+                             "fpc3", bms_side=True)
         if args.schematic_only:
             print("bms schematic design contract checks OK")
         else:
@@ -3106,22 +3109,64 @@ def main() -> int:
         check_optional_radio_interface(components)
         check_system_audio(components)
         check_maker_mcu(components)
+        check_fpc_connectors(components, "FPC102", "ducktop2",
+                             "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+                             "fpc1")
+        check_fpc_connectors(components, "FPC103", "ducktop2",
+                             "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+                             "fpc2")
+        check_fpc_connectors(components, "FPC105", "Connector_FFC-FPC",
+                             "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
+                             "fpc3")
         print("ducktop2 schematic design contract checks OK")
     elif args.project == "left_io":
         check_five_port_usb_c_architecture(components, pd_sheet="PD1 Dual-Role",
                                            hub_sheet="USB Hub + Ports", ports=(1,))
+        check_fpc_connectors(components, "FPC101", "ducktop2",
+                             "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+                             "fpc1")
         print("left_io schematic design contract checks OK")
     elif args.project == "right_io":
         check_five_port_usb_c_architecture(components, pd_sheet="PD2 Dual-Role",
                                            hub_sheet="USB Hub + Ports", ports=(2,))
         check_external_hdmi_path(components, sheet="HDMI")
         check_ethernet(components, sheet="GbE", project="right_io")
+        check_fpc_connectors(components, "FPC104", "ducktop2",
+                             "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+                             "fpc2")
         print("right_io schematic design contract checks OK")
     if args.project == "ducktop2" and not args.schematic_only:
         check_main_pcb_contract(components, fps, pcb_text)
         check_drc_fatal_categories(run_current_drc())
         print("ducktop2 full design contract checks OK")
     return 0
+
+def check_fpc_connectors(components, ref, lib, footprint, contract, bms_side=False):
+    """Phase 4a: FPC connector boundary contracts (board split).
+
+    Asserts the connector exists with the exact footprint and that the
+    pins wired in the schematic match fpc_contract.py's authoritative pin
+    map -- the same conductor order must exist on both ends of every FPC.
+    The bms side maps PACK_NEG_RAW pins to the pack negative net; the
+    center side joins them to GND.
+    """
+    import fpc_contract as fpc
+
+    pinmap = {"fpc1": fpc.FPC1_PINMAP, "fpc2": fpc.FPC2_PINMAP,
+              "fpc3": fpc.FPC3_PINMAP}[contract]
+    expect(comp(components, ref).footprint, f"{lib}:{footprint}",
+           f"{ref} footprint")
+    for pin, netname in pinmap.items():
+        if netname == "GND":
+            want = "GND"
+        elif contract == "fpc3" and not bms_side and netname == "PACK_NEG_RAW":
+            want = "GND"
+        else:
+            want = f"/{netname}"
+        expect(net(components, ref, str(pin)), want, f"{ref} pin {pin}")
+    expect(net(components, ref, "MP"), "GND", f"{ref} MP hold-down tab")
+    print(f"    FPC {ref}: {len(pinmap)} pin contract OK")
+
 
 def check_bms_pack(components):
     """BMS daughterboard pack protection contracts (board split Phase 2.4).
@@ -3214,7 +3259,7 @@ def check_bms_pack(components):
     expect(net(components, "F1", "2"), "/BAT_PROT_VIN", "F1 protected-entry output")
     for pin, want in {
         "1": "/BAT_PROT_VIN", "2": "/BAT_PROT_UV",
-        "3": "/BAT_PROT_OV", "4": "/GND", "5": "/GND",
+        "3": "/BAT_PROT_OV", "4": "GND", "5": "GND",
         "6": "/BAT_PROT_SHDN", "7": "/PACK_FAULT_N",
         "8": "/PACK_POS_FUSED",
         "9": "/BAT_PROT_SENSE", "10": "/BAT_PROT_GATE",
@@ -3232,7 +3277,7 @@ def check_bms_pack(components):
     expect_value_prefix(components, "C725", "10u 25V X7R", "LTC4368 VOUT capacitor")
     expect(net(components, "C725", "1"), "/PACK_POS_FUSED",
            "LTC4368 VOUT capacitor protected rail")
-    expect(net(components, "C725", "2"), "/GND", "LTC4368 VOUT capacitor return")
+    expect(net(components, "C725", "2"), "GND", "LTC4368 VOUT capacitor return")
     expect(prop(components, "C725", "MPN"), "GRM21BZ71E106KE15L",
            "LTC4368 VOUT capacitor exact MPN")
     expect_value_prefix(components, "R700", "3.09M 1%", "LTC4368 pack-window top")
@@ -3241,7 +3286,7 @@ def check_bms_pack(components):
     expect(net(components, "R703", "1"), "/BAT_PROT_GATE", "LTC4368 CGATE resistor input")
     expect(net(components, "R703", "2"), "/BAT_PROT_CGATE", "LTC4368 CGATE resistor output")
     expect(net(components, "C700", "1"), "/BAT_PROT_CGATE", "LTC4368 CGATE capacitor")
-    expect(net(components, "C700", "2"), "/GND", "LTC4368 CGATE capacitor return")
+    expect(net(components, "C700", "2"), "GND", "LTC4368 CGATE capacitor return")
     expect(net(components, "C724", "1"), "/BAT_PROT_GATE", "LTC4368 hot-swap capacitor gate")
     expect(net(components, "C724", "2"), "/BAT_PROT_FET_COMMON", "LTC4368 hot-swap capacitor source")
     expect(net(components, "R707", "1"), "/BAT_PROT_VIN", "pack protector SHDN pull-up source")
@@ -3251,12 +3296,12 @@ def check_bms_pack(components):
     expect(net(components, "R708", "2"), "/PACK_FAULT_N", "pack protector FAULT output")
     expect_value_prefix(components, "R708", "10k", "pack protector FAULT pull-up")
     for pin, want in {
-        "1": "/PACK_RETRY_PULSE", "2": "/GND", "3": "/BAT_PROT_SHDN",
+        "1": "/PACK_RETRY_PULSE", "2": "GND", "3": "/BAT_PROT_SHDN",
     }.items():
         expect(net(components, "Q701", pin), want, f"pack protector retry transistor pin {pin}")
     expect_value_prefix(components, "R709", "100k", "pack retry default-off pull-down")
     expect(net(components, "R709", "1"), "/PACK_RETRY_PULSE", "pack retry pull-down signal")
-    expect(net(components, "R709", "2"), "/GND", "pack retry pull-down return")
+    expect(net(components, "R709", "2"), "GND", "pack retry pull-down return")
 
 
 if __name__ == "__main__":

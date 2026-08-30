@@ -24,7 +24,8 @@ import generate_power_inputs_sheet as pwrin
 import generate_usb_c_io_sheet as usb
 import build_ducktop2 as b
 from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, FOOTPRINTS
-from generate_mu_carrier_sheet import root_label, sheet_block
+from generate_mu_carrier_sheet import root_label, sheet_block, build_fpc_sheet
+import fpc_contract as fpc
 
 BOARD_DIR = os.path.join(PROJDIR, "right_io")
 PROJECT_NAME = "right_io"
@@ -79,6 +80,20 @@ def main() -> int:
     hdmi_s = write_generated_sheet("hdmi", "right_hdmi.kicad_sch", build_right_hdmi_sheet)
     eth_s = write_generated_sheet("eth", "right_eth.kicad_sch", build_right_eth_sheet)
 
+    # Phase 4a: FPC-2 connector sheet (the physical FH12-100S on the right
+    # board edge).  Pin map from fpc_contract.py -- same conductor order as
+    # the center's FPC2_C.
+    fpc2_sheet_uuid = stable_uuid("right_io:sheet:fpc2")
+    with uuid_scope("right_io:fpc2"):
+        fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC104", "Conn_01x100_FFC_MP",
+                                 fpc.FPC2_PINMAP, "FH12-100S-0.5SH (FPC-2)",
+                                 pwr_base=3500)
+        fpc2_text = fpc2_s.render(stable_uuid("right_io:self:fpc2"),
+                                  page_number=4, paper="A1")
+    with open(os.path.join(BOARD_DIR, "right_fpc.kicad_sch"), "w",
+              encoding="utf-8") as f:
+        f.write(fpc2_text)
+
     # Collect the FPC-2 boundary nets = all hier labels across the sheets.
     hier_nets = set()
     pd_sheet_nets, hdmi_sheet_nets, eth_sheet_nets = set(), set(), set()
@@ -101,6 +116,9 @@ def main() -> int:
                                 "HDMI", "right_hdmi.kicad_sch", sorted(hdmi_sheet_nets))
     eth_block, eth_pins = sheet_block(eth_uuid, 30.48, 400.05, 119.38, 149.86,
                                "GbE", "right_eth.kicad_sch", sorted(eth_sheet_nets))
+    fpc2_block, fpc2_pins = sheet_block(fpc2_sheet_uuid, 170.0, 39.37, 119.38, 149.86,
+                                 "FPC-2 (to Center)", "right_fpc.kicad_sch",
+                                 fpc.FPC2_NETS)
 
     root = []
     root.append(f'(kicad_sch\n  (version 20260306)\n  (generator "eeschema")\n  (generator_version "10.0")\n'
@@ -108,14 +126,19 @@ def main() -> int:
     root.append(pd_block)
     root.append(hdmi_block)
     root.append(eth_block)
+    root.append(fpc2_block)
     # Root labels sit exactly on the hosting sheet's block pin endpoint so
-    # KiCad wires each label to that sheet's hierarchical label.
+    # KiCad wires each label to that sheet's hierarchical label.  FPC-2 nets
+    # are hosted by the pd/hdmi/eth sheets AND the FPC-2 connector sheet;
+    # labels at both block pins join the nets by name.
     for net in sorted(pd_sheet_nets):
         root.append(root_label(pd_pins[net], net))
     for net in sorted(hdmi_sheet_nets):
         root.append(root_label(hdmi_pins[net], net))
     for net in sorted(eth_sheet_nets):
         root.append(root_label(eth_pins[net], net))
+    for net in fpc.FPC2_NETS:
+        root.append(root_label(fpc2_pins[net], net))
     root.append(f'  (sheet_instances\n    (path "/"\n      (page "1")\n    )\n  )\n  (embedded_fonts no)\n)')
     with open(os.path.join(BOARD_DIR, "right_io.kicad_sch"), "w", encoding="utf-8") as f:
         f.write("\n".join(root))
