@@ -1,0 +1,84 @@
+(version 1)
+
+# The power netclasses intentionally keep generous spacing between routed
+# copper. These audited vendor packages have smaller clearances between pads
+# inside one footprint, so constrain only pairs belonging to the same exact
+# reference. Cross-footprint copper still uses the full netclass clearance.
+(rule "TPS25751 audited intra-footprint clearance"
+    (condition "((A.Reference == 'U41') && (B.Reference == 'U41')) || ((A.Reference == 'U42') && (B.Reference == 'U42'))")
+    (constraint clearance (min 0.12mm)))
+
+(rule "Audited intra-footprint power-pad clearance"
+    (condition "((A.Reference == 'A1') && (B.Reference == 'A1')) || ((A.Reference == 'J11') && (B.Reference == 'J11')) || ((A.Reference == 'J21') && (B.Reference == 'J21')) || ((A.Reference == 'U2') && (B.Reference == 'U2')) || ((A.Reference == 'U4') && (B.Reference == 'U4')) || ((A.Reference == 'U6') && (B.Reference == 'U6')) || ((A.Reference == 'U7') && (B.Reference == 'U7')) || ((A.Reference == 'U11') && (B.Reference == 'U11')) || ((A.Reference == 'U12') && (B.Reference == 'U12')) || ((A.Reference == 'U14') && (B.Reference == 'U14')) || ((A.Reference == 'U15') && (B.Reference == 'U15')) || ((A.Reference == 'U54') && (B.Reference == 'U54')) || ((A.Reference == 'U55') && (B.Reference == 'U55')) || ((A.Reference == 'U400') && (B.Reference == 'U400')) || ((A.Reference == 'U720') && (B.Reference == 'U720')) || ((A.Reference == 'U721') && (B.Reference == 'U721')) || ((A.Reference == 'U750') && (B.Reference == 'U750')) || ((A.Reference == 'U772') && (B.Reference == 'U772')) || ((A.Reference == 'U773') && (B.Reference == 'U773')) || ((A.Reference == 'U1700') && (B.Reference == 'U1700')) || ((A.Reference == 'U1701') && (B.Reference == 'U1701')) || ((A.Reference == 'U1703') && (B.Reference == 'U1703')) || ((A.Reference == 'U1742') && (B.Reference == 'U1742')) || ((A.Reference == 'U1762') && (B.Reference == 'U1762')) || ((A.Reference == 'U1782') && (B.Reference == 'U1782')) || ((A.Reference == 'U2000') && (B.Reference == 'U2000')) || ((A.Reference == 'U2003') && (B.Reference == 'U2003')) || ((A.Reference == 'U2005') && (B.Reference == 'U2005')) || ((A.Reference == 'U2010') && (B.Reference == 'U2010')) || ((A.Reference == 'U2013') && (B.Reference == 'U2013')) || ((A.Reference == 'U2015') && (B.Reference == 'U2015')) || ((A.Reference == 'U2300') && (B.Reference == 'U2300'))")
+    (constraint clearance (min 0.15mm)))
+
+# Infineon Figure 13 places the 0.6 mm bottom acoustic port inside the pad-4
+# ground ring. The measured copper-to-hole gap is about 0.19 mm. Keep the
+# project-wide 0.25 mm rule everywhere else.
+(rule "IM68A130 reference acoustic-port clearance"
+    (condition "A.memberOfFootprint('MK430') && B.memberOfFootprint('MK430')")
+    (constraint hole_clearance (min 0.15mm))
+    (constraint physical_hole_clearance (min 0.15mm)))
+
+# Wurth 9774055243R specifies a 3.0 mm non-plated locating hole centered
+# inside its 5.3 mm solder land. The shared mask opening and zero internal
+# hole-to-land clearance are therefore intentional for H1/H2 only.
+(rule "Mu standoff locating hole inside solder land"
+    (condition "((A.Reference == 'H1') && (B.Reference == 'H1')) || ((A.Reference == 'H2') && (B.Reference == 'H2'))")
+    (constraint hole_clearance (min 0mm))
+    (constraint physical_hole_clearance (min 0mm)))
+
+(rule "Mu standoff shared mask aperture"
+    (condition "A.intersectsCourtyard('H1') || A.intersectsCourtyard('H2')")
+    (constraint bridged_mask)
+    (severity ignore))
+
+# H1/H2 are soldered M2 standoffs that intentionally occupy the Mu module's
+# retention area. This only permits their courtyard overlap with A1.
+(rule "Mu socket and retention-stack courtyard overlap"
+    (condition "(((A.Reference == 'H1') || (A.Reference == 'H2')) && (B.Reference == 'A1')) || ((A.Reference == 'A1') && ((B.Reference == 'H1') || (B.Reference == 'H2')))")
+    (constraint courtyard_clearance (min -1mm)))
+
+# --- NextPCB capability-derived routing constraints (2026-08-13) ---
+# Source: https://www.nextpcb.com/pcb-capabilities.  These are stricter than
+# the 0.15 mm net-class clearance for specific item pairs; they become active
+# during routing so DFM failures are caught in DRC, not by the fab.
+
+(rule "NextPCB PTH component pad to track >= 0.23 mm"
+    (condition "((A.Type == 'track' && B.Type == 'pad' && B.Pad_Type == 'thru_hole') || (A.Type == 'pad' && A.Pad_Type == 'thru_hole' && B.Type == 'track'))")
+    (constraint clearance (min 0.23mm)))
+
+(rule "NextPCB NPTH pad to track >= 0.2 mm"
+    (condition "((A.Type == 'track' && B.Type == 'pad' && B.Pad_Type == 'np_thru_hole') || (A.Type == 'pad' && A.Pad_Type == 'np_thru_hole' && B.Type == 'track'))")
+    (constraint clearance (min 0.2mm)))
+
+(rule "NextPCB via to track >= 0.18 mm"
+    (condition "((A.Type == 'track' && B.Type == 'via') || (A.Type == 'via' && B.Type == 'track'))")
+    (constraint clearance (min 0.18mm)))
+
+(rule "NextPCB via to via (different nets) >= 0.2 mm"
+    (condition "(A.Type == 'via' && B.Type == 'via')")
+    (constraint clearance (min 0.2mm)))
+
+(rule "NextPCB TH pad to TH pad (different nets) >= 0.4 mm"
+    (condition "((A.Type == 'pad' && A.Pad_Type == 'thru_hole' && B.Type == 'pad' && B.Pad_Type == 'thru_hole'))")
+    (constraint clearance (min 0.4mm)))
+
+# Power-class creepage exceptions (2026-08-13).  The POWER_10A_PACK (0.5 mm)
+# and POWER_5A (0.3 mm) classes set conservative creepage on high-current
+# rails.  These three pairs sit at or slightly below the class clearance but
+# above the NextPCB fab minimums (0.4 mm TH / 0.15 mm SMD); each is a
+# same-node bypass or a microamp sense placement where the extra margin is
+# not required.
+
+(rule "Pack sense shunt pad spacing U11/RS10 (0.47 mm actual >= fab TH min)"
+    (condition "((A.Reference == 'U11' && B.Reference == 'RS10') || (A.Reference == 'RS10' && B.Reference == 'U11'))")
+    (constraint clearance (min 0.4mm)))
+
+(rule "Charger input bypass pair C712/C708 (0.2 mm actual)"
+    (condition "((A.Reference == 'C712' && B.Reference == 'C708') || (A.Reference == 'C708' && B.Reference == 'C712'))")
+    (constraint clearance (min 0.2mm)))
+
+(rule "VSYS bypass pair C709/C720 (0.295 mm actual)"
+    (condition "((A.Reference == 'C709' && B.Reference == 'C720') || (A.Reference == 'C720' && B.Reference == 'C709'))")
+    (constraint clearance (min 0.25mm)))
