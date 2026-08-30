@@ -859,6 +859,70 @@ def assign_connector_pad_nets(path, ref, pinmap):
     return changed
 
 
+def inherit_netclasses():
+    """Copy net class definitions + per-net patterns from the main project's
+    .kicad_pro into the daughterboard projects (Phase 4a).
+
+    Net classes live in the project board settings (.kicad_pro
+    net_settings): class definitions plus netclass_patterns (net name ->
+    class).  The daughterboards were created without them, so every net
+    silently routed as Default.  Each board inherits only the patterns
+    matching its own netlist nets; the BMS pack rails get POWER_HI.
+    The MCP board sync clobbers .kicad_pro files, so this runs at the END
+    of the split (after every sync).
+    """
+    import json
+    import re as _re
+
+    def find(o, key):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if k == key:
+                    return v
+                r = find(v, key)
+                if r is not None:
+                    return r
+        elif isinstance(o, list):
+            for v in o:
+                r = find(v, key)
+                if r is not None:
+                    return r
+        return None
+
+    center = json.load(open(os.path.join(PROJDIR, "ducktop2.kicad_pro")))
+    cns = find(center, "net_settings")
+    center_classes = {c["name"]: c for c in cns["classes"]}
+    center_patterns = cns["netclass_patterns"]
+
+    def nets(xml):
+        t = open(xml).read()
+        return set(_re.findall(r'<net code="\d+" name="([^"]*)"', t))
+
+    extra = {"bms": [{"netclass": "POWER_HI", "pattern": "/PACK_POS_FUSED"},
+                     {"netclass": "POWER_HI", "pattern": "/PACK_NEG_RAW"}]}
+    for board, xml in (("left_io", "verification/left_io_netlist.xml"),
+                       ("right_io", "verification/right_io_netlist.xml"),
+                       ("bms", "verification/bms_netlist.xml")):
+        d = json.load(open(os.path.join(PROJDIR, board, f"{board}.kicad_pro")))
+        ns = find(d, "net_settings")
+        have = {c["name"] for c in ns["classes"]}
+        for name, cls in center_classes.items():
+            if name != "Default" and name not in have:
+                ns["classes"].append(cls)
+                have.add(name)
+        n = nets(os.path.join(PROJDIR, xml))
+        apply = [p for p in center_patterns if p["pattern"] in n]
+        apply += extra.get(board, [])
+        existing = {(p["pattern"], p["netclass"])
+                    for p in ns["netclass_patterns"]}
+        for p in apply:
+            if (p["pattern"], p["netclass"]) not in existing:
+                ns["netclass_patterns"].append(p)
+        json.dump(d, open(os.path.join(PROJDIR, board, f"{board}.kicad_pro"),
+                          "w"), indent=2)
+        print(f"    netclasses {board}: {sorted(have)}")
+
+
 def main():
     parts = {k: netlist_refs(v) for k, v in NETLISTS.items()}
     orphans = None
@@ -1163,6 +1227,10 @@ def main():
                     print(f"   CONNECTOR OVERLAP: {cr} <-> {r}")
         print(f"    connectors {n_conn}, pad overlaps: "
               f"{sum(1 for cr in conn_refs for r in pl if r != cr and not r.startswith('FPC') and pads_overlap(pl[cr], pl[r], margin=0.05))}")
+
+    # Phase 4a: daughterboards inherit the net class definitions + per-net
+    # patterns from the main project (the MCP sync clobbers .kicad_pro).
+    inherit_netclasses()
 
 
 if __name__ == "__main__":
