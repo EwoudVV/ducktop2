@@ -20,7 +20,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 import build_ducktop2 as b
 from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, FOOTPRINTS
-from generate_mu_carrier_sheet import root_label
+from generate_mu_carrier_sheet import root_label, place_fpc_connector
+import fpc_contract as fpc
 
 BOARD_DIR = os.path.join(PROJDIR, "bms")
 PROJECT_NAME = "bms"
@@ -206,6 +207,14 @@ def build_bms_sheet(sheet_symbol_uuid):
     # FPC-3 boundary markers
     s.pwrflag(20, 400, "PACK_POS_FUSED")
     s.pwrflag(20, 420, "PACK_NEG_RAW")
+
+    # Phase 4a: FPC-3 connector (the physical FH12-30S on the BMS board
+    # edge).  Pin map from fpc_contract.py -- same conductor order as the
+    # center's FPC3_C.  The pack rails (PACK_POS_FUSED, PACK_NEG_RAW),
+    # FG_VSS, MCU_3V3, PACK_FAULT_N and PACK_RETRY_PULSE cross here; the
+    # hier labels at the connector pins make them boundary nets.
+    place_fpc_connector(s, "FPC106", "Conn_01x30_FFC_MP", fpc.FPC3_PINMAP,
+                        "FH12-30S-0.5SH (FPC-3)", x=490, y=250, pwr_base=3600)
     return s
 
 
@@ -214,7 +223,7 @@ def main() -> int:
     sheet_uuid = stable_uuid("bms:sheet:main")
     with uuid_scope("bms:main"):
         sheet = build_bms_sheet(sheet_uuid)
-        text = sheet.render(stable_uuid("bms:self:main"), page_number=1)
+        text = sheet.render(stable_uuid("bms:self:main"), page_number=1, paper="A1")
     with open(os.path.join(BOARD_DIR, "bms.kicad_sch"), "w", encoding="utf-8") as f:
         f.write(text)
 

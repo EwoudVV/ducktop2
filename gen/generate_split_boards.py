@@ -69,18 +69,23 @@ HOLES = {
     "B": [],
 }
 
-# FPC connectors (Phase 3 = placement only; Phase 4 wires them)
+# FPC connectors (Phase 3 = placement only; Phase 4 = wired through the
+# schematics: refs FPC101..FPC106 match the connector sheets, so the sync
+# from each schematic places them WITH their pad nets; this script only
+# re-positions them.  The center board is built text-side from the old
+# board, so its connectors are added here and get their pad nets assigned
+# text-side from fpc_contract (assign_connector_pad_nets).)
 FH12_100 = "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal"
 FH12_30 = "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal"
 CONNECTORS = {
-    "L": [("FPC1_L", "ducktop2", FH12_100, (65.6, 92.5), 90)],
+    "L": [("FPC101", "ducktop2", FH12_100, (65.6, 92.5), 90)],
     "C": [
-        ("FPC1_C", "ducktop2", FH12_100, (72.75, 92.5), 270),
-        ("FPC2_C", "ducktop2", FH12_100, (294.6, 92.5), 90),
-        ("FPC3_C", "Connector_FFC-FPC", FH12_30, (120, 2.6), 0),
+        ("FPC102", "ducktop2", FH12_100, (72.75, 92.5), 270),
+        ("FPC103", "ducktop2", FH12_100, (294.6, 92.5), 90),
+        ("FPC105", "Connector_FFC-FPC", FH12_30, (120, 2.6), 0),
     ],
-    "R": [("FPC2_R", "ducktop2", FH12_100, (302.7, 92.5), 270)],
-    "B": [("FPC3_B", "Connector_FFC-FPC", FH12_30, (30, 55.8), 180)],
+    "R": [("FPC104", "ducktop2", FH12_100, (302.7, 92.5), 270)],
+    "B": [("FPC106", "Connector_FFC-FPC", FH12_30, (30, 55.8), 180)],
 }
 
 CONNECTOR_KEEPOUT = {
@@ -165,10 +170,12 @@ def parse_pad_bboxes(path):
             pa = float(am.group(3)) if am.group(3) else 0.0
             w, h = float(sm.group(1)), float(sm.group(2))
             # KiCad y-down convention: pad centre offset rotates by -R
-            # relative to the mathematical +R of the footprint rotation
+            # relative to the mathematical +R of the footprint rotation.
+            # Pads are saved with WORLD orientation (empirically verified
+            # vs pcbnew: the stored rotation alone describes the shape).
             cx = fx + px * math.cos(rad) + py * math.sin(rad)
             cy = fy - px * math.sin(rad) + py * math.cos(rad)
-            ang = rad + math.radians(pa)
+            ang = math.radians(pa)
             hw = abs(w / 2 * math.cos(ang)) + abs(h / 2 * math.sin(ang))
             hh = abs(w / 2 * math.sin(ang)) + abs(h / 2 * math.cos(ang))
             pads.append((cx, cy, hw, hh))
@@ -388,6 +395,112 @@ def parse_fp_pads(path):
     return pads
 
 
+def nudge_connector_collisions(board_key, connectors, final_pads, region,
+                               padlists, moves, old, board_refs=None):
+    """Move parts whose pads collide with a connector's pads out of the way.
+
+    The center board's edges are packed with parts from the monolithic
+    layout, so the 100-pin FPC-1/FPC-2 connectors have no collision-free
+    spot at their preferred anchors.  The connector stays at its anchor;
+    each colliding part is shifted perpendicular to the connector axis
+    (away from the board edge) in 0.5mm steps until it clears the
+    connector pads AND everything else (0.8mm margin).  Shifts land in
+    `moves` so the text-side placement applies them.
+
+    Only parts that REMAIN on this board are considered (parts moving to
+    another board sit at irrelevant old positions near the cut lines).
+    """
+    x0, y0, x1, y1 = region
+    placed = {}
+    for r, pads in padlists.items():
+        if board_refs is not None and r not in board_refs:
+            continue
+        if r in moves:
+            dx = moves[r][0] - old[r][0]
+            dy = moves[r][1] - old[r][1]
+            placed[r] = [(px + dx, py + dy, hw, hh) for (px, py, hw, hh) in pads]
+        else:
+            placed[r] = list(pads)
+    conn_collided = {}
+    for (ref, lib, name, pos, rot) in connectors:
+        fname = name if lib == "ducktop2" else name
+        fpath = os.path.join(LIB_DIRS[lib], fname + ".kicad_mod")
+        conn_pads = parse_fp_pads(fpath)
+        import math
+        rad = math.radians(rot)
+        wp = []
+        for (lx, ly, hw, hh) in conn_pads:
+            cx = pos[0] + lx * math.cos(rad) + ly * math.sin(rad)
+            cy = pos[1] - lx * math.sin(rad) + ly * math.cos(rad)
+            hwr = abs(hw * math.cos(rad)) + abs(hh * math.sin(rad))
+            hhr = abs(hw * math.sin(rad)) + abs(hh * math.cos(rad))
+            wp.append((cx, cy, hwr, hhr))
+        collided = set()
+        # parts currently colliding with the connector (their FINAL pads)
+        for _pass in range(4):
+            colliders = []
+            for r, pads in placed.items():
+                if r.startswith("FPC") or r in collided:
+                    continue
+                if pads_overlap(wp, pads, margin=0.45):
+                    colliders.append(r)
+            if not colliders:
+                break
+            collided.update(colliders)
+            for r in colliders:
+                pads = placed[r]
+                if r in moves:
+                    ax, ay = moves[r][0], moves[r][1]
+                else:
+                    ax, ay = old[r][0], old[r][1]
+                cur = [(px + ax - old[r][0], py + ay - old[r][1], hw, hh)
+                       for (px, py, hw, hh) in pads]
+                # preferred direction: away from the connector's side
+                cx = sum(p[0] for p in cur) / len(cur)
+                step_x = 1.0 if cx < pos[0] else -1.0
+                cy = sum(p[1] for p in cur) / len(cur)
+                step_y = 1.0 if cy < pos[1] else -1.0
+                found = None
+                # try axis-away shifts first, then the other axis, then the
+                # reverse directions (parts can sit between the connector
+                # body and its pin column, where "away" is the interior).
+                dirs = [(step_x, 0.0), (0.0, step_y), (-step_x, 0.0),
+                        (0.0, -step_y)]
+                candidates = []
+                for (dxu, dyu) in dirs:
+                    candidates += [(dxu * s * 0.5, dyu * s * 0.5)
+                                   for s in range(1, 21)]
+                candidates += [(step_x * s * 0.5, step_y * s * 0.5)
+                               for s in range(1, 11)]
+                for (dx, dy) in candidates:
+                    cand = [(px + dx, py + dy, hw, hh) for (px, py, hw, hh) in cur]
+                    if any(px - hw < x0 + 0.7 or px + hw > x1 - 0.7
+                           or py - hh < y0 + 0.7 or py + hh > y1 - 0.7
+                           for (px, py, hw, hh) in cand):
+                        continue
+                    if pads_overlap(wp, cand, margin=0.35):
+                        continue
+                    bad = False
+                    for o, opads in placed.items():
+                        if o == r or o.startswith("FPC"):
+                            continue
+                        if pads_overlap(cand, opads):
+                            bad = True
+                            break
+                    if not bad:
+                        found = (ax + dx, ay + dy)
+                        break
+                if found:
+                    moves[r] = (found[0], found[1], old[r][2])
+                    placed[r] = [(px + found[0] - old[r][0],
+                                  py + found[1] - old[r][1], hw, hh)
+                                 for (px, py, hw, hh) in pads]
+                    print(f"    nudge {r}: -> ({found[0]:.1f}, {found[1]:.1f})")
+                else:
+                    print(f"    WARN: no nudge spot for {r} near {ref}")
+    return moves
+
+
 def resolve_connectors(board_key, final_pads, region, keepout, holes_pads):
     """Find clear positions for the board's FPC connectors.
 
@@ -434,9 +547,16 @@ def resolve_connectors(board_key, final_pads, region, keepout, holes_pads):
         for (ax, ay) in candidates:
             wp = []
             for (lx, ly, hw, hh) in pads:
-                cx = ax + lx * math.cos(rad) - ly * math.sin(rad)
-                cy = ay + lx * math.sin(rad) + ly * math.cos(rad)
-                wp.append((cx, cy, hw, hh))
+                # KiCad y-down rotation: pad offsets rotate by -R (the
+                # packer and pcbnew agree on this convention; a naive +R
+                # here silently placed connectors over parts in Phase 3).
+                # The library pads are footprint-local, so their half
+                # extents rotate with the footprint too.
+                cx = ax + lx * math.cos(rad) + ly * math.sin(rad)
+                cy = ay - lx * math.sin(rad) + ly * math.cos(rad)
+                hwr = abs(hw * math.cos(rad)) + abs(hh * math.sin(rad))
+                hhr = abs(hw * math.sin(rad)) + abs(hh * math.cos(rad))
+                wp.append((cx, cy, hwr, hhr))
             ok = True
             for (cx, cy, hw, hh) in wp:
                 if cx - hw < x0 + 0.6 or cy - hh < y0 + 0.6 \
@@ -658,6 +778,87 @@ def parse_old_placements(path):
     return out
 
 
+def assign_connector_pad_nets(path, ref, pinmap):
+    """Text-side pad net assignment for the center board's FPC connectors
+    (added by pcbnew without nets; the sync never touched them).
+
+    This project's boards carry pad nets as (net "NAME") lines -- KiCad 10
+    writes code-less net references -- so the connector pads get the same
+    form.  Same map on both ends: the center-side map renames PACK_NEG_RAW
+    to GND.
+    """
+    import fpc_contract as fpc_contract
+
+    txt = open(path).read()
+
+    def center_name(n):
+        return fpc_contract.CENTER_RENAME.get(n, n)
+
+    changed = 0
+    out = []
+    pos = 0
+    while True:
+        m = re.search(r'^\t\(footprint "([^"]+)"\n', txt[pos:], re.M)
+        if not m:
+            out.append(txt[pos:])
+            break
+        start = pos + m.start()
+        depth = 0
+        j = start
+        while j < len(txt):
+            if txt[j] == "(":
+                depth += 1
+            elif txt[j] == ")":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        block = txt[start:j + 1]
+        refm = re.search(r'\n\t\t\(property "Reference" "([^"]+)"\n', block)
+        if refm is None or refm.group(1) != ref:
+            out.append(txt[pos:start])
+            out.append(block)
+            pos = j + 1
+            continue
+        newblock = []
+        ppos = 0
+        while True:
+            pm = re.search(r'\n\t\t\(pad "([^"]+)" smd', block[ppos:])
+            if not pm:
+                newblock.append(block[ppos:])
+                break
+            pstart = ppos + pm.start()
+            depth = 0
+            q = pstart
+            while q < len(block):
+                if block[q] == "(":
+                    depth += 1
+                elif block[q] == ")":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                q += 1
+            pblock = block[pstart:q + 1]
+            num = pm.group(1)
+            if num == "MP":
+                name = "GND"
+            else:
+                name = center_name(pinmap.get(int(num)) if num.isdigit() else pinmap.get(num))
+            if name is None:
+                raise SystemExit(f"{ref} pad {num} not in pin map")
+            pblock = re.sub(r'\n\t\t\t\(net "[^"]*"\)\n', "", pblock)
+            pblock = pblock.rstrip(")").rstrip() + f'\n\t\t\t(net "{name}")\n\t\t)'
+            newblock.append(block[ppos:pstart])
+            newblock.append(pblock)
+            ppos = q + 1
+            changed += 1
+        out.append(txt[pos:start])
+        out.append("".join(newblock))
+        pos = j + 1
+    open(path, "w").write("".join(out))
+    return changed
+
+
 def main():
     parts = {k: netlist_refs(v) for k, v in NETLISTS.items()}
     orphans = None
@@ -700,8 +901,8 @@ def main():
         if build:
             board = pcbnew.LoadBoard(out)
             board_refs = {fp.GetReference(): fp for fp in board.GetFootprints()}
-            leftovers = [r for r in board_refs if r.startswith("FPC")
-                         or r in HOLES[board_key]]
+            leftovers = [r for r in board_refs
+                         if r not in parts[board_key] and r not in HOLES[board_key]]
             assert not leftovers, \
                 f"{board_key} board not clean, leftovers: {leftovers}"
             refs = set(board_refs)
@@ -728,7 +929,8 @@ def main():
 
         in_region = sorted(r for r in refs if r in old and not crosses_internal(r))
         out_region = sorted(r for r in refs if r in old and crosses_internal(r)) \
-            + sorted(r for r in refs if r not in old)
+            + sorted(r for r in refs if r not in old and not r.startswith("FPC"))
+        fpc_refs = sorted(r for r in refs if r.startswith("FPC"))
 
         # 2) transplant placement from the original board
         for r in in_region + out_region:
@@ -851,19 +1053,43 @@ def main():
                 assert 65.0 <= pos[0] <= 70, f"{ref} not on L edge: {pos}"
             if board_key == "R":
                 assert 300.0 <= pos[0] <= 305, f"{ref} not on R edge: {pos}"
+        # Phase 4a: edges are packed with parts from the monolithic layout,
+        # so the connectors may have no collision-free spot at their
+        # preferred anchors; nudge the colliding parts away instead.
+        if any(pos == p for (ref, lib, name, pos, rot) in connectors
+               for (_ref, _lib, _name, p, _rot) in CONNECTORS[board_key]) or True:
+            nudge_connector_collisions(board_key, connectors, final_pads,
+                                       region, padlists, moves, old, refs)
+            if build:
+                for r, (nx, ny, rot) in moves.items():
+                    fp = board_refs.get(r)
+                    if fp is None:
+                        continue
+                    fp.SetPosition(pcbnew.VECTOR2I(int(nx * 1e6),
+                                                   int(ny * 1e6)))
         CONNECTORS_FINAL[board_key] = connectors
 
         if build:
-            # 4) holes (board-only, loaded from their libraries)
+            # 4) holes (board-only, loaded from their libraries).  Skip any
+            # that already exist so the script is idempotent across reruns.
             if HOLES[board_key]:
                 for h in HOLES[board_key]:
+                    if h in board_refs:
+                        continue
                     ox, oy = old[h][0], old[h][1]
                     add_fp(board, "MountingHole", "MountingHole_2.7mm_M2.5",
                            h, (ox, oy), 0)
 
-            # 5) FPC connectors
-            for ref, lib, name, pos, rot in CONNECTORS_FINAL[board_key]:
-                add_fp(board, lib, name, ref, pos, rot)
+            # 5) FPC connectors: already on the board from the schematic
+            # sync WITH their pad nets; re-position to the resolved spots.
+            for (ref, lib, name, pos, rot) in CONNECTORS_FINAL[board_key]:
+                if ref in board_refs:
+                    fp = board_refs[ref]
+                    fp.SetPosition(pcbnew.VECTOR2I(int(pos[0] * 1e6),
+                                                   int(pos[1] * 1e6)))
+                    fp.SetOrientationDegrees(rot)
+                else:
+                    add_fp(board, lib, name, ref, pos, rot)
 
             pcbnew.SaveBoard(out, board)
             splice_setup_layers(out)
@@ -872,9 +1098,22 @@ def main():
             # fresh subprocess (Remove+Set* poisons SWIG in-process)
             build_center_text(out, keep_center, moves)
             add_connectors_pcbnew(out, CONNECTORS_FINAL[board_key])
+            # Phase 4a: the center's connectors were added without nets;
+            # assign pad nets text-side from the FPC contract maps.
+            import fpc_contract as fpc_contract
+            for ref, _lib, _name, _pos, _rot in CONNECTORS_FINAL[board_key]:
+                pinmap = {
+                    "FPC102": fpc_contract.FPC1_PINMAP,
+                    "FPC103": fpc_contract.FPC2_PINMAP,
+                    "FPC105": fpc_contract.FPC3_PINMAP,
+                }[ref]
+                n = assign_connector_pad_nets(out, ref, pinmap)
+                print(f"    {ref}: assigned {n} pad nets")
         inject_outline_text(out, OUTLINES[board_key])
         print(f"[{board_key}] wrote {out}")
-        print(f"    footprints: {len(board_refs) + len(HOLES[board_key]) + len(CONNECTORS_FINAL[board_key])}")
+        n_conn = len(CONNECTORS_FINAL[board_key])
+        n_fpc_present = len([r for r in board_refs if r.startswith("FPC")])
+        print(f"    footprints: {len(board_refs) + len(HOLES[board_key]) + n_conn - n_fpc_present}")
 
     # --- verification: every footprint inside its region (pad-based bbox) ---
     for board_key, out_rel in (
@@ -909,6 +1148,21 @@ def main():
         for r, b in overhang[:5]:
             print("   edge overhang (chassis, ok):", r,
                   tuple(round(v, 1) for v in b))
+        # connector pad-level collision check: every FPC connector pad must
+        # clear every OTHER footprint's pads (real geometry from the board
+        # text, rotation-agnostic).
+        _, pl = parse_pad_bboxes(out)
+        conn_refs = [r for r in pl if r.startswith("FPC")]
+        n_conn = 0
+        for cr in conn_refs:
+            n_conn += 1
+            for r, pads in pl.items():
+                if r == cr or r.startswith("FPC"):
+                    continue
+                if pads_overlap(pl[cr], pads, margin=0.15):
+                    print(f"   CONNECTOR OVERLAP: {cr} <-> {r}")
+        print(f"    connectors {n_conn}, pad overlaps: "
+              f"{sum(1 for cr in conn_refs for r in pl if r != cr and not r.startswith('FPC') and pads_overlap(pl[cr], pl[r], margin=0.05))}")
 
 
 if __name__ == "__main__":

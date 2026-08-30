@@ -41,7 +41,11 @@ def build(sheet_symbol_uuid):
     s.pwrflag(200, 45, "FG_VSS")
     s.pwrflag(200, 105, "GND")
     s.text(200, 55, "FPC-3 to BMS: PACK_POS_FUSED / PACK_FAULT_N / PACK_RETRY_PULSE cross here")
-    s.pwrflag(650, 30, "BAT_PROT_VIN")
+    # The protected pack rail crosses FPC-3 as PACK_POS_FUSED (BMS LTC4368
+    # output). The gauge divider and the charger BAT sense both tap this
+    # rail; it was historically named BAT_PROT_VIN here and is reconciled
+    # to the FPC-3 contract name (Phase 4a).
+    s.pwrflag(650, 30, "PACK_POS_FUSED")
 
     # ---------------- U10: protected-pack fuel gauge ----------------
     s.text(170, 125, "== U10 BQ34Z100-G1 3S fuel gauge for protected external pack ==")
@@ -65,7 +69,7 @@ def build(sheet_symbol_uuid):
             },
             extra_props={"Manufacturer": "Texas Instruments", "MPN": "BQ34Z100PWR-G1"})
     s.place("R180", "R", "220k 0.1% <=25ppm pack divider hi", 170, 150, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("FG_BAT_DIV", "local")})
+            pin_nets={"1": ("PACK_POS_FUSED", "hier"), "2": ("FG_BAT_DIV", "local")})
     # The gauge's 5 mOhm Kelvin shunt stays on center (Phase 2.4): it measures
     # the system-side current through FG_VSS, distinct from the pack shunts
     # (RS10/RS11) which moved to the BMS board.

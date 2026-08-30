@@ -3355,7 +3355,7 @@
     )
   )
 )
-(label "BAT_PROT_VIN"
+(label "PACK_POS_FUSED"
   (at 650.24 30.48 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 3c1aa395-17b5-529a-b228-9717bc08dde4)
@@ -3492,7 +3492,8 @@
     )
   )
 )
-(label "BAT_PROT_VIN"
+(hierarchical_label "PACK_POS_FUSED"
+  (shape bidirectional)
   (at 170.18 146.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid cac66bf2-e180-5ce7-b86a-61fa2bdc69d1)

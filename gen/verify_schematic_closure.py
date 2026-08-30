@@ -115,7 +115,7 @@ def run_pack_checks(a: ClosureAudit) -> None:
     a.pin("U11", "8", "/PACK_POS_FUSED")
     a.value_starts("C725", "10u 25V X7R")
     a.pin("C725", "1", "/PACK_POS_FUSED")
-    a.pin("C725", "2", "/GND")
+    a.pin("C725", "2", "GND")
     a.prop_eq("C725", "MPN", "GRM21BZ71E106KE15L")
     for pin in ("1", "2"):
         a.pin("J2", pin, "/PACK_POS_RAW")

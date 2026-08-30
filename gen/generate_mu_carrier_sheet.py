@@ -1,6 +1,7 @@
 import os
 
 import genlib
+import build_ducktop2 as b
 from build_ducktop2 import (
     Sheet, U, PROJDIR, FOOTPRINTS, fmt_coord, snap_coord,
     reset_uuid_sequence, stable_uuid, uuid_scope,
@@ -938,6 +939,32 @@ def root_label(coord, name):
     )
 
 
+# ---- Phase 4a: FPC connector sheets ----
+# One sheet per boundary (FPC-1 left, FPC-2 right, FPC-3 BMS), each holding
+# the physical FFC connector symbol.  Every non-GND connector pin gets a
+# hierarchical label (the pin map in fpc_contract.py is the single source
+# of truth); GND and the MP hold-down tabs get GND power symbols.
+def place_fpc_connector(s, ref, symname, pinmap, value, x=60, y=300, pwr_base=3100):
+    s.refcounters["#PWR"] = pwr_base
+    s.refcounters["#FLG"] = pwr_base
+    pins = s.place(ref, symname, value, x, y,
+                   footprint=FOOTPRINTS[symname] if symname in FOOTPRINTS else "",
+                   pin_nets={str(p): (net, "hier")
+                             for p, net in sorted(pinmap.items())
+                             if net != "GND"})
+    for p, net in sorted(pinmap.items()):
+        if net == "GND":
+            s.gnd(*pins[str(p)])
+    s.gnd(*pins["MP"])
+    return s
+
+
+def build_fpc_sheet(sheet_uuid, ref, symname, pinmap, value, pwr_base=3100):
+    s = b.Sheet(f"/{sheet_uuid}")
+    place_fpc_connector(s, ref, symname, pinmap, value, pwr_base=pwr_base)
+    return s
+
+
 def main():
     import generate_power_sheet as ps
     import generate_ec_mcu_sheet as ec
@@ -1182,53 +1209,49 @@ def main():
             root_labels.append(root_label(coord, net))
             seen_root_labels.add(key)
 
-    # ---- Board split Phase 2.4: FPC boundary contracts ----
+    # ---- Board split Phase 2.4 + Phase 4a: FPC boundary contracts ----
     # The left (FPC-1), right (FPC-2), and BMS (FPC-3) daughterboards connect
-    # through these nets. The pins dicts map each net to a root-label coord.
-    fpc1_nets = [
-        "AUX_DC_RAW", "HUB_DS1_DM", "HUB_DS1_DP",
-        "INTERNAL_USB_VBUS_VALID", "MCU_3V3",
-        "PD1_EFUSE_FAULT_N", "PD1_I2C_SCL", "PD1_I2C_SDA", "PD1_PATH_EN",
-        "PD1_TCPC_IRQ_N", "PD1_VALID_N", "PD1_VBUS_RAW", "PD2_VALID_N",
-        "PD_PROTECT_FAULT_N", "SYS_3V3",
-        "USBC1_DM", "USBC1_DP", "USBC1_SSRX_N", "USBC1_SSRX_P",
-        "USBC1_SSTX_N", "USBC1_SSTX_P",
-        "USBC2_DM", "USBC2_DP", "USBC2_SSRX_N", "USBC2_SSRX_P",
-        "USBC2_SSTX_N", "USBC2_SSTX_P",
-        "USB_PD_SELECTED", "USB_PORT_5V", "VSYS",
-    ]
-    fpc2_nets = [
-        "GBE_CLKREQ_N", "GBE_HOST_RX_N", "GBE_HOST_RX_P", "GBE_HOST_TX_N",
-        "GBE_HOST_TX_P", "GBE_REFCLK_N", "GBE_REFCLK_P",
-        "HUB_DS1_DM", "HUB_DS1_DP",
-        "MCU_3V3", "MU_HOST_ACTIVE", "PCIE_3V3", "PCIE_WAKE_N",
-        "PD2_EFUSE_FAULT_N", "PD2_I2C_SCL", "PD2_I2C_SDA", "PD2_PATH_EN",
-        "PD2_TCPC_IRQ_N", "PD2_VBUS_RAW", "PD_PROTECT_FAULT_N", "PLTRST_SRC_N",
-        "SYS_3V3", "SYS_5V",
-        "TCP0_DDC_SCL", "TCP0_DDC_SDA", "TCP0_HPD",
-        "TCP0_TX0_N", "TCP0_TX0_P", "TCP0_TX1_N", "TCP0_TX1_P",
-        "TCP0_TXRX0_N", "TCP0_TXRX0_P", "TCP0_TXRX1_N", "TCP0_TXRX1_P",
-        "USB_PORT_5V",
-    ]
-    fpc3_nets = [
-        "PACK_POS_FUSED", "PACK_FAULT_N", "PACK_RETRY_PULSE", "FG_VSS",
-    ]
+    # through these nets.  Phase 4a replaces the label rows with real FPC
+    # connector sheets (fpc1_left/fpc2_right/fpc3_bms); the pin maps in
+    # fpc_contract.py are the single source of truth.
+    import fpc_contract as fpc
 
-    # Build pins dicts (net -> root coord) for the boundary label rows.
-    def fpc_pins(nets, x0, y):
-        pins = {}
-        x = x0
-        for net in nets:
-            pins[net] = (x, y)
-            x = snap_coord(x + 20)
-            if x > 900:
-                x = x0
-                y = snap_coord(y + 10)
-        return pins
+    fpc1_nets = fpc.FPC1_NETS
+    fpc2_nets = fpc.FPC2_NETS
+    fpc3_nets = fpc.FPC3_NETS_CENTER
 
-    fpc1_pins = fpc_pins(fpc1_nets, 30, 560)
-    fpc2_pins = fpc_pins(fpc2_nets, 350, 560)
-    fpc3_pins = fpc_pins(fpc3_nets, 700, 560)
+    # Phase 4a: the FPC sheets are real sheets now (connector + hier labels).
+    fpc1_sheet_uuid = stable_uuid("sheet-symbol:16_fpc1_left")
+    fpc2_sheet_uuid = stable_uuid("sheet-symbol:17_fpc2_right")
+    fpc3_sheet_uuid = stable_uuid("sheet-symbol:18_fpc3_bms")
+    fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC102", "Conn_01x100_FFC_MP",
+                             fpc.center_pinmap(fpc.FPC1_PINMAP),
+                             "FH12-100S-0.5SH (FPC-1)", pwr_base=3100)
+    fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC103", "Conn_01x100_FFC_MP",
+                             fpc.center_pinmap(fpc.FPC2_PINMAP),
+                             "FH12-100S-0.5SH (FPC-2)", pwr_base=3200)
+    fpc3_s = build_fpc_sheet(fpc3_sheet_uuid, "FPC105", "Conn_01x30_FFC_MP",
+                             fpc.center_pinmap(fpc.FPC3_PINMAP),
+                             "FH12-30S-0.5SH (FPC-3)", pwr_base=3300)
+    for filename, s in (("fpc1_left.kicad_sch", fpc1_s),
+                        ("fpc2_right.kicad_sch", fpc2_s),
+                        ("fpc3_bms.kicad_sch", fpc3_s)):
+        with open(os.path.join(PROJDIR, filename), "w", encoding="utf-8") as f:
+            f.write(s.render(stable_uuid(f"{filename}:self"), page_number="16", paper="A1"))
+
+    # FPC sheet blocks (net -> block-pin coord) in the root.
+    fpc1_block, fpc1_pins = sheet_block(
+        fpc1_sheet_uuid, 420, 40, 60, 150, "FPC-1 (Left)", "fpc1_left.kicad_sch",
+        fpc1_nets,
+    )
+    fpc2_block, fpc2_pins = sheet_block(
+        fpc2_sheet_uuid, 490, 40, 60, 150, "FPC-2 (Right)", "fpc2_right.kicad_sch",
+        fpc2_nets,
+    )
+    fpc3_block, fpc3_pins = sheet_block(
+        fpc3_sheet_uuid, 560, 40, 60, 150, "FPC-3 (BMS)", "fpc3_bms.kicad_sch",
+        fpc3_nets,
+    )
 
     sheet_contracts = (
         ("power", power_pins, power_hier_nets),
@@ -1257,18 +1280,16 @@ def main():
         if len(users) < 2:
             orphan_nets.append((net, users[0][0]))
             continue
-        # Board split Phase 2.4: the FPC boundary contracts (fpc1_left,
-        # fpc2_right, fpc3_bms) declare the nets so they do not orphan, but
-        # their labels are placed only when the net has NO real center-sheet
-        # host yet.  A net hosted by a center sheet gets its label at that
-        # sheet's block pin; the FPC row is only a Phase 4 placeholder.
+        # Board split Phase 2.4 + Phase 4a: the FPC boundary contracts
+        # (fpc1_left, fpc2_right, fpc3_bms) are real FPC connector sheets.
+        # Their nets get root labels at the FPC sheet block pins as well as
+        # at any real center-sheet host pins (labels join by name).
         real_users = [u for u in users if not u[0].startswith("fpc")]
-        if real_users:
-            for _name, pins in real_users:
-                add_root_label(pins, net)
-        else:
-            for _name, pins in users:
-                add_root_label(pins, net)
+        fpc_users = [u for u in users if u[0].startswith("fpc")]
+        for _name, pins in real_users:
+            add_root_label(pins, net)
+        for _name, pins in fpc_users:
+            add_root_label(pins, net)
     if orphan_nets:
         details = ", ".join(f"{net} only on {sheet}" for net, sheet in orphan_nets)
         raise ValueError(f"orphan hierarchical nets: {details}")
@@ -1291,6 +1312,9 @@ def main():
         f'{keyboard_block}\n'
         f'{maker_block}\n'
         f'{system_audio_block}\n'
+        f'{fpc1_block}\n'
+        f'{fpc2_block}\n'
+        f'{fpc3_block}\n'
         + "\n".join(root_labels) + "\n"
         + "\n".join(root_ncs) + "\n"
         f'  (sheet_instances\n'

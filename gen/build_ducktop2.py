@@ -104,7 +104,9 @@ FOOTPRINTS = {
     "Conn_01x18": "Connector_PinHeader_1.27mm:PinHeader_1x18_P1.27mm_Vertical",
     "Conn_01x20_FFC": "Connector_FFC-FPC:Hirose_FH12-20S-0.5SH_1x20-1MP_P0.50mm_Horizontal",
     "Conn_01x30_FFC": "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
+    "Conn_01x30_FFC_MP": "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
     "Conn_01x40_FFC": "Connector_FFC-FPC:Hirose_FH12-40S-0.5SH_1x40-1MP_P0.50mm_Horizontal",
+    "Conn_01x100_FFC_MP": "ducktop2:FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
     # Polarized/latching 2.00 mm cable header. J901 is deliberately not a
     # Raspberry Pi HAT connector and cannot accept a 2.54 mm HAT plug.
     "Conn_02x20_Maker": "Connector_JST:JST_PUD_B40B-PUDSS_2x20_P2.00mm_Vertical",
@@ -382,7 +384,7 @@ class Sheet:
         msg_escaped = msg.replace('"', "'")
         self.body.append(f'(text "{msg_escaped}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27))) (uuid {U()}))')
 
-    def render(self, self_uuid, page_number):
+    def render(self, self_uuid, page_number, paper="A2"):
         libsyms = "\n".join(self.lib_symbols[k] for k in sorted(self.lib_symbols))
         body = "\n".join(self.body)
         sheet_instances = (
@@ -398,7 +400,7 @@ class Sheet:
             f'  (generator "eeschema")\n'
             f'  (generator_version "10.0")\n'
             f'  (uuid {self_uuid})\n'
-            f'  (paper "A2")\n'
+            f'  (paper "{paper}")\n'
             f'  (lib_symbols\n{libsyms}\n  )\n'
             f'{body}\n'
             f'{sheet_instances}\n'
