@@ -85,8 +85,8 @@ def main() -> int:
     # the center's FPC2_C.
     fpc2_sheet_uuid = stable_uuid("right_io:sheet:fpc2")
     with uuid_scope("right_io:fpc2"):
-        fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC104", "Conn_01x100_FFC_MP",
-                                 fpc.FPC2_PINMAP, "FH12-100S-0.5SH (FPC-2)",
+        fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC104", "Conn_01x68_FFC_MP",
+                                 fpc.FPC2_PINMAP, "FH41-68S-0.5SH (FPC-2)",
                                  pwr_base=3500)
         fpc2_text = fpc2_s.render(stable_uuid("right_io:self:fpc2"),
                                   page_number=4, paper="A1")

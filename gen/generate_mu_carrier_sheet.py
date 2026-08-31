@@ -1224,12 +1224,12 @@ def main():
     fpc1_sheet_uuid = stable_uuid("sheet-symbol:16_fpc1_left")
     fpc2_sheet_uuid = stable_uuid("sheet-symbol:17_fpc2_right")
     fpc3_sheet_uuid = stable_uuid("sheet-symbol:18_fpc3_bms")
-    fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC102", "Conn_01x100_FFC_MP",
+    fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC102", "Conn_01x68_FFC_MP",
                              fpc.center_pinmap(fpc.FPC1_PINMAP),
-                             "FH12-100S-0.5SH (FPC-1)", pwr_base=3100)
-    fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC103", "Conn_01x100_FFC_MP",
+                             "FH41-68S-0.5SH (FPC-1)", pwr_base=3100)
+    fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC103", "Conn_01x68_FFC_MP",
                              fpc.center_pinmap(fpc.FPC2_PINMAP),
-                             "FH12-100S-0.5SH (FPC-2)", pwr_base=3200)
+                             "FH41-68S-0.5SH (FPC-2)", pwr_base=3200)
     fpc3_s = build_fpc_sheet(fpc3_sheet_uuid, "FPC105", "Conn_01x30_FFC_MP",
                              fpc.center_pinmap(fpc.FPC3_PINMAP),
                              "FH12-30S-0.5SH (FPC-3)", pwr_base=3300)

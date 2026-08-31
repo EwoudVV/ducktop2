@@ -6,8 +6,11 @@ every project generator (center root, left_io, right_io, bms) and by the
 cable spec.  Pin maps are authoritative: the same conductor order must exist
 on both ends, so both boards' connectors are wired from THIS table.
 
-FPC-1 (left_io <-> center): Hirose FH12-100S-0.5SH, 100 pins.
-FPC-2 (right_io <-> center): Hirose FH12-100S-0.5SH, 100 pins.
+FPC-1 (left_io <-> center): Hirose FH41-68S-0.5SH, 68 pins (shielded FFC).
+FPC-2 (right_io <-> center): Hirose FH41-68S-0.5SH, 68 pins (shielded FFC).
+Unused pins beyond the used range are GND; the FH12-100S does not exist
+(Phase 4 deep audit -- FH12 tops out at 60 positions, so the 100-pin
+parts were replaced by the FH41-68S).
 FPC-3 (bms <-> center):      Hirose FH12-30S-0.5SH, 30 pins.
 
 Power rails get 2 pins each where current matters (VSYS, USB_PORT_5V,
@@ -37,7 +40,7 @@ FPC1_PINMAP = {
     49: "USBC2_SSRX_P", 50: "USBC2_SSRX_N", 51: "GND",
     52: "USBC2_SSTX_P", 53: "USBC2_SSTX_N",
 }
-for _pin in range(54, 101):
+for _pin in range(54, 69):
     FPC1_PINMAP[_pin] = "GND"
 
 FPC2_PINMAP = {
@@ -59,7 +62,7 @@ FPC2_PINMAP = {
     57: "TCP0_TXRX0_P", 58: "TCP0_TXRX0_N", 59: "GND",
     60: "TCP0_TXRX1_P", 61: "TCP0_TXRX1_N",
 }
-for _pin in range(62, 101):
+for _pin in range(62, 69):
     FPC2_PINMAP[_pin] = "GND"
 
 # BMS-side names.  PACK_NEG_RAW becomes GND on the center side.

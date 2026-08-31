@@ -27,6 +27,7 @@ import os
 import re
 import shutil
 import sys
+import math
 
 sys.path.insert(0, os.path.dirname(__file__))
 from build_ducktop2 import PROJDIR
@@ -75,24 +76,24 @@ HOLES = {
 # re-positions them.  The center board is built text-side from the old
 # board, so its connectors are added here and get their pad nets assigned
 # text-side from fpc_contract (assign_connector_pad_nets).)
-FH12_100 = "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal"
+FH12_100 = "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal"
 FH12_30 = "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal"
 CONNECTORS = {
     "L": [("FPC101", "ducktop2", FH12_100, (65.6, 92.5), 90)],
     "C": [
         ("FPC102", "ducktop2", FH12_100, (72.75, 92.5), 270),
         ("FPC103", "ducktop2", FH12_100, (294.6, 92.5), 90),
-        ("FPC105", "Connector_FFC-FPC", FH12_30, (120, 2.6), 0),
+        ("FPC105", "Connector_FFC-FPC", FH12_30, (123.5, 6.5), 180),
     ],
     "R": [("FPC104", "ducktop2", FH12_100, (302.7, 92.5), 270)],
     "B": [("FPC106", "Connector_FFC-FPC", FH12_30, (30, 55.8), 180)],
 }
 
 CONNECTOR_KEEPOUT = {
-    "L": [(64.5, 63, 69.5, 122)],
-    "C": [(69, 63, 79, 122), (291, 63, 298, 122), (112, 0, 128, 8)],
-    "R": [(299.5, 63, 308, 122)],
-    "B": [(24, 50, 36, 60)],
+    "L": [(64.5, 71.5, 69.5, 113.5)],
+    "C": [(69, 71.5, 79, 113.5), (291, 71.5, 298, 113.5), (114, 0, 130, 12)],
+    "R": [(299.5, 71.5, 308, 113.5)],
+    "B": [(24, 48, 36, 60)],
 }
 
 OUTLINES = {
@@ -395,20 +396,39 @@ def parse_fp_pads(path):
     return pads
 
 
-def nudge_connector_collisions(board_key, connectors, final_pads, region,
-                               padlists, moves, old, board_refs=None):
-    """Move parts whose pads collide with a connector's pads out of the way.
+def fix_part_overlaps(board_key, region, padlists, moves, old, board_refs=None,
+                      forbidden=None, keepouts=None, neighbor_margin=0.8,
+                      courtyards=None):
+    # `courtyards` (ref -> world AABBs at ORIG positions) makes the pass
+    # treat part bodies as solid: pair detection includes courtyard
+    # overlaps (parts sitting on chip bodies have no pad overlap -- pads
+    # hug the die edge) and candidates must clear every other part's
+    # courtyard.  A1 (the Mu module SOCKET) is exempt from courtyard
+    # detection: the parts in its moat are beside the socket, not under
+    # the module, and physically cannot be moved away.
+    def is_socket(r):
+        return r == "A1"
 
-    The center board's edges are packed with parts from the monolithic
-    layout, so the 100-pin FPC-1/FPC-2 connectors have no collision-free
-    spot at their preferred anchors.  The connector stays at its anchor;
-    each colliding part is shifted perpendicular to the connector axis
-    (away from the board edge) in 0.5mm steps until it clears the
-    connector pads AND everything else (0.8mm margin).  Shifts land in
-    `moves` so the text-side placement applies them.
+    cy = courtyards or {}
+    cy_moved = {}
+    for r, rects in cy.items():
+        if r in moves:
+            dx = moves[r][0] - old[r][0]
+            dy = moves[r][1] - old[r][1]
+            cy_moved[r] = [(a + dx, b + dy, c + dx, d + dy)
+                           for (a, b, c, d) in rects]
+        else:
+            cy_moved[r] = list(rects)
+    """Move parts whose pads overlap ANOTHER part's pads apart.
 
-    Only parts that REMAIN on this board are considered (parts moving to
-    another board sit at irrelevant old positions near the cut lines).
+    The monolithic layout shipped genuine pad-pad overlaps (the BQ25798
+    inductor's huge pads swallow neighbouring 0402/0603 caps, several
+    passives sit on top of each other, two parts touch mounting holes).
+    Every one of those is a DRC short and a fab reject.  For each pair the
+    smaller part (pad-bbox area) is shifted to the first clear spot:
+    0.5mm steps on four axes, then a 2D scan, cleared against every other
+    pad (0.8mm margin), the region edges, forbidden zones and connector
+    keepouts.  Shifts land in `moves` (absolute anchors).
     """
     x0, y0, x1, y1 = region
     placed = {}
@@ -421,6 +441,311 @@ def nudge_connector_collisions(board_key, connectors, final_pads, region,
             placed[r] = [(px + dx, py + dy, hw, hh) for (px, py, hw, hh) in pads]
         else:
             placed[r] = list(pads)
+    forbid = [(f[0], f[1], f[2], f[3]) for f in (forbidden or [])]
+    keepout = [(k[0], k[1], k[2], k[3]) for k in (keepouts or [])]
+
+    def in_clear_zone(cand):
+        for (px, py, hw, hh) in cand:
+            if px - hw < x0 + 0.7 or px + hw > x1 - 0.7 \
+               or py - hh < y0 + 0.7 or py + hh > y1 - 0.7:
+                return False
+            for (fx0, fy0, fx1, fy1) in forbid + keepout:
+                if not (px + hw <= fx0 or fx1 <= px - hw
+                        or py + hh <= fy0 or fy1 <= py - hh):
+                    return False
+        return True
+
+    total_moved = 0
+    for _pass in range(6):
+        pairs = []
+        refs = sorted(placed)
+        for i, a in enumerate(refs):
+            for b in refs[i + 1:]:
+                if pads_overlap(placed[a], placed[b], margin=0.25):
+                    pairs.append((a, b))
+                    continue
+                if (cy_moved.get(a) and cy_moved.get(b)
+                        and not is_socket(a) and not is_socket(b)
+                        and not courtyards_clear(cy_moved[a], cy_moved[b])):
+                    pairs.append((a, b))
+        if not pairs:
+            break
+        def is_hole(x):
+            return x.startswith("H") and len(x) > 1 and x[1].isdigit()
+
+        for (a, b) in pairs:
+            if is_hole(a) and not is_hole(b):
+                mover, other = b, a
+            elif is_hole(b) and not is_hole(a):
+                mover, other = a, b
+            else:
+                area_a = sum((2 * hw) * (2 * hh) for (_, _, hw, hh) in placed[a])
+                area_b = sum((2 * hw) * (2 * hh) for (_, _, hw, hh) in placed[b])
+                mover, other = (a, b) if area_a <= area_b else (b, a)
+            pads = placed[mover]
+            ax = sum(p[0] for p in pads) / len(pads)
+            ay = sum(p[1] for p in pads) / len(pads)
+            cur_anchor = moves.get(mover, (old[mover][0], old[mover][1],
+                                           old[mover][2]))
+            found = None
+            candidates = []
+            for (dxu, dyu) in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                candidates += [(dxu * s * 0.5, dyu * s * 0.5)
+                               for s in range(1, 31)]
+            candidates += [(i * 0.5 - 15, j * 0.5 - 15)
+                           for i in range(61) for j in range(61)
+                           if abs(i * 0.5 - 15) > 1.5 or abs(j * 0.5 - 15) > 1.5]
+            for (dx, dy) in candidates:
+                cand = [(px + dx, py + dy, hw, hh) for (px, py, hw, hh) in pads]
+                if not in_clear_zone(cand):
+                    continue
+                bad = False
+                for o, opads in placed.items():
+                    if o == mover:
+                        continue
+                    if pads_overlap(cand, opads, margin=neighbor_margin):
+                        bad = True
+                        break
+                if not bad and cy_moved:
+                    oc = cy_moved.get(mover)
+                    if oc:
+                        moved_oc = [(a + dx, b + dy, c + dx, d + dy)
+                                    for (a, b, c, d) in oc]
+                        for o, ocy in cy_moved.items():
+                            if o == mover:
+                                continue
+                            if not courtyards_clear(moved_oc, ocy):
+                                bad = True
+                                break
+                if not bad:
+                    found = (ax + dx, ay + dy)
+                    break
+            if found is None:
+                print(f"    OVERLAP WARN: no spot for {mover} <-> {other}")
+                continue
+            moves[mover] = (found[0], found[1], old[mover][2])
+            placed[mover] = [(px + found[0] - old[mover][0],
+                              py + found[1] - old[mover][1], hw, hh)
+                             for (px, py, hw, hh) in pads]
+            if mover in cy_moved:
+                dx = found[0] - old[mover][0]
+                dy = found[1] - old[mover][1]
+                cy_moved[mover] = [(a + dx, b + dy, c + dx, d + dy)
+                                   for (a, b, c, d) in cy[mover]]
+            total_moved += 1
+            print(f"    overlap fix: {mover} -> ({found[0]:.1f}, {found[1]:.1f})")
+    if total_moved:
+        print(f"    [{board_key}] moved {total_moved} parts to clear overlaps")
+    # forbidden-zone sweep: the monolithic layout placed parts inside the
+    # hinge cutouts (the board does not exist there); move them to solid
+    # board with the same search.
+    if forbid:
+        for _pass in range(4):
+            viol = []
+            for r, pads in placed.items():
+                if r.startswith("FPC"):
+                    continue
+                for (px, py, hw, hh) in pads:
+                    hit = False
+                    for (fx0, fy0, fx1, fy1) in forbid:
+                        if not (px + hw <= fx0 or fx1 <= px - hw
+                                or py + hh <= fy0 or fy1 <= py - hh):
+                            hit = True
+                            break
+                    if hit:
+                        viol.append(r)
+                        break
+            if not viol:
+                break
+            for r in viol:
+                pads = placed[r]
+                ax = sum(p[0] for p in pads) / len(pads)
+                ay = sum(p[1] for p in pads) / len(pads)
+                found = None
+                candidates = [(i * 0.5 - 25, j * 0.5 - 25)
+                              for i in range(101) for j in range(101)
+                              if abs(i * 0.5 - 25) > 1.5 or abs(j * 0.5 - 25) > 1.5]
+                for (dx, dy) in candidates:
+                    cand = [(px + dx, py + dy, hw, hh)
+                            for (px, py, hw, hh) in pads]
+                    if not in_clear_zone(cand):
+                        continue
+                    ok = True
+                    for (fx0, fy0, fx1, fy1) in forbid:
+                        for (px, py, hw, hh) in cand:
+                            if not (px + hw <= fx0 or fx1 <= px - hw
+                                    or py + hh <= fy0 or fy1 <= py - hh):
+                                ok = False
+                                break
+                        if not ok:
+                            break
+                    if not ok:
+                        continue
+                    for o, opads in placed.items():
+                        if o == r:
+                            continue
+                        if pads_overlap(cand, opads, margin=neighbor_margin):
+                            ok = False
+                            break
+                    if ok:
+                        found = (ax + dx, ay + dy)
+                        break
+                if found:
+                    moves[r] = (found[0], found[1], old[r][2])
+                    placed[r] = [(px + found[0] - old[r][0],
+                                  py + found[1] - old[r][1], hw, hh)
+                                 for (px, py, hw, hh) in pads]
+                    print(f"    notch fix: {r} -> ({found[0]:.1f}, {found[1]:.1f})")
+                else:
+                    print(f"    NOTCH WARN: no spot for {r}")
+    return moves
+
+
+def parse_courtyards(path):
+    """ref -> list of world-AABB courtyards.
+
+    Footprints store their courtyard as (fp_courtyard ...) polygons,
+    (fp_rect ...) rects, or (fp_line ...) outlines on F.CrtYd; the
+    connector footprints draw it as fp_rect.  Returns axis-aligned world
+    rects (fp-local geometry rotated by the footprint rotation, y-down).
+    """
+    txt = open(path).read()
+    out = {}
+    for m in re.finditer(r'\(footprint "([^"]+)"\n', txt):
+        s = m.start()
+        depth = 0
+        j = s
+        while j < len(txt):
+            if txt[j] == "(":
+                depth += 1
+            elif txt[j] == ")":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        block = txt[s:j + 1]
+        refm = re.search(r'\(property "Reference" "([^"]+)"', block)
+        if not refm:
+            continue
+        rects = []
+        for cm in re.finditer(r'\(fp_courtyard "[^"]+"\n(.*?)\n\t+\)',
+                              block, re.S):
+            pts = re.findall(r'\(xy ([-\d.]+) ([-\d.]+)\)', cm.group(1))
+            if pts:
+                xs = [float(p[0]) for p in pts]
+                ys = [float(p[1]) for p in pts]
+                rects.append((min(xs), min(ys), max(xs), max(ys)))
+        for rm in re.finditer(
+                r'\(fp_rect\s*\(start ([-\d.]+) ([-\d.]+)\)(.*?)'
+                r'\(end ([-\d.]+) ([-\d.]+)\)(.*?)\(layer "F\.CrtYd"\)',
+                block, re.S):
+            rects.append((float(rm.group(1)), float(rm.group(2)),
+                          float(rm.group(4)), float(rm.group(5))))
+        for lm in re.finditer(
+                r'\(fp_line\s*\(start ([-\d.]+) ([-\d.]+)\)(.*?)'
+                r'\(end ([-\d.]+) ([-\d.]+)\)(.*?)\(layer "F\.CrtYd"\)',
+                block, re.S):
+            rects.append((float(lm.group(1)), float(lm.group(2)),
+                          float(lm.group(4)), float(lm.group(5))))
+        if not rects:
+            continue
+        am = re.search(r'\n\t\t\(at ([-\d.]+) ([-\d.]+)( [-\d.]+)?\)\n', block)
+        if not am:
+            continue
+        fx, fy = float(am.group(1)), float(am.group(2))
+        fr = float(am.group(3) or 0)
+        rad = math.radians(fr)
+        world = []
+        for (x0, y0, x1, y1) in rects:
+            corners = [(x0, y0), (x1, y0), (x0, y1), (x1, y1)]
+            wc = [(fx + px * math.cos(rad) + py * math.sin(rad),
+                   fy - px * math.sin(rad) + py * math.cos(rad))
+                  for (px, py) in corners]
+            xs = [c[0] for c in wc]
+            ys = [c[1] for c in wc]
+            world.append((min(xs), min(ys), max(xs), max(ys)))
+        out[refm.group(1)] = world
+    return out
+
+
+def courtyards_clear(cy_a, cy_b, margin=0.25):
+    """True when no AABB of a intersects any of b (with margin)."""
+    for a in cy_a:
+        for b in cy_b:
+            if not (a[2] + margin <= b[0] or b[2] + margin <= a[0]
+                    or a[3] + margin <= b[1] or b[3] + margin <= a[1]):
+                return False
+    return True
+
+
+def library_courtyards(lib, name, pos, rot):
+    """Courtyard rects of a connector footprint from its .kicad_mod file,
+    transformed to the given world anchor (y-down rotation)."""
+    fpath = os.path.join(LIB_DIRS[lib], name + ".kicad_mod")
+    txt = open(fpath).read()
+    rects = []
+    for rm in re.finditer(
+            r'\(fp_rect\s*\(start ([-\d.]+) ([-\d.]+)\)(.*?)'
+            r'\(end ([-\d.]+) ([-\d.]+)\)(.*?)\(layer "F\.CrtYd"\)',
+            txt, re.S):
+        rects.append((float(rm.group(1)), float(rm.group(2)),
+                      float(rm.group(4)), float(rm.group(5))))
+    for lm in re.finditer(
+            r'\(fp_line\s*\(start ([-\d.]+) ([-\d.]+)\)(.*?)'
+            r'\(end ([-\d.]+) ([-\d.]+)\)(.*?)\(layer "F\.CrtYd"\)',
+            txt, re.S):
+        rects.append((float(lm.group(1)), float(lm.group(2)),
+                      float(lm.group(4)), float(lm.group(5))))
+    rad = math.radians(rot)
+    world = []
+    for (x0, y0, x1, y1) in rects:
+        corners = [(x0, y0), (x1, y0), (x0, y1), (x1, y1)]
+        wc = [(pos[0] + px * math.cos(rad) + py * math.sin(rad),
+               pos[1] - px * math.sin(rad) + py * math.cos(rad))
+              for (px, py) in corners]
+        xs = [c[0] for c in wc]
+        ys = [c[1] for c in wc]
+        world.append((min(xs), min(ys), max(xs), max(ys)))
+    return world
+
+
+def nudge_connector_collisions(board_key, connectors, final_pads, region,
+                               padlists, moves, old, board_refs=None,
+                               courtyards=None):
+    """Move parts whose pads collide with a connector's pads out of the way.
+
+    The center board's edges are packed with parts from the monolithic
+    layout, so the 100-pin FPC-1/FPC-2 connectors have no collision-free
+    spot at their preferred anchors.  The connector stays at its anchor;
+    each colliding part is shifted perpendicular to the connector axis
+    (away from the board edge) in 0.5mm steps until it clears the
+    connector pads AND everything else (0.8mm margin).  Shifts land in
+    `moves` so the text-side placement applies them.
+
+    Only parts that REMAIN on this board are considered (parts moving to
+    another board sit at irrelevant old positions near the cut lines).
+    When `courtyards` is given (ref -> world AABB list) the connector's
+    COURTYARD is also enforced: parts must keep their courtyards clear of
+    the connector body (the DRC courtyard rule), which is stricter than
+    the pad check.
+    """
+    x0, y0, x1, y1 = region
+    placed = {}
+    for r, pads in padlists.items():
+        if board_refs is not None and r not in board_refs:
+            continue
+        if r in moves:
+            dx = moves[r][0] - old[r][0]
+            dy = moves[r][1] - old[r][1]
+            placed[r] = [(px + dx, py + dy, hw, hh) for (px, py, hw, hh) in pads]
+        else:
+            placed[r] = list(pads)
+    conn_courtyards = {}
+    for (ref, _lib, _name, pos, rot) in connectors:
+        cc = courtyards.get(ref) if courtyards is not None else None
+        if not cc:
+            cc = library_courtyards(_lib, _name, pos, rot)
+        conn_courtyards[ref] = cc
     conn_collided = {}
     for (ref, lib, name, pos, rot) in connectors:
         fname = name if lib == "ducktop2" else name
@@ -436,25 +761,46 @@ def nudge_connector_collisions(board_key, connectors, final_pads, region,
             hhr = abs(hw * math.sin(rad)) + abs(hh * math.cos(rad))
             wp.append((cx, cy, hwr, hhr))
         collided = set()
-        # parts currently colliding with the connector (their FINAL pads)
+        cc = conn_courtyards.get(ref, [])
+        # parts currently colliding with the connector (their FINAL pads
+        # or their courtyards overlapping the connector body)
         for _pass in range(4):
             colliders = []
             for r, pads in placed.items():
                 if r.startswith("FPC") or r in collided:
                     continue
-                if pads_overlap(wp, pads, margin=0.45):
+                is_hole_r = r.startswith("H") and len(r) > 1 and r[1].isdigit()
+                if pads_overlap(wp, pads, margin=0.25 if is_hole_r else 0.45):
                     colliders.append(r)
+                    continue
+                if courtyards is not None and cc:
+                    rc = courtyards.get(r)
+                    if rc:
+                        if r in moves:
+                            mdx = moves[r][0] - old[r][0]
+                            mdy = moves[r][1] - old[r][1]
+                        else:
+                            mdx = mdy = 0.0
+                        rc_cur = [(x0r + mdx, y0r + mdy, x1r + mdx, y1r + mdy)
+                                  for (x0r, y0r, x1r, y1r) in rc]
+                        if not courtyards_clear(rc_cur, cc):
+                            colliders.append(r)
             if not colliders:
                 break
             collided.update(colliders)
             for r in colliders:
+                if r.startswith("H") and len(r) > 1 and r[1].isdigit():
+                    print(f"    WARN: hole {r} collides with {ref} -- move the connector")
+                    continue
                 pads = placed[r]
+                # placed[] already carries the final (moves-applied)
+                # position; using it directly avoids double-shifting
+                # re-placed parts.
+                cur = list(pads)
                 if r in moves:
                     ax, ay = moves[r][0], moves[r][1]
                 else:
                     ax, ay = old[r][0], old[r][1]
-                cur = [(px + ax - old[r][0], py + ay - old[r][1], hw, hh)
-                       for (px, py, hw, hh) in pads]
                 # preferred direction: away from the connector's side
                 cx = sum(p[0] for p in cur) / len(cur)
                 step_x = 1.0 if cx < pos[0] else -1.0
@@ -472,6 +818,9 @@ def nudge_connector_collisions(board_key, connectors, final_pads, region,
                                    for s in range(1, 21)]
                 candidates += [(step_x * s * 0.5, step_y * s * 0.5)
                                for s in range(1, 11)]
+                candidates += [(i * 0.5 - 15, j * 0.5 - 15)
+                               for i in range(61) for j in range(61)
+                               if abs(i * 0.5 - 15) > 1.5 or abs(j * 0.5 - 15) > 1.5]
                 for (dx, dy) in candidates:
                     cand = [(px + dx, py + dy, hw, hh) for (px, py, hw, hh) in cur]
                     if any(px - hw < x0 + 0.7 or px + hw > x1 - 0.7
@@ -480,11 +829,24 @@ def nudge_connector_collisions(board_key, connectors, final_pads, region,
                         continue
                     if pads_overlap(wp, cand, margin=0.35):
                         continue
+                    if cc:
+                        rc = courtyards.get(r)
+                        if rc:
+                            if r in moves:
+                                mdx0 = moves[r][0] - old[r][0]
+                                mdy0 = moves[r][1] - old[r][1]
+                            else:
+                                mdx0 = mdy0 = 0.0
+                            moved_cy = [(x0r + mdx0 + dx, y0r + mdy0 + dy,
+                                         x1r + mdx0 + dx, y1r + mdy0 + dy)
+                                        for (x0r, y0r, x1r, y1r) in rc]
+                            if not courtyards_clear(moved_cy, cc):
+                                continue
                     bad = False
                     for o, opads in placed.items():
                         if o == r or o.startswith("FPC"):
                             continue
-                        if pads_overlap(cand, opads):
+                        if pads_overlap(cand, opads, margin=0.3):
                             bad = True
                             break
                     if not bad:
@@ -501,12 +863,16 @@ def nudge_connector_collisions(board_key, connectors, final_pads, region,
     return moves
 
 
-def resolve_connectors(board_key, final_pads, region, keepout, holes_pads):
+def resolve_connectors(board_key, final_pads, region, keepout, holes_pads,
+                       courtyards=None, moves=None, old=None):
     """Find clear positions for the board's FPC connectors.
 
     final_pads: pad AABBs of every placed part at its final anchor.
     Returns a new CONNECTORS list with resolved anchors (same rotations,
-    scanned along the connector length axis to avoid parts/edge)."""
+    scanned along the connector length axis to avoid parts/edge).  When
+    `courtyards` is given the connector's COURTYARD must also clear every
+    part's courtyard (at its final position) -- parts must not end up
+    under the connector body even if their pads clear."""
     import math
     x0, y0, x1, y1 = region
     # spatial grid over final_pads (4mm cells) for fast overlap rejection
@@ -544,6 +910,19 @@ def resolve_connectors(board_key, final_pads, region, keepout, holes_pads):
         else:
             span = (y1 - y0 - 20)
             candidates = [(bx, by + off) for off in range(-int(span / 2), int(span / 2) + 1, 4)]
+        # part courtyards at their FINAL positions (moves applied)
+        part_cy = []
+        if courtyards is not None:
+            for r, rects in courtyards.items():
+                if r.startswith("FPC"):
+                    continue
+                if moves is not None and r in moves:
+                    mdx = moves[r][0] - old[r][0]
+                    mdy = moves[r][1] - old[r][1]
+                    part_cy.append([(x0r + mdx, y0r + mdy, x1r + mdx, y1r + mdy)
+                                    for (x0r, y0r, x1r, y1r) in rects])
+                else:
+                    part_cy.append(rects)
         for (ax, ay) in candidates:
             wp = []
             for (lx, ly, hw, hh) in pads:
@@ -567,6 +946,14 @@ def resolve_connectors(board_key, final_pads, region, keepout, holes_pads):
                 continue
             if not clear_against(wp):
                 continue
+            if courtyards is not None:
+                cc = library_courtyards(lib, fname, (ax, ay), rot)
+                for pc in part_cy:
+                    if not courtyards_clear(cc, pc):
+                        ok = False
+                        break
+                if not ok:
+                    continue
             best = (ax, ay)
             break
         if best is None:
@@ -778,21 +1165,22 @@ def parse_old_placements(path):
     return out
 
 
-def assign_connector_pad_nets(path, ref, pinmap):
-    """Text-side pad net assignment for the center board's FPC connectors
-    (added by pcbnew without nets; the sync never touched them).
+def assign_connector_pad_nets(path, ref, pinmap, center_side=False):
+    """Text-side pad net assignment for FPC connector pads.
 
-    This project's boards carry pad nets as (net "NAME") lines -- KiCad 10
-    writes code-less net references -- so the connector pads get the same
-    form.  Same map on both ends: the center-side map renames PACK_NEG_RAW
-    to GND.
+    The center board's connectors are added without nets (the sync never
+    touched them); the daughterboards' connectors arrive from the sync but
+    their FH41-68S SH solder-hold pads stay unmatched.  Both get their
+    pads written as (net "NAME") lines -- KiCad 10's code-less form.
+    The same map exists on both ends; only the center side renames
+    PACK_NEG_RAW to GND.
     """
     import fpc_contract as fpc_contract
 
     txt = open(path).read()
 
     def center_name(n):
-        return fpc_contract.CENTER_RENAME.get(n, n)
+        return fpc_contract.CENTER_RENAME.get(n, n) if center_side else n
 
     changed = 0
     out = []
@@ -840,7 +1228,9 @@ def assign_connector_pad_nets(path, ref, pinmap):
                 q += 1
             pblock = block[pstart:q + 1]
             num = pm.group(1)
-            if num == "MP":
+            if num == "MP" or num == "SH":
+                # MP hold-downs and SH solder-hold pads: GND (the FH41 is
+                # a shielded-FFC connector; the shield return lands here)
                 name = "GND"
             else:
                 name = center_name(pinmap.get(int(num)) if num.isdigit() else pinmap.get(num))
@@ -921,6 +1311,70 @@ def inherit_netclasses():
         json.dump(d, open(os.path.join(PROJDIR, board, f"{board}.kicad_pro"),
                           "w"), indent=2)
         print(f"    netclasses {board}: {sorted(have)}")
+
+
+def strip_tracks_and_vias(path):
+    """Remove every (segment), (via), and (arc) block from a board file.
+
+    The center board inherited the monolithic board's WIP routing (tracks
+    that cross the cut lines and dangle after parts moved).  Routing is
+    manual (Phase 4b), so the center starts clean.  Zones keep their
+    outlines and are refilled afterwards (refill_zones).
+    """
+    txt = open(path).read()
+
+    def drop_blocks(text, prefix):
+        out = []
+        pos = 0
+        while True:
+            m = re.search(r'\n\t\(' + prefix + r'\n', text[pos:])
+            if not m:
+                out.append(text[pos:])
+                break
+            out.append(text[pos:pos + m.start() + 1])
+            start = pos + m.start() + 1
+            depth = 0
+            j = start
+            while j < len(text):
+                if text[j] == "(":
+                    depth += 1
+                elif text[j] == ")":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                j += 1
+            pos = j + 1
+        return "".join(out)
+
+    n_seg = len(re.findall(r'\n\t\(segment ', txt))
+    n_via = len(re.findall(r'\n\t\(via ', txt))
+    n_arc = len(re.findall(r'\n\t\(arc ', txt))
+    txt = drop_blocks(txt, "segment")
+    txt = drop_blocks(txt, "via")
+    txt = drop_blocks(txt, "arc")
+    open(path, "w").write(txt)
+    print(f"    stripped {n_seg} segments, {n_via} vias, {n_arc} arcs")
+
+
+def refill_zones(path):
+    """Recompute zone fills in a FRESH pcbnew process (LoadBoard + fill +
+    save).  The fills inherited from the monolithic board are stale after
+    the cut, part moves and track stripping; the fab gerbers use them."""
+    code = (
+        f"import pcbnew\n"
+        f"b = pcbnew.LoadBoard({path!r})\n"
+        f"zones = [z for z in b.Zones()]\n"
+        f"if zones:\n"
+        f"    pcbnew.ZONE_FILLER(b).Fill(zones)\n"
+        f"    pcbnew.SaveBoard({path!r}, b)\n"
+        f"print('refilled', len(zones), 'zones')\n"
+    )
+    import subprocess
+    r = subprocess.run([PCB, "-c", code], capture_output=True, text=True)
+    if r.returncode != 0:
+        print(r.stderr[-2000:])
+        raise SystemExit("zone refill failed")
+    print(r.stdout.strip().splitlines()[-1])
 
 
 def main():
@@ -1110,8 +1564,9 @@ def main():
         for h in HOLES[board_key]:
             if h in padlists:
                 final_pads.extend(padlists[h])
+        courtyards = parse_courtyards(ORIG)
         connectors = resolve_connectors(board_key, final_pads, region,
-                                        [], [])
+                                        [], [], courtyards, moves, old)
         for (ref, lib, name, pos, rot) in connectors:
             if board_key == "L":
                 assert 65.0 <= pos[0] <= 70, f"{ref} not on L edge: {pos}"
@@ -1122,8 +1577,22 @@ def main():
         # preferred anchors; nudge the colliding parts away instead.
         if any(pos == p for (ref, lib, name, pos, rot) in connectors
                for (_ref, _lib, _name, p, _rot) in CONNECTORS[board_key]) or True:
+            # Phase 4 deep audit: fix genuine part-on-part pad overlaps
+            # inherited from the monolithic layout (all of them DRC shorts).
+            fix_part_overlaps(board_key, region, padlists, moves, old, refs,
+                              FORBIDDEN[board_key],
+                              CONNECTOR_KEEPOUT[board_key],
+                              courtyards=courtyards)
             nudge_connector_collisions(board_key, connectors, final_pads,
-                                       region, padlists, moves, old, refs)
+                                       region, padlists, moves, old, refs,
+                                       courtyards=courtyards)
+            # the nudge's greedy per-part moves can crowd parts together;
+            # a final sweep separates any residual pad overlaps.
+            fix_part_overlaps(board_key, region, padlists, moves, old, refs,
+                              FORBIDDEN[board_key],
+                              CONNECTOR_KEEPOUT[board_key],
+                              neighbor_margin=0.3,
+                              courtyards=courtyards)
             if build:
                 for r, (nx, ny, rot) in moves.items():
                     fp = board_refs.get(r)
@@ -1157,6 +1626,18 @@ def main():
 
             pcbnew.SaveBoard(out, board)
             splice_setup_layers(out)
+            # FH41-68S SH solder-hold pads: GND (shielded-FFC return).
+            # The sync leaves them unmatched (no symbol pins).
+            import fpc_contract as fpc_contract
+            for (ref, _lib, _name, _pos, _rot) in CONNECTORS_FINAL[board_key]:
+                pinmap = {
+                    "FPC101": fpc_contract.FPC1_PINMAP,
+                    "FPC104": fpc_contract.FPC2_PINMAP,
+                    "FPC106": fpc_contract.FPC3_PINMAP,
+                }.get(ref)
+                if pinmap is not None:
+                    assign_connector_pad_nets(out, ref, pinmap)
+                    print(f"    {ref}: SH pads -> GND")
         else:
             # center: text surgery (no pcbnew mutation) then connectors in a
             # fresh subprocess (Remove+Set* poisons SWIG in-process)
@@ -1171,8 +1652,14 @@ def main():
                     "FPC103": fpc_contract.FPC2_PINMAP,
                     "FPC105": fpc_contract.FPC3_PINMAP,
                 }[ref]
-                n = assign_connector_pad_nets(out, ref, pinmap)
+                n = assign_connector_pad_nets(out, ref, pinmap, center_side=True)
                 print(f"    {ref}: assigned {n} pad nets")
+            # Phase 4 deep audit: the inherited monolithic routing is WIP
+            # (tracks cross the cut lines) — routing is manual, so strip
+            # tracks/vias/arcs and refill the zones against the final
+            # placement.
+            strip_tracks_and_vias(out)
+            refill_zones(out)
         inject_outline_text(out, OUTLINES[board_key])
         print(f"[{board_key}] wrote {out}")
         n_conn = len(CONNECTORS_FINAL[board_key])

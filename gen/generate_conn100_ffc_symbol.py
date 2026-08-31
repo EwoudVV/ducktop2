@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate gen/Conn_01x100_FFC_MP.kicad_sym (Phase 4a).
+"""Generate gen/Conn_01x{N}_FFC_MP.kicad_sym (FFC_PINS env).
 
 Derived from the existing 30-pin FFC/MP symbol pattern (pins every 2.54mm,
 small tick rectangles at each pin, MP hold-down pin at the bottom).  The
@@ -13,8 +13,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from build_ducktop2 import U
 
-OUT = os.path.join(os.path.dirname(__file__), "Conn_01x100_FFC_MP.kicad_sym")
-PINS = 100
+PINS = int(os.environ.get("FFC_PINS", "100"))
+OUT = os.path.join(os.path.dirname(__file__), f"Conn_01x{PINS}_FFC_MP.kicad_sym")
 PIN_PITCH = 2.54
 PIN1_Y = 35.56
 PIN_LAST_Y = PIN1_Y - (PINS - 1) * PIN_PITCH
@@ -33,7 +33,7 @@ parts.append("(kicad_symbol_lib")
 parts.append("\t(version 20251024)")
 parts.append('\t(generator "ducktop2_project_lib")')
 parts.append('\t(generator_version "10.0")')
-parts.append('\t(symbol "Conn_01x100_FFC_MP"')
+parts.append(f'\t(symbol "Conn_01x{PINS}_FFC_MP"')
 parts.append("\t\t(pin_names")
 parts.append("\t\t\t(offset 1.016)")
 parts.append("\t\t\t(hide yes)")
@@ -44,7 +44,7 @@ parts.append("\t\t(on_board yes)")
 parts.append("\t\t(in_pos_files yes)")
 parts.append("\t\t(duplicate_pin_numbers_are_jumpers no)")
 for prop, value, y in (("Reference", "J", 38.1),
-                       ("Value", "Conn_01x100_FFC_MP", VALUE_Y)):
+                       ("Value", f"Conn_01x{PINS}_FFC_MP", VALUE_Y)):
     parts.append(f'\t\t(property "{prop}" "{value}"')
     parts.append(f"\t\t\t(at 0 {y:g} 0)")
     parts.append("\t\t\t(show_name no)")
@@ -81,7 +81,7 @@ parts.append("\t\t\t\t\t(size 1.27 1.27)")
 parts.append("\t\t\t\t)")
 parts.append("\t\t\t)")
 parts.append("\t\t)")
-parts.append('\t\t(symbol "Conn_01x100_FFC_MP_1_1"')
+parts.append(f'\t\t(symbol "Conn_01x{PINS}_FFC_MP_1_1"')
 parts.append("\t\t\t(rectangle")
 parts.append(f"\t\t\t\t(start -1.27 {BODY_TOP:g})")
 parts.append(f"\t\t\t\t(end 1.27 {BODY_BOTTOM:g})")

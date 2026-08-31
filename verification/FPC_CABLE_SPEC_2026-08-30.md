@@ -10,14 +10,18 @@ enforce it.
 
 | Cable | Between | Connectors | Pitch | Pins used | Cable |
 |---|---|---|---|---|---|
-| FPC-1 | Left I/O <-> Center | FPC101 <-> FPC102 | 0.5 mm | 100 | 100-pin FFC, 30 signals + rails, rest GND |
-| FPC-2 | Center <-> Right I/O | FPC103 <-> FPC104 | 0.5 mm | 100 | 100-pin FFC, 35 signals + rails, rest GND |
+| FPC-1 | Left I/O <-> Center | FPC101 <-> FPC102 | 0.5 mm | 68 | 68-pin shielded FFC, 30 signals + rails, rest GND |
+| FPC-2 | Center <-> Right I/O | FPC103 <-> FPC104 | 0.5 mm | 68 | 68-pin shielded FFC, 35 signals + rails, rest GND |
 | FPC-3 | Center <-> BMS (on pack) | FPC105 <-> FPC106 | 0.5 mm | 30 | 30-pin FFC, 8 signals/power, rest GND |
 
-Connectors: Hirose FH12-100S-0.5SH (FPC-1/-2), Hirose FH12-30S-0.5SH (FPC-3),
-horizontal, top-contact, with MP hold-down tabs soldered to GND on both ends.
+Connectors: Hirose FH41-68S-0.5SH(05) (FPC-1/-2) -- the FH41 series is the
+shielded-FFC 0.5mm connector and tops out at 68 positions (the FH12 series
+stops at 60; the 100-pin "FH12-100S" does not exist -- Phase 4 deep audit).
+The 14 SH solder-hold pads are connected to GND on both ends (shield
+return).  FPC-3: Hirose FH12-30S-0.5SH, horizontal, top-contact, MP tabs
+to GND on both ends.
 
-## FPC-1 (100 pins) — FPC101 (left) <-> FPC102 (center)
+## FPC-1 (68 pins) — FPC101 (left) <-> FPC102 (center)
 
 | Pins | Nets |
 |---|---|
@@ -43,12 +47,12 @@ horizontal, top-contact, with MP hold-down tabs soldered to GND on both ends.
 | 46-47 | USBC1_SSTX_P / USBC1_SSTX_N |
 | 49-50 | USBC2_SSRX_P / USBC2_SSRX_N |
 | 52-53 | USBC2_SSTX_P / USBC2_SSTX_N |
-| all other pins | GND |
+| 54-68 | GND |
 
 Differential pairs kept adjacent (P before N) with a GND conductor between
 pairs.  Power pins concentrated at the cable start.
 
-## FPC-2 (100 pins) — FPC103 (center) <-> FPC104 (right)
+## FPC-2 (68 pins) — FPC103 (center) <-> FPC104 (right)
 
 | Pins | Nets |
 |---|---|
@@ -77,7 +81,7 @@ pairs.  Power pins concentrated at the cable start.
 | 54-55 | TCP0_TX1_P / TCP0_TX1_N |
 | 57-58 | TCP0_TXRX0_P / TCP0_TXRX0_N |
 | 60-61 | TCP0_TXRX1_P / TCP0_TXRX1_N |
-| all other pins | GND |
+| 62-68 | GND |
 
 ## FPC-3 (30 pins) — FPC105 (center) <-> FPC106 (BMS)
 
@@ -106,7 +110,8 @@ conductors each (protection path current).
 - **Unused pins are GND** (never floating) so the 100-pin cables get a
   near-continuous ground plane between signal groups.
 - Cable length: determined at integration (duct through the hinge channel);
-  FH12 connectors accept standard 0.3 mm-thick FFC.  For the USB3/HDMI
-  pairs a 30-50 mm short cable is assumed for Phase 4 length budgets;
-  GbE (RTL8111H MDI is magnetics-side, no FPC) and HDMI are 100-ohm
-  differential pairs per the net class plan.
+  the FH41 accepts 0.3 mm shielded FFC.  For the USB3/HDMI pairs a
+  30-50 mm short cable is assumed for Phase 4 length budgets; GbE
+  (RTL8111H MDI is magnetics-side, no FPC) and HDMI are 100-ohm
+  differential pairs per the net class plan.  The FH41-68S's shield
+  return is the SH pad row (GND on both ends).
