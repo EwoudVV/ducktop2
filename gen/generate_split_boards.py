@@ -81,12 +81,12 @@ FH12_30 = "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal"
 CONNECTORS = {
     "L": [("FPC101", "ducktop2", FH12_100, (65.6, 92.5), 90)],
     "C": [
-        ("FPC102", "ducktop2", FH12_100, (72.75, 92.5), 270),
+        ("FPC102", "ducktop2", FH12_100, (73.5, 92.5), 270),
         ("FPC103", "ducktop2", FH12_100, (294.6, 92.5), 90),
         ("FPC105", "Connector_FFC-FPC", FH12_30, (123.5, 6.5), 180),
     ],
-    "R": [("FPC104", "ducktop2", FH12_100, (302.7, 92.5), 270)],
-    "B": [("FPC106", "Connector_FFC-FPC", FH12_30, (30, 55.8), 180)],
+    "R": [("FPC104", "ducktop2", FH12_100, (303.6, 92.5), 270)],
+    "B": [("FPC106", "Connector_FFC-FPC", FH12_30, (30, 54), 0)],
 }
 
 CONNECTOR_KEEPOUT = {
@@ -1308,6 +1308,15 @@ def inherit_netclasses():
         for p in apply:
             if (p["pattern"], p["netclass"]) not in existing:
                 ns["netclass_patterns"].append(p)
+        # the MCP sync clobbers the design rules too; restore the main
+        # project's values (0.2 min hole matches the 0.2mm drills)
+        rules = d["board"]["design_settings"]["rules"]
+        for key, val in (("min_through_hole_diameter", 0.2),
+                         ("min_track_width", 0.09),
+                         ("min_clearance", 0.09),
+                         ("min_hole_to_hole", 0.2)):
+            if key in rules:
+                rules[key] = val
         json.dump(d, open(os.path.join(PROJDIR, board, f"{board}.kicad_pro"),
                           "w"), indent=2)
         print(f"    netclasses {board}: {sorted(have)}")
