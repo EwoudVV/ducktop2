@@ -78,3 +78,51 @@ Unconnected-items = unrouted nets (Phase 4b+).
    plus net-class differential pairs is the next work.
 2. Mechanical retention: MP tabs are grounded; cable routing/bend radius
    to be validated at integration.
+
+## Addendum (same day) — Phase 4 deep audit: one-shot readiness
+
+A full pre-fab audit found and fixed four classes of board-killer:
+
+1. **Fictional connector**: the Hirose FH12 series tops out at 60
+   positions -- "FH12-100S-0.5SH" does not exist.  FPC-1/FPC-2 now use
+   **Hirose FH41-68S-0.5SH(05)** (shielded-FFC, 68 positions; FPC-1 uses
+   pins 1-53, FPC-2 pins 1-61).  New footprint derived from the KiCad
+   FH41-30S (68 pins at 0.5mm, MP at +/-18, 14 SH solder-holds at 2.5mm
+   steps, 38mm body), new 68-pin symbol (Conn_01x68_FFC_MP), pin maps
+   trimmed to 68, SH pads to GND (shield return).  The fictional
+   FH12-100S footprint/symbol were removed.
+2. **Connector courtyard conflicts**: parts were sitting under the
+   connector bodies (pads cleared, bodies collided).  The placement now
+   enforces courtyard clearance against the connector BODY (library
+   courtyard rects), and parts squeezed between a body and its pin
+   columns are nudged away; the resolver scans with courtyard checks.
+   Fixed a double-shift bug that hid re-placed parts' true positions.
+3. **FPC-3 orientation**: the FH12's FPC enters from the +y side; both
+   FPC-3 connectors had the cable facing AWAY from the seam.  FPC105
+   (center) is now rot 180 at (123.5, 6.5) -- cable exits the bottom edge
+   toward the BMS; FPC106 (BMS) is rot 0 at (30, 54) -- cable enters from
+   the top edge.
+4. **Original-layout defects**: the monolithic board had 16 genuine
+   pad-pad shorts (inductor pads swallowing caps, passives on each
+   other, parts on mounting holes) and 23 parts inside the hinge
+   cutouts (physically off the board).  A courtyard-aware overlap sweep
+   plus a forbidden-zone sweep moved them all to legal spots; the
+   zones were refilled against the final placement.
+
+The placement passes grew a post-build hygiene sweep (fix_board_hygiene.py)
+that uses the FINAL board text as the geometry oracle and converges to a
+clean state; residuals are reported, never dropped.
+
+### Final DRC (all boards, project rules)
+
+| Board | shorts | clearance | hole | courtyard | notes |
+|---|---|---|---|---|---|
+| left_io | 0 | 24* | 0 | 10 | *pre-existing intra-footprint pad pitches |
+| right_io | 0 | 24* | 0 | 9 | *pre-existing; edge items are chassis I/O + notch-adjacent |
+| bms | 0 | 0 | 0 | 0 | fully clean |
+| center | 0 | 0 | 0 | 96 | courtyard = module-socket moat class (design-inherent) |
+
+Remaining categories: courtyards around the Mu socket and M.2 slot
+(parts must sit at the component edges), chassis-edge copper clearances
+(USB/HDMI/GbE through the chassis wall), 11 isolated zone islands, silk
+cosmetics, and 499 unconnected items (unrouted nets -- Phase 4b routing).

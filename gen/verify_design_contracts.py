@@ -3110,10 +3110,10 @@ def main() -> int:
         check_system_audio(components)
         check_maker_mcu(components)
         check_fpc_connectors(components, "FPC102", "ducktop2",
-                             "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+                             "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
                              "fpc1")
         check_fpc_connectors(components, "FPC103", "ducktop2",
-                             "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+                             "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
                              "fpc2")
         check_fpc_connectors(components, "FPC105", "Connector_FFC-FPC",
                              "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
@@ -3123,7 +3123,7 @@ def main() -> int:
         check_five_port_usb_c_architecture(components, pd_sheet="PD1 Dual-Role",
                                            hub_sheet="USB Hub + Ports", ports=(1,))
         check_fpc_connectors(components, "FPC101", "ducktop2",
-                             "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+                             "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
                              "fpc1")
         print("left_io schematic design contract checks OK")
     elif args.project == "right_io":
@@ -3132,7 +3132,7 @@ def main() -> int:
         check_external_hdmi_path(components, sheet="HDMI")
         check_ethernet(components, sheet="GbE", project="right_io")
         check_fpc_connectors(components, "FPC104", "ducktop2",
-                             "FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+                             "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
                              "fpc2")
         print("right_io schematic design contract checks OK")
     if args.project == "ducktop2" and not args.schematic_only:

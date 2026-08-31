@@ -106,7 +106,8 @@ FOOTPRINTS = {
     "Conn_01x30_FFC": "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
     "Conn_01x30_FFC_MP": "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
     "Conn_01x40_FFC": "Connector_FFC-FPC:Hirose_FH12-40S-0.5SH_1x40-1MP_P0.50mm_Horizontal",
-    "Conn_01x100_FFC_MP": "ducktop2:FH12-100S-0.5SH_1x100-1MP_P0.50mm_Horizontal",
+    "Conn_01x100_FFC_MP": "ducktop2:Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
+    "Conn_01x68_FFC_MP": "ducktop2:Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
     # Polarized/latching 2.00 mm cable header. J901 is deliberately not a
     # Raspberry Pi HAT connector and cannot accept a 2.54 mm HAT plug.
     "Conn_02x20_Maker": "Connector_JST:JST_PUD_B40B-PUDSS_2x20_P2.00mm_Vertical",

@@ -31,6 +31,7 @@ LIBMAP = {
     "Conn_01x10_FFC_MP": "Conn_01x10_FFC_MP",
     "Conn_01x30_FFC_MP": "Conn_01x30_FFC_MP",
     "Conn_01x100_FFC_MP": "Conn_01x100_FFC_MP",
+    "Conn_01x68_FFC_MP": "Conn_01x68_FFC_MP",
     "Conn_02x30_MP": "Conn_02x30_MP",
     "Conn_02x20_Odd_Even": "Connector_Generic",
     "BQ76920PW": "ducktop2", "BQ25798": "ducktop2", "BQ24650": "ducktop2",
