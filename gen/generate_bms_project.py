@@ -150,9 +150,9 @@ def build_bms_sheet(sheet_symbol_uuid):
             footprint=FOOTPRINTS["LTC4368-1"],
             pin_nets={
                 "1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_UV", "local"),
-                "3": ("BAT_PROT_OV", "local"), "4": ("GND", "local"),
-                "5": ("GND", "local"), "6": ("BAT_PROT_SHDN", "local"),
-                "7": ("PACK_FAULT_N", "hier"), "8": ("PACK_POS_FUSED", "local"),
+                "3": ("BAT_PROT_OV", "local"), "4": ("FG_VSS", "local"),
+                "5": ("FG_VSS", "local"), "6": ("BAT_PROT_SHDN", "local"),
+                "7": ("PACK_FAULT_N", "local"), "8": ("PACK_POS_FUSED", "local"),
                 "9": ("BAT_PROT_SENSE", "local"), "10": ("BAT_PROT_GATE", "local"),
             },
             extra_props={"Manufacturer": "Analog Devices", "MPN": "LTC4368IMS-1#PBF"})
@@ -178,43 +178,52 @@ def build_bms_sheet(sheet_symbol_uuid):
             extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP2512R0110FEA"})
     s.place("C725", "C", "10u 25V X7R LTC4368 VOUT", 390, 60,
             footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("PACK_POS_FUSED", "local"), "2": ("GND", "local")},
+            pin_nets={"1": ("PACK_POS_FUSED", "local"), "2": ("FG_VSS", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM21BZ71E106KE15L"})
     s.place("R700", "R", "3.09M 1% BAT UV/OV top", 335, 70, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_UV", "local")})
     s.place("R701", "R", "73.2k 1% BAT UV/OV middle", 335, 80, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BAT_PROT_UV", "local"), "2": ("BAT_PROT_OV", "local")})
     s.place("R702", "R", "121k 1% BAT UV/OV bottom", 335, 90, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_OV", "local"), "2": ("GND", "local")})
+            pin_nets={"1": ("BAT_PROT_OV", "local"), "2": ("FG_VSS", "local")})
     s.place("R703", "R", "22k LTC4368 CGATE series", 335, 100, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BAT_PROT_GATE", "local"), "2": ("BAT_PROT_CGATE", "local")})
     s.place("C700", "C", "3.3nF >=50V LTC4368 CGATE", 335, 110, footprint=FOOTPRINTS["C_1n"],
-            pin_nets={"1": ("BAT_PROT_CGATE", "local"), "2": ("GND", "local")})
+            pin_nets={"1": ("BAT_PROT_CGATE", "local"), "2": ("FG_VSS", "local")})
     s.place("C724", "C", "4.7nF >=50V pack hot-swap slew", 335, 120, footprint=FOOTPRINTS["C_1n"],
             pin_nets={"1": ("BAT_PROT_GATE", "local"), "2": ("BAT_PROT_FET_COMMON", "local")})
     s.place("R707", "R", "100k pack protector SHDN pull-up", 390, 70, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_SHDN", "local")})
     s.place("R708", "R", "10k pack FAULT pull-up", 390, 80, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("PACK_FAULT_N", "hier")})
+            pin_nets={"1": ("MCU_3V3", "local"), "2": ("PACK_FAULT_N", "local")})
     s.place("Q701", "Q_NMOS_SOT23_GSD", "BSS138 pack protector latch reset", 390, 90,
             footprint=FOOTPRINTS["Q_BSS138"],
-            pin_nets={"1": ("PACK_RETRY_PULSE", "hier"), "2": ("GND", "local"),
+            pin_nets={"1": ("PACK_RETRY_PULSE", "local"), "2": ("FG_VSS", "local"),
                       "3": ("BAT_PROT_SHDN", "local")},
             extra_props={"Manufacturer": "onsemi", "MPN": "BSS138LT1G"})
     s.place("R709", "R", "100k pack retry gate pulldown", 390, 100, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_RETRY_PULSE", "hier"), "2": ("GND", "local")})
+            pin_nets={"1": ("PACK_RETRY_PULSE", "local"), "2": ("FG_VSS", "local")})
 
     # FPC-3 boundary markers
     s.pwrflag(20, 400, "PACK_POS_FUSED")
     s.pwrflag(20, 420, "PACK_NEG_RAW")
+    s.pwrflag(20, 440, "FG_VSS")
+    s.pwrflag(20, 460, "PACK_POS_RAW")
+    s.pwrflag(20, 480, "BAT_PROT_VIN")
+    s.pwrflag(20, 500, "BMS_VDD")
 
     # Phase 4a: FPC-3 connector (the physical FH12-30S on the BMS board
     # edge).  Pin map from fpc_contract.py -- same conductor order as the
     # center's FPC3_C.  The pack rails (PACK_POS_FUSED, PACK_NEG_RAW),
     # FG_VSS, MCU_3V3, PACK_FAULT_N and PACK_RETRY_PULSE cross here; the
     # hier labels at the connector pins make them boundary nets.
+    # Phase 5: FG_VSS (the BQ77915 post-FET protected return) IS this
+    # board's ground; the pack negative stays internal.  Flat sheet, so
+    # boundary nets use local labels (hierarchical labels in a parentless
+    # root are an ERC error class).
     place_fpc_connector(s, "FPC106", "Conn_01x30_FFC_MP", fpc.FPC3_PINMAP,
-                        "FH12-30S-0.5SH (FPC-3)", x=490, y=250, pwr_base=3600)
+                        "FH12-30S-0.5SH (FPC-3)", x=490, y=250, pwr_base=3600,
+                        label_kind="local", ground_net="FG_VSS", ground_fn=s.fg_vss)
     return s
 
 

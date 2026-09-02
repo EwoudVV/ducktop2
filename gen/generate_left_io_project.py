@@ -2,7 +2,7 @@
 """Generate the Left I/O board project (ducktop2 board split, Phase 2.1).
 
 Left board carries: J21-25, J190, hub U1700 + PD1 chain + SS muxes +
-USB-A cluster. FPC-1 (75 signals) connects it to the center board.
+USB-A cluster. FPC-1 (68 pins / 30 contract nets) connects it to the center board.
 
 This Phase 2.1 cut reuses the existing sheet builders from the main
 project at their native coordinates, emitting them as the left_io
@@ -64,11 +64,24 @@ def build_left_pd_sheet(sheet_symbol_uuid):
     # AUX/SOLAR input terminal — the raw terminal lives on the left board;
     # the protection chain (fuse/TVS/reverse FET/efuse) stays on the center
     # board where the VSYS OR-ing is. AUX_DC_RAW crosses FPC-1.
+    # Phase 5: the source-side fuse protects the FPC-1 AUX segment; the
+    # center board keeps its own F190 + protection chain downstream.
+    s.place("F195", "Fuse", "3A MINI AUX source fuse: Littelfuse 0297003.WXNV",
+            640.08, 50.8, footprint=FOOTPRINTS["Fuse_Pack_Blade_Mini"],
+            pin_nets={"1": ("AUX_DC_TERM", "local"), "2": ("AUX_DC_RAW", "hier")},
+            extra_props={"Manufacturer": "Littelfuse / Keystone", "MPN": "0297003.WXNV + 3568"})
     s.place("J190", "Conn_01x02", "AUX/SOLAR protected screw terminal 6-22V nominal",
             680, 50.8, footprint=FOOTPRINTS["Terminal_01x02_5.08"],
-            pin_nets={"1": ("AUX_DC_RAW", "hier"), "2": ("GND", "local")},
+            pin_nets={"1": ("AUX_DC_TERM", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Phoenix Contact", "MPN": "1715022"})
     s.text(20.32, 693.42, "Five-port source budget: 5 x 0.9A maximum advertised load = 4.5A on the dedicated 6A USB_PORT_5V rail.")
+    # Phase 5 B9: the left board's chassis holes live on THIS board; the
+    # board build transplants them to their monolith positions.
+    for ref in ("H10", "H11", "H12", "H16"):
+        s.place(ref, "MountingHole", "M2.5 isolated mainboard mounting hole",
+                740.0, 60.0, footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
+                in_bom=False,
+                extra_props={"Hardware_Spec": "2.7mm isolated NPTH for M2.5 chassis screw"})
     s.gnd(431.8, 622.3)
     return s
 
@@ -97,7 +110,9 @@ def main() -> int:
     with uuid_scope("left_io:fpc1"):
         fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC101", "Conn_01x68_FFC_MP",
                                  fpc.FPC1_PINMAP, "FH41-68S-0.5SH (FPC-1)",
-                                 pwr_base=3400)
+                                 pwr_base=3400,
+                                 power_flags=("VSYS", "SYS_3V3", "MCU_3V3",
+                                              "GND"))
         fpc1_text = fpc1_s.render(stable_uuid("left_io:self:fpc1"),
                                   page_number=3, paper="A1")
     with open(os.path.join(BOARD_DIR, "left_fpc.kicad_sch"), "w",

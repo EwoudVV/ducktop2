@@ -43,9 +43,15 @@ def build_right_pd_sheet(sheet_symbol_uuid):
             "sstx_p": None, "sstx_n": None,
             "ssrx_p": None, "ssrx_n": None,
         }, x0=20.32, y0=50.8, rbase=2040, cbase=2040, ubase=2010, dbase=2120, ebase=2090,
-        usb2_only=True)
+        usb2_only=True, gated_hier=True)
     usb.add_source_port(s, jref="J12", port=4, base=1760, x0=20.32, y0=337.82,
-                        usb2_only=True)
+                        usb2_only=True, remote_data=True)
+    # Phase 5 B9: the right board's chassis holes live on THIS board.
+    for ref in ("H13", "H15", "H17", "H27"):
+        s.place(ref, "MountingHole", "M2.5 isolated mainboard mounting hole",
+                500.0, 20.32, footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
+                in_bom=False,
+                extra_props={"Hardware_Spec": "2.7mm isolated NPTH for M2.5 chassis screw"})
     s.gnd(431.8, 622.3)
     return s
 
@@ -87,7 +93,9 @@ def main() -> int:
     with uuid_scope("right_io:fpc2"):
         fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC104", "Conn_01x68_FFC_MP",
                                  fpc.FPC2_PINMAP, "FH41-68S-0.5SH (FPC-2)",
-                                 pwr_base=3500)
+                                 pwr_base=3500,
+                                 power_flags=("SYS_5V", "SYS_3V3", "MCU_3V3",
+                                              "USB_PORT_5V", "PCIE_3V3", "GND"))
         fpc2_text = fpc2_s.render(stable_uuid("right_io:self:fpc2"),
                                   page_number=4, paper="A1")
     with open(os.path.join(BOARD_DIR, "right_fpc.kicad_sch"), "w",

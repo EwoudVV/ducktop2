@@ -29,55 +29,70 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid ed693766-8c44-5d8f-8e7d-7997a6c5999f)
   )
-  (pin "INTERNAL_USB_VBUS_VALID" bidirectional
+  (pin "HUB_DS4_DM" bidirectional
     (at 149.86 54.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 237fc7b2-f184-502b-b07d-7a61b5e9b7b3)
   )
-  (pin "SYS_3V3" bidirectional
+  (pin "HUB_DS4_DP" bidirectional
     (at 149.86 59.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 84bf5ad6-2ceb-55df-8d0b-38ae366e884c)
   )
-  (pin "USBC2_DM" bidirectional
+  (pin "HUB_PRT_CTL4" bidirectional
     (at 149.86 64.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 073d23b4-c4b8-51e7-943f-4c567c45aa0c)
   )
-  (pin "USBC2_DP" bidirectional
+  (pin "INTERNAL_USB_VBUS_VALID" bidirectional
     (at 149.86 69.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c1273843-10a7-508a-8302-905f4882f927)
   )
-  (pin "USBC2_SSRX_N" bidirectional
+  (pin "SYS_3V3" bidirectional
     (at 149.86 74.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 5a173218-d54f-54dc-932e-917f050edd67)
   )
-  (pin "USBC2_SSRX_P" bidirectional
+  (pin "USBC2_DM" bidirectional
     (at 149.86 80.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 72f65813-bd17-51e4-afc6-dd122bb9f56f)
   )
-  (pin "USBC2_SSTX_N" bidirectional
+  (pin "USBC2_DP" bidirectional
     (at 149.86 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 82a103ea-853f-59fa-b98c-3d2f344c42e0)
   )
-  (pin "USBC2_SSTX_P" bidirectional
+  (pin "USBC2_SSRX_N" bidirectional
     (at 149.86 90.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 596acdf8-7ad9-5f68-b254-d90ca0e02039)
   )
-  (pin "USB_PORT_5V" bidirectional
+  (pin "USBC2_SSRX_P" bidirectional
     (at 149.86 95.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 4fa07a0b-8b53-579e-8c76-ad4ea59a92bb)
   )
-  (pin "VSYS" bidirectional
+  (pin "USBC2_SSTX_N" bidirectional
     (at 149.86 100.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 2298d60f-f114-5946-8306-039e250c3d69)
+  )
+  (pin "USBC2_SSTX_P" bidirectional
+    (at 149.86 105.41 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid eb188f33-54f2-522c-a6b9-3d50ae5a45f1)
+  )
+  (pin "USB_PORT_5V" bidirectional
+    (at 149.86 110.49 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7a694363-ed9f-579c-90d4-5e1b064544eb)
+  )
+  (pin "VSYS" bidirectional
+    (at 149.86 115.57 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid d33cc3fa-e08d-5abe-b3a1-b03423f0f4f2)
   )
 )
 (sheet
@@ -97,107 +112,102 @@
   (pin "AUX_DC_RAW" bidirectional
     (at 149.86 224.79 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid eb188f33-54f2-522c-a6b9-3d50ae5a45f1)
+    (uuid 8a5415d6-e231-5aa5-bdff-12cdce6951f6)
   )
   (pin "MCU_3V3" bidirectional
     (at 149.86 229.87 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 7a694363-ed9f-579c-90d4-5e1b064544eb)
+    (uuid 6b15d3bd-5ee9-58ca-8b48-4efb5bbd67f5)
   )
   (pin "PD1_EFUSE_FAULT_N" bidirectional
     (at 149.86 234.95 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d33cc3fa-e08d-5abe-b3a1-b03423f0f4f2)
+    (uuid 181d2208-85a3-50d3-a520-abd1479a63b7)
   )
   (pin "PD1_I2C_SCL" bidirectional
     (at 149.86 240.03 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 8a5415d6-e231-5aa5-bdff-12cdce6951f6)
+    (uuid 42c41a65-285e-59f8-b719-c2f2fa367b77)
   )
   (pin "PD1_I2C_SDA" bidirectional
     (at 149.86 245.11 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 6b15d3bd-5ee9-58ca-8b48-4efb5bbd67f5)
+    (uuid 53b9a034-0a0f-51e1-b137-8ce5451e8c9d)
   )
   (pin "PD1_PATH_EN" bidirectional
     (at 149.86 250.19 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 181d2208-85a3-50d3-a520-abd1479a63b7)
+    (uuid c23179a4-ba32-55aa-8e60-5e9d6ff897ed)
   )
   (pin "PD1_TCPC_IRQ_N" bidirectional
     (at 149.86 255.27 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 42c41a65-285e-59f8-b719-c2f2fa367b77)
+    (uuid f400f254-4d55-5006-b40e-b4d5c2a61a5f)
   )
   (pin "PD1_VALID_N" bidirectional
     (at 149.86 260.35 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 53b9a034-0a0f-51e1-b137-8ce5451e8c9d)
+    (uuid 40003b5a-2440-5e67-bf96-226b68b9241d)
   )
   (pin "PD1_VBUS_RAW" bidirectional
     (at 149.86 265.43 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c23179a4-ba32-55aa-8e60-5e9d6ff897ed)
-  )
-  (pin "PD2_VALID_N" bidirectional
-    (at 149.86 270.51 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid f400f254-4d55-5006-b40e-b4d5c2a61a5f)
-  )
-  (pin "PD_PROTECT_FAULT_N" bidirectional
-    (at 149.86 275.59 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 40003b5a-2440-5e67-bf96-226b68b9241d)
-  )
-  (pin "SYS_3V3" bidirectional
-    (at 149.86 280.67 0)
-    (effects (font (size 1.27 1.27)) (justify left))
     (uuid cc8a1528-61b1-5219-bee1-c3157ba07dfe)
   )
-  (pin "USBC1_DM" bidirectional
-    (at 149.86 285.75 0)
+  (pin "PD_PROTECT_FAULT_N" bidirectional
+    (at 149.86 270.51 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 514e9a72-a4d1-56c9-9a89-0af30914bdf5)
   )
-  (pin "USBC1_DP" bidirectional
-    (at 149.86 290.83 0)
+  (pin "SYS_3V3" bidirectional
+    (at 149.86 275.59 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e2a641f5-31db-5c19-8639-1b9a8c4670c6)
   )
-  (pin "USBC1_SSRX_N" bidirectional
-    (at 149.86 295.91 0)
+  (pin "USBC1_DM" bidirectional
+    (at 149.86 280.67 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 349fd0f2-aa8a-5524-bb44-0ba9bdb4d093)
   )
-  (pin "USBC1_SSRX_P" bidirectional
-    (at 149.86 300.99 0)
+  (pin "USBC1_DP" bidirectional
+    (at 149.86 285.75 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 1f7b5890-dbf2-581e-b816-1ab42f07665c)
   )
-  (pin "USBC1_SSTX_N" bidirectional
-    (at 149.86 306.07 0)
+  (pin "USBC1_SSRX_N" bidirectional
+    (at 149.86 290.83 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 5092fab3-7475-5a4e-84a5-8d1cfdf49ba2)
   )
-  (pin "USBC1_SSTX_P" bidirectional
-    (at 149.86 311.15 0)
+  (pin "USBC1_SSRX_P" bidirectional
+    (at 149.86 295.91 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid f0969b7c-13ed-5cd7-b440-3daef0d83b9f)
   )
-  (pin "USB_PD_SELECTED" bidirectional
-    (at 149.86 316.23 0)
+  (pin "USBC1_SSTX_N" bidirectional
+    (at 149.86 300.99 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 3c6b5e86-dfe3-5d30-99ea-a3704311e640)
   )
-  (pin "USB_PORT_5V" bidirectional
-    (at 149.86 321.31 0)
+  (pin "USBC1_SSTX_P" bidirectional
+    (at 149.86 306.07 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c5619a39-1e45-51e9-a88a-295a6dc84b3c)
+  )
+  (pin "USB_PD_SELECTED" bidirectional
+    (at 149.86 311.15 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid b176a95e-069a-5b8f-9b58-eb3d67994ea7)
+  )
+  (pin "USB_PORT_5V" bidirectional
+    (at 149.86 316.23 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid c0bc6fa2-fce0-55a8-92ed-32b8b6446d85)
   )
 )
 (sheet
   (at 170.18 39.37)
-  (size 119.38 162.56)
+  (size 119.38 172.72)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 86191e00-3cef-5223-829f-0c74cf67126c)
@@ -206,469 +216,499 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
   )
   (property "Sheetfile" "left_fpc.kicad_sch"
-    (at 170.18 203.2 0)
+    (at 170.18 213.36 0)
     (effects (font (size 1.27 1.27)) (justify left top))
   )
   (pin "VSYS" bidirectional
     (at 289.56 44.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid b176a95e-069a-5b8f-9b58-eb3d67994ea7)
+    (uuid 85c04d82-6331-5db2-b69a-9dd48a7f48bd)
   )
   (pin "USB_PORT_5V" bidirectional
     (at 289.56 49.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c0bc6fa2-fce0-55a8-92ed-32b8b6446d85)
+    (uuid 382fee57-a5a9-5a9e-acc4-6fc3264d261b)
   )
   (pin "SYS_3V3" bidirectional
     (at 289.56 54.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 85c04d82-6331-5db2-b69a-9dd48a7f48bd)
+    (uuid d50f7a07-cc1b-5fdb-a208-a0112525b445)
   )
   (pin "MCU_3V3" bidirectional
     (at 289.56 59.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 382fee57-a5a9-5a9e-acc4-6fc3264d261b)
+    (uuid 61cdc032-7d2e-5ca0-85b4-48c0c9da6a7d)
   )
   (pin "PD1_VBUS_RAW" bidirectional
     (at 289.56 64.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid d50f7a07-cc1b-5fdb-a208-a0112525b445)
-  )
-  (pin "AUX_DC_RAW" bidirectional
-    (at 289.56 69.85 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 61cdc032-7d2e-5ca0-85b4-48c0c9da6a7d)
+    (uuid 81e0b152-d04b-521c-9ddb-4c2908c622f4)
   )
   (pin "USB_PD_SELECTED" bidirectional
+    (at 289.56 69.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 18855767-bf36-5122-8b4a-dd3947b0e557)
+  )
+  (pin "AUX_DC_RAW" bidirectional
     (at 289.56 74.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 81e0b152-d04b-521c-9ddb-4c2908c622f4)
+    (uuid 11fa6a26-46dd-5778-8330-898d28ec4c82)
   )
   (pin "INTERNAL_USB_VBUS_VALID" bidirectional
     (at 289.56 80.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 18855767-bf36-5122-8b4a-dd3947b0e557)
+    (uuid 291e7689-ff41-5dc4-9673-aaaf0a0a8eae)
   )
   (pin "PD1_I2C_SCL" bidirectional
     (at 289.56 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 11fa6a26-46dd-5778-8330-898d28ec4c82)
+    (uuid 017fd99b-98d8-5fb4-8f76-9e5d8982567c)
   )
   (pin "PD1_I2C_SDA" bidirectional
     (at 289.56 90.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 291e7689-ff41-5dc4-9673-aaaf0a0a8eae)
+    (uuid 13ac7586-60f9-598d-a162-f01eb06c7c68)
   )
   (pin "PD1_TCPC_IRQ_N" bidirectional
     (at 289.56 95.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 017fd99b-98d8-5fb4-8f76-9e5d8982567c)
+    (uuid c89bc00f-54ba-5b5f-acc2-9d3ed520670b)
   )
   (pin "PD1_PATH_EN" bidirectional
     (at 289.56 100.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 13ac7586-60f9-598d-a162-f01eb06c7c68)
+    (uuid 2d82aa58-d3e4-5a01-9c43-5754f6c7b3b7)
   )
   (pin "PD1_VALID_N" bidirectional
     (at 289.56 105.41 0)
     (effects (font (size 1.27 1.27)) (justify left))
-    (uuid c89bc00f-54ba-5b5f-acc2-9d3ed520670b)
-  )
-  (pin "PD2_VALID_N" bidirectional
-    (at 289.56 110.49 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 2d82aa58-d3e4-5a01-9c43-5754f6c7b3b7)
-  )
-  (pin "PD1_EFUSE_FAULT_N" bidirectional
-    (at 289.56 115.57 0)
-    (effects (font (size 1.27 1.27)) (justify left))
     (uuid 2afffb00-07b9-51c6-9ebd-24e29bcc1591)
   )
-  (pin "PD_PROTECT_FAULT_N" bidirectional
-    (at 289.56 120.65 0)
+  (pin "PD1_EFUSE_FAULT_N" bidirectional
+    (at 289.56 110.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 210233e5-3445-5994-b5a1-f5e3db76414f)
   )
-  (pin "USBC1_DP" bidirectional
-    (at 289.56 125.73 0)
+  (pin "PD_PROTECT_FAULT_N" bidirectional
+    (at 289.56 115.57 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 1cba92ca-b7b4-5da5-8c73-d38771dfe0e6)
   )
-  (pin "USBC1_DM" bidirectional
-    (at 289.56 130.81 0)
+  (pin "HUB_DS4_DP" bidirectional
+    (at 289.56 120.65 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 50f66840-b09b-55a6-bb1f-1712637bddcd)
   )
-  (pin "USBC2_DP" bidirectional
-    (at 289.56 135.89 0)
+  (pin "HUB_DS4_DM" bidirectional
+    (at 289.56 125.73 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 87c5ce92-6aed-5976-9633-d25f47a07239)
   )
-  (pin "USBC2_DM" bidirectional
-    (at 289.56 140.97 0)
+  (pin "HUB_PRT_CTL4" bidirectional
+    (at 289.56 130.81 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid f1e1bff3-5b2c-54e9-a719-df286993473e)
   )
-  (pin "HUB_DS1_DP" bidirectional
-    (at 289.56 146.05 0)
+  (pin "USBC1_DP" bidirectional
+    (at 289.56 135.89 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid ecca8252-255d-5565-a500-a8732c81dd5b)
   )
-  (pin "HUB_DS1_DM" bidirectional
-    (at 289.56 151.13 0)
+  (pin "USBC1_DM" bidirectional
+    (at 289.56 140.97 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b9f90b84-eb31-5b7b-b851-b7b4f8be01fb)
   )
-  (pin "USBC1_SSRX_P" bidirectional
-    (at 289.56 156.21 0)
+  (pin "USBC2_DP" bidirectional
+    (at 289.56 146.05 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c01a5be4-d5f5-54cd-9134-f17b984bbc1b)
   )
-  (pin "USBC1_SSRX_N" bidirectional
-    (at 289.56 161.29 0)
+  (pin "USBC2_DM" bidirectional
+    (at 289.56 151.13 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 09bffff6-2a52-513b-9373-ab4d48af59f4)
   )
-  (pin "USBC1_SSTX_P" bidirectional
-    (at 289.56 166.37 0)
+  (pin "HUB_DS1_DP" bidirectional
+    (at 289.56 156.21 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 77359fcc-975a-5ec3-991b-49daa7eb5c3f)
   )
-  (pin "USBC1_SSTX_N" bidirectional
-    (at 289.56 171.45 0)
+  (pin "HUB_DS1_DM" bidirectional
+    (at 289.56 161.29 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 62e82fbd-97fa-5596-b01e-7112cc17c27e)
   )
-  (pin "USBC2_SSRX_P" bidirectional
-    (at 289.56 176.53 0)
+  (pin "USBC1_SSRX_P" bidirectional
+    (at 289.56 166.37 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 938709b7-d439-57b3-8fbc-aba263ee295f)
   )
-  (pin "USBC2_SSRX_N" bidirectional
-    (at 289.56 181.61 0)
+  (pin "USBC1_SSRX_N" bidirectional
+    (at 289.56 171.45 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid cdaa0763-db89-57a6-a691-723eaddcc9b6)
   )
-  (pin "USBC2_SSTX_P" bidirectional
-    (at 289.56 186.69 0)
+  (pin "USBC1_SSTX_P" bidirectional
+    (at 289.56 176.53 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 3a314ce6-06b3-5ee6-a825-cc6e9a6f02e4)
   )
-  (pin "USBC2_SSTX_N" bidirectional
-    (at 289.56 191.77 0)
+  (pin "USBC1_SSTX_N" bidirectional
+    (at 289.56 181.61 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid bcf3ce24-617c-58a9-b75f-b69bed90f8df)
+  )
+  (pin "USBC2_SSRX_P" bidirectional
+    (at 289.56 186.69 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 7c5b80ee-4105-589b-ba92-6b19256c28ca)
+  )
+  (pin "USBC2_SSRX_N" bidirectional
+    (at 289.56 191.77 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid fbf9dfe9-1bc1-5345-899c-4807d3968cca)
+  )
+  (pin "USBC2_SSTX_P" bidirectional
+    (at 289.56 196.85 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 84e1f6f4-3d9c-504e-8aa2-8a4d61eb1935)
+  )
+  (pin "USBC2_SSTX_N" bidirectional
+    (at 289.56 201.93 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2f64a43c-dced-527c-8194-03b77f2d5e45)
   )
 )
 (label "HUB_DS1_DM"
   (at 149.86 44.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7c5b80ee-4105-589b-ba92-6b19256c28ca)
+  (uuid a3867d4f-a347-5d36-8d71-8512c81dab13)
 )
 (label "HUB_DS1_DP"
   (at 149.86 49.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fbf9dfe9-1bc1-5345-899c-4807d3968cca)
-)
-(label "INTERNAL_USB_VBUS_VALID"
-  (at 149.86 54.61 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 84e1f6f4-3d9c-504e-8aa2-8a4d61eb1935)
-)
-(label "SYS_3V3"
-  (at 149.86 59.69 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2f64a43c-dced-527c-8194-03b77f2d5e45)
-)
-(label "USBC2_DM"
-  (at 149.86 64.77 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a3867d4f-a347-5d36-8d71-8512c81dab13)
-)
-(label "USBC2_DP"
-  (at 149.86 69.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 54ca72c1-3959-53d2-af9f-93cc4e3aa4c8)
 )
-(label "USBC2_SSRX_N"
-  (at 149.86 74.93 0)
+(label "HUB_DS4_DM"
+  (at 149.86 54.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 2a976d04-e540-5d29-9dd8-5bbfa2dc9474)
 )
-(label "USBC2_SSRX_P"
-  (at 149.86 80.01 0)
+(label "HUB_DS4_DP"
+  (at 149.86 59.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid cddc75ab-b268-5311-8f39-683e0b2c8dbf)
 )
-(label "USBC2_SSTX_N"
-  (at 149.86 85.09 0)
+(label "HUB_PRT_CTL4"
+  (at 149.86 64.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e6977b0a-2a98-5846-aa47-8d13b05849c3)
 )
-(label "USBC2_SSTX_P"
-  (at 149.86 90.17 0)
+(label "INTERNAL_USB_VBUS_VALID"
+  (at 149.86 69.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid ec7f00ea-0044-5b65-8de8-8abf9a450703)
 )
-(label "USB_PORT_5V"
-  (at 149.86 95.25 0)
+(label "SYS_3V3"
+  (at 149.86 74.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 093badd3-873e-5eae-96da-a0bd96e22f3e)
 )
-(label "VSYS"
-  (at 149.86 100.33 0)
+(label "USBC2_DM"
+  (at 149.86 80.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d7899ebc-0295-55fe-8552-242c5e8b172d)
+)
+(label "USBC2_DP"
+  (at 149.86 85.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 963337d3-30d7-5ebe-a77e-d9b94f447950)
+)
+(label "USBC2_SSRX_N"
+  (at 149.86 90.17 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a1554925-3ac9-5fe5-8a6f-911701442154)
+)
+(label "USBC2_SSRX_P"
+  (at 149.86 95.25 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 18727bec-9023-53ef-9b3f-e358014fb860)
+)
+(label "USBC2_SSTX_N"
+  (at 149.86 100.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0e200b75-2139-559b-bf38-ae5cb8f998c6)
+)
+(label "USBC2_SSTX_P"
+  (at 149.86 105.41 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b5f81f49-3430-5118-9d11-eb3a70c8d07d)
+)
+(label "USB_PORT_5V"
+  (at 149.86 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d525297b-30a2-53e8-bac0-3879a0b02e32)
+)
+(label "VSYS"
+  (at 149.86 115.57 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ed3fb87d-aaac-5f38-aa40-5256508a1d90)
 )
 (label "AUX_DC_RAW"
   (at 149.86 224.79 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 963337d3-30d7-5ebe-a77e-d9b94f447950)
+  (uuid 9a6dc7c9-64d9-5811-af94-17d55d98b454)
 )
 (label "MCU_3V3"
   (at 149.86 229.87 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a1554925-3ac9-5fe5-8a6f-911701442154)
+  (uuid bd2668a0-e27d-5217-addc-78ed6188b4d7)
 )
 (label "PD1_EFUSE_FAULT_N"
   (at 149.86 234.95 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 18727bec-9023-53ef-9b3f-e358014fb860)
+  (uuid 4a46131e-894f-598c-b165-5e1985c89483)
 )
 (label "PD1_I2C_SCL"
   (at 149.86 240.03 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0e200b75-2139-559b-bf38-ae5cb8f998c6)
+  (uuid b0988930-974b-5d1c-9007-ee68578aabe8)
 )
 (label "PD1_I2C_SDA"
   (at 149.86 245.11 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b5f81f49-3430-5118-9d11-eb3a70c8d07d)
+  (uuid e0289e88-067a-5f00-bb4b-bb7d55585da1)
 )
 (label "PD1_PATH_EN"
   (at 149.86 250.19 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d525297b-30a2-53e8-bac0-3879a0b02e32)
+  (uuid 4bf0a4c3-491b-5dc4-81da-01d9d205f0c9)
 )
 (label "PD1_TCPC_IRQ_N"
   (at 149.86 255.27 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ed3fb87d-aaac-5f38-aa40-5256508a1d90)
+  (uuid 0cbb73d1-1e4d-5ba1-8691-6fd7b33244fb)
 )
 (label "PD1_VALID_N"
   (at 149.86 260.35 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9a6dc7c9-64d9-5811-af94-17d55d98b454)
+  (uuid fe804bca-178f-5504-905f-1b18b3a93e05)
 )
 (label "PD1_VBUS_RAW"
   (at 149.86 265.43 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid bd2668a0-e27d-5217-addc-78ed6188b4d7)
-)
-(label "PD2_VALID_N"
-  (at 149.86 270.51 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4a46131e-894f-598c-b165-5e1985c89483)
-)
-(label "PD_PROTECT_FAULT_N"
-  (at 149.86 275.59 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b0988930-974b-5d1c-9007-ee68578aabe8)
-)
-(label "SYS_3V3"
-  (at 149.86 280.67 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e0289e88-067a-5f00-bb4b-bb7d55585da1)
-)
-(label "USBC1_DM"
-  (at 149.86 285.75 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4bf0a4c3-491b-5dc4-81da-01d9d205f0c9)
-)
-(label "USBC1_DP"
-  (at 149.86 290.83 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0cbb73d1-1e4d-5ba1-8691-6fd7b33244fb)
-)
-(label "USBC1_SSRX_N"
-  (at 149.86 295.91 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fe804bca-178f-5504-905f-1b18b3a93e05)
-)
-(label "USBC1_SSRX_P"
-  (at 149.86 300.99 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid c4f42f2b-35bd-525a-988c-e0e041e7d0eb)
 )
-(label "USBC1_SSTX_N"
-  (at 149.86 306.07 0)
+(label "PD_PROTECT_FAULT_N"
+  (at 149.86 270.51 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 58715da0-bc69-5120-ab25-78d5fbb3bac4)
 )
-(label "USBC1_SSTX_P"
-  (at 149.86 311.15 0)
+(label "SYS_3V3"
+  (at 149.86 275.59 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 32e2438e-ab71-543f-9adb-b268d70c2bd2)
 )
-(label "USB_PD_SELECTED"
-  (at 149.86 316.23 0)
+(label "USBC1_DM"
+  (at 149.86 280.67 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid c44553ca-dce6-50d0-b269-9d4e6108dbd4)
 )
-(label "USB_PORT_5V"
-  (at 149.86 321.31 0)
+(label "USBC1_DP"
+  (at 149.86 285.75 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 42e3ccdb-e258-5385-aa78-c257531bbba6)
+)
+(label "USBC1_SSRX_N"
+  (at 149.86 290.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 23cdd6cf-afb0-5001-b380-e29dc087d07d)
+)
+(label "USBC1_SSRX_P"
+  (at 149.86 295.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5b67eee9-cd2b-5576-a127-b6816836bc78)
+)
+(label "USBC1_SSTX_N"
+  (at 149.86 300.99 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c6894ed7-42e9-5d1f-8e32-ac09d16198de)
+)
+(label "USBC1_SSTX_P"
+  (at 149.86 306.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 2f4df1ac-45a3-501a-9104-44593882827c)
+)
+(label "USB_PD_SELECTED"
+  (at 149.86 311.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5d8582b1-8f6d-5b79-b1ef-b50436f424b3)
+)
+(label "USB_PORT_5V"
+  (at 149.86 316.23 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fb3b1d57-6b93-5f07-8b84-aae1165c81a1)
 )
 (label "VSYS"
   (at 289.56 44.45 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 23cdd6cf-afb0-5001-b380-e29dc087d07d)
+  (uuid 5b1925b2-8130-53c8-b10e-b8eed71b7856)
 )
 (label "USB_PORT_5V"
   (at 289.56 49.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5b67eee9-cd2b-5576-a127-b6816836bc78)
+  (uuid 8f6d0047-ba04-5bc6-a113-d09787f7024b)
 )
 (label "SYS_3V3"
   (at 289.56 54.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c6894ed7-42e9-5d1f-8e32-ac09d16198de)
+  (uuid e4f2fc00-093d-5972-918b-a2cb12030de4)
 )
 (label "MCU_3V3"
   (at 289.56 59.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2f4df1ac-45a3-501a-9104-44593882827c)
+  (uuid 527d7f5f-6dda-5763-838c-ab579f4ce8ee)
 )
 (label "PD1_VBUS_RAW"
   (at 289.56 64.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5d8582b1-8f6d-5b79-b1ef-b50436f424b3)
-)
-(label "AUX_DC_RAW"
-  (at 289.56 69.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fb3b1d57-6b93-5f07-8b84-aae1165c81a1)
+  (uuid b6864268-e804-5917-b2c7-2211acc8f83a)
 )
 (label "USB_PD_SELECTED"
+  (at 289.56 69.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 06c4e85d-9362-5e4b-8a79-ef5fa1b70b57)
+)
+(label "AUX_DC_RAW"
   (at 289.56 74.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5b1925b2-8130-53c8-b10e-b8eed71b7856)
+  (uuid 09e1ce9e-b812-55e9-aeb9-3d77fa96a270)
 )
 (label "INTERNAL_USB_VBUS_VALID"
   (at 289.56 80.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8f6d0047-ba04-5bc6-a113-d09787f7024b)
+  (uuid 8c1b0c45-07c2-5cd0-9ed6-b18f493ef862)
 )
 (label "PD1_I2C_SCL"
   (at 289.56 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e4f2fc00-093d-5972-918b-a2cb12030de4)
+  (uuid ef79ac8f-524e-5259-892b-81cfede086e2)
 )
 (label "PD1_I2C_SDA"
   (at 289.56 90.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 527d7f5f-6dda-5763-838c-ab579f4ce8ee)
+  (uuid 515fec87-1eac-5d03-bfff-05cce3db19f7)
 )
 (label "PD1_TCPC_IRQ_N"
   (at 289.56 95.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b6864268-e804-5917-b2c7-2211acc8f83a)
+  (uuid 9807c4b0-c4a4-5ac1-be47-2f5dd2163141)
 )
 (label "PD1_PATH_EN"
   (at 289.56 100.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 06c4e85d-9362-5e4b-8a79-ef5fa1b70b57)
+  (uuid 62c480fc-a4db-5bb6-a260-083a8d870ffa)
 )
 (label "PD1_VALID_N"
   (at 289.56 105.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 09e1ce9e-b812-55e9-aeb9-3d77fa96a270)
-)
-(label "PD2_VALID_N"
-  (at 289.56 110.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 8c1b0c45-07c2-5cd0-9ed6-b18f493ef862)
-)
-(label "PD1_EFUSE_FAULT_N"
-  (at 289.56 115.57 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ef79ac8f-524e-5259-892b-81cfede086e2)
-)
-(label "PD_PROTECT_FAULT_N"
-  (at 289.56 120.65 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 515fec87-1eac-5d03-bfff-05cce3db19f7)
-)
-(label "USBC1_DP"
-  (at 289.56 125.73 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9807c4b0-c4a4-5ac1-be47-2f5dd2163141)
-)
-(label "USBC1_DM"
-  (at 289.56 130.81 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 62c480fc-a4db-5bb6-a260-083a8d870ffa)
-)
-(label "USBC2_DP"
-  (at 289.56 135.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid eeb73468-6dd6-50d4-a787-c87aa47b776e)
 )
-(label "USBC2_DM"
-  (at 289.56 140.97 0)
+(label "PD1_EFUSE_FAULT_N"
+  (at 289.56 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 3d7a98ed-a830-59eb-8d07-998e074a4533)
 )
-(label "HUB_DS1_DP"
-  (at 289.56 146.05 0)
+(label "PD_PROTECT_FAULT_N"
+  (at 289.56 115.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 97d71bfc-06fb-5227-950f-0466a2adcdab)
 )
-(label "HUB_DS1_DM"
-  (at 289.56 151.13 0)
+(label "HUB_DS4_DP"
+  (at 289.56 120.65 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0729d3f9-151f-5e23-b14f-ee84045256d6)
 )
-(label "USBC1_SSRX_P"
-  (at 289.56 156.21 0)
+(label "HUB_DS4_DM"
+  (at 289.56 125.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 97539c0c-1031-500e-b185-cbca43e04c1e)
 )
-(label "USBC1_SSRX_N"
-  (at 289.56 161.29 0)
+(label "HUB_PRT_CTL4"
+  (at 289.56 130.81 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid b3a85ca9-be51-5653-bf6e-7f417923ce50)
 )
-(label "USBC1_SSTX_P"
-  (at 289.56 166.37 0)
+(label "USBC1_DP"
+  (at 289.56 135.89 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid a9ebd9dc-336b-5299-b3f9-d264f2b8cd89)
 )
-(label "USBC1_SSTX_N"
-  (at 289.56 171.45 0)
+(label "USBC1_DM"
+  (at 289.56 140.97 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid adcd42a7-ace8-5f2f-bf95-8d7c7e712cce)
 )
-(label "USBC2_SSRX_P"
-  (at 289.56 176.53 0)
+(label "USBC2_DP"
+  (at 289.56 146.05 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid c7766bf3-4277-59d5-a712-c07b863360fd)
 )
-(label "USBC2_SSRX_N"
-  (at 289.56 181.61 0)
+(label "USBC2_DM"
+  (at 289.56 151.13 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9ac8ee4f-80f6-509b-b0cc-0859d5cd621b)
 )
-(label "USBC2_SSTX_P"
-  (at 289.56 186.69 0)
+(label "HUB_DS1_DP"
+  (at 289.56 156.21 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 7cb289fb-01b9-5dfd-b6f6-057f599d2c80)
 )
-(label "USBC2_SSTX_N"
-  (at 289.56 191.77 0)
+(label "HUB_DS1_DM"
+  (at 289.56 161.29 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 18101d9b-afdf-5d7c-b662-61eecb471845)
+)
+(label "USBC1_SSRX_P"
+  (at 289.56 166.37 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 145f2cb7-3529-5082-8c5e-06bfd1eec7f5)
+)
+(label "USBC1_SSRX_N"
+  (at 289.56 171.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8e56a8eb-7fd2-5164-b37a-5d5fd0a4b143)
+)
+(label "USBC1_SSTX_P"
+  (at 289.56 176.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 558dc646-12b9-53d5-95ff-2fed0ad95cbc)
+)
+(label "USBC1_SSTX_N"
+  (at 289.56 181.61 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7afbcd6e-42b2-5e14-8954-6583aec2775b)
+)
+(label "USBC2_SSRX_P"
+  (at 289.56 186.69 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5b2a2c65-1335-5c65-859d-f1513d3e6840)
+)
+(label "USBC2_SSRX_N"
+  (at 289.56 191.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d202e227-ea2f-541b-b68e-b74a64fd88f8)
+)
+(label "USBC2_SSTX_P"
+  (at 289.56 196.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d0b71a71-dbcb-5c12-8fa9-52ace7e3f996)
+)
+(label "USBC2_SSTX_N"
+  (at 289.56 201.93 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0958b955-adcc-5e1b-a6ce-44fae6b2ad4a)
 )
   (sheet_instances
     (path "/"

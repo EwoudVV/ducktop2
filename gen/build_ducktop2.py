@@ -78,7 +78,7 @@ FOOTPRINTS = {
     "Q_CSD18540Q5B": "ducktop2:CSD18540Q5B_DNK",
     "Q_CSD19537Q3": "ducktop2:CSD19537Q3_DQG",
     # CSD17575Q3 and CSD19537Q3 share TI's exact DQG0008A VSON-CLIP land pattern.
-    "Q_CSD17575Q3": "ducktop2:CSD19537Q3_DQG",
+    "Q_CSD17575Q3": "ducktop2:CSD17575Q3_DQG",
     "Q_BSS138": "Package_TO_SOT_SMD:SOT-23",
     "Q_SiSS4409DN": "Package_SO:Vishay_PowerPAK_1212-8_Single",
     "LTC4368-1": "Package_SO:MSOP-10_3x3mm_P0.5mm",
@@ -375,6 +375,15 @@ class Sheet:
         pins = self.place(self.nextref("#PWR"), "GND", "GND", x, y)
         ax, ay = pins["1"]
         self.label(ax, ay, "GND", hier=False)
+
+    def fg_vss(self, x, y):
+        """BMS protected-return power symbol: the stock GND symbol with
+        value FG_VSS (the power net name follows the value field).  The
+        pack negative never crosses FPC-3; the return conductors carry
+        the BQ77915 post-FET protected return."""
+        pins = self.place(self.nextref("#PWR"), "GND", "FG_VSS", x, y)
+        ax, ay = pins["1"]
+        self.label(ax, ay, "FG_VSS", hier=False)
 
     def pwrflag(self, x, y, netname):
         pins = self.place(self.nextref("#FLG"), "PWR_FLAG", "PWR_FLAG", x, y)

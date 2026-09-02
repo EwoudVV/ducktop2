@@ -807,20 +807,31 @@ def main(argv=None) -> int:
     if not schematic.exists() or not pcb.exists():
         raise RuntimeError("schematic or PCB candidate does not exist")
 
+    # Phase 5 (audit B4): the split boards are the fabricable artifacts.
+    # In fabrication/production stages with no explicit --pcb, run the
+    # PCB checks against ALL FOUR boards instead of the retired monolith.
+    stage_boards = [ROOT / "ducktop2-center.kicad_pcb",
+                    ROOT / "left_io" / "left_io.kicad_pcb",
+                    ROOT / "right_io" / "right_io.kicad_pcb",
+                    ROOT / "bms" / "bms.kicad_pcb"]
+    pcbs = ([pcb] if args.pcb else stage_boards) \
+        if args.stage in {"fabrication", "production"} else [pcb]
+
     watched = project_design_files()
     before = hash_snapshot(watched)
     cli = find_kicad_cli()
     failures = 0
 
-    duplicate_refs = duplicate_footprint_references(pcb.read_text(encoding="utf-8"))
-    if duplicate_refs:
-        failures += len(duplicate_refs)
-        print(
-            "PCB footprint references: FAIL, duplicate physical references: "
-            + ", ".join(duplicate_refs)
-        )
-    else:
-        print("PCB footprint references: unique")
+    for _pcb in pcbs:
+        duplicate_refs = duplicate_footprint_references(
+            _pcb.read_text(encoding="utf-8"))
+        if duplicate_refs:
+            failures += len(duplicate_refs)
+            print(
+                f"PCB footprint references ({_pcb.name}): FAIL, duplicate "
+                "physical references: " + ", ".join(duplicate_refs))
+        else:
+            print(f"PCB footprint references ({_pcb.name}): unique")
 
     with tempfile.TemporaryDirectory(prefix="ducktop2-release-check-") as temp:
         tempdir = Path(temp)
@@ -835,7 +846,8 @@ def main(argv=None) -> int:
             failures += require_json_status(
                 ROOT / "manufacturing/mainboard_stackup_release.json", "APPROVED",
                 "Fabricator stackup release")
-            failures += run_pcb_checks(cli, pcb, tempdir)
+            for _pcb in pcbs:
+                failures += run_pcb_checks(cli, _pcb, tempdir)
         if args.stage == "production":
             failures += production_evidence_checks()
 

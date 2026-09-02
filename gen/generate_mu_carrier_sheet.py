@@ -172,14 +172,9 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
                 "ModuleAssemblyItem": "A2 DFRobot DFR1149",
                 "BIOSProfile": "DFLT S70NC1R200-16G-B.bin; SHA256 6edcfe021d84baf2b6ea3e4f4df4e81442a6be3580905f255221644d0eeb0bed",
             })
-    s.place("A2", "MountingHole", "DFR1149 LattePanda Mu N305 16GB/64GB removable module", 270, 180,
-            footprint="", pin_nets={}, on_board=False, in_bom=True,
-            extra_props={
-                "Manufacturer": "DFRobot", "MPN": "DFR1149",
-                "AssemblyType": "Customer-fitted removable compute module",
-                "RequiredSocket": "A1 TE Connectivity 2309411-1",
-                "BIOSProfile": "DFLT S70NC1R200-16G-B.bin; build 2026-06-03; SHA256 6edcfe021d84baf2b6ea3e4f4df4e81442a6be3580905f255221644d0eeb0bed",
-            })
+    # Phase 5 B9: A2 (the removable Mu module) was a schematic-only
+    # documentation symbol; it is not a board part.  See the note below.
+    s.text(270, 180, "A2 = DFR1149 LattePanda Mu N305 16GB/64GB removable module (not a board part)")
     standoff_props = {
         "Manufacturer": "Wurth Elektronik",
         "MPN": "9774055243R",
@@ -277,9 +272,11 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
                 "Manufacturer": "Coilcraft", "MPN": "XAL7070-332MEC",
                 "Datasheet": "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xal/xal7070/",
             })
-    s.place("R40", "R", "76.8k 0.1% TPS56637 FB high", *p.next(), footprint=FOOTPRINTS["R"],
+    # Phase 5 (audit C6): 76.8k/10k gave 5.208 V (zero USB margin);
+    # 75.0k/10k targets exactly 5.10 V (TPS56637 Vref 0.6 V).
+    s.place("R40", "R", "75.0k 0.1% TPS56637 FB high", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("SYS_5V", "local"), "2": ("BUCK5_FB", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0776K8L"})
+            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD075KL"})
     s.place("R41", "R", "10k 0.1% TPS56637 FB low", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK5_FB", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0710KL"})
@@ -823,8 +820,13 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     mainboard_hole_props = {
         "Hardware_Spec": "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond",
     }
+    # Phase 5 B9: H10-H13 and H15-H17 moved to the left/right board
+    # schematics (they sit on those boards mechanically); only center holes
+    # are placed here.  H14 stays (center).
     for index, (x, y) in enumerate(((600, 600), (620, 600), (640, 600), (660, 600),
                                     (600, 620), (620, 620), (640, 620), (660, 620)), start=10):
+        if f"H{index}" in ("H10", "H11", "H12", "H13", "H15", "H16", "H17"):
+            continue
         s.place(f"H{index}", "MountingHole", "M2.5 isolated mainboard mounting hole", x, y,
                 footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
                 extra_props=mainboard_hole_props, in_bom=False)
@@ -833,6 +835,8 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     # symbols so the board footprints have netlist backing.
     for index, (x, y) in enumerate(((600, 640), (620, 640), (640, 640), (660, 640),
                                     (600, 660), (620, 660), (640, 660)), start=21):
+        if f"H{index}" == "H27":
+            continue
         s.place(f"H{index}", "MountingHole", "M2.5 isolated mainboard mounting hole", x, y,
                 footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
                 extra_props=mainboard_hole_props, in_bom=False)
@@ -944,24 +948,61 @@ def root_label(coord, name):
 # the physical FFC connector symbol.  Every non-GND connector pin gets a
 # hierarchical label (the pin map in fpc_contract.py is the single source
 # of truth); GND and the MP hold-down tabs get GND power symbols.
-def place_fpc_connector(s, ref, symname, pinmap, value, x=60, y=300, pwr_base=3100):
+def place_fpc_connector(s, ref, symname, pinmap, value, x=60, y=300, pwr_base=3100,
+                        label_kind="hier", ground_net="GND", ground_fn=None,
+                        props=None):
+    """Place an FPC connector with per-pin labels.
+
+    label_kind: "hier" for sheet-based projects, "local" for flat sheets
+    (the BMS: hierarchical labels in a parentless root sheet are an ERC
+    error class).  ground_net/ground_fn: the board's ground reference --
+    the BMS ties its whole ground to FG_VSS (the BQ77915 protected
+    return), so its connector grounds use that net.
+    """
+    gnd = ground_fn if ground_fn is not None else s.gnd
     s.refcounters["#PWR"] = pwr_base
     s.refcounters["#FLG"] = pwr_base
     pins = s.place(ref, symname, value, x, y,
                    footprint=FOOTPRINTS[symname] if symname in FOOTPRINTS else "",
-                   pin_nets={str(p): (net, "hier")
+                   pin_nets={str(p): (net, label_kind)
                              for p, net in sorted(pinmap.items())
-                             if net != "GND"})
+                             if net != "GND"},
+                   extra_props=props)
     for p, net in sorted(pinmap.items()):
-        if net == "GND":
-            s.gnd(*pins[str(p)])
-    s.gnd(*pins["MP"])
+        if net == "GND" or net == ground_net:
+            gnd(*pins[str(p)])
+    gnd(*pins["MP"])
+    # shielded-FFC connectors (FH41-68S) carry a dedicated SH pin; the
+    # plain FH12-30S symbol has none
+    if "SH" in pins:
+        gnd(*pins["SH"])
     return s
 
 
-def build_fpc_sheet(sheet_uuid, ref, symname, pinmap, value, pwr_base=3100):
+FPC_BOM = {
+    "FPC101": ("Hirose", "FH41-68S-0.5SH(05)"),
+    "FPC102": ("Hirose", "FH41-68S-0.5SH(05)"),
+    "FPC103": ("Hirose", "FH41-68S-0.5SH(05)"),
+    "FPC104": ("Hirose", "FH41-68S-0.5SH(05)"),
+    "FPC105": ("Hirose", "FH12-30S-0.5SH(55)"),
+    "FPC106": ("Hirose", "FH12-30S-0.5SH(55)"),
+}
+
+
+def build_fpc_sheet(sheet_uuid, ref, symname, pinmap, value, pwr_base=3100,
+                    label_kind="hier", ground_net="GND", ground_fn=None,
+                    power_flags=()):
+    """power_flags: hier rails entering the board through this connector;
+    each gets a PWR_FLAG so ERC sees the connector-fed power inputs as
+    driven (the flag joins the net by name in this sheet)."""
     s = b.Sheet(f"/{sheet_uuid}")
-    place_fpc_connector(s, ref, symname, pinmap, value, pwr_base=pwr_base)
+    place_fpc_connector(s, ref, symname, pinmap, value, pwr_base=pwr_base,
+                        label_kind=label_kind, ground_net=ground_net,
+                        ground_fn=ground_fn,
+                        props={"Manufacturer": FPC_BOM[ref][0],
+                               "MPN": FPC_BOM[ref][1]} if ref in FPC_BOM else None)
+    for i, net in enumerate(power_flags):
+        s.pwrflag(20 + i * 15.24, 420, net)
     return s
 
 
@@ -1218,20 +1259,24 @@ def main():
 
     fpc1_nets = fpc.FPC1_NETS
     fpc2_nets = fpc.FPC2_NETS
-    fpc3_nets = fpc.FPC3_NETS_CENTER
+    # FPC-3 center side: the return conductors are FG_VSS (post-protector);
+    # the pack negative never crosses the cable (Phase 5 contract).
+    fpc3_nets = fpc.contract_nets(fpc.FPC105_PINMAP)
 
     # Phase 4a: the FPC sheets are real sheets now (connector + hier labels).
+    # Phase 5: the center is side B of every cable -- mirrored pin maps
+    # (the connectors sit rotated 180 deg to their far-end partners).
     fpc1_sheet_uuid = stable_uuid("sheet-symbol:16_fpc1_left")
     fpc2_sheet_uuid = stable_uuid("sheet-symbol:17_fpc2_right")
     fpc3_sheet_uuid = stable_uuid("sheet-symbol:18_fpc3_bms")
     fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC102", "Conn_01x68_FFC_MP",
-                             fpc.center_pinmap(fpc.FPC1_PINMAP),
+                             fpc.FPC102_PINMAP,
                              "FH41-68S-0.5SH (FPC-1)", pwr_base=3100)
     fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC103", "Conn_01x68_FFC_MP",
-                             fpc.center_pinmap(fpc.FPC2_PINMAP),
+                             fpc.FPC103_PINMAP,
                              "FH41-68S-0.5SH (FPC-2)", pwr_base=3200)
     fpc3_s = build_fpc_sheet(fpc3_sheet_uuid, "FPC105", "Conn_01x30_FFC_MP",
-                             fpc.center_pinmap(fpc.FPC3_PINMAP),
+                             fpc.FPC105_PINMAP,
                              "FH12-30S-0.5SH (FPC-3)", pwr_base=3300)
     for filename, s in (("fpc1_left.kicad_sch", fpc1_s),
                         ("fpc2_right.kicad_sch", fpc2_s),

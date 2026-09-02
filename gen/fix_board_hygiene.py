@@ -116,9 +116,9 @@ def sweep(path, board_key, region, forbidden):
             ax = sum(p[0] for p in cur) / len(cur)
             ay = sum(p[1] for p in cur) / len(cur)
             found = None
-            candidates = [(i * 0.5 - 20, j * 0.5 - 20)
-                          for i in range(81) for j in range(81)
-                          if abs(i * 0.5 - 20) > 1.5 or abs(j * 0.5 - 20) > 1.5]
+            candidates = [(i * 0.5 - 45, j * 0.5 - 45)
+                          for i in range(181) for j in range(181)
+                          if abs(i * 0.5 - 45) > 1.5 or abs(j * 0.5 - 45) > 1.5]
             for (dx, dy) in candidates:
                 cand = [(px + dx, py + dy, hw, hh) for (px, py, hw, hh) in cur]
                 if not in_zone_clear(cand, region, forbidden):
@@ -131,14 +131,17 @@ def sweep(path, board_key, region, forbidden):
                         bad = True
                         break
                 if not bad:
-                    found = (ax + dx, ay + dy)
+                    found = (dx, dy)
                     break
             if found is None:
                 print(f"    HYGIENE WARN: no spot for {mover} "
                       f"({'zone' if b is None else b})")
                 continue
-            moved[mover] = (found[0], found[1])
-            pads[mover] = [(px + found[0] - ax, py + found[1] - ay, hw, hh)
+            # store the raw translation delta: the new ANCHOR is
+            # old anchor + delta (writing centroid+delta as the anchor
+            # silently shifted every asymmetric part by centroid-anchor).
+            moved[mover] = found
+            pads[mover] = [(px + found[0], py + found[1], hw, hh)
                            for (px, py, hw, hh) in cur]
             conflicts.add(mover)
     if moved:
@@ -164,9 +167,18 @@ def sweep(path, board_key, region, forbidden):
             block = txt[start:j + 1]
             refm = re.search(r'\(property "Reference" "([^"]+)"', block)
             if refm and refm.group(1) in moved:
-                nx, ny = moved[refm.group(1)]
+                ref = refm.group(1)
+                dx, dy = moved[ref]
+                # new anchor = old anchor + the sweep's translation delta,
+                # with the part's rotation preserved (dropping the third
+                # token silently reset moved parts to 0 deg while the
+                # candidate pad geometry was computed at the original
+                # rotation).
+                ox, oy, rot = anchors.get(ref, (0.0, 0.0, 0.0))
+                nx, ny = ox + dx, oy + dy
+                rot_s = f" {rot:g}" if rot else ""
                 block = re.sub(r'\n\t\t\(at [-\d.]+ [-\d.]+( [-\d.]+)?\)\n',
-                               f"\n\t\t(at {nx:g} {ny:g})\n", block, count=1)
+                               f"\n\t\t(at {nx:g} {ny:g}{rot_s})\n", block, count=1)
             out.append(txt[pos:start])
             out.append(block)
             pos = j + 1
@@ -176,10 +188,19 @@ def sweep(path, board_key, region, forbidden):
     for r in sorted(moved):
         print(f"    hygiene {r}: -> ({moved[r][0]:.1f}, {moved[r][1]:.1f})")
 
-
 def main():
+    moved_any = False
     for path, key, region, forbidden in BOARDS:
+        before = g.parse_pad_bboxes(os.path.join(PROJDIR, path))[0]
         sweep(os.path.join(PROJDIR, path), key, region, forbidden)
+        after = g.parse_pad_bboxes(os.path.join(PROJDIR, path))[0]
+        if before != after:
+            moved_any = True
+    if moved_any:
+        # zone fills are stale after any part move: refill in fresh
+        # pcbnew processes (Phase 5: fills must match the final placement)
+        for path, _key, _region, _forbidden in BOARDS:
+            g.refill_zones(os.path.join(PROJDIR, path))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,1856 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/Users/ellievanvooren/Documents/kicad/ducktop2/bms/bms.kicad_sch</source>
+    <date>2026-09-02T13:44:05</date>
+    <tool>Eeschema 10.0.4</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>bms.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C700">
+      <value>3.3nF &gt;=50V LTC4368 CGATE</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM155R71H332KA01</field>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM155R71H332KA01"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6dc3d2f7-4770-581e-8bfe-6b3167eca43d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C724">
+      <value>4.7nF &gt;=50V pack hot-swap slew</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM155R71H472KA01</field>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM155R71H472KA01"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d05d58a6-f034-5607-8e3b-d23dfab1726f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C725">
+      <value>10u 25V X7R LTC4368 VOUT</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM21BZ71E106KE15L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM21BZ71E106KE15L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2edb7dc7-af75-54b2-8c45-146430bf0853</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C840">
+      <value>1u 25V X7R BQ77915 VDD</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM21BR71H105KA12L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM21BR71H105KA12L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ba6d8e60-76e5-5e7d-a927-7a0e02b585fc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C841">
+      <value>1u 10V X7R BQ77915 AVDD</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM21BR71A105KA01L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM21BR71A105KA01L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>78f5cb4e-eb9c-56af-a321-badb1335501b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C842">
+      <value>1u 10V X7R BQ77915 internal-balance filter</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM21BR71A105KA01L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM21BR71A105KA01L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>71a368b4-f5c6-5ba9-ad98-81b4167e2bd1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C843">
+      <value>1u 10V X7R BQ77915 internal-balance filter</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM21BR71A105KA01L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM21BR71A105KA01L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ac43ac81-addb-5d89-a956-d67ff10af5e7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C844">
+      <value>1u 10V X7R BQ77915 internal-balance filter</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM21BR71A105KA01L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM21BR71A105KA01L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>91d9ab13-d792-5a0f-bf7f-5fb4f162aa1b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C845">
+      <value>100n BQ77915 SRP-VSS filter</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM188R71H104KA93D"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>72471219-aa3e-52c5-b586-0b08d9769f41</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C846">
+      <value>100n BQ77915 differential sense filter</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM188R71H104KA93D"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8a0c4589-0144-5716-9137-1808e07b8900</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C847">
+      <value>100n BQ77915 SRN-VSS filter</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM188R71H104KA93D"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>02fd06d6-386b-5ee5-bb3d-b058495d95d8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C848">
+      <value>1u 10V X7R BQ77915 internal-balance filter</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM21BR71A105KA01L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="MPN" value="GRM21BR71A105KA01L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>25b483ee-9585-5040-b051-57f7ee0f27e9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F1">
+      <value>10A MINI pack fuse: Littelfuse 0297010.WXNV</value>
+      <footprint>Fuse:Fuseholder_Blade_Mini_Keystone_3568</footprint>
+      <fields>
+        <field name="Manufacturer">Littelfuse / Keystone</field>
+        <field name="MPN">0297010.WXNV + 3568</field>
+        <field name="Footprint">Fuse:Fuseholder_Blade_Mini_Keystone_3568</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="Fuse" description="Fuse"/>
+      <property name="Manufacturer" value="Littelfuse / Keystone"/>
+      <property name="MPN" value="0297010.WXNV + 3568"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="fuse"/>
+      <property name="ki_fp_filters" value="*Fuse*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4a780406-acda-50c4-926d-9c142c0f9c81</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="FPC106">
+      <value>FH12-30S-0.5SH (FPC-3)</value>
+      <footprint>Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal</footprint>
+      <fields>
+        <field name="Footprint">Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Conn_01x30_FFC_MP" part="Conn_01x30_FFC_MP" description="Generic connector, single row, 01x30, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="connector"/>
+      <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cbb7a3d4-9139-5b35-a4dd-677f4e6ef93b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="14"/>
+            <pin num="15"/>
+            <pin num="16"/>
+            <pin num="17"/>
+            <pin num="18"/>
+            <pin num="19"/>
+            <pin num="20"/>
+            <pin num="21"/>
+            <pin num="22"/>
+            <pin num="23"/>
+            <pin num="24"/>
+            <pin num="25"/>
+            <pin num="26"/>
+            <pin num="27"/>
+            <pin num="28"/>
+            <pin num="29"/>
+            <pin num="30"/>
+            <pin num="MP"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J2">
+      <value>3S pack power + cell-tap harness</value>
+      <footprint>Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical</footprint>
+      <fields>
+        <field name="Manufacturer">Molex</field>
+        <field name="MPN">76829-0006</field>
+        <field name="Footprint">Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_02x03_Odd_Even" description="Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Manufacturer" value="Molex"/>
+      <property name="MPN" value="76829-0006"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="connector"/>
+      <property name="ki_fp_filters" value="Connector*:*_2x??_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1c90922e-a546-564b-ac5b-bcfd241e1d0f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="3"/>
+            <pin num="5"/>
+            <pin num="2"/>
+            <pin num="4"/>
+            <pin num="6"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q11">
+      <value>CSD18540Q5B reverse-pack FET A</value>
+      <footprint>ducktop2:CSD18540Q5B_DNK</footprint>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">CSD18540Q5B</field>
+        <field name="Footprint">ducktop2:CSD18540Q5B_DNK</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Q_NMOS_123S_4G_5678D" part="Q_NMOS_123S_4G_5678D" description="N-channel power MOSFET with NexFET pinout: 1-3 source, 4 gate, unified drain land 5 (physical contacts 5-8)"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="MPN" value="CSD18540Q5B"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>23f9eebd-2809-5d13-af08-8f16fdc4348a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q12">
+      <value>CSD18540Q5B reverse-pack FET B</value>
+      <footprint>ducktop2:CSD18540Q5B_DNK</footprint>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">CSD18540Q5B</field>
+        <field name="Footprint">ducktop2:CSD18540Q5B_DNK</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Q_NMOS_123S_4G_5678D" part="Q_NMOS_123S_4G_5678D" description="N-channel power MOSFET with NexFET pinout: 1-3 source, 4 gate, unified drain land 5 (physical contacts 5-8)"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="MPN" value="CSD18540Q5B"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b01656d1-43a9-5059-bba1-839eed2f1802</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q701">
+      <value>BSS138 pack protector latch reset</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="Manufacturer">onsemi</field>
+        <field name="MPN">BSS138LT1G</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Q_NMOS_SOT23_GSD" part="Q_NMOS_SOT23_GSD" description="N-MOSFET, numbered for common SOT-23 1=G 2=S 3=D pinout"/>
+      <property name="Manufacturer" value="onsemi"/>
+      <property name="MPN" value="BSS138LT1G"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>74d2f2bf-eb55-51e4-859b-5003a611b982</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="3"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q703">
+      <value>CSD18540Q5B BQ77915 discharge FET</value>
+      <footprint>ducktop2:CSD18540Q5B_DNK</footprint>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">CSD18540Q5B</field>
+        <field name="Footprint">ducktop2:CSD18540Q5B_DNK</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Q_NMOS_123S_4G_5678D" part="Q_NMOS_123S_4G_5678D" description="N-channel power MOSFET with NexFET pinout: 1-3 source, 4 gate, unified drain land 5 (physical contacts 5-8)"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="MPN" value="CSD18540Q5B"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>478c7413-fd53-5c7c-b3fc-3db5d9e3cd5e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q704">
+      <value>CSD18540Q5B BQ77915 charge FET</value>
+      <footprint>ducktop2:CSD18540Q5B_DNK</footprint>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">CSD18540Q5B</field>
+        <field name="Footprint">ducktop2:CSD18540Q5B_DNK</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Q_NMOS_123S_4G_5678D" part="Q_NMOS_123S_4G_5678D" description="N-channel power MOSFET with NexFET pinout: 1-3 source, 4 gate, unified drain land 5 (physical contacts 5-8)"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="MPN" value="CSD18540Q5B"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c761adc7-bb82-5955-83d6-5af99ff0256b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R700">
+      <value>3.09M 1% BAT UV/OV top</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-073M09L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-073M09L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>db77ebbc-0f5d-57f3-99eb-384d18724c81</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R701">
+      <value>73.2k 1% BAT UV/OV middle</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0773K2L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0773K2L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>033db2aa-a5b5-5ee0-b3b8-43788dc21d6f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R702">
+      <value>121k 1% BAT UV/OV bottom</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-07121KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-07121KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bf572132-25d5-5928-b7ad-e7713e722045</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R703">
+      <value>22k LTC4368 CGATE series</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0722KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0722KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ebd747ac-1a27-5d29-a592-669b52403f3f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R707">
+      <value>100k pack protector SHDN pull-up</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-07100KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-07100KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b02a108c-41a5-5009-a954-afc426d4edef</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R708">
+      <value>10k pack FAULT pull-up</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>729dd5af-f9d3-531f-bf4b-23ee7ddbd9fd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R709">
+      <value>100k pack retry gate pulldown</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-07100KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-07100KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>de620723-6af7-52ba-b147-3abdf9567767</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R840">
+      <value>1k 1% BQ77915 VDD filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-071KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-071KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2e46afe2-5d05-5a32-86a2-19485246bf5f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R841">
+      <value>75R 1% BQ77915 cell/balance filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0775RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0775RL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>da16f315-6172-53cd-bb37-8be78a95bf94</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R842">
+      <value>75R 1% BQ77915 cell/balance filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0775RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0775RL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8008c98b-ae47-527c-8007-d5d77e46154f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R843">
+      <value>75R 1% BQ77915 cell/balance filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0775RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0775RL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f645a241-61db-5040-b30e-be28fbe20874</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R844">
+      <value>75R 1% BQ77915 cell/balance filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0775RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0775RL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8c7e9ca5-1c9a-5c92-9546-e3500f1ca08c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R845">
+      <value>100R BQ77915 SRP filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-07100RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-07100RL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1a100f93-1eca-5a65-9c0d-0beef28c100f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R846">
+      <value>100R BQ77915 SRN filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-07100RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-07100RL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0512cadb-1776-5f98-816e-19466bbd72c7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R847">
+      <value>4.53k 1% DSG gate resistor</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-074K53L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-074K53L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e28ae2cb-0dfd-5444-94c7-1c97b4bffc83</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R848">
+      <value>1k 1% CHG gate resistor</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-071KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-071KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1583b91c-e1f5-58de-9687-658d48397c36</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R849">
+      <value>1M 5% DSG gate-source</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-071ML</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-071ML"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>211a6908-8f1b-5681-b9b3-2f9859c30eec</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R850">
+      <value>3.3M 5% CHG gate-source</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-073M3L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-073M3L"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4a9dd79e-2158-53e2-987f-4e5df743fac2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R851">
+      <value>453k 1% load-detect resistor</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-07453KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-07453KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1eda9b19-50e4-5f47-b07a-ec29417c6578</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R852">
+      <value>10k 5% PRES normal-mode pull-up</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a177fb87-8b81-5d6a-b901-2157bade54eb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R853">
+      <value>10k 1% unused TS to VSS</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bcbc9269-973d-5f82-b405-5e3613e7bca8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R854">
+      <value>604k 1% OCD delay program</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-07604KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="MPN" value="RC0603FR-07604KL"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6c307d4f-0a2e-5749-a3b2-cc6c64480276</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="RS10">
+      <value>11mOhm 1% 2W LTC4368 bounded pack-current shunt</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Vishay Dale</field>
+        <field name="MPN">WSLP2512R0110FEA</field>
+        <field name="Footprint">Resistor_SMD:R_2512_6332Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Vishay Dale"/>
+      <property name="MPN" value="WSLP2512R0110FEA"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>65789f60-7d34-599a-8114-ab55c8d7bff2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="RS11">
+      <value>8mOhm 1% 2W BQ77915 current shunt</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Vishay Dale</field>
+        <field name="MPN">WSLP25128L000FEA</field>
+        <field name="Footprint">Resistor_SMD:R_2512_6332Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Manufacturer" value="Vishay Dale"/>
+      <property name="MPN" value="WSLP25128L000FEA"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a9b28dc0-f2b9-5a62-ae1d-b1b08b974964</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U11">
+      <value>LTC4368IMS-1 bidirectional pack protector</value>
+      <footprint>Package_SO:MSOP-10_3x3mm_P0.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">Analog Devices</field>
+        <field name="MPN">LTC4368IMS-1#PBF</field>
+        <field name="Footprint">Package_SO:MSOP-10_3x3mm_P0.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="LTC4368-1" part="LTC4368-1" description="100V UV/OV and reverse-protection controller with bidirectional circuit breaker; -50mV reverse threshold option"/>
+      <property name="Manufacturer" value="Analog Devices"/>
+      <property name="MPN" value="LTC4368IMS-1#PBF"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>be17a800-92f8-533d-a106-a11c8cdeb776</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="6"/>
+            <pin num="5"/>
+            <pin num="10"/>
+            <pin num="9"/>
+            <pin num="8"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U719">
+      <value>BQ7791500PWR autonomous 3S primary protector</value>
+      <footprint>Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/bq77915.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">BQ7791500PWR</field>
+        <field name="Footprint">Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/bq77915.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="BQ77915" part="BQ77915" description="3-series to 5-series autonomous primary Li-ion protector with cell balancing"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="MPN" value="BQ7791500PWR"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>dfcef911-c747-56a4-8288-f640a7ad444c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+            <pin num="24"/>
+            <pin num="23"/>
+            <pin num="22"/>
+            <pin num="21"/>
+            <pin num="20"/>
+            <pin num="19"/>
+            <pin num="18"/>
+            <pin num="17"/>
+            <pin num="16"/>
+            <pin num="15"/>
+            <pin num="14"/>
+            <pin num="13"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="BQ77915" part="BQ77915">
+      <description>3-series to 5-series autonomous primary Li-ion protector with cell balancing</description>
+      <docs>https://www.ti.com/lit/ds/symlink/bq77915.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">BQ77915</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/bq77915.pdf</field>
+        <field name="Description">3-series to 5-series autonomous primary Li-ion protector with cell balancing</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="AVDD" type="power_out"/>
+        <pin num="3" name="VC5" type="input"/>
+        <pin num="4" name="VC4" type="input"/>
+        <pin num="5" name="VC3" type="input"/>
+        <pin num="6" name="VC2" type="input"/>
+        <pin num="7" name="VC1" type="input"/>
+        <pin num="8" name="VC0" type="input"/>
+        <pin num="9" name="VSS" type="power_in"/>
+        <pin num="10" name="SRP" type="input"/>
+        <pin num="11" name="SRN" type="input"/>
+        <pin num="12" name="DSG" type="output"/>
+        <pin num="13" name="CHG" type="output"/>
+        <pin num="14" name="LD" type="input"/>
+        <pin num="15" name="LPWR" type="output"/>
+        <pin num="16" name="CBI" type="input"/>
+        <pin num="17" name="OCDP" type="input"/>
+        <pin num="18" name="TS" type="input"/>
+        <pin num="19" name="VTB" type="power_out"/>
+        <pin num="20" name="CCFG" type="input"/>
+        <pin num="21" name="CBO" type="output"/>
+        <pin num="22" name="PRES" type="input"/>
+        <pin num="23" name="CTRC" type="input"/>
+        <pin num="24" name="CTRD" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Conn_01x30_FFC_MP" part="Conn_01x30_FFC_MP">
+      <description>Generic connector, single row, 01x30, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x30_FFC_MP</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Generic connector, single row, 01x30, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+        <pin num="10" name="Pin_10" type="passive"/>
+        <pin num="11" name="Pin_11" type="passive"/>
+        <pin num="12" name="Pin_12" type="passive"/>
+        <pin num="13" name="Pin_13" type="passive"/>
+        <pin num="14" name="Pin_14" type="passive"/>
+        <pin num="15" name="Pin_15" type="passive"/>
+        <pin num="16" name="Pin_16" type="passive"/>
+        <pin num="17" name="Pin_17" type="passive"/>
+        <pin num="18" name="Pin_18" type="passive"/>
+        <pin num="19" name="Pin_19" type="passive"/>
+        <pin num="20" name="Pin_20" type="passive"/>
+        <pin num="21" name="Pin_21" type="passive"/>
+        <pin num="22" name="Pin_22" type="passive"/>
+        <pin num="23" name="Pin_23" type="passive"/>
+        <pin num="24" name="Pin_24" type="passive"/>
+        <pin num="25" name="Pin_25" type="passive"/>
+        <pin num="26" name="Pin_26" type="passive"/>
+        <pin num="27" name="Pin_27" type="passive"/>
+        <pin num="28" name="Pin_28" type="passive"/>
+        <pin num="29" name="Pin_29" type="passive"/>
+        <pin num="30" name="Pin_30" type="passive"/>
+        <pin num="MP" name="MP" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_02x03_Odd_Even">
+      <description>Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <footprints>
+        <fp>Connector*:*_2x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_02x03_Odd_Even</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Fuse">
+      <description>Fuse</description>
+      <footprints>
+        <fp>*Fuse*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">F</field>
+        <field name="Value">Fuse</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Fuse</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="LTC4368-1" part="LTC4368-1">
+      <description>100V UV/OV and reverse-protection controller with bidirectional circuit breaker; -50mV reverse threshold option</description>
+      <docs>https://www.analog.com/media/en/technical-documentation/data-sheets/LTC4368.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LTC4368-1</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.analog.com/media/en/technical-documentation/data-sheets/LTC4368.pdf</field>
+        <field name="Description">100V UV/OV and reverse-protection controller with bidirectional circuit breaker; -50mV reverse threshold option</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VIN" type="power_in"/>
+        <pin num="2" name="UV" type="input"/>
+        <pin num="3" name="OV" type="input"/>
+        <pin num="4" name="RETRY" type="input"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="SHDN" type="input"/>
+        <pin num="7" name="FAULT" type="open_collector"/>
+        <pin num="8" name="VOUT" type="input"/>
+        <pin num="9" name="SENSE" type="input"/>
+        <pin num="10" name="GATE" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="Q_NMOS_123S_4G_5678D" part="Q_NMOS_123S_4G_5678D">
+      <description>N-channel power MOSFET with NexFET pinout: 1-3 source, 4 gate, unified drain land 5 (physical contacts 5-8)</description>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">Q_NMOS_123S_4G_5678D</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">N-channel power MOSFET with NexFET pinout: 1-3 source, 4 gate, unified drain land 5 (physical contacts 5-8)</field>
+      </fields>
+      <pins>
+        <pin num="1" name="S" type="passive"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="S" type="passive"/>
+        <pin num="4" name="G" type="input"/>
+        <pin num="5" name="D(5-8)" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Q_NMOS_SOT23_GSD" part="Q_NMOS_SOT23_GSD">
+      <description>N-MOSFET, numbered for common SOT-23 1=G 2=S 3=D pinout</description>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">Q_NMOS_SOT23_GSD</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">N-MOSFET, numbered for common SOT-23 1=G 2=S 3=D pinout</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="BQ77915">
+      <uri>${KIPRJMOD}/../gen/BQ77915.kicad_sym</uri>
+    </library>
+    <library logical="Conn_01x30_FFC_MP">
+      <uri>${KIPRJMOD}/../gen/Conn_01x30_FFC_MP.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>${KICAD10_SYMBOL_DIR}/Connector_Generic.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>${KICAD10_SYMBOL_DIR}/Device.kicad_sym</uri>
+    </library>
+    <library logical="LTC4368-1">
+      <uri>${KIPRJMOD}/../gen/LTC4368-1.kicad_sym</uri>
+    </library>
+    <library logical="Q_NMOS_123S_4G_5678D">
+      <uri>${KIPRJMOD}/../gen/Q_NMOS_123S_4G_5678D.kicad_sym</uri>
+    </library>
+    <library logical="Q_NMOS_SOT23_GSD">
+      <uri>${KIPRJMOD}/../gen/Q_NMOS_SOT23_GSD.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/BAT_PROT_CGATE" class="Default">
+      <node ref="C700" pin="1" pintype="passive"/>
+      <node ref="R703" pin="2" pintype="passive"/>
+    </net>
+    <net code="2" name="/BAT_PROT_FET_COMMON" class="Default">
+      <node ref="C724" pin="2" pintype="passive"/>
+      <node ref="Q11" pin="1" pinfunction="S_1" pintype="passive"/>
+      <node ref="Q11" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q11" pin="3" pinfunction="S_3" pintype="passive"/>
+      <node ref="Q12" pin="1" pinfunction="S_1" pintype="passive"/>
+      <node ref="Q12" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q12" pin="3" pinfunction="S_3" pintype="passive"/>
+    </net>
+    <net code="3" name="/BAT_PROT_GATE" class="Default">
+      <node ref="C724" pin="1" pintype="passive"/>
+      <node ref="Q11" pin="4" pinfunction="G_4" pintype="input"/>
+      <node ref="Q12" pin="4" pinfunction="G_4" pintype="input"/>
+      <node ref="R703" pin="1" pintype="passive"/>
+      <node ref="U11" pin="10" pinfunction="GATE_10" pintype="output"/>
+    </net>
+    <net code="4" name="/BAT_PROT_OV" class="Default">
+      <node ref="R701" pin="2" pintype="passive"/>
+      <node ref="R702" pin="1" pintype="passive"/>
+      <node ref="U11" pin="3" pinfunction="OV_3" pintype="input"/>
+    </net>
+    <net code="5" name="/BAT_PROT_SENSE" class="Default">
+      <node ref="Q12" pin="5" pinfunction="D(5-8)_5" pintype="passive"/>
+      <node ref="RS10" pin="1" pintype="passive"/>
+      <node ref="U11" pin="9" pinfunction="SENSE_9" pintype="input"/>
+    </net>
+    <net code="6" name="/BAT_PROT_SHDN" class="Default">
+      <node ref="Q701" pin="3" pinfunction="D_3" pintype="passive"/>
+      <node ref="R707" pin="2" pintype="passive"/>
+      <node ref="U11" pin="6" pinfunction="SHDN_6" pintype="input"/>
+    </net>
+    <net code="7" name="/BAT_PROT_UV" class="Default">
+      <node ref="R700" pin="2" pintype="passive"/>
+      <node ref="R701" pin="1" pintype="passive"/>
+      <node ref="U11" pin="2" pinfunction="UV_2" pintype="input"/>
+    </net>
+    <net code="8" name="/BAT_PROT_VIN" class="Default">
+      <node ref="F1" pin="2" pintype="passive"/>
+      <node ref="Q11" pin="5" pinfunction="D(5-8)_5" pintype="passive"/>
+      <node ref="R700" pin="1" pintype="passive"/>
+      <node ref="R707" pin="1" pintype="passive"/>
+      <node ref="U11" pin="1" pinfunction="VIN_1" pintype="power_in"/>
+    </net>
+    <net code="9" name="/BMS_AVDD" class="Default">
+      <node ref="C841" pin="1" pintype="passive"/>
+      <node ref="U719" pin="2" pinfunction="AVDD_2" pintype="power_out"/>
+    </net>
+    <net code="10" name="/BMS_CHG_DRV" class="Default">
+      <node ref="R848" pin="1" pintype="passive"/>
+      <node ref="U719" pin="13" pinfunction="CHG_13" pintype="output"/>
+    </net>
+    <net code="11" name="/BMS_CHG_GATE" class="Default">
+      <node ref="Q704" pin="4" pinfunction="G_4" pintype="input"/>
+      <node ref="R848" pin="2" pintype="passive"/>
+      <node ref="R850" pin="1" pintype="passive"/>
+    </net>
+    <net code="12" name="/BMS_DSG_DRV" class="Default">
+      <node ref="R847" pin="1" pintype="passive"/>
+      <node ref="U719" pin="12" pinfunction="DSG_12" pintype="output"/>
+    </net>
+    <net code="13" name="/BMS_DSG_GATE" class="Default">
+      <node ref="Q703" pin="4" pinfunction="G_4" pintype="input"/>
+      <node ref="R847" pin="2" pintype="passive"/>
+      <node ref="R849" pin="1" pintype="passive"/>
+    </net>
+    <net code="14" name="/BMS_FET_COMMON" class="Default">
+      <node ref="Q703" pin="5" pinfunction="D(5-8)_5" pintype="passive"/>
+      <node ref="Q704" pin="5" pinfunction="D(5-8)_5" pintype="passive"/>
+    </net>
+    <net code="15" name="/BMS_LD" class="Default">
+      <node ref="R851" pin="1" pintype="passive"/>
+      <node ref="U719" pin="14" pinfunction="LD_14" pintype="input"/>
+    </net>
+    <net code="16" name="/BMS_OCDP" class="Default">
+      <node ref="R854" pin="1" pintype="passive"/>
+      <node ref="U719" pin="17" pinfunction="OCDP_17" pintype="input"/>
+    </net>
+    <net code="17" name="/BMS_PRES" class="Default">
+      <node ref="R852" pin="2" pintype="passive"/>
+      <node ref="U719" pin="22" pinfunction="PRES_22" pintype="input"/>
+    </net>
+    <net code="18" name="/BMS_SENSE_N" class="Default">
+      <node ref="Q703" pin="1" pinfunction="S_1" pintype="passive"/>
+      <node ref="Q703" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q703" pin="3" pinfunction="S_3" pintype="passive"/>
+      <node ref="R846" pin="1" pintype="passive"/>
+      <node ref="R849" pin="2" pintype="passive"/>
+      <node ref="RS11" pin="2" pintype="passive"/>
+    </net>
+    <net code="19" name="/BMS_SRN" class="Default">
+      <node ref="C846" pin="2" pintype="passive"/>
+      <node ref="C847" pin="1" pintype="passive"/>
+      <node ref="R846" pin="2" pintype="passive"/>
+      <node ref="U719" pin="11" pinfunction="SRN_11" pintype="input"/>
+    </net>
+    <net code="20" name="/BMS_SRP" class="Default">
+      <node ref="C845" pin="1" pintype="passive"/>
+      <node ref="C846" pin="1" pintype="passive"/>
+      <node ref="R845" pin="2" pintype="passive"/>
+      <node ref="U719" pin="10" pinfunction="SRP_10" pintype="input"/>
+    </net>
+    <net code="21" name="/BMS_TS_UNUSED" class="Default">
+      <node ref="R853" pin="1" pintype="passive"/>
+      <node ref="U719" pin="18" pinfunction="TS_18" pintype="input"/>
+    </net>
+    <net code="22" name="/BMS_VC0" class="Default">
+      <node ref="C842" pin="1" pintype="passive"/>
+      <node ref="C843" pin="2" pintype="passive"/>
+      <node ref="R841" pin="2" pintype="passive"/>
+      <node ref="U719" pin="8" pinfunction="VC0_8" pintype="input"/>
+    </net>
+    <net code="23" name="/BMS_VC1" class="Default">
+      <node ref="C843" pin="1" pintype="passive"/>
+      <node ref="C844" pin="2" pintype="passive"/>
+      <node ref="R842" pin="2" pintype="passive"/>
+      <node ref="U719" pin="7" pinfunction="VC1_7" pintype="input"/>
+    </net>
+    <net code="24" name="/BMS_VC2" class="Default">
+      <node ref="C844" pin="1" pintype="passive"/>
+      <node ref="C848" pin="2" pintype="passive"/>
+      <node ref="R843" pin="2" pintype="passive"/>
+      <node ref="U719" pin="6" pinfunction="VC2_6" pintype="input"/>
+    </net>
+    <net code="25" name="/BMS_VC3_TOP" class="Default">
+      <node ref="C848" pin="1" pintype="passive"/>
+      <node ref="R844" pin="2" pintype="passive"/>
+      <node ref="U719" pin="3" pinfunction="VC5_3" pintype="input"/>
+      <node ref="U719" pin="4" pinfunction="VC4_4" pintype="input"/>
+      <node ref="U719" pin="5" pinfunction="VC3_5" pintype="input"/>
+    </net>
+    <net code="26" name="/BMS_VDD" class="Default">
+      <node ref="C840" pin="1" pintype="passive"/>
+      <node ref="R840" pin="2" pintype="passive"/>
+      <node ref="U719" pin="1" pinfunction="VDD_1" pintype="power_in"/>
+    </net>
+    <net code="27" name="/CELL1_TAP" class="Default">
+      <node ref="J2" pin="5" pinfunction="Pin_5_5" pintype="passive"/>
+      <node ref="R842" pin="1" pintype="passive"/>
+    </net>
+    <net code="28" name="/CELL2_TAP" class="Default">
+      <node ref="J2" pin="6" pinfunction="Pin_6_6" pintype="passive"/>
+      <node ref="R843" pin="1" pintype="passive"/>
+    </net>
+    <net code="29" name="/MCU_3V3" class="POWER_MID">
+      <node ref="FPC106" pin="15" pinfunction="Pin_15_15" pintype="passive"/>
+      <node ref="R708" pin="1" pintype="passive"/>
+    </net>
+    <net code="30" name="/PACK_FAULT_N" class="Default">
+      <node ref="FPC106" pin="13" pinfunction="Pin_13_13" pintype="passive"/>
+      <node ref="R708" pin="2" pintype="passive"/>
+      <node ref="U11" pin="7" pinfunction="FAULT_7" pintype="open_collector"/>
+    </net>
+    <net code="31" name="/PACK_NEG_RAW" class="POWER_HI">
+      <node ref="C840" pin="2" pintype="passive"/>
+      <node ref="C841" pin="2" pintype="passive"/>
+      <node ref="C842" pin="2" pintype="passive"/>
+      <node ref="C845" pin="2" pintype="passive"/>
+      <node ref="C847" pin="2" pintype="passive"/>
+      <node ref="J2" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
+      <node ref="J2" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
+      <node ref="R841" pin="1" pintype="passive"/>
+      <node ref="R845" pin="1" pintype="passive"/>
+      <node ref="R853" pin="2" pintype="passive"/>
+      <node ref="R854" pin="2" pintype="passive"/>
+      <node ref="RS11" pin="1" pintype="passive"/>
+      <node ref="U719" pin="16" pinfunction="CBI_16" pintype="input"/>
+      <node ref="U719" pin="20" pinfunction="CCFG_20" pintype="input"/>
+      <node ref="U719" pin="23" pinfunction="CTRC_23" pintype="input"/>
+      <node ref="U719" pin="24" pinfunction="CTRD_24" pintype="input"/>
+      <node ref="U719" pin="9" pinfunction="VSS_9" pintype="power_in"/>
+    </net>
+    <net code="32" name="/PACK_POS_FUSED" class="POWER_HI">
+      <node ref="C725" pin="1" pintype="passive"/>
+      <node ref="FPC106" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
+      <node ref="FPC106" pin="10" pinfunction="Pin_10_10" pintype="passive"/>
+      <node ref="FPC106" pin="11" pinfunction="Pin_11_11" pintype="passive"/>
+      <node ref="FPC106" pin="12" pinfunction="Pin_12_12" pintype="passive"/>
+      <node ref="FPC106" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
+      <node ref="FPC106" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
+      <node ref="FPC106" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
+      <node ref="FPC106" pin="5" pinfunction="Pin_5_5" pintype="passive"/>
+      <node ref="FPC106" pin="6" pinfunction="Pin_6_6" pintype="passive"/>
+      <node ref="FPC106" pin="7" pinfunction="Pin_7_7" pintype="passive"/>
+      <node ref="FPC106" pin="8" pinfunction="Pin_8_8" pintype="passive"/>
+      <node ref="FPC106" pin="9" pinfunction="Pin_9_9" pintype="passive"/>
+      <node ref="RS10" pin="2" pintype="passive"/>
+      <node ref="U11" pin="8" pinfunction="VOUT_8" pintype="input"/>
+    </net>
+    <net code="33" name="/PACK_POS_RAW" class="Default">
+      <node ref="F1" pin="1" pintype="passive"/>
+      <node ref="J2" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
+      <node ref="J2" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
+      <node ref="R840" pin="1" pintype="passive"/>
+      <node ref="R844" pin="1" pintype="passive"/>
+      <node ref="R852" pin="1" pintype="passive"/>
+    </net>
+    <net code="34" name="/PACK_RETRY_PULSE" class="Default">
+      <node ref="FPC106" pin="14" pinfunction="Pin_14_14" pintype="passive"/>
+      <node ref="Q701" pin="1" pinfunction="G_1" pintype="input"/>
+      <node ref="R709" pin="1" pintype="passive"/>
+    </net>
+    <net code="35" name="FG_VSS" class="Default">
+      <node ref="C700" pin="2" pintype="passive"/>
+      <node ref="C725" pin="2" pintype="passive"/>
+      <node ref="FPC106" pin="16" pinfunction="Pin_16_16" pintype="passive"/>
+      <node ref="FPC106" pin="17" pinfunction="Pin_17_17" pintype="passive"/>
+      <node ref="FPC106" pin="18" pinfunction="Pin_18_18" pintype="passive"/>
+      <node ref="FPC106" pin="19" pinfunction="Pin_19_19" pintype="passive"/>
+      <node ref="FPC106" pin="20" pinfunction="Pin_20_20" pintype="passive"/>
+      <node ref="FPC106" pin="21" pinfunction="Pin_21_21" pintype="passive"/>
+      <node ref="FPC106" pin="22" pinfunction="Pin_22_22" pintype="passive"/>
+      <node ref="FPC106" pin="23" pinfunction="Pin_23_23" pintype="passive"/>
+      <node ref="FPC106" pin="24" pinfunction="Pin_24_24" pintype="passive"/>
+      <node ref="FPC106" pin="25" pinfunction="Pin_25_25" pintype="passive"/>
+      <node ref="FPC106" pin="26" pinfunction="Pin_26_26" pintype="passive"/>
+      <node ref="FPC106" pin="27" pinfunction="Pin_27_27" pintype="passive"/>
+      <node ref="FPC106" pin="28" pinfunction="Pin_28_28" pintype="passive"/>
+      <node ref="FPC106" pin="29" pinfunction="Pin_29_29" pintype="passive"/>
+      <node ref="FPC106" pin="30" pinfunction="Pin_30_30" pintype="passive"/>
+      <node ref="FPC106" pin="MP" pinfunction="MP_MP" pintype="passive"/>
+      <node ref="Q701" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q704" pin="1" pinfunction="S_1" pintype="passive"/>
+      <node ref="Q704" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q704" pin="3" pinfunction="S_3" pintype="passive"/>
+      <node ref="R702" pin="2" pintype="passive"/>
+      <node ref="R709" pin="2" pintype="passive"/>
+      <node ref="R850" pin="2" pintype="passive"/>
+      <node ref="R851" pin="2" pintype="passive"/>
+      <node ref="U11" pin="4" pinfunction="RETRY_4" pintype="input"/>
+      <node ref="U11" pin="5" pinfunction="GND_5" pintype="power_in"/>
+    </net>
+    <net code="36" name="unconnected-(U719-CBO-Pad21)" class="Default">
+      <node ref="U719" pin="21" pinfunction="CBO_21" pintype="output+no_connect"/>
+    </net>
+    <net code="37" name="unconnected-(U719-LPWR-Pad15)" class="Default">
+      <node ref="U719" pin="15" pinfunction="LPWR_15" pintype="output+no_connect"/>
+    </net>
+    <net code="38" name="unconnected-(U719-VTB-Pad19)" class="Default">
+      <node ref="U719" pin="19" pinfunction="VTB_19" pintype="power_out+no_connect"/>
+    </net>
+  </nets>
+</export>
