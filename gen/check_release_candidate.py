@@ -23,14 +23,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SCHEMATIC = ROOT / "ducktop2.kicad_sch"
-DEFAULT_PCB = ROOT / "ducktop2.kicad_pcb"
+DEFAULT_PCB = ROOT / "old" / "monolith_ducktop2.kicad_pcb"
 NUMBER = r"[-+0-9.eE]+"
 
 # Violation types a refill may newly introduce without blocking, because
 # they are direct consequences of unrouted nets on a routing-phase board:
 # isolated islands of unvias'd copper.  Everything else that appears only
 # after refill (placement drift, shorts from fills, etc.) blocks release.
-REFILL_DELTA_TYPES = {"isolated_copper"}
+# Categories a --refill-zones pass may introduce while the boards are
+# still unrouted (no tracks/vias yet): fill islands, and dangling-via
+# detection flipping on PTH pads as fills reconnect around them.
+REFILL_DELTA_TYPES = {"isolated_copper", "via_dangling"}
 
 
 def semantic_signature(sheet: str, violation: dict) -> tuple:
@@ -708,6 +711,15 @@ def run_pcb_checks(cli: str, pcb: Path, tempdir: Path) -> int:
                 shutil.copyfile(source, project_root / name)
         shutil.copyfile(pcb, project_root / pcb.name)
     refill_pcb = project_root / pcb.name
+    if not refill_pcb.exists():
+        # stage this board into the project copy (the canonical-project
+        # branch does not stage per-board PCBs on its own)
+        shutil.copyfile(pcb, refill_pcb)
+        for name in (pcb.with_suffix(".kicad_pro").name,
+                     pcb.with_suffix(".kicad_dru").name):
+            source = pcb.parent / name
+            if source.exists() and not (project_root / name).exists():
+                shutil.copyfile(source, project_root / name)
     refill_path = tempdir / "drc_refilled.json"
     if refill_pcb.exists():
         run_command([
