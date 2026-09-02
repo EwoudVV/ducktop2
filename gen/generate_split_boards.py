@@ -1517,14 +1517,15 @@ def inherit_netclasses():
             if (p["pattern"], p["netclass"]) not in existing:
                 ns["netclass_patterns"].append(p)
         # the MCP sync clobbers the design rules too; restore the main
-        # project's values (0.2 min hole matches the 0.2mm drills)
-        rules = d["board"]["design_settings"]["rules"]
+        # project's values (0.2 min hole matches the 0.2mm drills).  Keys
+        # are inserted UNCONDITIONALLY: fresh sync-created .kicad_pro files
+        # lack them entirely, and a conditional restore silently no-ops.
+        rules = d["board"]["design_settings"].setdefault("rules", {})
         for key, val in (("min_through_hole_diameter", 0.2),
                          ("min_track_width", 0.09),
                          ("min_clearance", 0.09),
                          ("min_hole_to_hole", 0.2)):
-            if key in rules:
-                rules[key] = val
+            rules[key] = val
         json.dump(d, open(os.path.join(PROJDIR, board, f"{board}.kicad_pro"),
                           "w"), indent=2)
         print(f"    netclasses {board}: {sorted(have)}")
