@@ -82,3 +82,11 @@
 (rule "VSYS bypass pair C709/C720 (0.295 mm actual)"
     (condition "((A.Reference == 'C709' && B.Reference == 'C720') || (A.Reference == 'C720' && B.Reference == 'C709'))")
     (constraint clearance (min 0.25mm)))
+
+(rule "0201 ESD diode intra-footprint clearance (Phase 5, audit C10)"
+    (condition "((A.Reference == 'D150') && (B.Reference == 'D150')) || ((A.Reference == 'D151') && (B.Reference == 'D151')) || ((A.Reference == 'D152') && (B.Reference == 'D152')) || ((A.Reference == 'D153') && (B.Reference == 'D153')) || ((A.Reference == 'D154') && (B.Reference == 'D154')) || ((A.Reference == 'D155') && (B.Reference == 'D155')) || ((A.Reference == 'D156') && (B.Reference == 'D156')) || ((A.Reference == 'D157') && (B.Reference == 'D157'))")
+    (constraint clearance (min 0.1mm)))
+
+(rule "UDFN-10 GbE ESD array intra-footprint clearance (Phase 5, audit C10)"
+    (condition "((A.Reference == 'U501') && (B.Reference == 'U501')) || ((A.Reference == 'U502') && (B.Reference == 'U502'))")
+    (constraint clearance (min 0.1mm)))

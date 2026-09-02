@@ -35,7 +35,7 @@ from build_ducktop2 import PROJDIR
 PCB = "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3"
 import pcbnew  # noqa: E402
 
-ORIG = os.path.join(PROJDIR, "ducktop2.kicad_pcb")
+ORIG = os.path.join(PROJDIR, "old", "monolith_ducktop2.kicad_pcb")
 NETLISTS = {
     "L": os.path.join(PROJDIR, "verification", "left_io_netlist.xml"),
     "R": os.path.join(PROJDIR, "verification", "right_io_netlist.xml"),
@@ -103,6 +103,8 @@ OUTLINES = {
           (358, 88), (352.78, 88), (352.78, 107), (358, 107), (358, 185), (300, 185)],
     "B": [(0, 0), (60, 0), (60, 60), (0, 60)],
 }
+
+KICAD_FP_LIBS = "/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints"
 
 LIB_DIRS = {
     "ducktop2": os.path.join(PROJDIR, "ducktop2.pretty"),
@@ -1057,9 +1059,11 @@ def build_center_text(out, keep_refs, moves):
     open(out, "w").write(txt)
 
 
-def add_connectors_pcbnew(out, connectors):
-    """Add FPC connector footprints in a FRESH pcbnew process (never mutates
-    existing footprints, so no SWIG corruption)."""
+def add_connectors_pcbnew(out, connectors, extra_parts=()):
+    """Add FPC connector footprints (and netlist-only parts) in a FRESH
+    pcbnew process (never mutates existing footprints, so no SWIG
+    corruption).  extra_parts: (ref, fplibdir, fpname, pos, rot, {pad: net}).
+    """
     code = f"""
 import pcbnew
 b = pcbnew.LoadBoard({out!r})
@@ -1073,13 +1077,213 @@ for ref, lib, name, pos, rot in {connectors!r}:
     fp.SetOrientationDegrees(rot)
     fp.SetLayer(pcbnew.F_Cu)
     b.Add(fp)
+for ref, fplibdir, fpname, pos, rot, padnets in {extra_parts!r}:
+    fp = pcbnew.FootprintLoad(fplibdir, fpname)
+    fp.SetReference(ref)
+    fp.SetValue(fpname)
+    fp.SetPosition(pcbnew.VECTOR2I(int(pos[0]*1e6), int(pos[1]*1e6)))
+    fp.SetOrientationDegrees(rot)
+    fp.SetLayer(pcbnew.F_Cu)
+    for pad in fp.Pads():
+        num = pad.GetNumber()
+        net = padnets.get(num) or padnets.get(str(num), "")
+        if net:
+            netitem = b.FindNet(net)
+            if netitem is None:
+                netitem = pcbnew.NETINFO_ITEM(b, net)
+                b.Add(netitem)
+            pad.SetNet(netitem)
+    b.Add(fp)
 pcbnew.SaveBoard({out!r}, b)
 """
     import subprocess
     r = subprocess.run([PCB, "-c", code], capture_output=True, text=True)
     if r.returncode != 0:
         print(r.stderr)
-        raise SystemExit("connector add failed")
+        raise SystemExit("connector/part add failed")
+
+
+def find_footprint_path(lib, name):
+    """Resolve Lib:Name to a .pretty file: project libs first, then the
+    KiCad install."""
+    base_dirs = [os.path.join(PROJDIR, "ducktop2.pretty")]
+    for base in base_dirs:
+        p = os.path.join(base, name + ".kicad_mod")
+        if os.path.exists(p):
+            return p
+    p = os.path.join(KICAD_FP_LIBS, lib + ".pretty", name + ".kicad_mod")
+    if os.path.exists(p):
+        return p
+    raise SystemExit(f"footprint not found: {lib}:{name}")
+
+
+def netlist_parts(xml):
+    """Parse the netlist XML: ref -> (footprint, {pin: net_name}).
+
+    Net names are the netlist's exact names (sheet-prefixed where the
+    schematic sheet prefixes them) -- exactly what board pads must carry
+    to connect to the circuits (Phase 5 A1 fix).
+    """
+    txt = open(xml).read()
+    out = {}
+    for m in re.finditer(r'<comp ref="([^"]+)">.*?</comp>', txt, re.S):
+        ref, body = m.group(1), m.group(0)
+        fm = re.search(r'<footprint>([^<]*)</footprint>', body)
+        if not fm or not fm.group(1):
+            continue
+        out[ref] = (fm.group(1), {})
+    for nm in re.finditer(r'<net code="\d+" name="([^"]*)"[^>]*>(.*?)</net>', txt, re.S):
+        net, nodes = nm.group(1), nm.group(2)
+        for node in re.finditer(r'<node ref="([^"]+)" pin="([^"]+)"', nodes):
+            ref, pin = node.group(1), node.group(2)
+            if ref in out:
+                out[ref][1][pin] = net
+    return out
+
+
+def resolve_net_names(pinmap, netlist_xml):
+    """Map each contract net name to the board netlist's exact name via
+    unique basename match (contract "VSYS" -> netlist "/VSYS").  Hard-fails
+    on missing or ambiguous names: connector pads MUST carry the circuit
+    net's exact name (a prefix-stripped match is a shadowed connector).
+    """
+    xml = open(netlist_xml).read()
+    names = set(re.findall(r'<net code="\d+" name="([^"]*)"', xml))
+    by_base = {}
+    for n in names:
+        by_base.setdefault(n.split("/")[-1], set()).add(n)
+    out = {}
+    for net in sorted(set(pinmap.values())):
+        if net == "GND":
+            out[net] = "GND"
+            continue
+        cands = by_base.get(net.split("/")[-1], set())
+        if len(cands) == 1:
+            out[net] = next(iter(cands))
+        elif len(cands) == 0:
+            raise SystemExit(
+                f"contract net {net!r} missing from {netlist_xml}")
+        else:
+            raise SystemExit(
+                f"contract net {net!r} ambiguous in {netlist_xml}: {cands}")
+    return out
+
+
+def resync_pad_nets(path, netlist_xml):
+    """Rewrite every footprint pad's net to the netlist's per-pin net.
+
+    Fixes stale pads on live parts (e.g. U14's leftover PD2-channel pins
+    after the dead channel was removed from the schematic).  Pads absent
+    from the netlist (MP/SH hold-downs, extra mechanical pads) are left
+    untouched -- the connector assign pass handles those.
+    """
+    xml = open(netlist_xml).read()
+    net_by_pin = {}
+    for m in re.finditer(r'<net code="\d+" name="([^"]*)"[^>]*>(.*?)</net>',
+                         xml, re.S):
+        net = m.group(1)
+        for node in re.finditer(r'<node ref="([^"]+)" pin="([^"]+)"',
+                                m.group(2)):
+            net_by_pin[(node.group(1), node.group(2))] = net
+    txt = open(path).read()
+    changed = 0
+    pos = 0
+    out = []
+    while True:
+        m = re.search(r'^\t\(footprint "([^"]+)"\n', txt[pos:], re.M)
+        if not m:
+            out.append(txt[pos:])
+            break
+        start = pos + m.start()
+        depth = 0
+        j = start
+        while j < len(txt):
+            if txt[j] == "(":
+                depth += 1
+            elif txt[j] == ")":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        block = txt[start:j + 1]
+        refm = re.search(r'\n\t\t\(property "Reference" "([^"]+)"\n', block)
+        ref = refm.group(1) if refm else None
+        if ref is None:
+            out.append(txt[pos:start]); out.append(block); pos = j + 1
+            continue
+        newblock = []
+        ppos = 0
+        while True:
+            pm = re.search(r'\n\t\t\(pad "([^"]+)" smd', block[ppos:])
+            if not pm:
+                newblock.append(block[ppos:])
+                break
+            pstart = ppos + pm.start()
+            depth = 0
+            q = pstart
+            while q < len(block):
+                if block[q] == "(":
+                    depth += 1
+                elif block[q] == ")":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                q += 1
+            pblock = block[pstart:q + 1]
+            num = pm.group(1)
+            want = net_by_pin.get((ref, num))
+            if want is not None:
+                pblock = re.sub(r'\n\t\t\t\(net "[^"]*"\)\n', "",
+                                pblock)
+                pblock = pblock.rstrip(")").rstrip() + \
+                    f'\n\t\t\t(net "{want}")\n\t\t)'
+                changed += 1
+            newblock.append(block[ppos:pstart])
+            newblock.append(pblock)
+            ppos = q + 1
+        out.append(txt[pos:start])
+        out.append("".join(newblock))
+        pos = j + 1
+    open(path, "w").write("".join(out))
+    print(f"    pad nets resynced: {changed}")
+    return changed
+
+
+def normalize_board_nets(path, netlist_xml):
+    """Rewrite board net names to the netlist's exact names (unique
+    basename match, hard fail otherwise).  Fixes the monolith's legacy
+    sheet-prefixed names (/Power & Battery/FG_VSS -> /FG_VSS) so every
+    board net -- circuits, pads and zones alike -- matches the schematic
+    netlist that the release gates compare against."""
+    xml = open(netlist_xml).read()
+    names = {n for n in re.findall(r'<net code="\d+" name="([^"]*)"', xml)}
+    by_base = {}
+    for n in names:
+        by_base.setdefault(n.split("/")[-1], []).append(n)
+    txt = open(path).read()
+    board_names = set(re.findall(r'\(net "([^"]+)"\)', txt))
+    rename = {}
+    for name in sorted(board_names):
+        if name in names:
+            continue
+        cands = by_base.get(name.split("/")[-1], [])
+        if len(cands) == 1:
+            rename[name] = cands[0]
+        elif len(cands) > 1:
+            raise SystemExit(
+                f"{path}: net {name!r} ambiguous: {cands}")
+        else:
+            raise SystemExit(
+                f"{path}: net {name!r} has no schematic counterpart")
+    if not rename:
+        print(f"    nets normalized: 0 (already match "
+              f"{os.path.basename(netlist_xml)})")
+        return 0
+    for old in sorted(rename, key=len, reverse=True):
+        txt = txt.replace(f'(net "{old}")', f'(net "{rename[old]}")')
+    open(path, "w").write(txt)
+    print(f"    nets normalized: {len(rename)} -> schematic names")
+    return len(rename)
 
 
 def inject_outline_text(path, pts):
@@ -1165,22 +1369,24 @@ def parse_old_placements(path):
     return out
 
 
-def assign_connector_pad_nets(path, ref, pinmap, center_side=False):
+def assign_connector_pad_nets(path, ref, pinmap, resolve=None,
+                              ground="GND"):
     """Text-side pad net assignment for FPC connector pads.
 
     The center board's connectors are added without nets (the sync never
     touched them); the daughterboards' connectors arrive from the sync but
     their FH41-68S SH solder-hold pads stay unmatched.  Both get their
     pads written as (net "NAME") lines -- KiCad 10's code-less form.
-    The same map exists on both ends; only the center side renames
-    PACK_NEG_RAW to GND.
-    """
-    import fpc_contract as fpc_contract
 
+    `resolve` maps a contract net name to the BOARD's net name (the
+    netlist-exact form, e.g. "VSYS" -> "/VSYS"): pads must carry the same
+    name the circuits carry, or the connector is shadowed (Phase 5 A1
+    regression: bare-name pads vs prefixed-name circuits).
+    """
     txt = open(path).read()
 
     def center_name(n):
-        return fpc_contract.CENTER_RENAME.get(n, n) if center_side else n
+        return resolve.get(n, n) if resolve else n
 
     changed = 0
     out = []
@@ -1229,9 +1435,11 @@ def assign_connector_pad_nets(path, ref, pinmap, center_side=False):
             pblock = block[pstart:q + 1]
             num = pm.group(1)
             if num == "MP" or num == "SH":
-                # MP hold-downs and SH solder-hold pads: GND (the FH41 is
-                # a shielded-FFC connector; the shield return lands here)
-                name = "GND"
+                # MP hold-downs and SH solder-hold pads: the board's ground
+                # (the FH41 is a shielded-FFC connector; the shield return
+                # lands here).  The BMS board's ground reference is FG_VSS,
+                # not GND (the pack negative never crosses the cable).
+                name = ground
             else:
                 name = center_name(pinmap.get(int(num)) if num.isdigit() else pinmap.get(num))
             if name is None:
@@ -1390,6 +1598,7 @@ def main():
     parts = {k: netlist_refs(v) for k, v in NETLISTS.items()}
     orphans = None
     old = parse_old_placements(ORIG)  # ref -> (x, y, rot, flipped)
+    monolith_old = dict(old)
 
     pcb_refs = set(old)
     orphans = pcb_refs - parts["L"] - parts["R"] - parts["B"] - parts["C"]
@@ -1416,6 +1625,8 @@ def main():
     conn_keepout_pads = {k: rect_to_pads(v) for k, v in CONNECTOR_KEEPOUT.items()}
     CONNECTORS_FINAL = {}
 
+    import os as _os
+    _center_only = _os.environ.get("DUCKTOP2_CENTER_ONLY") == "1"
     for board_key, out_rel, build in (
         ("L", "left_io/left_io.kicad_pcb", True),
         ("R", "right_io/right_io.kicad_pcb", True),
@@ -1423,6 +1634,8 @@ def main():
         ("C", "ducktop2-center.kicad_pcb", False),
     ):
         out = os.path.join(PROJDIR, out_rel)
+        if _center_only and build:
+            continue
         region = REGIONS[board_key]
         x0, y0, x1, y1 = region
         if build:
@@ -1430,12 +1643,31 @@ def main():
             board_refs = {fp.GetReference(): fp for fp in board.GetFootprints()}
             leftovers = [r for r in board_refs
                          if r not in parts[board_key] and r not in HOLES[board_key]]
-            assert not leftovers, \
-                f"{board_key} board not clean, leftovers: {leftovers}"
+            if leftovers:
+                # orphan policy (same as the center): parts in no schematic
+                # are dead -- drop them loudly rather than fail the build
+                print(f"    dropping {len(leftovers)} board-only parts: "
+                      f"{sorted(leftovers)}")
+            # the sync'd daughterboards already carry their final placement
+            # (Phase 5 packer + manual nudges): preserve the FILE geometry
+            # as the placement authority, not the stale monolith positions.
+            file_bboxes, file_pads = parse_pad_bboxes(out)
+            occupied_by_ref = file_bboxes
+            padlists = file_pads
+            for r, fp in board_refs.items():
+                pos = fp.GetPosition()
+                old[r] = (pos.x / 1e6, pos.y / 1e6,
+                          fp.GetOrientationDegrees(),
+                          fp.GetLayer() == pcbnew.B_Cu)
             refs = set(board_refs)
         else:
             board = None
             board_refs = {}
+            # the center is cut from the monolith: restore the monolith
+            # geometry and placements as the authority for this iteration
+            occupied_by_ref = all_bboxes
+            padlists = all_pads
+            old = dict(monolith_old)
             refs = set(keep_center)
 
         # 1) classify: a part is "in place" iff its pad bbox does not cross an
@@ -1635,9 +1867,14 @@ def main():
 
             pcbnew.SaveBoard(out, board)
             splice_setup_layers(out)
+            if leftovers:
+                txt = open(out).read()
+                txt = remove_footprint_blocks(txt, set(leftovers))
+                open(out, "w").write(txt)
             # FH41-68S SH solder-hold pads: GND (shielded-FFC return).
             # The sync leaves them unmatched (no symbol pins).
             import fpc_contract as fpc_contract
+            resync_pad_nets(out, NETLISTS[board_key])
             for (ref, _lib, _name, _pos, _rot) in CONNECTORS_FINAL[board_key]:
                 pinmap = {
                     "FPC101": fpc_contract.FPC1_PINMAP,
@@ -1645,31 +1882,104 @@ def main():
                     "FPC106": fpc_contract.FPC3_PINMAP,
                 }.get(ref)
                 if pinmap is not None:
-                    assign_connector_pad_nets(out, ref, pinmap)
-                    print(f"    {ref}: SH pads -> GND")
+                    resolve = resolve_net_names(pinmap, NETLISTS[board_key])
+                    ground = "FG_VSS" if board_key == "B" else "GND"
+                    n = assign_connector_pad_nets(out, ref, pinmap,
+                                                  resolve=resolve,
+                                                  ground=ground)
+                    print(f"    {ref}: assigned {n} pad nets "
+                          f"(MP/SH -> {ground})")
+            # board nets must carry the netlist's exact names (parity +
+            # netclass patterns match by full name)
+            normalize_board_nets(out, NETLISTS[board_key])
+            inject_outline_text(out, OUTLINES[board_key])
         else:
             # center: text surgery (no pcbnew mutation) then connectors in a
             # fresh subprocess (Remove+Set* poisons SWIG in-process)
             build_center_text(out, keep_center, moves)
-            add_connectors_pcbnew(out, CONNECTORS_FINAL[board_key])
-            # Phase 4a: the center's connectors were added without nets;
-            # assign pad nets text-side from the FPC contract maps.
+            print(f"    center after cut: {os.path.getsize(out)} bytes")
             import fpc_contract as fpc_contract
+            # Phase 5: parts added to the schematics after the monolith was
+            # cut (selector cascade, probe headers) exist only in the
+            # netlist -- inject them with footprints + pad nets.  The
+            # netlist already carries the board-exact (/X) names.
+            nl = netlist_parts(NETLISTS[board_key])
+            netlist_only = sorted(
+                r for r in (set(parts[board_key]) - set(keep_center))
+                if not r.startswith("FPC") and r in nl)
+            extra = []
+            inj_set = set()
+            for k, r in enumerate(netlist_only):
+                fp_lib, fp_name = nl[r][0].split(":", 1)
+                fplibdir = os.path.dirname(find_footprint_path(fp_lib, fp_name))
+                # seed mid-board in the ST2-selector staging area -- the
+                # left-edge column collides with FPC102's SH/MP pads
+                sx = 186.0 + (k // 8) * 9.0
+                sy = 30.0 + (k % 8) * 12.0
+                extra.append((r, fplibdir, fp_name, (sx, sy), 0.0, nl[r][1]))
+                inj_set.add(r)
+                print(f"    netlist-only {r}: {nl[r][0]}")
+            add_connectors_pcbnew(out, CONNECTORS_FINAL[board_key],
+                                  extra_parts=extra)
+            _n_fp = len(re.findall(r'\n\t\(footprint ', open(out).read()))
+            print(f"    center after add: {os.path.getsize(out)} bytes, "
+                  f"{_n_fp} fps")
+            # The packer ran before the injected parts existed; move ONLY
+            # the injected parts out of any overlap with the placed board.
+            if inj_set:
+                for r, _l, _n, pos, _rot, _pn in extra:
+                    old[r] = (pos[0], pos[1], 0.0, False)
+                _, pl_inj = parse_pad_bboxes(out)
+                fix_part_overlaps(board_key, region, pl_inj, moves, old,
+                                  inj_set,
+                                  FORBIDDEN[board_key],
+                                  CONNECTOR_KEEPOUT[board_key],
+                                  courtyards=courtyards)
+                moved_inj = {r: moves[r][:2] for r in inj_set if r in moves}
+                if moved_inj:
+                    _txt = open(out).read()
+                    open(out, "w").write(rewrite_at_lines(
+                        _txt,
+                        {r: (x, y, 0.0) for r, (x, y) in moved_inj.items()}))
+                    for r in sorted(moved_inj):
+                        print(f"    injected {r} -> "
+                              f"({moved_inj[r][0]:.1f}, {moved_inj[r][1]:.1f})")
+            # every pad must carry the netlist's per-pin net: the monolith
+            # predates the Phase 5 rewire (U15 pin 12 moved from the AUX
+            # pair to the MAIN pair; nets renamed), so name-aliasing is not
+            # enough -- resync pads pin-by-pin like the daughterboards.
+            resync_pad_nets(out, NETLISTS[board_key])
+            # connector pad nets: the center is side B of every cable --
+            # mirrored maps (180-deg-mounted connectors mirror the pin order
+            # through the straight FFC), names resolved to the center
+            # netlist's exact names so pads join the circuits they face.
+            all_nets = (set(fpc_contract.FPC1_PINMAP.values())
+                        | set(fpc_contract.FPC2_PINMAP.values())
+                        | set(fpc_contract.FPC3_PINMAP.values()))
+            resolve = resolve_net_names(
+                {f"k{i}": v for i, v in enumerate(all_nets)},
+                NETLISTS[board_key])
             for ref, _lib, _name, _pos, _rot in CONNECTORS_FINAL[board_key]:
                 pinmap = {
-                    "FPC102": fpc_contract.FPC1_PINMAP,
-                    "FPC103": fpc_contract.FPC2_PINMAP,
-                    "FPC105": fpc_contract.FPC3_PINMAP,
+                    "FPC102": fpc_contract.FPC102_PINMAP,
+                    "FPC103": fpc_contract.FPC103_PINMAP,
+                    "FPC105": fpc_contract.FPC105_PINMAP,
                 }[ref]
-                n = assign_connector_pad_nets(out, ref, pinmap, center_side=True)
+                n = assign_connector_pad_nets(out, ref, pinmap,
+                                              resolve=resolve)
                 print(f"    {ref}: assigned {n} pad nets")
+            print(f"    center after assign: {os.path.getsize(out)} bytes")
             # Phase 4 deep audit: the inherited monolithic routing is WIP
             # (tracks cross the cut lines) — routing is manual, so strip
             # tracks/vias/arcs and refill the zones against the final
-            # placement.
+            # placement.  Order matters: normalize (net names) before the
+            # outline swap, refill after it so pours clip to the new
+            # outline.
             strip_tracks_and_vias(out)
+            normalize_board_nets(out, NETLISTS[board_key])
+            inject_outline_text(out, OUTLINES[board_key])
+            print(f"    center after outline: {os.path.getsize(out)} bytes")
             refill_zones(out)
-        inject_outline_text(out, OUTLINES[board_key])
         print(f"[{board_key}] wrote {out}")
         n_conn = len(CONNECTORS_FINAL[board_key])
         n_fpc_present = len([r for r in board_refs if r.startswith("FPC")])

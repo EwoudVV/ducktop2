@@ -318,39 +318,89 @@ def build(sheet_symbol_uuid):
 
     # U15 provides qualified, reverse-blocking priority selection between USB-C PD and AUX/solar.
     # The industrial I-grade part is used because commercial C-grade selectors stop at 70 C.
-    s.text(470, 20, "== U15 LTC4418IUF: USB-C PD priority over protected AUX/solar ==")
-    s.place("U15", "LTC4418IUF", "LTC4418IUF#PBF dual-input selector", 520, 165,
+    #
+    # Phase 5: THREE charge sources (PD1 via FPC-1, PD2 via FPC-2, AUX).
+    # The LTC4418 datasheet sanctions cascading: U15B (stage 2) selects
+    # PD2 over AUX into SEL_STAGE2; U15 (stage 1) selects PD1 over
+    # SEL_STAGE2 into VBUS_COMBINED.  Priority: PD1 > PD2 > AUX.
+    #
+    # Phase 5 pinout fix: the LTC4418IUF symbol had pins 6-10 transcribed
+    # from the wrong datasheet column.  Real UF20 pinout (datasheet Rev A
+    # pin functions): 6=VALID1, 7=VALID2 (both open-drain), 8=GND,
+    # 9=CAS, 10=INTVCC, 18=EN, 19=SHDN, 20=HYS.  The old wiring put the
+    # real GND on the INTVCC bypass node and real INTVCC on a 3V3-pulled
+    # logic net -- U14/U15 could never have functioned.  Symbol corrected;
+    # VALID outputs now land on 6/7 with their existing pull-ups.
+    s.text(470, 20, "== U15/U15B LTC4418IUF cascade: PD1 > PD2 > AUX into VBUS_COMBINED ==")
+    s.place("U15", "LTC4418IUF", "LTC4418IUF#PBF dual-input selector (stage 1)", 520, 165,
             footprint=FOOTPRINTS["LTC4418IUF"],
             pin_nets={
                 "1": ("MAIN_SEL_TMR", "local"),
                 "2": ("USB_MAIN_UV", "local"), "3": ("USB_MAIN_OV", "local"),
-                "4": ("AUX_MAIN_UV", "local"), "5": ("AUX_MAIN_OV", "local"),
-                "6": ("", "nc"), "7": ("GND", "local"),
-                "8": ("MAIN_SEL_INTVCC", "local"), "9": ("MAIN_USB_VALID_N", "hier"),
-                "10": ("MAIN_AUX_VALID_N", "hier"),
-                "11": ("AUX_MAIN_GATE", "local"), "12": ("AUX_MAIN_FET_COMMON", "local"),
+                "4": ("ST2_MAIN_UV", "local"), "5": ("ST2_MAIN_OV", "local"),
+                "6": ("MAIN_USB_VALID_N", "hier"), "7": ("MAIN_AUX_VALID_N", "hier"),
+                "8": ("GND", "local"), "9": ("", "nc"), "10": ("MAIN_SEL_INTVCC", "local"),
+                "11": ("ST2_MAIN_GATE", "local"), "12": ("ST2_MAIN_FET_COMMON", "local"),
                 "13": ("USB_MAIN_GATE", "local"), "14": ("USB_MAIN_FET_COMMON", "local"),
                 "15": ("VBUS_COMBINED", "local"),
-                "16": ("AUX_DC_PROTECTED", "local"), "17": ("USB_PD_SELECTED", "hier"),
+                "16": ("SEL_STAGE2", "local"), "17": ("USB_PD_SELECTED", "hier"),
                 "18": ("MAIN_SEL_INTVCC", "local"), "19": ("MAIN_SEL_INTVCC", "local"),
+                "20": ("GND", "local"), "21": ("GND", "local"),
+            },
+            extra_props={"Manufacturer": "Analog Devices", "MPN": "LTC4418IUF#PBF"})
+
+    # Stage 2: PD2 (from the right board via FPC-2) over AUX.
+    s.place("U15B", "LTC4418IUF", "LTC4418IUF#PBF dual-input selector (stage 2)", 520, 425,
+            footprint=FOOTPRINTS["LTC4418IUF"],
+            pin_nets={
+                "1": ("ST2_SEL_TMR", "local"),
+                "2": ("ST2_USB_UV", "local"), "3": ("ST2_USB_OV", "local"),
+                "4": ("ST2_AUX_UV", "local"), "5": ("ST2_AUX_OV", "local"),
+                "6": ("PD2_VALID_N", "hier"), "7": ("", "nc"),
+                "8": ("GND", "local"), "9": ("", "nc"), "10": ("ST2_SEL_INTVCC", "local"),
+                "11": ("ST2_AUX_GATE", "local"), "12": ("ST2_AUX_FET_COMMON", "local"),
+                "13": ("ST2_USB_GATE", "local"), "14": ("ST2_USB_FET_COMMON", "local"),
+                "15": ("SEL_STAGE2", "local"),
+                "16": ("AUX_DC_PROTECTED", "local"), "17": ("PD2_VBUS_GATED", "hier"),
+                "18": ("ST2_SEL_INTVCC", "local"), "19": ("ST2_SEL_INTVCC", "local"),
                 "20": ("GND", "local"), "21": ("GND", "local"),
             },
             extra_props={"Manufacturer": "Analog Devices", "MPN": "LTC4418IUF#PBF"})
 
     add_selector_fet(s, "Q21", 485, 70, "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "USB_PD_SELECTED", "hier")
     add_selector_fet(s, "Q22", 545, 70, "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "VBUS_COMBINED", "local")
-    add_selector_fet(s, "Q23", 485, 105, "AUX_MAIN_GATE", "AUX_MAIN_FET_COMMON", "AUX_DC_PROTECTED", "local")
-    add_selector_fet(s, "Q24", 545, 105, "AUX_MAIN_GATE", "AUX_MAIN_FET_COMMON", "VBUS_COMBINED", "local")
+    # stage-1 V2 channel: SEL_STAGE2 -> VBUS_COMBINED
+    add_selector_fet(s, "Q28", 485, 137, "ST2_MAIN_GATE", "ST2_MAIN_FET_COMMON", "SEL_STAGE2", "local")
+    add_selector_fet(s, "Q29", 545, 137, "ST2_MAIN_GATE", "ST2_MAIN_FET_COMMON", "VBUS_COMBINED", "local")
+    # stage-2 channels: PD2 and AUX into SEL_STAGE2
+    add_selector_fet(s, "Q26", 485, 350, "ST2_USB_GATE", "ST2_USB_FET_COMMON", "PD2_VBUS_GATED", "hier")
+    add_selector_fet(s, "Q27", 545, 350, "ST2_USB_GATE", "ST2_USB_FET_COMMON", "SEL_STAGE2", "local")
+    add_selector_fet(s, "Q23", 485, 385, "ST2_AUX_GATE", "ST2_AUX_FET_COMMON", "AUX_DC_PROTECTED", "local")
+    add_selector_fet(s, "Q24", 545, 385, "ST2_AUX_GATE", "ST2_AUX_FET_COMMON", "SEL_STAGE2", "local")
 
+    # UV/OV window dividers (VTH = 1.000 V, HYS pin to GND = fixed 3%):
+    #   USB/PD2 windows 13.1-17.1 V (15 V PDO class, values verified
+    #   against the LTC4418 VTH): V(UV) = Vin*83k/1083k, V(OV) = Vin*63.4k/1083k.
+    #   AUX window (on U15B.V2) 5.59-23.3 V: V(UV) = Vin*83.4k/466.4k,
+    #   V(OV) = Vin*20k/466.4k -- wide by design; the AUX eFuse (5.53-22.99 V)
+    #   performs the real 7-22 V qualification upstream.
+    #   Stage-2 window (on U15.V2, SEL_STAGE2 output) 5.99-22.45 V:
+    #   V(UV) = Vin*74.9k/448.9k, V(OV) = Vin*20k/448.9k.
     for ref, value, net_a, net_b, x, y, mpn in (
         ("R730", "1.00M 0.1% USB UV top", "USB_PD_SELECTED", "USB_MAIN_UV", 475, 225, "RT0603BRD071ML"),
         ("R731", "19.6k 0.1% USB window middle", "USB_MAIN_UV", "USB_MAIN_OV", 475, 237.7, "RT0603BRD0719K6L"),
         ("R732", "63.4k 0.1% USB OV bottom", "USB_MAIN_OV", "GND", 475, 250.4, "RT0603BRD0763K4L"),
-        ("R733", "383k 0.1% AUX UV top", "AUX_DC_PROTECTED", "AUX_MAIN_UV", 555, 225, "RT0603BRD07383KL"),
-        ("R734", "63.4k 0.1% AUX window middle", "AUX_MAIN_UV", "AUX_MAIN_OV", 555, 237.7, "RT0603BRD0763K4L"),
-        ("R735", "20.0k 0.1% AUX OV bottom", "AUX_MAIN_OV", "GND", 555, 250.4, "RT0603BRD0720KL"),
+        ("R741", "1.00M 0.1% PD2 UV top", "PD2_VBUS_GATED", "ST2_USB_UV", 475, 462.3, "RT0603BRD071ML"),
+        ("R742", "19.6k 0.1% PD2 window middle", "ST2_USB_UV", "ST2_USB_OV", 475, 475, "RT0603BRD0719K6L"),
+        ("R743", "63.4k 0.1% PD2 OV bottom", "ST2_USB_OV", "GND", 475, 487.7, "RT0603BRD0763K4L"),
+        ("R733", "383k 0.1% AUX UV top", "AUX_DC_PROTECTED", "ST2_AUX_UV", 555, 462.3, "RT0603BRD07383KL"),
+        ("R734", "63.4k 0.1% AUX window middle", "ST2_AUX_UV", "ST2_AUX_OV", 555, 475, "RT0603BRD0763K4L"),
+        ("R735", "20.0k 0.1% AUX OV bottom", "ST2_AUX_OV", "GND", 555, 487.7, "RT0603BRD0720KL"),
+        ("R744", "374k 0.1% stage2 UV top", "SEL_STAGE2", "ST2_MAIN_UV", 615, 225, "RT0603BRD07374KL"),
+        ("R745", "54.9k 0.1% stage2 window middle", "ST2_MAIN_UV", "ST2_MAIN_OV", 615, 237.7, "RT0603BRD0754K9L"),
+        ("R746", "20.0k 0.1% stage2 OV bottom", "ST2_MAIN_OV", "GND", 615, 250.4, "RT0603BRD0720KL"),
     ):
-        kind_a = "hier" if net_a == "USB_PD_SELECTED" else "local"
+        kind_a = "hier" if net_a in ("USB_PD_SELECTED", "PD2_VBUS_GATED") else "local"
         s.place(ref, "R", value, x, y, footprint=FOOTPRINTS["R"],
                 pin_nets={"1": (net_a, kind_a), "2": (net_b, "local")},
                 extra_props={"Manufacturer": "Yageo", "MPN": mpn})
@@ -360,8 +410,11 @@ def build(sheet_symbol_uuid):
         ("C741", "15n 50V TMR approx 240ms", "MAIN_SEL_TMR", 515, 275, "C_0402", "GRM155R71H153KA12D"),
         ("C742", "100n 50V USB V1 local", "USB_PD_SELECTED", 555, 275, "C_100n", "GRM188R71H104KA93D"),
         ("C743", "100n 50V USB VS1 local", "USB_MAIN_FET_COMMON", 475, 292.8, "C_100n", "GRM188R71H104KA93D"),
-        ("C744", "100n 50V AUX V2 local", "AUX_DC_PROTECTED", 515, 292.8, "C_100n", "GRM188R71H104KA93D"),
-        ("C745", "100n 50V AUX VS2 local", "AUX_MAIN_FET_COMMON", 555, 292.8, "C_100n", "GRM188R71H104KA93D"),
+        ("C744", "100n 50V stage2 V2 local", "AUX_DC_PROTECTED", 515, 292.8, "C_100n", "GRM188R71H104KA93D"),
+        ("C745", "100n 50V AUX VS2 local", "ST2_AUX_FET_COMMON", 555, 292.8, "C_100n", "GRM188R71H104KA93D"),
+        ("C747", "100n 50V stage2 VS1 local", "ST2_MAIN_FET_COMMON", 635, 292.8, "C_100n", "GRM188R71H104KA93D"),
+        ("C748", "100n 50V stage2 out local", "SEL_STAGE2", 615, 275, "C_100n", "GRM188R71H104KA93D"),
+        ("C749", "100n 10V stage2 INTVCC", "ST2_SEL_INTVCC", 475, 505, "C_100n", "GRM188R71A104KA61D"),
     ):
         kind = "hier" if net == "USB_PD_SELECTED" else "local"
         s.place(ref, "C", value, x, y, footprint=FOOTPRINTS[fp],
@@ -371,6 +424,12 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MAIN_USB_VALID_N", "hier")})
     s.place("R718", "R", "10k main AUX VALID pull-up", 595, 237.7, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MAIN_AUX_VALID_N", "hier")})
+    s.place("R747", "R", "10k PD2 VALID pull-up", 595, 250.4, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("PD2_VALID_N", "hier")})
+    s.place("C715", "C", "15n 50V stage2 TMR approx 240ms", 515, 505,
+            footprint=FOOTPRINTS["C_0402"],
+            pin_nets={"1": ("ST2_SEL_TMR", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM155R71H153KA12D"})
     s.place("C746", "C_Polarized", "100u 35V hybrid selector output hold-up", 595, 292.8,
             footprint=FOOTPRINTS["C_100u_35V_hybrid"],
             pin_nets={"1": ("VBUS_COMBINED", "local"), "2": ("GND", "local")},
@@ -380,7 +439,14 @@ def build(sheet_symbol_uuid):
     # The switched rails are physically driven through passive external FETs;
     # both selector VOUT pins are supply/sense inputs rather than power sources.
     s.pwrflag(650, 90, "VBUS_COMBINED")
+    # USB_PD_SELECTED enters as connector power (FPC-1); the selector's V1
+    # is a power input, so flag the net for ERC.
+    s.pwrflag(650, 75, "USB_PD_SELECTED")
     s.pwrflag(650, 45, "AUX_DC_FUSED")
+    # stage-2 output and the FPC-2-sourced PD2 rail are power inputs to
+    # the cascade's V1/V2 sense pins
+    s.pwrflag(650, 105, "SEL_STAGE2")
+    s.pwrflag(650, 120, "PD2_VBUS_GATED")
     s.pwrflag(650, 60, "AUX_EFUSE_IN_SYS")
     # Keep the EC alive before source selection. These Schottky diodes OR the
     # protected battery/AUX paths and each raw PD port into one shared,
@@ -432,7 +498,7 @@ def build(sheet_symbol_uuid):
     s.pwrflag(650, 370, "AON_OR_RAW")
     s.text(380, 20, "J190 is the single AUX/SOLAR physical input; USB-C PD negotiation remains only on sheet 5.")
     s.text(380, 26, "TPS26630 accepts 7-22V nominal; 0.1% ladder targets 5.53V/22.99V rising UV/OV and a 3A limit.")
-    s.text(380, 32, "U15 validates USB near 15V and AUX across 7-22V, gives USB priority, and prevents inactive-source backfeed.")
+    s.text(380, 32, "U15/U15B cascade validates USB+PD2 near 15V and AUX across 7-22V, prioritizes PD1 > PD2 > AUX, and prevents inactive-source backfeed.")
     s.text(380, 38.1, "SMCJ24CA protects the 67V eFuse input; active OVP protects the BQ25798 24V recommended input limit.")
 
     s.text(20, 220, "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice).")

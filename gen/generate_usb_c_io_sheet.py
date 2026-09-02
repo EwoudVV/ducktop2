@@ -102,7 +102,9 @@ def add_hub(s):
         "47": ("", "nc"), "48": ("", "nc"), "49": ("", "nc"), "50": ("", "nc"),
         "51": ("", "nc"), "52": ("", "nc"), "53": ("SYS_3V3", "hier"), "54": ("", "nc"),
         "55": ("HUB_VCORE", "local"), "56": ("", "nc"),
-        "57": ("HUB_PRT_CTL4", "local"), "58": ("HUB_PRT_CTL3", "local"),
+        # DS4 serves J12 on the RIGHT board across FPC-1/FPC-2 (pass-through
+        # on the center), so its data + power-enable are hierarchical.
+        "57": ("HUB_PRT_CTL4", "hier"), "58": ("HUB_PRT_CTL3", "local"),
         "59": ("HUB_PRT_CTL2", "local"), "60": ("HUB_DS1_PRT_CTL", "local"),
         "61": ("", "nc"), "62": ("SYS_3V3", "hier"),
         "63": ("HUB_TEST1", "local"), "64": ("HUB_TEST2", "local"), "65": ("HUB_TEST3", "local"),
@@ -123,6 +125,9 @@ def add_hub(s):
     resistor(s, "R1840", "10k DS1 PRT_CTL idle pull-up; VBUS is managed by its TCPC",
              304.8, 132.08, "SYS_3V3", "HUB_DS1_PRT_CTL", a_kind="hier",
              mpn="RC0603FR-0710KL")
+    resistor(s, "R1841", "10k DS4 PRT_CTL idle pull-up (J12 branch enable, remote)",
+             355.6, 144.78, "SYS_3V3", "HUB_PRT_CTL4", a_kind="hier", b_kind="hier",
+             mpn="RC0603FR-0710KL")
     unit2 = {
         "5": ("HUB_DS1_DP", "hier"), "6": ("HUB_DS1_DM", "hier"),
         # DS1 is USB2-only (feeds J11 after the split); SS pins retired.
@@ -137,8 +142,8 @@ def add_hub(s):
         "27": ("HUB_DS3_DP", "local"), "28": ("HUB_DS3_DM", "local"),
         "29": ("HUB_DS3_TX_RAW_P", "local"), "30": ("HUB_DS3_TX_RAW_N", "local"),
         "31": ("HUB_VCORE", "local"), "32": ("HUB_DS3_SSRX_P", "local"), "33": ("HUB_DS3_SSRX_N", "local"),
-        "34": ("HUB_DS4_DP", "local"), "35": ("HUB_DS4_DM", "local"),
-        # DS4 is USB2-only (feeds J12 after the split); SS pins retired.
+        "34": ("HUB_DS4_DP", "hier"), "35": ("HUB_DS4_DM", "hier"),
+        # DS4 is USB2-only (feeds J12 on the right board); SS pins retired.
         "36": ("", "nc"), "37": ("", "nc"),
         "38": ("HUB_VCORE", "local"), "39": ("", "nc"), "40": ("", "nc"),
     }
@@ -309,10 +314,13 @@ def add_usba_ports(s):
               kind="hier", footprint="C_0805", mpn="GRM21BR71A106KE51L")
 
 
-def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False):
+def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False, remote_data=False):
+    """remote_data=True: the hub (and its PRT_CTL) sit on another board;
+    DP/DM and PRT_CTL cross an FPC, so they are hierarchical nets."""
     ctl = f"HUB_PRT_CTL{port}"
     dp = f"HUB_DS{port}_DP"
     dm = f"HUB_DS{port}_DM"
+    data_kind = "hier" if remote_data else "local"
     host_tx_p = f"HUB_DS{port}_SSTX_P"
     host_tx_n = f"HUB_DS{port}_SSTX_N"
     host_rx_p = f"HUB_DS{port}_SSRX_P"
@@ -330,14 +338,14 @@ def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False):
     s.text(x0, y0, f"== {jref}: source-only USB-C data port, USB7206C downstream {port}, {'USB2' if usb2_only else 'USB3'} ==")
     s.place(u_sw, "TPS2553D", "TPS2553DDBVR 1.3A USB branch", x0 + 25.4, y0 + 22.86,
             footprint=FOOTPRINTS["TPS2553DDBV"], pin_nets={
-                "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"), "3": (ctl, "local"),
-                "4": (ctl, "local"), "5": (ilim, "local"), "6": (pre, "local"),
+                "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"), "3": (ctl, data_kind),
+                "4": (ctl, data_kind), "5": (ilim, "local"), "6": (pre, "local"),
             }, extra_props=props("Texas Instruments", "TPS2553DDBVR"))
     resistor(s, f"R{base}", "20.0k 1% TPS2553 1.3A ILIM", x0 + 2.54, y0 + 55.88, ilim, "GND", mpn="RC0603FR-0720KL")
     s.place(u_cc, "TPS25810RVC", "TPS25810RVCR Type-C DFP controller", x0 + 78.74, y0 + 43.18,
             footprint=FOOTPRINTS["TPS25810RVC"], pin_nets={
-                "1": (ctl, "local"), "2": (pre, "local"), "3": (pre, "local"), "4": (pre, "local"),
-                "5": ("SYS_3V3", "hier"), "6": (ctl, "local"), "7": ("GND", "local"), "8": ("GND", "local"),
+                "1": (ctl, data_kind), "2": (pre, "local"), "3": (pre, "local"), "4": (pre, "local"),
+                "5": ("SYS_3V3", "hier"), "6": (ctl, data_kind), "7": ("GND", "local"), "8": ("GND", "local"),
                 "9": (refrtn, "local"), "10": (refnet, "local"), "11": (cc1, "local"), "12": ("GND", "local"),
                 "13": (cc2, "local"), "14": (vbus_sys, "local"), "15": (vbus_sys, "local"),
                 "16": ("", "nc"), "17": ("", "nc"), "18": (pol, "local"),
@@ -381,7 +389,7 @@ def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False):
                 "A1": ("GND", "local"), "A12": ("GND", "local"), "B1": ("GND", "local"), "B12": ("GND", "local"),
                 "SH": ("GND", "local"), "A4": (vbus, "local"), "A9": (vbus, "local"), "B4": (vbus, "local"), "B9": (vbus, "local"),
                 "A5": (cc1, "local"), "B5": (cc2, "local"),
-                "A6": (dp, "local"), "B6": (dp, "local"), "A7": (dm, "local"), "B7": (dm, "local"),
+                "A6": (dp, data_kind), "B6": (dp, data_kind), "A7": (dm, data_kind), "B7": (dm, data_kind),
                 "A2": ("" if usb2_only else tx1p, "nc" if usb2_only else "local"),
                 "A3": ("" if usb2_only else tx1n, "nc" if usb2_only else "local"),
                 "B2": ("" if usb2_only else tx2p, "nc" if usb2_only else "local"),

@@ -2826,6 +2826,105 @@
 		)
 		(embedded_fonts no)
 	)
+(symbol "Mechanical:MountingHole"
+		(pin_names
+			(offset 1.016)
+		)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "H"
+			(at 0 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 0 3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "mounting hole"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "MountingHole*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "MountingHole_0_1"
+			(circle
+				(center 0 0)
+				(radius 1.27)
+				(stroke
+					(width 1.27)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 (symbol "Memory_EEPROM:CAT24C256"
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7507,12 +7606,14 @@
   (uuid 853747db-c463-558e-9b5b-6d329738793c)
 )
 (no_connect (at 388.62 147.32) (uuid 2993bada-8905-58a0-934a-4c257781937e))
-(label "PD2_VBUS_GATED"
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
   (at 388.62 132.08 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 7a8edb81-c1bd-5d83-90c1-f4b5d08bdc90)
 )
-(label "PD2_VBUS_GATED"
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
   (at 388.62 132.08 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid f600e832-4175-5477-bc5e-6596b564b288)
@@ -8027,12 +8128,14 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d393bd99-3d93-54eb-b0ec-aec892d0d0d9)
 )
-(label "HUB_PRT_CTL4"
+(hierarchical_label "HUB_PRT_CTL4"
+  (shape bidirectional)
   (at 38.1 359.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 7dc2c973-c8c4-58c7-8f74-a9691eec68ca)
 )
-(label "HUB_PRT_CTL4"
+(hierarchical_label "HUB_PRT_CTL4"
+  (shape bidirectional)
   (at 53.34 361.95 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 10bef65a-00de-5708-a420-23bee862b9dd)
@@ -8128,7 +8231,8 @@
     )
   )
 )
-(label "HUB_PRT_CTL4"
+(hierarchical_label "HUB_PRT_CTL4"
+  (shape bidirectional)
   (at 111.76 381 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 58d9b5af-0b1c-57c4-bc45-a5144fa2d802)
@@ -8154,7 +8258,8 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 929f5c18-ad06-55f6-adb9-ace6ae732166)
 )
-(label "HUB_PRT_CTL4"
+(hierarchical_label "HUB_PRT_CTL4"
+  (shape bidirectional)
   (at 86.36 375.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid dd0121d9-6ca3-5c69-8bed-5f29cc48025c)
@@ -8419,22 +8524,26 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 98eaa802-a573-5c9f-b978-b8920240932b)
 )
-(label "HUB_DS4_DP"
+(hierarchical_label "HUB_DS4_DP"
+  (shape bidirectional)
   (at 261.62 373.38 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid f94d3481-4089-5df6-8a70-d67cbbc8bd39)
 )
-(label "HUB_DS4_DP"
+(hierarchical_label "HUB_DS4_DP"
+  (shape bidirectional)
   (at 261.62 375.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9630c9eb-7d89-5dcf-8c4d-94441681242c)
 )
-(label "HUB_DS4_DM"
+(hierarchical_label "HUB_DS4_DM"
+  (shape bidirectional)
   (at 261.62 368.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0ece4e97-5b21-5e34-810f-69ecd351bc01)
 )
-(label "HUB_DS4_DM"
+(hierarchical_label "HUB_DS4_DM"
+  (shape bidirectional)
   (at 261.62 370.84 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid cfe5e221-a750-542a-b8dc-99967968bcf8)
@@ -8881,6 +8990,102 @@
 (no_connect (at 271.78 414.02) (uuid bacb165c-dbe8-5fe4-936c-c6cd9d34e0ef))
 (no_connect (at 271.78 398.78) (uuid c685a161-0ea7-50ae-a2bc-52432f0e33a2))
 (symbol
+  (lib_id "Mechanical:MountingHole")
+  (at 500.38 20.32 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom no)
+  (on_board yes)
+  (dnp no)
+  (uuid 731d603f-7b02-5223-948c-b8cf75e4baf6)
+  (property "Reference" "H13" (at 500.38 17.78 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "M2.5 isolated mainboard mounting hole" (at 500.38 22.86 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+  (instances
+    (project "ducktop2"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "H13")
+        (unit 1)
+      )
+    )
+  )
+)
+(symbol
+  (lib_id "Mechanical:MountingHole")
+  (at 500.38 20.32 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom no)
+  (on_board yes)
+  (dnp no)
+  (uuid fcf29ab7-bd3e-5a6e-96c9-ac1592e0777d)
+  (property "Reference" "H15" (at 500.38 17.78 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "M2.5 isolated mainboard mounting hole" (at 500.38 22.86 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+  (instances
+    (project "ducktop2"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "H15")
+        (unit 1)
+      )
+    )
+  )
+)
+(symbol
+  (lib_id "Mechanical:MountingHole")
+  (at 500.38 20.32 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom no)
+  (on_board yes)
+  (dnp no)
+  (uuid 7e9a0145-90e4-5b79-9195-f5664cca632a)
+  (property "Reference" "H17" (at 500.38 17.78 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "M2.5 isolated mainboard mounting hole" (at 500.38 22.86 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+  (instances
+    (project "ducktop2"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "H17")
+        (unit 1)
+      )
+    )
+  )
+)
+(symbol
+  (lib_id "Mechanical:MountingHole")
+  (at 500.38 20.32 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom no)
+  (on_board yes)
+  (dnp no)
+  (uuid 59bb3970-5d5f-532e-805f-67043719612a)
+  (property "Reference" "H27" (at 500.38 17.78 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "M2.5 isolated mainboard mounting hole" (at 500.38 22.86 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw" (at 500.38 20.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+  (instances
+    (project "ducktop2"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "H27")
+        (unit 1)
+      )
+    )
+  )
+)
+(symbol
   (lib_id "power:GND")
   (at 431.8 622.3 0)
   (unit 1)
@@ -8888,12 +9093,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 731d603f-7b02-5223-948c-b8cf75e4baf6)
+  (uuid 837e242e-7e10-58c6-938d-35f3afe7e6dd)
   (property "Reference" "#PWR2001" (at 431.8 619.76 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 431.8 624.84 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 431.8 622.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 431.8 622.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid fcf29ab7-bd3e-5a6e-96c9-ac1592e0777d))
+  (pin "1" (uuid 62081242-864e-5737-b37e-66afcdf22283))
   (instances
     (project "ducktop2"
       (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
@@ -8906,7 +9111,7 @@
 (label "GND"
   (at 431.8 622.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7e9a0145-90e4-5b79-9195-f5664cca632a)
+  (uuid b322e4b2-2e13-55a3-9aed-95378b89871a)
 )
 (sheet_instances
   (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"

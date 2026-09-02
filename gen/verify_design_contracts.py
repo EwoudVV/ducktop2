@@ -428,7 +428,8 @@ def check_battery_and_charger(components):
     expect(net(components, "Q25", "4"), "/Power & Battery/SDRV_GATE", "ship FET gate")
     expect(net(components, "Q25", "5"), "/PACK_POS_FUSED", "ship FET pack-side drain (FPC-3 boundary)")
     expect(prop(components, "Q25", "MPN"), "CSD17575Q3", "ship FET exact MPN")
-    expect(comp(components, "Q25").footprint, "ducktop2:CSD19537Q3_DQG", "ship FET TI DQG footprint")
+    expect(comp(components, "Q25").footprint, "ducktop2:CSD17575Q3_DQG",
+           "ship FET TI DQG footprint (Phase 5: value/footprint agree)")
     expect(net(components, "U2", "25"), "/VSYS", "BQ25798 SYS")
     expect(net(components, "U2", "13"), "/Power & Battery/CHG_CE_HW_N", "BQ25798 fail-off CE")
     expect_unconnected(components, "U2", "6")
@@ -515,35 +516,58 @@ def check_battery_and_charger(components):
         expect(net(components, ref, "1"), "/MCU_3V3", f"{ref} pull-up rail")
         expect(net(components, ref, "2"), signal, f"{ref} status signal")
 
-    # U15 qualifies and prioritizes the already-selected 15 V USB rail over protected AUX.
+    # Phase 5: U15/U15B cascade (priority PD1 > PD2 > AUX) with the
+    # corrected LTC4418 pinout (6=VALID1, 7=VALID2, 8=GND, 9=CAS, 10=INTVCC).
     expect_contains(comp(components, "U15").value, "LTC4418IUF", "industrial dual-input selector")
     expect(comp(components, "U15").footprint,
            "ducktop2:ADI_UF20_QFN20_4x4_P0.5_EP2.45", "U15 exact ADI UF20 footprint")
+    expect_contains(comp(components, "U15B").value, "LTC4418IUF", "stage-2 dual-input selector")
     for pin, want in {
         "1": "/Power & Battery/MAIN_SEL_TMR",
         "2": "/Power & Battery/USB_MAIN_UV", "3": "/Power & Battery/USB_MAIN_OV",
-        "4": "/Power & Battery/AUX_MAIN_UV", "5": "/Power & Battery/AUX_MAIN_OV",
-        "7": "GND", "8": "/Power & Battery/MAIN_SEL_INTVCC",
-        "11": "/Power & Battery/AUX_MAIN_GATE", "12": "/Power & Battery/AUX_MAIN_FET_COMMON",
+        "4": "/Power & Battery/ST2_MAIN_UV", "5": "/Power & Battery/ST2_MAIN_OV",
+        "6": "/MAIN_USB_VALID_N", "7": "/MAIN_AUX_VALID_N", "8": "GND",
+        "10": "/Power & Battery/MAIN_SEL_INTVCC",
+        "11": "/Power & Battery/ST2_MAIN_GATE", "12": "/Power & Battery/ST2_MAIN_FET_COMMON",
         "13": "/Power & Battery/USB_MAIN_GATE", "14": "/Power & Battery/USB_MAIN_FET_COMMON",
-        "15": "/Power & Battery/VBUS_COMBINED", "16": "/Power & Battery/AUX_DC_PROTECTED",
+        "15": "/Power & Battery/VBUS_COMBINED", "16": "/Power & Battery/SEL_STAGE2",
         "17": "/USB_PD_SELECTED", "18": "/Power & Battery/MAIN_SEL_INTVCC",
         "19": "/Power & Battery/MAIN_SEL_INTVCC", "20": "GND", "21": "GND",
     }.items():
         expect(net(components, "U15", pin), want, f"LTC4418 U15 pin {pin}")
-    expect_unconnected(components, "U15", "6")
-    for pin, signal in (("9", "/MAIN_USB_VALID_N"), ("10", "/MAIN_AUX_VALID_N")):
+    expect_unconnected(components, "U15", "9")
+    for pin, signal in (("6", "/MAIN_USB_VALID_N"), ("7", "/MAIN_AUX_VALID_N")):
         expect(net(components, "U15", pin), signal, f"LTC4418 status pin {pin}")
-    for ref, signal in (("R717", "/MAIN_USB_VALID_N"), ("R718", "/MAIN_AUX_VALID_N")):
+    for ref, signal in (("R717", "/MAIN_USB_VALID_N"), ("R718", "/MAIN_AUX_VALID_N"),
+                        ("R747", "/PD2_VALID_N")):
         expect_value_prefix(components, ref, "10k", f"{ref} main-selector status pull-up")
         expect(net(components, ref, "1"), "/MCU_3V3", f"{ref} pull-up rail")
         expect(net(components, ref, "2"), signal, f"{ref} status signal")
 
+    # Stage 2: PD2 (V1, from FPC-2) over AUX (V2) into SEL_STAGE2.
+    for pin, want in {
+        "1": "/Power & Battery/ST2_SEL_TMR",
+        "2": "/Power & Battery/ST2_USB_UV", "3": "/Power & Battery/ST2_USB_OV",
+        "4": "/Power & Battery/ST2_AUX_UV", "5": "/Power & Battery/ST2_AUX_OV",
+        "6": "/PD2_VALID_N", "8": "GND",
+        "10": "/Power & Battery/ST2_SEL_INTVCC",
+        "11": "/Power & Battery/ST2_AUX_GATE", "12": "/Power & Battery/ST2_AUX_FET_COMMON",
+        "13": "/Power & Battery/ST2_USB_GATE", "14": "/Power & Battery/ST2_USB_FET_COMMON",
+        "15": "/Power & Battery/SEL_STAGE2", "16": "/Power & Battery/AUX_DC_PROTECTED",
+        "17": "/PD2_VBUS_GATED", "18": "/Power & Battery/ST2_SEL_INTVCC",
+        "19": "/Power & Battery/ST2_SEL_INTVCC", "20": "GND", "21": "GND",
+    }.items():
+        expect(net(components, "U15B", pin), want, f"LTC4418 U15B pin {pin}")
+
     for ref, gate, common, drain in (
         ("Q21", "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "/USB_PD_SELECTED"),
         ("Q22", "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "/Power & Battery/VBUS_COMBINED"),
-        ("Q23", "AUX_MAIN_GATE", "AUX_MAIN_FET_COMMON", "/Power & Battery/AUX_DC_PROTECTED"),
-        ("Q24", "AUX_MAIN_GATE", "AUX_MAIN_FET_COMMON", "/Power & Battery/VBUS_COMBINED"),
+        ("Q28", "ST2_MAIN_GATE", "ST2_MAIN_FET_COMMON", "/Power & Battery/SEL_STAGE2"),
+        ("Q29", "ST2_MAIN_GATE", "ST2_MAIN_FET_COMMON", "/Power & Battery/VBUS_COMBINED"),
+        ("Q26", "ST2_USB_GATE", "ST2_USB_FET_COMMON", "/PD2_VBUS_GATED"),
+        ("Q27", "ST2_USB_GATE", "ST2_USB_FET_COMMON", "/Power & Battery/SEL_STAGE2"),
+        ("Q23", "ST2_AUX_GATE", "ST2_AUX_FET_COMMON", "/Power & Battery/AUX_DC_PROTECTED"),
+        ("Q24", "ST2_AUX_GATE", "ST2_AUX_FET_COMMON", "/Power & Battery/SEL_STAGE2"),
     ):
         expect_contains(comp(components, ref).value, "SiSS4409DN", f"{ref} selector PMOS")
         expect(comp(components, ref).footprint, "Package_SO:Vishay_PowerPAK_1212-8_Single", f"{ref} footprint")
@@ -556,9 +580,15 @@ def check_battery_and_charger(components):
         ("R730", "1.00M 0.1%", "/USB_PD_SELECTED", "/Power & Battery/USB_MAIN_UV"),
         ("R731", "19.6k 0.1%", "/Power & Battery/USB_MAIN_UV", "/Power & Battery/USB_MAIN_OV"),
         ("R732", "63.4k 0.1%", "/Power & Battery/USB_MAIN_OV", "GND"),
-        ("R733", "383k 0.1%", "/Power & Battery/AUX_DC_PROTECTED", "/Power & Battery/AUX_MAIN_UV"),
-        ("R734", "63.4k 0.1%", "/Power & Battery/AUX_MAIN_UV", "/Power & Battery/AUX_MAIN_OV"),
-        ("R735", "20.0k 0.1%", "/Power & Battery/AUX_MAIN_OV", "GND"),
+        ("R741", "1.00M 0.1%", "/PD2_VBUS_GATED", "/Power & Battery/ST2_USB_UV"),
+        ("R742", "19.6k 0.1%", "/Power & Battery/ST2_USB_UV", "/Power & Battery/ST2_USB_OV"),
+        ("R743", "63.4k 0.1%", "/Power & Battery/ST2_USB_OV", "GND"),
+        ("R733", "383k 0.1%", "/Power & Battery/AUX_DC_PROTECTED", "/Power & Battery/ST2_AUX_UV"),
+        ("R734", "63.4k 0.1%", "/Power & Battery/ST2_AUX_UV", "/Power & Battery/ST2_AUX_OV"),
+        ("R735", "20.0k 0.1%", "/Power & Battery/ST2_AUX_OV", "GND"),
+        ("R744", "374k 0.1%", "/Power & Battery/SEL_STAGE2", "/Power & Battery/ST2_MAIN_UV"),
+        ("R745", "54.9k 0.1%", "/Power & Battery/ST2_MAIN_UV", "/Power & Battery/ST2_MAIN_OV"),
+        ("R746", "20.0k 0.1%", "/Power & Battery/ST2_MAIN_OV", "GND"),
     ):
         expect_value_prefix(components, ref, value, f"{ref} selector threshold value")
         expect(net(components, ref, "1"), net_a, f"{ref} pin 1")
@@ -857,12 +887,8 @@ def check_mu_carrier(components, pin_names):
     expect_contains(prop(components, "A1", "BIOSProfile"),
                     "6edcfe021d84baf2b6ea3e4f4df4e81442a6be3580905f255221644d0eeb0bed",
                     "LattePanda Mu BIOS binary hash")
-    expect(prop(components, "A2", "Manufacturer"), "DFRobot",
-           "LattePanda Mu module manufacturer")
-    expect(prop(components, "A2", "MPN"), "DFR1149",
-           "LattePanda Mu module SKU")
-    expect_contains(prop(components, "A2", "BIOSProfile"), "build 2026-06-03",
-                    "LattePanda Mu BIOS build date")
+    # Phase 5 B9: A2 (the removable Mu module) is no longer a schematic
+    # component -- it is assembly documentation, not a board part.
     for ref in ("H1", "H2"):
         expect(comp(components, ref).footprint,
                "ducktop2:Wurth_9774055243R_M2_H5.5",
@@ -1144,7 +1170,8 @@ def check_mu_carrier(components, pin_names):
     for ref in ("C44", "C45"):
         expect(net(components, ref, "1"), "/SYS_5V", f"{ref} TPS56637 output rail")
         expect(net(components, ref, "2"), "GND", f"{ref} TPS56637 output return")
-    expect_value_prefix(components, "R40", "76.8k 0.1%", "SYS_5V HDMI-headroom FB top value")
+    # Phase 5 (audit C6): 75.0k/10k targets 5.10 V (0.6 V ref x 8.5)
+    expect_value_prefix(components, "R40", "75.0k 0.1%", "SYS_5V FB top value")
     expect_value_prefix(components, "R41", "10k 0.1%", "SYS_5V HDMI-headroom FB bottom value")
     expect_value_prefix(components, "R42", "100k 1%", "TPS56637 enable divider top (host-active gate)")
     expect_value_prefix(components, "R45", "100k 1%", "TPS56637 enable divider bottom")
@@ -1627,7 +1654,9 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
         expect_contains(comp(components, "U14").value, "LTC4418", "two-input PD selector")
         expect(net(components, "U14", "15"), "/USB_PD_SELECTED", "selected PD output")
         expect(net(components, "U14", "17"), local_net(pd_sheet, "PD1_VBUS_GATED"), "PD1 selector input")
-        expect(net(components, "U14", "16"), local_net(pd_sheet, "PD2_VBUS_GATED"), "PD2 selector input")
+        # Phase 5: U14 runs single-input (PD2 selection moved to the
+        # center's U15B); V2 is grounded per the LTC4418 datasheet.
+        expect(net(components, "U14", "16"), "GND", "PD2 selector input (unused V2, grounded)")
     for component in components.values():
         if "CH224" in component.value:
             fail(f"obsolete CH224 power-only controller remains: {component.ref}")
@@ -1679,13 +1708,23 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
                 expect(net(components, uref, pin), "GND", f"{uref} clamp GND")
 
     source_ports = tuple(
-        sp for sp in (("J22", 2, 1780, False, hub_sheet),
-                      ("J23", 3, 1740, False, hub_sheet),
-                      ("J12", 4, 1760, True, pd_sheet))
+        sp for sp in (("J22", 2, 1780, False, hub_sheet, False),
+                      ("J23", 3, 1740, False, hub_sheet, False),
+                      ("J12", 4, 1760, True, pd_sheet, True))
         if sp[0] in components
     )
-    for jref, port, base, usb2_only, port_sheet in source_ports:
-        local = lambda name, sheet=port_sheet: local_net(sheet, name)
+    for jref, port, base, usb2_only, port_sheet, remote_data in source_ports:
+        # remote_data: the hub (DSx + PRT_CTLx) is on the LEFT board and
+        # the nets cross FPC-1/FPC-2, so they merge at root level.
+        remote_nets = {f"HUB_DS{port}_DP", f"HUB_DS{port}_DM",
+                       f"HUB_PRT_CTL{port}"} if remote_data else set()
+
+        def local(name, sheet=port_sheet):
+            # remote hub data/enable nets merge at root level (they cross
+            # FPC-1/FPC-2); everything else stays on the port's sheet
+            if name in remote_nets:
+                return f"/{name}"
+            return local_net(sheet, name)
         expect(comp(components, jref).footprint,
                "Connector_USB:USB_C_Receptacle_Molex_105450-0101", f"{jref} exact connector")
         expect_contains(comp(components, f"U{base + 1}").value, "TPS25810", f"{jref} DFP controller")
@@ -3152,23 +3191,32 @@ def check_fpc_connectors(components, ref, lib, footprint, contract, bms_side=Fal
     """
     import fpc_contract as fpc
 
-    pinmap = {"fpc1": fpc.FPC1_PINMAP, "fpc2": fpc.FPC2_PINMAP,
-              "fpc3": fpc.FPC3_PINMAP}[contract]
+    side_b = {"FPC102", "FPC103", "FPC105"}
+    base = {"fpc1": fpc.FPC1_PINMAP, "fpc2": fpc.FPC2_PINMAP,
+            "fpc3": fpc.FPC3_PINMAP}[contract]
+    pinmap = fpc.reversed_map(base) if ref in side_b else base
     expect(comp(components, ref).footprint, f"{lib}:{footprint}",
            f"{ref} footprint")
     for pin, netname in pinmap.items():
+        # Phase 5: the pack negative never crosses FPC-3; the return
+        # conductors are FG_VSS.  On the BMS the whole ground reference IS
+        # FG_VSS (a power-symbol net, unprefixed); on the center it is the
+        # labeled net /FG_VSS.
         if netname == "GND":
             want = "GND"
-        elif contract == "fpc3" and not bms_side and netname == "PACK_NEG_RAW":
-            want = "GND"
+        elif netname == "FG_VSS" and bms_side:
+            want = "FG_VSS"
         else:
             want = f"/{netname}"
         expect(net(components, ref, str(pin)), want, f"{ref} pin {pin}")
-    expect(net(components, ref, "MP"), "GND", f"{ref} MP hold-down tab")
+    mp_want = "FG_VSS" if bms_side else "GND"
+    expect(net(components, ref, "MP"), mp_want, f"{ref} MP hold-down tab")
     print(f"    FPC {ref}: {len(pinmap)} pin contract OK")
 
 
 def check_bms_pack(components):
+    # Phase 5: the BMS ground reference is FG_VSS (power-symbol net,
+    # unprefixed in the netlist).
     """BMS daughterboard pack protection contracts (board split Phase 2.4).
 
     Runs against the bms project netlist (single flat sheet, no sheet prefix).
@@ -3218,8 +3266,8 @@ def check_bms_pack(components):
         ("R847", "4.53k 1%", "/BMS_DSG_DRV", "/BMS_DSG_GATE"),
         ("R848", "1k 1%", "/BMS_CHG_DRV", "/BMS_CHG_GATE"),
         ("R849", "1M 5%", "/BMS_DSG_GATE", "/BMS_SENSE_N"),
-        ("R850", "3.3M 5%", "/BMS_CHG_GATE", "/FG_VSS"),
-        ("R851", "453k 1%", "/BMS_LD", "/FG_VSS"),
+        ("R850", "3.3M 5%", "/BMS_CHG_GATE", "FG_VSS"),
+        ("R851", "453k 1%", "/BMS_LD", "FG_VSS"),
         ("R852", "10k 5%", "/PACK_POS_RAW", "/BMS_PRES"),
         ("R853", "10k 1%", "/BMS_TS_UNUSED", "/PACK_NEG_RAW"),
         ("R854", "604k 1%", "/BMS_OCDP", "/PACK_NEG_RAW"),
@@ -3247,7 +3295,7 @@ def check_bms_pack(components):
     expect(prop(components, "RS11", "MPN"), "WSLP25128L000FEA", "BQ7791500 exact shunt")
     for ref, source, gate in (
         ("Q703", "/BMS_SENSE_N", "/BMS_DSG_GATE"),
-        ("Q704", "/FG_VSS", "/BMS_CHG_GATE"),
+        ("Q704", "FG_VSS", "/BMS_CHG_GATE"),
     ):
         for pin in ("1", "2", "3"):
             expect(net(components, ref, pin), source, f"{ref} source pin {pin}")
@@ -3259,7 +3307,7 @@ def check_bms_pack(components):
     expect(net(components, "F1", "2"), "/BAT_PROT_VIN", "F1 protected-entry output")
     for pin, want in {
         "1": "/BAT_PROT_VIN", "2": "/BAT_PROT_UV",
-        "3": "/BAT_PROT_OV", "4": "GND", "5": "GND",
+        "3": "/BAT_PROT_OV", "4": "FG_VSS", "5": "FG_VSS",
         "6": "/BAT_PROT_SHDN", "7": "/PACK_FAULT_N",
         "8": "/PACK_POS_FUSED",
         "9": "/BAT_PROT_SENSE", "10": "/BAT_PROT_GATE",
@@ -3277,7 +3325,7 @@ def check_bms_pack(components):
     expect_value_prefix(components, "C725", "10u 25V X7R", "LTC4368 VOUT capacitor")
     expect(net(components, "C725", "1"), "/PACK_POS_FUSED",
            "LTC4368 VOUT capacitor protected rail")
-    expect(net(components, "C725", "2"), "GND", "LTC4368 VOUT capacitor return")
+    expect(net(components, "C725", "2"), "FG_VSS", "LTC4368 VOUT capacitor return")
     expect(prop(components, "C725", "MPN"), "GRM21BZ71E106KE15L",
            "LTC4368 VOUT capacitor exact MPN")
     expect_value_prefix(components, "R700", "3.09M 1%", "LTC4368 pack-window top")
@@ -3286,7 +3334,7 @@ def check_bms_pack(components):
     expect(net(components, "R703", "1"), "/BAT_PROT_GATE", "LTC4368 CGATE resistor input")
     expect(net(components, "R703", "2"), "/BAT_PROT_CGATE", "LTC4368 CGATE resistor output")
     expect(net(components, "C700", "1"), "/BAT_PROT_CGATE", "LTC4368 CGATE capacitor")
-    expect(net(components, "C700", "2"), "GND", "LTC4368 CGATE capacitor return")
+    expect(net(components, "C700", "2"), "FG_VSS", "LTC4368 CGATE capacitor return")
     expect(net(components, "C724", "1"), "/BAT_PROT_GATE", "LTC4368 hot-swap capacitor gate")
     expect(net(components, "C724", "2"), "/BAT_PROT_FET_COMMON", "LTC4368 hot-swap capacitor source")
     expect(net(components, "R707", "1"), "/BAT_PROT_VIN", "pack protector SHDN pull-up source")
@@ -3296,12 +3344,12 @@ def check_bms_pack(components):
     expect(net(components, "R708", "2"), "/PACK_FAULT_N", "pack protector FAULT output")
     expect_value_prefix(components, "R708", "10k", "pack protector FAULT pull-up")
     for pin, want in {
-        "1": "/PACK_RETRY_PULSE", "2": "GND", "3": "/BAT_PROT_SHDN",
+        "1": "/PACK_RETRY_PULSE", "2": "FG_VSS", "3": "/BAT_PROT_SHDN",
     }.items():
         expect(net(components, "Q701", pin), want, f"pack protector retry transistor pin {pin}")
     expect_value_prefix(components, "R709", "100k", "pack retry default-off pull-down")
     expect(net(components, "R709", "1"), "/PACK_RETRY_PULSE", "pack retry pull-down signal")
-    expect(net(components, "R709", "2"), "GND", "pack retry pull-down return")
+    expect(net(components, "R709", "2"), "FG_VSS", "pack retry pull-down return")
 
 
 if __name__ == "__main__":
