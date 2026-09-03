@@ -224,6 +224,30 @@ def build_bms_sheet(sheet_symbol_uuid):
     place_fpc_connector(s, "FPC106", "Conn_01x30_FFC_MP", fpc.FPC3_PINMAP,
                         "FH12-30S-0.5SH (FPC-3)", x=490, y=250, pwr_base=3600,
                         label_kind="local", ground_net="FG_VSS", ground_fn=s.fg_vss)
+
+    # Phase 5 bring-up: test points.  Every rail, protector node and
+    # status line gets a physical 1.5x1.5 mm probe pad on the board so
+    # bring-up (docs/BRINGUP_TEST_PLAN.md) never needs to poke a live
+    # pin.  Value = the net name (the probe target).  One extra FG_VSS
+    # point serves as the scope ground clip.
+    bms_test_points = [
+        ("TPB1", "PACK_POS_RAW"), ("TPB2", "BAT_PROT_VIN"),
+        ("TPB3", "PACK_POS_FUSED"), ("TPB4", "BAT_PROT_FET_COMMON"),
+        ("TPB5", "BAT_PROT_GATE"), ("TPB6", "BAT_PROT_CGATE"),
+        ("TPB7", "PACK_FAULT_N"), ("TPB8", "PACK_RETRY_PULSE"),
+        ("TPB9", "MCU_3V3"), ("TPB10", "BMS_AVDD"),
+        ("TPB11", "BMS_VDD"), ("TPB12", "BMS_SRP"),
+        ("TPB13", "BMS_SRN"), ("TPB14", "BMS_PRES"),
+        ("TPB15", "BMS_LD"), ("TPB16", "FG_VSS"),
+    ]
+    s.text(600, 60, "== Test points (bring-up probing; see BRINGUP_TEST_PLAN.md) ==")
+    for k, (ref, net) in enumerate(bms_test_points):
+        col, row = k % 2, k // 2
+        s.place(ref, "TestPoint", net, 600 + col * 40, 75 + row * 15,
+                footprint=FOOTPRINTS["TestPoint_Pad_1.5"],
+                pin_nets={"1": (net, "local")},
+                extra_props={"Manufacturer": "-",
+                             "Note": "test point, no MPN"})
     return s
 
 

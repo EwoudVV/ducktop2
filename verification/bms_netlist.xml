@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/Users/ellievanvooren/Documents/kicad/ducktop2/bms/bms.kicad_sch</source>
-    <date>2026-09-02T13:44:05</date>
+    <date>2026-09-03T14:26:08</date>
     <tool>Eeschema 10.0.4</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -1288,6 +1288,438 @@
         </unit>
       </units>
     </comp>
+    <comp ref="TPB1">
+      <value>PACK_POS_RAW</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a69c399d-6068-59ce-9295-34612e0bcb36</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB2">
+      <value>BAT_PROT_VIN</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>777fe403-09a4-5fbf-9bd7-39ff97d8d0af</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB3">
+      <value>PACK_POS_FUSED</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2477ef98-63dd-52fd-8ca7-d9b71c072254</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB4">
+      <value>BAT_PROT_FET_COMMON</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8dc08bcd-0053-5d06-9e1c-adb4079d13d4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB5">
+      <value>BAT_PROT_GATE</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>db73a4d7-9248-5094-82ec-c9a91bb24369</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB6">
+      <value>BAT_PROT_CGATE</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a3856d3c-6d02-5d5f-b776-1c4f531ecc73</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB7">
+      <value>PACK_FAULT_N</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fc7d97a4-3cc0-5e8a-a5e5-7c53252a51ca</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB8">
+      <value>PACK_RETRY_PULSE</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>11f2cbcf-9e9c-5b02-893d-f15a5abb53ff</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB9">
+      <value>MCU_3V3</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1cc69068-53b0-52ee-b9fd-5101efeeb1b7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB10">
+      <value>BMS_AVDD</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f14908a6-01f6-59c4-b3be-e35ada75e252</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB11">
+      <value>BMS_VDD</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>46820344-8bba-5234-bee0-21e143b18494</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB12">
+      <value>BMS_SRP</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>85a5ea85-3d88-53f9-a79e-ce32546d2867</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB13">
+      <value>BMS_SRN</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d3e08b65-d015-51fe-943c-d82ea3b73f52</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB14">
+      <value>BMS_PRES</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>849c8484-a3e3-5a69-aa0d-40b622b09978</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB15">
+      <value>BMS_LD</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1095ec85-7e82-5e9d-a704-a0e79b84da62</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TPB16">
+      <value>FG_VSS</value>
+      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">-</field>
+        <field name="Note">test point, no MPN</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <property name="Manufacturer" value="-"/>
+      <property name="Note" value="test point, no MPN"/>
+      <property name="Sheetname" value="bms"/>
+      <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="test point tp"/>
+      <property name="ki_fp_filters" value="Pin* Test*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>828f9182-c2a9-50ef-b06a-882e361144b8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
     <comp ref="U11">
       <value>LTC4368IMS-1 bidirectional pack protector</value>
       <footprint>Package_SO:MSOP-10_3x3mm_P0.5mm</footprint>
@@ -1456,6 +1888,23 @@
         <pin num="MP" name="MP" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="Connector" part="TestPoint">
+      <description>test point</description>
+      <footprints>
+        <fp>Pin*</fp>
+        <fp>Test*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TestPoint</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">test point</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="Connector_Generic" part="Conn_02x03_Odd_Even">
       <description>Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <footprints>
@@ -1591,6 +2040,9 @@
     <library logical="Conn_01x30_FFC_MP">
       <uri>${KIPRJMOD}/../gen/Conn_01x30_FFC_MP.kicad_sym</uri>
     </library>
+    <library logical="Connector">
+      <uri>${KICAD10_SYMBOL_DIR}/Connector.kicad_sym</uri>
+    </library>
     <library logical="Connector_Generic">
       <uri>${KICAD10_SYMBOL_DIR}/Connector_Generic.kicad_sym</uri>
     </library>
@@ -1611,6 +2063,7 @@
     <net code="1" name="/BAT_PROT_CGATE" class="Default">
       <node ref="C700" pin="1" pintype="passive"/>
       <node ref="R703" pin="2" pintype="passive"/>
+      <node ref="TPB6" pin="1" pinfunction="1_1" pintype="passive"/>
     </net>
     <net code="2" name="/BAT_PROT_FET_COMMON" class="Default">
       <node ref="C724" pin="2" pintype="passive"/>
@@ -1620,12 +2073,14 @@
       <node ref="Q12" pin="1" pinfunction="S_1" pintype="passive"/>
       <node ref="Q12" pin="2" pinfunction="S_2" pintype="passive"/>
       <node ref="Q12" pin="3" pinfunction="S_3" pintype="passive"/>
+      <node ref="TPB4" pin="1" pinfunction="1_1" pintype="passive"/>
     </net>
     <net code="3" name="/BAT_PROT_GATE" class="Default">
       <node ref="C724" pin="1" pintype="passive"/>
       <node ref="Q11" pin="4" pinfunction="G_4" pintype="input"/>
       <node ref="Q12" pin="4" pinfunction="G_4" pintype="input"/>
       <node ref="R703" pin="1" pintype="passive"/>
+      <node ref="TPB5" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U11" pin="10" pinfunction="GATE_10" pintype="output"/>
     </net>
     <net code="4" name="/BAT_PROT_OV" class="Default">
@@ -1653,10 +2108,12 @@
       <node ref="Q11" pin="5" pinfunction="D(5-8)_5" pintype="passive"/>
       <node ref="R700" pin="1" pintype="passive"/>
       <node ref="R707" pin="1" pintype="passive"/>
+      <node ref="TPB2" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U11" pin="1" pinfunction="VIN_1" pintype="power_in"/>
     </net>
     <net code="9" name="/BMS_AVDD" class="Default">
       <node ref="C841" pin="1" pintype="passive"/>
+      <node ref="TPB10" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U719" pin="2" pinfunction="AVDD_2" pintype="power_out"/>
     </net>
     <net code="10" name="/BMS_CHG_DRV" class="Default">
@@ -1683,6 +2140,7 @@
     </net>
     <net code="15" name="/BMS_LD" class="Default">
       <node ref="R851" pin="1" pintype="passive"/>
+      <node ref="TPB15" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U719" pin="14" pinfunction="LD_14" pintype="input"/>
     </net>
     <net code="16" name="/BMS_OCDP" class="Default">
@@ -1691,6 +2149,7 @@
     </net>
     <net code="17" name="/BMS_PRES" class="Default">
       <node ref="R852" pin="2" pintype="passive"/>
+      <node ref="TPB14" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U719" pin="22" pinfunction="PRES_22" pintype="input"/>
     </net>
     <net code="18" name="/BMS_SENSE_N" class="Default">
@@ -1705,12 +2164,14 @@
       <node ref="C846" pin="2" pintype="passive"/>
       <node ref="C847" pin="1" pintype="passive"/>
       <node ref="R846" pin="2" pintype="passive"/>
+      <node ref="TPB13" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U719" pin="11" pinfunction="SRN_11" pintype="input"/>
     </net>
     <net code="20" name="/BMS_SRP" class="Default">
       <node ref="C845" pin="1" pintype="passive"/>
       <node ref="C846" pin="1" pintype="passive"/>
       <node ref="R845" pin="2" pintype="passive"/>
+      <node ref="TPB12" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U719" pin="10" pinfunction="SRP_10" pintype="input"/>
     </net>
     <net code="21" name="/BMS_TS_UNUSED" class="Default">
@@ -1745,6 +2206,7 @@
     <net code="26" name="/BMS_VDD" class="Default">
       <node ref="C840" pin="1" pintype="passive"/>
       <node ref="R840" pin="2" pintype="passive"/>
+      <node ref="TPB11" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U719" pin="1" pinfunction="VDD_1" pintype="power_in"/>
     </net>
     <net code="27" name="/CELL1_TAP" class="Default">
@@ -1758,10 +2220,12 @@
     <net code="29" name="/MCU_3V3" class="POWER_MID">
       <node ref="FPC106" pin="15" pinfunction="Pin_15_15" pintype="passive"/>
       <node ref="R708" pin="1" pintype="passive"/>
+      <node ref="TPB9" pin="1" pinfunction="1_1" pintype="passive"/>
     </net>
     <net code="30" name="/PACK_FAULT_N" class="Default">
       <node ref="FPC106" pin="13" pinfunction="Pin_13_13" pintype="passive"/>
       <node ref="R708" pin="2" pintype="passive"/>
+      <node ref="TPB7" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U11" pin="7" pinfunction="FAULT_7" pintype="open_collector"/>
     </net>
     <net code="31" name="/PACK_NEG_RAW" class="POWER_HI">
@@ -1798,6 +2262,7 @@
       <node ref="FPC106" pin="8" pinfunction="Pin_8_8" pintype="passive"/>
       <node ref="FPC106" pin="9" pinfunction="Pin_9_9" pintype="passive"/>
       <node ref="RS10" pin="2" pintype="passive"/>
+      <node ref="TPB3" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U11" pin="8" pinfunction="VOUT_8" pintype="input"/>
     </net>
     <net code="33" name="/PACK_POS_RAW" class="Default">
@@ -1807,11 +2272,13 @@
       <node ref="R840" pin="1" pintype="passive"/>
       <node ref="R844" pin="1" pintype="passive"/>
       <node ref="R852" pin="1" pintype="passive"/>
+      <node ref="TPB1" pin="1" pinfunction="1_1" pintype="passive"/>
     </net>
     <net code="34" name="/PACK_RETRY_PULSE" class="Default">
       <node ref="FPC106" pin="14" pinfunction="Pin_14_14" pintype="passive"/>
       <node ref="Q701" pin="1" pinfunction="G_1" pintype="input"/>
       <node ref="R709" pin="1" pintype="passive"/>
+      <node ref="TPB8" pin="1" pinfunction="1_1" pintype="passive"/>
     </net>
     <net code="35" name="FG_VSS" class="Default">
       <node ref="C700" pin="2" pintype="passive"/>
@@ -1840,6 +2307,7 @@
       <node ref="R709" pin="2" pintype="passive"/>
       <node ref="R850" pin="2" pintype="passive"/>
       <node ref="R851" pin="2" pintype="passive"/>
+      <node ref="TPB16" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U11" pin="4" pinfunction="RETRY_4" pintype="input"/>
       <node ref="U11" pin="5" pinfunction="GND_5" pintype="power_in"/>
     </net>

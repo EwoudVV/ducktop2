@@ -1496,8 +1496,15 @@ def inherit_netclasses():
         t = open(xml).read()
         return set(_re.findall(r'<net code="\d+" name="([^"]*)"', t))
 
+    # the bms pack-current path rides POWER_HI end to end (raw, fused,
+    # both FET commons, and the FG_VSS return -- bare name on this board)
     extra = {"bms": [{"netclass": "POWER_HI", "pattern": "/PACK_POS_FUSED"},
-                     {"netclass": "POWER_HI", "pattern": "/PACK_NEG_RAW"}]}
+                     {"netclass": "POWER_HI", "pattern": "/PACK_NEG_RAW"},
+                     {"netclass": "POWER_HI", "pattern": "/PACK_POS_RAW"},
+                     {"netclass": "POWER_HI", "pattern": "/BAT_PROT_VIN"},
+                     {"netclass": "POWER_HI", "pattern": "/BAT_PROT_FET_COMMON"},
+                     {"netclass": "POWER_HI", "pattern": "/BMS_FET_COMMON"},
+                     {"netclass": "POWER_HI", "pattern": "FG_VSS"}]}
     for board, xml in (("left_io", "verification/left_io_netlist.xml"),
                        ("right_io", "verification/right_io_netlist.xml"),
                        ("bms", "verification/bms_netlist.xml")):
