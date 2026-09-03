@@ -112,7 +112,8 @@ FOOTPRINTS = {
     # Raspberry Pi HAT connector and cannot accept a 2.54 mm HAT plug.
     "Conn_02x20_Maker": "Connector_JST:JST_PUD_B40B-PUDSS_2x20_P2.00mm_Vertical",
     "TagConnect_SWD": "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical",
-    "TestPoint_Pad": "TestPoint:TestPoint_Pad_D1.0mm",
+    "TestPoint_Pad": "TestPoint:TestPoint_Pad_1.0x1.0mm",
+    "TestPoint_Pad_1.5": "TestPoint:TestPoint_Pad_1.5x1.5mm",
     "RP2350A": "Package_DFN_QFN:QFN-60-1EP_7x7mm_P0.4mm_EP3.4x3.4mm_ThermalVias",
     "W25Q32RVXHJQ": "Package_SON:Winbond_USON-8-1EP_3x2mm_P0.5mm_EP0.2x1.6mm",
     "RT6150BGQW": "Package_SON:WSON-10-1EP_2.5x2.5mm_P0.5mm_EP1.2x2mm_ThermalVias",

@@ -15,6 +15,8 @@ The schematics and boards are REGENERATED. Never hand-edit a .kicad_sch.
 9. `/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3 gen/generate_split_boards.py`
    (additive env: KICAD_PYTHON; exits non-zero on any hard failure)
 10. `python3 gen/fix_board_hygiene.py`               # overlap sweep + final zone refill
+10.5 `/Applications/KiCad/KiCad.app/.../python3 gen/add_test_points.py bms`
+    (and per board as they gain test points; idempotent)
 11. ERC + DRC + gates:
     `kicad-cli sch erc ...` x4, `kicad-cli pcb drc ...` x4,
     `python3 gen/check_release_candidate.py --stage schematic|fabrication`
