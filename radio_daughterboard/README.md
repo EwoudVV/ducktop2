@@ -1,40 +1,44 @@
-# Ducktop2 Radio Daughterboard
+# radio daughterboard
 
-This is the removable radio, GNSS, and radio-audio section of Ducktop2. Keeping
-it separate means the main laptop can still boot, charge, play system audio,
-use its microphone, and run normally if the radio board is not installed or
-needs another revision.
+the radio/GNSS/audio board is removable. i want the rest of the laptop to
+work while it is absent or being revised, including normal system audio,
+the microphone, charging, and boot.
 
-![Radio daughterboard top view](radio_daughterboard_top.png)
+it contains DRA818V and DRA818U radio modules, external filters and RF
+switches, a MAX-M10S GNSS receiver, and a separate PCM2900C USB audio codec.
+power, USB, UART/control, PTT, presence, and fault signals go through the
+removable interface. the radio is intended to start off and stay separate
+from core laptop power decisions.
 
-The board contains:
+## layout state
 
-- DRA818V and DRA818U FM radio modules;
-- external low-pass filtering and selectable onboard/external antenna paths;
-- a u-blox MAX-M10S GNSS receiver;
-- a separate PCM2900C USB codec for radio audio; and
-- default-off power, USB, UART, I2C, PTT, and status interfaces to the mainboard.
+the 4 september board read found 126 footprints on a four-layer placement
+board, with no tracks or vias. the nominal outline is about 120 x 70 mm.
 
-The fixed laptop audio codec and microphone remain on the mainboard. The radio
-codec is on the second port of the internal USB hub and has separately switched
-VBUS and data, so removing this board does not remove system audio.
 
-## Generate And Verify
+the stored renders show a placement-stage design. they do not prove the
+current chassis fit. the center-side FFC connector J2300 is now at (188,4),
+rotation 0, so the installed cable route and board supports need a new check.
+[mechanical plan](../docs/mechanical.md)
 
-The KiCad hierarchy and placement board are generated from `gen/`:
+## source and checks
 
-```sh
-python3 gen/generate_radio_daughterboard_project.py
-python3 gen/generate_radio_daughterboard_pcb.py
-python3 gen/verify_radio_daughterboard.py
-```
+the schematic hierarchy and placement generator live in `gen/`:
 
-Current verification result:
+- `generate_radio_daughterboard_project.py`
+- `generate_radio_daughterboard_pcb.py`
+- `verify_radio_daughterboard.py`
 
-- ERC: 0 errors, 0 warnings
-- board contracts: pass
-- placed footprints: 126
-- unrouted connections: 385
-- classified placement warnings: 96
+generation can replace source/placement files. use a copied candidate for
+a deliberate change, following [the rebuild guidance](../docs/build-and-verify.md#deliberate-rebuilds).
+direct ERC and DRC can inspect the existing files without regeneration.
 
-The PNG files are placement-stage renders of the current board.
+## remaining work
+
+finish placement/routing, test access, the cable installation, and mechanical
+supports. then verify rails, default-off behavior, removal/fault handling,
+GNSS, control and audio paths. RF filters, antennas, transmit behavior,
+emissions, and coexistence need their own measured test setup.
+
+the radio can be deferred during initial laptop bring-up. its removal must
+not silently break a shared bus, reset, power, or audio dependency.

@@ -1,105 +1,116 @@
-# Bring-up test plan — 2026-09-02
+# bring-up plan
 
-Goal: prove every PCB is electrically correct BEFORE any board is
-connected to another or to the battery. Each stage has a pass criterion;
-do not advance until it passes. Equipment: DMM, oscilloscope, current
-limited bench supply, ESD strap.
+updated 4 september 2026. this is the preparation and test order. the exact
+power fixtures, limits, connections, and acceptance values still need a
+review against the corrected boards before this becomes a bench procedure.
 
-## Stage 0 — bare boards (before assembly)
+the first prerequisites are the BMS fuse-net/layer fixes, completed routing,
+and trustworthy per-board verification. see [current status](design-status.md).
 
-For each of the four boards:
+## fixture requirements
 
-1. Visual: mask defects, silks legibility, drill burrs, board outline vs
-   the chassis cutouts (hinge notches on left/right).
-2. **Netlist continuity test** against the IPC-D-356 netlists in
-   `verification/`:
-   - `left_io_ipc356.ipc`, `right_io_ipc356.ipc`, `bms_ipc356.ipc`,
-     `ducktop2-center_ipc356.ipc`
-   - The file lists every pad with its net and XY. Two probes + DMM
-     continuity:
-     a. same-net pads: expect < 1 ohm between every pad pair on a net
-        (spot-check: at least first/last pad of each net)
-     b. adjacent different-net pads: expect open
-   - This catches etch opens, via failures (barrel continuity), and
-     mask/etch shorts before a single component is soldered.
-3. Mark the board stage-0-pass, date it.
+- The BMS fixture must provide defined simulated voltages at all three cell
+  inputs and taps. provide a separate MCU_3V3/control interface where needed.
+- Keep raw pack negative, BMS protected return, and system ground distinct.
+  measurement equipment must not bridge the protector or gauge shunt.
+- Match input fixtures to the actual qualification windows and source paths.
+  the PD selector's nominal window is 13.1-17.1 V; AUX enters at left J190.
+- Define fault injection using controlled sources and loads. specify levels,
+  timing, recovery, and probe references before applying power.
 
-## Stage 1 — assembled, unpowered
+## records for every stage
 
-1. Solder inspection under magnification: every IC orientation (U15/U15B
-   LTC4418 pinouts, Q25 ship FET), every FPC connector seating.
-2. **Rail resistance map, board unpowered** — DMM diode mode, both
-   polarities, record values. The boards carry dedicated test points so
-   nothing needs to be probed at a live pin:
-   - BMS: TPB1 PACK_POS_RAW, TPB2 BAT_PROT_VIN, TPB3 PACK_POS_FUSED,
-     TPB4 BAT_PROT_FET_COMMON, TPB5 BAT_PROT_GATE, TPB6 BAT_PROT_CGATE,
-     TPB7 PACK_FAULT_N, TPB8 PACK_RETRY_PULSE, TPB9 MCU_3V3,
-     TPB10 BMS_AVDD, TPB11 BMS_VDD, TPB12 BMS_SRP, TPB13 BMS_SRN,
-     TPB14 BMS_PRES, TPB15 BMS_LD, TPB16 FG_VSS (scope ground)
-   - BMS: PACK_POS_RAW->FG_VSS, PACK_POS_FUSED->FG_VSS, BMS_AVDD->FG_VSS,
-     MCU_3V3->FG_VSS, each cell tap -> FG_VSS
-   - Center: VBUS_COMBINED->GND, VSYS->GND, USB_PORT_5V->GND, SYS_3V3->GND,
-     MCU_3V3->GND, SEL_STAGE2->GND, each Mu socket rail -> GND
-   - Left/right: VBUS raw -> GND, USB_PORT_5V -> GND, 3V3 rails -> GND
-   - A dead short (near 0 ohm both ways) = find it before power. Compare
-     the diode readings between boards: identical designs should read
-     alike; an outlier localizes a bridge.
-3. **FPC cables**: continuity pin-to-pin along each cable (conductor N to
-   conductor N), then cable-in-place check: with the cable seated in both
-   connectors, verify board net N on side A reaches the contract's
-   expected net on side B (the reversed maps in
-   `verification/FPC_CABLE_SPEC_2026-09-02.md`).
-4. Orientation sanity: the 3 cables are straight-through Type-A — if a
-   cable refuses to seat flat or needs a twist, STOP and re-check the
-   connector rotations.
+record board revision and serial, assembly population, firmware version,
+fixture diagram, instruments, source/load limits, probe references, expected
+values, measurements, and a pass/fail result. retain evidence in the project.
+do not advance through a failed or unexplained result.
 
-## Stage 2 — first power, one board at a time, current limited
+## stage 0: bare boards and cables
 
-Rules: bench supply current limit at ~10x expected idle (start 50 mA),
-external fuse in the lead, scope across the supply terminals for inrush.
+inspect outlines, drills, mask, pad registration, and connector footprints.
+obtain the fabricator's electrical test result against the released netlist.
+regenerate IPC-D-356 from the final board files; the existing pre-routing
+exports are historical and can have obsolete pad positions.
 
-1. **BMS first** (it wakes without the pack):
-   - Bench supply on the cell-tap connector at 12.0 V (3S nominal), limit
-     50 mA, fused.
-   - Scope each rail: BMS_AVDD, MCU_3V3 — verify DC level and ripple.
-   - Verify the protector FETs are OFF (gate nodes low) — the BQ77915
-     must not enable the pack until it sees valid cells.
-   - 5 min soak, finger/IR thermals. Expect: barely warm.
-2. **Center** (no Mu inserted yet):
-   - Power via the AUX jack or PD1 VBUS path at 9-12 V, limit 200 mA.
-   - Scope every rail BEFORE inserting the Mu: VBUS_COMBINED, VSYS,
-     USB_PORT_5V, SYS_3V3, MCU_3V3, and the Mu socket pins (3V3/5V/VBUS).
-   - Verify the selector cascade: with one source present, USB_PD_SELECTED
-     appears; remove it, feed AUX, verify the swap on the scope.
-   - Then, and only then, insert the Mu. Re-check rails under Mu idle.
-3. **Left/right**: 5 V bench on the 5 V rail, limit 100 mA; verify hub
-   power-up and port VBUS switches off by default.
+use unpowered continuity/isolation checks to investigate suspect nets and
+interfaces. a few DMM spot checks are not equivalent to a full flying-probe
+test. verify both the cable's conductor map and the expected board nets
+with it seated in the intended orientation.
 
-## Stage 3 — staged integration
+## stage 1: assembled, unpowered
 
-1. BMS + real cells (external 5 A fuse in series), no load: pack voltage
-   at the protector output, cell taps within 50 mV of each other, pack
-   positive fused.
-2. Trigger test: with the pack connected through the bench-supply
-   series-limit, pull a fake over-current (briefly) and scope the
-   protector gate — it must open. Reset works.
-3. Connect FPC-1 (left<->center) with both boards powered OFF; power the
-   center only; verify the left board's rails come up through the cable;
-   then power the left.
-4. Same for FPC-2, then FPC-3 (BMS last — it is the power source).
+inspect IC orientation, FET footprints/pin assignments, fuse clips, shunts,
+connector seating, solder joints, and DNP population. measure resistance and
+diode behavior in both polarities between the specified rails/references.
+record the readings and investigate unexplained low resistance.
 
-## Stage 4 — scope checklist (ongoing)
+the BMS test-point table is:
 
-- Rail ripple at every regulator: < 1% of rail at idle, < 3% under load.
-- Charger: scope the charge current shunt node during a charge cycle.
-- USB: after enumeration, scope DP/DM lines for activity; full eye
-  verification is out of scope without a proper capture card, but
-  gross signal integrity (ringing, flat-lining) is visible.
-- Any rail that sags when a downstream board connects = a wiring/fuse
-  problem, not a design one — re-check Stage 1 resistance map.
+| Point | Net | Point | Net |
+| --- | --- | --- | --- |
+| TPB1 | PACK_POS_RAW | TPB9 | MCU_3V3 |
+| TPB2 | BAT_PROT_VIN | TPB10 | BMS_AVDD |
+| TPB3 | PACK_POS_FUSED | TPB11 | BMS_VDD |
+| TPB4 | BAT_PROT_FET_COMMON | TPB12 | BMS_SRP |
+| TPB5 | BAT_PROT_GATE | TPB13 | BMS_SRN |
+| TPB6 | BAT_PROT_CGATE | TPB14 | BMS_PRES |
+| TPB7 | PACK_FAULT_N | TPB15 | BMS_LD |
+| TPB8 | PACK_RETRY_PULSE | TPB16 | FG_VSS |
 
-## Pass/fail gate
+choose the correct reference for each measurement. TPB16 is the protected
+return, not a universal ground for every BMS node. define equivalent test
+maps for the center and I/O boards before assembling them.
 
-A board advances to the next stage only when the current stage passes.
-Never connect two boards, or the pack, to a board that has not passed
-its isolated bring-up.
+## stage 2: isolated low-energy power tests
+
+prepare board-specific supply fixtures and reviewed current limits before
+powering anything. keep the Mu, real cells, and optional loads disconnected
+until the relevant tests permit them.
+
+| Board | What the fixture must provide | What to establish |
+| --- | --- | --- |
+| BMS | Simulated series cells and taps; a separately defined MCU_3V3/control interface if needed | Internal supplies, primary/secondary FET behavior, fault/retry, balancing, thresholds, and recovery |
+| Center | A defined qualified input or fixture injection point, with the missing sideboard paths accounted for | AON/reset behavior, converters, charger communication, sequencing, and default-off loads |
+| Left | Its required supply rails and control inputs | Hub rails/reset, input protection, port switches, PD1, AUX, and interface behavior |
+| Right | Its required rails and control inputs | PD2, port switches, Ethernet/HDMI support rails, and interfaces |
+| Keyboard | EC or a dedicated matrix fixture | Every switch/diode, scan direction, debounce, and key mapping |
+| Radio | Controlled power and interface fixture | Presence/fault behavior, local rails, GNSS/control/audio; RF tests are a separate setup |
+
+write separate fault-injection tests for cell OV/UV, current faults, open
+tap, invalid source, reset, and failed/stale telemetry. use the IC datasheets
+and firmware HIL rows to set levels and timing. do not improvise a short
+across a real pack to test a protector.
+
+## stage 3: firmware and gradual integration
+
+establish programming, readback, recovery, reset defaults, and watchdog
+behavior. confirm actual applied limits before enabling charging or Mu power.
+host test success does not prove those target transactions.
+
+connect boards only with power removed. add one reviewed interface at a
+time, checking rails, current, faults, and communication. follow the actual
+power dependencies; do not power both ends independently unless the test
+fixture specifically accounts for it.
+
+use a controlled pack substitute during early integration. the real cells
+come after protection, charging, balancing, and reference-ground behavior
+have passed the relevant tests.
+
+## stage 4: complete laptop tests
+
+- All charging inputs and source transfers, at startup and under load.
+- Battery current, gauge calibration, balancing, trip/recovery, and energy use.
+- Mu boot, NVMe, Wi-Fi/Bluetooth, USB, HDMI, and Ethernet.
+- Internal display on the final harness, brightness, lid behavior, and hinge cycling.
+- Keyboard, trackpad, OLEDs, speakers/headphones, microphone, and maker GPIO.
+- Cooling, component/skin/cell temperatures, and sustained load.
+- Optional radio behavior, RF filters/antennas, emissions, and coexistence.
+- Power-off leakage, reset/recovery, cable strain relief, and service access.
+
+set ripple, overshoot, thermal, signal, and timing limits from the relevant
+component and system requirements. a generic percentage or visible USB
+activity on a scope does not validate every rail or a high-speed channel.
+
+the result records feed [firmware HIL](../firmware/release/README.md) and
+`verification/hardware_validation_release.json`. both stay incomplete until
+the measurements exist.

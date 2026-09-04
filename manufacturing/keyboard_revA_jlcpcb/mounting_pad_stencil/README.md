@@ -1,9 +1,13 @@
 # Ducktop2 Rev A keyboard paste stencils
 
+> keyboard rev A tooling notes. keep these with the matching board/package
+> and validate the actual printed stencil before use.
+> [keyboard package](../README_JLCPCB.md)
+
 Two stencil options are available:
 
-1. **Microstencil** — reusable single-switch stencil for one footprint at a time.
-2. **Full-board stencil** — one-piece stencil covering all 65 switches with
+1. **Microstencil** - reusable single-switch stencil for one footprint at a time.
+2. **Full-board stencil** - one-piece stencil covering all 65 switches with
    built-in diode clearance cutouts.
 
 ---
@@ -57,16 +61,16 @@ the membrane.
 ### Print size
 
 Board dimensions: 273.5 x 80 mm. The P1S bed is 256 x 256 mm. The stencil fits
-**diagonally** on the P1S — load the STL and rotate ~16 degrees. The 256 mm
+**diagonally** on the P1S - load the STL and rotate ~16 degrees. The 256 mm
 square bed diagonal of 362 mm easily accommodates the 273.5 mm long board.
 
 ### Output
 
-- `ducktop2_fullboard_stencil_revA.stl` — geometry STL, pre-mirrored for printing
-- `ducktop2_fullboard_stencil_revA.3mf` — 3MF with geometry only
-- `fullboard_stencil_manifest.json` — validation manifest with SHA256s
-- `bambu_p1s_0p4_fullboard_process.json` — Bambu Studio process preset
-- `generate_fullboard_stencil.py` — generator script
+- `ducktop2_fullboard_stencil_revA.stl` - geometry STL, pre-mirrored for printing
+- `ducktop2_fullboard_stencil_revA.3mf` - 3MF with geometry only
+- `fullboard_stencil_manifest.json` - validation manifest with SHA256s
+- `bambu_p1s_0p4_fullboard_process.json` - Bambu Studio process preset
+- `generate_fullboard_stencil.py` - generator script
 
 ### Registration
 
@@ -128,7 +132,7 @@ flat. For the full-board stencil, the alignment nibs should enter the locator
 holes at the three registration positions. The remaining locator holes are
 covered by the membrane but do not need pegs.
 
-Do not scale the STL to fix a tight fit — that would move the apertures away
+Do not scale the STL to fix a tight fit - that would move the apertures away
 from the copper pads. Lightly polish only the affected peg/nib with fine
 abrasive or a sharp blade.
 

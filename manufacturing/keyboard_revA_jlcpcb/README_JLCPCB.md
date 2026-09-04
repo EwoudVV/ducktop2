@@ -1,5 +1,10 @@
 # Ducktop2 keyboard rev A: JLCPCB production package
 
+> existing keyboard rev A package. the choices below belong to that package;
+> supplier stock and process availability need checking for any new order.
+> the 4 september documentation update did not regenerate its Gerbers, BOM, CPL, or reference hashes.
+> [project documentation](../../README.md)
+
 ## Upload these three files
 
 1. `ducktop2_keyboard_revA_GERBERS.zip` in the PCB Gerber upload field.

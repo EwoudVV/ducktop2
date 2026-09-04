@@ -1,146 +1,101 @@
-# Ducktop2 direct-eDP display release contract
+# direct-eDP display
 
-## Architecture decision
+the selected panel is the AUO B160QAN03.K HW0A. the replacement panel has
+been tested at 2560x1600 and 120 Hz using the Intehill controller. the
+finished laptop is intended to connect it directly to the Mu's onboard eDP
+connector, removing the separate monitor controller and external cable loop.
 
-The final laptop is intended to use the LattePanda Mu module's onboard eDP
-connector directly. The Intehill controller is a proven bench fixture and
-fallback, not a populated motherboard subsystem.
+updated 4 september 2026. the final harness remains pending in
+[`direct_edp_harness_release.json`](../manufacturing/direct_edp_harness_release.json).
+the known panel test does not validate a new Mu-to-panel cable.
 
-The installed replacement panel has been physically verified on the Intehill
-controller at 2560x1600 and 120 Hz. Its label identifies:
+## connector identification
 
-- AUO `B160QAN03.K`
-- hardware `HW:0A`, firmware `FW:1`
-- EDID identity `AUO30A5`
-- Dell part `0P3FPJ`
-
-That successful Intehill test proves the panel works. It does not prove that a
-generic 40-pin eDP cable is electrically compatible with the Mu connector.
-
-## Known connector mechanics
-
-| Endpoint | Installed receptacle | Required cable-side assembly |
+| End | Recorded identification | Status |
 | --- | --- | --- |
-| LattePanda Mu | I-PEX CABLINE-VS `20455-040E`, 40 pin, 0.5 mm pitch | `20453-240T-03`: housing `20454-240T`, shell `2574-0402`, insulated pull bar `2576-140-00` |
-| AUO B160QAN03.K | Likely I-PEX CABLINE-CA II `20682-040E-02`, 40 pin, 0.4 mm pitch; this is not yet confirmed by an AUO approval specification | Conditional on that receptacle ID: `20679-040T-01`, housing `20680-040T-01`, shell `3204-0401`, lock bar `20681-040T-01` |
+| Mu | I-PEX CABLINE-VS 40-pin, 0.5 mm pitch; module documentation names the 20455 family | Module-side family/pin table recorded; inspect exact installed suffix and pin-1 datum |
+| Panel | Possible I-PEX CABLINE-CA II 20682-040E-02, 40-pin, 0.4 mm pitch | Secondary-catalog association only; not confirmed for the owned panel |
 
-The LattePanda endpoint is confirmed by the current official Mu repository.
-LattePanda omits the complete receptacle suffix; current I-PEX literature lists
-`20455-040E-76`, so the installed suffix and pin-1 datum still need microscope
-confirmation. The panel-side connector association currently comes from a
-secondary panel catalog and must be verified from the physical connector or an
-AUO/Dell approval specification.
+the recorded CABLINE-VS cable-side family is 20453, with matching housing
+and shell parts. if the panel-side CA II identification is confirmed, its
+cable-side family is 20679 with the associated 20680 housing, 3204 shell,
+and 20681 lock bar. confirm full suffixes from the actual drawings before
+using those families in an order.
 
-The intended solution is a purchased, finished 200-300 mm micro-coax harness,
-not a hand-built cable. If physical inspection confirms that the panel also
-uses CABLINE-VS and the verified contact map is 1:1, I-PEX publishes stock
-40-pin assemblies `82691` (200 mm) and `82692` (300 mm). If the panel instead
-uses the currently suspected 0.4 mm CABLINE-CA II receptacle, a stock
-CABLINE-VS-to-VS cable cannot mate and a cable-assembly vendor must build a
-passive VS-to-CA-II harness from a released wiring drawing.
+the intended cable is a finished micro-coax assembly from a cable vendor.
+the earlier 200-300 mm length was a candidate, pending the hinge route.
+I-PEX's 82691/82692 VS-to-VS assemblies are relevant only if both ends and
+the contact map are actually compatible. they are not automatically a cable
+for the suspected CA II panel connector.
 
-In either case, the drawing or purchased-cable specification must resolve every
-individual `Mu pin + signal -> panel pin + signal` connection. Descriptions
-such as "generic 40-pin eDP", "same-side", "reverse", or "1-to-N" are not
-sufficient by themselves. The working Intehill cable is the physical and
-continuity-map reference for the panel end.
+## module-side contact reference
 
-References:
+this is the retained Mu-side reference map. panel destination contacts are
+still unresolved. do not infer a 1:1 wiring order from the shared pin count.
 
-- [Official LattePanda Mu eDP pinout](https://github.com/LattePandaTeam/LattePanda-Mu/blob/main/Electricals/Pinouts/README.md)
-- [I-PEX CABLINE-VS product family](https://www.i-pex.com/product/cabline-vs)
-- [I-PEX 82691 200 mm 1:1 40-pin harness drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_MCX_HARNESS_CABLINE-VS_40P_HARNESS_82691C0.pdf)
-- [I-PEX 20453 cable assembly drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-VS_PLUG_CABLE_ASSEMBLY_20453C38.pdf)
-- [I-PEX CABLINE-VS handling manual](https://www.i-pex.com/sites/default/files/downloads/pdf/MANUAL_CABLINE-VS_HIM-08004-08EN.pdf)
-- [I-PEX CABLINE-CA II product family](https://www.i-pex.com/product/cabline-ca-II)
-- [I-PEX 20682 receptacle drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-CA_II_RECEPTACLE_20682C17.pdf)
-- [I-PEX 20679 cable assembly drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-CA_II_PLUG_CABLE_ASSEMBLY_20679C14.pdf)
-- [Secondary B160QAN03.K connector association](https://www.panelook.com/B160QAN03.K_AUO_16.0_LCM_overview_68142.html)
-
-## Confirmed Mu contact map
-
-The official Mu pin table resolves the complete module side of the harness.
-Panel contact numbers remain unresolved and no lane, pair, or polarity reversal
-is authorized until the panel approval specification is obtained.
-
-| Mu contact(s) | Signal | Required panel destination |
+| Mu contact(s) | Signal | Required panel connection |
 | --- | --- | --- |
 | 1, 34, 35, 40 | NC | Open |
-| 2, 5, 8, 11, 14, 17, 23-26, 28-31 | GND | Individually assigned panel grounds, contacts TBD |
-| 3 / 4 | DDIA_TX3- / DDIA_TX3+ | Panel lane 3 - / +, contacts TBD |
-| 6 / 7 | DDIA_TX2- / DDIA_TX2+ | Panel lane 2 - / +, contacts TBD |
-| 9 / 10 | DDIA_TX1- / DDIA_TX1+ | Panel lane 1 - / +, contacts TBD |
-| 12 / 13 | DDIA_TX0- / DDIA_TX0+ | Panel lane 0 - / +, contacts TBD |
-| 15 / 16 | DDIA_AUX+ / DDIA_AUX- | Panel AUX + / -, contacts TBD |
-| 18-21 | LCD_VCC | Panel 3.3 V VDD contacts TBD |
-| 22 | Selftest, grounded by default on Mu | Open until the AUO specification defines the panel contact |
-| 27 | HPD input | Panel HPD contact TBD |
-| 32 | BL_EN output | Panel backlight-enable contact TBD |
-| 33 | BL_PWM output | Panel PWM contact TBD |
-| 36-39 | BL_PWR | Panel backlight-input contacts TBD |
+| 2, 5, 8, 11, 14, 17, 23-26, 28-31 | GND | Individually mapped panel grounds |
+| 3 / 4 | DDIA_TX3- / DDIA_TX3+ | Panel lane 3 - / + |
+| 6 / 7 | DDIA_TX2- / DDIA_TX2+ | Panel lane 2 - / + |
+| 9 / 10 | DDIA_TX1- / DDIA_TX1+ | Panel lane 1 - / + |
+| 12 / 13 | DDIA_TX0- / DDIA_TX0+ | Panel lane 0 - / + |
+| 15 / 16 | DDIA_AUX+ / DDIA_AUX- | Panel AUX + / - |
+| 18-21 | LCD_VCC | Panel logic-supply contacts, subject to confirmed limits |
+| 22 | Selftest, grounded by default on Mu | Leave unassigned until the panel specification resolves it |
+| 27 | HPD | Panel HPD |
+| 32 | BL_EN | Panel backlight enable |
+| 33 | BL_PWM | Panel brightness PWM |
+| 36-39 | BL_PWR | Panel backlight-power contacts, subject to confirmed limits |
 
-## Bandwidth
+source: [official Mu pinouts](https://github.com/LattePandaTeam/LattePanda-Mu/blob/main/Electricals/Pinouts/README.md).
+the local upstream reference is [`gen/Pinouts_README.md`](../gen/Pinouts_README.md).
 
-The Mu advertises eDP 1.4 support up to 4K60. The target panel should use all
-four lanes. Active video alone is 11.79648 Gbit/s at 8 bits per component and
-14.7456 Gbit/s at 10 bits per component, before blanking overhead.
+## power and link requirements
 
-- Four-lane HBR is insufficient: 8.64 Gbit/s payload.
-- Four-lane HBR2 is the minimum credible link: 17.28 Gbit/s payload.
-- Do not rely on two-lane HBR3 or DSC without confirming the panel DPCD.
+the Mu reference defines LCD_VCC as 3.3 V and BL_PWR as following the module
+input voltage. the custom center design supplies regulated `MU_12V`.
+that makes the exact panel's permitted backlight voltage and startup sequence
+part of the harness review; the selected rail alone does not settle them.
 
-Reference: [LattePanda Mu specifications](https://docs.lattepanda.com/content/mu_edition/specification/).
+at 2560x1600 and 120 Hz, active video is about 11.80 Gbit/s at 8 bits per
+component, before blanking. use the panel's real EDID/DPCD and timings to
+confirm lane count, link rate, color depth, and bandwidth. the design expects
+four lanes and needs HBR2 or better for the intended mode. do not assume DSC
+or a two-lane arrangement without panel evidence.
 
-## Electrical release block
+the panel's logic and backlight voltage/current limits, inrush, enable/PWM
+levels and timing, HPD behavior, sequencing, connector orientation, and full
+contact map remain part of the unresolved panel-side record.
 
-Do not order or power a direct-eDP harness yet. The exact Mu contact map is now
-public and confirmed, but no public primary AUO/Dell document has been found
-that gives the `B160QAN03.K HW0A` contact map and electrical limits.
+## what to do before ordering the harness
 
-The Mu endpoint is confirmed to provide `LCD_VCC = 3.3 V` and `BL_PWR` equal to
-the Mu input rail. A regulated 12 V input is valid for the Mu and will therefore
-put 12 V on `BL_PWR`; that does not prove that 12 V is valid for this exact AUO
-panel revision.
+1. Inspect the exact panel and both connectors. record markings, suffixes,
+   contact side, pin-1 datums, and connector position.
+2. Obtain the exact panel specification or establish a controlled contact/
+   electrical record using the working Intehill assembly as a reference.
+3. Produce a complete drawing: every Mu pin/signal to every panel pin/signal,
+   with NCs, grounds, logic power, backlight power, and control signals explicit.
+4. Measure the installed route through the hinge sweep. specify length,
+   insertion, bends, strain relief, power conductors, and the micro-coax construction.
+5. Review the cable's impedance, skew/loss, flex life, and connector compatibility
+   with the assembly vendor. continuity/isolation-test the finished harness before mating.
+6. Validate cold/warm boot, brightness, the intended lid behavior, supported
+   sleep/resume modes, full-resolution 120 Hz, and errors on the real Mu.
 
-The following remain unknown for the exact AUO revision:
+retain those results with the harness drawing and update the release record
+only when the corresponding evidence exists.
 
-- `LCD_VCC` and backlight rail minimum/maximum voltage
-- steady-state and inrush current
-- backlight-enable level and timing
-- PWM voltage, polarity, frequency, and duty-cycle limits
-- HPD electrical levels and timing
-- required rail power-up and power-down sequence
-- exact panel lane/AUX/power contact mapping and connector datum orientation
+## references
 
-The Mu power guide states that its eDP backlight converter supply follows Mu
-input power. Therefore the motherboard must not feed the Mu from a drifting raw
-3S/NVDC rail while the panel limits are unknown; the Mu input rail needs a
-defined contract. The separate power audit decides whether that is a regulated
-rail or a verified bounded NVDC range.
-
-Reference: [LattePanda Mu power guide](https://docs.lattepanda.com/content/mu_edition/design_guide_power/).
-
-## Measurements required before harness release
-
-1. Obtain the AUO B160QAN03.K HW0A approval specification, or establish every
-   panel contact by controlled continuity/back-probe measurements against the
-   working Intehill cable and controller. Record both cable-end connector
-   markings, pin-1 datums, and all 40 end-to-end connections before buying a
-   longer assembly. The Mu contact table above is already fixed.
-2. Record panel-pin `LCD_VCC`, backlight power, current/inrush, enable level,
-   PWM polarity/frequency, HPD timing, and power-off behavior at 0%, 50%, and
-   100% brightness.
-3. Capture raw EDID and DPCD. Confirm `AUO30A5`, native 2560x1600 at 120 Hz,
-   four active lanes, HBR2 or faster, pixel clock/totals, and color depth.
-4. Measure the final connector-datum-to-datum route through the hinge at every
-   opening angle before specifying harness length and bend geometry.
-5. Microscope-confirm both receptacle markings, complete suffixes, and pin-1
-   datums. Continuity-test all 40 conductors and verify no shorts before mating
-   either end. Confirm 100 ohm differential construction, skew/loss budget,
-   power-wire gauge, insulation, hinge bend radius, and flex life with the
-   cable vendor.
-6. Live validation must cover cold boot, warm boot, sleep/resume, brightness
-   control, full-resolution 120 Hz operation, and link-error monitoring.
-
-Until these items are closed, direct eDP is the selected architecture but not
-an electrically released cable assembly.
+- [Mu power guide](https://docs.lattepanda.com/content/mu_edition/design_guide_power/)
+- [Mu specifications](https://docs.lattepanda.com/content/mu_edition/specification/)
+- [I-PEX CABLINE-VS](https://www.i-pex.com/product/cabline-vs)
+- [I-PEX CABLINE-CA II](https://www.i-pex.com/product/cabline-ca-II)
+- [I-PEX 82691 drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_MCX_HARNESS_CABLINE-VS_40P_HARNESS_82691C0.pdf)
+- [I-PEX VS plug drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-VS_PLUG_CABLE_ASSEMBLY_20453C38.pdf)
+- [I-PEX VS handling manual](https://www.i-pex.com/sites/default/files/downloads/pdf/MANUAL_CABLINE-VS_HIM-08004-08EN.pdf)
+- [I-PEX CA II receptacle drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-CA_II_RECEPTACLE_20682C17.pdf)
+- [I-PEX CA II plug drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-CA_II_PLUG_CABLE_ASSEMBLY_20679C14.pdf)
+- [secondary panel listing](https://www.panelook.com/B160QAN03.K_AUO_16.0_LCM_overview_68142.html), a lead for identification, not the panel's approval specification

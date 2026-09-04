@@ -1,112 +1,205 @@
-# Build and Verification
+# build and verify
 
-## Requirements
+updated 4 september 2026. these are the entry points for checking the working
+files. the latest results and known checker failures are in [current status](design-status.md).
 
-- KiCad 10.0.4 or a compatible KiCad 10 release
-- Python 3.11 or newer
-- CMake 3.20 or newer for the host firmware tests
-- A POSIX shell for the helper scripts
+## before running anything
 
-The project uses stock KiCad libraries plus `sym-lib-table`, `fp-lib-table`,
-`gen/ducktop2.kicad_sym`, `ducktop2.pretty`, and `Module_LattePanda.pretty`.
+work from the project root and check `git status --short`. i keep manual
+routing in the working tree, so do not reset, stash, regenerate, or sync a
+board as part of an ordinary review.
 
-## Open the Project
-
-Open `ducktop2.kicad_pro` in KiCad 10. The main schematic is
-`ducktop2.kicad_sch`; the separate keyboard project is
-`12_keyboard_daughterboard.kicad_pro`.
-
-## Generated Schematics
-
-`gen/generate_mu_carrier_sheet.py` is the main schematic build entry point. It
-rewrites the generated child sheets and root schematic. Do not run it casually
-after making manual edits to generated `.kicad_sch` files; make the change in
-the generator instead.
-
-To compile-check the generator source without writing schematics:
+KiCad 10.0.4 was used for the latest checks. on this Mac:
 
 ```sh
-python3 -m compileall -q gen
+DUCKTOP_KCLI=/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli
+DUCKTOP_KPY=/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3
+mkdir -p verification/local
 ```
 
-To regenerate the full hierarchy deliberately:
+use the KiCad Python for pcbnew work. regular `python3` is used by the
+schematic generators and most text/netlist checks. some generator files use
+newer Python syntax, so the bundled KiCad Python is not interchangeable with
+system Python for every script.
+
+## direct ERC, netlist, and DRC checks
+
+the center schematic is `ducktop2.kicad_sch`. its routed-board filename is
+`ducktop2-center.kicad_pcb`. the daughterboards each have a matching project
+name in their own directory.
+
+from the root, export the center schematic and check it:
 
 ```sh
-python3 gen/generate_mu_carrier_sheet.py
+"$DUCKTOP_KCLI" sch erc --format json \
+  --output verification/local/center-erc.json ducktop2.kicad_sch
+"$DUCKTOP_KCLI" sch export netlist --format kicadxml \
+  --output verification/local/center-netlist.xml ducktop2.kicad_sch
+"$DUCKTOP_KCLI" pcb drc --format json \
+  --output verification/local/center-drc.json ducktop2-center.kicad_pcb
 ```
 
-After regeneration, inspect `git diff` before updating the PCB.
+run the daughterboard checks from their own directories so KiCad finds the
+matching project settings and rule files:
 
-## Schematic Release Check
+```sh
+for board in left_io right_io bms; do
+  (
+    cd "$board" || exit
+    "$DUCKTOP_KCLI" sch erc --format json \
+      --output "../verification/local/$board-erc.json" "$board.kicad_sch"
+    "$DUCKTOP_KCLI" sch export netlist --format kicadxml \
+      --output "../verification/local/$board-netlist.xml" "$board.kicad_sch"
+    "$DUCKTOP_KCLI" pcb drc --format json \
+      --output "../verification/local/$board-drc.json" "$board.kicad_pcb"
+  )
+done
+```
 
-The staged checker copies the project before running tools that rewrite
-generated sheets or fixed report paths:
+these commands write reports without saving a board. ordinary DRC uses the
+stored zone fill. refill and compare zones in a copied candidate before a
+release review. do not add `--save-board` to a read-only check.
+
+`--all-track-errors` expands the DRC report. `--schematic-parity` adds
+KiCad's schematic comparison, but on the center the schematic and PCB have
+different basenames. use an isolated project with the correct association
+or compare against an explicit fresh XML export. the ordinary report,
+expanded report, and parity report are different checks; label their counts.
+
+inspect the report's errors, warnings, unconnected items, and parity findings.
+the CLI can exit successfully while reporting violations unless
+`--exit-code-violations` is requested. zero unconnected items proves only
+connectivity under the board's current pad-net assignments.
+
+## schematic-to-board comparison
+
+compare physical reference, pad number, and assigned net against the fresh
+schematic export. include pads that share a number. classify DNP and no-connect
+cases explicitly, and handle XML entity escaping in center sheet names.
+
+the FPC contract comparison is a separate check. it verifies the cable
+boundary, not every component on a board. the F1 mismatch found on 4 september
+is why both checks are needed. also check that every schematic component has
+the intended footprint, value, and procurement fields on the correct board.
+
+## copied-project release checker
 
 ```sh
 python3 gen/check_release_candidate.py --stage schematic
 ```
 
-For a direct KiCad ERC run:
+the checker runs generators and report writers in a temporary project copy.
+it checks the live design/library files for changes afterwards. its current
+result is FAIL for the reasons listed in [status](design-status.md).
 
-```sh
-kicad-cli sch erc --severity-all --exit-code-violations \
-  --output /tmp/ducktop2-erc.rpt ducktop2.kicad_sch
-```
+two limitations matter before using its other stages:
 
-The current expected result is zero errors and 27 exact-reference warnings:
-13 flattened-library copy notices and 14 intentional bidirectional pins tied to
-ground. A different warning class, reference, pin, or count should be reviewed
-rather than silenced.
+- some helpers still expect the former root monolith path;
+- `--pcb` has a nonempty default, so the current selection logic takes the
+  monolith instead of the intended four-board list when no PCB is supplied.
 
-## Firmware Policy Tests
+repair those paths and board associations before treating a fabrication or
+production result as a whole-laptop check. an explicit `--pcb` selects one
+board; it does not validate the other boards. the `production` stage also
+checks target firmware, display, HIL, and hardware release records.
 
-The EC and maker-controller policy cores build on a host compiler:
+## firmware checks
 
 ```sh
 sh firmware/tools/run_host_tests.sh
 ```
 
-Or with CMake presets:
+the runner compiles host tests into its temporary directory, then checks the
+release contract. it does not flash hardware. see [target status](../firmware/README.md#stm32-target)
+for what the tests cover and what is still missing on the STM32/RP2350.
 
-```sh
-cmake --preset host-debug -S firmware
-cmake --build --preset host-debug
-ctest --preset host-debug --test-dir firmware
-```
+## report storage
 
-These tests cover policy and command ordering. They do not replace target
-firmware, peripheral-driver tests, watchdog tests, or hardware-in-the-loop work.
+keep retained project evidence in `verification/`, with the source revision
+or working-tree hashes, command, date, and result. `verification/local/` is a
+suggested working-report directory, not an automatically ignored directory.
+review generated files before staging them. the `.gitignore` already ignores
+some ERC/DRC reports and some generated XML paths may be tracked.
 
-## PCB Checks
+do not use an old XML file as evidence that the current schematic is correct.
+it may have survived a stash, checkout, or generator change.
 
-The PCB has partial routing in progress. Its current DRC has unresolved copper,
-clearance, mask, silkscreen, unrouted, and schematic-parity findings. Run DRC
-to classify and fix them; do not treat the current count as an allowlist or
-fabrication waiver:
 
-```sh
-kicad-cli pcb drc --format json \
-  --output /tmp/ducktop2-drc.json ducktop2.kicad_pcb
-```
 
-Do not add duplicate physical references: one footprint is required for each
-schematic reference, even when that reference is a multi-unit symbol. The
-copied-project release gate checks this before its schematic checks begin.
 
-Before applying an ECO, use the report and candidate checkers in `gen/`. Keep a
-snapshot for any operation that changes references, footprints, pad nets, board
-outline, or routing. Operations that refill zones or save a board must run in a
-copy first; merge only a reviewed, object-level diff into the live PCB.
+## deliberate rebuilds
 
-## Mainboard Render
+for a schematic change, edit its generator. for an FPC signal change, edit
+`gen/fpc_contract.py` and account for both ends of the cable. placement,
+footprint, net-assignment, and track changes are separate operations.
 
-The repository images can be refreshed from KiCad without opening the editor:
+make a candidate copy that includes the current uncommitted work, libraries,
+and project settings. keep the canonical working tree intact while checking
+the candidate. a checkout of HEAD alone would omit the current BMS routing.
 
-```sh
-kicad-cli pcb render -o docs/images/ducktop2-pcb-top.png \
-  -w 2400 -h 1500 --side top --background opaque \
-  --quality basic --zoom 1.28 ducktop2.kicad_pcb
-```
+## dependency order in the candidate
 
-KiCad's high-quality CLI renderer currently throws a macOS `bad_any_cast` for
-this project, so the checked-in images use the basic renderer.
+| Step | Script or action | What it can change |
+| --- | --- | --- |
+| 1 | `gen/generate_fh41_68s_footprint.py` | Project FH41 footprint |
+| 2 | `gen/generate_conn100_ffc_symbol.py` | FFC symbols; the filename is historical, current I/O maps use 68 pins |
+| 3 | `gen/generate_mu_carrier_sheet.py` | Root/center schematic and generated sheets |
+| 4 | `gen/generate_left_io_project.py` | Left schematic project |
+| 5 | `gen/generate_right_io_project.py` | Right schematic project |
+| 6 | `gen/generate_bms_project.py` | BMS schematic project |
+| 7 | `gen/verify_design_contracts.py --project NAME --schematic-only` for `ducktop2`, `left_io`, `right_io`, `bms` | Checks and refreshes the corresponding verification netlist |
+| 8 | Recreate daughterboards only if a new placement board is actually wanted | Replaces the routing/placement starting point |
+| 9 | `gen/generate_split_boards.py`, using KiCad Python | Board split, footprints, pad nets, connector maps, normalization, project rules |
+| 10 | `gen/fix_board_hygiene.py`, using KiCad Python | Placement, board hygiene, and zone fills |
+| 11 | `gen/add_test_points.py bms`, using KiCad Python | Adds missing test points using the defined table |
+| 12 | Per-project ERC, fresh netlists, pad-net comparison, per-board DRC, and release checks | Evidence for the candidate |
+
+use system Python for steps 1-7. use the pcbnew-capable KiCad Python for
+steps 9-11. exact paths are in [build and verify](build-and-verify.md).
+
+the earlier workflow used `create_board_from_schematic` for step 8. that was
+a board-creation operation, not a safe incremental update of a routed board.
+the radio and keyboard also have their own generators and are not recreated
+by the four-board split.
+
+## before bringing a candidate back
+
+compare the candidate to the starting working tree by object and purpose:
+
+- generated schematic changes match the requested circuit change;
+- all required footprint references exist once, on the intended board;
+- pads agree with fresh netlists, including all repeated pad numbers;
+- FPC maps, installed orientations, and ground/shield pads agree;
+- net names and classes match the actual circuit nets;
+- board layer tables and stackups agree;
+- board outlines and placement stay within the intended mechanical model;
+- unrelated routing is preserved;
+- fills and DRC are checked using the actual project rules.
+
+if a hygiene pass is supposed to converge, run it a second time in the
+candidate and confirm zero additional moves. do not run a placement fixer on
+the live routed BMS just to clear a historical courtyard count.
+
+## the center board's special case
+
+the root schematic is `ducktop2.kicad_sch`, but the center board is
+`ducktop2-center.kicad_pcb`. the split pipeline resolves FPC names and
+normalizes legacy sheet prefixes. a normal F8 update skips that process.
+
+`resync_pad_nets`, `resolve_net_names`, and `normalize_board_nets` are the
+relevant parts of the splitter. check their output, including XML-escaped
+sheet names, instead of assuming a successful script exit proves parity.
+
+`gen/recover_center.py` cuts another center board from the old monolith.
+that is recovery of a starting point, not restoration of current manual work.
+
+## known tool problems
+
+pcbnew operations that remove and re-add parts have previously failed through
+SWIG object corruption. use fresh subprocesses where the scripts require it.
+initialize wx for headless reads when needed, and reject a `None` result
+from `LoadBoard`.
+
+read files before opening them for writing. never combine a truncating open
+with a nested read of the same path. after any branch/stash operation,
+regenerate the candidate netlists before building from them.
