@@ -1,11 +1,15 @@
 # Pinouts
 
+> upstream Mu pinout reference kept with the generators. check the linked
+> upstream revision and the actual module before using it as a new hardware
+> specification. the project-specific display work is in [direct eDP](../docs/display-direct-edp.md).
+
 All pin definitions for LattePanda Mu(N100/N305 Processor)
 
 This reference is based on the official
 [LattePanda Mu pinout documentation](https://github.com/LattePandaTeam/LattePanda-Mu/tree/main/Electricals/Pinouts).
 
-⚠️ Note:  
+⚠️ Note:
 Due to the large number of functionally multiplexing pins, you should check the [BIOS functionality documentation](https://github.com/LattePandaTeam/LattePanda-Mu/blob/main/Softwares/BIOS/README.md) before starting your design. Do not design directly from the pin definition documentation here.
 
 [Official module pinout image](https://github.com/LattePandaTeam/LattePanda-Mu/blob/main/Electricals/Pinouts/pinout.jpg)
@@ -123,5 +127,5 @@ The edge_connector of LattePanda Mu is designed for DDR4 260P SODIMM. But this p
 
 - [LattePanda Mu Edge Connector Pinout](https://github.com/LattePandaTeam/LattePanda-Mu/blob/main/Electricals/Pinouts/LattePanda_Mu_Edge_Connector_Pinout.xlsx)
 
-⚠️ Note:  
+⚠️ Note:
 Due to the large number of functionally multiplexing pins, you should check the [BIOS functionality documentation](https://github.com/LattePandaTeam/LattePanda-Mu/blob/main/Softwares/BIOS/README.md) before starting your design. Do not design directly from the pin definition documentation here.

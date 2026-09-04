@@ -1,107 +1,77 @@
-# Ducktop2 OS Theme
+# ducktop2 OS and theme
 
-Early visual system for the Ducktop2 Fedora KDE desktop.
+this is the Fedora KDE setup and theme work for ducktop2. i want a dark,
+readable desktop with a bit of the cyberdeck feel, while normal applications
+still work and look normal.
 
-This pack aims for a clean cyberdeck/HUD look that is still comfortable as a daily laptop. It uses original assets and standard KDE customization points instead of copied game UI or fragile full-desktop skinning.
+the files are an early implementation. final Mu boot, EC integration,
+recovery, and display validation still need hardware testing.
+[project status](../../docs/design-status.md)
 
-The checked-in wallpaper is generated from the native SVG source at 2560x1600.
-The visual direction is still experimental; see the
-[`design spec`](docs/design-spec.md) and [`roadmap`](docs/roadmap.md) before
-changing it.
+## what's here
 
-## Current Scope
+- A visual spec, palette, and native 2560x1600 wallpaper source.
+- KDE and Konsole color schemes, a terminal profile, and Starship settings.
+- An optional Plasma panel layout.
+- Staged SDDM and Plymouth themes.
+- Package/setup scripts for a Fedora KDE install.
+- An eMMC recovery/hibernation setup script that still needs target validation.
 
-- Ducktop2 visual spec v0.1
-- Native vector-derived 2560x1600 wallpaper
-- KDE color scheme
-- Konsole color scheme and profile
-- Starship shell prompt
-- Optional Plasma panel layout script
-- Staged SDDM and Plymouth theme prototypes
-- Fedora package list and installer scripts
+## start with the desktop
 
-## Recommended Base
+the working base is Fedora KDE Plasma Desktop. test ordinary desktop pieces
+on an x86 install or VM before changing login and boot themes. the package
+scripts and assumptions need checking against the Fedora/KDE version in use.
 
-Use Fedora KDE Plasma Desktop for the first NVMe install. Move to Fedora Kinoite later only after the hardware and EC integration are stable.
+from this directory on the Fedora test system:
 
-## Quick Apply On Fedora KDE
-
-From this directory:
-
-```bash
+```sh
 bash install/apply-theme.sh --install-packages
 ```
 
-Then log out and back in. The script installs the user-level theme pieces and backs up touched config files under:
+the script is intended to back up touched user configuration. inspect the
+changes and confirm login/recovery before enabling the system themes.
+`--panel` applies the optional panel layout.
 
-```text
-~/.local/share/ducktop-theme-backups/
-```
+## wallpaper and system themes
 
-The script does not enable the SDDM login theme or Plymouth boot theme by default. Those are staged separately because a broken login theme is annoying on a fresh machine.
-
-## Resolution Check
-
-The target Ducktop2 panel is 2560x1600. Verify the native SVG source and active PNG wallpaper assets with:
-
-```bash
+```sh
 bash install/check-wallpaper-resolution.sh
 ```
 
-Regenerate the wallpaper from vector source with:
+the native wallpaper source targets 2560x1600. export it through
+`install/export-native-wallpaper.sh` when changing the artwork.
+static wallpaper should not contain fake battery, temperature, or system
+readouts. live status belongs in real widgets fed by the EC/OS.
 
-```bash
-bash install/export-native-wallpaper.sh
-```
+SDDM/Plymouth are separate steps in `install/system-theme.sh`. keep them
+staged until the test system has a working recovery path and their behavior
+has been checked. the desktop theme does not require them.
 
-## Optional Panel Layout
+## recovery and hardware integration
 
-After the first login, you can apply the prototype top-panel layout with:
+the daily OS belongs on NVMe. the 64 GB eMMC is planned for recovery,
+hibernation storage, and offline data. the setup script exists, but its disk,
+boot, and resume behavior have not been released on hardware.
+[eMMC plan](docs/emmc-recovery.md)
 
-```bash
-bash install/apply-theme.sh --panel
-```
+EC battery/telemetry transport, lid events, and hardware widgets remain
+integration work. host-tested EC report code alone does not create an OS
+battery device or a working widget.
 
-This uses Plasma's scripting interface and should be treated as experimental.
+- [visual direction](docs/design-spec.md)
+- [firmware target status](../../firmware/README.md#stm32-target)
 
-## System Themes
+## work order
 
-Install SDDM/Plymouth files without enabling them:
-
-```bash
-sudo bash install/system-theme.sh --install-sddm --install-plymouth
-```
-
-Enable them later, once the Fedora NVMe is easy to recover:
-
-```bash
-sudo bash install/system-theme.sh --enable-sddm --enable-plymouth
-```
-
-## eMMC Recovery And Hibernate
-
-The 64 GB onboard eMMC is the recovery/rescue OS + hibernation image target.
-Design and setup tooling:
-
-- [`docs/emmc-recovery.md`](docs/emmc-recovery.md) — layout, sizing math, boot
-  flow, hibernate config, recovery procedures.
-- [`install/emmc-recovery-setup.sh`](install/emmc-recovery-setup.sh) — guarded
-  setup (partition, build recovery OS, bootloader, hibernate resume). It
-  requires `--device` and `--yes`, and has `--check` / `--dry-run` preview
-  modes. Execute during Mu bring-up (roadmap Phase 5):
-
-```bash
-sudo bash install/emmc-recovery-setup.sh --device /dev/mmcblk0 --check
-sudo bash install/emmc-recovery-setup.sh --device /dev/mmcblk0 --dry-run
-sudo bash install/emmc-recovery-setup.sh --device /dev/mmcblk0 --yes
-```
-
-After the daily driver runs, configure hibernate resume onto the eMMC swap:
-
-```bash
-sudo bash install/emmc-recovery-setup.sh --configure-hibernate
-```
-
-## Design Rule
-
-Ducktop2 should feel like a real laptop with a cyberdeck-native shell, not a novelty desktop. Keep live-looking telemetry out of static images. Real status belongs in widgets and the future EC daemon.
+1. Test the existing wallpaper, colors, terminal, and panel on an x86 Fedora
+   KDE install or VM, with readable scaling and normal applications.
+2. Prepare the intended NVMe install. identify the disk by model, capacity,
+   connection, and partitions before writing it. prove independent boot,
+   updates, backups, and recovery.
+3. Validate the eMMC setup and recovery implementation on the target.
+4. Test login/boot themes after the desktop and recovery path work.
+5. Validate graphics, display modes, storage, networking, USB, audio, and
+   power states on the Mu.
+6. Integrate the EC transport and OS service before claiming working battery,
+   lid, fan, radio, or telemetry widgets.

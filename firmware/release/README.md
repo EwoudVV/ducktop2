@@ -1,98 +1,75 @@
-# Ducktop2 firmware release contract
+# firmware release and hardware tests
 
 Version: `0.3.0-policy`
 
-This directory defines the evidence required to turn the host-tested policy
-cores into production firmware. It does not claim that an STM32F407 or RP2350
-image exists or that any physical motherboard has passed qualification.
+this directory holds the target release record and
+the HIL matrix. the current STM32 implementation is described in
+[target status](../README.md#stm32-target).
 
-## Target integration order
+## before enabling a load
 
-Before STM32 execution, PD1 and PD2 depend on the released TPS25751A boot
-configuration and hardware fail-off controls. The target must not treat a
-default 5 V attachment as a qualified laptop-power contract.
+the startup sequence needs to establish passive hardware state, watchdog
+and reset handling, bounded bus access, and valid source/rail observations.
+release source-manager/service-mux resets in the reviewed order and confirm
+that the paths remain off until they are qualified.
 
-The STM32 target port must use this startup and recovery order:
+apply policy outputs through `ec_commit_apply()`. the target must confirm
+that limits and enable states took effect. failed communication, stale data,
+missing readback, or failed power-good must remain a failure.
 
-1. Configure critical MCU pins as inputs and keep hardware source-manager and
-   service-mux resets asserted.
-2. Initialize the watchdog and brownout/reset-cause logging without enabling a
-   source or load.
-3. Call `ec_commit_force_safe()` through bounded target-driver operations and
-   verify both PD paths, charging, `MU_12V`, and optional loads are off.
-4. Release the source-manager and service-mux resets, recover the I2C bus, and
-   confirm that all PD paths remain off.
-5. Read each TPS25751A on its own service-mux channel, then read charger,
-   battery, VSYS, power-good, and motherboard thermal telemetry with explicit
-   validity flags. A timeout, bus error, stale value, or failed readback must
-   remain invalid. Use 7-bit target addresses `0x20` for PD1 and `0x21` for
-   PD2, not shifted bus bytes. Read `Active PDO Contract` (`0x31`), `Active RDO
-   Contract` (`0x32`), and `PD Status` (`0x35`); reject a contract unless the
-   live status, PDO voltage/current, and RDO agree. The EC does not provide
-   pack-temperature telemetry. Interpret BQ34Z100 Current() as positive while
-   charging and negative while discharging. TimeToEmpty() and TimeToFull() are
-   minutes; reject `0xffff` and use
-   `ec_telemetry_bq34z100_minutes_to_seconds()` before publishing seconds.
-6. Run `ec_controller_step()` and apply its output only through
-   `ec_commit_apply()`. For a battery-absent PD cold start, first commit the one
-   qualified PD path with charging and every load off, wait for path-good and
-   BQ25798 I2C availability, then program/read back IINDPM. The target adapter
-   may acknowledge IINDPM or host power limits only after a successful
-   transaction and readback where available.
-7. AUX has no negotiated current contract. Start its BQ25798 input-current
-   qualification at 500 mA, command and read back 250 mA IINDPM, then use ICO
-   and VINDPM behavior to discover a higher safe limit. Publish a higher
-   `qualified_input_current_ma` only after reading the resulting charger limit
-   and deriving `available_power_mw` from that limit and measured AUX voltage.
-   A stale or failed measurement remains invalid and disables AUX.
-8. Feed the watchdog only after policy evaluation, ordered commit, telemetry,
-   and deadline checks all complete.
+for battery-absent PD startup, the path-only bootstrap powers the charger
+with charging and loads off. wait for path-good and charger communication,
+then program/read back IINDPM before allowing loads.
 
-The radio daughterboard is not a startup dependency. Its presence input must be
-read as active low with the released pull-up, and its power output must remain
-off through reset. An absent board, asserted fault, failed power-good startup,
-or later power-good loss disables only the daughterboard rail. Target code must
-not convert those conditions into a laptop source-manager fault.
+PD contract reads use live status, active PDO, and active RDO. PD1/PD2 use
+7-bit addresses `0x20`/`0x21` on their separate mux channels. a 5 V attachment
+does not meet the laptop's recorded always-on/selector requirements.
 
-The target OLED task may render only fields whose validity bits are set in the
-snapshot built by `ec_telemetry_build_snapshot()`. PD1 and PD2 contracts are
-read through their service-mux channels. Invalid fields must be shown as
-unavailable rather than retaining an older value.
+AUX starts with the conservative qualification defined by the policy. raising
+its budget needs valid measured input and charger results. it has no negotiated
+current contract to copy from a PD controller.
 
-The maker target must leave `MAKER_PWR_EN` off and all 26 exported I/O signals
-high impedance through RUN reset and BOOTSEL. User rails and I/O require
-separate authorization plus a hardware-interlock observation.
+## telemetry and optional hardware
 
-## Provisional low-pack envelope
+publish only data with valid, fresh measurements. BQ34Z100 charge current is
+positive and discharge current negative. reject invalid time values such as
+`0xffff` before converting bus minutes into seconds. OLED and OS reports
+should show unavailable fields as unavailable.
 
-The host policy uses a 15 W Mu-plus-eDP ceiling at low SOC. It also computes a
-source-aware ceiling from qualified available input power, an 85 percent
-conversion model, a 6 W platform reserve, and measured auxiliary demand. The
-lower ceiling wins. Charging and optional loads are shed in low-pack mode.
-Low-pack limiting follows an active PACK source plus valid low-pack telemetry;
-it cannot be bypassed by a separate `pack_only` indication. External-source
-charging is capped by the power remaining after the platform reserve, measured
-auxiliary demand, and estimated Mu/eDP demand, and is disabled below the 2.5 W
-minimum useful charge budget.
+an absent or failed radio board disables the radio path and should not block
+the rest of the laptop. maker rails and I/O have their own authorization and
+interlocks; the RP2350 target must preserve those defaults through reset and
+programming modes.
 
-The 15 W value is a provisional engineering ceiling, not a measured product
-rating. It must be replaced or confirmed using the released cells, BMS, fuse,
-harness, PCB, converter, display brightness, BIOS PL1/PL2 control, and thermal
-system. Until the HIL low-pack rows pass, the firmware and motherboard remain
-blocked from production.
+## provisional power model
 
-## Programming and recovery
+the host policy includes a low-pack Mu-plus-display ceiling of 15 W, an
+85 percent conversion model, a 6 W platform reserve, and source-aware
+charging/optional-load handling. those are engineering assumptions to
+validate against the real pack, cables, converters, display, and cooling.
 
-Production release requires reproducible target builds, pinned toolchains,
-linker maps, `.elf`/`.bin` for the EC, `.elf`/`.uf2` for the maker controller,
-SHA-256 manifests, blank-board programming logs, readback verification where
-supported, and documented recovery over SWD/BOOTSEL. None of those target
-artifacts is present in version `0.3.0-policy`.
+the target currently cannot acknowledge complete charge or Mu/eDP budget
+application. implementing and measuring that behavior is required before
+the policy can support normal laptop operation.
 
-## Evidence rule
+## build, programming, and recovery evidence
 
-`hil_matrix.csv` is the firmware-side qualification checklist. A row may move
-from `NOT_RUN` to `PASS` only when its evidence path and SHA-256 are recorded
-and the evidence file exists. `tools/verify_release_contract.py` enforces this
-rule and validates the host policy constants, required regression vectors, and
-version consistency.
+retain a reproducible build with toolchain version, flags, map, and hashes.
+the release needs EC `.elf`/`.bin` and maker `.elf`/`.uf2` artifacts, recorded
+blank-board programming, supported readback verification, and tested
+SWD/BOOTSEL recovery. local build files alone do not approve a firmware image.
+
+`target_release.json` records the approved artifacts and their evidence.
+it currently remains `PENDING_TARGET_PORTS`; the documentation refresh did
+not change its state.
+
+## HIL rows
+
+`hil_matrix.csv` is the test list. a row becomes PASS only when its evidence
+path and SHA-256 are recorded and the evidence file exists.
+`tools/verify_release_contract.py` checks those rules, versions, constants,
+and required vectors. it does not perform the physical tests itself.
+
+use the revised [bring-up plan](../../docs/BRINGUP_TEST_PLAN.md) to prepare
+the board fixtures and test order. retain failed measurements as well as
+passing ones, with the hardware and firmware revision for each run.

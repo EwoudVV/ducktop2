@@ -1,36 +1,36 @@
-# TPS25751A port policy
+# TPS25751A port configuration
 
-The two rear USB-C ports use the same TPS25751A configuration. They accept
-USB-PD power for the laptop and act as USB hosts when they are supplying power.
+J21 on the left and J11 on the right are the two PD/data ports. their
+controllers use the source configuration in `ducktop2_dual_role_config.json`.
+J12 is a source-only USB port and does not use this charging policy.
 
-The tracked source file is `ducktop2_dual_role_config.json`. It was exported
-from TI's USB-C/PD Application Customization Tool 2.0.0 with base firmware
-`FB09.17.02__RC5.bin`.
+the recorded export used TI's USB-C/PD Application Customization Tool 2.0.0
+and base firmware `FB09.17.02__RC5.bin`. the export filenames and hashes
+are in `release_manifest.json`; generated output is kept under `generated/`
+and is ignored by git.
 
-Current policy:
+## configured policy
 
-- DRP power role, no BQ25798 integration inside the TPS25751A
-- 5 V, 9 V, and 15 V sink PDOs at up to 3 A
-- one 5 V / 900 mA source PDO with default Rp
-- USB host data only; the laptop never exposes itself as a USB device here
-- GPIO4: inverted `UFP_DFP` event, high only while the port is DFP
-- GPIO6: cable orientation
-- GPIO7: `Dp_Dm_Mux_Enable`, high only while the USB data path is attached
+- dual-role power, with EC-controlled BQ25798 integration outside the PD controller;
+- 5 V, 9 V, and 15 V sink PDOs, up to 3 A;
+- a 5 V / 900 mA source PDO;
+- one private EEPROM per controller.
 
-GPIO4 and GPIO7 are ANDed in hardware before either USB2 or SuperSpeed is
-enabled. Both data paths therefore stay disconnected during reset, detach, and
-sink-only operation.
+advertising a sink PDO does not mean that voltage can run the laptop. the
+recorded AON UVLO and selector windows require a qualified usable input,
+and the EC must verify the live contract before enabling the sink path.
+[power architecture](../../docs/power-and-battery.md)
 
-To regenerate the EEPROM files:
+## verify and use the export
 
-1. Open TI's USB-C/PD Application Customization Tool 2.0.0.
-2. Select TPS25751A and base firmware `FB09.17.02__RC5.bin`.
-3. Import `ducktop2_dual_role_config.json` with advanced configuration enabled.
-4. Export all files using the name `ducktop2_dual_role`.
-5. Put the raw JSON, VIF, low-region binary, and full-flash binary in
-   `generated/` using the names recorded in `release_manifest.json`.
-6. Run `python3 firmware/tps25751a/verify_config.py --require-generated`.
+```sh
+python3 firmware/tps25751a/verify_config.py
+```
 
-The generated images are ignored by Git because TI's firmware license does not
-allow us to redistribute them. `release_manifest.json` records their expected
-hashes so the exact production images can still be checked locally.
+run from the repository root. review the configuration and manifest against
+the actual generated files before programming the EEPROMs. keep tool version,
+source hash, export hash, programmed device/board, and readback evidence.
+
+the configuration export and host tests do not prove physical negotiation,
+role swaps, source-path sequencing, or current-limit behavior. those belong
+in the [HIL work](../release/README.md).

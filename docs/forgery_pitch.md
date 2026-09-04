@@ -1,39 +1,44 @@
-Name: Ducktop2
+# ducktop2
 
-I'm designing: a full custom x86 laptop/cyberdeck on a single carrier PCB. it uses a LattePanda Mu (Intel N305, 16GB RAM, 64GB eMMC). I wanted to make a cyberdeck, but all the ones ive seen are really chunky. I wanted to make something thats actually portable and able to be daily driven. it has 2 embedded microcontrollers, 1 for controlling stuff like the keyboard matrix, fan speed, power management, etc and the other for exposed gpio, like an embedded arduino. it has an internal usb connection for programming. The main part of this project is making the pcb, its what im working on now.
+i'm making a custom x86 laptop around a LattePanda Mu. i wanted a cyberdeck
+with exposed hardware and room to experiment, but something i could actually
+carry around and use as a normal laptop too.
 
-the idea is one PCB replacing the mess of separate things and cables everywhere from ducktop1. it now has a 16" 2560x1600 120Hz display running direct eDP off the Mu module, instead of an hdmi cable. mechanical keyboard with Cherry MX ULP switches on a custom daughterboard. 3S battery with proper pack protection and a fuel gauge. it will go in a custom enclosure, cnced aluminum.
+ducktop1 used a Pi 500+ and a 16-inch portable monitor. it worked, but the
+cabling was a mess. the HDMI and USB-C cables had to run outside the case.
+this version uses direct eDP for the display and custom boards for the power,
+ports, and laptop controls.
 
-Inspo / reference:
-- ducktop1: pi 500 plus and a 16" portable monitor, with a custom pcb for charging the batteries and supplying power to the monitor and pi from them.
-- latte panda mu reference carrier: https://github.com/LattePandaTeam/LattePanda-Mu
-- all kinds of cyberdecks people are making
+it has a 16-inch 2560x1600 120 Hz display target, a Cherry MX ULP mechanical
+keyboard, NVMe, a large trackpad, and a 3S battery. there's an STM32 for the
+laptop controls and a separate RP2350 for exposed GPIO. the optional radio
+board adds VHF/UHF, GNSS, and its own audio path.
 
-Past projects:
-- ducktop1: pi 500, 16" 2560x1600 panel at 90Hz, worked but the internal cabling was a mess. hdmi and usb-c cables had to run outside the case. power system, display were all separate stuff and it was messy (pcbway funded)
-- a drawing machine (hc highway funded)
-- rc tank (hc hackpac funded)
+the main carrier is now split into a center board, left and right I/O, and a
+small BMS. the keyboard and radio are separate boards too. i'm doing the PCB
+routing by hand. the BMS is routed and under review, and the other main boards
+still need routing.
 
-Why this is worth more than $200:
-this is a laptop. not a breakout board or an arduino shield, an actual laptop with an x86 processor, 120Hz display, mechanical keyboard, multi-cell battery pack, and three custom PCBs. the mainboard alone is 358x185mm with over 1000 parts, most of them in fine-pitch packages (QFN, WCSP, 0402). nextpcb is giving me $300 already but the real total is way past that. i have some stuff from ducktop1 / early prototyping already, but the carrier board components, the Mu module, the ssd, keycaps, enclosure, and all the pcba work still needs to happen.
+## why it needs more than a small-project budget
 
-Rough BOM (what i still need, i already have the screen, keyboard pcb, ULP switches, and 3S cells):
+the expensive work is spread across fine-pitch parts, multilayer PCBs,
+assembly, the compute module, cooling, cables, and the enclosure. the split
+also needs proper connectors and cables between the boards.
 
-LattePanda Mu N305 compute module $190
-Main PCB fab (358x185mm 4-layer ENIG at nextpcb) $180
-Main PCB assembly + component sourcing $250
-Radio daughterboard PCB fab + assembly $50
-Cherry MX ULP keycaps x65 $45
-1TB NVMe SSD 2280 $60
-WiFi 6E E-key card $18
-Power management ICs (USB-C PD controllers, battery charger, fuel gauge, 3S protector, pack protector, buck-boost, bucks, eFuses, ideal diodes, supervisors, load switches) $95
-MCUs and compute ICs (STM32F407, RP2350A, flash) $15
-USB hub and interface ICs (USB7206C 6-port gen2 hub, RTL8111H gigabit ethernet, USB muxes, level translators, ESD diodes, i2c expanders) $55
-Audio subsystem (class-D amp, codec, mic preamp, LDO) $15
-Radio daughterboard components (DRA818V + DRA818U modules, u-blox MAX-M10S GNSS, Mini-Circuits ULP filters, PCM2900C codec) $70
-Connectors and hardware (DDR4 SO-DIMM socket, M.2 sockets, SMT standoffs, ethernet jack, DF40 mezzanine, FFC connectors) $35
-All passive components (~950+ resistors, capacitors, inductors, ferrites, crystals, diodes, fuses, buttons) $40
-Cooling (blower fan, heatpipe, coldplate) $35
-CNC aluminum enclosure $70
+i already have work and parts from ducktop1 and the earlier prototype stages.
+the keyboard has a rev A production package, and the replacement panel has
+been tested at full resolution and refresh rate on the Intehill controller.
+the final Mu display harness and full laptop assembly still need testing.
 
-Total: $1,223
+i still need current parts and assembly quotes for the split boards before
+putting a total in the budget. [parts and cost](bom-and-cost.md)
+
+## previous projects and references
+
+- [ducktop1](ducktop1.md), supported by PCBWay
+- [drawing machine](https://github.com/EwoudVV/drawbot), from Hack Club Highway
+- [RC tank](https://github.com/EwoudVV/rc-tank), from Hack Club Hackpac
+- [LattePanda Mu reference hardware](https://github.com/LattePandaTeam/LattePanda-Mu)
+
+[current progress](design-status.md) and [next steps](design-status.md#work-order) have the
+detailed state. this pitch was refreshed on 4 september 2026.

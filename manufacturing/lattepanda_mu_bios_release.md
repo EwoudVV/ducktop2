@@ -1,5 +1,6 @@
 # LattePanda Mu module and BIOS release contract
 
+
 Status: **CONTROLLED INPUT, FIRST-ARTICLE READBACK REQUIRED**
 Project: Ducktop2
 Date: 2026-07-18

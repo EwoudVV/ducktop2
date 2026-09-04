@@ -1,138 +1,175 @@
-# Ducktop2 controller firmware policy
+# controller firmware
+
+ducktop2 has two controllers. the STM32F407 is the laptop EC. the RP2350 is
+the separate maker controller. their policy code is C11 and can be tested
+on a host before it is connected to board drivers.
 
 Version: `0.3.0-policy`
 
-This tree contains deterministic, allocation-free C11 policy cores for the
-Ducktop2 STM32F407 embedded controller and integrated RP2350 maker controller.
-It is intentionally separated from target startup code and vendor SDKs so the
-safety transitions can be reviewed and tested on a host compiler first.
+the dated test results are in
+[project status](../docs/design-status.md). the STM32 target port exists,
+but normal charging and Mu power-budget integration are unfinished.
+[target details](README.md#stm32-target)
 
-## What is implemented
+## code layout
 
-- EC outputs start passive: both `PDx_PATH_EN` controls, `CHG_ENABLE`,
-  `MU_12V_ENABLE`, keyboard RGB, the radio daughterboard rail, and audio requests
-  are off.
-- PACK, AUX, PD1, and PD2 use one mutually exclusive source-state model with
-  `OFF`, `VALIDATING`, `ACTIVE`, and `FAULT` states.
-- PD1 and PD2 use TPS25751A controllers on separate service-mux channels. A PD
-  path cannot be enabled until its negotiated voltage/current contract is valid.
-  Their target addresses are the 7-bit values `0x20` for PD1 and `0x21` for
-  PD2; target drivers must not store the shifted 8-bit bus bytes as addresses.
-  Contract telemetry comes from `Active PDO Contract` (`0x31`), `Active RDO
-  Contract` (`0x32`), and `PD Status` (`0x35`). A valid sink contract must be
-  confirmed from those live registers before its current limit is used.
-  The qualified path first powers the otherwise-unpowered BQ25798 while the
-  charger, Mu, and optional loads remain off. After path-good,
-  charger IINDPM is set to `min(PDO current - 250 mA, 2750 mA)` and must be
-  acknowledged exactly before charging or downstream loads can start. A
-  missing or mismatched acknowledgement turns the path back off and latches a
-  fault.
-- Reset-domain release, an all-paths-off observation, service-bus health,
-  charger fault state, thermal validity, and source telemetry are qualified
-  before activation. PACK, AUX, PD1, and PD2 share one one-hot state model.
-- AUX current is never described as negotiated. Target firmware must begin with
-  a conservative 500 mA qualification, command the resulting 250 mA IINDPM,
-  and verify the charger readback before AUX becomes active. It may raise that
-  qualification only from BQ25798 ICO/VINDPM results and a measured input-power
-  limit; a missing, stale, or invalid result fails the source off.
-- Transfers impose a 20 ms all-off deadtime. Validation, path-good, and
-  `MU_12V_PG` timeouts fail safe and latch a fault.
-- Low-SOC pack operation limits the Mu plus eDP request to 15 W and
-  sheds keyboard RGB, radio, audio, and charging requests. `MU_12V` remains off
-  until the target adapter confirms an applied host/eDP power limit no greater
-  than the calculated source envelope. The limit applies whenever PACK is the
-  active source and low-pack telemetry is asserted; it does not depend on a
-  separate pack-only mode flag.
-- Charge power is source-aware: the policy subtracts the platform reserve,
-  measured auxiliary demand, and estimated Mu/eDP demand, caps the remainder,
-  and disables charging when less than 2.5 W remains.
-- Reset and watchdog paths remove every controlled load. Fault recovery always
-  returns to `OFF` and requires deliberate source revalidation.
-- The radio/GNSS/audio daughterboard is optional. Its active-low presence and
-  fault inputs default safe when the connector is empty. An absent, faulted, or
-  timed-out board keeps only `RADIO_DB_PWR_EN` low and does not block the Mu,
-  display, keyboard, trackpad, system audio, Ethernet, Wi-Fi, maker controller,
-  OLEDs, charging, or source selection. Rejected requests are not queued.
-- `ec_telemetry_build_snapshot()` prepares bounded, validity-qualified data for
-  the two SSD1306 displays: SOC, pack voltage/current, charge or discharge
-  power, time remaining, capacity, cycle count, health, active input, and both
-  TPS25751A negotiated contracts. BQ34Z100 current is positive while charging
-  and negative while discharging. BQ34Z100 time values are minutes on the bus;
-  `ec_telemetry_bq34z100_minutes_to_seconds()` rejects `0xffff` and converts
-  valid values before they enter the OLED snapshot. Cell protection handles
-  pack temperature, so the OLED model has no pack-temperature field.
-- The host-tested EC commit adapter rejects impossible output combinations and
-  direct source-to-source changes, forces a passive state before source
-  changes, requires a separate path-only bootstrap commit, writes current and
-  power limits before charger/load enables, commits optional loads last, and
-  attempts a full safe-state rollback after any driver error.
-- The host-tested keyboard Fn layer (`ec_keymap`) translates the fabricated
-  5×14 MX ULP matrix state into a USB HID boot-6KRO report plus a 4-slot
-  consumer report: Fn+1..0→F1..F10, Fn+Esc→grave, Fn+Bksp→Delete,
-  Fn+Up/Down→Brightness, Fn+Left/Right→Volume. 22 host tests.
-- The host-tested fan policy (`ec_fan`) is quiet at idle, performance-biased
-  under load, and never throttles: control temp = max(skin, Mu) in
-  decidegrees C, 40/45 °C hysteresis, 2 s anti-cycling, linear 30→100 % across
-  45→70 °C, 100 % at ≥70 °C, `throttle_imminent` at 80 °C, fail-safe 100 % on
-  invalid temps. 16 host tests.
-- The host-tested OLED content composer (`ec_oled`) renders the user-verified
-  "all system component status" spec into two 8-line text buffers (left:
-  power/battery; right: thermal/fan/system), with dashes for invalid data.
-  16 host tests.
-- The host-tested lid debouncer (`ec_lid`) debounces LID_CLOSED_N (30 ms,
-  R209 pull-up fail-safe open) and emits one-shot just_closed/just_opened
-  edges for ACPI events; it never sequences Mu power on lid events. 12 host
-  tests.
-- The host-tested battery state machine (`ec_battery`) turns the telemetry
-  snapshot + pack_present + charger_enable into a
-  UNKNOWN/NOT_PRESENT/DISCHARGING/CHARGING/FULL report with hysteresis
-  (charge >50 mA, discharge <−50 mA, full <30 mA + SOC ≥95 % with 2 s
-  confirmation) for the Mu OS as `/sys/class/power_supply/BAT0/`. 18 host
-  tests.
-- Maker user rails start off and require an explicit request, independent
-  authorization, and a hardware-interlock observation. All 26 exported RP2350
-  user I/O signals separately require I/O authorization; they start high
-  impedance and return high impedance on reset, watchdog, authorization loss,
-  interlock loss, or power fault. Requests made before their interlock and
-  authorization fault off and are not queued for later activation.
+| Directory | Contents |
+| --- | --- |
+| `ec/src`, `ec/include` | EC policies, commit ordering, telemetry, keyboard, fan, OLED content, lid, and battery state |
+| `ec_target` | STM32 startup, linker file, board drivers, matrix scan, USB HID, and application glue |
+| `maker/src`, `maker/include` | RP2350 maker policy |
+| `tests` | Host tests, mocked device transactions, and policy vectors |
+| `tps25751a` | USB-PD controller configuration and export manifest |
+| `release` | Target release record and HIL matrix |
 
-## Host build
+## EC policy
 
-With CMake 3.20 or newer:
+the EC starts with controlled paths and loads off. source handling uses
+OFF, VALIDATING, ACTIVE, and FAULT states, with a 20 ms all-off interval
+when changing sources. timeouts, invalid telemetry, and failed commits
+return to a passive state or latch a fault for deliberate recovery.
 
-```sh
-cmake --preset host-debug
-cmake --build --preset host-debug
-ctest --preset host-debug
-```
+PD1 and PD2 need valid live status, PDO, and RDO readings. a qualified PD
+path can first power the otherwise-unpowered charger with charging and
+loads off. after path-good, the target writes and reads back IINDPM before
+the policy can trust an applied input-current limit.
 
-On a machine without CMake, the same strict C11 tests can be run without
-creating repository build artifacts:
+AUX is not a negotiated PD source. its starting qualification is conservative,
+and raising it needs measured charger/input evidence. power budgets account
+for the platform, Mu/display, auxiliary loads, and charging. low-pack policy
+uses a provisional 15 W Mu-plus-display ceiling and sheds optional loads.
+that ceiling still needs hardware validation.
+
+the commit adapter checks ordering and output combinations. an acknowledgement
+means a command really took effect, with readback where supported. it must
+not be set just because code attempted a write.
+
+## laptop functions
+
+- `ec_keymap` turns the 5 x 14 keyboard matrix into boot-keyboard and consumer
+  reports, including the agreed Fn layer.
+- `ec_fan` uses skin and Mu temperatures, hysteresis, and a ramp to full fan.
+  invalid temperatures request full fan; thermal behavior still needs measurement.
+- `ec_oled` composes two displays' text. invalid data is shown as unavailable.
+- `ec_lid` debounces lid state without directly power-cycling the Mu.
+- `ec_battery` produces a stable charging/discharging/full/present report
+  from validated telemetry. host transport to the OS is still required.
+- optional radio presence/fault handling keeps the radio separate from the
+  laptop's core power and boot requirements.
+
+the target has some of these drivers and data paths, but not every policy
+module is integrated into the target main loop. use the target status page
+for the remaining work.
+
+## maker policy
+
+the maker rails start off and all 26 user I/O signals start high impedance.
+rail and I/O requests need the corresponding authorization and hardware
+interlock. reset, watchdog, interlock loss, or a power fault removes them.
+the full RP2350 target and its hardware tests remain to be completed.
+
+## host checks
+
+from the repository root:
 
 ```sh
 sh firmware/tools/run_host_tests.sh
 ```
 
-The runner executes nine suites (policy, commit, telemetry, keymap, fan,
-oled, lid, battery, maker) and then `tools/verify_release_contract.py`, which
-checks version consistency, required safety constants and vectors, and the
-evidence rules for `release/hil_matrix.csv`.
+the script compiles the suites with strict C11 warnings, runs them, and checks
+the release contract. tests include policy ordering, keyboard/fan/battery
+behavior, mocked BQ/TCA9539 transactions, matrix debounce, and USB descriptors.
+they do not exercise real USB hardware, analogue behavior, or a programmed MCU.
 
-The implementation has no network dependencies and uses only the C standard
-library in host tests.
+the CMake host build is another option:
 
-The `*_applied` inputs are target-adapter acknowledgements, not optimistic
-write attempts. Target code must assert them only after a successful bounded
-transaction and readback (where the device supports readback), and must clear
-them before starting a new command.
+```sh
+(
+  cd firmware || exit
+  cmake --preset host-debug
+  cmake --build --preset host-debug
+  ctest --preset host-debug
+)
+```
 
-## Deliberate boundary
+## next work
 
-This is not a production firmware release. It does not yet include STM32 or
-RP2350 startup files, linker scripts, board pin initialization, ADC/I2C/USB
-drivers, BQ25798/TPS25751A transactions, USB descriptors, OLED rendering,
-target watchdog setup,
-thermal characterization, signed images, or factory `.elf`, `.bin`, and `.uf2`
-artifacts. Those items remain blocked until target integration and the HIL
-matrix in `release/hil_matrix.csv` is completed with recorded evidence. See
-`release/README.md` for the required startup, programming, and recovery order.
+finish real charge and Mu/eDP budget application, normal operating requests,
+remaining displays/controls, and the OS telemetry transport. build and program
+the targets through a recorded recovery path, then run the HIL matrix.
+
+[release requirements](release/README.md) and [laptop behavior](../docs/hardware.md#expected-behavior)
+describe the result those implementations need to support.
+
+
+## STM32 target
+
+### what's present
+
+| Area | Source | What exists |
+| --- | --- | --- |
+| STM32 foundation | `startup_stm32f407vgtx.s`, `system_stm32f4xx.c`, linker script | Startup, clock setup, SysTick, and memory layout |
+| GPIO and thermal/fan hardware | `gpio.c`, `fan_math.c` | Safe pin initialization, ADC reads, PWM/tach support, and fan math |
+| I2C and service mux | `i2c.c`, `i2c.h` | Bounded bus operations and TCA9548A selection |
+| Source-manager expander | `tca9539.c` | Initialization, input reads, and controlled outputs |
+| Charger | `bq25798.c` | Probe, configuration, current/voltage setters, readback, faults, and ADC telemetry |
+| Fuel gauge | `bq34z100.c` | Gauge reads and control/data operations |
+| PD contract reads | `main.c` | PD status, active PDO/RDO, and qualification input assembly |
+| Keyboard scan | `matrix_scan.c`, `matrix_debounce.c` | Matrix scanning and debounce |
+| USB keyboard | `usb_hid.c`, `usb_hid_desc.c` | OTG_FS device stack and keyboard/consumer descriptors |
+| Application glue | `ec_app.c`, `ec_app_math.c`, `main.c` | Some policy inputs, charger commits, telemetry, and fan integration |
+
+existence here means code is present. host-tested pieces are covered by
+`tools/run_host_tests.sh`; real peripheral and end-to-end behavior still
+need target tests. [dated results](../docs/design-status.md)
+
+### what still stops normal operation
+
+`commit_write()` in `ec_target/main.c` returns false for
+`EC_COMMIT_CHARGE_BUDGET_MW` and `EC_COMMIT_MU_EDP_BUDGET_MW`. this avoids
+claiming a power limit was applied when no complete target path applied it.
+
+the input builder also leaves `request_charger`, `request_mu_12v`, and
+`power_limits_applied` false, with normal requested charge power at zero.
+estimated Mu/eDP and auxiliary power validity are also false. these are
+unfinished integration points, not proof that the power system is ready.
+
+remaining work includes:
+
+- converting policy budgets to real charger and host/display limits, with
+  applied-state feedback and failure handling;
+- normal power-button/operating requests and a checked startup/transfer path;
+- end-to-end battery/telemetry validity and transport to the Mu OS;
+- target integration for OLED rendering, lid events, headphone/speaker
+  behavior, and other controls not connected through the current main loop;
+- a complete RP2350 target, programming, and recovery path;
+- clean, reproducible build artifacts tied to the release record;
+- SWD/BOOTSEL recovery, blank-board programming, readback, and HIL evidence.
+
+do not replace the false returns with unconditional success. implement the
+actual command and verify the result first.
+
+### reference points in the current code
+
+these help locate the implementation. check the schematic generator and
+pin definitions together before changing an assignment.
+
+| Function | Current target assignment |
+| --- | --- |
+| I2C1 | PB6 SCL, PB7 SDA |
+| USB OTG FS | PA11 DM, PA12 DP |
+| AUX voltage ADC | PA6 |
+| Skin and Mu thermal ADCs | PA7 and PB0 |
+| Keyboard rows | PE0-PE4, read with pull-ups |
+| Keyboard columns | PD0-PD13, driven during scan |
+| Fan PWM | PE9, TIM1_CH1 |
+| Lid input | PE10 |
+| SWD | PA13 and PA14 |
+
+the intended clock setup is an 8 MHz HSE with a 168 MHz core and 48 MHz USB
+clock. the scan uses columns as driven outputs and rows as inputs. older
+notes saying to drive the rows are superseded.
+
+`i2c.h` uses 7-bit addresses: TCA9548A `0x70`, TCA9539 `0x74`, PD1 `0x20`,
+and PD2 `0x21`. the PD reads select service-mux channels 2 and 3 respectively.
+use the device headers and schematic for the full bus map and other addresses.

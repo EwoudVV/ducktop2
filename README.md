@@ -1,303 +1,111 @@
 # Ducktop2
 
-Ducktop2 is my second DIY laptop: a 16-inch x86 machine built around the
-LattePanda Mu. I want the flexibility and exposed hardware of a cyberdeck,
-without giving up the shape, portability, or everyday usability of a normal
-laptop.
+i'm building a 16-inch x86 laptop around the LattePanda Mu. i wanted the
+exposed hardware and flexibility of a cyberdeck in something i could actually
+carry around and use every day.
 
-My first version used a Raspberry Pi 500+ and a complete portable monitor. It
-worked, but HDMI and USB-C cables had to loop around the outside of the case.
-Ducktop2 replaces that stack with one purpose-built motherboard, a direct eDP
-display connection, and a separate low-profile mechanical keyboard.
+ducktop1 used a Pi 500+ and a portable monitor. it worked, but the HDMI and
+USB-C cables had to loop around the outside of the case. ducktop2 gets the
+display onto direct eDP and puts the power, ports, and laptop controls on
+custom boards.
 
-![Top view of the Ducktop2 motherboard with routing in progress](docs/images/ducktop2-pcb-top.png)
+**last checked: 4 september 2026.** the BMS is routed and under review. the
+center and two I/O boards are placed and still need routing. the keyboard
+has a rev A production package. the laptop is not ready to order or power up
+as a complete assembly yet. [current status](docs/design-status.md)
 
-> **Current state, 26 August 2026:** the generated motherboard schematic passes
-> its ERC, netlist-closure, calculation, and pin-review checks (now covering
-> the U773 endpoint buck and the active J24/J25 USB-A cluster), sheet 15
-> carries the rear 3.5 mm headphone jack with plug-detect speaker mute.
-> Six EC firmware policy cores are complete and host-tested, plus fail-safe
-> target drivers for the source manager, clocks, startup, USB HID, and ADC.
-> The eight-layer PCB has 1,225 physical footprints; hand routing is in
-> progress at 3,307 unconnected connections. The current independent verdict is
-> still **SCHEMATIC BLOCKED**: routing,
-> DRC/parity, SI, battery, mechanical,
-> procurement, and target-firmware evidence still block an order. The board
-> images in this repository are current routed-in-progress renders, not a
-> fabrication release.
+## what's in it
 
-## What I Am Building
+- LattePanda Mu with an Intel N305, a 16 GB RAM target, and 64 GB onboard eMMC
+- 16-inch AUO B160QAN03.K display, targeting 2560x1600 at 120 Hz over direct eDP
+- M.2 NVMe storage and a separate M.2 Wi-Fi/Bluetooth socket
+- 65-key Cherry MX Ultra Low Profile keyboard and a 140 x 105 mm USB trackpad
+- five USB-C ports, two USB-A ports, HDMI, and Gigabit Ethernet
+- a 3S battery, USB-C PD charging from either side, and an AUX/DC input
+- STM32F407 embedded controller for the laptop's power, keyboard, fan, and controls
+- a separate RP2350 maker controller with protected GPIO and user power
+- two status OLEDs, speakers, a headphone jack, and a microphone
+- an optional radio board with VHF/UHF, GNSS, and its own USB audio path
 
-The target is a self-contained 16-inch Linux laptop with a 2560x1600 120 Hz
-display, an Intel N305 compute module, real NVMe storage, a large trackpad, and
-a Cherry MX Ultra Low Profile keyboard. It should close and carry like a normal
-laptop, with no rear bump and no permanent cables hanging from the sides.
+the EC and maker controller have separate jobs. experimenting with the GPIO
+should leave the laptop's charging, cooling, and keyboard alone. the radio
+board is optional too, so the rest of the laptop can work while it's removed.
 
-The extra cyberdeck hardware is built into the same machine:
+## how the boards fit together
 
-- an independent RP2350 maker controller with protected GPIO;
-- dual-band VHF/UHF radio hardware and GNSS;
-- two small status OLEDs that remain under embedded-controller control;
-- multiple USB-C ports, HDMI, Gigabit Ethernet, and M.2 expansion; and
-- a protected three-cell battery system with several charging inputs.
+the carrier started as one large board. it is now split into a center board,
+left and right I/O boards, and a small BMS. three FFC cables connect them.
+the keyboard and radio are separate boards as well.
 
-The laptop EC and the maker controller are deliberately separate. Experiments
-on the exposed GPIO should not be able to take over keyboard scanning, cooling,
-charging, or system power sequencing.
-
-## Design Goals
-
-- **No external display wiring.** The internal panel connects directly to the
-  LattePanda Mu's onboard eDP connector.
-- **A normal laptop outline.** The measured panel is 352 x 227 mm and the
-  provisional base is 358 x 248 mm.
-- **Useful x86 performance.** The N305 module provides Linux graphics support,
-  PCIe storage, and substantially more headroom than Ducktop1's Raspberry Pi.
-- **Thin mechanical parts.** The keyboard uses Cherry MX Ultra Low Profile
-  switches, and the cooling system uses a flat cold plate, heat pipe, fin stack,
-  and blower.
-- **Repairable major modules.** The Mu, NVMe drive, Wi-Fi card, display,
-  keyboard, trackpad, speakers, battery cells, and cooling hardware remain
-  replaceable.
-- **Visible engineering evidence.** Generated schematics, calculations,
-  verification summaries, renders, and the keyboard production package live in
-  this repository.
-
-## System Architecture
-
-![Ducktop2 system architecture](docs/images/ducktop2-architecture.svg)
-
-| Area | Current design |
-| --- | --- |
-| Compute | LattePanda Mu with Intel N305 processor, LPDDR5, and 64 GB eMMC |
-| Internal display | AUO B160QAN03.K, 2560x1600 at 120 Hz through the Mu's onboard 40-pin eDP output |
-| Storage | PCIe Gen3 x4 M.2 M-key 2280 NVMe plus onboard eMMC fallback |
-| Networking | M.2 E-key 2230 Wi-Fi/Bluetooth and RTL8111H Gigabit Ethernet |
-| User I/O | Five USB-C data ports, HDMI-A, Ethernet, trackpad, keyboard, and two OLEDs |
-| Battery | Three 3.7 V pouch cells in series with cell-level and whole-pack protection |
-| Charging | One rear USB-C PD data/charging port per side plus a protected variable-voltage AUX/DC input |
-| Laptop controller | STM32F407 EC for power policy, keyboard, cooling, controls, radios, and status displays |
-| Maker controller | Chip-down RP2350 exposed as an independent USB device with protected power and GPIO |
-| Audio | Internal USB audio, stereo amplifier and speakers, digital microphone, and a separate radio audio path |
-| Radio/navigation | DRA818V, DRA818U, external filtering and switching, and u-blox MAX-M10S GNSS |
-
-## Power and Battery
-
-Ducktop2 uses a 3S lithium-ion pack. The battery path includes a replaceable
-10 A fuse, autonomous cell overvoltage/undervoltage/overcurrent protection,
-back-to-back MOSFET disconnects, a second whole-pack protection layer, a
-BQ25798 buck-boost charger and NVDC power path, and a BQ34Z100-G1 fuel gauge.
-
-The two rear TPS25751A ports negotiate up to 15 V from USB-C PD sources while
-also carrying USB data. The other three USB-C ports are protected host/data
-ports and safely ignore a connected charger. A separate AUX/DC
-input accepts a wider range of ordinary DC or occasional solar sources through
-its own qualification and protection path. A regulated 12 V rail supplies the
-LattePanda Mu; local converters generate the system 5 V and 3.3 V rails.
-
-The small protection boards attached to the individual cells are kept for
-cell-local thermal cutoff. Electrical pack overvoltage, undervoltage,
-overcurrent, and short-circuit protection are handled on the motherboard.
-
-## Display and Mechanical Layout
-
-The replacement AUO panel has been tested through the original Intehill board
-at its native 2560x1600 resolution and 120 Hz refresh rate. The finished laptop
-will use the Mu's direct eDP connector instead, removing the 114 x 70 mm
-portable-monitor controller board from the chassis.
-
-The eDP harness is not considered generic just because both ends have 40 pins.
-The connector families, contact orientation, pin mapping, cable length, power
-rails, and lane arrangement all need to match before a cable is ordered.
-
-Current measured parts:
-
-| Part | Plan-view size |
-| --- | --- |
-| Display panel | 352 x 227 mm |
-| Provisional base | 358 x 248 mm |
-| Mainboard | 358 x 185 mm, including the fin-stack notch |
-| Battery cells | 100 x 60 mm each |
-| Keyboard PCB | 273.5 x 80.0 mm |
-| Trackpad | 140 x 105 mm |
-| Speakers | 38 x 18 mm each |
-
-The next mechanical work is a proper Z-height model for the battery band,
-trackpad, keyboard, cooling stack, hinges, board supports, and display cable.
-
-## Keyboard
-
-The keyboard is a separate two-layer PCB with 65 Cherry MX Ultra Low Profile
-switches in a 5 x 14 matrix. It connects to the embedded controller through a
-30-pin FFC, keeping the expensive eight-layer motherboard out from underneath
-most of the switch area.
-
-The rev-A board has already been sent to production, and Cherry is supplying 70
-switch samples. Rev A is intended to validate the switch footprint, matrix,
-keycap fit, typing feel, and mechanical stack before optional lighting or other
-changes are considered.
-
-![Cherry MX Ultra Low Profile keyboard daughterboard](docs/images/ducktop2-keyboard-pcb.png)
-
-## Current Verification
-
-The active motherboard hierarchy contains 14 generated child sheets. The
-checks below are reproducible from the repository rather than being a manually
-maintained ERC screenshot.
-
-| Check | Current result |
-| --- | --- |
-| KiCad ERC | 0 errors; 27 intentional warnings (13 library-copy + 14 grounded-pin ties) |
-| Independent netlist closure | 1,580 pass, 0 fail |
-| Bounded electrical calculations | 123 pass, 0 fail |
-| Pin review | 2,603 pass, 0 fail, 0 review |
-| Mainboard duplicate references | 0; checked by the release gate |
-| PCB DRC / parity | 8-layer board in routing: 318 tracked findings (documented placement backlog + USB-A cluster), 3,307 unconnected (499 partial kicad-cli subset), 0 parity; enforced by the release gate allowlist |
-| BOM procurement completeness | 378 unresolved items |
-| Independent design review | **SCHEMATIC BLOCKED** (2026-07-27; closed findings recorded) |
-| Host firmware policy tests | Pass on host (9 suites); 42 HIL rows remain `NOT_RUN` |
-
-The project has also been reviewed repeatedly against component datasheets.
-The current summaries show what was checked and what remains uncertain; they
-are not a substitute for target firmware, signal-integrity work, thermal and RF
-measurements, or first-article testing. The current PCB DRC counts are an
-in-progress routing baseline, not waived release exceptions.
-
-## Cost and Bill of Materials
-
-The full build is estimated at roughly **$3,560**, dominated by the main PCB
-component sourcing and assembly (~$1,500) and the compute module. The line-item
-breakdown lives in [`docs/bom-and-cost.md`](docs/bom-and-cost.md), and the
-application-pitch version of the rough BOM is in
-[`docs/sponsorship/funding-pitch.md`](docs/sponsorship/funding-pitch.md).
-These are planning estimates, not vendor quotes; re-quote the bare-board fab
-line against the committed eight-layer stackup before ordering.
-
-| Item | Cost |
-| --- | --- |
-| LattePanda Mu N305 compute module | $300 |
-| Main PCB fab (358 x 185 mm, NextPCB) | $200 |
-| Main PCB assembly + component sourcing | $1,500 |
-| Radio daughterboard PCB fab + assembly + component sourcing | $600 |
-| Cherry MX ULP keycaps x65 | $50 |
-| 256 GB NVMe SSD 2280 | $50 |
-| Wi-Fi 6E E-key card | $40 |
-| Cooling (blower fan, heatpipe, coldplate) | $50 |
-| CNC aluminum enclosure | $300 |
-| 5000 mAh battery (100 x 60 x 6) | $50 |
-| eDP panel (Samsung ATNA60HU01-0) | $400 |
-| Framework 13 hinges | $20 |
-| **Total** | **~$3,560** |
-
-## Open and Check the Project
-
-KiCad 10.0.4 is the current reference version. Clone the repository and open
-`ducktop2.kicad_pro`:
-
-```sh
-git clone https://github.com/EwoudVV/ducktop2.git
-cd ducktop2
+```mermaid
+flowchart LR
+    L[Left I/O] <-->|68-pin FFC| C[Center: Mu, EC, charger, gauge, maker MCU]
+    C <-->|68-pin FFC| R[Right I/O]
+    B[BMS: protection and balancing] <-->|30-pin FFC| C
+    Cells[3S cells and cell taps] --- B
+    C --- K[Keyboard]
+    C --- Radio[Optional radio and GNSS]
+    C -->|Mu onboard eDP connector| Panel[Internal display]
 ```
 
-The preferred schematic check performs regenerating and report-writing work in
-an isolated copy, then confirms that the live source did not change:
+the center charger controls pack charging. the BMS sees the individual cell
+taps and does passive balancing locally. the raw battery negative stays on
+the BMS side of the protection circuit. [power and battery](docs/power-and-battery.md)
 
-```sh
-python3 gen/check_release_candidate.py --stage schematic
-```
+the replacement panel has been tested at 2560x1600 and 120 Hz using the
+Intehill controller. the final Mu-to-panel harness still needs its own pin
+map and testing. [display work](docs/display-direct-edp.md)
 
-The host-side firmware policy tests do not require a vendor SDK:
+## where the work is
 
-```sh
-sh firmware/tools/run_host_tests.sh
-```
+the next job is to fix the inherited BMS fuse-net mismatch and reconcile its
+four-layer stackup description with the eight enabled copper layers. then
+comes the power-route review, working verification checks, and the rest of
+the routing. [roadmap](docs/design-status.md#work-order)
 
-See [build and verification](docs/build-and-verify.md) before regenerating the
-schematics or comparing the PCB to the netlist.
+the firmware has host-tested policy code and a partial STM32 target port.
+charging and Mu power-budget integration are still unfinished, and the
+hardware tests have not been run. [firmware status](firmware/README.md#stm32-target)
 
-## Repository Layout
+the enclosure target is 358 x 248 mm. the keyboard, cooling, trackpad, cells,
+and cables still need a measured height model before the case can be frozen.
+[mechanical plan](docs/mechanical.md)
 
-| Path | Contents |
+## open the project
+
+KiCad 10.0.4 is the version used for the latest checks.
+
+| Work | Open |
 | --- | --- |
-| `ducktop2.kicad_*` | Main KiCad project and eight-layer motherboard |
-| `01_*.kicad_sch` ... `16_*.kicad_sch` | Generated hierarchical sheets |
-| `gen/` | Schematic generators, local symbols, and verification tools |
-| `ducktop2.pretty/` | Project-local footprints |
-| `firmware/` | Host-tested EC and maker-controller policy cores |
-| `mechanical/` | Current dimensions, floorplans, and retention contracts |
-| `manufacturing/` | Keyboard rev-A production package and release gates |
-| `radio_daughterboard/` | Removable VHF/UHF, GNSS, and radio-audio board |
-| `software/os-theme/` | Early Fedora KDE theme work |
-| `verification/` | Current checks and concise verification evidence |
-| `docs/` | Architecture, status, renders, schematic exports, and project background |
+| Center schematic | `ducktop2.kicad_pro` |
+| Center layout | `ducktop2-center.kicad_pcb` |
+| Left I/O | `left_io/left_io.kicad_pro` |
+| Right I/O | `right_io/right_io.kicad_pro` |
+| BMS | `bms/bms.kicad_pro` |
+| Keyboard | `12_keyboard_daughterboard.kicad_pro` |
+| Radio | `radio_daughterboard/radio_daughterboard.kicad_pro` |
 
-## Documentation
+read [build and verification](docs/build-and-verify.md) before running a
+generator or syncing a board. the boards contain manual routing that a full
+rebuild can overwrite. i want the routing tools to work through the visible
+KiCad editor so i can follow each change. the center board also has a specific
+net-normalization step that a normal F8 update skips.
 
-- [Hardware architecture](docs/hardware.md)
-- [Current design status](docs/design-status.md)
-- [Bill of materials and cost breakdown](docs/bom-and-cost.md)
-- [Funding application pitch](docs/sponsorship/funding-pitch.md)
-- [NextPCB sponsorship material](docs/sponsorship/nextpcb-email-draft.md)
-- [Direct-eDP panel and cable work](docs/display-direct-edp.md)
-- [Mechanical measurements](docs/mechanical.md)
-- [Firmware policy](firmware/README.md)
-- [Radio/GNSS daughterboard](radio_daughterboard/README.md)
-- [Keyboard production package](manufacturing/keyboard_revA_jlcpcb/README_JLCPCB.md)
-- [Verification summary](verification/README.md)
-- [OS theme work](software/os-theme/README.md)
-- [eMMC recovery/hibernation design](software/os-theme/docs/emmc-recovery.md)
-- [Project handoff for the next session](HANDOFF_PROJECT.md)
-- [Current full schematic export](docs/exports/ducktop2-selected-schematics.pdf)
-- [Current independent review](verification/INDEPENDENT_REVIEW_2026-07-27_trackpad-usba2.md)
-- [Current post-fix audit](verification/INDEPENDENT_REVIEW_2026-07-27_postfix.md)
-- [Independent review prompt](docs/review-prompt.md)
-- [Ducktop1 background](docs/ducktop1.md)
+## documentation
 
-## Roadmap
+- [current status and work order](docs/design-status.md): dated checks, open issues, and next steps
+- [hardware](docs/hardware.md): boards, ports, and interfaces
+- [expected behavior](docs/hardware.md#expected-behavior): what the finished laptop should do
+- [cables and connectors](docs/cables-and-connectors.md): pin maps and assembly details
+- [cost and sourcing](docs/bom-and-cost.md): what still needs a quote
+- [bring-up plan](docs/BRINGUP_TEST_PLAN.md): preparation and test order
+- [verification records](verification/README.md): checks, current evidence, and release records
+- [handoff](docs/HANDOFF.md): where to resume work
+- [OS work](software/os-theme/README.md): Fedora KDE, recovery, and theme files
+- [ducktop1](docs/ducktop1.md): where this started
 
-1. ✅ Remove the three verified duplicate physical PCB references and their
-   duplicate-only copper, and separate the overlapping unrouted R251 trackpad
-   USB resistor from R250 (2026-07-27).
-2. ✅ Add the rear 3.5 mm headphone jack with plug-detect speaker mute to sheet
-   15 (`fae06d4`); EC headphone firmware (I2C unmute/volume, HP_DETECT) remains
-   target-side work.
-3. ✅ Host-tested firmware policy cores: keyboard Fn layer (`d0991b3`), fan
-   policy (`d1396d0`), OLED content (`d95d9f2`), lid debounce (`22a966d`),
-   battery state machine (`f223750`); target-side drivers, transports, and the
-   42 HIL rows remain.
-4. ✅ eMMC recovery/hibernation design and setup tooling
-   (`software/os-theme/docs/emmc-recovery.md` + `install/emmc-recovery-setup.sh`,
-   `e2c594f`); execution happens at Mu bring-up.
-5. Classify and resolve the 1,404 current PCB DRC findings, 499 unconnected
-   items, and 199 schematic-parity observations as routing continues.
-6. ~~Freeze the six-layer stackup and controlled-impedance geometries~~ — COMPLETED via P1.4. Six-layer stackup committed at the time (see docs/design-status.md item 8 for the 2026-08-13 upgrade to the current 8-layer stackup). NextPCB field-solve since approved all impedance families (`manufacturing/mainboard_stackup_release.json`).
-7. ~~Complete manufacturer part numbers and assembly constraints in the BOM~~ — COMPLETED. 43 gaps assigned Murata GRM MPNs in `verification/BOM_MPN_ASSIGNMENTS.md`.
-8. Route and review power and high-speed interfaces, followed by control,
-   audio, and GPIO.
-9. Refill zones only in a copied board, clean silkscreen, run full DRC, and
-   review every exception.
-10. Finalize the eDP harness, battery pack, trackpad-cable retention, cooling
-    stack, and enclosure model.
-11. Assemble the first article, bring up one rail at a time, and record the test
-    results before installing the compute module or cells permanently.
+## license
 
-## Reviews and Contributions
-
-Technical review is welcome, especially around battery safety, USB-C and PD,
-PCIe/eDP/HDMI layout, RF coexistence, embedded-controller defaults, and
-manufacturing constraints. Please include the relevant sheet, reference, pin,
-datasheet section, and expected failure mode when reporting an electrical
-issue. The reusable [review prompt](docs/review-prompt.md) describes the current
-architecture and avoids several retired design paths.
-
-This is active prototype hardware. Do not order the mainboard directly from
-the files in the repository without doing your own review. Lithium-ion packs,
-USB-C power paths, RF transmitters, and high-current rails can damage hardware
-or cause injury when assembled or tested incorrectly.
-
-## License
-
-Ducktop2 is released under the [MIT License](LICENSE). The license covers the
-files in this repository, but it does not provide component certifications,
-radio authorization, electrical-safety approval, or any warranty that a board
-built from the current work in progress will function safely.
+the project files are under the [MIT license](LICENSE).
+this is still prototype hardware. use the current status and review records
+alongside the design files if you're building from it.

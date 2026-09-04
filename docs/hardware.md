@@ -1,108 +1,131 @@
-# Hardware Architecture
+# hardware
 
-This page describes the current Ducktop2 motherboard, not the retired ideas
-that appeared earlier in the project.
+updated 4 september 2026. this describes the intended circuit in the current
+split projects. [current status](design-status.md) lists where the board
+files or testing still fall short of it.
 
-## Compute and Display
+## boards
 
-The main computer is a LattePanda Mu with an Intel N305 or N100-class processor,
-LPDDR5 memory, and 64 GB eMMC. A regulated `MU_12V` rail powers the module and
-its onboard eDP backlight supply.
+| Board | Main contents | Connection to the rest of the laptop |
+| --- | --- | --- |
+| Center | Mu socket A1, STM32 EC, RP2350 maker MCU, charger U2, gauge U10, input selectors, converters, storage, system audio | FPC102, FPC103, FPC105, keyboard, radio, and module connectors |
+| Left I/O | USB7206C hub, PD1 controller and protection, USB-C J21/J22/J23, USB-A J24/J25, AUX connector J190 | FPC101 to center FPC102 |
+| Right I/O | PD2 controller and protection, USB-C J11/J12, HDMI, RTL8111H Ethernet | FPC104 to center FPC103 |
+| BMS | J2 cell harness, F1, BQ77915, LTC4368, protection FETs, shunts, TPB1-16 | FPC106 to center FPC105 |
+| Keyboard | 65 MX ULP switches and diodes, 5 x 14 matrix | 30-pin FFC to J310 |
+| Radio | DRA818V, DRA818U, filters/switches, MAX-M10S GNSS, separate PCM2900C radio codec | Removable FFC interface |
 
-The internal display is an AUO B160QAN03.K. The replacement panel has been
-tested at its native 2560x1600 resolution and 120 Hz through the original
-Intehill controller. The laptop design uses the Mu's onboard 40-pin eDP
-connector instead, so the carrier board does not route the eDP lanes.
+the left, center, and right boards retain the original shared XY frame.
+the BMS was reshaped and moved, so its file coordinates are no longer an
+installed chassis position. the radio and keyboard also have their own frames.
 
-The eDP cable is still a measured part, not a generic laptop cable. Both
-connector families, pin-one orientation, power rails, and all 40 contacts must
-be confirmed before ordering the final harness. See
-[display-direct-edp.md](display-direct-edp.md).
+## compute, display, and storage
 
-## Storage and Networking
+the target is a LattePanda Mu N305 with 16 GB RAM and 64 GB eMMC. A1 is its
+socket/interface, with separate mechanical retention. the module is powered
+from regulated `MU_12V`, made by the TPS552892 converter.
 
-- M.2 M-key 2280 socket with PCIe Gen3 x4 for the primary NVMe drive
-- M.2 E-key 2230 socket for an AX210-class Wi-Fi/Bluetooth card
-- RTL8111H PCIe Gigabit Ethernet with a mid-mount integrated-magnetics jack
-- External antenna connections at the rear of the case
+the AUO B160QAN03.K internal display connects to the Mu's onboard eDP
+connector. those eDP lanes do not run across the custom center PCB or an I/O
+FFC. the final harness is still pending. [display details](display-direct-edp.md)
 
-High-speed placement and routing are in progress. AC-coupling capacitors,
-clocks, endpoint support parts, controlled impedance, return paths, length
-matching, and final termination still require an interface-by-interface review
-before those links can be released.
+J10 is the M-key 2280 NVMe socket with PCIe x4. J40 is the E-key 2230
+Wi-Fi/Bluetooth socket. the live schematic includes its PCIe TX/RX path to
+Mu HSIO3, its reference clock/reset support, and USB.
 
-## External I/O
+## ports
 
-- Five USB-C host/data ports through native Mu links and a USB7206C hub
-- One rear data/charging port per side with TPS25751A USB-PD control
-- Three host/data ports with a source-only power role and protected 5 V VBUS
-- External HDMI-A from Mu TCP0
-- Two 15 V USB-C PD charging inputs
-- Protected AUX/DC input for bench supplies or occasional solar use
-- Gigabit Ethernet
-- Rear radio and wireless antenna connections
+| Reference | Board | Intended role |
+| --- | --- | --- |
+| J21 | Left | USB-C data and PD charging input |
+| J22, J23 | Left | USB-C host/data ports with protected source VBUS |
+| J11 | Right | USB-C data and PD charging input |
+| J12 | Right | USB2 host/data port from hub DS4, with protected source VBUS |
+| J24 | Left | USB3 Type-A on hub downstream port 5 |
+| J25 | Left | USB2 Type-A on hub downstream port 6 |
+| J190 | Left | AUX/DC input |
 
-The earlier VL822 USB hub and USB-C video-port plans are gone. The two rear
-PD/data ports use native Mu links, the other three ports remain data-capable,
-and the external video connector is HDMI.
+J12's `HUB_DS4_DP/DM` and `HUB_PRT_CTL4` cross both I/O cables. its U1760
+power switch is hub-controlled. J12 is not a third laptop charging input.
 
-## Battery and Power
+external HDMI comes from the Mu TCP0 path. Gigabit Ethernet uses the RTL8111H
+on the right board. review the complete routed channel, including cables,
+coupling, clocks, protection, and connector transitions before release.
 
-Ducktop2 uses three 3.7 V pouch cells in series. The motherboard contains:
+## controllers
 
-- BQ7791500 autonomous three-cell overvoltage, undervoltage, overcurrent, and
-  short-circuit protection
-- Back-to-back charge/discharge MOSFETs and an 8 mOhm current shunt
-- LTC4368-1 whole-pack protection, a second shunt, and a replaceable 10 A fuse
-- BQ25798 buck-boost charger and NVDC power path
-- BQ34Z100-G1 pack fuel gauge
-- Two TPS25751A USB-C PD controllers with released EEPROM policy
-- Default-off input eFuses and an always-on source manager
-- TPS552892 regulated 12 V rail plus system 5 V and 3.3 V rails
+the STM32F407 EC owns laptop functions: input qualification, power sequencing,
+charging policy, keyboard scanning/HID, fan control, lid and buttons, status
+OLEDs, and optional-device enables. its policy and target-code status are in
+the [firmware docs](../firmware/README.md).
 
-The small boards attached to the cells are retained for cell-local thermal
-cutoff. They are not used as the motherboard's electrical OV/UV/OC protection.
-The motherboard intentionally has no battery thermistor harness.
+the RP2350 maker controller is independent and appears as a separate USB
+device. exposed GPIO and user rails have their own authorization and
+interlock policy. experiments on those pins should not control the EC.
 
-## Controllers
+## input and audio
 
-The STM32F407 embedded controller owns the laptop functions that the x86 module
-does not provide directly:
+the keyboard is a 273.5 x 80.0 mm, two-layer, 0.8 mm PCB. its matrix goes
+straight to the EC over an FFC. the firmware scans columns and reads rows;
+the Fn layer and report generation have host tests.
 
-- source qualification, charging policy, and power sequencing
-- keyboard scan and USB HID
-- fan control and temperature monitoring
-- lid, power, and reset controls
-- two SSD1306 status displays
-- radio, GNSS, trackpad sideband, and audio enables
+the JOMAA trackpad is a complete USB device. a USB-C plug stays at the
+trackpad, and the cut Standard-A end of its USB2 cable goes to the four J58
+solder lands: 1 GND, 2 D-, 3 D+, 4 VBUS. cable retention is still unfinished.
 
-The RP2350 is a separate maker controller. It appears as its own USB device and
-exports protected GPIO and user power without giving experiments control over
-the laptop's EC.
+system audio uses its own USB codec, TPA2012D2 speaker amplifier, headphone
+amplifier/jack, and microphone path. the radio codec is separate. headphone
+insertion is intended to mute the speakers through EC control.
 
-## Keyboard, Trackpad, and Audio
+## power and radio
 
-The keyboard is a separate 273.5 x 80 mm, two-layer board with 65 Cherry MX
-Ultra Low Profile switches in a 5x14 matrix. It connects to the mainboard over a
-30-pin FFC. The rev-A keyboard production files are already generated.
+the battery, charger, protection, source priority, and ground references are
+covered in [power and battery](power-and-battery.md).
 
-The trackpad is a 140 x 105 mm USB unit. Its USB-C plug is retained at the
-trackpad; a cut USB 2.0 Standard-A-to-USB-C cable is soldered directly to the
-four labelled J58 lands on the motherboard (GND, D-, D+, VBUS), with continuity
-checked before power-up. This is an assembly contract, not a released cable
-assembly: cable part number, conductor gauge, length, bend radius, strain
-relief, retention hardware, and pull test remain open. System audio uses an internal USB hub,
-a PCM2900-family codec, a TPA2012D2 stereo amplifier, two front speakers, and a
-chip-down digital microphone/preamp path. A second USB audio codec handles the
-radio receive/transmit audio path.
+the radio board is removable. its power, data, control, PTT, and status paths
+default off or inactive. the rest of the laptop is intended to operate with
+it absent. RF filters, antennas, and coexistence still need measurement.
+[radio board](../radio_daughterboard/README.md)
 
-## Radio and Navigation
 
-The motherboard supports DRA818V and DRA818U modules for 2 m and 70 cm FM. Each
-path has external low-pass filtering and RF switching between the internal feed
-and a rear connector. A u-blox MAX-M10S provides GNSS for position, APRS, and
-software-assisted satellite work.
+## expected behavior
 
-The RF layout, antennas, filter tuning, coexistence, and emissions still need
-physical validation. The schematic provides the intended paths; it does not
-replace VNA and spectrum-analyzer measurements.
+| When i do this | Intended behavior | What's still needed |
+| --- | --- | --- |
+| Press power | The EC qualifies the available source, applies limits, and starts the Mu in order. | Normal target requests, applied budgets, and startup HIL. |
+| Plug a charger into J21 or J11 | The laptop negotiates PD and charges when the source and power budget allow it. | Target integration and measured charging/source-transfer tests. |
+| Charge with the Mu off | The always-on EC and charger can manage charging while compute stays off. | Validate this on the finished hardware/firmware. |
+| Plug power into J12/J22/J23 | Those ports remain source-only host/data ports; they do not charge the laptop. | Port-role and back-power tests. |
+| Use AUX/DC | The source is qualified within the actual protection windows and available power. | Measured limits, charging behavior, and source transfer. |
+| Close the lid | Turn the internal display off while the Mu keeps running. opening the lid should restore the display without a power cycle. | Target lid events, OS integration, and display testing. |
+| Type or use Fn | The 65-key matrix produces normal keyboard and consumer reports. | Verify every physical switch and USB report on target. |
+| Plug in headphones | Route audio to headphones and mute the speakers. | EC detect/amp integration and audio tests. |
+| Read battery status | Show valid percentage, charge state, and useful remaining-time data. | Pack calibration and EC-to-OS telemetry transport. |
+| Look at the OLEDs | Show real power/battery and thermal/system information; unavailable data stays unavailable. | SSD1306 target rendering, valid telemetry, and tests. |
+| Run a heavy workload | The fan responds to measured temperatures and the system stays within a validated power/thermal envelope. | Characterize the actual cooler and integrate host limits. |
+| Experiment with maker GPIO | The RP2350 handles the experiment independently of laptop control. | Complete target/interlock behavior and test it. |
+| Remove the radio board | The laptop can still boot, charge, and use its normal input/audio/networking. | Optional-board isolation and fault tests. |
+| Lose the main NVMe install | Boot a prepared recovery environment from eMMC or external recovery media. | Build and test the recovery path on the Mu. |
+
+## keyboard Fn layer
+
+the implemented keymap uses Fn+1..0 for F1..F10, Fn+Esc for grave/tilde,
+Fn+Backspace for Delete, Fn+Up/Down for brightness, and Fn+Left/Right for
+volume. the matrix scans columns and reads rows. software mapping tests
+are separate from physical key and USB enumeration tests.
+
+## OLED content
+
+the planned left OLED shows source, battery percentage/state, voltage,
+current, power, time remaining, capacity, cycles, and health. the right shows
+fan, skin/Mu temperature, system/optional-device state, firmware version,
+and faults. the content composer exists; all of that still needs reliable
+target measurements and display transport.
+
+## display and storage
+
+the internal display target is 2560x1600 at 120 Hz over direct eDP. the
+panel has achieved that mode on the Intehill controller; the final Mu harness
+has not been validated. the main OS uses NVMe, with eMMC planned for recovery,
+hibernation storage, and offline data. hibernation is a separate explicit
+operation from the agreed lid-close behavior.

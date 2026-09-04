@@ -1,38 +1,22 @@
-# Ducktop1
+# ducktop1
 
-Ducktop1 was the proof that I actually wanted to use this kind of computer. It
-combined a Raspberry Pi 500+ with a 16-inch 2560x1600 portable monitor in a
-custom laptop-style case.
+ducktop1 was my first version of this laptop idea. it used a Raspberry Pi
+500+ and a 16-inch 2560x1600 portable monitor in a custom case. it worked,
+including the display at up to 90 Hz, but the packaging was awkward.
 
-The build worked, including the display at up to 90 Hz, but it also exposed the
-problems that Ducktop2 is meant to solve:
+the HDMI and USB-C cables had to loop around the outside of the case.
+the keyboard, trackpad, display, and power system were still separate
+things, and the monitor controller decided too much of the internal layout.
 
-- HDMI and USB-C cables had to run outside the case
-- the Pi desktop was not as smooth as I wanted at the panel resolution
-- the portable-monitor controller and its connectors controlled too much of
-  the mechanical layout
-- the keyboard, trackpad, power system, and display were separate products
-  rather than one integrated computer
+ducktop2 keeps the 16-inch format, mechanical keyboard, battery operation,
+and exposed maker hardware. it moves to an x86 Mu module and custom boards,
+with the display connected directly over eDP. the carrier was later split
+into several boards to fit the build.
 
-Ducktop2 keeps the useful parts of that build: the 16-inch format, a real
-mechanical keyboard, battery operation, exposed maker hardware, and the
-cyberdeck character. It changes the computer to an Intel x86 module and moves
-the wiring onto one carrier board.
+the original display was damaged while being opened, although its LCD
+still worked. the teardown helped identify the panel and controller
+connections. a replacement AUO B160QAN03.K was later tested successfully
+at 2560x1600 and 120 Hz using the Intehill controller.
 
-The original display was damaged while being opened, but its LCD still worked.
-That teardown identified the panel family and controller connections. A
-replacement AUO B160QAN03.K panel was later bought and tested successfully at
-2560x1600 and 120 Hz on the Intehill controller.
-
-## Photo Set
-
-The public photo set will include:
-
-1. Ducktop1 closed and powered on
-2. the keyboard and display in normal use
-3. the underside or internal layout
-4. the external cable path that motivated Ducktop2
-5. the recovered controller and panel hardware
-
-Those photos are being taken separately so the repository does not publish old
-personal camera-roll material by accident.
+[ducktop2](../README.md) and [the current display work](display-direct-edp.md)
+pick up from there.
