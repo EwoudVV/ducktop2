@@ -22,10 +22,13 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-checked 4 september 2026. the BMS is routed and under review. its fuse-net
-connection and layer setup need correction before fabrication. the center
-and I/O boards are placed and still need routing. the keyboard has a rev A
-production package, and the radio is still a placement board.
+checked 5 september 2026. the four-layer BMS routing is finished, with
+zero DRC errors, warnings, or unconnected items. schematic ERC is clean,
+and the connected pads match the schematic. the power paths, shunt pickups,
+reference grounds, and connector current sharing have been reviewed.
+protection and thermal testing still need assembled hardware. the center
+and I/O boards are eight layers and still need routing. the keyboard has a
+rev A production package, and the radio is still a placement board.
 
 the replacement panel has run at 2560x1600 and 120 Hz on the Intehill
 controller. the final Mu-to-panel harness still needs its own validation.

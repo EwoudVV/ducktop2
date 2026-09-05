@@ -1,8 +1,9 @@
 # power and battery
 
-updated 4 september 2026. this describes the intended circuit. the routed
-BMS still needs its fuse-net connection and layer setup reconciled with
-that design before fabrication.
+updated 5 september 2026. the four-layer BMS routing is finished. the saved
+board has zero DRC errors, warnings, or unconnected items, and schematic
+ERC is clean. the power and sense routing checks are complete. assembled
+hardware still needs the protection, load, and thermal tests below.
 
 ## cells and board responsibilities
 
@@ -45,10 +46,22 @@ J2 PACK_POS_RAW
 `BAT_PROT_FET_COMMON` belongs to the LTC4368 stage. `BAT_PROT_SENSE` is
 also part of the main current path, despite its name.
 
-on the reviewed board, both F1 pads numbered 2 are instead assigned to
-`PACK_POS_FUSED`. that joins the fuse directly to the output and bypasses
-the intended secondary stage. the same assignment is present in the
-pre-routing commit. changing the documentation has not corrected the board.
+both F1 pads numbered 2 connect to `BAT_PROT_VIN`. the old fuse-to-output
+bypass is gone. the input, FET interconnect, shunt input, and protected
+output use wider routes, parallel copper, and multiple vias at their
+main transitions. the protected output no longer takes the long edge detour.
+
+U11 SENSE and VOUT each run directly to their RS10 pad. neither trace joins
+the load copper before reaching the shunt. the physical copper check includes
+zone fills, so a same-net pour cannot silently bypass the separate pickup.
+
+the twelve positive FPC contacts are fed from both ends of their pin group,
+with a three-layer bus and a front copper spreader. the fifteen return
+contacts use `FG_VSS`. the FET pin-one markers and test-point outlines now
+clear the exposed pads.
+
+source: [LTC4368 datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4368.pdf),
+layout considerations.
 
 ## return path and reference grounds
 
@@ -71,6 +84,12 @@ J2 PACK_NEG_RAW
 the BQ77915 itself uses `PACK_NEG_RAW` as its VSS reference. `FG_VSS` is
 the protected external return on the BMS. the center uses `/FG_VSS` for
 the same cable connection, on the pack side of the gauge shunt.
+
+the quiet `PACK_NEG_RAW` copper joins the battery return at J2 pin 4.
+it stays separate from the high-current run to RS11. R845 and R846 have
+separate pickups at the two RS11 pads. R844 senses the top cell at J2 pin 1;
+R840 and R844 exchanged positions to make room for that connection.
+R850 now sits beside Q704, with a short gate-to-source branch.
 
 raw pack negative does not cross FPC-3. an extra bond from raw negative to
 system ground would bypass the primary return protection and gauge path.
@@ -127,14 +146,49 @@ cell-local cutoff boards intended to provide thermal cutoff. this is a
 design decision to preserve in reviews; the actual cell assemblies and
 their cutoff behavior still need verification.
 
-## remaining review
+## routing checks and load tests
 
-resolve the F1 net mismatch and BMS layer conflict first. then check the full
-current paths, shunt connections, gate routing, sensing branches, via
-capacity, FFC current sharing, and fuse/protection tolerances. choose copper
-weights from that review. there is no blanket trace width or temperature-rise
-number that signs off every segment.
+the checked board has 62 footprints, 730 track segments, 313 vias, and four
+35 um copper layers. all 187 connected physical pads match a fresh schematic
+export. the FET footprint combines drain contacts 5-8 in its single pad 5.
+its copper and paste geometry are unchanged by the pin-marker cleanup.
 
-the gauge also needs configuration and calibration for the actual pack.
-protection trip/recovery, charging, balancing, power transfer, and thermal
-behavior all belong in the [bring-up work](../BRINGUP_TEST_PLAN.md).
+the copper loss calculation uses the actual filled geometry, 35 um copper,
+and 20 um hole plating. resistance was checked on a 0.1 mm grid, with 0.05 mm
+checks for the shunt pickup and connector sharing.
+
+| copper path | estimated resistance at 20 C |
+| --- | ---: |
+| battery positive to fuse | 9.4 milliohms |
+| fuse to Q11 | 4.0 milliohms |
+| Q11 to Q12 | 6.1 milliohms |
+| Q12 to RS10 | 9.5 milliohms |
+| RS10 to FPC positive | 8.5 milliohms |
+| battery negative to RS11 | 6.2 milliohms |
+| RS11 to Q703 | 1.9 milliohms |
+| Q703 to Q704 | 4.3 milliohms |
+| Q704 to FPC return | 4.6 milliohms |
+
+together, these copper paths dissipate about 0.61 W at 3 A or 2.1 W at
+5.6 A with copper assumed to be at 80 C. this excludes the FETs, shunts,
+fuse, connectors, and cable. 80 C is an input to the resistance calculation,
+not a prediction of board temperature.
+
+the 5.6 A review load covers the LTC4368's 60 mV upper forward threshold
+with an 11 milliohm shunt at -1% tolerance. at that load, the largest
+calculated positive-contact current is 0.497 A with equal 20 milliohm
+external paths, or 0.479 A with equal 50 milliohm paths, using 80 C copper.
+the connector rating is 0.5 A per contact. actual contact and cable
+variation still needs a load test. these calculations do not establish a
+continuous operating-current rating for the assembled pack.
+
+source: [Hirose FH12 connector rating](https://www.hirose.com/en/product/p/CL0528-0019-5-98).
+
+the small resistor and capacitor designators are on the back silkscreen.
+front test-point numbers 1-16 correspond to TPB1-TPB16 in the schematic;
+point 14 uses stacked digits. the assembly layer retains the full references.
+
+the remaining work is physical bring-up: protection trip and recovery,
+current sharing, voltage drop, balancing, and temperature under load. the
+gauge also needs configuration and calibration for the actual pack. use the
+[bring-up plan](../BRINGUP_TEST_PLAN.md) before powered integration.

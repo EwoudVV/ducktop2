@@ -965,8 +965,15 @@ def resolve_connectors(board_key, final_pads, region, keepout, holes_pads,
     return out
 
 
-def splice_setup_layers(path):
-    """Replace the (layers) and (setup) blocks with the 8-layer originals."""
+def splice_setup_layers(path, board_key):
+    """Keep the bms stackup; copy the eight-layer setup for the side boards."""
+    if board_key == "B":
+        txt = open(path).read()
+        start, end = extract_block(txt, "layers")
+        copper = re.findall(r'"((?:F|B|In\d+)\.Cu)"', txt[start:end])
+        if copper != ["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"]:
+            raise ValueError("the bms needs its four-layer setup before rebuilding")
+        return
     orig = open(ORIG).read()
     layers = orig[extract_block(orig, "layers")[0]:extract_block(orig, "layers")[1]]
     setup = orig[extract_block(orig, "setup")[0]:extract_block(orig, "setup")[1]]
@@ -1487,7 +1494,7 @@ def inherit_netclasses():
                     return r
         return None
 
-    center = json.load(open(os.path.join(PROJDIR, "ducktop2.kicad_pro")))
+    center = json.load(open(os.path.join(PROJDIR, "ducktop2-center.kicad_pro")))
     cns = find(center, "net_settings")
     center_classes = {c["name"]: c for c in cns["classes"]}
     center_patterns = cns["netclass_patterns"]
@@ -1503,6 +1510,8 @@ def inherit_netclasses():
                      {"netclass": "POWER_HI", "pattern": "/PACK_POS_RAW"},
                      {"netclass": "POWER_HI", "pattern": "/BAT_PROT_VIN"},
                      {"netclass": "POWER_HI", "pattern": "/BAT_PROT_FET_COMMON"},
+                     {"netclass": "POWER_HI", "pattern": "/BAT_PROT_SENSE"},
+                     {"netclass": "POWER_HI", "pattern": "/BMS_SENSE_N"},
                      {"netclass": "POWER_HI", "pattern": "/BMS_FET_COMMON"},
                      {"netclass": "POWER_HI", "pattern": "FG_VSS"}]}
     for board, xml in (("left_io", "verification/generated/left_io_netlist.xml"),
@@ -1874,7 +1883,7 @@ def main():
                     add_fp(board, lib, name, ref, pos, rot)
 
             pcbnew.SaveBoard(out, board)
-            splice_setup_layers(out)
+            splice_setup_layers(out, board_key)
             if leftovers:
                 txt = open(out).read()
                 txt = remove_footprint_blocks(txt, set(leftovers))
