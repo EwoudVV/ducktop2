@@ -442,7 +442,7 @@ def check_root_sheets():
 
 
 def check_main_pcb_contract():
-    pcb = PROJDIR / "ducktop2.kicad_pcb"
+    pcb = PROJDIR / "ducktop2-center.kicad_pcb"
     text = pcb.read_text(errors="ignore")
     if '"Edge.Cuts"' not in text:
         fail("main PCB has no Edge.Cuts outline")

@@ -14,8 +14,12 @@ fp-info-cache
 *.000
 
 # Local-only archives and scratch work
+.ai/
 .local/
 tmp/
+
+# generated checks are rebuilt from the design files
+verification/generated/
 
 # KiCad plot/fab/export output
 gerbers/

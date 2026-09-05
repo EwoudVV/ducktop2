@@ -288,7 +288,7 @@ def main() -> None:
     pcbs = [
         ("Main PCB", ROOT / "ducktop2.kicad_pcb"),
         ("Radio DB", ROOT / "radio_daughterboard" / "radio_daughterboard.kicad_pcb"),
-        ("KBD DB", ROOT / "12_keyboard_daughterboard.kicad_pcb"),
+        ("KBD DB", ROOT / "keyboard" / "12_keyboard_daughterboard.kicad_pcb"),
     ]
 
     total = {}

@@ -1,6 +1,6 @@
 # manufacturing
 
-the current boards are still in layout and review. [project status](../docs/design-status.md)
+the current boards are still in layout and review. [project status](../README.md#build-status)
 lists the issues that remain before an order package can be prepared.
 
 ## separate board packages
@@ -12,7 +12,7 @@ lists the issues that remain before an order package can be prepared.
 | Right I/O | `right_io/right_io.kicad_pcb` | Eight-layer layout; confirm the actual order against the approved stackup |
 | BMS | `bms/bms.kicad_pcb` | Four-layer intent conflicts with eight enabled layers; unresolved |
 | Radio | `radio_daughterboard/radio_daughterboard.kicad_pcb` | Four-layer placement board; fabrication details still to finalize |
-| Keyboard | `12_keyboard_daughterboard.kicad_pcb` | Existing separate two-layer rev A package |
+| Keyboard | `keyboard/12_keyboard_daughterboard.kicad_pcb` | Existing separate two-layer rev A package |
 
 the old monolith and the older quote package are reference material. do not
 use them as a substitute for packages from the current split-board files.
@@ -85,3 +85,15 @@ an exception in the rule file explains why a finding may be suppressed. it
 does not prove a vendor approved it or that the physical assembly fits.
 retain the drawing, measured geometry, and fabricator/assembler disposition
 for each exception used in the final package.
+
+## layout review
+
+use `mainboard_stackup_release.json` for the approved outer/inner geometry.
+PCIe data targets 85 ohm differential, USB3 90 ohm, and HDMI/Ethernet MDI
+100 ohm. reference-clock and USB2 geometry must match their endpoint and
+layer requirements. netclass names alone do not establish the completed
+channel's impedance, return continuity, skew, or loss.
+
+review the complete power paths, shunts, vias, connector contacts, local
+converter loops, effective capacitance, and thermal copper. check the routed
+channel across both boards and the cable where an interface crosses an FFC.

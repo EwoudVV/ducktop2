@@ -2,7 +2,7 @@
 
 > upstream Mu pinout reference kept with the generators. check the linked
 > upstream revision and the actual module before using it as a new hardware
-> specification. the project-specific display work is in [direct eDP](../docs/display-direct-edp.md).
+> specification. the project-specific display work is in [direct eDP](../../docs/hardware/display-direct-edp.md).
 
 All pin definitions for LattePanda Mu(N100/N305 Processor)
 

@@ -77,7 +77,7 @@ def main() -> None:
     print(f"  Connectors assigned: {len(CONNECTOR_ASSIGNMENTS)}")
     print(f"  Total assignments:   {len(ALL_ASSIGNMENTS)}")
 
-    sch_path = ROOT / "12_keyboard_daughterboard.kicad_sch"
+    sch_path = ROOT / "keyboard" / "12_keyboard_daughterboard.kicad_sch"
     if not sch_path.exists():
         print(f"\nERROR: {sch_path} not found")
         sys.exit(1)

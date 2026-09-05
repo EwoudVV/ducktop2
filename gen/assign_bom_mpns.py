@@ -12,7 +12,7 @@ from collections import defaultdict
 from pathlib import Path
 
 PROJDIR = Path(__file__).resolve().parent.parent
-INVENTORY = PROJDIR / "verification" / "component_inventory.csv"
+INVENTORY = PROJDIR / "verification" / "generated" / "component_inventory.csv"
 
 
 def norm_val(v):

@@ -29,15 +29,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PCB = ROOT / "ducktop2.kicad_pcb"
 SCH = ROOT / "ducktop2.kicad_sch"
-NETLIST = ROOT / "verification" / "ducktop2_netlist.xml"
+NETLIST = ROOT / "verification" / "generated" / "ducktop2_netlist.xml"
 
 # Board split projects: left I/O, right I/O, and BMS daughterboards.  Each
 # project has its own schematic root; the netlist path follows the project name.
 PROJECTS = {
-    "ducktop2": (ROOT / "ducktop2.kicad_sch", ROOT / "verification" / "ducktop2_netlist.xml"),
-    "left_io": (ROOT / "left_io" / "left_io.kicad_sch", ROOT / "verification" / "left_io_netlist.xml"),
-    "right_io": (ROOT / "right_io" / "right_io.kicad_sch", ROOT / "verification" / "right_io_netlist.xml"),
-    "bms": (ROOT / "bms" / "bms.kicad_sch", ROOT / "verification" / "bms_netlist.xml"),
+    "ducktop2": (ROOT / "ducktop2.kicad_sch", ROOT / "verification" / "generated" / "ducktop2_netlist.xml"),
+    "left_io": (ROOT / "left_io" / "left_io.kicad_sch", ROOT / "verification" / "generated" / "left_io_netlist.xml"),
+    "right_io": (ROOT / "right_io" / "right_io.kicad_sch", ROOT / "verification" / "generated" / "right_io_netlist.xml"),
+    "bms": (ROOT / "bms" / "bms.kicad_sch", ROOT / "verification" / "generated" / "bms_netlist.xml"),
 }
 KICAD_CLI = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
 
@@ -476,7 +476,7 @@ def extract(pattern: str, text: str, default: str = "") -> str:
 
 def export_netlist(project: str = "ducktop2") -> None:
     sch, netlist = PROJECTS[project]
-    netlist.parent.mkdir(exist_ok=True)
+    netlist.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         [
             str(KICAD_CLI),

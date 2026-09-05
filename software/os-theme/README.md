@@ -6,7 +6,7 @@ still work and look normal.
 
 the files are an early implementation. final Mu boot, EC integration,
 recovery, and display validation still need hardware testing.
-[project status](../../docs/design-status.md)
+[project status](../../README.md#build-status)
 
 ## what's here
 
@@ -61,17 +61,3 @@ battery device or a working widget.
 
 - [visual direction](docs/design-spec.md)
 - [firmware target status](../../firmware/README.md#stm32-target)
-
-## work order
-
-1. Test the existing wallpaper, colors, terminal, and panel on an x86 Fedora
-   KDE install or VM, with readable scaling and normal applications.
-2. Prepare the intended NVMe install. identify the disk by model, capacity,
-   connection, and partitions before writing it. prove independent boot,
-   updates, backups, and recovery.
-3. Validate the eMMC setup and recovery implementation on the target.
-4. Test login/boot themes after the desktop and recovery path work.
-5. Validate graphics, display modes, storage, networking, USB, audio, and
-   power states on the Mu.
-6. Integrate the EC transport and OS service before claiming working battery,
-   lid, fan, radio, or telemetry widgets.

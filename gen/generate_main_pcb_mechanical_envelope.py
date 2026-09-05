@@ -14,7 +14,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FLOORPLAN = ROOT / "mechanical" / "floorplan_revA.json"
+FLOORPLAN = ROOT / "reference" / "floorplans" / "floorplan_revA.json"
 OUT = ROOT / "ducktop2.kicad_pcb"
 
 UUID_NS = uuid.uuid5(uuid.NAMESPACE_URL, "ducktop2/main-pcb-mechanical-envelope")

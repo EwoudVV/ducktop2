@@ -630,17 +630,17 @@ def render_report(checks: list[Check], netlist: Path, radio_netlist: Path) -> st
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path,
-                        default=ROOT / "verification" /
+                        default=ROOT / "verification" / "generated" /
                         f"ELECTRICAL_CALCULATIONS_{dt.date.today().isoformat()}.md")
     parser.add_argument("--project", choices=("ducktop2", "bms"), default="ducktop2",
                         help="board split Phase 2.4: which project to verify (bms = pack calculations)")
     args = parser.parse_args()
 
-    netlist = ROOT / "verification" / "electrical_calculations_netlist.xml"
-    radio_netlist = ROOT / "verification" / "radio_electrical_calculations_netlist.xml"
+    netlist = ROOT / "verification" / "generated" / "electrical_calculations_netlist.xml"
+    radio_netlist = ROOT / "verification" / "generated" / "radio_electrical_calculations_netlist.xml"
     if args.project == "bms":
         bms_sch = ROOT / "bms" / "bms.kicad_sch"
-        netlist = ROOT / "verification" / "bms_netlist.xml"
+        netlist = ROOT / "verification" / "generated" / "bms_netlist.xml"
         export_netlist(bms_sch, netlist)
         checks = build_checks(component_values(netlist), {}, project="bms")
     else:

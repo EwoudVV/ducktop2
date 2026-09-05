@@ -1,15 +1,15 @@
-# verification files
+# verification
 
-the latest check results, open findings, and work order are in
-[current status](../docs/design-status.md). commands are in
-[build and verify](../docs/build-and-verify.md).
+`generated/` contains regeneratable netlists, DRC/ERC output, pin reviews,
+inventories, and working IPC-D-356 exports. it is ignored by git.
+generators and checkers create the directory when needed.
 
-this folder holds netlists, generated reports, and the hardware validation
-record. firmware HIL/release files are under `firmware/release`; stackup and
-display-harness release files are under `manufacturing`.
+`hardware_validation_release.json` remains tracked. firmware release/HIL
+records are under `firmware/release/`, and manufacturing packages retain
+their own released test files and manifests.
 
-retain the source revision or working-tree hashes, command, tool version,
-and date with evidence. distinguish ordinary DRC, expanded track checks,
-parity, and schematic contracts. generators can recreate their dated report
-outputs; keep current evidence needed for the design and remove superseded
-copies from the working documentation.
+use fresh schematic exports for comparisons. retain source revision,
+command, tool version, and date with evidence. ordinary DRC, expanded
+track checks, parity, and schematic contracts cover different things.
+
+[build and verification](../docs/build-and-verify.md)

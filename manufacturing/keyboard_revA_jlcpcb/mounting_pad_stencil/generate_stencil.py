@@ -27,7 +27,7 @@ except ImportError as exc:
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parents[2]
 FOOTPRINT_PATH = PROJECT_ROOT / "ducktop2.pretty" / "Cherry_MX_ULP_SMD.kicad_mod"
-PCB_PATH = PROJECT_ROOT / "12_keyboard_daughterboard.kicad_pcb"
+PCB_PATH = PROJECT_ROOT / "keyboard" / "12_keyboard_daughterboard.kicad_pcb"
 STL_PATH = SCRIPT_DIR / "ducktop2_mx_ulp_fixation_microstencil_revA.stl"
 MANIFEST_PATH = SCRIPT_DIR / "stencil_manifest.json"
 

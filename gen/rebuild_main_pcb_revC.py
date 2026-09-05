@@ -34,11 +34,11 @@ import sync_main_pcb_from_netlist as sync
 ROOT = Path(__file__).resolve().parents[1]
 LIVE_PCB = ROOT / "ducktop2.kicad_pcb"
 SNAPSHOT = ROOT / "mechanical" / "pcb_snapshots" / "ducktop2_pre_battery_band_relayout_2026-07-16.kicad_pcb"
-FLOORPLAN = ROOT / "mechanical" / "floorplan_revC_battery_band.json"
+FLOORPLAN = ROOT / "reference" / "floorplans" / "floorplan_revC_battery_band.json"
 OUT_DIR = ROOT / "mechanical" / "pcb_rebuild"
 DEFAULT_OUTPUT = OUT_DIR / "ducktop2_revC_candidate.kicad_pcb"
 REPORT = OUT_DIR / "ducktop2_revC_rebuild_report.json"
-DRC_REPORT = ROOT / "verification" / "ducktop2_revC_candidate_drc.json"
+DRC_REPORT = ROOT / "verification" / "generated" / "ducktop2_revC_candidate_drc.json"
 KICAD_CLI = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
 KICAD_PYTHON = Path(
     "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3"

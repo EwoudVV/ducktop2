@@ -40,5 +40,5 @@ putting a total in the budget. [parts and cost](bom-and-cost.md)
 - [RC tank](https://github.com/EwoudVV/rc-tank), from Hack Club Hackpac
 - [LattePanda Mu reference hardware](https://github.com/LattePandaTeam/LattePanda-Mu)
 
-[current progress](design-status.md) and [next steps](design-status.md#work-order) have the
+[current progress](../README.md#build-status) and [next steps](../README.md#build-status) have the
 detailed state. this pitch was refreshed on 4 september 2026.

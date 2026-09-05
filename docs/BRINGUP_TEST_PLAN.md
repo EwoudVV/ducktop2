@@ -5,7 +5,7 @@ power fixtures, limits, connections, and acceptance values still need a
 review against the corrected boards before this becomes a bench procedure.
 
 the first prerequisites are the BMS fuse-net/layer fixes, completed routing,
-and trustworthy per-board verification. see [current status](design-status.md).
+and trustworthy per-board verification. see the [build status](../README.md#build-status).
 
 ## fixture requirements
 
