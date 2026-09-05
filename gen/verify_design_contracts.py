@@ -22,7 +22,7 @@ import sync_main_pcb_from_netlist as sync
 
 ROOT = Path(__file__).resolve().parents[1]
 PCB = ROOT / "ducktop2.kicad_pcb"
-CURRENT_DRC = ROOT / "verification" / "contract_drc_current.json"
+CURRENT_DRC = ROOT / "verification" / "generated" / "contract_drc_current.json"
 
 
 class CheckFailure(RuntimeError):
@@ -3069,7 +3069,7 @@ def check_main_pcb_contract(components, fps, pcb_text):
 
 
 def run_current_drc() -> Path:
-    CURRENT_DRC.parent.mkdir(exist_ok=True)
+    CURRENT_DRC.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         [
             str(sync.KICAD_CLI),

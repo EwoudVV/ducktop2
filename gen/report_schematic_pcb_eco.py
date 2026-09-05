@@ -23,11 +23,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PCB = ROOT / "ducktop2.kicad_pcb"
 SCHEMATIC = ROOT / "ducktop2.kicad_sch"
-NETLIST = ROOT / "verification" / "ducktop2_netlist.xml"
-REPORT = ROOT / "verification" / "SCHEMATIC_TO_PCB_ECO_2026-07-20.md"
-NET_CSV = ROOT / "verification" / "schematic_to_pcb_eco_net_changes.csv"
-FOOTPRINT_CSV = ROOT / "verification" / "schematic_to_pcb_eco_footprint_changes.csv"
-ATTRIBUTE_CSV = ROOT / "verification" / "schematic_to_pcb_eco_attribute_changes.csv"
+NETLIST = ROOT / "verification" / "generated" / "ducktop2_netlist.xml"
+REPORT = ROOT / "verification" / "generated" / "SCHEMATIC_TO_PCB_ECO_2026-07-20.md"
+NET_CSV = ROOT / "verification" / "generated" / "schematic_to_pcb_eco_net_changes.csv"
+FOOTPRINT_CSV = ROOT / "verification" / "generated" / "schematic_to_pcb_eco_footprint_changes.csv"
+ATTRIBUTE_CSV = ROOT / "verification" / "generated" / "schematic_to_pcb_eco_attribute_changes.csv"
 KICAD_CLI = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
 
 
@@ -52,7 +52,7 @@ def load_parsers():
 
 
 def export_netlist() -> None:
-    NETLIST.parent.mkdir(exist_ok=True)
+    NETLIST.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         [
             str(KICAD_CLI),
@@ -106,7 +106,7 @@ def main() -> None:
     parser_arg.add_argument(
         "--no-export",
         action="store_true",
-        help="use the existing verification/ducktop2_netlist.xml",
+        help="use the existing verification/generated/ducktop2_netlist.xml",
     )
     args = parser_arg.parse_args()
 

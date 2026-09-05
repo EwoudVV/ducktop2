@@ -18,5 +18,5 @@ still worked. the teardown helped identify the panel and controller
 connections. a replacement AUO B160QAN03.K was later tested successfully
 at 2560x1600 and 120 Hz using the Intehill controller.
 
-[ducktop2](../README.md) and [the current display work](display-direct-edp.md)
+[ducktop2](../README.md) and [the current display work](hardware/display-direct-edp.md)
 pick up from there.

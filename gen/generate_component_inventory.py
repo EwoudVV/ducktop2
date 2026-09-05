@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_VERIFY = ROOT / "verification"
+DEFAULT_VERIFY = ROOT / "verification" / "generated"
 ROOT_SCHEMATIC = ROOT / "ducktop2.kicad_sch"
 KIPRJMOD_PREFIX = "${KIPRJMOD}/"
 SHEETFILE_RE = re.compile(r'\(property\s+"Sheetfile"\s+"([^"]+)"')
@@ -159,7 +159,7 @@ def main(argv=None) -> None:
         "--output-dir",
         type=Path,
         default=DEFAULT_VERIFY,
-        help="inventory destination (default: project verification/)",
+        help="inventory destination (default: verification/generated/)",
     )
     parser.add_argument(
         "--date",

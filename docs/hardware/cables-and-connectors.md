@@ -1,7 +1,7 @@
 # cables and connectors
 
 updated 4 september 2026. the signal maps live in
-[`gen/fpc_contract.py`](../gen/fpc_contract.py). this page covers how those
+[`gen/fpc_contract.py`](../../gen/fpc_contract.py). this page covers how those
 maps relate to the physical cables and what remains to be settled.
 
 ## board-to-board cables

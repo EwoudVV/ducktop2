@@ -19,7 +19,7 @@ and is ignored by git.
 advertising a sink PDO does not mean that voltage can run the laptop. the
 recorded AON UVLO and selector windows require a qualified usable input,
 and the EC must verify the live contract before enabling the sink path.
-[power architecture](../../docs/power-and-battery.md)
+[power architecture](../../docs/hardware/power-and-battery.md)
 
 ## verify and use the export
 

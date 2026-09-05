@@ -42,7 +42,7 @@ from typing import Optional
 from apply_bom_catalog import CAPACITOR_ASSIGNMENTS, RESISTOR_ASSIGNMENTS
 
 ROOT = Path(__file__).resolve().parents[1]
-GAP_CSV = ROOT / "verification" / "bom_release_gaps.csv"
+GAP_CSV = ROOT / "verification" / "generated" / "bom_release_gaps.csv"
 
 
 # =============================================================================

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Apply a mechanical_layout_planner.html floorplan export to the mainboard.
+Apply a mechanical/layout-planner.html floorplan export to the mainboard.
 
-The planner (mechanical_layout_planner.html) exports its state JSON.  This
+The planner (mechanical/layout-planner.html) exports its state JSON.  This
 script maps the floorplan part ids onto mainboard footprints, converts the
 base-plane coordinates (base y = board y + 63; board front edge at base
 y = 63) back to board coordinates, and moves those footprints into a

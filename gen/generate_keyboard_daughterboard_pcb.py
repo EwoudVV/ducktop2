@@ -19,12 +19,13 @@ from generate_keyboard_daughterboard_sheet import (
 PROJDIR = Path(__file__).resolve().parent.parent
 DEFAULT_OUT = (
     PROJDIR
-    / "tmp"
+    / "verification"
+    / "generated"
     / "keyboard_generator_candidates"
     / "12_keyboard_daughterboard_UNRELEASED_candidate.kicad_pcb"
 )
 PROTECTED_OUTPUTS = {
-    (PROJDIR / "12_keyboard_daughterboard.kicad_pcb").resolve(),
+    (PROJDIR / "keyboard" / "12_keyboard_daughterboard.kicad_pcb").resolve(),
     (
         PROJDIR
         / "manufacturing"
@@ -97,7 +98,7 @@ def iter_symbol_blocks(text):
 
 def schematic_paths():
     paths = {}
-    sch = (PROJDIR / "12_keyboard_daughterboard.kicad_sch").read_text(encoding="utf-8")
+    sch = (PROJDIR / "keyboard" / "12_keyboard_daughterboard.kicad_sch").read_text(encoding="utf-8")
     for block in iter_symbol_blocks(sch):
         ref = re.search(r'\(property "Reference" "([^"]+)"', block)
         sym_uuid = re.search(r'\(uuid ([0-9a-f-]+)\)', block)

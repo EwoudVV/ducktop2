@@ -6,7 +6,7 @@ finished laptop is intended to connect it directly to the Mu's onboard eDP
 connector, removing the separate monitor controller and external cable loop.
 
 updated 4 september 2026. the final harness remains pending in
-[`direct_edp_harness_release.json`](../manufacturing/direct_edp_harness_release.json).
+[`direct_edp_harness_release.json`](../../manufacturing/direct_edp_harness_release.json).
 the known panel test does not validate a new Mu-to-panel cable.
 
 ## connector identification
@@ -50,7 +50,7 @@ still unresolved. do not infer a 1:1 wiring order from the shared pin count.
 | 36-39 | BL_PWR | Panel backlight-power contacts, subject to confirmed limits |
 
 source: [official Mu pinouts](https://github.com/LattePandaTeam/LattePanda-Mu/blob/main/Electricals/Pinouts/README.md).
-the local upstream reference is [`gen/Pinouts_README.md`](../gen/Pinouts_README.md).
+the local upstream reference is [`reference/lattepanda/Pinouts.md`](../../reference/lattepanda/Pinouts.md).
 
 ## power and link requirements
 

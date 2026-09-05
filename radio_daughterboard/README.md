@@ -19,7 +19,7 @@ board, with no tracks or vias. the nominal outline is about 120 x 70 mm.
 the stored renders show a placement-stage design. they do not prove the
 current chassis fit. the center-side FFC connector J2300 is now at (188,4),
 rotation 0, so the installed cable route and board supports need a new check.
-[mechanical plan](../docs/mechanical.md)
+[mechanical plan](../docs/hardware/mechanical.md)
 
 ## source and checks
 

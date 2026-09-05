@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
-BOARD = PROJECT_DIR / "12_keyboard_daughterboard.kicad_pcb"
+BOARD = PROJECT_DIR / "keyboard" / "12_keyboard_daughterboard.kicad_pcb"
 OUTPUT = PROJECT_DIR / "manufacturing" / "keyboard_revA_jlcpcb"
 REFERENCE = OUTPUT / "reference"
 RAW = OUTPUT / "_raw"

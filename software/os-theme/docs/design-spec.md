@@ -62,4 +62,4 @@ EC/OS data. show missing or stale values as unavailable. the wallpaper remains
 decorative and the widgets report the actual system.
 
 use original assets and standard desktop features. the theme should stay
-easy to apply, undo, and maintain. [software roadmap](../README.md#work-order)
+easy to apply, undo, and maintain. [OS setup](../README.md)

@@ -1,7 +1,7 @@
 # build and verify
 
 updated 4 september 2026. these are the entry points for checking the working
-files. the latest results and known checker failures are in [current status](design-status.md).
+files. the latest results and known checker failures are in [current status](../README.md#build-status).
 
 ## before running anything
 
@@ -14,7 +14,7 @@ KiCad 10.0.4 was used for the latest checks. on this Mac:
 ```sh
 DUCKTOP_KCLI=/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli
 DUCKTOP_KPY=/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3
-mkdir -p verification/local
+mkdir -p verification/generated/local
 ```
 
 use the KiCad Python for pcbnew work. regular `python3` is used by the
@@ -32,11 +32,11 @@ from the root, export the center schematic and check it:
 
 ```sh
 "$DUCKTOP_KCLI" sch erc --format json \
-  --output verification/local/center-erc.json ducktop2.kicad_sch
+  --output verification/generated/local/center-erc.json ducktop2.kicad_sch
 "$DUCKTOP_KCLI" sch export netlist --format kicadxml \
-  --output verification/local/center-netlist.xml ducktop2.kicad_sch
+  --output verification/generated/local/center-netlist.xml ducktop2.kicad_sch
 "$DUCKTOP_KCLI" pcb drc --format json \
-  --output verification/local/center-drc.json ducktop2-center.kicad_pcb
+  --output verification/generated/local/center-drc.json ducktop2-center.kicad_pcb
 ```
 
 run the daughterboard checks from their own directories so KiCad finds the
@@ -47,11 +47,11 @@ for board in left_io right_io bms; do
   (
     cd "$board" || exit
     "$DUCKTOP_KCLI" sch erc --format json \
-      --output "../verification/local/$board-erc.json" "$board.kicad_sch"
+      --output "../verification/generated/local/$board-erc.json" "$board.kicad_sch"
     "$DUCKTOP_KCLI" sch export netlist --format kicadxml \
-      --output "../verification/local/$board-netlist.xml" "$board.kicad_sch"
+      --output "../verification/generated/local/$board-netlist.xml" "$board.kicad_sch"
     "$DUCKTOP_KCLI" pcb drc --format json \
-      --output "../verification/local/$board-drc.json" "$board.kicad_pcb"
+      --output "../verification/generated/local/$board-drc.json" "$board.kicad_pcb"
   )
 done
 ```
@@ -90,7 +90,7 @@ python3 gen/check_release_candidate.py --stage schematic
 
 the checker runs generators and report writers in a temporary project copy.
 it checks the live design/library files for changes afterwards. its current
-result is FAIL for the reasons listed in [status](design-status.md).
+result is FAIL for the reasons listed in [status](../README.md#build-status).
 
 two limitations matter before using its other stages:
 
@@ -115,16 +115,14 @@ for what the tests cover and what is still missing on the STM32/RP2350.
 
 ## report storage
 
-keep retained project evidence in `verification/`, with the source revision
-or working-tree hashes, command, date, and result. `verification/local/` is a
-suggested working-report directory, not an automatically ignored directory.
-review generated files before staging them. the `.gitignore` already ignores
-some ERC/DRC reports and some generated XML paths may be tracked.
+keep retained project evidence in `verification/generated/`, with the source revision
+or working-tree hashes, command, date, and result. `verification/generated/local/` is a
+working-report directory inside the ignored generated-output folder.
+keep generated reports there; release manifests and finished manufacturing
+packages have their own tracked locations.
 
 do not use an old XML file as evidence that the current schematic is correct.
 it may have survived a stash, checkout, or generator change.
-
-
 
 
 ## deliberate rebuilds

@@ -7,7 +7,7 @@ on a host before it is connected to board drivers.
 Version: `0.3.0-policy`
 
 the dated test results are in
-[project status](../docs/design-status.md). the STM32 target port exists,
+[project status](../README.md#build-status). the STM32 target port exists,
 but normal charging and Mu power-budget integration are unfinished.
 [target details](README.md#stm32-target)
 
@@ -98,7 +98,7 @@ finish real charge and Mu/eDP budget application, normal operating requests,
 remaining displays/controls, and the OS telemetry transport. build and program
 the targets through a recorded recovery path, then run the HIL matrix.
 
-[release requirements](release/README.md) and [laptop behavior](../docs/hardware.md#expected-behavior)
+[release requirements](release/README.md) and [laptop behavior](../docs/hardware/overview.md#expected-behavior)
 describe the result those implementations need to support.
 
 
@@ -121,7 +121,7 @@ describe the result those implementations need to support.
 
 existence here means code is present. host-tested pieces are covered by
 `tools/run_host_tests.sh`; real peripheral and end-to-end behavior still
-need target tests. [dated results](../docs/design-status.md)
+need target tests. [dated results](../README.md#build-status)
 
 ### what still stops normal operation
 

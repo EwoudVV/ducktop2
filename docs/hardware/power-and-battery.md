@@ -1,8 +1,8 @@
 # power and battery
 
-updated 4 september 2026. this page describes the intended connections.
-BMS-01 and BMS-02 in [current status](design-status.md) must be resolved
-before treating the routed BMS as matching that design.
+updated 4 september 2026. this describes the intended circuit. the routed
+BMS still needs its fuse-net connection and layer setup reconciled with
+that design before fabrication.
 
 ## cells and board responsibilities
 
@@ -119,7 +119,7 @@ conversion. `MCU_3V3` on the BMS is supplied through FPC-3; there is no local
 
 the EC is meant to qualify inputs, confirm applied current/power limits, and
 sequence charging and loads. the present target code still leaves charge
-and Mu/eDP budget commands unfinished. see [target status](../firmware/README.md#stm32-target).
+and Mu/eDP budget commands unfinished. see [target status](../../firmware/README.md#stm32-target).
 
 the recorded pack design omits a battery thermistor harness. the charger
 and protector use their documented unused-temperature arrangements, with
@@ -137,4 +137,4 @@ number that signs off every segment.
 
 the gauge also needs configuration and calibration for the actual pack.
 protection trip/recovery, charging, balancing, power transfer, and thermal
-behavior all belong in the [bring-up work](BRINGUP_TEST_PLAN.md).
+behavior all belong in the [bring-up work](../BRINGUP_TEST_PLAN.md).

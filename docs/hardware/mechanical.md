@@ -1,4 +1,4 @@
-# mechanical plan
+# mechanical layout
 
 the base and lid target is 358 x 248 mm. the final height, cooling stack,
 board supports, and cable installation still need a measured assembly.
@@ -37,9 +37,10 @@ before setting deck height. plan the inlet/exhaust and verify recirculation.
 Framework 13 hinges are the working choice; use the actual brackets and
 full sweep to place the display cable and case cutouts.
 
-the floorplan JSON files are packaging sketches. reconcile their envelopes
+`mechanical/floorplan.json` is the current packaging sketch. the layout
+planner is `mechanical/layout-planner.html`. reconcile its envelopes
 and positions with the current boards when editing the mechanical model.
-their names do not establish that the depicted fit has been validated.
+the sketch does not establish that the depicted fit has been validated.
 
 ## mounting and retention
 

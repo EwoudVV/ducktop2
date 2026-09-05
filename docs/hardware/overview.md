@@ -1,7 +1,7 @@
 # hardware
 
 updated 4 september 2026. this describes the intended circuit in the current
-split projects. [current status](design-status.md) lists where the board
+split projects. [current status](../../README.md#build-status) lists where the board
 files or testing still fall short of it.
 
 ## boards
@@ -57,7 +57,7 @@ coupling, clocks, protection, and connector transitions before release.
 the STM32F407 EC owns laptop functions: input qualification, power sequencing,
 charging policy, keyboard scanning/HID, fan control, lid and buttons, status
 OLEDs, and optional-device enables. its policy and target-code status are in
-the [firmware docs](../firmware/README.md).
+the [firmware docs](../../firmware/README.md).
 
 the RP2350 maker controller is independent and appears as a separate USB
 device. exposed GPIO and user rails have their own authorization and
@@ -85,7 +85,7 @@ covered in [power and battery](power-and-battery.md).
 the radio board is removable. its power, data, control, PTT, and status paths
 default off or inactive. the rest of the laptop is intended to operate with
 it absent. RF filters, antennas, and coexistence still need measurement.
-[radio board](../radio_daughterboard/README.md)
+[radio board](../../radio_daughterboard/README.md)
 
 
 ## expected behavior

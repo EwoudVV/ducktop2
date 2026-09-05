@@ -1036,7 +1036,9 @@ def main():
         with uuid_scope(context):
             sheet = builder()
             text = sheet.render(stable_uuid(f"{context}:self"), page_number=page_number)
-        with open(os.path.join(PROJDIR, filename), "w", encoding="utf-8") as f:
+        output = os.path.join(PROJDIR, filename)
+        os.makedirs(os.path.dirname(output), exist_ok=True)
+        with open(output, "w", encoding="utf-8") as f:
             f.write(text)
         return sheet
 
@@ -1064,7 +1066,7 @@ def main():
         lambda: keyboard_if.build(keyboard_interface_sheet_uuid), "12"
     )
     keyboard_daughterboard_s = write_generated_sheet(
-        "12_keyboard_daughterboard", "12_keyboard_daughterboard.kicad_sch",
+        "12_keyboard_daughterboard", "keyboard/12_keyboard_daughterboard.kicad_sch",
         lambda: keyboard.build(keyboard_daughterboard_sheet_uuid), "K1"
     )
     maker_s = write_generated_sheet(

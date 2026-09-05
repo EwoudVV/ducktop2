@@ -23,7 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SCHEMATIC = ROOT / "ducktop2.kicad_sch"
-DEFAULT_PCB = ROOT / "old" / "monolith_ducktop2.kicad_pcb"
+DEFAULT_PCB = ROOT / "reference" / "monolith" / "monolith_ducktop2.kicad_pcb"
 NUMBER = r"[-+0-9.eE]+"
 
 # Violation types a refill may newly introduce without blocking, because
@@ -267,14 +267,18 @@ def find_kicad_cli() -> str:
 
 def project_design_files() -> list[Path]:
     paths: set[Path] = set()
-    for pattern in ("*.kicad_sch", "*.kicad_pcb", "*.kicad_pro"):
-        paths.update(path.resolve() for path in ROOT.glob(pattern))
+    project_dirs = [ROOT] + [ROOT / name for name in
+                            ("keyboard", "left_io", "right_io", "bms", "radio_daughterboard")]
+    for directory in project_dirs:
+        for pattern in ("*.kicad_sch", "*.kicad_pcb", "*.kicad_pro", "*.kicad_dru"):
+            paths.update(path.resolve() for path in directory.glob(pattern))
+        for name in ("sym-lib-table", "fp-lib-table"):
+            table = directory / name
+            if table.exists():
+                paths.add(table.resolve())
     paths.update(path.resolve() for path in (ROOT / "gen").glob("*.kicad_sym"))
     for library in (ROOT / "ducktop2.pretty", ROOT / "Module_LattePanda.pretty"):
         paths.update(path.resolve() for path in library.glob("*.kicad_mod"))
-    for table in (ROOT / "sym-lib-table", ROOT / "fp-lib-table"):
-        if table.exists():
-            paths.add(table.resolve())
     return sorted(paths)
 
 
@@ -556,24 +560,25 @@ def run_command(command: list[str], cwd: Path, label: str) -> None:
 def copy_for_static_checks(destination: Path) -> Path:
     copy_root = destination / "project"
     ignored = shutil.ignore_patterns(
-        ".git", "__pycache__", "*.pyc", "tmp",
+        ".git", ".ai", ".local", ".history", ".mcp-backups", "__pycache__", "*.pyc", "tmp",
         "pcb_snapshots", "project_snapshots",
     )
     shutil.copytree(ROOT, copy_root, ignore=ignored)
-    verification = copy_root / "verification"
+    verification = copy_root / "verification" / "generated"
     if verification.exists():
         shutil.rmtree(verification)
-    verification.mkdir()
+    verification.mkdir(parents=True)
     return copy_root
 
 
 def generated_schematic_drift(copy_root: Path) -> list[str]:
     drift: list[str] = []
     live_paths = sorted(ROOT.glob("*.kicad_sch"))
+    live_paths += sorted((ROOT / "keyboard").glob("*.kicad_sch"))
     for live in live_paths:
-        candidate = copy_root / live.name
+        candidate = copy_root / live.relative_to(ROOT)
         if not candidate.exists() or sha256(live) != sha256(candidate):
-            drift.append(live.name)
+            drift.append(live.relative_to(ROOT).as_posix())
     for relative in (Path("gen/ducktop2.kicad_sym"),):
         live = ROOT / relative
         candidate = copy_root / relative
@@ -593,16 +598,16 @@ def run_static_checks(tempdir: Path) -> tuple[int, int]:
     if bms_sch.exists():
         subprocess.run(
             [cli, "sch", "export", "netlist", "--format", "kicadxml",
-             "--output", str(copy_root / "verification" / "bms_netlist.xml"), str(bms_sch)],
+             "--output", str(copy_root / "verification" / "generated" / "bms_netlist.xml"), str(bms_sch)],
             check=False, capture_output=True, cwd=copy_root,
         )
     commands = [
         (["python3", "gen/check_schematic.py"], copy_root, "schematic self-check"),
         (["python3", "gen/verify_design_contracts.py", "--schematic-only"], copy_root,
          "schematic design contracts"),
-        (["python3", "gen/verify_schematic_closure.py", "verification/ducktop2_netlist.xml"],
+        (["python3", "gen/verify_schematic_closure.py", "verification/generated/ducktop2_netlist.xml"],
          copy_root, "independent schematic closure audit (center)"),
-        (["python3", "gen/verify_schematic_closure.py", "verification/bms_netlist.xml", "--pack"],
+        (["python3", "gen/verify_schematic_closure.py", "verification/generated/bms_netlist.xml", "--pack"],
          copy_root, "independent schematic closure audit (bms pack)"),
         (["python3", "gen/verify_electrical_calculations.py"], copy_root,
          "electrical calculations"),
@@ -611,7 +616,7 @@ def run_static_checks(tempdir: Path) -> tuple[int, int]:
         (["python3", "gen/generate_pin_review_table.py"], copy_root,
          "pin review generation"),
         (["python3", "gen/generate_component_inventory.py", "--output-dir",
-          "verification/release_inventory"], copy_root, "component inventory"),
+          "verification/generated/release_inventory"], copy_root, "component inventory"),
         (["sh", "tools/run_host_tests.sh"], copy_root / "firmware",
          "firmware host-policy tests"),
     ]
@@ -629,7 +634,7 @@ def run_static_checks(tempdir: Path) -> tuple[int, int]:
     else:
         print("Generated-source identity: PASS")
 
-    gap_csv = copy_root / "verification/release_inventory/bom_release_gaps.csv"
+    gap_csv = copy_root / "verification/generated/release_inventory/bom_release_gaps.csv"
     if gap_csv.exists():
         with gap_csv.open(newline="", encoding="utf-8") as handle:
             bom_gaps = sum(1 for _ in csv.DictReader(handle))
@@ -893,6 +898,5 @@ def main(argv=None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
 
 

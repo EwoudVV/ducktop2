@@ -19,7 +19,7 @@ import sync_main_pcb_from_netlist as sync
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PCB = ROOT / "ducktop2.kicad_pcb"
-DEFAULT_NETLIST = ROOT / "verification" / "mu_standoff_release_netlist_2026-07-18.xml"
+DEFAULT_NETLIST = ROOT / "verification" / "generated" / "mu_standoff_release_netlist_2026-07-18.xml"
 EXPECTED_INPUT_SHA256 = "903de727a674d67a9013e3d43eeeec5bd8f06126023cc5a1d359140805760323"
 TARGET_REFS = {"H1", "H2"}
 TARGET_FOOTPRINT = "ducktop2:Wurth_9774055243R_M2_H5.5"

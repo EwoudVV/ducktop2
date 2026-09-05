@@ -1,41 +1,38 @@
 # Ducktop2
 
 i'm building a 16-inch x86 laptop around the LattePanda Mu. i wanted the
-exposed hardware and flexibility of a cyberdeck in something i could actually
-carry around and use every day.
+exposed hardware and flexibility of a cyberdeck in something i could
+actually carry around and use every day.
 
-ducktop1 used a Pi 500+ and a portable monitor. it worked, but the HDMI and
-USB-C cables had to loop around the outside of the case. ducktop2 gets the
-display onto direct eDP and puts the power, ports, and laptop controls on
-custom boards.
-
-**last checked: 4 september 2026.** the BMS is routed and under review. the
-center and two I/O boards are placed and still need routing. the keyboard
-has a rev A production package. the laptop is not ready to order or power up
-as a complete assembly yet. [current status](docs/design-status.md)
+ducktop1 used a Pi 500+ and a portable monitor, with HDMI and USB-C cables
+looping around the outside of the case. ducktop2 brings the display onto
+direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## what's in it
 
-- LattePanda Mu with an Intel N305, a 16 GB RAM target, and 64 GB onboard eMMC
-- 16-inch AUO B160QAN03.K display, targeting 2560x1600 at 120 Hz over direct eDP
-- M.2 NVMe storage and a separate M.2 Wi-Fi/Bluetooth socket
+- LattePanda Mu N305, with a 16 GB RAM target and 64 GB onboard eMMC
+- 16-inch AUO B160QAN03.K, targeting 2560x1600 at 120 Hz over direct eDP
+- M.2 NVMe and a separate Wi-Fi/Bluetooth socket
 - 65-key Cherry MX Ultra Low Profile keyboard and a 140 x 105 mm USB trackpad
 - five USB-C ports, two USB-A ports, HDMI, and Gigabit Ethernet
-- a 3S battery, USB-C PD charging from either side, and an AUX/DC input
-- STM32F407 embedded controller for the laptop's power, keyboard, fan, and controls
-- a separate RP2350 maker controller with protected GPIO and user power
+- a 3S battery, USB-C PD charging from either side, and AUX/DC input
+- STM32F407 for laptop control and a separate RP2350 with protected maker GPIO
 - two status OLEDs, speakers, a headphone jack, and a microphone
-- an optional radio board with VHF/UHF, GNSS, and its own USB audio path
+- optional VHF/UHF radio, GNSS, and a separate radio audio path
 
-the EC and maker controller have separate jobs. experimenting with the GPIO
-should leave the laptop's charging, cooling, and keyboard alone. the radio
-board is optional too, so the rest of the laptop can work while it's removed.
+## build status
 
-## how the boards fit together
+checked 4 september 2026. the BMS is routed and under review. its fuse-net
+connection and layer setup need correction before fabrication. the center
+and I/O boards are placed and still need routing. the keyboard has a rev A
+production package, and the radio is still a placement board.
 
-the carrier started as one large board. it is now split into a center board,
-left and right I/O boards, and a small BMS. three FFC cables connect them.
-the keyboard and radio are separate boards as well.
+the replacement panel has run at 2560x1600 and 120 Hz on the Intehill
+controller. the final Mu-to-panel harness still needs its own validation.
+firmware has host-tested policy/driver code and an incomplete target port.
+the complete laptop is not ready for fabrication or powered integration.
+
+## boards
 
 ```mermaid
 flowchart LR
@@ -45,67 +42,61 @@ flowchart LR
     Cells[3S cells and cell taps] --- B
     C --- K[Keyboard]
     C --- Radio[Optional radio and GNSS]
-    C -->|Mu onboard eDP connector| Panel[Internal display]
+    C -->|Mu onboard eDP| Panel[Internal display]
 ```
 
-the center charger controls pack charging. the BMS sees the individual cell
-taps and does passive balancing locally. the raw battery negative stays on
-the BMS side of the protection circuit. [power and battery](docs/power-and-battery.md)
+the center charges the whole pack. the BMS monitors the cell taps and
+balances cells locally. the EC and maker controller have separate jobs,
+and the rest of the laptop is intended to work with the radio board removed.
 
-the replacement panel has been tested at 2560x1600 and 120 Hz using the
-Intehill controller. the final Mu-to-panel harness still needs its own pin
-map and testing. [display work](docs/display-direct-edp.md)
+## open in KiCad
 
-## where the work is
+the current reference version is KiCad 10.0.4.
 
-the next job is to fix the inherited BMS fuse-net mismatch and reconcile its
-four-layer stackup description with the eight enabled copper layers. then
-comes the power-route review, working verification checks, and the rest of
-the routing. [roadmap](docs/design-status.md#work-order)
-
-the firmware has host-tested policy code and a partial STM32 target port.
-charging and Mu power-budget integration are still unfinished, and the
-hardware tests have not been run. [firmware status](firmware/README.md#stm32-target)
-
-the enclosure target is 358 x 248 mm. the keyboard, cooling, trackpad, cells,
-and cables still need a measured height model before the case can be frozen.
-[mechanical plan](docs/mechanical.md)
-
-## open the project
-
-KiCad 10.0.4 is the version used for the latest checks.
-
-| Work | Open |
+| Work | File |
 | --- | --- |
 | Center schematic | `ducktop2.kicad_pro` |
 | Center layout | `ducktop2-center.kicad_pcb` |
 | Left I/O | `left_io/left_io.kicad_pro` |
 | Right I/O | `right_io/right_io.kicad_pro` |
 | BMS | `bms/bms.kicad_pro` |
-| Keyboard | `12_keyboard_daughterboard.kicad_pro` |
+| Keyboard | `keyboard/12_keyboard_daughterboard.kicad_pro` |
 | Radio | `radio_daughterboard/radio_daughterboard.kicad_pro` |
 
-read [build and verification](docs/build-and-verify.md) before running a
-generator or syncing a board. the boards contain manual routing that a full
-rebuild can overwrite. i want the routing tools to work through the visible
-KiCad editor so i can follow each change. the center board also has a specific
-net-normalization step that a normal F8 update skips.
+read [build and verification](docs/build-and-verify.md) before regenerating
+or syncing a board. the center layout uses net normalization that a normal
+F8 update skips, and rebuilding a board can replace existing routing.
 
-## documentation
+## files and documentation
 
-- [current status and work order](docs/design-status.md): dated checks, open issues, and next steps
-- [hardware](docs/hardware.md): boards, ports, and interfaces
-- [expected behavior](docs/hardware.md#expected-behavior): what the finished laptop should do
-- [cables and connectors](docs/cables-and-connectors.md): pin maps and assembly details
-- [cost and sourcing](docs/bom-and-cost.md): what still needs a quote
-- [bring-up plan](docs/BRINGUP_TEST_PLAN.md): preparation and test order
-- [verification records](verification/README.md): checks, current evidence, and release records
-- [handoff](docs/HANDOFF.md): where to resume work
-- [OS work](software/os-theme/README.md): Fedora KDE, recovery, and theme files
-- [ducktop1](docs/ducktop1.md): where this started
+| Location | Contents |
+| --- | --- |
+| Root KiCad files | Center project and active schematic hierarchy |
+| `left_io/`, `right_io/`, `bms/`, `keyboard/`, `radio_daughterboard/` | Separate board projects |
+| `gen/` | Schematic generators, validation code, and symbol definitions |
+| `ducktop2.pretty/`, `Module_LattePanda.pretty/`, `ducktop2.3dshapes/` | Shared footprints and models |
+| `docs/hardware/` | Circuit, cable, display, and mechanical documentation |
+| `firmware/` | EC/maker code, tests, and firmware release records |
+| `mechanical/` | Current floorplan and layout planner |
+| `reference/` | Source/reference designs and retained generator inputs |
+| `manufacturing/` | Board packages, quotes, and manufacturing requirements |
+| `verification/` | Hardware validation record and ignored generated checks |
+| `software/` | Fedora setup, recovery, and theme files |
+
+- [hardware and behavior](docs/hardware/overview.md)
+- [power and battery](docs/hardware/power-and-battery.md)
+- [cables and connectors](docs/hardware/cables-and-connectors.md)
+- [display harness](docs/hardware/display-direct-edp.md)
+- [mechanical layout](docs/hardware/mechanical.md)
+- [build and verify](docs/build-and-verify.md)
+- [bring-up procedure](docs/BRINGUP_TEST_PLAN.md)
+- [parts and cost](docs/bom-and-cost.md)
+- [firmware](firmware/README.md)
+- [manufacturing](manufacturing/README.md)
+- [OS work](software/os-theme/README.md)
+- [ducktop1](docs/ducktop1.md)
+- [Forge project pitch](docs/forgery_pitch.md)
 
 ## license
 
 the project files are under the [MIT license](LICENSE).
-this is still prototype hardware. use the current status and review records
-alongside the design files if you're building from it.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Phase 3: produce 4 fabricable .kicad_pcb files from the split schematics.
 
-Board part sets come from the project netlists (verification/*_netlist.xml),
+Board part sets come from the project netlists (verification/generated/*_netlist.xml),
 NOT the stale board_partition.json scratch file (see notes in the report):
   - left_io  = left_io netlist (261) + holes H10/H11/H12/H16 + FPC-1 connector
   - right_io = right_io netlist (158) + holes H13/H15/H17/H27 + FPC-2 connector
@@ -35,12 +35,12 @@ from build_ducktop2 import PROJDIR
 PCB = "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3"
 import pcbnew  # noqa: E402
 
-ORIG = os.path.join(PROJDIR, "old", "monolith_ducktop2.kicad_pcb")
+ORIG = os.path.join(PROJDIR, "reference", "monolith", "monolith_ducktop2.kicad_pcb")
 NETLISTS = {
-    "L": os.path.join(PROJDIR, "verification", "left_io_netlist.xml"),
-    "R": os.path.join(PROJDIR, "verification", "right_io_netlist.xml"),
-    "B": os.path.join(PROJDIR, "verification", "bms_netlist.xml"),
-    "C": os.path.join(PROJDIR, "verification", "ducktop2_netlist.xml"),
+    "L": os.path.join(PROJDIR, "verification", "generated", "left_io_netlist.xml"),
+    "R": os.path.join(PROJDIR, "verification", "generated", "right_io_netlist.xml"),
+    "B": os.path.join(PROJDIR, "verification", "generated", "bms_netlist.xml"),
+    "C": os.path.join(PROJDIR, "verification", "generated", "ducktop2_netlist.xml"),
 }
 
 # Board regions in the original coordinate frame (x0 of chassis = left edge)
@@ -1505,9 +1505,9 @@ def inherit_netclasses():
                      {"netclass": "POWER_HI", "pattern": "/BAT_PROT_FET_COMMON"},
                      {"netclass": "POWER_HI", "pattern": "/BMS_FET_COMMON"},
                      {"netclass": "POWER_HI", "pattern": "FG_VSS"}]}
-    for board, xml in (("left_io", "verification/left_io_netlist.xml"),
-                       ("right_io", "verification/right_io_netlist.xml"),
-                       ("bms", "verification/bms_netlist.xml")):
+    for board, xml in (("left_io", "verification/generated/left_io_netlist.xml"),
+                       ("right_io", "verification/generated/right_io_netlist.xml"),
+                       ("bms", "verification/generated/bms_netlist.xml")):
         d = json.load(open(os.path.join(PROJDIR, board, f"{board}.kicad_pro")))
         ns = find(d, "net_settings")
         have = {c["name"] for c in ns["classes"]}

@@ -27,10 +27,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-NETLIST = ROOT / "verification" / "pin_review_netlist.xml"
+NETLIST = ROOT / "verification" / "generated" / "pin_review_netlist.xml"
 REPORT_DATE = dt.date.today().isoformat()
-CSV_OUT = ROOT / "verification" / f"pin_by_pin_review_{REPORT_DATE}.csv"
-MD_OUT = ROOT / "verification" / f"PIN_BY_PIN_REVIEW_{REPORT_DATE}.md"
+CSV_OUT = ROOT / "verification" / "generated" / f"pin_by_pin_review_{REPORT_DATE}.csv"
+MD_OUT = ROOT / "verification" / "generated" / f"PIN_BY_PIN_REVIEW_{REPORT_DATE}.md"
 KICAD_CLI = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
 
 
@@ -2072,7 +2072,7 @@ def load_current_architecture_overrides() -> None:
         add("U2304", pin, net, "Codec VBUS is separately current-limited and off when the radio board is absent.", radio)
 
 def export_netlist() -> None:
-    NETLIST.parent.mkdir(exist_ok=True)
+    NETLIST.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         [
             str(KICAD_CLI),
@@ -2336,8 +2336,8 @@ def main() -> int:
     )
     args = parser.parse_args()
     REPORT_DATE = args.report_date
-    CSV_OUT = ROOT / "verification" / f"pin_by_pin_review_{args.report_date}.csv"
-    MD_OUT = ROOT / "verification" / f"PIN_BY_PIN_REVIEW_{args.report_date}.md"
+    CSV_OUT = ROOT / "verification" / "generated" / f"pin_by_pin_review_{args.report_date}.csv"
+    MD_OUT = ROOT / "verification" / "generated" / f"PIN_BY_PIN_REVIEW_{args.report_date}.md"
     load_contracts()
     load_current_architecture_overrides()
     export_netlist()
