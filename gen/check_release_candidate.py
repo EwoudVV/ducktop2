@@ -560,7 +560,7 @@ def run_command(command: list[str], cwd: Path, label: str) -> None:
 def copy_for_static_checks(destination: Path) -> Path:
     copy_root = destination / "project"
     ignored = shutil.ignore_patterns(
-        ".git", ".ai", ".local", ".history", ".mcp-backups", "__pycache__", "*.pyc", "tmp",
+        ".git", ".workbench", ".local", ".history", ".mcp-backups", "__pycache__", "*.pyc", "tmp",
         "pcb_snapshots", "project_snapshots",
     )
     shutil.copytree(ROOT, copy_root, ignore=ignored)

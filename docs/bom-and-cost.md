@@ -8,7 +8,7 @@ there is no reconciled current total yet.
 | Item | Basis for the next quote |
 | --- | --- |
 | Center, left, and right PCBs | Three separate eight-layer boards, current outlines, approved stackup/impedance requirements |
-| BMS PCB | Corrected board, agreed layer count and copper weights |
+| BMS PCB | Four layers, 35 um copper, 1.6 mm board; confirm 20 um hole plating in the quote |
 | PCBA and component sourcing | Separate BOM/CPL for each board, DNPs, hand assembly, fixtures, setup charges, and spares |
 | Radio board | Separate four-layer board and its assembly/components |
 | Keyboard | Existing rev A package; check what has already been ordered/received |

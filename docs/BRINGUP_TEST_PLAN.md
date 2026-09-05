@@ -1,11 +1,12 @@
 # bring-up plan
 
-updated 4 september 2026. this is the preparation and test order. the exact
+updated 5 september 2026. this is the preparation and test order. the exact
 power fixtures, limits, connections, and acceptance values still need a
 review against the corrected boards before this becomes a bench procedure.
 
-the first prerequisites are the BMS fuse-net/layer fixes, completed routing,
-and trustworthy per-board verification. see the [build status](../README.md#build-status).
+the BMS routing, direct shunt pickups, and per-board checks are complete.
+the center and I/O boards still need routing and verification. see the
+[build status](../README.md#build-status).
 
 ## fixture requirements
 
@@ -43,6 +44,9 @@ inspect IC orientation, FET footprints/pin assignments, fuse clips, shunts,
 connector seating, solder joints, and DNP population. measure resistance and
 diode behavior in both polarities between the specified rails/references.
 record the readings and investigate unexplained low resistance.
+
+the BMS front silkscreen uses numbers 1-16 for TPB1-TPB16. point 14 has
+stacked digits. the full references are on the assembly drawing.
 
 the BMS test-point table is:
 
