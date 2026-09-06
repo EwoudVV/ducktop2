@@ -1,6 +1,6 @@
 # build and verify
 
-updated 5 september 2026. these are the entry points for checking the working
+updated 6 september 2026. these are the entry points for checking the working
 files. the latest results and known checker failures are in [current status](../README.md#build-status).
 
 ## before running anything
@@ -131,6 +131,13 @@ findings. use native connectivity for routing progress, and retain the DRC
 list as diagnostic examples. `--all-track-errors` does not remove this cap.
 
 current remaining findings are in the [center review](hardware/center-board.md).
+
+the center sync was tested using an explicit KiCad S-expression netlist and
+matching by reference. correct stale footprint library IDs before importing;
+the trial otherwise added duplicate footprints. compare every retained pad
+and placement afterward. KiCad's `{slash}` encoding within a sheet name is
+different from the old literal XML `&amp;` corruption; the comparison handles
+the former while continuing to reject the latter and split net groups.
 
 ## firmware checks
 

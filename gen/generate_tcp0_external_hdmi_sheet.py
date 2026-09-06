@@ -110,102 +110,62 @@ def build(sheet_symbol_uuid):
         dnp=True,
     )
 
-    # Remove locally powered interfaces from the Mu pins while the host is off.
-    # TPS22975N does not specify reverse-current blocking, so the downstream rails
-    # must not be externally driven while SYS_5V/SYS_3V3 are absent.
-    # MU_HOST_ACTIVE is already fail-low in the Mu carrier power sequencing.
-    for ref, source, output, ct, y in (
-        ("U54", "SYS_5V", "HDMI_SOURCE_5V", "HDMI_5V_SWITCH_CT", 38.1),
-        ("U55", "SYS_3V3", "HDMI_HOST_3V3", "HDMI_3V3_SWITCH_CT", 101.6),
-    ):
-        source_kind = "hier"
-        s.place(
-            ref, "TPS22975N", f"TPS22975NDSGR host-active {source} switch", 405, y,
-            footprint=FOOTPRINTS["TPS22975N"],
-            pin_nets={
-                "1": (source, source_kind), "2": (source, source_kind),
-                "3": ("MU_HOST_ACTIVE", "hier"), "4": (source, source_kind),
-                "5": ("GND", "local"), "6": (ct, "local"),
-                "7": (output, "local"), "8": (output, "local"),
-                "9": ("GND", "local"),
-            },
-            extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "TPS22975NDSGR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/tps22975.pdf",
-                "PowerOffContract": "OUTPUT_OFF_WHEN_MU_HOST_ACTIVE_LOW; NO_REVERSE_BLOCK_GUARANTEE",
-            },
-        )
-    s.place("C164", "C", "4.7n HDMI 5V switch rise-time", 455, 38.1,
+    # The HDMI power branch uses its own current-limited, reverse-blocking switch.
+    s.place("U54", "TPS22948", "TPS22948DCKR HDMI 5V current-limited switch", 405, 38.1,
+            footprint=FOOTPRINTS["TPS22948"],
+            pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local"),
+                      "3": ("MU_HOST_ACTIVE", "hier"), "4": ("", "nc"),
+                      "5": ("", "nc"), "6": ("EXT_HDMI_5V", "local")},
+            extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPS22948DCKR",
+                         "Datasheet": "https://www.ti.com/lit/ds/symlink/tps22948.pdf",
+                         "PowerOffContract": "OUTPUT_OFF_WHEN_MU_HOST_ACTIVE_LOW; ALWAYS_ON_REVERSE_BLOCKING"})
+    s.place("R570", "R", "100k HDMI enable pulldown", 365, 50.8,
+            footprint=FOOTPRINTS["R_0402"],
+            pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0402FR-07100KL"})
+    s.place("C164", "C", "18n 50V X7R TPS22948 output", 455, 38.1,
             footprint=FOOTPRINTS["C_0402"],
-            pin_nets={"1": ("HDMI_5V_SWITCH_CT", "local"), "2": ("GND", "local")})
+            pin_nets={"1": ("EXT_HDMI_5V", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "CC0402KRX7R9BB183",
+                         "Datasheet": "https://yageogroup.com/download/specsheet/CC0402KRX7R9BB183"})
+
+    # Keep the DDC/HPD host-side 3V3 rail off when the Mu is off.
+    s.place("U55", "TPS22975N", "TPS22975NDSGR host-active SYS_3V3 switch", 405, 101.6,
+            footprint=FOOTPRINTS["TPS22975N"],
+            pin_nets={"1": ("SYS_3V3", "hier"), "2": ("SYS_3V3", "hier"),
+                      "3": ("MU_HOST_ACTIVE", "hier"), "4": ("SYS_3V3", "hier"),
+                      "5": ("GND", "local"), "6": ("HDMI_3V3_SWITCH_CT", "local"),
+                      "7": ("HDMI_HOST_3V3", "local"), "8": ("HDMI_HOST_3V3", "local"),
+                      "9": ("GND", "local")},
+            extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPS22975NDSGR",
+                         "Datasheet": "https://www.ti.com/lit/ds/symlink/tps22975.pdf",
+                         "PowerOffContract": "OUTPUT_OFF_WHEN_MU_HOST_ACTIVE_LOW; NO_REVERSE_BLOCK_GUARANTEE"})
     s.place("C165", "C", "4.7n HDMI 3V3 switch rise-time", 455, 101.6,
             footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("HDMI_3V3_SWITCH_CT", "local"), "2": ("GND", "local")})
     s.place("R168", "R", "100k HDMI switched 5V discharge", 455, 50.8,
             footprint=FOOTPRINTS["R_0402"],
-            pin_nets={"1": ("HDMI_SOURCE_5V", "local"), "2": ("GND", "local")})
+            pin_nets={"1": ("EXT_HDMI_5V", "local"), "2": ("GND", "local")})
     s.place("R169", "R", "100k HDMI switched 3V3 discharge", 455, 114.3,
             footprint=FOOTPRINTS["R_0402"],
             pin_nets={"1": ("HDMI_HOST_3V3", "local"), "2": ("GND", "local")})
 
-    # TPD13S523 supplies a current-limited, reverse-blocking HDMI 5 V output
-    # and clamps the three connector-side control lines. Its legacy TMDS
-    # clamps remain unused; the 0.15-pF-max TI shunts stay at J30.
-    s.place(
-        "U50", "TPD13S523PWR", "TPD13S523PWR HDMI control ESD / 5V switch", 500, 63.5,
-        footprint=FOOTPRINTS["TPD13S523PWR"],
-        pin_nets={
-            "1": ("EXT_HDMI_SCL_CONN", "local"),
-            "2": ("EXT_HDMI_SDA_CONN", "local"),
-            "3": ("EXT_HDMI_HPD_CONN", "local"),
-            "4": ("HDMI_TPD_D0_UNUSED", "local"),
-            "5": ("HDMI_SOURCE_5V", "local"),
-            "6": ("EXT_HDMI_5V", "local"),
-            "7": ("HDMI_TPD_D1_UNUSED", "local"),
-            "8": ("GND", "local"),
-            "9": ("HDMI_TPD_D2_UNUSED", "local"),
-            "10": ("HDMI_TPD_D3_UNUSED", "local"),
-            "11": ("HDMI_TPD_D4_UNUSED", "local"),
-            "12": ("HDMI_TPD_D5_UNUSED", "local"),
-            "13": ("HDMI_TPD_D6_UNUSED", "local"),
-            "14": ("HDMI_TPD_D7_UNUSED", "local"),
-            "15": ("HDMI_TPD_D8_UNUSED", "local"),
-            "16": ("HDMI_TPD_D9_UNUSED", "local"),
-        },
-        extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPD13S523PWR"},
-    )
-    s.place(
-        "C158", "C", "1u 10V X7R HDMI 5V switch input", 570, 58.42,
-        footprint=FOOTPRINTS["C_1u"],
-        pin_nets={"1": ("HDMI_SOURCE_5V", "local"), "2": ("GND", "local")},
-        extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71A105KA61D"},
-    )
-    s.place(
-        "C159", "C", "1u 10V X7R HDMI 5V switch output", 570, 68.58,
-        footprint=FOOTPRINTS["C_1u"],
-        pin_nets={"1": ("EXT_HDMI_5V", "local"), "2": ("GND", "local")},
-        extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71A105KA61D"},
-    )
-    s.place(
-        "C162", "C", "100n 10V X7R HDMI 5V switch input HF", 620, 58.42,
-        footprint=FOOTPRINTS["C_0402"],
-        pin_nets={"1": ("HDMI_SOURCE_5V", "local"), "2": ("GND", "local")},
-        extra_props={"Manufacturer": "Murata", "MPN": "GRM155R71A104KA01D"},
-    )
-    s.place(
-        "C163", "C", "100n 10V X7R HDMI 5V switch output HF", 620, 68.58,
-        footprint=FOOTPRINTS["C_0402"],
-        pin_nets={"1": ("EXT_HDMI_5V", "local"), "2": ("GND", "local")},
-        extra_props={"Manufacturer": "Murata", "MPN": "GRM155R71A104KA01D"},
-    )
-    for offset, pin in enumerate(("4", "7", "9", "10", "11", "12", "13", "14", "15", "16")):
-        s.place(
-            f"R{570 + offset}", "R", "75R 1% unused TPD13S523 channel termination",
-            700 + (offset % 2) * 45, 55.88 + (offset // 2) * 12.7,
-            footprint=FOOTPRINTS["R_0402"],
-            pin_nets={"1": (f"HDMI_TPD_D{offset}_UNUSED", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0402FR-0775RL"},
-        )
+    s.place("U50", "TPD4E05U06DQA", "TPD4E05U06DQAR HDMI control and 5V ESD", 500, 63.5,
+            footprint=FOOTPRINTS["TPD4E05U06DQA"],
+            pin_nets={"1": ("EXT_HDMI_SCL_CONN", "local"), "2": ("EXT_HDMI_SDA_CONN", "local"),
+                      "3": ("GND", "local"), "4": ("EXT_HDMI_HPD_CONN", "local"),
+                      "5": ("EXT_HDMI_5V", "local"), "6": ("", "nc"), "7": ("", "nc"),
+                      "8": ("GND", "local"), "9": ("", "nc"), "10": ("", "nc")},
+            extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPD4E05U06DQAR",
+                         "Datasheet": "https://www.ti.com/lit/ds/symlink/tpd4e05u06.pdf"})
+    s.place("C158", "C", "1u 10V X7R HDMI switch input", 570, 58.42,
+            footprint="Capacitor_SMD:C_0603_1608Metric",
+            pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71A105KA61D"})
+    s.place("C162", "C", "100n 10V X7R HDMI switch input HF", 620, 58.42,
+            footprint=FOOTPRINTS["C_0402"],
+            pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM155R71A104KA01D"})
 
     # PCA9306 provides a characterized bidirectional DDC/SCDC translation
     # path. VREF2 and EN share the application-circuit bias node.
@@ -266,7 +226,7 @@ def build(sheet_symbol_uuid):
     s.text(20, 228.6, "NOTES:")
     s.text(20, 236.22, "J30 is the outside-world HDMI jack. The retired Intehill controller is a bench-test/fallback fixture, not motherboard circuitry.")
     s.text(20, 243.84, "TMDS ESD uses 0.15pF-max, +/-3.6V TPD1E0B04DPLR single-line parts; route each shunt at J30 with no stub.")
-    s.text(20, 251.46, "CEC and utility are explicitly NC; unused TPD13S523 legacy channels use the datasheet 75R-to-GND termination.")
+    s.text(20, 251.46, "CEC and utility are NC. TPS22948 supplies current-limited, reverse-blocking 5V; TPD4E05U06 protects DDC, HPD, and 5V.")
     s.text(20, 259.08, "U54/U55 remove 5V/DDC/HPD power while the Mu is off; PCA9306 translates DDC/SCDC and U53 buffers HPD.")
     s.text(20, 266.7, "LAYOUT: HDMI TMDS pairs are 100-ohm differential. Match pair skew to under 5 mil per Mu HDMI guide (current ~495 mil).")
     s.text(20, 274.32, "LAYOUT: PCIe Gen3 pairs are 85-ohm differential. Match data-pair skew under 5 mil and refclock under 5 mil per Mu PCIe guide.")

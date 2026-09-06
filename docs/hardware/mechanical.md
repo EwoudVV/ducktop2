@@ -20,6 +20,11 @@ the left, center, and right PCBs use the original shared XY frame. their
 nominal widths are 70, 230, and 58 mm, with a depth of 185 mm. the seams
 are at x=70 and x=300. each board needs its own structural support.
 
+the two OLED modules mount separately in the case and connect to J41/J45
+with wires. their module bodies are not part of the center-board footprint.
+the floorplan positions remain a packaging sketch until the case mounts
+and cable routes are set.
+
 the BMS is about 62 x 30 mm, with its outline at roughly x=106.7-168.6,
 y=62.552-92.9 in its current file. the radio outline is about 120 x 70 mm,
 at x=20-140, y=20-90 in its file. those are separate layout frames, not

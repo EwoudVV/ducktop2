@@ -38,12 +38,13 @@ use this convention. confirm the exact ordered connector against its drawing.
 
 ## positions read from the boards
 
-KiCad coordinates in mm and rotations in degrees, checked 4 september.
+KiCad coordinates in mm and rotations in degrees, checked 4 september;
+FPC102's center-board position was updated on 6 september.
 
 | Ref | Board | X | Y | Rotation |
 | --- | --- | ---: | ---: | ---: |
 | FPC101 | Left | 65.6 | 92.5 | 90 |
-| FPC102 | Center | 73.5 | 92.5 | 270 |
+| FPC102 | Center | 73.85 | 92.5 | 270 |
 | FPC103 | Center | 294.6 | 92.5 | 90 |
 | FPC104 | Right | 303.6 | 92.5 | 270 |
 | FPC105 | Center | 123.5 | 6.5 | 180 |
@@ -84,8 +85,17 @@ the rating of a complete heated cable/connector assembly.
 | --- | --- | --- |
 | Keyboard | 30-pin interface; center J310 is at (216.5, 12.5), rotation 270 | Installed route, length, seating, and continuity against both board revisions |
 | Radio | Removable 30-pin interface; center J2300 is at (188, 4), rotation 0 | Radio chassis location, supports, orientation, and cable route |
+| OLEDs | J41/J45 use four-wire cables: 1 GND, 2 3.3 V, 3 SCL, 4 SDA | Module mounts, cable lengths, and rise-time check with the installed harness |
 | Trackpad | J58: 1 GND, 2 D-, 3 D+, 4 VBUS; USB-C plug at trackpad | Exact cable, cut-end identification, bend path, clamp, and pull test |
 | Internal display | Mu onboard eDP connection | Exact panel connector, all 40 conductors, rail limits, and hinge route |
+
+the two OLEDs mount separately in the case. J41/J45 are JST GH
+`SM04B-GHS-TB` connectors, with `GHR-04V-S` cable housings and
+`SSHL-002T-P0.2` contacts. use the OLED's printed signal labels when wiring
+the far end; connector views can reverse the apparent pin order. keep each
+harness short and check continuity before plugging it in. the display
+modules need their own mounts and wire strain relief.
+[JST GH drawing](https://www.jst-mfg.com/product/pdf/eng/eGH.pdf).
 
 ## keyboard cable map
 

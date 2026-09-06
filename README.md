@@ -22,14 +22,16 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-checked 5 september 2026. the four-layer BMS routing is finished, with
+the four-layer BMS routing was checked on 5 september 2026, with
 zero DRC errors, warnings, or unconnected items. schematic ERC is clean,
 and the connected pads match the schematic. the power paths, shunt pickups,
 reference grounds, and connector current sharing have been reviewed.
 protection and thermal testing still need assembled hardware. the center
 and I/O boards are eight layers and still need routing. the
-[center review](docs/hardware/center-board.md) records the pad-name, component,
-placement, and HDMI power issues to resolve first. the keyboard has a
+[center review](docs/hardware/center-board.md) was updated on 6 september:
+the net and component sync, wired OLED connectors, edge clearances, and
+layer rules are in place. the remaining placement work and right-board HDMI
+update are listed there. the keyboard has a
 rev A production package, and the radio is still a placement board.
 
 the replacement panel has run at 2560x1600 and 120 Hz on the Intehill
@@ -69,8 +71,9 @@ the current reference version is KiCad 10.0.4.
 | Radio | `radio_daughterboard/radio_daughterboard.kicad_pro` |
 
 read [build and verification](docs/build-and-verify.md) before regenerating
-or syncing a board. the center layout uses net normalization that a normal
-F8 update skips, and rebuilding a board can replace existing routing.
+or syncing a board. the center schematic and PCB have different basenames.
+review an explicit current netlist before updating the PCB; rebuilding a
+board can replace existing routing.
 
 ## files and documentation
 

@@ -93,9 +93,9 @@ def component_flags(project: str = "ducktop2") -> tuple[set[str], set[str]]:
     return dnp, exclude_bom
 
 
-def component_pin_names() -> dict[tuple[str, str], str]:
+def component_pin_names(netlist: Path | None = None) -> dict[tuple[str, str], str]:
     """Return the library-declared pin name for every instantiated pin."""
-    root = ET.parse(sync.NETLIST).getroot()
+    root = ET.parse(netlist if netlist is not None else sync.NETLIST).getroot()
     library_pins: dict[tuple[str, str], dict[str, str]] = {}
     for libpart in root.findall(".//libpart"):
         key = (libpart.get("lib") or "", libpart.get("part") or "")
@@ -313,8 +313,11 @@ def check_active_custom_footprint_pin_sets(components, min_custom: int = 10) -> 
 
 
 def check_oled(components, fps=None):
-    expect(comp(components, "J41").footprint, "ducktop2:SSD1306_0.96in_Module_4Pin", "J41 footprint")
-    expect(comp(components, "J45").footprint, "ducktop2:SSD1306_0.96in_Module_4Pin", "J45 footprint")
+    expect_value_prefix(components, "C170", "47u 10V X5R", "E-key bulk capacitor")
+    expect(prop(components, "C170", "MPN"), "GRM31CR61A476ME15L", "E-key 47uF part number")
+    cable_footprint = "Connector_JST:JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal"
+    for ref in ("J41", "J45"):
+        expect(comp(components, ref).footprint, cable_footprint, f"{ref} cable footprint")
     expect(comp(components, "U45").footprint, "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm", "U45 footprint")
     for ref, sda, scl in [
         ("J41", "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_A_SDA", "/Wi-Fi{slash}Bluetooth & OLEDs/OLED_A_SCL"),
@@ -324,13 +327,15 @@ def check_oled(components, fps=None):
         expect(net(components, ref, "2"), "/MCU_3V3", f"{ref} pin 2")
         expect(net(components, ref, "3"), scl, f"{ref} pin 3")
         expect(net(components, ref, "4"), sda, f"{ref} pin 4")
-        expect(prop(components, ref, "ProcurementClass"), "Owner-supplied measured module",
-               f"{ref} controlled owner-supplied identity")
+        expect(prop(components, ref, "MPN"), "SM04B-GHS-TB", f"{ref} PCB connector")
+        expect(prop(components, ref, "MatingHousing"), "GHR-04V-S", f"{ref} cable housing")
+        expect(prop(components, ref, "Contacts"), "SSHL-002T-P0.2", f"{ref} cable contacts")
+        expect(prop(components, ref, "CablePinout"), "1=GND;2=3V3;3=SCL;4=SDA", f"{ref} cable map")
         if fps is not None:
             if ref not in fps:
                 fail(f"{ref} missing from PCB")
-            if fps[ref].footprint != "ducktop2:SSD1306_0.96in_Module_4Pin":
-                fail(f"{ref} PCB footprint is not the exact OLED module: {fps[ref].footprint}")
+            if fps[ref].footprint != cable_footprint:
+                fail(f"{ref} PCB footprint is not the OLED cable connector: {fps[ref].footprint}")
 
     for pin in ("1", "2", "12", "21"):
         expect(net(components, "U45", pin), "GND", f"U45 pin {pin}")
@@ -1801,33 +1806,37 @@ def check_external_hdmi_path(components, sheet: str = "TCP0 External HDMI"):
                f"{dref} 0.6x0.3mm DPL land pattern")
         expect(net(components, dref, "1"), local_net(sheet, conn), f"{dref} TMDS shunt")
         expect(net(components, dref, "2"), "GND", f"{dref} ESD return")
-    for pin, want in {
-        "1": "EXT_HDMI_SCL_CONN", "2": "EXT_HDMI_SDA_CONN", "3": "EXT_HDMI_HPD_CONN",
-        "5": "HDMI_SOURCE_5V", "6": "EXT_HDMI_5V", "8": "GND",
-    }.items():
-        expected = want if want.startswith("/") or want == "GND" else local_net(sheet, want)
-        expect(net(components, "U50", pin), expected, f"TPD13S523 pin {pin}")
-    unused_pins = ("4", "7", "9", "10", "11", "12", "13", "14", "15", "16")
-    for index, pin in enumerate(unused_pins):
-        unused = local_net(sheet, f"HDMI_TPD_D{index}_UNUSED")
-        ref = f"R{570 + index}"
-        expect(net(components, "U50", pin), unused, f"TPD13S523 unused channel pin {pin}")
-        expect_value_prefix(components, ref, "75R 1%", f"{ref} unused HDMI termination")
-        expect(net(components, ref, "1"), unused, f"{ref} unused HDMI channel")
-        expect(net(components, ref, "2"), "GND", f"{ref} unused HDMI termination return")
-    for ref, value, rail in (
-        ("C158", "1u", local_net(sheet, "HDMI_SOURCE_5V")),
-        ("C162", "100n", local_net(sheet, "HDMI_SOURCE_5V")),
-        ("C159", "1u", local_net(sheet, "EXT_HDMI_5V")),
-        ("C163", "100n", local_net(sheet, "EXT_HDMI_5V")),
-    ):
-        expect_value_prefix(components, ref, value, f"{ref} HDMI switch bypass")
-        expect(net(components, ref, "1"), rail, f"{ref} HDMI switch bypass rail")
-        expect(net(components, ref, "2"), "GND", f"{ref} HDMI switch bypass return")
+    expect(prop(components, "U50", "MPN"), "TPD4E05U06DQAR", "HDMI ESD array MPN")
+    for pin, want in {"1":"EXT_HDMI_SCL_CONN", "2":"EXT_HDMI_SDA_CONN",
+                      "3":"GND", "4":"EXT_HDMI_HPD_CONN", "5":"EXT_HDMI_5V", "8":"GND"}.items():
+        expect(net(components, "U50", pin), want if want=="GND" else local_net(sheet,want), f"HDMI ESD pin {pin}")
+    for pin in ("6","7","9","10"):
+        expect_unconnected(components,"U50",pin)
+    expect(prop(components,"U54","MPN"),"TPS22948DCKR","HDMI power switch MPN")
+    expect(comp(components,"U54").footprint,"Package_TO_SOT_SMD:SOT-363_SC-70-6","HDMI switch footprint")
+    for pin,want in {"1":"/SYS_5V","2":"GND","3":"/MU_HOST_ACTIVE","6":local_net(sheet,"EXT_HDMI_5V")}.items():
+        expect(net(components,"U54",pin),want,f"HDMI switch pin {pin}")
+    for pin in ("4","5"):
+        expect_unconnected(components,"U54",pin)
+    expect(prop(components,"U54","PowerOffContract"),
+           "OUTPUT_OFF_WHEN_MU_HOST_ACTIVE_LOW; ALWAYS_ON_REVERSE_BLOCKING", "HDMI switch power-off behavior")
+    expect_value_prefix(components,"R570","100k","HDMI enable pulldown")
+    expect(net(components,"R570","1"),"/MU_HOST_ACTIVE","HDMI enable pulldown input")
+    expect(net(components,"R570","2"),"GND","HDMI enable pulldown return")
+    for ref,value,rail in (("C158","1u","/SYS_5V"),("C162","100n","/SYS_5V"),
+                           ("C164","18n",local_net(sheet,"EXT_HDMI_5V"))):
+        expect_value_prefix(components,ref,value,f"{ref} HDMI switch capacitor")
+        expect(net(components,ref,"1"),rail,f"{ref} rail")
+        expect(net(components,ref,"2"),"GND",f"{ref} return")
+    expect(net(components,"R168","1"),local_net(sheet,"EXT_HDMI_5V"),"HDMI 5V discharge")
+    expect(net(components,"R168","2"),"GND","HDMI 5V discharge return")
+    expect_value_prefix(components,"R168","100k","HDMI 5V discharge value")
+    for ref in ["C159","C163"]+[f"R{n}" for n in range(571,580)]:
+        if ref in components:
+            fail(f"obsolete HDMI switch part remains: {ref}")
     expect(net(components, "R165", "1"), "/MU_HOST_ACTIVE", "HDMI bias qualified host-active source")
 
     for ref, source, output, ct, cap, bleed in (
-        ("U54", "/SYS_5V", "HDMI_SOURCE_5V", "HDMI_5V_SWITCH_CT", "C164", "R168"),
         ("U55", "/SYS_3V3", "HDMI_HOST_3V3", "HDMI_3V3_SWITCH_CT", "C165", "R169"),
     ):
         for pin, want in {
@@ -3119,7 +3128,7 @@ def main() -> int:
     args = parse_args()
     sync.export_netlist(args.project)
     components = sync.parse_netlist(args.project)
-    pin_names = component_pin_names()
+    pin_names = component_pin_names(sync.PROJECTS[args.project][1])
     fps = pcb_text = None
     if not args.schematic_only and args.project == "ducktop2":
         fps, pcb_text = footprint_map()

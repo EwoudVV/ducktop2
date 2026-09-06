@@ -78,8 +78,9 @@ def build(sheet_symbol_uuid):
     s.place("F10", "Fuse", "2A E-key 3V3 fuse/polyfuse", 20, 76.2, footprint=FOOTPRINTS["Fuse"],
             pin_nets={"1": ("PCIE_3V3", "hier"), "2": ("WIFI_3V3", "local")},
             extra_props={"Manufacturer": "Littelfuse", "MPN": "1206L200PR"})
-    s.place("C170", "C", "47u E-key bulk", 20, 91.44, footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("WIFI_3V3", "local"), "2": ("GND", "local")})
+    s.place("C170", "C", "47u 10V X5R E-key bulk", 20, 91.44, footprint=FOOTPRINTS["C_10u"],
+            pin_nets={"1": ("WIFI_3V3", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM31CR61A476ME15L"})
     s.place("C171", "C", "100n radio bypass", 20, 104.14, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("WIFI_3V3", "local"), "2": ("GND", "local")})
     s.pwrflag(20, 119.38, "WIFI_3V3")
@@ -162,17 +163,18 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
     s.place("C175", "C", "100n OLED A local", 90, 337.82, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
-    s.place("J41", "Conn_01x04", "SSD1306 OLED A 4-pin GND/VDD/SCK/SDA", 205, 287.02,
-            footprint=FOOTPRINTS["SSD1306_0.96in_Module"],
+    s.place("J41", "Conn_01x04", "OLED A cable: GND/3V3/SCL/SDA", 205, 287.02,
+            footprint=FOOTPRINTS["Conn_01x04_Service_GH"],
             pin_nets={
                 "1": ("GND", "local"),
                 "2": ("MCU_3V3", "hier"),
                 "3": ("OLED_A_SCL", "local"),
                 "4": ("OLED_A_SDA", "local"),
             }, extra_props={
-                "ProcurementClass": "Owner-supplied measured module",
-                "AssemblyID": "OLED-A-SSD1306-0P96-4PIN-GND-VDD-SCK-SDA",
-                "MechanicalEnvelope": "27.0x27.0mm module; verify owned sample before enclosure release",
+                "Manufacturer": "JST", "MPN": "SM04B-GHS-TB",
+                "MatingHousing": "GHR-04V-S", "Contacts": "SSHL-002T-P0.2",
+                "Endpoint": "OLED A, mounted separately in the case",
+                "CablePinout": "1=GND;2=3V3;3=SCL;4=SDA",
             })
     s.place("R196", "R", "4.7k OLED B SCL pull-up", 205, 312.42, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("OLED_B_SCL", "local")})
@@ -184,17 +186,18 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
     s.place("C185", "C", "100n OLED mux local", 90, 350.52, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
-    s.place("J45", "Conn_01x04", "SSD1306 OLED B 4-pin GND/VDD/SCK/SDA", 205, 375.92,
-            footprint=FOOTPRINTS["SSD1306_0.96in_Module"],
+    s.place("J45", "Conn_01x04", "OLED B cable: GND/3V3/SCL/SDA", 205, 375.92,
+            footprint=FOOTPRINTS["Conn_01x04_Service_GH"],
             pin_nets={
                 "1": ("GND", "local"),
                 "2": ("MCU_3V3", "hier"),
                 "3": ("OLED_B_SCL", "local"),
                 "4": ("OLED_B_SDA", "local"),
             }, extra_props={
-                "ProcurementClass": "Owner-supplied measured module",
-                "AssemblyID": "OLED-B-SSD1306-0P96-4PIN-GND-VDD-SCK-SDA",
-                "MechanicalEnvelope": "27.0x27.0mm module; verify owned sample before enclosure release",
+                "Manufacturer": "JST", "MPN": "SM04B-GHS-TB",
+                "MatingHousing": "GHR-04V-S", "Contacts": "SSHL-002T-P0.2",
+                "Endpoint": "OLED B, mounted separately in the case",
+                "CablePinout": "1=GND;2=3V3;3=SCL;4=SDA",
             })
 
     s.gnd(520, 300)
@@ -202,7 +205,7 @@ def build(sheet_symbol_uuid):
     s.text(20, 358.14, "M.2 E-key directions are host TX->PET35/37 and PER41/43->host RX; Mu-side TX has 220n AC coupling.")
     s.text(20, 365.76, "USB2_P1 carries Bluetooth; default-BIOS HSIO3/REFCLK3/CLKREQ3 carry the E-key PCIe function.")
     s.text(20, 373.38, "Qualified radio is Intel AX210.NGWGIE.NV M.2 2230 Key-E: Wi-Fi over PCIe and Bluetooth over USB; AX211/CNVio2 is prohibited.")
-    s.text(20, 381, "OLED headers match common 4-pin SSD1306 modules: GND, VDD/3V3, SCK/SCL, SDA. Use 3.3V modules only.")
+    s.text(20, 381, "The OLEDs mount separately in the case. J41/J45 use four-wire GH cables: 1 GND, 2 3V3, 3 SCL, 4 SDA. Check the module labels when wiring.")
     s.text(20, 388.62, "GNSS, amateur-radio modules, RF switching, and the dedicated radio codec are isolated on the removable daughterboard.")
     s.text(20, 396.24, "TCA9548A channels 0/1 isolate the identical 0x3C OLEDs; channels 2/3 isolate the two TPS25751A service buses.")
     s.text(20, 403.86, "Hardware-gated SERVICE_MUX_RESET_N asserts during every EC reset; firmware selects one TPS25751A channel and validates PD Status 0x35 plus PDO/RDO 0x31/0x32.")

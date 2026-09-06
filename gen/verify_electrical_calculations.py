@@ -160,9 +160,9 @@ def add_window(checks: list[Check], name: str, refs: tuple[str, str, str],
               f"VREF*(Rtop+Rmid+Rbot)/Rbot, {refs_text}"),
     ])
 
-def system_5v_checks(r_top: float, r_bottom: float) -> list[Check]:
-    # The current 75k/10k divider targets 5.10 V. Keep the downstream HDMI
-    # minimum separate so updating the nominal target cannot hide its shortfall.
+def system_5v_checks(r_top: float, r_bottom: float, hdmi_drop_v: float = .055 * .500) -> list[Check]:
+    # Keep the 5.10 V system rail. The HDMI branch uses the TPS22948
+    # maximum on-resistance across its full operating temperature range.
     nominal = 0.6 * (1.0 + r_top / r_bottom)
     minimum = 0.591 * (1.0 + r_top * 0.999 / (r_bottom * 1.001))
     maximum = 0.609 * (1.0 + r_top * 1.001 / (r_bottom * 0.999))
@@ -173,9 +173,9 @@ def system_5v_checks(r_top: float, r_bottom: float) -> list[Check]:
               "0.591V*(1+R40*0.999/(R41*1.001))"),
         Check("TPS56637 SYS_5V worst-case maximum", maximum, "V", 5.15, 5.25,
               "0.609V*(1+R40*1.001/(R41*0.999))"),
-        Check("HDMI +5V guaranteed connector minimum", minimum - 0.002 - 0.205 - 0.050,
+        Check("HDMI +5V guaranteed connector minimum", minimum - hdmi_drop_v - 0.050,
               "V", 4.80, 5.25,
-              "SYS_5V(min)-0.002V TPS22975 drop-0.205V TPD13S523 drop-0.050V board/connector allowance"),
+              "SYS_5V(min)-55mA*0.500ohm TPS22948(max at 125C)-0.050V board/connector allowance"),
     ]
 
 
@@ -609,7 +609,8 @@ def render_report(checks: list[Check], netlist: Path, radio_netlist: Path) -> st
         "- Texas Instruments TPS54302: https://www.ti.com/lit/ds/symlink/tps54302.pdf",
         "- Texas Instruments TPS56637: https://www.ti.com/lit/ds/symlink/tps56637.pdf",
         "- Texas Instruments TPS2553: https://www.ti.com/lit/ds/symlink/tps2553.pdf",
-        "- Texas Instruments TPD13S523: https://www.ti.com/lit/ds/symlink/tpd13s523.pdf",
+        "- Texas Instruments TPS22948: https://www.ti.com/lit/ds/symlink/tps22948.pdf",
+        "- Texas Instruments TPD4E05U06: https://www.ti.com/lit/ds/symlink/tpd4e05u06.pdf",
         "- pSemi PE42820: https://www.psemi.com/pdf/datasheets/pe42820ds.pdf",
         "- Texas Instruments PCM2900C: https://www.ti.com/lit/ds/symlink/pcm2900c.pdf",
         "- Texas Instruments TLV9061/TLV9062: https://www.ti.com/lit/ds/symlink/tlv9062.pdf",
@@ -652,6 +653,11 @@ def main() -> None:
     else:
         export_netlist(SCHEMATIC, netlist)
         export_netlist(RADIO_SCHEMATIC, radio_netlist)
+        right_netlist = ROOT / "verification/generated/right_electrical_calculations_netlist.xml"
+        export_netlist(ROOT / "right_io/right_io.kicad_sch", right_netlist)
+        right_values = component_values(right_netlist)
+        if not right_values.get("U54", "").startswith("TPS22948DCKR") or not right_values.get("U50", "").startswith("TPD4E05U06DQAR"):
+            raise ValueError("HDMI voltage calculation requires the checked TPS22948/TPD4E05U06 power path")
         checks = build_checks(component_values(netlist), component_values(radio_netlist))
     report = render_report(checks, netlist, radio_netlist)
     args.output.parent.mkdir(parents=True, exist_ok=True)
