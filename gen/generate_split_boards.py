@@ -28,6 +28,7 @@ import re
 import shutil
 import sys
 import math
+import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(__file__))
 from build_ducktop2 import PROJDIR
@@ -1131,20 +1132,17 @@ def netlist_parts(xml):
     schematic sheet prefixes them) -- exactly what board pads must carry
     to connect to the circuits (Phase 5 A1 fix).
     """
-    txt = open(xml).read()
+    root = ET.parse(xml).getroot()
     out = {}
-    for m in re.finditer(r'<comp ref="([^"]+)">.*?</comp>', txt, re.S):
-        ref, body = m.group(1), m.group(0)
-        fm = re.search(r'<footprint>([^<]*)</footprint>', body)
-        if not fm or not fm.group(1):
-            continue
-        out[ref] = (fm.group(1), {})
-    for nm in re.finditer(r'<net code="\d+" name="([^"]*)"[^>]*>(.*?)</net>', txt, re.S):
-        net, nodes = nm.group(1), nm.group(2)
-        for node in re.finditer(r'<node ref="([^"]+)" pin="([^"]+)"', nodes):
-            ref, pin = node.group(1), node.group(2)
-            if ref in out:
-                out[ref][1][pin] = net
+    for comp in root.findall('./components/comp'):
+        footprint = comp.findtext('footprint')
+        if footprint and comp.find("property[@name='exclude_from_board']") is None:
+            out[comp.get('ref')] = (footprint, {})
+    for net in root.findall('./nets/net'):
+        for node in net.findall('node'):
+            if node.get('ref') in out:
+                out[node.get('ref')][1][node.get('pin')] = net.get('name')
+
     return out
 
 
@@ -1154,8 +1152,7 @@ def resolve_net_names(pinmap, netlist_xml):
     on missing or ambiguous names: connector pads MUST carry the circuit
     net's exact name (a prefix-stripped match is a shadowed connector).
     """
-    xml = open(netlist_xml).read()
-    names = set(re.findall(r'<net code="\d+" name="([^"]*)"', xml))
+    names = {net.get('name') for net in ET.parse(netlist_xml).findall('./nets/net')}
     by_base = {}
     for n in names:
         by_base.setdefault(n.split("/")[-1], set()).add(n)
@@ -1184,14 +1181,9 @@ def resync_pad_nets(path, netlist_xml):
     from the netlist (MP/SH hold-downs, extra mechanical pads) are left
     untouched -- the connector assign pass handles those.
     """
-    xml = open(netlist_xml).read()
-    net_by_pin = {}
-    for m in re.finditer(r'<net code="\d+" name="([^"]*)"[^>]*>(.*?)</net>',
-                         xml, re.S):
-        net = m.group(1)
-        for node in re.finditer(r'<node ref="([^"]+)" pin="([^"]+)"',
-                                m.group(2)):
-            net_by_pin[(node.group(1), node.group(2))] = net
+    net_by_pin = {(node.get('ref'), node.get('pin')): net.get('name')
+                  for net in ET.parse(netlist_xml).findall('./nets/net')
+                  for node in net.findall('node')}
     txt = open(path).read()
     changed = 0
     pos = 0
@@ -1262,8 +1254,7 @@ def normalize_board_nets(path, netlist_xml):
     sheet-prefixed names (/Power & Battery/FG_VSS -> /FG_VSS) so every
     board net -- circuits, pads and zones alike -- matches the schematic
     netlist that the release gates compare against."""
-    xml = open(netlist_xml).read()
-    names = {n for n in re.findall(r'<net code="\d+" name="([^"]*)"', xml)}
+    names = {net.get('name') for net in ET.parse(netlist_xml).findall('./nets/net')}
     by_base = {}
     for n in names:
         by_base.setdefault(n.split("/")[-1], []).append(n)

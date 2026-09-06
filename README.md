@@ -27,7 +27,9 @@ zero DRC errors, warnings, or unconnected items. schematic ERC is clean,
 and the connected pads match the schematic. the power paths, shunt pickups,
 reference grounds, and connector current sharing have been reviewed.
 protection and thermal testing still need assembled hardware. the center
-and I/O boards are eight layers and still need routing. the keyboard has a
+and I/O boards are eight layers and still need routing. the
+[center review](docs/hardware/center-board.md) records the pad-name, component,
+placement, and HDMI power issues to resolve first. the keyboard has a
 rev A production package, and the radio is still a placement board.
 
 the replacement panel has run at 2560x1600 and 120 Hz on the Intehill

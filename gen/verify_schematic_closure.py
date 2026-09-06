@@ -115,7 +115,7 @@ def run_pack_checks(a: ClosureAudit) -> None:
     a.pin("U11", "8", "/PACK_POS_FUSED")
     a.value_starts("C725", "10u 25V X7R")
     a.pin("C725", "1", "/PACK_POS_FUSED")
-    a.pin("C725", "2", "GND")
+    a.pin("C725", "2", "FG_VSS")
     a.prop_eq("C725", "MPN", "GRM21BZ71E106KE15L")
     for pin in ("1", "2"):
         a.pin("J2", pin, "/PACK_POS_RAW")
@@ -165,8 +165,8 @@ def run_pack_checks(a: ClosureAudit) -> None:
         ("R847", "4.53k 1%", "/BMS_DSG_DRV", "/BMS_DSG_GATE"),
         ("R848", "1k 1%", "/BMS_CHG_DRV", "/BMS_CHG_GATE"),
         ("R849", "1M 5%", "/BMS_DSG_GATE", "/BMS_SENSE_N"),
-        ("R850", "3.3M 5%", "/BMS_CHG_GATE", "/FG_VSS"),
-        ("R851", "453k 1%", "/BMS_LD", "/FG_VSS"),
+        ("R850", "3.3M 5%", "/BMS_CHG_GATE", "FG_VSS"),
+        ("R851", "453k 1%", "/BMS_LD", "FG_VSS"),
         ("R852", "10k 5%", "/PACK_POS_RAW", "/BMS_PRES"),
         ("R853", "10k 1%", "/BMS_TS_UNUSED", "/PACK_NEG_RAW"),
         ("R854", "604k 1%", "/BMS_OCDP", "/PACK_NEG_RAW"),
@@ -194,7 +194,7 @@ def run_pack_checks(a: ClosureAudit) -> None:
     a.prop_eq("RS11", "MPN", "WSLP25128L000FEA")
     for ref, source, gate in (
         ("Q703", "/BMS_SENSE_N", "/BMS_DSG_GATE"),
-        ("Q704", "/FG_VSS", "/BMS_CHG_GATE"),
+        ("Q704", "FG_VSS", "/BMS_CHG_GATE"),
     ):
         for pin in ("1", "2", "3"):
             a.pin(ref, pin, source)

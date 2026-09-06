@@ -1,6 +1,6 @@
 # build and verify
 
-updated 4 september 2026. these are the entry points for checking the working
+updated 5 september 2026. these are the entry points for checking the working
 files. the latest results and known checker failures are in [current status](../README.md#build-status).
 
 ## before running anything
@@ -88,20 +88,49 @@ the intended footprint, value, and procurement fields on the correct board.
 python3 gen/check_release_candidate.py --stage schematic
 ```
 
-the checker runs generators and report writers in a temporary project copy.
-it checks the live design/library files for changes afterwards. its current
-result is FAIL for the reasons listed in [status](../README.md#build-status).
+the checker runs generators and report writers in a temporary project copy
+and checks that the working design/library files stay unchanged. its default
+fabrication and production stages now select the center, left, right, and
+BMS boards. each board is checked with its own project settings and rules.
 
-two limitations matter before using its other stages:
+the center is staged under the schematic basename so KiCad's native parity
+check finds the right schematic. copied-board refills do not modify the
+working board. findings introduced by refill are compared by full signature,
+including new findings in a category that already existed.
 
-- some helpers still expect the former root monolith path;
-- `--pcb` has a nonempty default, so the current selection logic takes the
-  monolith instead of the intended four-board list when no PCB is supplied.
+```sh
+python3 gen/check_release_candidate.py --stage fabrication \
+  --output-dir verification/generated/release-review
+```
 
-repair those paths and board associations before treating a fabrication or
-production result as a whole-laptop check. an explicit `--pcb` selects one
-board; it does not validate the other boards. the `production` stage also
-checks target firmware, display, HIL, and hardware release records.
+`--pcb` scopes the PCB checks to one board; the static schematic and firmware
+checks still cover the project. use `--schematic` with an explicit PCB when
+its schematic has a different name. `--output-dir` retains the per-board
+DRC and parity reports. the old monolith's DRC waivers are no longer applied
+to the current boards. production also requires the target firmware, display,
+HIL, and hardware release records.
+
+for a fresh physical-pad comparison of the center:
+
+```sh
+python3 gen/report_schematic_pcb_eco.py --project center \
+  --output-dir verification/generated/center-parity
+python3 -m unittest discover -s gen -p 'test_*.py' -v
+```
+
+the comparison supports `center`, `left_io`, `right_io`, and `bms`. it checks
+repeated physical pads, component values, footprint IDs, attributes, missing
+parts, and split/merged net names. `--netlist` selects an explicit existing
+XML file; otherwise it exports a fresh one. it exits with a failure status
+when differences remain.
+
+KiCad 10 caps clearance and unconnected-item reports at 499 entries; most
+other categories are capped at 199. the checker flags lists reaching these
+limits. the center has 2,026 native airwires while DRC lists 499 unconnected
+findings. use native connectivity for routing progress, and retain the DRC
+list as diagnostic examples. `--all-track-errors` does not remove this cap.
+
+current remaining findings are in the [center review](hardware/center-board.md).
 
 ## firmware checks
 
@@ -133,7 +162,7 @@ footprint, net-assignment, and track changes are separate operations.
 
 make a candidate copy that includes the current uncommitted work, libraries,
 and project settings. keep the canonical working tree intact while checking
-the candidate. a checkout of HEAD alone would omit the current BMS routing.
+the candidate. a checkout of HEAD alone would omit uncommitted changes.
 
 ## dependency order in the candidate
 

@@ -1,313 +1,182 @@
 #!/usr/bin/env python3
-"""Report schematic-to-PCB drift without modifying the PCB.
-
-This is deliberately separate from ``sync_main_pcb_from_netlist.py``.  It may
-export a fresh XML netlist and write reports under ``verification/``, but it
-only reads ``ducktop2.kicad_pcb`` and asserts that the board hash is unchanged.
-"""
-
+"""Compare a current PCB with a fresh schematic netlist, without editing it."""
 from __future__ import annotations
 
 import argparse
 import csv
 import hashlib
-import importlib.util
+import html
+import json
 import re
 import subprocess
-import sys
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from check_release_candidate import find_kicad_cli, top_level_blocks
 
 ROOT = Path(__file__).resolve().parents[1]
-PCB = ROOT / "ducktop2.kicad_pcb"
-SCHEMATIC = ROOT / "ducktop2.kicad_sch"
-NETLIST = ROOT / "verification" / "generated" / "ducktop2_netlist.xml"
-REPORT = ROOT / "verification" / "generated" / "SCHEMATIC_TO_PCB_ECO_2026-07-20.md"
-NET_CSV = ROOT / "verification" / "generated" / "schematic_to_pcb_eco_net_changes.csv"
-FOOTPRINT_CSV = ROOT / "verification" / "generated" / "schematic_to_pcb_eco_footprint_changes.csv"
-ATTRIBUTE_CSV = ROOT / "verification" / "generated" / "schematic_to_pcb_eco_attribute_changes.csv"
-KICAD_CLI = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
+PROJECTS = {
+    'center': ('ducktop2-center.kicad_pcb', 'ducktop2.kicad_sch'),
+    'left_io': ('left_io/left_io.kicad_pcb', 'left_io/left_io.kicad_sch'),
+    'right_io': ('right_io/right_io.kicad_pcb', 'right_io/right_io.kicad_sch'),
+    'bms': ('bms/bms.kicad_pcb', 'bms/bms.kicad_sch'),
+}
+QUOTED = r'"(?:[^"\\]|\\.)*"'
 
 
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+def unquote(value: str) -> str:
+    return json.loads(value)
 
 
-def load_parsers():
-    """Load only the proven netlist/S-expression parsers from the sync helper."""
-    path = ROOT / "gen" / "sync_main_pcb_from_netlist.py"
-    spec = importlib.util.spec_from_file_location("ducktop2_sync_parser", path)
-    if spec is None or spec.loader is None:
-        raise RuntimeError(f"cannot load parser from {path}")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module
-
-
-def export_netlist() -> None:
-    NETLIST.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(
-        [
-            str(KICAD_CLI),
-            "sch",
-            "export",
-            "netlist",
-            "--format",
-            "kicadxml",
-            "--output",
-            str(NETLIST),
-            str(SCHEMATIC),
-        ],
-        check=True,
-        cwd=ROOT,
-    )
-
-
-def board_pad_nets(parser, block: str) -> dict[str, str | None]:
-    nets: dict[str, str | None] = {}
-    for _, _, pad in parser.pad_blocks(block):
-        pin = parser.pad_name(pad)
-        match = re.search(r'\(net(?:\s+\d+)?\s+"([^"]*)"\)', pad)
-        nets[pin] = match.group(1) if match else None
-    return nets
+def field(block: str, name: str) -> str:
+    match = re.search(r'\(property\s+' + re.escape(json.dumps(name)) + r'\s+(' + QUOTED + ')', block)
+    return unquote(match[1]) if match else ''
 
 
 def normalize_net(name: str | None) -> str | None:
-    """Treat all KiCad-generated unconnected names as the same NC state."""
-    if not name or name.startswith("unconnected-"):
-        return None
-    return name
+    return None if not name or name.startswith('unconnected-') else name
 
 
-def pin_sort_key(pin: str):
-    return (not pin.isdigit(), int(pin) if pin.isdigit() else pin)
+def parse_board(text: str) -> list[dict]:
+    result = []
+    for block in top_level_blocks(text, '(footprint'):
+        fp = re.match(r'\(footprint\s+(' + QUOTED + ')', block)
+        attributes = list(top_level_blocks(block, '(attr'))
+        pads = []
+        for pad in top_level_blocks(block, '(pad'):
+            header = re.match(r'\(pad\s+(' + QUOTED + r')\s+(\w+)', pad)
+            layers = next(top_level_blocks(pad, '(layers'), '')
+            if header[2] == 'np_thru_hole' or not re.search(r'"[^" ]*\.Cu"', layers):
+                continue
+            net = re.search(r'\(net(?:\s+\d+)?\s+(' + QUOTED + ')', pad)
+            uid = re.search(r'\(uuid\s+(' + QUOTED + ')', pad)
+            pads.append({'pin':unquote(header[1]), 'net':normalize_net(unquote(net[1]) if net else None),
+                         'uuid':unquote(uid[1]) if uid else ''})
+        result.append({'ref':field(block, 'Reference'), 'value':field(block, 'Value'),
+                       'footprint':unquote(fp[1]), 'pads':pads,
+                       'attributes':set(re.findall(r'\b(?:dnp|exclude_from_bom)\b', ' '.join(attributes)))})
+    return result
 
 
-def markdown_refs(refs: list[str]) -> str:
-    return ", ".join(f"`{ref}`" for ref in refs) if refs else "None"
+def parse_schematic(root: ET.Element) -> list[dict]:
+    pin_sets = {}
+    for part in root.findall('./libparts/libpart'):
+        pin_sets[(part.get('lib'), part.get('part'))] = {p.get('num') for p in part.findall('./pins/pin')}
+    components = []
+    for comp in root.findall('./components/comp'):
+        props = {p.get('name'):p.get('value') for p in comp.findall('property')}
+        if 'exclude_from_board' in props:
+            continue
+        source = comp.find('libsource')
+        pins = pin_sets.get((source.get('lib'), source.get('part')), set()) if source is not None else set()
+        components.append({'ref':comp.get('ref'), 'value':comp.findtext('value') or '',
+                           'footprint':comp.findtext('footprint') or '', 'pin_nets':dict.fromkeys(pins),
+                           'attributes':{p for p in ('dnp','exclude_from_bom') if p in props}})
+    by_ref = {c['ref']:c for c in components}
+    for net in root.findall('./nets/net'):
+        for node in net.findall('node'):
+            if node.get('ref') in by_ref:
+                by_ref[node.get('ref')]['pin_nets'][node.get('pin')] = normalize_net(net.get('name'))
+    return components
 
 
-def write_csv(path: Path, header: list[str], rows: list[tuple]) -> None:
-    with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.writer(handle)
-        writer.writerow(header)
-        writer.writerows(rows)
+def compare(board_text: str, netlist_root: ET.Element) -> dict:
+    board_rows = parse_board(board_text);sch_rows = parse_schematic(netlist_root)
+    board = {c['ref']:c for c in board_rows};schematic = {c['ref']:c for c in sch_rows}
+    duplicate = lambda rows: sorted(ref for ref,n in Counter(c['ref'] for c in rows).items() if n>1)
+    result = {'duplicate_board_refs':duplicate(board_rows), 'duplicate_schematic_refs':duplicate(sch_rows),
+              'missing_components':sorted(schematic.keys()-board.keys()),
+              'extra_components':sorted(board.keys()-schematic.keys()), 'footprint_changes':[],
+              'value_changes':[], 'attribute_changes':[], 'pad_net_changes':[],
+              'missing_pin_pads':[], 'unexpected_pads':[], 'combined_drain_pins':[]}
+    expected_to_actual = defaultdict(set);actual_to_expected = defaultdict(set);checked = 0
+    for ref in sorted(board.keys() & schematic.keys()):
+        actual,wanted = board[ref],schematic[ref]
+        for name in ('footprint','value'):
+            if actual[name] != wanted[name]:
+                result[name+'_changes'].append({'ref':ref,'pcb':actual[name],'schematic':wanted[name]})
+        if actual['attributes'] != wanted['attributes']:
+            result['attribute_changes'].append({'ref':ref,'pcb':sorted(actual['attributes']),
+                                                'schematic':sorted(wanted['attributes'])})
+        physical = defaultdict(list)
+        for pad in actual['pads']:physical[pad['pin']].append(pad)
+        for pin,net in wanted['pin_nets'].items():
+            # This TI land pattern deliberately combines the four drain leads.
+            alias = '5' if (wanted['footprint']=='ducktop2:CSD18540Q5B_DNK' and pin in ('6','7','8')) else pin
+            if alias != pin:
+                if net != wanted['pin_nets'].get('5'):
+                    result['missing_pin_pads'].append({'ref':ref,'pin':pin,'reason':'combined drain nets differ'})
+                    continue
+                result['combined_drain_pins'].append({'ref':ref,'pin':pin,'physical_pad':alias})
+            if alias not in physical:
+                result['missing_pin_pads'].append({'ref':ref,'pin':pin})
+        for pad in actual['pads']:
+            pin,old = pad['pin'],pad['net']
+            if pin not in wanted['pin_nets']:
+                if ref.startswith('FPC') and pin in ('MP','SH'):
+                    new = 'FG_VSS' if ref=='FPC106' else 'GND'
+                elif not pin or re.fullmatch(r'(?:MP|MH|SH|S|H|M)\d*', pin):
+                    if old is not None and not pin:
+                        result['unexpected_pads'].append({'ref':ref,**pad})
+                    continue
+                else:
+                    result['unexpected_pads'].append({'ref':ref,**pad});continue
+            else:new = wanted['pin_nets'][pin]
+            checked += 1
+            if old != new:
+                result['pad_net_changes'].append({'ref':ref,'pin':pin,'uuid':pad['uuid'],
+                    'pcb':old,'schematic':new,'xml_encoding_only':bool(old and html.unescape(old)==new)})
+            if old is not None and new is not None:
+                expected_to_actual[new].add(old);actual_to_expected[old].add(new)
+    result['split_net_names'] = {k:sorted(v) for k,v in expected_to_actual.items() if len(v)>1}
+    result['merged_net_names'] = {k:sorted(v) for k,v in actual_to_expected.items() if len(v)>1}
+    result['counts'] = {k:len(v) for k,v in result.items()}
+    result['counts'].update(schematic_components=len(sch_rows), board_footprints=len(board_rows),
+                            physical_pads_checked=checked)
+    result['passed'] = not any(result[k] for k in ('duplicate_board_refs','duplicate_schematic_refs',
+        'missing_components','extra_components','footprint_changes','value_changes','attribute_changes',
+        'pad_net_changes','missing_pin_pads','unexpected_pads','split_net_names','merged_net_names'))
+    return result
 
 
-def main() -> None:
-    parser_arg = argparse.ArgumentParser(description=__doc__)
-    parser_arg.add_argument(
-        "--no-export",
-        action="store_true",
-        help="use the existing verification/generated/ducktop2_netlist.xml",
-    )
-    args = parser_arg.parse_args()
-
-    before_hash = sha256(PCB)
-    before_size = PCB.stat().st_size
-    if not args.no_export:
-        export_netlist()
-
-    parser = load_parsers()
-    schematic = parser.parse_netlist()
-    netlist_root = ET.parse(NETLIST).getroot()
-    excluded_from_board = {
-        comp.get("ref") or ""
-        for comp in netlist_root.findall(".//comp")
-        if comp.find("property[@name='exclude_from_board']") is not None
-    }
-    schematic = {
-        ref: comp for ref, comp in schematic.items() if ref not in excluded_from_board
-    }
-    pcb_text = PCB.read_text(encoding="utf-8")
-    board = {item.ref: item for item in parser.footprints(pcb_text) if item.ref}
-
-    missing = sorted(set(schematic) - set(board))
-    extra = sorted(set(board) - set(schematic))
-    footprint_changes: list[tuple[str, str, str, str]] = []
-    net_changes: list[tuple[str, str, str, str, str]] = []
-    attribute_changes: list[tuple[str, str, str, str, str]] = []
-
-    for ref in sorted(set(schematic) & set(board)):
-        wanted = schematic[ref]
-        actual = board[ref]
-        if wanted.footprint != actual.footprint:
-            footprint_changes.append(
-                (ref, wanted.sheetfile, actual.footprint, wanted.footprint)
-            )
-        actual_pads = board_pad_nets(parser, actual.text)
-        for pin in sorted(set(wanted.pin_nets) | set(actual_pads), key=pin_sort_key):
-            old_net = normalize_net(actual_pads.get(pin))
-            new_net = normalize_net(wanted.pin_nets.get(pin))
-            if old_net != new_net:
-                net_changes.append(
-                    (ref, wanted.sheetfile, pin, old_net or "NC", new_net or "NC")
-                )
-        actual_attributes = parser.footprint_attribute_flags(actual.text)
-        for flag in ("exclude_from_bom", "dnp"):
-            old_state = flag in actual_attributes
-            new_state = flag in wanted.properties
-            if old_state != new_state:
-                attribute_changes.append(
-                    (ref, wanted.sheetfile, flag, str(old_state), str(new_state))
-                )
-
-    after_hash = sha256(PCB)
-    after_size = PCB.stat().st_size
-    if (before_hash, before_size) != (after_hash, after_size):
-        raise RuntimeError("PCB changed during read-only ECO report")
-
-    write_csv(
-        FOOTPRINT_CSV,
-        ["reference", "sheet", "pcb_footprint", "schematic_footprint"],
-        footprint_changes,
-    )
-    write_csv(
-        NET_CSV,
-        ["reference", "sheet", "pin", "pcb_net", "schematic_net"],
-        net_changes,
-    )
-    write_csv(
-        ATTRIBUTE_CSV,
-        ["reference", "sheet", "attribute", "pcb_state", "schematic_state"],
-        attribute_changes,
-    )
-
-    missing_by_sheet: dict[str, list[str]] = defaultdict(list)
-    for ref in missing:
-        missing_by_sheet[schematic[ref].sheetfile or "(root)"] .append(ref)
-    net_counts = Counter(row[0] for row in net_changes)
-    drift_count = (
-        len(missing) + len(extra) + len(footprint_changes) + len(net_changes)
-        + len(attribute_changes)
-    )
-    if drift_count:
-        status_lines = [
-            "> **Routing hold:** the current PCB is materially behind the current schematic.",
-            "> Do not continue routing affected blocks until a controlled schematic-to-PCB",
-            "> ECO is reviewed and applied. This report does not perform that update.",
-        ]
-        next_steps = [
-            "## Recommended ECO Sequence",
-            "",
-            "1. Commit or externally back up the current board.",
-            "2. Review the controlled ECO without applying it to the live board.",
-            "3. Resolve every missing, obsolete, footprint, and pad-net change.",
-            "4. Apply the ECO only after a copied-board trial passes DRC and integrity checks.",
-            "5. Run this report again; all five difference counts must reach zero.",
-        ]
-    else:
-        status_lines = [
-            "> **ECO status: synchronized.** Schematic and PCB references, footprints, and",
-            "> pad-net assignments match. This proves parity only; physical placement, DRC,",
-            "> routing, and manufacturing release remain separate checks.",
-        ]
-        next_steps = [
-            "## Next PCB Steps",
-            "",
-            "1. Complete and review physical placement for every functional block.",
-            "2. Re-run DRC after each placement pass and resolve or document every violation.",
-            "3. Route by subsystem, preserving the documented six-layer stackup and net classes.",
-            "4. Re-run ERC, contracts, this ECO report, DRC, and manufacturing review before fab.",
-        ]
-
-    lines = [
-        "# Schematic-to-PCB ECO Report",
-        "",
-        "This report is read-only with respect to `ducktop2.kicad_pcb`. It compares a fresh",
-        "KiCad XML schematic netlist with the protected current board and normalizes KiCad's",
-        "generated unconnected-net names to a single NC state.",
-        "",
-        "## Safety Check",
-        "",
-        f"- PCB bytes before/after: `{before_size}` / `{after_size}`",
-        f"- PCB SHA-256 before/after: `{before_hash}` / `{after_hash}`",
-        "- Result: PCB was not modified.",
-        "",
-        "## Summary",
-        "",
-        f"- Schematic components: **{len(schematic)}**",
-        f"- PCB footprints: **{len(board)}**",
-        f"- Schematic references missing from PCB: **{len(missing)}**",
-        f"- Obsolete PCB references absent from schematic: **{len(extra)}**",
-            f"- Existing references with changed footprints: **{len(footprint_changes)}**",
-            f"- Existing pad assignments with changed nets: **{len(net_changes)}**",
-            f"- Existing BOM/DNP attribute mismatches: **{len(attribute_changes)}**",
-        "",
-        *status_lines,
-        "",
-        "## Missing PCB References",
-        "",
-    ]
-    for sheet, refs in sorted(missing_by_sheet.items()):
-        lines.extend([f"### {sheet}", "", markdown_refs(refs), ""])
-
-    lines.extend(["## Obsolete PCB References", "", markdown_refs(extra), ""])
-    lines.extend(
-        [
-            "## Footprint Changes",
-            "",
-            "| Ref | Sheet | PCB footprint | Schematic footprint |",
-            "|---|---|---|---|",
-        ]
-    )
-    for ref, sheet, old, new in footprint_changes:
-        lines.append(f"| `{ref}` | `{sheet or '(root)'}` | `{old}` | `{new}` |")
-
-    lines.extend(
-        [
-            "",
-            "## Pad-Net Change Hotspots",
-            "",
-            "| Ref | Changed pads |",
-            "|---|---:|",
-        ]
-    )
-    for ref, count in net_counts.most_common():
-        lines.append(f"| `{ref}` | {count} |")
-
-    lines.extend(
-        [
-            "",
-            "## BOM/DNP Attribute Changes",
-            "",
-            "| Ref | Sheet | Attribute | PCB | Schematic |",
-            "|---|---|---|---:|---:|",
-        ]
-    )
-    for ref, sheet, flag, old, new in attribute_changes:
-        lines.append(f"| `{ref}` | `{sheet}` | `{flag}` | {old} | {new} |")
-
-    lines.extend(
-        [
-            "",
-            "## Detailed Files",
-            "",
-            f"- Footprint changes: `{FOOTPRINT_CSV.relative_to(ROOT)}`",
-            f"- Pad-net changes: `{NET_CSV.relative_to(ROOT)}`",
-            f"- BOM/DNP attribute changes: `{ATTRIBUTE_CSV.relative_to(ROOT)}`",
-            "",
-            *next_steps,
-            "",
-        ]
-    )
-    REPORT.write_text("\n".join(lines), encoding="utf-8")
-
-    print(f"Report: {REPORT.relative_to(ROOT)}")
-    print(f"PCB SHA-256 unchanged: {before_hash}")
-    print(
-        f"missing={len(missing)} extra={len(extra)} "
-        f"footprints={len(footprint_changes)} pad_nets={len(net_changes)} "
-        f"attributes={len(attribute_changes)}"
-    )
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--project', choices=PROJECTS, default='center')
+    parser.add_argument('--pcb', type=Path)
+    parser.add_argument('--schematic', type=Path)
+    parser.add_argument('--netlist', type=Path, help='use this explicit netlist instead of exporting one')
+    parser.add_argument('--output-dir', type=Path)
+    args = parser.parse_args(argv)
+    pcb = (args.pcb or ROOT/PROJECTS[args.project][0]).resolve()
+    sch = (args.schematic or ROOT/PROJECTS[args.project][1]).resolve()
+    output = (args.output_dir or ROOT/'verification/generated/board-parity'/args.project).resolve()
+    output.mkdir(parents=True,exist_ok=True)
+    before = {p:hashlib.sha256(p.read_bytes()).hexdigest() for p in (pcb,sch)}
+    netlist = args.netlist.resolve() if args.netlist else output/'netlist.xml'
+    if args.netlist is None:
+        subprocess.run([find_kicad_cli(),'sch','export','netlist','--format','kicadxml',
+                        '--output',str(netlist),str(sch)],cwd=sch.parent,check=True)
+    result = compare(pcb.read_text(),ET.parse(netlist).getroot())
+    result['sources'] = {str(p):h for p,h in before.items()}
+    result['netlist_sha256'] = hashlib.sha256(netlist.read_bytes()).hexdigest()
+    assert all(hashlib.sha256(p.read_bytes()).hexdigest()==h for p,h in before.items()), 'design changed during review'
+    (output/'parity.json').write_text(json.dumps(result,indent=2)+'\n')
+    with (output/'pad-net-changes.csv').open('w',newline='') as handle:
+        writer=csv.DictWriter(handle,fieldnames=['ref','pin','uuid','pcb','schematic','xml_encoding_only'])
+        writer.writeheader();writer.writerows(result['pad_net_changes'])
+    lines=['# schematic and board comparison','',f'board: `{pcb.relative_to(ROOT) if pcb.is_relative_to(ROOT) else pcb}`',
+           '',f'result: {"pass" if result["passed"] else "differences need review"}', '',
+           '| check | count |','| --- | ---: |']
+    lines += [f'| {name.replace("_"," ")} | {value} |' for name,value in result['counts'].items()]
+    lines += ['', 'the JSON and CSV contain every difference, including repeated physical pads.',
+              'XML-escaped PCB names are reported as differences. they are not silently accepted.',
+              'a passing comparison checks assignments and component identity, not routed continuity.',
+              '', 'board and schematic files were unchanged.','']
+    (output/'report.md').write_text('\n'.join(lines))
+    print(json.dumps({'passed':result['passed'],**result['counts']}))
+    return 0 if result['passed'] else 1
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    raise SystemExit(main())

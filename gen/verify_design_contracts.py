@@ -21,7 +21,7 @@ import sync_main_pcb_from_netlist as sync
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PCB = ROOT / "ducktop2.kicad_pcb"
+PCB = ROOT / "ducktop2-center.kicad_pcb"
 CURRENT_DRC = ROOT / "verification" / "generated" / "contract_drc_current.json"
 
 

@@ -160,6 +160,25 @@ def add_window(checks: list[Check], name: str, refs: tuple[str, str, str],
               f"VREF*(Rtop+Rmid+Rbot)/Rbot, {refs_text}"),
     ])
 
+def system_5v_checks(r_top: float, r_bottom: float) -> list[Check]:
+    # The current 75k/10k divider targets 5.10 V. Keep the downstream HDMI
+    # minimum separate so updating the nominal target cannot hide its shortfall.
+    nominal = 0.6 * (1.0 + r_top / r_bottom)
+    minimum = 0.591 * (1.0 + r_top * 0.999 / (r_bottom * 1.001))
+    maximum = 0.609 * (1.0 + r_top * 1.001 / (r_bottom * 0.999))
+    return [
+        Check("TPS56637 SYS_5V set-point", nominal, "V", 5.09, 5.11,
+              "0.6V*(1+R40/R41); 5.10V target"),
+        Check("TPS56637 SYS_5V worst-case minimum", minimum, "V", 5.00, 5.05,
+              "0.591V*(1+R40*0.999/(R41*1.001))"),
+        Check("TPS56637 SYS_5V worst-case maximum", maximum, "V", 5.15, 5.25,
+              "0.609V*(1+R40*1.001/(R41*0.999))"),
+        Check("HDMI +5V guaranteed connector minimum", minimum - 0.002 - 0.205 - 0.050,
+              "V", 4.80, 5.25,
+              "SYS_5V(min)-0.002V TPS22975 drop-0.205V TPD13S523 drop-0.050V board/connector allowance"),
+    ]
+
+
 def build_checks(values: dict[str, str], radio_values: dict[str, str],
                  project: str = "ducktop2") -> list[Check]:
     checks: list[Check] = []
@@ -266,25 +285,12 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
     checks.append(Check("15V PD usable input budget with firmware reserve", qualified_pd_power, "W", 40.0, 42.0,
                         "15V*(ILIM ceiling-0.25A); firmware also caps IINDPM from the active TPS25751A PDO/RDO"))
 
-    sys_5v = 0.6 * (1.0 + resistor(values, "R40") / resistor(values, "R41"))
-    sys_5v_min = 0.591 * (
-        1.0 + resistor(values, "R40") * 0.999 / (resistor(values, "R41") * 1.001)
-    )
-    sys_5v_max = 0.609 * (
-        1.0 + resistor(values, "R40") * 1.001 / (resistor(values, "R41") * 0.999)
-    )
-    hdmi_5v_guaranteed_min = sys_5v_min - 0.002 - 0.205 - 0.050
+    rail_checks = system_5v_checks(resistor(values, "R40"), resistor(values, "R41"))
+    checks.extend(rail_checks)
+    sys_5v_max = rail_checks[2].value
     sys_5v_cout = capacitor(values, "C44") + capacitor(values, "C45")
     sys_3v3 = 0.6 * (1.0 + resistor(values, "R43") / resistor(values, "R44"))
     checks.extend([
-        Check("TPS56637 SYS_5V set-point", sys_5v, "V", 5.18, 5.23,
-              "0.6V*(1+R40/R41)"),
-        Check("TPS56637 SYS_5V worst-case minimum", sys_5v_min, "V", 5.10, 5.15,
-              "0.591V*(1+R40*0.999/(R41*1.001))"),
-        Check("TPS56637 SYS_5V worst-case maximum", sys_5v_max, "V", 5.25, 5.35,
-              "0.609V*(1+R40*1.001/(R41*0.999))"),
-        Check("HDMI +5V guaranteed connector minimum", hdmi_5v_guaranteed_min, "V", 4.80, 5.25,
-              "SYS_5V(min)-0.002V TPS22975 drop-0.205V TPD13S523 drop-0.050V board/connector allowance"),
         Check("TPS56637 SYS_5V nominal output capacitance", sys_5v_cout * 1e6, "uF", 40.0, 100.0,
               "C44+C45; effective capacitance under DC bias remains a release hold"),
         Check("TPS56637 SYS_3V3 set-point", sys_3v3, "V", 3.25, 3.35,
