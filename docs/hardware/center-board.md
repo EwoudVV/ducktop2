@@ -1,105 +1,94 @@
 # center board
 
-checked 5 september 2026. this is the eight-layer Mu carrier board in
-`ducktop2-center.kicad_pcb`. the verification pass changed the checking and
-import tools. the board and schematics were left untouched.
+checked 6 september 2026. this is the eight-layer Mu carrier in
+`ducktop2-center.kicad_pcb`. routing has not started. the BMS is a separate,
+four-layer board.
 
 ## current checks
 
 | check | result |
 | --- | --- |
-| physical footprints | 728, with no duplicate references |
+| footprints | 726, with no duplicate references |
 | copper layers | 8 |
 | tracks / vias | 0 / 0 |
-| native connectivity count | 2,026 airwires |
-| ordinary and expanded DRC | 158 errors, 248 warnings |
-| unconnected findings listed in the DRC report | 499 |
+| native connectivity | 2,020 airwires |
+| DRC after refilling the working board | 61 errors, 240 warnings |
+| copper clearance, hole clearance, and copper-to-edge errors | 0 |
+| unconnected findings shown in DRC | 499 |
 | schematic ERC | 0 errors, 10 library-symbol warnings |
-| physical pad comparisons | 3,000, including repeated and shield pads |
-| missing physical pin pads | 0 |
-| new reported DRC findings after a copied-board refill | 0 |
-| generated schematics match the working files | yes |
-| pin-review rows | 1,686 pass, 0 fail |
+| regression tests | 23 pass |
+| electrical calculations | 67 pass |
 
-KiCad 10 caps unconnected-item reports at 499 entries, so that number is
-not the full airwire count. use native connectivity for routing progress.
-[source: KiCad 10 DRC engine](https://gitlab.com/kicad/code/kicad/-/blob/10.0/pcbnew/drc/drc_engine.cpp). the saved and refilled DRC
-runs report no shorts or copper-to-copper clearance violations, but the
-placement and board-edge findings still need work.
+the remaining errors are 55 courtyard overlaps, three plated-hole/courtyard
+findings, and three non-plated-hole/courtyard findings. the warnings are
+mostly silkscreen, with ten isolated-copper warnings.
 
-the ten ERC warnings concern flattened library symbols: U311, U431, and
-U914-U921. they match the existing reference-specific classifications.
+KiCad caps unconnected reports at 499 entries. use the native connectivity
+count to track routing, and use the report to locate problems.
+[KiCad DRC source](https://gitlab.com/kicad/code/kicad/-/blob/10.0/pcbnew/drc/drc_engine.cpp).
 
-## board and schematic differences
+## corrected on the board
 
-| item | what needs correcting |
-| --- | --- |
-| R40 | PCB value is 76.8k; the schematic specifies 75.0k for the 5.10 V rail. settle the HDMI budget before choosing the final value. |
-| Q25 | PCB footprint ID names CSD19537; the schematic names CSD17575. the two project library footprints have identical pad positions, sizes, and layer assignments, so relinking does not require moving the pads. |
-| 16 other footprint IDs | library prefixes are missing. restore the schematic's qualified IDs and check the actual footprint definitions. |
-| 22 value fields | includes R40, missing values in the newer selector parts, and changed descriptions. sync these from the reviewed schematic. |
-| J8 and J50 | both remain on the PCB despite `exclude_from_board` in the schematic. |
-| 324 pad names on 91 nets | the PCB contains literal `&amp;` in sheet names. the XML reader is corrected; an isolated normalization trial clears every pad-name mismatch. |
+the board now has the schematic's net names, qualified footprint IDs, and
+component values from the reviewed sync. Q25 is linked to CSD17575, R40 is
+75.0k, and the excluded J8/J50 connectors are gone. all 3,000 checked pads
+matched after the sync, including repeated and shield pads.
 
-the name differences currently form a one-to-one mapping between schematic
-and PCB net groups. no split or merged net groups were found. the trial
-only fixes names; it does not resolve footprint IDs, values, or extra parts.
+FPC102 moved to (73.85, 92.5), U913 to (295.89, 19.12), and C703 to
+(72.62, 122.72). those changes cleared all 26 copper-to-edge errors. another
+37 placement changes cleared crowded groups around the connectors, power
+parts, and mounting holes.
 
-## placement work before routing
+the OLEDs now use wired JST GH connectors. J41 is at (271.5, 27.5), rotation
+270; J45 is at (280, 155), rotation 90. the maker header J901 is at
+(255.5, 65), rotation 90, alongside the Mu. the OLED modules mount separately
+in the case. their cable maps are in [cables and connectors](cables-and-connectors.md).
 
-26 board-edge errors come from FPC102, U913, and C703. FPC102 has 15 affected
-shield/mount pads at 0.20 mm clearance. U913 has ten affected pads, including
-pads touching the edge. C703's closest pad is 0.07 mm from the edge. the
-current board rule is 0.50 mm.
+## HDMI power
 
-there are also 106 courtyard overlaps, 21 plated-hole/courtyard findings,
-and five non-plated-hole/courtyard findings. review these groups first:
+R40/R41 stay at 75.0k/10.0k, giving 5.10 V nominal. the right-board schematic
+now uses TPS22948 for the HDMI 5 V switch and TPD4E05U06 for control-line and
+5 V ESD protection. the TMDS protection and DDC/HPD translation stay in place.
+the right PCB still needs this schematic update applied.
 
-- FPC103 and the surrounding passives;
-- H22, U750, and C750;
-- J422 and SW900;
-- J41, J420, J310, and H25;
-- J901 and J4 beneath the Mu footprint.
+at the checked reference and resistor corners, the rail minimum is
+5.01464 V. allowing 27.5 mV for the switch at 55 mA and 50 mV for the board
+and connectors leaves 4.93714 V, above the 4.80 V requirement. short-circuit,
+startup, reverse-current response, and cable behavior still need hardware tests.
+[TPS56637](https://www.ti.com/lit/ds/symlink/tps56637.pdf),
+[TPS22948](https://www.ti.com/lit/ds/symlink/tps22948.pdf),
+[TPD4E05U06](https://www.ti.com/lit/ds/symlink/tpd4e05u06.pdf).
 
-44 courtyard pairs include A1. some parts may fit below the raised Mu,
-but that needs an actual height and socket-clearance check. do not move all
-of them just to clear the courtyard report.
+## routing layers
 
-all footprint anchors are inside the outline. that alone does not prove
-that every pad, body, or mounting hole has enough room.
+controlled-impedance routes use F.Cu, In2.Cu, or B.Cu. In2.Cu has GND on
+both sides. In5.Cu faces split power islands and is reserved for general
+routing. the ground layers reject non-ground tracks.
 
-## power and routing constraints
+| netclass | outer width / gap, mm | In2.Cu width / gap, mm |
+| --- | --- | --- |
+| DIFF_85 | 0.183 / 0.1524 | 0.114 / 0.1524 |
+| DIFF_90 | 0.1796 / 0.2032 | 0.111 / 0.203 |
+| DIFF_100 | 0.1521 / 0.254 | 0.091 / 0.254 |
+| USB2_45 | 0.2248 single-ended width | 0.1313 single-ended width |
 
-the dielectric thicknesses and outer-layer DIFF_85, DIFF_90, and DIFF_100
-settings match `manufacturing/mainboard_stackup_release.json`. the inner-layer
-trace geometries are different. set the intended layer-specific widths and
-return paths before routing controlled-impedance signals on inner layers.
+the rules use the approved geometries in `manufacturing/mainboard_stackup_release.json`.
+fixture checks accept the intended geometry and reject deliberately wrong
+widths, gaps, and layers. local fanout neckdowns need their own checked rules.
 
-the current 75k/10k divider gives 5.10 V nominal. with the reference and
-resistor corners already used in the calculation, the rail minimum is
-5.01464 V. subtracting 2 mV for TPS22975, 205 mV for TPD13S523, and the
-50 mV board/connector allowance leaves 4.75764 V at the HDMI connector.
-that misses the 4.80 V requirement by about 42 mV. the requirement remains
-in the checker and still fails.
+## remaining placement and field work
 
-sources: [TPS56637 electrical characteristics](https://www.ti.com/lit/ds/symlink/tps56637.pdf)
-and [TPD13S523 supply and drop requirements](https://www.ti.com/lit/ds/symlink/tpd13s523.pdf).
+C170 was labeled 47u but had a 10u part number. its generator now specifies
+`GRM31CR61A476ME15L`, a 47u 10 V X5R part in the same 1206 footprint. the PCB
+value and part-number fields still need syncing. C780, U44's local bypass,
+also needs moving beside the IC; it is currently far away.
 
-the pin review now covers both U15 and U15B and the full selector cascade.
-GND is pin 8, CAS is pin 9, INTVCC is pin 10, and VALID1/VALID2 are pins 6/7.
-the previous review table still contained the older pin map.
-[source: LTC4418 pin functions](https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4418.pdf).
+some small overlaps remain around FPC103, U4, F190, the speaker connectors,
+and the rear switches. the U12/J2300 group and H21/FPC105 also need room.
+under-Mu placements still need the socket, clip, package-height, and service
+access checks. the installed BMS position and component-side orientation
+are needed to finish FPC105 and the cable route.
 
-R747 is the remaining procurement gap: its generator has no manufacturer or
-MPN. the installed cable orientations and lengths also remain open in
-[cables and connectors](cables-and-connectors.md).
-
-## check outputs
-
-the reports, source hashes, normalization trial results, and placement plot
-are in `verification/generated/center-review-2026-09-05/`. these are regenerated
-checks, not a manufacturing release. the complete four-board release check
-still fails on the remaining design and assembly findings.
-
-next comes the reviewed board/schematic sync, HDMI power decision, and
-connector/mounting clearance work. routing starts after those are resolved.
+the current evidence and placement image are in
+`verification/generated/center-corrections-2026-09-06/`. these checks describe
+an unfinished layout, not a manufacturing release.

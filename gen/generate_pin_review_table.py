@@ -66,11 +66,11 @@ CRITICAL_REFS = [
     "Q15", "Q16", "Q17", "Q18", "Q19", "Q20",
     "R720", "R721", "R722", "R723", "R724", "R725", "R726", "R727", "R728",
     "C730", "C731", "C732", "C733", "C734", "C735", "C736", "C737",
-    "J30", "U50", "U51", "U53", "U54", "U55", "R165", "C158", "C159", "C162", "C163",
+    "J30", "U50", "U51", "U53", "U54", "U55", "R165", "C158", "C162", "C164",
     "C150", "C151", "C152", "C153", "C154", "C155", "C156", "C157",
     "R150", "R151", "R152", "R153", "R154", "R155", "R156", "R157",
     "D150", "D151", "D152", "D153", "D154", "D155", "D156", "D157",
-    "R570", "R571", "R572", "R573", "R574", "R575", "R576", "R577", "R578", "R579",
+    "R570",
     "U61", "Q60", "R202", "J58", "U62", "U64",
     "R252", "C280", "C283", "R256", "J52", "J53", "J54", "J56", "Q200",
     "U45", "J41", "J45",
@@ -1079,28 +1079,27 @@ def load_contracts() -> None:
         add(rref, 2, local("TCP0 External HDMI", "EXT_HDMI_BIAS_RETURN"), "Host-state-gated HDMI bias return.", "LattePanda Mu HDMI reference")
         add(dref, 1, connector_net, "0.15pF-max ESD shunt is placed on the connector side of AC coupling.", "TI TPD1E0B04 datasheet")
         add(dref, 2, "GND", "HDMI ESD shunt return.", "TI TPD1E0B04 datasheet")
-    for pin, net in {
-        1: local("TCP0 External HDMI", "EXT_HDMI_SCL_CONN"),
-        2: local("TCP0 External HDMI", "EXT_HDMI_SDA_CONN"),
-        3: local("TCP0 External HDMI", "EXT_HDMI_HPD_CONN"),
-        5: local("TCP0 External HDMI", "HDMI_SOURCE_5V"), 6: local("TCP0 External HDMI", "EXT_HDMI_5V"), 8: "GND",
-    }.items():
-        add("U50", pin, net, "TPD13S523 clamps HDMI control lines and supplies current-limited reverse-blocking connector 5 V.", "TI TPD13S523 datasheet")
-    for offset, pin in enumerate((4, 7, 9, 10, 11, 12, 13, 14, 15, 16)):
-        unused = local("TCP0 External HDMI", f"HDMI_TPD_D{offset}_UNUSED")
-        add("U50", pin, unused, "Unused TPD13S523 TMDS clamp is terminated as TI requires instead of floating.", "TI TPD13S523 datasheet")
-        add(f"R{570 + offset}", 1, unused, "Unused TPD13S523 clamp-channel termination.", "TI TPD13S523 datasheet")
-        add(f"R{570 + offset}", 2, "GND", "75R unused-channel termination return.", "TI TPD13S523 datasheet")
+    for pin, name in {1:"EXT_HDMI_SCL_CONN",2:"EXT_HDMI_SDA_CONN",3:"GND",
+                      4:"EXT_HDMI_HPD_CONN",5:"EXT_HDMI_5V",8:"GND"}.items():
+        add("U50",pin,name if name=="GND" else local("TCP0 External HDMI",name),
+            "HDMI control and power ESD shunt.","TI TPD4E05U06 datasheet")
+    for pin in (6,7,9,10):
+        add_nc("U50",pin,"Unused straight-through pad stays open.","TI TPD4E05U06 datasheet")
+    for pin,name in {1:"/SYS_5V",2:"GND",3:"/MU_HOST_ACTIVE",6:local("TCP0 External HDMI","EXT_HDMI_5V")}.items():
+        add("U54",pin,name,"Current-limited HDMI power with reverse blocking.","TI TPS22948 datasheet")
+    for pin in (4,5):
+        add_nc("U54",pin,"Unused NC/fault pin stays open.","TI TPS22948 datasheet")
+    add("R570",1,"/MU_HOST_ACTIVE","Keeps HDMI power disabled if the control line floats.","TI TPS22948 ON pin requirements")
+    add("R570",2,"GND","HDMI enable pulldown return.","TI TPS22948 ON pin requirements")
+    add("C164",1,local("TCP0 External HDMI","EXT_HDMI_5V"),"18nF local output capacitor.","TI TPS22948 section 9.2.1")
+    add("C164",2,"GND","Local output capacitor return.","TI TPS22948 section 9.2.1")
+    add("R168",1,local("TCP0 External HDMI","EXT_HDMI_5V"),"Discharge the switched rail when disabled.","HDMI host-state contract")
+    add("R168",2,"GND","Switched-rail discharge return.","HDMI host-state contract")
     add("R165", 1, "/MU_HOST_ACTIVE", "HDMI bias network follows qualified Mu host state.", "Ducktop2 HDMI host-state contract")
     add("R165", 2, local("TCP0 External HDMI", "EXT_HDMI_BIAS_GATE"), "Qualified host-state series drive reaches the HDMI bias gate.", "Ducktop2 HDMI host-state contract")
-    for ref, net, note in (
-        ("C158", local("TCP0 External HDMI", "HDMI_SOURCE_5V"), "TPD13S523 input bulk"),
-        ("C159", local("TCP0 External HDMI", "EXT_HDMI_5V"), "TPD13S523 output bulk"),
-        ("C162", local("TCP0 External HDMI", "HDMI_SOURCE_5V"), "TPD13S523 input high-frequency bypass"),
-        ("C163", local("TCP0 External HDMI", "EXT_HDMI_5V"), "TPD13S523 output high-frequency bypass"),
-    ):
-        add(ref, 1, net, f"{note} positive rail.", "TI TPD13S523 datasheet")
-        add(ref, 2, "GND", f"{note} return.", "TI TPD13S523 datasheet")
+    for ref in ("C158","C162"):
+        add(ref,1,"/SYS_5V","HDMI switch input bypass.","TI TPS22948 datasheet")
+        add(ref,2,"GND","Input bypass return.","TI TPS22948 datasheet")
     for pin, net in {
         1: "GND", 2: local("TCP0 External HDMI", "HDMI_HOST_3V3"), 3: "/TCP0_DDC_SCL", 4: "/TCP0_DDC_SDA",
         5: local("TCP0 External HDMI", "EXT_HDMI_SDA_CONN"),
@@ -1113,7 +1112,6 @@ def load_contracts() -> None:
     for pin, net in {2: local("TCP0 External HDMI", "EXT_HDMI_HPD_NODE"), 3: "GND", 4: "/TCP0_HPD", 5: local("TCP0 External HDMI", "HDMI_HOST_3V3")}.items():
         add("U53", pin, net, "5.5-V-tolerant Schmitt buffer translates connector HPD to Mu 3.3 V.", "TI SN74LVC1G17 datasheet")
     for ref, source, output, ct, cap, bleed in (
-        ("U54", "/SYS_5V", "HDMI_SOURCE_5V", "HDMI_5V_SWITCH_CT", "C164", "R168"),
         ("U55", "/SYS_3V3", "HDMI_HOST_3V3", "HDMI_3V3_SWITCH_CT", "C165", "R169"),
     ):
         for pin, net in {

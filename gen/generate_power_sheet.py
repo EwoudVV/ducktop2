@@ -425,7 +425,8 @@ def build(sheet_symbol_uuid):
     s.place("R718", "R", "10k main AUX VALID pull-up", 595, 237.7, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MAIN_AUX_VALID_N", "hier")})
     s.place("R747", "R", "10k PD2 VALID pull-up", 595, 250.4, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("PD2_VALID_N", "hier")})
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("PD2_VALID_N", "hier")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
     s.place("C715", "C", "15n 50V stage2 TMR approx 240ms", 515, 505,
             footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("ST2_SEL_TMR", "local"), "2": ("GND", "local")},

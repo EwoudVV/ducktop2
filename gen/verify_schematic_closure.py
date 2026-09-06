@@ -391,15 +391,8 @@ def run_checks(a: ClosureAudit, skip_pack: bool = False) -> None:
     a.pin("C283", "1", "/Internal Services/TPAD_5V")
     a.pin("C283", "2", "GND")
 
-    # Host-active gating and the corrected PCIe coupling values.
-    for ref, source, output in (
-        ("U54", "/SYS_5V", "/TCP0 External HDMI/HDMI_SOURCE_5V"),
-        ("U55", "/SYS_3V3", "/TCP0 External HDMI/HDMI_HOST_3V3"),
-    ):
-        a.pin(ref, "1", source)
-        a.pin(ref, "3", "/MU_HOST_ACTIVE")
-        a.pin(ref, "7", output)
-        a.prop_eq(ref, "MPN", "TPS22975NDSGR")
+    # HDMI gating is checked against the right-board netlist in
+    # verify_design_contracts.check_external_hdmi_path.
     for ref in ("C500", "C501", "C502", "C503"):
         a.value_starts(ref, "220n")
         a.prop_eq(ref, "MPN", "GRM155R71C224KA12D")

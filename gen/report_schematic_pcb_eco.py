@@ -51,7 +51,11 @@ def parse_board(text: str) -> list[dict]:
                 continue
             net = re.search(r'\(net(?:\s+\d+)?\s+(' + QUOTED + ')', pad)
             uid = re.search(r'\(uuid\s+(' + QUOTED + ')', pad)
-            pads.append({'pin':unquote(header[1]), 'net':normalize_net(unquote(net[1]) if net else None),
+            raw_net = normalize_net(unquote(net[1]) if net else None)
+            # KiCad escapes a slash within a sheet name; XML displays it as '/'.
+            # Retain the raw name below so distinct board nets still fail as a split.
+            display_net = raw_net.replace('{slash}', '/') if raw_net else None
+            pads.append({'pin':unquote(header[1]), 'net':display_net, 'raw_net':raw_net,
                          'uuid':unquote(uid[1]) if uid else ''})
         result.append({'ref':field(block, 'Reference'), 'value':field(block, 'Value'),
                        'footprint':unquote(fp[1]), 'pads':pads,
@@ -128,7 +132,7 @@ def compare(board_text: str, netlist_root: ET.Element) -> dict:
                 result['pad_net_changes'].append({'ref':ref,'pin':pin,'uuid':pad['uuid'],
                     'pcb':old,'schematic':new,'xml_encoding_only':bool(old and html.unescape(old)==new)})
             if old is not None and new is not None:
-                expected_to_actual[new].add(old);actual_to_expected[old].add(new)
+                expected_to_actual[new].add(pad['raw_net']);actual_to_expected[pad['raw_net']].add(new)
     result['split_net_names'] = {k:sorted(v) for k,v in expected_to_actual.items() if len(v)>1}
     result['merged_net_names'] = {k:sorted(v) for k,v in actual_to_expected.items() if len(v)>1}
     result['counts'] = {k:len(v) for k,v in result.items()}

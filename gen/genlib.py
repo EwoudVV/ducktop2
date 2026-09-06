@@ -94,6 +94,7 @@ LIBMAP = {
     "TPS2592xx": "Power_Management",
     "TPS259470A": "TPS259470A",
     "TPS22975N": "TPS22975N",
+    "TPS22948": "TPS22948",
     "USB_C_Receptacle": "Connector",
     "USB_A": "Connector",
     "USB3_A": "USB3_A",

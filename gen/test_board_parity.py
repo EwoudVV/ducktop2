@@ -38,6 +38,17 @@ class BoardParity(unittest.TestCase):
         result=compare(board([('1','GND')]),schematic([('1','GND')],excluded=True))
         self.assertEqual(result['extra_components'],['R1'])
 
+    def test_kicad_sheet_slash_matches_xml_display_name(self):
+        result=compare(board([('1','/Wi-Fi{slash}Bluetooth/VCC')]),
+                       schematic([('1','/Wi-Fi/Bluetooth/VCC')]))
+        self.assertTrue(result['passed'])
+
+    def test_distinct_nets_cannot_hide_behind_slash_decoding(self):
+        result=compare(board([('1','/Wi-Fi{slash}Bluetooth/VCC'),('2','/Wi-Fi/Bluetooth/VCC')]),
+                       schematic([('1','/Wi-Fi/Bluetooth/VCC'),('2','/Wi-Fi/Bluetooth/VCC')]))
+        self.assertFalse(result['passed'])
+        self.assertEqual(len(result['split_net_names']),1)
+
     def test_missing_physical_pin_is_reported(self):
         result=compare(board([('1','GND')]),schematic([('1','GND'),('2','VCC')]))
         self.assertEqual(result['missing_pin_pads'],[{'ref':'R1','pin':'2'}])
@@ -51,11 +62,16 @@ class BoardParity(unittest.TestCase):
         self.assertTrue(result['passed'])
 
     def test_5v_target_update_keeps_hdmi_failure(self):
-        checks=system_5v_checks(75000,10000)
+        checks=system_5v_checks(75000,10000,hdmi_drop_v=.207)
         self.assertTrue(all(c.passed for c in checks[:3]))
         self.assertFalse(checks[3].passed)
         self.assertEqual(round(checks[3].value,6),4.757644)
         self.assertEqual(checks[3].low,4.8)
+
+    def test_low_drop_hdmi_path_has_dc_margin(self):
+        checks=system_5v_checks(75000,10000)
+        self.assertTrue(all(c.passed for c in checks))
+        self.assertEqual(round(checks[3].value,6),4.937144)
 
     def test_old_feedback_resistor_fails_current_target(self):
         self.assertFalse(system_5v_checks(76800,10000)[0].passed)
