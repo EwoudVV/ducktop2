@@ -55,7 +55,7 @@ CRITICAL_REFS = [
     "R795", "R796", "R797", "R798", "C795", "C796", "C797", "C798", "C799",
     "U2", "Q25", "U10",
     "U4", "U5", "L3", "U44", "J4", "Y1", "C32", "C33", "R37", "Y2", "C34", "C35", "J16",
-    "A1", "A2", "U6", "U7", "J9", "TP5", "TP6", "TP8", "TP12", "TP13", "TP14", "TP15", "U769", "U770", "U771", "U772", "R773", "R774", "R775", "R776",
+    "A1", "U6", "U7", "J9", "TP5", "TP6", "TP8", "TP12", "TP13", "TP14", "TP15", "U769", "U770", "U771", "U772", "R773", "R774", "R775", "R776",
     "C794", "C830", "C831", "C832", "C833", "C834", "C835", "C836", "C837",
     "U750", "L750", "RS750", "Q750", "Q751", "R761", "R766", "R767", "R768", "J10", "J40", "F10", "R170", "R171", "U170",
     "U20", "R70", "C70", "C71", "C75", "C78", "U21", "U22", "J11",
@@ -103,7 +103,7 @@ CURRENT_REQUIRED_REFS = {
     # EC, source manager, Mu, storage, and Wi-Fi.  J9 and the R1730-R1733
     # USB-A disable straps are retired by design (87d3dfe): DIS5/DIS6 are
     # active wired ports now, so they must NOT be required anymore.
-    "U4", "U44", "A1", "A2", "F10", "U170",
+    "U4", "U44", "A1", "F10", "U170",
     # Board split Phase 2.4: the five external USB-C ports and the hub
     # moved to the left/right I/O daughterboards (verified by their own
     # projects).  The center has no USB-C ports.
@@ -111,6 +111,8 @@ CURRENT_REQUIRED_REFS = {
     # User I/O, audio, keyboard, maker MCU, and optional radio boundary.
     "U45", "J41", "J45", "U400", "U402", "U430", "MK430", "J310",
     "J2300", "U2300", "U2303", "U2304",
+    "U15B", "Q26", "Q27", "Q28", "Q29", "C715", "C747", "C748", "C749",
+    "R741", "R742", "R743", "R744", "R745", "R746",
 }
 
 
@@ -289,50 +291,61 @@ def load_contracts() -> None:
     add("R739", 2, "/Power & Battery/AUX_PGTH", "PGTH divider top sets the output-good threshold.", aux_efuse)
     add("R740", 1, "/Power & Battery/AUX_PGTH", "PGTH divider bottom sets the output-good threshold.", aux_efuse)
     add("R740", 2, "GND", "PGTH divider returns to ground; PGTH is not hard-grounded.", aux_efuse)
-    selector = "ADI LTC4418 Rev A plus Vishay SiSS4409DN datasheets"
-    for pin, net in {
-        1: "/Power & Battery/MAIN_SEL_TMR",
-        2: "/Power & Battery/USB_MAIN_UV", 3: "/Power & Battery/USB_MAIN_OV",
-        4: "/Power & Battery/AUX_MAIN_UV", 5: "/Power & Battery/AUX_MAIN_OV",
-        7: "GND", 8: "/Power & Battery/MAIN_SEL_INTVCC",
-        11: "/Power & Battery/AUX_MAIN_GATE", 12: "/Power & Battery/AUX_MAIN_FET_COMMON",
-        13: "/Power & Battery/USB_MAIN_GATE", 14: "/Power & Battery/USB_MAIN_FET_COMMON",
-        15: "/Power & Battery/VBUS_COMBINED", 16: "/Power & Battery/AUX_DC_PROTECTED",
-        17: "/USB_PD_SELECTED", 18: "/Power & Battery/MAIN_SEL_INTVCC",
-        19: "/Power & Battery/MAIN_SEL_INTVCC", 20: "GND", 21: "GND",
-    }.items():
-        add("U15", pin, net, "Dual-input selector validates USB/AUX, gives USB priority, and drives reverse-blocking PMOS pairs.", selector)
-    add_nc("U15", 6, "Unused cascade output is intentionally open.", selector)
-    add("U15", 9, "/MAIN_USB_VALID_N", "Active-low USB source-valid output reaches source manager.", selector)
-    add("U15", 10, "/MAIN_AUX_VALID_N", "Active-low AUX source-valid output reaches source manager.", selector)
+    selector = "ADI LTC4418 Rev A pin functions and the two-stage source selector"
+    stages = {
+        "U15": {1:"MAIN_SEL_TMR", 2:"USB_MAIN_UV", 3:"USB_MAIN_OV",
+                4:"ST2_MAIN_UV", 5:"ST2_MAIN_OV", 6:"/MAIN_USB_VALID_N", 7:"/MAIN_AUX_VALID_N",
+                8:"GND", 10:"MAIN_SEL_INTVCC", 11:"ST2_MAIN_GATE", 12:"ST2_MAIN_FET_COMMON",
+                13:"USB_MAIN_GATE", 14:"USB_MAIN_FET_COMMON", 15:"VBUS_COMBINED",
+                16:"SEL_STAGE2", 17:"/USB_PD_SELECTED", 18:"MAIN_SEL_INTVCC",
+                19:"MAIN_SEL_INTVCC", 20:"GND", 21:"GND"},
+        "U15B": {1:"ST2_SEL_TMR", 2:"ST2_USB_UV", 3:"ST2_USB_OV",
+                 4:"ST2_AUX_UV", 5:"ST2_AUX_OV", 6:"/PD2_VALID_N", 8:"GND",
+                 10:"ST2_SEL_INTVCC", 11:"ST2_AUX_GATE", 12:"ST2_AUX_FET_COMMON",
+                 13:"ST2_USB_GATE", 14:"ST2_USB_FET_COMMON", 15:"SEL_STAGE2",
+                 16:"AUX_DC_PROTECTED", 17:"/PD2_VBUS_GATED", 18:"ST2_SEL_INTVCC",
+                 19:"ST2_SEL_INTVCC", 20:"GND", 21:"GND"},
+    }
+    def selector_net(name):
+        return name if name == "GND" or name.startswith("/") else local("Power & Battery", name)
+    for ref, pins in stages.items():
+        for pin, net in pins.items():
+            add(ref, pin, selector_net(net), "Source selector pin and channel assignment.", selector)
+        add_nc(ref, 9, "Unused CAS output stays open.", selector)
+    add_nc("U15B", 7, "Unused stage-2 VALID2 output stays open.", selector)
     for ref, gate, common, drain in (
         ("Q21", "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "/USB_PD_SELECTED"),
-        ("Q22", "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "/Power & Battery/VBUS_COMBINED"),
-        ("Q23", "AUX_MAIN_GATE", "AUX_MAIN_FET_COMMON", "/Power & Battery/AUX_DC_PROTECTED"),
-        ("Q24", "AUX_MAIN_GATE", "AUX_MAIN_FET_COMMON", "/Power & Battery/VBUS_COMBINED"),
+        ("Q22", "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "VBUS_COMBINED"),
+        ("Q23", "ST2_AUX_GATE", "ST2_AUX_FET_COMMON", "AUX_DC_PROTECTED"),
+        ("Q24", "ST2_AUX_GATE", "ST2_AUX_FET_COMMON", "SEL_STAGE2"),
+        ("Q26", "ST2_USB_GATE", "ST2_USB_FET_COMMON", "/PD2_VBUS_GATED"),
+        ("Q27", "ST2_USB_GATE", "ST2_USB_FET_COMMON", "SEL_STAGE2"),
+        ("Q28", "ST2_MAIN_GATE", "ST2_MAIN_FET_COMMON", "SEL_STAGE2"),
+        ("Q29", "ST2_MAIN_GATE", "ST2_MAIN_FET_COMMON", "VBUS_COMBINED"),
     ):
-        add(ref, 1, local("Power & Battery", gate), "Selector gate controller drives both PMOS gates directly.", selector)
-        add_many(ref, [2, 3, 4], local("Power & Battery", common), "Back-to-back pair shares this common-source node.", selector)
-        add(ref, 5, drain, "PMOS unified drain land terminates one side of the isolated path.", selector)
+        add(ref, 1, selector_net(gate), "Both PMOS gates use the corresponding channel drive.", selector)
+        add_many(ref, [2,3,4], selector_net(common), "The pair shares a common-source node.", selector)
+        add(ref, 5, selector_net(drain), "Unified drain land at the channel input or output.", selector)
     for ref, net_a, net_b in (
-        ("R730", "/USB_PD_SELECTED", "/Power & Battery/USB_MAIN_UV"),
-        ("R731", "/Power & Battery/USB_MAIN_UV", "/Power & Battery/USB_MAIN_OV"),
-        ("R732", "/Power & Battery/USB_MAIN_OV", "GND"),
-        ("R733", "/Power & Battery/AUX_DC_PROTECTED", "/Power & Battery/AUX_MAIN_UV"),
-        ("R734", "/Power & Battery/AUX_MAIN_UV", "/Power & Battery/AUX_MAIN_OV"),
-        ("R735", "/Power & Battery/AUX_MAIN_OV", "GND"),
+        ("R730", "/USB_PD_SELECTED", "USB_MAIN_UV"), ("R731", "USB_MAIN_UV", "USB_MAIN_OV"),
+        ("R732", "USB_MAIN_OV", "GND"), ("R733", "AUX_DC_PROTECTED", "ST2_AUX_UV"),
+        ("R734", "ST2_AUX_UV", "ST2_AUX_OV"), ("R735", "ST2_AUX_OV", "GND"),
+        ("R741", "/PD2_VBUS_GATED", "ST2_USB_UV"), ("R742", "ST2_USB_UV", "ST2_USB_OV"),
+        ("R743", "ST2_USB_OV", "GND"), ("R744", "SEL_STAGE2", "ST2_MAIN_UV"),
+        ("R745", "ST2_MAIN_UV", "ST2_MAIN_OV"), ("R746", "ST2_MAIN_OV", "GND"),
     ):
-        add(ref, 1, net_a, "LTC4418 UV/OV qualification ladder.", selector)
-        add(ref, 2, net_b, "LTC4418 UV/OV qualification ladder.", selector)
+        add(ref, 1, selector_net(net_a), "Channel UV/OV divider.", selector)
+        add(ref, 2, selector_net(net_b), "Channel UV/OV divider.", selector)
     for ref, net in (
-        ("C740", "/Power & Battery/MAIN_SEL_INTVCC"), ("C741", "/Power & Battery/MAIN_SEL_TMR"),
-        ("C742", "/USB_PD_SELECTED"), ("C743", "/Power & Battery/USB_MAIN_FET_COMMON"),
-        ("C744", "/Power & Battery/AUX_DC_PROTECTED"), ("C745", "/Power & Battery/AUX_MAIN_FET_COMMON"),
+        ("C740", "MAIN_SEL_INTVCC"), ("C741", "MAIN_SEL_TMR"),
+        ("C742", "/USB_PD_SELECTED"), ("C743", "USB_MAIN_FET_COMMON"),
+        ("C744", "AUX_DC_PROTECTED"), ("C745", "ST2_AUX_FET_COMMON"),
+        ("C747", "ST2_MAIN_FET_COMMON"), ("C748", "SEL_STAGE2"),
+        ("C749", "ST2_SEL_INTVCC"), ("C715", "ST2_SEL_TMR"),
+        ("C746", "VBUS_COMBINED"),
     ):
-        add(ref, 1, net, "Selector local bypass/timer capacitor.", selector)
-        add(ref, 2, "GND", "Selector capacitor returns directly to ground.", selector)
-    add("C746", 1, "/Power & Battery/VBUS_COMBINED", "LTC4418 output hold-up capacitor.", selector)
-    add("C746", 2, "GND", "LTC4418 output hold-up return.", selector)
+        add(ref, 1, selector_net(net), "Selector bypass, hold-up, or timer capacitor.", selector)
+        add(ref, 2, "GND", "Selector capacitor return.", selector)
 
     aon_or = (
         "Ducktop2 source-independent EC always-on Schottky-OR contract: "
