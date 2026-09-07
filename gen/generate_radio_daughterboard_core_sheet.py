@@ -11,7 +11,7 @@ def connector_pin_nets():
         "6":  ("RADIO_DB_5V", "hier"),
         "7":  ("GND", "local"),
         "8":  ("RADIO_CODEC_USB_DP", "hier"),
-        "9":  ("RADIO_CODEC_USB_DM", "hier"),
+        "9":  ("RADIO_CODEC_USB_DN", "hier"),
         "10": ("GND", "local"),
         "11": ("RADIO_VHF_UART_TX", "hier"),
         "12": ("RADIO_VHF_UART_RX", "hier"),

@@ -39,6 +39,12 @@
     (condition "(((A.Reference == 'H1') || (A.Reference == 'H2')) && (B.Reference == 'A1')) || ((A.Reference == 'A1') && ((B.Reference == 'H1') || (B.Reference == 'H2')))")
     (constraint courtyard_clearance (min -1mm)))
 
+# each M.2 socket courtyard includes its card. the mounting nut belongs
+# inside that area; other components do not.
+(rule "m.2 card and mounting nut"
+    (condition "((A.Reference == 'J10' && B.Reference == 'H3') || (A.Reference == 'H3' && B.Reference == 'J10') || (A.Reference == 'J40' && B.Reference == 'H4') || (A.Reference == 'H4' && B.Reference == 'J40'))")
+    (constraint courtyard_clearance (min -1mm)))
+
 # --- NextPCB capability-derived routing constraints (2026-08-13) ---
 # Source: https://www.nextpcb.com/pcb-capabilities.  These are stricter than
 # the 0.15 mm net-class clearance for specific item pairs; they become active
@@ -124,18 +130,8 @@
     (constraint track_width (min 0.091mm) (opt 0.091mm) (max 0.091mm))
     (constraint diff_pair_gap (min 0.254mm) (opt 0.254mm) (max 0.254mm)))
 
-(rule "center USB2_45 on outer"
-    (layer outer)
-    (condition "A.hasNetclass('USB2_45')")
-    (constraint track_width (min 0.2248mm) (opt 0.2248mm) (max 0.2248mm)))
-
-(rule "center USB2_45 on In2.Cu"
-    (layer "In2.Cu")
-    (condition "A.hasNetclass('USB2_45')")
-    (constraint track_width (min 0.1313mm) (opt 0.1313mm) (max 0.1313mm)))
-
 (rule "center controlled-impedance signal layers"
-    (condition "(A.hasNetclass('DIFF_85') || A.hasNetclass('DIFF_90') || A.hasNetclass('DIFF_100') || A.hasNetclass('USB2_45')) && A.Layer != 'F.Cu' && A.Layer != 'B.Cu' && A.Layer != 'In2.Cu'")
+    (condition "(A.hasNetclass('DIFF_85') || A.hasNetclass('DIFF_90') || A.hasNetclass('DIFF_100')) && A.Layer != 'F.Cu' && A.Layer != 'B.Cu' && A.Layer != 'In2.Cu'")
     (constraint disallow track))
 
 (rule "center solid ground layers"

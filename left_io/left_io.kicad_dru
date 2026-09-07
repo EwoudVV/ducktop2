@@ -86,3 +86,52 @@
 (rule "0201 ESD diode intra-footprint clearance (Phase 5, audit C10)"
     (condition "((A.Reference == 'D1800') && (B.Reference == 'D1800')) || ((A.Reference == 'D1801') && (B.Reference == 'D1801')) || ((A.Reference == 'D1802') && (B.Reference == 'D1802')) || ((A.Reference == 'D1803') && (B.Reference == 'D1803')) || ((A.Reference == 'D1804') && (B.Reference == 'D1804')) || ((A.Reference == 'D1805') && (B.Reference == 'D1805')) || ((A.Reference == 'D1806') && (B.Reference == 'D1806')) || ((A.Reference == 'D1807') && (B.Reference == 'D1807')) || ((A.Reference == 'D1808') && (B.Reference == 'D1808')) || ((A.Reference == 'D1809') && (B.Reference == 'D1809')) || ((A.Reference == 'D1810') && (B.Reference == 'D1810')) || ((A.Reference == 'D1811') && (B.Reference == 'D1811')) || ((A.Reference == 'D1812') && (B.Reference == 'D1812')) || ((A.Reference == 'D1813') && (B.Reference == 'D1813')) || ((A.Reference == 'D1814') && (B.Reference == 'D1814')) || ((A.Reference == 'D1815') && (B.Reference == 'D1815')) || ((A.Reference == 'D2100') && (B.Reference == 'D2100')) || ((A.Reference == 'D2101') && (B.Reference == 'D2101')) || ((A.Reference == 'D2102') && (B.Reference == 'D2102')) || ((A.Reference == 'D2103') && (B.Reference == 'D2103')) || ((A.Reference == 'D2104') && (B.Reference == 'D2104')) || ((A.Reference == 'D2105') && (B.Reference == 'D2105')) || ((A.Reference == 'D2106') && (B.Reference == 'D2106')) || ((A.Reference == 'D2107') && (B.Reference == 'D2107'))")
     (constraint clearance (min 0.1mm)))
+
+# left routing widths from the approved NextPCB stackup.
+# In2.Cu has GND on both sides. In5.Cu faces split power islands.
+# use F.Cu, In2.Cu or B.Cu for controlled-impedance traces.
+# local neckdowns need a reviewed exception when routing the fanout.
+
+(rule "left DIFF_85 on outer"
+    (layer outer)
+    (condition "A.hasNetclass('DIFF_85')")
+    (constraint track_width (min 0.183mm) (opt 0.183mm) (max 0.183mm))
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.1524mm)))
+
+(rule "left DIFF_85 on In2.Cu"
+    (layer "In2.Cu")
+    (condition "A.hasNetclass('DIFF_85')")
+    (constraint track_width (min 0.114mm) (opt 0.114mm) (max 0.114mm))
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.1524mm)))
+
+(rule "left DIFF_90 on outer"
+    (layer outer)
+    (condition "A.hasNetclass('DIFF_90')")
+    (constraint track_width (min 0.1796mm) (opt 0.1796mm) (max 0.1796mm))
+    (constraint diff_pair_gap (min 0.2032mm) (opt 0.2032mm) (max 0.2032mm)))
+
+(rule "left DIFF_90 on In2.Cu"
+    (layer "In2.Cu")
+    (condition "A.hasNetclass('DIFF_90')")
+    (constraint track_width (min 0.111mm) (opt 0.111mm) (max 0.111mm))
+    (constraint diff_pair_gap (min 0.203mm) (opt 0.203mm) (max 0.203mm)))
+
+(rule "left DIFF_100 on outer"
+    (layer outer)
+    (condition "A.hasNetclass('DIFF_100')")
+    (constraint track_width (min 0.1521mm) (opt 0.1521mm) (max 0.1521mm))
+    (constraint diff_pair_gap (min 0.254mm) (opt 0.254mm) (max 0.254mm)))
+
+(rule "left DIFF_100 on In2.Cu"
+    (layer "In2.Cu")
+    (condition "A.hasNetclass('DIFF_100')")
+    (constraint track_width (min 0.091mm) (opt 0.091mm) (max 0.091mm))
+    (constraint diff_pair_gap (min 0.254mm) (opt 0.254mm) (max 0.254mm)))
+
+(rule "left controlled-impedance signal layers"
+    (condition "(A.hasNetclass('DIFF_85') || A.hasNetclass('DIFF_90') || A.hasNetclass('DIFF_100')) && A.Layer != 'F.Cu' && A.Layer != 'B.Cu' && A.Layer != 'In2.Cu'")
+    (constraint disallow track))
+
+(rule "left solid ground layers"
+    (condition "(A.Layer == 'In1.Cu' || A.Layer == 'In3.Cu' || A.Layer == 'In6.Cu') && A.NetName != 'GND'")
+    (constraint disallow track))

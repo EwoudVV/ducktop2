@@ -1110,20 +1110,20 @@ def check_mu_carrier(components, pin_names):
     for pin, want in {
         "13": "/Mu Carrier/USBC1_SSTX_RAW_P", "15": "/Mu Carrier/USBC1_SSTX_RAW_N",
         "16": "/USBC1_SSRX_P", "18": "/USBC1_SSRX_N",
-        "73": "/USBC1_DM", "75": "/USBC1_DP",
+        "73": "/USBC1_DN", "75": "/USBC1_DP",
         "19": "/Mu Carrier/USBC2_SSTX_RAW_P", "21": "/Mu Carrier/USBC2_SSTX_RAW_N",
         "22": "/USBC2_SSRX_P", "24": "/USBC2_SSRX_N",
-        "70": "/USBC2_DP", "72": "/USBC2_DM",
+        "70": "/USBC2_DP", "72": "/USBC2_DN",
         "129": "/PD_PROTECT_FAULT_N",
         "31": "/Mu Carrier/WIFI_PCIE_TX_RAW_P", "33": "/Mu Carrier/WIFI_PCIE_TX_RAW_N",
         "34": "/WIFI_PCIE_RX_P", "36": "/WIFI_PCIE_RX_N",
         "67": "/WIFI_USB_DN", "69": "/WIFI_USB_DP",
         "88": "/WIFI_REFCLK_P", "90": "/WIFI_REFCLK_N",
         "100": "/WIFI_CLKREQ_N",
-        "79": "/EC_HOST_USB_DM", "81": "/EC_HOST_USB_DP",
-        "109": "/AUDIO_USB_DM", "111": "/AUDIO_USB_DP",
-        "76": "/MAKER_USB_DP", "78": "/MAKER_USB_DM",
-        "82": "/TRACKPAD_USB_DP", "84": "/TRACKPAD_USB_DM",
+        "79": "/EC_HOST_USB_DN", "81": "/EC_HOST_USB_DP",
+        "109": "/AUDIO_USB_DN", "111": "/AUDIO_USB_DP",
+        "76": "/MAKER_USB_DP", "78": "/MAKER_USB_DN",
+        "82": "/TRACKPAD_USB_DP", "84": "/TRACKPAD_USB_DN",
         "37": "/Mu Carrier/PCIE_M_L0_TX_RAW_P", "39": "/Mu Carrier/PCIE_M_L0_TX_RAW_N",
         "40": "/Mu Carrier/PCIE_M_L0_RX_P", "42": "/Mu Carrier/PCIE_M_L0_RX_N",
         "43": "/Mu Carrier/PCIE_M_L1_TX_RAW_P", "45": "/Mu Carrier/PCIE_M_L1_TX_RAW_N",
@@ -1343,8 +1343,8 @@ def _check_legacy_native_usb_c_ports(components):
             expect(net(components, jref, pin), local_net(sheet, f"{usb}_VBUS"), f"{jref} VBUS {pin}")
         expect(net(components, jref, "A6"), f"{native}_DP", f"{jref} D+ A")
         expect(net(components, jref, "B6"), f"{native}_DP", f"{jref} D+ B")
-        expect(net(components, jref, "A7"), f"{native}_DM", f"{jref} D- A")
-        expect(net(components, jref, "B7"), f"{native}_DM", f"{jref} D- B")
+        expect(net(components, jref, "A7"), f"{native}_DN", f"{jref} D- A")
+        expect(net(components, jref, "B7"), f"{native}_DN", f"{jref} D- B")
 
 
 def _check_legacy_ch224_inputs(components):
@@ -1513,14 +1513,14 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
 
     dual_role = (
         (1, "J21", "U41", 2000, {
-            "dp": "/USBC1_DP", "dm": "/USBC1_DM",
+            "dp": "/USBC1_DP", "dm": "/USBC1_DN",
             "sstx_p": "/USBC1_SSTX_P", "sstx_n": "/USBC1_SSTX_N",
             "ssrx_p": "/USBC1_SSRX_P", "ssrx_n": "/USBC1_SSRX_N",
         }, False),
         # J11 is USB2-only after the board split (no USB3 host port remains
         # on the right side); its SS connector pins are no-connect.
         (2, "J11", "U42", 2010, {
-            "dp": "/HUB_DS1_DP", "dm": "/HUB_DS1_DM",
+            "dp": "/HUB_DS1_DP", "dm": "/HUB_DS1_DN",
             "sstx_p": None, "sstx_n": None,
             "ssrx_p": None, "ssrx_n": None,
         }, True),
@@ -1551,8 +1551,8 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
             expect(net(components, jref, pin), raw, f"{jref} dual-role VBUS {pin}")
         for pin, want in {
             "A5": local("CC1_CONN"), "B5": local("CC2_CONN"),
-            "A6": local("DP_CONN"), "B6": local("DP_CONN"),
-            "A7": local("DM_CONN"), "B7": local("DM_CONN"),
+            "A6": local("CONN_DP"), "B6": local("CONN_DP"),
+            "A7": local("CONN_DN"), "B7": local("CONN_DN"),
             "A2": "" if usb2_only else local("TX1_P"), "A3": "" if usb2_only else local("TX1_N"),
             "B2": "" if usb2_only else local("TX2_P"), "B3": "" if usb2_only else local("TX2_N"),
             "B11": "" if usb2_only else local("RX1_P"), "B10": "" if usb2_only else local("RX1_N"),
@@ -1604,10 +1604,10 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
         protector = f"U{ubase + 1}"
         expect_contains(comp(components, protector).value, "TPD4S201", f"{protector} CC/USB2 protector")
         expect(prop(components, protector, "ChannelUse"),
-               "CC1_CC2_AND_USB2_DP_DM;DEAD_BATTERY_RD_ENABLED",
+               "CC1_CC2_AND_USB2_DP_DN;DEAD_BATTERY_RD_ENABLED",
                f"{protector} protected-channel contract")
-        expect(net(components, protector, "14"), local("DM_HOST_SWITCHED"), f"{protector} USB2 D-")
-        expect(net(components, protector, "15"), local("DP_HOST_SWITCHED"), f"{protector} USB2 D+")
+        expect(net(components, protector, "14"), local("HOST_SWITCHED_DN"), f"{protector} USB2 D-")
+        expect(net(components, protector, "15"), local("HOST_SWITCHED_DP"), f"{protector} USB2 D+")
 
         usb2_switch = f"U{ubase + 3}"
         expect_contains(comp(components, usb2_switch).value, "TS3USB30E", f"{usb2_switch} USB2 disconnect")
@@ -1671,9 +1671,9 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
         expect(prop(components, "U1700", "MPN"), "USB7206C-I/KDX", "hub exact MPN")
         for pin, want in {
             "2": "/INTERNAL_USB_VBUS_VALID",
-            "89": "/USBC2_DP", "90": "/USBC2_DM",
+            "89": "/USBC2_DP", "90": "/USBC2_DN",
             "94": "/USBC2_SSTX_P", "95": "/USBC2_SSTX_N",
-            "5": "/HUB_DS1_DP", "6": "/HUB_DS1_DM",
+            "5": "/HUB_DS1_DP", "6": "/HUB_DS1_DN",
         }.items():
             expect(net(components, "U1700", pin), want, f"USB7206C pin {pin}")
         # DS1/DS4 are USB2-only after the board split; their SS pins (7/8/10/11
@@ -1685,10 +1685,10 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
         # J25 USB2).  The old R1730-R1733 disable-strap contracts are obsolete.
         spare_ports = (
             ("J24", "USB 3.0 Type-A internal header (hub DIS5)",
-             {"2": "HUB_DIS5_DM", "3": "HUB_DIS5_DP", "5": "HUB_DIS5_RX_N",
+             {"2": "HUB_DIS5_DN", "3": "HUB_DIS5_DP", "5": "HUB_DIS5_RX_N",
               "6": "HUB_DIS5_RX_P"}),
             ("J25", "USB 2.0 Type-A internal header (hub DIS6)",
-             {"2": "HUB_DIS6_DM", "3": "HUB_DIS6_DP"}),
+             {"2": "HUB_DIS6_DN", "3": "HUB_DIS6_DP"}),
         )
         for jref, want_value, data_pins in spare_ports:
             expect_contains(comp(components, jref).value, "USB",
@@ -1701,8 +1701,8 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
                 expect(net(components, jref, pin), local_net(hub_sheet, f"J{jref[1:]}_5V_PRE"),
                        f"{jref} VBUS pre-switch")
         # DIS5/DIS6 ESD clamp pairs (USBLC6-2P6): clamp the D+/D- lines to GND.
-        for uref, (dp, dm) in (("U1801", ("HUB_DIS5_DP", "HUB_DIS5_DM")),
-                               ("U1804", ("HUB_DIS6_DP", "HUB_DIS6_DM"))):
+        for uref, (dp, dm) in (("U1801", ("HUB_DIS5_DP", "HUB_DIS5_DN")),
+                               ("U1804", ("HUB_DIS6_DP", "HUB_DIS6_DN"))):
             expect_contains(comp(components, uref).value, "USBLC6",
                             f"{uref} USBLC6-2P6 D+/D- clamp")
             expect(net(components, uref, "1"), local_net(hub_sheet, dp),
@@ -1721,7 +1721,7 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
     for jref, port, base, usb2_only, port_sheet, remote_data in source_ports:
         # remote_data: the hub (DSx + PRT_CTLx) is on the LEFT board and
         # the nets cross FPC-1/FPC-2, so they merge at root level.
-        remote_nets = {f"HUB_DS{port}_DP", f"HUB_DS{port}_DM",
+        remote_nets = {f"HUB_DS{port}_DP", f"HUB_DS{port}_DN",
                        f"HUB_PRT_CTL{port}"} if remote_data else set()
 
         def local(name, sheet=port_sheet):
@@ -1746,7 +1746,7 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
             expect(net(components, jref, pin), local(f"J{jref[1:]}_VBUS"), f"{jref} VBUS {pin}")
         for pin, want in {
             "A6": local(f"HUB_DS{port}_DP"), "B6": local(f"HUB_DS{port}_DP"),
-            "A7": local(f"HUB_DS{port}_DM"), "B7": local(f"HUB_DS{port}_DM"),
+            "A7": local(f"HUB_DS{port}_DN"), "B7": local(f"HUB_DS{port}_DN"),
         }.items():
             expect(net(components, jref, pin), want, f"{jref} data pin {pin}")
         if usb2_only:
@@ -1895,16 +1895,16 @@ def check_internal_services(components):
     sheet = "Internal Services"
     expect(net(components, "R200", "1"), local_net(sheet, "EC_USB_ISO_DP"), "EC USB DP isolated side")
     expect(net(components, "R200", "2"), "/MCU_USB_DP", "EC USB DP MCU side")
-    expect(net(components, "R201", "1"), local_net(sheet, "EC_USB_ISO_DM"), "EC USB DM isolated side")
-    expect(net(components, "R201", "2"), "/MCU_USB_DM", "EC USB DM MCU side")
+    expect(net(components, "R201", "1"), local_net(sheet, "EC_USB_ISO_DN"), "EC USB DM isolated side")
+    expect(net(components, "R201", "2"), "/MCU_USB_DN", "EC USB DM MCU side")
     expect(comp(components, "U61").footprint, "Package_SO:TSSOP-10_3x3mm_P0.5mm", "EC USB isolation switch footprint")
     for pin, want in {
         "1": "/EC_DFU_SEL", "2": "/EC_HOST_USB_DP", "4": local_net(sheet, "EC_USB_ISO_DP"),
-        "5": "GND", "6": local_net(sheet, "EC_USB_ISO_DM"), "8": "/EC_HOST_USB_DM",
+        "5": "GND", "6": local_net(sheet, "EC_USB_ISO_DN"), "8": "/EC_HOST_USB_DN",
         "9": local_net(sheet, "EC_USB_OE_N"), "10": "/MCU_3V3",
     }.items():
         expect(net(components, "U61", pin), want, f"EC USB isolation U61 pin {pin}")
-    for pin, want in {"3": local_net(sheet, "EC_DFU_DP"), "7": local_net(sheet, "EC_DFU_DM")}.items():
+    for pin, want in {"3": local_net(sheet, "EC_DFU_DP"), "7": local_net(sheet, "EC_DFU_DN")}.items():
         expect(net(components, "U61", pin), want, f"EC USB isolation U61 DFU-side pin {pin}")
     expect(net(components, "Q60", "1"), "/INTERNAL_USB_VBUS_VALID", "EC USB physical VBUS-valid interlock gate")
     expect(net(components, "Q60", "2"), "GND", "EC USB interlock return")
@@ -1918,8 +1918,8 @@ def check_internal_services(components):
             fail(f"obsolete status-proxy EC USB component {obsolete} remains")
     expect(net(components, "R250", "1"), "/TRACKPAD_USB_DP", "trackpad USB DP Mu side")
     expect(net(components, "R250", "2"), local_net(sheet, "TPAD_CONN_DP"), "trackpad USB DP connector side")
-    expect(net(components, "R251", "1"), "/TRACKPAD_USB_DM", "trackpad USB DM Mu side")
-    expect(net(components, "R251", "2"), local_net(sheet, "TPAD_CONN_DM"), "trackpad USB DM connector side")
+    expect(net(components, "R251", "1"), "/TRACKPAD_USB_DN", "trackpad USB DM Mu side")
+    expect(net(components, "R251", "2"), local_net(sheet, "TPAD_CONN_DN"), "trackpad USB DM connector side")
     for obsolete in ("F201", "R253", "R255", "J57"):
         if obsolete in components:
             fail(f"obsolete passive/fallback trackpad part {obsolete} is still present")
@@ -1934,7 +1934,7 @@ def check_internal_services(components):
     expect(prop(components, "J58", "AssemblyID"), "TRACKPAD_USBA2_CUT_CABLE",
            "trackpad wired-cable assembly identity")
     for pin, want in {
-        "1": "GND", "2": local_net(sheet, "TPAD_CONN_DM"),
+        "1": "GND", "2": local_net(sheet, "TPAD_CONN_DN"),
         "3": local_net(sheet, "TPAD_CONN_DP"), "4": local_net(sheet, "TPAD_5V"),
     }.items():
         expect(net(components, "J58", pin), want, f"trackpad field-solder pad {pin}")
@@ -1959,7 +1959,7 @@ def check_internal_services(components):
         expect(net(components, ref, "1"), rail, f"{ref} trackpad source rail")
         expect(net(components, ref, "2"), "GND", f"{ref} trackpad source return")
     for pin, want in {
-        "1": local_net(sheet, "TPAD_CONN_DP"), "2": local_net(sheet, "TPAD_CONN_DM"),
+        "1": local_net(sheet, "TPAD_CONN_DP"), "2": local_net(sheet, "TPAD_CONN_DN"),
         "3": "GND", "8": "GND",
     }.items():
         expect(net(components, "U62", pin), want, f"trackpad USB2/CC ESD pin {pin}")
@@ -2287,9 +2287,9 @@ def _check_legacy_monolithic_radio_gnss_audio(components):
            "8W_MAX_AT_25C_DERATE_TO_3W_AT_100C", "VHF LPF released power rating")
 
     expect(net(components, "U330", "1"), local_net("Radio Audio Codec", "CODEC_USB_DP"), "PCM2902 D+")
-    expect(net(components, "U330", "2"), local_net("Radio Audio Codec", "CODEC_USB_DM"), "PCM2902 D-")
+    expect(net(components, "U330", "2"), local_net("Radio Audio Codec", "CODEC_USB_DN"), "PCM2902 D-")
     expect(net(components, "R330", "1"), "/RADIO_CODEC_USB_DP", "codec USB DP hub side")
-    expect(net(components, "R331", "1"), "/RADIO_CODEC_USB_DM", "codec USB DM hub side")
+    expect(net(components, "R331", "1"), "/RADIO_CODEC_USB_DN", "codec USB DM hub side")
     expect(net(components, "R337", "1"), "/RADIO_CODEC_USB_VBUS", "codec switched VBUS hub side")
     expect(net(components, "R337", "2"), local_net("Radio Audio Codec", "CODEC_VBUS"),
            "codec filtered VBUS side")
@@ -2404,7 +2404,7 @@ def check_optional_radio_interface(components):
         "1": "GND", "2": rloc("RADIO_DB_5V"), "3": rloc("RADIO_DB_5V"),
         "4": "GND", "5": rloc("RADIO_CODEC_USB_VBUS_DB"),
         "6": rloc("RADIO_DB_5V"), "7": "GND",
-        "8": rloc("RADIO_CODEC_USB_DP_DB"), "9": rloc("RADIO_CODEC_USB_DM_DB"),
+        "8": rloc("RADIO_CODEC_USB_DB_DP"), "9": rloc("RADIO_CODEC_USB_DB_DN"),
         "10": "GND", "11": rloc("RADIO_VHF_UART_TX_DB"),
         "12": rloc("RADIO_VHF_UART_RX_DB"), "13": rloc("RADIO_UHF_UART_TX_DB"),
         "14": rloc("RADIO_UHF_UART_RX_DB"), "15": rloc("RADIO_VHF_PTT_N_DB"),
@@ -2517,8 +2517,8 @@ def check_system_audio(components):
     expect(net(components, "F400", "2"), loc("AUDIO_5V"), "audio branch fuse output")
 
     hub_pins = {
-        "1": loc("SYSTEM_DAC_USB_DM"), "2": loc("SYSTEM_DAC_USB_DP"),
-        "3": "/RADIO_CODEC_USB_DM_HOST", "4": "/RADIO_CODEC_USB_DP_HOST",
+        "1": loc("SYSTEM_DAC_USB_DN"), "2": loc("SYSTEM_DAC_USB_DP"),
+        "3": "/RADIO_CODEC_USB_HOST_DN", "4": "/RADIO_CODEC_USB_HOST_DP",
         "5": "/SYS_3V3", "10": "/SYS_3V3", "12": loc("HUB_PORT1_EN"),
         "13": loc("HUB_PORT1_OC_N"), "14": loc("HUB_CRFILT"),
         "15": "/SYS_3V3", "16": loc("HUB_PORT2_EN"),
@@ -2526,7 +2526,7 @@ def check_system_audio(components):
         "23": "/SYS_3V3", "24": loc("HUB_CFG_SEL0"),
         "25": loc("HUB_CFG_SEL1"), "26": loc("HUB_RESET_N"),
         "27": loc("HUB_VBUS_DET"), "28": loc("HUB_NON_REM0"),
-        "29": "/SYS_3V3", "30": "/AUDIO_USB_DM", "31": "/AUDIO_USB_DP",
+        "29": "/SYS_3V3", "30": "/AUDIO_USB_DN", "31": "/AUDIO_USB_DP",
         "32": loc("HUB_XO"), "33": loc("HUB_XI"),
         "34": loc("HUB_PLLFILT"), "35": loc("HUB_RBIAS"),
         "36": "/SYS_3V3", "37": "GND",
@@ -2569,7 +2569,7 @@ def check_system_audio(components):
         expect(net(components, "U401", pin), want, f"audio-hub reset supervisor pin {pin}")
 
     codec_pins = {
-        "1": loc("CODEC_USB_DP"), "2": loc("CODEC_USB_DM"),
+        "1": loc("CODEC_USB_DP"), "2": loc("CODEC_USB_DN"),
         "3": loc("CODEC_VBUS"), "4": "GND",
         "8": loc("CODEC_VDDI"), "9": loc("CODEC_VDDI"),
         "10": loc("CODEC_VCCCI"), "11": "GND",
@@ -2588,8 +2588,8 @@ def check_system_audio(components):
         expect_unconnected(components, "U410", pin)
     expect_value_prefix(components, "U410", "PCM2900CDBR", "system USB audio codec")
     expect_value_prefix(components, "R410", "22R", "system codec USB D- series")
-    expect(net(components, "R410", "1"), loc("SYSTEM_DAC_USB_DM"), "R410 hub side")
-    expect(net(components, "R410", "2"), loc("CODEC_USB_DM"), "R410 codec side")
+    expect(net(components, "R410", "1"), loc("SYSTEM_DAC_USB_DN"), "R410 hub side")
+    expect(net(components, "R410", "2"), loc("CODEC_USB_DN"), "R410 codec side")
     expect_value_prefix(components, "R411", "22R", "system codec USB D+ series")
     expect(net(components, "R411", "1"), loc("SYSTEM_DAC_USB_DP"), "R411 hub side")
     expect(net(components, "R411", "2"), loc("CODEC_USB_DP"), "R411 codec side")
@@ -2778,7 +2778,7 @@ def check_maker_mcu(components):
     expect(net(components, "F900", "2"), local_net("Maker MCU", "MAKER_5V_CORE"), "maker 5V core fuse output")
     expect_value_prefix(components, "F900", "1.1A hold PPTC", "maker-domain PPTC")
     expect(net(components, "R900", "1"), local_net("Maker MCU", "MAKER_USB_ISO_DP"), "maker USB DP isolated side")
-    expect(net(components, "R901", "1"), local_net("Maker MCU", "MAKER_USB_ISO_DM"), "maker USB DM isolated side")
+    expect(net(components, "R901", "1"), local_net("Maker MCU", "MAKER_USB_ISO_DN"), "maker USB DM isolated side")
     expect_value_prefix(components, "R900", "27R", "maker USB DP termination")
     expect_value_prefix(components, "R901", "27R", "maker USB DM termination")
 
@@ -2858,7 +2858,7 @@ def check_maker_mcu(components):
         "40": "MAKER_ADC0", "41": "MAKER_ADC1", "42": "MAKER_ADC2",
         "43": "MAKER_PWR_EN", "44": "MAKER_ADC_AVDD", "45": "MAKER_3V3_CORE",
         "46": "MAKER_VREG_AVDD", "48": "MAKER_VREG_LX", "49": "MAKER_3V3_CORE",
-        "50": "MAKER_1V1", "51": "MAKER_USB_DM_MCU", "52": "MAKER_USB_DP_MCU",
+        "50": "MAKER_1V1", "51": "MAKER_USB_MCU_DN", "52": "MAKER_USB_MCU_DP",
         "53": "MAKER_3V3_CORE", "54": "MAKER_3V3_CORE", "55": "MAKER_QSPI_SD3",
         "56": "MAKER_QSPI_SCLK", "57": "MAKER_QSPI_SD0", "58": "MAKER_QSPI_SD2",
         "59": "MAKER_QSPI_SD1", "60": "MAKER_QSPI_SS",
@@ -2891,7 +2891,7 @@ def check_maker_mcu(components):
     expect(comp(components, "U906").footprint, "Package_SO:TSSOP-10_3x3mm_P0.5mm", "maker USB isolation switch footprint")
     for pin, want in {
         "1": "GND", "2": "/MAKER_USB_DP", "4": local_net("Maker MCU", "MAKER_USB_ISO_DP"),
-        "5": "GND", "6": local_net("Maker MCU", "MAKER_USB_ISO_DM"), "8": "/MAKER_USB_DM",
+        "5": "GND", "6": local_net("Maker MCU", "MAKER_USB_ISO_DN"), "8": "/MAKER_USB_DN",
         "9": local_net("Maker MCU", "MAKER_USB_OE_N"), "10": local_net("Maker MCU", "MAKER_3V3_CORE"),
     }.items():
         expect(net(components, "U906", pin), want, f"maker USB isolation U906 pin {pin}")
@@ -3128,6 +3128,9 @@ def main() -> int:
     args = parse_args()
     sync.export_netlist(args.project)
     components = sync.parse_netlist(args.project)
+    for ref, item in components.items():
+        if "JST_GH_SM" in item.footprint or "JST_SH_SM" in item.footprint:
+            expect(net(components, ref, "MP"), "GND", f"{ref} hold-down ground")
     pin_names = component_pin_names(sync.PROJECTS[args.project][1])
     fps = pcb_text = None
     if not args.schematic_only and args.project == "ducktop2":
@@ -3144,6 +3147,10 @@ def main() -> int:
         return 0
 
     check_custom_footprint_sources()
+    if "C1852" in components:
+        for ref in ("C1852", "C1853"):
+            expect_value_prefix(components, ref, "100n 16V X7R", f"{ref} SuperSpeed coupling")
+            expect(prop(components, ref, "MPN"), "GRM155R71C104KA88D", f"{ref} 100nF part number")
     min_custom = {"ducktop2": 10, "left_io": 4, "right_io": 2, "bms": 4}[args.project]
     check_active_custom_footprint_pin_sets(components, min_custom=min_custom)
     if args.project == "ducktop2":

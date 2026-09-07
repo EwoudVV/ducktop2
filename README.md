@@ -22,16 +22,17 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-the four-layer BMS routing was checked on 5 september 2026, with
-zero DRC errors, warnings, or unconnected items. schematic ERC is clean,
+the four-layer BMS routing was checked on 6 september 2026, with
+zero routing errors or unconnected items. schematic ERC is clean,
 and the connected pads match the schematic. the power paths, shunt pickups,
 reference grounds, and connector current sharing have been reviewed.
 protection and thermal testing still need assembled hardware. the center
 and I/O boards are eight layers and still need routing. the
-[center review](docs/hardware/center-board.md) was updated on 6 september:
-the net and component sync, wired OLED connectors, edge clearances, and
-layer rules are in place. the remaining placement work and right-board HDMI
-update are listed there. the keyboard has a
+[center review](docs/hardware/center-board.md) was updated on 7 september:
+the BMS cutout, component placement, M.2 card clearances, wired connectors,
+and routing rules are in place. USB pairs now have usable P/N names, and
+the existing left-board copper is preserved for the routing pass. the
+keyboard has a
 rev A production package, and the radio is still a placement board.
 
 the replacement panel has run at 2560x1600 and 120 Hz on the Intehill

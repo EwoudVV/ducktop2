@@ -69,7 +69,28 @@
           "thermal_relief_spoke_width": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        },
+        {
+          "gap": 0.1524,
+          "via_gap": 0.25,
+          "width": 0.183
+        },
+        {
+          "gap": 0.2032,
+          "via_gap": 0.25,
+          "width": 0.1796
+        },
+        {
+          "gap": 0.254,
+          "via_gap": 0.25,
+          "width": 0.1521
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -203,7 +224,19 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.091,
+        0.111,
+        0.114,
+        0.1521,
+        0.1796,
+        0.183,
+        0.25,
+        0.3,
+        0.4,
+        0.6,
+        1.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -382,25 +415,6 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.15,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2248,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "USB2_45",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": -1,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2248,
-        "tuning_profile": "",
-        "via_diameter": 0.6,
-        "via_drill": 0.3,
-        "wire_width": 6
       }
     ],
     "meta": {
@@ -432,66 +446,6 @@
       {
         "netclass": "DIFF_100",
         "pattern": "/GBE_REFCLK_P"
-      },
-      {
-        "netclass": "POWER_HI",
-        "pattern": "/PD2_VBUS_RAW"
-      },
-      {
-        "netclass": "POWER_HI",
-        "pattern": "/SYS_3V3"
-      },
-      {
-        "netclass": "POWER_HI",
-        "pattern": "/SYS_5V"
-      },
-      {
-        "netclass": "POWER_MID",
-        "pattern": "/MCU_3V3"
-      },
-      {
-        "netclass": "POWER_MID",
-        "pattern": "/USB_PORT_5V"
-      },
-      {
-        "netclass": "USB2_45",
-        "pattern": "/HUB_DS1_DM"
-      },
-      {
-        "netclass": "USB2_45",
-        "pattern": "/HUB_DS1_DP"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0_TX0_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0_TX0_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0_TX1_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0_TX1_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0_TXRX0_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0_TXRX0_N"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0_TXRX1_P"
-      },
-      {
-        "netclass": "DIFF_100",
-        "pattern": "/TCP0_TXRX1_N"
       },
       {
         "netclass": "DIFF_100",
@@ -527,6 +481,22 @@
       },
       {
         "netclass": "DIFF_100",
+        "pattern": "/GbE/GBE_HSI_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GbE/GBE_HSI_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GbE/GBE_HSO_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/GbE/GBE_HSO_P"
+      },
+      {
+        "netclass": "DIFF_100",
         "pattern": "/HDMI/EXT_HDMI_CK_N"
       },
       {
@@ -559,26 +529,122 @@
       },
       {
         "netclass": "DIFF_100",
-        "pattern": "/GbE/GBE_HSI_N"
+        "pattern": "/TCP0_TX0_N"
       },
       {
         "netclass": "DIFF_100",
-        "pattern": "/GbE/GBE_HSI_P"
+        "pattern": "/TCP0_TX0_P"
       },
       {
         "netclass": "DIFF_100",
-        "pattern": "/GbE/GBE_HSO_N"
+        "pattern": "/TCP0_TX1_N"
       },
       {
         "netclass": "DIFF_100",
-        "pattern": "/GbE/GBE_HSO_P"
+        "pattern": "/TCP0_TX1_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TXRX0_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TXRX0_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TXRX1_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TXRX1_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS1_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS1_DP"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS4_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS4_DP"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD2 Dual-Role/PD2_CONN_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD2 Dual-Role/PD2_CONN_DP"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD2 Dual-Role/PD2_HOST_SWITCHED_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD2 Dual-Role/PD2_HOST_SWITCHED_DP"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/PCIE_3V3"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/PD2 Dual-Role/PD2_PPHV"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/PD2_VBUS_GATED"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/PD2_VBUS_RAW"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/SYS_3V3"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/SYS_5V"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/USB_PORT_5V"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/MCU_3V3"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/PD2 Dual-Role/J12_5V_PRE"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/PD2 Dual-Role/J12_VBUS"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/PD2 Dual-Role/J12_VBUS_POWER"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/PD2 Dual-Role/J12_VBUS_SYS"
       }
     ]
   },
   "pcbnew": {
     "last_paths": {
       "idf": "",
-      "netlist": "",
+      "netlist": "../.workbench/routing-prep-2026-09-06/right-usb-ready.net",
       "plot": "",
       "specctra_dsn": "",
       "vrml": ""

@@ -252,6 +252,11 @@ class Sheet:
 
     def place(self, ref, symname, value, x, y, footprint="", pin_nets=None, unit=None, extra_props=None,
               dnp=None, in_bom=None, on_board=True):
+        # SMT JST hold-downs need a symbol pin so PCB updates keep their ground.
+        if ("JST_GH_SM" in footprint or "JST_SH_SM" in footprint) and symname in ("Conn_01x02", "Conn_01x03", "Conn_01x04"):
+            symname += "_MP"
+            pin_nets = dict(pin_nets or {})
+            pin_nets.setdefault("MP", ("GND", "local"))
         x = snap_coord(x)
         y = snap_coord(y)
         lib = self._use_symbol(symname)

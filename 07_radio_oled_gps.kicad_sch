@@ -289,6 +289,32 @@
 		)
 		(embedded_fonts no)
 	)
+(symbol "Conn_01x04_MP:Conn_01x04_MP"
+    (pin_names (offset 1.016) hide)
+    (in_bom yes) (on_board yes)
+    (property "Reference" "J" (at 0 3.81 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "Conn_01x04_MP" (at 0 -11.43 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+    (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+    (symbol "Conn_01x04_MP_0_1"
+      (rectangle (start -1.27 1.27) (end 1.27 -8.89)
+        (stroke (width 0.254) (type default)) (fill (type background))))
+    (symbol "Conn_01x04_MP_1_1"
+      (pin passive line (at -5.08 0 0) (length 3.81)
+          (name "Pin_1" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27)))))
+(pin passive line (at -5.08 -2.54 0) (length 3.81)
+          (name "Pin_2" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27)))))
+(pin passive line (at -5.08 -5.08 0) (length 3.81)
+          (name "Pin_3" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27)))))
+(pin passive line (at -5.08 -7.62 0) (length 3.81)
+          (name "Pin_4" (effects (font (size 1.27 1.27))))
+          (number "4" (effects (font (size 1.27 1.27)))))
+(pin passive line (at 5.08 -3.81 180) (length 3.81)
+      (name "MP" (effects (font (size 1.27 1.27))))
+      (number "MP" (effects (font (size 1.27 1.27)))))))
 (symbol "Connector:Bus_M.2_Socket_E"
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1597,222 +1623,6 @@
 					)
 				)
 				(number "75"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
-(symbol "Connector_Generic:Conn_01x04"
-		(pin_names
-			(offset 1.016)
-			(hide yes)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "J"
-			(at 0 5.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x04"
-			(at 0 -7.62 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "connector"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "Connector*:*_1x??_*"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(symbol "Conn_01x04_1_1"
-			(rectangle
-				(start -1.27 3.81)
-				(end 1.27 -6.35)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type background)
-				)
-			)
-			(rectangle
-				(start -1.27 2.667)
-				(end 0 2.413)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 0.127)
-				(end 0 -0.127)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 -2.413)
-				(end 0 -2.667)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 -4.953)
-				(end 0 -5.207)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(pin passive line
-				(at -5.08 2.54 0)
-				(length 3.81)
-				(name "Pin_1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 0 0)
-				(length 3.81)
-				(name "Pin_2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -2.54 0)
-				(length 3.81)
-				(name "Pin_3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -5.08 0)
-				(length 3.81)
-				(name "Pin_4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -4350,7 +4160,7 @@
   (uuid 2491d498-e8f8-5cfc-b575-e6dfcd4e58ff)
 )
 (symbol
-  (lib_id "Connector_Generic:Conn_01x04")
+  (lib_id "Conn_01x04_MP:Conn_01x04_MP")
   (at 204.47 287.02 0)
   (unit 1)
   (exclude_from_sim no)
@@ -4372,6 +4182,7 @@
   (pin "2" (uuid b40389cd-4277-58e5-b4e5-31256decd240))
   (pin "3" (uuid 969ad1ae-807a-5723-ae1e-4f5967ffc221))
   (pin "4" (uuid 4b483ec7-0761-52cd-8261-f45a6837ff15))
+  (pin "MP" (uuid 2ec183d1-f5ff-5735-b045-3f008d20257d))
   (instances
     (project "ducktop2"
       (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
@@ -4382,25 +4193,30 @@
   )
 )
 (label "GND"
-  (at 199.39 284.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2ec183d1-f5ff-5735-b045-3f008d20257d)
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
   (at 199.39 287.02 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e8d0ca9b-ad0e-5266-9d4c-05ee35bfb701)
 )
-(label "OLED_A_SCL"
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
   (at 199.39 289.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid fde8b0dc-2325-54d3-af1f-fe57ded6a9ad)
 )
-(label "OLED_A_SDA"
+(label "OLED_A_SCL"
   (at 199.39 292.1 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 837e6ae6-15cf-5ca1-9016-4ded47e575e2)
+)
+(label "OLED_A_SDA"
+  (at 199.39 294.64 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 451e4ba3-8bbc-5ddc-a3cd-b19c2745b7ca)
+)
+(label "GND"
+  (at 209.55 290.83 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1207e801-3ebc-55d2-9ac2-5e16736b6754)
 )
 (symbol
   (lib_id "Device:R")
@@ -4410,15 +4226,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 451e4ba3-8bbc-5ddc-a3cd-b19c2745b7ca)
+  (uuid 6b09dc36-fd68-571d-ae6a-c3602cad56d7)
   (property "Reference" "R196" (at 204.47 309.88 0) (effects (font (size 1.27 1.27))))
   (property "Value" "4.7k OLED B SCL pull-up" (at 204.47 314.96 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 204.47 312.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 312.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 204.47 312.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "RC0603FR-074K7L" (at 204.47 312.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 1207e801-3ebc-55d2-9ac2-5e16736b6754))
-  (pin "2" (uuid 6b09dc36-fd68-571d-ae6a-c3602cad56d7))
+  (pin "1" (uuid f1f80297-28a9-5750-be29-89ab04327259))
+  (pin "2" (uuid 6f10f91e-f833-5895-92ef-fde65f342882))
   (instances
     (project "ducktop2"
       (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
@@ -4432,12 +4248,12 @@
   (shape bidirectional)
   (at 204.47 308.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f1f80297-28a9-5750-be29-89ab04327259)
+  (uuid b4a9aef8-35ae-58f2-a73d-00f4c3407351)
 )
 (label "OLED_B_SCL"
   (at 204.47 316.23 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6f10f91e-f833-5895-92ef-fde65f342882)
+  (uuid 2a4045f5-b27a-5c1a-b1ee-4cf52e218080)
 )
 (symbol
   (lib_id "Device:R")
@@ -4447,15 +4263,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid b4a9aef8-35ae-58f2-a73d-00f4c3407351)
+  (uuid 75de6509-a1ad-56c9-b45f-6af4699f6e56)
   (property "Reference" "R197" (at 204.47 322.58 0) (effects (font (size 1.27 1.27))))
   (property "Value" "4.7k OLED B SDA pull-up" (at 204.47 327.66 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 204.47 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Yageo" (at 204.47 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "RC0603FR-074K7L" (at 204.47 325.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 2a4045f5-b27a-5c1a-b1ee-4cf52e218080))
-  (pin "2" (uuid 75de6509-a1ad-56c9-b45f-6af4699f6e56))
+  (pin "1" (uuid adab08d5-86b6-5570-bb50-506058976395))
+  (pin "2" (uuid 274543bb-6533-5fca-8ea5-3544494a879f))
   (instances
     (project "ducktop2"
       (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
@@ -4469,12 +4285,12 @@
   (shape bidirectional)
   (at 204.47 321.31 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid adab08d5-86b6-5570-bb50-506058976395)
+  (uuid 8c76316d-cc25-56c1-9fab-2daaef85f668)
 )
 (label "OLED_B_SDA"
   (at 204.47 328.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 274543bb-6533-5fca-8ea5-3544494a879f)
+  (uuid 3a10c1ee-217e-5979-80f4-20f0c513759a)
 )
 (symbol
   (lib_id "Device:C")
@@ -4484,15 +4300,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 8c76316d-cc25-56c1-9fab-2daaef85f668)
+  (uuid b5a14b53-8f57-5306-a4ba-a8c3a89a5a3a)
   (property "Reference" "C178" (at 204.47 347.98 0) (effects (font (size 1.27 1.27))))
   (property "Value" "1u OLED B local" (at 204.47 353.06 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 204.47 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Murata" (at 204.47 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "GRM21BR71A105KA01L" (at 204.47 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 3a10c1ee-217e-5979-80f4-20f0c513759a))
-  (pin "2" (uuid b5a14b53-8f57-5306-a4ba-a8c3a89a5a3a))
+  (pin "1" (uuid ecd97a09-af97-5ed9-b85d-5ad6aad82883))
+  (pin "2" (uuid 420c6d72-2aa1-5d5a-b094-49685fc2fac1))
   (instances
     (project "ducktop2"
       (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
@@ -4506,12 +4322,12 @@
   (shape bidirectional)
   (at 204.47 346.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ecd97a09-af97-5ed9-b85d-5ad6aad82883)
+  (uuid 1e8513c5-8a84-5f61-8bd6-a3567d7cf1f0)
 )
 (label "GND"
   (at 204.47 354.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 420c6d72-2aa1-5d5a-b094-49685fc2fac1)
+  (uuid 390e26a9-b866-58cc-84b0-87061975442f)
 )
 (symbol
   (lib_id "Device:C")
@@ -4521,15 +4337,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 1e8513c5-8a84-5f61-8bd6-a3567d7cf1f0)
+  (uuid 3a6718a4-5e0b-532d-8d73-bee163eaf0ac)
   (property "Reference" "C179" (at 204.47 360.68 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n OLED B local" (at 204.47 365.76 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 204.47 363.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 204.47 363.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Murata" (at 204.47 363.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "GRM188R71H104KA93D" (at 204.47 363.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 390e26a9-b866-58cc-84b0-87061975442f))
-  (pin "2" (uuid 3a6718a4-5e0b-532d-8d73-bee163eaf0ac))
+  (pin "1" (uuid f5cd908a-76b0-5f50-98ad-af5ab35e471e))
+  (pin "2" (uuid 6ccd4c48-1eee-5fa9-845d-33272121d119))
   (instances
     (project "ducktop2"
       (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
@@ -4543,12 +4359,12 @@
   (shape bidirectional)
   (at 204.47 359.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f5cd908a-76b0-5f50-98ad-af5ab35e471e)
+  (uuid 3b0c3f42-6121-5fb2-a9b5-62c50882bd3d)
 )
 (label "GND"
   (at 204.47 367.03 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6ccd4c48-1eee-5fa9-845d-33272121d119)
+  (uuid 68a2fe0a-6d06-55ac-afbb-36d160b87dd6)
 )
 (symbol
   (lib_id "Device:C")
@@ -4558,15 +4374,15 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 3b0c3f42-6121-5fb2-a9b5-62c50882bd3d)
+  (uuid 1d2140cf-663c-565e-a01d-211b5f0d3df3)
   (property "Reference" "C185" (at 90.17 347.98 0) (effects (font (size 1.27 1.27))))
   (property "Value" "100n OLED mux local" (at 90.17 353.06 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 90.17 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 90.17 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Murata" (at 90.17 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "GRM188R71H104KA93D" (at 90.17 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 68a2fe0a-6d06-55ac-afbb-36d160b87dd6))
-  (pin "2" (uuid 1d2140cf-663c-565e-a01d-211b5f0d3df3))
+  (pin "1" (uuid d9bb37f5-4d6d-5591-939e-d36b9069c1b0))
+  (pin "2" (uuid 45114788-3770-50c2-8dea-85eafb6727d9))
   (instances
     (project "ducktop2"
       (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
@@ -4580,22 +4396,22 @@
   (shape bidirectional)
   (at 90.17 346.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d9bb37f5-4d6d-5591-939e-d36b9069c1b0)
+  (uuid c7bb60c4-4ee3-5f54-a7d2-c634b58c0d5f)
 )
 (label "GND"
   (at 90.17 354.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 45114788-3770-50c2-8dea-85eafb6727d9)
+  (uuid 0a49c32a-1389-539e-abce-d5af563a7d93)
 )
 (symbol
-  (lib_id "Connector_Generic:Conn_01x04")
+  (lib_id "Conn_01x04_MP:Conn_01x04_MP")
   (at 204.47 375.92 0)
   (unit 1)
   (exclude_from_sim no)
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c7bb60c4-4ee3-5f54-a7d2-c634b58c0d5f)
+  (uuid 16dfe7e5-6313-5b77-9746-ca4bf0f7d62c)
   (property "Reference" "J45" (at 204.47 373.38 0) (effects (font (size 1.27 1.27))))
   (property "Value" "OLED B cable: GND/3V3/SCL/SDA" (at 204.47 378.46 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_JST:JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal" (at 204.47 375.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4606,10 +4422,11 @@
   (property "Contacts" "SSHL-002T-P0.2" (at 204.47 375.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Endpoint" "OLED B, mounted separately in the case" (at 204.47 375.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "CablePinout" "1=GND;2=3V3;3=SCL;4=SDA" (at 204.47 375.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0a49c32a-1389-539e-abce-d5af563a7d93))
-  (pin "2" (uuid 16dfe7e5-6313-5b77-9746-ca4bf0f7d62c))
-  (pin "3" (uuid 869ade8c-0437-501e-bc5f-a093926d8156))
-  (pin "4" (uuid 12466fca-a507-590a-a80d-3b3a0b5252a9))
+  (pin "1" (uuid 869ade8c-0437-501e-bc5f-a093926d8156))
+  (pin "2" (uuid 12466fca-a507-590a-a80d-3b3a0b5252a9))
+  (pin "3" (uuid a904e81f-629f-5aeb-a58c-3e100e5ecfeb))
+  (pin "4" (uuid b6e7350c-b418-5209-9174-431dec8a6766))
+  (pin "MP" (uuid b2a11207-9200-5447-9986-b350917f136b))
   (instances
     (project "ducktop2"
       (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
@@ -4620,25 +4437,30 @@
   )
 )
 (label "GND"
-  (at 199.39 373.38 0)
+  (at 199.39 375.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a904e81f-629f-5aeb-a58c-3e100e5ecfeb)
+  (uuid 1c8356f1-ed3e-5fd2-9935-47b7f9c84c98)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
-  (at 199.39 375.92 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b6e7350c-b418-5209-9174-431dec8a6766)
-)
-(label "OLED_B_SCL"
   (at 199.39 378.46 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b2a11207-9200-5447-9986-b350917f136b)
+  (uuid 505b7bbe-2711-55ae-82f4-055ab4053964)
 )
-(label "OLED_B_SDA"
+(label "OLED_B_SCL"
   (at 199.39 381 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1c8356f1-ed3e-5fd2-9935-47b7f9c84c98)
+  (uuid 982dbade-c4f2-5476-8140-a74fd643eb59)
+)
+(label "OLED_B_SDA"
+  (at 199.39 383.54 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0996ec5b-d53b-5a6a-b40b-d349429bf1d5)
+)
+(label "GND"
+  (at 209.55 379.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3e89c661-0673-5545-8460-584f736bd697)
 )
 (symbol
   (lib_id "power:GND")
@@ -4648,12 +4470,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 505b7bbe-2711-55ae-82f4-055ab4053964)
+  (uuid 5bb5fc2f-d871-51e5-b844-27b69efcb85d)
   (property "Reference" "#PWR091" (at 519.43 297.18 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 519.43 302.26 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 519.43 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 982dbade-c4f2-5476-8140-a74fd643eb59))
+  (pin "1" (uuid 4bd0a0a0-5ba8-5d0c-8e07-988883d54939))
   (instances
     (project "ducktop2"
       (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
@@ -4666,21 +4488,21 @@
 (label "GND"
   (at 519.43 299.72 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0996ec5b-d53b-5a6a-b40b-d349429bf1d5)
+  (uuid 78fb6f15-8c00-56ac-88d0-0c5ccf067dec)
 )
-(text "NOTES:" (at 20.32 350.52 0) (effects (font (size 1.27 1.27))) (uuid 3e89c661-0673-5545-8460-584f736bd697))
-(text "M.2 E-key directions are host TX->PET35/37 and PER41/43->host RX; Mu-side TX has 220n AC coupling." (at 20.32 358.14 0) (effects (font (size 1.27 1.27))) (uuid 5bb5fc2f-d871-51e5-b844-27b69efcb85d))
-(text "USB2_P1 carries Bluetooth; default-BIOS HSIO3/REFCLK3/CLKREQ3 carry the E-key PCIe function." (at 20.32 365.76 0) (effects (font (size 1.27 1.27))) (uuid 4bd0a0a0-5ba8-5d0c-8e07-988883d54939))
-(text "Qualified radio is Intel AX210.NGWGIE.NV M.2 2230 Key-E: Wi-Fi over PCIe and Bluetooth over USB; AX211/CNVio2 is prohibited." (at 20.32 373.38 0) (effects (font (size 1.27 1.27))) (uuid 78fb6f15-8c00-56ac-88d0-0c5ccf067dec))
-(text "The OLEDs mount separately in the case. J41/J45 use four-wire GH cables: 1 GND, 2 3V3, 3 SCL, 4 SDA. Check the module labels when wiring." (at 20.32 381 0) (effects (font (size 1.27 1.27))) (uuid 598e9f68-7b85-5fb0-972f-3345238dfc87))
-(text "GNSS, amateur-radio modules, RF switching, and the dedicated radio codec are isolated on the removable daughterboard." (at 20.32 388.62 0) (effects (font (size 1.27 1.27))) (uuid fc2fc0b5-9c22-5a50-814a-ce4be2694b10))
-(text "TCA9548A channels 0/1 isolate the identical 0x3C OLEDs; channels 2/3 isolate the two TPS25751A service buses." (at 20.32 396.24 0) (effects (font (size 1.27 1.27))) (uuid aa719e0f-e657-53dd-ad75-a0b37e5d2259))
-(text "Hardware-gated SERVICE_MUX_RESET_N asserts during every EC reset; firmware selects one TPS25751A channel and validates PD Status 0x35 plus PDO/RDO 0x31/0x32." (at 20.32 403.86 0) (effects (font (size 1.27 1.27))) (uuid fcf75077-4a40-54eb-a161-0a8e2d50dfa9))
-(text "The mainboard OLED and Wi-Fi functions do not depend on radio-daughterboard presence or power." (at 20.32 411.48 0) (effects (font (size 1.27 1.27))) (uuid c08d129f-eae4-5157-a492-745c1e03261d))
-(text "U170 isolates powered-off E-key controls; R198/R199 keep WLAN and Bluetooth disabled until EC firmware explicitly enables them." (at 20.32 419.1 0) (effects (font (size 1.27 1.27))) (uuid b55cc214-7bd5-5b62-a833-09b73852c9b5))
-(text "Channels 4-7 remain unused and explicitly no-connected for future service expansion." (at 20.32 426.72 0) (effects (font (size 1.27 1.27))) (uuid 10738d15-4358-515a-93ce-65902eadc991))
-(text "SUSCLK, SDIO, PCM/I2S, UIM, and vendor-defined E-key pins remain NC for the AX210-class module target." (at 20.32 434.34 0) (effects (font (size 1.27 1.27))) (uuid 0160d63e-9a19-53cf-bd8e-1cd0c703a006))
-(text "The optional-board interface provides independent safe defaults for every radio/GNSS signal." (at 20.32 441.96 0) (effects (font (size 1.27 1.27))) (uuid 41953950-4810-5859-8c51-cfe6cd552e3d))
+(text "NOTES:" (at 20.32 350.52 0) (effects (font (size 1.27 1.27))) (uuid 598e9f68-7b85-5fb0-972f-3345238dfc87))
+(text "M.2 E-key directions are host TX->PET35/37 and PER41/43->host RX; Mu-side TX has 220n AC coupling." (at 20.32 358.14 0) (effects (font (size 1.27 1.27))) (uuid fc2fc0b5-9c22-5a50-814a-ce4be2694b10))
+(text "USB2_P1 carries Bluetooth; default-BIOS HSIO3/REFCLK3/CLKREQ3 carry the E-key PCIe function." (at 20.32 365.76 0) (effects (font (size 1.27 1.27))) (uuid aa719e0f-e657-53dd-ad75-a0b37e5d2259))
+(text "Qualified radio is Intel AX210.NGWGIE.NV M.2 2230 Key-E: Wi-Fi over PCIe and Bluetooth over USB; AX211/CNVio2 is prohibited." (at 20.32 373.38 0) (effects (font (size 1.27 1.27))) (uuid fcf75077-4a40-54eb-a161-0a8e2d50dfa9))
+(text "The OLEDs mount separately in the case. J41/J45 use four-wire GH cables: 1 GND, 2 3V3, 3 SCL, 4 SDA. Check the module labels when wiring." (at 20.32 381 0) (effects (font (size 1.27 1.27))) (uuid c08d129f-eae4-5157-a492-745c1e03261d))
+(text "GNSS, amateur-radio modules, RF switching, and the dedicated radio codec are isolated on the removable daughterboard." (at 20.32 388.62 0) (effects (font (size 1.27 1.27))) (uuid b55cc214-7bd5-5b62-a833-09b73852c9b5))
+(text "TCA9548A channels 0/1 isolate the identical 0x3C OLEDs; channels 2/3 isolate the two TPS25751A service buses." (at 20.32 396.24 0) (effects (font (size 1.27 1.27))) (uuid 10738d15-4358-515a-93ce-65902eadc991))
+(text "Hardware-gated SERVICE_MUX_RESET_N asserts during every EC reset; firmware selects one TPS25751A channel and validates PD Status 0x35 plus PDO/RDO 0x31/0x32." (at 20.32 403.86 0) (effects (font (size 1.27 1.27))) (uuid 0160d63e-9a19-53cf-bd8e-1cd0c703a006))
+(text "The mainboard OLED and Wi-Fi functions do not depend on radio-daughterboard presence or power." (at 20.32 411.48 0) (effects (font (size 1.27 1.27))) (uuid 41953950-4810-5859-8c51-cfe6cd552e3d))
+(text "U170 isolates powered-off E-key controls; R198/R199 keep WLAN and Bluetooth disabled until EC firmware explicitly enables them." (at 20.32 419.1 0) (effects (font (size 1.27 1.27))) (uuid e11c885f-b932-515a-9536-9b2c90a51821))
+(text "Channels 4-7 remain unused and explicitly no-connected for future service expansion." (at 20.32 426.72 0) (effects (font (size 1.27 1.27))) (uuid 2b2c45e0-28cf-5188-8d96-829a33ac28d0))
+(text "SUSCLK, SDIO, PCM/I2S, UIM, and vendor-defined E-key pins remain NC for the AX210-class module target." (at 20.32 434.34 0) (effects (font (size 1.27 1.27))) (uuid 4895a392-8638-539e-b46c-e92438407c0e))
+(text "The optional-board interface provides independent safe defaults for every radio/GNSS signal." (at 20.32 441.96 0) (effects (font (size 1.27 1.27))) (uuid c9e77174-64d2-5c65-9cee-e4afc7987767))
 (sheet_instances
   (path "/c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e"
     (page "8")

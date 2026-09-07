@@ -120,8 +120,8 @@ RP2350_PINS = {
     "48": ("MAKER_VREG_LX", "local"),
     "49": ("MAKER_3V3_CORE", "local"),
     "50": ("MAKER_1V1", "local"),
-    "51": ("MAKER_USB_DM_MCU", "local"),
-    "52": ("MAKER_USB_DP_MCU", "local"),
+    "51": ("MAKER_USB_MCU_DN", "local"),
+    "52": ("MAKER_USB_MCU_DP", "local"),
     "53": ("MAKER_3V3_CORE", "local"),
     "54": ("MAKER_3V3_CORE", "local"),
     "55": ("MAKER_QSPI_SD3", "local"),
@@ -278,26 +278,26 @@ def build(sheet_symbol_uuid):
 
     s.text(20, 363.22, "== Direct internal USB, Pico utility GPIO, reset/boot, and SWD ==")
     usb_pins = usblc6(s, "U900", "USBLC6-2P6 maker USB ESD", 90, 395,
-                      "MAKER_USB_DP", "MAKER_USB_DM", "MAKER_5V_CORE")
+                      "MAKER_USB_DP", "MAKER_USB_DN", "MAKER_5V_CORE")
     s.label(*usb_pins["1"], "MAKER_USB_DP", hier=True)
-    s.label(*usb_pins["3"], "MAKER_USB_DM", hier=True)
+    s.label(*usb_pins["3"], "MAKER_USB_DN", hier=True)
     s.place("U906", "TS3USB30EDGSR", "TS3USB30EDGSR maker USB host-state isolation", 150, 395,
             footprint=FOOTPRINTS["TS3USB30EDGSR"],
             pin_nets={
                 "1": ("GND", "local"),
                 "2": ("MAKER_USB_DP", "hier"), "3": ("", "nc"),
                 "4": ("MAKER_USB_ISO_DP", "local"), "5": ("GND", "local"),
-                "6": ("MAKER_USB_ISO_DM", "local"), "7": ("", "nc"),
-                "8": ("MAKER_USB_DM", "hier"), "9": ("MAKER_USB_OE_N", "local"),
+                "6": ("MAKER_USB_ISO_DN", "local"), "7": ("", "nc"),
+                "8": ("MAKER_USB_DN", "hier"), "9": ("MAKER_USB_OE_N", "local"),
                 "10": ("MAKER_3V3_CORE", "local"),
             }, extra_props={
                 "Manufacturer": "Texas Instruments", "MPN": "TS3USB30EDGSR",
                 "Datasheet": "https://www.ti.com/lit/ds/symlink/ts3usb30e.pdf",
             })
     place_r(s, "R900", "27R USB DP termination", 220, 387.35,
-            ("MAKER_USB_ISO_DP", "local"), ("MAKER_USB_DP_MCU", "local"))
+            ("MAKER_USB_ISO_DP", "local"), ("MAKER_USB_MCU_DP", "local"))
     place_r(s, "R901", "27R USB DM termination", 220, 402.59,
-            ("MAKER_USB_ISO_DM", "local"), ("MAKER_USB_DM_MCU", "local"))
+            ("MAKER_USB_ISO_DN", "local"), ("MAKER_USB_MCU_DN", "local"))
     s.place("Q901", "Q_NMOS_SOT23_GSD", "2N7002 physical host-VBUS USB connect gate", 285, 380,
             footprint=FOOTPRINTS["Q_NMOS"],
             pin_nets={"1": ("INTERNAL_USB_VBUS_VALID", "hier"), "2": ("GND", "local"),

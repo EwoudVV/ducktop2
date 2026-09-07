@@ -116,7 +116,7 @@ def check_connector_and_supply(components) -> None:
             expect(net(components, "J1", pin), "/RADIO_DB_5V", f"J1 5V pin {pin}")
         else:
             want = {
-                5: "/RADIO_CODEC_USB_VBUS", 8: "/RADIO_CODEC_USB_DP", 9: "/RADIO_CODEC_USB_DM",
+                5: "/RADIO_CODEC_USB_VBUS", 8: "/RADIO_CODEC_USB_DP", 9: "/RADIO_CODEC_USB_DN",
                 11: "/RADIO_VHF_UART_TX", 12: "/RADIO_VHF_UART_RX",
                 13: "/RADIO_UHF_UART_TX", 14: "/RADIO_UHF_UART_RX",
                 15: "/RADIO_VHF_PTT_N", 16: "/RADIO_UHF_PTT_N",

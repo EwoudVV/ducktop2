@@ -382,7 +382,7 @@ def run_checks(a: ClosureAudit, skip_pack: bool = False) -> None:
     for ref in ("R254", "C281", "C282", "C284"):
         a.absent(ref)
     a.pin("J58", "1", "GND")
-    a.pin("J58", "2", "/Internal Services/TPAD_CONN_DM")
+    a.pin("J58", "2", "/Internal Services/TPAD_CONN_DN")
     a.pin("J58", "3", "/Internal Services/TPAD_CONN_DP")
     a.pin("J58", "4", "/Internal Services/TPAD_5V")
     a.pin("U64", "5", "/Internal Services/TPAD_ILIM")

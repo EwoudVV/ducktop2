@@ -107,8 +107,8 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
     drain = f"PD{port}_DRAIN_THERMAL"
     cc1_c, cc2_c = f"PD{port}_CC1_CONN", f"PD{port}_CC2_CONN"
     cc1_s, cc2_s = f"PD{port}_CC1_SYS", f"PD{port}_CC2_SYS"
-    dp_c, dm_c = f"PD{port}_DP_CONN", f"PD{port}_DM_CONN"
-    dp_host, dm_host = f"PD{port}_DP_HOST_SWITCHED", f"PD{port}_DM_HOST_SWITCHED"
+    dp_c, dm_c = f"PD{port}_CONN_DP", f"PD{port}_CONN_DN"
+    dp_host, dm_host = f"PD{port}_HOST_SWITCHED_DP", f"PD{port}_HOST_SWITCHED_DN"
     esd_bias = f"PD{port}_CC_ESD_VBIAS"
     cc_fault = f"PD{port}_CC_FAULT_LOCAL_N"
     eeprom_sda, eeprom_scl = f"PD{port}_EEPROM_SDA", f"PD{port}_EEPROM_SCL"
@@ -163,7 +163,7 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
             }, extra_props=props(
                 "Texas Instruments", "TPD4S201RUKR",
                 "https://www.ti.com/lit/ds/symlink/tpd4s201.pdf",
-                ChannelUse="CC1_CC2_AND_USB2_DP_DM;DEAD_BATTERY_RD_ENABLED",
+                ChannelUse="CC1_CC2_AND_USB2_DP_DN;DEAD_BATTERY_RD_ENABLED",
             ))
     capacitor(s, f"C{cbase}", "100n 100V TPD4S201 VBIAS", x0 + 205.74, y0 + 91.44,
               esd_bias, footprint="C_0805", mpn="GRM21BR72A104KA01L")
@@ -456,12 +456,12 @@ def build(sheet_symbol_uuid):
     s.text(20.32, 27.94, "TPS25751A loads a versioned 32KB EEPROM image while powered from dead-battery VBUS; no EC is needed to obtain the first 15V contract.")
     s.text(20.32, 35.56, "The raw 5V attach rail stays below the Type-C pre-attach capacitance limit; large sink bulk is behind the integrated PD switch.")
     add_dual_role_port(s, port=1, jref="J21", host={
-        "dp": "USBC1_DP", "dm": "USBC1_DM",
+        "dp": "USBC1_DP", "dm": "USBC1_DN",
         "sstx_p": "USBC1_SSTX_P", "sstx_n": "USBC1_SSTX_N",
         "ssrx_p": "USBC1_SSRX_P", "ssrx_n": "USBC1_SSRX_N",
     }, x0=20.32, y0=50.8, rbase=2000, cbase=2000, ubase=2000, dbase=2100, ebase=2080)
     add_dual_role_port(s, port=2, jref="J11", host={
-        "dp": "HUB_DS1_DP", "dm": "HUB_DS1_DM",
+        "dp": "HUB_DS1_DP", "dm": "HUB_DS1_DN",
         "sstx_p": None, "sstx_n": None,
         "ssrx_p": None, "ssrx_n": None,
     }, x0=20.32, y0=276.86, rbase=2040, cbase=2040, ubase=2010, dbase=2120, ebase=2090,

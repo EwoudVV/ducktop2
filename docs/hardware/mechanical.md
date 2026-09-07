@@ -2,7 +2,7 @@
 
 the base and lid target is 358 x 248 mm. the final height, cooling stack,
 board supports, and cable installation still need a measured assembly.
-board coordinates below were checked on 4 september 2026.
+board coordinates below were checked on 6 september 2026.
 
 ## recorded parts
 
@@ -25,10 +25,18 @@ with wires. their module bodies are not part of the center-board footprint.
 the floorplan positions remain a packaging sketch until the case mounts
 and cable routes are set.
 
-the BMS is about 62 x 30 mm, with its outline at roughly x=106.7-168.6,
-y=62.552-92.9 in its current file. the radio outline is about 120 x 70 mm,
-at x=20-140, y=20-90 in its file. those are separate layout frames, not
-installed chassis positions. the keyboard also needs an assembly transform.
+the BMS is 61.9 x 30.348 mm. it sits in an open notch at the front center,
+with its components up and its center at x=185. the installed board spans
+x=154.05-215.95 and y=154-184.348. the notch has 1.5 mm inside radii and
+1.5 mm board-to-board clearance. the battery row stays at y=188.
+
+the BMS keeps its own mounting points and needs chassis support. the center
+board's H24 moved to (149,148), outside the notch. H22 is now (105,70).
+the BMS file uses its original coordinates; the installed translation is
+(+47.35,+91.448), with no rotation.
+
+the radio outline is about 120 x 70 mm in its own layout frame. its installed
+position and the keyboard's assembly transform still need the case model.
 
 the working packaging plan puts the cells across the front band and the
 trackpad above them on its own support plate. the keyboard overlaps part of
@@ -41,6 +49,12 @@ the seated module, socket/support plane, TIM, cooler, and keyboard stack
 before setting deck height. plan the inlet/exhaust and verify recirculation.
 Framework 13 hinges are the working choice; use the actual brackets and
 full sweep to place the display cable and case cutouts.
+
+`mechanical/board-layout.svg` shows the current board arrangement. regenerate
+it with `gen/export_board_assembly.py` using KiCad's Python. the exporter
+checks the BMS conductor alignment and the M.2 socket-to-retainer offsets.
+`mechanical/board-placement.json` stores the installed board transforms;
+`mechanical/board-datums.json` is the generated mounting and connector data.
 
 `mechanical/floorplan.json` is the current packaging sketch. the layout
 planner is `mechanical/layout-planner.html`. reconcile its envelopes
@@ -63,7 +77,16 @@ needs its own fit/process check.
 | H3 | Center | NVMe retainer | 279.98 | 116.0 |
 | H4 | Center | Wi-Fi retainer | 261.55 | 167.25 |
 
-the M.2 sockets are MDT420M01001 and MDT420E01001. H3/H4 use the recorded
+the M.2 sockets are MDT420M01001 and MDT420E01001. J10 is at
+(196.43,125.25), rotation 90; J40 is at (228,176.5), rotation 90. their
+courtyards include the complete 2280 and 2230 card areas. the power parts,
+boot button, and programming connector have been moved out of those areas.
+
+the retainer offsets from pad 1, in the socket's local axes, are
+(9.25,83.55) for 2280 and (9.25,33.55) for 2230. these match the Mu reference
+carrier geometry. the exporter checks the offsets using the actual pad rows,
+so changing a socket's rotation cannot silently leave its mounting nut behind.
+ H3/H4 use the recorded
 Mu reference-carrier 2.5 mm-high M2 nut/standoff geometry, with a 2.75 mm
 drill and 5.0 mm solder land. MDT420STD001 has different thread/hole
 geometry and is not interchangeable. retain exact sourcing and sample fit.
@@ -75,16 +98,23 @@ geometry and is not interchangeable. retain exact sourcing and sample fit.
 | H12 | Left | 63.8 | 6.1 |
 | H16 | Left | 5.0 | 12.85 |
 | H14 | Center | 260.0 | 6.0 |
+| H21 | Center | 110.25 | 6.05 |
+| H22 | Center | 105.0 | 70.0 |
+| H23 | Center | 124.1 | 180.4 |
+| H24 | Center | 149.0 | 148.0 |
+| H25 | Center | 208.85 | 4.95 |
+| H26 | Center | 253.15 | 134.5 |
 | H13 | Right | 353.0 | 58.75 |
 | H15 | Right | 353.0 | 19.65 |
 | H17 | Right | 353.0 | 112.05 |
+| H27 | Right | 353.316 | 180.611 |
 
 these are file datums, not approval that the split boards have enough
 supports. review flex, heavy components, connector loads, boss geometry,
 fastening access, and electrical isolation in the chassis model.
 
-the BMS mounting circles are Edge.Cuts geometry and need an installed
-mounting drawing. radio H1-H4 are (24,24), (136,24), (24,86), and (136,86)
+the BMS mounting circles are Edge.Cuts geometry. their installed centers are
+in `mechanical/board-datums.json`. radio H1-H4 are (24,24), (136,24), (24,86), and (136,86)
 in the radio frame; they are different parts from center H1-H4.
 
 ## cables and access

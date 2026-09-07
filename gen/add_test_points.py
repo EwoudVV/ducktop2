@@ -122,6 +122,7 @@ import pcbnew
 b = pcbnew.LoadBoard({out!r})
 for ref, fplibdir, fpname, pos, rot, padnets in {extra!r}:
     fp = pcbnew.FootprintLoad(fplibdir, fpname)
+    fp.SetFPID(pcbnew.LIB_ID("TestPoint", fpname))
     fp.SetReference(ref)
     fp.SetValue(padnets.get("1", ""))
     fp.SetPosition(pcbnew.VECTOR2I(int(pos[0]*1e6), int(pos[1]*1e6)))

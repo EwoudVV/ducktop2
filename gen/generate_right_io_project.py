@@ -39,7 +39,7 @@ def build_right_pd_sheet(sheet_symbol_uuid):
     s.text(20.32, 12.7, "== Right I/O: PD2 dual-role (J11) + source (J12), USB2-only ==")
     pwrin.add_dual_role_port(
         s, port=2, jref="J11", host={
-            "dp": "HUB_DS1_DP", "dm": "HUB_DS1_DM",
+            "dp": "HUB_DS1_DP", "dm": "HUB_DS1_DN",
             "sstx_p": None, "sstx_n": None,
             "ssrx_p": None, "ssrx_n": None,
         }, x0=20.32, y0=50.8, rbase=2040, cbase=2040, ubase=2010, dbase=2120, ebase=2090,

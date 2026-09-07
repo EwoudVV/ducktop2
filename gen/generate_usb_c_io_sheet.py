@@ -129,33 +129,33 @@ def add_hub(s):
              355.6, 144.78, "SYS_3V3", "HUB_PRT_CTL4", a_kind="hier", b_kind="hier",
              mpn="RC0603FR-0710KL")
     unit2 = {
-        "5": ("HUB_DS1_DP", "hier"), "6": ("HUB_DS1_DM", "hier"),
+        "5": ("HUB_DS1_DP", "hier"), "6": ("HUB_DS1_DN", "hier"),
         # DS1 is USB2-only (feeds J11 after the split); SS pins retired.
         "7": ("", "nc"), "8": ("", "nc"),
         "9": ("HUB_VCORE", "local"), "10": ("", "nc"), "11": ("", "nc"),
         "12": ("", "nc"), "13": ("", "nc"),
-        "14": ("HUB_DS2_DP", "local"), "15": ("HUB_DS2_DM", "local"),
+        "14": ("HUB_DS2_DP", "local"), "15": ("HUB_DS2_DN", "local"),
         "16": ("HUB_DS2_TX_RAW_P", "local"), "17": ("HUB_DS2_TX_RAW_N", "local"),
         "18": ("HUB_VCORE", "local"), "19": ("HUB_DS2_SSRX_P", "local"), "20": ("HUB_DS2_SSRX_N", "local"),
     }
     unit3 = {
-        "27": ("HUB_DS3_DP", "local"), "28": ("HUB_DS3_DM", "local"),
+        "27": ("HUB_DS3_DP", "local"), "28": ("HUB_DS3_DN", "local"),
         "29": ("HUB_DS3_TX_RAW_P", "local"), "30": ("HUB_DS3_TX_RAW_N", "local"),
         "31": ("HUB_VCORE", "local"), "32": ("HUB_DS3_SSRX_P", "local"), "33": ("HUB_DS3_SSRX_N", "local"),
-        "34": ("HUB_DS4_DP", "hier"), "35": ("HUB_DS4_DM", "hier"),
+        "34": ("HUB_DS4_DP", "hier"), "35": ("HUB_DS4_DN", "hier"),
         # DS4 is USB2-only (feeds J12 on the right board); SS pins retired.
         "36": ("", "nc"), "37": ("", "nc"),
         "38": ("HUB_VCORE", "local"), "39": ("", "nc"), "40": ("", "nc"),
     }
     unit4 = {
-        "41": ("HUB_DIS6_DM", "local"), "42": ("HUB_DIS6_DP", "local"),
-        "81": ("HUB_DIS5_DP", "local"), "82": ("HUB_DIS5_DM", "local"),
+        "41": ("HUB_DIS6_DN", "local"), "42": ("HUB_DIS6_DP", "local"),
+        "81": ("HUB_DIS5_DP", "local"), "82": ("HUB_DIS5_DN", "local"),
         "83": ("HUB_DIS5_TX_P", "local"), "84": ("HUB_DIS5_TX_N", "local"),
         "85": ("HUB_VCORE", "local"),
         "86": ("HUB_DIS5_RX_P", "local"), "87": ("HUB_DIS5_RX_N", "local"),
     }
     unit5 = {
-        "89": ("USBC2_DP", "hier"), "90": ("USBC2_DM", "hier"),
+        "89": ("USBC2_DP", "hier"), "90": ("USBC2_DN", "hier"),
         "91": ("HUB_UP_TX_RAW_P", "local"), "92": ("HUB_UP_TX_RAW_N", "local"),
         "93": ("HUB_VCORE", "local"), "94": ("USBC2_SSTX_P", "hier"), "95": ("USBC2_SSTX_N", "hier"),
     }
@@ -217,7 +217,7 @@ def add_usba_ports(s):
               mpn="GRM21BR71A106KA73L")
     capacitor(s, "C1851", "100n USB3-A VBUS HF", 80, 385.19, "J24_5V_PRE")
     usblc6_usba(s, "U1801", "USBLC6-2P6 USB3-A D+/D- ESD", 160, 332.74,
-                "HUB_DIS5_DP", "HUB_DIS5_DM", "GND")
+                "HUB_DIS5_DP", "HUB_DIS5_DN", "GND")
     s.place("U1802", "TPD4EUSB30", "TPD4E05U06 USB3-A SuperSpeed ESD", 250, 332.74,
             footprint=FOOTPRINTS["TPD4E05U06DQA"], pin_nets={
                 "1": ("HUB_DIS5_TX_P", "local"), "2": ("HUB_DIS5_TX_N", "local"),
@@ -226,18 +226,18 @@ def add_usba_ports(s):
                 "7": ("", "nc"), "8": ("GND", "local"),
                 "9": ("", "nc"), "10": ("", "nc"),
             }, extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPD4E05U06DQAR"})
-    s.place("C1852", "C", "100n C0G USB3-A SSTX+ series AC", 250, 344.17,
+    s.place("C1852", "C", "100n 16V X7R USB3-A SSTX+ series AC", 250, 344.17,
             footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("HUB_DIS5_TX_P", "local"), "2": ("J24_SSTX_P", "local")},
-            extra_props=props("Murata", "GRM1555C1H101JA01D"))
-    s.place("C1853", "C", "100n C0G USB3-A SSTX- series AC", 250, 355.6,
+            extra_props=props("Murata", "GRM155R71C104KA88D"))
+    s.place("C1853", "C", "100n 16V X7R USB3-A SSTX- series AC", 250, 355.6,
             footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("HUB_DIS5_TX_N", "local"), "2": ("J24_SSTX_N", "local")},
-            extra_props=props("Murata", "GRM1555C1H101JA01D"))
+            extra_props=props("Murata", "GRM155R71C104KA88D"))
     s.place("J24", "USB3_A", "USB 3.0 Type-A internal header (hub DIS5)", 340, 340.36,
             footprint="Connector_USB:USB_A_Receptacle_XKB_U231-091N-4BLRA00-S",
             pin_nets={
-                "1": ("J24_5V_PRE", "local"), "2": ("HUB_DIS5_DM", "local"),
+                "1": ("J24_5V_PRE", "local"), "2": ("HUB_DIS5_DN", "local"),
                 "3": ("HUB_DIS5_DP", "local"), "4": ("GND", "local"),
                 "5": ("HUB_DIS5_RX_N", "local"), "6": ("HUB_DIS5_RX_P", "local"),
                 "7": ("GND", "local"), "8": ("J24_SSTX_N", "local"),
@@ -258,11 +258,11 @@ def add_usba_ports(s):
               mpn="GRM21BR71A106KA73L")
     capacitor(s, "C1855", "100n USB2-A VBUS HF", 80, 453.77, "J25_5V_PRE")
     usblc6_usba(s, "U1804", "USBLC6-2P6 USB2-A D+/D- ESD", 160, 401.32,
-                "HUB_DIS6_DP", "HUB_DIS6_DM", "GND")
+                "HUB_DIS6_DP", "HUB_DIS6_DN", "GND")
     s.place("J25", "USB_A", "USB 2.0 Type-A internal header (hub DIS6)", 340, 406.4,
             footprint="Connector_USB:USB_A_Receptacle_GCT_USB1046",
             pin_nets={
-                "1": ("J25_5V_PRE", "local"), "2": ("HUB_DIS6_DM", "local"),
+                "1": ("J25_5V_PRE", "local"), "2": ("HUB_DIS6_DN", "local"),
                 "3": ("HUB_DIS6_DP", "local"), "4": ("GND", "local"),
                 "SH": ("GND", "local"),
             }, extra_props=props("GCT", "USB1046-GF-L",
@@ -319,7 +319,7 @@ def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False, remote_data
     DP/DM and PRT_CTL cross an FPC, so they are hierarchical nets."""
     ctl = f"HUB_PRT_CTL{port}"
     dp = f"HUB_DS{port}_DP"
-    dm = f"HUB_DS{port}_DM"
+    dm = f"HUB_DS{port}_DN"
     data_kind = "hier" if remote_data else "local"
     host_tx_p = f"HUB_DS{port}_SSTX_P"
     host_tx_n = f"HUB_DS{port}_SSTX_N"

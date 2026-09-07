@@ -69,7 +69,28 @@
           "thermal_relief_spoke_width": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        },
+        {
+          "gap": 0.1524,
+          "via_gap": 0.25,
+          "width": 0.183
+        },
+        {
+          "gap": 0.2032,
+          "via_gap": 0.25,
+          "width": 0.1796
+        },
+        {
+          "gap": 0.254,
+          "via_gap": 0.25,
+          "width": 0.1521
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -203,7 +224,19 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.091,
+        0.111,
+        0.114,
+        0.1521,
+        0.1796,
+        0.183,
+        0.25,
+        0.3,
+        0.4,
+        0.6,
+        1.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -382,25 +415,6 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.15,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2248,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "USB2_45",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": -1,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2248,
-        "tuning_profile": "",
-        "via_diameter": 0.6,
-        "via_drill": 0.3,
-        "wire_width": 6
       }
     ],
     "meta": {
@@ -411,79 +425,99 @@
     "netclass_patterns": [
       {
         "netclass": "DIFF_90",
-        "pattern": "/USBC1_SSRX_N"
+        "pattern": "/PD1 Dual-Role/PD1_RX1_N"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/USBC1_SSRX_P"
+        "pattern": "/PD1 Dual-Role/PD1_RX1_P"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/USBC1_SSTX_N"
+        "pattern": "/PD1 Dual-Role/PD1_RX2_N"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/USBC1_SSTX_P"
+        "pattern": "/PD1 Dual-Role/PD1_RX2_P"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/USBC2_SSRX_N"
+        "pattern": "/HUB_DS1_DN"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/USBC2_SSRX_P"
-      },
-      {
-        "netclass": "DIFF_90",
-        "pattern": "/USBC2_SSTX_N"
-      },
-      {
-        "netclass": "DIFF_90",
-        "pattern": "/USBC2_SSTX_P"
-      },
-      {
-        "netclass": "POWER_HI",
-        "pattern": "/PD1_VBUS_RAW"
-      },
-      {
-        "netclass": "POWER_HI",
-        "pattern": "/SYS_3V3"
-      },
-      {
-        "netclass": "POWER_HI",
-        "pattern": "/VSYS"
-      },
-      {
-        "netclass": "POWER_MID",
-        "pattern": "/MCU_3V3"
-      },
-      {
-        "netclass": "POWER_MID",
-        "pattern": "/USB_PORT_5V"
-      },
-      {
-        "netclass": "USB2_45",
-        "pattern": "/HUB_DS1_DM"
-      },
-      {
-        "netclass": "USB2_45",
         "pattern": "/HUB_DS1_DP"
       },
       {
-        "netclass": "USB2_45",
-        "pattern": "/USBC1_DM"
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS4_DN"
       },
       {
-        "netclass": "USB2_45",
-        "pattern": "/USBC1_DP"
+        "netclass": "DIFF_90",
+        "pattern": "/HUB_DS4_DP"
       },
       {
-        "netclass": "USB2_45",
-        "pattern": "/USBC2_DM"
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_CONN_DN"
       },
       {
-        "netclass": "USB2_45",
-        "pattern": "/USBC2_DP"
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_CONN_DP"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_CTX1_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_CTX1_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_CTX2_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_CTX2_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_HOST_SWITCHED_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_HOST_SWITCHED_DP"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_SSRX_RAW_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_SSRX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_TX1_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_TX1_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_TX2_N"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/PD1 Dual-Role/PD1_TX2_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USB Hub + Ports/HUB_DIS5_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USB Hub + Ports/HUB_DIS5_DP"
       },
       {
         "netclass": "DIFF_90",
@@ -500,6 +534,22 @@
       {
         "netclass": "DIFF_90",
         "pattern": "/USB Hub + Ports/HUB_DIS5_TX_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USB Hub + Ports/HUB_DIS6_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USB Hub + Ports/HUB_DIS6_DP"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USB Hub + Ports/HUB_DS2_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USB Hub + Ports/HUB_DS2_DP"
       },
       {
         "netclass": "DIFF_90",
@@ -524,6 +574,14 @@
       {
         "netclass": "DIFF_90",
         "pattern": "/USB Hub + Ports/HUB_DS2_TX_RAW_P"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USB Hub + Ports/HUB_DS3_DN"
+      },
+      {
+        "netclass": "DIFF_90",
+        "pattern": "/USB Hub + Ports/HUB_DS3_DP"
       },
       {
         "netclass": "DIFF_90",
@@ -631,66 +689,138 @@
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_CTX1_RAW_N"
+        "pattern": "/USBC1_DN"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_CTX1_RAW_P"
+        "pattern": "/USBC1_DP"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_CTX2_RAW_N"
+        "pattern": "/USBC1_SSRX_N"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_CTX2_RAW_P"
+        "pattern": "/USBC1_SSRX_P"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_RX1_N"
+        "pattern": "/USBC1_SSTX_N"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_RX1_P"
+        "pattern": "/USBC1_SSTX_P"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_RX2_N"
+        "pattern": "/USBC2_DN"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_RX2_P"
+        "pattern": "/USBC2_DP"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_SSRX_RAW_N"
+        "pattern": "/USBC2_SSRX_N"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_SSRX_RAW_P"
+        "pattern": "/USBC2_SSRX_P"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_TX1_N"
+        "pattern": "/USBC2_SSTX_N"
       },
       {
         "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_TX1_P"
+        "pattern": "/USBC2_SSTX_P"
       },
       {
-        "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_TX2_N"
+        "netclass": "POWER_HI",
+        "pattern": "/AUX_DC_RAW"
       },
       {
-        "netclass": "DIFF_90",
-        "pattern": "/PD1 Dual-Role/PD1_TX2_P"
+        "netclass": "POWER_HI",
+        "pattern": "/PD1 Dual-Role/AUX_DC_TERM"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/PD1 Dual-Role/PD1_PPHV"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/PD1 Dual-Role/PD1_VBUS_GATED"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/PD1_VBUS_RAW"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/SYS_3V3"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/USB_PD_SELECTED"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/USB_PORT_5V"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/VSYS"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/MCU_3V3"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J22_5V_PRE"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J22_VBUS"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J22_VBUS_POWER"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J22_VBUS_SYS"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J23_5V_PRE"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J23_VBUS"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J23_VBUS_POWER"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J23_VBUS_SYS"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J24_5V_PRE"
+      },
+      {
+        "netclass": "POWER_MID",
+        "pattern": "/USB Hub + Ports/J25_5V_PRE"
       }
     ]
   },
   "pcbnew": {
     "last_paths": {
       "idf": "",
-      "netlist": "",
+      "netlist": "../.workbench/routing-prep-2026-09-06/left-usb-ready.net",
       "plot": "",
       "specctra_dsn": "",
       "vrml": ""

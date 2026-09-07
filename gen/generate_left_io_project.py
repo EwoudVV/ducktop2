@@ -56,7 +56,7 @@ def build_left_pd_sheet(sheet_symbol_uuid):
     s.text(20.32, 12.7, "== Left I/O: PD1 dual-role port (J21) + AUX input (J190) ==")
     pwrin.add_dual_role_port(
         s, port=1, jref="J21", host={
-            "dp": "USBC1_DP", "dm": "USBC1_DM",
+            "dp": "USBC1_DP", "dm": "USBC1_DN",
             "sstx_p": "USBC1_SSTX_P", "sstx_n": "USBC1_SSTX_N",
             "ssrx_p": "USBC1_SSRX_P", "ssrx_n": "USBC1_SSRX_N",
         }, x0=20.32, y0=50.8, rbase=2000, cbase=2000, ubase=2000, dbase=2100, ebase=2080)

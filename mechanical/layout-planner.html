@@ -607,58 +607,2310 @@
     const lightTextKinds = new Set(["keepout", "ghost"]);
 
     const defaultState = {
-      version: 3,
-      mode: "select",
-      grid: 5,
-      snap: true,
-      view: { x: -18, y: -18, w: 625, h: 575 },
-      planes: {
-        base: { label: "Base / Keyboard Deck", x: 0, y: 0, w: 358, h: 248 },
-        lid: { label: "Lid / Direct-eDP Display", x: 0, y: 288, w: 358, h: 248 },
-        tray: { label: "Parking / Unplaced", x: 398, y: 0, w: 190, h: 536 }
-      },
-      selectedIds: [],
-      parts: [
-        { id: "mainboard-guide", name: "mainboard outline (358x185, left fin-stack notch)", zone: "base", x: 0, y: 0, w: 358, h: 185, kind: "ghost" },
-        { id: "keyboard", name: "MX ULP keyboard PCB rev A", zone: "base", x: 42.3, y: 20, w: 273.5, h: 80, kind: "input" },
-        { id: "keyboard-ffc", name: "J310 mainboard keyboard FFC connector", zone: "base", x: 320, y: 50, w: 18, h: 8, kind: "port" },
-        { id: "battery-1", name: "3.7V cell A (measured)", zone: "base", x: 25, y: 188, w: 100, h: 60, kind: "power" },
-        { id: "battery-2", name: "3.7V cell B (measured)", zone: "base", x: 130, y: 188, w: 100, h: 60, kind: "power" },
-        { id: "battery-3", name: "3.7V cell C (measured)", zone: "base", x: 235, y: 188, w: 100, h: 60, kind: "power" },
-        { id: "trackpad-target", name: "JOMAA trackpad (140 W x 105 D mm)", zone: "base", x: 125, y: 143, w: 140, h: 105, kind: "input" },
-        { id: "tpad-usbc-conn", name: "trackpad USB-C receptacle", zone: "base", x: 185, y: 130, w: 18, h: 10, kind: "port" },
-        { id: "speaker-left", name: "front speaker L", zone: "base", x: 3, y: 205, w: 18, h: 38, kind: "audio" },
-        { id: "speaker-right", name: "front speaker R", zone: "base", x: 337, y: 205, w: 18, h: 38, kind: "audio" },
-        { id: "left-ports", name: "left side connector corridor", zone: "base", x: 0, y: 20, w: 10, h: 160, kind: "port" },
-        { id: "right-ports", name: "right side connector corridor", zone: "base", x: 348, y: 20, w: 10, h: 160, kind: "port" },
-        { id: "battery-connector", name: "J2 Mega-Fit battery connector", zone: "base", x: 95, y: 165, w: 25.8, h: 15, kind: "power" },
-        { id: "rear-antennas", name: "rear antenna connector recess", zone: "base", x: 15, y: 231, w: 86, h: 17, kind: "rf" },
-        { id: "hinge-left", name: "Framework 13 hinge keepout L (module ~30x12 + margin)", zone: "base", x: 8, y: 0, w: 40, h: 20, kind: "keepout" },
-        { id: "hinge-right", name: "Framework 13 hinge keepout R (module ~30x12 + margin)", zone: "base", x: 310, y: 0, w: 40, h: 20, kind: "keepout" },
-        { id: "mu-module", name: "LattePanda Mu carrier (77x65; drag to upper middle)", zone: "base", x: 180, y: 30, w: 77, h: 65, kind: "board" },
-        { id: "cold-plate", name: "Mu copper cold plate (74x64)", zone: "base", x: 180, y: 30, w: 74, h: 64, kind: "thermal" },
-        { id: "heatpipe", name: "121721 heatpipe to left fin stack", zone: "base", x: 85, y: 60, w: 150, h: 8.1, kind: "thermal" },
-        { id: "fin-stack", name: "SKV505014-AL fin stack (at board notch)", zone: "base", x: 70, y: 35, w: 50, h: 50, kind: "thermal" },
-        { id: "blower", name: "12V Delta blower (45x45)", zone: "base", x: 72, y: 90, w: 45, h: 45, kind: "thermal" },
-        { id: "exhaust", name: "rear exhaust opening keepout", zone: "base", x: 70, y: 0, w: 50, h: 12, kind: "thermal" },
-        { id: "m2-nvme", name: "J10 M.2 2280 NVMe (socket 22x12, card 80x22)", zone: "base", x: 215, y: 110, w: 80, h: 22, kind: "board" },
-        { id: "m2-wifi", name: "J40 M.2 E-key Wi-Fi (2230 card)", zone: "base", x: 265, y: 85, w: 30, h: 22, kind: "board" },
-        { id: "oled-a", name: "SSD1306 0.96in OLED A (J41)", zone: "base", x: 310, y: 155, w: 27.3, h: 27.3, kind: "display" },
-        { id: "oled-b", name: "SSD1306 0.96in OLED B (J45)", zone: "base", x: 280, y: 155, w: 27.3, h: 27.3, kind: "display" },
-        { id: "radio-daughterboard", name: "radio/GNSS/audio daughterboard PCB (120x40.5 over J2300)", zone: "base", x: 288.4, y: 149.1, w: 120, h: 40.5, kind: "board" },
-        { id: "ethernet-jack", name: "J500 JXD1-1022NL recessed Ethernet jack", zone: "base", x: 337.2, y: 104.0, w: 26.0, h: 17.6, kind: "port" },
-        { id: "usb-c-right", name: "J11 right USB-C receptacle (board edge)", zone: "base", x: 347.4, y: 93.0, w: 9.2, h: 8.5, kind: "port" },
-        { id: "usb-c-left-1", name: "J22 left USB-C receptacle #1 (board edge)", zone: "base", x: 4.5, y: 5.9, w: 9.2, h: 8.5, kind: "port" },
-        { id: "usb-c-left-2", name: "J23 left USB-C receptacle #2 (board edge)", zone: "base", x: 4.5, y: 48.0, w: 9.2, h: 8.5, kind: "port" },
-        { id: "headphone-jack", name: "J422 3.5mm headphone jack (top edge)", zone: "base", x: 50.0, y: 2.0, w: 9.2, h: 19.0, kind: "audio" },
-        { id: "fan-connector", name: "J52 12V Delta blower fan connector", zone: "base", x: 61.0, y: 120.0, w: 9.5, h: 6.4, kind: "port" },
-        { id: "speaker-connector", name: "J420 front speaker connector", zone: "base", x: 18.0, y: 180.0, w: 7.0, h: 6.4, kind: "audio" },
-        { id: "trackpad-lands", name: "J58 trackpad USB2 solder lands", zone: "base", x: 171.2, y: 130.0, w: 14.0, h: 8.0, kind: "port" },
-        { id: "microphone", name: "MK430 IM68A130V01 MEMS microphone (acoustic port)", zone: "base", x: 40.0, y: 110.0, w: 4.0, h: 3.0, kind: "audio" },
-        { id: "headphone-amp", name: "U425 TPA6130A2 headphone amplifier", zone: "base", x: 140.0, y: 158.0, w: 5.3, h: 5.3, kind: "board" },
-        { id: "panel-outline", name: "B160QAN03.K panel (measured)", zone: "lid", x: 3, y: 10.5, w: 352, h: 227, kind: "display" },
-        { id: "panel-active", name: "2560x1600 active area (approximate)", zone: "lid", x: 6.5, y: 16.5, w: 345, h: 215, kind: "ghost" }
-      ]    };
+ "version": 5,
+ "mode": "select",
+ "grid": 5,
+ "snap": true,
+ "view": {
+  "x": -44.8,
+  "y": -20,
+  "w": 447.6,
+  "h": 288
+ },
+ "planes": {
+  "base": {
+   "label": "Base / Keyboard Deck",
+   "x": 0,
+   "y": 0,
+   "w": 358,
+   "h": 248
+  },
+  "lid": {
+   "label": "Lid / Direct-eDP Display",
+   "x": 0,
+   "y": 288,
+   "w": 358,
+   "h": 248
+  },
+  "tray": {
+   "label": "Parking / Unplaced",
+   "x": 398,
+   "y": 0,
+   "w": 190,
+   "h": 536
+  }
+ },
+ "selectedIds": [],
+ "parts": [
+  {
+   "id": "left-pcb",
+   "name": "left pcb",
+   "kind": "board",
+   "zone": "base",
+   "x": 0.0,
+   "y": 0.0,
+   "w": 70.0,
+   "h": 185.0,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "outline": [
+    [
+     12.0,
+     18.0
+    ],
+    [
+     48.0,
+     18.0
+    ],
+    [
+     48.0,
+     0.0
+    ],
+    [
+     70.0,
+     0.0
+    ],
+    [
+     70.0,
+     185.0
+    ],
+    [
+     0.0,
+     185.0
+    ],
+    [
+     0.0,
+     0.0
+    ],
+    [
+     12.0,
+     0.0
+    ]
+   ],
+   "outlineHoles": []
+  },
+  {
+   "id": "center-pcb",
+   "name": "center pcb",
+   "kind": "board",
+   "zone": "base",
+   "x": 70.0,
+   "y": 0.0,
+   "w": 230.0,
+   "h": 185.0,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "outline": [
+    [
+     230.0,
+     185.0
+    ],
+    [
+     147.45,
+     185.0
+    ],
+    [
+     147.45,
+     154.0
+    ],
+    [
+     147.447688,
+     153.882129
+    ],
+    [
+     147.41081,
+     153.649291
+    ],
+    [
+     147.337962,
+     153.425087
+    ],
+    [
+     147.230938,
+     153.21504
+    ],
+    [
+     147.092372,
+     153.024322
+    ],
+    [
+     146.925678,
+     152.857628
+    ],
+    [
+     146.73496,
+     152.719062
+    ],
+    [
+     146.524913,
+     152.612038
+    ],
+    [
+     146.300709,
+     152.53919
+    ],
+    [
+     146.067871,
+     152.502312
+    ],
+    [
+     145.95,
+     152.5
+    ],
+    [
+     84.05,
+     152.5
+    ],
+    [
+     83.932129,
+     152.502312
+    ],
+    [
+     83.699291,
+     152.53919
+    ],
+    [
+     83.475087,
+     152.612038
+    ],
+    [
+     83.26504,
+     152.719062
+    ],
+    [
+     83.074322,
+     152.857628
+    ],
+    [
+     82.907628,
+     153.024322
+    ],
+    [
+     82.769062,
+     153.21504
+    ],
+    [
+     82.662038,
+     153.425087
+    ],
+    [
+     82.58919,
+     153.649291
+    ],
+    [
+     82.552312,
+     153.882129
+    ],
+    [
+     82.55,
+     154.0
+    ],
+    [
+     82.55,
+     185.0
+    ],
+    [
+     0.0,
+     185.0
+    ],
+    [
+     0.0,
+     0.0
+    ],
+    [
+     230.0,
+     0.0
+    ]
+   ],
+   "outlineHoles": []
+  },
+  {
+   "id": "right-pcb",
+   "name": "right pcb",
+   "kind": "board",
+   "zone": "base",
+   "x": 300.0,
+   "y": 0.0,
+   "w": 58.0,
+   "h": 185.0,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "outline": [
+    [
+     10.0,
+     18.0
+    ],
+    [
+     46.0,
+     18.0
+    ],
+    [
+     46.0,
+     0.0
+    ],
+    [
+     58.0,
+     0.0
+    ],
+    [
+     58.0,
+     88.0
+    ],
+    [
+     52.78,
+     88.0
+    ],
+    [
+     52.78,
+     107.0
+    ],
+    [
+     58.0,
+     107.0
+    ],
+    [
+     58.0,
+     185.0
+    ],
+    [
+     0.0,
+     185.0
+    ],
+    [
+     0.0,
+     0.0
+    ],
+    [
+     10.0,
+     0.0
+    ]
+   ],
+   "outlineHoles": []
+  },
+  {
+   "id": "bms-pcb",
+   "name": "bms pcb",
+   "kind": "board",
+   "zone": "base",
+   "x": 154.05,
+   "y": 154.0,
+   "w": 61.89999999999998,
+   "h": 30.348000000000013,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "outline": [
+    [
+     61.522519,
+     0.002758
+    ],
+    [
+     61.656655,
+     0.046341
+    ],
+    [
+     61.770758,
+     0.129242
+    ],
+    [
+     61.853659,
+     0.243345
+    ],
+    [
+     61.897242,
+     0.377481
+    ],
+    [
+     61.9,
+     0.448
+    ],
+    [
+     61.898,
+     29.9
+    ],
+    [
+     61.895242,
+     29.970519
+    ],
+    [
+     61.851659,
+     30.104655
+    ],
+    [
+     61.768758,
+     30.218758
+    ],
+    [
+     61.654655,
+     30.301659
+    ],
+    [
+     61.520519,
+     30.345242
+    ],
+    [
+     61.45,
+     30.348
+    ],
+    [
+     0.448,
+     30.346
+    ],
+    [
+     0.377481,
+     30.343242
+    ],
+    [
+     0.243345,
+     30.299659
+    ],
+    [
+     0.129242,
+     30.216758
+    ],
+    [
+     0.046341,
+     30.102655
+    ],
+    [
+     0.002758,
+     29.968519
+    ],
+    [
+     0.0,
+     29.898
+    ],
+    [
+     0.0,
+     0.448
+    ],
+    [
+     0.003235,
+     0.377443
+    ],
+    [
+     0.047581,
+     0.24343
+    ],
+    [
+     0.130926,
+     0.129503
+    ],
+    [
+     0.245221,
+     0.046663
+    ],
+    [
+     0.379429,
+     0.002912
+    ],
+    [
+     0.45,
+     0.0
+    ],
+    [
+     61.452,
+     0.0
+    ]
+   ],
+   "outlineHoles": [
+    [
+     [
+      59.766403,
+      26.885941
+     ],
+     [
+      59.526229,
+      26.934973
+     ],
+     [
+      59.297031,
+      27.021896
+     ],
+     [
+      59.084744,
+      27.14446
+     ],
+     [
+      58.894867,
+      27.29949
+     ],
+     [
+      58.732317,
+      27.482971
+     ],
+     [
+      58.601305,
+      27.69015
+     ],
+     [
+      58.505223,
+      27.915663
+     ],
+     [
+      58.44656,
+      28.153667
+     ],
+     [
+      58.426836,
+      28.398
+     ],
+     [
+      58.44656,
+      28.642333
+     ],
+     [
+      58.505223,
+      28.880337
+     ],
+     [
+      58.601305,
+      29.10585
+     ],
+     [
+      58.732317,
+      29.313029
+     ],
+     [
+      58.894867,
+      29.49651
+     ],
+     [
+      59.084744,
+      29.65154
+     ],
+     [
+      59.297031,
+      29.774104
+     ],
+     [
+      59.526229,
+      29.861027
+     ],
+     [
+      59.766403,
+      29.910059
+     ],
+     [
+      60.011332,
+      29.919929
+     ],
+     [
+      60.254672,
+      29.890382
+     ],
+     [
+      60.490122,
+      29.822184
+     ],
+     [
+      60.711582,
+      29.717099
+     ],
+     [
+      60.913318,
+      29.577851
+     ],
+     [
+      61.090105,
+      29.408045
+     ],
+     [
+      61.237364,
+      29.212079
+     ],
+     [
+      61.35128,
+      28.99503
+     ],
+     [
+      61.428904,
+      28.762517
+     ],
+     [
+      61.468225,
+      28.520564
+     ],
+     [
+      61.470691,
+      28.398
+     ],
+     [
+      61.468225,
+      28.275436
+     ],
+     [
+      61.428904,
+      28.033483
+     ],
+     [
+      61.35128,
+      27.80097
+     ],
+     [
+      61.237364,
+      27.583921
+     ],
+     [
+      61.090105,
+      27.387955
+     ],
+     [
+      60.913318,
+      27.218149
+     ],
+     [
+      60.711582,
+      27.078901
+     ],
+     [
+      60.490122,
+      26.973816
+     ],
+     [
+      60.254672,
+      26.905618
+     ],
+     [
+      60.011332,
+      26.876071
+     ]
+    ],
+    [
+     [
+      31.316403,
+      26.735941
+     ],
+     [
+      31.076229,
+      26.784973
+     ],
+     [
+      30.847031,
+      26.871896
+     ],
+     [
+      30.634744,
+      26.99446
+     ],
+     [
+      30.444867,
+      27.14949
+     ],
+     [
+      30.282317,
+      27.332971
+     ],
+     [
+      30.151305,
+      27.54015
+     ],
+     [
+      30.055223,
+      27.765663
+     ],
+     [
+      29.99656,
+      28.003667
+     ],
+     [
+      29.976836,
+      28.248
+     ],
+     [
+      29.99656,
+      28.492333
+     ],
+     [
+      30.055223,
+      28.730337
+     ],
+     [
+      30.151305,
+      28.95585
+     ],
+     [
+      30.282317,
+      29.163029
+     ],
+     [
+      30.444867,
+      29.34651
+     ],
+     [
+      30.634744,
+      29.50154
+     ],
+     [
+      30.847031,
+      29.624104
+     ],
+     [
+      31.076229,
+      29.711027
+     ],
+     [
+      31.316403,
+      29.760059
+     ],
+     [
+      31.561332,
+      29.769929
+     ],
+     [
+      31.804672,
+      29.740382
+     ],
+     [
+      32.040122,
+      29.672184
+     ],
+     [
+      32.261582,
+      29.567099
+     ],
+     [
+      32.463318,
+      29.427851
+     ],
+     [
+      32.640105,
+      29.258045
+     ],
+     [
+      32.787364,
+      29.062079
+     ],
+     [
+      32.90128,
+      28.84503
+     ],
+     [
+      32.978904,
+      28.612517
+     ],
+     [
+      33.018225,
+      28.370564
+     ],
+     [
+      33.020691,
+      28.248
+     ],
+     [
+      33.018225,
+      28.125436
+     ],
+     [
+      32.978904,
+      27.883483
+     ],
+     [
+      32.90128,
+      27.65097
+     ],
+     [
+      32.787364,
+      27.433921
+     ],
+     [
+      32.640105,
+      27.237955
+     ],
+     [
+      32.463318,
+      27.068149
+     ],
+     [
+      32.261582,
+      26.928901
+     ],
+     [
+      32.040122,
+      26.823816
+     ],
+     [
+      31.804672,
+      26.755618
+     ],
+     [
+      31.561332,
+      26.726071
+     ]
+    ],
+    [
+     [
+      49.416403,
+      10.235941
+     ],
+     [
+      49.176229,
+      10.284973
+     ],
+     [
+      48.947031,
+      10.371896
+     ],
+     [
+      48.734744,
+      10.49446
+     ],
+     [
+      48.544867,
+      10.64949
+     ],
+     [
+      48.382317,
+      10.832971
+     ],
+     [
+      48.251305,
+      11.04015
+     ],
+     [
+      48.155223,
+      11.265663
+     ],
+     [
+      48.09656,
+      11.503667
+     ],
+     [
+      48.076836,
+      11.748
+     ],
+     [
+      48.09656,
+      11.992333
+     ],
+     [
+      48.155223,
+      12.230337
+     ],
+     [
+      48.251305,
+      12.45585
+     ],
+     [
+      48.382317,
+      12.663029
+     ],
+     [
+      48.544867,
+      12.84651
+     ],
+     [
+      48.734744,
+      13.00154
+     ],
+     [
+      48.947031,
+      13.124104
+     ],
+     [
+      49.176229,
+      13.211027
+     ],
+     [
+      49.416403,
+      13.260059
+     ],
+     [
+      49.661332,
+      13.269929
+     ],
+     [
+      49.904672,
+      13.240382
+     ],
+     [
+      50.140122,
+      13.172184
+     ],
+     [
+      50.361582,
+      13.067099
+     ],
+     [
+      50.563318,
+      12.927851
+     ],
+     [
+      50.740105,
+      12.758045
+     ],
+     [
+      50.887364,
+      12.562079
+     ],
+     [
+      51.00128,
+      12.34503
+     ],
+     [
+      51.078904,
+      12.112517
+     ],
+     [
+      51.118225,
+      11.870564
+     ],
+     [
+      51.120691,
+      11.748
+     ],
+     [
+      51.118225,
+      11.625436
+     ],
+     [
+      51.078904,
+      11.383483
+     ],
+     [
+      51.00128,
+      11.15097
+     ],
+     [
+      50.887364,
+      10.933921
+     ],
+     [
+      50.740105,
+      10.737955
+     ],
+     [
+      50.563318,
+      10.568149
+     ],
+     [
+      50.361582,
+      10.428901
+     ],
+     [
+      50.140122,
+      10.323816
+     ],
+     [
+      49.904672,
+      10.255618
+     ],
+     [
+      49.661332,
+      10.226071
+     ]
+    ],
+    [
+     [
+      2.016403,
+      7.985941
+     ],
+     [
+      1.776229,
+      8.034973
+     ],
+     [
+      1.547031,
+      8.121896
+     ],
+     [
+      1.334744,
+      8.24446
+     ],
+     [
+      1.144867,
+      8.39949
+     ],
+     [
+      0.982317,
+      8.582971
+     ],
+     [
+      0.851305,
+      8.79015
+     ],
+     [
+      0.755223,
+      9.015663
+     ],
+     [
+      0.69656,
+      9.253667
+     ],
+     [
+      0.676836,
+      9.498
+     ],
+     [
+      0.69656,
+      9.742333
+     ],
+     [
+      0.755223,
+      9.980337
+     ],
+     [
+      0.851305,
+      10.20585
+     ],
+     [
+      0.982317,
+      10.413029
+     ],
+     [
+      1.144867,
+      10.59651
+     ],
+     [
+      1.334744,
+      10.75154
+     ],
+     [
+      1.547031,
+      10.874104
+     ],
+     [
+      1.776229,
+      10.961027
+     ],
+     [
+      2.016403,
+      11.010059
+     ],
+     [
+      2.261332,
+      11.019929
+     ],
+     [
+      2.504672,
+      10.990382
+     ],
+     [
+      2.740122,
+      10.922184
+     ],
+     [
+      2.961582,
+      10.817099
+     ],
+     [
+      3.163318,
+      10.677851
+     ],
+     [
+      3.340105,
+      10.508045
+     ],
+     [
+      3.487364,
+      10.312079
+     ],
+     [
+      3.60128,
+      10.09503
+     ],
+     [
+      3.678904,
+      9.862517
+     ],
+     [
+      3.718225,
+      9.620564
+     ],
+     [
+      3.720691,
+      9.498
+     ],
+     [
+      3.718225,
+      9.375436
+     ],
+     [
+      3.678904,
+      9.133483
+     ],
+     [
+      3.60128,
+      8.90097
+     ],
+     [
+      3.487364,
+      8.683921
+     ],
+     [
+      3.340105,
+      8.487955
+     ],
+     [
+      3.163318,
+      8.318149
+     ],
+     [
+      2.961582,
+      8.178901
+     ],
+     [
+      2.740122,
+      8.073816
+     ],
+     [
+      2.504672,
+      8.005618
+     ],
+     [
+      2.261332,
+      7.976071
+     ]
+    ],
+    [
+     [
+      2.045712,
+      0.735941
+     ],
+     [
+      1.805538,
+      0.784973
+     ],
+     [
+      1.57634,
+      0.871896
+     ],
+     [
+      1.364053,
+      0.99446
+     ],
+     [
+      1.174176,
+      1.14949
+     ],
+     [
+      1.011626,
+      1.332971
+     ],
+     [
+      0.880614,
+      1.54015
+     ],
+     [
+      0.784532,
+      1.765663
+     ],
+     [
+      0.725869,
+      2.003667
+     ],
+     [
+      0.706145,
+      2.248
+     ],
+     [
+      0.725869,
+      2.492333
+     ],
+     [
+      0.784532,
+      2.730337
+     ],
+     [
+      0.880614,
+      2.95585
+     ],
+     [
+      1.011626,
+      3.163029
+     ],
+     [
+      1.174176,
+      3.34651
+     ],
+     [
+      1.364053,
+      3.50154
+     ],
+     [
+      1.57634,
+      3.624104
+     ],
+     [
+      1.805538,
+      3.711027
+     ],
+     [
+      2.045712,
+      3.760059
+     ],
+     [
+      2.290641,
+      3.769929
+     ],
+     [
+      2.533981,
+      3.740382
+     ],
+     [
+      2.769431,
+      3.672184
+     ],
+     [
+      2.990891,
+      3.567099
+     ],
+     [
+      3.192627,
+      3.427851
+     ],
+     [
+      3.369414,
+      3.258045
+     ],
+     [
+      3.516673,
+      3.062079
+     ],
+     [
+      3.630589,
+      2.84503
+     ],
+     [
+      3.708213,
+      2.612517
+     ],
+     [
+      3.747534,
+      2.370564
+     ],
+     [
+      3.75,
+      2.248
+     ],
+     [
+      3.747534,
+      2.125436
+     ],
+     [
+      3.708213,
+      1.883483
+     ],
+     [
+      3.630589,
+      1.65097
+     ],
+     [
+      3.516673,
+      1.433921
+     ],
+     [
+      3.369414,
+      1.237955
+     ],
+     [
+      3.192627,
+      1.068149
+     ],
+     [
+      2.990891,
+      0.928901
+     ],
+     [
+      2.769431,
+      0.823816
+     ],
+     [
+      2.533981,
+      0.755618
+     ],
+     [
+      2.290641,
+      0.726071
+     ]
+    ],
+    [
+     [
+      59.416403,
+      0.635941
+     ],
+     [
+      59.176229,
+      0.684973
+     ],
+     [
+      58.947031,
+      0.771896
+     ],
+     [
+      58.734744,
+      0.89446
+     ],
+     [
+      58.544867,
+      1.04949
+     ],
+     [
+      58.382317,
+      1.232971
+     ],
+     [
+      58.251305,
+      1.44015
+     ],
+     [
+      58.155223,
+      1.665663
+     ],
+     [
+      58.09656,
+      1.903667
+     ],
+     [
+      58.076836,
+      2.148
+     ],
+     [
+      58.09656,
+      2.392333
+     ],
+     [
+      58.155223,
+      2.630337
+     ],
+     [
+      58.251305,
+      2.85585
+     ],
+     [
+      58.382317,
+      3.063029
+     ],
+     [
+      58.544867,
+      3.24651
+     ],
+     [
+      58.734744,
+      3.40154
+     ],
+     [
+      58.947031,
+      3.524104
+     ],
+     [
+      59.176229,
+      3.611027
+     ],
+     [
+      59.416403,
+      3.660059
+     ],
+     [
+      59.661332,
+      3.669929
+     ],
+     [
+      59.904672,
+      3.640382
+     ],
+     [
+      60.140122,
+      3.572184
+     ],
+     [
+      60.361582,
+      3.467099
+     ],
+     [
+      60.563318,
+      3.327851
+     ],
+     [
+      60.740105,
+      3.158045
+     ],
+     [
+      60.887364,
+      2.962079
+     ],
+     [
+      61.00128,
+      2.74503
+     ],
+     [
+      61.078904,
+      2.512517
+     ],
+     [
+      61.118225,
+      2.270564
+     ],
+     [
+      61.120691,
+      2.148
+     ],
+     [
+      61.118225,
+      2.025436
+     ],
+     [
+      61.078904,
+      1.783483
+     ],
+     [
+      61.00128,
+      1.55097
+     ],
+     [
+      60.887364,
+      1.333921
+     ],
+     [
+      60.740105,
+      1.137955
+     ],
+     [
+      60.563318,
+      0.968149
+     ],
+     [
+      60.361582,
+      0.828901
+     ],
+     [
+      60.140122,
+      0.723816
+     ],
+     [
+      59.904672,
+      0.655618
+     ],
+     [
+      59.661332,
+      0.626071
+     ]
+    ]
+   ]
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "input",
+   "zone": "base",
+   "rot": 0,
+   "id": "keyboard",
+   "name": "MX ULP keyboard PCB rev A",
+   "x": 42.3,
+   "y": 20,
+   "w": 273.5,
+   "h": 80
+  },
+  {
+   "locked": true,
+   "hidden": false,
+   "kind": "port",
+   "zone": "base",
+   "rot": 0,
+   "id": "keyboard-ffc",
+   "name": "J310 keyboard cable",
+   "x": 140.105,
+   "y": 38.455,
+   "w": 7.890000000000015,
+   "h": 21.090000000000003,
+   "pcbSource": [
+    "center",
+    "J310"
+   ]
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "power",
+   "zone": "base",
+   "rot": 0,
+   "id": "battery-1",
+   "name": "3.7V cell A - battery row left",
+   "x": 5,
+   "y": 188,
+   "w": 100,
+   "h": 60
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "power",
+   "zone": "base",
+   "rot": 0,
+   "id": "battery-2",
+   "name": "3.7V cell B - battery row center (under trackpad Z)",
+   "x": 129,
+   "y": 188,
+   "w": 100,
+   "h": 60
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "power",
+   "zone": "base",
+   "rot": 0,
+   "id": "battery-3",
+   "name": "3.7V cell C - battery row right",
+   "x": 253,
+   "y": 188,
+   "w": 100,
+   "h": 60
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "input",
+   "zone": "base",
+   "rot": 0,
+   "id": "trackpad-target",
+   "name": "JOMAA trackpad (140x105) - palmrest height above battery row",
+   "x": 109,
+   "y": 143,
+   "w": 140,
+   "h": 105
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "audio",
+   "zone": "base",
+   "rot": 0,
+   "id": "speaker-left",
+   "name": "front speaker L",
+   "x": 3,
+   "y": 205,
+   "w": 18,
+   "h": 38
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "audio",
+   "zone": "base",
+   "rot": 0,
+   "id": "speaker-right",
+   "name": "front speaker R",
+   "x": 337,
+   "y": 205,
+   "w": 18,
+   "h": 38
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "port",
+   "zone": "base",
+   "rot": 0,
+   "id": "left-ports",
+   "name": "left side connector corridor",
+   "x": 0,
+   "y": 20,
+   "w": 10,
+   "h": 160
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "port",
+   "zone": "base",
+   "rot": 0,
+   "id": "right-ports",
+   "name": "right side connector corridor",
+   "x": 348,
+   "y": 20,
+   "w": 10,
+   "h": 160
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "rf",
+   "zone": "base",
+   "rot": 0,
+   "id": "rear-antennas",
+   "name": "rear antenna connector recess",
+   "x": 15,
+   "y": 231,
+   "w": 86,
+   "h": 17
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "keepout",
+   "zone": "base",
+   "rot": 0,
+   "id": "hinge-left",
+   "name": "left hinge opening",
+   "x": 12,
+   "y": 0,
+   "w": 36,
+   "h": 18
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "keepout",
+   "zone": "base",
+   "rot": 0,
+   "id": "hinge-right",
+   "name": "right hinge opening",
+   "x": 310,
+   "y": 0,
+   "w": 36,
+   "h": 18
+  },
+  {
+   "locked": true,
+   "hidden": false,
+   "kind": "board",
+   "zone": "base",
+   "rot": 0,
+   "id": "mu-module",
+   "name": "A1 Mu and socket",
+   "x": 176.105,
+   "y": 6.305,
+   "w": 65.39000000000001,
+   "h": 77.38999999999999,
+   "pcbSource": [
+    "center",
+    "A1"
+   ]
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "thermal",
+   "zone": "base",
+   "rot": 0,
+   "id": "cold-plate",
+   "name": "cold plate target, height and fit pending",
+   "x": 180,
+   "y": 30,
+   "w": 74,
+   "h": 64
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "thermal",
+   "zone": "base",
+   "rot": 0,
+   "id": "heatpipe",
+   "name": "121721 heatpipe to left fin stack",
+   "x": 85,
+   "y": 60,
+   "w": 150,
+   "h": 8.1
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "thermal",
+   "zone": "base",
+   "rot": 0,
+   "id": "fin-stack",
+   "name": "fin stack target, height and fit pending",
+   "x": 70,
+   "y": 35,
+   "w": 50,
+   "h": 50
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "thermal",
+   "zone": "base",
+   "rot": 0,
+   "id": "blower",
+   "name": "12V Delta blower (45x45)",
+   "x": 72,
+   "y": 90,
+   "w": 45,
+   "h": 45
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "thermal",
+   "zone": "base",
+   "rot": 0,
+   "id": "exhaust",
+   "name": "rear exhaust opening keepout",
+   "x": 70,
+   "y": 0,
+   "w": 50,
+   "h": 12
+  },
+  {
+   "locked": true,
+   "hidden": false,
+   "kind": "board",
+   "zone": "base",
+   "rot": 0,
+   "id": "m2-nvme",
+   "name": "J10 NVMe socket and 2280 card",
+   "x": 191.535,
+   "y": 103.505,
+   "w": 92.44000000000003,
+   "h": 24.99000000000001,
+   "pcbSource": [
+    "center",
+    "J10"
+   ]
+  },
+  {
+   "locked": true,
+   "hidden": false,
+   "kind": "board",
+   "zone": "base",
+   "rot": 0,
+   "id": "m2-wifi",
+   "name": "J40 Wi-Fi socket and 2230 card",
+   "x": 223.105,
+   "y": 154.755,
+   "w": 42.440000000000026,
+   "h": 24.99000000000001,
+   "pcbSource": [
+    "center",
+    "J40"
+   ]
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "display",
+   "zone": "base",
+   "rot": 0,
+   "id": "oled-a",
+   "name": "wired OLED A",
+   "x": 310,
+   "y": 155,
+   "w": 27.3,
+   "h": 27.3
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "display",
+   "zone": "base",
+   "rot": 0,
+   "id": "oled-b",
+   "name": "wired OLED B",
+   "x": 280,
+   "y": 155,
+   "w": 27.3,
+   "h": 27.3
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "board",
+   "zone": "tray",
+   "rot": 0,
+   "id": "radio-daughterboard",
+   "name": "radio board, position pending",
+   "x": 20,
+   "y": 20,
+   "w": 120,
+   "h": 70
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "display",
+   "zone": "lid",
+   "rot": 0,
+   "id": "panel-outline",
+   "name": "B160QAN03.K panel (measured)",
+   "x": 3,
+   "y": 10.5,
+   "w": 352,
+   "h": 227
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "ghost",
+   "zone": "lid",
+   "rot": 0,
+   "id": "panel-active",
+   "name": "2560x1600 active area (approximate)",
+   "x": 6.5,
+   "y": 16.5,
+   "w": 345,
+   "h": 215
+  },
+  {
+   "locked": true,
+   "hidden": false,
+   "kind": "audio",
+   "zone": "base",
+   "rot": 0,
+   "id": "headphone-jack",
+   "name": "J422 headphone jack",
+   "x": 247.505,
+   "y": -3.695,
+   "w": 9.189999999999998,
+   "h": 18.99,
+   "pcbSource": [
+    "center",
+    "J422"
+   ]
+  },
+  {
+   "locked": true,
+   "hidden": false,
+   "kind": "port",
+   "zone": "base",
+   "rot": 0,
+   "id": "fan-connector",
+   "name": "J52 fan connector",
+   "x": 181.775,
+   "y": 102.305,
+   "w": 9.449999999999989,
+   "h": 6.389999999999986,
+   "pcbSource": [
+    "center",
+    "J52"
+   ]
+  },
+  {
+   "locked": true,
+   "hidden": false,
+   "kind": "audio",
+   "zone": "base",
+   "rot": 0,
+   "id": "speaker-connector",
+   "name": "J420 left speaker cable",
+   "x": 99.525,
+   "y": 167.805,
+   "w": 6.949999999999989,
+   "h": 6.389999999999986,
+   "pcbSource": [
+    "center",
+    "J420"
+   ]
+  },
+  {
+   "locked": true,
+   "hidden": false,
+   "kind": "port",
+   "zone": "base",
+   "rot": 0,
+   "id": "trackpad-lands",
+   "name": "J58 trackpad solder lands",
+   "x": 139.455,
+   "y": 160.705,
+   "w": 10.70999999999998,
+   "h": 3.089999999999975,
+   "pcbSource": [
+    "center",
+    "J58"
+   ]
+  },
+  {
+   "id": "usb-c-left-2",
+   "name": "J23 left USB-C data 2",
+   "zone": "base",
+   "x": -0.495,
+   "y": 64.705,
+   "w": 9.45,
+   "h": 10.590000000000003,
+   "kind": "port",
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "left",
+    "J23"
+   ]
+  },
+  {
+   "id": "usb-c-left-1",
+   "name": "J22 left USB-C data 1",
+   "zone": "base",
+   "x": -0.495,
+   "y": 19.705,
+   "w": 9.45,
+   "h": 10.590000000000003,
+   "kind": "port",
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "left",
+    "J22"
+   ]
+  },
+  {
+   "id": "usb-c-right",
+   "name": "J11 right USB-C PD",
+   "zone": "base",
+   "x": 349.02,
+   "y": 24.705,
+   "w": 9.450000000000045,
+   "h": 10.590000000000003,
+   "kind": "port",
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "right",
+    "J11"
+   ]
+  },
+  {
+   "id": "ethernet-jack",
+   "name": "J500 Ethernet jack",
+   "zone": "base",
+   "x": 328.455,
+   "y": 87.925,
+   "w": 26.650000000000034,
+   "h": 18.17,
+   "kind": "port",
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "right",
+    "J500"
+   ]
+  },
+  {
+   "id": "headphone-amp",
+   "name": "U425 TPA6130A2 headphone amplifier",
+   "zone": "base",
+   "x": 137.375,
+   "y": 155.375,
+   "w": 5.25,
+   "h": 5.25,
+   "kind": "board",
+   "rot": 0,
+   "locked": true,
+   "pcbSource": [
+    "center",
+    "U425"
+   ]
+  },
+  {
+   "id": "microphone",
+   "name": "MK430 IM68A130V01 MEMS microphone (acoustic port)",
+   "zone": "base",
+   "x": 159.2425,
+   "y": 105.405001,
+   "w": 2.7399999999999807,
+   "h": 3.5899980000000085,
+   "kind": "audio",
+   "rot": 0,
+   "locked": true,
+   "pcbSource": [
+    "center",
+    "MK430"
+   ]
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "ghost",
+   "zone": "lid",
+   "rot": 0,
+   "id": "hinge-lid-left",
+   "name": "Framework 13 hinge bracket keepout (lid) L",
+   "x": 8,
+   "y": 228,
+   "w": 40,
+   "h": 20
+  },
+  {
+   "locked": false,
+   "hidden": false,
+   "kind": "ghost",
+   "zone": "lid",
+   "rot": 0,
+   "id": "hinge-lid-right",
+   "name": "Framework 13 hinge bracket keepout (lid) R",
+   "x": 310,
+   "y": 228,
+   "w": 40,
+   "h": 20
+  },
+  {
+   "id": "speaker-connector-right",
+   "name": "J421 right speaker cable",
+   "kind": "port",
+   "zone": "base",
+   "x": 111.525,
+   "y": 167.805,
+   "w": 6.949999999999989,
+   "h": 6.389999999999986,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "J421"
+   ]
+  },
+  {
+   "id": "usb-c-right-data",
+   "name": "J12 right USB-C data",
+   "kind": "port",
+   "zone": "base",
+   "x": 349.025,
+   "y": 42.705,
+   "w": 9.450000000000045,
+   "h": 10.590000000000003,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "right",
+    "J12"
+   ]
+  },
+  {
+   "id": "usb-c-left-pd",
+   "name": "J21 left USB-C PD",
+   "kind": "port",
+   "zone": "base",
+   "x": -0.495,
+   "y": 42.205,
+   "w": 9.45,
+   "h": 10.590000000000003,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "left",
+    "J21"
+   ]
+  },
+  {
+   "id": "ec-service-usb",
+   "name": "J73 EC programming USB",
+   "kind": "port",
+   "zone": "base",
+   "x": 285.545,
+   "y": 170.705,
+   "w": 9.449999999999989,
+   "h": 10.589999999999975,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "J73"
+   ]
+  },
+  {
+   "id": "mu-ntc-connector",
+   "name": "J56 Mu temperature probe",
+   "kind": "port",
+   "zone": "base",
+   "x": 163.525,
+   "y": 82.805,
+   "w": 6.949999999999989,
+   "h": 6.389999999999986,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "J56"
+   ]
+  },
+  {
+   "id": "radio-ffc",
+   "name": "J2300 radio cable",
+   "kind": "port",
+   "zone": "base",
+   "x": 144.455,
+   "y": 64.755,
+   "w": 21.089999999999975,
+   "h": 7.890000000000001,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "J2300"
+   ]
+  },
+  {
+   "id": "bms-ffc",
+   "name": "bms cable corridor",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 175.751,
+   "y": 136.9,
+   "w": 17,
+   "h": 18.7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false
+  },
+  {
+   "id": "mount-center-H14",
+   "name": "H14 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 256.5,
+   "y": 2.5,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "H14"
+   ]
+  },
+  {
+   "id": "mount-center-H21",
+   "name": "H21 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 106.75,
+   "y": 2.55,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "H21"
+   ]
+  },
+  {
+   "id": "mount-center-H22",
+   "name": "H22 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 101.5,
+   "y": 66.5,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "H22"
+   ]
+  },
+  {
+   "id": "mount-center-H23",
+   "name": "H23 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 120.6,
+   "y": 176.9,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "H23"
+   ]
+  },
+  {
+   "id": "mount-center-H24",
+   "name": "H24 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 145.5,
+   "y": 144.5,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "H24"
+   ]
+  },
+  {
+   "id": "mount-center-H25",
+   "name": "H25 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 205.35,
+   "y": 1.4500000000000002,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "H25"
+   ]
+  },
+  {
+   "id": "mount-center-H26",
+   "name": "H26 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 249.65,
+   "y": 131.0,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "center",
+    "H26"
+   ]
+  },
+  {
+   "id": "mount-left-H10",
+   "name": "H10 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 1.5,
+   "y": 147.25,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "left",
+    "H10"
+   ]
+  },
+  {
+   "id": "mount-left-H11",
+   "name": "H11 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 1.5,
+   "y": 177.25,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "left",
+    "H11"
+   ]
+  },
+  {
+   "id": "mount-left-H12",
+   "name": "H12 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 60.3,
+   "y": 2.5999999999999996,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "left",
+    "H12"
+   ]
+  },
+  {
+   "id": "mount-left-H16",
+   "name": "H16 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 1.5,
+   "y": 9.35,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "left",
+    "H16"
+   ]
+  },
+  {
+   "id": "mount-right-H13",
+   "name": "H13 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 349.5,
+   "y": 55.25,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "right",
+    "H13"
+   ]
+  },
+  {
+   "id": "mount-right-H15",
+   "name": "H15 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 349.5,
+   "y": 16.15,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "right",
+    "H15"
+   ]
+  },
+  {
+   "id": "mount-right-H17",
+   "name": "H17 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 349.5,
+   "y": 108.55,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "right",
+    "H17"
+   ]
+  },
+  {
+   "id": "mount-right-H27",
+   "name": "H27 chassis clearance",
+   "kind": "ghost",
+   "zone": "base",
+   "x": 349.816,
+   "y": 177.111,
+   "w": 7,
+   "h": 7,
+   "rot": 0,
+   "locked": true,
+   "hidden": false,
+   "pcbSource": [
+    "right",
+    "H27"
+   ]
+  }
+ ]
+};
 
     const productionFacts = {
       keyboard: {
@@ -666,18 +2918,6 @@
         w: 273.5,
         h: 80,
         kind: "input"
-      },
-      "keyboard-ffc": {
-        name: "J310 mainboard keyboard FFC connector",
-        w: 18,
-        h: 8,
-        kind: "port"
-      },
-      "keyboard-ffc-keepout": {
-        name: "keyboard FFC bend / exit keepout",
-        w: 45,
-        h: 24,
-        kind: "ghost"
       },
       "trackpad-target": {
         name: "JOMAA trackpad (140 W x 105 D mm)",
@@ -726,7 +2966,8 @@
     }
 
     function normalize(next) {
-      next.version = 3;
+      const updateBoardDatums = Number(next.version) < 5;
+      next.version = 5;
       next.mode = next.mode === "pan" ? "pan" : "select";
       next.grid = Number(next.grid) || defaultState.grid;
       next.snap = next.snap !== false;
@@ -746,13 +2987,23 @@
         h: Math.max(1, Number(part.h) || 1),
         rot: normalizeAngle(Number(part.rot) || 0)
       }));
+      if (updateBoardDatums) {
+        const obsolete = new Set(["mainboard-guide", "battery-connector", "tpad-usbc-conn", "mainboard-bosses"]);
+        next.parts = next.parts.filter(part => !obsolete.has(part.id));
+        for (const part of next.parts) {
+          const current = defaultState.parts.find(item => item.id === part.id);
+          if (current && (current.pcbSource || current.outline || current.id === "bms-ffc")) Object.assign(part, clone(current));
+        }
+      }
       for (const part of next.parts) {
         if (productionFacts[part.id]) Object.assign(part, productionFacts[part.id]);
       }
       for (const part of defaultState.parts) {
         if (!next.parts.some(existing => existing.id === part.id)) next.parts.push(clone(part));
       }
-      for (const part of next.parts) clampPart(part, next.planes);
+      for (const part of next.parts) {
+        if (!part.pcbSource && !part.outline && part.id !== "bms-ffc") clampPart(part, next.planes);
+      }
       const valid = new Set(next.parts.map(part => part.id));
       next.selectedIds = [...new Set(next.selectedIds)].filter(id => valid.has(id));
       return next;
@@ -1022,7 +3273,14 @@
       if (part.locked && (part.kind === "ghost" || part.kind === "keepout")) {
         shapeAttrs["pointer-events"] = "none";
       }
-      const shape = svgEl("rect", shapeAttrs);
+      let shape;
+      if (part.outline) {
+        const rings = [part.outline, ...(part.outlineHoles || [])];
+        const path = rings.map(points => "M " + points.map(p => `${rect.x + p[0]},${rect.y + p[1]}`).join(" L ") + " Z").join(" ");
+        shape = svgEl("path", { ...shapeAttrs, d: path, "fill-rule": "evenodd" });
+      } else {
+        shape = svgEl("rect", shapeAttrs);
+      }
       if (selected) {
         shape.setAttribute("stroke", "#ffffff");
         shape.setAttribute("stroke-width", "1.5");
