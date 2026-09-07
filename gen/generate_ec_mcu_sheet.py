@@ -52,7 +52,7 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
                 "63": ("RADIO_UHF_UART_TX", "hier"), "64": ("RADIO_UHF_UART_RX", "hier"),
                 "65": ("RADIO_UHF_PTT_N", "hier"), "66": ("RADIO_VHF_PD_N", "hier"),
                 "67": ("WIFI_W_DISABLE1_N_EC", "hier"), "68": ("GNSS_UART_TX", "hier"), "69": ("GNSS_UART_RX", "hier"),
-                "70": ("MCU_USB_DM", "hier"), "71": ("MCU_USB_DP", "hier"), "72": ("SWDIO_NET", "local"),
+                "70": ("MCU_USB_DN", "hier"), "71": ("MCU_USB_DP", "hier"), "72": ("SWDIO_NET", "local"),
                 "73": ("VCAP2_NODE", "local"), "74": ("GND", "local"), "75": ("MCU_3V3", "hier"),
                 "76": ("SWCLK_NET", "local"), "77": ("WIFI_W_DISABLE2_N_EC", "hier"), "78": ("RADIO_UHF_PD_N", "hier"),
                 "79": ("RADIO_VHF_SQL", "hier"), "80": ("RADIO_UHF_SQL", "hier"),
@@ -330,7 +330,7 @@ def main():
     ec_hier_nets = [
         "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
-        "EC_AON_IN", "MCU_USB_DP", "MCU_USB_DM", "MCU_3V3", "AUX_DC_ADC",
+        "EC_AON_IN", "MCU_USB_DP", "MCU_USB_DN", "MCU_3V3", "AUX_DC_ADC",
         "FAN_PWM", "FAN_TACH", "LID_CLOSED_N",
         "THERM_SKIN_ADC", "THERM_MU_ADC",
         "RADIO_VHF_UART_TX", "RADIO_VHF_UART_RX", "RADIO_UHF_UART_TX", "RADIO_UHF_UART_RX",

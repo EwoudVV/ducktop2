@@ -171,7 +171,7 @@
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
         "min_hole_clearance": 0.3,
-        "min_hole_to_hole": 0.3,
+        "min_hole_to_hole": 0.2,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
         "min_resolved_spokes": 2,
@@ -556,7 +556,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "ducktop2.kicad_pro",
+    "filename": "radio_daughterboard.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -1912,13 +1912,53 @@
       {
         "netclass": "USB2_45",
         "pattern": "/WIFI_USB_DP"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TX0_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TX0_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TX1_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TX1_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TXRX0_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TXRX0_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TXRX1_P"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/TCP0_TXRX1_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Wi-Fi/Bluetooth &amp; OLEDs/WIFI_REFCLK_E_N"
+      },
+      {
+        "netclass": "DIFF_100",
+        "pattern": "/Wi-Fi/Bluetooth &amp; OLEDs/WIFI_REFCLK_E_P"
       }
     ]
   },
   "pcbnew": {
     "last_paths": {
       "idf": "",
-      "netlist": "",
+      "netlist": "../.workbench/routing-prep-2026-09-06/radio-usb-ready.net",
       "plot": "",
       "specctra_dsn": "",
       "vrml": ""
@@ -2038,8 +2078,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "ducktop2.kicad_sch",
-        "name": "ducktop2",
+        "filename": "radio_daughterboard.kicad_sch",
+        "name": "radio_daughterboard",
         "uuid": "898e349f-792f-5b73-93f6-827ac90c0616"
       }
     ],

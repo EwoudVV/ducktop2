@@ -26,10 +26,10 @@ POLYFUSE_FOOTPRINT = "Fuse:Fuse_1812_4532Metric"
 
 def usb2512b_nets():
     return {
-        "1": ("SYSTEM_DAC_USB_DM", "local"),
+        "1": ("SYSTEM_DAC_USB_DN", "local"),
         "2": ("SYSTEM_DAC_USB_DP", "local"),
-        "3": ("RADIO_CODEC_USB_DM_HOST", "hier"),
-        "4": ("RADIO_CODEC_USB_DP_HOST", "hier"),
+        "3": ("RADIO_CODEC_USB_HOST_DN", "hier"),
+        "4": ("RADIO_CODEC_USB_HOST_DP", "hier"),
         "5": ("SYS_3V3", "hier"),
         "6": ("", "nc"),
         "7": ("", "nc"),
@@ -55,7 +55,7 @@ def usb2512b_nets():
         "27": ("HUB_VBUS_DET", "local"),
         "28": ("HUB_NON_REM0", "local"),
         "29": ("SYS_3V3", "hier"),
-        "30": ("AUDIO_USB_DM", "hier"),
+        "30": ("AUDIO_USB_DN", "hier"),
         "31": ("AUDIO_USB_DP", "hier"),
         "32": ("HUB_XO", "local"),
         "33": ("HUB_XI", "local"),
@@ -69,7 +69,7 @@ def usb2512b_nets():
 def pcm2900c_nets():
     return {
         "1": ("CODEC_USB_DP", "local"),
-        "2": ("CODEC_USB_DM", "local"),
+        "2": ("CODEC_USB_DN", "local"),
         "3": ("CODEC_VBUS", "local"),
         "4": ("GND", "local"),
         "5": ("", "nc"),
@@ -348,7 +348,7 @@ def build(sheet_symbol_uuid):
     s.place(
         "R410", "R", "22R system DAC USB D- series", 20, 233.68,
         footprint=FOOTPRINTS["R"],
-        pin_nets={"1": ("SYSTEM_DAC_USB_DM", "local"), "2": ("CODEC_USB_DM", "local")},
+        pin_nets={"1": ("SYSTEM_DAC_USB_DN", "local"), "2": ("CODEC_USB_DN", "local")},
     )
     s.place(
         "R411", "R", "22R system DAC USB D+ series", 20, 246.38,

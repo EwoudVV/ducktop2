@@ -1,28 +1,16 @@
 #!/usr/bin/env python3
-"""Generate the FH41-68S-0.5SH footprint (ducktop2 board split, Phase 4 deep audit).
+"""Generate the FH41-68S-0.5SH(28) footprint for the two I/O cables.
 
-The FH12 series tops out at 60 positions, so the "FH12-100S" used for
-FPC-1/FPC-2 was fictional.  The FH41 series (shielded-FFC, 0.5mm pitch,
-2.5mm height) offers 68 positions: FH41-68S-0.5SH.  FPC-1 uses pins
-1-53, FPC-2 pins 1-61, both fit a 68-pin connector.
-
-Pad geometry per the Hirose FH41-68S-0.5SH(05) drawing (FH41 catalog
-D31607_en, 68-position row):
+Land pattern from Hirose D31607, 68-position row:
   - 68 signal pads, 0.5mm pitch, x = -16.75 .. +16.75 (span D=33.5),
     y = -2.975, land 0.3x0.65
   - 2 MP hold-down pads at x = +/-18.0 (span J=36), y = 2.275, 0.4x1.55
   - G = 13 SH solder-hold pads at 2.5mm pitch (span E=30); G is ODD so the
     row is CENTER-symmetric: x = 0, +/-2.5, +/-5.0, +/-7.5, +/-10.0,
     +/-12.5, +/-15.0, y = 2.7, land 0.3x1.2.
-    (The first cut of this generator linearly extrapolated the FH41-30S
-    offset pattern, which is only valid for an EVEN ground-contact count;
-    that put all 14 pads 1.25mm off the real terminals.  Never extrapolate
-    the SH row from a different pin count.)
-  - body length C=38 (fab +/-19.0), silk +/-19.46, courtyard +/-20.0x3.8
-    (x2 graphics scale of the 30-pin source, verified against the catalog).
-3D model: project-local path (bundled under ducktop2.3dshapes); the KiCad
-library ships no FH41 STEP, and a dangling ${KICADxx_3DMODEL_DIR} reference
-silently renders nothing.
+  - body length C=38, courtyard +/-20.0x3.8
+
+The silk outline clears both pad rows and keeps a pin-1 marker.
 """
 
 import os
@@ -42,6 +30,15 @@ SCALE = 2.0  # 30-pin graphics x-extents -> 68-pin (C=38mm, verified)
 # SH ground-contact row per datasheet: G=13 (odd) -> x = 0, +/-2.5*k
 SH_PITCH = 2.5
 SH_COUNT = 13
+SILK_LINES = [
+    ((-19.25, -2.35), (19.25, -2.35)),
+    ((19.25, -2.35), (19.25, 3.6)),
+    ((19.25, 3.6), (-19.25, 3.6)),
+    ((-19.25, 3.6), (-19.25, -2.35)),
+    ((-18.9, -3.3), (-18.1, -3.3)),
+    ((-18.1, -3.3), (-18.5, -2.6)),
+    ((-18.5, -2.6), (-18.9, -3.3)),
+]
 
 
 def sh_positions():
@@ -115,6 +112,21 @@ def main():
     txt = re.sub(r"(\(end )([-\d.]+) ([-\d.]+)\)",
                  rescale_xy, txt)
 
+    # The 68-pin row needs its own outline; scaling the 30-pin silk
+    # leaves lines running across the extra contacts.
+    edits = []
+    for match in re.finditer(r'\(fp_(?:line|rect|poly|circle|arc)\b', txt):
+        start = match.start(); depth = 0
+        for end in range(start, len(txt)):
+            if txt[end] == "(": depth += 1
+            elif txt[end] == ")":
+                depth -= 1
+                if depth == 0: break
+        if '(layer "F.SilkS")' in txt[start:end+1]: edits.append((start, end+1))
+    for start, end in reversed(edits): txt = txt[:start] + txt[end:]
+    lines = [f'(fp_line (start {a[0]} {a[1]}) (end {z[0]} {z[1]}) (stroke (width 0.12) (type solid)) (layer "F.SilkS"))' for a, z in SILK_LINES]
+    txt = txt.rstrip()[:-1] + "\n" + "\n".join(lines) + "\n)\n"
+
     # --- 3D model: project-local, never a dangling KICADxx_3DMODEL_DIR ---
     txt = re.sub(
         r'\(model "\$\{KICAD\d+_3DMODEL_DIR\}/[^"]*"',
@@ -134,6 +146,7 @@ def main():
                  '(property "Value" "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal"\n\t\t(at 0 4.625 0)',
                  txt)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    txt = "\n".join(line.rstrip() for line in txt.splitlines()) + "\n"
     open(OUT, "w").write(txt)
     print(f"wrote {OUT}")
     verify(OUT)

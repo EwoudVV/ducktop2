@@ -5510,22 +5510,22 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 880ad3a8-0ae0-51de-b049-e6e2a14d4af0)
 )
-(label "PD2_DP_CONN"
+(label "PD2_CONN_DP"
   (at 289.56 99.06 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 3f5c120d-d83e-59be-9bd7-0e9cfac5673b)
 )
-(label "PD2_DP_CONN"
+(label "PD2_CONN_DP"
   (at 289.56 101.6 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid ab50e5ae-5c2b-50cc-a335-ecd1dbca31ea)
 )
-(label "PD2_DM_CONN"
+(label "PD2_CONN_DN"
   (at 289.56 93.98 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9c828e79-cae6-51c6-98a0-b93d0fecc8f7)
 )
-(label "PD2_DM_CONN"
+(label "PD2_CONN_DN"
   (at 289.56 96.52 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 90d13f70-18c9-57d2-8991-a6490574b520)
@@ -5556,7 +5556,7 @@
   (property "Manufacturer" "Texas Instruments" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "TPD4S201RUKR" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd4s201.pdf" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ChannelUse" "CC1_CC2_AND_USB2_DP_DM;DEAD_BATTERY_RD_ENABLED" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ChannelUse" "CC1_CC2_AND_USB2_DP_DN;DEAD_BATTERY_RD_ENABLED" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid e25f62a1-9cbd-5fb0-9134-5634031f2cbb))
   (pin "2" (uuid 8410f009-c88a-5b4b-bd75-6e8ce6480233))
   (pin "3" (uuid 17bb70cd-447c-5b62-a0cc-02ea1ca081ec))
@@ -5587,12 +5587,12 @@
     )
   )
 )
-(label "PD2_DP_CONN"
+(label "PD2_CONN_DP"
   (at 213.36 95.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid a9893dcb-174d-5668-9940-8867037d3789)
 )
-(label "PD2_DM_CONN"
+(label "PD2_CONN_DN"
   (at 213.36 97.79 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 498c8c62-00a9-5166-aecf-3cca8112fea5)
@@ -5652,12 +5652,12 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid ca8ec528-92bf-5892-a53e-08354c6aabe2)
 )
-(label "PD2_DM_HOST_SWITCHED"
+(label "PD2_HOST_SWITCHED_DN"
   (at 238.76 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid cdd234c9-5cb1-5cf1-9bff-da06a24e7140)
 )
-(label "PD2_DP_HOST_SWITCHED"
+(label "PD2_HOST_SWITCHED_DP"
   (at 238.76 107.95 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 70e6e193-e741-5b73-a509-e71d4a97f7eb)
@@ -6722,7 +6722,7 @@
   (uuid 12f42e93-51e5-5257-a2c0-f84b81a93b62)
 )
 (no_connect (at 220.98 170.18) (uuid 87934f45-6303-578f-9212-9ae728da1389))
-(label "PD2_DP_HOST_SWITCHED"
+(label "PD2_HOST_SWITCHED_DP"
   (at 200.66 162.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 46f10ad0-2fb9-5cd8-9995-a0cce30746cb)
@@ -6732,13 +6732,13 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 240a8b77-910b-53eb-8b6e-69da0cc9f7a3)
 )
-(label "PD2_DM_HOST_SWITCHED"
+(label "PD2_HOST_SWITCHED_DN"
   (at 200.66 165.1 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 32263774-dc25-58ea-812c-a2ae2f835796)
 )
 (no_connect (at 220.98 172.72) (uuid 9f6278b4-f68f-5851-8c78-5a7f629da01f))
-(hierarchical_label "HUB_DS1_DM"
+(hierarchical_label "HUB_DS1_DN"
   (shape bidirectional)
   (at 220.98 165.1 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -8536,13 +8536,13 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9630c9eb-7d89-5dcf-8c4d-94441681242c)
 )
-(hierarchical_label "HUB_DS4_DM"
+(hierarchical_label "HUB_DS4_DN"
   (shape bidirectional)
   (at 261.62 368.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0ece4e97-5b21-5e34-810f-69ecd351bc01)
 )
-(hierarchical_label "HUB_DS4_DM"
+(hierarchical_label "HUB_DS4_DN"
   (shape bidirectional)
   (at 261.62 370.84 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -8960,7 +8960,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6af4394e-dc25-54fe-862d-9f7fe6c33c30)
 )
-(label "HUB_DS4_DM"
+(label "HUB_DS4_DN"
   (at 271.78 408.94 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 47cb6498-89ac-5250-a9f1-0b93e6a7b5ed)

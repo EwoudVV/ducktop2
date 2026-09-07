@@ -90,3 +90,52 @@
 (rule "UDFN-10 GbE ESD array intra-footprint clearance (Phase 5, audit C10)"
     (condition "((A.Reference == 'U501') && (B.Reference == 'U501')) || ((A.Reference == 'U502') && (B.Reference == 'U502'))")
     (constraint clearance (min 0.1mm)))
+
+# right routing widths from the approved NextPCB stackup.
+# In2.Cu has GND on both sides. In5.Cu faces split power islands.
+# use F.Cu, In2.Cu or B.Cu for controlled-impedance traces.
+# local neckdowns need a reviewed exception when routing the fanout.
+
+(rule "right DIFF_85 on outer"
+    (layer outer)
+    (condition "A.hasNetclass('DIFF_85')")
+    (constraint track_width (min 0.183mm) (opt 0.183mm) (max 0.183mm))
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.1524mm)))
+
+(rule "right DIFF_85 on In2.Cu"
+    (layer "In2.Cu")
+    (condition "A.hasNetclass('DIFF_85')")
+    (constraint track_width (min 0.114mm) (opt 0.114mm) (max 0.114mm))
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.1524mm)))
+
+(rule "right DIFF_90 on outer"
+    (layer outer)
+    (condition "A.hasNetclass('DIFF_90')")
+    (constraint track_width (min 0.1796mm) (opt 0.1796mm) (max 0.1796mm))
+    (constraint diff_pair_gap (min 0.2032mm) (opt 0.2032mm) (max 0.2032mm)))
+
+(rule "right DIFF_90 on In2.Cu"
+    (layer "In2.Cu")
+    (condition "A.hasNetclass('DIFF_90')")
+    (constraint track_width (min 0.111mm) (opt 0.111mm) (max 0.111mm))
+    (constraint diff_pair_gap (min 0.203mm) (opt 0.203mm) (max 0.203mm)))
+
+(rule "right DIFF_100 on outer"
+    (layer outer)
+    (condition "A.hasNetclass('DIFF_100')")
+    (constraint track_width (min 0.1521mm) (opt 0.1521mm) (max 0.1521mm))
+    (constraint diff_pair_gap (min 0.254mm) (opt 0.254mm) (max 0.254mm)))
+
+(rule "right DIFF_100 on In2.Cu"
+    (layer "In2.Cu")
+    (condition "A.hasNetclass('DIFF_100')")
+    (constraint track_width (min 0.091mm) (opt 0.091mm) (max 0.091mm))
+    (constraint diff_pair_gap (min 0.254mm) (opt 0.254mm) (max 0.254mm)))
+
+(rule "right controlled-impedance signal layers"
+    (condition "(A.hasNetclass('DIFF_85') || A.hasNetclass('DIFF_90') || A.hasNetclass('DIFF_100')) && A.Layer != 'F.Cu' && A.Layer != 'B.Cu' && A.Layer != 'In2.Cu'")
+    (constraint disallow track))
+
+(rule "right solid ground layers"
+    (condition "(A.Layer == 'In1.Cu' || A.Layer == 'In3.Cu' || A.Layer == 'In6.Cu') && A.NetName != 'GND'")
+    (constraint disallow track))

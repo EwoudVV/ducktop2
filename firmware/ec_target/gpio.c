@@ -57,7 +57,7 @@ void gpio_init_all(void)
     GPIOA->MODER   |= GPIO_MODER_AF << (10 * 2);
     GPIOA->AFRH     = (GPIOA->AFRH & ~(0xFu << 8)) | (GPIO_AF7 << 8);
 
-    /* PA11: MCU_USB_DM - AF10 (OTG_FS) */
+    /* PA11: MCU_USB_DN - AF10 (OTG_FS) */
     GPIOA->MODER   |= GPIO_MODER_AF << (11 * 2);
     GPIOA->AFRH     = (GPIOA->AFRH & ~(0xFu << 12)) | (GPIO_AF10 << 12);
 

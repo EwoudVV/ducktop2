@@ -561,7 +561,7 @@ def load_contracts() -> None:
     ):
         add("U4", pin, net, requirement, stm)
     for pin, net, requirement in (
-        (70, "/MCU_USB_DM", "PA11 is the STM32 USB FS D- signal."),
+        (70, "/MCU_USB_DN", "PA11 is the STM32 USB FS D- signal."),
         (71, "/MCU_USB_DP", "PA12 is the STM32 USB FS D+ signal."),
         (92, "/I2C_SCL", "PB6 is the EC I2C1 clock."),
         (93, "/I2C_SDA", "PB7 is the EC I2C1 data signal."),
@@ -665,8 +665,8 @@ def load_contracts() -> None:
                             ("C1854", "J25_5V_PRE"), ("C1855", "J25_5V_PRE")):
         add(c_ref, 1, local(usba_sheet, pre_vbus), "USB-A branch reservoir positive rail.", usba_src)
         add(c_ref, 2, "GND", "USB-A branch reservoir return.", usba_src)
-    for esd_ref, dp, dm in (("U1801", "HUB_DIS5_DP", "HUB_DIS5_DM"),
-                            ("U1804", "HUB_DIS6_DP", "HUB_DIS6_DM")):
+    for esd_ref, dp, dm in (("U1801", "HUB_DIS5_DP", "HUB_DIS5_DN"),
+                            ("U1804", "HUB_DIS6_DP", "HUB_DIS6_DN")):
         for pin, net in {1: dp, 6: dp, 3: dm, 4: dm}.items():
             add(esd_ref, pin, local(usba_sheet, net), "USBLC6 D+/D- line pair protection.", usba_src)
         add(esd_ref, 5, "GND", "USBLC6 rail reference.", usba_src)
@@ -686,14 +686,14 @@ def load_contracts() -> None:
         add(c_ref, 1, local(usba_sheet, ss_in), "USB3-A SSTX AC-coupling cap centered on the pair.", usba_src)
         add(c_ref, 2, local(usba_sheet, ss_out), "SSTX series capacitor connector side.", usba_src)
     for pin, net in {
-        1: "J24_5V_PRE", 2: "HUB_DIS5_DM", 3: "HUB_DIS5_DP", 4: "GND",
+        1: "J24_5V_PRE", 2: "HUB_DIS5_DN", 3: "HUB_DIS5_DP", 4: "GND",
         5: "HUB_DIS5_RX_N", 6: "HUB_DIS5_RX_P", 7: "GND",
         8: "J24_SSTX_N", 9: "J24_SSTX_P", "SH": "GND",
     }.items():
         add("J24", str(pin), local(usba_sheet, net) if not net.startswith(("GND",)) else net,
             "USB 3.0 Type-A receptacle on hub DIS5.", usba_src)
     for pin, net in {
-        1: "J25_5V_PRE", 2: "HUB_DIS6_DM", 3: "HUB_DIS6_DP", 4: "GND", "SH": "GND",
+        1: "J25_5V_PRE", 2: "HUB_DIS6_DN", 3: "HUB_DIS6_DP", 4: "GND", "SH": "GND",
     }.items():
         add("J25", str(pin), local(usba_sheet, net) if not net.startswith(("GND",)) else net,
             "USB 2.0 Type-A receptacle on hub DIS6.", usba_src)
@@ -735,12 +735,12 @@ def load_contracts() -> None:
     add("R768", 2, "/MU_S0_HIGH", "Pulled-up PSON is used only as a weak status/control signal.", mu)
     for pin, net in {
         13: "/Mu Carrier/USBC1_SSTX_RAW_P", 15: "/Mu Carrier/USBC1_SSTX_RAW_N",
-        16: "/USBC1_SSRX_P", 18: "/USBC1_SSRX_N", 73: "/USBC1_DM", 75: "/USBC1_DP",
+        16: "/USBC1_SSRX_P", 18: "/USBC1_SSRX_N", 73: "/USBC1_DN", 75: "/USBC1_DP",
         19: "/Mu Carrier/USBC2_SSTX_RAW_P", 21: "/Mu Carrier/USBC2_SSTX_RAW_N",
-        22: "/USBC2_SSRX_P", 24: "/USBC2_SSRX_N", 70: "/USBC2_DP", 72: "/USBC2_DM",
-        129: "/MU_USB_OC_N", 79: "/EC_HOST_USB_DM", 81: "/EC_HOST_USB_DP",
-        109: "/AUDIO_USB_DM", 111: "/AUDIO_USB_DP", 76: "/MAKER_USB_DP", 78: "/MAKER_USB_DM",
-        82: "/TRACKPAD_USB_DP", 84: "/TRACKPAD_USB_DM",
+        22: "/USBC2_SSRX_P", 24: "/USBC2_SSRX_N", 70: "/USBC2_DP", 72: "/USBC2_DN",
+        129: "/MU_USB_OC_N", 79: "/EC_HOST_USB_DN", 81: "/EC_HOST_USB_DP",
+        109: "/AUDIO_USB_DN", 111: "/AUDIO_USB_DP", 76: "/MAKER_USB_DP", 78: "/MAKER_USB_DN",
+        82: "/TRACKPAD_USB_DP", 84: "/TRACKPAD_USB_DN",
         37: "/Mu Carrier/PCIE_M_L0_TX_RAW_P", 39: "/Mu Carrier/PCIE_M_L0_TX_RAW_N",
         40: "/Mu Carrier/PCIE_M_L0_RX_P", 42: "/Mu Carrier/PCIE_M_L0_RX_N",
         43: "/Mu Carrier/PCIE_M_L1_TX_RAW_P", 45: "/Mu Carrier/PCIE_M_L1_TX_RAW_N",
@@ -983,7 +983,7 @@ def load_contracts() -> None:
         add(conn, "A5", local(sheet, f"{usb}_CC1"), "USB-C CC1 to TPS25810.", conn_src)
         add(conn, "B5", local(sheet, f"{usb}_CC2"), "USB-C CC2 to TPS25810.", conn_src)
         add_many(conn, ["A6", "B6"], f"{native}_DP", "Native USB2 D+ tied to both Type-C orientations.", conn_src)
-        add_many(conn, ["A7", "B7"], f"{native}_DM", "Native USB2 D- tied to both Type-C orientations.", conn_src)
+        add_many(conn, ["A7", "B7"], f"{native}_DN", "Native USB2 D- tied to both Type-C orientations.", conn_src)
         for pin, net in {
             "A2": local(sheet, f"{usb}_TX1_P_CONN"), "A3": local(sheet, f"{usb}_TX1_N_CONN"),
             "A10": local(sheet, f"{usb}_RX2_N_CONN"), "A11": local(sheet, f"{usb}_RX2_P_CONN"),
@@ -1129,12 +1129,12 @@ def load_contracts() -> None:
     ec_usb_src = "TI TS3USB30E and TLV803E datasheets plus Ducktop2 physical internal-host VBUS contract"
     for pin, net in {
         1: "/EC_DFU_SEL", 2: "/EC_HOST_USB_DP", 4: local("Internal Services", "EC_USB_ISO_DP"),
-        5: "GND", 6: local("Internal Services", "EC_USB_ISO_DM"), 8: "/EC_HOST_USB_DM",
+        5: "GND", 6: local("Internal Services", "EC_USB_ISO_DN"), 8: "/EC_HOST_USB_DN",
         9: local("Internal Services", "EC_USB_OE_N"), 10: "/MCU_3V3",
     }.items():
         add("U61", pin, net, "EC USB data is disconnected unless the physical carrier host VBUS is valid.", ec_usb_src)
     add("U61", 3, local("Internal Services", "EC_DFU_DP"), "DFU-side D+ (rear programming port).", ec_usb_src)
-    add("U61", 7, local("Internal Services", "EC_DFU_DM"), "DFU-side D- (rear programming port).", ec_usb_src)
+    add("U61", 7, local("Internal Services", "EC_DFU_DN"), "DFU-side D- (rear programming port).", ec_usb_src)
     for pin, net in {1: "/INTERNAL_USB_VBUS_VALID", 2: "GND", 3: local("Internal Services", "EC_USB_OE_N")}.items():
         add("Q60", pin, net, "NMOS enables EC USB data only after physical host VBUS qualification.", ec_usb_src)
     add("R202", 1, "/MCU_3V3", "USB switch enable defaults high/disconnected.", ec_usb_src)
@@ -1142,7 +1142,7 @@ def load_contracts() -> None:
 
     trackpad_src = "USB-IF USB-C-to-USB 2.0 Standard-A cable assembly plus field-soldered trackpad cable contract"
     add("J58", "1", "GND", "Trackpad cable GND conductor; confirm continuity before soldering.", trackpad_src)
-    add("J58", "2", local("Internal Services", "TPAD_CONN_DM"), "Trackpad cable D- conductor; confirm continuity before soldering.", trackpad_src)
+    add("J58", "2", local("Internal Services", "TPAD_CONN_DN"), "Trackpad cable D- conductor; confirm continuity before soldering.", trackpad_src)
     add("J58", "3", local("Internal Services", "TPAD_CONN_DP"), "Trackpad cable D+ conductor; confirm continuity before soldering.", trackpad_src)
     add("J58", "4", local("Internal Services", "TPAD_5V"), "Trackpad cable VBUS conductor from the current-limited branch.", trackpad_src)
     trackpad_branch = "TI TPS2553 datasheet plus direct wired USB2 trackpad branch contract"
@@ -1162,7 +1162,7 @@ def load_contracts() -> None:
     add("R256", 1, "/MCU_3V3", "Trackpad branch-switch FAULT open-drain output requires an always-on pull-up.", "TI TPS2553 datasheet")
     add("R256", 2, "/TRACKPAD_FAULT_N", "Trackpad branch fault reaches the EC as an active-low signal.", "TI TPS2553 datasheet")
     for pin, net in {1: local("Internal Services", "TPAD_CONN_DP"),
-                     2: local("Internal Services", "TPAD_CONN_DM"), 3: "GND", 8: "GND"}.items():
+                     2: local("Internal Services", "TPAD_CONN_DN"), 3: "GND", 8: "GND"}.items():
         add("U62", pin, net, "Trackpad wired USB2 data-pair ESD protection.", "TI TPD4E05U06 datasheet")
     for pin in [4, 5, 6, 7, 9, 10]:
         add_nc("U62", pin, "Unused TPD4E05U06 package pin.", "TI TPD4E05U06 datasheet")
@@ -1318,7 +1318,7 @@ def load_contracts() -> None:
     pcm = "TI PCM2902C datasheet Figure 39 plus Ducktop2 radio-audio USB codec contract"
     for pin, net in {
         1: local("Radio Audio Codec", "CODEC_USB_DP"),
-        2: local("Radio Audio Codec", "CODEC_USB_DM"),
+        2: local("Radio Audio Codec", "CODEC_USB_DN"),
         3: local("Radio Audio Codec", "CODEC_VBUS"),
         4: "GND", 8: local("Radio Audio Codec", "CODEC_VDDI"),
         9: local("Radio Audio Codec", "CODEC_VDDI"),
@@ -1341,8 +1341,8 @@ def load_contracts() -> None:
         add_nc("U330", pin, "Unused PCM2902C HID/serial/status pin intentionally NC.", pcm)
     add("R330", 1, "/RADIO_CODEC_USB_DP", "Radio codec D+ comes from downstream port 1 of the embedded audio hub.", pcm)
     add("R330", 2, local("Radio Audio Codec", "CODEC_USB_DP"), "Radio codec D+ series resistor device side.", pcm)
-    add("R331", 1, "/RADIO_CODEC_USB_DM", "Radio codec D- comes from downstream port 1 of the embedded audio hub.", pcm)
-    add("R331", 2, local("Radio Audio Codec", "CODEC_USB_DM"), "Radio codec D- series resistor device side.", pcm)
+    add("R331", 1, "/RADIO_CODEC_USB_DN", "Radio codec D- comes from downstream port 1 of the embedded audio hub.", pcm)
+    add("R331", 2, local("Radio Audio Codec", "CODEC_USB_DN"), "Radio codec D- series resistor device side.", pcm)
     add("R337", 1, "/RADIO_CODEC_USB_VBUS", "Radio codec VBUS comes from the hub-controlled downstream power switch.", pcm)
     add("R337", 2, local("Radio Audio Codec", "CODEC_VBUS"), "Radio codec filtered VBUS sense/supply node.", pcm)
     for ref, gate, mic in [("Q330", "VHF_MUTE_GATE", "/RADIO_VHF_MIC_IN"),
@@ -1367,8 +1367,8 @@ def load_contracts() -> None:
     add("F400", 1, "/SYS_5V", "Protected system-audio branch enters from SYS_5V.", audio)
     add("F400", 2, local(sa, "AUDIO_5V"), "Audio branch fuse feeds the local amplifier and downstream-port switch.", audio)
     hub = {
-        1: local(sa, "SYSTEM_DAC_USB_DM"), 2: local(sa, "SYSTEM_DAC_USB_DP"),
-        3: "/RADIO_CODEC_USB_DM_HOST", 4: "/RADIO_CODEC_USB_DP_HOST",
+        1: local(sa, "SYSTEM_DAC_USB_DN"), 2: local(sa, "SYSTEM_DAC_USB_DP"),
+        3: "/RADIO_CODEC_USB_HOST_DN", 4: "/RADIO_CODEC_USB_HOST_DP",
         5: "/SYS_3V3", 10: "/SYS_3V3", 12: local(sa, "HUB_PORT1_EN"),
         13: local(sa, "HUB_PORT1_OC_N"), 14: local(sa, "HUB_CRFILT"),
         15: "/SYS_3V3", 16: local(sa, "HUB_PORT2_EN"),
@@ -1376,7 +1376,7 @@ def load_contracts() -> None:
         23: "/SYS_3V3", 24: local(sa, "HUB_CFG_SEL0"),
         25: local(sa, "HUB_CFG_SEL1"), 26: local(sa, "HUB_RESET_N"),
         27: local(sa, "HUB_VBUS_DET"), 28: local(sa, "HUB_NON_REM0"),
-        29: "/SYS_3V3", 30: "/AUDIO_USB_DM", 31: "/AUDIO_USB_DP",
+        29: "/SYS_3V3", 30: "/AUDIO_USB_DN", 31: "/AUDIO_USB_DP",
         32: local(sa, "HUB_XO"), 33: local(sa, "HUB_XI"),
         34: local(sa, "HUB_PLLFILT"), 35: local(sa, "HUB_RBIAS"),
         36: "/SYS_3V3", 37: "GND",
@@ -1397,7 +1397,7 @@ def load_contracts() -> None:
     for pin, net in {1: local(sa, "HUB_RESET_N"), 2: "GND", 3: "/SYS_3V3"}.items():
         add("U401", pin, net, "TLV803E holds the hub in reset until 3.3 V is valid.", audio)
     codec = {
-        1: local(sa, "CODEC_USB_DP"), 2: local(sa, "CODEC_USB_DM"),
+        1: local(sa, "CODEC_USB_DP"), 2: local(sa, "CODEC_USB_DN"),
         3: local(sa, "CODEC_VBUS"), 4: "GND", 8: local(sa, "CODEC_VDDI"),
         9: local(sa, "CODEC_VDDI"), 10: local(sa, "CODEC_VCCCI"), 11: "GND",
         12: local(sa, "MIC_ADC_L"), 13: local(sa, "MIC_ADC_R"),
@@ -1548,8 +1548,8 @@ def load_contracts() -> None:
         36: "MAKER_HOST_ACTIVE_N", 37: "MAKER_PWR_FAULT_N", 38: "MAKER_3V3_CORE", 39: "MAKER_1V1",
         40: "MAKER_ADC0", 41: "MAKER_ADC1", 42: "MAKER_ADC2", 43: "MAKER_PWR_EN",
         44: "MAKER_ADC_AVDD", 45: "MAKER_3V3_CORE", 46: "MAKER_VREG_AVDD",
-        48: "MAKER_VREG_LX", 49: "MAKER_3V3_CORE", 50: "MAKER_1V1", 51: "MAKER_USB_DM_MCU",
-        52: "MAKER_USB_DP_MCU", 53: "MAKER_3V3_CORE", 54: "MAKER_3V3_CORE", 55: "MAKER_QSPI_SD3",
+        48: "MAKER_VREG_LX", 49: "MAKER_3V3_CORE", 50: "MAKER_1V1", 51: "MAKER_USB_MCU_DN",
+        52: "MAKER_USB_MCU_DP", 53: "MAKER_3V3_CORE", 54: "MAKER_3V3_CORE", 55: "MAKER_QSPI_SD3",
         56: "MAKER_QSPI_SCLK", 57: "MAKER_QSPI_SD0", 58: "MAKER_QSPI_SD2",
         59: "MAKER_QSPI_SD1", 60: "MAKER_QSPI_SS",
     }
@@ -1584,7 +1584,7 @@ def load_contracts() -> None:
     maker_usb = "TI TS3USB30E and TLV803E datasheets plus Ducktop2 physical internal-host VBUS contract"
     for pin, net in {
         1: "GND", 2: "/MAKER_USB_DP", 4: local("Maker MCU", "MAKER_USB_ISO_DP"),
-        5: "GND", 6: local("Maker MCU", "MAKER_USB_ISO_DM"), 8: "/MAKER_USB_DM",
+        5: "GND", 6: local("Maker MCU", "MAKER_USB_ISO_DN"), 8: "/MAKER_USB_DN",
         9: local("Maker MCU", "MAKER_USB_OE_N"), 10: local("Maker MCU", "MAKER_3V3_CORE"),
     }.items():
         add("U906", pin, net, "Maker USB data is disconnected unless physical carrier host VBUS is valid.", maker_usb)
@@ -1787,10 +1787,10 @@ def load_current_architecture_overrides() -> None:
     dual_ports = {
         1: {"j": "J21", "mux": "U2000", "protect": "U2001", "eeprom": "U2002", "usb2": "U2003",
             "control": "U2004", "qualifier": "U2006",
-            "host_dp": "/USBC1_DP", "host_dm": "/USBC1_DM", "host_tx_p": "/USBC1_SSTX_P", "host_tx_n": "/USBC1_SSTX_N"},
+            "host_dp": "/USBC1_DP", "host_dm": "/USBC1_DN", "host_tx_p": "/USBC1_SSTX_P", "host_tx_n": "/USBC1_SSTX_N"},
         2: {"j": "J11", "mux": None, "protect": "U2011", "eeprom": "U2012", "usb2": "U2013",
             "control": "U2014", "qualifier": "U2016",
-            "host_dp": "/HUB_DS1_DP", "host_dm": "/HUB_DS1_DM", "host_tx_p": None, "host_tx_n": None},
+            "host_dp": "/HUB_DS1_DP", "host_dm": "/HUB_DS1_DN", "host_tx_p": None, "host_tx_n": None},
     }
     clear_ref_contracts(*(value for cfg in dual_ports.values() for value in (
         cfg["j"], cfg["mux"], cfg["protect"], cfg["eeprom"], cfg["usb2"],
@@ -1804,8 +1804,8 @@ def load_current_architecture_overrides() -> None:
         add_many(jref, ("A4", "A9", "B4", "B9"), f"/{prefix}_VBUS_RAW", "Raw connector VBUS before the default-off eFuse.", source)
         for pin, net in {
             "A5": local("Power Inputs", f"{prefix}_CC1_CONN"), "B5": local("Power Inputs", f"{prefix}_CC2_CONN"),
-            "A6": local("Power Inputs", f"{prefix}_DP_CONN"), "B6": local("Power Inputs", f"{prefix}_DP_CONN"),
-            "A7": local("Power Inputs", f"{prefix}_DM_CONN"), "B7": local("Power Inputs", f"{prefix}_DM_CONN"),
+            "A6": local("Power Inputs", f"{prefix}_CONN_DP"), "B6": local("Power Inputs", f"{prefix}_CONN_DP"),
+            "A7": local("Power Inputs", f"{prefix}_CONN_DN"), "B7": local("Power Inputs", f"{prefix}_CONN_DN"),
         }.items():
             add(jref, pin, net, "Dual-role connector USB2/CC signal.", source)
         if cfg["mux"] is None:
@@ -1844,14 +1844,14 @@ def load_current_architecture_overrides() -> None:
 
         protect = cfg["protect"]
         for pin, net in {
-            1: local("Power Inputs", f"{prefix}_DP_CONN"), 2: local("Power Inputs", f"{prefix}_DM_CONN"),
+            1: local("Power Inputs", f"{prefix}_CONN_DP"), 2: local("Power Inputs", f"{prefix}_CONN_DN"),
             3: local("Power Inputs", f"{prefix}_CC_ESD_VBIAS"), 4: local("Power Inputs", f"{prefix}_CC1_CONN"),
             5: local("Power Inputs", f"{prefix}_CC2_CONN"), 6: local("Power Inputs", f"{prefix}_CC2_CONN"),
             7: local("Power Inputs", f"{prefix}_CC1_CONN"), 8: "GND",
             9: local("Power Inputs", f"{prefix}_CC_FAULT_LOCAL_N"), 10: local("Power Inputs", f"{prefix}_LDO3V3"),
             11: local("Power Inputs", f"{prefix}_CC2_SYS"), 12: local("Power Inputs", f"{prefix}_CC1_SYS"),
-            13: "GND", 14: local("Power Inputs", f"{prefix}_DM_HOST_SWITCHED"),
-            15: local("Power Inputs", f"{prefix}_DP_HOST_SWITCHED"), 18: "GND", 21: "GND",
+            13: "GND", 14: local("Power Inputs", f"{prefix}_HOST_SWITCHED_DN"),
+            15: local("Power Inputs", f"{prefix}_HOST_SWITCHED_DP"), 18: "GND", 21: "GND",
         }.items():
             add(protect, pin, net, "TPD4S201 CC and USB2 short-to-VBUS protection path.", source)
         for pin in (16, 17, 19, 20):
@@ -1866,8 +1866,8 @@ def load_current_architecture_overrides() -> None:
 
         usb2 = cfg["usb2"]
         for pin, net in {
-            1: "GND", 2: cfg["host_dp"], 4: local("Power Inputs", f"{prefix}_DP_HOST_SWITCHED"),
-            5: "GND", 6: local("Power Inputs", f"{prefix}_DM_HOST_SWITCHED"), 8: cfg["host_dm"],
+            1: "GND", 2: cfg["host_dp"], 4: local("Power Inputs", f"{prefix}_HOST_SWITCHED_DP"),
+            5: "GND", 6: local("Power Inputs", f"{prefix}_HOST_SWITCHED_DN"), 8: cfg["host_dm"],
             9: local("Power Inputs", f"{prefix}_USB2_OE_N"), 10: "/SYS_3V3",
         }.items():
             add(usb2, pin, net, "USB2 remains disconnected until DFP data role is confirmed.", source)
@@ -1901,15 +1901,15 @@ def load_current_architecture_overrides() -> None:
     hub = "Microchip USB7206C four-active-port USB 3.2 hub contract"
     for pin, net in {
         2: "/INTERNAL_USB_VBUS_VALID",
-        5: "/HUB_DS1_DP", 6: "/HUB_DS1_DM",
-        14: local(hub_sheet, "HUB_DS2_DP"), 15: local(hub_sheet, "HUB_DS2_DM"),
+        5: "/HUB_DS1_DP", 6: "/HUB_DS1_DN",
+        14: local(hub_sheet, "HUB_DS2_DP"), 15: local(hub_sheet, "HUB_DS2_DN"),
         16: local(hub_sheet, "HUB_DS2_TX_RAW_P"), 17: local(hub_sheet, "HUB_DS2_TX_RAW_N"),
         19: local(hub_sheet, "HUB_DS2_SSRX_P"), 20: local(hub_sheet, "HUB_DS2_SSRX_N"),
-        27: local(hub_sheet, "HUB_DS3_DP"), 28: local(hub_sheet, "HUB_DS3_DM"),
+        27: local(hub_sheet, "HUB_DS3_DP"), 28: local(hub_sheet, "HUB_DS3_DN"),
         29: local(hub_sheet, "HUB_DS3_TX_RAW_P"), 30: local(hub_sheet, "HUB_DS3_TX_RAW_N"),
         32: local(hub_sheet, "HUB_DS3_SSRX_P"), 33: local(hub_sheet, "HUB_DS3_SSRX_N"),
-        34: local(hub_sheet, "HUB_DS4_DP"), 35: local(hub_sheet, "HUB_DS4_DM"),
-        89: "/USBC2_DP", 90: "/USBC2_DM", 91: local(hub_sheet, "HUB_UP_TX_RAW_P"),
+        34: local(hub_sheet, "HUB_DS4_DP"), 35: local(hub_sheet, "HUB_DS4_DN"),
+        89: "/USBC2_DP", 90: "/USBC2_DN", 91: local(hub_sheet, "HUB_UP_TX_RAW_P"),
         92: local(hub_sheet, "HUB_UP_TX_RAW_N"), 94: "/USBC2_SSTX_P", 95: "/USBC2_SSTX_N",
     }.items():
         add("U1700", pin, net, "Hub upstream or active downstream data lane.", hub)
@@ -1917,8 +1917,8 @@ def load_current_architecture_overrides() -> None:
         add_nc("U1700", pin,
                "DS1/DS4 SS pins retired: J11/J12 are USB2-only after the board split.", hub)
     for pin, net in {
-        41: local(hub_sheet, "HUB_DIS6_DM"), 42: local(hub_sheet, "HUB_DIS6_DP"),
-        81: local(hub_sheet, "HUB_DIS5_DP"), 82: local(hub_sheet, "HUB_DIS5_DM"),
+        41: local(hub_sheet, "HUB_DIS6_DN"), 42: local(hub_sheet, "HUB_DIS6_DP"),
+        81: local(hub_sheet, "HUB_DIS5_DP"), 82: local(hub_sheet, "HUB_DIS5_DN"),
     }.items():
         add("U1700", pin, net, "Active USB-A downstream port D+/D- lane (J25 on DIS6, J24 on DIS5).", hub)
     for pin, net in {
@@ -1971,7 +1971,7 @@ def load_current_architecture_overrides() -> None:
         for pin, net in {
             "A5": local(hub_sheet, f"{jref}_CC1"), "B5": local(hub_sheet, f"{jref}_CC2"),
             "A6": local(hub_sheet, f"HUB_DS{ds}_DP"), "B6": local(hub_sheet, f"HUB_DS{ds}_DP"),
-            "A7": local(hub_sheet, f"HUB_DS{ds}_DM"), "B7": local(hub_sheet, f"HUB_DS{ds}_DM"),
+            "A7": local(hub_sheet, f"HUB_DS{ds}_DN"), "B7": local(hub_sheet, f"HUB_DS{ds}_DN"),
         }.items():
             add(jref, pin, net, "Source-only connector data or CC signal.", source)
         if usb2_only:
@@ -2019,8 +2019,8 @@ def load_current_architecture_overrides() -> None:
     add_many("J2300", (2, 3, 6), local("Optional Radio Daughterboard Interface", "RADIO_DB_5V"), "Current-sharing radio-board 5V supply contacts.", radio)
     radio_header = {
         5: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_VBUS_DB"),
-        8: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DP_DB"),
-        9: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DM_DB"),
+        8: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DB_DP"),
+        9: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DB_DN"),
         11: local("Optional Radio Daughterboard Interface", "RADIO_VHF_UART_TX_DB"),
         12: local("Optional Radio Daughterboard Interface", "RADIO_VHF_UART_RX_DB"),
         13: local("Optional Radio Daughterboard Interface", "RADIO_UHF_UART_TX_DB"),
@@ -2066,10 +2066,10 @@ def load_current_architecture_overrides() -> None:
     add_nc("U2300", 3, "AUXOFF is unused.", radio)
     add_nc("U2300", 10, "ITIMER is unused for the released radio branch.", radio)
     for pin, net in {
-        1: "GND", 2: "/RADIO_CODEC_USB_DP_HOST",
-        4: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DP_DB"), 5: "GND",
-        6: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DM_DB"),
-        8: "/RADIO_CODEC_USB_DM_HOST", 9: local("Optional Radio Daughterboard Interface", "RADIO_USB_OE_N"),
+        1: "GND", 2: "/RADIO_CODEC_USB_HOST_DP",
+        4: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DB_DP"), 5: "GND",
+        6: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_DB_DN"),
+        8: "/RADIO_CODEC_USB_HOST_DN", 9: local("Optional Radio Daughterboard Interface", "RADIO_USB_OE_N"),
         10: "/MCU_3V3",
     }.items():
         add("U2303", pin, net, "USB2 disconnect prevents an absent radio codec from loading or back-powering the host.", radio)

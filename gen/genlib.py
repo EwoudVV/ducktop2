@@ -30,6 +30,7 @@ LIBMAP = {
     "Conn_02x30_Odd_Even": "Connector_Generic",
     "Conn_01x10_FFC_MP": "Conn_01x10_FFC_MP",
     "Conn_01x30_FFC_MP": "Conn_01x30_FFC_MP",
+    "Conn_01x02_MP": "Conn_01x02_MP", "Conn_01x03_MP": "Conn_01x03_MP", "Conn_01x04_MP": "Conn_01x04_MP",
     "Conn_01x100_FFC_MP": "Conn_01x100_FFC_MP",
     "Conn_01x68_FFC_MP": "Conn_01x68_FFC_MP",
     "Conn_02x30_MP": "Conn_02x30_MP",

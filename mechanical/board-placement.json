@@ -1,0 +1,115 @@
+{
+  "units": "mm",
+  "view": "top, front of case at positive y",
+  "boards": {
+    "left": {
+      "file": "left_io/left_io.kicad_pcb",
+      "translation": [
+        0,
+        0
+      ],
+      "rotation": 0,
+      "components": "up"
+    },
+    "center": {
+      "file": "ducktop2-center.kicad_pcb",
+      "translation": [
+        0,
+        0
+      ],
+      "rotation": 0,
+      "components": "up"
+    },
+    "right": {
+      "file": "right_io/right_io.kicad_pcb",
+      "translation": [
+        0,
+        0
+      ],
+      "rotation": 0,
+      "components": "up"
+    },
+    "bms": {
+      "file": "bms/bms.kicad_pcb",
+      "translation": [
+        47.35,
+        91.448
+      ],
+      "rotation": 0,
+      "components": "up"
+    }
+  },
+  "bms_notch": {
+    "side_walls_x": [
+      152.55,
+      217.45
+    ],
+    "back_wall_y": 152.5,
+    "front_y": 185,
+    "inside_corner_radius": 1.5,
+    "minimum_board_gap": 1.5
+  },
+  "fpc3": {
+    "ends": [
+      [
+        "center",
+        "FPC105"
+      ],
+      [
+        "bms",
+        "FPC106"
+      ]
+    ],
+    "contacts": 30,
+    "pitch": 0.5,
+    "contact_sides": "same side at both ends",
+    "mating_end_thickness": 0.3,
+    "mapping": "center N to bms 31-N",
+    "corridor_width": 17,
+    "length": null,
+    "length_note": "measure the seated cable path and loop before ordering"
+  },
+  "m2_cards": {
+    "nvme": {
+      "socket": "J10",
+      "retainer": "H3",
+      "card": "2280",
+      "retainer_from_pad1_local": [
+        9.25,
+        83.55
+      ]
+    },
+    "wifi": {
+      "socket": "J40",
+      "retainer": "H4",
+      "card": "2230",
+      "retainer_from_pad1_local": [
+        9.25,
+        33.55
+      ]
+    }
+  },
+  "chassis_mounts": {
+    "center": [
+      "H14",
+      "H21",
+      "H22",
+      "H23",
+      "H24",
+      "H25",
+      "H26"
+    ],
+    "left": [
+      "H10",
+      "H11",
+      "H12",
+      "H16"
+    ],
+    "right": [
+      "H13",
+      "H15",
+      "H17",
+      "H27"
+    ]
+  }
+}

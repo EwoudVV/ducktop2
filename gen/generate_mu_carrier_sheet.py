@@ -70,14 +70,14 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         "15": ("USBC1_SSTX_RAW_N", "local"),
         "16": ("USBC1_SSRX_P", "hier"),
         "18": ("USBC1_SSRX_N", "hier"),
-        "73": ("USBC1_DM", "hier"),
+        "73": ("USBC1_DN", "hier"),
         "75": ("USBC1_DP", "hier"),
         "19": ("USBC2_SSTX_RAW_P", "local"),
         "21": ("USBC2_SSTX_RAW_N", "local"),
         "22": ("USBC2_SSRX_P", "hier"),
         "24": ("USBC2_SSRX_N", "hier"),
         "70": ("USBC2_DP", "hier"),
-        "72": ("USBC2_DM", "hier"),
+        "72": ("USBC2_DN", "hier"),
         "129": ("PD_PROTECT_FAULT_N", "hier"),
     })
 
@@ -99,14 +99,14 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     # USB2_P5 hosts the internal two-port system-audio hub; USB2_P7 hosts the maker MCU sandbox.
     # USB2_P8 hosts the internal trackpad so the OS sees a normal USB HID pointing device.
     mu_nets.update({
-        "79": ("EC_HOST_USB_DM", "hier"),
+        "79": ("EC_HOST_USB_DN", "hier"),
         "81": ("EC_HOST_USB_DP", "hier"),
-        "109": ("AUDIO_USB_DM", "hier"),
+        "109": ("AUDIO_USB_DN", "hier"),
         "111": ("AUDIO_USB_DP", "hier"),
         "76": ("MAKER_USB_DP", "hier"),
-        "78": ("MAKER_USB_DM", "hier"),
+        "78": ("MAKER_USB_DN", "hier"),
         "82": ("TRACKPAD_USB_DP", "hier"),
-        "84": ("TRACKPAD_USB_DM", "hier"),
+        "84": ("TRACKPAD_USB_DN", "hier"),
     })
 
     # The panel connects to the Mu module's onboard eDP connector; no display
@@ -980,10 +980,10 @@ def place_fpc_connector(s, ref, symname, pinmap, value, x=60, y=300, pwr_base=31
 
 
 FPC_BOM = {
-    "FPC101": ("Hirose", "FH41-68S-0.5SH(05)"),
-    "FPC102": ("Hirose", "FH41-68S-0.5SH(05)"),
-    "FPC103": ("Hirose", "FH41-68S-0.5SH(05)"),
-    "FPC104": ("Hirose", "FH41-68S-0.5SH(05)"),
+    "FPC101": ("Hirose", "FH41-68S-0.5SH(28)"),
+    "FPC102": ("Hirose", "FH41-68S-0.5SH(28)"),
+    "FPC103": ("Hirose", "FH41-68S-0.5SH(28)"),
+    "FPC104": ("Hirose", "FH41-68S-0.5SH(28)"),
     "FPC105": ("Hirose", "FH12-30S-0.5SH(55)"),
     "FPC106": ("Hirose", "FH12-30S-0.5SH(55)"),
 }
@@ -1100,7 +1100,7 @@ def main():
     ]
     ec_hier_nets = [
         "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
-        "CASE_PWRBTN_N", "EC_AON_IN", "MCU_USB_DP", "MCU_USB_DM", "MCU_3V3", "AUX_DC_ADC", "MU_PWRBTN_N", "MU_RSTBTN_N",
+        "CASE_PWRBTN_N", "EC_AON_IN", "MCU_USB_DP", "MCU_USB_DN", "MCU_3V3", "AUX_DC_ADC", "MU_PWRBTN_N", "MU_RSTBTN_N",
         "WIFI_W_DISABLE1_N_EC", "WIFI_W_DISABLE2_N_EC", "SERVICE_MUX_RESET_N",
         "GNSS_UART_RX", "GNSS_UART_TX", "GNSS_RESET_N", "GNSS_PPS", "GNSS_EXTINT",
         "RADIO_GPIO0",
@@ -1127,11 +1127,11 @@ def main():
         "VSYS", "SYS_5V", "SYS_3V3", "MCU_3V3", "MU_12V", "MU_PWRBTN_N", "MU_RSTBTN_N", "MU_S0_HIGH",
         "MU_HOST_ACTIVE", "PCIE_3V3", "INTERNAL_USB_VBUS_VALID", "INTERNAL_USB_VBUS_FAULT_N",
         "MU_12V_ENABLE", "MU_12V_PG",
-        "EC_HOST_USB_DP", "EC_HOST_USB_DM", "AUDIO_USB_DP", "AUDIO_USB_DM",
-        "TRACKPAD_USB_DP", "TRACKPAD_USB_DM",
-        "MAKER_USB_DP", "MAKER_USB_DM",
-        "USBC1_SSTX_P", "USBC1_SSTX_N", "USBC1_SSRX_P", "USBC1_SSRX_N", "USBC1_DP", "USBC1_DM",
-        "USBC2_SSTX_P", "USBC2_SSTX_N", "USBC2_SSRX_P", "USBC2_SSRX_N", "USBC2_DP", "USBC2_DM",
+        "EC_HOST_USB_DP", "EC_HOST_USB_DN", "AUDIO_USB_DP", "AUDIO_USB_DN",
+        "TRACKPAD_USB_DP", "TRACKPAD_USB_DN",
+        "MAKER_USB_DP", "MAKER_USB_DN",
+        "USBC1_SSTX_P", "USBC1_SSTX_N", "USBC1_SSRX_P", "USBC1_SSRX_N", "USBC1_DP", "USBC1_DN",
+        "USBC2_SSTX_P", "USBC2_SSTX_N", "USBC2_SSRX_P", "USBC2_SSRX_N", "USBC2_DP", "USBC2_DN",
         "PD_PROTECT_FAULT_N",
         "TCP0_DDC_SDA", "TCP0_DDC_SCL", "TCP0_HPD",
         "TCP0_TX0_P", "TCP0_TX0_N", "TCP0_TX1_P", "TCP0_TX1_N",
@@ -1155,8 +1155,8 @@ def main():
     internal_hier_nets = [
         "SYS_5V", "SYS_3V3", "MCU_3V3", "MU_12V", "MU_HOST_ACTIVE",
         "INTERNAL_USB_VBUS_VALID",
-        "EC_HOST_USB_DP", "EC_HOST_USB_DM", "MCU_USB_DP", "MCU_USB_DM",
-        "TRACKPAD_USB_DP", "TRACKPAD_USB_DM",
+        "EC_HOST_USB_DP", "EC_HOST_USB_DN", "MCU_USB_DP", "MCU_USB_DN",
+        "TRACKPAD_USB_DP", "TRACKPAD_USB_DN",
         "FAN_PWM", "FAN_TACH", "LID_CLOSED_N",
         "THERM_SKIN_ADC", "THERM_MU_ADC", "TRACKPAD_FAULT_N",
     ]
@@ -1177,16 +1177,16 @@ def main():
     ]
     audio_hier_nets = [
         "MCU_3V3",
-        "RADIO_CODEC_USB_DP_HOST", "RADIO_CODEC_USB_DM_HOST", "RADIO_CODEC_USB_VBUS_HOST",
+        "RADIO_CODEC_USB_HOST_DP", "RADIO_CODEC_USB_HOST_DN", "RADIO_CODEC_USB_VBUS_HOST",
         "RADIO_VHF_AUDIO_OUT", "RADIO_UHF_AUDIO_OUT", "RADIO_VHF_MIC_IN", "RADIO_UHF_MIC_IN",
         "RADIO_VHF_PTT_N", "RADIO_UHF_PTT_N",
     ]
     maker_hier_nets = [
-        "SYS_5V", "INTERNAL_USB_VBUS_VALID", "MAKER_USB_DP", "MAKER_USB_DM",
+        "SYS_5V", "INTERNAL_USB_VBUS_VALID", "MAKER_USB_DP", "MAKER_USB_DN",
     ]
     system_audio_hier_nets = [
-        "SYS_5V", "SYS_3V3", "INTERNAL_USB_VBUS_VALID", "AUDIO_USB_DP", "AUDIO_USB_DM",
-        "RADIO_CODEC_USB_DP_HOST", "RADIO_CODEC_USB_DM_HOST", "RADIO_CODEC_USB_VBUS_HOST",
+        "SYS_5V", "SYS_3V3", "INTERNAL_USB_VBUS_VALID", "AUDIO_USB_DP", "AUDIO_USB_DN",
+        "RADIO_CODEC_USB_HOST_DP", "RADIO_CODEC_USB_HOST_DN", "RADIO_CODEC_USB_VBUS_HOST",
         "AUDIO_AMP_EC_EN", "AUDIO_MIC_EN",
     ]
 

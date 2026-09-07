@@ -1,6 +1,6 @@
 # cables and connectors
 
-updated 4 september 2026. the signal maps live in
+updated 7 september 2026. the signal maps live in
 [`gen/fpc_contract.py`](../../gen/fpc_contract.py). this page covers how those
 maps relate to the physical cables and what remains to be settled.
 
@@ -38,23 +38,26 @@ use this convention. confirm the exact ordered connector against its drawing.
 
 ## positions read from the boards
 
-KiCad coordinates in mm and rotations in degrees, checked 4 september;
-FPC102's center-board position was updated on 6 september.
+KiCad coordinates in mm and rotations in degrees, checked 6 september.
 
 | Ref | Board | X | Y | Rotation |
 | --- | --- | ---: | ---: | ---: |
 | FPC101 | Left | 65.6 | 92.5 | 90 |
 | FPC102 | Center | 73.85 | 92.5 | 270 |
 | FPC103 | Center | 294.6 | 92.5 | 90 |
-| FPC104 | Right | 303.6 | 92.5 | 270 |
-| FPC105 | Center | 123.5 | 6.5 | 180 |
+| FPC104 | Right | 303.9 | 92.5 | 270 |
+| FPC105 | Center | 184.251 | 132.5 | 0 |
 | FPC106 | BMS | 136.901 | 68.552 | 180 |
 
-the BMS was moved and reshaped after the original cable plan. its coordinates
-are not its installed chassis coordinates. FPC105 and FPC106 now both read
-180 degrees in their files, so the old flat, opposite-facing installation
-cannot simply be assumed. decide the installed BMS orientation and verify
-the conductor mapping before buying the cable.
+the BMS sits face up in the center board's front notch. its installed
+translation is (+47.35, +91.448), with no rotation. FPC106 is therefore at
+(184.251, 160) in the shared frame, facing FPC105. all 30 opposing pad
+positions line up in X and their reversed pin map matches.
+
+the two actuator envelopes are 18.7 mm apart. a 17 mm-wide corridor is
+reserved between them. measure the seated path and a gentle service loop
+before ordering the cable. the assembly transform and checked datums are
+in `mechanical/board-placement.json` and `mechanical/board-datums.json`.
 
 ## cable construction and ordering
 
@@ -65,11 +68,10 @@ tolerance in the actual cable drawing, including any stiffener.
 sources: [FH12-30S-0.5SH(55)](https://www.hirose.com/en/product/p/CL0586-0525-1-55),
 [FH41-68S-0.5SH(28)](https://www.hirose.com/en/product/p/CL0580-2202-5-28).
 
-the project currently names FH41-68S-0.5SH(05), while earlier purchasing
-notes also mention (28). resolve the orderable suffix against the footprint,
-contact construction, drawing, and supplier listing. the connector's height
-is not the cable thickness. check the FH41 footprint and current 3D model
-against the exact vendor drawing as part of that work.
+the I/O connectors now specify FH41-68S-0.5SH(28). Hirose lists (05) as
+discontinued and (28) as fully compatible in mounting, mating, and
+specification. the land pattern stays the same.
+[Hirose replacement notice](https://www.hirose.com/en/product/p/CL0580-2202-5-05).
 
 measure mouth-to-mouth routes, insertion lengths, bends, service loops, and
 installed board offsets before selecting cable lengths.
@@ -83,8 +85,8 @@ the rating of a complete heated cable/connector assembly.
 
 | Connection | What is fixed | What remains |
 | --- | --- | --- |
-| Keyboard | 30-pin interface; center J310 is at (216.5, 12.5), rotation 270 | Installed route, length, seating, and continuity against both board revisions |
-| Radio | Removable 30-pin interface; center J2300 is at (188, 4), rotation 0 | Radio chassis location, supports, orientation, and cable route |
+| Keyboard | 30-pin interface; center J310 is at (145, 49), rotation 270 | Installed route, length, seating, and continuity against both board revisions |
+| Radio | Removable 30-pin interface; center J2300 is at (155, 67.75), rotation 0 | Radio chassis location, supports, orientation, and cable route |
 | OLEDs | J41/J45 use four-wire cables: 1 GND, 2 3.3 V, 3 SCL, 4 SDA | Module mounts, cable lengths, and rise-time check with the installed harness |
 | Trackpad | J58: 1 GND, 2 D-, 3 D+, 4 VBUS; USB-C plug at trackpad | Exact cable, cut-end identification, bend path, clamp, and pull test |
 | Internal display | Mu onboard eDP connection | Exact panel connector, all 40 conductors, rail limits, and hinge route |

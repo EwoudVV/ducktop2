@@ -110,9 +110,9 @@ _FPC_BOUNDARY_LABELS = [
     "TCP0_DDC_SCL", "TCP0_DDC_SDA", "TCP0_HPD",
     "TCP0_TX0_N", "TCP0_TX0_P", "TCP0_TX1_N", "TCP0_TX1_P",
     "TCP0_TXRX0_N", "TCP0_TXRX0_P", "TCP0_TXRX1_N", "TCP0_TXRX1_P",
-    "USBC1_DM", "USBC1_DP", "USBC1_SSRX_N", "USBC1_SSRX_P",
+    "USBC1_DN", "USBC1_DP", "USBC1_SSRX_N", "USBC1_SSRX_P",
     "USBC1_SSTX_N", "USBC1_SSTX_P",
-    "USBC2_DM", "USBC2_DP", "USBC2_SSRX_N", "USBC2_SSRX_P",
+    "USBC2_DN", "USBC2_DP", "USBC2_SSRX_N", "USBC2_SSRX_P",
     "USBC2_SSTX_N", "USBC2_SSTX_P",
 ]
 for _label in _FPC_BOUNDARY_LABELS:
@@ -128,7 +128,7 @@ for _label in _FPC_BOUNDARY_LABELS:
 # PACK_POS_FUSED are FPC-3 boundary nets whose center-side host is the gauge/
 # ship-FET only; USB_PD_SELECTED and USB_PORT_5V are consumed by the left
 # board's selector now.  Their root labels are Phase 4 connector placeholders.
-for _label in ("HUB_DS1_DM", "HUB_DS1_DP", "FG_VSS", "PACK_POS_FUSED",
+for _label in ("HUB_DS1_DN", "HUB_DS1_DP", "FG_VSS", "PACK_POS_FUSED",
                "USB_PD_SELECTED", "USB_PORT_5V"):
     ALLOWED_ERC_WARNINGS[(
         "error", "label_dangling",

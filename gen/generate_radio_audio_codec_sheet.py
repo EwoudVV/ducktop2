@@ -4,7 +4,7 @@ from build_ducktop2 import Sheet, FOOTPRINTS
 def pcm2902c_nets():
     return {
         "1": ("CODEC_USB_DP", "local"),
-        "2": ("CODEC_USB_DM", "local"),
+        "2": ("CODEC_USB_DN", "local"),
         "3": ("CODEC_VBUS", "local"),
         "4": ("GND", "local"),
         "5": ("", "nc"),
@@ -54,7 +54,7 @@ def build(sheet_symbol_uuid, logic_3v3="MCU_3V3"):
     s.place("R330", "R", "22R USB DP series", 20, 90, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("RADIO_CODEC_USB_DP", "hier"), "2": ("CODEC_USB_DP", "local")})
     s.place("R331", "R", "22R USB DM series", 20, 102.7, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("RADIO_CODEC_USB_DM", "hier"), "2": ("CODEC_USB_DM", "local")})
+            pin_nets={"1": ("RADIO_CODEC_USB_DN", "hier"), "2": ("CODEC_USB_DN", "local")})
     s.place("R337", "R", "2.2R PCM2902C VBUS filter", 20, 125.73, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("RADIO_CODEC_USB_VBUS", "hier"), "2": ("CODEC_VBUS", "local")})
     s.pwrflag(20, 132.08, "CODEC_VBUS")

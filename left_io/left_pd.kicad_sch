@@ -4690,22 +4690,22 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid beaeb316-a42c-5b3e-a2eb-6b93edc3570b)
 )
-(label "PD1_DP_CONN"
+(label "PD1_CONN_DP"
   (at 289.56 99.06 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 7e2529bc-9657-5fe4-b37d-3c05eea271f5)
 )
-(label "PD1_DP_CONN"
+(label "PD1_CONN_DP"
   (at 289.56 101.6 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid be7d2a97-f4dd-56ff-a88f-68a1b42b45ee)
 )
-(label "PD1_DM_CONN"
+(label "PD1_CONN_DN"
   (at 289.56 93.98 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d99a683c-531f-53e6-98ed-f6ef09bbeefc)
 )
-(label "PD1_DM_CONN"
+(label "PD1_CONN_DN"
   (at 289.56 96.52 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid edcdc94e-ff0d-5279-9e16-19027d5b3c6d)
@@ -4768,7 +4768,7 @@
   (property "Manufacturer" "Texas Instruments" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "TPD4S201RUKR" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd4s201.pdf" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ChannelUse" "CC1_CC2_AND_USB2_DP_DM;DEAD_BATTERY_RD_ENABLED" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ChannelUse" "CC1_CC2_AND_USB2_DP_DN;DEAD_BATTERY_RD_ENABLED" (at 226.06 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 9b428bae-92b4-5022-8da9-10e025e2ba20))
   (pin "2" (uuid 88f494d2-2adc-5cfb-9dda-47e936b4d670))
   (pin "3" (uuid d80a3292-f389-53f1-bfca-bb1425bc8c06))
@@ -4799,12 +4799,12 @@
     )
   )
 )
-(label "PD1_DP_CONN"
+(label "PD1_CONN_DP"
   (at 213.36 95.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid c823d05f-d7df-5fe3-bfa4-157823a3ca50)
 )
-(label "PD1_DM_CONN"
+(label "PD1_CONN_DN"
   (at 213.36 97.79 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 2e2c607a-dd50-5d7b-a836-a21ef5b9755e)
@@ -4864,12 +4864,12 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 99b50c02-dcf8-58d3-9122-975a62865f52)
 )
-(label "PD1_DM_HOST_SWITCHED"
+(label "PD1_HOST_SWITCHED_DN"
   (at 238.76 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid f7a96226-b7ba-551c-851c-9872478761dd)
 )
-(label "PD1_DP_HOST_SWITCHED"
+(label "PD1_HOST_SWITCHED_DP"
   (at 238.76 107.95 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid bc8dac17-3e1d-500b-b84c-55559d72b7fe)
@@ -5934,7 +5934,7 @@
   (uuid 8d9bac23-b35c-5f50-991c-ec37d5137fcb)
 )
 (no_connect (at 220.98 170.18) (uuid 76db50f7-addd-5182-8362-90e14fb3733b))
-(label "PD1_DP_HOST_SWITCHED"
+(label "PD1_HOST_SWITCHED_DP"
   (at 200.66 162.56 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 077c796a-068c-56d9-b7f4-bc77a8dd2bac)
@@ -5944,13 +5944,13 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid f82dc0fd-77b7-5dba-8662-d08a378f3d30)
 )
-(label "PD1_DM_HOST_SWITCHED"
+(label "PD1_HOST_SWITCHED_DN"
   (at 200.66 165.1 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 5e51bffb-7e73-5c82-84e6-b2832bed4c7f)
 )
 (no_connect (at 220.98 172.72) (uuid f178d99d-952b-549c-b91e-8230317353ac))
-(hierarchical_label "USBC1_DM"
+(hierarchical_label "USBC1_DN"
   (shape bidirectional)
   (at 220.98 165.1 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))

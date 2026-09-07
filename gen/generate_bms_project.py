@@ -245,6 +245,7 @@ def build_bms_sheet(sheet_symbol_uuid):
         col, row = k % 2, k // 2
         s.place(ref, "TestPoint", net, 600 + col * 40, 75 + row * 15,
                 footprint=FOOTPRINTS["TestPoint_Pad_1.5"],
+                in_bom=False,
                 pin_nets={"1": (net, "local")},
                 extra_props={"Manufacturer": "-",
                              "Note": "test point, no MPN"})

@@ -2,7 +2,7 @@
 """Create a candidate that separates the unrouted trackpad USB series resistors.
 
 The reviewed 2026-07-27 board places R250 and R251 so that R250.1
-(/TRACKPAD_USB_DP) overlaps R251.2 (/Internal Services/TPAD_CONN_DM).  This
+(/TRACKPAD_USB_DP) overlaps R251.2 (/Internal Services/TPAD_CONN_DN).  This
 helper is deliberately hash-locked to that board.  It moves only R251 from
 (179.3, 88.6) to (180.3, 90.3), after proving that neither old R251 pad has a
 track endpoint.  Run a zone refill only in a copied project after this helper;

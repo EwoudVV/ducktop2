@@ -8037,7 +8037,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 77b05e0e-a36e-5c47-8e21-6c40924e1f9c)
 )
-(hierarchical_label "HUB_DS1_DM"
+(hierarchical_label "HUB_DS1_DN"
   (shape bidirectional)
   (at 411.48 48.26 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -8059,7 +8059,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid eb9a2ba4-914d-5878-8df7-1a7287d7e9eb)
 )
-(label "HUB_DS2_DM"
+(label "HUB_DS2_DN"
   (at 436.88 58.42 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 49b449f0-ed5b-50da-adf8-48241f982fa4)
@@ -8132,7 +8132,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 5a4d8db7-6115-560a-9f28-eda4053723e1)
 )
-(label "HUB_DS3_DM"
+(label "HUB_DS3_DN"
   (at 411.48 121.92 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid cb8bba98-8b5e-574d-ad52-889e3d278cbf)
@@ -8168,7 +8168,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid cdca48f6-8875-56e0-9955-88128d796d05)
 )
-(hierarchical_label "HUB_DS4_DM"
+(hierarchical_label "HUB_DS4_DN"
   (shape bidirectional)
   (at 436.88 132.08 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -8216,7 +8216,7 @@
     )
   )
 )
-(label "HUB_DIS6_DM"
+(label "HUB_DIS6_DN"
   (at 487.68 53.34 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid fb7c8d3c-48d7-5018-932e-40e029bf03b9)
@@ -8231,7 +8231,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid a079cfd4-053d-59e5-a26c-423df02b5cc6)
 )
-(label "HUB_DIS5_DM"
+(label "HUB_DIS5_DN"
   (at 513.08 55.88 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 1f3dec0d-de00-51f9-9789-ce51a4b93ba7)
@@ -8298,7 +8298,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 93532f1a-1971-5e11-9861-7fc79102b93a)
 )
-(hierarchical_label "USBC2_DM"
+(hierarchical_label "USBC2_DN"
   (shape bidirectional)
   (at 487.68 129.54 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -9010,12 +9010,12 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d58c538c-0d4a-531d-a88d-0188e5d8c9ae)
 )
-(label "HUB_DIS5_DM"
+(label "HUB_DIS5_DN"
   (at 154.94 335.28 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid c4cb7909-796d-5354-bef2-5cfba6e3abf7)
 )
-(label "HUB_DIS5_DM"
+(label "HUB_DIS5_DN"
   (at 165.1 335.28 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid ffdfb828-4550-5e1f-9c48-d7abdfcf73d1)
@@ -9108,11 +9108,11 @@
   (dnp no)
   (uuid f311cde6-2798-5c0f-a041-551e12f48534)
   (property "Reference" "C1852" (at 250.19 341.63 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n C0G USB3-A SSTX+ series AC" (at 250.19 346.71 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R USB3-A SSTX+ series AC" (at 250.19 346.71 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 250.19 344.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 250.19 344.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Murata" (at 250.19 344.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "GRM1555C1H101JA01D" (at 250.19 344.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 250.19 344.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid aa061bdb-66d4-5b28-bcfe-aaa44a88f843))
   (pin "2" (uuid f4009510-6ebe-53fd-afad-f084ec510f36))
   (instances
@@ -9144,11 +9144,11 @@
   (dnp no)
   (uuid 07ff9271-19d6-5058-a893-a889f372cdfe)
   (property "Reference" "C1853" (at 250.19 353.06 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n C0G USB3-A SSTX- series AC" (at 250.19 358.14 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 16V X7R USB3-A SSTX- series AC" (at 250.19 358.14 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 250.19 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 250.19 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Murata" (at 250.19 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "GRM1555C1H101JA01D" (at 250.19 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM155R71C104KA88D" (at 250.19 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 4b65c4e8-88f5-5686-aabd-57fe4001ec92))
   (pin "2" (uuid 5d998294-0ae3-5890-917f-5b2953a2c653))
   (instances
@@ -9210,7 +9210,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 2265c693-8bab-59a5-9f3f-001054b3d240)
 )
-(label "HUB_DIS5_DM"
+(label "HUB_DIS5_DN"
   (at 330.2 330.2 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 913875ab-2b52-5e65-a21f-8cc231926d9c)
@@ -9462,12 +9462,12 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6daca9c1-57fd-5a08-83d1-bb9bba20cf93)
 )
-(label "HUB_DIS6_DM"
+(label "HUB_DIS6_DN"
   (at 154.94 403.86 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 4eaa26b8-46b0-5bd5-b806-e8a0e0923797)
 )
-(label "HUB_DIS6_DM"
+(label "HUB_DIS6_DN"
   (at 165.1 403.86 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 36bb1df3-9f39-5494-93a0-c2859edaf62a)
@@ -9517,7 +9517,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e0ebaeda-ade3-55a4-9cac-5cf086d06c5a)
 )
-(label "HUB_DIS6_DM"
+(label "HUB_DIS6_DN"
   (at 347.98 408.94 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid ff774c4d-7355-5ab9-9018-d9f977851e6a)
@@ -11942,12 +11942,12 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 63a3e442-eb5a-59df-9d28-3725fc620aa6)
 )
-(label "HUB_DS2_DM"
+(label "HUB_DS2_DN"
   (at 261.62 269.24 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 8d6925dd-a5f3-5c5c-bdac-fe0e5ad04255)
 )
-(label "HUB_DS2_DM"
+(label "HUB_DS2_DN"
   (at 261.62 271.78 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 38c4158c-f04b-570d-995e-085fd5ad3bce)
@@ -12877,7 +12877,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid cec4b295-0f55-5f6a-8611-837075361f2f)
 )
-(label "HUB_DS2_DM"
+(label "HUB_DS2_DN"
   (at 271.78 309.88 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e3168e05-7988-5c09-9739-28b7398957fa)
@@ -13557,12 +13557,12 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 706af845-32cb-5c9c-b234-3223459f7ffd)
 )
-(label "HUB_DS3_DM"
+(label "HUB_DS3_DN"
   (at 546.1 269.24 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid ecb901c3-7ac7-52e3-a74b-5e80815b2999)
 )
-(label "HUB_DS3_DM"
+(label "HUB_DS3_DN"
   (at 546.1 271.78 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 4421c927-554d-5d63-b06d-c1bfeab80691)
@@ -14492,7 +14492,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 4247e290-e8f0-5f8e-b03c-f8a055c6b29d)
 )
-(label "HUB_DS3_DM"
+(label "HUB_DS3_DN"
   (at 556.26 309.88 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 037c91a2-4c89-5861-a785-b73532f396fd)

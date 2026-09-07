@@ -22,6 +22,17 @@ schematic generators and most text/netlist checks. some generator files use
 newer Python syntax, so the bundled KiCad Python is not interchangeable with
 system Python for every script.
 
+## routing setup
+
+`python3 gen/setup_net_classes.py --project all` checks the center and I/O
+netclasses. use `--apply` to update the saved project files, then reload the
+boards in KiCad. this does not add or reshape copper.
+
+`gen/export_board_assembly.py`, run with KiCad's Python, exports the board
+outlines and mounting datums. it checks the BMS cable map, M.2 retainer
+alignment, and named chassis-hole keepout positions. the installed transforms
+live in `mechanical/board-placement.json`.
+
 ## direct ERC, netlist, and DRC checks
 
 the center schematic is `ducktop2.kicad_sch`. its routed-board filename is
@@ -176,6 +187,7 @@ the candidate. a checkout of HEAD alone would omit uncommitted changes.
 | Step | Script or action | What it can change |
 | --- | --- | --- |
 | 1 | `gen/generate_fh41_68s_footprint.py` | Project FH41 footprint |
+| 1 | `gen/generate_connector_symbols.py` | SMT JST connector symbols with mounting-pad pins |
 | 2 | `gen/generate_conn100_ffc_symbol.py` | FFC symbols; the filename is historical, current I/O maps use 68 pins |
 | 3 | `gen/generate_mu_carrier_sheet.py` | Root/center schematic and generated sheets |
 | 4 | `gen/generate_left_io_project.py` | Left schematic project |
