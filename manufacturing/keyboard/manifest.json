@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "status": "CHECKED_FABRICATION_FILES",
+  "board": "keyboard/12_keyboard_daughterboard.kicad_pcb",
+  "source_sha256": {
+    "ducktop2.pretty/Cherry_MX_ULP_SMD.kicad_mod": "06ee701016cb8d73e7583c6579434044f9edc9ca702154b0a954f3d28ac6fc4e",
+    "ducktop2.pretty/D_SOD-323_JSCJ_1N4148WS.kicad_mod": "aa9c3489d6cacdfb202217a6771ff0558fb1831f7dc8d917333dca615dd2aa4a",
+    "fp-lib-table": "0f421214663f50ea18cf9e593d701239c4d6f163f03cb82ebe28bbdac1846769",
+    "gen/Cherry_MX_ULP.kicad_sym": "b8770f60e99e8d1c344f2d6150c3b049c6ebe6228dbba4f1a2ec10e93f5278de",
+    "gen/Conn_01x30_FFC_MP.kicad_sym": "413b026492b29beb1e552167eaaee1cd2442bdfe47278fb7610f0aea1ef30ae9",
+    "gen/apply_bom_keyboard_daughterboard.py": "f091d3e828f2041f335ac932de01a7d608e1513de588114cf06fb4118a5b676c",
+    "gen/board_release_contract.py": "07d893ecce373c7b0e5a99e0dc1e11b2292391459c98d570cb300ebe3a4356d2",
+    "gen/check_release_candidate.py": "87d60549f3672d880bfce46f0fae78847d5ac50d6f1ad8e2b933b4a1312a4425",
+    "gen/generate_keyboard_daughterboard_pcb.py": "4dc22ebe49a324a60dff1fc9fb3097369fbd508ef00d8dd9c63b0484ae9cc87c",
+    "gen/generate_keyboard_daughterboard_sheet.py": "6cfb256ac12493248a640d8e516cd5b4d3ade70b341799eaa6d13e8986cdaf90",
+    "gen/generate_keyboard_jlcpcb_package.py": "abdbff78e3d4816154fdf4d2e1a6ec3d4303614c1491591a1d4d269e74105875",
+    "gen/genlib.py": "4a015addc46abcf3e6706f85ef854c8a2d242fbc67e0f517deffb68856997f4e",
+    "gen/report_schematic_pcb_eco.py": "5371b80838b7e22723c528abee462d7a962e235dc3c295edd76d94f77fd4b94c",
+    "keyboard/12_keyboard_daughterboard.kicad_pcb": "53d5e46515a637c3f01a93f19c6a8664ae2f2592b317a18618501d007da49186",
+    "keyboard/12_keyboard_daughterboard.kicad_pro": "98d539b80427ca670f27d0a0a7a2fe1896e4db488fbec0fc633c1d947f51b362",
+    "keyboard/12_keyboard_daughterboard.kicad_sch": "9c09a713bd925f932fd2a1e0d05d9789e36ff8226cc5cacba057bb4681ee138e",
+    "keyboard/fp-lib-table": "5356695ea061e43e425ea9b79b540109639cb1797802d4cc33709cc176832fd0",
+    "keyboard/sym-lib-table": "7fd002acee8b112c559ea447995f641f42c9127ea06dacca53d8d17659d85e80",
+    "sym-lib-table": "ccb2adbf6c2c8c7fb1cfda49e3a934ce52c06e9d3221ac47c87424071a33bc02"
+  },
+  "checked_board_sha256": "103f528603172164ca336c82775b31e54fbcbf15eaf9dbba4f4ac7ec31c9053d",
+  "kicad_version": "10.0.4",
+  "restored_drc_categories": [
+    "footprint_filters_mismatch",
+    "footprint_type_mismatch",
+    "missing_courtyard",
+    "track_not_centered_on_via",
+    "tuning_profile_track_geometries"
+  ],
+  "exclusion_source": "CHERRY VS-10107 revision 03, PCB-MX-ULP; footprint origin at switch center, PCB Y downward",
+  "exclusion_bounds_mm": [
+    -5.05,
+    2.2,
+    -1.25,
+    4.2
+  ],
+  "checks": {
+    "saved_drc_findings": 0,
+    "refilled_drc_findings": 0,
+    "native_airwires": 0,
+    "parity_passed": true,
+    "copper_exclusion_hits": 0,
+    "export_mismatches": 0,
+    "copper_layers": 2,
+    "complete_parts": 131,
+    "factory_parts": 66,
+    "switch_parts": 65
+  },
+  "physical_assembly_qualification": "NOT_RUN",
+  "reproducibility": "same sources and tool versions regenerate the checked outputs; tool-generated timestamps are not byte reproducibility"
+}

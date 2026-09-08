@@ -26,6 +26,7 @@ import build_ducktop2 as b
 from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, FOOTPRINTS
 from generate_mu_carrier_sheet import root_label, sheet_block, build_fpc_sheet
 import fpc_contract as fpc
+import generate_usb_power_control as usb_power
 
 BOARD_DIR = os.path.join(PROJDIR, "right_io")
 PROJECT_NAME = "right_io"
@@ -43,9 +44,9 @@ def build_right_pd_sheet(sheet_symbol_uuid):
             "sstx_p": None, "sstx_n": None,
             "ssrx_p": None, "ssrx_n": None,
         }, x0=20.32, y0=50.8, rbase=2040, cbase=2040, ubase=2010, dbase=2120, ebase=2090,
-        usb2_only=True, gated_hier=True)
+        usb2_only=True, gated_hier=True, pp5v_net=usb_power.PP5V_NETS["J11"])
     usb.add_source_port(s, jref="J12", port=4, base=1760, x0=20.32, y0=337.82,
-                        usb2_only=True, remote_data=True)
+                        usb2_only=True, remote_data=True, ec_controlled=True)
     # Phase 5 B9: the right board's chassis holes live on THIS board.
     for ref in ("H13", "H15", "H17", "H27"):
         s.place(ref, "MountingHole", "M2.5 isolated mainboard mounting hole",
@@ -53,6 +54,8 @@ def build_right_pd_sheet(sheet_symbol_uuid):
                 in_bom=False,
                 extra_props={"Hardware_Spec": "2.7mm isolated NPTH for M2.5 chassis screw"})
     s.gnd(431.8, 622.3)
+    usb_power.add_pd_gate(s, "J11", x=790, y=250)
+    usb_power.add_hub_veto(s, "J12", "HUB_PRT_CTL4", "hier", x=650, y=450)
     return s
 
 
@@ -65,6 +68,8 @@ def build_right_hdmi_sheet(sheet_symbol_uuid):
 def build_right_eth_sheet(sheet_symbol_uuid):
     """GbE (RTL8111H + magnetics + RJ45) — reuses the main GbE builder."""
     s = eth.build(sheet_symbol_uuid)
+    from generate_pcie_power import add_pcie_remote_bulk
+    add_pcie_remote_bulk(s)
     return s
 
 
@@ -91,8 +96,8 @@ def main() -> int:
     # the center's FPC2_C.
     fpc2_sheet_uuid = stable_uuid("right_io:sheet:fpc2")
     with uuid_scope("right_io:fpc2"):
-        fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC104", "Conn_01x68_FFC_MP",
-                                 fpc.FPC2_PINMAP, "FH41-68S-0.5SH (FPC-2)",
+        fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC104", fpc.symbol_for("FPC104"),
+                                 fpc.FPC2_PINMAP, "Molex5039085120 signal cable",
                                  pwr_base=3500,
                                  power_flags=("SYS_5V", "SYS_3V3", "MCU_3V3",
                                               "USB_PORT_5V", "PCIE_3V3", "GND"))
@@ -126,7 +131,7 @@ def main() -> int:
                                "GbE", "right_eth.kicad_sch", sorted(eth_sheet_nets))
     fpc2_block, fpc2_pins = sheet_block(fpc2_sheet_uuid, 170.0, 39.37, 119.38, 149.86,
                                  "FPC-2 (to Center)", "right_fpc.kicad_sch",
-                                 fpc.FPC2_NETS)
+                                 fpc.FPC2_IO_NETS)
 
     root = []
     root.append(f'(kicad_sch\n  (version 20260306)\n  (generator "eeschema")\n  (generator_version "10.0")\n'
@@ -145,7 +150,7 @@ def main() -> int:
         root.append(root_label(hdmi_pins[net], net))
     for net in sorted(eth_sheet_nets):
         root.append(root_label(eth_pins[net], net))
-    for net in fpc.FPC2_NETS:
+    for net in fpc.FPC2_IO_NETS:
         root.append(root_label(fpc2_pins[net], net))
     root.append(f'  (sheet_instances\n    (path "/"\n      (page "1")\n    )\n  )\n  (embedded_fonts no)\n)')
     with open(os.path.join(BOARD_DIR, "right_io.kicad_sch"), "w", encoding="utf-8") as f:

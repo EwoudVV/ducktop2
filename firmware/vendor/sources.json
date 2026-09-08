@@ -1,0 +1,57 @@
+{
+  "cmsis-device-f4": {
+    "repository": "https://github.com/STMicroelectronics/cmsis-device-f4",
+    "revision": "0fa0e489e053fa1ca7790bb40b4d76458f64c55d",
+    "files": {
+      "Include/stm32f407xx.h": "bd21220ea8b6858c2d727cca1d2a5f1077f8a81717acdac583a1e9165d858160",
+      "Include/system_stm32f4xx.h": "02c067d5a135f540c03215dc834b1e60a97bbd4e55bfd3994b0c82a15ea3012a",
+      "LICENSE.md": "dadb755f51d36614173b28c5790cb4a991e8f4cc822e5b634fd66a4f4145824d"
+    }
+  },
+  "cmsis-core": {
+    "repository": "https://github.com/ARM-software/CMSIS_5",
+    "revision": "2b7495b8535bdcb306dac29b9ded4cfb679d7e5c",
+    "files": {
+      "CMSIS/Core/Include/core_cm4.h": "f5b63d52dd1557b15ca414cb59c264f595a7b5669db2a5878dffe22f4caedc8c",
+      "CMSIS/Core/Include/cmsis_version.h": "184c19fd3ee73632edf35a0b4d49cd48be75fbf49e6ccb19d9db05fa83bea4b3",
+      "CMSIS/Core/Include/cmsis_compiler.h": "b51963d271c1571ca3463654c76aa7ea50c4eac5d0a2710df10414ac64d9e0f8",
+      "CMSIS/Core/Include/cmsis_gcc.h": "43bfd1fe69fbbc2ca70aaf7d43cc3e20f16e0c7f66e1bdef9b51af6dc14b2617",
+      "CMSIS/Core/Include/mpu_armv7.h": "29206b52ee02290ed6f5a5415ebd4187de802cf176d9b3cb844390d8e5571372",
+      "LICENSE.txt": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+    }
+  },
+  "tinyusb": {
+    "repository": "https://github.com/hathach/tinyusb",
+    "revision": "dae3f9a366bfcddbf9dcf1b48d7500286a849539",
+    "version": "0.21.0",
+    "files": {
+      "LICENSE": "f878d62e47e693ea64160218edb1b9b4755f4839a3179e5bef4a6b0359399431",
+      "src/class/hid/hid.h": "f012fc6b6d5ec864b0104fcccc4d75e530695fc0cd0e741c41f1d7687798d37c",
+      "src/class/hid/hid_device.c": "a168e91cac81135905a52eb7da2a2b113134afb5b32ac04307de486146696132",
+      "src/class/hid/hid_device.h": "6b8d004bb5319a6a76b3afc77d3c8763587c8e8ef869d05077a7886f9629f514",
+      "src/common/tusb_common.h": "a664fab5d2c3c635f64eca7a379e76934cb3ba6969b99260064946573e5396b1",
+      "src/common/tusb_compiler.h": "7f726abb8a3de111f55d95de60d6f9607d3464eb52b7780f37b1e10dae19ecfc",
+      "src/common/tusb_debug.h": "25c5e7f4ca87daa1619b0dc7042de641092a8f5970b6138f31a4d090b47a25be",
+      "src/common/tusb_fifo.c": "d87e25d3329244226f3b794882e89898ac5fe20e04568a7750f4aff154f871ac",
+      "src/common/tusb_fifo.h": "6d4af6262d85a13a38d7e211419c0491e78bc076e6d7c5bba38613c011bf8166",
+      "src/common/tusb_mcu.h": "ef584be007e78926dac89863b87e1e2bdd0358d9a89ed68c433f9f57ab1dd953",
+      "src/common/tusb_private.h": "6216aa425618d3c88ff57c0d2d29caace1b59bad1c361627a9a7401e4994fa97",
+      "src/common/tusb_types.h": "cb6f1d329629fe7a91a2509d991878298070d203d804eab7f90a260de1c977a4",
+      "src/common/tusb_verify.h": "061205bd8a55fd7134436bef64147100769a4ee4f15cef123f3b513c62b57514",
+      "src/device/dcd.h": "baf785f2d5d8e3f74bd6d6a04559fc606d341983aad35aa08e168b452c2750db",
+      "src/device/usbd.c": "38de54351d81878e6543f2b022d0c39f45d28c8f0888491796398dec45e727be",
+      "src/device/usbd.h": "48040a0ea812b5f099bab557c81aa83fb9386d7eb2dfd814b1eba9aa2468b298",
+      "src/device/usbd_pvt.h": "3d3bae6a54ac6d677a2fdae156665c760a7f22f7651b34cfaa4460a585964db9",
+      "src/osal/osal.h": "c9bd3d35f7436c47287bc481041f9af6aeec605f1e0291e3a76bd95bfc04f4d9",
+      "src/osal/osal_none.h": "d6eed8e3a3c7a25fc7d57bdded71ce2f56aa82564d7a1dd07cba525239bc1b8f",
+      "src/portable/synopsys/dwc2/dcd_dwc2.c": "96e6a20e599f97fc9fa057e672612977f5732465911988df7cbeccdd9028dcb7",
+      "src/portable/synopsys/dwc2/dwc2_common.c": "3971bcb1b0fd639dad056dab97a2671aa430a5892347938427a11d864679559b",
+      "src/portable/synopsys/dwc2/dwc2_common.h": "1bbfe05848a9de8275fc8650176c847a89f5b5d550556f7f47085e1ce31af637",
+      "src/portable/synopsys/dwc2/dwc2_stm32.h": "9c6f7e6e092c514b42885f1b54ec2e2e7504553f02b6b5ba2821203b6e6dd631",
+      "src/portable/synopsys/dwc2/dwc2_type.h": "d26e86d39ef2fac05adb7d2ad7c53720b144ec3c32f3501b8d6c3975e62ea567",
+      "src/tusb.c": "b5f0e8ca00ba6e63914583f7b4711c540a125c261b261216f89e5136fda2ac6f",
+      "src/tusb.h": "115100fbffe8984964a321e477720a5586db7776ac832ca81749c89cc08183bb",
+      "src/tusb_option.h": "452216f8caa674e6987f7565186dc100d02a177f3a655c7cb6e506e68e0ee67f"
+    }
+  }
+}

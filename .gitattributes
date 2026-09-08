@@ -23,3 +23,8 @@ mechanical/*.svg binary
 *.zip binary
 *.step binary
 *.stp binary
+
+# keep checked packages and upstream files as exact copies
+/manufacturing/keyboard/** -text -whitespace
+/firmware/vendor/** -text -whitespace
+/reference/raspberrypi/** -text -whitespace

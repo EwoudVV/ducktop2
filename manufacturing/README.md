@@ -10,7 +10,7 @@ lists the issues that remain before an order package can be prepared.
 | Center | `ducktop2-center.kicad_pcb` | Eight-layer NextPCB record |
 | Left I/O | `left_io/left_io.kicad_pcb` | Eight-layer layout; confirm the actual order against the approved stackup |
 | Right I/O | `right_io/right_io.kicad_pcb` | Eight-layer layout; confirm the actual order against the approved stackup |
-| BMS | `bms/bms.kicad_pcb` | Four-layer intent conflicts with eight enabled layers; unresolved |
+| BMS | `bms/bms.kicad_pcb` | Four layers; power-harness and thermal corrections are still in progress |
 | Radio | `radio_daughterboard/radio_daughterboard.kicad_pcb` | Four-layer placement board; fabrication details still to finalize |
 | Keyboard | `keyboard/12_keyboard_daughterboard.kicad_pcb` | Existing separate two-layer rev A package |
 
@@ -55,12 +55,14 @@ the release checker still has board-selection/path defects recorded in the
 project status. fix those before relying on its fabrication stage to cover
 every board. an explicit one-board check does not cover the whole laptop.
 
-## existing keyboard package
+## keyboard package
 
-[`keyboard_revA_jlcpcb/README_JLCPCB.md`](keyboard_revA_jlcpcb/README_JLCPCB.md)
-describes the package that was prepared for the separate keyboard revision.
-keep its reference hashes and assembly notes with it. it is not regenerated
-as part of this documentation update.
+[`keyboard/README.md`](keyboard/README.md) describes the current keyboard
+package. it replaces the old rev A files and printed-stencil assumptions.
+the saved board has zero DRC violations, zero airwires and zero schematic
+parity issues. its Gerbers, drills, paste and placement exports were checked
+against that same saved board. physical switch assembly still needs the
+process checks listed with the package.
 
 ## cost and retained evidence
 

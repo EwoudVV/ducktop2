@@ -24,6 +24,7 @@ import build_ducktop2 as b
 from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, U, FOOTPRINTS
 from generate_mu_carrier_sheet import root_label, sheet_block, build_fpc_sheet
 import fpc_contract as fpc
+import generate_usb_power_control as usb_power
 
 BOARD_DIR = os.path.join(PROJDIR, "left_io")
 PROJECT_NAME = "left_io"
@@ -37,14 +38,21 @@ def build_left_usb_sheet(sheet_symbol_uuid):
     s.text(20, 12.7, "== Left I/O: USB7206C hub, source ports, USB-A spare ports ==")
     s.text(20, 20.32, "Board split Phase 2.1: hub + PD1 moved left; FPC-1 crosses to center.")
     usb.add_hub_supplies(s)
-    usb.add_hub(s)  # includes add_usba_ports (J24/J25)
+    usb.add_hub(s, ec_controlled=True)  # includes add_usba_ports (J24/J25)
     # J22/J23 source ports (J12 stays on center for now — it is on the
     # right edge; the center trim removes it from this sheet later).
-    usb.add_source_port(s, jref="J22", port=2, base=1780, x0=20.32, y0=238.76)
-    usb.add_source_port(s, jref="J23", port=3, base=1740, x0=304.8, y0=238.76)
+    usb.add_source_port(s, jref="J22", port=2, base=1780, x0=20.32, y0=238.76, ec_controlled=True)
+    usb.add_source_port(s, jref="J23", port=3, base=1740, x0=304.8, y0=238.76, ec_controlled=True)
     s.pwrflag(571.5, 198.12, "HUB_VCORE")
     s.pwrflag(571.5, 215.9, "USB_PORT_5V")
     s.gnd(571.5, 228.6)
+    usb_power.add_left_monitor(s)
+    usb_power.add_permission_io(s)
+    for port, ctl, kind, x, y in (("J22", "HUB_PRT_CTL2", "local", 650, 450),
+                                  ("J23", "HUB_PRT_CTL3", "local", 790, 450),
+                                  ("J24", "INTERNAL_USB_VBUS_VALID", "hier", 650, 550),
+                                  ("J25", "INTERNAL_USB_VBUS_VALID", "hier", 790, 550)):
+        usb_power.add_hub_veto(s, port, ctl, kind, x, y)
     return s
 
 
@@ -59,7 +67,7 @@ def build_left_pd_sheet(sheet_symbol_uuid):
             "dp": "USBC1_DP", "dm": "USBC1_DN",
             "sstx_p": "USBC1_SSTX_P", "sstx_n": "USBC1_SSTX_N",
             "ssrx_p": "USBC1_SSRX_P", "ssrx_n": "USBC1_SSRX_N",
-        }, x0=20.32, y0=50.8, rbase=2000, cbase=2000, ubase=2000, dbase=2100, ebase=2080)
+        }, x0=20.32, y0=50.8, rbase=2000, cbase=2000, ubase=2000, dbase=2100, ebase=2080, pp5v_net=usb_power.PP5V_NETS["J21"])
     pwrin.add_pd_selector(s)
     # AUX/SOLAR input terminal — the raw terminal lives on the left board;
     # the protection chain (fuse/TVS/reverse FET/efuse) stays on the center
@@ -74,7 +82,7 @@ def build_left_pd_sheet(sheet_symbol_uuid):
             680, 50.8, footprint=FOOTPRINTS["Terminal_01x02_5.08"],
             pin_nets={"1": ("AUX_DC_TERM", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Phoenix Contact", "MPN": "1715022"})
-    s.text(20.32, 693.42, "Five-port source budget: 5 x 0.9A maximum advertised load = 4.5A on the dedicated 6A USB_PORT_5V rail.")
+    s.text(20.32, 693.42, "Seven port permissions reserve VBUS, VCONN and branch losses before power is applied.")
     # Phase 5 B9: the left board's chassis holes live on THIS board; the
     # board build transplants them to their monolith positions.
     for ref in ("H10", "H11", "H12", "H16"):
@@ -83,6 +91,7 @@ def build_left_pd_sheet(sheet_symbol_uuid):
                 in_bom=False,
                 extra_props={"Hardware_Spec": "2.7mm isolated NPTH for M2.5 chassis screw"})
     s.gnd(431.8, 622.3)
+    usb_power.add_pd_gate(s, "J21")
     return s
 
 
@@ -108,8 +117,8 @@ def main() -> int:
     # the center's FPC1_C.
     fpc1_sheet_uuid = stable_uuid("left_io:sheet:fpc1")
     with uuid_scope("left_io:fpc1"):
-        fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC101", "Conn_01x68_FFC_MP",
-                                 fpc.FPC1_PINMAP, "FH41-68S-0.5SH (FPC-1)",
+        fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC101", fpc.symbol_for("FPC101"),
+                                 fpc.FPC1_PINMAP, "Molex5039084120 signal cable",
                                  pwr_base=3400,
                                  power_flags=("VSYS", "SYS_3V3", "MCU_3V3",
                                               "GND"))
@@ -145,7 +154,7 @@ def main() -> int:
                               "PD1 Dual-Role", "left_pd.kicad_sch", pd_sheet_nets)
     fpc1_block, fpc1_pins = sheet_block(fpc1_sheet_uuid, 170.0, 39.37, 119.38, 149.86,
                                  "FPC-1 (to Center)", "left_fpc.kicad_sch",
-                                 fpc.FPC1_NETS)
+                                 fpc.FPC1_IO_NETS)
 
     root = []
     root.append(f'(kicad_sch\n  (version 20260306)\n  (generator "eeschema")\n  (generator_version "10.0")\n'
@@ -162,7 +171,7 @@ def main() -> int:
         root.append(root_label(usb_pins[net], net))
     for net in pd_sheet_nets:
         root.append(root_label(pd_pins[net], net))
-    for net in fpc.FPC1_NETS:
+    for net in fpc.FPC1_IO_NETS:
         root.append(root_label(fpc1_pins[net], net))
     root.append(f'  (sheet_instances\n    (path "/"\n      (page "1")\n    )\n  )\n  (embedded_fonts no)\n)')
     with open(os.path.join(BOARD_DIR, "left_io.kicad_sch"), "w", encoding="utf-8") as f:

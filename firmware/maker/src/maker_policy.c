@@ -3,7 +3,7 @@
 #include <string.h>
 
 static bool mode_is_valid(maker_io_mode_t mode) {
-  return mode >= MAKER_IO_HIGH_IMPEDANCE && mode <= MAKER_IO_ALTERNATE_FUNCTION;
+  return (unsigned)mode <= (unsigned)MAKER_IO_ALTERNATE_FUNCTION;
 }
 
 static bool any_io_driven(const maker_outputs_t *outputs) {
@@ -141,6 +141,10 @@ void maker_controller_step(maker_controller_t *controller,
   }
   controller->outputs.user_rails_enable =
       controller->user_rails_requested && inputs->user_power_authorized;
+}
+
+void maker_controller_transaction_trip(maker_controller_t *controller) {
+  enter_fault(controller, MAKER_FAULT_TRANSACTION);
 }
 
 void maker_controller_watchdog_trip(maker_controller_t *controller) {

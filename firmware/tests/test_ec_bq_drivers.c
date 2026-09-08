@@ -113,18 +113,19 @@ static void test_bq25798_probe(void) {
 
 static void test_bq25798_init_config_bits(void) {
   i2c_mock_begin();
-  /* POR defaults: REG18=0x54, REG09=0x05, REG14=0x16, REG10=0x05. */
-  i2c_mock.regfile[0x18u] = 0x54u;
+  /* Start with TS_IGNORE set to prove init clears a prior unsafe state. */
+  i2c_mock.regfile[0x18u] = 0x55u;
   i2c_mock.regfile[0x09u] = 0x05u;
   i2c_mock.regfile[0x14u] = 0x16u;
-  i2c_mock.regfile[0x10u] = 0x05u;
+  i2c_mock.regfile[0x10u] = 0x00u; /* previous firmware disabled watchdog */
   CHECK(bq25798_init());
-  CHECK(i2c_mock.regfile[0x18u] == 0x55u); /* TS_IGNORE=1, other bits kept */
+  CHECK((i2c_mock.regfile[0x0fu] & 0x20u) == 0u);
+  CHECK(i2c_mock.regfile[0x18u] == 0x54u); /* TS_IGNORE=0, other bits kept */
   CHECK(i2c_mock.regfile[0x09u] == 0x25u); /* STOP_WD_CHG=1, ITERM kept */
   CHECK(i2c_mock.regfile[0x14u] == 0xB6u); /* SFET_PRESENT + EN_IBAT */
-  CHECK(i2c_mock.regfile[0x10u] == 0x0Du); /* WD_RST written, WATCHDOG kept */
-  CHECK(i2c_mock.reads == 4u);
-  CHECK(i2c_mock.writes == 4u);
+  CHECK(i2c_mock.regfile[0x10u] == 0x0Du); /* WD_RST written, 40 s watchdog restored */
+  CHECK(i2c_mock.reads == 10u);
+  CHECK(i2c_mock.writes == 5u);
   CHECK(i2c_mock_script_complete());
 
   i2c_mock_begin();
@@ -135,8 +136,10 @@ static void test_bq25798_init_config_bits(void) {
 static void test_bq25798_setters(void) {
   i2c_mock_begin();
   CHECK(bq25798_set_charge_current_ma(440u));
-  CHECK(i2c_mock.regfile[0x03u] == 0x2Cu); /* 440mA -> 44 = 0x2C */
-  CHECK(i2c_mock.regfile[0x04u] == 0x00u);
+  /* BQ25798 register tables: the lower address holds the high byte.
+   * These wire bytes are literal examples, independent of the driver. */
+  CHECK(i2c_mock.regfile[0x03u] == 0x00u); /* 440mA -> 0x002C */
+  CHECK(i2c_mock.regfile[0x04u] == 0x2Cu);
   CHECK(i2c_mock.write_raws == 1u);
 
   i2c_mock_begin();
@@ -146,25 +149,28 @@ static void test_bq25798_setters(void) {
 
   i2c_mock_begin();
   CHECK(bq25798_set_charge_voltage_mv(12600u));
-  CHECK(i2c_mock.regfile[0x01u] == 0xECu); /* 12600/10=1260=0x04EC, LE */
-  CHECK(i2c_mock.regfile[0x02u] == 0x04u);
+  CHECK(i2c_mock.regfile[0x01u] == 0x04u); /* 12600/10=1260=0x04EC */
+  CHECK(i2c_mock.regfile[0x02u] == 0xECu);
   CHECK(!bq25798_set_charge_voltage_mv(2999u));
   CHECK(!bq25798_set_charge_voltage_mv(18801u));
 
   i2c_mock_begin();
   CHECK(bq25798_set_input_current_ma(3000u));
-  CHECK(i2c_mock.regfile[0x06u] == 0x2Cu); /* 300=0x12C, LE */
-  CHECK(i2c_mock.regfile[0x07u] == 0x01u);
+  CHECK(i2c_mock.regfile[0x06u] == 0x01u); /* 3000mA -> 0x012C */
+  CHECK(i2c_mock.regfile[0x07u] == 0x2Cu);
   CHECK(!bq25798_set_input_current_ma(99u));
   CHECK(!bq25798_set_input_current_ma(3301u));
 
   i2c_mock_begin();
-  i2c_mock.regfile[0x06u] = 0x2Cu;
-  i2c_mock.regfile[0x07u] = 0x01u;
+  i2c_mock.regfile[0x06u] = 0x01u;
+  i2c_mock.regfile[0x07u] = 0x2Cu;
   uint16_t readback = 0u;
   CHECK(bq25798_read_input_current_limit_ma(&readback));
   CHECK(readback == 3000u);
   CHECK(bq25798_read_input_current_limit_ma(NULL) == false);
+  i2c_mock.regfile[0x06u] = 0xFFu; /* reserved bits must not enter IINDPM */
+  CHECK(bq25798_read_input_current_limit_ma(&readback));
+  CHECK(readback == 3000u);
 
   i2c_mock_begin();
   i2c_mock.regfile[0x0Fu] = 0x02u;
@@ -224,14 +230,14 @@ static void test_bq25798_read_telemetry(void) {
   i2c_mock.regfile[0x1Du] = 0x01u; /* VBAT present */
   i2c_mock.regfile[0x20u] = 0x00u;
   i2c_mock.regfile[0x21u] = 0x00u;
-  i2c_mock.regfile[0x31u] = 0x64u; /* IBUS 100mA */
-  i2c_mock.regfile[0x32u] = 0x00u;
-  i2c_mock.regfile[0x33u] = 0xDCu; /* IBAT +1500mA */
-  i2c_mock.regfile[0x34u] = 0x05u;
-  i2c_mock.regfile[0x35u] = 0x38u; /* VBUS 19000mV */
-  i2c_mock.regfile[0x36u] = 0x4Au;
-  i2c_mock.regfile[0x3Bu] = 0xD4u; /* VBAT 12500mV */
-  i2c_mock.regfile[0x3Cu] = 0x30u;
+  i2c_mock.regfile[0x31u] = 0x00u; /* IBUS 100mA = 0x0064 */
+  i2c_mock.regfile[0x32u] = 0x64u;
+  i2c_mock.regfile[0x33u] = 0x05u; /* IBAT +1500mA = 0x05DC */
+  i2c_mock.regfile[0x34u] = 0xDCu;
+  i2c_mock.regfile[0x35u] = 0x4Au; /* VBUS 19000mV = 0x4A38 */
+  i2c_mock.regfile[0x36u] = 0x38u;
+  i2c_mock.regfile[0x3Bu] = 0x30u; /* VBAT 12500mV = 0x30D4 */
+  i2c_mock.regfile[0x3Cu] = 0xD4u;
 
   bq25798_telemetry_t t;
   memset(&t, 0, sizeof(t));
@@ -254,8 +260,8 @@ static void test_bq25798_read_telemetry(void) {
 static void test_bq25798_read_telemetry_signed_and_fault(void) {
   i2c_mock_begin();
   i2c_mock.regfile[0x20u] = 0x20u; /* VBAT_OVP fault status */
-  i2c_mock.regfile[0x33u] = 0x20u; /* IBAT -480mA (0xFE20, 2's comp) */
-  i2c_mock.regfile[0x34u] = 0xFEu;
+  i2c_mock.regfile[0x33u] = 0xFEu; /* IBAT -480mA (0xFE20, 2's comp) */
+  i2c_mock.regfile[0x34u] = 0x20u;
   bq25798_telemetry_t t;
   memset(&t, 0, sizeof(t));
   CHECK(bq25798_read_telemetry(&t));

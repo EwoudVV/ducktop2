@@ -4,7 +4,7 @@
  * (ec_inputs_t / ec_telemetry_inputs_t / ec_fan_*).
  *
  * Design rules followed here:
- *  - Every hardware probe result is latched; a dead device makes the
+ *  - Device probes are retried; a dead device makes the
  *    corresponding input invalid (never stale data).
  *  - Thermal data that cannot be converted forces the fan fail-safe
  *    (ec_fan handles invalid temps with 100% duty) and clears thermal_ok.
@@ -30,7 +30,7 @@ extern "C" {
 #endif
 
 /*
- * Hardware init: probes the charger and gauge once; latches configuration
+ * Hardware init: clears device state; the loop retries probes and tracks configuration
  * validity.  Call once after I2C init.  Never blocks longer than the I2C
  * driver timeouts.
  */
@@ -39,6 +39,7 @@ bool ec_app_charger_configured(void);
 bool ec_app_gauge_present(void);
 /* Fresh result of the last charger telemetry read (REG1D VBAT present). */
 bool ec_app_battery_present(void);
+bool ec_app_charging_active(void);
 
 /*
  * Fill the power/battery/thermal inputs the policy consumes.  PD contract
@@ -46,12 +47,14 @@ bool ec_app_battery_present(void);
  * charger, pack, VSYS, and thermal fields of both structs.
  */
 void ec_app_read_power_inputs(ec_inputs_t *inputs,
-                              ec_telemetry_inputs_t *telemetry);
+                              ec_telemetry_inputs_t *telemetry, uint32_t now_ms);
 
 /* Commit-side: apply the policy IINDPM command to the charger.  Returns
  * true when the charger accepted the write and the applied value is
  * latched for read_inputs. */
 bool ec_app_apply_charger_iindpm_ma(uint16_t ma);
+bool ec_app_apply_charge_budget_mw(uint32_t mw);
+bool ec_app_set_charging(bool enable);
 uint16_t ec_app_applied_charger_iindpm_ma(void);
 bool ec_app_charger_iindpm_applied(void);
 

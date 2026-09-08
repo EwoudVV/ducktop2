@@ -92,14 +92,15 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C41"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "3c521d19-3913-4583-8c0f-1c835e897930")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10u GNSS local"
@@ -149,16 +150,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bef5db13-a446-432d-9936-c9f54e2010de")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM31CR71E106KA12L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "35a08f81-f7d6-4848-aa3b-8e4fdbf317f0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/1f512e8c-ea3d-5981-8ea3-22e7b622143b")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -252,14 +273,15 @@
 		(descr "VSSOP, 8 Pin (https://www.jedec.org/standards-documents/docs/mo-187-f)")
 		(tags "VSSOP SO JEDEC-MO-187-CA Texas_DCU0008A")
 		(property "Reference" "U252"
-			(at 0 -1.95 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "2f105816-06c6-4b49-8515-8f6725cea28a")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC3G34DCUR UHF fail-safe control buffer"
@@ -349,24 +371,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/d71dae0c-144f-5b8a-991d-812c9e8a2f4c")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "7")
-			)
-			(unit
-				(name "B")
-				(pins "6" "2")
-			)
-			(unit
-				(name "C")
-				(pins "3" "5")
-			)
-			(unit
-				(name "D")
-				(pins "8" "4")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -638,14 +642,15 @@
 		(descr "Dorji DRA818V/DRA818U 35.60 x 19.00 mm castellated module. Figure 4 geometry: 1.80 mm pads, 4.45 mm top/bottom pitch, 4.60 mm right-side pitch; host lands add a 0.70 mm external toe. Pins 2,4,11,13,14,15 remain soldered mechanical lands but are electrical NC.")
 		(tags "DRA818 DRA818V DRA818U Dorji castellated radio module")
 		(property "Reference" "J70"
-			(at 0 -12.2 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1424f643-ff59-414e-b912-10222f2d13e8")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "DRA818V 2m FM module"
@@ -709,14 +714,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/06bda8ba-0153-5f2c-b2b3-8d59ffba5461")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "8" "5" "6" "7" "16" "18" "9" "10" "1" "3" "12" "17" "2" "4" "11"
-					"13" "14" "15"
-				)
-			)
-		)
 		(solder_mask_margin 0.05)
 		(solder_paste_margin -0.05)
 		(attr smd)
@@ -842,7 +839,6 @@
 			(at -8.9 -8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J70-NC-Pad2)")
 			(pinfunction "NC_2")
 			(pintype "no_connect")
 			(uuid "b07df6d1-1f98-448b-b644-dd584977c880")
@@ -860,7 +856,6 @@
 			(at 0 -8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J70-NC-Pad4)")
 			(pinfunction "NC_4")
 			(pintype "no_connect")
 			(uuid "269ffea3-2ec1-4ecc-a5de-36b735eced20")
@@ -923,7 +918,6 @@
 			(at 17.25 6.9 180)
 			(size 2.5 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J70-NC-Pad11)")
 			(pinfunction "NC_11")
 			(pintype "no_connect")
 			(uuid "264dd42a-15ea-48c1-8b1c-866db5105351")
@@ -941,7 +935,6 @@
 			(at 8.9 8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J70-NC-Pad13)")
 			(pinfunction "NC_13")
 			(pintype "no_connect")
 			(uuid "3248dc7d-69a3-4460-afea-f3697b4bbb4d")
@@ -950,7 +943,6 @@
 			(at 4.45 8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J70-NC-Pad14)")
 			(pinfunction "NC_14")
 			(pintype "no_connect")
 			(uuid "79bf81d7-e7f8-42df-81c0-6874eaf1beda")
@@ -959,7 +951,6 @@
 			(at 0 8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J70-NC-Pad15)")
 			(pinfunction "NC_15")
 			(pintype "no_connect")
 			(uuid "2257bef6-c450-4a3a-a98c-427f101ec178")
@@ -1031,14 +1022,15 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C225"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "9e8ee8a9-0c05-432d-b531-7fda8ae3c0b4")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "22u 16V X7R radio output"
@@ -1116,12 +1108,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/02678590-e1a9-54b6-ac86-360cb26981aa")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1215,14 +1201,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C343"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "796b72bb-7dcd-49cd-a40c-9413ad2489d6")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u UHF TX audio AC couple"
@@ -1272,16 +1259,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "42afd64f-9280-4df6-ae5e-6f95d8a3377a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4806c691-fc49-402a-b3e6-84ee313ac49e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/f90a426c-caf0-5f30-89b5-023c5cb45b9b")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1375,14 +1382,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R341"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at -0.75 -0.75 0)
+			(layer "B.SilkS")
 			(uuid "43911fac-9b48-4d6f-ac38-b4e0dfbcb78e")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1k 1% UHF mic attenuator shunt"
@@ -1432,16 +1440,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d0e1342d-8aad-4e65-b644-a7b044701593")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ae1b80c4-58ec-46c3-8889-81884fa4ca3b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/9f3a45de-3cb7-5548-aa2e-defff48403a8")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1535,14 +1563,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R345"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 -0.75 0)
+			(layer "B.SilkS")
 			(uuid "b0275c51-6a2b-4677-90b0-519e96b4eaa7")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k UHF mute-gate pull-down"
@@ -1592,16 +1621,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a3546e50-5b4c-4e85-b43a-227efbb57e2a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d7d0636b-234d-4ff4-86d2-76b7043d565c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/5a604f5a-eb9a-55f9-8495-daf0d5b63886")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1695,14 +1744,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C226"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "336b248e-b888-4959-aa8b-c08c7cb62e87")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10n VHF audio RF shunt"
@@ -1752,16 +1802,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f47573cb-b708-403b-9680-a33d334bc280")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H103KA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "255983e2-0bc9-42c0-9279-400549a15b59")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/262b37be-863e-5e14-ae0b-47ea4d0ec828")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1855,14 +1925,15 @@
 		(descr "SOD-323")
 		(tags "SOD-323")
 		(property "Reference" "D393"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "79190826-681c-4fdc-b12c-3f8b6154fbab")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "BAT54WS PTT/suspend mute OR"
@@ -1930,12 +2001,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/ae7629fb-40bc-520d-9104-bf590152916d")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2159,14 +2224,15 @@
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C224"
-			(at 0 -1.16 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "45fd44e8-7a52-4e4a-a30b-5908d192e4e6")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "56p C0G TPS54302 feed-forward"
@@ -2216,16 +2282,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "39ff523e-6ffc-4c14-8ed0-8fa988b57914")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM1555C1H560JA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "82d4b94a-7b62-4f45-bd11-2175c606eb93")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/e56780f5-1cc7-57f9-b340-be435e042e76")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2319,14 +2405,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R261"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "5ca950b1-9263-4217-b8da-b49e43788d85")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100R UHF translated TXD series"
@@ -2376,16 +2463,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5aefd54f-6216-4339-b5df-983af27f12d7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100RL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "632b8e95-4627-44a3-9d31-1446449030fd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/a9cd1393-391f-5cc2-942a-0c80c0a8f869")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2475,18 +2582,19 @@
 	(footprint "Connector_Coaxial:SMA_Molex_73251-1153_EdgeMount_Horizontal"
 		(layer "F.Cu")
 		(uuid "15074dbb-a277-5bef-bec7-6c0414f53d8e")
-		(at 112 20 -90)
+		(at 108 24.26 -90)
 		(descr "Molex SMA RF Connectors, Edge Mount, https://tools.molex.com/pdm_docs/sd/732511150_sd.pdf")
 		(tags "sma edge")
 		(property "Reference" "J251"
-			(at -1.5 7 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "b9e37c30-7610-4213-8e25-94a278c7179e")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "70cm/UHF rear external SMA/u.FL path"
@@ -2554,12 +2662,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/8dc7942d-f386-54f1-a9a3-1fe6fd8a2d3f")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_poly
@@ -2902,7 +3004,6 @@
 			(at 1.72 -4.38 270)
 			(size 0.97 0.97)
 			(drill 0.46)
-			(property pad_prop_mechanical)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -2914,7 +3015,6 @@
 			(at 1.72 4.38 270)
 			(size 0.97 0.97)
 			(drill 0.46)
-			(property pad_prop_mechanical)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -2942,14 +3042,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C255"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "ca8cf684-c13c-4c9e-9471-df22e0c3808b")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "DNP 0.2p PE42820 RFC match candidate"
@@ -3027,12 +3128,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/a88bdf21-a495-5ad5-a905-dabe70b1e90a")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3122,18 +3217,19 @@
 	(footprint "ducktop2:PE42820_QFN-32-1EP_5x5mm_P0.5mm"
 		(layer "F.Cu")
 		(uuid "1c247d42-bd37-5bb6-b6b6-7fbc491c5d39")
-		(at 106.5 29.5)
+		(at 106.5 30.2)
 		(descr "pSemi PE42820B-X 32-lead 5x5mm QFN. Perimeter lands and 3.35mm exposed pad follow PE42820 datasheet Figure 15; exposed-pad thermal vias follow the datasheet high-power thermal guidance.")
 		(tags "PE42820 pSemi RF SPDT high power QFN32 5x5")
 		(property "Reference" "U250"
-			(at 0 -3.8 0)
-			(layer "F.SilkS")
+			(at 0 -2 0)
+			(layer "B.SilkS")
 			(uuid "98890467-9cd4-40f4-8c60-c1b186a14020")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "PE42820B-X 70cm/UHF 43dBm-CW RF switch"
@@ -3257,15 +3353,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/fb813769-6dd4-5d62-8559-258d131aabe1")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "12" "13" "16" "28" "1" "3" "4" "5" "6" "7" "8" "9" "10" "11" "14"
-					"15" "33" "2" "23" "17" "18" "19" "20" "21" "22" "24" "25" "26" "27"
-					"29" "30" "31" "32"
-				)
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3350,7 +3437,7 @@
 		)
 		(fp_poly
 			(pts
-				(xy -3.15 -1.75) (xy -3.55 -1.5) (xy -3.55 -2)
+				(xy -2.65 -2.75) (xy -3.05 -2.5) (xy -3.05 -3)
 			)
 			(stroke
 				(width 0.12)
@@ -3792,7 +3879,6 @@
 			(at -1 -1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3804,7 +3890,6 @@
 			(at -1 0)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3816,7 +3901,6 @@
 			(at -1 1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3828,7 +3912,6 @@
 			(at 0 -1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3840,7 +3923,6 @@
 			(at 0 0)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3851,7 +3933,6 @@
 		(pad "33" smd rect
 			(at 0 0)
 			(size 2.8 2.8)
-			(property pad_prop_heatsink)
 			(layers "B.Cu")
 			(net "GND")
 			(pinfunction "EP_GND_33")
@@ -3862,7 +3943,6 @@
 		(pad "33" smd rect
 			(at 0 0)
 			(size 3.35 3.35)
-			(property pad_prop_heatsink)
 			(layers "F.Cu" "F.Mask")
 			(net "GND")
 			(pinfunction "EP_GND_33")
@@ -3874,7 +3954,6 @@
 			(at 0 1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3886,7 +3965,6 @@
 			(at 1 -1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3898,7 +3976,6 @@
 			(at 1 0)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3910,7 +3987,6 @@
 			(at 1 1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -3927,14 +4003,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R230"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "b6eab4fe-72ba-494b-a85f-e70511836647")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k VHF RF-select EC reset default internal"
@@ -3984,16 +4061,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d2793761-3692-496b-9de7-f66f9d37f452")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "281aa490-bec5-4777-855d-35e573de0204")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/69f358c1-8d1d-5293-89e7-e940e4c73a8d")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4087,14 +4184,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C250"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "9edac685-d76b-4615-a939-2282bebf22b7")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n UHF RF-select latch local"
@@ -4144,16 +4242,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "57d319e6-566e-4c3c-b064-6dec60d5272c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "43459a0b-812e-4728-891a-a999230fe529")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/9f3a8471-26fb-59af-a9d6-1d825123ace5")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4247,14 +4365,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R336"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "8000a820-508e-40a0-96dc-d45ee2e20635")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1k 1% VHF mic attenuator shunt"
@@ -4304,16 +4423,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "51e7e533-78ff-4621-8b71-5a40fb8a7910")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7bccf1df-9659-425c-ae65-baaeb2ddee93")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/4f3516cc-1aae-5b30-a586-1d1f85685af9")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4403,18 +4542,19 @@
 	(footprint "ducktop2:PE42820_QFN-32-1EP_5x5mm_P0.5mm"
 		(layer "F.Cu")
 		(uuid "21c3c2be-3c10-5247-99bf-d101b1c51fb5")
-		(at 45.5 29.5)
+		(at 45.5 30.2)
 		(descr "pSemi PE42820B-X 32-lead 5x5mm QFN. Perimeter lands and 3.35mm exposed pad follow PE42820 datasheet Figure 15; exposed-pad thermal vias follow the datasheet high-power thermal guidance.")
 		(tags "PE42820 pSemi RF SPDT high power QFN32 5x5")
 		(property "Reference" "U240"
-			(at 0 -3.8 0)
-			(layer "F.SilkS")
+			(at 0 -2 0)
+			(layer "B.SilkS")
 			(uuid "d92db43a-f7ae-4f08-88b8-29ad603b0c73")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "PE42820B-X 2m/VHF 43dBm-CW RF switch"
@@ -4538,15 +4678,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/b451ba53-38f6-538a-9f62-16b70cb18a6b")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "12" "13" "16" "28" "1" "3" "4" "5" "6" "7" "8" "9" "10" "11" "14"
-					"15" "33" "2" "23" "17" "18" "19" "20" "21" "22" "24" "25" "26" "27"
-					"29" "30" "31" "32"
-				)
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4631,7 +4762,7 @@
 		)
 		(fp_poly
 			(pts
-				(xy -3.15 -1.75) (xy -3.55 -1.5) (xy -3.55 -2)
+				(xy -2.65 -2.75) (xy -3.05 -2.5) (xy -3.05 -3)
 			)
 			(stroke
 				(width 0.12)
@@ -5073,7 +5204,6 @@
 			(at -1 -1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5085,7 +5215,6 @@
 			(at -1 0)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5097,7 +5226,6 @@
 			(at -1 1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5109,7 +5237,6 @@
 			(at 0 -1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5121,7 +5248,6 @@
 			(at 0 0)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5132,7 +5258,6 @@
 		(pad "33" smd rect
 			(at 0 0)
 			(size 2.8 2.8)
-			(property pad_prop_heatsink)
 			(layers "B.Cu")
 			(net "GND")
 			(pinfunction "EP_GND_33")
@@ -5143,7 +5268,6 @@
 		(pad "33" smd rect
 			(at 0 0)
 			(size 3.35 3.35)
-			(property pad_prop_heatsink)
 			(layers "F.Cu" "F.Mask")
 			(net "GND")
 			(pinfunction "EP_GND_33")
@@ -5155,7 +5279,6 @@
 			(at 0 1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5167,7 +5290,6 @@
 			(at 1 -1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5179,7 +5301,6 @@
 			(at 1 0)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5191,7 +5312,6 @@
 			(at 1 1)
 			(size 0.45 0.45)
 			(drill 0.2)
-			(property pad_prop_heatsink)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -5208,14 +5328,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C332"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "a04b41d8-db27-45a7-aee8-3a1cf0966a01")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u VCCP1I (<2u)"
@@ -5265,16 +5386,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a9340155-3483-46f9-b308-cbcee2888771")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "eab68e8a-044c-487d-ab70-f3b1cb6dc918")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/8b31e35c-ea21-548d-b390-8b640cdcb775")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -5368,14 +5509,15 @@
 		(descr "ublox MAX 6/7/8, (https://www.u-blox.com/sites/default/files/MAX-8-M8-FW3_HardwareIntegrationManual_%28UBX-15030059%29.pdf)")
 		(tags "GPS ublox MAX 6/7/8")
 		(property "Reference" "U40"
-			(at 0 -6 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "bfe43fee-7875-46aa-807f-807c9a8d12e5")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "MAX-M10S GNSS"
@@ -5443,14 +5585,6 @@
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/0ed3f229-512d-5ab0-976a-12f4e00d8615")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "3" "2" "16" "17" "5" "18" "9" "15" "8" "7" "6" "1" "10" "12" "14"
-					"13" "11" "4"
-				)
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -5515,7 +5649,7 @@
 		)
 		(fp_poly
 			(pts
-				(xy -5.43 -5.01) (xy -5.67 -5.34) (xy -5.19 -5.34) (xy -5.43 -5.01)
+				(xy -5.43 -5.01) (xy -5.67 -5.34) (xy -5.19 -5.34)
 			)
 			(stroke
 				(width 0.12)
@@ -5681,7 +5815,6 @@
 			(size 1.8 0.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U40-V_BCKP-Pad6)")
 			(pinfunction "V_BCKP_6")
 			(pintype "power_in+no_connect")
 			(uuid "ff35e206-246d-40cd-91a3-653b6be88bb4")
@@ -5751,7 +5884,6 @@
 			(size 1.8 0.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U40-LNA_EN-Pad13)")
 			(pinfunction "LNA_EN_13")
 			(pintype "output+no_connect")
 			(uuid "70024186-fbd4-4c59-b569-76d9784dec81")
@@ -5761,7 +5893,6 @@
 			(size 1.8 0.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U40-VCC_RF-Pad14)")
 			(pinfunction "VCC_RF_14")
 			(pintype "power_out+no_connect")
 			(uuid "1e7b9e89-1423-4b0b-b4bd-929c09a9d0d1")
@@ -5771,7 +5902,6 @@
 			(size 1.8 0.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U40-VIO_SEL-Pad15)")
 			(pinfunction "VIO_SEL_15")
 			(pintype "input+no_connect")
 			(uuid "7f6e8ff5-3eba-4d8c-a08a-3c53ad7ead8c")
@@ -5781,7 +5911,6 @@
 			(size 1.8 0.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U40-SDA-Pad16)")
 			(pinfunction "SDA_16")
 			(pintype "bidirectional+no_connect")
 			(uuid "cfa336bb-f82b-458c-a3c6-86b0991d807e")
@@ -5791,7 +5920,6 @@
 			(size 1.8 0.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U40-SCL-Pad17)")
 			(pinfunction "SCL_17")
 			(pintype "input+no_connect")
 			(uuid "226480db-eebe-4202-adc6-c9c355da5b64")
@@ -5801,7 +5929,6 @@
 			(size 1.8 0.7)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U40-~{SAFEBOOT}-Pad18)")
 			(pinfunction "~{SAFEBOOT}_18")
 			(pintype "input+no_connect")
 			(uuid "e0c3a4b8-7a6f-4496-9100-a22f06b586ea")
@@ -5826,14 +5953,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R337"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "e46dec87-4f11-48d6-a576-457568199f5f")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "2.2R PCM2902C VBUS filter"
@@ -5883,16 +6011,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "90daa518-6955-492f-9f5f-3681866c23ce")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072R2L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2677390c-b608-4671-bb3b-aa4109ef4570")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/d3c97a66-4a46-51ae-8ff7-80d455cbc4e1")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -5986,14 +6134,15 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C220"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1d015991-f248-469b-bcd4-9d38ae7dbd04")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10u 25V X7R radio VIN"
@@ -6071,12 +6220,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/feaadf37-5bf0-5c3d-9d0d-374b0427e20a")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -6170,14 +6313,15 @@
 		(descr "Mounting Hole 2.2mm, M2, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2")
 		(property "Reference" "H4"
-			(at 0 -3.15 0)
-			(layer "F.SilkS")
+			(at 0 -1.75 0)
+			(layer "B.SilkS")
 			(uuid "43c4c928-7dd0-4671-912c-e38d9317b07d")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "M2 daughterboard support hole"
@@ -6243,12 +6387,6 @@
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/effbf681-5515-5da0-965c-33d0bb698739")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins)
-			)
-		)
 		(attr exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -6300,14 +6438,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R236"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "7b8a71bc-0fb7-4857-87de-5bd38ee2f5b0")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10k UHF local PTT inactive"
@@ -6385,12 +6524,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/e3eaecaf-bbcd-5bd7-a6d9-0b846157fff5")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -6484,14 +6617,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C247"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "460fa18f-9235-486a-b893-ca317a5eb231")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n VHF UART translator RADIO_4V0"
@@ -6541,16 +6675,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e7479e03-2991-475e-a1b7-46bbed712cbe")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0c25b077-58ef-4a9d-8b24-ed79c53c828a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/77d13b6d-18b5-5b83-bfe6-eddfab567e3d")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -6644,14 +6798,15 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C331"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "a0004e14-ac47-4e49-b17f-c74f70d4a620")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10u VCCCI"
@@ -6701,16 +6856,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "eaf111ba-df1c-4bde-ae39-942cd1039db3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM31CR71E106KA12L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cb179a3c-53ab-4e2e-be27-3e6830ad686d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/b2a5bb53-05eb-5d42-9251-5b51d3ce7e77")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -6804,14 +6979,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C275"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "e9e6cbd0-86bd-4243-b4bf-28200bbbe842")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100p C0G 250V UHF PE42820 RF2_INTERNAL DC block"
@@ -6913,12 +7089,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/bc010cc6-a9cb-5055-b508-588cc1629ae5")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7012,14 +7182,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R331"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "aad3e194-28b0-4916-966d-4d634f38230d")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "22R USB DM series"
@@ -7069,16 +7240,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f3028bb8-8d7f-4441-b9a8-21bbef6ff98c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0722RL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "85858914-1e6a-4e16-8fb1-e43e5bcc0b1f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/4fd23709-8aae-5468-911c-4ff33a9546bd")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7172,14 +7363,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R229"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "d4a12175-a574-46ea-a1a4-cecba841c330")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "0R VHF H/L LOW POWER - FIT"
@@ -7253,16 +7445,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "431859ad-8ab9-4a2f-bcba-7a5d9ff4bce2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-070RL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8cc0c534-f48d-47c4-93f2-fb410f2336db")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/8a872da0-6f7d-5dbc-bd33-8fccf0d2b336")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7356,14 +7568,15 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C337"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1ddfa537-e0e6-4ef1-afdf-e16566de9285")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10u VCOM"
@@ -7413,16 +7626,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "27ddd513-aa37-4c89-92c5-8c6684269894")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM31CR71E106KA12L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bcec352c-c64b-4ef7-be8c-fa03004972b8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/d073cf10-2901-57d8-b970-44d0c4b36aa3")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7516,14 +7749,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C246"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "b6f75441-c1bf-46d0-81fa-6326d3515007")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n VHF fail-safe buffer local"
@@ -7573,16 +7807,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b49d529f-318d-40af-b005-af01660fb2b5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c11d784f-8f36-49f7-be05-9bb2d402917e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/667a4d6d-69ad-5a4b-a63d-2b869ee11931")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7676,14 +7930,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R234"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "309a2c9b-3e33-47a8-bdaa-f6523630edca")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1k UHF AF out"
@@ -7733,16 +7988,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c011f8dc-b12d-4cab-a8ac-d79242918c7a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8275f58c-c7f4-426f-9212-e2231f8fc75d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/f8b26263-befa-52dd-b28c-1515fb8eb001")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7836,14 +8111,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C5"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "0048b4e3-0edd-429c-907d-e585bd92b67f")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n RADIO_DB_3V3 high-frequency"
@@ -7893,16 +8169,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8f0f426b-8e34-4813-9cf9-fdd5ce821802")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cb87e288-55c2-467c-9cb4-a23c25c3c2b3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/ce20dd6d-a1c1-5b04-9558-ab262148a63f")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7996,14 +8292,15 @@
 		(descr "VSSOP, 8 Pin (https://www.jedec.org/standards-documents/docs/mo-187-f)")
 		(tags "VSSOP SO JEDEC-MO-187-CA Texas_DCU0008A")
 		(property "Reference" "U261"
-			(at 0 -1.95 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1a833920-6bb2-49fb-a629-788df42451ed")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC2G32DCUR dual-radio PTT interlock"
@@ -8093,20 +8390,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/c4ce0c8b-67b5-5ecd-93f9-956cb3f5a403")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "7")
-			)
-			(unit
-				(name "B")
-				(pins "5" "6" "3")
-			)
-			(unit
-				(name "C")
-				(pins "8" "4")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -8378,14 +8661,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C227"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "52af9723-8da4-407d-b638-46b8b3cabd8f")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10n UHF audio RF shunt"
@@ -8435,16 +8719,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4d0f6c39-edff-4378-9a78-0fee1763090f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H103KA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3bdd5aff-9349-48b9-96ab-bc0c980286ff")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/a6468da9-caf7-5272-aef7-69ae32a98cf4")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -8538,14 +8842,15 @@
 		(descr "SOT, 6 Pin (https://home.jeita.or.jp/tsc/std-pdf/ED-7500A.pdf#page=170, JEDEC MO-203, variant AB, https://www.jedec.org/document_search?search_api_views_fulltext=MO-203)")
 		(tags "SOT TO_SOT_SMD SC-88 SOT-363 SC-70-6 US6 UMT6 S-Mini6 TSSOP6")
 		(property "Reference" "U260"
-			(at 0 -1.8 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "9127c8cc-a58d-45fe-8aa7-db81a6b573e8")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC2G04DCKR PTT request inverter"
@@ -8635,20 +8940,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/8800d567-be88-56d3-a370-3ac8556e5706")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "6")
-			)
-			(unit
-				(name "B")
-				(pins "3" "4")
-			)
-			(unit
-				(name "C")
-				(pins "5" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -8942,14 +9233,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C240"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "66859467-43d2-4bbc-b651-1daf18dee1b7")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n VHF RF-select latch local"
@@ -8999,16 +9291,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c7bbd2f7-a92f-461a-8b19-9f69c5147353")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1c28856f-7c9d-41b4-a75c-ab141fe22ba0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/ea414d26-2aac-5b11-bd61-691253377e58")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9102,14 +9414,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R231"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "04207a12-c325-4e27-a7e7-c25c09c3afd8")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "0R UHF H/L LOW POWER - FIT"
@@ -9183,16 +9496,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "51cf5207-36fd-47fc-8f24-b4fa6fb2d722")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-070RL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3fc5c971-215d-40fb-bfce-3cc14b3b8a8d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/30cd4238-d494-5667-b828-37a44a08bcdc")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9286,14 +9619,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R227"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "decb6f2a-4b03-430d-a1fb-4146c33cb061")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "47k 1% VHF antenna select default internal; PE42820 control divider low"
@@ -9343,16 +9677,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "995dac47-25db-48cb-bf06-10422fd0bd66")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b32a4943-ba9b-427f-901f-221728310adf")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/3061535a-acb0-5866-90bb-0cf250a1f57e")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9446,14 +9800,15 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q332"
-			(at 0 -2.4 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "05fbd9c0-70ac-4258-af25-0836ba51fe53")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "BSS84LT1G codec-loss force-mute"
@@ -9530,12 +9885,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/b9f5a67f-6efd-5214-845f-1f578db76972")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "3" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9853,14 +10202,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R330"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1c5b9f15-2a0b-4c5e-a130-ea0846b8acc5")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "22R USB DP series"
@@ -9910,16 +10260,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ec47f9ff-52e8-4b0f-bcc4-208450bee488")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0722RL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f6062495-a72c-4ed4-83c0-b8eb5e02f789")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/0ce632e5-2aa5-5bb1-a8e6-5ba3fc45d39d")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10013,14 +10383,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R232"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "0326d35b-fd28-4454-9977-89b878517b33")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k UHF RF-select EC reset default internal"
@@ -10070,16 +10441,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bb6b8f38-4eb2-4ff3-800f-13cb42743a25")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b1c6d958-b816-43a2-8c78-9cfedbbeee55")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/67a30307-fddd-5215-9feb-fb278abf2581")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10173,14 +10564,15 @@
 		(descr "Mounting Hole 2.2mm, M2, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2")
 		(property "Reference" "H1"
-			(at 0 -3.15 0)
-			(layer "F.SilkS")
+			(at 0 -1.75 0)
+			(layer "B.SilkS")
 			(uuid "7292d08c-7d72-4dc7-b9f9-a57415c61ae9")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "M2 daughterboard support hole"
@@ -10246,12 +10638,6 @@
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/d2b82ce5-c8d6-5ee5-952c-2ede8d067ddd")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins)
-			)
-		)
 		(attr exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -10303,14 +10689,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C338"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "2e67a4f8-70d3-4b76-9579-70d6ce79ce03")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "18p C0G 5% PCM2902 crystal load"
@@ -10360,16 +10747,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f2e23262-a14c-4c1c-ba55-4805b8c93b7a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM1885C1H180JA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e6c0898a-7d91-4513-a149-bcd953dcc793")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/323dfd50-29d1-5f83-8502-9ddd5846e98a")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10463,14 +10870,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C333"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "6fd99619-5d27-40ec-9e14-3173c770870b")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u VCCP2I (<2u)"
@@ -10520,16 +10928,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b7558e86-c8fb-44d4-a651-fbd001dade43")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "06e8ee59-e6ed-439c-8d05-beba4ab4fb12")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/fe5c24c0-1f19-50aa-aec4-01fe6bfc3a37")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10623,14 +11051,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C248"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "c7116c21-ccb6-479d-9412-5e18e9aab63b")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n VHF UART translator 3V3"
@@ -10680,16 +11109,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b2feee0f-4158-49c8-b9bb-e8bdd9e87db4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "db19f2f0-9a14-4d97-b0a2-91671229b171")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/9acb2f47-971d-5498-a2e9-06d4c7a40e3c")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10783,14 +11232,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C42"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "8314054a-47f6-41fb-bebd-96b0ae67a129")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n GNSS local"
@@ -10840,16 +11290,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "af7224b1-60ed-4258-b481-f18f0cabd918")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "39ea363b-699b-4a90-a1b7-261a71a43c38")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/fa0ebc77-0be6-5a2d-9aea-efc7bc0248f4")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10943,14 +11413,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C257"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1030ea5a-a331-49af-9a27-163ba24ba6ea")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n UHF UART translator RADIO_4V0"
@@ -11000,16 +11471,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b8b7c059-7b60-4eb1-a6b6-aa169bf2133e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "36c95b20-4327-4bb4-9653-23950db7bf3f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/cd18e60b-4c0b-5ef4-babc-36aa946fbc3a")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -11103,14 +11594,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C40"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "ecd51357-be4a-4ec0-8c64-a96a6d89e274")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n GNSS input-buffer local"
@@ -11160,16 +11652,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a8ad5e22-5550-46e8-b6ea-1db59d705cd0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7cce9fde-e44e-497e-a68b-aeb25796abb4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/eddb3ede-dd7e-5aaf-ba3f-46441cb7fb99")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -11263,14 +11775,15 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C4"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "dde76328-de51-480f-ab2e-11f658671ea3")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10u RADIO_DB_3V3 local bulk"
@@ -11320,16 +11833,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "af27e9db-0293-492e-a4f5-5bbe094b216a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM31CR71E106KA12L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "158e908c-a865-4e4d-9a94-5c9c1d9e7d71")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/4223fdb0-e1ed-5543-aa70-f65d65d43194")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -11423,14 +11956,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R260"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "49ad5bdf-c41f-4692-a42b-f508fbf3d919")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10k 1% UHF PE42820 control divider top"
@@ -11480,16 +12014,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "27a6e6a5-25ff-4916-a860-48b56363f27c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0710KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e27f1498-8ec0-4c8a-aae5-520316cf2dc6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/cae8ffea-562f-5723-83a0-7687c6a82989")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -11583,14 +12137,15 @@
 		(descr "SOT, 6 Pin (https://home.jeita.or.jp/tsc/std-pdf/ED-7500A.pdf#page=170, JEDEC MO-203, variant AB, https://www.jedec.org/document_search?search_api_views_fulltext=MO-203)")
 		(tags "SOT TO_SOT_SMD SC-88 SOT-363 SC-70-6 US6 UMT6 S-Mini6 TSSOP6")
 		(property "Reference" "U241"
-			(at 0 -1.8 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "d7bcf4d2-93c3-430d-967b-1b66caf319b2")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC1G373DCKR VHF transmit-safe RF-select latch"
@@ -11680,12 +12235,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/e181b96f-4f35-5430-aac0-0dce8db9cd4a")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "3" "1" "5" "2" "4" "6")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -11983,14 +12532,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C330"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "bf643938-317c-407a-a693-79e86dd22d3f")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u PCM2902C VBUS"
@@ -12040,16 +12590,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d1f05f9f-5818-4746-9a8c-cfe6763fd8e5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1c596485-2970-4feb-a27e-8cb4d8a62347")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/ecdd413c-e5a8-5566-bdc5-c7dc5fc5e93d")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -12143,14 +12713,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C334"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "3fdc5a70-27ff-40ec-8385-90459b0e9512")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u VCCXI (<2u)"
@@ -12200,16 +12771,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4f8facdf-c5f6-4db1-878d-3e8c5a4ce20e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "26097fa0-396b-4b56-94da-27f082172cb5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/318267e8-e7c8-53b5-a629-e69d274586db")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -12299,18 +12890,19 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "6746aaad-0668-50af-8f8a-7feb356bcf2a")
-		(at 44.5 25 90)
+		(at 41.625 28.625 90)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C271"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "e3c40400-c1bf-4228-9545-44c1e8c42e19")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100p C0G 250V VHF PE42820 RF1_EXTERNAL DC block"
@@ -12412,12 +13004,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/0ca35787-c4b4-5d15-b047-fdda8b97bc3f")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -12511,14 +13097,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C261"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "bde84a97-e517-4218-8d0f-fbbbc307ad39")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n PTT interlock local"
@@ -12568,16 +13155,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "29db6cbb-7ac1-49ee-a230-5da759429733")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7803c670-b787-4eb6-8ea7-0ec07150e498")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/f4c99a09-9f50-5a87-ac8e-bdecda6fe170")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -12671,14 +13278,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R338"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "8d8c2756-d214-43c1-a61e-ab358b28bca6")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1.5k USB D+ pull-up per TI Figure 39"
@@ -12728,16 +13336,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "97f79de4-db47-48be-87eb-99620a8d39aa")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K5L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b57560b1-3af5-4c1f-b448-43b68dd0b6b4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/e23818c6-6246-59e4-b4e7-6755b236bbdf")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -12831,14 +13459,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C340"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "357fdb05-43f7-4500-ba55-25d83621c9ad")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u VHF RX AC couple"
@@ -12888,16 +13517,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4a09c2f2-a73a-4bd1-b0dc-5da4dce78beb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "abdb9687-c436-4633-b667-dfe7ed0214e2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/e26f88ca-dbc1-5422-9788-dd89f42bfb16")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -12987,18 +13636,19 @@
 	(footprint "Connector_Coaxial:SMA_Molex_73251-1153_EdgeMount_Horizontal"
 		(layer "F.Cu")
 		(uuid "71c90bec-43e5-5857-8dff-2d66b96ba532")
-		(at 43 20 -90)
+		(at 43 24.26 -90)
 		(descr "Molex SMA RF Connectors, Edge Mount, https://tools.molex.com/pdm_docs/sd/732511150_sd.pdf")
 		(tags "sma edge")
 		(property "Reference" "J241"
-			(at -1.5 7 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "9cd41b22-b020-4342-b7cb-5161ee613759")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "2m/VHF rear external SMA/u.FL path"
@@ -13066,12 +13716,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/63dbf481-b7fb-5a92-8d9e-5354c90639f4")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_poly
@@ -13414,7 +14058,6 @@
 			(at 1.72 -4.38 270)
 			(size 0.97 0.97)
 			(drill 0.46)
-			(property pad_prop_mechanical)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -13426,7 +14069,6 @@
 			(at 1.72 4.38 270)
 			(size 0.97 0.97)
 			(drill 0.46)
-			(property pad_prop_mechanical)
 			(layers "*.Cu")
 			(remove_unused_layers no)
 			(net "GND")
@@ -13454,14 +14096,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C270"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "2c7c75df-69c7-4622-a781-84498be8bfd1")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100p C0G 250V VHF PE42820 RFC DC block"
@@ -13563,12 +14206,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/dd334880-65a3-58ca-96bf-ffcf23b1608f")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -13662,14 +14299,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C243"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "feec3935-cbd7-48c7-97bc-056fb33ddb53")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10n PE42820 VDD bypass per eval board"
@@ -13719,16 +14357,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6647dae7-83f4-4802-9952-3d068ab38d4c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H103KA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "770bf8c4-31a2-414f-a119-9fea3742f3ca")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/5f4074ea-d293-538e-a2f1-e58026ad413b")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -13822,14 +14480,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R242"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1ec121ab-1c1b-4d14-ad3a-b0ba2f3868f1")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10k 1% VHF PE42820 control divider top"
@@ -13879,16 +14538,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2a4369be-79c0-4586-8625-d78aff279219")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0710KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a23d44ee-ec5b-4cce-8de2-4f506019b46f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/f0087443-9e24-5e52-bade-120b83b27c5d")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -13982,14 +14661,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R226"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "429cc6bd-7dec-42ea-812c-bb80dfcdeb28")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k UHF default sleep"
@@ -14039,16 +14719,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5c7ea690-d0ab-4331-b5d4-fe7cb4828983")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "16980adb-6a21-43d3-9a07-e0839793ed53")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/83c780ba-2b43-5ce2-a200-c09c1f7c5905")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -14142,14 +14842,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R237"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "43428c04-89fe-4eb3-bf0e-ea9bd25a8d7b")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10k VHF local sleep"
@@ -14227,12 +14928,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/0ef8a0d1-b218-5dc3-8536-cd06e5e1b6e4")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -14326,14 +15021,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R344"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "c668391c-4fad-4ba0-8885-fac8f451cc0b")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k VHF mute-gate pull-down"
@@ -14383,16 +15079,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7b3358e9-de1f-4ae4-874f-43f848b70650")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3510b92b-ba07-4367-9c09-6f5e66fba4cb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/2c61d67b-1309-5de4-be5a-e97c5a15b00b")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -14486,14 +15202,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C2"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "cbc47b5d-7d7f-4b35-ad55-3d16c2717b47")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u AP2112 input local"
@@ -14543,16 +15260,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "afd98a49-0b3f-46d2-92ec-595c5dc7b8c2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "34409539-b4bd-4f58-ac32-2c6f6c179e4d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/3c02ee97-e3e2-528c-a7e3-2ac673ff9653")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -14646,14 +15383,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C254"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "30589f19-171f-4066-8ebc-f29680564799")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100p PE42820 V1 RF bypass per eval board"
@@ -14703,16 +15441,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b07d5b31-5902-41d7-8d42-237913b197a4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM1885C1H101JA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fa8919da-e753-4f09-aa65-6cf5df482059")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/d6b41046-4867-58ba-97f2-3c400a916a35")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -14806,14 +15564,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R343"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "79847a1a-b9bf-4073-9e52-f1852a8344ae")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k force-mute pull-down"
@@ -14863,16 +15622,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "383642ce-8f4f-43a8-9d2d-8481ee193820")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1b8d4ed3-730b-4265-9dc8-9f1d7fff4290")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/2f68c1d2-fc43-5e41-87cb-f786cd616839")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -14966,14 +15745,15 @@
 		(descr "Mounting Hole 2.2mm, M2, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2")
 		(property "Reference" "H2"
-			(at 0 -3.15 0)
-			(layer "F.SilkS")
+			(at 0 -1.75 0)
+			(layer "B.SilkS")
 			(uuid "73a63986-4fd2-4911-961b-5e2c180737e2")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "M2 daughterboard support hole"
@@ -15039,12 +15819,6 @@
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/6abe2305-81db-5ea2-b5c2-6168ed9940c5")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins)
-			)
-		)
 		(attr exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -15096,14 +15870,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R335"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "f1132a4d-42a7-49a9-99f3-b7b577582d35")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "82k 1% UHF mic attenuator series"
@@ -15165,16 +15940,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8aa9b4f8-4f52-4981-8359-8e0590149c69")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0782KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "695cb00d-93b3-41cd-8421-642b53620460")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/19b499a1-2bbe-58b1-b9fb-2f24b1c389e2")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -15268,14 +16063,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R342"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "3467c785-1816-43c2-8406-fa31e254b9ca")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k SSPND fail-low pull-down"
@@ -15325,16 +16121,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7dc3b2b9-32f5-46dd-926a-736b52c89d7d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0b12b9ab-116e-48ef-8f1d-217c80e68713")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/67561945-f678-5525-a0a4-646e3930cfa4")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -15424,18 +16240,19 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "8fbb4b7a-fd84-5b58-9577-8d399a7c4535")
-		(at 113.5 26.5)
+		(at 107 34.25)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C253"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "c7fc0d1b-978d-4348-bd20-9903a9845007")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10n PE42820 VDD bypass per eval board"
@@ -15485,16 +16302,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3b6f476a-ab6b-4ce7-a6ed-f6c9967c4312")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H103KA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "aa98ea3a-6f8f-46d1-b44d-d071609cc6ae")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/eb31a64e-2b9e-509e-803b-575e23255c78")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -15588,14 +16425,15 @@
 		(descr "SOD-323")
 		(tags "SOD-323")
 		(property "Reference" "D392"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "901683e2-657a-42ae-9554-4ca82a3ff40c")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "BAT54WS PTT/suspend mute OR"
@@ -15663,12 +16501,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/da3260ff-bc70-5c03-91bc-2dfe41829749")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -15892,14 +16724,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R340"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 -0.5 0)
+			(layer "B.SilkS")
 			(uuid "fc582cda-c92e-4da8-83eb-d5f0342aaeb6")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1M crystal feedback"
@@ -15949,16 +16782,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0c6595f3-37ad-4e85-ab46-3074e8b76cdb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071ML"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f0707261-bdb2-4f34-b621-23e4cb19cd60")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/42373eb1-528f-56f1-ad9d-03e8f8e34bb4")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -16052,14 +16905,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R225"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "b06a0225-c2a8-40d8-a9ab-c90ff45752fd")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k VHF default sleep"
@@ -16109,16 +16963,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2dd2aea7-605a-4c07-beb8-a4add3bb531e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bdb6f71a-bdd9-4323-bf69-11c45e6bd05e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/eea95857-6a24-5218-a0cd-196c9e992a74")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -16212,14 +17086,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R334"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "3cae8e44-1486-48b7-aa64-a48c1a5c7897")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "82k 1% VHF mic attenuator series"
@@ -16281,16 +17156,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ca7acb19-2a95-4f78-97fc-ce2823f25498")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0782KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a955223-e97a-4eff-84a6-2b26a97ef7ca")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/0bffdbe7-8db2-5245-b0de-42a67d7bc7e1")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -16384,14 +17279,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C260"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1f365307-af9d-4002-a01c-889d57e1601f")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n PTT interlock local"
@@ -16441,16 +17337,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "928cf14c-1866-4f88-b9e4-fbc205036dff")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f769296f-abb2-46d2-adb6-27f718bdbfd4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/2d4761c9-74b4-5374-983a-5abd0f9c8e30")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -16544,14 +17460,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R222"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at -0.25 0 0)
+			(layer "B.SilkS")
 			(uuid "b4c8a204-ad8d-43b0-99c0-b3a0c08866e9")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "17.4k 1% 4.0V FB lo"
@@ -16601,16 +17518,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d5e21c2b-0232-4f23-a6f9-9630afb30df5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0717K4L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f43883ad-4b68-48f6-b621-9859c7a7696d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/2f7e0260-eb91-5e28-aec0-e4eabddd27a6")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -16704,14 +17641,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C339"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "2cd2266c-d2de-404f-bd6b-72308ac393ee")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "18p C0G 5% PCM2902 crystal load"
@@ -16761,16 +17699,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5dfac122-a2ac-4c40-8bcc-b3968ce7716f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM1885C1H180JA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "70e49d37-26d1-4ae2-9df4-fec7705dc1cb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/ba4e601d-e5eb-57d5-94a3-a7eea722eb62")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -16860,22 +17818,23 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "a45e5072-1f31-559d-b76a-b1334c490e62")
-		(at 39 25.5)
+		(at 39.75 28.5 90)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C245"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 -1 0)
+			(layer "B.SilkS")
 			(uuid "05371736-7b61-4a87-b8fd-90e7b864790d")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "DNP 0.2p PE42820 RFC match candidate"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(layer "F.Fab")
 			(uuid "65263616-6996-4586-8611-b33fbaf6025a")
 			(effects
@@ -16886,7 +17845,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1d4613c4-5fe3-597d-95d1-72a7c3148704")
@@ -16898,7 +17857,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7df14bdb-ce6d-514c-9e5d-f11c373e67e8")
@@ -16910,7 +17869,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "3511fda5-304e-4306-a504-ce833e494cd0")
@@ -16922,7 +17881,7 @@
 			)
 		)
 		(property "CandidateValue" "0.2pF"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "ceb4c750-d6de-5ddb-9fcf-36b96c6b450d")
@@ -16934,7 +17893,7 @@
 			)
 		)
 		(property "ReleaseGate" "FIT_ONLY_AFTER_BOARD_SPARAMETER_AND_VNA_MATCHING"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "cf41983b-3847-59db-8a54-f4331490188e")
@@ -16949,16 +17908,10 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/72f720e7-fd46-50e1-b002-b92fa8ebcc22")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.14058 -0.51)
+			(start -0.140579 -0.51)
 			(end 0.14058 -0.51)
 			(stroke
 				(width 0.12)
@@ -16969,7 +17922,7 @@
 		)
 		(fp_line
 			(start -0.14058 0.51)
-			(end 0.14058 0.51)
+			(end 0.140579 0.51)
 			(stroke
 				(width 0.12)
 				(type solid)
@@ -17000,7 +17953,7 @@
 			(uuid "1d168caa-cb05-4ce2-bbb3-48f90f58d40e")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(uuid "f2a74a9d-4c98-4f4c-aef1-5ef0722cbb40")
 			(effects
@@ -17011,7 +17964,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -17020,7 +17973,7 @@
 			(uuid "ee4f0577-a0e2-4e8d-bae9-8b5b3becf738")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -17048,14 +18001,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C335"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "a87a77df-8b3b-4cb6-911e-03df9de2f40a")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u VDDI (<2u)"
@@ -17105,16 +18059,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b126f75e-3b54-4eab-a7bd-9fd25dcba397")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f8bb9a40-ecee-4ba8-8df7-1a2f13b00b99")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/f39e49fa-6eed-5e1a-9373-f8edfca197a3")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -17208,14 +18182,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C3"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "f88fd14f-1d5f-44aa-802c-7156095ed7eb")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u AP2112 output local"
@@ -17265,16 +18240,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6d925cdf-2d37-43ef-828b-573b3c92da9f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b6805c3d-68c3-4f1f-be3b-9b5d08e5c6b0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/c2e5d67a-5060-5778-92a0-40e8d76c10fa")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -17368,14 +18363,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R221"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "f7f08663-066a-4b22-a6ad-1dcce25c63d9")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k 1% 4.0V FB hi"
@@ -17425,16 +18421,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9cdb5c9b-95ec-495b-a1e6-a0d3b6365913")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e6f7260a-a705-4bac-9f64-9c75ea521939")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/870d2f80-9ed4-5110-8063-9130ed16e332")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -17528,14 +18544,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R238"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "8d01d182-d406-4ddc-8aa5-dec0a9b38cfc")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10k UHF local sleep"
@@ -17613,12 +18630,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/c53d2217-be6d-50c5-abd2-5018303f0438")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -17712,14 +18723,15 @@
 		(descr "VSSOP, 8 Pin (https://www.jedec.org/standards-documents/docs/mo-187-f)")
 		(tags "VSSOP SO JEDEC-MO-187-CA Texas_DCU0008A")
 		(property "Reference" "U41"
-			(at 0 -1.95 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "96ef60a5-faa1-4303-81f8-3073964c0323")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC3G34 GNSS input isolation"
@@ -17809,24 +18821,6 @@
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/905830a0-7cde-565c-bfe6-7c4f5b8ebe2c")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "7")
-			)
-			(unit
-				(name "B")
-				(pins "6" "2")
-			)
-			(unit
-				(name "C")
-				(pins "3" "5")
-			)
-			(unit
-				(name "D")
-				(pins "8" "4")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -18098,14 +19092,15 @@
 		(descr "SOT, 6 Pin (JEDEC MO-178 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U253"
-			(at 0 -2.4 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "7239bd6e-82cf-441a-88e5-2e1d54d83e32")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC1T45 UHF TXD 4V-to-3V3 translator"
@@ -18195,12 +19190,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/23044b2a-080c-5ace-8f4f-d6dd0b80913a")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "3" "5" "1" "2" "6" "4")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -18498,14 +19487,15 @@
 		(descr "SOT, 6 Pin (JEDEC MO-178 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U243"
-			(at 0 -2.4 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "bc43c00e-84af-48a0-bfa3-327c77c722e7")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC1T45 VHF TXD 4V-to-3V3 translator"
@@ -18595,12 +19585,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/e59cd7ad-38a5-53c8-96bb-2e3394b52bc5")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "3" "5" "1" "2" "6" "4")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -18898,14 +19882,15 @@
 		(descr "Hirose U.FL Coaxial (https://www.hirose.com/en/product/document?clcode=CL0331-0472-2-01&productname=U.FL-R-SMT-1(01)&series=U.FL&documenttype=2DDrawing&lang=en&documentid=0000940668)")
 		(tags "Hirose U.FL Coaxial")
 		(property "Reference" "J42"
-			(at 0 -3.2 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "3e929bbd-559d-43c1-8200-c66b85e59a7a")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "GNSS passive antenna U.FL"
@@ -18973,12 +19958,6 @@
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/b3e6775b-6383-5fcc-b7fa-1c1cbde6741d")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
@@ -19040,7 +20019,7 @@
 			)
 			(stroke
 				(width 0.05)
-				(type default)
+				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
@@ -19308,14 +20287,15 @@
 		(descr "Mini-Circuits Filter SMD 1206 https://ww2.minicircuits.com/case_style/FV1206.pdf")
 		(tags "Mini-Circuits Filter SMD 1206")
 		(property "Reference" "FL240"
-			(at 0 -2.5 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "0ada725e-8608-472a-849b-1db93f182800")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "Mini-Circuits LFCN-160+ 2m/VHF LPF"
@@ -19419,12 +20399,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/bb3bf952-f308-5535-ae84-4bc63ca538e3")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "4" "3")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -19479,7 +20453,7 @@
 		)
 		(fp_poly
 			(pts
-				(xy -1.66 -1.16) (xy -1.94 -1.16) (xy -1.66 -1.44) (xy -1.66 -1.16)
+				(xy -1.66 -1.16) (xy -1.94 -1.16) (xy -1.66 -1.44)
 			)
 			(stroke
 				(width 0.12)
@@ -19772,14 +20746,15 @@
 		(descr "Hirose U.FL Coaxial (https://www.hirose.com/en/product/document?clcode=CL0331-0472-2-01&productname=U.FL-R-SMT-1(01)&series=U.FL&documenttype=2DDrawing&lang=en&documentid=0000940668)")
 		(tags "Hirose U.FL Coaxial")
 		(property "Reference" "J250"
-			(at 0 -3.2 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "a4c4dda2-61d4-4292-b969-5d8f79b10853")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "70cm/UHF internal/PCB antenna feed U.FL"
@@ -19847,12 +20822,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/77dea94a-04a4-51fc-afe2-e7081f1cdb7d")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
@@ -19914,7 +20883,7 @@
 			)
 			(stroke
 				(width 0.05)
-				(type default)
+				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
@@ -20182,14 +21151,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C258"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "2d7561f4-0e90-409e-8b8c-3790778b2036")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n UHF UART translator 3V3"
@@ -20239,16 +21209,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cd526fe0-7a21-40f3-af23-9087e26b5115")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "db94ca07-e4b3-402f-bc84-a500f1673f66")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/da7f9ccd-e046-555b-b787-6e93bc0281ea")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -20342,14 +21332,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C342"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "6d0001dc-28a5-480f-893f-bb4e6d3028b1")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u VHF TX audio AC couple"
@@ -20399,16 +21390,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "df82f7de-5f4d-4dbd-8b9e-b09e0298940e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5aea38e5-5dd5-4abf-8ab5-f8c1a1997367")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/6f1f57ab-f913-5434-9f5e-463f9be16507")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -20502,14 +21513,15 @@
 		(descr "SOT, 6 Pin (https://home.jeita.or.jp/tsc/std-pdf/ED-7500A.pdf#page=170, JEDEC MO-203, variant AB, https://www.jedec.org/document_search?search_api_views_fulltext=MO-203)")
 		(tags "SOT TO_SOT_SMD SC-88 SOT-363 SC-70-6 US6 UMT6 S-Mini6 TSSOP6")
 		(property "Reference" "U251"
-			(at 0 -1.8 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "d287a705-031d-4191-b65f-4e01ed333c5f")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC1G373DCKR UHF transmit-safe RF-select latch"
@@ -20599,12 +21611,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/876636b8-e70f-5662-9b41-f9bda80dead3")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "3" "1" "5" "2" "4" "6")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -20902,14 +21908,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R42"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "8da59692-08b8-4c8f-b478-2e4ccdbadd98")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100R GNSS output series"
@@ -20959,16 +21966,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6d4343b2-ea66-4fbc-abfa-f98954ddc91d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100RL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1ff6391f-e6a9-4c79-bcc8-6cec8e5af7f7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/2be9a007-cc81-52a9-b9f4-b20cab31c0e6")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -21062,14 +22089,15 @@
 		(descr "Coilcraft XGL5030 molded power inductor; manufacturer recommended 1.18 x 3.31 mm lands at 4.70 mm center spacing")
 		(tags "Coilcraft XGL5030 power inductor")
 		(property "Reference" "L70"
-			(at 0 -3.65 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "0708510e-0e93-4453-8eed-f8384600118a")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "3.3uH 20% 6.0A Isat20"
@@ -21134,12 +22162,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/d417df74-9fcf-5f8e-9105-6cb9405bf96c")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -21275,14 +22297,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R40"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "3b41bec4-e0fb-4fc2-8b73-07749c0a4248")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k GNSS local reset pull-up"
@@ -21332,16 +22355,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "027a6228-1ea5-4307-94f0-d6a09eaf081a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e844f403-de3e-4994-8a76-e8f6e8c1c442")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/f1b8d75d-fc98-5970-9edf-43b3fec204ea")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -21435,14 +22478,15 @@
 		(descr "SOD-323")
 		(tags "SOD-323")
 		(property "Reference" "D391"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "ea580d53-9260-4778-8b71-021c141c4cb0")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "BAT54WS PTT/suspend mute OR"
@@ -21510,12 +22554,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/146563dd-cce4-5fdc-8693-c2aa115f471d")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -21739,14 +22777,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C244"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "6a558ca2-8ce2-43b6-8440-b8f0e55b1900")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100p PE42820 V1 RF bypass per eval board"
@@ -21796,16 +22835,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c6edca4b-01ff-47b9-afc7-367745dbecaa")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM1885C1H101JA01D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5a065662-b5bd-482d-8b08-c9608dbcfa42")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/4d00a1a9-c3e3-5dcc-825a-f1fd16ee8679")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -21899,14 +22958,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R233"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "7066acfb-5038-4989-b838-f752d6e4df58")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1k VHF AF out"
@@ -21956,16 +23016,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f9064c86-137d-459c-8fc1-ddf99c960f05")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "04a52978-8230-452c-8395-0275fc0e01d1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/485071d8-26e5-53c8-bc4c-0bf303f97eeb")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -22059,14 +23139,15 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q331"
-			(at 0 -2.4 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "df23b236-38c5-41a9-be13-96df08c973da")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "2N7002KT1G UHF PTT/suspend fail-mute shunt"
@@ -22155,12 +23236,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/9ee61f5d-06b0-5283-a0dc-cfc8c0bd21d5")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "3" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -22478,14 +23553,15 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C222"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "01a5543b-ead9-4900-a380-4a25b8db3203")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "22u 16V X7R radio output"
@@ -22563,12 +23639,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/e3fb1d22-8106-5dbd-a977-e58f5d5271f1")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -22662,14 +23732,15 @@
 		(descr "SOD-323")
 		(tags "SOD-323")
 		(property "Reference" "D390"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "0b49a24b-e7c9-445c-bfc2-fdfe520d6d4d")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "BAT54WS PTT/suspend mute OR"
@@ -22737,12 +23808,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/5b799c1b-ed56-52ed-a648-b8de4ea38f41")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -22966,14 +24031,15 @@
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q330"
-			(at 0 -2.4 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "61dfc383-eea2-49f9-ad52-58ed85228a6f")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "2N7002KT1G VHF PTT/suspend fail-mute shunt"
@@ -23062,12 +24128,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/1caf7d3d-daa9-5100-a8b0-25c9ea366186")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "3" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -23385,14 +24445,15 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C341"
-			(at 0 -1.68 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "7f766b70-f65c-42ac-b707-0f782dd929f1")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "1u UHF RX AC couple"
@@ -23442,16 +24503,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6dff358b-0517-42f2-ba36-20d1940200f0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM21BR71A105KA01L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6d5939f8-6820-4ed7-a5e8-0178411a56b2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/792d144a-d213-52d9-b19f-efe5ae099871")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -23545,14 +24626,15 @@
 		(descr "SOT, 5 Pin (JEDEC MO-178 Var AA https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U1"
-			(at 0 -2.4 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "9b733606-2eca-4f9e-ae82-b30bcf3ade69")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "AP2112K-3.3 600mA daughterboard logic LDO"
@@ -23630,12 +24712,6 @@
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/300f9f3c-fb8d-5113-a14c-f8ad8cba4526")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "3" "2" "4" "5")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -23938,7 +25014,6 @@
 			(size 1.325 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U1-NC-Pad4)")
 			(pinfunction "NC_4")
 			(pintype "no_connect")
 			(uuid "48967a79-a621-466d-b0c7-e67c600dee51")
@@ -23973,14 +25048,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C256"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "e86af924-e7d5-4db0-abd9-88b912d43d7d")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n UHF fail-safe buffer local"
@@ -24030,16 +25106,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a742875e-16f3-4c3f-9049-ac6a40225e1b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "92bdb965-d383-43c2-afa4-54b4e74a8d78")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/290ef4fc-f956-50aa-b6e4-5434d1df076b")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -24133,14 +25229,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C221"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "1cdbde86-f65c-4b0e-b3a3-2bfc933bd190")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n BOOT"
@@ -24190,16 +25287,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6f844411-f50b-4d97-90a3-f18a45a094b4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM188R71H104KA93D"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "84c15e04-d6d7-447c-874e-c66c573f3796")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/ff46a897-e0b1-52fe-a72a-32ad3bc591a2")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -24293,14 +25410,15 @@
 		(descr "Dorji DRA818V/DRA818U 35.60 x 19.00 mm castellated module. Figure 4 geometry: 1.80 mm pads, 4.45 mm top/bottom pitch, 4.60 mm right-side pitch; host lands add a 0.70 mm external toe. Pins 2,4,11,13,14,15 remain soldered mechanical lands but are electrical NC.")
 		(tags "DRA818 DRA818V DRA818U Dorji castellated radio module")
 		(property "Reference" "J71"
-			(at 0 -12.2 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "575c2203-d544-4fb4-9d0c-34eaff23c791")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "DRA818U 70cm FM module"
@@ -24364,14 +25482,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/74081a53-98a0-51c6-bd44-3ff5536463bf")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "8" "5" "6" "7" "16" "18" "9" "10" "1" "3" "12" "17" "2" "4" "11"
-					"13" "14" "15"
-				)
-			)
-		)
 		(solder_mask_margin 0.05)
 		(solder_paste_margin -0.05)
 		(attr smd)
@@ -24497,7 +25607,6 @@
 			(at -8.9 -8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J71-NC-Pad2)")
 			(pinfunction "NC_2")
 			(pintype "no_connect")
 			(uuid "d73629e1-c7c7-49c2-9e90-4a33b1ea7844")
@@ -24515,7 +25624,6 @@
 			(at 0 -8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J71-NC-Pad4)")
 			(pinfunction "NC_4")
 			(pintype "no_connect")
 			(uuid "0989d86f-ff20-40db-b822-c3fc8f74cbac")
@@ -24578,7 +25686,6 @@
 			(at 17.25 6.9 180)
 			(size 2.5 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J71-NC-Pad11)")
 			(pinfunction "NC_11")
 			(pintype "no_connect")
 			(uuid "e616936c-487e-497e-9de5-14e92ef3123b")
@@ -24596,7 +25703,6 @@
 			(at 8.9 8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J71-NC-Pad13)")
 			(pinfunction "NC_13")
 			(pintype "no_connect")
 			(uuid "42b17ae7-186a-4063-a2a7-9dc758030e10")
@@ -24605,7 +25711,6 @@
 			(at 4.45 8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J71-NC-Pad14)")
 			(pinfunction "NC_14")
 			(pintype "no_connect")
 			(uuid "f5cb14bb-f021-4e2d-8119-32bccebba438")
@@ -24614,7 +25719,6 @@
 			(at 0 8.95 180)
 			(size 1.8 2.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(J71-NC-Pad15)")
 			(pinfunction "NC_15")
 			(pintype "no_connect")
 			(uuid "e7fe209b-9d97-4dd2-8717-3323f5dda5d5")
@@ -24686,14 +25790,15 @@
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1"
-			(at 0 -1.85 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "f92cdc45-d02f-4bd7-ad45-904b55fcc62b")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10u 10V RADIO_DB_5V local bulk"
@@ -24743,16 +25848,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a56340ac-7b2d-40a6-9aad-c74a1dfc63b0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "GRM31CR71E106KA12L"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "359869b0-672f-4ccc-a70b-d641fca1ad43")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/d66bf494-bf85-5b47-80ef-dd2676891d40")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -24846,14 +25971,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C272"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "ed13c2ac-1116-4ec9-9b66-a493b7281ed2")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100p C0G 250V VHF PE42820 RF2_INTERNAL DC block"
@@ -24955,12 +26081,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/6a3c4643-21b8-51ec-91bc-5e020bbcdb28")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -25054,14 +26174,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R235"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "95565188-14cf-4902-8b38-38c9af74c6d7")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "10k VHF local PTT inactive"
@@ -25139,12 +26260,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/15382f9a-d888-59f2-9a7b-d1e81ba76f2f")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -25239,14 +26354,14 @@
 		(tags "Mini-Circuits QA2224 PL-484 ULP")
 		(property "Reference" "FL250"
 			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
+			(layer "B.SilkS")
 			(uuid "1ff0d170-6a5c-58f1-b09b-34ef339ccc53")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "Mini-Circuits ULP-470+ 70cm/UHF LPF"
@@ -25348,12 +26463,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/488cce5c-6886-519c-ab69-762e4194ec81")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "4" "5" "6" "3")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -25361,67 +26470,27 @@
 			(end -3.3 -2.3)
 			(stroke
 				(width 0.15)
-				(type default)
+				(type solid)
 			)
 			(layer "F.SilkS")
 			(uuid "15569d6f-716c-4b36-b89f-f0c50f848cbc")
-		)
-		(fp_line
-			(start -3.3 -3.3)
-			(end -1.9 -3.3)
-			(stroke
-				(width 0.15)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "18783c62-0790-479c-a045-85233e5fe1da")
 		)
 		(fp_line
 			(start -3.3 2.3)
 			(end -3.3 3.3)
 			(stroke
 				(width 0.15)
-				(type default)
+				(type solid)
 			)
 			(layer "F.SilkS")
 			(uuid "937ffee0-6c8f-4fc6-b4f3-a40f2e4923b9")
-		)
-		(fp_line
-			(start -3.3 3.3)
-			(end -1.9 3.3)
-			(stroke
-				(width 0.15)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "204209f3-ad98-493c-948d-1507ebbd6fd3")
-		)
-		(fp_line
-			(start 1.9 -3.3)
-			(end 3.3 -3.3)
-			(stroke
-				(width 0.15)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "08f4b12b-c09e-45b4-9ef4-3cb47fa8117d")
-		)
-		(fp_line
-			(start 1.9 3.3)
-			(end 3.3 3.3)
-			(stroke
-				(width 0.15)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "93bfcdc1-5c8e-4564-906d-7353888c27ab")
 		)
 		(fp_line
 			(start 3.3 -3.3)
 			(end 3.3 -2.3)
 			(stroke
 				(width 0.15)
-				(type default)
+				(type solid)
 			)
 			(layer "F.SilkS")
 			(uuid "237fdbc9-393c-4206-858f-94c05c79cf7f")
@@ -25431,7 +26500,7 @@
 			(end 3.3 3.3)
 			(stroke
 				(width 0.15)
-				(type default)
+				(type solid)
 			)
 			(layer "F.SilkS")
 			(uuid "bb0cae29-6d28-4173-b0f8-cc71c4f2e254")
@@ -25441,7 +26510,7 @@
 			(end -2.14 -3.7)
 			(stroke
 				(width 0.15)
-				(type default)
+				(type solid)
 			)
 			(fill yes)
 			(layer "F.SilkS")
@@ -25452,18 +26521,58 @@
 			(end 3.555 3.555)
 			(stroke
 				(width 0.05)
-				(type default)
+				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
 			(uuid "3a356a17-3de1-4f81-a68c-6ae665c25bb4")
+		)
+		(fp_line
+			(start -3.3 -3.3)
+			(end -1.9 -3.3)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "18783c62-0790-479c-a045-85233e5fe1da")
+		)
+		(fp_line
+			(start -3.3 3.3)
+			(end -1.9 3.3)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "204209f3-ad98-493c-948d-1507ebbd6fd3")
+		)
+		(fp_line
+			(start 1.9 -3.3)
+			(end 3.3 -3.3)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "08f4b12b-c09e-45b4-9ef4-3cb47fa8117d")
+		)
+		(fp_line
+			(start 1.9 3.3)
+			(end 3.3 3.3)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "93bfcdc1-5c8e-4564-906d-7353888c27ab")
 		)
 		(fp_rect
 			(start -3.175 -3.175)
 			(end 3.175 3.175)
 			(stroke
 				(width 0.1)
-				(type default)
+				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
@@ -25538,14 +26647,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C273"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "d97a9279-5080-4dbc-a40c-2dd9a8a7324c")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100p C0G 250V UHF PE42820 RFC DC block"
@@ -25647,12 +26757,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/2bab0793-aeae-5862-8df3-4fb1e59c66d0")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -25746,14 +26850,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R220"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "7d22b990-602c-4912-ab33-4c8bf14acb8d")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100k radio rail enable"
@@ -25803,16 +26908,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "69325651-f976-4a54-bd61-8aa201022f9f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3b18d2c1-4128-45dc-af44-7d187d791569")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/66df57de-1f00-5336-96b6-3ff0a0f8bd50")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -25906,14 +27031,15 @@
 		(descr "Mounting Hole 2.2mm, M2, no annular, generated by kicad-footprint-generator mountinghole.py")
 		(tags "mountinghole M2")
 		(property "Reference" "H3"
-			(at 0 -3.15 0)
-			(layer "F.SilkS")
+			(at 0 -1.75 0)
+			(layer "B.SilkS")
 			(uuid "7bf3db35-dea9-4782-9e10-494d046d926c")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "M2 daughterboard support hole"
@@ -25979,12 +27105,6 @@
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/ca545b1d-7503-5f18-81f0-43341892db23")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins)
-			)
-		)
 		(attr exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -26036,14 +27156,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R41"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "9e5f5bcf-7b56-4645-a0b0-503c9fec4233")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100R GNSS output series"
@@ -26093,16 +27214,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "dc5a150b-2303-4e08-a12c-bdbe427ae71d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100RL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0455977c-43df-4e1b-a711-e54d065760ed")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/b8998dd0-fd02-5c89-b51a-c8f136024c79/554a4910-12bd-59ad-ab4c-90fbb832fa74")
 		(sheetname "/GNSS/")
 		(sheetfile "03_gnss.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -26196,14 +27337,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R228"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "a2060482-c681-4f16-862e-15ab89e73339")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "47k 1% UHF antenna select default internal; PE42820 control divider low"
@@ -26253,16 +27395,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a396c247-ad6f-4bac-a597-eab4d9494a7d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "59fc4926-0fd0-4dde-a562-5259d5d27249")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/5b3924d6-fb37-535e-9df1-34c9dda17abf")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -26352,18 +27514,19 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "f4e6f8af-8d2b-567c-8776-47fcffcd6c99")
-		(at 109.5 25 90)
+		(at 102.375 28.625 90)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C274"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "90c1089a-5d79-46b3-94c5-9f1b6ac3aeda")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100p C0G 250V UHF PE42820 RF1_EXTERNAL DC block"
@@ -26465,12 +27628,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/60548dd4-148a-5481-a565-8b84f630a9f5")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -26563,14 +27720,15 @@
 		(at 67 82)
 		(descr "SMD3225/4, Crystal, 3.2x2.5mm package, SMD, http://www.txccrystal.com/images/pdf/7m-accuracy.pdf")
 		(property "Reference" "Y330"
-			(at 0 -2.45 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "7b0fe664-820b-4174-8a7c-ef58a3b8fb9e")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "ABM8G-106-12.000MHZ-T 12MHz 10pF CL"
@@ -26660,12 +27818,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/87af5599-489b-567b-b678-00b75919d890")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "4" "3")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -26782,14 +27934,15 @@
 		(descr "Hirose U.FL Coaxial (https://www.hirose.com/en/product/document?clcode=CL0331-0472-2-01&productname=U.FL-R-SMT-1(01)&series=U.FL&documenttype=2DDrawing&lang=en&documentid=0000940668)")
 		(tags "Hirose U.FL Coaxial")
 		(property "Reference" "J240"
-			(at 0 -3.2 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "df0058f9-0be8-4b69-bf45-9eb7ae5a29e5")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "2m/VHF internal/PCB antenna feed U.FL"
@@ -26857,12 +28010,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/25931482-8c04-55d3-a0ac-40436f61ab12")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
@@ -26924,7 +28071,7 @@
 			)
 			(stroke
 				(width 0.05)
-				(type default)
+				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
@@ -27192,14 +28339,15 @@
 		(descr "SSOP, 28 Pin (JEDEC MO-150 variation AH, 1.75mm body thickness, https://www.jedec.org/document_search?search_api_views_fulltext=MO-150, https://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf#page=400)")
 		(tags "SSOP SO")
 		(property "Reference" "U330"
-			(at 0 -6.05 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "6bc09efd-5b04-437e-82d8-9fb0acb9d7ca")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "PCM2902CDBR USB audio codec"
@@ -27289,14 +28437,6 @@
 		(path "/1d8c5d7c-d61c-50d6-b8b2-81577330717e/7f2fbaf2-4a00-59ee-80d8-91ad9f9b2394")
 		(sheetname "/USB Radio Audio/")
 		(sheetfile "04_codec.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "12" "13" "24" "8" "9" "28" "5" "6" "7" "1" "2" "4" "27" "26" "3"
-					"11" "18" "22" "16" "15" "25" "21" "20" "10" "14" "17" "19" "23"
-				)
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -27559,7 +28699,6 @@
 			(size 1.9 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U330-HID0-Pad5)")
 			(pinfunction "HID0_5")
 			(pintype "input+no_connect")
 			(uuid "352f66c5-7601-4412-9125-bb3df7fd2e35")
@@ -27569,7 +28708,6 @@
 			(size 1.9 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U330-HID1-Pad6)")
 			(pinfunction "HID1_6")
 			(pintype "input+no_connect")
 			(uuid "24789ea2-7e67-4954-81f2-c457b5c3a92c")
@@ -27579,7 +28717,6 @@
 			(size 1.9 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U330-HID2-Pad7)")
 			(pinfunction "HID2_7")
 			(pintype "input+no_connect")
 			(uuid "304bb6fc-8425-491c-9512-a8da979ec3ff")
@@ -27749,7 +28886,6 @@
 			(size 1.9 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U330-DIN-Pad24)")
 			(pinfunction "DIN_24")
 			(pintype "input+no_connect")
 			(uuid "e6ba1b4b-6879-47a2-9e4b-98c6ec7eed8f")
@@ -27759,7 +28895,6 @@
 			(size 1.9 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U330-DOUT-Pad25)")
 			(pinfunction "DOUT_25")
 			(pintype "output+no_connect")
 			(uuid "018c7a94-0aca-43bc-be48-c4269b86d536")
@@ -27814,14 +28949,15 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C223"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "28c74167-86fe-4ccc-ab91-4345a8a70dbe")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100n 50V X7R radio HF"
@@ -27899,12 +29035,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/c21d70a5-ad2e-5f4c-9a3d-92c723c672f5")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -27998,14 +29128,15 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R243"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "fd753bc7-e146-4222-a0c1-e78ed74ce0e0")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "100R VHF translated TXD series"
@@ -28055,16 +29186,36 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c942bedc-cf3b-4826-8cd7-eadd5d991642")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100RL"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "16574ade-411d-4a7e-ad1d-36fab2b057ae")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/0f9eabaf-b15d-5108-bac9-22e45540aa04")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -28158,14 +29309,15 @@
 		(descr "SOT, 6 Pin (JEDEC MO-178 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U70"
-			(at 0 -2.4 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "7334e989-3ad9-4438-8a6f-84b783160c0c")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "TPS54302 RADIO_DB_5V -> RADIO_4V0"
@@ -28243,12 +29395,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/c3599e5c-3b82-5ab8-b6d0-804ce9fe2022")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "3" "5" "1" "6" "2" "4")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -28546,14 +29692,15 @@
 		(descr "VSSOP, 8 Pin (https://www.jedec.org/standards-documents/docs/mo-187-f)")
 		(tags "VSSOP SO JEDEC-MO-187-CA Texas_DCU0008A")
 		(property "Reference" "U242"
-			(at 0 -1.95 0)
-			(layer "F.SilkS")
+			(at 0 0 0)
+			(layer "B.SilkS")
 			(uuid "d9240962-62f0-47a2-9cbd-7d24589ef189")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
+				(justify mirror)
 			)
 		)
 		(property "Value" "SN74LVC3G34DCUR VHF fail-safe control buffer"
@@ -28643,24 +29790,6 @@
 		(path "/fda02120-a83a-5ebb-baa8-77248c1d9158/cfd0b753-29e1-56ce-ac9c-03425178488c")
 		(sheetname "/VHF & UHF Radios/")
 		(sheetfile "02_radios.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "7")
-			)
-			(unit
-				(name "B")
-				(pins "6" "2")
-			)
-			(unit
-				(name "C")
-				(pins "3" "5")
-			)
-			(unit
-				(name "D")
-				(pins "8" "4")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -28932,15 +30061,14 @@
 		(descr "Hirose FH12, FFC/FPC connector, FH12-30S-0.5SH, 30 Pins per row (https://www.hirose.com/product/en/products/FH12/FH12-24S-0.5SH(55)/)")
 		(tags "connector Hirose FH12 horizontal")
 		(property "Reference" "J1"
-			(at 0 3.7 0)
-			(layer "B.SilkS")
+			(at 0 0 0)
+			(layer "F.SilkS")
 			(uuid "fa32541b-b84a-484a-9b2a-8ba183628980")
 			(effects
 				(font
-					(size 1 1)
-					(thickness 0.15)
+					(size 0.8 0.8)
+					(thickness 0.1)
 				)
-				(justify mirror)
 			)
 		)
 		(property "Value" "FH12-30S 30-pin radio daughterboard FFC"
@@ -29046,19 +30174,10 @@
 				(justify mirror)
 			)
 		)
-		(property ki_fp_filters "Connector*:*_1x??_*")
+		(property ki_fp_filters "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH*")
 		(path "/07edb036-1bb6-5266-86cd-88d2d04aecef/10b9c134-886e-5279-85f9-81d6be7161ca")
 		(sheetname "/Core & Mainboard Connector/")
 		(sheetfile "01_core.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15"
-					"16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29"
-					"30" "MP"
-				)
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -29070,16 +30189,6 @@
 			)
 			(layer "B.SilkS")
 			(uuid "5f5e8e3a-6e92-4ed1-8422-186671ff773d")
-		)
-		(fp_line
-			(start 9.15 -4.5)
-			(end 9.15 -2.76)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "B.SilkS")
-			(uuid "d01e1370-b35e-4546-a09d-58e86dfb7b6e")
 		)
 		(fp_line
 			(start 7.66 1.3)
@@ -29122,16 +30231,6 @@
 			(uuid "4be0b105-37f2-439b-8137-2104438bd60f")
 		)
 		(fp_line
-			(start -9.15 -2.76)
-			(end -9.15 -4.5)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "B.SilkS")
-			(uuid "54af4617-69c0-4cd7-afc8-e487f287ec06")
-		)
-		(fp_line
 			(start -9.15 -4.5)
 			(end 9.15 -4.5)
 			(stroke
@@ -29151,6 +30250,16 @@
 			(fill no)
 			(layer "B.CrtYd")
 			(uuid "d06b5ca8-0a39-48da-b153-42ddc8ffa71b")
+		)
+		(fp_line
+			(start 9.15 -4.5)
+			(end 9.15 -2.76)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.Fab")
+			(uuid "d01e1370-b35e-4546-a09d-58e86dfb7b6e")
 		)
 		(fp_line
 			(start 9.05 1.2)
@@ -29311,6 +30420,16 @@
 			)
 			(layer "B.Fab")
 			(uuid "5408e3ac-92a7-4ea6-8654-31b4a14daa7e")
+		)
+		(fp_line
+			(start -9.15 -2.76)
+			(end -9.15 -4.5)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.Fab")
+			(uuid "54af4617-69c0-4cd7-afc8-e487f287ec06")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 -3.7 0)
@@ -29636,22 +30755,22 @@
 		(layer "Edge.Cuts")
 		(uuid "d665eecd-6402-574a-af0f-f696dedf2bee")
 	)
-	(gr_text "REAR / ANTENNA EDGE"
-		(at 80 21.5 0)
+	(gr_text "ducktop2 radio / gnss"
+		(at 80 89.2 0)
 		(layer "B.SilkS")
-		(uuid "4cba7d6a-c166-5655-b97c-6eb57e4ab26b")
+		(uuid "aa333eee-f39b-5d35-809f-cae682e87146")
 		(effects
 			(font
-				(size 1 1)
-				(thickness 0.15)
+				(size 0.8 0.8)
+				(thickness 0.1)
 			)
 			(justify mirror)
 		)
 	)
-	(gr_text "DUCKTOP2 RADIO / GNSS DAUGHTERBOARD"
-		(at 80 88.5 0)
+	(gr_text "REAR / ANTENNA EDGE"
+		(at 80 21.5 0)
 		(layer "B.SilkS")
-		(uuid "aa333eee-f39b-5d35-809f-cae682e87146")
+		(uuid "4cba7d6a-c166-5655-b97c-6eb57e4ab26b")
 		(effects
 			(font
 				(size 1 1)

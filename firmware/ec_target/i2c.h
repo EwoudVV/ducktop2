@@ -28,7 +28,7 @@ bool i2c1_probe(uint8_t dev_addr);
 
 bool tca9548a_select_channel(uint8_t channel);
 bool tca9548a_select_all(void);
-void tca9548a_deselect_all(void);
+bool tca9548a_deselect_all(void);
 
 bool tca9539_write_register(uint8_t reg, uint8_t value);
 bool tca9539_read_register(uint8_t reg, uint8_t *value);
@@ -36,6 +36,8 @@ bool tca9539_init_safe(void);
 bool tca9539_set_pd_path_enable(uint8_t path, bool enable);
 bool tca9539_read_inputs(uint8_t *port0, uint8_t *port1);
 bool tca9539_ready(void);
+bool tca9539_verify_state(void);
+bool tca9539_set_bms_retry(bool asserted);
 uint8_t tca9539_output0(void);
 
 #endif

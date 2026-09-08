@@ -13,6 +13,8 @@ MAX_DEVICE_GIB=128
 
 RECOVERY_PACKAGES=(
   fedora-release
+  shadow-utils
+  sudo
   systemd
   systemd-udev
   kernel-core
@@ -42,6 +44,8 @@ CHECK=0
 SKIP_OS=0
 CONFIGURE_HIBERNATE=0
 swap_gib=0
+PASSWORD_HASH_FILE=""
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
 usage() {
   cat <<'USAGE'
@@ -56,7 +60,10 @@ Modes (default: full setup):
   --check              Validate environment and device; change nothing.
   --dry-run            Print the full plan and every command; change nothing.
   --yes                Actually perform the setup (required for real mode).
-  --skip-os            Partitions + formatting + bootloader only; skip
+  --recovery-password-hash-file <file>
+                       Required for a full build; one crypt password hash
+                       for the local duck recovery account.
+  --skip-os            Partitions and formatting only; skip
                        building the recovery OS root.
   --configure-hibernate
                        Configure the RUNNING system (daily driver on NVMe)
@@ -79,6 +86,7 @@ while [[ $# -gt 0 ]]; do
     --dry-run) DRY_RUN=1 ;;
     --check) CHECK=1 ;;
     --skip-os) SKIP_OS=1 ;;
+    --recovery-password-hash-file) shift; PASSWORD_HASH_FILE="${1:-}" ;;
     --configure-hibernate) CONFIGURE_HIBERNATE=1 ;;
     -h|--help) usage; exit 0 ;;
     *) echo "Unknown option: $1" >&2; usage; exit 2 ;;
@@ -127,10 +135,19 @@ detect_swap_gib() {
 
 check_device() {
   [[ -b "$DEVICE" ]] || die "not a block device: $DEVICE"
-  case "$DEVICE" in
-    /dev/mmcblk*) ;;
-    *) die "refusing non-eMMC device $DEVICE; expected /dev/mmcblk*" ;;
-  esac
+  [[ "$DEVICE" =~ ^/dev/mmcblk[0-9]+$ ]] || die "expected a whole /dev/mmcblkN eMMC device"
+  [[ "$(lsblk -dn -o TYPE "$DEVICE")" == disk ]] || die "target is not a whole disk"
+  local kernel_name=${DEVICE##*/}
+  [[ "$(cat "/sys/class/block/$kernel_name/device/type")" == MMC ]] || die "target is an SD card, not eMMC"
+  [[ ! -e "/sys/class/block/$kernel_name/partition" ]] || die "target is a partition"
+  local child active_swap
+  while read -r child; do
+    [[ -n "$child" ]] || continue
+    [[ -z "$(ls -A "/sys/class/block/${child##*/}/holders")" ]] || die "$child has active block holders"
+    while read -r active_swap; do
+      [[ "$active_swap" != "$child" ]] || die "$child is active swap"
+    done < <(swapon --show=NAME --noheadings --raw)
+  done < <(lsblk -nrpo NAME "$DEVICE")
 
   local root_src mounted size_bytes size_gib needed
   root_src=$(findmnt -n -o SOURCE --target / || true)
@@ -150,22 +167,22 @@ check_device() {
   fi
 
   needed=$(( ESP_SIZE_GIB + RECOVERY_ROOT_SIZE_GIB + swap_gib ))
-  if (( needed > size_gib )); then
-    die "device ${size_gib} GiB too small for layout needing ${needed} GiB (incl. ${swap_gib} GiB hibernate)"
+  if (( needed + 1 > size_gib )); then
+    die "device ${size_gib} GiB too small for layout needing ${needed} GiB plus 1 GiB minimum offline space (incl. ${swap_gib} GiB hibernate)"
   fi
   echo "device OK: $DEVICE (${size_gib} GiB, hibernate swap ${swap_gib} GiB)"
 }
 
 check_prereqs() {
-  for tool in lsblk findmnt blkid; do
+  for tool in lsblk findmnt blkid swapon python3; do
     need_cmd "$tool"
   done
-  if [[ "$DRY_RUN" -eq 0 ]]; then
+  if [[ "$DRY_RUN" -eq 0 && "$CONFIGURE_HIBERNATE" -eq 0 && "$CHECK" -eq 0 ]]; then
     for tool in sgdisk mkfs.fat mkfs.ext4 mkswap partprobe; do
       need_cmd "$tool"
     done
   fi
-  if [[ "$DRY_RUN" -eq 0 && "$CHECK" -eq 0 && "$SKIP_OS" -eq 0 ]]; then
+  if [[ "$DRY_RUN" -eq 0 && "$CHECK" -eq 0 && "$SKIP_OS" -eq 0 && "$CONFIGURE_HIBERNATE" -eq 0 ]]; then
     need_cmd dnf
   fi
 }
@@ -181,7 +198,7 @@ plan() {
   echo "================================"
 }
 
-if [[ "$CHECK" -eq 1 && -z "$DEVICE" ]]; then
+if [[ "$CHECK" -eq 1 && -z "$DEVICE" && "$CONFIGURE_HIBERNATE" -eq 0 ]]; then
   check_prereqs
   echo "Environment OK (check mode; no device given)."
   exit 0
@@ -202,21 +219,38 @@ if [[ "$CONFIGURE_HIBERNATE" -eq 1 ]]; then
     echo "[dry-run] would rebuild initramfs with dracut --force"
     exit 0
   fi
+  [[ "$(blkid -s TYPE -o value "$hswap")" == swap ]] || die "resume target is not swap"
+  [[ "$hswap" =~ ^/dev/mmcblk[0-9]+p[0-9]+$ ]] || die "resume target is not an eMMC partition"
+  resume_parent=$(lsblk -dn -o PKNAME "$hswap")
+  [[ "$(cat "/sys/class/block/$resume_parent/device/type")" == MMC ]] || die "resume target is not eMMC"
+  [[ "$(lsblk -bdn -o SIZE "$hswap")" -ge "$((swap_gib * 1073741824))" ]] || die "resume swap is below the planned hibernate size"
+  [[ "$CHECK" -eq 0 ]] || { echo "resume target verified; no changes in check mode"; exit 0; }
+  [[ "$YES" -eq 1 ]] || die "--configure-hibernate requires --yes"
   need_cmd dracut
+  need_cmd grubby
   [[ "$EUID" -eq 0 ]] || die "must run as root (sudo)"
   echo "Configuring hibernate resume on the running system (UUID=$hswap_uuid)..."
+  mkdir -p /etc/dracut.conf.d
   printf 'add_dracutmodules+=" resume "\n' > /etc/dracut.conf.d/99-ducktop-resume.conf
   local_grub=/etc/default/grub
   local_cmdline=/etc/kernel/cmdline
-  if [[ -f "$local_grub" && ! -e "$local_cmdline" ]]; then
-    if ! grep -q '^GRUB_CMDLINE_LINUX=' "$local_grub" || ! grep -q 'resume=' "$local_grub"; then
-      cp -a "$local_grub" "${local_grub}.ducktop-backup"
-      sed -i "s/^GRUB_CMDLINE_LINUX=\"\(.*\)\"/GRUB_CMDLINE_LINUX=\"\1 resume=UUID=${hswap_uuid}\"/" "$local_grub"
-      grub2-mkconfig -o /boot/grub2/grub.cfg
-    fi
+  mkdir -p /etc/kernel /etc/dracut.conf.d
+  if [[ -f "$local_cmdline" ]]; then
+    python3 "$SCRIPT_DIR/resume_config.py" "$local_cmdline" "$hswap_uuid"
+  elif [[ -f "$local_grub" ]]; then
+    python3 "$SCRIPT_DIR/resume_config.py" "$local_grub" "$hswap_uuid" --grub
+  else
+    die "no supported persistent kernel command-line configuration found"
   fi
+  grubby --update-kernel=ALL --remove-args="resume resume_offset" --args="resume=UUID=$hswap_uuid"
+  grubby --info=ALL | grep -q "resume=UUID=$hswap_uuid" || die "resume argument missing from boot entries"
+  if ! grep -q "^UUID=$hswap_uuid[[:space:]]" /etc/fstab; then
+    printf 'UUID=%s none swap defaults 0 0\n' "$hswap_uuid" >> /etc/fstab
+  fi
+  swapon "$hswap" 2>/dev/null || swapon --show=NAME --noheadings | grep -Fxq "$hswap" || die "swap activation failed"
+
   dracut --force
-  echo "Hibernate resume configured. Test with: systemctl hibernate --test"
+  echo "resume argument and initramfs updated; hibernate/resume still needs a real test on the Mu"
   exit 0
 fi
 
@@ -240,6 +274,11 @@ if [[ "$YES" -ne 1 ]]; then
 fi
 
 [[ "$EUID" -eq 0 ]] || die "must run as root (sudo)"
+if [[ "$SKIP_OS" -eq 0 ]]; then
+  [[ -r "$PASSWORD_HASH_FILE" ]] || die "full setup requires --recovery-password-hash-file"
+  [[ "$(wc -l < "$PASSWORD_HASH_FILE")" -le 1 ]] || die "password hash file must contain one line"
+  grep -Eq '^\$(6|y)\$[^[:space:]:]+$' "$PASSWORD_HASH_FILE" || die "expected one SHA-512 or yescrypt password hash"
+fi
 
 echo "=== Partitioning $DEVICE ==="
 run sgdisk -o "$DEVICE"
@@ -266,8 +305,8 @@ release_ver=$(source /etc/os-release 2>/dev/null && printf '%s' "${VERSION_ID:-}
 [[ -n "$release_ver" ]] || die "cannot determine Fedora release version"
 mnt=$(mktemp -d)
 trap 'umount -R "$mnt" 2>/dev/null || true; rm -rf "$mnt"' EXIT
-run mkdir -p "$mnt/boot"
 run mount "${DEVICE}p2" "$mnt"
+run mkdir -p "$mnt/boot"
 run mount "${DEVICE}p1" "$mnt/boot"
 
 run dnf --releasever="$release_ver" \
@@ -280,12 +319,16 @@ run mount --rbind /dev "$mnt/dev"
 
 kver=$(ls -1 "$mnt/usr/lib/modules" | head -1)
 [[ -n "$kver" ]] || die "no kernel modules installed in recovery root"
-run chroot "$mnt" dracut --force "" "$kver"
+run cp "$mnt/usr/lib/modules/$kver/vmlinuz" "$mnt/boot/vmlinuz-$kver"
+run chroot "$mnt" dracut --no-hostonly --force "/boot/initramfs-$kver.img" "$kver"
+[[ -s "$mnt/boot/vmlinuz-$kver" && -s "$mnt/boot/initramfs-$kver.img" ]] || die "recovery kernel/initramfs missing"
 
 echo "=== Installing systemd-boot ==="
 run bootctl --esp-path="$mnt/boot" --boot-path="$mnt/boot" install
 run chroot "$mnt" systemctl set-default multi-user.target
-run chroot "$mnt" systemctl enable NetworkManager sshd
+run chroot "$mnt" systemctl enable NetworkManager
+run chroot "$mnt" useradd --create-home --groups wheel duck
+printf 'duck:%s\n' "$(cat "$PASSWORD_HASH_FILE")" | chroot "$mnt" chpasswd --encrypted
 run chroot "$mnt" mkdir -p /data
 
 echo "=== Writing boot loader config ==="
@@ -323,4 +366,4 @@ echo ""
 echo "eMMC setup complete."
 echo "Next: set UEFI boot order NVMe-first/eMMC-fallback (Mu BIOS F7 boot menu)."
 echo "Then, from the daily driver:"
-echo "  sudo bash install/emmc-recovery-setup.sh --configure-hibernate"
+echo "  sudo bash install/emmc-recovery-setup.sh --configure-hibernate --yes"

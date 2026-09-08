@@ -49,26 +49,6 @@
     "inside_corner_radius": 1.5,
     "minimum_board_gap": 1.5
   },
-  "fpc3": {
-    "ends": [
-      [
-        "center",
-        "FPC105"
-      ],
-      [
-        "bms",
-        "FPC106"
-      ]
-    ],
-    "contacts": 30,
-    "pitch": 0.5,
-    "contact_sides": "same side at both ends",
-    "mating_end_thickness": 0.3,
-    "mapping": "center N to bms 31-N",
-    "corridor_width": 17,
-    "length": null,
-    "length_note": "measure the seated cable path and loop before ordering"
-  },
   "m2_cards": {
     "nvme": {
       "socket": "J10",
@@ -111,5 +91,47 @@
       "H17",
       "H27"
     ]
+  },
+  "bms_harnesses": {
+    "power": {
+      "ends": [
+        [
+          "center",
+          "J2071"
+        ],
+        [
+          "bms",
+          "J2072"
+        ]
+      ],
+      "wire_awg": 18,
+      "wire_length_budget_mm": 75,
+      "installed_length_mm": null,
+      "minimum_mated_height_above_pcb_mm": 17.56,
+      "height_note": "connector stack only; add the actual wire bend and strain relief",
+      "mapping": "pin 1 to 1; pin 2 to 2; mounting pads isolated"
+    },
+    "control": {
+      "ends": [
+        [
+          "center",
+          "J2073"
+        ],
+        [
+          "bms",
+          "J2074"
+        ]
+      ],
+      "wire_awg": 28,
+      "wire_length_budget_mm": 75,
+      "installed_length_mm": null,
+      "mapping": "pin N to N; center GND becomes the isolated CTRL_GND island on the BMS"
+    }
+  },
+  "bms_mounting": {
+    "conductive_fasteners_allowed": false,
+    "support_and_fastener_material": "electrically insulating",
+    "ground_bonds_allowed": [],
+    "note": "support all six holes; keep raw pack, protected return and control ground isolated from the chassis and each other"
   }
 }

@@ -1,0 +1,55 @@
+sch export netlist --format kicadxml --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/netlist.xml /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_sch
+Fontconfig error: Cannot load default config file: No such file: (null)
+
+pcb drc --severity-all --severity-exclusions --schematic-parity --format json --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/saved-drc.json /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Found 0 violations
+Found 0 unconnected items
+Found 0 schematic parity issues
+Saved DRC Report to /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/saved-drc.json
+Fontconfig error: Cannot load default config file: No such file: (null)
+
+pcb drc --refill-zones --save-board --severity-all --severity-exclusions --schematic-parity --format json --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/refilled-drc.json /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Found 0 violations
+Found 0 unconnected items
+Found 0 schematic parity issues
+Saved DRC Report to /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/refilled-drc.json
+Saved board
+Fontconfig error: Cannot load default config file: No such file: (null)
+
+pcb export gerbers --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers --layers F.Cu,B.Cu,F.Mask,B.Mask,F.Silkscreen,B.Silkscreen,Edge.Cuts --precision 6 /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-F_Cu.gtl'.
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-B_Cu.gbl'.
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-F_Silkscreen.gto'.
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-B_Silkscreen.gbo'.
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-F_Mask.gts'.
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-B_Mask.gbs'.
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-Edge_Cuts.gm1'.
+
+pcb export drill --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers --format excellon --drill-origin absolute --excellon-units mm --excellon-zeros-format decimal --excellon-separate-th /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Created file '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-PTH.drl'
+Created file '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/gerbers/12_keyboard_daughterboard-NPTH.drl'
+Done.
+
+pcb export pos --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/raw_positions.csv --format csv --units mm --side both --smd-only /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Wrote position data to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/raw_positions.csv'.
+
+pcb export ipcd356 --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/keyboard.ipc /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Successfully created IPC-D-356 file
+
+pcb export stats --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/board_stats.txt --format report --units mm /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Wrote board statistics to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/board_stats.txt'.
+
+pcb export svg --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/top_assembly.svg --layers F.Fab,F.Silkscreen,Edge.Cuts --mode-single /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/top_assembly.svg'.
+Done.
+
+pcb export svg --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/bottom_references.svg --layers B.Silkscreen,Edge.Cuts --mode-single /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/design/12_keyboard_daughterboard.kicad_pcb
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/reference/bottom_references.svg'.
+Done.
+
+pcb export gerbers --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/paste/factory --layers F.Paste --precision 6 /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/factory-paste.kicad_pcb
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/paste/factory/factory-paste-F_Paste.gtp'.
+
+pcb export gerbers --output /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/paste/switches --layers F.Paste --precision 6 /Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/switches-paste.kicad_pcb
+Plotted to '/Users/ellievanvooren/Documents/kicad/ducktop2/manufacturing/.keyboard-export-gwbl8_ex/package/paste/switches/switches-paste-F_Paste.gtp'.
+

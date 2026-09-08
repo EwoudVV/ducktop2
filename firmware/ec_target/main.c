@@ -8,6 +8,15 @@
 #include "matrix_scan.h"
 #include "stm32f4xx.h"
 #include "usb_hid.h"
+#include "watchdog.h"
+#include "board_profile.h"
+#include "tps25751.h"
+#include "host_link.h"
+#include "usb_power.h"
+#include "audio.h"
+#include "ssd1306.h"
+#include "ducktop2/ec/ec_fan_monitor.h"
+#include "ducktop2/ec/ec_lid.h"
 
 static volatile uint32_t g_tick_ms = 0;
 
@@ -47,424 +56,276 @@ uint32_t GetTick(void)
 void DelayMs(uint32_t ms)
 {
     uint32_t start = GetTick();
-    while ((GetTick() - start) < ms);
-}
-
-/*
- * TCA9539 (U44) input-port bit map, sheet 02:
- *   P0.6 PACK_FAULT_N   P0.7 AUX_FAULT_N      (low = faulted)
- *   P1.1 AUX_PGOOD      P1.3 MAIN_AUX_VALID_N P1.4 AON_FAULT_N
- *   P1.5 RADIO_DB_PG    P1.6 RADIO_DB_FAULT_N P1.7 RADIO_DB_PRESENT_N
- */
-#define U44_BIT_AUX_PGOOD          (1u << 1)
-#define U44_BIT_MAIN_AUX_VALID_N   (1u << 3)
-#define U44_BIT_AON_FAULT_N        (1u << 4)
-#define U44_BIT_RADIO_DB_PG        (1u << 5)
-#define U44_BIT_RADIO_DB_FAULT_N   (1u << 6)
-#define U44_BIT_RADIO_DB_PRESENT_N (1u << 7)
-
-/* AUX starts at the released 500 mA qualification current (250 mA IINDPM);
- * raising it requires fresh ICO/VINDPM evidence per firmware/release. */
-#define EC_TARGET_AUX_QUALIFIED_CURRENT_MA 500u
-
-/* Pack usable power basis: LTC4368 breaker worst-case minimum 3.60 A,
- * derated to 80 percent (verify_electrical_calculations.py), at the live
- * pack voltage. */
-#define EC_TARGET_PACK_USABLE_CURRENT_MA 2880u
-
-/* Boot arbitration priority: USB-PD selector beats AUX; PD1 edge annotated
- * ahead of PD2; PACK is the NVDC fallback. */
-static const ec_source_id_t k_source_priority[] = {
-    EC_SOURCE_PD1, EC_SOURCE_PD2, EC_SOURCE_AUX, EC_SOURCE_PACK,
-};
-
-static bool source_eligible(const ec_inputs_t *inputs, ec_source_id_t source)
-{
-    const ec_source_observation_t *obs = &inputs->source[source];
-
-    if (!obs->present || !obs->fault_n) {
-        return false;
+    while ((GetTick() - start) < ms) {
+        usb_hid_poll();
+        __WFI();
     }
-    if (source == EC_SOURCE_PD1 || source == EC_SOURCE_PD2 ||
-        source == EC_SOURCE_AUX) {
-        return obs->qualified_input_current_valid;
-    }
-    return obs->available_power_valid;
 }
 
-static bool u44_read(uint8_t *port0, uint8_t *port1)
-{
-    return tca9539_read_inputs(port0, port1);
-}
+/* U44 wiring is defined in sheet 02. A failed read invalidates every input. */
+#define U44_PACK_OK (1u << 6)
+#define U44_AUX_OK (1u << 7)
+#define U44_AON_OK (1u << 4)
+static bool want_power = true;
+static bool headphone_present;
+static bool fan_healthy = true;
+static usb_power_state_t usb_power;
+static uint32_t other_auxiliary_mw;
 
 static bool commit_write(void *context, ec_commit_command_t command, uint32_t value)
 {
     (void)context;
-
     switch (command) {
-    case EC_COMMIT_PD1_PATH_ENABLE:
-        return tca9539_set_pd_path_enable(0u, value != 0u);
-
-    case EC_COMMIT_PD2_PATH_ENABLE:
-        return tca9539_set_pd_path_enable(1u, value != 0u);
-
-    case EC_COMMIT_CHARGER_IINDPM_MA:
-        return ec_app_apply_charger_iindpm_ma((uint16_t)value);
-
-    case EC_COMMIT_CHARGE_BUDGET_MW:
-        /* No host transport programs a charge-current setpoint yet: an
-         * unimplemented acknowledgement would let the policy believe a
-         * budget was committed while the charger stayed at POR values. */
-        return false;
-
-    case EC_COMMIT_MU_EDP_BUDGET_MW:
-        /* Same reasoning as the charge budget above; the Mu 12 V enable
-         * must not be granted against an acknowledged-but-fake limit. */
-        return false;
-
-    case EC_COMMIT_CHARGER_ENABLE:
-        gpio_set_charger_enable(value ? true : false);
-        return true;
-
-    case EC_COMMIT_MU_12V_ENABLE:
-        gpio_set_mu_12v_enable(value ? true : false);
-        return true;
-
-    case EC_COMMIT_KEYBOARD_RGB_ENABLE:
-        gpio_set_keyboard_rgb_enable(value ? true : false);
-        return true;
-
-    case EC_COMMIT_RADIO_DB_ENABLE:
-        gpio_set_radio_db_power_enable(value ? true : false);
-        return true;
-
-    case EC_COMMIT_AUDIO_AMP_ENABLE:
-        gpio_set_audio_amp_enable(value ? true : false);
-        return true;
-
-    case EC_COMMIT_AUDIO_MIC_ENABLE:
-        gpio_set_audio_mic_enable(value ? true : false);
-        return true;
-
-    default:
-        return false;
+    case EC_COMMIT_PD1_PATH_ENABLE: return tca9539_set_pd_path_enable(0, value != 0);
+    case EC_COMMIT_PD2_PATH_ENABLE: return tca9539_set_pd_path_enable(1, value != 0);
+    case EC_COMMIT_CHARGER_IINDPM_MA: return ec_app_apply_charger_iindpm_ma((uint16_t)value);
+    case EC_COMMIT_CHARGE_BUDGET_MW: return ec_app_apply_charge_budget_mw(value);
+    case EC_COMMIT_MU_EDP_BUDGET_MW: return ec_host_request_budget(value);
+    case EC_COMMIT_CHARGER_ENABLE: return ec_app_set_charging(value != 0);
+    case EC_COMMIT_MU_12V_ENABLE: gpio_set_mu_12v_enable(value != 0); return true;
+    case EC_COMMIT_KEYBOARD_RGB_ENABLE: gpio_set_keyboard_rgb_enable(value != 0); return true;
+    case EC_COMMIT_RADIO_DB_ENABLE: gpio_set_radio_db_power_enable(value != 0); return true;
+    case EC_COMMIT_AUDIO_AMP_ENABLE: gpio_set_audio_amp_enable(value != 0); return true;
+    case EC_COMMIT_AUDIO_MIC_ENABLE: gpio_set_audio_mic_enable(value != 0); return true;
+    default: return false;
     }
 }
 
-static void read_pd_contract(ec_inputs_t *inputs, uint8_t pd_index)
+static void read_inputs(ec_inputs_t *in, ec_telemetry_inputs_t *telemetry, uint32_t now)
 {
-    uint8_t channel = (pd_index == 0) ? 2u : 3u;
-    uint8_t addr = (pd_index == 0) ? I2C_PD1_TCPC_ADDR : I2C_PD2_TCPC_ADDR;
-    uint8_t pdo_data[4];
-    uint8_t rdo_data[4];
-    uint8_t pd_status;
-    ec_source_observation_t *obs = &inputs->source[EC_SOURCE_PD1 + pd_index];
-
-    if (!tca9548a_select_channel(channel)) {
-        tca9548a_deselect_all();
-        return;
-    }
-
-    do {
-        if (!i2c1_read(addr, EC_TPS25751_PD_STATUS_REGISTER, &pd_status, 1)) {
-            break;
-        }
-        obs->present = (pd_status & 0x01) != 0;
-        if (!obs->present) {
-            break;
-        }
-        /* Fresh Active PDO and Active RDO are both mandatory: the release
-         * contract rejects validation from a partial or stale snapshot. */
-        if (!i2c1_read(addr, EC_TPS25751_ACTIVE_PDO_REGISTER, pdo_data, 4) ||
-            !i2c1_read(addr, EC_TPS25751_ACTIVE_RDO_REGISTER, rdo_data, 4)) {
-            obs->present = false;
-            break;
-        }
-
-        {
-            uint32_t pdo = (uint32_t)pdo_data[0] |
-                           ((uint32_t)pdo_data[1] << 8) |
-                           ((uint32_t)pdo_data[2] << 16) |
-                           ((uint32_t)pdo_data[3] << 24);
-            uint32_t rdo = (uint32_t)rdo_data[0] |
-                           ((uint32_t)rdo_data[1] << 8) |
-                           ((uint32_t)rdo_data[2] << 16) |
-                           ((uint32_t)rdo_data[3] << 24);
-            uint16_t current_raw =
-                (uint16_t)((rdo >> 10) & 0x3FF); /* RDO op current, 10 mA */
-
-            obs->negotiated_voltage_mv =
-                (uint16_t)(((pdo >> 10) & 0x3FF) * 50u);
-            obs->qualified_input_current_ma = (uint16_t)(current_raw * 10u);
-            obs->qualified_input_current_valid = current_raw > 0;
-        }
-
-        /* path_good is the physical source-valid indication (PDx_VALID_N,
-         * active low), never merely "the TCPC answered". */
-        obs->path_good = (pd_index == 0)
-                             ? !gpio_get_pd1_valid_n()
-                             : !gpio_get_pd2_valid_n();
-        /* Aggregate connector protection plus the always-on eFuse. */
-        obs->fault_n = gpio_get_pd_protect_fault_n();
-    } while (false);
-
-    tca9548a_deselect_all();
-}
-
-static void read_pack_source(ec_inputs_t *inputs,
-                             const ec_telemetry_inputs_t *telemetry)
-{
-    ec_source_observation_t *obs = &inputs->source[EC_SOURCE_PACK];
-    uint16_t pack_mv;
-
-    if (telemetry->valid_flags & EC_TELEMETRY_VALID_PACK_VOLTAGE) {
-        pack_mv = telemetry->pack_voltage_mv;
-    } else if (inputs->vsys_valid) {
-        pack_mv = inputs->vsys_mv; /* charger VBAT lower-bound proxy */
-    } else {
-        return;
-    }
-
-    obs->present = ec_app_battery_present() || inputs->vsys_valid;
-    obs->negotiated_voltage_mv = pack_mv;
-    obs->path_good = obs->present;
-    obs->fault_n = gpio_get_pd_protect_fault_n(); /* /PACK_FAULT_N aggregate */
-    obs->available_power_mw =
-        (uint32_t)pack_mv * EC_TARGET_PACK_USABLE_CURRENT_MA / 1000u;
-    obs->available_power_valid = obs->present && obs->fault_n;
-}
-
-static void read_aux_source(ec_inputs_t *inputs)
-{
-    ec_source_observation_t *obs = &inputs->source[EC_SOURCE_AUX];
-    uint8_t port0;
-    uint8_t port1;
-    uint16_t aux_mv;
-
-    if (!u44_read(&port0, &port1)) {
-        return;
-    }
-    if (!ec_app_aux_counts_to_mv(gpio_read_adc_aux_dc(), &aux_mv)) {
-        return;
-    }
-
-    obs->present = (port1 & U44_BIT_AUX_PGOOD) != 0 &&
-                   aux_mv >= 7000 && aux_mv <= 22000;
-    if (!obs->present) {
-        return;
-    }
-    obs->negotiated_voltage_mv = aux_mv;
-    obs->path_good = (port1 & U44_BIT_MAIN_AUX_VALID_N) == 0;
-    obs->fault_n = (port0 & U44_BIT_AON_FAULT_N) != 0;
-    obs->qualified_input_current_ma = EC_TARGET_AUX_QUALIFIED_CURRENT_MA;
-    obs->qualified_input_current_valid = true;
-    obs->available_power_mw =
-        (uint32_t)aux_mv * obs->qualified_input_current_ma / 1000u;
-    obs->available_power_valid = obs->fault_n;
-}
-
-static void read_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *telemetry)
-{
-    uint8_t port0 = 0xFFu;
-    uint8_t port1 = 0xFFu;
-
-    ec_inputs_init(inputs);
+    ec_inputs_init(in);
     ec_telemetry_inputs_init(telemetry);
-
-    /* The independent IWDG is armed and reloaded below this loop; a stale
-     * tick is reported by hardware resetting into the passive boot state,
-     * so the software flag stays true only across a fed iteration. */
-    inputs->watchdog_healthy = true;
-    inputs->reset_asserted = false;
-
-    inputs->service_mux_reset_released = true;
-    inputs->service_bus_healthy = i2c1_probe(I2C_TCA9548A_ADDR);
-    inputs->source_manager_reset_released = tca9539_ready();
-
-    ec_app_read_power_inputs(inputs, telemetry);
-    u44_read(&port0, &port1);
-
-    inputs->radio_db_present_n = (port1 & U44_BIT_RADIO_DB_PRESENT_N) != 0;
-    inputs->radio_db_fault_n = (port1 & U44_BIT_RADIO_DB_FAULT_N) != 0;
-    inputs->radio_db_power_good = (port1 & U44_BIT_RADIO_DB_PG) != 0;
-
-    /* All paths off requires both commanded output bits low and both
-     * physical valid indications high. */
-    inputs->all_pd_paths_off =
-        (tca9539_output0() & 0x03u) == 0u &&
-        gpio_get_pd1_valid_n() && gpio_get_pd2_valid_n();
-
-    inputs->mu_12v_pg = gpio_get_mu_12v_pg();
-
-    inputs->estimated_mu_edp_power_valid = false;
-    inputs->estimated_mu_edp_power_mw = 0;
-    inputs->estimated_aux_power_valid = false;
-    inputs->estimated_aux_power_mw = 0;
-    inputs->requested_charge_power_mw = 0;
-    inputs->request_charger = false;
-    inputs->request_mu_12v = false;
-    inputs->power_limits_applied = false;
-    inputs->applied_mu_edp_budget_mw = 0;
-
-    inputs->request_keyboard_rgb = false;
-    inputs->request_audio_amp = false;
-    inputs->request_audio_mic = false;
-
-    read_pd_contract(inputs, 0);
-    read_pd_contract(inputs, 1);
-    read_pack_source(inputs, telemetry);
-    read_aux_source(inputs);
+    uint8_t p0=0, p1=0;
+    bool expander = tca9539_read_inputs(&p0, &p1);
+    in->source_manager_reset_released = expander;
+    in->service_mux_reset_released = true;
+    in->service_bus_healthy = expander && i2c1_probe(I2C_TCA9548A_ADDR);
+    in->all_pd_paths_off = expander && (tca9539_output0() & 3u) == 0u &&
+                           gpio_get_pd1_valid_n() && gpio_get_pd2_valid_n();
+    in->radio_db_present_n = !expander || (p1 & (1u<<7)) != 0;
+    in->radio_db_fault_n = expander && (p1 & (1u<<6)) != 0;
+    in->radio_db_power_good = expander && (p1 & (1u<<5)) != 0;
+    headphone_present = expander && (p0 & (1u<<2)) != 0;
+    ec_app_read_power_inputs(in, telemetry, now);
+    in->thermal_ok = in->thermal_ok && fan_healthy;
+    in->mu_12v_pg = gpio_get_mu_12v_pg();
+    if (in->service_bus_healthy) {
+        for (uint8_t port=0; port<2; ++port) {
+            tps25751_contract_t contract;
+            bool valid=tca9548a_select_channel((uint8_t)(port+2)) &&
+                       tps25751_read_contract((uint8_t)(0x20+port), &contract);
+            if (!tca9548a_deselect_all()) {
+                in->service_bus_healthy=false;
+                break;
+            }
+            if (!valid) continue;
+            ec_source_observation_t *obs=&in->source[EC_SOURCE_PD1+port];
+            obs->present=contract.connected;
+            obs->fault_n=gpio_get_pd_protect_fault_n() && (p1 & U44_AON_OK) &&
+                          (p0 & (1u<<(port+3)));
+            obs->path_good=port ? !gpio_get_pd2_valid_n() : !gpio_get_pd1_valid_n();
+            obs->negotiated_voltage_mv=contract.voltage_mv;
+            obs->qualified_input_current_valid=contract.valid;
+            obs->qualified_input_current_ma=contract.current_ma;
+        }
+    }
+    ec_source_observation_t *pack=&in->source[EC_SOURCE_PACK];
+    pack->present=DUCKTOP2_PACK_QUALIFIED && ec_app_battery_present() &&
+                  (telemetry->valid_flags & EC_TELEMETRY_VALID_PACK_VOLTAGE);
+    pack->fault_n=expander && (p0 & U44_PACK_OK);
+    pack->path_good=pack->present && pack->fault_n;
+    pack->negotiated_voltage_mv=in->pack_voltage_mv;
+    pack->available_power_mw=(uint32_t)in->pack_voltage_mv * DUCKTOP2_PACK_USABLE_CURRENT_MA / 1000u;
+    pack->available_power_valid=pack->path_good && in->pack_telemetry_valid && pack->available_power_mw>0;
+    in->pack_bridge_qualified=DUCKTOP2_PACK_BRIDGE_QUALIFIED && DUCKTOP2_PACK_QUALIFIED;
+    in->pack_discharge_limit_ma=DUCKTOP2_PACK_USABLE_CURRENT_MA;
+    uint16_t aux_mv;
+    ec_source_observation_t *aux=&in->source[EC_SOURCE_AUX];
+    if (expander && ec_app_aux_counts_to_mv(gpio_read_adc_aux_dc(), &aux_mv)) {
+        aux->present=(p1 & (1u<<1)) && aux_mv>=7000 && aux_mv<=22000;
+        aux->path_good=(p1 & (1u<<3)) == 0;
+        aux->fault_n=(p0 & U44_AUX_OK) && (p1 & U44_AON_OK);
+        aux->negotiated_voltage_mv=aux_mv;
+        aux->qualified_input_current_valid=aux->present && aux->fault_n;
+        aux->qualified_input_current_ma=DUCKTOP2_AUX_QUALIFIED_CURRENT_MA;
+        /* Use the same IINDPM margin as the command, not full source current. */
+        ec_policy_config_t config=ec_policy_default_config();
+        config.iindpm_cap_ma=DUCKTOP2_IINDPM_CAP_MA;
+        config.pd_iindpm_margin_ma=DUCKTOP2_PD_IINDPM_MARGIN_MA;
+        aux->available_power_mw=(uint32_t)aux_mv*ec_policy_iindpm_ma(&config,aux->qualified_input_current_ma)/1000u;
+        aux->available_power_valid=aux->qualified_input_current_valid;
+    }
+    ec_host_state_t host=ec_host_state(now);
+    if (host.valid && (host.requests & EC_HOST_REQUEST_OFF)) want_power=false;
+    if (gpio_get_power_button_pressed()) want_power=true;
+    in->request_mu_12v=want_power && (DUCKTOP2_EXTERNAL_BOOT_QUALIFIED ||
+                      DUCKTOP2_PACK_BOOT_QUALIFIED || host.valid);
+    in->external_boot_authorized=DUCKTOP2_EXTERNAL_BOOT_QUALIFIED && !host.valid;
+    in->external_boot_budget_mw=DUCKTOP2_EXTERNAL_BOOT_BUDGET_MW;
+    in->pack_boot_authorized=DUCKTOP2_PACK_BOOT_QUALIFIED && DUCKTOP2_PACK_QUALIFIED && !host.valid;
+    in->pack_boot_budget_mw=DUCKTOP2_PACK_BOOT_BUDGET_MW;
+    in->estimated_mu_edp_power_valid=host.valid;
+    in->estimated_mu_edp_power_mw=host.estimated_mu_mw;
+    in->estimated_aux_power_valid=DUCKTOP2_AUX_LOADS_QUALIFIED;
+    in->estimated_aux_power_mw=DUCKTOP2_AUX_WORST_CASE_MW;
+    if (host.valid && host.estimated_aux_mw>in->estimated_aux_power_mw)
+        in->estimated_aux_power_mw=host.estimated_aux_mw;
+    other_auxiliary_mw=in->estimated_aux_power_mw;
+    in->estimated_aux_power_mw+=usb_power_reservation_mw(&usb_power);
+    in->power_limits_applied=host.valid;
+    in->applied_mu_edp_budget_mw=host.budget_mw;
+    in->request_charger=DUCKTOP2_CHARGING_QUALIFIED && DUCKTOP2_PACK_QUALIFIED &&
+                        pack->fault_n && in->pack_telemetry_valid && host.valid &&
+                        (host.requests & EC_HOST_REQUEST_CHARGE);
+    in->requested_charge_power_mw=in->request_charger ? 10000u : 0u;
+    in->request_audio_amp=host.valid && (host.requests & EC_HOST_REQUEST_SPEAKER) && !headphone_present;
+    in->request_audio_mic=host.valid && (host.requests & EC_HOST_REQUEST_MIC);
+    in->request_keyboard_rgb=host.valid && (host.requests & EC_HOST_REQUEST_RGB);
+    in->request_radio_db=host.valid && (host.requests & EC_HOST_REQUEST_RADIO);
 }
 
-static void arm_watchdog(void)
+static uint32_t age_forward(uint32_t age,uint32_t elapsed)
 {
-    /* LSI ~32 kHz / 256 = 125..15.6 kHz class timer; RLR 3125 gives roughly
-     * 200 ms at the 15.625 kHz tick.  Expiry hard-resets into the passive
-     * boot state, which is the released fail-safe behavior. */
-    IWDG->KR = IWDG_KR_KEY_ENABLE;
-    IWDG->KR = IWDG_KR_KEY_ACCESS;
-    IWDG->PR = IWDG_PR_DIV256;
-    IWDG->RLR = 3125u;
+    return UINT32_MAX-age<elapsed ? UINT32_MAX : age+elapsed;
+}
+
+static void refresh_transfer_interlocks(ec_inputs_t *in,uint32_t sampled_at,uint32_t *now)
+{
+    if(in->pack_bridge_qualified && in->request_mu_12v) {
+        uint8_t p0,p1;
+        if(!tca9539_read_inputs(&p0,&p1))in->service_bus_healthy=false;
+        else {
+            in->source[EC_SOURCE_PACK].fault_n=(p0 & U44_PACK_OK)!=0;
+            in->source[EC_SOURCE_PACK].path_good &= in->source[EC_SOURCE_PACK].fault_n;
+            for(unsigned p=0;p<2;p++)in->source[EC_SOURCE_PD1+p].fault_n=
+                (p0 & (1u<<(p+3))) && (p1 & U44_AON_OK) && gpio_get_pd_protect_fault_n();
+        }
+    }
+    in->mu_12v_pg=gpio_get_mu_12v_pg();
+    in->source[EC_SOURCE_PD1].path_good=!gpio_get_pd1_valid_n();
+    in->source[EC_SOURCE_PD2].path_good=!gpio_get_pd2_valid_n();
+    in->all_pd_paths_off=in->source_manager_reset_released && (tca9539_output0()&3u)==0 &&
+        !in->source[EC_SOURCE_PD1].path_good && !in->source[EC_SOURCE_PD2].path_good;
+    *now=GetTick();
+    in->pack_sample_age_ms=age_forward(in->pack_sample_age_ms,*now-sampled_at);
+    in->vsys_sample_age_ms=age_forward(in->vsys_sample_age_ms,*now-sampled_at);
+    if(!ec_host_state(*now).valid) {
+        in->power_limits_applied=false;
+        in->estimated_mu_edp_power_valid=false;
+        in->request_charger=false;
+    }
 }
 
 int main(void)
 {
-    gpio_init_all();
-
-    matrix_scan_init();
-
-    i2c1_init();
-
-    if (!tca9539_init_safe()) {
-        for (;;) {
-        }
-    }
-
-    ec_app_init();
-
+    gpio_init_all(); matrix_scan_init(); i2c1_init(); ec_app_init(); ec_host_init();
     usb_hid_init();
-
-    gpio_set_gnss_reset_n(false);
-    gpio_set_service_mux_reset(false);
-
-    ec_policy_config_t config = ec_policy_default_config();
-    ec_controller_t controller;
-    ec_commit_state_t commit_state;
-    ec_telemetry_inputs_t telemetry_inputs;
-    ec_telemetry_snapshot_t telemetry_snapshot;
-    ec_inputs_t inputs;
-    ec_fan_config_t fan_config = ec_fan_default_config();
-    ec_fan_state_t fan_state;
-    ec_fan_state_init(&fan_state);
-
-    ec_controller_init(&controller, &config, 0);
-    ec_commit_state_init(&commit_state);
-    ec_telemetry_inputs_init(&telemetry_inputs);
-
-    ec_commit_driver_t commit_driver;
-    commit_driver.context = NULL;
-    commit_driver.write = commit_write;
-
-    ec_commit_force_safe(&commit_state, &commit_driver);
-
-    arm_watchdog();
-
-    gpio_set_service_mux_reset(true);
-
-    gpio_set_gnss_reset_n(true);
-
-    DelayMs(10);
-
-    bool bus_ok = i2c1_probe(I2C_TCA9548A_ADDR);
-    (void)bus_ok;
-
-    tca9548a_deselect_all();
-
-    uint32_t now_ms = GetTick();
-    ec_source_id_t requested_source = EC_SOURCE_NONE;
-
-    while (1) {
-        now_ms = GetTick();
-
-        read_inputs(&inputs, &telemetry_inputs);
-        IWDG->KR = IWDG_KR_KEY_RELOAD;
-
-        /* Boot-time arbitration, priority PD1 > PD2 > AUX > PACK: request
-         * the first eligible source exactly once.  A latched fault keeps
-         * every source state non-OFF, so no further requests are issued
-         * until reset; policy faults are never auto-cleared here. */
-        if (requested_source == EC_SOURCE_NONE &&
-            inputs.service_bus_healthy && inputs.service_mux_reset_released &&
-            tca9539_ready() && inputs.all_pd_paths_off) {
-            bool controller_idle = true;
-            for (unsigned i = 0; i < EC_SOURCE_COUNT; ++i) {
-                if (ec_controller_source_state(
-                        &controller, (ec_source_id_t)i) !=
-                    EC_SOURCE_STATE_OFF) {
-                    controller_idle = false;
-                    break;
-                }
-            }
-            if (controller_idle) {
-                for (size_t p = 0;
-                     p < sizeof(k_source_priority) / sizeof(k_source_priority[0]);
-                     ++p) {
-                    ec_source_id_t source = k_source_priority[p];
-                    if (source_eligible(&inputs, source) &&
-                        ec_controller_request_source(&controller, source,
-                                                     now_ms)) {
-                        requested_source = source;
-                        break;
-                    }
-                }
-            }
+    if (!tca9539_init_safe()) NVIC_SystemReset();
+    ec_policy_config_t config=ec_policy_default_config();
+    config.iindpm_cap_ma=DUCKTOP2_IINDPM_CAP_MA;
+        config.pd_iindpm_margin_ma=DUCKTOP2_PD_IINDPM_MARGIN_MA;
+    uint32_t boot_budget=DUCKTOP2_EXTERNAL_BOOT_BUDGET_MW;
+    uint32_t pack_boot_budget=DUCKTOP2_PACK_BOOT_BUDGET_MW;
+    if (pack_boot_budget>boot_budget) boot_budget=pack_boot_budget;
+    if (boot_budget>config.normal_mu_edp_budget_mw) config.normal_mu_edp_budget_mw=boot_budget;
+    ec_controller_t controller; ec_controller_init(&controller,&config,GetTick());
+    ec_commit_state_t commits; ec_commit_state_init(&commits);
+    ec_commit_driver_t driver={.context=NULL,.write=commit_write};
+    if (ec_commit_force_safe(&commits,&driver) != EC_COMMIT_OK) NVIC_SystemReset();
+    gpio_set_service_mux_reset(true); DelayMs(2); tca9548a_deselect_all();
+    usb_power_config_t uc={
+        .budget={.qualified=DUCKTOP2_USB_POWER_QUALIFIED,
+                 .admission_current_ma=DUCKTOP2_USB_ADMISSION_MA,
+                 .right_harness_current_ma=DUCKTOP2_USB_RIGHT_HARNESS_MA,
+                 .rail_max_mv=5239u,.minimum_efficiency_percent=DUCKTOP2_USB_EFFICIENCY_PERCENT},
+        .startup_ceiling_ma=5700u,.pd_inrush_ma=DUCKTOP2_USB_PD_INRUSH_MA,
+        .branch_inrush_ma=DUCKTOP2_USB_BRANCH_INRUSH_MA,
+        .rail_min_mv=5000u,.rail_max_mv=5250u,
+        .startup_timeout_ms=500u,.gate_timeout_ms=200u,.sample_max_age_ms=100u
+    };
+    if (!usb_power_init(&usb_power,&uc,GetTick())) NVIC_SystemReset();
+    ec_fan_config_t fc=ec_fan_default_config(); ec_fan_state_t fs; ec_fan_state_init(&fs);
+    ec_fan_monitor_t fan_monitor; ec_fan_monitor_init(&fan_monitor);
+    ec_lid_config_t lc=ec_lid_default_config(); ec_lid_state_t ls; ec_lid_state_init(&ls);
+    ec_battery_config_t bc=ec_battery_default_config(); ec_battery_controller_t bs; ec_battery_state_init(&bs);
+    bool retry_active=false, retry_consumed=false; uint32_t retry_started=0;
+    for (;;) {
+        uint32_t now=GetTick();
+        if (!usb_power_poll(&usb_power,now)) NVIC_SystemReset();
+        now=GetTick();
+        uint16_t rpm=0; uint8_t duty=ec_app_fan_step(&fc,&fs,now,&rpm);
+        fan_healthy=ec_fan_monitor_step(&fan_monitor,gpio_get_mu_12v_pg(),duty,rpm,now);
+        if (!fan_healthy) gpio_set_fan_pwm_duty(100);
+        ec_inputs_t in; ec_telemetry_inputs_t ti; read_inputs(&in,&ti,now);
+        refresh_transfer_interlocks(&in,now,&now);
+        ec_controller_arbitrate(&controller,&in,now); ec_controller_step(&controller,&in,now);
+        const ec_outputs_t *out=ec_controller_outputs(&controller);
+        if ((!out->mu_12v_enable || controller.transfer_active || !in.thermal_ok ||
+             !in.power_limits_applied || !in.service_bus_healthy ||
+             (usb_power.have_source && usb_power.last_source!=(uint8_t)controller.active_source)) &&
+            !usb_power_disable(&usb_power)) NVIC_SystemReset();
+        if (ec_commit_apply(&commits,&driver,out) != EC_COMMIT_OK) NVIC_SystemReset();
+        /* U44 /RESET follows NRST, so a failed safe write resets both domains. */
+        now=GetTick();
+        ec_host_state_t host=ec_host_state(now);
+        uint64_t used=(uint64_t)config.system_reserve_mw+host.budget_mw+other_auxiliary_mw;
+        usb_power_request_t ur={
+            .host_lease_valid=host.valid,
+            .system_safe=out->mu_12v_enable && gpio_get_mu_12v_pg() && in.thermal_ok &&
+                         in.service_bus_healthy && out->power_policy_confirmed &&
+                         in.estimated_aux_power_valid,
+            .transfer_active=controller.transfer_active,
+            .clear_fault=ec_host_take_usb_clear(now),
+            .requested_mask=host.usb_requested_mask,.active_source=(uint8_t)controller.active_source,
+            .available_input_power_mw=out->source_usable_power_mw>used ?
+                                      (uint32_t)(out->source_usable_power_mw-used) : 0u,
+            .committed_reservation_mw=in.estimated_aux_power_mw-other_auxiliary_mw
+        };
+        if (!usb_power_step(&usb_power,&ur,now)) NVIC_SystemReset();
+        ec_host_usb_status_t us=usb_power_status(&usb_power,now);
+        ec_host_publish_usb(&us);
+        bool retry_request=host.valid && (host.requests & EC_HOST_REQUEST_BMS_RETRY);
+        bool external=controller.active_source!=EC_SOURCE_NONE && controller.active_source!=EC_SOURCE_PACK;
+        if (!retry_request) retry_consumed=false;
+        if (!retry_active && !retry_consumed && retry_request && external &&
+            !out->mu_12v_enable && !out->charger_enable && DUCKTOP2_PACK_QUALIFIED) {
+            if (!tca9539_set_bms_retry(true)) NVIC_SystemReset();
+            retry_active=true; retry_consumed=true; retry_started=now;
         }
-
-        /* Publish PD contracts and the owned active-source decision into
-         * telemetry so downstream consumers see target-owned values. */
-        for (uint8_t idx = 0; idx < EC_PD_PORT_COUNT; ++idx) {
-            const ec_source_observation_t *obs =
-                &inputs.source[EC_SOURCE_PD1 + idx];
-            if (obs->qualified_input_current_valid) {
-                telemetry_inputs.pd[idx].valid = true;
-                telemetry_inputs.pd[idx].voltage_mv =
-                    obs->negotiated_voltage_mv;
-                telemetry_inputs.pd[idx].current_ma =
-                    obs->qualified_input_current_ma;
-                telemetry_inputs.valid_flags |= EC_TELEMETRY_VALID_ACTIVE_INPUT;
-            }
+        if (retry_active && (!external || now-retry_started>=100u)) {
+            if (!tca9539_set_bms_retry(false)) NVIC_SystemReset();
+            retry_active=false;
         }
-        for (unsigned i = 0; i < EC_SOURCE_COUNT; ++i) {
-            if (ec_controller_source_state(&controller,
-                                           (ec_source_id_t)i) ==
-                EC_SOURCE_STATE_ACTIVE) {
-                telemetry_inputs.valid_flags |= EC_TELEMETRY_VALID_ACTIVE_INPUT;
-                telemetry_inputs.active_source = (ec_source_id_t)i;
-                break;
-            }
+        ec_keymap_matrix_t matrix; ec_hid_keyboard_report_t kb; ec_hid_consumer_report_t consumer;
+        matrix_scan_get_matrix(&matrix); ec_keymap_process(&matrix,&kb,&consumer);
+        usb_hid_send_keyboard(&kb); usb_hid_send_consumer(&consumer);
+        ec_lid_inputs_t li={.lid_open_raw=gpio_get_lid_open()}; ec_lid_output_t lid;
+        ec_lid_step(&lc,&li,&ls,now,&lid);
+        ti.active_source=controller.transfer_active ? EC_SOURCE_PACK : controller.active_source;
+        if (ti.active_source!=EC_SOURCE_NONE) ti.valid_flags|=EC_TELEMETRY_VALID_ACTIVE_INPUT;
+        for (uint8_t p=0;p<2;p++) {
+            const ec_source_observation_t *obs=&in.source[EC_SOURCE_PD1+p];
+            ti.pd[p].valid=obs->qualified_input_current_valid;
+            ti.pd[p].voltage_mv=obs->negotiated_voltage_mv;
+            ti.pd[p].current_ma=obs->qualified_input_current_ma;
         }
-
-        ec_controller_step(&controller, &inputs, now_ms);
-
-        const ec_outputs_t *outputs = ec_controller_outputs(&controller);
-        ec_commit_apply(&commit_state, &commit_driver, outputs);
-
-        uint16_t fan_rpm;
-        uint8_t fan_duty = ec_app_fan_step(&fan_config, &fan_state, now_ms, &fan_rpm);
-        (void)fan_duty;
-        (void)fan_rpm;
-
-        ec_keymap_matrix_t matrix;
-        ec_hid_keyboard_report_t keyboard_report;
-        ec_hid_consumer_report_t consumer_report;
-        matrix_scan_get_matrix(&matrix);
-        ec_keymap_process(&matrix, &keyboard_report, &consumer_report);
-        usb_hid_send_keyboard(&keyboard_report);
-        usb_hid_send_consumer(&consumer_report);
-        usb_hid_poll();
-
-        ec_telemetry_build_snapshot(&telemetry_snapshot, &telemetry_inputs);
-
-        DelayMs(20);
+        ec_telemetry_snapshot_t snapshot; ec_telemetry_build_snapshot(&snapshot,&ti);
+        ec_battery_inputs_t bi={.telemetry=snapshot,.pack_present=ec_app_battery_present(),.charger_enable=out->charger_enable};
+        ec_battery_report_t battery; ec_battery_step(&bc,&bi,&bs,now,&battery);
+        uint16_t flags=(battery.present?1u:0u) | (lid.lid_closed?2u:0u) | (!fan_healthy?4u:0u) |
+                       (headphone_present?8u:0u) | (external?16u:0u) | (out->mu_boot_authorized?32u:0u) |
+                       (ec_app_charging_active()?64u:0u) | (host.valid?128u:0u);
+        ec_host_publish(&snapshot,&battery,flags,(uint16_t)controller.fault,rpm,now);
+        static uint32_t audio_due;
+        if ((int32_t)(now-audio_due)>=0) {
+            audio_due=now+500u;
+            bool headphones=headphone_present && host.valid && out->mu_12v_enable &&
+                             (host.requests & EC_HOST_REQUEST_SPEAKER);
+            if (!audio_headphones(headphones)) gpio_set_audio_amp_enable(false);
+        }
+        ssd1306_status_step(&snapshot,flags,(uint16_t)controller.fault,rpm,duty,
+            ec_app_ntc_counts_to_temp_dc(gpio_read_adc_thermal_skin()),
+            ec_app_ntc_counts_to_temp_dc(gpio_read_adc_thermal_mu()),now);
+        usb_hid_poll(); ec_watchdog_pet(); DelayMs(20);
     }
 }

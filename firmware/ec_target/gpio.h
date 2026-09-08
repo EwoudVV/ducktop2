@@ -22,6 +22,8 @@ bool gpio_get_bq_alert(void);
 void gpio_set_mu_12v_enable(bool enable);
 bool gpio_get_mu_12v_pg(void);
 bool gpio_get_mu_s0_high(void);
+bool gpio_get_lid_open(void);
+bool gpio_get_power_button_pressed(void);
 void gpio_set_mu_pwrbtn_n(bool active);
 void gpio_set_mu_rstbtn_n(bool active);
 

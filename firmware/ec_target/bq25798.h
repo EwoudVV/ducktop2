@@ -28,12 +28,12 @@ extern "C" {
  * the schematic has no ADDR pin), so the fixed datasheet address applies.
  * SLUSDV2C 7.5: "The BQ25798 7-bit address is defined as 1101 011 (0x6B)".
  *
- * Multi-byte registers are little-endian (low byte at offset, high byte at
- * offset+1), matching the TI charger register convention; the part supports
+ * Multi-byte registers put the most-significant byte on the wire first.
+ * This differs from the BQ34Z100 gauge. The part supports
  * multi-byte reads and writes of all registers.
  *
  * Design notes specific to this board (from generate_power_sheet.py):
- *  - TS is fixed at 58.9% REGN by R16/R705; the driver sets TS_IGNORE=1.
+ *  - TS_IGNORE stays clear; actual temperature protection is mandatory.
  *  - /CE is the fail-off hardware path (Q700 + R14); CHG_ENABLE is a separate
  *    GPIO (main.c), so register EN_CHG is a secondary gate only.
  *  - Q25 (CSD17575Q3) ship FET is on SDRV; driver sets SFET_PRESENT=1 so the
@@ -68,6 +68,7 @@ extern "C" {
 #define BQ25798_REG_IBAT_ADC                0x33u /* 16-bit, 1mA/LSB, 2's comp   */
 #define BQ25798_REG_VBUS_ADC                0x35u /* 16-bit, 1mV/LSB             */
 #define BQ25798_REG_VBAT_ADC                0x3Bu /* 16-bit, 1mV/LSB (BATP sense)*/
+#define BQ25798_REG_VSYS_ADC                0x3Du
 #define BQ25798_REG_PART_INFORMATION        0x48u
 
 /* REG09 Termination Control fields (7.5.1.7). */
@@ -152,6 +153,7 @@ typedef struct {
   int16_t ibus_ma;                /* input current, +in/-out */
   uint16_t vbat_mv;               /* pack voltage at BATP sense */
   uint16_t vbus_mv;               /* VBUS voltage */
+  uint16_t vsys_mv;               /* actual SYS ADC, never VBAT substitute */
 } bq25798_telemetry_t;
 
 /* ---- Pure, host-testable encode/decode layer (no I2C, no hardware) ---- */
@@ -172,8 +174,11 @@ bool bq25798_charge_done(bq25798_charge_status_t status);
 /* Read REG48 and verify the part number field reads 011b (BQ25798).
  * Returns false if the charger is absent or unreachable. */
 bool bq25798_probe(void);
+bool bq25798_start_sample(void);
+bool bq25798_read_sample(bq25798_telemetry_t *telemetry, bool *complete);
+bool bq25798_read_charge_limits(uint16_t *voltage_mv, uint16_t *current_ma);
 
-/* Board-configuration write sequence: TS_IGNORE=1 (REG18), STOP_WD_CHG=1
+/* Board-configuration write sequence: EN_CHG=0, TS_IGNORE=0, STOP_WD_CHG=1
  * (REG09), SFET_PRESENT=1 + EN_IBAT=1 (REG14), then pet the watchdog.
  * Safe to retry: each step is idempotent. */
 bool bq25798_init(void);

@@ -20,7 +20,7 @@ class ReleaseChecks(unittest.TestCase):
     def test_explicit_board_and_schematic_stage(self):
         pcb = release.ROOT / 'bms/bms.kicad_pcb'
         self.assertEqual(release.select_pcbs('fabrication', pcb), [pcb])
-        self.assertEqual(release.select_pcbs('schematic', None), [release.DEFAULT_PCB])
+        self.assertEqual(release.select_pcbs('schematic', None), [release.ROOT/name for name in release.ACTIVE_BOARDS])
         self.assertEqual(release.schematic_for_board(release.DEFAULT_PCB), release.DEFAULT_SCHEMATIC)
         self.assertEqual(release.schematic_for_board(pcb), pcb.with_suffix('.kicad_sch'))
 
@@ -99,8 +99,9 @@ class ReleaseChecks(unittest.TestCase):
             with patch.multiple(release, ROOT=root, DEFAULT_PCB=pcb, DEFAULT_SCHEMATIC=sch), \
                  patch.object(release,'project_design_files',return_value=[pcb,sch]), \
                  patch.object(release,'find_kicad_cli',return_value='fixture-cli'), \
-                 patch.object(release,'run_static_checks',side_effect=fail_after_write), redirect_stdout(out):
-                result=release.main(['--stage','schematic'])
+                 patch.object(release,'run_static_checks',side_effect=fail_after_write), \
+                 patch.object(release,'selection_coverage',return_value={'boards':[]}), redirect_stdout(out):
+                result=release.main(['--stage','schematic','--pcb',str(pcb),'--schematic',str(sch)])
             self.assertNotEqual(result,0)
             self.assertIn('Read-only integrity: FAIL',out.getvalue())
             self.assertIn('ducktop2-center.kicad_pcb',out.getvalue())

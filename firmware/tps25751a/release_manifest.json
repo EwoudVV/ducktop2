@@ -5,9 +5,10 @@
   "base_firmware": "FB09.17.02__RC5.bin",
   "source": {
     "path": "ducktop2_dual_role_config.json",
-    "sha256": "14dcc9b9e631ea6c9cc4a7233ca2672b26aed38d0d699bf868ce8dbf9fc7c423"
+    "sha256": "68c8f4d09f6198b6787097094733a5bb695a6045f7d1c88bb727c8d30b47c97f"
   },
-  "generated": {
+  "status": "GENERATED_PENDING_HIL",
+  "previous_15v_generated": {
     "ducktop2_dual_role_raw.json": {
       "sha256": "9d4376ddd54b84a2a19e86a0c8b9aea12bc258aff42a13b5b7186b2f50f716c7"
     },
@@ -22,5 +23,61 @@
       "sha256": "279e0a59f72271a7f0c1e6cf2b6e52e501517764b7bddc6a9661177365d6aa2d",
       "bytes": 22400
     }
+  },
+  "previous_15v_source_sha256": "14dcc9b9e631ea6c9cc4a7233ca2672b26aed38d0d699bf868ce8dbf9fc7c423",
+  "generated": {
+    "ducktop2_dual_role_vif.xml": {
+      "sha256": "9b1892bb780417f75cd68665af64d18e63462fe55ec88c8fe5b15839c08abe8c",
+      "bytes": 8235
+    },
+    "ducktop2_dual_role_raw.json": {
+      "sha256": "68c8f4d09f6198b6787097094733a5bb695a6045f7d1c88bb727c8d30b47c97f",
+      "bytes": 6926
+    },
+    "ducktop2_dual_role_lowRegion.bin": {
+      "sha256": "ccd8328ca7afc10225b56df8ecfcf2fd8b99743f006177772996becbab2caf85",
+      "bytes": 4992
+    },
+    "ducktop2_dual_role_lowRegion.c": {
+      "sha256": "4eadb449f5b133a9266492da4c59dde5f8e118cb2d1b7b966f69487e3a6a3722",
+      "bytes": 30377
+    },
+    "ducktop2_dual_role_fullFlash.bin": {
+      "sha256": "c13bda99428ea012f7dc4bec3e4e2b35529659841ef74e2365a2d707ba2d0ce6",
+      "bytes": 22400
+    },
+    "ducktop2_dual_role_fullFlash.c": {
+      "sha256": "059c998c3559088340f5ac72f5ceccb6c7ad4c00d253b0cdac6a2f998b09bfa0",
+      "bytes": 135913
+    }
+  },
+  "programming_and_readback": {
+    "PD1": {
+      "status": "NOT_RUN",
+      "expected_full_flash_sha256": "c13bda99428ea012f7dc4bec3e4e2b35529659841ef74e2365a2d707ba2d0ce6",
+      "controller_address_7bit": 32,
+      "service_mux_channel": 2,
+      "programmed_board_revision": null,
+      "readback_path": null,
+      "readback_sha256": null
+    },
+    "PD2": {
+      "status": "NOT_RUN",
+      "expected_full_flash_sha256": "c13bda99428ea012f7dc4bec3e4e2b35529659841ef74e2365a2d707ba2d0ce6",
+      "controller_address_7bit": 33,
+      "service_mux_channel": 3,
+      "programmed_board_revision": null,
+      "readback_path": null,
+      "readback_sha256": null
+    }
+  },
+  "source_normalization": "official v2.0.0 TPS25751A export; legacy 0x27/0x73 omitted and reserved zero padding normalized",
+  "exported_utc": "2026-09-07T19:38:05.968750+00:00",
+  "official_tool_url": "https://dev.ti.com/gallery/view/USBPD/USBCPD_Application_Customization_Tool/ver/2.0.0/",
+  "official_export_zip_sha256": "772fbfb23d064c721852a5b02d3e001d0dcf0c6439ae9ef0b11cc6d9820d11f0",
+  "source_registers_match_export": true,
+  "agreements": {
+    "SRAS_2714": "explicitly approved and accepted",
+    "SRAS_8013": "explicitly approved and accepted"
   }
 }

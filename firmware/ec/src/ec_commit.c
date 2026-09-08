@@ -27,7 +27,12 @@ static bool desired_is_valid(const ec_outputs_t *desired) {
       desired->keyboard_rgb_power_enable || desired->radio_db_power_enable ||
       desired->audio_amp_enable ||
       desired->audio_mic_enable;
-  if (enabled_paths != 0u && desired->charger_iindpm_ma == 0u &&
+  bool bridge_only=desired->mu_rail_hold && desired->mu_12v_enable &&
+      desired->power_policy_confirmed && !desired->mu_boot_authorized &&
+      !desired->charger_enable && desired->charge_power_budget_mw==0u &&
+      !desired->keyboard_rgb_power_enable && !desired->radio_db_power_enable &&
+      !desired->audio_amp_enable && !desired->audio_mic_enable;
+  if (!bridge_only && enabled_paths != 0u && desired->charger_iindpm_ma == 0u &&
       (controlled_load_enabled || desired->charge_power_budget_mw != 0u ||
        desired->mu_edp_budget_mw != 0u || desired->power_policy_confirmed)) {
     return false;
@@ -38,7 +43,8 @@ static bool desired_is_valid(const ec_outputs_t *desired) {
     return false;
   }
   if (desired->mu_12v_enable &&
-      (!desired->power_policy_confirmed || desired->mu_edp_budget_mw == 0u)) {
+      ((!desired->power_policy_confirmed && !desired->mu_boot_authorized) ||
+       desired->mu_edp_budget_mw == 0u)) {
     return false;
   }
   return true;
@@ -147,6 +153,12 @@ ec_commit_result_t ec_commit_apply(ec_commit_state_t *state,
   }
 
   current = state->applied;
+  if (desired->mu_rail_hold && (!state->initialized || !current.mu_12v_enable ||
+      !current.power_policy_confirmed || !desired->mu_12v_enable ||
+      current.mu_edp_budget_mw!=desired->mu_edp_budget_mw)) {
+    ec_commit_result_t safe_result=ec_commit_force_safe(state,driver);
+    return safe_result==EC_COMMIT_OK ? EC_COMMIT_INVALID_DESIRED_STATE : safe_result;
+  }
   if (state->initialized && controlled_state_equal(&current, desired)) {
     state->applied = *desired;
     return EC_COMMIT_OK;
@@ -173,7 +185,7 @@ ec_commit_result_t ec_commit_apply(ec_commit_state_t *state,
       path_changed || current.charger_iindpm_ma != desired->charger_iindpm_ma ||
       current.charge_power_budget_mw != desired->charge_power_budget_mw ||
       current.mu_edp_budget_mw != desired->mu_edp_budget_mw;
-  if (path_changed) {
+  if (path_changed && !desired->mu_rail_hold) {
     ec_commit_result_t safe_result = ec_commit_force_safe(state, driver);
     if (safe_result != EC_COMMIT_OK) {
       return safe_result;
@@ -209,7 +221,8 @@ ec_commit_result_t ec_commit_apply(ec_commit_state_t *state,
     current.audio_mic_enable = false;
   }
   if (current.mu_12v_enable &&
-      (sequencing_change || !desired->mu_12v_enable)) {
+      (!desired->mu_12v_enable || current.mu_edp_budget_mw!=desired->mu_edp_budget_mw ||
+       (path_changed && !desired->mu_rail_hold))) {
     COMMIT_OR_SAFE(EC_COMMIT_MU_12V_ENABLE, 1u, 0u);
     current.mu_12v_enable = false;
   }

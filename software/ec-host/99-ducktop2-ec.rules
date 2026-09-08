@@ -1,0 +1,2 @@
+SUBSYSTEM=="hidraw", IMPORT{builtin}="usb_id"
+SUBSYSTEM=="hidraw", ENV{ID_VENDOR_ID}=="1209", ENV{ID_MODEL_ID}=="2328", ENV{ID_USB_INTERFACE_NUM}=="02", SYMLINK+="ducktop2-ec", MODE="0600"

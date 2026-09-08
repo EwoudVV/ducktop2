@@ -1,0 +1,12 @@
+[Unit]
+Description=Ducktop2 EC power limits
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/libexec/ducktop2-ec-host --hidraw /dev/ducktop2-ec --profile /etc/ducktop2/board-profile.json
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

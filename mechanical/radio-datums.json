@@ -1,0 +1,119 @@
+{
+  "source": "radio_daughterboard/radio_daughterboard.kicad_pcb",
+  "sha256": "f3334b0757dd6eca588041d354721eb404749cda9e5a2eeac6d2c690dadae014",
+  "coordinate_system": "radio PCB coordinates; z is relative to the top of the PCB",
+  "board_thickness_mm": 1.6,
+  "sma_mpn": "73251-1153",
+  "sma_axes": [
+    {
+      "reference": "J241",
+      "axis_at_rear_edge_mm": [
+        43.0,
+        20,
+        0.38
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "nominal_body_bounds_mm": [
+        [
+          38.24,
+          10.480000000000002,
+          -3.58
+        ],
+        [
+          47.76,
+          24.75,
+          4.34
+        ]
+      ]
+    },
+    {
+      "reference": "J251",
+      "axis_at_rear_edge_mm": [
+        108.0,
+        20,
+        0.38
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "nominal_body_bounds_mm": [
+        [
+          103.24,
+          10.480000000000002,
+          -3.58
+        ],
+        [
+          112.76,
+          24.75,
+          4.34
+        ]
+      ]
+    }
+  ],
+  "mounting_holes": [
+    {
+      "reference": "H1",
+      "position_mm": [
+        24.0,
+        24.0
+      ],
+      "drill_mm": [
+        2.2,
+        2.2
+      ]
+    },
+    {
+      "reference": "H2",
+      "position_mm": [
+        136.0,
+        24.0
+      ],
+      "drill_mm": [
+        2.2,
+        2.2
+      ]
+    },
+    {
+      "reference": "H3",
+      "position_mm": [
+        24.0,
+        86.0
+      ],
+      "drill_mm": [
+        2.2,
+        2.2
+      ]
+    },
+    {
+      "reference": "H4",
+      "position_mm": [
+        136.0,
+        86.0
+      ],
+      "drill_mm": [
+        2.2,
+        2.2
+      ]
+    }
+  ],
+  "case_transform": null,
+  "mating_antenna_or_plug": null,
+  "case_fit_verified": false,
+  "geometry_note": "nominal body and slot-stop coordinates come from the connector model; add part tolerances, mating-plug volume and installation access in the case model",
+  "drawing_reference": {
+    "document": "Molex SD-73251-115 revision B3",
+    "url": "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/732/73251/732511150_sd.pdf",
+    "body_width_mm": 9.52,
+    "body_width_tolerance_mm": 0.13,
+    "board_slot_mm": 1.68,
+    "board_slot_tolerance_mm": 0.08,
+    "contact_projection_mm": 4.75,
+    "contact_projection_tolerance_mm": 0.2
+  }
+}

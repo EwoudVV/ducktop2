@@ -22,31 +22,36 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-the four-layer BMS routing was checked on 6 september 2026, with
-zero routing errors or unconnected items. schematic ERC is clean,
-and the connected pads match the schematic. the power paths, shunt pickups,
-reference grounds, and connector current sharing have been reviewed.
-protection and thermal testing still need assembled hardware. the center
-and I/O boards are eight layers and still need routing. the
-[center review](docs/hardware/center-board.md) was updated on 7 september:
-the BMS cutout, component placement, M.2 card clearances, wired connectors,
-and routing rules are in place. USB pairs now have usable P/N names, and
-the existing left-board copper is preserved for the routing pass. the
-keyboard has a
-rev A production package, and the radio is still a placement board.
+updated 8 september 2026. the audit repairs are still in progress. the
+schematic generators include power and interconnect changes that still
+need to reach the saved schematics and boards. i also moved connectors,
+both M.2 sockets, and parts on the right board. those positions are saved;
+card supports, cable access, and nearby components still need checking.
 
-the replacement panel has run at 2560x1600 and 120 Hz on the Intehill
-controller. the final Mu-to-panel harness still needs its own validation.
-firmware has host-tested policy/driver code and an incomplete target port.
-the complete laptop is not ready for fabrication or powered integration.
+the keyboard repairs and its [manufacturing package](manufacturing/keyboard/)
+are finished, with zero DRC errors and zero unconnected items in the checked
+board. the radio antenna connectors now match the board edge and their
+mechanical drawing. the radio still needs routing.
+
+the four-layer BMS is getting separate power and isolated control wiring,
+plus cell temperature monitoring. its revised routing still needs work,
+including preserving the main battery return plane. the three main-board
+sections are eight layers. the remaining main-board routing has not started.
+
+firmware corrections cover charger communication, startup, watchdog and fan
+handling, USB power permissions, and host communication. assembled-hardware
+tests are still pending. the replacement panel has run at 2560x1600 and
+120 Hz on the Intehill controller; the final Mu-to-panel cable still needs
+validation. the complete laptop is not ready for fabrication or powered
+integration.
 
 ## boards
 
 ```mermaid
 flowchart LR
-    L[Left I/O] <-->|68-pin FFC| C[Center: Mu, EC, charger, gauge, maker MCU]
-    C <-->|68-pin FFC| R[Right I/O]
-    B[BMS: protection and balancing] <-->|30-pin FFC| C
+    L[Left I/O] <-->|signal cable and power wiring| C[Center: Mu, EC, charger, gauge, maker MCU]
+    C <-->|signal cable and power wiring| R[Right I/O]
+    B[BMS: protection and balancing] <-->|power and isolated control wiring| C
     Cells[3S cells and cell taps] --- B
     C --- K[Keyboard]
     C --- Radio[Optional radio and GNSS]

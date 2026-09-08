@@ -5,8 +5,9 @@ BMS board (on the pack, MacBook-style): J2 pack connector, F1 fuse,
 U719 BQ77915 primary protector + filters, Q703/Q704 charge/discharge
 FETs, U11 LTC4368 + Q11/Q12 + RS10 + divider, pack fault/retry path.
 
-Crosses FPC-3 to center: PACK_POS_FUSED, PACK_NEG_RAW, PACK_FAULT_N,
-PACK_RETRY_PULSE, MCU_3V3, GND. The gauge (U10 BQ34Z100), charger
+The rated power harness carries PACK_POS_FUSED and FG_VSS. The separate
+control link carries PACK_FAULT_N, PACK_RETRY_PULSE, PACK_CHG_TEMP_OK and
+MCU_3V3. PACK_NEG_RAW stays isolated on this board. The gauge (U10), charger
 (U2), and ship FET (Q25) stay on center.
 
 Reuses the part definitions (nets, footprints, MPNs) from the main
@@ -20,8 +21,9 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 import build_ducktop2 as b
 from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, FOOTPRINTS
-from generate_mu_carrier_sheet import root_label, place_fpc_connector
+from generate_mu_carrier_sheet import root_label, place_bms_control_connector, place_bms_power_connector
 import fpc_contract as fpc
+from generate_bms_thermal import add_bms_thermal
 
 BOARD_DIR = os.path.join(PROJDIR, "bms")
 PROJECT_NAME = "bms"
@@ -65,7 +67,7 @@ def build_bms_sheet(sheet_symbol_uuid):
                 "17": ("BMS_OCDP", "local"), "18": ("BMS_TS_UNUSED", "local"),
                 "19": ("", "nc"), "20": ("PACK_NEG_RAW", "local"),
                 "21": ("", "nc"), "22": ("BMS_PRES", "local"),
-                "23": ("PACK_NEG_RAW", "local"), "24": ("PACK_NEG_RAW", "local"),
+                "23": ("BMS_CTRC", "local"), "24": ("BMS_CTRD", "local"),
             },
             extra_props={
                 "Manufacturer": "Texas Instruments", "MPN": "BQ7791500PWR",
@@ -152,7 +154,7 @@ def build_bms_sheet(sheet_symbol_uuid):
                 "1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_UV", "local"),
                 "3": ("BAT_PROT_OV", "local"), "4": ("FG_VSS", "local"),
                 "5": ("FG_VSS", "local"), "6": ("BAT_PROT_SHDN", "local"),
-                "7": ("PACK_FAULT_N", "local"), "8": ("PACK_POS_FUSED", "local"),
+                "7": ("BMS_PROTECT_FAULT_N", "local"), "8": ("PACK_POS_FUSED", "local"),
                 "9": ("BAT_PROT_SENSE", "local"), "10": ("BAT_PROT_GATE", "local"),
             },
             extra_props={"Manufacturer": "Analog Devices", "MPN": "LTC4368IMS-1#PBF"})
@@ -194,36 +196,31 @@ def build_bms_sheet(sheet_symbol_uuid):
             pin_nets={"1": ("BAT_PROT_GATE", "local"), "2": ("BAT_PROT_FET_COMMON", "local")})
     s.place("R707", "R", "100k pack protector SHDN pull-up", 390, 70, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_SHDN", "local")})
-    s.place("R708", "R", "10k pack FAULT pull-up", 390, 80, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "local"), "2": ("PACK_FAULT_N", "local")})
+    s.place("R708", "R", "100k protected-side LTC fault pull-up", 390, 80, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("PROT_CTRL_3V3", "local"), "2": ("BMS_PROTECT_FAULT_N", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
     s.place("Q701", "Q_NMOS_SOT23_GSD", "BSS138 pack protector latch reset", 390, 90,
             footprint=FOOTPRINTS["Q_BSS138"],
-            pin_nets={"1": ("PACK_RETRY_PULSE", "local"), "2": ("FG_VSS", "local"),
+            pin_nets={"1": ("PACK_RETRY_LOCAL_GATE", "local"), "2": ("FG_VSS", "local"),
                       "3": ("BAT_PROT_SHDN", "local")},
             extra_props={"Manufacturer": "onsemi", "MPN": "BSS138LT1G"})
     s.place("R709", "R", "100k pack retry gate pulldown", 390, 100, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_RETRY_PULSE", "local"), "2": ("FG_VSS", "local")})
+            pin_nets={"1": ("PACK_RETRY_LOCAL_GATE", "local"), "2": ("FG_VSS", "local")})
 
     # FPC-3 boundary markers
     s.pwrflag(20, 400, "PACK_POS_FUSED")
     s.pwrflag(20, 420, "PACK_NEG_RAW")
     s.pwrflag(20, 440, "FG_VSS")
+    s.fg_vss(30, 440)
     s.pwrflag(20, 460, "PACK_POS_RAW")
     s.pwrflag(20, 480, "BAT_PROT_VIN")
     s.pwrflag(20, 500, "BMS_VDD")
 
-    # Phase 4a: FPC-3 connector (the physical FH12-30S on the BMS board
-    # edge).  Pin map from fpc_contract.py -- same conductor order as the
-    # center's FPC3_C.  The pack rails (PACK_POS_FUSED, PACK_NEG_RAW),
-    # FG_VSS, MCU_3V3, PACK_FAULT_N and PACK_RETRY_PULSE cross here; the
-    # hier labels at the connector pins make them boundary nets.
-    # Phase 5: FG_VSS (the BQ77915 post-FET protected return) IS this
-    # board's ground; the pack negative stays internal.  Flat sheet, so
-    # boundary nets use local labels (hierarchical labels in a parentless
-    # root are an ERC error class).
-    place_fpc_connector(s, "FPC106", "Conn_01x30_FFC_MP", fpc.FPC3_PINMAP,
-                        "FH12-30S-0.5SH (FPC-3)", x=490, y=250, pwr_base=3600,
-                        label_kind="local", ground_net="FG_VSS", ground_fn=s.fg_vss)
+    # the power return and isolated control return use separate wire harnesses.
+    place_bms_control_connector(s, "bms", 490, 250, "local")
+    place_bms_power_connector(s, "bms", 560, 250, "local")
+    s.text(465, 360, "j2072 carries protected pack power and return. j2074 pin 5 and its mounting tabs serve only the isolated ctrl_gnd island.")
+    s.text(465, 370, "never join ctrl_gnd to fg_vss or pack_neg_raw. raw pack negative remains inside the bms and pack harness.")
 
     # Phase 5 bring-up: test points.  Every rail, protector node and
     # status line gets a physical 1.5x1.5 mm probe pad on the board so
@@ -249,6 +246,7 @@ def build_bms_sheet(sheet_symbol_uuid):
                 pin_nets={"1": (net, "local")},
                 extra_props={"Manufacturer": "-",
                              "Note": "test point, no MPN"})
+    add_bms_thermal(s)
     return s
 
 
@@ -257,7 +255,7 @@ def main() -> int:
     sheet_uuid = stable_uuid("bms:sheet:main")
     with uuid_scope("bms:main"):
         sheet = build_bms_sheet(sheet_uuid)
-        text = sheet.render(stable_uuid("bms:self:main"), page_number=1, paper="A1")
+        text = sheet.render(stable_uuid("bms:self:main"), page_number=1, paper="A0")
     with open(os.path.join(BOARD_DIR, "bms.kicad_sch"), "w", encoding="utf-8") as f:
         f.write(text)
 

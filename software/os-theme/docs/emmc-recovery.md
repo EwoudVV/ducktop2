@@ -69,3 +69,22 @@ during the documentation update.
 the documentation cleanup does not approve or change the installer. any
 script corrections belong in a separate implementation change with tests
 for its actual disk/boot behavior.
+
+
+## current setup checks
+
+the setup script now distinguishes whole eMMC devices from SD cards and
+partitions, rejects active swap and block holders, and requires a recovery
+password hash for a complete OS build. `--skip-os` creates only the layout
+and filesystems. it does not install a bootloader or recovery OS.
+
+resume configuration requires `--yes`. it updates an existing
+`/etc/kernel/cmdline`, or the quoted GRUB cmdline if that is the persistent
+source. it removes stale resume arguments, updates current kernel entries
+through grubby, verifies their resume target, enables the matching swap,
+and rebuilds initramfs. the final message reports those operations without
+claiming that hibernation itself was tested.
+
+this still needs a disposable Fedora installation test, a real Mu boot,
+and a hibernate/resume cycle with the actual storage and BIOS. temporary
+parser tests and shell syntax checks cannot establish those outcomes.

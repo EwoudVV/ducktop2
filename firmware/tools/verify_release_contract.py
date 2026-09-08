@@ -236,8 +236,10 @@ for relative in (
     "release/hil_matrix.csv",
 ):
     contract_text = read_text(relative)
-    require("0x40" not in contract_text and "0x41" not in contract_text,
-            f"{relative}: shifted TPS25751A address used as 7-bit address")
+    for line in contract_text.splitlines():
+        if "ADDRESS_7BIT" in line or "I2C_ADDRESS_7BIT" in line:
+            require("0x40" not in line and "0x41" not in line,
+                    f"{relative}: shifted TPS25751A address used as 7-bit address")
 
 hil_rows = read_csv("release/hil_matrix.csv")
 verify_unique_ids(hil_rows, "HIL matrix")

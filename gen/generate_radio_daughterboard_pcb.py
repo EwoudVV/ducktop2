@@ -24,6 +24,14 @@ BOARD = BOARD_DIR / "radio_daughterboard.kicad_pcb"
 KICAD_CLI = Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
 KICAD_PYTHON = Path("/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3")
 
+# The stock Molex footprint origin is 4.26 mm behind its PCB slot stop.
+# SD-73251-115 B3 and the 73251-1153 product record cover the 1.6 mm board.
+# At 270 degrees, local -X faces the rear and the full lands start exactly
+# at the board edge. The body face at -4.76 mm is not the slot stop.
+REAR_EDGE_Y_MM = 20.0
+SMA_ORIGIN_FROM_EDGE_MM = 4.26
+SMA_ORIGIN_Y_MM = REAR_EDGE_Y_MM + SMA_ORIGIN_FROM_EDGE_MM
+
 
 def grid(refs, xs, ys, rotation=0.0):
     positions = [(x, y, rotation) for y in ys for x in xs]
@@ -47,25 +55,25 @@ ANCHORS = {
     "C5": (87.5, 77.0, 0.0),
 
     # Rear-edge RF launches and short 50-ohm chains.
-    "J241": (43.0, 20.0, 270.0),
-    "J251": (112.0, 20.0, 270.0),
+    "J241": (43.0, SMA_ORIGIN_Y_MM, 270.0),
+    "J251": (108.0, SMA_ORIGIN_Y_MM, 270.0),
     "J240": (55.5, 28.0, 0.0),
     "J250": (122.0, 28.0, 0.0),
-    "U240": (45.5, 29.5, 0.0),
-    "U250": (106.5, 29.5, 0.0),
+    "U240": (45.5, 30.2, 0.0),
+    "U250": (106.5, 30.2, 0.0),
     "FL240": (35.0, 31.5, 0.0),
     "FL250": (96.0, 31.5, 0.0),
     "C243": (49.5, 35.5, 0.0),
     "C244": (50.0, 32.5, 0.0),
-    "C245": (39.0, 25.5, 0.0),
-    "C253": (113.5, 26.5, 0.0),
+    "C245": (39.75, 28.5, 90.0),
+    "C253": (107.0, 34.25, 0.0),
     "C254": (111.0, 32.5, 0.0),
     "C255": (100.0, 25.5, 0.0),
     "C270": (40.25, 31.5, 0.0),
-    "C271": (44.5, 25.0, 90.0),
+    "C271": (41.625, 28.625, 90.0),
     "C272": (50.5, 28.0, 0.0),
     "C273": (101.25, 31.5, 0.0),
-    "C274": (109.5, 25.0, 90.0),
+    "C274": (102.375, 28.625, 90.0),
     "C275": (113.5, 28.0, 0.0),
 
     # The two castellated modules face their RF pins toward the rear filters.
@@ -153,6 +161,8 @@ ANCHORS.update({
 
 def flip_footprint_to_back(board_path: Path, ref: str) -> None:
     script = """
+import wx
+app = wx.App(False)
 import pcbnew
 import sys
 
@@ -164,7 +174,7 @@ if not footprint.IsFlipped():
 pcbnew.SaveBoard(board_path, board)
 """
     subprocess.run(
-        [str(KICAD_PYTHON), "-c", script, str(board_path), ref],
+        [str(KICAD_PYTHON), "-c", script, str(board_path), ref, "-ApplePersistenceIgnoreState", "YES"],
         cwd=ROOT,
         check=True,
     )

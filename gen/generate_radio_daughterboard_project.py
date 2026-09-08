@@ -1,5 +1,6 @@
 import os
 import shutil
+from sync_main_pcb_from_netlist import iter_blocks
 
 import build_ducktop2
 from build_ducktop2 import (
@@ -15,6 +16,7 @@ import generate_gnss_daughterboard_sheet as gnss
 import generate_ham_radio_sheet as ham
 import generate_radio_audio_codec_sheet as codec
 import generate_radio_daughterboard_core_sheet as core
+from apply_bom_radio_daughterboard import stamp_sheet_identities
 
 
 BOARD_DIR = os.path.join(PROJDIR, "radio_daughterboard")
@@ -37,7 +39,7 @@ def generated_hier_nets(sheet):
 
 def write_generated_sheet(context, filename, builder, page_number):
     with uuid_scope(f"radio_daughterboard:{context}"):
-        sheet = builder()
+        sheet = stamp_sheet_identities(builder())
         text = sheet.render(
             stable_uuid(f"radio_daughterboard:{context}:self"),
             page_number=page_number,
@@ -61,12 +63,36 @@ def write_library_tables():
 def write_project_file():
     source = os.path.join(PROJDIR, "ducktop2.kicad_pro")
     destination = os.path.join(BOARD_DIR, f"{PROJECT_NAME}.kicad_pro")
-    shutil.copyfile(source, destination)
+    if not os.path.exists(destination):
+        shutil.copyfile(source, destination)
 
 
-def main():
-    # The radio daughterboard BOM is patched by apply_bom_radio_daughterboard.py;
-    # keep this build from stamping main-board catalog parts onto its passives.
+def write_design_rules():
+    source = os.path.join(PROJDIR, "gen", "radio_sma_edge.kicad_dru")
+    destination = os.path.join(BOARD_DIR, f"{PROJECT_NAME}.kicad_dru")
+    with open(source, encoding="utf-8") as handle:
+        rule = handle.read()
+    existing = ""
+    if os.path.exists(destination):
+        with open(destination, encoding="utf-8") as handle:
+            existing = handle.read()
+    name = '(rule "radio Molex 73251-1153 edge-launch SMD lands"'
+    current = iter_blocks(existing, name)
+    replacement = iter_blocks(rule, name)[0][2]
+    if len(current) > 1:
+        raise ValueError("duplicate radio sma edge rules")
+    if current:
+        start, end, _ = current[0]
+        result = existing[:start] + replacement + existing[end:]
+    else:
+        result = existing.rstrip() + "\n\n" + rule.split("(version 1)", 1)[1] if existing else rule
+    with open(destination, "w", encoding="utf-8") as handle:
+        handle.write(result)
+
+
+def _generate_project():
+    # Radio refs overlap main-board refs. Each sheet stamps and validates the
+    # radio catalog before rendering, instead of taking main-board parts.
     build_ducktop2.PROCUREMENT_STAMP = False
     os.makedirs(BOARD_DIR, exist_ok=True)
 
@@ -185,7 +211,16 @@ def main():
         handle.write(root_text)
 
     write_project_file()
+    write_design_rules()
     write_library_tables()
+
+
+def main():
+    previous = build_ducktop2.PROCUREMENT_STAMP
+    try:
+        _generate_project()
+    finally:
+        build_ducktop2.PROCUREMENT_STAMP = previous
 
 
 if __name__ == "__main__":

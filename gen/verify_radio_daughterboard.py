@@ -11,6 +11,8 @@ import tempfile
 from pathlib import Path
 
 import sync_main_pcb_from_netlist as sync
+from part_identity import identity_errors
+from generate_radio_daughterboard_pcb import SMA_ORIGIN_Y_MM, KICAD_PYTHON
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,6 +47,18 @@ def net(components, ref: str, pin: str | int) -> str | None:
 
 def prop(components, ref: str, name: str) -> str | None:
     return component(components, ref).properties.get(name)
+
+
+def check_procurement(components):
+    for ref, comp in components.items():
+        if "exclude_from_bom" in comp.properties or "dnp" in comp.properties:
+            continue
+        mpn = comp.properties.get("MPN")
+        if not mpn or not comp.properties.get("Manufacturer"):
+            fail(f"{ref}: missing populated radio procurement identity")
+        errors = identity_errors(comp.value, comp.footprint, mpn)
+        if errors:
+            fail(f"{ref} ({mpn}): " + "; ".join(errors))
 
 
 def expect_value(components, ref: str, prefix: str) -> None:
@@ -229,11 +243,17 @@ def check_board(components, temp_dir: Path) -> tuple[int, int]:
         fail("radio daughterboard J1 must be flipped to B.Cu to mate with mainboard J2300")
     for ref in ("J241", "J251"):
         _x, y, rotation = sync.at_tuple(footprints[ref].text)
-        if abs(y - 20.0) > 0.01 or abs((rotation % 360.0) - 270.0) > 0.01:
+        if abs(y - SMA_ORIGIN_Y_MM) > 0.001 or abs((rotation % 360.0) - 270.0) > 0.01:
             fail(
-                f"{ref} SMA must face the radio-board rear edge; "
+                f"{ref} SMA must seat at the rear edge using its footprint offset; "
                 f"got y={y}, rotation={rotation % 360.0}"
             )
+
+    subprocess.run(
+        [str(KICAD_PYTHON), str(ROOT / "gen" / "check_radio_sma_geometry.py"),
+         str(BOARD), "-ApplePersistenceIgnoreState", "YES"],
+        cwd=ROOT, check=True, stdout=subprocess.PIPE, text=True,
+    )
 
     drc_path = temp_dir / "radio_drc.json"
     subprocess.run(
@@ -243,17 +263,11 @@ def check_board(components, temp_dir: Path) -> tuple[int, int]:
     )
     report = json.loads(drc_path.read_text(encoding="utf-8"))
     violations = report.get("violations", [])
-    allowed_types = {"copper_edge_clearance", "silk_over_copper", "silk_overlap", "silk_edge_clearance"}
+    allowed_types = {"silk_over_copper", "silk_overlap", "silk_edge_clearance"}
     unexpected = [item for item in violations if item.get("type") not in allowed_types]
     if unexpected:
         kinds = sorted({item.get("type", "unknown") for item in unexpected})
         fail(f"radio daughterboard has unexpected DRC classes: {kinds}")
-    for item in violations:
-        if item.get("type") != "copper_edge_clearance":
-            continue
-        descriptions = " ".join(child.get("description", "") for child in item.get("items", []))
-        if not re.search(r"\bJ(?:241|251)\b", descriptions):
-            fail(f"unexpected copper-to-edge finding outside edge-launch SMA connectors: {descriptions}")
     return len(violations), len(report.get("unconnected_items", []))
 
 
@@ -264,6 +278,7 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="ducktop2_radio_verify_") as temp:
         temp_dir = Path(temp)
         components, warning_count = export_and_parse(temp_dir)
+        check_procurement(components)
         check_connector_and_supply(components)
         check_radio_controls(components)
         check_gnss(components)

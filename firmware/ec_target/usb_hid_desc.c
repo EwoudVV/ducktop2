@@ -21,15 +21,15 @@ const uint8_t usb_hid_device_descriptor[18] = {
     0x01u,                  /* bNumConfigurations */
 };
 
-const uint8_t usb_hid_config_descriptor[59] = {
+const uint8_t usb_hid_config_descriptor[84] = {
     /* Configuration descriptor */
     9u, USB_DT_CONFIG,
-    59u, 0x00u,             /* wTotalLength */
-    0x02u,                  /* bNumInterfaces */
+    84u, 0x00u,             /* wTotalLength */
+    0x03u,                  /* bNumInterfaces */
     0x01u,                  /* bConfigurationValue */
     0x00u,                  /* iConfiguration */
-    0x80u,                  /* bmAttributes: bus-powered */
-    50u,                    /* bMaxPower (100 mA) */
+    0xc0u,                  /* self-powered from the always-on rail */
+    0u,                     /* no VBUS load allocated to this function */
 
     /* Interface 0: boot keyboard */
     9u, USB_DT_INTERFACE,
@@ -80,6 +80,16 @@ const uint8_t usb_hid_config_descriptor[59] = {
     USB_EP_ATTR_INTERRUPT,
     USB_HID_REPORT_SIZE, 0x00u,
     USB_HID_BINTERVAL,
+    /* Interface 2: status input and control feature reports, no report IDs. */
+    9u, USB_DT_INTERFACE, 2u, 0u, 1u, USB_CLASS_HID, 0u, 0u, 0u,
+    9u, USB_DT_HID, 0x11u, 0x01u, 0u, 1u, USB_DT_HID_REPORT, 25u, 0u,
+    7u, USB_DT_ENDPOINT, USB_HID_STATUS_EP, USB_EP_ATTR_INTERRUPT, 64u, 0u, 20u,
+};
+
+const uint8_t usb_hid_status_report_descriptor[25] = {
+    0x06, 0x00, 0xff, 0x09, 0x01, 0xa1, 0x01,
+    0x15, 0x00, 0x26, 0xff, 0x00, 0x75, 0x08, 0x95, 0x40,
+    0x09, 0x01, 0x81, 0x02, 0x09, 0x02, 0xb1, 0x02, 0xc0
 };
 
 const uint8_t usb_hid_keyboard_report_descriptor[63] = {
@@ -157,14 +167,13 @@ const uint8_t usb_hid_string_serial[28] = {
     '1', 0x00u,
 };
 
-uint32_t usb_hid_desc_check(void)
+uint32_t usb_hid_desc_check_buffer(const uint8_t *config, uint32_t size)
 {
-    const uint8_t *config = usb_hid_config_descriptor;
-    if (config[0] != 9u || config[1] != USB_DT_CONFIG) {
-        return 0u;
+    if (!config || size < 9u || config[0] != 9u || config[1] != USB_DT_CONFIG) {
+        return 1u;
     }
     uint32_t total = (uint32_t)config[2] | ((uint32_t)config[3] << 8u);
-    if (total != USB_HID_CONFIG_TOTAL_LENGTH || total > sizeof(usb_hid_config_descriptor)) {
+    if (total != USB_HID_CONFIG_TOTAL_LENGTH || total != size) {
         return 2u;
     }
     uint32_t offset = 9u;   /* skip configuration header */
@@ -172,6 +181,7 @@ uint32_t usb_hid_desc_check(void)
     uint32_t hid_class = 0u;
     uint32_t endpoints = 0u;
     while (offset < total) {
+        if (total - offset < 2u) return offset;
         uint8_t len = config[offset];
         uint8_t type = config[offset + 1u];
         if (len < 2u || offset + len > total) {
@@ -203,63 +213,41 @@ uint32_t usb_hid_desc_check(void)
         }
         offset += len;
     }
-    if (offset != total || interfaces != 2u || hid_class != 2u || endpoints != 2u) {
+    if (offset != total || interfaces != 3u || hid_class != 3u || endpoints != 3u) {
         return offset;
     }
     return 0u;
 }
 
-/* Item payload sizes as written by every shipped HID descriptor (the size
- * nibble of Usage/Input/etc. items does not match the real byte layout).
- * Only the items used by the two report descriptors are needed. */
-static uint8_t hid_item_size(uint8_t b)
+uint32_t usb_hid_desc_check(void)
 {
-    switch (b) {
-    case 0x05u: case 0x09u: case 0x19u: case 0x29u:
-    case 0x15u: case 0x25u: case 0x75u: case 0x95u:
-    case 0x81u: case 0x91u: case 0xA1u:
-        return 1u;
-    case 0x26u: case 0x2Au:
-        return 2u;
-    case 0xC0u:
-        return 0u;
-    default:
-        return 0u;
-    }
+    return usb_hid_desc_check_buffer(usb_hid_config_descriptor, sizeof(usb_hid_config_descriptor));
 }
 
+/* HID 1.11 short-item decoding. Constant input fields occupy wire bits;
+ * Report Size and Count are globals and persist across main items. */
 uint32_t usb_hid_report_input_size(const uint8_t *desc, uint32_t len)
 {
-    uint32_t input_bits = 0u;
-    uint32_t report_size = 0u;
-    uint32_t report_count = 0u;
-    uint32_t offset = 0u;
-    while (offset < len) {
-        uint8_t b = desc[offset];
-        uint8_t size = hid_item_size(b);
-        uint32_t value = 0u;
-        uint32_t i;
-        for (i = 0u; i < size && offset + 1u + i < len; i++) {
-            value |= (uint32_t)desc[offset + 1u + i] << (8u * i);
+    if (!desc || !len) return 0u;
+    uint32_t bits=0, size=0, count=0, offset=0;
+    while (offset<len) {
+        uint8_t prefix=desc[offset++];
+        if (prefix==0xfeu) return 0u;
+        uint8_t bytes=prefix & 3u;
+        if (bytes==3u) bytes=4u;
+        if (bytes>len-offset) return 0u;
+        uint32_t value=0;
+        for (uint8_t i=0;i<bytes;i++) value|=(uint32_t)desc[offset+i]<<(8u*i);
+        switch (prefix & 0xfcu) {
+        case 0x74u: size=value; break;
+        case 0x94u: count=value; break;
+        case 0x84u: return 0u; /* this transport has no report IDs */
+        case 0x80u:
+            if (!size || !count || size>1024u || count>1024u || bits>65536u-size*count) return 0u;
+            bits+=size*count; break;
+        default: break;
         }
-        if (b == 0x75u) {                   /* Report Size */
-            report_size = value;
-        } else if (b == 0x95u) {            /* Report Count */
-            report_count = value;
-        } else if (b == 0x81u) {            /* Input main item */
-            if ((value & 0x01u) == 0u) {    /* Data (not Const) */
-                input_bits += report_size * report_count;
-            }
-            report_size = 0u;
-            report_count = 0u;
-        } else if (b == 0x91u) {            /* Output main item */
-            report_size = 0u;
-            report_count = 0u;
-        } else if (b == 0xA1u || b == 0xC0u) {
-            report_size = 0u;
-            report_count = 0u;
-        }
-        offset += 1u + size;
+        offset+=bytes;
     }
-    return (input_bits + 7u) / 8u;
+    return (bits+7u)/8u;
 }

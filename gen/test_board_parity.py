@@ -49,6 +49,21 @@ class BoardParity(unittest.TestCase):
         self.assertFalse(result['passed'])
         self.assertEqual(len(result['split_net_names']),1)
 
+    def test_standalone_root_prefix_is_explicit_and_cannot_hide_split_nets(self):
+        actual=board([('1','ROW0')]);wanted=schematic([('1','/ROW0')])
+        self.assertFalse(compare(actual,wanted)['passed'])
+        self.assertTrue(compare(actual,wanted,standalone_root_prefix=True)['passed'])
+        result=compare(board([('1','ROW0'),('2','/ROW0')]),
+                       schematic([('1','/ROW0'),('2','/ROW0')]),standalone_root_prefix=True)
+        self.assertFalse(result['passed'])
+        self.assertEqual(len(result['split_net_names']),1)
+
+    def test_standalone_prefix_cannot_hide_a_schematic_merge(self):
+        result=compare(board([('1','ROW0'),('2','ROW0')]),
+                       schematic([('1','/ROW0'),('2','ROW0')]),standalone_root_prefix=True)
+        self.assertFalse(result['passed'])
+        self.assertEqual(result['merged_net_names'],{'ROW0':['/ROW0','ROW0']})
+
     def test_missing_physical_pin_is_reported(self):
         result=compare(board([('1','GND')]),schematic([('1','GND'),('2','VCC')]))
         self.assertEqual(result['missing_pin_pads'],[{'ref':'R1','pin':'2'}])

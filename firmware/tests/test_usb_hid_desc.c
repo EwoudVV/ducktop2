@@ -34,13 +34,24 @@ static void test_config_descriptor_walk(void)
 {
     uint32_t result = usb_hid_desc_check();
     CHECK(result == 0u);
+    uint8_t invalid[USB_HID_CONFIG_TOTAL_LENGTH];
+    for (unsigned i=0;i<sizeof(invalid);i++) invalid[i]=usb_hid_config_descriptor[i];
+    invalid[0]=0;
+    CHECK(usb_hid_desc_check_buffer(invalid,sizeof(invalid)) != 0u);
+    CHECK(usb_hid_desc_check_buffer(NULL,0u) != 0u);
+    CHECK(usb_hid_desc_check_buffer(usb_hid_config_descriptor,1u) != 0u);
+    invalid[0]=9; invalid[9]=0;
+    CHECK(usb_hid_desc_check_buffer(invalid,sizeof(invalid)) != 0u);
+    CHECK(usb_hid_report_input_size(usb_hid_status_report_descriptor,25u)==64u);
+    const uint8_t truncated[]={0x75};
+    CHECK(usb_hid_report_input_size(truncated,1u)==0u);
 }
 
 static void test_endpoints(void)
 {
     const uint8_t *c = usb_hid_config_descriptor;
     CHECK(((uint16_t)c[2] | ((uint16_t)c[3] << 8u)) == USB_HID_CONFIG_TOTAL_LENGTH);
-    CHECK(c[4] == 2u);   /* two interfaces */
+    CHECK(c[4] == 3u);   /* keyboard, consumer, status */
 
     uint32_t offset = 9u;
     uint32_t hid_count = 0u;
@@ -53,25 +64,27 @@ static void test_endpoints(void)
             uint16_t report_len = (uint16_t)c[offset + 7u] | ((uint16_t)c[offset + 8u] << 8u);
             if (hid_count == 1u) {
                 CHECK(report_len == sizeof(usb_hid_keyboard_report_descriptor));
-            } else {
+            } else if (hid_count == 2u) {
                 CHECK(report_len == sizeof(usb_hid_consumer_report_descriptor));
+            } else {
+                CHECK(report_len == sizeof(usb_hid_status_report_descriptor));
             }
         } else if (type == USB_DT_ENDPOINT) {
             ep_count++;
             CHECK((c[offset + 2u] & 0x80u) != 0u);   /* IN */
             CHECK(c[offset + 3u] == USB_EP_ATTR_INTERRUPT);
-            CHECK(c[offset + 6u] == USB_HID_BINTERVAL);
-            CHECK((uint16_t)c[offset + 4u] == USB_HID_REPORT_SIZE);
+            CHECK(c[offset + 6u] == (ep_count == 3u ? 20u : USB_HID_BINTERVAL));
+            CHECK((uint16_t)c[offset + 4u] == (ep_count == 3u ? 64u : USB_HID_REPORT_SIZE));
             if (ep_count == 1u) {
                 CHECK(c[offset + 2u] == USB_HID_KEYBOARD_EP);
-            } else {
+            } else if (ep_count == 2u) {
                 CHECK(c[offset + 2u] == USB_HID_CONSUMER_EP);
-            }
+            } else { CHECK(c[offset + 2u] == USB_HID_STATUS_EP); }
         }
         offset += len;
     }
-    CHECK(hid_count == 2u);
-    CHECK(ep_count == 2u);
+    CHECK(hid_count == 3u);
+    CHECK(ep_count == 3u);
 }
 
 static void test_report_descriptor_sizes(void)
@@ -79,7 +92,7 @@ static void test_report_descriptor_sizes(void)
     /* Boot keyboard: modifier (8) + 6 keys (48) = 56 data bits = 7 bytes;
      * the reserved byte is a constant item. */
     CHECK(usb_hid_report_input_size(usb_hid_keyboard_report_descriptor,
-                                    sizeof(usb_hid_keyboard_report_descriptor)) == 7u);
+                                    sizeof(usb_hid_keyboard_report_descriptor)) == 8u);
     /* Consumer: 4 x 16-bit usages = 64 bits = 8 bytes. */
     CHECK(usb_hid_report_input_size(usb_hid_consumer_report_descriptor,
                                     sizeof(usb_hid_consumer_report_descriptor)) == 8u);

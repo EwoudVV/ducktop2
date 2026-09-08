@@ -171,7 +171,7 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
             extra_props={"Manufacturer": "JST", "MPN": "SM03B-SRSS-TB"})
 
     # ---------------- U5: TPS54202DDC always-on source -> 3.3V buck ----------------
-    s.text(650, 20, "== U5 TPS54202DDC EC_AON_IN -> MCU_3V3 Buck (3.3V, 2A) ==")
+    s.text(650, 20, "== U5 TPS54202DDC EC_AON_IN -> MCU_3V3 buck; 1.5A continuous design envelope ==")
     s.place("U5", "TPS54202DDC", "TPS54202DDC", 700, 100,
             footprint=FOOTPRINTS["U_SOT23_6"],
             pin_nets={
@@ -192,20 +192,22 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D"})
     s.place("C38", "C", "100n (BOOT cap)", *c4.next(), footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("BUCK_BOOT", "local"), "2": ("BUCK_SW", "local")})
-    s.place("L3", "L", "10uH 20% 3.3A Isat20", *c4.next(), footprint=FOOTPRINTS["L_XGL5030"],
+    s.place("L3", "L", "10uH 20% 6.2A Isat30; 1.5A rail envelope", *c4.next(), footprint=FOOTPRINTS["L_XGL6030"],
             pin_nets={"1": ("BUCK_SW", "local"), "2": ("MCU_3V3", "hier")},
             extra_props={
-                "Manufacturer": "Coilcraft", "MPN": "XGL5030-103MEC",
-                "Datasheet": "https://www.coilcraft.com/getmedia/e64ac115-95f2-45c7-b798-1b3769b91583/xgl5030.pdf",
+                "Manufacturer": "Coilcraft", "MPN": "XGL6030-103MEC",
+                "Datasheet": "https://www.coilcraft.com/getmedia/9bfb2606-51aa-49a6-98ad-d20f3504c8ae/xgl6030.pdf",
             })
-    s.place("R35", "R", "100k 1% (3.3V FB hi)", *c4.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("BUCK_FB", "local")})
-    s.place("R36", "R", "22.1k 1% (3.3V FB lo)", *c4.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BUCK_FB", "local"), "2": ("GND", "local")})
+    s.place("R35", "R", "100k 0.1% 25ppm MCU_3V3 FB hi", *c4.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("BUCK_FB", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD07100KL"})
+    s.place("R36", "R", "22.1k 0.1% 25ppm MCU_3V3 FB lo", *c4.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("BUCK_FB", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0722K1L"})
     for ref in ("C39", "C291"):
-        s.place(ref, "C", "22u 16V X7R MCU_3V3 output", *c4.next(), footprint=FOOTPRINTS["C_10u"],
+        s.place(ref, "C", "22u 25V X7R MCU_3V3 output; TI characterized part", *c4.next(), footprint=FOOTPRINTS["C_1210"],
                 pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")},
-                extra_props={"Manufacturer": "Murata", "MPN": "GRM31CZ71C226ME15L"})
+                extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER71E226KE15L"})
     s.place("C292", "C", "56p C0G TPS54202 feed-forward", *c4.next(), footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("BUCK_FB", "local")})
 
