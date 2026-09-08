@@ -75,9 +75,9 @@ def add_tps26630(s, port, x0, y0, base, gated_hier=False):
             ))
 
     entries = (
-        (base, "887k 0.1% 15V eFuse UV/OV top", raw, uv, "RT0603BRD07887KL", "local", "local"),
-        (base + 1, "27.4k 0.1% 15V eFuse UV/OV middle", uv, ov, "RT0603BRD0727K4L", "local", "local"),
-        (base + 2, "68.1k 0.1% 15V eFuse UV/OV bottom", ov, "GND", "RT0603BRD0768K1L", "local", "local"),
+        (base, "8.87k 0.1% 10ppm 15/20V eFuse UV/OV top", raw, uv, "RT0603BRB078K87L", "local", "local"),
+        (base + 1, "562R 0.1% 10ppm 15/20V eFuse UV/OV middle", uv, ov, "RT0603BRB07562RL", "local", "local"),
+        (base + 2, "511R 0.1% 10ppm 15/20V eFuse UV/OV bottom", ov, "GND", "RT0603BRB07511RL", "local", "local"),
         (base + 3, "6.04k 1% eFuse 2.98A ILIM", ilim, "GND", "RC0603FR-076K04L", "local", "local"),
         (base + 4, "47k eFuse default-off pulldown", shdn, "GND", "RC0603FR-0747KL", "local", "local"),
         (base + 5, "10k path-enable series", path_en, shdn, "RC0603FR-0710KL", "hier", "local"),
@@ -99,7 +99,8 @@ def add_tps26630(s, port, x0, y0, base, gated_hier=False):
 
 
 def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbase, ebase,
-                       usb2_only=False, gated_hier=False):
+                       usb2_only=False, gated_hier=False, pp5v_net=None):
+    pp5v = (pp5v_net, "local") if pp5v_net else ("USB_PORT_5V", "hier")
     raw_vbus = f"PD{port}_VBUS_RAW"
     pphv = f"PD{port}_PPHV"
     ldo3v3 = f"PD{port}_LDO3V3"
@@ -191,7 +192,7 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
                 "26": (gpio_dfp, "local"), "27": ("GND", "local"),
                 "28": (cc1_s, "local"), "29": (cc2_s, "local"), "30": (drain, "local"),
                 "31": ("GND", "local"), "32": (raw_vbus, "hier"),
-                "34": ("USB_PORT_5V", "hier"),
+                "34": pp5v,
                 "36": (gpio_attach, "local"), "37": (gpio_flip, "local"),
                 "38": ("MCU_3V3", "hier"), "39": ("GND", "local"), "40": (drain, "local"),
             }, extra_props=props(
@@ -365,10 +366,10 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
     for index, x in enumerate((20.32, 35.56)):
         s.place(f"C{cbase + 25 + index}", "C_Polarized", "100u 10V PP5V source bulk",
                 x0 + x, y0 + 195.58, footprint="Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D",
-                pin_nets={"1": ("USB_PORT_5V", "hier"), "2": ("GND", "local")},
+                pin_nets={"1": pp5v, "2": ("GND", "local")},
                 extra_props=props("KEMET", "T520D107M010ATE070"))
     capacitor(s, f"C{cbase + 27}", "10u PP5V local ceramic", x0 + 50.8, y0 + 195.58,
-              "USB_PORT_5V", kind="hier", footprint="C_10u", mpn="GRM31CR71A106KA01L")
+              pp5v[0], kind=pp5v[1], footprint="C_10u", mpn="GRM31CR71A106KA01L")
     s.place(f"C{cbase + 28}", "C_Polarized", "68u 25V PPHV sink bulk",
             x0 + 73.66, y0 + 195.58, footprint=FOOTPRINTS["C_100u_25V_poly"],
             pin_nets={"1": (pphv, "local"), "2": ("GND", "local")},
@@ -379,7 +380,7 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
     s.pwrflag(x0 + 327.66, y0 + 187.96, raw_vbus)
     s.pwrflag(x0 + 347.98, y0 + 187.96, pphv)
     s.text(x0, y0 + 213.36,
-           f"{jref}: EEPROM configures DRP prefer-sink, 15V/3A sink, 5V/0.9A source, default Rp, GPIO6 FLIP, GPIO4 DFP, and GPIO7 data-attached.")
+           f"{jref}: hardware accepts 15V/20V PD; use a verified 3A contract and 2.50A IINDPM bootstrap command. Actual current/headroom and EEPROM/profile qualification remain required.")
     s.text(x0, y0 + 220.98,
            "GPIO4 AND GPIO7 qualifies both host USB2 and SuperSpeed. They remain disconnected through reset, detach, and sink-only operation.")
 
@@ -420,12 +421,12 @@ def add_pd_selector(s):
     add_selector_fet(s, "Q15", 205.74, 543.56, "PD1_SEL_GATE", "PD1_SEL_FET_COMMON", "PD1_VBUS_GATED", "local")
     add_selector_fet(s, "Q16", 259.08, 543.56, "PD1_SEL_GATE", "PD1_SEL_FET_COMMON", "USB_PD_SELECTED", "hier")
 
-    resistor(s, "R2140", "1.00M 0.1% 15V UV top", 20.32, 622.3,
+    resistor(s, "R2140", "1.00M 0.1% 25ppm 15/20V UV top", 20.32, 622.3,
              "PD1_VBUS_GATED", "PD1_SEL_UV", mpn="RT0603BRD071ML")
-    resistor(s, "R2141", "19.6k 0.1% 15V window middle", 20.32, 635,
-             "PD1_SEL_UV", "PD1_SEL_OV", mpn="RT0603BRD0719K6L")
-    resistor(s, "R2142", "63.4k 0.1% 15V OV bottom", 20.32, 647.7,
-             "PD1_SEL_OV", "GND", mpn="RT0603BRD0763K4L")
+    resistor(s, "R2141", "35.7k 0.1% 25ppm 15/20V window middle", 20.32, 635,
+             "PD1_SEL_UV", "PD1_SEL_OV", mpn="RT0603BRD0735K7L")
+    resistor(s, "R2142", "47.5k 0.1% 25ppm 15/20V OV bottom", 20.32, 647.7,
+             "PD1_SEL_OV", "GND", mpn="RT0603BRD0747K5L")
     resistor(s, "R2146", "10k PD1 VALID pull-up", 152.4, 622.3,
              "MCU_3V3", "PD1_VALID_N", a_kind="hier", b_kind="hier")
     capacitor(s, "C2140", "100n selector INTVCC", 203.2, 622.3, "PD_SEL_INTVCC")

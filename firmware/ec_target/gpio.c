@@ -8,7 +8,16 @@ void gpio_init_all(void)
                   | RCC_AHB1ENR_GPIOCEN | RCC_AHB1ENR_GPIODEN
                   | RCC_AHB1ENR_GPIOEEN;
 
-    GPIOA->MODER = 0;
+    /* Set inactive output latches before output modes to avoid button pulses. */
+    GPIOA->ODR = (1u << 0) | (1u << 5) | (1u << 8) | (1u << 15);
+    GPIOB->ODR = 1u << 15;
+    GPIOC->ODR = (1u << 8) | (1u << 9) | (1u << 10);
+    GPIOD->ODR = 0u;
+    GPIOE->ODR = 0u;
+    /* Preserve SWD on PA13/PA14 through normal startup. */
+    GPIOA->MODER = (2u << 26) | (2u << 28);
+    GPIOA->PUPDR = (1u << 26) | (2u << 28);
+    GPIOA->AFR[1] &= ~((0xFu << 20) | (0xFu << 24));
     GPIOB->MODER = 0;
     GPIOC->MODER = 0;
     GPIOD->MODER = 0;
@@ -51,19 +60,19 @@ void gpio_init_all(void)
 
     /* PA9: GNSS_UART_TX - AF7 (USART1) */
     GPIOA->MODER   |= GPIO_MODER_AF << (9 * 2);
-    GPIOA->AFRH     = (GPIOA->AFRH & ~(0xFu << 4)) | (GPIO_AF7 << 4);
+    GPIOA->AFR[1]     = (GPIOA->AFR[1] & ~(0xFu << 4)) | (GPIO_AF7 << 4);
 
     /* PA10: GNSS_UART_RX - AF7 (USART1) */
     GPIOA->MODER   |= GPIO_MODER_AF << (10 * 2);
-    GPIOA->AFRH     = (GPIOA->AFRH & ~(0xFu << 8)) | (GPIO_AF7 << 8);
+    GPIOA->AFR[1]     = (GPIOA->AFR[1] & ~(0xFu << 8)) | (GPIO_AF7 << 8);
 
     /* PA11: MCU_USB_DN - AF10 (OTG_FS) */
     GPIOA->MODER   |= GPIO_MODER_AF << (11 * 2);
-    GPIOA->AFRH     = (GPIOA->AFRH & ~(0xFu << 12)) | (GPIO_AF10 << 12);
+    GPIOA->AFR[1]     = (GPIOA->AFR[1] & ~(0xFu << 12)) | (GPIO_AF10 << 12);
 
     /* PA12: MCU_USB_DP - AF10 (OTG_FS) */
     GPIOA->MODER   |= GPIO_MODER_AF << (12 * 2);
-    GPIOA->AFRH     = (GPIOA->AFRH & ~(0xFu << 16)) | (GPIO_AF10 << 16);
+    GPIOA->AFR[1]     = (GPIOA->AFR[1] & ~(0xFu << 16)) | (GPIO_AF10 << 16);
 
     /* PA13: SWDIO - leave as default (AF0, pull-up) */
 
@@ -97,14 +106,14 @@ void gpio_init_all(void)
     GPIOB->OTYPER  |= GPIO_OTYPER_OD << 6;
     GPIOB->PUPDR   |= GPIO_PUPDR_PU << (6 * 2);
     GPIOB->OSPEEDR |= GPIO_OSPEEDR_HIGH << (6 * 2);
-    GPIOB->AFRL     = (GPIOB->AFRL & ~(0xFu << 24)) | (GPIO_AF4 << 24);
+    GPIOB->AFR[0]     = (GPIOB->AFR[0] & ~(0xFu << 24)) | (GPIO_AF4 << 24);
 
     /* PB7: I2C1_SDA - AF4 */
     GPIOB->MODER   |= GPIO_MODER_AF << (7 * 2);
     GPIOB->OTYPER  |= GPIO_OTYPER_OD << 7;
     GPIOB->PUPDR   |= GPIO_PUPDR_PU << (7 * 2);
     GPIOB->OSPEEDR |= GPIO_OSPEEDR_HIGH << (7 * 2);
-    GPIOB->AFRL     = (GPIOB->AFRL & ~(0xFu << 28)) | (GPIO_AF4 << 28);
+    GPIOB->AFR[0]     = (GPIOB->AFR[0] & ~(0xFu << 28)) | (GPIO_AF4 << 28);
 
     /* PB8: GNSS_EXTINT - Input, pull-down */
     GPIOB->PUPDR   |= GPIO_PUPDR_PD << (8 * 2);
@@ -114,11 +123,11 @@ void gpio_init_all(void)
 
     /* PB10: RADIO_VHF_UART_TX - AF7 (USART3) */
     GPIOB->MODER   |= GPIO_MODER_AF << (10 * 2);
-    GPIOB->AFRH     = (GPIOB->AFRH & ~(0xFu << 8)) | (GPIO_AF7 << 8);
+    GPIOB->AFR[1]     = (GPIOB->AFR[1] & ~(0xFu << 8)) | (GPIO_AF7 << 8);
 
     /* PB11: RADIO_VHF_UART_RX - AF7 (USART3) */
     GPIOB->MODER   |= GPIO_MODER_AF << (11 * 2);
-    GPIOB->AFRH     = (GPIOB->AFRH & ~(0xFu << 12)) | (GPIO_AF7 << 12);
+    GPIOB->AFR[1]     = (GPIOB->AFR[1] & ~(0xFu << 12)) | (GPIO_AF7 << 12);
 
     /* PB12: SERVICE_MUX_RESET_REQ_N - Output, push-pull, low (reset held) */
     GPIOB->MODER   |= GPIO_MODER_OUTPUT << (12 * 2);
@@ -156,11 +165,11 @@ void gpio_init_all(void)
 
     /* PC6: RADIO_UHF_UART_TX - AF8 (USART6) */
     GPIOC->MODER   |= GPIO_MODER_AF << (6 * 2);
-    GPIOC->AFRL     = (GPIOC->AFRL & ~(0xFu << 24)) | (GPIO_AF8 << 24);
+    GPIOC->AFR[0]     = (GPIOC->AFR[0] & ~(0xFu << 24)) | (GPIO_AF8 << 24);
 
     /* PC7: RADIO_UHF_UART_RX - AF8 (USART6) */
     GPIOC->MODER   |= GPIO_MODER_AF << (7 * 2);
-    GPIOC->AFRL     = (GPIOC->AFRL & ~(0xFu << 28)) | (GPIO_AF8 << 28);
+    GPIOC->AFR[0]     = (GPIOC->AFR[0] & ~(0xFu << 28)) | (GPIO_AF8 << 28);
 
     /* PC8: RADIO_UHF_PTT_N - Output, push-pull, high (inactive) */
     GPIOC->MODER   |= GPIO_MODER_OUTPUT << (8 * 2);
@@ -205,7 +214,7 @@ void gpio_init_all(void)
 
     /* PE9: FAN_PWM - AF1 (TIM1_CH1) */
     GPIOE->MODER   |= GPIO_MODER_AF << (9 * 2);
-    GPIOE->AFRH     = (GPIOE->AFRH & ~(0xFu << 4)) | (GPIO_AF1 << 4);
+    GPIOE->AFR[1]     = (GPIOE->AFR[1] & ~(0xFu << 4)) | (GPIO_AF1 << 4);
 
     /* PE10: LID_CLOSED_N - Input, pull-up */
     GPIOE->PUPDR   |= GPIO_PUPDR_PU << (10 * 2);
@@ -225,6 +234,9 @@ void gpio_init_all(void)
     /* PE15: MU_12V_PG - Input, pull-down */
     GPIOE->PUPDR   |= GPIO_PUPDR_PD << (15 * 2);
 }
+
+bool gpio_get_lid_open(void) { return (GPIOE->IDR & (1u << 10)) != 0u; }
+bool gpio_get_power_button_pressed(void) { return (GPIOA->IDR & 1u) == 0u; }
 
 void gpio_set_pd_path_enable_a(bool enable)
 {
@@ -505,7 +517,7 @@ static void gpio_fan_pwm_init(void)
     /* PE9 = TIM1_CH1 (AF1); high speed for 25 kHz gate drive into Q200. */
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN;
     GPIOE->MODER = (GPIOE->MODER & ~(3u << 18)) | (GPIO_MODER_AF << 18);
-    GPIOE->AFRH = (GPIOE->AFRH & ~(0xFu << 4)) | (GPIO_AF1 << 4);
+    GPIOE->AFR[1] = (GPIOE->AFR[1] & ~(0xFu << 4)) | (GPIO_AF1 << 4);
     GPIOE->OSPEEDR = (GPIOE->OSPEEDR & ~(3u << 18)) | (GPIO_OSPEEDR_HIGH << 18);
     GPIOE->OTYPER &= ~(1u << 9); /* push-pull, not open-drain */
 

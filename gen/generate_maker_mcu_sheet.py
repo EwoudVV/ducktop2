@@ -10,8 +10,8 @@ def place_r(s, ref, value, x, y, net1, net2, *, size="0402", dnp=False,
 
 
 def place_c(s, ref, value, x, y, net1, net2=("GND", "local"), *, size="0402",
-            extra_props=None):
-    footprint = {
+            extra_props=None, footprint=None):
+    footprint = footprint or {
         "0402": FOOTPRINTS["C_0402"],
         "0603": FOOTPRINTS["C_100n"],
         "0805": FOOTPRINTS["C_0805"],
@@ -184,8 +184,10 @@ def build(sheet_symbol_uuid):
             footprint=FOOTPRINTS["L_RP2350"],
             pin_nets={"1": ("MAKER_1V1", "local"), "2": ("MAKER_VREG_LX", "local")},
             extra_props={"Manufacturer": "Abracon", "MPN": "AOTA-B201610S3R3-101-T"})
-    place_c(s, "C911", "4.7u VREG input", 220, 235, ("MAKER_3V3_CORE", "local"))
-    place_c(s, "C912", "4.7u 1V1 output", 260, 235, ("MAKER_1V1", "local"))
+    place_c(s, "C911", "4.7u VREG input", 220, 235, ("MAKER_3V3_CORE", "local"),
+            footprint="ducktop2:C_0402_RP2350_Regulator")
+    place_c(s, "C912", "4.7u 1V1 output", 260, 235, ("MAKER_1V1", "local"),
+            footprint="ducktop2:C_0402_RP2350_Regulator")
     place_r(s, "R907", "33R VREG_AVDD filter", 310, 215,
             ("MAKER_3V3_CORE", "local"), ("MAKER_VREG_AVDD", "local"))
     place_c(s, "C913", "4.7u VREG_AVDD", 310, 235, ("MAKER_VREG_AVDD", "local"))
@@ -462,7 +464,7 @@ def build(sheet_symbol_uuid):
     s.pwrflag(440, 250, "MAKER_ADC_AVDD")
 
     s.text(20, 449.58, "LAYOUT-CRITICAL NOTES:")
-    s.text(20, 457.2, "Place L901/C911/C912/C913/R907 exactly around U901 per Raspberry Pi RP2350 guidance; keep LX copper tiny.")
+    s.text(20, 457.2, "L901/C911/C912/C913/R907 follow the RP2350 reference placement. L901 pin 1 is the marked output end; keep LX on top and all copper clear beneath it.")
     s.text(20, 464.82, "Place R900/R901 at U901 USB pins and U906 in the short Mu path; route both pairs as 90-ohm differential over uninterrupted ground.")
     s.text(20, 472.44, "Keep Y900/R906/C918/C919 tight to XIN/XOUT. Keep QSPI traces short; place C902/C903 at U902.")
     s.text(20, 480.06, "No Pico module, Micro-USB receptacle, or internal USB cable is used. The integrated RP2350 is the USB device.")
@@ -472,4 +474,6 @@ def build(sheet_symbol_uuid):
     s.text(20, 510.54, "U922/Q903 hold all 30 signals disconnected until MAKER_3V3_CORE is valid. Header power rails separately default OFF and are current-limited.")
     s.text(20, 518.16, "U906 defaults disconnected and connects only after physical INTERNAL_USB_VBUS is valid. The maker cannot wake S3; firmware reinitializes USB when MAKER_HOST_ACTIVE_N falls.")
 
+    place_c(s, "C935", "4.7u DVDD far-side bulk", 385, 240.4, ("MAKER_1V1", "local"),
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM155R60J475ME47D"})
     return s

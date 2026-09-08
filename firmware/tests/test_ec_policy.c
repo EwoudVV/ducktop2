@@ -865,7 +865,53 @@ static void test_deterministic_transition_properties(void) {
   }
 }
 
+static void test_external_boot_has_separate_expiring_authorization(void) {
+  ec_policy_config_t config=ec_policy_default_config();
+  ec_controller_t controller; ec_inputs_t inputs;
+  ec_controller_init(&controller,&config,0); set_nominal_inputs(&inputs);
+  inputs.estimated_mu_edp_power_valid=false;
+  inputs.external_boot_authorized=true;
+  inputs.external_boot_budget_mw=15000;
+  inputs.request_mu_12v=true;
+  activate_pd(&controller,&inputs,EC_SOURCE_PD1,3000,0);
+  ec_controller_step(&controller,&inputs,23);
+  CHECK(controller.outputs.mu_12v_enable);
+  CHECK(controller.outputs.mu_boot_authorized);
+  CHECK(!controller.outputs.power_policy_confirmed);
+  inputs.mu_12v_pg=true;
+  ec_controller_step(&controller,&inputs,24);
+  CHECK(controller.fault==EC_FAULT_NONE);
+  ec_controller_step(&controller,&inputs,120024);
+  CHECK(controller.fault==EC_FAULT_POWER_POLICY_APPLY_TIMEOUT);
+  CHECK(outputs_are_passive(&controller.outputs));
+
+  ec_controller_init(&controller,&config,0); set_nominal_inputs(&inputs);
+  inputs.estimated_mu_edp_power_valid=false;
+  inputs.request_mu_12v=true;
+  inputs.pack_boot_authorized=true;
+  inputs.pack_boot_budget_mw=15000;
+  activate_pack(&controller,&inputs,50000,0);
+  ec_controller_step(&controller,&inputs,21);
+  CHECK(controller.outputs.mu_12v_enable && controller.outputs.mu_boot_authorized);
+  CHECK(!controller.outputs.power_policy_confirmed);
+  ec_controller_init(&controller,&config,0); set_nominal_inputs(&inputs);
+  inputs.charger_config_valid=false;
+  set_pd_ready(&inputs,EC_SOURCE_PD1,3000,false);
+  CHECK(ec_controller_request_source(&controller,EC_SOURCE_PD1,0));
+  ec_controller_step(&controller,&inputs,0);
+  ec_controller_step(&controller,&inputs,20);
+  CHECK(controller.outputs.pd_path_enable[0]);
+  inputs.source[EC_SOURCE_PD1].path_good=true; inputs.all_pd_paths_off=false;
+  ec_controller_step(&controller,&inputs,40);
+  CHECK(controller.outputs.charger_iindpm_ma==0);
+  CHECK(controller.fault==EC_FAULT_NONE);
+  inputs.charger_config_valid=true;
+  ec_controller_step(&controller,&inputs,100);
+  CHECK(controller.outputs.charger_iindpm_ma==2750);
+}
+
 int main(void) {
+  test_external_boot_has_separate_expiring_authorization();
   test_boot_defaults();
   test_iindpm_math();
   test_reset_and_service_interlocks();

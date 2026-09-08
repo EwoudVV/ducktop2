@@ -24,7 +24,8 @@ typedef enum {
   MAKER_FAULT_WATCHDOG,
   MAKER_FAULT_USER_POWER,
   MAKER_FAULT_INTERLOCK,
-  MAKER_FAULT_IO_AUTHORIZATION
+  MAKER_FAULT_IO_AUTHORIZATION,
+  MAKER_FAULT_TRANSACTION
 } maker_fault_t;
 
 typedef struct {
@@ -57,6 +58,7 @@ bool maker_controller_request_io_mode(maker_controller_t *controller,
 void maker_controller_step(maker_controller_t *controller,
                            const maker_inputs_t *inputs);
 void maker_controller_watchdog_trip(maker_controller_t *controller);
+void maker_controller_transaction_trip(maker_controller_t *controller);
 bool maker_controller_clear_fault(maker_controller_t *controller,
                                   bool root_cause_removed);
 const maker_outputs_t *

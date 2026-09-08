@@ -43,32 +43,99 @@ def usb2_cc_esd(s, ref, x, y, dp, dm, cc1, cc2):
             }, extra_props=props("Texas Instruments", "TPD4E05U06DQAR"))
 
 
-def add_hub_supplies(s):
-    s.text(20, 45.72, "== Dedicated 6A-class port rail and 1.15V hub-core rail ==")
-    s.place("U1703", "TPS56637", "TPS56637RPAR VSYS to USB_PORT_5V 5.06V nominal", 63.5, 73.66,
-            footprint=FOOTPRINTS["TPS56637"], pin_nets={
-                "1": ("USB5_EN", "local"), "2": ("USB5_FB", "local"),
-                "3": ("GND", "local"), "4": ("USB5_PG", "local"), "5": ("", "nc"),
-                "6": ("USB5_SW", "local"), "7": ("USB5_BOOT", "local"),
-                "8": ("VSYS", "hier"), "9": ("GND", "local"), "10": ("GND", "local"),
-            }, extra_props=props("Texas Instruments", "TPS56637RPAR"))
-    s.place("L1701", "L", "3.3uH >=9A USB port buck", 121.92, 73.66,
-            footprint=FOOTPRINTS["L_XAL7070"],
-            pin_nets={"1": ("USB5_SW", "local"), "2": ("USB_PORT_5V", "hier")},
-            extra_props=props("Coilcraft", "XAL7070-332MEC"))
-    resistor(s, "R1710", "169k 1% USB5 EN top", 38.1, 106.68, "VSYS", "USB5_EN", a_kind="hier", mpn="RC0603FR-07169KL")
-    resistor(s, "R1711", "36.1k 1% USB5 EN bottom", 63.5, 106.68, "USB5_EN", "GND", mpn="RC0603FR-0736K1L")
-    resistor(s, "R1712", "74.3k 0.1% USB5 FB top", 101.6, 106.68, "USB_PORT_5V", "USB5_FB", a_kind="hier", mpn="RT0603BRD0743KL")
-    resistor(s, "R1713", "10.0k 0.1% USB5 FB bottom", 127, 106.68, "USB5_FB", "GND", mpn="RT0603BRD0710KL")
-    resistor(s, "R1714", "100k USB5 PG pull-up", 152.4, 106.68, "SYS_3V3", "USB5_PG", a_kind="hier", mpn="RC0603FR-07100KL")
-    s.place("C1710", "C", "100n USB5 bootstrap", 101.6, 91.44,
-            footprint=FOOTPRINTS["C_100n"], pin_nets={"1": ("USB5_BOOT", "local"), "2": ("USB5_SW", "local")},
-            extra_props=props("Murata", "GRM188R71H104KA93D"))
+def add_usb5_lm706a0(s):
+    # external compensation covers the local and remote PP5V reservoirs.
+    # 6.5A includes VBUS and VCONN; source/harness admission remains separate.
+    pin_nets = {
+        **{str(n): ("VSYS", "hier") for n in (1, 2, 3, 27, 28, 29)},
+        "4": ("USB5_BOOT", "local"), "5": ("USB5_SW_BOOT", "local"),
+        "6": ("GND", "local"), "7": ("USB5_PG", "local"),
+        "8": ("GND", "local"), "9": ("USB5_EN", "local"), "10": ("", "nc"),
+        "11": ("USB5_PRE_SENSE", "local"), "12": ("USB_PORT_5V", "hier"),
+        "13": ("USB5_CONFIG", "local"), "14": ("USB5_RT", "local"),
+        "15": ("USB5_COMP", "local"), "16": ("USB5_FB", "local"),
+        "17": ("GND", "local"), "18": ("USB5_VDDA", "local"),
+        "19": ("USB5_VCC", "local"),
+        **{str(n): ("USB5_SW", "local") for n in (20, 21, 22)},
+        **{str(n): ("GND", "local") for n in (23, 24, 25, 26, 30)},
+    }
+    s.place("U1703", "LM706A0", "LM706A0RRXR USB5 5.161V; 6.5A design envelope", 63.5, 73.66,
+            footprint=FOOTPRINTS["LM706A0"], pin_nets=pin_nets,
+            extra_props=props("Texas Instruments", "LM706A0RRXR", "https://www.ti.com/lit/gpn/LM706A0",
+                              Compensation="external;3.3k+220n;2.2nHF;two330uF_local",
+                              Startup="ports_off_until_rails_settle",
+                              Layout="separate_SW4_bootstrap_return;Kelvin_ISNS+_and_VOUT"))
+    s.place("L1701", "L", "8.2uH 16.9A Isat30 / 9.9A Irms20", 121.92, 73.66,
+            footprint=FOOTPRINTS["L_XGL1060"],
+            pin_nets={"1": ("USB5_SW", "local"), "2": ("USB5_PRE_SENSE", "local")},
+            extra_props=props("Coilcraft", "XGL1060-822MEC", "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xgl/xgl1060/xgl1060-822/",
+                              Layout="pad1_is_marked_short_lead_to_SW;6mm_max_height"))
+    for ref,y in (("RS1860",73.66),("RS1861",88.9)):
+        s.place(ref, "R", "10mOhm 1% 1W USB5 sense; parallel pair gives 5mOhm", 152.4, y,
+                footprint=FOOTPRINTS["R_ERJ8CW_10m"],
+                pin_nets={"1": ("USB5_PRE_SENSE", "local"), "2": ("USB_PORT_5V", "hier")},
+                extra_props=props("Panasonic", "ERJ8CWFR010V", "https://industrial.panasonic.com/ww/products/pt/current-sensing-chip-resistors/models/ERJ8CWFR010V",
+                                  Layout="Kelvin_pairs_at_RS1860_inner_pad_edges;power_copper_outside_sense_span;parallel_branch_mismatch_le20uOhm"))
+    resistor(s, "R1710", "100k USB5 hardware-qualified EN top", 38.1, 106.68,
+             "USB5_HW_ENABLE", "USB5_EN", mpn="RC0603FR-07100KL")
+    resistor(s, "R1711", "100k USB5 EN bottom", 63.5, 106.68,
+             "USB5_EN", "GND", mpn="RC0603FR-07100KL")
+    resistor(s, "R1712", "55.6k 0.1% 10ppm USB5 FB top", 101.6, 106.68,
+             "USB_PORT_5V", "USB5_FB", a_kind="hier", mpn="RT0603BRB0755K6L")
+    resistor(s, "R1713", "10.2k 0.1% 10ppm USB5 FB bottom", 127, 106.68,
+             "USB5_FB", "GND", mpn="RT0603BRB0710K2L")
+    resistor(s, "R1714", "100k USB5 PG pull-up", 152.4, 106.68,
+             "SYS_3V3", "USB5_PG", a_kind="hier", mpn="RC0603FR-07100KL")
+    resistor(s, "R1863", "1R USB5 bootstrap damping", 101.6, 91.44,
+             "USB5_BOOT", "USB5_BOOT_C", mpn="RC0603FR-071RL")
+    s.place("C1710", "C", "47n 25V USB5 bootstrap", 127, 91.44,
+            footprint=FOOTPRINTS["C_0402"],
+            pin_nets={"1": ("USB5_BOOT_C", "local"), "2": ("USB5_SW_BOOT", "local")},
+            extra_props=props("Murata", "GRM155R71E473KA88D"))
     for ref, x in (("C1711", 20.32), ("C1712", 33.02)):
-        capacitor(s, ref, "10u 50V USB5 input", x, 121.92, "VSYS", kind="hier", footprint="C_10u", mpn="CGA5L1X7R1H106K160AC")
-    capacitor(s, "C1713", "100n 50V USB5 input HF", 45.72, 121.92, "VSYS", kind="hier")
-    for ref, x in (("C1714", 101.6), ("C1715", 114.3)):
-        capacitor(s, ref, "22u 10V USB5 output", x, 121.92, "USB_PORT_5V", kind="hier", footprint="C_1210", mpn="GRM32ER71A226KE20L")
+        s.place(ref, "C", "10u 50V USB5 input", x, 121.92,
+                footprint=FOOTPRINTS["C_10u"],
+                pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
+                extra_props=props("TDK", "CGA5L1X7R1H106K160AC"))
+    for ref,x in (("C1713",45.72),("C1867",58.42)):
+        capacitor(s, ref, "100n 50V USB5 input HF", x, 121.92, "VSYS", kind="hier")
+    for ref, x in (("C1714", 101.6), ("C1715", 114.3), ("C1868", 127), ("C1869", 139.7)):
+        capacitor(s, ref, "22u 25V USB5 output; TI characterized part", x, 121.92, "USB_PORT_5V", kind="hier",
+                  footprint="C_1210", mpn="GRM32ER71E226KE15L")
+    capacitor(s, "C1860", "22u 25V USB5 VCC; effective minimum 4.7u", 20.32, 144.78,
+              "USB5_VCC", footprint="C_1210", mpn="GRM32ER71E226KE15L")
+    capacitor(s, "C1861", "100n 50V USB5 VDDA", 45.72, 144.78, "USB5_VDDA")
+    resistor(s, "R1860", "49.9k 0.1% 10ppm USB5 RT", 76.2, 144.78,
+             "USB5_RT", "GND", mpn="RT0603BRB0749K9L")
+    resistor(s, "R1861", "29.4k 1% standalone DRSS off", 101.6, 144.78,
+             "USB5_CONFIG", "GND", mpn="RC0603FR-0729K4L")
+    resistor(s, "R1862", "3.3k 1% USB5 COMP", 20.32, 165.1,
+             "USB5_COMP", "USB5_COMP_RC", mpn="RC0603FR-073K3L")
+    s.place("C1862", "C", "220n 50V X7R USB5 COMP", 45.72, 165.1,
+            footprint=FOOTPRINTS["C_100n"],
+            pin_nets={"1": ("USB5_COMP_RC", "local"), "2": ("GND", "local")},
+            extra_props=props("KEMET", "C0603C224K5RACTU"))
+    s.place("C1863", "C", "2.2n 50V C0G USB5 COMP HF", 76.2, 165.1,
+            footprint=FOOTPRINTS["C_100n"],
+            pin_nets={"1": ("USB5_COMP", "local"), "2": ("GND", "local")},
+            extra_props=props("KEMET", "C0603C222J5GACTU"))
+    for ref,x in (("C1864",101.6),("C1865",127)):
+        s.place(ref, "C_Polarized", "330u 10V USB5 local reservoir; 4.3mm max height", x, 165.1,
+                footprint=FOOTPRINTS["C_330u_10V_poly"],
+                pin_nets={"1": ("USB_PORT_5V", "hier"), "2": ("GND", "local")},
+                extra_props=props("KEMET", "T520X337M010ATE010",
+                                  "https://search.kemet.com/download/specsheet/T520X337M010ATE010"))
+    s.place("C1866", "C_Polarized", "DNP 68u 25V input damping option", 152.4, 165.1,
+            footprint=FOOTPRINTS["C_68u_25V_poly"], dnp=True,
+            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
+            extra_props=props("KEMET", "T521V686M025ATE050"))
+    s.text(20.32, 187.96, "USB5: external COMP 3.3k / 220n / 2.2n; include both local reservoirs and remote PP5V banks in the loop model.")
+    s.text(20.32, 195.58, "6.5A includes VBUS and VCONN. Source admission, harness loss, capacitor corners, startup and thermal behavior require qualification.")
+
+
+def add_hub_supplies(s):
+    s.text(20, 45.72, "== 6.5A USB5 converter envelope and 1.15V hub-core rail ==")
+    add_usb5_lm706a0(s)
 
     s.place("U1701", "TPS62823DLC", "TPS62823DLC 3A USB7206C 1.146V core buck", 205.74, 73.66,
             footprint=FOOTPRINTS["TPS62823DLC"], pin_nets={
@@ -93,7 +160,7 @@ def add_hub_supplies(s):
     capacitor(s, "C1709", "10u core output", 266.7, 121.92, "HUB_VCORE", footprint="C_0805", mpn="GRM21BR71A106KE51L")
 
 
-def add_hub(s):
+def add_hub(s, *, ec_controlled=False):
     unit1 = {
         "1": ("HUB_RESET_N", "local"), "2": ("INTERNAL_USB_VBUS_VALID", "hier"), "3": ("", "nc"), "4": ("", "nc"),
         "21": ("HUB_CFG1", "local"), "22": ("HUB_CFG2", "local"), "23": ("HUB_CFG3", "local"),
@@ -183,8 +250,10 @@ def add_hub(s):
         ("R1723", "HUB_SPI_D3", 466.09),
     ):
         resistor(s, ref, "100k unused SPI pull-down", x, 160.02, net, "GND", mpn="RC0603FR-07100KL")
-    add_usba_ports(s)
+    add_usba_ports(s, ec_controlled=ec_controlled)
 def usblc6_usba(s, ref, value, x, y, dp, dm, rail):
+    if rail == "GND":
+        raise ValueError(f"{ref}: USBLC6 pin 5 is the upper clamp supply")
     s.place(ref, "USBLC6-2P6", value, x, y, footprint=FOOTPRINTS["USBLC6-2P6"],
             pin_nets={
                 "1": (dp, "local"), "6": (dp, "local"),
@@ -201,23 +270,23 @@ def usblc6_usba(s, ref, value, x, y, dp, dm, rail):
     # straps tied DIS5/DIS6 D+/D- to 3V3; they are removed and the ports now
     # drive two USB-A receptacles on the left edge (J24 USB 3.0, J25 USB 2.0).
     # VBUS is gated by INTERNAL_USB_VBUS_VALID (host-active qualified).
-def add_usba_ports(s):
+def add_usba_ports(s, *, ec_controlled=False):
     s.text(20, 320.04, "== Internal USB-A spare ports: hub DIS5 (USB3) + DIS6 (USB2) ==")
 
     # ---- J24: USB 3.0 Type-A on hub DIS5 ----
     s.place("U1800", "TPS2553D", "TPS2553DDBVR USB3-A VBUS branch 1.3A", 80, 332.74,
             footprint=FOOTPRINTS["TPS2553DDBV"], pin_nets={
                 "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"),
-                "3": ("INTERNAL_USB_VBUS_VALID", "hier"), "4": ("", "nc"),
+                "3": (("USB_J24_SWITCH_EN", "local") if ec_controlled else ("INTERNAL_USB_VBUS_VALID", "hier")), "4": ("", "nc"),
                 "5": ("J24_ILIM", "local"), "6": ("J24_5V_PRE", "local"),
             }, extra_props=props("Texas Instruments", "TPS2553DDBVR"))
     resistor(s, "R1850", "20.0k 1% TPS2553 1.3A ILIM", 80, 358.14, "J24_ILIM", "GND",
              mpn="RC0603FR-0720KL")
-    capacitor(s, "C1850", "10u 10V USB3-A VBUS bulk", 80, 373.38, "J24_5V_PRE", footprint="C_10u",
+    capacitor(s, "C1850", "10u 10V USB3-A VBUS bulk", 80, 373.38, "J24_5V_PRE", footprint="C_0805",
               mpn="GRM21BR71A106KA73L")
     capacitor(s, "C1851", "100n USB3-A VBUS HF", 80, 385.19, "J24_5V_PRE")
     usblc6_usba(s, "U1801", "USBLC6-2P6 USB3-A D+/D- ESD", 160, 332.74,
-                "HUB_DIS5_DP", "HUB_DIS5_DN", "GND")
+                "HUB_DIS5_DP", "HUB_DIS5_DN", "J24_5V_PRE")
     s.place("U1802", "TPD4EUSB30", "TPD4E05U06 USB3-A SuperSpeed ESD", 250, 332.74,
             footprint=FOOTPRINTS["TPD4E05U06DQA"], pin_nets={
                 "1": ("HUB_DIS5_TX_P", "local"), "2": ("HUB_DIS5_TX_N", "local"),
@@ -249,16 +318,16 @@ def add_usba_ports(s):
     s.place("U1803", "TPS2553D", "TPS2553DDBVR USB2-A VBUS branch 1.3A", 80, 401.32,
             footprint=FOOTPRINTS["TPS2553DDBV"], pin_nets={
                 "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"),
-                "3": ("INTERNAL_USB_VBUS_VALID", "hier"), "4": ("", "nc"),
+                "3": (("USB_J25_SWITCH_EN", "local") if ec_controlled else ("INTERNAL_USB_VBUS_VALID", "hier")), "4": ("", "nc"),
                 "5": ("J25_ILIM", "local"), "6": ("J25_5V_PRE", "local"),
             }, extra_props=props("Texas Instruments", "TPS2553DDBVR"))
     resistor(s, "R1851", "20.0k 1% TPS2553 1.3A ILIM", 80, 426.72, "J25_ILIM", "GND",
              mpn="RC0603FR-0720KL")
-    capacitor(s, "C1854", "10u 10V USB2-A VBUS bulk", 80, 441.96, "J25_5V_PRE", footprint="C_10u",
+    capacitor(s, "C1854", "10u 10V USB2-A VBUS bulk", 80, 441.96, "J25_5V_PRE", footprint="C_0805",
               mpn="GRM21BR71A106KA73L")
     capacitor(s, "C1855", "100n USB2-A VBUS HF", 80, 453.77, "J25_5V_PRE")
     usblc6_usba(s, "U1804", "USBLC6-2P6 USB2-A D+/D- ESD", 160, 401.32,
-                "HUB_DIS6_DP", "HUB_DIS6_DN", "GND")
+                "HUB_DIS6_DP", "HUB_DIS6_DN", "J25_5V_PRE")
     s.place("J25", "USB_A", "USB 2.0 Type-A internal header (hub DIS6)", 340, 406.4,
             footprint="Connector_USB:USB_A_Receptacle_GCT_USB1046",
             pin_nets={
@@ -314,13 +383,14 @@ def add_usba_ports(s):
               kind="hier", footprint="C_0805", mpn="GRM21BR71A106KE51L")
 
 
-def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False, remote_data=False):
+def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False, remote_data=False, ec_controlled=False):
     """remote_data=True: the hub (and its PRT_CTL) sit on another board;
     DP/DM and PRT_CTL cross an FPC, so they are hierarchical nets."""
     ctl = f"HUB_PRT_CTL{port}"
     dp = f"HUB_DS{port}_DP"
     dm = f"HUB_DS{port}_DN"
     data_kind = "hier" if remote_data else "local"
+    enable = ("USB_"+jref+"_SWITCH_EN", "local") if ec_controlled else (ctl, data_kind)
     host_tx_p = f"HUB_DS{port}_SSTX_P"
     host_tx_n = f"HUB_DS{port}_SSTX_N"
     host_rx_p = f"HUB_DS{port}_SSRX_P"
@@ -338,14 +408,14 @@ def add_source_port(s, *, jref, port, base, x0, y0, usb2_only=False, remote_data
     s.text(x0, y0, f"== {jref}: source-only USB-C data port, USB7206C downstream {port}, {'USB2' if usb2_only else 'USB3'} ==")
     s.place(u_sw, "TPS2553D", "TPS2553DDBVR 1.3A USB branch", x0 + 25.4, y0 + 22.86,
             footprint=FOOTPRINTS["TPS2553DDBV"], pin_nets={
-                "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"), "3": (ctl, data_kind),
+                "1": ("USB_PORT_5V", "hier"), "2": ("GND", "local"), "3": enable,
                 "4": (ctl, data_kind), "5": (ilim, "local"), "6": (pre, "local"),
             }, extra_props=props("Texas Instruments", "TPS2553DDBVR"))
-    resistor(s, f"R{base}", "20.0k 1% TPS2553 1.3A ILIM", x0 + 2.54, y0 + 55.88, ilim, "GND", mpn="RC0603FR-0720KL")
+    resistor(s, f"R{base}", "19.1k 1% TPS2553 VBUS plus VCONN ILIM" if ec_controlled else "20.0k 1% TPS2553 1.3A ILIM", x0 + 2.54, y0 + 55.88, ilim, "GND", mpn="RC0603FR-0719K1L" if ec_controlled else "RC0603FR-0720KL")
     s.place(u_cc, "TPS25810RVC", "TPS25810RVCR Type-C DFP controller", x0 + 78.74, y0 + 43.18,
             footprint=FOOTPRINTS["TPS25810RVC"], pin_nets={
                 "1": (ctl, data_kind), "2": (pre, "local"), "3": (pre, "local"), "4": (pre, "local"),
-                "5": ("SYS_3V3", "hier"), "6": (ctl, data_kind), "7": ("GND", "local"), "8": ("GND", "local"),
+                "5": ("SYS_3V3", "hier"), "6": enable, "7": ("GND", "local"), "8": ("GND", "local"),
                 "9": (refrtn, "local"), "10": (refnet, "local"), "11": (cc1, "local"), "12": ("GND", "local"),
                 "13": (cc2, "local"), "14": (vbus_sys, "local"), "15": (vbus_sys, "local"),
                 "16": ("", "nc"), "17": ("", "nc"), "18": (pol, "local"),

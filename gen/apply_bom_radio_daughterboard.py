@@ -8,11 +8,13 @@ Pattern: same Yageo/Murata strategy as the main project catalog.
 from __future__ import annotations
 
 import sys
+import re
 from pathlib import Path
 from apply_bom_catalog import (
     ROOT, PatchResult, find_component_block, has_manufacturer_mpn,
     patch_component_block, patch_schematic_file,
 )
+from part_identity import identity_errors
 
 RADIO = ROOT / "radio_daughterboard"
 
@@ -75,7 +77,7 @@ CAPACITOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
 
     # -- 02_radios.kicad_sch --
     "C221": ("Murata", "GRM188R71H104KA93D", "100n 50V X7R 0603"),
-    "C224": ("Murata", "GRM1885C1H560JA01D", "56p C0G 50V 0402"),
+    "C224": ("Murata", "GRM1555C1H560JA01D", "56p C0G 50V 5% 0402; Murata GRM1555C1H560JA01 reference sheet"),
     "C226": ("Murata", "GRM188R71H103KA01D", "10n 50V X7R 0603"),
     "C227": ("Murata", "GRM188R71H103KA01D", "10n 50V X7R 0603"),
     "C240": ("Murata", "GRM188R71H104KA93D", "100n 50V X7R 0603"),
@@ -108,8 +110,8 @@ CAPACITOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
     "C334": ("Murata", "GRM21BR71A105KA01L", "1u 10V X7R 0805"),
     "C335": ("Murata", "GRM21BR71A105KA01L", "1u 10V X7R 0805"),
     "C337": ("Murata", "GRM31CR71E106KA12L", "10u 25V X7R 1206"),
-    "C338": ("Murata", "GRM1885C1H180JA01D", "18p C0G 50V 0603 (hold for review)"),
-    "C339": ("Murata", "GRM1885C1H180JA01D", "18p C0G 50V 0603 (hold for review)"),
+    "C338": ("Murata", "GRM1885C1H180JA01D", "18p C0G 50V 5% 0603 crystal load"),
+    "C339": ("Murata", "GRM1885C1H180JA01D", "18p C0G 50V 5% 0603 crystal load"),
     "C340": ("Murata", "GRM21BR71A105KA01L", "1u 10V X7R 0805"),
     "C341": ("Murata", "GRM21BR71A105KA01L", "1u 10V X7R 0805"),
     "C342": ("Murata", "GRM21BR71A105KA01L", "1u 10V X7R 0805"),
@@ -121,18 +123,38 @@ ALL_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {}
 ALL_ASSIGNMENTS.update(RESISTOR_ASSIGNMENTS)
 ALL_ASSIGNMENTS.update(CAPACITOR_ASSIGNMENTS)
 
-# Holds (components intentionally left unassigned)
-HOLDS: set[str] = {
-    "C338", "C339",  # 18p C0G crystal loads (need tight tolerance)
-    "C224",          # 56p C0G feed-forward (need C0G)
-    "C244", "C254",  # 100p PE42820 V1 bypass (eval board pattern)
-    "C245", "C255",  # 0.2p PE42820 RFC match (physical fit required)
-}
+# The optional matching capacitors remain DNP pending measured RF tuning.
+HOLDS: set[str] = {"C245", "C255"}
 
-# Remove any hold that's also assigned
-for ref in list(HOLDS):
-    if ref in ALL_ASSIGNMENTS:
-        HOLDS.discard(ref)
+
+def stamp_sheet_identities(sheet):
+    """Stamp this board's catalog without using colliding main-board refs."""
+    for index, block in enumerate(sheet.body):
+        if not re.match(r"\(symbol\s", block):
+            continue
+        props = dict(re.findall(r'\(property "([^"]+)" "([^"]*)"', block))
+        ref = props.get("Reference", "")
+        if ref.startswith("#") or "(in_bom no)" in block or "(dnp yes)" in block:
+            continue
+        value, footprint = props.get("Value", ""), props.get("Footprint", "")
+        assignment = None if ref in HOLDS else ALL_ASSIGNMENTS.get(ref)
+        mpn = props.get("MPN")
+        if mpn:
+            if assignment and mpn != assignment[1]:
+                raise ValueError(f"{ref}: source MPN {mpn} differs from radio catalog {assignment[1]}")
+        elif assignment:
+            manufacturer, mpn, _ = assignment
+            at = re.search(r"\(at ([^\)]+)\)", block)
+            if at is None:
+                raise ValueError(f"{ref}: missing symbol position")
+            block = patch_component_block(block, at.group(1), manufacturer, mpn)
+            sheet.body[index] = block
+        else:
+            raise ValueError(f"{ref}: missing radio order code for {value} / {footprint}")
+        errors = identity_errors(value, footprint, mpn)
+        if errors:
+            raise ValueError(f"{ref} ({mpn}): " + "; ".join(errors))
+    return sheet
 
 
 def main() -> None:

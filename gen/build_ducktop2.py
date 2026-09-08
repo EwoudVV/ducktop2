@@ -2,6 +2,7 @@ import contextlib
 import uuid, os
 import genlib
 import bom_catalog
+from part_identity import identity_errors
 
 GRID_MM = 1.27
 
@@ -107,6 +108,8 @@ FOOTPRINTS = {
     "Conn_01x40_FFC": "Connector_FFC-FPC:Hirose_FH12-40S-0.5SH_1x40-1MP_P0.50mm_Horizontal",
     "Conn_01x100_FFC_MP": "ducktop2:Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
     "Conn_01x68_FFC_MP": "ducktop2:Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
+    "Conn_01x41_Signal_SH": "ducktop2:Molex_5039084120_1x41_P0.50mm_Horizontal",
+    "Conn_01x51_Signal_SH": "ducktop2:Molex_5039085120_1x51_P0.50mm_Horizontal",
     # Polarized/latching 2.00 mm cable header. J901 is deliberately not a
     # Raspberry Pi HAT connector and cannot accept a 2.54 mm HAT plug.
     "Conn_02x20_Maker": "Connector_JST:JST_PUD_B40B-PUDSS_2x20_P2.00mm_Vertical",
@@ -116,7 +119,7 @@ FOOTPRINTS = {
     "RP2350A": "Package_DFN_QFN:QFN-60-1EP_7x7mm_P0.4mm_EP3.4x3.4mm_ThermalVias",
     "W25Q32RVXHJQ": "Package_SON:Winbond_USON-8-1EP_3x2mm_P0.5mm_EP0.2x1.6mm",
     "RT6150BGQW": "Package_SON:WSON-10-1EP_2.5x2.5mm_P0.5mm_EP1.2x2mm_ThermalVias",
-    "L_RP2350": "Inductor_SMD:L_Wuerth_PMFI-201610_PMCI-compatible",
+    "L_RP2350": "ducktop2:Abracon_AOTA-B201610S3R3-101-T_RP2350",
     "Q_SOT523": "Package_TO_SOT_SMD:SOT-523",
     "Conn_Coaxial_UFL": "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical",
     "Conn_Coaxial_SMA_Edge": "Connector_Coaxial:SMA_Molex_73251-1153_EdgeMount_Horizontal",
@@ -133,6 +136,10 @@ FOOTPRINTS = {
     "L_XGL5030": "ducktop2:Coilcraft_XGL5030",
     "L_XGL6030": "ducktop2:Coilcraft_XGL6030",
     "L_XAL7070": "Inductor_SMD:L_Coilcraft_XAL7070-XXX",
+    "L_XGL1060": "ducktop2:Coilcraft_XGL1060",
+    "L_XGL1060_CENTER": "ducktop2:Coilcraft_XGL1060_Center",
+    "R_ERJ8CW_CENTER": "ducktop2:Panasonic_ERJ8CW_10to16m_Center",
+    "R_ERJ8CW_10m": "ducktop2:Panasonic_ERJ8CW_10to16m",
     "L_SY8253": "ducktop2:Coilcraft_XGL4020",
     "L_BQ25798": "Inductor_SMD:L_Coilcraft_XAL7030-102",
     "L_RF": "Inductor_SMD:L_0603_1608Metric",
@@ -153,6 +160,10 @@ FOOTPRINTS = {
     "AMS1117-3.3": "Package_TO_SOT_SMD:SOT-223-3_TabPin2",
     "SY8253ADC": "Package_TO_SOT_SMD:TSOT-23-6",
     "TPS56637": "ducktop2:Texas_RPA0010A_VQFN-HR-10_3x3mm",
+    "LM706A0": "ducktop2:Texas_RRX0029B_VQFN-29_6x6mm",
+    "R_WSL2010": "ducktop2:Vishay_WSL2010_1to6m9",
+    "C_330u_10V_poly": "Capacitor_Tantalum_SMD:CP_EIA-7343-43_Kemet-X",
+    "C_68u_25V_poly": "Capacitor_Tantalum_SMD:CP_EIA-7343-20_Kemet-V",
     "VL822-Q7": "ducktop2:QFN-76-1EP_9x9mm_P0.4mm_EP6.3x6.3mm",
     "TPS7A0210": "Package_SON:Texas_X2SON-4_1x1mm_P0.65mm",
     "TUSB8020BIPHP": "Package_QFP:Texas_PHP0048E_HTQFP-48-1EP_7x7mm_P0.5mm_EP6.5x6.5mm_Mask3.62x3.62mm_ThermalVias",
@@ -162,10 +173,10 @@ FOOTPRINTS = {
     "TPS2553DDBV": "Package_TO_SOT_SMD:SOT-23-6",
     "L_TFM201610": "ducktop2:TDK_TFM201610",
     "TPS552892": "ducktop2:Texas_RYQ0021A_VQFN-HR-21_3x5mm",
-    "L_MU12": "Inductor_SMD:L_Coilcraft_XAL7030-472",
+    "L_MU12": "Inductor_SMD:L_Coilcraft_XAL7070-XXX",
     "C_100u_25V_poly": "Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D",
     "C_68u_50V_hybrid": "Capacitor_SMD:CP_Elec_8x10",
-    "C_100u_35V_hybrid": "Capacitor_SMD:CP_Elec_6.3x5.8",
+    "C_100u_35V_hybrid": "Capacitor_SMD:CP_Elec_6.3x7.7",
     "R_1206": "Resistor_SMD:R_1206_3216Metric",
     "C_1210": "Capacitor_SMD:C_1210_3225Metric",
     "TLV803EA29RDBZR": "Package_TO_SOT_SMD:SOT-23-3",
@@ -299,6 +310,7 @@ class Sheet:
         if extra_props:
             for k, v in extra_props.items():
                 props.append(f'(property "{k}" "{v}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
+        ordered_mpn = (extra_props or {}).get("MPN")
         if (
             in_bom
             and PROCUREMENT_STAMP
@@ -307,8 +319,14 @@ class Sheet:
             stamped = bom_catalog.resolve(ref, value, footprint)
             if stamped is not None:
                 manufacturer, mpn = stamped
+                ordered_mpn = mpn
                 props.append(f'(property "Manufacturer" "{manufacturer}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
                 props.append(f'(property "MPN" "{mpn}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
+
+        if in_bom and ordered_mpn:
+            errors = identity_errors(value, footprint, ordered_mpn)
+            if errors:
+                raise ValueError(f"{ref} ({ordered_mpn}): " + "; ".join(errors))
 
         pin_lines = [f'(pin "{num}" (uuid {U()}))' for num in pins]
 

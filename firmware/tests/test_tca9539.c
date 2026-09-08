@@ -22,9 +22,10 @@ static void expect_safe_initialization(void)
 
   i2c_mock_expect_write(I2C_TCA9539_ADDR, TCA9539_REG_OUTPUT0, zero, 1u);
   i2c_mock_expect_write(I2C_TCA9539_ADDR, TCA9539_REG_OUTPUT1, zero, 1u);
+  i2c_mock_expect_read(I2C_TCA9539_ADDR, TCA9539_REG_OUTPUT0, zero, 1u);
+  i2c_mock_expect_read(I2C_TCA9539_ADDR, TCA9539_REG_OUTPUT1, zero, 1u);
   i2c_mock_expect_write(I2C_TCA9539_ADDR, TCA9539_REG_CONFIG0, config0, 1u);
   i2c_mock_expect_write(I2C_TCA9539_ADDR, TCA9539_REG_CONFIG1, config1, 1u);
-  i2c_mock_expect_read(I2C_TCA9539_ADDR, TCA9539_REG_OUTPUT0, zero, 1u);
   i2c_mock_expect_read(I2C_TCA9539_ADDR, TCA9539_REG_CONFIG0, config0, 1u);
   i2c_mock_expect_read(I2C_TCA9539_ADDR, TCA9539_REG_CONFIG1, config1, 1u);
 }
@@ -39,20 +40,23 @@ static void test_safe_initialization_order(void)
 
 static void test_path_control_uses_output_latch(void)
 {
-  static const uint8_t pd1_on[] = {0x01u};
-  static const uint8_t both_on[] = {0x03u};
-  static const uint8_t pd2_on[] = {0x02u};
-
   i2c_mock_begin();
-  expect_safe_initialization();
   CHECK(tca9539_init_safe());
-  i2c_mock_expect_write(I2C_TCA9539_ADDR, TCA9539_REG_OUTPUT0, pd1_on, 1u);
-  i2c_mock_expect_write(I2C_TCA9539_ADDR, TCA9539_REG_OUTPUT0, both_on, 1u);
-  i2c_mock_expect_write(I2C_TCA9539_ADDR, TCA9539_REG_OUTPUT0, pd2_on, 1u);
   CHECK(tca9539_set_pd_path_enable(0u, true));
-  CHECK(tca9539_set_pd_path_enable(1u, true));
+  CHECK(!tca9539_set_pd_path_enable(1u, true));
+  CHECK(tca9539_output0() == 1u);
   CHECK(tca9539_set_pd_path_enable(0u, false));
-  CHECK(i2c_mock_script_complete());
+  CHECK(tca9539_set_pd_path_enable(1u, true));
+  CHECK(tca9539_output0() == 2u);
+  CHECK(tca9539_verify_state());
+  i2c_mock.regfile[TCA9539_REG_CONFIG0] = 0xffu;
+  CHECK(!tca9539_verify_state());
+  CHECK(!tca9539_ready());
+  CHECK(!tca9539_set_pd_path_enable(0u, true));
+  CHECK(tca9539_init_safe());
+  CHECK(tca9539_set_bms_retry(true));
+  CHECK(tca9539_verify_state());
+  CHECK(tca9539_set_bms_retry(false));
 }
 
 static void test_failure_stays_uninitialized(void)

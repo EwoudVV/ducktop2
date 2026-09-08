@@ -1,0 +1,1 @@
+#define UART_UARTFR_BUSY_BITS (1u<<3)

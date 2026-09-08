@@ -78,9 +78,9 @@ def build(sheet_symbol_uuid):
     s.place("F10", "Fuse", "2A E-key 3V3 fuse/polyfuse", 20, 76.2, footprint=FOOTPRINTS["Fuse"],
             pin_nets={"1": ("PCIE_3V3", "hier"), "2": ("WIFI_3V3", "local")},
             extra_props={"Manufacturer": "Littelfuse", "MPN": "1206L200PR"})
-    s.place("C170", "C", "47u 10V X5R E-key bulk", 20, 91.44, footprint=FOOTPRINTS["C_10u"],
+    s.place("C170", "C", "22u 25V X7R E-key bulk; TI characterized part", 20, 91.44, footprint=FOOTPRINTS["C_1210"],
             pin_nets={"1": ("WIFI_3V3", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM31CR61A476ME15L"})
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER71E226KE15L"})
     s.place("C171", "C", "100n radio bypass", 20, 104.14, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("WIFI_3V3", "local"), "2": ("GND", "local")})
     s.pwrflag(20, 119.38, "WIFI_3V3")

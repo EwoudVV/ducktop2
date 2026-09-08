@@ -1,6 +1,6 @@
 # build and verify
 
-updated 6 september 2026. these are the entry points for checking the working
+updated 8 september 2026. these are the entry points for checking the working
 files. the latest results and known checker failures are in [current status](../README.md#build-status).
 
 ## before running anything
@@ -101,11 +101,15 @@ python3 gen/check_release_candidate.py --stage schematic
 
 the checker runs generators and report writers in a temporary project copy
 and checks that the working design/library files stay unchanged. its default
-fabrication and production stages now select the center, left, right, and
-BMS boards. each board is checked with its own project settings and rules.
+routing, fabrication, and production stages cover all six boards, including
+the keyboard and radio. each board is checked with its own project settings
+and rules. the routing stage allows unfinished routing only on boards whose
+contract permits it; the keyboard and BMS still require complete routing.
 
 the center is staged under the schematic basename so KiCad's native parity
-check finds the right schematic. copied-board refills do not modify the
+check finds the right schematic. the checker also requires the comparison's
+completion message: KiCad can return an empty parity list after failing to
+load the schematic. copied-board refills do not modify the
 working board. findings introduced by refill are compared by full signature,
 including new findings in a category that already existed.
 
@@ -137,8 +141,8 @@ when differences remain.
 
 KiCad 10 caps clearance and unconnected-item reports at 499 entries; most
 other categories are capped at 199. the checker flags lists reaching these
-limits. the center has 2,026 native airwires while DRC lists 499 unconnected
-findings. use native connectivity for routing progress, and retain the DRC
+limits. a 499-item DRC list can hide thousands of native airwires. use native
+connectivity for routing progress, and retain the DRC
 list as diagnostic examples. `--all-track-errors` does not remove this cap.
 
 current remaining findings are in the [center review](hardware/center-board.md).

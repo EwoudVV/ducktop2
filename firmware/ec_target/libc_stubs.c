@@ -33,22 +33,3 @@ int memcmp(const void *s1, const void *s2, size_t n)
     }
     return 0;
 }
-
-/* ARM EABI 64-bit unsigned division helper.
- * ABI: r0:r1 = quotient, r2:r3 = remainder.
- * Needed because the policy code uses uint64_t division
- * and this GCC's multilib libgcc is not found with -nostdlib. */
-unsigned long long __aeabi_uldivmod(unsigned long long n, unsigned long long d)
-{
-    unsigned long long q = 0, r = 0;
-    int i;
-    if (d == 0) return 0;
-    for (i = 63; i >= 0; i--) {
-        r = (r << 1) | ((n >> (unsigned)i) & 1ULL);
-        if (r >= d) {
-            r -= d;
-            q |= (1ULL << (unsigned)i);
-        }
-    }
-    return q;
-}

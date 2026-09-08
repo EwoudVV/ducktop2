@@ -1,12 +1,14 @@
 from build_ducktop2 import Sheet, FOOTPRINTS
 
 
-def usblc6(s, ref, value, x, y, dp, dm, rail):
+def usblc6(s, ref, value, x, y, dp, dm, rail, *, rail_kind="hier"):
+    if rail == "GND":
+        raise ValueError(f"{ref}: USBLC6 pin 5 is the upper clamp supply")
     s.place(ref, "USBLC6-2P6", value, x, y, footprint=FOOTPRINTS["USBLC6-2P6"],
             pin_nets={
                 "1": (dp, "local"), "6": (dp, "local"),
                 "3": (dm, "local"), "4": (dm, "local"),
-                "5": (rail, "hier" if rail != "GND" else "local"),
+                "5": (rail, rail_kind),
                 "2": ("GND", "local"),
             }, extra_props={
                 "Manufacturer": "STMicroelectronics", "MPN": "USBLC6-2P6",
@@ -75,7 +77,13 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("EC_DFU_DP", "local"), "2": ("DFU_CONN_DP", "local")})
     s.place("R204", "R", "22R DFU USB DM series", 40, 222.0, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("EC_DFU_DN", "local"), "2": ("DFU_CONN_DN", "local")})
-    usblc6(s, "U63", "USBLC6-2P6 EC DFU USB ESD", 150, 216.0, "DFU_CONN_DP", "DFU_CONN_DN", "GND")
+    usblc6(s, "U63", "USBLC6-2P6 EC DFU USB ESD", 150, 216.0,
+           "DFU_CONN_DP", "DFU_CONN_DN", "DFU_VBUS", rail_kind="local")
+    s.place("C2070", "C", "100n 50V DFU clamp bypass", 150, 180,
+            footprint=FOOTPRINTS["C_100n"],
+            pin_nets={"1": ("DFU_VBUS", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D"})
+    s.pwrflag(180, 180, "DFU_VBUS")
     s.place("R205", "R", "5.1k USB-C CC1 Rd (UFP)", 200, 210.0, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("J73_CC1", "local"), "2": ("GND", "local")})
     s.place("R211", "R", "5.1k USB-C CC2 Rd (UFP)", 200, 222.0, footprint=FOOTPRINTS["R"],
@@ -91,8 +99,9 @@ def build(sheet_symbol_uuid):
                 "SH": ("GND", "local"),
                 "A2": ("", "nc"), "A3": ("", "nc"), "B2": ("", "nc"), "B3": ("", "nc"),
                 "A10": ("", "nc"), "A11": ("", "nc"), "B10": ("", "nc"), "B11": ("", "nc"),
-                "A8": ("", "nc"), "B8": ("", "nc"), "A4": ("", "nc"), "B4": ("", "nc"),
-                "A9": ("", "nc"), "B9": ("", "nc"),
+                "A8": ("", "nc"), "B8": ("", "nc"),
+                "A4": ("DFU_VBUS", "local"), "B4": ("DFU_VBUS", "local"),
+                "A9": ("DFU_VBUS", "local"), "B9": ("DFU_VBUS", "local"),
             }, extra_props={
                 "Manufacturer": "Molex", "MPN": "105450-0101",
                 "Datasheet": "https://www.molex.com/pdm_docs/sd/1054500101_sd.pdf",

@@ -129,14 +129,15 @@ SECTIONS
         _eheap = .;
     } > SRAM
 
-    .stack (COPY) :
+    /* Stack grows down from the top of SRAM. Keep a real 8 KiB reservation,
+     * rather than overriding _estack with a small COPY section near BSS. */
+    .stack ORIGIN(SRAM) + LENGTH(SRAM) - 0x2000 (NOLOAD) :
     {
-        . = ALIGN(8);
         _sstack = .;
-        . = . + 0x800;
-        . = ALIGN(8);
+        . += 0x2000;
         _estack = .;
     } > SRAM
+    ASSERT(_eheap <= _sstack, "SRAM data/heap overlaps the reserved stack")
 
     /DISCARD/ :
     {

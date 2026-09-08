@@ -60,8 +60,10 @@ blank-board programming, supported readback verification, and tested
 SWD/BOOTSEL recovery. local build files alone do not approve a firmware image.
 
 `target_release.json` records the approved artifacts and their evidence.
-it currently remains `PENDING_TARGET_PORTS`; the documentation refresh did
-not change its state.
+it retains its original `PENDING_TARGET_PORTS` state until the final release
+review. both targets now build, but qualified power profiles, programming,
+readback and HIL evidence are still missing. the development builds under
+`.workbench/audit-fixes-2026-09-07/firmware/` are not approved release images.
 
 ## HIL rows
 

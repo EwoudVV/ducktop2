@@ -89,6 +89,7 @@ bool i2c1_write(uint8_t dev_addr, uint8_t reg, uint8_t data)
         step->used = true;
         return step->ack;
     }
+    if (step != NULL) { i2c_mock.script_error = true; return false; }
     i2c_mock.regfile[reg] = data;
     if (i2c_mock.adc_done_autoset && dev_addr == 0x6Bu && reg == 0x2Eu &&
         (data & 0x80u) != 0) {
@@ -115,6 +116,7 @@ bool i2c1_write_raw(uint8_t dev_addr, uint8_t *data, uint16_t len)
         step->used = true;
         return step->ack;
     }
+    if (step != NULL) { i2c_mock.script_error = true; return false; }
     for (uint16_t i = 1; i < len; i++) {
         i2c_mock.regfile[data[0] + (uint8_t)(i - 1u)] = data[i];
     }
@@ -134,6 +136,7 @@ bool i2c1_read(uint8_t dev_addr, uint8_t reg, uint8_t *data, uint16_t len)
         step->used = true;
         return step->ack;
     }
+    if (step != NULL) { i2c_mock.script_error = true; return false; }
     for (uint16_t i = 0; i < len; i++) {
         data[i] = i2c_mock.regfile[reg + (uint8_t)i];
     }
@@ -148,6 +151,7 @@ bool i2c1_probe(uint8_t dev_addr)
         step->used = true;
         return step->ack;
     }
+    if (step != NULL) { i2c_mock.script_error = true; return false; }
     return i2c_mock.present;
 }
 

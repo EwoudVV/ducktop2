@@ -106,6 +106,17 @@ typedef struct {
   uint32_t requested_charge_power_mw;
   bool power_limits_applied;
   uint32_t applied_mu_edp_budget_mw;
+  bool external_boot_authorized;
+  uint32_t external_boot_budget_mw;
+  bool pack_boot_authorized;
+  uint32_t pack_boot_budget_mw;
+  bool pack_bridge_qualified;
+  bool pack_current_valid;
+  int32_t pack_current_ma;
+  uint16_t pack_voltage_mv;
+  uint16_t pack_discharge_limit_ma;
+  uint32_t pack_sample_age_ms;
+  uint32_t vsys_sample_age_ms;
 
   ec_source_observation_t source[EC_SOURCE_COUNT];
 } ec_inputs_t;
@@ -121,6 +132,8 @@ typedef struct {
   uint32_t charge_power_budget_mw;
   bool power_budget_limited;
   bool power_policy_confirmed;
+  bool mu_boot_authorized;
+  bool mu_rail_hold;
   bool keyboard_rgb_power_enable;
   bool radio_db_power_enable;
   bool audio_amp_enable;
@@ -137,6 +150,7 @@ typedef struct {
   uint32_t radio_db_power_good_timeout_ms;
   uint16_t minimum_pd_current_ma;
   uint16_t iindpm_margin_ma;
+  uint16_t pd_iindpm_margin_ma;
   uint16_t iindpm_cap_ma;
   uint16_t minimum_vsys_mv;
   uint16_t source_efficiency_permille;
@@ -145,6 +159,7 @@ typedef struct {
   uint32_t maximum_charge_budget_mw;
   uint32_t normal_mu_edp_budget_mw;
   uint32_t low_pack_mu_edp_budget_mw;
+  uint32_t external_boot_timeout_ms;
 } ec_policy_config_t;
 
 typedef struct {
@@ -171,6 +186,11 @@ typedef struct {
   bool radio_db_waiting_for_pg;
   bool radio_db_pg_confirmed;
   bool radio_db_request_blocked;
+  bool transfer_active;
+  uint32_t transfer_budget_mw;
+  uint32_t transfer_off_observed_ms;
+  ec_source_id_t transfer_failed_source;
+  uint32_t transfer_retry_not_before_ms;
   ec_outputs_t outputs;
 } ec_controller_t;
 
@@ -181,6 +201,10 @@ void ec_controller_init(ec_controller_t *controller,
 bool ec_controller_request_source(ec_controller_t *controller,
                                   ec_source_id_t source, uint32_t now_ms);
 void ec_controller_stop_source(ec_controller_t *controller, uint32_t now_ms);
+bool ec_controller_pack_bridge_ready(const ec_controller_t *controller,
+                                     const ec_inputs_t *inputs);
+void ec_controller_arbitrate(ec_controller_t *controller, const ec_inputs_t *inputs,
+                             uint32_t now_ms);
 void ec_controller_step(ec_controller_t *controller, const ec_inputs_t *inputs,
                         uint32_t now_ms);
 void ec_controller_watchdog_trip(ec_controller_t *controller);

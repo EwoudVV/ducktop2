@@ -1,0 +1,20 @@
+{
+  "pico_sdk": {
+    "url": "https://github.com/raspberrypi/pico-sdk",
+    "tag": "2.2.0",
+    "commit": "a1438dff1d38bd9c65dbd693f0e5db4b9ae91779",
+    "license": "BSD-3-Clause, see SDK LICENSE.TXT"
+  },
+  "tinyusb": {
+    "url": "https://github.com/hathach/tinyusb",
+    "commit": "86ad6e56c1700e85f1c5678607a762cfe3aa2f47",
+    "license": "MIT, see SDK lib/tinyusb/LICENSE"
+  },
+  "toolchain": {
+    "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.tar.xz",
+    "sha256": "fb6921db95d345dc7e5e487dd43b745e3a5b4d5c0c7ca4f707347148760317b4",
+    "version": "13.3.Rel1",
+    "host": "darwin-arm64",
+    "license": "component notices under share/doc; GCC notice: share/doc/gcc/Copying.html"
+  }
+}

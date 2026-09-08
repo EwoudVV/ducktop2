@@ -224,15 +224,15 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     # brief rail dropouts. The clock persists while the pack (or AC) is
     # connected; removing the pack resets it -- the coin-cell header and
     # holder are gone, saving the board header and chassis cell.
-    s.place("D1824", "D_Schottky", "1N5819HW RTC_BAT diode-OR from MCU_3V3", 30, 130,
-            footprint=FOOTPRINTS["D_Schottky_SOD123W"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("RTC_BAT", "local")},
+    s.place("D1824", "D_Schottky", "1N5819HW RTC supply from MCU_3V3", 30, 130,
+            footprint="Diode_SMD:D_SOD-123",
+            pin_nets={"1": ("RTC_BAT", "local"), "2": ("MCU_3V3", "hier")},
             extra_props={
-                "Manufacturer": "STMicroelectronics", "MPN": "1N5819HW",
-                "Datasheet": "https://www.st.com/resource/en/datasheet/1n5819hw.pdf",
+                "Manufacturer": "Diodes Incorporated", "MPN": "1N5819HW-7-F",
+                "Datasheet": "https://www.diodes.com/datasheet/download/1N5819HW.pdf",
             })
     s.place("C783", "C", "1u RTC_BAT hold", 40, 130,
-            footprint=FOOTPRINTS["C_1u"],
+            footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("RTC_BAT", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R60J105KA01D"})
     s.pwrflag(30, 180, "RTC_BAT")
@@ -276,7 +276,7 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     # 75.0k/10k targets exactly 5.10 V (TPS56637 Vref 0.6 V).
     s.place("R40", "R", "75.0k 0.1% TPS56637 FB high", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("SYS_5V", "local"), "2": ("BUCK5_FB", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD075KL"})
+            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0775KL"})
     s.place("R41", "R", "10k 0.1% TPS56637 FB low", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK5_FB", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0710KL"})
@@ -287,10 +287,10 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.place("R46", "R", "100k SYS_5V PG pull-up", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("SYS_5V_PG", "local")})
     for ref in ("C44", "C45"):
-        s.place(ref, "C", "22u 16V X7R TPS56637 OUT", *p.next(),
-                footprint=FOOTPRINTS["C_10u"],
+        s.place(ref, "C", "22u 25V X7R TPS56637 OUT; TI example part", *p.next(),
+                footprint=FOOTPRINTS["C_1210"],
                 pin_nets={"1": ("SYS_5V", "local"), "2": ("GND", "local")},
-                extra_props={"Manufacturer": "Murata", "MPN": "GRM31CZ71C226ME15L"})
+                extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER71E226KE15L"})
 
     s.place("U7", "TPS56637", "TPS56637RPAR VSYS -> SYS_3V3 (3.32V, 6A class)", *p.next(),
             footprint=FOOTPRINTS["TPS56637"],
@@ -331,12 +331,12 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             pin_nets={"1": ("BUCK33_EN", "local"), "2": ("GND", "local")})
     s.place("R772", "R", "100k SYS_3V3 PG pull-up", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("SYS_3V3_PG", "local")})
-    s.place("C48", "C", "22u 16V X7R TPS56637 OUT", *p.next(), footprint=FOOTPRINTS["C_10u"],
+    s.place("C48", "C", "22u 25V X7R TPS56637 OUT; TI example part", *p.next(), footprint=FOOTPRINTS["C_1210"],
             pin_nets={"1": ("SYS_3V3", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM31CZ71C226ME15L"})
-    s.place("C792", "C", "22u 16V X7R TPS56637 OUT", *p.next(), footprint=FOOTPRINTS["C_10u"],
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER71E226KE15L"})
+    s.place("C792", "C", "22u 25V X7R TPS56637 OUT; TI example part", *p.next(), footprint=FOOTPRINTS["C_1210"],
             pin_nets={"1": ("SYS_3V3", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM31CZ71C226ME15L"})
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER71E226KE15L"})
 
     # Native USB 3.2 host TX pairs need 100 nF coupling on the carrier.
     # Place these close to the Type-C port signal path; Mu RX stays direct.
@@ -389,10 +389,10 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         },
         extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPS552892RYQR"},
     )
-    s.place("L750", "L", "4.7uH 10.1A Isat / 6.9A Irms", 520, 220,
+    s.place("L750", "L", "6.8uH 12.8A Isat30 / 6.8A Irms20; 7mm class", 520, 220,
             footprint=FOOTPRINTS["L_MU12"],
             pin_nets={"1": ("MU12_SW1", "local"), "2": ("MU12_SW2", "local")},
-            extra_props={"Manufacturer": "Coilcraft", "MPN": "XAL7030-472MEC"})
+            extra_props={"Manufacturer": "Coilcraft", "MPN": "XAL7070-682MEC"})
     s.place("RS750", "R", "15mOhm 1% 1W; 3.33A output current limit", 520, 230,
             footprint=FOOTPRINTS["R_1206"],
             pin_nets={"1": ("MU12_PRE_SENSE", "local"), "2": ("MU_12V", "hier")},
@@ -478,12 +478,15 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             pin_nets={"1": ("MU12_FB_TOP", "local"), "2": ("MU12_FB", "local")})
     s.place("R754", "R", "11.3k 0.1% 12V FB low", 685, 300, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_FB", "local"), "2": ("GND", "local")})
-    s.place("R755", "R", "15k COMP series", 685, 310, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU12_COMP", "local"), "2": ("MU12_COMP_RC", "local")})
-    s.place("C771", "C", "4.7n COMP", 685, 320, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("MU12_COMP_RC", "local"), "2": ("GND", "local")})
-    s.place("C772", "C", "100p C0G COMP HF", 685, 330, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("MU12_COMP", "local"), "2": ("GND", "local")})
+    s.place("R755", "R", "5.1k 1% COMP series", 685, 310, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU12_COMP", "local"), "2": ("MU12_COMP_RC", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-075K1L"})
+    s.place("C771", "C", "220n 50V X7R COMP", 685, 320, footprint=FOOTPRINTS["C_100n"],
+            pin_nets={"1": ("MU12_COMP_RC", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "KEMET", "MPN": "C0603C224K5RACTU"})
+    s.place("C772", "C", "1n 50V C0G COMP HF", 685, 330, footprint=FOOTPRINTS["C_100n"],
+            pin_nets={"1": ("MU12_COMP", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM1885C1H102JA01D"})
     s.place("R756", "R", "49.9k 1% FSW = 400kHz", 685, 340, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_FSW", "local"), "2": ("GND", "local")})
     s.place("C767", "C", "10n DITH/SYNC spreading", 685, 350, footprint=FOOTPRINTS["C_100n"],
@@ -562,11 +565,11 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("INTERNAL_USB_VBUS_FAULT_N", "hier")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
     s.place("C794", "C", "1u internal host VBUS switch input", 955, 325,
-            footprint=FOOTPRINTS["C_1u"],
+            footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("SYS_5V", "hier"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71A105KA61D"})
     s.place("C830", "C", "10u internal host VBUS output", 955, 337.7,
-            footprint=FOOTPRINTS["C_10u"],
+            footprint=FOOTPRINTS["C_0805"],
             pin_nets={"1": ("INTERNAL_USB_VBUS", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM21BR61A106KE19L"})
     # TPS3897A is powered from MCU_3V3 (always-defined), not from VBUS,
@@ -610,102 +613,8 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
                 extra_props={"ProcurementClass": "PCB copper test feature"},
                 in_bom=False)
 
-    # PCIe endpoints must not remain powered while the Mu host is off. One
-    # slew-controlled 6A switch supplies NVMe, E-key and RTL8111H only in S0.
-    # This intentionally means those endpoints cannot wake the Mu from S3.
-    s.place("U772", "TPS22975N", "TPS22975NDSGR switched PCIe endpoint 3V3", 900, 420,
-            footprint=FOOTPRINTS["TPS22975N"],
-            pin_nets={
-                "1": ("PCIE_3V3_IN", "local"), "2": ("PCIE_3V3_IN", "local"),
-                "3": ("MU_HOST_ACTIVE", "hier"), "4": ("PCIE_3V3_IN", "local"),
-                "5": ("GND", "local"), "6": ("PCIE_3V3_CT", "local"),
-                "7": ("PCIE_3V3", "hier"), "8": ("PCIE_3V3", "hier"),
-                "9": ("GND", "local"),
-            }, extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "TPS22975NDSGR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/tps22975.pdf",
-                "PowerPolicy": "PCIE_3V3 enabled only by MU_HOST_ACTIVE; no PCIe wake from S3",
-            })
-    s.place("R776", "R", "100k PCIe endpoint rail fail-low", 955, 420,
-            footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
-    s.place("C832", "C", "1u PCIe endpoint switch input", 955, 432.7,
-            footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("PCIE_3V3_IN", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R60J105KA01D"})
-    # Dedicated PCIe endpoint 3.3V buck so NVMe/Wi-Fi/GbE peak currents never
-    # tax the shared SYS_3V3 rail (NVMe x4 write bursts were the tightest
-    # margin in the power audit; this moves ~3A off SYS_3V3). Host-gated the
-    # same way as U6/U7: only fully active in S0.
-    s.place("U773", "TPS56637", "TPS56637RPAR VSYS -> PCIE_3V3_IN (3.32V, 6A class, dedicated endpoint rail)", 1000, 420,
-            footprint=FOOTPRINTS["TPS56637"],
-            pin_nets={
-                "1": ("BUCKPE_EN", "local"), "2": ("BUCKPE_FB", "local"),
-                "3": ("GND", "local"), "4": ("PCIE_3V3_PG", "local"),
-                "5": ("", "nc"), "6": ("BUCKPE_SW", "local"),
-                "7": ("BUCKPE_BOOT", "local"), "8": ("VSYS", "hier"),
-                "9": ("GND", "local"), "10": ("GND", "local"),
-            }, extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "TPS56637RPAR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/tps56637.pdf",
-            })
-    s.place("C776", "C", "10u 50V X7R TPS56637 VIN", 1010, 420,
-            footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "TDK", "MPN": "CGA5L1X7R1H106K160AC"})
-    s.place("C777", "C", "10u 50V X7R TPS56637 VIN", 1020, 420,
-            footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "TDK", "MPN": "CGA5L1X7R1H106K160AC"})
-    s.place("C778", "C", "100n 50V X7R TPS56637 VIN HF", 1030, 420,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")})
-    s.place("C779", "C", "100n 16V X7R TPS56637 BOOT", 1040, 420,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BUCKPE_BOOT", "local"), "2": ("BUCKPE_SW", "local")})
-    s.place("L1702", "L", "XAL7070-222MEC 2.2uH 19.6A Isat30%", 1050, 420,
-            footprint=FOOTPRINTS["L_XAL7070"],
-            pin_nets={"1": ("BUCKPE_SW", "local"), "2": ("PCIE_3V3_IN", "local")},
-            extra_props={
-                "Manufacturer": "Coilcraft", "MPN": "XAL7070-222MEC",
-                "Datasheet": "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xal/xal7070/",
-            })
-    s.place("R785", "R", "45.3k 1% TPS56637 FB high", 1020, 440,
-            footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PCIE_3V3_IN", "local"), "2": ("BUCKPE_FB", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0745K3L"})
-    s.place("R786", "R", "10k 1% TPS56637 FB low", 1030, 440,
-            footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BUCKPE_FB", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0710KL"})
-    s.place("R787", "R", "100k 1% TPS56637 EN high (host-active gate)", 1040, 440,
-            footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("BUCKPE_EN", "local")})
-    s.place("R788", "R", "100k 1% TPS56637 EN low", 1050, 440,
-            footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BUCKPE_EN", "local"), "2": ("GND", "local")})
-    s.place("C782", "C", "47u 6.3V PCIE_3V3_IN rail bulk", 1060, 420,
-            footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("PCIE_3V3_IN", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER60J476ME20L"})
-    s.place("R789", "R", "100k PCIE_3V3_PG pull-up", 1070, 440,
-            footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("PCIE_3V3_PG", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
-    s.pwrflag(1080, 420, "PCIE_3V3_IN")
-    s.place("C833", "C", "4.7n PCIe endpoint controlled slew", 955, 445.4,
-            footprint=FOOTPRINTS["C_0402"],
-            pin_nets={"1": ("PCIE_3V3_CT", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM155R71H472KA01D"})
-    s.place("C834", "C", "47u 6.3V PCIe endpoint rail bulk", 955, 458.1,
-            footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("PCIE_3V3", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER60J476ME20L"})
-    s.place("C835", "C", "100n PCIe endpoint rail HF", 955, 470.8,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("PCIE_3V3", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71A104KA01D"})
+    from generate_pcie_power import add_pcie_power
+    add_pcie_power(s)
     s.place("R762", "R", "100k PG pull-up", 740, 270, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MU_12V_PG", "hier")})
     s.place("C774", "C", "10n PG deglitch", 740, 280, footprint=FOOTPRINTS["C_100n"],
@@ -769,7 +678,8 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
                 "Manufacturer": "Yageo", "MPN": "RC0603FR-071KL",
                 "ClockPolicy": "Requests REFCLK; Mu BIOS/device-presence policy still controls clock availability",
             })
-    m2m = default_pin_map("Bus_M.2_Socket_M", power_3v3_net="PCIE_3V3")
+    m2m = default_pin_map("Bus_M.2_Socket_M", power_3v3_net="NVME_3V3")
+    m2m = {pin:((net,"local") if net=="NVME_3V3" else (net,kind)) for pin,(net,kind) in m2m.items()}
     m2m.update({
         "41": ("PCIE_M_L0_RX_N", "local"),
         "43": ("PCIE_M_L0_RX_P", "local"),
@@ -797,12 +707,12 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             footprint=FOOTPRINTS["M2_M_key"], pin_nets=m2m,
             extra_props={"Manufacturer": "Amphenol", "MPN": "MDT420M01001"})
     s.place("C836", "C", "10u 6.3V NVMe socket local bulk", 500, 595,
-            footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("PCIE_3V3", "hier"), "2": ("GND", "local")},
+            footprint=FOOTPRINTS["C_0805"],
+            pin_nets={"1": ("NVME_3V3", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM21BR60J106ME19L"})
     s.place("C837", "C", "100n NVMe socket local HF", 540, 595,
             footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("PCIE_3V3", "hier"), "2": ("GND", "local")},
+            pin_nets={"1": ("NVME_3V3", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71A104KA01D"})
     s.place("H3", "MountingHole_Pad", "M.2 M-key 2280 M2 grounded standoff 2.5mm", 520, 620,
             footprint=FOOTPRINTS["M2_Card_Standoff_H2.5"],
@@ -964,29 +874,85 @@ def place_fpc_connector(s, ref, symname, pinmap, value, x=60, y=300, pwr_base=31
     s.refcounters["#FLG"] = pwr_base
     pins = s.place(ref, symname, value, x, y,
                    footprint=FOOTPRINTS[symname] if symname in FOOTPRINTS else "",
-                   pin_nets={str(p): (net, label_kind)
+                   pin_nets={str(p): (("", "nc") if net == "NC" else (net, label_kind))
                              for p, net in sorted(pinmap.items())
                              if net != "GND"},
                    extra_props=props)
     for p, net in sorted(pinmap.items()):
         if net == "GND" or net == ground_net:
             gnd(*pins[str(p)])
-    gnd(*pins["MP"])
-    # shielded-FFC connectors (FH41-68S) carry a dedicated SH pin; the
-    # plain FH12-30S symbol has none
+    if "MP" in pins:
+        gnd(*pins["MP"])
     if "SH" in pins:
-        gnd(*pins["SH"])
+        if ref in ("FPC101", "FPC102", "FPC103", "FPC104"):
+            s.label(*pins["SH"], ref + "_SHELL")
+        else:
+            gnd(*pins["SH"])
     return s
 
 
 FPC_BOM = {
-    "FPC101": ("Hirose", "FH41-68S-0.5SH(28)"),
-    "FPC102": ("Hirose", "FH41-68S-0.5SH(28)"),
-    "FPC103": ("Hirose", "FH41-68S-0.5SH(28)"),
-    "FPC104": ("Hirose", "FH41-68S-0.5SH(28)"),
+    "FPC101": ("Molex", "5039084120"),
+    "FPC102": ("Molex", "5039084120"),
+    "FPC103": ("Molex", "5039085120"),
+    "FPC104": ("Molex", "5039085120"),
     "FPC105": ("Hirose", "FH12-30S-0.5SH(55)"),
     "FPC106": ("Hirose", "FH12-30S-0.5SH(55)"),
 }
+
+
+def place_bms_power_connector(s, side, x, y, label_kind="hier"):
+    import fpc_contract as fpc
+    pin_nets = {str(pin): (net, label_kind) for pin, net in fpc.BMS_POWER_PINMAP.items()}
+    pin_nets["MP"] = ("", "nc")
+    return s.place(fpc.BMS_POWER_REFS[side], "Conn_01x02_MP", "protected pack power", x, y,
+            footprint=fpc.BMS_POWER_FOOTPRINT,
+            pin_nets=pin_nets,
+            extra_props={
+                "Manufacturer": "Molex", "MPN": fpc.BMS_POWER_MPN,
+                "MatingHousing": fpc.BMS_POWER_HOUSING,
+                "Harness": "18 awg; pin 1 red; pin 2 black; straight-numbered; 75 mm length budget",
+                "Contacts": fpc.BMS_POWER_CONTACT + " tin, 18 awg; insulation diameter <=1.85 mm",
+                "MatedHeight": "reserve 17.56 mm per drawing, plus wire exit and bend",
+                "CurrentRatingBasis": "PS-43650-001 N4: 2 circuits, 18 awg, 8.5 A at 30 C rise; validate assembled temperature rise",
+                "Datasheet": "https://www.molex.com/en-us/products/part-detail/0436500224",
+            })
+
+
+def place_bms_control_connector(s, side, x, y, label_kind="hier"):
+    import fpc_contract as fpc
+    # use the stock mounting-pin symbol without changing other connector types.
+    symname = "Conn_01x05_MountingPin"
+    genlib.LIBMAP.setdefault(symname, "Connector_Generic_MountingPin")
+    mapping = fpc.BMS_CONTROL_CENTER_PINMAP if side == "center" else fpc.BMS_CONTROL_PINMAP
+    pin_nets = {str(pin): (net, label_kind) for pin, net in mapping.items()}
+    pin_nets["MP"] = (mapping[5], label_kind)
+    if side == "center":
+        pin_nets["5"] = ("", "none")
+        pin_nets["MP"] = ("", "none")
+    pins = s.place(fpc.BMS_CONTROL_REFS[side], symname, "isolated bms control", x, y,
+            footprint=fpc.BMS_CONTROL_FOOTPRINT, pin_nets=pin_nets,
+            extra_props={
+                "Manufacturer": "JST", "MPN": fpc.BMS_CONTROL_MPN,
+                "MatingHousing": fpc.BMS_CONTROL_HOUSING,
+                "Contacts": fpc.BMS_CONTROL_CONTACT,
+                "Harness": "28 awg; five straight-numbered wires; separate strain relief; 75 mm length budget",
+                "GroundDomain": "center GND" if side == "center" else "CTRL_GND isolated island only; never FG_VSS or PACK_NEG_RAW",
+                "Datasheet": "https://www.jst-mfg.com/product/pdf/eng/eSH.pdf",
+            })
+    if side == "center":
+        s.gnd(*pins["5"])
+        s.gnd(*pins["MP"])
+    return pins
+
+
+def build_bms_interconnect_sheet(sheet_uuid, label_kind="hier"):
+    s = b.Sheet(f"/{sheet_uuid}")
+    place_bms_control_connector(s, "center", 80, 90, label_kind)
+    place_bms_power_connector(s, "center", 80, 145, label_kind)
+    s.text(30, 190, "j2071 carries pack current through the rated power harness. j2073 supplies the isolated control island and its own return.")
+    s.text(30, 200, "the bms control return never joins raw pack negative or the protected power return. the power return still crosses the center gauge shunt.")
+    return s
 
 
 def build_fpc_sheet(sheet_uuid, ref, symname, pinmap, value, pwr_base=3100,
@@ -1003,6 +969,11 @@ def build_fpc_sheet(sheet_uuid, ref, symname, pinmap, value, pwr_base=3100,
                                "MPN": FPC_BOM[ref][1]} if ref in FPC_BOM else None)
     for i, net in enumerate(power_flags):
         s.pwrflag(20 + i * 15.24, 420, net)
+    import usb_power_contract
+    usb_power_contract.add_board_power(s, ref)
+    if ref in ("FPC101", "FPC102", "FPC103", "FPC104"):
+        import signal_interconnect_contract
+        signal_interconnect_contract.add_returns(s, ref)
     return s
 
 
@@ -1095,7 +1066,7 @@ def main():
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "VSYS", "MCU_3V3", "EC_AON_IN", "AUX_DC_ADC", "USB_PD_SELECTED",
         "PD1_VBUS_RAW", "PD2_VBUS_RAW",
-        "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD",
+        "PACK_FAULT_N", "PACK_RETRY_PULSE", "PACK_CHG_TEMP_OK", "AUX_FAULT_N", "AUX_PGOOD",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]
     ec_hier_nets = [
@@ -1263,7 +1234,7 @@ def main():
     fpc2_nets = fpc.FPC2_NETS
     # FPC-3 center side: the return conductors are FG_VSS (post-protector);
     # the pack negative never crosses the cable (Phase 5 contract).
-    fpc3_nets = fpc.contract_nets(fpc.FPC105_PINMAP)
+    fpc3_nets = fpc.BMS_INTERCONNECT_NETS
 
     # Phase 4a: the FPC sheets are real sheets now (connector + hier labels).
     # Phase 5: the center is side B of every cable -- mirrored pin maps
@@ -1271,15 +1242,13 @@ def main():
     fpc1_sheet_uuid = stable_uuid("sheet-symbol:16_fpc1_left")
     fpc2_sheet_uuid = stable_uuid("sheet-symbol:17_fpc2_right")
     fpc3_sheet_uuid = stable_uuid("sheet-symbol:18_fpc3_bms")
-    fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC102", "Conn_01x68_FFC_MP",
+    fpc1_s = build_fpc_sheet(fpc1_sheet_uuid, "FPC102", fpc.symbol_for("FPC102"),
                              fpc.FPC102_PINMAP,
-                             "FH41-68S-0.5SH (FPC-1)", pwr_base=3100)
-    fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC103", "Conn_01x68_FFC_MP",
+                             "Molex5039084120 signal cable", pwr_base=3100)
+    fpc2_s = build_fpc_sheet(fpc2_sheet_uuid, "FPC103", fpc.symbol_for("FPC103"),
                              fpc.FPC103_PINMAP,
-                             "FH41-68S-0.5SH (FPC-2)", pwr_base=3200)
-    fpc3_s = build_fpc_sheet(fpc3_sheet_uuid, "FPC105", "Conn_01x30_FFC_MP",
-                             fpc.FPC105_PINMAP,
-                             "FH12-30S-0.5SH (FPC-3)", pwr_base=3300)
+                             "Molex5039085120 signal cable", pwr_base=3200)
+    fpc3_s = build_bms_interconnect_sheet(fpc3_sheet_uuid)
     for filename, s in (("fpc1_left.kicad_sch", fpc1_s),
                         ("fpc2_right.kicad_sch", fpc2_s),
                         ("fpc3_bms.kicad_sch", fpc3_s)):

@@ -117,10 +117,10 @@ RESISTOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
     "R783":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
 
     # -- 03_mu_carrier.kicad_sch --
-    "R42":   ("Yageo", "RC0603FR-07169KL",   "1%-context"),
+    "R42":   ("Yageo", "RC0603FR-07100KL",   "1%-context"),
     "R43":   ("Yageo", "RC0603FR-0745K3L",   "1%-context"),
     "R44":   ("Yageo", "RC0603FR-0710KL",    "1%-context"),
-    "R45":   ("Yageo", "RC0603FR-0736K1L",   "1%-context"),
+    "R45":   ("Yageo", "RC0603FR-07100KL",   "1%-context"),
     "R46":   ("Yageo", "RC0603FR-07100KL",   "1%-context"),
     "R47":   ("Yageo", "RC0603FR-070RL",     "jumper"),
     "R48":   ("Yageo", "RC0603FR-070RL",     "jumper"),
@@ -143,8 +143,8 @@ RESISTOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
     "R767":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
     "R768":  ("Yageo", "RC0603FR-0710KL",    "1%-context"),
     "R769":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
-    "R770":  ("Yageo", "RC0603FR-07169KL",   "1%-context"),
-    "R771":  ("Yageo", "RC0603FR-0736K1L",   "1%-context"),
+    "R770":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
+    "R771":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
     "R772":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
 
     # -- 06_tcp0_external_hdmi.kicad_sch --

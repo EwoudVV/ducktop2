@@ -1,120 +1,82 @@
 # center board
 
-checked 7 september 2026. this is the eight-layer Mu carrier in
-`ducktop2-center.kicad_pcb`. it still has 726 footprints and no tracks or
-vias. the separate BMS is four layers and its routing is unchanged.
+updated 8 september 2026. this is the eight-layer Mu carrier in
+`ducktop2-center.kicad_pcb`. the saved board has 735 footprints. the audit
+repairs and manual placement changes are still being brought together;
+remaining main-board routing has not started.
 
-## placement
+## current placement
 
-the BMS now fits in a front-center notch. the opening runs from x=152.55
-to x=217.45, with its back at y=152.5 and 1.5 mm inside radii. the installed
-BMS has 1.5 mm clearance from the center board. FPC105 faces it at
-(184.251,132.5), rotation 0. all 30 cable conductors line up with the
-reversed pin map.
+i moved both M.2 sockets and several power, audio, and service connectors.
+these positions are the starting point for the next fit check. the card
+retainers and nearby parts still need to follow the sockets.
 
-the regulator capacitors, feedback networks, inductors, crystals, and gauge
-parts are grouped with their circuits. U2 is at (174.5,118). U10 and RS1
-are beside the battery interface, with the sense filters kept separate from
-the load-current path. RS1 still separates `FG_VSS` from system `GND`;
-do not bypass it with a ground pour.
+| part | saved position, mm | rotation |
+| --- | --- | --- |
+| J10, NVMe socket | 189.55, 106.60 | 90° |
+| J40, Wi-Fi/Bluetooth socket | 177.80, 88.05 | -90° |
+| J2071, BMS power | 188.60, 144.54 | 0° |
+| J2073, BMS control | 176.50, 145.45 | 180° |
+| RS1, gauge shunt | 165.95, 135.40 | 180° |
+| J41, left OLED | 201.05, 145.00 | 180° |
+| J45, right OLED | 210.575, 145.00 | 180° |
+| J901, maker connector | 298.00, 6.00 | 180° |
 
-the Mu courtyard is clear apart from its two supports. the M.2 courtyards
-now include the 2280 and 2230 cards. their sockets face the mounting nuts,
-and the power parts, boot button, and programming connector are outside
-the card areas. the case still needs a measured height and cable fit.
+RS1 separates `FG_VSS` from system `GND`. its sense filters and gauge inputs
+need short Kelvin connections; a ground pour or cable return must not bypass
+it. the BMS control return is a separate isolated interface.
 
-J41/J45 are wired JST GH OLED connectors. J310 is at (145,49), rotation
-270; J2300 is at (155,67.75), rotation 0. the trackpad lands are at
-(141,162.25). the speaker connectors are at (103,171) and (115,171).
-see [cables and connectors](cables-and-connectors.md) and the
-[mechanical layout](mechanical.md) for the installed datums.
+the front-center BMS opening still runs from x=152.55 to x=217.45, with its
+back at y=152.5 and 1.5 mm inside radii. the revised BMS outline, connectors,
+wire bends, and insulated supports need a combined fit check. H14 was
+removed from the center board and H27 from the right board; the support and
+keepout records still need to be updated with the placement review.
 
-## schematic and footprint fixes
+## applied corrections
 
-C170 now has the 47u part number `GRM31CR61A476ME15L` on both the
-schematic and board. the left USB3-A coupling capacitors C1852/C1853 now
-specify real 100n 16 V X7R parts, `GRM155R71C104KA88D`, in the same 0402
-footprints. the old part number was 100pF.
+the saved center board includes the corrected always-on input protection,
+Mu supply parts, isolated BMS control connector, and charge-temperature
+gate. the RP2350 regulator uses the reference-design inductor and local
+capacitor placement, with copper exclusions beneath its switching region.
+the USB protection supply and RTC diode connections were also corrected.
 
-the I/O cables use FH41-68S-0.5SH(28), Hirose's compatible replacement for
-(05). the JST connector symbols include their mounting pads, so a netlist
-update keeps all 18 hold-down pads grounded.
+those changes passed the physical and schematic comparisons before the
+latest manual moves. that result does not cover the new placement. the
+next check includes the actual card outlines, support positions, capacitor
+locations, connector access, and every changed pad-net assignment.
 
-USB data nets use matching P/N suffixes, including the segments through
-switches and protection parts. KiCad can now recognize the pairs. the
-netlist comparison checked every affected reference and pin before and
-after the rename, with no signal-connection changes.
+## changes still being applied
 
-## HDMI power
+the generators now include revised power stages, USB power permissions,
+separate I/O power looms, and 41- and 51-contact shielded signal interfaces.
+some saved schematics and boards still contain the previous parts. update
+from a reviewed fresh netlist and preserve the manual placements.
 
-R40/R41 stay at 75.0k/10.0k, giving 5.10 V nominal. the right board now
-has the TPS22948 HDMI 5 V switch and TPD4E05U06 control-line protection,
-with the TMDS protection and DDC/HPD translation retained.
-
-the checked rail minimum is 5.01464 V. allowing 27.5 mV for the switch at
-55 mA and 50 mV for the board and connectors leaves 4.93714 V, above the
-4.80 V requirement. routing has to meet that drop allowance. startup,
-short-circuit, reverse-current response, and cable behavior still need
-hardware tests.
-[TPS56637](https://www.ti.com/lit/ds/symlink/tps56637.pdf),
-[TPS22948](https://www.ti.com/lit/ds/symlink/tps22948.pdf).
+see [power and battery](power-and-battery.md) and
+[cables and connectors](cables-and-connectors.md) for the circuit and harness
+work. connector selection alone does not qualify the complete high-speed
+channel. board routes, cable bends, return paths, and assembled testing are
+part of that check.
 
 ## routing setup
 
 controlled-impedance routes use F.Cu, In2.Cu, or B.Cu. In2.Cu has ground
 on both sides. In5.Cu faces split power islands and is for general routing.
-the ground layers reject non-ground tracks. the old disconnected power-pour
-placeholders are removed; In4.Cu power distribution will be drawn with the
-routes. the same layer rules cover
-the center and both I/O boards.
+the ground layers reject non-ground tracks. In4.Cu power distribution still
+needs to be drawn with the routes.
 
 | netclass | outer width / gap, mm | In2.Cu width / gap, mm |
 | --- | --- | --- |
 | DIFF_85 | 0.183 / 0.1524 | 0.114 / 0.1524 |
-| DIFF_90, USB 2.0 and USB 3.x | 0.1796 / 0.2032 | 0.111 / 0.203 |
+| DIFF_90 | 0.1796 / 0.2032 | 0.111 / 0.203 |
 | DIFF_100 | 0.1521 / 0.254 | 0.091 / 0.254 |
 
-these are the approved geometries in
-`manufacturing/mainboard_stackup_release.json`. USB 2.0 now uses the
-90-ohm coupled geometry, rather than a width-only single-ended preset.
-[TI USB layout guidance](https://www.ti.com/lit/an/spraar7/spraar7.pdf).
+these settings come from `manufacturing/mainboard_stackup_release.json`.
+use `gen/setup_net_classes.py --project all` to check the actual projects.
+local escapes, neckdowns, reference transitions, and connector launches
+need their own review.
 
-`gen/setup_net_classes.py --project all` checks the actual split projects.
-add `--apply` to update their project settings. local fanout neckdowns and
-uncoupled escapes need their own routing review.
-
-the chassis-hole keepouts use the actual mount positions on each board.
-soldered module retainers rely on their footprint and drill clearances.
-
-the existing left-board copper has been preserved. the stricter rules
-expose its USB escape widths and pair spacing for correction during routing.
-no new routing was added in this preparation pass.
-
-## current checks
-
-| board | physical pad comparison | tracks / vias | native airwires |
-| --- | --- | --- | --- |
-| center | 3,018 pads match | 0 / 0 | 2,038 |
-| left I/O | 1,278 pads match | 144 / 0 | 804 |
-| right I/O | 714 pads match | 0 / 0 | 506 |
-| BMS | 187 pads match | 730 / 313 | 0 |
-
-the center has no DRC violations beyond the unconnected list. the left
-board has 20 existing USB escape-width findings and 31 pair-gap findings;
-those need routing changes. its two dangling ends are also existing work.
-the right and BMS boards have no copper DRC errors. local silkscreen and
-footprint differences remain visible as library-comparison warnings.
-
-ERC has no errors on these four schematics. the remaining main-board
-warnings concern grounded configuration pins and cached library symbols.
-27 regression tests and all 67 electrical calculations pass.
-
-## checking progress
-
-use the native connectivity count for airwires. KiCad's DRC report caps the
-unconnected list at 499, and several other finding categories are capped too.
-a smaller displayed list does not establish that the board is clean.
-[KiCad DRC source](https://gitlab.com/kicad/code/kicad/-/blob/10.0/pcbnew/drc/drc_engine.cpp).
-
-the current reports are in `verification/generated/routing-prep-2026-09-06/`.
-these checks are preparation for routing, not a manufacturing release.
+use [build and verify](../build-and-verify.md) for the checks. native
+connectivity gives the full airwire count; KiCad's DRC list can stop at 499
+unconnected findings. run the six-board routing check after the source,
+layout, and mechanical records agree.

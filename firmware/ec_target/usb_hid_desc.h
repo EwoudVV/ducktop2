@@ -44,7 +44,7 @@
 #define USB_STR_SERIAL          0x03u
 
 extern const uint8_t usb_hid_device_descriptor[18];
-extern const uint8_t usb_hid_config_descriptor[59];
+extern const uint8_t usb_hid_config_descriptor[84];
 extern const uint8_t usb_hid_keyboard_report_descriptor[63];
 extern const uint8_t usb_hid_consumer_report_descriptor[23];
 extern const uint8_t usb_hid_string_langid[4];
@@ -52,11 +52,14 @@ extern const uint8_t usb_hid_string_manufacturer[22];
 extern const uint8_t usb_hid_string_product[24];
 extern const uint8_t usb_hid_string_serial[28];
 
-#define USB_HID_CONFIG_TOTAL_LENGTH 59u
+#define USB_HID_CONFIG_TOTAL_LENGTH 84u
+#define USB_HID_STATUS_EP 0x83u
+extern const uint8_t usb_hid_status_report_descriptor[25];
 
 /* Validate descriptor chain structure; returns 0 on success, or the offset
  * of the first inconsistency.  Host-test entry point. */
 uint32_t usb_hid_desc_check(void);
+uint32_t usb_hid_desc_check_buffer(const uint8_t *config, uint32_t size);
 
 /* Report-descriptor total size walk; returns the reported input size in
  * bytes for the given report descriptor, or 0 on malformed input. */

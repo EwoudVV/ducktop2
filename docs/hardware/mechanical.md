@@ -37,6 +37,13 @@ the BMS file uses its original coordinates; the installed translation is
 
 the radio outline is about 120 x 70 mm in its own layout frame. its installed
 position and the keyboard's assembly transform still need the case model.
+the corrected SMA axes are at x=43 and x=108, pointing through the rear
+edge at y=20. their centerlines sit 0.38 mm above the PCB top. the connector
+bodies extend 9.52 mm beyond that edge and 3.58 mm below the PCB top.
+[`radio-datums.json`](../../mechanical/radio-datums.json) records the complete
+nominal body envelopes and mounting holes from the saved board. regenerate
+it with `gen/export_radio_mechanical.py` using KiCad's Python. add connector
+tolerances, the selected antenna plugs and room to tighten them in the case.
 
 the working packaging plan puts the cells across the front band and the
 trackpad above them on its own support plate. the keyboard overlaps part of

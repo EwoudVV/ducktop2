@@ -1,0 +1,10 @@
+(version 1)
+
+# molex 73251-1153 is an edge launch. its complete smd lands begin at the
+# pcb slot stop, local x=-4.26 mm. kicad requires a negative minimum to
+# permit contact with the edge, so use one native unit below zero here.
+# verify_radio_daughterboard.py independently requires the seating datum
+# and every complete copper land inside or on the actual board outline.
+(rule "radio Molex 73251-1153 edge-launch SMD lands"
+    (condition "((A.memberOfFootprint('J241') || A.memberOfFootprint('J251')) && A.Pad_Type == 'SMD') || ((B.memberOfFootprint('J241') || B.memberOfFootprint('J251')) && B.Pad_Type == 'SMD')")
+    (constraint edge_clearance (min -0.000001mm)))

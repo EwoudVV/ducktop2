@@ -13,6 +13,7 @@ from pathlib import Path
 import wx
 app = wx.App(False)
 import pcbnew as pcb
+import fpc_contract as interconnect
 
 ROOT = Path(__file__).resolve().parents[1]
 config = json.loads((ROOT / "mechanical/board-placement.json").read_text())
@@ -96,8 +97,6 @@ for name, spec in config["boards"].items():
             center = xy(zone.GetBoundingBox().GetCenter())
             assert math.dist(center, footprint_positions[ref]) < .01, f"{name} {ref} keepout is out of position"
 
-center = next(f for f in loaded["center"].GetFootprints() if f.GetReference() == "FPC105")
-bms = next(f for f in loaded["bms"].GetFootprints() if f.GetReference() == "FPC106")
 mount_checks = {}
 center_parts = {f.GetReference(): f for f in loaded["center"].GetFootprints()}
 for name, card in config["m2_cards"].items():
@@ -114,18 +113,51 @@ for name, card in config["m2_cards"].items():
     assert max(abs(offset[i]-card["retainer_from_pad1_local"][i]) for i in (0, 1)) < .01, f"{name} socket and retainer do not line up"
     mount_checks[name] = {"socket": card["socket"], "retainer": card["retainer"], "local_offset": offset}
 data["m2_mount_checks"] = mount_checks
-cp = {p.GetNumber(): p for p in center.Pads()}
-bp = {p.GetNumber(): p for p in bms.Pads()}
-for number in range(1, 31):
-    a, z = cp[str(number)], bp[str(31-number)]
-    ac = transform(xy(a.GetPosition()), config["boards"]["center"])
-    bc = transform(xy(z.GetPosition()), config["boards"]["bms"])
-    assert abs(ac[0]-bc[0]) < .00001, f"FPC-3 conductor {number} misaligned"
-    assert a.GetNetname().rsplit("/", 1)[-1] == z.GetNetname().rsplit("/", 1)[-1], f"FPC-3 conductor {number} net mismatch"
-a = transform(xy(center.GetPosition()), config["boards"]["center"])
-z = transform(xy(bms.GetPosition()), config["boards"]["bms"])
-y0, y1 = a[1]+4.4, z[1]-4.4
-svg.append(f'<rect x="{a[0]-8.5}" y="{y0}" width="17" height="{y1-y0}" fill="#ead399" fill-opacity=".75" stroke="#ac8230" stroke-width=".25"/>')
+data["bms_harnesses"] = {}
+for name, maps, refs, footprint_id, mpn, housing, contact in (
+    ("power", {"center": interconnect.BMS_POWER_PINMAP, "bms": interconnect.BMS_POWER_PINMAP},
+     interconnect.BMS_POWER_REFS, interconnect.BMS_POWER_FOOTPRINT, interconnect.BMS_POWER_MPN,
+     interconnect.BMS_POWER_HOUSING, interconnect.BMS_POWER_CONTACT),
+    ("control", {"center": interconnect.BMS_CONTROL_CENTER_PINMAP, "bms": interconnect.BMS_CONTROL_PINMAP},
+     interconnect.BMS_CONTROL_REFS, interconnect.BMS_CONTROL_FOOTPRINT, interconnect.BMS_CONTROL_MPN,
+     interconnect.BMS_CONTROL_HOUSING, interconnect.BMS_CONTROL_CONTACT),
+):
+    spec = config["bms_harnesses"][name]
+    ends, rows = {}, []
+    for board_name, reference in refs.items():
+        matches = [f for f in loaded[board_name].GetFootprints() if f.GetReference() == reference]
+        assert len(matches) == 1, f"{board_name} needs the current BMS connector {reference}"
+        footprint = matches[0]
+        actual_id = str(footprint.GetFPID().GetLibNickname()) + ":" + str(footprint.GetFPID().GetLibItemName())
+        assert actual_id == footprint_id, f"{reference} has the wrong connector footprint"
+        pads = {pad.GetNumber(): pad for pad in footprint.Pads()}
+        for pin, net in maps[board_name].items():
+            assert str(pin) in pads, f"{reference} is missing pin {pin}"
+            actual = pads[str(pin)].GetNetname().rsplit("/", 1)[-1]
+            assert actual == net, f"{reference} pin {pin}: {actual} instead of {net}"
+        mounting_pads = [pad for pad in footprint.Pads() if pad.GetNumber() == "MP"]
+        assert mounting_pads, f"{reference} is missing its hold-down pads"
+        for pad in mounting_pads:
+            mp_net = pad.GetNetname().rsplit("/", 1)[-1]
+            if name == "power":
+                assert not mp_net or mp_net.startswith("unconnected-"), f"{reference} hold-down must remain isolated"
+            else:
+                assert mp_net == maps[board_name][5], f"{reference} hold-down crosses a ground domain"
+        ends[board_name] = {"reference": reference,
+                            "position": transform(xy(footprint.GetPosition()), config["boards"][board_name]),
+                            "pin_map": maps[board_name]}
+    a, z = ends["center"]["position"], ends["bms"]["position"]
+    straight = math.dist(a, z)
+    assert straight < spec["wire_length_budget_mm"], f"{name} harness cannot fit its wire-length budget"
+    for pin in maps["center"]:
+        rows.append({"center_pin": pin, "center_net": maps["center"][pin],
+                     "bms_pin": pin, "bms_net": maps["bms"][pin]})
+    data["bms_harnesses"][name] = {**spec, "ends": ends, "pcb_connector_mpn": mpn,
+                                   "housing_mpn": housing, "contact_mpn": contact,
+                                   "connections": rows, "origin_distance_mm": round(straight, 6),
+                                   "installed_route_verified": False}
+    color = "#b98237" if name == "power" else "#627cab"
+    svg.append(f'<path d="M {a[0]},{a[1]} L {z[0]},{z[1]}" fill="none" stroke="{color}" stroke-width="1" stroke-dasharray="2 1"/>')
 label(185, 175, "bms", 4, "#28586d")
 label(185, 180, "1.5 mm board clearance", 2.3, "#28586d")
 for x, text in [(35, "left I/O"), (185, "center"), (329, "right I/O")]:
@@ -137,8 +169,6 @@ svg.append('<rect x="109" y="143" width="140" height="105" rx="2" fill="none" st
 label(179, 240, "trackpad above the front area", 2.8, "#655f50")
 label(179, 255, "board XY placement; case height, cable loops and supports still need a measured fit", 2.7)
 svg.append('</g></svg>')
-data["fpc3"] = {"pin_map_checked": 30, "actuator_envelope_gap": round(y1-y0, 6),
-                 "center_position": a, "bms_position": z}
 (ROOT / "mechanical/board-layout.svg").write_text("\n".join(svg)+"\n")
 (ROOT / "mechanical/board-datums.json").write_text(json.dumps(data, indent=2)+"\n")
-print("exported four board outlines and mounting datums; all 30 FPC-3 conductors align")
+print("exported four board outlines and mounting datums; BMS power and isolated control pin maps match")
