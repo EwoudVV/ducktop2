@@ -48,7 +48,7 @@ def build_right_pd_sheet(sheet_symbol_uuid):
     usb.add_source_port(s, jref="J12", port=4, base=1760, x0=20.32, y0=337.82,
                         usb2_only=True, remote_data=True, ec_controlled=True)
     # Phase 5 B9: the right board's chassis holes live on THIS board.
-    for ref in ("H13", "H15", "H17", "H27"):
+    for ref in ("H13", "H15", "H17"):
         s.place(ref, "MountingHole", "M2.5 isolated mainboard mounting hole",
                 500.0, 20.32, footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
                 in_bom=False,

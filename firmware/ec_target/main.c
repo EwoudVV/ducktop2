@@ -238,9 +238,11 @@ int main(void)
                  .admission_current_ma=DUCKTOP2_USB_ADMISSION_MA,
                  .right_harness_current_ma=DUCKTOP2_USB_RIGHT_HARNESS_MA,
                  .rail_max_mv=5239u,.minimum_efficiency_percent=DUCKTOP2_USB_EFFICIENCY_PERCENT},
-        .startup_ceiling_ma=5700u,.pd_inrush_ma=DUCKTOP2_USB_PD_INRUSH_MA,
+        .startup_ceiling_ma=5600u,.pd_inrush_ma=DUCKTOP2_USB_PD_INRUSH_MA,
         .branch_inrush_ma=DUCKTOP2_USB_BRANCH_INRUSH_MA,
         .rail_min_mv=5000u,.rail_max_mv=5250u,
+        .vsys_max_overestimate_mv=DUCKTOP2_VSYS_MAX_OVERESTIMATE_MV,
+        .vsys_max_fall_mv=DUCKTOP2_VSYS_MAX_FALL_MV,
         .startup_timeout_ms=500u,.gate_timeout_ms=200u,.sample_max_age_ms=100u
     };
     if (!usb_power_init(&usb_power,&uc,GetTick())) NVIC_SystemReset();
@@ -271,6 +273,8 @@ int main(void)
         uint64_t used=(uint64_t)config.system_reserve_mw+host.budget_mw+other_auxiliary_mw;
         usb_power_request_t ur={
             .host_lease_valid=host.valid,
+            .vsys_measurement_valid=DUCKTOP2_VSYS_SENSE_QUALIFIED && in.vsys_valid,
+            .vsys_measured_mv=in.vsys_mv,.vsys_age_ms=in.vsys_sample_age_ms,
             .system_safe=out->mu_12v_enable && gpio_get_mu_12v_pg() && in.thermal_ok &&
                          in.service_bus_healthy && out->power_policy_confirmed &&
                          in.estimated_aux_power_valid,

@@ -12,7 +12,7 @@ def props(manufacturer, mpn, datasheet="", **extra):
 def resistor(s, ref, value, x, y, a, b, *, a_kind="local", b_kind="local", mpn="RC0603FR-0710KL"):
     s.place(ref, "R", value, x, y, footprint=FOOTPRINTS["R"],
             pin_nets={"1": (a, a_kind), "2": (b, b_kind)},
-            extra_props=props("Yageo", mpn))
+            extra_props=props("Vishay" if mpn.startswith("TNP") else "Yageo", mpn))
 
 
 def capacitor(s, ref, value, x, y, net, *, kind="local", footprint="C_100n", mpn="GRM188R71H104KA93D"):
@@ -62,13 +62,13 @@ def add_usb5_lm706a0(s):
     s.place("U1703", "LM706A0", "LM706A0RRXR USB5 5.161V; 6.5A design envelope", 63.5, 73.66,
             footprint=FOOTPRINTS["LM706A0"], pin_nets=pin_nets,
             extra_props=props("Texas Instruments", "LM706A0RRXR", "https://www.ti.com/lit/gpn/LM706A0",
-                              Compensation="external;3.3k+220n;2.2nHF;two330uF_local",
+                              Compensation="external;2.49k+220n;2.2nHF;two330uF_local;0.95MHz;PP5V_gates_off_or_on",
                               Startup="ports_off_until_rails_settle",
                               Layout="separate_SW4_bootstrap_return;Kelvin_ISNS+_and_VOUT"))
-    s.place("L1701", "L", "8.2uH 16.9A Isat30 / 9.9A Irms20", 121.92, 73.66,
+    s.place("L1701", "L", "6.8uH 18.4A Isat30 / 10.9A Irms20", 121.92, 73.66,
             footprint=FOOTPRINTS["L_XGL1060"],
             pin_nets={"1": ("USB5_SW", "local"), "2": ("USB5_PRE_SENSE", "local")},
-            extra_props=props("Coilcraft", "XGL1060-822MEC", "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xgl/xgl1060/xgl1060-822/",
+            extra_props=props("Coilcraft", "XGL1060-682MEC", "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xgl/xgl1060/xgl1060-682/",
                               Layout="pad1_is_marked_short_lead_to_SW;6mm_max_height"))
     for ref,y in (("RS1860",73.66),("RS1861",88.9)):
         s.place(ref, "R", "10mOhm 1% 1W USB5 sense; parallel pair gives 5mOhm", 152.4, y,
@@ -80,10 +80,10 @@ def add_usb5_lm706a0(s):
              "USB5_HW_ENABLE", "USB5_EN", mpn="RC0603FR-07100KL")
     resistor(s, "R1711", "100k USB5 EN bottom", 63.5, 106.68,
              "USB5_EN", "GND", mpn="RC0603FR-07100KL")
-    resistor(s, "R1712", "55.6k 0.1% 10ppm USB5 FB top", 101.6, 106.68,
-             "USB_PORT_5V", "USB5_FB", a_kind="hier", mpn="RT0603BRB0755K6L")
-    resistor(s, "R1713", "10.2k 0.1% 10ppm USB5 FB bottom", 127, 106.68,
-             "USB5_FB", "GND", mpn="RT0603BRB0710K2L")
+    resistor(s, "R1712", "55.6k 0.02% 5ppm USB5 FB top", 101.6, 106.68,
+             "USB_PORT_5V", "USB5_FB", a_kind="hier", mpn="TNPU060355K6HZEN00")
+    resistor(s, "R1713", "10.2k 0.02% 5ppm USB5 FB bottom", 127, 106.68,
+             "USB5_FB", "GND", mpn="TNPU060310K2HZEN00")
     resistor(s, "R1714", "100k USB5 PG pull-up", 152.4, 106.68,
              "SYS_3V3", "USB5_PG", a_kind="hier", mpn="RC0603FR-07100KL")
     resistor(s, "R1863", "1R USB5 bootstrap damping", 101.6, 91.44,
@@ -105,12 +105,12 @@ def add_usb5_lm706a0(s):
     capacitor(s, "C1860", "22u 25V USB5 VCC; effective minimum 4.7u", 20.32, 144.78,
               "USB5_VCC", footprint="C_1210", mpn="GRM32ER71E226KE15L")
     capacitor(s, "C1861", "100n 50V USB5 VDDA", 45.72, 144.78, "USB5_VDDA")
-    resistor(s, "R1860", "49.9k 0.1% 10ppm USB5 RT", 76.2, 144.78,
-             "USB5_RT", "GND", mpn="RT0603BRB0749K9L")
+    resistor(s, "R1860", "22.1k 0.02% 5ppm USB5 RT", 76.2, 144.78,
+             "USB5_RT", "GND", mpn="TNPU060322K1HZEN00")
     resistor(s, "R1861", "29.4k 1% standalone DRSS off", 101.6, 144.78,
              "USB5_CONFIG", "GND", mpn="RC0603FR-0729K4L")
-    resistor(s, "R1862", "3.3k 1% USB5 COMP", 20.32, 165.1,
-             "USB5_COMP", "USB5_COMP_RC", mpn="RC0603FR-073K3L")
+    resistor(s, "R1862", "2.49k 0.02% 5ppm USB5 COMP", 20.32, 165.1,
+             "USB5_COMP", "USB5_COMP_RC", mpn="TNPU06032K49HZEN00")
     s.place("C1862", "C", "220n 50V X7R USB5 COMP", 45.72, 165.1,
             footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("USB5_COMP_RC", "local"), "2": ("GND", "local")},
@@ -129,7 +129,7 @@ def add_usb5_lm706a0(s):
             footprint=FOOTPRINTS["C_68u_25V_poly"], dnp=True,
             pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
             extra_props=props("KEMET", "T521V686M025ATE050"))
-    s.text(20.32, 187.96, "USB5: external COMP 3.3k / 220n / 2.2n; include both local reservoirs and remote PP5V banks in the loop model.")
+    s.text(20.32, 187.96, "USB5: external COMP 2.49k / 220n / 2.2n; include each PP5V reservoir gate state and remote cable R/L in the loop model.")
     s.text(20.32, 195.58, "6.5A includes VBUS and VCONN. Source admission, harness loss, capacitor corners, startup and thermal behavior require qualification.")
 
 
@@ -148,8 +148,8 @@ def add_hub_supplies(s):
             footprint=FOOTPRINTS["L_TFM201610"],
             pin_nets={"1": ("HUB_CORE_SW", "local"), "2": ("HUB_VCORE", "local")},
             extra_props=props("TDK", "TFM201610ALMA-R47MTAA"))
-    resistor(s, "R1705", "91.0k 1% core FB top", 215.9, 106.68, "HUB_VCORE", "HUB_CORE_FB", mpn="RC0603FR-0791KL")
-    resistor(s, "R1706", "100k 1% core FB bottom", 241.3, 106.68, "HUB_CORE_FB", "GND", mpn="RC0603FR-07100KL")
+    resistor(s, "R1705", "91.0k 0.02% 5ppm core FB top", 215.9, 106.68, "HUB_VCORE", "HUB_CORE_FB", mpn="TNPU060391K0HZEN00")
+    resistor(s, "R1706", "100k 0.02% 5ppm core FB bottom", 241.3, 106.68, "HUB_CORE_FB", "GND", mpn="TNPU0603100KHZEN00")
     resistor(s, "R1707", "100k core PG pull-up", 266.7, 106.68, "SYS_3V3", "HUB_CORE_PG", a_kind="hier", mpn="RC0603FR-07100KL")
     s.place("C1705", "C", "120p core feed-forward", 215.9, 121.92,
             footprint=FOOTPRINTS["C_0402"], pin_nets={"1": ("HUB_VCORE", "local"), "2": ("HUB_CORE_FB", "local")},

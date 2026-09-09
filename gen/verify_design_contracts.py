@@ -70,9 +70,17 @@ def local_net(sheet: str, name: str) -> str:
 
 def expect_unconnected(components, ref: str, pin: str) -> None:
     got = net(components, ref, pin)
-    pattern = rf"unconnected-\({re.escape(ref)}(?:-[^()]*)?-Pad{re.escape(pin)}\)"
+    # Native XML carries one symbol UUID per unit. A single-unit connector
+    # cannot acquire a suffix just because its net name contains one.
+    units = len(getattr(comp(components, ref), 'path', '').split()) or 1
+    suffix = f"(?:[{'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[:units]}])?" if 1 < units <= 26 else ""
+    pattern = rf"unconnected-\({re.escape(ref)}{suffix}(?:-[^()]*)?-Pad{re.escape(pin)}\)"
     if got is None or re.fullmatch(pattern, got) is None:
         fail(f"{ref} pin {pin}: expected an exact KiCad unconnected net, got {got!r}")
+    nodes = {(other_ref, other_pin) for other_ref, item in components.items()
+             for other_pin, other_net in item.pin_nets.items() if other_net == got}
+    if nodes != {(ref, pin)}:
+        fail(f"{ref} pin {pin}: no-connect net is shared by {sorted(nodes)}")
 
 
 def expect_value_prefix(components, ref: str, prefix: str, label: str | None = None) -> None:
@@ -466,8 +474,8 @@ def check_battery_and_charger(components):
     expect(net(components, "R18", "1"), "/Power & Battery/PROG_SET", "BQ25798 PROG resistor top")
     expect(net(components, "R18", "2"), "GND", "BQ25798 PROG resistor bottom")
     expect(net(components, "R17", "1"), "/Power & Battery/REGN", "BQ25798 ILIM top source")
-    expect_value_prefix(components, "R17", "47.0k 0.1%", "BQ25798 3A ILIM top")
-    expect_value_prefix(components, "R190", "100k 0.1%", "BQ25798 3A ILIM bottom")
+    expect_value_prefix(components, "R17", "47.0k 0.02%", "BQ25798 3A ILIM top")
+    expect_value_prefix(components, "R190", "100k 0.02%", "BQ25798 3A ILIM bottom")
     expect(net(components, "R190", "2"), "GND", "BQ25798 ILIM bottom")
     expect(net(components, "L1", "1"), "/Power & Battery/SW1", "BQ25798 inductor side A")
     expect(net(components, "L1", "2"), "/Power & Battery/SW2", "BQ25798 inductor side B")
@@ -517,14 +525,14 @@ def check_battery_and_charger(components):
     for pin in ("17", "18"):
         expect(net(components, "U12", pin), "/Power & Battery/AUX_DC_PROTECTED", f"TPS26630 output pin {pin}")
     expect_value_prefix(components, "R711", "300k", "TPS26630 UV/OV top")
-    expect_value_prefix(components, "R712", "63.2k", "TPS26630 UV/OV middle")
+    expect_value_prefix(components, "R712", "63.4k", "TPS26630 UV/OV middle")
     expect_value_prefix(components, "R713", "20.0k", "TPS26630 UV/OV bottom")
     expect(net(components, "U12", "14"), "/AUX_FAULT_N", "TPS26630 AUX fault output")
     expect(net(components, "U12", "15"), "/Power & Battery/AUX_PGTH", "TPS26630 PGOOD threshold input")
     expect(net(components, "U12", "16"), "/AUX_PGOOD", "TPS26630 AUX power-good output")
     for ref, value, pin1, pin2 in (
         ("R739", "332k 0.1%", "/Power & Battery/AUX_DC_PROTECTED", "/Power & Battery/AUX_PGTH"),
-        ("R740", "97.6k 0.1%", "/Power & Battery/AUX_PGTH", "GND"),
+        ("R740", "97.6k 0.02%", "/Power & Battery/AUX_PGTH", "GND"),
     ):
         expect_value_prefix(components, ref, value, f"{ref} AUX PGOOD threshold divider")
         expect(net(components, ref, "1"), pin1, f"{ref} AUX PGOOD divider pin 1")
@@ -534,12 +542,12 @@ def check_battery_and_charger(components):
         expect(net(components, ref, "1"), "/MCU_3V3", f"{ref} pull-up rail")
         expect(net(components, ref, "2"), signal, f"{ref} status signal")
 
-    # Phase 5: U15/U15B cascade (priority PD1 > PD2 > AUX) with the
+    # Phase 5: U15/U16 cascade (priority PD1 > PD2 > AUX) with the
     # corrected LTC4418 pinout (6=VALID1, 7=VALID2, 8=GND, 9=CAS, 10=INTVCC).
     expect_contains(comp(components, "U15").value, "LTC4418IUF", "industrial dual-input selector")
     expect(comp(components, "U15").footprint,
            "ducktop2:ADI_UF20_QFN20_4x4_P0.5_EP2.45", "U15 exact ADI UF20 footprint")
-    expect_contains(comp(components, "U15B").value, "LTC4418IUF", "stage-2 dual-input selector")
+    expect_contains(comp(components, "U16").value, "LTC4418IUF", "stage-2 dual-input selector")
     for pin, want in {
         "1": "/Power & Battery/MAIN_SEL_TMR",
         "2": "/Power & Battery/USB_MAIN_UV", "3": "/Power & Battery/USB_MAIN_OV",
@@ -575,7 +583,7 @@ def check_battery_and_charger(components):
         "17": "/PD2_VBUS_GATED", "18": "/Power & Battery/ST2_SEL_INTVCC",
         "19": "/Power & Battery/ST2_SEL_INTVCC", "20": "GND", "21": "GND",
     }.items():
-        expect(net(components, "U15B", pin), want, f"LTC4418 U15B pin {pin}")
+        expect(net(components, "U16", pin), want, f"LTC4418 U16 pin {pin}")
 
     for ref, gate, common, drain in (
         ("Q21", "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "/USB_PD_SELECTED"),
@@ -596,17 +604,17 @@ def check_battery_and_charger(components):
 
     for ref, value, net_a, net_b in (
         ("R730", "1.00M 0.1%", "/USB_PD_SELECTED", "/Power & Battery/USB_MAIN_UV"),
-        ("R731", "35.7k 0.1%", "/Power & Battery/USB_MAIN_UV", "/Power & Battery/USB_MAIN_OV"),
-        ("R732", "47.5k 0.1%", "/Power & Battery/USB_MAIN_OV", "GND"),
+        ("R731", "35.7k 0.02%", "/Power & Battery/USB_MAIN_UV", "/Power & Battery/USB_MAIN_OV"),
+        ("R732", "47.5k 0.02%", "/Power & Battery/USB_MAIN_OV", "GND"),
         ("R741", "1.00M 0.1%", "/PD2_VBUS_GATED", "/Power & Battery/ST2_USB_UV"),
-        ("R742", "35.7k 0.1%", "/Power & Battery/ST2_USB_UV", "/Power & Battery/ST2_USB_OV"),
-        ("R743", "47.5k 0.1%", "/Power & Battery/ST2_USB_OV", "GND"),
+        ("R742", "35.7k 0.02%", "/Power & Battery/ST2_USB_UV", "/Power & Battery/ST2_USB_OV"),
+        ("R743", "47.5k 0.02%", "/Power & Battery/ST2_USB_OV", "GND"),
         ("R733", "383k 0.1%", "/Power & Battery/AUX_DC_PROTECTED", "/Power & Battery/ST2_AUX_UV"),
-        ("R734", "63.4k 0.1%", "/Power & Battery/ST2_AUX_UV", "/Power & Battery/ST2_AUX_OV"),
-        ("R735", "20.0k 0.1%", "/Power & Battery/ST2_AUX_OV", "GND"),
+        ("R734", "63.4k 0.02%", "/Power & Battery/ST2_AUX_UV", "/Power & Battery/ST2_AUX_OV"),
+        ("R735", "20.0k 0.02%", "/Power & Battery/ST2_AUX_OV", "GND"),
         ("R744", "383k 0.1%", "/Power & Battery/SEL_STAGE2", "/Power & Battery/ST2_MAIN_UV"),
-        ("R745", "54.9k 0.1%", "/Power & Battery/ST2_MAIN_UV", "/Power & Battery/ST2_MAIN_OV"),
-        ("R746", "20.0k 0.1%", "/Power & Battery/ST2_MAIN_OV", "GND"),
+        ("R745", "54.9k 0.02%", "/Power & Battery/ST2_MAIN_UV", "/Power & Battery/ST2_MAIN_OV"),
+        ("R746", "20.0k 0.02%", "/Power & Battery/ST2_MAIN_OV", "GND"),
     ):
         expect_value_prefix(components, ref, value, f"{ref} selector threshold value")
         expect(net(components, ref, "1"), net_a, f"{ref} pin 1")
@@ -644,11 +652,11 @@ def check_battery_and_charger(components):
     expect(comp(components,"U718").footprint,
            "Package_DFN_QFN:Texas_RHF0024A_VQFN-24-1EP_4x5mm_P0.5mm_EP2.65x3.65mm", "aggregate AON eFuse exact footprint")
     for ref,value,net_a,net_b in (
-        ("R795","8.06k 0.1%","/Power & Battery/AON_OR_RAW","/Power & Battery/AON_EFUSE_UV"),
-        ("R796","1.43k 0.1%","/Power & Battery/AON_EFUSE_UV","/Power & Battery/AON_EFUSE_OV"),
-        ("R797","511R 0.1%","/Power & Battery/AON_EFUSE_OV",rtn),
-        ("R798","16k 0.1%","/Power & Battery/AON_EFUSE_ILM",rtn),
-        ("R799","16k 0.1%","/Power & Battery/AON_EFUSE_ILM",rtn),
+        ("R795","8.06k 0.02%","/Power & Battery/AON_OR_RAW","/Power & Battery/AON_EFUSE_UV"),
+        ("R796","1.43k 0.02%","/Power & Battery/AON_EFUSE_UV","/Power & Battery/AON_EFUSE_OV"),
+        ("R797","511R 0.02%","/Power & Battery/AON_EFUSE_OV",rtn),
+        ("R798","16k 0.02%","/Power & Battery/AON_EFUSE_ILM",rtn),
+        ("R799","16k 0.02%","/Power & Battery/AON_EFUSE_ILM",rtn),
         ("C795","1u 25V","/Power & Battery/AON_OR_RAW","GND"),
         ("C796","100n 50V","/Power & Battery/AON_OR_RAW","GND"),
         ("C797","10u 25V","/EC_AON_IN","GND"),
@@ -658,8 +666,8 @@ def check_battery_and_charger(components):
         expect_value_prefix(components,ref,value,f"{ref} AON support value")
         expect(net(components,ref,"1"),net_a,f"{ref} AON support pin1")
         expect(net(components,ref,"2"),net_b,f"{ref} AON support pin2")
-    for ref,mpn in {"R795":"RT0603BRD078K06L","R796":"RT0603BRD071K43L",
-                    "R797":"RT0603BRD07511RL","R798":"RT0603BRD0716KL","R799":"RT0603BRD0716KL",
+    for ref,mpn in {"R795":"TNPU06038K06HZEN00","R796":"TNPU06031K43HZEN00",
+                    "R797":"TNPU0603511RHZEN00","R798":"TNPU060316K0HZEN00","R799":"TNPU060316K0HZEN00",
                     "C799":"C0805C223J5GACTU"}.items():
         expect(prop(components,ref,"MPN"),mpn,f"{ref} AON exact part")
 
@@ -820,8 +828,8 @@ def check_ec_core(components):
     expect_value_prefix(components, "L3", "10uH", "EC buck inductor")
     expect(prop(components,"L3","MPN"),"XGL6030-103MEC","AON inductor fault margin")
     expect(comp(components,"L3").footprint,"ducktop2:Coilcraft_XGL6030","AON inductor lands")
-    expect(prop(components,"R35","MPN"),"RT0603BRD07100KL","AON precision divider top")
-    expect(prop(components,"R36","MPN"),"RT0603BRD0722K1L","AON precision divider bottom")
+    expect(prop(components,"R35","MPN"),"TNPU0603100KHZEN00","AON precision divider top")
+    expect(prop(components,"R36","MPN"),"TNPU060322K1HZEN00","AON precision divider bottom")
     expect_value_prefix(components, "R35", "100k", "EC buck feedback top")
     expect_value_prefix(components, "R36", "22.1k", "EC buck feedback bottom")
     expect(net(components, "C292", "1"), "/MCU_3V3", "EC buck feed-forward output side")
@@ -875,6 +883,60 @@ def check_ec_core(components):
     expect_contains(comp(components, "U46").value, "SN74LVC1G08", "service-mux hardware reset gate")
     expect(net(components, "C781", "1"), "/MCU_3V3", "service-mux reset gate bypass rail")
     expect(net(components, "C781", "2"), "GND", "service-mux reset gate bypass return")
+
+
+def check_sys5_converter(components):
+    local = lambda name: "/Mu Carrier/" + name
+    expect(prop(components, "U6", "MPN"), "LM706A0RRXR", "SYS5 exact regulator")
+    expect(comp(components, "U6").footprint,
+           "ducktop2:Texas_RRX0029B_VQFN-29_6x6mm", "SYS5 RRX package")
+    pins = {
+        **{str(n): "/VSYS" for n in (1, 2, 3, 27, 28, 29)},
+        **{str(n): "GND" for n in (6, 8, 17, 23, 24, 25, 26, 30)},
+        **{str(n): local("BUCK5_SW") for n in (20, 21, 22)},
+        "4": local("BUCK5_BOOT"), "5": local("BUCK5_SW_BOOT"),
+        "7": local_net("Mu Carrier", "SYS_5V_PG"), "9": local("BUCK5_EN"),
+        "11": local("SYS5_PRE_SENSE"), "12": "/SYS_5V",
+        "13": local("BUCK5_CONFIG"), "14": local("BUCK5_RT"),
+        "15": local("BUCK5_COMP"), "16": local("BUCK5_FB"),
+        "18": local("BUCK5_VDDA"), "19": local("BUCK5_VCC"),
+    }
+    for pin, want in pins.items():
+        expect(net(components, "U6", pin), want, f"SYS5 LM706A0 pin {pin}")
+    expect_unconnected(components, "U6", "10")
+    for ref, mpn, a, b in (
+        ("L4", "XGL1060-682MEC", local("BUCK5_SW"), local("SYS5_PRE_SENSE")),
+        ("RS2360", "ERJ8CWFR010V", local("SYS5_PRE_SENSE"), "/SYS_5V"),
+        ("RS2361", "ERJ8CWFR010V", local("SYS5_PRE_SENSE"), "/SYS_5V"),
+        ("R40", "TNPU060354K9HZEN00", "/SYS_5V", local("BUCK5_FB")),
+        ("R41", "TNPU060310K2HZEN00", local("BUCK5_FB"), "GND"),
+        ("R42", "RC0603FR-07100KL", "/MU_HOST_ACTIVE", local("BUCK5_EN")),
+        ("R45", "RC0603FR-07100KL", local("BUCK5_EN"), "GND"),
+        ("R46", "RC0603FR-07100KL", "/MCU_3V3", local_net("Mu Carrier", "SYS_5V_PG")),
+        ("R2360", "TNPU060322K1HZEN00", local("BUCK5_RT"), "GND"),
+        ("R2361", "RC0603FR-0729K4L", local("BUCK5_CONFIG"), "GND"),
+        ("R2362", "TNPU06032K20HZEN00", local("BUCK5_COMP"), local("BUCK5_COMP_RC")),
+        ("C2362", "C0603C224K5RACTU", local("BUCK5_COMP_RC"), "GND"),
+        ("C2363", "C0603C222J5GACTU", local("BUCK5_COMP"), "GND"),
+        ("R2363", "RC0603FR-071RL", local("BUCK5_BOOT"), local("BUCK5_BOOT_C")),
+        ("C43", "GRM155R71E473KA88D", local("BUCK5_BOOT_C"), local("BUCK5_SW_BOOT")),
+        ("C2364", "T530D227M010ATE006", "/SYS_5V", "GND"),
+    ):
+        expect(prop(components, ref, "MPN"), mpn, f"{ref} SYS5 exact part")
+        expect(net(components, ref, "1"), a, f"{ref} SYS5 pad1")
+        expect(net(components, ref, "2"), b, f"{ref} SYS5 pad2")
+    expect(comp(components, "L4").footprint, "ducktop2:Coilcraft_XGL1060_Center", "SYS5 inductor lands")
+    for ref in ("RS2360", "RS2361"):
+        expect(comp(components, ref).footprint, "ducktop2:Panasonic_ERJ8CW_10to16m_Center", f"{ref} exact shunt lands")
+    expect(comp(components, "C2364").footprint, "Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D", "SYS5 reservoir case")
+    for ref in ("C40", "C41", "C42", "C2365"):
+        expect(net(components, ref, "1"), "/VSYS", f"{ref} SYS5 input")
+        expect(net(components, ref, "2"), "GND", f"{ref} SYS5 input return")
+    for ref, rail in (("C44", "/SYS_5V"), ("C45", "/SYS_5V"), ("C2360", local("BUCK5_VCC"))):
+        expect(prop(components, ref, "MPN"), "GRM32ER71E226KE15L", f"{ref} characterized ceramic")
+        expect(comp(components, ref).footprint, "Capacitor_SMD:C_1210_3225Metric", f"{ref} exact case")
+        expect(net(components, ref, "1"), rail, f"{ref} supply")
+        expect(net(components, ref, "2"), "GND", f"{ref} return")
 
 
 def check_mu_carrier(components, pin_names):
@@ -970,10 +1032,11 @@ def check_mu_carrier(components, pin_names):
     expect(net(components, "L750", "1"), "/Mu Carrier/MU12_SW1", "Mu 12V inductor SW1")
     expect(net(components, "L750", "2"), "/Mu Carrier/MU12_SW2", "Mu 12V inductor SW2")
     expect_contains(comp(components, "L750").value, "6.8uH", "Mu 12V inductor value")
-    expect(prop(components, "L750", "MPN"), "XAL7070-682MEC", "Mu inductor identity")
+    expect(prop(components, "L750", "MPN"), "XGL1060-682MEC", "Mu inductor identity")
+    expect(comp(components, "L750").footprint, "ducktop2:Coilcraft_XGL1060_Center", "Mu inductor lands")
     for ref, value, a, b in (
         ("R755", "5.1k", "MU12_COMP", "MU12_COMP_RC"),
-        ("C771", "220n", "MU12_COMP_RC", None),
+        ("C771", "330n", "MU12_COMP_RC", None),
         ("C772", "1n", "MU12_COMP", None),
     ):
         expect_value_prefix(components, ref, value, f"{ref} reviewed Mu compensation")
@@ -981,7 +1044,10 @@ def check_mu_carrier(components, pin_names):
         expect(net(components, ref, "2"), local_net("Mu Carrier", b) if b else "GND", f"{ref} compensation return")
     expect(net(components, "RS750", "1"), "/Mu Carrier/MU12_PRE_SENSE", "Mu 12V current shunt source")
     expect(net(components, "RS750", "2"), "/MU_12V", "Mu 12V current shunt load")
-    expect_value_prefix(components, "RS750", "15mOhm", "Mu 12V 3.33A current shunt")
+    expect_value_prefix(components, "RS750", "13mOhm", "Mu current shunt for3.3A operation")
+    expect(prop(components, "RS750", "MPN"), "ERJ8CWFR013V", "Mu exact shunt")
+    expect(comp(components, "RS750").footprint, "ducktop2:Panasonic_ERJ8CW_10to16m_Center", "Mu shunt lands")
+    expect(prop(components, "C771", "MPN"), "CGA3E3X7R1H334K080AB", "Mu compensation capacitor identity")
     for ref, value, footprint in [
         ("C750", "68u 50V", "Capacitor_SMD:CP_Elec_8x10"),
         ("C751", "10u 50V", "Capacitor_SMD:C_1206_3216Metric"),
@@ -1072,7 +1138,7 @@ def check_mu_carrier(components, pin_names):
     # is deterministic even when VBUS is absent.
     for pin, want in {
         "1": "/MCU_3V3", "2": "GND", "3": local_net("Mu Carrier", "INTERNAL_USB_VBUS_SENSE"),
-        "4": "/INTERNAL_USB_VBUS_VALID", "6": "/MCU_3V3",
+        "4": local_net("Mu Carrier", "INTERNAL_USB_VBUS_RAW_VALID"), "6": "/MCU_3V3",
     }.items():
         expect(net(components, "U771", pin), want, f"physical internal VBUS supervisor pin {pin}")
     expect_unconnected(components, "U771", "5")
@@ -1080,7 +1146,10 @@ def check_mu_carrier(components, pin_names):
     expect(prop(components, "U771", "MPN"), "TPS3897ADRYR", "physical internal VBUS supervisor orderable")
     expect_value_prefix(components, "R775", "10k", "internal VBUS valid pull-up")
     expect(net(components, "R775", "1"), "/MCU_3V3", "internal VBUS valid pull-up rail")
-    expect(net(components, "R775", "2"), "/INTERNAL_USB_VBUS_VALID", "internal VBUS valid signal")
+    expect(net(components, "R775", "2"), local_net("Mu Carrier", "INTERNAL_USB_VBUS_RAW_VALID"), "internal raw VBUS valid signal")
+    for pin, want in {"1": local_net("Mu Carrier", "SYS_5V_PG"), "2": local_net("Mu Carrier", "INTERNAL_USB_VBUS_RAW_VALID"),
+                      "3": "GND", "4": "/INTERNAL_USB_VBUS_VALID", "5": "/MCU_3V3"}.items():
+        expect(net(components, "U2412", pin), want, f"SYS5 PG and VBUS qualifier pin {pin}")
     for ref, value, rail in (
         ("C794", "1u", "/SYS_5V"),
         ("C830", "10u", "/Mu Carrier/INTERNAL_USB_VBUS"),
@@ -1158,36 +1227,7 @@ def check_mu_carrier(components, pin_names):
                 "209", "211", "215", "217", "112", "114"):
         expect_unconnected(components, "A1", pin)
 
-    expect_contains(comp(components, "U6").value, "TPS56637RPAR", "SYS_5V regulator exact part")
-    expect(comp(components, "U6").footprint,
-           "ducktop2:Texas_RPA0010A_VQFN-HR-10_3x3mm", "TPS56637 exact RPA footprint")
-    for pin, want in {
-        "1": "/Mu Carrier/BUCK5_EN", "2": "/Mu Carrier/BUCK5_FB",
-        "3": "GND", "4": "/Mu Carrier/SYS_5V_PG", "6": "/Mu Carrier/BUCK5_SW",
-        "7": "/Mu Carrier/BUCK5_BOOT", "8": "/VSYS", "9": "GND", "10": "GND",
-    }.items():
-        expect(net(components, "U6", pin), want, f"TPS56637 pin {pin}")
-    expect_unconnected(components, "U6", "5")
-    expect(comp(components, "L4").footprint, "Inductor_SMD:L_Coilcraft_XAL7070-XXX", "SYS_5V inductor footprint")
-    expect_value_prefix(components, "L4", "XAL7070-332MEC", "SYS_5V inductor exact part")
-    expect(net(components, "L4", "1"), "/Mu Carrier/BUCK5_SW", "SYS_5V inductor switch side")
-    expect(net(components, "L4", "2"), "/SYS_5V", "SYS_5V inductor output side")
-    for ref in ("C40", "C41", "C42"):
-        expect(net(components, ref, "1"), "/VSYS", f"{ref} TPS56637 input rail")
-        expect(net(components, ref, "2"), "GND", f"{ref} TPS56637 input return")
-    expect(net(components, "C43", "1"), "/Mu Carrier/BUCK5_BOOT", "TPS56637 bootstrap capacitor")
-    expect(net(components, "C43", "2"), "/Mu Carrier/BUCK5_SW", "TPS56637 bootstrap switch side")
-    for ref in ("C44", "C45"):
-        expect(prop(components,ref,"MPN"),"GRM32ER71E226KE15L",f"{ref} TI characterized output capacitor")
-        expect(comp(components,ref).footprint,"Capacitor_SMD:C_1210_3225Metric",f"{ref} exact case")
-        expect(net(components, ref, "1"), "/SYS_5V", f"{ref} TPS56637 output rail")
-        expect(net(components, ref, "2"), "GND", f"{ref} TPS56637 output return")
-    # Phase 5 (audit C6): 75.0k/10k targets 5.10 V (0.6 V ref x 8.5)
-    expect_value_prefix(components, "R40", "75.0k 0.1%", "SYS_5V FB top value")
-    expect_value_prefix(components, "R41", "10k 0.1%", "SYS_5V HDMI-headroom FB bottom value")
-    expect_value_prefix(components, "R42", "100k 1%", "TPS56637 enable divider top (host-active gate)")
-    expect_value_prefix(components, "R45", "100k 1%", "TPS56637 enable divider bottom")
-    expect_value_prefix(components, "R46", "100k", "TPS56637 power-good pull-up")
+    check_sys5_converter(components)
 
     expect_contains(comp(components, "U7").value, "TPS56637RPAR", "SYS_3V3 regulator exact part")
     expect(comp(components, "U7").footprint,
@@ -1463,8 +1503,8 @@ def _check_legacy_ch224_inputs(components):
         base = 720 + (idx - 1) * 3
         for ref, value, net_a, net_b in (
             (f"R{base}", "1.00M 0.1%", gated, local_net("Power Inputs", f"PD{idx}_UV")),
-            (f"R{base + 1}", "35.7k 0.1%", local_net("Power Inputs", f"PD{idx}_UV"), local_net("Power Inputs", f"PD{idx}_OV")),
-            (f"R{base + 2}", "47.5k 0.1%", local_net("Power Inputs", f"PD{idx}_OV"), "GND"),
+            (f"R{base + 1}", "35.7k 0.02%", local_net("Power Inputs", f"PD{idx}_UV"), local_net("Power Inputs", f"PD{idx}_OV")),
+            (f"R{base + 2}", "47.5k 0.02%", local_net("Power Inputs", f"PD{idx}_OV"), "GND"),
         ):
             expect_value_prefix(components, ref, value, f"{ref} PD validation value")
             expect(net(components, ref, "1"), net_a, f"{ref} pin 1")
@@ -1490,9 +1530,9 @@ def _check_legacy_ch224_inputs(components):
             expect_unconnected(components, uref, pin)
         ebase = 800 + (idx - 1) * 10
         for ref, value, net_a, net_b in (
-            (f"R{ebase}", "8.87k 0.1%", raw, local_net("Power Inputs", f"PD{idx}_EFUSE_UV")),
-            (f"R{ebase + 1}", "562R 0.1%", local_net("Power Inputs", f"PD{idx}_EFUSE_UV"), local_net("Power Inputs", f"PD{idx}_EFUSE_OV")),
-            (f"R{ebase + 2}", "511R 0.1%", local_net("Power Inputs", f"PD{idx}_EFUSE_OV"), "GND"),
+            (f"R{ebase}", "8.87k 0.02%", raw, local_net("Power Inputs", f"PD{idx}_EFUSE_UV")),
+            (f"R{ebase + 1}", "562R 0.02%", local_net("Power Inputs", f"PD{idx}_EFUSE_UV"), local_net("Power Inputs", f"PD{idx}_EFUSE_OV")),
+            (f"R{ebase + 2}", "511R 0.02%", local_net("Power Inputs", f"PD{idx}_EFUSE_OV"), "GND"),
             (f"R{ebase + 3}", "6.04k 1%", local_net("Power Inputs", f"PD{idx}_EFUSE_ILIM"), "GND"),
             (f"R{ebase + 4}", "47k", shdn, "GND"),
             (f"R{ebase + 5}", "10k", f"/PD{idx}_PATH_EN", shdn),
@@ -1575,16 +1615,16 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
         expect_contains(comp(components, tcpc).value, "TPS25751AD", f"{tcpc} DRP controller")
         expect(prop(components, tcpc, "MPN"), "TPS25751ADREFR", f"{tcpc} exact MPN")
         expect(prop(components, tcpc, "PortPolicy"),
-               "DRP_PREFER_SINK;HOST_DATA_ONLY;15V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP",
+               "DRP;HOST_DATA_ONLY;5_9_15_20V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP",
                f"{tcpc} released port policy")
         expect(prop(components, tcpc, "EEPROMSource"),
-               "firmware/tps25751a/ducktop2_dual_role_config.json",
+               f"firmware/tps25751a/ducktop2_pd{port}_config.json",
                f"{tcpc} versioned EEPROM source")
         for pin in ("23", "32"):
             expect(net(components, tcpc, pin), raw, f"{tcpc} raw VBUS pin {pin}")
         for pin in ("20",):
             expect(net(components, tcpc, pin), local("PPHV"), f"{tcpc} protected PPHV pin {pin}")
-        expect(net(components, tcpc, "34"), "/USB_PORT_5V", f"{tcpc} source PP5V land")
+        expect(net(components, tcpc, "34"), local("PP5V_GATED"), f"{tcpc} permitted source PP5V land")
         expect(net(components, tcpc, "28"), local("CC1_SYS"), f"{tcpc} CC1")
         expect(net(components, tcpc, "29"), local("CC2_SYS"), f"{tcpc} CC2")
         expect(net(components, tcpc, "26"), local("GPIO_DFP"), f"{tcpc} DFP-role output")
@@ -1669,7 +1709,7 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
         expect(net(components, "U14", "15"), "/USB_PD_SELECTED", "selected PD output")
         expect(net(components, "U14", "17"), local_net(pd_sheet, "PD1_VBUS_GATED"), "PD1 selector input")
         # Phase 5: U14 runs single-input (PD2 selection moved to the
-        # center's U15B); V2 is grounded per the LTC4418 datasheet.
+        # center's U16); V2 is grounded per the LTC4418 datasheet.
         expect(net(components, "U14", "16"), "GND", "PD2 selector input (unused V2, grounded)")
     for component in components.values():
         if "CH224" in component.value:
@@ -3146,8 +3186,8 @@ def check_pcie_power(components):
     for ref in ('RS2280','RS2281'):
         expect(net(components,ref,'1'),local('PCIE_PRE_SENSE'),f'{ref} upstream')
         expect(net(components,ref,'2'),local('PCIE_3V3_IN'),f'{ref} downstream')
-    for ref,mpn in [('R785','RT0603BRB0732K4L'),('R786','RT0603BRB0710KL'),
-                    ('R2280','RT0603BRB0722K1L'),('R2282','RC0603FR-073K3L'),
+    for ref,mpn in [('R785','TNPU060332K4HZEN00'),('R786','TNPU060310K0HZEN00'),
+                    ('R2280','TNPU060322K1HZEN00'),('R2282','TNPU06033K30HZEN00'),
                     ('C2282','C0603C224K5RACTU'),('C2283','C0603C222J5GACTU'),
                     ('C833','C0805C223J5GACTU'),('C2289','C0805C223J5GACTU')]:
         expect(prop(components,ref,'MPN'),mpn,f'{ref} endpoint timing/compensation')
@@ -3216,14 +3256,14 @@ def check_usb5_converter(components):
     ):
         expect(net(components, ref, "1"), a, f"{ref} USB5 first terminal")
         expect(net(components, ref, "2"), b, f"{ref} USB5 second terminal")
-    expect(prop(components, "L1701", "MPN"), "XGL1060-822MEC", "USB5 6.5A inductor")
+    expect(prop(components, "L1701", "MPN"), "XGL1060-682MEC", "USB5 6.5A inductor")
     expect(comp(components, "L1701").footprint, "ducktop2:Coilcraft_XGL1060", "USB5 inductor lands and marked SW lead")
     for ref in ("RS1860", "RS1861"):
         expect(prop(components, ref, "MPN"), "ERJ8CWFR010V", f"{ref} USB5 parallel shunt identity")
         expect(comp(components, ref).footprint, "ducktop2:Panasonic_ERJ8CW_10to16m", f"{ref} long-terminal shunt lands")
-    for ref, mpn in (("R1712", "RT0603BRB0755K6L"), ("R1713", "RT0603BRB0710K2L")):
+    for ref, mpn in (("R1712", "TNPU060355K6HZEN00"), ("R1713", "TNPU060310K2HZEN00")):
         expect(prop(components, ref, "MPN"), mpn, f"{ref} USB5 setpoint identity")
-    for ref, mpn in (("R1862", "RC0603FR-073K3L"), ("C1862", "C0603C224K5RACTU"),
+    for ref, mpn in (("R1862", "TNPU06032K49HZEN00"), ("C1862", "C0603C224K5RACTU"),
                      ("C1863", "C0603C222J5GACTU")):
         expect(prop(components, ref, "MPN"), mpn, f"{ref} USB5 compensation identity")
     for ref in ("C1714", "C1715", "C1868", "C1869"):
@@ -3305,10 +3345,10 @@ def main() -> int:
         check_system_audio(components)
         check_maker_mcu(components)
         check_fpc_connectors(components, "FPC102", "ducktop2",
-                             "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
+                             "Molex_5039084120_1x41_P0.50mm_Horizontal",
                              "fpc1")
         check_fpc_connectors(components, "FPC103", "ducktop2",
-                             "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
+                             "Molex_5039085120_1x51_P0.50mm_Horizontal",
                              "fpc2")
         check_bms_interconnect(components)
         print("ducktop2 schematic design contract checks OK")
@@ -3317,7 +3357,7 @@ def main() -> int:
         check_five_port_usb_c_architecture(components, pd_sheet="PD1 Dual-Role",
                                            hub_sheet="USB Hub + Ports", ports=(1,))
         check_fpc_connectors(components, "FPC101", "ducktop2",
-                             "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
+                             "Molex_5039084120_1x41_P0.50mm_Horizontal",
                              "fpc1")
         print("left_io schematic design contract checks OK")
     elif args.project == "right_io":
@@ -3326,7 +3366,7 @@ def main() -> int:
         check_external_hdmi_path(components, sheet="HDMI")
         check_ethernet(components, sheet="GbE", project="right_io")
         check_fpc_connectors(components, "FPC104", "ducktop2",
-                             "Hirose_FH41-68S-0.5SH_1x68_1MP_1SH_P0.5mm_Horizontal",
+                             "Molex_5039085120_1x51_P0.50mm_Horizontal",
                              "fpc2")
         print("right_io schematic design contract checks OK")
     if args.project == "ducktop2" and not args.schematic_only:
@@ -3345,11 +3385,46 @@ def check_fpc_connectors(components, ref, lib, footprint, contract, bms_side=Fal
     power harness brings its protected return to the gauge shunt.
     """
     import fpc_contract as fpc
+    import signal_interconnect_contract as signal
 
     side_b = {"FPC102", "FPC103", "FPC105"}
     base = {"fpc1": fpc.FPC1_PINMAP, "fpc2": fpc.FPC2_PINMAP,
             "fpc3": fpc.FPC3_PINMAP}[contract]
     pinmap = fpc.reversed_map(base) if ref in side_b else base
+    if ref in signal.INTERFACES:
+        spec = signal.INTERFACES[ref]
+        expected = signal.footprint_for(ref)
+        expect(f"{lib}:{footprint}", expected, f"{ref} requested footprint contract")
+        expect(comp(components, ref).footprint, expected, f"{ref} footprint")
+        expect(prop(components, ref, 'MPN'), signal.mpn_for(ref), f"{ref} exact connector")
+        expected_pins = {str(n) for n in range(1, spec['count']+1)} | {'SH'}
+        if set(comp(components, ref).pin_nets) != expected_pins:
+            fail(f"{ref}: expected exactly {spec['count']} numbered contacts and SH, with no MP")
+        for pin, name in pinmap.items():
+            if name == 'NC':
+                expect_unconnected(components, ref, str(pin))
+            else:
+                expect(net(components, ref, str(pin)), 'GND' if name == 'GND' else '/'+name,
+                       f"{ref} pin {pin}")
+        sheet = comp(components, ref).sheetname.strip('/')
+        shell = local_net(sheet, ref+'_SHELL')
+        expect(net(components, ref, 'SH'), shell, f"{ref} common shell domain")
+        for resistor in spec['resistors']:
+            if 'dnp' in comp(components, resistor).properties:
+                fail(f"{resistor}: both shell returns must be fitted")
+            expect(prop(components, resistor, 'MPN'), signal.SHELL_RESISTOR_MPN, f"{resistor} shell resistor")
+            expect(comp(components, resistor).value, '0.33', f"{resistor} resistance")
+            expect(comp(components, resistor).footprint, 'Resistor_SMD:R_0603_1608Metric', f"{resistor} package")
+            expect(net(components, resistor, '1'), shell, f"{resistor} shell side")
+            expect(net(components, resistor, '2'), 'GND', f"{resistor} local ground side")
+        shell_nodes = {(peer, pad) for peer, item in components.items()
+                       for pad, name in item.pin_nets.items() if name == shell}
+        if shell_nodes != {(ref, 'SH')} | {(resistor, '1') for resistor in spec['resistors']}:
+            fail(f"{ref}: unexpected connection bypasses or extends the reviewed shell return")
+        for strap in spec['straps']:
+            expect(net(components, strap, '1'), 'GND', f"{strap} main ground strap")
+            expect(comp(components, strap).footprint, 'Connector_Wire:SolderWirePad_1x01_SMD_5x10mm', f"{strap} land")
+        return
     expect(comp(components, ref).footprint, f"{lib}:{footprint}",
            f"{ref} footprint")
     for pin, netname in pinmap.items():
@@ -3456,10 +3531,10 @@ def check_bms_thermal(components):
         expect(net(components,'J2200',str(2*cell)),f'/THERM_PROBE_{cell}_B',f'cell{cell} probe return lead')
     expect(net(components,'J2200','MP'),raw,'thermal connector hold-downs stay raw referenced')
     for ref,p1,p2,mpn in [
-        ('R2240',bias,'/THERM_CHG_COLD_REF','RT0603BRD07232KL'),
-        ('R2242',bias,'/THERM_CHG_HOT_REF','RT0603BRD07665KL'),
-        ('R2244',bias,'/THERM_DSG_COLD_REF','RT0603BRD07140KL'),
-        ('R2246',bias,'/THERM_DSG_HOT_REF','RT0603BRD07887KL'),
+        ('R2240',bias,'/THERM_CHG_COLD_REF','RT0603BRD07243KL'),
+        ('R2242',bias,'/THERM_CHG_HOT_REF','RT0603BRD07634KL'),
+        ('R2244',bias,'/THERM_DSG_COLD_REF','RT0603BRD07147KL'),
+        ('R2246',bias,'/THERM_DSG_HOT_REF','RT0603BRD07845KL'),
         ('R2236','/BMS_VDD','/BMS_CTRC','RT0603BRD07470KL'),
         ('R2239','/BMS_VDD','/BMS_CTRD','RT0603BRD07470KL'),
     ]:

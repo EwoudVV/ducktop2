@@ -27,6 +27,19 @@ class BmsThermalTests(unittest.TestCase):
                      'unconnected-(J2072-PadMP)-GND',None):
             with self.assertRaises(CheckFailure):
                 expect_unconnected({'J2072':SimpleNamespace(pin_nets={'MP':name})},'J2072','MP')
+        named='unconnected-(J2072-PadMP)'
+        with self.assertRaises(CheckFailure):
+            expect_unconnected({'J2072':SimpleNamespace(pin_nets={'MP':named}),
+                                'R1':SimpleNamespace(pin_nets={'1':named})},'J2072','MP')
+
+    def test_unit_suffix_requires_native_multiple_unit_evidence(self):
+        component=SimpleNamespace(path='/sheet/unit-a unit-b',pin_nets={'2':'unconnected-(U10B-Pad2)'})
+        expect_unconnected({'U10':component},'U10','2')
+        component.pin_nets['2']='unconnected-(U10C-Pad2)'
+        with self.assertRaises(CheckFailure):expect_unconnected({'U10':component},'U10','2')
+        component.path='/sheet/unit-a'
+        component.pin_nets['2']='unconnected-(U10B-Pad2)'
+        with self.assertRaises(CheckFailure):expect_unconnected({'U10':component},'U10','2')
 
     def setUp(self):
         self.capture=Capture();add_bms_thermal(self.capture);self.parts=self.capture.parts

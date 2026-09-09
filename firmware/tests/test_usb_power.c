@@ -19,8 +19,9 @@ bool tps25751_read_port_state(uint8_t address,tps25751_port_state_t *state)
 {assert(address==channel+0x1e);*state=ports[address-0x20];return !malformed_pd;}
 static usb_power_config_t config(void)
 {
-    usb_power_config_t c={.budget={true,5500,2200,5239,85},.startup_ceiling_ma=5700,
+    usb_power_config_t c={.budget={true,5500,2200,5239,85},.startup_ceiling_ma=5600,
         .pd_inrush_ma=1500,.branch_inrush_ma=1600,.rail_min_mv=5000,.rail_max_mv=5250,
+        .vsys_max_overestimate_mv=200,.vsys_max_fall_mv=100,
         .startup_timeout_ms=500,.gate_timeout_ms=200,.sample_max_age_ms=100};return c;
 }
 static void fixture(usb_power_state_t *s)
@@ -33,13 +34,14 @@ static void fixture(usb_power_state_t *s)
 static void sample(usb_power_state_t *s,uint32_t now,uint16_t mv,uint16_t ma,bool pg)
 {
     observation=(usb_power_sample_t){.valid=true,.sample_ms=now,.conversion_sequence=++conversion_sequence,.voltage_mv=mv,
-        .upper_current_ma=ma,.input1=(uint8_t)(6u|(pg?0x38u:0u))};
+        .upper_current_ma=ma,.input1=(uint8_t)(70u|(pg?0x38u:0u))};
     assert(usb_power_poll(s,now));
 }
 static usb_power_request_t request(void)
 {
     usb_power_request_t r={.host_lease_valid=true,.system_safe=true,.requested_mask=127,
-        .active_source=2,.available_input_power_mw=100000};return r;
+        .active_source=2,.vsys_measurement_valid=true,.vsys_measured_mv=12000,
+        .available_input_power_mw=100000};return r;
 }
 int main(void)
 {
@@ -84,5 +86,45 @@ int main(void)
     assert(usb_power_step(&s,&r,0));assert((s.plan.allowed_mask&3)==0 && (s.plan.denied_mask&3)==3);
     usb_power_config_t bad=config();bad.budget.admission_current_ma=5800;
     assert(!usb_power_init(&s,&bad,0));bad=config();bad.pd_inrush_ma=0;assert(!usb_power_init(&s,&bad,0));
+    bad=config();bad.budget.minimum_efficiency_percent=79;assert(!usb_power_init(&s,&bad,0));
+    bad=config();bad.vsys_max_overestimate_mv=0;assert(!usb_power_init(&s,&bad,0));
+    bad=config();bad.vsys_max_fall_mv=0;assert(!usb_power_init(&s,&bad,0));
+    /* Independent lower-bound example: 9000 - 200 error - 100 fall = 8700 mV. */
+    fixture(&s);r=request();r.vsys_measured_mv=8999;sample(&s,0,0,0,false);
+    assert(usb_power_step(&s,&r,0) && outputs==0 && !s.plan.allowed_mask);
+    r.vsys_measured_mv=9000;assert(usb_power_step(&s,&r,0) && s.plan.allowed_mask);
+    r.vsys_age_ms=251;assert(usb_power_step(&s,&r,0) && outputs==0 && !s.plan.allowed_mask);
+    r.vsys_age_ms=0;r.vsys_measurement_valid=false;
+    assert(usb_power_step(&s,&r,0) && outputs==0 && !s.plan.allowed_mask);
+    /* PG loss is immediate on a successful GPIO read, even without new ADC data. */
+    fixture(&s);r=request();sample(&s,0,5160,25,true);assert(usb_power_step(&s,&r,0));
+    r.committed_reservation_mw=usb_power_reservation_mw(&s);assert(usb_power_step(&s,&r,0));
+    sample(&s,20,5160,25,true);assert(usb_power_step(&s,&r,20));assert(s.phase==USB_POWER_READY);
+    observation.valid=false;observation.input1=70;result=USB_POWER_HW_NOT_READY;
+    assert(usb_power_poll(&s,21));assert(s.sample.sample_ms==20);
+    assert(usb_power_step(&s,&r,21) && s.fault==USB_POWER_VOLTAGE && outputs==0);
+    /* A short SYS5 brownout is retained even with a valid old host lease. */
+    fixture(&s);r=request();sample(&s,0,0,0,false);assert(usb_power_step(&s,&r,0));
+    r.committed_reservation_mw=usb_power_reservation_mw(&s);assert(usb_power_step(&s,&r,0));
+    sample(&s,20,5160,25,true);assert(usb_power_step(&s,&r,20));assert(outputs!=0);
+    observation.input1&=(uint8_t)~0x40u;result=USB_POWER_HW_OVERCURRENT;
+    assert(usb_power_poll(&s,21) && s.fault==USB_POWER_SYSTEM_RAIL && outputs==0);
+    sample(&s,40,0,0,false); /* SYS5 recovered; hardware latch remains asserted. */
+    assert(usb_power_step(&s,&r,40) && s.phase==USB_POWER_FAULT && outputs==0);
+    result=USB_POWER_HW_OK;sample(&s,60,0,0,false);
+    assert(usb_power_step(&s,&r,60) && s.phase==USB_POWER_FAULT && outputs==0);
+    r.clear_fault=true;clear_ok=true;
+    assert(usb_power_step(&s,&r,60) && s.phase!=USB_POWER_FAULT);
+    /* A recovered pulse remains latched without fabricating its cause. */
+    observation.input1=(uint8_t)(70u&~2u);result=USB_POWER_HW_OVERCURRENT;
+    assert(usb_power_poll(&s,61) && s.fault==USB_POWER_LATCHED_FAULT && outputs==0);
+    /* Cold start with SYS5 low cannot admit ports or clear its inhibit. */
+    fixture(&s);r=request();result=USB_POWER_HW_OVERCURRENT;
+    observation=(usb_power_sample_t){.valid=true,.input1=4};
+    assert(usb_power_poll(&s,0));r.clear_fault=true;clear_ok=true;
+    assert(usb_power_step(&s,&r,0) && s.phase==USB_POWER_FAULT && outputs==0);
+    fixture(&s);r=request();s.phase=USB_POWER_FAULT;sample(&s,20,0,0,false);
+    r.clear_fault=true;clear_ok=false;
+    assert(!usb_power_step(&s,&r,20) && outputs==0); /* main resets on failed clear */
     puts("USB power target: PASS (reserve-before-enable, measured startup, staggered gates, sink/VCONN costs, source/lease loss, fault clear and reset)");
 }

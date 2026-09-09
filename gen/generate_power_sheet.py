@@ -200,12 +200,12 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("I2C_SDA", "hier")})
     s.place("R705", "R", "7.50k 1% fixed-valid TS bottom", *c3.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("CHG_TS_FIXED", "local"), "2": ("GND", "local")})
-    s.place("R17", "R", "47.0k 0.1% ILIM top (3.0A nominal setting)", *c3.next(), footprint=FOOTPRINTS["R"],
+    s.place("R17", "R", "47.0k 0.02% 5ppm ILIM top (3.0A nominal setting)", *c3.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("REGN", "local"), "2": ("ILIM_SET", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0747KL"})
-    s.place("R190", "R", "100k 0.1% ILIM bottom", *c3.next(), footprint=FOOTPRINTS["R"],
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060347K0HZEN00"})
+    s.place("R190", "R", "100k 0.02% 5ppm ILIM bottom", *c3.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("ILIM_SET", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD07100KL"})
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU0603100KHZEN00"})
     s.place("R18", "R", "10.5k 1% PROG: 3S, 1.5MHz", *c3.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("PROG_SET", "local"), "2": ("GND", "local")})
     s.place("C10", "C", "100n 50V X7R PMID local", *c3.next(), footprint=FOOTPRINTS["C_100n"],
@@ -301,24 +301,27 @@ def build(sheet_symbol_uuid):
             extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPS26630RGER"})
     s.place("R710", "R", "6.04k 1% AUX 3A current limit", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("AUX_EFUSE_ILIM", "local"), "2": ("GND", "local")})
-    s.place("R711", "R", "300k 0.1% AUX UV/OV top", *c4.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("AUX_EFUSE_IN_SYS", "local"), "2": ("AUX_EFUSE_UV", "local")})
-    s.place("R712", "R", "63.2k 0.1% AUX UV/OV middle", *c4.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("AUX_EFUSE_UV", "local"), "2": ("AUX_EFUSE_OV", "local")})
-    s.place("R713", "R", "20.0k 0.1% AUX UV/OV bottom", *c4.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("AUX_EFUSE_OV", "local"), "2": ("GND", "local")})
+    s.place("R711", "R", "300k 0.1% 10ppm AUX UV/OV top", *c4.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("AUX_EFUSE_IN_SYS", "local"), "2": ("AUX_EFUSE_UV", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPW0603300KBYEA"})
+    s.place("R712", "R", "63.4k 0.02% 5ppm AUX UV/OV middle", *c4.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("AUX_EFUSE_UV", "local"), "2": ("AUX_EFUSE_OV", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060363K4HZEN00"})
+    s.place("R713", "R", "20.0k 0.02% 5ppm AUX UV/OV bottom", *c4.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("AUX_EFUSE_OV", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060320K0HZEN00"})
     s.place("R714", "R", "31R AUX reverse-FET pulldown gate", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("AUX_EFUSE_DRV", "local"), "2": ("AUX_EFUSE_Q2_GATE", "local")})
     s.place("R715", "R", "10k AUX eFuse FLT pull-up", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("AUX_FAULT_N", "hier")})
     s.place("R716", "R", "10k AUX eFuse PGOOD pull-up", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("AUX_PGOOD", "hier")})
-    s.place("R739", "R", "332k 0.1% AUX PGOOD threshold top", *c4.next(), footprint=FOOTPRINTS["R"],
+    s.place("R739", "R", "332k 0.1% 10ppm AUX PGOOD threshold top", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("AUX_DC_PROTECTED", "local"), "2": ("AUX_PGTH", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD07332KL"})
-    s.place("R740", "R", "97.6k 0.1% AUX PGOOD threshold bottom", *c4.next(), footprint=FOOTPRINTS["R"],
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPW0603332KBYEA"})
+    s.place("R740", "R", "97.6k 0.02% 5ppm AUX PGOOD threshold bottom", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("AUX_PGTH", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0797K6L"})
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060397K6HZEN00"})
     s.place("C720", "C", "1u 50V X7R AUX input", *c4.next(), footprint=FOOTPRINTS["C_1u"],
             pin_nets={"1": ("AUX_EFUSE_IN_SYS", "local"), "2": ("GND", "local")})
     s.place("C721", "C", "100n 50V X7R AUX eFuse local", *c4.next(), footprint=FOOTPRINTS["C_100n"],
@@ -341,7 +344,7 @@ def build(sheet_symbol_uuid):
     # The industrial I-grade part is used because commercial C-grade selectors stop at 70 C.
     #
     # Phase 5: THREE charge sources (PD1 via FPC-1, PD2 via FPC-2, AUX).
-    # The LTC4418 datasheet sanctions cascading: U15B (stage 2) selects
+    # The LTC4418 datasheet sanctions cascading: U16 (stage 2) selects
     # PD2 over AUX into SEL_STAGE2; U15 (stage 1) selects PD1 over
     # SEL_STAGE2 into VBUS_COMBINED.  Priority: PD1 > PD2 > AUX.
     #
@@ -352,7 +355,7 @@ def build(sheet_symbol_uuid):
     # real GND on the INTVCC bypass node and real INTVCC on a 3V3-pulled
     # logic net -- U14/U15 could never have functioned.  Symbol corrected;
     # VALID outputs now land on 6/7 with their existing pull-ups.
-    s.text(470, 20, "== U15/U15B LTC4418IUF cascade: PD1 > PD2 > AUX into VBUS_COMBINED ==")
+    s.text(470, 20, "== U15/U16 LTC4418IUF cascade: PD1 > PD2 > AUX into VBUS_COMBINED ==")
     s.place("U15", "LTC4418IUF", "LTC4418IUF#PBF dual-input selector (stage 1)", 520, 165,
             footprint=FOOTPRINTS["LTC4418IUF"],
             pin_nets={
@@ -371,7 +374,7 @@ def build(sheet_symbol_uuid):
             extra_props={"Manufacturer": "Analog Devices", "MPN": "LTC4418IUF#PBF"})
 
     # Stage 2: PD2 (from the right board via FPC-2) over AUX.
-    s.place("U15B", "LTC4418IUF", "LTC4418IUF#PBF dual-input selector (stage 2)", 520, 425,
+    s.place("U16", "LTC4418IUF", "LTC4418IUF#PBF dual-input selector (stage 2)", 520, 425,
             footprint=FOOTPRINTS["LTC4418IUF"],
             pin_nets={
                 "1": ("ST2_SEL_TMR", "local"),
@@ -402,28 +405,28 @@ def build(sheet_symbol_uuid):
     # UV/OV window dividers (VTH = 1.000 V, HYS pin to GND = fixed 3%):
     #   PD windows accept fixed 15V and 20V contracts. The 1M/35.7k/47.5k
     #   network includes enough OV hysteresis margin to recover at 21V.
-    #   AUX window (on U15B.V2) 5.59-23.3 V: V(UV) = Vin*83.4k/466.4k,
+    #   AUX window (on U16.V2) 5.59-23.3 V: V(UV) = Vin*83.4k/466.4k,
     #   V(OV) = Vin*20k/466.4k -- wide by design; the AUX eFuse (5.53-22.99 V)
     #   performs the real 7-22 V qualification upstream.
     #   Stage-2 383k/54.9k/20k also covers 21V OV recovery after TCR.
     for ref, value, net_a, net_b, x, y, mpn in (
         ("R730", "1.00M 0.1% USB UV top", "USB_PD_SELECTED", "USB_MAIN_UV", 475, 225, "RT0603BRD071ML"),
-        ("R731", "35.7k 0.1% USB window middle", "USB_MAIN_UV", "USB_MAIN_OV", 475, 237.7, "RT0603BRD0735K7L"),
-        ("R732", "47.5k 0.1% USB OV bottom", "USB_MAIN_OV", "GND", 475, 250.4, "RT0603BRD0747K5L"),
+        ("R731", "35.7k 0.02% 5ppm USB window middle", "USB_MAIN_UV", "USB_MAIN_OV", 475, 237.7, "TNPU060335K7HZEN00"),
+        ("R732", "47.5k 0.02% 5ppm USB OV bottom", "USB_MAIN_OV", "GND", 475, 250.4, "TNPU060347K5HZEN00"),
         ("R741", "1.00M 0.1% PD2 UV top", "PD2_VBUS_GATED", "ST2_USB_UV", 475, 462.3, "RT0603BRD071ML"),
-        ("R742", "35.7k 0.1% PD2 window middle", "ST2_USB_UV", "ST2_USB_OV", 475, 475, "RT0603BRD0735K7L"),
-        ("R743", "47.5k 0.1% PD2 OV bottom", "ST2_USB_OV", "GND", 475, 487.7, "RT0603BRD0747K5L"),
+        ("R742", "35.7k 0.02% 5ppm PD2 window middle", "ST2_USB_UV", "ST2_USB_OV", 475, 475, "TNPU060335K7HZEN00"),
+        ("R743", "47.5k 0.02% 5ppm PD2 OV bottom", "ST2_USB_OV", "GND", 475, 487.7, "TNPU060347K5HZEN00"),
         ("R733", "383k 0.1% AUX UV top", "AUX_DC_PROTECTED", "ST2_AUX_UV", 555, 462.3, "RT0603BRD07383KL"),
-        ("R734", "63.4k 0.1% AUX window middle", "ST2_AUX_UV", "ST2_AUX_OV", 555, 475, "RT0603BRD0763K4L"),
-        ("R735", "20.0k 0.1% AUX OV bottom", "ST2_AUX_OV", "GND", 555, 487.7, "RT0603BRD0720KL"),
+        ("R734", "63.4k 0.02% 5ppm AUX window middle", "ST2_AUX_UV", "ST2_AUX_OV", 555, 475, "TNPU060363K4HZEN00"),
+        ("R735", "20.0k 0.02% 5ppm AUX OV bottom", "ST2_AUX_OV", "GND", 555, 487.7, "TNPU060320K0HZEN00"),
         ("R744", "383k 0.1% stage2 UV top", "SEL_STAGE2", "ST2_MAIN_UV", 615, 225, "RT0603BRD07383KL"),
-        ("R745", "54.9k 0.1% stage2 window middle", "ST2_MAIN_UV", "ST2_MAIN_OV", 615, 237.7, "RT0603BRD0754K9L"),
-        ("R746", "20.0k 0.1% stage2 OV bottom", "ST2_MAIN_OV", "GND", 615, 250.4, "RT0603BRD0720KL"),
+        ("R745", "54.9k 0.02% 5ppm stage2 window middle", "ST2_MAIN_UV", "ST2_MAIN_OV", 615, 237.7, "TNPU060354K9HZEN00"),
+        ("R746", "20.0k 0.02% 5ppm stage2 OV bottom", "ST2_MAIN_OV", "GND", 615, 250.4, "TNPU060320K0HZEN00"),
     ):
         kind_a = "hier" if net_a in ("USB_PD_SELECTED", "PD2_VBUS_GATED") else "local"
         s.place(ref, "R", value, x, y, footprint=FOOTPRINTS["R"],
                 pin_nets={"1": (net_a, kind_a), "2": (net_b, "local")},
-                extra_props={"Manufacturer": "Yageo", "MPN": mpn})
+                extra_props={"Manufacturer": "Vishay" if mpn.startswith("TNP") else "Yageo", "MPN": mpn})
 
     for ref, value, net, x, y, fp, mpn in (
         ("C740", "100n 10V INTVCC", "MAIN_SEL_INTVCC", 475, 275, "C_100n", "GRM188R71A104KA61D"),
@@ -498,19 +501,19 @@ def build(sheet_symbol_uuid):
                 "Manufacturer": "Texas Instruments", "MPN": "TPS26600RHFR",
                 "Datasheet": "https://www.ti.com/lit/ds/symlink/tps2660.pdf",
             })
-    s.place("R795", "R", "8.06k 0.1% 25ppm AON UV/OV top", 755, 315, footprint=FOOTPRINTS["R"],
+    s.place("R795", "R", "8.06k 0.02% 5ppm AON UV/OV top", 755, 315, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("AON_OR_RAW", "local"), "2": ("AON_EFUSE_UV", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD078K06L"})
-    s.place("R796", "R", "1.43k 0.1% 25ppm AON UV/OV middle", 755, 325, footprint=FOOTPRINTS["R"],
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU06038K06HZEN00"})
+    s.place("R796", "R", "1.43k 0.02% 5ppm AON UV/OV middle", 755, 325, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("AON_EFUSE_UV", "local"), "2": ("AON_EFUSE_OV", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD071K43L"})
-    s.place("R797", "R", "511R 0.1% 25ppm AON UV/OV bottom", 755, 335, footprint=FOOTPRINTS["R"],
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU06031K43HZEN00"})
+    s.place("R797", "R", "511R 0.02% 5ppm AON UV/OV bottom", 755, 335, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("AON_EFUSE_OV", "local"), "2": ("AON_EFUSE_RTN", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD07511RL"})
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU0603511RHZEN00"})
     for ref,y in (("R798",345),("R799",355)):
-        s.place(ref, "R", "16k 0.1% 25ppm; parallel pair gives 8k AON ILIM", 755, y, footprint=FOOTPRINTS["R"],
+        s.place(ref, "R", "16k 0.02% 5ppm; parallel pair gives 8k AON ILIM", 755, y, footprint=FOOTPRINTS["R"],
                 pin_nets={"1": ("AON_EFUSE_ILM", "local"), "2": ("AON_EFUSE_RTN", "local")},
-                extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0716KL"})
+                extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060316K0HZEN00"})
     s.place("C795", "C", "1u 25V AON eFuse input", 805, 315, footprint=FOOTPRINTS["C_1u"],
             pin_nets={"1": ("AON_OR_RAW", "local"), "2": ("GND", "local")})
     s.place("C796", "C", "100n 50V AON eFuse input local", 805, 325, footprint=FOOTPRINTS["C_100n"],
@@ -527,7 +530,7 @@ def build(sheet_symbol_uuid):
     s.text(650, 400, "U718 RTN/pad25 needs its own thermal copper and vias; do not short it to GND pin17. MODE to RTN selects current-limit/auto-retry.")
     s.text(380, 20, "J190 is the single AUX/SOLAR physical input; USB-C PD negotiation remains only on sheet 5.")
     s.text(380, 26, "TPS26630 accepts 7-22V nominal; 0.1% ladder targets 5.53V/22.99V rising UV/OV and a 3A limit.")
-    s.text(380, 32, "U15/U15B cascade accepts fixed 15/20V PD contracts and AUX across 7-22V; priority remains PD1 > PD2 > AUX.")
+    s.text(380, 32, "U15/U16 cascade accepts fixed 15/20V PD contracts and AUX across 7-22V; priority remains PD1 > PD2 > AUX.")
     s.text(380, 38.1, "SMCJ24CA protects the 67V eFuse input; active OVP protects the BQ25798 24V recommended input limit.")
 
     s.text(20, 220, "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice).")

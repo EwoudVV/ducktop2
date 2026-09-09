@@ -1,187 +1,187 @@
 #!/usr/bin/env python3
-"""Verify the released Ducktop2 TPS25751A policy and local TI output."""
-
+"""Check each port's exact TI source, images and separately reviewed VIF."""
 from __future__ import annotations
-
 import argparse
 import hashlib
 import json
+import re
+import zipfile
 from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
 
-
-ROOT = Path(__file__).resolve().parent
-SOURCE = ROOT / "ducktop2_dual_role_config.json"
-MANIFEST = ROOT / "release_manifest.json"
-GENERATED = ROOT / "generated"
+ROOT=Path(__file__).resolve().parent
+MANIFEST=ROOT/'release_manifest.json'
+GENERATED=ROOT/'generated'
+NS='http://usb.org/VendorInfoFile.xsd'
+# Complete records actually present in both official FB09.17.02 exports.
+BINARY_REGISTERS=(0x16,0x27,0x28,0x29,0x32,0x33,0x37,0x42,0x5c,0x70,0x77,0x78,0x7e)
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def register_map(document: dict) -> dict[int, list[int]]:
-    entries = document["configuration"]["data"]["selected_ace"]
-    return {entry["register"]: entry["data"] for entry in entries}
+def require(condition: bool,message: str,errors: list[str]) -> None:
+    if not condition:errors.append(message)
 
 
-def require(condition: bool, message: str, errors: list[str]) -> None:
-    if not condition:
-        errors.append(message)
+def register_map(document: dict) -> dict[int,list[int]]:
+    entries=document['configuration']['data']['selected_ace']
+    result={entry['register']:entry['data'] for entry in entries}
+    if len(result)!=len(entries):raise ValueError('duplicate register in TI source')
+    if any(not data or len(data)>64 or any(type(b) is not int or not 0<=b<=255 for b in data)
+           for data in result.values()):raise ValueError('invalid register bytes')
+    return result
 
 
-def verify_policy(document: dict, label: str, errors: list[str]) -> None:
-    answers = document["questionnaire"]["answers"]
-    registers = register_map(document)
-
-    require(answers[1] == 1, f"{label}: power policy is not DRP/no-BQ", errors)
-    require(answers[6] == 1, f"{label}: data role is not host-only", errors)
-    require(registers[41] == [112, 193, 129, 0],
-            f"{label}: Port Control (0x29) drifted", errors)
-    require(registers[50][:8] == [1, 168, 42, 90, 144, 1, 6, 44],
-            f"{label}: source PDO is not exactly 5 V / 900 mA", errors)
-
-    sink=registers.get(51,[])
-    require(len(sink)>=17 and (sink[0]&7)==4,
-            f"{label}: exactly four sink PDOs are required",errors)
-    decoded=[]
-    if len(sink)>=17:
-        for index in range(sink[0]&7):
-            start=1+4*index
-            word=int.from_bytes(bytes(sink[start:start+4]),"little")
+def verify_policy(document: dict,label: str,errors: list[str],port: str='PD1') -> None:
+    answers=document['questionnaire']['answers'];regs=register_map(document)
+    speed=2 if port=='PD1' else 0
+    require(port in ('PD1','PD2'),f'{label}: unknown physical port',errors)
+    require(answers[1]==1 and answers[3]==3 and answers[6]==1,
+            f'{label}: expected DRP/no-BQ, 60 W sink and host-only questionnaire',errors)
+    require(answers[5]==(3 if port=='PD1' else 1),f'{label}: data-speed questionnaire differs from physical port',errors)
+    require(regs.get(0x27)==[1,129,2,0,28,3,0,0,0,0,0,0,0,0,0],
+            f'{label}: VCONN limit or PP1-source/PP3-sink global configuration drifted',errors)
+    expected_cfg=[2,0x48 if speed==2 else 8,46,1,0,0,0,0,0,0,0,0,112,252,255,3,1,0]
+    require(regs.get(0x28)==expected_cfg,f'{label}: physical port speed, DRP or port configuration drifted',errors)
+    require(regs.get(0x29)==[112,193,129,0,0],
+            f'{label}: host-only swaps, default Rp or disabled BC1.2 drifted',errors)
+    source=regs.get(0x32,[])
+    # The first three bytes are the register header, not a PDO. Only one slot
+    # is active. The PDO's dual-role-data flag must stay clear for this host.
+    require(len(source)==63 and source[:7]==[1,168,42,0x5a,0x90,1,4],
+            f'{label}: source must be one PP5V fixed 5 V / 900 mA PDO without dual-role-data',errors)
+    sink=regs.get(0x33,[]);decoded=[]
+    if len(sink)==53 and (sink[0]&7)==4:
+        for index in range(4):
+            word=int.from_bytes(bytes(sink[1+4*index:5+4*index]),'little')
             decoded.append(((word>>30)&3,((word>>10)&0x3ff)*50,(word&0x3ff)*10))
-    require(decoded==[(0,5000,3000),(0,9000,3000),(0,15000,3000),(0,20000,3000)],
-            f"{label}: sink PDO voltage/current list is {decoded!r}",errors)
-
-    io_config = registers[92]
-    require(io_config[0] == 219, f"{label}: GPIO output-enable map drifted", errors)
-    require(io_config[32] == 16, f"{label}: GPIO4 inversion is missing", errors)
-    require(io_config[40] == 29, f"{label}: GPIO4 is not UFP_DFP event 29", errors)
-    require(io_config[42] == 3, f"{label}: GPIO6 is not orientation event 3", errors)
-    require(io_config[43] == 61, f"{label}: GPIO7 is not data-mux event 61", errors)
-    require(registers[119][13] == 5, f"{label}: source power is not 5 W encoded", errors)
-    require(registers[120][2] == 5, f"{label}: product source power drifted", errors)
+    require(decoded==[(0,5000,3000),(0,9000,3000),(0,15000,3000),(0,20000,3000)]
+            and not any(sink[17:]),f'{label}: four fixed 3 A sink PDOs and no inactive 5 A slot required',errors)
+    require(regs.get(0x7e,[None]*11)[8:11]==[45,45,60],
+            f'{label}: minimum/operational/maximum sink PDP must be 45/45/60 W',errors)
+    io=regs.get(0x5c,[])
+    require(len(io)>43 and (io[0],io[32],io[40],io[42],io[43])==(219,16,29,3,61),
+            f'{label}: GPIO enable/inversion/DFP/orientation/data-mux events drifted',errors)
+    require(regs.get(0x77,[None]*14)[13]==5 and regs.get(0x78,[None]*3)[2]==5,
+            f'{label}: encoded 5 W source information drifted',errors)
 
 
-def xml_value(root: ET.Element, tag: str) -> ET.Element | None:
-    return root.find(f".//{{http://usb.org/VendorInfoFile.xsd}}{tag}")
+def xml_value(root: ET.Element,tag: str) -> ET.Element | None:
+    return root.find(f'.//{{{NS}}}{tag}')
 
 
-def verify_vif(path: Path, errors: list[str]) -> None:
-    root = ET.parse(path).getroot()
-
-    expected = {
-        "PD_Port_Type": ("4", "DRP"),
-        "RP_Value": ("0", "Default"),
-        "Type_C_Can_Act_As_Host": ("true", ""),
-        "Type_C_Can_Act_As_Device": ("false", ""),
-        "Data_Capable_As_USB_Host_SOP": ("true", ""),
-        "Data_Capable_As_USB_Device_SOP": ("false", ""),
-        "PD_Power_As_Source": ("4500", "4500 mW"),
-        "Src_PDO_Voltage": ("100", "5000 mV"),
-        "Src_PDO_Max_Current": ("90", "900 mA"),
-        "Num_Snk_PDOs": ("4", ""),
-        "PD_Power_As_Sink": ("60000", "60000 mW"),
-    }
-    for tag, (value, text) in expected.items():
-        element = xml_value(root, tag)
-        require(element is not None, f"VIF: missing {tag}", errors)
-        if element is None:
-            continue
-        if value is not None:
-            require(element.get("value") == value,
-                    f"VIF: {tag} value is {element.get('value')!r}, expected {value!r}", errors)
-        require((element.text or "").strip() == text,
-                f"VIF: {tag} text is {(element.text or '').strip()!r}, expected {text!r}", errors)
-
-
-    sink_voltages=[int(e.get("value","-1"))*50 for e in root.iter() if e.tag.endswith("}Snk_PDO_Voltage")]
-    sink_currents=[int(e.get("value","-1"))*10 for e in root.iter() if e.tag.endswith("}Snk_PDO_Op_Current")]
-    require(sink_voltages==[5000,9000,15000,20000] and sink_currents==[3000]*4,
-            "VIF: active sink PDO list does not match the reviewed source",errors)
+def verify_vif(path: Path,errors: list[str],port: str='PD1',reviewed: bool=True) -> None:
+    root=ET.parse(path).getroot();label=f'{port} {path.name}'
+    expected={'PD_Port_Type':'4','RP_Value':'0','Type_C_Can_Act_As_Host':'true',
+        'Type_C_Can_Act_As_Device':'false','Host_Supports_USB_Data':'true','Device_Supports_USB_Data':'false',
+        'Data_Capable_As_USB_Host_SOP':'true','Data_Capable_As_USB_Device_SOP':'false',
+        'DR_Swap_To_DFP_Supported':'true','DR_Swap_To_UFP_Supported':'false',
+        'USB4_Supported':'false','Type_C_Is_Alt_Mode_Controller':'false',
+        'Type_C_Is_Alt_Mode_Adapter':'false','Modal_Operation_Supported_SOP':'false',
+        'Num_SVIDs_Min_SOP':'0','Num_SVIDs_Max_SOP':'0','PD_Power_As_Source':'4500',
+        'Num_Src_PDOs':'1','Src_PDO_Voltage':'100','Src_PDO_Max_Current':'90',
+        'Num_Snk_PDOs':'4','PD_Power_As_Sink':'60000','BC_1_2_Support':'0',
+        'Enter_USB_Supported':'true' if port=='PD1' else 'false',
+        'Host_Speed':('2' if reviewed else '5') if port=='PD1' else '0',
+        'Type_C_Port_On_Hub':'true' if reviewed and port=='PD2' else 'false',
+        'Is_DFP_On_Hub':'true' if reviewed and port=='PD2' else 'false'}
+    if reviewed and port=='PD2':expected['Hub_Port_Number']='1'
+    for tag,value in expected.items():
+        element=xml_value(root,tag)
+        require(element is not None and element.get('value')==value,
+                f'{label}: {tag} must be {value}',errors)
+    for tag,want,scale in [('Snk_PDO_Voltage',[5000,9000,15000,20000],50),
+                           ('Snk_PDO_Op_Current',[3000]*4,10)]:
+        actual=[int(e.get('value','-1'))*scale for e in root.iter() if e.tag==f'{{{NS}}}{tag}']
+        require(actual==want,f'{label}: active sink list {tag} differs',errors)
 
 
 def verify_binary_registers(path: Path,document: dict,errors: list[str]) -> None:
-    """Check complete TI register-write records inside the official image."""
-    image=path.read_bytes()
-    for register in (41,50,51,55,92):
-        data=bytes(register_map(document)[register])
-        record=bytes((0x0f,register&255,register>>8,len(data)-1))+data
-        expected=2 if "fullFlash" in path.name else 1
+    image=path.read_bytes();regs=register_map(document)
+    for reg in BINARY_REGISTERS:
+        data=bytes(regs[reg]);record=bytes((0x0f,reg,0,len(data)-1))+data
+        expected=2 if 'fullFlash' in path.name else 1
         require(image.count(record)==expected,
-                f"{path.name}: expected register {register:#x} record is absent or duplicated",errors)
+                f'{path.name}: register {reg:#x} complete record absent or duplicated',errors)
+
+
+def verify_c_array(path: Path,binary: Path,errors: list[str]) -> None:
+    arrays=re.findall(r'=\s*\{([^}]*)\}',path.read_text())
+    if len(arrays)!=1 or not re.fullmatch(r'[\s,0-9a-fAxX]+',arrays[0]):
+        errors.append(f'{path.name}: expected one literal byte array');return
+    tokens=[s.strip() for s in arrays[0].split(',') if s.strip()]
+    if any(not re.fullmatch(r'0x[0-9a-fA-F]{2}',s) for s in tokens):
+        errors.append(f'{path.name}: non-byte literal in array');return
+    require(bytes(int(s,16) for s in tokens)==binary.read_bytes(),
+            f'{path.name}: C array differs from binary',errors)
+
+
+def check_file(metadata: dict,errors: list[str],base: Path=ROOT) -> Path:
+    path=base/metadata['path']
+    require(path.is_file(),f'missing artifact {metadata["path"]}',errors)
+    if path.is_file():
+        require(sha256(path)==metadata['sha256'],f'hash mismatch {metadata["path"]}',errors)
+        require(path.stat().st_size==metadata['bytes'],f'size mismatch {metadata["path"]}',errors)
+    return path
+
+
+def verify_release(require_generated: bool=False) -> list[str]:
+    errors=[];manifest=json.loads(MANIFEST.read_text())
+    require(manifest.get('schema_version')==2 and set(manifest.get('ports',{}))=={'PD1','PD2'},
+            'distinct physical-port manifests are required',errors)
+    require(manifest.get('status')=='GENERATED_PENDING_HIL','export status is inconsistent',errors)
+    for port,metadata in manifest['ports'].items():
+        source=check_file(metadata['source'],errors)
+        document=json.loads(source.read_text());verify_policy(document,port,errors,port)
+        reviewed=check_file(metadata['reviewed_vif'],errors);verify_vif(reviewed,errors,port)
+        require(metadata['programming_and_readback']['status']=='NOT_RUN',
+                f'{port}: this source checkpoint has no programming/readback evidence',errors)
+        if not require_generated:continue
+        paths={name:check_file(value,errors) for name,value in metadata['generated'].items()}
+        for name,path in paths.items():
+            if path.is_file() and name.endswith('.bin'):verify_binary_registers(path,document,errors)
+        for name,path in paths.items():
+            if name.endswith('.c') and path.is_file() and path.with_suffix('.bin').is_file():
+                verify_c_array(path,path.with_suffix('.bin'),errors)
+        archive=paths['official-export.zip']
+        if archive.is_file():
+            with zipfile.ZipFile(archive) as z:
+                members={Path(n).name:n for n in z.namelist() if not n.endswith('/')}
+                expected=set(paths)-{'official-export.zip'}
+                require(set(members)==expected,f'{port}: original archive member set differs',errors)
+                for name in expected & set(members):
+                    if paths[name].is_file():
+                        require(z.read(members[name])==paths[name].read_bytes(),
+                                f'{port}: retained {name} differs from original archive',errors)
+        raw=next(path for name,path in paths.items() if name.endswith('_raw.json'))
+        if raw.is_file():
+            require(register_map(json.loads(raw.read_text()))==register_map(document),
+                    f'{port}: tracked register map differs from untouched TI export',errors)
+        original=check_file(metadata['original_vif'],errors)
+        if original.is_file():verify_vif(original,errors,port,False)
+        low=next(path for name,path in paths.items() if name.endswith('_lowRegion.bin'))
+        full=next(path for name,path in paths.items() if name.endswith('_fullFlash.bin'))
+        if low.is_file() and full.is_file():
+            require(full.read_bytes().count(low.read_bytes())==2,f'{port}: full flash must contain two complete low images',errors)
+            require(sha256(full)==metadata['programming_and_readback']['expected_full_flash_sha256'],
+                    f'{port}: pending readback is bound to another image',errors)
+    return errors
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--require-generated", action="store_true",
-                        help="also require and hash-check local TI output")
-    args = parser.parse_args()
-
-    errors: list[str] = []
-    manifest = json.loads(MANIFEST.read_text())
-    source = json.loads(SOURCE.read_text())
-
-    require(sha256(SOURCE) == manifest["source"]["sha256"],
-            "tracked source hash does not match release_manifest.json", errors)
-    verify_policy(source, "source", errors)
-
-    generated_entries = manifest["generated"]
-    if args.require_generated:
-        require(manifest.get("status")=="GENERATED_PENDING_HIL",
-                "fresh 20 V / 3 A TI export is not recorded",errors)
-        required_files={"ducktop2_dual_role_raw.json","ducktop2_dual_role_vif.xml",
-                        "ducktop2_dual_role_lowRegion.bin","ducktop2_dual_role_fullFlash.bin"}
-        require(required_files.issubset(generated_entries),"TI export artifact set is incomplete",errors)
-        for name, metadata in generated_entries.items():
-            path = GENERATED / name
-            require(path.is_file(), f"generated file is missing: {name}", errors)
-            if not path.is_file():
-                continue
-            require(sha256(path) == metadata["sha256"],
-                    f"generated hash mismatch: {name}", errors)
-            if "bytes" in metadata:
-                require(path.stat().st_size == metadata["bytes"],
-                        f"generated size mismatch: {name}", errors)
-            if name.endswith(".bin"):
-                verify_binary_registers(path,source,errors)
-
-        low_path=GENERATED/"ducktop2_dual_role_lowRegion.bin"
-        full_path=GENERATED/"ducktop2_dual_role_fullFlash.bin"
-        if low_path.is_file() and full_path.is_file():
-            require(full_path.read_bytes().count(low_path.read_bytes())==2,
-                    "full flash does not contain two identical low-region images",errors)
-        raw_path = GENERATED / "ducktop2_dual_role_raw.json"
-        vif_path = GENERATED / "ducktop2_dual_role_vif.xml"
-        if raw_path.is_file():
-            exported=json.loads(raw_path.read_text())
-            verify_policy(exported, "TI export", errors)
-            require(register_map(exported)==register_map(source),
-                    "TI export: register map differs from the reviewed input",errors)
-        if vif_path.is_file():
-            verify_vif(vif_path, errors)
-
+    parser=argparse.ArgumentParser();parser.add_argument('--require-generated',action='store_true')
+    args=parser.parse_args()
+    try:errors=verify_release(args.require_generated)
+    except (ValueError,KeyError,IndexError,OSError,ET.ParseError,StopIteration,zipfile.BadZipFile) as exc:errors=[str(exc)]
     if errors:
-        print("TPS25751A CONFIGURATION FAILED")
-        for error in errors:
-            print(f"- {error}")
+        print('TPS25751A CONFIGURATION FAILED')
+        for error in errors:print('- '+error)
         return 1
-
-    print("TPS25751A configuration OK")
-    print("- 5 V / 900 mA source, default Rp")
-    print("- 5/9/15/20 V sink at 3 A, DRP power policy")
-    print("- host-only USB data with GPIO4/GPIO7 qualified enable")
-    if args.require_generated:
-        print("- TI output hashes and VIF match release_manifest.json")
-    elif manifest.get("status")!="GENERATED_PENDING_HIL":
-        print("- source input verified; fresh TI export and physical readback remain pending")
+    print('TPS25751A: PASS (PD1 Gen 2x1 host, PD2 USB2 hub host; 5 V / 900 mA source; 5/9/15/20 V at 3 A sink)')
+    print('official originals retained; reviewed VIF metadata is a draft; programming and HIL NOT_RUN')
     return 0
 
-
-if __name__ == "__main__":
-    sys.exit(main())
+if __name__=='__main__':sys.exit(main())

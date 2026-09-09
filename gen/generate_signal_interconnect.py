@@ -28,7 +28,7 @@ def pad_rows(count):
     # Two rear shell tails and two retention tabs, all electrically common.
     rows += [("SH", sign * (span + 6) / 2, 0, 2.5, 1.55)
              for sign in (-1, 1)]
-    rows += [("SH", sign * (span + 9.75 + 2.05) / 2, 2.975, 2.05, 2.5)
+    rows += [("SH", sign * (span + 9.75 + 2.05) / 2, 3.075, 2.05, 2.5)
              for sign in (-1, 1)]
     return rows
 
@@ -86,6 +86,17 @@ def main():
     for count in (41, 51):
         (ROOT / 'ducktop2.pretty' / (footprint_name(count) + '.kicad_mod')).write_text(footprint_text(count))
         (ROOT / 'gen' / f'Conn_01x{count}_Signal_SH.kicad_sym').write_text(symbol_text(count))
+    for folder, counts in (('', (41, 51)), ('left_io', (41,)), ('right_io', (51,))):
+        table = ROOT / folder / 'sym-lib-table'
+        text = table.read_text()
+        base = '${KIPRJMOD}/' + ('../' if folder else '') + 'gen/'
+        for count in counts:
+            name = f'Conn_01x{count}_Signal_SH'
+            if f'(name "{name}")' in text:
+                continue
+            entry = f'  (lib (name "{name}") (type "KiCad") (uri "{base}{name}.kicad_sym") (options "") (descr "{count}-contact signal connector with separate shell return"))'
+            text = text.replace('  (version 7)', '  (version 7)\n' + entry, 1)
+        table.write_text(text)
     print('wrote the 41- and 51-contact signal connector libraries')
 
 

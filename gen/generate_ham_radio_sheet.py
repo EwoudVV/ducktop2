@@ -203,10 +203,12 @@ def build(sheet_symbol_uuid, supply_5v="SYS_5V", logic_3v3="MCU_3V3"):
                 "Manufacturer": "Coilcraft", "MPN": "XGL5030-332MEC",
                 "Datasheet": "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xgl/xgl5030/xgl5030-332/",
             })
-    s.place("R221", "R", "100k 1% 4.0V FB hi", 20, 127, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("RADIO_4V0", "local"), "2": ("RADIO_BUCK_FB", "local")})
-    s.place("R222", "R", "17.4k 1% 4.0V FB lo", 20, 139.7, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("RADIO_BUCK_FB", "local"), "2": ("GND", "local")})
+    s.place("R221", "R", "100k 0.02% 5ppm 4.0V FB hi", 20, 127, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("RADIO_4V0", "local"), "2": ("RADIO_BUCK_FB", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU0603100KHZEN00"})
+    s.place("R222", "R", "17.4k 0.02% 5ppm 4.0V FB lo", 20, 139.7, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("RADIO_BUCK_FB", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060317K4HZEN00"})
     for ref, y in (("C222", 152.4), ("C225", 158.75)):
         s.place(ref, "C", "22u 16V X7R radio output", 20, y, footprint=FOOTPRINTS["C_10u"],
                 pin_nets={"1": ("RADIO_4V0", "local"), "2": ("GND", "local")},
@@ -365,9 +367,10 @@ def build(sheet_symbol_uuid, supply_5v="SYS_5V", logic_3v3="MCU_3V3"):
                     "Datasheet": "https://www.ti.com/lit/ds/symlink/sn74lvc1g373.pdf",
                     "SafetyContract": "ANTENNA_SELECTION_LATCHED_WHILE_PTT_SAFE_N_LOW",
                 })
-        s.place(divider, "R", f"10k 1% {prefix} PE42820 control divider top", 550, y,
+        s.place(divider, "R", f"10k 0.02% 5ppm {prefix} PE42820 control divider top", 550, y,
                 footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (raw, "local"), "2": (ctrl, "local")})
+                pin_nets={"1": (raw, "local"), "2": (ctrl, "local")},
+                extra_props={"Manufacturer":"Vishay","MPN":"TNPU060310K0HZEN00"})
         s.place(bypass, "C", f"100n {prefix} RF-select latch local", 450, y,
                 footprint=FOOTPRINTS["C_100n"],
                 pin_nets={"1": ("RADIO_4V0", "local"), "2": ("GND", "local")})
@@ -389,8 +392,9 @@ def build(sheet_symbol_uuid, supply_5v="SYS_5V", logic_3v3="MCU_3V3"):
         ("RADIO_VHF_RF_SEL_4V0", "VHF antenna select default internal"),
         ("RADIO_UHF_RF_SEL_4V0", "UHF antenna select default internal"),
     ]):
-        s.place(f"R{227+i}", "R", f"47k 1% {label}; PE42820 control divider low", 250, 271.78 + i * 12.7, footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (net, "local"), "2": ("GND", "local")})
+        s.place(f"R{227+i}", "R", f"47k 0.02% 5ppm {label}; PE42820 control divider low", 250, 271.78 + i * 12.7, footprint=FOOTPRINTS["R"],
+                pin_nets={"1": (net, "local"), "2": ("GND", "local")},
+                extra_props={"Manufacturer":"Vishay","MPN":"TNPU060347K0HZEN00"})
     s.place("R229", "R", "0R VHF H/L LOW POWER - FIT", 390, 220.98, footprint=FOOTPRINTS["R"],
             pin_nets={"1": (vhf["hl"], "local"), "2": ("GND", "local")},
             dnp=False, in_bom=True,

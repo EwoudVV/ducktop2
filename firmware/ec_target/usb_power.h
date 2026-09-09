@@ -9,16 +9,20 @@ typedef enum { USB_POWER_OFF=0, USB_POWER_STARTING, USB_POWER_READY,
                USB_POWER_FAULT, USB_POWER_PENDING } usb_power_phase_t;
 typedef enum { USB_POWER_NO_FAULT=0, USB_POWER_OVERCURRENT,
                USB_POWER_STALE, USB_POWER_VOLTAGE, USB_POWER_GATE_TIMEOUT,
-               USB_POWER_PD_PATH } usb_power_fault_t;
+               USB_POWER_PD_PATH, USB_POWER_SYSTEM_RAIL, USB_POWER_LATCHED_FAULT } usb_power_fault_t;
 typedef struct {
     ec_usb_power_config_t budget;
     uint16_t startup_ceiling_ma, pd_inrush_ma, branch_inrush_ma;
     uint16_t rail_min_mv, rail_max_mv;
+    uint16_t vsys_max_overestimate_mv, vsys_max_fall_mv;
     uint32_t startup_timeout_ms, gate_timeout_ms, sample_max_age_ms;
 } usb_power_config_t;
 typedef struct {
     bool host_lease_valid, system_safe, transfer_active, clear_fault;
     uint8_t requested_mask, active_source;
+    bool vsys_measurement_valid;
+    uint16_t vsys_measured_mv;
+    uint32_t vsys_age_ms;
     uint32_t available_input_power_mw;
     /* USB demand already included in this cycle's EC/charger allocation. */
     uint32_t committed_reservation_mw;

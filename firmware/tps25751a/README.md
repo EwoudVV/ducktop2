@@ -1,60 +1,47 @@
 # TPS25751A port configuration
 
-J21 on the left and J11 on the right are the two PD/data ports. their
-controllers use the source configuration in `ducktop2_dual_role_config.json`.
-the fresh official TI export includes fixed 5 V, 9 V, 15 V and 20 V sink
-PDOs at 3 A. the source configuration is the raw JSON normalized by that
-export; the manifest binds its binaries and per-port pending readback.
-J12 is a source-only USB port and does not use this charging policy.
+J21 uses `ducktop2_pd1_config.json`: host-only USB 3.2 Gen 2x1. J11 uses
+`ducktop2_pd2_config.json`: host-only USB 2 through USB7206 downstream port 1.
+the two EEPROM images are different. neither port provides a USB device,
+USB4, DisplayPort alternate mode, or audio accessory data path.
 
-the recorded export used TI's USB-C/PD Application Customization Tool 2.0.0
-and base firmware `FB09.17.02__RC5.bin`. the export filenames and hashes
-are in `release_manifest.json`; generated output is kept under `generated/`
-and is ignored by git.
+both ports use dual-role power, fixed 5/9/15/20 V sink PDOs at 3 A, one
+5 V / 900 mA source PDO, default Rp, and no BC1.2 advertisement. the EC
+controls the charger and separate PP5V permissions. the 20 V / 5 A slot is
+inactive and zeroed in the sink list.
 
-## configured policy
-
-- dual-role power, with EC-controlled BQ25798 integration outside the PD controller;
-- 5 V, 9 V, 15 V and 20 V sink PDOs, up to 3 A;
-- a 5 V / 900 mA source PDO;
-- one private EEPROM per controller.
-
-advertising a sink PDO does not mean that voltage can run the laptop. the
-recorded AON UVLO and selector windows require a qualified usable input,
-and the EC must verify the live contract before enabling the sink path.
-[power architecture](../../docs/hardware/power-and-battery.md)
-
-## verify and use the export
+these are exact raw JSON exports from TI Application Customization Tool
+2.0.0 with `FB09.17.02__RC5.bin`. `release_manifest.json` binds each source,
+original export archive, binary, C array, original VIF and reviewed VIF.
+local TI output is under ignored `generated/PD1/` and `generated/PD2/`.
+the superseded combined image must not be used for either port.
 
 ```sh
-python3 firmware/tps25751a/verify_config.py
+python3 firmware/tps25751a/verify_config.py --require-generated
+python3 firmware/tests/test_tps25751_config.py
 ```
 
-run from the repository root. review the configuration and manifest against
-the actual generated files before programming the EEPROMs. keep tool version,
-source hash, export hash, programmed device/board, and readback evidence.
+the checker compares complete critical register-write records, the two
+low-region copies in each full-flash image, GPIO roles, data rate, swaps,
+VCONN/path settings and every active PDO. target admission also reads the
+controller's profile and fails off if it belongs to the wrong physical port.
 
-the configuration export and host tests do not prove physical negotiation,
-role swaps, source-path sequencing, or current-limit behavior. those belong
-in the [HIL work](../release/README.md).
+TI's original VIFs are retained unchanged. its left VIF reports host speed
+as N/A, and its right VIF defaults to a port outside a hub. the public VIFs
+are clearly marked project review drafts with each correction recorded in
+the manifest. the left speed is Gen 2x1; the right is USB 2 on hub port 1.
+TI documents that system fields need review after export in
+[SLVAFZ1](https://www.ti.com/lit/an/slvafz1/slvafz1.pdf), sections 2.2 and 4.
+the numeric Gen 2x1 value and hub-field mapping are also checked against the
+[Chromium EC VIF implementation](https://chromium.googlesource.com/chromiumos/platform/ec/+/d1e7a27efbc80e282b3917d1bef7a9a944c00eeb/util/genvif.c).
 
+these drafts are not certification submissions. product identification,
+battery/status message support and the complete USB-IF review remain open.
+programming and per-port readback remain `NOT_RUN`, each bound to its own
+full-flash hash. no controller was programmed during export.
 
-## export and pending device readback
-
-the inactive 20 V / 5 A sink slot was replaced with 20 V / 3 A before the
-valid-PDO count was increased. source output remains 5 V / 900 mA. the
-verifier checks every active sink PDO and rejects the old three-PDO export.
-`--require-generated` verifies the six fresh exports against the source and
-manifest. the low-region image is present twice in the full-flash image, and
-the critical register payloads must match both. PD1 and PD2 programming and
-readback fields remain NOT_RUN, bound to the expected full-flash SHA-256.
-
-the official 2.0.0 application generated the files after the two separate
-TI tool and commercial firmware agreements were explicitly approved. its
-normalization dropped legacy register 0x27 and empty 0x73, resized reserved
-padding at 0x28, 0x29, 0x78 and 0x98, and preserved every shared register
-value. no physical controller or EEPROM was programmed.
-
-[power allowance](power-envelope.md) separates nominal 0.50 A from actual
-current-regulation and source-tolerance bounds. none of these source changes
-approves real-cell charging, a boot envelope or a completed EEPROM readback.
+[power allowance](power-envelope.md) keeps the nominal 0.50 A input margin
+separate from actual source tolerance, current regulation and AON draw.
+[physical testing](../release/README.md) still has to establish negotiation,
+role changes, current limits, USB signaling and source-path sequencing.
+all charging, boot and USB load qualification gates remain off.

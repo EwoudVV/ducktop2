@@ -40,6 +40,7 @@ INDUCTORS = {
     "XAL7070-332MEC": (3.3e-6, .20, 19.4, 11.5, .0094),
     "XAL7070-682MEC": (6.8e-6, .20, 12.8, 6.8, .0196),
     "XGL1060-822MEC": (8.2e-6, .20, 16.9, 9.9, .0150),
+    "XGL1060-682MEC": (6.8e-6, .20, 18.4, 10.9, .0125),
     "XGL6030-103MEC": (10e-6, .20, 6.2, 5.0, .0440),
     # XGL5030 entries use the 20%-drop Isat column.
     "XGL5030-103MEC": (10e-6, .20, 3.3, 4.3, .0484),
@@ -49,12 +50,14 @@ INDUCTORS = {
 EXACT_PASSIVES = {
     # value, fractional initial tolerance, rated voltage (if applicable)
     "CGA5L1X7R1H106K160AC": (10e-6, .10, 50.0),
+    "CGA3E3X7R1H334K080AB": (330e-9, .10, 50.0),
     "EEHZK1V101XP": (100e-6, .20, 35.0),
     "EEHZA1H680P": (68e-6, .20, 50.0),
     "T520D107M010ATE070": (100e-6, .20, 10.0),
     "T520D157M010ATE025": (150e-6, .20, 10.0),
     "T521V686M025ATE050": (68e-6, .20, 25.0),
     "T520X337M010ATE010": (330e-6, .20, 10.0),
+    "T530D227M010ATE006": (220e-6, .20, 10.0),
     "C0603C224K5RACTU": (220e-9, .10, 50.0),
     "C0603C222J5GACTU": (2.2e-9, .05, 50.0),
     "WSL20105L600FEA": (.0056, .01, None),
@@ -109,11 +112,34 @@ class NetlistValues(dict):
         This is the component temperature range used by the calculation. It
         does not establish an ambient or enclosure temperature rating.
         """
+        identity = decode(self.mpn(ref))
+        if identity is not None and identity.tcr_ppm is not None:
+            return self.tolerance(ref) + identity.tcr_ppm*1e-6*max(abs(low_c-25), abs(high_c-25))
         match = re.match(r"RT\d{4}[BCDFPW][RK]([ABCDE])", self.mpn(ref))
         if not match:
             raise ValueError(f"no reviewed TCR code for {ref}: {self.mpn(ref)}")
         ppm = {"A": 5, "B": 10, "C": 15, "D": 25, "E": 50}[match[1]]
         return self.tolerance(ref) + ppm*1e-6*max(abs(low_c-25), abs(high_c-25))
+
+    def environment_tolerance(self, ref: str, low_c: float = -40,
+                              high_c: float = 85) -> float:
+        """Independent initial, TCR, endurance and soldering-change screen.
+
+        Vishay uses its 8000h endurance and soldering-heat requirements. Yageo
+        RT uses its 1000h requirements. These sums are design stress envelopes,
+        not a claim that dissimilar environmental tests establish service life.
+        """
+        mpn = self.mpn(ref)
+        resistance = resistor(self, ref)
+        if mpn.startswith(('TNPU', 'TNPW')):
+            return self.temperature_tolerance(ref, low_c, high_c) + .001 + .02/resistance + .0002 + .01/resistance
+        if mpn.startswith('RT'):
+            return self.temperature_tolerance(ref, low_c, high_c) + .005 + .05/resistance + .005 + .05/resistance
+        if mpn.startswith('RC'):
+            # The reviewed RC1% envelope rounds initial, full TCR, endurance
+            # and soldering change upward. It is also used by F12 branch ILIM.
+            return .05
+        raise ValueError(f'no reviewed endurance/assembly bounds for {ref}: {mpn}')
 
     def capacitors_on(self, net: str) -> list[str]:
         return sorted(ref for ref, pins in self.pins.items()
@@ -248,7 +274,7 @@ def direct_capacitance(boards: list[NetlistValues], net: str,
     total = 0.0
     for values in boards:
         for ref in values.capacitors_on(net):
-            if polymer_only and not values.mpn(ref).startswith(("T520", "T521", "EEH")):
+            if polymer_only and not values.mpn(ref).startswith(("T520", "T521", "T530", "EEH")):
                 continue
             value = capacitor(values, ref)
             if minimum:
@@ -296,15 +322,16 @@ def three_resistor_window(r_top: float, r_mid: float, r_bottom: float,
 
 
 def three_resistor_window_corners(r_top: float, r_mid: float, r_bottom: float,
-                                  tolerance: float, reference_min: float,
+                                  tolerance: float | tuple[float, float, float], reference_min: float,
                                   reference_max: float,
                                   leakage_abs: float) -> tuple[float, float, float, float]:
     """Return UV-min/UV-max/OV-min/OV-max including both comparator leakages."""
     results: list[tuple[float, float]] = []
+    tolerances = (tolerance,)*3 if isinstance(tolerance, (int, float)) else tolerance
     for top_scale, mid_scale, bottom_scale, reference, uv_leakage, ov_leakage in itertools.product(
-        (1.0 - tolerance, 1.0 + tolerance),
-        (1.0 - tolerance, 1.0 + tolerance),
-        (1.0 - tolerance, 1.0 + tolerance),
+        (1.0 - tolerances[0], 1.0 + tolerances[0]),
+        (1.0 - tolerances[1], 1.0 + tolerances[1]),
+        (1.0 - tolerances[2], 1.0 + tolerances[2]),
         (reference_min, reference_max),
         (-leakage_abs, leakage_abs),
         (-leakage_abs, leakage_abs),
@@ -360,15 +387,15 @@ def system_5v_checks(r_top: float, r_bottom: float, hdmi_drop_v: float = .055 * 
 def left_5v_checks(values: dict[str, str]) -> list[Check]:
     top, bottom = resistor(values, "R1712"), resistor(values, "R1713")
     if isinstance(values, NetlistValues) and values.mpn("U1703") == "LM706A0RRXR":
-        minimum, maximum = divider_corners(top, bottom, values.temperature_tolerance("R1712"),
-                                           values.temperature_tolerance("R1713"), .794, .806, 75e-9)
+        minimum, maximum = divider_corners(top, bottom, values.environment_tolerance("R1712"),
+                                           values.environment_tolerance("R1713"), .794, .806, 75e-9)
         return [
             Check("left LM706A0 USB_PORT_5V set-point", .8*(1+top/bottom), "V", 5.09, 5.18,
                   "0.8*(1+R1712/R1713); actual MPN resistance"),
             Check("left USB_PORT_5V minimum before branch losses", minimum, "V", 5.0, 5.25,
-                  "0.794V; MPN tolerance and TCR at -40..85C; +/-75nA FB bias"),
+                  "0.794V; MPN initial/TCR/endurance/soldering corners; +/-75nA FB bias"),
             Check("left USB_PORT_5V maximum before branch losses", maximum, "V", 4.75, 5.25,
-                  "0.806V; MPN tolerance and TCR at -40..85C; +/-75nA FB bias"),
+                  "0.806V; MPN initial/TCR/endurance/soldering corners; +/-75nA FB bias"),
         ]
     tt = values.tolerance("R1712") if isinstance(values, NetlistValues) else .001
     bt = values.tolerance("R1713") if isinstance(values, NetlistValues) else .001
@@ -389,7 +416,7 @@ def usb5_shunt_bounds(values: NetlistValues):
         for ref in ('RS1860','RS1861'):
             if values.mpn(ref)!='ERJ8CWFR010V':raise ValueError('unreviewed parallel USB5 shunt')
         nominal=1/sum(1/resistor(values,ref) for ref in ('RS1860','RS1861'))
-        tolerance=max(values.tolerance(ref) for ref in ('RS1860','RS1861'))+75e-6*100+.03
+        tolerance=.060  # initial1%,75ppm*105C,endurance3%,soldering1%, rounded upward
         # Sense RS1860 inner pad edges. A <=20uOhm power-branch mismatch
         # contributes <=0.11%; common power copper must be outside that span.
         return nominal,nominal*(1-tolerance)*.9989,nominal*(1+tolerance)*1.0011
@@ -402,7 +429,9 @@ def lm706_checks(values: NetlistValues) -> list[Check]:
     values.used.add('L1701')
     shunt,shunt_low,shunt_high=usb5_shunt_bounds(values)
     minimum_limit=.050/shunt_high;maximum_limit=.062/shunt_low
-    fmin=400e3*49900/resistor(values,'R1860')/(1+values.temperature_tolerance('R1860'))
+    rt=resistor(values,'R1860')
+    if rt not in (22100,49900):raise ValueError('USB5 RT has no reviewed exact frequency-table point')
+    fmin={22100:850e3,49900:400e3}[rt]/(1+values.environment_tolerance('R1860'))
     vout=left_5v_checks(values)[2].value
     modern='RS1861' in values;load=6.5 if modern else 5.5;vin=24.1 if modern else 22
     lmin=inductance*(1-ltol)*.70
@@ -411,7 +440,7 @@ def lm706_checks(values: NetlistValues) -> list[Check]:
     bank_ceiling=sum(capacitor(values,ref)*(1+values.tolerance(ref))*1.10*1.20*1.35 for ref in ('C1864','C1865'))
     checks=[
         Check('LM706A0 full-load peak versus current-limit minimum',peak,'A',0,minimum_limit,
-              f'{vin}V,{load}A,L tolerance/-30% bias screen,fSW minimum plus RT tolerance/TCR; shunt life/layout included for parallel ERJ pair'),
+              f'{vin}V,{load}A,L tolerance/-30% bias screen,fSW minimum plus RT tolerance/TCR; shunt initial/TCR/endurance/soldering/layout included for parallel ERJ pair'),
         Check('LM706A0 peak current-limit headroom',minimum_limit/peak,'x',1.25,math.inf,
               '50mV/(effective shunt maximum)/Ipeak;25% startup/load-step design margin'),
         Check('USB5 inductor RMS current screen',rms,'A',0,irms,
@@ -420,15 +449,15 @@ def lm706_checks(values: NetlistValues) -> list[Check]:
               'actual MPN; compare25C Isat30% characterization'),
         Check('USB5 current-limit high corner',maximum_limit,'A',0,isat,
               '62mV/effective shunt minimum; includes initial/TCR/endurance/layout on ERJ pair'),
-        Check('USB5 short-circuit peak screen',maximum_limit+vin*75e-9/lmin,'A',0,isat*(.8 if modern else 1),
-              'maximum threshold + VIN*75ns/Lmin;75ns and20% hot-Isat reduction are explicit stress assumptions, not guaranteed limits'),
+        Check('USB5 short-circuit peak screen',maximum_limit+vin*(150e-9 if modern else 75e-9)/lmin,'A',0,isat*(.8 if modern else 1),
+              'maximum threshold + VIN*150ns/Lmin for the6.5A build;150ns and20% hot-Isat reduction are explicit stress assumptions, not guaranteed limits'),
         Check('USB5 added reservoir compound environment floor',bank_floor*1e6,'uF',300,1500,
               'KEMET initial,-20% endurance,-20% temperature,-5% humidity multiplied as a stress envelope; not a cumulative-life guarantee'),
         Check('USB5 added reservoir compound environment ceiling',bank_ceiling*1e6,'uF',300,1500,
               'initial,+10% endurance,+20% temperature,+35% humidity stress; model spans300..1500uF'),
     ]
     if modern:
-        rmax=.010*(1+.01+75e-6*100+.03)
+        rmax=.010*1.060
         shunt_power=(rms/2)**2*rmax*1.0022
         checks.append(Check('USB5 per-shunt power at maximum resistance',shunt_power,'W',0,1*(125-110)/(125-70),
                             'two ERJ8CW10mOhm parts; require case<=110C,1W rating derated from70C to125C'))
@@ -439,9 +468,84 @@ def lm706_checks(values: NetlistValues) -> list[Check]:
     return checks
 
 
+def sys5_voltage_checks(values: NetlistValues) -> list[Check]:
+    top, bottom = resistor(values, 'R40'), resistor(values, 'R41')
+    lo, hi = divider_corners(top, bottom, values.environment_tolerance('R40'),
+                             values.environment_tolerance('R41'), .794, .806, 75e-9)
+    return [
+        Check('LM706A0 SYS_5V set-point', .8*(1+top/bottom), 'V', 5.09, 5.12,
+              '0.8V reference; actual R40/R41 order codes'),
+        Check('LM706A0 SYS_5V DC minimum', lo, 'V', 5.0, 5.25,
+              '0.794V reference; independent initial/TCR/endurance/soldering corners;75nA FB bias'),
+        Check('LM706A0 SYS_5V DC maximum', hi, 'V', 5.0, 5.23,
+              '0.806V reference; independent initial/TCR/endurance/soldering corners;75nA FB bias;20mV ripple reserved'),
+    ]
+
+
+def sys5_checks(values: NetlistValues) -> list[Check]:
+    """Complete 4.5A bank startup screen, separate from source admission."""
+    if values.mpn('U6') != 'LM706A0RRXR':
+        raise ValueError('SYS5 enabled bank requires the reviewed externally compensated regulator')
+    for ref in ('RS2360', 'RS2361'):
+        if values.mpn(ref) != 'ERJ8CWFR010V':
+            raise ValueError('unreviewed SYS5 shunt')
+    rs = 1/sum(1/resistor(values, ref) for ref in ('RS2360', 'RS2361'))
+    rslow, rshigh = rs*.940*.9989, rs*1.060*1.0011
+    limit_min, limit_max = .050/rshigh, .062/rslow
+    l, ltol, isat, irms, dcr = INDUCTORS[values.mpn('L4')]
+    values.used.add('L4')
+    lmin = l*(1-ltol)*.70
+    fmin = 850e3*22100/resistor(values, 'R2360')/(1+values.environment_tolerance('R2360'))
+    vhi = sys5_voltage_checks(values)[2].value
+    ripple, peak, rms, _ = buck_currents(24.1, vhi, 4.5, lmin, fmin)
+    # This is the full model envelope, including directly connected bypasses
+    # and every enabled branch. It is not merely the fitted local label sum.
+    ctotal_max = (80+500+300)*1e-6
+    startup = ctotal_max*vhi/1.9e-3
+    reservoir = capacitor(values, 'C2364')
+    reservoir_floor = reservoir*(1-values.tolerance('C2364'))*.80*.80*.95
+    reservoir_ceiling = reservoir*(1+values.tolerance('C2364'))*1.10*1.20*1.35
+    branch_max = sum(22.98/(resistor(values, ref)/1000*.95)**.94
+                     for ref in ('R773', 'R252', 'R388'))
+    branch_max += 2.2*1650/(resistor(values, 'R2301')*(1-values.environment_tolerance('R2301')))+.350
+    return [
+        *sys5_voltage_checks(values),
+        Check('SYS5 combined branch current-limit high corners', branch_max, 'A', 0, 4.5,
+              'TPS2553D Eq1 with ±5% R including life; TPS25947 2.2A table maximum with RT corners; TPS22948 350mA maximum; remaining allowance covers bias'),
+        Check('SYS5 25-percent steady peak margin', limit_min/peak, 'x', 1.25, math.inf,
+              '4.5A plus ripple;L -20%/-30% stress;0.85MHz minimum and RT drift;shunt initial/TCR/endurance/soldering/layout'),
+        Check('SYS5 25-percent startup peak margin', limit_min/(peak+startup), 'x', 1.25, math.inf,
+              'full 880uF model ceiling charged to VOUTmax in1.9ms minimum soft start, concurrent4.5A load and ripple'),
+        Check('SYS5 high-limit fault peak screen', limit_max+24.1*150e-9/lmin, 'A', 0, isat*.8,
+              '62mV/shunt minimum plus150ns stress;20% hot-Isat reduction is a screen, not a guaranteed fault bound'),
+        Check('SYS5 inductor RMS screen', rms, 'A', 0, irms,
+              '25C/20C-rise manufacturer characterization; installed thermal loss remains to be measured'),
+        Check('SYS5 winding copper-loss screen at125C', rms*rms*dcr*(1+.00393*100), 'W', 0, .5,
+              'maximum DCR and copper TCR; excludes core and switching losses'),
+        Check('SYS5 per-shunt continuous power', (rms/2)**2*.010*1.060*1.0022, 'W', 0, (125-110)/(125-70),
+              'ERJ8CW1W derated to110C; pair mismatch allowance included'),
+        Check('SYS5 polymer environment floor', reservoir_floor*1e6, 'uF', 90, 500,
+              'initial,-20% endurance,-20% temperature,-5% humidity stress; model envelope90..500uF'),
+        Check('SYS5 polymer environment ceiling', reservoir_ceiling*1e6, 'uF', 90, 500,
+              'initial,+10% endurance,+20% temperature,+35% humidity stress; not a cumulative-life guarantee'),
+    ]
+
+
+def sys3_distribution_checks(values: NetlistValues) -> list[Check]:
+    lo, hi = divider_corners(resistor(values, 'R43'), resistor(values, 'R44'),
+                             values.environment_tolerance('R43'), values.environment_tolerance('R44'),
+                             .591, .609)
+    return [
+        Check('SYS3 left 2A qualified distribution minimum', lo-.02-.01-2*(.093+.010), 'V', 3.0, 3.465,
+              'initial/TCR/endurance/soldering;20mV ripple,10mV ground,93mOhm positive loom and10mOhm board loop; these path limits require assembly qualification'),
+        Check('SYS3 maximum including ripple allocation', hi+.020, 'V', 3.0, 3.465,
+              'initial/TCR/endurance/soldering and20mV positive ripple allocation'),
+    ]
+
+
 def aon_window_checks(values: NetlistValues) -> list[Check]:
     refs=('R795','R796','R797');r=[resistor(values,ref) for ref in refs]
-    tolerance=max(values.temperature_tolerance(ref) for ref in refs)
+    tolerance=tuple(values.environment_tolerance(ref) for ref in refs)
     if values.mpn('U718')!='TPS26600RHFR':
         fall=three_resistor_window_corners(*r,tolerance,1.076,1.116,.1e-6)
         return [Check('AON OV recovery covers a21V source',fall[2],'V',21,25,
@@ -450,7 +554,7 @@ def aon_window_checks(values: NetlistValues) -> list[Check]:
     ov=three_resistor_window_corners(*r,tolerance,1.17,1.225,.1e-6)
     fall=three_resistor_window_corners(*r,tolerance,1.085,1.125,.1e-6)
     rlimit=1/sum(1/resistor(values,ref) for ref in ('R798','R799'))
-    rtol=max(values.temperature_tolerance(ref) for ref in ('R798','R799'))
+    rtol=max(values.environment_tolerance(ref) for ref in ('R798','R799'))
     return [
         Check('AON UV rising minimum',uv[0],'V',5.5,6.5,'TPS26600 UV minimum, both100nA leakages and RT initial/TCR corners'),
         Check('AON UV rising maximum',uv[1],'V',5.5,6.5,'TPS26600 UV maximum with RT corners'),
@@ -465,7 +569,7 @@ def aon_window_checks(values: NetlistValues) -> list[Check]:
 
 def aon_converter_checks(values: NetlistValues) -> list[Check]:
     lo,hi=divider_corners(resistor(values,'R35'),resistor(values,'R36'),
-                         values.temperature_tolerance('R35'),values.temperature_tolerance('R36'),.581,.611)
+                         values.environment_tolerance('R35'),values.environment_tolerance('R36'),.581,.611)
     nominal=.596*(1+resistor(values,'R35')/resistor(values,'R36'))
     mpn=values.mpn('L3');inductance,tol,isat,irms,dcr=INDUCTORS[mpn]
     lmin=inductance*(1-tol)*.80
@@ -473,8 +577,8 @@ def aon_converter_checks(values: NetlistValues) -> list[Check]:
     isat30=6.2 if mpn=='XGL6030-103MEC' else 4.5
     return [
         Check('TPS54202 MCU_3V3 set-point',nominal,'V',3.25,3.35,'actual R35/R36 order codes;0.596V reference'),
-        Check('TPS54202 MCU_3V3 minimum',lo,'V',3.135,3.465,'0.581V reference; independent initial and -40..85C TCR corners'),
-        Check('TPS54202 MCU_3V3 maximum',hi,'V',3.135,3.465,'0.611V reference; independent initial and -40..85C TCR corners'),
+        Check('TPS54202 MCU_3V3 minimum',lo,'V',3.135,3.465,'0.581V reference; independent initial, -40..85C TCR, endurance and soldering corners'),
+        Check('TPS54202 MCU_3V3 maximum',hi,'V',3.135,3.465,'0.611V reference; independent initial, -40..85C TCR, endurance and soldering corners'),
         Check('TPS54202 1.5A peak versus high-side minimum limit',peak,'A',0,2.5,
               '24.1V,L -20% initial/-20% bias stress,390kHz minimum center frequency and -6% spread spectrum'),
         Check('TPS54202 1.5A valley versus low-side minimum limit',1.5-ripple/2,'A',0,2.0,'minimum low-side limit2A'),
@@ -494,12 +598,12 @@ def endpoint_checks(values: NetlistValues) -> list[Check]:
     for ref in ('RS2280','RS2281'):
         if values.mpn(ref)!='ERJ8CWFR013V':raise ValueError('unreviewed endpoint shunt')
     rs=1/sum(1/resistor(values,ref) for ref in ('RS2280','RS2281'))
-    rslow=rs*.9525*.9989;rshigh=rs*1.0475*1.0011
+    rslow=rs*.940*.9989;rshigh=rs*1.060*1.0011
     limit_min=.050/rshigh;limit_max=.062/rslow
     vlo,vhi=divider_corners(resistor(values,'R785'),resistor(values,'R786'),
-                            values.temperature_tolerance('R785'),values.temperature_tolerance('R786'),.794,.806,75e-9)
+                            values.environment_tolerance('R785'),values.environment_tolerance('R786'),.794,.806,75e-9)
     l,ltol,isat,irms,dcr=INDUCTORS[values.mpn('L1702')];lmin=l*(1-ltol)*.7
-    fmin=850e3*22100/resistor(values,'R2280')/(1+values.temperature_tolerance('R2280'))
+    fmin=850e3*22100/resistor(values,'R2280')/(1+values.environment_tolerance('R2280'))
     ripple,peak,rms,_=buck_currents(24.1,vhi,5.0,lmin,fmin)
     ctmin=sum(capacitor(values,ref) for ref in ('C833','C2289'))*(.95-.003)
     rise_fast=(vhi*(.27*ctmin*1e12+25.5)+24.9)*.5e-6
@@ -507,27 +611,73 @@ def endpoint_checks(values: NetlistValues) -> list[Check]:
     return [
         Check('endpoint minimum regulator voltage',vlo,'V',3.3,3.465,'LM0.794V;actual divider tolerance/TCR;75nA bias'),
         Check('endpoint maximum including20mV ripple allocation',vhi+.02,'V',3.135,3.465,'static upper plus positive ripple allocation'),
-        Check('endpoint 25-percent steady peak margin',limit_min/peak,'x',1.25,math.inf,'5A load;0.85MHz table minimum with RT drift;L -20%/-30% stress;shunt life/layout'),
+        Check('endpoint 25-percent steady peak margin',limit_min/peak,'x',1.25,math.inf,'5A load;0.85MHz table minimum with RT drift;L -20%/-30% stress;shunt initial/TCR/endurance/soldering/layout'),
         Check('endpoint 25-percent peak margin including controlled inrush',limit_min/(peak+.4),'x',1.25,math.inf,'5A module draw plus0.4A inrush allowance plusinductor ripple'),
         Check('endpoint2mF startup current screen',inrush,'A',0,.4,'two22n C0G caps at tolerance/TCR floor;TPS22992 rise-time equation with2x-fast stress, not guaranteed silicon timing'),
         Check('endpoint switch including startup allowance',5+.4,'A',0,6,'TPS22992S maximum continuous current6A; selected endpoint operating envelope5A'),
         Check('endpoint high-limit fault peak screen',limit_max+24.1*150e-9/lmin,'A',0,isat*.8,'62mV/shunt minimum plus150ns delay;20% hot-Isat stress;SCC limiter remains separately qualified'),
         Check('endpoint inductor RMS screen',rms,'A',0,irms,'compare25C/20C-rise reference; installed switching/core loss remains'),
-        Check('endpoint guaranteed path damping floor',resistor(values,'R2292')*.9525*1000,'mOhm',9,20,
+        Check('endpoint guaranteed path damping floor',resistor(values,'R2292')*.940*1000,'mOhm',9,20,
               'ERJ8CW initial/TCR/endurance stress; no minimum switch RON is assumed'),
-        Check('endpoint remaining common-path voltage allowance',(vlo-.02-5*.015-3.5*resistor(values,'R2292')*1.0475-3.135)*1000,'mV',0,250,
+        Check('endpoint remaining common-path voltage allowance',(vlo-.02-5*.015-3.5*resistor(values,'R2292')*1.060-3.135)*1000,'mV',0,250,
               'regulator low-20mV ripple-5A*15mOhm switch-3.5A*NVMe damping resistor-3.135V; residual covers NVMe copper and contacts'),
-        Check('NVMe damping resistor steady dissipation',3.5**2*resistor(values,'R2292')*1.0475,'W',0,(125-100)/(125-70),
+        Check('NVMe damping resistor steady dissipation',3.5**2*resistor(values,'R2292')*1.060,'W',0,(125-100)/(125-70),
               'require resistor case<=100C; short-circuit pulse and recovery remain hardware qualification'),
-        Check('endpoint regulator input resistance per shunt power',(rms/2)**2*.013*1.0475*1.0022,'W',0,(125-110)/(125-70),
+        Check('endpoint regulator input resistance per shunt power',(rms/2)**2*.013*1.060*1.0022,'W',0,(125-110)/(125-70),
               'ERJ8CW1W derated to110C;parallel balance allowance included'),
+    ]
+
+
+def mu_voltage_corners(values: NetlistValues) -> tuple[float, float]:
+    refs = ('R752', 'R753')
+    top = sum(resistor(values, ref) for ref in refs)
+    top_tolerance = sum(resistor(values, ref)*values.environment_tolerance(ref)
+                        for ref in refs)/top
+    return divider_corners(top, resistor(values, 'R754'), top_tolerance,
+                           values.environment_tolerance('R754'), 1.188, 1.212, 100e-9)
+
+
+def mu_shunt_bounds(values: NetlistValues) -> tuple[float, float]:
+    if values.mpn('RS750') not in ('ERJ8BWFR015V','ERJ8CWFR013V'):
+        raise ValueError('unreviewed Mu current-limit shunt')
+    # CW:1% initial+75ppm*105C+3% endurance+1% soldering, rounded to6%.
+    # The old BW part needs7.5% for its larger positive-only200ppm TCR.
+    tolerance=.060 if values.mpn('RS750')=='ERJ8CWFR013V' else .075
+    return (resistor(values, 'RS750')*(1-tolerance)*.998,
+            resistor(values, 'RS750')*(1+tolerance)*1.002)
+
+
+def mu_operating_checks(values: NetlistValues) -> list[Check]:
+    inductance, tolerance, isat, irms, dcr = INDUCTORS[values.mpn('L750')]
+    values.used.add('L750')
+    _, vout = mu_voltage_corners(values)
+    shunt_low, shunt_high = mu_shunt_bounds(values)
+    frequency = 20e9/resistor(values, 'R756')*.90*.93/(1+values.environment_tolerance('R756'))
+    lmin = inductance*(1-tolerance)*.70
+    average, ripple, peak, rms = boost_currents(8.55, vout, 3.3, lmin, frequency, .85)
+    clamp_rms = math.sqrt(9**2+ripple**2/12)
+    return [
+        Check('Mu3.3A allocation below output-limit minimum', .048/shunt_high, 'A', 3.3, math.inf,
+              'actual shunt; initial/TCR/endurance/soldering and0.2% Kelvin allowance;48mV threshold minimum'),
+        Check('Mu3.3A average-current margin screen', 7/average, 'x', 1.25, math.inf,
+              '8.55V input,85% efficiency requirement;7A minimum is specified at VIN8V/VOUT20V/400kHz and must be confirmed at12V output'),
+        Check('Mu3.3A inductor RMS screen', rms, 'A', 0, irms,
+              'actual MPN; compare25C/20C-rise characterization, not an installed temperature guarantee'),
+        Check('Mu average-clamp inductor RMS screen', clamp_rms, 'A', 0, irms,
+              '9A maximum average-current table point plus ripple; operating allocation remains3.3A output'),
+        Check('Mu typical peak-clamp fault screen', 13+24.1*150e-9/lmin, 'A', 0, isat*.8,
+              '13A high-side clamp is typical only;150ns delay and20% hot-Isat reduction are stress assumptions; no guaranteed peak-clamp maximum is published'),
+        Check('Mu output shunt dissipation at3.3A', 3.3**2*shunt_high, 'W', 0, (125-110)/(125-70),
+              '1W CW resistor derated to case110C; fault pulse energy and installed case temperature remain unmeasured'),
+        Check('Mu COMP capacitor nominal identity', capacitor(values, 'C771')*1e9, 'nF', 329, 331,
+              'TDK330nF50V0603; finite model covers210..500nF effective including drift'),
     ]
 
 
 def source_window_checks(name: str, values: NetlistValues, refs: tuple[str, str, str],
                          ltc4418: bool = False) -> list[Check]:
     top, middle, bottom = (resistor(values, ref) for ref in refs)
-    tolerance = max(values.temperature_tolerance(ref) for ref in refs)
+    tolerance = tuple(values.environment_tolerance(ref) for ref in refs)
     # Both pin leakages are varied independently in the three-resistor network.
     vlow, vhigh, leakage = (.985, 1.015, 10e-9) if ltc4418 else (1.176, 1.224, 150e-9)
     _, _, ovmin, ovmax = three_resistor_window_corners(
@@ -541,7 +691,7 @@ def source_window_checks(name: str, values: NetlistValues, refs: tuple[str, str,
         top, middle, bottom, tolerance, resetlow, resethigh, leakage)
     return [
         Check(f"{name} 20V-source startup UV maximum", uvmax, "V", 0, 19.0,
-              f"{'/'.join(refs)}; IC, initial tolerance, RT TCR at -40..85C, "
+              f"{'/'.join(refs)}; IC, asymmetric initial/TCR/endurance/soldering corners, "
               "both leakages and fixed hysteresis"),
         Check(f"{name} 20V-source OV recovery minimum", resetmin, "V", 21.0, 24.0,
               "must recover with source at 20V+5%; both comparator leakages included"),
@@ -577,11 +727,13 @@ def extended_checks(center: NetlistValues, left: NetlistValues,
         ("PCIE_3V3_IN", center, "R785", "R786", "L1702", 6.0),
         ("USB_PORT_5V", left, "R1712", "R1713", "L1701", 5.5),
     ]:
-        if (name == "USB_PORT_5V" and values.mpn("U1703") == "LM706A0RRXR") or (name == "PCIE_3V3_IN" and values.mpn("U773") == "LM706A0RRXR"):
+        if ((name == "USB_PORT_5V" and values.mpn("U1703") == "LM706A0RRXR")
+                or (name == "PCIE_3V3_IN" and values.mpn("U773") == "LM706A0RRXR")
+                or (name == "SYS_5V" and values.mpn("U6") == "LM706A0RRXR")):
             continue
         top, bottom = resistor(values, top_ref), resistor(values, bottom_ref)
-        low, high = divider_corners(top, bottom, values.tolerance(top_ref),
-                                   values.tolerance(bottom_ref), .591, .609)
+        low, high = divider_corners(top, bottom, values.environment_tolerance(top_ref),
+                                   values.environment_tolerance(bottom_ref), .591, .609)
         inductor_mpn = values.mpn(lref)
         if inductor_mpn not in INDUCTORS:
             raise ValueError(f"unreviewed {name} inductor: {inductor_mpn}")
@@ -592,9 +744,9 @@ def extended_checks(center: NetlistValues, left: NetlistValues,
         ripple, peak, rms, _ = buck_currents(22, high, load, inductance*(1-ltol), 500e3)
         checks.extend([
             Check(f"{name} DC minimum", low, "V", 4.75 if high > 4 else 3.135,
-                  5.25 if high > 4 else 3.465, "0.591V, independent manufacturer resistor tolerances"),
+                  5.25 if high > 4 else 3.465, "0.591V, independent manufacturer initial/TCR resistor corners"),
             Check(f"{name} DC maximum", high, "V", 4.75 if high > 4 else 3.135,
-                  5.25 if high > 4 else 3.465, "0.609V, independent manufacturer resistor tolerances"),
+                  5.25 if high > 4 else 3.465, "0.609V, independent manufacturer initial/TCR resistor corners"),
             Check(f"{name} peak current screen", peak, "A", 0, isat,
                   f"22V input, {load:g}A load, L -20%, 500kHz typical; {inductor_mpn} 25C Isat30%"),
             Check(f"{name} RMS current screen", rms, "A", 0, irms,
@@ -604,8 +756,8 @@ def extended_checks(center: NetlistValues, left: NetlistValues,
         ])
 
     core_top, core_bottom = resistor(left, "R1705"), resistor(left, "R1706")
-    core_min, core_max = divider_corners(core_top, core_bottom, left.tolerance("R1705"),
-                                         left.tolerance("R1706"), .594, .606, 50e-9)
+    core_min, core_max = divider_corners(core_top, core_bottom, left.environment_tolerance("R1705"),
+                                         left.environment_tolerance("R1706"), .594, .606, 50e-9)
     checks.extend([
         Check("left USB7206C core minimum", core_min, "V", 1.1, 1.2,
               "TPS62823 0.594V reference, resistor tolerance, 50nA FB leakage"),
@@ -634,21 +786,30 @@ def extended_checks(center: NetlistValues, left: NetlistValues,
 
     checks.extend(aon_window_checks(center))
     checks.extend(endpoint_checks(center))
+    checks.extend(mu_operating_checks(center))
+    checks.extend(sys3_distribution_checks(center))
+    sys3_cap_max = sum(capacitor(values, ref)*(1+values.tolerance(ref))*1.15
+                       for values in (center, left, right)
+                       for ref in values.capacitors_on('/SYS_3V3'))
+    # U55's switched HDMI-side bypass joins SYS_3V3 when enabled.
+    sys3_cap_max += capacitor(right, 'C161')*(1+right.tolerance('C161'))*1.15
+    checks.append(Check('SYS3 complete enabled bank upper bound', sys3_cap_max*1e6, 'uF', 20, 100,
+                        'all three native netlists, actual MPN initial tolerance and+15% temperature; DC bias ignored on the upper bound; includes C161 behind U55'))
 
     # The idealized ILIM setting is not the same thing as guaranteed measured
     # input-current regulation. Do not turn the 3A nominal label into a limit.
     rt, rb = resistor(center, "R17"), resistor(center, "R190")
     settings = []
     for top, bottom, regn, leakage in itertools.product(
-        (rt*(1-center.tolerance("R17")), rt*(1+center.tolerance("R17"))),
-        (rb*(1-center.tolerance("R190")), rb*(1+center.tolerance("R190"))),
+        (rt*(1-center.environment_tolerance("R17")), rt*(1+center.environment_tolerance("R17"))),
+        (rb*(1-center.environment_tolerance("R190")), rb*(1+center.environment_tolerance("R190"))),
         (4.8, 5.2), (-1.5e-6, 1.5e-6)):
         settings.append((regn*bottom/(top+bottom)-leakage*top*bottom/(top+bottom)-1)/.8)
     checks.append(Check("BQ25798 2.50A bootstrap command below ILIM setting floor",
                         min(settings)-2.50, "A", 0, 1,
                         "REGN4.8-5.2V, MPN resistor corners, +/-1.5uA leakage; ADC/current-loop errors remain"))
     if 'R2262' in center:
-        output_rmax=resistor(center,'R2262')*(1+.01+100e-6*65)
+        output_rmax=resistor(center,'R2262')*(1+center.environment_tolerance('R2262'))
         checks.append(Check('charger-enable gate when AND is unpowered',output_rmax*10.1e-6,'V',0,.1,
                             '(10uA LVC Ioff+100nA MOS gate leakage)*R2262(high); full isolated-link screens run against the BMS netlist'))
 
@@ -660,15 +821,14 @@ def extended_checks(center: NetlistValues, left: NetlistValues,
     frequency = 20e9/resistor(center, "R756")
     # +/-10% is a conservative interpolation from TI's specified clock
     # endpoints, not a guaranteed specification at 49.9k. DITH is fitted.
-    fmin = frequency*.90*.93/(1+center.tolerance("R756"))
+    fmin = frequency*.90*.93/(1+center.environment_tolerance("R756"))
     lscreen = inductance*(1-ltol)*.70
     checks.append(Check("TPS552892 minimum L with tolerance and 30-percent bias screen",
                         lscreen*1e6, "uH", 1.2/fmin*1e6, math.inf,
                         f"{mu_mpn}; Lnom*(1-tolerance)*0.70; requires L>1.2/fSW; "
                         "clock -10%, R tolerance, dither -7%; typical bias boundary only"))
-    mu_max = .052/(resistor(center, "RS750")*(1-center.tolerance("RS750")))
-    mu_vmax = divider_corners(resistor(center, "R753")+resistor(center, "R752"),
-                              resistor(center, "R754"), .001, .001, 1.188, 1.212, 100e-9)[1]
+    mu_max = .052/mu_shunt_bounds(center)[0]
+    mu_vmax = mu_voltage_corners(center)[1]
     average, ripple, peak, rms = boost_currents(8.55, mu_vmax, mu_max, lscreen, fmin, .90)
     checks.extend([
         Check("Mu average inductor current screen at 8.55V", average, "A", 0, 7.0,
@@ -693,12 +853,12 @@ def thermal_supply_budget(feed_ohms: float, values=None) -> dict[str, float]:
     its 350uA/150mA-load characterization plus 100uA additional reserve here.
     The allocation must be measured; this function does not relabel it a limit.
     """
-    v=3.393; tr=.001+25e-6*65; tc=.01+100e-6*65
-    defaults={'R2201':10e3,'R2230':100e3,'R2231':100e3,'R2232':100e3,
+    v=3.393; tr=.001+25e-6*65+.010+.1/10000; tc=.05
+    defaults={'R2201':9.53e3,'R2230':100e3,'R2231':100e3,'R2232':100e3,
               'R2233':1e6,'R2235':100e3,'R2238':100e3}
     for cell in range(3):
         defaults.update({f'R{2210+3*cell}':100e3,f'R{2211+3*cell}':10e3,f'R{2212+3*cell}':10e3})
-    for index,top in enumerate([232e3,665e3,140e3,887e3]):
+    for index,top in enumerate([243e3,634e3,147e3,845e3]):
         defaults[f'R{2240+2*index}']=top;defaults[f'R{2241+2*index}']=499e3
     def r(ref):return resistor(values,ref) if values is not None else defaults[ref]
     passive=v/(r('R2201')*(1-tr))
@@ -885,21 +1045,19 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
                values, 1.2, (5.3, 5.8), (22.5, 23.5))
     aux_efuse_limit = 18.0 / (resistor(values, "R710") / 1e3)
     aux_pg_nominal = 1.2 * (1.0 + resistor(values, "R739") / resistor(values, "R740"))
-    aux_pg_minimum = 1.176 * (
-        1.0 + resistor(values, "R739") * 0.999 / (resistor(values, "R740") * 1.001)
-    )
-    aux_pg_maximum = 1.224 * (
-        1.0 + resistor(values, "R739") * 1.001 / (resistor(values, "R740") * 0.999)
-    )
+    aux_pg_minimum, aux_pg_maximum = divider_corners(
+        resistor(values, 'R739'), resistor(values, 'R740'),
+        values.environment_tolerance('R739'), values.environment_tolerance('R740'),
+        1.176, 1.224)
     checks.extend([
         Check("TPS26630 AUX current limit", aux_efuse_limit, "A", 2.9, 3.1,
               "18/R710(kOhm)"),
         Check("TPS26630 AUX PGOOD rising nominal", aux_pg_nominal, "V", 5.20, 5.35,
               "1.2V*(1+R739/R740)"),
         Check("TPS26630 AUX PGOOD rising worst-case minimum", aux_pg_minimum, "V", 5.10, 5.25,
-              "1.176V*(1+R739*0.999/(R740*1.001))"),
+              "1.176V; actual R739/R740 independent initial/TCR/endurance/soldering bounds"),
         Check("TPS26630 AUX PGOOD rising worst-case maximum", aux_pg_maximum, "V", 5.30, 5.45,
-              "1.224V*(1+R739*1.001/(R740*0.999))"),
+              "1.224V; actual R739/R740 independent initial/TCR/endurance/soldering bounds"),
     ])
 
     r_ilim_top = resistor(values, "R17")
@@ -908,14 +1066,17 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
     checks.append(Check("BQ25798 nominal ILIM pin setting", bq_ilim, "A", 2.9, 3.1,
                         "(5V*R190/(R17+R190)-1V)/(0.8V/A); not a guaranteed 3A current ceiling"))
 
-    rail_checks = system_5v_checks(resistor(values, "R40"), resistor(values, "R41"))
-    checks.extend(rail_checks)
+    if values.mpn('U6') == 'LM706A0RRXR':
+        rail_checks = sys5_voltage_checks(values)
+        checks.extend(sys5_checks(values))
+    else:
+        rail_checks = system_5v_checks(resistor(values, "R40"), resistor(values, "R41"))
+        checks.extend(rail_checks)
+        checks.append(Check("TPS56637 SYS_5V local capacitance only", (capacitor(values, 'C44')+capacitor(values, 'C45'))*1e6,
+                            'uF', 40, 100, 'local bank only; enabled branch bank must also be below the published100uF range'))
     sys_5v_max = rail_checks[2].value
-    sys_5v_cout = capacitor(values, "C44") + capacitor(values, "C45")
     sys_3v3 = 0.6 * (1.0 + resistor(values, "R43") / resistor(values, "R44"))
     checks.extend([
-        Check("TPS56637 SYS_5V nominal output capacitance", sys_5v_cout * 1e6, "uF", 40.0, 100.0,
-              "C44+C45; effective capacitance under DC bias remains a release hold"),
         Check("TPS56637 SYS_3V3 set-point", sys_3v3, "V", 3.25, 3.35,
               "0.6V*(1+R43/R44)"),
     ])
@@ -955,15 +1116,14 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
     radio_vout = 0.596 * (
         1.0 + resistor(radio_values, "R221") / resistor(radio_values, "R222")
     )
-    radio_vout_max = 0.611 * (
-        1.0 + resistor(radio_values, "R221") * 1.01 /
-        (resistor(radio_values, "R222") * 0.99)
-    )
-    pe42820_control_max = radio_vout_max * (
-        resistor(radio_values, "R227") * 1.01 /
-        (resistor(radio_values, "R242") * 0.99 +
-         resistor(radio_values, "R227") * 1.01)
-    )
+    _, radio_vout_max = divider_corners(resistor(radio_values, 'R221'), resistor(radio_values, 'R222'),
+                                       radio_values.environment_tolerance('R221'), radio_values.environment_tolerance('R222'),
+                                       .581, .611)
+    pe42820_control_max = max(
+        radio_vout_max*resistor(radio_values, bottom)*(1+radio_values.environment_tolerance(bottom)) /
+        (resistor(radio_values, top)*(1-radio_values.environment_tolerance(top))+
+         resistor(radio_values, bottom)*(1+radio_values.environment_tolerance(bottom)))
+        for top, bottom in (('R242', 'R227'), ('R260', 'R228')))
     radio_inductor = parse_engineering(radio_values["L70"])
     radio_vin_max = sys_5v_max
     radio_ripple_worst = radio_vout * (radio_vin_max - radio_vout) / (
@@ -976,7 +1136,7 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
         Check("TPS54302 RADIO_4V0 set-point", radio_vout, "V", 3.95, 4.08,
               "0.596V*(1+R221/R222)"),
         Check("PE42820 control worst-case maximum", pe42820_control_max, "V", 0.0, 3.55,
-              "RADIO_4V0(max)*R227(max)/(R242(min)+R227(max)); PE42820 absolute max is 3.6V"),
+              "both VHF/UHF dividers and TPS54302 output divider include actual initial/TCR/endurance/soldering bounds; PE42820 absolute max is3.6V"),
         Check("TPS54302 worst-case full-load ripple ratio", radio_ripple_worst / 3.0, "ratio", 0.0, 0.45,
               "SYS_5V(max), L70 -20%, fSW(min)=290kHz; KIND is designer-selected per TI Eq.8"),
         Check("TPS54302 worst-case full-load peak current", radio_peak, "A", 3.0, 4.0,
@@ -991,18 +1151,19 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
               "C224; interpolated starting point between TI 3.3V and 5V table rows"),
     ])
 
-    mu_12v = 1.2 * (1.0 + resistor(values, "R753") / resistor(values, "R754"))
+    mu_12v = 1.2 * (1.0 + (resistor(values, "R753")+resistor(values, 'R752')) / resistor(values, "R754"))
     mu_shunt = resistor(values, "RS750")
     mu_current = 0.050 / mu_shunt
-    mu_current_min = 0.048 / (mu_shunt * 1.01)
-    mu_current_max = 0.052 / (mu_shunt * 0.99)
-    mu_power_min = (mu_12v * 0.99) * mu_current_min
-    mu_power_max = (mu_12v * 1.01) * mu_current_max
+    shunt_min, shunt_max = mu_shunt_bounds(values)
+    mu_current_min = 0.048 / shunt_max
+    mu_current_max = 0.052 / shunt_min
+    mu_vmin, mu_vmax = mu_voltage_corners(values)
+    mu_power_min = mu_vmin * mu_current_min
+    mu_power_max = mu_vmax * mu_current_max
     mu_uvlo = 1.23 * (1.0 + resistor(values, "R759") / resistor(values, "R760"))
-    mu_uvlo_min = 1.20 * (1.0 + resistor(values, "R759") * 0.99 /
-                          (resistor(values, "R760") * 1.01))
-    mu_uvlo_max = 1.26 * (1.0 + resistor(values, "R759") * 1.01 /
-                          (resistor(values, "R760") * 0.99))
+    mu_uvlo_min, mu_uvlo_max = divider_corners(resistor(values, 'R759'), resistor(values, 'R760'),
+                                               values.environment_tolerance('R759'), values.environment_tolerance('R760'),
+                                               1.20, 1.26)
     mu_force_off_gate = 8.45 * resistor(values, "R761") / (
         resistor(values, "R766") + resistor(values, "R761")
     )
@@ -1019,26 +1180,22 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
     low_pack_required_input = low_pack_budget / source_efficiency + low_pack_reserve
     low_pack_mu_headroom = low_pack_continuous_power - low_pack_required_input
     fan_max_current = 0.26
-    fan_max_power = (mu_12v * 1.01) * fan_max_current
+    fan_max_power = mu_vmax * fan_max_current
     fan_fuse_margin = resistor(values, "F200") / fan_max_current
     fan_fg_cutoff = 1.0 / (2.0 * math.pi * resistor(values, "R206") * capacitor(values, "C209"))
     fan_fg_max = 6100.0 * 2.0 / 60.0
     fan_fg_filter_ratio = fan_fg_cutoff / fan_fg_max
-    normal_mu_rail_headroom = mu_power_min - normal_mu_edp_budget - fan_max_power
+    normal_mu_rail_headroom = 3.3*mu_vmin - normal_mu_edp_budget - fan_max_power
     support_reserve_after_fan = low_pack_reserve - fan_max_power
     checks.extend([
         Check("TPS552892 MU_12V set-point", mu_12v, "V", 11.9, 12.15,
               "1.2V*(1+R753/R754)"),
-        Check("TPS552892 output-current limit", mu_current, "A", 3.2, 3.5,
+        Check("TPS552892 nominal output-current limit", mu_current, "A", 3.7, 4.0,
               "50mV/RS750"),
-        Check("TPS552892 output-current worst-case minimum", mu_current_min, "A", 3.1, 3.25,
-              "48mV/(RS750*1.01); current-threshold minimum and shunt +1%"),
-        Check("TPS552892 output-current worst-case maximum", mu_current_max, "A", 3.45, 3.55,
-              "52mV/(RS750*0.99); current-threshold maximum and shunt -1%"),
-        Check("TPS552892 total MU_12V worst-case low ceiling", mu_power_min, "W", 37.5, 38.5,
-              "MU_12V*0.99*Ilimit_min; shared by Mu, eDP backlight, and fan"),
-        Check("TPS552892 total MU_12V worst-case high ceiling", mu_power_max, "W", 42.0, 43.0,
-              "MU_12V*1.01*Ilimit_max; shared by Mu, eDP backlight, and fan"),
+        Check("TPS552892 output-current limit minimum", mu_current_min, "A", 3.3, math.inf,
+              "48mV/full effective shunt maximum;initial,TCR,endurance,soldering and Kelvin allowance"),
+        Check("Mu output-limit high corner versus average-clamp maximum", mu_power_max/(8.55*.85), "A", 0, 9,
+              "VOUTmax*IOUT-limit-max/(8.55V*85%); the lower7A input-limit corner can act first; this is fault coordination, not an operating entitlement"),
         Check("Delta blower worst-case rail power", fan_max_power, "W", 3.0, 3.3,
               "MU_12V high corner*0.26A fan datasheet maximum"),
         Check("Delta blower PTC hold-current margin", fan_fuse_margin, "x", 2.5, 3.2,
@@ -1048,15 +1205,15 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
         Check("Delta blower FG filter/pulse ratio", fan_fg_filter_ratio, "x", 20.0, 30.0,
               "FG RC cutoff/(6100RPM*2 pulses/rev/60)"),
         Check("MU_12V headroom after normal Mu/eDP budget and maximum fan", normal_mu_rail_headroom, "W", 4.0, 8.0,
-              "MU_12V low current-limit ceiling-normal Mu/eDP budget-fan maximum"),
+              "3.3A operating allocation*VOUTmin-normal Mu/eDP budget-fan maximum"),
         Check("System reserve remaining after maximum fan", support_reserve_after_fan, "W", 2.5, 4.0,
               "EC system reserve-fan maximum; remaining reserve covers mandatory support loads"),
         Check("TPS552892 rising UVLO", mu_uvlo, "V", 8.8, 9.2,
               "1.23V*(1+R759/R760), hysteresis excluded"),
-        Check("TPS552892 rising UVLO worst-case minimum", mu_uvlo_min, "V", 8.55, 8.75,
-              "1.20V*(1+R759*0.99/(R760*1.01))"),
-        Check("TPS552892 rising UVLO worst-case maximum", mu_uvlo_max, "V", 9.3, 9.5,
-              "1.26V*(1+R759*1.01/(R760*0.99))"),
+        Check("TPS552892 rising UVLO minimum", mu_uvlo_min, "V", 8.55, 9.0,
+              "1.20V with individual R759/R760 initial,TCR,endurance,soldering bounds"),
+        Check("TPS552892 rising UVLO maximum", mu_uvlo_max, "V", 9.0, 9.5,
+              "1.26V with individual R759/R760 initial,TCR,endurance,soldering bounds"),
         Check("Mu fail-off Q750 gate at 8.45V VSYS", mu_force_off_gate, "V", 4.0, 4.5,
               "8.45V*R761/(R766+R761); reset-state gate divider"),
         Check("TPS552892 switching frequency", mu_fsw / 1e3, "kHz", 380, 420,
@@ -1163,72 +1320,71 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
 
 
 def render_analog_addendum(boards: dict[str, NetlistValues]) -> str:
-    lines = ["", "## analog coverage added after the independent audit", "",
-             "these are desktop calculations. they do not approve charging, full-load use, "
-             "a cable rating, loop stability, or fabrication.", "",
-             "| bank | nominal local capacitance | effective requirement or model bound | "
-             "required dc-bias retention |", "|---|---:|---:|---:|"]
+    lines = ["", "## analog coverage and qualification limits", "",
+             "these are calculations from native netlists and manufacturer order codes. "
+             "they are not physical rail, loop, harness, cell or fabrication qualification.", "",
+             "| local bank | nominal capacitance | effective lower bound | required dc-bias retention |",
+             "|---|---:|---:|---:|"]
     for board, name, refs, requirement in [
-        ("center", "U6 SYS_5V", ("C44", "C45"), 20e-6),
-        ("center", "U7 SYS_3V3", ("C48", "C792"), 20e-6),
-        ("center", "U773 PCIE_3V3_IN, switch off", ("C782",), 20e-6),
-        ("left", "U1703 USB_PORT_5V local ceramics, loop model lower bound", ("C1714", "C1715"), 20e-6),
+        ("center", "U5 output", ("C39", "C291"), 20e-6),
+        ("center", "U6 output ceramics", ("C44", "C45"), 20e-6),
+        ("center", "U7 output ceramics", ("C48", "C792"), 20e-6),
+        ("center", "U773 local output ceramics", ("C782", "C2287"), 20e-6),
+        ("left", "U1703 local output ceramics", ("C1714", "C1715", "C1868", "C1869"), 20e-6),
         ("left", "U1701 hub core", ("C1708", "C1709"), 5e-6),
         ("center", "U750 VCC", ("C764",), 4.7e-6),
+        ("center", "U6 VCC", ("C2360",), 4.7e-6),
+        ("center", "U773 VCC", ("C2280",), 4.7e-6),
+        ("left", "U1703 VCC", ("C1860",), 4.7e-6),
     ]:
-        values = boards[board]
-        nominal = sum(capacitor(values, ref) for ref in refs)
-        tol = max(values.tolerance(ref) for ref in refs)
-        retention = capacitor_retention_required(nominal, tol, .15, .10, requirement)
-        lines.append(f"| {name}, {'/'.join(refs)} | {nominal*1e6:.3g} uF | "
-                     f"{requirement*1e6:g} uF | {retention*100:.2f}% |")
-    total = direct_capacitance(list(boards.values()), "/USB_PORT_5V")
-    lines.extend(["", "the retention column is a requirement, not a pass. it includes the MPN's "
-                  "initial tolerance, a 15% temperature screen, and an explicit 10% aging allowance. "
-                  "the aging allowance is a design assumption, not manufacturer lifetime data. "
-                  "exact dc-bias/temperature curves and the intended service interval must be "
-                  "bound to each part before these capacitor margins can be closed.", "",
-                  f"USB_PORT_5V has {total*1e6:.4g} uF nominal directly connected across the three boards. "
-                  "the count includes PP5V input reservoirs even when the port source switches are off. "
-                  "enabled branch reservoirs add more capacitance. a cable is an R/L network, "
-                  "so a lumped sum alone cannot establish loop stability.", "",
-                  "C782 also sees C834/C836 through U772 when the endpoint switch is on. "
-                  "the two switch states and the actual NVMe input capacitance both need a loop model.", "",
-                  "the U750 current screen uses 8.55V input, the output-current-limit high corner, "
-                  "90% efficiency, a -10% clock screen and -7% dither. 90% efficiency and the "
-                  "clock interpolation are assumptions. Coilcraft Isat/Irms figures are typical "
-                  "25C characterization points; copper loss is not a temperature prediction.", "",
-                  "the 20V-source window rows include the full comparator range, both pin leakages, "
-                  "initial resistor tolerance and independent RT TCR drift from 25C over -40..85C "
-                  "resistor temperature. this is a component-temperature calculation range, "
-                  "not a released enclosure or ambient range.", "",
-                  "the accepted external bootstrap planning command is 2.50A IINDPM: 37.5W at 15V, "
-                  "50W at 20V, or 47.5W at 19V before losses. the nominal difference from a 3A "
-                  "source is 0.50A, not guaranteed AON headroom. actual headroom is qualified "
-                  "source-minimum current minus BQ-maximum current at 15/20V across temperature, "
-                  "with source/path minimum voltage for watts. IINDPM accuracy at these conditions "
-                  "is unclosed. see firmware/tools/calculate_pd_headroom.py. these arithmetic "
-                  "budgets do not prove firmware enforcement or successful module/panel boot.", "",
-                  "the private analog evidence contains reproducible sensitivity sweeps for the "
-                  "LM706A0 compensation and Mu boost compensation. their cable/load/capacitor ranges "
-                  "are declared model assumptions, not measured installed values.", "",
-                  "unclosed desktop items: capacitor bias/aging data; Mu buck/boost transition and "
-                  "the actual module input network; USB5 vendor-model/assembled-harness confirmation; "
-                  "switching-loop placement and routed parasitics; fuse/FET/shunt "
-                  "fault-energy and SOA coordination.", "",
-                  "first-article measurements remain unrun: startup, line/load steps, output ripple, "
-                  "fault overshoot, loop gain, cable drop/heating, capacitor ripple heating, converter "
-                  "temperature, and recovery after source/protection faults. Mu ripple must stay "
-                  "within its 200mV p-p requirement and every rail within its approved load range.", "",
-                  "### procurement coverage", ""])
+        values=boards[board]
+        nominal=sum(capacitor(values, ref) for ref in refs)
+        tol=max(values.tolerance(ref) for ref in refs)
+        retention=capacitor_retention_required(nominal,tol,.15,.10,requirement)
+        lines.append(f"| {name}, {'/'.join(refs)} | {nominal*1e6:.3g} µf | {requirement*1e6:g} µf | {retention*100:.2f}% |")
+    total=direct_capacitance(list(boards.values()), '/USB_PORT_5V')
+    lines += ["", "the retention column is an acceptance requirement. it combines initial tolerance, "
+              "a15% temperature screen and an explicit10% aging allowance. exact biased capacitance "
+              "and the service interval must be confirmed for the installed parts; a nominal label is not an effective-capacitance result.", "",
+              f"USB_PORT_5V has {total*1e6:.4g} µf nominal directly connected in these three exports. "
+              "the two PP5V gate states are separate networks. the final USB5 sensitivity model includes "
+              "both reservoirs off, either on, both on, remote cable R/L and optional capacitance.", "",
+              "U6 uses external compensation for the complete bank: at most80µf local ceramics,500µf "
+              "local polymer and300µf across all enabled branches. U7's separate upper-bank check "
+              "includes all three boards and the switched HDMI bypass. the endpoint model separates "
+              "NVMe, wi-fi and the right-board GbE branch; its2mf ceiling includes board and module capacitors.", "",
+              "critical voltage windows use independent resistor-family initial,TCR,endurance and "
+              "soldering-change screens. TNPU/TNPW use their8000h endurance requirements; retainedRT "
+              "parts use their1000h requirements. summing those changes is a conservative design screen, "
+              "not a claim that different qualification tests establish product service life. "
+              "the resistor temperature range is−40..85°C; it is not a released ambient range.", "",
+              "the CW shunt component envelope is rounded to±6%, including initial tolerance, "
+              "75ppm×105°C,3% endurance and1% soldering change. Kelvin/layout allowances are additional. "
+              "the inductors' Isat and Irms figures are25°C characterization points. the stated hot-Isat "
+              "reductions, propagation delays and copper losses are screens, not installed thermal or fault guarantees.", "",
+              "the Mu3.3A allocation requires at least85% conversion efficiency at the modeled8.55V input. "
+              "the7..9A average-current table is specified at VIN8V/VOUT20V/400kHz, and the13A peak clamp "
+              "is typical only. confirm those limits at12V output. the finite Mu model includes resistive, "
+              "constant-current and100kHz constant-power loads in boost operation; buck/transition behavior remains to be measured.", "",
+              "the accepted BQ bootstrap command is2.50A IINDPM. the0.50A difference from a3A source "
+              "is nominal only. actual AON headroom requires the source-minimum current minus the "
+              "BQ maximum current at15/20V, with path and voltage tolerances. the available IINDPM "
+              "accuracy table does not supply that bound at these operating points. all simultaneous "
+              "rail allocations must fit the independently qualified whole-system source budget.", "",
+              "unrun physical checks are finite: capacitor bias/aging and module input impedance; "
+              "startup, load steps, ripple and loop gain across gate states and converter modes; "
+              "hot converter/coil/shunt and harness temperatures; current-limit, short, negative-input "
+              "and OV-recovery waveforms; actual branch R/L and return drop; and the insulated probes' "
+              "contact/lag and cell-specific temperature/current limits. operating qualification gates remain off.", "",
+              "### procurement coverage", ""]
     for name, values in boards.items():
-        unknown = [f"{ref} ({values.mpn(ref) or 'missing MPN'})" for ref in sorted(values.used)
-                   if decode(values.mpn(ref)) is None and values.mpn(ref) not in EXACT_PASSIVES
-                   and values.mpn(ref) not in INDUCTORS]
-        lines.append(f"- {name}: {len(values.used)} component values used; "
-                     + ("unverified procurement values: " + ", ".join(unknown) if unknown
-                        else "all used numeric values resolve to supported manufacturer data."))
-    return "\n".join(lines) + "\n"
+        unknown=[f"{ref} ({values.mpn(ref) or 'missing MPN'})" for ref in sorted(values.used)
+                 if decode(values.mpn(ref)) is None and values.mpn(ref) not in EXACT_PASSIVES
+                 and values.mpn(ref) not in INDUCTORS]
+        lines.append(f"- {name}: {len(values.used)} numeric component values used; "+
+                     ("unverified procurement values: "+", ".join(unknown) if unknown else
+                      "all used numeric values resolve to supported manufacturer data."))
+    return "\n".join(lines)+"\n"
 
 
 def render_report(checks: list[Check], netlist: Path, radio_netlist: Path) -> str:

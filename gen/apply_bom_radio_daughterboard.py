@@ -24,23 +24,23 @@ RADIO = ROOT / "radio_daughterboard"
 RESISTOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
     # -- 01_core.kicad_sch --
     "R220": ("Yageo", "RC0603FR-07100KL", "1%-context"),
-    "R221": ("Yageo", "RC0603FR-07100KL", "1%-context"),
-    "R222": ("Yageo", "RC0603FR-0717K4L", "1%-context"),
+    "R221": ("Vishay", "TNPU0603100KHZEN00", "0.02%-5ppm"),
+    "R222": ("Vishay", "TNPU060317K4HZEN00", "0.02%-5ppm"),
 
     # -- 02_radios.kicad_sch --
     "R225": ("Yageo", "RC0603FR-07100KL", "1%-context"),
     "R226": ("Yageo", "RC0603FR-07100KL", "1%-context"),
-    "R227": ("Yageo", "RC0603FR-0747KL",  "1%-context"),
-    "R228": ("Yageo", "RC0603FR-0747KL",  "1%-context"),
+    "R227": ("Vishay", "TNPU060347K0HZEN00", "0.02%-5ppm"),
+    "R228": ("Vishay", "TNPU060347K0HZEN00", "0.02%-5ppm"),
     "R229": ("Yageo", "RC0603FR-070RL",   "jumper"),
     "R230": ("Yageo", "RC0603FR-07100KL", "1%-context"),
     "R231": ("Yageo", "RC0603FR-070RL",   "jumper"),
     "R232": ("Yageo", "RC0603FR-07100KL", "1%-context"),
     "R233": ("Yageo", "RC0603FR-071KL",   "1%-context"),
     "R234": ("Yageo", "RC0603FR-071KL",   "1%-context"),
-    "R242": ("Yageo", "RC0603FR-0710KL",  "1%-context"),
+    "R242": ("Vishay", "TNPU060310K0HZEN00", "0.02%-5ppm"),
     "R243": ("Yageo", "RC0603FR-07100RL", "1%-context"),
-    "R260": ("Yageo", "RC0603FR-0710KL",  "1%-context"),
+    "R260": ("Vishay", "TNPU060310K0HZEN00", "0.02%-5ppm"),
     "R261": ("Yageo", "RC0603FR-07100RL", "1%-context"),
 
     # -- 03_gnss.kicad_sch --

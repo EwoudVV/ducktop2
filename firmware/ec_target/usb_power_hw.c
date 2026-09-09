@@ -47,7 +47,10 @@ uint16_t usb_power_alert_threshold_raw(void)
 {
     uint64_t nano_volts=(uint64_t)USB_POWER_TRIP_CURRENT_MA * USB_POWER_SHUNT_MIN_NOHM *
                        (1000000u-USB_POWER_ADC_GAIN_PPM)/1000000000u;
-    return (uint16_t)((nano_volts-USB_POWER_ADC_OFFSET_NV)/2500u);
+    /* Subtract one full ADC code: the comparator tests greater than the
+     * programmed limit, and conversion quantization must not delay the
+     * worst-case trip beyond the declared current bound. */
+    return (uint16_t)((nano_volts-USB_POWER_ADC_OFFSET_NV)/2500u-1u);
 }
 uint16_t usb_power_current_upper_ma(int16_t raw)
 {
@@ -105,13 +108,14 @@ bool usb_power_hw_clear_fault(uint32_t now_ms)
     if (!initialized || output0!=0u || !last_sample.valid ||
         now_ms-last_sample.sample_ms>100u || last_sample.upper_current_ma>100u ||
         last_sample.nominal_current_ma < -5 || !tca9548a_deselect_all() || !io_verify() ||
-        !io_read(1,&pins) || !(pins&USB_POWER_IN_ALERT_N)) return false;
+        !io_read(1,&pins) || (pins&(USB_POWER_IN_ALERT_N|USB_POWER_IN_SYS5_VALID))!=
+         (USB_POWER_IN_ALERT_N|USB_POWER_IN_SYS5_VALID)) return false;
     /* Clear only after the caller has verified fresh near-zero current.
      * Each I2C transfer exceeds the latch's minimum asynchronous pulse. */
     if (!io_write(3,0) || !io_read(3,&value) || value!=0 ||
         !io_write(3,1) || !io_read(3,&value) || value!=1 || !io_read(1,&pins) ||
-        (pins&(USB_POWER_IN_FAULT_N|USB_POWER_IN_ALERT_N))!=
-               (USB_POWER_IN_FAULT_N|USB_POWER_IN_ALERT_N)) {
+        (pins&(USB_POWER_IN_FAULT_N|USB_POWER_IN_ALERT_N|USB_POWER_IN_SYS5_VALID))!=
+               (USB_POWER_IN_FAULT_N|USB_POWER_IN_ALERT_N|USB_POWER_IN_SYS5_VALID)) {
         initialized=false;
         return false;
     }
@@ -127,8 +131,8 @@ usb_power_hw_result_t usb_power_hw_sample(uint32_t now_ms, usb_power_sample_t *s
     memset(sample,0,sizeof(*sample));
     if (!initialized || !tca9548a_deselect_all() || !io_verify() ||
         !io_read(0,&sample->input0) || !io_read(1,&sample->input1)) return USB_POWER_HW_BUS;
-    bool fault=(sample->input1&(USB_POWER_IN_FAULT_N|USB_POWER_IN_ALERT_N))!=
-               (USB_POWER_IN_FAULT_N|USB_POWER_IN_ALERT_N);
+    bool fault=(sample->input1&(USB_POWER_IN_FAULT_N|USB_POWER_IN_ALERT_N|USB_POWER_IN_SYS5_VALID))!=
+               (USB_POWER_IN_FAULT_N|USB_POWER_IN_ALERT_N|USB_POWER_IN_SYS5_VALID);
     /* Do not clear an INA latch while old permits remain high. The external
      * flip-flop independently keeps the converter off during this ordering. */
     if (fault && output0 && !usb_power_hw_write(0)) return USB_POWER_HW_BUS;

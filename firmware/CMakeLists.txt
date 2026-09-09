@@ -223,3 +223,6 @@ add_executable(usb_power_tests ec_target/usb_power.c ec/src/ec_usb_power.c tests
 target_include_directories(usb_power_tests PRIVATE ec_target ec/include)
 ducktop2_target_defaults(usb_power_tests)
 add_test(NAME usb_power_tests COMMAND usb_power_tests)
+
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
+add_test(NAME tps25751_config_tests COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_tps25751_config.py)

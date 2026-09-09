@@ -165,6 +165,7 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
     "$ROOT/tests/test_usb_power.c" -o "$BUILD_DIR/usb_power_tests"
 "$BUILD_DIR/usb_power_hw_tests"
 "$BUILD_DIR/usb_power_tests"
+python3 "$ROOT/tests/test_tps25751_config.py"
 python3 "$ROOT/tools/verify_release_contract.py"
 
 printf '%s\n' "host tests: PASS ($CC_BIN)"

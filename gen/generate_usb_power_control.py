@@ -14,7 +14,7 @@ PP5V_NETS = {'J21':'PD1_PP5V_GATED','J11':'PD2_PP5V_GATED'}
 PP5V_PG = {'J21':'PD1_SOURCE_PG','J11':'PD2_SOURCE_PG'}
 CTRL_OUT0 = ('USB5_PERMIT', *(PERMIT_NETS[p] for p in PORTS))
 CTRL_OUT1 = {'0':'USB5_FAULT_CLEAR_N'}
-CTRL_IN1 = {1:'USB5_FAULT_N',2:'USB5_OC_N',3:'USB5_PG',4:'PD1_SOURCE_PG',5:'PD2_SOURCE_PG'}
+CTRL_IN1 = {1:'USB5_FAULT_N',2:'USB5_OC_N',3:'USB5_PG',4:'PD1_SOURCE_PG',5:'PD2_SOURCE_PG',6:'INTERNAL_USB_VBUS_VALID'}
 
 LOCAL_CONTROL_NETS = {'USB5_PERMIT', 'USB5_FAULT_N', 'USB5_OC_N',
                       'USB5_PG', 'USB5_FAULT_CLEAR_N',
@@ -33,13 +33,17 @@ def props(mpn, source):
 
 
 def resistor(s, ref, value, x, y, first, second, first_kind='local', second_kind='local'):
+    mpn={'10k':'RC0603FR-0710KL','100k':'RC0603FR-07100KL',
+         '12.7k 1%':'RC0603FR-0712K7L'}[value]
     s.place(ref,'R',value,x,y,footprint=b.FOOTPRINTS['R'],
-            pin_nets={'1':(first,first_kind),'2':(second,second_kind)})
+            pin_nets={'1':(first,first_kind),'2':(second,second_kind)},
+            extra_props={'Manufacturer':'Yageo','MPN':mpn})
 
 
 def bypass(s, ref, x, y):
     s.place(ref,'C','100n',x,y,footprint=b.FOOTPRINTS['C_100n'],
-            pin_nets={'1':('MCU_3V3','hier'),'2':('GND','local')})
+            pin_nets={'1':('MCU_3V3','hier'),'2':('GND','local')},
+            extra_props={'Manufacturer':'Murata','MPN':'GRM188R71H104KA93D'})
 
 
 def add_permission_io(s, x=1000, y=70):
@@ -59,7 +63,7 @@ def add_permission_io(s, x=1000, y=70):
     for bit,net in CTRL_IN1.items():
         resistor(s,'R'+str(2420+bit),'12.7k 1%' if bit in (4,5) else '100k',
                  x+60,y+bit*20,net,'GND',net_kind(net))
-    for bit in (6,7):
+    for bit in (7,):
         resistor(s,'R'+str(2420+bit),'100k',x+60,y+bit*20,'USB_IO_UNUSED'+str(bit),'GND')
     s.text(x-60,y-70,'USB permissions reset off; fault clear is active-low and defaults high.')
 
@@ -84,7 +88,7 @@ def add_left_monitor(s, x=650, y=70):
             footprint='ducktop2:TI_DCU0008A_VSSOP8',pin_nets={
                 '1':('GND','local'),'2':('GND','local'),'3':('USB5_FAULT_N','local'),
                 '4':('GND','local'),'5':('','nc'),'6':('USB5_FAULT_CLEAR_N','local'),
-                '7':('USB5_OC_N','local'),'8':('MCU_3V3','hier')},
+                '7':('USB5_COMBINED_OK','local'),'8':('MCU_3V3','hier')},
             extra_props=props('SN74LVC1G74DCUR','https://www.ti.com/lit/ds/symlink/sn74lvc1g74.pdf'))
     bypass(s,'C2402',x-35,y+50)
     resistor(s,'R2402','10k',x+45,y+80,'MCU_3V3','USB5_FAULT_CLEAR_N','hier','local')
@@ -96,13 +100,31 @@ def add_left_monitor(s, x=650, y=70):
     bypass(s,'C2410',x-35,y+130)
     s.place('U2411','74LVC1G08','SN74LVC1G08DBVR raw fault veto',x,y+240,
             footprint='Package_TO_SOT_SMD:SOT-23-5',pin_nets={
-                '1':('USB5_LATCH_ENABLE','local'),'2':('USB5_OC_N','local'),
+                '1':('USB5_LATCH_ENABLE','local'),'2':('USB5_COMBINED_OK','local'),
                 '3':('GND','local'),'4':('USB5_HW_ENABLE','local'),'5':('MCU_3V3','hier')},
             extra_props=props('SN74LVC1G08DBVR','https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf'))
     bypass(s,'C2411',x-35,y+210)
     resistor(s,'R2400','10k',x+45,y+240,'USB5_HW_ENABLE','GND')
     resistor(s,'R2410','100k',x+45,y+160,'USB5_PERMIT','GND','local')
-    s.text(x-45,y+275,'Raw ALERT veto remains active during fault-clear; never tie the fault-latch clear to NRST.')
+    s.place('U2413','74LVC1G08','SN74LVC1G08DBVR raw OC and SYS5 veto',x+165,y+210,
+            footprint='Package_TO_SOT_SMD:SOT-23-5',pin_nets={
+                '1':('USB5_OC_N','local'),'2':('INTERNAL_USB_VBUS_VALID','hier'),
+                '3':('GND','local'),'4':('USB5_COMBINED_OK','local'),'5':('MCU_3V3','hier')},
+            extra_props=props('SN74LVC1G08DBVR','https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf'))
+    bypass(s,'C2415',x+130,y+180)
+    resistor(s,'R2429','10k',x+205,y+210,'USB5_COMBINED_OK','GND')
+    s.text(x-45,y+275,'Raw OC and SYS5 veto remain active during clear; any SYS5 loss latches USB off until explicit clear.')
+
+
+def add_sys5_qualification(s,x=1020,y=395):
+    s.place('U2412','74LVC1G08','SN74LVC1G08DBVR SYS5 PG and actual VBUS qualify',x,y,
+            footprint='Package_TO_SOT_SMD:SOT-23-5',pin_nets={
+                '1':('SYS_5V_PG','local'),'2':('INTERNAL_USB_VBUS_RAW_VALID','local'),
+                '3':('GND','local'),'4':('INTERNAL_USB_VBUS_VALID','hier'),'5':('MCU_3V3','hier')},
+            extra_props={**props('SN74LVC1G08DBVR','https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf'),
+                'Function':'existing VBUS-valid boundary requires actual downstream VBUS and settled SYS5 PG'})
+    bypass(s,'C2412',x+35,y+30)
+    resistor(s,'R2428','10k',x+35,y+55,'INTERNAL_USB_VBUS_VALID','GND','hier')
 
 
 def switch_enable_net(port):
@@ -134,7 +156,8 @@ def add_pd_gate(s, port, x=790, y=250):
             extra_props={**props('TPS22992SRXNR','https://www.ti.com/lit/ds/symlink/tps22992.pdf'),
                          'PowerContract':'permit off before loss/reset; wait PG before Source role; TCPC PP5V path retains VBUS reverse blocking'})
     s.place('C'+str(n),'C','1u',x-35,y-25,footprint=b.FOOTPRINTS['C_0805'],
-            pin_nets={'1':('USB_PORT_5V','hier'),'2':('GND','local')})
+            pin_nets={'1':('USB_PORT_5V','hier'),'2':('GND','local')},
+            extra_props={'Manufacturer':'Murata','MPN':'GRM21BR71H105KA12L'})
     s.place('C'+str(n+10),'C','4.7n C0G PP5V slew',x+45,y-25,
             footprint=b.FOOTPRINTS['C_100n'],pin_nets={'1':(ct,'local'),'2':('GND','local')},
             extra_props={'Manufacturer':'Murata','MPN':'GRM1885C1H472JA01D'})

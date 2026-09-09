@@ -22,9 +22,9 @@ def parts(*rows):
 
 class ElectricalCalculationTests(unittest.TestCase):
     def lm_values(self, inductor="XAL7070-682MEC"):
-        values=parts(("R1712","54.9k 0.1%","RT0603BRB0754K9L"),
-                     ("R1713","10.2k 0.1%","RT0603BRB0710K2L"),
-                     ("R1860","49.9k 0.1%","RT0603BRB0749K9L"),
+        values=parts(("R1712","54.9k 0.1%","TNPU060354K9HZEN00"),
+                     ("R1713","10.2k 0.1%","TNPU060310K2HZEN00"),
+                     ("R1860","49.9k 0.1%","TNPU060349K9HZEN00"),
                      ("RS1860","5.6mOhm 1%","WSL20105L600FEA"),
                      ("L1701","6.8uH",inductor),
                      ("C1864","330u","T520X337M010ATE010"),
@@ -34,7 +34,7 @@ class ElectricalCalculationTests(unittest.TestCase):
 
     def test_lm_divider_and_current_limit_corners(self):
         values=self.lm_values()
-        self.assertAlmostEqual(left_5v_checks(values)[1].value,5.049397919348851)
+        self.assertAlmostEqual(left_5v_checks(values)[1].value,5.048744514468825)
         self.assertTrue(all(check.passed for check in lm706_checks(values)))
 
     def test_lm_old_inductor_loses_transient_current_margin(self):
@@ -43,18 +43,20 @@ class ElectricalCalculationTests(unittest.TestCase):
         self.assertFalse(headroom.passed)
 
     def test_usb5_parallel_shunt_life_temperature_and_layout_bounds(self):
-        values=self.lm_values("XGL1060-822MEC")
-        values.parts["R1712"]=("RT0603BRB0755K6L",values.parts["R1712"][1])
+        values=self.lm_values("XGL1060-682MEC")
+        values.parts["R1712"]=("TNPU060355K6HZEN00",values.parts["R1712"][1])
         values["R1712"]="55.6k 0.1%"
         for ref in ("RS1860","RS1861"):
             values[ref]="10mOhm 1%"
             values.parts[ref]=("ERJ8CWFR010V","ducktop2:Panasonic_ERJ8CW_10to16m")
+        values["R1860"]="22.1k 0.02%"
+        values.parts["R1860"]=("TNPU060322K1HZEN00",values.parts["R1860"][1])
         nominal,low,high=usb5_shunt_bounds(values)
         self.assertAlmostEqual(nominal,.005)
-        self.assertAlmostEqual(low,.00475726125)
-        self.assertAlmostEqual(high,.00524326125)
+        self.assertAlmostEqual(low,.00469483)
+        self.assertAlmostEqual(high,.00530583)
         self.assertTrue(all(check.passed for check in lm706_checks(values)))
-        self.assertAlmostEqual(left_5v_checks(values)[1].value,5.103656180615594)
+        self.assertAlmostEqual(left_5v_checks(values)[1].value,5.102994474221816)
         values.parts["RS1861"]=("ERJ8BWFR010V",values.parts["RS1861"][1])
         with self.assertRaisesRegex(ValueError,"unreviewed parallel"):
             usb5_shunt_bounds(values)
@@ -135,11 +137,11 @@ class ElectricalCalculationTests(unittest.TestCase):
 
     def test_recovery_includes_hysteresis_and_independent_tcr(self):
         values = parts(("R1", "1M 0.1%", "RT0603BRD071ML"),
-                       ("R2", "35.7k 0.1%", "RT0603BRD0735K7L"),
-                       ("R3", "47.5k 0.1%", "RT0603BRD0747K5L"))
+                       ("R2", "35.7k 0.02%", "TNPU060335K7HZEN00"),
+                       ("R3", "47.5k 0.02%", "TNPU060347K5HZEN00"))
         checks = source_window_checks("pd", values, ("R1", "R2", "R3"), True)
         self.assertTrue(all(check.passed for check in checks))
-        self.assertAlmostEqual(checks[1].value, 21.308332273318143)
+        self.assertAlmostEqual(checks[1].value, 21.12991560187165)
 
 
 if __name__ == "__main__":
