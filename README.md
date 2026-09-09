@@ -22,11 +22,12 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 8 september 2026. the audit repairs are still in progress. the
-schematic generators include power and interconnect changes that still
-need to reach the saved schematics and boards. i also moved connectors,
-both M.2 sockets, and parts on the right board. those positions are saved;
-card supports, cable access, and nearby components still need checking.
+updated 9 september 2026. the audit repairs are still in progress. the
+left board now has the revised power circuit, separate power wiring, and
+new signal connector in its saved schematic and layout. its existing USB
+routing is preserved. i also started HDMI and USB routing on the right
+board. the center, right, and BMS revisions still need their remaining
+checks and integration; the generators are ahead of those saved boards.
 
 the keyboard repairs and its [manufacturing package](manufacturing/keyboard/)
 are finished, with zero DRC errors and zero unconnected items in the checked
@@ -36,7 +37,7 @@ mechanical drawing. the radio still needs routing.
 the four-layer BMS is getting separate power and isolated control wiring,
 plus cell temperature monitoring. its revised routing still needs work,
 including preserving the main battery return plane. the three main-board
-sections are eight layers. the remaining main-board routing has not started.
+sections are eight layers, and most of their routing still remains.
 
 firmware corrections cover charger communication, startup, watchdog and fan
 handling, USB power permissions, and host communication. assembled-hardware

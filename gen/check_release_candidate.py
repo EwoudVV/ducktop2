@@ -524,6 +524,7 @@ def run_static_checks(tempdir: Path) -> tuple[int, int]:
         )
     commands = [
         (["python3", "gen/check_schematic.py"], copy_root, "schematic self-check"),
+        (["python3", "gen/check_schematic_annotation.py"], copy_root, "complete schematic annotation"),
         (["python3", "gen/verify_design_contracts.py", "--schematic-only"], copy_root,
          "schematic design contracts"),
         (["python3", "gen/verify_schematic_closure.py", "verification/generated/ducktop2_netlist.xml"],
@@ -934,4 +935,3 @@ def main(argv=None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -31,7 +31,7 @@ static void port_snapshot(const uint8_t status[6],const uint8_t power[6],
     i2c_mock_expect_read(0x20,0x26,power,6);
     i2c_mock_expect_read(0x20,0x40,pdstate,5);
     config_read(0x20,cfg);
-    static const uint8_t source_profile[]={63,1,168,42,90,144,1,6};
+    static const uint8_t source_profile[]={63,1,168,42,90,144,1,4};
     static const uint8_t control[]={4,0x70,0xc1,0x81,0};
     static const uint8_t global[]={14,1,0x81,2};
     i2c_mock_expect_read(0x20,0x32,source_profile,8);
@@ -40,7 +40,7 @@ static void port_snapshot(const uint8_t status[6],const uint8_t power[6],
 }
 static void port_tests(void)
 {
-    uint8_t cfg[19]={17,0xa2,0x58,0x22,0xa5,0x3c,0x81,0x72,0x63,0x54,0x45,0x36,0x27,0x18,0x09,0xfa,0xeb,0xdc,0xcd};
+    uint8_t cfg[19]={17,0xa2,0x48,0x22,0xa5,0x3c,0x81,0x72,0x63,0x54,0x45,0x36,0x27,0x18,0x09,0xfa,0xeb,0xdc,0xcd};
     uint8_t sink[6]={5,0x0d,0,0x20,0,0};
     uint8_t source[6]={5,0x6d,0,0x20,0,0};
     uint8_t sink_vconn[6]={5,0x02,0x30,0,0,0x40}; /* PP_EXT input, CC1 VCONN */
@@ -64,6 +64,23 @@ static void port_tests(void)
         i2c_mock.script[n].data[4]=0x2c;i2c_mock.script[n].data[5]=0x91;
     }
     assert(tps25751_read_port_state(0x20,&state) && !state.source_profile_valid);
+    /* The official export has one reserved tail byte on 0x29. Both wire
+     * lengths are supported; unrecognized lengths and UFP swaps fail off. */
+    for(uint8_t length=3;length<=6;length++) {
+        i2c_mock_begin();port_snapshot(source,source_vconn,source_pd,cfg);port_snapshot(source,source_vconn,source_pd,cfg);
+        for(size_t n=0;n<i2c_mock.script_count;n++) if(i2c_mock.script[n].reg==0x29)
+            i2c_mock.script[n].data[0]=length;
+        assert(tps25751_read_port_state(0x20,&state)==(length==4 || length==5));
+        if(length==4 || length==5) assert(state.source_profile_valid && i2c_mock_script_complete());
+    }
+    i2c_mock_begin();port_snapshot(source,source_vconn,source_pd,cfg);port_snapshot(source,source_vconn,source_pd,cfg);
+    for(size_t n=0;n<i2c_mock.script_count;n++) if(i2c_mock.script[n].reg==0x29)
+        i2c_mock.script[n].data[2]|=0x10; /* Process Swap to UFP */
+    assert(tps25751_read_port_state(0x20,&state) && !state.source_profile_valid);
+    cfg[2]=8; /* The right USB2 image cannot qualify the left Gen2 port. */
+    i2c_mock_begin();port_snapshot(source,source_vconn,source_pd,cfg);port_snapshot(source,source_vconn,source_pd,cfg);
+    assert(tps25751_read_port_state(0x20,&state) && !state.source_profile_valid);
+    cfg[2]=0x48;
     uint8_t off[6]={5,0,0,0,0,0x40};
     i2c_mock_begin();port_snapshot(sink,off,sink_pd,cfg);port_snapshot(sink,off,sink_pd,cfg);
     assert(tps25751_read_port_state(0x20,&state) && !state.vconn_enabled && !state.pp5v_enabled);

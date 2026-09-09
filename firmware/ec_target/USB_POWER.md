@@ -19,12 +19,25 @@ J23, J12, J24 and J25 in that order. P1 bit 0 is active-low fault clear;
 it defaults high and is never tied to NRST. bits 1 through 5 read the fault
 latch, raw INA alert, converter PG, PD1 gate PG and PD2 gate PG. both PD gate
 PG inputs use dividers that stay below MCU_3V3 and above the expander's VIH.
+P1 bit 6 observes the existing INTERNAL_USB_VBUS_VALID signal.
 
 U2402 retains the INA alert independently. reading the INA Mask Enable
 register clears its internal alert flag, so that register alone cannot be
-the hardware interlock. U2411 also gates on the raw alert: an asserted fault
-still blocks the converter if clear and fault are asserted together.
+the hardware interlock. U2412 on center ANDs U6 SYS_5V_PG with U771's actual downstream VBUS
+supervisor. its result uses the existing INTERNAL_USB_VBUS_VALID seam
+signal. U2413 on left ANDs that signal with the raw INA alert. this
+combined result drives both U2402 preset and U2411's direct enable veto.
+raw overcurrent or SYS5 loss therefore blocks power even while preset and
+clear are asserted together.
 R2400 pulls the converter enable output low during partial power loss.
+
+a SYS5 brownout is retained in the independent latch even if the host lease
+survives and the rail recovers before the next poll. cold start likewise
+holds USB5 off until SYS5 PG and actual internal VBUS are valid, current is
+fresh and quiet, and the host sends an explicit clear. rail recovery alone
+never clears the latch. a failed clear readback, including PG loss during
+the pulse, enters the EC reset path. no extra seam conductor is used.
+
 
 J22, J23 and J12 retain their hub control and fault connections. their new
 AND gates add the EC veto. J24 and J25 retain the existing host-active
@@ -78,16 +91,17 @@ endurance and assembly change. the old 20 kΩ low corner is 1.144307 A.
 ## monitor and target sequence
 
 RS1860 and RS1861 are two ERJ8CWFR010V 10 mΩ resistors in parallel.
-the effective sense envelope is 4.757261 to 5.243261 mΩ, including the
-specified layout allowance. each controller gets its own Kelvin pair from
+the effective sense envelope is 4.69483 to 5.30583 mΩ, including the
+rounded 6% component allowance for initial tolerance, full-category TCR,
+endurance and soldering, plus the separate 0.11% layout allowance. each controller gets its own Kelvin pair from
 the inner pad edges of RS1860. power-branch resistance mismatch must be
 at most 20 µΩ; shared copper stays outside the sense pickup.
 
 INA calibration is 2048 for a 0.5 mA current LSB. the alert limit is raw
-0x2ffc, calculated from the low shunt corner, 0.6% ADC gain error and
-25 µV offset/layout allowance. its maximum actual trip is below 6.5 A;
-the opposite corner trips at about 5.817 A. the current target therefore
-caps steady reservations at 5.5 A and the startup screen at 5.7 A.
+0x2f5a, calculated from the low shunt corner, 0.6% ADC gain error and
+25 µV offset/layout allowance and one full ADC code for quantization. its maximum actual trip is below 6.5 A;
+the opposite corner trips at about 5.673 A. the current target therefore
+caps steady reservations at 5.5 A and the startup screen at 5.6 A.
 64 averages with 140 µs bus/shunt conversions give a datasheet maximum
 conversion window of 19.712 ms. physical total shutoff latency and fault
 energy still need measurement. see the
@@ -116,40 +130,26 @@ USB demand. the host cannot turn on any qualification switch.
 
 ## separate power looms
 
-`gen/usb_power_contract.py` defines the straight-numbered looms. J2430/J2431
-use 43045-1200 headers and 43025-1200 housings for left power. J2432/J2433
-use the 10-contact versions for right power. J2434/J2435 use the 8-contact
-versions for direct left-right USB5, with four positive and four return
-conductors. every terminal is 43030-0038, tin, 18 AWG. different circuit
-counts prevent interchanging these three looms.
+J2430/J2431 use the 12-contact Micro-Fit loom; J2432/J2433 use the
+10-contact loom. J2434/J2435 use XT30PW-F30.G.Y with XT30U-M.G.Y plugs
+and one 18 AWG Alpha 5857 conductor per polarity. pad 1 is ground and
+pad 2 is USB5. the direct USB loom has a conservative 8 A return design
+bound and a 2.015 A maximum positive reservation.
 
-wire is Alpha 3253 UL1061, 18 AWG, 7/26 tinned copper: red 3253 RD005 and
-black 3253 BK005. maximum OD is 1.778 mm, below the terminal's 1.85 mm
-limit. wire temperature is limited to 80 °C, and the minimum bend radius
-is 17.78 mm. cut lengths between crimp barrels are 90 to 100 mm for the
-seams and 280 to 300 mm for USB5. the Micro-Fit mated height is 10.29 mm;
-wire exit and latch access need additional space. see
-[Alpha 3253](https://www.alphawire.com/products/wire/hook-up-wire/premium/3253)
-and the [Molex drawing](https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/430/43045/430451000_sd.pdf).
+the complete pin maps, dimensions, hot/aged resistance conditions, actual
+load inventory, voltage budgets and signed ground proof are in
+[I/O power qualification](../../docs/hardware/io-power-qualification.md).
+`gen/calculate_io_power.py` reproduces the 7.845353 A worst normal cut
+including startup and converter/loom losses. every accepted profile must
+meet those branch ceilings and maintain true center VSYS at least 8.7 V.
 
-use the conservative 12-circuit, 18 AWG, 5.5 A reference screen for every
-contact, not the 2-circuit headline rating. the
-[Molex specification](https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/productspecificationpdf/430/43045/PS-43045-001.pdf?inline=)
-requires an assembled temperature-rise evaluation. our acceptance limits
-are 45 mΩ per hot/aged mated-and-crimp termination and 30 mΩ/m for hot
-wire. neither is claimed as a measured result. individual cold return
-resistance must be at least 2 mΩ for a seam and 4 mΩ for direct USB5.
-with at most 10 mV per seam and 20 mV left-right GND difference, each
-return is bounded to 5 A even with unequal sharing. the ground limits must
-include every signed return path, including the signal shields.
-
-four positive conductors at their maximum resistance bound the USB5 bank
-at 24.75 mΩ. with 20 mΩ board copper allowance, 2.015 A right load and
-the 20 mV total ground limit, the right PP5V floor is about 4.956 V.
-J12's VBUS floor is about 4.781 V after its switches and a separate 40 mV
-hot TPD1S514 allowance. the ground-bond geometry, this hot switch bound,
-wire temperatures and every assembled resistance remain qualification
-conditions. no equal current split or ideal ground is assumed.
+BQ25798's 1 mV ADC resolution is not an absolute accuracy guarantee.
+USB qualification therefore also requires measured worst-case VSYS
+overestimate and rail-fall margins, including observation/shutoff latency.
+`DUCKTOP2_VSYS_SENSE_QUALIFIED` and both margins default to zero.
+readings older than 250 ms, an unqualified measurement, or a lower bound
+below 8.7 V remove all USB permissions. target initialization rejects a
+whole-path efficiency below 80% or an absent voltage margin.
 
 run `gen/verify_usb_power.py` against fresh native center, left and right
 XML exports. it checks source wiring, not PCB routing or fabrication approval.

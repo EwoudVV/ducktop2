@@ -406,6 +406,7 @@ class Component:
     sheetfile: str
     path: str
     pin_nets: dict[str, str]
+    unit_paths: tuple[str, ...] = ()
 
 
 @dataclass
@@ -526,7 +527,15 @@ def parse_netlist(project: str = "ducktop2") -> dict[str, Component]:
         props.update({p.get("name"): p.get("value") for p in comp.findall("property")})
         sheetname = sheetpath.get("names", "") if sheetpath is not None else ""
         sheet_tstamps = sheetpath.get("tstamps", "") if sheetpath is not None else ""
-        symbol_tstamp = comp.findtext("tstamps") or ""
+        symbol_tstamps = (comp.findtext("tstamps") or comp.findtext("tstamp") or "").split()
+        if not symbol_tstamps:
+            raise ValueError(f"{ref}: netlist has no symbol UUID")
+        for stamp in symbol_tstamps:
+            try:
+                uuid.UUID(stamp)
+            except ValueError as exc:
+                raise ValueError(f"{ref}: invalid symbol UUID {stamp!r}") from exc
+        unit_paths = tuple(sheet_tstamps.rstrip("/") + "/" + stamp for stamp in symbol_tstamps)
         components[ref] = Component(
             ref=ref,
             value=comp.findtext("value") or "",
@@ -534,8 +543,9 @@ def parse_netlist(project: str = "ducktop2") -> dict[str, Component]:
             properties={k: v or "" for k, v in props.items() if k},
             sheetname=sheetname,
             sheetfile=props.get("Sheetfile") or "",
-            path=sheet_tstamps + symbol_tstamp,
+            path=unit_paths[0],
             pin_nets={},
+            unit_paths=unit_paths,
         )
         sheet_by_ref[ref] = sheetname
 
@@ -887,7 +897,11 @@ def update_metadata(block: str, comp: Component) -> str:
         if name in internal_properties or name.startswith("ki_"):
             continue
         block = replace_property(block, name, value, comp.ref)
-    block = set_or_insert_top_line(block, "path", f'(path "{q(comp.path)}")')
+    current_path = extract(r'^\s*\(path "([^"]*)"\)', block)
+    # A multi-unit part still has one footprint. Keep a valid existing unit
+    # link, or use the first exported unit; never join UUIDs with spaces.
+    linked_path = current_path if current_path in (comp.unit_paths or (comp.path,)) else comp.path
+    block = set_or_insert_top_line(block, "path", f'(path "{q(linked_path)}")')
     block = set_or_insert_top_line(block, "sheetname", f'(sheetname "{q(comp.sheetname)}")')
     block = set_or_insert_top_line(block, "sheetfile", f'(sheetfile "{q(comp.sheetfile)}")')
     block = update_attribute_flags(block, comp)

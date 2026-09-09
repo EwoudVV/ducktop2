@@ -111,7 +111,7 @@ CURRENT_REQUIRED_REFS = {
     # User I/O, audio, keyboard, maker MCU, and optional radio boundary.
     "U45", "J41", "J45", "U400", "U402", "U430", "MK430", "J310",
     "J2300", "U2300", "U2303", "U2304",
-    "U15B", "Q26", "Q27", "Q28", "Q29", "C715", "C747", "C748", "C749",
+    "U16", "Q26", "Q27", "Q28", "Q29", "C715", "C747", "C748", "C749",
     "R741", "R742", "R743", "R744", "R745", "R746",
 }
 
@@ -299,7 +299,7 @@ def load_contracts() -> None:
                 13:"USB_MAIN_GATE", 14:"USB_MAIN_FET_COMMON", 15:"VBUS_COMBINED",
                 16:"SEL_STAGE2", 17:"/USB_PD_SELECTED", 18:"MAIN_SEL_INTVCC",
                 19:"MAIN_SEL_INTVCC", 20:"GND", 21:"GND"},
-        "U15B": {1:"ST2_SEL_TMR", 2:"ST2_USB_UV", 3:"ST2_USB_OV",
+        "U16": {1:"ST2_SEL_TMR", 2:"ST2_USB_UV", 3:"ST2_USB_OV",
                  4:"ST2_AUX_UV", 5:"ST2_AUX_OV", 6:"/PD2_VALID_N", 8:"GND",
                  10:"ST2_SEL_INTVCC", 11:"ST2_AUX_GATE", 12:"ST2_AUX_FET_COMMON",
                  13:"ST2_USB_GATE", 14:"ST2_USB_FET_COMMON", 15:"SEL_STAGE2",
@@ -312,7 +312,7 @@ def load_contracts() -> None:
         for pin, net in pins.items():
             add(ref, pin, selector_net(net), "Source selector pin and channel assignment.", selector)
         add_nc(ref, 9, "Unused CAS output stays open.", selector)
-    add_nc("U15B", 7, "Unused stage-2 VALID2 output stays open.", selector)
+    add_nc("U16", 7, "Unused stage-2 VALID2 output stays open.", selector)
     for ref, gate, common, drain in (
         ("Q21", "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "/USB_PD_SELECTED"),
         ("Q22", "USB_MAIN_GATE", "USB_MAIN_FET_COMMON", "VBUS_COMBINED"),

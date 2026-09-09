@@ -1,83 +1,234 @@
 {
+  "schema_version": 2,
   "tool": "TI USB-C/PD Application Customization Tool",
   "tool_version": "2.0.0",
   "device": "TPS25751A",
   "base_firmware": "FB09.17.02__RC5.bin",
-  "source": {
-    "path": "ducktop2_dual_role_config.json",
-    "sha256": "68c8f4d09f6198b6787097094733a5bb695a6045f7d1c88bb727c8d30b47c97f"
-  },
-  "status": "GENERATED_PENDING_HIL",
-  "previous_15v_generated": {
-    "ducktop2_dual_role_raw.json": {
-      "sha256": "9d4376ddd54b84a2a19e86a0c8b9aea12bc258aff42a13b5b7186b2f50f716c7"
-    },
-    "ducktop2_dual_role_vif.xml": {
-      "sha256": "811af79fb497372e548b1197c20e4584a2e54ad37cc127a02111d7be482da183"
-    },
-    "ducktop2_dual_role_lowRegion.bin": {
-      "sha256": "0578c6e49782d6c8df305390e1aea8d028893f2c0f7401faccc9e023f8ba719a",
-      "bytes": 4992
-    },
-    "ducktop2_dual_role_fullFlash.bin": {
-      "sha256": "279e0a59f72271a7f0c1e6cf2b6e52e501517764b7bddc6a9661177365d6aa2d",
-      "bytes": 22400
-    }
-  },
-  "previous_15v_source_sha256": "14dcc9b9e631ea6c9cc4a7233ca2672b26aed38d0d699bf868ce8dbf9fc7c423",
-  "generated": {
-    "ducktop2_dual_role_vif.xml": {
-      "sha256": "9b1892bb780417f75cd68665af64d18e63462fe55ec88c8fe5b15839c08abe8c",
-      "bytes": 8235
-    },
-    "ducktop2_dual_role_raw.json": {
-      "sha256": "68c8f4d09f6198b6787097094733a5bb695a6045f7d1c88bb727c8d30b47c97f",
-      "bytes": 6926
-    },
-    "ducktop2_dual_role_lowRegion.bin": {
-      "sha256": "ccd8328ca7afc10225b56df8ecfcf2fd8b99743f006177772996becbab2caf85",
-      "bytes": 4992
-    },
-    "ducktop2_dual_role_lowRegion.c": {
-      "sha256": "4eadb449f5b133a9266492da4c59dde5f8e118cb2d1b7b966f69487e3a6a3722",
-      "bytes": 30377
-    },
-    "ducktop2_dual_role_fullFlash.bin": {
-      "sha256": "c13bda99428ea012f7dc4bec3e4e2b35529659841ef74e2365a2d707ba2d0ce6",
-      "bytes": 22400
-    },
-    "ducktop2_dual_role_fullFlash.c": {
-      "sha256": "059c998c3559088340f5ac72f5ceccb6c7ad4c00d253b0cdac6a2f998b09bfa0",
-      "bytes": 135913
-    }
-  },
-  "programming_and_readback": {
-    "PD1": {
-      "status": "NOT_RUN",
-      "expected_full_flash_sha256": "c13bda99428ea012f7dc4bec3e4e2b35529659841ef74e2365a2d707ba2d0ce6",
-      "controller_address_7bit": 32,
-      "service_mux_channel": 2,
-      "programmed_board_revision": null,
-      "readback_path": null,
-      "readback_sha256": null
-    },
-    "PD2": {
-      "status": "NOT_RUN",
-      "expected_full_flash_sha256": "c13bda99428ea012f7dc4bec3e4e2b35529659841ef74e2365a2d707ba2d0ce6",
-      "controller_address_7bit": 33,
-      "service_mux_channel": 3,
-      "programmed_board_revision": null,
-      "readback_path": null,
-      "readback_sha256": null
-    }
-  },
-  "source_normalization": "official v2.0.0 TPS25751A export; legacy 0x27/0x73 omitted and reserved zero padding normalized",
-  "exported_utc": "2026-09-07T19:38:05.968750+00:00",
   "official_tool_url": "https://dev.ti.com/gallery/view/USBPD/USBCPD_Application_Customization_Tool/ver/2.0.0/",
-  "official_export_zip_sha256": "772fbfb23d064c721852a5b02d3e001d0dcf0c6439ae9ef0b11cc6d9820d11f0",
-  "source_registers_match_export": true,
   "agreements": {
     "SRAS_2714": "explicitly approved and accepted",
     "SRAS_8013": "explicitly approved and accepted"
-  }
+  },
+  "status": "GENERATED_PENDING_HIL",
+  "exported_date": "2026-09-08",
+  "physical_programming": "NOT_RUN",
+  "ports": {
+    "PD1": {
+      "receptacle": "J21",
+      "source": {
+        "path": "ducktop2_pd1_config.json",
+        "sha256": "394160f33f8ee66bfb6c7bac2b388ef7c0c0de3f93ef705c595b3cffc3fe3eaf",
+        "bytes": 7686
+      },
+      "usb_data": "USB3_GEN2X1_HOST_ONLY",
+      "service_mux_channel": 2,
+      "controller_address_7bit": 32,
+      "generated": {
+        "ducktop2_pd1_review_TPS25751A_FB091702_fullFlash.bin": {
+          "path": "generated/PD1/ducktop2_pd1_review_TPS25751A_FB091702_fullFlash.bin",
+          "sha256": "1ba86cefb42e7be4b7aef61f9edb51adc4921779249f267dbc86c005e4eac7b0",
+          "bytes": 22400
+        },
+        "ducktop2_pd1_review_TPS25751A_FB091702_fullFlash.c": {
+          "path": "generated/PD1/ducktop2_pd1_review_TPS25751A_FB091702_fullFlash.c",
+          "sha256": "69a7933a72c03681f5001ef2ff3e288735c6395e50b2d479ecebb28bacd94740",
+          "bytes": 135913
+        },
+        "ducktop2_pd1_review_TPS25751A_FB091702_lowRegion.bin": {
+          "path": "generated/PD1/ducktop2_pd1_review_TPS25751A_FB091702_lowRegion.bin",
+          "sha256": "85df46f4d949fc286233419d995ec5e3e8eeb7c5a834c5b3c5333fc5314c31d7",
+          "bytes": 4992
+        },
+        "ducktop2_pd1_review_TPS25751A_FB091702_lowRegion.c": {
+          "path": "generated/PD1/ducktop2_pd1_review_TPS25751A_FB091702_lowRegion.c",
+          "sha256": "142d7f9e3a273e8a3ad2e3ed78481f39ead70bf4d7f87db226ff0c87465ea2e0",
+          "bytes": 30377
+        },
+        "official-export.zip": {
+          "path": "generated/PD1/official-export.zip",
+          "sha256": "d77b81add923402eb7e60c4013f1e3e56444f2966995c6b563301482ce00c0a3",
+          "bytes": 210559
+        },
+        "ready_pd1_raw.json": {
+          "path": "generated/PD1/ready_pd1_raw.json",
+          "sha256": "394160f33f8ee66bfb6c7bac2b388ef7c0c0de3f93ef705c595b3cffc3fe3eaf",
+          "bytes": 7686
+        },
+        "ready_pd1_vif.xml": {
+          "path": "generated/PD1/ready_pd1_vif.xml",
+          "sha256": "9b1892bb780417f75cd68665af64d18e63462fe55ec88c8fe5b15839c08abe8c",
+          "bytes": 8235
+        }
+      },
+      "original_vif": {
+        "path": "generated/PD1/ready_pd1_vif.xml",
+        "sha256": "9b1892bb780417f75cd68665af64d18e63462fe55ec88c8fe5b15839c08abe8c",
+        "bytes": 8235
+      },
+      "reviewed_vif": {
+        "path": "ducktop2_pd1_vif.xml",
+        "sha256": "639bdbb3d97281b51591f7649aeb1b3108fc60c1c732ed9909df1d2679cb5e26",
+        "bytes": 9580
+      },
+      "vif_review": {
+        "status": "SYSTEM_METADATA_DRAFT_NOT_CERTIFIED",
+        "corrections": [
+          {
+            "field": "Port_Label",
+            "from": {
+              "value": null,
+              "text": "1"
+            },
+            "to": {
+              "value": null,
+              "text": "J21"
+            }
+          },
+          {
+            "field": "Host_Speed",
+            "from": {
+              "value": "5",
+              "text": "N/A"
+            },
+            "to": {
+              "value": "2",
+              "text": "USB 3.2 Gen 2x1"
+            }
+          }
+        ],
+        "remaining": "system identification, battery/status message implementation and complete USB-IF VIF/compliance review remain before certification"
+      },
+      "programming_and_readback": {
+        "status": "NOT_RUN",
+        "expected_full_flash_sha256": "1ba86cefb42e7be4b7aef61f9edb51adc4921779249f267dbc86c005e4eac7b0",
+        "programmed_board_revision": null,
+        "readback_path": null,
+        "readback_sha256": null
+      }
+    },
+    "PD2": {
+      "receptacle": "J11",
+      "source": {
+        "path": "ducktop2_pd2_config.json",
+        "sha256": "81a15a8793259772bf1dacd230d6a45d0f7d00fd1419c2512aaf962eab889e61",
+        "bytes": 7685
+      },
+      "usb_data": "USB2_HOST_ONLY",
+      "service_mux_channel": 3,
+      "controller_address_7bit": 33,
+      "generated": {
+        "ducktop2_pd2_usb2_TPS25751A_FB091702_fullFlash.bin": {
+          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_fullFlash.bin",
+          "sha256": "f62e2d8f7f258524108abeb8d0eac0de197e2eac937d1d61b0c0a6dd0b6e4bf4",
+          "bytes": 22400
+        },
+        "ducktop2_pd2_usb2_TPS25751A_FB091702_fullFlash.c": {
+          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_fullFlash.c",
+          "sha256": "c3e6295741258594307989a1792236ae2a512d3ea9c2fcf20d7df22db33ef4f9",
+          "bytes": 135913
+        },
+        "ducktop2_pd2_usb2_TPS25751A_FB091702_lowRegion.bin": {
+          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_lowRegion.bin",
+          "sha256": "54b272b86632be6992ea4cdbc6c64bfb748b7efcaa5ff80e419bd1eb931797a2",
+          "bytes": 4992
+        },
+        "ducktop2_pd2_usb2_TPS25751A_FB091702_lowRegion.c": {
+          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_lowRegion.c",
+          "sha256": "2139ae1a9e624689cc66a6b75629b02a31193cd0535ab21697b559cb656cc43f",
+          "bytes": 30377
+        },
+        "ducktop2_pd2_usb2_TPS25751A_FB091702_raw.json": {
+          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_raw.json",
+          "sha256": "81a15a8793259772bf1dacd230d6a45d0f7d00fd1419c2512aaf962eab889e61",
+          "bytes": 7685
+        },
+        "ducktop2_pd2_usb2_TPS25751A_FB091702_vif.xml": {
+          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_vif.xml",
+          "sha256": "0b4087a4c687af13655c68445425ccdb78493da49a3597610fdf8c6ef7041bae",
+          "bytes": 8239
+        },
+        "official-export.zip": {
+          "path": "generated/PD2/official-export.zip",
+          "sha256": "abe02001db52ac62a8b6f765782208678c8f39d3cf311d56297afc83ae345bf1",
+          "bytes": 210654
+        }
+      },
+      "original_vif": {
+        "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_vif.xml",
+        "sha256": "0b4087a4c687af13655c68445425ccdb78493da49a3597610fdf8c6ef7041bae",
+        "bytes": 8239
+      },
+      "reviewed_vif": {
+        "path": "ducktop2_pd2_vif.xml",
+        "sha256": "6fdb6edccb12e992f38192732c5f1f40c6aba5ab607c9842fe657b6763953a44",
+        "bytes": 9604
+      },
+      "vif_review": {
+        "status": "SYSTEM_METADATA_DRAFT_NOT_CERTIFIED",
+        "corrections": [
+          {
+            "field": "Port_Label",
+            "from": {
+              "value": null,
+              "text": "1"
+            },
+            "to": {
+              "value": null,
+              "text": "J11"
+            }
+          },
+          {
+            "field": "Type_C_Port_On_Hub",
+            "from": {
+              "value": "false",
+              "text": null
+            },
+            "to": {
+              "value": "true",
+              "text": null
+            }
+          },
+          {
+            "field": "Is_DFP_On_Hub",
+            "from": {
+              "value": "false",
+              "text": null
+            },
+            "to": {
+              "value": "true",
+              "text": null
+            }
+          },
+          {
+            "field": "Hub_Port_Number",
+            "from": null,
+            "to": {
+              "value": "1",
+              "text": null
+            }
+          }
+        ],
+        "remaining": "system identification, battery/status message implementation and complete USB-IF VIF/compliance review remain before certification"
+      },
+      "programming_and_readback": {
+        "status": "NOT_RUN",
+        "expected_full_flash_sha256": "f62e2d8f7f258524108abeb8d0eac0de197e2eac937d1d61b0c0a6dd0b6e4bf4",
+        "programmed_board_revision": null,
+        "readback_path": null,
+        "readback_sha256": null
+      }
+    }
+  },
+  "evidence_boundary": "official configuration/image export and independent static checks; no controller programming, wire readback, negotiation or USB certification",
+  "vif_review_sources": [
+    {
+      "url": "https://www.ti.com/lit/an/slvafz1/slvafz1.pdf",
+      "document": "SLVAFZ1, May 2025, sections 2.2, 4 and 5.6",
+      "purpose": "TI VIF exports require system fields to be reviewed; generic XML editing is supported"
+    },
+    {
+      "url": "https://chromium.googlesource.com/chromiumos/platform/ec/+/d1e7a27efbc80e282b3917d1bef7a9a944c00eeb/util/genvif.c",
+      "purpose": "primary implementation enum USB_GEN21=2 and Type_C_Port_On_Hub to Is_DFP_On_Hub mapping"
+    }
+  ]
 }

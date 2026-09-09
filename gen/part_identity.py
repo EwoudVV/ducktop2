@@ -2,6 +2,7 @@
 
 Yageo RC/RT: resistance follows the reel code, with R/K/M as the decimal.
 Murata GRM/GCM/GRT: dimensions precede the dielectric, voltage and capacitance.
+Vishay TNPU/TNPW: four-character resistance, then tolerance, TCR and packaging.
 An unsupported family stays unverified; it is never counted as a match.
 """
 from __future__ import annotations
@@ -18,6 +19,7 @@ class Identity:
     size: str
     tolerance: float | None = None
     voltage: float | None = None
+    tcr_ppm: float | None = None
 
 
 def engineering_value(token: str) -> float | None:
@@ -36,6 +38,48 @@ def engineering_value(token: str) -> float | None:
 
 
 def decode(mpn: str) -> Identity | None:
+    # Vishay 28779 (TNPU, 2025-03-04) and 28758 (TNPW, 2026-04-10).
+    # Reject combinations outside their published precision/resistance tables.
+    precision = re.fullmatch(r"(TNPU)(0402|0603|0805|1206)([\dRKM]{4})([ABH])([YZW])(E[AINP])00", mpn)
+    if precision:
+        _, size, code, tolerance, tcr, packaging = precision.groups()
+        value = engineering_value(code)
+        initial = {"B": .1, "A": .05, "H": .02}[tolerance]
+        ppm = {"Y": 10, "Z": 5, "W": 2}[tcr]
+        valid = value is not None and sum(code.count(c) for c in 'RKM') == 1
+        valid = valid and packaging in (("EP", "EI") if size == "0402" else ("EN", "EA"))
+        low, high = {"0402": (100, 100e3), "0603": (24.9, 100e3),
+                     "0805": (100, 332e3), "1206": (100, 511e3)}[size]
+        if ppm == 10:
+            valid = valid and initial == .05
+        elif ppm == 5 and initial == .02:
+            valid = valid and size != "0402"
+            low, high = 100, 100e3 if size == "0603" else 200e3
+        elif ppm == 2:
+            valid = valid and size != "0402"
+            low, high = 500, 20e3
+        if valid and low <= value <= high:
+            return Identity("R", value, size, initial, tcr_ppm=ppm)
+        return None
+    precision = re.fullmatch(r"(TNPW)(0603|0805|1206)([\dRKM]{4})([BDF])([HEXY])(E[AC])", mpn)
+    if precision:
+        _, size, code, tolerance, tcr, packaging = precision.groups()
+        value = engineering_value(code)
+        initial = {"B": .1, "D": .5, "F": 1}[tolerance]
+        ppm = {"H": 50, "E": 25, "X": 15, "Y": 10}[tcr]
+        valid = value is not None and sum(code.count(c) for c in 'RKM') == 1
+        valid = valid and packaging in (("ED",) if size == "0402" else ("EA", "EC"))
+        valid = valid and (packaging != "EC" or ppm in (25, 50))
+        low, high = {"0402": (10, 100e3), "0603": (1, 332e3),
+                     "0805": (1, 1e6), "1206": (1, 2e6), "1210": (10, 3.01e6)}[size]
+        if initial == .1 and size in ("0603", "0805", "1206"):
+            low = 3.5
+        if ppm in (10, 15):
+            valid = valid and initial == .1
+            low = 47 if size in ("0402", "0603", "1206") else 3.5
+        if valid and low <= value <= high:
+            return Identity("R", value, size, initial, tcr_ppm=ppm)
+        return None
     resistor = re.fullmatch(
         r"(?:RC(\d{4})([BDFJ])[RK]-?(?:07|10|13)|"
         r"RT(\d{4})([BCDFPW])[RK][ABCDE](?:07|10|13|7W))([\dRKM]+)L", mpn)
@@ -82,6 +126,9 @@ def identity_errors(value: str, footprint: str, mpn: str) -> list[str]:
     tolerance = re.search(r"(\d+(?:\.\d+)?)\s*%", value)
     if tolerance and actual.tolerance is not None and actual.tolerance > float(tolerance[1]):
         errors.append(f"order code tolerance {actual.tolerance:g}% exceeds {tolerance[1]}%")
+    tcr = re.search(r"(\d+(?:\.\d+)?)\s*ppm", value, re.I)
+    if tcr and actual.tcr_ppm is not None and actual.tcr_ppm > float(tcr[1]):
+        errors.append(f"order code TCR {actual.tcr_ppm:g}ppm exceeds {tcr[1]}ppm")
     if actual.kind == "C" and actual.voltage is not None:
         ratings = [float(word[:-1]) for word in words if re.fullmatch(r"\d+(?:\.\d+)?V", word)]
         if ratings and actual.voltage < max(ratings):

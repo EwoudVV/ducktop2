@@ -72,14 +72,26 @@
 #ifndef DUCKTOP2_USB_EFFICIENCY_PERCENT
 #define DUCKTOP2_USB_EFFICIENCY_PERCENT 0u
 #endif
+/* BQ25798 ADC resolution is not a guaranteed absolute accuracy. These
+ * bounds need assembled calibration across temperature, operating state,
+ * life and the full measurement-to-shutoff interval before USB admission. */
+#ifndef DUCKTOP2_VSYS_SENSE_QUALIFIED
+#define DUCKTOP2_VSYS_SENSE_QUALIFIED 0
+#endif
+#ifndef DUCKTOP2_VSYS_MAX_OVERESTIMATE_MV
+#define DUCKTOP2_VSYS_MAX_OVERESTIMATE_MV 0u
+#endif
+#ifndef DUCKTOP2_VSYS_MAX_FALL_MV
+#define DUCKTOP2_VSYS_MAX_FALL_MV 0u
+#endif
 #ifndef DUCKTOP2_USB_PD_INRUSH_MA
 #define DUCKTOP2_USB_PD_INRUSH_MA 0u
 #endif
 #ifndef DUCKTOP2_USB_BRANCH_INRUSH_MA
 #define DUCKTOP2_USB_BRANCH_INRUSH_MA 0u
 #endif
-#if DUCKTOP2_USB_POWER_QUALIFIED && (!DUCKTOP2_AUX_LOADS_QUALIFIED || !DUCKTOP2_USB_RIGHT_HARNESS_MA || !DUCKTOP2_USB_EFFICIENCY_PERCENT || !DUCKTOP2_USB_PD_INRUSH_MA || !DUCKTOP2_USB_BRANCH_INRUSH_MA)
-#error "USB power requires qualified harness, efficiency, inrush and other load bounds"
+#if DUCKTOP2_USB_POWER_QUALIFIED && (!DUCKTOP2_AUX_LOADS_QUALIFIED || !DUCKTOP2_USB_RIGHT_HARNESS_MA || DUCKTOP2_USB_EFFICIENCY_PERCENT < 80 || !DUCKTOP2_VSYS_SENSE_QUALIFIED || !DUCKTOP2_VSYS_MAX_OVERESTIMATE_MV || !DUCKTOP2_VSYS_MAX_FALL_MV || !DUCKTOP2_USB_PD_INRUSH_MA || !DUCKTOP2_USB_BRANCH_INRUSH_MA)
+#error "USB power requires qualified harness, VSYS measurement/fall, efficiency, inrush and other load bounds"
 #endif
 #if DUCKTOP2_USB_ADMISSION_MA > 5500 || DUCKTOP2_USB_RIGHT_HARNESS_MA > 2500 || DUCKTOP2_USB_EFFICIENCY_PERCENT > 100
 #error "USB profile exceeds the conservative design envelope"

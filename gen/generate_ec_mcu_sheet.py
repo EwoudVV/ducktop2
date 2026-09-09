@@ -198,12 +198,12 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
                 "Manufacturer": "Coilcraft", "MPN": "XGL6030-103MEC",
                 "Datasheet": "https://www.coilcraft.com/getmedia/9bfb2606-51aa-49a6-98ad-d20f3504c8ae/xgl6030.pdf",
             })
-    s.place("R35", "R", "100k 0.1% 25ppm MCU_3V3 FB hi", *c4.next(), footprint=FOOTPRINTS["R"],
+    s.place("R35", "R", "100k 0.02% 5ppm MCU_3V3 FB hi", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("BUCK_FB", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD07100KL"})
-    s.place("R36", "R", "22.1k 0.1% 25ppm MCU_3V3 FB lo", *c4.next(), footprint=FOOTPRINTS["R"],
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU0603100KHZEN00"})
+    s.place("R36", "R", "22.1k 0.02% 5ppm MCU_3V3 FB lo", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK_FB", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0722K1L"})
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060322K1HZEN00"})
     for ref in ("C39", "C291"):
         s.place(ref, "C", "22u 25V X7R MCU_3V3 output; TI characterized part", *c4.next(), footprint=FOOTPRINTS["C_1210"],
                 pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")},

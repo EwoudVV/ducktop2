@@ -34,16 +34,16 @@ def add_bms_thermal(s):
          'Package_TO_SOT_SMD:SOT-23-5',{'1':'THERM_RAW_IN','2':RAW,'3':'','4':'','5':BIAS},'TPS70933DBVR')
     cap('C2201','10u 50V thermal bias; require Ceff >=2u',80,350,BIAS,
         mpn='CGA5L1X7R1H106K160AC',footprint='Capacitor_SMD:C_1206_3216Metric')
-    resistor('R2201','10k 0.1% 25ppm thermal bias fault bleed',80,365,BIAS,RAW,'RT0603BRD0710KL')
+    resistor('R2201','9.53k 0.1% 25ppm thermal bias fault bleed',80,365,BIAS,RAW,'RT0603BRD079K53L')
     s.pwrflag(65,380,'THERM_RAW_IN')
 
     # Shared ratiometric references. Bottoms and tolerances are intentionally
     # identical; each midpoint drives one input on each of the three quads.
     for index,(name,top,mpn) in enumerate([
-            ('CHG_COLD','232k','RT0603BRD07232KL'),
-            ('CHG_HOT','665k','RT0603BRD07665KL'),
-            ('DSG_COLD','140k','RT0603BRD07140KL'),
-            ('DSG_HOT','887k','RT0603BRD07887KL')]):
+            ('CHG_COLD','243k','RT0603BRD07243KL'),
+            ('CHG_HOT','634k','RT0603BRD07634KL'),
+            ('DSG_COLD','147k','RT0603BRD07147KL'),
+            ('DSG_HOT','845k','RT0603BRD07845KL')]):
         x=200+index*80; net=f'THERM_{name}_REF'
         resistor(f'R{2240+index*2}',f'{top} 0.1% 25ppm {name} top',x,460,BIAS,net,mpn)
         resistor(f'R{2241+index*2}','499k 0.1% 25ppm thermal reference bottom',x,475,net,RAW,'RT0603BRD07499KL')

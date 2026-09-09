@@ -4,6 +4,23 @@ from part_identity import decode, engineering_value, identity_errors
 
 
 class PartIdentity(unittest.TestCase):
+    def test_vishay_precision_order_codes_include_tcr(self):
+        part = decode("TNPU060355K6HZEN00")
+        self.assertEqual((part.value, part.size, part.tolerance, part.tcr_ppm),
+                         (55600, "0603", .02, 5))
+        part = decode("TNPW0603102KBYEA")
+        self.assertEqual((part.value, part.tolerance, part.tcr_ppm), (102000, .1, 10))
+        self.assertEqual(decode("TNPU060310K2HWEN00").tcr_ppm, 2)
+        self.assertTrue(identity_errors("102k 0.1% 5ppm", "Resistor_SMD:R_0603_1608Metric",
+                                        "TNPW0603102KBYEA"))
+
+    def test_vishay_unpublished_grade_and_range_combinations_remain_unknown(self):
+        for mpn in ("TNPU0603102KHZEN00", "TNPU060355K6HWEN00", "TNPU060355K6HYEN00",
+                    "TNPU040210K0HZEN00", "TNPW06031M00BYEA", "TNPW060310K0FYEA",
+                    "TNPU060310K0HZEA", "TNPU060310K0HZEI00", "TNPW060310K0BYEC"):
+            with self.subTest(mpn=mpn):
+                self.assertIsNone(decode(mpn))
+
     def test_reel_digits_are_not_resistance_digits(self):
         self.assertEqual(decode("RT0603BRD075KL").value, 5000)
         self.assertEqual(decode("RT0603BRD0775KL").value, 75000)

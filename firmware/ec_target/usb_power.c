@@ -33,7 +33,9 @@ bool usb_power_init(usb_power_state_t *s,const usb_power_config_t *c,uint32_t no
     if (!s || !c) return false;
     memset(s,0,sizeof(*s));s->config=*c;s->starting_port=NO_PORT;
     if (c->budget.qualified && (!c->pd_inrush_ma || !c->branch_inrush_ma ||
-        c->startup_ceiling_ma>5700u || c->budget.admission_current_ma>5500u ||
+        c->budget.minimum_efficiency_percent<80u ||
+        !c->vsys_max_overestimate_mv || !c->vsys_max_fall_mv ||
+        c->startup_ceiling_ma>5600u || c->budget.admission_current_ma>5500u ||
         c->startup_ceiling_ma<c->budget.admission_current_ma ||
         c->rail_min_mv<4900u || c->rail_max_mv>5250u || c->rail_min_mv>=c->rail_max_mv ||
         !c->sample_max_age_ms || c->sample_max_age_ms>100u ||
@@ -56,7 +58,16 @@ bool usb_power_poll(usb_power_state_t *s,uint32_t now)
     if (result==USB_POWER_HW_BUS || result==USB_POWER_HW_CONFIG || result==USB_POWER_HW_RANGE)
         return false;
     if (sample.valid) s->sample=sample;
-    if (result==USB_POWER_HW_OVERCURRENT && !trip(s,USB_POWER_OVERCURRENT)) return false;
+    else {
+        /* GPIO state is live even while a new ADC conversion is pending.
+         * Keep the old ADC timestamp and values; do not manufacture freshness. */
+        s->sample.input0=sample.input0;s->sample.input1=sample.input1;
+    }
+    if (result==USB_POWER_HW_OVERCURRENT) {
+        usb_power_fault_t cause=!(sample.input1&USB_POWER_IN_SYS5_VALID) ? USB_POWER_SYSTEM_RAIL :
+            !(sample.input1&USB_POWER_IN_ALERT_N) ? USB_POWER_OVERCURRENT : USB_POWER_LATCHED_FAULT;
+        if (!trip(s,cause)) return false;
+    }
     for (uint8_t n=0;n<2u;n++) {
         tps25751_port_state_t pd;
         bool valid=tca9548a_select_channel((uint8_t)(2u+n)) &&
@@ -73,13 +84,19 @@ bool usb_power_step(usb_power_state_t *s,const usb_power_request_t *r,uint32_t n
     if (!s || !r || !s->initialized) return false;
     if (s->phase==USB_POWER_FAULT) {
         if (!all_off(s)) return false;
-        if (r->clear_fault && fresh(s,now) && s->sample.upper_current_ma<=100u &&
-            usb_power_hw_clear_fault(now)) {s->phase=USB_POWER_OFF;s->fault=USB_POWER_NO_FAULT;}
-        else return true;
+        if (r->clear_fault && fresh(s,now) && (s->sample.input1&USB_POWER_IN_SYS5_VALID) &&
+            s->sample.upper_current_ma<=100u) {
+            if (!usb_power_hw_clear_fault(now)) return false;
+            s->phase=USB_POWER_OFF;s->fault=USB_POWER_NO_FAULT;
+        } else return true;
     }
     bool source_changed=s->have_source && s->last_source!=r->active_source;
     s->last_source=r->active_source;s->have_source=true;
-    if (!r->host_lease_valid || !r->system_safe || r->transfer_active || source_changed ||
+    uint32_t required_vsys=8700u+s->config.vsys_max_overestimate_mv+s->config.vsys_max_fall_mv;
+    bool vsys_safe=r->vsys_measurement_valid && r->vsys_age_ms<=250u &&
+                   r->vsys_measured_mv>=required_vsys && r->vsys_measured_mv<=16000u;
+    if (!(s->sample.input1&USB_POWER_IN_SYS5_VALID)) return trip(s,USB_POWER_SYSTEM_RAIL);
+    if (!r->host_lease_valid || !r->system_safe || !vsys_safe || r->transfer_active || source_changed ||
         !s->config.budget.qualified) {
         memset(&s->plan,0,sizeof(s->plan));s->plan.denied_mask=r->requested_mask;
         return all_off(s);

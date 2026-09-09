@@ -118,7 +118,7 @@ sections 9.3.4 and 10.2.2.
 
 PD1 enters on left J21, PD2 on right J11, and AUX at left J190. their
 qualification, protection, and selector paths span the side and center
-boards. the center U15/U15B cascade gives the intended external-input
+boards. the center U15/U16 cascade gives the intended external-input
 priority PD1, then PD2, then AUX. the left U14 stage is also part of the
 input path and must be included in a complete source-transfer review.
 

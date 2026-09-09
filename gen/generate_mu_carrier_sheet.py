@@ -241,56 +241,9 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     # ---------------- U6/U7: local buck rails ----------------
     s.text(300, 20, "== Local carrier rails from VSYS ==")
     p = Cur(300, 45)
-    s.place("U6", "TPS56637", "TPS56637RPAR VSYS -> SYS_5V (5.10V, 6A class)",
-            *p.next(), footprint=FOOTPRINTS["TPS56637"],
-            pin_nets={
-                "1": ("BUCK5_EN", "local"), "2": ("BUCK5_FB", "local"),
-                "3": ("GND", "local"), "4": ("SYS_5V_PG", "local"),
-                "5": ("", "nc"), "6": ("BUCK5_SW", "local"),
-                "7": ("BUCK5_BOOT", "local"), "8": ("VSYS", "hier"),
-                "9": ("GND", "local"), "10": ("GND", "local"),
-            },
-            extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "TPS56637RPAR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/tps56637.pdf",
-            })
-    for ref in ("C40", "C41"):
-        s.place(ref, "C", "10u 50V X7R TPS56637 VIN", *p.next(),
-                footprint=FOOTPRINTS["C_10u"],
-                pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
-                extra_props={"Manufacturer": "TDK", "MPN": "CGA5L1X7R1H106K160AC"})
-    s.place("C42", "C", "100n 50V X7R TPS56637 VIN HF", *p.next(),
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")})
-    s.place("C43", "C", "100n 16V X7R TPS56637 BOOT", *p.next(),
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BUCK5_BOOT", "local"), "2": ("BUCK5_SW", "local")})
-    s.place("L4", "L", "XAL7070-332MEC 3.3uH 19.4A Isat30%", *p.next(),
-            footprint=FOOTPRINTS["L_XAL7070"],
-            pin_nets={"1": ("BUCK5_SW", "local"), "2": ("SYS_5V", "hier")},
-            extra_props={
-                "Manufacturer": "Coilcraft", "MPN": "XAL7070-332MEC",
-                "Datasheet": "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xal/xal7070/",
-            })
-    # Phase 5 (audit C6): 76.8k/10k gave 5.208 V (zero USB margin);
-    # 75.0k/10k targets exactly 5.10 V (TPS56637 Vref 0.6 V).
-    s.place("R40", "R", "75.0k 0.1% TPS56637 FB high", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("SYS_5V", "local"), "2": ("BUCK5_FB", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0775KL"})
-    s.place("R41", "R", "10k 0.1% TPS56637 FB low", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BUCK5_FB", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RT0603BRD0710KL"})
-    s.place("R42", "R", "100k 1% TPS56637 EN high (host-active gate)", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("BUCK5_EN", "local")})
-    s.place("R45", "R", "100k 1% TPS56637 EN low", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BUCK5_EN", "local"), "2": ("GND", "local")})
-    s.place("R46", "R", "100k SYS_5V PG pull-up", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("SYS_5V_PG", "local")})
-    for ref in ("C44", "C45"):
-        s.place(ref, "C", "22u 25V X7R TPS56637 OUT; TI example part", *p.next(),
-                footprint=FOOTPRINTS["C_1210"],
-                pin_nets={"1": ("SYS_5V", "local"), "2": ("GND", "local")},
-                extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER71E226KE15L"})
+    from generate_sys5_power import add_sys5_power
+    add_sys5_power(s)
+    p.i = 13  # preserve the completed U7 schematic coordinates
 
     s.place("U7", "TPS56637", "TPS56637RPAR VSYS -> SYS_3V3 (3.32V, 6A class)", *p.next(),
             footprint=FOOTPRINTS["TPS56637"],
@@ -321,10 +274,12 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
                 "Manufacturer": "Coilcraft", "MPN": "XAL7070-222MEC",
                 "Datasheet": "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xal/xal7070/",
             })
-    s.place("R43", "R", "45.3k 1% TPS56637 FB high", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("SYS_3V3", "local"), "2": ("BUCK33_FB", "local")})
-    s.place("R44", "R", "10k 1% TPS56637 FB low", *p.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BUCK33_FB", "local"), "2": ("GND", "local")})
+    s.place("R43", "R", "45.3k 0.02% 5ppm TPS56637 FB high", *p.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("SYS_3V3", "local"), "2": ("BUCK33_FB", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060345K3HZEN00"})
+    s.place("R44", "R", "10k 0.02% 5ppm TPS56637 FB low", *p.next(), footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("BUCK33_FB", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060310K0HZEN00"})
     s.place("R770", "R", "100k 1% TPS56637 EN high (host-active gate)", *p.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("BUCK33_EN", "local")})
     s.place("R771", "R", "100k 1% TPS56637 EN low", *p.next(), footprint=FOOTPRINTS["R"],
@@ -389,14 +344,14 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         },
         extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPS552892RYQR"},
     )
-    s.place("L750", "L", "6.8uH 12.8A Isat30 / 6.8A Irms20; 7mm class", 520, 220,
-            footprint=FOOTPRINTS["L_MU12"],
+    s.place("L750", "L", "6.8uH 18.4A Isat30 / 10.9A Irms20; 6mm max", 520, 220,
+            footprint=FOOTPRINTS["L_XGL1060_CENTER"],
             pin_nets={"1": ("MU12_SW1", "local"), "2": ("MU12_SW2", "local")},
-            extra_props={"Manufacturer": "Coilcraft", "MPN": "XAL7070-682MEC"})
-    s.place("RS750", "R", "15mOhm 1% 1W; 3.33A output current limit", 520, 230,
-            footprint=FOOTPRINTS["R_1206"],
+            extra_props={"Manufacturer": "Coilcraft", "MPN": "XGL1060-682MEC"})
+    s.place("RS750", "R", "13mOhm 1% 1W; 3.85A nominal limit, 3.3A operating envelope", 520, 230,
+            footprint=FOOTPRINTS["R_ERJ8CW_CENTER"],
             pin_nets={"1": ("MU12_PRE_SENSE", "local"), "2": ("MU_12V", "hier")},
-            extra_props={"Manufacturer": "Panasonic", "MPN": "ERJ8BWFR015V"})
+            extra_props={"Manufacturer": "Panasonic", "MPN": "ERJ8CWFR013V"})
 
     # Input and output reservoirs use the exact voltage classes from TI's EVM.
     # This preserves DC-bias margin and avoids relying on the surge clamp to make
@@ -474,31 +429,37 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             pin_nets={"1": ("MU12_ISP", "local"), "2": ("MU12_ISN", "local")})
     s.place("R752", "R", "49.9R FB isolation", 685, 280, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU_12V", "local"), "2": ("MU12_FB_TOP", "local")})
-    s.place("R753", "R", "102k 0.1% 12V FB high", 685, 290, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU12_FB_TOP", "local"), "2": ("MU12_FB", "local")})
-    s.place("R754", "R", "11.3k 0.1% 12V FB low", 685, 300, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU12_FB", "local"), "2": ("GND", "local")})
-    s.place("R755", "R", "5.1k 1% COMP series", 685, 310, footprint=FOOTPRINTS["R"],
+    s.place("R753", "R", "102k 0.1% 10ppm 12V FB high", 685, 290, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU12_FB_TOP", "local"), "2": ("MU12_FB", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPW0603102KBYEA"})
+    s.place("R754", "R", "11.3k 0.02% 5ppm 12V FB low", 685, 300, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU12_FB", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060311K3HZEN00"})
+    s.place("R755", "R", "5.1k 0.02% 5ppm COMP series", 685, 310, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_COMP", "local"), "2": ("MU12_COMP_RC", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-075K1L"})
-    s.place("C771", "C", "220n 50V X7R COMP", 685, 320, footprint=FOOTPRINTS["C_100n"],
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU06035K10HZEN00"})
+    s.place("C771", "C", "330n 50V X7R COMP; effective 210..500nF", 685, 320, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MU12_COMP_RC", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "KEMET", "MPN": "C0603C224K5RACTU"})
+            extra_props={"Manufacturer": "TDK", "MPN": "CGA3E3X7R1H334K080AB",
+                         "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA3E3X7R1H334K080AB"})
     s.place("C772", "C", "1n 50V C0G COMP HF", 685, 330, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MU12_COMP", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM1885C1H102JA01D"})
-    s.place("R756", "R", "49.9k 1% FSW = 400kHz", 685, 340, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU12_FSW", "local"), "2": ("GND", "local")})
+    s.place("R756", "R", "49.9k 0.02% 5ppm FSW = 400kHz", 685, 340, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU12_FSW", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060349K9HZEN00"})
     s.place("C767", "C", "10n DITH/SYNC spreading", 685, 350, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MU12_DITH", "local"), "2": ("GND", "local")})
     s.place("R757", "R", "0R MODE forced-PWM", 685, 360, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_VCC", "local"), "2": ("MU12_MODE", "local")})
     s.place("R758", "R", "0R EXTVCC selects internal LDO", 685, 370, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_VCC", "local"), "2": ("MU12_EXTVCC", "local")})
-    s.place("R759", "R", "150k 1% UVLO high; 9.0V rising", 740, 220, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("VSYS", "hier"), "2": ("MU12_EN_UVLO", "local")})
-    s.place("R760", "R", "23.7k 1% UVLO low", 740, 230, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU12_EN_UVLO", "local"), "2": ("GND", "local")})
+    s.place("R759", "R", "150k 0.1% 10ppm UVLO high; 9.0V rising", 740, 220, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("VSYS", "hier"), "2": ("MU12_EN_UVLO", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPW0603150KBYEA"})
+    s.place("R760", "R", "23.7k 0.02% 5ppm UVLO low", 740, 230, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU12_EN_UVLO", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060323K7HZEN00"})
     s.place("C773", "C", "100n UVLO noise filter", 740, 240, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MU12_EN_UVLO", "local"), "2": ("GND", "local")})
     s.place("Q750", "Q_NMOS_SOT23_GSD", "BSS138 fail-off EN/UVLO clamp", 740, 250,
@@ -578,7 +539,7 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             footprint=FOOTPRINTS["TPS3897ADRYR"],
             pin_nets={
                 "1": ("MCU_3V3", "hier"), "2": ("GND", "local"),
-                "3": ("INTERNAL_USB_VBUS_SENSE", "local"), "4": ("INTERNAL_USB_VBUS_VALID", "hier"),
+                "3": ("INTERNAL_USB_VBUS_SENSE", "local"), "4": ("INTERNAL_USB_VBUS_RAW_VALID", "local"),
                 "5": ("", "nc"), "6": ("MCU_3V3", "hier"),
             }, extra_props={
                 "Manufacturer": "Texas Instruments", "MPN": "TPS3897ADRYR",
@@ -587,7 +548,7 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             })
     s.place("R775", "R", "10k internal host VBUS valid pull-up", 955, 370,
             footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("INTERNAL_USB_VBUS_VALID", "hier")},
+            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("INTERNAL_USB_VBUS_RAW_VALID", "local")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
     s.place("C831", "C", "100n TPS3897 VCC bypass", 955, 382.7,
             footprint=FOOTPRINTS["C_100n"],
@@ -602,6 +563,9 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("INTERNAL_USB_VBUS_SENSE", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
+    from generate_usb_power_control import add_sys5_qualification
+    add_sys5_qualification(s)
+
     for ref, label, x, y, net_name, scope in (
         ("TP13", "Internal USB VBUS test", 1005, 325, "INTERNAL_USB_VBUS", "local"),
         ("TP14", "Internal USB VBUS valid test", 1005, 337.7, "INTERNAL_USB_VBUS_VALID", "hier"),
@@ -730,23 +694,10 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     mainboard_hole_props = {
         "Hardware_Spec": "2.7mm isolated NPTH for M2.5 chassis screw; no electrical chassis bond",
     }
-    # Phase 5 B9: H10-H13 and H15-H17 moved to the left/right board
-    # schematics (they sit on those boards mechanically); only center holes
-    # are placed here.  H14 stays (center).
-    for index, (x, y) in enumerate(((600, 600), (620, 600), (640, 600), (660, 600),
-                                    (600, 620), (620, 620), (640, 620), (660, 620)), start=10):
-        if f"H{index}" in ("H10", "H11", "H12", "H13", "H15", "H16", "H17"):
-            continue
-        s.place(f"H{index}", "MountingHole", "M2.5 isolated mainboard mounting hole", x, y,
-                footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
-                extra_props=mainboard_hole_props, in_bom=False)
-    # Extra copy-pasted mounting holes (2026-08-25): the user duplicated a
-    # hole when more chassis support points were needed. Keep the schematic
-    # symbols so the board footprints have netlist backing.
+    # H21-H26 are the current center chassis supports. The I/O boards own
+    # their supports in their separate schematics.
     for index, (x, y) in enumerate(((600, 640), (620, 640), (640, 640), (660, 640),
-                                    (600, 660), (620, 660), (640, 660)), start=21):
-        if f"H{index}" == "H27":
-            continue
+                                    (600, 660), (620, 660)), start=21):
         s.place(f"H{index}", "MountingHole", "M2.5 isolated mainboard mounting hole", x, y,
                 footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
                 extra_props=mainboard_hole_props, in_bom=False)
@@ -758,7 +709,7 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.text(20, 362, "TCP0 HDMI 2.0 lane/HPD/DDC nets leave to sheet 6 for the external HDMI-A output.")
     s.text(20, 370, "USB2_P3 is EC; P4 pairs with USB-C 2; P5 is the system-audio hub; P7 is maker MCU; P8 is trackpad.")
     s.text(20, 378, "Native USB-C data/OC nets leave to sheet 4; VBUS switching, CC, muxing, and ESD live there.")
-    s.text(20, 386, "SYS_5V and SYS_3V3 use TPS56637 6A-class bucks with XAL7070 inductors; endpoint load budgets remain a release check.")
+    s.text(20, 386, "SYS_5V uses externally compensated LM706A0 at 4.5A; SYS_3V3 uses TPS56637 with a complete bank below 100uF. source admission remains separate.")
     s.text(20, 393.7, "M.2 M-key uses default HSIO8-11 x4 and REFCLK2; no lane reversal and no TX/RX direction swap.")
     s.text(20, 401.32, "M.2 M-key: Mu TX->PET through 220n near J10; PET/PER naming is from the host perspective.")
     s.text(20, 408.94, "USB2_P6 is reserved for the Mu Type-C PD controller direction; trackpad consumes the former USB2_P8 spare.")
@@ -948,6 +899,8 @@ def place_bms_control_connector(s, side, x, y, label_kind="hier"):
 
 def build_bms_interconnect_sheet(sheet_uuid, label_kind="hier"):
     s = b.Sheet(f"/{sheet_uuid}")
+    s.refcounters["#PWR"] = 3300
+    s.refcounters["#FLG"] = 3300
     place_bms_control_connector(s, "center", 80, 90, label_kind)
     place_bms_power_connector(s, "center", 80, 145, label_kind)
     s.text(30, 190, "j2071 carries pack current through the rated power harness. j2073 supplies the isolated control island and its own return.")

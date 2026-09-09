@@ -10,7 +10,7 @@ def add_pcie_power(s):
                 pin_nets={str(k):(v if isinstance(v,tuple) else (v,'local') if v else ('','nc')) for k,v in pins.items()},
                 extra_props={'Manufacturer':maker,'MPN':mpn,**extra})
     def r(ref,value,x,y,a,b,mpn):
-        part(ref,'R',value,x,y,FOOTPRINTS['R'],{1:a,2:b},mpn,'Yageo')
+        part(ref,'R',value,x,y,FOOTPRINTS['R'],{1:a,2:b},mpn,'Vishay' if mpn.startswith('TNP') else 'Yageo')
     def c(ref,value,x,y,a,b='GND',mpn='GRM188R71H104KA93D',fp='C_100n',maker='Murata'):
         part(ref,'C',value,x,y,FOOTPRINTS[fp],{1:a,2:b},mpn,maker)
     out='PCIE_3V3_IN';post=('PCIE_3V3','hier');vin=('VSYS','hier');logic=('MCU_3V3','hier');active=('MU_HOST_ACTIVE','hier')
@@ -31,14 +31,14 @@ def add_pcie_power(s):
         part(ref,'R','13mOhm 1% 1W; parallel pair gives 6.5mOhm',1020,y,FOOTPRINTS['R_ERJ8CW_CENTER'],
              {1:'PCIE_PRE_SENSE',2:out},'ERJ8CWFR013V','Panasonic',
              Layout='Kelvin_at_RS2280_inner_pad_edges;power_branch_mismatch_le20uOhm')
-    r('R785','32.4k 0.1% 10ppm endpoint FB high',950,565,out,'BUCKPE_FB','RT0603BRB0732K4L')
-    r('R786','10k 0.1% 10ppm endpoint FB low',980,565,'BUCKPE_FB','GND','RT0603BRB0710KL')
+    r('R785',"32.4k 0.02% 5ppm endpoint FB high",950,565,out,'BUCKPE_FB',"TNPU060332K4HZEN00")
+    r('R786',"10k 0.02% 5ppm endpoint FB low",980,565,'BUCKPE_FB','GND',"TNPU060310K0HZEN00")
     r('R787','100k endpoint EN top',760,580,active,'BUCKPE_EN','RC0603FR-07100KL')
     r('R788','100k endpoint EN bottom',790,580,'BUCKPE_EN','GND','RC0603FR-07100KL')
     r('R789','10k endpoint converter PG pull-up',825,580,logic,'PCIE_3V3_PG','RC0603FR-0710KL')
-    r('R2280','22.1k 0.1% 10ppm endpoint RT',855,580,'BUCKPE_RT','GND','RT0603BRB0722K1L')
+    r('R2280',"22.1k 0.02% 5ppm endpoint RT",855,580,'BUCKPE_RT','GND',"TNPU060322K1HZEN00")
     r('R2281','29.4k endpoint standalone config',885,580,'BUCKPE_CONFIG','GND','RC0603FR-0729K4L')
-    r('R2282','3.3k endpoint COMP',760,615,'BUCKPE_COMP','BUCKPE_COMP_RC','RC0603FR-073K3L')
+    r('R2282',"3.3k endpoint COMP",760,615,'BUCKPE_COMP','BUCKPE_COMP_RC',"TNPU06033K30HZEN00")
     c('C2282','220n 50V X7R endpoint COMP',790,615,'BUCKPE_COMP_RC',mpn='C0603C224K5RACTU',maker='KEMET')
     c('C2283','2.2n 50V C0G endpoint COMP HF',825,615,'BUCKPE_COMP',mpn='C0603C222J5GACTU',maker='KEMET')
     r('R2283','1R endpoint BOOT damping',870,615,'BUCKPE_BOOT','BUCKPE_BOOT_C','RC0603FR-071RL')

@@ -79,8 +79,8 @@ bool tps25751_read_contract(uint8_t address, tps25751_contract_t *contract)
 static bool read_port_configuration(uint8_t address,uint8_t data[18],uint8_t *length)
 {
     uint8_t size,frame[19];
-    /* Tool FB09.17.02 uses 17 bytes; SPMU379A additionally describes byte 18.
-     * Preserve the actual controller's length and every unrelated field. */
+    /* Official exports have used both 17 and 18 bytes. Preserve the actual
+     * controller length and every unrelated field, including reserved tail. */
     if (!i2c1_read(address,0x28,&size,1) || size<17u || size>18u ||
         !i2c1_read(address,0x28,frame,(uint16_t)(size+1u)) || frame[0]!=size) return false;
     memcpy(data,frame+1,size);*length=size;return true;
@@ -105,17 +105,18 @@ static bool read_source_profile(uint8_t address,uint8_t snapshot[17])
      * three-byte header and first PDO are relevant. Read its count prefix
      * explicitly; inactive slots cannot increase the advertised count. */
     return i2c1_read(address,0x32,snapshot,8) && snapshot[0]==63u &&
-           i2c1_read(address,0x29,snapshot+8,5) && snapshot[8]==4u &&
+           i2c1_read(address,0x29,snapshot+8,5) && (snapshot[8]==4u || snapshot[8]==5u) &&
            i2c1_read(address,0x27,snapshot+13,4) &&
            snapshot[13]>=3u && snapshot[13]<=64u;
 }
-static bool source_profile_valid(const uint8_t snapshot[17])
+static bool source_profile_valid(const uint8_t snapshot[17],const uint8_t cfg[18],uint8_t address)
 {
     uint32_t pdo=le32(snapshot+4),control=le32(snapshot+9);
     const uint8_t *global=snapshot+14;
     return snapshot[1]==1u && (snapshot[2]&3u)==0u &&
-           (pdo>>30)==0u && ((pdo>>10)&0x3ffu)==100u && (pdo&0x3ffu)==90u &&
-           (control&3u)==0u && ((control>>26)&7u)==0u &&
+           pdo==0x0401905au && control==0x0081c170u &&
+           (address==0x20u || address==0x21u) &&
+           (cfg[1]&0x78u)==(address==0x20u ? 0x48u : 0x08u) &&
            (global[0]&1u) && (global[1]&7u)==1u && (global[2]&7u)==2u;
 }
 
@@ -135,7 +136,7 @@ bool tps25751_read_port_state(uint8_t address,tps25751_port_state_t *state)
         length!=length2 || memcmp(cfg,cfg2,length)) return false;
     uint32_t st=le32(status),pwr=le32(power),pdst=le32(pd);
     uint8_t pp1=(uint8_t)((pwr>>6)&7u),pp3=(uint8_t)((pwr>>12)&7u);
-    state->source_profile_valid=source_profile_valid(profile);
+    state->source_profile_valid=source_profile_valid(profile,cfg,address);
     state->typec_mode=cfg[0]&3u;
     state->connected=(st&1u) && ((st>>1)&7u)>=6u;
     state->source=(st&(1u<<5))!=0;

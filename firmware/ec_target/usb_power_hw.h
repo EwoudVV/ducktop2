@@ -10,6 +10,7 @@
 #define USB_POWER_IN_PG      (1u << 3)
 #define USB_POWER_IN_PD1_PG  (1u << 4)
 #define USB_POWER_IN_PD2_PG  (1u << 5)
+#define USB_POWER_IN_SYS5_VALID (1u << 6)
 
 typedef enum {
     USB_POWER_HW_OK = 0, USB_POWER_HW_NOT_READY, USB_POWER_HW_BUS,
@@ -25,10 +26,10 @@ typedef struct {
     uint8_t input0, input1;
 } usb_power_sample_t;
 
-/* Component, -40..125 C, life, and specified Kelvin-layout envelope. */
+/* Initial, -40..125 C from 20 C, life, soldering and Kelvin-layout envelope. */
 #define USB_POWER_SHUNT_NOMINAL_NOHM 5000000u
-#define USB_POWER_SHUNT_MIN_NOHM 4757261u
-#define USB_POWER_SHUNT_MAX_NOHM 5243261u
+#define USB_POWER_SHUNT_MIN_NOHM 4694830u
+#define USB_POWER_SHUNT_MAX_NOHM 5305830u
 #define USB_POWER_ADC_GAIN_PPM 6000u
 #define USB_POWER_ADC_OFFSET_NV 25000u
 #define USB_POWER_TRIP_CURRENT_MA 6500u

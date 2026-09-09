@@ -84,11 +84,14 @@ def build(sheet_symbol_uuid):
     for ref, value, net, y, fp in (
         ("C2301", "10u SYS_5V radio eFuse input", "SYS_5V", 114.3, "C_10u"),
         ("C2302", "100n SYS_5V radio eFuse input HF", "SYS_5V", 127.0, "C_100n"),
-        ("C2303", "22u RADIO_DB_5V output bulk", "RADIO_DB_5V", 139.7, "C_10u"),
         ("C2304", "100n RADIO_DB_5V output HF", "RADIO_DB_5V", 152.4, "C_100n"),
     ):
         s.place(ref, "C", value, 20, y, footprint=FOOTPRINTS[fp],
                 pin_nets={"1": (net, "hier" if net == "SYS_5V" else "local"), "2": ("GND", "local")})
+    s.place("C2303", "C", "22u 25V RADIO_DB_5V bulk; TI characterized part", 20, 139.7,
+            footprint=FOOTPRINTS["C_1210"],
+            pin_nets={"1": ("RADIO_DB_5V", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER71E226KE15L"})
 
     # TLV803 asserts low until the switched rail is above 4.3 V. Its open-drain
     # output is pulled up by that same switched rail, divided, then restored to

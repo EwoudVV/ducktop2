@@ -4233,6 +4233,23 @@
 		)
 		(embedded_fonts no)
 	)
+(symbol "TPS22992S:TPS22992S" (exclude_from_sim no) (in_bom yes) (on_board yes)
+  (property "Reference" "U" (at 0 10.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS22992S" (at 0 7.62 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:Texas_RXN0008A_WQFN-HR-8_1.25x1.25mm" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22992.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+  (symbol "TPS22992S_0_1" (rectangle (start -5.08 5.08) (end 5.08 -7.62) (stroke (width 0.254) (type default)) (fill (type background))))
+  (symbol "TPS22992S_1_1"
+   (pin power_in line (at -7.62 2.54 0) (length 2.54) (name "VBIAS" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+   (pin power_in line (at -7.62 0 0) (length 2.54) (name "VIN" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+   (pin open_collector line (at 7.62 2.54 180) (length 2.54) (name "PG" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+   (pin power_in line (at 0 -10.16 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+   (pin passive line (at 7.62 -2.54 180) (length 2.54) (name "QOD" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+   (pin power_out line (at 7.62 0 180) (length 2.54) (name "VOUT" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+   (pin output line (at 7.62 -5.08 180) (length 2.54) (name "CT" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+   (pin input line (at -7.62 -2.54 0) (length 2.54) (name "ON" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+  )
+ )
 (symbol "TPS25751AD:TPS25751AD"
 		(pin_names (offset 1.016))
 		(exclude_from_sim no)
@@ -4623,7 +4640,7 @@
   (pin "B12" (uuid 8ff76f0c-30d0-5197-b521-beefbd415861))
   (pin "SH" (uuid feb16f4e-3846-5b0d-b019-8d0e34f66137))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "J21")
         (unit 1)
@@ -4791,7 +4808,7 @@
   (pin "20" (uuid 432632c8-d162-59bf-b41b-cb89389b69fe))
   (pin "21" (uuid 1bc05349-04d8-5ade-9737-880643df6161))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2001")
         (unit 1)
@@ -4906,7 +4923,7 @@
   (pin "1" (uuid 28a49b06-e3ab-52f5-96e3-82a32c44d802))
   (pin "2" (uuid cbead664-9f6a-5999-a3ee-fca59a9f8775))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2000")
         (unit 1)
@@ -4942,7 +4959,7 @@
   (pin "1" (uuid 3ba3915c-b1df-532f-b3c4-8858e8554d1c))
   (pin "2" (uuid a50a0a96-cc1a-5f72-9483-50a102b44c17))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2001")
         (unit 1)
@@ -4978,7 +4995,7 @@
   (pin "1" (uuid d5d564ff-29c5-5d66-8384-d29720a4013d))
   (pin "2" (uuid d10bf606-d89c-5688-bd19-191a065e2ef3))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2000")
         (unit 1)
@@ -5016,7 +5033,7 @@
   (pin "1" (uuid 4b3d9adb-fc68-5274-a55b-881b3863b0b7))
   (pin "2" (uuid bc4ea088-0f64-55df-abe8-5c4fe8ade3cb))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2017")
         (unit 1)
@@ -5051,9 +5068,9 @@
   (property "Manufacturer" "Texas Instruments" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "TPS25751ADREFR" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps25751a.pdf" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "PortPolicy" "DRP_PREFER_SINK;HOST_DATA_ONLY;15V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "PortPolicy" "DRP;HOST_DATA_ONLY;5_9_15_20V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "EEPROMContract" "U2002_PROGRAM_WITH_VERSIONED_TPS25751_IMAGE" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "EEPROMSource" "firmware/tps25751a/ducktop2_dual_role_config.json" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "EEPROMSource" "firmware/tps25751a/ducktop2_pd1_config.json" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ADCStrap" "SAFE_MODE_ADDR_0X20" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid c4116ea7-c1a6-51a1-9561-f67c2fb6a70e))
   (pin "2" (uuid a4af44ee-43c8-5c1f-84fa-1b3bba7bc67c))
@@ -5090,7 +5107,7 @@
   (pin "39" (uuid f562e635-8d3e-5870-9a9d-6b2c0100a7fa))
   (pin "40" (uuid 6292bf34-32f2-50f3-a415-46225bd576d5))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U41")
         (unit 1)
@@ -5243,8 +5260,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 23a85e83-b3fd-5cda-95de-ac6163468391)
 )
-(hierarchical_label "USB_PORT_5V"
-  (shape bidirectional)
+(label "PD1_PP5V_GATED"
   (at 99.06 92.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 4f4aea95-ed48-55cf-902c-d016a7375303)
@@ -5301,7 +5317,7 @@
   (pin "7" (uuid afa7ae5a-f91b-52d5-b059-ca31eb1e8761))
   (pin "8" (uuid 675dd2dd-a361-5a13-9bf5-5ad7e57a4894))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2002")
         (unit 1)
@@ -5367,7 +5383,7 @@
   (pin "1" (uuid 0c282fe0-0930-59e6-90c3-efe6f97aa47d))
   (pin "2" (uuid b6afaa53-ac15-5b1f-bc21-072bfaeaddc6))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2001")
         (unit 1)
@@ -5403,7 +5419,7 @@
   (pin "1" (uuid 819ecd9f-e303-5958-a015-3fd6b10eac27))
   (pin "2" (uuid 81050145-5d06-5ed4-a7d1-bf67ebb343df))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2002")
         (unit 1)
@@ -5439,7 +5455,7 @@
   (pin "1" (uuid d8749910-a698-5485-9b41-0097b8d7246a))
   (pin "2" (uuid eaa1c303-ce17-5bc4-9827-069d4ebc5dc9))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2015")
         (unit 1)
@@ -5475,7 +5491,7 @@
   (pin "1" (uuid e730d155-3f01-5135-a247-3403c13e7e59))
   (pin "2" (uuid 43d0b34a-4b68-58f0-b442-b0b68f581cd5))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2002")
         (unit 1)
@@ -5511,7 +5527,7 @@
   (pin "1" (uuid cd90c2a2-8b3d-5ff3-9708-6d7fdbab60a0))
   (pin "2" (uuid e041de3b-1840-5986-8900-d39607c2bfbf))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2003")
         (unit 1)
@@ -5549,7 +5565,7 @@
   (pin "1" (uuid 63479ecc-ca88-5fb2-9d16-46eb4f2bd152))
   (pin "2" (uuid a04c824d-91a7-5569-8c35-1020488f433d))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2004")
         (unit 1)
@@ -5587,7 +5603,7 @@
   (pin "1" (uuid 0b354976-a910-57e0-b830-10d390ef148c))
   (pin "2" (uuid ce3605c8-e413-5471-9b81-0fcfb7b5ade0))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2005")
         (unit 1)
@@ -5626,7 +5642,7 @@
   (pin "1" (uuid 7c0e78f9-e1a9-5a78-b6b1-846ce201209d))
   (pin "6" (uuid 345c30d8-097a-5d75-9386-3bda112f9117))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2004")
         (unit 1)
@@ -5662,7 +5678,7 @@
   (pin "3" (uuid 3bddf24b-46b6-59bb-b219-48d622796c48))
   (pin "4" (uuid b7e01463-c386-5591-b70e-420c68deb5e1))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2004")
         (unit 2)
@@ -5698,7 +5714,7 @@
   (pin "2" (uuid 9727fb07-9a2b-584d-a429-a869359ad3e2))
   (pin "5" (uuid 7f0cfb6b-4deb-5801-bd75-b5b60c3aabf1))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2004")
         (unit 3)
@@ -5735,7 +5751,7 @@
   (pin "1" (uuid a2081f1d-586e-514a-a1c7-89066966784c))
   (pin "2" (uuid bc00097c-c5c4-5889-b35a-e291464ad365))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2006")
         (unit 1)
@@ -5772,7 +5788,7 @@
   (pin "1" (uuid 2780d567-b7e8-5ffa-94c3-2d1c2a9d05ee))
   (pin "2" (uuid b7a7e3d5-8215-5f14-a03a-23d9d5a30644))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2007")
         (unit 1)
@@ -5809,7 +5825,7 @@
   (pin "1" (uuid e3608f4e-94cf-5959-94e6-924e5d639cb4))
   (pin "2" (uuid 910076ea-930e-5dff-bbb0-61858348e199))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2003")
         (unit 1)
@@ -5852,7 +5868,7 @@
   (pin "4" (uuid b67b2b72-80eb-5041-a0cf-7d2934f33344))
   (pin "5" (uuid d2d9d87c-1777-5abc-ac66-0aff2b732a4b))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2006")
         (unit 1)
@@ -5914,7 +5930,7 @@
   (pin "9" (uuid 58d937d7-7dfb-5815-8881-2a8d4164b5b8))
   (pin "10" (uuid c626e751-49d7-5a17-94be-ad4228b5f6e9))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2003")
         (unit 1)
@@ -5985,7 +6001,7 @@
   (pin "1" (uuid 134cfde3-4928-52e0-b3b0-324a9fa0b38e))
   (pin "2" (uuid 5e8cf39f-6fd6-5fa0-bb6c-01bdbe8885a9))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2016")
         (unit 1)
@@ -6023,7 +6039,7 @@
   (pin "2" (uuid bf4b3196-7bb6-5043-97ed-27d9ec612c33))
   (pin "3" (uuid a33b582c-7a1b-58c0-bc7b-4bf221be270b))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "Q2001")
         (unit 1)
@@ -6064,7 +6080,7 @@
   (pin "1" (uuid d8a18211-e0d7-5c10-b3f9-a3b29292b163))
   (pin "2" (uuid 01faaaa9-3d39-5901-8164-01c7dac49b54))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2030")
         (unit 1)
@@ -6142,7 +6158,7 @@
   (pin "40" (uuid 98cc2bd4-8e31-5693-b488-2b76778c6314))
   (pin "41" (uuid 97bdb9e0-aea1-5c30-b1b3-2f94c62ad0f4))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2000")
         (unit 1)
@@ -6319,7 +6335,7 @@
   (pin "1" (uuid 1ed783c0-f34c-59bf-a769-a69de9cfe338))
   (pin "2" (uuid afca52e4-7a35-521f-866c-8734b7e0abe3))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2008")
         (unit 1)
@@ -6355,7 +6371,7 @@
   (pin "1" (uuid 28515ee5-608f-5d92-ad8f-dee9b631eb8e))
   (pin "2" (uuid f993c2a5-4862-57fd-8a77-e23458110cb9))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2009")
         (unit 1)
@@ -6391,7 +6407,7 @@
   (pin "1" (uuid 99b2151d-824e-5e2f-8a8f-4ee93de93c96))
   (pin "2" (uuid 1fe96bb3-1c26-5a6a-a13b-bddc05942ce9))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2010")
         (unit 1)
@@ -6427,7 +6443,7 @@
   (pin "1" (uuid 1ad33590-4c31-524f-8049-504de0305b5f))
   (pin "2" (uuid 33c8b882-bc79-5497-a4c8-80aba09823c1))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2011")
         (unit 1)
@@ -6463,7 +6479,7 @@
   (pin "1" (uuid a5cea0ef-0f8f-584a-99e8-02f1990a34fe))
   (pin "2" (uuid 8d992b70-5aab-5798-9e65-9494b1005851))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2012")
         (unit 1)
@@ -6500,7 +6516,7 @@
   (pin "1" (uuid d698700e-1678-568e-b572-3b5002339ed3))
   (pin "2" (uuid f3e030b9-b882-514d-8f91-7dff58f911d9))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2013")
         (unit 1)
@@ -6536,7 +6552,7 @@
   (pin "1" (uuid 95781bde-d51b-5b9e-b840-cffbe4dcc336))
   (pin "2" (uuid a52a7de6-228f-5489-9abe-5345c569c255))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2014")
         (unit 1)
@@ -6572,7 +6588,7 @@
   (pin "1" (uuid c8ebffd8-7ae2-533a-98ad-5fdae4735f32))
   (pin "2" (uuid 91f7e3d6-2f96-519d-8ef9-8b05129543c8))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2018")
         (unit 1)
@@ -6608,7 +6624,7 @@
   (pin "1" (uuid 987bead2-05a1-53e6-8bb6-351571ccdf65))
   (pin "2" (uuid 20706ee9-ac1f-5e28-99d6-30fd2b4f3f5e))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2004")
         (unit 1)
@@ -6645,7 +6661,7 @@
   (pin "1" (uuid b7be3253-089a-55a2-bd3b-ddd7248fdffc))
   (pin "2" (uuid 9276f413-3f75-5381-bde1-01e15b9e946e))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2005")
         (unit 1)
@@ -6682,7 +6698,7 @@
   (pin "1" (uuid 6c045de7-fd27-5e74-b3ef-34911fcbf584))
   (pin "2" (uuid cd7213e1-2924-5a30-9fbf-ff202a3fb869))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2006")
         (unit 1)
@@ -6719,7 +6735,7 @@
   (pin "1" (uuid 724092a7-aaf5-5c8b-8705-da317a207204))
   (pin "2" (uuid 84ed7a69-8c3a-53ca-965c-d74ec5f8e426))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2007")
         (unit 1)
@@ -6756,7 +6772,7 @@
   (pin "1" (uuid ee79dd16-f8b2-5f3e-b05b-63d58ecbab63))
   (pin "2" (uuid 2a3b711c-0a01-5294-9c67-b2dfe27f9982))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2008")
         (unit 1)
@@ -6793,7 +6809,7 @@
   (pin "1" (uuid 6b2f7a37-7bce-5358-bbc3-26878b9a0166))
   (pin "2" (uuid 74a6eb4c-1429-525e-bbad-033c3eabd090))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2009")
         (unit 1)
@@ -6830,7 +6846,7 @@
   (pin "1" (uuid da8274ce-4159-5702-84fe-ceb647ecc78d))
   (pin "2" (uuid dd5f21b1-5872-56cc-8caf-4a60d5656784))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2010")
         (unit 1)
@@ -6867,7 +6883,7 @@
   (pin "1" (uuid 0feb22f0-1122-55e1-a86e-e02f118402b8))
   (pin "2" (uuid c9e11678-b4ac-5118-980c-64cd610b988c))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2011")
         (unit 1)
@@ -6903,7 +6919,7 @@
   (pin "1" (uuid 3adfd786-814a-51ad-b5f8-7565d1e29132))
   (pin "2" (uuid 735198f1-54d8-5598-a404-35304d031050))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2012")
         (unit 1)
@@ -6939,7 +6955,7 @@
   (pin "1" (uuid 82e4dad3-eb29-5449-81ff-5149d36fa569))
   (pin "2" (uuid 1a8af865-7b81-5fc8-8165-94b98a593256))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2013")
         (unit 1)
@@ -6975,7 +6991,7 @@
   (pin "1" (uuid 8295f5bf-3ccc-5d92-b4c1-aaf3977b4e1a))
   (pin "2" (uuid d84bd02a-0db7-524c-b814-8f43a4b18217))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2014")
         (unit 1)
@@ -7012,7 +7028,7 @@
   (pin "1" (uuid c0b8b2aa-55f2-589f-bf7e-19194b23121b))
   (pin "2" (uuid e90be3ea-8f34-5aba-9b01-919744a58750))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2100")
         (unit 1)
@@ -7049,7 +7065,7 @@
   (pin "1" (uuid e4a1af91-575d-58a6-bfa2-4702e95d0042))
   (pin "2" (uuid 30f643d5-d06d-5c02-922b-ab5877b9738e))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2101")
         (unit 1)
@@ -7086,7 +7102,7 @@
   (pin "1" (uuid 3924a672-81da-5c15-be3e-3cfb99d43106))
   (pin "2" (uuid 8773154f-00ce-597d-8e5d-5ad12004e617))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2102")
         (unit 1)
@@ -7123,7 +7139,7 @@
   (pin "1" (uuid 2993a306-4cd7-505b-b859-820518af43e4))
   (pin "2" (uuid 5aae5886-33cc-5378-813e-fd4b1797c02c))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2103")
         (unit 1)
@@ -7160,7 +7176,7 @@
   (pin "1" (uuid 11571eac-ca5b-53a6-a82f-4579c631a978))
   (pin "2" (uuid 56818268-0a77-5a75-99cd-748efa6469ee))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2104")
         (unit 1)
@@ -7197,7 +7213,7 @@
   (pin "1" (uuid 39032dc2-d136-5e6b-9b99-c206712a5ad2))
   (pin "2" (uuid b9d1cc33-ac80-5d85-be07-470d846caced))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2105")
         (unit 1)
@@ -7234,7 +7250,7 @@
   (pin "1" (uuid 2eeec213-ca5e-5b95-8173-24c420ea3afc))
   (pin "2" (uuid 480e8e39-70f5-55d1-9ae7-ebbf4d78d17b))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2106")
         (unit 1)
@@ -7271,7 +7287,7 @@
   (pin "1" (uuid cbf3e53b-e49d-53f0-b9de-911959ad4337))
   (pin "2" (uuid 17f0bb33-d65e-5a95-b589-7ea2b0b8de5d))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2107")
         (unit 1)
@@ -7313,7 +7329,7 @@
   (pin "6" (uuid d67e6953-f629-50e3-97a0-a19bcba813d0))
   (pin "7" (uuid 29c6991c-64ab-59b3-a10e-434e46e286ee))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U2005")
         (unit 1)
@@ -7377,7 +7393,7 @@
   (pin "1" (uuid 6eca97c0-68d1-5c4d-9b64-8684bc8660bf))
   (pin "2" (uuid 2a835556-8d3d-5454-a895-24f8afe3699a))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2015")
         (unit 1)
@@ -7414,7 +7430,7 @@
   (pin "1" (uuid fb1117ca-d384-5198-950b-eac3ebc2627e))
   (pin "2" (uuid 7ee77f94-ce5c-5d1e-b86c-a7b9b2152c16))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2016")
         (unit 1)
@@ -7451,7 +7467,7 @@
   (pin "1" (uuid a0d3ef01-7d46-5180-92cf-976bd55317c5))
   (pin "2" (uuid 02eb0b26-0e8b-5f38-a15b-7fc9bf1f8257))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2017")
         (unit 1)
@@ -7488,7 +7504,7 @@
   (pin "1" (uuid 15959c12-3307-5c97-85c3-bedcb1ec9b11))
   (pin "2" (uuid d2682fdd-233f-5b26-8270-cb09fc5a7dc0))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2018")
         (unit 1)
@@ -7525,7 +7541,7 @@
   (pin "1" (uuid cba7258c-13c1-52d3-872b-1424c5b0b4b7))
   (pin "2" (uuid 5be74310-4393-5167-973d-5ea56b214bf5))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2019")
         (unit 1)
@@ -7562,7 +7578,7 @@
   (pin "1" (uuid d7c84130-4978-5f3f-91bb-d3b33a28664f))
   (pin "2" (uuid 90582c73-97f7-5b8f-9993-bb896ac40b87))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2020")
         (unit 1)
@@ -7598,7 +7614,7 @@
   (pin "1" (uuid ec6a9316-e5f8-5883-98c4-58ed46948979))
   (pin "2" (uuid 2cf20cc0-fa2f-5608-bb0a-6f16ee10f6f5))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2021")
         (unit 1)
@@ -7634,7 +7650,7 @@
   (pin "1" (uuid 2a701eb8-e1c0-5ade-94bd-976633dc7fb5))
   (pin "2" (uuid f7e55701-2b68-5ff6-9b77-565947e51a28))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2022")
         (unit 1)
@@ -7671,7 +7687,7 @@
   (pin "1" (uuid 7ed21c44-6156-534f-95cf-8a98a6af81c6))
   (pin "2" (uuid 5af115b2-8b94-590f-9950-d9ed35bd6dc7))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2023")
         (unit 1)
@@ -7707,7 +7723,7 @@
   (pin "1" (uuid 5cbe1287-3e98-541f-b8f3-aeda3524f3ae))
   (pin "2" (uuid ed000bff-8942-5d84-a2e7-a2ffa9b3e43a))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2024")
         (unit 1)
@@ -7743,7 +7759,7 @@
   (pin "1" (uuid 5a5e986a-828d-5a00-9d9b-35ad6a7fba19))
   (pin "2" (uuid 2a86f6f4-ae7a-53b6-8789-203884e4955e))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2025")
         (unit 1)
@@ -7751,8 +7767,7 @@
     )
   )
 )
-(hierarchical_label "USB_PORT_5V"
-  (shape bidirectional)
+(label "PD1_PP5V_GATED"
   (at 40.64 242.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 287a8fec-52c7-5d05-b229-1ccff6bbec7d)
@@ -7780,7 +7795,7 @@
   (pin "1" (uuid b69f875d-de89-55a9-b995-4397466aa9ac))
   (pin "2" (uuid 7ff68af3-ba58-5e6a-a5ff-e251c3ff0b67))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2026")
         (unit 1)
@@ -7788,8 +7803,7 @@
     )
   )
 )
-(hierarchical_label "USB_PORT_5V"
-  (shape bidirectional)
+(label "PD1_PP5V_GATED"
   (at 55.88 242.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 5672c23e-1935-5da3-a5a1-96bf71b05950)
@@ -7817,7 +7831,7 @@
   (pin "1" (uuid 20286a6c-dcd4-52af-9699-b3a935958c07))
   (pin "2" (uuid 9e10817a-e47d-528e-8cac-b42225a4b0a0))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2027")
         (unit 1)
@@ -7825,8 +7839,7 @@
     )
   )
 )
-(hierarchical_label "USB_PORT_5V"
-  (shape bidirectional)
+(label "PD1_PP5V_GATED"
   (at 71.12 242.57 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0d9fd482-093e-51f6-86ba-f132977ea62d)
@@ -7854,7 +7867,7 @@
   (pin "1" (uuid cda6807a-7f7d-51f0-a4da-6cb442a6b983))
   (pin "2" (uuid 2de47021-dcb3-5a45-9b18-2f005db2597e))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2028")
         (unit 1)
@@ -7890,7 +7903,7 @@
   (pin "1" (uuid f2aa317f-493a-548d-a07c-289634a942ad))
   (pin "2" (uuid 1f9dc0ea-5139-563b-b744-c1d29dee493b))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2029")
         (unit 1)
@@ -7951,7 +7964,7 @@
   (pin "24" (uuid 41d7cb39-c697-536a-b0d8-f8d2779f2315))
   (pin "25" (uuid c760c72b-050d-597e-8bfd-604e242f3fa0))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U720")
         (unit 1)
@@ -8055,15 +8068,15 @@
   (dnp no)
   (uuid e269565d-fd0d-5856-8d83-65af33b5a04a)
   (property "Reference" "R2080" (at 421.64 111.76 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "8.87k 0.1% 10ppm 15/20V eFuse UV/OV top" (at 421.64 116.84 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "8.87k 0.02% 5ppm 15/20V eFuse UV/OV top" (at 421.64 116.84 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RT0603BRB078K87L" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Vishay" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TNPU06038K87HZEN00" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 8b0e4dbc-9d66-5487-b2b9-a1fb00b643b6))
   (pin "2" (uuid cbd6b1e6-fd81-5ac0-b54e-f0807e0b063f))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2080")
         (unit 1)
@@ -8091,15 +8104,15 @@
   (dnp no)
   (uuid a036bb2f-e7b3-5e03-b545-3c48cc428b14)
   (property "Reference" "R2081" (at 421.64 121.92 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "562R 0.1% 10ppm 15/20V eFuse UV/OV middle" (at 421.64 127 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "562R 0.02% 5ppm 15/20V eFuse UV/OV middle" (at 421.64 127 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RT0603BRB07562RL" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Vishay" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TNPU0603562RHZEN00" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 63835abd-6def-572c-8515-133b21ca7bba))
   (pin "2" (uuid 01b93532-030c-5143-8c09-f4ae269d508d))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2081")
         (unit 1)
@@ -8127,15 +8140,15 @@
   (dnp no)
   (uuid b9e62249-89fe-54a4-92bb-a07db7acc1ec)
   (property "Reference" "R2082" (at 421.64 132.08 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "511R 0.1% 10ppm 15/20V eFuse UV/OV bottom" (at 421.64 137.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "511R 0.02% 5ppm 15/20V eFuse UV/OV bottom" (at 421.64 137.16 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RT0603BRB07511RL" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Vishay" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TNPU0603511RHZEN00" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 08219db4-e5ad-5549-bf94-2be5a458e34a))
   (pin "2" (uuid c10a2caa-cd94-5b7b-8af8-5faf0b4d71b2))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2082")
         (unit 1)
@@ -8171,7 +8184,7 @@
   (pin "1" (uuid 2842a1cb-e146-5312-8652-497b705e4db9))
   (pin "2" (uuid d1892335-ebe2-5518-8ef4-344dd845be8b))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2083")
         (unit 1)
@@ -8207,7 +8220,7 @@
   (pin "1" (uuid 0b1fb9b9-f4b6-538c-a76b-be3616281610))
   (pin "2" (uuid d3de563c-f0f5-539e-9379-f5b4bba2f654))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2084")
         (unit 1)
@@ -8243,7 +8256,7 @@
   (pin "1" (uuid d2de3b05-af2c-5231-aabc-f59eb65172ec))
   (pin "2" (uuid 1070b07b-95da-519a-815b-a1b1c74ce3be))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2085")
         (unit 1)
@@ -8280,7 +8293,7 @@
   (pin "1" (uuid 07e69fa2-48ec-511a-9b32-f2f4e16026f6))
   (pin "2" (uuid af10cc6a-bb88-5e80-840d-58c416f7c59f))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2086")
         (unit 1)
@@ -8318,7 +8331,7 @@
   (pin "1" (uuid 63cd3dc0-97a6-58a2-b134-9afbd86e50d3))
   (pin "2" (uuid d876dcb9-bb81-587d-8136-71e353c7e64e))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2080")
         (unit 1)
@@ -8354,7 +8367,7 @@
   (pin "1" (uuid 576bf16e-892b-50d9-a440-001f2e3d2da0))
   (pin "2" (uuid fd4d3c5c-ee1c-5117-a011-0388146cdf20))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2081")
         (unit 1)
@@ -8390,7 +8403,7 @@
   (pin "1" (uuid 03c2299e-bcf3-58fb-9048-435f17b0380e))
   (pin "2" (uuid b62b8c26-a475-5a17-8416-00661c7e6de3))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2082")
         (unit 1)
@@ -8426,7 +8439,7 @@
   (pin "1" (uuid 422ab4dc-02b3-5adc-8c28-9666d764531b))
   (pin "2" (uuid 1e80a389-268b-53c2-a7f8-de427f3f1724))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "D2080")
         (unit 1)
@@ -8459,7 +8472,7 @@
   (property "Datasheet" "" (at 347.98 238.76 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid c97f56a8-6ab7-5ef3-83e7-76cc7935dd08))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "#FLG2001")
         (unit 0)
@@ -8487,7 +8500,7 @@
   (property "Datasheet" "" (at 368.3 238.76 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid fd6ee9a5-4491-5ee0-b7ea-3f5478b51421))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "#FLG2002")
         (unit 0)
@@ -8500,7 +8513,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 78e83ed2-e002-5807-abdb-e57253c5976e)
 )
-(text "J21: hardware accepts 15V/20V PD; use a verified 3A contract and 2.50A charger bootstrap limit. EEPROM/profile qualification remains required." (at 20.32 264.16 0) (effects (font (size 1.27 1.27))) (uuid e8d3c956-4c65-5be5-84a8-37305596b95e))
+(text "J21: hardware accepts 15V/20V PD; use a verified 3A contract and 2.50A IINDPM bootstrap command. Actual current/headroom and EEPROM/profile qualification remain required." (at 20.32 264.16 0) (effects (font (size 1.27 1.27))) (uuid e8d3c956-4c65-5be5-84a8-37305596b95e))
 (text "GPIO4 AND GPIO7 qualifies both host USB2 and SuperSpeed. They remain disconnected through reset, detach, and sink-only operation." (at 20.32 271.78 0) (effects (font (size 1.27 1.27))) (uuid 7ca63c01-01d2-5921-88ed-15adbba12a73))
 (text "== U14: two-input qualified PD selector; J21 has priority over J11 ==" (at 20.32 505.46 0) (effects (font (size 1.27 1.27))) (uuid ea11d4ae-7228-5de4-9c42-760da78bd2c7))
 (symbol
@@ -8541,7 +8554,7 @@
   (pin "20" (uuid a46a6f80-9f2e-5c42-b179-a781b2f290bc))
   (pin "21" (uuid 71188577-09b1-5963-96cc-0bb492a12f55))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "U14")
         (unit 1)
@@ -8665,7 +8678,7 @@
   (pin "4" (uuid 88bc6a61-f774-58c2-94dd-2012c11d2341))
   (pin "5" (uuid 53b5545d-e374-5b85-bff4-cefbd43834e0))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "Q15")
         (unit 1)
@@ -8719,7 +8732,7 @@
   (pin "4" (uuid a741fd0c-78b7-58ab-991f-c57d1462feb2))
   (pin "5" (uuid 0986d39d-421a-5f09-916e-22acb513cba6))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "Q16")
         (unit 1)
@@ -8771,7 +8784,7 @@
   (pin "1" (uuid 606e08b8-36ad-57b5-9a54-1cf97745b524))
   (pin "2" (uuid be29b31f-31c6-596f-b076-39364a5b21d0))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2140")
         (unit 1)
@@ -8799,15 +8812,15 @@
   (dnp no)
   (uuid ee0e8d5b-cd82-539e-bf31-9315e1257d69)
   (property "Reference" "R2141" (at 20.32 632.46 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "35.7k 0.1% 25ppm 15/20V window middle" (at 20.32 637.54 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "35.7k 0.02% 5ppm 15/20V window middle" (at 20.32 637.54 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 635 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 635 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 20.32 635 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RT0603BRD0735K7L" (at 20.32 635 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Vishay" (at 20.32 635 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TNPU060335K7HZEN00" (at 20.32 635 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 54a960dd-b89f-54ae-a17c-b6fff8d2bf58))
   (pin "2" (uuid 1e0c1669-463c-55d1-a7da-c4b834c62106))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2141")
         (unit 1)
@@ -8835,15 +8848,15 @@
   (dnp no)
   (uuid 0287c631-e989-51fc-ae22-d8325aa9b6fc)
   (property "Reference" "R2142" (at 20.32 645.16 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "47.5k 0.1% 25ppm 15/20V OV bottom" (at 20.32 650.24 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "47.5k 0.02% 5ppm 15/20V OV bottom" (at 20.32 650.24 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 20.32 647.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 20.32 647.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 20.32 647.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RT0603BRD0747K5L" (at 20.32 647.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Vishay" (at 20.32 647.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TNPU060347K5HZEN00" (at 20.32 647.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 636456ed-94c7-5f2d-9c8d-5a14461c0083))
   (pin "2" (uuid a6df28ca-e30a-5122-8478-6807c4d2f017))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2142")
         (unit 1)
@@ -8879,7 +8892,7 @@
   (pin "1" (uuid daa5ebde-0be4-59ff-84a6-63c979ad0e88))
   (pin "2" (uuid a7b8ae4b-9bf2-563b-8f1c-49986f5217cd))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "R2146")
         (unit 1)
@@ -8917,7 +8930,7 @@
   (pin "1" (uuid 6cdc11f5-7d36-5260-84ed-c45f6a631e8b))
   (pin "2" (uuid 9d2935e8-bff5-57b1-bcc8-460382cdd8fa))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2140")
         (unit 1)
@@ -8953,7 +8966,7 @@
   (pin "1" (uuid 2fe827a7-9a1c-5780-b198-f30ec726c5d4))
   (pin "2" (uuid a6fd4b8b-52af-5968-bac5-e5b0d0359723))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2141")
         (unit 1)
@@ -8989,7 +9002,7 @@
   (pin "1" (uuid 4f81d7a1-656d-538c-b6e8-c8d27b1755d1))
   (pin "2" (uuid 60dc1356-1641-5f01-b8fd-041121036156))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2142")
         (unit 1)
@@ -9025,7 +9038,7 @@
   (pin "1" (uuid 03d2124e-3468-5962-ab0a-ed0557027904))
   (pin "2" (uuid 3a0bcc46-6984-541e-8456-d01d46f1feba))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2143")
         (unit 1)
@@ -9061,7 +9074,7 @@
   (pin "1" (uuid bfef1742-b5e3-5599-99ce-25ff17e5c522))
   (pin "2" (uuid 71de862a-1efc-520d-81c4-4642902ae4d0))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "C2146")
         (unit 1)
@@ -9095,7 +9108,7 @@
   (property "Datasheet" "" (at 393.7 622.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 904563c8-f169-5437-86b4-8af784ba025a))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "#FLG2003")
         (unit 0)
@@ -9110,7 +9123,7 @@
 )
 (text "The EC reads each TPS25751A contract first, programs the BQ25798 input limit, then enables exactly one default-off TPS26630 path." (at 20.32 670.56 0) (effects (font (size 1.27 1.27))) (uuid 56c5db51-5681-58ac-b7a8-3cb2cff93606))
 (text "LTC4418 independently validates approximately 13.1V to 17.1V and prevents the attached adapter from backfeeding." (at 20.32 678.18 0) (effects (font (size 1.27 1.27))) (uuid cc8cca8f-9fee-5c02-be82-a14a9a06a04d))
-(text "Phase 5: J11 (PD2) charge power is selected on the CENTER board (U15B); this board exports its own gated VBUS only." (at 20.32 685.8 0) (effects (font (size 1.27 1.27))) (uuid ae6ee2c4-45bb-52df-8ff3-aa685ad64a2e))
+(text "Phase 5: J11 (PD2) charge power is selected on the CENTER board (U16); this board exports its own gated VBUS only." (at 20.32 685.8 0) (effects (font (size 1.27 1.27))) (uuid ae6ee2c4-45bb-52df-8ff3-aa685ad64a2e))
 (symbol
   (lib_id "Device:Fuse")
   (at 640.08 50.8 0)
@@ -9129,7 +9142,7 @@
   (pin "1" (uuid 511d3db8-93dd-51a7-9eba-ec3dcef4f39c))
   (pin "2" (uuid 37a53ca0-e4b5-57cf-a147-12dc0694a49a))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "F195")
         (unit 1)
@@ -9166,7 +9179,7 @@
   (pin "1" (uuid f771bd9c-4c72-539a-a655-353a630d3ff2))
   (pin "2" (uuid 10374882-9677-51d4-a7eb-390d91b0be6e))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "J190")
         (unit 1)
@@ -9184,7 +9197,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e4c9f1b3-253d-5361-9eae-e9f6fd684d81)
 )
-(text "Five-port source budget: 5 x 0.9A maximum advertised load = 4.5A on the dedicated 6A USB_PORT_5V rail." (at 20.32 693.42 0) (effects (font (size 1.27 1.27))) (uuid e282296e-88e0-587c-a858-f79df21efd84))
+(text "Seven port permissions reserve VBUS, VCONN and branch losses before power is applied." (at 20.32 693.42 0) (effects (font (size 1.27 1.27))) (uuid e282296e-88e0-587c-a858-f79df21efd84))
 (symbol
   (lib_id "Mechanical:MountingHole")
   (at 740.41 59.69 0)
@@ -9201,7 +9214,7 @@
   (property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw" (at 740.41 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "H10")
         (unit 1)
@@ -9225,7 +9238,7 @@
   (property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw" (at 740.41 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "H11")
         (unit 1)
@@ -9249,7 +9262,7 @@
   (property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw" (at 740.41 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "H12")
         (unit 1)
@@ -9273,7 +9286,7 @@
   (property "Hardware_Spec" "2.7mm isolated NPTH for M2.5 chassis screw" (at 740.41 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "H16")
         (unit 1)
@@ -9296,7 +9309,7 @@
   (property "Datasheet" "" (at 431.8 622.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid a19acd89-eac8-5296-b1a1-6736652a64ac))
   (instances
-    (project "left_io"
+    (project "ducktop2"
       (path "/c0b61100-162c-5129-baf8-026904cbc11a"
         (reference "#PWR2001")
         (unit 1)
@@ -9308,6 +9321,231 @@
   (at 431.8 622.3 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 3ea5ae64-362f-5251-ad6c-af2384c71ef9)
+)
+(symbol
+  (lib_id "TPS22992S:TPS22992S")
+  (at 789.94 250.19 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 8f725736-59d2-517c-b7df-0cc6dd0c7998)
+  (property "Reference" "U2403" (at 789.94 247.65 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS22992SRXNR J21 PP5V gate" (at 789.94 252.73 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:Texas_RXN0008A_WQFN-HR-8_1.25x1.25mm" (at 789.94 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 789.94 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 789.94 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPS22992SRXNR" (at 789.94 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps22992.pdf" (at 789.94 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "PowerContract" "permit off before loss/reset; wait PG before Source role; TCPC PP5V path retains VBUS reverse blocking" (at 789.94 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e405c3c2-b4a5-5e41-b7e7-1fef79a8e058))
+  (pin "2" (uuid d4b33b48-7f48-55b0-975c-51e2742dacd2))
+  (pin "3" (uuid eda59cce-82e9-5850-aad8-c9c4214c059e))
+  (pin "4" (uuid 13ec49cb-7380-5e42-af03-fcc33d00339a))
+  (pin "5" (uuid b6dd1757-0ac0-5d5b-a8ed-0751e484dfbf))
+  (pin "6" (uuid cd44ad2a-ccd2-5304-91eb-5fe74472aa8e))
+  (pin "7" (uuid 4b62aaa7-3c10-5e19-a38a-8b25d1ff835e))
+  (pin "8" (uuid 1d715c96-af0f-552b-9483-d84a9406774c))
+  (instances
+    (project "ducktop2"
+      (path "/c0b61100-162c-5129-baf8-026904cbc11a"
+        (reference "U2403")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "USB_PORT_5V"
+  (shape bidirectional)
+  (at 782.32 247.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a6a95c66-b5b2-5725-b0e2-f99ed6798ee2)
+)
+(hierarchical_label "USB_PORT_5V"
+  (shape bidirectional)
+  (at 782.32 250.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 79f56aab-7f09-531a-8929-195ebcdb61ac)
+)
+(hierarchical_label "PD1_SOURCE_PG"
+  (shape bidirectional)
+  (at 797.56 247.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9f48a5e9-c83f-585c-83ca-de984bb4f89d)
+)
+(label "GND"
+  (at 789.94 260.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cf4598b0-c097-52c0-8430-f7ddbd038475)
+)
+(label "PD1_PP5V_GATED"
+  (at 797.56 252.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6b23332c-803f-5254-8e3c-d551b4128692)
+)
+(label "PD1_PP5V_GATED"
+  (at 797.56 250.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d2c0f985-e747-51ea-a334-9e5db3f4ae53)
+)
+(label "J21_PP5V_CT"
+  (at 797.56 255.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid cf1e031c-11c2-52b8-a26e-ecb3d011165e)
+)
+(hierarchical_label "USB_J21_PERMIT"
+  (shape bidirectional)
+  (at 782.32 252.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1bfdf106-71d0-5536-ba7a-2bbc1ad0094f)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 754.38 224.79 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 5192e809-b842-5562-a14c-e174ab3a541e)
+  (property "Reference" "C2403" (at 754.38 222.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1u" (at 754.38 227.33 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 754.38 224.79 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 754.38 224.79 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 754.38 224.79 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM21BR71H105KA12L" (at 754.38 224.79 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 67a513ef-6c9e-5dca-816c-d1e45313e4fc))
+  (pin "2" (uuid 07d76c82-296e-528e-992a-ebb9c13c1be9))
+  (instances
+    (project "ducktop2"
+      (path "/c0b61100-162c-5129-baf8-026904cbc11a"
+        (reference "C2403")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "USB_PORT_5V"
+  (shape bidirectional)
+  (at 754.38 220.98 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f8b903c2-0f44-5db1-88d7-b8aff3f1b62e)
+)
+(label "GND"
+  (at 754.38 228.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4382e803-b7e5-519a-9597-73fb627f6930)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 834.39 224.79 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9dfc3aea-3a1d-55d4-be2d-e01cd17c5643)
+  (property "Reference" "C2413" (at 834.39 222.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4.7n C0G PP5V slew" (at 834.39 227.33 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 834.39 224.79 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 834.39 224.79 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 834.39 224.79 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM1885C1H472JA01D" (at 834.39 224.79 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 2ef9bf1b-306d-535e-908c-9038d17e208c))
+  (pin "2" (uuid d6825a09-3fb9-50de-a37f-f2a34d6ac8f3))
+  (instances
+    (project "ducktop2"
+      (path "/c0b61100-162c-5129-baf8-026904cbc11a"
+        (reference "C2413")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "J21_PP5V_CT"
+  (at 834.39 220.98 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 12373126-d674-5ca5-9727-091dd83530a1)
+)
+(label "GND"
+  (at 834.39 228.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0a04df3a-4186-51f3-82bf-f8e19269e59f)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 754.38 275.59 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ba7323c5-945e-5de1-8db7-ec56e6c28769)
+  (property "Reference" "R2403" (at 754.38 273.05 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k" (at 754.38 278.13 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 754.38 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 754.38 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 754.38 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 754.38 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 87dca872-63b0-55e8-8fa3-b3b0ae413d5a))
+  (pin "2" (uuid 23b2da32-8baf-5dcf-9731-7d80bf0696b9))
+  (instances
+    (project "ducktop2"
+      (path "/c0b61100-162c-5129-baf8-026904cbc11a"
+        (reference "R2403")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "USB_J21_PERMIT"
+  (shape bidirectional)
+  (at 754.38 271.78 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f922b3e7-52b2-54f9-86b1-4cbbcf901c11)
+)
+(label "GND"
+  (at 754.38 279.4 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6166b1e7-3c44-51f8-8b7b-563e325a5eb9)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 834.39 275.59 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid c6f75b82-a048-57f4-a341-4da17abe1805)
+  (property "Reference" "R2413" (at 834.39 273.05 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k" (at 834.39 278.13 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 834.39 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 834.39 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 834.39 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 834.39 275.59 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e1ebad09-497e-5c5d-b502-9c71c02b1050))
+  (pin "2" (uuid e509dc26-6f99-5b61-b52b-a6ceb1cb6211))
+  (instances
+    (project "ducktop2"
+      (path "/c0b61100-162c-5129-baf8-026904cbc11a"
+        (reference "R2413")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD1_PP5V_GATED"
+  (at 834.39 271.78 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c79c435e-7e0c-5f31-86f0-2a82e7da3b79)
+)
+(hierarchical_label "PD1_SOURCE_PG"
+  (shape bidirectional)
+  (at 834.39 279.4 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 959d9a33-a440-57a7-8b32-f09dcdc50377)
 )
 (sheet_instances
   (path "/c0b61100-162c-5129-baf8-026904cbc11a"
