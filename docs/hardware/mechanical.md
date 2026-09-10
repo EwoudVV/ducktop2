@@ -2,7 +2,7 @@
 
 the base and lid target is 358 x 248 mm. the final height, cooling stack,
 board supports, and cable installation still need a measured assembly.
-board coordinates below were checked on 6 september 2026.
+main-board coordinates below were checked on 10 september 2026.
 
 ## recorded parts
 
@@ -17,23 +17,30 @@ board coordinates below were checked on 6 september 2026.
 ## packaging
 
 the left, center, and right PCBs use the original shared XY frame. their
-nominal widths are 70, 230, and 58 mm, with a depth of 185 mm. the seams
-are at x=70 and x=300. each board needs its own structural support.
+widths are 70, 227, and 58 mm. the left and center are 185 mm deep; the
+right board ends at y=117. the center runs from x=71.5 to x=298.5, leaving
+1.5 mm gaps to both I/O boards. the board span stays at 358 mm before case
+walls. each board needs its own structural support.
 
 the two OLED modules mount separately in the case and connect to J41/J45
 with wires. their module bodies are not part of the center-board footprint.
 the floorplan positions remain a packaging sketch until the case mounts
 and cable routes are set.
 
-the BMS is 61.9 x 30.348 mm. it sits in an open notch at the front center,
-with its components up and its center at x=185. the installed board spans
-x=154.05-215.95 and y=154-184.348. the notch has 1.5 mm inside radii and
-1.5 mm board-to-board clearance. the battery row stays at y=188.
+the revised BMS under review is 61.9 x 36.148 mm at its widest bounds. its
+installed outline spans x=154.05 to x=215.95 and y=150.2 to y=186.348,
+centered at x=185. the small rear extension is tapered. the center board's
+notch is already set for it, with its back at y=148.7, 1.5 mm inside radii,
+and 1.5 mm board clearance. the battery row stays at y=188. this BMS layout
+is still being routed and has not replaced the saved BMS board yet.
 
 the BMS keeps its own mounting points and needs chassis support. the center
 board's H24 moved to (149,148), outside the notch. H22 is now (105,70).
 the BMS file uses its original coordinates; the installed translation is
-(+47.35,+91.448), with no rotation.
+(+47.35,+91.448), with no rotation. the main component side faces up;
+the isolated-control and raw-probe connectors face down. include their
+housings and wire bends below the board. all six BMS supports and fasteners
+must be insulating so they cannot bridge its separate ground domains.
 
 the radio outline is about 120 x 70 mm in its own layout frame. its installed
 position and the keyboard's assembly transform still need the case model.
@@ -57,16 +64,18 @@ before setting deck height. plan the inlet/exhaust and verify recirculation.
 Framework 13 hinges are the working choice; use the actual brackets and
 full sweep to place the display cable and case cutouts.
 
-`mechanical/board-layout.svg` shows the current board arrangement. regenerate
-it with `gen/export_board_assembly.py` using KiCad's Python. the exporter
-checks the BMS conductor alignment and the M.2 socket-to-retainer offsets.
+regenerate `mechanical/board-layout.svg` with `gen/export_board_assembly.py`
+using KiCad's Python after the revised BMS is saved. the exporter checks
+both BMS connector maps and the M.2 socket-to-retainer offsets, and includes
+front- and back-side connector courtyards. the existing public export still
+needs that refresh.
 `mechanical/board-placement.json` stores the installed board transforms;
 `mechanical/board-datums.json` is the generated mounting and connector data.
 
-`mechanical/floorplan.json` is the current packaging sketch. the layout
-planner is `mechanical/layout-planner.html`. reconcile its envelopes
-and positions with the current boards when editing the mechanical model.
-the sketch does not establish that the depicted fit has been validated.
+the same export refreshes board outlines and parts linked to a PCB in
+`mechanical/floorplan.json`. the layout planner is
+`mechanical/layout-planner.html`. free case parts, cells and cooling parts
+remain a packaging sketch. their volumes and assembly fit still need checking.
 
 ## mounting and retention
 
@@ -81,11 +90,11 @@ needs its own fit/process check.
 | A1 | Center | Mu socket, rotation 90 | 181.3 | 45.0 |
 | H1 | Center | Mu M2 support | 238.3 | 76.8 |
 | H2 | Center | Mu M2 support | 238.3 | 13.2 |
-| H3 | Center | NVMe retainer | 279.98 | 116.0 |
-| H4 | Center | Wi-Fi retainer | 261.55 | 167.25 |
+| H3 | Center | NVMe retainer | 273.10 | 97.35 |
+| H4 | Center | Wi-Fi retainer | 144.25 | 97.30 |
 
 the M.2 sockets are MDT420M01001 and MDT420E01001. J10 is at
-(196.43,125.25), rotation 90; J40 is at (228,176.5), rotation 90. their
+(189.55,106.60), rotation 90; J40 is at (177.80,88.05), rotation -90. their
 courtyards include the complete 2280 and 2230 card areas. the power parts,
 boot button, and programming connector have been moved out of those areas.
 
@@ -93,32 +102,14 @@ the retainer offsets from pad 1, in the socket's local axes, are
 (9.25,83.55) for 2280 and (9.25,33.55) for 2230. these match the Mu reference
 carrier geometry. the exporter checks the offsets using the actual pad rows,
 so changing a socket's rotation cannot silently leave its mounting nut behind.
- H3/H4 use the recorded
-Mu reference-carrier 2.5 mm-high M2 nut/standoff geometry, with a 2.75 mm
+H3/H4 use the recorded Mu reference-carrier 2.5 mm-high M2 nut/standoff geometry, with a 2.75 mm
 drill and 5.0 mm solder land. MDT420STD001 has different thread/hole
 geometry and is not interchangeable. retain exact sourcing and sample fit.
 
-| Chassis hole | Board | X (mm) | Y (mm) |
-| --- | --- | ---: | ---: |
-| H10 | Left | 5.0 | 150.75 |
-| H11 | Left | 5.0 | 180.75 |
-| H12 | Left | 63.8 | 6.1 |
-| H16 | Left | 5.0 | 12.85 |
-| H14 | Center | 260.0 | 6.0 |
-| H21 | Center | 110.25 | 6.05 |
-| H22 | Center | 105.0 | 70.0 |
-| H23 | Center | 124.1 | 180.4 |
-| H24 | Center | 149.0 | 148.0 |
-| H25 | Center | 208.85 | 4.95 |
-| H26 | Center | 253.15 | 134.5 |
-| H13 | Right | 353.0 | 58.75 |
-| H15 | Right | 353.0 | 19.65 |
-| H17 | Right | 353.0 | 112.05 |
-| H27 | Right | 353.316 | 180.611 |
-
-these are file datums, not approval that the split boards have enough
-supports. review flex, heavy components, connector loads, boss geometry,
-fastening access, and electrical isolation in the chassis model.
+the chassis mounts are H10/H11/H12/H16 on the left, H21 through H26 on the
+center, and H13/H15/H17 on the right. H14 and H27 are gone. use the generated
+datum file for positions. review flex, heavy components, connector loads,
+boss geometry, fastening access and electrical isolation in the chassis model.
 
 the BMS mounting circles are Edge.Cuts geometry. their installed centers are
 in `mechanical/board-datums.json`. radio H1-H4 are (24,24), (136,24), (24,86), and (136,86)

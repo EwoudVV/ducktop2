@@ -136,6 +136,34 @@ def local(sheet: str, name: str) -> str:
     return f"/{sheet}/{name}"
 
 
+LM706_SOURCE = "TI LM706x0 RRX pin functions: https://www.ti.com/lit/ds/symlink/lm70660.pdf"
+CURRENT_PART_IDENTITIES = {
+    "U6": ("LM706A0", "LM706A0"),
+    "U773": ("LM706A0", "LM706A0"),
+    "U718": ("Power_Management", "TPS26600RHF"),
+    "U772": ("TPS22992S", "TPS22992S"),
+}
+
+
+def add_lm706a0(ref: str, prefix: str, sense: str, output: str, power_good: str) -> None:
+    add_many(ref, (1, 2, 3, 27, 28, 29), "/VSYS", "All six converter input pins use VSYS.", LM706_SOURCE)
+    add_many(ref, (6, 8, 17, 23, 24, 25, 26, 30), "GND",
+             "Internal bias, forced PWM, analog ground and power/thermal returns.", LM706_SOURCE)
+    for pin, suffix in {4: "BOOT", 5: "SW_BOOT", 9: "EN", 13: "CONFIG", 14: "RT",
+                        15: "COMP", 16: "FB", 18: "VDDA", 19: "VCC", 20: "SW", 21: "SW", 22: "SW"}.items():
+        add(ref, pin, local("Mu Carrier", prefix + "_" + suffix), "Converter control and switching pin.", LM706_SOURCE)
+    add(ref, 7, local("Mu Carrier", power_good), "Converter power-good output.", LM706_SOURCE)
+    add(ref, 11, local("Mu Carrier", sense), "Kelvin input at the inductor side of the output shunts.", LM706_SOURCE)
+    add(ref, 12, output, "Output sensing after the shunts.", LM706_SOURCE)
+    add_nc(ref, 10, "RRX pin 10 is NC; the thermal pad is pin 30.", LM706_SOURCE)
+
+
+def part_identity_errors(comp_meta):
+    return {ref: {"expected": expected, "actual": (comp_meta.get(ref, {}).get("lib"), comp_meta.get(ref, {}).get("part"))}
+            for ref, expected in CURRENT_PART_IDENTITIES.items()
+            if (comp_meta.get(ref, {}).get("lib"), comp_meta.get(ref, {}).get("part")) != expected}
+
+
 def clear_ref_contracts(*refs: str) -> None:
     ref_set = set(refs)
     for key in list(contracts):
@@ -349,7 +377,7 @@ def load_contracts() -> None:
 
     aon_or = (
         "Ducktop2 source-independent EC always-on Schottky-OR contract: "
-        "6.20V nominal UVLO rejects default USB-C 5V and accepts the autonomous 15V PDO"
+        "passive startup follows the current qualified input windows"
     )
     for ref, source in (
         ("D710", "/Power & Battery/BAT_CHARGER"),
@@ -360,31 +388,30 @@ def load_contracts() -> None:
     ):
         add(ref, 1, "/Power & Battery/AON_OR_RAW", "Schottky cathode joins the aggregate always-on eFuse input.", aon_or)
         add(ref, 2, source, "Schottky anode senses one available input source ahead of source selection.", aon_or)
+    aon_efuse = "TI TPS2660 RHF pin functions: https://www.ti.com/lit/ds/symlink/tps2660.pdf"
     for pin, net in {
-        1: "/Power & Battery/AON_EFUSE_UV",
-        2: "/Power & Battery/AON_EFUSE_OV",
-        4: "/AON_FAULT_N",
-        5: "/Power & Battery/AON_OR_RAW",
-        6: "/EC_AON_IN",
-        7: "/Power & Battery/AON_EFUSE_DVDT",
-        8: "GND",
-        9: "/Power & Battery/AON_EFUSE_ILM",
+        8: "/Power & Battery/AON_OR_RAW", 9: "/Power & Battery/AON_OR_RAW",
+        10: "/Power & Battery/AON_EFUSE_UV", 12: "/Power & Battery/AON_EFUSE_OV",
+        13: "/Power & Battery/AON_EFUSE_RTN", 15: "/Power & Battery/AON_EFUSE_RTN",
+        17: "GND", 19: "/Power & Battery/AON_EFUSE_ILM",
+        20: "/Power & Battery/AON_EFUSE_DVDT", 22: "/AON_FAULT_N",
+        23: "/EC_AON_IN", 24: "/EC_AON_IN", 25: "/Power & Battery/AON_EFUSE_RTN",
     }.items():
-        add("U718", pin, net,
-            "TPS259470A bounds the combined always-on source with true reverse blocking and a 6.06-6.36V UVLO window.",
-            "TI TPS25947 datasheet plus Ducktop2 aggregate AON safety contract")
-    add_nc("U718", 3, "TPS259470A AUXOFF is intentionally left open; the aggregate AON path does not use auxiliary power-off control.", aon_or)
-    add_nc("U718", 10, "TPS259470A ITIMER is intentionally left open for the minimum current-limit fault timer delay allowed by the datasheet.", aon_or)
+        add("U718", pin, net, "Aggregate AON eFuse; MODE and the thermal pad use local RTN.", aon_efuse)
+    for pin in (1, 2, 3, 4, 5, 6, 7, 11, 16, 21):
+        add_nc("U718", pin, "RHF package NC pin.", aon_efuse)
+    add_nc("U718", 14, "SHDN is open for the internally enabled always-on path.", aon_efuse)
+    add_nc("U718", 18, "The aggregate AON current-monitor output is unused.", aon_efuse)
     for ref, net_a, net_b in (
         ("R795", "/Power & Battery/AON_OR_RAW", "/Power & Battery/AON_EFUSE_UV"),
         ("R796", "/Power & Battery/AON_EFUSE_UV", "/Power & Battery/AON_EFUSE_OV"),
-        ("R797", "/Power & Battery/AON_EFUSE_OV", "GND"),
-        ("R798", "/Power & Battery/AON_EFUSE_ILM", "GND"),
+        ("R797", "/Power & Battery/AON_EFUSE_OV", "/Power & Battery/AON_EFUSE_RTN"),
+        ("R798", "/Power & Battery/AON_EFUSE_ILM", "/Power & Battery/AON_EFUSE_RTN"),
         ("C795", "/Power & Battery/AON_OR_RAW", "GND"),
         ("C796", "/Power & Battery/AON_OR_RAW", "GND"),
         ("C797", "/EC_AON_IN", "GND"),
         ("C798", "/EC_AON_IN", "GND"),
-        ("C799", "/Power & Battery/AON_EFUSE_DVDT", "GND"),
+        ("C799", "/Power & Battery/AON_EFUSE_DVDT", "/Power & Battery/AON_EFUSE_RTN"),
     ):
         add(ref, 1, net_a, "Aggregate AON eFuse support component follows the released threshold/current/slew network.", aon_or)
         add(ref, 2, net_b, "Aggregate AON eFuse support component follows the released threshold/current/slew network.", aon_or)
@@ -448,7 +475,7 @@ def load_contracts() -> None:
     for ref, pin, net, note in (
         ("R14", 1, "/Power & Battery/REGN", "REGN pulls charger CE inactive by default."),
         ("R14", 2, "/Power & Battery/CHG_CE_HW_N", "Hardware CE defaults high, disabling charging."),
-        ("Q700", 1, "/CHG_ENABLE", "Active-high EC charger-enable gate."),
+        ("Q700", 1, "/Power & Battery/CHG_ENABLE_THERM", "Charger enable requires EC and cell-temperature permission."),
         ("Q700", 2, "GND", "Charger-enable NMOS source."),
         ("Q700", 3, "/Power & Battery/CHG_CE_HW_N", "NMOS pulls BQ25798 CE low only after validation."),
         ("R719", 1, "/CHG_ENABLE", "Charger enable defaults low."),
@@ -623,23 +650,9 @@ def load_contracts() -> None:
     mu = "Official LattePanda Mu edge pinout, DFLT BIOS mapping, and Ducktop2 allocation"
     for pin in range(250, 261):
         add("A1", pin, "/MU_12V", "Mu VIN is supplied by the regulated 12 V buck-boost stage shared with the released blower.", mu)
-    add("D1824", 1, "/MCU_3V3", "RTC_BAT diode-OR: always-on 3.3V anode (no coin cell).", mu)
-    add("D1824", 2, "/Mu Carrier/RTC_BAT", "RTC_BAT cathode feeds the Mu RTC backup directly; C783 holds through dropouts.", mu)
-    add("U773", 8, "/VSYS", "Dedicated PCIe endpoint buck input from VSYS.", mu)
-    add("U773", 1, "/Mu Carrier/BUCKPE_EN", "Endpoint buck EN gated by MU_HOST_ACTIVE (S0-only, like U6/U7).", mu)
-    tps56637_endpoint = "TI TPS56637 datasheet plus Ducktop2 S0-only PCIe endpoint rail contract"
-    for pin, net in {
-        2: "/Mu Carrier/BUCKPE_FB",
-        3: "GND",
-        4: "/Mu Carrier/PCIE_3V3_PG",
-        6: "/Mu Carrier/BUCKPE_SW",
-        7: "/Mu Carrier/BUCKPE_BOOT",
-        9: "GND",
-        10: "GND",
-    }.items():
-        add("U773", pin, net,
-            "TPS56637 dedicated endpoint-rail converter pin follows the U6/U7 topology and the sheet-03 netlist.", tps56637_endpoint)
-    add_nc("U773", 5, "TPS56637 NC pin intentionally left unconnected.", tps56637_endpoint)
+    add("D1824", 1, "/Mu Carrier/RTC_BAT", "Diode cathode feeds the Mu RTC backup and hold-up capacitor.", mu)
+    add("D1824", 2, "/MCU_3V3", "Diode anode receives the always-on 3.3V supply.", mu)
+    add_lm706a0("U773", "BUCKPE", "PCIE_PRE_SENSE", "/Mu Carrier/PCIE_3V3_IN", "PCIE_3V3_PG")
 
     # Active internal USB-A cluster on hub DIS5/DIS6 (2026-08-24 redesign,
     # commit 87d3dfe): the retired R1730-R1733 straps are NOT here on purpose.
@@ -817,16 +830,10 @@ def load_contracts() -> None:
         add_nc("A1", pin, "TCP0 AUX is unused by the HDMI-only TCP0 implementation.", mu)
     for pin in [112, 114, 169, 171, 183, 191, 193, 197, 199, 203, 205, 209, 211, 215, 217]:
         add_nc("A1", pin, "USB2_P6 is reserved and DDIB is unused because the panel uses onboard eDP.", mu)
+    add_lm706a0("U6", "BUCK5", "SYS5_PRE_SENSE", "/SYS_5V", "SYS_5V_PG")
+    add("L4", 1, "/Mu Carrier/BUCK5_SW", "SYS5 inductor switch-node side.", LM706_SOURCE)
+    add("L4", 2, "/Mu Carrier/SYS5_PRE_SENSE", "SYS5 inductor output reaches the current shunts first.", LM706_SOURCE)
     tps5 = "TI TPS56637 datasheet and RPA0010A package drawing"
-    for pin, net in {
-        1: "/Mu Carrier/BUCK5_EN", 2: "/Mu Carrier/BUCK5_FB", 3: "GND",
-        4: "/Mu Carrier/SYS_5V_PG", 6: "/Mu Carrier/BUCK5_SW",
-        7: "/Mu Carrier/BUCK5_BOOT", 8: "/VSYS", 9: "GND", 10: "GND",
-    }.items():
-        add("U6", pin, net, "TPS56637 6A-class SYS_5V converter pin contract.", tps5)
-    add_nc("U6", 5, "TPS56637 NC pin intentionally left unconnected.", tps5)
-    add("L4", 1, "/Mu Carrier/BUCK5_SW", "XAL7070 switch-node side.", tps5)
-    add("L4", 2, "/SYS_5V", "XAL7070 regulated-output side.", tps5)
     for pin, net in {
         1: "/Mu Carrier/BUCK33_EN", 2: "/Mu Carrier/BUCK33_FB", 3: "GND",
         4: "/Mu Carrier/SYS_3V3_PG", 6: "/Mu Carrier/BUCK33_SW",
@@ -849,14 +856,14 @@ def load_contracts() -> None:
         add("U770", pin, net, "Carrier creates a protected physical upstream VBUS for permanently attached Mu USB devices.", internal_vbus)
     for pin, net in {
         1: "/MCU_3V3", 2: "GND", 3: local("Mu Carrier", "INTERNAL_USB_VBUS_SENSE"),
-        4: "/INTERNAL_USB_VBUS_VALID", 6: "/MCU_3V3",
+        4: "/Mu Carrier/INTERNAL_USB_VBUS_RAW_VALID", 6: "/MCU_3V3",
     }.items():
         add("U771", pin, net, "TPS3897A always-powered supervisor qualifies actual carrier-generated internal USB VBUS via 78.7k/10.0k divider.", internal_vbus)
     add_nc("U771", 5, "CT left floating for default 40us delay.", internal_vbus)
     for ref, net_a, net_b in (
         ("R773", local("Mu Carrier", "INTERNAL_USB_VBUS_ILIM"), "GND"),
         ("R774", "/MCU_3V3", "/INTERNAL_USB_VBUS_FAULT_N"),
-        ("R775", "/MCU_3V3", "/INTERNAL_USB_VBUS_VALID"),
+        ("R775", "/MCU_3V3", "/Mu Carrier/INTERNAL_USB_VBUS_RAW_VALID"),
         ("C794", "/SYS_5V", "GND"),
         ("C830", local("Mu Carrier", "INTERNAL_USB_VBUS"), "GND"),
         ("C831", "/MCU_3V3", "GND"),
@@ -869,19 +876,19 @@ def load_contracts() -> None:
                         ("TP14", "/INTERNAL_USB_VBUS_VALID"),
                         ("TP15", "/INTERNAL_USB_VBUS_FAULT_N")):
         add(ref, 1, target, "First-article physical internal-host VBUS fixture point.", internal_vbus)
-    pcie_power = "TI TPS22975N datasheet plus Ducktop2 S0-only PCIe endpoint power contract"
+    pcie_power = "TI TPS22992S RXN pin functions: https://www.ti.com/lit/ds/symlink/tps22992.pdf"
     for pin, net in {
-        1: "/Mu Carrier/PCIE_3V3_IN", 2: "/Mu Carrier/PCIE_3V3_IN", 3: "/MU_HOST_ACTIVE", 4: "/Mu Carrier/PCIE_3V3_IN",
-        5: "GND", 6: local("Mu Carrier", "PCIE_3V3_CT"),
-        7: "/PCIE_3V3", 8: "/PCIE_3V3", 9: "GND",
+        1: "/Mu Carrier/PCIE_3V3_IN", 2: "/Mu Carrier/PCIE_3V3_IN",
+        3: "/Mu Carrier/PCIE_LOAD_PG", 4: "GND", 5: "/Mu Carrier/PCIE_QOD",
+        6: "/PCIE_3V3", 7: "/Mu Carrier/PCIE_3V3_CT", 8: "/Mu Carrier/PCIE_LOAD_EN",
     }.items():
-        add("U772", pin, net, "All PCIe endpoints are unpowered unless the Mu host is fully active.", pcie_power)
+        add("U772", pin, net, "Endpoint power gate requires host state and converter power-good.", pcie_power)
     for ref, first, second in (
-        ("R776", "/MU_HOST_ACTIVE", "GND"),
+        ("R776", "/Mu Carrier/PCIE_LOAD_EN", "GND"),
         ("C832", local("Mu Carrier", "PCIE_3V3_IN"), "GND"),
         ("C833", local("Mu Carrier", "PCIE_3V3_CT"), "GND"),
-        ("C834", "/PCIE_3V3", "GND"), ("C835", "/PCIE_3V3", "GND"),
-        ("C836", "/PCIE_3V3", "GND"), ("C837", "/PCIE_3V3", "GND"),
+        ("C834", "/Mu Carrier/NVME_3V3", "GND"), ("C835", "/Mu Carrier/NVME_3V3", "GND"),
+        ("C836", "/Mu Carrier/NVME_3V3", "GND"), ("C837", "/Mu Carrier/NVME_3V3", "GND"),
     ):
         add(ref, 1, first, "S0-switched PCIe endpoint rail support network.", pcie_power)
         add(ref, 2, second, "S0-switched PCIe endpoint rail support network.", pcie_power)
@@ -898,7 +905,7 @@ def load_contracts() -> None:
         50: "/Mu Carrier/PCIE_M_PERST_N", 52: "/Mu Carrier/PCIE_M_CLKREQ_N", 54: "/PCIE_WAKE_N",
     }.items():
         add("J10", pin, net, "M.2 M-key PCIe Gen3 x4 lane and sideband contract.", mu)
-    add_many("J10", [2, 4, 12, 14, 16, 18, 70, 72, 74], "/PCIE_3V3",
+    add_many("J10", [2, 4, 12, 14, 16, 18, 70, 72, 74], "/Mu Carrier/NVME_3V3",
              "All M.2 M-key 3.3 V contacts use the S0-switched PCIe rail.", mu)
     add_many("J10", [1, 3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 71, 73, 75], "GND",
              "All M.2 M-key ground contacts are bonded to the carrier ground plane.", mu)
@@ -1671,7 +1678,7 @@ def load_contracts() -> None:
 
 def load_current_architecture_overrides() -> None:
     """Replace retired contracts for references reused by the current design."""
-    project = "Ducktop2 released five-port USB-C and optional-radio architecture"
+    project = "Ducktop2 current five-port USB-C and optional-radio architecture"
 
     # Pins reused by the current EC/source-manager allocation.
     for pin in (33, 37, 39, 90, 91, 96):
@@ -2081,6 +2088,10 @@ def load_current_architecture_overrides() -> None:
         6: local("Optional Radio Daughterboard Interface", "RADIO_CODEC_USB_VBUS_DB"),
     }.items():
         add("U2304", pin, net, "Codec VBUS is separately current-limited and off when the radio board is absent.", radio)
+    for ref in ("J16", "J41", "J45", "J52", "J53", "J54", "J56", "J420", "J421"):
+        add(ref, "MP", "GND", "JST cable-connector hold-down pads use system ground.",
+            "Current JST connector symbols and board-ground contract")
+
 
 def export_netlist() -> None:
     NETLIST.parent.mkdir(parents=True, exist_ok=True)
@@ -2353,6 +2364,7 @@ def main() -> int:
     load_current_architecture_overrides()
     export_netlist()
     comp_meta, comp_pins = parse_netlist()
+    identity_errors = part_identity_errors(comp_meta)
     rows, missing_refs = generate_rows(comp_meta, comp_pins)
     write_csv(rows)
     write_md(rows, missing_refs)
@@ -2364,19 +2376,14 @@ def main() -> int:
         for ref in missing_refs:
             print(f"required reference missing from netlist: {ref}")
         return 1
-    # REVIEW rows on safety-critical classes block fabrication-stage gating;
-    # they represent uncontracted pins on power, battery, RF, or module
-    # boundary parts where a wrong net is not a cosmetic gap.
-    blocking_review = sorted({
-        row["ref"] for row in rows
-        if row["status"] == "REVIEW"
-        and (row["ref"].startswith(("U7", "U2", "A1", "U44"))
-             or row["ref"] in {"Q62", "U1800", "U1801", "U1802", "U1803",
-                               "U1804", "J24", "J25"})
-    } - {"U771", "U772"})  # load switches already contracted end-to-end
+    if identity_errors:
+        for ref, error in identity_errors.items():
+            print(f"part identity mismatch on {ref}: {error}")
+        return 1
+    blocking_review = sorted({row["ref"] for row in rows if row["status"] == "REVIEW"})
     if blocking_review:
         for ref in blocking_review:
-            print(f"blocking uncontracted pins remain on required component: {ref}")
+            print(f"uncontracted pins remain in the selected review: {ref}")
         return 1
     if counts["FAIL"]:
         return 1

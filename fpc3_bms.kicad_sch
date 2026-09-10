@@ -433,7 +433,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid dab6fd64-262a-5571-9a4c-c6b2bd8ecfe3)
+  (uuid e0789a92-7030-5f05-832f-1bbf593a96f3)
   (property "Reference" "J2073" (at 80.01 87.63 0) (effects (font (size 1.27 1.27))))
   (property "Value" "isolated bms control" (at 80.01 92.71 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal" (at 80.01 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -445,12 +445,12 @@
   (property "Harness" "28 awg; five straight-numbered wires; separate strain relief; 75 mm length budget" (at 80.01 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "GroundDomain" "center GND" (at 80.01 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/eSH.pdf" (at 80.01 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid f3741447-634e-554a-a1bd-a9414449c7a3))
-  (pin "2" (uuid 970673ce-eb0f-5ed1-94b3-96190e769863))
-  (pin "3" (uuid 6630e603-1f6b-504a-97be-e4ec8d1725d1))
-  (pin "4" (uuid 2a46b85c-6f31-5397-a392-76671d0268e3))
-  (pin "5" (uuid d7b809b4-2e3b-521d-b748-1c4543a96bd6))
-  (pin "MP" (uuid e0789a92-7030-5f05-832f-1bbf593a96f3))
+  (pin "1" (uuid d7e0c512-3250-55d3-8de6-fdcb4f3328e0))
+  (pin "2" (uuid 05f1c1ae-34fd-508b-b923-45a0d8458d8f))
+  (pin "3" (uuid 91e80633-65af-5e2b-b805-643e4fdbfbf9))
+  (pin "4" (uuid 6ebfc9d6-fb96-5100-808a-fa9e2bf6c9ab))
+  (pin "5" (uuid 755761c9-49a4-5e2b-aeb6-d5ebb4762a04))
+  (pin "MP" (uuid 8791d943-12c3-527b-87fc-1e4f76109bcd))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
@@ -464,25 +464,25 @@
   (shape bidirectional)
   (at 74.93 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d7e0c512-3250-55d3-8de6-fdcb4f3328e0)
+  (uuid b21264fb-8e2f-5c5a-ae1a-a87eb4b2d661)
 )
 (hierarchical_label "PACK_RETRY_PULSE"
   (shape bidirectional)
   (at 74.93 87.63 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 05f1c1ae-34fd-508b-b923-45a0d8458d8f)
+  (uuid e0c35064-275e-5d9a-b6df-752e28855c94)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
   (at 74.93 90.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 91e80633-65af-5e2b-b805-643e4fdbfbf9)
+  (uuid e2448295-b002-53b3-8932-bde0f674f0a7)
 )
 (hierarchical_label "PACK_CHG_TEMP_OK"
   (shape bidirectional)
   (at 74.93 92.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6ebfc9d6-fb96-5100-808a-fa9e2bf6c9ab)
+  (uuid d0d566d1-d88f-5697-9863-b286341b2aef)
 )
 (symbol
   (lib_id "power:GND")
@@ -492,16 +492,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 755761c9-49a4-5e2b-aeb6-d5ebb4762a04)
-  (property "Reference" "#PWR001" (at 74.93 92.71 0) (effects (font (size 1.27 1.27))))
+  (uuid 70abd61d-364b-5cdc-b8d7-b8f7437af0a3)
+  (property "Reference" "#PWR3301" (at 74.93 92.71 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 74.93 97.79 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 74.93 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 74.93 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8791d943-12c3-527b-87fc-1e4f76109bcd))
+  (pin "1" (uuid 75d17314-3cc9-58d1-90b8-a31a3fb27b44))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
-        (reference "#PWR001")
+        (reference "#PWR3301")
         (unit 1)
       )
     )
@@ -510,7 +510,7 @@
 (label "GND"
   (at 74.93 95.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b21264fb-8e2f-5c5a-ae1a-a87eb4b2d661)
+  (uuid 867040dc-84d2-571b-85ec-8c4f22e3c7db)
 )
 (symbol
   (lib_id "power:GND")
@@ -520,16 +520,16 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid e0c35064-275e-5d9a-b6df-752e28855c94)
-  (property "Reference" "#PWR002" (at 80.01 97.79 0) (effects (font (size 1.27 1.27))))
+  (uuid b319d162-8499-52ae-b0c9-fce22b3a3a0e)
+  (property "Reference" "#PWR3302" (at 80.01 97.79 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 80.01 102.87 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 80.01 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 80.01 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid e2448295-b002-53b3-8932-bde0f674f0a7))
+  (pin "1" (uuid b5c6dcb6-e68f-5bda-85ab-a8ad363da487))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
-        (reference "#PWR002")
+        (reference "#PWR3302")
         (unit 1)
       )
     )
@@ -538,7 +538,7 @@
 (label "GND"
   (at 80.01 100.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d0d566d1-d88f-5697-9863-b286341b2aef)
+  (uuid 46c270db-472a-53e7-ab45-3a773980971a)
 )
 (symbol
   (lib_id "Conn_01x02_MP:Conn_01x02_MP")
@@ -548,7 +548,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 70abd61d-364b-5cdc-b8d7-b8f7437af0a3)
+  (uuid 4c7e321a-0faa-5370-8fec-6ce9527cf6b0)
   (property "Reference" "J2071" (at 80.01 142.24 0) (effects (font (size 1.27 1.27))))
   (property "Value" "protected pack power" (at 80.01 147.32 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -561,9 +561,9 @@
   (property "MatedHeight" "reserve 17.56 mm per drawing, plus wire exit and bend" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "CurrentRatingBasis" "PS-43650-001 N4: 2 circuits, 18 awg, 8.5 A at 30 C rise; validate assembled temperature rise" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.molex.com/en-us/products/part-detail/0436500224" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 75d17314-3cc9-58d1-90b8-a31a3fb27b44))
-  (pin "2" (uuid 867040dc-84d2-571b-85ec-8c4f22e3c7db))
-  (pin "MP" (uuid b319d162-8499-52ae-b0c9-fce22b3a3a0e))
+  (pin "1" (uuid dcd5972e-506b-5b3e-81fe-39c08cbb8ef8))
+  (pin "2" (uuid 90d60ef3-51b7-5a9c-b76a-1c8368afbc74))
+  (pin "MP" (uuid df491f05-c9a6-5d85-8b34-244934a8866d))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
@@ -577,17 +577,17 @@
   (shape bidirectional)
   (at 74.93 144.78 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b5c6dcb6-e68f-5bda-85ab-a8ad363da487)
+  (uuid 84fa4756-11ed-509b-8d44-f13f4657e1d5)
 )
 (hierarchical_label "FG_VSS"
   (shape bidirectional)
   (at 74.93 147.32 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 46c270db-472a-53e7-ab45-3a773980971a)
+  (uuid 5fbadfa0-2967-5bb3-90ee-48c90b023dd3)
 )
-(no_connect (at 85.09 146.05) (uuid 4c7e321a-0faa-5370-8fec-6ce9527cf6b0))
-(text "j2071 carries pack current through the rated power harness. j2073 supplies the isolated control island and its own return." (at 30.48 190.5 0) (effects (font (size 1.27 1.27))) (uuid dcd5972e-506b-5b3e-81fe-39c08cbb8ef8))
-(text "the bms control return never joins raw pack negative or the protected power return. the power return still crosses the center gauge shunt." (at 30.48 199.39 0) (effects (font (size 1.27 1.27))) (uuid 90d60ef3-51b7-5a9c-b76a-1c8368afbc74))
+(no_connect (at 85.09 146.05) (uuid f96b73c7-d25b-54f2-85f0-cb227f8184e1))
+(text "j2071 carries pack current through the rated power harness. j2073 supplies the isolated control island and its own return." (at 30.48 190.5 0) (effects (font (size 1.27 1.27))) (uuid aa5600f5-2d14-5e17-9a0e-bf3c92c4674a))
+(text "the bms control return never joins raw pack negative or the protected power return. the power return still crosses the center gauge shunt." (at 30.48 199.39 0) (effects (font (size 1.27 1.27))) (uuid 4cd19896-e76b-5d1c-9af8-bf7b0aec6ad1))
 (sheet_instances
   (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
     (page "16")

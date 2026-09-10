@@ -1,11 +1,11 @@
 # bring-up plan
 
-updated 5 september 2026. this is the preparation and test order. the exact
+updated 10 september 2026. this is the preparation and test order. the exact
 power fixtures, limits, connections, and acceptance values still need a
 review against the corrected boards before this becomes a bench procedure.
 
-the BMS routing, direct shunt pickups, and per-board checks are complete.
-the center and I/O boards still need routing and verification. see the
+the revised BMS routing and final project checks are still in progress.
+the center and I/O boards also need their remaining routing. see the
 [build status](../README.md#build-status).
 
 ## fixture requirements
@@ -15,7 +15,8 @@ the center and I/O boards still need routing and verification. see the
 - Keep raw pack negative, BMS protected return, and system ground distinct.
   measurement equipment must not bridge the protector or gauge shunt.
 - Match input fixtures to the actual qualification windows and source paths.
-  the PD selector's nominal window is 13.1-17.1 V; AUX enters at left J190.
+  use the current electrical-calculation record and PD configurations for
+  the exact test voltages. AUX enters at left J190.
 - Define fault injection using controlled sources and loads. specify levels,
   timing, recovery, and probe references before applying power.
 
@@ -45,10 +46,11 @@ connector seating, solder joints, and DNP population. measure resistance and
 diode behavior in both polarities between the specified rails/references.
 record the readings and investigate unexplained low resistance.
 
-the BMS front silkscreen uses numbers 1-16 for TPB1-TPB16. point 14 has
-stacked digits. the full references are on the assembly drawing.
+use the final BMS assembly drawing to locate the test points. the thermal
+circuit adds TPB20 through TPB27; their identities must match the released
+board and schematic before connecting the fixture.
 
-the BMS test-point table is:
+the original BMS test-point identities are:
 
 | Point | Net | Point | Net |
 | --- | --- | --- | --- |
@@ -61,8 +63,13 @@ the BMS test-point table is:
 | TPB7 | PACK_FAULT_N | TPB15 | BMS_LD |
 | TPB8 | PACK_RETRY_PULSE | TPB16 | FG_VSS |
 
+the thermal points are TPB20 THERM_3V3, TPB21 THERM_READY, TPB22..24
+THERM_SENSE_1..3, TPB25 BMS_CTRC, TPB26 BMS_CTRD, and TPB27
+PACK_CHG_TEMP_OK. check these against the final export. the thermal side
+is raw-pack referenced; the control interface uses CTRL_GND.
+
 choose the correct reference for each measurement. TPB16 is the protected
-return, not a universal ground for every BMS node. define equivalent test
+return. define the required differential gate/shunt measurements and equivalent test
 maps for the center and I/O boards before assembling them.
 
 ## stage 2: isolated low-energy power tests

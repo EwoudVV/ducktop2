@@ -49,9 +49,16 @@ def semantic_signature(sheet: str, violation: dict) -> tuple:
     )
 
 
-# The old monolith's waivers do not describe the split boards.
-# Current PCB findings require review; none are waived by this checker.
+# Reviewed warnings require matching saved objects and library definitions.
 DRC_ALLOWLIST = Counter()
+
+SOURCE_GENERATORS = {
+    "gen/generate_mu_carrier_sheet.py": ("center", "keyboard"),
+    "gen/generate_left_io_project.py": ("left_io",),
+    "gen/generate_right_io_project.py": ("right_io",),
+    "gen/generate_bms_project.py": ("bms",),
+    "gen/generate_radio_daughterboard_project.py": ("radio",),
+}
 
 
 def sha256(path: Path) -> str:
@@ -500,12 +507,51 @@ def generated_schematic_drift(copy_root: Path) -> list[str]:
         candidate = copy_root / live.relative_to(ROOT)
         if not candidate.exists() or sha256(live) != sha256(candidate):
             drift.append(live.relative_to(ROOT).as_posix())
-    for relative in (Path("gen/ducktop2.kicad_sym"),):
-        live = ROOT / relative
-        candidate = copy_root / relative
-        if live.exists() and (not candidate.exists() or sha256(live) != sha256(candidate)):
-            drift.append(relative.as_posix())
+    for folder, pattern in (("gen", "*.kicad_sym"), ("ducktop2.pretty", "*.kicad_mod"),
+                            ("Module_LattePanda.pretty", "*.kicad_mod")):
+        relatives = {path.relative_to(ROOT) for path in (ROOT / folder).glob(pattern)}
+        relatives |= {path.relative_to(copy_root) for path in (copy_root / folder).glob(pattern)}
+        for relative in sorted(relatives):
+            live, candidate = ROOT / relative, copy_root / relative
+            if not live.exists() or not candidate.exists() or sha256(live) != sha256(candidate):
+                drift.append(relative.as_posix())
     return drift
+
+
+def regenerate_project_sources(copy_root: Path) -> None:
+    """Regenerate every schematic in the copy, retaining the saved PCB setup."""
+    copy_root = copy_root.resolve()
+    if copy_root == ROOT.resolve():
+        raise RuntimeError("source regeneration must use a temporary project copy")
+    coverage = Counter(board for boards in SOURCE_GENERATORS.values() for board in boards)
+    if coverage != Counter({board: 1 for board in BOARD_PROJECTS}):
+        raise RuntimeError("source regeneration must cover all six boards exactly once")
+    boards = {copy_root / item["pcb"]: sha256(copy_root / item["pcb"])
+              for item in BOARD_PROJECTS.values()}
+    setup_paths = {path.with_suffix(suffix) for item in BOARD_PROJECTS.values()
+                   for path in (copy_root / item["pcb"], copy_root / item["schematic"])
+                   for suffix in (".kicad_pro", ".kicad_dru")}
+    setup = {path: path.read_bytes() if path.exists() else None for path in setup_paths}
+    try:
+        for generator, covered in SOURCE_GENERATORS.items():
+            run_command(["python3", generator], copy_root,
+                        "regenerate " + ", ".join(covered) + " schematics")
+    finally:
+        # Schematic generators can emit ERC-only project files. They must not
+        # replace the settings used to assess the saved, placed boards.
+        for path, contents in setup.items():
+            if contents is not None:
+                path.write_bytes(contents)
+            elif path.exists():
+                path.unlink()
+    changed = [str(path.relative_to(copy_root)) for path, digest in boards.items()
+               if not path.exists() or sha256(path) != digest]
+    if changed:
+        raise RuntimeError("schematic generation changed PCB files: " + ", ".join(changed))
+    missing = [item["schematic"] for item in BOARD_PROJECTS.values()
+               if not (copy_root / item["schematic"]).is_file()]
+    if missing:
+        raise RuntimeError("schematic generation omitted: " + ", ".join(missing))
 
 
 def run_static_checks(tempdir: Path) -> tuple[int, int]:
@@ -513,6 +559,11 @@ def run_static_checks(tempdir: Path) -> tuple[int, int]:
     failures = 0
     bom_gaps = -1
     copy_root = copy_for_static_checks(tempdir)
+    try:
+        regenerate_project_sources(copy_root)
+    except (OSError, RuntimeError) as exc:
+        print(f"Six-board source regeneration: FAIL: {exc}")
+        return 1, -1
     # Board split Phase 2.4: export the BMS netlist for its pack audit.
     cli = find_kicad_cli()
     bms_sch = copy_root / "bms" / "bms.kicad_sch"
@@ -523,7 +574,7 @@ def run_static_checks(tempdir: Path) -> tuple[int, int]:
             check=False, capture_output=True, cwd=copy_root,
         )
     commands = [
-        (["python3", "gen/check_schematic.py"], copy_root, "schematic self-check"),
+        (["python3", "gen/check_schematic.py", "--skip-regenerate"], copy_root, "schematic self-check"),
         (["python3", "gen/check_schematic_annotation.py"], copy_root, "complete schematic annotation"),
         (["python3", "gen/verify_design_contracts.py", "--schematic-only"], copy_root,
          "schematic design contracts"),
@@ -707,7 +758,7 @@ def run_pcb_checks(cli: str, pcb: Path, tempdir: Path,
     if ignored:print('Staged DRC restores ignored categories: '+', '.join(ignored))
     drc_path = reports / "drc.json"
     drc_output = run_command([
-        cli, "pcb", "drc", "--severity-all", "--severity-exclusions",
+        cli, "pcb", "drc", "--severity-all", "--severity-exclusions", "--all-track-errors",
         "--schematic-parity", "--format", "json", "--output", str(drc_path), str(staged),
     ], staged.parent, "PCB DRC")
     drc = json.loads(drc_path.read_text(encoding="utf-8"))
@@ -725,10 +776,30 @@ def run_pcb_checks(cli: str, pcb: Path, tempdir: Path,
     drc_findings = Counter(semantic_signature("PCB", v) for v in drc.get("violations", []))
     parity_findings = Counter(semantic_signature("PCB parity", v)
                               for v in drc.get("schematic_parity", []))
-    failures += report_unexpected("DRC", drc_findings, DRC_ALLOWLIST)
-    failures += report_unexpected("Schematic parity", parity_findings, Counter())
+    contract = board_contract(pcb)
+    reviews = {}
+    from verify_layout_reviews import reviewed_violations
+    for section in ("violations", "schematic_parity"):
+        try:
+            reviews[section] = reviewed_violations(
+                contract['name'], staged, 'drc' if section == 'violations' else section,
+                drc.get(section, []), root=ROOT, stage=stage,
+                routing_complete_required=contract['routing_complete_required'],
+            ) if contract else {'accepted': [], 'stale': []}
+        except (OSError, ValueError, KeyError) as exc:
+            failures += 1
+            print(f"Layout review record: FAIL: {exc}")
+            reviews[section] = {'accepted': [], 'stale': []}
+        for message in reviews[section]['stale']:
+            print('Layout review needs renewal: ' + message)
+    (reports / 'reviewed-advisories.json').write_text(json.dumps(reviews, indent=2) + '\n')
+    reviewed_drc = Counter(semantic_signature('PCB', v) for v in reviews['violations']['accepted'])
+    reviewed_parity = Counter(semantic_signature('PCB parity', v) for v in reviews['schematic_parity']['accepted'])
+    if reviewed_drc or reviewed_parity:
+        print(f"Exact layout reviews: {sum(reviewed_drc.values())} DRC and {sum(reviewed_parity.values())} footprint-filter advisories")
+    failures += report_unexpected("DRC", drc_findings, DRC_ALLOWLIST + reviewed_drc)
+    failures += report_unexpected("Schematic parity", parity_findings, reviewed_parity)
     unconnected = drc.get("unconnected_items", [])
-    contract=board_contract(pcb)
     allow_unrouted=stage=='routing' and contract is not None and not contract['routing_complete_required']
     stats=native_board_stats(staged)
     if contract and stats['copper_layers']!=contract['copper_layers']:
@@ -740,7 +811,7 @@ def run_pcb_checks(cli: str, pcb: Path, tempdir: Path,
     refill_path = reports / "drc_refilled.json"
     run_command([
         cli, "pcb", "drc", "--refill-zones", "--save-board",
-        "--severity-all", "--severity-exclusions", "--format", "json",
+        "--severity-all", "--severity-exclusions", "--all-track-errors", "--format", "json",
         "--output", str(refill_path), str(staged),
     ], staged.parent, "Refilled-state DRC")
     refilled = json.loads(refill_path.read_text(encoding="utf-8"))

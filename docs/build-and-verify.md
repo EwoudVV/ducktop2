@@ -125,6 +125,16 @@ DRC and parity reports. the old monolith's DRC waivers are no longer applied
 to the current boards. production also requires the target firmware, display,
 HIL, and hardware release records.
 
+[layout review records](../verification/layout-reviews.json) cover specific
+library, mounting-type and symbol-filter advisories. each record includes
+the reason, exact placed object, and library hash. a changed pad, marking,
+placement or library needs another review. no clearance, short, courtyard
+or silkscreen collision can be accepted through these records.
+
+the nine retained unfinished right-board vias are listed separately in the
+same file. they are allowed only at the routing-preparation stage, where the
+main boards still have open nets. they continue to block fabrication.
+
 for a fresh physical-pad comparison of the center:
 
 ```sh
@@ -146,6 +156,12 @@ connectivity for routing progress, and retain the DRC
 list as diagnostic examples. `--all-track-errors` does not remove this cap.
 
 current remaining findings are in the [center review](hardware/center-board.md).
+
+`gen/export_board_assembly.py` refreshes the mechanical drawing, connector
+datums and PCB-linked planner parts from the saved boards. it checks both
+BMS harness maps and M.2 retainer offsets before writing those files. the
+old floorplan-to-monolith importer was removed because its mappings no
+longer describe these boards. the planner does not move PCB footprints.
 
 the center sync was tested using an explicit KiCad S-expression netlist and
 matching by reference. correct stale footprint library IDs before importing;
@@ -190,22 +206,24 @@ the candidate. a checkout of HEAD alone would omit uncommitted changes.
 
 | Step | Script or action | What it can change |
 | --- | --- | --- |
-| 1 | `gen/generate_fh41_68s_footprint.py` | Project FH41 footprint |
-| 1 | `gen/generate_connector_symbols.py` | SMT JST connector symbols with mounting-pad pins |
-| 2 | `gen/generate_conn100_ffc_symbol.py` | FFC symbols; the filename is historical, current I/O maps use 68 pins |
+| 1 | The library generator for the changed component or connector | Shared symbol and footprint definitions; review every board using them |
+| 2 | `gen/generate_signal_interconnect.py` | Current 41/51-contact signal connector definitions |
 | 3 | `gen/generate_mu_carrier_sheet.py` | Root/center schematic and generated sheets |
 | 4 | `gen/generate_left_io_project.py` | Left schematic project |
 | 5 | `gen/generate_right_io_project.py` | Right schematic project |
 | 6 | `gen/generate_bms_project.py` | BMS schematic project |
 | 7 | `gen/verify_design_contracts.py --project NAME --schematic-only` for `ducktop2`, `left_io`, `right_io`, `bms` | Checks and refreshes the corresponding verification netlist |
-| 8 | Recreate daughterboards only if a new placement board is actually wanted | Replaces the routing/placement starting point |
-| 9 | `gen/generate_split_boards.py`, using KiCad Python | Board split, footprints, pad nets, connector maps, normalization, project rules |
-| 10 | `gen/fix_board_hygiene.py`, using KiCad Python | Placement, board hygiene, and zone fills |
-| 11 | `gen/add_test_points.py bms`, using KiCad Python | Adds missing test points using the defined table |
-| 12 | Per-project ERC, fresh netlists, pad-net comparison, per-board DRC, and release checks | Evidence for the candidate |
+| 8 | Compare the fresh netlist to the saved PCB, then apply the reviewed component changes | Part identities, source links and pad nets; preserve compatible placement and copper |
+| 9 | Per-project ERC, pad-net comparison, native DRC, uncapped connectivity and release checks | Evidence for the candidate |
 
-use system Python for steps 1-7. use the pcbnew-capable KiCad Python for
-steps 9-11. exact paths are in [build and verify](build-and-verify.md).
+use system Python for the schematic generators. native PCB checks and edits
+use the pcbnew-capable KiCad Python described above. the 30-contact keyboard
+and radio definitions still use their existing generators; the current I/O
+interfaces use `generate_signal_interconnect.py`.
+
+`generate_split_boards.py` builds from the historical monolith. it is outside
+the normal update path for these corrected boards. existing routed boards
+must be updated incrementally against their current files.
 
 the earlier workflow used `create_board_from_schematic` for step 8. that was
 a board-creation operation, not a safe incremental update of a routed board.

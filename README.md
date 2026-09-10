@@ -22,12 +22,14 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 9 september 2026. the audit repairs are still in progress. the
-left board now has the revised power circuit, separate power wiring, and
-new signal connector in its saved schematic and layout. its existing USB
-routing is preserved. i also started HDMI and USB routing on the right
-board. the center, right, and BMS revisions still need their remaining
-checks and integration; the generators are ahead of those saved boards.
+updated 10 september 2026. the audit repairs are still in progress. both
+I/O boards now have the revised power circuits, separate power wiring, and
+new signal connectors in their saved schematics and layouts. the right
+board also has the HDMI pair corrections and repairs to the USB routing i
+started. compatible existing routing is preserved. the center
+revision is also integrated, with its power-support placement corrected and
+its edges moved inward for board gaps. the BMS revision and final project
+checks still need work.
 
 the keyboard repairs and its [manufacturing package](manufacturing/keyboard/)
 are finished, with zero DRC errors and zero unconnected items in the checked
