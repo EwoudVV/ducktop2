@@ -63,10 +63,10 @@ dimensions. reserve sleeve thickness, wire exit and bend space separately.
 strain-relieve the wires independently. mate only while unpowered.
 
 use 420 mm as the nominal direct-loom cut target. the rounded wire-exit
-path is 370.47 mm for ground and 380.47 mm for USB5, using an 18.796 mm
+path is 354.47 mm for ground and 364.47 mm for USB5, using an 18.796 mm
 bend radius between the reviewed front-left and rear-right positions.
 reserve up to 12 mm inside the two solder/sleeve terminations. at 400 mm,
-that leaves 17.53 mm and 7.53 mm for dressing and height detours; 420 mm
+that leaves 33.53 mm and 23.53 mm for dressing and height detours; 420 mm
 adds 20 mm. check the real component-height corridor before assembly.
 a flat plan view does not prove the enclosure fit.
 
@@ -129,7 +129,7 @@ accuracy in its [BQ25798 support response](https://e2e.ti.com/support/power-mana
 
 ## system 5 V startup and brownout
 
-U6 starts from MU_HOST_ACTIVE. its 900 µF / 1.9 ms startup screen is a
+U6 starts from MU_HOST_ACTIVE. its 880 µF / 1.9 ms startup screen is a
 rail-rise transient, so high USB5 admission requires actual SYS5 power-good.
 U2412 combines U6 PG and U771's downstream VBUS supervisor onto the existing
 INTERNAL_USB_VBUS_VALID boundary. left U2413 combines that signal with raw
@@ -178,9 +178,9 @@ the signal conductors. USB2, HCSL and control paths remain in the signed
 signal allowance. validate that allowance using active traffic and static
 states, including back-powered peripherals.
 
-the corrected U7 divider gives a 3.254211 V DC floor. at 2 A, 93 mΩ loom,
+the corrected U7 divider gives a 3.259000 V DC floor. at 2 A, 93 mΩ loom,
 10 mΩ board copper, 10 mV ground difference and 20 mV ripple, the left
-SYS3 floor is 3.018211 V. verify it at the actual device pins. endpoint
+SYS3 floor is 3.023000 V. verify it at the actual device pins. endpoint
 limits remain 5 A total, 5.4 A startup, with 3.5 A NVMe, 1.0 A Wi-Fi and
 0.4 A GbE branches. pair right power pin 5 physically with GND pin 10.
 

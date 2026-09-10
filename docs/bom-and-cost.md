@@ -1,6 +1,6 @@
 # parts and cost
 
-updated 4 september 2026. the split design needs a new per-board quote.
+updated 10 september 2026. the split design needs a new per-board quote.
 there is no reconciled current total yet.
 
 ## what the next estimate needs to cover
@@ -16,7 +16,7 @@ there is no reconciled current total yet.
 | NVMe and Wi-Fi/Bluetooth | Final module identities and capacities |
 | Display | Current AUO panel, final compatible eDP harness, mounting and hinge hardware |
 | Pack | Exact cells and owned stock, harness, connectors, cutoff assemblies, fuse and mounting |
-| Interconnect | Four FH41 connectors, two BMS FH12 connectors, compatible FFCs, and keyboard/radio/trackpad cables |
+| Interconnect | Four Molex 503908 signal connectors and their 41/51-contact cables, separate Micro-Fit/XT30 power looms, ground braids, BMS control/probe cables, and keyboard/radio/trackpad cables |
 | Case and cooler | Measured design, material/process, fasteners, cold plate, heatpipe, fins, blower |
 | Other costs | Shipping, tax, assembly tooling, test fixtures, and replacement parts |
 
@@ -27,11 +27,11 @@ footprint, DNP, and controlled assembly information. `gen/bom_catalog.py`
 supplies many of the passive identities. component inventory tools turn a
 schematic export into a sourcing report.
 
-the latest copied-project inventory reported one center-board procurement
-gap. that is not a combined count for all boards. inspect the missing R747
-identity, BMS FPC106 fields, connector suffixes, and each board's inventory
-before claiming the BOM is complete. DNPs and owner-supplied assemblies need
-their intended classification rather than a made-up MPN.
+the corrected center and I/O source packets have manufacturer and part-number
+fields for their populated board components. run the complete six-board
+inventory again after the BMS integration. include off-board items such as
+probes, fuse/holder assemblies, crimp contacts, housings, braids and wire.
+DNPs and owned assemblies need their intended classification.
 
 one physical footprint is not necessarily one purchased component or one
 assembler placement. test points, holes, modules, compound fuse/holder
@@ -50,6 +50,6 @@ options, assembly side and quantities, BOM/CPL versions, substitutions,
 shipping/tax, and expiry. keep component cost separate from bare-board fab
 and assembly labor so it is not counted twice.
 
-the [manufacturing checklist](../manufacturing/README.md) describes the files
+the [build and verification guide](build-and-verify.md) describes the files
 needed for an order. the [Forge pitch](forgery_pitch.md) should
 use this page's reviewed budget once that quote work is complete.

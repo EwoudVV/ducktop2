@@ -1,194 +1,145 @@
 # power and battery
 
-updated 5 september 2026. the four-layer BMS routing is finished. the saved
-board has zero DRC errors, warnings, or unconnected items, and schematic
-ERC is clean. the power and sense routing checks are complete. assembled
-hardware still needs the protection, load, and thermal tests below.
+updated 10 september 2026. this describes the corrected circuit. the revised
+four-layer BMS layout is still being finished and checked. the old routing
+results do not cover its new thermal circuit or separate cable connections.
+[current board status](../../README.md#build-status)
 
-## cells and board responsibilities
+## cells and responsibilities
 
-the pack target is three 10 Ah pouch cells in series, or 111 Wh at
-3 x 3.7 V nominal. exact cell identity, ratings, thickness, tab geometry,
-and thermal behavior still need to be part of the pack's build record.
+i have three AKZYTUE packs and have tested them in series with both cell
+taps connected. their advertised capacity, continuous current, temperature
+limits, and individual protection boards still need qualification for this
+laptop. capacity on a listing is not a measured runtime or energy result.
+the design keeps the existing packs under review. removing their protection
+boards has not been established as a suitable change.
 
-J2 on the BMS brings in two pack-positive contacts, two pack-negative
-contacts, `CELL1_TAP`, and `CELL2_TAP`.
-
-| Job | Part / location |
+| job | circuit |
 | --- | --- |
-| Per-cell voltage/current protection and passive balancing | U719 BQ7791500, BMS |
-| Primary disconnect FETs | Q703/Q704, BMS return path |
-| Secondary whole-pack protection | U11 LTC4368-1, Q11/Q12, RS10 on BMS positive path |
-| Pack fuse | F1, BMS |
-| Pack charging and NVDC power path | U2 BQ25798, center |
-| Fuel gauge | U10 BQ34Z100-G1, center |
-| Gauge current shunt | RS1, center |
-| Ship FET | Q25 CSD17575Q3, center |
+| cell voltage protection and balancing | U719 BQ7791500, on the BMS |
+| primary return disconnect | Q703/Q704 and RS11, on the BMS |
+| bidirectional pack breaker | U11 LTC4368-1, Q11/Q12 and RS10, on the BMS |
+| pack fuse | F1, 10 A MINI fuse in its specified holder |
+| cell temperature windows | three insulated probes and the BMS comparator/control circuit |
+| charging and system power path | U2 BQ25798, on the center board |
+| fuel gauge and current measurement | U10 BQ34Z100-G1 and RS1, on the center board |
+| ship disconnect | Q25, on the center board |
 
-## positive path
+## pack paths
 
-the schematic's connection order is:
+the positive path is:
 
-```text
+```
 J2 PACK_POS_RAW
   -> F1
   -> BAT_PROT_VIN
-  -> Q11
-  -> BAT_PROT_FET_COMMON
-  -> Q12
+  -> Q11 / Q12, controlled by LTC4368
   -> BAT_PROT_SENSE
   -> RS10, 11 milliohms
   -> PACK_POS_FUSED
-  -> FPC106 / FPC105
+  -> J2072 pin 1 / J2071 pin 1
   -> center ship FET and charger battery path
 ```
 
-`BAT_PROT_FET_COMMON` belongs to the LTC4368 stage. `BAT_PROT_SENSE` is
-also part of the main current path, despite its name.
+U11's two sense connections must reach the RS10 lands independently of the
+load-current route. keep the FET, shunt and connector current paths wide,
+including their transitions between layers. neither a copper pour nor a
+local signal repair may bypass the fuse, FETs or shunt.
 
-both F1 pads numbered 2 connect to `BAT_PROT_VIN`. the old fuse-to-output
-bypass is gone. the input, FET interconnect, shunt input, and protected
-output use wider routes, parallel copper, and multiple vias at their
-main transitions. the protected output no longer takes the long edge detour.
+the return connections are:
 
-U11 SENSE and VOUT each run directly to their RS10 pad. neither trace joins
-the load copper before reaching the shunt. the physical copper check includes
-zone fills, so a same-net pour cannot silently bypass the separate pickup.
-
-the twelve positive FPC contacts are fed from both ends of their pin group,
-with a three-layer bus and a front copper spreader. the fifteen return
-contacts use `FG_VSS`. the FET pin-one markers and test-point outlines now
-clear the exposed pads.
-
-source: [LTC4368 datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4368.pdf),
-layout considerations.
-
-## return path and reference grounds
-
-the intended connection order from cell negative towards system ground is:
-
-```text
-J2 PACK_NEG_RAW
-  -> RS11, 8 milliohms
-  -> BMS_SENSE_N
-  -> Q703
-  -> BMS_FET_COMMON
-  -> Q704
-  -> FG_VSS
-  -> FPC106 / FPC105
-  -> center FG_VSS
-  -> RS1, 5 milliohms
-  -> system GND
+```
+raw pack negative
+  <-> RS11, 8 milliohms
+  <-> Q703 / Q704
+  <-> FG_VSS
+  <-> J2072 pin 2 / J2071 pin 2
+  <-> center gauge shunt RS1
+  <-> system GND
 ```
 
-the BQ77915 itself uses `PACK_NEG_RAW` as its VSS reference. `FG_VSS` is
-the protected external return on the BMS. the center uses `/FG_VSS` for
-the same cable connection, on the pack side of the gauge shunt.
+keep the quiet raw reference at the protector separate from load current.
+the BMS layout checks preserve the original FET and Kelvin geometry and
+the continuous filled power areas. the new dedicated FG_VSS output return
+is checked separately from the thermal and control routing.
 
-the quiet `PACK_NEG_RAW` copper joins the battery return at J2 pin 4.
-it stays separate from the high-current run to RS11. R845 and R846 have
-separate pickups at the two RS11 pads. R844 senses the top cell at J2 pin 1;
-R840 and R844 exchanged positions to make room for that connection.
-R850 now sits beside Q704, with a short gate-to-source branch.
+raw negative, FG_VSS, CTRL_GND and system GND have different jobs. their
+connections are defined by the protection, isolation and gauge circuits.
+extra ground bonds would bypass those circuits. use insulating BMS
+supports and include test-equipment grounds in the connection review.
 
-raw pack negative does not cross FPC-3. an extra bond from raw negative to
-system ground would bypass the primary return protection and gauge path.
-test equipment grounds also need to respect these separate nodes.
+## temperature and control
+
+J2200 connects three SEMITEC 104JT-025 insulated probes, one per cell.
+pairs 1/2, 3/4 and 5/6 correspond to cells 1, 2 and 3. the probe interface
+has its own lead-current limiting and filters. the comparator circuit has
+separate charge and discharge windows and checks for open and shorted
+probe connections. its raw-referenced supply works independently of the EC.
+
+charge-temperature permission reaches the EC as PACK_CHG_TEMP_OK.
+discharge faults also assert PACK_FAULT_N. the retry input and status
+signals cross the isolated control interface. that interface uses a
+separate five-wire cable, with center GND connected only to the BMS
+CTRL_GND island. [cable pinouts](cables-and-connectors.md#bms-wiring)
+
+the electrical window calculations include the specified probe and
+resistor tolerances. probe attachment, insulation, cell-to-probe temperature
+difference and response delay still need tests. the final operating limits
+also depend on the actual cells. the old plan to omit cell-temperature
+monitoring has been replaced.
 
 ## balancing
 
-the cell taps stop at the BMS because balancing happens there. the center
-charger supplies pack-level current; it does not need cell-tap wires in FPC-3.
+cell taps stop at the BMS. the center charger supplies current to the whole
+pack, while U719 handles balancing locally. R841 through R844 are 75 ohms,
+with the 1 uF cell-filter network. the unused upper cell inputs connect to
+the top-cell sensing node for this three-cell arrangement.
 
-U719's CBI pin is tied to its VSS reference, enabling autonomous balancing.
-R841-R844 are 75 ohm input/balance resistors, with the 1 uF cell-filter
-network. the three-cell configuration ties the unused upper cell inputs to
-the top-cell sensing node.
-
-the internal balancing path includes two input resistors plus the internal
-FET resistance. TI's 75 ohm example is about 25 mA at 4.1 V. "up to 50 mA"
-is the IC's capability, not the current set by these parts. balancing also
-depends on the device's charging state, cell-voltage thresholds, and faults.
-its performance with the actual cells still needs testing.
-
-source: [BQ77915 datasheet](https://www.ti.com/lit/ds/symlink/bq77915.pdf),
-sections 9.3.4 and 10.2.2.
+these parts set a balancing current of roughly 26 mA in the nominal
+calculation. verify balancing behavior with the actual cells, including
+voltage differences, charging state and fault recovery. the protection and
+balance checks are in
+[verify_electrical_calculations.py](../../gen/verify_electrical_calculations.py).
 
 ## charging inputs and rails
 
-PD1 enters on left J21, PD2 on right J11, and AUX at left J190. their
-qualification, protection, and selector paths span the side and center
-boards. the center U15/U16 cascade gives the intended external-input
-priority PD1, then PD2, then AUX. the left U14 stage is also part of the
-input path and must be included in a complete source-transfer review.
+PD1 enters through left J21, PD2 through right J11, and AUX through left
+J190. source selection and protection span the I/O and center boards.
+the PD configurations contain 5, 9, 15 and 20 V sink profiles, up to 3 A.
+the EC still has to qualify the negotiated source and apply the complete
+input and charging budget before admitting loads.
 
-the recorded nominal selector windows are 13.1-17.1 V for the USB paths,
-5.59-23.3 V for AUX, and 5.99-22.45 V for the stage-2 input. these are design
-thresholds, not a complete test setup or a promise that every voltage in a
-window has a usable power budget. the always-on 6.2 V UVLO deliberately
-excludes a 5 V-only USB-C source from starting the laptop.
+U2 supplies the system power path. the downstream circuits provide MU_12V,
+SYS_5V, SYS_3V3, endpoint power and the always-on MCU supply. the left board
+has a separate USB5 converter with current monitoring, a hardware fault
+latch, per-port permissions and controlled startup. its right-side load
+uses the direct XT30 loom.
 
-the BQ25798 feeds the NVDC system path. downstream converters provide
-`MU_12V`, `SYS_5V` at a 5.10 V nominal target, system 3.3 V, endpoint power,
-and the always-on EC supply. the USB hub/port supply has its own left-board
-conversion. `MCU_3V3` on the BMS is supplied through FPC-3; there is no local
-3.3 V regulator to test by powering J2 alone.
+USB5's nominal target is 5.160784 V. its allowed loads, voltage-loss budget,
+startup restrictions and ground bounds are recorded in
+[I/O power qualification](io-power-qualification.md). keep those checks
+together with the converter and harness revisions.
 
-## firmware and temperature decisions
+the EC firmware now includes applied charger limits, source transitions,
+USB permissions, fault handling and host-budget checks. the operating
+qualification gates remain disabled until their hardware requirements pass.
+[firmware status](../../firmware/README.md)
 
-the EC is meant to qualify inputs, confirm applied current/power limits, and
-sequence charging and loads. the present target code still leaves charge
-and Mu/eDP budget commands unfinished. see [target status](../../firmware/README.md#stm32-target).
+## checks before use
 
-the recorded pack design omits a battery thermistor harness. the charger
-and protector use their documented unused-temperature arrangements, with
-cell-local cutoff boards intended to provide thermal cutoff. this is a
-design decision to preserve in reviews; the actual cell assemblies and
-their cutoff behavior still need verification.
+the BMS routing needs both native connectivity checks and explicit power-path
+checks. zero airwires alone does not establish current capacity or a valid
+Kelvin pickup. inspect the filled copper, minimum widths, via transitions,
+connector joints and the separate return domains.
 
-## routing checks and load tests
+copper loss calculations depend on actual finished copper and hole plating.
+the revised output-return review is conditional on its stated copper and
+assembly limits; it has not been measured on a manufactured board. the
+8 A copper/harness screen is separate from the shunt-set pack protection
+thresholds and does not establish an 8 A operating mode.
 
-the checked board has 62 footprints, 730 track segments, 313 vias, and four
-35 um copper layers. all 187 connected physical pads match a fresh schematic
-export. the FET footprint combines drain contacts 5-8 in its single pad 5.
-its copper and paste geometry are unchanged by the pin-marker cleanup.
-
-the copper loss calculation uses the actual filled geometry, 35 um copper,
-and 20 um hole plating. resistance was checked on a 0.1 mm grid, with 0.05 mm
-checks for the shunt pickup and connector sharing.
-
-| copper path | estimated resistance at 20 C |
-| --- | ---: |
-| battery positive to fuse | 9.4 milliohms |
-| fuse to Q11 | 4.0 milliohms |
-| Q11 to Q12 | 6.1 milliohms |
-| Q12 to RS10 | 9.5 milliohms |
-| RS10 to FPC positive | 8.5 milliohms |
-| battery negative to RS11 | 6.2 milliohms |
-| RS11 to Q703 | 1.9 milliohms |
-| Q703 to Q704 | 4.3 milliohms |
-| Q704 to FPC return | 4.6 milliohms |
-
-together, these copper paths dissipate about 0.61 W at 3 A or 2.1 W at
-5.6 A with copper assumed to be at 80 C. this excludes the FETs, shunts,
-fuse, connectors, and cable. 80 C is an input to the resistance calculation,
-not a prediction of board temperature.
-
-the 5.6 A review load covers the LTC4368's 60 mV upper forward threshold
-with an 11 milliohm shunt at -1% tolerance. at that load, the largest
-calculated positive-contact current is 0.497 A with equal 20 milliohm
-external paths, or 0.479 A with equal 50 milliohm paths, using 80 C copper.
-the connector rating is 0.5 A per contact. actual contact and cable
-variation still needs a load test. these calculations do not establish a
-continuous operating-current rating for the assembled pack.
-
-source: [Hirose FH12 connector rating](https://www.hirose.com/en/product/p/CL0528-0019-5-98).
-
-the small resistor and capacitor designators are on the back silkscreen.
-front test-point numbers 1-16 correspond to TPB1-TPB16 in the schematic;
-point 14 uses stacked digits. the assembly layer retains the full references.
-
-the remaining work is physical bring-up: protection trip and recovery,
-current sharing, voltage drop, balancing, and temperature under load. the
-gauge also needs configuration and calibration for the actual pack. use the
-[bring-up plan](../BRINGUP_TEST_PLAN.md) before powered integration.
+the finished hardware still needs cell/cable qualification, gauge
+calibration, trip and recovery tests, source transfer, thermal tests,
+charging tests and the recorded firmware hardware tests. use the
+[bring-up plan](../BRINGUP_TEST_PLAN.md) and keep results tied to the exact
+board, firmware, cells and harnesses used.

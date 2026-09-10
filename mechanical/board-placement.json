@@ -44,7 +44,7 @@
       152.55,
       217.45
     ],
-    "back_wall_y": 152.5,
+    "back_wall_y": 148.7,
     "front_y": 185,
     "inside_corner_radius": 1.5,
     "minimum_board_gap": 1.5
@@ -131,5 +131,22 @@
     "support_and_fastener_material": "electrically insulating",
     "ground_bonds_allowed": [],
     "note": "support all six holes; keep raw pack, protected return and control ground isolated from the chassis and each other"
+  },
+  "main_board_seams": {
+    "minimum_board_gap_mm": 1.5,
+    "overall_span_mm": 358,
+    "center_outline_x_mm": [
+      71.5,
+      298.5
+    ],
+    "left_gap_x_mm": [
+      70,
+      71.5
+    ],
+    "right_gap_x_mm": [
+      298.5,
+      300
+    ],
+    "method": "narrow the center board; keep I/O outlines and installed translations unchanged"
   }
 }

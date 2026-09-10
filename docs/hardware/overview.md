@@ -1,6 +1,6 @@
 # hardware
 
-updated 4 september 2026. this describes the intended circuit in the current
+updated 10 september 2026. this describes the intended circuit in the current
 split projects. [current status](../../README.md#build-status) lists where the board
 files or testing still fall short of it.
 
@@ -8,10 +8,10 @@ files or testing still fall short of it.
 
 | Board | Main contents | Connection to the rest of the laptop |
 | --- | --- | --- |
-| Center | Mu socket A1, STM32 EC, RP2350 maker MCU, charger U2, gauge U10, input selectors, converters, storage, system audio | FPC102, FPC103, FPC105, keyboard, radio, and module connectors |
-| Left I/O | USB7206C hub, PD1 controller and protection, USB-C J21/J22/J23, USB-A J24/J25, AUX connector J190 | FPC101 to center FPC102 |
-| Right I/O | PD2 controller and protection, USB-C J11/J12, HDMI, RTL8111H Ethernet | FPC104 to center FPC103 |
-| BMS | J2 cell harness, F1, BQ77915, LTC4368, protection FETs, shunts, TPB1-16 | FPC106 to center FPC105 |
+| Center | Mu socket A1, STM32 EC, RP2350 maker MCU, charger U2, gauge U10, input selectors, converters, storage, system audio | FPC102/FPC103, separate power/control wiring, keyboard, radio, and module connectors |
+| Left I/O | USB7206C hub, PD1 controller and protection, USB-C J21/J22/J23, USB-A J24/J25, AUX connector J190 | FPC101 to center FPC102, separate power loom, and ground braids |
+| Right I/O | PD2 controller and protection, USB-C J11/J12, HDMI, RTL8111H Ethernet | FPC104 to center FPC103, separate power loom, ground braids, and direct USB5 wiring |
+| BMS | J2 cell harness, F1, BQ77915, LTC4368, protection FETs, shunts, and three thermal probes | J2071/J2072 power and J2073/J2074 isolated control |
 | Keyboard | 65 MX ULP switches and diodes, 5 x 14 matrix | 30-pin FFC to J310 |
 | Radio | DRA818V, DRA818U, filters/switches, MAX-M10S GNSS, separate PCM2900C radio codec | Removable FFC interface |
 
@@ -45,8 +45,9 @@ Mu HSIO3, its reference clock/reset support, and USB.
 | J25 | Left | USB2 Type-A on hub downstream port 6 |
 | J190 | Left | AUX/DC input |
 
-J12's `HUB_DS4_DP/DM` and `HUB_PRT_CTL4` cross both I/O cables. its U1760
-power switch is hub-controlled. J12 is not a third laptop charging input.
+J12's `HUB_DS4_DP/DN` and `HUB_PRT_CTL4` cross both I/O cables. its U1760
+power switch requires both hub control and EC permission. J12 is a host
+port; charging inputs are J21, J11, and AUX.
 
 external HDMI comes from the Mu TCP0 path. Gigabit Ethernet uses the RTL8111H
 on the right board. review the complete routed channel, including cables,
@@ -90,22 +91,26 @@ it absent. RF filters, antennas, and coexistence still need measurement.
 
 ## expected behavior
 
-| When i do this | Intended behavior | What's still needed |
-| --- | --- | --- |
-| Press power | The EC qualifies the available source, applies limits, and starts the Mu in order. | Normal target requests, applied budgets, and startup HIL. |
-| Plug a charger into J21 or J11 | The laptop negotiates PD and charges when the source and power budget allow it. | Target integration and measured charging/source-transfer tests. |
-| Charge with the Mu off | The always-on EC and charger can manage charging while compute stays off. | Validate this on the finished hardware/firmware. |
-| Plug power into J12/J22/J23 | Those ports remain source-only host/data ports; they do not charge the laptop. | Port-role and back-power tests. |
-| Use AUX/DC | The source is qualified within the actual protection windows and available power. | Measured limits, charging behavior, and source transfer. |
-| Close the lid | Turn the internal display off while the Mu keeps running. opening the lid should restore the display without a power cycle. | Target lid events, OS integration, and display testing. |
-| Type or use Fn | The 65-key matrix produces normal keyboard and consumer reports. | Verify every physical switch and USB report on target. |
-| Plug in headphones | Route audio to headphones and mute the speakers. | EC detect/amp integration and audio tests. |
-| Read battery status | Show valid percentage, charge state, and useful remaining-time data. | Pack calibration and EC-to-OS telemetry transport. |
-| Look at the OLEDs | Show real power/battery and thermal/system information; unavailable data stays unavailable. | SSD1306 target rendering, valid telemetry, and tests. |
-| Run a heavy workload | The fan responds to measured temperatures and the system stays within a validated power/thermal envelope. | Characterize the actual cooler and integrate host limits. |
-| Experiment with maker GPIO | The RP2350 handles the experiment independently of laptop control. | Complete target/interlock behavior and test it. |
-| Remove the radio board | The laptop can still boot, charge, and use its normal input/audio/networking. | Optional-board isolation and fault tests. |
-| Lose the main NVMe install | Boot a prepared recovery environment from eMMC or external recovery media. | Build and test the recovery path on the Mu. |
+| When i do this | Intended behavior |
+| --- | --- |
+| Press power | The EC qualifies the available source, applies limits, and starts the Mu in order. |
+| Plug a charger into J21 or J11 | The laptop negotiates PD and charges when the source and power budget allow it. |
+| Charge with the Mu off | The always-on EC and charger can manage charging while compute stays off. |
+| Plug power into J12/J22/J23 | Those ports remain source-only host/data ports; they do not charge the laptop. |
+| Use AUX/DC | The source is qualified within the actual protection windows and available power. |
+| Close the lid | Turn the internal display off while the Mu keeps running. opening the lid should restore the display without a power cycle. |
+| Type or use Fn | The 65-key matrix produces normal keyboard and consumer reports. |
+| Plug in headphones | Route audio to headphones and mute the speakers. |
+| Read battery status | Show valid percentage, charge state, and useful remaining-time data. |
+| Look at the OLEDs | Show real power/battery and thermal/system information; unavailable data stays unavailable. |
+| Run a heavy workload | The fan responds to measured temperatures and the system stays within a validated power/thermal envelope. |
+| Experiment with maker GPIO | The RP2350 handles the experiment independently of laptop control. |
+| Remove the radio board | The laptop can still boot, charge, and use its normal input/audio/networking. |
+| Lose the main NVMe install | Boot a prepared recovery environment from eMMC or external recovery media. |
+
+these are the intended behaviors. current implementation and hardware-test
+status live in the [firmware docs](../../firmware/README.md) and
+[bring-up plan](../BRINGUP_TEST_PLAN.md).
 
 ## keyboard Fn layer
 

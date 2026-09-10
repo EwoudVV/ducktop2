@@ -105,7 +105,7 @@ def add_connector(s, loom, side, x, y):
                 'CurrentRatingBasis':'AMASS 2025V0: 20 A at up to 85 K rise; project return design 8 A, qualification <=80 C',
                 'ResistanceAcceptance':'each mated/soldered termination <=5 mOhm hot/aged; wire <=30 mOhm/m hot',
                 'MatedEnvelope':'23.10 x 13.60 x 5.75 mm conservative; reserve sleeve and 18.80 mm wire bend radius',
-                'CableEnvelope':'rounded exit path 370.47 mm GND / 380.47 mm USB5; retain up to 12 mm termination/sleeve allowance and fit remaining height/service detour before assembly',
+                'CableEnvelope':'rounded exit path 354.47 mm GND / 364.47 mm USB5; retain up to 12 mm termination/sleeve allowance and fit remaining height/service detour before assembly',
                 'Assembly':'unpowered mating only; insulate solder joints and strain-relieve wires independently; retention lands isolated',
                 'Fabrication':'power holes 1.85 +/-0.05 mm, retention holes 1.15 +/-0.05 mm finished diameter',
                 'Datasheet':'https://www.china-amass.net/uploads/31.XT30PW-F30-SPEC-2025V0.pdf'})

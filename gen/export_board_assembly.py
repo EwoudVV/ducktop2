@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export the installed board outlines, connectors, and mounting datums.
+"""Export installed board outlines, connectors, datums and planner geometry.
 
 Run with KiCad's Python from the project root. Board placement comes from
 mechanical/board-placement.json; footprint positions come from the PCBs.
@@ -12,6 +12,7 @@ from pathlib import Path
 
 import wx
 app = wx.App(False)
+wx.Log.EnableLogging(False)
 import pcbnew as pcb
 import fpc_contract as interconnect
 
@@ -45,6 +46,68 @@ def path_text(points):
 def label(x, y, text, size=2.2, color="#344e40"):
     svg.append(f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" text-anchor="middle">{html.escape(text)}</text>')
 
+def courtyard_rings(footprint, spec):
+    footprint.BuildCourtyardCaches()
+    result = {}
+    for side, layer in (("front", pcb.F_CrtYd), ("back", pcb.B_CrtYd)):
+        courtyard = footprint.GetCourtyard(layer)
+        result[side] = [ring(courtyard.COutline(i), spec) for i in range(courtyard.OutlineCount())]
+    return result
+
+def rectangle(points):
+    assert points, "empty mechanical envelope"
+    x, y = min(p[0] for p in points), min(p[1] for p in points)
+    return {"x": round(x, 6), "y": round(y, 6),
+            "w": round(max(p[0] for p in points)-x, 6),
+            "h": round(max(p[1] for p in points)-y, 6)}
+
+def updated_floorplan():
+    plan = json.loads((ROOT / "mechanical/floorplan.json").read_text())
+    parts = {part["id"]: part for part in plan["parts"]}
+    actual = {name: {f.GetReference(): f for f in board.GetFootprints()} for name, board in loaded.items()}
+    for name, record in data["boards"].items():
+        part = parts[name+"-pcb"]
+        assert len(record["outlines"]) == 1, name+" needs a multi-body planner representation"
+        outline = record["outlines"][0]
+        bounds = rectangle(outline["outer"])
+        part.update(bounds, rot=0, locked=True)
+        local = lambda points: [[round(x-bounds["x"],6), round(y-bounds["y"],6)] for x,y in points]
+        part["outline"] = local(outline["outer"])
+        part["outlineHoles"] = [local(points) for points in outline["holes"]]
+        part["pcbSha256"] = record["sha256"]
+    for old, board_name, ref in (("mount-center-H14","center","H14"), ("mount-right-H27","right","H27")):
+        if old in parts:
+            assert ref not in actual[board_name], old+" is no longer obsolete"
+            del parts[old]
+    parts.pop("bms-ffc", None)
+    for name, refs in (("power",interconnect.BMS_POWER_REFS), ("control",interconnect.BMS_CONTROL_REFS)):
+        for board_name, ref in refs.items():
+            key = "bms-"+name+"-"+board_name
+            parts.setdefault(key, {"id":key,"name":ref+" bms "+name,"kind":"port","zone":"base",
+                                   "hidden":False,"pcbSource":[board_name,ref]})
+    for part in parts.values():
+        if "pcbSource" not in part:
+            continue
+        name, ref = part["pcbSource"]
+        assert ref in actual[name], part["id"]+" points to a missing footprint"
+        footprint = actual[name][ref]
+        spec = config["boards"][name]
+        if part["id"].startswith("mount-"):
+            zones = [z for z in loaded[name].Zones() if z.GetIsRuleArea() and z.GetZoneName()=="mount "+ref]
+            assert len(zones)==1, part["id"]+" needs its actual support keepout"
+            points = [point for i in range(zones[0].Outline().OutlineCount())
+                      for point in ring(zones[0].Outline().COutline(i),spec)]
+        else:
+            points = [point for rings in courtyard_rings(footprint,spec).values() for points in rings for point in points]
+        part.update(rectangle(points), rot=0, locked=True)
+        part["pcbAnchor"] = transform(xy(footprint.GetPosition()),spec)
+        part["pcbRotation"] = (footprint.GetOrientationDegrees()+spec["rotation"]) % 360
+        part["pcbSide"] = "back" if footprint.GetLayer()==pcb.B_Cu else "front"
+        part["pcbSha256"] = data["boards"][name]["sha256"]
+    plan["parts"] = list(parts.values())
+    plan["pcbGeometrySource"] = "saved boards and board-placement.json; free case parts remain a packaging sketch"
+    return plan
+
 for name, spec in config["boards"].items():
     source = ROOT / spec["file"]
     board = pcb.LoadBoard(str(source))
@@ -64,16 +127,17 @@ for name, spec in config["boards"].items():
         ref = footprint.GetReference()
         pos = transform(xy(footprint.GetPosition()), spec)
         if ref.startswith(("J", "FPC", "H")) or ref in ("A1", "F1", "F190", "F195", "SW900"):
-            footprint.BuildCourtyardCaches()
-            cy = footprint.GetCourtyard(pcb.F_CrtYd)
+            courtyards = courtyard_rings(footprint, spec)
             bounds = []
-            for i in range(cy.OutlineCount()):
-                points = ring(cy.COutline(i), spec)
-                bounds.extend(points)
-                svg.append(f'<path d="{path_text(points)}" fill="#ffffff" fill-opacity=".34" stroke="#658875" stroke-width=".15"/>')
+            for side, rings in courtyards.items():
+                for points in rings:
+                    bounds.extend(points)
+                    dash = ' stroke-dasharray=".7 .5"' if side == "back" else ''
+                    svg.append(f'<path d="{path_text(points)}" fill="#ffffff" fill-opacity=".34" stroke="#658875" stroke-width=".15"{dash}/>')
             entries.append({"reference": ref, "position": pos,
                             "rotation": (footprint.GetOrientationDegrees()+spec["rotation"]) % 360,
-                            "courtyard": bounds})
+                            "side": "back" if footprint.GetLayer()==pcb.B_Cu else "front",
+                            "courtyard": bounds, "courtyards": courtyards})
             if ref.startswith(("J", "FPC")) or ref == "A1":
                 label(pos[0], pos[1], ref, 1.9)
         if ref.startswith("H"):
@@ -169,6 +233,8 @@ svg.append('<rect x="109" y="143" width="140" height="105" rx="2" fill="none" st
 label(179, 240, "trackpad above the front area", 2.8, "#655f50")
 label(179, 255, "board XY placement; case height, cable loops and supports still need a measured fit", 2.7)
 svg.append('</g></svg>')
+floorplan = updated_floorplan()
 (ROOT / "mechanical/board-layout.svg").write_text("\n".join(svg)+"\n")
 (ROOT / "mechanical/board-datums.json").write_text(json.dumps(data, indent=2)+"\n")
-print("exported four board outlines and mounting datums; BMS power and isolated control pin maps match")
+(ROOT / "mechanical/floorplan.json").write_text(json.dumps(floorplan, indent=1)+"\n")
+print("exported board outlines, both-side connector datums and planner geometry; BMS maps and M.2 offsets match")

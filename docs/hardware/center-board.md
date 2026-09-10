@@ -1,62 +1,61 @@
 # center board
 
-updated 8 september 2026. this is the eight-layer Mu carrier in
-`ducktop2-center.kicad_pcb`. the saved board has 735 footprints. the audit
-repairs and manual placement changes are still being brought together;
-remaining main-board routing has not started.
+updated 10 september 2026. the saved eight-layer board now has 781
+footprints. it is 227 mm wide, from x=71.5 to x=298.5. narrowing the center
+leaves a 1.5 mm gap to each I/O board while keeping the total span at
+358 mm. the center still has no tracks or vias.
 
-## current placement
+## placement
 
-i moved both M.2 sockets and several power, audio, and service connectors.
-these positions are the starting point for the next fit check. the card
-retainers and nearby parts still need to follow the sockets.
+the M.2 retainers now follow their sockets. the maker circuit, its switching
+keepouts, and the nearby header/jack group moved inward together. the
+lower-right USB-C and speaker group also moved inward to clear the new
+edge. the Mu, M.2 sockets, supports, and main cable connector datums stayed
+in place.
 
 | part | saved position, mm | rotation |
 | --- | --- | --- |
 | J10, NVMe socket | 189.55, 106.60 | 90° |
+| H3, NVMe retainer | 273.10, 97.35 | 0° |
 | J40, Wi-Fi/Bluetooth socket | 177.80, 88.05 | -90° |
-| J2071, BMS power | 188.60, 144.54 | 0° |
-| J2073, BMS control | 176.50, 145.45 | 180° |
+| H4, Wi-Fi/Bluetooth retainer | 144.25, 97.30 | 0° |
+| J2071, BMS power | 188.60, 143.69 | 0° |
+| J2073, BMS control | 176.50, 145.30 | 180° |
 | RS1, gauge shunt | 165.95, 135.40 | 180° |
 | J41, left OLED | 201.05, 145.00 | 180° |
 | J45, right OLED | 210.575, 145.00 | 180° |
-| J901, maker connector | 298.00, 6.00 | 180° |
+| J901, maker connector | 296.30, 6.00 | 180° |
+| J2300, radio interface | 82.25, 117.75 | 0° |
 
-RS1 separates `FG_VSS` from system `GND`. its sense filters and gauge inputs
-need short Kelvin connections; a ground pour or cable return must not bypass
-it. the BMS control return is a separate isolated interface.
+RS1 separates FG_VSS from system GND. its sense filters and gauge inputs
+need short Kelvin connections. all return wiring must respect the gauge
+shunt and the separate BMS control island.
 
-the front-center BMS opening still runs from x=152.55 to x=217.45, with its
-back at y=152.5 and 1.5 mm inside radii. the revised BMS outline, connectors,
-wire bends, and insulated supports need a combined fit check. H14 was
-removed from the center board and H27 from the right board; the support and
-keepout records still need to be updated with the placement review.
+the BMS opening runs from x=152.55 to x=217.45, with its back at y=148.7
+and 1.5 mm inside radii. the notch and its two connectors now clear the BMS
+thermal circuit's 0.8 mm rear strip. the complete cable and case fit is still
+being checked.
 
-## applied corrections
+## completed checks
 
-the saved center board includes the corrected always-on input protection,
-Mu supply parts, isolated BMS control connector, and charge-temperature
-gate. the RP2350 regulator uses the reference-design inductor and local
-capacitor placement, with copper exclusions beneath its switching region.
-the USB protection supply and RTC diode connections were also corrected.
+the power-converter support parts were placed by their actual functions.
+bootstrap, supply, feedback, current-sense and compensation connections
+were checked before fitting optional snubbers. bypasses that had been left
+behind by earlier IC moves were brought back to their own supply pins.
+J4 and J902 also have their native programming-probe keepouts restored.
+MK430 has its acoustic-port keepout back too. it blocks tracks, vias and
+pours on both outer layers while preserving the microphone's ground ring.
 
-those changes passed the physical and schematic comparisons before the
-latest manual moves. that result does not cover the new placement. the
-next check includes the actual card outlines, support positions, capacitor
-locations, connector access, and every changed pad-net assignment.
+the saved board passes the strict physical, edge, courtyard and silkscreen
+checks. its 781 components match the corrected schematic, all source links
+survive native save/reload, and all 3,235 pads match the native footprint
+definitions within the recorded serialization tolerance. the audit also
+corrected older pad-coordinate rounding and missing pad-role/zone metadata.
 
-## changes still being applied
-
-the generators now include revised power stages, USB power permissions,
-separate I/O power looms, and 41- and 51-contact shielded signal interfaces.
-some saved schematics and boards still contain the previous parts. update
-from a reviewed fresh netlist and preserve the manual placements.
-
-see [power and battery](power-and-battery.md) and
-[cables and connectors](cables-and-connectors.md) for the circuit and harness
-work. connector selection alone does not qualify the complete high-speed
-channel. board routes, cable bends, return paths, and assembled testing are
-part of that check.
+the remaining advisories are documented library/marking differences,
+hybrid mounting-footprint types and generic symbol footprint filters.
+there are 2,087 native unconnected items. the complete laptop still needs
+the BMS work and the final project-wide checks before main routing starts.
 
 ## routing setup
 

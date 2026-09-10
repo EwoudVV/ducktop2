@@ -873,8 +873,19 @@ def transform_footprint_zone_coordinates(
     return new_block
 
 
+def scope_library_uuids(raw: str, reference: str) -> str:
+    """Give each imported copy its own child IDs and keep local group links."""
+    values = re.findall(r'\(uuid\s+"([^"]+)"\)', raw)
+    if len(values) != len(set(values)):
+        raise ValueError(f"{reference}: library footprint contains duplicate object UUIDs")
+    replacements = {value: stable_uuid(f"library-child:{reference}:{value}") for value in values}
+    return re.sub(r'"([0-9a-fA-F-]{36})"',
+                  lambda match: '"' + replacements.get(match.group(1), match.group(1)) + '"', raw)
+
+
 def normalize_library_footprint(comp: Component, x: float, y: float, rot: float) -> str:
     raw = footprint_library_file(comp.footprint).read_text(encoding="utf-8")
+    raw = scope_library_uuids(raw, comp.ref)
     raw = re.sub(r'^\(footprint\s+"[^"]+"', f'(footprint "{q(comp.footprint)}"', raw, count=1)
     block = "\n".join("\t" + line if line else line for line in raw.splitlines())
     block = set_or_insert_top_line(block, "uuid", f'(uuid "{stable_uuid(f"footprint:{comp.ref}")}")')

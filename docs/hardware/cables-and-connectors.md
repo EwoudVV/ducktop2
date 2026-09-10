@@ -1,85 +1,99 @@
 # cables and connectors
 
-updated 7 september 2026. the signal maps live in
-[`gen/fpc_contract.py`](../../gen/fpc_contract.py). this page covers how those
-maps relate to the physical cables and what remains to be settled.
+updated 10 september 2026. the I/O signal cables, power looms, and BMS
+control cable are separate connections. the old 68-pin I/O cables and
+30-pin BMS power cable are no longer part of this design.
 
-## board-to-board cables
+## signal cables between the main boards
 
-| Cable | Ends | Connector family | Signals |
+| cable | board connectors | cable part | contents |
 | --- | --- | --- | --- |
-| FPC-1 | Left FPC101 to center FPC102 | Hirose FH41, 68 pins, 0.5 mm pitch | Left power, USB, and control boundary |
-| FPC-2 | Right FPC104 to center FPC103 | Hirose FH41, 68 pins, 0.5 mm pitch | Right power, USB, HDMI, Ethernet PCIe/clock, and controls |
-| FPC-3 | BMS FPC106 to center FPC105 | Hirose FH12-30S, 30 pins, 0.5 mm pitch | Protected pack positive/return, fault, retry, MCU_3V3 |
+| left to center | FPC101/FPC102, Molex 5039084120 | Molex 150230241, 41 contacts | USB pairs, PD control, and ground guards |
+| right to center | FPC104/FPC103, Molex 5039085120 | Molex 150230251, 51 contacts | HDMI, Ethernet PCIe/clock, USB pairs, control, and ground guards |
 
-the FH41 footprint has 68 numbered signal pads, two MP hold-down pads, and
-13 SH pads. MP/SH are on system ground. the BMS FH12 hold-down pads use
-`FG_VSS`, the BMS's protected return.
+both cable parts are 51 +/-2 mm long. use the specified shielded 100 ohm
+assemblies and check their exact part numbers and contact construction.
+positive supply rails use the separate power wiring.
 
-FPC-3 allocates 12 numbered contacts to `PACK_POS_FUSED`, 15 to `FG_VSS`,
-and one each to `PACK_FAULT_N`, `PACK_RETRY_PULSE`, and `MCU_3V3`.
-cell taps and raw pack negative do not cross this cable.
+both ends have contacts on the same side. the connectors face each other,
+so numbered contacts reverse between boards: left pin N reaches center
+pin 42-N, and right pin N reaches center pin 52-N. the complete signal map
+is in [signal_interconnect_contract.py](../../gen/signal_interconnect_contract.py),
+with the center reversal in [fpc_contract.py](../../gen/fpc_contract.py).
+check the actual cable alone, then check it again seated in both boards.
 
-## mapping and installed orientation
+numbered ground contacts connect to their local board ground. each
+connector's shell connects through two parallel 0.33 ohm resistors. two
+separate Alpha Wire 1230 ground braids also cross each seam, using the four
+pairs of J2440 through J2447 solder lands. each braid starts from a 20 mm
+cut length and must measure at most 1 milliohm as a complete connection,
+including its joints and board connection. fit and strain-relieve both
+braids before attaching the signal cable.
 
-the code defines each daughterboard as side A. center maps are reversed:
-side-A pin N corresponds to center pin 69-N for FPC-1/2 and 31-N for FPC-3.
-the intended physical arrangement was a straight Type-A FFC, with contacts
-on the same side at both ends, between oppositely mounted connectors.
+the resistance and temperature bounds for the shared returns still need
+assembly tests. the signal cable ground conductors can carry DC return
+current alongside the power wiring and braids. see
+[I/O power qualification](io-power-qualification.md) for those limits.
 
-the cable's conductor mapping, connector contact side, and installed board
-orientation must all agree with that arrangement. "straight" by itself is
-not a complete assembly instruction. continuity-test the cable alone, then
-verify the expected board nets with it seated in both connectors.
+keep the exact cable and connector transitions in the signal-integrity
+review. the cable's nominal impedance alone does not qualify the complete
+USB, HDMI, or PCIe channel. final checks include the routed boards, vias,
+switches, protection parts, and external connector/cable allowance.
 
-the project's footprint convention places the connector mouth on local +Y,
-opposite the solder-pin row. the earlier drawing review and the current code
-use this convention. confirm the exact ordered connector against its drawing.
+## power between the main boards
 
-## positions read from the boards
+| loom | board connectors | cable housing | wire |
+| --- | --- | --- | --- |
+| center to left | J2430/J2431, Molex 43045-1212 | 43025-1200 with 43030-0038 contacts | 12 separate 18 AWG conductors, 90..100 mm |
+| center to right | J2432/J2433, Molex 43045-1012 | 43025-1000 with 43030-0038 contacts | 10 separate 18 AWG conductors, 90..100 mm |
+| USB5, left to right | J2434/J2435, AMASS XT30PW-F30.G.Y | XT30U-M.G.Y | two 18 AWG conductors, 400..420 mm |
 
-KiCad coordinates in mm and rotations in degrees, checked 6 september.
+the Micro-Fit looms use Alpha 3253 wire and connect pin N to pin N. their
+pin maps and exact supply names are in
+[usb_power_contract.py](../../gen/usb_power_contract.py). the different
+contact counts distinguish the left and right looms.
 
-| Ref | Board | X | Y | Rotation |
-| --- | --- | ---: | ---: | ---: |
-| FPC101 | Left | 65.6 | 92.5 | 90 |
-| FPC102 | Center | 73.85 | 92.5 | 270 |
-| FPC103 | Center | 294.6 | 92.5 | 90 |
-| FPC104 | Right | 303.9 | 92.5 | 270 |
-| FPC105 | Center | 184.251 | 132.5 | 0 |
-| FPC106 | BMS | 136.901 | 68.552 | 180 |
+the direct USB5 loom uses Alpha 5857 wire. pin 1 is GND and pin 2 is
+USB_PORT_5V at both ends. insulate the solder terminations and add strain
+relief. the board connector's retention lands are isolated.
 
-the BMS sits face up in the center board's front notch. its installed
-translation is (+47.35, +91.448), with no rotation. FPC106 is therefore at
-(184.251, 160) in the shared frame, facing FPC105. all 30 opposing pad
-positions line up in X and their reversed pin map matches.
+the Micro-Fit connector body is 17.64 mm high when mated. the current
+individual-wire bend model reaches roughly 55 mm above the PCB. that
+still excludes a proven arrangement for the whole wire bundle, its clamp,
+and the cover. do not use connector body height as the case-height limit.
+current lengths, bend radii, voltage-drop limits, and remaining fit work are
+recorded in [I/O power qualification](io-power-qualification.md).
 
-the two actuator envelopes are 18.7 mm apart. a 17 mm-wide corridor is
-reserved between them. measure the seated path and a gentle service loop
-before ordering the cable. the assembly transform and checked datums are
-in `mechanical/board-placement.json` and `mechanical/board-datums.json`.
+## BMS wiring
 
-## cable construction and ordering
+| connection | ends | construction |
+| --- | --- | --- |
+| protected pack power | center J2071 to BMS J2072 | Molex 43650-0224 headers, 43645-0200 housings, 43030-0038 contacts, 18 AWG; 75 mm wire budget |
+| isolated control | center J2073 to BMS J2074 | JST SM05B-SRSS-TB headers, SHR-05V-S housings, SSH-003T-P0.2-H contacts; five wires |
+| cell temperature probes | BMS J2200 to three insulated probes | JST SM06B-SRSS-TB header; three separate wire pairs to SEMITEC 104JT-025 probes |
 
-Hirose lists a 0.3 mm mating cable thickness for FH12-30S-0.5SH(55), and 0.3 mm for the
-FH41-68S-0.5SH(28) product. include the specified contact-end thickness and
-tolerance in the actual cable drawing, including any stiffener.
+the power cable is pin 1 to pin 1 for PACK_POS_FUSED, and pin 2 to pin 2
+for FG_VSS. FG_VSS reaches system ground through the center's gauge shunt.
+the connector mounting pads are isolated.
 
-sources: [FH12-30S-0.5SH(55)](https://www.hirose.com/en/product/p/CL0586-0525-1-55),
-[FH41-68S-0.5SH(28)](https://www.hirose.com/en/product/p/CL0580-2202-5-28).
+the control cable is also straight-numbered:
 
-the I/O connectors now specify FH41-68S-0.5SH(28). Hirose lists (05) as
-discontinued and (28) as fully compatible in mounting, mating, and
-specification. the land pattern stays the same.
-[Hirose replacement notice](https://www.hirose.com/en/product/p/CL0580-2202-5-05).
+| pin | connection |
+| ---: | --- |
+| 1 | PACK_FAULT_N |
+| 2 | PACK_RETRY_PULSE |
+| 3 | MCU_3V3 |
+| 4 | PACK_CHG_TEMP_OK |
+| 5 | center GND to the BMS CTRL_GND island |
 
-measure mouth-to-mouth routes, insertion lengths, bends, service loops, and
-installed board offsets before selecting cable lengths.
+CTRL_GND is isolated from FG_VSS and raw pack negative on the BMS. do not
+add a ground bridge between those domains. the temperature probes and
+J2200 hold-downs are raw-pack referenced; they do not get a system-ground
+wire. J2200 pairs 1/2, 3/4, and 5/6 serve cells 1, 2, and 3.
 
-for the shielded I/O cables, verify the shield-contact construction and its
-connection to the SH row. also obtain suitable current and signal-integrity
-data for the actual cable. parallel contact counts alone do not establish
-the rating of a complete heated cable/connector assembly.
+the cell power and tap harness stays on the BMS's six-contact Mega-Fit J2.
+cell taps do not cross to the center board. all BMS cable routes need to
+include the actual plugs, wire exits, bend clearance, and insulating supports.
 
 ## other internal cables
 

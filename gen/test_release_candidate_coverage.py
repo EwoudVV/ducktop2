@@ -9,6 +9,69 @@ from report_schematic_pcb_eco import PROJECTS
 
 
 class Coverage(unittest.TestCase):
+    def source_fixture(self, root):
+        for item in BOARD_PROJECTS.values():
+            for key in ('pcb', 'schematic'):
+                path = root / item[key]
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text('saved ' + key)
+                path.with_suffix('.kicad_pro').write_text('saved settings')
+
+    def test_regeneration_covers_bms_and_retains_saved_settings(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.source_fixture(root)
+            called = []
+            def generate(command, cwd, label):
+                self.assertEqual(cwd, root.resolve())
+                called.extend(release.SOURCE_GENERATORS[command[1]])
+                for board in release.SOURCE_GENERATORS[command[1]]:
+                    path = root / BOARD_PROJECTS[board]['schematic']
+                    path.write_text('fresh schematic')
+                    path.with_suffix('.kicad_pro').write_text('generator-only settings')
+                return ''
+            with patch.object(release, 'run_command', side_effect=generate):
+                release.regenerate_project_sources(root)
+            self.assertEqual(set(called), set(BOARD_PROJECTS))
+            for item in BOARD_PROJECTS.values():
+                self.assertEqual((root / item['schematic']).read_text(), 'fresh schematic')
+                self.assertEqual((root / item['pcb']).read_text(), 'saved pcb')
+                self.assertEqual((root / item['schematic']).with_suffix('.kicad_pro').read_text(), 'saved settings')
+
+    def test_missing_bms_regeneration_is_rejected(self):
+        generators = {k: v for k, v in release.SOURCE_GENERATORS.items() if 'bms' not in v}
+        with tempfile.TemporaryDirectory() as temp, patch.object(release, 'SOURCE_GENERATORS', generators):
+            with self.assertRaisesRegex(RuntimeError, 'all six boards'):
+                release.regenerate_project_sources(Path(temp))
+
+    def test_generator_must_not_replace_a_placed_board(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.source_fixture(root)
+            def damage(command, cwd, label):
+                (root / BOARD_PROJECTS['bms']['pcb']).write_text('recreated board')
+                return ''
+            with patch.object(release, 'run_command', side_effect=damage):
+                with self.assertRaisesRegex(RuntimeError, 'changed PCB files: bms/bms.kicad_pcb'):
+                    release.regenerate_project_sources(root)
+
+    def test_canonical_regeneration_is_rejected(self):
+        with self.assertRaisesRegex(RuntimeError, 'temporary project copy'):
+            release.regenerate_project_sources(release.ROOT)
+
+    def test_local_library_drift_cannot_hide_behind_same_part_name(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root, candidate = Path(temp) / 'saved', Path(temp) / 'candidate'
+            for folder in (root, candidate):
+                (folder / 'gen').mkdir(parents=True)
+                (folder / 'ducktop2.pretty').mkdir()
+                (folder / 'gen/power.kicad_sym').write_text('same symbol')
+            (root / 'ducktop2.pretty/power.kicad_mod').write_text('saved pads')
+            (candidate / 'ducktop2.pretty/power.kicad_mod').write_text('different pads')
+            with patch.object(release, 'ROOT', root):
+                self.assertEqual(release.generated_schematic_drift(candidate),
+                                 ['ducktop2.pretty/power.kicad_mod'])
+
     def test_skipped_native_parity_is_not_an_empty_pass(self):
         output = ("Failed to fetch schematic netlist for parity tests.\n"
                   "Schematic parity tests require a fully annotated schematic.\n"
