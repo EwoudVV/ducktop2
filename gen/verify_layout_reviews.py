@@ -83,12 +83,19 @@ def reviewed_violations(board_name, pcb, section, violations, *, root=ROOT,
         block = text[start:end]
         uuid = pcb_text.extract(r'\(uuid\s+"([^"]+)"\)', block)
         vias[uuid].append(block)
+    tracks = defaultdict(list)
+    for kind in ('segment', 'arc'):
+        for start, end in pcb_text.top_level_child_spans(text, kind):
+            block = text[start:end]
+            uuid = pcb_text.extract(r'\(uuid\s+"([^"]+)"\)', block)
+            tracks[uuid].append(block)
     for violation in violations:
         items = violation.get('items', [])
-        pending_via = (violation.get('type') == 'via_dangling' and section == 'drc'
-                       and stage == 'routing' and not routing_complete_required)
+        pending_kind = {'via_dangling': 'via', 'track_dangling': 'track'}.get(violation.get('type'))
+        pending_route = (pending_kind is not None and section == 'drc'
+                         and stage == 'routing' and not routing_complete_required)
         if violation.get('severity') != 'warning' or len(items) != 1 \
-                or (violation.get('type') not in REVIEW_TYPES and not pending_via):
+                or (violation.get('type') not in REVIEW_TYPES and not pending_route):
             continue
         matches = [row for row in records if row['type'] == violation['type']
                    and row['severity'] == violation['severity']
@@ -97,14 +104,14 @@ def reviewed_violations(board_name, pcb, section, violations, *, root=ROOT,
         if len(matches) != 1:
             continue
         record = matches[0]
-        if pending_via:
-            candidates = vias.get(record['item_uuid'], [])
-            if record.get('kind') == 'via' and record.get('stage') == 'routing' \
+        if pending_route:
+            candidates = (vias if pending_kind == 'via' else tracks).get(record['item_uuid'], [])
+            if record.get('kind') == pending_kind and record.get('stage') == 'routing' \
                     and len(candidates) == 1 and fingerprint(candidates[0]) == record['item_sha256'] \
                     and items[0].get('description') == record['item_description']:
                 result['accepted'].append(violation)
             else:
-                result['stale'].append(record['item_uuid'] + ': unfinished via changed')
+                result['stale'].append(record['item_uuid'] + ': unfinished ' + pending_kind + ' changed')
             continue
         if record.get('kind') != 'footprint':
             continue

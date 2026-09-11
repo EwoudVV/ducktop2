@@ -89,6 +89,25 @@ class LayoutReviewTests(unittest.TestCase):
         self.pcb.write_text(self.pcb.read_text().replace('(drill 0.3)', '(drill 0.4)'))
         self.assertEqual(self.check(), [])
 
+    def test_existing_open_track_cannot_pass_fabrication_or_complete_board_gate(self):
+        track = f'''(segment (start 1 2) (end 4 2) (width 0.15)
+        (layer "F.Cu") (net "CONTROL") (uuid "{VIA_ID}"))'''
+        self.pcb.write_text('(kicad_pcb\n' + FP + '\n' + track + '\n)')
+        self.violation = {'type': 'track_dangling', 'severity': 'warning', 'description': 'open route end',
+                          'items': [{'uuid': VIA_ID, 'description': 'Track on CONTROL'}]}
+        self.record = {'board': 'center', 'section': 'drc', 'kind': 'track', 'stage': 'routing',
+                       'type': 'track_dangling', 'severity': 'warning', 'description': 'open route end',
+                       'item_uuid': VIA_ID, 'item_description': 'Track on CONTROL',
+                       'item_sha256': review.fingerprint(track)}
+        self.assertEqual(self.check(), [self.violation])
+        self.assertEqual(self.check(stage='fabrication'), [])
+        self.assertEqual(self.check(complete=True), [])
+        self.record['kind'] = 'via'
+        self.assertEqual(self.check(), [])
+        self.record['kind'] = 'track'
+        self.pcb.write_text(self.pcb.read_text().replace('(end 4 2)', '(end 5 2)'))
+        self.assertEqual(self.check(), [])
+
 
 if __name__ == '__main__':
     unittest.main()
