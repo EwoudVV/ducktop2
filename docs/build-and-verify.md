@@ -131,9 +131,9 @@ the reason, exact placed object, and library hash. a changed pad, marking,
 placement or library needs another review. no clearance, short, courtyard
 or silkscreen collision can be accepted through these records.
 
-the nine retained unfinished right-board vias are listed separately in the
-same file. they are allowed only at the routing-preparation stage, where the
-main boards still have open nets. they continue to block fabrication.
+retained unfinished main-board vias and track ends are listed separately in
+the same file. they are allowed only at the routing-preparation stage, where
+the main boards still have open nets. they continue to block fabrication.
 
 for a fresh physical-pad comparison of the center:
 

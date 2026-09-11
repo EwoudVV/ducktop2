@@ -241,7 +241,8 @@ def build_bms_sheet(sheet_symbol_uuid):
     for k, (ref, net) in enumerate(bms_test_points):
         col, row = k % 2, k // 2
         s.place(ref, "TestPoint", net, 600 + col * 40, 75 + row * 15,
-                footprint=FOOTPRINTS["TestPoint_Pad_1.5"],
+                footprint=("TestPoint:TestPoint_Pad_1.0x1.0mm" if ref == "TPB5"
+                           else FOOTPRINTS["TestPoint_Pad_1.5"]),
                 in_bom=False,
                 pin_nets={"1": (net, "local")},
                 extra_props={"Manufacturer": "-",
