@@ -31,6 +31,19 @@ class NetClasses(unittest.TestCase):
         self.assertEqual(set(assigned["DIFF_100"]), {"/TCP0_TXRX0_P", "/TCP0_TXRX0_N"})
         self.assertFalse(any("/Mu Carrier/PCIE_M_CLKREQ_N" in values for values in assigned.values()))
 
+    def test_ethernet_pcie_and_mdi_use_their_own_impedance(self):
+        pcie = {f"/{leaf}_{side}" for leaf in
+                ("GBE_HOST_TX", "GBE_HOST_RX", "GBE_REFCLK") for side in ("P", "N")}
+        pcie |= {f"/Gigabit Ethernet/{leaf}_{side}" for leaf in
+                 ("GBE_HSI", "GBE_HSO") for side in ("P", "N")}
+        mdi = {f"/Gigabit Ethernet/ETH_MDI{lane}_{side}"
+               for lane in range(4) for side in ("P", "N")}
+        controls = {"/GBE_CLKREQ_N", "/GBE_WAKE_N", "/GBE_PLTRST_N"}
+        assigned, _ = classes.classify(pcie | mdi | controls)
+        self.assertEqual(set(assigned["DIFF_85"]), pcie)
+        self.assertEqual(set(assigned["DIFF_100"]), mdi)
+        self.assertFalse(any(controls & set(values) for values in assigned.values()))
+
     def test_custom_rules_and_clearance_survive_an_update(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "board.kicad_pro"

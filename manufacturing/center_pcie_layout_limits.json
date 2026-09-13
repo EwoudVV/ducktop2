@@ -1,0 +1,3047 @@
+{
+  "schema_version": 1,
+  "description": "center board connector escapes, PCIe fanouts and pair tuning limits",
+  "stackup": "mainboard_stackup_release.json",
+  "suites": [
+    {
+      "schema_version": 1,
+      "scope": "NVMe data and reference clock copper coupling",
+      "nominal_gap_mm": 0.1524,
+      "maximum_rounding_tolerance_mm": 2e-06,
+      "paired_corner_leg_tolerance_mm": 2.5e-05,
+      "maximum_sample_step_mm": 0.005,
+      "outside_uncoupled_rounding_length_mm": 1e-06,
+      "pairs": [
+        {
+          "stem": "/Mu Carrier/PCIE_M_L0_RX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L0_TX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L0_TX_RAW",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L1_RX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L1_TX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L1_TX_RAW",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L2_RX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L2_TX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L2_TX_RAW",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L3_RX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L3_TX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_L3_TX_RAW",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_REFCLK",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Mu Carrier/PCIE_M_REFCLK_SRC",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        }
+      ],
+      "regions": [
+        {
+          "name": "rx0 A1 land to via",
+          "category": "pad_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.9,
+            57.84,
+            217.7,
+            58.79
+          ],
+          "max_total_length_mm": {
+            "P": 1.56,
+            "N": 1.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.56,
+            "N": 1.72
+          },
+          "max_nearest_gap_mm": 0.54
+        },
+        {
+          "name": "rx0 inner launch",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            216.6,
+            57.89,
+            217.7,
+            59.59
+          ],
+          "max_total_length_mm": {
+            "P": 1.67,
+            "N": 1.35
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.46,
+            "N": 0.89
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "rx0 inner receiver",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            209.95,
+            131.505405,
+            211.8538,
+            133.35
+          ],
+          "max_total_length_mm": {
+            "P": 1.09,
+            "N": 1.83
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.99,
+            "N": 1.73
+          },
+          "max_nearest_gap_mm": 0.7
+        },
+        {
+          "name": "rx0 outer receiver via",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            210.7,
+            132.405405,
+            211.9038,
+            133.35
+          ],
+          "max_total_length_mm": {
+            "P": 1.12,
+            "N": 0.78
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.73,
+            "N": 0.4
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "rx0 J10 lands",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            218.6,
+            132.55,
+            220.15,
+            133.25
+          ],
+          "max_total_length_mm": {
+            "P": 1.55,
+            "N": 1.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.5,
+            "N": 1.56
+          },
+          "max_nearest_gap_mm": 0.36
+        },
+        {
+          "name": "rx0 skew tuning",
+          "category": "single_leg_tuning",
+          "stem": "/Mu Carrier/PCIE_M_L0_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            210.9832,
+            84.49,
+            211.516763,
+            85.937126
+          ],
+          "max_total_length_mm": {
+            "P": 1.47,
+            "N": 1.65
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.45,
+            "N": 1.63
+          },
+          "max_nearest_gap_mm": 0.38
+        },
+        {
+          "name": "tx0 A1 pad escape",
+          "category": "pad_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.2,
+            56.925,
+            207.8,
+            57.925
+          ],
+          "max_total_length_mm": {
+            "P": 0.61,
+            "N": 0.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.14,
+            "N": 0.14
+          },
+          "max_nearest_gap_mm": 0.26
+        },
+        {
+          "name": "tx0 F source via flare",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            203.3,
+            55.95,
+            204.3,
+            57.05
+          ],
+          "max_total_length_mm": {
+            "P": 0.96,
+            "N": 1.0
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.81,
+            "N": 0.85
+          },
+          "max_nearest_gap_mm": 0.73
+        },
+        {
+          "name": "tx0 B source via escape",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            203.3,
+            55.95,
+            204.15,
+            57.8
+          ],
+          "max_total_length_mm": {
+            "P": 0.83,
+            "N": 0.9
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.39,
+            "N": 0.46
+          },
+          "max_nearest_gap_mm": 0.54
+        },
+        {
+          "name": "tx0 cap input flare",
+          "category": "cap_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            219.05,
+            130.75,
+            219.87,
+            132.025
+          ],
+          "max_total_length_mm": {
+            "P": 0.86,
+            "N": 0.93
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.81,
+            "N": 0.88
+          },
+          "max_nearest_gap_mm": 0.85
+        },
+        {
+          "name": "tx0 cap to output via",
+          "category": "cap_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_TX",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            219.950001,
+            130.725,
+            221.921934,
+            132.075
+          ],
+          "max_total_length_mm": {
+            "P": 1.16,
+            "N": 0.98
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.16,
+            "N": 0.98
+          },
+          "max_nearest_gap_mm": 0.81
+        },
+        {
+          "name": "tx0 output via to J10",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L0_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            220.000001,
+            130.725,
+            221.921934,
+            132.075
+          ],
+          "max_total_length_mm": {
+            "P": 1.72,
+            "N": 1.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.72,
+            "N": 1.72
+          },
+          "max_nearest_gap_mm": 0.58
+        },
+        {
+          "name": "rx1 A1 land to via",
+          "category": "pad_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.9,
+            59.34,
+            217.7,
+            60.29
+          ],
+          "max_total_length_mm": {
+            "P": 1.56,
+            "N": 1.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.56,
+            "N": 1.72
+          },
+          "max_nearest_gap_mm": 0.54
+        },
+        {
+          "name": "rx1 inner launch",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            216.6,
+            59.39,
+            217.7,
+            61.09
+          ],
+          "max_total_length_mm": {
+            "P": 1.67,
+            "N": 1.35
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.46,
+            "N": 0.89
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "rx1 inner receiver",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            211.481601,
+            134.520003,
+            213.385401,
+            136.364599
+          ],
+          "max_total_length_mm": {
+            "P": 1.13,
+            "N": 1.87
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.03,
+            "N": 1.77
+          },
+          "max_nearest_gap_mm": 0.7
+        },
+        {
+          "name": "rx1 outer receiver via",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            212.231601,
+            135.420003,
+            213.435401,
+            136.364599
+          ],
+          "max_total_length_mm": {
+            "P": 1.11,
+            "N": 0.79
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.74,
+            "N": 0.42
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "rx1 J10 lands",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            218.6,
+            135.55,
+            220.15,
+            136.25
+          ],
+          "max_total_length_mm": {
+            "P": 1.55,
+            "N": 1.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.5,
+            "N": 1.56
+          },
+          "max_nearest_gap_mm": 0.36
+        },
+        {
+          "name": "rx1 skew tuning",
+          "category": "single_leg_tuning",
+          "stem": "/Mu Carrier/PCIE_M_L1_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            212.6009,
+            85.99,
+            213.119864,
+            87.407928
+          ],
+          "max_total_length_mm": {
+            "P": 1.44,
+            "N": 1.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.42,
+            "N": 1.59
+          },
+          "max_nearest_gap_mm": 0.37
+        },
+        {
+          "name": "tx1 A1 pad escape",
+          "category": "pad_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.2,
+            58.425,
+            207.8,
+            59.425
+          ],
+          "max_total_length_mm": {
+            "P": 0.61,
+            "N": 0.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.14,
+            "N": 0.14
+          },
+          "max_nearest_gap_mm": 0.26
+        },
+        {
+          "name": "tx1 F source via flare",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            203.3,
+            57.85,
+            204.3,
+            58.95
+          ],
+          "max_total_length_mm": {
+            "P": 0.96,
+            "N": 1.0
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.81,
+            "N": 0.85
+          },
+          "max_nearest_gap_mm": 0.73
+        },
+        {
+          "name": "tx1 B source via escape",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            203.3,
+            57.85,
+            204.15,
+            59.7
+          ],
+          "max_total_length_mm": {
+            "P": 0.83,
+            "N": 0.9
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.39,
+            "N": 0.46
+          },
+          "max_nearest_gap_mm": 0.54
+        },
+        {
+          "name": "tx1 cap input flare",
+          "category": "cap_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            219.05,
+            133.75,
+            219.87,
+            135.025
+          ],
+          "max_total_length_mm": {
+            "P": 0.86,
+            "N": 0.93
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.81,
+            "N": 0.88
+          },
+          "max_nearest_gap_mm": 0.85
+        },
+        {
+          "name": "tx1 cap to output via",
+          "category": "cap_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_TX",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            219.950001,
+            133.725,
+            221.921934,
+            135.075
+          ],
+          "max_total_length_mm": {
+            "P": 1.16,
+            "N": 0.98
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.16,
+            "N": 0.98
+          },
+          "max_nearest_gap_mm": 0.81
+        },
+        {
+          "name": "tx1 output via to J10",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L1_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            220.000001,
+            133.725,
+            221.921934,
+            135.075
+          ],
+          "max_total_length_mm": {
+            "P": 1.72,
+            "N": 1.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.72,
+            "N": 1.72
+          },
+          "max_nearest_gap_mm": 0.58
+        },
+        {
+          "name": "rx2 A1 land to via",
+          "category": "pad_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.9,
+            60.84,
+            217.7,
+            61.79
+          ],
+          "max_total_length_mm": {
+            "P": 1.56,
+            "N": 1.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.56,
+            "N": 1.72
+          },
+          "max_nearest_gap_mm": 0.54
+        },
+        {
+          "name": "rx2 inner launch",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            216.6,
+            60.89,
+            217.7,
+            62.59
+          ],
+          "max_total_length_mm": {
+            "P": 1.67,
+            "N": 1.35
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.46,
+            "N": 0.89
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "rx2 inner receiver",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            213.117002,
+            137.534602,
+            215.020802,
+            139.379198
+          ],
+          "max_total_length_mm": {
+            "P": 1.13,
+            "N": 1.87
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.03,
+            "N": 1.77
+          },
+          "max_nearest_gap_mm": 0.7
+        },
+        {
+          "name": "rx2 outer receiver via",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            213.867002,
+            138.434602,
+            215.070802,
+            139.379198
+          ],
+          "max_total_length_mm": {
+            "P": 1.11,
+            "N": 0.8
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.75,
+            "N": 0.44
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "rx2 J10 lands",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            218.6,
+            138.55,
+            220.15,
+            139.25
+          ],
+          "max_total_length_mm": {
+            "P": 1.55,
+            "N": 1.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.5,
+            "N": 1.56
+          },
+          "max_nearest_gap_mm": 0.36
+        },
+        {
+          "name": "rx2 skew tuning",
+          "category": "single_leg_tuning",
+          "stem": "/Mu Carrier/PCIE_M_L2_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            214.2332,
+            87.99,
+            214.737565,
+            89.37873
+          ],
+          "max_total_length_mm": {
+            "P": 1.41,
+            "N": 1.57
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.39,
+            "N": 1.55
+          },
+          "max_nearest_gap_mm": 0.35
+        },
+        {
+          "name": "tx2 A1 pad escape",
+          "category": "pad_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.2,
+            59.925,
+            207.8,
+            60.925
+          ],
+          "max_total_length_mm": {
+            "P": 0.61,
+            "N": 0.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.14,
+            "N": 0.14
+          },
+          "max_nearest_gap_mm": 0.26
+        },
+        {
+          "name": "tx2 F source via flare",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            203.3,
+            59.75,
+            204.3,
+            60.85
+          ],
+          "max_total_length_mm": {
+            "P": 0.96,
+            "N": 1.0
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.81,
+            "N": 0.85
+          },
+          "max_nearest_gap_mm": 0.73
+        },
+        {
+          "name": "tx2 B source via escape",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            203.3,
+            59.75,
+            204.15,
+            61.6
+          ],
+          "max_total_length_mm": {
+            "P": 0.83,
+            "N": 0.9
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.39,
+            "N": 0.46
+          },
+          "max_nearest_gap_mm": 0.54
+        },
+        {
+          "name": "tx2 cap input flare",
+          "category": "cap_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            219.05,
+            136.75,
+            219.87,
+            138.025
+          ],
+          "max_total_length_mm": {
+            "P": 0.89,
+            "N": 0.89
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.84,
+            "N": 0.84
+          },
+          "max_nearest_gap_mm": 0.79
+        },
+        {
+          "name": "tx2 cap to output via",
+          "category": "cap_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_TX",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            219.950001,
+            136.725,
+            221.887861,
+            138.075
+          ],
+          "max_total_length_mm": {
+            "P": 1.13,
+            "N": 0.98
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.13,
+            "N": 0.98
+          },
+          "max_nearest_gap_mm": 0.81
+        },
+        {
+          "name": "tx2 output via to J10",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L2_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            220.000001,
+            136.725,
+            221.887861,
+            138.075
+          ],
+          "max_total_length_mm": {
+            "P": 1.68,
+            "N": 1.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.68,
+            "N": 1.72
+          },
+          "max_nearest_gap_mm": 0.58
+        },
+        {
+          "name": "rx3 A1 land to via",
+          "category": "pad_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.9,
+            62.34,
+            217.7,
+            63.29
+          ],
+          "max_total_length_mm": {
+            "P": 1.56,
+            "N": 1.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.56,
+            "N": 1.72
+          },
+          "max_nearest_gap_mm": 0.54
+        },
+        {
+          "name": "rx3 inner launch",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            216.6,
+            62.39,
+            217.7,
+            64.09
+          ],
+          "max_total_length_mm": {
+            "P": 1.67,
+            "N": 1.35
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.46,
+            "N": 0.89
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "rx3 inner receiver",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            214.917002,
+            140.534602,
+            216.820802,
+            142.379198
+          ],
+          "max_total_length_mm": {
+            "P": 1.13,
+            "N": 1.87
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.03,
+            "N": 1.77
+          },
+          "max_nearest_gap_mm": 0.7
+        },
+        {
+          "name": "rx3 outer receiver via",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.667002,
+            141.434602,
+            216.870802,
+            142.379198
+          ],
+          "max_total_length_mm": {
+            "P": 1.11,
+            "N": 0.8
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.75,
+            "N": 0.44
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "rx3 J10 lands",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            218.6,
+            141.55,
+            220.15,
+            142.25
+          ],
+          "max_total_length_mm": {
+            "P": 1.55,
+            "N": 1.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.5,
+            "N": 1.56
+          },
+          "max_nearest_gap_mm": 0.36
+        },
+        {
+          "name": "rx3 skew tuning",
+          "category": "single_leg_tuning",
+          "stem": "/Mu Carrier/PCIE_M_L3_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            216.0332,
+            87.99,
+            216.537565,
+            89.37873
+          ],
+          "max_total_length_mm": {
+            "P": 1.41,
+            "N": 1.57
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.39,
+            "N": 1.55
+          },
+          "max_nearest_gap_mm": 0.35
+        },
+        {
+          "name": "tx3 A1 pad escape",
+          "category": "pad_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.2,
+            61.425,
+            207.8,
+            62.425
+          ],
+          "max_total_length_mm": {
+            "P": 0.61,
+            "N": 0.61
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.14,
+            "N": 0.14
+          },
+          "max_nearest_gap_mm": 0.26
+        },
+        {
+          "name": "tx3 F source via flare",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            203.3,
+            61.65,
+            204.3,
+            62.75
+          ],
+          "max_total_length_mm": {
+            "P": 0.93,
+            "N": 1.04
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.78,
+            "N": 0.89
+          },
+          "max_nearest_gap_mm": 0.73
+        },
+        {
+          "name": "tx3 B source via escape",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            203.3,
+            61.65,
+            204.15,
+            63.5
+          ],
+          "max_total_length_mm": {
+            "P": 0.83,
+            "N": 0.9
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.39,
+            "N": 0.46
+          },
+          "max_nearest_gap_mm": 0.54
+        },
+        {
+          "name": "tx3 cap input flare",
+          "category": "cap_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            218.84,
+            139.875,
+            220.12,
+            141.4
+          ],
+          "max_total_length_mm": {
+            "P": 1.25,
+            "N": 1.65
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.24,
+            "N": 1.64
+          },
+          "max_nearest_gap_mm": 1.13
+        },
+        {
+          "name": "tx3 cap to output via",
+          "category": "cap_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_TX",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            219.950001,
+            139.79,
+            222.187747,
+            141.45
+          ],
+          "max_total_length_mm": {
+            "P": 1.11,
+            "N": 0.88
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.11,
+            "N": 0.88
+          },
+          "max_nearest_gap_mm": 1.13
+        },
+        {
+          "name": "tx3 output via to J10",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_L3_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            220.000001,
+            139.79,
+            222.187747,
+            141.45
+          ],
+          "max_total_length_mm": {
+            "P": 2.05,
+            "N": 1.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.05,
+            "N": 1.72
+          },
+          "max_nearest_gap_mm": 0.69
+        },
+        {
+          "name": "clock B source via flare",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            201.1,
+            71.75,
+            202.2,
+            73.45
+          ],
+          "max_total_length_mm": {
+            "P": 2.24,
+            "N": 1.07
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.02,
+            "N": 0.85
+          },
+          "max_nearest_gap_mm": 0.73
+        },
+        {
+          "name": "clock F resistor to via",
+          "category": "resistor_via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            202.0,
+            71.35,
+            203.65,
+            73.05
+          ],
+          "max_total_length_mm": {
+            "P": 1.77,
+            "N": 1.81
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.21,
+            "N": 1.25
+          },
+          "max_nearest_gap_mm": 0.92
+        },
+        {
+          "name": "clock B output via flare",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            204.2,
+            118.1,
+            205.6,
+            120.1
+          ],
+          "max_total_length_mm": {
+            "P": 1.77,
+            "N": 2.31
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.67,
+            "N": 2.21
+          },
+          "max_nearest_gap_mm": 0.83
+        },
+        {
+          "name": "clock F output via flare",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            204.6,
+            119.3,
+            206.7,
+            120.9
+          ],
+          "max_total_length_mm": {
+            "P": 2.35,
+            "N": 1.66
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.2,
+            "N": 1.51
+          },
+          "max_nearest_gap_mm": 0.83
+        },
+        {
+          "name": "clock J10 lands",
+          "category": "connector_fanout",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            220.0,
+            129.5,
+            221.8,
+            130.3
+          ],
+          "max_total_length_mm": {
+            "P": 1.76,
+            "N": 1.76
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.36,
+            "N": 1.36
+          },
+          "max_nearest_gap_mm": 0.33
+        },
+        {
+          "name": "clock resistor input flare",
+          "category": "resistor_fanout",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK_SRC",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            205.05,
+            71.35,
+            206.05,
+            73.05
+          ],
+          "max_total_length_mm": {
+            "P": 1.23,
+            "N": 1.05
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.17,
+            "N": 0.98
+          },
+          "max_nearest_gap_mm": 1.03
+        },
+        {
+          "name": "clock A1 pad escape",
+          "category": "pad_fanout",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK_SRC",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.6,
+            72.1,
+            207.8,
+            72.75
+          ],
+          "max_total_length_mm": {
+            "P": 0.21,
+            "N": 0.21
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.14,
+            "N": 0.14
+          },
+          "max_nearest_gap_mm": 0.26
+        },
+        {
+          "name": "clock skew tuning 1",
+          "category": "single_leg_tuning",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            201.1,
+            89.99,
+            202.1,
+            92.31753
+          ],
+          "max_total_length_mm": {
+            "P": 2.35,
+            "N": 2.81
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.33,
+            "N": 2.79
+          },
+          "max_nearest_gap_mm": 0.72
+        },
+        {
+          "name": "clock skew tuning 2",
+          "category": "single_leg_tuning",
+          "stem": "/Mu Carrier/PCIE_M_REFCLK",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            201.1,
+            93.097529,
+            202.1,
+            95.425059
+          ],
+          "max_total_length_mm": {
+            "P": 2.35,
+            "N": 2.81
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.33,
+            "N": 2.79
+          },
+          "max_nearest_gap_mm": 0.72
+        }
+      ],
+      "notes": [
+        "Limits are fixed local ceilings, not a whole-net allowance. Geometry outside every local window still has to follow nominal coupling.",
+        "Maximum nearest-copper distance uses a conservative sampling error bound. Uncoupled lengths are exact analytical capsule coverage.",
+        "Paired 45-degree corners are accepted only when both offset legs are independently verified.",
+        "The 25 nm corner recognizer covers retained 20 nm inward rounding. It does not increase the 2 nm outside maximum tolerance.",
+        "A region is selected by net stem and layer. It cannot waive a neighboring pair or a width, clearance, drill or plane violation."
+      ]
+    },
+    {
+      "schema_version": 1,
+      "scope": "Wi-Fi PCIe data and reference clock",
+      "nominal_gap_mm": 0.1524,
+      "maximum_rounding_tolerance_mm": 2e-06,
+      "paired_corner_leg_tolerance_mm": 2.5e-05,
+      "maximum_sample_step_mm": 0.005,
+      "outside_uncoupled_rounding_length_mm": 1e-06,
+      "pairs": [
+        {
+          "stem": "/Mu Carrier/WIFI_PCIE_TX_RAW",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/WIFI_PCIE_RX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/WIFI_PCIE_TX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/WIFI_REFCLK",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        },
+        {
+          "stem": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ],
+            "B.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ]
+          }
+        }
+      ],
+      "regions": [
+        {
+          "name": "wifi tx A1 lands",
+          "category": "pad_fanout",
+          "stem": "/Mu Carrier/WIFI_PCIE_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.64,
+            55.57,
+            207.86,
+            56.28
+          ],
+          "max_total_length_mm": {
+            "P": 0.22,
+            "N": 0.22
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.11,
+            "N": 0.11
+          },
+          "max_nearest_gap_mm": 0.24
+        },
+        {
+          "name": "wifi tx F source vias",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/WIFI_PCIE_TX_RAW",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            203.34,
+            54.04,
+            204.1,
+            55.16
+          ],
+          "max_total_length_mm": {
+            "P": 0.73,
+            "N": 0.72
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.63,
+            "N": 0.62
+          },
+          "max_nearest_gap_mm": 0.64
+        },
+        {
+          "name": "wifi tx B source vias",
+          "category": "via_fanout",
+          "stem": "/Mu Carrier/WIFI_PCIE_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            203.34,
+            54.04,
+            203.61,
+            55.16
+          ],
+          "max_total_length_mm": {
+            "P": 0.42,
+            "N": 0.42
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.31,
+            "N": 0.31
+          },
+          "max_nearest_gap_mm": 0.45
+        },
+        {
+          "name": "wifi tx capacitor inputs",
+          "category": "cap_fanout",
+          "stem": "/Mu Carrier/WIFI_PCIE_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            204.9,
+            129.48,
+            206.5,
+            130.13
+          ],
+          "max_total_length_mm": {
+            "P": 0.82,
+            "N": 0.82
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.7,
+            "N": 0.7
+          },
+          "max_nearest_gap_mm": 0.79
+        },
+        {
+          "name": "wifi tx raw length tuning",
+          "category": "single_leg_tuning",
+          "stem": "/Mu Carrier/WIFI_PCIE_TX_RAW",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            206.75,
+            104.99,
+            208.18,
+            106.76
+          ],
+          "max_total_length_mm": {
+            "P": 2.79,
+            "N": 1.79
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.76,
+            "N": 1.76
+          },
+          "max_nearest_gap_mm": 1.04
+        },
+        {
+          "name": "wifi rx A1 lands",
+          "category": "pad_fanout",
+          "stem": "/WIFI_PCIE_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.84,
+            56.31,
+            216.06,
+            57.04
+          ],
+          "max_total_length_mm": {
+            "P": 0.22,
+            "N": 0.22
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.11,
+            "N": 0.11
+          },
+          "max_nearest_gap_mm": 0.24
+        },
+        {
+          "name": "wifi rx F source vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_PCIE_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            217.09,
+            56.34,
+            218.16,
+            57.26
+          ],
+          "max_total_length_mm": {
+            "P": 0.99,
+            "N": 0.6
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.88,
+            "N": 0.49
+          },
+          "max_nearest_gap_mm": 0.68
+        },
+        {
+          "name": "wifi rx In2 source vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_PCIE_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            215.89,
+            56.34,
+            218.16,
+            57.26
+          ],
+          "max_total_length_mm": {
+            "P": 2.2,
+            "N": 1.7
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.09,
+            "N": 1.59
+          },
+          "max_nearest_gap_mm": 0.76
+        },
+        {
+          "name": "wifi rx In2 receiver vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_PCIE_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            206.21,
+            134.29,
+            207.66,
+            135.31
+          ],
+          "max_total_length_mm": {
+            "P": 0.89,
+            "N": 1.53
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.78,
+            "N": 1.42
+          },
+          "max_nearest_gap_mm": 0.79
+        },
+        {
+          "name": "wifi rx F receiver vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_PCIE_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            206.21,
+            134.29,
+            207.21,
+            135.21
+          ],
+          "max_total_length_mm": {
+            "P": 0.53,
+            "N": 0.91
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.42,
+            "N": 0.8
+          },
+          "max_nearest_gap_mm": 0.67
+        },
+        {
+          "name": "wifi rx J40 lands",
+          "category": "connector_fanout",
+          "stem": "/WIFI_PCIE_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            208.24,
+            134.49,
+            208.46,
+            135.21
+          ],
+          "max_total_length_mm": {
+            "P": 0.22,
+            "N": 0.22
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.11,
+            "N": 0.11
+          },
+          "max_nearest_gap_mm": 0.24
+        },
+        {
+          "name": "wifi rx length tuning 1",
+          "category": "single_leg_tuning",
+          "stem": "/WIFI_PCIE_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            199.04,
+            89.99,
+            200.29,
+            91.5
+          ],
+          "max_total_length_mm": {
+            "P": 1.54,
+            "N": 2.38
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.49,
+            "N": 2.35
+          },
+          "max_nearest_gap_mm": 0.91
+        },
+        {
+          "name": "wifi rx length tuning 2",
+          "category": "single_leg_tuning",
+          "stem": "/WIFI_PCIE_RX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            199.07,
+            92.47,
+            200.32,
+            93.99
+          ],
+          "max_total_length_mm": {
+            "P": 1.55,
+            "N": 2.39
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.49,
+            "N": 2.35
+          },
+          "max_nearest_gap_mm": 0.91
+        },
+        {
+          "name": "wifi tx capacitor outputs",
+          "category": "cap_fanout",
+          "stem": "/WIFI_PCIE_TX",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            204.89,
+            130.87,
+            206.73,
+            131.78
+          ],
+          "max_total_length_mm": {
+            "P": 1.73,
+            "N": 0.68
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.57,
+            "N": 0.53
+          },
+          "max_nearest_gap_mm": 1.23
+        },
+        {
+          "name": "wifi tx B receiver vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_PCIE_TX",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            206.21,
+            132.34,
+            207.56,
+            133.76
+          ],
+          "max_total_length_mm": {
+            "P": 0.59,
+            "N": 2.54
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.57,
+            "N": 2.53
+          },
+          "max_nearest_gap_mm": 0.74
+        },
+        {
+          "name": "wifi tx F receiver vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_PCIE_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            206.21,
+            132.79,
+            207.21,
+            133.71
+          ],
+          "max_total_length_mm": {
+            "P": 0.53,
+            "N": 0.91
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.42,
+            "N": 0.8
+          },
+          "max_nearest_gap_mm": 0.67
+        },
+        {
+          "name": "wifi tx J40 lands",
+          "category": "connector_fanout",
+          "stem": "/WIFI_PCIE_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            208.24,
+            132.99,
+            208.46,
+            133.71
+          ],
+          "max_total_length_mm": {
+            "P": 0.22,
+            "N": 0.22
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.11,
+            "N": 0.11
+          },
+          "max_nearest_gap_mm": 0.24
+        },
+        {
+          "name": "wifi source clock A1 lands",
+          "category": "pad_fanout",
+          "stem": "/WIFI_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.84,
+            69.81,
+            216.06,
+            70.54
+          ],
+          "max_total_length_mm": {
+            "P": 0.22,
+            "N": 0.22
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.11,
+            "N": 0.11
+          },
+          "max_nearest_gap_mm": 0.24
+        },
+        {
+          "name": "wifi source clock F right vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            209.24,
+            69.64,
+            210.21,
+            70.66
+          ],
+          "max_total_length_mm": {
+            "P": 0.91,
+            "N": 0.94
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.8,
+            "N": 0.83
+          },
+          "max_nearest_gap_mm": 0.61
+        },
+        {
+          "name": "wifi source clock In2 right vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_REFCLK",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            208.85,
+            69.64,
+            209.46,
+            70.66
+          ],
+          "max_total_length_mm": {
+            "P": 0.61,
+            "N": 0.62
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.49,
+            "N": 0.45
+          },
+          "max_nearest_gap_mm": 0.55
+        },
+        {
+          "name": "wifi source clock F resistor vias",
+          "category": "resistor_via_fanout",
+          "stem": "/WIFI_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            205.06,
+            68.34,
+            206.11,
+            70.06
+          ],
+          "max_total_length_mm": {
+            "P": 0.85,
+            "N": 0.83
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.85,
+            "N": 0.83
+          },
+          "max_nearest_gap_mm": 1.33
+        },
+        {
+          "name": "wifi source clock In2 resistor vias",
+          "category": "via_fanout",
+          "stem": "/WIFI_REFCLK",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            205.2,
+            68.4,
+            206.11,
+            70.06
+          ],
+          "max_total_length_mm": {
+            "P": 1.34,
+            "N": 1.29
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.84,
+            "N": 1.25
+          },
+          "max_nearest_gap_mm": 0.93
+        },
+        {
+          "name": "wifi source clock length tuning",
+          "category": "single_leg_tuning",
+          "stem": "/WIFI_REFCLK",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            206.44,
+            69.07,
+            208.85,
+            70.95
+          ],
+          "max_total_length_mm": {
+            "P": 3.48,
+            "N": 2.48
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.76,
+            "N": 1.76
+          },
+          "max_nearest_gap_mm": 1.04
+        },
+        {
+          "name": "wifi clock F resistor outputs",
+          "category": "resistor_via_fanout",
+          "stem": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            201.89,
+            68.29,
+            203.64,
+            70.06
+          ],
+          "max_total_length_mm": {
+            "P": 1.82,
+            "N": 1.97
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.38,
+            "N": 1.53
+          },
+          "max_nearest_gap_mm": 0.96
+        },
+        {
+          "name": "wifi clock B source vias",
+          "category": "via_fanout",
+          "stem": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            200.85,
+            68.49,
+            202.16,
+            70.23
+          ],
+          "max_total_length_mm": {
+            "P": 1.18,
+            "N": 1.86
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.02,
+            "N": 1.67
+          },
+          "max_nearest_gap_mm": 0.78
+        },
+        {
+          "name": "wifi clock B receiver vias",
+          "category": "via_fanout",
+          "stem": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            206.14,
+            135.79,
+            206.94,
+            136.71
+          ],
+          "max_total_length_mm": {
+            "P": 0.71,
+            "N": 0.48
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.6,
+            "N": 0.37
+          },
+          "max_nearest_gap_mm": 0.51
+        },
+        {
+          "name": "wifi clock F receiver vias",
+          "category": "via_fanout",
+          "stem": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            206.21,
+            135.79,
+            207.21,
+            136.71
+          ],
+          "max_total_length_mm": {
+            "P": 0.53,
+            "N": 0.91
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.42,
+            "N": 0.8
+          },
+          "max_nearest_gap_mm": 0.67
+        },
+        {
+          "name": "wifi clock J40 lands",
+          "category": "connector_fanout",
+          "stem": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            208.24,
+            135.99,
+            208.46,
+            136.71
+          ],
+          "max_total_length_mm": {
+            "P": 0.22,
+            "N": 0.22
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.11,
+            "N": 0.11
+          },
+          "max_nearest_gap_mm": 0.24
+        },
+        {
+          "name": "wifi clock length tuning 1",
+          "category": "single_leg_tuning",
+          "stem": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            198.12,
+            89.99,
+            199.45,
+            91.56
+          ],
+          "max_total_length_mm": {
+            "P": 2.48,
+            "N": 1.6
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.44,
+            "N": 1.55
+          },
+          "max_nearest_gap_mm": 0.94
+        },
+        {
+          "name": "wifi clock length tuning 2",
+          "category": "single_leg_tuning",
+          "stem": "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            198.12,
+            92.53,
+            199.45,
+            94.11
+          ],
+          "max_total_length_mm": {
+            "P": 2.49,
+            "N": 1.6
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.43,
+            "N": 1.54
+          },
+          "max_nearest_gap_mm": 0.94
+        }
+      ],
+      "notes": [
+        "All limits apply to clipped geometry for exactly one pair and copper layer.",
+        "Outside these local windows, the full traces and arcs retain nominal coupling.",
+        "Arc centers follow native KiCad geometry; per-arc center rounding is measured and bounded, never applied to straight-to-straight spacing.",
+        "Native DRC still checks every physical clearance, minimum gap, drill, width and layer condition."
+      ]
+    },
+    {
+      "schema_version": 1,
+      "scope": "center existing 85 ohm A1 and FPC103 escapes",
+      "nominal_gap_mm": 0.1524,
+      "maximum_rounding_tolerance_mm": 2e-06,
+      "paired_corner_leg_tolerance_mm": 2.5e-05,
+      "maximum_sample_step_mm": 0.005,
+      "outside_uncoupled_rounding_length_mm": 1e-06,
+      "pairs": [
+        {
+          "stem": "/GBE_HOST_RX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ]
+          }
+        },
+        {
+          "stem": "/GBE_HOST_TX",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ]
+          }
+        },
+        {
+          "stem": "/GBE_REFCLK",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.183
+            ]
+          }
+        }
+      ],
+      "regions": [
+        {
+          "name": "GBE_HOST_RX A1 pad lands",
+          "category": "pad_fanout",
+          "stem": "/GBE_HOST_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.995001,
+            63.945,
+            216.712301,
+            64.655
+          ],
+          "max_total_length_mm": {
+            "P": 0.762,
+            "N": 0.762
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.757,
+            "N": 0.757
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "GBE_HOST_RX A1 via flare",
+          "category": "via_fanout",
+          "stem": "/GBE_HOST_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            217.3627,
+            63.945,
+            218.055,
+            64.655
+          ],
+          "max_total_length_mm": {
+            "P": 0.737,
+            "N": 0.378
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.731,
+            "N": 0.373
+          },
+          "max_nearest_gap_mm": 0.601
+        },
+        {
+          "name": "GBE_HOST_RX FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/GBE_HOST_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.89207,
+            120.96,
+            321.760001,
+            121.56
+          ],
+          "max_total_length_mm": {
+            "P": 1.979,
+            "N": 1.158
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.979,
+            "N": 1.158
+          },
+          "max_nearest_gap_mm": 0.624
+        },
+        {
+          "name": "GBE_HOST_TX A1 pad lands",
+          "category": "pad_fanout",
+          "stem": "/GBE_HOST_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.745001,
+            63.195,
+            208.512301,
+            63.905
+          ],
+          "max_total_length_mm": {
+            "P": 0.812,
+            "N": 0.812
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.807,
+            "N": 0.807
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "GBE_HOST_TX A1 via flare",
+          "category": "via_fanout",
+          "stem": "/GBE_HOST_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            209.1127,
+            63.195,
+            209.805,
+            63.905
+          ],
+          "max_total_length_mm": {
+            "P": 0.737,
+            "N": 0.378
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.731,
+            "N": 0.373
+          },
+          "max_nearest_gap_mm": 0.601
+        },
+        {
+          "name": "GBE_HOST_TX FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/GBE_HOST_TX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.89207,
+            122.46,
+            321.760001,
+            123.06
+          ],
+          "max_total_length_mm": {
+            "P": 1.979,
+            "N": 1.158
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.979,
+            "N": 1.158
+          },
+          "max_nearest_gap_mm": 0.624
+        },
+        {
+          "name": "GBE_REFCLK A1 pad lands",
+          "category": "pad_fanout",
+          "stem": "/GBE_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.995001,
+            71.445,
+            216.712301,
+            72.155
+          ],
+          "max_total_length_mm": {
+            "P": 0.762,
+            "N": 0.762
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.757,
+            "N": 0.757
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "GBE_REFCLK A1 via flare",
+          "category": "via_fanout",
+          "stem": "/GBE_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            217.3627,
+            71.445,
+            218.055,
+            72.155
+          ],
+          "max_total_length_mm": {
+            "P": 0.737,
+            "N": 0.378
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.731,
+            "N": 0.373
+          },
+          "max_nearest_gap_mm": 0.601
+        },
+        {
+          "name": "GBE_REFCLK FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/GBE_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.269257,
+            123.91,
+            321.760001,
+            124.56
+          ],
+          "max_total_length_mm": {
+            "P": 2.646,
+            "N": 1.724
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.646,
+            "N": 1.724
+          },
+          "max_nearest_gap_mm": 0.67
+        }
+      ],
+      "notes": [
+        "These are the existing pad-to-via escapes. The long board-to-board interfaces remain unrouted.",
+        "Every centerline is clipped to the exact local window. Copper outside all windows stays at nominal coupling.",
+        "No minimum gap, width, clearance, via drill or ground-plane restriction is waived.",
+        "The fixed ceilings include at most 0.016 mm of length margin and 0.006 mm of sampled-gap upper-bound margin over this reviewed geometry."
+      ]
+    },
+    {
+      "schema_version": 1,
+      "scope": "center existing 100 ohm A1 and FPC103 escapes",
+      "nominal_gap_mm": 0.254,
+      "maximum_rounding_tolerance_mm": 2e-06,
+      "paired_corner_leg_tolerance_mm": 2.5e-05,
+      "maximum_sample_step_mm": 0.005,
+      "outside_uncoupled_rounding_length_mm": 1e-06,
+      "pairs": [
+        {
+          "stem": "/TCP0_TX0",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1521
+            ]
+          }
+        },
+        {
+          "stem": "/TCP0_TX1",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1521
+            ]
+          }
+        },
+        {
+          "stem": "/TCP0_TXRX0",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1521
+            ]
+          }
+        },
+        {
+          "stem": "/TCP0_TXRX1",
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1521
+            ]
+          }
+        }
+      ],
+      "regions": [
+        {
+          "name": "TCP0_TX0 A1 pad lands",
+          "category": "pad_fanout",
+          "stem": "/TCP0_TX0",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.695001,
+            111.195,
+            208.476951,
+            111.905
+          ],
+          "max_total_length_mm": {
+            "P": 0.812,
+            "N": 0.812
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.807,
+            "N": 0.807
+          },
+          "max_nearest_gap_mm": 0.356
+        },
+        {
+          "name": "TCP0_TX0 A1 via flare",
+          "category": "via_fanout",
+          "stem": "/TCP0_TX0",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            209.09805,
+            111.195,
+            209.755,
+            111.905
+          ],
+          "max_total_length_mm": {
+            "P": 0.328,
+            "N": 0.687
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.323,
+            "N": 0.681
+          },
+          "max_nearest_gap_mm": 0.632
+        },
+        {
+          "name": "TCP0_TX0 FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/TCP0_TX0",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.89207,
+            114.79,
+            321.76,
+            115.575236
+          ],
+          "max_total_length_mm": {
+            "P": 2.199,
+            "N": 1.258
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.199,
+            "N": 1.258
+          },
+          "max_nearest_gap_mm": 0.664
+        },
+        {
+          "name": "TCP0_TX1 A1 pad lands",
+          "category": "pad_fanout",
+          "stem": "/TCP0_TX1",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.745001,
+            108.145,
+            208.476951,
+            108.855
+          ],
+          "max_total_length_mm": {
+            "P": 0.762,
+            "N": 0.762
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.757,
+            "N": 0.757
+          },
+          "max_nearest_gap_mm": 0.356
+        },
+        {
+          "name": "TCP0_TX1 A1 via flare",
+          "category": "via_fanout",
+          "stem": "/TCP0_TX1",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            209.14805,
+            108.145,
+            209.805,
+            108.855
+          ],
+          "max_total_length_mm": {
+            "P": 0.328,
+            "N": 0.687
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.323,
+            "N": 0.681
+          },
+          "max_nearest_gap_mm": 0.632
+        },
+        {
+          "name": "TCP0_TX1 FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/TCP0_TX1",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.89207,
+            116.44,
+            321.76,
+            117.112472
+          ],
+          "max_total_length_mm": {
+            "P": 1.987,
+            "N": 1.255
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.987,
+            "N": 1.255
+          },
+          "max_nearest_gap_mm": 0.65
+        },
+        {
+          "name": "TCP0_TXRX0 A1 pad lands",
+          "category": "pad_fanout",
+          "stem": "/TCP0_TXRX0",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.695001,
+            109.695,
+            208.476951,
+            110.405
+          ],
+          "max_total_length_mm": {
+            "P": 0.812,
+            "N": 0.812
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.807,
+            "N": 0.807
+          },
+          "max_nearest_gap_mm": 0.356
+        },
+        {
+          "name": "TCP0_TXRX0 A1 via flare",
+          "category": "via_fanout",
+          "stem": "/TCP0_TXRX0",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            209.09805,
+            109.695,
+            209.755,
+            110.405
+          ],
+          "max_total_length_mm": {
+            "P": 0.328,
+            "N": 0.687
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.323,
+            "N": 0.681
+          },
+          "max_nearest_gap_mm": 0.632
+        },
+        {
+          "name": "TCP0_TXRX0 FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/TCP0_TXRX0",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.89207,
+            117.94,
+            321.76,
+            118.56
+          ],
+          "max_total_length_mm": {
+            "P": 2.087,
+            "N": 1.137
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.521,
+            "N": 0.569
+          },
+          "max_nearest_gap_mm": 0.699
+        },
+        {
+          "name": "TCP0_TXRX1 A1 pad lands",
+          "category": "pad_fanout",
+          "stem": "/TCP0_TXRX1",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.745001,
+            106.695,
+            208.476951,
+            107.405
+          ],
+          "max_total_length_mm": {
+            "P": 0.762,
+            "N": 0.762
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.757,
+            "N": 0.757
+          },
+          "max_nearest_gap_mm": 0.356
+        },
+        {
+          "name": "TCP0_TXRX1 A1 via flare",
+          "category": "via_fanout",
+          "stem": "/TCP0_TXRX1",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            209.14805,
+            106.695,
+            209.805,
+            107.405
+          ],
+          "max_total_length_mm": {
+            "P": 0.328,
+            "N": 0.687
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.323,
+            "N": 0.681
+          },
+          "max_nearest_gap_mm": 0.632
+        },
+        {
+          "name": "TCP0_TXRX1 FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/TCP0_TXRX1",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.89207,
+            119.44,
+            321.76,
+            120.119748
+          ],
+          "max_total_length_mm": {
+            "P": 2.007,
+            "N": 1.233
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.007,
+            "N": 1.233
+          },
+          "max_nearest_gap_mm": 0.677
+        }
+      ],
+      "notes": [
+        "These are the existing pad-to-via escapes. The long board-to-board interfaces remain unrouted.",
+        "Every centerline is clipped to the exact local window. Copper outside all windows stays at nominal coupling.",
+        "No minimum gap, width, clearance, via drill or ground-plane restriction is waived.",
+        "The fixed ceilings include at most 0.016 mm of length margin and 0.006 mm of sampled-gap upper-bound margin over this reviewed geometry."
+      ]
+    }
+  ],
+  "signal_paths": [
+    {
+      "name": "NVMe RX0",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_L0_RX_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_L0_RX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_L0_RX_P": [
+          "A1.40",
+          "J10.43"
+        ],
+        "/Mu Carrier/PCIE_M_L0_RX_N": [
+          "A1.42",
+          "J10.41"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2
+    },
+    {
+      "name": "NVMe TX0",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_L0_TX_RAW_P",
+          "/Mu Carrier/PCIE_M_L0_TX_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_L0_TX_RAW_N",
+          "/Mu Carrier/PCIE_M_L0_TX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_L0_TX_RAW_P": [
+          "A1.37",
+          "C68.1"
+        ],
+        "/Mu Carrier/PCIE_M_L0_TX_RAW_N": [
+          "A1.39",
+          "C69.1"
+        ],
+        "/Mu Carrier/PCIE_M_L0_TX_P": [
+          "C68.2",
+          "J10.49"
+        ],
+        "/Mu Carrier/PCIE_M_L0_TX_N": [
+          "C69.2",
+          "J10.47"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2,
+      "post_cap_nets": {
+        "P": "/Mu Carrier/PCIE_M_L0_TX_P",
+        "N": "/Mu Carrier/PCIE_M_L0_TX_N"
+      },
+      "max_post_cap_path_with_via_mm": 8.0
+    },
+    {
+      "name": "NVMe RX1",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_L1_RX_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_L1_RX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_L1_RX_P": [
+          "A1.46",
+          "J10.31"
+        ],
+        "/Mu Carrier/PCIE_M_L1_RX_N": [
+          "A1.48",
+          "J10.29"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2
+    },
+    {
+      "name": "NVMe TX1",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_L1_TX_RAW_P",
+          "/Mu Carrier/PCIE_M_L1_TX_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_L1_TX_RAW_N",
+          "/Mu Carrier/PCIE_M_L1_TX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_L1_TX_RAW_P": [
+          "A1.43",
+          "C592.1"
+        ],
+        "/Mu Carrier/PCIE_M_L1_TX_RAW_N": [
+          "A1.45",
+          "C593.1"
+        ],
+        "/Mu Carrier/PCIE_M_L1_TX_P": [
+          "C592.2",
+          "J10.37"
+        ],
+        "/Mu Carrier/PCIE_M_L1_TX_N": [
+          "C593.2",
+          "J10.35"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2,
+      "post_cap_nets": {
+        "P": "/Mu Carrier/PCIE_M_L1_TX_P",
+        "N": "/Mu Carrier/PCIE_M_L1_TX_N"
+      },
+      "max_post_cap_path_with_via_mm": 8.0
+    },
+    {
+      "name": "NVMe RX2",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_L2_RX_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_L2_RX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_L2_RX_P": [
+          "A1.52",
+          "J10.19"
+        ],
+        "/Mu Carrier/PCIE_M_L2_RX_N": [
+          "A1.54",
+          "J10.17"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2
+    },
+    {
+      "name": "NVMe TX2",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_L2_TX_RAW_P",
+          "/Mu Carrier/PCIE_M_L2_TX_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_L2_TX_RAW_N",
+          "/Mu Carrier/PCIE_M_L2_TX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_L2_TX_RAW_P": [
+          "A1.49",
+          "C594.1"
+        ],
+        "/Mu Carrier/PCIE_M_L2_TX_RAW_N": [
+          "A1.51",
+          "C595.1"
+        ],
+        "/Mu Carrier/PCIE_M_L2_TX_P": [
+          "C594.2",
+          "J10.25"
+        ],
+        "/Mu Carrier/PCIE_M_L2_TX_N": [
+          "C595.2",
+          "J10.23"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2,
+      "post_cap_nets": {
+        "P": "/Mu Carrier/PCIE_M_L2_TX_P",
+        "N": "/Mu Carrier/PCIE_M_L2_TX_N"
+      },
+      "max_post_cap_path_with_via_mm": 8.0
+    },
+    {
+      "name": "NVMe RX3",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_L3_RX_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_L3_RX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_L3_RX_P": [
+          "A1.58",
+          "J10.7"
+        ],
+        "/Mu Carrier/PCIE_M_L3_RX_N": [
+          "A1.60",
+          "J10.5"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2
+    },
+    {
+      "name": "NVMe TX3",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_L3_TX_RAW_P",
+          "/Mu Carrier/PCIE_M_L3_TX_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_L3_TX_RAW_N",
+          "/Mu Carrier/PCIE_M_L3_TX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_L3_TX_RAW_P": [
+          "A1.55",
+          "C596.1"
+        ],
+        "/Mu Carrier/PCIE_M_L3_TX_RAW_N": [
+          "A1.57",
+          "C597.1"
+        ],
+        "/Mu Carrier/PCIE_M_L3_TX_P": [
+          "C596.2",
+          "J10.13"
+        ],
+        "/Mu Carrier/PCIE_M_L3_TX_N": [
+          "C597.2",
+          "J10.11"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2,
+      "post_cap_nets": {
+        "P": "/Mu Carrier/PCIE_M_L3_TX_P",
+        "N": "/Mu Carrier/PCIE_M_L3_TX_N"
+      },
+      "max_post_cap_path_with_via_mm": 8.0
+    },
+    {
+      "name": "NVMe reference clock",
+      "nets": {
+        "P": [
+          "/Mu Carrier/PCIE_M_REFCLK_SRC_P",
+          "/Mu Carrier/PCIE_M_REFCLK_P"
+        ],
+        "N": [
+          "/Mu Carrier/PCIE_M_REFCLK_SRC_N",
+          "/Mu Carrier/PCIE_M_REFCLK_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/PCIE_M_REFCLK_SRC_P": [
+          "A1.97",
+          "R48.1"
+        ],
+        "/Mu Carrier/PCIE_M_REFCLK_SRC_N": [
+          "A1.99",
+          "R49.1"
+        ],
+        "/Mu Carrier/PCIE_M_REFCLK_P": [
+          "R48.2",
+          "J10.55"
+        ],
+        "/Mu Carrier/PCIE_M_REFCLK_N": [
+          "R49.2",
+          "J10.53"
+        ]
+      },
+      "max_pn_difference_mm": 0.381,
+      "via_transition_count": 2
+    },
+    {
+      "name": "Wi-Fi TX",
+      "nets": {
+        "P": [
+          "/Mu Carrier/WIFI_PCIE_TX_RAW_P",
+          "/WIFI_PCIE_TX_P"
+        ],
+        "N": [
+          "/Mu Carrier/WIFI_PCIE_TX_RAW_N",
+          "/WIFI_PCIE_TX_N"
+        ]
+      },
+      "endpoints": {
+        "/Mu Carrier/WIFI_PCIE_TX_RAW_P": [
+          "A1.31",
+          "C590.1"
+        ],
+        "/Mu Carrier/WIFI_PCIE_TX_RAW_N": [
+          "A1.33",
+          "C591.1"
+        ],
+        "/WIFI_PCIE_TX_P": [
+          "C590.2",
+          "J40.35"
+        ],
+        "/WIFI_PCIE_TX_N": [
+          "C591.2",
+          "J40.37"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2,
+      "post_cap_nets": {
+        "P": "/WIFI_PCIE_TX_P",
+        "N": "/WIFI_PCIE_TX_N"
+      },
+      "max_post_cap_path_with_via_mm": 8.0
+    },
+    {
+      "name": "Wi-Fi RX",
+      "nets": {
+        "P": [
+          "/WIFI_PCIE_RX_P"
+        ],
+        "N": [
+          "/WIFI_PCIE_RX_N"
+        ]
+      },
+      "endpoints": {
+        "/WIFI_PCIE_RX_P": [
+          "A1.34",
+          "J40.41"
+        ],
+        "/WIFI_PCIE_RX_N": [
+          "A1.36",
+          "J40.43"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2
+    },
+    {
+      "name": "Wi-Fi reference clock",
+      "nets": {
+        "P": [
+          "/WIFI_REFCLK_P",
+          "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_P"
+        ],
+        "N": [
+          "/WIFI_REFCLK_N",
+          "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_N"
+        ]
+      },
+      "endpoints": {
+        "/WIFI_REFCLK_P": [
+          "A1.88",
+          "R177.1"
+        ],
+        "/WIFI_REFCLK_N": [
+          "A1.90",
+          "R178.1"
+        ],
+        "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_P": [
+          "R177.2",
+          "J40.47"
+        ],
+        "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_N": [
+          "R178.2",
+          "J40.49"
+        ]
+      },
+      "max_pn_difference_mm": 0.381,
+      "via_transition_count": 4
+    }
+  ]
+}

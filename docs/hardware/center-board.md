@@ -1,68 +1,78 @@
 # center board
 
-updated 10 september 2026. the saved eight-layer board now has 781
-footprints. it is 227 mm wide, from x=71.5 to x=298.5. narrowing the center
-leaves a 1.5 mm gap to each I/O board while keeping the total span at
-358 mm. the center still has no tracks or vias.
+updated 13 september 2026. the center board is 227 x 185 mm on the
+approved eight-layer stack. it has 781 footprints and 3,235 pads. the
+nvme and wi-fi pcie routing repairs are complete, but there is still a
+lot of main routing to do before this board can be ordered.
 
-## placement
+## routing so far
 
-the M.2 retainers now follow their sockets. the maker circuit, its switching
-keepouts, and the nearby header/jack group moved inward together. the
-lower-right USB-C and speaker group also moved inward to clear the new
-edge. the Mu, M.2 sockets, supports, and main cable connector datums stayed
-in place.
+the nvme data pairs and reference clock are routed, along with the wi-fi
+pcie data and clock connections. their tx capacitors sit on the back of
+the board near the sockets. the repairs include pair spacing, length
+matching, layer transitions, local ground returns and the nearby control
+routes. the repaired signals use F.Cu, In2.Cu and B.Cu.
 
-| part | saved position, mm | rotation |
+this checkpoint has 2,929 straight track sections, 33 arcs and 669 vias.
+native connectivity counts 1,725 unconnected items. KiCad's DRC list can
+stop at 499, so use the native count when checking routing progress.
+
+FPC103 pin 5 still has its original unfinished `/PLTRST_SRC_N` reset
+escape. the reset connection to the right board needs routing. 42 remaining
+usb pair-gap reports also need review. power distribution, usb,
+hdmi, the ethernet host link and the remaining main-board connections
+are unfinished.
+
+the strict check also reports existing library, footprint-type and symbol
+filter warnings. their saved review records no longer match the moved
+footprints, so those reviews need to be checked again.
+
+## shape and placement
+
+in the pcb editor, the outline runs from x=102.05 to x=329.05 and from
+y=36.55 to y=221.55. the installed layout uses the center translation
+`[-30.550001, -36.55]` in
+[`board-placement.json`](../../mechanical/board-placement.json). that puts
+the center back at x=71.5 to x=298.5, with 1.5 mm gaps to both i/o boards
+and a 358 mm board span before case walls.
+
+the bms notch is 64.9 mm wide with 1.5 mm inside radii. its editor side
+walls are x=183.10 and x=248.00, and its back is at y=185.25. in the
+installed frame those become x=152.55 and x=217.45, with the back at
+y=148.7. the notch opens through the front edge.
+
+the positions below use pcb editor coordinates, in mm.
+
+| part | position | rotation |
 | --- | --- | --- |
-| J10, NVMe socket | 189.55, 106.60 | 90° |
-| H3, NVMe retainer | 273.10, 97.35 | 0° |
-| J40, Wi-Fi/Bluetooth socket | 177.80, 88.05 | -90° |
-| H4, Wi-Fi/Bluetooth retainer | 144.25, 97.30 | 0° |
-| J2071, BMS power | 188.60, 143.69 | 0° |
-| J2073, BMS control | 176.50, 145.30 | 180° |
-| RS1, gauge shunt | 165.95, 135.40 | 180° |
-| J41, left OLED | 201.05, 145.00 | 180° |
-| J45, right OLED | 210.575, 145.00 | 180° |
-| J901, maker connector | 296.30, 6.00 | 180° |
-| J2300, radio interface | 82.25, 117.75 | 0° |
+| A1, mu socket | 211.850, 81.550 | 90° |
+| J10, nvme socket | 220.100, 143.150 | 90° |
+| H3, nvme retainer | 303.650, 133.900 | 0° |
+| J40, wi-fi/bluetooth socket | 208.350, 124.600 | -90° |
+| H4, wi-fi retainer | 174.800, 133.850 | 0° |
+| FPC102, left signals | 109.350, 71.050 | -90° |
+| FPC103, right signals | 321.750, 127.050 | 90° |
+| J2071, bms power | 219.150, 180.240 | 0° |
+| J2073, bms control | 207.050, 181.850 | 180° |
+| RS1, gauge shunt | 196.500, 171.950 | 180° |
+| J41, left oled | 231.600, 181.550 | 180° |
+| J45, right oled | 241.125, 181.550 | 180° |
+| J901, maker connector | 326.850, 42.550 | 180° |
+| J2300, radio interface | 112.800, 154.300 | 0° |
 
-RS1 separates FG_VSS from system GND. its sense filters and gauge inputs
-need short Kelvin connections. all return wiring must respect the gauge
-shunt and the separate BMS control island.
+the m.2 retainers line up with their sockets: the local offsets from pad 1
+are 9.25 x 83.55 mm for nvme 2280 and 9.25 x 33.55 mm for wi-fi 2230.
 
-the BMS opening runs from x=152.55 to x=217.45, with its back at y=148.7
-and 1.5 mm inside radii. the notch and its two connectors now clear the BMS
-thermal circuit's 0.8 mm rear strip. the complete cable and case fit is still
-being checked.
-
-## completed checks
-
-the power-converter support parts were placed by their actual functions.
-bootstrap, supply, feedback, current-sense and compensation connections
-were checked before fitting optional snubbers. bypasses that had been left
-behind by earlier IC moves were brought back to their own supply pins.
-J4 and J902 also have their native programming-probe keepouts restored.
-MK430 has its acoustic-port keepout back too. it blocks tracks, vias and
-pours on both outer layers while preserving the microphone's ground ring.
-
-the saved board passes the strict physical, edge, courtyard and silkscreen
-checks. its 781 components match the corrected schematic, all source links
-survive native save/reload, and all 3,235 pads match the native footprint
-definitions within the recorded serialization tolerance. the audit also
-corrected older pad-coordinate rounding and missing pad-role/zone metadata.
-
-the remaining advisories are documented library/marking differences,
-hybrid mounting-footprint types and generic symbol footprint filters.
-there are 2,087 native unconnected items. the complete laptop still needs
-the BMS work and the final project-wide checks before main routing starts.
+RS1 separates `FG_VSS` from system `GND`. its sense filters and gauge
+inputs need short kelvin connections. return wiring must respect the
+shunt and the separate bms control island.
 
 ## routing setup
 
-controlled-impedance routes use F.Cu, In2.Cu, or B.Cu. In2.Cu has ground
-on both sides. In5.Cu faces split power islands and is for general routing.
-the ground layers reject non-ground tracks. In4.Cu power distribution still
-needs to be drawn with the routes.
+In1.Cu, In3.Cu and In6.Cu are ground. In2.Cu has ground on both sides.
+In4.Cu is for power distribution; In5.Cu faces split power islands and
+is used for general routing. controlled-impedance signals use F.Cu,
+In2.Cu or B.Cu.
 
 | netclass | outer width / gap, mm | In2.Cu width / gap, mm |
 | --- | --- | --- |
@@ -70,12 +80,20 @@ needs to be drawn with the routes.
 | DIFF_90 | 0.1796 / 0.2032 | 0.111 / 0.203 |
 | DIFF_100 | 0.1521 / 0.254 | 0.091 / 0.254 |
 
-these settings come from `manufacturing/mainboard_stackup_release.json`.
-use `gen/setup_net_classes.py --project all` to check the actual projects.
-local escapes, neckdowns, reference transitions, and connector launches
-need their own review.
+these dimensions come from
+[`mainboard_stackup_release.json`](../../manufacturing/mainboard_stackup_release.json).
+the ethernet controller's pcie data and reference clock use `DIFF_85`;
+its mdi pairs use `DIFF_100`. usb uses `DIFF_90` and hdmi uses `DIFF_100`.
 
-use [build and verify](../build-and-verify.md) for the checks. native
-connectivity gives the full airwire count; KiCad's DRC list can stop at 499
-unconnected findings. run the six-board routing check after the source,
-layout, and mechanical records agree.
+the small gap areas around pads, vias and tuning are checked individually.
+`gen/check_center_pcie_coupling.py` checks the local limits and the copper
+outside them, plus the completed pcie paths. use
+[build and verify](../build-and-verify.md) for the release checks.
+
+## assembly work left
+
+the center frame and m.2 offsets are checked. the complete assembly
+export still stops at the saved bms board, which lacks J2072 from the
+current harness definition. the generated assembly datums also need a
+refresh after that is resolved. connector housings, cable bends, board
+supports and the final case height still need a measured fit.

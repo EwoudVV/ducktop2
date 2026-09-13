@@ -16,6 +16,7 @@ import math
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import uuid
 from collections import Counter, defaultdict
@@ -469,6 +470,88 @@ def run_command(command: list[str], cwd: Path, label: str) -> str:
     return result.stdout + "\n" + result.stderr
 
 
+def needs_center_pcie_coupling(pcb: Path, staged: Path, stage: str) -> bool:
+    if stage not in {"routing", "fabrication", "production"}:
+        return False
+    contract = board_contract(pcb)
+    if contract and contract["name"] == "center":
+        return True
+    prefix = r"(?:nvme |wifi pcie |center pcie )"
+    area_name = re.compile(r'\(name\s+"' + prefix, re.IGNORECASE)
+    rule_name = re.compile(r'\(rule\s+"' + prefix, re.IGNORECASE)
+    # Explicit candidate paths do not have a canonical board contract.
+    # Inspect their own areas and rules as well as the staged copy.
+    for board in {pcb, staged}:
+        if any(area_name.search(block) for block in
+               top_level_blocks(board.read_text(encoding="utf-8"), "(zone")):
+            return True
+        rules = board.with_suffix(".kicad_dru")
+        if rules.is_file() and rule_name.search(rules.read_text(encoding="utf-8")):
+            return True
+    return False
+
+
+def run_center_pcie_coupling(pcb: Path, staged: Path, reports: Path, stage: str) -> int:
+    """Require a fresh, complete coupling proof for the selected PCB copy."""
+    output = reports / "center-pcie-coupling.json"
+    execution = {"selected_pcb": str(pcb.resolve()), "checked_pcb": str(staged.resolve()),
+                 "stage": stage, "status": "failed"}
+    try:
+        if not needs_center_pcie_coupling(pcb, staged, stage):
+            return 0
+        reports.mkdir(parents=True, exist_ok=True)
+        checker = ROOT / "gen/check_center_pcie_coupling.py"
+        limits = ROOT / "manufacturing/center_pcie_layout_limits.json"
+        if not checker.is_file() or not limits.is_file():
+            raise RuntimeError("required center PCIe checker or layout limits are missing")
+        board_hash = sha256(pcb)
+        if sha256(staged) != board_hash:
+            raise RuntimeError("staged board does not match the selected PCB")
+        limits_hash = sha256(limits)
+        limits_document = json.loads(limits.read_text(encoding="utf-8"))
+        expected_suites = limits_document["suites"]
+        if not isinstance(expected_suites, list) or not expected_suites:
+            raise RuntimeError("center PCIe layout limits contain no check suites")
+        expected_scopes = Counter(suite["scope"] for suite in expected_suites)
+        if limits_document.get("signal_paths"):
+            expected_scopes["complete PCIe signal paths"] += 1
+        output.unlink(missing_ok=True)
+        run_command([
+            sys.executable, str(checker.resolve()), "--pcb", str(staged.resolve()),
+            "--limits", str(limits.resolve()), "--output", str(output.resolve()),
+        ], staged.parent, "Center PCIe coupling")
+        if sha256(pcb) != board_hash or sha256(staged) != board_hash or sha256(limits) != limits_hash:
+            raise RuntimeError("center PCIe checker changed a board or its layout limits")
+        proof = json.loads(output.read_text(encoding="utf-8"))
+        suites = proof.get("suites")
+        if proof.get("status") != "passed" or not isinstance(suites, list) or not suites:
+            raise RuntimeError("center PCIe checker did not produce a complete passing proof")
+        if proof.get("candidate_sha256") != board_hash or proof.get("limits_sha256") != limits_hash:
+            raise RuntimeError("center PCIe proof does not match the selected board and layout limits")
+        if proof.get("exact_pcb_path") != str(staged.resolve()):
+            raise RuntimeError("center PCIe proof checked a different PCB path")
+        if Counter(suite["scope"] for suite in suites) != expected_scopes:
+            raise RuntimeError("center PCIe proof does not cover every layout check suite")
+        if any(suite.get("status") != "passed" or suite.get("blocking_findings") != []
+               for suite in suites):
+            raise RuntimeError("center PCIe coupling has blocking or incomplete suite results")
+        execution.update(status="passed", candidate_sha256=board_hash,
+                         limits_sha256=limits_hash, suites_checked=len(suites))
+        print(f"Center PCIe coupling: PASS ({len(suites)} suites on the selected board)")
+        return 0
+    except (OSError, RuntimeError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as exc:
+        execution["error"] = str(exc)
+        print(f"Center PCIe coupling: FAIL: {exc}")
+        if "ModuleNotFoundError" in str(exc) or "No module named" in str(exc):
+            print("Geometry dependencies: python -m pip install -r gen/requirements-release.txt")
+        return 1
+    finally:
+        if execution.get("error") or execution["status"] == "passed":
+            reports.mkdir(parents=True, exist_ok=True)
+            (reports / "center-pcie-coupling-execution.json").write_text(
+                json.dumps(execution, indent=2) + "\n", encoding="utf-8")
+
+
 def native_parity_completed(output: str, report: dict) -> bool:
     # KiCad can return success and an empty parity array when it skipped the
     # comparison. Require its completion message as well as the JSON result.
@@ -756,6 +839,7 @@ def run_pcb_checks(cli: str, pcb: Path, tempdir: Path,
     design['drc_exclusions']=[]
     settings_path.write_text(json.dumps(settings,indent=2)+'\n')
     if ignored:print('Staged DRC restores ignored categories: '+', '.join(ignored))
+    failures += run_center_pcie_coupling(pcb, staged, reports, stage)
     drc_path = reports / "drc.json"
     drc_output = run_command([
         cli, "pcb", "drc", "--severity-all", "--severity-exclusions", "--all-track-errors",

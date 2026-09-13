@@ -137,3 +137,247 @@
 (rule "center solid ground layers"
     (condition "(A.Layer == 'In1.Cu' || A.Layer == 'In3.Cu' || A.Layer == 'In6.Cu') && A.NetName != 'GND'")
     (constraint disallow track))
+
+# local connector, component and tuning gaps.
+# the full copper outside these areas is checked by gen/check_center_pcie_coupling.py.
+# widths, minimum gap, clearance and ground-layer rules still apply.
+# these maximums use KiCad parallel-segment measurements; the layout checker also
+# limits actual nearest-copper distance and length inside every local area.
+
+(rule "nvme tx3 source paired jog"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_TX_RAW') && A.intersectsArea('nvme tx3 source paired jog')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.2633mm)))
+
+(rule "nvme tx2 source paired jog"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_TX_RAW') && A.intersectsArea('nvme tx2 source paired jog')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.2775mm)))
+
+(rule "nvme rx2 skew tuning"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_RX') && A.intersectsArea('nvme rx2 skew tuning')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3369mm)))
+
+(rule "nvme rx3 skew tuning"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_RX') && A.intersectsArea('nvme rx3 skew tuning')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3369mm)))
+
+(rule "nvme rx1 skew tuning"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L1_RX') && A.intersectsArea('nvme rx1 skew tuning')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3515mm)))
+
+(rule "nvme rx0 a1 land to via"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L0_RX') && A.intersectsArea('nvme rx0 a1 land to via')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3571mm)))
+
+(rule "nvme rx1 a1 land to via"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L1_RX') && A.intersectsArea('nvme rx1 a1 land to via')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3571mm)))
+
+(rule "nvme rx2 a1 land to via"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_RX') && A.intersectsArea('nvme rx2 a1 land to via')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3571mm)))
+
+(rule "nvme rx3 a1 land to via"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_RX') && A.intersectsArea('nvme rx3 a1 land to via')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3571mm)))
+
+(rule "nvme rx0 skew tuning"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L0_RX') && A.intersectsArea('nvme rx0 skew tuning')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3661mm)))
+
+(rule "nvme rx0 j10 lands"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L0_RX') && A.intersectsArea('nvme rx0 j10 lands')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3671mm)))
+
+(rule "nvme rx1 j10 lands"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L1_RX') && A.intersectsArea('nvme rx1 j10 lands')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3671mm)))
+
+(rule "nvme rx2 j10 lands"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_RX') && A.intersectsArea('nvme rx2 j10 lands')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3671mm)))
+
+(rule "nvme rx3 j10 lands"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_RX') && A.intersectsArea('nvme rx3 j10 lands')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3671mm)))
+
+(rule "nvme tx0 output via to j10"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L0_TX') && A.intersectsArea('nvme tx0 output via to j10')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3671mm)))
+
+(rule "nvme tx1 output via to j10"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L1_TX') && A.intersectsArea('nvme tx1 output via to j10')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3671mm)))
+
+(rule "nvme tx2 output via to j10"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_TX') && A.intersectsArea('nvme tx2 output via to j10')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3671mm)))
+
+(rule "nvme tx3 cap input flare"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_TX_RAW') && A.intersectsArea('nvme tx3 cap input flare')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3725mm)))
+
+(rule "nvme rx0 inner launch"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L0_RX') && A.intersectsArea('nvme rx0 inner launch')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.4376mm)))
+
+(rule "nvme rx1 inner launch"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L1_RX') && A.intersectsArea('nvme rx1 inner launch')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.4376mm)))
+
+(rule "nvme rx2 inner launch"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_RX') && A.intersectsArea('nvme rx2 inner launch')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.4376mm)))
+
+(rule "nvme rx3 inner launch"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_RX') && A.intersectsArea('nvme rx3 inner launch')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.4376mm)))
+
+(rule "nvme tx3 output via to j10"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_TX') && A.intersectsArea('nvme tx3 output via to j10')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.5271mm)))
+
+(rule "nvme tx0 cap to output via"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L0_TX') && A.intersectsArea('nvme tx0 cap to output via')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.5671mm)))
+
+(rule "nvme tx1 cap to output via"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L1_TX') && A.intersectsArea('nvme tx1 cap to output via')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.5671mm)))
+
+(rule "nvme tx2 cap to output via"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_TX') && A.intersectsArea('nvme tx2 cap to output via')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.5671mm)))
+
+(rule "nvme clock b output via flare"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_REFCLK') && A.intersectsArea('nvme clock b output via flare')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.6199mm)))
+
+(rule "nvme rx0 inner receiver"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L0_RX') && A.intersectsArea('nvme rx0 inner receiver')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.6628mm)))
+
+(rule "nvme rx1 inner receiver"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L1_RX') && A.intersectsArea('nvme rx1 inner receiver')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.6628mm)))
+
+(rule "nvme rx2 inner receiver"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_RX') && A.intersectsArea('nvme rx2 inner receiver')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.6628mm)))
+
+(rule "nvme rx3 inner receiver"
+    (layer "In2.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_RX') && A.intersectsArea('nvme rx3 inner receiver')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.6628mm)))
+
+(rule "nvme clock b source via flare"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_REFCLK') && A.intersectsArea('nvme clock b source via flare')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.6656mm)))
+
+(rule "nvme clock skew tuning 1"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_REFCLK') && A.intersectsArea('nvme clock skew tuning 1')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.7063mm)))
+
+(rule "nvme clock skew tuning 2"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_REFCLK') && A.intersectsArea('nvme clock skew tuning 2')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.7063mm)))
+
+(rule "nvme tx0 f source via flare"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L0_TX_RAW') && A.intersectsArea('nvme tx0 f source via flare')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.7171mm)))
+
+(rule "nvme tx1 f source via flare"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L1_TX_RAW') && A.intersectsArea('nvme tx1 f source via flare')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.7171mm)))
+
+(rule "nvme tx2 f source via flare"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L2_TX_RAW') && A.intersectsArea('nvme tx2 f source via flare')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.7171mm)))
+
+(rule "nvme tx3 f source via flare"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_TX_RAW') && A.intersectsArea('nvme tx3 f source via flare')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.7171mm)))
+
+(rule "nvme tx3 cap to output via"
+    (layer "B.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_L3_TX') && A.intersectsArea('nvme tx3 cap to output via')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.7271mm)))
+
+(rule "nvme clock f output via flare"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/Mu Carrier/PCIE_M_REFCLK') && A.intersectsArea('nvme clock f output via flare')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.8070mm)))
+
+
+# short FPC103 escapes; full geometry is also checked by the release gate.
+
+(rule "center pcie gbe_host_rx fpc103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/GBE_HOST_RX') && A.intersectsArea('center pcie gbe_host_rx fpc103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3971mm)))
+
+(rule "center pcie gbe_host_tx fpc103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/GBE_HOST_TX') && A.intersectsArea('center pcie gbe_host_tx fpc103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3971mm)))
+
+(rule "center pcie gbe_refclk fpc103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/GBE_REFCLK') && A.intersectsArea('center pcie gbe_refclk fpc103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.4471mm)))
+
+(rule "center pcie tcp0_txrx0 fpc103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/TCP0_TXRX0') && A.intersectsArea('center pcie tcp0_txrx0 fpc103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.4480mm)))
+
+(rule "center pcie tcp0_tx0 fpc103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/TCP0_TX0') && A.intersectsArea('center pcie tcp0_tx0 fpc103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.5980mm)))
+
+(rule "center pcie tcp0_tx1 fpc103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/TCP0_TX1') && A.intersectsArea('center pcie tcp0_tx1 fpc103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.6119mm)))
+
+(rule "center pcie tcp0_txrx1 fpc103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "A.inDiffPair('/TCP0_TXRX1') && A.intersectsArea('center pcie tcp0_txrx1 fpc103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.6520mm)))
