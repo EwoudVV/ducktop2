@@ -41,6 +41,29 @@ class CouplingTests(unittest.TestCase):
     def test_nominal_pair(self):
         self.assertEqual(check(self.data, limits())['status'], 'passed')
 
+    def test_explicit_usb_names_keep_the_full_gap_check(self):
+        self.data['items'][0]['net'] = 'TEST_DP'
+        self.data['items'][1]['net'] = 'TEST_DN'
+        spec = limits()
+        spec['pairs'][0]['nets'] = {'P': 'TEST_DP', 'N': 'TEST_DN'}
+        before = copy.deepcopy(self.data)
+        self.assertEqual(check(self.data, spec)['status'], 'passed')
+        self.assertEqual(self.data, before)
+        self.data['items'][1]['start'][1] = .4
+        self.data['items'][1]['end'][1] = .4
+        result = check(self.data, spec)
+        self.assertEqual(result['status'], 'failed')
+        self.assertTrue(result['outside_region_uncoupled'])
+
+    def test_explicit_usb_names_require_both_polarities(self):
+        self.data['items'][0]['net'] = 'TEST_DP'
+        self.data['items'][1]['net'] = 'DIFFERENT_DN'
+        spec = limits()
+        spec['pairs'][0]['nets'] = {'P': 'TEST_DP', 'N': 'TEST_DN'}
+        result = check(self.data, spec)
+        self.assertTrue(any(row['kind'] == 'missing_polarity'
+                            for row in result['blocking_findings']))
+
     def test_window_does_not_exempt_the_rest_of_a_long_track(self):
         self.data['items'][1]['start'][1] = .4
         self.data['items'][1]['end'][1] = .4

@@ -25,18 +25,19 @@ MODEL_FIXES: dict[str, tuple[tuple[float, float, float], tuple[float, float, flo
     "Cherry_MX_ULP_SMD":                      ((0, 5.50, 3.40), (0, 0, 180)),
     "DRA818_Castellated":                      ((0, -2.00, 9.50), None),
     "ublox_MAX":                               ((0.15, -0.06, 0.40), None),
+    # Contact faces, locating pegs and acoustic port checked in native STEP exports.
+    "Amphenol_MDT420E01001_H4.2": ((9.25, -3.525, 0), (-90, 0, 0)),
+    "Amphenol_MDT420M01001_H4.2": ((-1.75, -3.725, 0), (-90, 0, 90)),
+    "Infineon_IM68A130V01": ((0, 0, 0), (0, 0, -90)),
 }
 
 # Models confirmed correct (no offset/rotate change needed)
 MODELS_CORRECT = {
     "Coilcraft_XGL5030",
-    "Amphenol_MDT420E01001_H4.2",
-    "Amphenol_MDT420M01001_H4.2",
     "JXD1-1022NL_MidMount",
     "LattePanda_Mu_H8.0_Horizontal",
     "SSD1306_0.96in_Module_4Pin",
     "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
-    "Infineon_IM68A130V01",
     "MiniCircuits_QA2224_PL484",
     "TDK_TFM201610",
     "Texas_RPA0010A_VQFN-HR-10_3x3mm",

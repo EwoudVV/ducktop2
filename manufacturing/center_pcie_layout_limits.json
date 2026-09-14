@@ -2669,6 +2669,709 @@
         "No minimum gap, width, clearance, via drill or ground-plane restriction is waived.",
         "The fixed ceilings include at most 0.016 mm of length margin and 0.006 mm of sampled-gap upper-bound margin over this reviewed geometry."
       ]
+    },
+    {
+      "schema_version": 1,
+      "scope": "Existing center USB connector escapes; complete interfaces remain unrouted",
+      "nominal_gap_mm": 0.2032,
+      "maximum_rounding_tolerance_mm": 2e-06,
+      "paired_corner_leg_tolerance_mm": 1e-06,
+      "maximum_sample_step_mm": 0.005,
+      "outside_uncoupled_rounding_length_mm": 1e-06,
+      "pairs": [
+        {
+          "stem": "/HUB_DS4_D",
+          "nets": {
+            "N": "/HUB_DS4_DN",
+            "P": "/HUB_DS4_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/HUB_DS1_D",
+          "nets": {
+            "N": "/HUB_DS1_DN",
+            "P": "/HUB_DS1_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC2_D",
+          "nets": {
+            "N": "/USBC2_DN",
+            "P": "/USBC2_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC1_D",
+          "nets": {
+            "N": "/USBC1_DN",
+            "P": "/USBC1_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC2_SSTX",
+          "nets": {
+            "N": "/USBC2_SSTX_N",
+            "P": "/USBC2_SSTX_P"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC2_SSRX",
+          "nets": {
+            "N": "/USBC2_SSRX_N",
+            "P": "/USBC2_SSRX_P"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC1_SSTX",
+          "nets": {
+            "N": "/USBC1_SSTX_N",
+            "P": "/USBC1_SSTX_P"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC1_SSRX",
+          "nets": {
+            "N": "/USBC1_SSRX_N",
+            "P": "/USBC1_SSRX_P"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ]
+          }
+        }
+      ],
+      "regions": [
+        {
+          "name": "FPC102 HUB_DS4_D pad launch",
+          "category": "pad_fanout",
+          "stem": "/HUB_DS4_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.299998,
+            69.549998,
+            109.41720199999999,
+            70.05000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC102 HUB_DS4_D fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/HUB_DS4_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            110.79421699999997,
+            69.385942,
+            111.700002,
+            69.98020199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.977,
+            "N": 0.24
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.977,
+            "N": 0.24
+          },
+          "max_nearest_gap_mm": 0.625
+        },
+        {
+          "name": "FPC102 HUB_DS1_D pad launch",
+          "category": "pad_fanout",
+          "stem": "/HUB_DS1_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.299998,
+            71.049998,
+            109.41720199999999,
+            71.55000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC102 HUB_DS1_D fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/HUB_DS1_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            110.46595499999995,
+            70.89999800000001,
+            111.450002,
+            71.469802
+          ],
+          "max_total_length_mm": {
+            "P": 1.058,
+            "N": 0.262
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.058,
+            "N": 0.262
+          },
+          "max_nearest_gap_mm": 0.673
+        },
+        {
+          "name": "FPC102 USBC2_D pad launch",
+          "category": "pad_fanout",
+          "stem": "/USBC2_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.299998,
+            72.549998,
+            109.41720199999999,
+            73.05000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC102 USBC2_D fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC2_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            110.64837999999995,
+            72.407533,
+            111.500002,
+            72.98020199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.867,
+            "N": 0.274
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.867,
+            "N": 0.274
+          },
+          "max_nearest_gap_mm": 0.63
+        },
+        {
+          "name": "A1 USBC2_D pad lands",
+          "category": "pad_fanout",
+          "stem": "/USBC2_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.074999,
+            65.274998,
+            216.82500299999998,
+            66.075002
+          ],
+          "max_total_length_mm": {
+            "P": 0.853,
+            "N": 0.853
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.711,
+            "N": 0.711
+          },
+          "max_nearest_gap_mm": 0.326
+        },
+        {
+          "name": "A1 USBC2_D fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC2_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            216.969998,
+            64.86999800000001,
+            218.05200200000002,
+            66.730002
+          ],
+          "max_total_length_mm": {
+            "P": 1.108,
+            "N": 0.749
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.685,
+            "N": 0.328
+          },
+          "max_nearest_gap_mm": 0.602
+        },
+        {
+          "name": "FPC102 USBC1_D pad launch",
+          "category": "pad_fanout",
+          "stem": "/USBC1_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.299998,
+            74.049998,
+            109.41720199999999,
+            74.55000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC102 USBC1_D fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC1_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            110.39028399999995,
+            73.89999800000001,
+            111.400284,
+            74.469802
+          ],
+          "max_total_length_mm": {
+            "P": 1.18,
+            "N": 0.262
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.18,
+            "N": 0.262
+          },
+          "max_nearest_gap_mm": 0.668
+        },
+        {
+          "name": "A1 USBC1_D pad lands",
+          "category": "pad_fanout",
+          "stem": "/USBC1_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            206.874999,
+            66.024998,
+            208.625003,
+            66.825002
+          ],
+          "max_total_length_mm": {
+            "P": 0.903,
+            "N": 0.903
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.761,
+            "N": 0.761
+          },
+          "max_nearest_gap_mm": 0.326
+        },
+        {
+          "name": "A1 USBC1_D fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC1_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            208.719998,
+            65.61999800000001,
+            209.80200200000002,
+            67.480002
+          ],
+          "max_total_length_mm": {
+            "P": 0.749,
+            "N": 1.108
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.328,
+            "N": 0.685
+          },
+          "max_nearest_gap_mm": 0.602
+        },
+        {
+          "name": "FPC102 USBC2_SSTX pad launch",
+          "category": "pad_fanout",
+          "stem": "/USBC2_SSTX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.299998,
+            75.549998,
+            109.41720199999999,
+            76.05000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC102 USBC2_SSTX fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC2_SSTX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            110.499998,
+            75.172279,
+            111.925454,
+            75.969802
+          ],
+          "max_total_length_mm": {
+            "P": 0.83,
+            "N": 1.562
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.83,
+            "N": 1.562
+          },
+          "max_nearest_gap_mm": 0.625
+        },
+        {
+          "name": "FPC102 USBC2_SSRX pad launch",
+          "category": "pad_fanout",
+          "stem": "/USBC2_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.299998,
+            77.049998,
+            109.41720199999999,
+            77.55000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC102 USBC2_SSRX fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC2_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            110.61467699999994,
+            76.902079,
+            111.30000199999999,
+            77.57000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.712,
+            "N": 0.269
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.712,
+            "N": 0.269
+          },
+          "max_nearest_gap_mm": 0.639
+        },
+        {
+          "name": "A1 USBC2_SSRX pad lands",
+          "category": "pad_fanout",
+          "stem": "/USBC2_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.074999,
+            53.274998,
+            216.82500299999998,
+            54.075002
+          ],
+          "max_total_length_mm": {
+            "P": 0.853,
+            "N": 0.853
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.711,
+            "N": 0.711
+          },
+          "max_nearest_gap_mm": 0.326
+        },
+        {
+          "name": "A1 USBC2_SSRX fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC2_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            216.969998,
+            52.869998,
+            218.05200200000002,
+            54.730002
+          ],
+          "max_total_length_mm": {
+            "P": 1.108,
+            "N": 0.749
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.685,
+            "N": 0.328
+          },
+          "max_nearest_gap_mm": 0.602
+        },
+        {
+          "name": "FPC102 USBC1_SSTX pad launch",
+          "category": "pad_fanout",
+          "stem": "/USBC1_SSTX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.299998,
+            78.549998,
+            109.41720199999999,
+            79.05000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC102 USBC1_SSTX fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC1_SSTX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            110.21655699999988,
+            78.480198,
+            111.30000199999999,
+            79.05000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 1.162,
+            "N": 0.36
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.162,
+            "N": 0.36
+          },
+          "max_nearest_gap_mm": 0.686
+        },
+        {
+          "name": "FPC102 USBC1_SSRX pad launch",
+          "category": "pad_fanout",
+          "stem": "/USBC1_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.299998,
+            80.049998,
+            109.41720199999999,
+            80.55000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC102 USBC1_SSRX fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC1_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            110.01652699999984,
+            80.046732,
+            111.147932,
+            80.68520199999999
+          ],
+          "max_total_length_mm": {
+            "P": 1.258,
+            "N": 0.434
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.258,
+            "N": 0.433
+          },
+          "max_nearest_gap_mm": 0.625
+        },
+        {
+          "name": "A1 USBC1_SSRX pad lands",
+          "category": "pad_fanout",
+          "stem": "/USBC1_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.074999,
+            51.774998,
+            216.82500299999998,
+            52.575002
+          ],
+          "max_total_length_mm": {
+            "P": 0.853,
+            "N": 0.853
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.711,
+            "N": 0.711
+          },
+          "max_nearest_gap_mm": 0.326
+        },
+        {
+          "name": "A1 USBC1_SSRX fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/USBC1_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            216.969998,
+            51.369998,
+            218.05200200000002,
+            53.230002
+          ],
+          "max_total_length_mm": {
+            "P": 1.108,
+            "N": 0.749
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.685,
+            "N": 0.328
+          },
+          "max_nearest_gap_mm": 0.602
+        },
+        {
+          "name": "FPC103 HUB_DS4_D pad launch",
+          "category": "pad_fanout",
+          "stem": "/HUB_DS4_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            321.63279800000004,
+            127.049998,
+            321.750002,
+            127.55000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC103 HUB_DS4_D fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/HUB_DS4_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.902069,
+            126.903198,
+            321.1304820000002,
+            127.55000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 1.377,
+            "N": 0.501
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.377,
+            "N": 0.499
+          },
+          "max_nearest_gap_mm": 0.625
+        },
+        {
+          "name": "FPC103 HUB_DS1_D pad launch",
+          "category": "pad_fanout",
+          "stem": "/HUB_DS1_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            321.63279800000004,
+            125.549998,
+            321.750002,
+            126.05000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 0.169,
+            "N": 0.121
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.169,
+            "N": 0.119
+          },
+          "max_nearest_gap_mm": 0.325
+        },
+        {
+          "name": "FPC103 HUB_DS1_D fixed vias",
+          "category": "pad_via_fanout",
+          "stem": "/HUB_DS1_D",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.882162,
+            125.403198,
+            321.1196120000002,
+            126.05000199999999
+          ],
+          "max_total_length_mm": {
+            "P": 1.404,
+            "N": 0.491
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.404,
+            "N": 0.489
+          },
+          "max_nearest_gap_mm": 0.625
+        }
+      ],
+      "notes": [
+        "Only the existing pad-to-via copper is present. Passing these coupling limits does not establish complete USB connectivity or length matching.",
+        "FPC102 and FPC103 tracks keep the approved 0.1796 mm width and 0.2032 mm coupled gap. The fanouts preserve their pad contacts and fixed 0.6 mm vias.",
+        "Every line and arc is clipped to each local region. Full copper outside the regions must remain coupled. Length and distance ceilings allow only the measured local transition plus at most 0.005 mm margin.",
+        "No native minimum gap, clearance, width, hole-spacing or layer rule is waived."
+      ]
     }
   ],
   "signal_paths": [

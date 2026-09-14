@@ -3495,6 +3495,8 @@ def check_bms_thermal(components):
         ('U2208','TPS70933DBVR','Package_TO_SOT_SMD:SOT-23-5'),
         ('U2209','ISO7021FDR','Package_SO:SOIC-8_3.9x4.9mm_P1.27mm'),
         ('R2200','RC2010FK-071KL','Resistor_SMD:R_2010_5025Metric'),
+        ('R2217','RT0402BRD0710KL','Resistor_SMD:R_0402_1005Metric'),
+        ('R2254','ERJ2RKF1001X','Resistor_SMD:R_0402_1005Metric'),
         ('J2200','SM06B-SRSS-TB(LF)(SN)','Connector_JST:JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal'),
     ]:
         expect(prop(components,ref,'MPN'),mpn,f'{ref} thermal exact part')
@@ -3548,7 +3550,7 @@ def check_bms_thermal(components):
 
     for ref,p1,p2,mpn in [
         ('R2252','/BAT_PROT_VIN','/PROT_CTRL_FEED','RC1206FR-072K49L'),
-        ('R2254','/PACK_RETRY_LOCAL','/PACK_RETRY_LOCAL_GATE','RC0603FR-071KL'),
+        ('R2254','/PACK_RETRY_LOCAL','/PACK_RETRY_LOCAL_GATE','ERJ2RKF1001X'),
         ('R2257','/MCU_3V3','/CTRL_3V3','RC1206FR-07100RL'),
         ('R2258','/CTRL_FAULT_LOCAL_N','/PACK_FAULT_N','RC0603FR-074K7L'),
         ('R2259','/PACK_RETRY_PULSE','/CTRL_RETRY_IN','RC0603FR-074K7L'),

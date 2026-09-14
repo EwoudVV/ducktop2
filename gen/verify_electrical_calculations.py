@@ -66,6 +66,7 @@ EXACT_PASSIVES = {
     "ERJ8CWFR013V": (.013, .01, None),
     "C0805C223J5GACTU": (22e-9, .05, 50.0),
     "RC2010FK-071KL": (1000.0, .01, 200.0),
+    "ERJ2RKF1001X": (1000.0, .01, None),
 }
 
 
@@ -883,7 +884,13 @@ def bms_thermal_checks(values) -> list[Check]:
     if values.mpn('R2200')!='RC2010FK-071KL':
         raise ValueError('thermal supply sizing requires the reviewed RC2010 1k/0.75W part')
     budget=thermal_supply_budget(resistor(values,'R2200'),values)
+    if values.mpn('R2217') != 'RT0402BRD0710KL':
+        raise ValueError('third probe lead requires the reviewed RT0402 10k part')
+    probe_rmin = resistor(values,'R2217') * (1-values.environment_tolerance('R2217'))
+    probe_rating = .0625 * (155-85)/(155-70)
     return [
+        Check('third NTC sense-lead resistor at21V fault screen',21**2/probe_rmin,'W',0,probe_rating,
+              '21^2/R2217(low); Yageo RT0402 1/16W derated from70C to85C; independent resistance stress screen; never an allowed cell voltage'),
         Check('thermal raw supply at explicit maximum-demand screen',budget['regulator_input_min_v'],'V',4.393,8.4,
               '8.4V - R2200(high)*sum(passives, TI IC screens, 350uA loaded-LDO and100uA extra allowances); loaded LDO maximum remains unmeasured'),
         Check('thermal raw feed short dissipation at13.8V',budget['short_13v8_w'],'W',0,budget['resistor_derated_85c_w'],
@@ -943,7 +950,15 @@ def bms_control_budget(values: NetlistValues, center: NetlistValues | None = Non
 
 def bms_control_checks(values: NetlistValues, center: NetlistValues | None = None):
     budget=bms_control_budget(values,center)
+    if values.mpn('R2254') != 'ERJ2RKF1001X':
+        raise ValueError('reset gate resistor requires the reviewed ERJ2RKF 1k part')
+    gate_rmin = resistor(values,'R2254') * .95
+    gate_rating = .1 * (155-85)/(155-70)
     return [
+        Check('reset gate resistor regulated short and pulse screen',3.393**2/gate_rmin,'W',0,gate_rating,
+              'Full protected-bias maximum across R2254(low); 5% resistance envelope; no pulse-overload allowance'),
+        Check('reset gate resistor at maximum ISO operating supply',5.5**2/gate_rmin,'W',0,gate_rating,
+              'ISO7021 5.5V upper supply screen; ERJ2RKF 0.1W at70C derated to85C'),
         Check('control-island minimum supply screen',budget['control_supply_min_v'],'V',2.25,3.6,
               'MCU3V3 3.135V,50mV wire allocation,all IC/input-state current screens and R2257 tolerance/TCR'),
         Check('isolated charge-permit high screen',budget['charge_high_min_v'],'V',2.0,3.6,

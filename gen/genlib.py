@@ -284,6 +284,35 @@ def override_pin_types(block, overrides):
     return block
 
 
+# These project footprints have checked pad maps for the generic symbols below.
+# Keep the stock package choices and add only these specific hardware names.
+PROJECT_FOOTPRINT_FILTERS = {
+    'MountingHole_Pad': ('ducktop2:Wurth_9774055243R_M2_H5.5', 'ducktop2:SMT_Standoff_M2_H2.5_C4_Tail2.7x1.5'),
+    'TestPoint': ('Connector_Wire:SolderWirePad_1x01_SMD_5x10mm',),
+    'Conn_01x06': ('Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical',),
+    'Conn_01x04': ('ducktop2:USB2_Trackpad_Cable_SolderPads_1x04_P2.54mm',),
+    'R': ('ducktop2:Panasonic_ERJ8CW_10to16m_Center',),
+    'L': ('ducktop2:TDK_TFM201610', 'ducktop2:Abracon_AOTA-B201610S3R3-101-T_RP2350'),
+    'PCA9539xD': ('Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm',),
+    'W25Q32JVZP': ('Package_SON:Winbond_USON-8-1EP_3x2mm_P0.5mm_EP0.2x1.6mm',),
+}
+
+
+def add_project_footprint_filters(name, block):
+    additions = PROJECT_FOOTPRINT_FILTERS.get(name)
+    if not additions:
+        return block
+    def replace(match):
+        filters = match.group(2).split()
+        filters.extend(value for value in additions if value not in filters)
+        return match.group(1) + " ".join(filters) + match.group(3)
+    pattern = r'(\(property\s+"ki_fp_filters"\s+")([^"]*)(")'
+    result, count = re.subn(pattern, replace, block, count=1)
+    if count != 1:
+        raise ValueError(f"missing footprint filters for {name}")
+    return result
+
+
 def load_renamed_symbol(name):
     lib = LIBMAP[name]
     if name in FFC_MP_SYMBOLS:
@@ -347,6 +376,7 @@ def load_renamed_symbol(name):
         # source after the full orderable part (for example TPD1E0B04DPLR),
         # while the generated library uses a shorter project-facing name.
         block = block.replace(f'"{source_name}_', f'"{name}_')
+    block = add_project_footprint_filters(name, block)
     # Transformations above may already rename the outer symbol (for example
     # the passive USB-C and FFC-with-mounting-pad variants).  Replacing the
     # complete outer identifier is robust; slicing by the original source-name

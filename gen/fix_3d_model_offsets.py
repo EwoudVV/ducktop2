@@ -25,8 +25,8 @@ MODEL_OFFSETS = {
     "Cherry_MX_ULP_SMD":     (0, +5.50, +3.40),
     "DRA818_Castellated":     (0,     0, +9.50),   # castellated module, origin at pin 1
     "JXD1-1022NL_MidMount":  (0,     0, +21.45),   # connector, origin at pin 1
-    "Amphenol_MDT420E01001_H4.2": (0, 0, +3.95),   # M.2 socket, origin at pin 1
-    "Amphenol_MDT420M01001_H4.2": (0, 0, +22.00),  # M.2 socket, origin at pin 1
+    "Amphenol_MDT420E01001_H4.2": (9.25, -3.525, 0),   # M.2 socket, origin at pin 1
+    "Amphenol_MDT420M01001_H4.2": (-1.75, -3.725, 0),  # M.2 socket, origin at pin 1
     "SSD1306_0.96in_Module_4Pin": (0, 0, +8.50),   # symmetric module, centered ok
     "ublox_MAX":              (0,     0, +0.40),    # GPS module, origin at pin 1
     "LattePanda_Mu_H8.0_Horizontal": (0, 0, +27.91),  # socket connector

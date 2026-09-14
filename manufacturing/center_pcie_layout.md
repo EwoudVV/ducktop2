@@ -38,6 +38,12 @@ and 12 TCP0 windows. the FPC103 pads and vias account for much of each
 short escape; the exposed uncoupled copper is at most 1.362 mm on GbE
 and 0.895 mm on TCP0. the full copper length stays checked too.
 
+the usb check covers eight DP/DN pairs, including ten FPC pair escapes.
+their 42 gap reports are fixed, with 28 small windows around the pads and
+vias. copper outside those windows must keep the normal USB gap. these are
+local escapes; the full USB trunks and their final length matching are still
+unfinished. include the existing fragment lengths when finishing each pair.
+
 KiCad applies an area condition to a whole track object. a long track can
 cross a small tuning window, so the native local rules also need the geometry
 check. it clips each track or arc to the actual window and checks all the

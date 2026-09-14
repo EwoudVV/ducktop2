@@ -52,6 +52,8 @@ def measure_max(part,width,others,step):
  sampled=float(gaps.max());return sampled,sampled+part.length/n/2
 
 def check(data,spec):
+ names={net:p['stem']+'_'+pol for p in spec['pairs'] for pol,net in p.get('nets',{}).items()}
+ if names:data=dict(data,items=[dict(v,net=names.get(v['net'],v['net'])) for v in data['items']])
  from center_pcie_geometry import Curve,merge as curve_merge,complement,intersection,gap_measure
  assert spec['schema_version']==1;stems={v['stem'] for v in spec['pairs']};items=[v for v in data['items'] if v['net'][:-2] in stems];tracks=[v for v in items if v['type'] in ('PCB_TRACK','PCB_ARC')];errors=[];curves={}
  for t in tracks:
@@ -111,14 +113,14 @@ def native_python(explicit=None):
   if result.returncode==0:return candidate
  raise RuntimeError('KiCad Python was not found; set KICAD_PYTHON or pass --kicad-python')
 
-def export_board(pcb,stems,python=None):
+def export_board(pcb,stems,python=None,net_names=()):
  before=file_sha(pcb)
  code=r'''import sys,json,hashlib,wx
 app=wx.App(False);wx.Log.EnableLogging(False)
 import pcbnew as p
-path=sys.argv[1];stems=set(json.loads(sys.argv[2]));b=p.LoadBoard(path)
+path=sys.argv[1];stems=set(json.loads(sys.argv[2]));net_names=set(json.loads(sys.argv[3]));b=p.LoadBoard(path)
 if b is None:raise RuntimeError('could not load board')
-b.BuildConnectivity();c=b.GetConnectivity();xy=lambda v:[v.x/1e6,v.y/1e6];uid=lambda v:v.m_Uuid.AsString();wanted=lambda n:n.endswith(('_P','_N')) and n[:-2] in stems
+b.BuildConnectivity();c=b.GetConnectivity();xy=lambda v:[v.x/1e6,v.y/1e6];uid=lambda v:v.m_Uuid.AsString();wanted=lambda n:n in net_names or (n.endswith(('_P','_N')) and n[:-2] in stems)
 allpads={uid(q):q for f in b.GetFootprints() for q in f.Pads()};items=[];enabled=set(b.GetEnabledLayers().Seq())
 for t in b.GetTracks():
  if not wanted(t.GetNetname()):continue
@@ -133,7 +135,7 @@ for f in b.GetFootprints():
   items.append({'id':uid(q),'type':'PAD','ref':f.GetReference(),'number':q.GetNumber(),'net':q.GetNetname(),'start':xy(q.GetPosition()),'end':xy(q.GetPosition()),'size':xy(q.GetSize()),'angle':q.GetOrientationDegrees(),'layers':[b.GetLayerName(l) for l in q.GetLayerSet().Seq() if l in enabled and b.GetLayerName(l).endswith('.Cu')],'length':0,'native_component_pad_ids':sorted(k for k in component if k in allpads),'neighbors':sorted({uid(i) for i in list(c.GetConnectedTracks(q))+list(c.GetConnectedPads(q))}),'box':[rect.GetLeft()/1e6,rect.GetTop()/1e6,rect.GetRight()/1e6,rect.GetBottom()/1e6]})
 print(json.dumps({'source':path,'source_sha256':hashlib.sha256(open(path,'rb').read()).hexdigest(),'copper_layers':b.GetCopperLayerCount(),'board_thickness_mm':b.GetDesignSettings().GetBoardThickness()/1e6,'items':items}))
 '''
- command=[python or native_python(),'-c',code,str(pcb),json.dumps(sorted(stems))]
+ command=[python or native_python(),'-c',code,str(pcb),json.dumps(sorted(stems)),json.dumps(sorted(net_names))]
  if sys.platform=='darwin':command+=['-ApplePersistenceIgnoreState','YES']
  result=subprocess.run(command,capture_output=True,text=True,timeout=120)
  if result.returncode:raise RuntimeError('native PCB export failed: '+result.stderr.strip()[-2000:])
@@ -159,7 +161,7 @@ def main():
    data=json.loads(args.native_json.read_text())
    if args.pcb and data.get('source_sha256')!=file_sha(args.pcb):raise ValueError('native export is not from the specified PCB')
   elif args.pcb:
-   stems={p['stem'] for suite in suites for p in suite['pairs']};data=export_board(args.pcb.resolve(),stems,native_python(args.kicad_python))
+   stems={p['stem'] for suite in suites for p in suite['pairs']};net_names={net for suite in suites for p in suite['pairs'] for net in p.get('nets',{}).values()};data=export_board(args.pcb.resolve(),stems,native_python(args.kicad_python),net_names)
   else:raise ValueError('pass --pcb or --native-json')
   result=run_checks(data,limits);result['limits_sha256']=file_sha(args.limits)
   result['exact_pcb_path']=str(args.pcb.resolve()) if args.pcb else data.get('source');code=0 if result['status']=='passed' else 1

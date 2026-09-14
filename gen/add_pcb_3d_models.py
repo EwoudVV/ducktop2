@@ -38,12 +38,20 @@ MODEL_OFFSETS = {
     "Cherry_MX_ULP_SMD": (0, +5.50, +3.40),
     "DRA818_Castellated": (0, -2.00, +9.50),
     "JXD1-1022NL_MidMount": (0, 0, +21.45),
-    "Amphenol_MDT420E01001_H4.2": (0, 0, +3.95),
-    "Amphenol_MDT420M01001_H4.2": (0, 0, +22.00),
+    "Amphenol_MDT420E01001_H4.2": (9.25, -3.525, 0),
+    "Amphenol_MDT420M01001_H4.2": (-1.75, -3.725, 0),
     "SSD1306_0.96in_Module_4Pin": (0, 0, +8.50),
     "ublox_MAX": (0.15, -0.06, +0.40),
     "LattePanda_Mu_H8.0_Horizontal": (0, 0, +27.91),
     "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal": (0, 0, 0),
+}
+
+
+# Factory contact faces and locating pegs aligned through native STEP export.
+MODEL_ROTATIONS = {
+    "Amphenol_MDT420E01001_H4.2": (-90, 0, 0),
+    "Amphenol_MDT420M01001_H4.2": (-90, 0, 90),
+    "Infineon_IM68A130V01": (0, 0, -90),
 }
 
 
@@ -169,12 +177,14 @@ def add_model_to_block(block: str, model_path: str) -> str:
 
     model_name = Path(model_path).stem
     ox, oy, oz = MODEL_OFFSETS.get(model_name, (0, 0, 0))
+    rx, ry, rz = MODEL_ROTATIONS.get(model_name, (0, 0, 0))
 
     indent = "  "
     model_line = (
         f'{indent}(model "{model_path}"\n'
         f'{indent}  (offset (xyz {ox} {oy} {oz}))\n'
         f'{indent}  (scale (xyz 1 1 1))\n'
+        f'{indent}  (rotate (xyz {rx} {ry} {rz}))\n'
         f'{indent})'
     )
 

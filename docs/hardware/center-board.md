@@ -1,6 +1,6 @@
 # center board
 
-updated 13 september 2026. the center board is 227 x 185 mm on the
+updated 14 september 2026. the center board is 227 x 185 mm on the
 approved eight-layer stack. it has 781 footprints and 3,235 pads. the
 nvme and wi-fi pcie routing repairs are complete, but there is still a
 lot of main routing to do before this board can be ordered.
@@ -13,19 +13,25 @@ the board near the sockets. the repairs include pair spacing, length
 matching, layer transitions, local ground returns and the nearby control
 routes. the repaired signals use F.Cu, In2.Cu and B.Cu.
 
-this checkpoint has 2,929 straight track sections, 33 arcs and 669 vias.
+this checkpoint has 2,863 straight track sections, 33 arcs and 669 vias.
 native connectivity counts 1,725 unconnected items. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
 FPC103 pin 5 still has its original unfinished `/PLTRST_SRC_N` reset
-escape. the reset connection to the right board needs routing. 42 remaining
-usb pair-gap reports also need review. power distribution, usb,
+escape. the reset connection to the right board needs routing. the 42 usb
+pair-gap reports are fixed, with checked local pad and via exits. the full
+usb connections still need routing and length matching. power distribution,
 hdmi, the ethernet host link and the remaining main-board connections
 are unfinished.
 
-the strict check also reports existing library, footprint-type and symbol
-filter warnings. their saved review records no longer match the moved
-footprints, so those reviews need to be checked again.
+the footprint review is current. the symbol filters now name the actual
+packages, and 25 library and footprint-type advisories have exact saved
+reviews. the remaining dangling tracks and vias are still part of the
+unfinished routing.
+
+the removed nvme ground stub did not break a return connection. four other
+ground pieces were entirely covered by longer tracks and have been removed.
+that cleanup leaves the copper area and ground-pad/via connections unchanged.
 
 ## shape and placement
 
@@ -62,6 +68,9 @@ the positions below use pcb editor coordinates, in mm.
 
 the m.2 retainers line up with their sockets: the local offsets from pad 1
 are 9.25 x 83.55 mm for nvme 2280 and 9.25 x 33.55 mm for wi-fi 2230.
+both socket models now sit flat at their 4.2 mm height, with the contacts
+and locating pegs aligned to the footprints. the microphone model also
+matches its pads and acoustic port.
 
 RS1 separates `FG_VSS` from system `GND`. its sense filters and gauge
 inputs need short kelvin connections. return wiring must respect the
