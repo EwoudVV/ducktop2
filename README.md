@@ -114,6 +114,14 @@ board can replace existing routing.
 - [ducktop1](docs/ducktop1.md)
 - [Forge project pitch](docs/forgery_pitch.md)
 
+## sponsors
+
+<a href="https://www.nextpcb.com/">
+  <img src="https://www.nextpcb.com/uploads/images/202505/07/1746603675-2518-QAgOoc.png" alt="NextPCB" width="260">
+</a>
+
+thanks to NextPCB for supporting PCB manufacturing and assembly for ducktop2.
+
 ## license
 
 the project files are under the [MIT license](LICENSE).
