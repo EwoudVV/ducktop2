@@ -14,13 +14,18 @@ CFP='Capacitor_SMD:C_0603_1608Metric'
 C100='GRM188R71H104KA93D'
 C10N='GRM188R71H103KA01D'
 C10N_0402='C1005X7R1H103K050BB'
+DATASHEETS={
+    'C1005X7R1H103K050BB': 'https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C1005X7R1H103K050BB',
+    'ERJ2RKF1001X': 'https://industrial.panasonic.com/ww/products/pt/general-purpose-chip-resistors/models/ERJ2RKF1001X',
+}
 
 
 def add_bms_thermal(s):
     def part(ref,symbol,value,x,y,footprint,nets,mpn,manufacturer='Texas Instruments',**extra):
         return s.place(ref,symbol,value,x,y,footprint=footprint,
                        pin_nets={pin:((net,'local') if net else ('','nc')) for pin,net in nets.items()},
-                       extra_props={'Manufacturer':manufacturer,'MPN':mpn},**extra)
+                       extra_props={'Manufacturer':manufacturer,'MPN':mpn},
+                       datasheet=DATASHEETS.get(mpn,''),**extra)
     def resistor(ref,value,x,y,a,z,mpn,footprint=RFP,manufacturer='Yageo'):
         return part(ref,'R',value,x,y,footprint,{'1':a,'2':z},mpn,manufacturer)
     def cap(ref,value,x,y,a,z=RAW,mpn=C100,footprint=CFP):
