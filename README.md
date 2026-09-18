@@ -113,6 +113,7 @@ board can replace existing routing.
 - [OS work](software/os-theme/README.md)
 - [ducktop1](docs/ducktop1.md)
 - [Forge project pitch](docs/forgery_pitch.md)
+- [project journal](JOURNAL.md)
 
 ## sponsors
 
