@@ -355,48 +355,96 @@ mock up of the splits: ![image.png](https://cdn.hackclub.com/01a0490a-68b1-773a-
 wired all the gnd stitching vias to the lattepanda mu, and also the 12 volt net. also routed miscellaneous nets.
 ![image.png](https://cdn.hackclub.com/01a04484-f2fa-772a-8d0f-dda4058154a3/image.png)
 
-# 2026-08-27: Designed the PCB layout and schematics and EC firmware for ducktop2
+# 2026-07-02: initial project setup
 
-**Total time spent: 142 hours**
+this is the older work i did before i knew about Forge. i split it up here so the timeline is easier to follow.
 
-Yes, this is very big, but i started this project before i knew about Forge, and i didn't want my hours go to waste.
-
-July 2
 - 8f9f31b 07-02. Made the initial commit with the power/battery and EC/MCU sheets, ERC clean. This has the generator state that had been built up before the repo existed. 51 files. 5 h
-July 8
+
+**Total time spent: 5 hours**
+
+# 2026-07-08: deterministic schematics
+
 - 4fae95c 07-08. Checkpointed the generated schematic baseline across 68 files. 5 h
 - 46bb178 07-08. Made the generated schematics deterministic so diffs stopped being noise. 8 min
-July 19
+
+**Total time spent: 5 hours 8 minutes**
+
+# 2026-07-19: published the first full design
+
 - 6b47a97 07-19. Published the current Ducktop2 design, all child sheets, board, and docs. 214 files. 10 h
+
+**Total time spent: 10 hours**
+
+# 2026-07-19: updated the docs and readme
+
 - eee41e4 07-19. Updated the README. 7 min
 - 9073acc 07-19. Expanded the project documentation and added the MIT license. 7 min
 - e14f134 07-19. Removed outdated pin-review details from the README. 8 min
-July 20
+
+**Total time spent: 22 minutes**
+
+# 2026-07-20: split out the radio hardware and finished the usb-c policy
+
 - ab3b887 07-20. Finished the USB-C policy and split the radio hardware out onto its own daughterboard. 96 files. 8 h
-July 21
+
+**Total time spent: 8 hours**
+
+# 2026-07-21: closed the pin reviews and moved the ac coupling caps
+
 - 720bd9f 07-21. Closed the remaining pin-review contracts. 2 h
 - c4217c1 07-21. Relocated 23 high-speed AC coupling caps and completed the pre-routing design review. 1 h 25 min
-July 23
+
+**Total time spent: 3 hours 25 minutes**
+
+# 2026-07-23: refreshed the published design
+
 - 764558d 07-23. Refreshed the repo with updated PCB renders and the current design state. 2 h
-July 27
+
+**Total time spent: 2 hours**
+
+# 2026-07-27: rewired the trackpad over usb2
+
 - 8f2b992 07-27. Wired the trackpad directly over USB2 and recorded the audit holds. 5 h
 - 66c243f 07-27. Fixed what the trackpad rewire broke and removed duplicate footprints. 3 h
-July 28
+
+**Total time spent: 8 hours**
+
+# 2026-07-28: filled in the bom and part numbers
+
 - 57008c8 07-28. Assigned 327 BOM MPNs across 11 schematic sheets, closing the procurement gaps from 370 down to 43. 2.5 h
 - 3271f16 07-28. Applied the BOM to the radio and keyboard daughterboards and added Cherry MX switch 3D models. 18 min
+
+**Total time spent: 2 hours 48 minutes**
+
+# 2026-07-28: added the remaining 3d models and cleaned up the radio board
+
 - 059dbb2 07-28. Added 3D models for 9 more footprints on the main PCB and radio daughterboard. 22 min
 - e8a8249 07-28. Added 3D STEP models for the remaining ducktop2 components. 29 min
 - 015e06f 07-28. Added the Amphenol MDT420M01001 3D model (M.2 Key M) and re-added the remaining models. 2 min
 - 9a02516 07-28. Fixed the radio DB J1 layer (F.Cu to B.Cu) for the mezzanine stack and added the radio DB outline to the mainboard Dwgs.User. 7 min
 - b4d83e6 07-28. Fixed the 3D model paths to use KIPRJMOD, moved J1 to B.Cu, and relocated 77 fanout traces plus 42 stitch vias for the mezzanine stack. 4 min
-July 30
+
+**Total time spent: 1 hour 4 minutes**
+
+# 2026-07-30: set up the fabrication stackup and ec tooling
+
 - dc019f9 07-30. Defined the 6-layer fabrication stackup for NextPCB. 3 h
 - cbbc6c9 07-30. Fixed 3D model paths and updated the PCB format to KiCad 10.0. 1.5 h
 - 5fe84ee 07-30. Added the power loop relocation scripts and BOM MPN assignments. 3 h
 - ab1ab99 07-30. Ported the EC target firmware to the STM32F407. 2.5 h
-July 31
+
+**Total time spent: 10 hours**
+
+# 2026-07-31: added and fixed the ec dfu path
+
 - dc893b5 07-31. Added the EC DFU programming path: BOOT0 button (SW2) and the rear-edge USB-C prog port (J70/U70/U71/D70) in 08_internal_services. 3 h
 - 744f320 07-31. Fixed the ERC and annotation issues in the EC DFU programming section. 2.5 h
+
+**Total time spent: 5 hours 30 minutes**
+
+# 2026-07-31: wrote the behavior docs and headphone jack work
+
 - fbc8981 07-31. Added the user-facing behavior verification checklist covering lid, USB-C roles, boot, audio, display, input. 24 min
 - db86159 07-31. Recorded the user-confirmed behavior expectations: lid means display off, wide-range AUX, headphone jack as an action item, keyboard/OLED/fan specs. 19 min
 - 2ff5b2b 07-31. Locked the keyboard layout (board already fabricated), recorded the headphone jack design (rear 3.5mm with plug-detect mute), and added the rendered keyboard image. 13 min
@@ -405,13 +453,22 @@ July 31
 - c329f95 07-31. Regenerated the child schematics to sync with the current generators. 29 min
 - fae06d4 07-31. Added the rear 3.5mm headphone jack with plug-detect speaker mute as sheet 15. 45 min
 - 70811a2 07-31. Documented the headphone jack completion across verification, design-status, and handoffs. 10 min
-August 1
+
+**Total time spent: 3 hours 48 minutes**
+
+# 2026-08-01: host-tested the ec behavior
+
 - d0991b3 08-01. Added the host-tested keyboard Fn-layer keymap (ec_keymap). 1.5 h
 - d1396d0 08-01. Added the host-tested EC fan policy core (ec_fan). 3 min
 - d95d9f2 08-01. Added the host-tested OLED status content composer (ec_oled). 9 min
 - 22a966d 08-01. Added the host-tested lid switch debouncer (ec_lid). 18 min
 - f223750 08-01. Added the host-tested battery state machine (ec_battery). 36 min
 - e2c594f 08-01. Added the eMMC recovery/hibernate setup design and tooling. 9 min
+
+**Total time spent: 2 hours 45 minutes**
+
+# 2026-08-01: worked through the bom, impedance, and placement prep
+
 - 14a7a89 08-01. Refreshed the documentation across the repo. 15 min
 - 68cd774 08-01. Stamped the generation-time BOM catalog and closed the remaining 378 procurement gaps. 43 min
 - 98d614d 08-01. Computed candidate impedance geometries for the NextPCB review. 2.5 h
@@ -420,49 +477,95 @@ August 1
 - 42abc43 08-01. Added the placement-collision analyzer for pre-routing triage. 13 min
 - 7877b5c 08-01. Added the placement-collision fixer with conservative grid moves for passives. 21 min
 - e23a151 08-01. Documented the pre-routing placement review checklist. 2 min
+
+**Total time spent: 4 hours 42 minutes**
+
+# 2026-08-01: built the ec driver and keyboard path
+
 - d53b337 08-01. Analyzed the mic acoustic integration and accepted the trackpad/battery overlap. 8 min
 - 1e346eb 08-01. Fixed the placement analyzer pad parsing (at/size/at_span). 28 min
 - ee8a2bf 08-01. Added the EC target driver stack: BQ25798/BQ34Z100, ADC/PWM/tach hardening, and app glue. 1.5 h
 - dc4a1f8 08-01. Added the EC keyboard matrix scan with debounce and wired the keymap into the target loop. 1 h 7 min
 - a6bddbd 08-01. Added the EC USB HID keyboard device stack (OTG_FS) with report transport. 11 min
 - 5dd8b29 08-01. Documented the EC driver stack and keyboard path completion in the target port status. 10 min
+
+**Total time spent: 3 hours 34 minutes**
+
+# 2026-08-01: added the headphone jack and cleaned up placement
+
 - 203083f 08-01. Synced 11 headphone-jack section footprints onto the mainboard (ECO). 40 min
 - 7d5caa5 08-01. Ran placement fixer pass 2: 190 passive moves, shorts 199 to 97, mask 199 to 107. 1 min
 - 08673af 08-01. Ran placement fixer pass 3: 59 more passive moves, shorts 97 to 54. 7 min
 - b93a023 08-01. Documented the big-part placement proposals for review. 15 min
 - aa10d03 08-01. Added first-pass GND planes, power islands, and mechanical keepouts, unfilled. 8 min
 - 8199ed3 08-01. Aligned the min through-drill constraint with NextPCB capability (0.2mm), clearing 199 drill findings. 1 min
+
+**Total time spent: 1 hour 12 minutes**
+
+# 2026-08-01: tightened the floorplan and placement checks
+
 - c555bf9 08-01. Ran placement fixer pass 4 with board-bounds enforcement and recovered the pushed-off caps. 3 min
 - dec7206 08-01. Updated the placement review, 27 off-board anchors left for manual work. 10 min
 - 8271eda 08-01. Revived the floorplan workflow, planner updated with all major parts plus apply_floorplan_layout.py. 31 min
 - 3717620 08-01. Verified all part sizes in the floorplan, added OLED modules, unlocked all parts. 23 min
 - 35006b8 08-01. Set the hinge keepouts to the Framework 13 hinge dimensions, identical L/R modules. 4 min
 - c5cefd7 08-01. Adopted the user floorplan layout and fixed the mainboard coordinate to (0,0). 16 min
+
+**Total time spent: 1 hour 27 minutes**
+
+# 2026-08-01: applied the floorplan and changed the radio connector
+
 - e48ad3c 08-01. Applied the floorplan revD layout to the mainboard, 10 parts with the Mu upper-middle. 20 min
 - ced8650 08-01. Fixed Edge.Cuts (removed the stale notch), cleaned zones, keepouts, and guides, ran fixer pass 5. 52 min
 - f4c8a3d 08-01. Added board-bounds enforcement to the floorplan apply script. 10 min
 - 986616b 08-01. Applied the user layout rev2 and ran fixer pass 6, shorts 90 to 76. 4 min
 - d8df625 08-01. Swapped the radio daughterboard connector from DF40-60 to FH12-30S FFC. 1 h 25 min
-August 2
+
+**Total time spent: 2 hours 51 minutes**
+
+# 2026-08-02: cleaned up and restored the board geometry
+
 - 4a14b0c 08-02. Did a thorough cleanup: fixed Edge.Cuts, cleared Dwgs.User guides, clipped zones, restored J2300. 1 h
 - ab101bc 08-02. Fixed Edge.Cuts to a plain rect, cleared all Dwgs.User guides, restored J2300. 10 min
 - c86cdd1 08-02. Reverted to d8df625, restoring the original Edge.Cuts, guides, and zones. 6 min
-August 9
+
+**Total time spent: 1 hour 16 minutes**
+
+# 2026-08-09: repaired the board outline and guides
+
 - 7a94c7d 08-09. Updated Edge.Cuts to a plain 358x185 rect, regenerated the Dwgs.User sheet guides, fixed the J2300 position. 1.5 h
 - d93fcd6 08-09. Fixed Edge.Cuts properly, replacing 5 notch lines with 1 rect edge. 26 min
 - f0902e6 08-09. Deduplicated the UUIDs on the outline segments. 40 min
 - 0b3a3a3 08-09. Regenerated the Dwgs.User sheet guides with valid unique UUIDs. 8 min
+
+**Total time spent: 2 hours 44 minutes**
+
+# 2026-08-09: removed the stale notch and restored the radio connector
+
 - 32a29a8 08-09. Removed the old left-side notch, leaving a plain 358x185 rectangle. 55 min
 - eecee42 08-09. Restored the J2300 radio-DF40 position to on-board at (288.4, 149.1). 16 min
-August 11
+
+**Total time spent: 1 hour 11 minutes**
+
+# 2026-08-11: fixed placement collisions and port layout
+
 - c3d268c 08-11. Resolved all pad collisions in placement and applied the user floorplan export. 3 h
 - 8a18fc9 08-11. Fixed the port positions, J22 to y=25, J21 to y=36.4, and set the guides to the footprint bboxes. 1 h 13 min
 - d5eb9ff 08-11. Fixed the port positions and M.2 card layout, guides verified with DRC. 2 h
-August 12
+
+**Total time spent: 6 hours 13 minutes**
+
+# 2026-08-12: fixed the outline, guides, and radio ffc
+
 - a283abc 08-12. Added the ethernet jack mid-mount cutout and verified the M.2 slots and port alignment. 1 h
 - 1435f20 08-12. Fixed all remaining DRC shorts, 49 to 0. 29 min
 - f3e4074 08-12. Cleaned up the Dwgs.User guides, removed 67 stale blocks, regenerated 21 aligned pairs. 29 min
 - ab33172 08-12. Swapped J2300 to the FH12-30S FFC and removed 52 dangling route stubs. 24 min
+
+**Total time spent: 2 hours 22 minutes**
+
+# 2026-08-12: worked through the f1-f9 placement review
+
 - b8e329f 08-12. Fixed F1, made the Mu carrier (A1) mountable by moving it south and relocating H1/H2. 1 h 15 min
 - 5c33a8a 08-12. Fixed F2, moved U170, R2316, and U46 clear of the J40 WiFi socket. 4 min
 - 262ba3b 08-12. Fixed F3, moved the keyboard FFC series resistors clear of the J310 pad field. 4 min
@@ -473,37 +576,73 @@ August 12
 - 91c4f3b 08-12. Fixed F7, documented the ethernet notch and mounting pattern as the released contract. 5 min
 - caf6ffb 08-12. Redocumented F7, same ethernet notch and mounting pattern contract. 5 min
 - a5b4f3a 08-12. Recorded the independent review findings and the final F1-F9 fix state. 20 min
-August 13
+
+**Total time spent: 2 hours 20 minutes**
+
+# 2026-08-13: cleaned placement and started the independent review
+
 - 0b3974d 08-13. Resolved all placement DRC classes, board at 186 violations. 2 h
 - c8316e3 08-13. Added the electronics-correctness handoff review. 4 min
 - 9716bc6 08-13. Ran the electronics review v2 and found the J2300 pin-net mismatch across 26 pads. 1 h
 - 77484dd 08-13. Ran the electronics review v3, retracted the false alarms, confirmed J2300 as the blocker. 1 h
 - 9a2d7a5 08-13. Added the independent review prompts for nets/electronics and user-functionality. 8 min
+
+**Total time spent: 4 hours 12 minutes**
+
+# 2026-08-13: fixed j2300 and closed the electronics review
+
 - b13a110 08-13. Fixed P0, replaced J2300 with the FH12-30S and resynced all 30 pin nets. 55 min
 - f3c0fe1 08-13. Recorded the user-functionality review, noted the DB J1 (P0-2) and EC-update/S5-gating decisions as open. 35 min
 - 3176d90 08-13. Completed the EC DFU port (J73) and the DB power rework, verified schematic and board. 1 h
 - 8a64108 08-13. Closed the remaining electronics-review items: FAN1_TAC, SLS_S3, SIO UART, F5/F6. 1.5 h
 - ec8ea47 08-13. Fixed the F1 (Mu mountability) and F3 (keyboard FFC) review findings. 25 min
+
+**Total time spent: 4 hours 25 minutes**
+
+# 2026-08-13: finished the mechanical review and moved to eight layers
+
 - 39123b2 08-13. Did the mechanical enclosure/stack design, hinge plan, and battery-trackpad resolution. 2 h
 - 5bbfe91 08-13. Did mechanical rev 2, trackpad stacks above the battery row, 358x248 envelope. 15 min
 - 7351b21 08-13. Transitioned the mainboard stackup to 8 layers, impedance geometry preserved. 40 min
 - a7268a4 08-13. Drafted the 8L power plan with the rail inventory, L5 island rules, and open items. 10 min
-August 14
+
+**Total time spent: 3 hours 5 minutes**
+
+# 2026-08-14: did the pre-routing audits
+
 - e069a6f 08-14. Did the pre-routing audits: Mu fan-out feasibility, power load budget, footprint audit. 2 h
-August 23
+
+**Total time spent: 2 hours**
+
+# 2026-08-23: prepared the nvme, rtc, and nextpcb submission
+
 - 6513f54 08-23. Added NVMe power headroom and the pack-backed RTC, coin cell removed. 3 h
 - fd5a419 08-23. Prepared the NextPCB 8L fab submittal with the DRC-vs-capability gap table. 10 min
 - 367b55e 08-23. Set the fab submittal solder mask to BLACK (matte preferred), 0.15mm spacing clears the 5mil black bridge rule. 15 min
-August 24
+
+**Total time spent: 3 hours 25 minutes**
+
+# 2026-08-24: closed phase 1 and approved the stackup
+
 - fe23e7d 08-24. Closed out phase 1: fab rules, thermal/routing plans, audits, silk cleanup. 2 h
 - 1f735b5 08-24. Ran the independent-verifier sweep, fixed 12 stale contracts and 4 real board bugs. 1 h 20 min
 - 019de9e 08-24. Applied the fab field-solved impedance geometry after the NextPCB stackup approval. 5 min
 - 757482c 08-24. Set the stackup release status to APPROVED, fab gate now passes. 5 min
+
+**Total time spent: 3 hours 30 minutes**
+
+# 2026-08-24: fixed the radio, usb-a, and placement updates
+
 - 14e332e 08-24. Corrected the radio DB floorplan footprint (160x110, 4x M2 mounts) and documented the DB mounting contract. 25 min
 - 92751f9 08-24. Added the USB-A spare-port headers on hub DIS5 (USB3) and DIS6 (USB2). 30 min
 - 1360032 08-24. Applied the J73/J190/C35/J11 placement updates from the live KiCad session. 30 min
 - 7ff43e4 08-24. Did the USB-A spare port board placement and full schematic/board sync. 55 min
 - 72bc0a9 08-24. Regenerated the schematic sheets as a deterministic snapshot after the USB-A work. 20 min
+
+**Total time spent: 2 hours 40 minutes**
+
+# 2026-08-24: finished the usb-a routing prep and power zones
+
 - 6897d31 08-24. Cleaned up the USB-A port placement, refreshed the DRC allowlist, restored Q60B. 10 min
 - 1b47b5f 08-24. Set the intentional 8-point mounting hole pattern, clear of mechanical envelopes. 20 min
 - 8576f12 08-24. Wrote the USB-A port cluster routing plan and strategy analysis. 25 min
@@ -512,42 +651,76 @@ August 24
 - 3326e81 08-24. Added the full-board routing plan. 8 min
 - 8c8d5fe 08-24. Synced the project net-class settings to the approved board geometries. 10 min
 - c456299 08-24. Added the POWER_HI/POWER_MID net classes for phase 1 routing prep. 5 min
-August 25
+
+**Total time spent: 4 hours 33 minutes**
+
+# 2026-08-25: set the routing presets and board layout
+
 - 2ceabaf 08-25. Put the spec-sheet routing presets into the project design settings. 1.5 h
 - 3c84d5d 08-25. Restored J11 to the top of the right edge at (353.475, 30) mirroring J22, with a position guard. 20 min
 - 54f1726 08-25. Assigned ratnest net colors by routing function across 518 nets. 4 min
 - 5ae4cb0 08-25. Fixed the power-zone layer architecture to match the routing-plan stackup. 25 min
 - 4f9caaa 08-25. Regenerated the Dwgs.User guides to reflect the current board. 4 min
 - dd332ac 08-25. Added the Framework 13 hinge cutouts to Edge.Cuts and removed the Dwgs.User guides. 35 min
+
+**Total time spent: 2 hours 58 minutes**
+
+# 2026-08-25: fixed colors, hinge cutouts, and release checks
+
 - 7ee8c4d 08-25. Fixed the net-color serialization to KiCad's CSS-string format and re-applied the presets. 40 min
 - 449c2a5 08-25. Aligned the user-moved mounting holes to the edge rails. 25 min
 - 42708da 08-25. Made the hinge cutouts symmetric and set AON_FAULT_N to pure red. 1 h 15 min
 - 388f876 08-25. Moved the net colors to the app's real location, net_settings.net_colors. 10 min
 - 955904c 08-25. Fixed the report_unexpected NameError in the release gate, a lost diff line from an earlier edit. 30 min
-August 26
+
+**Total time spent: 3 hours**
+
+# 2026-08-26: fixed mounting holes, power islands, and board formats
+
 - e0a8dce 08-26. Renumbered the duplicated mounting holes H21-H27 and added the schematic symbols. 1.5 h
 - 8862f57 08-26. Fixed the dead L5 power islands: hierarchical zone net names, split VBUS_RAW, applied the 85-ohm DIFF_85 geometry. 3 h
 - 87d3dfe 08-26. Fixed the stale USB7206C DIS5/DIS6 contract, these are active USB-A ports, not 0R straps. 15 min
 - 66ad851 08-26. Renamed Q60B to Q62, the letter-suffix reference broke the KiCad annotation check. 25 min
 - df45a4c 08-26. Normalized the TPS7A0210_unit1.svg to LF line endings. 3 min
+
+**Total time spent: 5 hours 13 minutes**
+
+# 2026-08-26: updated the pitch and ec startup work
+
 - 29ffb8a 08-26. Added the funding pitch, the full BOM cost breakdown at about $3,560, and the README cost section. 1 h
 - dcbf6a6 08-26. Merged the remote-tracking branch origin/main. 4 min
 - 05e0188 08-26. Fixed the EC startup memory initialization. 1.5 h
 - 78d98b4 08-26. Corrected the EC clock tree and timer rates. 2 min
 - 5fd464c 08-26. Corrected the EC ADC register mapping. 2 min
 - b960da7 08-26. Made the EC source manager fail safe. 9 min
+
+**Total time spent: 2 hours 47 minutes**
+
+# 2026-08-26: fixed the ec mappings and hardened the release checks
+
 - 35ceb4c 08-26. Fixed the authoritative mainboard net classes. 3 min
 - 488c7fb 08-26. Partitioned the mainboard power zones. 45 min
 - 8da03cd 08-26. Corrected the EC USB register and request mappings. 3 min
 - 99f06b4 08-26. Grounded the EC target observations and power limits. 10 min
 - 1ae4b5e 08-26. Hardened the release gate with refilled-state DRC and an exact allowlist. 6 min
 - 88417fb 08-26. Made the PCB object UUIDs deterministic and unique, with gate enforcement. 5 min
+
+**Total time spent: 1 hour 12 minutes**
+
+# 2026-08-26: finished the quote package, impedance approvals, and eight-layer docs
+
 - 0722019 08-26. Contracted the U773 endpoint buck and USB-A cluster pins. 7 min
 - 9e14f10 08-26. Regenerated the NextPCB mainboard quote package from the current sources. 7 min
 - d2a97e7 08-26. Completed the structured impedance approvals in the stackup record. 5 min
 - be371a6 08-26. Refreshed the stale design docs to the current 8-layer state. 3 min
-August 27
+
+**Total time spent: 22 minutes**
+
+# 2026-08-27: documented the source-local l5 island architecture
+
 - 20de7a4 08-27. Documented the source-local L5 island architecture for power routing. 45 min
+
+**Total time spent: 45 minutes**
 
 Pictures:
 ![Screenshot_2026-08-27_at_13.50.28.png](https://cdn.hackclub.com/01a0445c-9019-7fef-a079-2795fc54d2f0/Screenshot_2026-08-27_at_13.50.28.png)
