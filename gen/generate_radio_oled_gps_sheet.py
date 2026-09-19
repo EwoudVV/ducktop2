@@ -54,7 +54,9 @@ def build(sheet_symbol_uuid):
         "58": ("", "nc"),
         "60": ("", "nc"),
     })
-    s.place("J40", "Bus_M.2_Socket_E", "Amphenol MDT420E01001 E-key Wi-Fi/Bluetooth socket", 170, 180,
+    # Readability: J40 (75-pin M.2 socket, tall body) overlapped the U170
+    # isolation row 41 mm above. Moved +30 mm down to clear. Nets unchanged.
+    s.place("J40", "Bus_M.2_Socket_E", "Amphenol MDT420E01001 E-key Wi-Fi/Bluetooth socket", 170, 210,
             footprint=FOOTPRINTS["M2_E_key"], pin_nets=m2e,
             extra_props={
                 "Manufacturer": "Amphenol", "MPN": "MDT420E01001",
@@ -62,7 +64,8 @@ def build(sheet_symbol_uuid):
                 "QualifiedModuleMPN": "AX210.NGWGIE.NV",
                 "QualifiedModuleContract": "M2_2230_KEY_E_PCIE_WIFI_USB_BLUETOOTH_NOT_CNVIO2",
             })
-    s.place("H4", "MountingHole_Pad", "M.2 E-key 2230 M2 grounded standoff 2.5mm", 250, 180,
+    # Keep card standoff grouped with J40 after the readability move.
+    s.place("H4", "MountingHole_Pad", "M.2 E-key 2230 M2 grounded standoff 2.5mm", 250, 210,
             footprint=FOOTPRINTS["M2_Card_Standoff_H2.5"],
             pin_nets={"1": ("GND", "local")},
             extra_props={
@@ -111,10 +114,12 @@ def build(sheet_symbol_uuid):
     s.place("C187", "C", "100n E-key control-isolator local", 215, 139.7,
             footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("WIFI_3V3", "local"), "2": ("GND", "local")})
-    s.place("R198", "R", "100k WLAN disable default asserted", 95, 152.4,
+    # Readability: R198/R199 sat 12.7 mm below U170 with overlapping bboxes
+    # (U170 Value field extends into the row). Moved +12.7 mm down. Nets unchanged.
+    s.place("R198", "R", "100k WLAN disable default asserted", 95, 165.1,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("WIFI_W_DISABLE1_N_EC", "hier"), "2": ("GND", "local")})
-    s.place("R199", "R", "100k Bluetooth disable default asserted", 125, 152.4,
+    s.place("R199", "R", "100k Bluetooth disable default asserted", 125, 165.1,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("WIFI_W_DISABLE2_N_EC", "hier"), "2": ("GND", "local")})
     s.place("R176", "R", "0R / PERST isolation", 20, 170.18, footprint=FOOTPRINTS["R"],
@@ -159,9 +164,11 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("OLED_A_SCL", "local")})
     s.place("R179", "R", "4.7k OLED A SDA pull-up", 20, 312.42, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("OLED_A_SDA", "local")})
-    s.place("C174", "C", "1u OLED A local", 90, 325.12, footprint=FOOTPRINTS["C_1u"],
+    # Readability: C174/C175 sat in the U45 (24-pin mux) column with overlapping
+    # bboxes. Moved +20 mm right to clear the mux body. Nets unchanged.
+    s.place("C174", "C", "1u OLED A local", 110, 325.12, footprint=FOOTPRINTS["C_1u"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
-    s.place("C175", "C", "100n OLED A local", 90, 337.82, footprint=FOOTPRINTS["C_100n"],
+    s.place("C175", "C", "100n OLED A local", 110, 337.82, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
     s.place("J41", "Conn_01x04", "OLED A cable: GND/3V3/SCL/SDA", 205, 287.02,
             footprint=FOOTPRINTS["Conn_01x04_Service_GH"],

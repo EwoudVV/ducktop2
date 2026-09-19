@@ -25,10 +25,14 @@ class KeyboardSheet(Sheet):
         self.body[first] = re.sub(r'\(uuid [0-9a-f-]+\)', f'(uuid {ident})', self.body[first], count=1)
         return pins
 
-    def label(self, x, y, name, hier=False):
+    def label(self, x, y, name, hier=False, angle=None, justify=None,
+                pin_dx=None, pin_dy=None):
         # This board is a standalone schematic. Global labels keep the existing
         # matrix net names without a nonexistent parent sheet or a path prefix.
-        super().label(x, y, name, hier=False)
+        # Cosmetic orientation (angle/justify) is preserved; only the kind is
+        # forced to global for electrical compatibility with the released board.
+        super().label(x, y, name, hier=False, angle=angle, justify=justify,
+                      pin_dx=pin_dx, pin_dy=pin_dy)
         self.body[-1] = self.body[-1].replace('(label ', '(global_label ', 1).replace(
             '\n  (at ', '\n  (shape bidirectional)\n  (at ', 1)
 

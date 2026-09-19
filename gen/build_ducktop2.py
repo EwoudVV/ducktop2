@@ -248,6 +248,10 @@ class Sheet:
         self.body = []
         self.refcounters = {}
         self.ref_units = {}
+        # Cosmetic-only readability state: counts labels per anchor so
+        # duplicate same-net labels at one pin stack can be fanned out by
+        # text orientation. Anchors, names, and kinds never change here.
+        self._label_anchor_counts = {}
 
     def _use_symbol(self, name):
         lib, text = genlib.load_renamed_symbol(name)
@@ -302,9 +306,28 @@ class Sheet:
         is_dnp = ("DNP" in value.upper()) if dnp is None else bool(dnp)
         if in_bom is None:
             in_bom = not is_dnp
+        # Cosmetic-only: keep small 2-pin passives compact, but lift
+        # Reference/Value clear of the body for larger symbols so the fixed
+        # +/-2.54 offsets no longer sit inside big IC bodies or their labels.
+        # Electrical data (ref/value/footprint/pins/nets) is untouched.
+        try:
+            _px = [p["x"] for p in pins.values()]
+            _py = [p["y"] for p in pins.values()]
+            _half_h = (max(abs(v) for v in _py) if _py else 0) + 2.54
+            _half_w = (max(abs(v) for v in _px) if _px else 0) + 2.54
+            _is_large = len(pins) > 8 or max(_half_h, _half_w) > 7.0
+        except Exception:
+            _is_large = False
+            _half_h = 2.54
+        if _is_large:
+            _ref_y = snap_coord(y - _half_h - 3.81)
+            _val_y = snap_coord(y + _half_h + 3.81)
+        else:
+            _ref_y = snap_coord(y - 2.54)
+            _val_y = snap_coord(y + 2.54)
         props = []
-        props.append(f'(property "Reference" "{ref}" (at {fmt_coord(x)} {fmt_coord(y - 2.54)} 0) (effects (font (size 1.27 1.27))))')
-        props.append(f'(property "Value" "{value}" (at {fmt_coord(x)} {fmt_coord(y + 2.54)} 0) (effects (font (size 1.27 1.27))))')
+        props.append(f'(property "Reference" "{ref}" (at {fmt_coord(x)} {fmt_coord(_ref_y)} 0) (effects (font (size 1.27 1.27))))')
+        props.append(f'(property "Value" "{value}" (at {fmt_coord(x)} {fmt_coord(_val_y)} 0) (effects (font (size 1.27 1.27))))')
         props.append(f'(property "Footprint" "{footprint}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
         props.append(f'(property "Datasheet" "{datasheet}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
         if extra_props:
@@ -366,10 +389,17 @@ class Sheet:
                     raise ValueError(f"{ref} ({symname} unit {unit}) has no pin {num}; available: {list(abs_pins)}")
                 ax, ay = abs_pins[num]
                 netname, kind = spec
+                # Pin offset in symbol-local coords (Y-up per genlib) tells
+                # which side of the body this pin exits, so the label text
+                # can be thrown outward instead of into the body. Anchor,
+                # name, and kind are unchanged (electrically identical).
+                _po = pins.get(num, {})
+                _pdx = _po.get("x", 0.0)
+                _pdy = _po.get("y", 0.0)
                 if kind == "local":
-                    self.label(ax, ay, netname, hier=False)
+                    self.label(ax, ay, netname, hier=False, pin_dx=_pdx, pin_dy=_pdy)
                 elif kind == "hier":
-                    self.label(ax, ay, netname, hier=True)
+                    self.label(ax, ay, netname, hier=True, pin_dx=_pdx, pin_dy=_pdy)
                 elif kind == "nc":
                     self.no_connect(ax, ay)
                 elif kind == "none":
@@ -378,15 +408,61 @@ class Sheet:
                     raise ValueError(f"unknown kind {kind}")
         return abs_pins
 
-    def label(self, x, y, name, hier=False):
+    def _outward_orientation(self, pin_dx, pin_dy):
+        # Left-side pins exit left (text left), right-side pins exit right
+        # (text right). Top/bottom-centered pins keep horizontal text to the
+        # right, which clears the body without vertical-text complexity.
+        try:
+            dx = float(pin_dx)
+        except Exception:
+            dx = 0.0
+        if dx < -0.5:
+            return 180, "right"
+        return 0, "left"
+
+    def label(self, x, y, name, hier=False, angle=None, justify=None,
+              pin_dx=None, pin_dy=None):
+        # Electrical contract: (x, y) anchor, name, and hier/kind must stay
+        # exactly on the pin endpoint. Only text orientation (angle/justify)
+        # may vary for readability.
         x = snap_coord(x)
         y = snap_coord(y)
+        if angle is None or justify is None:
+            _base_angle, _base_just = self._outward_orientation(pin_dx or 0.0, pin_dy or 0.0)
+            if angle is None:
+                angle = _base_angle
+            if justify is None:
+                justify = _base_just
+        # Deduplicate exact-duplicate labels (same anchor+name+kind from
+        # stacked multi-pin symbols, e.g. VBUS pins 2/3 at one coordinate).
+        # One label at a shared pin endpoint connects all coincident pins in
+        # KiCad, so keeping the first and skipping the rest is electrically
+        # identical while removing 0mm text stacks. Consume a UUID for each
+        # skipped duplicate so downstream UUIDs stay stable (smaller diff).
+        # Same-anchor different-net labels (a true short if it occurred) are
+        # fanned by orientation instead of hidden.
         kind = "hierarchical_label" if hier else "label"
+        _akey = (round(float(x), 4), round(float(y), 4), str(name), kind)
+        if _akey in self._label_anchor_counts:
+            U()
+            return
+        self._label_anchor_counts[_akey] = True
+        _poskey = (round(float(x), 4), round(float(y), 4))
+        _n = sum(1 for k in self._label_anchor_counts if k[0] == _poskey[0] and k[1] == _poskey[1])
+        # _n includes this label; fan only when >1 distinct net shares anchor
+        if _n > 1:
+            _cycle = [
+                (angle, justify),
+                ((angle + 180) % 360, "right" if justify == "left" else "left"),
+                (90, "left"),
+                (270, "right"),
+            ]
+            angle, justify = _cycle[(_n - 1) % len(_cycle)]
         shape = "\n  (shape bidirectional)" if hier else ""
         s = (
             f'({kind} "{name}"{shape}\n'
-            f'  (at {fmt_coord(x)} {fmt_coord(y)} 0)\n'
-            f'  (effects (font (size 1.27 1.27)) (justify left bottom))\n'
+            f'  (at {fmt_coord(x)} {fmt_coord(y)} {int(angle)})\n'
+            f'  (effects (font (size 1.27 1.27)) (justify {justify} bottom))\n'
             f'  (uuid {U()})\n'
             f')'
         )

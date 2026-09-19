@@ -210,7 +210,9 @@ def build(sheet_symbol_uuid):
                 "Manufacturer": "JST", "MPN": "SM02B-GHS-TB",
                 "MatingHousing": "GHR-02V-S", "Contacts": "SSHL-002T-P0.2",
             })
-    s.place("R209", "R", "10k lid pull-up", 330, 130.81, footprint=FOOTPRINTS["R"],
+    # Readability: R209 sat 3.81 mm below C206 with overlapping bboxes (paired
+    # by Y with J53). Moved +20 mm right to clear C206. Nets unchanged.
+    s.place("R209", "R", "10k lid pull-up", 350, 130.81, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("LID_CLOSED_N", "hier")})
     s.place("J54", "Conn_01x02", "Skin/hinge NTC", 410, 160.02,
             footprint=FOOTPRINTS["Conn_01x02_Service_GH"],

@@ -6070,8 +6070,8 @@
   (on_board yes)
   (dnp no)
   (uuid 1ea45975-ac97-5661-af33-4cde3af6bb7b)
-  (property "Reference" "U901" (at 299.72 142.24 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "RP2350A" (at 299.72 147.32 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U901" (at 299.72 92.71 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "RP2350A" (at 299.72 196.85 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_DFN_QFN:QFN-60-1EP_7x7mm_P0.4mm_EP3.4x3.4mm_ThermalVias" (at 299.72 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 299.72 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Raspberry Pi" (at 299.72 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6147,8 +6147,8 @@
   )
 )
 (label "MAKER_3V3_CORE"
-  (at 297.18 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 297.18 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5dc00f2a-90bd-5116-9213-ddfbe7fb82f0)
 )
 (label "MAKER_UART_TX"
@@ -6196,11 +6196,6 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9b7b873d-28b8-51f8-9a88-5685c2d6bded)
 )
-(label "MAKER_3V3_CORE"
-  (at 297.18 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4fc2a0ce-9862-597c-a133-ad0f19e4c50a)
-)
 (label "MAKER_GPIO4"
   (at 325.12 127 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -6241,39 +6236,29 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid fe7b7d5f-1d94-57a8-bfba-6ccadb4584e6)
 )
-(label "MAKER_3V3_CORE"
-  (at 297.18 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f8884834-fd74-5c16-bee1-5a14af74a34c)
-)
 (label "MAKER_XIN"
-  (at 274.32 160.02 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 160.02 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7a51b593-5a41-5ba7-87a5-6cfcf5ff420a)
 )
 (label "MAKER_XOUT"
-  (at 274.32 170.18 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 170.18 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 814a228a-ac2f-5fe6-9a67-78d878764a2a)
 )
-(label "MAKER_1V1"
-  (at 312.42 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dff7c6c4-ceca-5078-b141-4bcc07d25454)
-)
 (label "MAKER_SWCLK_MCU"
-  (at 274.32 177.8 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 177.8 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ded6adf1-e1d9-59f6-b038-90b5dd4437f0)
 )
 (label "MAKER_SWDIO_MCU"
-  (at 274.32 180.34 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 180.34 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7a91919f-b5f5-5b33-925b-935fe7480546)
 )
 (label "MAKER_RUN_N"
-  (at 274.32 121.92 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 121.92 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 66f08d92-f6c5-58eb-a86d-9f831db64b0d)
 )
 (label "MAKER_SPI_MISO"
@@ -6290,11 +6275,6 @@
   (at 325.12 152.4 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 7b1e6fae-65a1-51fe-a6ec-4780844f3d67)
-)
-(label "MAKER_3V3_CORE"
-  (at 297.18 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a2e2d53c-26b2-5d4c-aa87-970115860fda)
 )
 (label "MAKER_SPI_MOSI"
   (at 325.12 154.94 0)
@@ -6331,16 +6311,6 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid a4c6368a-49da-500d-a4c3-2e7a947c2788)
 )
-(label "MAKER_3V3_CORE"
-  (at 297.18 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fa6447fd-a794-560c-a1ce-d7f4bf1646d9)
-)
-(label "MAKER_1V1"
-  (at 312.42 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fe84e975-31aa-56b1-adaa-241bae67e0d2)
-)
 (label "MAKER_ADC0"
   (at 325.12 175.26 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -6362,23 +6332,18 @@
   (uuid 171f0d4c-1ba1-5ea2-b14a-d02683da92ac)
 )
 (label "MAKER_ADC_AVDD"
-  (at 289.56 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 289.56 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 20f58d13-854f-5aec-8060-627b4e8f3281)
 )
-(label "MAKER_3V3_CORE"
-  (at 297.18 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6f3fd54c-9447-5252-8a3c-913c416736d1)
-)
 (label "MAKER_VREG_AVDD"
-  (at 281.94 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 281.94 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 06db7f65-8359-55d2-81d1-77b6208b6f0c)
 )
 (label "GND"
-  (at 297.18 190.5 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 297.18 190.5 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 51a98db4-d266-5954-9631-6f7f0a7cb861)
 )
 (label "MAKER_VREG_LX"
@@ -6397,53 +6362,53 @@
   (uuid 24fc5be6-bdf2-5981-9e2e-fcb85f66ad02)
 )
 (label "MAKER_USB_MCU_DN"
-  (at 274.32 129.54 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 129.54 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid bfa4af26-f9db-54b1-8d07-3de6bbbf7fe4)
 )
 (label "MAKER_USB_MCU_DP"
-  (at 274.32 132.08 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 132.08 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ed2c20eb-85b2-5fc9-b49b-c6e7228d8700)
 )
 (label "MAKER_3V3_CORE"
-  (at 287.02 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 287.02 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 101fc22e-ee11-54d4-883f-04402f3f5774)
 )
 (label "MAKER_3V3_CORE"
-  (at 294.64 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 294.64 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6aaa4b3a-fa40-5093-bd90-67861030e807)
 )
 (label "MAKER_QSPI_SD3"
-  (at 274.32 152.4 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 152.4 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 53be27c6-ce6a-5fe1-abad-d7fcf6d4c77b)
 )
 (label "MAKER_QSPI_SCLK"
-  (at 274.32 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 811f39e3-e024-5d55-b84e-5deb3c18127e)
 )
 (label "MAKER_QSPI_SD0"
-  (at 274.32 144.78 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 144.78 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f9defb58-0bbd-51cc-aa08-7d28c9434a34)
 )
 (label "MAKER_QSPI_SD2"
-  (at 274.32 149.86 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 149.86 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3415be25-d780-5d75-b12b-9c76983d685b)
 )
 (label "MAKER_QSPI_SD1"
-  (at 274.32 147.32 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 147.32 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f35c50a5-3c77-5015-9fca-1f6f54e79ebe)
 )
 (label "MAKER_QSPI_SS"
-  (at 274.32 139.7 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 274.32 139.7 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 0a295225-573e-585f-af86-b59c803f172d)
 )
 (label "GND"
@@ -6460,8 +6425,8 @@
   (on_board yes)
   (dnp no)
   (uuid 53ea3096-3485-5dc4-ae96-7eaf0e78de27)
-  (property "Reference" "U902" (at 105.41 121.92 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "W25Q32RVXHJQ 32Mbit (4MiB)" (at 105.41 127 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U902" (at 105.41 105.41 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "W25Q32RVXHJQ 32Mbit (4MiB)" (at 105.41 143.51 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:Winbond_USON-8-1EP_3x2mm_P0.5mm_EP0.2x1.6mm" (at 105.41 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 105.41 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Winbond" (at 105.41 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6485,18 +6450,18 @@
   )
 )
 (label "MAKER_QSPI_SS"
-  (at 95.25 116.84 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 116.84 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a92040d4-f6aa-5bb4-94d7-cc4d97d9c6cd)
 )
 (label "MAKER_QSPI_SD1"
-  (at 95.25 124.46 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 124.46 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ae454fde-4486-5b56-8f94-7f9e2771396e)
 )
 (label "MAKER_QSPI_SD2"
-  (at 95.25 127 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 127 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 85188103-7b88-510e-826e-67d54e2d21de)
 )
 (label "GND"
@@ -6505,18 +6470,18 @@
   (uuid 80f98f45-afc7-5f64-8f27-d36386962fe6)
 )
 (label "MAKER_QSPI_SD0"
-  (at 95.25 121.92 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 121.92 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6f73bddb-f57d-5a2e-b463-03e22a717073)
 )
 (label "MAKER_QSPI_SCLK"
-  (at 95.25 119.38 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 119.38 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid dc461b7d-3f89-59c6-8ce1-7dcc5473d450)
 )
 (label "MAKER_QSPI_SD3"
-  (at 95.25 129.54 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 129.54 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6af9eb0c-de97-5ca6-a1b1-ae1884e25e46)
 )
 (label "MAKER_3V3_CORE"
@@ -6681,8 +6646,8 @@
   (on_board yes)
   (dnp no)
   (uuid 5c1c0b12-eb07-571b-a2e3-9c88a834cd22)
-  (property "Reference" "Y900" (at 90.17 212.09 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Abracon ABM8-272-T3 12MHz" (at 90.17 217.17 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "Y900" (at 90.17 203.2 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Abracon ABM8-272-T3 12MHz" (at 90.17 226.06 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm" (at 90.17 214.63 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 90.17 214.63 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Abracon" (at 90.17 214.63 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6701,8 +6666,8 @@
   )
 )
 (label "MAKER_XIN"
-  (at 86.36 214.63 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 86.36 214.63 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e82e44c6-00fb-5022-aa0b-b36292869294)
 )
 (label "GND"
@@ -6714,11 +6679,6 @@
   (at 93.98 214.63 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e00c9904-a594-5d6b-9620-e3ab8e8b2fda)
-)
-(label "GND"
-  (at 90.17 219.71 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 28db78ae-abf8-5ac4-aa38-073ed415834b)
 )
 (symbol
   (lib_id "Device:R")
@@ -7415,8 +7375,8 @@
   (on_board yes)
   (dnp no)
   (uuid b51fb6d0-4287-520b-877a-70f58064c22b)
-  (property "Reference" "U903" (at 149.86 302.26 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPS62821DLC 1A adjustable buck" (at 149.86 307.34 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U903" (at 149.86 290.83 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS62821DLC 1A adjustable buck" (at 149.86 318.77 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:Texas_VSON-HR-8_1.5x2mm_P0.5mm" (at 149.86 304.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 149.86 304.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 149.86 304.8 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7439,13 +7399,13 @@
   )
 )
 (label "MAKER_5V_CORE"
-  (at 142.24 300.99 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 142.24 300.99 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ebdb4298-3aab-5dde-a31b-3fd6af3c30f4)
 )
 (label "MAKER_3V3_FB"
-  (at 142.24 303.53 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 142.24 303.53 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a37480e6-0991-55d8-aa66-01a6429b232a)
 )
 (label "GND"
@@ -7465,8 +7425,8 @@
   (uuid 3cd5eca3-3111-5cfb-804f-20e704e15393)
 )
 (label "MAKER_5V_CORE"
-  (at 142.24 306.07 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 142.24 306.07 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e9017429-1f38-528e-a37b-bcf52680631b)
 )
 (no_connect (at 157.48 303.53) (uuid dc5fba57-237b-5a72-ac77-c6d9c6fd6d4c))
@@ -7767,8 +7727,8 @@
   (on_board yes)
   (dnp no)
   (uuid 87349748-8251-595b-9fa3-57deddc06e38)
-  (property "Reference" "U904" (at 405.13 297.18 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPS2553DDBVR 5V header, 300mA nominal" (at 405.13 302.26 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U904" (at 405.13 285.75 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS2553DDBVR 5V header, 300mA nominal" (at 405.13 313.69 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 405.13 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 405.13 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 405.13 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7789,8 +7749,8 @@
   )
 )
 (label "MAKER_5V_CORE"
-  (at 397.51 295.91 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 295.91 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e4babbc2-71b7-53b7-b1a5-248da684ad22)
 )
 (label "GND"
@@ -7799,8 +7759,8 @@
   (uuid 78352cab-11e3-5c43-94b7-99530d6a3bb3)
 )
 (label "MAKER_PWR_EN"
-  (at 397.51 298.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 298.45 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 4314d91a-457f-509b-a39a-0a1092ef90ca)
 )
 (label "MAKER_PWR_FAULT_N"
@@ -7809,8 +7769,8 @@
   (uuid ab251baa-0186-5fe5-b9d7-5b93273a7275)
 )
 (label "MAKER_5V_ILIM"
-  (at 397.51 300.99 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 300.99 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 8fd468ef-c64e-55e9-8707-a37e4de2ceb0)
 )
 (label "J901_5V_OUT"
@@ -7935,8 +7895,8 @@
   (on_board yes)
   (dnp no)
   (uuid 2cac62f9-8fd6-5669-8275-983d2646b522)
-  (property "Reference" "U905" (at 510.54 297.18 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPS2553DDBVR 3V3 header, 120mA nominal" (at 510.54 302.26 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U905" (at 510.54 285.75 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS2553DDBVR 3V3 header, 120mA nominal" (at 510.54 313.69 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 510.54 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 510.54 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 510.54 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7957,8 +7917,8 @@
   )
 )
 (label "MAKER_3V3_CORE"
-  (at 502.92 295.91 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 502.92 295.91 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a2984db3-a6dc-55f1-8933-1b5faacd2585)
 )
 (label "GND"
@@ -7967,8 +7927,8 @@
   (uuid ceb39216-e748-5b98-9561-070311e0fc05)
 )
 (label "MAKER_PWR_EN"
-  (at 502.92 298.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 502.92 298.45 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7a9a668f-e615-5db6-839c-97b99415d11e)
 )
 (label "MAKER_PWR_FAULT_N"
@@ -7977,8 +7937,8 @@
   (uuid 6420fe05-8ace-53ab-bcfd-fce43d3c03d5)
 )
 (label "MAKER_3V3_ILIM"
-  (at 502.92 300.99 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 502.92 300.99 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5330634c-818c-5a00-aab0-b69763319108)
 )
 (label "J901_3V3_OUT"
@@ -8320,8 +8280,8 @@
   (on_board yes)
   (dnp no)
   (uuid ffa31d69-491e-5479-8c1e-fec445e54475)
-  (property "Reference" "U900" (at 90.17 392.43 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "USBLC6-2P6 maker USB ESD" (at 90.17 397.51 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U900" (at 90.17 381 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "USBLC6-2P6 maker USB ESD" (at 90.17 408.94 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-666" (at 90.17 394.97 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 90.17 394.97 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "STMicroelectronics" (at 90.17 394.97 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -8343,8 +8303,8 @@
   )
 )
 (label "MAKER_USB_DP"
-  (at 85.09 394.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 85.09 394.97 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 27686422-a628-536c-a636-c84d90b9df42)
 )
 (label "MAKER_USB_DP"
@@ -8353,8 +8313,8 @@
   (uuid a4ab6eee-70c6-5e27-a2ae-dad4c6d2a005)
 )
 (label "MAKER_USB_DN"
-  (at 85.09 397.51 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 85.09 397.51 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f154a4b7-8bdc-5334-a97a-a34e3bc1a3e5)
 )
 (label "MAKER_USB_DN"
@@ -8374,14 +8334,14 @@
 )
 (hierarchical_label "MAKER_USB_DP"
   (shape bidirectional)
-  (at 85.09 394.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 85.09 394.97 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e4638646-0f9b-5921-9801-04937a2d491a)
 )
 (hierarchical_label "MAKER_USB_DN"
   (shape bidirectional)
-  (at 85.09 397.51 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 85.09 397.51 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9d117f35-bafe-5d85-af0f-dba56c1a5545)
 )
 (symbol
@@ -8393,8 +8353,8 @@
   (on_board yes)
   (dnp no)
   (uuid befcd0b2-f947-5266-a3d1-2b6868ea7a2b)
-  (property "Reference" "U906" (at 149.86 392.43 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TS3USB30EDGSR maker USB host-state isolation" (at 149.86 397.51 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U906" (at 149.86 378.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TS3USB30EDGSR maker USB host-state isolation" (at 149.86 411.48 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:TSSOP-10_3x3mm_P0.5mm" (at 149.86 394.97 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 149.86 394.97 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 149.86 394.97 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -8420,8 +8380,8 @@
   )
 )
 (label "GND"
-  (at 139.7 400.05 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 139.7 400.05 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d1e21008-e9ee-5c81-8964-161686020190)
 )
 (hierarchical_label "MAKER_USB_DP"
@@ -8432,8 +8392,8 @@
 )
 (no_connect (at 160.02 397.51) (uuid 6db6be1e-ae35-5670-8af2-be970506b6fc))
 (label "MAKER_USB_ISO_DP"
-  (at 139.7 389.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 139.7 389.89 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 48eeb01f-46b7-57c7-ac5b-2b1490b75281)
 )
 (label "GND"
@@ -8442,8 +8402,8 @@
   (uuid 7d67d7d8-3b24-516a-a19c-d61f0ea8e7e7)
 )
 (label "MAKER_USB_ISO_DN"
-  (at 139.7 392.43 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 139.7 392.43 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 387ae34c-bc85-5b72-9bb1-815bb6fcad7e)
 )
 (no_connect (at 160.02 400.05) (uuid 5dd60b2d-a7e3-5c7a-b23d-d058399454ee))
@@ -8454,8 +8414,8 @@
   (uuid e84327fe-7b1a-501c-8da9-d1e8b7b1a5d8)
 )
 (label "MAKER_USB_OE_N"
-  (at 139.7 397.51 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 139.7 397.51 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 92328c9c-6cef-5153-adb0-bf3e7b0c1b2f)
 )
 (label "MAKER_3V3_CORE"
@@ -8544,8 +8504,8 @@
   (on_board yes)
   (dnp no)
   (uuid d4ea88b0-bc32-55f0-b633-4696da15242b)
-  (property "Reference" "Q901" (at 284.48 377.19 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "2N7002 physical host-VBUS USB connect gate" (at 284.48 382.27 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "Q901" (at 284.48 368.3 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2N7002 physical host-VBUS USB connect gate" (at 284.48 391.16 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 284.48 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 284.48 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "onsemi" (at 284.48 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -8564,8 +8524,8 @@
 )
 (hierarchical_label "INTERNAL_USB_VBUS_VALID"
   (shape bidirectional)
-  (at 279.4 379.73 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 279.4 379.73 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d3de4d1a-8b40-52d0-ab95-a725d4c44d54)
 )
 (label "GND"
@@ -8731,8 +8691,8 @@
   (on_board yes)
   (dnp no)
   (uuid 75e7a5ea-7808-589f-84da-cb556df1a9c0)
-  (property "Reference" "SW900" (at 469.9 407.67 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Maker reset/RUN" (at 469.9 412.75 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW900" (at 469.9 403.86 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Maker reset/RUN" (at 469.9 416.56 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Button_Switch_SMD:SW_SPST_B3S-1000" (at 469.9 410.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 469.9 410.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Omron" (at 469.9 410.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -8749,8 +8709,8 @@
   )
 )
 (label "MAKER_RUN_N"
-  (at 464.82 410.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 464.82 410.21 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b0a56a71-529f-5014-a069-ea6cad101962)
 )
 (label "MAKER_RUN_SW"
@@ -8803,8 +8763,8 @@
   (on_board yes)
   (dnp no)
   (uuid 68b13f3c-fa42-50f4-9d1e-bb94c5d1271b)
-  (property "Reference" "SW901" (at 529.59 407.67 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Maker BOOTSEL" (at 529.59 412.75 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW901" (at 529.59 403.86 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Maker BOOTSEL" (at 529.59 416.56 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Button_Switch_SMD:SW_SPST_B3S-1000" (at 529.59 410.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 529.59 410.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Omron" (at 529.59 410.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -8821,8 +8781,8 @@
   )
 )
 (label "MAKER_BOOT_N"
-  (at 524.51 410.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 524.51 410.21 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 65a2b52c-2012-5d69-9418-5a613fc02b1c)
 )
 (label "GND"
@@ -8947,8 +8907,8 @@
   (on_board yes)
   (dnp no)
   (uuid a532e12a-a200-5491-bf6a-08e8b20451e9)
-  (property "Reference" "J902" (at 650.24 394.97 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TC2030 Cortex SWD: VTref/SWDIO/RUN/SWCLK/GND/NC" (at 650.24 400.05 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "J902" (at 650.24 383.54 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TC2030 Cortex SWD: VTref/SWDIO/RUN/SWCLK/GND/NC" (at 650.24 411.48 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical" (at 650.24 397.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 650.24 397.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ProcurementClass" "PCB copper test feature" (at 650.24 397.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -8969,28 +8929,28 @@
   )
 )
 (label "MAKER_SWD_VTREF"
-  (at 645.16 392.43 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 645.16 392.43 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ea1b2307-9a3c-5eff-ae6b-21d7c593425c)
 )
 (label "MAKER_SWDIO"
-  (at 645.16 394.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 645.16 394.97 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9559ce85-4107-56d0-9e4a-4b7eaf744527)
 )
 (label "MAKER_RUN_N"
-  (at 645.16 397.51 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 645.16 397.51 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d95b814c-f36b-542f-a0e3-e16ff164903d)
 )
 (label "MAKER_SWCLK"
-  (at 645.16 400.05 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 645.16 400.05 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 18058835-a4bd-5852-bb75-272a767a79b7)
 )
 (label "GND"
-  (at 645.16 402.59 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 645.16 402.59 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 92fd9c91-1ab8-5b84-8e3e-fbb3e0d444ac)
 )
 (no_connect (at 645.16 405.13) (uuid 5f394c20-ddc0-5adf-ada6-2ec5f9981f98))
@@ -9004,8 +8964,8 @@
   (on_board yes)
   (dnp no)
   (uuid d69aeec9-8871-589f-b158-138bbc898d15)
-  (property "Reference" "U910" (at 500.38 92.71 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "SN74CB3T3245PWR maker header isolation bank 1" (at 500.38 97.79 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U910" (at 500.38 76.2 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74CB3T3245PWR maker header isolation bank 1" (at 500.38 114.3 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" (at 500.38 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 500.38 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 500.38 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -9057,8 +9017,8 @@
   (uuid 6a83d35e-7aeb-5f57-8478-74390baabc9c)
 )
 (label "MAKER_BOOT_N"
-  (at 492.76 86.36 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 86.36 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 60c08e19-ee3b-533a-86d1-e66b56af1075)
 )
 (label "J901_MAKER_BOOT_N_ISO"
@@ -9067,8 +9027,8 @@
   (uuid fbc3685f-2460-5a4b-be31-69084d2be87e)
 )
 (label "MAKER_RUN_N"
-  (at 492.76 88.9 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 88.9 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 8613b63b-f0b1-528e-a6d7-b7a90b344f09)
 )
 (label "J901_MAKER_RUN_N_ISO"
@@ -9077,8 +9037,8 @@
   (uuid 44dddb2c-e2f4-5786-9c80-defd565cb500)
 )
 (label "MAKER_SWDIO"
-  (at 492.76 91.44 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 91.44 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3cda0c1e-3a3e-5e22-9ace-a58d3599e94b)
 )
 (label "J901_MAKER_SWDIO_ISO"
@@ -9087,8 +9047,8 @@
   (uuid efe82be6-e143-5e81-b2b5-c61acccf634f)
 )
 (label "MAKER_SWCLK"
-  (at 492.76 93.98 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 93.98 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid da632d08-5f09-53d4-9a7d-908f759ed6bf)
 )
 (label "J901_MAKER_SWCLK_ISO"
@@ -9097,8 +9057,8 @@
   (uuid a6fb3d2a-a777-502a-9d3e-6050a8d3fa3a)
 )
 (label "MAKER_UART_TX"
-  (at 492.76 96.52 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 96.52 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5010d981-3d70-5dad-831d-a90272729dc2)
 )
 (label "J901_MAKER_UART_TX_ISO"
@@ -9107,8 +9067,8 @@
   (uuid 359ab5fd-9a21-5ce3-81ae-acd1cbcad22d)
 )
 (label "MAKER_UART_RX"
-  (at 492.76 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 279a644f-ece1-5fa2-b2b3-114239d64b33)
 )
 (label "J901_MAKER_UART_RX_ISO"
@@ -9117,8 +9077,8 @@
   (uuid d8f98115-8955-5962-bcae-3b901fa2890b)
 )
 (label "MAKER_I2C_SCL"
-  (at 492.76 101.6 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 101.6 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c7830629-badf-59b7-bac5-f4e6b37d4077)
 )
 (label "J901_MAKER_I2C_SCL_ISO"
@@ -9127,8 +9087,8 @@
   (uuid 0320d8c5-6c9f-5c9a-b45b-aff0619d04f9)
 )
 (label "MAKER_I2C_SDA"
-  (at 492.76 104.14 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 104.14 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d01d0a88-2ed4-582c-aaad-5eb2d0791542)
 )
 (label "J901_MAKER_I2C_SDA_ISO"
@@ -9181,8 +9141,8 @@
   (on_board yes)
   (dnp no)
   (uuid 35f22166-1159-55a4-971f-dd2d6d876b6c)
-  (property "Reference" "U911" (at 599.44 92.71 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "SN74CB3T3245PWR maker header isolation bank 2" (at 599.44 97.79 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U911" (at 599.44 76.2 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74CB3T3245PWR maker header isolation bank 2" (at 599.44 114.3 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" (at 599.44 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 599.44 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 599.44 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -9234,8 +9194,8 @@
   (uuid 278486ac-e8c9-5a6a-b24d-3e5509c419e9)
 )
 (label "MAKER_SPI_SCK"
-  (at 591.82 86.36 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 86.36 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2c2d0b2a-8339-599e-8778-a52bddc4534c)
 )
 (label "J901_MAKER_SPI_SCK_ISO"
@@ -9244,8 +9204,8 @@
   (uuid c800ea14-a637-5470-904a-f31de39b26b8)
 )
 (label "MAKER_SPI_MISO"
-  (at 591.82 88.9 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 88.9 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 4edce317-2cf0-56fe-b775-c33a73c28046)
 )
 (label "J901_MAKER_SPI_MISO_ISO"
@@ -9254,8 +9214,8 @@
   (uuid 30a8a574-d526-5c06-bdd9-af9bc1bb170b)
 )
 (label "MAKER_SPI_MOSI"
-  (at 591.82 91.44 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 91.44 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b6713f84-4565-5d13-bff0-7c5ffbcde36e)
 )
 (label "J901_MAKER_SPI_MOSI_ISO"
@@ -9264,8 +9224,8 @@
   (uuid 121eab63-3c9d-5676-ab77-822aac6b2b68)
 )
 (label "MAKER_SPI_CS_N"
-  (at 591.82 93.98 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 93.98 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e76a1477-8a05-5f58-8da6-72ffaf09606f)
 )
 (label "J901_MAKER_SPI_CS_N_ISO"
@@ -9274,8 +9234,8 @@
   (uuid 2c66967e-8f64-510f-8dbf-8e5780f9b375)
 )
 (label "MAKER_GPIO0"
-  (at 591.82 96.52 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 96.52 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6aff9443-0254-5a7c-9f9e-b2ad861c5b71)
 )
 (label "J901_MAKER_GPIO0_ISO"
@@ -9284,8 +9244,8 @@
   (uuid 5e2311b6-768d-5c13-aac6-709fc52d2b85)
 )
 (label "MAKER_GPIO1"
-  (at 591.82 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid dc31f365-74dd-5436-a2b2-13e790af5c29)
 )
 (label "J901_MAKER_GPIO1_ISO"
@@ -9294,8 +9254,8 @@
   (uuid e13be7ef-1972-5281-a5ea-dc9f1b71a685)
 )
 (label "MAKER_GPIO2"
-  (at 591.82 101.6 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 101.6 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c2b511fd-e04f-55ce-9da3-a4504e27e557)
 )
 (label "J901_MAKER_GPIO2_ISO"
@@ -9304,8 +9264,8 @@
   (uuid a18091e6-fe14-5c3d-b422-4c02e6a54cd7)
 )
 (label "MAKER_GPIO3"
-  (at 591.82 104.14 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 104.14 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid dd872769-a65d-5101-8192-e8dfadd72cba)
 )
 (label "J901_MAKER_GPIO3_ISO"
@@ -9358,8 +9318,8 @@
   (on_board yes)
   (dnp no)
   (uuid 6e9fbeb7-2261-582a-9bcf-7bcfbe1bc1ff)
-  (property "Reference" "U912" (at 500.38 196.85 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "SN74CB3T3245PWR maker header isolation bank 3" (at 500.38 201.93 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U912" (at 500.38 180.34 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74CB3T3245PWR maker header isolation bank 3" (at 500.38 218.44 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" (at 500.38 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 500.38 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 500.38 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -9411,8 +9371,8 @@
   (uuid 7b7758a2-cb81-5a07-9951-b87dd3b920ea)
 )
 (label "MAKER_GPIO4"
-  (at 492.76 190.5 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 190.5 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ee3a6719-62bf-5110-a8cd-feb844f2311d)
 )
 (label "J901_MAKER_GPIO4_ISO"
@@ -9421,8 +9381,8 @@
   (uuid 5b74d74b-6a98-5e28-b936-6c95ca96e117)
 )
 (label "MAKER_GPIO5"
-  (at 492.76 193.04 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 193.04 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 295c3723-e06b-59de-8665-238efc39650b)
 )
 (label "J901_MAKER_GPIO5_ISO"
@@ -9431,8 +9391,8 @@
   (uuid 72d07878-28a3-58ce-8762-12baf39d6230)
 )
 (label "MAKER_GPIO6"
-  (at 492.76 195.58 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 195.58 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3666e4c6-2402-5b8e-bb5f-f0b088db0fed)
 )
 (label "J901_MAKER_GPIO6_ISO"
@@ -9441,8 +9401,8 @@
   (uuid fce54ea1-de41-520e-8f6b-ca3fd5aba3d4)
 )
 (label "MAKER_GPIO7"
-  (at 492.76 198.12 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 198.12 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7c0ba3e3-d7ce-5bee-8fec-fc03c3854f83)
 )
 (label "J901_MAKER_GPIO7_ISO"
@@ -9451,8 +9411,8 @@
   (uuid 31e9ec6d-5c5d-56d0-b251-90800904ca0d)
 )
 (label "MAKER_GPIO8"
-  (at 492.76 200.66 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 200.66 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c4148a82-02d8-5f1c-8338-42a3d256dbff)
 )
 (label "J901_MAKER_GPIO8_ISO"
@@ -9461,8 +9421,8 @@
   (uuid 410d149c-e280-52d6-898b-0c1004d44203)
 )
 (label "MAKER_GPIO9"
-  (at 492.76 203.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 203.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 08218f53-08c3-5e8a-bbc1-04545f1bd1cc)
 )
 (label "J901_MAKER_GPIO9_ISO"
@@ -9471,8 +9431,8 @@
   (uuid 84f990d2-a9d8-5e00-892a-e37daa046504)
 )
 (label "MAKER_GPIO10"
-  (at 492.76 205.74 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 205.74 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid dd30e674-a67e-547d-92d8-3d86bb6f5c72)
 )
 (label "J901_MAKER_GPIO10_ISO"
@@ -9481,8 +9441,8 @@
   (uuid 4db8cbae-3153-5f04-a2c6-33b94a3b1a08)
 )
 (label "MAKER_GPIO11"
-  (at 492.76 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 59df09e0-666b-5fce-a3aa-4e3b17718725)
 )
 (label "J901_MAKER_GPIO11_ISO"
@@ -9535,8 +9495,8 @@
   (on_board yes)
   (dnp no)
   (uuid 6b96e727-0a4c-5ef1-a092-999b758cef4a)
-  (property "Reference" "U913" (at 599.44 196.85 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "SN74CB3T3245PWR maker header isolation bank 4" (at 599.44 201.93 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U913" (at 599.44 180.34 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74CB3T3245PWR maker header isolation bank 4" (at 599.44 218.44 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" (at 599.44 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 599.44 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 599.44 199.39 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -9588,8 +9548,8 @@
   (uuid 3dcc3034-4f2d-55d9-8aae-a7f876ce5da7)
 )
 (label "MAKER_GPIO12"
-  (at 591.82 190.5 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 190.5 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a49627f6-a26b-5c40-93ce-e73632b1feb4)
 )
 (label "J901_MAKER_GPIO12_ISO"
@@ -9598,8 +9558,8 @@
   (uuid c4487edc-bf28-5f81-bb43-d43c07da5b10)
 )
 (label "MAKER_GPIO13"
-  (at 591.82 193.04 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 193.04 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f43004b6-490f-576e-8b33-f04b0d09182f)
 )
 (label "J901_MAKER_GPIO13_ISO"
@@ -9608,8 +9568,8 @@
   (uuid 5fab8951-bd14-5088-984e-0e6fbac28b08)
 )
 (label "MAKER_GPIO14"
-  (at 591.82 195.58 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 195.58 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f0586ff9-b0f6-5070-ad5c-92b420dfd78f)
 )
 (label "J901_MAKER_GPIO14_ISO"
@@ -9618,8 +9578,8 @@
   (uuid fac85314-21bb-5310-896a-ece5e6cc1bb5)
 )
 (label "MAKER_ADC0"
-  (at 591.82 198.12 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 198.12 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 8a5faf3d-a182-5746-8852-ba88a0f56278)
 )
 (label "J901_MAKER_ADC0_ISO"
@@ -9628,8 +9588,8 @@
   (uuid 38ba6873-1eb2-5eb8-99d1-5d7d637be94f)
 )
 (label "MAKER_ADC1"
-  (at 591.82 200.66 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 200.66 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 0c02b816-0f0c-587a-9577-94b4bbd68cc7)
 )
 (label "J901_MAKER_ADC1_ISO"
@@ -9638,8 +9598,8 @@
   (uuid 021ed9b8-4008-5cd6-9094-3569a4227054)
 )
 (label "MAKER_ADC2"
-  (at 591.82 203.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 591.82 203.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 32e535a6-30a7-596d-9d2d-633e8d083d8e)
 )
 (label "J901_MAKER_ADC2_ISO"
@@ -10776,8 +10736,8 @@
   (on_board yes)
   (dnp no)
   (uuid 7b611451-05fc-5a9d-92fc-015ee3ec182e)
-  (property "Reference" "U914" (at 699.77 72.39 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR maker header ESD bank 1" (at 699.77 77.47 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U914" (at 699.77 55.88 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR maker header ESD bank 1" (at 699.77 93.98 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 699.77 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 699.77 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 699.77 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -10807,23 +10767,18 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid f95997d9-8e33-5336-9af1-7b78d88a71b7)
 )
-(label "GND"
-  (at 699.77 87.63 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4a1b9481-7e26-59d2-8f78-27c89e89c8f7)
-)
 (no_connect (at 712.47 82.55) (uuid 0881d25b-09e4-5d75-89e1-8466d87523e1))
 (no_connect (at 712.47 67.31) (uuid a6483735-b515-5396-9ca4-ae5656173fbb))
 (no_connect (at 687.07 82.55) (uuid af059e3e-929b-5e01-b281-ae751f63dbf2))
 (no_connect (at 687.07 67.31) (uuid e1a7495b-8fe3-5732-97be-4a44660180f3))
 (label "J901_MAKER_BOOT_N"
-  (at 687.07 72.39 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 687.07 72.39 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid eba997e6-06f2-535c-9ca3-8cce1d377b8a)
 )
 (label "J901_MAKER_RUN_N"
-  (at 687.07 77.47 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 687.07 77.47 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 07ea98b3-ccb8-556e-bbfb-4735eabf845f)
 )
 (label "J901_MAKER_SWDIO"
@@ -10845,8 +10800,8 @@
   (on_board yes)
   (dnp no)
   (uuid dcc8f922-c20f-5b8b-9560-4cd162fdafcd)
-  (property "Reference" "U915" (at 764.54 72.39 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR maker header ESD bank 2" (at 764.54 77.47 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U915" (at 764.54 55.88 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR maker header ESD bank 2" (at 764.54 93.98 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 764.54 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 764.54 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 764.54 74.93 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -10876,23 +10831,18 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 97ccdd9d-ba3a-560e-bac2-44d90d6a7350)
 )
-(label "GND"
-  (at 764.54 87.63 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4f40124d-2256-5ee0-b181-4f74b995b419)
-)
 (no_connect (at 777.24 82.55) (uuid 35da8c2a-025a-5f39-abeb-07f8bfe84548))
 (no_connect (at 777.24 67.31) (uuid 519123e5-4e0b-518d-813a-ec3c399add0a))
 (no_connect (at 751.84 82.55) (uuid 266cbdcc-4052-5b33-a436-8b7c4f53a7a9))
 (no_connect (at 751.84 67.31) (uuid 4d005d8e-8e42-5b44-a65e-b4577f6a45b9))
 (label "J901_MAKER_UART_TX"
-  (at 751.84 72.39 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 751.84 72.39 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d63e60c2-b8ae-5d6b-80a9-018290c3fb13)
 )
 (label "J901_MAKER_UART_RX"
-  (at 751.84 77.47 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 751.84 77.47 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a48b00c5-6d6d-5c13-8bbf-424c80d4ab0e)
 )
 (label "J901_MAKER_I2C_SCL"
@@ -10914,8 +10864,8 @@
   (on_board yes)
   (dnp no)
   (uuid 1955ee95-682e-594c-99a2-6ee92f837e6c)
-  (property "Reference" "U916" (at 699.77 127 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR maker header ESD bank 3" (at 699.77 132.08 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U916" (at 699.77 110.49 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR maker header ESD bank 3" (at 699.77 148.59 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 699.77 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 699.77 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 699.77 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -10945,23 +10895,18 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 5550609d-dc0b-5bd1-8aca-e0b29c56adec)
 )
-(label "GND"
-  (at 699.77 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9e300208-cbe6-5fc1-ac33-a4455763910b)
-)
 (no_connect (at 712.47 137.16) (uuid be41fed0-302b-571e-b1e6-8a9d53a77d7c))
 (no_connect (at 712.47 121.92) (uuid 02637c09-922d-5f0e-9054-9714e78986ae))
 (no_connect (at 687.07 137.16) (uuid 551ea185-e1f4-5b93-8101-61f2da00da1b))
 (no_connect (at 687.07 121.92) (uuid ed2452af-2fca-5631-befa-b0ffaccea462))
 (label "J901_MAKER_SPI_SCK"
-  (at 687.07 127 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 687.07 127 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e09c3535-0a57-5ee3-9c6e-a93535273724)
 )
 (label "J901_MAKER_SPI_MISO"
-  (at 687.07 132.08 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 687.07 132.08 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid eeeae74d-0773-51bb-9410-6fabddd92308)
 )
 (label "J901_MAKER_SPI_MOSI"
@@ -10983,8 +10928,8 @@
   (on_board yes)
   (dnp no)
   (uuid 4affe580-918d-52e6-ac24-0f067d9cd18f)
-  (property "Reference" "U917" (at 764.54 127 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR maker header ESD bank 4" (at 764.54 132.08 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U917" (at 764.54 110.49 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR maker header ESD bank 4" (at 764.54 148.59 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 764.54 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 764.54 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 764.54 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11014,23 +10959,18 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0b975466-84b7-5bce-a0ce-5313f940387c)
 )
-(label "GND"
-  (at 764.54 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b0c84f5d-88b1-5438-84e6-12e4e35c36e4)
-)
 (no_connect (at 777.24 137.16) (uuid 5f972757-f023-5efd-9e9b-0fbc00706518))
 (no_connect (at 777.24 121.92) (uuid 6c295e8e-ced3-558d-9482-76961529dae7))
 (no_connect (at 751.84 137.16) (uuid 377d6514-6e71-502e-9218-5c96b35f63b7))
 (no_connect (at 751.84 121.92) (uuid b64bde70-25f1-5695-bac8-846e1ff9bbc4))
 (label "J901_MAKER_GPIO0"
-  (at 751.84 127 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 751.84 127 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9e12119e-60ed-589d-8c55-752f18626dea)
 )
 (label "J901_MAKER_GPIO1"
-  (at 751.84 132.08 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 751.84 132.08 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b1541001-861e-50b9-ae15-3d3f8e4f06c3)
 )
 (label "J901_MAKER_GPIO2"
@@ -11052,8 +10992,8 @@
   (on_board yes)
   (dnp no)
   (uuid 1f3191bd-17d7-5cb1-92e8-6b81cfb0ee8a)
-  (property "Reference" "U918" (at 699.77 182.88 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR maker header ESD bank 5" (at 699.77 187.96 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U918" (at 699.77 166.37 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR maker header ESD bank 5" (at 699.77 204.47 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 699.77 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 699.77 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 699.77 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11083,23 +11023,18 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 92925da0-7f62-5fc8-b560-e974f0ef203c)
 )
-(label "GND"
-  (at 699.77 198.12 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d5199474-5527-5788-9e51-badab08e646b)
-)
 (no_connect (at 712.47 193.04) (uuid 8a4c3571-7da9-50ca-8e97-5fbc0553fe46))
 (no_connect (at 712.47 177.8) (uuid d6633af0-6ca9-5c7e-b526-8c6b1d5b5d1a))
 (no_connect (at 687.07 193.04) (uuid 16445897-51ee-5db5-8449-e15887ea56e5))
 (no_connect (at 687.07 177.8) (uuid e392edd7-44f6-5d4a-9ace-4c3bbe00f246))
 (label "J901_MAKER_GPIO4"
-  (at 687.07 182.88 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 687.07 182.88 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 0731115e-bd4f-5c1b-b0f9-571197c42fb1)
 )
 (label "J901_MAKER_GPIO5"
-  (at 687.07 187.96 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 687.07 187.96 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 04efeafb-ba34-503c-840b-7c786e050bdc)
 )
 (label "J901_MAKER_GPIO6"
@@ -11121,8 +11056,8 @@
   (on_board yes)
   (dnp no)
   (uuid d30629d0-738c-58d9-9736-4f10ba4043d6)
-  (property "Reference" "U919" (at 764.54 182.88 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR maker header ESD bank 6" (at 764.54 187.96 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U919" (at 764.54 166.37 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR maker header ESD bank 6" (at 764.54 204.47 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 764.54 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 764.54 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 764.54 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11152,23 +11087,18 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0a74a2d2-4c92-55cf-8284-20adcffde0bd)
 )
-(label "GND"
-  (at 764.54 198.12 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3ad356eb-bfb6-5b90-a0e8-2b822ae2df83)
-)
 (no_connect (at 777.24 193.04) (uuid a66b866c-56e1-56d4-b405-c1c9827c7217))
 (no_connect (at 777.24 177.8) (uuid 36ca161c-fadc-5f1a-89e6-d94776c7356c))
 (no_connect (at 751.84 193.04) (uuid 1cb0bc83-e3b3-567d-91bf-34a8cba52caa))
 (no_connect (at 751.84 177.8) (uuid 74996dfb-e1ac-511a-a507-742f36cc86b0))
 (label "J901_MAKER_GPIO8"
-  (at 751.84 182.88 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 751.84 182.88 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e8f31a8e-2d4a-58be-af4a-3fa48cc244f6)
 )
 (label "J901_MAKER_GPIO9"
-  (at 751.84 187.96 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 751.84 187.96 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 979149f3-bef1-5440-8123-375de6ed1f65)
 )
 (label "J901_MAKER_GPIO10"
@@ -11190,8 +11120,8 @@
   (on_board yes)
   (dnp no)
   (uuid 53938603-7caf-5d0b-9923-0adb9336b8d4)
-  (property "Reference" "U920" (at 699.77 237.49 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR maker header ESD bank 7" (at 699.77 242.57 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U920" (at 699.77 220.98 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR maker header ESD bank 7" (at 699.77 259.08 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 699.77 240.03 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 699.77 240.03 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 699.77 240.03 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11221,23 +11151,18 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid c2061cfe-7f30-5ad4-b436-c85350c4fe35)
 )
-(label "GND"
-  (at 699.77 252.73 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 37f4d944-19a9-57de-841c-2c02d5b2c2d2)
-)
 (no_connect (at 712.47 247.65) (uuid 4822ddf9-aaba-580b-b137-7747cd5ab81c))
 (no_connect (at 712.47 232.41) (uuid cf709333-d509-5cbd-bfe0-0a1313d59495))
 (no_connect (at 687.07 247.65) (uuid 921564a9-1526-5a0d-9170-46c69ee6e747))
 (no_connect (at 687.07 232.41) (uuid 37001d50-c38d-56c0-9768-2d4217ac8b20))
 (label "J901_MAKER_GPIO12"
-  (at 687.07 237.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 687.07 237.49 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 0711ba4e-8a0c-5775-b082-7255b9e8e94a)
 )
 (label "J901_MAKER_GPIO13"
-  (at 687.07 242.57 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 687.07 242.57 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7bb2fe30-3808-5e98-a8e1-810fee4bf674)
 )
 (label "J901_MAKER_GPIO14"
@@ -11259,8 +11184,8 @@
   (on_board yes)
   (dnp no)
   (uuid 3cdee6c8-d53e-5501-b119-11b673eae6ba)
-  (property "Reference" "U921" (at 764.54 237.49 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR maker header ESD bank 8" (at 764.54 242.57 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U921" (at 764.54 220.98 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR maker header ESD bank 8" (at 764.54 259.08 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 764.54 240.03 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 764.54 240.03 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 764.54 240.03 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11290,23 +11215,18 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid b4265808-f8f3-52d9-969a-8032bb8405ca)
 )
-(label "GND"
-  (at 764.54 252.73 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5904b170-73d0-5545-9d36-992f3a34fd6e)
-)
 (no_connect (at 777.24 247.65) (uuid 6d2d8ab6-c855-5755-bb8c-d7596caed278))
 (no_connect (at 777.24 232.41) (uuid 720ca387-efc7-5cd4-812e-bab465bc5ca8))
 (no_connect (at 751.84 247.65) (uuid d96a0c0f-3e9a-52b1-a438-0e83d5c08ee0))
 (no_connect (at 751.84 232.41) (uuid be20b08a-5442-5297-81f9-31e8d5a40eb0))
 (label "J901_MAKER_ADC1"
-  (at 751.84 237.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 751.84 237.49 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3c1e49bd-9e0f-5b58-9af5-9a9cf80ae8fb)
 )
 (label "J901_MAKER_ADC2"
-  (at 751.84 242.57 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 751.84 242.57 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e96cbed0-079a-5bd7-8fbe-c32b3c450de3)
 )
 (no_connect (at 777.24 237.49) (uuid 81cf41a4-8f4f-5d0e-a6cd-589d6dc50ac1))
@@ -11320,8 +11240,8 @@
   (on_board yes)
   (dnp no)
   (uuid 65bdd08c-c36f-5a35-a6ad-fdd9367c79ad)
-  (property "Reference" "U922" (at 519.43 281.94 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TLV803EA29RDBZR maker header rail supervisor" (at 519.43 287.02 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U922" (at 519.43 271.78 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TLV803EA29RDBZR maker header rail supervisor" (at 519.43 297.18 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23-3" (at 519.43 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 519.43 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 519.43 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11350,8 +11270,8 @@
   (uuid 4e231478-6bd4-5446-aab6-deb53d34f58b)
 )
 (label "MAKER_3V3_CORE"
-  (at 513.08 284.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 513.08 284.48 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e37de860-6af7-5c8d-9cd0-bd72ec059d1e)
 )
 (symbol
@@ -11399,8 +11319,8 @@
   (on_board yes)
   (dnp no)
   (uuid 9be52cef-9efd-5afb-89f1-640c78aaaad8)
-  (property "Reference" "Q903" (at 609.6 281.94 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "2N7002 maker header isolation enable gate" (at 609.6 287.02 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "Q903" (at 609.6 273.05 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2N7002 maker header isolation enable gate" (at 609.6 295.91 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 609.6 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 609.6 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "onsemi" (at 609.6 284.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11418,8 +11338,8 @@
   )
 )
 (label "MAKER_HEADER_VALID"
-  (at 604.52 284.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 604.52 284.48 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 499bc041-41c2-58de-9aa6-158205d01be4)
 )
 (label "GND"
@@ -11513,8 +11433,8 @@
   (on_board yes)
   (dnp no)
   (uuid ee710c00-f68a-5571-bff2-6f3fd6319042)
-  (property "Reference" "J901" (at 820.42 167.64 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "JST PUD 2x20 protected maker GPIO/power; NOT A PI HAT" (at 820.42 172.72 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "J901" (at 820.42 138.43 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "JST PUD 2x20 protected maker GPIO/power; NOT A PI HAT" (at 820.42 201.93 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_JST:JST_PUD_B40B-PUDSS_2x20_P2.00mm_Vertical" (at 820.42 170.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 820.42 170.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "JST" (at 820.42 170.18 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -11573,8 +11493,8 @@
   )
 )
 (label "GND"
-  (at 815.34 147.32 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 147.32 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c5c5053a-ef3a-5990-a5f4-969028812bf4)
 )
 (label "J901_5V_OUT"
@@ -11583,8 +11503,8 @@
   (uuid 3cc9c77b-aa45-5837-8fd1-6d7851c2683d)
 )
 (label "GND"
-  (at 815.34 149.86 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 149.86 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1e9222d3-5f0a-51d5-9854-caf3504f70f4)
 )
 (label "J901_3V3_OUT"
@@ -11593,8 +11513,8 @@
   (uuid d176ad29-8b7c-5459-96c9-82889cdd54a3)
 )
 (label "J901_MAKER_BOOT_N"
-  (at 815.34 152.4 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 152.4 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a74de04a-757d-59b6-a30e-bb1471a8787d)
 )
 (label "J901_MAKER_RUN_N"
@@ -11603,8 +11523,8 @@
   (uuid b46635d1-211f-5486-a8c3-afa5238a21de)
 )
 (label "J901_MAKER_SWDIO"
-  (at 815.34 154.94 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 154.94 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a21bbff5-da99-54ba-8f5a-c152fdb57a34)
 )
 (label "J901_MAKER_SWCLK"
@@ -11613,8 +11533,8 @@
   (uuid f0664780-90a7-5e39-8d3d-4fecb3130cd7)
 )
 (label "J901_MAKER_UART_TX"
-  (at 815.34 157.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 157.48 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3384fd22-69e5-5750-a6ba-31b4c258e6cd)
 )
 (label "J901_MAKER_UART_RX"
@@ -11623,8 +11543,8 @@
   (uuid 0addc899-8f40-54ce-8482-00e4a07dae6b)
 )
 (label "J901_MAKER_I2C_SCL"
-  (at 815.34 160.02 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 160.02 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5b179576-773d-5bf8-b0af-b2895fc6984a)
 )
 (label "J901_MAKER_I2C_SDA"
@@ -11633,8 +11553,8 @@
   (uuid dfc9bf45-0b53-58fd-a533-7d622a925e8e)
 )
 (label "J901_MAKER_SPI_SCK"
-  (at 815.34 162.56 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 162.56 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b1cf0db5-bf34-5540-bd1a-cc350674bbeb)
 )
 (label "J901_MAKER_SPI_MISO"
@@ -11643,8 +11563,8 @@
   (uuid a6797a7a-777d-52ba-8109-1ce6c8340118)
 )
 (label "J901_MAKER_SPI_MOSI"
-  (at 815.34 165.1 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 165.1 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid db77a64c-de94-5ae5-ba85-29569df79506)
 )
 (label "J901_MAKER_SPI_CS_N"
@@ -11653,8 +11573,8 @@
   (uuid c2b7f77d-01a7-5494-97b1-1dc62758e9fe)
 )
 (label "J901_MAKER_GPIO0"
-  (at 815.34 167.64 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 167.64 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d4a0864b-cb39-5e92-acb5-aaa43cd39f9f)
 )
 (label "J901_MAKER_GPIO1"
@@ -11663,8 +11583,8 @@
   (uuid 573615d0-bf35-541a-904c-e10705ef89a5)
 )
 (label "J901_MAKER_GPIO2"
-  (at 815.34 170.18 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 170.18 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ce375c3d-1f53-5edc-a17d-5364a8c878cc)
 )
 (label "J901_MAKER_GPIO3"
@@ -11673,8 +11593,8 @@
   (uuid abdab95c-be8d-5684-aba9-46246183e941)
 )
 (label "J901_MAKER_GPIO4"
-  (at 815.34 172.72 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 172.72 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid cacf2b14-6c4a-5020-97fb-fd86e3ff234e)
 )
 (label "J901_MAKER_GPIO5"
@@ -11683,8 +11603,8 @@
   (uuid 0ac5816e-0611-528a-807b-b003ea266b36)
 )
 (label "J901_MAKER_GPIO6"
-  (at 815.34 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 479f3a45-0f3d-54d9-9edd-9050ecea1ee4)
 )
 (label "J901_MAKER_GPIO7"
@@ -11693,8 +11613,8 @@
   (uuid 8c28cf86-9bc2-5f9b-a3f4-36c95ab0d326)
 )
 (label "J901_MAKER_GPIO8"
-  (at 815.34 177.8 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 177.8 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 58bf6096-deb4-5151-8657-853a991fa8f8)
 )
 (label "J901_MAKER_GPIO9"
@@ -11703,8 +11623,8 @@
   (uuid daa54fca-9c4a-57fe-abd1-2096e39041de)
 )
 (label "J901_MAKER_GPIO10"
-  (at 815.34 180.34 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 180.34 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 827d5087-e871-551e-ab17-d156aeb2091d)
 )
 (label "J901_MAKER_GPIO11"
@@ -11713,8 +11633,8 @@
   (uuid 3d3491bc-e7f9-56b6-9410-80d8beed7093)
 )
 (label "J901_MAKER_GPIO12"
-  (at 815.34 182.88 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 182.88 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 8c05b2a5-5548-5da9-b566-a39114ce1914)
 )
 (label "J901_MAKER_GPIO13"
@@ -11723,14 +11643,14 @@
   (uuid 9c1c63e0-a98d-5c5e-82b1-9a6b9b7a0818)
 )
 (label "J901_MAKER_GPIO14"
-  (at 815.34 185.42 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 185.42 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 0f385500-a6fc-53c2-9e2a-146b067bb352)
 )
 (no_connect (at 828.04 185.42) (uuid a17a8d83-3fe7-5b8b-a99a-203c2e11b7e7))
 (label "GND"
-  (at 815.34 187.96 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 187.96 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f43c6146-eb5b-59d3-9224-38f670bc8e3c)
 )
 (label "GND"
@@ -11739,8 +11659,8 @@
   (uuid dae4c491-e60a-539c-9b17-c3dadd71e9af)
 )
 (label "J901_MAKER_ADC0"
-  (at 815.34 190.5 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 190.5 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1a8f5932-466d-59b1-bae5-69060c5270fb)
 )
 (label "J901_MAKER_ADC1"
@@ -11749,8 +11669,8 @@
   (uuid 3ccafef5-f787-5943-bc18-e8582295e40a)
 )
 (label "J901_3V3_OUT"
-  (at 815.34 193.04 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 193.04 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3f0ff38a-e370-5c24-abc7-e80c803924bc)
 )
 (label "GND"
@@ -11759,8 +11679,8 @@
   (uuid e5564f65-b431-5ef5-a8db-c2da407f39bd)
 )
 (label "J901_MAKER_ADC2"
-  (at 815.34 195.58 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 815.34 195.58 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3f2af6e7-a952-5815-a5da-8490a6782df4)
 )
 (label "GND"

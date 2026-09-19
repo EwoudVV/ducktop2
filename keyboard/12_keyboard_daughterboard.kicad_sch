@@ -1200,7 +1200,7 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "Connector*:*_1x??_*"
+		(property "ki_fp_filters" "Connector*:*_1x??_* ducktop2:USB2_Trackpad_Cable_SolderPads_1x04_P2.54mm"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1931,8 +1931,8 @@
   (on_board yes)
   (dnp no)
   (uuid 2bc33f58-81e5-5b46-80aa-28a690189711)
-  (property "Reference" "SW320" (at 24.13 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Esc 1u" (at 24.13 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW320" (at 24.13 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Esc 1u" (at 24.13 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 24.13 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 24.13 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 24.13 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -1952,8 +1952,8 @@
 )
 (global_label "KB_R0_C0_ESC"
   (shape bidirectional)
-  (at 19.05 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 19.05 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3a154dc9-0796-519b-953a-8e52fc864c21)
 )
 (global_label "KB_COL0"
@@ -1998,8 +1998,8 @@
 )
 (global_label "KB_R0_C0_ESC"
   (shape bidirectional)
-  (at 38.1 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 38.1 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 93037391-6204-5579-ad3d-a07dbc214be7)
 )
 (global_label "KB_ROW0"
@@ -2017,8 +2017,8 @@
   (on_board yes)
   (dnp no)
   (uuid 93037391-6204-5579-ad3d-a07dbc214be7)
-  (property "Reference" "SW321" (at 62.23 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "1 1u" (at 62.23 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW321" (at 62.23 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1 1u" (at 62.23 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 62.23 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 62.23 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 62.23 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2038,8 +2038,8 @@
 )
 (global_label "KB_R0_C1_1"
   (shape bidirectional)
-  (at 57.15 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 57.15 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 4831df6f-2e3e-5080-9cf1-e2d1a26666a9)
 )
 (global_label "KB_COL1"
@@ -2084,8 +2084,8 @@
 )
 (global_label "KB_R0_C1_1"
   (shape bidirectional)
-  (at 76.2 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 76.2 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid aa84b9c7-0603-5a79-9e42-59b0e04be2fe)
 )
 (global_label "KB_ROW0"
@@ -2103,8 +2103,8 @@
   (on_board yes)
   (dnp no)
   (uuid 97240906-46ef-505c-b725-a7e0805120de)
-  (property "Reference" "SW322" (at 100.33 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "2 1u" (at 100.33 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW322" (at 100.33 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "2 1u" (at 100.33 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 100.33 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 100.33 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 100.33 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2124,8 +2124,8 @@
 )
 (global_label "KB_R0_C2_2"
   (shape bidirectional)
-  (at 95.25 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a159e800-1042-52b9-a070-78d792d108de)
 )
 (global_label "KB_COL2"
@@ -2170,8 +2170,8 @@
 )
 (global_label "KB_R0_C2_2"
   (shape bidirectional)
-  (at 114.3 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 114.3 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 12790f44-9e86-5b44-9a40-6b4945197f45)
 )
 (global_label "KB_ROW0"
@@ -2189,8 +2189,8 @@
   (on_board yes)
   (dnp no)
   (uuid ff0893dd-ddc5-5921-b0b6-8d24a745ec8c)
-  (property "Reference" "SW323" (at 138.43 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "3 1u" (at 138.43 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW323" (at 138.43 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "3 1u" (at 138.43 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 138.43 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 138.43 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 138.43 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2210,8 +2210,8 @@
 )
 (global_label "KB_R0_C3_3"
   (shape bidirectional)
-  (at 133.35 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 133.35 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9bd86650-3c3c-5753-9f0e-f6351ddf3383)
 )
 (global_label "KB_COL3"
@@ -2256,8 +2256,8 @@
 )
 (global_label "KB_R0_C3_3"
   (shape bidirectional)
-  (at 152.4 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 152.4 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9eb8498d-9e6d-58ef-baef-a26f4bbdbd45)
 )
 (global_label "KB_ROW0"
@@ -2275,8 +2275,8 @@
   (on_board yes)
   (dnp no)
   (uuid 9bd86650-3c3c-5753-9f0e-f6351ddf3383)
-  (property "Reference" "SW324" (at 176.53 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "4 1u" (at 176.53 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW324" (at 176.53 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4 1u" (at 176.53 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 176.53 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 176.53 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 176.53 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2296,8 +2296,8 @@
 )
 (global_label "KB_R0_C4_4"
   (shape bidirectional)
-  (at 171.45 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 171.45 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d788a658-3dd6-5401-9b3b-bd53f23c02fc)
 )
 (global_label "KB_COL4"
@@ -2342,8 +2342,8 @@
 )
 (global_label "KB_R0_C4_4"
   (shape bidirectional)
-  (at 190.5 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 190.5 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 69654928-8acd-5456-a0a0-cf4ff205c90c)
 )
 (global_label "KB_ROW0"
@@ -2361,8 +2361,8 @@
   (on_board yes)
   (dnp no)
   (uuid 3bd6cb70-827c-54be-bbc2-6ffd9e8f00ad)
-  (property "Reference" "SW325" (at 214.63 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "5 1u" (at 214.63 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW325" (at 214.63 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "5 1u" (at 214.63 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 214.63 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 214.63 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 214.63 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2382,8 +2382,8 @@
 )
 (global_label "KB_R0_C5_5"
   (shape bidirectional)
-  (at 209.55 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 209.55 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5fb69ff3-fcef-50d2-b21a-1455eb3f784c)
 )
 (global_label "KB_COL5"
@@ -2428,8 +2428,8 @@
 )
 (global_label "KB_R0_C5_5"
   (shape bidirectional)
-  (at 228.6 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 228.6 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 357bb5e0-e0b1-5222-abc3-0ee89551e3f4)
 )
 (global_label "KB_ROW0"
@@ -2447,8 +2447,8 @@
   (on_board yes)
   (dnp no)
   (uuid 2f606a61-840b-5d10-925d-82e0666faf2a)
-  (property "Reference" "SW326" (at 251.46 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "6 1u" (at 251.46 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW326" (at 251.46 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "6 1u" (at 251.46 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 251.46 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 251.46 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 251.46 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2468,8 +2468,8 @@
 )
 (global_label "KB_R0_C6_6"
   (shape bidirectional)
-  (at 246.38 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 246.38 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c657a0e0-d2b0-582b-bf07-ff57f0fcafd9)
 )
 (global_label "KB_COL6"
@@ -2514,8 +2514,8 @@
 )
 (global_label "KB_R0_C6_6"
   (shape bidirectional)
-  (at 265.43 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 265.43 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9d5ea0ff-1dc3-57d8-9c55-f2b880184f1c)
 )
 (global_label "KB_ROW0"
@@ -2533,8 +2533,8 @@
   (on_board yes)
   (dnp no)
   (uuid 357bb5e0-e0b1-5222-abc3-0ee89551e3f4)
-  (property "Reference" "SW327" (at 289.56 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "7 1u" (at 289.56 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW327" (at 289.56 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "7 1u" (at 289.56 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 289.56 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 289.56 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 289.56 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2554,8 +2554,8 @@
 )
 (global_label "KB_R0_C7_7"
   (shape bidirectional)
-  (at 284.48 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 284.48 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6d60b82b-a182-5839-b1ac-45f0eca8244d)
 )
 (global_label "KB_COL7"
@@ -2600,8 +2600,8 @@
 )
 (global_label "KB_R0_C7_7"
   (shape bidirectional)
-  (at 303.53 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 303.53 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d3415b59-fec4-5eec-b606-f2f27deaa3c7)
 )
 (global_label "KB_ROW0"
@@ -2619,8 +2619,8 @@
   (on_board yes)
   (dnp no)
   (uuid 95c6c8e7-a825-53b5-9d1f-bf2baf905f91)
-  (property "Reference" "SW328" (at 327.66 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "8 1u" (at 327.66 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW328" (at 327.66 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "8 1u" (at 327.66 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 327.66 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 327.66 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 327.66 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2640,8 +2640,8 @@
 )
 (global_label "KB_R0_C8_8"
   (shape bidirectional)
-  (at 322.58 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 322.58 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 88646192-19de-54cf-abeb-29292dd31f96)
 )
 (global_label "KB_COL8"
@@ -2686,8 +2686,8 @@
 )
 (global_label "KB_R0_C8_8"
   (shape bidirectional)
-  (at 341.63 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 341.63 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 27ac20d9-531c-5ca6-891d-aad2e09e13db)
 )
 (global_label "KB_ROW0"
@@ -2705,8 +2705,8 @@
   (on_board yes)
   (dnp no)
   (uuid 1361f26e-a3e0-5f29-b8b8-462a04252301)
-  (property "Reference" "SW329" (at 365.76 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "9 1u" (at 365.76 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW329" (at 365.76 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "9 1u" (at 365.76 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 365.76 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 365.76 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 365.76 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2726,8 +2726,8 @@
 )
 (global_label "KB_R0_C9_9"
   (shape bidirectional)
-  (at 360.68 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 360.68 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 21599f13-8b00-5cb1-8529-d80b75c1b080)
 )
 (global_label "KB_COL9"
@@ -2772,8 +2772,8 @@
 )
 (global_label "KB_R0_C9_9"
   (shape bidirectional)
-  (at 379.73 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 379.73 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 13ff1289-4338-51ce-ad01-4f335829d46d)
 )
 (global_label "KB_ROW0"
@@ -2791,8 +2791,8 @@
   (on_board yes)
   (dnp no)
   (uuid 88646192-19de-54cf-abeb-29292dd31f96)
-  (property "Reference" "SW330" (at 403.86 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "0 1u" (at 403.86 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW330" (at 403.86 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "0 1u" (at 403.86 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 403.86 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 403.86 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 403.86 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2812,8 +2812,8 @@
 )
 (global_label "KB_R0_C10_0"
   (shape bidirectional)
-  (at 398.78 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 398.78 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 492c5854-426b-50a2-abff-66934502c481)
 )
 (global_label "KB_COL10"
@@ -2858,8 +2858,8 @@
 )
 (global_label "KB_R0_C10_0"
   (shape bidirectional)
-  (at 417.83 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 417.83 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a0ddd81d-9fff-50b9-9790-dd2415788dac)
 )
 (global_label "KB_ROW0"
@@ -2877,8 +2877,8 @@
   (on_board yes)
   (dnp no)
   (uuid 330a2872-f23a-5346-bcf5-f48ac3cc4a1d)
-  (property "Reference" "SW331" (at 441.96 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Minus 1u" (at 441.96 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW331" (at 441.96 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Minus 1u" (at 441.96 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 441.96 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 441.96 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 441.96 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2898,8 +2898,8 @@
 )
 (global_label "KB_R0_C11_MINUS"
   (shape bidirectional)
-  (at 436.88 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 436.88 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 42f32e63-71b8-58b6-ba37-0eaa5948656d)
 )
 (global_label "KB_COL11"
@@ -2944,8 +2944,8 @@
 )
 (global_label "KB_R0_C11_MINUS"
   (shape bidirectional)
-  (at 455.93 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 455.93 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e3d98ec8-dd6e-552f-8fff-84b6668e7d6e)
 )
 (global_label "KB_ROW0"
@@ -2963,8 +2963,8 @@
   (on_board yes)
   (dnp no)
   (uuid d6280a20-8a64-5718-b66c-687fbf41d793)
-  (property "Reference" "SW332" (at 480.06 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Equal 1u" (at 480.06 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW332" (at 480.06 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Equal 1u" (at 480.06 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 480.06 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 480.06 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 480.06 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2984,8 +2984,8 @@
 )
 (global_label "KB_R0_C12_EQUAL"
   (shape bidirectional)
-  (at 474.98 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 474.98 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d82e7801-0821-54cc-8d76-8532cdfd2929)
 )
 (global_label "KB_COL12"
@@ -3030,8 +3030,8 @@
 )
 (global_label "KB_R0_C12_EQUAL"
   (shape bidirectional)
-  (at 494.03 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 494.03 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 4dda8817-92dc-53b8-9f3d-57cdaf5effcb)
 )
 (global_label "KB_ROW0"
@@ -3049,8 +3049,8 @@
   (on_board yes)
   (dnp no)
   (uuid a0ddd81d-9fff-50b9-9790-dd2415788dac)
-  (property "Reference" "SW333" (at 518.16 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Backspace 1.75u" (at 518.16 78.74 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW333" (at 518.16 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Backspace 1.75u" (at 518.16 90.17 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 518.16 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 518.16 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 518.16 76.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3070,8 +3070,8 @@
 )
 (global_label "KB_R0_C13_BKSP"
   (shape bidirectional)
-  (at 513.08 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 513.08 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 066284ae-2249-50f9-9613-c8e06067d48f)
 )
 (global_label "KB_COL13"
@@ -3116,8 +3116,8 @@
 )
 (global_label "KB_R0_C13_BKSP"
   (shape bidirectional)
-  (at 532.13 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 532.13 76.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6a6ba4ac-66d4-5c9b-a031-e4e50b9827dd)
 )
 (global_label "KB_ROW0"
@@ -3135,8 +3135,8 @@
   (on_board yes)
   (dnp no)
   (uuid 44bf64b7-c8ae-58b0-a0ef-c9f9b01b09f8)
-  (property "Reference" "SW334" (at 24.13 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Tab 1.25u" (at 24.13 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW334" (at 24.13 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Tab 1.25u" (at 24.13 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 24.13 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 24.13 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 24.13 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3156,8 +3156,8 @@
 )
 (global_label "KB_R1_C0_TAB"
   (shape bidirectional)
-  (at 19.05 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 19.05 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid aefc6ce8-89fd-507f-877f-a501e2939030)
 )
 (global_label "KB_COL0"
@@ -3202,8 +3202,8 @@
 )
 (global_label "KB_R1_C0_TAB"
   (shape bidirectional)
-  (at 38.1 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 38.1 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 715ec55e-89f9-5ad2-8bd3-c4e62685b905)
 )
 (global_label "KB_ROW1"
@@ -3221,8 +3221,8 @@
   (on_board yes)
   (dnp no)
   (uuid 40b088a4-cfd3-5846-9935-ca45bb979e1b)
-  (property "Reference" "SW335" (at 62.23 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Q 1u" (at 62.23 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW335" (at 62.23 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Q 1u" (at 62.23 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 62.23 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 62.23 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 62.23 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3242,8 +3242,8 @@
 )
 (global_label "KB_R1_C1_Q"
   (shape bidirectional)
-  (at 57.15 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 57.15 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1606284d-cf89-5bcc-8a7c-a74aa136c760)
 )
 (global_label "KB_COL1"
@@ -3288,8 +3288,8 @@
 )
 (global_label "KB_R1_C1_Q"
   (shape bidirectional)
-  (at 76.2 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 76.2 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e197b523-d62d-528e-8383-640668146331)
 )
 (global_label "KB_ROW1"
@@ -3307,8 +3307,8 @@
   (on_board yes)
   (dnp no)
   (uuid 066284ae-2249-50f9-9613-c8e06067d48f)
-  (property "Reference" "SW336" (at 100.33 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "W 1u" (at 100.33 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW336" (at 100.33 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "W 1u" (at 100.33 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 100.33 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 100.33 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 100.33 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3328,8 +3328,8 @@
 )
 (global_label "KB_R1_C2_W"
   (shape bidirectional)
-  (at 95.25 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 529dc5f3-be1b-5c7a-aa3b-5d15f721c5fd)
 )
 (global_label "KB_COL2"
@@ -3374,8 +3374,8 @@
 )
 (global_label "KB_R1_C2_W"
   (shape bidirectional)
-  (at 114.3 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 114.3 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d362a66f-abf9-5691-934b-b3169b999a7b)
 )
 (global_label "KB_ROW1"
@@ -3393,8 +3393,8 @@
   (on_board yes)
   (dnp no)
   (uuid 3bd3c3bb-296b-55dd-bd63-e617a3952a3a)
-  (property "Reference" "SW337" (at 138.43 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "E 1u" (at 138.43 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW337" (at 138.43 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "E 1u" (at 138.43 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 138.43 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 138.43 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 138.43 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3414,8 +3414,8 @@
 )
 (global_label "KB_R1_C3_E"
   (shape bidirectional)
-  (at 133.35 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 133.35 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2b168323-a0f8-550b-80bf-27d8a2553478)
 )
 (global_label "KB_COL3"
@@ -3460,8 +3460,8 @@
 )
 (global_label "KB_R1_C3_E"
   (shape bidirectional)
-  (at 152.4 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 152.4 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid bf175277-eb02-5a71-9e48-20aabcf6d952)
 )
 (global_label "KB_ROW1"
@@ -3479,8 +3479,8 @@
   (on_board yes)
   (dnp no)
   (uuid 3ddeda38-4a28-59ca-9c01-bd4c7dba5780)
-  (property "Reference" "SW338" (at 176.53 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "R 1u" (at 176.53 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW338" (at 176.53 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "R 1u" (at 176.53 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 176.53 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 176.53 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 176.53 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3500,8 +3500,8 @@
 )
 (global_label "KB_R1_C4_R"
   (shape bidirectional)
-  (at 171.45 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 171.45 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid fd6214f1-e477-531d-bd52-d2e75309ff8b)
 )
 (global_label "KB_COL4"
@@ -3546,8 +3546,8 @@
 )
 (global_label "KB_R1_C4_R"
   (shape bidirectional)
-  (at 190.5 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 190.5 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 943ab684-5762-51b5-ab67-72df5bbe3916)
 )
 (global_label "KB_ROW1"
@@ -3565,8 +3565,8 @@
   (on_board yes)
   (dnp no)
   (uuid e197b523-d62d-528e-8383-640668146331)
-  (property "Reference" "SW339" (at 214.63 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "T 1u" (at 214.63 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW339" (at 214.63 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "T 1u" (at 214.63 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 214.63 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 214.63 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 214.63 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3586,8 +3586,8 @@
 )
 (global_label "KB_R1_C5_T"
   (shape bidirectional)
-  (at 209.55 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 209.55 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b1fde0cb-da2c-55a9-b82d-23f1db4978c6)
 )
 (global_label "KB_COL5"
@@ -3632,8 +3632,8 @@
 )
 (global_label "KB_R1_C5_T"
   (shape bidirectional)
-  (at 228.6 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 228.6 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d9fac98b-e8a2-5bed-a1f2-b2e448bdc590)
 )
 (global_label "KB_ROW1"
@@ -3651,8 +3651,8 @@
   (on_board yes)
   (dnp no)
   (uuid 16105eb0-47c7-54d2-a2a8-5759f04dd8d8)
-  (property "Reference" "SW340" (at 251.46 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Y 1u" (at 251.46 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW340" (at 251.46 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Y 1u" (at 251.46 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 251.46 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 251.46 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 251.46 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3672,8 +3672,8 @@
 )
 (global_label "KB_R1_C6_Y"
   (shape bidirectional)
-  (at 246.38 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 246.38 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c7ac8923-10c9-570f-af17-73c7ffdec78e)
 )
 (global_label "KB_COL6"
@@ -3718,8 +3718,8 @@
 )
 (global_label "KB_R1_C6_Y"
   (shape bidirectional)
-  (at 265.43 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 265.43 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid cfbad279-187e-5f20-b63e-06cdcd09fd63)
 )
 (global_label "KB_ROW1"
@@ -3737,8 +3737,8 @@
   (on_board yes)
   (dnp no)
   (uuid 34422273-7a45-5c4a-a9f9-ef404575fed9)
-  (property "Reference" "SW341" (at 289.56 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "U 1u" (at 289.56 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW341" (at 289.56 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "U 1u" (at 289.56 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 289.56 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 289.56 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 289.56 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3758,8 +3758,8 @@
 )
 (global_label "KB_R1_C7_U"
   (shape bidirectional)
-  (at 284.48 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 284.48 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6f979ca5-4645-5062-aa51-655877feec07)
 )
 (global_label "KB_COL7"
@@ -3804,8 +3804,8 @@
 )
 (global_label "KB_R1_C7_U"
   (shape bidirectional)
-  (at 303.53 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 303.53 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c9ef3f18-f6ef-503e-93e1-5a9415be05ae)
 )
 (global_label "KB_ROW1"
@@ -3823,8 +3823,8 @@
   (on_board yes)
   (dnp no)
   (uuid fd6214f1-e477-531d-bd52-d2e75309ff8b)
-  (property "Reference" "SW342" (at 327.66 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "I 1u" (at 327.66 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW342" (at 327.66 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "I 1u" (at 327.66 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 327.66 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 327.66 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 327.66 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3844,8 +3844,8 @@
 )
 (global_label "KB_R1_C8_I"
   (shape bidirectional)
-  (at 322.58 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 322.58 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c202cada-d638-52f5-9b63-9df2a8a9cebe)
 )
 (global_label "KB_COL8"
@@ -3890,8 +3890,8 @@
 )
 (global_label "KB_R1_C8_I"
   (shape bidirectional)
-  (at 341.63 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 341.63 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5ae66d76-f20e-5234-8aa1-27b093ff5d38)
 )
 (global_label "KB_ROW1"
@@ -3909,8 +3909,8 @@
   (on_board yes)
   (dnp no)
   (uuid ce37f310-7eca-5712-a9e7-36af9fab7d99)
-  (property "Reference" "SW343" (at 365.76 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "O 1u" (at 365.76 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW343" (at 365.76 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "O 1u" (at 365.76 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 365.76 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 365.76 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 365.76 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3930,8 +3930,8 @@
 )
 (global_label "KB_R1_C9_O"
   (shape bidirectional)
-  (at 360.68 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 360.68 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a1e83e88-6e55-5601-a55f-4cd74da49cea)
 )
 (global_label "KB_COL9"
@@ -3976,8 +3976,8 @@
 )
 (global_label "KB_R1_C9_O"
   (shape bidirectional)
-  (at 379.73 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 379.73 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 786d1945-cc7b-5484-b2cf-25ecec66a950)
 )
 (global_label "KB_ROW1"
@@ -3995,8 +3995,8 @@
   (on_board yes)
   (dnp no)
   (uuid 14cfda6a-1e4e-5f0b-84cc-6b2c93265b74)
-  (property "Reference" "SW344" (at 403.86 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "P 1u" (at 403.86 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW344" (at 403.86 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "P 1u" (at 403.86 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 403.86 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 403.86 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 403.86 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4016,8 +4016,8 @@
 )
 (global_label "KB_R1_C10_P"
   (shape bidirectional)
-  (at 398.78 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 398.78 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 099d9c13-3db2-5ce6-af67-0d0721fb7d6e)
 )
 (global_label "KB_COL10"
@@ -4062,8 +4062,8 @@
 )
 (global_label "KB_R1_C10_P"
   (shape bidirectional)
-  (at 417.83 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 417.83 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a9e2bb92-7a98-505e-9ea9-af6f6a177284)
 )
 (global_label "KB_ROW1"
@@ -4081,8 +4081,8 @@
   (on_board yes)
   (dnp no)
   (uuid cfbad279-187e-5f20-b63e-06cdcd09fd63)
-  (property "Reference" "SW345" (at 441.96 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "[ 1u" (at 441.96 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW345" (at 441.96 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "[ 1u" (at 441.96 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 441.96 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 441.96 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 441.96 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4102,8 +4102,8 @@
 )
 (global_label "KB_R1_C11_LBRACKET"
   (shape bidirectional)
-  (at 436.88 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 436.88 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 760c3c36-7972-55d8-84d2-146c45002c92)
 )
 (global_label "KB_COL11"
@@ -4148,8 +4148,8 @@
 )
 (global_label "KB_R1_C11_LBRACKET"
   (shape bidirectional)
-  (at 455.93 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 455.93 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 54fc38df-1ab7-567d-ad82-80b124b5d4b2)
 )
 (global_label "KB_ROW1"
@@ -4167,8 +4167,8 @@
   (on_board yes)
   (dnp no)
   (uuid 88ad62ea-ee4f-5394-92f4-dfaaa6d424a2)
-  (property "Reference" "SW346" (at 480.06 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "] 1u" (at 480.06 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW346" (at 480.06 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "] 1u" (at 480.06 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 480.06 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 480.06 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 480.06 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4188,8 +4188,8 @@
 )
 (global_label "KB_R1_C12_RBRACKET"
   (shape bidirectional)
-  (at 474.98 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 474.98 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3564bfc6-1681-5e43-8f1b-4225555e1294)
 )
 (global_label "KB_COL12"
@@ -4234,8 +4234,8 @@
 )
 (global_label "KB_R1_C12_RBRACKET"
   (shape bidirectional)
-  (at 494.03 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 494.03 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 844843b0-c012-5412-99d5-205201326a4c)
 )
 (global_label "KB_ROW1"
@@ -4253,8 +4253,8 @@
   (on_board yes)
   (dnp no)
   (uuid 5f096804-4e5e-5676-8f6d-9e7c20feeeeb)
-  (property "Reference" "SW347" (at 518.16 106.68 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Backslash 1u" (at 518.16 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW347" (at 518.16 95.25 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Backslash 1u" (at 518.16 123.19 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 518.16 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 518.16 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 518.16 109.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4274,8 +4274,8 @@
 )
 (global_label "KB_R1_C13_BSLASH"
   (shape bidirectional)
-  (at 513.08 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 513.08 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 42a5a15f-fc28-5c2e-8360-ae26aa7f07f0)
 )
 (global_label "KB_COL13"
@@ -4320,8 +4320,8 @@
 )
 (global_label "KB_R1_C13_BSLASH"
   (shape bidirectional)
-  (at 532.13 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 532.13 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid be1a4e2f-98a7-51d6-9c7c-1b5cec0614cf)
 )
 (global_label "KB_ROW1"
@@ -4339,8 +4339,8 @@
   (on_board yes)
   (dnp no)
   (uuid a1e83e88-6e55-5601-a55f-4cd74da49cea)
-  (property "Reference" "SW348" (at 24.13 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Caps 1.5u" (at 24.13 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW348" (at 24.13 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Caps 1.5u" (at 24.13 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 24.13 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 24.13 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 24.13 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4360,8 +4360,8 @@
 )
 (global_label "KB_R2_C0_CAPS"
   (shape bidirectional)
-  (at 19.05 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 19.05 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 89d9a8d0-9ed5-5724-8752-be3a37eeec15)
 )
 (global_label "KB_COL0"
@@ -4406,8 +4406,8 @@
 )
 (global_label "KB_R2_C0_CAPS"
   (shape bidirectional)
-  (at 38.1 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 38.1 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2712c396-d924-5c69-a333-a664e74a268a)
 )
 (global_label "KB_ROW2"
@@ -4425,8 +4425,8 @@
   (on_board yes)
   (dnp no)
   (uuid 1b0404d3-3999-5d2d-bb5a-c134291391ea)
-  (property "Reference" "SW349" (at 62.23 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "A 1u" (at 62.23 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW349" (at 62.23 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "A 1u" (at 62.23 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 62.23 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 62.23 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 62.23 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4446,8 +4446,8 @@
 )
 (global_label "KB_R2_C1_A"
   (shape bidirectional)
-  (at 57.15 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 57.15 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid dffa3338-012f-5873-95c0-4411c61b5230)
 )
 (global_label "KB_COL1"
@@ -4492,8 +4492,8 @@
 )
 (global_label "KB_R2_C1_A"
   (shape bidirectional)
-  (at 76.2 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 76.2 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 824f9284-c93f-5ccc-8305-c28ff8d04f98)
 )
 (global_label "KB_ROW2"
@@ -4511,8 +4511,8 @@
   (on_board yes)
   (dnp no)
   (uuid 42a5c4d9-1c28-5468-b09a-26b9bf2f672e)
-  (property "Reference" "SW350" (at 100.33 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "S 1u" (at 100.33 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW350" (at 100.33 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "S 1u" (at 100.33 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 100.33 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 100.33 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 100.33 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4532,8 +4532,8 @@
 )
 (global_label "KB_R2_C2_S"
   (shape bidirectional)
-  (at 95.25 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b7067b21-5f2b-5bf5-a405-b52066bb203d)
 )
 (global_label "KB_COL2"
@@ -4578,8 +4578,8 @@
 )
 (global_label "KB_R2_C2_S"
   (shape bidirectional)
-  (at 114.3 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 114.3 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 89f49644-2240-5b73-a3d3-ae3a48da73ce)
 )
 (global_label "KB_ROW2"
@@ -4597,8 +4597,8 @@
   (on_board yes)
   (dnp no)
   (uuid 54fc38df-1ab7-567d-ad82-80b124b5d4b2)
-  (property "Reference" "SW351" (at 138.43 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "D 1u" (at 138.43 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW351" (at 138.43 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "D 1u" (at 138.43 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 138.43 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 138.43 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 138.43 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4618,8 +4618,8 @@
 )
 (global_label "KB_R2_C3_D"
   (shape bidirectional)
-  (at 133.35 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 133.35 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 99701b22-8b16-5e1d-b3a0-975217a463d0)
 )
 (global_label "KB_COL3"
@@ -4664,8 +4664,8 @@
 )
 (global_label "KB_R2_C3_D"
   (shape bidirectional)
-  (at 152.4 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 152.4 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d3e5a1ee-deac-5824-9743-6842ef429a09)
 )
 (global_label "KB_ROW2"
@@ -4683,8 +4683,8 @@
   (on_board yes)
   (dnp no)
   (uuid 80a8a273-7921-5b03-be80-7a138ddb5ff5)
-  (property "Reference" "SW352" (at 176.53 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "F 1u" (at 176.53 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW352" (at 176.53 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "F 1u" (at 176.53 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 176.53 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 176.53 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 176.53 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4704,8 +4704,8 @@
 )
 (global_label "KB_R2_C4_F"
   (shape bidirectional)
-  (at 171.45 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 171.45 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7e4bef83-3911-591a-a1da-5dda7b1e48de)
 )
 (global_label "KB_COL4"
@@ -4750,8 +4750,8 @@
 )
 (global_label "KB_R2_C4_F"
   (shape bidirectional)
-  (at 190.5 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 190.5 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 40688461-6896-519f-bece-829d56963c44)
 )
 (global_label "KB_ROW2"
@@ -4769,8 +4769,8 @@
   (on_board yes)
   (dnp no)
   (uuid ae4ba724-f833-5c4c-81eb-ee55c519a0ba)
-  (property "Reference" "SW353" (at 214.63 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "G 1u" (at 214.63 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW353" (at 214.63 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "G 1u" (at 214.63 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 214.63 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 214.63 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 214.63 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4790,8 +4790,8 @@
 )
 (global_label "KB_R2_C5_G"
   (shape bidirectional)
-  (at 209.55 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 209.55 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 92b006e0-8302-5854-a312-5a0bc41de929)
 )
 (global_label "KB_COL5"
@@ -4836,8 +4836,8 @@
 )
 (global_label "KB_R2_C5_G"
   (shape bidirectional)
-  (at 228.6 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 228.6 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 43631043-58ee-5ba7-a98a-a608380ea4ae)
 )
 (global_label "KB_ROW2"
@@ -4855,8 +4855,8 @@
   (on_board yes)
   (dnp no)
   (uuid 89d9a8d0-9ed5-5724-8752-be3a37eeec15)
-  (property "Reference" "SW354" (at 251.46 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "H 1u" (at 251.46 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW354" (at 251.46 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "H 1u" (at 251.46 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 251.46 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 251.46 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 251.46 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4876,8 +4876,8 @@
 )
 (global_label "KB_R2_C6_H"
   (shape bidirectional)
-  (at 246.38 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 246.38 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2109e7bb-00ea-5bac-bd6f-b34eeef4a161)
 )
 (global_label "KB_COL6"
@@ -4922,8 +4922,8 @@
 )
 (global_label "KB_R2_C6_H"
   (shape bidirectional)
-  (at 265.43 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 265.43 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 4ae0c5ac-6578-5496-9250-0fbcad926ad9)
 )
 (global_label "KB_ROW2"
@@ -4941,8 +4941,8 @@
   (on_board yes)
   (dnp no)
   (uuid 35f032d3-5ec7-5c73-951c-bcaaf6a57a9d)
-  (property "Reference" "SW355" (at 289.56 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "J 1u" (at 289.56 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW355" (at 289.56 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "J 1u" (at 289.56 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 289.56 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 289.56 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 289.56 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4962,8 +4962,8 @@
 )
 (global_label "KB_R2_C7_J"
   (shape bidirectional)
-  (at 284.48 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 284.48 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ef5dd591-4097-583d-a1e6-24b0d6b230bd)
 )
 (global_label "KB_COL7"
@@ -5008,8 +5008,8 @@
 )
 (global_label "KB_R2_C7_J"
   (shape bidirectional)
-  (at 303.53 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 303.53 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 4e3ed252-696e-5b35-8871-b4096f978714)
 )
 (global_label "KB_ROW2"
@@ -5027,8 +5027,8 @@
   (on_board yes)
   (dnp no)
   (uuid 1538eef8-3a1b-5ace-bc82-4c951af2464e)
-  (property "Reference" "SW356" (at 327.66 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "K 1u" (at 327.66 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW356" (at 327.66 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "K 1u" (at 327.66 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 327.66 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 327.66 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 327.66 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5048,8 +5048,8 @@
 )
 (global_label "KB_R2_C8_K"
   (shape bidirectional)
-  (at 322.58 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 322.58 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f38b4104-4053-5c0d-87ed-8d65f80a9bab)
 )
 (global_label "KB_COL8"
@@ -5094,8 +5094,8 @@
 )
 (global_label "KB_R2_C8_K"
   (shape bidirectional)
-  (at 341.63 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 341.63 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 60ed7e81-aa27-5677-bbff-f874254ce460)
 )
 (global_label "KB_ROW2"
@@ -5113,8 +5113,8 @@
   (on_board yes)
   (dnp no)
   (uuid 89f49644-2240-5b73-a3d3-ae3a48da73ce)
-  (property "Reference" "SW357" (at 365.76 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "L 1u" (at 365.76 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW357" (at 365.76 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "L 1u" (at 365.76 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 365.76 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 365.76 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 365.76 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5134,8 +5134,8 @@
 )
 (global_label "KB_R2_C9_L"
   (shape bidirectional)
-  (at 360.68 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 360.68 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 67ccab3b-19f9-5cba-a816-4b98e8154fa9)
 )
 (global_label "KB_COL9"
@@ -5180,8 +5180,8 @@
 )
 (global_label "KB_R2_C9_L"
   (shape bidirectional)
-  (at 379.73 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 379.73 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7d9ebdd6-2e86-53ec-b0b5-e2c7585be336)
 )
 (global_label "KB_ROW2"
@@ -5199,8 +5199,8 @@
   (on_board yes)
   (dnp no)
   (uuid 9a494586-2bdd-5091-87b2-c6ab3bfcdf69)
-  (property "Reference" "SW358" (at 403.86 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Semicolon 1u" (at 403.86 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW358" (at 403.86 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Semicolon 1u" (at 403.86 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 403.86 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 403.86 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 403.86 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5220,8 +5220,8 @@
 )
 (global_label "KB_R2_C10_SEMICOLON"
   (shape bidirectional)
-  (at 398.78 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 398.78 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6cd28d65-bf09-5f13-b66c-d8ede0e302c5)
 )
 (global_label "KB_COL10"
@@ -5266,8 +5266,8 @@
 )
 (global_label "KB_R2_C10_SEMICOLON"
   (shape bidirectional)
-  (at 417.83 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 417.83 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6dd5e00f-ca97-5eee-b59f-64b406405f78)
 )
 (global_label "KB_ROW2"
@@ -5285,8 +5285,8 @@
   (on_board yes)
   (dnp no)
   (uuid 6d40a0e3-165b-5ce8-ad68-aad8ee2c10cd)
-  (property "Reference" "SW359" (at 441.96 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Quote 1u" (at 441.96 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW359" (at 441.96 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Quote 1u" (at 441.96 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 441.96 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 441.96 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 441.96 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5306,8 +5306,8 @@
 )
 (global_label "KB_R2_C11_QUOTE"
   (shape bidirectional)
-  (at 436.88 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 436.88 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 23d3921a-d8f0-53c0-b3cc-e24edf034a63)
 )
 (global_label "KB_COL11"
@@ -5352,8 +5352,8 @@
 )
 (global_label "KB_R2_C11_QUOTE"
   (shape bidirectional)
-  (at 455.93 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 455.93 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5bfb5e88-0ac7-57f5-88d0-32b46c989f13)
 )
 (global_label "KB_ROW2"
@@ -5371,8 +5371,8 @@
   (on_board yes)
   (dnp no)
   (uuid 92b006e0-8302-5854-a312-5a0bc41de929)
-  (property "Reference" "SW360" (at 480.06 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Enter 1.75u" (at 480.06 144.78 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW360" (at 480.06 128.27 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Enter 1.75u" (at 480.06 156.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 480.06 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 480.06 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 480.06 142.24 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5392,8 +5392,8 @@
 )
 (global_label "KB_R2_C12_ENTER"
   (shape bidirectional)
-  (at 474.98 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 474.98 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 36247ff0-2010-59ee-ab54-3f7561be8bba)
 )
 (global_label "KB_COL12"
@@ -5438,8 +5438,8 @@
 )
 (global_label "KB_R2_C12_ENTER"
   (shape bidirectional)
-  (at 494.03 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 494.03 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid bb972ce4-6058-5881-a166-f7a78ab22425)
 )
 (global_label "KB_ROW2"
@@ -5457,8 +5457,8 @@
   (on_board yes)
   (dnp no)
   (uuid 94ba6e09-c0c1-518a-b495-4e5fd4d9a351)
-  (property "Reference" "SW361" (at 24.13 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Shift L 1.75u" (at 24.13 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW361" (at 24.13 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Shift L 1.75u" (at 24.13 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 24.13 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 24.13 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 24.13 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5478,8 +5478,8 @@
 )
 (global_label "KB_R3_C0_LSHIFT"
   (shape bidirectional)
-  (at 19.05 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 19.05 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b1e8ff19-cb2c-585e-851f-abc7587974db)
 )
 (global_label "KB_COL0"
@@ -5524,8 +5524,8 @@
 )
 (global_label "KB_R3_C0_LSHIFT"
   (shape bidirectional)
-  (at 38.1 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 38.1 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2b4ca8e1-bd25-5c97-a184-e2afe3248cd8)
 )
 (global_label "KB_ROW3"
@@ -5543,8 +5543,8 @@
   (on_board yes)
   (dnp no)
   (uuid 391d3d80-af5e-50e7-a0d1-4f84b681f132)
-  (property "Reference" "SW362" (at 62.23 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Z 1u" (at 62.23 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW362" (at 62.23 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Z 1u" (at 62.23 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 62.23 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 62.23 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 62.23 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5564,8 +5564,8 @@
 )
 (global_label "KB_R3_C1_Z"
   (shape bidirectional)
-  (at 57.15 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 57.15 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1a11c94f-b0b3-5e4e-a5d4-dd03a75df379)
 )
 (global_label "KB_COL1"
@@ -5610,8 +5610,8 @@
 )
 (global_label "KB_R3_C1_Z"
   (shape bidirectional)
-  (at 76.2 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 76.2 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 66ceeac3-3c9b-52e9-98a3-45aae7f55f0f)
 )
 (global_label "KB_ROW3"
@@ -5629,8 +5629,8 @@
   (on_board yes)
   (dnp no)
   (uuid 4e3ed252-696e-5b35-8871-b4096f978714)
-  (property "Reference" "SW363" (at 100.33 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "X 1u" (at 100.33 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW363" (at 100.33 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "X 1u" (at 100.33 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 100.33 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 100.33 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 100.33 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5650,8 +5650,8 @@
 )
 (global_label "KB_R3_C2_X"
   (shape bidirectional)
-  (at 95.25 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2327c7f1-9266-5e7f-90a7-2766c4a0d850)
 )
 (global_label "KB_COL2"
@@ -5696,8 +5696,8 @@
 )
 (global_label "KB_R3_C2_X"
   (shape bidirectional)
-  (at 114.3 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 114.3 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d8c7aef9-7f24-5f79-b6cf-5023904f4647)
 )
 (global_label "KB_ROW3"
@@ -5715,8 +5715,8 @@
   (on_board yes)
   (dnp no)
   (uuid 39ef490e-385e-5252-af58-b805c773f27f)
-  (property "Reference" "SW364" (at 138.43 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "C 1u" (at 138.43 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW364" (at 138.43 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "C 1u" (at 138.43 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 138.43 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 138.43 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 138.43 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5736,8 +5736,8 @@
 )
 (global_label "KB_R3_C3_C"
   (shape bidirectional)
-  (at 133.35 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 133.35 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c2180d5b-02c1-5e04-a46a-ba93727c59fc)
 )
 (global_label "KB_COL3"
@@ -5782,8 +5782,8 @@
 )
 (global_label "KB_R3_C3_C"
   (shape bidirectional)
-  (at 152.4 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 152.4 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9c9a7075-d8e9-5ca0-8c88-86f511245092)
 )
 (global_label "KB_ROW3"
@@ -5801,8 +5801,8 @@
   (on_board yes)
   (dnp no)
   (uuid 2e89d279-9b26-505c-a0b4-7d0723b08061)
-  (property "Reference" "SW365" (at 176.53 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "V 1u" (at 176.53 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW365" (at 176.53 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "V 1u" (at 176.53 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 176.53 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 176.53 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 176.53 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5822,8 +5822,8 @@
 )
 (global_label "KB_R3_C4_V"
   (shape bidirectional)
-  (at 171.45 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 171.45 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 23a29593-698f-5994-92d8-e9d278f622eb)
 )
 (global_label "KB_COL4"
@@ -5868,8 +5868,8 @@
 )
 (global_label "KB_R3_C4_V"
   (shape bidirectional)
-  (at 190.5 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 190.5 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid cd026116-9fc3-583e-bdf7-805cb9d43271)
 )
 (global_label "KB_ROW3"
@@ -5887,8 +5887,8 @@
   (on_board yes)
   (dnp no)
   (uuid 6cd28d65-bf09-5f13-b66c-d8ede0e302c5)
-  (property "Reference" "SW366" (at 214.63 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "B 1u" (at 214.63 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW366" (at 214.63 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "B 1u" (at 214.63 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 214.63 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 214.63 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 214.63 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5908,8 +5908,8 @@
 )
 (global_label "KB_R3_C5_B"
   (shape bidirectional)
-  (at 209.55 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 209.55 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6d591b0b-d108-59e9-a782-12cccef7228c)
 )
 (global_label "KB_COL5"
@@ -5954,8 +5954,8 @@
 )
 (global_label "KB_R3_C5_B"
   (shape bidirectional)
-  (at 228.6 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 228.6 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c0ea3d57-71dd-5dd5-9bc4-2838d8ad285c)
 )
 (global_label "KB_ROW3"
@@ -5973,8 +5973,8 @@
   (on_board yes)
   (dnp no)
   (uuid 6e508a52-9c99-5fc5-b847-0aafb74672f3)
-  (property "Reference" "SW367" (at 251.46 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "N 1u" (at 251.46 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW367" (at 251.46 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "N 1u" (at 251.46 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 251.46 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 251.46 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 251.46 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -5994,8 +5994,8 @@
 )
 (global_label "KB_R3_C6_N"
   (shape bidirectional)
-  (at 246.38 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 246.38 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 8c44564f-523c-5f1b-8d61-f7ff5d123808)
 )
 (global_label "KB_COL6"
@@ -6040,8 +6040,8 @@
 )
 (global_label "KB_R3_C6_N"
   (shape bidirectional)
-  (at 265.43 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 265.43 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid bf4ec0ab-5112-575c-992c-314cb4a1d07b)
 )
 (global_label "KB_ROW3"
@@ -6059,8 +6059,8 @@
   (on_board yes)
   (dnp no)
   (uuid 10c8927e-c63f-5629-9a5d-3b7994cf86f8)
-  (property "Reference" "SW368" (at 289.56 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "M 1u" (at 289.56 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW368" (at 289.56 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "M 1u" (at 289.56 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 289.56 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 289.56 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 289.56 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6080,8 +6080,8 @@
 )
 (global_label "KB_R3_C7_M"
   (shape bidirectional)
-  (at 284.48 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 284.48 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a8d4d42a-6e35-5e7d-a2b3-6404a592f6b6)
 )
 (global_label "KB_COL7"
@@ -6126,8 +6126,8 @@
 )
 (global_label "KB_R3_C7_M"
   (shape bidirectional)
-  (at 303.53 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 303.53 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 65917362-c10f-5f6a-86f4-09adc953eeec)
 )
 (global_label "KB_ROW3"
@@ -6145,8 +6145,8 @@
   (on_board yes)
   (dnp no)
   (uuid bb972ce4-6058-5881-a166-f7a78ab22425)
-  (property "Reference" "SW369" (at 327.66 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Comma 1u" (at 327.66 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW369" (at 327.66 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Comma 1u" (at 327.66 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 327.66 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 327.66 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 327.66 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6166,8 +6166,8 @@
 )
 (global_label "KB_R3_C8_COMMA"
   (shape bidirectional)
-  (at 322.58 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 322.58 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 65722ee2-83a4-5f8b-9f95-d2026f2b6110)
 )
 (global_label "KB_COL8"
@@ -6212,8 +6212,8 @@
 )
 (global_label "KB_R3_C8_COMMA"
   (shape bidirectional)
-  (at 341.63 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 341.63 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ab342708-71d4-5d73-b725-b9a5b3a63bc4)
 )
 (global_label "KB_ROW3"
@@ -6231,8 +6231,8 @@
   (on_board yes)
   (dnp no)
   (uuid fbc75b06-b04f-5834-b49f-78ce818023c9)
-  (property "Reference" "SW370" (at 365.76 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Period 1u" (at 365.76 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW370" (at 365.76 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Period 1u" (at 365.76 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 365.76 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 365.76 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 365.76 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6252,8 +6252,8 @@
 )
 (global_label "KB_R3_C9_PERIOD"
   (shape bidirectional)
-  (at 360.68 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 360.68 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e8a15e45-aded-560f-9866-9cdd587f6620)
 )
 (global_label "KB_COL9"
@@ -6298,8 +6298,8 @@
 )
 (global_label "KB_R3_C9_PERIOD"
   (shape bidirectional)
-  (at 379.73 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 379.73 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b5d7dc1d-7890-5c87-b89f-7f10df721970)
 )
 (global_label "KB_ROW3"
@@ -6317,8 +6317,8 @@
   (on_board yes)
   (dnp no)
   (uuid b3df732c-7795-53b1-9192-c9bbd193f06a)
-  (property "Reference" "SW371" (at 403.86 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Slash 1u" (at 403.86 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW371" (at 403.86 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Slash 1u" (at 403.86 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 403.86 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 403.86 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 403.86 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6338,8 +6338,8 @@
 )
 (global_label "KB_R3_C10_SLASH"
   (shape bidirectional)
-  (at 398.78 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 398.78 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a223d283-fdf8-5306-b327-f46b47a26b52)
 )
 (global_label "KB_COL10"
@@ -6384,8 +6384,8 @@
 )
 (global_label "KB_R3_C10_SLASH"
   (shape bidirectional)
-  (at 417.83 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 417.83 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7d3390aa-440c-5536-8fe1-16e75017374b)
 )
 (global_label "KB_ROW3"
@@ -6403,8 +6403,8 @@
   (on_board yes)
   (dnp no)
   (uuid 2327c7f1-9266-5e7f-90a7-2766c4a0d850)
-  (property "Reference" "SW372" (at 441.96 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Up 1u" (at 441.96 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW372" (at 441.96 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Up 1u" (at 441.96 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 441.96 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 441.96 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 441.96 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6424,8 +6424,8 @@
 )
 (global_label "KB_R3_C11_UP"
   (shape bidirectional)
-  (at 436.88 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 436.88 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2aa961f6-646a-50b3-a533-6e0a79d881e1)
 )
 (global_label "KB_COL11"
@@ -6470,8 +6470,8 @@
 )
 (global_label "KB_R3_C11_UP"
   (shape bidirectional)
-  (at 455.93 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 455.93 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid be8a15d9-b920-5330-9921-05407859cbab)
 )
 (global_label "KB_ROW3"
@@ -6489,8 +6489,8 @@
   (on_board yes)
   (dnp no)
   (uuid 51d6af33-f3fe-52c4-a056-37fc9075174d)
-  (property "Reference" "SW373" (at 480.06 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Shift R 1.25u" (at 480.06 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW373" (at 480.06 161.29 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Shift R 1.25u" (at 480.06 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 480.06 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 480.06 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 480.06 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6510,8 +6510,8 @@
 )
 (global_label "KB_R3_C12_RSHIFT"
   (shape bidirectional)
-  (at 474.98 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 474.98 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6f5bb793-cca3-5e84-8ca2-6231b542ef5d)
 )
 (global_label "KB_COL12"
@@ -6556,8 +6556,8 @@
 )
 (global_label "KB_R3_C12_RSHIFT"
   (shape bidirectional)
-  (at 494.03 175.26 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 494.03 175.26 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9e433d70-6fcf-5485-881d-a710b7b43b47)
 )
 (global_label "KB_ROW3"
@@ -6575,8 +6575,8 @@
   (on_board yes)
   (dnp no)
   (uuid 51fe0997-c4a3-5825-a282-e78a8f5ff4fa)
-  (property "Reference" "SW374" (at 24.13 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Ctrl 1u" (at 24.13 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW374" (at 24.13 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Ctrl 1u" (at 24.13 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 24.13 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 24.13 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 24.13 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6596,8 +6596,8 @@
 )
 (global_label "KB_R4_C0_CTRL"
   (shape bidirectional)
-  (at 19.05 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 19.05 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6df4efe6-d72c-5a90-99c2-7a9e1541b6f0)
 )
 (global_label "KB_COL0"
@@ -6642,8 +6642,8 @@
 )
 (global_label "KB_R4_C0_CTRL"
   (shape bidirectional)
-  (at 38.1 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 38.1 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 17223d41-3801-51b8-9489-64c078a728ce)
 )
 (global_label "KB_ROW4"
@@ -6661,8 +6661,8 @@
   (on_board yes)
   (dnp no)
   (uuid cd026116-9fc3-583e-bdf7-805cb9d43271)
-  (property "Reference" "SW375" (at 62.23 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Fn 1u" (at 62.23 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW375" (at 62.23 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Fn 1u" (at 62.23 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 62.23 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 62.23 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 62.23 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6682,8 +6682,8 @@
 )
 (global_label "KB_R4_C1_FN"
   (shape bidirectional)
-  (at 57.15 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 57.15 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7f671217-3c20-5818-84b8-57d3e681d0ff)
 )
 (global_label "KB_COL1"
@@ -6728,8 +6728,8 @@
 )
 (global_label "KB_R4_C1_FN"
   (shape bidirectional)
-  (at 76.2 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 76.2 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 14b9ebcb-9936-5826-9fc1-27a4bdac513d)
 )
 (global_label "KB_ROW4"
@@ -6747,8 +6747,8 @@
   (on_board yes)
   (dnp no)
   (uuid 46612e8e-549b-5466-85b4-905c5b474267)
-  (property "Reference" "SW376" (at 100.33 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Super 1u" (at 100.33 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW376" (at 100.33 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Super 1u" (at 100.33 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 100.33 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 100.33 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 100.33 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6768,8 +6768,8 @@
 )
 (global_label "KB_R4_C2_SUPER"
   (shape bidirectional)
-  (at 95.25 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 95.25 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b41c9da9-b15f-5a58-b038-6f437e2e24a8)
 )
 (global_label "KB_COL2"
@@ -6814,8 +6814,8 @@
 )
 (global_label "KB_R4_C2_SUPER"
   (shape bidirectional)
-  (at 114.3 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 114.3 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 07b9875e-9461-5e7a-a606-23e7f942e060)
 )
 (global_label "KB_ROW4"
@@ -6833,8 +6833,8 @@
   (on_board yes)
   (dnp no)
   (uuid 060f3363-1fe5-5d42-bc72-186941c3044c)
-  (property "Reference" "SW377" (at 138.43 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Alt L 1u" (at 138.43 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW377" (at 138.43 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Alt L 1u" (at 138.43 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 138.43 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 138.43 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 138.43 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6854,8 +6854,8 @@
 )
 (global_label "KB_R4_C3_LALT"
   (shape bidirectional)
-  (at 133.35 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 133.35 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3f4d4c9a-816a-54bc-9ca3-0d059814d2ee)
 )
 (global_label "KB_COL3"
@@ -6900,8 +6900,8 @@
 )
 (global_label "KB_R4_C3_LALT"
   (shape bidirectional)
-  (at 152.4 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 152.4 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7abf6175-eb44-5581-937b-f40dfe6c50e3)
 )
 (global_label "KB_ROW4"
@@ -6919,8 +6919,8 @@
   (on_board yes)
   (dnp no)
   (uuid a8d4d42a-6e35-5e7d-a2b3-6404a592f6b6)
-  (property "Reference" "SW378" (at 176.53 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Space L 2.25u" (at 176.53 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW378" (at 176.53 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Space L 2.25u" (at 176.53 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 176.53 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 176.53 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 176.53 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -6940,8 +6940,8 @@
 )
 (global_label "KB_R4_C4_SPACE_L"
   (shape bidirectional)
-  (at 171.45 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 171.45 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 14ea3b4f-4107-5529-a364-49785b53f1c9)
 )
 (global_label "KB_COL4"
@@ -6986,8 +6986,8 @@
 )
 (global_label "KB_R4_C4_SPACE_L"
   (shape bidirectional)
-  (at 190.5 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 190.5 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ac1a5e77-db30-5a5a-b74e-5effa36ba308)
 )
 (global_label "KB_ROW4"
@@ -7005,8 +7005,8 @@
   (on_board yes)
   (dnp no)
   (uuid 7a3aeb3f-666f-5758-a04c-275c1ab148d0)
-  (property "Reference" "SW379" (at 214.63 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Space R 2.25u" (at 214.63 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW379" (at 214.63 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Space R 2.25u" (at 214.63 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 214.63 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 214.63 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 214.63 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7026,8 +7026,8 @@
 )
 (global_label "KB_R4_C5_SPACE_R"
   (shape bidirectional)
-  (at 209.55 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 209.55 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3e2f3c33-0a0c-5d90-aa73-5c22ae903845)
 )
 (global_label "KB_COL5"
@@ -7072,8 +7072,8 @@
 )
 (global_label "KB_R4_C5_SPACE_R"
   (shape bidirectional)
-  (at 228.6 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 228.6 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid bad97b11-ddcc-5aaf-9658-441d048a74c1)
 )
 (global_label "KB_ROW4"
@@ -7091,8 +7091,8 @@
   (on_board yes)
   (dnp no)
   (uuid 243c73d4-1532-598f-8ca8-8ae1418f2bbf)
-  (property "Reference" "SW380" (at 251.46 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Alt R 1u" (at 251.46 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW380" (at 251.46 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Alt R 1u" (at 251.46 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 251.46 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 251.46 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 251.46 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7112,8 +7112,8 @@
 )
 (global_label "KB_R4_C6_RALT"
   (shape bidirectional)
-  (at 246.38 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 246.38 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5cd5fd51-00d0-5341-9db3-c2e8680ee90e)
 )
 (global_label "KB_COL6"
@@ -7158,8 +7158,8 @@
 )
 (global_label "KB_R4_C6_RALT"
   (shape bidirectional)
-  (at 265.43 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 265.43 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 66dd1719-b231-523c-a47f-49923de201d4)
 )
 (global_label "KB_ROW4"
@@ -7177,8 +7177,8 @@
   (on_board yes)
   (dnp no)
   (uuid b5d7dc1d-7890-5c87-b89f-7f10df721970)
-  (property "Reference" "SW381" (at 289.56 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Menu 1u" (at 289.56 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW381" (at 289.56 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Menu 1u" (at 289.56 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 289.56 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 289.56 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 289.56 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7198,8 +7198,8 @@
 )
 (global_label "KB_R4_C7_MENU"
   (shape bidirectional)
-  (at 284.48 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 284.48 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5e97e690-d320-5d0b-bccb-65050110eada)
 )
 (global_label "KB_COL7"
@@ -7244,8 +7244,8 @@
 )
 (global_label "KB_R4_C7_MENU"
   (shape bidirectional)
-  (at 303.53 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 303.53 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 8670bb69-6f78-53bb-8736-1a783b51037b)
 )
 (global_label "KB_ROW4"
@@ -7263,8 +7263,8 @@
   (on_board yes)
   (dnp no)
   (uuid 34595727-1302-576b-a735-d6503518c785)
-  (property "Reference" "SW382" (at 365.76 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Left 1u" (at 365.76 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW382" (at 365.76 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Left 1u" (at 365.76 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 365.76 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 365.76 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 365.76 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7284,8 +7284,8 @@
 )
 (global_label "KB_R4_C9_LEFT"
   (shape bidirectional)
-  (at 360.68 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 360.68 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 327795e2-eba5-5874-80bd-979bd081a501)
 )
 (global_label "KB_COL9"
@@ -7330,8 +7330,8 @@
 )
 (global_label "KB_R4_C9_LEFT"
   (shape bidirectional)
-  (at 379.73 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 379.73 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 73d21b3e-c649-5879-b83e-a8009dd34a3d)
 )
 (global_label "KB_ROW4"
@@ -7349,8 +7349,8 @@
   (on_board yes)
   (dnp no)
   (uuid 4a433af9-2170-5043-b763-3dc2df44d29d)
-  (property "Reference" "SW383" (at 403.86 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Down 1u" (at 403.86 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW383" (at 403.86 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Down 1u" (at 403.86 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 403.86 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 403.86 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 403.86 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7370,8 +7370,8 @@
 )
 (global_label "KB_R4_C10_DOWN"
   (shape bidirectional)
-  (at 398.78 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 398.78 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 8bd981e2-2e22-5fcc-94b7-fe2c2d63cb29)
 )
 (global_label "KB_COL10"
@@ -7416,8 +7416,8 @@
 )
 (global_label "KB_R4_C10_DOWN"
   (shape bidirectional)
-  (at 417.83 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 417.83 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1d65d1a5-155e-5029-aae6-cdf8429b5c85)
 )
 (global_label "KB_ROW4"
@@ -7435,8 +7435,8 @@
   (on_board yes)
   (dnp no)
   (uuid 6f5bb793-cca3-5e84-8ca2-6231b542ef5d)
-  (property "Reference" "SW384" (at 441.96 205.74 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Right 1u" (at 441.96 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "SW384" (at 441.96 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Right 1u" (at 441.96 222.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Cherry_MX_ULP_SMD" (at 441.96 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 441.96 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "CHERRY" (at 441.96 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7456,8 +7456,8 @@
 )
 (global_label "KB_R4_C11_RIGHT"
   (shape bidirectional)
-  (at 436.88 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 436.88 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d10de08c-ccca-564d-bdf5-b7426e9bbb05)
 )
 (global_label "KB_COL11"
@@ -7502,8 +7502,8 @@
 )
 (global_label "KB_R4_C11_RIGHT"
   (shape bidirectional)
-  (at 455.93 208.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 455.93 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 71df3c49-ef85-5038-9166-a29b8191f300)
 )
 (global_label "KB_ROW4"
@@ -7522,8 +7522,8 @@
   (on_board yes)
   (dnp no)
   (uuid 4dc59f84-1ad7-578c-a488-592db414238c)
-  (property "Reference" "J320" (at 165.1 337.82 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "Keyboard FFC: MX ULP 5x14 matrix on 30-pin EC contract" (at 165.1 342.9 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "J320" (at 165.1 293.37 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "Keyboard FFC: MX ULP 5x14 matrix on 30-pin EC contract" (at 165.1 387.35 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal" (at 165.1 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 165.1 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Hirose" (at 165.1 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7573,182 +7573,182 @@
 )
 (global_label "GND"
   (shape bidirectional)
-  (at 160.02 304.8 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 304.8 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 729977cd-f88e-5b28-9923-908b6d80e409)
 )
 (global_label "MCU_3V3"
   (shape bidirectional)
-  (at 160.02 307.34 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 307.34 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1e83a918-edb2-5d44-8913-885da29fb1dc)
 )
 (global_label "I2C_SCL"
   (shape bidirectional)
-  (at 160.02 309.88 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 309.88 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6959d5e4-e7d2-595c-b2f5-f7dd3e70fac9)
 )
 (global_label "I2C_SDA"
   (shape bidirectional)
-  (at 160.02 312.42 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 312.42 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 4b38a50e-c1a6-5789-b694-ccc1e25842b3)
 )
 (global_label "KB_ROW0"
   (shape bidirectional)
-  (at 160.02 314.96 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 314.96 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9ce781f1-bf4a-5874-a3e7-dcd879f2893f)
 )
 (global_label "KB_ROW1"
   (shape bidirectional)
-  (at 160.02 317.5 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 317.5 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d0564cd3-4845-5498-9a58-f7edccfc3073)
 )
 (global_label "KB_ROW2"
   (shape bidirectional)
-  (at 160.02 320.04 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 320.04 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 517a62c4-88e6-5e2b-9dbd-9547baa8954c)
 )
 (global_label "KB_ROW3"
   (shape bidirectional)
-  (at 160.02 322.58 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 322.58 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3b9ba4ba-b4c5-5305-a8c2-25715f788950)
 )
 (global_label "KB_ROW4"
   (shape bidirectional)
-  (at 160.02 325.12 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 325.12 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9898c34c-95c9-5b92-99d3-a214aeffddaf)
 )
 (global_label "KB_ROW5"
   (shape bidirectional)
-  (at 160.02 327.66 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 327.66 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid fba35f12-9d23-5da9-b1e0-17b0f111e44f)
 )
 (global_label "KB_ROW6"
   (shape bidirectional)
-  (at 160.02 330.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 330.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9a26c08a-5669-5306-bebe-71f9b8de3c05)
 )
 (global_label "KB_ROW7"
   (shape bidirectional)
-  (at 160.02 332.74 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 332.74 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1fc749d4-dc48-5e2e-9b40-bc1fc7dcd89b)
 )
 (global_label "KB_COL0"
   (shape bidirectional)
-  (at 160.02 335.28 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 335.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f4301b59-52e3-578a-bf5a-36174fad56a9)
 )
 (global_label "KB_COL1"
   (shape bidirectional)
-  (at 160.02 337.82 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 337.82 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 8e4e1fa3-eae8-57e9-ad45-87ca26974bec)
 )
 (global_label "KB_COL2"
   (shape bidirectional)
-  (at 160.02 340.36 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 340.36 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b6efc79d-2bd9-5532-bd49-9b825308b9f1)
 )
 (global_label "KB_COL3"
   (shape bidirectional)
-  (at 160.02 342.9 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 342.9 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid dd2e3b5f-b612-5d01-9723-7f36cff21bc2)
 )
 (global_label "KB_COL4"
   (shape bidirectional)
-  (at 160.02 345.44 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 345.44 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7540343a-021f-521d-a03b-cfa0ec7c5a2b)
 )
 (global_label "KB_COL5"
   (shape bidirectional)
-  (at 160.02 347.98 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 347.98 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 95ea63a7-073e-5ef5-bcee-15d39c4c60ed)
 )
 (global_label "KB_COL6"
   (shape bidirectional)
-  (at 160.02 350.52 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 350.52 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid a0f53036-d87c-5fc4-90a8-a918ef561fa9)
 )
 (global_label "KB_COL7"
   (shape bidirectional)
-  (at 160.02 353.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 353.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 140ce056-090e-5dc2-af77-e932352713ab)
 )
 (global_label "KB_COL8"
   (shape bidirectional)
-  (at 160.02 355.6 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 355.6 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 549da1ea-067c-5f7f-9ce7-76cbc27978b3)
 )
 (global_label "KB_COL9"
   (shape bidirectional)
-  (at 160.02 358.14 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 358.14 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9b472752-2d00-5f67-8b9a-e2194941a7bf)
 )
 (global_label "KB_COL10"
   (shape bidirectional)
-  (at 160.02 360.68 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 360.68 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid db9ac00c-977a-505a-8f6e-ac86ee84d418)
 )
 (global_label "KB_COL11"
   (shape bidirectional)
-  (at 160.02 363.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 363.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 9f7a1f1d-b099-5b18-a730-5a05f6f12364)
 )
 (global_label "KB_COL12"
   (shape bidirectional)
-  (at 160.02 365.76 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 365.76 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1cee1c68-1745-5a99-b66a-b60670a3353b)
 )
 (global_label "KB_COL13"
   (shape bidirectional)
-  (at 160.02 368.3 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 368.3 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c77c0485-748b-5fd3-bf3d-9f38039ef86f)
 )
 (global_label "KB_COL14"
   (shape bidirectional)
-  (at 160.02 370.84 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 370.84 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 68d815ac-68b3-524d-bbae-4f1ea65eea31)
 )
 (global_label "KB_COL15"
   (shape bidirectional)
-  (at 160.02 373.38 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 373.38 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6f89e720-b608-5d69-89ca-a75f558fe2e6)
 )
 (global_label "SYS_5V"
   (shape bidirectional)
-  (at 160.02 375.92 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 375.92 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e98d5c33-de67-5f02-8eb6-1acddae31346)
 )
 (global_label "GND"
   (shape bidirectional)
-  (at 160.02 378.46 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 160.02 378.46 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 40c5f46c-329b-57fa-a7af-77ebc94f83f9)
 )
 (no_connect (at 170.18 381) (uuid 6a394ee4-eec4-5d77-943f-95478596ece0))
@@ -7835,8 +7835,8 @@
   (on_board no)
   (dnp yes)
   (uuid 44679dcb-f93a-56cc-8276-738ee08e551f)
-  (property "Reference" "J321" (at 350.52 337.82 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "DNP keyboard bring-up/debug" (at 350.52 342.9 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "J321" (at 350.52 328.93 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "DNP keyboard bring-up/debug" (at 350.52 351.79 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" (at 350.52 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 350.52 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "ReleasedRevA" "Not fitted; footprint omitted from manufactured PCB" (at 350.52 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -7855,26 +7855,26 @@
 )
 (global_label "GND"
   (shape bidirectional)
-  (at 345.44 337.82 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 345.44 337.82 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b706a152-6d51-5bf5-935c-f49990f7d6c1)
 )
 (global_label "MCU_3V3"
   (shape bidirectional)
-  (at 345.44 340.36 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 345.44 340.36 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2c86240d-e6bf-5800-b270-3486e9507797)
 )
 (global_label "I2C_SCL"
   (shape bidirectional)
-  (at 345.44 342.9 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 345.44 342.9 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ae0952a7-9027-5491-82f7-3344cf94c3be)
 )
 (global_label "I2C_SDA"
   (shape bidirectional)
-  (at 345.44 345.44 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 345.44 345.44 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 597b27a3-1956-5d73-8a36-ec42000858a1)
 )
 (symbol

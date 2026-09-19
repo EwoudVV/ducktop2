@@ -85,9 +85,11 @@ def build_left_pd_sheet(sheet_symbol_uuid):
     s.text(20.32, 693.42, "Seven port permissions reserve VBUS, VCONN and branch losses before power is applied.")
     # Phase 5 B9: the left board's chassis holes live on THIS board; the
     # board build transplants them to their monolith positions.
-    for ref in ("H10", "H11", "H12", "H16"):
+    # Readability: H holes shared one XY (0mm stacks). Spread 25.4 mm apart.
+    # Schematic positions do not affect PCB placement. Nets unchanged (none).
+    for _i, ref in enumerate(("H10", "H11", "H12", "H16")):
         s.place(ref, "MountingHole", "M2.5 isolated mainboard mounting hole",
-                740.0, 60.0, footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
+                740.0 + _i * 25.4, 60.0, footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
                 in_bom=False,
                 extra_props={"Hardware_Spec": "2.7mm isolated NPTH for M2.5 chassis screw"})
     s.gnd(431.8, 622.3)

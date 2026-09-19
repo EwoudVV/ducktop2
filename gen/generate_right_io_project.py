@@ -48,9 +48,11 @@ def build_right_pd_sheet(sheet_symbol_uuid):
     usb.add_source_port(s, jref="J12", port=4, base=1760, x0=20.32, y0=337.82,
                         usb2_only=True, remote_data=True, ec_controlled=True)
     # Phase 5 B9: the right board's chassis holes live on THIS board.
-    for ref in ("H13", "H15", "H17"):
+    # Readability: H holes shared one XY (0mm stacks). Spread 25.4 mm apart.
+    # Schematic positions do not affect PCB placement. Nets unchanged (none).
+    for _i, ref in enumerate(("H13", "H15", "H17")):
         s.place(ref, "MountingHole", "M2.5 isolated mainboard mounting hole",
-                500.0, 20.32, footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
+                500.0 + _i * 25.4, 20.32, footprint=FOOTPRINTS["Mainboard_M2.5_Hole"],
                 in_bom=False,
                 extra_props={"Hardware_Spec": "2.7mm isolated NPTH for M2.5 chassis screw"})
     s.gnd(431.8, 622.3)

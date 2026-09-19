@@ -495,7 +495,9 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
                 "Datasheet": "https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf",
                 "LogicContract": "MU_HOST_ACTIVE=MU_S0_HIGH_AND_MU_12V_PG",
             })
-    s.place("C793", "C", "100n qualified host-active gate local", 840, 300,
+    # Readability: C793 sat 10 mm below U769 with overlapping body bboxes.
+    # Moved +20 mm right to clear the AND gate. Nets unchanged.
+    s.place("C793", "C", "100n qualified host-active gate local", 860, 300,
             footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
     s.place("R769", "R", "100k MU_HOST_ACTIVE fail-low", 840, 310,

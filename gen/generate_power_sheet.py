@@ -104,8 +104,11 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("FG_TS", "local"), "2": ("FG_VSS", "hier")})
 
     # ---------------- U2: BQ25798 buck-boost charger / NVDC path ----------------
+    # Readability (cosmetic-only, nets unchanged): U2 body is ~60 mm tall and
+    # sat inside the c3 col-2 passive column at x=315. Moved +30 mm right so
+    # C11/L1/Q25/R704/C701-C703 clear the body. Anchors follow pins.
     s.text(260, 20, "== U2 bq25798 Buck-Boost Charger / NVDC Power Path (VSYS) ==")
-    s.place("U2", "BQ25798", "BQ25798RQMR", 320, 120,
+    s.place("U2", "BQ25798", "BQ25798RQMR", 351, 120,
             footprint="Package_DFN_QFN:Texas_RQM0029A_VQFN-29_4x4mm_P0.4mm",
             pin_nets={
                 "1": ("STAT_DRV", "local"), "2": ("VBUS_COMBINED", "local"),
@@ -169,7 +172,12 @@ def build(sheet_symbol_uuid):
             extra_props={"Manufacturer": "onsemi", "MPN": "BSS138LT1G"})
     s.place("R719", "R", "100k charger-enable gate pulldown", *c3.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("CHG_ENABLE", "hier"), "2": ("GND", "local")})
-    s.place("U2210", "74LVC1G08", "SN74LVC1G08DBVR charger request AND isolated cell-temperature permit", *c3.next(),
+    # Readability: U2210 sat between R719/R2260 at 10 mm pitch with overlapping
+    # body bboxes. Waste one c3 slot to keep the column stable, place U2210
+    # in the gap between the 170-col and 260-col (x=200) clear of R181/U10.
+    # Nets unchanged.
+    c3.next()
+    s.place("U2210", "74LVC1G08", "SN74LVC1G08DBVR charger request AND isolated cell-temperature permit", 200, 160.02,
             footprint=FOOTPRINTS["SN74LVC1G08DBV"],
             pin_nets={"1": ("CHG_ENABLE", "hier"), "2": ("PACK_CHG_TEMP_OK_IN", "local"),
                       "3": ("GND", "local"), "4": ("CHG_ENABLE_THERM", "local"),
@@ -283,7 +291,11 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("AUX_EFUSE_Q2_GATE", "local"), "2": ("AUX_EFUSE_IN_SYS", "local"),
                       "3": ("AUX_EFUSE_BGATE", "local")},
             extra_props={"Manufacturer": "onsemi", "MPN": "BSS138LT1G"})
-    s.place("U12", "TPS26630RGE", "TPS26630RGER 3A AUX eFuse / surge cutoff", *c4.next(),
+    # Readability: U12 (25-pin eFuse, tall body) sat inside the c4 passive
+    # column at x=380 overlapping Q13/Q14/R710/R711. Waste one c4 slot, move
+    # U12 +25 mm right to clear the column. Nets unchanged.
+    c4.next()
+    s.place("U12", "TPS26630RGE", "TPS26630RGER 3A AUX eFuse / surge cutoff", 405.13, 90.17,
             footprint=FOOTPRINTS["TPS26630RGE"],
             pin_nets={
                 "1": ("AUX_DC_FUSED", "local"), "2": ("AUX_DC_FUSED", "local"),

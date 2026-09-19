@@ -1155,7 +1155,7 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "R_*"
+		(property "ki_fp_filters" "R_* ducktop2:Panasonic_ERJ8CW_10to16m_Center"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2303,8 +2303,8 @@
   (on_board yes)
   (dnp no)
   (uuid 55a68289-bb36-593c-911b-9e789f2b94a7)
-  (property "Reference" "J30" (at 115.57 121.92 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "External HDMI-A from TCP0" (at 115.57 127 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "J30" (at 115.57 90.17 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "External HDMI-A from TCP0" (at 115.57 158.75 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_Video:HDMI_A_Molex_208658-1001_Horizontal" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Molex" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2339,38 +2339,38 @@
   )
 )
 (label "EXT_HDMI_D2_P"
-  (at 105.41 104.14 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 104.14 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d96ce822-e23c-5434-a54f-fd66cc89e6a2)
 )
 (label "GND"
-  (at 110.49 152.4 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 110.49 152.4 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid cb8f2720-a7d7-5ee5-9b4d-ab0c0d09c04d)
 )
 (label "EXT_HDMI_D2_N"
-  (at 105.41 106.68 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 106.68 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7cd5be87-b458-5f68-9d71-f77186686bc7)
 )
 (label "EXT_HDMI_D1_P"
-  (at 105.41 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2f96fc8b-4f0c-5cea-8718-1362c48b1ecd)
 )
 (label "GND"
-  (at 113.03 152.4 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 113.03 152.4 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7858d62f-0c6d-50e5-b1d1-c990ce44a6c4)
 )
 (label "EXT_HDMI_D1_N"
-  (at 105.41 111.76 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 111.76 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ae4eb55e-c74a-5e13-9dc0-bcda9f44e70b)
 )
 (label "EXT_HDMI_D0_P"
-  (at 105.41 114.3 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 114.3 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c6f1c548-76a5-5a37-b76d-4e5cd61f1869)
 )
 (label "GND"
@@ -2379,13 +2379,13 @@
   (uuid 5a6d25db-3902-527d-ac3d-958c8de8b3e0)
 )
 (label "EXT_HDMI_D0_N"
-  (at 105.41 116.84 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 116.84 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 5aa2f9da-f6dc-5df4-9fef-5acf74c61bb6)
 )
 (label "EXT_HDMI_CK_P"
-  (at 105.41 119.38 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 119.38 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c8a6fd75-a06b-533b-882f-d7424af47e6f)
 )
 (label "GND"
@@ -2394,20 +2394,20 @@
   (uuid 5f524362-a2c6-57cf-80e0-9cfa7ee3a043)
 )
 (label "EXT_HDMI_CK_N"
-  (at 105.41 121.92 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 121.92 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 7eb4aef4-0c89-5b1a-a676-79291445a6e0)
 )
 (no_connect (at 105.41 127) (uuid 9fdd2ad6-ef85-5ff8-9aea-fd023db7505e))
 (no_connect (at 105.41 139.7) (uuid c486cdcc-b4c4-5355-9d55-469b9f9c1a1a))
 (label "EXT_HDMI_SCL_CONN"
-  (at 105.41 132.08 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 132.08 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid e65b0c10-156b-56ff-97e8-ba2b94fb2d6d)
 )
 (label "EXT_HDMI_SDA_CONN"
-  (at 105.41 134.62 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 134.62 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 3d2aad87-9c2f-54d9-a6c5-6a2a7957e569)
 )
 (label "GND"
@@ -2421,8 +2421,8 @@
   (uuid ee71d0a6-017d-5aa8-94e1-077fc90a4bd7)
 )
 (label "EXT_HDMI_HPD_CONN"
-  (at 105.41 142.24 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 105.41 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 290e4a97-be15-534f-9d91-f13c7cb94479)
 )
 (label "GND"
@@ -2531,8 +2531,8 @@
   )
 )
 (label "EXT_HDMI_D2_P"
-  (at 246.38 102.87 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 246.38 102.87 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 85bc9b61-52c4-535d-8b81-133b8c06d2b1)
 )
 (label "GND"
@@ -2641,8 +2641,8 @@
   )
 )
 (label "EXT_HDMI_D2_N"
-  (at 300.99 102.87 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 300.99 102.87 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid bc8170e1-2cbc-5dc2-8c39-f8c85e563477)
 )
 (label "GND"
@@ -2751,8 +2751,8 @@
   )
 )
 (label "EXT_HDMI_D1_P"
-  (at 355.6 102.87 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 355.6 102.87 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 16480f9e-8c02-54f9-beb9-139e76994214)
 )
 (label "GND"
@@ -2861,8 +2861,8 @@
   )
 )
 (label "EXT_HDMI_D1_N"
-  (at 411.48 102.87 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 411.48 102.87 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2d510717-65e4-5d30-b9fd-4ad5bcef5bf8)
 )
 (label "GND"
@@ -2971,8 +2971,8 @@
   )
 )
 (label "EXT_HDMI_D0_P"
-  (at 246.38 128.27 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 246.38 128.27 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c501658d-6f99-5a4d-b475-2f8aa06f053a)
 )
 (label "GND"
@@ -3081,8 +3081,8 @@
   )
 )
 (label "EXT_HDMI_D0_N"
-  (at 300.99 128.27 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 300.99 128.27 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid b75e3615-73f2-5cf2-a91c-469f935efd6d)
 )
 (label "GND"
@@ -3191,8 +3191,8 @@
   )
 )
 (label "EXT_HDMI_CK_P"
-  (at 355.6 128.27 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 355.6 128.27 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid f7b1058f-890e-5100-a8df-a0dcba499012)
 )
 (label "GND"
@@ -3301,8 +3301,8 @@
   )
 )
 (label "EXT_HDMI_CK_N"
-  (at 411.48 128.27 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 411.48 128.27 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 102d99e0-ca89-5c73-a4a0-1ffc0501bf0d)
 )
 (label "GND"
@@ -3319,8 +3319,8 @@
   (on_board yes)
   (dnp no)
   (uuid a8f638c4-49bf-57d1-8e52-45b73b9de58a)
-  (property "Reference" "Q50" (at 474.98 177.8 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "BSS138 HDMI bias gate" (at 474.98 182.88 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "Q50" (at 474.98 168.91 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BSS138 HDMI bias gate" (at 474.98 191.77 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 474.98 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 474.98 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "onsemi" (at 474.98 180.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3338,8 +3338,8 @@
   )
 )
 (label "EXT_HDMI_BIAS_GATE"
-  (at 469.9 180.34 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 469.9 180.34 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 368205f1-ecd7-56cb-be47-f0c37f9520bf)
 )
 (label "GND"
@@ -3468,8 +3468,8 @@
   (on_board yes)
   (dnp no)
   (uuid e7415b8a-b60c-549b-a3a7-c8415608a035)
-  (property "Reference" "U54" (at 405.13 35.56 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPS22948DCKR HDMI 5V current-limited switch" (at 405.13 40.64 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U54" (at 405.13 24.13 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS22948DCKR HDMI 5V current-limited switch" (at 405.13 52.07 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 405.13 38.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3493,8 +3493,8 @@
 )
 (hierarchical_label "SYS_5V"
   (shape bidirectional)
-  (at 397.51 35.56 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 35.56 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c9effb09-a462-573f-b415-4a98524a1635)
 )
 (label "GND"
@@ -3504,8 +3504,8 @@
 )
 (hierarchical_label "MU_HOST_ACTIVE"
   (shape bidirectional)
-  (at 397.51 38.1 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 38.1 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 60c1da5d-2ce2-5903-9faf-d256f51978d8)
 )
 (no_connect (at 412.75 41.91) (uuid f0ec07ce-467c-5c72-8773-614045903995))
@@ -3598,8 +3598,8 @@
   (on_board yes)
   (dnp no)
   (uuid f59a9190-1046-57d0-8775-2c1fde7795b7)
-  (property "Reference" "U55" (at 405.13 99.06 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPS22975NDSGR host-active SYS_3V3 switch" (at 405.13 104.14 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U55" (at 405.13 87.63 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS22975NDSGR host-active SYS_3V3 switch" (at 405.13 115.57 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:Texas_DSG0008A_WSON-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 405.13 101.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3626,26 +3626,26 @@
 )
 (hierarchical_label "SYS_3V3"
   (shape bidirectional)
-  (at 397.51 99.06 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 00b5b966-cf95-5bd0-a27e-cd73db7ec3b4)
 )
 (hierarchical_label "SYS_3V3"
   (shape bidirectional)
-  (at 397.51 100.33 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 100.33 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 1da92261-9dec-5b2a-ad25-def3396cee3a)
 )
 (hierarchical_label "MU_HOST_ACTIVE"
   (shape bidirectional)
-  (at 397.51 102.87 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 102.87 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 2dbb0085-5abc-58e4-808b-2e16dc0acc74)
 )
 (hierarchical_label "SYS_3V3"
   (shape bidirectional)
-  (at 397.51 104.14 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 397.51 104.14 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ca97a4a7-6ba6-5862-864c-de34222d0754)
 )
 (label "GND"
@@ -3667,11 +3667,6 @@
   (at 412.75 99.06 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e8e044e1-b86c-5e31-9160-34b7c31b9d41)
-)
-(label "GND"
-  (at 405.13 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fc63b5bb-a717-5b1b-bc15-2f0f992a6ea0)
 )
 (symbol
   (lib_id "Device:C")
@@ -3790,8 +3785,8 @@
   (on_board yes)
   (dnp no)
   (uuid 1faffdcc-80c3-5cd6-83a2-4cab5c46554e)
-  (property "Reference" "U50" (at 500.38 60.96 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPD4E05U06DQAR HDMI control and 5V ESD" (at 500.38 66.04 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U50" (at 500.38 44.45 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPD4E05U06DQAR HDMI control and 5V ESD" (at 500.38 82.55 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 500.38 63.5 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3817,13 +3812,13 @@
   )
 )
 (label "EXT_HDMI_SCL_CONN"
-  (at 487.68 60.96 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 487.68 60.96 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 703c744b-0781-561e-870a-93b4588b4a89)
 )
 (label "EXT_HDMI_SDA_CONN"
-  (at 487.68 66.04 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 487.68 66.04 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 34dd92dc-cdc4-58c0-917e-e25ad85efd06)
 )
 (label "GND"
@@ -3843,11 +3838,6 @@
 )
 (no_connect (at 513.08 71.12) (uuid a9f72fd2-a60a-5549-8566-b4b2b10206e7))
 (no_connect (at 513.08 55.88) (uuid fa8b5594-a74e-5424-8d42-4f6fe7a3eef0))
-(label "GND"
-  (at 500.38 76.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ab632d7f-fd52-5daf-8c8d-e1ebba3ec163)
-)
 (no_connect (at 487.68 71.12) (uuid 852a61a8-f0ee-53d8-bb51-6cce5abb460f))
 (no_connect (at 487.68 55.88) (uuid f97124ee-c8c0-5ba4-872f-b5d96a669841))
 (symbol
@@ -3933,8 +3923,8 @@
   (on_board yes)
   (dnp no)
   (uuid 76051ae1-3cd9-56d9-baef-6c1afb12da0a)
-  (property "Reference" "U51" (at 500.38 116.84 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "PCA9306DCTR HDMI DDC level translator" (at 500.38 121.92 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U51" (at 500.38 105.41 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PCA9306DCTR HDMI DDC level translator" (at 500.38 133.35 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_SO:SSOP-8_2.95x2.8mm_P0.65mm" (at 500.38 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 500.38 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 500.38 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -3962,20 +3952,20 @@
   (uuid cafe64a1-49cc-5a58-89ae-81761dc95738)
 )
 (label "HDMI_HOST_3V3"
-  (at 492.76 115.57 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 115.57 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 30afafa1-2f8c-5e15-b91d-29e849b3e5e2)
 )
 (hierarchical_label "TCP0_DDC_SCL"
   (shape bidirectional)
-  (at 492.76 118.11 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 118.11 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ad0df174-a86c-513f-8eb3-a5257c39d42d)
 )
 (hierarchical_label "TCP0_DDC_SDA"
   (shape bidirectional)
-  (at 492.76 120.65 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 492.76 120.65 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 6bd50ccf-0fce-5340-9ea1-66726c619216)
 )
 (label "EXT_HDMI_SDA_CONN"
@@ -4225,8 +4215,8 @@
   (on_board yes)
   (dnp no)
   (uuid 3cec503e-c8d4-5487-8378-6cc9fbc16775)
-  (property "Reference" "U53" (at 500.38 154.94 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "SN74LVC1G17DBVR HDMI HPD buffer" (at 500.38 160.02 0) (effects (font (size 1.27 1.27))))
+  (property "Reference" "U53" (at 500.38 140.97 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74LVC1G17DBVR HDMI HPD buffer" (at 500.38 173.99 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 500.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 500.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Texas Instruments" (at 500.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -4247,13 +4237,13 @@
 )
 (no_connect (at 492.76 152.4) (uuid 682a2185-7bf8-53f8-b45c-30911634c3c5))
 (label "EXT_HDMI_HPD_NODE"
-  (at 487.68 157.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 487.68 157.48 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 535fdf31-d41d-5977-9033-2ded2aaf61f2)
 )
 (label "GND"
-  (at 495.3 167.64 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 495.3 167.64 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c175d857-3e91-5780-bc55-151fb5ac04f4)
 )
 (hierarchical_label "TCP0_HPD"
@@ -4263,8 +4253,8 @@
   (uuid f8688cb0-964e-5c4a-b35d-900f26a9da16)
 )
 (label "HDMI_HOST_3V3"
-  (at 495.3 147.32 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (at 495.3 147.32 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid d60494dd-e84a-59d6-8cec-a566e2ece02f)
 )
 (symbol
