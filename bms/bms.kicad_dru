@@ -82,3 +82,14 @@
 (rule "VSYS bypass pair C709/C720 (0.295 mm actual)"
     (condition "((A.Reference == 'C709' && B.Reference == 'C720') || (A.Reference == 'C720' && B.Reference == 'C709'))")
     (constraint clearance (min 0.25mm)))
+
+# --- BMS low-current logic manufacturing rules ---
+# NextPCB publishes 0.10 mm SMD-pad-to-track and 0.15 mm SMD-pad-to-pad
+# spacing. Via, PTH, NPTH and high-current net rules above remain stricter.
+(rule "BMS SMD pad to track >= 0.10 mm"
+    (condition "((A.Type == 'track' && B.Type == 'pad' && B.Pad_Type == 'smd') || (A.Type == 'pad' && A.Pad_Type == 'smd' && B.Type == 'track'))")
+    (constraint clearance (min 0.10mm)))
+
+(rule "BMS SMD pad to SMD pad >= 0.15 mm"
+    (condition "A.Type == 'pad' && B.Type == 'pad' && A.Pad_Type == 'smd' && B.Pad_Type == 'smd'")
+    (constraint clearance (min 0.15mm)))
