@@ -27,19 +27,20 @@ with wires. their module bodies are not part of the center-board footprint.
 the floorplan positions remain a packaging sketch until the case mounts
 and cable routes are set.
 
-the revised BMS under review is 61.9 x 36.148 mm at its widest bounds. its
+the BMS is 61.9 x 36.148 mm at its widest bounds. its
 installed outline spans x=154.05 to x=215.95 and y=150.2 to y=186.348,
 centered at x=185. the small rear extension is tapered. the center board's
 notch is already set for it, with its back at y=148.7, 1.5 mm inside radii,
-and 1.5 mm board clearance. the battery row stays at y=188. this BMS layout
-is still being routed and has not replaced the saved BMS board yet.
+and 1.5 mm board clearance. the battery row stays at y=188. this outline is
+in the saved, routed BMS board. the two middle holes were removed for routing;
+the four perimeter supports remain.
 
 the BMS keeps its own mounting points and needs chassis support. the center
 board's H24 moved to (149,148), outside the notch. H22 is now (105,70).
 the BMS file uses its original coordinates; the installed translation is
 (+47.35,+91.448), with no rotation. the main component side faces up;
 the isolated-control and raw-probe connectors face down. include their
-housings and wire bends below the board. all six BMS supports and fasteners
+housings and wire bends below the board. all four BMS supports and fasteners
 must be insulating so they cannot bridge its separate ground domains.
 
 the radio outline is about 120 x 70 mm in its own layout frame. its installed

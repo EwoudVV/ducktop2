@@ -101,8 +101,7 @@ outside them, plus the completed pcie paths. use
 
 ## assembly work left
 
-the center frame and m.2 offsets are checked. the complete assembly
-export still stops at the saved bms board, which lacks J2072 from the
-current harness definition. the generated assembly datums also need a
-refresh after that is resolved. connector housings, cable bends, board
-supports and the final case height still need a measured fit.
+the center frame and m.2 offsets are checked. the assembly export now
+includes the routed bms and both of its cable connections. the connector
+maps and generated datums agree with the saved boards. connector housings,
+cable bends, board supports and the final case height still need a measured fit.

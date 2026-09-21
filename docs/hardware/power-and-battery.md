@@ -1,8 +1,10 @@
 # power and battery
 
-updated 10 september 2026. this describes the corrected circuit. the revised
-four-layer BMS layout is still being finished and checked. the old routing
-results do not cover its new thermal circuit or separate cable connections.
+updated 21 september 2026. the four-layer BMS is routed, including the
+thermal circuit and separate cable connections. the saved board has zero
+unconnected items, zero physical DRC errors and no schematic mismatch.
+[layout checks](../../verification/bms-layout.md) records the copper and
+return-path checks. the cell and assembled-hardware tests below still apply.
 [current board status](../../README.md#build-status)
 
 ## cells and responsibilities
@@ -59,9 +61,9 @@ raw pack negative
 ```
 
 keep the quiet raw reference at the protector separate from load current.
-the BMS layout checks preserve the original FET and Kelvin geometry and
-the continuous filled power areas. the new dedicated FG_VSS output return
-is checked separately from the thermal and control routing.
+the FET placements and Kelvin pickups are preserved. the wide power routes
+use copper fills so the signal vias have proper clearance. their load paths
+were checked after refill, including the separate FG_VSS output return.
 
 raw negative, FG_VSS, CTRL_GND and system GND have different jobs. their
 connections are defined by the protection, isolation and gauge circuits.

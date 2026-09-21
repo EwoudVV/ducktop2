@@ -1,0 +1,406 @@
+{
+  "checked_on": "2026-09-21",
+  "board": "bms/bms.kicad_pcb",
+  "working_tree": true,
+  "base_commit": "49ea8fe85a8eadaca53e3b9e6f80318b01309bbd",
+  "source_sha256": {
+    "bms/bms.kicad_pcb": "b49cacce1cd20ba42c54bc3955d3b4da7d03eabb26c9ec9879775d074f8df5f2",
+    "bms/bms.kicad_sch": "771de1b5ded171a8935a4792934b80f82480d227484ba8593f1cd620ee18724a",
+    "bms/bms.kicad_pro": "cc6ac996a9e9c80cd246ee780557ad5d197457eee5ed7cc6eaf912082392db82",
+    "bms/bms.kicad_dru": "37bf5785744034ada850286953d1156b3af6458e2f49bbe53890e8af50aab2ba"
+  },
+  "native_counts": {
+    "native_airwires": 0,
+    "copper_layers": 4,
+    "footprints": 149,
+    "tracks": 2710,
+    "vias": 394,
+    "perimeter_holes": 4
+  },
+  "drc": {
+    "errors": 0,
+    "unconnected": 0,
+    "schematic_mismatches": 0,
+    "warnings": {
+      "track_dangling": 8,
+      "via_dangling": 2,
+      "lib_footprint_mismatch": 72
+    }
+  },
+  "erc": {
+    "errors": 0,
+    "warnings": {
+      "lib_symbol_mismatch": 89,
+      "ground_pin_not_ground": 3
+    }
+  },
+  "circuit_tests": {
+    "thermal": 13,
+    "electrical_calculations": 31
+  },
+  "quiet_return": {
+    "all_previously_connected_reference_pads_preserved": true,
+    "raw_load_pads_excluded": true,
+    "kelvin_pickup_excluded": true,
+    "original_bridge_preserved": "74054819-13f2-42fa-b992-9b133e64df51"
+  },
+  "power_screen": {
+    "copper_um": 35,
+    "temperature_C": 85,
+    "current_A": 8,
+    "all_28_sheet_cases_connected": true,
+    "models": {
+      "RAW": [
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 10.420164
+        },
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 11.323952
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 10.283048
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 11.185489
+        }
+      ],
+      "SENSE": [
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 17.117998
+        },
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 19.474605
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 16.889375
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 19.324949
+        }
+      ],
+      "FG_RETURN": [
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 3.037226
+        },
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 3.25934
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 3.015318
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 3.250962
+        }
+      ],
+      "FET_COMMON": [
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 7.106301
+        },
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 7.422527
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 7.067399
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 7.387494
+        }
+      ],
+      "BMS_COMMON": [
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 5.749323
+        },
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 6.107409
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 5.686233
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 6.026111
+        }
+      ],
+      "VIN": [
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 4.621921
+        },
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 5.326547
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 4.591706
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 5.290647
+        }
+      ],
+      "POS_FUSED": [
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 10.360472
+        },
+        {
+          "grid_mm": 0.05,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 11.6487
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0,
+          "connected": true,
+          "resistance_milliohms": 10.301477
+        },
+        {
+          "grid_mm": 0.025,
+          "erosion_mm": 0.05,
+          "connected": true,
+          "resistance_milliohms": 11.533357
+        }
+      ]
+    },
+    "positive_path": {
+      "all_four_layers": true,
+      "thin_tracks_below_mm_excluded": 0.8,
+      "erosion_cases_mm": [
+        0,
+        0.05
+      ],
+      "both_connected": true
+    },
+    "limits": "Geometry and resistance screen. Not a thermal qualification or an 8 A operating rating."
+  },
+  "retained_endpoint_warnings": [
+    {
+      "description": "Track has unconnected end",
+      "items": [
+        {
+          "description": "Track [/BMS_VC1] on F.Cu, length 0.1598 mm",
+          "pos": {
+            "x": 129.128982,
+            "y": 83.638027
+          },
+          "uuid": "7e88bd5d-d94c-40b2-a383-948cd7ff7ad6"
+        }
+      ],
+      "severity": "warning",
+      "type": "track_dangling"
+    },
+    {
+      "description": "Track has unconnected end",
+      "items": [
+        {
+          "description": "Track [FG_VSS] on F.Cu, length 0.2198 mm",
+          "pos": {
+            "x": 162.1695,
+            "y": 71.550343
+          },
+          "uuid": "833f6401-9573-4d0f-9938-4a395684319f"
+        }
+      ],
+      "severity": "warning",
+      "type": "track_dangling"
+    },
+    {
+      "description": "Via is not connected or connected on only one layer",
+      "items": [
+        {
+          "description": "Via [FG_VSS] on F.Cu - B.Cu",
+          "pos": {
+            "x": 166.2,
+            "y": 69.8
+          },
+          "uuid": "d607fc2a-e652-45d0-812d-9c7076be8bb6"
+        }
+      ],
+      "severity": "warning",
+      "type": "via_dangling"
+    },
+    {
+      "description": "Via is not connected or connected on only one layer",
+      "items": [
+        {
+          "description": "Via [/BAT_PROT_GATE] on F.Cu - B.Cu",
+          "pos": {
+            "x": 129.35,
+            "y": 67.1
+          },
+          "uuid": "ec13fa99-8198-45f3-8ad6-edab257e0d82"
+        }
+      ],
+      "severity": "warning",
+      "type": "via_dangling"
+    },
+    {
+      "description": "Track has unconnected end",
+      "items": [
+        {
+          "description": "Track [/PROT_CTRL_3V3] on F.Cu, length 0.0699 mm",
+          "pos": {
+            "x": 156.15,
+            "y": 82.85
+          },
+          "uuid": "8f315bef-bf5a-4e83-a95f-04a3a3ab8033"
+        }
+      ],
+      "severity": "warning",
+      "type": "track_dangling"
+    },
+    {
+      "description": "Track has unconnected end",
+      "items": [
+        {
+          "description": "Track [/PACK_NEG_RAW] on F.Cu, length 0.0699 mm",
+          "pos": {
+            "x": 141.275549,
+            "y": 93.450549
+          },
+          "uuid": "fe8b58e1-db56-4645-aa2c-7ad449584c36"
+        }
+      ],
+      "severity": "warning",
+      "type": "track_dangling"
+    },
+    {
+      "description": "Track has unconnected end",
+      "items": [
+        {
+          "description": "Track [/PACK_NEG_RAW] on In1.Cu, length 0.1296 mm",
+          "pos": {
+            "x": 129.291667,
+            "y": 68.55
+          },
+          "uuid": "6ff3bf47-568f-4083-a362-3b7f7cad35ba"
+        }
+      ],
+      "severity": "warning",
+      "type": "track_dangling"
+    },
+    {
+      "description": "Track has unconnected end",
+      "items": [
+        {
+          "description": "Track [/PACK_NEG_RAW] on In2.Cu, length 0.0461 mm",
+          "pos": {
+            "x": 120.692426,
+            "y": 85.057574
+          },
+          "uuid": "3c406a60-5c1a-4a6e-b8f6-2ba13913c0b8"
+        }
+      ],
+      "severity": "warning",
+      "type": "track_dangling"
+    },
+    {
+      "description": "Track has unconnected end",
+      "items": [
+        {
+          "description": "Track [/PACK_NEG_RAW] on In2.Cu, length 0.3182 mm",
+          "pos": {
+            "x": 138.446214,
+            "y": 86.446215
+          },
+          "uuid": "67bf2316-0158-404a-a9ae-a9fc04802951"
+        }
+      ],
+      "severity": "warning",
+      "type": "track_dangling"
+    },
+    {
+      "description": "Track has unconnected end",
+      "items": [
+        {
+          "description": "Track [/THERM_PROBE_2_A] on B.Cu, length 0.0636 mm",
+          "pos": {
+            "x": 135.375,
+            "y": 68.325
+          },
+          "uuid": "570090ad-af17-406c-a2f5-446b6250e436"
+        }
+      ],
+      "severity": "warning",
+      "type": "track_dangling"
+    }
+  ],
+  "assembly": {
+    "front": "manufacturing/bms/front-assembly.svg",
+    "back": "manufacturing/bms/back-assembly.svg",
+    "test_points": "manufacturing/bms/test-points.csv",
+    "perimeter_supports": 4
+  },
+  "hardware_testing": "pending"
+}
