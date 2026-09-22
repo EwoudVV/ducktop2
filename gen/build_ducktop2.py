@@ -495,6 +495,7 @@ class Sheet:
         self.body.append(f'(text "{msg_escaped}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27))) (uuid {U()}))')
 
     def render(self, self_uuid, page_number, paper="A2"):
+        paper = getattr(self, "paper", paper)
         libsyms = "\n".join(self.lib_symbols[k] for k in sorted(self.lib_symbols))
         body = "\n".join(self.body)
         sheet_instances = (

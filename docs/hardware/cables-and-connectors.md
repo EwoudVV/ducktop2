@@ -122,21 +122,29 @@ Type-A cable. verify all 30 conductors in the installed assembly.
 | J310 | J320 | Function |
 | ---: | ---: | --- |
 | 1 | 30 | GND |
-| 2 | 29 | Protected keyboard 5 V option |
+| 2 | 29 | Switched, current-limited RGB 5 V |
 | 27 | 4 | I2C SDA |
 | 28 | 3 | I2C SCL |
-| 29 | 2 | Keyboard 3.3 V option |
+| 29 | 2 | 3.3 V through fitted R387, for the RGB I2C buffer |
 | 30 | 1 | GND |
 
 the matrix contacts follow the same reversal. the sources are
 `gen/generate_keyboard_interface_sheet.py` and
 `gen/generate_keyboard_daughterboard_sheet.py`.
 
-for rev A, the 3.3 V option through DNP R387 stays unpopulated, and U310's
-5 V option stays off until the EC asserts `KB_RGB_PWR_EN`. this is not a
-released RGB assembly. verify no unintended power reaches those contacts
-before testing the passive matrix. a different cable/orientation or powered
-keyboard variant needs its own mapping and current-budget review.
+the RGB revision uses both supply contacts. fit R387, a 0 ohm 0603 resistor,
+and leave the R386 bypass unpopulated. U310 keeps 5 V off until the EC
+asserts `KB_RGB_PWR_EN`; its nominal current limit is about 0.4 A. the
+keyboard's IS31FL3743A uses a 33.2k current-setting resistor, with about
+0.20 A of peak LED sink current at the published datasheet corner. budget
+0.25 A for the RGB 5 V feed, including logic and margin, and verify it on
+the first board. the contact is rated 0.5 A with the specified connector.
+
+J320 pins 10, 11, 12, 27 and 28 are unused. pin 28's old one-wire RGB
+option is not used by this I2C design. U321 isolates the switched-off LED
+driver from the live EC bus. [keyboard notes](../../keyboard/README.md) have
+the driver mapping and routing order. verify the installed cable's
+continuity before power; this revision still needs routing and fabrication checks.
 
 ## before a cable is released
 

@@ -10,7 +10,7 @@ main-board coordinates below were checked on 10 september 2026.
 | --- | --- | --- |
 | AUO B160QAN03.K panel | 352 x 227 mm | Thickness, protrusions, bezel offsets, mounting, connector datum |
 | Three cells | 100 x 60 mm each | Exact identity, thickness, tabs, wiring, cutoff boards, clearance allowance |
-| Keyboard rev A | 273.5 x 80.0 x 0.8 mm PCB | Switch/keycap/plate stack, fastening, stiffness |
+| RGB keyboard | 273.5 x 80.0 x 0.8 mm PCB, original key positions retained | First-article LED/switch fit, keycaps/plate, fastening, stiffness |
 | JOMAA trackpad | 140 x 105 mm | Height, travel, mounting, plug and bend clearance |
 | Speakers | 38 x 18 mm each in plan view | Depth, fastening, acoustic volume and openings |
 

@@ -26,7 +26,7 @@ assembly, the compute module, cooling, cables, and the enclosure. the split
 also needs proper connectors and cables between the boards.
 
 i already have work and parts from ducktop1 and the earlier prototype stages.
-the keyboard has a rev A production package, and the replacement panel has
+the keyboard is being revised for per-key RGB, and the replacement panel has
 been tested at full resolution and refresh rate on the Intehill controller.
 the final Mu display harness and full laptop assembly still need testing.
 

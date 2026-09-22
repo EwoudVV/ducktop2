@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate an unreleased keyboard-layout candidate without touching Rev A."""
+"""Legacy passive-keyboard generator. The RGB board uses the saved layout."""
 
 import argparse
 import re
@@ -339,6 +339,9 @@ def main(argv=None):
         help="allow replacing an existing non-release candidate only",
     )
     args = parser.parse_args(argv)
+    current_schematic = PROJDIR / 'keyboard/12_keyboard_daughterboard.kicad_sch'
+    if 'Keyboard_RGB:IS31FL3743A' in current_schematic.read_text():
+        parser.error('the current keyboard has RGB; use the saved PCB. For an intentional placement reset, use gen/prepare_keyboard_rgb_board.py with a separate output')
     output = safe_output_path(args.output, args.overwrite_candidate)
 
     reset_uuid_sequence("12_keyboard_daughterboard_pcb")

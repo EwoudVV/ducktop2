@@ -11,7 +11,7 @@ there is no reconciled current total yet.
 | BMS PCB | Four layers, 35 um copper, 1.6 mm board; confirm 20 um hole plating in the quote |
 | PCBA and component sourcing | Separate BOM/CPL for each board, DNPs, hand assembly, fixtures, setup charges, and spares |
 | Radio board | Separate four-layer board and its assembly/components |
-| Keyboard | Existing rev A package; check what has already been ordered/received |
+| Keyboard | New two-layer RGB revision; 65 LEDs, driver and support parts. Original boards have diodes fitted and no switches fitted |
 | Mu | Exact N305 module/RAM variant and cooling/retention hardware |
 | NVMe and Wi-Fi/Bluetooth | Final module identities and capacities |
 | Display | Current AUO panel, final compatible eDP harness, mounting and hinge hardware |

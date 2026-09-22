@@ -29,6 +29,7 @@ void gpio_set_mu_rstbtn_n(bool active);
 
 void gpio_set_service_mux_reset(bool released);
 void gpio_set_keyboard_rgb_enable(bool enable);
+bool gpio_get_keyboard_rgb_fault_n(void);
 bool gpio_get_trackpad_fault_n(void);
 
 void gpio_set_gnss_reset_n(bool active);

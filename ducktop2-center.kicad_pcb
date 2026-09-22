@@ -30595,7 +30595,7 @@
 				)
 			)
 		)
-		(property "Value" "0R DNP keyboard 3V3 option"
+		(property "Value" "0R keyboard RGB bus-buffer supply"
 			(at 0 1.43 0)
 			(layer "F.Fab")
 			(uuid "860640fd-1117-5f41-b217-19700d827a42")
@@ -30650,7 +30650,7 @@
 				(pins "1" "2")
 			)
 		)
-		(attr smd exclude_from_bom dnp)
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -0.237258 0.5225)
@@ -30733,6 +30733,28 @@
 			)
 			(rotate
 				(xyz 0 0 0)
+			)
+		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "1328281b-a7cc-457a-b3fa-11419c3862a4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603JR-070RL"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "fa8afab6-205b-44da-ae94-e4ac0c0b049f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 	)

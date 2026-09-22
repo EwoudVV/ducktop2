@@ -14,6 +14,7 @@ from apply_bom_catalog import (
     ROOT, PatchResult, find_component_block, has_manufacturer_mpn,
     patch_component_block, patch_schematic_file,
 )
+from keyboard_rgb_contract import LED_MPN, DRIVER_MPN, BUFFER_MPN
 
 # =============================================================================
 # DIODE CATALOG
@@ -37,10 +38,24 @@ SWITCH_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
 # CAPACITOR CATALOG
 # =============================================================================
 CAPACITOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
-    "C320": ("Murata", "GRM188R71H104KA93D",
-             "100n 50V X7R 0603 (DNP reserve)"),
-    "C321": ("Murata", "GRM31CR71E106KA12L",
-             "10u 25V X7R 1206 (DNP backlight)"),
+    "C320": ("Samsung Electro-Mechanics", "CL10B104KB8NNNC", "100n 50V buffer 3V3"),
+    "C321": ("Samsung Electro-Mechanics", "CL21A106KAYNNNE", "10u 25V RGB input bulk"),
+    "C322": ("Samsung Electro-Mechanics", "CL10B105KA8NNNC", "1u 25V RGB VCC"),
+    "C323": ("Samsung Electro-Mechanics", "CL10B104KB8NNNC", "100n 50V RGB VCC"),
+    "C324": ("Samsung Electro-Mechanics", "CL10B105KA8NNNC", "1u 25V RGB PVCC"),
+    "C325": ("Samsung Electro-Mechanics", "CL10B104KB8NNNC", "100n 50V RGB PVCC / buffer A"),
+    "C326": ("Samsung Electro-Mechanics", "CL10B104KB8NNNC", "100n 50V RGB startup delay"),
+}
+
+RGB_ASSIGNMENTS = {
+    **{f'LED{ref}': ('Everlight', LED_MPN, 'per-key RGB') for ref in range(320,385)},
+    'U320': ('Lumissil', DRIVER_MPN, '18 x 11 matrix driver'),
+    'U321': ('Texas Instruments', BUFFER_MPN, 'I2C buffer with power-off isolation'),
+    'R320': ('Yageo', 'RC0603FR-0733K2L', '33.2k 1% RGB current limit'),
+    'R321': ('Yageo', 'RC0603FR-072K2L', '2.2k RGB SCL pull-up'),
+    'R322': ('Yageo', 'RC0603FR-072K2L', '2.2k RGB SDA pull-up'),
+    'R323': ('Yageo', 'RC0603FR-07100KL', '100k RGB startup pull-up'),
+    **{f'R{ref}': ('Yageo', 'RC0603FR-07100RL', '100R red-channel heat sharing') for ref in range(330,336)},
 }
 
 # =============================================================================
@@ -49,8 +64,6 @@ CAPACITOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
 CONNECTOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
     "J320": ("Hirose", "FH12-30S-0.5SH(55)",
              "30-pin 0.5mm pitch FFC connector for keyboard matrix"),
-    "J321": ("Samtec", "TSW-104-07-G-S",
-             "1x04 2.54mm pin header (DNP debug)"),
 }
 
 # Merge all assignments
@@ -59,6 +72,7 @@ ALL_ASSIGNMENTS.update(DIODE_ASSIGNMENTS)
 ALL_ASSIGNMENTS.update(SWITCH_ASSIGNMENTS)
 ALL_ASSIGNMENTS.update(CAPACITOR_ASSIGNMENTS)
 ALL_ASSIGNMENTS.update(CONNECTOR_ASSIGNMENTS)
+ALL_ASSIGNMENTS.update(RGB_ASSIGNMENTS)
 
 HOLDS: set[str] = set()
 

@@ -63,6 +63,7 @@ set(TARGET_SOURCES
     fan_math.c
     matrix_scan.c
     matrix_debounce.c
+    keyboard_rgb.c
     usb_hid.c
     usb_hid_desc.c
     libc_stubs.c

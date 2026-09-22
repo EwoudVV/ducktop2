@@ -15,6 +15,7 @@ profile keeps unqualified pack use, charging and laptop boot disabled.
 | power sources | TPS25751 framed reads, two coherent contract snapshots, live expander state checks, cold charger retry, ordinary removal/reselection |
 | thermal | ADC conversion, 25 kHz PWM, tach freshness, spin-up grace and a latched stall response |
 | laptop controls | keyboard/consumer HID, vendor status/control HID, lid debounce, battery validity, two OLED page writers, headphone mute/enable/readback |
+| keyboard RGB | IS31FL3743A at 0x2f, 65-key colour map, staged startup, brightness control and RGB power cut on bus or load-switch faults; host command currently provides enable/disable |
 | maker RP2350 | pinned Pico SDK target, USB HID GPIO/ADC control, user-rail gate, expiring authorization and a watchdog |
 
 `ec_target/main.c` binds the target functions to the portable policy and

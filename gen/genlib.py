@@ -14,6 +14,7 @@ STOCK_SYMBOL_DIRS = [
 ]
 
 LIBMAP = {
+    "LED_19_337_C02": "Keyboard_RGB", "IS31FL3743A": "Keyboard_RGB", "TCA9517A": "Keyboard_RGB",
     "R": "Device", "C": "Device", "C_Polarized": "Device", "D": "Device", "D_Schottky": "Device",
     "D_Zener": "Device", "D_TVS": "Device", "Fuse": "Device", "Thermistor_NTC": "Device", "Q_NMOS": "Device",
     "Q_NMOS_SOT23_GSD": "Q_NMOS_SOT23_GSD", "Q_NMOS_TO252_GDS": "Q_NMOS_TO252_GDS",
@@ -189,8 +190,8 @@ def flatten_extends_symbol(lib_path, base_name, new_name, overrides, out_path):
     return out_path
 
 def symbol_file_for(lib, name):
-    if lib == "BMS_Thermal":
-        return os.path.join(SYMDIR, "BMS_Thermal.kicad_sym")
+    if lib in ("BMS_Thermal", "Keyboard_RGB"):
+        return os.path.join(SYMDIR, lib + ".kicad_sym")
     local_path = os.path.join(SYMDIR, f"{name}.kicad_sym")
     if os.path.exists(local_path):
         return local_path

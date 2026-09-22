@@ -524,7 +524,11 @@ def main(argv=None):
     try:
         if args.verify_package:
             verify_package(args.verify_package.resolve());print('keyboard package matches current sources and all bound artifacts')
-        else:build_package(args.output,args.replace,args.kicad_python,args.kicad_cli)
+        else:
+            schematic = PROJECT_DIR/'keyboard/12_keyboard_daughterboard.kicad_sch'
+            require('Keyboard_RGB:IS31FL3743A' not in schematic.read_text(),
+                    'the RGB keyboard needs routing and a new assembly contract; this exporter only covers the old passive keyboard')
+            build_package(args.output,args.replace,args.kicad_python,args.kicad_cli)
     except (RuntimeError,OSError,ImportError,subprocess.SubprocessError,ValueError,KeyError) as exc:
         print(f'keyboard package: FAIL: {exc}',file=sys.stderr);return 1
     return 0

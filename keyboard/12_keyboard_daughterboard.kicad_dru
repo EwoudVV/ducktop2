@@ -1,0 +1,198 @@
+(version 1)
+# Each LED fits inside its matching CHERRY auxiliary component area.
+# The separate placement check verifies its offset, pad envelope and height.
+(rule "LED320 inside SW320 light cavity"
+  (condition "(A.Reference == 'LED320' && B.Reference == 'SW320') || (A.Reference == 'SW320' && B.Reference == 'LED320')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED321 inside SW321 light cavity"
+  (condition "(A.Reference == 'LED321' && B.Reference == 'SW321') || (A.Reference == 'SW321' && B.Reference == 'LED321')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED322 inside SW322 light cavity"
+  (condition "(A.Reference == 'LED322' && B.Reference == 'SW322') || (A.Reference == 'SW322' && B.Reference == 'LED322')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED323 inside SW323 light cavity"
+  (condition "(A.Reference == 'LED323' && B.Reference == 'SW323') || (A.Reference == 'SW323' && B.Reference == 'LED323')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED324 inside SW324 light cavity"
+  (condition "(A.Reference == 'LED324' && B.Reference == 'SW324') || (A.Reference == 'SW324' && B.Reference == 'LED324')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED325 inside SW325 light cavity"
+  (condition "(A.Reference == 'LED325' && B.Reference == 'SW325') || (A.Reference == 'SW325' && B.Reference == 'LED325')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED326 inside SW326 light cavity"
+  (condition "(A.Reference == 'LED326' && B.Reference == 'SW326') || (A.Reference == 'SW326' && B.Reference == 'LED326')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED327 inside SW327 light cavity"
+  (condition "(A.Reference == 'LED327' && B.Reference == 'SW327') || (A.Reference == 'SW327' && B.Reference == 'LED327')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED328 inside SW328 light cavity"
+  (condition "(A.Reference == 'LED328' && B.Reference == 'SW328') || (A.Reference == 'SW328' && B.Reference == 'LED328')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED329 inside SW329 light cavity"
+  (condition "(A.Reference == 'LED329' && B.Reference == 'SW329') || (A.Reference == 'SW329' && B.Reference == 'LED329')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED330 inside SW330 light cavity"
+  (condition "(A.Reference == 'LED330' && B.Reference == 'SW330') || (A.Reference == 'SW330' && B.Reference == 'LED330')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED331 inside SW331 light cavity"
+  (condition "(A.Reference == 'LED331' && B.Reference == 'SW331') || (A.Reference == 'SW331' && B.Reference == 'LED331')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED332 inside SW332 light cavity"
+  (condition "(A.Reference == 'LED332' && B.Reference == 'SW332') || (A.Reference == 'SW332' && B.Reference == 'LED332')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED333 inside SW333 light cavity"
+  (condition "(A.Reference == 'LED333' && B.Reference == 'SW333') || (A.Reference == 'SW333' && B.Reference == 'LED333')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED334 inside SW334 light cavity"
+  (condition "(A.Reference == 'LED334' && B.Reference == 'SW334') || (A.Reference == 'SW334' && B.Reference == 'LED334')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED335 inside SW335 light cavity"
+  (condition "(A.Reference == 'LED335' && B.Reference == 'SW335') || (A.Reference == 'SW335' && B.Reference == 'LED335')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED336 inside SW336 light cavity"
+  (condition "(A.Reference == 'LED336' && B.Reference == 'SW336') || (A.Reference == 'SW336' && B.Reference == 'LED336')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED337 inside SW337 light cavity"
+  (condition "(A.Reference == 'LED337' && B.Reference == 'SW337') || (A.Reference == 'SW337' && B.Reference == 'LED337')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED338 inside SW338 light cavity"
+  (condition "(A.Reference == 'LED338' && B.Reference == 'SW338') || (A.Reference == 'SW338' && B.Reference == 'LED338')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED339 inside SW339 light cavity"
+  (condition "(A.Reference == 'LED339' && B.Reference == 'SW339') || (A.Reference == 'SW339' && B.Reference == 'LED339')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED340 inside SW340 light cavity"
+  (condition "(A.Reference == 'LED340' && B.Reference == 'SW340') || (A.Reference == 'SW340' && B.Reference == 'LED340')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED341 inside SW341 light cavity"
+  (condition "(A.Reference == 'LED341' && B.Reference == 'SW341') || (A.Reference == 'SW341' && B.Reference == 'LED341')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED342 inside SW342 light cavity"
+  (condition "(A.Reference == 'LED342' && B.Reference == 'SW342') || (A.Reference == 'SW342' && B.Reference == 'LED342')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED343 inside SW343 light cavity"
+  (condition "(A.Reference == 'LED343' && B.Reference == 'SW343') || (A.Reference == 'SW343' && B.Reference == 'LED343')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED344 inside SW344 light cavity"
+  (condition "(A.Reference == 'LED344' && B.Reference == 'SW344') || (A.Reference == 'SW344' && B.Reference == 'LED344')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED345 inside SW345 light cavity"
+  (condition "(A.Reference == 'LED345' && B.Reference == 'SW345') || (A.Reference == 'SW345' && B.Reference == 'LED345')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED346 inside SW346 light cavity"
+  (condition "(A.Reference == 'LED346' && B.Reference == 'SW346') || (A.Reference == 'SW346' && B.Reference == 'LED346')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED347 inside SW347 light cavity"
+  (condition "(A.Reference == 'LED347' && B.Reference == 'SW347') || (A.Reference == 'SW347' && B.Reference == 'LED347')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED348 inside SW348 light cavity"
+  (condition "(A.Reference == 'LED348' && B.Reference == 'SW348') || (A.Reference == 'SW348' && B.Reference == 'LED348')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED349 inside SW349 light cavity"
+  (condition "(A.Reference == 'LED349' && B.Reference == 'SW349') || (A.Reference == 'SW349' && B.Reference == 'LED349')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED350 inside SW350 light cavity"
+  (condition "(A.Reference == 'LED350' && B.Reference == 'SW350') || (A.Reference == 'SW350' && B.Reference == 'LED350')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED351 inside SW351 light cavity"
+  (condition "(A.Reference == 'LED351' && B.Reference == 'SW351') || (A.Reference == 'SW351' && B.Reference == 'LED351')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED352 inside SW352 light cavity"
+  (condition "(A.Reference == 'LED352' && B.Reference == 'SW352') || (A.Reference == 'SW352' && B.Reference == 'LED352')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED353 inside SW353 light cavity"
+  (condition "(A.Reference == 'LED353' && B.Reference == 'SW353') || (A.Reference == 'SW353' && B.Reference == 'LED353')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED354 inside SW354 light cavity"
+  (condition "(A.Reference == 'LED354' && B.Reference == 'SW354') || (A.Reference == 'SW354' && B.Reference == 'LED354')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED355 inside SW355 light cavity"
+  (condition "(A.Reference == 'LED355' && B.Reference == 'SW355') || (A.Reference == 'SW355' && B.Reference == 'LED355')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED356 inside SW356 light cavity"
+  (condition "(A.Reference == 'LED356' && B.Reference == 'SW356') || (A.Reference == 'SW356' && B.Reference == 'LED356')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED357 inside SW357 light cavity"
+  (condition "(A.Reference == 'LED357' && B.Reference == 'SW357') || (A.Reference == 'SW357' && B.Reference == 'LED357')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED358 inside SW358 light cavity"
+  (condition "(A.Reference == 'LED358' && B.Reference == 'SW358') || (A.Reference == 'SW358' && B.Reference == 'LED358')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED359 inside SW359 light cavity"
+  (condition "(A.Reference == 'LED359' && B.Reference == 'SW359') || (A.Reference == 'SW359' && B.Reference == 'LED359')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED360 inside SW360 light cavity"
+  (condition "(A.Reference == 'LED360' && B.Reference == 'SW360') || (A.Reference == 'SW360' && B.Reference == 'LED360')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED361 inside SW361 light cavity"
+  (condition "(A.Reference == 'LED361' && B.Reference == 'SW361') || (A.Reference == 'SW361' && B.Reference == 'LED361')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED362 inside SW362 light cavity"
+  (condition "(A.Reference == 'LED362' && B.Reference == 'SW362') || (A.Reference == 'SW362' && B.Reference == 'LED362')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED363 inside SW363 light cavity"
+  (condition "(A.Reference == 'LED363' && B.Reference == 'SW363') || (A.Reference == 'SW363' && B.Reference == 'LED363')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED364 inside SW364 light cavity"
+  (condition "(A.Reference == 'LED364' && B.Reference == 'SW364') || (A.Reference == 'SW364' && B.Reference == 'LED364')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED365 inside SW365 light cavity"
+  (condition "(A.Reference == 'LED365' && B.Reference == 'SW365') || (A.Reference == 'SW365' && B.Reference == 'LED365')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED366 inside SW366 light cavity"
+  (condition "(A.Reference == 'LED366' && B.Reference == 'SW366') || (A.Reference == 'SW366' && B.Reference == 'LED366')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED367 inside SW367 light cavity"
+  (condition "(A.Reference == 'LED367' && B.Reference == 'SW367') || (A.Reference == 'SW367' && B.Reference == 'LED367')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED368 inside SW368 light cavity"
+  (condition "(A.Reference == 'LED368' && B.Reference == 'SW368') || (A.Reference == 'SW368' && B.Reference == 'LED368')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED369 inside SW369 light cavity"
+  (condition "(A.Reference == 'LED369' && B.Reference == 'SW369') || (A.Reference == 'SW369' && B.Reference == 'LED369')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED370 inside SW370 light cavity"
+  (condition "(A.Reference == 'LED370' && B.Reference == 'SW370') || (A.Reference == 'SW370' && B.Reference == 'LED370')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED371 inside SW371 light cavity"
+  (condition "(A.Reference == 'LED371' && B.Reference == 'SW371') || (A.Reference == 'SW371' && B.Reference == 'LED371')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED372 inside SW372 light cavity"
+  (condition "(A.Reference == 'LED372' && B.Reference == 'SW372') || (A.Reference == 'SW372' && B.Reference == 'LED372')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED373 inside SW373 light cavity"
+  (condition "(A.Reference == 'LED373' && B.Reference == 'SW373') || (A.Reference == 'SW373' && B.Reference == 'LED373')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED374 inside SW374 light cavity"
+  (condition "(A.Reference == 'LED374' && B.Reference == 'SW374') || (A.Reference == 'SW374' && B.Reference == 'LED374')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED375 inside SW375 light cavity"
+  (condition "(A.Reference == 'LED375' && B.Reference == 'SW375') || (A.Reference == 'SW375' && B.Reference == 'LED375')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED376 inside SW376 light cavity"
+  (condition "(A.Reference == 'LED376' && B.Reference == 'SW376') || (A.Reference == 'SW376' && B.Reference == 'LED376')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED377 inside SW377 light cavity"
+  (condition "(A.Reference == 'LED377' && B.Reference == 'SW377') || (A.Reference == 'SW377' && B.Reference == 'LED377')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED378 inside SW378 light cavity"
+  (condition "(A.Reference == 'LED378' && B.Reference == 'SW378') || (A.Reference == 'SW378' && B.Reference == 'LED378')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED379 inside SW379 light cavity"
+  (condition "(A.Reference == 'LED379' && B.Reference == 'SW379') || (A.Reference == 'SW379' && B.Reference == 'LED379')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED380 inside SW380 light cavity"
+  (condition "(A.Reference == 'LED380' && B.Reference == 'SW380') || (A.Reference == 'SW380' && B.Reference == 'LED380')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED381 inside SW381 light cavity"
+  (condition "(A.Reference == 'LED381' && B.Reference == 'SW381') || (A.Reference == 'SW381' && B.Reference == 'LED381')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED382 inside SW382 light cavity"
+  (condition "(A.Reference == 'LED382' && B.Reference == 'SW382') || (A.Reference == 'SW382' && B.Reference == 'LED382')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED383 inside SW383 light cavity"
+  (condition "(A.Reference == 'LED383' && B.Reference == 'SW383') || (A.Reference == 'SW383' && B.Reference == 'LED383')")
+  (constraint courtyard_clearance (min -0.01mm)))
+(rule "LED384 inside SW384 light cavity"
+  (condition "(A.Reference == 'LED384' && B.Reference == 'SW384') || (A.Reference == 'SW384' && B.Reference == 'LED384')")
+  (constraint courtyard_clearance (min -0.01mm)))

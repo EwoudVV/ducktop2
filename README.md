@@ -31,9 +31,11 @@ revision is also integrated, with its power-support placement corrected and
 its edges moved inward for board gaps. the main-board routing and final
 project checks still need work.
 
-the keyboard repairs and its [manufacturing package](manufacturing/keyboard/)
-are finished, with zero DRC errors and zero unconnected items in the checked
-board. the radio antenna connectors now match the board edge and their
+the keyboard now has per-key RGB, with its schematic and placement ready
+for routing. the previous tracks and pours are cleared. the key positions,
+outline and cable connector are unchanged. [keyboard routing notes](keyboard/README.md)
+cover the LEDs, current limit and switch keepouts. the old non-RGB order
+files have been retired. the radio antenna connectors now match the board edge and their
 mechanical drawing. the radio still needs routing.
 
 the four-layer BMS is now routed, including the separate power and control

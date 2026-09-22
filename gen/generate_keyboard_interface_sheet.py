@@ -119,8 +119,9 @@ def build(sheet_symbol_uuid):
     s.place("R386", "R", "0R DNP DO-NOT-FIT keyboard 5V protection bypass", 450, 90,
             footprint=FOOTPRINTS["R"], dnp=True,
             pin_nets={"1": ("SYS_5V", "hier"), "2": ("KB_FFC_5V", "local")})
-    s.place("R387", "R", "0R DNP keyboard 3V3 option", 450, 105,
-            footprint=FOOTPRINTS["R"], dnp=True,
+    s.place("R387", "R", "0R keyboard RGB bus-buffer supply", 450, 105,
+            footprint=FOOTPRINTS["R"],
+            extra_props={"Manufacturer":"Yageo", "MPN":"RC0603JR-070RL"},
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("KB_FFC_3V3", "local")})
 
     s.place("C318", "C", "100n DNP keyboard 3V3 reserve", 450, 120,
@@ -137,8 +138,8 @@ def build(sheet_symbol_uuid):
     s.text(20, 230, "NOTES:")
     s.text(20, 237.62, "J310 is deliberately pin-reversed relative to J320 for two top-side FH12 bottom-contact connectors and a Type-A same-side FFC.")
     s.text(20, 245.24, "Specified cable: Molex 0150200315, 30 circuits, 0.5 mm pitch, 30 mm, Type A / same-side contacts.")
-    s.text(20, 252.86, "R386/R387 stay DNP. U310 limits the future RGB rail below 0.5A/contact and defaults off; rev A has no RGB load.")
-    s.text(20, 260.48, "J310 pin 3 / rev-A J320 pin 28 repurposes unused COL15 for RGB data. Rows 5..7 and COL14 remain spare.")
-    s.text(20, 268.1, "Rev B must add local LED bulk capacitance and firmware must enforce a 325mA LED budget; unrestricted full-white is unsupported.")
+    s.text(20, 252.86, "R386 stays DNP. Fit R387 for the RGB keyboard bus buffer. U310 limits the switched 5 V rail and defaults off.")
+    s.text(20, 260.48, "J310 pin 3 / J320 pin 28 is an unused one-wire data option. The RGB keyboard uses I2C on J320 pins 3/4.")
+    s.text(20, 268.1, "RGB keyboard U320 uses a 33.2k current-setting resistor. Budget 0.25A on the switched 5V feed and verify full-white current on hardware.")
 
     return s

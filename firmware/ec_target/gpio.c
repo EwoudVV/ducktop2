@@ -359,6 +359,11 @@ void gpio_set_keyboard_rgb_enable(bool enable)
     }
 }
 
+bool gpio_get_keyboard_rgb_fault_n(void)
+{
+    return (GPIOC->IDR & (1u << 1)) != 0u;
+}
+
 bool gpio_get_trackpad_fault_n(void)
 {
     return (GPIOB->IDR & (1u << 1)) ? true : false;

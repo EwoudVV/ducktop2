@@ -6,6 +6,7 @@
 #include "gpio.h"
 #include "i2c.h"
 #include "matrix_scan.h"
+#include "keyboard_rgb.h"
 #include "stm32f4xx.h"
 #include "usb_hid.h"
 #include "watchdog.h"
@@ -83,7 +84,7 @@ static bool commit_write(void *context, ec_commit_command_t command, uint32_t va
     case EC_COMMIT_MU_EDP_BUDGET_MW: return ec_host_request_budget(value);
     case EC_COMMIT_CHARGER_ENABLE: return ec_app_set_charging(value != 0);
     case EC_COMMIT_MU_12V_ENABLE: gpio_set_mu_12v_enable(value != 0); return true;
-    case EC_COMMIT_KEYBOARD_RGB_ENABLE: gpio_set_keyboard_rgb_enable(value != 0); return true;
+    case EC_COMMIT_KEYBOARD_RGB_ENABLE: return keyboard_rgb_request(value != 0,GetTick());
     case EC_COMMIT_RADIO_DB_ENABLE: gpio_set_radio_db_power_enable(value != 0); return true;
     case EC_COMMIT_AUDIO_AMP_ENABLE: gpio_set_audio_amp_enable(value != 0); return true;
     case EC_COMMIT_AUDIO_MIC_ENABLE: gpio_set_audio_mic_enable(value != 0); return true;
@@ -218,7 +219,7 @@ static void refresh_transfer_interlocks(ec_inputs_t *in,uint32_t sampled_at,uint
 
 int main(void)
 {
-    gpio_init_all(); matrix_scan_init(); i2c1_init(); ec_app_init(); ec_host_init();
+    gpio_init_all(); matrix_scan_init(); i2c1_init(); ec_app_init(); ec_host_init(); keyboard_rgb_init();
     usb_hid_init();
     if (!tca9539_init_safe()) NVIC_SystemReset();
     ec_policy_config_t config=ec_policy_default_config();
@@ -330,6 +331,7 @@ int main(void)
         ssd1306_status_step(&snapshot,flags,(uint16_t)controller.fault,rpm,duty,
             ec_app_ntc_counts_to_temp_dc(gpio_read_adc_thermal_skin()),
             ec_app_ntc_counts_to_temp_dc(gpio_read_adc_thermal_mu()),now);
+        keyboard_rgb_service(GetTick());
         usb_hid_poll(); ec_watchdog_pet(); DelayMs(20);
     }
 }
