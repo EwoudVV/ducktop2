@@ -1,0 +1,1418 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-22T07:25:53",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.4",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/7e289a08-afcd-5577-84ea-625bf60cf20d",
+            "violations": [
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R840 [R]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 0.3556
+                            },
+                            "uuid": "2e46afe2-5d05-5a32-86a2-19485246bf5f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R841 [R]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 0.6477
+                            },
+                            "uuid": "da16f315-6172-53cd-bb37-8be78a95bf94"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R842 [R]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 0.7493
+                            },
+                            "uuid": "8008c98b-ae47-527c-8007-d5d77e46154f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R843 [R]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 0.8509
+                            },
+                            "uuid": "f645a241-61db-5040-b30e-be28fbe20874"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R844 [R]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 0.9525
+                            },
+                            "uuid": "8c7e9ca5-1c9a-5c92-9546-e3500f1ca08c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol RS11 [R]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 1.4986
+                            },
+                            "uuid": "a9b28dc0-f2b9-5a62-ae1d-b1b08b974964"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R845 [R]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 1.6002
+                            },
+                            "uuid": "1a100f93-1eca-5a65-9c0d-0beef28c100f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R846 [R]",
+                            "pos": {
+                                "x": 0.2032,
+                                "y": 1.7018
+                            },
+                            "uuid": "0512cadb-1776-5f98-816e-19466bbd72c7"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R847 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 1.8034
+                            },
+                            "uuid": "e28ae2cb-0dfd-5444-94c7-1c97b4bffc83"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R849 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 1.905
+                            },
+                            "uuid": "211a6908-8f1b-5681-b9b3-2f9859c30eec"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R851 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 1.9939
+                            },
+                            "uuid": "1eda9b19-50e4-5f47-b07a-ec29417c6578"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R853 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 2.0955
+                            },
+                            "uuid": "bcbc9269-973d-5f82-b405-5e3613e7bca8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2200 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 3.2004
+                            },
+                            "uuid": "817eb548-b504-57d1-8fb5-33c28146be34"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2201 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 3.6449
+                            },
+                            "uuid": "47b31fbc-9486-5113-b1b8-5b73f23a4662"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2230 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 4.0005
+                            },
+                            "uuid": "fd4cd867-a752-5b95-a521-8068351fcfa2"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2231 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 4.1529
+                            },
+                            "uuid": "88290695-a0c8-57f4-92e8-feb1faf8bb39"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2232 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 4.8514
+                            },
+                            "uuid": "41edee8f-54e4-5995-b2c8-bbcac90d45aa"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2233 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 5.0038
+                            },
+                            "uuid": "a551955d-bde5-53b6-b466-19135b676ce6"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2252 [R]",
+                            "pos": {
+                                "x": 0.8001,
+                                "y": 6.096
+                            },
+                            "uuid": "5869a05a-bd9c-576f-884c-d6b15623d309"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R848 [R]",
+                            "pos": {
+                                "x": 1.2446,
+                                "y": 1.8034
+                            },
+                            "uuid": "1583b91c-e1f5-58de-9687-658d48397c36"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R850 [R]",
+                            "pos": {
+                                "x": 1.2446,
+                                "y": 1.905
+                            },
+                            "uuid": "4a9dd79e-2158-53e2-987f-4e5df743fac2"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R852 [R]",
+                            "pos": {
+                                "x": 1.2446,
+                                "y": 1.9939
+                            },
+                            "uuid": "a177fb87-8b81-5d6a-b901-2157bade54eb"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R854 [R]",
+                            "pos": {
+                                "x": 1.2446,
+                                "y": 2.0955
+                            },
+                            "uuid": "6c307d4f-0a2e-5749-a3b2-cc6c64480276"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2240 [R]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 4.5974
+                            },
+                            "uuid": "b478d735-f6f0-5b85-8e0b-258bda394e43"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2241 [R]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 4.7498
+                            },
+                            "uuid": "777fe403-09a4-5fbf-9bd7-39ff97d8d0af"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2234 [R]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 5.1943
+                            },
+                            "uuid": "56d7053c-287b-54ce-9a75-4bc527f8e0b2"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2235 [R]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 5.3467
+                            },
+                            "uuid": "1f46a5f2-d205-5a47-a90b-a32dec7737a5"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2236 [R]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 5.4991
+                            },
+                            "uuid": "44170fd4-05da-5acc-ab4e-9eb2bbb0ef25"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2210 [R]",
+                            "pos": {
+                                "x": 2.1971,
+                                "y": 3.0988
+                            },
+                            "uuid": "552c857d-0f00-5569-ab20-a27eafc94874"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2211 [R]",
+                            "pos": {
+                                "x": 2.1971,
+                                "y": 3.2512
+                            },
+                            "uuid": "e471694d-8c2c-50a1-93d9-74aaeab4063d"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2212 [R]",
+                            "pos": {
+                                "x": 2.1971,
+                                "y": 3.4036
+                            },
+                            "uuid": "dbb9f62c-7f00-53d8-a3fd-dd6aadabe03f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2242 [R]",
+                            "pos": {
+                                "x": 2.794,
+                                "y": 4.5974
+                            },
+                            "uuid": "93d6e65b-6819-52eb-9c18-d0ed119f30d1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2243 [R]",
+                            "pos": {
+                                "x": 2.794,
+                                "y": 4.7498
+                            },
+                            "uuid": "fc7d97a4-3cc0-5e8a-a5e5-7c53252a51ca"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2253 [R]",
+                            "pos": {
+                                "x": 2.9972,
+                                "y": 6.096
+                            },
+                            "uuid": "1ec9e8ec-7c91-5b93-958b-75b616e718b9"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2237 [R]",
+                            "pos": {
+                                "x": 3.0988,
+                                "y": 5.1943
+                            },
+                            "uuid": "1e3d9e66-db03-51c2-a9b9-59c3ea59b1d5"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2238 [R]",
+                            "pos": {
+                                "x": 3.0988,
+                                "y": 5.3467
+                            },
+                            "uuid": "3696569a-9dc3-51f8-8317-7e16c65e1c1c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2239 [R]",
+                            "pos": {
+                                "x": 3.0988,
+                                "y": 5.4991
+                            },
+                            "uuid": "e357ebe6-64f6-538c-9d09-0ce7e85d8c36"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2213 [R]",
+                            "pos": {
+                                "x": 3.2004,
+                                "y": 3.0988
+                            },
+                            "uuid": "f52a5db1-3b16-5113-9263-e89ed2d4aa94"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2214 [R]",
+                            "pos": {
+                                "x": 3.2004,
+                                "y": 3.2512
+                            },
+                            "uuid": "b5600605-d0f9-58fe-b6c5-1ce61ef9822b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2215 [R]",
+                            "pos": {
+                                "x": 3.2004,
+                                "y": 3.4036
+                            },
+                            "uuid": "6b0607fc-c306-5e70-bac9-c4f50373394c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol RS10 [R]",
+                            "pos": {
+                                "x": 3.3528,
+                                "y": 0.5969
+                            },
+                            "uuid": "65789f60-7d34-599a-8114-ab55c8d7bff2"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R700 [R]",
+                            "pos": {
+                                "x": 3.3528,
+                                "y": 0.6985
+                            },
+                            "uuid": "db77ebbc-0f5d-57f3-99eb-384d18724c81"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R701 [R]",
+                            "pos": {
+                                "x": 3.3528,
+                                "y": 0.8001
+                            },
+                            "uuid": "033db2aa-a5b5-5ee0-b3b8-43788dc21d6f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R702 [R]",
+                            "pos": {
+                                "x": 3.3528,
+                                "y": 0.9017
+                            },
+                            "uuid": "bf572132-25d5-5928-b7ad-e7713e722045"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R703 [R]",
+                            "pos": {
+                                "x": 3.3528,
+                                "y": 1.0033
+                            },
+                            "uuid": "ebd747ac-1a27-5d29-a592-669b52403f3f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2244 [R]",
+                            "pos": {
+                                "x": 3.5941,
+                                "y": 4.5974
+                            },
+                            "uuid": "d981a9f8-a1fa-58c5-b522-d654a79a3a09"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2245 [R]",
+                            "pos": {
+                                "x": 3.5941,
+                                "y": 4.7498
+                            },
+                            "uuid": "85a5ea85-3d88-53f9-a79e-ce32546d2867"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2254 [R]",
+                            "pos": {
+                                "x": 3.5941,
+                                "y": 6.7056
+                            },
+                            "uuid": "b20e6877-940f-50c0-86d9-a060ea5b3d82"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R707 [R]",
+                            "pos": {
+                                "x": 3.8989,
+                                "y": 0.6985
+                            },
+                            "uuid": "b02a108c-41a5-5009-a954-afc426d4edef"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R708 [R]",
+                            "pos": {
+                                "x": 3.8989,
+                                "y": 0.8001
+                            },
+                            "uuid": "729dd5af-f9d3-531f-bf4b-23ee7ddbd9fd"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R709 [R]",
+                            "pos": {
+                                "x": 3.8989,
+                                "y": 1.0033
+                            },
+                            "uuid": "de620723-6af7-52ba-b147-3abdf9567767"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Pin GND1 not connected to ground net",
+                    "items": [
+                        {
+                            "description": "Symbol U2209 Pin 4 [GND1, Power input, Line]",
+                            "pos": {
+                                "x": 4.0005,
+                                "y": 6.2865
+                            },
+                            "uuid": "52f07d13-4ae0-58f5-895e-49c3fd8b256b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "ground_pin_not_ground"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2216 [R]",
+                            "pos": {
+                                "x": 4.2037,
+                                "y": 3.0988
+                            },
+                            "uuid": "a19c54ad-3174-5f94-9a1d-96875bc06703"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2217 [R]",
+                            "pos": {
+                                "x": 4.2037,
+                                "y": 3.2512
+                            },
+                            "uuid": "5ae3caef-2390-55e6-bc35-18a5bce1126f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2218 [R]",
+                            "pos": {
+                                "x": 4.2037,
+                                "y": 3.4036
+                            },
+                            "uuid": "fd61fe8d-ed85-5884-abe0-8fd261c837eb"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2246 [R]",
+                            "pos": {
+                                "x": 4.3942,
+                                "y": 4.5974
+                            },
+                            "uuid": "c3fb74b8-1769-57b8-a0f8-94c10e758f0c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2247 [R]",
+                            "pos": {
+                                "x": 4.3942,
+                                "y": 4.7498
+                            },
+                            "uuid": "fcc79074-3eb3-54d9-b995-f4d15d93098f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB20 [TestPoint]",
+                            "pos": {
+                                "x": 4.8006,
+                                "y": 5.1943
+                            },
+                            "uuid": "96b8e683-40a5-5f95-b837-3aaa19eb9cca"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB24 [TestPoint]",
+                            "pos": {
+                                "x": 4.8006,
+                                "y": 5.4483
+                            },
+                            "uuid": "2380711a-53c8-5612-95db-7c9cd168e3d5"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Pin GND1 not connected to ground net",
+                    "items": [
+                        {
+                            "description": "Symbol U2206 Pin 2 [GND1, Power input, Line]",
+                            "pos": {
+                                "x": 5.0927,
+                                "y": 4.191
+                            },
+                            "uuid": "6f69fc9d-0ed1-5bb1-a11a-d127e08b5b86"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "ground_pin_not_ground"
+                },
+                {
+                    "description": "Pin GND1 not connected to ground net",
+                    "items": [
+                        {
+                            "description": "Symbol U2206 Pin 8 [GND1, Power input, Line]",
+                            "pos": {
+                                "x": 5.0927,
+                                "y": 4.3434
+                            },
+                            "uuid": "67e1b7e2-22d5-5797-8e19-0ec3c1cc7df8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "ground_pin_not_ground"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2255 [R]",
+                            "pos": {
+                                "x": 5.1943,
+                                "y": 6.096
+                            },
+                            "uuid": "3a5973bd-a9d4-5364-8774-6be212974d72"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2256 [R]",
+                            "pos": {
+                                "x": 5.1943,
+                                "y": 6.2484
+                            },
+                            "uuid": "56630c30-612b-53fd-8bfb-83090d258b3b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB21 [TestPoint]",
+                            "pos": {
+                                "x": 5.3467,
+                                "y": 5.1943
+                            },
+                            "uuid": "4051ac7a-ebae-5ddb-bf29-0878d1959727"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB25 [TestPoint]",
+                            "pos": {
+                                "x": 5.3467,
+                                "y": 5.4483
+                            },
+                            "uuid": "59b297e6-4330-5003-8cc1-02d9080b03c0"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2257 [R]",
+                            "pos": {
+                                "x": 5.7531,
+                                "y": 6.096
+                            },
+                            "uuid": "03c194db-d620-5457-8e53-b19c7383dac6"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2258 [R]",
+                            "pos": {
+                                "x": 5.7531,
+                                "y": 6.2484
+                            },
+                            "uuid": "b82e8b91-6ab8-5ebc-8b35-5615440d173a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB22 [TestPoint]",
+                            "pos": {
+                                "x": 5.9055,
+                                "y": 5.1943
+                            },
+                            "uuid": "2477b09a-0e7a-58ae-8f38-96745e7e997b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB26 [TestPoint]",
+                            "pos": {
+                                "x": 5.9055,
+                                "y": 5.4483
+                            },
+                            "uuid": "fbab8a5b-b4d2-5e3e-8650-9284604dc533"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB1 [TestPoint]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 0.7493
+                            },
+                            "uuid": "42f960b8-d817-546b-ab92-2a9a007f453a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB3 [TestPoint]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 0.9017
+                            },
+                            "uuid": "f2a539d8-1aad-52fc-b94d-b997163f6415"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB5 [TestPoint]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 1.0541
+                            },
+                            "uuid": "301f6ce7-495e-5dd3-9c35-6fcfa8768585"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB7 [TestPoint]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 1.1938
+                            },
+                            "uuid": "696d8817-e21d-5749-b41b-48b6f127ed8c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB9 [TestPoint]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 1.3462
+                            },
+                            "uuid": "50f0d848-cd19-57b4-98f2-0ec2b70366ab"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB11 [TestPoint]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 1.4986
+                            },
+                            "uuid": "e9fc1f6a-5aba-505e-a57b-bfc39bdf73cc"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB13 [TestPoint]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 1.651
+                            },
+                            "uuid": "814a7b29-3ad6-5343-9d31-779dae3344c7"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB15 [TestPoint]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 1.8034
+                            },
+                            "uuid": "e1eafb4d-0f21-5b16-9f43-fd6f4c81f252"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2250 [R]",
+                            "pos": {
+                                "x": 5.9944,
+                                "y": 4.7498
+                            },
+                            "uuid": "74445b15-d96c-5942-adef-9dd0a5ba64a1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2259 [R]",
+                            "pos": {
+                                "x": 6.2992,
+                                "y": 6.096
+                            },
+                            "uuid": "a9e22576-c5e2-5d76-aea7-6a8101db6ba6"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2264 [R]",
+                            "pos": {
+                                "x": 6.2992,
+                                "y": 6.2484
+                            },
+                            "uuid": "14138989-a9c0-5150-ab1e-bd13037f60a8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB2 [TestPoint]",
+                            "pos": {
+                                "x": 6.4008,
+                                "y": 0.7493
+                            },
+                            "uuid": "07b39fb3-3118-5f29-aeb0-344adfe87166"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB4 [TestPoint]",
+                            "pos": {
+                                "x": 6.4008,
+                                "y": 0.9017
+                            },
+                            "uuid": "0ae9e882-baf8-51b4-a168-b60a9ea77895"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB6 [TestPoint]",
+                            "pos": {
+                                "x": 6.4008,
+                                "y": 1.0541
+                            },
+                            "uuid": "9c431dbb-1b58-50ee-829f-f61bd665dcb1"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB8 [TestPoint]",
+                            "pos": {
+                                "x": 6.4008,
+                                "y": 1.1938
+                            },
+                            "uuid": "386ecd33-5223-5094-96f3-99246a0e1a79"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB10 [TestPoint]",
+                            "pos": {
+                                "x": 6.4008,
+                                "y": 1.3462
+                            },
+                            "uuid": "b4e1c1eb-ccc6-5126-a902-a892bf14c0ef"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB12 [TestPoint]",
+                            "pos": {
+                                "x": 6.4008,
+                                "y": 1.4986
+                            },
+                            "uuid": "025c43c4-096e-5932-85e4-2640b21a51fd"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB14 [TestPoint]",
+                            "pos": {
+                                "x": 6.4008,
+                                "y": 1.651
+                            },
+                            "uuid": "c9c1c0dc-bf4d-5327-9590-008a24956568"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB16 [TestPoint]",
+                            "pos": {
+                                "x": 6.4008,
+                                "y": 1.8034
+                            },
+                            "uuid": "d98ca74a-71c9-5825-99f7-dd9471212f46"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB23 [TestPoint]",
+                            "pos": {
+                                "x": 6.4516,
+                                "y": 5.1943
+                            },
+                            "uuid": "1fe93b6f-fedd-5b58-8696-d8425f10cda8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TestPoint' doesn't match copy in library 'Connector'",
+                    "items": [
+                        {
+                            "description": "Symbol TPB27 [TestPoint]",
+                            "pos": {
+                                "x": 6.4516,
+                                "y": 5.4483
+                            },
+                            "uuid": "d86e5960-9dc9-501c-8270-aab30b3c319f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2251 [R]",
+                            "pos": {
+                                "x": 6.5024,
+                                "y": 4.7498
+                            },
+                            "uuid": "c84bed23-7808-531c-8920-a1e6865de667"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2265 [R]",
+                            "pos": {
+                                "x": 6.8453,
+                                "y": 6.096
+                            },
+                            "uuid": "6d2a4adb-70ad-5235-9ca2-b7b23517b4ee"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                }
+            ]
+        }
+    ],
+    "source": "bms.kicad_sch"
+}

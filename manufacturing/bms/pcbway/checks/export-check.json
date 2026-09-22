@@ -1,0 +1,77 @@
+{
+  "copper": {
+    "F.Cu": {
+      "missing_beyond_2um_mm2": 0.0,
+      "extra_beyond_2um_mm2": 0.0,
+      "native_area_mm2": 926.8748114515721,
+      "gerber_area_mm2": 926.7563906898839
+    },
+    "In1.Cu": {
+      "missing_beyond_2um_mm2": 0.0,
+      "extra_beyond_2um_mm2": 0.0,
+      "native_area_mm2": 991.3161229534478,
+      "gerber_area_mm2": 991.2305455885951
+    },
+    "In2.Cu": {
+      "missing_beyond_2um_mm2": 0.0,
+      "extra_beyond_2um_mm2": 0.0,
+      "native_area_mm2": 944.0970564802312,
+      "gerber_area_mm2": 944.0104255134526
+    },
+    "B.Cu": {
+      "missing_beyond_2um_mm2": 0.0,
+      "extra_beyond_2um_mm2": 0.0,
+      "native_area_mm2": 1115.3726117698247,
+      "gerber_area_mm2": 1115.2624463471323
+    }
+  },
+  "drills": {
+    "PTH": {
+      "holes": 404,
+      "mismatches": 0,
+      "coordinate_quantum_mm": 0.001,
+      "max_coordinate_error_mm": 0.0005000000000165983
+    },
+    "NPTH": {
+      "holes": 2,
+      "mismatches": 0,
+      "coordinate_quantum_mm": 0.001,
+      "max_coordinate_error_mm": 0
+    }
+  },
+  "mask": {
+    "top": {
+      "exposed_via_holes": 0,
+      "smt_mask_shift_screen_mm": 0.05,
+      "via_holes_exposed_by_shifted_smt_mask": 0
+    },
+    "bottom": {
+      "exposed_via_holes": 0,
+      "smt_mask_shift_screen_mm": 0.05,
+      "via_holes_exposed_by_shifted_smt_mask": 0
+    }
+  },
+  "paste": {
+    "top": {
+      "outside_pad_copper_mm2": 0.0,
+      "area_mm2": 207.5060508871617
+    },
+    "bottom": {
+      "outside_pad_copper_mm2": 0.0,
+      "area_mm2": 139.58152740297763
+    }
+  },
+  "outline": {
+    "outer_contours": 1,
+    "unplated_mounting_cutouts": 4,
+    "native_curve_tolerance_mm": 0.005,
+    "gerber_line_width_mm": 0.05
+  },
+  "electrical_test": {
+    "records": 809,
+    "nets": 73,
+    "missing_records": 0,
+    "ambiguous_net_names": 0,
+    "coordinate_quantum_mm": 0.00254
+  }
+}

@@ -1,0 +1,61 @@
+Designator,Quantity,Manufacturer,MPN,Description,Footprint,Mount,Notes
+U11,1,Analog Devices,LTC4368IMS-1#PBF,LTC4368IMS-1 bidirectional pack protector,Package_SO:MSOP-10_3x3mm_P0.5mm,SMT,exact part; no unapproved substitutions
+"D2201,D2202",2,Diodes Incorporated,BAT54S-7-F,BAT54S control-island pin clamps,Package_TO_SOT_SMD:SOT-23,SMT,exact part; no unapproved substitutions
+D2200,1,Diodes Incorporated,BAT54WS-7-F,BAT54WS protected control reverse-input block,Diode_SMD:D_SOD-323,SMT,exact part; no unapproved substitutions
+J2074,1,JST,SM05B-SRSS-TB(LF)(SN),isolated bms control,Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal,SMT,exact part; no unapproved substitutions
+J2200,1,JST,SM06B-SRSS-TB(LF)(SN),"three cell probes: paired 1/2, 3/4, 5/6",Connector_JST:JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal,SMT,exact part; no unapproved substitutions
+F1,1,Keystone Electronics,3568,"MINI fuse holder, fuse supplied separately",Fuse:Fuseholder_Blade_Mini_Keystone_3568,THT,exact part; no unapproved substitutions
+J2072,1,Molex,43650-0224,protected pack power,Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical,SMT,exact part; no unapproved substitutions
+J2,1,Molex,76829-0006,3S pack power + cell-tap harness,Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical,THT,exact part; no unapproved substitutions
+C700,1,Murata,GRM155R71H332KA01,3.3nF >=50V LTC4368 CGATE,Capacitor_SMD:C_0402_1005Metric,SMT,exact part; no unapproved substitutions
+C724,1,Murata,GRM155R71H472KA01,4.7nF >=50V pack hot-swap slew,Capacitor_SMD:C_0402_1005Metric,SMT,exact part; no unapproved substitutions
+"C2211,C2212,C2213,C2240,C2241,C2242",6,Murata,GRM188R71H103KA01D,10n 50V NTC sense filter,Capacitor_SMD:C_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"C845,C846,C847,C2200,C2221,C2222,C2223,C2230,C2231,C2250,C2251,C2252,C2253,C2255,C2256",15,Murata,GRM188R71H104KA93D,100n BQ77915 SRP-VSS filter,Capacitor_SMD:C_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"C841,C842,C843,C844,C848",5,Murata,GRM21BR71A105KA01L,1u 10V X7R BQ77915 AVDD,Capacitor_SMD:C_0805_2012Metric,SMT,exact part; no unapproved substitutions
+C840,1,Murata,GRM21BR71H105KA12L,1u 25V X7R BQ77915 VDD,Capacitor_SMD:C_0805_2012Metric,SMT,exact part; no unapproved substitutions
+C725,1,Murata,GRM21BZ71E106KE15L,10u 25V X7R LTC4368 VOUT,Capacitor_SMD:C_0805_2012Metric,SMT,exact part; no unapproved substitutions
+R2254,1,Panasonic,ERJ2RKF1001X,1k local retry gate series,Resistor_SMD:R_0402_1005Metric,SMT,exact part; no unapproved substitutions
+C2243,1,TDK,C1005X7R1H103K050BB,10n 50V thermal reference filter,Capacitor_SMD:C_0402_1005Metric,SMT,exact part; no unapproved substitutions
+"C2201,C2254",2,TDK,CGA5L1X7R1H106K160AC,10u 50V thermal bias; require Ceff >=2u,Capacitor_SMD:C_1206_3216Metric,SMT,exact part; no unapproved substitutions
+U719,1,Texas Instruments,BQ7791500PWR,BQ7791500PWR autonomous 3S primary protector,Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm,SMT,exact part; no unapproved substitutions
+"Q11,Q12,Q703,Q704",4,Texas Instruments,CSD18540Q5B,CSD18540Q5B reverse-pack FET A,ducktop2:CSD18540Q5B_DNK,SMT,exact part; no unapproved substitutions
+U2209,1,Texas Instruments,ISO7021FDR,ISO7021FDR LTC fault and retry isolation,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,SMT,exact part; no unapproved substitutions
+U2206,1,Texas Instruments,ISO7041FDBQR,ISO7041FDBQR separate charge/discharge permits; default low,Package_SO:QSOP-16_3.9x4.9mm_P0.635mm,SMT,exact part; no unapproved substitutions
+U2207,1,Texas Instruments,SN74AUP2G07DCKR,SN74AUP2G07DCKR thermal and LTC fault wired-OR,Package_TO_SOT_SMD:SOT-363_SC-70-6,SMT,exact part; no unapproved substitutions
+U2205,1,Texas Instruments,SN74AUP2G126DCUR,SN74AUP2G126DCUR thermal startup gate,ducktop2:TI_DCU0008A_VSSOP8,SMT,exact part; no unapproved substitutions
+"U2201,U2202,U2203",3,Texas Instruments,TLV1864PWR,TLV1864PWR cell 1 thermal windows,Package_SO:TSSOP-14_4.4x5mm_P0.65mm,SMT,exact part; no unapproved substitutions
+U2204,1,Texas Instruments,TLV803EA29RDBZR,TLV803EA29RDBZR thermal startup hold,Package_TO_SOT_SMD:SOT-23,SMT,exact part; no unapproved substitutions
+"U2200,U2208",2,Texas Instruments,TPS70933DBVR,TPS70933DBVR raw-pack thermal bias,Package_TO_SOT_SMD:SOT-23-5,SMT,exact part; no unapproved substitutions
+RS11,1,Vishay Dale,WSLP25128L000FEA,8mOhm 1% 2W BQ77915 current shunt,Resistor_SMD:R_2512_6332Metric,SMT,exact part; no unapproved substitutions
+RS10,1,Vishay Dale,WSLP2512R0110FEA,11mOhm 1% 2W LTC4368 bounded pack-current shunt,Resistor_SMD:R_2512_6332Metric,SMT,exact part; no unapproved substitutions
+"R707,R708,R709,R2230,R2231,R2232,R2235,R2238,R2250,R2251,R2255,R2264",12,Yageo,RC0603FR-07100KL,100k pack protector SHDN pull-up,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R845,R846",2,Yageo,RC0603FR-07100RL,100R BQ77915 SRP filter,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R852,R853",2,Yageo,RC0603FR-0710KL,10k 5% PRES normal-mode pull-up,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R702,1,Yageo,RC0603FR-07121KL,121k 1% BAT UV/OV bottom,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R840,R848,R2234,R2237",4,Yageo,RC0603FR-071KL,1k 1% BQ77915 VDD filter,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R849,R2233",2,Yageo,RC0603FR-071ML,1M 5% DSG gate-source,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R703,1,Yageo,RC0603FR-0722KL,22k LTC4368 CGATE series,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R2256,1,Yageo,RC0603FR-073K3L,3.3k control fault pull-up,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R700,1,Yageo,RC0603FR-073M09L,3.09M 1% BAT UV/OV top,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R850,1,Yageo,RC0603FR-073M3L,3.3M 5% CHG gate-source,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R851,1,Yageo,RC0603FR-07453KL,453k 1% load-detect resistor,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R847,1,Yageo,RC0603FR-074K53L,4.53k 1% DSG gate resistor,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R2258,R2259,R2265",3,Yageo,RC0603FR-074K7L,4.7k fault interface current limit,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R854,1,Yageo,RC0603FR-07604KL,604k 1% OCD delay program,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R701,1,Yageo,RC0603FR-0773K2L,73.2k 1% BAT UV/OV middle,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R841,R842,R843,R844",4,Yageo,RC0603FR-0775RL,75R 1% BQ77915 cell/balance filter,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R2257,1,Yageo,RC1206FR-07100RL,100R 1% 0.25W control-island current limiter,Resistor_SMD:R_1206_3216Metric,SMT,exact part; no unapproved substitutions
+R2252,1,Yageo,RC1206FR-072K49L,2.49k 1% 0.25W protected control supply limiter,Resistor_SMD:R_1206_3216Metric,SMT,exact part; no unapproved substitutions
+R2200,1,Yageo,RC2010FK-071KL,1k 1% 0.75W raw thermal supply limiter,Resistor_SMD:R_2010_5025Metric,SMT,exact part; no unapproved substitutions
+R2217,1,Yageo,RT0402BRD0710KL,10k 0.1% 25ppm NTC sense-lead limit,Resistor_SMD:R_0402_1005Metric,SMT,exact part; no unapproved substitutions
+"R2210,R2213,R2216",3,Yageo,RT0603BRD07100KL,100k 0.1% 25ppm cell NTC pull-up,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R2211,R2212,R2214,R2215,R2218",5,Yageo,RT0603BRD0710KL,10k 0.1% 25ppm NTC sense-lead limit,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R2244,1,Yageo,RT0603BRD07147KL,147k 0.1% 25ppm DSG_COLD top,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R2240,1,Yageo,RT0603BRD07243KL,243k 0.1% 25ppm CHG_COLD top,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R2253,1,Yageo,RT0603BRD0730K1L,30.1k 0.1% protected bias minimum load,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R2236,R2239",2,Yageo,RT0603BRD07470KL,470k 0.1% 25ppm CTR fault pull-up,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"R2241,R2243,R2245,R2247",4,Yageo,RT0603BRD07499KL,499k 0.1% 25ppm thermal reference bottom,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R2242,1,Yageo,RT0603BRD07634KL,634k 0.1% 25ppm CHG_HOT top,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R2246,1,Yageo,RT0603BRD07845KL,845k 0.1% 25ppm DSG_HOT top,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+R2201,1,Yageo,RT0603BRD079K53L,9.53k 0.1% 25ppm thermal bias fault bleed,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
+"Q701,Q2200,Q2201",3,onsemi,BSS138LT1G,BSS138 pack protector latch reset,Package_TO_SOT_SMD:SOT-23,SMT,exact part; no unapproved substitutions

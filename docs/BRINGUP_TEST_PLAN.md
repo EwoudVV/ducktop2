@@ -1,11 +1,12 @@
 # bring-up plan
 
-updated 10 september 2026. this is the preparation and test order. the exact
+updated 22 september 2026. this is the preparation and test order. the exact
 power fixtures, limits, connections, and acceptance values still need a
 review against the corrected boards before this becomes a bench procedure.
 
-the revised BMS routing and final project checks are still in progress.
-the center and I/O boards also need their remaining routing. see the
+the BMS routing and fabrication-file checks are finished. its
+[prototype package](../manufacturing/bms/pcbway/README.md) still needs the
+factory quote and review. the center and I/O boards need their remaining routing. see the
 [build status](../README.md#build-status).
 
 ## fixture requirements

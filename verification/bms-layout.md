@@ -1,8 +1,14 @@
 # bms layout checks
 
-21 september 2026. the bms routing is finished and saved in
+22 september 2026. the bms routing is finished and saved in
 [`bms/bms.kicad_pcb`](../bms/bms.kicad_pcb). it is still a four-layer board.
 the two middle mounting holes were removed; the four perimeter supports remain.
+
+the [pcbway package](../manufacturing/bms/pcbway/README.md) includes the
+checked fabrication and assembly files. the order cleanup widened three
+short traces to 0.10 mm, made the printing 0.15 mm thick and moved six vias
+away from solder-mask openings. the filled power paths, quiet return and
+positive-load connection were checked again after those moves.
 
 | check | result |
 | --- | --- |
@@ -31,11 +37,16 @@ copper screen does not establish an 8 A operating mode.
 ## remaining warnings
 
 KiCad reports differences from library silkscreen graphics because some
-outlines were moved to the fabrication layers. the pads, drills and
+outlines were moved to the fabrication layers and printing was thickened.
+there are 73 library graphic warnings. the pads, drills and
 component positions were checked separately. it also flags eight short
 track ends and two vias connected on one layer. their component nets are
 connected; they are not missing pad connections. the report keeps these
 warnings visible.
+
+the fabrication check also enables the normally hidden categories. this
+adds eight off-centre track/via warnings on connected copper, for 91 warnings
+in that report. none are clearance, missing-connection or printing errors.
 
 ERC still has 89 cached-symbol differences and three ground-name warnings
 for the separate return domains. these are unchanged from the circuit review.

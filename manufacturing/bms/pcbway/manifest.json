@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "status": "CHECKED_FILES_PENDING_FACTORY_REVIEW",
+  "board": "bms/bms.kicad_pcb",
+  "source_commit": "e77e38157c8ff020cd8c646fe3c3bf69a16c4a69",
+  "working_tree": true,
+  "source_sha256": {
+    "bms/bms.kicad_pcb": "eb147d4bfedfec5447d79759b4612e251e331bac942dba1f9ab51f11f26f3f40",
+    "bms/bms.kicad_sch": "771de1b5ded171a8935a4792934b80f82480d227484ba8593f1cd620ee18724a",
+    "bms/bms.kicad_pro": "cc6ac996a9e9c80cd246ee780557ad5d197457eee5ed7cc6eaf912082392db82",
+    "bms/bms.kicad_dru": "37bf5785744034ada850286953d1156b3af6458e2f49bbe53890e8af50aab2ba",
+    "gen/generate_bms_pcbway_package.py": "09c24f8045522142fbacc7d8465c2cd8877978ee313acf11d4d1b86f7ceb0684",
+    "gen/bms_fabrication_geometry.py": "0f742f268777dd39effaf7187a7f805d8306ff64ea8f45a37197ccdb921a2cbf",
+    "gen/check_release_candidate.py": "1b3b24f463f46dbdbe39123499e44e97635a992ff1e4eb113e71bccc19cb6209",
+    "gen/report_schematic_pcb_eco.py": "5371b80838b7e22723c528abee462d7a962e235dc3c295edd76d94f77fd4b94c",
+    "gen/requirements-bms-fabrication.txt": "7889aa641144e8653a86c18ee14b814af94beb75c637fe98431ac8c82d0815d5",
+    "manufacturing/bms/front-assembly.svg": "75b46bbe1680bfdcc8d59a17f6b420722e124c9cb4ad3a8deee11de05a825194",
+    "manufacturing/bms/back-assembly.svg": "99e331fe744c173ba34f9fae406119d0f5e11e9fad085ac76d70b40ccb712c90",
+    "manufacturing/bms/test-points.csv": "b5b66db90a803facb503447e97d57b0004a17da899cb6219b614c519ef0cbca7",
+    "manufacturing/bms/assembly-source.json": "6b883d5796d06eafff3125f1094daed468d21203aca6f40491e4303261b70849",
+    "verification/bms-layout.json": "d3d39285b01da0c3a91d08c8df0aeaa58e66acb6bbbdb704b5e866bd62dfafdd"
+  },
+  "refilled_board_sha256": "eb147d4bfedfec5447d79759b4612e251e331bac942dba1f9ab51f11f26f3f40",
+  "restored_warning_categories": [
+    "footprint_filters_mismatch",
+    "footprint_type_mismatch",
+    "missing_courtyard",
+    "track_not_centered_on_via",
+    "tuning_profile_track_geometries"
+  ],
+  "audit_minimums_mm": {
+    "track": 0.1,
+    "clearance": 0.1,
+    "via_annular_ring": 0.15,
+    "silk_stroke": 0.15
+  },
+  "checks": {
+    "saved": {
+      "errors": 0,
+      "unconnected": 0,
+      "schematic_mismatches": 0,
+      "warnings": {
+        "track_dangling": 8,
+        "via_dangling": 2,
+        "track_not_centered_on_via": 8,
+        "lib_footprint_mismatch": 73
+      }
+    },
+    "refilled": {
+      "errors": 0,
+      "unconnected": 0,
+      "schematic_mismatches": 0,
+      "warnings": {
+        "track_dangling": 8,
+        "via_dangling": 2,
+        "track_not_centered_on_via": 8,
+        "lib_footprint_mismatch": 73
+      }
+    },
+    "native_airwires": 0,
+    "library_pad_differences": [],
+    "parity_passed": true,
+    "erc_errors": 0,
+    "erc_warnings": {
+      "lib_symbol_mismatch": 89,
+      "ground_pin_not_ground": 3
+    },
+    "power_path_evidence_matches_geometry": true
+  },
+  "library_sha256": {
+    "Capacitor_SMD:C_0805_2012Metric": "62775a51fe74ba7f1b572de327bdbd3fc92582721b2abcaa47787865590d89cb",
+    "Capacitor_SMD:C_0603_1608Metric": "fe0dbfefbb181a0466f93a8de52d84ba7b00fcd9acdbb69575f4128a0af4e405",
+    "Package_SO:MSOP-10_3x3mm_P0.5mm": "c179dbee33613027667b07b4dba02648f193fc65f63616c9d73d6f1162c6bb9d",
+    "Resistor_SMD:R_0603_1608Metric": "7190ac4a00125b807e54129ef0d87d87f2a658eeb74d025a7028203419b09f23",
+    "ducktop2:CSD18540Q5B_DNK": "11d28fb3aae1887806d62391f51cea28f91a04d940a895249343d24ead38376d",
+    "Package_TO_SOT_SMD:SOT-23-5": "455a3f7c3e5eb5b8847eaa5df23e18651e78ab9f75afd09a0883758a0d901761",
+    "Fuse:Fuseholder_Blade_Mini_Keystone_3568": "ce9f2576e0604a938518a57905b3876e023afe3a4493bd80dbe5a56b171d068d",
+    "TestPoint:TestPoint_Pad_1.5x1.5mm": "3bc6d5e42ac6570be508f2534022843f8bf6e4a94c2c0e3f784ba2aef27fcb90",
+    "Capacitor_SMD:C_0402_1005Metric": "0403382fc4583ed510b461b1fa4a36dfaec6f4c0d9b1a67e6b0027837a54e1b5",
+    "Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical": "0bbeeba711d606f7de4507774d9c02124b5e268b9ce055740eec72ba5006bfc7",
+    "Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical": "97e22ddc12955e592fbb3fc634bc185aae9446fc0d74e2d1e40668a745310082",
+    "Resistor_SMD:R_2512_6332Metric": "abab4bf8eeb3ed03061d8eeb56b542cdac074ce8a0ace0f9b06e933c0b48f297",
+    "Package_TO_SOT_SMD:SOT-23": "0d88c86c1b6d8c1aae4aa8c09386264c089d4451a128b6ccd63ed253f4300b15",
+    "Package_TO_SOT_SMD:SOT-363_SC-70-6": "0659d885e00b786968c3ba29152b808777240a91c1fb49ab8d814eb03530115c",
+    "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm": "951159bb3a87997ba4a4f14affd963324813db13d9426715b2a29388369d74ed",
+    "Resistor_SMD:R_0402_1005Metric": "e05c7605248c220836f642ed1f526133edf0374acdfd5bb2631e58b4e377acfb",
+    "Capacitor_SMD:C_1206_3216Metric": "b2e4a08e3aaf40bc587090190c0e3969e962d7ae962c172cce0581ae8327651c",
+    "Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal": "22e7d2c00d937d424a03ed2d4ecb415aece56e5f1fa150e772bf721794450719",
+    "Package_SO:QSOP-16_3.9x4.9mm_P0.635mm": "8e15c2265c1bf146931d275142279487d56188c2662616447564f9eb5c6387fd",
+    "Resistor_SMD:R_1206_3216Metric": "c7320668dc81bbb954cb4f15e4e7a766c120059343d43551468c8f7ccc8fde37",
+    "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm": "074ecb2092b24fa4b4b9cdd7c926fc587b0d7d6d21e7341e57935fd42d36894f",
+    "Package_SO:TSSOP-14_4.4x5mm_P0.65mm": "e4bf82cea6d3b3259ddf42469b1407628ad1181a28ae6f3f340190c0cca31ccd",
+    "Diode_SMD:D_SOD-323": "03669ee95335b8ad49c3458e5262e7c2fd7ace6fe481bfd00f46b6f2f32abc8a",
+    "Connector_JST:JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal": "090e9bd7350aed224a938b922cc7d49020aa5235cc7e647a82cc3c08f37e881e",
+    "TestPoint:TestPoint_Pad_1.0x1.0mm": "23d45f5fca6994956d56fc13b34b6161edc3ec5adb33567cb8521e6554868643",
+    "Resistor_SMD:R_2010_5025Metric": "5bcbaf3a7798d3d1b8dd2bf0293dad98ef606efa5787149a542c5661c3a59725",
+    "ducktop2:TI_DCU0008A_VSSOP8": "ac2805836d829eb370db61e91d75ce8c2927f7ee0fa253d77810e84aca1aae5b"
+  },
+  "assembly": {
+    "board_components": 125,
+    "smt_components": 123,
+    "through_hole_components": 2,
+    "unique_board_parts": 60,
+    "loose_fuses_per_board": 1,
+    "top_smt_components": 77,
+    "bottom_smt_components": 46,
+    "smt_pads": 379,
+    "soldered_through_holes": 10
+  },
+  "kicad_version": "10.0.4",
+  "export_checker_versions": {
+    "shapely": "2.1.2",
+    "gerbonara": "1.6.3"
+  },
+  "order_submitted": false,
+  "hardware_testing": "pending"
+}

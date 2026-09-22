@@ -10,7 +10,7 @@ lists the issues that remain before an order package can be prepared.
 | Center | `ducktop2-center.kicad_pcb` | Eight-layer NextPCB record |
 | Left I/O | `left_io/left_io.kicad_pcb` | Eight-layer layout; confirm the actual order against the approved stackup |
 | Right I/O | `right_io/right_io.kicad_pcb` | Eight-layer layout; confirm the actual order against the approved stackup |
-| BMS | `bms/bms.kicad_pcb` | Four layers; routing and layout checks complete. Confirm the order stackup and assembly details. |
+| BMS | `bms/bms.kicad_pcb` | Four layers; [checked PCBWay package](bms/pcbway/README.md). Quote and factory review pending. |
 | Radio | `radio_daughterboard/radio_daughterboard.kicad_pcb` | Four-layer placement board; fabrication details still to finalize |
 | Keyboard | `keyboard/12_keyboard_daughterboard.kicad_pcb` | Existing separate two-layer rev A package |
 

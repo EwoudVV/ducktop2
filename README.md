@@ -22,7 +22,7 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 21 september 2026. the audit repairs are still in progress. both
+updated 22 september 2026. the audit repairs are still in progress. both
 I/O boards now have the revised power circuits, separate power wiring, and
 new signal connectors in their saved schematics and layouts. the right
 board also has the HDMI pair corrections and repairs to the USB routing i
@@ -40,7 +40,8 @@ the four-layer BMS is now routed, including the separate power and control
 cables and all three temperature probes. it has zero unconnected items,
 zero physical DRC errors and no schematic mismatch. the power paths and
 separate return connections were checked too. [BMS layout checks](verification/bms-layout.md)
-has the results and the remaining hardware tests. the three main-board
+has the results and the remaining hardware tests. the [PCBWay package](manufacturing/bms/pcbway/README.md)
+is ready for a prototype quote and factory review. the three main-board
 sections are eight layers, and most of their routing still remains.
 
 firmware corrections cover charger communication, startup, watchdog and fan

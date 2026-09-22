@@ -29,6 +29,11 @@ plot/
 *.gbr
 *.gbrjob
 
+# Retain the checked BMS order files.
+!manufacturing/bms/pcbway/gerbers/
+!manufacturing/bms/pcbway/gerbers/**
+!manufacturing/bms/pcbway/paste/*.gbrjob
+
 # Python
 __pycache__/
 *.pyc
@@ -41,6 +46,7 @@ gen/netlist.net
 *.plist
 *-erc.json
 *-drc.json
+!manufacturing/bms/pcbway/checks/*-drc.json
 *.net
 result.json
 !verification/*_netlist.xml
