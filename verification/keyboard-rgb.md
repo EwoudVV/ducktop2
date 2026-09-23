@@ -10,10 +10,10 @@ routing, not an order release. the saved project is in `keyboard/`.
 | schematic / PCB parity | 0 differences; 1,096 physical pads checked |
 | routing | 0 tracks, 0 vias, 0 copper pours |
 | native unconnected count | 960; the CLI's list stops at 499 |
-| board | 2 copper layers, 0.8 mm, original 273.5 x 80 mm outline |
+| board | 4 copper layers, 0.8 mm, original 273.5 x 80 mm outline |
 | original placement | all 65 switches, 65 diodes and J320 preserved |
 | RGB placement | all 65 LEDs at the checked switch-relative offset |
-| switch copper exclusions | all 65 retained on both copper layers |
+| switch copper exclusions | all 65 extended to all four copper layers |
 | driver mapping | 195 unique colour channels, 3 unused channels kept off |
 | part identities | 215 populated components have manufacturer and MPN; 6 test pads excluded |
 | EC target build | ARM build passed |

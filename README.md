@@ -1,6 +1,6 @@
 # Ducktop2
 
-i'm building a 16-inch x86 laptop around the LattePanda Mu. i wanted the
+i'm building a 16-inch x86 laptop around the LattePanda Mu Ultra. i wanted the
 exposed hardware and flexibility of a cyberdeck in something i could
 actually carry around and use every day.
 
@@ -10,7 +10,7 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## what's in it
 
-- LattePanda Mu N305, with a 16 GB RAM target and 64 GB onboard eMMC
+- LattePanda Mu Ultra 226V initially, with the carrier designed to support a later 256V upgrade; 16 GB RAM and NVMe storage
 - 16-inch AUO B160QAN03.K, targeting 2560x1600 at 120 Hz over direct eDP
 - M.2 NVMe and a separate Wi-Fi/Bluetooth socket
 - 65-key Cherry MX Ultra Low Profile keyboard and a 140 x 105 mm USB trackpad
@@ -22,7 +22,13 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 22 september 2026. the audit repairs are still in progress. both
+updated 23 september 2026. the compute target is now Mu Ultra: start with
+the 226V and design the power, cooling and carrier for the 256V too. the
+saved main-board circuits still need the N305-to-Ultra changes. the
+[module requirements](manufacturing/lattepanda_mu_bios_release.md) separate
+that target from the current CAD and the remaining hardware checks.
+
+the audit repairs are still in progress. both
 I/O boards now have the revised power circuits, separate power wiring, and
 new signal connectors in their saved schematics and layouts. the right
 board also has the HDMI pair corrections and repairs to the USB routing i
@@ -31,8 +37,8 @@ revision is also integrated, with its power-support placement corrected and
 its edges moved inward for board gaps. the main-board routing and final
 project checks still need work.
 
-the keyboard now has per-key RGB, with its schematic and placement ready
-for routing. the previous tracks and pours are cleared. the key positions,
+the keyboard now has per-key RGB on four layers, with its schematic and
+placement ready for routing. the previous tracks and pours are cleared. the key positions,
 outline and cable connector are unchanged. [keyboard routing notes](keyboard/README.md)
 cover the LEDs, current limit and switch keepouts. the old non-RGB order
 files have been retired. the radio antenna connectors now match the board edge and their

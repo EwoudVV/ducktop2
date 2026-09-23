@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
 
-from keyboard_rgb_contract import DRIVER_PINS, ISET_OHMS, LED_MPN, DRIVER_MPN, BUFFER_MPN, key_assignments, led_nets
+from keyboard_rgb_contract import COPPER_LAYERS, DRIVER_PINS, ISET_OHMS, LED_MPN, DRIVER_MPN, BUFFER_MPN, key_assignments, led_nets
 from report_schematic_pcb_eco import compare, parse_schematic
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,7 +38,8 @@ def main():
     board.BuildConnectivity()
     fps = {f.GetReference(): f for f in board.GetFootprints()}
     require(len(fps) == 221, 'expected 221 footprints, including six test pads')
-    require(board.GetCopperLayerCount() == 2, 'keyboard must stay two layers')
+    require(board.GetCopperLayerCount() == COPPER_LAYERS, 'keyboard must have four copper layers')
+    require(board.GetLayerType(p.In1_Cu) == p.LT_POWER, 'In1.Cu must remain the ground-plane layer')
     require(board.GetDesignSettings().GetBoardThickness() == 800000, 'keyboard must stay 0.8 mm')
     xml = ET.parse(args.netlist).getroot()
     parity = compare(args.board.read_text(), xml, standalone_root_prefix=True)
@@ -99,7 +100,7 @@ def main():
         zones = list(sw.Zones())
         require(len(zones) == 1, sw.GetReference()+' needs its copper keepout')
         z = zones[0]
-        require(z.GetIsRuleArea() and set(z.GetLayerSet().Seq()) == {p.F_Cu,p.B_Cu}, 'keepout layers changed')
+        require(z.GetIsRuleArea() and set(z.GetLayerSet().Seq()) == {p.F_Cu,p.In1_Cu,p.In2_Cu,p.B_Cu}, 'keepouts must cover all four copper layers')
         require(all((z.GetDoNotAllowTracks(),z.GetDoNotAllowVias(),z.GetDoNotAllowPads(),z.GetDoNotAllowZoneFills())), 'keepout no longer blocks all copper')
         line = z.Outline().COutline(0)
         local = {(round(line.CPoint(i).x/1e6-sx,5),round(line.CPoint(i).y/1e6-sy,5)) for i in range(line.PointCount())}
@@ -144,7 +145,7 @@ def main():
                     ROOT/'keyboard/12_keyboard_daughterboard.kicad_sch', args.netlist)
     peak_ma = 36.91*10000/(ISET_OHMS*.99)
     report = {'passed':True,'stage':'placement, not fabrication',
-              'footprints':len(fps),'rgb_leds':65,'copper_layers':2,'thickness_mm':.8,
+              'footprints':len(fps),'rgb_leds':65,'copper_layers':board.GetCopperLayerCount(),'thickness_mm':.8,
               'tracks_and_vias':tracks,'copper_pours':pours,'switch_keepouts':keepouts,
               'native_unconnected':board.GetConnectivity().GetUnconnectedCount(False),
               'schematic_parity':parity['passed'],'physical_pads_checked':parity['counts']['physical_pads_checked'],

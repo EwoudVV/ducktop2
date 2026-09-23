@@ -1,6 +1,6 @@
 # ducktop2
 
-i'm making a custom x86 laptop around a LattePanda Mu. i wanted a cyberdeck
+i'm making a custom x86 laptop around a LattePanda Mu Ultra. i wanted a cyberdeck
 with exposed hardware and room to experiment, but something i could actually
 carry around and use as a normal laptop too.
 
@@ -8,6 +8,10 @@ ducktop1 used a Pi 500+ and a 16-inch portable monitor. it worked, but the
 cabling was a mess. the HDMI and USB-C cables had to run outside the case.
 this version uses direct eDP for the display and custom boards for the power,
 ports, and laptop controls.
+
+i'm starting with the 226V, but designing the carrier, power and cooling
+for the 256V too so i can upgrade later. the existing N305 carrier design
+still needs to be adapted for the Ultra.
 
 it has a 16-inch 2560x1600 120 Hz display target, a Cherry MX ULP mechanical
 keyboard, NVMe, a large trackpad, and a 3S battery. there's an STM32 for the
@@ -41,4 +45,4 @@ putting a total in the budget. [parts and cost](bom-and-cost.md)
 - [LattePanda Mu reference hardware](https://github.com/LattePandaTeam/LattePanda-Mu)
 
 [current progress](../README.md#build-status) and [next steps](../README.md#build-status) have the
-detailed state. this pitch was refreshed on 4 september 2026.
+detailed state. this pitch was refreshed on 23 september 2026.

@@ -14,6 +14,7 @@ DRIVER_ADDRESS = 0x2f  # ADDR1 and ADDR2 tied to the driver's VCC.
 ISET_OHMS = 33200
 LED_OFFSET_MM = (0.0, -2.8)  # CHERRY VS-10107 rev 03 / pcb-mx-ulp.dxf.
 ROW_COUNTS = (14, 14, 13, 13, 11)
+COPPER_LAYERS = 4
 
 DRIVER_PINS = {
     1:'RGB_SW08', 2:'RGB_SW06', 3:'RGB_SW04', 4:'RGB_SW02', 5:'KB_RGB_5V',

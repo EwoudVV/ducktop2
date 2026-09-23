@@ -1,4 +1,8 @@
 (version 1)
+# Keep the first inner layer available for ground. Signal vias may cross it.
+(rule "In1.Cu ground only"
+  (condition "A.Layer == 'In1.Cu' && A.NetName != 'GND'")
+  (constraint disallow track))
 # Each LED fits inside its matching CHERRY auxiliary component area.
 # The separate placement check verifies its offset, pad envelope and height.
 (rule "LED320 inside SW320 light cavity"

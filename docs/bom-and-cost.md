@@ -1,6 +1,6 @@
 # parts and cost
 
-updated 10 september 2026. the split design needs a new per-board quote.
+updated 23 september 2026. the split design needs a new per-board quote.
 there is no reconciled current total yet.
 
 ## what the next estimate needs to cover
@@ -11,8 +11,8 @@ there is no reconciled current total yet.
 | BMS PCB | Four layers, 35 um copper, 1.6 mm board; confirm 20 um hole plating in the quote |
 | PCBA and component sourcing | Separate BOM/CPL for each board, DNPs, hand assembly, fixtures, setup charges, and spares |
 | Radio board | Separate four-layer board and its assembly/components |
-| Keyboard | New two-layer RGB revision; 65 LEDs, driver and support parts. Original boards have diodes fitted and no switches fitted |
-| Mu | Exact N305 module/RAM variant and cooling/retention hardware |
+| Keyboard | New four-layer, 0.8 mm RGB revision; 65 LEDs, driver and support parts. Original boards have diodes fitted and no switches fitted |
+| Mu | DFR1294 Ultra 226V initially, or DFR1294-1 development kit; carrier and cooling must also support DFR1295 Ultra 256V |
 | NVMe and Wi-Fi/Bluetooth | Final module identities and capacities |
 | Display | Current AUO panel, final compatible eDP harness, mounting and hinge hardware |
 | Pack | Exact cells and owned stock, harness, connectors, cutoff assemblies, fuse and mounting |
@@ -36,6 +36,11 @@ DNPs and owned assemblies need their intended classification.
 one physical footprint is not necessarily one purchased component or one
 assembler placement. test points, holes, modules, compound fuse/holder
 assemblies, DNPs, and hand-soldered parts affect those counts.
+
+DFR1294-1 includes the 226V compute module, Mini Carrier Board and Ultra
+active cooler. do not also count a separate DFR1294 module or FIT1049 cooler
+when quoting that kit. NVMe storage and a suitable power supply are separate.
+the Mini Carrier is for development; the finished laptop uses its custom boards.
 
 ## ownership and sponsorship
 

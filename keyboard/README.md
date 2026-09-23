@@ -1,6 +1,6 @@
 # keyboard
 
-the RGB revision is ready for routing. it is still two layers and 0.8 mm
+the RGB revision is ready for routing. it is now four layers and still 0.8 mm
 thick, with the same 273.5 x 80 mm outline, 65 key positions, diodes and
 J320 connector position. the previous tracks, vias and pours are cleared.
 the switches, LEDs and cable connector are locked so they do not move by
@@ -8,6 +8,13 @@ accident while routing.
 
 open `12_keyboard_daughterboard.kicad_pro` in this folder. the schematic,
 PCB, rules and library tables beside it are the current files.
+
+the layer plan is F.Cu for components and signals, In1.Cu for GND,
+In2.Cu for extra signals and local power copper, and B.Cu for signals and
+ground fill. a rule blocks non-ground tracks on In1.Cu while allowing
+signal vias through it. the ground zone and stitching are still to route.
+the dielectric build is provisional; confirm a 0.8 mm four-layer stackup
+with the fabricator before ordering.
 
 ## LEDs and power
 
@@ -45,13 +52,13 @@ the EC side.
 1. start with U320's exposed ground pad, supply pins and decoupling.
    keep C322/C323 close to VCC, C324/C325 close to PVCC, and C320 beside
    U321's 3.3 V pin. give the exposed pad a short, broad ground connection
-   and a return to bottom ground copper. keep ordinary open vias out of
+   and a return to the In1.Cu ground plane. keep ordinary open vias out of
    the exposed paste area; agree any filled or capped thermal vias with
    the assembler. R320 should have a quiet return to U320's ground.
 2. route the 5 V feed and ground returns with at least the selected
    0.5 mm width where space allows. use short neckdowns at fine-pitch pads.
-   add ground copper on both layers and enough stitching to keep the
-   return continuous around matrix routing. preserve the switch keepouts.
+   add the In1.Cu ground plane, ground fill on the outer layers and enough
+   stitching to connect the surface pads. preserve the switch keepouts.
 3. route the RGB scan banks. `RGB_SW01` through `RGB_SW11` are common
    anodes, with up to six nearby keys on each bank. `RGB_CS` nets are
    shared colour sinks. red channels pass through R330-R335 and become
@@ -69,8 +76,9 @@ the minimum clearance and track width are 0.15 mm, with 0.5/0.2 mm vias.
 these are routing settings, not a factory approval. confirm the final
 0.8 mm stackup and manufacturing limits when ordering.
 
-the 65 CHERRY copper-free rectangles apply on **both layers**. do not
-put tracks, vias, pads or pours in them. the custom courtyard rules allow
+the 65 CHERRY copper-free rectangles are conservatively extended through
+**all four layers**. do not put tracks, vias, pads or pours in them.
+the custom courtyard rules allow
 only each LED to sit under its matching switch. every other courtyard
 check stays active. those exceptions depend on the checked LED offset
 and body height, so leave the locked LED positions alone.

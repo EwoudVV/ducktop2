@@ -8,9 +8,10 @@ main-board coordinates below were checked on 10 september 2026.
 
 | Part | Recorded information | Still needed |
 | --- | --- | --- |
+| Mu Ultra 226V / 256V | Shared 69.6 x 60 mm module format and Ultra cooler family | Measured cooler contact, clearances and thermal validation covering both variants |
 | AUO B160QAN03.K panel | 352 x 227 mm | Thickness, protrusions, bezel offsets, mounting, connector datum |
 | Three cells | 100 x 60 mm each | Exact identity, thickness, tabs, wiring, cutoff boards, clearance allowance |
-| RGB keyboard | 273.5 x 80.0 x 0.8 mm PCB, original key positions retained | First-article LED/switch fit, keycaps/plate, fastening, stiffness |
+| RGB keyboard | Four-layer 273.5 x 80.0 x 0.8 mm PCB, original key positions retained | First-article LED/switch fit, keycaps/plate, fastening, stiffness |
 | JOMAA trackpad | 140 x 105 mm | Height, travel, mounting, plug and bend clearance |
 | Speakers | 38 x 18 mm each in plan view | Depth, fastening, acoustic volume and openings |
 
@@ -59,9 +60,13 @@ the compute/cooling area in XY. actual volumes, insulation, click travel,
 cell clearance, and fasteners must stay separate. click loads go into the
 trackpad supports, not the cells.
 
-the cooler is a Mu cold plate, flat heatpipe, fins, and a blower. measure
-the seated module, socket/support plane, TIM, cooler, and keyboard stack
-before setting deck height. plan the inlet/exhaust and verify recirculation.
+the intended laptop cooler is a Mu Ultra cold plate, flat heatpipe, fins,
+and a blower, sized and checked for the 256V even if the first module is
+the 226V. the older N305 cooler geometry is not interchangeable. use the
+Ultra mounting and processor-height drawings, then measure the seated
+module, socket/support plane, TIM, cooler and keyboard stack before setting
+deck height. the later module upgrade must fit the same cooling assembly.
+plan the inlet/exhaust and verify recirculation.
 Framework 13 hinges are the working choice; use the actual brackets and
 full sweep to place the display cable and case cutouts.
 

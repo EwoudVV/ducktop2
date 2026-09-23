@@ -27,13 +27,13 @@
   (pad "MP" smd rect (at 6.2 -5.025) (size 1.6 1.8) (layers "F.Cu" "F.Paste" "F.Mask"))
   (pad "MP" smd rect (at 6.2 0) (size 1.6 2.6) (layers "F.Cu" "F.Paste" "F.Mask"))
   (pad "MP" smd rect (at 6.2 5.025) (size 1.6 1.8) (layers "F.Cu" "F.Paste" "F.Mask"))
-  (zone (net 0) (net_name "") (layers "F.Cu" "B.Cu")
+  (zone (net 0) (net_name "") (layers "F.Cu" "In1.Cu" "In2.Cu" "B.Cu")
     (hatch edge 0.508)
     (connect_pads (clearance 0))
-    (min_thickness 0.254)
+    (min_thickness 0.25)
     (filled_areas_thickness no)
     (keepout (tracks not_allowed) (vias not_allowed) (pads not_allowed) (copperpour not_allowed) (footprints allowed))
-    (fill (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (fill (thermal_gap 0.5) (thermal_bridge_width 0.5))
     (polygon
       (pts
         (xy -1.25 4.2)

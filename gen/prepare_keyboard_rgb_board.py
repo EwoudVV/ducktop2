@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
-from keyboard_rgb_contract import LED_OFFSET_MM
+from keyboard_rgb_contract import COPPER_LAYERS, LED_OFFSET_MM
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -39,6 +39,22 @@ def main():
     wx.Log.EnableLogging(False)
     import pcbnew as p
     board=p.LoadBoard(str(args.source))
+    board.SetCopperLayerCount(COPPER_LAYERS)
+    board.SetLayerType(p.In1_Cu,p.LT_POWER)
+    enabled=board.GetEnabledLayers()
+    for layer in (p.In1_Cu,p.In2_Cu):
+        enabled.AddLayer(layer)
+    board.SetEnabledLayers(enabled)
+    copper=p.LSET()
+    for layer in (p.F_Cu,p.In1_Cu,p.In2_Cu,p.B_Cu):
+        copper.AddLayer(layer)
+    for footprint in board.GetFootprints():
+        if footprint.GetReference().startswith('SW'):
+            for zone in footprint.Zones():
+                zone.SetLayerSet(copper)
+                zone.SetMinThickness(250000)
+                zone.SetThermalReliefGap(500000)
+                zone.SetThermalReliefSpokeWidth(500000)
     before={f.GetReference():(f.GetPosition().x,f.GetPosition().y,f.GetOrientationDegrees())
             for f in board.GetFootprints()}
     removed_tracks=len(list(board.GetTracks()))

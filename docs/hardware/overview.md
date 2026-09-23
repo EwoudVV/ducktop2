@@ -1,6 +1,6 @@
 # hardware
 
-updated 10 september 2026. this describes the intended circuit in the current
+updated 23 september 2026. this describes the intended circuit in the current
 split projects. [current status](../../README.md#build-status) lists where the board
 files or testing still fall short of it.
 
@@ -21,9 +21,18 @@ installed chassis position. the radio and keyboard also have their own frames.
 
 ## compute, display, and storage
 
-the target is a LattePanda Mu N305 with 16 GB RAM and 64 GB eMMC. A1 is its
-socket/interface, with separate mechanical retention. the module is powered
-from regulated `MU_12V`, made by the TPS552892 converter.
+the initial module is a LattePanda Mu Ultra 226V, DFR1294. the carrier,
+power path and cooling must also support the Ultra 256V, DFR1295, so that
+upgrading later does not require another PCB or a different cooling assembly.
+both current modules have 16 GB RAM and no onboard eMMC. NVMe is required
+for the installed OS; recovery uses prepared external media.
+
+the main-board CAD still contains the N305 pin assignment and regulated
+`MU_12V` circuit. the Ultra migration, power-budget review and validation
+of both module variants remain to do. A1's TE socket is shared, but that
+alone does not make the current N305 carrier electrically compatible.
+the [module requirements](../../manufacturing/lattepanda_mu_bios_release.md)
+record the selected parts and upgrade checks.
 
 the AUO B160QAN03.K internal display connects to the Mu's onboard eDP
 connector. those eDP lanes do not run across the custom center PCB or an I/O
@@ -66,7 +75,7 @@ interlock policy. experiments on those pins should not control the EC.
 
 ## input and audio
 
-the keyboard is a 273.5 x 80.0 mm, two-layer, 0.8 mm PCB. its matrix goes
+the RGB keyboard is a 273.5 x 80.0 mm, four-layer, 0.8 mm PCB. its matrix goes
 straight to the EC over an FFC. the firmware scans columns and reads rows;
 the Fn layer and report generation have host tests.
 
@@ -106,7 +115,7 @@ it absent. RF filters, antennas, and coexistence still need measurement.
 | Run a heavy workload | The fan responds to measured temperatures and the system stays within a validated power/thermal envelope. |
 | Experiment with maker GPIO | The RP2350 handles the experiment independently of laptop control. |
 | Remove the radio board | The laptop can still boot, charge, and use its normal input/audio/networking. |
-| Lose the main NVMe install | Boot a prepared recovery environment from eMMC or external recovery media. |
+| Lose the main NVMe install | Boot a prepared recovery environment from external USB media. |
 
 these are the intended behaviors. current implementation and hardware-test
 status live in the [firmware docs](../../firmware/README.md) and
@@ -131,6 +140,6 @@ target measurements and display transport.
 
 the internal display target is 2560x1600 at 120 Hz over direct eDP. the
 panel has achieved that mode on the Intehill controller; the final Mu harness
-has not been validated. the main OS uses NVMe, with eMMC planned for recovery,
-hibernation storage, and offline data. hibernation is a separate explicit
-operation from the agreed lid-close behavior.
+has not been validated. the main OS and any hibernation storage use NVMe.
+the Ultra has no eMMC, so recovery needs prepared external USB media.
+hibernation is a separate explicit operation from the agreed lid-close behavior.
