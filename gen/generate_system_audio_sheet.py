@@ -3,10 +3,7 @@ import genlib
 from build_ducktop2 import FOOTPRINTS, Sheet
 
 
-USB2512B_FOOTPRINT = (
-    "Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_"
-    "EP3.7x3.7mm_ThermalVias"
-)
+USB2513B_FOOTPRINT = "ducktop2:Microchip_SQFN36_6x6_EP3.7"
 PCM2900C_FOOTPRINT = "Package_SO:SSOP-28_5.3x10.2mm_P0.65mm"
 TPA2012D2_FOOTPRINT = (
     "Package_DFN_QFN:WQFN-20-1EP_4x4mm_P0.5mm_"
@@ -24,15 +21,15 @@ FERRITE_FOOTPRINT = "Inductor_SMD:L_0603_1608Metric"
 POLYFUSE_FOOTPRINT = "Fuse:Fuse_1812_4532Metric"
 
 
-def usb2512b_nets():
+def usb2513b_nets():
     return {
         "1": ("SYSTEM_DAC_USB_DN", "local"),
         "2": ("SYSTEM_DAC_USB_DP", "local"),
-        "3": ("RADIO_CODEC_USB_HOST_DN", "hier"),
-        "4": ("RADIO_CODEC_USB_HOST_DP", "hier"),
+        "3": ("TRACKPAD_USB_DN", "hier"),
+        "4": ("TRACKPAD_USB_DP", "hier"),
         "5": ("SYS_3V3", "hier"),
-        "6": ("", "nc"),
-        "7": ("", "nc"),
+        "6": ("RADIO_CODEC_USB_HOST_DN", "hier"),
+        "7": ("RADIO_CODEC_USB_HOST_DP", "hier"),
         "8": ("", "nc"),
         "9": ("", "nc"),
         "10": ("SYS_3V3", "hier"),
@@ -41,10 +38,10 @@ def usb2512b_nets():
         "13": ("HUB_PORT1_OC_N", "local"),
         "14": ("HUB_CRFILT", "local"),
         "15": ("SYS_3V3", "hier"),
-        "16": ("HUB_PORT2_EN", "local"),
-        "17": ("HUB_PORT2_OC_N", "local"),
-        "18": ("", "nc"),
-        "19": ("", "nc"),
+        "16": ("HUB_TRACKPAD_EN", "hier"),
+        "17": ("HUB_TRACKPAD_OC_N", "hier"),
+        "18": ("HUB_PORT3_EN", "local"),
+        "19": ("HUB_PORT3_OC_N", "local"),
         "20": ("", "nc"),
         "21": ("", "nc"),
         "22": ("HUB_NON_REM1", "local"),
@@ -127,14 +124,15 @@ def tpa2012d2_nets():
 
 def build(sheet_symbol_uuid):
     s = Sheet(f"/{sheet_symbol_uuid}")
+    s.paper = "A1"
     # Keep generated power-symbol references globally unique across the
     # hierarchical project.  The Mu carrier already owns the 400 range.
     s.refcounters["#PWR"] = 1500
     s.refcounters["#FLG"] = 1500
 
-    s.text(20, 12.7, "== System audio: embedded two-port USB hub, playback/record codec, microphone, and stereo BTL amplifier ==")
-    s.text(20, 20.32, "Mu USB2_P5 feeds a self-powered USB2512B multi-TT hub. Port 1 is the fixed PCM2900C system codec; port 2 is the optional radio daughterboard.")
-    s.text(20, 27.94, "Port 1 is non-removable. Port 2 is removable and may be empty; TPS2052B provides individual protected VBUS outputs.")
+    s.text(20, 12.7, "== System audio: embedded three-port USB hub, playback/record codec, microphone, and stereo BTL amplifier ==")
+    s.text(20, 20.32, "Mu Ultra USB2_P1 feeds U400: port 1 system codec, port 2 trackpad, port 3 optional radio.")
+    s.text(20, 27.94, "Ports 1/2 are non-removable. Port 3 is removable. U402 protects codec/radio VBUS; U64 protects trackpad VBUS.")
 
     s.text(20, 45.72, "== Protected 5V audio branch and downstream USB power ==")
     s.place(
@@ -169,8 +167,8 @@ def build(sheet_symbol_uuid):
             "1": ("GND", "local"),
             "2": ("AUDIO_5V", "local"),
             "3": ("HUB_PORT1_EN", "local"),
-            "4": ("HUB_PORT2_EN", "local"),
-            "5": ("HUB_PORT2_OC_N", "local"),
+            "4": ("HUB_PORT3_EN", "local"),
+            "5": ("HUB_PORT3_OC_N", "local"),
             "6": ("RADIO_CODEC_USB_VBUS_HOST", "hier"),
             "7": ("SYSTEM_DAC_USB_VBUS", "local"),
             "8": ("HUB_PORT1_OC_N", "local"),
@@ -178,7 +176,7 @@ def build(sheet_symbol_uuid):
         extra_props={
             "Manufacturer": "Texas Instruments",
             "MPN": "TPS2052BDR",
-            "ReferenceCircuit": "USB2512B checklist Figure 5-2 individual port power",
+            "ReferenceCircuit": "USB2513B checklist Figure 5-2 individual port power",
         },
     )
     for ref, value, net, x in [
@@ -206,15 +204,15 @@ def build(sheet_symbol_uuid):
             },
         )
 
-    s.text(20, 93.98, "== U400 USB2512B-AEZG-TR: self-powered, port 1 non-removable, port 2 removable ==")
+    s.text(20, 93.98, "== U400 USB2513BT-I/M2: self-powered, ports 1/2 non-removable, port 3 removable ==")
     s.place(
-        "U400", "USB2512B", "USB2512B-AEZG-TR two-port HS multi-TT hub",
-        300, 160.02, footprint=USB2512B_FOOTPRINT,
-        pin_nets=usb2512b_nets(),
+        "U400", "USB2513B", "USB2513BT-I/M2 three-port HS multi-TT hub",
+        300, 160.02, footprint=USB2513B_FOOTPRINT,
+        pin_nets=usb2513b_nets(),
         extra_props={
             "Manufacturer": "Microchip Technology",
-            "MPN": "USB2512B-AEZG-TR",
-            "Configuration": "CFG_SEL[1:0]=00 self-powered; system-codec port 1 non-removable; radio port 2 removable",
+            "MPN": "USB2513BT-I/M2",
+            "Configuration": "CFG_SEL[1:0]=00 self-powered; codec/trackpad ports 1/2 non-removable; radio port 3 removable",
             "ReferenceCircuit": "Current DS00001692 plus DS00004539A hardware checklist",
         },
     )
@@ -304,14 +302,16 @@ def build(sheet_symbol_uuid):
     )
 
     for ref, value, pin_net, rail_net, rail_kind, x, y in [
-        ("R402", "100k NON_REM1 strap low", "HUB_NON_REM1", "GND", "local", 20, 177.8),
-        ("R403", "10k NON_REM0 strap high", "HUB_NON_REM0", "SYS_3V3", "hier", 150, 177.8),
+        ("R402", "100k NON_REM1 strap high", "HUB_NON_REM1", "SYS_3V3", "hier", 20, 177.8),
+        ("R403", "100k NON_REM0 strap low", "HUB_NON_REM0", "GND", "local", 150, 177.8),
         ("R404", "100k CFG_SEL0 strap low", "HUB_CFG_SEL0", "GND", "local", 280, 177.8),
         ("R405", "100k CFG_SEL1 strap low", "HUB_CFG_SEL1", "GND", "local", 410, 177.8),
     ]:
         s.place(
             ref, "R", value, x, y, footprint=FOOTPRINTS["R"],
             pin_nets={"1": (pin_net, "local"), "2": (rail_net, rail_kind)},
+            extra_props={"Manufacturer": "Yageo", "MPN":
+                         "RC0603FR-0710KL" if value.startswith("10k ") else "RC0603FR-07100KL"},
         )
     s.place(
         "R417", "R", "0R physical internal-host VBUS-valid link", 540, 177.8,
@@ -319,7 +319,7 @@ def build(sheet_symbol_uuid):
         pin_nets={"1": ("INTERNAL_USB_VBUS_VALID", "hier"), "2": ("HUB_VBUS_DET", "local")},
         extra_props={
             "Manufacturer": "Yageo", "MPN": "RC0603JR-070RL",
-            "Function": "USB2512B VBUS_DET follows a supervisor on the physical carrier-generated upstream VBUS",
+            "Function": "USB2513B VBUS_DET follows a supervisor on the physical carrier-generated upstream VBUS",
         },
     )
     s.place(
@@ -328,9 +328,9 @@ def build(sheet_symbol_uuid):
         pin_nets={"1": ("SYS_3V3", "hier"), "2": ("HUB_PORT1_OC_N", "local")},
     )
     s.place(
-        "R409", "R", "10k port 2 OC_N noise-margin pull-up", 650, 190.5,
+        "R409", "R", "10k port 3 OC_N noise-margin pull-up", 650, 190.5,
         footprint=FOOTPRINTS["R"],
-        pin_nets={"1": ("SYS_3V3", "hier"), "2": ("HUB_PORT2_OC_N", "local")},
+        pin_nets={"1": ("SYS_3V3", "hier"), "2": ("HUB_PORT3_OC_N", "local")},
     )
 
     s.text(20, 210.82, "== U410 PCM2900CDBR system USB playback/record codec; TI Figure 38 bus-powered core ==")

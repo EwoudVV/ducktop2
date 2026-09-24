@@ -27,10 +27,14 @@ upgrading later does not require another PCB or a different cooling assembly.
 both current modules have 16 GB RAM and no onboard eMMC. NVMe is required
 for the installed OS; recovery uses prepared external media.
 
-the main-board CAD still contains the N305 pin assignment and regulated
-`MU_12V` circuit. the Ultra migration, power-budget review and validation
-of both module variants remain to do. A1's TE socket is shared, but that
-alone does not make the current N305 carrier electrically compatible.
+the carrier now uses an Ultra-specific A1 symbol and pin map. USB2 P2 feeds
+the left USB hub, P6 serves Bluetooth, and the trackpad shares the internal
+three-port hub with audio. HDMI uses TCP2 and NVMe CLKREQ reaches pin 108.
+pin 136 is left open. the existing socket and compatible routing stay in place.
+
+100 W USB-C input is the new target. the saved charger and `MU_12V` supply
+still need their power redesign, and both module variants need hardware
+validation. this is still an unfinished carrier.
 the [module requirements](../../manufacturing/lattepanda_mu_bios_release.md)
 record the selected parts and upgrade checks.
 

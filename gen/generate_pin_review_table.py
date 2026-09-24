@@ -647,7 +647,7 @@ def load_contracts() -> None:
         add("J16", pin, net, "Three-wire JST-SH case-button harness; power is diode-isolated to charger QON and Mu PWRBTN.", "JST SM03B-SRSS-TB and Ducktop2 case-control contract")
 
     # LattePanda Mu carrier and rails.
-    mu = "Official LattePanda Mu edge pinout, DFLT BIOS mapping, and Ducktop2 allocation"
+    mu = "Official Mu Ultra comparison pinout, SBCLNLCXR120-A DFLT mapping and Ducktop2 allocation"
     for pin in range(250, 261):
         add("A1", pin, "/MU_12V", "Mu VIN is supplied by the regulated 12 V buck-boost stage shared with the released blower.", mu)
     add("D1824", 1, "/Mu Carrier/RTC_BAT", "Diode cathode feeds the Mu RTC backup and hold-up capacitor.", mu)
@@ -750,10 +750,10 @@ def load_contracts() -> None:
         13: "/Mu Carrier/USBC1_SSTX_RAW_P", 15: "/Mu Carrier/USBC1_SSTX_RAW_N",
         16: "/USBC1_SSRX_P", 18: "/USBC1_SSRX_N", 73: "/USBC1_DN", 75: "/USBC1_DP",
         19: "/Mu Carrier/USBC2_SSTX_RAW_P", 21: "/Mu Carrier/USBC2_SSTX_RAW_N",
-        22: "/USBC2_SSRX_P", 24: "/USBC2_SSRX_N", 70: "/USBC2_DP", 72: "/USBC2_DN",
-        129: "/MU_USB_OC_N", 79: "/EC_HOST_USB_DN", 81: "/EC_HOST_USB_DP",
+        22: "/USBC2_SSRX_P", 24: "/USBC2_SSRX_N", 112: "/USBC2_DP", 114: "/USBC2_DN",
+        129: "/PD_PROTECT_FAULT_N", 79: "/EC_HOST_USB_DN", 81: "/EC_HOST_USB_DP",
         109: "/AUDIO_USB_DN", 111: "/AUDIO_USB_DP", 76: "/MAKER_USB_DP", 78: "/MAKER_USB_DN",
-        82: "/TRACKPAD_USB_DP", 84: "/TRACKPAD_USB_DN",
+        82: "/WIFI_USB_DP", 84: "/WIFI_USB_DN", 108: "/Mu Carrier/PCIE_M_CLKREQ_N",
         37: "/Mu Carrier/PCIE_M_L0_TX_RAW_P", 39: "/Mu Carrier/PCIE_M_L0_TX_RAW_N",
         40: "/Mu Carrier/PCIE_M_L0_RX_P", 42: "/Mu Carrier/PCIE_M_L0_RX_N",
         43: "/Mu Carrier/PCIE_M_L1_TX_RAW_P", 45: "/Mu Carrier/PCIE_M_L1_TX_RAW_N",
@@ -780,25 +780,25 @@ def load_contracts() -> None:
     for pin, net in {
         31: "/Mu Carrier/WIFI_PCIE_TX_RAW_P", 33: "/Mu Carrier/WIFI_PCIE_TX_RAW_N",
         34: "/WIFI_PCIE_RX_P", 36: "/WIFI_PCIE_RX_N",
-        67: "/WIFI_USB_DN", 69: "/WIFI_USB_DP",
+        84: "/WIFI_USB_DN", 82: "/WIFI_USB_DP",
         88: "/WIFI_REFCLK_P", 90: "/WIFI_REFCLK_N", 100: "/WIFI_CLKREQ_N",
     }.items():
-        add("A1", pin, net, "HSIO3, REFCLK3, USB2_P1, and CLKREQ3 implement the released M.2 E-key allocation.", mu)
+        add("A1", pin, net, "PCIe lane 4, REFCLK3, USB2_P6 and CLKREQ3 serve Wi-Fi/Bluetooth.", mu)
     add("A1", 103, "/PCIE_WAKE_N", "Shared PCIe wake input is routed to the installed PCIe endpoints.", mu)
     add("A1", 105, "/PLTRST_SRC_N", "Mu platform reset drives the qualified endpoint-reset distribution.", mu)
     for pin, net in {
-        177: "/TCP0_DDC_SDA", 179: "/TCP0_DDC_SCL", 187: "/TCP0_HPD",
-        227: "/TCP0_TXRX1_N", 229: "/TCP0_TXRX1_P",
-        233: "/TCP0_TX1_N", 235: "/TCP0_TX1_P",
-        239: "/TCP0_TXRX0_N", 241: "/TCP0_TXRX0_P",
-        245: "/TCP0_TX0_N", 247: "/TCP0_TX0_P",
+        169: "/TCP2_DDC_SDA", 171: "/TCP2_DDC_SCL", 183: "/TCP2_HPD",
+        197: "/TCP2_TXRX1_N", 199: "/TCP2_TXRX1_P",
+        203: "/TCP2_TX1_N", 205: "/TCP2_TX1_P",
+        209: "/TCP2_TXRX0_N", 211: "/TCP2_TXRX0_P",
+        215: "/TCP2_TX0_N", 217: "/TCP2_TX0_P",
     }.items():
-        add("A1", pin, net, "TCP0 carries the released external HDMI output through the level shifter and protection path.", mu)
+        add("A1", pin, net, "TCP2 carries the Ultra external HDMI output through the level shifter and protection path.", mu)
     add_many(
         "A1",
         [11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, 53, 56,
          59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92, 95, 98, 101, 107,
-         110, 113, 116, 135, 136, 151, 158, 167, 170, 181, 182, 188, 189, 194,
+         110, 113, 116, 135, 151, 158, 167, 170, 181, 182, 188, 189, 194,
          195, 200, 201, 206, 207, 212, 213, 218, 219, 224, 225, 230, 231, 236,
          237, 242, 243, 248, 249, "MP"],
         "GND", "Every Mu ground and mounting contact is bonded to the carrier ground plane.", mu,
@@ -809,12 +809,12 @@ def load_contracts() -> None:
         "Mu FAN1_TAC CPU-fan tachometer input (SIO GP52) receives the fan FG open-collector tach (8.2k MCU_3V3 pull-up) so the module's thermal policy sees the real fan speed.",
         mu)
     add("A1", 7, "/SLS_S3",
-        "Mu SLS_S3 power-status output (SoC GPD5, high while S0 or S3) is observed on the source-manager spare input; R783 defaults the line low when the module is absent.",
+        "Ultra SLP_S4 is high during working state and Modern Standby. The legacy SLS_S3 net goes through R783 to the source manager; it cannot identify S0ix by itself.",
         mu)
     for pin in (25, 27, 28, 30, 85, 87, 91, 93):
-        add_nc("A1", pin, "Unused HSIO2 and REFCLK0/1 resources are intentionally left open under the released BIOS map.", mu)
+        add_nc("A1", pin, "Unused PCIe lane 3 and REFCLK0/1 resources are intentionally left open under the released BIOS map.", mu)
     for pin in (
-        104, 106, 108, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127,
+        104, 106, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127,
         128, 130, 131, 132, 133, 134, 137, 138, 139, 140, 141, 142, 143, 144,
         145, 146, 147, 148, 149, 150, 152, 153, 154, 155, 156, 157, 159, 160,
         161, 162, 163, 164, 165, 166, 168,
@@ -823,13 +823,13 @@ def load_contracts() -> None:
     for pin in (172, 174, 176, 178, 180):
         add_nc("A1", pin, "Intel HDA is unused because Ducktop2 audio is implemented by the isolated USB codec.", mu)
     for pin in (184, 186, 190, 192, 196, 198, 202, 204, 208, 210, 214, 216):
-        add_nc("A1", pin, "Unused MIPI CSI lane is intentionally left open.", mu)
+        add_nc("A1", pin, "Unused CNVi interface is intentionally left open.", mu)
     for pin in (173, 175, 185, 220, 222, 226, 228, 232, 234, 238, 240, 244, 246):
         add_nc("A1", pin, "Unused TCP1 display resource is intentionally left open.", mu)
     for pin in (221, 223):
-        add_nc("A1", pin, "TCP0 AUX is unused by the HDMI-only TCP0 implementation.", mu)
-    for pin in [112, 114, 169, 171, 183, 191, 193, 197, 199, 203, 205, 209, 211, 215, 217]:
-        add_nc("A1", pin, "USB2_P6 is reserved and DDIB is unused because the panel uses onboard eDP.", mu)
+        add_nc("A1", pin, "TCP0 is unused; HDMI uses TCP2.", mu)
+    for pin in [67, 69, 70, 72, 136, 177, 179, 187, 191, 193, 227, 229, 233, 235, 239, 241, 245, 247]:
+        add_nc("A1", pin, "Ultra lane 2, reserved pin 136, TCP0 and TCP2 AUX are unused.", mu)
     add_lm706a0("U6", "BUCK5", "SYS5_PRE_SENSE", "/SYS_5V", "SYS_5V_PG")
     add("L4", 1, "/Mu Carrier/BUCK5_SW", "SYS5 inductor switch-node side.", LM706_SOURCE)
     add("L4", 2, "/Mu Carrier/SYS5_PRE_SENSE", "SYS5 inductor output reaches the current shunts first.", LM706_SOURCE)
@@ -1070,14 +1070,14 @@ def load_contracts() -> None:
     add_nc("J30", 13, "CEC is intentionally not implemented on this source port.", hdmi_src)
     add_nc("J30", 14, "HDMI utility pin not used.", hdmi_src)
     for source, connector, cref, rref, dref in (
-        ("/TCP0_TX0_P", "EXT_HDMI_D2_P", "C150", "R150", "D150"),
-        ("/TCP0_TX0_N", "EXT_HDMI_D2_N", "C151", "R151", "D151"),
-        ("/TCP0_TXRX0_P", "EXT_HDMI_D1_P", "C152", "R152", "D152"),
-        ("/TCP0_TXRX0_N", "EXT_HDMI_D1_N", "C153", "R153", "D153"),
-        ("/TCP0_TX1_P", "EXT_HDMI_D0_P", "C154", "R154", "D154"),
-        ("/TCP0_TX1_N", "EXT_HDMI_D0_N", "C155", "R155", "D155"),
-        ("/TCP0_TXRX1_P", "EXT_HDMI_CK_P", "C156", "R156", "D156"),
-        ("/TCP0_TXRX1_N", "EXT_HDMI_CK_N", "C157", "R157", "D157"),
+        ("/TCP2_TX0_P", "EXT_HDMI_D2_P", "C150", "R150", "D150"),
+        ("/TCP2_TX0_N", "EXT_HDMI_D2_N", "C151", "R151", "D151"),
+        ("/TCP2_TXRX0_P", "EXT_HDMI_D1_P", "C152", "R152", "D152"),
+        ("/TCP2_TXRX0_N", "EXT_HDMI_D1_N", "C153", "R153", "D153"),
+        ("/TCP2_TX1_P", "EXT_HDMI_D0_P", "C154", "R154", "D154"),
+        ("/TCP2_TX1_N", "EXT_HDMI_D0_N", "C155", "R155", "D155"),
+        ("/TCP2_TXRX1_P", "EXT_HDMI_CK_P", "C156", "R156", "D156"),
+        ("/TCP2_TXRX1_N", "EXT_HDMI_CK_N", "C157", "R157", "D157"),
     ):
         connector_net = local("TCP0 External HDMI", connector)
         add(cref, 1, source, "Mu-side HDMI transmitter AC coupling.", "LattePanda Mu HDMI reference")
@@ -1108,7 +1108,7 @@ def load_contracts() -> None:
         add(ref,1,"/SYS_5V","HDMI switch input bypass.","TI TPS22948 datasheet")
         add(ref,2,"GND","Input bypass return.","TI TPS22948 datasheet")
     for pin, net in {
-        1: "GND", 2: local("TCP0 External HDMI", "HDMI_HOST_3V3"), 3: "/TCP0_DDC_SCL", 4: "/TCP0_DDC_SDA",
+        1: "GND", 2: local("TCP0 External HDMI", "HDMI_HOST_3V3"), 3: "/TCP2_DDC_SCL", 4: "/TCP2_DDC_SDA",
         5: local("TCP0 External HDMI", "EXT_HDMI_SDA_CONN"),
         6: local("TCP0 External HDMI", "EXT_HDMI_SCL_CONN"),
         7: local("TCP0 External HDMI", "HDMI_DDC_REF5"),
@@ -1116,7 +1116,7 @@ def load_contracts() -> None:
     }.items():
         add("U51", pin, net, "PCA9306 provides the characterized bidirectional DDC/SCDC level-translation path.", "TI PCA9306 datasheet")
     add_nc("U53", 1, "SN74LVC1G17 DBV pin 1 is NC.", "TI SN74LVC1G17 datasheet")
-    for pin, net in {2: local("TCP0 External HDMI", "EXT_HDMI_HPD_NODE"), 3: "GND", 4: "/TCP0_HPD", 5: local("TCP0 External HDMI", "HDMI_HOST_3V3")}.items():
+    for pin, net in {2: local("TCP0 External HDMI", "EXT_HDMI_HPD_NODE"), 3: "GND", 4: "/TCP2_HPD", 5: local("TCP0 External HDMI", "HDMI_HOST_3V3")}.items():
         add("U53", pin, net, "5.5-V-tolerant Schmitt buffer translates connector HPD to Mu 3.3 V.", "TI SN74LVC1G17 datasheet")
     for ref, source, output, ct, cap, bleed in (
         ("U55", "/SYS_3V3", "HDMI_HOST_3V3", "HDMI_3V3_SWITCH_CT", "C165", "R169"),
@@ -1369,17 +1369,19 @@ def load_contracts() -> None:
         add(ref, 1, local("Radio Audio Codec", gate), "Schottky OR cathode at mute gate.", pcm)
         add(ref, 2, source, "Schottky OR anode at PTT or codec force-mute source.", pcm)
 
-    audio = "Microchip USB2512B, TI PCM2900C, TPS2052B, TPA2012D2, LP5907, TLV9061, and Infineon IM68A130 datasheets plus Ducktop2 system-audio contract"
+    audio = "Microchip USB2513B, TI PCM2900C, TPS2052B, TPA2012D2, LP5907, TLV9061, and Infineon IM68A130 datasheets plus Ducktop2 system-audio contract"
     sa = "System Audio"
     add("F400", 1, "/SYS_5V", "Protected system-audio branch enters from SYS_5V.", audio)
     add("F400", 2, local(sa, "AUDIO_5V"), "Audio branch fuse feeds the local amplifier and downstream-port switch.", audio)
     hub = {
         1: local(sa, "SYSTEM_DAC_USB_DN"), 2: local(sa, "SYSTEM_DAC_USB_DP"),
-        3: "/RADIO_CODEC_USB_HOST_DN", 4: "/RADIO_CODEC_USB_HOST_DP",
+        3: "/TRACKPAD_USB_DN", 4: "/TRACKPAD_USB_DP",
+        6: "/RADIO_CODEC_USB_HOST_DN", 7: "/RADIO_CODEC_USB_HOST_DP",
         5: "/SYS_3V3", 10: "/SYS_3V3", 12: local(sa, "HUB_PORT1_EN"),
         13: local(sa, "HUB_PORT1_OC_N"), 14: local(sa, "HUB_CRFILT"),
-        15: "/SYS_3V3", 16: local(sa, "HUB_PORT2_EN"),
-        17: local(sa, "HUB_PORT2_OC_N"), 22: local(sa, "HUB_NON_REM1"),
+        15: "/SYS_3V3", 16: "/HUB_TRACKPAD_EN",
+        17: "/HUB_TRACKPAD_OC_N",
+        18: local(sa, "HUB_PORT3_EN"), 19: local(sa, "HUB_PORT3_OC_N"), 22: local(sa, "HUB_NON_REM1"),
         23: "/SYS_3V3", 24: local(sa, "HUB_CFG_SEL0"),
         25: local(sa, "HUB_CFG_SEL1"), 26: local(sa, "HUB_RESET_N"),
         27: local(sa, "HUB_VBUS_DET"), 28: local(sa, "HUB_NON_REM0"),
@@ -1389,14 +1391,14 @@ def load_contracts() -> None:
         36: "/SYS_3V3", 37: "GND",
     }
     for pin, net in hub.items():
-        add("U400", pin, net, "USB2512B self-powered two-port internal hub pin contract.", audio)
-    for pin in [6, 7, 8, 9, 11, 18, 19, 20, 21]:
-        add_nc("U400", pin, "USB2512B reserved/test pin intentionally NC.", audio)
+        add("U400", pin, net, "USB2513B self-powered three-port internal hub pin contract.", audio)
+    for pin in [8, 9, 11, 20, 21]:
+        add_nc("U400", pin, "USB2513B reserved/test pin intentionally NC.", audio)
     add("R417", 1, "/INTERNAL_USB_VBUS_VALID", "Audio hub receives the supervised physical upstream-VBUS state.", audio)
     add("R417", 2, local(sa, "HUB_VBUS_DET"), "Audio hub VBUS_DET follows the physical upstream-VBUS state.", audio)
     for pin, net in {
         1: "GND", 2: local(sa, "AUDIO_5V"), 3: local(sa, "HUB_PORT1_EN"),
-        4: local(sa, "HUB_PORT2_EN"), 5: local(sa, "HUB_PORT2_OC_N"),
+        4: local(sa, "HUB_PORT3_EN"), 5: local(sa, "HUB_PORT3_OC_N"),
         6: "/RADIO_CODEC_USB_VBUS_HOST", 7: local(sa, "SYSTEM_DAC_USB_VBUS"),
         8: local(sa, "HUB_PORT1_OC_N"),
     }.items():
@@ -1477,7 +1479,7 @@ def load_contracts() -> None:
     }
     for pin, name in rtl.items():
         expected = name if name.startswith("/") or name == "GND" else local(ge, name)
-        add("U500", pin, expected, "RTL8111H native HSIO6 PCIe Gigabit Ethernet contract.", ethernet)
+        add("U500", pin, expected, "RTL8111H Ultra lane 1 PCIe Gigabit Ethernet contract.", ethernet)
     add_nc("U500", 27, "Unused RTL8111H LED0 pin intentionally NC.", ethernet)
     for ref, names in [
         ("U501", ["ETH_MDI0_P", "ETH_MDI0_N", "ETH_MDI1_P", "ETH_MDI1_N"]),
@@ -2331,7 +2333,7 @@ def write_md(rows, missing_refs) -> None:
         "- Every M.2 M-key contact is contracted, including all 3.3 V/ground contacts and intentionally unused optional sidebands.",
         "- The optional radio daughterboard boundary is contracted so an absent board cannot block normal laptop operation or receive back-power.",
         "- External HDMI, four-pin SSD1306 headers, TCA9548A, keyboard FFC, audio, and maker headers are contracted where the project has a clear decision.",
-        "- PCM2900C playback/record, IM68A130 microphone, privacy-enable path, speaker BTL outputs, RTL8111H HSIO6 PCIe, MDI ESD, and JXD1 integrated-magnetics jack pins are explicitly contracted.",
+        "- PCM2900C playback/record, IM68A130 microphone, privacy-enable path, speaker BTL outputs, RTL8111H lane 1 PCIe, MDI ESD, and JXD1 integrated-magnetics jack pins are explicitly contracted.",
         "- The native Mu eDP connector and panel harness are release-gated in docs/display-direct-edp.md because neither connector is routed through the carrier-board netlist.",
         "- REVIEW is not failure. It is a deliberate flag for independent review.",
         "",

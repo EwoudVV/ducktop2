@@ -44,11 +44,11 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             return (self.x0 + col * self.col_w, self.y0 + row * self.row_h)
 
     # ---------------- A1: LattePanda Mu module ----------------
-    s.text(20, 20, "== A1 LattePanda Mu carrier core ==")
-    mu_nets = default_pin_map("LattePanda_Mu")
+    s.text(20, 20, "== A1 LattePanda Mu Ultra carrier core ==")
+    mu_nets = default_pin_map("LattePanda_Mu_Ultra")
 
     # The Mu and its onboard eDP backlight input use a regulated 12 V rail.
-    # Raw 3S VSYS spans too much voltage to guarantee the module's 15 W mode.
+    # The existing 12 V stage remains here pending the 100 W power-path redesign.
     for pin in [str(n) for n in range(250, 261)]:
         mu_nets[pin] = ("MU_12V", "local")
     mu_nets["115"] = ("RTC_BAT", "local")
@@ -62,9 +62,9 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     mu_nets["10"] = ("MU_SIO_UART_TX", "local")
     mu_nets["12"] = ("MU_SIO_UART_RX", "local")
 
-    # Default BIOS exposes HSIO0 and HSIO1 as two independent USB 3.2 Gen 2
-    # host lanes. Pair them with USB2_P2 and USB2_P4 for the two external
-    # Type-C downstream ports. Mu host TX requires 100 nF series coupling.
+    # Ultra USB3 ports 1/2 retain the existing SuperSpeed links. USB2 P3
+    # serves USBC1; P2 serves the left USB7206C upstream. Verify companion
+    # port behaviour with the selected DFLT BIOS. Host TX needs 100 nF coupling.
     mu_nets.update({
         "13": ("USBC1_SSTX_RAW_P", "local"),
         "15": ("USBC1_SSTX_RAW_N", "local"),
@@ -76,28 +76,26 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         "21": ("USBC2_SSTX_RAW_N", "local"),
         "22": ("USBC2_SSRX_P", "hier"),
         "24": ("USBC2_SSRX_N", "hier"),
-        "70": ("USBC2_DP", "hier"),
-        "72": ("USBC2_DN", "hier"),
+        "112": ("USBC2_DP", "hier"),
+        "114": ("USBC2_DN", "hier"),
         "129": ("PD_PROTECT_FAULT_N", "hier"),
     })
 
-    # Default-BIOS HSIO3 + USB2_P1 feed the M.2 E-key Wi-Fi/Bluetooth module.
+    # PCIe lane 4 and USB2 P6 feed the M.2 E-key Wi-Fi/Bluetooth module.
     mu_nets.update({
         "31": ("WIFI_PCIE_TX_RAW_P", "local"),
         "33": ("WIFI_PCIE_TX_RAW_N", "local"),
         "34": ("WIFI_PCIE_RX_P", "hier"),
         "36": ("WIFI_PCIE_RX_N", "hier"),
-        "67": ("WIFI_USB_DN", "hier"),
-        "69": ("WIFI_USB_DP", "hier"),
+        "84": ("WIFI_USB_DN", "hier"),
+        "82": ("WIFI_USB_DP", "hier"),
         "88": ("WIFI_REFCLK_P", "hier"),
         "90": ("WIFI_REFCLK_N", "hier"),
         "100": ("WIFI_CLKREQ_N", "hier"),
     })
 
-    # Spare native USB2 ports become internal laptop service links.
-    # USB2_P3 hosts the EC USB device; USB2_P4 is paired with native USB-C port 2.
-    # USB2_P5 hosts the internal two-port system-audio hub; USB2_P7 hosts the maker MCU sandbox.
-    # USB2_P8 hosts the internal trackpad so the OS sees a normal USB HID pointing device.
+    # USB2 P4 hosts the EC, P1 the three-port internal hub, and P5 the maker
+    # MCU. The trackpad is downstream of U400, leaving P6 for Bluetooth.
     mu_nets.update({
         "79": ("EC_HOST_USB_DN", "hier"),
         "81": ("EC_HOST_USB_DP", "hier"),
@@ -105,15 +103,14 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         "111": ("AUDIO_USB_DP", "hier"),
         "76": ("MAKER_USB_DP", "hier"),
         "78": ("MAKER_USB_DN", "hier"),
-        "82": ("TRACKPAD_USB_DP", "hier"),
-        "84": ("TRACKPAD_USB_DN", "hier"),
     })
 
     # The panel connects to the Mu module's onboard eDP connector; no display
     # lanes leave the SODIMM edge connector. DDIB therefore remains unused.
 
-    # Default BIOS aggregates HSIO8..11 into one PCIe Gen3 x4 link. REFCLK2 is
-    # the documented default clock for HSIO8. Host TX requires 220 nF coupling.
+    # Ultra lanes 5..8 form the NVMe x4 link with REFCLK2/CLKREQ2.
+    # Host TX still needs 220 nF coupling. The routed channel requires
+    # separate Gen4 qualification or a verified Gen3 BIOS speed cap.
     mu_nets.update({
         "37": ("PCIE_M_L0_TX_RAW_P", "local"),
         "39": ("PCIE_M_L0_TX_RAW_N", "local"),
@@ -133,12 +130,13 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         "60": ("PCIE_M_L3_RX_N", "local"),
         "97": ("PCIE_M_REFCLK_SRC_P", "local"),
         "99": ("PCIE_M_REFCLK_SRC_N", "local"),
+        "108": ("PCIE_M_CLKREQ_N", "local"),
         "103": ("PCIE_WAKE_N", "hier"),
         "105": ("PLTRST_SRC_N", "hier"),
     })
 
-    # Default BIOS exposes HSIO6 as PCIe Gen3 x1. It feeds the onboard
-    # RTL8111H Gigabit Ethernet controller on sheet 16 using REFCLK4/CLKREQ4.
+    # Ultra lane 1 feeds RTL8111H using REFCLK4/CLKREQ4. DFLT groups lanes
+    # 1/2 as x2; verify x1 endpoint training with lane 2 left unused.
     mu_nets.update({
         "61": ("GBE_HOST_TX_P", "hier"),
         "63": ("GBE_HOST_TX_N", "hier"),
@@ -149,32 +147,32 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
         "102": ("GBE_CLKREQ_N", "hier"),
     })
 
-    # TCP0 is the second default-BIOS HDMI 2.0 output; it leaves to sheet 6 for the external HDMI-A jack.
+    # TCP2 is the Ultra DFLT HDMI output; the existing right-board HDMI circuit stays.
     mu_nets.update({
-        "177": ("TCP0_DDC_SDA", "hier"),
-        "179": ("TCP0_DDC_SCL", "hier"),
-        "187": ("TCP0_HPD", "hier"),
-        "227": ("TCP0_TXRX1_N", "hier"),
-        "229": ("TCP0_TXRX1_P", "hier"),
-        "233": ("TCP0_TX1_N", "hier"),
-        "235": ("TCP0_TX1_P", "hier"),
-        "239": ("TCP0_TXRX0_N", "hier"),
-        "241": ("TCP0_TXRX0_P", "hier"),
-        "245": ("TCP0_TX0_N", "hier"),
-        "247": ("TCP0_TX0_P", "hier"),
+        "169": ("TCP2_DDC_SDA", "hier"),
+        "171": ("TCP2_DDC_SCL", "hier"),
+        "183": ("TCP2_HPD", "hier"),
+        "197": ("TCP2_TXRX1_N", "hier"),
+        "199": ("TCP2_TXRX1_P", "hier"),
+        "203": ("TCP2_TX1_N", "hier"),
+        "205": ("TCP2_TX1_P", "hier"),
+        "209": ("TCP2_TXRX0_N", "hier"),
+        "211": ("TCP2_TXRX0_P", "hier"),
+        "215": ("TCP2_TX0_N", "hier"),
+        "217": ("TCP2_TX0_P", "hier"),
     })
 
-    s.place("A1", "LattePanda_Mu", "TE 2309411-1 LattePanda Mu host socket/interface", 160, 180,
+    s.place("A1", "LattePanda_Mu_Ultra", "TE 2309411-1 Mu Ultra host socket/interface", 160, 180,
             footprint=FOOTPRINTS["LattePanda_Mu"], pin_nets=mu_nets,
             extra_props={
                 "Manufacturer": "TE Connectivity", "MPN": "2309411-1",
                 "SocketHeight": "8.0mm standard orientation",
-                "ModuleAssemblyItem": "A2 DFRobot DFR1149",
-                "BIOSProfile": "DFLT S70NC1R200-16G-B.bin; SHA256 6edcfe021d84baf2b6ea3e4f4df4e81442a6be3580905f255221644d0eeb0bed",
+                "ModuleAssemblyItem": "A2 DFRobot DFR1294; upgrade DFR1295",
+                "BIOSProfile": "DFLT SBCLNLCXR120-A.bin; 2026-04-30; binary hash and hardware qualification pending",
             })
     # Phase 5 B9: A2 (the removable Mu module) was a schematic-only
     # documentation symbol; it is not a board part.  See the note below.
-    s.text(270, 180, "A2 = DFR1149 LattePanda Mu N305 16GB/64GB removable module (not a board part)")
+    s.text(270, 180, "A2 = DFR1294 Mu Ultra 226V; DFR1295 256V upgrade; 16GB RAM, NVMe required (not a board part)")
     standoff_props = {
         "Manufacturer": "Wurth Elektronik",
         "MPN": "9774055243R",
@@ -638,12 +636,6 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             pin_nets={"1": ("PCIE_M_REFCLK_SRC_P", "local"), "2": ("PCIE_M_REFCLK_P", "local")})
     s.place("R49", "R", "0R / REFCLK- isolation", 300, 565, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("PCIE_M_REFCLK_SRC_N", "local"), "2": ("PCIE_M_REFCLK_N", "local")})
-    s.place("R50", "R", "1k NVMe CLKREQ# low: request REFCLK", 300, 575, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PCIE_M_CLKREQ_N", "local"), "2": ("GND", "local")},
-            extra_props={
-                "Manufacturer": "Yageo", "MPN": "RC0603FR-071KL",
-                "ClockPolicy": "Requests REFCLK; Mu BIOS/device-presence policy still controls clock availability",
-            })
     m2m = default_pin_map("Bus_M.2_Socket_M", power_3v3_net="NVME_3V3")
     m2m = {pin:((net,"local") if net=="NVME_3V3" else (net,kind)) for pin,(net,kind) in m2m.items()}
     m2m.update({
@@ -706,15 +698,15 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
 
     s.text(20, 330, "NOTES:")
     s.text(20, 338, "Mu VIN and onboard eDP BL_PWR use regulated MU_12V; the exact B160QAN03.K harness/pinout remains a release gate.")
-    s.text(20, 346, "Default-BIOS HSIO0/1 are independent native USB 3.2 Gen2 ports; HSIO3 + USB2_P1 feed M.2 E-key.")
+    s.text(20, 346, "Ultra USB3 ports 1/2 retain their links. PCIe lane 4 and USB2 P6 feed M.2 E-key; verify USB companion pairing on the kit.")
     s.text(20, 354, "The verified B160QAN03.K panel connects to the Mu onboard eDP connector; DDIB is unused.")
-    s.text(20, 362, "TCP0 HDMI 2.0 lane/HPD/DDC nets leave to sheet 6 for the external HDMI-A output.")
+    s.text(20, 362, "TCP2 HDMI lane/HPD/DDC nets leave through the right-board signal cable for the external HDMI-A output.")
     s.text(20, 370, "USB2_P3 is EC; P4 pairs with USB-C 2; P5 is the system-audio hub; P7 is maker MCU; P8 is trackpad.")
     s.text(20, 378, "Native USB-C data/OC nets leave to sheet 4; VBUS switching, CC, muxing, and ESD live there.")
     s.text(20, 386, "SYS_5V uses externally compensated LM706A0 at 4.5A; SYS_3V3 uses TPS56637 with a complete bank below 100uF. source admission remains separate.")
-    s.text(20, 393.7, "M.2 M-key uses default HSIO8-11 x4 and REFCLK2; no lane reversal and no TX/RX direction swap.")
+    s.text(20, 393.7, "M.2 M-key uses Ultra PCIe lanes 5-8 x4, REFCLK2 and CLKREQ2; no lane reversal or TX/RX direction swap.")
     s.text(20, 401.32, "M.2 M-key: Mu TX->PET through 220n near J10; PET/PER naming is from the host perspective.")
-    s.text(20, 408.94, "USB2_P6 is reserved for the Mu Type-C PD controller direction; trackpad consumes the former USB2_P8 spare.")
+    s.text(20, 408.94, "USB2 P6 serves Bluetooth. The trackpad is on internal hub U400 port 2; the EC remains directly on native USB2 P4.")
     s.text(20, 416.56, "MU_12V is a TPS552892EVM-derived 12V stage: 400kHz forced PWM, 3.33A nominal limit, and about 8.65-9.40V worst-case rising UVLO. Firmware requires VSYS >=10.0V.")
     s.text(20, 424.18, "MU_12V_ENABLE is active high and defaults low. Q750/Q751 force EN/UVLO low until EC firmware explicitly releases the rail; MU_12V_PG is pulled up to MCU_3V3.")
     s.text(20, 431.8, "POWER BUDGET HOLD: MU_12V is about 40W maximum for Mu plus eDP backlight. Lock BIOS PL1/PL2 only after measuring panel and whole-module draw; unrestricted 35W CPU mode is not released.")
@@ -937,7 +929,7 @@ def main():
     import generate_ec_mcu_sheet as ec
     import generate_usb_c_io_sheet as usb
     import generate_power_inputs_sheet as pwrin
-    import generate_tcp0_external_hdmi_sheet as tcp0
+    import generate_tcp2_external_hdmi_sheet as tcp0
     import generate_radio_oled_gps_sheet as radio
     import generate_internal_services_sheet as internal
     import generate_radio_daughterboard_interface_sheet as radio_db
@@ -1059,9 +1051,9 @@ def main():
         "USBC1_SSTX_P", "USBC1_SSTX_N", "USBC1_SSRX_P", "USBC1_SSRX_N", "USBC1_DP", "USBC1_DN",
         "USBC2_SSTX_P", "USBC2_SSTX_N", "USBC2_SSRX_P", "USBC2_SSRX_N", "USBC2_DP", "USBC2_DN",
         "PD_PROTECT_FAULT_N",
-        "TCP0_DDC_SDA", "TCP0_DDC_SCL", "TCP0_HPD",
-        "TCP0_TX0_P", "TCP0_TX0_N", "TCP0_TX1_P", "TCP0_TX1_N",
-        "TCP0_TXRX0_P", "TCP0_TXRX0_N", "TCP0_TXRX1_P", "TCP0_TXRX1_N",
+        "TCP2_DDC_SDA", "TCP2_DDC_SCL", "TCP2_HPD",
+        "TCP2_TX0_P", "TCP2_TX0_N", "TCP2_TX1_P", "TCP2_TX1_N",
+        "TCP2_TXRX0_P", "TCP2_TXRX0_N", "TCP2_TXRX1_P", "TCP2_TXRX1_N",
         "WIFI_PCIE_TX_P", "WIFI_PCIE_TX_N", "WIFI_PCIE_RX_P", "WIFI_PCIE_RX_N",
         "WIFI_USB_DN", "WIFI_USB_DP", "WIFI_REFCLK_P", "WIFI_REFCLK_N",
         "WIFI_CLKREQ_N", "PCIE_WAKE_N", "PLTRST_SRC_N",

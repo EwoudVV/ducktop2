@@ -75,7 +75,7 @@ LEAF_CLASSIFIERS: list[tuple[str, re.Pattern]] = [
     # 90-ohm differential (USB 3.x / USB-C SS lanes)
     ("DIFF_90", re.compile(r"^(HUB_(DS[0-9]|UP)_(SSRX|SSTX|TX_RAW)|HUB_DIS[0-9]_(TX|RX)|J(12|22|23)_(RX|TX)[0-9]|J24_SSTX|USBC[12]_SSTX_RAW|USBC[12]_(SSRX|SSTX)|PD[12]_(SSRX_RAW|CTX[12]_RAW|TX[12]))_(N|P)$")),
     # 100-ohm differential (HDMI and Ethernet MDI)
-    ("DIFF_100", re.compile(r"^(TCP0_(TX|TXRX)[01]|EXT_HDMI_(CK|D[0-9])|ETH_MDI[0-9])_(N|P)$")),
+    ("DIFF_100", re.compile(r"^(TCP2_(TX|TXRX)[01]|EXT_HDMI_(CK|D[0-9])|ETH_MDI[0-9])_(N|P)$")),
     # USB 2.0 uses the same approved 90-ohm coupled geometry.
     ("DIFF_90", re.compile(r"^(USBC[12]|HUB_DS[0-9]|HUB_DIS[0-9]|AUDIO_USB|EC_HOST_USB|MAKER_USB|MCU_USB|EC_USB_ISO|TPAD_CONN|MAKER_USB_ISO|CODEC_USB|SYSTEM_DAC_USB|TRACKPAD_USB|WIFI_USB|DFU_CONN|EC_DFU)_(DP|DN)$")),
     ("DIFF_90", re.compile(r"^RADIO_CODEC_USB_(HOST|DB)_(DP|DN)$")),

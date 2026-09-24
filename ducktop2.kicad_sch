@@ -648,7 +648,7 @@
 )
 (sheet
   (at 289.56 39.37)
-  (size 69.85 345.44)
+  (size 69.85 401.32)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 7f3572a2-a529-5ef0-93eb-27f85c0119a9)
@@ -705,76 +705,32 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid a7714b15-79f2-51ba-b131-24e12eed8ae7)
   )
-  (pin "TCP0_DDC_SDA" bidirectional
-    (at 359.41 90.17 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid b8f5eaa3-320b-5430-96a8-49568a74a903)
-  )
-  (pin "TCP0_DDC_SCL" bidirectional
-    (at 359.41 95.25 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 97ba86db-5855-5407-9c71-dd53f75a66d5)
-  )
+
+
   (pin "USBC1_SSRX_N" bidirectional
     (at 359.41 100.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c69a3542-7d19-53a2-843b-4766720f078e)
   )
-  (pin "TCP0_HPD" bidirectional
-    (at 359.41 105.41 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid b0402477-c3ae-5cb2-a32b-e18d7aa30921)
-  )
+
   (pin "USBC2_SSRX_P" bidirectional
     (at 359.41 110.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e3c36eee-0081-5fc5-a03a-f698033583b0)
   )
-  (pin "TCP0_TXRX1_N" bidirectional
-    (at 359.41 115.57 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid a40f5000-a2ac-505c-80fe-122de95aa36c)
-  )
-  (pin "TCP0_TXRX1_P" bidirectional
-    (at 359.41 120.65 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 4991c2bf-e0bd-5a80-9f66-206feddc3a9d)
-  )
-  (pin "TCP0_TX1_N" bidirectional
-    (at 359.41 125.73 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 29102460-b885-53fa-9fa7-0f9209bf0c09)
-  )
-  (pin "TCP0_TX1_P" bidirectional
-    (at 359.41 130.81 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 146d1f2d-d992-56f3-b37e-c5ff0391c285)
-  )
-  (pin "TCP0_TXRX0_N" bidirectional
-    (at 359.41 135.89 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid b1ae3af0-231e-5c5f-928a-f6730cc65a9c)
-  )
+
+
+
+
+
   (pin "USBC2_SSRX_N" bidirectional
     (at 359.41 140.97 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 6dc68d1a-f84c-5b57-acea-11138c1f9f1e)
   )
-  (pin "TCP0_TXRX0_P" bidirectional
-    (at 359.41 146.05 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 0095d623-3c74-5192-a276-6813896a8b99)
-  )
-  (pin "TCP0_TX0_N" bidirectional
-    (at 359.41 151.13 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid a5a24b1b-9776-5425-828e-fcb3e8987dca)
-  )
-  (pin "TCP0_TX0_P" bidirectional
-    (at 359.41 156.21 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 2b7697c0-2fc4-5d94-af24-9c95bdcbc610)
-  )
+
+
+
   (pin "MU_RSTBTN_N" bidirectional
     (at 359.41 161.29 0)
     (effects (font (size 1.27 1.27)) (justify left))
@@ -875,16 +831,8 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b07ffc77-c1ad-5948-8c5f-e36e950f48be)
   )
-  (pin "TRACKPAD_USB_DP" bidirectional
-    (at 359.41 262.89 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 9c5044cc-8d27-55eb-b162-3d3cd8847321)
-  )
-  (pin "TRACKPAD_USB_DN" bidirectional
-    (at 359.41 267.97 0)
-    (effects (font (size 1.27 1.27)) (justify left))
-    (uuid 213dfa48-f876-52a8-989c-2f27ecd0c8b0)
-  )
+
+
   (pin "WIFI_REFCLK_P" bidirectional
     (at 359.41 273.05 0)
     (effects (font (size 1.27 1.27)) (justify left))
@@ -990,6 +938,17 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid ab0d811d-73f0-50e3-8cee-c8993a9fef5d)
   )
+(pin "TCP2_DDC_SCL" bidirectional (at 359.41 379.73 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 552b0327-03ad-5cbd-ac8a-d4506be65980))
+(pin "TCP2_DDC_SDA" bidirectional (at 359.41 384.81 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 18f372b4-e6c8-5dce-a666-770c3da08af1))
+(pin "TCP2_HPD" bidirectional (at 359.41 389.89 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 04036b71-b217-5ac6-adab-92acce6dd507))
+(pin "TCP2_TX0_N" bidirectional (at 359.41 394.97 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid c809d169-045b-5803-997c-ded4396c3ea4))
+(pin "TCP2_TX0_P" bidirectional (at 359.41 400.05 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 81e7db56-9bd8-5264-b31e-5f31ba105c75))
+(pin "TCP2_TX1_N" bidirectional (at 359.41 405.13 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 1a7e09e5-7332-58d2-bd6a-e8ae44eaa305))
+(pin "TCP2_TX1_P" bidirectional (at 359.41 410.21 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 83ed823b-2c0e-51cc-a6bb-d57cb6f3ff3d))
+(pin "TCP2_TXRX0_N" bidirectional (at 359.41 415.29 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 2c235c5c-80ae-5784-bdef-c639988a83e9))
+(pin "TCP2_TXRX0_P" bidirectional (at 359.41 420.37 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 407bf966-f748-59bc-a81c-2b7abb6fc904))
+(pin "TCP2_TXRX1_N" bidirectional (at 359.41 425.45 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid af91826a-2f74-54a3-821d-ef0898f01123))
+(pin "TCP2_TXRX1_P" bidirectional (at 359.41 430.53 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 5b85583e-f346-576e-94ad-9a85efbc0150))
 )
 (sheet
   (at 30.48 379.73)
@@ -1220,6 +1179,9 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 641e740c-2174-5f05-aa14-1bc25061321b)
   )
+(pin "HUB_TRACKPAD_EN" bidirectional (at 405.13 486.41 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid d08d7f8c-44d7-5048-9cd3-317f5b52ef99))
+(pin "HUB_TRACKPAD_OC_N" bidirectional (at 405.13 491.49 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 8da7b9ee-3eb2-525e-9cf4-2eb41ce52124))
+(pin "SYS_3V3" bidirectional (at 405.13 496.57 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid f69903a4-fd59-5aaa-aaa8-5ebda3c4bf22))
 )
 (sheet
   (at 420.37 219.71)
@@ -1568,7 +1530,7 @@
 )
 (sheet
   (at 679.45 330.2)
-  (size 134.62 85.09)
+  (size 134.62 101.6)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 5a262a39-3888-5c6d-ad36-52d5f9c459dd)
@@ -1650,6 +1612,10 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 9bc5d429-56cf-5671-ae79-5b6b891c8f4a)
   )
+(pin "HUB_TRACKPAD_EN" bidirectional (at 814.07 406.4 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 9d919fc5-0540-5127-b5c7-536b29a0e96a))
+(pin "HUB_TRACKPAD_OC_N" bidirectional (at 814.07 411.48 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid ed688869-4908-5bff-ac76-f0a6a8d3cced))
+(pin "TRACKPAD_USB_DN" bidirectional (at 814.07 416.56 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 696dab55-8b74-591c-816a-f7e5a34c09a0))
+(pin "TRACKPAD_USB_DP" bidirectional (at 814.07 421.64 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 02769580-d90b-5983-97f2-d9fee685e256))
 )
 (sheet
   (at 420.37 39.37)
@@ -1995,57 +1961,57 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 898e349f-792f-5b73-93f6-827ac90c0616)
   )
-  (pin "TCP0_DDC_SCL" bidirectional
+  (pin "TCP2_DDC_SCL" bidirectional
     (at 549.91 186.69 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid fd07ced8-143f-50cc-a465-7c0872a24b1d)
   )
-  (pin "TCP0_DDC_SDA" bidirectional
+  (pin "TCP2_DDC_SDA" bidirectional
     (at 549.91 191.77 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 96873b95-1816-581c-9c8c-e72198b9b90d)
   )
-  (pin "TCP0_HPD" bidirectional
+  (pin "TCP2_HPD" bidirectional
     (at 549.91 196.85 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 4f035710-c0ae-515f-893f-259404b8f158)
   )
-  (pin "TCP0_TX0_N" bidirectional
+  (pin "TCP2_TX0_N" bidirectional
     (at 549.91 201.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 13629bb2-89be-51fe-875a-081219ae17c7)
   )
-  (pin "TCP0_TX0_P" bidirectional
+  (pin "TCP2_TX0_P" bidirectional
     (at 549.91 207.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 90fb9b4c-9b8d-579e-8f36-d3fe4fce7fbc)
   )
-  (pin "TCP0_TX1_N" bidirectional
+  (pin "TCP2_TX1_N" bidirectional
     (at 549.91 212.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 555bc838-75df-5188-91c0-38e12af3d0b1)
   )
-  (pin "TCP0_TX1_P" bidirectional
+  (pin "TCP2_TX1_P" bidirectional
     (at 549.91 217.17 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid bf3059b1-7ea9-5fb8-bd12-3c6ab720e985)
   )
-  (pin "TCP0_TXRX0_N" bidirectional
+  (pin "TCP2_TXRX0_N" bidirectional
     (at 549.91 222.25 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 1b23ea03-ac64-5ebc-b53e-211e783f5708)
   )
-  (pin "TCP0_TXRX0_P" bidirectional
+  (pin "TCP2_TXRX0_P" bidirectional
     (at 549.91 227.33 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 8fd9e372-714c-5ad9-85ef-98609ff22032)
   )
-  (pin "TCP0_TXRX1_N" bidirectional
+  (pin "TCP2_TXRX1_N" bidirectional
     (at 549.91 232.41 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e99caf99-26f1-5045-96d9-14e42dbf7871)
   )
-  (pin "TCP0_TXRX1_P" bidirectional
+  (pin "TCP2_TXRX1_P" bidirectional
     (at 549.91 237.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b1700430-a3f1-5cb2-9873-c1be170ca914)
@@ -3331,22 +3297,14 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 3863fd23-f54a-5a1a-8a0d-e17808e77e48)
 )
-(label "TCP0_DDC_SDA"
-  (at 359.41 90.17 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 92ae93ae-f0c5-5dc9-8b76-5de8572cf306)
-)
-(label "TCP0_DDC_SDA"
+
+(label "TCP2_DDC_SDA"
   (at 549.91 191.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e7d1eb75-1b6e-5ff2-a3bb-65459c39f64c)
 )
-(label "TCP0_DDC_SCL"
-  (at 359.41 95.25 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 07eb7dce-69c6-54ec-8dd2-b3bd0fc7f820)
-)
-(label "TCP0_DDC_SCL"
+
+(label "TCP2_DDC_SCL"
   (at 549.91 186.69 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid af06dc13-8697-5511-bfea-1e0a277e04a7)
@@ -3361,12 +3319,8 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d2d3134a-1b9d-5f86-af8d-2becc55c6464)
 )
-(label "TCP0_HPD"
-  (at 359.41 105.41 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 47635ffd-870b-513d-9720-1efef887fc8b)
-)
-(label "TCP0_HPD"
+
+(label "TCP2_HPD"
   (at 549.91 196.85 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 04dc12d4-2c90-526f-b3d9-aaae94be1d8c)
@@ -3381,52 +3335,32 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0e9bd0ef-a463-58d7-9d3e-0ca4fd050bdb)
 )
-(label "TCP0_TXRX1_N"
-  (at 359.41 115.57 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 405ec2ce-f945-5f0e-b187-d6a8993ee232)
-)
-(label "TCP0_TXRX1_N"
+
+(label "TCP2_TXRX1_N"
   (at 549.91 232.41 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d12a0c4e-0b5e-5444-a536-6a262e714602)
 )
-(label "TCP0_TXRX1_P"
-  (at 359.41 120.65 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c46d1630-4a7a-5014-af60-e6a0ab5e5cb7)
-)
-(label "TCP0_TXRX1_P"
+
+(label "TCP2_TXRX1_P"
   (at 549.91 237.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e248692c-21f8-5309-be2e-a0d5383c9ef2)
 )
-(label "TCP0_TX1_N"
-  (at 359.41 125.73 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1359fd4b-0a4d-5a88-9443-f67e5604f874)
-)
-(label "TCP0_TX1_N"
+
+(label "TCP2_TX1_N"
   (at 549.91 212.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 951f394f-9417-55d7-94cc-ab535759da46)
 )
-(label "TCP0_TX1_P"
-  (at 359.41 130.81 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 19241c3b-2a50-51c1-a1d3-44cdb6e0098e)
-)
-(label "TCP0_TX1_P"
+
+(label "TCP2_TX1_P"
   (at 549.91 217.17 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 5d5ea18c-d838-59f8-b494-f114ae6faa7c)
 )
-(label "TCP0_TXRX0_N"
-  (at 359.41 135.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ffd7e593-4c9c-56e1-b715-4d8f30828516)
-)
-(label "TCP0_TXRX0_N"
+
+(label "TCP2_TXRX0_N"
   (at 549.91 222.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 1a4d9e31-aa80-5c7c-b058-334c87b78a9e)
@@ -3441,32 +3375,20 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9d97b329-007a-5c28-90eb-ee36619eb548)
 )
-(label "TCP0_TXRX0_P"
-  (at 359.41 146.05 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 22ea14a0-96be-5171-a924-2d950be0a973)
-)
-(label "TCP0_TXRX0_P"
+
+(label "TCP2_TXRX0_P"
   (at 549.91 227.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 4e793a0e-fde9-50f2-a45c-aea8d2bc2fdb)
 )
-(label "TCP0_TX0_N"
-  (at 359.41 151.13 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6d9ae82e-fdb9-5811-b36d-618d72c6e679)
-)
-(label "TCP0_TX0_N"
+
+(label "TCP2_TX0_N"
   (at 549.91 201.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid af264a1b-1be9-5e34-b23c-db1fcbb41f45)
 )
-(label "TCP0_TX0_P"
-  (at 359.41 156.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ed2ea43c-9de1-5ca5-9a76-4aed2cfa74c4)
-)
-(label "TCP0_TX0_P"
+
+(label "TCP2_TX0_P"
   (at 549.91 207.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6dc5b03b-25f6-55d5-aa06-8b349e4fd1da)
@@ -3631,21 +3553,13 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 28f78f28-25f2-5ef7-8f58-f61c23249ac0)
 )
-(label "TRACKPAD_USB_DP"
-  (at 359.41 262.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1049e236-816d-5628-b861-3567456f62a2)
-)
+
 (label "TRACKPAD_USB_DP"
   (at 405.13 430.53 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d74618ce-bd14-5d28-ac11-fb71ee0d5545)
 )
-(label "TRACKPAD_USB_DN"
-  (at 359.41 267.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 770c9db1-7587-5864-b388-f6d55c734fe5)
-)
+
 (label "TRACKPAD_USB_DN"
   (at 405.13 435.61 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -4033,4 +3947,22 @@
     )
   )
   (embedded_fonts no)
+(label "TCP2_DDC_SCL" (at 359.41 379.73 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 0ca01524-7e5b-5632-a24d-945f6177f5a3))
+(label "TCP2_DDC_SDA" (at 359.41 384.81 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 7b815a77-f08f-5065-99d0-2ce372bb6c1f))
+(label "TCP2_HPD" (at 359.41 389.89 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 27898704-94fd-51c0-9de9-e8737dd574c0))
+(label "TCP2_TX0_N" (at 359.41 394.97 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid e513b8f4-bc32-5602-81cb-f8e8f951a9d5))
+(label "TCP2_TX0_P" (at 359.41 400.05 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid dd641767-6abb-5582-a4c6-d303e0e02ead))
+(label "TCP2_TX1_N" (at 359.41 405.13 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid d5e2f69a-0fb4-57ac-9962-dce91027dcde))
+(label "TCP2_TX1_P" (at 359.41 410.21 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid ecb3f78d-3ec4-571d-9bc3-d8d9786e5087))
+(label "TCP2_TXRX0_N" (at 359.41 415.29 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 556b7979-de04-589b-9110-908b263c4276))
+(label "TCP2_TXRX0_P" (at 359.41 420.37 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 9c3535a1-295f-50f3-994f-37df04fc74a9))
+(label "TCP2_TXRX1_N" (at 359.41 425.45 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 61f6170e-f0a5-537a-b74f-bdbbad53a62c))
+(label "TCP2_TXRX1_P" (at 359.41 430.53 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 29a79922-c49d-5003-a7d6-1d587313bf67))
+(label "HUB_TRACKPAD_EN" (at 814.07 406.4 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid c26fdd93-c128-540b-aaeb-a3d709bfdc22))
+(label "HUB_TRACKPAD_OC_N" (at 814.07 411.48 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 9e5958d8-f0f4-549a-a8b8-89db73c38a2a))
+(label "TRACKPAD_USB_DN" (at 814.07 416.56 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid d48ee535-a670-5047-bb25-1b507d8403c6))
+(label "TRACKPAD_USB_DP" (at 814.07 421.64 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 3773a91e-f50c-5b4b-82f9-24aafb19e0fb))
+(label "HUB_TRACKPAD_EN" (at 405.13 486.41 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 697e8333-cba6-56ed-ae7b-06dc86248448))
+(label "HUB_TRACKPAD_OC_N" (at 405.13 491.49 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 9410feae-891d-5939-8672-b05a791c55ae))
+(label "SYS_3V3" (at 405.13 496.57 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 87806428-eab2-5dc2-a3a4-030cfb3fbc67))
 )

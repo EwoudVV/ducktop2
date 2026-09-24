@@ -22,9 +22,10 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 23 september 2026. the compute target is now Mu Ultra: start with
-the 226V and design the power, cooling and carrier for the 256V too. the
-saved main-board circuits still need the N305-to-Ultra changes. the
+updated 24 september 2026. the carrier interface is being switched to Mu
+Ultra: 226V first, with a later 256V upgrade. the new pin map moves HDMI to
+TCP2, reallocates USB and gives NVMe a real clock-request connection. the
+100 W USB-C power path, cooling and firmware qualification still need work. the
 [module requirements](manufacturing/lattepanda_mu_bios_release.md) separate
 that target from the current CAD and the remaining hardware checks.
 

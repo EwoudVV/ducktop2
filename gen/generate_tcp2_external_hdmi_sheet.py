@@ -1,16 +1,16 @@
 from build_ducktop2 import Sheet, FOOTPRINTS
 
 
-# LattePanda Mu TCP0 default-HDMI lane assignment from the Mu carrier reference.
+# LattePanda Mu Ultra TCP2 default-HDMI lane assignment from the Mu carrier reference.
 HDMI_LINES = [
-    ("TCP0_TX0_P", "EXT_HDMI_D2_P"),
-    ("TCP0_TX0_N", "EXT_HDMI_D2_N"),
-    ("TCP0_TXRX0_P", "EXT_HDMI_D1_P"),
-    ("TCP0_TXRX0_N", "EXT_HDMI_D1_N"),
-    ("TCP0_TX1_P", "EXT_HDMI_D0_P"),
-    ("TCP0_TX1_N", "EXT_HDMI_D0_N"),
-    ("TCP0_TXRX1_P", "EXT_HDMI_CK_P"),
-    ("TCP0_TXRX1_N", "EXT_HDMI_CK_N"),
+    ("TCP2_TX0_P", "EXT_HDMI_D2_P"),
+    ("TCP2_TX0_N", "EXT_HDMI_D2_N"),
+    ("TCP2_TXRX0_P", "EXT_HDMI_D1_P"),
+    ("TCP2_TXRX0_N", "EXT_HDMI_D1_N"),
+    ("TCP2_TX1_P", "EXT_HDMI_D0_P"),
+    ("TCP2_TX1_N", "EXT_HDMI_D0_N"),
+    ("TCP2_TXRX1_P", "EXT_HDMI_CK_P"),
+    ("TCP2_TXRX1_N", "EXT_HDMI_CK_N"),
 ]
 
 
@@ -56,13 +56,13 @@ def build(sheet_symbol_uuid):
     s.refcounters["#PWR"] = 80
     s.refcounters["#FLG"] = 80
 
-    s.text(20, 12.7, "== TCP0 external HDMI 2.0 output ==")
-    s.text(20, 20.32, "LattePanda Mu default BIOS maps TCP0 as HDMI 2.0; the internal panel uses the Mu module's onboard eDP connector.")
+    s.text(20, 12.7, "== TCP2 external HDMI 2.0 output ==")
+    s.text(20, 20.32, "LattePanda Mu Ultra default BIOS maps TCP2 as HDMI 2.0; the internal panel uses the Mu module's onboard eDP connector.")
     s.text(20, 27.94, "Lane map, AC coupling, bias gating, DDC/HPD translation, and 5V isolation follow the Mu reference.")
 
     s.text(20, 50.8, "== J30 external HDMI-A connector ==")
     s.place(
-        "J30", "HDMI_A", "External HDMI-A from TCP0", 115, 125,
+        "J30", "HDMI_A", "External HDMI-A from TCP2", 115, 125,
         footprint=FOOTPRINTS["HDMI_A"], pin_nets=hdmi_connector_nets(),
         extra_props={"Manufacturer": "Molex", "MPN": "208658-1001"},
     )
@@ -174,15 +174,15 @@ def build(sheet_symbol_uuid):
         footprint=FOOTPRINTS["PCA9306DCTR"],
         pin_nets={
             "1": ("GND", "local"), "2": ("HDMI_HOST_3V3", "local"),
-            "3": ("TCP0_DDC_SCL", "hier"), "4": ("TCP0_DDC_SDA", "hier"),
+            "3": ("TCP2_DDC_SCL", "hier"), "4": ("TCP2_DDC_SDA", "hier"),
             "5": ("EXT_HDMI_SDA_CONN", "local"), "6": ("EXT_HDMI_SCL_CONN", "local"),
             "7": ("HDMI_DDC_REF5", "local"), "8": ("HDMI_DDC_REF5", "local"),
         },
         extra_props={"Manufacturer": "Texas Instruments", "MPN": "PCA9306DCTR"},
     )
     for ref, rail, net, y in [
-        ("R158", "HDMI_HOST_3V3", "TCP0_DDC_SCL", 96.52),
-        ("R159", "HDMI_HOST_3V3", "TCP0_DDC_SDA", 109.22),
+        ("R158", "HDMI_HOST_3V3", "TCP2_DDC_SCL", 96.52),
+        ("R159", "HDMI_HOST_3V3", "TCP2_DDC_SDA", 109.22),
         ("R160", "EXT_HDMI_5V", "EXT_HDMI_SCL_CONN", 121.92),
         ("R161", "EXT_HDMI_5V", "EXT_HDMI_SDA_CONN", 134.62),
     ]:
@@ -191,7 +191,7 @@ def build(sheet_symbol_uuid):
             ref, "R", value, 575, y,
             footprint=FOOTPRINTS["R_0402"],
             pin_nets={"1": (rail, "local"),
-                      "2": (net, "hier" if net.startswith("TCP0_") else "local")},
+                      "2": (net, "hier" if net.startswith("TCP2_") else "local")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0402FR-072K2L" if rail == "HDMI_HOST_3V3" else "RC0402FR-071K8L"},
         )
     s.place("R162", "R", "200k PCA9306 VREF2/EN bias", 650, 96.52,
@@ -208,7 +208,7 @@ def build(sheet_symbol_uuid):
         "U53", "74LVC1G17", "SN74LVC1G17DBVR HDMI HPD buffer", 500, 157.48,
         footprint=FOOTPRINTS["SN74LVC1G17DBV"],
         pin_nets={"1": ("", "nc"), "2": ("EXT_HDMI_HPD_NODE", "local"),
-                  "3": ("GND", "local"), "4": ("TCP0_HPD", "hier"),
+                  "3": ("GND", "local"), "4": ("TCP2_HPD", "hier"),
                   "5": ("HDMI_HOST_3V3", "local")},
         extra_props={"Manufacturer": "Texas Instruments", "MPN": "SN74LVC1G17DBVR"},
     )

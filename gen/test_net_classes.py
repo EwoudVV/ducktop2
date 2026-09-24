@@ -25,10 +25,10 @@ class NetClasses(unittest.TestCase):
     def test_clock_controls_are_separate_from_clock_pairs(self):
         nets = {"/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_P",
                 "/Wi-Fi{slash}Bluetooth & OLEDs/WIFI_REFCLK_E_N",
-                "/Mu Carrier/PCIE_M_CLKREQ_N", "/TCP0_TXRX0_P", "/TCP0_TXRX0_N"}
+                "/Mu Carrier/PCIE_M_CLKREQ_N", "/TCP2_TXRX0_P", "/TCP2_TXRX0_N"}
         assigned, _ = classes.classify(nets)
         self.assertEqual(len(assigned["DIFF_85"]), 2)
-        self.assertEqual(set(assigned["DIFF_100"]), {"/TCP0_TXRX0_P", "/TCP0_TXRX0_N"})
+        self.assertEqual(set(assigned["DIFF_100"]), {"/TCP2_TXRX0_P", "/TCP2_TXRX0_N"})
         self.assertFalse(any("/Mu Carrier/PCIE_M_CLKREQ_N" in values for values in assigned.values()))
 
     def test_ethernet_pcie_and_mdi_use_their_own_impedance(self):

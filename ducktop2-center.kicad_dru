@@ -364,20 +364,20 @@
 
 (rule "center pcie tcp0_txrx0 fpc103 lands to staggered vias"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/TCP0_TXRX0') && A.intersectsArea('center pcie tcp0_txrx0 fpc103 lands to staggered vias')")
+    (condition "A.inDiffPair('/TCP2_TXRX0') && A.intersectsArea('center pcie tcp0_txrx0 fpc103 lands to staggered vias')")
     (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.4480mm)))
 
 (rule "center pcie tcp0_tx0 fpc103 lands to staggered vias"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/TCP0_TX0') && A.intersectsArea('center pcie tcp0_tx0 fpc103 lands to staggered vias')")
+    (condition "A.inDiffPair('/TCP2_TX0') && A.intersectsArea('center pcie tcp0_tx0 fpc103 lands to staggered vias')")
     (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.5980mm)))
 
 (rule "center pcie tcp0_tx1 fpc103 lands to staggered vias"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/TCP0_TX1') && A.intersectsArea('center pcie tcp0_tx1 fpc103 lands to staggered vias')")
+    (condition "A.inDiffPair('/TCP2_TX1') && A.intersectsArea('center pcie tcp0_tx1 fpc103 lands to staggered vias')")
     (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.6119mm)))
 
 (rule "center pcie tcp0_txrx1 fpc103 lands to staggered vias"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/TCP0_TXRX1') && A.intersectsArea('center pcie tcp0_txrx1 fpc103 lands to staggered vias')")
+    (condition "A.inDiffPair('/TCP2_TXRX1') && A.intersectsArea('center pcie tcp0_txrx1 fpc103 lands to staggered vias')")
     (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.6520mm)))

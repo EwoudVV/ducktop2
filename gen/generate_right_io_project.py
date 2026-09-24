@@ -5,7 +5,7 @@ Right board carries: J11/J12 (USB2-only), PD2 chain (U42, U2010-15),
 HDMI (J30 + U50/U51), GbE (J500 + U501/U500). FPC-2 (~83 signals)
 connects it to the center board.
 
-Reuses the existing sheet builders: generate_tcp0_external_hdmi_sheet
+Reuses the existing sheet builders: generate_tcp2_external_hdmi_sheet
 (HDMI), generate_ethernet_sheet (GbE), and the PD2 dual-role builder
 (add_dual_role_port usb2_only=True for J11).
 
@@ -18,7 +18,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-import generate_tcp0_external_hdmi_sheet as hdmi
+import generate_tcp2_external_hdmi_sheet as hdmi
 import generate_ethernet_sheet as eth
 import generate_power_inputs_sheet as pwrin
 import generate_usb_c_io_sheet as usb

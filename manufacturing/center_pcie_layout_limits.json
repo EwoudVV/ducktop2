@@ -2377,7 +2377,7 @@
       "outside_uncoupled_rounding_length_mm": 1e-06,
       "pairs": [
         {
-          "stem": "/TCP0_TX0",
+          "stem": "/TCP2_TX0",
           "widths_by_layer": {
             "F.Cu": [
               0.1521
@@ -2385,7 +2385,7 @@
           }
         },
         {
-          "stem": "/TCP0_TX1",
+          "stem": "/TCP2_TX1",
           "widths_by_layer": {
             "F.Cu": [
               0.1521
@@ -2393,7 +2393,7 @@
           }
         },
         {
-          "stem": "/TCP0_TXRX0",
+          "stem": "/TCP2_TXRX0",
           "widths_by_layer": {
             "F.Cu": [
               0.1521
@@ -2401,7 +2401,7 @@
           }
         },
         {
-          "stem": "/TCP0_TXRX1",
+          "stem": "/TCP2_TXRX1",
           "widths_by_layer": {
             "F.Cu": [
               0.1521
@@ -2411,9 +2411,9 @@
       ],
       "regions": [
         {
-          "name": "TCP0_TX0 A1 pad lands",
+          "name": "TCP2_TX0 A1 pad lands",
           "category": "pad_fanout",
-          "stem": "/TCP0_TX0",
+          "stem": "/TCP2_TX0",
           "layer": "F.Cu",
           "bounds_mm": [
             207.695001,
@@ -2432,9 +2432,9 @@
           "max_nearest_gap_mm": 0.356
         },
         {
-          "name": "TCP0_TX0 A1 via flare",
+          "name": "TCP2_TX0 A1 via flare",
           "category": "via_fanout",
-          "stem": "/TCP0_TX0",
+          "stem": "/TCP2_TX0",
           "layer": "F.Cu",
           "bounds_mm": [
             209.09805,
@@ -2453,9 +2453,9 @@
           "max_nearest_gap_mm": 0.632
         },
         {
-          "name": "TCP0_TX0 FPC103 lands to staggered vias",
+          "name": "TCP2_TX0 FPC103 lands to staggered vias",
           "category": "connector_via_fanout",
-          "stem": "/TCP0_TX0",
+          "stem": "/TCP2_TX0",
           "layer": "F.Cu",
           "bounds_mm": [
             319.89207,
@@ -2474,9 +2474,9 @@
           "max_nearest_gap_mm": 0.664
         },
         {
-          "name": "TCP0_TX1 A1 pad lands",
+          "name": "TCP2_TX1 A1 pad lands",
           "category": "pad_fanout",
-          "stem": "/TCP0_TX1",
+          "stem": "/TCP2_TX1",
           "layer": "F.Cu",
           "bounds_mm": [
             207.745001,
@@ -2495,9 +2495,9 @@
           "max_nearest_gap_mm": 0.356
         },
         {
-          "name": "TCP0_TX1 A1 via flare",
+          "name": "TCP2_TX1 A1 via flare",
           "category": "via_fanout",
-          "stem": "/TCP0_TX1",
+          "stem": "/TCP2_TX1",
           "layer": "F.Cu",
           "bounds_mm": [
             209.14805,
@@ -2516,9 +2516,9 @@
           "max_nearest_gap_mm": 0.632
         },
         {
-          "name": "TCP0_TX1 FPC103 lands to staggered vias",
+          "name": "TCP2_TX1 FPC103 lands to staggered vias",
           "category": "connector_via_fanout",
-          "stem": "/TCP0_TX1",
+          "stem": "/TCP2_TX1",
           "layer": "F.Cu",
           "bounds_mm": [
             319.89207,
@@ -2537,9 +2537,9 @@
           "max_nearest_gap_mm": 0.65
         },
         {
-          "name": "TCP0_TXRX0 A1 pad lands",
+          "name": "TCP2_TXRX0 A1 pad lands",
           "category": "pad_fanout",
-          "stem": "/TCP0_TXRX0",
+          "stem": "/TCP2_TXRX0",
           "layer": "F.Cu",
           "bounds_mm": [
             207.695001,
@@ -2558,9 +2558,9 @@
           "max_nearest_gap_mm": 0.356
         },
         {
-          "name": "TCP0_TXRX0 A1 via flare",
+          "name": "TCP2_TXRX0 A1 via flare",
           "category": "via_fanout",
-          "stem": "/TCP0_TXRX0",
+          "stem": "/TCP2_TXRX0",
           "layer": "F.Cu",
           "bounds_mm": [
             209.09805,
@@ -2579,9 +2579,9 @@
           "max_nearest_gap_mm": 0.632
         },
         {
-          "name": "TCP0_TXRX0 FPC103 lands to staggered vias",
+          "name": "TCP2_TXRX0 FPC103 lands to staggered vias",
           "category": "connector_via_fanout",
-          "stem": "/TCP0_TXRX0",
+          "stem": "/TCP2_TXRX0",
           "layer": "F.Cu",
           "bounds_mm": [
             319.89207,
@@ -2600,9 +2600,9 @@
           "max_nearest_gap_mm": 0.699
         },
         {
-          "name": "TCP0_TXRX1 A1 pad lands",
+          "name": "TCP2_TXRX1 A1 pad lands",
           "category": "pad_fanout",
-          "stem": "/TCP0_TXRX1",
+          "stem": "/TCP2_TXRX1",
           "layer": "F.Cu",
           "bounds_mm": [
             207.745001,
@@ -2621,9 +2621,9 @@
           "max_nearest_gap_mm": 0.356
         },
         {
-          "name": "TCP0_TXRX1 A1 via flare",
+          "name": "TCP2_TXRX1 A1 via flare",
           "category": "via_fanout",
-          "stem": "/TCP0_TXRX1",
+          "stem": "/TCP2_TXRX1",
           "layer": "F.Cu",
           "bounds_mm": [
             209.14805,
@@ -2642,9 +2642,9 @@
           "max_nearest_gap_mm": 0.632
         },
         {
-          "name": "TCP0_TXRX1 FPC103 lands to staggered vias",
+          "name": "TCP2_TXRX1 FPC103 lands to staggered vias",
           "category": "connector_via_fanout",
-          "stem": "/TCP0_TXRX1",
+          "stem": "/TCP2_TXRX1",
           "layer": "F.Cu",
           "bounds_mm": [
             319.89207,

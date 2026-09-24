@@ -82,7 +82,7 @@ for pin, name in (
     ("16", "HSIO0_RX+"), ("18", "HSIO0_RX-"),
     ("22", "HSIO1_RX+"), ("24", "HSIO1_RX-"),
     ("64", "HSIO6_RX+"), ("66", "HSIO6_RX-"),
-    ("102", "~{CLKREQ4}"), ("187", "TCP0_HPD"),
+    ("102", "~{CLKREQ4}"), ("187", "TCP2_HPD"),
 ):
     ALLOWED_ERC_WARNINGS[(
         "error", "pin_not_driven",
@@ -108,9 +108,9 @@ _FPC_BOUNDARY_LABELS = [
     "PD1_PATH_EN", "PD1_TCPC_IRQ_N", "PD1_VALID_N", "PD1_VBUS_RAW",
     "PD2_EFUSE_FAULT_N", "PD2_I2C_SCL", "PD2_I2C_SDA", "PD2_PATH_EN",
     "PD2_TCPC_IRQ_N", "PD2_VALID_N", "PD2_VBUS_RAW",
-    "TCP0_DDC_SCL", "TCP0_DDC_SDA", "TCP0_HPD",
-    "TCP0_TX0_N", "TCP0_TX0_P", "TCP0_TX1_N", "TCP0_TX1_P",
-    "TCP0_TXRX0_N", "TCP0_TXRX0_P", "TCP0_TXRX1_N", "TCP0_TXRX1_P",
+    "TCP2_DDC_SCL", "TCP2_DDC_SDA", "TCP2_HPD",
+    "TCP2_TX0_N", "TCP2_TX0_P", "TCP2_TX1_N", "TCP2_TX1_P",
+    "TCP2_TXRX0_N", "TCP2_TXRX0_P", "TCP2_TXRX1_N", "TCP2_TXRX1_P",
     "USBC1_DN", "USBC1_DP", "USBC1_SSRX_N", "USBC1_SSRX_P",
     "USBC1_SSTX_N", "USBC1_SSTX_P",
     "USBC2_DN", "USBC2_DP", "USBC2_SSRX_N", "USBC2_SSRX_P",

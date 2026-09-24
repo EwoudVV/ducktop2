@@ -7,6 +7,23 @@ unconnected items, zero physical DRC errors and no schematic mismatch.
 return-path checks. the cell and assembled-hardware tests below still apply.
 [current board status](../../README.md#build-status)
 
+## Mu Ultra power target
+
+the new input target is 100 W over USB-C, at 20 V / 5 A. that needs a new
+charger and a complete check of the input switches, looms, protection and
+12 V supply. the saved PD profiles and charger limits are still the older
+60 W design. do not increase those limits on the current hardware.
+
+the BMS stays unchanged during the interface migration. RS10 is 11 mOhm,
+so its pack breaker is about 4.55 A nominal and can trip around 3.60 A at
+the low threshold/high resistance corner. the 8 A copper check does not
+set the battery's allowed current. the cells still need their own tests.
+
+battery mode needs a lower combined load budget. unplugging at full adapter
+load also needs a checked fast response, since a software power-limit update
+may arrive after the pack breaker trips. charging, external USB loads and
+processor limits have to share the available input power.
+
 ## cells and responsibilities
 
 i have three AKZYTUE packs and have tested them in series with both cell

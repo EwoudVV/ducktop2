@@ -3,7 +3,7 @@
   (generator "eeschema")
   (generator_version "10.0")
   (uuid eff338ed-5134-5a48-be94-cee1046e93fe)
-  (paper "A2")
+  (paper "A1")
   (lib_symbols
 (symbol "Conn_01x02_MP:Conn_01x02_MP"
     (pin_names (offset 1.016) hide)
@@ -3541,11 +3541,226 @@
 		)
 		(embedded_fonts no)
 	)
-  )
-(text "== Internal laptop services: EC USB, trackpad, fan, lid, thermal ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 6e9de324-4803-5197-a554-1feb6ff9bca9))
-(text "This sheet turns spare Mu USB2 ports and EC GPIO into internal laptop plumbing." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid 36148e92-219d-5040-9c1a-55aad0d34f3b))
-(text "The internal display uses the Mu onboard eDP connector and needs no motherboard USB path." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid 7dcfafaa-1762-5701-b092-8c4c7399a65b))
-(text "== EC USB device link to host Mu USB2_P3 ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 4c6b986a-7bfd-5ea9-9cb8-bf374f565f36))
+  (symbol "74xGxx:74LVC1G08"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at -5.08 7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC1G08"
+			(at 7.62 -7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Single AND Gate, Low-Voltage CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "Single Gate AND LVC CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23* Texas?R-PDSO-G5?DCK* Texas?R-PDSO-N5?DRL* Texas?X2SON*0.8x0.8mm*P0.48mm*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "74LVC1G08_0_1"
+			(arc
+				(start 0 5.08)
+				(mid 5.0579 0)
+				(end 0 -5.08)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 -5.08) (xy -7.62 -5.08) (xy -7.62 5.08) (xy 0 5.08)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "74LVC1G08_1_1"
+			(pin input line
+				(at -15.24 2.54 0)
+				(length 7.62)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -15.24 -2.54 0)
+				(length 7.62)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 -10.16 90)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 12.7 0 180)
+				(length 7.62)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 10.16 270)
+				(length 5.08)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "BMS_Thermal:SN74LVC1G07DCK" (exclude_from_sim no) (in_bom yes) (on_board yes)
+(property "Reference" "U" (at 0 7.62 0) (effects (font (size 1.27 1.27))))
+(property "Value" "SN74LVC1G07DCK" (at 0 -7.62 0) (effects (font (size 1.27 1.27))))
+(property "Footprint" "Package_TO_SOT_SMD:SOT-353_SC-70-5" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+(property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc1g07.pdf" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+(symbol "SN74LVC1G07DCK_0_1" (rectangle (start -7.62 5.08) (end 7.62 -5.08) (stroke (width 0.254) (type default)) (fill (type background))))
+(symbol "SN74LVC1G07DCK_1_1"
+(pin no_connect line (at -10.16 2.54 0) (length 2.54) (name "NC" (effects (font (size 1 1)))) (number "1" (effects (font (size 1 1)))))
+(pin input line (at -10.16 0.00 0) (length 2.54) (name "A" (effects (font (size 1 1)))) (number "2" (effects (font (size 1 1)))))
+(pin power_in line (at -10.16 -2.54 0) (length 2.54) (name "GND" (effects (font (size 1 1)))) (number "3" (effects (font (size 1 1)))))
+(pin open_collector line (at 10.16 2.54 180) (length 2.54) (name "Y" (effects (font (size 1 1)))) (number "4" (effects (font (size 1 1)))))
+(pin power_in line (at 10.16 0.00 180) (length 2.54) (name "VCC" (effects (font (size 1 1)))) (number "5" (effects (font (size 1 1)))))
+)
+)
+)
+(text "== Internal laptop services: EC USB, trackpad, fan, lid, thermal ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 6e9de324-4803-5197-a554-1feb6ff9bca9))
+(text "This sheet turns spare Mu USB2 ports and EC GPIO into internal laptop plumbing." (at 20.32 20.32 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 36148e92-219d-5040-9c1a-55aad0d34f3b))
+(text "The internal display uses the Mu onboard eDP connector and needs no motherboard USB path." (at 20.32 27.94 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 7dcfafaa-1762-5701-b092-8c4c7399a65b))
+(text "== EC USB device link to host Mu USB2_P3 ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 4c6b986a-7bfd-5ea9-9cb8-bf374f565f36))
 (symbol
   (lib_id "Device:R")
   (at 20.32 76.2 0)
@@ -3980,8 +4195,8 @@
   (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 402c6c32-5d43-530b-99a3-099380f70a6c)
 )
-(text "== Rear USB-C EC firmware programming port (DFU) ==" (at 20.32 190.5 0) (effects (font (size 1.27 1.27))) (uuid 16812451-47cf-520a-90b1-597b5eed4aac))
-(text "BOOT0 (EC_DFU_SEL) high at EC reset selects this port and forces the USB mux on." (at 20.32 196.85 0) (effects (font (size 1.27 1.27))) (uuid 846f1365-93fc-5f60-a6c2-fa04120732b4))
+(text "== Rear USB-C EC firmware programming port (DFU) ==" (at 20.32 190.5 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 16812451-47cf-520a-90b1-597b5eed4aac))
+(text "BOOT0 (EC_DFU_SEL) high at EC reset selects this port and forces the USB mux on." (at 20.32 196.85 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 846f1365-93fc-5f60-a6c2-fa04120732b4))
 (symbol
   (lib_id "Device:R")
   (at 39.37 209.55 0)
@@ -4356,7 +4571,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid f241f7fd-fdb8-5083-99b7-54c14b434c15)
 )
-(text "== Required internal trackpad on Mu USB2_P8 ==" (at 20.32 234.95 0) (effects (font (size 1.27 1.27))) (uuid 8f6ba39a-97cc-5c74-b87b-83bd69206b59))
+(text "== Internal trackpad on U400 port 2 ==" (at 20.32 234.95 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 8f6ba39a-97cc-5c74-b87b-83bd69206b59))
 (symbol
   (lib_id "Device:R")
   (at 20.32 259.08 0)
@@ -4486,70 +4701,13 @@
 (no_connect (at 123.19 257.81) (uuid 8c5490af-5cff-53b8-a405-c9e982274e9f))
 (no_connect (at 97.79 273.05) (uuid 2296da88-8a61-5429-83c4-3027668f4b04))
 (no_connect (at 97.79 257.81) (uuid b3b0ae93-0b7c-536a-b507-ccd07e53baa8))
-(symbol
-  (lib_id "TPS2553D:TPS2553D")
-  (at 469.9 322.58 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid ffccea97-9f33-5046-b8ee-f5323877df7c)
-  (property "Reference" "U64" (at 469.9 308.61 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPS2553DDBVR trackpad 0.61A branch switch" (at 469.9 336.55 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Texas Instruments" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "TPS2553DDBVR" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2553.pdf" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 5b1e6313-7275-5689-a1d5-1a42f412729b))
-  (pin "2" (uuid ed09bbc3-164e-5f5e-87b3-c63d0f8625b8))
-  (pin "3" (uuid baf3fabb-3f3a-5aac-a9a1-3c7bd0f45051))
-  (pin "4" (uuid 5fb22507-73fe-5987-a2af-aeee486d8e15))
-  (pin "5" (uuid a363fc95-197a-5567-a5d4-40bdf406975c))
-  (pin "6" (uuid a83bd2c6-5af2-51e3-a040-a68a70b4c486))
-  (instances
-    (project "ducktop2"
-      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
-        (reference "U64")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "SYS_5V"
-  (shape bidirectional)
-  (at 462.28 318.77 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid a63dd52d-64af-51af-85a4-4e13d05de757)
-)
-(label "GND"
-  (at 469.9 330.2 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 035d8752-6c65-56a9-ae11-5b8426a89f5c)
-)
-(hierarchical_label "MU_HOST_ACTIVE"
-  (shape bidirectional)
-  (at 462.28 321.31 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid fe15f8c9-4358-5039-b8f8-4bbc1f0c8aee)
-)
-(hierarchical_label "TRACKPAD_FAULT_N"
-  (shape bidirectional)
-  (at 477.52 323.85 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid aa11a995-32c6-555b-839b-ffb6422f14fa)
-)
-(label "TPAD_ILIM"
-  (at 462.28 323.85 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 900bd836-6d3c-5cec-a0c8-ae072e05b716)
-)
-(label "TPAD_5V"
-  (at 477.52 318.77 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1f9b3e4b-c3a9-5055-8014-52ccbeddce4d)
-)
+
+
+
+
+
+
+
 (symbol
   (lib_id "Connector_Generic:Conn_01x04")
   (at 204.47 278.13 0)
@@ -4748,8 +4906,8 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 054e3655-16ab-5a2d-af30-5ef40f2ccc64)
 )
-(text "J58 is four field-soldered pads for a cut USB 2.0 Standard-A-to-USB-C cable: 1=GND, 2=D-, 3=D+, 4=VBUS. The USB-C plug's compliant 56k Rp handles trackpad-side CC; U64 provides current limiting and host-off isolation." (at 20.32 345.44 0) (effects (font (size 1.27 1.27))) (uuid b676adad-45e8-5ee9-94ba-e3ab07d74357))
-(text "== Fan, lid, and thermal service ==" (at 330.2 50.8 0) (effects (font (size 1.27 1.27))) (uuid 1ebfb903-1a2f-5721-bfb8-88f71f3c20ee))
+(text "J58 is four field-soldered pads for a cut USB 2.0 Standard-A-to-USB-C cable: 1=GND, 2=D-, 3=D+, 4=VBUS. The USB-C plug's compliant 56k Rp handles trackpad-side CC; U64 provides current limiting and host-off isolation." (at 20.32 345.44 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid b676adad-45e8-5ee9-94ba-e3ab07d74357))
+(text "== Fan, lid, and thermal service ==" (at 330.2 50.8 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 1ebfb903-1a2f-5721-bfb8-88f71f3c20ee))
 (symbol
   (lib_id "Conn_01x04_MP:Conn_01x04_MP")
   (at 410.21 82.55 0)
@@ -5462,20 +5620,333 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e682beb9-c095-50d5-bc43-f8f48095e6cb)
 )
-(text "NOTES:" (at 20.32 355.6 0) (effects (font (size 1.27 1.27))) (uuid ba370de4-f346-5cd9-9561-ea361b0d27f9))
-(text "EC enumerates over Mu USB2_P3 only after the carrier-generated physical INTERNAL_USB_VBUS is above the supervisor threshold. U61 defaults disconnected so an always-powered EC cannot back-drive an off host PHY." (at 20.32 363.22 0) (effects (font (size 1.27 1.27))) (uuid 19a880ea-49cf-5ef9-960d-2c5971ae0bd2))
-(text "The verified B160QAN03.K panel is non-touch; USB2_P4 is paired with native USB-C port 2." (at 20.32 370.84 0) (effects (font (size 1.27 1.27))) (uuid ad7debc9-4795-59f3-82c7-051927676554))
-(text "Trackpad uses Mu USB2_P8 as a direct internal USB HID device. TRACKPAD_FAULT_N is pulled up to the EC; S3 removes trackpad VBUS, so wake-from-trackpad is not supported." (at 20.32 378.46 0) (effects (font (size 1.27 1.27))) (uuid 73282620-21b8-51bf-bb3a-f7df4837b49f))
-(text "The Intehill controller remains a bench fixture/fallback and is not populated on the motherboard." (at 20.32 386.08 0) (effects (font (size 1.27 1.27))) (uuid 4c888a56-dbbc-59f8-81d0-2e6e8a2f6aab))
-(text "J52 is released for Delta BFB04512HHA-CZ0T: fused MU_12V, 8.2k/3.9n FG interface, and 25kHz open-drain PWM. Floating PWM commands full speed; firmware never drives the fan PWM node high." (at 20.32 393.7 0) (effects (font (size 1.27 1.27))) (uuid cc0c0052-d84b-5911-b7bd-6294e4149f40))
-(text "Delta contract: 0.26A maximum, 35% minimum start duty, FG is open collector at 2 pulses/revolution, and 0% PWM stops the fan. Gate pull-down makes an unpowered/reset EC command full fan speed, not fan-off." (at 20.32 401.32 0) (effects (font (size 1.27 1.27))) (uuid 32698dc0-062e-59eb-86df-04add2883b12))
-(text "Thermal control has separate skin/hinge and Mu heatsink NTCs on ADC-capable EC pins." (at 20.32 408.94 0) (effects (font (size 1.27 1.27))) (uuid 1a7a438f-64d0-5970-b802-b7ccc3240256))
-(text "The blower shares MU_12V: it is available whenever the Mu is powered. Thermal policy commands full fan and host throttle/shutdown before any final MU_12V cut; after a cut the passive coldplate/heatpipe/fin stack absorbs residual heat while heat generation is removed." (at 20.32 416.56 0) (effects (font (size 1.27 1.27))) (uuid d0a53092-8977-558b-a7ca-4b1369235c7c))
-(text "Cooling default is copper spreader/heatpipe/vapor chamber plus the released Delta blower; no Peltier/TEC in the base design. Solid-state AirJet-style modules are a future mechanical option only." (at 20.32 424.18 0) (effects (font (size 1.27 1.27))) (uuid 14db8cdb-6bfa-543f-82b1-e1a4b68da304))
+(text "NOTES:" (at 20.32 355.6 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid ba370de4-f346-5cd9-9561-ea361b0d27f9))
+(text "EC enumerates over Mu Ultra USB2_P4 only after the carrier-generated physical INTERNAL_USB_VBUS is above the supervisor threshold. U61 defaults disconnected so an always-powered EC cannot back-drive an off host PHY." (at 20.32 363.22 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 19a880ea-49cf-5ef9-960d-2c5971ae0bd2))
+(text "The verified B160QAN03.K panel is non-touch; USB2_P2 feeds the left USB7206C upstream." (at 20.32 370.84 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid ad7debc9-4795-59f3-82c7-051927676554))
+(text "Trackpad uses U400 port 2. VBUS needs both hub permission and MU_HOST_ACTIVE. Fault reporting to the hub is isolated from the always-on EC pull-up. Modern Standby behaviour needs hardware qualification." (at 20.32 378.46 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 73282620-21b8-51bf-bb3a-f7df4837b49f))
+(text "The Intehill controller remains a bench fixture/fallback and is not populated on the motherboard." (at 20.32 386.08 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 4c888a56-dbbc-59f8-81d0-2e6e8a2f6aab))
+(text "J52 is released for Delta BFB04512HHA-CZ0T: fused MU_12V, 8.2k/3.9n FG interface, and 25kHz open-drain PWM. Floating PWM commands full speed; firmware never drives the fan PWM node high." (at 20.32 393.7 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid cc0c0052-d84b-5911-b7bd-6294e4149f40))
+(text "Delta contract: 0.26A maximum, 35% minimum start duty, FG is open collector at 2 pulses/revolution, and 0% PWM stops the fan. Gate pull-down makes an unpowered/reset EC command full fan speed, not fan-off." (at 20.32 401.32 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 32698dc0-062e-59eb-86df-04add2883b12))
+(text "Thermal control has separate skin/hinge and Mu heatsink NTCs on ADC-capable EC pins." (at 20.32 408.94 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 1a7a438f-64d0-5970-b802-b7ccc3240256))
+(text "The blower shares MU_12V: it is available whenever the Mu is powered. Thermal policy commands full fan and host throttle/shutdown before any final MU_12V cut; after a cut the passive coldplate/heatpipe/fin stack absorbs residual heat while heat generation is removed." (at 20.32 416.56 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid d0a53092-8977-558b-a7ca-4b1369235c7c))
+(text "Cooling default is copper spreader/heatpipe/vapor chamber plus the released Delta blower; no Peltier/TEC in the base design. Solid-state AirJet-style modules are a future mechanical option only." (at 20.32 424.18 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 14db8cdb-6bfa-543f-82b1-e1a4b68da304))
 (sheet_instances
   (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
     (page "9")
   )
 )
   (embedded_fonts no)
+(symbol
+  (lib_id "Device:C")
+  (at 740.41 322.58 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 37976442-5e7d-59a8-98c2-6bd616a88197)
+  (property "Reference" "C2091" (at 740.41 320.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n trackpad logic bypass" (at 740.41 325.12 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 740.41 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 740.41 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ae2cec28-03be-501a-8145-937a93553feb))
+  (pin "2" (uuid 234fbb7d-9d5c-5651-ba28-1a3b8cbc14e4))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "C2091")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 740.41 318.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ec5b1de9-5d7d-542a-8423-8f11b97c1787)
+)
+(label "GND"
+  (at 740.41 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 154b5da7-fe40-54e1-8f84-aa76d43cd9b9)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 740.41 280.67 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9512343c-3158-5bfc-90bb-f59238c6eba2)
+  (property "Reference" "C451" (at 740.41 278.13 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n trackpad logic bypass" (at 740.41 283.21 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 740.41 280.67 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 740.41 280.67 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 0a4c5f63-5ad4-5e1e-b127-c886cdc2a48f))
+  (pin "2" (uuid 9ad69e36-8ad7-555b-baf0-088321cc6fc4))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "C451")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 740.41 276.86 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4c5b0b39-5cfb-51b6-a214-1c4a6f0d6037)
+)
+(label "GND"
+  (at 740.41 284.48 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9ac7a174-01b1-5a3a-98a8-496c5c6ef1fe)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 740.41 265.43 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 626e7ef2-fc94-5916-98e4-d7a436970e14)
+  (property "Reference" "R450" (at 740.41 262.89 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k trackpad enable pull-down" (at 740.41 267.97 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 740.41 265.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 740.41 265.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 8d766f32-04c7-5b34-a582-fb4ee98012ca))
+  (pin "2" (uuid 00636cbc-1385-5d06-abd9-dec404962280))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "R450")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "TRACKPAD_EN"
+  (at 740.41 261.62 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e6d80354-9cb9-51b4-a7b0-e340a8f6f6a1)
+)
+(label "GND"
+  (at 740.41 269.24 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6aa53c3a-5882-5a9e-93d9-f4394b7f616c)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 740.41 307.34 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b5e35f8a-02ad-5a10-9d0a-4c1b1f8e9375)
+  (property "Reference" "R451" (at 740.41 304.8 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k hub trackpad fault pull-up" (at 740.41 309.88 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 740.41 307.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 740.41 307.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 8567f4bb-c3f8-551b-911a-fee89bde451c))
+  (pin "2" (uuid 185f393a-61b6-5321-b721-423c804c0231))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "R451")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 740.41 303.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid be93944d-451b-5b5b-9701-0a50a5ee238f)
+)
+(hierarchical_label "HUB_TRACKPAD_OC_N"
+  (shape bidirectional)
+  (at 740.41 311.15 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f2b1c1bb-38e6-57b7-8980-ce7b6e8107d2)
+)
+(symbol
+  (lib_id "74xGxx:74LVC1G08")
+  (at 640.08 265.43 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid bfa31f77-4de3-5b4a-bd64-b3792502d36d)
+  (property "Reference" "U450" (at 640.08 248.92 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74LVC1G08DBVR trackpad VBUS permission" (at 640.08 281.94 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 640.08 265.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 640.08 265.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 640.08 265.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "SN74LVC1G08DBVR" (at 640.08 265.43 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid fc1023d4-669e-5ca7-9bf7-e1dce82a9a80))
+  (pin "2" (uuid 11b1005a-ed78-5eb0-b443-8caef35abdac))
+  (pin "3" (uuid b9cdf1b1-1644-56da-8e5f-da4a2e29b84a))
+  (pin "4" (uuid 246d7b4b-fd29-5662-a470-064ca0cb7003))
+  (pin "5" (uuid bb4f4a68-3c98-5975-a8c7-67e4e89f8ec1))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "U450")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MU_HOST_ACTIVE"
+  (shape bidirectional)
+  (at 624.84 262.89 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 4e997e63-9bcb-5e6c-9bac-00456590ee22)
+)
+(hierarchical_label "HUB_TRACKPAD_EN"
+  (shape bidirectional)
+  (at 624.84 267.97 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid fa94810f-9344-5c9b-b6c7-a44e6edd3e6c)
+)
+(label "GND"
+  (at 640.08 275.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9c84137f-cc6f-56c3-8c32-ebdb9bc30f77)
+)
+(label "TRACKPAD_EN"
+  (at 652.78 265.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c3fe8c16-f58b-523c-af2e-05620e54e87f)
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 640.08 255.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8bdba4cc-9f06-5de6-8d1f-8a4112f19437)
+)
+(symbol
+  (lib_id "BMS_Thermal:SN74LVC1G07DCK")
+  (at 640.08 307.34 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 0661c4fe-f4d3-5e2a-8a72-b3d10b6a516c)
+  (property "Reference" "U451" (at 640.08 298.45 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74LVC1G07DCKR trackpad fault isolation" (at 640.08 316.23 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-353_SC-70-5" (at 640.08 307.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 640.08 307.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 640.08 307.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "SN74LVC1G07DCKR" (at 640.08 307.34 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid bf11cf8a-beba-59e4-9057-7f382add7f34))
+  (pin "2" (uuid 014cc8c5-afa3-5efc-960e-555c5b32480f))
+  (pin "3" (uuid 73d150c9-06dd-5d95-aead-dd720dcc60ed))
+  (pin "4" (uuid 4caa101c-c867-5817-a4fe-168818aa8f0f))
+  (pin "5" (uuid 114d46e7-f094-5604-af92-1a904dc3055b))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "U451")
+        (unit 1)
+      )
+    )
+  )
+)
+(no_connect (at 629.92 304.8) (uuid 9c16cda8-fc60-5338-880c-320202f6ba32))
+(hierarchical_label "TRACKPAD_FAULT_N"
+  (shape bidirectional)
+  (at 629.92 307.34 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid aee400f3-71f9-529d-86c1-6a592890a9b1)
+)
+(label "GND"
+  (at 629.92 309.88 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 59feed79-d6f3-5559-a1c5-f465cb42b03a)
+)
+(hierarchical_label "HUB_TRACKPAD_OC_N"
+  (shape bidirectional)
+  (at 650.24 304.8 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a95108d1-695a-5d1e-b28a-3aa917220e40)
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 650.24 307.34 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 496fcb5c-aa0b-5286-9c16-1780de73ef46)
+)
+(symbol
+  (lib_id "TPS2553D:TPS2553D")
+  (at 469.9 322.58 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ffccea97-9f33-5046-b8ee-f5323877df7c)
+  (property "Reference" "U64" (at 469.9 308.61 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS2553DDBVR trackpad 0.61A branch switch" (at 469.9 336.55 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPS2553DDBVR" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2553.pdf" (at 469.9 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f48c5e65-1e58-5807-b640-e962cee92062))
+  (pin "2" (uuid 3551f4db-d077-513f-b674-dbe3c3865fa7))
+  (pin "3" (uuid 8fccbbf3-a832-5c2c-9e28-cb4339ac0b10))
+  (pin "4" (uuid b8abee20-26ad-5830-b233-e9e207755445))
+  (pin "5" (uuid 953dff7d-4b04-5294-9eb4-888e2fc9f5ca))
+  (pin "6" (uuid ced3d1b8-dbf6-5fb7-b4cb-32969c83e7d5))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "U64")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_5V"
+  (shape bidirectional)
+  (at 462.28 318.77 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 885f108d-e8dc-5cd3-a995-52738c342340)
+)
+(label "GND"
+  (at 469.9 330.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 65faf257-6c10-598a-b194-e9ea399c4629)
+)
+(label "TRACKPAD_EN"
+  (at 462.28 321.31 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid e681f73f-d629-5266-8a5d-3d877f89416f)
+)
+(hierarchical_label "TRACKPAD_FAULT_N"
+  (shape bidirectional)
+  (at 477.52 323.85 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 12def5df-0f44-56ab-88db-88521f710762)
+)
+(label "TPAD_ILIM"
+  (at 462.28 323.85 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid b1b5eb5d-a776-5fe0-aaf8-24d195cd0917)
+)
+(label "TPAD_5V"
+  (at 477.52 318.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6ceb609a-1d97-5ad7-b7fa-2361dbb4c6a1)
+)
 )

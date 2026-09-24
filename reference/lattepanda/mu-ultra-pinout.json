@@ -1,0 +1,2351 @@
+{
+  "module_models": [
+    "DFR1294",
+    "DFR1295"
+  ],
+  "source": "https://github.com/LattePandaTeam/LattePanda-Mu-Ultra/blob/main/Electricals/Pinouts/LattePanda_Mu_and_Mu_Ultra_Pinout_Comparison.xlsx",
+  "source_git_blob": "28f8b4ec424a139cc7008736e20909272332b5c6",
+  "checked_date": "2026-09-24",
+  "pins": [
+    {
+      "pin": 1,
+      "name": "PWR_SW#",
+      "manufacturer_name": "PWR_SW#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "System Power Switch",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 2,
+      "name": "FAN2_CTL",
+      "manufacturer_name": "FAN2_CTL",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "CPU Fan PWM",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 3,
+      "name": "RST_SW#",
+      "manufacturer_name": "RST_SW#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "System Reset Switch",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 4,
+      "name": "FAN2_TAC",
+      "manufacturer_name": "FAN2_TAC",
+      "direction": "I",
+      "io_level": "5V",
+      "description": "CPU Fan Tacho",
+      "notes": ""
+    },
+    {
+      "pin": 5,
+      "name": "SLP_S0_S3",
+      "manufacturer_name": "SLP_S0_S3",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "System Status",
+      "notes": "Output HIGH only when Working and Modern Standby; 4.7K Pulled-up(Weak Drive of HIGH output)"
+    },
+    {
+      "pin": 6,
+      "name": "FAN3_CTL",
+      "manufacturer_name": "FAN3_CTL",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "SYS Fan PWM",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 7,
+      "name": "SLP_S4",
+      "manufacturer_name": "SLP_S4",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "System Status",
+      "notes": "Output HIGH only when Working and Modern Standby; 4.7K Pulled-up(Weak Drive of HIGH output)"
+    },
+    {
+      "pin": 8,
+      "name": "FAN3_TAC",
+      "manufacturer_name": "FAN3_TAC",
+      "direction": "I",
+      "io_level": "5V",
+      "description": "SYS Fan Tacho",
+      "notes": ""
+    },
+    {
+      "pin": 9,
+      "name": "TSENSE",
+      "manufacturer_name": "TSENSE",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "NTC Temperature Sensor",
+      "notes": ""
+    },
+    {
+      "pin": 10,
+      "name": "SIO_UART_TX",
+      "manufacturer_name": "SIO_UART_TX",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "SuperIO UART TX",
+      "notes": ""
+    },
+    {
+      "pin": 11,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 12,
+      "name": "SIO_UART_RX",
+      "manufacturer_name": "SIO_UART_RX",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "SuperIO UART RX",
+      "notes": ""
+    },
+    {
+      "pin": 13,
+      "name": "USB3_P1_TX_P",
+      "manufacturer_name": "USB3_P1_TX_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "USB 3.2 Port 1 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 14,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 15,
+      "name": "USB3_P1_TX_N",
+      "manufacturer_name": "USB3_P1_TX_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "USB 3.2 Port 1 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 16,
+      "name": "USB3_P1_RX_P",
+      "manufacturer_name": "USB3_P1_RX_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "USB 3.2 Port 1 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 17,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 18,
+      "name": "USB3_P1_RX_N",
+      "manufacturer_name": "USB3_P1_RX_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "USB 3.2 Port 1 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 19,
+      "name": "USB3_P2_TX_P",
+      "manufacturer_name": "USB3_P2_TX_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "USB 3.2 Port 2 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 20,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 21,
+      "name": "USB3_P2_TX_N",
+      "manufacturer_name": "USB3_P2_TX_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "USB 3.2 Port 2 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 22,
+      "name": "USB3_P2_RX_P",
+      "manufacturer_name": "USB3_P2_RX_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "USB 3.2 Port 2 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 23,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 24,
+      "name": "USB3_P2_RX_N",
+      "manufacturer_name": "USB3_P2_RX_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "USB 3.2 Port 2 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 25,
+      "name": "PCIE_TX3_P",
+      "manufacturer_name": "PCIE_TX3_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 3 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 26,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 27,
+      "name": "PCIE_TX3_N",
+      "manufacturer_name": "PCIE_TX3_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 3 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 28,
+      "name": "PCIE_RX3_P",
+      "manufacturer_name": "PCIE_RX3_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 3 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 29,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 30,
+      "name": "PCIE_RX3_N",
+      "manufacturer_name": "PCIE_RX3_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 3 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 31,
+      "name": "PCIE_TX4_P",
+      "manufacturer_name": "PCIE_TX4_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 4 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 32,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 33,
+      "name": "PCIE_TX4_N",
+      "manufacturer_name": "PCIE_TX4_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 4 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 34,
+      "name": "PCIE_RX4_P",
+      "manufacturer_name": "PCIE_RX4_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 4 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 35,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 36,
+      "name": "PCIE_RX4_N",
+      "manufacturer_name": "PCIE_RX4_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 4 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 37,
+      "name": "PCIE_TX5_P",
+      "manufacturer_name": "PCIE_TX5_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 5 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 38,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 39,
+      "name": "PCIE_TX5_N",
+      "manufacturer_name": "PCIE_TX5_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 5 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 40,
+      "name": "PCIE_RX5_P",
+      "manufacturer_name": "PCIE_RX5_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 5 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 41,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 42,
+      "name": "PCIE_RX5_N",
+      "manufacturer_name": "PCIE_RX5_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 5 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 43,
+      "name": "PCIE_TX6_P",
+      "manufacturer_name": "PCIE_TX6_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 6 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 44,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 45,
+      "name": "PCIE_TX6_N",
+      "manufacturer_name": "PCIE_TX6_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 6 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 46,
+      "name": "PCIE_RX6_P",
+      "manufacturer_name": "PCIE_RX6_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 6 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 47,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 48,
+      "name": "PCIE_RX6_N",
+      "manufacturer_name": "PCIE_RX6_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 6 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 49,
+      "name": "PCIE_TX7_P",
+      "manufacturer_name": "PCIE_TX7_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 7 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 50,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 51,
+      "name": "PCIE_TX7_N",
+      "manufacturer_name": "PCIE_TX7_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 7 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 52,
+      "name": "PCIE_RX7_P",
+      "manufacturer_name": "PCIE_RX7_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 7 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 53,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 54,
+      "name": "PCIE_RX7_N",
+      "manufacturer_name": "PCIE_RX7_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 7 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 55,
+      "name": "PCIE_TX8_P",
+      "manufacturer_name": "PCIE_TX8_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 8 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 56,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 57,
+      "name": "PCIE_TX8_N",
+      "manufacturer_name": "PCIE_TX8_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 8 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 58,
+      "name": "PCIE_RX8_P",
+      "manufacturer_name": "PCIE_RX8_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 8 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 59,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 60,
+      "name": "PCIE_RX8_N",
+      "manufacturer_name": "PCIE_RX8_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 8 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 61,
+      "name": "PCIE_TX1_P",
+      "manufacturer_name": "PCIE_TX1_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 1 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 62,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 63,
+      "name": "PCIE_TX1_N",
+      "manufacturer_name": "PCIE_TX1_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 1 TX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 64,
+      "name": "PCIE_RX1_P",
+      "manufacturer_name": "PCIE_RX1_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 1 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 65,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 66,
+      "name": "PCIE_RX1_N",
+      "manufacturer_name": "PCIE_RX1_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 1 RX Differential Pair",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 67,
+      "name": "PCIE_TX2_P",
+      "manufacturer_name": "PCIE_TX2_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 2 TX Differential Pair",
+      "notes": "Integrated 220nF AC Coupling Capacitor"
+    },
+    {
+      "pin": 68,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 69,
+      "name": "PCIE_TX2_N",
+      "manufacturer_name": "PCIE_TX2_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 2 TX Differential Pair",
+      "notes": "Integrated 220nF AC Coupling Capacitor"
+    },
+    {
+      "pin": 70,
+      "name": "PCIE_RX2_P",
+      "manufacturer_name": "PCIE_RX2_P",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 2 RX Differential Pair",
+      "notes": "Integrated 220nF AC Coupling Capacitor"
+    },
+    {
+      "pin": 71,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 72,
+      "name": "PCIE_RX2_N",
+      "manufacturer_name": "PCIE_RX2_N",
+      "direction": "I",
+      "io_level": "0.8V",
+      "description": "PCIe Lane 2 RX Differential Pair",
+      "notes": "Integrated 220nF AC Coupling Capacitor"
+    },
+    {
+      "pin": 73,
+      "name": "USB2_P3_N",
+      "manufacturer_name": "USB2_P3_N",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 3 Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 74,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 75,
+      "name": "USB2_P3_P",
+      "manufacturer_name": "USB2_P3_P",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 3 Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 76,
+      "name": "USB2_P5_P",
+      "manufacturer_name": "USB2_P5_P",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 5 Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 77,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 78,
+      "name": "USB2_P5_N",
+      "manufacturer_name": "USB2_P5_N",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 5 Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 79,
+      "name": "USB2_P4_N",
+      "manufacturer_name": "USB2_P4_N",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 4 Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 80,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 81,
+      "name": "USB2_P4_P",
+      "manufacturer_name": "USB2_P4_P",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 4 Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 82,
+      "name": "USB2_P6_P",
+      "manufacturer_name": "USB2_P6_P (BT)",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 6 Differential Pair",
+      "notes": "Dedicated to BT; can also for generic USB 2.0"
+    },
+    {
+      "pin": 83,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 84,
+      "name": "USB2_P6_N",
+      "manufacturer_name": "USB2_P6_N (BT)",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 6 Differential Pair",
+      "notes": "Dedicated to BT; can also for generic USB 2.0"
+    },
+    {
+      "pin": 85,
+      "name": "REFCLK0_P",
+      "manufacturer_name": "REFCLK0_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 0 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 86,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 87,
+      "name": "REFCLK0_N",
+      "manufacturer_name": "REFCLK0_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 0 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 88,
+      "name": "REFCLK3_P",
+      "manufacturer_name": "REFCLK3_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 3 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 89,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 90,
+      "name": "REFCLK3_N",
+      "manufacturer_name": "REFCLK3_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 3 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 91,
+      "name": "REFCLK1_P",
+      "manufacturer_name": "REFCLK1_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 1 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 92,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 93,
+      "name": "REFCLK1_N",
+      "manufacturer_name": "REFCLK1_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 1 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 94,
+      "name": "REFCLK4_P",
+      "manufacturer_name": "REFCLK4_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 4 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 95,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 96,
+      "name": "REFCLK4_N",
+      "manufacturer_name": "REFCLK4_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 4 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 97,
+      "name": "REFCLK2_P",
+      "manufacturer_name": "REFCLK2_P",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 2 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 98,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 99,
+      "name": "REFCLK2_N",
+      "manufacturer_name": "REFCLK2_N",
+      "direction": "O",
+      "io_level": "0.8V",
+      "description": "PCIe Reference Clock 2 Differential Pair",
+      "notes": "100MHz"
+    },
+    {
+      "pin": 100,
+      "name": "REFCLK_REQ3#",
+      "manufacturer_name": "REFCLK_REQ3#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "Clock Request of REFCLK3",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 101,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 102,
+      "name": "REFCLK_REQ4#",
+      "manufacturer_name": "REFCLK_REQ4#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "Clock Request of REFCLK4",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 103,
+      "name": "PCIE_WAKE#",
+      "manufacturer_name": "PCIE_WAKE#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "PCIe Wake Request",
+      "notes": "Pulled LOW to Wake System; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 104,
+      "name": "REFCLK_REQ0#",
+      "manufacturer_name": "REFCLK_REQ0#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "Clock Request of REFCLK0",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 105,
+      "name": "PLT_RST#",
+      "manufacturer_name": "PLT_RST#",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "Platform Reset for PCIe",
+      "notes": "Output LOW to Reset PCIe Device"
+    },
+    {
+      "pin": 106,
+      "name": "REFCLK_REQ1#",
+      "manufacturer_name": "REFCLK_REQ1#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "Clock Request of REFCLK1",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 107,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 108,
+      "name": "REFCLK_REQ2#",
+      "manufacturer_name": "REFCLK_REQ2#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "Clock Request of REFCLK2",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 109,
+      "name": "USB2_P1_N",
+      "manufacturer_name": "USB2_P1_N (TCP1)",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 1 Differential Pair",
+      "notes": "Bound to TCP1 in Default BIOS"
+    },
+    {
+      "pin": 110,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 111,
+      "name": "USB2_P1_P",
+      "manufacturer_name": "USB2_P1_P (TCP1)",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 1 Differential Pair",
+      "notes": "Bound to TCP1 in Default BIOS"
+    },
+    {
+      "pin": 112,
+      "name": "USB2_P2_P",
+      "manufacturer_name": "USB2_P2_P (TCP0)",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 2 Differential Pair",
+      "notes": "Bound to TCP0 in Default BIOS"
+    },
+    {
+      "pin": 113,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 114,
+      "name": "USB2_P2_N",
+      "manufacturer_name": "USB2_P2_N (TCP0)",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "USB 2.0 Port 2 Differential Pair",
+      "notes": "Bound to TCP0 in Default BIOS"
+    },
+    {
+      "pin": 115,
+      "name": "VBAT",
+      "manufacturer_name": "VBAT",
+      "direction": "PWR",
+      "io_level": "3.0V",
+      "description": "RTC Battery Input",
+      "notes": ""
+    },
+    {
+      "pin": 116,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 117,
+      "name": "PROCHOT#",
+      "manufacturer_name": "PROCHOT#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "(TCC) Overheat Protect",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 118,
+      "name": "GPP_E11",
+      "manufacturer_name": "GPP_E11",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": ""
+    },
+    {
+      "pin": 119,
+      "name": "GPP_E22",
+      "manufacturer_name": "GPP_E22 (8851_INT)",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": "BIOS Default Function: IT8851_INT"
+    },
+    {
+      "pin": 120,
+      "name": "GPP_E14",
+      "manufacturer_name": "GPP_E14",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": ""
+    },
+    {
+      "pin": 121,
+      "name": "CRF_CLKREQ",
+      "manufacturer_name": "CRF_CLKREQ",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "CNVi SOC to CRF Wake Indication",
+      "notes": ""
+    },
+    {
+      "pin": 122,
+      "name": "GPP_E13",
+      "manufacturer_name": "GPP_E13",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": ""
+    },
+    {
+      "pin": 123,
+      "name": "CNV_RF_RESET#",
+      "manufacturer_name": "CNV_RF_RESET#",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "CNVi RF Companion (CRF) Reset Signal",
+      "notes": "Active Low"
+    },
+    {
+      "pin": 124,
+      "name": "GPP_E17",
+      "manufacturer_name": "GPP_E17",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": ""
+    },
+    {
+      "pin": 125,
+      "name": "PMCALERT#",
+      "manufacturer_name": "PMCALERT#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "USB Type-C PD Controller / Re-timer Alert",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 126,
+      "name": "GPP_E12",
+      "manufacturer_name": "GPP_E12",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": ""
+    },
+    {
+      "pin": 127,
+      "name": "TPM_IRQ",
+      "manufacturer_name": "TPM_IRQ",
+      "direction": "I",
+      "io_level": "1.8V",
+      "description": "Discrete TPM Interrupt",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 128,
+      "name": "GPP_B04",
+      "manufacturer_name": "GPP_B04",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": ""
+    },
+    {
+      "pin": 129,
+      "name": "USB_OC#",
+      "manufacturer_name": "USB_OC#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "USB Over Current",
+      "notes": "Active LOW; Internally 10K Pulled Up"
+    },
+    {
+      "pin": 130,
+      "name": "GPP_B05",
+      "manufacturer_name": "GPP_B05 (8851_INT)",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": "BIOS Default Function: IT8851_INT"
+    },
+    {
+      "pin": 131,
+      "name": "SUSCLK",
+      "manufacturer_name": "SUSCLK",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "Suspend Clock",
+      "notes": "32.768KHz"
+    },
+    {
+      "pin": 132,
+      "name": "GPP_B06",
+      "manufacturer_name": "GPP_B06",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": ""
+    },
+    {
+      "pin": 133,
+      "name": "BIOS_SEL#",
+      "manufacturer_name": "BIOS_SEL#",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "BIOS ROM Select",
+      "notes": "Internally 100K Pulled Up;\nHIGH: Integrated ROM; LOW: Carrier ROM"
+    },
+    {
+      "pin": 134,
+      "name": "GPP_B07",
+      "manufacturer_name": "GPP_B07 (BLINK)",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "GPIO",
+      "notes": "BIOS Default Function: Modern Standby Blink Output"
+    },
+    {
+      "pin": 135,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 136,
+      "name": "RSVD",
+      "manufacturer_name": "RSVD",
+      "direction": "/",
+      "io_level": "/",
+      "description": "No Connect",
+      "notes": ""
+    },
+    {
+      "pin": 137,
+      "name": "UART0_RXD / GPP_H08",
+      "manufacturer_name": "UART0_RXD / GPP_H08",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "SoC UART0 RX / GPIO",
+      "notes": "BIOS Default Function: UART"
+    },
+    {
+      "pin": 138,
+      "name": "CNV_RGI_DT",
+      "manufacturer_name": "CNV_RGI_DT",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "CNVi RGI Bus TX",
+      "notes": ""
+    },
+    {
+      "pin": 139,
+      "name": "UART0_TXD / GPP_H09",
+      "manufacturer_name": "UART0_TXD / GPP_H09",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "SoC UART0 TX / GPIO",
+      "notes": "BIOS Default Function: UART"
+    },
+    {
+      "pin": 140,
+      "name": "CNV_BRI_RSP",
+      "manufacturer_name": "CNV_BRI_RSP",
+      "direction": "I",
+      "io_level": "1.8V",
+      "description": "CNVi BRI Bus RX",
+      "notes": ""
+    },
+    {
+      "pin": 141,
+      "name": "UART1_RXD / GPP_H06",
+      "manufacturer_name": "UART1_RXD / GPP_H06",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "SoC UART1 RX / GPIO",
+      "notes": "BIOS Default Function: UART"
+    },
+    {
+      "pin": 142,
+      "name": "CNV_BRI_DT",
+      "manufacturer_name": "CNV_BRI_DT",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "CNVi BRI Bus TX",
+      "notes": ""
+    },
+    {
+      "pin": 143,
+      "name": "UART1_TXD / GPP_H07",
+      "manufacturer_name": "UART1_TXD / GPP_H07",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "SoC UART1 TX / GPIO",
+      "notes": "BIOS Default Function: UART"
+    },
+    {
+      "pin": 144,
+      "name": "CNV_RGI_RSP",
+      "manufacturer_name": "CNV_RGI_RSP",
+      "direction": "I",
+      "io_level": "1.8V",
+      "description": "CNVi RGI Bus RX",
+      "notes": ""
+    },
+    {
+      "pin": 145,
+      "name": "SML1_DATA",
+      "manufacturer_name": "SML1_DATA",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "SMLink1 Data",
+      "notes": "Internally 2.2K Pulled Up"
+    },
+    {
+      "pin": 146,
+      "name": "I2C3_SCL",
+      "manufacturer_name": "I2C3_SCL",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "I2C3 Clock",
+      "notes": "Internally 2.2K Pulled Up"
+    },
+    {
+      "pin": 147,
+      "name": "SML1_CLK",
+      "manufacturer_name": "SML1_CLK",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "SMLink1 Clock",
+      "notes": "Internally 2.2K Pulled Up"
+    },
+    {
+      "pin": 148,
+      "name": "I2C3_SDA",
+      "manufacturer_name": "I2C3_SDA",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "I2C3 Data",
+      "notes": "Internally 2.2K Pulled Up"
+    },
+    {
+      "pin": 149,
+      "name": "RSVD",
+      "manufacturer_name": "RSVD",
+      "direction": "/",
+      "io_level": "/",
+      "description": "No Connect",
+      "notes": ""
+    },
+    {
+      "pin": 150,
+      "name": "I2C2_SCL",
+      "manufacturer_name": "I2C2_SCL",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "I2C2 Clock",
+      "notes": "Internally 2.2K Pulled Up"
+    },
+    {
+      "pin": 151,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 152,
+      "name": "I2C2_SDA",
+      "manufacturer_name": "I2C2_SDA",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "I2C2 Data",
+      "notes": "Internally 2.2K Pulled Up"
+    },
+    {
+      "pin": 153,
+      "name": "SPI_IO3",
+      "manufacturer_name": "SPI_IO3",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "SPI Bus for BIOS and dTPM",
+      "notes": ""
+    },
+    {
+      "pin": 154,
+      "name": "I2C1_SCL",
+      "manufacturer_name": "I2C1_SCL (8851_I2C)",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "I2C1 Clock",
+      "notes": "Internally 2.2K Pulled Up"
+    },
+    {
+      "pin": 155,
+      "name": "SPI_CLK",
+      "manufacturer_name": "SPI_CLK",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "SPI Bus for BIOS and dTPM",
+      "notes": ""
+    },
+    {
+      "pin": 156,
+      "name": "I2C1_SDA",
+      "manufacturer_name": "I2C1_SDA (8851_I2C)",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "I2C1 Data",
+      "notes": "Internally 2.2K Pulled Up"
+    },
+    {
+      "pin": 157,
+      "name": "TPM_SPI_CS#",
+      "manufacturer_name": "TPM_SPI_CS#",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "SPI Chip Select for dTPM",
+      "notes": ""
+    },
+    {
+      "pin": 158,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 159,
+      "name": "SPI_MOSI/SPI_IO0",
+      "manufacturer_name": "SPI_MOSI/SPI_IO0",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "SPI Bus for BIOS and dTPM",
+      "notes": ""
+    },
+    {
+      "pin": 160,
+      "name": "RSVD",
+      "manufacturer_name": "RSVD",
+      "direction": "/",
+      "io_level": "/",
+      "description": "No Connect",
+      "notes": ""
+    },
+    {
+      "pin": 161,
+      "name": "SPI_IO2",
+      "manufacturer_name": "SPI_IO2",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "SPI Bus for BIOS and dTPM",
+      "notes": ""
+    },
+    {
+      "pin": 162,
+      "name": "RSVD",
+      "manufacturer_name": "RSVD",
+      "direction": "/",
+      "io_level": "/",
+      "description": "No Connect",
+      "notes": ""
+    },
+    {
+      "pin": 163,
+      "name": "SPI_MISO/SPI_IO1",
+      "manufacturer_name": "SPI_MISO/SPI_IO1",
+      "direction": "I/O",
+      "io_level": "1.8V",
+      "description": "SPI Bus for BIOS and dTPM",
+      "notes": ""
+    },
+    {
+      "pin": 164,
+      "name": "RSVD",
+      "manufacturer_name": "RSVD",
+      "direction": "/",
+      "io_level": "/",
+      "description": "No Connect",
+      "notes": ""
+    },
+    {
+      "pin": 165,
+      "name": "FLASH_SPI_CS#",
+      "manufacturer_name": "FLASH_SPI_CS#",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "SPI Chip Select for BIOS ROM",
+      "notes": ""
+    },
+    {
+      "pin": 166,
+      "name": "RSVD",
+      "manufacturer_name": "RSVD",
+      "direction": "/",
+      "io_level": "/",
+      "description": "No Connect",
+      "notes": ""
+    },
+    {
+      "pin": 167,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 168,
+      "name": "RSVD",
+      "manufacturer_name": "RSVD",
+      "direction": "/",
+      "io_level": "/",
+      "description": "No Connect",
+      "notes": ""
+    },
+    {
+      "pin": 169,
+      "name": "TCP2_CTRL_DATA",
+      "manufacturer_name": "TCP2_CTRL_DATA",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "TCP2 Control Data",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 170,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 171,
+      "name": "TCP2_CTRL_CLK",
+      "manufacturer_name": "TCP2_CTRL_CLK",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "TCP2 Control Clock",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 172,
+      "name": "HDA_RST#",
+      "manufacturer_name": "HDA_RST#",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "HD Audio Reset",
+      "notes": ""
+    },
+    {
+      "pin": 173,
+      "name": "TCP1_CTRL_DATA",
+      "manufacturer_name": "TCP1_CTRL_DATA",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "TCP1 Control Data",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 174,
+      "name": "HDA_BCLK",
+      "manufacturer_name": "HDA_BCLK",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "HD Audio Codec Bit Clock",
+      "notes": ""
+    },
+    {
+      "pin": 175,
+      "name": "TCP1_CTRL_CLK",
+      "manufacturer_name": "TCP1_CTRL_CLK",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "TCP1 Control Clock",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 176,
+      "name": "HDA_SYNC",
+      "manufacturer_name": "HDA_SYNC",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "HD Audio Codec Sync",
+      "notes": ""
+    },
+    {
+      "pin": 177,
+      "name": "TCP0_CTRL_DATA",
+      "manufacturer_name": "TCP0_CTRL_DATA",
+      "direction": "I/O",
+      "io_level": "3.3V",
+      "description": "TCP0 Control Data",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 178,
+      "name": "HDA_SDO",
+      "manufacturer_name": "HDA_SDO",
+      "direction": "O",
+      "io_level": "1.8V",
+      "description": "HD Audio Codec Serial Data Out",
+      "notes": ""
+    },
+    {
+      "pin": 179,
+      "name": "TCP0_CTRL_CLK",
+      "manufacturer_name": "TCP0_CTRL_CLK",
+      "direction": "O",
+      "io_level": "3.3V",
+      "description": "TCP0 Control Clock",
+      "notes": "Internally 4.7K Pulled Up"
+    },
+    {
+      "pin": 180,
+      "name": "HDA_SDI0",
+      "manufacturer_name": "HDA_SDI0",
+      "direction": "I",
+      "io_level": "1.8V",
+      "description": "HD Audio Codec Serial Data In",
+      "notes": ""
+    },
+    {
+      "pin": 181,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 182,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 183,
+      "name": "TCP2_HPD",
+      "manufacturer_name": "TCP2_HPD",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "TCP2 Hot Plug Detect",
+      "notes": ""
+    },
+    {
+      "pin": 184,
+      "name": "CNV_WT_CLK_P",
+      "manufacturer_name": "CNV_WT_CLK_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "CNVio Bus TX CLK Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 185,
+      "name": "TCP1_HPD",
+      "manufacturer_name": "TCP1_HPD",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "TCP1 Hot Plug Detect",
+      "notes": ""
+    },
+    {
+      "pin": 186,
+      "name": "CNV_WT_CLK_N",
+      "manufacturer_name": "CNV_WT_CLK_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "CNVio Bus TX CLK Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 187,
+      "name": "TCP0_HPD",
+      "manufacturer_name": "TCP0_HPD",
+      "direction": "I",
+      "io_level": "3.3V",
+      "description": "TCP0 Hot Plug Detect",
+      "notes": ""
+    },
+    {
+      "pin": 188,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 189,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 190,
+      "name": "CNV_WT_D0_P",
+      "manufacturer_name": "CNV_WT_D0_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "CNVio Bus Lane 0 TX Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 191,
+      "name": "TCP2_AUX_N",
+      "manufacturer_name": "TCP2_AUX_N",
+      "direction": "I/O",
+      "io_level": "0.6V",
+      "description": "TCP2 DP Auxiliary Channel",
+      "notes": ""
+    },
+    {
+      "pin": 192,
+      "name": "CNV_WT_D0_N",
+      "manufacturer_name": "CNV_WT_D0_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "CNVio Bus Lane 0 TX Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 193,
+      "name": "TCP2_AUX_P",
+      "manufacturer_name": "TCP2_AUX_P",
+      "direction": "I/O",
+      "io_level": "0.6V",
+      "description": "TCP2 DP Auxiliary Channel",
+      "notes": ""
+    },
+    {
+      "pin": 194,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 195,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 196,
+      "name": "CNV_WT_D1_P",
+      "manufacturer_name": "CNV_WT_D1_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "CNVio Bus Lane 1 TX Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 197,
+      "name": "TCP2_TXRX1_N",
+      "manufacturer_name": "TCP2_TXRX1_N",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP2 DP Lane 3 / HDMI TMDS Clock / Type C RX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 198,
+      "name": "CNV_WT_D1_N",
+      "manufacturer_name": "CNV_WT_D1_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "CNVio Bus Lane 1 TX Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 199,
+      "name": "TCP2_TXRX1_P",
+      "manufacturer_name": "TCP2_TXRX1_P",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP2 DP Lane 3 / HDMI TMDS Clock / Type C RX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 200,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 201,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 202,
+      "name": "CNV_WR_CLK_P",
+      "manufacturer_name": "CNV_WR_CLK_P",
+      "direction": "I",
+      "io_level": "1.2V",
+      "description": "CNVio Bus RX CLK Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 203,
+      "name": "TCP2_TX1_N",
+      "manufacturer_name": "TCP2_TX1_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP2 DP Lane 2 / HDMI TMDS Data0 / Type C TX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 204,
+      "name": "CNV_WR_CLK_N",
+      "manufacturer_name": "CNV_WR_CLK_N",
+      "direction": "I",
+      "io_level": "1.2V",
+      "description": "CNVio Bus RX CLK Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 205,
+      "name": "TCP2_TX1_P",
+      "manufacturer_name": "TCP2_TX1_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP2 DP Lane 2 / HDMI TMDS Data0 / Type C TX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 206,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 207,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 208,
+      "name": "CNV_WR_D0_P",
+      "manufacturer_name": "CNV_WR_D0_P",
+      "direction": "I",
+      "io_level": "1.2V",
+      "description": "CNVio Bus Lane 0 RX Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 209,
+      "name": "TCP2_TXRX0_N",
+      "manufacturer_name": "TCP2_TXRX0_N",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP2 DP Lane 1 / HDMI TMDS Data1 / Type C RX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 210,
+      "name": "CNV_WR_D0_N",
+      "manufacturer_name": "CNV_WR_D0_N",
+      "direction": "I",
+      "io_level": "1.2V",
+      "description": "CNVio Bus Lane 0 RX Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 211,
+      "name": "TCP2_TXRX0_P",
+      "manufacturer_name": "TCP2_TXRX0_P",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP2 DP Lane 1 / HDMI TMDS Data1 / Type C RX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 212,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 213,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 214,
+      "name": "CNV_WR_D1_P",
+      "manufacturer_name": "CNV_WR_D1_P",
+      "direction": "I",
+      "io_level": "1.2V",
+      "description": "CNVio Bus Lane 1 RX Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 215,
+      "name": "TCP2_TX0_N",
+      "manufacturer_name": "TCP2_TX0_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP2 DP Lane 0 / HDMI TMDS Data2 / Type C TX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 216,
+      "name": "CNV_WR_D1_N",
+      "manufacturer_name": "CNV_WR_D1_N",
+      "direction": "I",
+      "io_level": "1.2V",
+      "description": "CNVio Bus Lane 1 RX Differential Pair",
+      "notes": ""
+    },
+    {
+      "pin": 217,
+      "name": "TCP2_TX0_P",
+      "manufacturer_name": "TCP2_TX0_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP2 DP Lane 0 / HDMI TMDS Data2 / Type C TX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 218,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 219,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 220,
+      "name": "TCP1_TX0_P",
+      "manufacturer_name": "TCP1_TX0_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP1 DP Lane 0 / HDMI TMDS Data2 / Type C TX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 221,
+      "name": "TCP0_AUX_N",
+      "manufacturer_name": "TCP0_AUX_N",
+      "direction": "I/O",
+      "io_level": "0.6V",
+      "description": "TCP0 DP Auxiliary Channel",
+      "notes": ""
+    },
+    {
+      "pin": 222,
+      "name": "TCP1_TX0_N",
+      "manufacturer_name": "TCP1_TX0_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP1 DP Lane 0 / HDMI TMDS Data2 / Type C TX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 223,
+      "name": "TCP0_AUX_P",
+      "manufacturer_name": "TCP0_AUX_P",
+      "direction": "I/O",
+      "io_level": "0.6V",
+      "description": "TCP0 DP Auxiliary Channel",
+      "notes": ""
+    },
+    {
+      "pin": 224,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 225,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 226,
+      "name": "TCP1_TXRX0_P",
+      "manufacturer_name": "TCP1_TXRX0_P",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP1 DP Lane 1 / HDMI TMDS Data1 / Type C RX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 227,
+      "name": "TCP0_TXRX1_N",
+      "manufacturer_name": "TCP0_TXRX1_N",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP0 DP Lane 3 / HDMI TMDS Clock / Type C RX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 228,
+      "name": "TCP1_TXRX0_N",
+      "manufacturer_name": "TCP1_TXRX0_N",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP1 DP Lane 1 / HDMI TMDS Data1 / Type C RX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 229,
+      "name": "TCP0_TXRX1_P",
+      "manufacturer_name": "TCP0_TXRX1_P",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP0 DP Lane 3 / HDMI TMDS Clock / Type C RX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 230,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 231,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 232,
+      "name": "TCP1_TX1_P",
+      "manufacturer_name": "TCP1_TX1_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP1 DP Lane 2 / HDMI TMDS Data0 / Type C TX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 233,
+      "name": "TCP0_TX1_N",
+      "manufacturer_name": "TCP0_TX1_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP0 DP Lane 2 / HDMI TMDS Data0 / Type C TX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 234,
+      "name": "TCP1_TX1_N",
+      "manufacturer_name": "TCP1_TX1_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP1 DP Lane 2 / HDMI TMDS Data0 / Type C TX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 235,
+      "name": "TCP0_TX1_P",
+      "manufacturer_name": "TCP0_TX1_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP0 DP Lane 2 / HDMI TMDS Data0 / Type C TX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 236,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 237,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 238,
+      "name": "TCP1_TXRX1_P",
+      "manufacturer_name": "TCP1_TXRX1_P",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP1 DP Lane 3 / HDMI TMDS Clock / Type C RX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 239,
+      "name": "TCP0_TXRX0_N",
+      "manufacturer_name": "TCP0_TXRX0_N",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP0 DP Lane 1 / HDMI TMDS Data1 / Type C RX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 240,
+      "name": "TCP1_TXRX1_N",
+      "manufacturer_name": "TCP1_TXRX1_N",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP1 DP Lane 3 / HDMI TMDS Clock / Type C RX Data Lane 2",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 241,
+      "name": "TCP0_TXRX0_P",
+      "manufacturer_name": "TCP0_TXRX0_P",
+      "direction": "I/O",
+      "io_level": "1.2V",
+      "description": "TCP0 DP Lane 1 / HDMI TMDS Data1 / Type C RX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 242,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 243,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 244,
+      "name": "TCP1_AUX_P",
+      "manufacturer_name": "TCP1_AUX_P",
+      "direction": "I/O",
+      "io_level": "0.6V",
+      "description": "TCP1 DP Auxiliary Channel",
+      "notes": ""
+    },
+    {
+      "pin": 245,
+      "name": "TCP0_TX0_N",
+      "manufacturer_name": "TCP0_TX0_N",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP0 DP Lane 0 / HDMI TMDS Data2 / Type C TX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 246,
+      "name": "TCP1_AUX_N",
+      "manufacturer_name": "TCP1_AUX_N",
+      "direction": "I/O",
+      "io_level": "0.6V",
+      "description": "TCP1 DP Auxiliary Channel",
+      "notes": ""
+    },
+    {
+      "pin": 247,
+      "name": "TCP0_TX0_P",
+      "manufacturer_name": "TCP0_TX0_P",
+      "direction": "O",
+      "io_level": "1.2V",
+      "description": "TCP0 DP Lane 0 / HDMI TMDS Data2 / Type C TX Data Lane 1",
+      "notes": "External AC Coupling Capacitor Required"
+    },
+    {
+      "pin": 248,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 249,
+      "name": "GND",
+      "manufacturer_name": "GND",
+      "direction": "PWR",
+      "io_level": "0V",
+      "description": "Ground",
+      "notes": ""
+    },
+    {
+      "pin": 250,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 251,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 252,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 253,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 254,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 255,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 256,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 257,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 258,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 259,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    },
+    {
+      "pin": 260,
+      "name": "VIN",
+      "manufacturer_name": "VIN",
+      "direction": "PWR",
+      "io_level": "9V ~ 20V",
+      "description": "Main Power Input",
+      "notes": ""
+    }
+  ]
+}

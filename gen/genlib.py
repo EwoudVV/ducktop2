@@ -53,6 +53,7 @@ LIBMAP = {
     "Conn_01x16": "Connector_Generic",
     "Conn_Coaxial": "Connector",
     "LattePanda_Mu": "Module_LattePanda",
+    "LattePanda_Mu_Ultra": "Module_LattePanda_Ultra",
     "DRA818": "DRA818",
     "PE42820": "PE42820",
     "MiniCircuits_ULP": "MiniCircuits_ULP",
@@ -88,6 +89,7 @@ LIBMAP = {
     "TLV803EA43RDBZR": "TLV803EA43RDBZR",
 	"TPS3897ADRYR": "TPS3897ADRYR",
     "USB2512B": "USB2512B",
+    "USB2513B": "USB2513B",
     "PCM2704C": "PCM2704C",
     "TPA2012D2": "TPA2012D2",
     "TPA6130A2": "TPA6130A2",
@@ -362,7 +364,7 @@ def load_renamed_symbol(name):
         # undriven input to ERC.  Passive connector pins leave directionality
         # to the Mu endpoint while preserving every official pin name/number.
         block = re.sub(r'\(pin \w+ line', '(pin passive line', block)
-    elif name == "LattePanda_Mu":
+    elif name in {"LattePanda_Mu", "LattePanda_Mu_Ultra"}:
         # USB_OC# has the documented on-module pull-up and is driven only by
         # external open-drain FAULT outputs.  Treat this one pad as passive so
         # ERC does not demand a push-pull driver that would be electrically wrong.

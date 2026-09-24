@@ -239,7 +239,7 @@ RESISTOR_ASSIGNMENTS: dict[str, tuple[str, str, str]] = {
     "R400":  ("Yageo", "RC0603FR-0712K0L",   "1%-context"),
     "R401":  ("Yageo", "RC0603FR-0710KL",    "1%-context"),
     "R402":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
-    "R403":  ("Yageo", "RC0603FR-0710KL",    "1%-context"),
+    "R403":  ("Yageo", "RC0603FR-07100KL",    "1%-context"),
     "R404":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
     "R405":  ("Yageo", "RC0603FR-07100KL",   "1%-context"),
     "R408":  ("Yageo", "RC0603FR-0710KL",    "1%-context"),

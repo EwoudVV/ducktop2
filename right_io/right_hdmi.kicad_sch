@@ -2290,8 +2290,8 @@
 		(embedded_fonts no)
 	)
   )
-(text "== TCP0 external HDMI 2.0 output ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 947a9de1-9653-55f2-9239-30b5145c8036))
-(text "LattePanda Mu default BIOS maps TCP0 as HDMI 2.0; the internal panel uses the Mu module's onboard eDP connector." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid feda1afb-9507-593f-a3c9-aa5a2e8612eb))
+(text "== TCP2 external HDMI 2.0 output ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 947a9de1-9653-55f2-9239-30b5145c8036))
+(text "LattePanda Mu Ultra default BIOS maps TCP2 as HDMI 2.0; the internal panel uses the Mu module's onboard eDP connector." (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid feda1afb-9507-593f-a3c9-aa5a2e8612eb))
 (text "Lane map, AC coupling, bias gating, DDC/HPD translation, and 5V isolation follow the Mu reference." (at 20.32 27.94 0) (effects (font (size 1.27 1.27))) (uuid f9ee6e45-3288-5c14-a29e-51740df51cb8))
 (text "== J30 external HDMI-A connector ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 35c284f9-f978-556c-b01e-d9e7cfcac2b1))
 (symbol
@@ -2304,7 +2304,7 @@
   (dnp no)
   (uuid 55a68289-bb36-593c-911b-9e789f2b94a7)
   (property "Reference" "J30" (at 115.57 90.17 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "External HDMI-A from TCP0" (at 115.57 158.75 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "External HDMI-A from TCP2" (at 115.57 158.75 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_Video:HDMI_A_Molex_208658-1001_Horizontal" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Molex" (at 115.57 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -2456,7 +2456,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TX0_P"
+(hierarchical_label "TCP2_TX0_P"
   (shape bidirectional)
   (at 250.19 78.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2566,7 +2566,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TX0_N"
+(hierarchical_label "TCP2_TX0_N"
   (shape bidirectional)
   (at 304.8 78.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2676,7 +2676,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TXRX0_P"
+(hierarchical_label "TCP2_TXRX0_P"
   (shape bidirectional)
   (at 359.41 78.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2786,7 +2786,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TXRX0_N"
+(hierarchical_label "TCP2_TXRX0_N"
   (shape bidirectional)
   (at 415.29 78.74 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -2896,7 +2896,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TX1_P"
+(hierarchical_label "TCP2_TX1_P"
   (shape bidirectional)
   (at 250.19 104.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -3006,7 +3006,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TX1_N"
+(hierarchical_label "TCP2_TX1_N"
   (shape bidirectional)
   (at 304.8 104.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -3116,7 +3116,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TXRX1_P"
+(hierarchical_label "TCP2_TXRX1_P"
   (shape bidirectional)
   (at 359.41 104.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -3226,7 +3226,7 @@
     )
   )
 )
-(hierarchical_label "TCP0_TXRX1_N"
+(hierarchical_label "TCP2_TXRX1_N"
   (shape bidirectional)
   (at 415.29 104.14 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -3956,13 +3956,13 @@
   (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid 30afafa1-2f8c-5e15-b91d-29e849b3e5e2)
 )
-(hierarchical_label "TCP0_DDC_SCL"
+(hierarchical_label "TCP2_DDC_SCL"
   (shape bidirectional)
   (at 492.76 118.11 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid ad0df174-a86c-513f-8eb3-a5257c39d42d)
 )
-(hierarchical_label "TCP0_DDC_SDA"
+(hierarchical_label "TCP2_DDC_SDA"
   (shape bidirectional)
   (at 492.76 120.65 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -4019,7 +4019,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 93ce173d-30e7-53c9-9f8a-c96f381bb60a)
 )
-(hierarchical_label "TCP0_DDC_SCL"
+(hierarchical_label "TCP2_DDC_SCL"
   (shape bidirectional)
   (at 575.31 100.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -4056,7 +4056,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d548a4f2-333d-5221-a5ae-fc9f444560bd)
 )
-(hierarchical_label "TCP0_DDC_SDA"
+(hierarchical_label "TCP2_DDC_SDA"
   (shape bidirectional)
   (at 575.31 113.03 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -4246,7 +4246,7 @@
   (effects (font (size 1.27 1.27)) (justify right bottom))
   (uuid c175d857-3e91-5780-bc55-151fb5ac04f4)
 )
-(hierarchical_label "TCP0_HPD"
+(hierarchical_label "TCP2_HPD"
   (shape bidirectional)
   (at 510.54 157.48 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))

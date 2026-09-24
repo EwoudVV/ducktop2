@@ -958,6 +958,12 @@ def check_mu_carrier(components, pin_names):
     if not (ROOT / "ducktop2.3dshapes" / "Wurth_9774055243R.step").exists():
         fail("Mu standoff exact 5.5mm STEP model is missing")
 
+    published = json.loads((ROOT / "reference/lattepanda/mu-ultra-pinout.json").read_text())
+    expect(len(published["pins"]), 260, "complete Ultra pin table")
+    for pin in published["pins"]:
+        expect(pin_names.get(("A1", str(pin["pin"]))), pin["name"].replace(" ", "_"),
+               f"published Mu Ultra contact {pin['pin']}")
+
     expect(comp(components, "A1").footprint,
            "Module_LattePanda:LattePanda_Module_H8.0mm_Horizontal",
            "LattePanda Mu 8mm standard-orientation socket footprint")
@@ -965,13 +971,12 @@ def check_mu_carrier(components, pin_names):
            "LattePanda Mu socket manufacturer")
     expect(prop(components, "A1", "MPN"), "2309411-1",
            "LattePanda Mu socket MPN")
-    expect(prop(components, "A1", "ModuleAssemblyItem"), "A2 DFRobot DFR1149",
+    expect(prop(components, "A1", "ModuleAssemblyItem"), "A2 DFRobot DFR1294; upgrade DFR1295",
            "LattePanda Mu socket-to-module assembly contract")
     expect_contains(prop(components, "A1", "BIOSProfile"),
-                    "S70NC1R200-16G-B.bin", "LattePanda Mu BIOS profile")
-    expect_contains(prop(components, "A1", "BIOSProfile"),
-                    "6edcfe021d84baf2b6ea3e4f4df4e81442a6be3580905f255221644d0eeb0bed",
-                    "LattePanda Mu BIOS binary hash")
+                    "SBCLNLCXR120-A.bin", "LattePanda Mu BIOS profile")
+    expect_contains(prop(components, "A1", "BIOSProfile"), "qualification pending",
+                    "Ultra BIOS remains unqualified until tested on hardware")
     # Phase 5 B9: A2 (the removable Mu module) is no longer a schematic
     # component -- it is assembly documentation, not a board part.
     for ref in ("H1", "H2"):
@@ -1187,17 +1192,17 @@ def check_mu_carrier(components, pin_names):
         "73": "/USBC1_DN", "75": "/USBC1_DP",
         "19": "/Mu Carrier/USBC2_SSTX_RAW_P", "21": "/Mu Carrier/USBC2_SSTX_RAW_N",
         "22": "/USBC2_SSRX_P", "24": "/USBC2_SSRX_N",
-        "70": "/USBC2_DP", "72": "/USBC2_DN",
+        "112": "/USBC2_DP", "114": "/USBC2_DN",
         "129": "/PD_PROTECT_FAULT_N",
         "31": "/Mu Carrier/WIFI_PCIE_TX_RAW_P", "33": "/Mu Carrier/WIFI_PCIE_TX_RAW_N",
         "34": "/WIFI_PCIE_RX_P", "36": "/WIFI_PCIE_RX_N",
-        "67": "/WIFI_USB_DN", "69": "/WIFI_USB_DP",
+        "84": "/WIFI_USB_DN", "82": "/WIFI_USB_DP",
         "88": "/WIFI_REFCLK_P", "90": "/WIFI_REFCLK_N",
         "100": "/WIFI_CLKREQ_N",
         "79": "/EC_HOST_USB_DN", "81": "/EC_HOST_USB_DP",
         "109": "/AUDIO_USB_DN", "111": "/AUDIO_USB_DP",
         "76": "/MAKER_USB_DP", "78": "/MAKER_USB_DN",
-        "82": "/TRACKPAD_USB_DP", "84": "/TRACKPAD_USB_DN",
+        "108": "/Mu Carrier/PCIE_M_CLKREQ_N",
         "37": "/Mu Carrier/PCIE_M_L0_TX_RAW_P", "39": "/Mu Carrier/PCIE_M_L0_TX_RAW_N",
         "40": "/Mu Carrier/PCIE_M_L0_RX_P", "42": "/Mu Carrier/PCIE_M_L0_RX_N",
         "43": "/Mu Carrier/PCIE_M_L1_TX_RAW_P", "45": "/Mu Carrier/PCIE_M_L1_TX_RAW_N",
@@ -1212,20 +1217,22 @@ def check_mu_carrier(components, pin_names):
         "102": "/GBE_CLKREQ_N",
         "97": "/Mu Carrier/PCIE_M_REFCLK_SRC_P", "99": "/Mu Carrier/PCIE_M_REFCLK_SRC_N",
         "103": "/PCIE_WAKE_N", "105": "/PLTRST_SRC_N",
-        "177": "/TCP0_DDC_SDA", "179": "/TCP0_DDC_SCL", "187": "/TCP0_HPD",
-        "227": "/TCP0_TXRX1_N", "229": "/TCP0_TXRX1_P",
-        "233": "/TCP0_TX1_N", "235": "/TCP0_TX1_P",
-        "239": "/TCP0_TXRX0_N", "241": "/TCP0_TXRX0_P",
-        "245": "/TCP0_TX0_N", "247": "/TCP0_TX0_P",
+        "169": "/TCP2_DDC_SDA", "171": "/TCP2_DDC_SCL", "183": "/TCP2_HPD",
+        "197": "/TCP2_TXRX1_N", "199": "/TCP2_TXRX1_P",
+        "203": "/TCP2_TX1_N", "205": "/TCP2_TX1_P",
+        "209": "/TCP2_TXRX0_N", "211": "/TCP2_TXRX0_P",
+        "215": "/TCP2_TX0_N", "217": "/TCP2_TX0_P",
     }.items():
         expect(net(components, "A1", pin), want, f"LattePanda Mu pin {pin}")
 
-    # The panel uses the Mu module's onboard 40-pin eDP connector.  DDIB on
-    # the SODIMM edge is intentionally unused, as is USB2_P6 (reserved for a
-    # future Mu Type-C/PD-controller configuration).
-    for pin in ("169", "171", "183", "191", "193", "197", "199", "203", "205",
-                "209", "211", "215", "217", "112", "114"):
+    # Ultra lane 2 is unused; old USB and TCP0 HDMI assignments must be gone.
+    # Pin 136 is reserved. TCP2 AUX is unused in this HDMI implementation.
+    for pin in ("67", "69", "70", "72", "136", "177", "179", "187", "191", "193",
+                "227", "229", "233", "235", "239", "241", "245", "247"):
         expect_unconnected(components, "A1", pin)
+    if "R50" in components:
+        fail("R50 must be removed; NVMe CLKREQ now connects to A1 pin 108")
+    expect(net(components, "J10", "52"), "/Mu Carrier/PCIE_M_CLKREQ_N", "NVMe CLKREQ")
 
     check_sys5_converter(components)
 
@@ -1835,14 +1842,14 @@ def check_external_hdmi_path(components, sheet: str = "TCP0 External HDMI"):
     expect_unconnected(components, "J30", "13")
     expect_unconnected(components, "J30", "14")
     for src, conn, cref, rref, dref in [
-        ("/TCP0_TX0_P", "EXT_HDMI_D2_P", "C150", "R150", "D150"),
-        ("/TCP0_TX0_N", "EXT_HDMI_D2_N", "C151", "R151", "D151"),
-        ("/TCP0_TXRX0_P", "EXT_HDMI_D1_P", "C152", "R152", "D152"),
-        ("/TCP0_TXRX0_N", "EXT_HDMI_D1_N", "C153", "R153", "D153"),
-        ("/TCP0_TX1_P", "EXT_HDMI_D0_P", "C154", "R154", "D154"),
-        ("/TCP0_TX1_N", "EXT_HDMI_D0_N", "C155", "R155", "D155"),
-        ("/TCP0_TXRX1_P", "EXT_HDMI_CK_P", "C156", "R156", "D156"),
-        ("/TCP0_TXRX1_N", "EXT_HDMI_CK_N", "C157", "R157", "D157"),
+        ("/TCP2_TX0_P", "EXT_HDMI_D2_P", "C150", "R150", "D150"),
+        ("/TCP2_TX0_N", "EXT_HDMI_D2_N", "C151", "R151", "D151"),
+        ("/TCP2_TXRX0_P", "EXT_HDMI_D1_P", "C152", "R152", "D152"),
+        ("/TCP2_TXRX0_N", "EXT_HDMI_D1_N", "C153", "R153", "D153"),
+        ("/TCP2_TX1_P", "EXT_HDMI_D0_P", "C154", "R154", "D154"),
+        ("/TCP2_TX1_N", "EXT_HDMI_D0_N", "C155", "R155", "D155"),
+        ("/TCP2_TXRX1_P", "EXT_HDMI_CK_P", "C156", "R156", "D156"),
+        ("/TCP2_TXRX1_N", "EXT_HDMI_CK_N", "C157", "R157", "D157"),
     ]:
         expect(net(components, cref, "1"), src, f"{cref} HDMI source side")
         expect(net(components, cref, "2"), local_net(sheet, conn), f"{cref} HDMI connector side")
@@ -1913,7 +1920,7 @@ def check_external_hdmi_path(components, sheet: str = "TCP0 External HDMI"):
         expect(net(components, bleed, "2"), "GND", f"{bleed} discharge return")
 
     for pin, want in {
-        "1": "GND", "2": "HDMI_HOST_3V3", "3": "/TCP0_DDC_SCL", "4": "/TCP0_DDC_SDA",
+        "1": "GND", "2": "HDMI_HOST_3V3", "3": "/TCP2_DDC_SCL", "4": "/TCP2_DDC_SDA",
         "5": "EXT_HDMI_SDA_CONN", "6": "EXT_HDMI_SCL_CONN", "7": "HDMI_DDC_REF5", "8": "HDMI_DDC_REF5",
     }.items():
         expected = want if want.startswith("/") or want == "GND" else local_net(sheet, want)
@@ -1932,7 +1939,7 @@ def check_external_hdmi_path(components, sheet: str = "TCP0 External HDMI"):
     expect_unconnected(components, "U53", "1")
     expect(net(components, "U53", "2"), local_net(sheet, "EXT_HDMI_HPD_NODE"), "HPD buffer input")
     expect(net(components, "U53", "3"), "GND", "HPD buffer ground")
-    expect(net(components, "U53", "4"), "/TCP0_HPD", "HPD buffer Mu output")
+    expect(net(components, "U53", "4"), "/TCP2_HPD", "HPD buffer Mu output")
     expect(net(components, "U53", "5"), local_net(sheet, "HDMI_HOST_3V3"), "HPD buffer switched supply")
     expect(net(components, "R163", "1"), local_net(sheet, "EXT_HDMI_HPD_CONN"), "HPD input series connector side")
     expect(net(components, "R163", "2"), local_net(sheet, "EXT_HDMI_HPD_NODE"), "HPD input series buffer side")
@@ -1998,11 +2005,27 @@ def check_internal_services(components):
         expect(net(components, "J58", pin), want, f"trackpad field-solder pad {pin}")
     expect_contains(comp(components, "U64").value, "TPS2553D", "trackpad branch switch")
     for pin, want in {
-        "1": "/SYS_5V", "2": "GND", "3": "/MU_HOST_ACTIVE",
+        "1": "/SYS_5V", "2": "GND", "3": local_net(sheet, "TRACKPAD_EN"),
         "4": "/TRACKPAD_FAULT_N", "5": local_net(sheet, "TPAD_ILIM"),
         "6": local_net(sheet, "TPAD_5V"),
     }.items():
         expect(net(components, "U64", pin), want, f"trackpad branch switch pin {pin}")
+    for ref, pins in {
+        "U450": {"1": "/MU_HOST_ACTIVE", "2": "/HUB_TRACKPAD_EN", "3": "GND",
+                 "4": local_net(sheet, "TRACKPAD_EN"), "5": "/SYS_3V3"},
+        "U451": {"2": "/TRACKPAD_FAULT_N", "3": "GND", "4": "/HUB_TRACKPAD_OC_N", "5": "/SYS_3V3"},
+        "R450": {"1": local_net(sheet, "TRACKPAD_EN"), "2": "GND"},
+        "R451": {"1": "/SYS_3V3", "2": "/HUB_TRACKPAD_OC_N"},
+        "C451": {"1": "/SYS_3V3", "2": "GND"},
+        "C2091": {"1": "/SYS_3V3", "2": "GND"},
+    }.items():
+        for pin, want in pins.items():
+            expect(net(components, ref, pin), want, f"{ref} trackpad gate/isolation pin {pin}")
+    expect_unconnected(components, "U451", "1")
+    expect(prop(components, "U450", "MPN"), "SN74LVC1G08DBVR", "trackpad AND with Ioff")
+    expect(prop(components, "U451", "MPN"), "SN74LVC1G07DCKR", "trackpad open-drain buffer with Ioff")
+    expect_value_prefix(components, "R450", "100k", "trackpad default-off resistor")
+    expect_value_prefix(components, "R451", "10k", "hub trackpad OC pull-up")
     expect_value_prefix(components, "R252", "43.2k 1%", "trackpad branch ILIM resistor")
     expect(net(components, "R252", "1"), local_net(sheet, "TPAD_ILIM"), "trackpad ILIM node")
     expect(net(components, "R252", "2"), "GND", "trackpad ILIM return")
@@ -2136,9 +2159,11 @@ def check_keyboard_interface(components):
     expect_contains(comp(components, "U311").value, "SN74AHCT1G126", "keyboard RGB level buffer exact part")
     expect_value_prefix(components, "C319", "10u", "keyboard RGB switched-output bulk")
     dnp, exclude_bom = component_flags()
-    for ref in ("R386", "R387", "C318"):
+    for ref in ("R386", "C318"):
         if ref not in dnp or ref not in exclude_bom:
             fail(f"{ref} keyboard option must remain DNP and excluded from BOM")
+    if "R387" in dnp or "R387" in exclude_bom:
+        fail("R387 must supply the RGB keyboard bus buffer")
     if "C319" in dnp or "C319" in exclude_bom:
         fail("C319 keyboard RGB output bulk must be populated")
 
@@ -2568,19 +2593,21 @@ def check_system_audio(components):
     loc = lambda name: local_net(sheet, name)
 
     expect(comp(components, "U400").footprint,
-           "Package_DFN_QFN:QFN-36-1EP_6x6mm_P0.5mm_EP3.7x3.7mm_ThermalVias",
-           "USB2512B footprint")
-    expect_value_prefix(components, "U400", "USB2512B-AEZG-TR", "system-audio hub part")
+           "ducktop2:Microchip_SQFN36_6x6_EP3.7",
+           "USB2513B footprint")
+    expect_value_prefix(components, "U400", "USB2513BT-I/M2", "system-audio hub part")
     expect(net(components, "F400", "1"), "/SYS_5V", "audio branch fuse input")
     expect(net(components, "F400", "2"), loc("AUDIO_5V"), "audio branch fuse output")
 
     hub_pins = {
         "1": loc("SYSTEM_DAC_USB_DN"), "2": loc("SYSTEM_DAC_USB_DP"),
-        "3": "/RADIO_CODEC_USB_HOST_DN", "4": "/RADIO_CODEC_USB_HOST_DP",
+        "3": "/TRACKPAD_USB_DN", "4": "/TRACKPAD_USB_DP",
+        "6": "/RADIO_CODEC_USB_HOST_DN", "7": "/RADIO_CODEC_USB_HOST_DP",
         "5": "/SYS_3V3", "10": "/SYS_3V3", "12": loc("HUB_PORT1_EN"),
         "13": loc("HUB_PORT1_OC_N"), "14": loc("HUB_CRFILT"),
-        "15": "/SYS_3V3", "16": loc("HUB_PORT2_EN"),
-        "17": loc("HUB_PORT2_OC_N"), "22": loc("HUB_NON_REM1"),
+        "15": "/SYS_3V3", "16": "/HUB_TRACKPAD_EN",
+        "17": "/HUB_TRACKPAD_OC_N",
+        "18": loc("HUB_PORT3_EN"), "19": loc("HUB_PORT3_OC_N"), "22": loc("HUB_NON_REM1"),
         "23": "/SYS_3V3", "24": loc("HUB_CFG_SEL0"),
         "25": loc("HUB_CFG_SEL1"), "26": loc("HUB_RESET_N"),
         "27": loc("HUB_VBUS_DET"), "28": loc("HUB_NON_REM0"),
@@ -2590,22 +2617,22 @@ def check_system_audio(components):
         "36": "/SYS_3V3", "37": "GND",
     }
     for pin, want in hub_pins.items():
-        expect(net(components, "U400", pin), want, f"USB2512B pin {pin}")
-    for pin in ("6", "7", "8", "9", "11", "18", "19", "20", "21"):
+        expect(net(components, "U400", pin), want, f"USB2513B pin {pin}")
+    for pin in ("8", "9", "11", "20", "21"):
         expect_unconnected(components, "U400", pin)
 
     # Strap mode: self-powered, individual switching/OC, fixed system codec on
-    # non-removable port 1 and optional radio codec on removable port 2.
+    # non-removable ports 1/2 and optional radio codec on removable port 3.
     for ref, pin_net, rail in (
-        ("R402", loc("HUB_NON_REM1"), "GND"),
-        ("R403", loc("HUB_NON_REM0"), "/SYS_3V3"),
+        ("R402", loc("HUB_NON_REM1"), "/SYS_3V3"),
+        ("R403", loc("HUB_NON_REM0"), "GND"),
         ("R404", loc("HUB_CFG_SEL0"), "GND"),
         ("R405", loc("HUB_CFG_SEL1"), "GND"),
     ):
         expect(net(components, ref, "1"), pin_net, f"{ref} strap pin 1")
         expect(net(components, ref, "2"), rail, f"{ref} strap pin 2")
-    expect_value_prefix(components, "R403", "10k", "NON_REM0 high strap")
-    for ref in ("R402", "R404", "R405"):
+    expect_value_prefix(components, "R402", "100k", "NON_REM1 high strap")
+    for ref in ("R403", "R404", "R405"):
         expect_value_prefix(components, ref, "100k", f"{ref} low strap")
     expect_value_prefix(components, "R417", "0R", "physical internal VBUS-valid hub link")
     expect(net(components, "R417", "1"), "/INTERNAL_USB_VBUS_VALID", "audio-hub physical VBUS-valid input")
@@ -2618,7 +2645,7 @@ def check_system_audio(components):
 
     for pin, want in {
         "1": "GND", "2": loc("AUDIO_5V"), "3": loc("HUB_PORT1_EN"),
-        "4": loc("HUB_PORT2_EN"), "5": loc("HUB_PORT2_OC_N"),
+        "4": loc("HUB_PORT3_EN"), "5": loc("HUB_PORT3_OC_N"),
         "6": "/RADIO_CODEC_USB_VBUS_HOST", "7": loc("SYSTEM_DAC_USB_VBUS"),
         "8": loc("HUB_PORT1_OC_N"),
     }.items():

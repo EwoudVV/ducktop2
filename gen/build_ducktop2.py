@@ -492,7 +492,7 @@ class Sheet:
 
     def text(self, x, y, msg):
         msg_escaped = msg.replace('"', "'")
-        self.body.append(f'(text "{msg_escaped}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27))) (uuid {U()}))')
+        self.body.append(f'(text "{msg_escaped}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid {U()}))')
 
     def render(self, self_uuid, page_number, paper="A2"):
         paper = getattr(self, "paper", paper)

@@ -18,6 +18,7 @@ def usblc6(s, ref, value, x, y, dp, dm, rail, *, rail_kind="hier"):
 
 def build(sheet_symbol_uuid):
     s = Sheet(f"/{sheet_symbol_uuid}")
+    s.paper = "A1"
     s.refcounters["#PWR"] = 100
     s.refcounters["#FLG"] = 100
 
@@ -70,6 +71,30 @@ def build(sheet_symbol_uuid):
                 "4": ("MCU_3V3", "hier"),
             }, on_board=False)
 
+    # Trackpad VBUS follows the hub port and the physical host-active gate.
+    # Both logic parts specify Ioff, so the always-on EC inputs cannot power
+    # the switched hub rail through these interfaces.
+    s.place("U450", "74LVC1G08", "SN74LVC1G08DBVR trackpad VBUS permission", 640, 265.43,
+            footprint="Package_TO_SOT_SMD:SOT-23-5",
+            pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("HUB_TRACKPAD_EN", "hier"),
+                      "3": ("GND", "local"), "4": ("TRACKPAD_EN", "local"), "5": ("SYS_3V3", "hier")},
+            extra_props={"Manufacturer": "Texas Instruments", "MPN": "SN74LVC1G08DBVR"})
+    s.place("U451", "SN74LVC1G07DCK", "SN74LVC1G07DCKR trackpad fault isolation", 640, 307.34,
+            footprint="Package_TO_SOT_SMD:SOT-353_SC-70-5",
+            pin_nets={"1": ("", "nc"), "2": ("TRACKPAD_FAULT_N", "hier"),
+                      "3": ("GND", "local"), "4": ("HUB_TRACKPAD_OC_N", "hier"), "5": ("SYS_3V3", "hier")},
+            extra_props={"Manufacturer": "Texas Instruments", "MPN": "SN74LVC1G07DCKR"})
+    s.place("R450", "R", "100k trackpad enable pull-down", 740, 265.43,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("TRACKPAD_EN", "local"), "2": ("GND", "local")})
+    s.place("R451", "R", "10k hub trackpad fault pull-up", 740, 307.34,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("SYS_3V3", "hier"), "2": ("HUB_TRACKPAD_OC_N", "hier")})
+    for ref, y in (("C451", 280.67), ("C2091", 322.58)):
+        s.place(ref, "C", "100n trackpad logic bypass", 740, y,
+                footprint=FOOTPRINTS["C_100n"],
+                pin_nets={"1": ("SYS_3V3", "hier"), "2": ("GND", "local")})
+
     # ---------------- Rear EC DFU prog port (J70) ----------------
     s.text(20, 190.0, "== Rear USB-C EC firmware programming port (DFU) ==")
     s.text(20, 197.0, "BOOT0 (EC_DFU_SEL) high at EC reset selects this port and forces the USB mux on.")
@@ -108,7 +133,7 @@ def build(sheet_symbol_uuid):
             })
 
     # ---------------- Internal trackpad USB2/HID link ----------------
-    s.text(20, 235.0, "== Required internal trackpad on Mu USB2_P8 ==")
+    s.text(20, 235.0, "== Internal trackpad on U400 port 2 ==")
     s.place("R250", "R", "22R trackpad DP series", 20, 259.08, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("TRACKPAD_USB_DP", "hier"), "2": ("TPAD_CONN_DP", "local")})
     s.place("R251", "R", "22R trackpad DM series", 20, 271.78, footprint=FOOTPRINTS["R"],
@@ -126,7 +151,7 @@ def build(sheet_symbol_uuid):
             footprint=FOOTPRINTS["TPS2553DDBV"],
             pin_nets={
                 "1": ("SYS_5V", "hier"), "2": ("GND", "local"),
-                "3": ("MU_HOST_ACTIVE", "hier"), "4": ("TRACKPAD_FAULT_N", "hier"),
+                "3": ("TRACKPAD_EN", "local"), "4": ("TRACKPAD_FAULT_N", "hier"),
                 "5": ("TPAD_ILIM", "local"), "6": ("TPAD_5V", "local"),
             }, extra_props={
                 "Manufacturer": "Texas Instruments", "MPN": "TPS2553DDBVR",
@@ -239,9 +264,9 @@ def build(sheet_symbol_uuid):
 
     s.gnd(520, 360)
     s.text(20, 355.6, "NOTES:")
-    s.text(20, 363.22, "EC enumerates over Mu USB2_P3 only after the carrier-generated physical INTERNAL_USB_VBUS is above the supervisor threshold. U61 defaults disconnected so an always-powered EC cannot back-drive an off host PHY.")
-    s.text(20, 370.84, "The verified B160QAN03.K panel is non-touch; USB2_P4 is paired with native USB-C port 2.")
-    s.text(20, 378.46, "Trackpad uses Mu USB2_P8 as a direct internal USB HID device. TRACKPAD_FAULT_N is pulled up to the EC; S3 removes trackpad VBUS, so wake-from-trackpad is not supported.")
+    s.text(20, 363.22, "EC enumerates over Mu Ultra USB2_P4 only after the carrier-generated physical INTERNAL_USB_VBUS is above the supervisor threshold. U61 defaults disconnected so an always-powered EC cannot back-drive an off host PHY.")
+    s.text(20, 370.84, "The verified B160QAN03.K panel is non-touch; USB2_P2 feeds the left USB7206C upstream.")
+    s.text(20, 378.46, "Trackpad uses U400 port 2. VBUS needs both hub permission and MU_HOST_ACTIVE. Fault reporting to the hub is isolated from the always-on EC pull-up. Modern Standby behaviour needs hardware qualification.")
     s.text(20, 386.08, "The Intehill controller remains a bench fixture/fallback and is not populated on the motherboard.")
     s.text(20, 393.7, "J52 is released for Delta BFB04512HHA-CZ0T: fused MU_12V, 8.2k/3.9n FG interface, and 25kHz open-drain PWM. Floating PWM commands full speed; firmware never drives the fan PWM node high.")
     s.text(20, 401.32, "Delta contract: 0.26A maximum, 35% minimum start duty, FG is open collector at 2 pulses/revolution, and 0% PWM stops the fan. Gate pull-down makes an unpowered/reset EC command full fan speed, not fan-off.")
