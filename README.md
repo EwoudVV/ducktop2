@@ -1,5 +1,7 @@
 # Ducktop2
 
+<img width="1109" height="804" alt="image" src="https://github.com/user-attachments/assets/f92274c8-3593-47c7-84d2-15d226b0aad5" />
+
 i'm building a 16-inch x86 laptop around the LattePanda Mu Ultra. i wanted the
 exposed hardware and flexibility of a cyberdeck in something i could
 actually carry around and use every day.
