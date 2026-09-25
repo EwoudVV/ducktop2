@@ -29,6 +29,13 @@ qualified worst-case boot envelope in `ec_target/board_profile.h`. it never
 sets `power_policy_confirmed`. without a host acknowledgement, it expires
 and controlled loads turn off.
 
+charging does not need the OS to stay running. a live host can pause it,
+but the EC can charge on its own once the Mu rail is off. it waits for
+the previous enable command and power-good signal to clear before counting
+that load as zero. during an authorized boot it reserves the full boot
+budget. while running, it uses the fresh host load reading. unknown loads,
+temperature faults and the qualification switches still block charging.
+
 pack operation and charging require the exact pack, interconnect, thermal
 protection and gauge profile to be qualified. the user reports a successful functional test of the three owned AKZYTUE
 cells in series with two intermediate taps. that is useful functional

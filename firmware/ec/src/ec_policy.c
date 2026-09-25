@@ -643,7 +643,16 @@ static void apply_load_policy(ec_controller_t *controller,
       !controller->outputs.power_policy_confirmed;
 
   remaining_after_loads_mw = system_budget_mw;
-  if (inputs->estimated_mu_edp_power_valid) {
+  if (!inputs->request_mu_12v && !controller->outputs.mu_12v_enable &&
+      !inputs->mu_12v_pg) {
+    /* A completed rail shutdown needs no OS power reading. Waiting for
+     * both the previous enable and PG to clear also covers shutdown decay. */
+  } else if (controller->outputs.mu_boot_authorized) {
+    const uint32_t boot_mw = source_external ? inputs->external_boot_budget_mw
+                                            : inputs->pack_boot_budget_mw;
+    remaining_after_loads_mw = subtract_saturating_u32(
+        remaining_after_loads_mw, boot_mw);
+  } else if (inputs->estimated_mu_edp_power_valid) {
     remaining_after_loads_mw = subtract_saturating_u32(
         remaining_after_loads_mw, inputs->estimated_mu_edp_power_mw);
   } else {

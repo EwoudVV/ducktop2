@@ -19,7 +19,7 @@ KICAD_3D = "/Applications/KiCad/KiCad.app/Contents/SharedSupport/3dmodels"
 
 # Mapping from ducktop2 footprint names to model filenames where they differ
 FOOTPRINT_TO_MODEL = {
-    "LattePanda_Module_H8.0mm_Horizontal": "LattePanda_Mu_H8.0_Horizontal.step",
+    "LattePanda_Module_H8.0mm_Horizontal": "LattePanda_Mu_Ultra_H8.0_Horizontal.step",
 }
 
 # Mapping from ducktop2 footprint names to standard KiCad 3D library paths
@@ -42,13 +42,14 @@ MODEL_OFFSETS = {
     "Amphenol_MDT420M01001_H4.2": (-1.75, -3.725, 0),
     "SSD1306_0.96in_Module_4Pin": (0, 0, +8.50),
     "ublox_MAX": (0.15, -0.06, +0.40),
-    "LattePanda_Mu_H8.0_Horizontal": (0, 0, +27.91),
+    "LattePanda_Mu_Ultra_H8.0_Horizontal": (0, -32.5, 5.5),
     "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal": (0, 0, 0),
 }
 
 
 # Factory contact faces and locating pegs aligned through native STEP export.
 MODEL_ROTATIONS = {
+    "LattePanda_Mu_Ultra_H8.0_Horizontal": (-90, 0, 180),
     "Amphenol_MDT420E01001_H4.2": (-90, 0, 0),
     "Amphenol_MDT420M01001_H4.2": (-90, 0, 90),
     "Infineon_IM68A130V01": (0, 0, -90),

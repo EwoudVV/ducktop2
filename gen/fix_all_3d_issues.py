@@ -22,6 +22,7 @@ KICAD_3D = Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/3dmodels")
 # (x, y, z) offsets, and optional (rx, ry, rz) rotation.
 # All values verified against cadquery bounding box analysis.
 MODEL_FIXES: dict[str, tuple[tuple[float, float, float], tuple[float, float, float] | None]] = {
+    "LattePanda_Mu_Ultra_H8.0_Horizontal": ((0, -32.5, 5.5), (-90, 0, 180)),
     "Cherry_MX_ULP_SMD":                      ((0, 5.50, 3.40), (0, 0, 180)),
     "DRA818_Castellated":                      ((0, -2.00, 9.50), None),
     "ublox_MAX":                               ((0.15, -0.06, 0.40), None),
@@ -35,7 +36,6 @@ MODEL_FIXES: dict[str, tuple[tuple[float, float, float], tuple[float, float, flo
 MODELS_CORRECT = {
     "Coilcraft_XGL5030",
     "JXD1-1022NL_MidMount",
-    "LattePanda_Mu_H8.0_Horizontal",
     "SSD1306_0.96in_Module_4Pin",
     "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
     "MiniCircuits_QA2224_PL484",

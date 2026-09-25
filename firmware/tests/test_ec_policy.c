@@ -396,23 +396,86 @@ static void test_active_pd_faults_and_charging(void) {
 static void test_source_aware_charge_budget(void) {
   ec_controller_t controller;
   ec_inputs_t inputs;
+  ec_policy_config_t config = ec_policy_default_config();
+  config.normal_mu_edp_budget_mw = 14000u;
 
   set_nominal_inputs(&inputs);
-  ec_controller_init(&controller, NULL, 0u);
+  ec_controller_init(&controller, &config, 0u);
   activate_pd(&controller, &inputs, EC_SOURCE_PD1, 2000u, 0u);
   inputs.request_charger = true;
   inputs.requested_charge_power_mw = 10000u;
   inputs.estimated_aux_power_mw = 1000u;
-  inputs.estimated_mu_edp_power_mw = 12000u;
+  configure_mu_request(&inputs, 12000u, 14000u, true);
   ec_controller_step(&controller, &inputs, 23u);
   CHECK(controller.outputs.source_input_power_mw == 26250u);
   CHECK(controller.outputs.source_usable_power_mw == 22312u);
   CHECK(controller.outputs.charge_power_budget_mw == 3312u);
   CHECK(controller.outputs.charger_enable);
+  CHECK(controller.outputs.mu_12v_enable);
 
   inputs.estimated_aux_power_mw = 2000u;
+  inputs.applied_mu_edp_budget_mw = 14000u;
+  inputs.mu_12v_pg = true;
   ec_controller_step(&controller, &inputs, 24u);
   CHECK(controller.outputs.charge_power_budget_mw == 2312u);
+  CHECK(!controller.outputs.charger_enable);
+  CHECK(controller.outputs.mu_12v_enable);
+  CHECK(controller.fault == EC_FAULT_NONE);
+}
+
+static void test_charging_without_the_os(void) {
+  ec_controller_t controller;
+  ec_inputs_t inputs;
+  set_nominal_inputs(&inputs);
+  ec_controller_init(&controller, NULL, 0u);
+  activate_pd(&controller, &inputs, EC_SOURCE_PD1, 3000u, 0u);
+  inputs.request_charger = true;
+  inputs.requested_charge_power_mw = 10000u;
+  inputs.estimated_aux_power_mw = 1000u;
+  inputs.estimated_mu_edp_power_valid = false;
+
+  /* No host, rail already off: there is a bounded charging budget. */
+  ec_controller_step(&controller, &inputs, 23u);
+  CHECK(controller.outputs.charge_power_budget_mw == 10000u);
+  CHECK(controller.outputs.charger_enable);
+  CHECK(!controller.outputs.mu_12v_enable);
+
+  /* PG still high means an unknown load may remain. */
+  inputs.mu_12v_pg = true;
+  ec_controller_step(&controller, &inputs, 24u);
+  CHECK(controller.outputs.charge_power_budget_mw == 0u);
+  CHECK(!controller.outputs.charger_enable);
+  inputs.mu_12v_pg = false;
+
+  /* Boot without a host must reserve the complete qualified boot load. */
+  inputs.request_mu_12v = true;
+  inputs.external_boot_authorized = true;
+  inputs.external_boot_budget_mw = 20000u;
+  ec_controller_step(&controller, &inputs, 25u);
+  CHECK(controller.outputs.mu_12v_enable);
+  CHECK(controller.outputs.mu_boot_authorized);
+  CHECK(controller.outputs.charge_power_budget_mw == 8062u);
+  CHECK(controller.outputs.charger_enable);
+
+  inputs.mu_12v_pg = true;
+  ec_controller_step(&controller, &inputs, 26u);
+  inputs.request_mu_12v = false;
+  inputs.external_boot_authorized = false;
+  ec_controller_step(&controller, &inputs, 27u);
+  CHECK(!controller.outputs.mu_12v_enable);
+  CHECK(!controller.outputs.charger_enable);
+  inputs.mu_12v_pg = false;
+  ec_controller_step(&controller, &inputs, 28u);
+  CHECK(controller.outputs.charger_enable);
+
+  /* Temperature and unknown auxiliary demand still block charging. */
+  inputs.estimated_aux_power_valid = false;
+  ec_controller_step(&controller, &inputs, 29u);
+  CHECK(!controller.outputs.charger_enable);
+  inputs.estimated_aux_power_valid = true;
+  inputs.thermal_ok = false;
+  ec_controller_step(&controller, &inputs, 30u);
+  CHECK(controller.fault == EC_FAULT_THERMAL);
   CHECK(!controller.outputs.charger_enable);
 }
 
@@ -924,6 +987,7 @@ int main(void) {
   test_path_good_faults();
   test_active_pd_faults_and_charging();
   test_source_aware_charge_budget();
+  test_charging_without_the_os();
   test_weak_pd_contract_cannot_start_mu();
   test_aux_requires_qualified_current_and_applied_limit();
   test_low_pack_15w_policy();

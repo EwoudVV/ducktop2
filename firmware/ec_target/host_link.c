@@ -49,6 +49,11 @@ ec_host_state_t ec_host_state(uint32_t now_ms)
     if (state.valid && now_ms-received_at>=lease_ms) state.valid=false;
     return state;
 }
+bool ec_host_allows_charging(uint32_t now_ms)
+{
+    ec_host_state_t host=ec_host_state(now_ms);
+    return !host.valid || (host.requests & EC_HOST_REQUEST_CHARGE) != 0u;
+}
 bool ec_host_take_usb_clear(uint32_t now_ms)
 {
     bool take=usb_clear_pending && ec_host_state(now_ms).valid;

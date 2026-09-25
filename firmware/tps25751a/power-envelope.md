@@ -29,3 +29,21 @@ the AON converter's own losses. 2.75 A is an example input, not a TI guarantee.
 exact source, charger-current, path-drop and AON demand bounds remain
 unqualified. the 85% portable power model is not a substitute for them.
 boot, pack bridge, charging and load qualification switches remain disabled.
+
+## simultaneous running and charging
+
+the new design needs to charge while running, during startup and while
+shut down. it also needs to use 5 V and 9 V inputs with battery assistance
+when the input is too small. the current 15/20 V input selector and PD
+acceptance rules still need to be changed for that.
+
+the calculator now has an optional operating budget. it needs explicit
+system load, reserve, converter efficiency and output-current limits, along
+with the pack voltage, allowed discharge current and path efficiency.
+it reports charging headroom, battery assistance and any load reduction
+needed. battery assistance never counts as charging.
+
+the converter output limit includes the system and charging current.
+for example, a 6 A output limit at 10 V caps this path at 60 W, even with
+a 100 W adapter. this is why the charger cannot be chosen from its USB-C
+input rating alone. the example is arithmetic, not a released load profile.

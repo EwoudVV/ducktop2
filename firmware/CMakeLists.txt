@@ -230,3 +230,4 @@ add_test(NAME usb_power_tests COMMAND usb_power_tests)
 
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
 add_test(NAME tps25751_config_tests COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_tps25751_config.py)
+add_test(NAME pd_headroom_tests COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_pd_headroom.py)

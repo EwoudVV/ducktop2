@@ -9,6 +9,7 @@ static uint32_t get32(const uint8_t *p) { return p[0]|((uint32_t)p[1]<<8)|((uint
 int main(void)
 {
     ec_host_init(); assert(!ec_host_state(0).valid);
+    assert(ec_host_allows_charging(0));
     assert(ec_host_request_budget(30000));
     ec_telemetry_snapshot_t telemetry={0}; ec_battery_report_t battery={0};
     ec_host_publish(&telemetry,&battery,0,0,0,0);
@@ -16,7 +17,9 @@ int main(void)
     u32(p+8,30000); u32(p+12,25000); u32(p+16,5000); u32(p+24,1000);
     ec_host_receive(p,63,0); assert(!ec_host_state(0).valid);
     ec_host_receive(p,64,0); assert(ec_host_state(999).valid);
+    assert(!ec_host_allows_charging(999));
     assert(!ec_host_state(1000).valid);
+    assert(ec_host_allows_charging(1000));
     u32(p+8,30001); ec_host_receive(p,64,1100); assert(!ec_host_state(1100).valid);
     u32(p+8,30000); ec_host_receive(p,64,1100); assert(ec_host_state(1100).valid);
     assert(ec_host_request_budget(29000)); assert(!ec_host_state(1100).valid);
@@ -36,6 +39,10 @@ int main(void)
     u32(p+4,get32(ec_host_report()+4));p[28]=128;ec_host_receive(p,64,2200);assert(!ec_host_state(2200).valid);
     p[28]=127;p[29]=1;ec_host_receive(p,64,2200);assert(!ec_host_state(2200).valid);
     p[29]=0;ec_host_receive(p,64,2200);assert(ec_host_state(2200).valid);
+    u32(p+20,EC_HOST_REQUEST_CHARGE);
+    ec_host_receive(p,64,2201);assert(ec_host_allows_charging(2201));
+    u32(p+20,0);
+    ec_host_receive(p,64,2202);assert(!ec_host_allows_charging(2202));
     ec_host_usb_status_t usb={0x21,0x40,3,0xb7,5200,5160,32000};ec_host_publish_usb(&usb);
     ec_host_publish(&telemetry,&battery,0,0,0,2200);
     assert(ec_host_report()[52]==0x21 && ec_host_report()[55]==0xb7 && get32(ec_host_report()+60)==32000);

@@ -29,7 +29,7 @@ MODEL_OFFSETS = {
     "Amphenol_MDT420M01001_H4.2": (-1.75, -3.725, 0),  # M.2 socket, origin at pin 1
     "SSD1306_0.96in_Module_4Pin": (0, 0, +8.50),   # symmetric module, centered ok
     "ublox_MAX":              (0,     0, +0.40),    # GPS module, origin at pin 1
-    "LattePanda_Mu_H8.0_Horizontal": (0, 0, +27.91),  # socket connector
+    "LattePanda_Mu_Ultra_H8.0_Horizontal": (0, -32.5, 5.5),  # module datum and 5.5mm supports
     "Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal": (0, 0, 0),  # FFC connector, standard model
 }
 

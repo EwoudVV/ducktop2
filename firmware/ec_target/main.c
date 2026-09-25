@@ -176,8 +176,8 @@ static void read_inputs(ec_inputs_t *in, ec_telemetry_inputs_t *telemetry, uint3
     in->power_limits_applied=host.valid;
     in->applied_mu_edp_budget_mw=host.budget_mw;
     in->request_charger=DUCKTOP2_CHARGING_QUALIFIED && DUCKTOP2_PACK_QUALIFIED &&
-                        pack->fault_n && in->pack_telemetry_valid && host.valid &&
-                        (host.requests & EC_HOST_REQUEST_CHARGE);
+                        pack->fault_n && in->pack_telemetry_valid &&
+                        ec_host_allows_charging(now);
     in->requested_charge_power_mw=in->request_charger ? 10000u : 0u;
     in->request_audio_amp=host.valid && (host.requests & EC_HOST_REQUEST_SPEAKER) && !headphone_present;
     in->request_audio_mic=host.valid && (host.requests & EC_HOST_REQUEST_MIC);
@@ -213,7 +213,9 @@ static void refresh_transfer_interlocks(ec_inputs_t *in,uint32_t sampled_at,uint
     if(!ec_host_state(*now).valid) {
         in->power_limits_applied=false;
         in->estimated_mu_edp_power_valid=false;
-        in->request_charger=false;
+        /* The missing host lease invalidates its load reading. The policy
+         * can resume charging once the Mu rail is off, or reserve a separately
+         * qualified boot budget. It must not treat an unknown live load as zero. */
     }
 }
 

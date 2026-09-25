@@ -1,6 +1,6 @@
 # power and battery
 
-updated 21 september 2026. the four-layer BMS is routed, including the
+updated 25 september 2026. the four-layer BMS is routed, including the
 thermal circuit and separate cable connections. the saved board has zero
 unconnected items, zero physical DRC errors and no schematic mismatch.
 [layout checks](../../verification/bms-layout.md) records the copper and
@@ -13,6 +13,19 @@ the new input target is 100 W over USB-C, at 20 V / 5 A. that needs a new
 charger and a complete check of the input switches, looms, protection and
 12 V supply. the saved PD profiles and charger limits are still the older
 60 W design. do not increase those limits on the current hardware.
+
+charging needs to work while the laptop is running, starting up or shut
+down. smaller 5 V and 9 V chargers should work too. the laptop takes what
+it needs first, then the remaining input power charges the battery. if the
+charger cannot cover the load, the battery supplies the difference within
+its allowed current. charging resumes when there is enough spare power.
+the pack temperature limits still apply in every state.
+
+the EC now permits charging without a running OS, after checking that the
+Mu rail is off or reserving its qualified startup budget. this is tested
+in software only. 5 V and 9 V operation still needs the input-selector and
+firmware voltage checks changed together. those voltages are not enabled
+on the saved hardware yet.
 
 the BMS stays unchanged during the interface migration. RS10 is 11 mOhm,
 so its pack breaker is about 4.55 A nominal and can trip around 3.60 A at

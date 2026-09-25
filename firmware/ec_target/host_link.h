@@ -30,6 +30,9 @@ void ec_host_publish_usb(const ec_host_usb_status_t *status);
 bool ec_host_request_budget(uint32_t mw);
 void ec_host_receive(const uint8_t *packet, uint16_t size, uint32_t now_ms);
 ec_host_state_t ec_host_state(uint32_t now_ms);
+/* Charging does not require the OS. A live host can still pause it.
+ * Pack, temperature and power-budget checks remain the EC's responsibility. */
+bool ec_host_allows_charging(uint32_t now_ms);
 void ec_host_publish(const ec_telemetry_snapshot_t *telemetry,
                       const ec_battery_report_t *battery, uint16_t flags,
                       uint16_t fault, uint16_t fan_rpm, uint32_t now_ms);
