@@ -1,5 +1,6 @@
 # Ducktop2
 
+<img width="820" height="833" alt="image" src="https://github.com/user-attachments/assets/9345a4b7-7898-459d-a0e5-621a216b712b" />
 <img width="1109" height="804" alt="image" src="https://github.com/user-attachments/assets/f92274c8-3593-47c7-84d2-15d226b0aad5" />
 
 i'm building a 16-inch x86 laptop around the LattePanda Mu Ultra. i wanted the
