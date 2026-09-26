@@ -37,7 +37,7 @@ void gpio_init_all(void)
     /* PA2: CHG_INT_N - Input, pull-up */
     GPIOA->PUPDR   |= GPIO_PUPDR_PU << (2 * 2);
 
-    /* PA3: PMIC_QON_ASSERT - Output, push-pull, low */
+    /* PA3: MU_PROCHOT_RELEASE - low keeps the module throttled. */
     GPIOA->MODER   |= GPIO_MODER_OUTPUT << (3 * 2);
 
     /* PA4: CHG_ENABLE - Output, push-pull, low (charger off) */
@@ -285,9 +285,9 @@ void gpio_set_charger_enable(bool enable)
     }
 }
 
-void gpio_set_pmic_qon_assert(bool assert)
+void gpio_set_mu_throttle_release(bool release)
 {
-    if (assert) {
+    if (release) {
         GPIOA->BSRR = (1u << 3);
     } else {
         GPIOA->BSRR = (1u << (3 + 16));
@@ -412,7 +412,7 @@ void gpio_set_audio_mic_enable(bool enable)
  * (PA6=IN6, PA7=IN7, PB0=IN8) and verified against the schematic
  * (gen/generate_pin_review_table.py lines 524-527; the EC MCU sheet maps
  * pins 31/32/35 to AUX_DC_ADC/THERM_SKIN_ADC/THERM_MU_ADC on those ports).
- * Note: PA3 (ADC1_IN3) is PMIC_QON_ASSERT, so the previous hardcoded
+ * Note: PA3 (ADC1_IN3) is MU_PROCHOT_RELEASE, so the previous hardcoded
  * channel 3 for AUX_DC sampled the wrong signal.
  */
 #define ADC_CHANNEL_AUX_DC       6u

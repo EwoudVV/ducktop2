@@ -80,7 +80,7 @@ for token in (
     "EC_FAULT_MU_POWER_GOOD_STUCK_HIGH",
     "source_input_power_mw",
     "ec_policy_usable_power_mw",
-    "!controller->path_commanded && !inputs->all_pd_paths_off",
+    "!controller->path_commanded && !inputs->all_source_paths_off",
     "apply_radio_db_policy",
     "radio_db_request_blocked",
     "radio_db_power_good_timeout_ms",

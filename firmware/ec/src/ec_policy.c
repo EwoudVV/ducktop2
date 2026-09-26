@@ -15,10 +15,32 @@ static bool source_uses_charger_input(ec_source_id_t source) {
   return source == EC_SOURCE_AUX || source_is_pd(source);
 }
 
-static uint16_t source_iindpm(const ec_policy_config_t *config,ec_source_id_t source,uint16_t qualified_ma) {
+/* Reserve raw AON demand before allocating current to the charger. USB
+ * budgets include source tolerance, cable drop and the raw-input loom. */
+static uint16_t source_voltage_floor(ec_source_id_t source,uint16_t mv,uint16_t ma)
+{
+  uint32_t floor=(uint32_t)mv*95u/100u;
+  uint32_t loss=150u;
+  if(source_is_pd(source)) loss+=ma>3000u ? 750u : 500u;
+  return floor>loss ? (uint16_t)(floor-loss) : 0u;
+}
+
+uint16_t ec_policy_source_iindpm_ma(const ec_policy_config_t *config,
+                                   ec_source_id_t source,uint16_t mv,uint16_t ma)
+{
+  if(!config || !source_uses_charger_input(source)) return 0u;
   ec_policy_config_t limits=*config;
-  if (source_is_pd(source)) limits.iindpm_margin_ma=config->pd_iindpm_margin_ma;
-  return ec_policy_iindpm_ma(&limits,qualified_ma);
+  uint32_t margin=source_is_pd(source) ? config->pd_iindpm_margin_ma : config->iindpm_margin_ma;
+  if(config->raw_aon_reserve_mw) {
+    uint16_t floor=source_voltage_floor(source,mv,ma);
+    if(!floor) return 0u;
+    uint64_t reserve=((uint64_t)config->raw_aon_reserve_mw*1000u+floor-1u)/floor;
+    if(reserve>=ma || margin+reserve>=ma) return 0u;
+    margin+=(uint32_t)reserve;
+  }
+  if(margin>=ma) return 0u;
+  limits.iindpm_margin_ma=(uint16_t)margin;
+  return ec_policy_iindpm_ma(&limits,ma);
 }
 
 static bool input_current_is_qualified(const ec_controller_t *controller,
@@ -28,7 +50,7 @@ static bool input_current_is_qualified(const ec_controller_t *controller,
     return true;
   }
   if (!source->qualified_input_current_valid ||
-      source_iindpm(&controller->config,source_id,
+      ec_policy_source_iindpm_ma(&controller->config,source_id,source->negotiated_voltage_mv,
                           source->qualified_input_current_ma) == 0u) {
     return false;
   }
@@ -87,6 +109,7 @@ static void runtime_safe_reset(ec_controller_t *controller, uint32_t now_ms) {
   controller->power_policy_started_ms = now_ms;
   controller->mu_enable_started_ms = now_ms;
   controller->radio_db_enable_started_ms = now_ms;
+  controller->validated_voltage_mv=controller->validated_current_ma=0u;
   controller->path_commanded = false;
   controller->iindpm_commanded = false;
   controller->power_policy_waiting = false;
@@ -114,6 +137,7 @@ static void enter_fault(ec_controller_t *controller, ec_source_id_t source,
   controller->active_source = EC_SOURCE_NONE;
   controller->fault_source = source;
   controller->fault = fault;
+  controller->validated_voltage_mv=controller->validated_current_ma=0u;
   controller->path_commanded = false;
   controller->iindpm_commanded = false;
   controller->power_policy_waiting = false;
@@ -144,10 +168,14 @@ ec_policy_config_t ec_policy_default_config(void) {
   config.iindpm_margin_ma = 250u;
   config.pd_iindpm_margin_ma = 250u;
   config.iindpm_cap_ma = 2750u;
+  config.iindpm_step_ma = 1u;
+  config.minimum_iindpm_ma = 0u;
+  config.raw_aon_reserve_mw = 0u;
   config.minimum_vsys_mv = 10000u;
   config.source_efficiency_permille =
       EC_DEFAULT_SOURCE_EFFICIENCY_PERMILLE;
   config.system_reserve_mw = EC_DEFAULT_SYSTEM_RESERVE_MW;
+  config.standby_reserve_mw = EC_DEFAULT_SYSTEM_RESERVE_MW;
   config.minimum_charge_budget_mw = 2500u;
   config.maximum_charge_budget_mw = 10000u;
   config.normal_mu_edp_budget_mw =
@@ -189,16 +217,24 @@ uint16_t ec_policy_iindpm_ma(const ec_policy_config_t *config,
   }
   available_ma =
       (uint16_t)(qualified_input_current_ma - config->iindpm_margin_ma);
-  return available_ma < config->iindpm_cap_ma ? available_ma
-                                              : config->iindpm_cap_ma;
+  if(available_ma>config->iindpm_cap_ma) available_ma=config->iindpm_cap_ma;
+  uint16_t step=config->iindpm_step_ma ? config->iindpm_step_ma : 1u;
+  available_ma=(uint16_t)(available_ma/step*step);
+  return available_ma>=config->minimum_iindpm_ma ? available_ma : 0u;
+}
+
+uint32_t ec_policy_external_input_power_mw(const ec_policy_config_t *config,
+                                           ec_source_id_t source,uint16_t mv,uint16_t ma)
+{
+  uint16_t limit=ec_policy_source_iindpm_ma(config,source,mv,ma);
+  if(config && config->raw_aon_reserve_mw) mv=source_voltage_floor(source,mv,ma);
+  return (uint32_t)mv*limit/1000u;
 }
 
 uint32_t ec_policy_pd_input_power_mw(const ec_policy_config_t *config,
-                                     uint16_t negotiated_voltage_mv,
-                                     uint16_t negotiated_current_ma) {
-  uint16_t iindpm_ma = source_iindpm(config, EC_SOURCE_PD1, negotiated_current_ma);
-
-  return ((uint32_t)negotiated_voltage_mv * (uint32_t)iindpm_ma) / 1000u;
+                                     uint16_t mv,uint16_t ma)
+{
+  return ec_policy_external_input_power_mw(config,EC_SOURCE_PD1,mv,ma);
 }
 
 uint32_t ec_policy_usable_power_mw(const ec_policy_config_t *config,
@@ -270,6 +306,18 @@ static void hold_mu_on_pack(ec_controller_t *c,uint32_t budget,uint32_t now) {
 
 void ec_controller_arbitrate(ec_controller_t *c,const ec_inputs_t *in,uint32_t now) {
   if (c->fault!=EC_FAULT_NONE || c->transfer_active) return;
+  if(source_uses_charger_input(c->active_source) && c->validated_voltage_mv) {
+    const ec_source_observation_t *active=&in->source[c->active_source];
+    bool changed=active->qualified_input_current_valid &&
+        (active->negotiated_voltage_mv!=c->validated_voltage_mv ||
+         active->qualified_input_current_ma!=c->validated_current_ma);
+    bool reloaded=in->charger_config_valid && in->charger_iindpm_applied &&
+        in->applied_charger_iindpm_ma!=c->outputs.charger_iindpm_ma;
+    if(changed || reloaded) {
+      if(ec_controller_pack_bridge_ready(c,in)) hold_mu_on_pack(c,c->outputs.mu_edp_budget_mw,now);
+      else ec_controller_stop_source(c,now);
+    }
+  }
   if (source_is_valid(c->candidate_source)) {
     if (!source_eligible(c,in,c->candidate_source)) ec_controller_stop_source(c,now);
     else return;
@@ -282,17 +330,24 @@ void ec_controller_arbitrate(ec_controller_t *c,const ec_inputs_t *in,uint32_t n
     if (s==c->transfer_failed_source && !time_reached(now,c->transfer_retry_not_before_ms)) continue;
     if (source_eligible(c,in,s)) {preferred=s;break;}
   }
+  /* An attached weak adapter must not prevent an otherwise qualified
+   * battery boot. After the host confirms its battery-safe budget, normal
+   * arbitration can add the adapter without interrupting that envelope. */
+  if(!c->outputs.mu_12v_enable && in->request_mu_12v && preferred!=EC_SOURCE_NONE &&
+     preferred!=EC_SOURCE_PACK && in->pack_boot_authorized && in->pack_boot_budget_mw &&
+     !in->pack_low && in->estimated_aux_power_valid && source_eligible(c,in,EC_SOURCE_PACK)) {
+    uint64_t other=(uint64_t)in->estimated_aux_power_mw+c->config.system_reserve_mw;
+    uint32_t external=ec_policy_usable_power_mw(&c->config,source_input_power_mw(c,&in->source[preferred],preferred));
+    uint32_t pack=ec_policy_usable_power_mw(&c->config,in->source[EC_SOURCE_PACK].available_power_mw);
+    if((!in->external_boot_authorized || !in->external_boot_budget_mw ||
+        external<other+in->external_boot_budget_mw) && pack>=other+in->pack_boot_budget_mw)
+      preferred=EC_SOURCE_PACK;
+  }
   bool active_valid=source_is_valid(c->active_source) && source_eligible(c,in,c->active_source) &&
                     in->source[c->active_source].path_good;
   if (active_valid && preferred==c->active_source) return;
   if (c->outputs.mu_12v_enable && ec_controller_pack_bridge_ready(c,in)) {
     uint32_t budget=c->outputs.mu_edp_budget_mw;
-    uint64_t demand=(uint64_t)budget+in->estimated_aux_power_mw+c->config.system_reserve_mw;
-    if (preferred!=EC_SOURCE_NONE && preferred!=EC_SOURCE_PACK &&
-        demand>ec_policy_usable_power_mw(&c->config,source_input_power_mw(c,&in->source[preferred],preferred))) {
-      if (active_valid) return;
-      preferred=EC_SOURCE_PACK;
-    }
     if (preferred==EC_SOURCE_NONE || preferred==EC_SOURCE_PACK) {
       hold_mu_on_pack(c,budget,now);return;
     }
@@ -309,13 +364,13 @@ void ec_controller_arbitrate(ec_controller_t *c,const ec_inputs_t *in,uint32_t n
    * Source loss without a qualified pack uses the ordinary passive restart. */
   if (active_valid && c->outputs.mu_12v_enable) return;
   if (source_is_valid(c->active_source)) ec_controller_stop_source(c,now);
-  if (preferred!=EC_SOURCE_NONE && in->all_pd_paths_off && in->service_bus_healthy)
+  if (preferred!=EC_SOURCE_NONE && in->all_source_paths_off && in->service_bus_healthy)
     (void)ec_controller_request_source(c,preferred,now);
 }
 
 static bool reset_interlock_ready(const ec_inputs_t *inputs) {
   return reset_domains_released(inputs) && inputs->service_bus_healthy &&
-         inputs->all_pd_paths_off;
+         inputs->all_source_paths_off;
 }
 
 bool ec_controller_request_source(ec_controller_t *controller,
@@ -340,6 +395,7 @@ bool ec_controller_request_source(ec_controller_t *controller,
   controller->path_enable_started_ms = now_ms;
   controller->iindpm_command_started_ms = now_ms;
   controller->power_policy_started_ms = now_ms;
+  controller->validated_voltage_mv=controller->validated_current_ma=0u;
   controller->path_commanded = false;
   controller->iindpm_commanded = false;
   controller->power_policy_waiting = false;
@@ -389,7 +445,7 @@ static void step_validating(ec_controller_t *controller,
                                 controller->config.validation_timeout_ms)) {
       enter_fault(controller, source,
                   !reset_domains_released(inputs) ||
-                          !inputs->all_pd_paths_off
+                          !inputs->all_source_paths_off
                       ? EC_FAULT_RESET_INTERLOCK
                       : EC_FAULT_SERVICE_BUS);
     }
@@ -403,7 +459,7 @@ static void step_validating(ec_controller_t *controller,
     enter_fault(controller, source, EC_FAULT_SERVICE_BUS);
     return;
   }
-  if (!controller->path_commanded && !inputs->all_pd_paths_off) {
+  if (!controller->path_commanded && !inputs->all_source_paths_off) {
     enter_fault(controller, source, EC_FAULT_RESET_INTERLOCK);
     return;
   }
@@ -465,17 +521,18 @@ static void step_validating(ec_controller_t *controller,
       return;
     }
 
-    expected_iindpm_ma = source_iindpm(
-        &controller->config, source, observation->qualified_input_current_ma);
+    expected_iindpm_ma = ec_policy_source_iindpm_ma(
+        &controller->config, source, observation->negotiated_voltage_mv, observation->qualified_input_current_ma);
   }
 
-  if (source_is_pd(source)) {
+  if (source_uses_charger_input(source)) {
     if (!controller->path_commanded) {
       if (observation->path_good) {
         enter_fault(controller, source, EC_FAULT_PATH_GOOD_STUCK_HIGH);
         return;
       }
-      controller->outputs.pd_path_enable[pd_index(source)] = true;
+      if(source==EC_SOURCE_AUX) controller->outputs.aux_path_enable=true;
+      else controller->outputs.pd_path_enable[pd_index(source)] = true;
       controller->path_commanded = true;
       controller->path_enable_started_ms = now_ms;
       return;
@@ -521,6 +578,8 @@ static void step_validating(ec_controller_t *controller,
     }
   }
 
+  controller->validated_voltage_mv=observation->negotiated_voltage_mv;
+  controller->validated_current_ma=observation->qualified_input_current_ma;
   controller->source_state[source] = EC_SOURCE_STATE_ACTIVE;
   controller->active_source = source;
   controller->candidate_source = EC_SOURCE_NONE;
@@ -592,8 +651,10 @@ static void apply_load_policy(ec_controller_t *controller,
   const uint32_t ceiling_mw =
       low_pack_mode ? controller->config.low_pack_mu_edp_budget_mw
                     : controller->config.normal_mu_edp_budget_mw;
-  uint32_t system_budget_mw = subtract_saturating_u32(
-      usable_power_mw, controller->config.system_reserve_mw);
+  const bool mu_off=!controller->outputs.mu_12v_enable && !inputs->mu_12v_pg;
+  const bool asleep=!inputs->request_mu_12v && mu_off;
+  const uint32_t reserve_mw=asleep ? controller->config.standby_reserve_mw : controller->config.system_reserve_mw;
+  uint32_t system_budget_mw = subtract_saturating_u32(usable_power_mw,reserve_mw);
   uint32_t mu_budget_mw;
   uint32_t charge_budget_mw = 0u;
   uint32_t remaining_after_loads_mw;
@@ -609,13 +670,14 @@ static void apply_load_policy(ec_controller_t *controller,
   /* Keep a working host envelope stable across a stronger source. A budget
    * increase must not invalidate the host lease or pulse the Mu rail. */
   if (controller->outputs.mu_12v_enable && controller->outputs.mu_edp_budget_mw>0u &&
-      controller->outputs.mu_edp_budget_mw<=mu_budget_mw)
+      (controller->outputs.mu_edp_budget_mw<=mu_budget_mw ||
+       (source_external && ec_controller_pack_bridge_ready(controller,inputs))))
     mu_budget_mw=controller->outputs.mu_edp_budget_mw;
 
   if (source_external && active->qualified_input_current_valid) {
     controller->outputs.charger_iindpm_ma =
-        source_iindpm(&controller->config,controller->active_source,
-                            active->qualified_input_current_ma);
+        ec_policy_source_iindpm_ma(&controller->config,controller->active_source,
+                            active->negotiated_voltage_mv,active->qualified_input_current_ma);
   } else {
     controller->outputs.charger_iindpm_ma = 0u;
   }
@@ -642,9 +704,15 @@ static void apply_load_policy(ec_controller_t *controller,
   controller->outputs.power_budget_limited =
       !controller->outputs.power_policy_confirmed;
 
+  const bool wait_for_power=mu_off && source_external && inputs->external_boot_authorized &&
+      !inputs->power_limits_applied && inputs->external_boot_budget_mw>mu_budget_mw;
   remaining_after_loads_mw = system_budget_mw;
-  if (!inputs->request_mu_12v && !controller->outputs.mu_12v_enable &&
-      !inputs->mu_12v_pg) {
+  if ((!inputs->request_mu_12v || wait_for_power) && mu_off) {
+    if(wait_for_power) {
+      remaining_after_loads_mw=subtract_saturating_u32(usable_power_mw,controller->config.standby_reserve_mw);
+      remaining_after_loads_mw=inputs->estimated_aux_power_valid ?
+          subtract_saturating_u32(remaining_after_loads_mw,inputs->estimated_aux_power_mw) : 0u;
+    }
     /* A completed rail shutdown needs no OS power reading. Waiting for
      * both the previous enable and PG to clear also covers shutdown decay. */
   } else if (controller->outputs.mu_boot_authorized) {
@@ -693,7 +761,8 @@ static void apply_load_policy(ec_controller_t *controller,
   controller->outputs.audio_mic_enable =
       inputs->request_audio_mic && optional_loads_permitted;
 
-  if (!inputs->request_mu_12v) {
+  if (!inputs->request_mu_12v || wait_for_power) {
+    if(wait_for_power) controller->outputs.mu_edp_budget_mw=0u;
     controller->outputs.mu_12v_enable = false;
     controller->power_policy_waiting = false;
     controller->commanded_mu_edp_budget_mw = 0u;
@@ -825,8 +894,8 @@ static void step_active(ec_controller_t *controller, const ec_inputs_t *inputs,
   }
 
   if (source_uses_charger_input(source)) {
-    const uint16_t expected_iindpm_ma = source_iindpm(
-        &controller->config, source, observation->qualified_input_current_ma);
+    const uint16_t expected_iindpm_ma = ec_policy_source_iindpm_ma(
+        &controller->config, source, observation->negotiated_voltage_mv, observation->qualified_input_current_ma);
 
     controller->outputs.charger_iindpm_ma = expected_iindpm_ma;
     if (!inputs->charger_iindpm_applied) {
@@ -837,9 +906,8 @@ static void step_active(ec_controller_t *controller, const ec_inputs_t *inputs,
       enter_fault(controller, source, EC_FAULT_IINDPM_MISMATCH);
       return;
     }
-    if (source_is_pd(source)) {
-      controller->outputs.pd_path_enable[pd_index(source)] = true;
-    }
+    if(source==EC_SOURCE_AUX) controller->outputs.aux_path_enable=true;
+    else controller->outputs.pd_path_enable[pd_index(source)] = true;
   }
   apply_load_policy(controller, inputs, now_ms);
 }
@@ -931,7 +999,7 @@ const ec_outputs_t *ec_controller_outputs(const ec_controller_t *controller) {
 bool ec_controller_one_hot_invariant(const ec_controller_t *controller) {
   size_t index;
   unsigned int non_off_states = 0u;
-  unsigned int enabled_pd_paths = 0u;
+  unsigned int enabled_pd_paths = controller->outputs.aux_path_enable ? 1u : 0u;
   bool state_mapping_valid = true;
 
   for (index = 0; index < EC_SOURCE_COUNT; ++index) {
@@ -960,6 +1028,9 @@ bool ec_controller_one_hot_invariant(const ec_controller_t *controller) {
       }
     }
   }
+  if(controller->outputs.aux_path_enable &&
+     controller->source_state[EC_SOURCE_AUX]!=EC_SOURCE_STATE_VALIDATING &&
+     controller->source_state[EC_SOURCE_AUX]!=EC_SOURCE_STATE_ACTIVE) state_mapping_valid=false;
   if (source_is_valid(controller->candidate_source) &&
       source_is_valid(controller->active_source)) {
     state_mapping_valid = false;

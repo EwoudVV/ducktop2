@@ -19,6 +19,7 @@ static bool desired_is_valid(const ec_outputs_t *desired) {
       ++enabled_paths;
     }
   }
+  enabled_paths += desired->aux_path_enable ? 1u : 0u;
   if (enabled_paths > 1u) {
     return false;
   }
@@ -66,6 +67,7 @@ static bool write_safe_sequence(const ec_commit_driver_t *driver) {
   ok = write_value(driver, EC_COMMIT_CHARGER_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_PD1_PATH_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_PD2_PATH_ENABLE, 0u) && ok;
+  ok = write_value(driver, EC_COMMIT_AUX_PATH_ENABLE, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_CHARGER_IINDPM_MA, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_CHARGE_BUDGET_MW, 0u) && ok;
   ok = write_value(driver, EC_COMMIT_MU_EDP_BUDGET_MW, 0u) && ok;
@@ -102,7 +104,7 @@ static bool path_selection_changed(const ec_outputs_t *applied,
       return true;
     }
   }
-  return false;
+  return applied->aux_path_enable != desired->aux_path_enable;
 }
 
 static bool controlled_state_equal(const ec_outputs_t *applied,
@@ -169,6 +171,8 @@ ec_commit_result_t ec_commit_apply(ec_commit_state_t *state,
     current_path_enabled = current_path_enabled || current.pd_path_enable[index];
     desired_path_enabled = desired_path_enabled || desired->pd_path_enable[index];
   }
+  current_path_enabled |= current.aux_path_enable;
+  desired_path_enabled |= desired->aux_path_enable;
   if (path_changed && current_path_enabled && desired_path_enabled) {
     ec_commit_result_t safe_result = ec_commit_force_safe(state, driver);
     return safe_result == EC_COMMIT_OK ? EC_COMMIT_INVALID_DESIRED_STATE
@@ -247,6 +251,8 @@ ec_commit_result_t ec_commit_apply(ec_commit_state_t *state,
                    desired->pd_path_enable[index]);
   }
 
+  COMMIT_OR_SAFE(EC_COMMIT_AUX_PATH_ENABLE, current.aux_path_enable,
+                 desired->aux_path_enable);
   COMMIT_OR_SAFE(EC_COMMIT_CHARGER_ENABLE, current.charger_enable,
                  desired->charger_enable);
   COMMIT_OR_SAFE(EC_COMMIT_MU_12V_ENABLE, current.mu_12v_enable,

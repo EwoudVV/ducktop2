@@ -41,13 +41,16 @@ bool tps25751_decode_contract(const uint8_t status[5], const uint8_t pdo[6],
     uint16_t maximum_ma = (uint16_t)((request & 0x3ffu) * 10u);
     uint8_t position = (uint8_t)(request >> 28);
     /* Only the allowed fixed sink PDOs can qualify the hardware selectors.
-     * GiveBack and mismatch need different policy, so reject them here. */
+     * GiveBack is unsupported. A capability mismatch may still supply a
+     * valid lower-power contract; reserve only its operating current. */
     contract->voltage_mv = (uint16_t)(((power >> 10) & 0x3ffu) * 50u);
-    bool voltage_allowed = contract->voltage_mv == 15000u ||
+    bool voltage_allowed = contract->voltage_mv == 5000u || contract->voltage_mv == 9000u ||
+        contract->voltage_mv == 15000u ||
         (DUCKTOP2_PD_ALLOW_20V && contract->voltage_mv == 20000u);
     if (!voltage_allowed || position == 0u || position > 7u ||
-        (request & ((1u << 27) | (1u << 26))) != 0u || operating_ma == 0u ||
-        operating_ma > advertised_ma || maximum_ma != operating_ma)
+        (request & (1u << 27)) != 0u || operating_ma == 0u ||
+        operating_ma > advertised_ma || advertised_ma>5000u || maximum_ma<operating_ma ||
+        maximum_ma>5000u || (!(request & (1u<<26)) && maximum_ma>advertised_ma))
         return false;
     contract->current_ma = operating_ma;
     contract->valid = true;

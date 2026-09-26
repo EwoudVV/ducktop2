@@ -1,0 +1,54 @@
+{
+  "profile": "compact-study",
+  "units": "mm",
+  "PCB_sources": {
+    "left": {
+      "file": "left_io/left_io.kicad_pcb",
+      "sha256": "01d57d7b7b5bfa0f8024c947bdcfbc33626edd707b1626317d6b098575f86110",
+      "unchanged": true
+    },
+    "center": {
+      "file": "ducktop2-center.kicad_pcb",
+      "sha256": "f3af13be5f763422f665713fb967477b04f66f4f65964cc61c6a849b5ccaeb2f",
+      "unchanged": true
+    },
+    "right": {
+      "file": "right_io/right_io.kicad_pcb",
+      "sha256": "770d1e322ec36e603b93ca0dd5f08af4854d4f767916a5418962431c30934eca",
+      "unchanged": true
+    },
+    "bms": {
+      "file": "bms/bms.kicad_pcb",
+      "sha256": "eb147d4bfedfec5447d79759b4612e251e331bac942dba1f9ab51f11f26f3f40",
+      "unchanged": true
+    },
+    "keyboard": {
+      "file": "keyboard/12_keyboard_daughterboard.kicad_pcb",
+      "sha256": "f33ffae6e6e7192066ee53b051872c056c74b4e3d843ce6c00916949903d43b6",
+      "unchanged": true
+    },
+    "radio": {
+      "file": "radio_daughterboard/radio_daughterboard.kicad_pcb",
+      "sha256": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
+      "unchanged": true
+    }
+  },
+  "manufacturing_ready": false,
+  "owned_part_measurements_complete": false,
+  "cad_sources": {
+    "inventory_boards.py": "2e697070719bdcd6b3fedead478b9bb63b6a3961920040939f74eccd0d73d430",
+    "build.py": "1e685b0cdf01b1e1cfe4adfcd8fb61cd3efad0c1b233ca099f30df7ab758a2d3",
+    "check_hinges.py": "1c7e2bc4adac2a2c7325c9480ccc1647569da95893d3946249df55feceacb03b",
+    "export_pcbs.py": "80d5adc264893b672c4fe7e2e247604bb15a8ccd6c8440eb89b70135548672c4",
+    "hinges.py": "7a4803a568a0c45ab77072926ae41a667eab80a0c85196a26dfa173812b75f8a",
+    "finalize_metadata.py": "9806c93ddc5b787c1fe71ae732d276b833de8878c33f5477536c664fdc089f93",
+    "review.py": "9ece1c5795f3d62daf2ca4f297b968376d3d5ccc706d6e9c80315372181c94ce",
+    "sync_floorplan.py": "eea99f00ce9dffd6590fea0eadeb9e89dca3e28e3399702741e5072bc4daf3c2",
+    "check_exports.py": "48d9b1b46fe487a348a6e235b9d65799bb893ceeb1fb01c3004b388021cfe4fa",
+    "draw_hinges.py": "a3e9ca5752343cad671f138c9f4c7deb915cd1f5aae55ccc56041ab5956cfa3c",
+    "cad.py": "7d9ae18a70a74b226ab3bc8a3b78ed62795cbb81c705f1bb64101335eca9441e",
+    "cables.py": "2f6cb27a0de6fd2b5c344500758971e8e7531c535b2a91af12a63fac80eb4e9e",
+    "deliver.py": "b8ff1c4841dc3d6a466b214fd9a10648177880a02be0e18f701852b02afcf42f"
+  },
+  "assembly_config_sha256": "5713b277e86f0f474959f5107c2b8e657a7ddea41bcce39ffd302c1314178222"
+}

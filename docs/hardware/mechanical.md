@@ -1,7 +1,12 @@
 # mechanical layout
 
-the base and lid target is 358 x 248 mm. the final height, cooling stack,
-board supports, and cable installation still need a measured assembly.
+the original base and lid target was 358 x 248 mm. the saved main boards
+already span 358 mm before case walls. the first editable
+[case study](../../mechanical/case-prototype/README.md) uses a 370 x 282 mm
+base envelope and a 35 mm deck-height target. the current vertical power
+plugs and wire loops do not fit that compact target. the 73 mm profile is
+retained as a clearance reference. measured parts, cooling, cable dressing
+and the pending power layout still control the final size.
 main-board coordinates below were checked on 10 september 2026.
 
 ## recorded parts

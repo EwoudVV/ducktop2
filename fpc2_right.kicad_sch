@@ -833,7 +833,323 @@
 		)
 		(embedded_fonts no)
 	)
-  )
+  (symbol "Connector_Generic:Conn_01x03"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03"
+			(at 0 -5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x03_1_1"
+			(rectangle
+				(start -1.27 3.81)
+				(end 1.27 -3.81)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 2.667)
+				(end 0 2.413)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 2.54 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Connector_Generic:Conn_01x01"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01"
+			(at 0 -2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x01_1_1"
+			(rectangle
+				(start -1.27 1.27)
+				(end 1.27 -1.27)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+)
 (symbol
   (lib_id "Conn_01x51_Signal_SH:Conn_01x51_Signal_SH")
   (at 59.69 299.72 0)
@@ -1573,105 +1889,17 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 8f458688-623b-583f-b2c4-a3d1d2d77b22)
 )
-(symbol
-  (lib_id "Connector_Generic:Conn_02x05_Odd_Even")
-  (at 229.87 160.02 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid f746d9d9-cbc3-50f7-9392-bb6fc3d4a2ef)
-  (property "Reference" "J2432" (at 229.87 148.59 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "right power loom, straight-numbered" (at 229.87 171.45 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43045-1012_2x05_P3.00mm_Vertical" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Molex" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "43045-1012" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatingHousing" "43025-1000" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Contacts" "43030-0038 tin 18 AWG" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Wire" "Alpha Wire 3253 UL1061 18 AWG tinned stranded" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessWireLength" "90..100 mm between crimp barrels, including tolerance" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessPinOrder" "pin n to pin n; continuity and isolation test every conductor" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CurrentRatingBasis" "PS-43045 R; use 12-circuit 18 AWG 5.5 A reference screen; assembled wire <=80 C" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ResistanceAcceptance" "termination <=45 mOhm hot/aged; wire <=30 mOhm/m hot; each return >=2 mOhm cold" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatedHeight" "17.64 mm connector body; current 90..100 mm wire poses require about 55 mm individual-loop clearance; qualify bundle crossing, exact crimp allowance and cover fit" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/430/43045/430451012_sd.pdf" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 33695614-81ea-5d9e-9760-5cba3ce9adce))
-  (pin "2" (uuid 1d3b2d36-059b-5756-8ead-d3d7aea152a5))
-  (pin "3" (uuid 74168d23-1bc8-5026-a917-7e0a5ca4769c))
-  (pin "4" (uuid 0f741614-613b-52a2-9852-6eb28ae02a73))
-  (pin "5" (uuid b96cab69-5c36-5934-9ac7-bdaf8ecfd0b1))
-  (pin "6" (uuid 0ebd08a0-bb91-50e5-9182-696b5c387f97))
-  (pin "7" (uuid 51f00757-284b-504b-88ce-c1d5502434a8))
-  (pin "8" (uuid 98f017e2-8e0d-5791-b59a-f4d47d0f4abb))
-  (pin "9" (uuid a28659fe-5af3-5db4-8d00-01e658639087))
-  (pin "10" (uuid 77d8192a-4e50-5ded-aab5-c9f0e8e3fa69))
-  (instances
-    (project "ducktop2"
-      (path "/af20b413-e6d0-5020-bc43-5a597ffa81f9"
-        (reference "J2432")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "PD2_VBUS_GATED"
-  (shape bidirectional)
-  (at 224.79 154.94 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 450b65eb-d4fc-525b-be36-a6667b09c7b0)
-)
-(hierarchical_label "PD2_VBUS_RAW"
-  (shape bidirectional)
-  (at 237.49 154.94 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid dfae98d5-589f-5492-a987-567859f57994)
-)
-(hierarchical_label "SYS_5V"
-  (shape bidirectional)
-  (at 224.79 157.48 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 0ae2b25b-0da7-5976-b2da-24e8563021f2)
-)
-(hierarchical_label "SYS_3V3"
-  (shape bidirectional)
-  (at 237.49 157.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e9dd1916-75b6-5043-b600-00d5bd9ddf15)
-)
-(hierarchical_label "PCIE_3V3"
-  (shape bidirectional)
-  (at 224.79 160.02 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 34e253ca-01e6-5161-8a1c-199d3cde733a)
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 237.49 160.02 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ba4d5a00-19a0-59ca-b251-7584c074853a)
-)
-(label "GND"
-  (at 224.79 162.56 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 6aa862a5-a201-5a31-9a0c-7dac4701e849)
-)
-(label "GND"
-  (at 237.49 162.56 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b8d63669-aecb-56ed-90bb-05590015b252)
-)
-(label "GND"
-  (at 224.79 165.1 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 6561c771-cd91-5539-843d-31caf5dfbfc0)
-)
-(label "GND"
-  (at 237.49 165.1 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b7c2552a-b631-5012-814d-33be9fafe31e)
-)
+
+
+
+
+
+
+
+
+
+
+
 (text "Power uses the separate rated looms. The signal cable carries no positive supply rails." (at 180.34 309.88 0) (effects (font (size 1.27 1.27))) (uuid 77d353c0-8e20-5a24-b856-fbe35ea6e378))
 (symbol
   (lib_id "Device:R")
@@ -1913,4 +2141,145 @@
   )
 )
   (embedded_fonts no)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x03")
+  (at 229.87 160.02 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f746d9d9-cbc3-50f7-9392-bb6fc3d4a2ef)
+  (property "Reference" "J2432" (at 229.87 151.13 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "right power rails" (at 229.87 168.91 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_453_SMD" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-453/998-404" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1fe13765-bbd3-5e2f-a2f8-5445a6f75bdf))
+  (pin "2" (uuid a7f7e82d-d7e5-51b8-9aed-6335b8e7846e))
+  (pin "3" (uuid 0b9d5165-2113-525b-a268-091132115230))
+  (instances
+    (project "ducktop2"
+      (path "/af20b413-e6d0-5020-bc43-5a597ffa81f9"
+        (reference "J2432")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_5V"
+  (shape bidirectional)
+  (at 224.79 157.48 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 53f32d93-ac11-532c-ab0d-c53ee3d535c6)
+)
+(hierarchical_label "PD2_VBUS_RAW"
+  (shape bidirectional)
+  (at 224.79 160.02 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 51cae561-c4e8-508e-b43a-2b179a29c0ec)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 224.79 162.56 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid dd585e40-76c4-50a6-ae23-566b48fbe444)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x03")
+  (at 229.87 185.42 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 00c6e574-283c-5dc0-99a6-7c984543fd70)
+  (property "Reference" "J2452" (at 229.87 176.53 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "right power rails" (at 229.87 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_453_SMD" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-453/998-404" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 8b06b1a1-a3e3-5329-89a4-c460c3925dc3))
+  (pin "2" (uuid dce3f9d6-0b76-52e1-8cf0-a25c47d6a2a5))
+  (pin "3" (uuid 0fac1fac-cb46-5e59-90d2-73900a19f0f0))
+  (instances
+    (project "ducktop2"
+      (path "/af20b413-e6d0-5020-bc43-5a597ffa81f9"
+        (reference "J2452")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 224.79 182.88 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid bf9c29ff-6c29-56df-9495-7735b5ba1017)
+)
+(hierarchical_label "PCIE_3V3"
+  (shape bidirectional)
+  (at 224.79 185.42 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid ab4ea7b6-f4f1-5e21-ab48-7ec6afed00c5)
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 224.79 187.96 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid a730bccd-561f-5916-8423-5191f9e8881b)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x01")
+  (at 229.87 209.55 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4fa4754f-dccc-5959-a232-30c1d27cfca0)
+  (property "Reference" "J2462" (at 229.87 203.2 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "right power return" (at 229.87 215.9 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_451_SMD" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-451/998-404" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a322063a-cc8d-593f-b0f1-7b074339eb4e))
+  (instances
+    (project "ducktop2"
+      (path "/af20b413-e6d0-5020-bc43-5a597ffa81f9"
+        (reference "J2462")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GND"
+  (at 224.79 209.55 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 60062329-1ea7-5315-bbac-61a6cb6b7447)
+)
 )

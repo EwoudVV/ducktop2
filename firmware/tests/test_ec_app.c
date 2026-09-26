@@ -1,11 +1,13 @@
 #include "ec_app.h"
 #include "board_profile.h"
-#include "bq25798.h"
+#include "isl9241.h"
+#include "tca9537.h"
 #include "i2c_mock.h"
 #include <assert.h>
 #include <stdio.h>
-static bool charging;
+static bool charging,throttle_release;
 void gpio_set_charger_enable(bool on) { charging=on; }
+void gpio_set_mu_throttle_release(bool on) { throttle_release=on; }
 uint16_t gpio_read_adc_thermal_skin(void) { return 2048; }
 uint16_t gpio_read_adc_thermal_mu(void) { return 2048; }
 void gpio_set_fan_pwm_duty(uint16_t duty) { (void)duty; }
@@ -13,40 +15,68 @@ void gpio_fan_tach_update(void) {}
 uint16_t gpio_fan_tach_rpm(void) { return 0; }
 static void seed(void)
 {
-    i2c_mock.regfile[0x48]=0x18;
-    i2c_mock.regfile[0x1b]=8;
-    i2c_mock.regfile[0x1d]=1;
-    i2c_mock.regfile[0x3d]=0x2e; i2c_mock.regfile[0x3e]=0xe0; /* 12000 mV SYS */
-    i2c_mock.regfile[0x3b]=0x2a; i2c_mock.regfile[0x3c]=0xf8; /* 11000 mV BAT */
+    i2c_mock.isl_words[0xfe]=0x49;i2c_mock.isl_words[0xff]=0x0e;
+    i2c_mock.isl_words[0x4d]=0x4c0c;
+    i2c_mock.isl_words[0x81]=172u<<6;i2c_mock.isl_words[0x86]=125u<<6;
+    i2c_mock.isl_words[0x87]=208u<<6;
+    i2c_mock.gauge_emulated=true;i2c_mock.gauge[2]=55;
+    i2c_mock.gauge[8]=0xf8;i2c_mock.gauge[9]=0x2a; /* 11 V */
+}
+static void permission(uint32_t now)
+{
+    ec_app_set_power_control(true,TCA9537_CHARGER_BIAS_GOOD | TCA9537_PACK_CHARGE_PERMIT,now);
 }
 int main(void)
 {
-    ec_inputs_t input; ec_telemetry_inputs_t telemetry;
-    i2c_mock_begin(); ec_app_init(); i2c_mock.nack_all=true;
-    ec_inputs_init(&input); ec_app_read_power_inputs(&input,&telemetry,0);
-    assert(!input.charger_config_valid && !input.vsys_valid && !charging);
-    i2c_mock.nack_all=false;seed();
-    ec_app_read_power_inputs(&input,&telemetry,100);
-    assert(input.charger_config_valid && input.vsys_valid && input.vsys_mv==12000);
-    assert(telemetry.valid_flags==0); /* no qualified gauge */
-    assert(ec_app_apply_charger_iindpm_ma(2750));
-    ec_app_read_power_inputs(&input,&telemetry,120);
-    assert(input.charger_iindpm_applied && input.applied_charger_iindpm_ma==2750);
-    if (DUCKTOP2_CHARGING_QUALIFIED) {
-        assert(ec_app_apply_charge_budget_mw(6300) && ec_app_set_charging(true));
-        assert(charging && i2c_mock.regfile[0x01]==0x04 && i2c_mock.regfile[0x02]==0xec);
-        assert(i2c_mock.regfile[0x03]==0 && i2c_mock.regfile[0x04]==0x32);
-    } else assert(!ec_app_apply_charge_budget_mw(6300) && !ec_app_set_charging(true));
+    ec_inputs_t in;ec_telemetry_inputs_t t;
+    i2c_mock_begin();ec_app_init();i2c_mock.nack_all=true;
+    ec_inputs_init(&in);permission(0);ec_app_read_power_inputs(&in,&t,0);
+    assert(!in.charger_config_valid && !in.vsys_valid && !charging && !throttle_release);
+    assert(!ec_app_prepare_source(5000,20)); /* powered charger does not ACK */
+    ec_app_set_power_control(true,0,20);
+    assert(ec_app_prepare_source(5000,20)); /* sensor proves reset/default 200 mA */
+    assert(!ec_app_prepare_source(5000,121)); /* stale proof */
+    ec_app_set_power_control(true,0,0);assert(!ec_app_prepare_source(5000,9));
+    i2c_mock.nack_all=false;seed();permission(100);
+    ec_app_read_power_inputs(&in,&t,100);assert(!in.charger_config_valid);
+    ec_app_read_power_inputs(&in,&t,219);assert(!in.charger_config_valid);
+    ec_app_read_power_inputs(&in,&t,220);
+    assert(in.charger_config_valid && in.vsys_valid && in.vsys_mv==12000);
+    if(!DUCKTOP2_GAUGE_QUALIFIED) assert(t.valid_flags==0);
+    permission(220);assert(!ec_app_apply_charger_iindpm_ma(2750));
+    assert(ec_app_apply_charger_iindpm_ma(2752));
+    ec_app_read_power_inputs(&in,&t,240);
+    assert(in.charger_iindpm_applied && in.applied_charger_iindpm_ma==2752);
+    if(DUCKTOP2_CHARGING_QUALIFIED) {
+        assert(ec_app_apply_charge_budget_mw(6264) && ec_app_set_charging(true));
+        assert(charging && i2c_mock.isl_words[0x14]==500 && i2c_mock.isl_words[0x15]==12528);
+        i2c_mock.gauge[0x0f]=2;ec_app_read_power_inputs(&in,&t,340);
+        assert(ec_app_gauge_full() && !ec_app_set_charging(true) && !charging);
+        i2c_mock.gauge[0x0f]=0;permission(460);ec_app_read_power_inputs(&in,&t,460);
+        assert(ec_app_apply_charge_budget_mw(6264) && ec_app_set_charging(true));
+        ec_app_set_power_control(true,TCA9537_CHARGER_BIAS_GOOD,460);
+        assert(!charging && !ec_app_set_charging(true));
+    } else {
+        assert(!ec_app_apply_charge_budget_mw(6264) && !ec_app_set_charging(true));
+        ec_app_read_power_inputs(&in,&t,340);ec_app_read_power_inputs(&in,&t,460);
+    }
     assert(ec_app_apply_charge_budget_mw(0) && ec_app_set_charging(false));
-    i2c_mock.regfile[0x06]=0; i2c_mock.regfile[0x07]=50; /* charger POR changed IINDPM */
-    ec_app_read_power_inputs(&input,&telemetry,140);
-    assert(!input.charger_iindpm_applied && !input.charger_config_valid && !charging);
-    seed();ec_app_read_power_inputs(&input,&telemetry,300);
-    assert(input.charger_config_valid); /* retry after an actual power cycle */
-    ec_app_init();i2c_mock.adc_done_autoset=false;i2c_mock.regfile[0x1e]=0;
-    ec_app_read_power_inputs(&input,&telemetry,0);
-    assert(!input.charger_config_valid && !input.vsys_valid);
-    ec_app_read_power_inputs(&input,&telemetry,251);
-    assert(!ec_app_charger_configured());
-    puts("ec app: PASS (cold power, VSYS, charger reset/retry, pending ADC timeout, unqualified charge gate)");
+    permission(480);assert(ec_app_prepare_source(9000,480));
+    assert(!charging && !throttle_release && i2c_mock.isl_words[0x3f]==200 && i2c_mock.isl_words[0x3b]==200);
+    assert(i2c_mock.isl_words[0x14]==0 && i2c_mock.isl_words[0x3e]==0);
+    assert(ec_app_apply_charger_iindpm_ma(2000));
+    i2c_mock.isl_words[0x3f]=200; /* ACOK reload keeps the rest of the setup */
+    ec_app_read_power_inputs(&in,&t,480);
+    assert(in.charger_config_valid && in.charger_iindpm_applied && in.applied_charger_iindpm_ma==200);
+    assert(i2c_mock.isl_words[0x3b]==200);
+    assert(ec_app_apply_charger_iindpm_ma(2000));
+    i2c_mock.isl_words[0x3f]=i2c_mock.isl_words[0x3b]=200;
+    i2c_mock.isl_words[0x3d]=0; /* real POR also loses temperature settings */
+    ec_app_read_power_inputs(&in,&t,500);
+    assert(!in.charger_config_valid && !in.charger_iindpm_applied && !charging);
+    seed();ec_app_read_power_inputs(&in,&t,600);ec_app_read_power_inputs(&in,&t,720);
+    assert(in.charger_config_valid);
+    ec_app_init();ec_app_read_power_inputs(&in,&t,0);
+    ec_app_read_power_inputs(&in,&t,251);assert(!ec_app_charger_configured());
+    puts("ec app: PASS (cold/powered NACK, bias freshness, continuous ADC, current steps, FC/temperature, pre-enable limit and reset)");
 }

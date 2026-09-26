@@ -85,7 +85,7 @@ typedef struct {
   bool source_manager_reset_released;
   bool service_mux_reset_released;
   bool service_bus_healthy;
-  bool all_pd_paths_off;
+  bool all_source_paths_off;
   bool charger_config_valid;
   bool charger_iindpm_applied;
   uint16_t applied_charger_iindpm_ma;
@@ -123,6 +123,7 @@ typedef struct {
 
 typedef struct {
   bool pd_path_enable[EC_PD_PORT_COUNT];
+  bool aux_path_enable;
   bool charger_enable;
   uint16_t charger_iindpm_ma;
   bool mu_12v_enable;
@@ -152,9 +153,13 @@ typedef struct {
   uint16_t iindpm_margin_ma;
   uint16_t pd_iindpm_margin_ma;
   uint16_t iindpm_cap_ma;
+  uint16_t iindpm_step_ma;
+  uint16_t minimum_iindpm_ma;
+  uint32_t raw_aon_reserve_mw;
   uint16_t minimum_vsys_mv;
   uint16_t source_efficiency_permille;
   uint32_t system_reserve_mw;
+  uint32_t standby_reserve_mw;
   uint32_t minimum_charge_budget_mw;
   uint32_t maximum_charge_budget_mw;
   uint32_t normal_mu_edp_budget_mw;
@@ -176,6 +181,7 @@ typedef struct {
   uint32_t power_policy_started_ms;
   uint32_t mu_enable_started_ms;
   uint32_t radio_db_enable_started_ms;
+  uint16_t validated_voltage_mv, validated_current_ma;
   bool path_commanded;
   bool iindpm_commanded;
   bool power_policy_waiting;
@@ -213,6 +219,12 @@ bool ec_controller_clear_fault(ec_controller_t *controller,
 
 uint16_t ec_policy_iindpm_ma(const ec_policy_config_t *config,
                              uint16_t qualified_input_current_ma);
+uint16_t ec_policy_source_iindpm_ma(const ec_policy_config_t *config,
+                                     ec_source_id_t source, uint16_t voltage_mv,
+                                     uint16_t qualified_current_ma);
+uint32_t ec_policy_external_input_power_mw(const ec_policy_config_t *config,
+                                           ec_source_id_t source,uint16_t voltage_mv,
+                                           uint16_t current_ma);
 uint32_t ec_policy_pd_input_power_mw(const ec_policy_config_t *config,
                                      uint16_t negotiated_voltage_mv,
                                      uint16_t negotiated_current_ma);

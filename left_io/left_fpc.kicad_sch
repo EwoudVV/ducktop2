@@ -1154,7 +1154,323 @@
 		)
 		(embedded_fonts no)
 	)
-  )
+  (symbol "Connector_Generic:Conn_01x03"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03"
+			(at 0 -5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x03_1_1"
+			(rectangle
+				(start -1.27 3.81)
+				(end 1.27 -3.81)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 2.667)
+				(end 0 2.413)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 2.54 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Connector_Generic:Conn_01x01"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x01"
+			(at 0 -2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x01_1_1"
+			(rectangle
+				(start -1.27 1.27)
+				(end 1.27 -1.27)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+)
 (symbol
   (lib_id "Conn_01x41_Signal_SH:Conn_01x41_Signal_SH")
   (at 59.69 299.72 0)
@@ -1848,165 +2164,22 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6f76e6bc-1b87-510b-9092-62368e60f612)
 )
-(symbol
-  (lib_id "Connector_Generic:Conn_02x06_Odd_Even")
-  (at 229.87 160.02 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 6eaab8f1-3ae6-51b2-867e-f90e77001378)
-  (property "Reference" "J2431" (at 229.87 146.05 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "left power loom, straight-numbered" (at 229.87 173.99 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43045-1212_2x06_P3.00mm_Vertical" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Molex" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "43045-1212" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatingHousing" "43025-1200" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Contacts" "43030-0038 tin 18 AWG" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Wire" "Alpha Wire 3253 UL1061 18 AWG tinned stranded" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessWireLength" "90..100 mm between crimp barrels, including tolerance" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessPinOrder" "pin n to pin n; continuity and isolation test every conductor" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CurrentRatingBasis" "PS-43045 R; use 12-circuit 18 AWG 5.5 A reference screen; assembled wire <=80 C" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ResistanceAcceptance" "termination <=45 mOhm hot/aged; wire <=30 mOhm/m hot; each return >=2 mOhm cold" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatedHeight" "17.64 mm connector body; current 90..100 mm wire poses require about 55 mm individual-loop clearance; qualify bundle crossing, exact crimp allowance and cover fit" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/430/43045/430451012_sd.pdf" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a82f4b57-afb7-50c9-9523-b3ea2aaab9d0))
-  (pin "2" (uuid aac596be-fe9f-5787-85ec-114701b9d07c))
-  (pin "3" (uuid 57f0c996-8b51-5ee7-bbb4-766d91124a57))
-  (pin "4" (uuid 5b491c5c-9f88-5101-9c0c-693ed80853d5))
-  (pin "5" (uuid 58f33139-f2c2-57e9-9aca-eac623102ab5))
-  (pin "6" (uuid 82bddf4d-7b45-576c-8abf-ad928c616ea9))
-  (pin "7" (uuid 01f4de1f-2c6d-5e02-ac6f-e84b7e266e1c))
-  (pin "8" (uuid ee188658-cb60-5661-8534-ff77c133b6d1))
-  (pin "9" (uuid 73d7c3f0-b6d1-568f-908b-fc18812c3e9d))
-  (pin "10" (uuid 81b0f07a-c5dd-5c13-a398-4a765ce528a5))
-  (pin "11" (uuid 1902d6b1-dd9b-5c4d-a96e-cb1e03a080df))
-  (pin "12" (uuid 5ad04469-f4d0-5b18-983c-0981bbce6ad4))
-  (instances
-    (project "ducktop2"
-      (path "/86191e00-3cef-5223-829f-0c74cf67126c"
-        (reference "J2431")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "VSYS"
-  (shape bidirectional)
-  (at 224.79 154.94 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid f66fd3c6-203c-5718-8d00-013b112f02c4)
-)
-(hierarchical_label "PD1_VBUS_RAW"
-  (shape bidirectional)
-  (at 237.49 154.94 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e08e7aa2-08fd-5a60-9dc3-6c18cec7aef3)
-)
-(hierarchical_label "USB_PD_SELECTED"
-  (shape bidirectional)
-  (at 224.79 157.48 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid a83dfad1-6ead-5989-864a-dde83f6fbc17)
-)
-(hierarchical_label "AUX_DC_RAW"
-  (shape bidirectional)
-  (at 237.49 157.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f7415af0-1821-5d6d-86c5-f089c3d5a9c7)
-)
-(hierarchical_label "SYS_3V3"
-  (shape bidirectional)
-  (at 224.79 160.02 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid cd35dd3a-5dfd-5ff9-b001-79e948f2db6d)
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 237.49 160.02 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 83273d3b-242f-5cd7-ac87-bb6f4afac022)
-)
-(label "GND"
-  (at 224.79 162.56 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid c633dda8-9520-59da-9040-4d4f5676cb17)
-)
-(label "GND"
-  (at 237.49 162.56 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4b761c52-4c3a-5c8b-995f-18019c341c16)
-)
-(label "GND"
-  (at 224.79 165.1 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 227a484c-5d43-5963-bc31-14220fe88437)
-)
-(label "GND"
-  (at 237.49 165.1 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d0b66a7c-7662-5bf0-af0e-fbe26e27bd88)
-)
-(label "GND"
-  (at 224.79 167.64 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid a1a6b57b-24e0-5839-a8c0-93a99ad95ad4)
-)
-(label "GND"
-  (at 237.49 167.64 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1c8db499-033b-5276-9e14-80e819a7cbe1)
-)
-(symbol
-  (lib_id "Connector_Generic:Conn_01x02")
-  (at 229.87 229.87 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid a4bd3c7b-ba77-50e7-86b0-a71eb7cc8a3e)
-  (property "Reference" "J2434" (at 229.87 220.98 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "USB5 direct power loom" (at 229.87 238.76 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "ducktop2:AMASS_XT30PW-F30_G_Y" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "AMASS" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "XT30PW-F30.G.Y" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatingHousing" "XT30U-M.G.Y" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Wire" "Alpha 5857 RD005/BK005; 18 AWG 19/30 silver-plated copper, PTFE" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessWireLength" "400..420 mm between solder terminations; 420 mm nominal cut target, dress slack above minimum bend radius" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessPinOrder" "1 negative/GND; 2 positive/USB5; continuity and isolation test before power" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CurrentRatingBasis" "AMASS 2025V0: 20 A at up to 85 K rise; project return design 8 A, qualification <=80 C" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ResistanceAcceptance" "each mated/soldered termination <=5 mOhm hot/aged; wire <=30 mOhm/m hot" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatedEnvelope" "23.10 x 13.60 x 5.75 mm conservative; reserve sleeve and 18.80 mm wire bend radius" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CableEnvelope" "rounded exit path 354.47 mm GND / 364.47 mm USB5; retain up to 12 mm termination/sleeve allowance and fit remaining height/service detour before assembly" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Assembly" "unpowered mating only; insulate solder joints and strain-relieve wires independently; retention lands isolated" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Fabrication" "power holes 1.85 +/-0.05 mm, retention holes 1.15 +/-0.05 mm finished diameter" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.china-amass.net/uploads/31.XT30PW-F30-SPEC-2025V0.pdf" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 36d1d2f9-e3d0-51c7-9750-4d508e1c7f39))
-  (pin "2" (uuid c94d92b1-8392-5eeb-98bb-eaade6037174))
-  (instances
-    (project "ducktop2"
-      (path "/86191e00-3cef-5223-829f-0c74cf67126c"
-        (reference "J2434")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "GND"
-  (at 224.79 229.87 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 51e97eb7-7250-5195-94b2-505846798e46)
-)
-(hierarchical_label "USB_PORT_5V"
-  (shape bidirectional)
-  (at 224.79 232.41 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 1248222d-cedf-5ed6-a106-308c4ae380d9)
-)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (text "Power uses the separate rated looms. The signal cable carries no positive supply rails." (at 180.34 309.88 0) (effects (font (size 1.27 1.27))) (uuid 2a8a0eeb-fd10-57dd-b917-712c59de6170))
 (symbol
   (lib_id "Device:R")
@@ -2248,4 +2421,193 @@
   )
 )
   (embedded_fonts no)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x03")
+  (at 229.87 160.02 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 6eaab8f1-3ae6-51b2-867e-f90e77001378)
+  (property "Reference" "J2431" (at 229.87 151.13 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "left power rails" (at 229.87 168.91 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_453_SMD" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-453/998-404" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e0d4b779-0278-56db-a0aa-acecaadeb6b2))
+  (pin "2" (uuid bef25ec3-64ef-574f-8f4d-dd671e6308a4))
+  (pin "3" (uuid 056ded2a-c391-5174-b5e0-2004a4bc82c0))
+  (instances
+    (project "left_io"
+      (path "/86191e00-3cef-5223-829f-0c74cf67126c"
+        (reference "J2431")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "VSYS"
+  (shape bidirectional)
+  (at 224.79 157.48 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 6c4eefed-2efd-5380-845b-fc459b37028b)
+)
+(hierarchical_label "PD1_VBUS_RAW"
+  (shape bidirectional)
+  (at 224.79 160.02 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 4730008c-c0dc-5317-8620-2023e26bf74a)
+)
+(hierarchical_label "USB_PD_SELECTED"
+  (shape bidirectional)
+  (at 224.79 162.56 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 6511e793-f0ed-52cf-a8ea-c6801a511368)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x03")
+  (at 229.87 185.42 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2a12e3ff-c05b-575e-a6de-34368db72549)
+  (property "Reference" "J2451" (at 229.87 176.53 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "left power rails" (at 229.87 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_453_SMD" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-453/998-404" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e0ddbec2-c892-5b5a-9399-1690f091d0f4))
+  (pin "2" (uuid 91020fda-edab-5d3b-9f29-bcb17d886e67))
+  (pin "3" (uuid 781748b4-e482-5e64-bbfb-c2a82b12db02))
+  (instances
+    (project "left_io"
+      (path "/86191e00-3cef-5223-829f-0c74cf67126c"
+        (reference "J2451")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "AUX_DC_RAW"
+  (shape bidirectional)
+  (at 224.79 182.88 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid b6588f74-9177-5f0b-8c59-56fbbe91b2dd)
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 224.79 185.42 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid be876dbe-f197-5281-9ee4-b11373ca9afd)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 224.79 187.96 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 1db0f2ef-29af-580c-bac3-e7574f1156c2)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x01")
+  (at 229.87 209.55 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid e932aa84-e348-51f9-a46a-d24744e143be)
+  (property "Reference" "J2461" (at 229.87 203.2 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "left power return" (at 229.87 215.9 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_451_SMD" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-451/998-404" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid fd8cddc4-73f7-5c43-815b-1488556519cc))
+  (instances
+    (project "left_io"
+      (path "/86191e00-3cef-5223-829f-0c74cf67126c"
+        (reference "J2461")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GND"
+  (at 224.79 209.55 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 37074716-f97f-5caf-9ad7-c9697d92d7ba)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x02")
+  (at 229.87 229.87 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a4bd3c7b-ba77-50e7-86b0-a71eb7cc8a3e)
+  (property "Reference" "J2434" (at 229.87 220.98 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "USB5 direct power loom" (at 229.87 238.76 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:AMASS_XT30PW-F30_G_Y" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "AMASS" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "XT30PW-F30.G.Y" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatingHousing" "XT30U-M.G.Y" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6716 RD005/BK005; 16 AWG 26/30 tinned copper, mPPE" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessWireLength" "400..420 mm between solder terminations; 420 mm nominal cut target, dress slack above minimum bend radius" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "1 negative/GND; 2 positive/USB5; continuity and isolation test before power" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "AMASS 2025V0: 20 A at up to 85 K rise; project return design 10 A with 16 AWG wire, qualification <=80 C" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ResistanceAcceptance" "each mated/soldered termination <=5 mOhm hot/aged; wire <=30 mOhm/m hot" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedEnvelope" "23.10 x 13.60 x 5.75 mm conservative; reserve sleeve and 10.541 mm wire bend radius" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CableEnvelope" "rounded exit path 354.47 mm GND / 364.47 mm USB5; retain up to 12 mm termination/sleeve allowance and fit remaining height/service detour before assembly" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "unpowered mating only; insulate solder joints and strain-relieve wires independently; retention lands isolated" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Fabrication" "power holes 1.85 +/-0.05 mm, retention holes 1.15 +/-0.05 mm finished diameter" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.china-amass.net/uploads/31.XT30PW-F30-SPEC-2025V0.pdf" (at 229.87 229.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid ac2af59c-9636-571d-9292-519c5c859e89))
+  (pin "2" (uuid c7b0c95d-87c9-558d-82f5-090ee1b037ce))
+  (instances
+    (project "left_io"
+      (path "/86191e00-3cef-5223-829f-0c74cf67126c"
+        (reference "J2434")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GND"
+  (at 224.79 229.87 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid a8c38ff8-5ddd-5c79-9540-c641d9b56dec)
+)
+(hierarchical_label "USB_PORT_5V"
+  (shape bidirectional)
+  (at 224.79 232.41 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 24d22ad8-e86d-5d3f-bcc3-a686506511d5)
+)
 )

@@ -3495,10 +3495,12 @@ def check_bms_interconnect(components, bms_side=False):
     ):
         expect(comp(components, ref).footprint, footprint, f"{ref} interconnect footprint")
         expect(prop(components, ref, "MPN"), mpn, f"{ref} interconnect part")
-    for pin, name in fpc.BMS_POWER_PINMAP.items():
+    power_map = fpc.BMS_POWER_PINMAP if bms_side else fpc.BMS_POWER_CENTER_PINMAP
+    for pin, name in power_map.items():
         wanted = name if bms_side and name == "FG_VSS" else f"/{name}"
         expect(net(components, power, str(pin)), wanted, f"{power} power pin {pin}")
-    expect_unconnected(components, power, "MP")
+    if "MP" in comp(components, power).pin_nets:
+        fail(f"{power}: spring terminal must not have a mounting-pin net")
     mapping = fpc.BMS_CONTROL_PINMAP if bms_side else fpc.BMS_CONTROL_CENTER_PINMAP
     for pin, name in mapping.items():
         wanted = "GND" if name == "GND" else f"/{name}"
@@ -3633,14 +3635,14 @@ def check_bms_pack(components):
     Q703/Q704 charge/discharge FETs, RS10/RS11 shunts, and the full
     filter/gate/divider/retry network.
     """
-    for pin in ("1", "2"):
+    for pin in ("3",):
         expect(net(components, "J2", pin), "/PACK_POS_RAW",
-               f"J2 paired pack-positive pin {pin}")
-    for pin in ("3", "4"):
+               f"J2 pack-positive pin {pin}")
+    for pin in ("1",):
         expect(net(components, "J2", pin), "/PACK_NEG_RAW",
-               f"J2 paired raw pack-negative pin {pin}")
-    expect(net(components, "J2", "5"), "/CELL1_TAP", "J2 cell-1 tap")
-    expect(net(components, "J2", "6"), "/CELL2_TAP", "J2 cell-2 tap")
+               f"J2 raw pack-negative pin {pin}")
+    expect(net(components, "J2", "4"), "/CELL1_TAP", "J2 cell-1 tap")
+    expect(net(components, "J2", "2"), "/CELL2_TAP", "J2 cell-2 tap")
 
     # Autonomous per-cell primary protection.  These checks deliberately cover
     # physical pin numbers, sense direction, FET orientation, and every strap.

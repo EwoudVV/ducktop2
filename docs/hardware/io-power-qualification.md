@@ -1,5 +1,10 @@
 # I/O power looms and ground bounds
 
+26 september 2026: the saved power connectors and wire specifications have
+changed. the limits below belong to the earlier wiring revision and need
+to be reconciled with the new terminals and return-current calculations.
+[power revision status](power-revision.md) records the current checkpoint.
+
 power uses two short Micro-Fit looms and one direct left-to-right XT30 loom.
 all positive supply rails are removed from the 41/51-contact signal cables.
 `gen/usb_power_contract.py` is the pin and assembly contract.

@@ -33,8 +33,9 @@ PROJECT_NAME = "right_io"
 
 
 def build_right_pd_sheet(sheet_symbol_uuid):
-    """PD2 dual-role port (J11) + source port (J12) — both USB2-only."""
+    """PD2 dual-role port (J11) + source port (J12), both USB2-only."""
     s = b.Sheet(f"/{sheet_symbol_uuid}")
+    s.paper = "A0"
     s.refcounters["#PWR"] = 2000
     s.refcounters["#FLG"] = 2000
     s.text(20.32, 12.7, "== Right I/O: PD2 dual-role (J11) + source (J12), USB2-only ==")
@@ -62,13 +63,13 @@ def build_right_pd_sheet(sheet_symbol_uuid):
 
 
 def build_right_hdmi_sheet(sheet_symbol_uuid):
-    """HDMI-A (J30) + DDC/5V chain — reuses the main HDMI builder."""
+    """HDMI-A (J30) + DDC/5V chain, reuses the main HDMI builder."""
     s = hdmi.build(sheet_symbol_uuid)
     return s
 
 
 def build_right_eth_sheet(sheet_symbol_uuid):
-    """GbE (RTL8111H + magnetics + RJ45) — reuses the main GbE builder."""
+    """GbE (RTL8111H + magnetics + RJ45), reuses the main GbE builder."""
     s = eth.build(sheet_symbol_uuid)
     from generate_pcie_power import add_pcie_remote_bulk
     add_pcie_remote_bulk(s)

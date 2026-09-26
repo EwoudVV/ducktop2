@@ -4,7 +4,7 @@
 FPC-1 joins the left and center boards; FPC-2 joins the right and center.
 The 41- and 51-contact Molex interfaces carry signals and ground guards.
 Power positives use separate crimp looms; two ground straps cross each seam.
-J2071/J2072 carry protected pack power over an 18 AWG Micro-Fit harness,
+J2071/J2072 carry protected pack power through 18 AWG spring terminals,
 with one rated contact per conductor. J2073/J2074 carry the isolated BMS
 control interface and its own return over a separate five-wire harness.
 
@@ -35,13 +35,18 @@ FPC3_PINMAP = {
 # power uses one rated contact per conductor. ctrl_gnd supplies only the
 # isolated control island and must never be tied to fg_vss or raw negative.
 BMS_POWER_PINMAP = {1: "PACK_POS_FUSED", 2: "FG_VSS"}
+BMS_POWER_CENTER_PINMAP = {1: "FG_VSS", 2: "PACK_POS_FUSED"}
 BMS_POWER_REFS = {"center": "J2071", "bms": "J2072"}
-BMS_POWER_FOOTPRINT = "Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical"
-BMS_POWER_MPN = "43650-0224"
-BMS_POWER_HOUSING = "43645-0200"
-BMS_POWER_CONTACT = "43030-0038"
+BMS_POWER_FOOTPRINT = "ducktop2:WAGO_2060_452_SMD"
+BMS_POWER_MPN = "2060-452/998-404"
+BMS_POWER_HOUSING = "bare wire"
+BMS_POWER_CONTACT = "spring contact"
+BMS_POWER_CENTER_FOOTPRINT = "ducktop2:WAGO_2060_452_SMD"
+BMS_POWER_CENTER_MPN = "2060-452/998-404"
+BMS_POWER_CENTER_HOUSING = "bare wire"
+BMS_POWER_CENTER_CONTACT = "spring contact"
 BMS_POWER_WIRE_AWG = 18
-BMS_POWER_WIRE_LENGTH_BUDGET_MM = 75
+BMS_POWER_WIRE_LENGTH_BUDGET_MM = 90
 
 BMS_CONTROL_PINMAP = {1: "PACK_FAULT_N", 2: "PACK_RETRY_PULSE", 3: "MCU_3V3",
                       4: "PACK_CHG_TEMP_OK", 5: "CTRL_GND"}

@@ -11,14 +11,14 @@ class IOCurrentTests(unittest.TestCase):
         self.assertAlmostEqual(r['usb_input_a']*r['regulator_input_min_v'],5.238866489*5.6/.85)
     def test_actual_signed_cut_bounds(self):
         r=calculate();self.assertEqual(r['status'],'PASS_CONDITIONAL')
-        self.assertAlmostEqual(r['worst_ground_edge_a'],7.765979949035502)
-        self.assertAlmostEqual(r['signed_cut_absolute_bounds_a']['left_negative'],7.615)
+        self.assertAlmostEqual(r['worst_ground_edge_a'],9.115)
+        self.assertAlmostEqual(r['signed_cut_absolute_bounds_a']['left_negative'],9.115)
         self.assertAlmostEqual(r['left_sys3_min_v'],3.022999702)
         self.assertGreater(r['whole_path_efficiency_min'],.80)
     def test_previous_loss_free_efficiency_assumption_fails(self):
         self.assertEqual(calculate(replace(Limits(),converter_efficiency_min=.80))['status'],'FAIL')
     def test_load_or_supply_drift_fails(self):
-        self.assertEqual(calculate(replace(Limits(),left_sys3_a=2.3))['status'],'FAIL')
+        self.assertEqual(calculate(replace(Limits(),left_sys3_a=5.0))['status'],'FAIL')
         self.assertEqual(calculate(replace(Limits(),center_vsys_min_v=8.2))['status'],'FAIL')
         with self.assertRaises(ValueError):constant_power_current(100,2,.1,0)
     def test_unequal_three_node_network_and_one_open_strap(self):

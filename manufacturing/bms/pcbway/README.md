@@ -1,5 +1,9 @@
 # bms order files
 
+26 september 2026: this describes the previous BMS revision. the current
+board has connector, fuse and placement changes with routing still unfinished.
+these files are not current order files.
+
 this is the pcbway package for the four-layer bms. the exact source files,
 checks and output hashes are recorded in `manifest.json` and `SHA256SUMS.txt`.
 these are checked prototype files. pcbway has not reviewed or quoted this

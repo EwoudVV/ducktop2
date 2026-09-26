@@ -1,0 +1,816 @@
+{
+  "profile": "compact-study",
+  "status": "35 mm target study; current power plugs and wires remain explicit conflicts, not a fit claim",
+  "checks": {
+    "board_gaps_mm": {
+      "left-center": 1.5,
+      "center-right": 1.5,
+      "center-bms": 1.4999999999999998
+    },
+    "main_board_span_mm": 358.0,
+    "base_outside_mm": [
+      370,
+      282,
+      35
+    ],
+    "main_chassis_mounts": 13,
+    "BMS_supports": 4,
+    "radio_supports": 4,
+    "case_sweep": {
+      "range": [
+        0,
+        180
+      ],
+      "step_deg": 2,
+      "collisions": [],
+      "covers": "manufactured case parts and panel envelope; cable flex and joint friction are not validated"
+    },
+    "maximum_sampled_collision_free_angle_from_closed": 180,
+    "current_power_wires_vs_closed_case": [
+      {
+        "wire": "left-loom-wire-1",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-1",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 18.346
+      },
+      {
+        "wire": "left-loom-wire-1",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.536
+      },
+      {
+        "wire": "left-loom-wire-1",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 9.939
+      },
+      {
+        "wire": "left-loom-wire-2",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-2",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 18.345
+      },
+      {
+        "wire": "left-loom-wire-2",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.638
+      },
+      {
+        "wire": "left-loom-wire-2",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 9.939
+      },
+      {
+        "wire": "left-loom-wire-3",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-3",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 18.346
+      },
+      {
+        "wire": "left-loom-wire-3",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.54
+      },
+      {
+        "wire": "left-loom-wire-3",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 9.939
+      },
+      {
+        "wire": "left-loom-wire-4",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-4",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 11.173
+      },
+      {
+        "wire": "left-loom-wire-4",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "left-loom-wire-4",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 9.933
+      },
+      {
+        "wire": "left-loom-wire-5",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-5",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 11.173
+      },
+      {
+        "wire": "left-loom-wire-5",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "left-loom-wire-5",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 9.952
+      },
+      {
+        "wire": "left-loom-wire-6",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-6",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.383
+      },
+      {
+        "wire": "left-loom-wire-6",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 10.041
+      },
+      {
+        "wire": "left-loom-wire-7",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-7",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 4.392
+      },
+      {
+        "wire": "left-loom-wire-7",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "left-loom-wire-7",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 9.998
+      },
+      {
+        "wire": "left-loom-wire-8",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-8",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 4.392
+      },
+      {
+        "wire": "left-loom-wire-8",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "left-loom-wire-8",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 9.985
+      },
+      {
+        "wire": "left-loom-wire-9",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-9",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 4.392
+      },
+      {
+        "wire": "left-loom-wire-9",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "left-loom-wire-9",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 9.998
+      },
+      {
+        "wire": "left-loom-wire-10",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-10",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 4.392
+      },
+      {
+        "wire": "left-loom-wire-10",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.384
+      },
+      {
+        "wire": "left-loom-wire-10",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 10.046
+      },
+      {
+        "wire": "left-loom-wire-11",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-11",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 4.392
+      },
+      {
+        "wire": "left-loom-wire-11",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.407
+      },
+      {
+        "wire": "left-loom-wire-11",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 10.156
+      },
+      {
+        "wire": "left-loom-wire-12",
+        "part": "keyboard-carrier-11",
+        "closed_overlap_mm3": 9.931
+      },
+      {
+        "wire": "left-loom-wire-12",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 8.313
+      },
+      {
+        "wire": "left-loom-wire-12",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.5
+      },
+      {
+        "wire": "left-loom-wire-12",
+        "part": "lid-shell-11",
+        "closed_overlap_mm3": 10.367
+      },
+      {
+        "wire": "right-loom-wire-1",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-1",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 11.173
+      },
+      {
+        "wire": "right-loom-wire-1",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.515
+      },
+      {
+        "wire": "right-loom-wire-1",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.939
+      },
+      {
+        "wire": "right-loom-wire-2",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-2",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 11.176
+      },
+      {
+        "wire": "right-loom-wire-2",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.745
+      },
+      {
+        "wire": "right-loom-wire-2",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.938
+      },
+      {
+        "wire": "right-loom-wire-3",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-3",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 11.115
+      },
+      {
+        "wire": "right-loom-wire-3",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.761
+      },
+      {
+        "wire": "right-loom-wire-3",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.938
+      },
+      {
+        "wire": "right-loom-wire-4",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-4",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 11.179
+      },
+      {
+        "wire": "right-loom-wire-4",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.732
+      },
+      {
+        "wire": "right-loom-wire-4",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.938
+      },
+      {
+        "wire": "right-loom-wire-5",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-5",
+        "part": "key-travel-and-cap-envelopes",
+        "closed_overlap_mm3": 5.187
+      },
+      {
+        "wire": "right-loom-wire-5",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.454
+      },
+      {
+        "wire": "right-loom-wire-5",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.939
+      },
+      {
+        "wire": "right-loom-wire-6",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-6",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "right-loom-wire-6",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.995
+      },
+      {
+        "wire": "right-loom-wire-7",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-7",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "right-loom-wire-7",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.962
+      },
+      {
+        "wire": "right-loom-wire-8",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-8",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "right-loom-wire-8",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.954
+      },
+      {
+        "wire": "right-loom-wire-9",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-9",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "right-loom-wire-9",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 9.965
+      },
+      {
+        "wire": "right-loom-wire-10",
+        "part": "keyboard-carrier-21",
+        "closed_overlap_mm3": 8.69
+      },
+      {
+        "wire": "right-loom-wire-10",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 17.38
+      },
+      {
+        "wire": "right-loom-wire-10",
+        "part": "lid-shell-21",
+        "closed_overlap_mm3": 10.003
+      },
+      {
+        "wire": "BMS-proposed-flex-wire-1",
+        "part": "trackpad-bridge",
+        "closed_overlap_mm3": 3.871
+      },
+      {
+        "wire": "BMS-proposed-flex-wire-1",
+        "part": "trackpad-body-envelope",
+        "closed_overlap_mm3": 26.88
+      },
+      {
+        "wire": "BMS-proposed-flex-wire-1",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 18.816
+      },
+      {
+        "wire": "BMS-proposed-flex-wire-1",
+        "part": "lid-shell-22",
+        "closed_overlap_mm3": 10.752
+      },
+      {
+        "wire": "BMS-proposed-flex-wire-2",
+        "part": "trackpad-bridge",
+        "closed_overlap_mm3": 3.871
+      },
+      {
+        "wire": "BMS-proposed-flex-wire-2",
+        "part": "trackpad-body-envelope",
+        "closed_overlap_mm3": 26.88
+      },
+      {
+        "wire": "BMS-proposed-flex-wire-2",
+        "part": "display-panel-envelope",
+        "closed_overlap_mm3": 18.816
+      },
+      {
+        "wire": "BMS-proposed-flex-wire-2",
+        "part": "lid-shell-22",
+        "closed_overlap_mm3": 10.752
+      }
+    ],
+    "eDP_bend_corridor_vs_moving_parts_closed": [],
+    "eDP_corridor_note": "annulus is rotationally invariant about the hinge axis; this checks its space, not constant-length cable behavior",
+    "known_component_model_vs_support": [],
+    "cell_to_trackpad_bridge_gap_mm": 8.100000000000001,
+    "closed_key_to_panel_gap_mm": 2.0
+  },
+  "collisions": [],
+  "limitations": [
+    "cooler geometry is a reserved volume, not a qualified Ultra cooler; contact, springs and thermal performance for 256V remain open",
+    "left Micro-Fit loom: 43 wire-pair clearance conflicts in independent arches; dress/replace harness before loaded assembly",
+    "right Micro-Fit loom: 39 wire-pair clearance conflicts in independent arches; dress/replace harness before loaded assembly",
+    "BMS 75 mm budget does not accommodate the 17.78 mm Alpha 3253 arch. Displayed 7 mm candidate requires a qualified flexible wire or connector/routing change.",
+    "eDP lines are route datums, not a constant-length flex simulation; the annular corridor and slack bay must be fitted with the actual cable",
+    "current power wires collide with the selected case profile; compact profile requires a harness/connector change"
+  ],
+  "lid_mass_and_loads": {
+    "items": [
+      {
+        "name": "hinge-left-0",
+        "kg": 0.003430099115262542,
+        "lever_s_mm": 1.5182974963192368,
+        "height_above_axis_mm": 3.1335644409600185,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "hinge-left-1",
+        "kg": 6.165375582669985e-06,
+        "lever_s_mm": -1.0755868184216126,
+        "height_above_axis_mm": 5.575586818421609,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "hinge-left-2",
+        "kg": 0.0003628451367473672,
+        "lever_s_mm": 2.5590204543202333,
+        "height_above_axis_mm": 7.399999999999775,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "hinge-right-0",
+        "kg": 0.003430121275682866,
+        "lever_s_mm": 1.5183114140960186,
+        "height_above_axis_mm": 3.1335839422967204,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "hinge-right-1",
+        "kg": 6.165375582669985e-06,
+        "lever_s_mm": -1.0755868184216126,
+        "height_above_axis_mm": 5.575586818421609,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "hinge-right-2",
+        "kg": 0.0003628451367473677,
+        "lever_s_mm": 2.5590204543202324,
+        "height_above_axis_mm": 7.399999999999753,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "left-lid-steel-plate",
+        "kg": 0.030889748957207176,
+        "lever_s_mm": 11.403343704343438,
+        "height_above_axis_mm": 11.49999999999999,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "left-lid-seat-1",
+        "kg": 0.00011578339724805181,
+        "lever_s_mm": 5.85,
+        "height_above_axis_mm": 8.50000000000001,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "left-lid-seat-2",
+        "kg": 0.00011578339724805182,
+        "lever_s_mm": 2.950000000000001,
+        "height_above_axis_mm": 8.500000000000004,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "left-lid-seat-3",
+        "kg": 4.7636597724912733e-05,
+        "lever_s_mm": 0.4499999999999975,
+        "height_above_axis_mm": 8.049999999999986,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "right-lid-steel-plate",
+        "kg": 0.030889748957207176,
+        "lever_s_mm": 11.403343704343438,
+        "height_above_axis_mm": 11.49999999999999,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "right-lid-seat-1",
+        "kg": 0.00011578339724805163,
+        "lever_s_mm": 5.85,
+        "height_above_axis_mm": 8.499999999999996,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "right-lid-seat-2",
+        "kg": 0.00011578339724805159,
+        "lever_s_mm": 2.9499999999999975,
+        "height_above_axis_mm": 8.50000000000001,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "right-lid-seat-3",
+        "kg": 4.763659772491303e-05,
+        "lever_s_mm": 0.45000000000000284,
+        "height_above_axis_mm": 8.049999999999986,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-cross-rail",
+        "kg": 0.09060955687191204,
+        "lever_s_mm": 11.587770511518102,
+        "height_above_axis_mm": 14.499999999999996,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-shell-11",
+        "kg": 0.05212772767621212,
+        "lever_s_mm": 75.17849698096407,
+        "height_above_axis_mm": 13.792078818931639,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-shell-12",
+        "kg": 0.06890485924449492,
+        "lever_s_mm": 200.69870556177162,
+        "height_above_axis_mm": 13.746253114781684,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-shell-21",
+        "kg": 0.050588487676212136,
+        "lever_s_mm": 77.66309437983207,
+        "height_above_axis_mm": 13.849648505930201,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-shell-22",
+        "kg": 0.06890485924449496,
+        "lever_s_mm": 200.69870556177165,
+        "height_above_axis_mm": 13.746253114781684,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "bezel-11",
+        "kg": 0.00829279385165535,
+        "lever_s_mm": 21.367520432314112,
+        "height_above_axis_mm": 8.600000000000005,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "bezel-12",
+        "kg": 0.003456835703310754,
+        "lever_s_mm": 233.16517770846662,
+        "height_above_axis_mm": 8.599999999999998,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "bezel-21",
+        "kg": 0.00860978585165535,
+        "lever_s_mm": 20.764906949670692,
+        "height_above_axis_mm": 8.59999999999999,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "bezel-22",
+        "kg": 0.003456835703310753,
+        "lever_s_mm": 233.1651777084666,
+        "height_above_axis_mm": 8.600000000000012,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-print-splice-1",
+        "kg": 0.002077891334405777,
+        "lever_s_mm": 65.0,
+        "height_above_axis_mm": 16.00000000000001,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-print-splice-2",
+        "kg": 0.002077891334405777,
+        "lever_s_mm": 210.00000000000006,
+        "height_above_axis_mm": 16.00000000000001,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-print-splice-3",
+        "kg": 0.0020778913344057775,
+        "lever_s_mm": 130.0,
+        "height_above_axis_mm": 16.00000000000001,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "lid-print-splice-4",
+        "kg": 0.002077891334405777,
+        "lever_s_mm": 129.99999999999994,
+        "height_above_axis_mm": 16.00000000000001,
+        "basis": "CAD volume and assumed density"
+      },
+      {
+        "name": "display panel",
+        "kg": 0.4,
+        "lever_s_mm": 143.5,
+        "height_above_axis_mm": 11,
+        "basis": "unmeasured mass assumption"
+      },
+      {
+        "name": "cable, gasket and fasteners",
+        "kg": 0.04,
+        "lever_s_mm": 100,
+        "height_above_axis_mm": 10,
+        "basis": "allowance"
+      }
+    ],
+    "total_kg": 0.8731994532753434,
+    "COM_distance_along_lid_mm": 116.53059049784464,
+    "COM_height_above_axis_closed_mm": 12.0335586482974,
+    "gravity_torque": [
+      {
+        "angle_deg": 0,
+        "gravity_Nm": 0.9978702566218132
+      },
+      {
+        "angle_deg": 15,
+        "gravity_Nm": 0.9371985646770654
+      },
+      {
+        "angle_deg": 30,
+        "gravity_Nm": 0.8126583393434333
+      },
+      {
+        "angle_deg": 45,
+        "gravity_Nm": 0.6327367911649503
+      },
+      {
+        "angle_deg": 60,
+        "gravity_Nm": 0.4096952763155632
+      },
+      {
+        "angle_deg": 90,
+        "gravity_Nm": -0.10304530514390775
+      },
+      {
+        "angle_deg": 105,
+        "gravity_Nm": -0.3578019484714034
+      },
+      {
+        "angle_deg": 120,
+        "gravity_Nm": -0.5881749803062498
+      },
+      {
+        "angle_deg": 135,
+        "gravity_Nm": -0.7784648592383386
+      },
+      {
+        "angle_deg": 150,
+        "gravity_Nm": -0.9157036444873411
+      },
+      {
+        "angle_deg": 180,
+        "gravity_Nm": -0.9978702566218132
+      }
+    ],
+    "conditional_pair_open_Nm": 0.6472389,
+    "conditional_pair_close_Nm": 0.8433719,
+    "conditional_aged_low_open_Nm": 0.46679654,
+    "conditional_aged_low_close_Nm": 0.63350959,
+    "unit_condition": "drawing says kg-f/cm; multiplication-unit interpretation must be confirmed or replaced with measurement",
+    "result": "do not assume original 3.3 kit holds this larger lid near horizontal; use prop and dummy-mass test",
+    "screen_mount_design_torque_Nm": 2,
+    "screen_note": "2 Nm total handling screen, not an impact specification or material qualification",
+    "per_hinge_load_at_15mm_load_path_N": 66.66666666666667,
+    "sign_convention": "positive means gravity tends to close; negative means gravity tends to open"
+  },
+  "stability": {
+    "assumed_base_kg": 2.0,
+    "assumed_base_COM_y_mm": 125,
+    "rear_foot_y_mm": -19,
+    "front_foot_y_mm": 249,
+    "angles": [
+      {
+        "angle_deg": 90,
+        "combined_COM_y_mm": 80.31475447050433,
+        "rear_margin_mm": 99.31475447050433,
+        "minimum_base_kg_against_rear_tip": 0.018395151063694264
+      },
+      {
+        "angle_deg": 105,
+        "combined_COM_y_mm": 71.27328401954962,
+        "rear_margin_mm": 90.27328401954962,
+        "minimum_base_kg_against_rear_tip": 0.19879756742819613
+      },
+      {
+        "angle_deg": 120,
+        "combined_COM_y_mm": 63.09720298462255,
+        "rear_margin_mm": 82.09720298462256,
+        "minimum_base_kg_against_rear_tip": 0.36193306436908035
+      },
+      {
+        "angle_deg": 135,
+        "combined_COM_y_mm": 56.343697776640646,
+        "rear_margin_mm": 75.34369777664065,
+        "minimum_base_kg_against_rear_tip": 0.4966842273639817
+      },
+      {
+        "angle_deg": 150,
+        "combined_COM_y_mm": 51.473008614832814,
+        "rear_margin_mm": 70.47300861483282,
+        "minimum_base_kg_against_rear_tip": 0.5938679873416235
+      },
+      {
+        "angle_deg": 180,
+        "combined_COM_y_mm": 48.5568648551827,
+        "rear_margin_mm": 67.55686485518271,
+        "minimum_base_kg_against_rear_tip": 0.6520531446742555
+      }
+    ],
+    "status": "static table screen only; actual mass/COM, hand opening, rubber friction and lap use pending"
+  },
+  "physical_tests_complete": false,
+  "fastener_length_screen": {
+    "blower_suspension_length_mm": 15.0,
+    "nut_engagement_mm": 1.5,
+    "lowest_suspension_screw_tip_height_mm": 13.5,
+    "nearby_SW3_model_top_height_mm": 12.337,
+    "tip_to_SW3_height_difference_mm": 1.163,
+    "status": "nominal geometry screen; actual bolt head, nut, tip and backside keyboard fit pending"
+  }
+}

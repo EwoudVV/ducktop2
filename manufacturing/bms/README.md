@@ -1,10 +1,11 @@
 # bms
 
-the four-layer board is routed and the [pcbway package](pcbway/README.md)
-is prepared for a prototype quote. [layout checks](../../verification/bms-layout.md)
-records the checks on the saved pcb.
+the saved BMS is being revised for the new power wiring and is not ready
+to order. the files below belong to the previous routed revision. they
+have not been regenerated for the new connector, fuse and placement changes.
+see [power revision status](../../docs/hardware/power-revision.md).
 
-- [complete pcbway package](bms_PCBWAY.zip)
+- [previous pcbway package](bms_PCBWAY.zip)
 - [gerbers and drills](pcbway/bms_GERBERS.zip)
 - [assembly BOM](pcbway/BOM.csv) and [SMT placements](pcbway/CPL.csv)
 - [order settings and assembly notes](pcbway/README.md)

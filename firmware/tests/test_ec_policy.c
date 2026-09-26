@@ -21,7 +21,7 @@ static bool outputs_are_passive(const ec_outputs_t *outputs) {
       return false;
     }
   }
-  return !outputs->charger_enable && outputs->charger_iindpm_ma == 0u &&
+  return !outputs->aux_path_enable && !outputs->charger_enable && outputs->charger_iindpm_ma == 0u &&
          !outputs->mu_12v_enable && !outputs->keyboard_rgb_power_enable &&
          !outputs->radio_db_power_enable &&
          !outputs->audio_amp_enable && !outputs->audio_mic_enable;
@@ -32,7 +32,7 @@ static void set_nominal_inputs(ec_inputs_t *inputs) {
   inputs->source_manager_reset_released = true;
   inputs->service_mux_reset_released = true;
   inputs->service_bus_healthy = true;
-  inputs->all_pd_paths_off = true;
+  inputs->all_source_paths_off = true;
   inputs->charger_config_valid = true;
   inputs->thermal_data_valid = true;
   inputs->pack_telemetry_valid = true;
@@ -64,7 +64,7 @@ static void set_pack_ready(ec_inputs_t *inputs, uint32_t available_power_mw) {
 static void set_aux_ready(ec_inputs_t *inputs, uint16_t qualified_current_ma,
                           uint32_t available_power_mw) {
   inputs->source[EC_SOURCE_AUX].present = true;
-  inputs->source[EC_SOURCE_AUX].path_good = true;
+  inputs->source[EC_SOURCE_AUX].path_good = false;
   inputs->source[EC_SOURCE_AUX].fault_n = true;
   inputs->source[EC_SOURCE_AUX].qualified_input_current_valid = true;
   inputs->source[EC_SOURCE_AUX].qualified_input_current_ma =
@@ -97,7 +97,7 @@ static void activate_pd(ec_controller_t *controller, ec_inputs_t *inputs,
   CHECK(controller->outputs.pd_path_enable[source - EC_SOURCE_PD1]);
   CHECK(controller->outputs.charger_iindpm_ma == 0u);
   inputs->source[source].path_good = true;
-  inputs->all_pd_paths_off = false;
+  inputs->all_source_paths_off = false;
   ec_controller_step(controller, inputs, start_ms + 21u);
   CHECK(controller->outputs.charger_iindpm_ma == expected_ma);
   confirm_iindpm(inputs, expected_ma);
@@ -119,20 +119,19 @@ static void activate_pack(ec_controller_t *controller, ec_inputs_t *inputs,
 static void activate_aux(ec_controller_t *controller, ec_inputs_t *inputs,
                          uint16_t qualified_current_ma,
                          uint32_t available_power_mw, uint32_t start_ms) {
-  const uint16_t expected_ma =
-      ec_policy_iindpm_ma(&controller->config, qualified_current_ma);
-
-  set_aux_ready(inputs, qualified_current_ma, available_power_mw);
-  CHECK(ec_controller_request_source(controller, EC_SOURCE_AUX, start_ms));
-  ec_controller_step(controller, inputs, start_ms);
-  ec_controller_step(controller, inputs, start_ms + 20u);
-  CHECK(controller->outputs.charger_iindpm_ma == expected_ma);
-  CHECK(ec_controller_source_state(controller, EC_SOURCE_AUX) ==
-        EC_SOURCE_STATE_VALIDATING);
-  confirm_iindpm(inputs, expected_ma);
-  ec_controller_step(controller, inputs, start_ms + 21u);
-  CHECK(ec_controller_source_state(controller, EC_SOURCE_AUX) ==
-        EC_SOURCE_STATE_ACTIVE);
+  const uint16_t expected_ma=ec_policy_iindpm_ma(&controller->config,qualified_current_ma);
+  set_aux_ready(inputs,qualified_current_ma,available_power_mw);
+  CHECK(ec_controller_request_source(controller,EC_SOURCE_AUX,start_ms));
+  ec_controller_step(controller,inputs,start_ms);
+  ec_controller_step(controller,inputs,start_ms+20u);
+  CHECK(controller->outputs.aux_path_enable && controller->outputs.charger_iindpm_ma==0u);
+  inputs->source[EC_SOURCE_AUX].path_good=true;inputs->all_source_paths_off=false;
+  ec_controller_step(controller,inputs,start_ms+21u);
+  CHECK(controller->outputs.charger_iindpm_ma==expected_ma);
+  CHECK(ec_controller_source_state(controller,EC_SOURCE_AUX)==EC_SOURCE_STATE_VALIDATING);
+  confirm_iindpm(inputs,expected_ma);
+  ec_controller_step(controller,inputs,start_ms+22u);
+  CHECK(ec_controller_source_state(controller,EC_SOURCE_AUX)==EC_SOURCE_STATE_ACTIVE);
 }
 
 static void test_boot_defaults(void) {
@@ -186,7 +185,7 @@ static void test_reset_and_service_interlocks(void) {
   set_nominal_inputs(&inputs);
   ec_controller_init(&controller, NULL, 0u);
   set_pd_ready(&inputs, EC_SOURCE_PD1, 3000u, false);
-  inputs.all_pd_paths_off = false;
+  inputs.all_source_paths_off = false;
   CHECK(ec_controller_request_source(&controller, EC_SOURCE_PD1, 0u));
   ec_controller_step(&controller, &inputs, 0u);
   CHECK(controller.fault == EC_FAULT_NONE);
@@ -249,7 +248,7 @@ static void test_path_bootstrap_precedes_iindpm_ack(void) {
   CHECK(controller.outputs.pd_path_enable[0]);
   CHECK(controller.outputs.charger_iindpm_ma == 0u);
   inputs.source[EC_SOURCE_PD1].path_good = true;
-  inputs.all_pd_paths_off = false;
+  inputs.all_source_paths_off = false;
   ec_controller_step(&controller, &inputs, 21u);
   CHECK(controller.outputs.pd_path_enable[0]);
   CHECK(controller.outputs.charger_iindpm_ma == 2750u);
@@ -270,7 +269,7 @@ static void test_all_paths_off_interlock_is_continuous_until_enable(void) {
   ec_controller_step(&controller, &inputs, 0u);
   CHECK(controller.fault == EC_FAULT_NONE);
 
-  inputs.all_pd_paths_off = false;
+  inputs.all_source_paths_off = false;
   ec_controller_step(&controller, &inputs, 20u);
   CHECK(controller.fault == EC_FAULT_RESET_INTERLOCK);
   CHECK(outputs_are_passive(&controller.outputs));
@@ -288,7 +287,7 @@ static void test_iindpm_timeout_and_mismatch_fail_off(void) {
   ec_controller_step(&controller, &inputs, 20u);
   CHECK(controller.outputs.pd_path_enable[0]);
   inputs.source[EC_SOURCE_PD1].path_good = true;
-  inputs.all_pd_paths_off = false;
+  inputs.all_source_paths_off = false;
   ec_controller_step(&controller, &inputs, 21u);
   CHECK(controller.outputs.charger_iindpm_ma == 2750u);
   ec_controller_step(&controller, &inputs, 121u);
@@ -302,7 +301,7 @@ static void test_iindpm_timeout_and_mismatch_fail_off(void) {
   ec_controller_step(&controller, &inputs, 0u);
   ec_controller_step(&controller, &inputs, 20u);
   inputs.source[EC_SOURCE_PD2].path_good = true;
-  inputs.all_pd_paths_off = false;
+  inputs.all_source_paths_off = false;
   ec_controller_step(&controller, &inputs, 21u);
   confirm_iindpm(&inputs, 1800u);
   ec_controller_step(&controller, &inputs, 22u);
@@ -317,7 +316,7 @@ static void test_transfer_is_break_before_make(void) {
   set_nominal_inputs(&inputs);
   ec_controller_init(&controller, NULL, 0u);
   activate_pd(&controller, &inputs, EC_SOURCE_PD1, 3000u, 0u);
-  inputs.all_pd_paths_off = true;
+  inputs.all_source_paths_off = true;
   inputs.charger_iindpm_applied = false;
   set_pd_ready(&inputs, EC_SOURCE_PD2, 2000u, false);
   CHECK(ec_controller_request_source(&controller, EC_SOURCE_PD2, 100u));
@@ -330,7 +329,7 @@ static void test_transfer_is_break_before_make(void) {
   CHECK(controller.outputs.pd_path_enable[1]);
   CHECK(controller.outputs.charger_iindpm_ma == 0u);
   inputs.source[EC_SOURCE_PD2].path_good = true;
-  inputs.all_pd_paths_off = false;
+  inputs.all_source_paths_off = false;
   ec_controller_step(&controller, &inputs, 121u);
   CHECK(controller.outputs.charger_iindpm_ma == 1750u);
   confirm_iindpm(&inputs, 1750u);
@@ -503,7 +502,7 @@ static void test_aux_requires_qualified_current_and_applied_limit(void) {
   set_nominal_inputs(&inputs);
   ec_controller_init(&controller, NULL, 0u);
   inputs.source[EC_SOURCE_AUX].present = true;
-  inputs.source[EC_SOURCE_AUX].path_good = true;
+  inputs.source[EC_SOURCE_AUX].path_good = false;
   inputs.source[EC_SOURCE_AUX].available_power_valid = true;
   inputs.source[EC_SOURCE_AUX].available_power_mw = 45000u;
   CHECK(ec_controller_request_source(&controller, EC_SOURCE_AUX, 0u));
@@ -519,7 +518,7 @@ static void test_aux_requires_qualified_current_and_applied_limit(void) {
   set_nominal_inputs(&inputs);
   ec_controller_init(&controller, NULL, 0u);
   activate_aux(&controller, &inputs, 500u, 45000u, 0u);
-  CHECK(controller.outputs.charger_iindpm_ma == 250u);
+  CHECK(controller.outputs.aux_path_enable && controller.outputs.charger_iindpm_ma == 250u);
 
   set_nominal_inputs(&inputs);
   ec_controller_init(&controller, NULL, 0u);
@@ -964,7 +963,7 @@ static void test_external_boot_has_separate_expiring_authorization(void) {
   ec_controller_step(&controller,&inputs,0);
   ec_controller_step(&controller,&inputs,20);
   CHECK(controller.outputs.pd_path_enable[0]);
-  inputs.source[EC_SOURCE_PD1].path_good=true; inputs.all_pd_paths_off=false;
+  inputs.source[EC_SOURCE_PD1].path_good=true; inputs.all_source_paths_off=false;
   ec_controller_step(&controller,&inputs,40);
   CHECK(controller.outputs.charger_iindpm_ma==0);
   CHECK(controller.fault==EC_FAULT_NONE);

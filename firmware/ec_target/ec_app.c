@@ -1,20 +1,26 @@
 #include "ec_app.h"
-#include "bq25798.h"
+#include "isl9241.h"
 #include "bq34z100.h"
 #include "board_profile.h"
 #include "gpio.h"
+#include "tca9537.h"
 #include <string.h>
 
 static bool configured, gauge_present, iindpm_applied, battery_present;
 static bool sample_pending, sample_valid, charge_budget_applied, gauge_status_valid;
-static uint16_t iindpm_ma;
+static uint16_t iindpm_ma, prepared_source_mv;
+static bool power_io_valid, charger_bias_good, pack_charge_permit, gauge_full;
+static bool throttle_released;
+static uint32_t power_io_at;
 static uint32_t probe_at, gauge_at, sample_at, sample_good_at, sample_good_started_ms;
-static bq25798_telemetry_t sample;
+static isl9241_telemetry_t sample;
 static ec_telemetry_inputs_t gauge;
 
 static void charger_lost(void)
 {
     gpio_set_charger_enable(false);
+    gpio_set_mu_throttle_release(false);
+    throttle_released=false;
     configured = iindpm_applied = sample_valid = sample_pending = false;
     charge_budget_applied = battery_present = false;
     iindpm_ma = 0;
@@ -23,20 +29,68 @@ static void charger_lost(void)
 void ec_app_init(void)
 {
     charger_lost();
-    gauge_present = gauge_status_valid = false;
+    gauge_present = gauge_status_valid = gauge_full = false;
+    power_io_valid=charger_bias_good=pack_charge_permit=false;
+    prepared_source_mv=0;power_io_at=0;
     probe_at = gauge_at = 0;
     ec_telemetry_inputs_init(&gauge);
 }
 
 bool ec_app_charger_configured(void) { return configured; }
 bool ec_app_gauge_present(void) { return gauge_present; }
+bool ec_app_gauge_full(void) { return gauge_status_valid && gauge_full; }
 bool ec_app_battery_present(void) { return battery_present; }
-bool ec_app_charging_active(void) { return sample_valid && bq25798_is_charge_in_progress(sample.charge_status); }
+bool ec_app_charging_active(void) { return sample_valid && isl9241_is_charge_in_progress(sample.charge_status); }
+
+void ec_app_set_power_control(bool valid,uint8_t inputs,uint32_t now_ms)
+{
+    power_io_valid=valid;
+    charger_bias_good=valid && (inputs & TCA9537_CHARGER_BIAS_GOOD)!=0;
+    pack_charge_permit=valid && (inputs & TCA9537_PACK_CHARGE_PERMIT)!=0;
+    power_io_at=now_ms;
+    if(!valid || !pack_charge_permit) gpio_set_charger_enable(false);
+}
+
+bool ec_app_prepare_source(uint16_t source_mv,uint32_t now_ms)
+{
+    gpio_set_charger_enable(false);
+    gpio_set_mu_throttle_release(false);
+    throttle_released=false;charge_budget_applied=false;iindpm_applied=false;
+    iindpm_ma=0;
+    if(source_mv<5000u || source_mv>22000u || !power_io_valid || now_ms-power_io_at>100u)
+        return false;
+    prepared_source_mv=source_mv;
+    uint16_t actual;
+    if(configured && isl9241_set_charge_enable(false) &&
+       isl9241_set_input_current_ma(ISL9241_BOOT_INPUT_MA) &&
+       isl9241_read_input_current_limit_ma(&actual) && actual==ISL9241_BOOT_INPUT_MA &&
+       isl9241_set_adapter_alarm(source_mv) && isl9241_configuration_ok()) return true;
+    /* TPS3700 has a 450 us maximum startup delay. The source dead time
+     * already exceeds this; keep a separate 10 ms floor for a cold EC.
+     * A NACK while bias is high cannot authorize another supply. */
+    charger_lost();
+    return now_ms>=10u && !charger_bias_good;
+}
+
+void ec_app_update_throttle(bool allow_release,bool battery_mode)
+{
+    if(!allow_release || !DUCKTOP2_MU_THROTTLE_QUALIFIED || !configured ||
+       !power_io_valid || !sample_valid || sample.fault) {
+        gpio_set_mu_throttle_release(false);throttle_released=false;return;
+    }
+    if(!throttle_released) {
+        if(!isl9241_set_adapter_alarm(battery_mode ? 0u : prepared_source_mv) ||
+           !isl9241_clear_throttle()) return;
+        gpio_set_mu_throttle_release(true);throttle_released=true;
+    }
+    /* Hardware current alarms remain latched. A trip is not cleared on
+     * every poll; source revalidation or a deliberate restart is required. */
+}
 
 static void read_gauge(void)
 {
     ec_telemetry_inputs_init(&gauge);
-    gauge_status_valid = false;
+    gauge_status_valid = gauge_full = false;
     gauge_present = bq34z100_probe();
     if (!gauge_present) return;
     /* A responsive gauge is not a calibrated gauge. Keep raw values private
@@ -46,6 +100,7 @@ static void read_gauge(void)
     uint16_t value, flags;
     gauge_status_valid = bq34z100_read_flags(&flags) &&
         (flags & (BQ34Z100_FLAG_OTD | BQ34Z100_FLAG_OTC | BQ34Z100_FLAG_BATHI)) == 0;
+    gauge_full=gauge_status_valid && (flags & BQ34Z100_FLAG_FC)!=0;
     int16_t current;
     if (bq34z100_read_soc_percent(&soc) && soc <= 100) {
         gauge.soc_percent = soc; gauge.valid_flags |= EC_TELEMETRY_VALID_SOC;
@@ -81,37 +136,35 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *teleme
 {
     if (!configured && (int32_t)(now_ms - probe_at) >= 0) {
         probe_at = now_ms + 100u;
-        configured = bq25798_probe() && bq25798_init();
-        if (configured) {
-            sample_pending = bq25798_start_sample();
-            sample_at = now_ms;
-            if (!sample_pending) charger_lost();
-        }
+        configured = isl9241_probe() && isl9241_init() &&
+                     isl9241_set_adapter_alarm(prepared_source_mv);
+        if (configured) { sample_pending=true; sample_at=now_ms; }
     }
-    if (configured && sample_pending) {
-        bool complete = false;
-        bq25798_telemetry_t next;
-        if (!bq25798_read_sample(&next, &complete) || now_ms - sample_at > 250u) {
+    if (configured && sample_pending && now_ms-sample_at>=ISL9241_SAMPLE_WAIT_MS) {
+        isl9241_telemetry_t next;
+        if (now_ms-sample_at>250u || !isl9241_read_sample(&next)) {
             charger_lost();
-        } else if (complete) {
-            sample = next;
-            sample_valid = true;
-            sample_good_at = now_ms;
-            sample_good_started_ms = sample_at;
-            sample_pending = false;
+        } else {
+            sample=next; sample_valid=true; sample_good_at=now_ms;
+            sample_good_started_ms=sample_at; sample_pending=false;
         }
     }
-    if (configured && !sample_pending && now_ms - sample_at >= 100u) {
-        sample_pending = bq25798_start_sample();
-        sample_at = now_ms;
-        if (!sample_pending) charger_lost();
+    if (configured && !sample_pending && now_ms-sample_at>=100u) {
+        sample_pending=true; sample_at=now_ms;
     }
     if (sample_valid && now_ms - sample_good_at > 300u) charger_lost();
     /* Detect an unannounced charger POR/watchdog register reset. */
     if (configured && iindpm_applied) {
         uint16_t actual;
-        if (!bq25798_read_input_current_limit_ma(&actual) || actual != iindpm_ma)
-            charger_lost();
+        if(!isl9241_read_input_current_limit_ma(&actual)) charger_lost();
+        else if(actual!=iindpm_ma) {
+            /* An ACOK drop reloads the 200 mA strap without resetting the
+             * chip. Revalidate that source; a real register reset fails off. */
+            if(actual==ISL9241_BOOT_INPUT_MA && isl9241_configuration_ok()) {
+                iindpm_ma=actual;
+                gpio_set_charger_enable(false);charge_budget_applied=false;
+            } else charger_lost();
+        }
     }
     inputs->charger_config_valid = configured && sample_valid;
     inputs->charger_iindpm_applied = configured && iindpm_applied;
@@ -119,7 +172,7 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *teleme
     battery_present = sample_valid && sample.battery_present;
     inputs->vsys_valid = sample_valid && sample.vsys_mv >= 2500u && sample.vsys_mv <= 16000u;
     inputs->vsys_mv = inputs->vsys_valid ? sample.vsys_mv : 0u;
-    /* Unknown charger state can qualify its input with /CE off. The policy
+    /* Unknown charger state can qualify its input with the NTC inhibit active. The policy
      * requires configured+sample-valid before activating the source. */
     inputs->charger_fault_n = !sample_valid || !sample.fault;
     if ((int32_t)(now_ms - gauge_at) >= 0) {
@@ -127,10 +180,10 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *teleme
         read_gauge();
     }
     *telemetry = gauge;
-    /* Bridge measurements use the completed charger one-shot ADC. Polling
-     * the gauge alone does not establish a new internal ADC conversion. */
+    /* The continuous ADC's 100 ms battery-voltage period is covered by the
+     * 120 ms sampling window. Reserve AON pack current outside its shunt. */
     inputs->pack_current_valid=sample_valid && battery_present;
-    inputs->pack_current_ma=sample_valid ? sample.ibat_ma : 0;
+    inputs->pack_current_ma=sample_valid ? (int32_t)sample.ibat_ma-DUCKTOP2_PACK_AON_RESERVE_MA : 0;
     inputs->pack_voltage_mv=sample_valid ? sample.vbat_mv : 0;
     inputs->pack_sample_age_ms=sample_valid ? now_ms-sample_good_started_ms : UINT32_MAX;
     inputs->vsys_sample_age_ms=sample_valid ? now_ms-sample_good_started_ms : UINT32_MAX;
@@ -152,12 +205,16 @@ bool ec_app_apply_charger_iindpm_ma(uint16_t ma)
     if (ma == 0u) {
         gpio_set_charger_enable(false);
         /* Zero releases the command; it is not a 0 mA IINDPM register value. */
-        return !configured || bq25798_set_charge_enable(false);
+        if(!configured) return true;
+        bool disabled=isl9241_set_charge_enable(false);
+        bool limited=isl9241_set_input_current_ma(ISL9241_BOOT_INPUT_MA);
+        return disabled && limited;
     }
     uint16_t actual;
-    if (!configured || !bq25798_set_input_current_ma(ma) ||
-        !bq25798_read_input_current_limit_ma(&actual) ||
-        actual != (ma / 10u) * 10u) return false;
+    if(ma%4u) return false;
+    if (!configured || !isl9241_set_input_current_ma(ma) ||
+        !isl9241_read_input_current_limit_ma(&actual) ||
+        actual != (ma / 4u) * 4u) return false;
     iindpm_applied = true; iindpm_ma = actual;
     return true;
 }
@@ -166,7 +223,7 @@ bool ec_app_apply_charge_budget_mw(uint32_t mw)
 {
     gpio_set_charger_enable(false);
     charge_budget_applied = false;
-    if (mw == 0u) return !configured || bq25798_set_charge_enable(false);
+    if (mw == 0u) return !configured || isl9241_set_charge_enable(false);
     uint16_t charge_mv = DUCKTOP2_PACK_CHARGE_VOLTAGE_MV;
     if (!DUCKTOP2_CHARGING_QUALIFIED || !DUCKTOP2_PACK_QUALIFIED ||
         !configured || !sample_valid || !battery_present || sample.fault ||
@@ -175,24 +232,23 @@ bool ec_app_apply_charge_budget_mw(uint32_t mw)
      * exceed the allocated battery power near the top of charge. */
     uint32_t ma = ((uint64_t)mw * 1000u) / charge_mv;
     if (ma > DUCKTOP2_PACK_CHARGE_CURRENT_MA) ma = DUCKTOP2_PACK_CHARGE_CURRENT_MA;
-    ma = (ma / 10u) * 10u;
-    if (ma < BQ25798_CHARGE_CURRENT_MIN_MA) return false;
+    ma = (ma / 4u) * 4u;
+    if (ma < ISL9241_CHARGE_CURRENT_MIN_MA) return false;
     uint16_t actual_v, actual_i;
-    charge_budget_applied = bq25798_set_charge_enable(false) &&
-        bq25798_set_charge_voltage_mv(DUCKTOP2_PACK_CHARGE_VOLTAGE_MV) &&
-        bq25798_set_charge_current_ma((uint16_t)ma) &&
-        bq25798_read_charge_limits(&actual_v, &actual_i) &&
-        actual_v == (DUCKTOP2_PACK_CHARGE_VOLTAGE_MV / 10u) * 10u && actual_i == ma;
+    charge_budget_applied = isl9241_program_charge_limits(DUCKTOP2_PACK_CHARGE_VOLTAGE_MV,(uint16_t)ma) &&
+        isl9241_read_charge_limits(&actual_v, &actual_i) &&
+        actual_v == DUCKTOP2_PACK_CHARGE_VOLTAGE_MV && actual_i == ma;
     return charge_budget_applied;
 }
 
 bool ec_app_set_charging(bool enable)
 {
     gpio_set_charger_enable(false);
-    if (!enable) return !configured || bq25798_set_charge_enable(false);
-    if (!DUCKTOP2_CHARGING_QUALIFIED || !configured || !charge_budget_applied ||
+    if (!enable) return !configured || isl9241_set_charge_enable(false);
+    if (!DUCKTOP2_CHARGING_QUALIFIED || !power_io_valid || !pack_charge_permit || !gauge_status_valid || ec_app_gauge_full() ||
+        !configured || !charge_budget_applied ||
         !iindpm_applied || !sample_valid || sample.fault || !battery_present ||
-        !bq25798_set_charge_enable(true)) return false;
+        !isl9241_set_charge_enable(true)) return false;
     gpio_set_charger_enable(true);
     return true;
 }

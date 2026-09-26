@@ -15,7 +15,7 @@ bool gpio_get_pd2_tcpc_irq_n(void);
 bool gpio_get_pd_protect_fault_n(void);
 
 void gpio_set_charger_enable(bool enable);
-void gpio_set_pmic_qon_assert(bool assert);
+void gpio_set_mu_throttle_release(bool release);
 bool gpio_get_charger_int_n(void);
 bool gpio_get_bq_alert(void);
 

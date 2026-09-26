@@ -496,6 +496,7 @@ class Sheet:
 
     def render(self, self_uuid, page_number, paper="A2"):
         paper = getattr(self, "paper", paper)
+        paper_expr = f'(paper "User" {paper[0]} {paper[1]})' if isinstance(paper, tuple) else f'(paper "{paper}")'
         libsyms = "\n".join(self.lib_symbols[k] for k in sorted(self.lib_symbols))
         body = "\n".join(self.body)
         sheet_instances = (
@@ -511,7 +512,7 @@ class Sheet:
             f'  (generator "eeschema")\n'
             f'  (generator_version "10.0")\n'
             f'  (uuid {self_uuid})\n'
-            f'  (paper "{paper}")\n'
+            f'  {paper_expr}\n'
             f'  (lib_symbols\n{libsyms}\n  )\n'
             f'{body}\n'
             f'{sheet_instances}\n'

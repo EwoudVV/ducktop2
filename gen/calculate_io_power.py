@@ -23,11 +23,14 @@ class Limits:
     right_pcie_a: float=.400
     endpoint_startup_extra_a: float=.400
     right_usb5_a: float=2.015
-    main_selected_input_a: float=3.5
+    main_selected_input_a: float=5.0
     raw_aon_aggregate_a: float=2.0
     left_dc_signal_a: float=.100
     right_dc_signal_a: float=.100
-    seam_design_a: float=8.0
+    seam_design_a: float=10.0
+    return_wire_min_ohm: float=.00012
+    remaining_braid_max_ohm: float=.001
+    return_terminal_rating_a: float=9.0
 
 
 def constant_power_current(power_w,source_v,positive_ohm,ground_v):
@@ -64,12 +67,14 @@ def calculate(l=Limits()):
       'combined_negative':l.main_selected_input_a+l.raw_aon_aggregate_a+l.left_dc_signal_a+l.right_dc_signal_a}
     worst=max(bounds.values())
     whole_eff=usb_w/(l.center_vsys_min_v*current)
-    return {'status':'PASS_CONDITIONAL' if worst<=l.seam_design_a and whole_eff>=.80 else 'FAIL',
+    terminal_current=worst/(1+l.return_wire_min_ohm/l.remaining_braid_max_ohm)
+    return {'status':'PASS_CONDITIONAL' if worst<=l.seam_design_a and terminal_current<=l.return_terminal_rating_a and whole_eff>=.80 else 'FAIL',
             'boundary':'normal and qualified startup states only; no physical qualification or fuse/ESD fault clearance',
             'qualification_limits':asdict(l),'usb_input_a':current,
             'regulator_input_min_v':l.center_vsys_min_v-l.seam_ground_max_v-resistance*current,
             'whole_path_efficiency_min':whole_eff,'signed_cut_absolute_bounds_a':bounds,
-            'worst_ground_edge_a':worst,'remaining_to_8a':l.seam_design_a-worst,
+            'worst_ground_edge_a':worst,'one_open_braid_terminal_a':terminal_current,
+            'return_path_power_max_w':worst*worst*l.remaining_braid_max_ohm/4,'remaining_to_design_a':l.seam_design_a-worst,
             'left_sys3_min_v':3.258999702-l.left_sys3_a*(.093+.010)-.010-.020}
 
 

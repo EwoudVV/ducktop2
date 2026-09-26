@@ -110,6 +110,19 @@ int main(void)
     const uint8_t pdo20[6]={0x2c,0x41,0x06,0x00,0,0};
     assert(tps25751_decode_contract(st+1,pdo20,rdo+1,pd+1,&c)==(DUCKTOP2_PD_ALLOW_20V != 0));
     if (DUCKTOP2_PD_ALLOW_20V) assert(c.voltage_mv==20000 && c.current_ma==3000);
+    const uint8_t pdo5[6]={0x2c,0x91,0x01,0,0,0};
+    const uint8_t pdo9[6]={0x2c,0xd1,0x02,0,0,0};
+    assert(tps25751_decode_contract(st+1,pdo5,rdo+1,pd+1,&c) && c.voltage_mv==5000);
+    assert(tps25751_decode_contract(st+1,pdo9,rdo+1,pd+1,&c) && c.voltage_mv==9000);
+    const uint8_t mismatch[16]={0xf4,0x59,0x02,0x14}; /* 1.5 A operation, wants 5 A */
+    const uint8_t pdo5_1a5[6]={0x96,0x90,0x01,0,0,0};
+    assert(tps25751_decode_contract(st+1,pdo5_1a5,mismatch,pd+1,&c) && c.current_ma==1500);
+    uint8_t giveback[16];memcpy(giveback,mismatch,16);giveback[3]|=8u;
+    assert(!tps25751_decode_contract(st+1,pdo5_1a5,giveback,pd+1,&c));
+    const uint8_t pdo20_5a[6]={0xf4,0x41,0x06,0,0,0};
+    const uint8_t rdo5a[16]={0xf4,0xd1,0x07,0x20};
+    assert(tps25751_decode_contract(st+1,pdo20_5a,rdo5a,pd+1,&c)==(DUCKTOP2_PD_ALLOW_20V!=0));
+    if(DUCKTOP2_PD_ALLOW_20V)assert(c.current_ma==5000);
     uint8_t bad[17];
     memcpy(bad, st, sizeof(st)); bad[0] = 4;
     i2c_mock_begin(); i2c_mock_expect_read(0x20, 0x1a, bad, 6);

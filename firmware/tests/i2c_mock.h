@@ -31,6 +31,10 @@ typedef struct {
 
 typedef struct {
   uint8_t regfile[256];
+  uint16_t isl_words[256];
+  uint8_t tca37[4], gauge[256];
+  bool gauge_emulated, expander_pins_emulated, ignore_writes;
+  uint8_t nack_address;
   bool present;             /* i2c1_probe() result when no probe step scripted */
   bool nack_all;            /* force NACK on every transaction */
   bool adc_done_autoset;    /* REG1E ADC_DONE set when BQ25798 ADC_EN written */

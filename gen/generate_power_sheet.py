@@ -19,6 +19,7 @@ def add_selector_fet(s, ref, x, y, gate, common_source, drain, drain_kind):
 
 def build(sheet_symbol_uuid):
     s = Sheet(f"/{sheet_symbol_uuid}")
+    s.paper = (1400, 900)
 
     class Cur:
         def __init__(self, x0, y0, col_w=55, row_h=10, rows_per_col=22):
@@ -30,13 +31,12 @@ def build(sheet_symbol_uuid):
             self.i += 1
             return (self.x0 + col * self.col_w, self.y0 + row * self.row_h)
 
-    # The motherboard provides autonomous per-cell protection.  The tiny PCBs
-    # attached to the user's cells are thermal-only and are not part of the
-    # electrical protection or current path.
+    # The BMS provides pack protection. The purchased cells retain their
+    # protection boards until their exact ratings and series use are verified.
     # ---- Board split Phase 2.4: pack protection moved to the BMS board ----
     # The pack connector, fuse, BQ77915, LTC4368, FETs, and shunts now live
     # on the BMS daughterboard (bms/bms.kicad_sch). The gauge (U10), charger
-    # (U2), and ship FET (Q25) stay here. FPC-3 boundary nets below.
+    # (U2), and battery power-path FET (Q25) stay here. FPC-3 boundary nets below.
     s.gnd(200, 90)
     s.pwrflag(200, 45, "FG_VSS")
     s.pwrflag(200, 105, "GND")
@@ -103,168 +103,11 @@ def build(sheet_symbol_uuid):
     s.place("R855", "R", "10k unused external TS pulldown", 345, 170, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("FG_TS", "local"), "2": ("FG_VSS", "hier")})
 
-    # ---------------- U2: BQ25798 buck-boost charger / NVDC path ----------------
-    # Readability (cosmetic-only, nets unchanged): U2 body is ~60 mm tall and
-    # sat inside the c3 col-2 passive column at x=315. Moved +30 mm right so
-    # C11/L1/Q25/R704/C701-C703 clear the body. Anchors follow pins.
-    s.text(260, 20, "== U2 bq25798 Buck-Boost Charger / NVDC Power Path (VSYS) ==")
-    s.place("U2", "BQ25798", "BQ25798RQMR", 351, 120,
-            footprint="Package_DFN_QFN:Texas_RQM0029A_VQFN-29_4x4mm_P0.4mm",
-            pin_nets={
-                "1": ("STAT_DRV", "local"), "2": ("VBUS_COMBINED", "local"),
-                "3": ("VBUS_COMBINED", "local"), "4": ("BTST1_NODE", "local"),
-                "5": ("REGN", "local"), "6": ("", "nc"), "7": ("", "nc"),
-                "8": ("VBUS_COMBINED", "local"), "9": ("VBUS_COMBINED", "local"), "10": ("GND", "local"),
-                "11": ("GND", "local"), "12": ("PMIC_QON_PIN", "local"), "13": ("CHG_CE_HW_N", "local"),
-                "14": ("I2C_SCL", "hier"), "15": ("I2C_SDA", "hier"), "16": ("CHG_TS_FIXED", "local"),
-                "17": ("ILIM_SET", "local"), "18": ("BATP_SENSE", "local"), "19": ("BTST2_NODE", "local"),
-                "20": ("PROG_SET", "local"), "21": ("CHG_INT_N", "hier"), "22": ("BAT_CHARGER", "local"),
-                "23": ("BAT_CHARGER", "local"), "24": ("SDRV_GATE", "local"), "25": ("VSYS", "hier"),
-                "26": ("SW2", "local"), "27": ("GND", "local"), "28": ("SW1", "local"),
-                "29": ("PMID", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "BQ25798RQMR"})
-
-    c3 = Cur(260, 40)
-    s.place("R12", "R", "1k", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("REGN", "local"), "2": ("STAT_LED_A", "local")})
-    s.place("LED1", "LED", "Charge STAT", *c3.next(), footprint=FOOTPRINTS["LED"],
-            pin_nets={"2": ("STAT_LED_A", "local"), "1": ("STAT_DRV", "local")},
-            extra_props={
-                "Manufacturer": "Kingbright", "MPN": "APT1608SGC",
-                "Datasheet": "https://www.kingbrightusa.com/images/catalog/SPEC/APT1608SGC.pdf",
-            })
-    s.place("C7", "C", "47n 25V X7R BTST1", *c3.next(), footprint=FOOTPRINTS["C_0402"],
-            pin_nets={"1": ("BTST1_NODE", "local"), "2": ("SW1", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM155R71E473KA88D"})
-    s.place("C8", "C", "47n 25V X7R BTST2", *c3.next(), footprint=FOOTPRINTS["C_0402"],
-            pin_nets={"1": ("BTST2_NODE", "local"), "2": ("SW2", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM155R71E473KA88D"})
-    s.place("C9", "C", "4.7u 10V X7R REGN", *c3.next(), footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("REGN", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM21BR71A475KA73L"})
-    # QON has its own charger-domain pull-up and must not be pulled to a rail
-    # that disappears in hard-off.  Q702 provides a high-impedance, active-high
-    # MCU pulse; the physical case button reaches QON and Mu PWRBTN through
-    # separate Schottky diodes so neither input can back-drive the other.
-    s.place("R13", "R", "100k QON-control gate pulldown", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PMIC_QON_ASSERT", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
-    s.place("Q702", "Q_NMOS_SOT23_GSD", "BSS138 QON open-drain pulse", *c3.next(),
-            footprint=FOOTPRINTS["Q_BSS138"],
-            pin_nets={"1": ("PMIC_QON_ASSERT", "hier"), "2": ("GND", "local"),
-                      "3": ("PMIC_QON_PIN", "local")},
-            extra_props={"Manufacturer": "onsemi", "MPN": "BSS138LT1G"})
-    s.place("D715", "D_Schottky", "BAT54WS case button to charger QON", *c3.next(),
-            footprint=FOOTPRINTS["D_Signal"],
-            pin_nets={"1": ("CASE_PWRBTN_N", "hier"), "2": ("PMIC_QON_PIN", "local")},
-            extra_props={"Manufacturer": "Diodes Incorporated", "MPN": "BAT54WS-7-F"})
-    s.place("D716", "D_Schottky", "BAT54WS case button to Mu PWRBTN", *c3.next(),
-            footprint=FOOTPRINTS["D_Signal"],
-            pin_nets={"1": ("CASE_PWRBTN_N", "hier"), "2": ("MU_PWRBTN_N", "hier")},
-            extra_props={"Manufacturer": "Diodes Incorporated", "MPN": "BAT54WS-7-F"})
-    s.place("R14", "R", "10k CE hardware-disable pull-up to REGN", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("REGN", "local"), "2": ("CHG_CE_HW_N", "local")})
-    s.place("Q700", "Q_NMOS_SOT23_GSD", "BSS138 source and cell-temperature qualified charger enable", *c3.next(),
-            footprint=FOOTPRINTS["Q_BSS138"],
-            pin_nets={"1": ("CHG_ENABLE_THERM", "local"), "2": ("GND", "local"),
-                      "3": ("CHG_CE_HW_N", "local")},
-            extra_props={"Manufacturer": "onsemi", "MPN": "BSS138LT1G"})
-    s.place("R719", "R", "100k charger-enable gate pulldown", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("CHG_ENABLE", "hier"), "2": ("GND", "local")})
-    # Readability: U2210 sat between R719/R2260 at 10 mm pitch with overlapping
-    # body bboxes. Waste one c3 slot to keep the column stable, place U2210
-    # in the gap between the 170-col and 260-col (x=200) clear of R181/U10.
-    # Nets unchanged.
-    c3.next()
-    s.place("U2210", "74LVC1G08", "SN74LVC1G08DBVR charger request AND isolated cell-temperature permit", 200, 160.02,
-            footprint=FOOTPRINTS["SN74LVC1G08DBV"],
-            pin_nets={"1": ("CHG_ENABLE", "hier"), "2": ("PACK_CHG_TEMP_OK_IN", "local"),
-                      "3": ("GND", "local"), "4": ("CHG_ENABLE_THERM", "local"),
-                      "5": ("MCU_3V3", "hier")},
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "SN74LVC1G08DBVR"})
-    s.place("R2260", "R", "1k isolated temperature-permit input series", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_CHG_TEMP_OK", "hier"), "2": ("PACK_CHG_TEMP_OK_IN", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-071KL"})
-    s.place("R2261", "R", "100k temperature-permit input default-low", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_CHG_TEMP_OK_IN", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
-    s.place("R2262", "R", "4.7k charger-enable output fail-off pulldown", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("CHG_ENABLE_THERM", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-074K7L"})
-    s.place("R2263", "R", "100k pack-fault input defaults to fault when control cable is absent", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_FAULT_N", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
-    s.place("C2260", "C", "100n 50V charger-temperature AND bypass", *c3.next(), footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D"})
-    s.place("R15", "R", "10k INT pull-up to 3V3", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("CHG_INT_N", "hier"), "2": ("MCU_3V3", "hier")})
-    s.place("R16", "R", "5.24k 1% fixed-valid TS top", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("REGN", "local"), "2": ("CHG_TS_FIXED", "local")})
-    s.place("R30", "R", "4.7k I2C SCL pull-up to 3V3", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("I2C_SCL", "hier")})
-    s.place("R31", "R", "4.7k I2C SDA pull-up to 3V3", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("I2C_SDA", "hier")})
-    s.place("R705", "R", "7.50k 1% fixed-valid TS bottom", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("CHG_TS_FIXED", "local"), "2": ("GND", "local")})
-    s.place("R17", "R", "47.0k 0.02% 5ppm ILIM top (3.0A nominal setting)", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("REGN", "local"), "2": ("ILIM_SET", "local")},
-            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060347K0HZEN00"})
-    s.place("R190", "R", "100k 0.02% 5ppm ILIM bottom", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("ILIM_SET", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU0603100KHZEN00"})
-    s.place("R18", "R", "10.5k 1% PROG: 3S, 1.5MHz", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PROG_SET", "local"), "2": ("GND", "local")})
-    s.place("C10", "C", "100n 50V X7R PMID local", *c3.next(), footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("PMID", "local"), "2": ("GND", "local")})
-    s.place("C11", "C", "100n 50V X7R SYS local", *c3.next(), footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")})
-    s.place("L1", "L", "1.0uH 20% 28A Isat BQ25798 1.5MHz", *c3.next(), footprint=FOOTPRINTS["L_BQ25798"],
-            pin_nets={"1": ("SW1", "local"), "2": ("SW2", "local")},
-            extra_props={"Manufacturer": "Coilcraft", "MPN": "XAL7030-102MEC"})
-    # TI BQ25798EVM-842 Q5 implementation: a single CSD17575Q3 ship FET
-    # blocks battery discharge into BAT/SYS when SDRV is low, while its body
-    # diode still permits adapter-powered charging and wake-up.
-    s.place("Q25", "Q_NMOS_123S_4G_5678D", "CSD17575Q3 BQ25798 ship FET", *c3.next(),
-            footprint=FOOTPRINTS["Q_CSD17575Q3"],
-            pin_nets={
-                "1": ("BAT_CHARGER", "local"), "2": ("BAT_CHARGER", "local"),
-                "3": ("BAT_CHARGER", "local"), "4": ("SDRV_GATE", "local"),
-                "5": ("PACK_POS_FUSED", "hier"),
-            },
-            extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "CSD17575Q3",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/csd17575q3.pdf",
-            })
-    s.place("R704", "R", "100R BATP Kelvin filter", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_POS_FUSED", "hier"), "2": ("BATP_SENSE", "local")})
-
-    # BQ25798 Rev C Figure 8-1 nominal capacitor network. Route the 100 nF parts closest to their pins.
-    for ref, net in (("C701", "VBUS_COMBINED"), ("C702", "VBUS_COMBINED")):
-        s.place(ref, "C", "10u 25V X7R VBUS", *c3.next(), footprint=FOOTPRINTS["C_10u"],
-                pin_nets={"1": (net, "local"), "2": ("GND", "local")},
-                extra_props={"Manufacturer": "Murata", "MPN": "GRM31CR71E106KA12L"})
-    for ref in ("C703", "C704", "C705"):
-        s.place(ref, "C", "10u 25V X7R PMID", *c3.next(), footprint=FOOTPRINTS["C_10u"],
-                pin_nets={"1": ("PMID", "local"), "2": ("GND", "local")},
-                extra_props={"Manufacturer": "Murata", "MPN": "GRM31CR71E106KA12L"})
-    for ref in ("C706", "C707", "C708", "C709", "C710"):
-        s.place(ref, "C", "10u 25V X7R SYS", *c3.next(), footprint=FOOTPRINTS["C_10u"],
-                pin_nets={"1": ("VSYS", "hier"), "2": ("GND", "local")},
-                extra_props={"Manufacturer": "Murata", "MPN": "GRM31CR71E106KA12L"})
-    s.place("C711", "C", "100n 50V X7R BAT local", *c3.next(), footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BAT_CHARGER", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D"})
-    for ref in ("C712", "C713"):
-        s.place(ref, "C", "10u 25V X7R BAT", *c3.next(), footprint=FOOTPRINTS["C_10u"],
-                pin_nets={"1": ("BAT_CHARGER", "local"), "2": ("GND", "local")},
-                extra_props={"Manufacturer": "Murata", "MPN": "GRM31CR71E106KA12L"})
-    s.place("R706", "R", "2R VBUS hot-plug damper", *c3.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("VBUS_COMBINED", "local"), "2": ("VBUS_DAMP", "local")})
-    s.place("C714", "C", "2.2u 25V X7R VBUS hot-plug damper", *c3.next(), footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("VBUS_DAMP", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM21BR71E225KA73L"})
+    # The charger block is kept together with its power and hardware gates.
+    from generate_isl9241_charger import add_charger
+    add_charger(s)
+    from generate_power_control import add_power_control
+    add_power_control(s)
 
     c4 = Cur(380, 40)
     s.place("C12", "C", "100n 50V X7R VBUS local", *c4.next(), footprint=FOOTPRINTS["C_100n"],
@@ -303,7 +146,7 @@ def build(sheet_symbol_uuid):
                 "5": ("AUX_EFUSE_IN_SYS", "local"), "6": ("AUX_EFUSE_UV", "local"),
                 "7": ("AUX_EFUSE_OV", "local"), "8": ("GND", "local"),
                 "9": ("AUX_EFUSE_DVDT", "local"), "10": ("AUX_EFUSE_ILIM", "local"),
-                "11": ("GND", "local"), "12": ("", "nc"), "13": ("", "nc"),
+                "11": ("GND", "local"), "12": ("AUX_EFUSE_SHDN", "local"), "13": ("", "nc"),
                 "14": ("AUX_FAULT_N", "hier"), "15": ("AUX_PGTH", "local"), "16": ("AUX_PGOOD", "hier"),
                 "17": ("AUX_DC_PROTECTED", "local"), "18": ("AUX_DC_PROTECTED", "local"),
                 "19": ("", "nc"), "20": ("", "nc"), "21": ("", "nc"),
@@ -344,7 +187,7 @@ def build(sheet_symbol_uuid):
     s.place("C723", "C", "100n AUX eFuse dVdT approx 50ms at 24V", *c4.next(), footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("AUX_EFUSE_DVDT", "local"), "2": ("GND", "local")})
     s.place("R191", "R", "470k 1% AUX ADC top", *c4.next(), footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("AUX_EFUSE_IN_SYS", "local"), "2": ("AUX_DC_DIV", "local")})
+            pin_nets={"1": ("AUX_DC_FUSED", "local"), "2": ("AUX_DC_DIV", "local")})
     s.place("R192", "R", "56k 1% AUX ADC bottom", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("AUX_DC_DIV", "local"), "2": ("GND", "local")})
     s.place("R193", "R", "1k AUX ADC series", *c4.next(), footprint=FOOTPRINTS["R"],
@@ -414,26 +257,25 @@ def build(sheet_symbol_uuid):
     add_selector_fet(s, "Q23", 485, 385, "ST2_AUX_GATE", "ST2_AUX_FET_COMMON", "AUX_DC_PROTECTED", "local")
     add_selector_fet(s, "Q24", 545, 385, "ST2_AUX_GATE", "ST2_AUX_FET_COMMON", "SEL_STAGE2", "local")
 
-    # UV/OV window dividers (VTH = 1.000 V, HYS pin to GND = fixed 3%):
-    #   PD windows accept fixed 15V and 20V contracts. The 1M/35.7k/47.5k
-    #   network includes enough OV hysteresis margin to recover at 21V.
+    # USB windows accept 5/9/15/20 V. Check threshold accuracy, resistor
+    # corners, leakage and the complete 15..45 mV fixed-hysteresis range.
     #   AUX window (on U16.V2) 5.59-23.3 V: V(UV) = Vin*83.4k/466.4k,
     #   V(OV) = Vin*20k/466.4k -- wide by design; the AUX eFuse (5.53-22.99 V)
     #   performs the real 7-22 V qualification upstream.
     #   Stage-2 383k/54.9k/20k also covers 21V OV recovery after TCR.
     for ref, value, net_a, net_b, x, y, mpn in (
-        ("R730", "1.00M 0.1% USB UV top", "USB_PD_SELECTED", "USB_MAIN_UV", 475, 225, "RT0603BRD071ML"),
-        ("R731", "35.7k 0.02% 5ppm USB window middle", "USB_MAIN_UV", "USB_MAIN_OV", 475, 237.7, "TNPU060335K7HZEN00"),
-        ("R732", "47.5k 0.02% 5ppm USB OV bottom", "USB_MAIN_OV", "GND", 475, 250.4, "TNPU060347K5HZEN00"),
-        ("R741", "1.00M 0.1% PD2 UV top", "PD2_VBUS_GATED", "ST2_USB_UV", 475, 462.3, "RT0603BRD071ML"),
-        ("R742", "35.7k 0.02% 5ppm PD2 window middle", "ST2_USB_UV", "ST2_USB_OV", 475, 475, "TNPU060335K7HZEN00"),
-        ("R743", "47.5k 0.02% 5ppm PD2 OV bottom", "ST2_USB_OV", "GND", 475, 487.7, "TNPU060347K5HZEN00"),
+        ("R730", "75.0k 0.02% 5ppm UV top", "USB_PD_SELECTED", "USB_MAIN_UV", 475, 225, "TNPU060375K0HZEN00"),
+        ("R731", "23.2k 0.02% 5ppm window middle", "USB_MAIN_UV", "USB_MAIN_OV", 475, 237.7, "TNPU060323K2HZEN00"),
+        ("R732", "4.53k 0.02% 5ppm OV bottom", "USB_MAIN_OV", "GND", 475, 250.4, "TNPU06034K53HZEN00"),
+        ("R741", "75.0k 0.02% 5ppm UV top", "PD2_VBUS_GATED", "ST2_USB_UV", 475, 462.3, "TNPU060375K0HZEN00"),
+        ("R742", "23.2k 0.02% 5ppm window middle", "ST2_USB_UV", "ST2_USB_OV", 475, 475, "TNPU060323K2HZEN00"),
+        ("R743", "4.53k 0.02% 5ppm OV bottom", "ST2_USB_OV", "GND", 475, 487.7, "TNPU06034K53HZEN00"),
         ("R733", "383k 0.1% AUX UV top", "AUX_DC_PROTECTED", "ST2_AUX_UV", 555, 462.3, "RT0603BRD07383KL"),
         ("R734", "63.4k 0.02% 5ppm AUX window middle", "ST2_AUX_UV", "ST2_AUX_OV", 555, 475, "TNPU060363K4HZEN00"),
         ("R735", "20.0k 0.02% 5ppm AUX OV bottom", "ST2_AUX_OV", "GND", 555, 487.7, "TNPU060320K0HZEN00"),
-        ("R744", "383k 0.1% stage2 UV top", "SEL_STAGE2", "ST2_MAIN_UV", 615, 225, "RT0603BRD07383KL"),
-        ("R745", "54.9k 0.02% 5ppm stage2 window middle", "ST2_MAIN_UV", "ST2_MAIN_OV", 615, 237.7, "TNPU060354K9HZEN00"),
-        ("R746", "20.0k 0.02% 5ppm stage2 OV bottom", "ST2_MAIN_OV", "GND", 615, 250.4, "TNPU060320K0HZEN00"),
+        ("R744", "75.0k 0.02% 5ppm UV top", "SEL_STAGE2", "ST2_MAIN_UV", 615, 225, "TNPU060375K0HZEN00"),
+        ("R745", "23.2k 0.02% 5ppm window middle", "ST2_MAIN_UV", "ST2_MAIN_OV", 615, 237.7, "TNPU060323K2HZEN00"),
+        ("R746", "4.53k 0.02% 5ppm OV bottom", "ST2_MAIN_OV", "GND", 615, 250.4, "TNPU06034K53HZEN00"),
     ):
         kind_a = "hier" if net_a in ("USB_PD_SELECTED", "PD2_VBUS_GATED") else "local"
         s.place(ref, "R", value, x, y, footprint=FOOTPRINTS["R"],
@@ -442,7 +284,7 @@ def build(sheet_symbol_uuid):
 
     for ref, value, net, x, y, fp, mpn in (
         ("C740", "100n 10V INTVCC", "MAIN_SEL_INTVCC", 475, 275, "C_100n", "GRM188R71A104KA61D"),
-        ("C741", "15n 50V TMR approx 240ms", "MAIN_SEL_TMR", 515, 275, "C_0402", "GRM155R71H153KA12D"),
+        ("C741", "1n 50V C0G selector validation", "MAIN_SEL_TMR", 515, 275, "C_0402", "GRM1555C1H102JA01D"),
         ("C742", "100n 50V USB V1 local", "USB_PD_SELECTED", 555, 275, "C_100n", "GRM188R71H104KA93D"),
         ("C743", "100n 50V USB VS1 local", "USB_MAIN_FET_COMMON", 475, 292.8, "C_100n", "GRM188R71H104KA93D"),
         ("C744", "100n 50V stage2 V2 local", "AUX_DC_PROTECTED", 515, 292.8, "C_100n", "GRM188R71H104KA93D"),
@@ -462,10 +304,10 @@ def build(sheet_symbol_uuid):
     s.place("R747", "R", "10k PD2 VALID pull-up", 595, 250.4, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("PD2_VALID_N", "hier")},
             extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
-    s.place("C715", "C", "15n 50V stage2 TMR approx 240ms", 515, 505,
+    s.place("C715", "C", "1n 50V C0G stage2 validation", 515, 505,
             footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("ST2_SEL_TMR", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM155R71H153KA12D"})
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM1555C1H102JA01D"})
     s.place("C746", "C_Polarized", "100u 35V hybrid selector output hold-up", 595, 292.8,
             footprint=FOOTPRINTS["C_100u_35V_hybrid"],
             pin_nets={"1": ("VBUS_COMBINED", "local"), "2": ("GND", "local")},
@@ -484,85 +326,32 @@ def build(sheet_symbol_uuid):
     s.pwrflag(650, 105, "SEL_STAGE2")
     s.pwrflag(650, 120, "PD2_VBUS_GATED")
     s.pwrflag(650, 60, "AUX_EFUSE_IN_SYS")
-    # Keep the EC alive before source selection. These Schottky diodes OR the
-    # protected battery/AUX paths and each raw PD port into one shared,
-    # reverse-blocking current-limited AON eFuse before the small AON buck.
-    for ref, source, source_kind, y in (
-        ("D710", "BAT_CHARGER", "local", 315),
-        ("D711", "AUX_DC_PROTECTED", "local", 325),
-        ("D712", "PD1_VBUS_RAW", "hier", 335),
-        ("D713", "PD2_VBUS_RAW", "hier", 345),
-    ):
-        s.place(ref, "D_Schottky", "B340A 3A 40V EC always-on OR", 650, y,
-                footprint=FOOTPRINTS["D_Schottky_SMA"],
-                pin_nets={"1": ("AON_OR_RAW", "local"), "2": (source, source_kind)},
-                extra_props={"Manufacturer": "Diodes Incorporated", "MPN": "B340A-13-F"})
-    s.place("U718", "TPS26600RHF", "TPS26600RHFR aggregate AON eFuse with 20V recovery margin", 705, 335,
-            footprint="Package_DFN_QFN:Texas_RHF0024A_VQFN-24-1EP_4x5mm_P0.5mm_EP2.65x3.65mm",
-            pin_nets={
-                **{str(pin): ("", "nc") for pin in (1,2,3,4,5,6,7,11,14,16,18,21)},
-                "8": ("AON_OR_RAW", "local"), "9": ("AON_OR_RAW", "local"),
-                "10": ("AON_EFUSE_UV", "local"), "12": ("AON_EFUSE_OV", "local"),
-                "13": ("AON_EFUSE_RTN", "local"), "15": ("AON_EFUSE_RTN", "local"),
-                "17": ("GND", "local"), "19": ("AON_EFUSE_ILM", "local"),
-                "20": ("AON_EFUSE_DVDT", "local"), "22": ("AON_FAULT_N", "hier"),
-                "23": ("EC_AON_IN", "hier"), "24": ("EC_AON_IN", "hier"),
-                "25": ("AON_EFUSE_RTN", "local"),
-            },
-            extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "TPS26600RHFR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/tps2660.pdf",
-            })
-    s.place("R795", "R", "8.06k 0.02% 5ppm AON UV/OV top", 755, 315, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("AON_OR_RAW", "local"), "2": ("AON_EFUSE_UV", "local")},
-            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU06038K06HZEN00"})
-    s.place("R796", "R", "1.43k 0.02% 5ppm AON UV/OV middle", 755, 325, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("AON_EFUSE_UV", "local"), "2": ("AON_EFUSE_OV", "local")},
-            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU06031K43HZEN00"})
-    s.place("R797", "R", "511R 0.02% 5ppm AON UV/OV bottom", 755, 335, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("AON_EFUSE_OV", "local"), "2": ("AON_EFUSE_RTN", "local")},
-            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU0603511RHZEN00"})
-    for ref,y in (("R798",345),("R799",355)):
-        s.place(ref, "R", "16k 0.02% 5ppm; parallel pair gives 8k AON ILIM", 755, y, footprint=FOOTPRINTS["R"],
-                pin_nets={"1": ("AON_EFUSE_ILM", "local"), "2": ("AON_EFUSE_RTN", "local")},
-                extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060316K0HZEN00"})
-    s.place("C795", "C", "1u 25V AON eFuse input", 805, 315, footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("AON_OR_RAW", "local"), "2": ("GND", "local")})
-    s.place("C796", "C", "100n 50V AON eFuse input local", 805, 325, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("AON_OR_RAW", "local"), "2": ("GND", "local")})
-    s.place("C797", "C", "10u 25V AON eFuse output", 805, 335, footprint=FOOTPRINTS["C_10u"],
-            pin_nets={"1": ("EC_AON_IN", "hier"), "2": ("GND", "local")})
-    s.place("C798", "C", "100n 50V AON eFuse output local", 805, 345, footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("EC_AON_IN", "hier"), "2": ("GND", "local")})
-    s.place("C799", "C", "22n 50V C0G 5% AON eFuse dVdt", 805, 355, footprint="Capacitor_SMD:C_0805_2012Metric",
-            pin_nets={"1": ("AON_EFUSE_DVDT", "local"), "2": ("AON_EFUSE_RTN", "local")},
-            extra_props={"Manufacturer": "KEMET", "MPN": "C0805C223J5GACTU"})
-    s.pwrflag(650, 370, "AON_OR_RAW")
-    s.pwrflag(730, 380, "AON_EFUSE_RTN")
-    s.text(650, 400, "U718 RTN/pad25 needs its own thermal copper and vias; do not short it to GND pin17. MODE to RTN selects current-limit/auto-retry.")
+    from generate_aon_input import add_aon_input
+    add_aon_input(s)
+
     s.text(380, 20, "J190 is the single AUX/SOLAR physical input; USB-C PD negotiation remains only on sheet 5.")
     s.text(380, 26, "TPS26630 accepts 7-22V nominal; 0.1% ladder targets 5.53V/22.99V rising UV/OV and a 3A limit.")
-    s.text(380, 32, "U15/U16 cascade accepts fixed 15/20V PD contracts and AUX across 7-22V; priority remains PD1 > PD2 > AUX.")
-    s.text(380, 38.1, "SMCJ24CA protects the 67V eFuse input; active OVP protects the BQ25798 24V recommended input limit.")
+    s.text(380, 32, "U15/U16 accepts fixed 5/9/15/20V PD contracts and AUX across 7-22V; priority remains PD1 > PD2 > AUX.")
+    s.text(380, 38.1, "SMCJ24CA protects the AUX eFuse input. The common LTC4418 window protects the charger input.")
 
     s.text(20, 220, "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice).")
     s.text(20, 226, "J2: pins 1/2 PACK+, pins 3/4 PACK-, pin 5 cell1 tap, pin 6 cell2 tap. Verify harness order before first connection.")
     s.text(20, 232, "U719 BQ7791500 autonomously protects each cell at 4.20V OV / 2.90V UV and drives back-to-back low-side FETs.")
     s.text(20, 238, "RS11=8mOhm gives 7.5A nominal OCD and 15A nominal SCD; U11/RS10 and F1 remain independent tighter/secondary protection.")
     s.text(20, 244, "Three insulated cell probes drive raw-referenced BMS comparators and CTRC/CTRD. U719 TS retains its unused-function strap.")
-    s.text(20, 250, "BQ25798 /CE requires CHG_ENABLE AND isolated PACK_CHG_TEMP_OK. REGN pulls /CE high when either permit is absent.")
-    s.text(20, 256, "U2 ILIM_HIZ is a nominal 3.0A setting. The bootstrap IINDPM command is <=2.50A; actual current and raw AON headroom require qualification.")
-    s.text(20, 263.62, "J190 is the one 7-22V nominal AUX/solar input; TPS26630 protects it before BQ25798.")
-    s.text(20, 271.24, "Solar MPPT is implemented by BQ25798 firmware on this same input; there is no second charger path.")
-    s.text(20, 286.48, "AUX_DC_ADC measures the post-reverse-FET input so firmware can detect droop and reduce BQ25798 input current.")
-    s.text(20, 294.1, "U2 VAC1/VAC2 tie to VBUS_COMBINED in no-external-mux mode; ACDRV1/2 go to GND.")
-    s.text(20, 301.72, "Q25 follows BQ25798EVM-842: SDRV disconnects pack discharge for electronic ship/hard-off while adapter charging can wake the pack.")
+    s.text(20, 250, "Charging requires CHG_ENABLE AND isolated PACK_CHG_TEMP_OK. Q700 clamps NTC hot until both permits are present.")
+    s.text(20, 256, "ISL9241 starts with a 200mA input limit and charging off. Firmware must verify the source and program bounded limits.")
+    s.text(20, 263.62, "J190 is the one 7-22V nominal AUX input; TPS26630 protects it before the source selector.")
+    s.text(20, 271.24, "AUX current is limited by the released source profile. Solar MPPT is not implemented in this charger driver.")
+    s.text(20, 286.48, "AUX_DC_ADC measures the protected input so firmware can detect droop and reduce charger input current.")
+    s.text(20, 294.1, "RS2600 is the 20mOhm input shunt. RS2601 is the separate 10mOhm battery-current shunt; both need Kelvin routing.")
+    s.text(20, 301.72, "Q25 is the ISL9241 battery-path FET. The protected pack feeds the EC separately; disabling the Mu rail keeps button wake available.")
     s.text(20, 309.34, "U11 accepts about 8.45-13.57V nominal; 11mOhm RS10 gives 4.55A nominal and <=5.51A worst-case trips.")
-    s.text(20, 316.96, "BQ25798 TS remains fixed at 58.9% REGN with TS_IGNORE=0. BQ34Z100 uses TEMPS=0; its internal temperature is not a cell-temperature measurement.")
-    s.text(20, 324.58, "STARTUP: hold MU_12V_ENABLE low; qualify source/profile, read PD Status 0x35 and Active PDO/RDO 0x31/0x32, then program VSYSMIN and IINDPM <=2.50A.")
+    s.text(20, 316.96, "The charger NTC pin receives a hardware inhibit from the BMS permit. The fixed 10k state is not a cell-temperature measurement.")
+    s.text(20, 324.58, "STARTUP: keep Mu enable low and PROCHOT asserted. Read TCPC PD Status 0x40 and active PDO/RDO 0x34/0x35 before selecting a source.")
     s.text(20, 332.2, "Require the qualified VSYS threshold before Mu enable and confirm MU_12V_PG. Source, charger, watchdog or PG faults revoke enable; profile gates remain off until qualified.")
-    s.text(20, 339.82, "BQ25798 keeps TS_IGNORE=0 and STOP_WD_CHG=1. TS divider is not a cell sensor; raw BMS CTRs and isolated /CE gating provide cell-temperature inhibits.")
-    s.text(20, 347.44, "U718 TPS26600 limits AON at nominal 1.5 A. OV recovery minimum 21.128 V covers a 21 V source; OV trip maximum 24.097 V remains below 25 V capacitors.")
+    s.text(20, 339.82, "The charger watchdog stays enabled. JEITA, source limits and throttle settings must be read back before the hardware gates are released.")
+    s.text(20, 347.44, "U718 is the shared standby circuit breaker. U2650 prefers a valid external supply; pack standby remains available without firmware.")
     s.text(20, 355.06, "AON UV rising remains above 6.0 V, so default 5 V USB-C is negotiation-only. B340A input OR blocks DC negative sources; transient overshoot still needs measurement.")
     s.text(20, 362.68, "A 5V-only USB-C source leaves the laptop off. AON_FAULT_N inhibits charging and Mu start; the service connector remains the assembly hard disconnect.")
     s.text(20, 370.3, "C746 provides low-ESR hold-up through LTC4418 break-before-make source switching.")
@@ -570,14 +359,14 @@ def build(sheet_symbol_uuid):
     # First-article pogo access. These pads are not user connectors; they make
     # the power-up and fault-state procedure electrically observable.
     for ref, label, x, y, net_name, scope in [
-        ("TP1", "GND test", 860, 260, "GND", "local"),
-        ("TP2", "PACK_POS_FUSED test", 880, 260, "PACK_POS_FUSED", "local"),
-        ("TP3", "VSYS test", 900, 260, "VSYS", "hier"),
-        ("TP4", "EC_AON_IN test", 920, 260, "EC_AON_IN", "hier"),
-        ("TP7", "MCU_3V3 test", 980, 260, "MCU_3V3", "hier"),
-        ("TP9", "CHG_INT_N test", 860, 280, "CHG_INT_N", "hier"),
-        ("TP10", "PACK_FAULT_N test", 890, 280, "PACK_FAULT_N", "hier"),
-        ("TP11", "AON_FAULT_N test", 920, 280, "AON_FAULT_N", "hier"),
+        ("TP1", "GND test", 1200, 480, "GND", "local"),
+        ("TP2", "PACK_POS_FUSED test", 1280, 480, "PACK_POS_FUSED", "local"),
+        ("TP3", "VSYS test", 1200, 505, "VSYS", "hier"),
+        ("TP4", "EC_AON_IN test", 1280, 505, "EC_AON_IN", "hier"),
+        ("TP7", "MCU_3V3 test", 1200, 530, "MCU_3V3", "hier"),
+        ("TP9", "CHG_INT_N test", 1280, 530, "CHG_INT_N", "hier"),
+        ("TP10", "PACK_FAULT_N test", 1200, 555, "PACK_FAULT_N", "hier"),
+        ("TP11", "AON_FAULT_N test", 1280, 555, "AON_FAULT_N", "hier"),
     ]:
         s.place(ref, "TestPoint", label, x, y,
                 footprint=FOOTPRINTS["TestPoint_Pad"],
@@ -602,7 +391,7 @@ def main():
 
     # ---- Root sheet ----
     hier_nets = [
-        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
+        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "MU_PROCHOT_RELEASE", "CHG_ENABLE",
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "VSYS", "MCU_3V3", "EC_AON_IN", "AUX_DC_ADC", "USB_PD_SELECTED",
         "PD1_VBUS_RAW", "PD2_VBUS_RAW",

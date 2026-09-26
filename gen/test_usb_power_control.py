@@ -117,7 +117,7 @@ class USBPowerTests(unittest.TestCase):
         self.assertLess(maximum,1.510)
         self.assertLess(old,1.175)
     def test_looms_have_distinct_counts_and_no_positive_signal_contacts(self):
-        self.assertEqual([len(loom.SEAMS[n]['pins']) for n in ('left','right','usb5')],[12,10,2])
+        self.assertEqual([len(loom.SEAMS[n]['pins']) for n in ('left','right','usb5')],[7,7,2])
         self.assertEqual(loom.USB5_POWER_PINMAP,{1:'GND',2:'USB_PORT_5V'})
         power_nets=set().union(*(set(spec['pins'].values()) for spec in loom.SEAMS.values()))-{'GND'}
         self.assertFalse(set(fpc.FPC1_PINMAP.values())&power_nets)
@@ -131,7 +131,7 @@ class USBPowerTests(unittest.TestCase):
         self.assertLess(loom.parallel_resistance([.006,.030,.080,.099]),maximum/4)
         self.assertAlmostEqual(loom.usb5_conductor_max_resistance(420),.0226)
         self.assertGreaterEqual(loom.USB5_RETURN_CONTINUOUS_A,8)
-        self.assertLessEqual(loom.SEAM_GROUND_DIFFERENCE_MAX_V/loom.SEAM_RETURN_MIN_OHM,5)
+        self.assertLessEqual(loom.ground_terminal_current_bound(10),9)
         self.assertGreater(loom.CONTACT_CONTINUOUS_SCREEN_A,5)
         self.assertGreater(loom.right_pp5v_minimum(),4.960)
         self.assertGreater(loom.right_usb2_vbus_minimum(),4.784)
@@ -140,18 +140,29 @@ class USBPowerTests(unittest.TestCase):
         with self.assertRaises(ValueError):loom.usb5_conductor_max_resistance(421)
         with self.assertRaises(ValueError):loom.parallel_resistance([.01,0])
         with self.assertRaises(ValueError):loom.conductor_max_resistance(301)
-    def test_vertical_microfit_keeps_literal_power_pinmaps(self):
+    def test_spring_terminal_groups_keep_literal_rail_maps(self):
         expected={
-            'left':('43045-1212',["VSYS","PD1_VBUS_RAW","USB_PD_SELECTED","AUX_DC_RAW","SYS_3V3","MCU_3V3"]+["GND"]*6),
-            'right':('43045-1012',["PD2_VBUS_GATED","PD2_VBUS_RAW","SYS_5V","SYS_3V3","PCIE_3V3","MCU_3V3"]+["GND"]*4)}
-        for side,(mpn,nets) in expected.items():
+            'left':[['VSYS','PD1_VBUS_RAW','USB_PD_SELECTED'],['AUX_DC_RAW','SYS_3V3','MCU_3V3'],['GND']],
+            'right':[['PD2_VBUS_GATED','PD2_VBUS_RAW','SYS_5V'],['SYS_3V3','PCIE_3V3','MCU_3V3'],['GND']]}
+        for side,groups in expected.items():
             for end in ('center','io'):
                 fixture=Capture();loom.add_connector(fixture,side,end,0,0)
-                ref=loom.SEAMS[side]['refs'][end];part=fixture.parts[ref]
-                self.assertEqual(part['extra_props']['MPN'],mpn)
-                self.assertTrue(part['footprint'].endswith('_P3.00mm_Vertical'))
-                self.assertEqual([self.net(fixture,ref,n) for n in range(1,len(nets)+1)],nets)
-        self.assertEqual(loom.LOOM_MATED_BODY_HEIGHT_MM,17.64)
+                refs=[loom.SEAMS[side][key][end] for key in ('refs','aux_refs','return_refs')]
+                for ref,nets in zip(refs,groups):
+                    n=len(nets);part=fixture.parts[ref]
+                    self.assertEqual(part['extra_props']['MPN'],f'2060-{450+n}/998-404')
+                    self.assertEqual(part['footprint'],f'ducktop2:WAGO_2060_{450+n}_SMD')
+                    wanted=list(reversed(nets)) if end=='center' else nets
+                    self.assertEqual([self.net(fixture,ref,p) for p in range(1,n+1)],wanted)
+        self.assertEqual(loom.LOOM_MATED_BODY_HEIGHT_MM,4.5)
+    def test_one_open_braid_does_not_overload_a_return_terminal(self):
+        # One complete <=1 mOhm braid remains. The wire is qualified at
+        # >=0.12 mOhm cold; other parallel paths only reduce its current.
+        self.assertAlmostEqual(loom.ground_terminal_current_bound(10),8.92857142857)
+        for wire in (.00012,.0005,.002,.05):
+            for braid in (.00001,.0005,.001):
+                self.assertLessEqual(10/(1+wire/braid),9)
+        with self.assertRaises(ValueError):loom.ground_terminal_current_bound(10,0,.001)
     def test_xt30_polarity_and_current_finished_hole_drawing(self):
         from generate_usb_power_connector import footprint_text
         text=footprint_text()

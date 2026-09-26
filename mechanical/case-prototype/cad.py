@@ -10,6 +10,13 @@ import cadquery as cq
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
+_MESHES={}
+
+
+def mesh(shape):
+    key=id(shape)
+    if key not in _MESHES:_MESHES[key]=(shape,shape.tessellate(.15,.18))
+    return _MESHES[key][1]
 
 
 def box(x, y, h, w, d, t):
@@ -57,7 +64,13 @@ def render(parts, path, title, direction=(1,-1,1), size=(1600,1100), focus=None)
     renderer.SetBackground(.94,.95,.96)
     for item in parts:
         shape, color = item['shape'], item.get('color',(.6,.65,.7))
-        vertices, triangles=shape.tessellate(.10,.15)
+        source=item.get('_mesh_source',shape)
+        vertices, triangles=mesh(source)
+        if '_mesh_source' in item:
+            import math
+            a=math.radians(-item.get('_mesh_angle',0));c=math.cos(a);s=math.sin(a)
+            _,py,pz=item['_mesh_pivot'];lift=item.get('_mesh_lift',0)
+            vertices=[cq.Vector(p.x,(p.y-py)*c-(p.z-pz)*s+py,(p.y-py)*s+(p.z-pz)*c+pz+lift) for p in vertices]
         points=vtk.vtkPoints()
         for p in vertices: points.InsertNextPoint(*p.toTuple())
         cells=vtk.vtkCellArray()

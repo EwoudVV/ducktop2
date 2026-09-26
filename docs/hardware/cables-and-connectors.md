@@ -1,6 +1,6 @@
 # cables and connectors
 
-updated 10 september 2026. the I/O signal cables, power looms, and BMS
+updated 26 september 2026. the I/O signal cables, power looms, and BMS
 control cable are separate connections. the old 68-pin I/O cables and
 30-pin BMS power cable are no longer part of this design.
 
@@ -42,39 +42,46 @@ switches, protection parts, and external connector/cable allowance.
 
 ## power between the main boards
 
-| loom | board connectors | cable housing | wire |
-| --- | --- | --- | --- |
-| center to left | J2430/J2431, Molex 43045-1212 | 43025-1200 with 43030-0038 contacts | 12 separate 18 AWG conductors, 90..100 mm |
-| center to right | J2432/J2433, Molex 43045-1012 | 43025-1000 with 43030-0038 contacts | 10 separate 18 AWG conductors, 90..100 mm |
-| USB5, left to right | J2434/J2435, AMASS XT30PW-F30.G.Y | XT30U-M.G.Y | two 18 AWG conductors, 400..420 mm |
+the saved connector revision is still being routed and checked. these are
+the new parts and pin maps; the complete installed harness is not qualified.
 
-the Micro-Fit looms use Alpha 3253 wire and connect pin N to pin N. their
-pin maps and exact supply names are in
-[usb_power_contract.py](../../gen/usb_power_contract.py). the different
-contact counts distinguish the left and right looms.
+| link | center terminal | I/O terminal | center pins, in order | I/O pins, in order |
+| --- | --- | --- | --- | --- |
+| left | J2430 | J2431 | 1: USB_PD_SELECTED, 2: PD1_VBUS_RAW, 3: VSYS | 1: VSYS, 2: PD1_VBUS_RAW, 3: USB_PD_SELECTED |
+| left | J2450 | J2451 | 1: MCU_3V3, 2: SYS_3V3, 3: AUX_DC_RAW | 1: AUX_DC_RAW, 2: SYS_3V3, 3: MCU_3V3 |
+| left | J2460 | J2461 | 1: GND | 1: GND |
+| right | J2432 | J2433 | 1: SYS_5V, 2: PD2_VBUS_RAW, 3: PD2_VBUS_GATED | 1: PD2_VBUS_GATED, 2: PD2_VBUS_RAW, 3: SYS_5V |
+| right | J2452 | J2453 | 1: MCU_3V3, 2: PCIE_3V3, 3: SYS_3V3 | 1: SYS_3V3, 2: PCIE_3V3, 3: MCU_3V3 |
+| right | J2462 | J2463 | 1: GND | 1: GND |
 
-the direct USB5 loom uses Alpha 5857 wire. pin 1 is GND and pin 2 is
-USB_PORT_5V at both ends. insulate the solder terminations and add strain
-relief. the board connector's retention lands are isolated.
+the three-pole parts are WAGO 2060-453/998-404. the single return terminals
+are 2060-451/998-404. both are 4.5 mm high. use Alpha 6715 18 AWG,
+strip 7..9 mm and hold the release button while inserting stranded wire.
+do not solder-tin the stripped ends. the 20..100 mm lengths in the power
+calculations are bounds, not a finished cut list. keep both ground braids.
 
-the Micro-Fit connector body is 17.64 mm high when mated. the current
-individual-wire bend model reaches roughly 55 mm above the PCB. that
-still excludes a proven arrangement for the whole wire bundle, its clamp,
-and the cover. do not use connector body height as the case-height limit.
-current lengths, bend radii, voltage-drop limits, and remaining fit work are
-recorded in [I/O power qualification](io-power-qualification.md).
+J2434/J2435 retain the AMASS XT30PW-F30.G.Y / XT30U-M.G.Y connection.
+the direct USB5 loom now specifies Alpha 6716 16 AWG, 400..420 mm.
+pin 1 is GND and pin 2 is USB_PORT_5V at both ends. insulate and support
+the solder joints independently. the retention lands stay isolated.
+
+Alpha 6715 has an 8.763 mm minimum bend radius using its maximum diameter.
+the corresponding limit for Alpha 6716 is 10.541 mm. final dressing, clamps,
+terminal access, voltage drop, shared-return current and temperature still
+need checking. see [power revision status](power-revision.md) and
+[the connector contract](../../gen/usb_power_contract.py).
 
 ## BMS wiring
 
 | connection | ends | construction |
 | --- | --- | --- |
-| protected pack power | center J2071 to BMS J2072 | Molex 43650-0224 headers, 43645-0200 housings, 43030-0038 contacts, 18 AWG; 75 mm wire budget |
+| protected pack power | center J2071 to BMS J2072 | WAGO 2060-452/998-404 terminals, Alpha 6715 18 AWG; 90 mm wire budget |
 | isolated control | center J2073 to BMS J2074 | JST SM05B-SRSS-TB headers, SHR-05V-S housings, SSH-003T-P0.2-H contacts; five wires |
 | cell temperature probes | BMS J2200 to three insulated probes | JST SM06B-SRSS-TB header; three separate wire pairs to SEMITEC 104JT-025 probes |
 
-the power cable is pin 1 to pin 1 for PACK_POS_FUSED, and pin 2 to pin 2
-for FG_VSS. FG_VSS reaches system ground through the center's gauge shunt.
-the connector mounting pads are isolated.
+the protected power cable joins BMS pin 1 to center pin 2 for PACK_POS_FUSED,
+and BMS pin 2 to center pin 1 for FG_VSS. FG_VSS reaches system ground
+through the center's gauge shunt. label and continuity-check both wires.
 
 the control cable is also straight-numbered:
 
@@ -91,8 +98,10 @@ add a ground bridge between those domains. the temperature probes and
 J2200 hold-downs are raw-pack referenced; they do not get a system-ground
 wire. J2200 pairs 1/2, 3/4, and 5/6 serve cells 1, 2, and 3.
 
-the cell power and tap harness stays on the BMS's six-contact Mega-Fit J2.
-cell taps do not cross to the center board. all BMS cable routes need to
+J2 is now the four-contact Molex 43045-0400, with a 43025-0400 housing
+and 43030-0038 tin contacts for 18 AWG wire. its new map is 1 raw negative,
+2 cell 2 tap, 3 raw positive and 4 cell 1 tap. the old six-wire harness
+does not match this revision. cell taps stay on the BMS. all routes need to
 include the actual plugs, wire exits, bend clearance, and insulating supports.
 
 ## other internal cables
@@ -100,7 +109,7 @@ include the actual plugs, wire exits, bend clearance, and insulating supports.
 | Connection | What is fixed | What remains |
 | --- | --- | --- |
 | Keyboard | 30-pin interface; center J310 is at (145, 49), rotation 270 | Installed route, length, seating, and continuity against both board revisions |
-| Radio | Removable 30-pin interface; center J2300 is at (155, 67.75), rotation 0 | Radio chassis location, supports, orientation, and cable route |
+| Radio | Removable 30-pin interface; saved center J2300 is at (82.25, 117.75), rotation 0 | Proposed suspended case pose and route are in `mechanical/case-prototype`; physical fit and cable length remain pending |
 | OLEDs | J41/J45 use four-wire cables: 1 GND, 2 3.3 V, 3 SCL, 4 SDA | Module mounts, cable lengths, and rise-time check with the installed harness |
 | Trackpad | J58: 1 GND, 2 D-, 3 D+, 4 VBUS; USB-C plug at trackpad | Exact cable, cut-end identification, bend path, clamp, and pull test |
 | Internal display | Mu onboard eDP connection | Exact panel connector, all 40 conductors, rail limits, and hinge route |

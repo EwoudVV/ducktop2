@@ -1,5 +1,5 @@
 /*
- * Ducktop2 EC target glue: binds the BQ25798/BQ34Z100 drivers, thermal ADC,
+ * Ducktop2 EC target glue: binds the ISL9241/BQ34Z100 drivers, thermal ADC,
  * and fan PWM/tach hardware to the host-tested policy contracts
  * (ec_inputs_t / ec_telemetry_inputs_t / ec_fan_*).
  *
@@ -37,7 +37,11 @@ extern "C" {
 void ec_app_init(void);
 bool ec_app_charger_configured(void);
 bool ec_app_gauge_present(void);
-/* Fresh result of the last charger telemetry read (REG1D VBAT present). */
+bool ec_app_gauge_full(void);
+void ec_app_set_power_control(bool valid, uint8_t inputs, uint32_t now_ms);
+bool ec_app_prepare_source(uint16_t source_mv, uint32_t now_ms);
+void ec_app_update_throttle(bool allow_release, bool battery_mode);
+/* Fresh charger voltage/presence result, separate from pack qualification. */
 bool ec_app_battery_present(void);
 bool ec_app_charging_active(void);
 

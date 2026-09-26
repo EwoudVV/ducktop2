@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-typedef struct { bool mu,pd[2]; unsigned mu_off,budget_changes; uint16_t iindpm; bool fail_next; } bus_t;
+typedef struct { bool mu,pd[2],aux; unsigned mu_off,budget_changes; uint16_t iindpm; bool fail_next; } bus_t;
 static bool write_command(void *ctx,ec_commit_command_t cmd,uint32_t value)
 {
     bus_t *bus=ctx;
@@ -13,7 +13,8 @@ static bool write_command(void *ctx,ec_commit_command_t cmd,uint32_t value)
     if(cmd==EC_COMMIT_PD2_PATH_ENABLE)bus->pd[1]=value!=0;
     if(cmd==EC_COMMIT_CHARGER_IINDPM_MA)bus->iindpm=(uint16_t)value;
     if(cmd==EC_COMMIT_MU_EDP_BUDGET_MW)bus->budget_changes++;
-    assert(!(bus->pd[0] && bus->pd[1]));
+    if(cmd==EC_COMMIT_AUX_PATH_ENABLE)bus->aux=value!=0;
+    assert((unsigned)bus->pd[0]+bus->pd[1]+bus->aux<=1u);
     return true;
 }
 static void fixture(ec_controller_t *c,ec_inputs_t *in,ec_commit_state_t *state,bus_t *bus)
@@ -43,7 +44,7 @@ static void fixture(ec_controller_t *c,ec_inputs_t *in,ec_commit_state_t *state,
 }
 static ec_commit_result_t step(ec_controller_t *c,ec_inputs_t *in,ec_commit_state_t *state,bus_t *bus,uint32_t now)
 {
-    in->all_pd_paths_off=!bus->pd[0] && !bus->pd[1];
+    in->all_source_paths_off=!bus->pd[0] && !bus->pd[1] && !bus->aux;
     for(unsigned p=0;p<2;p++)in->source[EC_SOURCE_PD1+p].path_good=bus->pd[p] && in->source[EC_SOURCE_PD1+p].present;
     in->charger_iindpm_applied=bus->iindpm!=0;in->applied_charger_iindpm_ma=bus->iindpm;
     ec_controller_arbitrate(c,in,now);ec_controller_step(c,in,now);
@@ -102,5 +103,23 @@ int main(void)
     assert(step(&c,&in,&state,&bus,2)==EC_COMMIT_OK && !bus.mu);
     fixture(&c,&in,&state,&bus);in.source[EC_SOURCE_PD1].present=false;bus.fail_next=true;
     assert(step(&c,&in,&state,&bus,1)!=EC_COMMIT_OK && !bus.mu);
+    /* A weak external source supplements the same qualified pack envelope.
+     * Battery assistance must not be reported as spare charging power. */
+    fixture(&c,&in,&state,&bus);in.source[EC_SOURCE_PD1].present=false;
+    in.source[EC_SOURCE_PD2].negotiated_voltage_mv=5000;
+    in.request_charger=true;in.requested_charge_power_mw=10000;
+    for(unsigned t=1;t<80;t++)assert(step(&c,&in,&state,&bus,t)==EC_COMMIT_OK);
+    assert(c.active_source==EC_SOURCE_PD2 && bus.mu && bus.mu_off==0);
+    assert(c.outputs.mu_edp_budget_mw==20000 && c.outputs.charge_power_budget_mw==0 && !c.outputs.charger_enable);
+    in.pack_current_valid=false;
+    assert(step(&c,&in,&state,&bus,81)==EC_COMMIT_OK && !bus.mu);
+    fixture(&c,&in,&state,&bus);
+    c.validated_voltage_mv=15000;c.validated_current_ma=3000;
+    in.source[EC_SOURCE_PD1].negotiated_voltage_mv=9000;
+    for(unsigned t=1;t<80;t++)assert(step(&c,&in,&state,&bus,t)==EC_COMMIT_OK);
+    assert(c.active_source==EC_SOURCE_PD1 && c.validated_voltage_mv==9000 && bus.mu_off==0);
+    in.source[EC_SOURCE_PD1].qualified_input_current_ma=2000;
+    for(unsigned t=100;t<180;t++)assert(step(&c,&in,&state,&bus,t)==EC_COMMIT_OK);
+    assert(c.validated_current_ma==2000 && bus.iindpm==1750 && bus.mu_off==0);
     puts("pack-backed transfer: PASS (break-before-make, repeated changes, role loss, fresh envelopes, passive fallbacks)");
 }

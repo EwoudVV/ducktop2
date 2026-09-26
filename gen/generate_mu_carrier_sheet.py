@@ -30,6 +30,7 @@ def default_pin_map(symname, power_3v3_net="SYS_3V3"):
 
 def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s = Sheet(f"/{sheet_symbol_uuid}")
+    s.paper = (1500, 900)
     s.refcounters["#PWR"] = pwr_start
     s.refcounters["#FLG"] = flg_start
 
@@ -52,6 +53,7 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     for pin in [str(n) for n in range(250, 261)]:
         mu_nets[pin] = ("MU_12V", "local")
     mu_nets["115"] = ("RTC_BAT", "local")
+    mu_nets["117"] = ("MU_PROCHOT_N", "hier")
 
     # Local buttons and debug.
     mu_nets["1"] = ("MU_PWRBTN_N", "hier")
@@ -307,49 +309,52 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.pwrflag(640, 150, "SYS_5V")
     s.pwrflag(640, 165, "SYS_3V3")
 
-    # ---------------- U750: regulated Mu / eDP 12 V rail ----------------
-    # This is based on TI's TPS552892EVM-111 12 V reference design. The
-    # 15 mOhm output shunt sets a 3.33 A nominal current limit (50 mV threshold).
-    # A 9.0 V nominal rising UVLO is the final analog backstop. The separate
-    # two-NMOS interlock keeps this stage disabled until the EC explicitly
-    # qualifies the source and asserts active-high MU_12V_ENABLE.
-    s.text(520, 200, "== U750 TPS552892 VSYS -> regulated MU_12V, 12 V / 3.3 A limit ==")
-    s.place(
-        "U750", "TPS552892", "TPS552892RYQR 12V buck-boost", 620, 250,
-        footprint=FOOTPRINTS["TPS552892"],
+    # U750 uses the TPS552882 power stage with two external buck FETs.
+    # The 8 mOhm output shunt leaves margin above a 5.5 A operating target.
+    s.text(520, 200, "== U750 TPS552882 VSYS -> MU_12V, 12 V / 5.5 A target ==")
+    s.place("U750", "TPS552882", "TPS552882RPMR 12V buck-boost", 620, 250,
+        footprint="ducktop2:Texas_RPM0026A_VQFN-HR26_4x3.5",
         pin_nets={
-            "1": ("MU12_EN_UVLO", "local"),
-            "2": ("MU12_MODE", "local"),
-            "3": ("MU_12V_PG", "hier"),
-            "4": ("MU12_CC_N", "local"),
-            "5": ("MU12_DITH", "local"),
-            "6": ("MU12_FSW", "local"),
-            "7": ("VSYS", "hier"),
-            "8": ("MU12_SW1", "local"),
-            "9": ("GND", "local"),
-            "10": ("MU12_SW2", "local"),
-            "11": ("MU12_PRE_SENSE", "local"),
-            "12": ("MU12_ISP", "local"),
-            "13": ("MU12_ISN", "local"),
-            "14": ("MU12_FB", "local"),
-            "15": ("MU12_COMP", "local"),
-            "16": ("", "nc"),
-            "17": ("GND", "local"),
-            "18": ("MU12_VCC", "local"),
-            "19": ("MU12_BOOT2", "local"),
-            "20": ("MU12_BOOT1", "local"),
-            "21": ("MU12_EXTVCC", "local"),
-        },
-        extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPS552892RYQR"},
-    )
+            "1": ("MU12_LS_DRV", "local"), "2": ("MU12_HS_DRV", "local"),
+            "3": ("VSYS", "hier"), "4": ("MU12_EN_UVLO", "local"),
+            "5": ("MU_12V_PG", "hier"), "6": ("MU12_CC_N", "local"),
+            "7": ("MU12_DITH", "local"), "8": ("MU12_FSW", "local"),
+            "9": ("GND", "local"), "10": ("GND", "local"),
+            "11": ("MU12_PRE_SENSE", "local"), "12": ("MU12_ISP", "local"),
+            "13": ("MU12_ISN", "local"), "14": ("MU12_FB", "local"),
+            "15": ("MU12_MODE", "local"), "16": ("", "nc"),
+            "17": ("MU12_ILIM", "local"), "18": ("MU12_COMP", "local"),
+            "19": ("MU12_VCC", "local"), "20": ("MU12_BOOT2", "local"),
+            "21": ("MU12_SW2", "local"), "22": ("MU12_BOOT1", "local"),
+            "23": ("MU12_SW1", "local"), "24": ("GND", "local"),
+            "25": ("MU12_SW2", "local"), "26": ("MU12_PRE_SENSE", "local"),
+        }, extra_props={"Manufacturer":"Texas Instruments", "MPN":"TPS552882RPMR"})
+    for ref,gate,source,drain,x in (
+            ("Q2610","MU12_HS_GATE","MU12_SW1","VSYS",955),
+            ("Q2611","MU12_LS_GATE","GND","MU12_SW1",1030)):
+        s.place(ref,"Q_NMOS_123S_4G_5678D","CSD17577Q3A buck FET",x,240,
+            footprint="Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET",
+            pin_nets={"1":(source,"hier" if source=="VSYS" else "local"),
+                      "2":(source,"local"),"3":(source,"local"),
+                      "4":(gate,"local"),"5":(drain,"hier" if drain=="VSYS" else "local")},
+            extra_props={"Manufacturer":"Texas Instruments","MPN":"CSD17577Q3A"})
+    for ref,drive,gate,x in (("R2613","MU12_HS_DRV","MU12_HS_GATE",955),
+                            ("R2614","MU12_LS_DRV","MU12_LS_GATE",1030)):
+        s.place(ref,"R","1R gate resistor",x,260,footprint=FOOTPRINTS["R"],
+            pin_nets={"1":(drive,"local"),"2":(gate,"local")},
+            extra_props={"Manufacturer":"Yageo","MPN":"RC0603FR-071RL"})
+    s.place("C2610","C_Polarized","100u 35V hybrid output bulk",955,285,
+        footprint=FOOTPRINTS["C_100u_35V_hybrid"],
+        pin_nets={"1":("MU12_PRE_SENSE","local"),"2":("GND","local")},
+        extra_props={"Manufacturer":"Panasonic","MPN":"EEHZK1V101XP"})
     s.place("L750", "L", "6.8uH 18.4A Isat30 / 10.9A Irms20; 6mm max", 520, 220,
             footprint=FOOTPRINTS["L_XGL1060_CENTER"],
             pin_nets={"1": ("MU12_SW1", "local"), "2": ("MU12_SW2", "local")},
             extra_props={"Manufacturer": "Coilcraft", "MPN": "XGL1060-682MEC"})
-    s.place("RS750", "R", "13mOhm 1% 1W; 3.85A nominal limit, 3.3A operating envelope", 520, 230,
-            footprint=FOOTPRINTS["R_ERJ8CW_CENTER"],
+    s.place("RS750", "R", "8m 1% 2W; 6.25A nominal limit, 5.5A target", 520, 230,
+            footprint="Resistor_SMD:R_2512_6332Metric",
             pin_nets={"1": ("MU12_PRE_SENSE", "local"), "2": ("MU_12V", "hier")},
-            extra_props={"Manufacturer": "Panasonic", "MPN": "ERJ8CWFR013V"})
+            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP2512R0080FEA"})
 
     # Input and output reservoirs use the exact voltage classes from TI's EVM.
     # This preserves DC-bias margin and avoids relying on the surge clamp to make
@@ -433,25 +438,26 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.place("R754", "R", "11.3k 0.02% 5ppm 12V FB low", 685, 300, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_FB", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060311K3HZEN00"})
-    s.place("R755", "R", "5.1k 0.02% 5ppm COMP series", 685, 310, footprint=FOOTPRINTS["R"],
+    s.place("R755", "R", "15k 1% COMP series", 685, 310, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_COMP", "local"), "2": ("MU12_COMP_RC", "local")},
-            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU06035K10HZEN00"})
-    s.place("C771", "C", "330n 50V X7R COMP; effective 210..500nF", 685, 320, footprint=FOOTPRINTS["C_100n"],
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0715KL"})
+    s.place("C771", "C", "10n 50V C0G COMP", 685, 320, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MU12_COMP_RC", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "TDK", "MPN": "CGA3E3X7R1H334K080AB",
-                         "Datasheet": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA3E3X7R1H334K080AB"})
-    s.place("C772", "C", "1n 50V C0G COMP HF", 685, 330, footprint=FOOTPRINTS["C_100n"],
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM1885C1H103JA01D"})
+    s.place("C772", "C", "100p 50V C0G COMP HF", 685, 330, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MU12_COMP", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM1885C1H102JA01D"})
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM1885C1H101JA01D"})
     s.place("R756", "R", "49.9k 0.02% 5ppm FSW = 400kHz", 685, 340, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_FSW", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060349K9HZEN00"})
     s.place("C767", "C", "10n DITH/SYNC spreading", 685, 350, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MU12_DITH", "local"), "2": ("GND", "local")})
-    s.place("R757", "R", "0R MODE forced-PWM", 685, 360, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU12_VCC", "local"), "2": ("MU12_MODE", "local")})
-    s.place("R758", "R", "0R EXTVCC selects internal LDO", 685, 370, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU12_VCC", "local"), "2": ("MU12_EXTVCC", "local")})
+    s.place("R757", "R", "0R MODE internal LDO / forced PWM", 685, 360, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU12_MODE", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer":"Yageo","MPN":"RC0603JR-070RL"})
+    s.place("R758", "R", "30.1k 1% inductor limit; about 11A nominal", 685, 370, footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("MU12_ILIM", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer":"Yageo","MPN":"RC0603FR-0730K1L"})
     s.place("R759", "R", "150k 0.1% 10ppm UVLO high; 9.0V rising", 740, 220, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("VSYS", "hier"), "2": ("MU12_EN_UVLO", "local")},
             extra_props={"Manufacturer": "Vishay", "MPN": "TNPW0603150KBYEA"})
@@ -707,7 +713,7 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.text(20, 393.7, "M.2 M-key uses Ultra PCIe lanes 5-8 x4, REFCLK2 and CLKREQ2; no lane reversal or TX/RX direction swap.")
     s.text(20, 401.32, "M.2 M-key: Mu TX->PET through 220n near J10; PET/PER naming is from the host perspective.")
     s.text(20, 408.94, "USB2 P6 serves Bluetooth. The trackpad is on internal hub U400 port 2; the EC remains directly on native USB2 P4.")
-    s.text(20, 416.56, "MU_12V is a TPS552892EVM-derived 12V stage: 400kHz forced PWM, 3.33A nominal limit, and about 8.65-9.40V worst-case rising UVLO. Firmware requires VSYS >=10.0V.")
+    s.text(20, 416.56, "MU_12V uses TPS552882: 400kHz forced PWM, 5.5A operating target, 8mOhm output shunt. Firmware requires VSYS >=10.0V; thermal and transient limits need hardware checks.")
     s.text(20, 424.18, "MU_12V_ENABLE is active high and defaults low. Q750/Q751 force EN/UVLO low until EC firmware explicitly releases the rail; MU_12V_PG is pulled up to MCU_3V3.")
     s.text(20, 431.8, "POWER BUDGET HOLD: MU_12V is about 40W maximum for Mu plus eDP backlight. Lock BIOS PL1/PL2 only after measuring panel and whole-module draw; unrestricted 35W CPU mode is not released.")
     s.text(20, 439.42, "MU_S0_HIGH is Mu PSON with the required 10k pull-up to always-on MCU_3V3. It is a weak status signal for logic/NMOS gates only, never a load supply.")
@@ -848,19 +854,21 @@ FPC_BOM = {
 
 def place_bms_power_connector(s, side, x, y, label_kind="hier"):
     import fpc_contract as fpc
-    pin_nets = {str(pin): (net, label_kind) for pin, net in fpc.BMS_POWER_PINMAP.items()}
-    pin_nets["MP"] = ("", "nc")
-    return s.place(fpc.BMS_POWER_REFS[side], "Conn_01x02_MP", "protected pack power", x, y,
-            footprint=fpc.BMS_POWER_FOOTPRINT,
+    center = side == "center"
+    mapping = fpc.BMS_POWER_CENTER_PINMAP if center else fpc.BMS_POWER_PINMAP
+    pin_nets = {str(pin): (net, label_kind) for pin, net in mapping.items()}
+    return s.place(fpc.BMS_POWER_REFS[side], "Conn_01x02", "protected pack power", x, y,
+            footprint=fpc.BMS_POWER_CENTER_FOOTPRINT if center else fpc.BMS_POWER_FOOTPRINT,
             pin_nets=pin_nets,
             extra_props={
-                "Manufacturer": "Molex", "MPN": fpc.BMS_POWER_MPN,
-                "MatingHousing": fpc.BMS_POWER_HOUSING,
-                "Harness": "18 awg; pin 1 red; pin 2 black; straight-numbered; 75 mm length budget",
-                "Contacts": fpc.BMS_POWER_CONTACT + " tin, 18 awg; insulation diameter <=1.85 mm",
-                "MatedHeight": "reserve 17.56 mm per drawing, plus wire exit and bend",
-                "CurrentRatingBasis": "PS-43650-001 N4: 2 circuits, 18 awg, 8.5 A at 30 C rise; validate assembled temperature rise",
-                "Datasheet": "https://www.molex.com/en-us/products/part-detail/0436500224",
+                "Manufacturer": "WAGO", "MPN": fpc.BMS_POWER_CENTER_MPN if center else fpc.BMS_POWER_MPN,
+                "MatingHousing": fpc.BMS_POWER_CENTER_HOUSING if center else fpc.BMS_POWER_HOUSING,
+                "Contacts": fpc.BMS_POWER_CENTER_CONTACT if center else fpc.BMS_POWER_CONTACT,
+                "Wire": "Alpha 6715 RD005/BK005, 18 AWG; minimum bend radius 8.763 mm",
+                "Harness": "center: 1 FG_VSS, 2 PACK_POS_FUSED; BMS: 1 PACK_POS_FUSED, 2 FG_VSS",
+                "MatedHeight": "4.5 mm terminal body; reserve release-tool access",
+                "CurrentRatingBasis": "WAGO 2060, 9 A IEC/UL rating with 18 AWG; assembled temperature still needs testing",
+                "Datasheet": "https://www.wago.com/2060-452/998-404",
             })
 
 
@@ -1009,7 +1017,9 @@ def main():
         return nets
 
     power_hier_nets = [
-        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
+        "NRST_NET",
+        "MU_PROCHOT_N",
+        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "MU_PROCHOT_RELEASE", "CHG_ENABLE",
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "VSYS", "MCU_3V3", "EC_AON_IN", "AUX_DC_ADC", "USB_PD_SELECTED",
         "PD1_VBUS_RAW", "PD2_VBUS_RAW",
@@ -1017,7 +1027,8 @@ def main():
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]
     ec_hier_nets = [
-        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
+        "NRST_NET",
+        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "MU_PROCHOT_RELEASE", "CHG_ENABLE",
         "CASE_PWRBTN_N", "EC_AON_IN", "MCU_USB_DP", "MCU_USB_DN", "MCU_3V3", "AUX_DC_ADC", "MU_PWRBTN_N", "MU_RSTBTN_N",
         "WIFI_W_DISABLE1_N_EC", "WIFI_W_DISABLE2_N_EC", "SERVICE_MUX_RESET_N",
         "GNSS_UART_RX", "GNSS_UART_TX", "GNSS_RESET_N", "GNSS_PPS", "GNSS_EXTINT",
@@ -1036,12 +1047,13 @@ def main():
         "KB_COL0", "KB_COL1", "KB_COL2", "KB_COL3", "KB_COL4", "KB_COL5", "KB_COL6", "KB_COL7",
         "KB_COL8", "KB_COL9", "KB_COL10", "KB_COL11", "KB_COL12", "KB_COL13", "KB_COL14",
         "PD1_PATH_EN", "PD2_PATH_EN",
-        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N",
+        "PD1_EFUSE_PG", "PD2_EFUSE_PG",
         "RADIO_DB_PWR_EN", "RADIO_DB_PG", "RADIO_DB_FAULT_N", "RADIO_DB_PRESENT_N",
         "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]
     mu_hier_nets = [
+        "MU_PROCHOT_N",
         "VSYS", "SYS_5V", "SYS_3V3", "MCU_3V3", "MU_12V", "MU_PWRBTN_N", "MU_RSTBTN_N", "MU_S0_HIGH",
         "MU_HOST_ACTIVE", "PCIE_3V3", "INTERNAL_USB_VBUS_VALID", "INTERNAL_USB_VBUS_FAULT_N",
         "MU_12V_ENABLE", "MU_12V_PG",

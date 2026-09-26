@@ -83,7 +83,7 @@ def base_plate(side,x,y,height):
 def lid_plate(side,x,y,height):
     """3 mm tapped backing plate and removable stepped seating sleeves."""
     xmin=x-17 if side=='left' else x-26
-    plate=box(xmin,y-4,height+10,43,22,3)
+    plate=box(xmin,y-4,height+10,43,31,3)
     seats=[]
     for hx,hy,seat,diam,thread,_,_ in lid_holes(side,x,y):
         tap=.8 if thread=='M2' else .625
@@ -92,7 +92,7 @@ def lid_plate(side,x,y,height):
         sleeve=cylinder(hx,hy,height+seat,r,10-seat)
         sleeve=sleeve.cut(cylinder(hx,hy,height+seat-.1,1.1 if thread=='M2' else .9,10-seat+.2))
         seats.append(sleeve)
-    bolts=[(xmin+3,y+15),(xmin+40,y+15)]
+    bolts=[(xmin+3,y+22),(xmin+40,y+22)]
     plate=drilling(plate,bolts,3.2,height+9.9,3.2)
     return plate,seats,bolts
 

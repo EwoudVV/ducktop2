@@ -39,7 +39,7 @@ def build_left_usb_sheet(sheet_symbol_uuid):
     s.text(20, 20.32, "Board split Phase 2.1: hub + PD1 moved left; FPC-1 crosses to center.")
     usb.add_hub_supplies(s)
     usb.add_hub(s, ec_controlled=True)  # includes add_usba_ports (J24/J25)
-    # J22/J23 source ports (J12 stays on center for now — it is on the
+    # J22/J23 source ports (J12 stays on center for now, it is on the
     # right edge; the center trim removes it from this sheet later).
     usb.add_source_port(s, jref="J22", port=2, base=1780, x0=20.32, y0=238.76, ec_controlled=True)
     usb.add_source_port(s, jref="J23", port=3, base=1740, x0=304.8, y0=238.76, ec_controlled=True)
@@ -59,6 +59,7 @@ def build_left_usb_sheet(sheet_symbol_uuid):
 def build_left_pd_sheet(sheet_symbol_uuid):
     """PD1 dual-role port (J21) + selector + AUX input terminal (J190)."""
     s = b.Sheet(f"/{sheet_symbol_uuid}")
+    s.paper = "A0"
     s.refcounters["#PWR"] = 2000
     s.refcounters["#FLG"] = 2000
     s.text(20.32, 12.7, "== Left I/O: PD1 dual-role port (J21) + AUX input (J190) ==")
@@ -69,7 +70,7 @@ def build_left_pd_sheet(sheet_symbol_uuid):
             "ssrx_p": "USBC1_SSRX_P", "ssrx_n": "USBC1_SSRX_N",
         }, x0=20.32, y0=50.8, rbase=2000, cbase=2000, ubase=2000, dbase=2100, ebase=2080, pp5v_net=usb_power.PP5V_NETS["J21"])
     pwrin.add_pd_selector(s)
-    # AUX/SOLAR input terminal — the raw terminal lives on the left board;
+    # AUX/SOLAR input terminal, the raw terminal lives on the left board;
     # the protection chain (fuse/TVS/reverse FET/efuse) stays on the center
     # board where the VSYS OR-ing is. AUX_DC_RAW crosses FPC-1.
     # Phase 5: the source-side fuse protects the FPC-1 AUX segment; the

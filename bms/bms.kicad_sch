@@ -2212,106 +2212,394 @@
 		)
 		(embedded_fonts no)
 	)
-  )
+  (symbol "Connector_Generic:Conn_02x02_Odd_Even"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 1.27 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_02x02_Odd_Even"
+			(at 1.27 -5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, double row, 02x02, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_2x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_02x02_Odd_Even_1_1"
+			(rectangle
+				(start -1.27 1.27)
+				(end 3.81 -3.81)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 0.127)
+				(end 2.54 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start 3.81 -2.413)
+				(end 2.54 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 0 180)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -2.54 180)
+				(length 3.81)
+				(name "Pin_4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Connector_Generic:Conn_01x02"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x02"
+			(at 0 -5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x02_1_1"
+			(rectangle
+				(start -1.27 1.27)
+				(end 1.27 -3.81)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+)
 (text "== 3S pack BMS: fuse, primary protector, redundant LTC4368, FETs ==" (at 20.32 20.32 0) (effects (font (size 1.27 1.27))) (uuid b2f88485-b132-5384-a2f9-65d65742a951))
 (text "Board split Phase 2.3: pack measurement + protection live on the pack board;" (at 20.32 30.48 0) (effects (font (size 1.27 1.27))) (uuid b2a319e7-fae4-579c-b5fd-c5bdc78493d5))
 (text "the gauge (U10), charger (U2), and ship FET (Q25) stay on the center board." (at 20.32 39.37 0) (effects (font (size 1.27 1.27))) (uuid 5ef7a4b9-5000-55d0-9ff1-fb7d91ee9d11))
-(symbol
-  (lib_id "Device:Fuse")
-  (at 170.18 59.69 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 4a780406-acda-50c4-926d-9c142c0f9c81)
-  (property "Reference" "F1" (at 170.18 57.15 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10A MINI pack fuse: Littelfuse 0297010.WXNV" (at 170.18 62.23 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Fuse:Fuseholder_Blade_Mini_Keystone_3568" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Littelfuse / Keystone" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "0297010.WXNV + 3568" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid e77faee9-b285-5fb0-ae84-ebf39f103b43))
-  (pin "2" (uuid 267a13ea-bb03-5d27-8d17-bfa7b3a62eb2))
-  (instances
-    (project "ducktop2"
-      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
-        (reference "F1")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PACK_POS_RAW"
-  (at 170.18 55.88 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f3c6d30d-53eb-5899-9b1d-6f07a2713cb8)
-)
-(label "BAT_PROT_VIN"
-  (at 170.18 63.5 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3e04f5b6-32d5-5636-80ef-339e0f8be55c)
-)
-(symbol
-  (lib_id "Connector_Generic:Conn_02x03_Odd_Even")
-  (at 170.18 80.01 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 1c90922e-a546-564b-ac5b-bcfd241e1d0f)
-  (property "Reference" "J2" (at 170.18 71.12 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "3S pack power + cell-tap harness" (at 170.18 88.9 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Molex" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "76829-0006" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0fccb980-83ac-5234-9d76-cde0ef7f15ef))
-  (pin "2" (uuid 192adcb3-3448-5ec7-96ef-bf5c656ddc10))
-  (pin "3" (uuid 373eef7f-a80b-58dc-b1f3-e2705cd6fd92))
-  (pin "4" (uuid 51af6453-0cfd-51ad-b246-64c766898fb0))
-  (pin "5" (uuid d9382f93-c5a4-522a-856f-d0e4ec4a375f))
-  (pin "6" (uuid 7e32b3d0-93ea-5753-83e3-7f0fe17ca612))
-  (instances
-    (project "ducktop2"
-      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
-        (reference "J2")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PACK_POS_RAW"
-  (at 165.1 77.47 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 3787afd4-ae21-5dc7-9e66-c5c9e703f549)
-)
-(label "PACK_POS_RAW"
-  (at 177.8 77.47 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3c8a2932-a324-5938-aa39-745bd510e22d)
-)
-(label "PACK_NEG_RAW"
-  (at 165.1 80.01 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid f21119c0-15ca-56b0-9ad4-6d371215075e)
-)
-(label "PACK_NEG_RAW"
-  (at 177.8 80.01 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 951bfc86-cd67-567a-8548-b246b633c338)
-)
-(label "CELL1_TAP"
-  (at 165.1 82.55 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 1020edf6-35bf-5c57-aa3b-cfdc30bdfd08)
-)
-(label "CELL2_TAP"
-  (at 177.8 82.55 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4810641f-8c1b-57b8-97ed-6c8be31dd30d)
-)
+
+
+
+
+
+
+
+
+
+
 (symbol
   (lib_id "BQ77915:BQ77915")
   (at 80.01 105.41 0)
@@ -4368,50 +4656,10 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9e31cf9e-7e1a-5950-b8c3-12c7f38d92cf)
 )
-(symbol
-  (lib_id "Conn_01x02_MP:Conn_01x02_MP")
-  (at 560.07 250.19 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 4751c19b-8042-561c-9884-7df3539b477f)
-  (property "Reference" "J2072" (at 560.07 241.3 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "protected pack power" (at 560.07 259.08 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Molex" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "43650-0224" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatingHousing" "43645-0200" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Harness" "18 awg; pin 1 red; pin 2 black; straight-numbered; 75 mm length budget" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Contacts" "43030-0038 tin, 18 awg; insulation diameter <=1.85 mm" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatedHeight" "reserve 17.56 mm per drawing, plus wire exit and bend" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CurrentRatingBasis" "PS-43650-001 N4: 2 circuits, 18 awg, 8.5 A at 30 C rise; validate assembled temperature rise" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.molex.com/en-us/products/part-detail/0436500224" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 08dc8dc1-5705-5bc6-b1f8-46d018ce7998))
-  (pin "2" (uuid 19c5b50a-c9c8-56b6-9c45-8aab01573fa4))
-  (pin "MP" (uuid 5d4f00ec-66a0-535a-a461-7e60f48028a6))
-  (instances
-    (project "ducktop2"
-      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
-        (reference "J2072")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PACK_POS_FUSED"
-  (at 554.99 250.19 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 4ca7c0e4-9c5a-57f8-977e-3e2b2740659a)
-)
-(label "FG_VSS"
-  (at 554.99 252.73 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 392b7cf6-7933-555c-9841-c7dfa7d8bb85)
-)
-(no_connect (at 565.15 251.46) (uuid 9236e0fb-eea5-57f1-9fb6-a94ff847f118))
+
+
+
+
 (text "j2072 carries protected pack power and return. j2074 pin 5 and its mounting tabs serve only the isolated ctrl_gnd island." (at 464.82 359.41 0) (effects (font (size 1.27 1.27))) (uuid 884fce9c-669a-55e1-8d15-bb4a98dc0b13))
 (text "never join ctrl_gnd to fg_vss or pack_neg_raw. raw pack negative remains inside the bms and pack harness." (at 464.82 369.57 0) (effects (font (size 1.27 1.27))) (uuid a4a946f4-7764-5934-9225-888ec95bf363))
 (text "== Test points (bring-up probing; see BRINGUP_TEST_PLAN.md) ==" (at 599.44 59.69 0) (effects (font (size 1.27 1.27))) (uuid dd3fe272-2128-5e98-ae49-7b6da0c559e8))
@@ -8642,4 +8890,140 @@
   )
 )
   (embedded_fonts no)
+(symbol
+  (lib_id "Connector_Generic:Conn_02x02_Odd_Even")
+  (at 170.18 80.01 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 1c90922e-a546-564b-ac5b-bcfd241e1d0f)
+  (property "Reference" "J2" (at 170.18 71.12 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "3S pack power + cell-tap harness" (at 170.18 88.9 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Molex" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "43045-0400" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatingHousing" "43025-0400" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Contacts" "43030-0038 tin 18 AWG" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG, minimum bend radius 8.763 mm" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "1 raw negative, 2 cell 2 tap, 3 raw positive, 4 cell 1 tap; this is a new keyed harness" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "PS-43045: use conservative six-circuit 18 AWG 6.5 A screen; one full-current contact per polarity; 5 A backup fuse" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "10.29 mm nominal; horizontal exit; independent harness clamp" (at 170.18 80.01 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 407a4958-e7bb-5573-9e29-b3d967db8e4a))
+  (pin "2" (uuid 2fb5f942-6c33-5fcc-9f5e-476d50550c6b))
+  (pin "3" (uuid 45e57e8d-7e7e-52cc-b1be-b5c8cfe384c2))
+  (pin "4" (uuid c0800624-0916-58a8-b088-c50d5ae7ce3e))
+  (instances
+    (project "bms"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "J2")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_NEG_RAW"
+  (at 165.1 80.01 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid af391847-b8a5-5439-8254-407169d2377d)
+)
+(label "CELL2_TAP"
+  (at 177.8 80.01 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 72e8c1b1-f203-5d97-9df0-3c0deff86c03)
+)
+(label "PACK_POS_RAW"
+  (at 165.1 82.55 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid f054ac1c-27aa-560b-990f-98035aabc71b)
+)
+(label "CELL1_TAP"
+  (at 177.8 82.55 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0354ec27-c6ca-59f0-b120-a4b63a9fb1b1)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x02")
+  (at 560.07 250.19 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4751c19b-8042-561c-9884-7df3539b477f)
+  (property "Reference" "J2072" (at 560.07 241.3 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "protected pack power" (at 560.07 259.08 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_452_SMD" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-452/998-404" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatingHousing" "bare wire" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Contacts" "spring contact" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715 RD005/BK005, 18 AWG; minimum bend radius 8.763 mm" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Harness" "center: 1 FG_VSS, 2 PACK_POS_FUSED; BMS: 1 PACK_POS_FUSED, 2 FG_VSS" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; reserve release-tool access" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "WAGO 2060, 9 A IEC/UL rating with 18 AWG; assembled temperature still needs testing" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-452/998-404" (at 560.07 250.19 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 0b80be71-5fa3-5aa6-8790-c952a5b188b5))
+  (pin "2" (uuid d77cae8d-2e76-5eac-88ba-ebaf20cefb86))
+  (instances
+    (project "bms"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "J2072")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_POS_FUSED"
+  (at 554.99 250.19 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 7b537bf9-7371-5bf5-8c1f-217f018fdeda)
+)
+(label "FG_VSS"
+  (at 554.99 252.73 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid deedd7a9-e6b1-57fd-b6e2-1ad7f8aaf0a9)
+)
+(symbol
+  (lib_id "Device:Fuse")
+  (at 170.18 59.69 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4a780406-acda-50c4-926d-9c142c0f9c81)
+  (property "Reference" "F1" (at 170.18 57.15 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "5A fast pack fuse: Schurter HCF, 1kA at 125VDC" (at 170.18 62.23 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:Schurter_HCF_8.05x5mm" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "SCHURTER" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "3-101-056" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.schurter.com/en/datasheet/typ_HCF.pdf" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Height" "5 mm" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "InterruptRating" "1000 A at 125 VDC, L/R <1 ms" (at 170.18 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid fcba3eaf-97cc-559b-a7e2-257df75fa910))
+  (pin "2" (uuid 4811c039-49bb-559f-b603-a18bba10d6dd))
+  (instances
+    (project "bms"
+      (path "/3c2c4a35-cd83-52ee-9af5-21290cb022b1"
+        (reference "F1")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PACK_POS_RAW"
+  (at 170.18 55.88 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d447890e-e976-5df5-a6ba-9b2697bf4c6b)
+)
+(label "BAT_PROT_VIN"
+  (at 170.18 63.5 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 59990370-dd18-552c-a215-3261a63ff32c)
+)
 )

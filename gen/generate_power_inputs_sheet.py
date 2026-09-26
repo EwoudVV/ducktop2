@@ -1,3 +1,4 @@
+from generate_pd_sink_switch import add_pd_sink_switch
 import os
 
 from build_ducktop2 import FOOTPRINTS, PROJDIR, Sheet, U
@@ -39,63 +40,6 @@ def ss_esd(s, base, x, y, nets):
                     "Texas Instruments", "TPD1E0B04DPLR",
                     "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf",
                 ))
-
-
-def add_tps26630(s, port, x0, y0, base, gated_hier=False):
-    """gated_hier: the gated VBUS leaves this board (PD2 on the right
-    crosses FPC-2 to the center selector), so export it hierarchically."""
-    raw = f"PD{port}_PPHV"
-    gated = f"PD{port}_VBUS_GATED"
-    uv = f"PD{port}_EFUSE_UV"
-    ov = f"PD{port}_EFUSE_OV"
-    shdn = f"PD{port}_EFUSE_SHDN"
-    ilim = f"PD{port}_EFUSE_ILIM"
-    dvdt = f"PD{port}_EFUSE_DVDT"
-    fault = f"PD{port}_EFUSE_FAULT_N"
-    path_en = f"PD{port}_PATH_EN"
-    uref = f"U{719 + port}"
-
-    s.place(uref, "TPS26630RGE", f"TPS26630RGER PD{port} default-off 3A sink eFuse", x0, y0,
-            footprint=FOOTPRINTS["TPS26630RGE"], pin_nets={
-                "1": (raw, "local"), "2": (raw, "local"),
-                "3": ("", "nc"), "4": ("", "nc"), "5": (raw, "local"),
-                "6": (uv, "local"), "7": (ov, "local"), "8": ("GND", "local"),
-                "9": (dvdt, "local"), "10": (ilim, "local"), "11": ("GND", "local"),
-                "12": (shdn, "local"), "13": ("", "nc"), "14": (fault, "hier"),
-                "15": ("GND", "local"), "16": ("", "nc"),
-                "17": (gated, "hier" if gated_hier else "local"),
-                "18": (gated, "hier" if gated_hier else "local"),
-                "19": ("", "nc"), "20": ("", "nc"), "21": ("", "nc"),
-                "22": ("", "nc"), "23": ("", "nc"), "24": ("", "nc"),
-                "25": ("GND", "local"),
-            }, extra_props=props(
-                "Texas Instruments", "TPS26630RGER",
-                "https://www.ti.com/lit/ds/symlink/tps2663.pdf",
-                SafetyState="MODE_GND_AUTORETRY;PGTH_GND_PGOOD_UNUSED;SHDN_47K_PULLDOWN",
-            ))
-
-    entries = (
-        (base, "8.87k 0.02% 5ppm 15/20V eFuse UV/OV top", raw, uv, "TNPU06038K87HZEN00", "local", "local"),
-        (base + 1, "562R 0.02% 5ppm 15/20V eFuse UV/OV middle", uv, ov, "TNPU0603562RHZEN00", "local", "local"),
-        (base + 2, "511R 0.02% 5ppm 15/20V eFuse UV/OV bottom", ov, "GND", "TNPU0603511RHZEN00", "local", "local"),
-        (base + 3, "6.04k 1% eFuse 2.98A ILIM", ilim, "GND", "RC0603FR-076K04L", "local", "local"),
-        (base + 4, "47k eFuse default-off pulldown", shdn, "GND", "RC0603FR-0747KL", "local", "local"),
-        (base + 5, "10k path-enable series", path_en, shdn, "RC0603FR-0710KL", "hier", "local"),
-        (base + 6, "10k eFuse FLT pull-up", "MCU_3V3", fault, "RC0603FR-0710KL", "hier", "hier"),
-    )
-    for offset, (refn, value, a, b, mpn, ak, bk) in enumerate(entries):
-        resistor(s, f"R{refn}", value, x0 + 45.72, y0 - 30.48 + offset * 10.16,
-                 a, b, a_kind=ak, b_kind=bk, mpn=mpn)
-
-    capacitor(s, f"C{base}", "100n 50V eFuse input local", x0 + 96.52, y0 - 17.78, raw)
-    capacitor(s, f"C{base + 1}", "10u 25V eFuse output", x0 + 96.52, y0 - 5.08, gated,
-              footprint="C_10u", mpn="GRM31CR71E106KA12L")
-    capacitor(s, f"C{base + 2}", "22n eFuse dVdT", x0 + 96.52, y0 + 7.62, dvdt,
-              footprint="C_0402", mpn="GRM155R71H223KA12D")
-    s.place(f"D{base}", "D_Schottky", "B340A eFuse output negative-transient clamp",
-            x0 + 96.52, y0 + 20.32, footprint=FOOTPRINTS["D_Schottky_SMA"],
-            pin_nets={"1": (gated, "local"), "2": ("GND", "local")},
-            extra_props=props("Diodes Incorporated", "B340A-13-F"))
 
 
 def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbase, ebase,
@@ -376,7 +320,7 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
             extra_props=props("KEMET", "T521V686M025ATE050"))
     capacitor(s, f"C{cbase + 29}", "100n 50V PPHV local", x0 + 88.9, y0 + 195.58, pphv)
 
-    add_tps26630(s, port, x0 + 355.6, y0 + 93.98, ebase, gated_hier=gated_hier)
+    add_pd_sink_switch(s, port, x0 + 355.6, y0 + 93.98, ebase, gated_hier=gated_hier)
     s.pwrflag(x0 + 327.66, y0 + 187.96, raw_vbus)
     s.pwrflag(x0 + 347.98, y0 + 187.96, pphv)
     s.text(x0, y0 + 213.36,
@@ -421,17 +365,17 @@ def add_pd_selector(s):
     add_selector_fet(s, "Q15", 205.74, 543.56, "PD1_SEL_GATE", "PD1_SEL_FET_COMMON", "PD1_VBUS_GATED", "local")
     add_selector_fet(s, "Q16", 259.08, 543.56, "PD1_SEL_GATE", "PD1_SEL_FET_COMMON", "USB_PD_SELECTED", "hier")
 
-    resistor(s, "R2140", "1.00M 0.1% 25ppm 15/20V UV top", 20.32, 622.3,
-             "PD1_VBUS_GATED", "PD1_SEL_UV", mpn="RT0603BRD071ML")
-    resistor(s, "R2141", "35.7k 0.02% 5ppm 15/20V window middle", 20.32, 635,
-             "PD1_SEL_UV", "PD1_SEL_OV", mpn="TNPU060335K7HZEN00")
-    resistor(s, "R2142", "47.5k 0.02% 5ppm 15/20V OV bottom", 20.32, 647.7,
-             "PD1_SEL_OV", "GND", mpn="TNPU060347K5HZEN00")
+    resistor(s, "R2140", "76.8k 0.02% 5ppm 5..20V UV top", 20.32, 622.3,
+             "PD1_VBUS_GATED", "PD1_SEL_UV", mpn="TNPU060376K8HZEN00")
+    resistor(s, "R2141", "21.5k 0.02% 5ppm 5..20V window middle", 20.32, 635,
+             "PD1_SEL_UV", "PD1_SEL_OV", mpn="TNPU060321K5HZEN00")
+    resistor(s, "R2142", "4.53k 0.02% 5ppm 5..20V OV bottom", 20.32, 647.7,
+             "PD1_SEL_OV", "GND", mpn="TNPU06034K53HZEN00")
     resistor(s, "R2146", "10k PD1 VALID pull-up", 152.4, 622.3,
              "MCU_3V3", "PD1_VALID_N", a_kind="hier", b_kind="hier")
     capacitor(s, "C2140", "100n selector INTVCC", 203.2, 622.3, "PD_SEL_INTVCC")
-    capacitor(s, "C2141", "15n selector TMR approx 240ms", 228.6, 622.3,
-              "PD_SEL_TMR", footprint="C_0402", mpn="GRM155R71H153KA12D")
+    capacitor(s, "C2141", "1n 50V C0G selector validation", 228.6, 622.3,
+              "PD_SEL_TMR", footprint="C_0402", mpn="GRM1555C1H102JA01D")
     for index, net in enumerate(("PD1_VBUS_GATED", "PD1_SEL_FET_COMMON")):
         capacitor(s, f"C{2142 + index}", "100n 50V selector local",
                   254 + index * 25.4, 622.3, net)
@@ -441,9 +385,9 @@ def add_pd_selector(s):
             extra_props=props("Panasonic", "EEHZK1V101XP"))
     s.pwrflag(393.7, 622.3, "USB_PD_SELECTED")
     s.text(20.32, 670.56,
-           "The EC reads each TPS25751A contract first, programs the BQ25798 input limit, then enables exactly one default-off TPS26630 path.")
+           "The EC selects one qualified sink path, waits for power good and voltage validation, then applies the verified charger input limit.")
     s.text(20.32, 678.18,
-           "LTC4418 independently validates approximately 13.1V to 17.1V and prevents the attached adapter from backfeeding.")
+           "LTC4418 validates the 5..20V input window and blocks backfeed. The sink switch discharges its output when disabled.")
     s.text(20.32, 685.8,
            "Phase 5: J11 (PD2) charge power is selected on the CENTER board (U16); this board exports its own gated VBUS only.")
 

@@ -1,0 +1,32 @@
+{
+  "Delta_BFB04512HHA_CZ0T": {
+    "part_found_in_saved_board": "center J52 value",
+    "product_url": "https://www.delta-fan.com/technology/BFB04512HHA-CZ0T.html",
+    "drawing_url": "https://www.delta-fan.com/Download/Spec/BFB04512HHA-CZ0T.pdf",
+    "revision": "00 / A00",
+    "issue_date": "2017-08-07",
+    "drawing_page": "PDF page 7, printed page 5",
+    "body_mm": [45, 45, 10.3],
+    "thickness_tolerance_mm": 0.3,
+    "mounting_holes": {"count": 3, "diameter_mm": 2.8, "diameter_tolerance_mm": [-0.05, 0.10], "pattern_pitch_mm": 38.5, "pitch_tolerance_mm": 0.2},
+    "body_to_pattern_centering": "3.25 mm derived from the symmetric 45 mm body and 38.5 mm pattern; verify sample datum",
+    "model_scope": "nominal body envelope and mounting pattern, not a detailed impeller/casing model",
+    "license": "copyright Delta Electronics; no open redistribution license identified; reference PDF kept in private project workbench"
+  },
+  "right_angle_power_candidates": {
+    "Molex_43045_1210": {"url": "https://www.molex.com/en-us/products/part-detail/430451210", "circuits": 12, "mated_height_mm": 10.29},
+    "Molex_43045_1010": {"url": "https://www.molex.com/en-us/products/part-detail/430451010", "circuits": 10, "mated_height_mm": 10.29},
+    "Molex_43650_0203": {"url": "https://www.molex.com/en-us/products/part-detail/436500203", "circuits": 2, "mated_height_mm": 6.98},
+    "status": "dimensional candidates only; no replacement in PCB or current-part CAD; footprint, mating contact/plating, current, plug and wire clearance review required"
+  },
+  "DRA818": {
+    "file": "../../../ducktop2.3dshapes/DRA818_Castellated.step",
+    "body_mm": [35.6, 19, 4],
+    "scope": "existing project envelope, rotated to the corrected saved J70/J71 footprint centres; height not newly measured"
+  },
+  "Mu_Ultra": {
+    "file": "../../../ducktop2.3dshapes/LattePanda_Mu_Ultra_H8.0_Horizontal.step",
+    "scope": "current PCB A1 transform through KiCad native STEP export; module and socket only",
+    "credits_and_license": "adjacent .sources.md and .LICENSE.txt in ducktop2.3dshapes"
+  }
+}

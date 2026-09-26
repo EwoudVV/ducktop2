@@ -22,7 +22,7 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 24 september 2026. the carrier interface is being switched to Mu
+updated 26 september 2026. the carrier interface is being switched to Mu
 Ultra: 226V first, with a later 256V upgrade. the new pin map moves HDMI to
 TCP2, reallocates USB and gives NVMe a real clock-request connection. the
 100 W USB-C power path, cooling and firmware qualification still need work. the
@@ -45,13 +45,13 @@ cover the LEDs, current limit and switch keepouts. the old non-RGB order
 files have been retired. the radio antenna connectors now match the board edge and their
 mechanical drawing. the radio still needs routing.
 
-the four-layer BMS is now routed, including the separate power and control
-cables and all three temperature probes. it has zero unconnected items,
-zero physical DRC errors and no schematic mismatch. the power paths and
-separate return connections were checked too. [BMS layout checks](verification/bms-layout.md)
-has the results and the remaining hardware tests. the [PCBWay package](manufacturing/bms/pcbway/README.md)
-is ready for a prototype quote and factory review. the three main-board
-sections are eight layers, and most of their routing still remains.
+the four-layer BMS is being reworked for the thinner power connections.
+the saved revision has the new terminals, raw-pack connector and fuse, with
+85 unconnected items left to repair. the previous PCBWay package and layout
+report describe the earlier routed board. they need to be regenerated after
+this revision is finished. the three main-board sections are eight layers,
+and most of their routing still remains. [power revision status](docs/hardware/power-revision.md)
+records what is saved and what is still unfinished.
 
 firmware corrections cover charger communication, startup, watchdog and fan
 handling, USB power permissions, and host communication. assembled-hardware

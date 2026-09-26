@@ -19,6 +19,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 
+import genlib
 import build_ducktop2 as b
 from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, FOOTPRINTS
 from generate_mu_carrier_sheet import root_label, place_bms_control_connector, place_bms_power_connector
@@ -39,18 +40,23 @@ def build_bms_sheet(sheet_symbol_uuid):
     s.text(20, 40, "the gauge (U10), charger (U2), and ship FET (Q25) stay on the center board.")
 
     # Fuse + pack connector
-    s.place("F1", "Fuse", "10A MINI pack fuse: Littelfuse 0297010.WXNV", 170, 60,
-            footprint=FOOTPRINTS["Fuse_Pack_Blade_Mini"],
+    s.place("F1", "Fuse", "5A fast pack fuse: Schurter HCF, 1kA at 125VDC", 170, 60,
+            footprint="ducktop2:Schurter_HCF_8.05x5mm",
             pin_nets={"1": ("PACK_POS_RAW", "local"), "2": ("BAT_PROT_VIN", "local")},
-            extra_props={"Manufacturer": "Littelfuse / Keystone", "MPN": "0297010.WXNV + 3568"})
-    s.place("J2", "Conn_02x03_Odd_Even", "3S pack power + cell-tap harness", 170, 80,
-            footprint=FOOTPRINTS["Conn_02x03_Pack_MegaFit"],
+            extra_props={"Manufacturer": "SCHURTER", "MPN": "3-101-056", "Datasheet": "https://www.schurter.com/en/datasheet/typ_HCF.pdf", "Height": "5 mm", "InterruptRating": "1000 A at 125 VDC, L/R <1 ms"})
+    genlib.LIBMAP.setdefault("Conn_02x02_Odd_Even", "Connector_Generic")
+    s.place("J2", "Conn_02x02_Odd_Even", "3S pack power + cell-tap harness", 170, 80,
+            footprint="Connector_Molex:Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal",
             pin_nets={
-                "1": ("PACK_POS_RAW", "local"), "2": ("PACK_POS_RAW", "local"),
-                "3": ("PACK_NEG_RAW", "local"), "4": ("PACK_NEG_RAW", "local"),
-                "5": ("CELL1_TAP", "local"), "6": ("CELL2_TAP", "local"),
+                "1": ("PACK_NEG_RAW", "local"), "2": ("CELL2_TAP", "local"),
+                "3": ("PACK_POS_RAW", "local"), "4": ("CELL1_TAP", "local"),
             },
-            extra_props={"Manufacturer": "Molex", "MPN": "76829-0006"})
+            extra_props={"Manufacturer": "Molex", "MPN": "43045-0400", "MatingHousing": "43025-0400",
+                "Contacts": "43030-0038 tin 18 AWG", "Wire": "Alpha 6715, 18 AWG, minimum bend radius 8.763 mm",
+                "HarnessPinOrder": "1 raw negative, 2 cell 2 tap, 3 raw positive, 4 cell 1 tap; this is a new keyed harness",
+                "CurrentRatingBasis": "PS-43045: use conservative six-circuit 18 AWG 6.5 A screen; one full-current contact per polarity; 5 A backup fuse",
+                "MatedHeight": "10.29 mm nominal; horizontal exit; independent harness clamp"})
+
 
     # BQ7791500 autonomous primary protector
     s.place("U719", "BQ77915", "BQ7791500PWR autonomous 3S primary protector", 80, 105,

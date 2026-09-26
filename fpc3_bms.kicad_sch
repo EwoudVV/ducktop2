@@ -424,7 +424,165 @@
 		)
 		(embedded_fonts no)
 	)
-  )
+  (symbol "Connector_Generic:Conn_01x02"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x02"
+			(at 0 -5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x02_1_1"
+			(rectangle
+				(start -1.27 1.27)
+				(end 1.27 -3.81)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+)
 (symbol
   (lib_id "Connector_Generic_MountingPin:Conn_01x05_MountingPin")
   (at 80.01 90.17 0)
@@ -540,8 +698,20 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 46c270db-472a-53e7-ab45-3a773980971a)
 )
+
+
+
+
+(text "j2071 carries pack current through the rated power harness. j2073 supplies the isolated control island and its own return." (at 30.48 190.5 0) (effects (font (size 1.27 1.27))) (uuid aa5600f5-2d14-5e17-9a0e-bf3c92c4674a))
+(text "the bms control return never joins raw pack negative or the protected power return. the power return still crosses the center gauge shunt." (at 30.48 199.39 0) (effects (font (size 1.27 1.27))) (uuid 4cd19896-e76b-5d1c-9af8-bf7b0aec6ad1))
+(sheet_instances
+  (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
+    (page "16")
+  )
+)
+  (embedded_fonts no)
 (symbol
-  (lib_id "Conn_01x02_MP:Conn_01x02_MP")
+  (lib_id "Connector_Generic:Conn_01x02")
   (at 80.01 144.78 0)
   (unit 1)
   (exclude_from_sim no)
@@ -551,19 +721,19 @@
   (uuid 4c7e321a-0faa-5370-8fec-6ce9527cf6b0)
   (property "Reference" "J2071" (at 80.01 135.89 0) (effects (font (size 1.27 1.27))))
   (property "Value" "protected pack power" (at 80.01 153.67 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Footprint" "ducktop2:WAGO_2060_452_SMD" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Molex" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "43650-0224" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatingHousing" "43645-0200" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Harness" "18 awg; pin 1 red; pin 2 black; straight-numbered; 75 mm length budget" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Contacts" "43030-0038 tin, 18 awg; insulation diameter <=1.85 mm" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatedHeight" "reserve 17.56 mm per drawing, plus wire exit and bend" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CurrentRatingBasis" "PS-43650-001 N4: 2 circuits, 18 awg, 8.5 A at 30 C rise; validate assembled temperature rise" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.molex.com/en-us/products/part-detail/0436500224" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid dcd5972e-506b-5b3e-81fe-39c08cbb8ef8))
-  (pin "2" (uuid 90d60ef3-51b7-5a9c-b76a-1c8368afbc74))
-  (pin "MP" (uuid df491f05-c9a6-5d85-8b34-244934a8866d))
+  (property "Manufacturer" "WAGO" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-452/998-404" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatingHousing" "bare wire" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Contacts" "spring contact" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715 RD005/BK005, 18 AWG; minimum bend radius 8.763 mm" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Harness" "center: 1 FG_VSS, 2 PACK_POS_FUSED; BMS: 1 PACK_POS_FUSED, 2 FG_VSS" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; reserve release-tool access" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "WAGO 2060, 9 A IEC/UL rating with 18 AWG; assembled temperature still needs testing" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-452/998-404" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 4b843587-ffb1-5628-9e14-91beaf8f6921))
+  (pin "2" (uuid f94f3c47-ac63-551e-89f6-cd2db40ef546))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
@@ -573,25 +743,16 @@
     )
   )
 )
-(hierarchical_label "PACK_POS_FUSED"
+(hierarchical_label "FG_VSS"
   (shape bidirectional)
   (at 74.93 144.78 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 84fa4756-11ed-509b-8d44-f13f4657e1d5)
+  (uuid 70aacdf0-e608-5b20-bd52-838d5b1ffce7)
 )
-(hierarchical_label "FG_VSS"
+(hierarchical_label "PACK_POS_FUSED"
   (shape bidirectional)
   (at 74.93 147.32 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 5fbadfa0-2967-5bb3-90ee-48c90b023dd3)
+  (uuid 8bf47c50-9a78-5f64-abaf-9fe3bd37c47f)
 )
-(no_connect (at 85.09 146.05) (uuid f96b73c7-d25b-54f2-85f0-cb227f8184e1))
-(text "j2071 carries pack current through the rated power harness. j2073 supplies the isolated control island and its own return." (at 30.48 190.5 0) (effects (font (size 1.27 1.27))) (uuid aa5600f5-2d14-5e17-9a0e-bf3c92c4674a))
-(text "the bms control return never joins raw pack negative or the protected power return. the power return still crosses the center gauge shunt." (at 30.48 199.39 0) (effects (font (size 1.27 1.27))) (uuid 4cd19896-e76b-5d1c-9af8-bf7b0aec6ad1))
-(sheet_instances
-  (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
-    (page "16")
-  )
-)
-  (embedded_fonts no)
 )

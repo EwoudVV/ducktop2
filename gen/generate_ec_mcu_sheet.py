@@ -4,6 +4,7 @@ from build_ducktop2 import Sheet, U, PROJDIR, FOOTPRINTS
 
 def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
     s = Sheet(f"/{sheet_symbol_uuid}")
+    s.paper = "A0"
     # continue global numbering for #PWR/#FLG pseudo-refs so they don't collide
     # with the ones already used on the Power & Battery sheet.
     s.refcounters["#PWR"] = pwr_start
@@ -28,13 +29,13 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
                 "4": ("KB_ROW5", "hier"), "5": ("KB_ROW6", "hier"), "6": ("MCU_3V3", "hier"),
                 "7": ("SOURCE_MGR_INT_N", "local"), "8": ("LSE_IN", "local"), "9": ("LSE_OUT", "local"),
                 "10": ("GND", "local"), "11": ("MCU_3V3", "hier"), "12": ("HSE_IN", "local"),
-                "13": ("HSE_OUT", "local"), "14": ("NRST_NET", "local"),
+                "13": ("HSE_OUT", "local"), "14": ("NRST_NET", "hier"),
                 "15": ("KB_RGB_PWR_EN", "hier"), "16": ("KB_RGB_FAULT_N", "hier"),
                 "17": ("RADIO_VHF_RF_SEL_3V3", "hier"),
                 "18": ("RADIO_UHF_RF_SEL_3V3", "hier"), "19": ("MCU_3V3", "hier"),
                 "20": ("GND", "local"), "21": ("MCU_3V3", "hier"), "22": ("MCU_3V3", "hier"),
                 "23": ("MU_PWRBTN_N", "hier"), "24": ("BQ_ALERT", "hier"), "25": ("CHG_INT_N", "hier"),
-                "26": ("PMIC_QON_ASSERT", "hier"), "27": ("GND", "local"), "28": ("MCU_3V3", "hier"),
+                "26": ("MU_PROCHOT_RELEASE", "hier"), "27": ("GND", "local"), "28": ("MCU_3V3", "hier"),
                 "29": ("CHG_ENABLE", "hier"), "30": ("MU_RSTBTN_N", "hier"), "31": ("AUX_DC_ADC", "hier"),
                 "32": ("THERM_SKIN_ADC", "hier"), "33": ("PD1_VALID_N", "hier"), "34": ("FAN_TACH", "hier"),
                 "35": ("THERM_MU_ADC", "hier"), "36": ("TRACKPAD_FAULT_N", "hier"), "37": ("PD2_VALID_N", "hier"),
@@ -170,19 +171,18 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
             },
             extra_props={"Manufacturer": "JST", "MPN": "SM03B-SRSS-TB"})
 
-    # ---------------- U5: TPS54202DDC always-on source -> 3.3V buck ----------------
-    s.text(650, 20, "== U5 TPS54202DDC EC_AON_IN -> MCU_3V3 buck; 1.5A continuous design envelope ==")
-    s.place("U5", "TPS54202DDC", "TPS54202DDC", 700, 100,
-            footprint=FOOTPRINTS["U_SOT23_6"],
-            pin_nets={
-                "1": ("GND", "local"), "2": ("BUCK_SW", "local"), "3": ("EC_AON_IN", "hier"),
-                "4": ("BUCK_FB", "local"), "5": ("", "nc"), "6": ("BUCK_BOOT", "local"),
-            },
-            extra_props={
-                "Manufacturer": "Texas Instruments",
-                "MPN": "TPS54202DDCR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/tps54202.pdf",
-            })
+    # U5 can start from the low-voltage USB standby path.
+    s.text(650, 20, "== U5 TPS62933 EC_AON_IN -> MCU_3V3, 1.5A target ==")
+    s.place("U5", "TPS62933", "TPS62933DRLR", 700, 100,
+            footprint="Package_TO_SOT_SMD:SOT-583-8",
+            pin_nets={"1":("","nc"),"2":("","nc"),"3":("EC_AON_IN","hier"),
+                      "4":("GND","local"),"5":("BUCK_SW","local"),"6":("BUCK_BOOT","local"),
+                      "7":("AON_BUCK_SS","local"),"8":("BUCK_FB","local")},
+            extra_props={"Manufacturer":"Texas Instruments","MPN":"TPS62933DRLR"})
+    s.place("C2640","C","1u 50V soft start; about 145ms nominal",755,80,
+            footprint=FOOTPRINTS["C_100n"],
+            pin_nets={"1":("AON_BUCK_SS","local"),"2":("GND","local")},
+            extra_props={"Manufacturer":"Murata","MPN":"GRT188R61H105ME13D"})
     c4 = Cur(650, 40)
     s.place("C36", "C", "10u 50V X7R VIN", *c4.next(), footprint=FOOTPRINTS["C_10u"],
             pin_nets={"1": ("EC_AON_IN", "hier"), "2": ("GND", "local")},
@@ -198,18 +198,17 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
                 "Manufacturer": "Coilcraft", "MPN": "XGL6030-103MEC",
                 "Datasheet": "https://www.coilcraft.com/getmedia/9bfb2606-51aa-49a6-98ad-d20f3504c8ae/xgl6030.pdf",
             })
-    s.place("R35", "R", "100k 0.02% 5ppm MCU_3V3 FB hi", *c4.next(), footprint=FOOTPRINTS["R"],
+    s.place("R35", "R", "62.4k 0.02% 5ppm MCU_3V3 FB hi", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("BUCK_FB", "local")},
-            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU0603100KHZEN00"})
-    s.place("R36", "R", "22.1k 0.02% 5ppm MCU_3V3 FB lo", *c4.next(), footprint=FOOTPRINTS["R"],
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060362K4HZEN00"})
+    s.place("R36", "R", "20.0k 0.02% 5ppm MCU_3V3 FB lo", *c4.next(), footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("BUCK_FB", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060322K1HZEN00"})
+            extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060320K0HZEN00"})
     for ref in ("C39", "C291"):
         s.place(ref, "C", "22u 25V X7R MCU_3V3 output; TI characterized part", *c4.next(), footprint=FOOTPRINTS["C_1210"],
                 pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")},
                 extra_props={"Manufacturer": "Murata", "MPN": "GRM32ER71E226KE15L"})
-    s.place("C292", "C", "56p C0G TPS54202 feed-forward", *c4.next(), footprint=FOOTPRINTS["C_0402"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("BUCK_FB", "local")})
+
 
     # TCA9539 resets every port to input whenever the EC supervisor/reset domain
     # asserts NRST. External SHDN pulldowns then force all PD eFuses off and they
@@ -221,8 +220,8 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
             pin_nets={
                 "1": ("SOURCE_MGR_INT_N", "local"), "2": ("GND", "local"), "3": ("NRST_NET", "local"),
                 "4": ("PD1_PATH_EN", "hier"), "5": ("PD2_PATH_EN", "hier"),
-                "6": ("HP_DETECT", "hier"), "7": ("PD1_EFUSE_FAULT_N", "hier"),
-                "8": ("PD2_EFUSE_FAULT_N", "hier"), "9": ("SLS_S3", "hier"),
+                "6": ("HP_DETECT", "hier"), "7": ("PD1_EFUSE_PG", "hier"),
+                "8": ("PD2_EFUSE_PG", "hier"), "9": ("SLS_S3", "hier"),
                 "10": ("PACK_FAULT_N", "hier"), "11": ("AUX_FAULT_N", "hier"),
                 "12": ("GND", "local"), "13": ("PACK_RETRY_PULSE", "hier"),
                 "14": ("AUX_PGOOD", "hier"), "15": ("MAIN_USB_VALID_N", "hier"),
@@ -295,7 +294,7 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
     s.text(20, 376, "AUX_DC_ADC monitors the screw-terminal wide-DC input so firmware can classify and current-limit that source.")
     s.text(20, 383.54, "PA7/PB0 are thermal ADCs; fan PWM uses timer-capable PE9/TIM1_CH1 and tach remains EC-owned.")
     s.text(20, 391.16, "The EC has no user GPIO header; all tinkering I/O is isolated to the integrated RP2350 maker domain.")
-    s.text(20, 398.78, "U5 follows the TPS54202 3.3V table and runs from EC_AON_IN so source validation firmware can execute before arbitration.")
+    s.text(20, 398.78, "U5 uses TPS62933 at 500kHz with a slow external soft start. MCU_3V3 can start before source selection, including from 5V USB.")
     s.text(20, 414.02, "U5 EN is intentionally floated: TI specifies an internal pull-up that enables the converter when EN is open.")
     s.text(20, 406.4, "PE13 drives active-high MU_12V_ENABLE; PE14 reads MU_S0_HIGH; PE15 reads MU_12V_PG; PB1 reads TRACKPAD_FAULT_N.")
 
@@ -325,12 +324,12 @@ def main():
 
     # ---- Root sheet (both sheets + cross-sheet wiring for shared nets) ----
     power_hier_nets = [
-        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
+        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "MU_PROCHOT_RELEASE", "CHG_ENABLE",
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "VSYS", "MCU_3V3", "EC_AON_IN", "AUX_DC_ADC", "USB_PD_SELECTED",
     ]
     ec_hier_nets = [
-        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "PMIC_QON_ASSERT", "CHG_ENABLE",
+        "I2C_SCL", "I2C_SDA", "BQ_ALERT", "CHG_INT_N", "MU_PROCHOT_RELEASE", "CHG_ENABLE",
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "EC_AON_IN", "MCU_USB_DP", "MCU_USB_DN", "MCU_3V3", "AUX_DC_ADC",
         "FAN_PWM", "FAN_TACH", "LID_CLOSED_N",
@@ -341,7 +340,7 @@ def main():
         "AUDIO_MIC_EN", "INTERNAL_USB_VBUS_FAULT_N",
         "SERVICE_MUX_RESET_N",
         "PD1_PATH_EN", "PD2_PATH_EN",
-        "PD1_EFUSE_FAULT_N", "PD2_EFUSE_FAULT_N",
+        "PD1_EFUSE_PG", "PD2_EFUSE_PG",
         "RADIO_DB_PWR_EN", "RADIO_DB_PG", "RADIO_DB_FAULT_N", "RADIO_DB_PRESENT_N",
         "PD1_TCPC_IRQ_N", "PD2_TCPC_IRQ_N", "PD_PROTECT_FAULT_N",
         "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD", "AON_FAULT_N",

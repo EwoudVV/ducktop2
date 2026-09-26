@@ -127,7 +127,7 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
 "$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" -I"$ROOT/ec/include" \
     "$ROOT/ec_target/host_link.c" "$ROOT/ec/src/ec_fan_monitor.c" "$ROOT/tests/test_target_runtime.c" -o "$BUILD_DIR/target_runtime_tests"
 "$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" -I"$ROOT/ec/include" -I"$ROOT/tests" \
-    "$ROOT/ec_target/ec_app.c" "$ROOT/ec_target/ec_app_math.c" "$ROOT/ec_target/bq25798.c" \
+    "$ROOT/ec_target/ec_app.c" "$ROOT/ec_target/ec_app_math.c" "$ROOT/ec_target/isl9241.c" \
     "$ROOT/ec_target/bq34z100.c" "$ROOT/ec/src/ec_telemetry.c" "$ROOT/ec/src/ec_fan.c" "$ROOT/ec/src/ec_policy.c" \
     "$ROOT/tests/i2c_mock.c" "$ROOT/tests/test_ec_app.c" -o "$BUILD_DIR/ec_app_tests"
 "$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" -I"$ROOT/ec/include" -I"$ROOT/tests" \
@@ -139,9 +139,9 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
 "$BUILD_DIR/target_runtime_tests"
 "$BUILD_DIR/ec_app_tests"
 "$CC_BIN" $COMMON_FLAGS -DDUCKTOP2_PACK_QUALIFIED=1 -DDUCKTOP2_CHARGING_QUALIFIED=1 \
-    -DDUCKTOP2_PACK_CHARGE_CURRENT_MA=500 -DDUCKTOP2_PACK_CHARGE_VOLTAGE_MV=12600 \
+    -DDUCKTOP2_GAUGE_QUALIFIED=1 -DDUCKTOP2_PACK_CHARGE_CURRENT_MA=500 -DDUCKTOP2_PACK_CHARGE_VOLTAGE_MV=12528 \
     -I"$ROOT/ec_target" -I"$ROOT/ec/include" -I"$ROOT/tests" \
-    "$ROOT/ec_target/ec_app.c" "$ROOT/ec_target/ec_app_math.c" "$ROOT/ec_target/bq25798.c" \
+    "$ROOT/ec_target/ec_app.c" "$ROOT/ec_target/ec_app_math.c" "$ROOT/ec_target/isl9241.c" \
     "$ROOT/ec_target/bq34z100.c" "$ROOT/ec/src/ec_telemetry.c" "$ROOT/ec/src/ec_fan.c" "$ROOT/ec/src/ec_policy.c" \
     "$ROOT/tests/i2c_mock.c" "$ROOT/tests/test_ec_app.c" -o "$BUILD_DIR/ec_charge_profile_tests"
 "$BUILD_DIR/ec_charge_profile_tests"
@@ -165,7 +165,13 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
     "$ROOT/tests/test_usb_power.c" -o "$BUILD_DIR/usb_power_tests"
 "$BUILD_DIR/usb_power_hw_tests"
 "$BUILD_DIR/usb_power_tests"
+"$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" -I"$ROOT/tests"     "$ROOT/ec_target/isl9241.c" "$ROOT/tests/i2c_mock.c" "$ROOT/tests/test_isl9241.c" -o "$BUILD_DIR/isl9241_tests"
+"$BUILD_DIR/isl9241_tests"
+"$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" -I"$ROOT/ec/include" -I"$ROOT/tests"     "$ROOT/ec_target/source_paths.c" "$ROOT/ec_target/tca9537.c" "$ROOT/ec_target/tca9539.c"     "$ROOT/tests/i2c_mock.c" "$ROOT/tests/test_source_paths.c" -o "$BUILD_DIR/source_paths_tests"
+"$BUILD_DIR/source_paths_tests"
 python3 "$ROOT/tests/test_tps25751_config.py"
+"$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" -I"$ROOT/ec/include" "$ROOT/ec/src/ec_policy.c" "$ROOT/tests/test_power_profile.c" -o "$BUILD_DIR/power_profile_tests"
+"$BUILD_DIR/power_profile_tests"
 python3 "$ROOT/tests/test_pd_headroom.py"
 python3 "$ROOT/tools/verify_release_contract.py"
 

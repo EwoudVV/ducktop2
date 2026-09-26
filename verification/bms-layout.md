@@ -1,5 +1,9 @@
 # bms layout checks
 
+26 september 2026: this describes the previous BMS revision. the current
+board has connector, fuse and placement changes with routing still unfinished.
+these files are not current order files.
+
 22 september 2026. the bms routing is finished and saved in
 [`bms/bms.kicad_pcb`](../bms/bms.kicad_pcb). it is still a four-layer board.
 the two middle mounting holes were removed; the four perimeter supports remain.

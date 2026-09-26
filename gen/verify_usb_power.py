@@ -71,12 +71,17 @@ def check(center,left,right):
         if board.field('R'+str(base),'MPN')!='RC0603FR-0719K1L':raise ContractError('source ILIM order code')
     for port,gate,switch in [('J24','U2407','U1800'),('J25','U2408','U1803')]:
         left.joined((gate,4),(switch,3));left.expect(gate,2,'INTERNAL_USB_VBUS_VALID')
-    looms=[(center,'J2430',left,'J2431',['VSYS','PD1_VBUS_RAW','USB_PD_SELECTED','AUX_DC_RAW','SYS_3V3','MCU_3V3']+['GND']*6,'43045-1212'),
-           (center,'J2432',right,'J2433',['PD2_VBUS_GATED','PD2_VBUS_RAW','SYS_5V','SYS_3V3','PCIE_3V3','MCU_3V3']+['GND']*4,'43045-1012'),
-           (left,'J2434',right,'J2435',['GND','USB_PORT_5V'],'XT30PW-F30.G.Y')]
-    for a,ar,b,br,nets,mpn in looms:
-        for index,net in enumerate(nets,1):a.expect(ar,index,net);b.expect(br,index,net)
-        if a.field(ar,'MPN')!=mpn or b.field(br,'MPN')!=mpn:raise ContractError('loom connector identity')
+    from usb_power_contract import terminal_groups
+    for name,io in [('left',left),('right',right)]:
+        for end,board in [('center',center),('io',io)]:
+            for ref,mapping in terminal_groups(name,end):
+                for pin,netname in mapping.items():board.expect(ref,pin,netname)
+                n=len(mapping)
+                if board.field(ref,'MPN')!=f'2060-{450+n}/998-404':raise ContractError('power terminal identity: '+ref)
+                if board.field(ref,'Footprint')!=f'ducktop2:WAGO_2060_{450+n}_SMD':raise ContractError('power terminal footprint: '+ref)
+    for board,ref in [(left,'J2434'),(right,'J2435')]:
+        board.expect(ref,1,'GND');board.expect(ref,2,'USB_PORT_5V')
+        if board.field(ref,'MPN')!='XT30PW-F30.G.Y':raise ContractError('direct USB loom identity')
     for board,ref,count,mpn in [(left,'FPC101',41,'5039084120'),(center,'FPC102',41,'5039084120'),
                                (right,'FPC104',51,'5039085120'),(center,'FPC103',51,'5039085120')]:
         numbered={int(pin) for r,pin in board.pins if r==ref and pin.isdigit()}
