@@ -5,6 +5,47 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-09-26: start the case with the actual hinge mounts
+
+recorded design session: 09:48:34 to 10:11:35 America/New_York, 23 minutes
+1 second elapsed, including research and CAD checks. hands-on measurement
+and printing time has not been logged. this is separate from the overnight
+time since the last commit.
+
+refreshed the saved-board geometry and checked all six boards. the center
+and right datum hashes were old, but the exported outlines and mount
+positions had not changed. the BMS has four perimeter holes and sits in
+the center board's front cutout. the keyboard has no chassis screw holes,
+so its supports need to hold the edges and underside without drilling it.
+
+imported the original Framework 13 hinge models and revision-00 drawings.
+the left and right mounts are different: their base seating faces are
+1.3 and 2.2 mm below the shared axis. the lid has stepped faces too. made
+separate backing plates, spacers and small printed fit gauges for both
+sides. the editable source, STEP files, STLs and dimensioned mount drawings
+are together in mechanical/case-prototype.
+
+the replacement photos were useful here. the three lid screws are two M2
+screws and one smaller M1.6 screw. the extra large hole is part of the
+Framework display mounting arrangement. the two base screws use the middle
+round and slotted holes, not the outer locating holes. the new plates have
+their own chassis bolts, clear of the hinge screw heads.
+
+checked the seating heights against the STEP solids, reopened every test
+STEP, and swept the adapters from closed to 180 degrees in 5 degree steps.
+both sides pass that unloaded geometry check, with 4.41 mm between the base
+adapter and hinge screw heads. this is not a full-case or cable-motion
+check yet. the owned hinges still need the small fit prints, and the lid
+still needs weighing and a holding test. the drawing's torque unit is
+ambiguous, so the marketplace's 3.3 kg name is not being used as a lid rating.
+
+the next part is the full case stack. the current wire loops need about
+55 mm above the board, before the keyboard support, and the boards already
+span 358 mm before walls. those conflicts remain visible. no PCB routing,
+placement, outline or mounting hole was changed.
+
+![stepped hinge mounts](mechanical/case-prototype/views/hinge-mounts.png)
+
 # 2026-09-18: more bms routing
 
 **Total time spent: 1 hour**

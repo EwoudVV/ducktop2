@@ -1,0 +1,62 @@
+{
+  "units": "mm",
+  "scope": "CAD fit only; no material, torque or physical qualification",
+  "sides": {
+    "left": {
+      "valid_source_solids": 7,
+      "base_seat_below_axis": 1.3,
+      "sampled_sweep_degrees": [
+        0,
+        180,
+        5
+      ],
+      "maximum_adapter_overlap_mm3": 0,
+      "base_screw_head_edge_gap_mm": 4.413,
+      "source_and_adapter_seats_match": true,
+      "physical_test_complete": false
+    },
+    "right": {
+      "valid_source_solids": 7,
+      "base_seat_below_axis": 2.2,
+      "sampled_sweep_degrees": [
+        0,
+        180,
+        5
+      ],
+      "maximum_adapter_overlap_mm3": 0,
+      "base_screw_head_edge_gap_mm": 4.413,
+      "source_and_adapter_seats_match": true,
+      "physical_test_complete": false
+    }
+  },
+  "step_roundtrip": {
+    "right-lid-seat-gauge.step": {
+      "valid": true,
+      "solids": 1
+    },
+    "hinge-coupon-assembly.step": {
+      "valid": true,
+      "solids": 20
+    },
+    "right-base-coupon.step": {
+      "valid": true,
+      "solids": 2
+    },
+    "right-base-steel-adapter.step": {
+      "valid": true,
+      "solids": 1
+    },
+    "left-base-steel-adapter.step": {
+      "valid": true,
+      "solids": 1
+    },
+    "left-lid-seat-gauge.step": {
+      "valid": true,
+      "solids": 1
+    },
+    "left-base-coupon.step": {
+      "valid": true,
+      "solids": 2
+    }
+  }
+}
