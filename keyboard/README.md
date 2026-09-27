@@ -1,10 +1,13 @@
 # keyboard
 
-the RGB revision is ready for routing. it is now four layers and still 0.8 mm
-thick, with the same 273.5 x 80 mm outline, 65 key positions, diodes and
-J320 connector position. the previous tracks, vias and pours are cleared.
-the switches, LEDs and cable connector are locked so they do not move by
-accident while routing.
+the RGB map now follows the physical rows. the board is four layers and
+0.8 mm thick, with the same 273.5 x 80 mm outline, 65 key positions, diodes
+and J320 position. the existing switch, power and I2C routing is retained.
+the local joins between each LED's three anodes are retained too. old links
+between incompatible LED banks were cleared or trimmed for the new map.
+
+switches, LEDs and the cable connector stay in their original locked positions.
+this is still a routing revision, not an order release.
 
 open `12_keyboard_daughterboard.kicad_pro` in this folder. the schematic,
 PCB, rules and library tables beside it are the current files.
@@ -12,7 +15,7 @@ PCB, rules and library tables beside it are the current files.
 the layer plan is F.Cu for components and signals, In1.Cu for GND,
 In2.Cu for extra signals and local power copper, and B.Cu for signals and
 ground fill. a rule blocks non-ground tracks on In1.Cu while allowing
-signal vias through it. the ground zone and stitching are still to route.
+signal vias through it. the current ground zone and stitching are retained.
 the dielectric build is provisional; confirm a 0.8 mm four-layer stackup
 with the fabricator before ordering.
 
@@ -59,18 +62,35 @@ the EC side.
    0.5 mm width where space allows. use short neckdowns at fine-pitch pads.
    add the In1.Cu ground plane, ground fill on the outer layers and enough
    stitching to connect the surface pads. preserve the switch keepouts.
-3. route the RGB scan banks. `RGB_SW01` through `RGB_SW11` are common
-   anodes, with up to six nearby keys on each bank. `RGB_CS` nets are
-   shared colour sinks. red channels pass through R330-R335 and become
-   `RGB_RED` nets. the [key map](rgb-key-map.csv) lists every connection.
-   the selected widths are 0.4 mm for bank feeds and 0.2 mm for sinks.
-4. route the keyboard matrix and I2C at 0.2 mm. there is no controlled
+3. route the RGB scan banks mainly down the keyboard and the colour sinks
+   along the key rows. each bank has one key from every physical row, with
+   one extra key on ten banks. use the table below and the [key map](rgb-key-map.csv).
+   RGB_SW feeds use 0.4 mm and sinks use 0.2 mm. local anode joins already
+   belong to their new bank; do not join neighbouring LEDs just because
+   they used to share a bank.
+4. finish any remaining keyboard-matrix and I2C connections at 0.2 mm. there is no controlled
    impedance requirement here. keep I2C away from long parallel LED power
    runs, and keep the driver-side pull-ups local. do not add extra EC-side
    pull-ups. the matrix diode direction is already set in the schematic.
 5. add ground stitching, refill, and run DRC with schematic parity.
    check the full native unconnected count: the CLI report stops at 499.
-   the untouched placement starts at **960 unconnected items**.
+   the current saved routing count is recorded in the [checks](../verification/keyboard-rgb.md).
+
+| physical row | red cathode | green cathode | blue cathode |
+| --- | --- | --- | --- |
+| number row | RGB_RED01 | RGB_CS02 | RGB_CS03 |
+| Q row | RGB_RED04 | RGB_CS05 | RGB_CS06 |
+| home row | RGB_RED07 | RGB_CS08 | RGB_CS09 |
+| shift row | RGB_RED10 | RGB_CS11 | RGB_CS12 |
+| bottom row | RGB_RED13 | RGB_CS14 | RGB_CS15 |
+| ten extra keys | RGB_RED16 | RGB_CS17 | RGB_CS18 |
+
+55 keys use their physical row's sink group. the ten extra keys use the
+last group, so two keys never share the same bank and colour channel.
+R330-R335 remain between the driver's red CS outputs and the RGB_RED nets.
+the firmware table and CSV use the same assignments as the schematic.
+
+![RGB wiring groups](images/rgb-routing-map.png)
 
 the minimum clearance and track width are 0.15 mm, with 0.5/0.2 mm vias.
 these are routing settings, not a factory approval. confirm the final

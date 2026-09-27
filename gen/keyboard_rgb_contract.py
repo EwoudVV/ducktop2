@@ -29,16 +29,23 @@ DRIVER_PINS = {
 }
 
 
+# Entries follow SW320..SW384 in physical row order. Slots 0..4 share
+# one R/G/B sink group per row; slot 5 serves the ten extra keys.
+# Bank 11 has five keys, leaving registers 196..198 unused.
+KEY_CHANNELS = (
+    (11, 0), (1, 5), (1, 0), (2, 0), (3, 0), (4, 0), (4, 5), (5, 0), (6, 0), (7, 0), (8, 5), (8, 0), (9, 0), (10, 0),
+    (11, 1), (1, 1), (2, 1), (2, 5), (3, 1), (4, 1), (5, 1), (6, 5), (6, 1), (7, 1), (8, 1), (9, 1), (10, 5), (10, 1),
+    (11, 2), (1, 2), (2, 2), (3, 2), (3, 5), (4, 2), (5, 2), (6, 2), (7, 5), (7, 2), (8, 2), (9, 2), (10, 2),
+    (11, 3), (1, 3), (2, 3), (3, 3), (4, 3), (5, 5), (5, 3), (6, 3), (7, 3), (8, 3), (9, 5), (9, 3), (10, 3),
+    (11, 4), (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), (9, 4), (10, 4),
+)
+
+
 def key_assignments():
-    """Six neighbouring keys per scan bank, following alternate row directions."""
-    order, offset = [], 0
-    for row, count in enumerate(ROW_COUNTS):
-        indices = list(range(offset, offset+count))
-        order.extend(indices if row % 2 == 0 else reversed(indices))
-        offset += count
-    return {index: {'bank': n//6+1, 'slot': n%6,
-                    'registers': [n//6*18+n%6*3+c+1 for c in range(3)]}
-            for n,index in enumerate(order)}
+    """Physical rows share sinks; nearby columns share scan banks."""
+    return {index: {'bank': bank, 'slot': slot,
+                    'registers': [(bank-1)*18+slot*3+c+1 for c in range(3)]}
+            for index, (bank, slot) in enumerate(KEY_CHANNELS)}
 
 
 def led_nets(index):

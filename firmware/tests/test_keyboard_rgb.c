@@ -70,8 +70,8 @@ int main(void)
         assert(reg>=1u && reg<=195u && !channels[reg-1u]);
         channels[reg-1u]=true;
     }
-    assert(keyboard_rgb_map[0][0]==1u);
-    assert(keyboard_rgb_map[27][0]==43u); /* reversed second physical row */
+    assert(keyboard_rgb_map[0][0]==181u); /* Esc: bank 11, top-row sinks */
+    assert(keyboard_rgb_map[27][0]==166u); /* Backslash: bank 10, second-row sinks */
     keyboard_rgb_init();
     assert(!power_on && !keyboard_rgb_ready());
     keyboard_rgb_service(1000u); assert(transfers==0u);
@@ -86,8 +86,9 @@ int main(void)
     keyboard_rgb_set_all(0u,0u,0u);
     assert(keyboard_rgb_set_key(0u,10u,20u,30u));
     for (unsigned i=0;i<11u;i++) keyboard_rgb_service(2000u+i*20u);
-    assert(regs[0][1]==10u && regs[0][2]==20u && regs[0][3]==30u);
-    for (unsigned reg=4;reg<=198u;reg++) assert(regs[0][reg]==0u);
+    assert(regs[0][181]==10u && regs[0][182]==20u && regs[0][183]==30u);
+    for (unsigned reg=1;reg<=198u;reg++)
+        if (reg<181u || reg>183u) assert(regs[0][reg]==0u);
     unsigned before=transfers; keyboard_rgb_service(3000u); assert(transfers==before);
     nack=true; keyboard_rgb_set_all(255u,0u,0u); keyboard_rgb_service(3020u);
     assert(keyboard_rgb_faulted() && !power_on && !keyboard_rgb_ready());

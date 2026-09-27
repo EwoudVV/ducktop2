@@ -1,48 +1,57 @@
-# keyboard RGB placement checks
+# keyboard RGB checks
 
-checked 22 september 2026 with KiCad 10.0.4. this is the starting point for
-routing, not an order release. the saved project is in `keyboard/`.
+checked 27 september 2026 with KiCad 10.0.4. the LED connections now follow
+the physical rows. this is a routing checkpoint, not an order release.
 
 | check | result |
 | --- | --- |
 | schematic ERC | 0 errors, 0 warnings |
-| PCB physical DRC | 0 errors, 0 warnings, no disabled PCB checks |
 | schematic / PCB parity | 0 differences; 1,096 physical pads checked |
-| routing | 0 tracks, 0 vias, 0 copper pours |
-| native unconnected count | 960; the CLI's list stops at 499 |
+| PCB physical DRC | 4 existing starved-thermal errors; no new errors |
+| remaining ground errors | C320 pad 2, C321 pad 2, J320 pads 1 and 30 |
+| routing | 1,208 tracks and arcs, 264 vias, 1 ground zone |
+| unconnected count after refill | 298, confirmed by native connectivity and DRC |
 | board | 4 copper layers, 0.8 mm, original 273.5 x 80 mm outline |
-| original placement | all 65 switches, 65 diodes and J320 preserved |
-| RGB placement | all 65 LEDs at the checked switch-relative offset |
-| switch copper exclusions | all 65 extended to all four copper layers |
-| driver mapping | 195 unique colour channels, 3 unused channels kept off |
-| part identities | 215 populated components have manufacturer and MPN; 6 test pads excluded |
-| EC target build | ARM build passed |
-| firmware host checks | 30 tests passed, including RGB startup, mapping, updates and fault shutdown |
+| placement | all 221 footprint positions and pad geometries preserved |
+| local LED anode joins | all 65 preserved |
+| other routing | switch-matrix, power and I2C copper unchanged |
+| switch copper exclusions | all 65 preserved on all four layers |
+| driver mapping | 195 unique colour channels; registers 196..198 remain off |
+| firmware checks | RGB startup, mapping, updates, fault latch and timer wrap pass |
+| row-map checks | four checks pass for row grouping, bank capacity, channel uniqueness and local anodes |
 
-the courtyard rules allow each LED beneath its matching switch. the
-placement checker separately checks the allowed CHERRY component area,
-pad envelope, orientation and offset. no other component pair gets that
-exception. the LED's maximum body height plus the solder allowance is
-0.50 mm against the drawing's 0.8 mm limit.
+the starting point was the live editor, including unsaved routing. the map
+change was applied as one undoable KiCad edit, then refilled and saved.
+50 old bank-link segments were removed and 101 were trimmed to retain local
+LED and driver wiring. one retained section needed a separate track item.
+no vias were removed, moved or added. no new routing was added beyond those
+retained portions of the existing tracks.
 
-the driver pinout and exposed-pad land came from Lumissil's IS31FL3743A
-revision C drawing. LED pins and lands came from Everlight's C02 revision
-4 drawing, not the different A01 part. the buffer supply arrangement uses
-TI's TCA9517A revision E datasheet. CHERRY's VS-10107 revision 03 and
-PCB-MX-ULP DXF set the switch-local LED position and copper-free area.
-the source links and routing order are in [keyboard notes](../keyboard/README.md).
+the old banks linked six neighbouring keys along the rows. the new banks
+follow nearby columns, so those old links could join different new nets.
+the anode joins at each LED stay connected; the feeds between banks need
+routing again. 55 keys use five row-aligned RGB sink groups. the ten extra
+keys use the sixth group. the [wiring map](../keyboard/images/rgb-routing-map.png)
+and [CSV](../keyboard/rgb-key-map.csv) show the assignments.
 
-the center-board change fits R387 as a 0 ohm link for the buffer's 3.3 V
-supply. its pads, position and nets are unchanged. R386 remains DNP.
+all LED positions, switch offsets, pad sizes, 3D models and ground-zone
+settings were retained. the filled ground copper was recalculated. the
+four ground thermal errors were present before this change and still need
+repair. remaining track-end warnings include the retained LED stubs.
 
-`gen/check_keyboard_rgb.py` checks the saved board against a fresh XML
-netlist using KiCad's Python. it also checks the firmware colour map,
-connector contacts, LED positions and keepouts. use `--expect-unrouted`
-only for this starting placement; omit it once routing begins.
-the [machine-readable record](keyboard-rgb.json) includes source hashes.
+the placement checker still verifies the CHERRY component area and copper
+exclusions. nominal pad margin is 0.075 mm. the maximum LED body height plus
+solder allowance is 0.50 mm against the 0.8 mm drawing limit. the selected
+LED, driver, current resistor and power circuit are unchanged.
 
-after routing, rerun native DRC, refill and save, check the exported copper
-against the CHERRY exclusions, and prepare the revised assembly package.
-on the first board, check LED/switch fit, all key positions, colour order,
-full-white current, driver temperature and I2C behaviour with RGB power
-off. those physical checks have not happened yet.
+`gen/check_keyboard_rgb.py` compares the saved board with a fresh XML netlist
+and the firmware table. `gen/test_keyboard_rgb_mapping.py` checks the row and
+bank structure. `gen/draw_keyboard_rgb_map.py` redraws the wiring reference
+from the saved PCB and requires its LED nets to match the source map.
+the [machine-readable record](keyboard-rgb.json) contains source hashes and
+the current preservation and DRC results.
+
+after routing, rerun DRC and schematic parity, check the exported copper
+against the CHERRY exclusions, and prepare the assembly package. physical
+LED/switch fit, colour order, full-white current, temperature and I2C checks
+still need an assembled board.

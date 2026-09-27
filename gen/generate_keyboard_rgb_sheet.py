@@ -7,7 +7,7 @@ def add_rgb(s, keys):
     s.paper='A0'
     s.text(650,20,'keyboard rgb: 65 separate colours, hardware-limited current')
     s.text(650,28,'Everlight 19-337/R6GHBHC-C02/2T, 1.6 x 1.6 x 0.35 mm; LEDs are fitted before the switches.')
-    s.text(650,36,'Each group has up to six nearby keys. Follow the RGB_SW and RGB_CS labels when routing.')
+    s.text(650,36,'Physical rows use sink groups 1..5; the ten extra keys use group 6. Scan banks follow nearby columns.')
     for index,assignment in key_assignments().items():
         bank,slot=assignment['bank'],assignment['slot']
         row,col,code,value=keys[index]
