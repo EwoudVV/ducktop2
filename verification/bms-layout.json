@@ -1,29 +1,29 @@
 {
-  "checked_on": "2026-09-22",
+  "checked_on": "2026-09-28",
   "board": "bms/bms.kicad_pcb",
   "working_tree": true,
-  "base_commit": "e77e381",
+  "base_commit": "a6eb27d",
   "source_sha256": {
-    "bms/bms.kicad_pcb": "eb147d4bfedfec5447d79759b4612e251e331bac942dba1f9ab51f11f26f3f40",
-    "bms/bms.kicad_sch": "771de1b5ded171a8935a4792934b80f82480d227484ba8593f1cd620ee18724a",
+    "bms/bms.kicad_pcb": "3e85a2c70a2fe8175ac3a08a688da6f6bda907fbb892188c746aafe3892ecf49",
+    "bms/bms.kicad_sch": "495334993aa6a3bda606b0a04b52b351ae8bb6a85379688e7cd1fec76eaebb11",
     "bms/bms.kicad_pro": "cc6ac996a9e9c80cd246ee780557ad5d197457eee5ed7cc6eaf912082392db82",
     "bms/bms.kicad_dru": "37bf5785744034ada850286953d1156b3af6458e2f49bbe53890e8af50aab2ba"
   },
+  "manufacturing_geometry_sha256": "c02e49782e97480f0490ab19c2a3d385d3c5960fdbc198086eda93731b19c93b",
   "native_counts": {
     "native_airwires": 0,
     "copper_layers": 4,
     "footprints": 149,
-    "tracks": 2710,
-    "vias": 394,
-    "perimeter_holes": 4
+    "tracks": 2184,
+    "vias": 398,
+    "perimeter_holes": 4,
+    "thickness_mm": 1.6
   },
   "drc": {
     "errors": 0,
     "unconnected": 0,
     "schematic_mismatches": 0,
     "warnings": {
-      "track_dangling": 8,
-      "via_dangling": 2,
       "lib_footprint_mismatch": 73
     }
   },
@@ -34,392 +34,345 @@
       "ground_pin_not_ground": 3
     }
   },
-  "circuit_tests": {
-    "thermal": 13,
-    "electrical_calculations": 31
+  "library_pad_differences": [],
+  "preservation": {
+    "footprint_positions_preserved": true,
+    "pads_and_drills_preserved": true,
+    "models_preserved": true,
+    "board_outline_and_drawings_preserved": true,
+    "footprints": 149
   },
   "quiet_return": {
-    "all_previously_connected_reference_pads_preserved": true,
-    "raw_load_pads_excluded": true,
-    "kelvin_pickup_excluded": true,
-    "original_bridge_preserved": "74054819-13f2-42fa-b992-9b133e64df51"
-  },
-  "power_screen": {
-    "copper_um": 35,
-    "temperature_C": 85,
-    "current_A": 8,
-    "all_28_sheet_cases_connected": true,
-    "models": {
-      "RAW": [
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 10.420164
-        },
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 11.323952
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 10.283048
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 11.185489
-        }
+    "connected_groups": 1,
+    "star_cut_groups": 2,
+    "quiet_pads": 48,
+    "quiet_matches": true,
+    "bulk": [
+      [
+        "C2230",
+        "2"
       ],
-      "SENSE": [
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 17.03449
-        },
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 19.376198
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 16.808692
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 19.225283
-        }
+      [
+        "J2",
+        "1"
       ],
-      "FG_RETURN": [
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 3.037296
-        },
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 3.259416
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 3.015318
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 3.250962
-        }
+      [
+        "R2235",
+        "2"
       ],
-      "FET_COMMON": [
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 7.106301
-        },
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 7.422527
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 7.067399
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 7.387494
-        }
+      [
+        "R845",
+        "1"
       ],
-      "BMS_COMMON": [
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 5.749323
-        },
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 6.107409
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 5.686233
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 6.026111
-        }
+      [
+        "RS11",
+        "1"
       ],
-      "VIN": [
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 4.621921
-        },
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 5.326547
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 4.591706
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 5.290647
-        }
-      ],
-      "POS_FUSED": [
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 10.350814
-        },
-        {
-          "grid_mm": 0.05,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 11.63792
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0,
-          "connected": true,
-          "resistance_milliohms": 10.291876
-        },
-        {
-          "grid_mm": 0.025,
-          "erosion_mm": 0.05,
-          "connected": true,
-          "resistance_milliohms": 11.522705
-        }
+      [
+        "U2204",
+        "2"
       ]
-    },
-    "positive_path": {
-      "all_four_layers": true,
-      "thin_tracks_below_mm_excluded": 0.8,
-      "erosion_cases_mm": [
-        0,
-        0.05
-      ],
-      "both_connected": true
-    },
-    "limits": "Geometry and resistance screen. Not a thermal qualification or an 8 A operating rating."
+    ]
   },
-  "retained_endpoint_warnings": [
-    {
-      "description": "Track has unconnected end",
-      "items": [
-        {
-          "description": "Track [/BMS_VC1] on F.Cu, length 0.1598 mm",
-          "pos": {
-            "x": 129.128982,
-            "y": 83.638027
-          },
-          "uuid": "7e88bd5d-d94c-40b2-a383-948cd7ff7ad6"
-        }
-      ],
-      "severity": "warning",
-      "type": "track_dangling"
-    },
-    {
-      "description": "Track has unconnected end",
-      "items": [
-        {
-          "description": "Track [FG_VSS] on F.Cu, length 0.2198 mm",
-          "pos": {
-            "x": 162.1695,
-            "y": 71.550343
-          },
-          "uuid": "833f6401-9573-4d0f-9938-4a395684319f"
-        }
-      ],
-      "severity": "warning",
-      "type": "track_dangling"
-    },
-    {
-      "description": "Via is not connected or connected on only one layer",
-      "items": [
-        {
-          "description": "Via [FG_VSS] on F.Cu - B.Cu",
-          "pos": {
-            "x": 166.2,
-            "y": 69.8
-          },
-          "uuid": "d607fc2a-e652-45d0-812d-9c7076be8bb6"
-        }
-      ],
-      "severity": "warning",
-      "type": "via_dangling"
-    },
-    {
-      "description": "Via is not connected or connected on only one layer",
-      "items": [
-        {
-          "description": "Via [/BAT_PROT_GATE] on F.Cu - B.Cu",
-          "pos": {
-            "x": 129.35,
-            "y": 67.1
-          },
-          "uuid": "ec13fa99-8198-45f3-8ad6-edab257e0d82"
-        }
-      ],
-      "severity": "warning",
-      "type": "via_dangling"
-    },
-    {
-      "description": "Track has unconnected end",
-      "items": [
-        {
-          "description": "Track [/PROT_CTRL_3V3] on F.Cu, length 0.0699 mm",
-          "pos": {
-            "x": 156.15,
-            "y": 82.85
-          },
-          "uuid": "8f315bef-bf5a-4e83-a95f-04a3a3ab8033"
-        }
-      ],
-      "severity": "warning",
-      "type": "track_dangling"
-    },
-    {
-      "description": "Track has unconnected end",
-      "items": [
-        {
-          "description": "Track [/PACK_NEG_RAW] on F.Cu, length 0.0699 mm",
-          "pos": {
-            "x": 141.275549,
-            "y": 93.450549
-          },
-          "uuid": "fe8b58e1-db56-4645-aa2c-7ad449584c36"
-        }
-      ],
-      "severity": "warning",
-      "type": "track_dangling"
-    },
-    {
-      "description": "Track has unconnected end",
-      "items": [
-        {
-          "description": "Track [/PACK_NEG_RAW] on In1.Cu, length 0.1296 mm",
-          "pos": {
-            "x": 129.291667,
-            "y": 68.55
-          },
-          "uuid": "6ff3bf47-568f-4083-a362-3b7f7cad35ba"
-        }
-      ],
-      "severity": "warning",
-      "type": "track_dangling"
-    },
-    {
-      "description": "Track has unconnected end",
-      "items": [
-        {
-          "description": "Track [/PACK_NEG_RAW] on In2.Cu, length 0.0461 mm",
-          "pos": {
-            "x": 120.692426,
-            "y": 85.057574
-          },
-          "uuid": "3c406a60-5c1a-4a6e-b8f6-2ba13913c0b8"
-        }
-      ],
-      "severity": "warning",
-      "type": "track_dangling"
-    },
-    {
-      "description": "Track has unconnected end",
-      "items": [
-        {
-          "description": "Track [/PACK_NEG_RAW] on In2.Cu, length 0.3182 mm",
-          "pos": {
-            "x": 138.446214,
-            "y": 86.446215
-          },
-          "uuid": "67bf2316-0158-404a-a9ae-a9fc04802951"
-        }
-      ],
-      "severity": "warning",
-      "type": "track_dangling"
-    },
-    {
-      "description": "Track has unconnected end",
-      "items": [
-        {
-          "description": "Track [/THERM_PROBE_2_A] on B.Cu, length 0.0636 mm",
-          "pos": {
-            "x": 135.375,
-            "y": 68.325
-          },
-          "uuid": "570090ad-af17-406c-a2f5-446b6250e436"
-        }
-      ],
-      "severity": "warning",
-      "type": "track_dangling"
-    }
-  ],
-  "assembly": {
-    "front": "manufacturing/bms/front-assembly.svg",
-    "back": "manufacturing/bms/back-assembly.svg",
-    "test_points": "manufacturing/bms/test-points.csv",
-    "perimeter_supports": 4
+  "positive_shunt_pickup_offset_v_at_5_6a": 0.0,
+  "power_screen": {
+    "source_sha256": "3e85a2c70a2fe8175ac3a08a688da6f6bda907fbb892188c746aafe3892ecf49",
+    "scope": "PCB copper only; fixed terminal potentials; isolated portions of a common connector terminal carry zero model current; connector and component resistance excluded; no temperature rise simulation",
+    "paths": [
+      {
+        "net": "/PACK_POS_RAW",
+        "mesh_mm": 0.1,
+        "nodes": 38985,
+        "resistance_ohm_20c": 0.030336128443093906,
+        "resistance_ohm_80c": 0.03748938752997545,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "J2.3"
+        ],
+        "target_pads": [
+          "F1.1"
+        ],
+        "solver_residual_a_at_1v": 7.736653902330563e-12,
+        "seconds": 0.16207495800335892,
+        "loss_w_80c_at_3a": 0.33740448776977905,
+        "loss_w_80c_at_4.5a": 0.7591600974820029,
+        "loss_w_80c_at_5.6a": 1.17566719294003,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "F1.1": 0.0,
+          "J2.3": 0.16988231928868866,
+          "R844.1": 0.16599070419021028,
+          "TPB1.1": 0.16988231928860612,
+          "R840.1": 0.004961963156731717,
+          "R852.1": 0.12752447711299625
+        },
+        "status": "estimated"
+      },
+      {
+        "net": "/BAT_PROT_VIN",
+        "mesh_mm": 0.1,
+        "nodes": 18648,
+        "resistance_ohm_20c": 0.0054081131811341675,
+        "resistance_ohm_80c": 0.006683346269245605,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "F1.2"
+        ],
+        "target_pads": [
+          "Q11.5"
+        ],
+        "solver_residual_a_at_1v": 3.937549393006377e-12,
+        "seconds": 0.10438870900543407,
+        "loss_w_80c_at_3a": 0.06015011642321044,
+        "loss_w_80c_at_4.5a": 0.1353377619522235,
+        "loss_w_80c_at_5.6a": 0.20958973900354214,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "U11.1": 0.0015434338970771568,
+          "Q11.5": 0.0,
+          "F1.2": 0.03028543381443735,
+          "TPB2.1": 0.0015434338971035935,
+          "R700.1": 0.0015434338970772156,
+          "R707.1": 0.0015434338970799558
+        },
+        "status": "estimated"
+      },
+      {
+        "net": "/BAT_PROT_FET_COMMON",
+        "mesh_mm": 0.1,
+        "nodes": 26839,
+        "resistance_ohm_20c": 0.007885849834219786,
+        "resistance_ohm_80c": 0.009745333225128812,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "Q11.1",
+          "Q11.2",
+          "Q11.3"
+        ],
+        "target_pads": [
+          "Q12.1",
+          "Q12.2",
+          "Q12.3"
+        ],
+        "solver_residual_a_at_1v": 4.715971368762424e-12,
+        "seconds": 0.09354833299585152,
+        "loss_w_80c_at_3a": 0.0877079990261593,
+        "loss_w_80c_at_4.5a": 0.19734299780885844,
+        "loss_w_80c_at_5.6a": 0.3056136499400395,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "Q11.1": 0.044160759071775496,
+          "Q11.2": 0.044160759071775496,
+          "Q11.3": 0.044160759071775496,
+          "TPB4.1": 0.04363982023928723,
+          "Q12.1": 0.0,
+          "Q12.2": 0.0,
+          "Q12.3": 0.0,
+          "C724.2": 0.04387077326498625
+        },
+        "status": "estimated"
+      },
+      {
+        "net": "/BAT_PROT_SENSE",
+        "mesh_mm": 0.1,
+        "nodes": 25765,
+        "resistance_ohm_20c": 0.01658364481470044,
+        "resistance_ohm_80c": 0.020494068262006806,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "Q12.5"
+        ],
+        "target_pads": [
+          "RS10.1"
+        ],
+        "solver_residual_a_at_1v": 5.237968843566184e-12,
+        "seconds": 0.1292617919971235,
+        "loss_w_80c_at_3a": 0.18444661435806126,
+        "loss_w_80c_at_4.5a": 0.4150048823056378,
+        "loss_w_80c_at_5.6a": 0.6426939806965334,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "U11.9": 0.0,
+          "RS10.1": 0.0,
+          "Q12.5": 0.09286841096413934
+        },
+        "status": "estimated"
+      },
+      {
+        "net": "/PACK_POS_FUSED",
+        "mesh_mm": 0.1,
+        "nodes": 22455,
+        "resistance_ohm_20c": 0.012324687721560021,
+        "resistance_ohm_80c": 0.015230849086303873,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "RS10.2"
+        ],
+        "target_pads": [
+          "J2072.1"
+        ],
+        "solver_residual_a_at_1v": 4.651005957074741e-12,
+        "seconds": 0.14137158400262706,
+        "loss_w_80c_at_3a": 0.13707764177673487,
+        "loss_w_80c_at_4.5a": 0.30842469399765343,
+        "loss_w_80c_at_5.6a": 0.4776394273464894,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "U11.8": 0.06901825124103571,
+          "J2072.1": 0.0,
+          "C725.1": 0.026394100357215865,
+          "TPB3.1": 0.01568382946518849,
+          "RS10.2": 0.06901825124161699
+        },
+        "status": "estimated"
+      },
+      {
+        "net": "/PACK_NEG_RAW",
+        "mesh_mm": 0.1,
+        "nodes": 51579,
+        "resistance_ohm_20c": 0.013526263707189875,
+        "resistance_ohm_80c": 0.016715756689345246,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "J2.1"
+        ],
+        "target_pads": [
+          "RS11.1"
+        ],
+        "solver_residual_a_at_1v": 6.090739789158641e-12,
+        "seconds": 0.41526454100676347,
+        "loss_w_80c_at_3a": 0.1504418102041072,
+        "loss_w_80c_at_4.5a": 0.3384940729592412,
+        "loss_w_80c_at_5.6a": 0.5242061297778668,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "R845.1": 0.0,
+          "C845.2": 0.06578228220648978,
+          "R854.2": 0.06578228220856648,
+          "J2.1": 0.07574707676282891,
+          "RS11.1": 0.0,
+          "C2230.2": 0.021795853983474615,
+          "C847.2": 0.06578228220657008,
+          "C841.2": 0.06578228220655424,
+          "Q2201.2": 0.06578228220510907,
+          "U719.9": 0.06578228220734134,
+          "U719.16": 0.06578228220802523,
+          "U719.20": 0.0657822822077946,
+          "R2235.2": 0.021795853983426518,
+          "C840.2": 0.06578228220655603
+        },
+        "status": "estimated"
+      },
+      {
+        "net": "/BMS_SENSE_N",
+        "mesh_mm": 0.1,
+        "nodes": 1271,
+        "resistance_ohm_20c": 0.0020090769160926885,
+        "resistance_ohm_80c": 0.0024828172529073444,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "RS11.2"
+        ],
+        "target_pads": [
+          "Q703.1",
+          "Q703.2",
+          "Q703.3"
+        ],
+        "solver_residual_a_at_1v": 3.0652976143187437e-12,
+        "seconds": 0.004461749995243736,
+        "loss_w_80c_at_3a": 0.0223453552761661,
+        "loss_w_80c_at_4.5a": 0.05027704937137372,
+        "loss_w_80c_at_5.6a": 0.0778611490511743,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "R849.2": 0.0026255278038401,
+          "Q703.1": 0.0,
+          "Q703.2": 0.0,
+          "Q703.3": 0.0,
+          "RS11.2": 0.011250830730120003,
+          "R846.1": 0.011250830730119354
+        },
+        "status": "estimated"
+      },
+      {
+        "net": "/BMS_FET_COMMON",
+        "mesh_mm": 0.1,
+        "nodes": 10744,
+        "resistance_ohm_20c": 0.01042695379387106,
+        "resistance_ohm_80c": 0.012885629498465856,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "Q703.5"
+        ],
+        "target_pads": [
+          "Q704.5"
+        ],
+        "solver_residual_a_at_1v": 4.2048368146662865e-12,
+        "seconds": 0.022618542003328912,
+        "loss_w_80c_at_3a": 0.11597066548619271,
+        "loss_w_80c_at_4.5a": 0.2609339973439336,
+        "loss_w_80c_at_5.6a": 0.4040933410718892,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "Q703.5": 0.058390941245924,
+          "Q704.5": 0.0
+        },
+        "status": "estimated"
+      },
+      {
+        "net": "FG_VSS",
+        "mesh_mm": 0.1,
+        "nodes": 107210,
+        "resistance_ohm_20c": 0.0022507588007636375,
+        "resistance_ohm_80c": 0.0027814877259837033,
+        "copper_um": 35,
+        "plating_um": 20,
+        "source_pads": [
+          "Q704.1",
+          "Q704.2",
+          "Q704.3"
+        ],
+        "target_pads": [
+          "J2072.2"
+        ],
+        "solver_residual_a_at_1v": 5.430923950162695e-12,
+        "seconds": 0.5484842500009108,
+        "loss_w_80c_at_3a": 0.02503338953385333,
+        "loss_w_80c_at_4.5a": 0.05632512645116999,
+        "loss_w_80c_at_5.6a": 0.08722745508684893,
+        "pad_voltage_relative_to_target_v_at_5.6a": {
+          "C2253.2": 0.0,
+          "U11.4": 0.0004053299779619959,
+          "U11.5": 0.00040532997796198094,
+          "U2208.2": 0.0,
+          "R709.2": 0.00040532888878045434,
+          "C700.2": 0.00040532937737390237,
+          "J2072.2": 0.0,
+          "C725.2": 0.0,
+          "Q704.1": 0.01260424928428088,
+          "Q704.2": 0.01260424928428088,
+          "Q704.3": 0.01260424928428088,
+          "TPB16.1": 0.0,
+          "R850.2": 0.01260421903367128,
+          "C2254.2": 0.0,
+          "R851.2": 0.0,
+          "R702.2": 0.0013090342977276036
+        },
+        "status": "estimated"
+      }
+    ]
   },
-  "hardware_testing": "pending",
-  "manufacturing_geometry_sha256": "7a5716fad81a46b4fd862c598c2aed3adc9347827cfa350b64f056cc2d5e67bb",
-  "manufacturing_audit": {
-    "all_warning_categories_enabled": true,
-    "additional_warnings": {
-      "track_not_centered_on_via": 8
-    },
-    "minimum_track_mm": 0.1,
-    "minimum_clearance_mm": 0.1,
-    "minimum_via_annular_ring_mm": 0.15,
-    "minimum_silk_stroke_mm": 0.15,
-    "mask_exposed_via_holes": 0,
-    "smt_mask_shift_screen_mm": 0.05,
-    "smt_mask_shift_exposed_via_holes": 0
+  "cleanup": {
+    "tracks_before": 2812,
+    "tracks_after": 2184,
+    "vias_before": 403,
+    "vias_after": 398,
+    "label_moves": 9,
+    "component_positions_changed": 0,
+    "dangling_track_warnings": 0,
+    "dangling_via_warnings": 0,
+    "copper_sliver_warnings": 0,
+    "silkscreen_warnings": 0
   },
-  "manufacturing_changes": [
-    "three BAT_PROT_SHDN segments widened from 0.09 to 0.10 mm",
-    "silkscreen strokes increased to 0.15 mm; TPB14 text widened; one U2208 outline segment moved to fabrication",
-    "six vias moved away from solder-mask openings with their connected track endpoints; the C2255 low-current return via uses a 0.20 mm hole in its existing 0.60 mm land"
-  ]
+  "manufacturing_status": "previous order package is stale; regenerate for the current connectors, fuse and saved board"
 }

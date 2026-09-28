@@ -45,11 +45,11 @@ cover the LEDs, current limit and switch keepouts. the old non-RGB order
 files have been retired. the radio antenna connectors now match the board edge and their
 mechanical drawing. the radio still needs routing.
 
-the four-layer BMS is being reworked for the thinner power connections.
-the saved revision has the new terminals, raw-pack connector and fuse, with
-85 unconnected items left to repair. the previous PCBWay package and layout
-report describe the earlier routed board. they need to be regenerated after
-this revision is finished. the three main-board sections are eight layers,
+the four-layer BMS is routed again with the new terminals, raw-pack connector
+and fuse. the routing cleanup is finished, with zero unconnected items and
+zero physical DRC errors. [layout checks](verification/bms-layout.md) cover
+the current saved board. the previous PCBWay package still needs regenerating.
+the three main-board sections are eight layers,
 and most of their routing still remains. [power revision status](docs/hardware/power-revision.md)
 records what is saved and what is still unfinished.
 

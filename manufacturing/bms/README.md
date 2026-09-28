@@ -1,9 +1,11 @@
 # bms
 
-the saved BMS is being revised for the new power wiring and is not ready
-to order. the files below belong to the previous routed revision. they
-have not been regenerated for the new connector, fuse and placement changes.
-see [power revision status](../../docs/hardware/power-revision.md).
+the saved BMS routing and cleanup are finished. the files below still
+belong to the previous revision and must not be used for the current board.
+they need regenerating for the new connectors, 5 A Schurter fuse and layout.
+the current results are in the [layout checks](../../verification/bms-layout.md).
+see [power revision status](../../docs/hardware/power-revision.md) for the
+remaining system and harness work.
 
 - [previous pcbway package](bms_PCBWAY.zip)
 - [gerbers and drills](pcbway/bms_GERBERS.zip)

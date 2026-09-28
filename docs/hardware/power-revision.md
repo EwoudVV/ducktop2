@@ -1,6 +1,6 @@
 # power revision
 
-26 september 2026. this is an unfinished checkpoint for the 100 W input
+28 september 2026. this is an unfinished checkpoint for the 100 W input
 and thinner power wiring. the boards are not ready to order.
 
 the saved center, left, right and BMS schematics now match their revised
@@ -10,11 +10,13 @@ the raw-pack input uses a right-angle Molex 43045-0400 with a new four-pin
 map. F1 is now a 5 A Schurter HCF fuse. Alpha 6715 is specified for the
 18 AWG links and Alpha 6716 for the 16 AWG direct USB5 loom.
 
-the BMS changes reopen part of its routing. the current saved board has
-85 unconnected items and zero physical DRC errors after removing the
-copper that conflicted with the new parts. the shunt sense connections,
-main current paths, routing and printing still need their final checks.
-the main boards remain unfinished too. no new main-board routing was added,
+the BMS routing and cleanup are finished. the saved board has zero
+unconnected items, zero physical DRC errors and no dangling-copper,
+silkscreen or copper-sliver warnings. the quiet return, shunt pickup and
+main current paths were checked again after cleanup. the
+[layout report](../../verification/bms-layout.md) records the checks and
+the remaining library warnings. the main boards remain unfinished.
+no new main-board routing was added,
 and their outlines, mounting holes and remaining copper were preserved.
 
 the ISL9241 charger, TPS552882 Mu supply, input switches and always-on power
@@ -38,4 +40,4 @@ the final thickness is still undecided. new plug, wire, clamp and service
 clearance checks are not finished.
 
 the BMS quote files under `manufacturing/bms/` describe the previous
-revision. they must be regenerated after the board repairs and checks.
+revision. they must be regenerated for the new connectors, fuse and saved layout.

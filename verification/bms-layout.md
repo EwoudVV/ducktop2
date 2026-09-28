@@ -1,69 +1,64 @@
 # bms layout checks
 
-26 september 2026: this describes the previous BMS revision. the current
-board has connector, fuse and placement changes with routing still unfinished.
-these files are not current order files.
-
-22 september 2026. the bms routing is finished and saved in
-[`bms/bms.kicad_pcb`](../bms/bms.kicad_pcb). it is still a four-layer board.
-the two middle mounting holes were removed; the four perimeter supports remain.
-
-the [pcbway package](../manufacturing/bms/pcbway/README.md) includes the
-checked fabrication and assembly files. the order cleanup widened three
-short traces to 0.10 mm, made the printing 0.15 mm thick and moved six vias
-away from solder-mask openings. the filled power paths, quiet return and
-positive-load connection were checked again after those moves.
+28 september 2026. the new connector and fuse revision is routed and saved in
+[`bms/bms.kicad_pcb`](../bms/bms.kicad_pcb). it is still four layers and
+1.6 mm thick, with 149 footprints and the four perimeter mounting holes.
 
 | check | result |
 | --- | --- |
 | native connectivity | 0 unconnected items |
 | physical DRC | 0 errors |
 | schematic-to-board comparison | 0 mismatches |
-| schematic ERC | 0 errors |
-| thermal circuit tests | 13 passed |
-| electrical calculation checks | 31 passed |
-| filled power paths | connected in both grid sizes and both copper-margin cases |
-| battery-positive path to the fuse | connected through the actual layers and plated connections, without relying on thin sensing traces |
-| quiet raw return | connected, with the load return and Kelvin pickup kept separate |
+| schematic ERC | 0 errors, 92 existing warnings |
+| dangling tracks and vias | 0 warnings |
+| silkscreen and copper slivers | 0 warnings |
+| routing | 2,184 track segments, 398 vias |
+| library pad and drill comparison | 0 differences |
+| quiet return | 48 analogue pads, one join to the six bulk-return pads |
+| positive shunt pickup | meets the load path at the shunt pad |
+| main current paths | all nine checked through the filled copper and plated connections |
 
-the checks include the three probe pairs, charge/discharge temperature
-references, isolated control cable, retry circuits and regulator returns.
-the wide power tracks were converted to fills within their existing outlines
-where needed for signal-via clearance. the FET positions and shunt pickups
-were preserved. the clearances and rule severities were not relaxed.
+the cleanup merged straight fragments, removed unused tails and vias, and
+shortened unnecessary bends. there are 628 fewer track segments than the
+completed routing checkpoint before cleanup. the old connector-shaped
+battery-positive pour was removed and its test point now connects directly
+to the new connector. nine clipped labels were moved. component positions,
+pads, drills, 3D models, board outline and mounting holes were preserved.
+the clearances and rule severities were not relaxed.
 
-the saved board's hashes and counts are in
-[`bms-layout.json`](bms-layout.json). the power calculations use nominal
-35 um copper at 85 C. the 0.025/0.05 mm grids and 0.05 mm copper erosion are
-sensitivity checks, not measurements of a manufactured board. the 8 A
-copper screen does not establish an 8 A operating mode.
+C2230 and the reset supervisor now return through the bulk branch. the
+analogue return still uses the original single join. removing that join
+in the geometry check separates exactly the intended two groups. the
+positive current-sense lead has local pour clearances so load current does
+not enter it before the shunt. the modelled pickup offset fell from about
+5.09 mV to zero at the 5.6 A screening point.
+
+the power check uses a 0.1 mm sheet mesh, nominal 35 um copper and assumed
+20 um hole plating. it estimates copper resistance at 20 C and 80 C.
+it excludes connector and component resistance and does not predict
+temperature rise. 5.6 A is a fault-corner check, not a continuous rating.
+the firmware's qualified pack-current ceiling remains 3 A and the hardware
+qualification flags remain off.
 
 ## remaining warnings
 
-KiCad reports differences from library silkscreen graphics because some
-outlines were moved to the fabrication layers and printing was thickened.
-there are 73 library graphic warnings. the pads, drills and
-component positions were checked separately. it also flags eight short
-track ends and two vias connected on one layer. their component nets are
-connected; they are not missing pad connections. the report keeps these
-warnings visible.
+the 73 PCB warnings are differences from library graphics and text. pad and
+drill geometry matches the libraries. the warnings remain visible. ERC
+retains 89 cached-symbol differences and three ground-name warnings for
+the separate return domains.
 
-the fabrication check also enables the normally hidden categories. this
-adds eight off-centre track/via warnings on connected copper, for 91 warnings
-in that report. none are clearance, missing-connection or printing errors.
+source hashes, counts, preservation checks and copper estimates are in
+[`bms-layout.json`](bms-layout.json). these replace the old revision's
+layout results; the earlier 8 A screen is not evidence for this revision.
 
-ERC still has 89 cached-symbol differences and three ground-name warnings
-for the separate return domains. these are unchanged from the circuit review.
+## before ordering
 
-## assembly and first power
+the [PCBWay files](../manufacturing/bms/README.md), assembly views and
+test-point map still describe the previous revision. regenerate and check
+them against this saved board, including the new WAGO output, right-angle
+raw-pack connector and 5 A Schurter fuse.
 
-use the [front assembly view](../manufacturing/bms/front-assembly.svg),
-[back assembly view](../manufacturing/bms/back-assembly.svg) and
-[test-point map](../manufacturing/bms/test-points.csv). the small numbers
-on the board match the TPB references. point 14 uses a stacked number.
-crowded component references are shown in the assembly views.
-
-cell ratings, the actual harnesses, protection trips, temperature response
-and powered operation still need the tests in the
-[bring-up plan](../docs/BRINGUP_TEST_PLAN.md). confirm the finished copper,
-hole plating and assembly details with the fabricator before ordering.
+the actual cells, harnesses, protection trips, temperature response and
+powered operation still need the [bring-up checks](../docs/BRINGUP_TEST_PLAN.md).
+finished copper, hole plating and assembly details also need the fabricator's
+confirmation. this layout check is not an order release.
