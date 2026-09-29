@@ -1,6 +1,6 @@
 # cables and connectors
 
-updated 26 september 2026. the I/O signal cables, power looms, and BMS
+updated 28 september 2026. the I/O signal cables, power looms, and BMS
 control cable are separate connections. the old 68-pin I/O cables and
 30-pin BMS power cable are no longer part of this design.
 
@@ -42,8 +42,10 @@ switches, protection parts, and external connector/cable allowance.
 
 ## power between the main boards
 
-the saved connector revision is still being routed and checked. these are
-the new parts and pin maps; the complete installed harness is not qualified.
+the saved main-board connector positions now leave room for the proposed
+wire paths. see [harness fit](power-harness-fit.md) for coordinates, bends
+and service space. no new main-board routing was added. the complete
+installed harness is not qualified.
 
 | link | center terminal | I/O terminal | center pins, in order | I/O pins, in order |
 | --- | --- | --- | --- | --- |

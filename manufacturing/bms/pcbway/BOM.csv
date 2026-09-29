@@ -4,9 +4,7 @@ U11,1,Analog Devices,LTC4368IMS-1#PBF,LTC4368IMS-1 bidirectional pack protector,
 D2200,1,Diodes Incorporated,BAT54WS-7-F,BAT54WS protected control reverse-input block,Diode_SMD:D_SOD-323,SMT,exact part; no unapproved substitutions
 J2074,1,JST,SM05B-SRSS-TB(LF)(SN),isolated bms control,Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal,SMT,exact part; no unapproved substitutions
 J2200,1,JST,SM06B-SRSS-TB(LF)(SN),"three cell probes: paired 1/2, 3/4, 5/6",Connector_JST:JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal,SMT,exact part; no unapproved substitutions
-F1,1,Keystone Electronics,3568,"MINI fuse holder, fuse supplied separately",Fuse:Fuseholder_Blade_Mini_Keystone_3568,THT,exact part; no unapproved substitutions
-J2072,1,Molex,43650-0224,protected pack power,Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical,SMT,exact part; no unapproved substitutions
-J2,1,Molex,76829-0006,3S pack power + cell-tap harness,Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical,THT,exact part; no unapproved substitutions
+J2,1,Molex,43045-0400,3S pack power + cell-tap harness,Connector_Molex:Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal,THT,exact part; no unapproved substitutions
 C700,1,Murata,GRM155R71H332KA01,3.3nF >=50V LTC4368 CGATE,Capacitor_SMD:C_0402_1005Metric,SMT,exact part; no unapproved substitutions
 C724,1,Murata,GRM155R71H472KA01,4.7nF >=50V pack hot-swap slew,Capacitor_SMD:C_0402_1005Metric,SMT,exact part; no unapproved substitutions
 "C2211,C2212,C2213,C2240,C2241,C2242",6,Murata,GRM188R71H103KA01D,10n 50V NTC sense filter,Capacitor_SMD:C_0603_1608Metric,SMT,exact part; no unapproved substitutions
@@ -15,6 +13,7 @@ C724,1,Murata,GRM155R71H472KA01,4.7nF >=50V pack hot-swap slew,Capacitor_SMD:C_0
 C840,1,Murata,GRM21BR71H105KA12L,1u 25V X7R BQ77915 VDD,Capacitor_SMD:C_0805_2012Metric,SMT,exact part; no unapproved substitutions
 C725,1,Murata,GRM21BZ71E106KE15L,10u 25V X7R LTC4368 VOUT,Capacitor_SMD:C_0805_2012Metric,SMT,exact part; no unapproved substitutions
 R2254,1,Panasonic,ERJ2RKF1001X,1k local retry gate series,Resistor_SMD:R_0402_1005Metric,SMT,exact part; no unapproved substitutions
+F1,1,SCHURTER,3-101-056,"5A fast pack fuse: Schurter HCF, 1kA at 125VDC",ducktop2:Schurter_HCF_8.05x5mm,SMT,exact part; no unapproved substitutions
 C2243,1,TDK,C1005X7R1H103K050BB,10n 50V thermal reference filter,Capacitor_SMD:C_0402_1005Metric,SMT,exact part; no unapproved substitutions
 "C2201,C2254",2,TDK,CGA5L1X7R1H106K160AC,10u 50V thermal bias; require Ceff >=2u,Capacitor_SMD:C_1206_3216Metric,SMT,exact part; no unapproved substitutions
 U719,1,Texas Instruments,BQ7791500PWR,BQ7791500PWR autonomous 3S primary protector,Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm,SMT,exact part; no unapproved substitutions
@@ -28,6 +27,7 @@ U2204,1,Texas Instruments,TLV803EA29RDBZR,TLV803EA29RDBZR thermal startup hold,P
 "U2200,U2208",2,Texas Instruments,TPS70933DBVR,TPS70933DBVR raw-pack thermal bias,Package_TO_SOT_SMD:SOT-23-5,SMT,exact part; no unapproved substitutions
 RS11,1,Vishay Dale,WSLP25128L000FEA,8mOhm 1% 2W BQ77915 current shunt,Resistor_SMD:R_2512_6332Metric,SMT,exact part; no unapproved substitutions
 RS10,1,Vishay Dale,WSLP2512R0110FEA,11mOhm 1% 2W LTC4368 bounded pack-current shunt,Resistor_SMD:R_2512_6332Metric,SMT,exact part; no unapproved substitutions
+J2072,1,WAGO,2060-452/998-404,protected pack power,ducktop2:WAGO_2060_452_SMD,SMT,exact part; no unapproved substitutions
 "R707,R708,R709,R2230,R2231,R2232,R2235,R2238,R2250,R2251,R2255,R2264",12,Yageo,RC0603FR-07100KL,100k pack protector SHDN pull-up,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
 "R845,R846",2,Yageo,RC0603FR-07100RL,100R BQ77915 SRP filter,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions
 "R852,R853",2,Yageo,RC0603FR-0710KL,10k 5% PRES normal-mode pull-up,Resistor_SMD:R_0603_1608Metric,SMT,exact part; no unapproved substitutions

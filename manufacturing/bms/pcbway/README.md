@@ -1,9 +1,5 @@
 # bms order files
 
-26 september 2026: this describes the previous BMS revision. the current
-board has connector, fuse and placement changes with routing still unfinished.
-these files are not current order files.
-
 this is the pcbway package for the four-layer bms. the exact source files,
 checks and output hashes are recorded in `manifest.json` and `SHA256SUMS.txt`.
 these are checked prototype files. pcbway has not reviewed or quoted this
@@ -14,12 +10,11 @@ package yet, and no order has been submitted.
 - `bms_GERBERS.zip`: bare-board fabrication files, including separate plated
   and unplated drills. all four copper layers are included.
 - `BOM.csv`: 125 fitted parts, grouped into 60 part numbers.
-- `CPL.csv`: 123 smt placements, 77 on top and 46 underneath.
-- `through-hole-positions.csv`: F1 and J2, both fitted from the top.
-- `loose-parts.csv`: one removable 10 A fuse per assembled board.
+- `CPL.csv`: 124 smt placements, 78 on top and 46 underneath.
+- `through-hole-positions.csv`: J2, fitted from the top.
 - `paste/`: top and bottom stencil artwork. the power-fet stencil windows
   are intentional. the assembler should review stencil thickness and process.
-- `bms.ipc`: the bare-board electrical test netlist, with 809 records and 73 nets.
+- `bms.ipc`: the bare-board electrical test netlist, with 808 records and 73 nets.
 - `assembly/`: both assembly drawings and the test-point map.
 - `previews/`: rendered gerbers for inspection. the gerbers control fabrication.
 
@@ -47,8 +42,8 @@ underneath; it is not the coordinate convention used by the cpl.
 | impedance control | not required |
 | electrical test | flying probe against the supplied IPC-D-356 netlist |
 
-the four support holes are unplated circular cutouts in Edge.Cuts. the two
-3 mm holes in the NPTH drill file are J2's locating holes. retain all six.
+the four support holes are unplated circular cutouts in Edge.Cuts. the
+NPTH drill file also contains J2's 3 mm locating hole. retain all five.
 
 the cad dielectric entries total about 1.626 mm. they are indicative, not a
 custom impedance stackup. quote a standard 1.6 mm build with 1 oz copper on
@@ -62,13 +57,14 @@ fit the exact BOM, including the 0.1% thermal resistors and both current
 shunts. substitutions need review. do not replace BQ7791500 with another
 threshold option, or LTC4368-1 with the -2 variant.
 
-F1 in the placement drawing is the Keystone 3568 through-hole holder. the
-Littelfuse 0297010.WXNV fuse is a separate purchased part and should be
-supplied loose. test pads are exposed copper, not components to fit.
+F1 is the SCHURTER 3-101-056 HCF fuse, 5 A, fast acting, with a 1000 A
+interrupt rating at 125 VDC under the specified L/R condition. it is an SMT
+part, not a holder or a removable fuse. use the exact part. test pads are
+exposed copper, not components to fit.
 
-the smt count is 379 copper lands. the 48 extra power-fet stencil windows
+the smt count is 381 copper lands. the extra power-fet stencil windows
 are apertures within those lands, not extra components or solder joints.
-there are ten soldered through holes, excluding vias and locating holes.
+there are 4 soldered through holes, excluding vias and locating holes.
 use the supplied paste apertures, check polarity and inspect the power-fet
 joints. use lead-free assembly and component-appropriate reflow profiles.
 
@@ -77,9 +73,17 @@ supports. batteries, probe wiring and the mating cable harnesses are not
 included in this pcb assembly order. no programming is required on the bms.
 powered protection tests will be done during bring-up with simulated cells.
 
-J2 is the tall Mega-Fit connector, not a low-profile header. Molex lists
-14.8 mm unmated and 16.78 mm mated height, before cable bending space.
-the two bottom JST connectors also need access for their mating cables.
+J2 is the right-angle Molex 43045-0400 Micro-Fit header. its mating cable
+uses 43025-0400 and tin 43030-0038 contacts. the plug drawing gives a
+10.81 mm mated height and 11 mm latch envelope above the PCB. reserve the
+plug and cable space shown in the harness notes, including 12.7 mm of free
+wire before bending. the front pin row is 9.80 mm from the board edge;
+Molex allows 10.16 mm maximum. keep the combined header/edge positioning
+error within 0.25 mm toward the edge-clearance limit.
+
+J2072 is the two-pole WAGO 2060-452/998-404. the assembler must solder both
+lands for each contact. its body is 4.5 mm high; the wire and release-tool
+space are separate. the two bottom JST connectors also need cable access.
 
 pcbway can add process rails and fiducials if their assembly setup needs
 them. send the panel drawing for review; do not change the finished outline,
@@ -106,11 +110,14 @@ mask openings expose no via holes, including a 0.05 mm outward-margin screen
 around the smt mask openings. the stencil openings stay on pads. confirm
 the actual mask registration with pcbway; this screen is a design check.
 
-the reports retain 73 library graphic differences, eight connected track-end
-flags, two single-layer via flags and eight off-centre track/via flags.
-the last category was re-enabled for this review. no electrical errors or
-silkscreen violations were waived. the 92 existing ERC warnings are recorded
-separately. `checks/layout-checks.json` holds the power-path review.
+the refilled report retains these warnings: 19 track_not_centered_on_via, 73 lib_footprint_mismatch.
+no electrical errors, dangling copper or silkscreen violations were waived.
+the existing ERC warnings are recorded separately in the manifest.
+the generic fuse and two-pin connector symbols also retain their library-name
+filter warnings for F1 and J2072. their exact footprints, pads and pin maps
+are checked separately; no netlist mismatch is accepted.
+`checks/layout-checks.json` holds the power-path review. the 3 A pack
+qualification limit remains in force; a 5 A fuse does not raise it.
 
 install `gen/requirements-bms-fabrication.txt` in a local virtual environment.
 run `python gen/generate_bms_pcbway_package.py --output NEW_PACKAGE --work
@@ -125,5 +132,7 @@ a source edit makes the old package stale.
 - [pcbway fabrication limits](https://www.pcbway.com/capabilities.html)
 - [pcbway assembly files](https://www.pcbway.com/assembly-file-requirements.html)
 - [pcbway confirms assembly from one piece](https://www.pcbway.com/blog/PCB_Basic_Information/PCBWay_Q_A_003___Common_Questions_for_PCBA_Ordering_01.html)
-- [molex 76829 connector dimensions](https://www.molex.com/en-us/products/series-chart/76829)
-- [keystone 3568 fuse holder](https://www.keyelco.com/product.cfm/product_id/306)
+- [molex 43045-0400 header](https://www.molex.com/en-us/products/part-detail/430450400)
+- [molex 43025-0400 plug drawing](https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/430/43025/430250400_sd.pdf)
+- [schurter HCF fuse](https://www.schurter.com/en/datasheet/typ_HCF.pdf)
+- [WAGO 2060-452](https://www.wago.com/2060-452/998-404)

@@ -12,19 +12,27 @@
 | schematic ERC | 0 errors, 92 existing warnings |
 | dangling tracks and vias | 0 warnings |
 | silkscreen and copper slivers | 0 warnings |
-| routing | 2,184 track segments, 398 vias |
+| routing | 2,187 track segments, 398 vias |
 | library pad and drill comparison | 0 differences |
 | quiet return | 48 analogue pads, one join to the six bulk-return pads |
 | positive shunt pickup | meets the load path at the shunt pad |
 | main current paths | all nine checked through the filled copper and plated connections |
+| solder-mask openings | no exposed via holes, including the 0.05 mm registration screen |
 
 the cleanup merged straight fragments, removed unused tails and vias, and
-shortened unnecessary bends. there are 628 fewer track segments than the
+shortened unnecessary bends. there are 625 fewer track segments than the
 completed routing checkpoint before cleanup. the old connector-shaped
 battery-positive pour was removed and its test point now connects directly
 to the new connector. nine clipped labels were moved. component positions,
-pads, drills, 3D models, board outline and mounting holes were preserved.
+component pads and holes, 3D models, board outline and mounting holes were preserved.
 the clearances and rule severities were not relaxed.
+
+the assembly check found two via holes inside the new WAGO solder openings.
+both vias now sit outside those openings. three short connections preserve
+their layer joins. the via diameters and drill sizes are unchanged, and the
+exported masks also pass with a 0.05 mm outward registration allowance.
+all nine copper-path estimates were repeated; the largest resistance change
+was 0.057 milliohms. the quiet return still passes the same separation check.
 
 C2230 and the reset supervisor now return through the bulk branch. the
 analogue return still uses the original single join. removing that join
@@ -42,8 +50,12 @@ qualification flags remain off.
 
 ## remaining warnings
 
-the 73 PCB warnings are differences from library graphics and text. pad and
-drill geometry matches the libraries. the warnings remain visible. ERC
+the normal board check retains 73 differences from library graphics and
+text. pad and drill geometry matches the libraries. the fabrication pass
+also restores 19 off-centre track/via warnings and two generic-symbol
+footprint-name filter warnings. the off-centre endpoints are within their
+via lands, and the exact footprint and netlist checks pass. all of these
+warnings remain in the package reports. ERC
 retains 89 cached-symbol differences and three ground-name warnings for
 the separate return domains.
 
@@ -54,9 +66,10 @@ layout results; the earlier 8 A screen is not evidence for this revision.
 ## before ordering
 
 the [PCBWay files](../manufacturing/bms/README.md), assembly views and
-test-point map still describe the previous revision. regenerate and check
-them against this saved board, including the new WAGO output, right-angle
-raw-pack connector and 5 A Schurter fuse.
+test-point map now match this saved board, including the new WAGO output,
+right-angle raw-pack connector and 5 A Schurter fuse. the package has its
+own source hashes and file checksums. any later source edit needs a fresh
+export and verification.
 
 the actual cells, harnesses, protection trips, temperature response and
 powered operation still need the [bring-up checks](../docs/BRINGUP_TEST_PLAN.md).

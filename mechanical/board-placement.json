@@ -103,11 +103,13 @@
         ]
       ],
       "wire_awg": 18,
-      "wire_length_budget_mm": 75,
+      "wire_length_budget_mm": 90,
       "installed_length_mm": null,
-      "minimum_mated_height_above_pcb_mm": 17.56,
-      "height_note": "connector stack only; add the actual wire bend and strain relief",
-      "mapping": "pin 1 to 1; pin 2 to 2; mounting pads isolated"
+      "minimum_mated_height_above_pcb_mm": 4.5,
+      "height_note": "terminal body only; add the wire and service envelopes",
+      "mapping": "center pin 1 to BMS pin 2 for FG_VSS; center pin 2 to BMS pin 1 for PACK_POS_FUSED",
+      "terminal_mpn": "2060-452/998-404",
+      "wire_series": "Alpha Wire 6715"
     },
     "control": {
       "ends": [

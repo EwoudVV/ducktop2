@@ -36,8 +36,10 @@ the case study contains the mounting schedule, Framework hinge supports,
 keyboard and trackpad supports, battery trays, lid, cooling reservations,
 STEP/STL exports and an interactive viewer. its exports still use the
 previous PCB snapshots. the 35 mm study has unresolved harness conflicts;
-the final thickness is still undecided. new plug, wire, clamp and service
-clearance checks are not finished.
+the final thickness is still undecided. the saved connector placements now
+have [proposed wire paths and service requirements](power-harness-fit.md).
+raw-pack lead measurements, clamps and the complete assembly check remain.
 
-the BMS quote files under `manufacturing/bms/` describe the previous
-revision. they must be regenerated for the new connectors, fuse and saved layout.
+the BMS quote files under `manufacturing/bms/` have been regenerated and
+checked against the saved board. the assembly review moved two vias clear
+of the WAGO solder openings. factory review and physical tests remain.

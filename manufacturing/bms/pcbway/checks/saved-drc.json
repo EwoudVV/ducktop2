@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-09-22T07:25:45",
+    "date": "2026-09-28T19:05:59",
     "ignored_checks": [],
     "included_severities": [
         "error",
@@ -9,193 +9,51 @@
         "exclusion"
     ],
     "kicad_version": "10.0.4",
-    "schematic_parity": [],
+    "schematic_parity": [
+        {
+            "description": "ducktop2:Schurter_HCF_8.05x5mm doesn't match symbol's footprint filters (*Fuse*)",
+            "items": [
+                {
+                    "description": "Footprint F1",
+                    "pos": {
+                        "x": 110.95,
+                        "y": 82.15
+                    },
+                    "uuid": "1fe8d715-09c7-4716-8a3f-dab84860811e"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_filters_mismatch"
+        },
+        {
+            "description": "ducktop2:WAGO_2060_452_SMD doesn't match symbol's footprint filters (Connector*:*_1x??_*)",
+            "items": [
+                {
+                    "description": "Footprint J2072",
+                    "pos": {
+                        "x": 140.15,
+                        "y": 68.05
+                    },
+                    "uuid": "4caf133b-4791-4f71-a168-f4288591956c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_filters_mismatch"
+        }
+    ],
     "source": "bms.kicad_pcb",
     "unconnected_items": [],
     "violations": [
         {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [/BMS_VC1] on F.Cu, length 0.1598 mm",
-                    "pos": {
-                        "x": 129.128982,
-                        "y": 83.638027
-                    },
-                    "uuid": "7e88bd5d-d94c-40b2-a383-948cd7ff7ad6"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [FG_VSS] on F.Cu, length 0.2198 mm",
-                    "pos": {
-                        "x": 162.1695,
-                        "y": 71.550343
-                    },
-                    "uuid": "833f6401-9573-4d0f-9938-4a395684319f"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "Via [FG_VSS] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 166.2,
-                        "y": 69.8
-                    },
-                    "uuid": "d607fc2a-e652-45d0-812d-9c7076be8bb6"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "Via [/BAT_PROT_GATE] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 129.35,
-                        "y": 67.1
-                    },
-                    "uuid": "ec13fa99-8198-45f3-8ad6-edab257e0d82"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [/PROT_CTRL_3V3] on F.Cu, length 0.0699 mm",
-                    "pos": {
-                        "x": 156.15,
-                        "y": 82.85
-                    },
-                    "uuid": "8f315bef-bf5a-4e83-a95f-04a3a3ab8033"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [/PACK_NEG_RAW] on F.Cu, length 0.0699 mm",
-                    "pos": {
-                        "x": 141.275549,
-                        "y": 93.450549
-                    },
-                    "uuid": "fe8b58e1-db56-4645-aa2c-7ad449584c36"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [/PACK_NEG_RAW] on In1.Cu, length 0.1296 mm",
-                    "pos": {
-                        "x": 129.291667,
-                        "y": 68.55
-                    },
-                    "uuid": "6ff3bf47-568f-4083-a362-3b7f7cad35ba"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [/PACK_NEG_RAW] on In2.Cu, length 0.0461 mm",
-                    "pos": {
-                        "x": 120.692426,
-                        "y": 85.057574
-                    },
-                    "uuid": "3c406a60-5c1a-4a6e-b8f6-2ba13913c0b8"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [/PACK_NEG_RAW] on In2.Cu, length 0.3182 mm",
-                    "pos": {
-                        "x": 138.446214,
-                        "y": 86.446215
-                    },
-                    "uuid": "67bf2316-0158-404a-a9ae-a9fc04802951"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [/THERM_PROBE_2_A] on B.Cu, length 0.0636 mm",
-                    "pos": {
-                        "x": 135.375,
-                        "y": 68.325
-                    },
-                    "uuid": "570090ad-af17-406c-a2f5-446b6250e436"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
             "description": "Track endpoint not centered on via",
             "items": [
                 {
-                    "description": "Track [FG_VSS] on F.Cu, length 0.5643 mm",
+                    "description": "Track [FG_VSS] on F.Cu, length 8.6974 mm",
                     "pos": {
-                        "x": 146.051,
-                        "y": 68.651
+                        "x": 158.9,
+                        "y": 91.9
                     },
-                    "uuid": "2dbe09cb-4aae-492b-9b4d-4a6c708e1e3e"
-                },
-                {
-                    "description": "Via [FG_VSS] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 146.25,
-                        "y": 68.8
-                    },
-                    "uuid": "3c1a7985-f8bb-4ba9-a4bf-2199663b5778"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_not_centered_on_via"
-        },
-        {
-            "description": "Track endpoint not centered on via",
-            "items": [
-                {
-                    "description": "Track [FG_VSS] on F.Cu, length 5.3033 mm",
-                    "pos": {
-                        "x": 162.65,
-                        "y": 88.15
-                    },
-                    "uuid": "5f17bed2-af1d-4503-a475-a8637c2b6df4"
+                    "uuid": "6311fede-2f37-48e4-acc5-6d695954ad04"
                 },
                 {
                     "description": "Via [FG_VSS] on F.Cu - B.Cu",
@@ -204,52 +62,6 @@
                         "y": 91.8
                     },
                     "uuid": "019d9257-4fc9-4f66-879c-3c08e56f7f40"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_not_centered_on_via"
-        },
-        {
-            "description": "Track endpoint not centered on via",
-            "items": [
-                {
-                    "description": "Track [FG_VSS] on F.Cu, length 1.1300 mm",
-                    "pos": {
-                        "x": 146.9,
-                        "y": 69.45
-                    },
-                    "uuid": "c188fb04-0984-4612-b578-814271da00ef"
-                },
-                {
-                    "description": "Via [FG_VSS] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 146.25,
-                        "y": 68.8
-                    },
-                    "uuid": "3c1a7985-f8bb-4ba9-a4bf-2199663b5778"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_not_centered_on_via"
-        },
-        {
-            "description": "Track endpoint not centered on via",
-            "items": [
-                {
-                    "description": "Track [FG_VSS] on F.Cu, length 0.0500 mm",
-                    "pos": {
-                        "x": 146.101,
-                        "y": 68.651
-                    },
-                    "uuid": "d2017909-054c-42f1-b4f8-1a0099331ca6"
-                },
-                {
-                    "description": "Via [FG_VSS] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 146.25,
-                        "y": 68.8
-                    },
-                    "uuid": "3c1a7985-f8bb-4ba9-a4bf-2199663b5778"
                 }
             ],
             "severity": "warning",
@@ -282,12 +94,81 @@
             "description": "Track endpoint not centered on via",
             "items": [
                 {
-                    "description": "Track [/THERM_3V3] on In1.Cu, length 0.6475 mm",
+                    "description": "Track [/BAT_PROT_VIN] on F.Cu, length 2.2250 mm",
                     "pos": {
-                        "x": 128.232872,
-                        "y": 60.417128
+                        "x": 127.275,
+                        "y": 72.55
                     },
-                    "uuid": "e40a7685-df01-4e9a-9fad-14d206e0c32f"
+                    "uuid": "b64b88d4-5b32-4a56-87da-805e8c5d5d71"
+                },
+                {
+                    "description": "Via [/BAT_PROT_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 127.2,
+                        "y": 72.4
+                    },
+                    "uuid": "45d37ace-8f1b-4aaf-a508-de2318aa3cfc"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/BAT_PROT_VIN] on F.Cu, length 0.1061 mm",
+                    "pos": {
+                        "x": 127.2,
+                        "y": 72.625
+                    },
+                    "uuid": "bed645c9-1f97-4948-9f3d-ec4f49edeecc"
+                },
+                {
+                    "description": "Via [/BAT_PROT_VIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 127.2,
+                        "y": 72.4
+                    },
+                    "uuid": "45d37ace-8f1b-4aaf-a508-de2318aa3cfc"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/PACK_POS_FUSED] on B.Cu, length 3.1000 mm",
+                    "pos": {
+                        "x": 144.35,
+                        "y": 82.1
+                    },
+                    "uuid": "8be98955-7679-472e-851a-641b8e73bbdb"
+                },
+                {
+                    "description": "Via [/PACK_POS_FUSED] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 144.25,
+                        "y": 82.1
+                    },
+                    "uuid": "1379d985-b808-40e9-a846-90dc3cbce320"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/THERM_3V3] on In1.Cu, length 1.5314 mm",
+                    "pos": {
+                        "x": 127.15,
+                        "y": 61.5
+                    },
+                    "uuid": "b33330e9-443d-4d43-81b8-94f10eb42681"
                 },
                 {
                     "description": "Via [/THERM_3V3] on F.Cu - B.Cu",
@@ -296,6 +177,52 @@
                         "y": 60.65
                     },
                     "uuid": "3c6792e4-49c1-4920-8ea0-ee52b5a808a4"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/THERM_CHG_HOT_REF] on B.Cu, length 0.5625 mm",
+                    "pos": {
+                        "x": 148.4375,
+                        "y": 62.2875
+                    },
+                    "uuid": "72db4060-208d-4a2d-adb0-9c578fea55a4"
+                },
+                {
+                    "description": "Via [/THERM_CHG_HOT_REF] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 148.4375,
+                        "y": 62.6
+                    },
+                    "uuid": "fe4e9e1a-a914-42be-94f9-2d9a91aba67b"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/THERM_CHG_HOT_REF] on B.Cu, length 1.6971 mm",
+                    "pos": {
+                        "x": 149.6375,
+                        "y": 64.05
+                    },
+                    "uuid": "fca1d805-0d79-4c97-abfd-ec1dd43e9c01"
+                },
+                {
+                    "description": "Via [/THERM_CHG_HOT_REF] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 148.4375,
+                        "y": 62.6
+                    },
+                    "uuid": "fe4e9e1a-a914-42be-94f9-2d9a91aba67b"
                 }
             ],
             "severity": "warning",
@@ -331,9 +258,9 @@
                     "description": "Track [/PACK_NEG_RAW] on In1.Cu, length 2.6750 mm",
                     "pos": {
                         "x": 132.199999,
-                        "y": 79.55
+                        "y": 82.225
                     },
-                    "uuid": "a50ef747-acd3-42ab-9f53-1f1b426bb49e"
+                    "uuid": "a815780d-9fa7-4380-af02-721c9ab2c912"
                 },
                 {
                     "description": "Via [/PACK_NEG_RAW] on F.Cu - B.Cu",
@@ -348,13 +275,220 @@
             "type": "track_not_centered_on_via"
         },
         {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/CTRL_GND] on B.Cu, length 1.0889 mm",
+                    "pos": {
+                        "x": 163.575,
+                        "y": 70.455
+                    },
+                    "uuid": "37d9c2c1-1f0a-4146-9957-21f72a7a6e04"
+                },
+                {
+                    "description": "Via [/CTRL_GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 164.32,
+                        "y": 71.2
+                    },
+                    "uuid": "6924272c-3117-4aea-978d-582b928afe86"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/CTRL_GND] on B.Cu, length 0.9050 mm",
+                    "pos": {
+                        "x": 164.345,
+                        "y": 71.225
+                    },
+                    "uuid": "8aeeb201-46bc-468e-aec5-2bcad0fcea51"
+                },
+                {
+                    "description": "Via [/CTRL_GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 164.32,
+                        "y": 71.2
+                    },
+                    "uuid": "6924272c-3117-4aea-978d-582b928afe86"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/CTRL_GND] on In1.Cu, length 0.4625 mm",
+                    "pos": {
+                        "x": 148.9125,
+                        "y": 91.975
+                    },
+                    "uuid": "87e3b474-8526-4714-ab61-6919e033632b"
+                },
+                {
+                    "description": "Via [/CTRL_GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 149.0875,
+                        "y": 91.975
+                    },
+                    "uuid": "150dac20-3769-4070-b109-71ae7bb4f2f1"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/CTRL_GND] on In1.Cu, length 1.9269 mm",
+                    "pos": {
+                        "x": 148.9125,
+                        "y": 91.975
+                    },
+                    "uuid": "9c2ce636-01d3-46da-8aba-09901c29f53a"
+                },
+                {
+                    "description": "Via [/CTRL_GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 149.0875,
+                        "y": 91.975
+                    },
+                    "uuid": "150dac20-3769-4070-b109-71ae7bb4f2f1"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/BMS_SRP] on F.Cu, length 1.0677 mm",
+                    "pos": {
+                        "x": 128.875,
+                        "y": 85.475
+                    },
+                    "uuid": "0cfea31d-b602-47c2-b0e2-2ca376dcbdef"
+                },
+                {
+                    "description": "Via [/BMS_SRP] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 129.0,
+                        "y": 85.6
+                    },
+                    "uuid": "4b881efc-9db4-4221-960a-9a406aac8a9d"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/BMS_SRP] on F.Cu, length 1.2000 mm",
+                    "pos": {
+                        "x": 127.675,
+                        "y": 85.475
+                    },
+                    "uuid": "9392cf9a-5226-40c0-8f26-335197053892"
+                },
+                {
+                    "description": "Via [/BMS_SRP] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 129.0,
+                        "y": 85.6
+                    },
+                    "uuid": "4b881efc-9db4-4221-960a-9a406aac8a9d"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/CELL2_TAP] on F.Cu, length 1.2021 mm",
+                    "pos": {
+                        "x": 124.2,
+                        "y": 86.2
+                    },
+                    "uuid": "609b5590-754b-4571-b4a9-dc11cf946df3"
+                },
+                {
+                    "description": "Via [/CELL2_TAP] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 124.125,
+                        "y": 86.125
+                    },
+                    "uuid": "5baabe11-c81a-435f-845c-bed6df4f3914"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/THERM_READY] on B.Cu, length 0.2482 mm",
+                    "pos": {
+                        "x": 116.251786,
+                        "y": 91.348214
+                    },
+                    "uuid": "5b64237d-f22d-4fd8-91cc-898c0aa4db9c"
+                },
+                {
+                    "description": "Via [/THERM_READY] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 116.25,
+                        "y": 91.4
+                    },
+                    "uuid": "258a42a3-da44-4c7a-b353-8afc14d10360"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [/THERM_READY] on B.Cu, length 0.0025 mm",
+                    "pos": {
+                        "x": 116.25,
+                        "y": 91.35
+                    },
+                    "uuid": "70f7110a-db05-4abe-b7d8-fda535c41ab0"
+                },
+                {
+                    "description": "Via [/THERM_READY] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 116.25,
+                        "y": 91.4
+                    },
+                    "uuid": "258a42a3-da44-4c7a-b353-8afc14d10360"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_not_centered_on_via"
+        },
+        {
             "description": "Footprint 'C_0805_2012Metric' does not match copy in library 'Capacitor_SMD'",
             "items": [
                 {
                     "description": "Footprint C843",
                     "pos": {
-                        "x": 115.9,
-                        "y": 80.35
+                        "x": 126.2,
+                        "y": 74.0
                     },
                     "uuid": "012058f2-30c5-43b7-a1fd-0e6d9136bf73"
                 }
@@ -443,7 +577,7 @@
                 {
                     "description": "Footprint R2218",
                     "pos": {
-                        "x": 132.0,
+                        "x": 131.5,
                         "y": 67.25
                     },
                     "uuid": "239da78a-cbdd-4944-a7c9-1812527f8125"
@@ -548,8 +682,8 @@
                 {
                     "description": "Footprint TPB14",
                     "pos": {
-                        "x": 128.05,
-                        "y": 77.8
+                        "x": 148.8,
+                        "y": 85.5
                     },
                     "uuid": "4925ff6c-ad7f-4d50-b8b9-b911c8c7236d"
                 }
@@ -593,8 +727,8 @@
                 {
                     "description": "Footprint TPB2",
                     "pos": {
-                        "x": 128.5,
-                        "y": 75.3
+                        "x": 129.5,
+                        "y": 72.55
                     },
                     "uuid": "52f83219-ff05-4577-ad47-7c0e82c7dd8a"
                 }
@@ -623,8 +757,8 @@
                 {
                     "description": "Footprint TPB11",
                     "pos": {
-                        "x": 115.85,
-                        "y": 83.85
+                        "x": 108.5,
+                        "y": 92.0
                     },
                     "uuid": "644a0086-8c2e-4025-a60e-a27ce0fb0376"
                 }
@@ -639,7 +773,7 @@
                     "description": "Footprint TPB3",
                     "pos": {
                         "x": 149.25,
-                        "y": 72.7
+                        "y": 73.95
                     },
                     "uuid": "691bcd7a-4678-4fe6-87ea-48bf69f01972"
                 }
@@ -648,13 +782,13 @@
             "type": "lib_footprint_mismatch"
         },
         {
-            "description": "Footprint 'TestPoint_Pad_1.5x1.5mm' does not match copy in library 'TestPoint'",
+            "description": "Footprint 'TestPoint_Pad_D1.0mm' does not match copy in library 'TestPoint'",
             "items": [
                 {
                     "description": "Footprint TPB13",
                     "pos": {
-                        "x": 123.5,
-                        "y": 74.15
+                        "x": 123.4,
+                        "y": 73.9
                     },
                     "uuid": "6bc849b9-526c-45af-9c79-cc0fdb69fe88"
                 }
@@ -713,8 +847,8 @@
                 {
                     "description": "Footprint TPB12",
                     "pos": {
-                        "x": 126.0,
-                        "y": 74.2
+                        "x": 148.8,
+                        "y": 89.0
                     },
                     "uuid": "78513239-d90f-4e20-a6c0-c7306c189a65"
                 }
@@ -1283,8 +1417,8 @@
                 {
                     "description": "Footprint R708",
                     "pos": {
-                        "x": 163.25,
-                        "y": 83.25
+                        "x": 166.5,
+                        "y": 84.5
                     },
                     "uuid": "8b0df140-2d8f-40e6-a066-c023b527f1c0"
                 }

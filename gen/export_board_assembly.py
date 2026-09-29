@@ -8,11 +8,13 @@ import hashlib
 import html
 import json
 import math
+import sys
 from pathlib import Path
 
-import wx
-app = wx.App(False)
-wx.Log.EnableLogging(False)
+if '--headless' not in sys.argv:
+    import wx
+    app = wx.App(False)
+    wx.Log.EnableLogging(False)
 import pcbnew as pcb
 import fpc_contract as interconnect
 
@@ -49,7 +51,7 @@ def label(x, y, text, size=2.2, color="#344e40"):
 def courtyard_rings(footprint, spec):
     footprint.BuildCourtyardCaches()
     result = {}
-    for side, layer in (("front", pcb.F_CrtYd), ("back", pcb.B_CrtYd)):
+    for side, layer in (("front", pcb.F_Cu), ("back", pcb.B_Cu)):
         courtyard = footprint.GetCourtyard(layer)
         result[side] = [ring(courtyard.COutline(i), spec) for i in range(courtyard.OutlineCount())]
     return result
@@ -179,7 +181,7 @@ for name, card in config["m2_cards"].items():
 data["m2_mount_checks"] = mount_checks
 data["bms_harnesses"] = {}
 for name, maps, refs, footprint_id, mpn, housing, contact in (
-    ("power", {"center": interconnect.BMS_POWER_PINMAP, "bms": interconnect.BMS_POWER_PINMAP},
+    ("power", {"center": interconnect.BMS_POWER_CENTER_PINMAP, "bms": interconnect.BMS_POWER_PINMAP},
      interconnect.BMS_POWER_REFS, interconnect.BMS_POWER_FOOTPRINT, interconnect.BMS_POWER_MPN,
      interconnect.BMS_POWER_HOUSING, interconnect.BMS_POWER_CONTACT),
     ("control", {"center": interconnect.BMS_CONTROL_CENTER_PINMAP, "bms": interconnect.BMS_CONTROL_PINMAP},
@@ -197,10 +199,17 @@ for name, maps, refs, footprint_id, mpn, housing, contact in (
         pads = {pad.GetNumber(): pad for pad in footprint.Pads()}
         for pin, net in maps[board_name].items():
             assert str(pin) in pads, f"{reference} is missing pin {pin}"
-            actual = pads[str(pin)].GetNetname().rsplit("/", 1)[-1]
-            assert actual == net, f"{reference} pin {pin}: {actual} instead of {net}"
+            contacts = [pad for pad in footprint.Pads() if pad.GetNumber() == str(pin)]
+            if name == "power":
+                assert len(contacts) == 2, f"{reference} needs both solder contacts for pin {pin}"
+            for pad in contacts:
+                actual = pad.GetNetname().rsplit("/", 1)[-1]
+                assert actual == net, f"{reference} pin {pin}: {actual} instead of {net}"
         mounting_pads = [pad for pad in footprint.Pads() if pad.GetNumber() == "MP"]
-        assert mounting_pads, f"{reference} is missing its hold-down pads"
+        if name == "power":
+            assert not mounting_pads, f"{reference} still has the old connector hold-down pads"
+        else:
+            assert mounting_pads, f"{reference} is missing its hold-down pads"
         for pad in mounting_pads:
             mp_net = pad.GetNetname().rsplit("/", 1)[-1]
             if name == "power":
@@ -214,10 +223,12 @@ for name, maps, refs, footprint_id, mpn, housing, contact in (
     straight = math.dist(a, z)
     assert straight < spec["wire_length_budget_mm"], f"{name} harness cannot fit its wire-length budget"
     for pin in maps["center"]:
+        bms_pin = next(p for p, net in maps["bms"].items() if net == maps["center"][pin]) if name == "power" else pin
         rows.append({"center_pin": pin, "center_net": maps["center"][pin],
-                     "bms_pin": pin, "bms_net": maps["bms"][pin]})
+                     "bms_pin": bms_pin, "bms_net": maps["bms"][bms_pin]})
     data["bms_harnesses"][name] = {**spec, "ends": ends, "pcb_connector_mpn": mpn,
-                                   "housing_mpn": housing, "contact_mpn": contact,
+                                   "housing_mpn": None if name == "power" else housing,
+                                   "contact_mpn": None if name == "power" else contact,
                                    "connections": rows, "origin_distance_mm": round(straight, 6),
                                    "installed_route_verified": False}
     color = "#b98237" if name == "power" else "#627cab"

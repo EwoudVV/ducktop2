@@ -20,6 +20,12 @@ main-board coordinates below were checked on 10 september 2026.
 | JOMAA trackpad | 140 x 105 mm | Height, travel, mounting, plug and bend clearance |
 | Speakers | 38 x 18 mm each in plan view | Depth, fastening, acoustic volume and openings |
 
+the cell footprints come from the recorded measurements in the
+[old battery-band layout](../../reference/floorplans/floorplan_revC_battery_band.json).
+the archived measurement notes at commit `8bd7a2d` explicitly confirm
+100 x 60 mm per cell, while leaving thickness and tabs unmeasured. the
+10 mm thickness in the case study is still an assumption.
+
 ## packaging
 
 the left, center, and right PCBs use the original shared XY frame. their

@@ -8,8 +8,11 @@ import sys
 
 
 def main():
-    import wx
-    app = wx.App(False)
+    # The geometry export uses no window or text rendering. Batch builds can
+    # skip wx startup, which can wait on macOS session-restoration dialogs.
+    if '--headless' not in sys.argv[3:]:
+        import wx
+        app = wx.App(False)
     import pcbnew as p
     source, output = map(Path, sys.argv[1:3])
     root = Path(__file__).resolve().parents[1]
@@ -49,7 +52,8 @@ def main():
               'copper_layers': [b.GetLayerName(x) for x in copper],
               'thickness_mm': b.GetDesignSettings().GetBoardThickness() / 1e6,
               'footprints': [], 'copper': [], 'drills': [], 'tracks': [],
-              'library_pad_differences': [], 'library_sha256': {}, 'vias': []}
+              'library_pad_differences': [], 'library_sha256': {}, 'vias': [],
+              'edge_primitives': []}
     for f in b.GetFootprints():
         pads = []
         for pad in f.Pads():
@@ -94,6 +98,11 @@ def main():
                     result['copper'].append({'kind': 'graphic', 'id': item.m_Uuid.AsString(),
                         'net': '', 'layer': b.GetLayerName(layer), 'polygons': shape(item, layer)})
     for item in list(b.GetTracks()) + list(b.GetDrawings()):
+        if isinstance(item, p.PCB_SHAPE) and item.GetLayer() == p.Edge_Cuts:
+            result['edge_primitives'].append({'id': item.m_Uuid.AsString(),
+                'shape': item.GetShapeStr(), 'start': xy(item.GetStart()),
+                'end': xy(item.GetEnd()), 'mid': xy(item.GetArcMid()),
+                'width': item.GetWidth() / 1e6})
         via = isinstance(item, p.PCB_VIA)
         if via:
             result['drills'].append({'position': xy(item.GetPosition()),
@@ -124,6 +133,7 @@ def main():
     if not b.GetBoardPolygonOutlines(outline, False):
         raise RuntimeError('invalid board outline')
     result['outline'] = polys(outline)
+    result['edge_primitives'].sort(key=lambda item: item['id'])
     output.write_text(json.dumps(result, separators=(',', ':')) + '\n')
     print(json.dumps({k: result[k] for k in ('native_airwires', 'copper_layers',
           'board_sha256', 'library_pad_differences')}))

@@ -1,14 +1,14 @@
 pcb drc --severity-all --all-track-errors --schematic-parity --format json --output package/checks/saved-drc.json bms/bms.kicad_pcb
-Found 91 violations
+Found 92 violations
 Found 0 unconnected items
-Found 0 schematic parity issues
+Found 2 schematic parity issues
 Saved DRC Report to package/checks/saved-drc.json
 Fontconfig error: Cannot load default config file: No such file: (null)
 
 pcb drc --severity-all --all-track-errors --schematic-parity --format json --output package/checks/refilled-drc.json --refill-zones --save-board bms/bms.kicad_pcb
-Found 91 violations
+Found 92 violations
 Found 0 unconnected items
-Found 0 schematic parity issues
+Found 2 schematic parity issues
 Saved DRC Report to package/checks/refilled-drc.json
 Saved board
 Fontconfig error: Cannot load default config file: No such file: (null)

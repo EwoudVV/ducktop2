@@ -27,9 +27,47 @@ def digest(path):
 
 
 def electrical_geometry_hash(geometry):
-    keys = ('copper', 'drills', 'tracks', 'vias', 'outline')
+    keys = ('copper', 'drills', 'tracks', 'vias', 'edge_primitives')
     return hashlib.sha256(json.dumps({k: geometry[k] for k in keys},
                          sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def compare_refill_geometry(source, refilled):
+    """Check refill rounding without accepting moved copper or changed topology."""
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
+    for key in ('tracks', 'vias', 'drills', 'edge_primitives'):
+        require(source[key] == refilled[key], 'refill changed ' + key)
+    require(len(source['copper']) == len(refilled['copper']), 'refill changed copper population')
+    report = {'maximum_boundary_difference_mm': .00005, 'zones': []}
+    old_outline = unary_union([Polygon(p['outer'], p['holes']) for p in source['outline']])
+    new_outline = unary_union([Polygon(p['outer'], p['holes']) for p in refilled['outline']])
+    require(len(source['outline']) == len(refilled['outline']) and
+            sorted(len(p['holes']) for p in source['outline']) ==
+            sorted(len(p['holes']) for p in refilled['outline']), 'outline topology changed')
+    outline_difference = old_outline.boundary.hausdorff_distance(new_outline.boundary)
+    require(outline_difference <= .005, 'outline polygon exceeds native curve tolerance')
+    report['outline'] = {'edge_primitives_identical': True,
+                         'polygon_boundary_difference_mm': outline_difference,
+                         'native_curve_tolerance_mm': .005}
+    for a, b in zip(source['copper'], refilled['copper']):
+        if a == b:
+            continue
+        require(a['kind'] == b['kind'] == 'zone', 'non-zone copper changed during refill')
+        require({k: v for k, v in a.items() if k != 'polygons'} ==
+                {k: v for k, v in b.items() if k != 'polygons'}, 'zone identity changed')
+        require(len(a['polygons']) == len(b['polygons']) and
+                sorted(len(p['holes']) for p in a['polygons']) ==
+                sorted(len(p['holes']) for p in b['polygons']), 'zone topology changed')
+        old = unary_union([Polygon(p['outer'], p['holes']) for p in a['polygons']])
+        new = unary_union([Polygon(p['outer'], p['holes']) for p in b['polygons']])
+        distance = old.boundary.hausdorff_distance(new.boundary)
+        area = old.symmetric_difference(new).area
+        require(distance <= .00005 and area <= .00001,
+                'refill changed a zone beyond rounding: ' + a['id'])
+        report['zones'].append({'id': a['id'], 'net': a['net'], 'layer': a['layer'],
+                               'boundary_difference_mm': distance, 'changed_area_mm2': area})
+    return report
 
 
 def require(ok, message):
@@ -56,6 +94,7 @@ def source_hashes():
     files = ['bms/bms' + suffix for suffix in ('.kicad_pcb', '.kicad_sch', '.kicad_pro', '.kicad_dru')]
     files += ['gen/generate_bms_pcbway_package.py', 'gen/bms_fabrication_geometry.py',
               'gen/check_release_candidate.py', 'gen/report_schematic_pcb_eco.py',
+              'gen/export_bms_assembly.py',
               'gen/requirements-bms-fabrication.txt',
               'manufacturing/bms/front-assembly.svg', 'manufacturing/bms/back-assembly.svg',
               'manufacturing/bms/test-points.csv', 'manufacturing/bms/assembly-source.json',
@@ -74,13 +113,20 @@ def zip_files(path, entries):
 
 def check_drc(path):
     d = json.loads(Path(path).read_text())
-    require(not d['unconnected_items'] and not d['schematic_parity'], 'unconnected pads or schematic mismatch')
-    allowed = {'lib_footprint_mismatch', 'track_dangling', 'via_dangling', 'track_not_centered_on_via'}
+    require(not d['unconnected_items'], 'unconnected pads')
+    # Generic Fuse and Conn_01x02 symbols filter library names. The exact
+    # project footprints are checked below, and netlist parity is independent.
+    require(all(v['severity'] == 'warning' and v['type'] == 'footprint_filters_mismatch'
+                and len(v['items']) == 1 and v['items'][0]['description'] in
+                ('Footprint F1', 'Footprint J2072') for v in d['schematic_parity']),
+            'schematic mismatch; review ' + str(path))
+    allowed = {'lib_footprint_mismatch', 'track_not_centered_on_via'}
     require(all(v['severity'] == 'warning' and v['type'] in allowed for v in d['violations']),
             'new DRC finding; review ' + str(path))
     counts = dict(Counter(v['type'] for v in d['violations']))
     require(max(counts.values(), default=0) < 499, 'DRC report may have reached its limit')
-    return {'errors': 0, 'unconnected': 0, 'schematic_mismatches': 0, 'warnings': counts}
+    return {'errors': 0, 'unconnected': 0, 'schematic_mismatches': 0, 'warnings': counts,
+            'footprint_filter_warnings': d['schematic_parity']}
 
 
 def assembly_files(out, geometry):
@@ -97,23 +143,22 @@ def assembly_files(out, geometry):
         maker, mpn = c['fields'].get('Manufacturer'), c['fields'].get('MPN')
         require(maker and mpn, 'missing manufacturer or MPN: ' + ref)
         if ref == 'F1':
-            require(mpn == '0297010.WXNV + 3568', 'fuse assembly changed')
-            maker, mpn = 'Keystone Electronics', '3568'
-        mount = 'THT' if ref in ('F1', 'J2') else 'SMT'
+            require(mpn == '3-101-056' and footprints[ref]['attributes'] & 2,
+                    'review the Schurter 5 A SMT fuse before export')
+        if ref == 'J2':
+            require(mpn == '43045-0400', 'review the raw-pack connector before export')
+        mount = 'THT' if ref == 'J2' else 'SMT'
         groups[maker, mpn, c['footprint'], mount].append(ref)
     rows = []
     for (maker, mpn, footprint, mount), refs in sorted(groups.items()):
         refs = sorted(refs, key=ref_key)
-        description = 'MINI fuse holder, fuse supplied separately' if refs == ['F1'] else populated[refs[0]]['value']
+        description = populated[refs[0]]['value']
         rows.append({'Designator': ','.join(refs), 'Quantity': len(refs), 'Manufacturer': maker,
                      'MPN': mpn, 'Description': description, 'Footprint': footprint,
                      'Mount': mount, 'Notes': 'exact part; no unapproved substitutions'})
     write_csv(out / 'BOM.csv', list(rows[0]), rows)
-    loose = [{'Part': 'F1 insert', 'Quantity': 1, 'Manufacturer': 'Littelfuse',
-              'MPN': '0297010.WXNV', 'Notes': '10 A MINI fuse for Keystone 3568; supply loose, not soldered'}]
-    write_csv(out / 'loose-parts.csv', list(loose[0]), loose)
     positions = list(csv.DictReader((out / 'checks/raw-positions.csv').open()))
-    expected_smt = set(populated) - {'F1', 'J2'}
+    expected_smt = set(populated) - {'J2'}
     require(Counter(r['Ref'] for r in positions) == Counter(expected_smt), 'SMT position population differs')
     cpl = []
     for row in sorted(positions, key=lambda r: ref_key(r['Ref'])):
@@ -129,17 +174,17 @@ def assembly_files(out, geometry):
     write_csv(out / 'CPL.csv', list(cpl[0]), cpl)
     tht = [{'Designator': ref, 'X (mm)': footprints[ref]['position'][0],
             'Y (mm)': -footprints[ref]['position'][1],
-            'Rotation': footprints[ref]['rotation'] % 360, 'Side': 'top'} for ref in ('F1', 'J2')]
+            'Rotation': footprints[ref]['rotation'] % 360, 'Side': 'top'} for ref in ('J2',)]
     write_csv(out / 'through-hole-positions.csv', list(tht[0]), tht)
     exclusions = [{'Designator': c['ref'], 'Reason': 'bare copper test point; no component to fit'}
                   for c in components if c['attributes']]
     write_csv(out / 'not-fitted.csv', list(exclusions[0]), exclusions)
-    return {'board_components': 125, 'smt_components': 123, 'through_hole_components': 2,
-            'unique_board_parts': len(groups), 'loose_fuses_per_board': 1,
+    return {'board_components': len(populated), 'smt_components': len(expected_smt), 'through_hole_components': 1,
+            'unique_board_parts': len(groups), 'loose_fuses_per_board': 0,
             'top_smt_components': sum(r['Side'].lower() == 'top' for r in cpl),
             'bottom_smt_components': sum(r['Side'].lower() == 'bottom' for r in cpl),
             'smt_pads': sum(bool(p['polygons']) for ref in expected_smt for p in footprints[ref]['pads']),
-            'soldered_through_holes': 10}
+            'soldered_through_holes': sum(d['plated'] and d['ref'] != 'VIA' for d in geometry['drills'])}
 
 
 def gerber_geometry(file):
@@ -299,7 +344,12 @@ def verify_package(out):
 
 
 def write_order_notes(out):
-    (out/'README.md').write_text('''# bms order files
+    manifest = json.loads((out/'manifest.json').read_text())
+    assembly = manifest['assembly']
+    exports = json.loads((out/'checks/export-check.json').read_text())
+    warnings = ', '.join(f'{count} {kind}' for kind, count in
+                         manifest['checks']['refilled']['warnings'].items()) or 'none'
+    (out/'README.md').write_text(f'''# bms order files
 
 this is the pcbway package for the four-layer bms. the exact source files,
 checks and output hashes are recorded in `manifest.json` and `SHA256SUMS.txt`.
@@ -310,13 +360,12 @@ package yet, and no order has been submitted.
 
 - `bms_GERBERS.zip`: bare-board fabrication files, including separate plated
   and unplated drills. all four copper layers are included.
-- `BOM.csv`: 125 fitted parts, grouped into 60 part numbers.
-- `CPL.csv`: 123 smt placements, 77 on top and 46 underneath.
-- `through-hole-positions.csv`: F1 and J2, both fitted from the top.
-- `loose-parts.csv`: one removable 10 A fuse per assembled board.
+- `BOM.csv`: {assembly['board_components']} fitted parts, grouped into {assembly['unique_board_parts']} part numbers.
+- `CPL.csv`: {assembly['smt_components']} smt placements, {assembly['top_smt_components']} on top and {assembly['bottom_smt_components']} underneath.
+- `through-hole-positions.csv`: J2, fitted from the top.
 - `paste/`: top and bottom stencil artwork. the power-fet stencil windows
   are intentional. the assembler should review stencil thickness and process.
-- `bms.ipc`: the bare-board electrical test netlist, with 809 records and 73 nets.
+- `bms.ipc`: the bare-board electrical test netlist, with {exports['electrical_test']['records']} records and {exports['electrical_test']['nets']} nets.
 - `assembly/`: both assembly drawings and the test-point map.
 - `previews/`: rendered gerbers for inspection. the gerbers control fabrication.
 
@@ -344,8 +393,8 @@ underneath; it is not the coordinate convention used by the cpl.
 | impedance control | not required |
 | electrical test | flying probe against the supplied IPC-D-356 netlist |
 
-the four support holes are unplated circular cutouts in Edge.Cuts. the two
-3 mm holes in the NPTH drill file are J2's locating holes. retain all six.
+the four support holes are unplated circular cutouts in Edge.Cuts. the
+NPTH drill file also contains J2's 3 mm locating hole. retain all five.
 
 the cad dielectric entries total about 1.626 mm. they are indicative, not a
 custom impedance stackup. quote a standard 1.6 mm build with 1 oz copper on
@@ -359,13 +408,14 @@ fit the exact BOM, including the 0.1% thermal resistors and both current
 shunts. substitutions need review. do not replace BQ7791500 with another
 threshold option, or LTC4368-1 with the -2 variant.
 
-F1 in the placement drawing is the Keystone 3568 through-hole holder. the
-Littelfuse 0297010.WXNV fuse is a separate purchased part and should be
-supplied loose. test pads are exposed copper, not components to fit.
+F1 is the SCHURTER 3-101-056 HCF fuse, 5 A, fast acting, with a 1000 A
+interrupt rating at 125 VDC under the specified L/R condition. it is an SMT
+part, not a holder or a removable fuse. use the exact part. test pads are
+exposed copper, not components to fit.
 
-the smt count is 379 copper lands. the 48 extra power-fet stencil windows
+the smt count is {assembly['smt_pads']} copper lands. the extra power-fet stencil windows
 are apertures within those lands, not extra components or solder joints.
-there are ten soldered through holes, excluding vias and locating holes.
+there are {assembly['soldered_through_holes']} soldered through holes, excluding vias and locating holes.
 use the supplied paste apertures, check polarity and inspect the power-fet
 joints. use lead-free assembly and component-appropriate reflow profiles.
 
@@ -374,9 +424,17 @@ supports. batteries, probe wiring and the mating cable harnesses are not
 included in this pcb assembly order. no programming is required on the bms.
 powered protection tests will be done during bring-up with simulated cells.
 
-J2 is the tall Mega-Fit connector, not a low-profile header. Molex lists
-14.8 mm unmated and 16.78 mm mated height, before cable bending space.
-the two bottom JST connectors also need access for their mating cables.
+J2 is the right-angle Molex 43045-0400 Micro-Fit header. its mating cable
+uses 43025-0400 and tin 43030-0038 contacts. the plug drawing gives a
+10.81 mm mated height and 11 mm latch envelope above the PCB. reserve the
+plug and cable space shown in the harness notes, including 12.7 mm of free
+wire before bending. the front pin row is 9.80 mm from the board edge;
+Molex allows 10.16 mm maximum. keep the combined header/edge positioning
+error within 0.25 mm toward the edge-clearance limit.
+
+J2072 is the two-pole WAGO 2060-452/998-404. the assembler must solder both
+lands for each contact. its body is 4.5 mm high; the wire and release-tool
+space are separate. the two bottom JST connectors also need cable access.
 
 pcbway can add process rails and fiducials if their assembly setup needs
 them. send the panel drawing for review; do not change the finished outline,
@@ -403,11 +461,14 @@ mask openings expose no via holes, including a 0.05 mm outward-margin screen
 around the smt mask openings. the stencil openings stay on pads. confirm
 the actual mask registration with pcbway; this screen is a design check.
 
-the reports retain 73 library graphic differences, eight connected track-end
-flags, two single-layer via flags and eight off-centre track/via flags.
-the last category was re-enabled for this review. no electrical errors or
-silkscreen violations were waived. the 92 existing ERC warnings are recorded
-separately. `checks/layout-checks.json` holds the power-path review.
+the refilled report retains these warnings: {warnings}.
+no electrical errors, dangling copper or silkscreen violations were waived.
+the existing ERC warnings are recorded separately in the manifest.
+the generic fuse and two-pin connector symbols also retain their library-name
+filter warnings for F1 and J2072. their exact footprints, pads and pin maps
+are checked separately; no netlist mismatch is accepted.
+`checks/layout-checks.json` holds the power-path review. the 3 A pack
+qualification limit remains in force; a 5 A fuse does not raise it.
 
 install `gen/requirements-bms-fabrication.txt` in a local virtual environment.
 run `python gen/generate_bms_pcbway_package.py --output NEW_PACKAGE --work
@@ -422,13 +483,17 @@ a source edit makes the old package stale.
 - [pcbway fabrication limits](https://www.pcbway.com/capabilities.html)
 - [pcbway assembly files](https://www.pcbway.com/assembly-file-requirements.html)
 - [pcbway confirms assembly from one piece](https://www.pcbway.com/blog/PCB_Basic_Information/PCBWay_Q_A_003___Common_Questions_for_PCBA_Ordering_01.html)
-- [molex 76829 connector dimensions](https://www.molex.com/en-us/products/series-chart/76829)
-- [keystone 3568 fuse holder](https://www.keyelco.com/product.cfm/product_id/306)
+- [molex 43045-0400 header](https://www.molex.com/en-us/products/part-detail/430450400)
+- [molex 43025-0400 plug drawing](https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/430/43025/430250400_sd.pdf)
+- [schurter HCF fuse](https://www.schurter.com/en/datasheet/typ_HCF.pdf)
+- [WAGO 2060-452](https://www.wago.com/2060-452/998-404)
 ''')
     (out/'PCBA_ORDER_REMARK.txt').write_text(
         'please quote 5 bare pcbs with 1 assembled, and the same build with 2 assembled. '
-        'both-side smt plus top-side F1 and J2 through-hole assembly. exact BOM, no unapproved substitutions. '
-        'F1 is the Keystone 3568 holder; supply the Littelfuse 0297010.WXNV insert loose. '
+        'both-side smt plus top-side J2 through-hole assembly. exact BOM, no unapproved substitutions. '
+        'F1 is the soldered SCHURTER 3-101-056 5 A fuse; no loose fuse insert. '
+        'J2 is Molex 43045-0400; keep the front pin row within 10.16 mm of the routed edge. '
+        'the design is 9.80 mm, allowing at most 0.25 mm combined header/edge positioning error. '
         '1.6 mm FR-4, ENIG, green mask, white printing, 1 oz copper on all four layers. '
         'confirm finished copper and minimum barrel plating against the 35 um / 20 um design basis. '
         'use the supplied paste files and electrical test netlist. all vias tented; no filled vias requested. '
@@ -481,7 +546,7 @@ def build(out, work):
     require(parity['passed'], 'netlist and board differ')
     write_json(out/'checks/parity.json', parity)
     geometry_path = work/'geometry.json'
-    proc = subprocess.run([native_python, str(ROOT/'gen/bms_fabrication_geometry.py'), str(board), str(geometry_path)],
+    proc = subprocess.run([native_python, str(ROOT/'gen/bms_fabrication_geometry.py'), str(board), str(geometry_path), '--headless'],
                           capture_output=True, text=True, cwd=ROOT)
     (out/'checks/native.log').write_text(proc.stdout + proc.stderr)
     require(proc.returncode == 0, 'native geometry export failed')
@@ -491,8 +556,20 @@ def build(out, work):
     layout = json.loads((ROOT/'verification/bms-layout.json').read_text())
     require(layout['source_sha256']['bms/bms.kicad_pcb'] == before['bms/bms.kicad_pcb'],
             'layout evidence belongs to a different saved board')
-    require(layout['manufacturing_geometry_sha256'] == electrical_geometry_hash(geometry),
-            'power-path evidence does not match the refilled geometry')
+    if layout['manufacturing_geometry_sha256'] != electrical_geometry_hash(geometry):
+        original_geometry_path = work/'saved-geometry.json'
+        proc = subprocess.run([native_python, str(ROOT/'gen/bms_fabrication_geometry.py'),
+                               str(BOARD), str(original_geometry_path), '--headless'],
+                              capture_output=True, text=True, cwd=ROOT)
+        (out/'checks/saved-native.log').write_text(proc.stdout + proc.stderr)
+        require(proc.returncode == 0, 'saved geometry export failed')
+        original_geometry = json.loads(original_geometry_path.read_text())
+        require(layout['manufacturing_geometry_sha256'] == electrical_geometry_hash(original_geometry),
+                'power-path evidence does not match the saved geometry')
+        refill_check = compare_refill_geometry(original_geometry, geometry)
+    else:
+        refill_check = {'maximum_boundary_difference_mm': 0, 'zones': []}
+    write_json(out/'checks/refill-geometry.json', refill_check)
     run('pcb', 'export', 'gerbers', '--output', out/'gerbers', '--layers', ','.join(LAYERS), '--precision', '6', board)
     run('pcb', 'export', 'drill', '--output', out/'gerbers', '--format', 'excellon', '--drill-origin', 'absolute',
         '--excellon-units', 'mm', '--excellon-zeros-format', 'decimal', '--excellon-separate-th',
@@ -541,7 +618,7 @@ def build(out, work):
             text = report.read_text().replace(str(board.parent), 'bms')
             text = text.replace(str(out), 'package').replace(str(work), 'build')
             text = text.replace(str(ROOT) + '/', '')
-            report.write_text(text)
+            report.write_text(text.rstrip() + '\n')
     (out/'SHA256SUMS.txt').write_text(''.join(
         f'{digest(p)}  {p.relative_to(out).as_posix()}\n'
         for p in sorted(out.rglob('*')) if p.is_file() and p.name != 'SHA256SUMS.txt'))

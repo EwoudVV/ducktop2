@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>bms/bms.kicad_sch</source>
-    <date>2026-09-22T07:25:53</date>
+    <date>2026-09-28T19:06:06</date>
     <tool>Eeschema 10.0.4</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -1032,18 +1032,23 @@
       </units>
     </comp>
     <comp ref="F1">
-      <value>10A MINI pack fuse: Littelfuse 0297010.WXNV</value>
-      <footprint>Fuse:Fuseholder_Blade_Mini_Keystone_3568</footprint>
+      <value>5A fast pack fuse: Schurter HCF, 1kA at 125VDC</value>
+      <footprint>ducktop2:Schurter_HCF_8.05x5mm</footprint>
+      <datasheet>https://www.schurter.com/en/datasheet/typ_HCF.pdf</datasheet>
       <fields>
-        <field name="Manufacturer">Littelfuse / Keystone</field>
-        <field name="MPN">0297010.WXNV + 3568</field>
-        <field name="Footprint">Fuse:Fuseholder_Blade_Mini_Keystone_3568</field>
-        <field name="Datasheet"/>
+        <field name="Manufacturer">SCHURTER</field>
+        <field name="MPN">3-101-056</field>
+        <field name="Height">5 mm</field>
+        <field name="InterruptRating">1000 A at 125 VDC, L/R &lt;1 ms</field>
+        <field name="Footprint">ducktop2:Schurter_HCF_8.05x5mm</field>
+        <field name="Datasheet">https://www.schurter.com/en/datasheet/typ_HCF.pdf</field>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="Fuse" description="Fuse"/>
-      <property name="Manufacturer" value="Littelfuse / Keystone"/>
-      <property name="MPN" value="0297010.WXNV + 3568"/>
+      <property name="Manufacturer" value="SCHURTER"/>
+      <property name="MPN" value="3-101-056"/>
+      <property name="Height" value="5 mm"/>
+      <property name="InterruptRating" value="1000 A at 125 VDC, L/R &lt;1 ms"/>
       <property name="Sheetname" value="bms"/>
       <property name="Sheetfile" value="bms.kicad_sch"/>
       <property name="ki_keywords" value="fuse"/>
@@ -1061,17 +1066,29 @@
     </comp>
     <comp ref="J2">
       <value>3S pack power + cell-tap harness</value>
-      <footprint>Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical</footprint>
+      <footprint>Connector_Molex:Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal</footprint>
       <fields>
         <field name="Manufacturer">Molex</field>
-        <field name="MPN">76829-0006</field>
-        <field name="Footprint">Connector_Molex:Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical</field>
+        <field name="MPN">43045-0400</field>
+        <field name="MatingHousing">43025-0400</field>
+        <field name="Contacts">43030-0038 tin 18 AWG</field>
+        <field name="Wire">Alpha 6715, 18 AWG, minimum bend radius 8.763 mm</field>
+        <field name="HarnessPinOrder">1 raw negative, 2 cell 2 tap, 3 raw positive, 4 cell 1 tap; this is a new keyed harness</field>
+        <field name="CurrentRatingBasis">PS-43045: use conservative six-circuit 18 AWG 6.5 A screen; one full-current contact per polarity; 5 A backup fuse</field>
+        <field name="MatedHeight">10.29 mm nominal; horizontal exit; independent harness clamp</field>
+        <field name="Footprint">Connector_Molex:Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
-      <libsource lib="Connector_Generic" part="Conn_02x03_Odd_Even" description="Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <libsource lib="Connector_Generic" part="Conn_02x02_Odd_Even" description="Generic connector, double row, 02x02, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="Manufacturer" value="Molex"/>
-      <property name="MPN" value="76829-0006"/>
+      <property name="MPN" value="43045-0400"/>
+      <property name="MatingHousing" value="43025-0400"/>
+      <property name="Contacts" value="43030-0038 tin 18 AWG"/>
+      <property name="Wire" value="Alpha 6715, 18 AWG, minimum bend radius 8.763 mm"/>
+      <property name="HarnessPinOrder" value="1 raw negative, 2 cell 2 tap, 3 raw positive, 4 cell 1 tap; this is a new keyed harness"/>
+      <property name="CurrentRatingBasis" value="PS-43045: use conservative six-circuit 18 AWG 6.5 A screen; one full-current contact per polarity; 5 A backup fuse"/>
+      <property name="MatedHeight" value="10.29 mm nominal; horizontal exit; independent harness clamp"/>
       <property name="Sheetname" value="bms"/>
       <property name="Sheetfile" value="bms.kicad_sch"/>
       <property name="ki_keywords" value="connector"/>
@@ -1083,40 +1100,42 @@
           <pins>
             <pin num="1"/>
             <pin num="3"/>
-            <pin num="5"/>
             <pin num="2"/>
             <pin num="4"/>
-            <pin num="6"/>
           </pins>
         </unit>
       </units>
     </comp>
     <comp ref="J2072">
       <value>protected pack power</value>
-      <footprint>Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical</footprint>
-      <datasheet>https://www.molex.com/en-us/products/part-detail/0436500224</datasheet>
+      <footprint>ducktop2:WAGO_2060_452_SMD</footprint>
+      <datasheet>https://www.wago.com/2060-452/998-404</datasheet>
       <fields>
-        <field name="Manufacturer">Molex</field>
-        <field name="MPN">43650-0224</field>
-        <field name="MatingHousing">43645-0200</field>
-        <field name="Harness">18 awg; pin 1 red; pin 2 black; straight-numbered; 75 mm length budget</field>
-        <field name="Contacts">43030-0038 tin, 18 awg; insulation diameter &lt;=1.85 mm</field>
-        <field name="MatedHeight">reserve 17.56 mm per drawing, plus wire exit and bend</field>
-        <field name="CurrentRatingBasis">PS-43650-001 N4: 2 circuits, 18 awg, 8.5 A at 30 C rise; validate assembled temperature rise</field>
-        <field name="Footprint">Connector_Molex:Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical</field>
-        <field name="Datasheet">https://www.molex.com/en-us/products/part-detail/0436500224</field>
+        <field name="Manufacturer">WAGO</field>
+        <field name="MPN">2060-452/998-404</field>
+        <field name="MatingHousing">bare wire</field>
+        <field name="Contacts">spring contact</field>
+        <field name="Wire">Alpha 6715 RD005/BK005, 18 AWG; minimum bend radius 8.763 mm</field>
+        <field name="Harness">center: 1 FG_VSS, 2 PACK_POS_FUSED; BMS: 1 PACK_POS_FUSED, 2 FG_VSS</field>
+        <field name="MatedHeight">4.5 mm terminal body; reserve release-tool access</field>
+        <field name="CurrentRatingBasis">WAGO 2060, 9 A IEC/UL rating with 18 AWG; assembled temperature still needs testing</field>
+        <field name="Footprint">ducktop2:WAGO_2060_452_SMD</field>
+        <field name="Datasheet">https://www.wago.com/2060-452/998-404</field>
         <field name="Description"/>
       </fields>
-      <libsource lib="Conn_01x02_MP" part="Conn_01x02_MP" description=""/>
-      <property name="Manufacturer" value="Molex"/>
-      <property name="MPN" value="43650-0224"/>
-      <property name="MatingHousing" value="43645-0200"/>
-      <property name="Harness" value="18 awg; pin 1 red; pin 2 black; straight-numbered; 75 mm length budget"/>
-      <property name="Contacts" value="43030-0038 tin, 18 awg; insulation diameter &lt;=1.85 mm"/>
-      <property name="MatedHeight" value="reserve 17.56 mm per drawing, plus wire exit and bend"/>
-      <property name="CurrentRatingBasis" value="PS-43650-001 N4: 2 circuits, 18 awg, 8.5 A at 30 C rise; validate assembled temperature rise"/>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Manufacturer" value="WAGO"/>
+      <property name="MPN" value="2060-452/998-404"/>
+      <property name="MatingHousing" value="bare wire"/>
+      <property name="Contacts" value="spring contact"/>
+      <property name="Wire" value="Alpha 6715 RD005/BK005, 18 AWG; minimum bend radius 8.763 mm"/>
+      <property name="Harness" value="center: 1 FG_VSS, 2 PACK_POS_FUSED; BMS: 1 PACK_POS_FUSED, 2 FG_VSS"/>
+      <property name="MatedHeight" value="4.5 mm terminal body; reserve release-tool access"/>
+      <property name="CurrentRatingBasis" value="WAGO 2060, 9 A IEC/UL rating with 18 AWG; assembled temperature still needs testing"/>
       <property name="Sheetname" value="bms"/>
       <property name="Sheetfile" value="bms.kicad_sch"/>
+      <property name="ki_keywords" value="connector"/>
+      <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>4751c19b-8042-561c-9884-7df3539b477f</tstamps>
       <units>
@@ -1124,7 +1143,6 @@
           <pins>
             <pin num="1"/>
             <pin num="2"/>
-            <pin num="MP"/>
           </pins>
         </unit>
       </units>
@@ -3641,11 +3659,11 @@
     </comp>
     <comp ref="TPB13">
       <value>BMS_SRN</value>
-      <footprint>TestPoint:TestPoint_Pad_1.5x1.5mm</footprint>
+      <footprint>TestPoint:TestPoint_Pad_D1.0mm</footprint>
       <fields>
         <field name="Manufacturer">-</field>
         <field name="Note">test point, no MPN</field>
-        <field name="Footprint">TestPoint:TestPoint_Pad_1.5x1.5mm</field>
+        <field name="Footprint">TestPoint:TestPoint_Pad_D1.0mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4593,20 +4611,6 @@
         <pin num="24" name="CTRD" type="input"/>
       </pins>
     </libpart>
-    <libpart lib="Conn_01x02_MP" part="Conn_01x02_MP">
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x02_MP</field>
-        <field name="Footprint"/>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
-        <pin num="MP" name="MP" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="Connector" part="TestPoint">
       <description>test point</description>
       <footprints>
@@ -4625,25 +4629,40 @@
         <pin num="1" name="1" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Connector_Generic" part="Conn_02x03_Odd_Even">
-      <description>Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+    <libpart lib="Connector_Generic" part="Conn_01x02">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_02x02_Odd_Even">
+      <description>Generic connector, double row, 02x02, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <footprints>
         <fp>Connector*:*_2x??_*</fp>
       </footprints>
       <fields>
         <field name="Reference">J</field>
-        <field name="Value">Conn_02x03_Odd_Even</field>
+        <field name="Value">Conn_02x02_Odd_Even</field>
         <field name="Footprint"/>
         <field name="Datasheet"/>
-        <field name="Description">Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</field>
+        <field name="Description">Generic connector, double row, 02x02, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
         <pin num="2" name="Pin_2" type="passive"/>
         <pin num="3" name="Pin_3" type="passive"/>
         <pin num="4" name="Pin_4" type="passive"/>
-        <pin num="5" name="Pin_5" type="passive"/>
-        <pin num="6" name="Pin_6" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Connector_Generic_MountingPin" part="Conn_01x05_MountingPin">
@@ -4835,9 +4854,6 @@
     </library>
     <library logical="BQ77915">
       <uri>bms/../gen/BQ77915.kicad_sym</uri>
-    </library>
-    <library logical="Conn_01x02_MP">
-      <uri>bms/../gen/Conn_01x02_MP.kicad_sym</uri>
     </library>
     <library logical="Connector">
       <uri>${KICAD10_SYMBOL_DIR}/Connector.kicad_sym</uri>
@@ -5035,11 +5051,11 @@
       <node ref="U719" pin="1" pinfunction="VDD_1" pintype="power_in"/>
     </net>
     <net code="30" name="/CELL1_TAP" class="Default">
-      <node ref="J2" pin="5" pinfunction="Pin_5_5" pintype="passive"/>
+      <node ref="J2" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
       <node ref="R842" pin="1" pintype="passive"/>
     </net>
     <net code="31" name="/CELL2_TAP" class="Default">
-      <node ref="J2" pin="6" pinfunction="Pin_6_6" pintype="passive"/>
+      <node ref="J2" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
       <node ref="R843" pin="1" pintype="passive"/>
     </net>
     <net code="32" name="/CTRL_3V3" class="BMS_LOGIC">
@@ -5121,8 +5137,7 @@
       <node ref="C842" pin="2" pintype="passive"/>
       <node ref="C845" pin="2" pintype="passive"/>
       <node ref="C847" pin="2" pintype="passive"/>
-      <node ref="J2" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
-      <node ref="J2" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
+      <node ref="J2" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
       <node ref="J2200" pin="MP" pinfunction="MP_MP" pintype="passive"/>
       <node ref="Q2200" pin="2" pinfunction="S_2" pintype="passive"/>
       <node ref="Q2201" pin="2" pinfunction="S_2" pintype="passive"/>
@@ -5165,8 +5180,7 @@
     </net>
     <net code="41" name="/PACK_POS_RAW" class="POWER_HI">
       <node ref="F1" pin="1" pintype="passive"/>
-      <node ref="J2" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
-      <node ref="J2" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
+      <node ref="J2" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
       <node ref="R2200" pin="1" pintype="passive"/>
       <node ref="R840" pin="1" pintype="passive"/>
       <node ref="R844" pin="1" pintype="passive"/>
@@ -5415,34 +5429,31 @@
       <node ref="U2208" pin="2" pinfunction="GND_2" pintype="power_in"/>
       <node ref="U2209" pin="4" pinfunction="GND1_4" pintype="power_in"/>
     </net>
-    <net code="74" name="unconnected-(J2072-PadMP)" class="Default">
-      <node ref="J2072" pin="MP" pinfunction="MP_MP" pintype="passive+no_connect"/>
-    </net>
-    <net code="75" name="unconnected-(U719-CBO-Pad21)" class="Default">
+    <net code="74" name="unconnected-(U719-CBO-Pad21)" class="Default">
       <node ref="U719" pin="21" pinfunction="CBO_21" pintype="output+no_connect"/>
     </net>
-    <net code="76" name="unconnected-(U719-LPWR-Pad15)" class="Default">
+    <net code="75" name="unconnected-(U719-LPWR-Pad15)" class="Default">
       <node ref="U719" pin="15" pinfunction="LPWR_15" pintype="output+no_connect"/>
     </net>
-    <net code="77" name="unconnected-(U719-VTB-Pad19)" class="Default">
+    <net code="76" name="unconnected-(U719-VTB-Pad19)" class="Default">
       <node ref="U719" pin="19" pinfunction="VTB_19" pintype="power_out+no_connect"/>
     </net>
-    <net code="78" name="unconnected-(U2200-EN-Pad3)" class="Default">
+    <net code="77" name="unconnected-(U2200-EN-Pad3)" class="Default">
       <node ref="U2200" pin="3" pinfunction="EN_3" pintype="input+no_connect"/>
     </net>
-    <net code="79" name="unconnected-(U2200-NC-Pad4)" class="Default">
+    <net code="78" name="unconnected-(U2200-NC-Pad4)" class="Default">
       <node ref="U2200" pin="4" pinfunction="NC_4" pintype="no_connect"/>
     </net>
-    <net code="80" name="unconnected-(U2206-OUTC-Pad12)" class="Default">
+    <net code="79" name="unconnected-(U2206-OUTC-Pad12)" class="Default">
       <node ref="U2206" pin="12" pinfunction="OUTC_12" pintype="output+no_connect"/>
     </net>
-    <net code="81" name="unconnected-(U2206-OUTD-Pad6)" class="Default">
+    <net code="80" name="unconnected-(U2206-OUTD-Pad6)" class="Default">
       <node ref="U2206" pin="6" pinfunction="OUTD_6" pintype="output+no_connect"/>
     </net>
-    <net code="82" name="unconnected-(U2208-EN-Pad3)" class="Default">
+    <net code="81" name="unconnected-(U2208-EN-Pad3)" class="Default">
       <node ref="U2208" pin="3" pinfunction="EN_3" pintype="input+no_connect"/>
     </net>
-    <net code="83" name="unconnected-(U2208-NC-Pad4)" class="Default">
+    <net code="82" name="unconnected-(U2208-NC-Pad4)" class="Default">
       <node ref="U2208" pin="4" pinfunction="NC_4" pintype="no_connect"/>
     </net>
   </nets>
