@@ -351,10 +351,15 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             footprint=FOOTPRINTS["L_XGL1060_CENTER"],
             pin_nets={"1": ("MU12_SW1", "local"), "2": ("MU12_SW2", "local")},
             extra_props={"Manufacturer": "Coilcraft", "MPN": "XGL1060-682MEC"})
-    s.place("RS750", "R", "8m 1% 2W; 6.25A nominal limit, 5.5A target", 520, 230,
-            footprint="Resistor_SMD:R_2512_6332Metric",
-            pin_nets={"1": ("MU12_PRE_SENSE", "local"), "2": ("MU_12V", "hier")},
-            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP2512R0080FEA"})
+    for ref, y in (("RS750", 230), ("RS2670", 245)):
+        s.place(ref, "R", "16m 1% 1W; parallel pair gives 8m", 520, y,
+            footprint="ducktop2:Panasonic_ERJ8CW_10to16m_Center",
+            pin_nets={"1":("MU12_PRE_SENSE","local"),"2":("MU_12V","hier")},
+            extra_props={"Manufacturer":"Panasonic","MPN":"ERJ8CWFR016V"})
+    s.place("C2670", "C", "100n 50V local VCC bypass", 955, 305,
+            footprint=FOOTPRINTS["C_0402"],
+            pin_nets={"1":("MU12_VCC","local"),"2":("GND","local")},
+            extra_props={"Manufacturer":"Murata","MPN":"GRM155R71H104ME14D"})
 
     # Input and output reservoirs use the exact voltage classes from TI's EVM.
     # This preserves DC-bias margin and avoids relying on the surge clamp to make
@@ -423,13 +428,16 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
                 footprint=FOOTPRINTS["C_0805"], dnp=True,
                 pin_nets={"1": (node, "local"), "2": ("GND", "local")},
                 extra_props={"Manufacturer": "Murata", "MPN": "GRM21AR72E222KW01D"})
-    s.place("R750", "R", "10R ISP Kelvin filter", 685, 250, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU12_PRE_SENSE", "local"), "2": ("MU12_ISP", "local")})
-    s.place("R751", "R", "10R ISN Kelvin filter", 685, 260, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MU_12V", "local"), "2": ("MU12_ISN", "local")})
+    s.place("R750", "R", "10R ISP Kelvin filter", 685, 250, footprint=FOOTPRINTS["R_0402"],
+            pin_nets={"1": ("MU12_PRE_SENSE", "local"), "2": ("MU12_ISP", "local")},
+            extra_props={"Manufacturer":"Yageo","MPN":"RC0402FR-0710RL"})
+    s.place("R751", "R", "10R ISN Kelvin filter", 685, 260, footprint=FOOTPRINTS["R_0402"],
+            pin_nets={"1": ("MU_12V", "local"), "2": ("MU12_ISN", "local")},
+            extra_props={"Manufacturer":"Yageo","MPN":"RC0402FR-0710RL"})
     s.place("C770", "C", "100n differential current-sense filter", 685, 270,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("MU12_ISP", "local"), "2": ("MU12_ISN", "local")})
+            footprint=FOOTPRINTS["C_0402"],
+            pin_nets={"1": ("MU12_ISP", "local"), "2": ("MU12_ISN", "local")},
+            extra_props={"Manufacturer":"Murata","MPN":"GRM155R71H104ME14D"})
     s.place("R752", "R", "49.9R FB isolation", 685, 280, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU_12V", "local"), "2": ("MU12_FB_TOP", "local")})
     s.place("R753", "R", "102k 0.1% 10ppm 12V FB high", 685, 290, footprint=FOOTPRINTS["R"],
@@ -438,15 +446,15 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.place("R754", "R", "11.3k 0.02% 5ppm 12V FB low", 685, 300, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_FB", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060311K3HZEN00"})
-    s.place("R755", "R", "15k 1% COMP series", 685, 310, footprint=FOOTPRINTS["R"],
+    s.place("R755", "R", "15k 1% COMP series", 685, 310, footprint=FOOTPRINTS["R_0402"],
             pin_nets={"1": ("MU12_COMP", "local"), "2": ("MU12_COMP_RC", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0715KL"})
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0402FR-0715KL"})
     s.place("C771", "C", "10n 50V C0G COMP", 685, 320, footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MU12_COMP_RC", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM1885C1H103JA01D"})
-    s.place("C772", "C", "100p 50V C0G COMP HF", 685, 330, footprint=FOOTPRINTS["C_100n"],
+    s.place("C772", "C", "100p 50V C0G COMP HF", 685, 330, footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("MU12_COMP", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM1885C1H101JA01D"})
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM1555C1H101JA01D"})
     s.place("R756", "R", "49.9k 0.02% 5ppm FSW = 400kHz", 685, 340, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_FSW", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Vishay", "MPN": "TNPU060349K9HZEN00"})
@@ -455,9 +463,9 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
     s.place("R757", "R", "0R MODE internal LDO / forced PWM", 685, 360, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_MODE", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer":"Yageo","MPN":"RC0603JR-070RL"})
-    s.place("R758", "R", "30.1k 1% inductor limit; about 11A nominal", 685, 370, footprint=FOOTPRINTS["R"],
+    s.place("R758", "R", "26.7k 1% inductor limit; about 12.4A nominal", 685, 370, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_ILIM", "local"), "2": ("GND", "local")},
-            extra_props={"Manufacturer":"Yageo","MPN":"RC0603FR-0730K1L"})
+            extra_props={"Manufacturer":"Yageo","MPN":"RC0603FR-0726K7L"})
     s.place("R759", "R", "150k 0.1% 10ppm UVLO high; 9.0V rising", 740, 220, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("VSYS", "hier"), "2": ("MU12_EN_UVLO", "local")},
             extra_props={"Manufacturer": "Vishay", "MPN": "TNPW0603150KBYEA"})

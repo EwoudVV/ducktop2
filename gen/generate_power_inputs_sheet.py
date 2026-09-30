@@ -142,7 +142,7 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
             }, extra_props=props(
                 "Texas Instruments", "TPS25751ADREFR",
                 "https://www.ti.com/lit/ds/symlink/tps25751a.pdf",
-                PortPolicy="DRP;HOST_DATA_ONLY;5_9_15_20V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP",
+                PortPolicy="DRP;HOST_DATA_ONLY;5_9_15V_3A_20V_5A_SINK;5V_900MA_SOURCE;DEFAULT_RP",
                 EEPROMContract=f"U{ubase + 2}_PROGRAM_WITH_VERSIONED_TPS25751_IMAGE",
                 EEPROMSource=f"firmware/tps25751a/ducktop2_pd{port}_config.json",
                 ADCStrap="SAFE_MODE_ADDR_0X20" if port == 1 else "SAFE_MODE_ADDR_0X21",

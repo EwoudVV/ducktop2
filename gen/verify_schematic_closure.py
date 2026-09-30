@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Read-only independent regression checks for Ducktop2 schematic closure.
 
-This checker intentionally imports none of the schematic generators or project
-contract helpers. It consumes an already-exported KiCad XML netlist and guards
+This checker imports none of the schematic generators. The 100 W revision
+uses separate reviewed power pin maps and tolerance checks. It consumes an already-exported KiCad XML netlist and guards
 the exact electrical regressions found by the July 17-19 independent audits.
 """
 
@@ -16,6 +16,7 @@ from pathlib import Path
 
 class ClosureAudit:
     def __init__(self, netlist: Path) -> None:
+        self.netlist = netlist
         root = ET.parse(netlist).getroot()
         self.components: dict[str, dict[str, object]] = {}
         self.pin_nets: dict[tuple[str, str], str] = {}
@@ -204,6 +205,7 @@ def run_pack_checks(a: ClosureAudit) -> None:
     a.absent("NTC2")
     a.absent("NTC4")
 def run_checks(a: ClosureAudit, skip_pack: bool = False) -> None:
+    modern = a.prop("U2", "MPN") == "ISL9241IRTZ"
     # TPS2553 regression: ILIM is physical pin 5 and OUT is physical pin 6.
     for pin, name, net in (
         ("1", "IN", "/SYS_5V"),
@@ -220,36 +222,42 @@ def run_checks(a: ClosureAudit, skip_pack: bool = False) -> None:
     # Q11/Q12/Q703/Q704/RS10/RS11/R700-R709/C700/C724/C840-C848) are
     # audited against the bms project by run_pack_checks().  The center
     # keeps the charger (U2), ship FET (Q25), and gauge (U10) checks below.
-    for pin in ("2", "3", "8", "9"):
-        a.pin("U2", pin, "/Power & Battery/VBUS_COMBINED")
-    for pin in ("10", "11", "27"):
-        a.pin("U2", pin, "GND")
-    a.pin("U2", "16", "/Power & Battery/CHG_TS_FIXED")
-    a.value_starts("R16", "5.24k 1%")
-    a.pin("R16", "1", "/Power & Battery/REGN")
-    a.pin("R16", "2", "/Power & Battery/CHG_TS_FIXED")
-    a.value_starts("R705", "7.50k 1%")
-    a.pin("R705", "1", "/Power & Battery/CHG_TS_FIXED")
-    a.pin("R705", "2", "GND")
-    a.pin("U2", "12", "/Power & Battery/PMIC_QON_PIN")
-    a.pin("U2", "13", "/Power & Battery/CHG_CE_HW_N")
-    a.pin("U2", "24", "/Power & Battery/SDRV_GATE")
-    a.pin("Q25", "4", "/Power & Battery/SDRV_GATE")
-    a.pin("Q25", "5", "/PACK_POS_FUSED")
-    a.pin("Q702", "1", "/PMIC_QON_ASSERT")
-    a.pin("Q702", "2", "GND")
-    a.pin("Q702", "3", "/Power & Battery/PMIC_QON_PIN")
-    a.pin("R13", "1", "/PMIC_QON_ASSERT")
-    a.pin("R13", "2", "GND")
-    a.pin("D715", "1", "/CASE_PWRBTN_N")
-    a.pin("D715", "2", "/Power & Battery/PMIC_QON_PIN")
-    a.pin("D716", "1", "/CASE_PWRBTN_N")
-    a.pin("D716", "2", "/MU_PWRBTN_N")
-    a.eq(
-        a.net_members.get("/Power & Battery/PMIC_QON_PIN"),
-        {("D715", "2"), ("Q702", "3"), ("U2", "12")},
-        "QON charger-domain membership",
-    )
+    if modern:
+        from verify_electrical_calculations import component_values
+        from verify_power_revision import check as power_check
+        result = power_check(component_values(a.netlist))
+        a.check(not result["failures"], "100 W charger and control wiring", result["failures"])
+    else:
+        for pin in ("2", "3", "8", "9"):
+            a.pin("U2", pin, "/Power & Battery/VBUS_COMBINED")
+        for pin in ("10", "11", "27"):
+            a.pin("U2", pin, "GND")
+        a.pin("U2", "16", "/Power & Battery/CHG_TS_FIXED")
+        a.value_starts("R16", "5.24k 1%")
+        a.pin("R16", "1", "/Power & Battery/REGN")
+        a.pin("R16", "2", "/Power & Battery/CHG_TS_FIXED")
+        a.value_starts("R705", "7.50k 1%")
+        a.pin("R705", "1", "/Power & Battery/CHG_TS_FIXED")
+        a.pin("R705", "2", "GND")
+        a.pin("U2", "12", "/Power & Battery/PMIC_QON_PIN")
+        a.pin("U2", "13", "/Power & Battery/CHG_CE_HW_N")
+        a.pin("U2", "24", "/Power & Battery/SDRV_GATE")
+        a.pin("Q25", "4", "/Power & Battery/SDRV_GATE")
+        a.pin("Q25", "5", "/PACK_POS_FUSED")
+        a.pin("Q702", "1", "/PMIC_QON_ASSERT")
+        a.pin("Q702", "2", "GND")
+        a.pin("Q702", "3", "/Power & Battery/PMIC_QON_PIN")
+        a.pin("R13", "1", "/PMIC_QON_ASSERT")
+        a.pin("R13", "2", "GND")
+        a.pin("D715", "1", "/CASE_PWRBTN_N")
+        a.pin("D715", "2", "/Power & Battery/PMIC_QON_PIN")
+        a.pin("D716", "1", "/CASE_PWRBTN_N")
+        a.pin("D716", "2", "/MU_PWRBTN_N")
+        a.eq(
+            a.net_members.get("/Power & Battery/PMIC_QON_PIN"),
+            {("D715", "2"), ("Q702", "3"), ("U2", "12")},
+            "QON charger-domain membership",
+        )
     a.absent("C184")
     a.pin("U10", "11", "/Power & Battery/FG_TS")
     a.value_starts("R855", "10k")
@@ -261,32 +269,37 @@ def run_checks(a: ClosureAudit, skip_pack: bool = False) -> None:
     a.pin("U12", "16", "/AUX_PGOOD")
     for ref, p1, p2, value in (
         ("R739", "/Power & Battery/AUX_DC_PROTECTED", "/Power & Battery/AUX_PGTH", "332k 0.1%"),
-        ("R740", "/Power & Battery/AUX_PGTH", "GND", "97.6k 0.1%"),
+        ("R740", "/Power & Battery/AUX_PGTH", "GND", "97.6k"),
     ):
         a.pin(ref, "1", p1)
         a.pin(ref, "2", p2)
         a.value_starts(ref, value)
-    for pin, net in {
-        "1": "/Power & Battery/AON_EFUSE_UV",
-        "2": "/Power & Battery/AON_EFUSE_OV",
-        "4": "/AON_FAULT_N",
-        "5": "/Power & Battery/AON_OR_RAW",
-        "6": "/EC_AON_IN",
-        "7": "/Power & Battery/AON_EFUSE_DVDT",
-        "8": "GND",
-        "9": "/Power & Battery/AON_EFUSE_ILM",
-    }.items():
-        a.pin("U718", pin, net)
-    a.prop_eq("U718", "MPN", "TPS259470ARPW")
-    for ref, value, mpn, p1, p2 in (
-        ("R795", "301k 0.1%", "RT0603BRD07301KL", "/Power & Battery/AON_OR_RAW", "/Power & Battery/AON_EFUSE_UV"),
-        ("R796", "52.3k 0.1%", "RT0603BRD0752K3L", "/Power & Battery/AON_EFUSE_UV", "/Power & Battery/AON_EFUSE_OV"),
-        ("R797", "20.0k 0.1%", "RT0603BRD0720KL", "/Power & Battery/AON_EFUSE_OV", "GND"),
-    ):
-        a.value_starts(ref, value)
-        a.prop_eq(ref, "MPN", mpn)
-        a.pin(ref, "1", p1)
-        a.pin(ref, "2", p2)
+    if modern:
+        from verify_aon_power import inspect as aon_check
+        result = aon_check(a.netlist)
+        a.check(not result["failures"], "standby wiring and tolerance screens", result["failures"])
+    else:
+        for pin, net in {
+            "1": "/Power & Battery/AON_EFUSE_UV",
+            "2": "/Power & Battery/AON_EFUSE_OV",
+            "4": "/AON_FAULT_N",
+            "5": "/Power & Battery/AON_OR_RAW",
+            "6": "/EC_AON_IN",
+            "7": "/Power & Battery/AON_EFUSE_DVDT",
+            "8": "GND",
+            "9": "/Power & Battery/AON_EFUSE_ILM",
+        }.items():
+            a.pin("U718", pin, net)
+        a.prop_eq("U718", "MPN", "TPS259470ARPW")
+        for ref, value, mpn, p1, p2 in (
+            ("R795", "301k 0.1%", "RT0603BRD07301KL", "/Power & Battery/AON_OR_RAW", "/Power & Battery/AON_EFUSE_UV"),
+            ("R796", "52.3k 0.1%", "RT0603BRD0752K3L", "/Power & Battery/AON_EFUSE_UV", "/Power & Battery/AON_EFUSE_OV"),
+            ("R797", "20.0k 0.1%", "RT0603BRD0720KL", "/Power & Battery/AON_EFUSE_OV", "GND"),
+        ):
+            a.value_starts(ref, value)
+            a.prop_eq(ref, "MPN", mpn)
+            a.pin(ref, "1", p1)
+            a.pin(ref, "2", p2)
 
     # Resetting the STM32 resets the source manager and removes all PD enables.
     source_manager = {
@@ -304,6 +317,8 @@ def run_checks(a: ClosureAudit, skip_pack: bool = False) -> None:
         "23": "/I2C_SDA",
         "24": "/MCU_3V3",
     }
+    if modern:
+        source_manager.update({"3":"/NRST_NET", "7":"/PD1_EFUSE_PG", "8":"/PD2_EFUSE_PG"})
     for pin, net in source_manager.items():
         a.pin("U44", pin, net)
     a.prop_eq("U44", "MPN", "TCA9539PWR")

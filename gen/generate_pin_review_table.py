@@ -159,9 +159,40 @@ def add_lm706a0(ref: str, prefix: str, sense: str, output: str, power_good: str)
 
 
 def part_identity_errors(comp_meta):
+    identities = dict(CURRENT_PART_IDENTITIES)
+    if comp_meta.get("U2", {}).get("part") == "ISL9241":
+        identities.update({"U2": ("ISL9241", "ISL9241"),
+            "U718": ("LTC4368-2", "LTC4368-2"), "U2660": ("LTC4231-1", "LTC4231-1"),
+            "U750": ("TPS552882", "TPS552882"), "U5": ("Regulator_Switching", "TPS62933")})
     return {ref: {"expected": expected, "actual": (comp_meta.get(ref, {}).get("lib"), comp_meta.get(ref, {}).get("part"))}
-            for ref, expected in CURRENT_PART_IDENTITIES.items()
+            for ref, expected in identities.items()
             if (comp_meta.get(ref, {}).get("lib"), comp_meta.get(ref, {}).get("part")) != expected}
+
+
+def load_power_revision_overrides(comp_meta):
+    if comp_meta.get("U2", {}).get("part") != "ISL9241":
+        return
+    from verify_electrical_calculations import component_values
+    from verify_power_revision import check as check_power
+    from verify_aon_power import inspect as inspect_aon
+    expected = check_power(component_values(NETLIST))["expected_pins"]
+    for ref, pins in inspect_aon(NETLIST)["expected_pins"].items():
+        expected.setdefault(ref, {}).update(pins)
+    clear_ref_contracts("U2", "U5", "U750", "U718", "U2660")
+    add("U64", 3, "/Internal Services/TRACKPAD_EN", "Trackpad supply follows its hardware-qualified enable.", "gen/verify_design_contracts.py")
+    aliases = {"/EC & MCU/NRST_NET":"/NRST_NET", "/PMIC_QON_ASSERT":"/MU_PROCHOT_RELEASE",
+               "/PD1_EFUSE_FAULT_N":"/PD1_EFUSE_PG", "/PD2_EFUSE_FAULT_N":"/PD2_EFUSE_PG"}
+    for key, contract in list(contracts.items()):
+        if contract.expected in aliases:
+            contracts[key] = Contract(aliases[contract.expected], "Reset and source-control signal for the 100 W power revision.",
+                                      "gen/verify_power_revision.py", contract.mode)
+    for ref, pins in expected.items():
+        for pin, net in pins.items():
+            if net is None:
+                add_nc(ref, pin, "Unused pin in the reviewed power configuration.", "gen/verify_power_revision.py; gen/verify_aon_power.py")
+            else:
+                add(ref, pin, net, "Reviewed power, sensing or control connection.", "gen/verify_power_revision.py; gen/verify_aon_power.py")
+    CURRENT_REQUIRED_REFS.update(ref for ref in comp_meta if re.fullmatch(r"(?:RS|TP|[RCUQDL])26[0-9]{2}", ref))
 
 
 def clear_ref_contracts(*refs: str) -> None:
@@ -2366,6 +2397,7 @@ def main() -> int:
     load_current_architecture_overrides()
     export_netlist()
     comp_meta, comp_pins = parse_netlist()
+    load_power_revision_overrides(comp_meta)
     identity_errors = part_identity_errors(comp_meta)
     rows, missing_refs = generate_rows(comp_meta, comp_pins)
     write_csv(rows)

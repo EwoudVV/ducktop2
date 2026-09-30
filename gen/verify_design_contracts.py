@@ -72,7 +72,7 @@ def expect_unconnected(components, ref: str, pin: str) -> None:
     got = net(components, ref, pin)
     # Native XML carries one symbol UUID per unit. A single-unit connector
     # cannot acquire a suffix just because its net name contains one.
-    units = len(getattr(comp(components, ref), 'path', '').split()) or 1
+    units = len(getattr(comp(components, ref), 'unit_paths', ())) or len(getattr(comp(components, ref), 'path', '').split()) or 1
     suffix = f"(?:[{'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[:units]}])?" if 1 < units <= 26 else ""
     pattern = rf"unconnected-\({re.escape(ref)}{suffix}(?:-[^()]*)?-Pad{re.escape(pin)}\)"
     if got is None or re.fullmatch(pattern, got) is None:
@@ -362,6 +362,7 @@ def check_oled(components, fps=None):
 
 
 def check_battery_and_charger(components):
+    modern = prop(components, "U2", "MPN") == "ISL9241IRTZ"
     # Board split Phase 2.4: the pack protection contracts (J2, F1, U719
     # BQ77915, U11 LTC4368, Q11/Q12, Q703/Q704, RS10/RS11, C725, R700-R709,
     # Q701, C700/C724) moved to the BMS daughterboard (bms/bms.kicad_sch).
@@ -393,125 +394,132 @@ def check_battery_and_charger(components):
         expect(prop(components, ref, "ProcurementClass"),
                "PCB copper test feature", f"{ref} procurement class")
 
-    for pin in ("2", "3", "8", "9"):
-        expect(net(components, "U2", pin), "/Power & Battery/VBUS_COMBINED", f"BQ25798 VBUS/VAC pin {pin}")
-    for pin in ("10", "11", "27"):
-        expect(net(components, "U2", pin), "GND", f"BQ25798 ground pin {pin}")
-    expect(net(components, "U2", "16"), "/Power & Battery/CHG_TS_FIXED",
-           "BQ25798 fixed non-sensing TS input")
-    expect_value_prefix(components, "R16", "5.24k 1%", "BQ25798 fixed TS top")
-    expect(net(components, "R16", "1"), "/Power & Battery/REGN", "BQ25798 TS divider source")
-    expect(net(components, "R16", "2"), "/Power & Battery/CHG_TS_FIXED", "BQ25798 TS divider node")
-    expect_value_prefix(components, "R705", "7.50k 1%", "BQ25798 fixed TS bottom")
-    expect(net(components, "R705", "1"), "/Power & Battery/CHG_TS_FIXED", "BQ25798 TS divider bottom")
-    expect(net(components, "R705", "2"), "GND", "BQ25798 TS divider return")
-    expect(net(components, "U2", "12"), "/Power & Battery/PMIC_QON_PIN",
-           "BQ25798 QON local charger-domain node")
-    for pin, want in {
-        "1": "/PMIC_QON_ASSERT", "2": "GND", "3": "/Power & Battery/PMIC_QON_PIN",
-    }.items():
-        expect(net(components, "Q702", pin), want, f"QON open-drain transistor pin {pin}")
-    expect(prop(components, "Q702", "MPN"), "BSS138LT1G", "QON transistor exact MPN")
-    expect_value_prefix(components, "R13", "100k QON-control gate pulldown",
-                        "QON gate default-off resistor")
-    expect(net(components, "R13", "1"), "/PMIC_QON_ASSERT", "QON gate control")
-    expect(net(components, "R13", "2"), "GND", "QON gate default-off return")
-    for ref, anode in (("D715", "/Power & Battery/PMIC_QON_PIN"),
-                       ("D716", "/MU_PWRBTN_N")):
-        expect(net(components, ref, "1"), "/CASE_PWRBTN_N", f"{ref} case-button cathode")
-        expect(net(components, ref, "2"), anode, f"{ref} isolated target anode")
-        expect(prop(components, ref, "MPN"), "BAT54WS-7-F", f"{ref} exact Schottky")
-    nodes = net_nodes()
-    expect(nodes.get("/Power & Battery/PMIC_QON_PIN"),
-           {("U2", "12"), ("Q702", "3"), ("D715", "2")},
-           "QON charger-domain node membership")
-    expect(nodes.get("/PMIC_QON_ASSERT"),
-           {("U4", "26"), ("Q702", "1"), ("R13", "1")},
-           "QON active-high control node membership")
-    expect(nodes.get("/CASE_PWRBTN_N"),
-           {("J16", "2"), ("D715", "1"), ("D716", "1")},
-           "case power-button isolated fanout membership")
-    expect(net(components, "U2", "18"), "/Power & Battery/BATP_SENSE", "BQ25798 BATP Kelvin sense")
-    for pin in ("22", "23"):
-        expect(net(components, "U2", pin), "/Power & Battery/BAT_CHARGER", f"BQ25798 BAT pin {pin}")
-    expect(net(components, "U2", "24"), "/Power & Battery/SDRV_GATE", "BQ25798 SDRV")
-    if "C184" in components:
-        fail("obsolete SDRV-to-ground capacitor C184 remains; the released design uses Q25 ship FET")
-    for pin in ("1", "2", "3"):
-        expect(net(components, "Q25", pin), "/Power & Battery/BAT_CHARGER", f"ship FET source pin {pin}")
-    expect(net(components, "Q25", "4"), "/Power & Battery/SDRV_GATE", "ship FET gate")
-    expect(net(components, "Q25", "5"), "/PACK_POS_FUSED", "ship FET pack-side drain (FPC-3 boundary)")
-    expect(prop(components, "Q25", "MPN"), "CSD17575Q3", "ship FET exact MPN")
-    expect(comp(components, "Q25").footprint, "ducktop2:CSD17575Q3_DQG",
-           "ship FET TI DQG footprint (Phase 5: value/footprint agree)")
-    expect(net(components, "U2", "25"), "/VSYS", "BQ25798 SYS")
-    expect(net(components, "U2", "13"), "/Power & Battery/CHG_CE_HW_N", "BQ25798 fail-off CE")
-    expect_unconnected(components, "U2", "6")
-    expect_unconnected(components, "U2", "7")
-    expect_value_prefix(components, "R18", "10.5k", "BQ25798 PROG default")
-    expect_value_prefix(components, "R14", "10k", "BQ25798 CE hardware-disable pull-up")
-    expect(net(components, "R14", "1"), "/Power & Battery/REGN", "BQ25798 CE pull-up source")
-    expect(net(components, "R14", "2"), "/Power & Battery/CHG_CE_HW_N", "BQ25798 CE pull-up node")
-    for pin, want in {
-        "1": "/Power & Battery/CHG_ENABLE_THERM", "2": "GND", "3": "/Power & Battery/CHG_CE_HW_N",
-    }.items():
-        expect(net(components, "Q700", pin), want, f"charger enable transistor pin {pin}")
-    expect_value_prefix(components, "R719", "100k", "charger-enable default-off pull-down")
-    expect(net(components, "R719", "1"), "/CHG_ENABLE", "charger-enable pull-down signal")
-    expect(net(components, "R719", "2"), "GND", "charger-enable pull-down return")
-    expect(prop(components, "U2210", "MPN"), "SN74LVC1G08DBVR", "charger temperature AND part")
-    for pin, want in {"1": "/CHG_ENABLE", "2": "/Power & Battery/PACK_CHG_TEMP_OK_IN",
-                      "3": "GND", "4": "/Power & Battery/CHG_ENABLE_THERM", "5": "/MCU_3V3"}.items():
-        expect(net(components, "U2210", pin), want, f"charger temperature AND pin {pin}")
-    for ref, p1, p2, mpn in [
-        ("R2260", "/PACK_CHG_TEMP_OK", "/Power & Battery/PACK_CHG_TEMP_OK_IN", "RC0603FR-071KL"),
-        ("R2261", "/Power & Battery/PACK_CHG_TEMP_OK_IN", "GND", "RC0603FR-07100KL"),
-        ("R2262", "/Power & Battery/CHG_ENABLE_THERM", "GND", "RC0603FR-074K7L"),
-    ]:
-        expect(net(components, ref, "1"), p1, f"{ref} first net")
-        expect(net(components, ref, "2"), p2, f"{ref} second net")
-        expect(prop(components, ref, "MPN"), mpn, f"{ref} exact part")
-    expect(net(components, "R18", "1"), "/Power & Battery/PROG_SET", "BQ25798 PROG resistor top")
-    expect(net(components, "R18", "2"), "GND", "BQ25798 PROG resistor bottom")
-    expect(net(components, "R17", "1"), "/Power & Battery/REGN", "BQ25798 ILIM top source")
-    expect_value_prefix(components, "R17", "47.0k 0.02%", "BQ25798 3A ILIM top")
-    expect_value_prefix(components, "R190", "100k 0.02%", "BQ25798 3A ILIM bottom")
-    expect(net(components, "R190", "2"), "GND", "BQ25798 ILIM bottom")
-    expect(net(components, "L1", "1"), "/Power & Battery/SW1", "BQ25798 inductor side A")
-    expect(net(components, "L1", "2"), "/Power & Battery/SW2", "BQ25798 inductor side B")
-    expect_value_prefix(components, "L1", "1.0uH 20% 28A Isat", "BQ25798 released inductor value")
-    expect(comp(components, "L1").footprint, "Inductor_SMD:L_Coilcraft_XAL7030-102",
-           "BQ25798 exact inductor footprint")
-    expect(prop(components, "L1", "Manufacturer"), "Coilcraft", "BQ25798 inductor manufacturer")
-    expect(prop(components, "L1", "MPN"), "XAL7030-102MEC", "BQ25798 inductor MPN")
+    if prop(components, "U2", "MPN") == "ISL9241IRTZ":
+        from verify_electrical_calculations import component_values
+        from verify_power_revision import check as check_power_revision
+        result = check_power_revision(component_values(sync.NETLIST))
+        if result["failures"]:
+            fail("100 W power wiring: " + "; ".join(result["failures"]))
+    else:
+        for pin in ("2", "3", "8", "9"):
+            expect(net(components, "U2", pin), "/Power & Battery/VBUS_COMBINED", f"BQ25798 VBUS/VAC pin {pin}")
+        for pin in ("10", "11", "27"):
+            expect(net(components, "U2", pin), "GND", f"BQ25798 ground pin {pin}")
+        expect(net(components, "U2", "16"), "/Power & Battery/CHG_TS_FIXED",
+               "BQ25798 fixed non-sensing TS input")
+        expect_value_prefix(components, "R16", "5.24k 1%", "BQ25798 fixed TS top")
+        expect(net(components, "R16", "1"), "/Power & Battery/REGN", "BQ25798 TS divider source")
+        expect(net(components, "R16", "2"), "/Power & Battery/CHG_TS_FIXED", "BQ25798 TS divider node")
+        expect_value_prefix(components, "R705", "7.50k 1%", "BQ25798 fixed TS bottom")
+        expect(net(components, "R705", "1"), "/Power & Battery/CHG_TS_FIXED", "BQ25798 TS divider bottom")
+        expect(net(components, "R705", "2"), "GND", "BQ25798 TS divider return")
+        expect(net(components, "U2", "12"), "/Power & Battery/PMIC_QON_PIN",
+               "BQ25798 QON local charger-domain node")
+        for pin, want in {
+            "1": "/PMIC_QON_ASSERT", "2": "GND", "3": "/Power & Battery/PMIC_QON_PIN",
+        }.items():
+            expect(net(components, "Q702", pin), want, f"QON open-drain transistor pin {pin}")
+        expect(prop(components, "Q702", "MPN"), "BSS138LT1G", "QON transistor exact MPN")
+        expect_value_prefix(components, "R13", "100k QON-control gate pulldown",
+                            "QON gate default-off resistor")
+        expect(net(components, "R13", "1"), "/PMIC_QON_ASSERT", "QON gate control")
+        expect(net(components, "R13", "2"), "GND", "QON gate default-off return")
+        for ref, anode in (("D715", "/Power & Battery/PMIC_QON_PIN"),
+                           ("D716", "/MU_PWRBTN_N")):
+            expect(net(components, ref, "1"), "/CASE_PWRBTN_N", f"{ref} case-button cathode")
+            expect(net(components, ref, "2"), anode, f"{ref} isolated target anode")
+            expect(prop(components, ref, "MPN"), "BAT54WS-7-F", f"{ref} exact Schottky")
+        nodes = net_nodes()
+        expect(nodes.get("/Power & Battery/PMIC_QON_PIN"),
+               {("U2", "12"), ("Q702", "3"), ("D715", "2")},
+               "QON charger-domain node membership")
+        expect(nodes.get("/PMIC_QON_ASSERT"),
+               {("U4", "26"), ("Q702", "1"), ("R13", "1")},
+               "QON active-high control node membership")
+        expect(nodes.get("/CASE_PWRBTN_N"),
+               {("J16", "2"), ("D715", "1"), ("D716", "1")},
+               "case power-button isolated fanout membership")
+        expect(net(components, "U2", "18"), "/Power & Battery/BATP_SENSE", "BQ25798 BATP Kelvin sense")
+        for pin in ("22", "23"):
+            expect(net(components, "U2", pin), "/Power & Battery/BAT_CHARGER", f"BQ25798 BAT pin {pin}")
+        expect(net(components, "U2", "24"), "/Power & Battery/SDRV_GATE", "BQ25798 SDRV")
+        if "C184" in components:
+            fail("obsolete SDRV-to-ground capacitor C184 remains; the released design uses Q25 ship FET")
+        for pin in ("1", "2", "3"):
+            expect(net(components, "Q25", pin), "/Power & Battery/BAT_CHARGER", f"ship FET source pin {pin}")
+        expect(net(components, "Q25", "4"), "/Power & Battery/SDRV_GATE", "ship FET gate")
+        expect(net(components, "Q25", "5"), "/PACK_POS_FUSED", "ship FET pack-side drain (FPC-3 boundary)")
+        expect(prop(components, "Q25", "MPN"), "CSD17575Q3", "ship FET exact MPN")
+        expect(comp(components, "Q25").footprint, "ducktop2:CSD17575Q3_DQG",
+               "ship FET TI DQG footprint (Phase 5: value/footprint agree)")
+        expect(net(components, "U2", "25"), "/VSYS", "BQ25798 SYS")
+        expect(net(components, "U2", "13"), "/Power & Battery/CHG_CE_HW_N", "BQ25798 fail-off CE")
+        expect_unconnected(components, "U2", "6")
+        expect_unconnected(components, "U2", "7")
+        expect_value_prefix(components, "R18", "10.5k", "BQ25798 PROG default")
+        expect_value_prefix(components, "R14", "10k", "BQ25798 CE hardware-disable pull-up")
+        expect(net(components, "R14", "1"), "/Power & Battery/REGN", "BQ25798 CE pull-up source")
+        expect(net(components, "R14", "2"), "/Power & Battery/CHG_CE_HW_N", "BQ25798 CE pull-up node")
+        for pin, want in {
+            "1": "/Power & Battery/CHG_ENABLE_THERM", "2": "GND", "3": "/Power & Battery/CHG_CE_HW_N",
+        }.items():
+            expect(net(components, "Q700", pin), want, f"charger enable transistor pin {pin}")
+        expect_value_prefix(components, "R719", "100k", "charger-enable default-off pull-down")
+        expect(net(components, "R719", "1"), "/CHG_ENABLE", "charger-enable pull-down signal")
+        expect(net(components, "R719", "2"), "GND", "charger-enable pull-down return")
+        expect(prop(components, "U2210", "MPN"), "SN74LVC1G08DBVR", "charger temperature AND part")
+        for pin, want in {"1": "/CHG_ENABLE", "2": "/Power & Battery/PACK_CHG_TEMP_OK_IN",
+                          "3": "GND", "4": "/Power & Battery/CHG_ENABLE_THERM", "5": "/MCU_3V3"}.items():
+            expect(net(components, "U2210", pin), want, f"charger temperature AND pin {pin}")
+        for ref, p1, p2, mpn in [
+            ("R2260", "/PACK_CHG_TEMP_OK", "/Power & Battery/PACK_CHG_TEMP_OK_IN", "RC0603FR-071KL"),
+            ("R2261", "/Power & Battery/PACK_CHG_TEMP_OK_IN", "GND", "RC0603FR-07100KL"),
+            ("R2262", "/Power & Battery/CHG_ENABLE_THERM", "GND", "RC0603FR-074K7L"),
+        ]:
+            expect(net(components, ref, "1"), p1, f"{ref} first net")
+            expect(net(components, ref, "2"), p2, f"{ref} second net")
+            expect(prop(components, ref, "MPN"), mpn, f"{ref} exact part")
+        expect(net(components, "R18", "1"), "/Power & Battery/PROG_SET", "BQ25798 PROG resistor top")
+        expect(net(components, "R18", "2"), "GND", "BQ25798 PROG resistor bottom")
+        expect(net(components, "R17", "1"), "/Power & Battery/REGN", "BQ25798 ILIM top source")
+        expect_value_prefix(components, "R17", "47.0k 0.02%", "BQ25798 3A ILIM top")
+        expect_value_prefix(components, "R190", "100k 0.02%", "BQ25798 3A ILIM bottom")
+        expect(net(components, "R190", "2"), "GND", "BQ25798 ILIM bottom")
+        expect(net(components, "L1", "1"), "/Power & Battery/SW1", "BQ25798 inductor side A")
+        expect(net(components, "L1", "2"), "/Power & Battery/SW2", "BQ25798 inductor side B")
+        expect_value_prefix(components, "L1", "1.0uH 20% 28A Isat", "BQ25798 released inductor value")
+        expect(comp(components, "L1").footprint, "Inductor_SMD:L_Coilcraft_XAL7030-102",
+               "BQ25798 exact inductor footprint")
+        expect(prop(components, "L1", "Manufacturer"), "Coilcraft", "BQ25798 inductor manufacturer")
+        expect(prop(components, "L1", "MPN"), "XAL7030-102MEC", "BQ25798 inductor MPN")
 
-    # BQ25798 Rev C Figure 8-1 support network. ERC cannot establish that the
-    # required local energy-storage and bootstrap population is complete.
-    for ref, value, net_a, net_b in (
-        ("C7", "47n 25V X7R", "/Power & Battery/BTST1_NODE", "/Power & Battery/SW1"),
-        ("C8", "47n 25V X7R", "/Power & Battery/BTST2_NODE", "/Power & Battery/SW2"),
-        ("C9", "4.7u 10V X7R", "/Power & Battery/REGN", "GND"),
-        ("C10", "100n 50V X7R", "/Power & Battery/PMID", "GND"),
-        ("C11", "100n 50V X7R", "/VSYS", "GND"),
-        ("C12", "100n 50V X7R", "/Power & Battery/VBUS_COMBINED", "GND"),
-        ("C701", "10u 25V X7R", "/Power & Battery/VBUS_COMBINED", "GND"),
-        ("C702", "10u 25V X7R", "/Power & Battery/VBUS_COMBINED", "GND"),
-        ("C703", "10u 25V X7R", "/Power & Battery/PMID", "GND"),
-        ("C704", "10u 25V X7R", "/Power & Battery/PMID", "GND"),
-        ("C705", "10u 25V X7R", "/Power & Battery/PMID", "GND"),
-        ("C706", "10u 25V X7R", "/VSYS", "GND"),
-        ("C707", "10u 25V X7R", "/VSYS", "GND"),
-        ("C708", "10u 25V X7R", "/VSYS", "GND"),
-        ("C709", "10u 25V X7R", "/VSYS", "GND"),
-        ("C710", "10u 25V X7R", "/VSYS", "GND"),
-        ("C711", "100n 50V X7R", "/Power & Battery/BAT_CHARGER", "GND"),
-        ("C712", "10u 25V X7R", "/Power & Battery/BAT_CHARGER", "GND"),
-        ("C713", "10u 25V X7R", "/Power & Battery/BAT_CHARGER", "GND"),
-        ("C714", "2.2u 25V X7R", "/Power & Battery/VBUS_DAMP", "GND"),
-    ):
-        expect_value_prefix(components, ref, value, f"{ref} BQ25798 support value")
-        expect(net(components, ref, "1"), net_a, f"{ref} BQ25798 support pin 1")
-        expect(net(components, ref, "2"), net_b, f"{ref} BQ25798 support pin 2")
+        # BQ25798 Rev C Figure 8-1 support network. ERC cannot establish that the
+        # required local energy-storage and bootstrap population is complete.
+        for ref, value, net_a, net_b in (
+            ("C7", "47n 25V X7R", "/Power & Battery/BTST1_NODE", "/Power & Battery/SW1"),
+            ("C8", "47n 25V X7R", "/Power & Battery/BTST2_NODE", "/Power & Battery/SW2"),
+            ("C9", "4.7u 10V X7R", "/Power & Battery/REGN", "GND"),
+            ("C10", "100n 50V X7R", "/Power & Battery/PMID", "GND"),
+            ("C11", "100n 50V X7R", "/VSYS", "GND"),
+            ("C12", "100n 50V X7R", "/Power & Battery/VBUS_COMBINED", "GND"),
+            ("C701", "10u 25V X7R", "/Power & Battery/VBUS_COMBINED", "GND"),
+            ("C702", "10u 25V X7R", "/Power & Battery/VBUS_COMBINED", "GND"),
+            ("C703", "10u 25V X7R", "/Power & Battery/PMID", "GND"),
+            ("C704", "10u 25V X7R", "/Power & Battery/PMID", "GND"),
+            ("C705", "10u 25V X7R", "/Power & Battery/PMID", "GND"),
+            ("C706", "10u 25V X7R", "/VSYS", "GND"),
+            ("C707", "10u 25V X7R", "/VSYS", "GND"),
+            ("C708", "10u 25V X7R", "/VSYS", "GND"),
+            ("C709", "10u 25V X7R", "/VSYS", "GND"),
+            ("C710", "10u 25V X7R", "/VSYS", "GND"),
+            ("C711", "100n 50V X7R", "/Power & Battery/BAT_CHARGER", "GND"),
+            ("C712", "10u 25V X7R", "/Power & Battery/BAT_CHARGER", "GND"),
+            ("C713", "10u 25V X7R", "/Power & Battery/BAT_CHARGER", "GND"),
+            ("C714", "2.2u 25V X7R", "/Power & Battery/VBUS_DAMP", "GND"),
+        ):
+            expect_value_prefix(components, ref, value, f"{ref} BQ25798 support value")
+            expect(net(components, ref, "1"), net_a, f"{ref} BQ25798 support pin 1")
+            expect(net(components, ref, "2"), net_b, f"{ref} BQ25798 support pin 2")
     expect(net(components, "F190", "1"), "/AUX_DC_RAW", "AUX fuse input (FPC-1 boundary from left board)")
     expect(net(components, "F190", "2"), "/Power & Battery/AUX_DC_FUSED", "AUX fuse output")
     expect(net(components, "D190", "1"), "/Power & Battery/AUX_DC_FUSED", "AUX TVS protected node")
@@ -616,10 +624,14 @@ def check_battery_and_charger(components):
         ("R745", "54.9k 0.02%", "/Power & Battery/ST2_MAIN_UV", "/Power & Battery/ST2_MAIN_OV"),
         ("R746", "20.0k 0.02%", "/Power & Battery/ST2_MAIN_OV", "GND"),
     ):
+        if modern:
+            value = {"R730":"75.0k", "R731":"23.2k", "R732":"4.53k",
+                     "R741":"75.0k", "R742":"23.2k", "R743":"4.53k",
+                     "R744":"75.0k", "R745":"23.2k", "R746":"4.53k"}.get(ref, value)
         expect_value_prefix(components, ref, value, f"{ref} selector threshold value")
         expect(net(components, ref, "1"), net_a, f"{ref} pin 1")
         expect(net(components, ref, "2"), net_b, f"{ref} pin 2")
-    expect_value_prefix(components, "C741", "15n", "LTC4418 validation timer")
+    expect_value_prefix(components, "C741", "1n" if modern else "15n", "LTC4418 validation timer")
     expect(net(components, "C740", "1"), "/Power & Battery/MAIN_SEL_INTVCC", "LTC4418 INTVCC bypass")
     expect(net(components, "C741", "1"), "/Power & Battery/MAIN_SEL_TMR", "LTC4418 timer capacitor")
     for ref in ("C740", "C741", "C742", "C743", "C744", "C745"):
@@ -628,48 +640,54 @@ def check_battery_and_charger(components):
     expect(net(components, "C746", "1"), "/Power & Battery/VBUS_COMBINED", "LTC4418 output hold-up rail")
     expect(net(components, "C746", "2"), "GND", "LTC4418 output hold-up return")
 
-    for ref, source in (
-        ("D710", "/Power & Battery/BAT_CHARGER"),
-        ("D711", "/Power & Battery/AUX_DC_PROTECTED"),
-        ("D712", "/PD1_VBUS_RAW"),
-        ("D713", "/PD2_VBUS_RAW"),
-    ):
-        expect(net(components, ref, "1"), "/Power & Battery/AON_OR_RAW", f"{ref} always-on OR cathode")
-        expect(net(components, ref, "2"), source, f"{ref} always-on OR source")
-        expect_contains(comp(components, ref).value, "B340A", f"{ref} always-on Schottky")
-    rtn="/Power & Battery/AON_EFUSE_RTN"
-    for pin, want in {
-        "8":"/Power & Battery/AON_OR_RAW", "9":"/Power & Battery/AON_OR_RAW",
-        "10":"/Power & Battery/AON_EFUSE_UV", "12":"/Power & Battery/AON_EFUSE_OV",
-        "13":rtn, "15":rtn, "17":"GND", "19":"/Power & Battery/AON_EFUSE_ILM",
-        "20":"/Power & Battery/AON_EFUSE_DVDT", "22":"/AON_FAULT_N",
-        "23":"/EC_AON_IN", "24":"/EC_AON_IN", "25":rtn,
-    }.items():
-        expect(net(components,"U718",pin),want,f"aggregate AON eFuse pin {pin}")
-    for pin in ("1","2","3","4","5","6","7","11","14","16","18","21"):
-        expect_unconnected(components,"U718",pin)
-    expect(prop(components,"U718","MPN"),"TPS26600RHFR","aggregate AON eFuse exact MPN")
-    expect(comp(components,"U718").footprint,
-           "Package_DFN_QFN:Texas_RHF0024A_VQFN-24-1EP_4x5mm_P0.5mm_EP2.65x3.65mm", "aggregate AON eFuse exact footprint")
-    for ref,value,net_a,net_b in (
-        ("R795","8.06k 0.02%","/Power & Battery/AON_OR_RAW","/Power & Battery/AON_EFUSE_UV"),
-        ("R796","1.43k 0.02%","/Power & Battery/AON_EFUSE_UV","/Power & Battery/AON_EFUSE_OV"),
-        ("R797","511R 0.02%","/Power & Battery/AON_EFUSE_OV",rtn),
-        ("R798","16k 0.02%","/Power & Battery/AON_EFUSE_ILM",rtn),
-        ("R799","16k 0.02%","/Power & Battery/AON_EFUSE_ILM",rtn),
-        ("C795","1u 25V","/Power & Battery/AON_OR_RAW","GND"),
-        ("C796","100n 50V","/Power & Battery/AON_OR_RAW","GND"),
-        ("C797","10u 25V","/EC_AON_IN","GND"),
-        ("C798","100n 50V","/EC_AON_IN","GND"),
-        ("C799","22n 50V C0G","/Power & Battery/AON_EFUSE_DVDT",rtn),
-    ):
-        expect_value_prefix(components,ref,value,f"{ref} AON support value")
-        expect(net(components,ref,"1"),net_a,f"{ref} AON support pin1")
-        expect(net(components,ref,"2"),net_b,f"{ref} AON support pin2")
-    for ref,mpn in {"R795":"TNPU06038K06HZEN00","R796":"TNPU06031K43HZEN00",
-                    "R797":"TNPU0603511RHZEN00","R798":"TNPU060316K0HZEN00","R799":"TNPU060316K0HZEN00",
-                    "C799":"C0805C223J5GACTU"}.items():
-        expect(prop(components,ref,"MPN"),mpn,f"{ref} AON exact part")
+    if prop(components, "U2", "MPN") == "ISL9241IRTZ":
+        from verify_aon_power import inspect as inspect_aon
+        result = inspect_aon(sync.NETLIST)
+        if result["failures"]:
+            fail("standby supply: " + "; ".join(result["failures"]))
+    else:
+        for ref, source in (
+            ("D710", "/Power & Battery/BAT_CHARGER"),
+            ("D711", "/Power & Battery/AUX_DC_PROTECTED"),
+            ("D712", "/PD1_VBUS_RAW"),
+            ("D713", "/PD2_VBUS_RAW"),
+        ):
+            expect(net(components, ref, "1"), "/Power & Battery/AON_OR_RAW", f"{ref} always-on OR cathode")
+            expect(net(components, ref, "2"), source, f"{ref} always-on OR source")
+            expect_contains(comp(components, ref).value, "B340A", f"{ref} always-on Schottky")
+        rtn="/Power & Battery/AON_EFUSE_RTN"
+        for pin, want in {
+            "8":"/Power & Battery/AON_OR_RAW", "9":"/Power & Battery/AON_OR_RAW",
+            "10":"/Power & Battery/AON_EFUSE_UV", "12":"/Power & Battery/AON_EFUSE_OV",
+            "13":rtn, "15":rtn, "17":"GND", "19":"/Power & Battery/AON_EFUSE_ILM",
+            "20":"/Power & Battery/AON_EFUSE_DVDT", "22":"/AON_FAULT_N",
+            "23":"/EC_AON_IN", "24":"/EC_AON_IN", "25":rtn,
+        }.items():
+            expect(net(components,"U718",pin),want,f"aggregate AON eFuse pin {pin}")
+        for pin in ("1","2","3","4","5","6","7","11","14","16","18","21"):
+            expect_unconnected(components,"U718",pin)
+        expect(prop(components,"U718","MPN"),"TPS26600RHFR","aggregate AON eFuse exact MPN")
+        expect(comp(components,"U718").footprint,
+               "Package_DFN_QFN:Texas_RHF0024A_VQFN-24-1EP_4x5mm_P0.5mm_EP2.65x3.65mm", "aggregate AON eFuse exact footprint")
+        for ref,value,net_a,net_b in (
+            ("R795","8.06k 0.02%","/Power & Battery/AON_OR_RAW","/Power & Battery/AON_EFUSE_UV"),
+            ("R796","1.43k 0.02%","/Power & Battery/AON_EFUSE_UV","/Power & Battery/AON_EFUSE_OV"),
+            ("R797","511R 0.02%","/Power & Battery/AON_EFUSE_OV",rtn),
+            ("R798","16k 0.02%","/Power & Battery/AON_EFUSE_ILM",rtn),
+            ("R799","16k 0.02%","/Power & Battery/AON_EFUSE_ILM",rtn),
+            ("C795","1u 25V","/Power & Battery/AON_OR_RAW","GND"),
+            ("C796","100n 50V","/Power & Battery/AON_OR_RAW","GND"),
+            ("C797","10u 25V","/EC_AON_IN","GND"),
+            ("C798","100n 50V","/EC_AON_IN","GND"),
+            ("C799","22n 50V C0G","/Power & Battery/AON_EFUSE_DVDT",rtn),
+        ):
+            expect_value_prefix(components,ref,value,f"{ref} AON support value")
+            expect(net(components,ref,"1"),net_a,f"{ref} AON support pin1")
+            expect(net(components,ref,"2"),net_b,f"{ref} AON support pin2")
+        for ref,mpn in {"R795":"TNPU06038K06HZEN00","R796":"TNPU06031K43HZEN00",
+                        "R797":"TNPU0603511RHZEN00","R798":"TNPU060316K0HZEN00","R799":"TNPU060316K0HZEN00",
+                        "C799":"C0805C223J5GACTU"}.items():
+            expect(prop(components,ref,"MPN"),mpn,f"{ref} AON exact part")
 
     expect(net(components, "U10", "1"), "/BQ_ALERT", "BQ34Z100 ALERT output")
     expect(net(components, "U10", "4"), "/Power & Battery/FG_BAT_SENSE", "BQ34Z100 BAT sense")
@@ -706,6 +724,8 @@ def check_dnp_metadata(components):
 
 
 def check_ec_core(components):
+    modern = prop(components, "U2", "MPN") == "ISL9241IRTZ"
+    reset_net = "/NRST_NET" if modern else "/EC & MCU/NRST_NET"
     for pin in ("6", "11", "19", "21", "22", "28", "50", "75", "100"):
         expect(net(components, "U4", pin), "/MCU_3V3", f"STM32 VDD/VBAT/VDDA pin {pin}")
     for pin in ("10", "20", "27", "74", "99"):
@@ -735,8 +755,8 @@ def check_ec_core(components):
     expect(net(components, "U4", "17"), "/RADIO_VHF_RF_SEL_3V3", "STM32 VHF RF-select logic")
     expect(net(components, "U4", "18"), "/RADIO_UHF_RF_SEL_3V3", "STM32 UHF RF-select logic")
     expect(net(components, "U4", "29"), "/CHG_ENABLE", "STM32 fail-off charger enable")
-    expect(net(components, "U4", "26"), "/PMIC_QON_ASSERT",
-           "STM32 active-high open-drain QON pulse control")
+    expect(net(components, "U4", "26"), ("/MU_PROCHOT_RELEASE" if modern else "/PMIC_QON_ASSERT"),
+           "STM32 active-high throttle release" if modern else "STM32 QON pulse control")
     expect(net(components, "U4", "51"), "/EC & MCU/SERVICE_MUX_RESET_REQ_N", "STM32 service-mux reset request")
     for pin, want, note in (
         ("33", "/PD1_VALID_N", "left dual-role source-qualified input"),
@@ -759,7 +779,7 @@ def check_ec_core(components):
            "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical", "EC SWD footprint")
     for pin, want in {
         "1": "/EC & MCU/EC_SWD_VTREF", "2": "/EC & MCU/SWDIO_NET",
-        "3": "/EC & MCU/NRST_NET", "4": "/EC & MCU/SWCLK_NET", "5": "GND",
+        "3": reset_net, "4": "/EC & MCU/SWCLK_NET", "5": "GND",
     }.items():
         expect(net(components, "J4", pin), want, f"EC TC2030 pin {pin}")
     expect_unconnected(components, "J4", "6")
@@ -814,35 +834,43 @@ def check_ec_core(components):
     for pin, want in {"1": "GND", "2": "/CASE_PWRBTN_N", "3": "/MU_RSTBTN_N"}.items():
         expect(net(components, "J16", pin), want, f"case-control harness pin {pin}")
     expect(net(components, "R32", "1"), "/MCU_3V3", "NRST pull-up top")
-    expect(net(components, "R32", "2"), "/EC & MCU/NRST_NET", "NRST pull-up bottom")
-    expect(net(components, "C31", "1"), "/EC & MCU/NRST_NET", "NRST cap")
-    expect(net(components, "SW1", "1"), "/EC & MCU/NRST_NET", "reset switch signal")
+    expect(net(components, "R32", "2"), reset_net, "NRST pull-up bottom")
+    expect(net(components, "C31", "1"), reset_net, "NRST cap")
+    expect(net(components, "SW1", "1"), reset_net, "reset switch signal")
     expect(net(components, "SW1", "2"), "GND", "reset switch ground")
     expect(prop(components, "SW1", "MPN"), "B3S-1000", "EC reset switch exact MPN")
     expect(net(components, "R33", "1"), "/EC & MCU/BOOT0_NET", "BOOT0 strap signal")
     expect(net(components, "R33", "2"), "GND", "BOOT0 strap ground")
     expect(net(components, "U5", "3"), "/EC_AON_IN", "EC buck VIN")
-    expect(net(components, "U5", "1"), "GND", "EC buck GND")
+    expect(net(components, "U5", "4" if modern else "1"), "GND", "EC buck GND")
     expect(net(components, "L3", "1"), "/EC & MCU/BUCK_SW", "EC buck inductor switch side")
     expect(net(components, "L3", "2"), "/MCU_3V3", "EC buck output rail")
     expect_value_prefix(components, "L3", "10uH", "EC buck inductor")
     expect(prop(components,"L3","MPN"),"XGL6030-103MEC","AON inductor fault margin")
     expect(comp(components,"L3").footprint,"ducktop2:Coilcraft_XGL6030","AON inductor lands")
-    expect(prop(components,"R35","MPN"),"TNPU0603100KHZEN00","AON precision divider top")
-    expect(prop(components,"R36","MPN"),"TNPU060322K1HZEN00","AON precision divider bottom")
-    expect_value_prefix(components, "R35", "100k", "EC buck feedback top")
-    expect_value_prefix(components, "R36", "22.1k", "EC buck feedback bottom")
-    expect(net(components, "C292", "1"), "/MCU_3V3", "EC buck feed-forward output side")
-    expect(net(components, "C292", "2"), "/EC & MCU/BUCK_FB", "EC buck feed-forward FB side")
+    if modern:
+        expect(prop(components, "R35", "MPN"), "TNPU060362K4HZEN00", "EC divider top")
+        expect(prop(components, "R36", "MPN"), "TNPU060320K0HZEN00", "EC divider bottom")
+        expect(net(components, "C2640", "1"), "/EC & MCU/AON_BUCK_SS", "EC buck soft start")
+        expect(net(components, "C2640", "2"), "GND", "EC buck soft-start return")
+        if "C292" in components:
+            fail("obsolete EC feed-forward capacitor remains")
+    else:
+        expect(prop(components,"R35","MPN"),"TNPU0603100KHZEN00","AON precision divider top")
+        expect(prop(components,"R36","MPN"),"TNPU060322K1HZEN00","AON precision divider bottom")
+        expect_value_prefix(components, "R35", "100k", "EC buck feedback top")
+        expect_value_prefix(components, "R36", "22.1k", "EC buck feedback bottom")
+        expect(net(components, "C292", "1"), "/MCU_3V3", "EC buck feed-forward output side")
+        expect(net(components, "C292", "2"), "/EC & MCU/BUCK_FB", "EC buck feed-forward FB side")
     for ref in ("C36", "C37"):
         expect(net(components, ref, "1"), "/EC_AON_IN", f"{ref} always-on buck input")
         expect(net(components, ref, "2"), "GND", f"{ref} always-on buck return")
 
     source_manager_pins = {
-        "1": "/EC & MCU/SOURCE_MGR_INT_N", "2": "GND", "3": "/EC & MCU/NRST_NET",
+        "1": "/EC & MCU/SOURCE_MGR_INT_N", "2": "GND", "3": reset_net,
         "4": "/PD1_PATH_EN", "5": "/PD2_PATH_EN",
         "6": "/HP_DETECT",
-        "7": "/PD1_EFUSE_FAULT_N", "8": "/PD2_EFUSE_FAULT_N",
+        "7": ("/PD1_EFUSE_PG" if modern else "/PD1_EFUSE_FAULT_N"), "8": ("/PD2_EFUSE_PG" if modern else "/PD2_EFUSE_FAULT_N"),
         "9": "/SLS_S3", "10": "/PACK_FAULT_N",
         "11": "/AUX_FAULT_N", "12": "GND", "13": "/PACK_RETRY_PULSE",
         "14": "/AUX_PGOOD", "15": "/MAIN_USB_VALID_N",
@@ -876,7 +904,7 @@ def check_ec_core(components):
     expect(net(components, "R172", "1"), "/MCU_3V3", "service-mux reset request pull-up rail")
     expect(net(components, "R172", "2"), "/EC & MCU/SERVICE_MUX_RESET_REQ_N", "service-mux reset request")
     for pin, want in {
-        "1": "/EC & MCU/NRST_NET", "2": "/EC & MCU/SERVICE_MUX_RESET_REQ_N",
+        "1": reset_net, "2": "/EC & MCU/SERVICE_MUX_RESET_REQ_N",
         "3": "GND", "4": "/SERVICE_MUX_RESET_N", "5": "/MCU_3V3",
     }.items():
         expect(net(components, "U46", pin), want, f"service-mux reset gate pin {pin}")
@@ -940,6 +968,7 @@ def check_sys5_converter(components):
 
 
 def check_mu_carrier(components, pin_names):
+    modern = prop(components, "U750", "MPN") == "TPS552882RPMR"
     standoff_path = ROOT / "ducktop2.pretty" / "Wurth_9774055243R_M2_H5.5.kicad_mod"
     standoff_text = standoff_path.read_text(encoding="utf-8")
     standoff_pads = rounded_pad_set(source_footprint_pads(standoff_path))
@@ -1020,19 +1049,29 @@ def check_mu_carrier(components, pin_names):
     for pin in [str(n) for n in range(250, 261)]:
         expect(net(components, "A1", pin), "/MU_12V", f"LattePanda Mu regulated VIN pin {pin}")
 
-    for pin, want in {
-        "1": "/Mu Carrier/MU12_EN_UVLO", "2": "/Mu Carrier/MU12_MODE",
-        "3": "/MU_12V_PG", "4": "/Mu Carrier/MU12_CC_N",
-        "5": "/Mu Carrier/MU12_DITH", "6": "/Mu Carrier/MU12_FSW",
-        "7": "/VSYS", "8": "/Mu Carrier/MU12_SW1", "9": "GND",
-        "10": "/Mu Carrier/MU12_SW2", "11": "/Mu Carrier/MU12_PRE_SENSE",
-        "12": "/Mu Carrier/MU12_ISP", "13": "/Mu Carrier/MU12_ISN",
-        "14": "/Mu Carrier/MU12_FB", "15": "/Mu Carrier/MU12_COMP",
-        "17": "GND", "18": "/Mu Carrier/MU12_VCC",
-        "19": "/Mu Carrier/MU12_BOOT2", "20": "/Mu Carrier/MU12_BOOT1",
-        "21": "/Mu Carrier/MU12_EXTVCC",
-    }.items():
-        expect(net(components, "U750", pin), want, f"TPS552892 pin {pin}")
+    if modern:
+        from verify_power_revision import check as check_power_revision
+        from verify_electrical_calculations import component_values
+        expected = check_power_revision(component_values(sync.NETLIST))["expected_pins"]["U750"]
+        for pin, want in expected.items():
+            if want is None:
+                expect_unconnected(components, "U750", pin)
+            else:
+                expect(net(components, "U750", pin), want, f"TPS552882 pin {pin}")
+    else:
+        for pin, want in {
+            "1": "/Mu Carrier/MU12_EN_UVLO", "2": "/Mu Carrier/MU12_MODE",
+            "3": "/MU_12V_PG", "4": "/Mu Carrier/MU12_CC_N",
+            "5": "/Mu Carrier/MU12_DITH", "6": "/Mu Carrier/MU12_FSW",
+            "7": "/VSYS", "8": "/Mu Carrier/MU12_SW1", "9": "GND",
+            "10": "/Mu Carrier/MU12_SW2", "11": "/Mu Carrier/MU12_PRE_SENSE",
+            "12": "/Mu Carrier/MU12_ISP", "13": "/Mu Carrier/MU12_ISN",
+            "14": "/Mu Carrier/MU12_FB", "15": "/Mu Carrier/MU12_COMP",
+            "17": "GND", "18": "/Mu Carrier/MU12_VCC",
+            "19": "/Mu Carrier/MU12_BOOT2", "20": "/Mu Carrier/MU12_BOOT1",
+            "21": "/Mu Carrier/MU12_EXTVCC",
+        }.items():
+            expect(net(components, "U750", pin), want, f"TPS552892 pin {pin}")
     expect_unconnected(components, "U750", "16")
     expect(net(components, "L750", "1"), "/Mu Carrier/MU12_SW1", "Mu 12V inductor SW1")
     expect(net(components, "L750", "2"), "/Mu Carrier/MU12_SW2", "Mu 12V inductor SW2")
@@ -1040,19 +1079,19 @@ def check_mu_carrier(components, pin_names):
     expect(prop(components, "L750", "MPN"), "XGL1060-682MEC", "Mu inductor identity")
     expect(comp(components, "L750").footprint, "ducktop2:Coilcraft_XGL1060_Center", "Mu inductor lands")
     for ref, value, a, b in (
-        ("R755", "5.1k", "MU12_COMP", "MU12_COMP_RC"),
-        ("C771", "330n", "MU12_COMP_RC", None),
-        ("C772", "1n", "MU12_COMP", None),
+        ("R755", "15k" if modern else "5.1k", "MU12_COMP", "MU12_COMP_RC"),
+        ("C771", "10n" if modern else "330n", "MU12_COMP_RC", None),
+        ("C772", "100p" if modern else "1n", "MU12_COMP", None),
     ):
         expect_value_prefix(components, ref, value, f"{ref} reviewed Mu compensation")
         expect(net(components, ref, "1"), local_net("Mu Carrier", a), f"{ref} compensation input")
         expect(net(components, ref, "2"), local_net("Mu Carrier", b) if b else "GND", f"{ref} compensation return")
     expect(net(components, "RS750", "1"), "/Mu Carrier/MU12_PRE_SENSE", "Mu 12V current shunt source")
     expect(net(components, "RS750", "2"), "/MU_12V", "Mu 12V current shunt load")
-    expect_value_prefix(components, "RS750", "13mOhm", "Mu current shunt for3.3A operation")
-    expect(prop(components, "RS750", "MPN"), "ERJ8CWFR013V", "Mu exact shunt")
+    expect_value_prefix(components, "RS750", "16m" if modern else "13mOhm", "Mu current shunt")
+    expect(prop(components, "RS750", "MPN"), "ERJ8CWFR016V" if modern else "ERJ8CWFR013V", "Mu exact shunt")
     expect(comp(components, "RS750").footprint, "ducktop2:Panasonic_ERJ8CW_10to16m_Center", "Mu shunt lands")
-    expect(prop(components, "C771", "MPN"), "CGA3E3X7R1H334K080AB", "Mu compensation capacitor identity")
+    expect(prop(components, "C771", "MPN"), "GRM1885C1H103JA01D" if modern else "CGA3E3X7R1H334K080AB", "Mu compensation capacitor identity")
     for ref, value, footprint in [
         ("C750", "68u 50V", "Capacitor_SMD:CP_Elec_8x10"),
         ("C751", "10u 50V", "Capacitor_SMD:C_1206_3216Metric"),
@@ -1622,7 +1661,9 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
         expect_contains(comp(components, tcpc).value, "TPS25751AD", f"{tcpc} DRP controller")
         expect(prop(components, tcpc, "MPN"), "TPS25751ADREFR", f"{tcpc} exact MPN")
         expect(prop(components, tcpc, "PortPolicy"),
-               "DRP;HOST_DATA_ONLY;5_9_15_20V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP",
+               ("DRP;HOST_DATA_ONLY;5_9_15V_3A_20V_5A_SINK;5V_900MA_SOURCE;DEFAULT_RP"
+                if prop(components, f"U{719+port}", "MPN") == "TPS259827ONRGER" else
+                "DRP;HOST_DATA_ONLY;5_9_15_20V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP"),
                f"{tcpc} released port policy")
         expect(prop(components, tcpc, "EEPROMSource"),
                f"firmware/tps25751a/ducktop2_pd{port}_config.json",
@@ -1701,11 +1742,23 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
                "PROGRAM_BEFORE_ASSEMBLY_OR_VIA_TP;READBACK_VERIFY_RELEASE_IMAGE",
                f"{eeprom} release-image contract")
         efuse = f"U{719 + port}"
-        expect_contains(comp(components, efuse).value, "TPS26630", f"{efuse} sink eFuse")
-        expect(prop(components, efuse, "SafetyState"),
-               "MODE_GND_AUTORETRY;PGTH_GND_PGOOD_UNUSED;SHDN_47K_PULLDOWN",
-               f"{efuse} default-off safety state")
-        expect(net(components, efuse, "12"), local("EFUSE_SHDN"), f"{efuse} shutdown")
+        if prop(components, efuse, "MPN") == "TPS259827ONRGER":
+            gated = f"/PD{port}_VBUS_GATED" if port == 2 else local("VBUS_GATED")
+            expected = {**{str(n):local("PPHV") for n in (1,2,3,16,25)},
+                        **{str(n):gated for n in range(17,25)},
+                        **{str(n):"GND" for n in (4,5,10,11,12,14,26)},
+                        "6":local("EFUSE_SHDN"), "8":local("EFUSE_ILIM"),
+                        "9":local("EFUSE_IMON"), "13":f"/PD{port}_EFUSE_PG", "15":local("EFUSE_DVDT")}
+            for pin, wanted in expected.items():
+                expect(net(components, efuse, pin), wanted, f"{efuse} TPS259827 pin {pin}")
+            expect_unconnected(components, efuse, "7")
+            expect(comp(components, efuse).footprint, "ducktop2:Texas_RGE0024M_QFN24_4x4_2EP", "sink switch thermal-pad footprint")
+        else:
+            expect_contains(comp(components, efuse).value, "TPS26630", f"{efuse} sink eFuse")
+            expect(prop(components, efuse, "SafetyState"),
+                   "MODE_GND_AUTORETRY;PGTH_GND_PGOOD_UNUSED;SHDN_47K_PULLDOWN",
+                   f"{efuse} default-off safety state")
+            expect(net(components, efuse, "12"), local("EFUSE_SHDN"), f"{efuse} shutdown")
         expect_value_prefix(components, f"R{2084 + (port - 1) * 10}", "47k",
                             f"PD{port} eFuse default-off pull-down")
         expect_value_prefix(components, f"C{2000 + (port - 1) * 40 + 15}", "4.7u 25V",

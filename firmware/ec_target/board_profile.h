@@ -48,8 +48,8 @@
 #ifndef DUCKTOP2_PACK_CHARGE_VOLTAGE_MV
 #define DUCKTOP2_PACK_CHARGE_VOLTAGE_MV 0u
 #endif
-/* Design allocations, not measured qualification. The raw AON branch
- * bypasses the charger shunts and is reserved separately in both modes. */
+/* Design allocations, not measured qualification. Raw USB/AUX standby bypasses the input shunt. VSYS-fed standby passes
+ * through the battery shunt; reserve its load within the total pack budget. */
 #ifndef DUCKTOP2_RAW_AON_RESERVE_MW
 #define DUCKTOP2_RAW_AON_RESERVE_MW 6500u
 #endif

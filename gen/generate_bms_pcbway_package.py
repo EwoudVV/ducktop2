@@ -94,7 +94,7 @@ def source_hashes():
     files = ['bms/bms' + suffix for suffix in ('.kicad_pcb', '.kicad_sch', '.kicad_pro', '.kicad_dru')]
     files += ['gen/generate_bms_pcbway_package.py', 'gen/bms_fabrication_geometry.py',
               'gen/check_release_candidate.py', 'gen/report_schematic_pcb_eco.py',
-              'gen/export_bms_assembly.py',
+              'gen/export_bms_assembly.py', 'gen/part_identity.py',
               'gen/requirements-bms-fabrication.txt',
               'manufacturing/bms/front-assembly.svg', 'manufacturing/bms/back-assembly.svg',
               'manufacturing/bms/test-points.csv', 'manufacturing/bms/assembly-source.json',
@@ -131,6 +131,7 @@ def check_drc(path):
 
 def assembly_files(out, geometry):
     from report_schematic_pcb_eco import parse_schematic
+    from part_identity import identity_errors
     components = parse_schematic(ET.parse(out / 'checks/netlist.xml').getroot())
     footprints = {f['ref']: f for f in geometry['footprints']}
     require(len(footprints) == len(components) == 149, 'BMS population changed; review it before export')
@@ -142,6 +143,10 @@ def assembly_files(out, geometry):
     for ref, c in populated.items():
         maker, mpn = c['fields'].get('Manufacturer'), c['fields'].get('MPN')
         require(maker and mpn, 'missing manufacturer or MPN: ' + ref)
+        errors = identity_errors(c['value'], c['footprint'], mpn)
+        require(not errors, ref + ': ' + '; '.join(errors))
+        if ref == 'RS10':
+            require(mpn == 'WSL2512R0110FEA18', 'RS10 must retain the reviewed 11 mOhm, 2 W part')
         if ref == 'F1':
             require(mpn == '3-101-056' and footprints[ref]['attributes'] & 2,
                     'review the Schurter 5 A SMT fuse before export')
@@ -407,6 +412,10 @@ report any lower guaranteed thickness so the power checks can be revisited.
 fit the exact BOM, including the 0.1% thermal resistors and both current
 shunts. substitutions need review. do not replace BQ7791500 with another
 threshold option, or LTC4368-1 with the -2 variant.
+
+RS10 is WSL2512R0110FEA18, 11 milliohms, 1%, 2 W. keep that exact
+resistance and high-power suffix; a 10 milliohm substitute changes the trip
+current. RS11 is WSLP25128L000FEA, 8 milliohms.
 
 F1 is the SCHURTER 3-101-056 HCF fuse, 5 A, fast acting, with a 1000 A
 interrupt rating at 125 VDC under the specified L/R condition. it is an SMT

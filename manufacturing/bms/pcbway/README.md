@@ -57,6 +57,10 @@ fit the exact BOM, including the 0.1% thermal resistors and both current
 shunts. substitutions need review. do not replace BQ7791500 with another
 threshold option, or LTC4368-1 with the -2 variant.
 
+RS10 is WSL2512R0110FEA18, 11 milliohms, 1%, 2 W. keep that exact
+resistance and high-power suffix; a 10 milliohm substitute changes the trip
+current. RS11 is WSLP25128L000FEA, 8 milliohms.
+
 F1 is the SCHURTER 3-101-056 HCF fuse, 5 A, fast acting, with a 1000 A
 interrupt rating at 125 VDC under the specified L/R condition. it is an SMT
 part, not a holder or a removable fuse. use the exact part. test pads are

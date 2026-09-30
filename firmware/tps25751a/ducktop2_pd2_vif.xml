@@ -142,7 +142,7 @@
         <Src_PD_OCP_UV_Threshold value="70">70</Src_PD_OCP_UV_Threshold>
       </SrcPDO>
     </SrcPdoList>
-    <PD_Power_As_Sink value="60000">60000 mW</PD_Power_As_Sink>
+    <PD_Power_As_Sink value="100000">100000 mW</PD_Power_As_Sink>
     <No_USB_Suspend_May_Be_Set value="true" />
     <GiveBack_May_Be_Set value="false" />
     <Higher_Capability_Set value="true" />
@@ -167,7 +167,7 @@
       </SnkPDO>
       <SnkPDO>
         <Snk_PDO_Supply_Type value="0">Fixed</Snk_PDO_Supply_Type>
-        <Snk_PDO_Op_Current value="300">3000 mA</Snk_PDO_Op_Current>
+        <Snk_PDO_Op_Current value="500">5000 mA</Snk_PDO_Op_Current>
         <Snk_PDO_Voltage value="400">20000 mV</Snk_PDO_Voltage>
       </SnkPDO>
     </SnkPdoList>

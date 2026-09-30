@@ -13,7 +13,8 @@ static inline ec_policy_config_t ec_target_power_config(void)
     c.standby_reserve_mw=DUCKTOP2_STANDBY_RESERVE_MW;
     c.minimum_charge_budget_mw=1000u;
     c.path_good_timeout_ms=400u;
-    c.normal_mu_edp_budget_mw=66000u;
+    /* 5.5A rail allocation includes the fan and divider/current-limit corners. */
+    c.normal_mu_edp_budget_mw=60000u;
     return c;
 }
 #endif

@@ -39,8 +39,8 @@ def verify_policy(document: dict,label: str,errors: list[str],port: str='PD1') -
     answers=document['questionnaire']['answers'];regs=register_map(document)
     speed=2 if port=='PD1' else 0
     require(port in ('PD1','PD2'),f'{label}: unknown physical port',errors)
-    require(answers[1]==1 and answers[3]==3 and answers[6]==1,
-            f'{label}: expected DRP/no-BQ, 60 W sink and host-only questionnaire',errors)
+    require(answers[1]==1 and answers[3]==4 and answers[6]==1,
+            f'{label}: expected DRP/no-BQ, 100 W sink and host-only questionnaire',errors)
     require(answers[5]==(3 if port=='PD1' else 1),f'{label}: data-speed questionnaire differs from physical port',errors)
     require(regs.get(0x27)==[1,129,2,0,28,3,0,0,0,0,0,0,0,0,0],
             f'{label}: VCONN limit or PP1-source/PP3-sink global configuration drifted',errors)
@@ -58,10 +58,12 @@ def verify_policy(document: dict,label: str,errors: list[str],port: str='PD1') -
         for index in range(4):
             word=int.from_bytes(bytes(sink[1+4*index:5+4*index]),'little')
             decoded.append(((word>>30)&3,((word>>10)&0x3ff)*50,(word&0x3ff)*10))
-    require(decoded==[(0,5000,3000),(0,9000,3000),(0,15000,3000),(0,20000,3000)]
-            and not any(sink[17:]),f'{label}: four fixed 3 A sink PDOs and no inactive 5 A slot required',errors)
-    require(regs.get(0x7e,[None]*11)[8:11]==[45,45,60],
-            f'{label}: minimum/operational/maximum sink PDP must be 45/45/60 W',errors)
+    require(decoded==[(0,5000,3000),(0,9000,3000),(0,15000,3000),(0,20000,5000)]
+            and not any(sink[17:]),f'{label}: expected 3 A at 5/9/15 V and 5 A at 20 V; inactive PDOs must be zero',errors)
+    require(regs.get(0x7e,[None]*11)[8:11]==[5,100,100],
+            f'{label}: minimum/operational/maximum sink PDP must be 5/100/100 W',errors)
+    require(regs.get(0x37)==[54,64,31,100,144,145,65,1]+[0]*16,
+            f'{label}: 100 W preference, 5..20 V range or weak-source fallback drifted',errors)
     io=regs.get(0x5c,[])
     require(len(io)>43 and (io[0],io[32],io[40],io[42],io[43])==(219,16,29,3,61),
             f'{label}: GPIO enable/inversion/DFP/orientation/data-mux events drifted',errors)
@@ -83,7 +85,7 @@ def verify_vif(path: Path,errors: list[str],port: str='PD1',reviewed: bool=True)
         'Type_C_Is_Alt_Mode_Adapter':'false','Modal_Operation_Supported_SOP':'false',
         'Num_SVIDs_Min_SOP':'0','Num_SVIDs_Max_SOP':'0','PD_Power_As_Source':'4500',
         'Num_Src_PDOs':'1','Src_PDO_Voltage':'100','Src_PDO_Max_Current':'90',
-        'Num_Snk_PDOs':'4','PD_Power_As_Sink':'60000','BC_1_2_Support':'0',
+        'Num_Snk_PDOs':'4','PD_Power_As_Sink':'100000','BC_1_2_Support':'0',
         'Enter_USB_Supported':'true' if port=='PD1' else 'false',
         'Host_Speed':('2' if reviewed else '5') if port=='PD1' else '0',
         'Type_C_Port_On_Hub':'true' if reviewed and port=='PD2' else 'false',
@@ -94,7 +96,7 @@ def verify_vif(path: Path,errors: list[str],port: str='PD1',reviewed: bool=True)
         require(element is not None and element.get('value')==value,
                 f'{label}: {tag} must be {value}',errors)
     for tag,want,scale in [('Snk_PDO_Voltage',[5000,9000,15000,20000],50),
-                           ('Snk_PDO_Op_Current',[3000]*4,10)]:
+                           ('Snk_PDO_Op_Current',[3000,3000,3000,5000],10)]:
         actual=[int(e.get('value','-1'))*scale for e in root.iter() if e.tag==f'{{{NS}}}{tag}']
         require(actual==want,f'{label}: active sink list {tag} differs',errors)
 
@@ -180,7 +182,7 @@ def main() -> int:
         print('TPS25751A CONFIGURATION FAILED')
         for error in errors:print('- '+error)
         return 1
-    print('TPS25751A: PASS (PD1 Gen 2x1 host, PD2 USB2 hub host; 5 V / 900 mA source; 5/9/15/20 V at 3 A sink)')
+    print('TPS25751A: PASS (PD1 Gen 2x1 host, PD2 USB2 hub host; 5 V / 900 mA source; 3 A at 5/9/15 V, 5 A at 20 V sink)')
     print('official originals retained; reviewed VIF metadata is a draft; programming and HIL NOT_RUN')
     return 0
 

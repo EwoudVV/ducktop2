@@ -93,7 +93,8 @@ def build(sheet_symbol_uuid):
     for ref, y in (("C451", 280.67), ("C2091", 322.58)):
         s.place(ref, "C", "100n trackpad logic bypass", 740, y,
                 footprint=FOOTPRINTS["C_100n"],
-                pin_nets={"1": ("SYS_3V3", "hier"), "2": ("GND", "local")})
+                pin_nets={"1": ("SYS_3V3", "hier"), "2": ("GND", "local")},
+                extra_props={"Manufacturer":"Murata","MPN":"GRM188R71H104KA93D"})
 
     # ---------------- Rear EC DFU prog port (J70) ----------------
     s.text(20, 190.0, "== Rear USB-C EC firmware programming port (DFU) ==")

@@ -57,7 +57,7 @@ def add_charger(s):
          FOOTPRINTS['L_XGL1060_CENTER'],{1:'SW1',2:'SW2'},'XGL1060-222MEC','Coilcraft')
     part('RS2600','R','20m 1% 2W input Kelvin shunt',850,200,
          'Resistor_SMD:R_2512_6332Metric',{1:'VBUS_COMBINED',2:'CHG_INPUT'},
-         'WSLP2512R0200FEA','Vishay Dale')
+         'WSL2512R0200FEA18','Vishay Dale')
     part('RS2601','R','10m 1% 2W battery Kelvin shunt',1010,200,
          'Resistor_SMD:R_2512_6332Metric',{1:'VSYS',2:'CHG_SRN'},
          'WSLP2512R0100FEA','Vishay Dale')
@@ -83,21 +83,21 @@ def add_charger(s):
           ('CHG_HS2_DRV','CHG_HS2_GATE'))):
         r('R'+str(2603+index),'0R gate link',850+80*index,315,driver,gate)
 
-    r('R18','2.21k 1% 3S / 724kHz / 200mA startup',850,340,'PROG_SET','GND','RC0603FR-072K21L')
-    c('C2602','1n 50V C0G PROG filter',930,340,'PROG_SET','GND','GRM1885C1H102JA01D')
-    r('R2607','2R input sense filter',1010,340,'VBUS_COMBINED','CHG_CSIP')
-    c('C2603','100n 50V input sense filter',1090,340,'CHG_CSIP','CHG_INPUT','GRM188R71H104KA93D')
-    c('C2604','100n 50V battery sense filter',850,360,'VSYS','CHG_SRN','GRM188R71H104KA93D')
-    r('R704','100R battery voltage filter',930,360,'PACK_POS_FUSED','BATP_SENSE')
-    c('C711','100n 50V battery voltage filter',1010,360,'BATP_SENSE','GND','GRM188R71H104KA93D')
-    r('R2608','1k forward compensation',850,385,'CHG_COMPF','CHG_COMPF_RC')
+    r('R18','2.21k 1% 3S / 724kHz / 200mA startup',850,340,'PROG_SET','GND','RC0402FR-072K21L',fp='Resistor_SMD:R_0402_1005Metric')
+    c('C2602','1n 50V C0G PROG filter',930,340,'PROG_SET','GND','GRM1555C1H102JA01D','C_0402')
+    r('R2607','2R input sense filter',1010,340,'VBUS_COMBINED','CHG_CSIP','RC0402FR-072RL',fp='Resistor_SMD:R_0402_1005Metric')
+    c('C2603','100n 50V input sense filter',1090,340,'CHG_CSIP','CHG_INPUT','GRM155R71H104ME14D','C_0402')
+    c('C2604','100n 50V battery sense filter',850,360,'VSYS','CHG_SRN','GRM155R71H104ME14D','C_0402')
+    r('R704','100R battery voltage filter',930,360,'PACK_POS_FUSED','BATP_SENSE','RC0402FR-07100RL',fp='Resistor_SMD:R_0402_1005Metric')
+    c('C711','100n 50V battery voltage filter',1010,360,'BATP_SENSE','GND','GRM155R71H104ME14D','C_0402')
+    r('R2608','1k forward compensation',850,385,'CHG_COMPF','CHG_COMPF_RC','RC0402FR-071KL',fp='Resistor_SMD:R_0402_1005Metric')
     c('C2605','22n 50V C0G forward compensation',930,385,'CHG_COMPF_RC','GND',
       'C0805C223J5GACTU','C_0805','KEMET')
-    r('R2609','1k reverse compensation',1010,385,'CHG_COMPR','CHG_COMPR_RC')
+    r('R2609','1k reverse compensation',1010,385,'CHG_COMPR','CHG_COMPR_RC','RC0402FR-071KL',fp='Resistor_SMD:R_0402_1005Metric')
     c('C2606','47n 50V X7R reverse compensation',1090,385,'CHG_COMPR_RC','GND','GRM188R71H473KA61D')
-    r('R2610','4.53k current monitor filter',850,405,'CHG_IMON','CHG_IMON_FILTER')
+    r('R2610','4.53k current monitor filter',850,405,'CHG_IMON','CHG_IMON_FILTER','RC0402FR-074K53L',fp='Resistor_SMD:R_0402_1005Metric')
     c('C2607','220n 50V X7R current monitor',930,405,'CHG_IMON_FILTER','GND','GRM188R71H224KAC4D')
-    r('R2611','20k PSYS monitor load',1010,405,'CHG_PSYS','GND')
+    r('R2611','20k PSYS monitor load',1010,405,'CHG_PSYS','GND','RC0402FR-0720KL',fp='Resistor_SMD:R_0402_1005Metric')
     # ACOK is high with a valid adapter. The LED indicates adapter absent.
     r('R12','2.2k adapter-status LED',1090,405,'REGN','STAT_LED_A')
     part('LED1','LED','Adapter absent',1090,425,FOOTPRINTS['LED'],

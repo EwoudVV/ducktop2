@@ -1,5 +1,9 @@
 # bms
 
+29 september: RS10 now uses the verified WSL2512R0110FEA18 ordering code,
+11 milliohms, 1%, 2 W. the assembly BOM and package have been rebuilt and
+checked. the resistor value, pads and all routing are unchanged.
+
 the files below now match the saved BMS, including the new connectors,
 5 A Schurter fuse and two vias moved clear of the WAGO solder openings.
 the copper, holes, mask, paste, netlist, BOM and placements have been checked.

@@ -20,10 +20,11 @@ class Identity:
     tolerance: float | None = None
     voltage: float | None = None
     tcr_ppm: float | None = None
+    power_w: float | None = None
 
 
 def engineering_value(token: str) -> float | None:
-    token = token.rstrip("FfΩ")
+    token = re.sub(r"(?:[Ff]|[Oo]hm|Ω)$", "", token)
     match = re.fullmatch(r"(\d+(?:\.\d+)?)([pnuµmRrKkM]?)(\d*)", token)
     if not match:
         return None
@@ -38,6 +39,37 @@ def engineering_value(token: str) -> float | None:
 
 
 def decode(mpn: str) -> Identity | None:
+    # Vishay 30100, 30122, 30121 and 31057. These are the package
+    # sizes reviewed here. A plausible-looking code outside the table is invalid.
+    strip = re.fullmatch(r"(WSL|WSLP|WSLT)(1206|2010|2512)(R\d{4}|\dL\d{3}|L\d{4})([DF])(EA|EK)(18)?", mpn)
+    if strip:
+        family, size, code, tolerance, _, high_power = strip.groups()
+        value = (int(code[1:])/10000 if code[0] == 'R' else
+                 float('0.'+code[1:])/1000 if code[0] == 'L' else
+                 float(code.replace('L', '.'))/1000)
+        if (code.startswith('R') and value < .01) or (not code.startswith('R') and value >= .01):
+            return None
+        if high_power and family != 'WSL':
+            return None
+        initial = .5 if tolerance == 'D' else 1.0
+        if family == 'WSLT':
+            low, high, power = .01, .5, 1.0
+            if size != '2512':
+                return None
+            if value > .1:
+                power *= 1-.2*(value-.1)/.4
+        else:
+            low = {'1206': .001, '2010': .001, '2512': .0005}[size]
+            if tolerance == 'D':
+                low = {'1206': .005, '2010': .004, '2512': .003}[size]
+            high = ({'1206': .05, '2010': .03, '2512': .01}[size] if family == 'WSLP' else
+                    .04 if high_power and size == '2512' else .2 if size == '1206' else .5)
+            power = ({'1206': 1.0, '2010': 2.0, '2512': 3.0}[size] if family == 'WSLP' else
+                     {'1206': .25, '2010': .5, '2512': 1.0}[size]*(2 if high_power else 1))
+        if not low <= value <= high:
+            return None
+        ppm = 75 if value >= .007 else 110 if value >= .005 else 150 if value >= .003 else 275 if value >= .001 else 400
+        return Identity('R', value, size, initial, tcr_ppm=ppm, power_w=power)
     # Vishay 28779 (TNPU, 2025-03-04) and 28758 (TNPW, 2026-04-10).
     # Reject combinations outside their published precision/resistance tables.
     precision = re.fullmatch(r"(TNPU)(0402|0603|0805|1206)([\dRKM]{4})([ABH])([YZW])(E[AINP])00", mpn)
@@ -110,6 +142,8 @@ def decode(mpn: str) -> Identity | None:
 def identity_errors(value: str, footprint: str, mpn: str) -> list[str]:
     actual = decode(mpn)
     if actual is None:
+        if mpn.startswith(('WSL1206', 'WSLP1206', 'WSL2010', 'WSL2512', 'WSLP2010', 'WSLP2512', 'WSLT2512')):
+            return [f"unverified metal-strip code or value outside the published family range: {mpn}"]
         return []
     words = re.sub(r"^DNP\s+", "", value.strip(), flags=re.I).split()
     declared = engineering_value(words[0]) if words else None
@@ -133,4 +167,7 @@ def identity_errors(value: str, footprint: str, mpn: str) -> list[str]:
         ratings = [float(word[:-1]) for word in words if re.fullmatch(r"\d+(?:\.\d+)?V", word)]
         if ratings and actual.voltage < max(ratings):
             errors.append(f"order code voltage {actual.voltage:g}V is below {max(ratings):g}V")
+    power = re.search(r"(\d+(?:\.\d+)?)\s*W\b", value)
+    if power and actual.power_w is not None and actual.power_w < float(power[1]):
+        errors.append(f"order code power {actual.power_w:g}W is below {power[1]}W")
     return errors

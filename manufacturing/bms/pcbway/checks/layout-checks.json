@@ -1,11 +1,11 @@
 {
-  "checked_on": "2026-09-28",
+  "checked_on": "2026-09-29",
   "board": "bms/bms.kicad_pcb",
   "working_tree": true,
-  "base_commit": "84dcf6e",
+  "base_commit": "124b22d",
   "source_sha256": {
-    "bms/bms.kicad_pcb": "dd0d244608b01ecec602c5e30e3cf1c5987f215a33f1e3862c92a7cc359d7a74",
-    "bms/bms.kicad_sch": "495334993aa6a3bda606b0a04b52b351ae8bb6a85379688e7cd1fec76eaebb11",
+    "bms/bms.kicad_pcb": "ece7d61301e85f55131c5e5ac32d38a056413b9feabd4bf4709e727e82e22829",
+    "bms/bms.kicad_sch": "d96a0472e10226dd94a3c8007cf3f09b1b3a6c3e093a83d6e0393a8648b76d8c",
     "bms/bms.kicad_pro": "cc6ac996a9e9c80cd246ee780557ad5d197457eee5ed7cc6eaf912082392db82",
     "bms/bms.kicad_dru": "37bf5785744034ada850286953d1156b3af6458e2f49bbe53890e8af50aab2ba"
   },
@@ -43,7 +43,28 @@
     "footprint_pads_and_drills_preserved": true,
     "via_diameters_and_drills_preserved": true,
     "via_positions_changed": 2,
-    "all_existing_copper_net_assignments_preserved": true
+    "all_existing_copper_net_assignments_preserved": true,
+    "rs10_order_code_correction": {
+      "bms/bms.kicad_pcb": {
+        "before": "dd0d244608b01ecec602c5e30e3cf1c5987f215a33f1e3862c92a7cc359d7a74",
+        "after": "ece7d61301e85f55131c5e5ac32d38a056413b9feabd4bf4709e727e82e22829",
+        "only_change": "RS10 MPN WSLP2512R0110FEA to WSL2512R0110FEA18"
+      },
+      "bms/bms.kicad_sch": {
+        "before": "495334993aa6a3bda606b0a04b52b351ae8bb6a85379688e7cd1fec76eaebb11",
+        "after": "d96a0472e10226dd94a3c8007cf3f09b1b3a6c3e093a83d6e0393a8648b76d8c",
+        "only_change": "RS10 MPN WSLP2512R0110FEA to WSL2512R0110FEA18"
+      },
+      "land_review": {
+        "terminal_overlap_min_mm": [
+          0.508,
+          2.926
+        ],
+        "assembly_offset_screen_mm": 0.125,
+        "source": "https://www.vishay.com/doc?31057",
+        "note": "existing lands retain terminal overlap; factory assembly review remains required; copper is unchanged"
+      }
+    }
   },
   "quiet_return": {
     "connected_groups": 1,
@@ -377,7 +398,7 @@
     "copper_sliver_warnings": 0,
     "silkscreen_warnings": 0
   },
-  "manufacturing_status": "previous order package is stale; regenerate for the current connectors, fuse and saved board",
+  "manufacturing_status": "see manufacturing/bms/pcbway/manifest.json for the current package checks",
   "manufacturing_geometry_schema": "native-edge-primitives-v2",
   "assembly_mask_check": {
     "moved_vias": {

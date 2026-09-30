@@ -4,6 +4,26 @@ from part_identity import decode, engineering_value, identity_errors
 
 
 class PartIdentity(unittest.TestCase):
+    def test_metal_strip_values_ranges_and_power(self):
+        for mpn, value, watts in (
+            ('WSLP25125L000FEA', .005, 3),
+            ('WSLP25128L000FEA', .008, 3),
+            ('WSL2512R0110FEA18', .011, 2),
+            ('WSL2512R0200FEA18', .020, 2),
+            ('WSL2512R0220FEA18', .022, 2),
+            ('WSLT2512R1000FEA', .100, 1),
+            ('WSL1206R1800FEA', .180, .25),
+        ):
+            part = decode(mpn)
+            self.assertAlmostEqual(part.value, value)
+            self.assertEqual(part.power_w, watts)
+        for mpn in ('WSLP2512R0050FEA', 'WSLP2512R0080FEA',
+                    'WSLP2512R0110FEA', 'WSLP2512R0200FEA', 'WSLP2512R0220FEA'):
+            self.assertIsNone(decode(mpn))
+            self.assertTrue(identity_errors('10m 1% 2W', 'Resistor_SMD:R_2512_6332Metric', mpn))
+        self.assertTrue(identity_errors('11m 1% 2W', 'Resistor_SMD:R_2512_6332Metric', 'WSL2512R0110FEA'))
+        self.assertEqual(identity_errors('11mOhm 1% 2W', 'Resistor_SMD:R_2512_6332Metric', 'WSL2512R0110FEA18'), [])
+
     def test_vishay_precision_order_codes_include_tcr(self):
         part = decode("TNPU060355K6HZEN00")
         self.assertEqual((part.value, part.size, part.tolerance, part.tcr_ppm),

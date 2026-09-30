@@ -1,6 +1,6 @@
 # bms layout checks
 
-28 september 2026. the new connector and fuse revision is routed and saved in
+29 september 2026. the new connector and fuse revision is routed and saved in
 [`bms/bms.kicad_pcb`](../bms/bms.kicad_pcb). it is still four layers and
 1.6 mm thick, with 149 footprints and the four perimeter mounting holes.
 
@@ -75,3 +75,11 @@ the actual cells, harnesses, protection trips, temperature response and
 powered operation still need the [bring-up checks](../docs/BRINGUP_TEST_PLAN.md).
 finished copper, hole plating and assembly details also need the fabricator's
 confirmation. this layout check is not an order release.
+
+RS10 now specifies WSL2512R0110FEA18, the 11 milliohm, 1%, 2 W part.
+the old WSLP ordering code was outside that series' published range. only
+the MPN field changed in the schematic and board. all pads, tracks, vias
+and outlines are byte-for-byte unchanged. the existing lands retain at
+least 0.508 x 2.926 mm of terminal overlap in the package-tolerance screen,
+including a 0.125 mm assembly-position allowance. the factory still needs
+to review the assembled joints and part sourcing.

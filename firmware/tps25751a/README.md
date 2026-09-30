@@ -5,12 +5,17 @@ J21 uses `ducktop2_pd1_config.json`: host-only USB 3.2 Gen 2x1. J11 uses
 the two EEPROM images are different. neither port provides a USB device,
 USB4, DisplayPort alternate mode, or audio accessory data path.
 
-both ports use dual-role power, fixed 5/9/15/20 V sink PDOs at 3 A, one
-5 V / 900 mA source PDO, default Rp, and no BC1.2 advertisement. the EC
-controls the charger and separate PP5V permissions. the 20 V / 5 A slot is
-inactive and zeroed in the sink list.
+both ports use dual-role power, fixed 5/9/15 V sink PDOs at 3 A and a
+20 V / 5 A sink PDO. the source side stays at 5 V / 900 mA, with default
+Rp and no BC1.2 advertisement. the EC controls the charger and separate
+PP5V permissions. 5 A operation needs a suitable cable and a valid contract.
+lower-power contracts stay connected so the EC can budget their actual power.
 
-these are exact raw JSON exports from TI Application Customization Tool
+these 100 W profiles belong to the ISL9241 power revision. that circuit's
+schematic and PCB integration is still pending. do not program these images
+onto the old power design. all hardware qualification gates remain off.
+
+these are exact raw JSON exports from 29 september 2026, using TI Application Customization Tool
 2.0.0 with `FB09.17.02__RC5.bin`. `release_manifest.json` binds each source,
 original export archive, binary, C array, original VIF and reviewed VIF.
 local TI output is under ignored `generated/PD1/` and `generated/PD2/`.
@@ -40,8 +45,8 @@ battery/status message support and the complete USB-IF review remain open.
 programming and per-port readback remain `NOT_RUN`, each bound to its own
 full-flash hash. no controller was programmed during export.
 
-[power allowance](power-envelope.md) keeps the nominal 0.50 A input margin
-separate from actual source tolerance, current regulation and AON draw.
+[power allowance](power-envelope.md) separates the input margin from
+source tolerance, current regulation and always-on draw.
 [physical testing](../release/README.md) still has to establish negotiation,
 role changes, current limits, USB signaling and source-path sequencing.
 all charging, boot and USB load qualification gates remain off.

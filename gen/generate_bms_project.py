@@ -183,7 +183,7 @@ def build_bms_sheet(sheet_symbol_uuid):
     s.place("RS10", "R", "11mOhm 1% 2W LTC4368 bounded pack-current shunt", 335, 60,
             footprint="Resistor_SMD:R_2512_6332Metric",
             pin_nets={"1": ("BAT_PROT_SENSE", "local"), "2": ("PACK_POS_FUSED", "local")},
-            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP2512R0110FEA"})
+            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSL2512R0110FEA18"})
     s.place("C725", "C", "10u 25V X7R LTC4368 VOUT", 390, 60,
             footprint=FOOTPRINTS["C_1u"],
             pin_nets={"1": ("PACK_POS_FUSED", "local"), "2": ("FG_VSS", "local")},

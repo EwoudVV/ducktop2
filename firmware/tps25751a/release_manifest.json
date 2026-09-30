@@ -10,65 +10,65 @@
     "SRAS_8013": "explicitly approved and accepted"
   },
   "status": "GENERATED_PENDING_HIL",
-  "exported_date": "2026-09-08",
+  "exported_date": "2026-09-29",
   "physical_programming": "NOT_RUN",
   "ports": {
     "PD1": {
       "receptacle": "J21",
       "source": {
         "path": "ducktop2_pd1_config.json",
-        "sha256": "394160f33f8ee66bfb6c7bac2b388ef7c0c0de3f93ef705c595b3cffc3fe3eaf",
-        "bytes": 7686
+        "sha256": "fa4f7f72164acc89a78975cf592b54b9b33d528588554eb7ef168ab923697ddc",
+        "bytes": 7688
       },
       "usb_data": "USB3_GEN2X1_HOST_ONLY",
       "service_mux_channel": 2,
       "controller_address_7bit": 32,
       "generated": {
-        "ducktop2_pd1_review_TPS25751A_FB091702_fullFlash.bin": {
-          "path": "generated/PD1/ducktop2_pd1_review_TPS25751A_FB091702_fullFlash.bin",
-          "sha256": "1ba86cefb42e7be4b7aef61f9edb51adc4921779249f267dbc86c005e4eac7b0",
+        "ducktop2_pd1_100w_checked_TPS25751A_FB091702_fullFlash.bin": {
+          "path": "generated/PD1/ducktop2_pd1_100w_checked_TPS25751A_FB091702_fullFlash.bin",
+          "sha256": "8bb69f848e3073a2a568619eb60692f24269e74cb51d5ea49caeafaa0e3b4ef0",
           "bytes": 22400
         },
-        "ducktop2_pd1_review_TPS25751A_FB091702_fullFlash.c": {
-          "path": "generated/PD1/ducktop2_pd1_review_TPS25751A_FB091702_fullFlash.c",
-          "sha256": "69a7933a72c03681f5001ef2ff3e288735c6395e50b2d479ecebb28bacd94740",
+        "ducktop2_pd1_100w_checked_TPS25751A_FB091702_fullFlash.c": {
+          "path": "generated/PD1/ducktop2_pd1_100w_checked_TPS25751A_FB091702_fullFlash.c",
+          "sha256": "f03e26d7a3d97df9f411587a5693dbf158ebe5d6de5b7dadfdce02c2a30142da",
           "bytes": 135913
         },
-        "ducktop2_pd1_review_TPS25751A_FB091702_lowRegion.bin": {
-          "path": "generated/PD1/ducktop2_pd1_review_TPS25751A_FB091702_lowRegion.bin",
-          "sha256": "85df46f4d949fc286233419d995ec5e3e8eeb7c5a834c5b3c5333fc5314c31d7",
+        "ducktop2_pd1_100w_checked_TPS25751A_FB091702_lowRegion.bin": {
+          "path": "generated/PD1/ducktop2_pd1_100w_checked_TPS25751A_FB091702_lowRegion.bin",
+          "sha256": "10ee272c229b689b776103ce225bd21812848dfbc57f42c9fa8ea639dd3e7d8f",
           "bytes": 4992
         },
-        "ducktop2_pd1_review_TPS25751A_FB091702_lowRegion.c": {
-          "path": "generated/PD1/ducktop2_pd1_review_TPS25751A_FB091702_lowRegion.c",
-          "sha256": "142d7f9e3a273e8a3ad2e3ed78481f39ead70bf4d7f87db226ff0c87465ea2e0",
+        "ducktop2_pd1_100w_checked_TPS25751A_FB091702_lowRegion.c": {
+          "path": "generated/PD1/ducktop2_pd1_100w_checked_TPS25751A_FB091702_lowRegion.c",
+          "sha256": "b1fc7b280007f62dd0f62151619206d4de47a6e11d5a33e00c45a3b9d68b297a",
           "bytes": 30377
+        },
+        "ducktop2_pd1_100w_checked_TPS25751A_FB091702_raw.json": {
+          "path": "generated/PD1/ducktop2_pd1_100w_checked_TPS25751A_FB091702_raw.json",
+          "sha256": "fa4f7f72164acc89a78975cf592b54b9b33d528588554eb7ef168ab923697ddc",
+          "bytes": 7688
+        },
+        "ducktop2_pd1_100w_checked_TPS25751A_FB091702_vif.xml": {
+          "path": "generated/PD1/ducktop2_pd1_100w_checked_TPS25751A_FB091702_vif.xml",
+          "sha256": "2510e8195c0f0de85d557dd1c749ed7267ca3faf2a396c894f2020299cbf65d0",
+          "bytes": 8237
         },
         "official-export.zip": {
           "path": "generated/PD1/official-export.zip",
-          "sha256": "d77b81add923402eb7e60c4013f1e3e56444f2966995c6b563301482ce00c0a3",
-          "bytes": 210559
-        },
-        "ready_pd1_raw.json": {
-          "path": "generated/PD1/ready_pd1_raw.json",
-          "sha256": "394160f33f8ee66bfb6c7bac2b388ef7c0c0de3f93ef705c595b3cffc3fe3eaf",
-          "bytes": 7686
-        },
-        "ready_pd1_vif.xml": {
-          "path": "generated/PD1/ready_pd1_vif.xml",
-          "sha256": "9b1892bb780417f75cd68665af64d18e63462fe55ec88c8fe5b15839c08abe8c",
-          "bytes": 8235
+          "sha256": "8b1ab1e98eefa1f39240786fe634d1279913c467cb6689a2e26b35e775f60dc2",
+          "bytes": 210751
         }
       },
       "original_vif": {
-        "path": "generated/PD1/ready_pd1_vif.xml",
-        "sha256": "9b1892bb780417f75cd68665af64d18e63462fe55ec88c8fe5b15839c08abe8c",
-        "bytes": 8235
+        "path": "generated/PD1/ducktop2_pd1_100w_checked_TPS25751A_FB091702_vif.xml",
+        "sha256": "2510e8195c0f0de85d557dd1c749ed7267ca3faf2a396c894f2020299cbf65d0",
+        "bytes": 8237
       },
       "reviewed_vif": {
         "path": "ducktop2_pd1_vif.xml",
-        "sha256": "639bdbb3d97281b51591f7649aeb1b3108fc60c1c732ed9909df1d2679cb5e26",
-        "bytes": 9580
+        "sha256": "806b2f6549224057a809b5e86c873b6f27e5356ba5a4eb4488535d64c6d03d7e",
+        "bytes": 9583
       },
       "vif_review": {
         "status": "SYSTEM_METADATA_DRAFT_NOT_CERTIFIED",
@@ -100,68 +100,69 @@
       },
       "programming_and_readback": {
         "status": "NOT_RUN",
-        "expected_full_flash_sha256": "1ba86cefb42e7be4b7aef61f9edb51adc4921779249f267dbc86c005e4eac7b0",
+        "expected_full_flash_sha256": "8bb69f848e3073a2a568619eb60692f24269e74cb51d5ea49caeafaa0e3b4ef0",
         "programmed_board_revision": null,
         "readback_path": null,
         "readback_sha256": null
-      }
+      },
+      "exported_date": "2026-09-29"
     },
     "PD2": {
       "receptacle": "J11",
       "source": {
         "path": "ducktop2_pd2_config.json",
-        "sha256": "81a15a8793259772bf1dacd230d6a45d0f7d00fd1419c2512aaf962eab889e61",
-        "bytes": 7685
+        "sha256": "2766da653fda886a819bcfe74efa84323c01c28384803a106f0e4c94e718c537",
+        "bytes": 7687
       },
       "usb_data": "USB2_HOST_ONLY",
       "service_mux_channel": 3,
       "controller_address_7bit": 33,
       "generated": {
-        "ducktop2_pd2_usb2_TPS25751A_FB091702_fullFlash.bin": {
-          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_fullFlash.bin",
-          "sha256": "f62e2d8f7f258524108abeb8d0eac0de197e2eac937d1d61b0c0a6dd0b6e4bf4",
+        "ducktop2_pd2_100w_final_TPS25751A_FB091702_fullFlash.bin": {
+          "path": "generated/PD2/ducktop2_pd2_100w_final_TPS25751A_FB091702_fullFlash.bin",
+          "sha256": "11247847207ec88ab6beb3a1ba3b05cccdd7e1c5933c85f698dfc360bad80558",
           "bytes": 22400
         },
-        "ducktop2_pd2_usb2_TPS25751A_FB091702_fullFlash.c": {
-          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_fullFlash.c",
-          "sha256": "c3e6295741258594307989a1792236ae2a512d3ea9c2fcf20d7df22db33ef4f9",
+        "ducktop2_pd2_100w_final_TPS25751A_FB091702_fullFlash.c": {
+          "path": "generated/PD2/ducktop2_pd2_100w_final_TPS25751A_FB091702_fullFlash.c",
+          "sha256": "a292d9bcaf3a17f63f4efa11c6d657173ff24d10916b9dbb5aecf9464360595a",
           "bytes": 135913
         },
-        "ducktop2_pd2_usb2_TPS25751A_FB091702_lowRegion.bin": {
-          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_lowRegion.bin",
-          "sha256": "54b272b86632be6992ea4cdbc6c64bfb748b7efcaa5ff80e419bd1eb931797a2",
+        "ducktop2_pd2_100w_final_TPS25751A_FB091702_lowRegion.bin": {
+          "path": "generated/PD2/ducktop2_pd2_100w_final_TPS25751A_FB091702_lowRegion.bin",
+          "sha256": "e21db929c2a78aca629cd2d463aea16aa4e71f9f033f7ea90a576463982e0854",
           "bytes": 4992
         },
-        "ducktop2_pd2_usb2_TPS25751A_FB091702_lowRegion.c": {
-          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_lowRegion.c",
-          "sha256": "2139ae1a9e624689cc66a6b75629b02a31193cd0535ab21697b559cb656cc43f",
+        "ducktop2_pd2_100w_final_TPS25751A_FB091702_lowRegion.c": {
+          "path": "generated/PD2/ducktop2_pd2_100w_final_TPS25751A_FB091702_lowRegion.c",
+          "sha256": "dd43baa5ee4e984af77b2c0c7d1b3492902ad026113c6e2565391ef56e662150",
           "bytes": 30377
         },
-        "ducktop2_pd2_usb2_TPS25751A_FB091702_raw.json": {
-          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_raw.json",
-          "sha256": "81a15a8793259772bf1dacd230d6a45d0f7d00fd1419c2512aaf962eab889e61",
-          "bytes": 7685
+        "ducktop2_pd2_100w_final_TPS25751A_FB091702_raw.json": {
+          "path": "generated/PD2/ducktop2_pd2_100w_final_TPS25751A_FB091702_raw.json",
+          "sha256": "2766da653fda886a819bcfe74efa84323c01c28384803a106f0e4c94e718c537",
+          "bytes": 7687
         },
-        "ducktop2_pd2_usb2_TPS25751A_FB091702_vif.xml": {
-          "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_vif.xml",
-          "sha256": "0b4087a4c687af13655c68445425ccdb78493da49a3597610fdf8c6ef7041bae",
-          "bytes": 8239
+        "ducktop2_pd2_100w_final_TPS25751A_FB091702_vif.xml": {
+          "path": "generated/PD2/ducktop2_pd2_100w_final_TPS25751A_FB091702_vif.xml",
+          "sha256": "5873ae15191a3bd9ecdb89e90a117cd96be73b8f1b1555e2708219bacd9b420b",
+          "bytes": 8241
         },
         "official-export.zip": {
           "path": "generated/PD2/official-export.zip",
-          "sha256": "abe02001db52ac62a8b6f765782208678c8f39d3cf311d56297afc83ae345bf1",
-          "bytes": 210654
+          "sha256": "023ca2ecbbc12d82016d58d2550cf6f89207e48a78138bb6a1164e4ded99854b",
+          "bytes": 210730
         }
       },
       "original_vif": {
-        "path": "generated/PD2/ducktop2_pd2_usb2_TPS25751A_FB091702_vif.xml",
-        "sha256": "0b4087a4c687af13655c68445425ccdb78493da49a3597610fdf8c6ef7041bae",
-        "bytes": 8239
+        "path": "generated/PD2/ducktop2_pd2_100w_final_TPS25751A_FB091702_vif.xml",
+        "sha256": "5873ae15191a3bd9ecdb89e90a117cd96be73b8f1b1555e2708219bacd9b420b",
+        "bytes": 8241
       },
       "reviewed_vif": {
         "path": "ducktop2_pd2_vif.xml",
-        "sha256": "6fdb6edccb12e992f38192732c5f1f40c6aba5ab607c9842fe657b6763953a44",
-        "bytes": 9604
+        "sha256": "4747aded7fe585c09ca6d4120d689250933c1b4c6847c3ddcc9eee10aa3fe9da",
+        "bytes": 9607
       },
       "vif_review": {
         "status": "SYSTEM_METADATA_DRAFT_NOT_CERTIFIED",
@@ -212,11 +213,12 @@
       },
       "programming_and_readback": {
         "status": "NOT_RUN",
-        "expected_full_flash_sha256": "f62e2d8f7f258524108abeb8d0eac0de197e2eac937d1d61b0c0a6dd0b6e4bf4",
+        "expected_full_flash_sha256": "11247847207ec88ab6beb3a1ba3b05cccdd7e1c5933c85f698dfc360bad80558",
         "programmed_board_revision": null,
         "readback_path": null,
         "readback_sha256": null
-      }
+      },
+      "exported_date": "2026-09-29"
     }
   },
   "evidence_boundary": "official configuration/image export and independent static checks; no controller programming, wire readback, negotiation or USB certification",
@@ -230,5 +232,6 @@
       "url": "https://chromium.googlesource.com/chromiumos/platform/ec/+/d1e7a27efbc80e282b3917d1bef7a9a944c00eeb/util/genvif.c",
       "purpose": "primary implementation enum USB_GEN21=2 and Type_C_Port_On_Hub to Is_DFP_On_Hub mapping"
     }
-  ]
+  ],
+  "hardware_compatibility": "100 W ISL9241 revision only; schematic and PCB integration still pending"
 }

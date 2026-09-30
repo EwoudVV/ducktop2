@@ -61,9 +61,11 @@ EXACT_PASSIVES = {
     "C0603C224K5RACTU": (220e-9, .10, 50.0),
     "C0603C222J5GACTU": (2.2e-9, .05, 50.0),
     "WSL20105L600FEA": (.0056, .01, None),
+    "WSLT2512R1000FEA": (.100, .01, None),
     "ERJ8BWFR015V": (.015, .01, None),
     "ERJ8CWFR010V": (.010, .01, None),
     "ERJ8CWFR013V": (.013, .01, None),
+    "ERJ8CWFR016V": (.016, .01, None),
     "C0805C223J5GACTU": (22e-9, .05, 50.0),
     "RC2010FK-071KL": (1000.0, .01, 200.0),
     "ERJ2RKF1001X": (1000.0, .01, None),
@@ -545,6 +547,9 @@ def sys3_distribution_checks(values: NetlistValues) -> list[Check]:
 
 
 def aon_window_checks(values: NetlistValues) -> list[Check]:
+    if values.mpn("U718").startswith("LTC4368"):
+        from verify_100w_calculations import aon_window
+        return aon_window(values)
     refs=('R795','R796','R797');r=[resistor(values,ref) for ref in refs]
     tolerance=tuple(values.environment_tolerance(ref) for ref in refs)
     if values.mpn('U718')!='TPS26600RHFR':
@@ -569,6 +574,9 @@ def aon_window_checks(values: NetlistValues) -> list[Check]:
 
 
 def aon_converter_checks(values: NetlistValues) -> list[Check]:
+    if values.mpn("U5") == "TPS62933DRLR":
+        from verify_100w_calculations import aon_buck
+        return aon_buck(values)
     lo,hi=divider_corners(resistor(values,'R35'),resistor(values,'R36'),
                          values.environment_tolerance('R35'),values.environment_tolerance('R36'),.581,.611)
     nominal=.596*(1+resistor(values,'R35')/resistor(values,'R36'))
@@ -639,6 +647,11 @@ def mu_voltage_corners(values: NetlistValues) -> tuple[float, float]:
 
 
 def mu_shunt_bounds(values: NetlistValues) -> tuple[float, float]:
+    if values.mpn("RS750") == "ERJ8CWFR016V":
+        if values.mpn("RS2670") != "ERJ8CWFR016V":
+            raise ValueError("Mu supply requires both parallel 16m shunts")
+        sense=1/sum(1/resistor(values,r) for r in ("RS750","RS2670"))
+        return sense*.940*.998, sense*1.060*1.002
     if values.mpn('RS750') not in ('ERJ8BWFR015V','ERJ8CWFR013V'):
         raise ValueError('unreviewed Mu current-limit shunt')
     # CW:1% initial+75ppm*105C+3% endurance+1% soldering, rounded to6%.
@@ -649,6 +662,9 @@ def mu_shunt_bounds(values: NetlistValues) -> tuple[float, float]:
 
 
 def mu_operating_checks(values: NetlistValues) -> list[Check]:
+    if values.mpn("U750") == "TPS552882RPMR":
+        from verify_100w_calculations import mu_operating
+        return mu_operating(values)
     inductance, tolerance, isat, irms, dcr = INDUCTORS[values.mpn('L750')]
     values.used.add('L750')
     _, vout = mu_voltage_corners(values)
@@ -697,7 +713,7 @@ def source_window_checks(name: str, values: NetlistValues, refs: tuple[str, str,
         Check(f"{name} 20V-source OV recovery minimum", resetmin, "V", 21.0, 24.0,
               "must recover with source at 20V+5%; both comparator leakages included"),
         Check(f"{name} OV cutoff maximum", ovmax, "V", 21.0, 24.0,
-              "DC trip must remain below BQ25798 24V operating limit; delay/overshoot excluded"),
+              "DC trip must remain below the 24V input-switch operating limit; delay/overshoot excluded"),
     ]
 
 
@@ -720,7 +736,11 @@ def extended_checks(center: NetlistValues, left: NetlistValues,
         ("left PD1 eFuse", left, ("R2080", "R2081", "R2082")),
         ("right PD2 eFuse", right, ("R2090", "R2091", "R2092")),
     ]:
-        checks.extend(source_window_checks(name, values, refs))
+        if values.mpn("U720" if "PD1" in name else "U721")=="TPS259827ONRGER":
+            from verify_100w_calculations import pd_switch
+            checks.extend(pd_switch(name,values,2080 if "PD1" in name else 2090))
+        else:
+            checks.extend(source_window_checks(name, values, refs))
 
     for name, values, top_ref, bottom_ref, lref, load in [
         ("SYS_5V", center, "R40", "R41", "L4", 6.0),
@@ -799,46 +819,48 @@ def extended_checks(center: NetlistValues, left: NetlistValues,
 
     # The idealized ILIM setting is not the same thing as guaranteed measured
     # input-current regulation. Do not turn the 3A nominal label into a limit.
-    rt, rb = resistor(center, "R17"), resistor(center, "R190")
-    settings = []
-    for top, bottom, regn, leakage in itertools.product(
-        (rt*(1-center.environment_tolerance("R17")), rt*(1+center.environment_tolerance("R17"))),
-        (rb*(1-center.environment_tolerance("R190")), rb*(1+center.environment_tolerance("R190"))),
-        (4.8, 5.2), (-1.5e-6, 1.5e-6)):
-        settings.append((regn*bottom/(top+bottom)-leakage*top*bottom/(top+bottom)-1)/.8)
-    checks.append(Check("BQ25798 2.50A bootstrap command below ILIM setting floor",
-                        min(settings)-2.50, "A", 0, 1,
-                        "REGN4.8-5.2V, MPN resistor corners, +/-1.5uA leakage; ADC/current-loop errors remain"))
+    if center.mpn("U2") != "ISL9241IRTZ":
+        rt, rb = resistor(center, "R17"), resistor(center, "R190")
+        settings = []
+        for top, bottom, regn, leakage in itertools.product(
+            (rt*(1-center.environment_tolerance("R17")), rt*(1+center.environment_tolerance("R17"))),
+            (rb*(1-center.environment_tolerance("R190")), rb*(1+center.environment_tolerance("R190"))),
+            (4.8, 5.2), (-1.5e-6, 1.5e-6)):
+            settings.append((regn*bottom/(top+bottom)-leakage*top*bottom/(top+bottom)-1)/.8)
+        checks.append(Check("BQ25798 2.50A bootstrap command below ILIM setting floor",
+                            min(settings)-2.50, "A", 0, 1,
+                            "REGN4.8-5.2V, MPN resistor corners, +/-1.5uA leakage; ADC/current-loop errors remain"))
     if 'R2262' in center:
         output_rmax=resistor(center,'R2262')*(1+center.environment_tolerance('R2262'))
         checks.append(Check('charger-enable gate when AND is unpowered',output_rmax*10.1e-6,'V',0,.1,
                             '(10uA LVC Ioff+100nA MOS gate leakage)*R2262(high); full isolated-link screens run against the BMS netlist'))
 
-    mu_mpn = center.mpn("L750")
-    if mu_mpn not in INDUCTORS:
-        raise ValueError(f"unreviewed Mu inductor {mu_mpn}")
-    inductance, ltol, isat, irms, _ = INDUCTORS[mu_mpn]
-    center.used.add("L750")
-    frequency = 20e9/resistor(center, "R756")
-    # +/-10% is a conservative interpolation from TI's specified clock
-    # endpoints, not a guaranteed specification at 49.9k. DITH is fitted.
-    fmin = frequency*.90*.93/(1+center.environment_tolerance("R756"))
-    lscreen = inductance*(1-ltol)*.70
-    checks.append(Check("TPS552892 minimum L with tolerance and 30-percent bias screen",
-                        lscreen*1e6, "uH", 1.2/fmin*1e6, math.inf,
-                        f"{mu_mpn}; Lnom*(1-tolerance)*0.70; requires L>1.2/fSW; "
-                        "clock -10%, R tolerance, dither -7%; typical bias boundary only"))
-    mu_max = .052/mu_shunt_bounds(center)[0]
-    mu_vmax = mu_voltage_corners(center)[1]
-    average, ripple, peak, rms = boost_currents(8.55, mu_vmax, mu_max, lscreen, fmin, .90)
-    checks.extend([
-        Check("Mu average inductor current screen at 8.55V", average, "A", 0, 7.0,
-              "Vout(max)*Ilimit(max)/(8.55V*90% assumed efficiency); 7A IC minimum average limit"),
-        Check("Mu peak inductor current screen at 8.55V", peak, "A", 0, isat,
-              "average+dIL/2; tolerance/bias/frequency screen versus 25C Isat reference"),
-        Check("Mu RMS inductor current screen at 8.55V", rms, "A", 0, irms,
-              "sqrt(Iavg^2+dIL^2/12); compare 25C/20C-rise reference, not installed temperature"),
-    ])
+    if center.mpn("U750") != "TPS552882RPMR":
+        mu_mpn = center.mpn("L750")
+        if mu_mpn not in INDUCTORS:
+            raise ValueError(f"unreviewed Mu inductor {mu_mpn}")
+        inductance, ltol, isat, irms, _ = INDUCTORS[mu_mpn]
+        center.used.add("L750")
+        frequency = 20e9/resistor(center, "R756")
+        # +/-10% is a conservative interpolation from TI's specified clock
+        # endpoints, not a guaranteed specification at 49.9k. DITH is fitted.
+        fmin = frequency*.90*.93/(1+center.environment_tolerance("R756"))
+        lscreen = inductance*(1-ltol)*.70
+        checks.append(Check("TPS552892 minimum L with tolerance and 30-percent bias screen",
+                            lscreen*1e6, "uH", 1.2/fmin*1e6, math.inf,
+                            f"{mu_mpn}; Lnom*(1-tolerance)*0.70; requires L>1.2/fSW; "
+                            "clock -10%, R tolerance, dither -7%; typical bias boundary only"))
+        mu_max = .052/mu_shunt_bounds(center)[0]
+        mu_vmax = mu_voltage_corners(center)[1]
+        average, ripple, peak, rms = boost_currents(8.55, mu_vmax, mu_max, lscreen, fmin, .90)
+        checks.extend([
+            Check("Mu average inductor current screen at 8.55V", average, "A", 0, 7.0,
+                  "Vout(max)*Ilimit(max)/(8.55V*90% assumed efficiency); 7A IC minimum average limit"),
+            Check("Mu peak inductor current screen at 8.55V", peak, "A", 0, isat,
+                  "average+dIL/2; tolerance/bias/frequency screen versus 25C Isat reference"),
+            Check("Mu RMS inductor current screen at 8.55V", rms, "A", 0, irms,
+                  "sqrt(Iavg^2+dIL^2/12); compare 25C/20C-rise reference, not installed temperature"),
+        ])
     for name, values in [("center", center), ("left", left), ("right", right)]:
         checks.extend(procurement_checks(name, values))
     return checks
@@ -1045,6 +1067,7 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
             checks.extend(bms_thermal_checks(values))
             checks.extend(bms_control_checks(values))
         return checks
+    modern = values.mpn("U2") == "ISL9241IRTZ"
     # Board split Phase 2.4: the LTC4418 PD selectors (R2140-R2145) moved to
     # the left I/O board; the USB selector (R730-R732) stays on center.
     if "R2140" in values:
@@ -1053,7 +1076,7 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
             add_window(checks, f"LTC4418 PD{index} selector acceptance", refs, values, 1.0,
                        (12.8, 13.3), (16.7, 17.5))
     add_window(checks, "LTC4418 USB acceptance", ("R730", "R731", "R732"),
-               values, 1.0, (12.8, 13.3), (16.7, 23.4))
+               values, 1.0, (3.5, 4.0) if modern else (12.8, 13.3), (22.5,23.4) if modern else (16.7, 23.4))
     add_window(checks, "LTC4418 AUX acceptance", ("R733", "R734", "R735"),
                values, 1.0, (5.3, 5.9), (22.5, 24.0))
     add_window(checks, "TPS26630 AUX protection", ("R711", "R712", "R713"),
@@ -1075,11 +1098,19 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
               "1.224V; actual R739/R740 independent initial/TCR/endurance/soldering bounds"),
     ])
 
-    r_ilim_top = resistor(values, "R17")
-    r_ilim_bottom = resistor(values, "R190")
-    bq_ilim = (5.0 * r_ilim_bottom / (r_ilim_top + r_ilim_bottom) - 1.0) / 0.8
-    checks.append(Check("BQ25798 nominal ILIM pin setting", bq_ilim, "A", 2.9, 3.1,
-                        "(5V*R190/(R17+R190)-1V)/(0.8V/A); not a guaranteed 3A current ceiling"))
+    if modern:
+        from verify_100w_calculations import charger
+        checks.extend(charger(values))
+        # Hardware starts at 200mA. Firmware restores that limit before transfer.
+        handoff_current=.200
+    else:
+        r_ilim_top = resistor(values, "R17")
+        r_ilim_bottom = resistor(values, "R190")
+        bq_ilim = (5.0 * r_ilim_bottom / (r_ilim_top + r_ilim_bottom) - 1.0) / 0.8
+        checks.append(Check("BQ25798 nominal ILIM pin setting", bq_ilim, "A", 2.9, 3.1,
+                            "(5V*R190/(R17+R190)-1V)/(0.8V/A); not a guaranteed 3A current ceiling"))
+
+        handoff_current=bq_ilim
 
     if values.mpn('U6') == 'LM706A0RRXR':
         rail_checks = sys5_voltage_checks(values)
@@ -1166,81 +1197,85 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
               "C224; interpolated starting point between TI 3.3V and 5V table rows"),
     ])
 
-    mu_12v = 1.2 * (1.0 + (resistor(values, "R753")+resistor(values, 'R752')) / resistor(values, "R754"))
-    mu_shunt = resistor(values, "RS750")
-    mu_current = 0.050 / mu_shunt
-    shunt_min, shunt_max = mu_shunt_bounds(values)
-    mu_current_min = 0.048 / shunt_max
-    mu_current_max = 0.052 / shunt_min
-    mu_vmin, mu_vmax = mu_voltage_corners(values)
-    mu_power_min = mu_vmin * mu_current_min
-    mu_power_max = mu_vmax * mu_current_max
-    mu_uvlo = 1.23 * (1.0 + resistor(values, "R759") / resistor(values, "R760"))
-    mu_uvlo_min, mu_uvlo_max = divider_corners(resistor(values, 'R759'), resistor(values, 'R760'),
-                                               values.environment_tolerance('R759'), values.environment_tolerance('R760'),
-                                               1.20, 1.26)
-    mu_force_off_gate = 8.45 * resistor(values, "R761") / (
-        resistor(values, "R766") + resistor(values, "R761")
-    )
-    mu_fsw = 20e9 / resistor(values, "R756")
-    low_pack_budget = firmware_integer_define("EC_DEFAULT_LOW_PACK_MU_EDP_BUDGET_MW") / 1000.0
-    normal_mu_edp_budget = firmware_integer_define("EC_DEFAULT_NORMAL_MU_EDP_BUDGET_MW") / 1000.0
-    low_pack_reserve = firmware_integer_define("EC_DEFAULT_SYSTEM_RESERVE_MW") / 1000.0
-    source_efficiency = firmware_integer_define("EC_DEFAULT_SOURCE_EFFICIENCY_PERMILLE") / 1000.0
-    if project == "bms":
-        low_pack_power = pack_uv * pack_breaker_min
-        low_pack_continuous_power = 0.80 * low_pack_power
+    if modern:
+        from verify_100w_calculations import mu_rail
+        checks.extend(mu_rail(values))
     else:
-        low_pack_power = low_pack_continuous_power = 0.0
-    low_pack_required_input = low_pack_budget / source_efficiency + low_pack_reserve
-    low_pack_mu_headroom = low_pack_continuous_power - low_pack_required_input
-    fan_max_current = 0.26
-    fan_max_power = mu_vmax * fan_max_current
-    fan_fuse_margin = resistor(values, "F200") / fan_max_current
-    fan_fg_cutoff = 1.0 / (2.0 * math.pi * resistor(values, "R206") * capacitor(values, "C209"))
-    fan_fg_max = 6100.0 * 2.0 / 60.0
-    fan_fg_filter_ratio = fan_fg_cutoff / fan_fg_max
-    normal_mu_rail_headroom = 3.3*mu_vmin - normal_mu_edp_budget - fan_max_power
-    support_reserve_after_fan = low_pack_reserve - fan_max_power
-    checks.extend([
-        Check("TPS552892 MU_12V set-point", mu_12v, "V", 11.9, 12.15,
-              "1.2V*(1+R753/R754)"),
-        Check("TPS552892 nominal output-current limit", mu_current, "A", 3.7, 4.0,
-              "50mV/RS750"),
-        Check("TPS552892 output-current limit minimum", mu_current_min, "A", 3.3, math.inf,
-              "48mV/full effective shunt maximum;initial,TCR,endurance,soldering and Kelvin allowance"),
-        Check("Mu output-limit high corner versus average-clamp maximum", mu_power_max/(8.55*.85), "A", 0, 9,
-              "VOUTmax*IOUT-limit-max/(8.55V*85%); the lower7A input-limit corner can act first; this is fault coordination, not an operating entitlement"),
-        Check("Delta blower worst-case rail power", fan_max_power, "W", 3.0, 3.3,
-              "MU_12V high corner*0.26A fan datasheet maximum"),
-        Check("Delta blower PTC hold-current margin", fan_fuse_margin, "x", 2.5, 3.2,
-              "F200 hold current/BFB04512HHA-CZ0T 0.26A maximum"),
-        Check("Delta blower FG RC cutoff", fan_fg_cutoff / 1e3, "kHz", 4.5, 5.5,
-              "1/(2*pi*R206*C209); Delta typical is 8.2k/4nF"),
-        Check("Delta blower FG filter/pulse ratio", fan_fg_filter_ratio, "x", 20.0, 30.0,
-              "FG RC cutoff/(6100RPM*2 pulses/rev/60)"),
-        Check("MU_12V headroom after normal Mu/eDP budget and maximum fan", normal_mu_rail_headroom, "W", 4.0, 8.0,
-              "3.3A operating allocation*VOUTmin-normal Mu/eDP budget-fan maximum"),
-        Check("System reserve remaining after maximum fan", support_reserve_after_fan, "W", 2.5, 4.0,
-              "EC system reserve-fan maximum; remaining reserve covers mandatory support loads"),
-        Check("TPS552892 rising UVLO", mu_uvlo, "V", 8.8, 9.2,
-              "1.23V*(1+R759/R760), hysteresis excluded"),
-        Check("TPS552892 rising UVLO minimum", mu_uvlo_min, "V", 8.55, 9.0,
-              "1.20V with individual R759/R760 initial,TCR,endurance,soldering bounds"),
-        Check("TPS552892 rising UVLO maximum", mu_uvlo_max, "V", 9.0, 9.5,
-              "1.26V with individual R759/R760 initial,TCR,endurance,soldering bounds"),
-        Check("Mu fail-off Q750 gate at 8.45V VSYS", mu_force_off_gate, "V", 4.0, 4.5,
-              "8.45V*R761/(R766+R761); reset-state gate divider"),
-        Check("TPS552892 switching frequency", mu_fsw / 1e3, "kHz", 380, 420,
-              "20e9/R756"),
-    ])
-    # Board split Phase 2.4: the low-pack budget check uses the pack UV/breaker
-    # capability and runs against the bms project netlist instead.
-    if project == "bms":
-        checks.append(
-            Check("Low-pack derated source power minus enforced firmware budget", low_pack_mu_headroom, "W", 0.5, 10.0,
-                  "0.80*LTC4368 pack UV*breaker_min-(EC low-pack Mu+eDP budget/efficiency)-EC system reserve")
+        mu_12v = 1.2 * (1.0 + (resistor(values, "R753")+resistor(values, 'R752')) / resistor(values, "R754"))
+        mu_shunt = resistor(values, "RS750")
+        mu_current = 0.050 / mu_shunt
+        shunt_min, shunt_max = mu_shunt_bounds(values)
+        mu_current_min = 0.048 / shunt_max
+        mu_current_max = 0.052 / shunt_min
+        mu_vmin, mu_vmax = mu_voltage_corners(values)
+        mu_power_min = mu_vmin * mu_current_min
+        mu_power_max = mu_vmax * mu_current_max
+        mu_uvlo = 1.23 * (1.0 + resistor(values, "R759") / resistor(values, "R760"))
+        mu_uvlo_min, mu_uvlo_max = divider_corners(resistor(values, 'R759'), resistor(values, 'R760'),
+                                                   values.environment_tolerance('R759'), values.environment_tolerance('R760'),
+                                                   1.20, 1.26)
+        mu_force_off_gate = 8.45 * resistor(values, "R761") / (
+            resistor(values, "R766") + resistor(values, "R761")
         )
+        mu_fsw = 20e9 / resistor(values, "R756")
+        low_pack_budget = firmware_integer_define("EC_DEFAULT_LOW_PACK_MU_EDP_BUDGET_MW") / 1000.0
+        normal_mu_edp_budget = firmware_integer_define("EC_DEFAULT_NORMAL_MU_EDP_BUDGET_MW") / 1000.0
+        low_pack_reserve = firmware_integer_define("EC_DEFAULT_SYSTEM_RESERVE_MW") / 1000.0
+        source_efficiency = firmware_integer_define("EC_DEFAULT_SOURCE_EFFICIENCY_PERMILLE") / 1000.0
+        if project == "bms":
+            low_pack_power = pack_uv * pack_breaker_min
+            low_pack_continuous_power = 0.80 * low_pack_power
+        else:
+            low_pack_power = low_pack_continuous_power = 0.0
+        low_pack_required_input = low_pack_budget / source_efficiency + low_pack_reserve
+        low_pack_mu_headroom = low_pack_continuous_power - low_pack_required_input
+        fan_max_current = 0.26
+        fan_max_power = mu_vmax * fan_max_current
+        fan_fuse_margin = resistor(values, "F200") / fan_max_current
+        fan_fg_cutoff = 1.0 / (2.0 * math.pi * resistor(values, "R206") * capacitor(values, "C209"))
+        fan_fg_max = 6100.0 * 2.0 / 60.0
+        fan_fg_filter_ratio = fan_fg_cutoff / fan_fg_max
+        normal_mu_rail_headroom = 3.3*mu_vmin - normal_mu_edp_budget - fan_max_power
+        support_reserve_after_fan = low_pack_reserve - fan_max_power
+        checks.extend([
+            Check("TPS552892 MU_12V set-point", mu_12v, "V", 11.9, 12.15,
+                  "1.2V*(1+R753/R754)"),
+            Check("TPS552892 nominal output-current limit", mu_current, "A", 3.7, 4.0,
+                  "50mV/RS750"),
+            Check("TPS552892 output-current limit minimum", mu_current_min, "A", 3.3, math.inf,
+                  "48mV/full effective shunt maximum;initial,TCR,endurance,soldering and Kelvin allowance"),
+            Check("Mu output-limit high corner versus average-clamp maximum", mu_power_max/(8.55*.85), "A", 0, 9,
+                  "VOUTmax*IOUT-limit-max/(8.55V*85%); the lower7A input-limit corner can act first; this is fault coordination, not an operating entitlement"),
+            Check("Delta blower worst-case rail power", fan_max_power, "W", 3.0, 3.3,
+                  "MU_12V high corner*0.26A fan datasheet maximum"),
+            Check("Delta blower PTC hold-current margin", fan_fuse_margin, "x", 2.5, 3.2,
+                  "F200 hold current/BFB04512HHA-CZ0T 0.26A maximum"),
+            Check("Delta blower FG RC cutoff", fan_fg_cutoff / 1e3, "kHz", 4.5, 5.5,
+                  "1/(2*pi*R206*C209); Delta typical is 8.2k/4nF"),
+            Check("Delta blower FG filter/pulse ratio", fan_fg_filter_ratio, "x", 20.0, 30.0,
+                  "FG RC cutoff/(6100RPM*2 pulses/rev/60)"),
+            Check("MU_12V headroom after normal Mu/eDP budget and maximum fan", normal_mu_rail_headroom, "W", 4.0, 8.0,
+                  "3.3A operating allocation*VOUTmin-normal Mu/eDP budget-fan maximum"),
+            Check("System reserve remaining after maximum fan", support_reserve_after_fan, "W", 2.5, 4.0,
+                  "EC system reserve-fan maximum; remaining reserve covers mandatory support loads"),
+            Check("TPS552892 rising UVLO", mu_uvlo, "V", 8.8, 9.2,
+                  "1.23V*(1+R759/R760), hysteresis excluded"),
+            Check("TPS552892 rising UVLO minimum", mu_uvlo_min, "V", 8.55, 9.0,
+                  "1.20V with individual R759/R760 initial,TCR,endurance,soldering bounds"),
+            Check("TPS552892 rising UVLO maximum", mu_uvlo_max, "V", 9.0, 9.5,
+                  "1.26V with individual R759/R760 initial,TCR,endurance,soldering bounds"),
+            Check("Mu fail-off Q750 gate at 8.45V VSYS", mu_force_off_gate, "V", 4.0, 4.5,
+                  "8.45V*R761/(R766+R761); reset-state gate divider"),
+            Check("TPS552892 switching frequency", mu_fsw / 1e3, "kHz", 380, 420,
+                  "20e9/R756"),
+        ])
+        # Board split Phase 2.4: the low-pack budget check uses the pack UV/breaker
+        # capability and runs against the bms project netlist instead.
+        if project == "bms":
+            checks.append(
+                Check("Low-pack derated source power minus enforced firmware budget", low_pack_mu_headroom, "W", 0.5, 10.0,
+                      "0.80*LTC4368 pack UV*breaker_min-(EC low-pack Mu+eDP budget/efficiency)-EC system reserve")
+            )
 
     mic_gain = 1.0 + resistor(values, "R432") / resistor(values, "R433")
     mic_shelf = 1.0 / (
@@ -1288,16 +1323,16 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
 
     pd_hold_up = capacitor(values, "C2146") if "C2146" in values else 0.0
     main_hold_up = capacitor(values, "C746")
-    main_droop = bq_ilim * (7e-6 + 4e-6) / main_hold_up
+    main_droop = handoff_current * (7e-6 + 4e-6) / main_hold_up
     if pd_hold_up > 0:
-        pd_droop = bq_ilim * (7e-6 + 4e-6) / pd_hold_up
+        pd_droop = handoff_current * (7e-6 + 4e-6) / pd_hold_up
         checks.extend([
             Check("LTC4418 dual-PD selector handoff droop", pd_droop, "V", 0.0, 0.40,
-                  "BQ ILIM ceiling*(7us VALID-off max+4us break-before-make max)/C2146; ESR and adapter loss excluded"),
+                  "reviewed transfer-current setting*(7us VALID-off max+4us break-before-make max)/C2146; ESR and adapter loss excluded"),
         ])
     checks.append(
         Check("LTC4418 PD/AUX selector handoff droop", main_droop, "V", 0.0, 0.40,
-              "BQ ILIM ceiling*(7us+4us)/C746; ESR and source loss excluded")
+              "reviewed transfer-current setting*(7us+4us)/C746; ESR and source loss excluded")
     )
 
     # ST AN2867 negative-resistance screening.  Stray capacitance is an
@@ -1399,6 +1434,9 @@ def render_analog_addendum(boards: dict[str, NetlistValues]) -> str:
         lines.append(f"- {name}: {len(values.used)} numeric component values used; "+
                      ("unverified procurement values: "+", ".join(unknown) if unknown else
                       "all used numeric values resolve to supported manufacturer data."))
+    if boards["center"].mpn("U2")=="ISL9241IRTZ":
+        lines=[line for line in lines if not line.startswith(("the Mu3.3A", "the accepted BQ bootstrap"))]
+        lines += ["", "the Mu supply uses a 5.5 A output operating screen at VSYS >=10 V, with 85% efficiency required. the 60 W Mu/display budget leaves room for the fan at the low rail-voltage corner. the resistor-scaled inductor-limit figures are engineering screens, since TI specifies their limits at other operating points. peak-clamp, low-pack, transition-mode and hot-fault behavior remain unmeasured.", "", "the ISL9241 starts at 200 mA input. firmware must restore that limit and disable charging before source transfer. its current shunts, register scaling and source policy are checked separately from actual silicon accuracy. standby startup and current limiting have their own AON report. qualification flags remain off."]
     return "\n".join(lines)+"\n"
 
 
@@ -1440,6 +1478,10 @@ def render_report(checks: list[Check], netlist: Path, radio_netlist: Path) -> st
         "- Analog Devices LTC4418: https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4418.pdf",
         "- Texas Instruments TPS2663: https://www.ti.com/lit/ds/symlink/tps2663.pdf",
         "- Texas Instruments TPS25947: https://www.ti.com/lit/ds/symlink/tps25947.pdf",
+        "- Renesas ISL9241: https://www.renesas.com/en/document/dst/isl9241-datasheet",
+        "- Texas Instruments TPS552882: https://www.ti.com/lit/ds/symlink/tps552882.pdf",
+        "- Texas Instruments TPS62933: https://www.ti.com/lit/ds/symlink/tps62933.pdf",
+        "- Analog Devices LTC4231: https://www.analog.com/media/en/technical-documentation/data-sheets/4231fa.pdf",
         "- Texas Instruments BQ25798: https://www.ti.com/lit/ds/symlink/bq25798.pdf",
         "- Texas Instruments TPS552892: https://www.ti.com/lit/ds/symlink/tps552892.pdf",
         "- Delta BFB04512HHA-CZ0T: https://www.delta-fan.com/Download/Spec/BFB04512HHA-CZ0T.pdf",
@@ -1481,6 +1523,9 @@ def main() -> None:
                         help="board split Phase 2.4: which project to verify (bms = pack calculations)")
     parser.add_argument("--netlist-dir", type=Path, default=ROOT / "verification/generated",
                         help="directory for fresh electrical evidence exports")
+    parser.add_argument("--center-netlist",type=Path)
+    parser.add_argument("--left-netlist",type=Path)
+    parser.add_argument("--right-netlist",type=Path)
     args = parser.parse_args()
     args.netlist_dir = args.netlist_dir.resolve()
 
@@ -1493,12 +1538,15 @@ def main() -> None:
         export_netlist(bms_sch, netlist)
         checks = build_checks(component_values(netlist), {}, project="bms")
     else:
-        export_netlist(SCHEMATIC, netlist)
+        if args.center_netlist: netlist=args.center_netlist.resolve()
+        else: export_netlist(SCHEMATIC, netlist)
         export_netlist(RADIO_SCHEMATIC, radio_netlist)
         right_netlist = args.netlist_dir / "right_electrical_calculations_netlist.xml"
-        export_netlist(ROOT / "right_io/right_io.kicad_sch", right_netlist)
+        if args.right_netlist: right_netlist=args.right_netlist.resolve()
+        else: export_netlist(ROOT / "right_io/right_io.kicad_sch", right_netlist)
         left_netlist = args.netlist_dir / "left_electrical_calculations_netlist.xml"
-        export_netlist(ROOT / "left_io/left_io.kicad_sch", left_netlist)
+        if args.left_netlist: left_netlist=args.left_netlist.resolve()
+        else: export_netlist(ROOT / "left_io/left_io.kicad_sch", left_netlist)
         right_values = component_values(right_netlist)
         if not right_values.get("U54", "").startswith("TPS22948DCKR") or not right_values.get("U50", "").startswith("TPD4E05U06DQAR"):
             raise ValueError("HDMI voltage calculation requires the checked TPS22948/TPD4E05U06 power path")

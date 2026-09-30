@@ -87,7 +87,7 @@ LIBMAP = {
     "TPS552892": "TPS552892",
     "TPS552882": "TPS552882", "ISL9241": "ISL9241",
     "TPS62933": "Regulator_Switching", "LM74700": "Power_Management",
-    "LTC4368-2": "LTC4368-2",
+    "LTC4368-2": "LTC4368-2", "LTC4231-1": "LTC4231-1",
     "TPS25982": "TPS25982", "74LVC1G04": "74xGxx",
     "TPS3700": "TPS3700", "PCA9537": "Interface_Expansion",
     "TLV803EA29RDBZR": "TLV803EA29RDBZR",

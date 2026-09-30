@@ -25,7 +25,9 @@ class PortConfigTests(unittest.TestCase):
     def test_images_cannot_exchange_ports(self):
         errors=[];pd.verify_policy(self.source('PD1'),'wrong right',errors,'PD2');self.assertTrue(errors)
         errors=[];pd.verify_policy(self.source('PD2'),'wrong left',errors,'PD1');self.assertTrue(errors)
-    def test_reject_5a_sink(self):self.check_bad(0x33,13,0xf4)
+    def test_reject_5a_at_9v(self):self.check_bad(0x33,5,0xf4)
+    def test_reject_above_5a_at_20v(self):self.check_bad(0x33,13,0xf5)
+    def test_reject_legacy_60w_profile(self):self.check_bad(0x33,13,0x2c)
     def test_reject_fifth_sink(self):self.check_bad(0x33,0,5)
     def test_reject_3a_source(self):self.check_bad(0x32,3,0x2c)
     def test_reject_second_source(self):self.check_bad(0x32,0,2)
@@ -35,6 +37,8 @@ class PortConfigTests(unittest.TestCase):
     def test_reject_pphv_source(self):self.check_bad(0x27,2,1)
     def test_reject_vconn_limit_change(self):self.check_bad(0x27,1,1)
     def test_reject_wrong_sink_pdp(self):self.check_bad(0x7e,10,45)
+    def test_keep_weak_source_connected(self):self.check_bad(0x37,0,0x76)
+    def test_reject_hidden_capability_mismatch(self):self.check_bad(0x37,0,0x3e)
     def test_reject_duplicate_register(self):
         source=self.source();entries=source['configuration']['data']['selected_ace'];entries.append(copy.deepcopy(entries[0]))
         with self.assertRaises(ValueError):pd.register_map(source)

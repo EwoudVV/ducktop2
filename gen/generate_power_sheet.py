@@ -19,7 +19,7 @@ def add_selector_fet(s, ref, x, y, gate, common_source, drain, drain_kind):
 
 def build(sheet_symbol_uuid):
     s = Sheet(f"/{sheet_symbol_uuid}")
-    s.paper = (1400, 900)
+    s.paper = (1400, 1100)
 
     class Cur:
         def __init__(self, x0, y0, col_w=55, row_h=10, rows_per_col=22):
@@ -76,7 +76,7 @@ def build(sheet_symbol_uuid):
     s.place("RS1", "R", "5mOhm 1% 2W BQ34Z100 Kelvin shunt", 170, 120,
             footprint="Resistor_SMD:R_2512_6332Metric",
             pin_nets={"1": ("FG_VSS", "hier"), "2": ("GND", "local")},
-            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP2512R0050FEA"})
+            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP25125L000FEA"})
 
     s.place("R181", "R", "16.5k 0.1% pack divider lo", 170, 160, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("FG_BAT_DIV", "local"), "2": ("FG_VSS", "hier")})
@@ -335,7 +335,7 @@ def build(sheet_symbol_uuid):
     s.text(380, 38.1, "SMCJ24CA protects the AUX eFuse input. The common LTC4418 window protects the charger input.")
 
     s.text(20, 220, "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice).")
-    s.text(20, 226, "J2: pins 1/2 PACK+, pins 3/4 PACK-, pin 5 cell1 tap, pin 6 cell2 tap. Verify harness order before first connection.")
+    s.text(20, 226, "BMS J2: 1 raw negative, 2 cell2 tap, 3 raw positive, 4 cell1 tap. Verify the assembled harness before connecting cells.")
     s.text(20, 232, "U719 BQ7791500 autonomously protects each cell at 4.20V OV / 2.90V UV and drives back-to-back low-side FETs.")
     s.text(20, 238, "RS11=8mOhm gives 7.5A nominal OCD and 15A nominal SCD; U11/RS10 and F1 remain independent tighter/secondary protection.")
     s.text(20, 244, "Three insulated cell probes drive raw-referenced BMS comparators and CTRC/CTRD. U719 TS retains its unused-function strap.")
@@ -345,15 +345,15 @@ def build(sheet_symbol_uuid):
     s.text(20, 271.24, "AUX current is limited by the released source profile. Solar MPPT is not implemented in this charger driver.")
     s.text(20, 286.48, "AUX_DC_ADC measures the protected input so firmware can detect droop and reduce charger input current.")
     s.text(20, 294.1, "RS2600 is the 20mOhm input shunt. RS2601 is the separate 10mOhm battery-current shunt; both need Kelvin routing.")
-    s.text(20, 301.72, "Q25 is the ISL9241 battery-path FET. The protected pack feeds the EC separately; disabling the Mu rail keeps button wake available.")
+    s.text(20, 301.72, "Q25 is the ISL9241 battery-path FET. Battery standby comes through VSYS and the discharge shunt; disabling Mu keeps button wake available.")
     s.text(20, 309.34, "U11 accepts about 8.45-13.57V nominal; 11mOhm RS10 gives 4.55A nominal and <=5.51A worst-case trips.")
     s.text(20, 316.96, "The charger NTC pin receives a hardware inhibit from the BMS permit. The fixed 10k state is not a cell-temperature measurement.")
     s.text(20, 324.58, "STARTUP: keep Mu enable low and PROCHOT asserted. Read TCPC PD Status 0x40 and active PDO/RDO 0x34/0x35 before selecting a source.")
     s.text(20, 332.2, "Require the qualified VSYS threshold before Mu enable and confirm MU_12V_PG. Source, charger, watchdog or PG faults revoke enable; profile gates remain off until qualified.")
     s.text(20, 339.82, "The charger watchdog stays enabled. JEITA, source limits and throttle settings must be read back before the hardware gates are released.")
-    s.text(20, 347.44, "U718 is the shared standby circuit breaker. U2650 prefers a valid external supply; pack standby remains available without firmware.")
-    s.text(20, 355.06, "AON UV rising remains above 6.0 V, so default 5 V USB-C is negotiation-only. B340A input OR blocks DC negative sources; transient overshoot still needs measurement.")
-    s.text(20, 362.68, "A 5V-only USB-C source leaves the laptop off. AON_FAULT_N inhibits charging and Mu start; the service connector remains the assembly hard disconnect.")
+    s.text(20, 347.44, "U718 provides fast voltage protection. U2660 limits standby inrush and latches a persistent fault; TP2660/TP2661 provide a service reset.")
+    s.text(20, 355.06, "USB and VSYS use reverse-blocking ideal-diode feeds. AUX uses D711. The EC can start from 5V USB before the main source paths are enabled.")
+    s.text(20, 362.68, "5V and 9V adapters use the buck-boost path. Running and charging share the measured input budget; a qualified pack can cover a shortfall.")
     s.text(20, 370.3, "C746 provides low-ESR hold-up through LTC4418 break-before-make source switching.")
 
     # First-article pogo access. These pads are not user connectors; they make
