@@ -28,7 +28,7 @@ def add_charger(s):
         part(ref,'C',value,x,y,FOOTPRINTS[fp],{1:a,2:b},mpn,maker)
     def nfet(ref,value,x,y,gate,source,drain,mpn='CSD17577Q3A',fp=None):
         part(ref,'Q_NMOS_123S_4G_5678D',value,x,y,
-             fp or 'Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET',
+             fp or 'ducktop2:CSD17577Q3A_DNH',
              {1:source,2:source,3:source,4:gate,5:drain},mpn)
     def small_fet(ref,x,y,gate,drain):
         part(ref,'Q_NMOS_SOT23_GSD','BSS138',x,y,FOOTPRINTS['Q_BSS138'],
@@ -83,7 +83,7 @@ def add_charger(s):
           ('CHG_HS2_DRV','CHG_HS2_GATE'))):
         r('R'+str(2603+index),'0R gate link',850+80*index,315,driver,gate)
 
-    r('R18','2.21k 1% 3S / 724kHz / 200mA startup',850,340,'PROG_SET','GND','RC0402FR-072K21L',fp='Resistor_SMD:R_0402_1005Metric')
+    r('R18','2.21k 0.1% 25ppm 3S / 724kHz / 200mA startup',850,340,'PROG_SET','GND','TNPW04022K21BEED',fp='Resistor_SMD:R_0402_1005Metric',maker='Vishay')
     c('C2602','1n 50V C0G PROG filter',930,340,'PROG_SET','GND','GRM1555C1H102JA01D','C_0402')
     r('R2607','2R input sense filter',1010,340,'VBUS_COMBINED','CHG_CSIP','RC0402FR-072RL',fp='Resistor_SMD:R_0402_1005Metric')
     c('C2603','100n 50V input sense filter',1090,340,'CHG_CSIP','CHG_INPUT','GRM155R71H104ME14D','C_0402')

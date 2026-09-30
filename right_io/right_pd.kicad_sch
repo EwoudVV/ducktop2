@@ -3,7 +3,7 @@
   (generator "eeschema")
   (generator_version "10.0")
   (uuid e5fa2b2c-3d44-5c18-94d1-381ac21e4de7)
-  (paper "A2")
+  (paper "A0")
   (lib_symbols
 (symbol "74xGxx:74LVC1G08"
 		(exclude_from_sim no)
@@ -3166,563 +3166,7 @@
 		)
 		(embedded_fonts no)
 	)
-(symbol "Power_Management:TPS26630RGE"
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "U"
-			(at -8.89 16.51 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TPS26630RGE"
-			(at 7.62 16.51 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_DFN_QFN:Texas_RGE0024H_VQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias"
-			(at 0 -31.75 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2663.pdf"
-			(at -10.16 20.32 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "60V, 6A Power Limiting, Surge Protection Industrial eFuse, Adjustable Overvoltage cut-off, Active Current Limiting, VQFN-24"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "efuse protection switch"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "Texas*RGE0024H*"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(symbol "TPS26630RGE_0_1"
-			(rectangle
-				(start -10.16 15.24)
-				(end 10.16 -17.78)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type background)
-				)
-			)
-		)
-		(symbol "TPS26630RGE_1_1"
-			(pin power_in line
-				(at -12.7 12.7 0)
-				(length 2.54)
-				(name "IN"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -12.7 12.7 0)
-				(length 2.54)
-				(hide yes)
-				(name "IN"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at -12.7 7.62 0)
-				(length 2.54)
-				(name "B_GATE"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at -12.7 2.54 0)
-				(length 2.54)
-				(name "DRV"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin power_in line
-				(at 0 17.78 270)
-				(length 2.54)
-				(name "IN_SYS"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -12.7 -2.54 0)
-				(length 2.54)
-				(name "UVLO"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "6"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -12.7 -7.62 0)
-				(length 2.54)
-				(name "OVP"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin power_in line
-				(at 0 -20.32 90)
-				(length 2.54)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 12.7 -15.24 180)
-				(length 2.54)
-				(name "dVdT"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 12.7 -12.7 180)
-				(length 2.54)
-				(name "ILIM"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "10"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -12.7 -15.24 0)
-				(length 2.54)
-				(name "MODE"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "11"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -12.7 -12.7 0)
-				(length 2.54)
-				(name "~{SHDN}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "12"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 12.7 -5.08 180)
-				(length 2.54)
-				(name "IMON"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "13"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin open_collector line
-				(at 12.7 0 180)
-				(length 2.54)
-				(name "~{FLT}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "14"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at 12.7 7.62 180)
-				(length 2.54)
-				(name "PGTH"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "15"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 12.7 -2.54 180)
-				(length 2.54)
-				(name "PGOOD"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "16"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin power_out line
-				(at 12.7 12.7 180)
-				(length 2.54)
-				(name "OUT"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "17"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 12.7 12.7 180)
-				(length 2.54)
-				(hide yes)
-				(name "OUT"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "18"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -10.16 10.16 0)
-				(length 2.54)
-				(hide yes)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "19"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -10.16 5.08 0)
-				(length 2.54)
-				(hide yes)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "20"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -10.16 0 0)
-				(length 2.54)
-				(hide yes)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "21"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at 10.16 10.16 180)
-				(length 2.54)
-				(hide yes)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "22"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at 10.16 5.08 180)
-				(length 2.54)
-				(hide yes)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "23"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at 10.16 2.54 180)
-				(length 2.54)
-				(hide yes)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "24"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 0 -20.32 90)
-				(length 2.54)
-				(hide yes)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "25"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
+
 (symbol "Power_Protection:TPD4E05U06DQA"
 		(pin_names
 			(offset 0)
@@ -5416,9 +4860,234 @@
 		)
 		(embedded_fonts no)
 	)
-  )
-(text "== Right I/O: PD2 dual-role (J11) + source (J12), USB2-only ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27))) (uuid 688f4fef-2ecc-5086-b440-15d9caf0a7c4))
-(text "== J11: USB 2.0 data plus USB-PD charging, side port 2 ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27))) (uuid 7ca4fa8e-031b-58a4-a82e-9348fcaf6cda))
+  (symbol "TPS25982:TPS25982" (in_bom yes) (on_board yes)
+(property "Reference" "U" (at 0 20.32 0) (effects (font (size 1.27 1.27))))
+(property "Value" "TPS25982" (at 0 17.78 0) (effects (font (size 1.27 1.27))))
+(property "Footprint" "ducktop2:Texas_RGE0024M_QFN24_4x4_2EP" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps25982.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+(symbol "TPS25982_0_1" (rectangle (start -10.16 16.51) (end 10.16 -16.51)
+(stroke (width 0.254) (type default)) (fill (type background))))
+(symbol "TPS25982_1_1"
+(pin power_in line (at -12.7 15.2400 0) (length 2.54) (name "IN" (effects (font (size 1.016 1.016)))) (number "1" (effects (font (size 1.016 1.016)))))
+(pin passive line (at -12.7 12.7000 0) (length 2.54) (name "IN" (effects (font (size 1.016 1.016)))) (number "2" (effects (font (size 1.016 1.016)))))
+(pin passive line (at -12.7 10.1600 0) (length 2.54) (name "IN" (effects (font (size 1.016 1.016)))) (number "3" (effects (font (size 1.016 1.016)))))
+(pin power_in line (at -12.7 7.6200 0) (length 2.54) (name "GND" (effects (font (size 1.016 1.016)))) (number "4" (effects (font (size 1.016 1.016)))))
+(pin passive line (at -12.7 5.0800 0) (length 2.54) (name "GND" (effects (font (size 1.016 1.016)))) (number "5" (effects (font (size 1.016 1.016)))))
+(pin input line (at -12.7 2.5400 0) (length 2.54) (name "EN/UVLO" (effects (font (size 1.016 1.016)))) (number "6" (effects (font (size 1.016 1.016)))))
+(pin passive line (at -12.7 0.0000 0) (length 2.54) (name "ITIMER" (effects (font (size 1.016 1.016)))) (number "7" (effects (font (size 1.016 1.016)))))
+(pin passive line (at -12.7 -2.5400 0) (length 2.54) (name "ILIM" (effects (font (size 1.016 1.016)))) (number "8" (effects (font (size 1.016 1.016)))))
+(pin output line (at -12.7 -5.0800 0) (length 2.54) (name "IMON" (effects (font (size 1.016 1.016)))) (number "9" (effects (font (size 1.016 1.016)))))
+(pin passive line (at -12.7 -7.6200 0) (length 2.54) (name "RETRY_DLY" (effects (font (size 1.016 1.016)))) (number "10" (effects (font (size 1.016 1.016)))))
+(pin passive line (at -12.7 -10.1600 0) (length 2.54) (name "NRETRY" (effects (font (size 1.016 1.016)))) (number "11" (effects (font (size 1.016 1.016)))))
+(pin input line (at -12.7 -12.7000 0) (length 2.54) (name "LDSTRT" (effects (font (size 1.016 1.016)))) (number "12" (effects (font (size 1.016 1.016)))))
+(pin open_collector line (at -12.7 -15.2400 0) (length 2.54) (name "PG" (effects (font (size 1.016 1.016)))) (number "13" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 15.2400 180) (length 2.54) (name "GND" (effects (font (size 1.016 1.016)))) (number "14" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 12.7000 180) (length 2.54) (name "dVdt" (effects (font (size 1.016 1.016)))) (number "15" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 10.1600 180) (length 2.54) (name "IN" (effects (font (size 1.016 1.016)))) (number "16" (effects (font (size 1.016 1.016)))))
+(pin power_out line (at 12.7 7.6200 180) (length 2.54) (name "OUT" (effects (font (size 1.016 1.016)))) (number "17" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 5.0800 180) (length 2.54) (name "OUT" (effects (font (size 1.016 1.016)))) (number "18" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 2.5400 180) (length 2.54) (name "OUT" (effects (font (size 1.016 1.016)))) (number "19" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 0.0000 180) (length 2.54) (name "OUT" (effects (font (size 1.016 1.016)))) (number "20" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 -2.5400 180) (length 2.54) (name "OUT" (effects (font (size 1.016 1.016)))) (number "21" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 -5.0800 180) (length 2.54) (name "OUT" (effects (font (size 1.016 1.016)))) (number "22" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 -7.6200 180) (length 2.54) (name "OUT" (effects (font (size 1.016 1.016)))) (number "23" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 -10.1600 180) (length 2.54) (name "OUT" (effects (font (size 1.016 1.016)))) (number "24" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 -12.7000 180) (length 2.54) (name "IN" (effects (font (size 1.016 1.016)))) (number "25" (effects (font (size 1.016 1.016)))))
+(pin passive line (at 12.7 -15.2400 180) (length 2.54) (name "GND" (effects (font (size 1.016 1.016)))) (number "26" (effects (font (size 1.016 1.016)))))
+))
+(symbol "74xGxx:74LVC1G04"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at 0 7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC1G04"
+			(at 5.08 -7.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc1g04.pdf"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Single NOT Gate, Low-Voltage CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "Single Gate NOT LVC CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23* Texas?R-PDSO-G5?DCK* Texas?R-PDSO-N5?DRL* Texas?X2SON*0.8x0.8mm*P0.48mm*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "74LVC1G04_0_1"
+			(polyline
+				(pts
+					(xy -7.62 6.35) (xy -7.62 -6.35) (xy 5.08 0) (xy -7.62 6.35)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "74LVC1G04_1_1"
+			(pin no_connect line
+				(at -7.62 2.54 0)
+				(length 2.54)
+				(hide yes)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -15.24 0 0)
+				(length 7.62)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -5.08 -10.16 90)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output inverted
+				(at 12.7 0 180)
+				(length 7.62)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at -5.08 10.16 270)
+				(length 5.08)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+)
+(text "== Right I/O: PD2 dual-role (J11) + source (J12), USB2-only ==" (at 20.32 12.7 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 688f4fef-2ecc-5086-b440-15d9caf0a7c4))
+(text "== J11: USB 2.0 data plus USB-PD charging, side port 2 ==" (at 20.32 50.8 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 7ca4fa8e-031b-58a4-a82e-9348fcaf6cda))
 (symbol
   (lib_id "Connector:USB_C_Receptacle")
   (at 274.32 106.68 0)
@@ -5807,245 +5476,41 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 05e3444d-e1db-573a-bff0-f7068214978c)
 )
-(symbol
-  (lib_id "TPS25751AD:TPS25751AD")
-  (at 83.82 106.68 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 9b3cf5d3-352b-58a3-acd6-ea89403c11de)
-  (property "Reference" "U42" (at 83.82 73.66 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPS25751AD USB-PD DRP controller" (at 83.82 139.7 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Texas Instruments" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "TPS25751ADREFR" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps25751a.pdf" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "PortPolicy" "DRP;HOST_DATA_ONLY;5_9_15_20V_3A_SINK;5V_900MA_SOURCE;DEFAULT_RP" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "EEPROMContract" "U2012_PROGRAM_WITH_VERSIONED_TPS25751_IMAGE" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "EEPROMSource" "firmware/tps25751a/ducktop2_pd2_config.json" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ADCStrap" "SAFE_MODE_ADDR_0X21" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 988f20ca-89b5-58b8-aab8-887a54067649))
-  (pin "2" (uuid 9cc3d4be-a663-5543-9c10-d5499fc561c8))
-  (pin "3" (uuid e72848e8-0043-5006-8881-c13500bb8a1a))
-  (pin "4" (uuid 34cdccd2-2c9e-57ec-b0cb-8d5d4fd5c3f0))
-  (pin "5" (uuid f978dd13-3353-5482-9bf1-8e9a131ac5e4))
-  (pin "6" (uuid d65e24a3-3ba5-5227-81d8-92d796a85575))
-  (pin "7" (uuid 35b0d030-0707-5854-8a3b-9a76f201d702))
-  (pin "8" (uuid 407e4aab-0b36-5903-8869-7ec33a196179))
-  (pin "9" (uuid f2f454c1-cb41-54b0-9570-6cf5bc68fb4d))
-  (pin "10" (uuid 154d1d04-412f-5999-968f-2ff65530091c))
-  (pin "11" (uuid e211554e-e335-5d63-b0ca-ce612af2094d))
-  (pin "12" (uuid 16b4362e-b595-5935-a6a9-75abc4cb7942))
-  (pin "13" (uuid ddd2b754-bb8d-54ea-bed7-f024f29ac893))
-  (pin "14" (uuid 0d28111c-2683-596e-be33-7d4721b0f253))
-  (pin "15" (uuid 070f5c2e-73e7-55e6-920d-dbfb380f787e))
-  (pin "16" (uuid 28bc14f3-a13d-5731-a6ca-b23d537f5ee4))
-  (pin "17" (uuid 95a10c4d-d00e-5536-95eb-f57d1d439fce))
-  (pin "18" (uuid 03dec964-0b79-5bfb-8d07-0eb158ac66c9))
-  (pin "19" (uuid 623ab46a-6a58-5aae-b8da-105282b99bb2))
-  (pin "20" (uuid 94603dd5-a57a-5aca-8cd2-0e2d90cca245))
-  (pin "23" (uuid c472f632-9b4c-51b7-9d5b-578837fdc399))
-  (pin "26" (uuid 7a8bbf10-01ab-549b-95d0-23f1c7b68e31))
-  (pin "27" (uuid 80297a05-ff5e-5d08-9301-0294928463b8))
-  (pin "28" (uuid 120036a9-2a16-56cc-8405-45e30236917a))
-  (pin "29" (uuid 058fd368-c1be-5c6c-98fd-90e58806d025))
-  (pin "30" (uuid 24a1a57f-0f6c-5308-a6a3-17ae8725993f))
-  (pin "31" (uuid 689593d8-5694-57e4-a8f0-67bc3ad79f21))
-  (pin "32" (uuid 6e44e454-ce13-5ffe-8f4a-6cba2fd7df67))
-  (pin "34" (uuid fbe2513e-14a4-56ac-bca0-059ba5f8b248))
-  (pin "36" (uuid b746f341-7955-59f8-b892-19611ff472d4))
-  (pin "37" (uuid 404f3e1f-90eb-5b17-869f-b0074afa2bc6))
-  (pin "38" (uuid 0352e8d1-4281-5b1c-9778-1549354dddbe))
-  (pin "39" (uuid 652d28c4-181f-5325-9dfa-ad031c706668))
-  (pin "40" (uuid 2aba539c-1280-5b41-b7b0-d43b2723f256))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "U42")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_LDO3V3"
-  (at 68.58 83.82 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 627aa85a-0357-5a1d-b9ae-2bae5e829b64)
-)
-(label "GND"
-  (at 68.58 86.36 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 160ea49d-c93f-502c-ac0d-bacfbb2d0fb1)
-)
-(label "GND"
-  (at 68.58 88.9 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 91e96190-1165-533c-8c29-291afdfb3278)
-)
-(label "PD2_LDO1V5"
-  (at 68.58 91.44 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid db33f6ba-daa4-5537-96b8-13f0fec01475)
-)
-(label "GND"
-  (at 68.58 93.98 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 695df313-8fca-54a4-a881-f38a487a7c6b)
-)
-(label "GND"
-  (at 68.58 96.52 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 217db5f1-7058-529a-8af8-de608f414131)
-)
-(label "GND"
-  (at 68.58 99.06 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 5217469d-8e56-50bf-af32-76198b85e762)
-)
-(hierarchical_label "PD2_I2C_SDA"
-  (shape bidirectional)
-  (at 68.58 101.6 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 8bc82ca3-4b39-5c2c-ae2b-0fa878e39e43)
-)
-(hierarchical_label "PD2_I2C_SCL"
-  (shape bidirectional)
-  (at 68.58 104.14 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 5aa63ea4-6a70-5490-8bfb-b8ceb11e309f)
-)
-(hierarchical_label "PD2_TCPC_IRQ_N"
-  (shape bidirectional)
-  (at 68.58 106.68 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 713dd269-d804-5dbc-ac89-c31823491c93)
-)
-(label "GND"
-  (at 68.58 109.22 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid a8ec6976-1099-5f63-a9ea-94746b8870a3)
-)
-(label "GND"
-  (at 68.58 111.76 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 608cf36d-34e0-5568-910a-10f57c1d1ad9)
-)
-(label "GND"
-  (at 68.58 114.3 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid ac098ae4-95b5-5f1e-b1e2-17e470f483d1)
-)
-(label "GND"
-  (at 68.58 116.84 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 8c61d74b-3038-51f2-963e-f53c42ad1f9c)
-)
-(label "PD2_DRAIN_THERMAL"
-  (at 68.58 119.38 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 81be56aa-d3ca-59ce-a154-832e0c370a81)
-)
-(label "PD2_EEPROM_SDA"
-  (at 68.58 121.92 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 61c66e78-7480-54f4-9146-ef3d6708090f)
-)
-(label "PD2_EEPROM_SCL"
-  (at 68.58 124.46 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 5b56fdf7-5c33-591b-b1d8-cdfb4a82a672)
-)
-(label "PD2_EEPROM_IRQ_N"
-  (at 68.58 127 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 36e394a1-e1bb-549d-84c2-2193c2f22ce1)
-)
-(label "GND"
-  (at 68.58 129.54 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 2cc07947-f770-55b8-a2c4-060aab173e7c)
-)
-(label "PD2_PPHV"
-  (at 99.06 127 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 413f4b6b-f1b1-586e-a6be-3c049a6be794)
-)
-(hierarchical_label "PD2_VBUS_RAW"
-  (shape bidirectional)
-  (at 99.06 119.38 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d3a07029-760c-54d0-b245-2c679227afbe)
-)
-(label "PD2_GPIO_DFP"
-  (at 99.06 114.3 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0b072ed5-2e35-5a81-9c02-151811530310)
-)
-(label "GND"
-  (at 99.06 111.76 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d1cef528-a47c-51b5-8fa0-1ea9d653fc8a)
-)
-(label "PD2_CC1_SYS"
-  (at 99.06 109.22 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid e6be8408-a27b-5ed2-8a45-31866487d95d)
-)
-(label "PD2_CC2_SYS"
-  (at 99.06 106.68 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid aa1415b3-9196-5877-9d94-fbc7557a3fff)
-)
-(label "PD2_DRAIN_THERMAL"
-  (at 99.06 104.14 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 95ea6c2c-08f7-5870-8c94-26a2b48421d4)
-)
-(label "GND"
-  (at 99.06 101.6 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 0645cda8-f204-5e49-9a8a-c39df328b26c)
-)
-(hierarchical_label "PD2_VBUS_RAW"
-  (shape bidirectional)
-  (at 99.06 97.79 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 47227077-859f-57fa-9b45-259e594c46ed)
-)
-(label "PD2_PP5V_GATED"
-  (at 99.06 92.71 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a70ae8ae-17f5-530a-9410-d86ba88cf94f)
-)
-(label "PD2_GPIO_ATTACH"
-  (at 99.06 88.9 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid adc32123-7513-5589-be62-949d01ca7b3a)
-)
-(label "PD2_GPIO_FLIP"
-  (at 99.06 86.36 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4c1e0be3-d9ca-5241-b981-09f2c9ba4bd8)
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 99.06 83.82 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4f182f64-20ac-54a5-8037-b3f84e6c8654)
-)
-(label "GND"
-  (at 81.28 133.35 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 83f82d6c-4ab7-5bd3-a307-122a8aba90be)
-)
-(label "PD2_DRAIN_THERMAL"
-  (at 86.36 133.35 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a0a9227f-5500-5977-ae0c-da1ea151de6a)
-)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (symbol
   (lib_id "Memory_EEPROM:CAT24C256")
   (at 40.64 170.18 0)
@@ -7443,492 +6908,59 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid aba2a825-69af-50a6-bce0-4dbea43eda08)
 )
-(symbol
-  (lib_id "Power_Management:TPS26630RGE")
-  (at 375.92 144.78 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 6c994cb6-d88d-5ac8-87b9-39459348a22b)
-  (property "Reference" "U721" (at 375.92 118.11 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "TPS26630RGER PD2 default-off 3A sink eFuse" (at 375.92 171.45 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Package_DFN_QFN:Texas_RGE0024H_VQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Texas Instruments" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "TPS26630RGER" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2663.pdf" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "SafetyState" "MODE_GND_AUTORETRY;PGTH_GND_PGOOD_UNUSED;SHDN_47K_PULLDOWN" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0121136b-66b8-5bad-a29e-dd575966bc28))
-  (pin "2" (uuid 723bed18-e437-598c-962e-aa0d5b2b5a56))
-  (pin "3" (uuid 01e92df3-ff59-54cb-9ad6-941acd9da8d5))
-  (pin "4" (uuid dee80e43-5eb0-5fc0-a7a2-9448b4cfba24))
-  (pin "5" (uuid dfa32a2c-7528-5197-8b1f-5646f496adc2))
-  (pin "6" (uuid ab1c6a0f-6fac-5143-ae9b-c9819f6887bf))
-  (pin "7" (uuid 6862566e-9087-5f80-a5c3-b691a2dc8de4))
-  (pin "8" (uuid 4dd577a9-a2b3-5427-81bf-e35d71aa82ad))
-  (pin "9" (uuid c31ecef6-cfde-59a1-a5a9-dc759c3321ca))
-  (pin "10" (uuid 2c604ad2-a07c-5e83-a703-9cc62275925a))
-  (pin "11" (uuid dd8224ff-2bd1-5546-92c5-887bdb238988))
-  (pin "12" (uuid e8fa1e06-4b11-5a0c-aeaa-63439e622b02))
-  (pin "13" (uuid 0b61af6d-f537-5a5d-a59a-213add12a980))
-  (pin "14" (uuid ffefa10b-1dd3-51b6-9111-ca31eae3e56a))
-  (pin "15" (uuid 58f426bc-fbcf-5fa9-acbf-b97cad740fcb))
-  (pin "16" (uuid 7c5bbf84-4da5-5351-94ad-5a50d5b7d25f))
-  (pin "17" (uuid 8f99d164-0ec7-53af-9e26-ce0d228f9881))
-  (pin "18" (uuid de819bb6-9e6f-54aa-817a-7bc46761518e))
-  (pin "19" (uuid c6853143-a4e7-5c1e-95e0-3a559589d56a))
-  (pin "20" (uuid ae79d909-a688-5e1a-910b-940aa28ed7c5))
-  (pin "21" (uuid b9adccad-009c-5317-b73f-58e8d5f26d7a))
-  (pin "22" (uuid cb7576db-e7e0-50af-bdfe-c30f4047bc21))
-  (pin "23" (uuid 88139461-8f39-5675-97f7-9ed3d40159e7))
-  (pin "24" (uuid da61b9d2-c4ba-5581-ac3e-3eb3c92f3062))
-  (pin "25" (uuid 7cc04731-da7c-5af0-9768-50800c673719))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "U721")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_PPHV"
-  (at 363.22 132.08 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 418c837d-2d14-5650-80cf-ed370619fd97)
-)
-(no_connect (at 363.22 137.16) (uuid d85f6949-2046-53f1-86e4-b9689cc28047))
-(no_connect (at 363.22 142.24) (uuid 5ea9555e-6b42-512f-9f79-7fc49f8dca3f))
-(label "PD2_PPHV"
-  (at 375.92 127 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 12a98726-f677-5f28-bd8b-f546828e34d2)
-)
-(label "PD2_EFUSE_UV"
-  (at 363.22 147.32 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid d71c4cc6-8bd2-5633-b83a-e80d4ccbef28)
-)
-(label "PD2_EFUSE_OV"
-  (at 363.22 152.4 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid c3b4a6e7-5360-5cf6-8d45-0645cc17dd32)
-)
-(label "GND"
-  (at 375.92 165.1 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4041e66d-52bd-57c4-9081-63422427d647)
-)
-(label "PD2_EFUSE_DVDT"
-  (at 388.62 160.02 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a2e63eb2-8f2f-5256-a789-28d284ee5edc)
-)
-(label "PD2_EFUSE_ILIM"
-  (at 388.62 157.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a5ed6fa8-a583-5f7c-8c4d-5d5d315c8221)
-)
-(label "GND"
-  (at 363.22 160.02 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 646e5a14-f039-548e-8df3-071a5cb2a85b)
-)
-(label "PD2_EFUSE_SHDN"
-  (at 363.22 157.48 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 0729491f-d52b-5ee7-87e3-b281759a8c89)
-)
-(no_connect (at 388.62 149.86) (uuid 75bad993-e3af-58b7-84ff-8ec4f4187670))
-(hierarchical_label "PD2_EFUSE_FAULT_N"
-  (shape bidirectional)
-  (at 388.62 144.78 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid cfdb61ab-144b-5626-8c67-35bce92813f4)
-)
-(label "GND"
-  (at 388.62 137.16 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 853747db-c463-558e-9b5b-6d329738793c)
-)
-(no_connect (at 388.62 147.32) (uuid 2993bada-8905-58a0-934a-4c257781937e))
-(hierarchical_label "PD2_VBUS_GATED"
-  (shape bidirectional)
-  (at 388.62 132.08 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7a8edb81-c1bd-5d83-90c1-f4b5d08bdc90)
-)
-(no_connect (at 365.76 134.62) (uuid 51b99080-eddb-58ab-87c9-644d38693f85))
-(no_connect (at 365.76 139.7) (uuid 45ae73ce-206f-5aef-9c44-6506c8cd0a63))
-(no_connect (at 365.76 144.78) (uuid dfb6e834-2c29-5082-9af9-7bf23d2e7989))
-(no_connect (at 386.08 134.62) (uuid 9f7bb113-d4e6-55ee-ae3f-c879fff1501b))
-(no_connect (at 386.08 139.7) (uuid 402e975e-628c-54cd-9a4a-748c08bb6cc9))
-(no_connect (at 386.08 142.24) (uuid f01f75f9-b7cf-559b-95f6-00d866939212))
-(symbol
-  (lib_id "Device:R")
-  (at 421.64 114.3 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 554d9040-bd21-5b62-bd80-051c1d1fdd8e)
-  (property "Reference" "R2090" (at 421.64 111.76 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "8.87k 0.02% 5ppm 15/20V eFuse UV/OV top" (at 421.64 116.84 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Vishay" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "TNPU06038K87HZEN00" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6124889d-dd13-5c8c-9c59-e9f31cd72f2e))
-  (pin "2" (uuid 4b0687be-07ba-5e8c-b268-4326b01a8f96))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "R2090")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_PPHV"
-  (at 421.64 110.49 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2bff97f9-51a3-5b5b-a67d-686fbdaf2762)
-)
-(label "PD2_EFUSE_UV"
-  (at 421.64 118.11 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 73047a12-4221-5e63-aa03-f2dd0dd0cc84)
-)
-(symbol
-  (lib_id "Device:R")
-  (at 421.64 124.46 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 9a360e2b-a19d-5c3a-8afe-eb63914f40f0)
-  (property "Reference" "R2091" (at 421.64 121.92 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "562R 0.02% 5ppm 15/20V eFuse UV/OV middle" (at 421.64 127 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Vishay" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "TNPU0603562RHZEN00" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 865b2f03-0562-55d9-8bc1-a118ddc2bfb7))
-  (pin "2" (uuid ef454d31-22b1-5771-9095-9c346bc5840f))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "R2091")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_EFUSE_UV"
-  (at 421.64 120.65 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 08ad878b-dc7a-5941-86c0-9f44507eb8cd)
-)
-(label "PD2_EFUSE_OV"
-  (at 421.64 128.27 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7fa7d309-581d-56ba-93ac-ecf4ea3958dd)
-)
-(symbol
-  (lib_id "Device:R")
-  (at 421.64 134.62 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 204fa670-ac2d-56c2-a7c1-ac09b68af4ab)
-  (property "Reference" "R2092" (at 421.64 132.08 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "511R 0.02% 5ppm 15/20V eFuse UV/OV bottom" (at 421.64 137.16 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Vishay" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "TNPU0603511RHZEN00" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d43ff77b-af6e-5a9b-9136-d18352074235))
-  (pin "2" (uuid 5f1bf99b-5cab-58ed-a8c2-3ef9059de10a))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "R2092")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_EFUSE_OV"
-  (at 421.64 130.81 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4cabb2d5-bc52-5de3-9291-18f0380bc2e9)
-)
-(label "GND"
-  (at 421.64 138.43 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 810698b3-2e1a-5b2d-8bec-e543dd44244d)
-)
-(symbol
-  (lib_id "Device:R")
-  (at 421.64 144.78 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 2c2f404a-ed9a-55e9-8b47-2f0b19c11360)
-  (property "Reference" "R2093" (at 421.64 142.24 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "6.04k 1% eFuse 2.98A ILIM" (at 421.64 147.32 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 421.64 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 421.64 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RC0603FR-076K04L" (at 421.64 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a42ca4bc-265a-537a-9c26-d3df3d635e8e))
-  (pin "2" (uuid 47673f87-05f9-589c-a6d2-c968d272c7b1))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "R2093")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_EFUSE_ILIM"
-  (at 421.64 140.97 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid a44b72a4-dd19-5711-83ac-a5a824a5b514)
-)
-(label "GND"
-  (at 421.64 148.59 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ad213640-9691-5758-b6ef-bbf18e9bf258)
-)
-(symbol
-  (lib_id "Device:R")
-  (at 421.64 154.94 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 72fe075a-6954-5434-86c2-6ac8f25384cc)
-  (property "Reference" "R2094" (at 421.64 152.4 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "47k eFuse default-off pulldown" (at 421.64 157.48 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 154.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 421.64 154.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 421.64 154.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RC0603FR-0747KL" (at 421.64 154.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9f99d03d-7bc9-574e-9790-4a0313ada4b6))
-  (pin "2" (uuid 6d471eba-9e5e-5238-88f1-cc8f86b1b2b9))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "R2094")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_EFUSE_SHDN"
-  (at 421.64 151.13 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 74c69f8e-67ff-57ec-b3bf-16fd02076be9)
-)
-(label "GND"
-  (at 421.64 158.75 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 75885b25-27f1-5d42-9c93-a15f76732c4d)
-)
-(symbol
-  (lib_id "Device:R")
-  (at 421.64 165.1 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid a1d89048-2fe0-56d4-a156-e4662fb99f6c)
-  (property "Reference" "R2095" (at 421.64 162.56 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10k path-enable series" (at 421.64 167.64 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 421.64 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 421.64 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RC0603FR-0710KL" (at 421.64 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 02bcee2d-9a80-5679-80e8-eec84bc0c7c0))
-  (pin "2" (uuid 26ae0d2c-1fd7-5fa1-ac48-91f7eafdbfbc))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "R2095")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "PD2_PATH_EN"
-  (shape bidirectional)
-  (at 421.64 161.29 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ab143b09-e37c-5e29-9639-c9d001c9ab7b)
-)
-(label "PD2_EFUSE_SHDN"
-  (at 421.64 168.91 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d4e19d9b-964d-53af-a7fe-e7eff7b6d82b)
-)
-(symbol
-  (lib_id "Device:R")
-  (at 421.64 175.26 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 67788230-aef6-573f-9c7e-8c67ce62cf12)
-  (property "Reference" "R2096" (at 421.64 172.72 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10k eFuse FLT pull-up" (at 421.64 177.8 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 421.64 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 421.64 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RC0603FR-0710KL" (at 421.64 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0fb67a27-4356-5019-89e9-00b20b99df53))
-  (pin "2" (uuid ceceb9cd-2619-52a0-a0ad-0eb713f01ced))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "R2096")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 421.64 171.45 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2a113084-7a53-5e19-894b-d26889765b22)
-)
-(hierarchical_label "PD2_EFUSE_FAULT_N"
-  (shape bidirectional)
-  (at 421.64 179.07 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 80f7fa93-ad22-5031-a929-282298fa7ce8)
-)
-(symbol
-  (lib_id "Device:C")
-  (at 472.44 127 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 4d8b8ad5-421c-510c-b8c0-327cd01038cb)
-  (property "Reference" "C2090" (at 472.44 124.46 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n 50V eFuse input local" (at 472.44 129.54 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 472.44 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 472.44 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Murata" (at 472.44 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "GRM188R71H104KA93D" (at 472.44 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6c82119e-90f0-5cc5-95e9-baacfe266325))
-  (pin "2" (uuid 35ce3713-b6ec-5350-aae2-769574be1f18))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "C2090")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_PPHV"
-  (at 472.44 123.19 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 95a7e55e-edd5-50e0-a19a-9ad2bc125113)
-)
-(label "GND"
-  (at 472.44 130.81 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid eb1df20e-aab8-58e5-bcf8-820cc47b0294)
-)
-(symbol
-  (lib_id "Device:C")
-  (at 472.44 139.7 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 96f05e7e-f9ea-552d-9d1e-e41d298b9243)
-  (property "Reference" "C2091" (at 472.44 137.16 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10u 25V eFuse output" (at 472.44 142.24 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 472.44 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 472.44 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Murata" (at 472.44 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "GRM31CR71E106KA12L" (at 472.44 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9f1fddc7-7371-5114-bb32-8f951ef727ec))
-  (pin "2" (uuid 0e8cf863-4132-54b8-9a5f-d60b9915a381))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "C2091")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_VBUS_GATED"
-  (at 472.44 135.89 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 62be7741-9d4d-5929-b3ad-827f8d6c4f5b)
-)
-(label "GND"
-  (at 472.44 143.51 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 12c8a035-12eb-525b-8ceb-fe3d6999cc66)
-)
-(symbol
-  (lib_id "Device:C")
-  (at 472.44 152.4 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 6026d255-ba43-5861-9d34-4f7d38e49926)
-  (property "Reference" "C2092" (at 472.44 149.86 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "22n eFuse dVdT" (at 472.44 154.94 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 472.44 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 472.44 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Murata" (at 472.44 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "GRM155R71H223KA12D" (at 472.44 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid f699563b-3178-599c-ba3c-b915229f0dcc))
-  (pin "2" (uuid edef2ccb-4f2d-5cd9-a237-c28c5d66008e))
-  (instances
-    (project "ducktop2"
-      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
-        (reference "C2092")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "PD2_EFUSE_DVDT"
-  (at 472.44 148.59 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6c45abc1-33a6-5155-8730-a3b7261f90cd)
-)
-(label "GND"
-  (at 472.44 156.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 70069793-e5a1-5ab5-9554-b515a8027342)
-)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (symbol
   (lib_id "Device:D_Schottky")
   (at 472.44 165.1 0)
@@ -8021,9 +7053,9 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid da0100f1-fb8c-5c53-b247-fd0e417b080f)
 )
-(text "J11: hardware accepts 15V/20V PD; use a verified 3A contract and 2.50A IINDPM bootstrap command. Actual current/headroom and EEPROM/profile qualification remain required." (at 20.32 264.16 0) (effects (font (size 1.27 1.27))) (uuid d2c3bb3a-7f13-5e90-ad23-ed8649cf2297))
-(text "GPIO4 AND GPIO7 qualifies both host USB2 and SuperSpeed. They remain disconnected through reset, detach, and sink-only operation." (at 20.32 271.78 0) (effects (font (size 1.27 1.27))) (uuid c44865cf-c7a3-5bbf-931f-817e132cd26b))
-(text "== J12: source-only USB-C data port, USB7206C downstream 4, USB2 ==" (at 20.32 337.82 0) (effects (font (size 1.27 1.27))) (uuid 09e1b9dc-abb9-5654-820f-839922784f08))
+(text "J11: hardware accepts 15V/20V PD; use a verified 3A contract and 2.50A IINDPM bootstrap command. Actual current/headroom and EEPROM/profile qualification remain required." (at 20.32 264.16 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid d2c3bb3a-7f13-5e90-ad23-ed8649cf2297))
+(text "GPIO4 AND GPIO7 qualifies both host USB2 and SuperSpeed. They remain disconnected through reset, detach, and sink-only operation." (at 20.32 271.78 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid c44865cf-c7a3-5bbf-931f-817e132cd26b))
+(text "== J12: source-only USB-C data port, USB7206C downstream 4, USB2 ==" (at 20.32 337.82 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 09e1b9dc-abb9-5654-820f-839922784f08))
 (symbol
   (lib_id "TPS2553D:TPS2553D")
   (at 45.72 360.68 0)
@@ -9337,4 +8369,961 @@
   )
 )
   (embedded_fonts no)
+(symbol
+  (lib_id "Device:C")
+  (at 472.44 127 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 4d8b8ad5-421c-510c-b8c0-327cd01038cb)
+  (property "Reference" "C2090" (at 472.44 124.46 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 50V input local" (at 472.44 129.54 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 472.44 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 472.44 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 472.44 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 472.44 127 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d988f486-a0a3-5fe7-83b1-a1576baf6ee0))
+  (pin "2" (uuid 65953ded-1500-51e4-924d-88a528f23d4d))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "C2090")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_PPHV"
+  (at 472.44 123.19 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4ca00791-ea76-5290-a1c2-2e9364eb7a77)
+)
+(label "GND"
+  (at 472.44 130.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ef5b493d-e4fa-5d38-8652-162a550e5c56)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 472.44 139.7 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 96f05e7e-f9ea-552d-9d1e-e41d298b9243)
+  (property "Reference" "C2091" (at 472.44 137.16 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10u 25V output" (at 472.44 142.24 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 472.44 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 472.44 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 472.44 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM31CR71E106KA12L" (at 472.44 139.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 568f2c1d-fc31-5da9-a20a-c5511770a7ac))
+  (pin "2" (uuid af5ae201-5f10-5505-b952-76490c006738))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "C2091")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 472.44 135.89 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7bbc20d2-0e78-5ccf-bc28-3b8de1c65a97)
+)
+(label "GND"
+  (at 472.44 143.51 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid b9e9abd4-a4ef-5159-97d6-db6b809e9b7a)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 472.44 152.4 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 6026d255-ba43-5861-9d34-4f7d38e49926)
+  (property "Reference" "C2092" (at 472.44 149.86 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10n 50V C0G slew control" (at 472.44 154.94 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 472.44 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 472.44 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 472.44 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM1885C1H103JA01D" (at 472.44 152.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1ce3c336-856e-5c50-bcc7-1967fcd4ecf3))
+  (pin "2" (uuid 4f8c3c2a-e2db-511c-82c2-ad4569f4420a))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "C2092")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_EFUSE_DVDT"
+  (at 472.44 148.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4318e4d4-6d47-5978-81dc-19be35c9f0c9)
+)
+(label "GND"
+  (at 472.44 156.21 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dcc7a441-a5e8-54f7-8942-235c25607aae)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 472.44 208.28 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2573426a-731f-5c9a-98fb-0c923a58669c)
+  (property "Reference" "C2631" (at 472.44 205.74 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n 50V inverter bypass" (at 472.44 210.82 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 472.44 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 472.44 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 472.44 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 472.44 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1017f8a2-4dcd-56c5-804e-693e79c27f35))
+  (pin "2" (uuid 4fd323fe-1012-5765-b265-7c4c827a5a6d))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "C2631")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 472.44 204.47 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5949f6f1-e48e-5a4f-9416-806dfd303c0b)
+)
+(label "GND"
+  (at 472.44 212.09 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 75899a3a-b7eb-5ede-8ee9-a6f861c909a9)
+)
+(symbol
+  (lib_id "Q_NMOS_SOT23_GSD:Q_NMOS_SOT23_GSD")
+  (at 421.64 208.28 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 0051e7a6-8b0d-5978-a305-de6155c23ffe)
+  (property "Reference" "Q2631" (at 421.64 196.85 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BSS138 switched discharge" (at 421.64 219.71 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23" (at 421.64 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 421.64 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "onsemi" (at 421.64 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "BSS138LT1G" (at 421.64 208.28 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d2f589eb-028e-5716-a17a-55e489e2e4d8))
+  (pin "2" (uuid 7db56f99-3bbf-52aa-b164-ffecfc875ac2))
+  (pin "3" (uuid 0d57651b-7830-5345-8ee0-2282f73a9f26))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "Q2631")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_DISCHARGE"
+  (at 416.56 208.28 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid c0a6cfd9-bebb-5f69-b556-eaad0022a4f0)
+)
+(label "GND"
+  (at 424.18 213.36 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1502b72b-da92-568a-8053-4e1fcdb3f85d)
+)
+(label "PD2_DISCHARGE_DRAIN"
+  (at 424.18 203.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e932cf72-ecb0-5d54-8f88-6c02d5cba242)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 421.64 114.3 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 554d9040-bd21-5b62-bd80-051c1d1fdd8e)
+  (property "Reference" "R2090" (at 421.64 111.76 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1k 1W switched input discharge" (at 421.64 116.84 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_2512_6332Metric" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC2512FR-071KL" (at 421.64 114.3 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 53eac5ae-60c6-5144-9da9-37afb893ff31))
+  (pin "2" (uuid 485a2987-f778-5540-87cb-abded4f935a4))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "R2090")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 421.64 110.49 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5a298363-73f8-527f-b8ed-653ee6e22160)
+)
+(label "PD2_DISCHARGE_DRAIN"
+  (at 421.64 118.11 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6ee04af6-3c68-5fbf-a5fb-b8ea946b5304)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 421.64 124.46 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9a360e2b-a19d-5c3a-8afe-eb63914f40f0)
+  (property "Reference" "R2091" (at 421.64 121.92 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100k discharge gate default-low" (at 421.64 127 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 421.64 124.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 5d99a162-7f76-599b-b425-8fbfa97786a0))
+  (pin "2" (uuid 20fa1a67-5f0f-5bdf-894e-692e89707598))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "R2091")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_DISCHARGE"
+  (at 421.64 120.65 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0d53adf7-873b-5f2b-acf4-25ca2a917268)
+)
+(label "GND"
+  (at 421.64 128.27 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6a97b163-5b84-52a3-9848-3b6b53050bd9)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 421.64 134.62 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 204fa670-ac2d-56c2-a7c1-ac09b68af4ab)
+  (property "Reference" "R2092" (at 421.64 132.08 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "1k IMON load" (at 421.64 137.16 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-071KL" (at 421.64 134.62 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 10408719-1ef0-579a-8a7a-966074e8a34a))
+  (pin "2" (uuid f3ca2f68-8612-5c33-8a00-383d177a7a50))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "R2092")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_EFUSE_IMON"
+  (at 421.64 130.81 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid dd399b3f-6394-5565-9917-6b69f4864a26)
+)
+(label "GND"
+  (at 421.64 138.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d21da160-8b19-5017-87dc-c798e046e916)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 421.64 144.78 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2c2f404a-ed9a-55e9-8b47-2f0b19c11360)
+  (property "Reference" "R2093" (at 421.64 142.24 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "267R 0.1% sink breaker; 5.58A nominal" (at 421.64 147.32 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 421.64 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 421.64 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RT0603BRD07267RL" (at 421.64 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid e4a6701a-6957-591c-b603-0fcb6dc80cfb))
+  (pin "2" (uuid 7fe90278-7c5c-53c9-b8ed-a03dddac7929))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "R2093")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_EFUSE_ILIM"
+  (at 421.64 140.97 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6a5d71ed-cb59-5352-85f5-cd4ee83e1231)
+)
+(label "GND"
+  (at 421.64 148.59 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 34d72463-ed86-5d75-93b2-70c6ed90950d)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 421.64 154.94 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 72fe075a-6954-5434-86c2-6ac8f25384cc)
+  (property "Reference" "R2094" (at 421.64 152.4 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "47k sink enable default-off" (at 421.64 157.48 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 154.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 421.64 154.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 421.64 154.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0747KL" (at 421.64 154.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 985e41f0-c7ea-51fc-8d0a-ddfa22787bf2))
+  (pin "2" (uuid 1a12e44f-b7d3-5b7e-a5a3-12c413dc1966))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "R2094")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_EFUSE_SHDN"
+  (at 421.64 151.13 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 61427c46-d9e5-51b8-8963-2452fcca8c32)
+)
+(label "GND"
+  (at 421.64 158.75 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f6ff8a5e-c752-52e2-80da-8cf0ee2bee7d)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 421.64 165.1 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid a1d89048-2fe0-56d4-a156-e4662fb99f6c)
+  (property "Reference" "R2095" (at 421.64 162.56 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "10k sink enable series" (at 421.64 167.64 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 421.64 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 421.64 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 421.64 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid f58be88e-9b21-522f-a729-bc77dc2cf6fb))
+  (pin "2" (uuid 8c7ed58d-052e-5838-83b4-47938c5eab7f))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "R2095")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "PD2_PATH_EN"
+  (shape bidirectional)
+  (at 421.64 161.29 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 032c5332-0e9e-5a51-b188-e814ad84a6c8)
+)
+(label "PD2_EFUSE_SHDN"
+  (at 421.64 168.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid bf6f8fbb-e738-5470-8d87-942f7a791581)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 421.64 175.26 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 67788230-aef6-573f-9c7e-8c67ce62cf12)
+  (property "Reference" "R2096" (at 421.64 172.72 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "150k sink PG pull-up; valid with input off" (at 421.64 177.8 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 421.64 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 421.64 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 421.64 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07150KL" (at 421.64 175.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 25b80c39-c8e7-567f-ae73-b2cbd59853eb))
+  (pin "2" (uuid c62a4835-3253-55c3-ab77-0fa44df37bd7))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "R2096")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 421.64 171.45 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8144a9f0-bffe-5232-b8a3-24db4e284660)
+)
+(hierarchical_label "PD2_EFUSE_PG"
+  (shape bidirectional)
+  (at 421.64 179.07 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6794ce53-0f08-54ff-843f-2e07c9c03c42)
+)
+(symbol
+  (lib_id "74xGxx:74LVC1G04")
+  (at 375.92 203.2 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid f0206804-0e17-544e-8e89-858baaadd6a8)
+  (property "Reference" "U2631" (at 375.92 186.69 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74LVC1G04DBVR discharge control" (at 375.92 219.71 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 375.92 203.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 375.92 203.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 375.92 203.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "SN74LVC1G04DBVR" (at 375.92 203.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 61245ec2-6371-5e2e-908a-db3d56e3f2e5))
+  (pin "2" (uuid c6d115c4-6a3a-5995-b580-408fb6a24e6e))
+  (pin "3" (uuid c3f62ed4-b4b9-5089-8f81-02079e891491))
+  (pin "4" (uuid edaa0159-a8db-5edd-ae66-0fa5b7d7dd38))
+  (pin "5" (uuid 876ce235-5118-5002-a43d-4137740e9ebb))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "U2631")
+        (unit 1)
+      )
+    )
+  )
+)
+(no_connect (at 368.3 200.66) (uuid e0e90604-f336-569a-9fcd-cc448a37ef3b))
+(hierarchical_label "PD2_PATH_EN"
+  (shape bidirectional)
+  (at 360.68 203.2 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 87778eb4-fd82-5d9d-8b21-5e3df775e89e)
+)
+(label "GND"
+  (at 370.84 213.36 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 2044439f-9fd0-5ae0-b589-2ca7b5e40009)
+)
+(label "PD2_DISCHARGE"
+  (at 388.62 203.2 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid da0246b8-9378-5bbc-9a4b-129cd14f1398)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 370.84 193.04 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 5120be00-d8f7-56c2-9040-e4c930210af2)
+)
+(symbol
+  (lib_id "TPS25751AD:TPS25751AD")
+  (at 83.82 106.68 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9b3cf5d3-352b-58a3-acd6-ea89403c11de)
+  (property "Reference" "U42" (at 83.82 73.66 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS25751AD USB-PD DRP controller" (at 83.82 139.7 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPS25751ADREFR" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps25751a.pdf" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "PortPolicy" "DRP;HOST_DATA_ONLY;5_9_15V_3A_20V_5A_SINK;5V_900MA_SOURCE;DEFAULT_RP" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "EEPROMContract" "U2012_PROGRAM_WITH_VERSIONED_TPS25751_IMAGE" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "EEPROMSource" "firmware/tps25751a/ducktop2_pd2_config.json" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ADCStrap" "SAFE_MODE_ADDR_0X21" (at 83.82 106.68 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid d102f3a7-e9b3-5560-b2d4-e2bbbe3b429e))
+  (pin "2" (uuid d413fa31-4686-563d-8cd0-9166acc6899c))
+  (pin "3" (uuid 32daca82-4349-5fbd-a508-bd658761bfd5))
+  (pin "4" (uuid 0a5608a7-2cf2-5179-885c-83ace882349d))
+  (pin "5" (uuid fcabb7db-478f-56ae-9ef7-f7db0fc24db0))
+  (pin "6" (uuid 660d29d5-4fd8-55a3-b6f7-68c12a9e84b1))
+  (pin "7" (uuid 7e1519d2-3253-576f-99db-bea8c1642b43))
+  (pin "8" (uuid 56c62684-0eea-5b36-add5-61f6a0ac949f))
+  (pin "9" (uuid fc35ccb2-bfc1-5632-8298-142c12780f1d))
+  (pin "10" (uuid d749c529-c47a-5503-ad47-2e755669b248))
+  (pin "11" (uuid d12cae6b-3514-5fb0-b070-1343b94431b5))
+  (pin "12" (uuid e19c4cb6-82e8-53d0-9527-359be57528e1))
+  (pin "13" (uuid af47b26c-5508-51c5-8eb7-26950215e51c))
+  (pin "14" (uuid 39fc9c12-4002-5e56-9f22-f58b7f7f15db))
+  (pin "15" (uuid a48cf5e9-5c7b-5e65-9b4b-84cce28b3014))
+  (pin "16" (uuid bf7dcc3a-524f-5798-b3b8-88078728f530))
+  (pin "17" (uuid bcf96819-61a0-502c-941f-bfa2fbf3c41f))
+  (pin "18" (uuid 0f3e0c06-ff5a-583e-b6a3-5d7254728bdb))
+  (pin "19" (uuid 0e114698-2021-52e5-9eb2-27a052e5e65c))
+  (pin "20" (uuid c57ab363-d264-52d2-8288-914d7b3e055b))
+  (pin "23" (uuid cca38bd1-a7ae-5309-a27d-23b0f2734398))
+  (pin "26" (uuid 0ebd62f6-3ea1-51d3-b0ed-0294216ba9ac))
+  (pin "27" (uuid 902337c5-ca5d-5f16-ae90-ec6c9ce948a0))
+  (pin "28" (uuid bdcae9ed-69e6-5213-933b-6f2a44a434a2))
+  (pin "29" (uuid e60a3930-cdcb-5030-bebd-d7f3839200b8))
+  (pin "30" (uuid fefc1cc8-d537-5ca5-9119-5bbe15d30d28))
+  (pin "31" (uuid bc8ce72a-f562-585a-a4e1-8dfc74c33475))
+  (pin "32" (uuid e77e21e5-228e-533d-9d4a-e7b40383c97b))
+  (pin "34" (uuid 52b2ec80-6bda-5c92-9461-8798f1c04011))
+  (pin "36" (uuid 0bda465d-a3f8-5fd7-890b-59094f51d176))
+  (pin "37" (uuid 8f3e05ad-d64c-54c9-8fe0-171d3760ce72))
+  (pin "38" (uuid d4f543c7-298d-52e7-b6e6-ddd298d87b4f))
+  (pin "39" (uuid 48124eb8-fdfd-554d-ad93-1c10e9af5ef0))
+  (pin "40" (uuid dec59806-e720-5b3f-8528-7207b7a01c1b))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "U42")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_LDO3V3"
+  (at 68.58 83.82 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 0956ed5b-8744-5d32-8de9-cac079e4da27)
+)
+(label "GND"
+  (at 68.58 86.36 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 1382df4d-4fa2-5054-8a93-f8bc8a02e950)
+)
+(label "GND"
+  (at 68.58 88.9 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 91d33014-80e3-5804-a572-722acad7ac3c)
+)
+(label "PD2_LDO1V5"
+  (at 68.58 91.44 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid c8a91cc8-d85c-501e-a9f4-bb3aa61b613e)
+)
+(label "GND"
+  (at 68.58 93.98 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid add157a6-8631-5c51-88eb-eca3711c7a0e)
+)
+(label "GND"
+  (at 68.58 96.52 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 0be4dfeb-ace0-5275-a7e9-fe0e94b2ab19)
+)
+(label "GND"
+  (at 68.58 99.06 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 4e6d538c-408a-5e5b-bca2-cb609d20f0f1)
+)
+(hierarchical_label "PD2_I2C_SDA"
+  (shape bidirectional)
+  (at 68.58 101.6 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 4589b472-9aec-5b3f-b702-43e2b8803194)
+)
+(hierarchical_label "PD2_I2C_SCL"
+  (shape bidirectional)
+  (at 68.58 104.14 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 8068f1e8-fafd-58d2-9155-8c98173db39f)
+)
+(hierarchical_label "PD2_TCPC_IRQ_N"
+  (shape bidirectional)
+  (at 68.58 106.68 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 307a822f-64a6-560a-97b0-13d2a789475e)
+)
+(label "GND"
+  (at 68.58 109.22 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid c595ab9f-ab77-5a16-a085-e2c555701981)
+)
+(label "GND"
+  (at 68.58 111.76 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 0f9d9882-b84c-5ff7-96a4-1a10718eaae6)
+)
+(label "GND"
+  (at 68.58 114.3 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid dc825275-1c18-5a63-8e76-6ae0cb3ce0ca)
+)
+(label "GND"
+  (at 68.58 116.84 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid b62cffa0-3a82-5d92-a7c6-e358f33d7c35)
+)
+(label "PD2_DRAIN_THERMAL"
+  (at 68.58 119.38 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid a1cb914b-9146-5c24-b6fa-c240a1d98ca4)
+)
+(label "PD2_EEPROM_SDA"
+  (at 68.58 121.92 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 7f908e5c-9d6a-58c3-b922-d4caa539a852)
+)
+(label "PD2_EEPROM_SCL"
+  (at 68.58 124.46 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 2c7513c2-ef62-5d7e-90ca-44d211072a19)
+)
+(label "PD2_EEPROM_IRQ_N"
+  (at 68.58 127 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid d9f84d64-46b5-5895-a57f-03495dddf908)
+)
+(label "GND"
+  (at 68.58 129.54 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid e777f6d7-ea9c-5706-84b7-099b148515a7)
+)
+(label "PD2_PPHV"
+  (at 99.06 127 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 89c18c1e-467e-5002-b766-0a27d1e05bb9)
+)
+(hierarchical_label "PD2_VBUS_RAW"
+  (shape bidirectional)
+  (at 99.06 119.38 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ea103fe8-812b-5b28-9a2b-cb0f4cdc961b)
+)
+(label "PD2_GPIO_DFP"
+  (at 99.06 114.3 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 00faab13-c708-5389-8ba5-1f37776df6f7)
+)
+(label "GND"
+  (at 99.06 111.76 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3cf883e3-2537-5cf5-b8e5-3ec100940bfe)
+)
+(label "PD2_CC1_SYS"
+  (at 99.06 109.22 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 11ed750b-41f1-5f52-be7e-d177db420eac)
+)
+(label "PD2_CC2_SYS"
+  (at 99.06 106.68 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 4e9e9a31-d641-5633-b2db-773f4c2c4e5f)
+)
+(label "PD2_DRAIN_THERMAL"
+  (at 99.06 104.14 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 8f20fdac-b762-51dc-b1e8-e52f606cac2e)
+)
+(label "GND"
+  (at 99.06 101.6 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 084b6d52-55d5-58e5-8dfa-8ffbaacd52fd)
+)
+(hierarchical_label "PD2_VBUS_RAW"
+  (shape bidirectional)
+  (at 99.06 97.79 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ce87fb04-0345-565a-a35c-13718d4b354e)
+)
+(label "PD2_PP5V_GATED"
+  (at 99.06 92.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 86a33fec-3e8c-5075-ba14-8ac17420ba5c)
+)
+(label "PD2_GPIO_ATTACH"
+  (at 99.06 88.9 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 17e688e8-c73a-5895-860c-de183c892107)
+)
+(label "PD2_GPIO_FLIP"
+  (at 99.06 86.36 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid d59b3ab2-b327-5597-8c80-5ae159edf0e9)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 99.06 83.82 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 0a8bec72-367c-5d5e-84b1-eed92b0c2883)
+)
+(label "GND"
+  (at 81.28 133.35 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 081d2966-7f7a-58d8-8c29-9223e86a8211)
+)
+(label "PD2_DRAIN_THERMAL"
+  (at 86.36 133.35 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1103a488-59eb-5ff9-a484-e2fd6dde5892)
+)
+(symbol
+  (lib_id "TPS25982:TPS25982")
+  (at 375.92 144.78 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 6c994cb6-d88d-5ac8-87b9-39459348a22b)
+  (property "Reference" "U721" (at 375.92 123.19 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "TPS259827ONRGER PD2 sink breaker" (at 375.92 166.37 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:Texas_RGE0024M_QFN24_4x4_2EP" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "TPS259827ONRGER" (at 375.92 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a94e1c7c-300b-52c9-91df-8ab5cee8e355))
+  (pin "2" (uuid 9cc59f53-4be5-5f09-b82a-35c07f002924))
+  (pin "3" (uuid 80f387d6-50c8-5c02-a563-a0d83634eebc))
+  (pin "4" (uuid 8283e9be-c469-5d82-b3d5-a5ea56b6aed8))
+  (pin "5" (uuid eaeee511-09ce-5fda-bbf0-1ddbb4476c2f))
+  (pin "6" (uuid 54b306d8-15fa-5fe8-b216-a11ff6d8373a))
+  (pin "7" (uuid 9e479f63-7575-5407-b3d3-7144b285aed8))
+  (pin "8" (uuid c5fd8dc7-1e5e-5b24-9f80-c1026e0fcc75))
+  (pin "9" (uuid 4d11f8d2-e47c-502d-93b7-eb90d7d42633))
+  (pin "10" (uuid 11feffbe-54bb-5d58-853d-c2affc2a9328))
+  (pin "11" (uuid a35004eb-4fbf-5ff0-84c6-71db35784b09))
+  (pin "12" (uuid adcd1961-91c5-594f-9127-292b0614143c))
+  (pin "13" (uuid 1049696b-5ee1-5a1c-8fed-b04feeeb82ca))
+  (pin "14" (uuid 95b9029b-b28a-52a6-a165-775bc6f2c461))
+  (pin "15" (uuid 962b883d-90d4-5732-adab-76027c0ced84))
+  (pin "16" (uuid 279dfd7c-5bf4-597e-8fad-02189a9796c3))
+  (pin "17" (uuid 31fe6a2b-32bd-532e-8f25-3e3094cbd997))
+  (pin "18" (uuid 6e8c1b5e-c147-55ae-a9c6-aee8558639ee))
+  (pin "19" (uuid da95de59-7bf3-5530-ac67-b1c6c38d2dd6))
+  (pin "20" (uuid d0b2046e-fe69-5903-8abe-06538e0d107f))
+  (pin "21" (uuid 37b102cf-908c-55d4-abac-ed3c817a06a2))
+  (pin "22" (uuid 830ffff3-1658-5677-a22e-6934ac3216ce))
+  (pin "23" (uuid 6f0699ca-8bd6-548c-bf1a-0da6f6b9b698))
+  (pin "24" (uuid 517b41f4-3784-5820-bc0a-9f01dd6acc7a))
+  (pin "25" (uuid 672ce177-4ccb-511c-8eff-bf94f76212a5))
+  (pin "26" (uuid 6231e352-0f7d-5ac2-9944-b491f0635549))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "U721")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "PD2_PPHV"
+  (at 363.22 129.54 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid b1bfa8db-f70f-5f7b-9428-2d4b824c4e1e)
+)
+(label "PD2_PPHV"
+  (at 363.22 132.08 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 0fcaa8b4-462a-5359-8da0-58eb7f2b932f)
+)
+(label "PD2_PPHV"
+  (at 363.22 134.62 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 5f50e7cb-ee40-5fdc-9b00-265d9fcf8cab)
+)
+(label "PD2_PPHV"
+  (at 388.62 134.62 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 1dc67896-ebcd-5879-b861-6a416dd704a9)
+)
+(label "PD2_PPHV"
+  (at 388.62 157.48 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 766bc26a-573d-5f03-98ad-0812318889e0)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 388.62 137.16 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 58c4b513-968f-536f-a305-ba4b8edede94)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 388.62 139.7 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 92e8dca4-e59c-55da-8f9f-da816eaeafec)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 388.62 142.24 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ad9c3011-1237-5eb8-bfeb-335a6ffe9a80)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 388.62 144.78 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 91aaa181-6e59-5371-bac4-77891e31df2b)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 388.62 147.32 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid f09ded03-7081-50e2-b60f-495e3b5c4dde)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 388.62 149.86 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 09ef5536-2f42-56af-823f-c8a29ac36f25)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 388.62 152.4 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ccc90a8e-e043-5969-b679-cc5cdafa650f)
+)
+(hierarchical_label "PD2_VBUS_GATED"
+  (shape bidirectional)
+  (at 388.62 154.94 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 313d8467-2fda-5947-b93b-591ecc5a7784)
+)
+(label "GND"
+  (at 363.22 137.16 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid b2de00c1-0d08-5ed6-83c6-1ce96e0bdc2a)
+)
+(label "GND"
+  (at 363.22 139.7 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 881135f7-9c58-5756-a5e4-351792ef3f8e)
+)
+(label "GND"
+  (at 363.22 152.4 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid fd30a0f4-8322-5c29-b464-ba4cecd8d3f9)
+)
+(label "GND"
+  (at 363.22 154.94 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 50030a96-1d11-5187-b9a6-fdb5abb3df14)
+)
+(label "GND"
+  (at 363.22 157.48 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 684ca2ff-764c-5a0c-8715-88bdf1350ccc)
+)
+(label "GND"
+  (at 388.62 129.54 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5b2ef772-9bf5-54b8-844a-342fe5fd5e23)
+)
+(label "GND"
+  (at 388.62 160.02 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a33cb59f-ebda-5957-b3d9-68f272afff6f)
+)
+(label "PD2_EFUSE_SHDN"
+  (at 363.22 142.24 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 6da2a00f-2de3-561e-b926-d629715866b7)
+)
+(no_connect (at 363.22 144.78) (uuid b56f13df-1a05-543b-a6b3-126543ec386f))
+(label "PD2_EFUSE_ILIM"
+  (at 363.22 147.32 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid cfd21851-0d41-5908-8c8f-b9ac92c5484a)
+)
+(label "PD2_EFUSE_IMON"
+  (at 363.22 149.86 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid dcec2ecd-9cac-5020-a9ba-629102eff5a0)
+)
+(hierarchical_label "PD2_EFUSE_PG"
+  (shape bidirectional)
+  (at 363.22 160.02 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 14f65ff8-82bd-587e-affe-4186b28d593b)
+)
+(label "PD2_EFUSE_DVDT"
+  (at 388.62 132.08 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 3d0a640a-a728-5fe3-a84e-a4ca60b26ccc)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 345.44 181.61 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 92a90b44-6837-5412-89c1-cc0f2ae83580)
+  (property "Reference" "C2681" (at 350.52 180.34 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Value" "100n 50V qualifier bypass" (at 350.52 182.88 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 345.44 181.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 345.44 181.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 345.44 181.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 345.44 181.61 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 801c7752-d21d-5ebc-b60d-7549ceb8b53d))
+  (pin "2" (uuid 30541677-1889-5f17-b17b-8749cead53f7))
+  (instances
+    (project "right_io"
+      (path "/37367af8-d35a-52ce-9a32-1764ce5de36b"
+        (reference "C2681")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 345.44 177.8 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 77092cee-3e7c-54b0-aef8-9437e075dcca)
+)
+(label "GND"
+  (at 345.44 185.42 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 74e517dc-b42d-51da-ac0d-726c0060b3e3)
+)
 )

@@ -8,7 +8,7 @@
   )
 (sheet
   (at 30.48 39.37)
-  (size 59.69 149.86)
+  (size 59.69 157.4800)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 577b7ab7-60d3-5949-82f8-bb269dce837a)
@@ -60,7 +60,7 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 72fd45a3-b0ae-5906-b8fe-2230e2df7c32)
   )
-  (pin "PMIC_QON_ASSERT" bidirectional
+  (pin "MU_PROCHOT_RELEASE" bidirectional
     (at 90.17 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e5ce16f4-545c-5665-ad8b-3a199ebeede3)
@@ -155,10 +155,12 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid bdfecf24-ea5d-5be4-86f2-64bcdd89ff5c)
   )
+(pin "MU_PROCHOT_N" bidirectional (at 90.17 181.61 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid dfcc1729-56cd-59b1-8205-6e8d40d95053))
+(pin "NRST_NET" bidirectional (at 90.17 186.69 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid c06dca70-f121-5616-8e84-7cc6a8e43294))
 )
 (sheet
   (at 160.02 39.37)
-  (size 59.69 492.76)
+  (size 59.69 497.8400)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid ed7eaa34-1bd3-577a-ab85-6415c5cdb1f8)
@@ -235,7 +237,7 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 56a9d48f-f667-5d0b-8118-93e42e65badf)
   )
-  (pin "PMIC_QON_ASSERT" bidirectional
+  (pin "MU_PROCHOT_RELEASE" bidirectional
     (at 219.71 110.49 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid efa9cf9b-7e1c-53e8-8bb8-945aa3d9b4f3)
@@ -575,12 +577,12 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 172f3a25-abe9-58fd-9a2f-2e91910d74fe)
   )
-  (pin "PD1_EFUSE_FAULT_N" bidirectional
+  (pin "PD1_EFUSE_PG" bidirectional
     (at 219.71 455.93 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 4083aa81-e241-5ae7-973f-27c8832b5949)
   )
-  (pin "PD2_EFUSE_FAULT_N" bidirectional
+  (pin "PD2_EFUSE_PG" bidirectional
     (at 219.71 461.01 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 63b8799d-bf3c-531f-b8a3-b2a1df6770f4)
@@ -645,10 +647,11 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e0a50257-eae0-5989-a7c7-0f5b78c20361)
   )
+(pin "NRST_NET" bidirectional (at 219.71 527.05 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 5b299200-e0c4-5c69-9f82-7529f54cebe1))
 )
 (sheet
   (at 289.56 39.37)
-  (size 69.85 401.32)
+  (size 69.85 406.4000)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 7f3572a2-a529-5ef0-93eb-27f85c0119a9)
@@ -949,10 +952,11 @@
 (pin "TCP2_TXRX0_P" bidirectional (at 359.41 420.37 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 407bf966-f748-59bc-a81c-2b7abb6fc904))
 (pin "TCP2_TXRX1_N" bidirectional (at 359.41 425.45 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid af91826a-2f74-54a3-821d-ef0898f01123))
 (pin "TCP2_TXRX1_P" bidirectional (at 359.41 430.53 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 5b85583e-f346-576e-94ad-9a85efbc0150))
+(pin "MU_PROCHOT_N" bidirectional (at 359.41 435.61 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 943ff314-3540-52e4-9078-f86e78bfd7ba))
 )
 (sheet
   (at 30.48 379.73)
-  (size 105.41 154.94)
+  (size 105.41 154.9400)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid c8c7e191-af3d-53bd-b1bb-00ffe0fb1b8e)
@@ -1077,7 +1081,7 @@
 )
 (sheet
   (at 289.56 389.89)
-  (size 115.57 154.94)
+  (size 115.57 154.9400)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 6e8963da-1a38-5ee1-aef2-2f991522fe35)
@@ -1185,7 +1189,7 @@
 )
 (sheet
   (at 420.37 219.71)
-  (size 115.57 170.18)
+  (size 115.57 170.1800)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid c1b99a0d-daca-57b5-85ae-3ffd9c9575e8)
@@ -1330,7 +1334,7 @@
 )
 (sheet
   (at 420.37 410.21)
-  (size 119.38 170.18)
+  (size 119.38 170.1800)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid cb7351cd-fcb6-573d-ba16-39cf42fd14a4)
@@ -1495,7 +1499,7 @@
 )
 (sheet
   (at 549.91 439.42)
-  (size 124.46 44.45)
+  (size 124.46 44.4500)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 2dcf1c62-b988-5976-a24b-47e7fc3c99f8)
@@ -1530,7 +1534,7 @@
 )
 (sheet
   (at 679.45 330.2)
-  (size 134.62 101.6)
+  (size 134.62 101.6000)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 5a262a39-3888-5c6d-ad36-52d5f9c459dd)
@@ -1619,7 +1623,7 @@
 )
 (sheet
   (at 420.37 39.37)
-  (size 59.69 187.96)
+  (size 59.69 187.9600)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid fda0f7ec-fba4-5555-b406-5bd391986492)
@@ -1671,7 +1675,7 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid f713ff0c-17fb-5c29-978a-3d58179942ed)
   )
-  (pin "PD1_EFUSE_FAULT_N" bidirectional
+  (pin "PD1_EFUSE_PG" bidirectional
     (at 480.06 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 81f22c28-0b59-5b5e-8a7a-978cd0bfa92a)
@@ -1809,7 +1813,7 @@
 )
 (sheet
   (at 490.22 39.37)
-  (size 59.69 218.44)
+  (size 59.69 218.4400)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid af20b413-e6d0-5020-bc43-5a597ffa81f9)
@@ -1901,7 +1905,7 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 5bbcb864-51e0-51c1-b006-dfcc3a59c3d3)
   )
-  (pin "PD2_EFUSE_FAULT_N" bidirectional
+  (pin "PD2_EFUSE_PG" bidirectional
     (at 549.91 125.73 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid bf4642a9-75d5-5164-9cb3-f4deeac84795)
@@ -2029,7 +2033,7 @@
 )
 (sheet
   (at 560.07 39.37)
-  (size 59.69 149.86)
+  (size 59.69 149.8600)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 46b21d0a-abb0-598b-9ae3-ea30d11d7d3c)
@@ -2227,12 +2231,12 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 53e9f9f1-d821-58b3-8c11-981f2172ed0f)
 )
-(label "PMIC_QON_ASSERT"
+(label "MU_PROCHOT_RELEASE"
   (at 90.17 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 2f5c442a-22ba-506b-8671-0d1aced05b09)
 )
-(label "PMIC_QON_ASSERT"
+(label "MU_PROCHOT_RELEASE"
   (at 219.71 110.49 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 0ad59fed-24be-58a9-9618-67cdc54ff2e5)
@@ -3132,22 +3136,22 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 2eefb85f-14a3-5e87-9280-033ec1ddf3ea)
 )
-(label "PD1_EFUSE_FAULT_N"
+(label "PD1_EFUSE_PG"
   (at 219.71 455.93 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 9b197660-7089-56ff-8300-1a3439c002de)
 )
-(label "PD1_EFUSE_FAULT_N"
+(label "PD1_EFUSE_PG"
   (at 480.06 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid f95489ab-3ef0-5e12-a0f6-18aadee7e053)
 )
-(label "PD2_EFUSE_FAULT_N"
+(label "PD2_EFUSE_PG"
   (at 219.71 461.01 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 08180690-98ab-596b-ac1b-0bb46ecc590c)
 )
-(label "PD2_EFUSE_FAULT_N"
+(label "PD2_EFUSE_PG"
   (at 549.91 125.73 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 517142a3-7775-5b91-bd55-f117784ffe79)
@@ -3965,4 +3969,8 @@
 (label "HUB_TRACKPAD_EN" (at 405.13 486.41 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 697e8333-cba6-56ed-ae7b-06dc86248448))
 (label "HUB_TRACKPAD_OC_N" (at 405.13 491.49 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 9410feae-891d-5939-8672-b05a791c55ae))
 (label "SYS_3V3" (at 405.13 496.57 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 87806428-eab2-5dc2-a3a4-030cfb3fbc67))
+(label "MU_PROCHOT_N" (at 90.17 181.61 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 32f36c9c-feec-5938-a638-7bd24e3c437f))
+(label "NRST_NET" (at 90.17 186.69 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid fcb355f8-6a44-5813-817f-497e4e483b35))
+(label "NRST_NET" (at 219.71 527.05 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 41043f93-5e6d-5e2a-8fb8-1b787000379d))
+(label "MU_PROCHOT_N" (at 359.41 435.61 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 7361cdf0-8e8c-5826-a901-90b6dcb019d0))
 )

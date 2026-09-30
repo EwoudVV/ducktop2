@@ -34,6 +34,15 @@ class PartIdentity(unittest.TestCase):
         self.assertTrue(identity_errors("102k 0.1% 5ppm", "Resistor_SMD:R_0603_1608Metric",
                                         "TNPW0603102KBYEA"))
 
+    def test_precision_0402_strap_and_reel_code(self):
+        part = decode("TNPW04022K21BEED")
+        self.assertEqual((part.value, part.size, part.tolerance, part.tcr_ppm),
+                         (2210, "0402", .1, 25))
+        self.assertEqual(identity_errors("2.21k 0.1% 25ppm",
+                         "Resistor_SMD:R_0402_1005Metric", "TNPW04022K21BEED"), [])
+        self.assertIsNone(decode("TNPW04022K21BEEA"))
+        self.assertIsNone(decode("TNPW06032K21BEED"))
+
     def test_vishay_unpublished_grade_and_range_combinations_remain_unknown(self):
         for mpn in ("TNPU0603102KHZEN00", "TNPU060355K6HWEN00", "TNPU060355K6HYEN00",
                     "TNPU040210K0HZEN00", "TNPW06031M00BYEA", "TNPW060310K0FYEA",

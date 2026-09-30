@@ -19,10 +19,10 @@ def resistor(s, ref, value, x, y, a, b, *, a_kind="local", b_kind="local", mpn="
 
 
 def capacitor(s, ref, value, x, y, net, *, kind="local", footprint="C_100n",
-              manufacturer="Murata", mpn="GRM188R71H104KA93D"):
+              manufacturer="Murata", mpn="GRM188R71H104KA93D", text_right=False):
     s.place(ref, "C", value, x, y, footprint=FOOTPRINTS[footprint],
             pin_nets={"1": (net, kind), "2": ("GND", "local")},
-            extra_props=props(manufacturer, mpn))
+            extra_props=props(manufacturer, mpn), text_right=text_right)
 
 
 def series_capacitor(s, ref, value, x, y, a, b, *, b_kind="local"):
@@ -203,6 +203,9 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
                 Qualification="GPIO4_INVERTED_UFP_DFP_AND_GPIO7_DP_DM_MUX_ENABLE",
                 DefaultState="LOW_WHEN_CONTROLLER_UNPOWERED_RESET_DETACHED_OR_SINK",
             ))
+
+    capacitor(s, "C2682" if port == 1 else "C2681", "100n 50V qualifier bypass",
+              x0 + 325.12, y0 + 130.81, "SYS_3V3", kind="hier", text_right=True)
 
     # USB2 must follow the negotiated data role just like the SuperSpeed path.
     # GPIO4 is high only in DFP role and GPIO7 is high only while the data path

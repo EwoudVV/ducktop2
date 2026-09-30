@@ -7,7 +7,7 @@
 
 (sheet
   (at 30.48 39.37)
-  (size 119.38 149.86)
+  (size 119.38 149.8600)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid f49c1072-f547-5a4f-a0ae-12bbf6096b8e)
@@ -142,7 +142,7 @@
 )
 (sheet
   (at 30.48 219.71)
-  (size 119.38 149.86)
+  (size 119.38 149.8600)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid c0b61100-162c-5129-baf8-026904cbc11a)
@@ -164,7 +164,7 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e2a641f5-31db-5c19-8639-1b9a8c4670c6)
   )
-  (pin "PD1_EFUSE_FAULT_N" bidirectional
+  (pin "PD1_EFUSE_PG" bidirectional
     (at 149.86 234.95 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 349fd0f2-aa8a-5524-bb44-0ba9bdb4d093)
@@ -262,7 +262,7 @@
 )
 (sheet
   (at 170.18 39.37)
-  (size 119.38 193.04)
+  (size 119.38 193.0400)
   (stroke (width 0.1524) (type solid))
   (fill (color 0 0 0 0.0))
   (uuid 86191e00-3cef-5223-829f-0c74cf67126c)
@@ -314,7 +314,7 @@
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid ecca8252-255d-5565-a500-a8732c81dd5b)
   )
-  (pin "PD1_EFUSE_FAULT_N" bidirectional
+  (pin "PD1_EFUSE_PG" bidirectional
     (at 289.56 85.09 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b9f90b84-eb31-5b7b-b851-b7b4f8be01fb)
@@ -585,7 +585,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 09e1ce9e-b812-55e9-aeb9-3d77fa96a270)
 )
-(label "PD1_EFUSE_FAULT_N"
+(label "PD1_EFUSE_PG"
   (at 149.86 234.95 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 8c1b0c45-07c2-5cd0-9ed6-b18f493ef862)
@@ -720,7 +720,7 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid e4047d85-d05b-5548-b087-ff147c364212)
 )
-(label "PD1_EFUSE_FAULT_N"
+(label "PD1_EFUSE_PG"
   (at 289.56 85.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid da9604c3-9d66-537d-8807-d9530d3b1579)

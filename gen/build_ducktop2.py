@@ -266,7 +266,7 @@ class Sheet:
         return f"{prefix}{n}"
 
     def place(self, ref, symname, value, x, y, footprint="", pin_nets=None, unit=None, extra_props=None,
-              dnp=None, in_bom=None, on_board=True, datasheet=""):
+              dnp=None, in_bom=None, on_board=True, datasheet="", text_right=False):
         # SMT JST hold-downs need a symbol pin so PCB updates keep their ground.
         if ("JST_GH_SM" in footprint or "JST_SH_SM" in footprint) and symname in ("Conn_01x02", "Conn_01x03", "Conn_01x04"):
             symname += "_MP"
@@ -325,9 +325,16 @@ class Sheet:
         else:
             _ref_y = snap_coord(y - 2.54)
             _val_y = snap_coord(y + 2.54)
+        _text_x = x
+        _justify = ""
+        if text_right:
+            _text_x = snap_coord(x + 5.08)
+            _ref_y = snap_coord(y - 1.27)
+            _val_y = snap_coord(y + 1.27)
+            _justify = " (justify left)"
         props = []
-        props.append(f'(property "Reference" "{ref}" (at {fmt_coord(x)} {fmt_coord(_ref_y)} 0) (effects (font (size 1.27 1.27))))')
-        props.append(f'(property "Value" "{value}" (at {fmt_coord(x)} {fmt_coord(_val_y)} 0) (effects (font (size 1.27 1.27))))')
+        props.append(f'(property "Reference" "{ref}" (at {fmt_coord(_text_x)} {fmt_coord(_ref_y)} 0) (effects (font (size 1.27 1.27)){_justify}))')
+        props.append(f'(property "Value" "{value}" (at {fmt_coord(_text_x)} {fmt_coord(_val_y)} 0) (effects (font (size 1.27 1.27)){_justify}))')
         props.append(f'(property "Footprint" "{footprint}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
         props.append(f'(property "Datasheet" "{datasheet}" (at {fmt_coord(x)} {fmt_coord(y)} 0) (effects (font (size 1.27 1.27)) (hide yes)))')
         if extra_props:

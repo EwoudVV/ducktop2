@@ -62,7 +62,7 @@ J12's `HUB_DS4_DP/DN` and `HUB_PRT_CTL4` cross both I/O cables. its U1760
 power switch requires both hub control and EC permission. J12 is a host
 port; charging inputs are J21, J11, and AUX.
 
-external HDMI comes from the Mu TCP0 path. Gigabit Ethernet uses the RTL8111H
+external HDMI comes from the Mu Ultra TCP2 path. Gigabit Ethernet uses the RTL8111H
 on the right board. review the complete routed channel, including cables,
 coupling, clocks, protection, and connector transitions before release.
 

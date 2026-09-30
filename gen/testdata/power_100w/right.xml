@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='utf-8'?>
+<export version="E">
+  <!--Reviewed pin/value subset, not a complete design. Native export 2026-09-30 SHA256 fa7b03f060de76a69f7eb447a8946fb0b25250a211a352dc2bc4d275fb32e5a4-->
+  <components>
+    <comp ref="C2092">
+      <value>10n 50V C0G slew control</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1885C1H103JA01D</field>
+      </fields>
+    </comp>
+    <comp ref="R2090">
+      <value>1k 1W switched input discharge</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="MPN">RC2512FR-071KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2093">
+      <value>267R 0.1% sink breaker; 5.58A nominal</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RT0603BRD07267RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2096">
+      <value>150k sink PG pull-up; valid with input off</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07150KL</field>
+      </fields>
+    </comp>
+    <comp ref="U721">
+      <value>TPS259827ONRGER PD2 sink breaker</value>
+      <footprint>ducktop2:Texas_RGE0024M_QFN24_4x4_2EP</footprint>
+      <fields>
+        <field name="MPN">TPS259827ONRGER</field>
+      </fields>
+    </comp>
+  </components>
+  <nets>
+    <net name="/MCU_3V3">
+      <node ref="R2096" pin="1" pintype="passive" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_DISCHARGE_DRAIN">
+      <node ref="R2090" pin="2" pintype="passive" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_EFUSE_DVDT">
+      <node ref="C2092" pin="1" pintype="passive" />
+      <node ref="U721" pin="15" pinfunction="dVdt_15" pintype="passive" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_EFUSE_ILIM">
+      <node ref="R2093" pin="1" pintype="passive" />
+      <node ref="U721" pin="8" pinfunction="ILIM_8" pintype="passive" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_EFUSE_IMON">
+      <node ref="U721" pin="9" pinfunction="IMON_9" pintype="output" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_EFUSE_SHDN">
+      <node ref="U721" pin="6" pinfunction="EN/UVLO_6" pintype="input" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_PPHV">
+      <node ref="U721" pin="1" pinfunction="IN_1" pintype="power_in" />
+      <node ref="U721" pin="16" pinfunction="IN_16" pintype="passive" />
+      <node ref="U721" pin="2" pinfunction="IN_2" pintype="passive" />
+      <node ref="U721" pin="25" pinfunction="IN_25" pintype="passive" />
+      <node ref="U721" pin="3" pinfunction="IN_3" pintype="passive" />
+    </net>
+    <net name="/PD2_EFUSE_PG">
+      <node ref="R2096" pin="2" pintype="passive" />
+      <node ref="U721" pin="13" pinfunction="PG_13" pintype="open_collector" />
+    </net>
+    <net name="/PD2_VBUS_GATED">
+      <node ref="R2090" pin="1" pintype="passive" />
+      <node ref="U721" pin="17" pinfunction="OUT_17" pintype="power_out" />
+      <node ref="U721" pin="18" pinfunction="OUT_18" pintype="passive" />
+      <node ref="U721" pin="19" pinfunction="OUT_19" pintype="passive" />
+      <node ref="U721" pin="20" pinfunction="OUT_20" pintype="passive" />
+      <node ref="U721" pin="21" pinfunction="OUT_21" pintype="passive" />
+      <node ref="U721" pin="22" pinfunction="OUT_22" pintype="passive" />
+      <node ref="U721" pin="23" pinfunction="OUT_23" pintype="passive" />
+      <node ref="U721" pin="24" pinfunction="OUT_24" pintype="passive" />
+    </net>
+    <net name="GND">
+      <node ref="C2092" pin="2" pintype="passive" />
+      <node ref="R2093" pin="2" pintype="passive" />
+      <node ref="U721" pin="10" pinfunction="RETRY_DLY_10" pintype="passive" />
+      <node ref="U721" pin="11" pinfunction="NRETRY_11" pintype="passive" />
+      <node ref="U721" pin="12" pinfunction="LDSTRT_12" pintype="input" />
+      <node ref="U721" pin="14" pinfunction="GND_14" pintype="passive" />
+      <node ref="U721" pin="26" pinfunction="GND_26" pintype="passive" />
+      <node ref="U721" pin="4" pinfunction="GND_4" pintype="power_in" />
+      <node ref="U721" pin="5" pinfunction="GND_5" pintype="passive" />
+    </net>
+    <net name="unconnected-(U721-ITIMER-Pad7)">
+      <node ref="U721" pin="7" pinfunction="ITIMER_7" pintype="passive+no_connect" />
+    </net>
+  </nets>
+</export>

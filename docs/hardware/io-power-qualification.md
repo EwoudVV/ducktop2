@@ -1,88 +1,72 @@
-# I/O power looms and ground bounds
+# i/o power looms and ground bounds
 
-26 september 2026: the saved power connectors and wire specifications have
-changed. the limits below belong to the earlier wiring revision and need
-to be reconciled with the new terminals and return-current calculations.
-[power revision status](power-revision.md) records the current checkpoint.
+30 september 2026. these are the loom and return-current limits for the
+100 W power revision. the calculation passes with the conditions below;
+the assembled harnesses and operating profiles have not been qualified.
+[power revision status](power-revision.md) records the board checkpoint.
 
-power uses two short Micro-Fit looms and one direct left-to-right XT30 loom.
-all positive supply rails are removed from the 41/51-contact signal cables.
-`gen/usb_power_contract.py` is the pin and assembly contract.
-`gen/calculate_io_power.py` reproduces the current and voltage screen below.
-these are routing and qualification limits. the assembled harnesses and
-operating profiles have not been qualified.
+power uses two short WAGO looms and one direct left-to-right XT30 loom.
+positive supply rails stay off the 41/51-contact signal cables.
+[usb_power_contract.py](../../gen/usb_power_contract.py) defines the pin maps,
+parts and assembly limits. [calculate_io_power.py](../../gen/calculate_io_power.py)
+reproduces the current and voltage screen.
 
-| loom | board headers | mating cable parts | construction |
-| --- | --- | --- | --- |
-| center to left | J2430/J2431, Molex 43045-1212 | 43025-1200, 43030-0038 tin contacts | 12 contacts, Alpha 3253 18 AWG, 90..100 mm |
-| center to right | J2432/J2433, Molex 43045-1012 | 43025-1000, 43030-0038 tin contacts | 10 contacts, Alpha 3253 18 AWG, 90..100 mm |
-| left to right USB5 | J2434/J2435, AMASS XT30PW-F30.G.Y | two XT30U-M.G.Y gold plugs | two Alpha 5857 18 AWG wires, 400..420 mm |
+| loom | board terminals | construction |
+| --- | --- | --- |
+| center to left | J2430/J2431 and J2450/J2451: WAGO 2060-453/998-404; J2460/J2461 return: 2060-451/998-404 | six positive rail wires and one return, Alpha 6715 18 AWG, 20..100 mm |
+| center to right | J2432/J2433 and J2452/J2453: WAGO 2060-453/998-404; J2462/J2463 return: 2060-451/998-404 | six positive rail wires and one return, Alpha 6715 18 AWG, 20..100 mm |
+| left to right USB5 | J2434/J2435: AMASS XT30PW-F30.G.Y, with two XT30U-M.G.Y plugs | one positive wire and one return, Alpha 6716 16 AWG, 400..420 mm |
 
-lengths include manufacturing tolerance, measured between wire termination
-ends. Micro-Fit uses one signal/power conductor per numbered position,
-straight number to number. USB5 uses pad 1 for GND and pad 2 for positive
-USB_PORT_5V. verify continuity, polarity and isolation before power.
-raw BMS power remains on its separate Mega-Fit connector.
+each three-pole WAGO group reverses its numbered positions at the center
+board. join matching rail names using the full
+[pin table](cables-and-connectors.md#power-between-the-main-boards), then
+check continuity, polarity and isolation before power. USB5 uses pad 1 for
+GND and pad 2 for USB_PORT_5V at both ends. fit both Alpha 1230 ground
+braids across each seam; they are part of the electrical design.
 
-the vertical headers avoid the facing cable-housing conflict at the narrow
-coplanar seams. the exact 10/12-contact parts have a 17.64 mm mated body;
-this excludes the wire loop. Alpha 3253 requires a 17.78 mm minimum bend
-radius, so even a single 90-degree turn needs more height. the complete
-90..100 mm loop must be checked at the installed board poses before the
-case height is frozen. both harnesses retain their original electrical map.
+the WAGO terminals accept bare stranded wire. strip 7..9 mm, hold the
+release button for insertion or removal, and do not solder-tin the ends.
+use Alpha 6715 RD005/BK005 for the short looms. the wire is 18 AWG,
+16/30 tinned copper with mPPE insulation, rated −40..105 °C. its maximum
+outside diameter is 1.7526 mm and its 5D minimum bend radius is 8.763 mm.
+[Alpha 6715 specification](https://www.alphawire.com/en/products/wire/ecogen/ecowire/6715).
 
-Micro-Fit contact screening uses the 12-circuit / 18 AWG / 5.5 A row in
-[Molex PS-43045 revision R](https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/productspecificationpdf/430/43045/PS-43045-001.pdf).
-Alpha 3253 is 7/26 tinned copper, 1.778 mm maximum OD, with an 80 °C wire
-limit and 17.78 mm minimum bend radius. each hot/aged termination must be
-at most 45 mΩ and wire at most 30 mΩ/m. a 100 mm positive leg is therefore
-at most 93 mΩ. every seam return must measure at least 2 mΩ at the cold
-qualification corner. with at most 10 mV between the actual ground lands,
-any one return is at most 5 A, regardless of sharing. those resistance and
-temperature conditions are receiving/assembly requirements.
+the WAGO current screen is 9 A per terminal. the model retains a 45 mΩ
+maximum for each complete hot/aged wire termination and 30 mΩ/m for wire.
+these are assembly acceptance limits, not claimed catalogue contact
+resistances. a 100 mm positive conductor is therefore at most 93 mΩ.
+the separate return wire must measure at least 0.12 mΩ at its cold corner.
+that lower bound and the remaining braid's upper bound establish the
+terminal-current limit below; equal current sharing is not assumed.
+
+the direct loom uses Alpha 6716 RD005/BK005: 16 AWG, 26/30 tinned copper
+with mPPE insulation. its maximum diameter is 2.1082 mm and minimum bend
+radius is 10.541 mm. keep each mated and soldered termination at or below
+5 mΩ after assembly, temperature and life tests, and wire at or below
+30 mΩ/m. the published wire DCR is nominal and does not establish that
+hot bound. [Alpha 6716 specification](https://www.alphawire.com/en/products/wire/ecogen/ecowire/6716).
 
 [AMASS 2025V0](https://www.china-amass.net/uploads/31.XT30PW-F30-SPEC-2025V0.pdf)
 specifies 20 A at up to 85 K rise, 1.2 mΩ contact resistance, 100 mating
-cycles and −20..120 °C. our assembled 8 A return-current bound still
-requires thermal testing. the direct loom must stay at or below 80 °C,
-including both solder joints and connector bodies. each mated and soldered
-termination must remain at or below 5 mΩ after assembly, temperature and
-life tests. the datasheet's contact value does not establish that assembled
-hot/aged bound.
+cycles and −20..120 °C. the project's direct-return design bound is 10 A.
+qualify the complete loom at or below 80 °C, including solder joints and
+connector bodies. the catalogue contact value does not prove the assembled
+hot/aged resistance or temperature.
 
-use [Alpha 5857](https://www.alphawire.com/products/wire/hook-up-wire/premium/5857),
-red 5857 RD005 and black 5857 BK005: 18 AWG 19/30 silver-plated copper,
-PTFE, UL1213 at 105 °C. maximum OD is 1.8796 mm and minimum bend radius is
-18.796 mm. its published DCR is nominal; the assembled 30 mΩ/m hot limit
-still needs checking. one positive wire and one full-current return remove
-the parallel-positive and minimum-return-resistance conditions of the old
-8-contact direct loom.
+the WAGO bodies are 4.5 mm high. reserve release-tool access and wire
+bends separately. the XT30 mated envelope is at most 23.10 × 13.60 mm,
+with a conservative 5.75 mm above-board height; the case reserves 6 mm.
+insulate the solder cups, keep retention lands isolated, strain-relieve
+the wires independently, and mate only while unpowered.
 
-the local AMASS footprint follows the current F30 drawing: 5.00 mm power
-pitch, 11.00 mm retention pitch, with retention pins 5.00 mm forward of the
-power row. finished power holes are 1.85 ±0.05 mm and retention holes
-1.15 ±0.05 mm. retention lands remain isolated and require a receiving
-isolation check. the mated envelope is at most 23.10 × 13.60 mm, with a
-conservative 5.75 mm above-board height from the independent total/tail
-dimensions. reserve sleeve thickness, wire exit and bend space separately.
-strain-relieve the wires independently. mate only while unpowered.
-
-use 420 mm as the nominal direct-loom cut target. the rounded wire-exit
-path is 354.47 mm for ground and 364.47 mm for USB5, using an 18.796 mm
-bend radius between the reviewed front-left and rear-right positions.
-reserve up to 12 mm inside the two solder/sleeve terminations. at 400 mm,
-that leaves 33.53 mm and 23.53 mm for dressing and height detours; 420 mm
-adds 20 mm. check the real component-height corridor before assembly.
-a flat plan view does not prove the enclosure fit.
-
-the vertical Micro-Fit body is 17.64 mm high, but Alpha 3253 wire has a
-17.78 mm minimum bend radius. at the current header poses, a 90..100 mm
-individual-wire model reaches about 54.4 mm above the board, including
-wire radius and an 8 mm maximum hidden crimp allowance. reserve about
-55 mm before any enclosure claim. verify numbered-wire bundle crossings,
-actual crimp length and latch access in the assembled loom; the single-wire
-curve calculation does not establish bundle clearance.
-
+use the reviewed [harness paths](power-harness-fit.md) for wire exits,
+cut-length allowances, clamps and service access. 20..100 mm and
+400..420 mm are electrical bounds, not finished cut lists. 420 mm remains
+the nominal direct-loom cut target. the complete installed route still
+needs a fit check after power placement; a flat plan view does not prove
+case clearance. protected BMS power uses its separate WAGO 2060-452 link,
+and the raw pack uses the four-contact Molex 43045-0400 map in the
+[cable document](cables-and-connectors.md#bms-wiring).
 
 ## voltage and input power
 
@@ -120,17 +104,29 @@ the loom. the EC's whole-path input reservation must use at least 80%
 qualified efficiency, with the actual validated minimum used if lower
 than a proposed profile. a profile below the 80% design floor is rejected.
 
-true center VSYS must remain at least 8.7 V during this high-power state.
-BQ25798 reports 1 mV resolution, but its datasheet does not guarantee
-absolute ADC accuracy. there is no existing STM32 VSYS channel: PA6 senses
-AUX input, PA7 skin temperature, and PB0 Mu temperature. AUX voltage is
-upstream of the charger and cannot establish this VSYS floor.
+true center VSYS must remain at least 8.7 V during this high-power USB5
+state. the ISL9241 VSYS ADC has a 96 mV step; that resolution does not
+establish absolute accuracy. the driver decodes this register in 96 mV
+steps. there is no independent STM32 VSYS channel: PA6 senses AUX input,
+PA7 skin temperature, and PB0 Mu temperature. AUX voltage is upstream of
+the charger and cannot establish this floor.
+[ISL9241 datasheet, ADC table](https://www.renesas.com/en/document/dst/isl9241-datasheet).
+
 `DUCKTOP2_VSYS_SENSE_QUALIFIED`, `DUCKTOP2_VSYS_MAX_OVERESTIMATE_MV` and
-`DUCKTOP2_VSYS_MAX_FALL_MV` remain zero. USB admission requires qualification
-and tests measured VSYS minus both margins against 8.7 V. the fall margin
-must cover the full observation age and shutoff latency. readings older
-than 250 ms fail off. TI confirms the absence of a guaranteed absolute ADC
-accuracy in its [BQ25798 support response](https://e2e.ti.com/support/power-management-group/power-management/f/power-management-forum/1402524/bq25798-premature-vsys-ovp).
+`DUCKTOP2_VSYS_MAX_FALL_MV` remain zero. qualify the maximum positive
+measurement error, including quantization, gain, offset, temperature and aging.
+the fall allowance must cover the ADC conversion/poll cycle, the full
+reported observation age and the time to remove the load. a register read
+alone does not prove that a new conversion has finished. USB admission
+requires measured VSYS minus both qualified margins to remain at least
+8.7 V; reported samples older than 250 ms fail off.
+
+this 8.7 V limit belongs to the USB5 path. it does not replace the Mu
+converter's 10 V minimum for its full 5.5 A operating screen. all rail
+reservations must also fit the whole-system source budget. the USB profile
+allows at most 5.5 A steady admission and 5.6 A during qualified startup,
+with one branch enabled per new measured conversion. source changes,
+transfer, stale measurements or loss of the host lease remove admission.
 
 ## system 5 V startup and brownout
 
@@ -161,8 +157,16 @@ bank/inrush envelope and auxiliary source reservation.
 | endpoint startup allowance | conservatively assign the entire shared startup allowance to the right cut | 0.400 A |
 | right USB_PORT_5V | J11 and J12 VBUS, VCONN, bleeds and full common allowance | 2.015 A |
 | signed DC signals per seam | USB2, HCSL reference clock, DDC/HPD and control/pull currents | 0.100 A each |
-| selected main input | one selected PD/AUX input path | 3.500 A aggregate |
+| selected main input | one selected PD/AUX input path | 5.000 A aggregate |
 | raw AON inputs | all simultaneously active raw-port AON feeds | 2.000 A aggregate |
+
+these are conservative loom bounds, not permission to draw 7 A from a
+5 A USB source. the target reserves 6.5 W for raw standby before allocating
+charger current. its ISL9241 command and available-power calculations also
+include shunt, gain and offset envelopes. the charger-current, USB power,
+VSYS measurement, harness, inrush and complete auxiliary-load qualification
+conditions must all hold before a live profile is released. their hardware
+qualification flags remain off.
 
 the hub's current table gives typical 25 °C values, not guaranteed maxima.
 its actual enabled inventory is three SuperSpeedPlus and three USB2
@@ -187,7 +191,7 @@ the corrected U7 divider gives a 3.259000 V DC floor. at 2 A, 93 mΩ loom,
 10 mΩ board copper, 10 mV ground difference and 20 mV ripple, the left
 SYS3 floor is 3.023000 V. verify it at the actual device pins. endpoint
 limits remain 5 A total, 5.4 A startup, with 3.5 A NVMe, 1.0 A Wi-Fi and
-0.4 A GbE branches. pair right power pin 5 physically with GND pin 10.
+0.4 A GbE branches. use the current WAGO rail map and installed wire paths.
 
 ## signed return proof
 
@@ -209,27 +213,42 @@ for the passive three-node return network, every edge is bounded by
 
 | cut | most positive | largest negative magnitude |
 | --- | ---: | ---: |
-| left | 6.389980 A | 7.615 A |
-| right | 3.391 A | 5.600 A |
-| left plus right | 7.765980 A | 5.700 A |
+| left | 6.389980 A | 9.115 A |
+| right | 3.391 A | 7.100 A |
+| left plus right | 7.765980 A | 7.200 A |
 
-the largest edge therefore remains below the 8 A continuous design bound.
+the largest edge is 9.115 A, below the 10 A continuous design bound.
 this includes the entire endpoint startup allowance. resistance ratios
-can move all of an edge's current into one remaining path; no equal split
-is assumed. two independently attached Alpha 1230 braids cross each seam,
-each complete bond at most 1 mΩ. either alone limits its ground difference
-to 8 mV at 8 A, leaving 2 mV for local plane gradients in the 10 mV power
-loom allowance. the FFC guard and shell constraints are separate in
-`gen/signal_interconnect_contract.py`.
+can move the load between return paths, so no equal split is assumed.
+install two independent Alpha 1230 braids per seam, each complete bond
+at most 1 mΩ including joints and board connections. the model covers
+one open braid; it does not cover losing both.
+
+with one braid remaining and at least 0.12 mΩ in the return wire, the
+WAGO terminal-current bound is:
+
+```
+I_terminal <= I_cut / (1 + R_wire_min / R_braid_max)
+           <= 9.115 A / (1 + 0.12 mΩ / 1 mΩ)
+           <= 8.138393 A
+```
+
+at the full 10 A design bound this becomes 8.928571 A, still below 9 A.
+no credit is taken for the signal cable or equal sharing. measure the
+cold minimum return-wire resistance and the hot/aged maximum resistance
+of each complete braid separately before using this result.
+
+a remaining 1 mΩ braid uses at most 9.115 mV at the calculated worst
+cut, leaving only 0.885 mV for additional plane gradients within the
+10 mV seam allowance. at 10 A there is no unused voltage allowance.
+check the difference between the actual ground lands under load; do not
+substitute a cable-only resistance measurement. the FFC guard and shell
+constraints remain separate in
+[signal_interconnect_contract.py](../../gen/signal_interconnect_contract.py).
 
 externally imposed ground-loop current, ESD and electrical faults are
-outside this normal-load sum. measure these separately and preserve the
-specified braid/FFC impedance bounds. a 3 A fuse does not limit an
-instantaneous fault to 3 A. the current
-[Littelfuse 297 datasheet, revised 2024-09-27](https://www.littelfuse.com/assetdocs/littelfuse_datasheet_297_mini32v.pdf?assetguid=42c9dd21-a88e-4328-8e67-2f832444faf1)
-lists 20 A²s typical melting I²t for the 3 A fuse, before arcing. it is not
-a guaranteed total clearing value. its opening-time maxima are 600 s at
-135%, 5 s at 200%, 0.5 s at 350%, and 0.1 s at 600% rated current.
-use the actual source fault current, total clearing energy, background
-load and temperature when checking braid and small-conductor fault pulses.
+outside this normal-load sum. the current pack fuse is the 5 A Schurter
+HCF, not an instantaneous 5 A clamp. use the actual source fault current,
+fuse clearing-time and total-energy bounds, capacitor discharge, background
+load and temperature when checking braid and small-conductor pulses.
 that fault-energy and ESD qualification remains open.

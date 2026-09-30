@@ -155,6 +155,11 @@ typedef struct {
   uint16_t iindpm_cap_ma;
   uint16_t iindpm_step_ma;
   uint16_t minimum_iindpm_ma;
+  uint16_t input_shunt_min_permille;
+  uint16_t input_shunt_max_permille;
+  uint16_t input_current_gain_min_permille;
+  uint16_t input_current_gain_max_permille;
+  uint16_t input_current_offset_ma;
   uint32_t raw_aon_reserve_mw;
   uint16_t minimum_vsys_mv;
   uint16_t source_efficiency_permille;
@@ -222,6 +227,9 @@ uint16_t ec_policy_iindpm_ma(const ec_policy_config_t *config,
 uint16_t ec_policy_source_iindpm_ma(const ec_policy_config_t *config,
                                      ec_source_id_t source, uint16_t voltage_mv,
                                      uint16_t qualified_current_ma);
+/* Lower actual charger current represented by a register command. */
+uint16_t ec_policy_charger_current_floor_ma(const ec_policy_config_t *config,
+                                           uint16_t command_ma);
 uint32_t ec_policy_external_input_power_mw(const ec_policy_config_t *config,
                                            ec_source_id_t source,uint16_t voltage_mv,
                                            uint16_t current_ma);

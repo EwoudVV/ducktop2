@@ -4,7 +4,7 @@ Version: `0.3.0-policy`
 
 this directory holds the target release record and
 the HIL matrix. the current STM32 implementation is described in
-[target status](../README.md#stm32-target).
+[target status](../README.md#current-targets).
 
 ## before enabling a load
 
@@ -22,8 +22,9 @@ with charging and loads off. wait for path-good and charger communication,
 then program/read back IINDPM before allowing loads.
 
 PD contract reads use live status, active PDO, and active RDO. PD1/PD2 use
-7-bit addresses `0x20`/`0x21` on their separate mux channels. a 5 V attachment
-does not meet the laptop's recorded always-on/selector requirements.
+7-bit addresses `0x20`/`0x21` on their separate mux channels. 5, 9, 15 and 20 V fixed contracts are supported. a low-power attachment
+only qualifies a path if the complete standby and charger-current budget
+leaves usable input. it does not authorize laptop boot by itself.
 
 AUX starts with the conservative qualification defined by the policy. raising
 its budget needs valid measured input and charger results. it has no negotiated
@@ -43,14 +44,22 @@ programming modes.
 
 ## provisional power model
 
-the host policy includes a low-pack Mu-plus-display ceiling of 15 W, an
-85 percent conversion model, a 6 W platform reserve, and source-aware
-charging/optional-load handling. those are engineering assumptions to
-validate against the real pack, cables, converters, display, and cooling.
+the target applies source-dependent charger commands with explicit shunt,
+gain and offset bounds. its power budget uses the lower current bound,
+not the programmed value. charge commands also include battery-shunt and
+regulation error. [current allowances](../tps25751a/power-envelope.md)
+records the values and their qualification requirements.
 
-the target currently cannot acknowledge complete charge or Mu/eDP budget
-application. implementing and measuring that behavior is required before
-the policy can support normal laptop operation.
+the Mu/display ceiling is 60 W, reduced to fit the actual source and other
+loads. the old 15 W low-pack value is a portable test case, not a qualified
+Mu Ultra operating point. a high-power unplug cannot be assumed to fit
+the 3 A pack ceiling. pack transfer requires a fresh, already-applied load
+limit that fits the released pack and auxiliary-load envelope.
+
+host budget acknowledgement requires matching readback and a fresh lease.
+startup uses a separate bounded authorization before an OS can respond.
+these sequences pass software tests; physical current response, the declared
+measurement bounds and actual module throttling remain untested.
 
 ## build, programming, and recovery evidence
 

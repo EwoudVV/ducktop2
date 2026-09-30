@@ -15,10 +15,10 @@ def resistor(s, ref, value, x, y, a, b, *, a_kind="local", b_kind="local", mpn="
             extra_props=props("Vishay" if mpn.startswith("TNP") else "Yageo", mpn))
 
 
-def capacitor(s, ref, value, x, y, net, *, kind="local", footprint="C_100n", mpn="GRM188R71H104KA93D"):
+def capacitor(s, ref, value, x, y, net, *, kind="local", footprint="C_100n", mpn="GRM188R71H104KA93D", text_right=False):
     s.place(ref, "C", value, x, y, footprint=FOOTPRINTS[footprint],
             pin_nets={"1": (net, kind), "2": ("GND", "local")},
-            extra_props=props("Murata", mpn))
+            extra_props=props("Murata", mpn), text_right=text_right)
 
 
 def ss_esd(s, base, x, y, nets):
@@ -280,6 +280,8 @@ def add_usba_ports(s, *, ec_controlled=False):
                 "3": (("USB_J24_SWITCH_EN", "local") if ec_controlled else ("INTERNAL_USB_VBUS_VALID", "hier")), "4": ("", "nc"),
                 "5": ("J24_ILIM", "local"), "6": ("J24_5V_PRE", "local"),
             }, extra_props=props("Texas Instruments", "TPS2553DDBVR"))
+    capacitor(s, "C2683", "1u 50V U1800 input bypass", 120, 360.68,
+              "USB_PORT_5V", kind="hier", mpn="GRT188R61H105ME13D", text_right=True)
     resistor(s, "R1850", "20.0k 1% TPS2553 1.3A ILIM", 80, 358.14, "J24_ILIM", "GND",
              mpn="RC0603FR-0720KL")
     capacitor(s, "C1850", "10u 10V USB3-A VBUS bulk", 80, 373.38, "J24_5V_PRE", footprint="C_0805",
@@ -321,6 +323,8 @@ def add_usba_ports(s, *, ec_controlled=False):
                 "3": (("USB_J25_SWITCH_EN", "local") if ec_controlled else ("INTERNAL_USB_VBUS_VALID", "hier")), "4": ("", "nc"),
                 "5": ("J25_ILIM", "local"), "6": ("J25_5V_PRE", "local"),
             }, extra_props=props("Texas Instruments", "TPS2553DDBVR"))
+    capacitor(s, "C2684", "1u 50V U1803 input bypass", 120, 429.26,
+              "USB_PORT_5V", kind="hier", mpn="GRT188R61H105ME13D", text_right=True)
     resistor(s, "R1851", "20.0k 1% TPS2553 1.3A ILIM", 80, 426.72, "J25_ILIM", "GND",
              mpn="RC0603FR-0720KL")
     capacitor(s, "C1854", "10u 10V USB2-A VBUS bulk", 80, 441.96, "J25_5V_PRE", footprint="C_0805",

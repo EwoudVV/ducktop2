@@ -60,6 +60,11 @@ EXACT_PASSIVES = {
     "T530D227M010ATE006": (220e-6, .20, 10.0),
     "C0603C224K5RACTU": (220e-9, .10, 50.0),
     "C0603C222J5GACTU": (2.2e-9, .05, 50.0),
+    # KEMET C1003_C0G (2025-02-20) ordering table; CER ENG KIT03
+    # separately confirms the10pF absolute-tolerance variant. CodeC is
+    # +/-0.25pF, not a percentage. Both are EIA0603/metric1608.
+    "C0603C100C5GACTU": (10e-12, .25/10, 50.0),
+    "C0603C689C5GACTU": (6.8e-12, .25/6.8, 50.0),
     "WSL20105L600FEA": (.0056, .01, None),
     "WSLT2512R1000FEA": (.100, .01, None),
     "ERJ8BWFR015V": (.015, .01, None),
@@ -69,6 +74,11 @@ EXACT_PASSIVES = {
     "C0805C223J5GACTU": (22e-9, .05, 50.0),
     "RC2010FK-071KL": (1000.0, .01, 200.0),
     "ERJ2RKF1001X": (1000.0, .01, None),
+}
+
+EXACT_PASSIVE_PACKAGES = {
+    "C0603C100C5GACTU": "Capacitor_SMD:C_0603_1608Metric",
+    "C0603C689C5GACTU": "Capacitor_SMD:C_0603_1608Metric",
 }
 
 
@@ -257,11 +267,45 @@ def buck_currents(vin: float, vout: float, load: float, inductance: float,
 def boost_currents(vin: float, vout: float, load: float, inductance: float,
                    frequency: float, efficiency: float) -> tuple[float, float, float, float]:
     """Screening model: average, ripple, peak and RMS inductor current."""
-    if not 0 < vin < vout or not 0 < efficiency <= 1:
-        raise ValueError("boost model needs 0 < VIN < VOUT and 0 < efficiency <= 1")
+    if (not 0 < vin < vout or not 0 < efficiency <= 1
+            or min(inductance, frequency) <= 0 or load < 0):
+        raise ValueError("boost model needs 0 < VIN < VOUT, 0 < efficiency <= 1, L/f > 0 and load >= 0")
     average = vout * load / (vin * efficiency)
     ripple = vin * (1-vin/vout) / (inductance*frequency)
     return average, ripple, average+ripple/2, math.sqrt(average**2+ripple**2/12)
+
+
+def metal_strip_bounds(values: NetlistValues, ref: str,
+                       low_c: float = -40, high_c: float = 100) -> tuple[float, float]:
+    """WSL/WSLP initial, TCR, load-life and soldering stress envelope.
+
+    Vishay 30100/30122 specify load life as 1% + 0.5 mOhm and soldering
+    change as 0.5% + 0.5 mOhm. Their fixed-ohm terms matter at these values.
+    Adding separate qualification-test drifts is a screen, not a lifetime law.
+    Kelvin pickup and shared copper errors are not component tolerances.
+    """
+    identity = decode(values.mpn(ref))
+    if identity is None or not re.match(r'WSL(?:P)?\d',values.mpn(ref)):
+        raise ValueError(f"unreviewed metal-strip shunt {ref}: {values.mpn(ref)}")
+    nominal = resistor(values, ref)
+    tolerance = (values.tolerance(ref)
+                 + identity.tcr_ppm * 1e-6 * max(abs(low_c-25), abs(high_c-25))
+                 + .010 + .0005/nominal + .005 + .0005/nominal)
+    if not 0 <= tolerance < 1:
+        raise ValueError(f"invalid resistance envelope for {ref}")
+    return nominal*(1-tolerance), nominal*(1+tolerance)
+
+
+def pack_breaker_environment_checks(values: NetlistValues) -> list[Check]:
+    """Keep the3A allocation below the forward trip floor after shunt drift."""
+    _,high=metal_strip_bounds(values,'RS10')
+    power=decode(values.mpn('RS10')).power_w
+    return [
+        Check('pack3A allocation below component-environment trip floor',.040/high,'A',3.0,math.inf,
+              'LTC4368 forward40mV minimum; RS10 initial,TCR at-40..100C,load-life and solder heat; dynamic and measurement margins remain unqualified'),
+        Check('pack shunt3A loss at100C component corner',3.0**2*high,'W',0,power*(170-100)/(170-70),
+              'MPN power rating linearly derated70..170C; installed thermal rise and fault pulses require measurement'),
+    ]
 
 
 def capacitor_retention_required(nominal: float, initial_tolerance: float,
@@ -296,6 +340,9 @@ def procurement_checks(board: str, values: NetlistValues) -> list[Check]:
             declared = parse_engineering(values[ref])
             errors = [] if math.isclose(declared, EXACT_PASSIVES[mpn][0], rel_tol=1e-9) else [
                 f"manufacturer table value {EXACT_PASSIVES[mpn][0]:g} differs from label {declared:g}"]
+            package=EXACT_PASSIVE_PACKAGES.get(mpn)
+            if package and footprint != package:
+                errors.append(f'manufacturer package requires {package}, got {footprint}')
         elif mpn in INDUCTORS:
             match = re.search(r"(?:^|\s)(\d+(?:\.\d+)?)\s*uH", values[ref], re.I)
             errors = [] if match and math.isclose(float(match[1])*1e-6, INDUCTORS[mpn][0], rel_tol=1e-9) else [
@@ -737,8 +784,10 @@ def extended_checks(center: NetlistValues, left: NetlistValues,
         ("right PD2 eFuse", right, ("R2090", "R2091", "R2092")),
     ]:
         if values.mpn("U720" if "PD1" in name else "U721")=="TPS259827ONRGER":
-            from verify_100w_calculations import pd_switch
-            checks.extend(pd_switch(name,values,2080 if "PD1" in name else 2090))
+            from verify_100w_calculations import pd_switch, pd_power_good
+            base=2080 if "PD1" in name else 2090
+            checks.extend(pd_switch(name,values,base))
+            checks.extend(pd_power_good(name,center,values,base))
         else:
             checks.extend(source_window_checks(name, values, refs))
 
@@ -1037,32 +1086,34 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
         checks.extend([
             Check("LTC4368 bidirectional pack breaker nominal", pack_breaker, "A", 4.4, 4.7,
                   "50mV/RS10; nominal forward and reverse magnitude"),
-            Check("LTC4368 breaker worst-case minimum", pack_breaker_min, "A", 3.5, 3.7,
+            Check("LTC4368 breaker IC and initial-shunt minimum", pack_breaker_min, "A", 3.5, 3.7,
                   "40mV/(RS10*1.01); LTC4368 threshold minimum and shunt +1%"),
-            Check("LTC4368 breaker worst-case maximum", pack_breaker_max, "A", 5.4, 5.6,
+            Check("LTC4368 breaker IC and initial-shunt maximum", pack_breaker_max, "A", 5.4, 5.6,
                   "60mV/(RS10*0.99); LTC4368 threshold maximum and shunt -1%"),
             Check("LTC4368 nominal VOUT capacitance", capacitor(values, "C725") * 1e6,
                   "uF", 9.9, 10.1,
                   "C725 on PACK_POS_FUSED; datasheet requires at least 1uF effective at VOUT"),
             Check("BQ7791500 backup overcurrent nominal", bms_ocd_nominal, "A", 7.4, 7.6,
                   "BQ7791500PWR 60mV OCD threshold / RS11"),
-            Check("BQ7791500 backup overcurrent worst-case minimum", bms_ocd_min, "A", 5.9, 6.1,
+            Check("BQ7791500 backup overcurrent IC and initial-shunt minimum", bms_ocd_min, "A", 5.9, 6.1,
                   "48mV/(RS11*1.01); protector threshold minimum and shunt +1%"),
-            Check("BQ7791500 backup overcurrent worst-case maximum", bms_ocd_max, "A", 9.0, 9.2,
+            Check("BQ7791500 backup overcurrent IC and initial-shunt maximum", bms_ocd_max, "A", 9.0, 9.2,
                   "72mV/(RS11*0.99); protector threshold maximum and shunt -1%"),
             Check("BQ7791500 short-circuit nominal", bms_scd_nominal, "A", 14.9, 15.1,
                   "BQ7791500PWR 120mV SCD threshold / RS11"),
-            Check("BQ7791500 short-circuit worst-case minimum", bms_scd_min, "A", 11.8, 12.0,
+            Check("BQ7791500 short-circuit IC and initial-shunt minimum", bms_scd_min, "A", 11.8, 12.0,
                   "96mV/(RS11*1.01); protector threshold minimum and shunt +1%"),
-            Check("BQ7791500 short-circuit worst-case maximum", bms_scd_max, "A", 18.0, 18.2,
+            Check("BQ7791500 short-circuit IC and initial-shunt maximum", bms_scd_max, "A", 18.0, 18.2,
                   "144mV/(RS11*0.99); protector threshold maximum and shunt -1%"),
-            Check("BQ7791500 shunt power at pack trip", bms_shunt_power_at_pack_trip, "W", 0.0, 0.30,
+            Check("BQ7791500 shunt power at initial-tolerance pack trip", bms_shunt_power_at_pack_trip, "W", 0.0, 0.30,
                   "I(LTC4368 max)^2*RS11; RS11 is rated 2W"),
             Check("BQ7791500 balance current nominal", bms_balance_nominal * 1000.0, "mA", 25.0, 27.0,
                   "4.2V/(2*75R+12R); internal-balance current"),
             Check("BQ7791500 balance worst-case max", bms_balance_worst_max * 1000.0, "mA", 0.0, 30.0,
                   "4.24V/(2*75R*0.99+8R); worst-case high balance current"),
         ])
+        if isinstance(values, NetlistValues):
+            checks.extend(pack_breaker_environment_checks(values))
         if isinstance(values, NetlistValues) and 'U2200' in values:
             checks.extend(bms_thermal_checks(values))
             checks.extend(bms_control_checks(values))
@@ -1437,6 +1488,7 @@ def render_analog_addendum(boards: dict[str, NetlistValues]) -> str:
     if boards["center"].mpn("U2")=="ISL9241IRTZ":
         lines=[line for line in lines if not line.startswith(("the Mu3.3A", "the accepted BQ bootstrap"))]
         lines += ["", "the Mu supply uses a 5.5 A output operating screen at VSYS >=10 V, with 85% efficiency required. the 60 W Mu/display budget leaves room for the fan at the low rail-voltage corner. the resistor-scaled inductor-limit figures are engineering screens, since TI specifies their limits at other operating points. peak-clamp, low-pack, transition-mode and hot-fault behavior remain unmeasured.", "", "the ISL9241 starts at 200 mA input. firmware must restore that limit and disable charging before source transfer. its current shunts, register scaling and source policy are checked separately from actual silicon accuracy. standby startup and current limiting have their own AON report. qualification flags remain off."]
+        lines += ["", "adapter and charging commands now use explicit shunt, gain and offset envelopes. the adapter power budget uses a lower actual-current bound. the rows above check that the firmware defaults cover component drift and the named silicon accuracy points; they do not interpolate a guaranteed accuracy curve. the complete installed transfer function needs qualification before the charger-current gate is enabled. charging also includes the separate trickle-current maximum and the upper regulated-voltage corner.", "", "60 W is the Mu/display cap, not an entitlement from every source. the 3 A pack ceiling cannot bridge a full-load unplug: at 10 V and 85% efficiency the Mu/display cap plus fan alone needs about 7.43 A. an already applied and measured lower load must fit the qualified pack budget before a transfer. exact cells and their charge, discharge and temperature limits are not established by this report."]
     return "\n".join(lines)+"\n"
 
 
@@ -1481,6 +1533,14 @@ def render_report(checks: list[Check], netlist: Path, radio_netlist: Path) -> st
         "- Renesas ISL9241: https://www.renesas.com/en/document/dst/isl9241-datasheet",
         "- Texas Instruments TPS552882: https://www.ti.com/lit/ds/symlink/tps552882.pdf",
         "- Texas Instruments TPS62933: https://www.ti.com/lit/ds/symlink/tps62933.pdf",
+        "- Texas Instruments TPS25982: https://www.ti.com/lit/ds/symlink/tps25982.pdf",
+        "- Texas Instruments TCA9539: https://www.ti.com/lit/ds/symlink/tca9539.pdf",
+        "- Texas Instruments CSD18540Q5B: https://www.ti.com/lit/ds/symlink/csd18540q5b.pdf",
+        "- Vishay WSL: https://www.vishay.com/docs/30100/wsl.pdf",
+        "- Vishay WSLP: https://www.vishay.com/docs/30122/wslp.pdf",
+        "- Vishay TNPW: https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+        "- KEMET C0G ordering codes: https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf",
+        "- KEMET CER ENG KIT03 component table: https://www.mouser.com/ds/2/212/CER%20ENG%20KITS%2003-1172831.pdf",
         "- Analog Devices LTC4231: https://www.analog.com/media/en/technical-documentation/data-sheets/4231fa.pdf",
         "- Texas Instruments BQ25798: https://www.ti.com/lit/ds/symlink/bq25798.pdf",
         "- Texas Instruments TPS552892: https://www.ti.com/lit/ds/symlink/tps552892.pdf",

@@ -5636,76 +5636,12 @@
   )
 )
   (embedded_fonts no)
-(symbol
-  (lib_id "Device:C")
-  (at 740.41 322.58 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 37976442-5e7d-59a8-98c2-6bd616a88197)
-  (property "Reference" "C2091" (at 740.41 320.04 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n trackpad logic bypass" (at 740.41 325.12 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 740.41 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 740.41 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid ae2cec28-03be-501a-8145-937a93553feb))
-  (pin "2" (uuid 234fbb7d-9d5c-5651-ba28-1a3b8cbc14e4))
-  (instances
-    (project "ducktop2"
-      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
-        (reference "C2091")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "SYS_3V3"
-  (shape bidirectional)
-  (at 740.41 318.77 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ec5b1de9-5d7d-542a-8423-8f11b97c1787)
-)
-(label "GND"
-  (at 740.41 326.39 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 154b5da7-fe40-54e1-8f84-aa76d43cd9b9)
-)
-(symbol
-  (lib_id "Device:C")
-  (at 740.41 280.67 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 9512343c-3158-5bfc-90bb-f59238c6eba2)
-  (property "Reference" "C451" (at 740.41 278.13 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n trackpad logic bypass" (at 740.41 283.21 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 740.41 280.67 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 740.41 280.67 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 0a4c5f63-5ad4-5e1e-b127-c886cdc2a48f))
-  (pin "2" (uuid 9ad69e36-8ad7-555b-baf0-088321cc6fc4))
-  (instances
-    (project "ducktop2"
-      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
-        (reference "C451")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "SYS_3V3"
-  (shape bidirectional)
-  (at 740.41 276.86 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 4c5b0b39-5cfb-51b6-a214-1c4a6f0d6037)
-)
-(label "GND"
-  (at 740.41 284.48 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 9ac7a174-01b1-5a3a-98a8-496c5c6ef1fe)
-)
+
+
+
+
+
+
 (symbol
   (lib_id "Device:R")
   (at 740.41 265.43 0)
@@ -5948,5 +5884,79 @@
   (at 477.52 318.77 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid 6ceb609a-1d97-5ad7-b7fa-2361dbb4c6a1)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 740.41 322.58 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 37976442-5e7d-59a8-98c2-6bd616a88197)
+  (property "Reference" "C2091" (at 740.41 320.04 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n trackpad logic bypass" (at 740.41 325.12 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 740.41 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 740.41 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 740.41 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 740.41 322.58 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 28a5c063-297f-5fbf-92ae-28a6989f3732))
+  (pin "2" (uuid 6d84779e-cae4-520e-a4d9-ae579d7787b6))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "C2091")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 740.41 318.77 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 782c4353-59dd-5fb3-8462-6400b86cb8fa)
+)
+(label "GND"
+  (at 740.41 326.39 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 7449a896-72b1-571d-941d-99cc69c5a43d)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 740.41 280.67 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9512343c-3158-5bfc-90bb-f59238c6eba2)
+  (property "Reference" "C451" (at 740.41 278.13 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "100n trackpad logic bypass" (at 740.41 283.21 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 740.41 280.67 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 740.41 280.67 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 740.41 280.67 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 740.41 280.67 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 69ddb4e0-42dd-55c7-847c-e9da80870600))
+  (pin "2" (uuid 4af4003c-4583-5155-8599-cf48855d641c))
+  (instances
+    (project "ducktop2"
+      (path "/6e8963da-1a38-5ee1-aef2-2f991522fe35"
+        (reference "C451")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 740.41 276.86 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid fb588a97-506f-56af-a48b-43e67d38b4fe)
+)
+(label "GND"
+  (at 740.41 284.48 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9b4a9836-0851-5712-aa5f-495e0d1f67c2)
 )
 )

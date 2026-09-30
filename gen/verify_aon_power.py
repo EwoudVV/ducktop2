@@ -7,14 +7,35 @@ import argparse
 import hashlib
 import json
 import math
+from dataclasses import dataclass
 from pathlib import Path
 
-from verify_electrical_calculations import component_values, divider_corners
+from verify_electrical_calculations import (
+    component_values, divider_corners, metal_strip_bounds, procurement_checks,
+)
 
 POWER = "/Power & Battery/"
 
 
-def inspect(netlist: Path) -> dict:
+@dataclass(frozen=True)
+class AonLimits:
+    """Explicit design allocations; none is a measured board rating."""
+
+    load_a: float = .450
+    efficiency: float = .80
+    buck_input_floor_v: float = 4.05
+    load_capacitance_f: float = 250e-6
+    initial_case_c: float = 100
+    # CSD18540Q5B Qg(max) is53nC at10V, not at the controller's18V
+    # high corner. This200nC allocation needs a measured discharge waveform.
+    intrinsic_gate_charge_c: float = 200e-9
+
+
+def inspect(netlist: Path, limits: AonLimits = AonLimits()) -> dict:
+    if (not 0 < limits.efficiency <= 1 or min(limits.load_a,
+            limits.buck_input_floor_v, limits.load_capacitance_f,
+            limits.intrinsic_gate_charge_c) <= 0):
+        raise ValueError('AON load, voltage, capacitance, charge and efficiency must be positive')
     v = component_values(netlist)
     failures = []
     expected_pins = {}
@@ -48,6 +69,7 @@ def inspect(netlist: Path) -> dict:
         "C2661": "GRT188R61H105ME13D",
         "C2662": "GRT188R61H105ME13D",
         "U5": "TPS62933DRLR",
+        "RS2620": "WSL2512R0220FEA18",
     }.items():
         identity(ref, mpn)
     pins(
@@ -193,7 +215,11 @@ def inspect(netlist: Path) -> dict:
     # Conservative component/assembly screens, not service-life guarantees.
     rmin = parallel(v.number("RS2660") * 0.94, v.number("R2662") * 0.94)
     rmax = parallel(v.number("RS2660") * 1.06, v.number("R2662") * 1.06)
-    shunt_power = 0.090**2 / (v.number("RS2660") * 0.94)
+    for ref in ('RS2660','R2662'):
+        derived_low,derived_high=metal_strip_bounds(v,ref)
+        require(v.number(ref)*.94 <= derived_low and derived_high <= v.number(ref)*1.06,
+                f'{ref}: six-percent screen does not cover the published drift terms')
+    shunt_power = max(0.090**2/(v.number(ref)*.94) for ref in ('RS2660','R2662'))
     require(
         shunt_power < 0.25 * (170 - 100) / (170 - 70),
         "sense-resistor power exceeds the 100 C derating screen",
@@ -201,11 +227,29 @@ def inspect(netlist: Path) -> dict:
     breaker_min = 0.047 / rmax
     limiter_min = 0.065 / rmax
     limiter_max = 0.090 / rmin
+    fast_rmin,fast_rmax=metal_strip_bounds(v,'RS2620')
+    # LTC4368 RevC p3:40..60mV with VOUT=VIN;30..70mV with
+    # VOUT=0 at VIN12V. Keep the lower short-circuit floor for coordination.
+    fast_breaker_min=.030/fast_rmax
+    require(limiter_max < fast_breaker_min,
+            'active-limit high corner can trip the upstream fast breaker')
     timer = v.number("C2661") + v.number("C2662")
     # X5R: initial, temperature, aging and low-voltage bias allowances.
-    timer_min = timer * 0.8 * 0.85 * 0.9 * 0.9 * 17000
-    timer_max = timer * 1.2 * 1.15 * 35000
-    gate_off = 0.0012
+    # Use the more conservative of the100nF delay table and independent
+    # comparator/current corners. A fresh event must start at<=130mV;
+    # otherwise timer accumulation makes a shorter event possible.
+    timer_min = timer * 0.8 * 0.85 * 0.9 * 0.9 * min(17000,(1.170-.130)/65e-6)
+    timer_max = timer * 1.2 * 1.15 * max(35000,1.216/35e-6)
+    timer_discharge_max=timer*1.2*1.15*1.216/3e-6
+    # Worst-case sustained pulse duty at which the timer can accumulate:
+    # 65uA maximum charge against3uA minimum discharge.
+    accumulating_duty=3/(65+3)
+    gate_cap_max=v.number('C2660')*1.053
+    # Fully discharge the external cap from25V output+18V gate overdrive,
+    # at the minimum0.6mA slow pull-down, plus intrinsic gate charge and
+    # five time constants of its series resistor. This replaces a fixed1.2ms.
+    gate_off=((gate_cap_max*(25+18)+limits.intrinsic_gate_charge_c)/.0006
+              +5*v.number('R2664')*(1+v.environment_tolerance('R2664'))*gate_cap_max)
     cap_refs = v.capacitors_on("/EC_AON_IN")
     require(
         set(cap_refs) == {"C797", "C798", "C36", "C37"},
@@ -214,7 +258,7 @@ def inspect(netlist: Path) -> dict:
     cap_screen = 2 * v.number("C797") + 1.4 * sum(
         v.number(r) for r in cap_refs if r != "C797"
     )
-    cap_max = 250e-6
+    cap_max = limits.load_capacitance_f
     require(cap_screen <= cap_max, "fitted input capacitors exceed the 250 uF screen")
     low, high = divider_corners(
         v.number("R35"),
@@ -224,9 +268,10 @@ def inspect(netlist: Path) -> dict:
         0.784,
         0.816,
     )
-    load_max = 0.450
-    input_power = load_max * (high + 0.020) / 0.80 + 0.020
-    input_floor = 4.05
+    load_max = limits.load_a
+    require(0 < limits.efficiency <= 1, 'invalid buck efficiency')
+    input_power = load_max * (high + 0.020) / limits.efficiency + 0.020
+    input_floor = limits.buck_input_floor_v
     require(
         input_power / input_floor < breaker_min,
         "steady standby allocation exceeds minimum breaker current",
@@ -244,7 +289,7 @@ def inspect(netlist: Path) -> dict:
         * math.log(
             (limiter_min * end - input_power) / (limiter_min * start - input_power)
         )
-    )
+    ) if limiter_min*start > input_power else math.inf
     require(recovery < timer_min, "input step can expire the current-limit timer")
     startup_overcurrent = []
     for gate_current in (7e-6, 13e-6):
@@ -256,15 +301,19 @@ def inspect(netlist: Path) -> dict:
                 startup_overcurrent.append(
                     max(0, input_power / remaining - start) / slope
                 )
-    require(max(startup_overcurrent) < timer_min, "startup overcurrent outlasts timer")
+    startup_worst=max(startup_overcurrent,default=math.inf)
+    require(startup_worst < timer_min, "startup overcurrent outlasts timer")
     # CSD18540Q5B Fig.10: conservative graph-read 2.5 A at 30 V/100 ms,
     # Tc=25 C. Derate to initial Tc=100 C using Tjmax=175 C.
-    soa_current = 2.5 * (175 - 100) / (175 - 25)
+    soa_current = 2.5 * (175 - limits.initial_case_c) / (175 - 25)
     require(limiter_max < soa_current, "pass-FET pulse exceeds derated SOA screen")
     require(
         timer_max + gate_off < 0.100, "fault pulse exceeds reviewed 100 ms SOA point"
     )
     require(input_floor > 3.8, "buck input has no headroom above its operating minimum")
+    # The arithmetic resolves actual MPN values; reject misleading labels too.
+    failures.extend(f'{check.name}: {check.equation}'
+                    for check in procurement_checks('AON',v) if not check.passed)
     report = {
         "status": "FAIL" if failures else "PASS_WITH_UNMEASURED_LIMITS",
         "netlist_sha256": hashlib.sha256(netlist.read_bytes()).hexdigest(),
@@ -275,8 +324,16 @@ def inspect(netlist: Path) -> dict:
         "sense_screen_ohm": [rmin, rmax],
         "breaker_min_a": breaker_min,
         "active_limit_a": [limiter_min, limiter_max],
+        "fast_breaker_normal_a": [.040/fast_rmax,.060/fast_rmin],
+        "fast_breaker_short_at_12v_a": [fast_breaker_min,.070/fast_rmin],
+        "active_to_fast_breaker_margin": fast_breaker_min/limiter_max,
         "timer_s": [timer_min, timer_max],
+        "timer_full_discharge_screen_s": timer_discharge_max,
+        "required_timer_start_below_v": .130,
+        "minimum_accumulating_overload_duty": accumulating_duty,
         "fault_with_gate_off_s": timer_max + gate_off,
+        "gate_off_screen_s": gate_off,
+        "intrinsic_gate_charge_screen_c": limits.intrinsic_gate_charge_c,
         "load_capacitors": cap_refs,
         "load_cap_screen_f": cap_screen,
         "load_cap_ceiling_f": cap_max,
@@ -285,8 +342,11 @@ def inspect(netlist: Path) -> dict:
         "input_power_screen_w": input_power,
         "required_buck_input_floor_v": input_floor,
         "recharge_s": recovery,
-        "startup_overcurrent_s": max(startup_overcurrent),
+        "startup_overcurrent_s": startup_worst,
         "pass_fet_soa_screen_a": soa_current,
+        "timed_breaker_scope": 'LTC4231 IN=12V electrical table; confirm4.05..25V and repeated events on hardware',
+        "fast_breaker_scope": 'LTC4368 thresholds differ when its output is shorted; propagation overshoot remains unmeasured',
+        "fault_recovery": 'LTC4231-1 latch resets after SHDN or IN is low for>100us; upstream faults can remove IN and reset it too',
         "unmeasured": [
             "complete standby load, including both OLED modules",
             "4.05 V minimum at the buck under the permitted source/load states",
@@ -294,6 +354,9 @@ def inspect(netlist: Path) -> dict:
             "effective capacitance and timer range over temperature and age",
             "initial pass-FET case at or below 100 C and timer capacitors at or below 85 C",
             "gate-loop stability, repeated source transitions and BMS/PROCHOT response",
+            "gate discharge including the200nC intrinsic-charge screen and fault overshoot",
+            "timer accumulation across repeated overload pulses; independent single pulses do not cover this",
+            "load-side short discharges the input reservoir without either upstream limiter controlling that initial pulse",
         ],
         "physical_tests": "NOT_RUN",
     }

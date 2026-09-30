@@ -181,9 +181,10 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *teleme
     }
     *telemetry = gauge;
     /* The continuous ADC's 100 ms battery-voltage period is covered by the
-     * 120 ms sampling window. Reserve AON pack current outside its shunt. */
+     * 120 ms sampling window. The VSYS standby feed now passes through the
+     * same battery shunt, so do not add its budget to this measurement. */
     inputs->pack_current_valid=sample_valid && battery_present;
-    inputs->pack_current_ma=sample_valid ? (int32_t)sample.ibat_ma-DUCKTOP2_PACK_AON_RESERVE_MA : 0;
+    inputs->pack_current_ma=sample_valid ? (int32_t)sample.ibat_ma : 0;
     inputs->pack_voltage_mv=sample_valid ? sample.vbat_mv : 0;
     inputs->pack_sample_age_ms=sample_valid ? now_ms-sample_good_started_ms : UINT32_MAX;
     inputs->vsys_sample_age_ms=sample_valid ? now_ms-sample_good_started_ms : UINT32_MAX;
@@ -228,12 +229,17 @@ bool ec_app_apply_charge_budget_mw(uint32_t mw)
     if (!DUCKTOP2_CHARGING_QUALIFIED || !DUCKTOP2_PACK_QUALIFIED ||
         !configured || !sample_valid || !battery_present || sample.fault ||
         charge_mv == 0u) return false;
-    /* Use VREG, the largest charging voltage, so the current ceiling cannot
-     * exceed the allocated battery power near the top of charge. */
-    uint32_t ma = ((uint64_t)mw * 1000u) / charge_mv;
-    if (ma > DUCKTOP2_PACK_CHARGE_CURRENT_MA) ma = DUCKTOP2_PACK_CHARGE_CURRENT_MA;
-    ma = (ma / 4u) * 4u;
-    if (ma < ISL9241_CHARGE_CURRENT_MIN_MA) return false;
+    /* Include regulation error, shunt drift and current-loop error before
+     * deriving the command. Qualification must cover the full model envelope. */
+    uint32_t high_mv=((uint32_t)charge_mv*1005u+999u)/1000u;
+    uint32_t allowed_ma=((uint64_t)mw*1000u)/high_mv;
+    if(allowed_ma>DUCKTOP2_PACK_CHARGE_CURRENT_MA) allowed_ma=DUCKTOP2_PACK_CHARGE_CURRENT_MA;
+    uint32_t sensed_ma=allowed_ma*DUCKTOP2_CHARGE_SENSE_MIN_PERMILLE/1000u;
+    /* The 64mA trickle setting can reach100mA before shunt tolerance. */
+    if(sensed_ma<100u || sensed_ma<=DUCKTOP2_CHARGE_OFFSET_MA) return false;
+    uint32_t ma=(sensed_ma-DUCKTOP2_CHARGE_OFFSET_MA)*1000u/DUCKTOP2_CHARGE_GAIN_MAX_PERMILLE;
+    ma=ma/4u*4u;
+    if(ma<ISL9241_CHARGE_CURRENT_MIN_MA) return false;
     uint16_t actual_v, actual_i;
     charge_budget_applied = isl9241_program_charge_limits(DUCKTOP2_PACK_CHARGE_VOLTAGE_MV,(uint16_t)ma) &&
         isl9241_read_charge_limits(&actual_v, &actual_i) &&

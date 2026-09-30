@@ -42,14 +42,22 @@ int main(void)
     ec_app_read_power_inputs(&in,&t,219);assert(!in.charger_config_valid);
     ec_app_read_power_inputs(&in,&t,220);
     assert(in.charger_config_valid && in.vsys_valid && in.vsys_mv==12000);
+    assert(in.pack_current_valid && in.pack_current_ma==0); /* no invented standby draw */
     if(!DUCKTOP2_GAUGE_QUALIFIED) assert(t.valid_flags==0);
     permission(220);assert(!ec_app_apply_charger_iindpm_ma(2750));
     assert(ec_app_apply_charger_iindpm_ma(2752));
     ec_app_read_power_inputs(&in,&t,240);
     assert(in.charger_iindpm_applied && in.applied_charger_iindpm_ma==2752);
     if(DUCKTOP2_CHARGING_QUALIFIED) {
+        assert(!ec_app_apply_charge_budget_mw(1000) && !charging);
+        assert(ec_app_apply_charge_budget_mw(1850));
+        assert(i2c_mock.isl_words[0x14]>=64 && i2c_mock.isl_words[0x14]%4==0);
+        assert(((1020u*i2c_mock.isl_words[0x14]+60000u)*12591ull+868999u)/869000u<=1850);
+
         assert(ec_app_apply_charge_budget_mw(6264) && ec_app_set_charging(true));
-        assert(charging && i2c_mock.isl_words[0x14]==500 && i2c_mock.isl_words[0x15]==12528);
+        assert(charging && i2c_mock.isl_words[0x14]==360 && i2c_mock.isl_words[0x15]==12528);
+        assert((1020u*i2c_mock.isl_words[0x14]+60000u+868u)/869u<=500);
+        assert(((1020u*i2c_mock.isl_words[0x14]+60000u)*12591ull+868999u)/869000u<=6264);
         i2c_mock.gauge[0x0f]=2;ec_app_read_power_inputs(&in,&t,340);
         assert(ec_app_gauge_full() && !ec_app_set_charging(true) && !charging);
         i2c_mock.gauge[0x0f]=0;permission(460);ec_app_read_power_inputs(&in,&t,460);
@@ -78,5 +86,13 @@ int main(void)
     assert(in.charger_config_valid);
     ec_app_init();ec_app_read_power_inputs(&in,&t,0);
     ec_app_read_power_inputs(&in,&t,251);assert(!ec_app_charger_configured());
+    i2c_mock_begin();seed();ec_app_init();permission(0);
+    i2c_mock.isl_words[0x84]=20; /* 20 discharge counts = 888 mA including standby */
+    i2c_mock.isl_words[0x85]=77; /* an older charge sample must not cancel discharge */
+    ec_app_read_power_inputs(&in,&t,0);ec_app_read_power_inputs(&in,&t,120);
+    assert(in.pack_current_valid && in.pack_current_ma==-888);
+    i2c_mock.isl_words[0x84]=0;i2c_mock.isl_words[0x85]=25;
+    ec_app_read_power_inputs(&in,&t,240);
+    assert(in.pack_current_valid && in.pack_current_ma==555);
     puts("ec app: PASS (cold/powered NACK, bias freshness, continuous ADC, current steps, FC/temperature, pre-enable limit and reset)");
 }

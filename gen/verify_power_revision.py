@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from part_identity import identity_errors
 from verify_electrical_calculations import component_values
 
 P = "/Power & Battery/"
@@ -40,11 +41,31 @@ def check(center, left=None, right=None):
         if v.mpn(ref) != want:
             failures.append(f"{ref}: expected {want}, got {v.mpn(ref)}")
 
+    def footprint(v, ref, want):
+        nonlocal count
+        count += 1
+        got = v.parts.get(ref, ("", ""))[1]
+        if got != want:
+            failures.append(f"{ref}: expected footprint {want}, got {got}")
+
     def pair(v, ref, first, second):
         pins(v, ref, {1: first, 2: second})
 
     def fet(v, ref, source, gate, drain):
         pins(v, ref, {1: source, 2: source, 3: source, 4: gate, 5: drain})
+
+    def bypass(v, ref, rail, want_mpn):
+        nonlocal count
+        pair(v, ref, rail, "GND")
+        mpn(v, ref, want_mpn)
+        footprint(v, ref, "Capacitor_SMD:C_0603_1608Metric")
+        count += 1
+        value = v.get(ref, "")
+        errors = identity_errors(value, v.parts.get(ref, ("", ""))[1], v.mpn(ref))
+        if value.lstrip().upper().startswith("DNP"):
+            errors.append("local bypass must be fitted")
+        if errors:
+            failures.append(f"{ref}: " + "; ".join(errors))
 
     mpn(center, "U2", "ISL9241IRTZ")
     # Renesas FN8945 rev 6.00, Table 1; NVDC-only connections.
@@ -93,15 +114,19 @@ def check(center, left=None, right=None):
         ("Q2602", "GND", P + "CHG_LS2_GATE", P + "SW2"),
         ("Q2603", P + "SW2", P + "CHG_HS2_GATE", "/VSYS"),
     ):
-        mpn(center, ref, "CSD17577Q3A")
         fet(center, ref, source, gate, drain)
+    # TI's CSD17577Q3A uses DNH. A generic 3.3 mm SON association can have
+    # different exposed-drain geometry even when its logical pin map matches.
+    for ref in ("Q2600", "Q2601", "Q2602", "Q2603", "Q2610", "Q2611"):
+        mpn(center, ref, "CSD17577Q3A")
+        footprint(center, ref, "ducktop2:CSD17577Q3A_DNH")
     fet(center, "Q25", "/PACK_POS_FUSED", P + "CHG_BGATE", P + "CHG_SRN")
     pair(center, "L1", P + "SW1", P + "SW2")
     pair(center, "RS2600", P + "VBUS_COMBINED", P + "CHG_INPUT")
     pair(center, "RS2601", "/VSYS", P + "CHG_SRN")
     mpn(center, "RS2600", "WSL2512R0200FEA18")
     mpn(center, "RS2601", "WSLP2512R0100FEA")
-    mpn(center, "R18", "RC0402FR-072K21L")
+    mpn(center, "R18", "TNPW04022K21BEED")
     pair(center, "R18", P + "PROG_SET", "GND")
     pair(center, "R2607", P + "VBUS_COMBINED", P + "CHG_CSIP")
     pair(center, "C2603", P + "CHG_CSIP", P + "CHG_INPUT")
@@ -325,6 +350,32 @@ def check(center, left=None, right=None):
         {1: P + "AUX_DISCHARGE", 2: "GND", 3: P + "AUX_DISCHARGE_DRAIN"},
     )
     pins(center, "D2640", {1: "GND", 2: "/MCU_3V3", 3: "/AUX_DC_ADC"})
+    # These checks establish the local-bypass circuit and procurement identity,
+    # not physical loop length or effective capacitance under DC bias.
+    # TPS22975 SLVSDD0B 10.1.2; TPS2553 SLVS841F 10.2.1.2.4;
+    # SN74LVC1G08 SCES217AA 8.3/8.4.
+    # LTC4418 Rev A figures 7/8: each selector needs its own local input bypass.
+    bypass(center, "C2685", P + "SEL_STAGE2", "GRM188R71H104KA93D")
+    bypass(center, "C740", P + "MAIN_SEL_INTVCC", "GRM188R71H104KA93D")
+    bypass(center, "C749", P + "ST2_SEL_INTVCC", "GRM188R71H104KA93D")
+    pins(center, "U15", {8: "GND", 10: P + "MAIN_SEL_INTVCC", 16: P + "SEL_STAGE2", 21: "GND"})
+    pins(center, "U16", {8: "GND", 10: P + "ST2_SEL_INTVCC", 21: "GND"})
+    if right is not None:
+        bypass(right, "C2680", "/SYS_3V3", "GRT188R61H105ME13D")
+        mpn(right, "U55", "TPS22975NDSGR")
+        pins(right, "U55", {1: "/SYS_3V3", 2: "/SYS_3V3",
+                             4: "/SYS_3V3", 5: "GND", 9: "GND"})
+        bypass(right, "C2681", "/SYS_3V3", "GRM188R71H104KA93D")
+        mpn(right, "U2016", "SN74LVC1G08DBVR")
+        pins(right, "U2016", {5: "/SYS_3V3", 3: "GND"})
+    if left is not None:
+        bypass(left, "C2682", "/SYS_3V3", "GRM188R71H104KA93D")
+        mpn(left, "U2006", "SN74LVC1G08DBVR")
+        pins(left, "U2006", {5: "/SYS_3V3", 3: "GND"})
+        for capacitor, switch in (("C2683", "U1800"), ("C2684", "U1803")):
+            bypass(left, capacitor, "/USB_PORT_5V", "GRT188R61H105ME13D")
+            mpn(left, switch, "TPS2553DDBVR")
+            pins(left, switch, {1: "/USB_PORT_5V", 2: "GND"})
     for port, v, prefix in [(1, left, "/USB-C PD1/"), (2, right, "/USB-C PD2/")]:
         if v is None:
             continue
@@ -341,6 +392,7 @@ def check(center, left=None, right=None):
         prefix = raw.rsplit("/", 1)[0] + "/"
         out = f"/PD{port}_VBUS_GATED" if port == 2 else prefix + f"PD{port}_VBUS_GATED"
         mpn(v, ref, "TPS259827ONRGER")
+        mpn(v, "R2086" if port == 1 else "R2096", "RC0603FR-07150KL")
         pins(
             v,
             ref,

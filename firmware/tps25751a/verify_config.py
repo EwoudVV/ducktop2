@@ -65,8 +65,12 @@ def verify_policy(document: dict,label: str,errors: list[str],port: str='PD1') -
     require(regs.get(0x37)==[54,64,31,100,144,145,65,1]+[0]*16,
             f'{label}: 100 W preference, 5..20 V range or weak-source fallback drifted',errors)
     io=regs.get(0x5c,[])
-    require(len(io)>43 and (io[0],io[32],io[40],io[42],io[43])==(219,16,29,3,61),
-            f'{label}: GPIO enable/inversion/DFP/orientation/data-mux events drifted',errors)
+    # Grounded unused GPIOs must never drive high. Check their initial levels,
+    # event mappings and pull settings as well as the three active outputs.
+    expected_io=[219,12,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,4,0,0,0,0,0,0,0,4,0,0,0,0,0,0,
+                 16,0,0,0,0,0,0,0,29,0,3,61,0,0,0,0,0]
+    require(io==expected_io,
+            f'{label}: GPIO levels, pulls or event mappings drifted',errors)
     require(regs.get(0x77,[None]*14)[13]==5 and regs.get(0x78,[None]*3)[2]==5,
             f'{label}: encoded 5 W source information drifted',errors)
 

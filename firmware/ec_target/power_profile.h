@@ -11,7 +11,12 @@ static inline ec_policy_config_t ec_target_power_config(void)
     c.pd_iindpm_margin_ma=DUCKTOP2_PD_IINDPM_MARGIN_MA;
     c.raw_aon_reserve_mw=DUCKTOP2_RAW_AON_RESERVE_MW;
     c.standby_reserve_mw=DUCKTOP2_STANDBY_RESERVE_MW;
-    c.minimum_charge_budget_mw=1000u;
+    c.input_shunt_min_permille=DUCKTOP2_ADAPTER_SENSE_MIN_PERMILLE;
+    c.input_shunt_max_permille=DUCKTOP2_ADAPTER_SENSE_MAX_PERMILLE;
+    c.input_current_gain_min_permille=DUCKTOP2_ADAPTER_GAIN_MIN_PERMILLE;
+    c.input_current_gain_max_permille=DUCKTOP2_ADAPTER_GAIN_MAX_PERMILLE;
+    c.input_current_offset_ma=DUCKTOP2_ADAPTER_OFFSET_MA;
+    c.minimum_charge_budget_mw=1850u;
     c.path_good_timeout_ms=400u;
     /* 5.5A rail allocation includes the fan and divider/current-limit corners. */
     c.normal_mu_edp_budget_mw=60000u;

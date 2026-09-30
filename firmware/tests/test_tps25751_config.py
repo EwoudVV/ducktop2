@@ -39,6 +39,14 @@ class PortConfigTests(unittest.TestCase):
     def test_reject_wrong_sink_pdp(self):self.check_bad(0x7e,10,45)
     def test_keep_weak_source_connected(self):self.check_bad(0x37,0,0x76)
     def test_reject_hidden_capability_mismatch(self):self.check_bad(0x37,0,0x3e)
+    def test_grounded_gpio_cannot_start_high(self):
+        self.check_bad(0x5c,8,1)  # GPIO0 initial output
+        self.check_bad(0x5c,9,8,'PD2')  # GPIO11 initial output
+    def test_grounded_gpio_cannot_get_an_event(self):
+        self.check_bad(0x5c,36,1)  # GPIO0 event
+        self.check_bad(0x5c,47,1,'PD2')  # GPIO11 event
+    def test_grounded_gpio_cannot_gain_a_pullup(self):
+        self.check_bad(0x5c,24,1)
     def test_reject_duplicate_register(self):
         source=self.source();entries=source['configuration']['data']['selected_ace'];entries.append(copy.deepcopy(entries[0]))
         with self.assertRaises(ValueError):pd.register_map(source)

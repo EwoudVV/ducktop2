@@ -28,7 +28,7 @@ def add_pd_sink_switch(s,port,x0,y0,base,gated_hier=False):
         (base+3,'267R 0.1% sink breaker; 5.58A nominal',ilim,'GND','RT0603BRD07267RL',FOOTPRINTS['R']),
         (base+4,'47k sink enable default-off',gate,'GND','RC0603FR-0747KL',FOOTPRINTS['R']),
         (base+5,'10k sink enable series',enable,gate,'RC0603FR-0710KL',FOOTPRINTS['R']),
-        (base+6,'10k sink PG pull-up','MCU_3V3',pg,'RC0603FR-0710KL',FOOTPRINTS['R']))
+        (base+6,'150k sink PG pull-up; valid with input off','MCU_3V3',pg,'RC0603FR-07150KL',FOOTPRINTS['R']))
     for i,(ref,value,a,b,mpn,fp) in enumerate(entries):
         part(f'R{ref}','R',value,x0+45.72,y0-30.48+i*10.16,fp,{1:a,2:b},mpn,'Yageo')
     for ref,value,net,y,mpn,fp in (

@@ -1,0 +1,1031 @@
+<?xml version='1.0' encoding='utf-8'?>
+<export version="E">
+  <!--Reviewed pin/value subset, not a complete design. Native export 2026-09-30 SHA256 66d839012f068c9003080f4dc90a47cb42fadc75b88bb7e50bd0954bb0d15eeb-->
+  <components>
+    <comp ref="C795">
+      <value>1u 50V AON input</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="C796">
+      <value>100n 50V AON input local</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C797">
+      <value>100u 35V hybrid AON hold-up</value>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <fields>
+        <field name="MPN">EEHZK1V101XP</field>
+      </fields>
+    </comp>
+    <comp ref="C798">
+      <value>100n 50V AON output local</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C799">
+      <value>22n 50V C0G gate ramp</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">C0805C223J5GACTU</field>
+      </fields>
+    </comp>
+    <comp ref="C2602">
+      <value>1n 50V C0G PROG filter</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1555C1H102JA01D</field>
+      </fields>
+    </comp>
+    <comp ref="C2620">
+      <value>100n 50V charge pump</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C2621">
+      <value>100n 50V charge pump</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C2622">
+      <value>22n 50V C0G retry timer</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">C0805C223J5GACTU</field>
+      </fields>
+    </comp>
+    <comp ref="C2650">
+      <value>100n 50V charge pump</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C2651">
+      <value>1u 50V protected input bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="C2660">
+      <value>22n 50V C0G gate ramp</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">C0805C223J5GACTU</field>
+      </fields>
+    </comp>
+    <comp ref="C2661">
+      <value>1u 50V fault timer</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="C2662">
+      <value>1u 50V fault timer</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="D711">
+      <value>SS310 3A 100V AUX standby feed</value>
+      <footprint>Diode_SMD:D_SMA</footprint>
+      <fields>
+        <field name="MPN">SS310-13-F</field>
+      </fields>
+    </comp>
+    <comp ref="D2620">
+      <value>BAT54WS fast gate discharge</value>
+      <footprint>Diode_SMD:D_SOD-323</footprint>
+      <fields>
+        <field name="MPN">BAT54WS-7-F</field>
+      </fields>
+    </comp>
+    <comp ref="Q25">
+      <value>CSD17575Q3 battery power-path FET</value>
+      <footprint>ducktop2:CSD17575Q3_DQG</footprint>
+      <fields>
+        <field name="MPN">CSD17575Q3</field>
+      </fields>
+    </comp>
+    <comp ref="Q2620">
+      <value>CSD19537Q3 100V</value>
+      <footprint>ducktop2:CSD19537Q3_DQG</footprint>
+      <fields>
+        <field name="MPN">CSD19537Q3</field>
+      </fields>
+    </comp>
+    <comp ref="Q2621">
+      <value>CSD19537Q3 100V</value>
+      <footprint>ducktop2:CSD19537Q3_DQG</footprint>
+      <fields>
+        <field name="MPN">CSD19537Q3</field>
+      </fields>
+    </comp>
+    <comp ref="Q2622">
+      <value>CSD19537Q3 100V</value>
+      <footprint>ducktop2:CSD19537Q3_DQG</footprint>
+      <fields>
+        <field name="MPN">CSD19537Q3</field>
+      </fields>
+    </comp>
+    <comp ref="Q2623">
+      <value>CSD19537Q3 100V</value>
+      <footprint>ducktop2:CSD19537Q3_DQG</footprint>
+      <fields>
+        <field name="MPN">CSD19537Q3</field>
+      </fields>
+    </comp>
+    <comp ref="Q2650">
+      <value>CSD19537Q3 100V</value>
+      <footprint>ducktop2:CSD19537Q3_DQG</footprint>
+      <fields>
+        <field name="MPN">CSD19537Q3</field>
+      </fields>
+    </comp>
+    <comp ref="Q2660">
+      <value>CSD18540Q5B AON pass FET</value>
+      <footprint>ducktop2:CSD18540Q5B_DNK</footprint>
+      <fields>
+        <field name="MPN">CSD18540Q5B</field>
+      </fields>
+    </comp>
+    <comp ref="R18">
+      <value>2.21k 0.1% 25ppm 3S / 724kHz / 200mA startup</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">TNPW04022K21BEED</field>
+      </fields>
+    </comp>
+    <comp ref="R795">
+      <value>56.2k 0.02% 5ppm AON UV top</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU060356K2HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R796">
+      <value>8.25k 0.02% 5ppm AON UV bottom</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU06038K25HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R797">
+      <value>100k 0.02% 5ppm AON OV top</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU0603100KHZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R798">
+      <value>2.15k 0.02% 5ppm AON OV bottom</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU06032K15HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R799">
+      <value>100k standby enable pull-up</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2620">
+      <value>10k gate ramp resistor</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2661">
+      <value>10R gate damping</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-0710RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2662">
+      <value>180m 1% 0.25W parallel AON shunt</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">WSL1206R1800FEA</field>
+      </fields>
+    </comp>
+    <comp ref="R2663">
+      <value>100k always-on enable</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2664">
+      <value>1k gate-ramp branch</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071KL</field>
+      </fields>
+    </comp>
+    <comp ref="RS2600">
+      <value>20m 1% 2W input Kelvin shunt</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="MPN">WSL2512R0200FEA18</field>
+      </fields>
+    </comp>
+    <comp ref="RS2601">
+      <value>10m 1% 2W battery Kelvin shunt</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="MPN">WSLP2512R0100FEA</field>
+      </fields>
+    </comp>
+    <comp ref="RS2620">
+      <value>22m 1% 2W AON Kelvin shunt</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="MPN">WSL2512R0220FEA18</field>
+      </fields>
+    </comp>
+    <comp ref="RS2660">
+      <value>180m 1% 0.25W parallel AON shunt</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">WSL1206R1800FEA</field>
+      </fields>
+    </comp>
+    <comp ref="TP2660">
+      <value>AON reset</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+    </comp>
+    <comp ref="TP2661">
+      <value>GND</value>
+      <footprint>TestPoint:TestPoint_Pad_D1.5mm</footprint>
+    </comp>
+    <comp ref="U2">
+      <value>ISL9241IRTZ</value>
+      <footprint>ducktop2:Renesas_L32_4x4D_QFN32_EP2.7</footprint>
+      <fields>
+        <field name="MPN">ISL9241IRTZ</field>
+      </fields>
+    </comp>
+    <comp ref="U718">
+      <value>LTC4368IMS-2#PBF standby breaker</value>
+      <footprint>Package_SO:MSOP-10_3x3mm_P0.5mm</footprint>
+      <fields>
+        <field name="MPN">LTC4368IMS-2#PBF</field>
+      </fields>
+    </comp>
+    <comp ref="U2620">
+      <value>LM74700QDBVRQ1</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        <field name="MPN">LM74700QDBVRQ1</field>
+      </fields>
+    </comp>
+    <comp ref="U2621">
+      <value>LM74700QDBVRQ1</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        <field name="MPN">LM74700QDBVRQ1</field>
+      </fields>
+    </comp>
+    <comp ref="U2650">
+      <value>LM74700QDBVRQ1 system standby feed</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        <field name="MPN">LM74700QDBVRQ1</field>
+      </fields>
+    </comp>
+    <comp ref="U2660">
+      <value>LTC4231IMS-1#PBF standby current limiter</value>
+      <footprint>Package_SO:MSOP-12_3x4.039mm_P0.65mm</footprint>
+      <fields>
+        <field name="MPN">LTC4231IMS-1#PBF</field>
+      </fields>
+    </comp>
+    <comp ref="C36">
+      <value>10u 50V X7R VIN</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">CGA5L1X7R1H106K160AC</field>
+      </fields>
+    </comp>
+    <comp ref="C37">
+      <value>100n 50V X7R VIN HF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C39">
+      <value>22u 25V X7R MCU_3V3 output; TI characterized part</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN">GRM32ER71E226KE15L</field>
+      </fields>
+    </comp>
+    <comp ref="C291">
+      <value>22u 25V X7R MCU_3V3 output; TI characterized part</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN">GRM32ER71E226KE15L</field>
+      </fields>
+    </comp>
+    <comp ref="C2640">
+      <value>1u 50V soft start; about 145ms nominal</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="L3">
+      <value>10uH 20% 6.2A Isat30; 1.5A rail envelope</value>
+      <footprint>ducktop2:Coilcraft_XGL6030</footprint>
+      <fields>
+        <field name="MPN">XGL6030-103MEC</field>
+      </fields>
+    </comp>
+    <comp ref="R35">
+      <value>62.4k 0.02% 5ppm MCU_3V3 FB hi</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU060362K4HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R36">
+      <value>20.0k 0.02% 5ppm MCU_3V3 FB lo</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU060320K0HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="U5">
+      <value>TPS62933DRLR</value>
+      <footprint>Package_TO_SOT_SMD:SOT-583-8</footprint>
+      <fields>
+        <field name="MPN">TPS62933DRLR</field>
+      </fields>
+    </comp>
+    <comp ref="U44">
+      <value>TCA9539PWR resettable source manager @0x74</value>
+      <footprint>Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm</footprint>
+      <fields>
+        <field name="MPN">TCA9539PWR</field>
+      </fields>
+    </comp>
+    <comp ref="C771">
+      <value>10n 50V C0G COMP</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1885C1H103JA01D</field>
+      </fields>
+    </comp>
+    <comp ref="C772">
+      <value>100p 50V C0G COMP HF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1555C1H101JA01D</field>
+      </fields>
+    </comp>
+    <comp ref="L750">
+      <value>6.8uH 18.4A Isat30 / 10.9A Irms20; 6mm max</value>
+      <footprint>ducktop2:Coilcraft_XGL1060_Center</footprint>
+      <fields>
+        <field name="MPN">XGL1060-682MEC</field>
+      </fields>
+    </comp>
+    <comp ref="R752">
+      <value>49.9R FB isolation</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0749R9L</field>
+      </fields>
+    </comp>
+    <comp ref="R753">
+      <value>102k 0.1% 10ppm 12V FB high</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPW0603102KBYEA</field>
+      </fields>
+    </comp>
+    <comp ref="R754">
+      <value>11.3k 0.02% 5ppm 12V FB low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU060311K3HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R755">
+      <value>15k 1% COMP series</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-0715KL</field>
+      </fields>
+    </comp>
+    <comp ref="R756">
+      <value>49.9k 0.02% 5ppm FSW = 400kHz</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU060349K9HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R758">
+      <value>26.7k 1% inductor limit; about 12.4A nominal</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0726K7L</field>
+      </fields>
+    </comp>
+    <comp ref="R759">
+      <value>150k 0.1% 10ppm UVLO high; 9.0V rising</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPW0603150KBYEA</field>
+      </fields>
+    </comp>
+    <comp ref="R760">
+      <value>23.7k 0.02% 5ppm UVLO low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU060323K7HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R761">
+      <value>100k fail-off gate divider low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R766">
+      <value>100k fail-off gate divider high</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="RS750">
+      <value>16m 1% 1W; parallel pair gives 8m</value>
+      <footprint>ducktop2:Panasonic_ERJ8CW_10to16m_Center</footprint>
+      <fields>
+        <field name="MPN">ERJ8CWFR016V</field>
+      </fields>
+    </comp>
+    <comp ref="RS2670">
+      <value>16m 1% 1W; parallel pair gives 8m</value>
+      <footprint>ducktop2:Panasonic_ERJ8CW_10to16m_Center</footprint>
+      <fields>
+        <field name="MPN">ERJ8CWFR016V</field>
+      </fields>
+    </comp>
+    <comp ref="U750">
+      <value>TPS552882RPMR 12V buck-boost</value>
+      <footprint>ducktop2:Texas_RPM0026A_VQFN-HR26_4x3.5</footprint>
+      <fields>
+        <field name="MPN">TPS552882RPMR</field>
+      </fields>
+    </comp>
+    <comp ref="C209">
+      <value>3.9n fan FG filter</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1555C1H392JA01D</field>
+      </fields>
+    </comp>
+    <comp ref="F200">
+      <value>750mA 16V fan polyfuse</value>
+      <footprint>Fuse:Fuse_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">1206L075/16WR</field>
+      </fields>
+    </comp>
+    <comp ref="R206">
+      <value>8.2k fan FG pull-up</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-078K2L</field>
+      </fields>
+    </comp>
+  </components>
+  <nets>
+    <net name="/AON_FAULT_N">
+      <node ref="U2660" pin="9" pinfunction="STATUS_9" pintype="open_collector" />
+      <node ref="U44" pin="17" pinfunction="IO1_4_17" pintype="bidirectional" />
+      <node ref="U718" pin="7" pinfunction="FAULT_7" pintype="open_collector" />
+    </net>
+    <net name="/AUX_FAULT_N">
+      <node ref="U44" pin="11" pinfunction="IO0_7_11" pintype="bidirectional" />
+    </net>
+    <net name="/AUX_PGOOD">
+      <node ref="U44" pin="14" pinfunction="IO1_1_14" pintype="bidirectional" />
+    </net>
+    <net name="/CHG_INT_N">
+      <node ref="U2" pin="26" pinfunction="CMOUT/~{INT}_26" pintype="open_collector" />
+    </net>
+    <net name="/EC &amp; MCU/AON_BUCK_SS">
+      <node ref="C2640" pin="1" pintype="passive" />
+      <node ref="U5" pin="7" pinfunction="SS_7" pintype="passive" />
+    </net>
+    <net name="/EC &amp; MCU/BUCK_BOOT">
+      <node ref="U5" pin="6" pinfunction="BST_6" pintype="passive" />
+    </net>
+    <net name="/EC &amp; MCU/BUCK_FB">
+      <node ref="R35" pin="2" pintype="passive" />
+      <node ref="R36" pin="1" pintype="passive" />
+      <node ref="U5" pin="8" pinfunction="FB_8" pintype="input" />
+    </net>
+    <net name="/EC &amp; MCU/BUCK_SW">
+      <node ref="L3" pin="1" pinfunction="1_1" pintype="passive" />
+      <node ref="U5" pin="5" pinfunction="SW_5" pintype="output" />
+    </net>
+    <net name="/EC &amp; MCU/SOURCE_MGR_INT_N">
+      <node ref="U44" pin="1" pinfunction="~{INT}_1" pintype="open_collector" />
+    </net>
+    <net name="/EC_AON_IN">
+      <node ref="C36" pin="1" pintype="passive" />
+      <node ref="C37" pin="1" pintype="passive" />
+      <node ref="C797" pin="1" pintype="passive" />
+      <node ref="C798" pin="1" pintype="passive" />
+      <node ref="Q2660" pin="1" pinfunction="S_1" pintype="passive" />
+      <node ref="Q2660" pin="2" pinfunction="S_2" pintype="passive" />
+      <node ref="Q2660" pin="3" pinfunction="S_3" pintype="passive" />
+      <node ref="U2660" pin="11" pinfunction="SOURCE_11" pintype="input" />
+      <node ref="U5" pin="3" pinfunction="VIN_3" pintype="power_in" />
+    </net>
+    <net name="/FAN_TACH">
+      <node ref="C209" pin="1" pintype="passive" />
+      <node ref="R206" pin="2" pintype="passive" />
+    </net>
+    <net name="/HP_DETECT">
+      <node ref="U44" pin="6" pinfunction="IO0_2_6" pintype="bidirectional" />
+    </net>
+    <net name="/I2C_SCL">
+      <node ref="U2" pin="22" pinfunction="SCL_22" pintype="input" />
+      <node ref="U44" pin="22" pinfunction="SCL_22" pintype="input" />
+    </net>
+    <net name="/I2C_SDA">
+      <node ref="U2" pin="21" pinfunction="SDA_21" pintype="bidirectional" />
+      <node ref="U44" pin="23" pinfunction="SDA_23" pintype="bidirectional" />
+    </net>
+    <net name="/Internal Services/FAN_12V">
+      <node ref="F200" pin="2" pintype="passive" />
+    </net>
+    <net name="/MAIN_AUX_VALID_N">
+      <node ref="U44" pin="16" pinfunction="IO1_3_16" pintype="bidirectional" />
+    </net>
+    <net name="/MAIN_USB_VALID_N">
+      <node ref="U44" pin="15" pinfunction="IO1_2_15" pintype="bidirectional" />
+    </net>
+    <net name="/MCU_3V3">
+      <node ref="C291" pin="1" pintype="passive" />
+      <node ref="C39" pin="1" pintype="passive" />
+      <node ref="L3" pin="2" pinfunction="2_2" pintype="passive" />
+      <node ref="R206" pin="1" pintype="passive" />
+      <node ref="R35" pin="1" pintype="passive" />
+      <node ref="U44" pin="24" pinfunction="V_{DD}_24" pintype="power_in" />
+    </net>
+    <net name="/MU_12V">
+      <node ref="F200" pin="1" pintype="passive" />
+      <node ref="R752" pin="1" pintype="passive" />
+      <node ref="RS2670" pin="2" pintype="passive" />
+      <node ref="RS750" pin="2" pintype="passive" />
+    </net>
+    <net name="/MU_12V_PG">
+      <node ref="U750" pin="5" pinfunction="PG_5" pintype="open_collector" />
+    </net>
+    <net name="/MU_PROCHOT_N">
+      <node ref="U2" pin="23" pinfunction="~{PROCHOT}_23" pintype="open_collector" />
+    </net>
+    <net name="/Mu Carrier/MU12_BOOT1">
+      <node ref="U750" pin="22" pinfunction="BOOT1_22" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_BOOT2">
+      <node ref="U750" pin="20" pinfunction="BOOT2_20" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_CC_N">
+      <node ref="U750" pin="6" pinfunction="~{CC}_6" pintype="open_collector" />
+    </net>
+    <net name="/Mu Carrier/MU12_COMP">
+      <node ref="C772" pin="1" pintype="passive" />
+      <node ref="R755" pin="1" pintype="passive" />
+      <node ref="U750" pin="18" pinfunction="COMP_18" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_COMP_RC">
+      <node ref="C771" pin="1" pintype="passive" />
+      <node ref="R755" pin="2" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_DITH">
+      <node ref="U750" pin="7" pinfunction="DITH/SYNC_7" pintype="input" />
+    </net>
+    <net name="/Mu Carrier/MU12_EN_UVLO">
+      <node ref="R759" pin="2" pintype="passive" />
+      <node ref="R760" pin="1" pintype="passive" />
+      <node ref="U750" pin="4" pinfunction="EN/UVLO_4" pintype="input" />
+    </net>
+    <net name="/Mu Carrier/MU12_FB">
+      <node ref="R753" pin="2" pintype="passive" />
+      <node ref="R754" pin="1" pintype="passive" />
+      <node ref="U750" pin="14" pinfunction="FB_14" pintype="input" />
+    </net>
+    <net name="/Mu Carrier/MU12_FB_TOP">
+      <node ref="R752" pin="2" pintype="passive" />
+      <node ref="R753" pin="1" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_FORCE_OFF">
+      <node ref="R761" pin="1" pintype="passive" />
+      <node ref="R766" pin="2" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_FSW">
+      <node ref="R756" pin="1" pintype="passive" />
+      <node ref="U750" pin="8" pinfunction="FSW_8" pintype="input" />
+    </net>
+    <net name="/Mu Carrier/MU12_HS_DRV">
+      <node ref="U750" pin="2" pinfunction="DR1H_2" pintype="output" />
+    </net>
+    <net name="/Mu Carrier/MU12_ILIM">
+      <node ref="R758" pin="1" pintype="passive" />
+      <node ref="U750" pin="17" pinfunction="ILIM_17" pintype="input" />
+    </net>
+    <net name="/Mu Carrier/MU12_ISN">
+      <node ref="U750" pin="13" pinfunction="ISN_13" pintype="input" />
+    </net>
+    <net name="/Mu Carrier/MU12_ISP">
+      <node ref="U750" pin="12" pinfunction="ISP_12" pintype="input" />
+    </net>
+    <net name="/Mu Carrier/MU12_LS_DRV">
+      <node ref="U750" pin="1" pinfunction="DR1L_1" pintype="output" />
+    </net>
+    <net name="/Mu Carrier/MU12_MODE">
+      <node ref="U750" pin="15" pinfunction="MODE_15" pintype="input" />
+    </net>
+    <net name="/Mu Carrier/MU12_PRE_SENSE">
+      <node ref="RS2670" pin="1" pintype="passive" />
+      <node ref="RS750" pin="1" pintype="passive" />
+      <node ref="U750" pin="11" pinfunction="VOUT_11" pintype="power_out" />
+      <node ref="U750" pin="26" pinfunction="VOUT_26" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_SW1">
+      <node ref="L750" pin="1" pinfunction="1_1" pintype="passive" />
+      <node ref="U750" pin="23" pinfunction="SW1_23" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_SW2">
+      <node ref="L750" pin="2" pinfunction="2_2" pintype="passive" />
+      <node ref="U750" pin="21" pinfunction="SW2_21" pintype="power_out" />
+      <node ref="U750" pin="25" pinfunction="SW2_25" pintype="passive" />
+    </net>
+    <net name="/Mu Carrier/MU12_VCC">
+      <node ref="U750" pin="19" pinfunction="VCC_19" pintype="power_out" />
+    </net>
+    <net name="/NRST_NET">
+      <node ref="U44" pin="3" pinfunction="~{RESET}_3" pintype="input" />
+    </net>
+    <net name="/PACK_FAULT_N">
+      <node ref="U44" pin="10" pinfunction="IO0_6_10" pintype="bidirectional" />
+    </net>
+    <net name="/PACK_POS_FUSED">
+      <node ref="Q25" pin="1" pinfunction="S_1" pintype="passive" />
+      <node ref="Q25" pin="2" pinfunction="S_2" pintype="passive" />
+      <node ref="Q25" pin="3" pinfunction="S_3" pintype="passive" />
+    </net>
+    <net name="/PACK_RETRY_PULSE">
+      <node ref="U44" pin="13" pinfunction="IO1_0_13" pintype="bidirectional" />
+    </net>
+    <net name="/PD1_EFUSE_PG">
+      <node ref="U44" pin="7" pinfunction="IO0_3_7" pintype="bidirectional" />
+    </net>
+    <net name="/PD1_PATH_EN">
+      <node ref="U44" pin="4" pinfunction="IO0_0_4" pintype="bidirectional" />
+    </net>
+    <net name="/PD1_VBUS_RAW">
+      <node ref="C2620" pin="2" pintype="passive" />
+      <node ref="Q2620" pin="1" pinfunction="S_1" pintype="passive" />
+      <node ref="Q2620" pin="2" pinfunction="S_2" pintype="passive" />
+      <node ref="Q2620" pin="3" pinfunction="S_3" pintype="passive" />
+      <node ref="U2620" pin="3" pinfunction="EN_3" pintype="input" />
+      <node ref="U2620" pin="6" pinfunction="ANODE_6" pintype="power_in" />
+    </net>
+    <net name="/PD2_EFUSE_PG">
+      <node ref="U44" pin="8" pinfunction="IO0_4_8" pintype="bidirectional" />
+    </net>
+    <net name="/PD2_PATH_EN">
+      <node ref="U44" pin="5" pinfunction="IO0_1_5" pintype="bidirectional" />
+    </net>
+    <net name="/PD2_VBUS_RAW">
+      <node ref="C2621" pin="2" pintype="passive" />
+      <node ref="Q2621" pin="1" pinfunction="S_1" pintype="passive" />
+      <node ref="Q2621" pin="2" pinfunction="S_2" pintype="passive" />
+      <node ref="Q2621" pin="3" pinfunction="S_3" pintype="passive" />
+      <node ref="U2621" pin="3" pinfunction="EN_3" pintype="input" />
+      <node ref="U2621" pin="6" pinfunction="ANODE_6" pintype="power_in" />
+    </net>
+    <net name="/Power &amp; Battery/AON_EFUSE_OV">
+      <node ref="R797" pin="2" pintype="passive" />
+      <node ref="R798" pin="1" pintype="passive" />
+      <node ref="U718" pin="3" pinfunction="OV_3" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/AON_EFUSE_UV">
+      <node ref="R795" pin="2" pintype="passive" />
+      <node ref="R796" pin="1" pintype="passive" />
+      <node ref="U718" pin="2" pinfunction="UV_2" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/AON_FET_COMMON">
+      <node ref="Q2622" pin="1" pinfunction="S_1" pintype="passive" />
+      <node ref="Q2622" pin="2" pinfunction="S_2" pintype="passive" />
+      <node ref="Q2622" pin="3" pinfunction="S_3" pintype="passive" />
+      <node ref="Q2623" pin="1" pinfunction="S_1" pintype="passive" />
+      <node ref="Q2623" pin="2" pinfunction="S_2" pintype="passive" />
+      <node ref="Q2623" pin="3" pinfunction="S_3" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/AON_FET_GATE">
+      <node ref="C799" pin="1" pintype="passive" />
+      <node ref="D2620" pin="2" pinfunction="A_2" pintype="passive" />
+      <node ref="Q2622" pin="4" pinfunction="G_4" pintype="input" />
+      <node ref="Q2623" pin="4" pinfunction="G_4" pintype="input" />
+      <node ref="R2620" pin="2" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/AON_GATE_DRV">
+      <node ref="D2620" pin="1" pinfunction="K_1" pintype="passive" />
+      <node ref="R2620" pin="1" pintype="passive" />
+      <node ref="U718" pin="10" pinfunction="GATE_10" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/AON_LIMIT_DRV">
+      <node ref="R2661" pin="1" pintype="passive" />
+      <node ref="R2664" pin="1" pintype="passive" />
+      <node ref="U2660" pin="12" pinfunction="GATE_12" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/AON_LIMIT_GATE">
+      <node ref="Q2660" pin="4" pinfunction="G_4" pintype="input" />
+      <node ref="R2661" pin="2" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/AON_LIMIT_RAMP">
+      <node ref="C2660" pin="1" pintype="passive" />
+      <node ref="R2664" pin="2" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/AON_LIMIT_SENSE">
+      <node ref="Q2660" pin="5" pinfunction="D(5-8)_5" pintype="passive" />
+      <node ref="R2662" pin="2" pintype="passive" />
+      <node ref="RS2660" pin="2" pintype="passive" />
+      <node ref="U2660" pin="1" pinfunction="SENSE_1" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/AON_LIMIT_SHDN">
+      <node ref="R2663" pin="2" pintype="passive" />
+      <node ref="TP2660" pin="1" pinfunction="1_1" pintype="passive" />
+      <node ref="U2660" pin="3" pinfunction="SHDN_3" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/AON_LIMIT_TIMER">
+      <node ref="C2661" pin="1" pintype="passive" />
+      <node ref="C2662" pin="1" pintype="passive" />
+      <node ref="U2660" pin="10" pinfunction="TIMER_10" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/AON_PD1_GATE">
+      <node ref="Q2620" pin="4" pinfunction="G_4" pintype="input" />
+      <node ref="U2620" pin="5" pinfunction="GATE_5" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/AON_PD1_VCAP">
+      <node ref="C2620" pin="1" pintype="passive" />
+      <node ref="U2620" pin="1" pinfunction="VCAP_1" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/AON_PD2_GATE">
+      <node ref="Q2621" pin="4" pinfunction="G_4" pintype="input" />
+      <node ref="U2621" pin="5" pinfunction="GATE_5" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/AON_PD2_VCAP">
+      <node ref="C2621" pin="1" pintype="passive" />
+      <node ref="U2621" pin="1" pinfunction="VCAP_1" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/AON_PROTECTED">
+      <node ref="C2651" pin="1" pintype="passive" />
+      <node ref="C799" pin="2" pintype="passive" />
+      <node ref="R2662" pin="1" pintype="passive" />
+      <node ref="R2663" pin="1" pintype="passive" />
+      <node ref="RS2620" pin="2" pintype="passive" />
+      <node ref="RS2660" pin="1" pintype="passive" />
+      <node ref="U2660" pin="2" pinfunction="IN_2" pintype="power_in" />
+      <node ref="U2660" pin="4" pinfunction="UVL_4" pintype="input" />
+      <node ref="U2660" pin="5" pinfunction="UVH_5" pintype="input" />
+      <node ref="U718" pin="8" pinfunction="VOUT_8" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/AON_PROTECT_SENSE">
+      <node ref="Q2623" pin="5" pinfunction="D(5-8)_5" pintype="passive" />
+      <node ref="RS2620" pin="1" pintype="passive" />
+      <node ref="U718" pin="9" pinfunction="SENSE_9" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/AON_PROTECT_SHDN">
+      <node ref="R799" pin="2" pintype="passive" />
+      <node ref="U718" pin="6" pinfunction="SHDN_6" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/AON_RAW">
+      <node ref="C795" pin="1" pintype="passive" />
+      <node ref="C796" pin="1" pintype="passive" />
+      <node ref="D711" pin="1" pinfunction="K_1" pintype="passive" />
+      <node ref="Q2620" pin="5" pinfunction="D(5-8)_5" pintype="passive" />
+      <node ref="Q2621" pin="5" pinfunction="D(5-8)_5" pintype="passive" />
+      <node ref="Q2622" pin="5" pinfunction="D(5-8)_5" pintype="passive" />
+      <node ref="Q2650" pin="5" pinfunction="D(5-8)_5" pintype="passive" />
+      <node ref="R795" pin="1" pintype="passive" />
+      <node ref="R797" pin="1" pintype="passive" />
+      <node ref="R799" pin="1" pintype="passive" />
+      <node ref="U2620" pin="4" pinfunction="CATHODE_4" pintype="input" />
+      <node ref="U2621" pin="4" pinfunction="CATHODE_4" pintype="input" />
+      <node ref="U2650" pin="4" pinfunction="CATHODE_4" pintype="input" />
+      <node ref="U718" pin="1" pinfunction="VIN_1" pintype="power_in" />
+    </net>
+    <net name="/Power &amp; Battery/AON_RETRY">
+      <node ref="C2622" pin="1" pintype="passive" />
+      <node ref="U718" pin="4" pinfunction="RETRY_4" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/AON_SYS_GATE">
+      <node ref="Q2650" pin="4" pinfunction="G_4" pintype="input" />
+      <node ref="U2650" pin="5" pinfunction="GATE_5" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/AON_SYS_VCAP">
+      <node ref="C2650" pin="1" pintype="passive" />
+      <node ref="U2650" pin="1" pinfunction="VCAP_1" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_DC_FUSED">
+      <node ref="D711" pin="2" pinfunction="A_2" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/BATP_SENSE">
+      <node ref="U2" pin="31" pinfunction="VBAT_31" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/BTST1_NODE">
+      <node ref="U2" pin="12" pinfunction="BOOT1_12" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/BTST2_NODE">
+      <node ref="U2" pin="4" pinfunction="BOOT2_4" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_ACOK">
+      <node ref="U2" pin="24" pinfunction="ACOK_24" pintype="open_collector" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_BGATE">
+      <node ref="Q25" pin="4" pinfunction="G_4" pintype="input" />
+      <node ref="U2" pin="32" pinfunction="BGATE_32" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_COMPF">
+      <node ref="U2" pin="28" pinfunction="COMPF_28" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_COMPR">
+      <node ref="U2" pin="27" pinfunction="COMPR_27" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_CSIP">
+      <node ref="U2" pin="15" pinfunction="CSIP_15" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_DCIN">
+      <node ref="U2" pin="17" pinfunction="DCIN_17" pintype="power_in" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_HS1_DRV">
+      <node ref="U2" pin="11" pinfunction="UGATE1_11" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_HS2_DRV">
+      <node ref="U2" pin="5" pinfunction="UGATE2_5" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_IMON">
+      <node ref="U2" pin="29" pinfunction="AMON/BMON_29" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_INPUT">
+      <node ref="RS2600" pin="2" pintype="passive" />
+      <node ref="U2" pin="14" pinfunction="CSIN_14" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_LS1_DRV">
+      <node ref="U2" pin="9" pinfunction="LGATE1_9" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_LS2_DRV">
+      <node ref="U2" pin="7" pinfunction="LGATE2_7" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_NTC">
+      <node ref="U2" pin="25" pinfunction="BATGONE/NTC_25" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_PSYS">
+      <node ref="U2" pin="30" pinfunction="PSYS_30" pintype="output" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_SRN">
+      <node ref="Q25" pin="5" pinfunction="D(5-8)_5" pintype="passive" />
+      <node ref="RS2601" pin="2" pintype="passive" />
+      <node ref="U2" pin="1" pinfunction="CSON_1" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_VDDP">
+      <node ref="U2" pin="13" pinfunction="BYPSRC_13" pintype="passive" />
+      <node ref="U2" pin="8" pinfunction="VDDP_8" pintype="power_in" />
+    </net>
+    <net name="/Power &amp; Battery/PROG_SET">
+      <node ref="C2602" pin="1" pintype="passive" />
+      <node ref="R18" pin="1" pintype="passive" />
+      <node ref="U2" pin="19" pinfunction="PROG_19" pintype="input" />
+    </net>
+    <net name="/Power &amp; Battery/REGN">
+      <node ref="U2" pin="18" pinfunction="VDD_18" pintype="power_out" />
+    </net>
+    <net name="/Power &amp; Battery/SW1">
+      <node ref="U2" pin="10" pinfunction="PHASE1_10" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/SW2">
+      <node ref="U2" pin="6" pinfunction="PHASE2_6" pintype="passive" />
+    </net>
+    <net name="/Power &amp; Battery/VBUS_COMBINED">
+      <node ref="RS2600" pin="1" pintype="passive" />
+    </net>
+    <net name="/RADIO_DB_FAULT_N">
+      <node ref="U44" pin="19" pinfunction="IO1_6_19" pintype="bidirectional" />
+    </net>
+    <net name="/RADIO_DB_PG">
+      <node ref="U44" pin="18" pinfunction="IO1_5_18" pintype="bidirectional" />
+    </net>
+    <net name="/RADIO_DB_PRESENT_N">
+      <node ref="U44" pin="20" pinfunction="IO1_7_20" pintype="bidirectional" />
+    </net>
+    <net name="/SLS_S3">
+      <node ref="U44" pin="9" pinfunction="IO0_5_9" pintype="bidirectional" />
+    </net>
+    <net name="/VSYS">
+      <node ref="C2650" pin="2" pintype="passive" />
+      <node ref="Q2650" pin="1" pinfunction="S_1" pintype="passive" />
+      <node ref="Q2650" pin="2" pinfunction="S_2" pintype="passive" />
+      <node ref="Q2650" pin="3" pinfunction="S_3" pintype="passive" />
+      <node ref="R759" pin="1" pintype="passive" />
+      <node ref="R766" pin="1" pintype="passive" />
+      <node ref="RS2601" pin="1" pintype="passive" />
+      <node ref="U2" pin="2" pinfunction="CSOP_2" pintype="input" />
+      <node ref="U2650" pin="3" pinfunction="EN_3" pintype="input" />
+      <node ref="U2650" pin="6" pinfunction="ANODE_6" pintype="power_in" />
+      <node ref="U750" pin="3" pinfunction="VIN_3" pintype="power_in" />
+    </net>
+    <net name="GND">
+      <node ref="C209" pin="2" pintype="passive" />
+      <node ref="C2602" pin="2" pintype="passive" />
+      <node ref="C2622" pin="2" pintype="passive" />
+      <node ref="C2640" pin="2" pintype="passive" />
+      <node ref="C2651" pin="2" pintype="passive" />
+      <node ref="C2660" pin="2" pintype="passive" />
+      <node ref="C2661" pin="2" pintype="passive" />
+      <node ref="C2662" pin="2" pintype="passive" />
+      <node ref="C291" pin="2" pintype="passive" />
+      <node ref="C36" pin="2" pintype="passive" />
+      <node ref="C37" pin="2" pintype="passive" />
+      <node ref="C39" pin="2" pintype="passive" />
+      <node ref="C771" pin="2" pintype="passive" />
+      <node ref="C772" pin="2" pintype="passive" />
+      <node ref="C795" pin="2" pintype="passive" />
+      <node ref="C796" pin="2" pintype="passive" />
+      <node ref="C797" pin="2" pintype="passive" />
+      <node ref="C798" pin="2" pintype="passive" />
+      <node ref="R18" pin="2" pintype="passive" />
+      <node ref="R36" pin="2" pintype="passive" />
+      <node ref="R754" pin="2" pintype="passive" />
+      <node ref="R756" pin="2" pintype="passive" />
+      <node ref="R758" pin="2" pintype="passive" />
+      <node ref="R760" pin="2" pintype="passive" />
+      <node ref="R761" pin="2" pintype="passive" />
+      <node ref="R796" pin="2" pintype="passive" />
+      <node ref="R798" pin="2" pintype="passive" />
+      <node ref="TP2661" pin="1" pinfunction="1_1" pintype="passive" />
+      <node ref="U2" pin="20" pinfunction="OTGEN/CMIN_20" pintype="input" />
+      <node ref="U2" pin="33" pinfunction="GND_33" pintype="power_in" />
+      <node ref="U2620" pin="2" pinfunction="GND_2" pintype="power_in" />
+      <node ref="U2621" pin="2" pinfunction="GND_2" pintype="power_in" />
+      <node ref="U2650" pin="2" pinfunction="GND_2" pintype="power_in" />
+      <node ref="U2660" pin="6" pinfunction="OV_6" pintype="input" />
+      <node ref="U2660" pin="8" pinfunction="GND_8" pintype="power_in" />
+      <node ref="U44" pin="12" pinfunction="V_{SS}_12" pintype="power_in" />
+      <node ref="U44" pin="2" pinfunction="A1_2" pintype="input" />
+      <node ref="U44" pin="21" pinfunction="A0_21" pintype="input" />
+      <node ref="U5" pin="4" pinfunction="GND_4" pintype="power_in" />
+      <node ref="U718" pin="5" pinfunction="GND_5" pintype="power_in" />
+      <node ref="U750" pin="10" pinfunction="AGND_10" pintype="power_in" />
+      <node ref="U750" pin="24" pinfunction="PGND_24" pintype="power_in" />
+      <node ref="U750" pin="9" pinfunction="PGND_9" pintype="power_in" />
+    </net>
+    <net name="unconnected-(U2-BYPSG-Pad16)">
+      <node ref="U2" pin="16" pinfunction="BYPSG_16" pintype="output+no_connect" />
+    </net>
+    <net name="unconnected-(U2-NGATE-Pad3)">
+      <node ref="U2" pin="3" pinfunction="NGATE_3" pintype="output+no_connect" />
+    </net>
+    <net name="unconnected-(U5-EN-Pad2)">
+      <node ref="U5" pin="2" pinfunction="EN_2" pintype="input+no_connect" />
+    </net>
+    <net name="unconnected-(U5-RT-Pad1)">
+      <node ref="U5" pin="1" pinfunction="RT_1" pintype="passive+no_connect" />
+    </net>
+    <net name="unconnected-(U750-CDC-Pad16)">
+      <node ref="U750" pin="16" pinfunction="CDC_16" pintype="passive+no_connect" />
+    </net>
+    <net name="unconnected-(U2660-GNDSW-Pad7)">
+      <node ref="U2660" pin="7" pinfunction="GNDSW_7" pintype="open_collector+no_connect" />
+    </net>
+  </nets>
+</export>

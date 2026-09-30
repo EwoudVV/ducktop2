@@ -49,7 +49,7 @@ CRITICAL_REFS = [
     "C840", "C841", "C842", "C843", "C844", "C845", "C846", "C847", "C848",
     "TP1", "TP2", "TP3", "TP4", "TP7", "TP9", "TP10", "TP11",
     "C725", "R707", "R708", "Q701", "R709", "R13", "Q702", "D715", "D716", "R14", "Q700", "R719", "R16", "R705",
-    "J190", "F190", "D190", "U12", "R739", "R740", "U15", "Q21", "Q22", "Q23", "Q24",
+    "J190", "F190", "D190", "U12", "R739", "R740", "U15", "Q21", "Q22", "Q23", "Q24", "C2685",
     "R730", "R731", "R732", "R733", "R734", "R735", "C740", "C741", "C742", "C743", "C744", "C745", "C746",
     "D710", "D711", "D712", "D713", "D714", "U718",
     "R795", "R796", "R797", "R798", "C795", "C796", "C797", "C798", "C799",
@@ -401,7 +401,7 @@ def load_contracts() -> None:
         ("C744", "AUX_DC_PROTECTED"), ("C745", "ST2_AUX_FET_COMMON"),
         ("C747", "ST2_MAIN_FET_COMMON"), ("C748", "SEL_STAGE2"),
         ("C749", "ST2_SEL_INTVCC"), ("C715", "ST2_SEL_TMR"),
-        ("C746", "VBUS_COMBINED"),
+        ("C746", "VBUS_COMBINED"), ("C2685", "SEL_STAGE2"),
     ):
         add(ref, 1, selector_net(net), "Selector bypass, hold-up, or timer capacitor.", selector)
         add(ref, 2, "GND", "Selector capacitor return.", selector)

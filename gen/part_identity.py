@@ -93,7 +93,7 @@ def decode(mpn: str) -> Identity | None:
         if valid and low <= value <= high:
             return Identity("R", value, size, initial, tcr_ppm=ppm)
         return None
-    precision = re.fullmatch(r"(TNPW)(0603|0805|1206)([\dRKM]{4})([BDF])([HEXY])(E[AC])", mpn)
+    precision = re.fullmatch(r"(TNPW)(0402|0603|0805|1206)([\dRKM]{4})([BDF])([HEXY])(E[ACD])", mpn)
     if precision:
         _, size, code, tolerance, tcr, packaging = precision.groups()
         value = engineering_value(code)

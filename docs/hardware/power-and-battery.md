@@ -1,6 +1,6 @@
 # power and battery
 
-updated 25 september 2026. the four-layer BMS is routed, including the
+updated 30 september 2026. the four-layer BMS is routed, including the
 thermal circuit and separate cable connections. the saved board has zero
 unconnected items, zero physical DRC errors and no schematic mismatch.
 [layout checks](../../verification/bms-layout.md) records the copper and
@@ -9,10 +9,11 @@ return-path checks. the cell and assembled-hardware tests below still apply.
 
 ## Mu Ultra power target
 
-the new input target is 100 W over USB-C, at 20 V / 5 A. that needs a new
-charger and a complete check of the input switches, looms, protection and
-12 V supply. the saved PD profiles and charger limits are still the older
-60 W design. do not increase those limits on the current hardware.
+the input target is 100 W over USB-C, at 20 V / 5 A. the revised circuit
+uses an ISL9241 buck-boost charger, TPS25982 input switches and a TPS552882
+Mu supply. both official PD profiles include 20 V / 5 A. these belong to
+the revised power circuit, not the earlier BQ25798 board. see the
+[revision status](power-revision.md) for integration and routing progress.
 
 charging needs to work while the laptop is running, starting up or shut
 down. smaller 5 V and 9 V chargers should work too. the laptop takes what
@@ -21,16 +22,17 @@ charger cannot cover the load, the battery supplies the difference within
 its allowed current. charging resumes when there is enough spare power.
 the pack temperature limits still apply in every state.
 
-the EC now permits charging without a running OS, after checking that the
-Mu rail is off or reserving its qualified startup budget. this is tested
-in software only. 5 V and 9 V operation still needs the input-selector and
-firmware voltage checks changed together. those voltages are not enabled
-on the saved hardware yet.
+the EC permits charging without a running OS after checking that the Mu
+rail is off or reserving its qualified startup budget. the selector windows
+and firmware accept 5, 9, 15 and 20 V contracts. this behavior has software
+tests; source transitions and charging on the actual boards remain untested.
 
-the BMS stays unchanged during the interface migration. RS10 is 11 mOhm,
-so its pack breaker is about 4.55 A nominal and can trip around 3.60 A at
-the low threshold/high resistance corner. the 8 A copper check does not
-set the battery's allowed current. the cells still need their own tests.
+RS10 on the BMS is 11 milliohms, using WSL2512R0110FEA18. the pack breaker
+is about 4.55 A nominal. the roughly 3.60 A low corner includes the IC and
+initial resistor tolerance only. the broader 100 C component-drift screen
+reduces that figure to about 3.24 A. the target pack operating ceiling stays
+at 3 A, subject to cell, transient and current-measurement qualification.
+copper capacity does not establish the cells' allowed current.
 
 battery mode needs a lower combined load budget. unplugging at full adapter
 load also needs a checked fast response, since a software power-limit update
@@ -51,11 +53,11 @@ boards has not been established as a suitable change.
 | cell voltage protection and balancing | U719 BQ7791500, on the BMS |
 | primary return disconnect | Q703/Q704 and RS11, on the BMS |
 | bidirectional pack breaker | U11 LTC4368-1, Q11/Q12 and RS10, on the BMS |
-| pack fuse | F1, 10 A MINI fuse in its specified holder |
+| pack fuse | F1, 5 A Schurter HCF 3-101-056 |
 | cell temperature windows | three insulated probes and the BMS comparator/control circuit |
-| charging and system power path | U2 BQ25798, on the center board |
+| charging and system power path | U2 ISL9241, on the center board |
 | fuel gauge and current measurement | U10 BQ34Z100-G1 and RS1, on the center board |
-| ship disconnect | Q25, on the center board |
+| NVDC battery path | Q25, on the center board; its body diode supplies VSYS during startup |
 
 ## pack paths
 
@@ -69,8 +71,8 @@ J2 PACK_POS_RAW
   -> BAT_PROT_SENSE
   -> RS10, 11 milliohms
   -> PACK_POS_FUSED
-  -> J2072 pin 1 / J2071 pin 1
-  -> center ship FET and charger battery path
+  -> J2072 pin 1 / J2071 pin 2
+  -> center Q25 and charger battery path
 ```
 
 U11's two sense connections must reach the RS10 lands independently of the
@@ -85,7 +87,7 @@ raw pack negative
   <-> RS11, 8 milliohms
   <-> Q703 / Q704
   <-> FG_VSS
-  <-> J2072 pin 2 / J2071 pin 2
+  <-> J2072 pin 2 / J2071 pin 1
   <-> center gauge shunt RS1
   <-> system GND
 ```
@@ -137,11 +139,15 @@ balance checks are in
 
 PD1 enters through left J21, PD2 through right J11, and AUX through left
 J190. source selection and protection span the I/O and center boards.
-the PD configurations contain 5, 9, 15 and 20 V sink profiles, up to 3 A.
+the PD configurations contain 5, 9 and 15 V sink profiles at up to 3 A,
+and a 20 V profile at up to 5 A.
 the EC still has to qualify the negotiated source and apply the complete
 input and charging budget before admitting loads.
 
-U2 supplies the system power path. the downstream circuits provide MU_12V,
+U2 supplies the system power path. standby takes battery power from VSYS,
+so its draw is included in the charger battery shunt. raw USB and AUX feeds
+can also start the standby supply. the LTC4368 voltage protection and
+LTC4231 current limiter operate before the EC boots. the downstream circuits provide MU_12V,
 SYS_5V, SYS_3V3, endpoint power and the always-on MCU supply. the left board
 has a separate USB5 converter with current monitoring, a hardware fault
 latch, per-port permissions and controlled startup. its right-side load

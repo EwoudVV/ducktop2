@@ -639,6 +639,10 @@ def check_battery_and_charger(components):
     expect_value_prefix(components, "C746", "100u 35V hybrid", "LTC4418 output hold-up")
     expect(net(components, "C746", "1"), "/Power & Battery/VBUS_COMBINED", "LTC4418 output hold-up rail")
     expect(net(components, "C746", "2"), "GND", "LTC4418 output hold-up return")
+    if modern:
+        expect_value_prefix(components, "C2685", "100n 50V", "U15 V2 local bypass")
+        expect(net(components, "C2685", "1"), net(components, "U15", "16"), "U15 V2 bypass supply")
+        expect(net(components, "C2685", "2"), "GND", "U15 V2 bypass return")
 
     if prop(components, "U2", "MPN") == "ISL9241IRTZ":
         from verify_aon_power import inspect as inspect_aon

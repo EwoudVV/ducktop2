@@ -170,6 +170,11 @@ ec_policy_config_t ec_policy_default_config(void) {
   config.iindpm_cap_ma = 2750u;
   config.iindpm_step_ma = 1u;
   config.minimum_iindpm_ma = 0u;
+  config.input_shunt_min_permille = 1000u;
+  config.input_shunt_max_permille = 1000u;
+  config.input_current_gain_min_permille = 1000u;
+  config.input_current_gain_max_permille = 1000u;
+  config.input_current_offset_ma = 0u;
   config.raw_aon_reserve_mw = 0u;
   config.minimum_vsys_mv = 10000u;
   config.source_efficiency_permille =
@@ -207,20 +212,37 @@ void ec_controller_init(ec_controller_t *controller,
   runtime_safe_reset(controller, now_ms);
 }
 
+static bool input_current_model_valid(const ec_policy_config_t *config) {
+  return config && config->input_shunt_min_permille>0u &&
+      config->input_shunt_min_permille<=1000u && config->input_shunt_max_permille>=1000u &&
+      config->input_current_gain_min_permille>0u && config->input_current_gain_min_permille<=1000u &&
+      config->input_current_gain_max_permille>=1000u;
+}
+
 uint16_t ec_policy_iindpm_ma(const ec_policy_config_t *config,
                              uint16_t qualified_input_current_ma) {
-  uint16_t available_ma;
-
-  if (config == NULL ||
-      qualified_input_current_ma <= config->iindpm_margin_ma) {
-    return 0u;
-  }
-  available_ma =
-      (uint16_t)(qualified_input_current_ma - config->iindpm_margin_ma);
-  if(available_ma>config->iindpm_cap_ma) available_ma=config->iindpm_cap_ma;
+  if (!input_current_model_valid(config) ||
+      qualified_input_current_ma <= config->iindpm_margin_ma) return 0u;
+  uint32_t available_ma=qualified_input_current_ma-config->iindpm_margin_ma;
+  /* Work in nominal-shunt current units. Both divisions round down so
+   * the positive gain/offset and lowest resistance cannot exceed the input. */
+  uint32_t sensed_ma=available_ma*config->input_shunt_min_permille/1000u;
+  if(sensed_ma<=config->input_current_offset_ma) return 0u;
+  uint32_t command_ma=(sensed_ma-config->input_current_offset_ma)*1000u/
+                       config->input_current_gain_max_permille;
+  if(command_ma>config->iindpm_cap_ma) command_ma=config->iindpm_cap_ma;
   uint16_t step=config->iindpm_step_ma ? config->iindpm_step_ma : 1u;
-  available_ma=(uint16_t)(available_ma/step*step);
-  return available_ma>=config->minimum_iindpm_ma ? available_ma : 0u;
+  command_ma=command_ma/step*step;
+  return command_ma>=config->minimum_iindpm_ma ? (uint16_t)command_ma : 0u;
+}
+
+uint16_t ec_policy_charger_current_floor_ma(const ec_policy_config_t *config,
+                                           uint16_t command_ma) {
+  if(!input_current_model_valid(config)) return 0u;
+  uint32_t sensed_ma=(uint32_t)command_ma*config->input_current_gain_min_permille/1000u;
+  if(sensed_ma<=config->input_current_offset_ma) return 0u;
+  return (uint16_t)((sensed_ma-config->input_current_offset_ma)*1000u/
+                    config->input_shunt_max_permille);
 }
 
 uint32_t ec_policy_external_input_power_mw(const ec_policy_config_t *config,
@@ -228,7 +250,7 @@ uint32_t ec_policy_external_input_power_mw(const ec_policy_config_t *config,
 {
   uint16_t limit=ec_policy_source_iindpm_ma(config,source,mv,ma);
   if(config && config->raw_aon_reserve_mw) mv=source_voltage_floor(source,mv,ma);
-  return (uint32_t)mv*limit/1000u;
+  return (uint32_t)mv*ec_policy_charger_current_floor_ma(config,limit)/1000u;
 }
 
 uint32_t ec_policy_pd_input_power_mw(const ec_policy_config_t *config,
@@ -732,6 +754,9 @@ static void apply_load_policy(ec_controller_t *controller,
     charge_budget_mw = minimum_u32(
         charge_budget_mw, controller->config.maximum_charge_budget_mw);
   }
+  /* A subminimum budget is not a valid charger command, even with the
+   * hardware enable low. Zero also clears the previous programmed budget. */
+  if(charge_budget_mw<controller->config.minimum_charge_budget_mw) charge_budget_mw=0u;
   controller->outputs.charge_power_budget_mw = charge_budget_mw;
 
   controller->outputs.charger_enable =

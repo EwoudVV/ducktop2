@@ -9,6 +9,7 @@ from verify_electrical_calculations import (
     component_values, direct_capacitance, divider_corners, left_5v_checks,
     procurement_checks, resistor, source_window_checks,
     lm706_checks, usb5_shunt_bounds,
+    EXACT_PASSIVES,
 )
 
 
@@ -21,6 +22,28 @@ def parts(*rows):
 
 
 class ElectricalCalculationTests(unittest.TestCase):
+    def test_oscillator_capacitor_pairs_use_absolute_tolerance(self):
+        values=parts(('C32','10p','C0603C100C5GACTU'),
+                     ('C33','10p','C0603C100C5GACTU'),
+                     ('C34','6.8p','C0603C689C5GACTU'),
+                     ('C35','6.8p','C0603C689C5GACTU'))
+        for ref in values:
+            mpn=values.mpn(ref)
+            values.parts[ref]=(mpn,'Capacitor_SMD:C_0603_1608Metric')
+            self.assertAlmostEqual(values.number(ref)*values.tolerance(ref)/1e-12,.25)
+            self.assertEqual(EXACT_PASSIVES[mpn][2],50)
+        self.assertEqual(procurement_checks('center',values),[])
+
+    def test_oscillator_capacitor_wrong_value_or_package_is_rejected(self):
+        values=parts(('C32','100p','C0603C100C5GACTU'),
+                     ('C34','6.8p','C0603C689C5GACTU'))
+        values.parts['C32']=(values.mpn('C32'),'Capacitor_SMD:C_0603_1608Metric')
+        values.parts['C34']=(values.mpn('C34'),'Capacitor_SMD:C_0402_1005Metric')
+        values.number('C32');values.number('C34')
+        failures=procurement_checks('center',values)
+        self.assertEqual({check.name for check in failures},
+                         {'center C32 procurement identity','center C34 procurement identity'})
+
     def lm_values(self, inductor="XAL7070-682MEC"):
         values=parts(("R1712","54.9k 0.1%","TNPU060354K9HZEN00"),
                      ("R1713","10.2k 0.1%","TNPU060310K2HZEN00"),

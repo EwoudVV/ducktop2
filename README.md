@@ -25,21 +25,21 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 26 september 2026. the carrier interface is being switched to Mu
+updated 30 september 2026. the carrier interface is being switched to Mu
 Ultra: 226V first, with a later 256V upgrade. the new pin map moves HDMI to
 TCP2, reallocates USB and gives NVMe a real clock-request connection. the
-100 W USB-C power path, cooling and firmware qualification still need work. the
+100 W power circuit is saved, but placement, routing, cooling and hardware
+qualification still need work. the
 [module requirements](manufacturing/lattepanda_mu_bios_release.md) separate
 that target from the current CAD and the remaining hardware checks.
 
-the audit repairs are still in progress. both
-I/O boards now have the revised power circuits, separate power wiring, and
-new signal connectors in their saved schematics and layouts. the right
-board also has the HDMI pair corrections and repairs to the USB routing i
-started. compatible existing routing is preserved. the center
-revision is also integrated, with its power-support placement corrected and
-its edges moved inward for board gaps. the main-board routing and final
-project checks still need work.
+the revised power circuits, separate power wiring and signal connectors are
+saved on all three main boards. the new placement pass uses both sides:
+local capacitors sit near their actual supply pins, USB protection follows
+its connector, and the audio and maker circuits have been regrouped.
+the connector positions, mounting points and board gaps are preserved.
+the existing PCIe routing is intact. USB, HDMI and Ethernet route repairs
+are in progress, and most main-board routing still remains.
 
 the keyboard now has per-key RGB on four layers, with its schematic and
 placement ready for routing. the previous tracks and pours are cleared. the key positions,
@@ -51,7 +51,8 @@ mechanical drawing. the radio still needs routing.
 the four-layer BMS is routed again with the new terminals, raw-pack connector
 and fuse. the routing cleanup is finished, with zero unconnected items and
 zero physical DRC errors. [layout checks](verification/bms-layout.md) cover
-the current saved board. the previous PCBWay package still needs regenerating.
+the current saved board. the PCBWay quote package has been regenerated and
+checked against the saved board.
 the three main-board sections are eight layers,
 and most of their routing still remains. [power revision status](docs/hardware/power-revision.md)
 records what is saved and what is still unfinished.

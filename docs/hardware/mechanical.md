@@ -82,12 +82,32 @@ Framework 13 hinges are the working choice; use the actual brackets and
 full sweep to place the display cable and case cutouts.
 
 regenerate `mechanical/board-layout.svg` with `gen/export_board_assembly.py`
-using KiCad's Python after the revised BMS is saved. the exporter checks
+using KiCad's Python after a board changes. the exporter checks
 both BMS connector maps and the M.2 socket-to-retainer offsets, and includes
-front- and back-side connector courtyards. the existing public export still
-needs that refresh.
+front- and back-side connector courtyards.
 `mechanical/board-placement.json` stores the installed board transforms;
 `mechanical/board-datums.json` is the generated mounting and connector data.
+
+`gen/export_power_placement.py --all-components` exports every footprint on
+the three main boards to `mechanical/component-placement.csv` and `.json`.
+it records native and installed XY, rotation, side, board thickness and
+the solder-plane Z. reviewed manufacturer heights are included; missing
+heights stay blank or null. a courtyard is an assembly-spacing outline,
+not a measured component body. use the source hashes to check that the
+case model is using the current boards. omit `--all-components` for the
+separate power-part export. `--check` checks either export without writing.
+
+`--study-top-z 8` adds the current study datum to those local coordinates.
+it does not approve that mounting height or the old 35 mm enclosure. add
+solder, assembly tolerances, supports and service space before freezing
+the case. backside parts extend below the board's back solder plane.
+
+the 30 september placement has 250 fitted parts on the back of the center
+board, 103 on the left and 39 on the right. all 392 have checked maximum
+package heights of 1.8 mm or less. the export includes a separate 0.3 mm
+underside assembly allowance. this still needs checking against the actual
+floor, supports, screws and cable clamps. some front-side package heights
+remain unverified in the export.
 
 the same export refreshes board outlines and parts linked to a PCB in
 `mechanical/floorplan.json`. the layout planner is

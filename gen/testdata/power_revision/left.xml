@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='utf-8'?>
+<export version="E">
+  <components>
+    <comp ref="C2683">
+      <value>1u 50V U1800 input bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="C2684">
+      <value>1u 50V U1803 input bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="U1800">
+      <value>TPS2553DDBVR USB3-A VBUS branch 1.3A</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        <field name="MPN">TPS2553DDBVR</field>
+      </fields>
+    </comp>
+    <comp ref="U1803">
+      <value>TPS2553DDBVR USB2-A VBUS branch 1.3A</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        <field name="MPN">TPS2553DDBVR</field>
+      </fields>
+    </comp>
+    <comp ref="C2682">
+      <value>100n 50V qualifier bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="R2086">
+      <value>150k sink PG pull-up; valid with input off</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07150KL</field>
+      </fields>
+    </comp>
+    <comp ref="U720">
+      <value>TPS259827ONRGER PD1 sink breaker</value>
+      <footprint>ducktop2:Texas_RGE0024M_QFN24_4x4_2EP</footprint>
+      <fields>
+        <field name="MPN">TPS259827ONRGER</field>
+      </fields>
+    </comp>
+    <comp ref="U2006">
+      <value>SN74LVC1G08 DFP and attached qualifier</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        <field name="MPN">SN74LVC1G08DBVR</field>
+      </fields>
+    </comp>
+  </components>
+  <nets>
+    <net name="/MCU_3V3">
+      <node ref="R2086" pin="1" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_EFUSE_DVDT">
+      <node ref="U720" pin="15" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_EFUSE_ILIM">
+      <node ref="U720" pin="8" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_EFUSE_IMON">
+      <node ref="U720" pin="9" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_EFUSE_SHDN">
+      <node ref="U720" pin="6" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_GPIO_ATTACH">
+      <node ref="U2006" pin="2" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_GPIO_DFP">
+      <node ref="U2006" pin="1" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_HOST_ATTACHED">
+      <node ref="U2006" pin="4" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_PPHV">
+      <node ref="U720" pin="1" />
+      <node ref="U720" pin="16" />
+      <node ref="U720" pin="2" />
+      <node ref="U720" pin="25" />
+      <node ref="U720" pin="3" />
+    </net>
+    <net name="/PD1 Dual-Role/PD1_VBUS_GATED">
+      <node ref="U720" pin="17" />
+      <node ref="U720" pin="18" />
+      <node ref="U720" pin="19" />
+      <node ref="U720" pin="20" />
+      <node ref="U720" pin="21" />
+      <node ref="U720" pin="22" />
+      <node ref="U720" pin="23" />
+      <node ref="U720" pin="24" />
+    </net>
+    <net name="/PD1_EFUSE_PG">
+      <node ref="R2086" pin="2" />
+      <node ref="U720" pin="13" />
+    </net>
+    <net name="/SYS_3V3">
+      <node ref="C2682" pin="1" />
+      <node ref="U2006" pin="5" />
+    </net>
+    <net name="/USB Hub + Ports/J24_5V_PRE">
+      <node ref="U1800" pin="6" />
+    </net>
+    <net name="/USB Hub + Ports/J24_ILIM">
+      <node ref="U1800" pin="5" />
+    </net>
+    <net name="/USB Hub + Ports/J25_5V_PRE">
+      <node ref="U1803" pin="6" />
+    </net>
+    <net name="/USB Hub + Ports/J25_ILIM">
+      <node ref="U1803" pin="5" />
+    </net>
+    <net name="/USB Hub + Ports/USB_J24_SWITCH_EN">
+      <node ref="U1800" pin="3" />
+    </net>
+    <net name="/USB Hub + Ports/USB_J25_SWITCH_EN">
+      <node ref="U1803" pin="3" />
+    </net>
+    <net name="/USB_PORT_5V">
+      <node ref="C2683" pin="1" />
+      <node ref="C2684" pin="1" />
+      <node ref="U1800" pin="1" />
+      <node ref="U1803" pin="1" />
+    </net>
+    <net name="GND">
+      <node ref="C2682" pin="2" />
+      <node ref="C2683" pin="2" />
+      <node ref="C2684" pin="2" />
+      <node ref="U1800" pin="2" />
+      <node ref="U1803" pin="2" />
+      <node ref="U2006" pin="3" />
+      <node ref="U720" pin="10" />
+      <node ref="U720" pin="11" />
+      <node ref="U720" pin="12" />
+      <node ref="U720" pin="14" />
+      <node ref="U720" pin="26" />
+      <node ref="U720" pin="4" />
+      <node ref="U720" pin="5" />
+    </net>
+    <net name="unconnected-(U720-ITIMER-Pad7)">
+      <node ref="U720" pin="7" />
+    </net>
+    <net name="unconnected-(U1800-~{FAULT}-Pad4)">
+      <node ref="U1800" pin="4" />
+    </net>
+    <net name="unconnected-(U1803-~{FAULT}-Pad4)">
+      <node ref="U1803" pin="4" />
+    </net>
+  </nets>
+</export>

@@ -283,7 +283,7 @@ def build(sheet_symbol_uuid):
                 extra_props={"Manufacturer": "Vishay" if mpn.startswith("TNP") else "Yageo", "MPN": mpn})
 
     for ref, value, net, x, y, fp, mpn in (
-        ("C740", "100n 10V INTVCC", "MAIN_SEL_INTVCC", 475, 275, "C_100n", "GRM188R71A104KA61D"),
+        ("C740", "100n 50V INTVCC", "MAIN_SEL_INTVCC", 475, 275, "C_100n", "GRM188R71H104KA93D"),
         ("C741", "1n 50V C0G selector validation", "MAIN_SEL_TMR", 515, 275, "C_0402", "GRM1555C1H102JA01D"),
         ("C742", "100n 50V USB V1 local", "USB_PD_SELECTED", 555, 275, "C_100n", "GRM188R71H104KA93D"),
         ("C743", "100n 50V USB VS1 local", "USB_MAIN_FET_COMMON", 475, 292.8, "C_100n", "GRM188R71H104KA93D"),
@@ -291,7 +291,7 @@ def build(sheet_symbol_uuid):
         ("C745", "100n 50V AUX VS2 local", "ST2_AUX_FET_COMMON", 555, 292.8, "C_100n", "GRM188R71H104KA93D"),
         ("C747", "100n 50V stage2 VS1 local", "ST2_MAIN_FET_COMMON", 635, 292.8, "C_100n", "GRM188R71H104KA93D"),
         ("C748", "100n 50V stage2 out local", "SEL_STAGE2", 615, 275, "C_100n", "GRM188R71H104KA93D"),
-        ("C749", "100n 10V stage2 INTVCC", "ST2_SEL_INTVCC", 475, 505, "C_100n", "GRM188R71A104KA61D"),
+        ("C749", "100n 50V stage2 INTVCC", "ST2_SEL_INTVCC", 475, 505, "C_100n", "GRM188R71H104KA93D"),
     ):
         kind = "hier" if net == "USB_PD_SELECTED" else "local"
         s.place(ref, "C", value, x, y, footprint=FOOTPRINTS[fp],
@@ -312,6 +312,11 @@ def build(sheet_symbol_uuid):
             footprint=FOOTPRINTS["C_100u_35V_hybrid"],
             pin_nets={"1": ("VBUS_COMBINED", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Panasonic", "MPN": "EEHZK1V101XP"})
+    s.place("C2685", "C", "100n 50V U15 V2 local", 685.8, 275.59,
+            footprint=FOOTPRINTS["C_100n"], text_right=True,
+            pin_nets={"1": ("SEL_STAGE2", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D",
+                         "DecouplingFor": "U15 V2"})
 
     s.gnd(400, 120)
     # The switched rails are physically driven through passive external FETs;

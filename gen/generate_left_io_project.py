@@ -33,6 +33,7 @@ PROJECT_NAME = "left_io"
 def build_left_usb_sheet(sheet_symbol_uuid):
     """Hub + source ports (J22/J23) + USB-A cluster (J24/J25)."""
     s = b.Sheet(f"/{sheet_symbol_uuid}")
+    s.paper = "A0"
     s.refcounters["#PWR"] = 1700
     s.refcounters["#FLG"] = 1700
     s.text(20, 12.7, "== Left I/O: USB7206C hub, source ports, USB-A spare ports ==")

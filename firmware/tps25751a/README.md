@@ -50,3 +50,7 @@ source tolerance, current regulation and always-on draw.
 [physical testing](../release/README.md) still has to establish negotiation,
 role changes, current limits, USB signaling and source-path sequencing.
 all charging, boot and USB load qualification gates remain off.
+
+the grounded unused GPIOs follow the TI pin guidance. the configuration checker
+also verifies their initial levels, pull settings and event mappings, so a
+future profile cannot quietly drive one of those pins high.

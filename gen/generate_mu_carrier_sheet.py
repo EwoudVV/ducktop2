@@ -333,7 +333,7 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             ("Q2610","MU12_HS_GATE","MU12_SW1","VSYS",955),
             ("Q2611","MU12_LS_GATE","GND","MU12_SW1",1030)):
         s.place(ref,"Q_NMOS_123S_4G_5678D","CSD17577Q3A buck FET",x,240,
-            footprint="Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET",
+            footprint="ducktop2:CSD17577Q3A_DNH",
             pin_nets={"1":(source,"hier" if source=="VSYS" else "local"),
                       "2":(source,"local"),"3":(source,"local"),
                       "4":(gate,"local"),"5":(drain,"hier" if drain=="VSYS" else "local")},

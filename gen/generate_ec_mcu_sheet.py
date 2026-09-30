@@ -83,9 +83,13 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
     s.place("C290", "C", "10n (VDDA high-frequency)", *c1.next(), footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
     s.place("C29", "C", "2.2u (VCAP_1, mandatory)", *c1.next(), footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("VCAP1_NODE", "local"), "2": ("GND", "local")})
+            pin_nets={"1": ("VCAP1_NODE", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM21BR71C225KA12L"},
+            datasheet="https://www.farnell.com/datasheets/4088041.pdf")
     s.place("C30", "C", "2.2u (VCAP_2, mandatory)", *c1.next(), footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("VCAP2_NODE", "local"), "2": ("GND", "local")})
+            pin_nets={"1": ("VCAP2_NODE", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRM21BR71C225KA12L"},
+            datasheet="https://www.farnell.com/datasheets/4088041.pdf")
 
     # ---------------- NRST / BOOT0 ----------------
     s.text(20, 170, "-- NRST filter/button, BOOT0 strap --")

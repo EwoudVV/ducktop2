@@ -140,6 +140,11 @@ def build(sheet_symbol_uuid):
             extra_props={"Manufacturer": "Texas Instruments", "MPN": "TPS22975NDSGR",
                          "Datasheet": "https://www.ti.com/lit/ds/symlink/tps22975.pdf",
                          "PowerOffContract": "OUTPUT_OFF_WHEN_MU_HOST_ACTIVE_LOW; NO_REVERSE_BLOCK_GUARANTEE"})
+    s.place("C2680", "C", "1u 50V U55 input bypass", 405, 142.24,
+            footprint=FOOTPRINTS["C_100n"], text_right=True,
+            pin_nets={"1": ("SYS_3V3", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Murata", "MPN": "GRT188R61H105ME13D",
+                         "DecouplingFor": "U55 VIN and VBIAS"})
     s.place("C165", "C", "4.7n HDMI 3V3 switch rise-time", 455, 101.6,
             footprint=FOOTPRINTS["C_0402"],
             pin_nets={"1": ("HDMI_3V3_SWITCH_CT", "local"), "2": ("GND", "local")})

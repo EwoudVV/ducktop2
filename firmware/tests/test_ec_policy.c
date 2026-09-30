@@ -416,7 +416,7 @@ static void test_source_aware_charge_budget(void) {
   inputs.applied_mu_edp_budget_mw = 14000u;
   inputs.mu_12v_pg = true;
   ec_controller_step(&controller, &inputs, 24u);
-  CHECK(controller.outputs.charge_power_budget_mw == 2312u);
+  CHECK(controller.outputs.charge_power_budget_mw == 0u); /* below minimum, no unusable command */
   CHECK(!controller.outputs.charger_enable);
   CHECK(controller.outputs.mu_12v_enable);
   CHECK(controller.fault == EC_FAULT_NONE);

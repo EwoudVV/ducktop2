@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='utf-8'?>
+<export version="E">
+  <components>
+    <comp ref="C2681">
+      <value>100n 50V qualifier bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="R2096">
+      <value>150k sink PG pull-up; valid with input off</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07150KL</field>
+      </fields>
+    </comp>
+    <comp ref="U721">
+      <value>TPS259827ONRGER PD2 sink breaker</value>
+      <footprint>ducktop2:Texas_RGE0024M_QFN24_4x4_2EP</footprint>
+      <fields>
+        <field name="MPN">TPS259827ONRGER</field>
+      </fields>
+    </comp>
+    <comp ref="U2016">
+      <value>SN74LVC1G08 DFP and attached qualifier</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        <field name="MPN">SN74LVC1G08DBVR</field>
+      </fields>
+    </comp>
+    <comp ref="C2680">
+      <value>1u 50V U55 input bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="U55">
+      <value>TPS22975NDSGR host-active SYS_3V3 switch</value>
+      <footprint>Package_SON:Texas_DSG0008A_WSON-8-1EP_2x2mm_P0.5mm_EP0.9x1.6mm</footprint>
+      <fields>
+        <field name="MPN">TPS22975NDSGR</field>
+      </fields>
+    </comp>
+  </components>
+  <nets>
+    <net name="/HDMI/HDMI_3V3_SWITCH_CT">
+      <node ref="U55" pin="6" />
+    </net>
+    <net name="/HDMI/HDMI_HOST_3V3">
+      <node ref="U55" pin="7" />
+      <node ref="U55" pin="8" />
+    </net>
+    <net name="/MCU_3V3">
+      <node ref="R2096" pin="1" />
+    </net>
+    <net name="/MU_HOST_ACTIVE">
+      <node ref="U55" pin="3" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_EFUSE_DVDT">
+      <node ref="U721" pin="15" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_EFUSE_ILIM">
+      <node ref="U721" pin="8" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_EFUSE_IMON">
+      <node ref="U721" pin="9" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_EFUSE_SHDN">
+      <node ref="U721" pin="6" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_GPIO_ATTACH">
+      <node ref="U2016" pin="2" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_GPIO_DFP">
+      <node ref="U2016" pin="1" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_HOST_ATTACHED">
+      <node ref="U2016" pin="4" />
+    </net>
+    <net name="/PD2 Dual-Role/PD2_PPHV">
+      <node ref="U721" pin="1" />
+      <node ref="U721" pin="16" />
+      <node ref="U721" pin="2" />
+      <node ref="U721" pin="25" />
+      <node ref="U721" pin="3" />
+    </net>
+    <net name="/PD2_EFUSE_PG">
+      <node ref="R2096" pin="2" />
+      <node ref="U721" pin="13" />
+    </net>
+    <net name="/PD2_VBUS_GATED">
+      <node ref="U721" pin="17" />
+      <node ref="U721" pin="18" />
+      <node ref="U721" pin="19" />
+      <node ref="U721" pin="20" />
+      <node ref="U721" pin="21" />
+      <node ref="U721" pin="22" />
+      <node ref="U721" pin="23" />
+      <node ref="U721" pin="24" />
+    </net>
+    <net name="/SYS_3V3">
+      <node ref="C2680" pin="1" />
+      <node ref="C2681" pin="1" />
+      <node ref="U2016" pin="5" />
+      <node ref="U55" pin="1" />
+      <node ref="U55" pin="2" />
+      <node ref="U55" pin="4" />
+    </net>
+    <net name="GND">
+      <node ref="C2680" pin="2" />
+      <node ref="C2681" pin="2" />
+      <node ref="U2016" pin="3" />
+      <node ref="U55" pin="5" />
+      <node ref="U55" pin="9" />
+      <node ref="U721" pin="10" />
+      <node ref="U721" pin="11" />
+      <node ref="U721" pin="12" />
+      <node ref="U721" pin="14" />
+      <node ref="U721" pin="26" />
+      <node ref="U721" pin="4" />
+      <node ref="U721" pin="5" />
+    </net>
+    <net name="unconnected-(U721-ITIMER-Pad7)">
+      <node ref="U721" pin="7" />
+    </net>
+  </nets>
+</export>

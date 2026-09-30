@@ -8,17 +8,37 @@ these profiles belong to the ISL9241 redesign, which is still being
 integrated into the schematics and boards. the old BQ25798 hardware must
 not use them. no controller has been programmed with this revision.
 
-the target EC caps the programmed charger input at 4.4 A. it also reserves
-250 mA on PD inputs and 6.5 W for the separate always-on branch. the reserve
-is converted to current using the source-voltage floor before choosing a
-charger limit, then rounded down to an ISL9241 register step. smaller
-contracts therefore get a smaller charger limit, even when the ceiling
-is 4.4 A.
+the EC first reserves 250 mA on PD inputs and 6.5 W for standby. it uses
+a source-voltage floor that includes supply tolerance, cable drop and the
+raw-input wiring. it then derates the charger command for current-sense
+resistance and charger error, rounds down to a 4 mA register step, and
+keeps the 4.4 A command ceiling.
 
-those are design allocations. the hardware tests still need to establish
-maximum actual charger current, always-on demand, cable and board losses,
-current-sense error and response during a contract change. the difference
-between a contract and a programmed limit is not all available for loads.
+the current-transfer screen uses 0.919..1.081 of nominal shunt resistance,
+0.975..1.025 gain and a 50 mA offset in nominal-shunt units. these bounds
+include the named datasheet points but still require board qualification
+across the actual voltage, current, temperature and transient range.
+`DUCKTOP2_CHARGER_CURRENT_QUALIFIED` remains off. boot, charging and USB
+load qualification cannot bypass it.
+
+| input contract | charger command | lower current used for the power budget |
+| --- | ---: | ---: |
+| 5 V / 3 A | 992 mA | 848 mA |
+| 9 V / 3 A | 1676 mA | 1465 mA |
+| 15 V / 3 A | 1984 mA | 1742 mA |
+| 20 V / 3 A | 2096 mA | 1843 mA |
+| 20 V / 5 A | 3884 mA | 3456 mA |
+
+these are conservative design settings, not measured output ratings. the
+100 W port rating does not promise 100 W for loads. converter loss, the
+remaining system demand and charging come out of the available power.
+the 60 W Mu/display setting is a ceiling, not a minimum entitlement.
+
+charging gets its own current-error calculation using the battery shunt,
+regulation error and the maximum charging voltage. a qualified 500 mA
+pack ceiling is therefore not written directly as a 500 mA command. the
+64 mA precharge setting and its error are included. budgets below 1850 mW
+are cleared to zero, so the driver is not given an unusable small command.
 
 `tools/calculate_pd_headroom.py` takes explicit minimum and maximum bounds.
 it checks source current left after the charger, voltage lost in the path,

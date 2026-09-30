@@ -1,0 +1,2396 @@
+<?xml version='1.0' encoding='utf-8'?>
+<export version="E">
+  <components>
+    <comp ref="A1">
+      <value>TE 2309411-1 Mu Ultra host socket/interface</value>
+      <footprint>Module_LattePanda:LattePanda_Module_H8.0mm_Horizontal</footprint>
+      <fields>
+        <field name="MPN">2309411-1</field>
+      </fields>
+    </comp>
+    <comp ref="C10">
+      <value>1u 50V input local</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="C11">
+      <value>1u 50V system local</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="C2260">
+      <value>100n 50V AND bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C2600">
+      <value>4.7u 50V X7R DCIN</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">GRM31CR71H475KA12L</field>
+      </fields>
+    </comp>
+    <comp ref="C2601">
+      <value>4.7u 10V X7R VDDP</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR71A475KA73L</field>
+      </fields>
+    </comp>
+    <comp ref="C2602">
+      <value>1n 50V C0G PROG filter</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1555C1H102JA01D</field>
+      </fields>
+    </comp>
+    <comp ref="C2603">
+      <value>100n 50V input sense filter</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM155R71H104ME14D</field>
+      </fields>
+    </comp>
+    <comp ref="C2604">
+      <value>100n 50V battery sense filter</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM155R71H104ME14D</field>
+      </fields>
+    </comp>
+    <comp ref="C2605">
+      <value>22n 50V C0G forward compensation</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">C0805C223J5GACTU</field>
+      </fields>
+    </comp>
+    <comp ref="C2606">
+      <value>47n 50V X7R reverse compensation</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H473KA61D</field>
+      </fields>
+    </comp>
+    <comp ref="C2607">
+      <value>220n 50V X7R current monitor</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H224KAC4D</field>
+      </fields>
+    </comp>
+    <comp ref="C2608">
+      <value>100u 35V hybrid system bulk</value>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <fields>
+        <field name="MPN">EEHZK1V101XP</field>
+      </fields>
+    </comp>
+    <comp ref="C2609">
+      <value>100u 35V hybrid system bulk</value>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <fields>
+        <field name="MPN">EEHZK1V101XP</field>
+      </fields>
+    </comp>
+    <comp ref="C2610">
+      <value>100u 35V hybrid output bulk</value>
+      <footprint>Capacitor_SMD:CP_Elec_6.3x7.7</footprint>
+      <fields>
+        <field name="MPN">EEHZK1V101XP</field>
+      </fields>
+    </comp>
+    <comp ref="C2640">
+      <value>1u 50V soft start; about 145ms nominal</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRT188R61H105ME13D</field>
+      </fields>
+    </comp>
+    <comp ref="C2641">
+      <value>100n 50V bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C2642">
+      <value>100n 50V bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C2643">
+      <value>100n 50V bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C2670">
+      <value>100n 50V local VCC bypass</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM155R71H104ME14D</field>
+      </fields>
+    </comp>
+    <comp ref="C2685">
+      <value>100n 50V U15 V2 local</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C291">
+      <value>22u 25V X7R MCU_3V3 output; TI characterized part</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN">GRM32ER71E226KE15L</field>
+      </fields>
+    </comp>
+    <comp ref="C36">
+      <value>10u 50V X7R VIN</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">CGA5L1X7R1H106K160AC</field>
+      </fields>
+    </comp>
+    <comp ref="C37">
+      <value>100n 50V X7R VIN HF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C38">
+      <value>100n (BOOT cap)</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C39">
+      <value>22u 25V X7R MCU_3V3 output; TI characterized part</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="MPN">GRM32ER71E226KE15L</field>
+      </fields>
+    </comp>
+    <comp ref="C7">
+      <value>470n 25V X7R bootstrap</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">C1608X7R1E474K080AE</field>
+      </fields>
+    </comp>
+    <comp ref="C701">
+      <value>10u 50V X7R input</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">CGA5L1X7R1H106K160AC</field>
+      </fields>
+    </comp>
+    <comp ref="C702">
+      <value>10u 50V X7R input</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">CGA5L1X7R1H106K160AC</field>
+      </fields>
+    </comp>
+    <comp ref="C703">
+      <value>10u 50V X7R input</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">CGA5L1X7R1H106K160AC</field>
+      </fields>
+    </comp>
+    <comp ref="C704">
+      <value>10u 50V X7R input</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">CGA5L1X7R1H106K160AC</field>
+      </fields>
+    </comp>
+    <comp ref="C705">
+      <value>10u 50V X7R input</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">CGA5L1X7R1H106K160AC</field>
+      </fields>
+    </comp>
+    <comp ref="C706">
+      <value>10u 25V X7R system</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">GRM31CR71E106KA12L</field>
+      </fields>
+    </comp>
+    <comp ref="C707">
+      <value>10u 25V X7R system</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">GRM31CR71E106KA12L</field>
+      </fields>
+    </comp>
+    <comp ref="C708">
+      <value>10u 25V X7R system</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">GRM31CR71E106KA12L</field>
+      </fields>
+    </comp>
+    <comp ref="C709">
+      <value>10u 25V X7R system</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">GRM31CR71E106KA12L</field>
+      </fields>
+    </comp>
+    <comp ref="C710">
+      <value>10u 25V X7R system</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">GRM31CR71E106KA12L</field>
+      </fields>
+    </comp>
+    <comp ref="C711">
+      <value>100n 50V battery voltage filter</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM155R71H104ME14D</field>
+      </fields>
+    </comp>
+    <comp ref="C712">
+      <value>10u 25V X7R battery</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">GRM31CR71E106KA12L</field>
+      </fields>
+    </comp>
+    <comp ref="C713">
+      <value>10u 25V X7R battery</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="MPN">GRM31CR71E106KA12L</field>
+      </fields>
+    </comp>
+    <comp ref="C740">
+      <value>100n 50V INTVCC</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C749">
+      <value>100n 50V stage2 INTVCC</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+      </fields>
+    </comp>
+    <comp ref="C771">
+      <value>10n 50V C0G COMP</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1885C1H103JA01D</field>
+      </fields>
+    </comp>
+    <comp ref="C772">
+      <value>100p 50V C0G COMP HF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1555C1H101JA01D</field>
+      </fields>
+    </comp>
+    <comp ref="C8">
+      <value>470n 25V X7R bootstrap</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">C1608X7R1E474K080AE</field>
+      </fields>
+    </comp>
+    <comp ref="C9">
+      <value>4.7u 10V X7R VDD</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR71A475KA73L</field>
+      </fields>
+    </comp>
+    <comp ref="D2600">
+      <value>BAT54WS bias OR</value>
+      <footprint>Diode_SMD:D_SOD-323</footprint>
+      <fields>
+        <field name="MPN">BAT54WS-7-F</field>
+      </fields>
+    </comp>
+    <comp ref="D2601">
+      <value>BAT54WS bias OR</value>
+      <footprint>Diode_SMD:D_SOD-323</footprint>
+      <fields>
+        <field name="MPN">BAT54WS-7-F</field>
+      </fields>
+    </comp>
+    <comp ref="D2640">
+      <value>BAT54S AUX ADC rail clamps</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">BAT54S,215</field>
+      </fields>
+    </comp>
+    <comp ref="L1">
+      <value>2.2uH 20%; 31A Isat30</value>
+      <footprint>ducktop2:Coilcraft_XGL1060_Center</footprint>
+      <fields>
+        <field name="MPN">XGL1060-222MEC</field>
+      </fields>
+    </comp>
+    <comp ref="L3">
+      <value>10uH 20% 6.2A Isat30; 1.5A rail envelope</value>
+      <footprint>ducktop2:Coilcraft_XGL6030</footprint>
+      <fields>
+        <field name="MPN">XGL6030-103MEC</field>
+      </fields>
+    </comp>
+    <comp ref="L750">
+      <value>6.8uH 18.4A Isat30 / 10.9A Irms20; 6mm max</value>
+      <footprint>ducktop2:Coilcraft_XGL1060_Center</footprint>
+      <fields>
+        <field name="MPN">XGL1060-682MEC</field>
+      </fields>
+    </comp>
+    <comp ref="LED1">
+      <value>Adapter absent</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">APT1608SGC</field>
+      </fields>
+    </comp>
+    <comp ref="Q25">
+      <value>CSD17575Q3 battery power-path FET</value>
+      <footprint>ducktop2:CSD17575Q3_DQG</footprint>
+      <fields>
+        <field name="MPN">CSD17575Q3</field>
+      </fields>
+    </comp>
+    <comp ref="Q2600">
+      <value>CSD17577Q3A 30V switching FET</value>
+      <footprint>ducktop2:CSD17577Q3A_DNH</footprint>
+      <fields>
+        <field name="MPN">CSD17577Q3A</field>
+      </fields>
+    </comp>
+    <comp ref="Q2601">
+      <value>CSD17577Q3A 30V switching FET</value>
+      <footprint>ducktop2:CSD17577Q3A_DNH</footprint>
+      <fields>
+        <field name="MPN">CSD17577Q3A</field>
+      </fields>
+    </comp>
+    <comp ref="Q2602">
+      <value>CSD17577Q3A 30V switching FET</value>
+      <footprint>ducktop2:CSD17577Q3A_DNH</footprint>
+      <fields>
+        <field name="MPN">CSD17577Q3A</field>
+      </fields>
+    </comp>
+    <comp ref="Q2603">
+      <value>CSD17577Q3A 30V switching FET</value>
+      <footprint>ducktop2:CSD17577Q3A_DNH</footprint>
+      <fields>
+        <field name="MPN">CSD17577Q3A</field>
+      </fields>
+    </comp>
+    <comp ref="Q2604">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">BSS138LT1G</field>
+      </fields>
+    </comp>
+    <comp ref="Q2605">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">BSS138LT1G</field>
+      </fields>
+    </comp>
+    <comp ref="Q2610">
+      <value>CSD17577Q3A buck FET</value>
+      <footprint>ducktop2:CSD17577Q3A_DNH</footprint>
+      <fields>
+        <field name="MPN">CSD17577Q3A</field>
+      </fields>
+    </comp>
+    <comp ref="Q2611">
+      <value>CSD17577Q3A buck FET</value>
+      <footprint>ducktop2:CSD17577Q3A_DNH</footprint>
+      <fields>
+        <field name="MPN">CSD17577Q3A</field>
+      </fields>
+    </comp>
+    <comp ref="Q2644">
+      <value>BSS138 AUX discharge</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">BSS138LT1G</field>
+      </fields>
+    </comp>
+    <comp ref="Q700">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">BSS138LT1G</field>
+      </fields>
+    </comp>
+    <comp ref="Q702">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">BSS138LT1G</field>
+      </fields>
+    </comp>
+    <comp ref="R12">
+      <value>2.2k adapter-status LED</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-072K2L</field>
+      </fields>
+    </comp>
+    <comp ref="R13">
+      <value>100k throttle-release default-low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R14">
+      <value>100k NTC-inhibit default-on</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R16">
+      <value>10k fixed-valid NTC resistance</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+      </fields>
+    </comp>
+    <comp ref="R18">
+      <value>2.21k 0.1% 25ppm 3S / 724kHz / 200mA startup</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">TNPW04022K21BEED</field>
+      </fields>
+    </comp>
+    <comp ref="R2260">
+      <value>1k temperature-permit input</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2261">
+      <value>100k temperature-permit default-low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2262">
+      <value>4.7k charge-permit default-low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-074K7L</field>
+      </fields>
+    </comp>
+    <comp ref="R2263">
+      <value>100k pack-fault default-low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2600">
+      <value>100k BGATE to source</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2601">
+      <value>10R DCIN filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2602">
+      <value>4.7R VDDP filter</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-074R7L</field>
+      </fields>
+    </comp>
+    <comp ref="R2603">
+      <value>0R gate link</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603JR-070RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2604">
+      <value>0R gate link</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603JR-070RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2605">
+      <value>0R gate link</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603JR-070RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2606">
+      <value>0R gate link</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603JR-070RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2607">
+      <value>2R input sense filter</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-072RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2608">
+      <value>1k forward compensation</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-071KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2609">
+      <value>1k reverse compensation</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-071KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2610">
+      <value>4.53k current monitor filter</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-074K53L</field>
+      </fields>
+    </comp>
+    <comp ref="R2611">
+      <value>20k PSYS monitor load</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-0720KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2612">
+      <value>100k throttle default-on</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2613">
+      <value>1R gate resistor</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2614">
+      <value>1R gate resistor</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071RL</field>
+      </fields>
+    </comp>
+    <comp ref="R2640">
+      <value>100k 1% bias sense top</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2641">
+      <value>24.9k 1% bias sense bottom</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0724K9L</field>
+      </fields>
+    </comp>
+    <comp ref="R2642">
+      <value>10k bias-good pull-up</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2643">
+      <value>100k PROCHOT sense default-low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2644">
+      <value>10k AUX permission series</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2645">
+      <value>47k AUX permission default-off</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0747KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2646">
+      <value>1k 1W switched AUX discharge</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="MPN">RC2512FR-071KL</field>
+      </fields>
+    </comp>
+    <comp ref="R2647">
+      <value>100k discharge gate default-low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R35">
+      <value>62.4k 0.02% 5ppm MCU_3V3 FB hi</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU060362K4HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R36">
+      <value>20.0k 0.02% 5ppm MCU_3V3 FB lo</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">TNPU060320K0HZEN00</field>
+      </fields>
+    </comp>
+    <comp ref="R704">
+      <value>100R battery voltage filter</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-07100RL</field>
+      </fields>
+    </comp>
+    <comp ref="R719">
+      <value>100k charge request default-low</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+      </fields>
+    </comp>
+    <comp ref="R755">
+      <value>15k 1% COMP series</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <fields>
+        <field name="MPN">RC0402FR-0715KL</field>
+      </fields>
+    </comp>
+    <comp ref="R757">
+      <value>0R MODE internal LDO / forced PWM</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603JR-070RL</field>
+      </fields>
+    </comp>
+    <comp ref="R758">
+      <value>26.7k 1% inductor limit; about 12.4A nominal</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0726K7L</field>
+      </fields>
+    </comp>
+    <comp ref="RS2600">
+      <value>20m 1% 2W input Kelvin shunt</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="MPN">WSL2512R0200FEA18</field>
+      </fields>
+    </comp>
+    <comp ref="RS2601">
+      <value>10m 1% 2W battery Kelvin shunt</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
+      <fields>
+        <field name="MPN">WSLP2512R0100FEA</field>
+      </fields>
+    </comp>
+    <comp ref="RS2670">
+      <value>16m 1% 1W; parallel pair gives 8m</value>
+      <footprint>ducktop2:Panasonic_ERJ8CW_10to16m_Center</footprint>
+      <fields>
+        <field name="MPN">ERJ8CWFR016V</field>
+      </fields>
+    </comp>
+    <comp ref="RS750">
+      <value>16m 1% 1W; parallel pair gives 8m</value>
+      <footprint>ducktop2:Panasonic_ERJ8CW_10to16m_Center</footprint>
+      <fields>
+        <field name="MPN">ERJ8CWFR016V</field>
+      </fields>
+    </comp>
+    <comp ref="U12">
+      <value>TPS26630RGER 3A AUX eFuse / surge cutoff</value>
+      <footprint>Package_DFN_QFN:Texas_RGE0024H_VQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias</footprint>
+      <fields>
+        <field name="MPN">TPS26630RGER</field>
+      </fields>
+    </comp>
+    <comp ref="U15">
+      <value>LTC4418IUF#PBF dual-input selector (stage 1)</value>
+      <footprint>ducktop2:ADI_UF20_QFN20_4x4_P0.5_EP2.45</footprint>
+      <fields>
+        <field name="MPN">LTC4418IUF#PBF</field>
+      </fields>
+    </comp>
+    <comp ref="U16">
+      <value>LTC4418IUF#PBF dual-input selector (stage 2)</value>
+      <footprint>ducktop2:ADI_UF20_QFN20_4x4_P0.5_EP2.45</footprint>
+      <fields>
+        <field name="MPN">LTC4418IUF#PBF</field>
+      </fields>
+    </comp>
+    <comp ref="U2">
+      <value>ISL9241IRTZ</value>
+      <footprint>ducktop2:Renesas_L32_4x4D_QFN32_EP2.7</footprint>
+      <fields>
+        <field name="MPN">ISL9241IRTZ</field>
+      </fields>
+    </comp>
+    <comp ref="U2210">
+      <value>SN74LVC1G08DBVR</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        <field name="MPN">SN74LVC1G08DBVR</field>
+      </fields>
+    </comp>
+    <comp ref="U2634">
+      <value>TPS3700DDCR charger-bias detector</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        <field name="MPN">TPS3700DDCR</field>
+      </fields>
+    </comp>
+    <comp ref="U2635">
+      <value>TCA9537DGSR power status and AUX control</value>
+      <footprint>Package_SO:MSOP-10_3x3mm_P0.5mm</footprint>
+      <fields>
+        <field name="MPN">TCA9537DGSR</field>
+      </fields>
+    </comp>
+    <comp ref="U2644">
+      <value>SN74LVC1G04DBVR AUX discharge</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        <field name="MPN">SN74LVC1G04DBVR</field>
+      </fields>
+    </comp>
+    <comp ref="U4">
+      <value>STM32F407VGTx</value>
+      <footprint>Package_QFP:LQFP-100_14x14mm_P0.5mm</footprint>
+      <fields>
+        <field name="MPN">STM32F407VGT6</field>
+      </fields>
+    </comp>
+    <comp ref="U5">
+      <value>TPS62933DRLR</value>
+      <footprint>Package_TO_SOT_SMD:SOT-583-8</footprint>
+      <fields>
+        <field name="MPN">TPS62933DRLR</field>
+      </fields>
+    </comp>
+    <comp ref="U750">
+      <value>TPS552882RPMR 12V buck-boost</value>
+      <footprint>ducktop2:Texas_RPM0026A_VQFN-HR26_4x3.5</footprint>
+      <fields>
+        <field name="MPN">TPS552882RPMR</field>
+      </fields>
+    </comp>
+  </components>
+  <nets>
+    <net name="/AUDIO_AMP_EC_EN">
+      <node ref="U4" pin="43" />
+    </net>
+    <net name="/AUDIO_MIC_EN">
+      <node ref="U4" pin="42" />
+    </net>
+    <net name="/AUDIO_USB_DN">
+      <node ref="A1" pin="109" />
+    </net>
+    <net name="/AUDIO_USB_DP">
+      <node ref="A1" pin="111" />
+    </net>
+    <net name="/AUX_DC_ADC">
+      <node ref="D2640" pin="3" />
+      <node ref="U4" pin="31" />
+    </net>
+    <net name="/AUX_FAULT_N">
+      <node ref="U12" pin="14" />
+    </net>
+    <net name="/AUX_PGOOD">
+      <node ref="U12" pin="16" />
+    </net>
+    <net name="/BQ_ALERT">
+      <node ref="U4" pin="24" />
+    </net>
+    <net name="/CHG_ENABLE">
+      <node ref="R719" pin="1" />
+      <node ref="U2210" pin="1" />
+      <node ref="U4" pin="29" />
+    </net>
+    <net name="/CHG_INT_N">
+      <node ref="U2" pin="26" />
+      <node ref="U4" pin="25" />
+    </net>
+    <net name="/EC &amp; MCU/AON_BUCK_SS">
+      <node ref="C2640" pin="1" />
+      <node ref="U5" pin="7" />
+    </net>
+    <net name="/EC &amp; MCU/BOOT0_NET">
+      <node ref="U4" pin="94" />
+    </net>
+    <net name="/EC &amp; MCU/BUCK_BOOT">
+      <node ref="C38" pin="1" />
+      <node ref="U5" pin="6" />
+    </net>
+    <net name="/EC &amp; MCU/BUCK_FB">
+      <node ref="R35" pin="2" />
+      <node ref="R36" pin="1" />
+      <node ref="U5" pin="8" />
+    </net>
+    <net name="/EC &amp; MCU/BUCK_SW">
+      <node ref="C38" pin="2" />
+      <node ref="L3" pin="1" />
+      <node ref="U5" pin="5" />
+    </net>
+    <net name="/EC &amp; MCU/HSE_IN">
+      <node ref="U4" pin="12" />
+    </net>
+    <net name="/EC &amp; MCU/HSE_OUT">
+      <node ref="U4" pin="13" />
+    </net>
+    <net name="/EC &amp; MCU/LSE_IN">
+      <node ref="U4" pin="8" />
+    </net>
+    <net name="/EC &amp; MCU/LSE_OUT">
+      <node ref="U4" pin="9" />
+    </net>
+    <net name="/EC &amp; MCU/SERVICE_MUX_RESET_REQ_N">
+      <node ref="U4" pin="51" />
+    </net>
+    <net name="/EC &amp; MCU/SOURCE_MGR_INT_N">
+      <node ref="U4" pin="7" />
+    </net>
+    <net name="/EC &amp; MCU/SWCLK_NET">
+      <node ref="U4" pin="76" />
+    </net>
+    <net name="/EC &amp; MCU/SWDIO_NET">
+      <node ref="U4" pin="72" />
+    </net>
+    <net name="/EC &amp; MCU/VCAP1_NODE">
+      <node ref="U4" pin="49" />
+    </net>
+    <net name="/EC &amp; MCU/VCAP2_NODE">
+      <node ref="U4" pin="73" />
+    </net>
+    <net name="/EC_AON_IN">
+      <node ref="C36" pin="1" />
+      <node ref="C37" pin="1" />
+      <node ref="U5" pin="3" />
+    </net>
+    <net name="/EC_HOST_USB_DN">
+      <node ref="A1" pin="79" />
+    </net>
+    <net name="/EC_HOST_USB_DP">
+      <node ref="A1" pin="81" />
+    </net>
+    <net name="/FAN_PWM">
+      <node ref="U4" pin="40" />
+    </net>
+    <net name="/FAN_TACH">
+      <node ref="A1" pin="4" />
+      <node ref="U4" pin="34" />
+    </net>
+    <net name="/GBE_CLKREQ_N">
+      <node ref="A1" pin="102" />
+    </net>
+    <net name="/GBE_HOST_RX_N">
+      <node ref="A1" pin="66" />
+    </net>
+    <net name="/GBE_HOST_RX_P">
+      <node ref="A1" pin="64" />
+    </net>
+    <net name="/GBE_HOST_TX_N">
+      <node ref="A1" pin="63" />
+    </net>
+    <net name="/GBE_HOST_TX_P">
+      <node ref="A1" pin="61" />
+    </net>
+    <net name="/GBE_REFCLK_N">
+      <node ref="A1" pin="96" />
+    </net>
+    <net name="/GBE_REFCLK_P">
+      <node ref="A1" pin="94" />
+    </net>
+    <net name="/GNSS_EXTINT">
+      <node ref="U4" pin="95" />
+    </net>
+    <net name="/GNSS_PPS">
+      <node ref="U4" pin="53" />
+    </net>
+    <net name="/GNSS_RESET_N">
+      <node ref="U4" pin="52" />
+    </net>
+    <net name="/GNSS_UART_RX">
+      <node ref="U4" pin="69" />
+    </net>
+    <net name="/GNSS_UART_TX">
+      <node ref="U4" pin="68" />
+    </net>
+    <net name="/I2C_SCL">
+      <node ref="U2" pin="22" />
+      <node ref="U2635" pin="8" />
+      <node ref="U4" pin="92" />
+    </net>
+    <net name="/I2C_SDA">
+      <node ref="U2" pin="21" />
+      <node ref="U2635" pin="9" />
+      <node ref="U4" pin="93" />
+    </net>
+    <net name="/INTERNAL_USB_VBUS_FAULT_N">
+      <node ref="U4" pin="89" />
+    </net>
+    <net name="/KB_COL0">
+      <node ref="U4" pin="81" />
+    </net>
+    <net name="/KB_COL1">
+      <node ref="U4" pin="82" />
+    </net>
+    <net name="/KB_COL2">
+      <node ref="U4" pin="83" />
+    </net>
+    <net name="/KB_COL3">
+      <node ref="U4" pin="84" />
+    </net>
+    <net name="/KB_COL4">
+      <node ref="U4" pin="85" />
+    </net>
+    <net name="/KB_COL5">
+      <node ref="U4" pin="86" />
+    </net>
+    <net name="/KB_COL6">
+      <node ref="U4" pin="87" />
+    </net>
+    <net name="/KB_COL7">
+      <node ref="U4" pin="88" />
+    </net>
+    <net name="/KB_COL8">
+      <node ref="U4" pin="55" />
+    </net>
+    <net name="/KB_COL9">
+      <node ref="U4" pin="56" />
+    </net>
+    <net name="/KB_COL10">
+      <node ref="U4" pin="57" />
+    </net>
+    <net name="/KB_COL11">
+      <node ref="U4" pin="58" />
+    </net>
+    <net name="/KB_COL12">
+      <node ref="U4" pin="59" />
+    </net>
+    <net name="/KB_COL13">
+      <node ref="U4" pin="60" />
+    </net>
+    <net name="/KB_COL14">
+      <node ref="U4" pin="61" />
+    </net>
+    <net name="/KB_RGB_DATA_3V3">
+      <node ref="U4" pin="62" />
+    </net>
+    <net name="/KB_RGB_FAULT_N">
+      <node ref="U4" pin="16" />
+    </net>
+    <net name="/KB_RGB_PWR_EN">
+      <node ref="U4" pin="15" />
+    </net>
+    <net name="/KB_ROW0">
+      <node ref="U4" pin="97" />
+    </net>
+    <net name="/KB_ROW1">
+      <node ref="U4" pin="98" />
+    </net>
+    <net name="/KB_ROW2">
+      <node ref="U4" pin="1" />
+    </net>
+    <net name="/KB_ROW3">
+      <node ref="U4" pin="2" />
+    </net>
+    <net name="/KB_ROW4">
+      <node ref="U4" pin="3" />
+    </net>
+    <net name="/KB_ROW5">
+      <node ref="U4" pin="4" />
+    </net>
+    <net name="/KB_ROW6">
+      <node ref="U4" pin="5" />
+    </net>
+    <net name="/KB_ROW7">
+      <node ref="U4" pin="38" />
+    </net>
+    <net name="/LID_CLOSED_N">
+      <node ref="U4" pin="41" />
+    </net>
+    <net name="/MAIN_AUX_VALID_N">
+      <node ref="U15" pin="7" />
+    </net>
+    <net name="/MAIN_USB_VALID_N">
+      <node ref="U15" pin="6" />
+    </net>
+    <net name="/MAKER_USB_DN">
+      <node ref="A1" pin="78" />
+    </net>
+    <net name="/MAKER_USB_DP">
+      <node ref="A1" pin="76" />
+    </net>
+    <net name="/MCU_3V3">
+      <node ref="C2260" pin="1" />
+      <node ref="C2641" pin="1" />
+      <node ref="C2642" pin="1" />
+      <node ref="C2643" pin="1" />
+      <node ref="C291" pin="1" />
+      <node ref="C39" pin="1" />
+      <node ref="D2640" pin="2" />
+      <node ref="L3" pin="2" />
+      <node ref="R2642" pin="1" />
+      <node ref="R35" pin="1" />
+      <node ref="U2210" pin="5" />
+      <node ref="U2634" pin="5" />
+      <node ref="U2635" pin="10" />
+      <node ref="U2644" pin="5" />
+      <node ref="U4" pin="100" />
+      <node ref="U4" pin="11" />
+      <node ref="U4" pin="19" />
+      <node ref="U4" pin="21" />
+      <node ref="U4" pin="22" />
+      <node ref="U4" pin="28" />
+      <node ref="U4" pin="50" />
+      <node ref="U4" pin="6" />
+      <node ref="U4" pin="75" />
+    </net>
+    <net name="/MCU_USB_DN">
+      <node ref="U4" pin="70" />
+    </net>
+    <net name="/MCU_USB_DP">
+      <node ref="U4" pin="71" />
+    </net>
+    <net name="/MU_12V">
+      <node ref="A1" pin="250" />
+      <node ref="A1" pin="251" />
+      <node ref="A1" pin="252" />
+      <node ref="A1" pin="253" />
+      <node ref="A1" pin="254" />
+      <node ref="A1" pin="255" />
+      <node ref="A1" pin="256" />
+      <node ref="A1" pin="257" />
+      <node ref="A1" pin="258" />
+      <node ref="A1" pin="259" />
+      <node ref="A1" pin="260" />
+      <node ref="RS2670" pin="2" />
+      <node ref="RS750" pin="2" />
+    </net>
+    <net name="/MU_12V_ENABLE">
+      <node ref="U4" pin="44" />
+    </net>
+    <net name="/MU_12V_PG">
+      <node ref="U4" pin="46" />
+      <node ref="U750" pin="5" />
+    </net>
+    <net name="/MU_PROCHOT_N">
+      <node ref="A1" pin="117" />
+      <node ref="Q2604" pin="3" />
+      <node ref="R2643" pin="1" />
+      <node ref="U2" pin="23" />
+      <node ref="U2635" pin="4" />
+    </net>
+    <net name="/MU_PROCHOT_RELEASE">
+      <node ref="Q2605" pin="1" />
+      <node ref="R13" pin="1" />
+      <node ref="U4" pin="26" />
+    </net>
+    <net name="/MU_PWRBTN_N">
+      <node ref="A1" pin="1" />
+      <node ref="U4" pin="23" />
+    </net>
+    <net name="/MU_RSTBTN_N">
+      <node ref="A1" pin="3" />
+      <node ref="U4" pin="30" />
+    </net>
+    <net name="/MU_S0_HIGH">
+      <node ref="A1" pin="5" />
+      <node ref="U4" pin="45" />
+    </net>
+    <net name="/Mu Carrier/MU12_BOOT1">
+      <node ref="U750" pin="22" />
+    </net>
+    <net name="/Mu Carrier/MU12_BOOT2">
+      <node ref="U750" pin="20" />
+    </net>
+    <net name="/Mu Carrier/MU12_CC_N">
+      <node ref="U750" pin="6" />
+    </net>
+    <net name="/Mu Carrier/MU12_COMP">
+      <node ref="C772" pin="1" />
+      <node ref="R755" pin="1" />
+      <node ref="U750" pin="18" />
+    </net>
+    <net name="/Mu Carrier/MU12_COMP_RC">
+      <node ref="C771" pin="1" />
+      <node ref="R755" pin="2" />
+    </net>
+    <net name="/Mu Carrier/MU12_DITH">
+      <node ref="U750" pin="7" />
+    </net>
+    <net name="/Mu Carrier/MU12_EN_UVLO">
+      <node ref="U750" pin="4" />
+    </net>
+    <net name="/Mu Carrier/MU12_FB">
+      <node ref="U750" pin="14" />
+    </net>
+    <net name="/Mu Carrier/MU12_FSW">
+      <node ref="U750" pin="8" />
+    </net>
+    <net name="/Mu Carrier/MU12_HS_DRV">
+      <node ref="R2613" pin="1" />
+      <node ref="U750" pin="2" />
+    </net>
+    <net name="/Mu Carrier/MU12_HS_GATE">
+      <node ref="Q2610" pin="4" />
+      <node ref="R2613" pin="2" />
+    </net>
+    <net name="/Mu Carrier/MU12_ILIM">
+      <node ref="R758" pin="1" />
+      <node ref="U750" pin="17" />
+    </net>
+    <net name="/Mu Carrier/MU12_ISN">
+      <node ref="U750" pin="13" />
+    </net>
+    <net name="/Mu Carrier/MU12_ISP">
+      <node ref="U750" pin="12" />
+    </net>
+    <net name="/Mu Carrier/MU12_LS_DRV">
+      <node ref="R2614" pin="1" />
+      <node ref="U750" pin="1" />
+    </net>
+    <net name="/Mu Carrier/MU12_LS_GATE">
+      <node ref="Q2611" pin="4" />
+      <node ref="R2614" pin="2" />
+    </net>
+    <net name="/Mu Carrier/MU12_MODE">
+      <node ref="R757" pin="1" />
+      <node ref="U750" pin="15" />
+    </net>
+    <net name="/Mu Carrier/MU12_PRE_SENSE">
+      <node ref="C2610" pin="1" />
+      <node ref="RS2670" pin="1" />
+      <node ref="RS750" pin="1" />
+      <node ref="U750" pin="11" />
+      <node ref="U750" pin="26" />
+    </net>
+    <net name="/Mu Carrier/MU12_SW1">
+      <node ref="L750" pin="1" />
+      <node ref="Q2610" pin="1" />
+      <node ref="Q2610" pin="2" />
+      <node ref="Q2610" pin="3" />
+      <node ref="Q2611" pin="5" />
+      <node ref="U750" pin="23" />
+    </net>
+    <net name="/Mu Carrier/MU12_SW2">
+      <node ref="L750" pin="2" />
+      <node ref="U750" pin="21" />
+      <node ref="U750" pin="25" />
+    </net>
+    <net name="/Mu Carrier/MU12_VCC">
+      <node ref="C2670" pin="1" />
+      <node ref="U750" pin="19" />
+    </net>
+    <net name="/Mu Carrier/MU_SIO_UART_RX">
+      <node ref="A1" pin="12" />
+    </net>
+    <net name="/Mu Carrier/MU_SIO_UART_TX">
+      <node ref="A1" pin="10" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_CLKREQ_N">
+      <node ref="A1" pin="108" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L0_RX_N">
+      <node ref="A1" pin="42" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L0_RX_P">
+      <node ref="A1" pin="40" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L0_TX_RAW_N">
+      <node ref="A1" pin="39" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L0_TX_RAW_P">
+      <node ref="A1" pin="37" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L1_RX_N">
+      <node ref="A1" pin="48" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L1_RX_P">
+      <node ref="A1" pin="46" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L1_TX_RAW_N">
+      <node ref="A1" pin="45" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L1_TX_RAW_P">
+      <node ref="A1" pin="43" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L2_RX_N">
+      <node ref="A1" pin="54" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L2_RX_P">
+      <node ref="A1" pin="52" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L2_TX_RAW_N">
+      <node ref="A1" pin="51" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L2_TX_RAW_P">
+      <node ref="A1" pin="49" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L3_RX_N">
+      <node ref="A1" pin="60" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L3_RX_P">
+      <node ref="A1" pin="58" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L3_TX_RAW_N">
+      <node ref="A1" pin="57" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_L3_TX_RAW_P">
+      <node ref="A1" pin="55" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_REFCLK_SRC_N">
+      <node ref="A1" pin="99" />
+    </net>
+    <net name="/Mu Carrier/PCIE_M_REFCLK_SRC_P">
+      <node ref="A1" pin="97" />
+    </net>
+    <net name="/Mu Carrier/RTC_BAT">
+      <node ref="A1" pin="115" />
+    </net>
+    <net name="/Mu Carrier/USBC1_SSTX_RAW_N">
+      <node ref="A1" pin="15" />
+    </net>
+    <net name="/Mu Carrier/USBC1_SSTX_RAW_P">
+      <node ref="A1" pin="13" />
+    </net>
+    <net name="/Mu Carrier/USBC2_SSTX_RAW_N">
+      <node ref="A1" pin="21" />
+    </net>
+    <net name="/Mu Carrier/USBC2_SSTX_RAW_P">
+      <node ref="A1" pin="19" />
+    </net>
+    <net name="/Mu Carrier/WIFI_PCIE_TX_RAW_N">
+      <node ref="A1" pin="33" />
+    </net>
+    <net name="/Mu Carrier/WIFI_PCIE_TX_RAW_P">
+      <node ref="A1" pin="31" />
+    </net>
+    <net name="/NRST_NET">
+      <node ref="U2635" pin="6" />
+      <node ref="U4" pin="14" />
+    </net>
+    <net name="/PACK_CHG_TEMP_OK">
+      <node ref="R2260" pin="1" />
+    </net>
+    <net name="/PACK_FAULT_N">
+      <node ref="R2263" pin="1" />
+    </net>
+    <net name="/PACK_POS_FUSED">
+      <node ref="C712" pin="1" />
+      <node ref="C713" pin="1" />
+      <node ref="Q25" pin="1" />
+      <node ref="Q25" pin="2" />
+      <node ref="Q25" pin="3" />
+      <node ref="R2600" pin="2" />
+      <node ref="R704" pin="1" />
+    </net>
+    <net name="/PCIE_WAKE_N">
+      <node ref="A1" pin="103" />
+    </net>
+    <net name="/PD1_TCPC_IRQ_N">
+      <node ref="U4" pin="39" />
+    </net>
+    <net name="/PD1_VALID_N">
+      <node ref="U4" pin="33" />
+    </net>
+    <net name="/PD2_TCPC_IRQ_N">
+      <node ref="U4" pin="90" />
+    </net>
+    <net name="/PD2_VALID_N">
+      <node ref="U16" pin="6" />
+      <node ref="U4" pin="37" />
+    </net>
+    <net name="/PD2_VBUS_GATED">
+      <node ref="U16" pin="17" />
+    </net>
+    <net name="/PD_PROTECT_FAULT_N">
+      <node ref="A1" pin="129" />
+      <node ref="U4" pin="96" />
+    </net>
+    <net name="/PLTRST_SRC_N">
+      <node ref="A1" pin="105" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_DC_FUSED">
+      <node ref="U12" pin="1" />
+      <node ref="U12" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_DC_PROTECTED">
+      <node ref="R2646" pin="1" />
+      <node ref="U12" pin="17" />
+      <node ref="U12" pin="18" />
+      <node ref="U16" pin="16" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_DISCHARGE">
+      <node ref="Q2644" pin="1" />
+      <node ref="R2647" pin="1" />
+      <node ref="U2644" pin="4" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_DISCHARGE_DRAIN">
+      <node ref="Q2644" pin="3" />
+      <node ref="R2646" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_EFUSE_BGATE">
+      <node ref="U12" pin="3" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_EFUSE_DRV">
+      <node ref="U12" pin="4" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_EFUSE_DVDT">
+      <node ref="U12" pin="9" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_EFUSE_ILIM">
+      <node ref="U12" pin="10" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_EFUSE_IN_SYS">
+      <node ref="U12" pin="5" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_EFUSE_OV">
+      <node ref="U12" pin="7" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_EFUSE_SHDN">
+      <node ref="R2644" pin="2" />
+      <node ref="R2645" pin="1" />
+      <node ref="U12" pin="12" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_EFUSE_UV">
+      <node ref="U12" pin="6" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_PATH_EN">
+      <node ref="R2644" pin="1" />
+      <node ref="U2635" pin="1" />
+      <node ref="U2644" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/AUX_PGTH">
+      <node ref="U12" pin="15" />
+    </net>
+    <net name="/Power &amp; Battery/BATP_SENSE">
+      <node ref="C711" pin="1" />
+      <node ref="R704" pin="2" />
+      <node ref="U2" pin="31" />
+    </net>
+    <net name="/Power &amp; Battery/BTST1_NODE">
+      <node ref="C7" pin="1" />
+      <node ref="U2" pin="12" />
+    </net>
+    <net name="/Power &amp; Battery/BTST2_NODE">
+      <node ref="C8" pin="1" />
+      <node ref="U2" pin="4" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_ACOK">
+      <node ref="LED1" pin="1" />
+      <node ref="U2" pin="24" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_BGATE">
+      <node ref="Q25" pin="4" />
+      <node ref="R2600" pin="1" />
+      <node ref="U2" pin="32" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_BIAS_GOOD">
+      <node ref="R2642" pin="2" />
+      <node ref="U2634" pin="1" />
+      <node ref="U2635" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_BIAS_OR">
+      <node ref="D2600" pin="1" />
+      <node ref="D2601" pin="1" />
+      <node ref="R2601" pin="1" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_BIAS_SENSE">
+      <node ref="R2640" pin="2" />
+      <node ref="R2641" pin="1" />
+      <node ref="U2634" pin="3" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_COMPF">
+      <node ref="R2608" pin="1" />
+      <node ref="U2" pin="28" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_COMPF_RC">
+      <node ref="C2605" pin="1" />
+      <node ref="R2608" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_COMPR">
+      <node ref="R2609" pin="1" />
+      <node ref="U2" pin="27" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_COMPR_RC">
+      <node ref="C2606" pin="1" />
+      <node ref="R2609" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_CSIP">
+      <node ref="C2603" pin="1" />
+      <node ref="R2607" pin="2" />
+      <node ref="U2" pin="15" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_DCIN">
+      <node ref="C2600" pin="1" />
+      <node ref="R2601" pin="2" />
+      <node ref="U2" pin="17" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_ENABLE_THERM">
+      <node ref="Q702" pin="1" />
+      <node ref="R2262" pin="1" />
+      <node ref="U2210" pin="4" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_HS1_DRV">
+      <node ref="R2603" pin="1" />
+      <node ref="U2" pin="11" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_HS1_GATE">
+      <node ref="Q2600" pin="4" />
+      <node ref="R2603" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_HS2_DRV">
+      <node ref="R2606" pin="1" />
+      <node ref="U2" pin="5" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_HS2_GATE">
+      <node ref="Q2603" pin="4" />
+      <node ref="R2606" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_IMON">
+      <node ref="R2610" pin="1" />
+      <node ref="U2" pin="29" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_IMON_FILTER">
+      <node ref="C2607" pin="1" />
+      <node ref="R2610" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_INPUT">
+      <node ref="C10" pin="1" />
+      <node ref="C2603" pin="2" />
+      <node ref="C701" pin="1" />
+      <node ref="C702" pin="1" />
+      <node ref="C703" pin="1" />
+      <node ref="C704" pin="1" />
+      <node ref="C705" pin="1" />
+      <node ref="D2600" pin="2" />
+      <node ref="Q2600" pin="5" />
+      <node ref="RS2600" pin="2" />
+      <node ref="U2" pin="14" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_LS1_DRV">
+      <node ref="R2604" pin="1" />
+      <node ref="U2" pin="9" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_LS1_GATE">
+      <node ref="Q2601" pin="4" />
+      <node ref="R2604" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_LS2_DRV">
+      <node ref="R2605" pin="1" />
+      <node ref="U2" pin="7" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_LS2_GATE">
+      <node ref="Q2602" pin="4" />
+      <node ref="R2605" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_NTC">
+      <node ref="Q700" pin="3" />
+      <node ref="R16" pin="1" />
+      <node ref="U2" pin="25" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_NTC_HOT_GATE">
+      <node ref="Q700" pin="1" />
+      <node ref="Q702" pin="3" />
+      <node ref="R14" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_PSYS">
+      <node ref="R2611" pin="1" />
+      <node ref="U2" pin="30" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_SRN">
+      <node ref="C2604" pin="2" />
+      <node ref="Q25" pin="5" />
+      <node ref="RS2601" pin="2" />
+      <node ref="U2" pin="1" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_THROTTLE_GATE">
+      <node ref="Q2604" pin="1" />
+      <node ref="Q2605" pin="3" />
+      <node ref="R2612" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/CHG_VDDP">
+      <node ref="C2601" pin="1" />
+      <node ref="R2602" pin="2" />
+      <node ref="U2" pin="13" />
+      <node ref="U2" pin="8" />
+    </net>
+    <net name="/Power &amp; Battery/MAIN_SEL_INTVCC">
+      <node ref="C740" pin="1" />
+      <node ref="U15" pin="10" />
+      <node ref="U15" pin="18" />
+      <node ref="U15" pin="19" />
+    </net>
+    <net name="/Power &amp; Battery/MAIN_SEL_TMR">
+      <node ref="U15" pin="1" />
+    </net>
+    <net name="/Power &amp; Battery/PACK_CHG_TEMP_OK_IN">
+      <node ref="R2260" pin="2" />
+      <node ref="R2261" pin="1" />
+      <node ref="U2210" pin="2" />
+      <node ref="U2635" pin="3" />
+    </net>
+    <net name="/Power &amp; Battery/PROG_SET">
+      <node ref="C2602" pin="1" />
+      <node ref="R18" pin="1" />
+      <node ref="U2" pin="19" />
+    </net>
+    <net name="/Power &amp; Battery/REGN">
+      <node ref="C9" pin="1" />
+      <node ref="R12" pin="1" />
+      <node ref="R14" pin="1" />
+      <node ref="R2602" pin="1" />
+      <node ref="R2612" pin="1" />
+      <node ref="R2640" pin="1" />
+      <node ref="U2" pin="18" />
+    </net>
+    <net name="/Power &amp; Battery/SEL_STAGE2">
+      <node ref="C2685" pin="1" />
+      <node ref="U15" pin="16" />
+      <node ref="U16" pin="15" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_AUX_FET_COMMON">
+      <node ref="U16" pin="12" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_AUX_GATE">
+      <node ref="U16" pin="11" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_AUX_OV">
+      <node ref="U16" pin="5" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_AUX_UV">
+      <node ref="U16" pin="4" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_MAIN_FET_COMMON">
+      <node ref="U15" pin="12" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_MAIN_GATE">
+      <node ref="U15" pin="11" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_MAIN_OV">
+      <node ref="U15" pin="5" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_MAIN_UV">
+      <node ref="U15" pin="4" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_SEL_INTVCC">
+      <node ref="C749" pin="1" />
+      <node ref="U16" pin="10" />
+      <node ref="U16" pin="18" />
+      <node ref="U16" pin="19" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_SEL_TMR">
+      <node ref="U16" pin="1" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_USB_FET_COMMON">
+      <node ref="U16" pin="14" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_USB_GATE">
+      <node ref="U16" pin="13" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_USB_OV">
+      <node ref="U16" pin="3" />
+    </net>
+    <net name="/Power &amp; Battery/ST2_USB_UV">
+      <node ref="U16" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/STAT_LED_A">
+      <node ref="LED1" pin="2" />
+      <node ref="R12" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/SW1">
+      <node ref="C7" pin="2" />
+      <node ref="L1" pin="1" />
+      <node ref="Q2600" pin="1" />
+      <node ref="Q2600" pin="2" />
+      <node ref="Q2600" pin="3" />
+      <node ref="Q2601" pin="5" />
+      <node ref="U2" pin="10" />
+    </net>
+    <net name="/Power &amp; Battery/SW2">
+      <node ref="C8" pin="2" />
+      <node ref="L1" pin="2" />
+      <node ref="Q2602" pin="5" />
+      <node ref="Q2603" pin="1" />
+      <node ref="Q2603" pin="2" />
+      <node ref="Q2603" pin="3" />
+      <node ref="U2" pin="6" />
+    </net>
+    <net name="/Power &amp; Battery/USB_MAIN_FET_COMMON">
+      <node ref="U15" pin="14" />
+    </net>
+    <net name="/Power &amp; Battery/USB_MAIN_GATE">
+      <node ref="U15" pin="13" />
+    </net>
+    <net name="/Power &amp; Battery/USB_MAIN_OV">
+      <node ref="U15" pin="3" />
+    </net>
+    <net name="/Power &amp; Battery/USB_MAIN_UV">
+      <node ref="U15" pin="2" />
+    </net>
+    <net name="/Power &amp; Battery/VBUS_COMBINED">
+      <node ref="R2607" pin="1" />
+      <node ref="RS2600" pin="1" />
+      <node ref="U15" pin="15" />
+    </net>
+    <net name="/RADIO_DB_PWR_EN">
+      <node ref="U4" pin="91" />
+    </net>
+    <net name="/RADIO_UHF_PD_N">
+      <node ref="U4" pin="78" />
+    </net>
+    <net name="/RADIO_UHF_PTT_N">
+      <node ref="U4" pin="65" />
+    </net>
+    <net name="/RADIO_UHF_RF_SEL_3V3">
+      <node ref="U4" pin="18" />
+    </net>
+    <net name="/RADIO_UHF_SQL">
+      <node ref="U4" pin="80" />
+    </net>
+    <net name="/RADIO_UHF_UART_RX">
+      <node ref="U4" pin="64" />
+    </net>
+    <net name="/RADIO_UHF_UART_TX">
+      <node ref="U4" pin="63" />
+    </net>
+    <net name="/RADIO_VHF_PD_N">
+      <node ref="U4" pin="66" />
+    </net>
+    <net name="/RADIO_VHF_PTT_N">
+      <node ref="U4" pin="54" />
+    </net>
+    <net name="/RADIO_VHF_RF_SEL_3V3">
+      <node ref="U4" pin="17" />
+    </net>
+    <net name="/RADIO_VHF_SQL">
+      <node ref="U4" pin="79" />
+    </net>
+    <net name="/RADIO_VHF_UART_RX">
+      <node ref="U4" pin="48" />
+    </net>
+    <net name="/RADIO_VHF_UART_TX">
+      <node ref="U4" pin="47" />
+    </net>
+    <net name="/SLS_S3">
+      <node ref="A1" pin="7" />
+    </net>
+    <net name="/TCP2_DDC_SCL">
+      <node ref="A1" pin="171" />
+    </net>
+    <net name="/TCP2_DDC_SDA">
+      <node ref="A1" pin="169" />
+    </net>
+    <net name="/TCP2_HPD">
+      <node ref="A1" pin="183" />
+    </net>
+    <net name="/TCP2_TX0_N">
+      <node ref="A1" pin="215" />
+    </net>
+    <net name="/TCP2_TX0_P">
+      <node ref="A1" pin="217" />
+    </net>
+    <net name="/TCP2_TX1_N">
+      <node ref="A1" pin="203" />
+    </net>
+    <net name="/TCP2_TX1_P">
+      <node ref="A1" pin="205" />
+    </net>
+    <net name="/TCP2_TXRX0_N">
+      <node ref="A1" pin="209" />
+    </net>
+    <net name="/TCP2_TXRX0_P">
+      <node ref="A1" pin="211" />
+    </net>
+    <net name="/TCP2_TXRX1_N">
+      <node ref="A1" pin="197" />
+    </net>
+    <net name="/TCP2_TXRX1_P">
+      <node ref="A1" pin="199" />
+    </net>
+    <net name="/THERM_MU_ADC">
+      <node ref="U4" pin="35" />
+    </net>
+    <net name="/THERM_SKIN_ADC">
+      <node ref="U4" pin="32" />
+    </net>
+    <net name="/TRACKPAD_FAULT_N">
+      <node ref="U4" pin="36" />
+    </net>
+    <net name="/USBC1_DN">
+      <node ref="A1" pin="73" />
+    </net>
+    <net name="/USBC1_DP">
+      <node ref="A1" pin="75" />
+    </net>
+    <net name="/USBC1_SSRX_N">
+      <node ref="A1" pin="18" />
+    </net>
+    <net name="/USBC1_SSRX_P">
+      <node ref="A1" pin="16" />
+    </net>
+    <net name="/USBC2_DN">
+      <node ref="A1" pin="114" />
+    </net>
+    <net name="/USBC2_DP">
+      <node ref="A1" pin="112" />
+    </net>
+    <net name="/USBC2_SSRX_N">
+      <node ref="A1" pin="24" />
+    </net>
+    <net name="/USBC2_SSRX_P">
+      <node ref="A1" pin="22" />
+    </net>
+    <net name="/USB_PD_SELECTED">
+      <node ref="U15" pin="17" />
+    </net>
+    <net name="/VSYS">
+      <node ref="C11" pin="1" />
+      <node ref="C2604" pin="1" />
+      <node ref="C2608" pin="1" />
+      <node ref="C2609" pin="1" />
+      <node ref="C706" pin="1" />
+      <node ref="C707" pin="1" />
+      <node ref="C708" pin="1" />
+      <node ref="C709" pin="1" />
+      <node ref="C710" pin="1" />
+      <node ref="D2601" pin="2" />
+      <node ref="Q2603" pin="5" />
+      <node ref="Q2610" pin="5" />
+      <node ref="RS2601" pin="1" />
+      <node ref="U2" pin="2" />
+      <node ref="U750" pin="3" />
+    </net>
+    <net name="/WIFI_CLKREQ_N">
+      <node ref="A1" pin="100" />
+    </net>
+    <net name="/WIFI_PCIE_RX_N">
+      <node ref="A1" pin="36" />
+    </net>
+    <net name="/WIFI_PCIE_RX_P">
+      <node ref="A1" pin="34" />
+    </net>
+    <net name="/WIFI_REFCLK_N">
+      <node ref="A1" pin="90" />
+    </net>
+    <net name="/WIFI_REFCLK_P">
+      <node ref="A1" pin="88" />
+    </net>
+    <net name="/WIFI_USB_DN">
+      <node ref="A1" pin="84" />
+    </net>
+    <net name="/WIFI_USB_DP">
+      <node ref="A1" pin="82" />
+    </net>
+    <net name="/WIFI_W_DISABLE1_N_EC">
+      <node ref="U4" pin="67" />
+    </net>
+    <net name="/WIFI_W_DISABLE2_N_EC">
+      <node ref="U4" pin="77" />
+    </net>
+    <net name="GND">
+      <node ref="A1" pin="101" />
+      <node ref="A1" pin="107" />
+      <node ref="A1" pin="11" />
+      <node ref="A1" pin="110" />
+      <node ref="A1" pin="113" />
+      <node ref="A1" pin="116" />
+      <node ref="A1" pin="135" />
+      <node ref="A1" pin="14" />
+      <node ref="A1" pin="151" />
+      <node ref="A1" pin="158" />
+      <node ref="A1" pin="167" />
+      <node ref="A1" pin="17" />
+      <node ref="A1" pin="170" />
+      <node ref="A1" pin="181" />
+      <node ref="A1" pin="182" />
+      <node ref="A1" pin="188" />
+      <node ref="A1" pin="189" />
+      <node ref="A1" pin="194" />
+      <node ref="A1" pin="195" />
+      <node ref="A1" pin="20" />
+      <node ref="A1" pin="200" />
+      <node ref="A1" pin="201" />
+      <node ref="A1" pin="206" />
+      <node ref="A1" pin="207" />
+      <node ref="A1" pin="212" />
+      <node ref="A1" pin="213" />
+      <node ref="A1" pin="218" />
+      <node ref="A1" pin="219" />
+      <node ref="A1" pin="224" />
+      <node ref="A1" pin="225" />
+      <node ref="A1" pin="23" />
+      <node ref="A1" pin="230" />
+      <node ref="A1" pin="231" />
+      <node ref="A1" pin="236" />
+      <node ref="A1" pin="237" />
+      <node ref="A1" pin="242" />
+      <node ref="A1" pin="243" />
+      <node ref="A1" pin="248" />
+      <node ref="A1" pin="249" />
+      <node ref="A1" pin="26" />
+      <node ref="A1" pin="29" />
+      <node ref="A1" pin="32" />
+      <node ref="A1" pin="35" />
+      <node ref="A1" pin="38" />
+      <node ref="A1" pin="41" />
+      <node ref="A1" pin="44" />
+      <node ref="A1" pin="47" />
+      <node ref="A1" pin="50" />
+      <node ref="A1" pin="53" />
+      <node ref="A1" pin="56" />
+      <node ref="A1" pin="59" />
+      <node ref="A1" pin="62" />
+      <node ref="A1" pin="65" />
+      <node ref="A1" pin="68" />
+      <node ref="A1" pin="71" />
+      <node ref="A1" pin="74" />
+      <node ref="A1" pin="77" />
+      <node ref="A1" pin="80" />
+      <node ref="A1" pin="83" />
+      <node ref="A1" pin="86" />
+      <node ref="A1" pin="89" />
+      <node ref="A1" pin="92" />
+      <node ref="A1" pin="95" />
+      <node ref="A1" pin="98" />
+      <node ref="A1" pin="MP" />
+      <node ref="C10" pin="2" />
+      <node ref="C11" pin="2" />
+      <node ref="C2260" pin="2" />
+      <node ref="C2600" pin="2" />
+      <node ref="C2601" pin="2" />
+      <node ref="C2602" pin="2" />
+      <node ref="C2605" pin="2" />
+      <node ref="C2606" pin="2" />
+      <node ref="C2607" pin="2" />
+      <node ref="C2608" pin="2" />
+      <node ref="C2609" pin="2" />
+      <node ref="C2610" pin="2" />
+      <node ref="C2640" pin="2" />
+      <node ref="C2641" pin="2" />
+      <node ref="C2642" pin="2" />
+      <node ref="C2643" pin="2" />
+      <node ref="C2670" pin="2" />
+      <node ref="C2685" pin="2" />
+      <node ref="C291" pin="2" />
+      <node ref="C36" pin="2" />
+      <node ref="C37" pin="2" />
+      <node ref="C39" pin="2" />
+      <node ref="C701" pin="2" />
+      <node ref="C702" pin="2" />
+      <node ref="C703" pin="2" />
+      <node ref="C704" pin="2" />
+      <node ref="C705" pin="2" />
+      <node ref="C706" pin="2" />
+      <node ref="C707" pin="2" />
+      <node ref="C708" pin="2" />
+      <node ref="C709" pin="2" />
+      <node ref="C710" pin="2" />
+      <node ref="C711" pin="2" />
+      <node ref="C712" pin="2" />
+      <node ref="C713" pin="2" />
+      <node ref="C740" pin="2" />
+      <node ref="C749" pin="2" />
+      <node ref="C771" pin="2" />
+      <node ref="C772" pin="2" />
+      <node ref="C9" pin="2" />
+      <node ref="D2640" pin="1" />
+      <node ref="Q2601" pin="1" />
+      <node ref="Q2601" pin="2" />
+      <node ref="Q2601" pin="3" />
+      <node ref="Q2602" pin="1" />
+      <node ref="Q2602" pin="2" />
+      <node ref="Q2602" pin="3" />
+      <node ref="Q2604" pin="2" />
+      <node ref="Q2605" pin="2" />
+      <node ref="Q2611" pin="1" />
+      <node ref="Q2611" pin="2" />
+      <node ref="Q2611" pin="3" />
+      <node ref="Q2644" pin="2" />
+      <node ref="Q700" pin="2" />
+      <node ref="Q702" pin="2" />
+      <node ref="R13" pin="2" />
+      <node ref="R16" pin="2" />
+      <node ref="R18" pin="2" />
+      <node ref="R2261" pin="2" />
+      <node ref="R2262" pin="2" />
+      <node ref="R2263" pin="2" />
+      <node ref="R2611" pin="2" />
+      <node ref="R2641" pin="2" />
+      <node ref="R2643" pin="2" />
+      <node ref="R2645" pin="2" />
+      <node ref="R2647" pin="2" />
+      <node ref="R36" pin="2" />
+      <node ref="R719" pin="2" />
+      <node ref="R757" pin="2" />
+      <node ref="R758" pin="2" />
+      <node ref="U12" pin="11" />
+      <node ref="U12" pin="25" />
+      <node ref="U12" pin="8" />
+      <node ref="U15" pin="20" />
+      <node ref="U15" pin="21" />
+      <node ref="U15" pin="8" />
+      <node ref="U16" pin="20" />
+      <node ref="U16" pin="21" />
+      <node ref="U16" pin="8" />
+      <node ref="U2" pin="20" />
+      <node ref="U2" pin="33" />
+      <node ref="U2210" pin="3" />
+      <node ref="U2634" pin="2" />
+      <node ref="U2634" pin="4" />
+      <node ref="U2635" pin="5" />
+      <node ref="U2644" pin="3" />
+      <node ref="U4" pin="10" />
+      <node ref="U4" pin="20" />
+      <node ref="U4" pin="27" />
+      <node ref="U4" pin="74" />
+      <node ref="U4" pin="99" />
+      <node ref="U5" pin="4" />
+      <node ref="U750" pin="10" />
+      <node ref="U750" pin="24" />
+      <node ref="U750" pin="9" />
+    </net>
+    <net name="unconnected-(A1-BIOS_SEL#-Pad133)">
+      <node ref="A1" pin="133" />
+    </net>
+    <net name="unconnected-(A1-CNV_BRI_DT-Pad142)">
+      <node ref="A1" pin="142" />
+    </net>
+    <net name="unconnected-(A1-CNV_BRI_RSP-Pad140)">
+      <node ref="A1" pin="140" />
+    </net>
+    <net name="unconnected-(A1-CNV_RF_RESET#-Pad123)">
+      <node ref="A1" pin="123" />
+    </net>
+    <net name="unconnected-(A1-CNV_RGI_DT-Pad138)">
+      <node ref="A1" pin="138" />
+    </net>
+    <net name="unconnected-(A1-CNV_RGI_RSP-Pad144)">
+      <node ref="A1" pin="144" />
+    </net>
+    <net name="unconnected-(A1-CNV_WR_CLK_N-Pad204)">
+      <node ref="A1" pin="204" />
+    </net>
+    <net name="unconnected-(A1-CNV_WR_CLK_P-Pad202)">
+      <node ref="A1" pin="202" />
+    </net>
+    <net name="unconnected-(A1-CNV_WR_D0_N-Pad210)">
+      <node ref="A1" pin="210" />
+    </net>
+    <net name="unconnected-(A1-CNV_WR_D0_P-Pad208)">
+      <node ref="A1" pin="208" />
+    </net>
+    <net name="unconnected-(A1-CNV_WR_D1_N-Pad216)">
+      <node ref="A1" pin="216" />
+    </net>
+    <net name="unconnected-(A1-CNV_WR_D1_P-Pad214)">
+      <node ref="A1" pin="214" />
+    </net>
+    <net name="unconnected-(A1-CNV_WT_CLK_N-Pad186)">
+      <node ref="A1" pin="186" />
+    </net>
+    <net name="unconnected-(A1-CNV_WT_CLK_P-Pad184)">
+      <node ref="A1" pin="184" />
+    </net>
+    <net name="unconnected-(A1-CNV_WT_D0_N-Pad192)">
+      <node ref="A1" pin="192" />
+    </net>
+    <net name="unconnected-(A1-CNV_WT_D0_P-Pad190)">
+      <node ref="A1" pin="190" />
+    </net>
+    <net name="unconnected-(A1-CNV_WT_D1_N-Pad198)">
+      <node ref="A1" pin="198" />
+    </net>
+    <net name="unconnected-(A1-CNV_WT_D1_P-Pad196)">
+      <node ref="A1" pin="196" />
+    </net>
+    <net name="unconnected-(A1-CRF_CLKREQ-Pad121)">
+      <node ref="A1" pin="121" />
+    </net>
+    <net name="unconnected-(A1-FAN2_CTL-Pad2)">
+      <node ref="A1" pin="2" />
+    </net>
+    <net name="unconnected-(A1-FAN3_CTL-Pad6)">
+      <node ref="A1" pin="6" />
+    </net>
+    <net name="unconnected-(A1-FAN3_TAC-Pad8)">
+      <node ref="A1" pin="8" />
+    </net>
+    <net name="unconnected-(A1-FLASH_SPI_CS#-Pad165)">
+      <node ref="A1" pin="165" />
+    </net>
+    <net name="unconnected-(A1-GPP_B04-Pad128)">
+      <node ref="A1" pin="128" />
+    </net>
+    <net name="unconnected-(A1-GPP_B05-Pad130)">
+      <node ref="A1" pin="130" />
+    </net>
+    <net name="unconnected-(A1-GPP_B06-Pad132)">
+      <node ref="A1" pin="132" />
+    </net>
+    <net name="unconnected-(A1-GPP_B07-Pad134)">
+      <node ref="A1" pin="134" />
+    </net>
+    <net name="unconnected-(A1-GPP_E11-Pad118)">
+      <node ref="A1" pin="118" />
+    </net>
+    <net name="unconnected-(A1-GPP_E12-Pad126)">
+      <node ref="A1" pin="126" />
+    </net>
+    <net name="unconnected-(A1-GPP_E13-Pad122)">
+      <node ref="A1" pin="122" />
+    </net>
+    <net name="unconnected-(A1-GPP_E14-Pad120)">
+      <node ref="A1" pin="120" />
+    </net>
+    <net name="unconnected-(A1-GPP_E17-Pad124)">
+      <node ref="A1" pin="124" />
+    </net>
+    <net name="unconnected-(A1-GPP_E22-Pad119)">
+      <node ref="A1" pin="119" />
+    </net>
+    <net name="unconnected-(A1-HDA_BCLK-Pad174)">
+      <node ref="A1" pin="174" />
+    </net>
+    <net name="unconnected-(A1-HDA_RST#-Pad172)">
+      <node ref="A1" pin="172" />
+    </net>
+    <net name="unconnected-(A1-HDA_SDI0-Pad180)">
+      <node ref="A1" pin="180" />
+    </net>
+    <net name="unconnected-(A1-HDA_SDO-Pad178)">
+      <node ref="A1" pin="178" />
+    </net>
+    <net name="unconnected-(A1-HDA_SYNC-Pad176)">
+      <node ref="A1" pin="176" />
+    </net>
+    <net name="unconnected-(A1-I2C1_SCL-Pad154)">
+      <node ref="A1" pin="154" />
+    </net>
+    <net name="unconnected-(A1-I2C1_SDA-Pad156)">
+      <node ref="A1" pin="156" />
+    </net>
+    <net name="unconnected-(A1-I2C2_SCL-Pad150)">
+      <node ref="A1" pin="150" />
+    </net>
+    <net name="unconnected-(A1-I2C2_SDA-Pad152)">
+      <node ref="A1" pin="152" />
+    </net>
+    <net name="unconnected-(A1-I2C3_SCL-Pad146)">
+      <node ref="A1" pin="146" />
+    </net>
+    <net name="unconnected-(A1-I2C3_SDA-Pad148)">
+      <node ref="A1" pin="148" />
+    </net>
+    <net name="unconnected-(A1-PCIE_RX2_N-Pad72)">
+      <node ref="A1" pin="72" />
+    </net>
+    <net name="unconnected-(A1-PCIE_RX2_P-Pad70)">
+      <node ref="A1" pin="70" />
+    </net>
+    <net name="unconnected-(A1-PCIE_RX3_N-Pad30)">
+      <node ref="A1" pin="30" />
+    </net>
+    <net name="unconnected-(A1-PCIE_RX3_P-Pad28)">
+      <node ref="A1" pin="28" />
+    </net>
+    <net name="unconnected-(A1-PCIE_TX2_N-Pad69)">
+      <node ref="A1" pin="69" />
+    </net>
+    <net name="unconnected-(A1-PCIE_TX2_P-Pad67)">
+      <node ref="A1" pin="67" />
+    </net>
+    <net name="unconnected-(A1-PCIE_TX3_N-Pad27)">
+      <node ref="A1" pin="27" />
+    </net>
+    <net name="unconnected-(A1-PCIE_TX3_P-Pad25)">
+      <node ref="A1" pin="25" />
+    </net>
+    <net name="unconnected-(A1-PMCALERT#-Pad125)">
+      <node ref="A1" pin="125" />
+    </net>
+    <net name="unconnected-(A1-REFCLK0_N-Pad87)">
+      <node ref="A1" pin="87" />
+    </net>
+    <net name="unconnected-(A1-REFCLK0_P-Pad85)">
+      <node ref="A1" pin="85" />
+    </net>
+    <net name="unconnected-(A1-REFCLK1_N-Pad93)">
+      <node ref="A1" pin="93" />
+    </net>
+    <net name="unconnected-(A1-REFCLK1_P-Pad91)">
+      <node ref="A1" pin="91" />
+    </net>
+    <net name="unconnected-(A1-REFCLK_REQ0#-Pad104)">
+      <node ref="A1" pin="104" />
+    </net>
+    <net name="unconnected-(A1-REFCLK_REQ1#-Pad106)">
+      <node ref="A1" pin="106" />
+    </net>
+    <net name="unconnected-(A1-RSVD-Pad136)">
+      <node ref="A1" pin="136" />
+    </net>
+    <net name="unconnected-(A1-RSVD-Pad149)">
+      <node ref="A1" pin="149" />
+    </net>
+    <net name="unconnected-(A1-RSVD-Pad160)">
+      <node ref="A1" pin="160" />
+    </net>
+    <net name="unconnected-(A1-RSVD-Pad162)">
+      <node ref="A1" pin="162" />
+    </net>
+    <net name="unconnected-(A1-RSVD-Pad164)">
+      <node ref="A1" pin="164" />
+    </net>
+    <net name="unconnected-(A1-RSVD-Pad166)">
+      <node ref="A1" pin="166" />
+    </net>
+    <net name="unconnected-(A1-RSVD-Pad168)">
+      <node ref="A1" pin="168" />
+    </net>
+    <net name="unconnected-(A1-SML1_CLK-Pad147)">
+      <node ref="A1" pin="147" />
+    </net>
+    <net name="unconnected-(A1-SML1_DATA-Pad145)">
+      <node ref="A1" pin="145" />
+    </net>
+    <net name="unconnected-(A1-SPI_CLK-Pad155)">
+      <node ref="A1" pin="155" />
+    </net>
+    <net name="unconnected-(A1-SPI_IO2-Pad161)">
+      <node ref="A1" pin="161" />
+    </net>
+    <net name="unconnected-(A1-SPI_IO3-Pad153)">
+      <node ref="A1" pin="153" />
+    </net>
+    <net name="unconnected-(A1-SPI_MISO/SPI_IO1-Pad163)">
+      <node ref="A1" pin="163" />
+    </net>
+    <net name="unconnected-(A1-SPI_MOSI/SPI_IO0-Pad159)">
+      <node ref="A1" pin="159" />
+    </net>
+    <net name="unconnected-(A1-SUSCLK-Pad131)">
+      <node ref="A1" pin="131" />
+    </net>
+    <net name="unconnected-(A1-TCP0_AUX_N-Pad221)">
+      <node ref="A1" pin="221" />
+    </net>
+    <net name="unconnected-(A1-TCP0_AUX_P-Pad223)">
+      <node ref="A1" pin="223" />
+    </net>
+    <net name="unconnected-(A1-TCP0_CTRL_CLK-Pad179)">
+      <node ref="A1" pin="179" />
+    </net>
+    <net name="unconnected-(A1-TCP0_CTRL_DATA-Pad177)">
+      <node ref="A1" pin="177" />
+    </net>
+    <net name="unconnected-(A1-TCP0_HPD-Pad187)">
+      <node ref="A1" pin="187" />
+    </net>
+    <net name="unconnected-(A1-TCP0_TX0_N-Pad245)">
+      <node ref="A1" pin="245" />
+    </net>
+    <net name="unconnected-(A1-TCP0_TX0_P-Pad247)">
+      <node ref="A1" pin="247" />
+    </net>
+    <net name="unconnected-(A1-TCP0_TX1_N-Pad233)">
+      <node ref="A1" pin="233" />
+    </net>
+    <net name="unconnected-(A1-TCP0_TX1_P-Pad235)">
+      <node ref="A1" pin="235" />
+    </net>
+    <net name="unconnected-(A1-TCP0_TXRX0_N-Pad239)">
+      <node ref="A1" pin="239" />
+    </net>
+    <net name="unconnected-(A1-TCP0_TXRX0_P-Pad241)">
+      <node ref="A1" pin="241" />
+    </net>
+    <net name="unconnected-(A1-TCP0_TXRX1_N-Pad227)">
+      <node ref="A1" pin="227" />
+    </net>
+    <net name="unconnected-(A1-TCP0_TXRX1_P-Pad229)">
+      <node ref="A1" pin="229" />
+    </net>
+    <net name="unconnected-(A1-TCP1_AUX_N-Pad246)">
+      <node ref="A1" pin="246" />
+    </net>
+    <net name="unconnected-(A1-TCP1_AUX_P-Pad244)">
+      <node ref="A1" pin="244" />
+    </net>
+    <net name="unconnected-(A1-TCP1_CTRL_CLK-Pad175)">
+      <node ref="A1" pin="175" />
+    </net>
+    <net name="unconnected-(A1-TCP1_CTRL_DATA-Pad173)">
+      <node ref="A1" pin="173" />
+    </net>
+    <net name="unconnected-(A1-TCP1_HPD-Pad185)">
+      <node ref="A1" pin="185" />
+    </net>
+    <net name="unconnected-(A1-TCP1_TX0_N-Pad222)">
+      <node ref="A1" pin="222" />
+    </net>
+    <net name="unconnected-(A1-TCP1_TX0_P-Pad220)">
+      <node ref="A1" pin="220" />
+    </net>
+    <net name="unconnected-(A1-TCP1_TX1_N-Pad234)">
+      <node ref="A1" pin="234" />
+    </net>
+    <net name="unconnected-(A1-TCP1_TX1_P-Pad232)">
+      <node ref="A1" pin="232" />
+    </net>
+    <net name="unconnected-(A1-TCP1_TXRX0_N-Pad228)">
+      <node ref="A1" pin="228" />
+    </net>
+    <net name="unconnected-(A1-TCP1_TXRX0_P-Pad226)">
+      <node ref="A1" pin="226" />
+    </net>
+    <net name="unconnected-(A1-TCP1_TXRX1_N-Pad240)">
+      <node ref="A1" pin="240" />
+    </net>
+    <net name="unconnected-(A1-TCP1_TXRX1_P-Pad238)">
+      <node ref="A1" pin="238" />
+    </net>
+    <net name="unconnected-(A1-TCP2_AUX_N-Pad191)">
+      <node ref="A1" pin="191" />
+    </net>
+    <net name="unconnected-(A1-TCP2_AUX_P-Pad193)">
+      <node ref="A1" pin="193" />
+    </net>
+    <net name="unconnected-(A1-TPM_IRQ-Pad127)">
+      <node ref="A1" pin="127" />
+    </net>
+    <net name="unconnected-(A1-TPM_SPI_CS#-Pad157)">
+      <node ref="A1" pin="157" />
+    </net>
+    <net name="unconnected-(A1-TSENSE-Pad9)">
+      <node ref="A1" pin="9" />
+    </net>
+    <net name="unconnected-(A1-UART0_RXD_{slash}_GPP_H08-Pad137)">
+      <node ref="A1" pin="137" />
+    </net>
+    <net name="unconnected-(A1-UART0_TXD_{slash}_GPP_H09-Pad139)">
+      <node ref="A1" pin="139" />
+    </net>
+    <net name="unconnected-(A1-UART1_RXD_{slash}_GPP_H06-Pad141)">
+      <node ref="A1" pin="141" />
+    </net>
+    <net name="unconnected-(A1-UART1_TXD_{slash}_GPP_H07-Pad143)">
+      <node ref="A1" pin="143" />
+    </net>
+    <net name="unconnected-(U2-BYPSG-Pad16)">
+      <node ref="U2" pin="16" />
+    </net>
+    <net name="unconnected-(U2-NGATE-Pad3)">
+      <node ref="U2" pin="3" />
+    </net>
+    <net name="unconnected-(U5-EN-Pad2)">
+      <node ref="U5" pin="2" />
+    </net>
+    <net name="unconnected-(U5-RT-Pad1)">
+      <node ref="U5" pin="1" />
+    </net>
+    <net name="unconnected-(U12-IMON-Pad13)">
+      <node ref="U12" pin="13" />
+    </net>
+    <net name="unconnected-(U12-NC-Pad19)">
+      <node ref="U12" pin="19" />
+    </net>
+    <net name="unconnected-(U12-NC-Pad20)">
+      <node ref="U12" pin="20" />
+    </net>
+    <net name="unconnected-(U12-NC-Pad21)">
+      <node ref="U12" pin="21" />
+    </net>
+    <net name="unconnected-(U12-NC-Pad22)">
+      <node ref="U12" pin="22" />
+    </net>
+    <net name="unconnected-(U12-NC-Pad23)">
+      <node ref="U12" pin="23" />
+    </net>
+    <net name="unconnected-(U12-NC-Pad24)">
+      <node ref="U12" pin="24" />
+    </net>
+    <net name="unconnected-(U15-CAS-Pad9)">
+      <node ref="U15" pin="9" />
+    </net>
+    <net name="unconnected-(U16-CAS-Pad9)">
+      <node ref="U16" pin="9" />
+    </net>
+    <net name="unconnected-(U16-~{VALID2}-Pad7)">
+      <node ref="U16" pin="7" />
+    </net>
+    <net name="unconnected-(U750-CDC-Pad16)">
+      <node ref="U750" pin="16" />
+    </net>
+    <net name="unconnected-(U2634-OUTB-Pad6)">
+      <node ref="U2634" pin="6" />
+    </net>
+    <net name="unconnected-(U2635-~{INT}-Pad7)">
+      <node ref="U2635" pin="7" />
+    </net>
+    <net name="unconnected-(U2644-NC-Pad1)">
+      <node ref="U2644" pin="1" />
+    </net>
+  </nets>
+</export>

@@ -11,7 +11,7 @@ profile keeps unqualified pack use, charging and laptop boot disabled.
 | target | implementation |
 | --- | --- |
 | STM32F407 | pinned ST CMSIS and TinyUSB, correct vectors, bounded clock startup, watchdog before clock waits, SWD preserved |
-| charger | BQ25798 high-byte-first registers, disabled charging at init, TS_IGNORE clear, voltage/current readback, asynchronous ADC and actual VSYS |
+| charger | ISL9241 low-byte-first registers, 200 mA startup, charge inhibit, voltage/current readback, continuous ADC and actual VSYS |
 | power sources | TPS25751 framed reads, two coherent contract snapshots, live expander state checks, cold charger retry, ordinary removal/reselection |
 | thermal | ADC conversion, 25 kHz PWM, tach freshness, spin-up grace and a latched stall response |
 | laptop controls | keyboard/consumer HID, vendor status/control HID, lid debounce, battery validity, two OLED page writers, headphone mute/enable/readback |
@@ -35,15 +35,17 @@ the previous enable command and power-good signal to clear before counting
 that load as zero. during an authorized boot it reserves the full boot
 budget. while running, it uses the fresh host load reading. unknown loads,
 temperature faults and the qualification switches still block charging.
+charge-current commands include shunt and regulation error. a budget below
+1850 mW becomes a zero command rather than an invalid small charge setting.
 
 pack operation and charging require the exact pack, interconnect, thermal
 protection and gauge profile to be qualified. the user reports a successful functional test of the three owned AKZYTUE
 cells in series with two intermediate taps. that is useful functional
 evidence; it does not establish current sharing, fault interruption or
-temperature protection. keep the individual protection boards intact while
-the replacement protection design is unfinished. the old 15 W low-pack policy value is
-still covered as a portable-policy regression; it is not a released N305
-operating point. the default target does not enable it.
+temperature protection. the BMS has not been tested with these packs, so removing their protection
+boards is not part of this checkpoint. the old 15 W low-pack value remains a portable-policy test case. it is not
+a qualified operating point for the Mu Ultra, and the default target does
+not enable it.
 
 ## source and fault behavior
 
@@ -51,15 +53,27 @@ PD1 and PD2 use 7-bit addresses `0x20` and `0x21`, through service-mux channels
 2 and 3. active PDO is register `0x34`, active RDO `0x35`, and PD status `0x40`.
 these are register offsets, not device addresses. status, PDO, RDO and PD
 status have 5-, 6-, 16- and 4-byte payloads, each preceded by its byte count.
-fixed 15 V and 20 V contracts are accepted for the corrected hardware.
-IINDPM is capped at 2.50 A, with a separate 0.50 A PD allowance for the raw
-AON path and margin. AUX retains its own conservative allowance. accepting
-a contract does not enable an unqualified boot or charge profile. other PDO
-types and voltages are rejected.
+fixed 5, 9, 15 and 20 V contracts are accepted for the revised hardware.
+the charger input command is capped at 4.4 A and uses 4 mA steps. the policy
+reserves 6.5 W for the raw standby path, converted to current at a conservative
+input voltage, plus a 250 mA PD allowance. shunt and charger error further reduce the
+command, and available power uses the lower current bound. this can leave no usable charger
+budget on a very small supply. AUX has its own allowance. a valid contract
+does not enable an unqualified boot or charge profile. other PDO types and
+voltages are rejected.
+
+the revised standby feed comes from VSYS on battery, so its draw passes through
+the ISL9241 battery shunt. the current reading is used directly. an 800 mA
+standby allocation is still reserved when calculating power available to the
+main loads; it is not added to the measured current. the normal Mu/display
+budget ceiling is 60 W, with the actual allowance reduced to fit the source,
+fan and other loads. this is not a battery-only power rating.
+`DUCKTOP2_CHARGER_CURRENT_QUALIFIED` stays off until the declared current
+transfer bounds have been checked on assembled hardware.
 
 all PD paths start off. a valid input can power the charger while charging
 and loads stay off. the EC retries its probe, obtains fresh VSYS/status,
-then writes and reads back IINDPM. U44 output and configuration registers
+then writes and reads back both input-limit registers. U44 output and configuration registers
 are checked on every input sample. an expander reset or bus failure cannot
 be hidden by its cached output latch. a failed safe commit resets the EC;
 U44 /RESET follows the same NRST net.
@@ -115,7 +129,7 @@ are retained with target objects. stack high-water measurement is still a
 hardware check.
 
 host CMake builds run the same suites. the host tests include literal PD
-wire frames, BQ byte order, charger power cycling, pending ADC timeout,
+wire frames, ISL byte order and current steps, charger power cycling, ADC freshness,
 expander reset, descriptor rejection, host lease expiry and fan stall.
 
 [USB power control and loom limits](ec_target/USB_POWER.md),
