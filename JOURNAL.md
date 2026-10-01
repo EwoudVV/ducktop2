@@ -5,46 +5,170 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-09-30: rework the board placement and fix more power stuff
+
+**Total time spent: 5 hours**
+
+i stopped trying to keep everything on top and did a much bigger placement pass across all three main boards. i moved 230 existing parts on the center board and reorganized the USB, audio, MCU and power sections. small support parts now use the underside where it makes sense, with capacitors much closer to the pins they actually support. the connectors, mounting holes and existing PCIe routing stayed in place.
+i also integrated the revised 100 W power circuit, corrected the charger current limits and standby-current handling, added missing bypass capacitors, and made a proper footprint for the power MOSFETs. i checked the maximum heights of all 392 underside parts and exported their positions for the case design. the BMS manufacturing package was regenerated and checked too.
+the schematics and board connections match, both I/O boards have zero physical DRC errors, and the firmware passes all 34 host tests and its ARM build. the center board still has routing errors to fix.
+
+images: ![image.png](https://cdn.hackclub.com/01a0f4b6-bee1-7dd2-b181-0124cfafe835/image.png)![image.png](https://cdn.hackclub.com/01a0f4b7-2686-7600-a9a2-4de267322587/image.png)![image.png](https://cdn.hackclub.com/01a0f4b7-c2f3-7f3e-9e4b-9a92a46cf959/image.png)
+
+# 2026-09-29: work on standby power and update the pd configs
+
+**Total time spent: 3 hours**
+
+worked on the 100 W power redesign, mainly the standby supply and Mu regulator. added controlled startup and current limiting to the standby circuit, and changed its battery feed so that current goes through the charger’s measurement shunt. checked component tolerances and corrected several resistor ordering codes. the Mu supply now has two current-sense resistors in parallel, and i adjusted its power budget to leave enough room for the fan.
+also exported fresh 20 V / 5 A configurations for both USB-C controllers and checked the generated files. corrected the BMS shunt part number and rebuilt its assembly package without changing the routing. the firmware tests and ARM build pass. main-board placement is still unfinished, especially around the charger’s gate-drive and bootstrap parts, so those changes haven’t been applied to the saved main boards yet. no new routing was added.
+image: ![image.png](https://cdn.hackclub.com/01a0efc6-5c2e-71a8-8fb6-01ceb362e8d0/image.png)
+
+# 2026-09-29: more keyboard routing
+
+**Total time spent: 22 minutes**
+
+did some keyboard routing! rerouted the updated led signals and power stuff.
+this was done yesterday, just forgot to devlog
+image: ![image.png](https://cdn.hackclub.com/01a0efc1-3d85-7710-8166-5ba21a2227ec/image.png)
+
+[lapse](https://lapse.hackclub.com/timelapse/cNIGQ1WzACUJ)
+
+# 2026-09-28: finish the bms routing and clean up the tracks
+
+**Total time spent: 2 hours**
+
+finished the bms routing after the connector and fuse changes, then cleaned up the weird bends and dangling tracks across the board. merged the tiny straight segments, removed unused vias, and replaced the old battery connector tail with a shorter connection. there are now 628 fewer track segments, without moving any components or mounting holes.
+fixed the supervisor ground return and current-sense pickup, checked all nine power paths, moved nine clipped labels and removed the last copper sliver. the saved board now has zero unconnected items, physical drc errors, dangling-copper warnings or silkscreen warnings. the pad and drill checks pass too. updated the layout report and readme, and pushed everything. the pcbway files still need regenerating for this revision before ordering.
+
+![image.png](https://cdn.hackclub.com/01a0e923-ffd7-7e82-9126-2c65b2d049aa/image.png)
+
+# 2026-09-27: sort out the keyboard leds and fix more bms routing
+
+**Total time spent: 4 hours**
+
+the keyboard led wiring was crossing everywhere, so i changed the assignments to follow the actual rows and nearby columns. updated the schematic, pcb, firmware mapping and wiring reference together. kept all 65 local led joins, all 264 vias and the existing switch, power and i2c routing. only removed or trimmed old led links that conflicted with the new assignments. the mapping tests pass, and the keyboard still has four existing ground thermal errors to fix while routing.
+also continued repairing the bms around the connector changes. brought it from 85 unconnected items down to 5, restored more control and power connections, and extended the pours into the unused space near the edges. moved and shrank the current-sense test point and removed several vias that were cutting through the main power copper. compared the power paths against the previous board and checked each saved revision. the latest bms has zero physical drc errors, but still needs the last connections and final checks on the sensing and return paths before it is ready to order.
+
+![image.png](https://cdn.hackclub.com/01a0e51e-22b9-7be2-a4ab-f8d3c7724e75/image.png)
+
+# 2026-09-26: work on the power redesign and case
+
+**Total time spent: 6 hours**
+
+worked on the 100w power redesign for the mu ultra. added the ISL9241 charger driver, input switching and interlocks, and more current-limit and power-budget handling. the firmware tests cover weaker chargers, switching inputs, resets, failed communication and charging independently of the os. also worked on the new Mu supply and always-on power circuits. the complete 100w circuit still needs to be integrated into the boards.
+changed the tall power connectors to low-profile WAGO terminals and updated the wire specifications and shared return-current calculations. the BMS now has a right-angle raw-pack connector and a smaller 5a fuse. fitting everything meant moving some nearby parts and test points, then removing conflicting copper. the board outlines, mounting holes and existing main-board high-speed routing were preserved. the BMS currently has 85 connections left to repair, so it isn't ready to order again yet.
+expanded the case study into a full assembly with base and lid pieces, revised Framework hinge supports, keyboard and trackpad supports, battery trays, speaker and OLED mounts, and cooling reservations. added STEP/STL exports, mounting and fastener schedules, an interactive viewer, and open, closed, exploded and section views. the study exposed how much space the old plugs and wire bends needed. the final thickness is still undecided, and the case exports need updating for the revised connectors.
+the firmware host tests and all 19 power tests pass. all four updated schematics have zero ERC errors and match their PCB pin assignments. saved everything as a checkpoint and marked the previous BMS manufacturing files as outdated. routing, harness clearance and physical testing still need finishing.
+
+![image.png](https://cdn.hackclub.com/01a0dfe2-2960-74cb-a88f-0815222d30cb/image.png)
+
 # 2026-09-26: start the case with the actual hinge mounts
 
-recorded design session: 09:48:34 to 10:11:35 America/New_York, 23 minutes
-1 second elapsed, including research and CAD checks. hands-on measurement
-and printing time has not been logged. this is separate from the overnight
-time since the last commit.
+**Total time spent: 1 hour**
 
-refreshed the saved-board geometry and checked all six boards. the center
-and right datum hashes were old, but the exported outlines and mount
-positions had not changed. the BMS has four perimeter holes and sits in
-the center board's front cutout. the keyboard has no chassis screw holes,
-so its supports need to hold the edges and underside without drilling it.
+imported the original Framework 13 hinge models and revision-00 drawings. the left and right mounts are different: their base seating faces are 1.3 and 2.2 mm below the shared axis. the lid has stepped faces too. made separate backing plates, spacers and small printed fit gauges for both sides. the editable source, STEP files, STLs and dimensioned mount drawings are together in mechanical/case-prototype.
+the replacement photos were useful here. the three lid screws are two M2 screws and one smaller M1.6 screw. the extra large hole is part of the Framework display mounting arrangement. the two base screws use the middle round and slotted holes, not the outer locating holes. the new plates have their own chassis bolts, clear of the hinge screw heads.
 
-imported the original Framework 13 hinge models and revision-00 drawings.
-the left and right mounts are different: their base seating faces are
-1.3 and 2.2 mm below the shared axis. the lid has stepped faces too. made
-separate backing plates, spacers and small printed fit gauges for both
-sides. the editable source, STEP files, STLs and dimensioned mount drawings
-are together in mechanical/case-prototype.
+![image.png](https://cdn.hackclub.com/01a0de16-3aae-7fc4-8980-43c5b14e48ac/image.png)
 
-the replacement photos were useful here. the three lid screws are two M2
-screws and one smaller M1.6 screw. the extra large hole is part of the
-Framework display mounting arrangement. the two base screws use the middle
-round and slotted holes, not the outer locating holes. the new plates have
-their own chassis bolts, clear of the hinge screw heads.
+# 2026-09-25: fix charging without the os and sort out the mu model
 
-checked the seating heights against the STEP solids, reopened every test
-STEP, and swept the adapters from closed to 180 degrees in 5 degree steps.
-both sides pass that unloaded geometry check, with 4.41 mm between the base
-adapter and hinge screw heads. this is not a full-case or cable-motion
-check yet. the owned hinges still need the small fit prints, and the lid
-still needs weighing and a holding test. the drawing's torque unit is
-ambiguous, so the marketplace's 3.3 kg name is not being used as a lid rating.
+**Total time spent: 2 hours**
 
-the next part is the full case stack. the current wire loops need about
-55 mm above the board, before the keyboard support, and the boards already
-span 358 mm before walls. those conflicts remain visible. no PCB routing,
-placement, outline or mounting hole was changed.
+fixed the mu ultra model so it sits correctly in the socket, without changing the actual board placement or routing. also fixed the charging logic so it doesn't depend on the OS being running. added checks for charging during startup, shutdown, missing load readings and temperature faults.
+expanded the power calculator to account for converter limits and battery assistance. all software tests and the firmware build passed. the bigger 100w power redesign is drafted and saved, but still needs integration and board changes before it's ready.
 
-![stepped hinge mounts](mechanical/case-prototype/views/hinge-mounts.png)
+![image.png](https://cdn.hackclub.com/01a0db14-1962-7f1c-bd83-7a2260e7e4d4/image.png)
+
+# 2026-09-24: start switching the carrier to mu ultra
+
+**Total time spent: 1 hour**
+
+started converting the carrier to the mu ultra, with the 226v first and room to upgrade to the 256v later. checked all 260 module contacts, moved the usb connections that changed, and moved hdmi to TCP2. pin 136 used to be ground but is now reserved, so that connection is gone. also replaced the nvme clock-request pull-down with the proper connection to the module.
+changed the internal usb hub from two ports to three so the trackpad can share it with the audio codec and optional radio. made the hub footprint match the manufacturer’s drawing and placed the trackpad power-control parts. removed 51 obsolete trace/via items around the changed connections, while keeping the rest of the routing and existing component positions.
+the schematic checks and 13 interface tests passed, and both boards’ pad connections match their schematics. there’s still routing and existing DRC issues to finish. decided on 100w usb-c input, but the charger, 12v supply and safe transition to battery power still need redesigning. the bms and keyboard are unchanged.
+image: ![image.png](https://cdn.hackclub.com/01a0d5e2-19a8-78be-ab90-9b54ebf7b8fc/image.png)
+
+# 2026-09-23: keyboard routing
+
+**Total time spent: 1 hour**
+
+did some routing on the keyboard. did the switches, mcu, and led power, but not yet led signal.
+![image.png](https://cdn.hackclub.com/01a0cfe4-15ad-78ab-98d3-2944ba79d0ae/image.png)
+
+[lapse](https://lapse.hackclub.com/timelapse/IrWANT44CM27)
+
+# 2026-09-22: add rgb to the keyboard and get it ready to route
+
+**Total time spent: 3 hours**
+
+added per-key rgb to the keyboard! picked tiny everlight LEDs that fit underneath the cherry ultra low profile switches, then checked their height, pads and position against the switch drawings. added a matrix driver, current-setting resistor, power filtering and an I2C buffer so turning the lighting off won't interfere with the rest of the bus.
+
+finished the schematic and component placement while keeping the original key positions, board outline and cable connector. cleared the previous routing so i can route it again myself. also cleaned up the schematic labels, added a connection map and routing notes, and removed the old non-rgb order files.
+
+the firmware now handles startup, individual colours, brightness and fault shutdown. all 30 firmware tests and the target build passed. the schematic and placement checks are clean, with 960 connections left to route. next up is routing it.
+
+![RGB keyboard placement on 22 september 2026](docs/images/journal/2026-09-22-keyboard-rgb.png)
+
+# 2026-09-22: get the bms files ready for pcbway
+
+**Total time spent: 2 hours**
+
+got the bms files ready for a pcbway quote. there were still a few manufacturing details to fix after finishing the routing. widened three short traces from 0.09 to 0.10 mm, thickened the silkscreen to 0.15 mm, and cleaned up the overlap that caused.
+
+also moved six vias away from nearby solder-mask openings. one low-current return via now has a smaller hole while keeping the same copper land. checked the smt openings with an extra 0.05 mm mask margin, then reran the power-path checks to make sure these changes hadn’t broken anything.
+
+exported and checked all four copper layers, drills, stencil files, the electrical test netlist, bom and placement files. the assembly list has 123 smt parts and two through-hole parts, with the removable fuse listed separately. the test pads aren’t counted as components.
+
+the saved board still has zero physical drc errors, zero unconnected items and no schematic mismatches. all 28 power-path cases passed. bundled everything with assembly drawings, order settings and file checksums. the notes ask for prices for one and two assembled boards. i still need to get the parts and manufacturing details confirmed with pcbway before paying.
+
+![BMS front prepared for PCBWay on 22 september 2026](docs/images/journal/2026-09-22-bms-front.png)
+![BMS back prepared for PCBWay on 22 september 2026](docs/images/journal/2026-09-22-bms-back.png)
+
+# 2026-09-21: finished bms routing!!
+
+**Total time spent: 4 hours**
+
+finally finished routing the bms! the temperature probes, isolated control signals, reference circuits and remaining supply connections are all connected now. it still fits on four layers. i removed the two middle mounting holes to make room, kept the four outer supports, and moved a few small parts around to get through the cramped areas.
+
+i also reworked some power copper so the signal vias have enough clearance, then checked that the battery and return paths were still connected properly. the quiet sensing return stays separate from the load current. the saved board has zero unconnected items, zero physical drc errors and no schematic mismatches. all 13 thermal tests and 31 electrical calculation checks passed too.
+
+cleaned up the silkscreen and test-point numbers, added front and back assembly drawings, exported previews, and updated the mechanical files and docs. i also wrote down the remaining warnings so i can refer back to them when i get the board made.
+
+![BMS front after routing on 21 september 2026](docs/images/journal/2026-09-21-bms-front.png)
+![BMS back after routing on 21 september 2026](docs/images/journal/2026-09-21-bms-back.png)
+
+# 2026-09-20: more bms routing
+
+**Total time spent: 5 hours**
+
+spent a lot of time on the bms routing. routed the charge and discharge health signals, hot temperature references, and more of the isolated controls and supplies. also moved a few control and reference components to make room, and restored the complete schematic so it matches the revised 149-part board. it still fits on four layers.
+
+a big part of this was checking what the new traces did to the battery current paths. some routes passed normal drc but narrowed important copper enough to fail the resistance margin checks, so i discarded those versions. the saved board has zero physical drc errors and no schematic-to-pcb mismatches.
+
+i have 46 connections left, mostly the temperature-sense and cold-reference circuits, supply rails, quiet returns and retry signals. i also need to clean up the silkscreen and the leftover track ends as i finish those connections.
+
+![BMS routing checkpoint on 20 september 2026](docs/images/journal/2026-09-20-bms-routing.png)
+
+# 2026-09-19: cleaned up schematics
+
+**Total time spent: 4 hours**
+
+cleaned up the schematics across the main board, both i/o boards, bms, keyboard and radio board. a lot of the labels and values were sitting inside large symbols or on top of each other. moved the reference and value text outside the bigger chips, turned net labels outward, and removed duplicate labels sitting on the same pin.
+
+also spread out the crowded charger, efuse, wifi and oled sections, including the small parts that were overlapping the larger symbols. updated the generators so the next regeneration keeps these readability changes, then saved the updated sheets.
+
+![Power schematic before and after the september 19 cleanup](docs/images/journal/2026-09-19-schematic-cleanup.png)
+
+# 2026-09-19: Split up my first 142 hour journal
+
+**Total time spent: 1 hour**
+
+split my first big journal into 40 shorter entries. it covered work from july 2 through august 27, before i knew about forge, and the single long entry was getting hard to read.
+
+i grouped the work into smaller sessions and kept the original dates and individual times. the earlier design, firmware and placement work now has its own entries, instead of everything being buried in one huge list. i also kept the screenshots with the older work.
+
+![Journal excerpts before and after splitting the first entry](docs/images/journal/2026-09-19-journal-split.png)
 
 # 2026-09-18: more bms routing
 
@@ -58,7 +182,7 @@ worked on the bms thermal and control wiring and added nine connections. it stil
 **Total time spent: 1 hour**
 
 I realized that i did not need to have a whole bunch of grounded stitching vias in between the differential pairs, and i could have just run a ground trace between them, so that's what i did. also did some routing for the stm32, mostly the keyboard nets.
-screenshots: ![image.png](https://cdn.hackclub.com/01a0ac70-f6e3-75b8-b58d-57d1b7f6683a/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-1e37-7bca-bcf5-92ebb4256f29/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-3ee3-7403-be03-c81e1c5b4886/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-6618-7479-94a5-9f860795def2/image.png)![Uploading image.png...]()
+screenshots: ![image.png](https://cdn.hackclub.com/01a0ac70-f6e3-75b8-b58d-57d1b7f6683a/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-1e37-7bca-bcf5-92ebb4256f29/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-3ee3-7403-be03-c81e1c5b4886/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-6618-7479-94a5-9f860795def2/image.png)
 
 # 2026-09-16: nextpcb sponsor!
 
@@ -250,7 +374,7 @@ Images: ![image.png](https://cdn.hackclub.com/01a06d38-73ad-7ae8-888b-2f76c67925
 
 starting routing now
 
-image: ![image.png](https://cdn.hackclub.com/01a068d3-c59d-755c-a8f5-9ef7fbb2cf46/image.png)
+image: ![image.png](docs/images/journal/history/2026-09-03-bms-placement-and-test-points.png)
 
 # 2026-09-02: I had someone audit the whole project (big thanks to them, they found a lot of stuff!) and fixed them
 
@@ -398,372 +522,462 @@ wired all the gnd stitching vias to the lattepanda mu, and also the 12 volt net.
 
 # 2026-07-02: initial project setup
 
-this is the older work i did before i knew about Forge. i split it up here so the timeline is easier to follow.
-
-- 8f9f31b 07-02. Made the initial commit with the power/battery and EC/MCU sheets, ERC clean. This has the generator state that had been built up before the repo existed. 51 files. 5 h
-
 **Total time spent: 5 hours**
+
+started putting the ducktop2 design into a proper kicad project. this was the first saved version of the power and battery circuit and the embedded controller, including the generator code i had already been working on before setting up the repo.
+
+the battery circuit at this point used a BQ76920 for the three-cell pack and a BQ25798 charger. i worked through the cell connections, current sensing, charge and discharge controls, and the smaller resistors and capacitors around them. a lot of the setup was getting the symbols, footprints and net labels into a form that could be reused across the project.
+
+on the controller side, i added the STM32F407 and started assigning the keyboard and power-control connections. the power and controller sheets needed to agree on their shared signals, so i kept those connections named consistently and worked through the schematic errors. this gave me a starting project with the two main sheets and their supporting libraries together.
+
+![initial project setup](docs/images/journal/history/2026-07-02-initial-project-setup.png)
 
 # 2026-07-08: deterministic schematics
 
-- 4fae95c 07-08. Checkpointed the generated schematic baseline across 68 files. 5 h
-- 46bb178 07-08. Made the generated schematics deterministic so diffs stopped being noise. 8 min
-
 **Total time spent: 5 hours 8 minutes**
+
+saved a much more complete set of schematics. the project now included the carrier connections, usb-c, power inputs, hdmi, internal services, display interfaces, keyboard, radio and maker controller. i also brought in the custom symbols and footprints those sections needed, so the sheets could be regenerated together.
+
+one annoying problem was that regenerating the same circuit kept changing the identifiers inside the kicad files. that made the differences huge even when very little had actually changed. i changed the generator to create repeatable identifiers from the sheet context and the order of its objects, instead of making new random ones each time.
+
+that work didn't add another laptop feature, but it made the whole project easier to work on. i could save a schematic change and see the actual difference instead of sorting through hundreds of unrelated identifier changes. the saved set includes the generated sheets, the keyboard board and the library files together.
+
+![deterministic schematics](docs/images/journal/history/2026-07-08-deterministic-schematics.png)
 
 # 2026-07-19: published the first full design
 
-- 6b47a97 07-19. Published the current Ducktop2 design, all child sheets, board, and docs. 214 files. 10 h
-
 **Total time spent: 10 hours**
+
+put the first full version of ducktop2 together in the public repo. until now, a lot of the work was spread across schematics, generators, board files and separate notes. i brought those into one project with the current hardware design, firmware, drawings and documentation.
+
+the main board was six layers at this point, with its outline and 997 footprints matched to the schematic. it covered the LattePanda Mu, nvme and wifi sockets, usb-c, hdmi, ethernet, power conversion and the embedded controllers. the internal screen uses the Mu's eDP connector, so i documented that connection separately from the external hdmi port. the low-profile keyboard also had its own board and manufacturing files.
+
+i added board renders and an architecture image so the project was understandable without opening every kicad sheet. i also wrote up how the hardware fits together, how to rebuild the schematics, and what the firmware is responsible for. that included the differences from ducktop1, where the separate computer and monitor left cables looping around the outside.
+
+this was mostly about getting all the existing design work into a usable project, with the supporting files alongside it. the board renders show the placement i was working with then, before the later board split.
+
+![published the first full design](docs/images/journal/history/2026-07-19-published-the-first-full-design.png)
 
 # 2026-07-19: updated the docs and readme
 
-- eee41e4 07-19. Updated the README. 7 min
-- 9073acc 07-19. Expanded the project documentation and added the MIT license. 7 min
-- e14f134 07-19. Removed outdated pin-review details from the README. 8 min
-
 **Total time spent: 22 minutes**
+
+cleaned up the readme and expanded the project documentation after publishing the design. i made the main page explain what ducktop2 is, how it differs from the first version, and where to find the hardware and build information.
+
+i also added the MIT license and removed old pin-review details that no longer belonged in the main readme. the more detailed information stays in the relevant documents, so the front page is easier to read.
+
+![updated the docs and readme](docs/images/journal/history/2026-07-19-updated-the-docs-and-readme.png)
 
 # 2026-07-20: split out the radio hardware and finished the usb-c policy
 
-- ab3b887 07-20. Finished the USB-C policy and split the radio hardware out onto its own daughterboard. 96 files. 8 h
-
 **Total time spent: 8 hours**
+
+split the radio hardware onto its own removable daughterboard. i wanted the laptop to work normally even if the radio board was missing or needed changing, so the radio could no longer share essential parts of the main system audio path.
+
+the daughterboard now holds the VHF and UHF modules, their filtering and antenna connections, the GNSS receiver and a separate USB audio codec. i kept the normal laptop audio and microphone on the main board. the connections between the boards needed their own power switching and signal controls, including USB, UART, I2C, push-to-talk and status lines. i made those interfaces start with the radio disabled, so an absent board would not affect startup.
+
+i also finished the USB-C port policy. the ports accept 5 V, 9 V or 15 V power at up to 3 A, and can supply 5 V at 900 mA. the laptop uses them as USB host ports. i tied the data-path enable to the controller's role and attachment signals, so the USB connections don't turn on just because a charger is plugged in.
+
+this touched the schematics, the new radio board, firmware and the port configuration files. i updated the documentation alongside those changes so the main-board and daughterboard interfaces stayed understandable.
+
+![split out the radio hardware and finished the usb-c policy](docs/images/journal/history/2026-07-20-split-out-the-radio-hardware-and-finished-the-usb-c-policy.png)
 
 # 2026-07-21: closed the pin reviews and moved the ac coupling caps
 
-- 720bd9f 07-21. Closed the remaining pin-review contracts. 2 h
-- c4217c1 07-21. Relocated 23 high-speed AC coupling caps and completed the pre-routing design review. 1 h 25 min
-
 **Total time spent: 3 hours 25 minutes**
+
+went through the pin connections again and finished the outstanding pin-by-pin review. i checked how the schematic signals lined up with the actual component pins and the board, rather than relying only on matching part names.
+
+i also moved 23 high-speed coupling capacitors. their positions affect how the pairs can leave the source and reach their connectors, so i worked through the capacitor locations before carrying on with routing. i recorded the placement changes and the reasons for them, then updated the board and the review notes together. this was a cleanup of the existing interface circuits and their layout, with the capacitor positions being the main visible change.
+
+![closed the pin reviews and moved the ac coupling caps](docs/images/journal/history/2026-07-21-closed-the-pin-reviews-and-moved-the-ac-coupling-caps.png)
 
 # 2026-07-23: refreshed the published design
 
-- 764558d 07-23. Refreshed the repo with updated PCB renders and the current design state. 2 h
-
 **Total time spent: 2 hours**
+
+refreshed the published project with the board changes and new renders. the pictures in the readme needed to match the design i was actually working on, including the main board and the separate daughterboard work.
+
+i also updated the keyboard stencil files and the printing setup for the full-board stencil. that meant keeping the model, process settings and description together instead of leaving the old stencil instructions beside newer files. the repo now showed the current design and the supporting manufacturing work in one place.
+
+![refreshed the published design](docs/images/journal/history/2026-07-23-refreshed-the-published-design.png)
 
 # 2026-07-27: rewired the trackpad over usb2
 
-- 8f2b992 07-27. Wired the trackpad directly over USB2 and recorded the audit holds. 5 h
-- 66c243f 07-27. Fixed what the trackpad rewire broke and removed duplicate footprints. 3 h
-
 **Total time spent: 8 hours**
+
+rewired the trackpad to use a direct USB2 connection to the Mu. i worked through the whole connection, including the data pair, series resistors, ESD protection, switched power and the connector pin order. the schematic now describes a four-wire connection with ground, D-, D+ and power.
+
+changing that circuit also meant checking the board that was already there. i found duplicate physical footprints and removed those, then fixed the copper conflict at J58 and the short around the two trackpad series resistors. i had to keep the schematic and PCB in agreement while doing that, because simply changing the labels would have left the old copper attached to the wrong things.
+
+i also checked the surrounding USB and power connections and wrote down the issues i still had to work through. the trackpad's power control needs to agree with the laptop's sleep and shutdown behavior, and the connector must match the actual cable. those details were part of the interface work, not just the two USB signal wires.
+
+the result was a corrected trackpad circuit and a cleanup of the footprint and copper problems exposed by the change. i kept the rest of the board's existing routing and outline while fixing this section.
+
+![rewired the trackpad over usb2](docs/images/journal/history/2026-07-27-rewired-the-trackpad-over-usb2.png)
 
 # 2026-07-28: filled in the bom and part numbers
 
-- 57008c8 07-28. Assigned 327 BOM MPNs across 11 schematic sheets, closing the procurement gaps from 370 down to 43. 2.5 h
-- 3271f16 07-28. Applied the BOM to the radio and keyboard daughterboards and added Cherry MX switch 3D models. 18 min
-
 **Total time spent: 2 hours 48 minutes**
+
+worked through the bill of materials and filled in the actual ordering codes. a generic capacitor value or connector name isn't enough when it comes time to buy parts, so i went through the packages and manufacturer part numbers across the sheets.
+
+i assigned 327 missing part numbers on the main design, bringing the list of procurement gaps down from 370 to 43. i also applied the part information to the radio and keyboard boards. while working on the keyboard, i added the Cherry MX ULP switch models so their bodies could be seen in the 3D view. the remaining gaps were kept in a separate list instead of disappearing into the larger BOM.
+
+![filled in the bom and part numbers](docs/images/journal/history/2026-07-28-filled-in-the-bom-and-part-numbers.png)
 
 # 2026-07-28: added the remaining 3d models and cleaned up the radio board
 
-- 059dbb2 07-28. Added 3D models for 9 more footprints on the main PCB and radio daughterboard. 22 min
-- e8a8249 07-28. Added 3D STEP models for the remaining ducktop2 components. 29 min
-- 015e06f 07-28. Added the Amphenol MDT420M01001 3D model (M.2 Key M) and re-added the remaining models. 2 min
-- 9a02516 07-28. Fixed the radio DB J1 layer (F.Cu to B.Cu) for the mezzanine stack and added the radio DB outline to the mainboard Dwgs.User. 7 min
-- b4d83e6 07-28. Fixed the 3D model paths to use KIPRJMOD, moved J1 to B.Cu, and relocated 77 fanout traces plus 42 stitch vias for the mezzanine stack. 4 min
-
 **Total time spent: 1 hour 4 minutes**
+
+added more of the missing 3D models, including the M.2 socket and parts on the main and radio boards. i fixed the model paths to use the project directory, so the views could work when the repo was moved to another computer.
+
+i also corrected the side of the radio board's J1 connector. moving that mezzanine connector to the back meant moving its associated fanout and ground stitching too. i relocated the 77 fanout tracks and 42 stitching vias with it, then added the radio-board outline to the main board's drawing layer to show how they fit together.
+
+![added the remaining 3d models and cleaned up the radio board](docs/images/journal/history/2026-07-28-added-the-remaining-3d-models-and-cleaned-up-the-radio-board.png)
 
 # 2026-07-30: set up the fabrication stackup and ec tooling
 
-- dc019f9 07-30. Defined the 6-layer fabrication stackup for NextPCB. 3 h
-- cbbc6c9 07-30. Fixed 3D model paths and updated the PCB format to KiCad 10.0. 1.5 h
-- 5fe84ee 07-30. Added the power loop relocation scripts and BOM MPN assignments. 3 h
-- ab1ab99 07-30. Ported the EC target firmware to the STM32F407. 2.5 h
-
 **Total time spent: 10 hours**
+
+worked on both the manufacturing setup and the first STM32 target build. i defined the six-layer stackup for NextPCB, then updated the board format and repaired the paths to its 3D models. i also worked on the power-loop placement scripts and the part-number assignments around those circuits.
+
+on the firmware side, i set up the ARM toolchain and brought the embedded-controller code onto the STM32F407 target. that included the startup code, clock setup, millisecond tick, GPIO initialization and I2C driver. the controller needs its pins to start in sensible states before it begins switching power or talking to the other devices, so startup was a substantial part of this work.
+
+the target build produced a firmware binary with the controller loop running at 50 Hz and I2C configured for the service devices. i wrote down the bus addresses and mux channels for the displays, USB-C controllers and other devices so the code and schematic used the same connections.
+
+this session covered a lot of supporting work around the board: its manufacturing definition, model paths, power placement tools and the firmware foundation needed to bring it up later.
+
+![set up the fabrication stackup and ec tooling](docs/images/journal/history/2026-07-30-set-up-the-fabrication-stackup-and-ec-tooling.png)
 
 # 2026-07-31: added and fixed the ec dfu path
 
-- dc893b5 07-31. Added the EC DFU programming path: BOOT0 button (SW2) and the rear-edge USB-C prog port (J70/U70/U71/D70) in 08_internal_services. 3 h
-- 744f320 07-31. Fixed the ERC and annotation issues in the EC DFU programming section. 2.5 h
-
 **Total time spent: 5 hours 30 minutes**
+
+added a way to program the embedded controller over USB. the circuit includes a BOOT0 button and a rear USB-C programming connection, with the USB protection and supporting parts on the internal-services sheet.
+
+i then worked through the schematic errors caused by that addition. some of the references and annotations needed fixing so the programming section could live alongside the existing service circuits without collisions. i kept the programming connection separate from the normal host USB connections and updated the notes to explain how to enter the STM32 bootloader.
+
+![added and fixed the ec dfu path](docs/images/journal/history/2026-07-31-added-and-fixed-the-ec-dfu-path.png)
 
 # 2026-07-31: wrote the behavior docs and headphone jack work
 
-- fbc8981 07-31. Added the user-facing behavior verification checklist covering lid, USB-C roles, boot, audio, display, input. 24 min
-- db86159 07-31. Recorded the user-confirmed behavior expectations: lid means display off, wide-range AUX, headphone jack as an action item, keyboard/OLED/fan specs. 19 min
-- 2ff5b2b 07-31. Locked the keyboard layout (board already fabricated), recorded the headphone jack design (rear 3.5mm with plug-detect mute), and added the rendered keyboard image. 13 min
-- 6fe853f 07-31. Wrote the headphone jack implementation plan as a handoff for the next session. 28 min
-- 90f3521 07-31. Wrote the full project handoff for the next session. 1 h
-- c329f95 07-31. Regenerated the child schematics to sync with the current generators. 29 min
-- fae06d4 07-31. Added the rear 3.5mm headphone jack with plug-detect speaker mute as sheet 15. 45 min
-- 70811a2 07-31. Documented the headphone jack completion across verification, design-status, and handoffs. 10 min
-
 **Total time spent: 3 hours 48 minutes**
+
+worked out how the laptop should behave in normal use, including the lid switch, charging inputs, keyboard, displays, cooling and audio. i wrote those decisions down so the firmware and hardware could follow the same behavior. the keyboard layout was already fixed because that board had been fabricated.
+
+the main circuit change was adding the rear 3.5 mm headphone jack. i gave it plug detection so inserting headphones can mute the speakers, and added the headphone section to the system-audio sheet. that involved the jack connections and the control signals, not just putting another connector on the board.
+
+i regenerated the affected schematic sheets and updated the audio and behavior documentation. i also added the keyboard image to the project so the chosen layout was visible alongside the rest of the design.
+
+![wrote the behavior docs and headphone jack work](docs/images/journal/history/2026-07-31-wrote-the-behavior-docs-and-headphone-jack-work.png)
 
 # 2026-08-01: host-tested the ec behavior
 
-- d0991b3 08-01. Added the host-tested keyboard Fn-layer keymap (ec_keymap). 1.5 h
-- d1396d0 08-01. Added the host-tested EC fan policy core (ec_fan). 3 min
-- d95d9f2 08-01. Added the host-tested OLED status content composer (ec_oled). 9 min
-- 22a966d 08-01. Added the host-tested lid switch debouncer (ec_lid). 18 min
-- f223750 08-01. Added the host-tested battery state machine (ec_battery). 36 min
-- e2c594f 08-01. Added the eMMC recovery/hibernate setup design and tooling. 9 min
-
 **Total time spent: 2 hours 45 minutes**
+
+worked on the controller behavior and tested it on the computer before connecting it to hardware. i added the keyboard Fn-layer mapping, fan policy, OLED status content, lid-switch debounce and battery state handling.
+
+the battery code needed to distinguish between a missing pack, an unknown reading, charging, discharging and a full battery. i added tests around those states so a missing or invalid measurement would not be treated as a valid battery reading. the lid and keyboard work also needed debounce handling, while the OLED code needed a consistent way to turn the controller state into text for the displays.
+
+i also wrote up the eMMC recovery and hibernation setup. this session was mainly firmware and behavior work: making the individual pieces testable and deciding what the laptop should do when its inputs change.
+
+![host-tested the ec behavior](docs/images/journal/history/2026-08-01-host-tested-the-ec-behavior.png)
 
 # 2026-08-01: worked through the bom, impedance, and placement prep
 
-- 14a7a89 08-01. Refreshed the documentation across the repo. 15 min
-- 68cd774 08-01. Stamped the generation-time BOM catalog and closed the remaining 378 procurement gaps. 43 min
-- 98d614d 08-01. Computed candidate impedance geometries for the NextPCB review. 2.5 h
-- b805412 08-01. Added impedance-driven net classes and base design rules to the mainboard. 18 min
-- 4dda560 08-01. Documented the high-speed routing plan and skew budgets. 20 min
-- 42abc43 08-01. Added the placement-collision analyzer for pre-routing triage. 13 min
-- 7877b5c 08-01. Added the placement-collision fixer with conservative grid moves for passives. 21 min
-- e23a151 08-01. Documented the pre-routing placement review checklist. 2 min
-
 **Total time spent: 4 hours 42 minutes**
+
+continued the BOM and routing preparation. i brought the part-number information into the generator's catalog and worked through the remaining procurement entries, so regenerating the schematics would keep the selected parts instead of losing that information.
+
+i also calculated starting widths and gaps for the high-speed traces and added the corresponding net classes and board rules. those values needed to go with the intended layer stack, so i wrote down the impedance calculations and the pair-length budgets alongside the routing plan.
+
+the other major part was placement cleanup. i added a tool to identify overlapping footprints and pads, then a second tool to make small, controlled moves of the crowded passive parts. i used the resulting reports to separate simple spacing problems from the larger components that needed a deliberate placement decision. that gave me a clearer list of what to move before spending time routing around it.
+
+![worked through the bom, impedance, and placement prep](docs/images/journal/history/2026-08-01-worked-through-the-bom-impedance-and-placement-prep.png)
 
 # 2026-08-01: built the ec driver and keyboard path
 
-- d53b337 08-01. Analyzed the mic acoustic integration and accepted the trackpad/battery overlap. 8 min
-- 1e346eb 08-01. Fixed the placement analyzer pad parsing (at/size/at_span). 28 min
-- ee8a2bf 08-01. Added the EC target driver stack: BQ25798/BQ34Z100, ADC/PWM/tach hardening, and app glue. 1.5 h
-- dc4a1f8 08-01. Added the EC keyboard matrix scan with debounce and wired the keymap into the target loop. 1 h 7 min
-- a6bddbd 08-01. Added the EC USB HID keyboard device stack (OTG_FS) with report transport. 11 min
-- 5dd8b29 08-01. Documented the EC driver stack and keyboard path completion in the target port status. 10 min
-
 **Total time spent: 3 hours 34 minutes**
+
+connected more of the controller's firmware to its actual devices. i added drivers for the BQ25798 charger and BQ34Z100 fuel gauge, including register reads, setting limits and reading the settings back. i used a mock I2C bus to exercise the transaction handling without needing a populated board.
+
+i also built the keyboard path. that included scanning the matrix, debouncing the keys, applying the keymap and sending USB HID reports to the host. the scan code and USB descriptors needed to agree with the keyboard behavior i had already written, so i added tests around those pieces as well.
+
+alongside that, i worked through the fan calculations and the code that connects device readings to the controller's decisions. i also checked the microphone placement and the trackpad overlap with the battery area. the firmware could now do more than calculate a policy; it had the driver and input code needed to communicate with the hardware.
+
+![built the ec driver and keyboard path](docs/images/journal/history/2026-08-01-built-the-ec-driver-and-keyboard-path.png)
 
 # 2026-08-01: added the headphone jack and cleaned up placement
 
-- 203083f 08-01. Synced 11 headphone-jack section footprints onto the mainboard (ECO). 40 min
-- 7d5caa5 08-01. Ran placement fixer pass 2: 190 passive moves, shorts 199 to 97, mask 199 to 107. 1 min
-- 08673af 08-01. Ran placement fixer pass 3: 59 more passive moves, shorts 97 to 54. 7 min
-- b93a023 08-01. Documented the big-part placement proposals for review. 15 min
-- aa10d03 08-01. Added first-pass GND planes, power islands, and mechanical keepouts, unfilled. 8 min
-- 8199ed3 08-01. Aligned the min through-drill constraint with NextPCB capability (0.2mm), clearing 199 drill findings. 1 min
-
 **Total time spent: 1 hour 12 minutes**
+
+brought the headphone-jack parts onto the PCB and continued sorting out placement collisions. eleven audio-section footprints needed to be added to match the new schematic.
+
+i ran two more passes over the crowded passive parts, moving 190 parts in one pass and another 59 in the next. the reported pad shorts dropped from 199 to 54 across those passes. i kept a separate list of the larger components that needed manual placement decisions.
+
+i also added the first ground planes, power islands and mechanical keepouts, and corrected the minimum through-hole drill setting to match the manufacturer's 0.2 mm capability.
+
+![added the headphone jack and cleaned up placement](docs/images/journal/history/2026-08-01-added-the-headphone-jack-and-cleaned-up-placement.png)
 
 # 2026-08-01: tightened the floorplan and placement checks
 
-- c555bf9 08-01. Ran placement fixer pass 4 with board-bounds enforcement and recovered the pushed-off caps. 3 min
-- dec7206 08-01. Updated the placement review, 27 off-board anchors left for manual work. 10 min
-- 8271eda 08-01. Revived the floorplan workflow, planner updated with all major parts plus apply_floorplan_layout.py. 31 min
-- 3717620 08-01. Verified all part sizes in the floorplan, added OLED modules, unlocked all parts. 23 min
-- 35006b8 08-01. Set the hinge keepouts to the Framework 13 hinge dimensions, identical L/R modules. 4 min
-- c5cefd7 08-01. Adopted the user floorplan layout and fixed the mainboard coordinate to (0,0). 16 min
-
 **Total time spent: 1 hour 27 minutes**
+
+went back to the floorplan and made it more useful for placement. i added the larger parts and OLED modules to the planner, checked their sizes, and updated the script that transfers the chosen positions onto the PCB.
+
+i also fixed the placement tool's handling of the board boundary. some capacitors had been pushed outside the outline during earlier moves, so i brought those back and made the boundary part of the placement checks. i updated the hinge keepouts to the Framework hinge dimensions and applied the chosen floorplan with the main-board origin at zero. this tied the drawing and the actual board coordinates together more clearly.
+
+![tightened the floorplan and placement checks](docs/images/journal/history/2026-08-01-tightened-the-floorplan-and-placement-checks.png)
 
 # 2026-08-01: applied the floorplan and changed the radio connector
 
-- e48ad3c 08-01. Applied the floorplan revD layout to the mainboard, 10 parts with the Mu upper-middle. 20 min
-- ced8650 08-01. Fixed Edge.Cuts (removed the stale notch), cleaned zones, keepouts, and guides, ran fixer pass 5. 52 min
-- f4c8a3d 08-01. Added board-bounds enforcement to the floorplan apply script. 10 min
-- 986616b 08-01. Applied the user layout rev2 and ran fixer pass 6, shorts 90 to 76. 4 min
-- d8df625 08-01. Swapped the radio daughterboard connector from DF40-60 to FH12-30S FFC. 1 h 25 min
-
 **Total time spent: 2 hours 51 minutes**
+
+applied the revised floorplan to the main board, including moving the Mu toward the upper-middle area. i then worked through the outline, zones and keepouts around the new positions. i added a board-boundary check to the placement script so another layout change could not silently leave parts outside the PCB.
+
+i also changed the radio connection from the DF40 mezzanine connector to a 30-pin FH12 FFC connector. that required updating the connector footprint and its place in the layout. after applying the next floorplan revision, i ran another collision cleanup pass and reduced the reported shorts from 90 to 76. there was still placement work to do, but the floorplan and radio connection were now much closer to the arrangement i wanted.
+
+![applied the floorplan and changed the radio connector](docs/images/journal/history/2026-08-01-applied-the-floorplan-and-changed-the-radio-connector.png)
 
 # 2026-08-02: cleaned up and restored the board geometry
 
-- 4a14b0c 08-02. Did a thorough cleanup: fixed Edge.Cuts, cleared Dwgs.User guides, clipped zones, restored J2300. 1 h
-- ab101bc 08-02. Fixed Edge.Cuts to a plain rect, cleared all Dwgs.User guides, restored J2300. 10 min
-- c86cdd1 08-02. Reverted to d8df625, restoring the original Edge.Cuts, guides, and zones. 6 min
-
 **Total time spent: 1 hour 16 minutes**
+
+cleaned up the board outline and drawing guides, including removing stale guide shapes, clipping the zones and restoring the radio connector's position.
+
+the cleanup went through a couple of revisions. i changed the outline to a plain rectangle and cleared the old guides, then decided to restore the earlier board geometry instead. i brought back that version's edges, guides and zones so the board was left in a known layout. this entry includes that back-and-forth, rather than treating the first cleanup as the final result.
+
+![cleaned up and restored the board geometry](docs/images/journal/history/2026-08-02-cleaned-up-and-restored-the-board-geometry.png)
 
 # 2026-08-09: repaired the board outline and guides
 
-- 7a94c7d 08-09. Updated Edge.Cuts to a plain 358x185 rect, regenerated the Dwgs.User sheet guides, fixed the J2300 position. 1.5 h
-- d93fcd6 08-09. Fixed Edge.Cuts properly, replacing 5 notch lines with 1 rect edge. 26 min
-- f0902e6 08-09. Deduplicated the UUIDs on the outline segments. 40 min
-- 0b3a3a3 08-09. Regenerated the Dwgs.User sheet guides with valid unique UUIDs. 8 min
-
 **Total time spent: 2 hours 44 minutes**
+
+worked on the board outline and the placement guides again. the intended outline was a plain 358 by 185 mm rectangle, but old notch segments were still mixed into the edge drawing. i removed those pieces and replaced them with the correct straight edge.
+
+i also fixed duplicated identifiers on the outline segments. that was separate from how the board looked on screen, but it mattered when loading and checking the file. after fixing the edges, i regenerated the drawing guides with unique identifiers and corrected the radio connector position. the saved file now had the intended outline instead of several different versions of it overlapping.
+
+![repaired the board outline and guides](docs/images/journal/history/2026-08-09-repaired-the-board-outline-and-guides.png)
 
 # 2026-08-09: removed the stale notch and restored the radio connector
 
-- 32a29a8 08-09. Removed the old left-side notch, leaving a plain 358x185 rectangle. 55 min
-- eecee42 08-09. Restored the J2300 radio-DF40 position to on-board at (288.4, 149.1). 16 min
-
 **Total time spent: 1 hour 11 minutes**
+
+removed the remaining old notch from the left side of the board. it was a leftover from an earlier layout and no longer belonged in the 358 by 185 mm outline.
+
+i also restored the radio connector to its on-board position at 288.4, 149.1 mm. the outline and connector had both been affected by the earlier cleanup, so i fixed them together and saved that arrangement before continuing with the rest of the placement.
+
+![removed the stale notch and restored the radio connector](docs/images/journal/history/2026-08-09-removed-the-stale-notch-and-restored-the-radio-connector.png)
 
 # 2026-08-11: fixed placement collisions and port layout
 
-- c3d268c 08-11. Resolved all pad collisions in placement and applied the user floorplan export. 3 h
-- 8a18fc9 08-11. Fixed the port positions, J22 to y=25, J21 to y=36.4, and set the guides to the footprint bboxes. 1 h 13 min
-- d5eb9ff 08-11. Fixed the port positions and M.2 card layout, guides verified with DRC. 2 h
-
 **Total time spent: 6 hours 13 minutes**
+
+spent this session cleaning up the main-board placement and getting the external ports into the right places. the floorplan changes had left overlapping pads and several connectors whose positions did not match the intended case openings.
+
+i applied the updated floorplan and worked through the pad collisions. i then adjusted the ports individually, including the two left-side connector heights and the M.2 card arrangement. changing a socket position also changes the space its card needs, so i checked those as assemblies instead of treating the connector body as the whole part.
+
+i rebuilt the drawing guides from the actual footprint bounds so they would follow the board rather than show old positions. that was useful for comparing the connector locations against the floorplan and seeing where the larger parts were still crowding one another.
+
+the work was mostly repeated placement adjustments and checking the result. i saved the corrected board, floorplan and guides together so the next placement changes could start from the same arrangement.
+
+![fixed placement collisions and port layout](docs/images/journal/history/2026-08-11-fixed-placement-collisions-and-port-layout.png)
 
 # 2026-08-12: fixed the outline, guides, and radio ffc
 
-- a283abc 08-12. Added the ethernet jack mid-mount cutout and verified the M.2 slots and port alignment. 1 h
-- 1435f20 08-12. Fixed all remaining DRC shorts, 49 to 0. 29 min
-- f3e4074 08-12. Cleaned up the Dwgs.User guides, removed 67 stale blocks, regenerated 21 aligned pairs. 29 min
-- ab33172 08-12. Swapped J2300 to the FH12-30S FFC and removed 52 dangling route stubs. 24 min
-
 **Total time spent: 2 hours 22 minutes**
+
+added the recess for the mid-mount ethernet jack and checked how the surrounding ports and M.2 slots lined up with the board. that connector needs room in the edge itself, so a rectangular outline was no longer enough in that area.
+
+i also worked through the remaining reported shorts, bringing that group from 49 down to zero, and cleaned up the old drawing guides. i removed 67 stale guide blocks and rebuilt 21 aligned pairs from the current placement.
+
+finally, i replaced the radio connector with the FH12-30S FFC footprint and removed 52 dangling route stubs left around the old connection. the outline, guides and connector changes are all saved in this version.
+
+![fixed the outline, guides, and radio ffc](docs/images/journal/history/2026-08-12-fixed-the-outline-guides-and-radio-ffc.png)
 
 # 2026-08-12: worked through the f1-f9 placement review
 
-- b8e329f 08-12. Fixed F1, made the Mu carrier (A1) mountable by moving it south and relocating H1/H2. 1 h 15 min
-- 5c33a8a 08-12. Fixed F2, moved U170, R2316, and U46 clear of the J40 WiFi socket. 4 min
-- 262ba3b 08-12. Fixed F3, moved the keyboard FFC series resistors clear of the J310 pad field. 4 min
-- 5fe1b61 08-12. Fixed F4, J2300 fully on-board, and fixed the FH12-30S BOM properties. 4 min
-- 8bbfa01 08-12. Fixed F5, the mounting hole pattern, board is canonical, updated the retention doc. 7 min
-- e57919a 08-12. Fixed F6+F8, committed the real impedance net classes and fixed all external clearances. 7 min
-- 0cf5f36 08-12. Fixed F9, moved the ethernet PHY crystal Y500 adjacent to U500. 9 min
-- 91c4f3b 08-12. Fixed F7, documented the ethernet notch and mounting pattern as the released contract. 5 min
-- caf6ffb 08-12. Redocumented F7, same ethernet notch and mounting pattern contract. 5 min
-- a5b4f3a 08-12. Recorded the independent review findings and the final F1-F9 fix state. 20 min
-
 **Total time spent: 2 hours 20 minutes**
+
+worked through the placement problems found in the board review. the biggest one was the Mu socket: part of its footprint and the matching standoff positions did not fit the board properly. i moved the module south and moved its two supports with it, so the mounting arrangement followed the module instead of staying behind at its old position.
+
+i cleared nearby control parts from the Wi-Fi socket and moved the keyboard FFC series resistors away from its pad field. i also brought the radio connector fully onto the board, corrected its part information, and moved the ethernet crystal next to its controller.
+
+the rest of the session covered the mounting pattern, external clearances and the real impedance net classes. i updated the mechanical notes to match the resulting board, including the ethernet recess, and wrote down the final changes so i could continue from the corrected positions.
+
+![worked through the f1-f9 placement review](docs/images/journal/history/2026-08-12-worked-through-the-f1-f9-placement-review.png)
 
 # 2026-08-13: cleaned placement and started the independent review
 
-- 0b3974d 08-13. Resolved all placement DRC classes, board at 186 violations. 2 h
-- c8316e3 08-13. Added the electronics-correctness handoff review. 4 min
-- 9716bc6 08-13. Ran the electronics review v2 and found the J2300 pin-net mismatch across 26 pads. 1 h
-- 77484dd 08-13. Ran the electronics review v3, retracted the false alarms, confirmed J2300 as the blocker. 1 h
-- 9a2d7a5 08-13. Added the independent review prompts for nets/electronics and user-functionality. 8 min
-
 **Total time spent: 4 hours 12 minutes**
+
+continued cleaning up the placement, then took a closer look at the electrical connections behind it. i worked through the placement-related DRC findings and got the board down to 186 reported violations at that point.
+
+the radio connector turned out to need more than a spacing fix. checking its pad numbers against the schematic showed mismatches across 26 pads, so i recorded the affected connections before changing it again. i also revisited some earlier reported problems and separated the actual connector issue from the ones that did not apply.
+
+this changed what i needed to do next. a connector can look correctly placed while still assigning the wrong signal to a contact, so i checked the pin mapping as well as the physical fit. i kept the layout cleanup and the remaining connector work written down together.
+
+![cleaned placement and started the independent review](docs/images/journal/history/2026-08-13-cleaned-placement-and-started-the-independent-review.png)
 
 # 2026-08-13: fixed j2300 and closed the electronics review
 
-- b13a110 08-13. Fixed P0, replaced J2300 with the FH12-30S and resynced all 30 pin nets. 55 min
-- f3c0fe1 08-13. Recorded the user-functionality review, noted the DB J1 (P0-2) and EC-update/S5-gating decisions as open. 35 min
-- 3176d90 08-13. Completed the EC DFU port (J73) and the DB power rework, verified schematic and board. 1 h
-- 8a64108 08-13. Closed the remaining electronics-review items: FAN1_TAC, SLS_S3, SIO UART, F5/F6. 1.5 h
-- ec8ea47 08-13. Fixed the F1 (Mu mountability) and F3 (keyboard FFC) review findings. 25 min
-
 **Total time spent: 4 hours 25 minutes**
+
+fixed the radio connector's pin mapping and worked through more of the board issues. i replaced J2300 with the FH12-30S connection and synchronized all 30 contacts with the schematic, then checked the resulting board assignments.
+
+i also completed the controller's USB programming connection and changed the radio-board power arrangement. other corrections covered the fan tachometer signal, the Mu sleep signal and the serial interface. these were separate connections that needed checking across the schematic, controller assignments and board.
+
+on the mechanical side, i corrected the Mu mounting arrangement and the keyboard FFC placement. the module socket and its standoffs now moved together, and the keyboard connector had the clearance it needed. i updated the board, part lists and notes to match these changes, including the corrected radio and programming connectors.
+
+![fixed j2300 and closed the electronics review](docs/images/journal/history/2026-08-13-fixed-j2300-and-closed-the-electronics-review.png)
 
 # 2026-08-13: finished the mechanical review and moved to eight layers
 
-- 39123b2 08-13. Did the mechanical enclosure/stack design, hinge plan, and battery-trackpad resolution. 2 h
-- 5bbfe91 08-13. Did mechanical rev 2, trackpad stacks above the battery row, 358x248 envelope. 15 min
-- 7351b21 08-13. Transitioned the mainboard stackup to 8 layers, impedance geometry preserved. 40 min
-- a7268a4 08-13. Drafted the 8L power plan with the rail inventory, L5 island rules, and open items. 10 min
-
 **Total time spent: 3 hours 5 minutes**
+
+worked through the case layout and the vertical space inside the laptop. my first arrangement put the batteries and trackpad in separate front-to-back bands, which made the base much deeper than it needed to be. i changed the plan so the trackpad sits above the battery row, with support and separation between them. that brought the planned footprint back to 358 by 248 mm.
+
+i also moved the main board from six layers to eight. i kept the impedance requirements with the new stackup and planned where the signal, ground and power layers would go.
+
+for the power layer, i started mapping the individual supply islands rather than treating it as one large plane. the mechanical drawing and the layer plan were both updated for this version of the laptop.
+
+![finished the mechanical review and moved to eight layers](docs/images/journal/history/2026-08-13-finished-the-mechanical-review-and-moved-to-eight-layers.png)
 
 # 2026-08-14: did the pre-routing audits
 
-- e069a6f 08-14. Did the pre-routing audits: Mu fan-out feasibility, power load budget, footprint audit. 2 h
-
 **Total time spent: 2 hours**
+
+checked several things before committing more time to routing. i looked at how the Mu socket's pads could escape onto the signal layers, checked the available power against the loads, and went through the footprints for the parts that were easy to get wrong.
+
+i wrote the results into the routing and power notes, including the constraints around the Mu fanout. this was mostly checking the design and deciding how to approach those areas, rather than adding more tracks to the board.
+
+![did the pre-routing audits](docs/images/journal/history/2026-08-14-did-the-pre-routing-audits.png)
 
 # 2026-08-23: prepared the nvme, rtc, and nextpcb submission
 
-- 6513f54 08-23. Added NVMe power headroom and the pack-backed RTC, coin cell removed. 3 h
-- fd5a419 08-23. Prepared the NextPCB 8L fab submittal with the DRC-vs-capability gap table. 10 min
-- 367b55e 08-23. Set the fab submittal solder mask to BLACK (matte preferred), 0.15mm spacing clears the 5mil black bridge rule. 15 min
-
 **Total time spent: 3 hours 25 minutes**
+
+worked on the nvme supply, the real-time clock power and the information for NextPCB. i added more power headroom for the SSD and changed the RTC supply to use the battery pack, removing the separate coin cell from the design.
+
+i then put together the eight-layer manufacturing details: the proposed stackup, copper, board thickness, via sizes and the impedance requirements. i compared the board's design rules with the manufacturer's capabilities so differences were written down before sending the files for review.
+
+i also set the solder mask to black, with matte preferred, and checked the planned mask spacing against the stated manufacturing limit. the resulting files describe the actual board and the fabrication choices i wanted NextPCB to check.
+
+![prepared the nvme, rtc, and nextpcb submission](docs/images/journal/history/2026-08-23-prepared-the-nvme-rtc-and-nextpcb-submission.png)
 
 # 2026-08-24: closed phase 1 and approved the stackup
 
-- fe23e7d 08-24. Closed out phase 1: fab rules, thermal/routing plans, audits, silk cleanup. 2 h
-- 1f735b5 08-24. Ran the independent-verifier sweep, fixed 12 stale contracts and 4 real board bugs. 1 h 20 min
-- 019de9e 08-24. Applied the fab field-solved impedance geometry after the NextPCB stackup approval. 5 min
-- 757482c 08-24. Set the stackup release status to APPROVED, fab gate now passes. 5 min
-
 **Total time spent: 3 hours 30 minutes**
+
+finished another pass over the board rules and manufacturing setup. i went through the fabrication limits, the thermal and routing plans, and the silkscreen, then checked the saved design against the information in those documents.
+
+that pass turned up twelve outdated checks and four board problems that needed correcting. i fixed those before applying the manufacturer's impedance values. the trace widths and pair gaps needed to come from the approved stackup rather than remain at the earlier estimates.
+
+i saved NextPCB's supplied geometry in the project settings and updated the stackup record. this brought the board rules, routing notes and manufacturing information together around the same layer construction.
+
+![closed phase 1 and approved the stackup](docs/images/journal/history/2026-08-24-closed-phase-1-and-approved-the-stackup.png)
 
 # 2026-08-24: fixed the radio, usb-a, and placement updates
 
-- 14e332e 08-24. Corrected the radio DB floorplan footprint (160x110, 4x M2 mounts) and documented the DB mounting contract. 25 min
-- 92751f9 08-24. Added the USB-A spare-port headers on hub DIS5 (USB3) and DIS6 (USB2). 30 min
-- 1360032 08-24. Applied the J73/J190/C35/J11 placement updates from the live KiCad session. 30 min
-- 7ff43e4 08-24. Did the USB-A spare port board placement and full schematic/board sync. 55 min
-- 72bc0a9 08-24. Regenerated the schematic sheets as a deterministic snapshot after the USB-A work. 20 min
-
 **Total time spent: 2 hours 40 minutes**
+
+updated the radio-board footprint in the floorplan and worked on the spare USB-A ports. the radio section now used the intended 160 by 110 mm outline with four M2 mounting points in the mechanical drawing.
+
+i added the USB-A connections on the hub's spare ports, then placed the new parts and matched the board to the schematic. i also saved the connector and capacitor positions i had adjusted in KiCad, including the programming port, AUX input and right-side USB connector.
+
+after those changes, i regenerated the schematic sheets together so the files reflected the current USB-A and placement work. this session was mainly getting the added ports and the physical layout to agree.
+
+![fixed the radio, usb-a, and placement updates](docs/images/journal/history/2026-08-24-fixed-the-radio-usb-a-and-placement-updates.png)
 
 # 2026-08-24: finished the usb-a routing prep and power zones
 
-- 6897d31 08-24. Cleaned up the USB-A port placement, refreshed the DRC allowlist, restored Q60B. 10 min
-- 1b47b5f 08-24. Set the intentional 8-point mounting hole pattern, clear of mechanical envelopes. 20 min
-- 8576f12 08-24. Wrote the USB-A port cluster routing plan and strategy analysis. 25 min
-- ceff6ca 08-24. Regenerated the power zones and mounting-hole keepouts at the current positions. 2 h
-- 8643449 08-24. Wired the hub DIS5 SuperSpeed lanes to USB3-A J24, tied the J24 shield to GND, applied net classes. 1 h 15 min
-- 3326e81 08-24. Added the full-board routing plan. 8 min
-- 8c8d5fe 08-24. Synced the project net-class settings to the approved board geometries. 10 min
-- c456299 08-24. Added the POWER_HI/POWER_MID net classes for phase 1 routing prep. 5 min
-
 **Total time spent: 4 hours 33 minutes**
+
+worked on the USB-A section and the power copper around the updated placement. i cleaned up the port cluster and wrote out how its signal pairs and supporting connections should reach the hub. the USB3 port uses the hub's SuperSpeed connection, while the other added port uses USB2.
+
+i connected the USB3-A port's high-speed nets and grounded its shield, then updated the net classes for those signals. i also fixed the mounting pattern into eight intended points, keeping the holes clear of the larger components and their mechanical space.
+
+a large part of the session went into rebuilding the power zones and mounting-hole keepouts at the current positions. i updated the full-board routing plan and the high- and medium-current trace classes alongside that work. those settings needed to follow the actual board layout, rather than the earlier positions the first zones had been based on.
+
+![finished the usb-a routing prep and power zones](docs/images/journal/history/2026-08-24-finished-the-usb-a-routing-prep-and-power-zones.png)
 
 # 2026-08-25: set the routing presets and board layout
 
-- 2ceabaf 08-25. Put the spec-sheet routing presets into the project design settings. 1.5 h
-- 3c84d5d 08-25. Restored J11 to the top of the right edge at (353.475, 30) mirroring J22, with a position guard. 20 min
-- 54f1726 08-25. Assigned ratnest net colors by routing function across 518 nets. 4 min
-- 5ae4cb0 08-25. Fixed the power-zone layer architecture to match the routing-plan stackup. 25 min
-- 4f9caaa 08-25. Regenerated the Dwgs.User guides to reflect the current board. 4 min
-- dd332ac 08-25. Added the Framework 13 hinge cutouts to Edge.Cuts and removed the Dwgs.User guides. 35 min
-
 **Total time spent: 2 hours 58 minutes**
+
+put the routing widths and gaps into the project settings so the right values were available while drawing tracks. i also assigned colors by routing function across the board's nets, which made it easier to follow the different groups in KiCad.
+
+i restored the right-side USB connector to the intended position opposite the left one and updated the power-zone layers to match the stackup plan. i refreshed the drawing guides from the saved board, then added the Framework hinge cutouts to the actual outline and removed the old guide shapes. the routing setup and the board edges now reflected the same layout.
+
+![set the routing presets and board layout](docs/images/journal/history/2026-08-25-set-the-routing-presets-and-board-layout.png)
 
 # 2026-08-25: fixed colors, hinge cutouts, and release checks
 
-- 7ee8c4d 08-25. Fixed the net-color serialization to KiCad's CSS-string format and re-applied the presets. 40 min
-- 449c2a5 08-25. Aligned the user-moved mounting holes to the edge rails. 25 min
-- 42708da 08-25. Made the hinge cutouts symmetric and set AON_FAULT_N to pure red. 1 h 15 min
-- 388f876 08-25. Moved the net colors to the app's real location, net_settings.net_colors. 10 min
-- 955904c 08-25. Fixed the report_unexpected NameError in the release gate, a lost diff line from an earlier edit. 30 min
-
 **Total time spent: 3 hours**
+
+fixed the net colors after finding that i had saved them in the wrong format and location for KiCad. i changed them to the format the editor actually reads, reapplied the colors, and made the standby fault signal easy to pick out in red.
+
+i also aligned the moved mounting holes with the edge rails and made the two hinge cutouts symmetric. those edits needed to be made on the board outline itself, not just shown in a drawing layer.
+
+while checking the result, i fixed a broken variable reference in the board-checking script. that restored the check which had stopped working after an earlier edit, so i could use it on the updated layout again.
+
+![fixed colors, hinge cutouts, and release checks](docs/images/journal/history/2026-08-25-fixed-colors-hinge-cutouts-and-release-checks.png)
 
 # 2026-08-26: fixed mounting holes, power islands, and board formats
 
-- e0a8dce 08-26. Renumbered the duplicated mounting holes H21-H27 and added the schematic symbols. 1.5 h
-- 8862f57 08-26. Fixed the dead L5 power islands: hierarchical zone net names, split VBUS_RAW, applied the 85-ohm DIFF_85 geometry. 3 h
-- 87d3dfe 08-26. Fixed the stale USB7206C DIS5/DIS6 contract, these are active USB-A ports, not 0R straps. 15 min
-- 66ad851 08-26. Renamed Q60B to Q62, the letter-suffix reference broke the KiCad annotation check. 25 min
-- df45a4c 08-26. Normalized the TPS7A0210_unit1.svg to LF line endings. 3 min
-
 **Total time spent: 5 hours 13 minutes**
+
+worked through the mounting holes, power islands and a few file problems that were getting in the way of routing. some mounting-hole references were duplicated, so i renumbered them and added their matching schematic symbols. that kept the mechanical parts identifiable when comparing the schematic and PCB.
+
+the power layer also had islands with the wrong net names. i corrected those to use the names from the schematic hierarchy, separated the two raw USB input rails and applied the intended 85-ohm pair geometry. this was more than a visual cleanup, because an island assigned to the wrong net cannot supply the parts it was drawn for.
+
+i fixed an outdated check around two hub ports that were now active USB-A connections, rather than treating them as unused straps. i also renamed the letter-suffixed transistor reference that was breaking annotation and normalized a library file's line endings.
+
+these were a mixture of electrical and project-file problems. i saved the board and its supporting definitions together so the corrected power nets and references would survive the next regeneration.
+
+![fixed mounting holes, power islands, and board formats](docs/images/journal/history/2026-08-26-fixed-mounting-holes-power-islands-and-board-formats.png)
 
 # 2026-08-26: updated the pitch and ec startup work
 
-- 29ffb8a 08-26. Added the funding pitch, the full BOM cost breakdown at about $3,560, and the README cost section. 1 h
-- dcbf6a6 08-26. Merged the remote-tracking branch origin/main. 4 min
-- 05e0188 08-26. Fixed the EC startup memory initialization. 1.5 h
-- 78d98b4 08-26. Corrected the EC clock tree and timer rates. 2 min
-- 5fd464c 08-26. Corrected the EC ADC register mapping. 2 min
-- b960da7 08-26. Made the EC source manager fail safe. 9 min
-
 **Total time spent: 2 hours 47 minutes**
+
+put together the project funding description and the cost breakdown. the parts estimate came to roughly $3,560, so i added that information to the readme and explained what the money would cover, including the computer module, boards and the other laptop parts.
+
+i also worked on the embedded controller's startup code. i fixed the memory initialization, clock setup, timer rates and ADC register mapping, then corrected the source-manager behavior so a communication problem would not leave it assuming that a power input was valid.
+
+this combined the project writeup with several small but important firmware fixes. the startup code has to establish the right state before the rest of the controller starts making power decisions.
+
+![updated the pitch and ec startup work](docs/images/journal/history/2026-08-26-updated-the-pitch-and-ec-startup-work.png)
 
 # 2026-08-26: fixed the ec mappings and hardened the release checks
 
-- 35ceb4c 08-26. Fixed the authoritative mainboard net classes. 3 min
-- 488c7fb 08-26. Partitioned the mainboard power zones. 45 min
-- 8da03cd 08-26. Corrected the EC USB register and request mappings. 3 min
-- 99f06b4 08-26. Grounded the EC target observations and power limits. 10 min
-- 1ae4b5e 08-26. Hardened the release gate with refilled-state DRC and an exact allowlist. 6 min
-- 88417fb 08-26. Made the PCB object UUIDs deterministic and unique, with gate enforcement. 5 min
-
 **Total time spent: 1 hour 12 minutes**
+
+corrected the main-board net classes and divided up the power layer according to the intended supply rails. i also fixed the controller's USB register and request handling, and checked the power-limit calculations against the actual target settings.
+
+i tightened the board checks so they examine a refilled copy of the PCB and compare its findings with the specific exceptions i had recorded. i also made the saved board-object identifiers unique and repeatable, so duplicate objects and unexplained file changes would be easier to catch. the work was spread between the PCB settings, firmware and the scripts used to check the saved design.
+
+![fixed the ec mappings and hardened the release checks](docs/images/journal/history/2026-08-26-fixed-the-ec-mappings-and-hardened-the-release-checks.png)
 
 # 2026-08-26: finished the quote package, impedance approvals, and eight-layer docs
 
-- 0722019 08-26. Contracted the U773 endpoint buck and USB-A cluster pins. 7 min
-- 9e14f10 08-26. Regenerated the NextPCB mainboard quote package from the current sources. 7 min
-- d2a97e7 08-26. Completed the structured impedance approvals in the stackup record. 5 min
-- be371a6 08-26. Refreshed the stale design docs to the current 8-layer state. 3 min
-
 **Total time spent: 22 minutes**
+
+regenerated the NextPCB quote files from the current board and part list. i updated the information for the endpoint regulator and USB-A cluster, then saved the BOM and placement data together with the package details.
+
+i also recorded the supplied impedance values in the stackup file and updated the documentation that still described the older layer arrangement. the quote files and the eight-layer notes now referred to the same board revision.
+
+![finished the quote package, impedance approvals, and eight-layer docs](docs/images/journal/history/2026-08-26-finished-the-quote-package-impedance-approvals-and-eight-layer-docs.png)
 
 # 2026-08-27: documented the source-local l5 island architecture
 
-- 20de7a4 08-27. Documented the source-local L5 island architecture for power routing. 45 min
-
 **Total time spent: 45 minutes**
 
-Pictures:
+wrote up how the power islands should be arranged on the inner power layer. the idea is to keep each supply island around its source circuit, rather than spreading every rail across the whole board and letting the zones become tangled.
+
+i documented that arrangement for the routing work, including how the separate rails should stay distinct. this was a planning and documentation session for the power layer; the pictures show the board i was using while working it out.
+
 ![Screenshot_2026-08-27_at_13.50.28.png](https://cdn.hackclub.com/01a0445c-9019-7fef-a079-2795fc54d2f0/Screenshot_2026-08-27_at_13.50.28.png)
 ![Screenshot_2026-08-27_at_13.50.36.png](https://cdn.hackclub.com/01a0445c-88bf-7293-b4a7-17e53fc211ac/Screenshot_2026-08-27_at_13.50.36.png)
 ![Screenshot_2026-08-27_at_13.50.49.png](https://cdn.hackclub.com/01a0445c-878e-7920-8afe-d62ad111fe86/Screenshot_2026-08-27_at_13.50.49.png)
