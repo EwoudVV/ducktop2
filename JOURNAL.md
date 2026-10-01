@@ -5,6 +5,14 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-1: rebuild the journal and add the missing pictures
+
+**Total time spent: 2 hours**
+
+put the journal back together after the forge database incident. restored the missing entries, expanded the old short lists into proper devlogs, and added pictures from the saved boards, schematics and firmware. all 91 entries now have images. i kept the dates and recorded hours, removed the extra process commentary, and saved both keyboard timelapse links in their matching entries.
+
+image: ![hc cdn](https://cdn.hackclub.com/01a0f7c8-eac0-78b2-a227-a5a97765b5e5/Screenshot%202026-10-01%20at%2010.05.23.png)
+
 # 2026-09-30: rework the board placement and fix more power stuff
 
 **Total time spent: 5 hours**
