@@ -4,6 +4,14 @@ author: "duck"
 description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
+# 2026-10-1: fix the center routing and ground returns
+
+**Total time spent: 3 hours**
+
+fixed the existing usb, hdmi and ethernet routing on the center board after the placement changes. moved the usb traces off the power layer, corrected their widths, and rebuilt the crowded connector fanouts so the pairs stay together. also lined up the two usb transmit capacitors and moved the right connector’s shield resistor to give the traces more room.
+finished the four hdmi pairs and the ethernet controller’s data and clock connections to the right-side connector. matched their lengths and added ground vias around the layer changes, including two extra stitches near the connector. the largest hdmi mismatch is now 0.052 mm, and the complete usb-c 1 receive pair is within 0.03 mm.
+also found a missing 1 mm piece in one of the nvme receive traces. recovered the original segment from an older revision and restored the connection without changing the surrounding routing. cleaned up a small usb shortcut and improved the checks for disconnected paths, unwanted branches and pair spacing.
+the saved board now has zero drc errors, and its connections match the schematic. refreshed the component positions, height information and cable exports for the case. the three moved parts clear the modelled wires, and all 18 wire paths still meet their bend and length limits. there are 1,795 connections left to route on the main board.
 
 # 2026-10-1: rebuild the journal and add the missing pictures
 
