@@ -1,6 +1,6 @@
 # power harness fit
 
-28 september 2026. the connector positions are saved on the boards. the
+1 october 2026. the connector positions are saved on the boards. the
 wire paths are a case-layout input, not a finished cable assembly or an
 approved case thickness.
 
@@ -8,42 +8,50 @@ approved case thickness.
 - [top view](../../mechanical/power-harness.png)
 - [pin maps and parts](cables-and-connectors.md)
 - [electrical acceptance limits](io-power-qualification.md)
+- [component positions and heights](../../mechanical/component-placement.csv)
 
 run `python gen/generate_power_harness_geometry.py` after refreshing the
 board datums. it checks the source-board hashes, bend radii, wire lengths
 and separation between the modelled wires. a stale board export stops it.
 
-## saved placement changes
+## connector positions
 
 these are installed top-view coordinates in mm, using the same origin as
-the board layout. rotations follow KiCad. none of these parts had tracks
-attached. the existing tracks, vias, outlines, mounting holes and pad nets
-were preserved. the BMS component positions are unchanged; its separate
-assembly check moved two vias clear of the WAGO solder-mask openings.
+the board layout. rotations follow KiCad. the full component export above
+includes the revised placement on both sides of the main boards.
 
 | board | part | x | y | rotation / side |
 | --- | --- | ---: | ---: | --- |
 | center | J2452, right auxiliary rails | 282.45 | 64.50 | 270, front |
 | center | J2462, right return | 281.45 | 80.00 | 180, front |
-| center | J54, skin/hinge temperature | 274.00 | 75.00 | original rotation, front |
+| center | J54, skin/hinge temperature | 274.00 | 75.00 | 180, front |
 | center | J2071, protected BMS power | 111.45 | 173.848 | 270, front |
 | right | J2453, auxiliary rails | 320.55 | 64.50 | 90, front |
 | right | J2463, return | 324.55 | 115.40 | 90, front |
-| right | C161, HDMI buffer bypass | 331.00 | 65.00 | 0, front |
-| right | C158, HDMI switch input | 304.00 | 61.80 | 0, front |
-| right | U1760, USB power switch | 303.25 | 47.50 | same x/y, moved underneath |
 
 the right auxiliary wires now run above the signal connectors in the top
 view. the separate return goes around their front ends. J2463's plastic
 body projects about 0.35 mm beyond the front PCB edge; its solder lands
 remain on the board. allow for the housing and its tolerance in the case.
-U1760 needs a 1.6 mm component allowance below the right board, including
-solder. check that against the final case floor and supports.
+U1760 is underneath the right board at x332.8, y48.7. its maximum body
+height is 1.45 mm; reserve 1.75 mm below the solder plane with the 0.3 mm
+assembly allowance. check that against the case floor and supports.
 
-the placement changes add no physical DRC errors. the right board has none;
-the center board still has existing routing and clearance errors. this is
-not a claim that the main boards are ready to order or route without the
-remaining power integration and checks.
+the revised power circuit and component placement are saved. the main-board
+routing and the complete cable assembly still need finishing.
+
+## clearance above components
+
+the component export includes manufacturer height limits for the audio
+codec, speaker amplifier, crystals, fuse, ferrites and small capacitors
+under the proposed wire paths. the latest height check covers 13 parts
+at 15 crossings. all clear the wires with a separate 0.3 mm assembly
+allowance; the smallest remaining gap in this group is 3.90 mm at Y900.
+
+i still need exact dimension drawings for C430/C431, C434 and C917's
+stored Murata part numbers. the wire paths allow a body height of 3.45 mm
+at C917 and at least 9.75 mm at the other three parts after the assembly
+allowance. keep those limits when choosing or checking the fitted parts.
 
 ## wire space
 
@@ -117,8 +125,8 @@ pack measurements.
 
 the case work still needs the actual clamps, fasteners, insertion/removal
 paths, signal cables, measured packs, cooling and keyboard/trackpad supports
-checked together. repeat the component-height check after the new 100 W
-power parts are placed. resistance, temperature and fault tests remain
+checked together. repeat the component-height check if parts or wire paths
+move. resistance, temperature and fault tests remain
 separate requirements; the hardware qualification flags are still off.
 
 ## drawings used

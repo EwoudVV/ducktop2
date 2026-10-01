@@ -37,6 +37,8 @@ result = {
 }
 if limits.get('signal_paths') and mode != 'missing_paths':
     result['suites'].append(dict(scope='complete PCIe signal paths', status='passed', blocking_findings=[]))
+if limits.get('local_usb_paths') and mode != 'missing_usb_paths':
+    result['suites'].append(dict(scope='local USB paths and connector branches', status='passed', blocking_findings=[]))
 if mode == 'wrong_board':
     result['candidate_sha256'] = '0' * 64
 elif mode == 'wrong_limits':
@@ -148,6 +150,14 @@ class ReleasePcieCoupling(unittest.TestCase):
         self.limits.write_text(json.dumps(limits))
         self.assertEqual(self.run_gate(), 0)
         self.checker_mode('missing_paths')
+        self.assertEqual(self.run_gate(), 1)
+
+    def test_configured_usb_branches_require_their_own_complete_result(self):
+        limits = json.loads(self.limits.read_text())
+        limits['local_usb_paths'] = {'schema_version': 1}
+        self.limits.write_text(json.dumps(limits))
+        self.assertEqual(self.run_gate(), 0)
+        self.checker_mode('missing_usb_paths')
         self.assertEqual(self.run_gate(), 1)
 
     def test_center_contract_requires_a_check_without_area_markers(self):

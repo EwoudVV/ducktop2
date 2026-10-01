@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the center board's PCIe layout limits without changing the board."""
+"""Check the center board's differential routing without changing the board."""
 from pathlib import Path
 import argparse,hashlib,json,math,os,shutil,subprocess,sys,collections
 DEPENDENCY_ERROR=None
@@ -13,11 +13,12 @@ except ImportError as error:
 ROOT=Path(__file__).resolve().parents[1]
 def cross(a,b):return float(a[0]*b[1]-a[1]*b[0])
 def polygon(r):return Polygon(r['polygon_mm']) if 'polygon_mm' in r else box(*r['bounds_mm'])
-def automatic_corners(tracks,nominal,tolerance):
+def automatic_corners(tracks,nominal,tolerance,gaps_by_layer=None):
  result=[]
  for net in sorted({v['net'] for v in tracks}):
   stem=net[:-2];opp=stem+('_N' if net.endswith('_P') else '_P')
   for layer in sorted({t['layers'][0] for t in tracks if t['net']==net}):
+   layer_nominal=(gaps_by_layer or {}).get(layer,nominal)
    own=[t for t in tracks if t['net']==net and t['layers']==[layer]];others=[t for t in tracks if t['net']==opp and t['layers']==[layer]];joints=collections.defaultdict(list)
    for t in own:
     for end,other in [(t['start'],t['end']),(t['end'],t['start'])]:joints[tuple(end)].append((t,np.asarray(other)-end))
@@ -35,10 +36,10 @@ def automatic_corners(tracks,nominal,tolerance):
       gap=abs(cross(uu,np.asarray(n['start'])-at))-(t['width']+n['width'])/2
       # Reject remote parallel lines: matching projection must reach this
       # corner neighborhood, not merely lie on the same infinite line.
-      if abs(gap-nominal)<=tolerance and LineString([n['start'],n['end']]).distance(Point(at))<2*(nominal+t['width']):valid.append({'id':n['id'],'gap_mm':gap})
+      if abs(gap-layer_nominal)<=tolerance and LineString([n['start'],n['end']]).distance(Point(at))<2*(layer_nominal+t['width']):valid.append({'id':n['id'],'gap_mm':gap})
      matching.append(valid)
     if not all(matching):continue
-    width=joined[0][0]['width'];pitch=nominal+width;radius=pitch*math.tan(bend/2)+.008
+    width=joined[0][0]['width'];pitch=layer_nominal+width;radius=pitch*math.tan(bend/2)+.008
     result.append({'name':f'paired corner {net} {at[0]:.6f},{at[1]:.6f}','category':'paired_corner','stem':stem,'layer':layer,'bounds_mm':[at[0]-radius,at[1]-radius,at[0]+radius,at[1]+radius],'own_tracks':[t['id'] for t,_ in joined],'matching_parallel_tracks':matching,'bend_degrees':math.degrees(bend),'max_nearest_gap_mm':pitch/math.cos(bend/2)-width+.00001,'max_total_length_mm':{'P':4*radius,'N':4*radius},'max_uncoupled_length_mm':{'P':4*radius,'N':4*radius},'automatic_corner_radius_mm':radius})
  return result
 
@@ -60,7 +61,13 @@ def check(data,spec):
   try:curves[t['id']]=Curve(t)
   except (ValueError,KeyError,np.linalg.LinAlgError) as error:errors.append({'kind':'invalid_curve','id':t['id'],'reason':str(error)})
  if len(curves)!=len(tracks):return {'status':'failed','candidate_sha256':data['source_sha256'],'scope':spec['scope'],'blocking_findings':errors,'outside_region_uncoupled':[],'region_measurements':[],'minimum_gaps':[]}
- nominal=spec['nominal_gap_mm'];tol=spec['maximum_rounding_tolerance_mm'];regions=list(spec['regions']);corners=automatic_corners([t for t in tracks if t['type']=='PCB_TRACK'],nominal,spec['paired_corner_leg_tolerance_mm']);regions+=corners
+ nominal_default=spec['nominal_gap_mm'];gaps_by_layer=spec.get('nominal_gap_by_layer_mm',{})
+ allowed_layers={layer for pair in spec['pairs'] for layer in pair['widths_by_layer']}
+ if not isinstance(gaps_by_layer,dict) or any(layer not in allowed_layers or type(gap) not in (int,float) or not math.isfinite(gap) or gap<=0 for layer,gap in gaps_by_layer.items()):raise ValueError('layer gaps must be positive finite numbers on allowed signal layers')
+ tol=spec['maximum_rounding_tolerance_mm'];regions=list(spec['regions']);corners=automatic_corners([t for t in tracks if t['type']=='PCB_TRACK'],nominal_default,spec['paired_corner_leg_tolerance_mm'],gaps_by_layer);regions+=corners
+ region_names=[r['name'] for r in regions]
+ if len(region_names)!=len(set(region_names)):raise ValueError('explicit regions and inferred corners must have unique names')
+ automatic_names={r['name'] for r in corners}
  bystem={v['stem']:v for v in spec['pairs']};summaries={r['name']:{'P':{'length_mm':0.,'uncoupled_length_mm':0.},'N':{'length_mm':0.,'uncoupled_length_mm':0.},'maximum_nearest_gap_sample_mm':0.,'maximum_nearest_gap_upper_bound_mm':0.} for r in regions};outside=[];minimums=[]
  for stem in sorted(stems):
   allowed=bystem[stem]['widths_by_layer']
@@ -70,6 +77,7 @@ def check(data,spec):
    if t['net'][:-2]!=stem:continue
    if len(t['layers'])!=1 or t['layers'][0] not in allowed or min(abs(t['width']-x) for x in allowed.get(t['layers'][0],[float('inf')]))>.000001:errors.append({'kind':'width_or_layer','id':t['id'],'net':t['net'],'layers':t['layers'],'width':t['width']})
   for layer in sorted({t['layers'][0] for t in tracks if t['net'][:-2]==stem}):
+   nominal=gaps_by_layer.get(layer,nominal_default)
    rs=[r for r in regions if r['stem']==stem and r['layer']==layer];both={pol:[curves[t['id']] for t in tracks if t['net']==stem+'_'+pol and t['layers']==[layer]] for pol in ['P','N']};minimum_count=0
    for a in both['P']:
     for b in both['N']:
@@ -83,8 +91,14 @@ def check(data,spec):
      coverage=[]
      for other in others:coverage+=curve.capsule_coverage(other,nominal+tol+curve.rounding_uncertainty+other.rounding_uncertainty+(curve.width+other.width)/2)
      uncoupled=complement(coverage);inside=[];portions=[]
+     # Explicitly bounded pad/via/tuning geometry takes precedence over a
+     # nearby inferred corner. Keep measuring every explicit region and keep
+     # the global width/minimum-gap checks, including within those regions.
+     reviewed=curve_merge([interval for r in rs if r['name'] not in automatic_names for interval in curve.inside(polygon(r))])
      for r in rs:
-      clipped=curve.inside(polygon(r));inside+=clipped;portions.extend((r,low,high) for low,high in clipped)
+      clipped=curve.inside(polygon(r))
+      if r['name'] in automatic_names:clipped=intersection(clipped,complement(reviewed))
+      inside+=clipped;portions.extend((r,low,high) for low,high in clipped)
      portions.extend((None,low,high) for low,high in complement(inside))
      for r,low,high in portions:
       intervals=intersection(uncoupled,[(low,high)]);length=sum(b-a for a,b in intervals)*curve.length
@@ -149,7 +163,10 @@ def run_checks(data,limits):
  if limits.get('signal_paths'):
   from center_pcie_paths import check_paths
   results.append(check_paths(data,limits['signal_paths']))
- return {'status':'passed' if all(r['status']=='passed' for r in results) else 'failed','candidate_sha256':data['source_sha256'],'suites':results,'scope':'center PCIe coupling and complete signal paths; native DRC remains a separate required release gate'}
+ if limits.get('local_usb_paths'):
+  from center_usb_paths import check as check_usb_paths
+  results.append(check_usb_paths(data,limits['local_usb_paths']))
+ return {'status':'passed' if all(r['status']=='passed' for r in results) else 'failed','candidate_sha256':data['source_sha256'],'suites':results,'scope':'center differential routing and complete signal paths; native DRC remains a separate required release gate'}
 
 def main():
  parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--pcb',type=Path);parser.add_argument('--native-json',type=Path);parser.add_argument('--limits',type=Path,default=ROOT/'manufacturing/center_pcie_layout_limits.json');parser.add_argument('--output',type=Path,required=True);parser.add_argument('--kicad-python');args=parser.parse_args()

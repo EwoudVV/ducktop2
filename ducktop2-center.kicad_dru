@@ -344,40 +344,484 @@
     (condition "A.inDiffPair('/Mu Carrier/PCIE_M_REFCLK') && A.intersectsArea('nvme clock f output via flare')")
     (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.8070mm)))
 
+# connector exits, via fanouts and tuning; full traces are also checked geometrically.
 
-# short FPC103 escapes; full geometry is also checked by the release gate.
-
-(rule "center pcie gbe_host_rx fpc103 lands to staggered vias"
+(rule "/GBE_HOST_TX first transition approach corner"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/GBE_HOST_RX') && A.intersectsArea('center pcie gbe_host_rx fpc103 lands to staggered vias')")
-    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3971mm)))
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX first transition approach corner')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.197000mm)))
 
-(rule "center pcie gbe_host_tx fpc103 lands to staggered vias"
+(rule "radio connector pad neck"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/GBE_HOST_TX') && A.intersectsArea('center pcie gbe_host_tx fpc103 lands to staggered vias')")
-    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.3971mm)))
+    (condition "(A.NetName == '/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB_DN' || A.NetName == '/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB_DP') && A.intersectsArea('radio connector pad neck')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.280000mm)))
 
-(rule "center pcie gbe_refclk fpc103 lands to staggered vias"
+(rule "/GBE_HOST_TX actual A1 pad pitch escape"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/GBE_REFCLK') && A.intersectsArea('center pcie gbe_refclk fpc103 lands to staggered vias')")
-    (constraint diff_pair_gap (min 0.1524mm) (opt 0.1524mm) (max 0.4471mm)))
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX actual A1 pad pitch escape')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.321000mm)))
 
-(rule "center pcie tcp0_txrx0 fpc103 lands to staggered vias"
+(rule "GBE_HOST_RX A1 pad lands"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/TCP2_TXRX0') && A.intersectsArea('center pcie tcp0_txrx0 fpc103 lands to staggered vias')")
-    (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.4480mm)))
+    (condition "(A.NetName == '/GBE_HOST_RX_N' || A.NetName == '/GBE_HOST_RX_P') && A.intersectsArea('GBE_HOST_RX A1 pad lands')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.325000mm)))
 
-(rule "center pcie tcp0_tx0 fpc103 lands to staggered vias"
+(rule "GBE_REFCLK A1 pad lands"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/TCP2_TX0') && A.intersectsArea('center pcie tcp0_tx0 fpc103 lands to staggered vias')")
-    (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.5980mm)))
+    (condition "(A.NetName == '/GBE_REFCLK_N' || A.NetName == '/GBE_REFCLK_P') && A.intersectsArea('GBE_REFCLK A1 pad lands')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.325000mm)))
 
-(rule "center pcie tcp0_tx1 fpc103 lands to staggered vias"
+(rule "/TCP2_TX0 actual A1 pad pitch escape"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/TCP2_TX1') && A.intersectsArea('center pcie tcp0_tx1 fpc103 lands to staggered vias')")
-    (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.6119mm)))
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('/TCP2_TX0 actual A1 pad pitch escape')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.353000mm)))
 
-(rule "center pcie tcp0_txrx1 fpc103 lands to staggered vias"
+(rule "/TCP2_TX1 actual A1 pad pitch escape"
     (layer "F.Cu")
-    (condition "A.inDiffPair('/TCP2_TXRX1') && A.intersectsArea('center pcie tcp0_txrx1 fpc103 lands to staggered vias')")
-    (constraint diff_pair_gap (min 0.2540mm) (opt 0.2540mm) (max 0.6520mm)))
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 actual A1 pad pitch escape')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.353000mm)))
+
+(rule "/TCP2_TXRX0 actual A1 pad pitch escape"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('/TCP2_TXRX0 actual A1 pad pitch escape')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.353000mm)))
+
+(rule "/TCP2_TXRX1 actual A1 pad pitch escape"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX1_N' || A.NetName == '/TCP2_TXRX1_P') && A.intersectsArea('/TCP2_TXRX1 actual A1 pad pitch escape')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.353000mm)))
+
+(rule "/HUB_DS1 right bounded length tuning"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/HUB_DS1_DN' || A.NetName == '/HUB_DS1_DP') && A.intersectsArea('/HUB_DS1 right bounded length tuning')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.355000mm)))
+
+(rule "/HUB_DS4 right bounded length tuning"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/HUB_DS4_DN' || A.NetName == '/HUB_DS4_DP') && A.intersectsArea('/HUB_DS4 right bounded length tuning')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.355000mm)))
+
+(rule "/USBC1_SSTX bounded length tuning"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC1_SSTX_N' || A.NetName == '/USBC1_SSTX_P') && A.intersectsArea('/USBC1_SSTX bounded length tuning')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.355000mm)))
+
+(rule "/GBE_HOST_TX paired transition 1 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX paired transition 1 F.Cu')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.419000mm)))
+
+(rule "/USBC1 bounded length tuning"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC1_DN' || A.NetName == '/USBC1_DP') && A.intersectsArea('/USBC1 bounded length tuning')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.455000mm)))
+
+(rule "/USBC1_SSRX bounded length tuning"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC1_SSRX_N' || A.NetName == '/USBC1_SSRX_P') && A.intersectsArea('/USBC1_SSRX bounded length tuning')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.455000mm)))
+
+(rule "/GBE_HOST_TX paired transition 1 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX paired transition 1 In2.Cu')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.458000mm)))
+
+(rule "/TCP2_TX1 paired transition 2 B.Cu"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 paired transition 2 B.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.460000mm)))
+
+(rule "/GBE_HOST_TX paired transition 2 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX paired transition 2 F.Cu')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.464000mm)))
+
+(rule "/GBE_HOST_TX paired transition 3 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX paired transition 3 F.Cu')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.464000mm)))
+
+(rule "/TCP2_TX1 paired transition 1 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 paired transition 1 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.485000mm)))
+
+(rule "/TCP2_TX1 paired transition 2 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 paired transition 2 In2.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.497000mm)))
+
+(rule "/TCP2_TX1 paired transition 3 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 paired transition 3 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.499000mm)))
+
+(rule "/TCP2_TX1 paired transition 4 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 paired transition 4 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.508000mm)))
+
+(rule "/GBE_HOST_TX paired transition 2 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX paired transition 2 In2.Cu')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.513000mm)))
+
+(rule "/GBE_HOST_TX paired transition 3 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX paired transition 3 In2.Cu')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.513000mm)))
+
+(rule "/TCP2_TX0 paired transition 2 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('/TCP2_TX0 paired transition 2 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.514000mm)))
+
+(rule "/TCP2_TX1 paired transition 1 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 paired transition 1 In2.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.532000mm)))
+
+(rule "/TCP2_TX0 paired transition 1 B.Cu"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('/TCP2_TX0 paired transition 1 B.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.533000mm)))
+
+(rule "/TCP2_TX0 paired transition 1 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('/TCP2_TX0 paired transition 1 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.533000mm)))
+
+(rule "/TCP2_TXRX0 paired transition 1 B.Cu"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('/TCP2_TXRX0 paired transition 1 B.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.533000mm)))
+
+(rule "/TCP2_TXRX0 paired transition 1 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('/TCP2_TXRX0 paired transition 1 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.533000mm)))
+
+(rule "/TCP2_TXRX0 paired transition 2 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('/TCP2_TXRX0 paired transition 2 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.533000mm)))
+
+(rule "/TCP2_TXRX0 paired transition 3 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('/TCP2_TXRX0 paired transition 3 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.533000mm)))
+
+(rule "/TCP2_TXRX1 paired transition 1 B.Cu"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX1_N' || A.NetName == '/TCP2_TXRX1_P') && A.intersectsArea('/TCP2_TXRX1 paired transition 1 B.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.533000mm)))
+
+(rule "/TCP2_TXRX1 paired transition 1 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX1_N' || A.NetName == '/TCP2_TXRX1_P') && A.intersectsArea('/TCP2_TXRX1 paired transition 1 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.533000mm)))
+
+(rule "/TCP2_TX0 paired transition 3 F.Cu"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('/TCP2_TX0 paired transition 3 F.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.544000mm)))
+
+(rule "/TCP2_TX1 paired transition 3 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 paired transition 3 In2.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.552000mm)))
+
+(rule "/TCP2_TX0 paired transition 2 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('/TCP2_TX0 paired transition 2 In2.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.559000mm)))
+
+(rule "/TCP2_TX1 paired transition 4 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 paired transition 4 In2.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.563000mm)))
+
+(rule "/TCP2_TXRX0 paired transition 2 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('/TCP2_TXRX0 paired transition 2 In2.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.585000mm)))
+
+(rule "/TCP2_TXRX0 paired transition 3 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('/TCP2_TXRX0 paired transition 3 In2.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.585000mm)))
+
+(rule "/TCP2_TX0 paired transition 3 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('/TCP2_TX0 paired transition 3 In2.Cu')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.598000mm)))
+
+(rule "GBE_HOST_RX A1 via flare"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/GBE_HOST_RX_N' || A.NetName == '/GBE_HOST_RX_P') && A.intersectsArea('GBE_HOST_RX A1 via flare')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.601000mm)))
+
+(rule "GBE_REFCLK A1 via flare"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/GBE_REFCLK_N' || A.NetName == '/GBE_REFCLK_P') && A.intersectsArea('GBE_REFCLK A1 via flare')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.601000mm)))
+
+(rule "EC host preserved A1 launch"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/EC_HOST_USB_DN' || A.NetName == '/EC_HOST_USB_DP') && A.intersectsArea('EC host preserved A1 launch')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.605000mm)))
+
+(rule "USB1 preserved A1 launch"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC1_DN' || A.NetName == '/USBC1_DP') && A.intersectsArea('USB1 preserved A1 launch')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.605000mm)))
+
+(rule "USB2 RX preserved A1 launch"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC2_SSRX_N' || A.NetName == '/USBC2_SSRX_P') && A.intersectsArea('USB2 RX preserved A1 launch')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.605000mm)))
+
+(rule "USB2 preserved A1 launch"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC2_DN' || A.NetName == '/USBC2_DP') && A.intersectsArea('USB2 preserved A1 launch')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.605000mm)))
+
+(rule "GBE_HOST_RX FPC103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/GBE_HOST_RX_N' || A.NetName == '/GBE_HOST_RX_P') && A.intersectsArea('GBE_HOST_RX FPC103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.624000mm)))
+
+(rule "GBE_HOST_TX FPC103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('GBE_HOST_TX FPC103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.624000mm)))
+
+(rule "/HUB_DS1 FPC103 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/HUB_DS1_DN' || A.NetName == '/HUB_DS1_DP') && A.intersectsArea('/HUB_DS1 FPC103 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.630000mm)))
+
+(rule "/HUB_DS1 right B via bank"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/HUB_DS1_DN' || A.NetName == '/HUB_DS1_DP') && A.intersectsArea('/HUB_DS1 right B via bank')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.630000mm)))
+
+(rule "/HUB_DS4 FPC102 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/HUB_DS4_DN' || A.NetName == '/HUB_DS4_DP') && A.intersectsArea('/HUB_DS4 FPC102 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.630000mm)))
+
+(rule "/HUB_DS4 FPC103 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/HUB_DS4_DN' || A.NetName == '/HUB_DS4_DP') && A.intersectsArea('/HUB_DS4 FPC103 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.630000mm)))
+
+(rule "/HUB_DS4 right B via bank"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/HUB_DS4_DN' || A.NetName == '/HUB_DS4_DP') && A.intersectsArea('/HUB_DS4 right B via bank')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.630000mm)))
+
+(rule "/USBC1_SSRX FPC102 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC1_SSRX_N' || A.NetName == '/USBC1_SSRX_P') && A.intersectsArea('/USBC1_SSRX FPC102 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.630000mm)))
+
+(rule "/USBC2_SSTX FPC102 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC2_SSTX_N' || A.NetName == '/USBC2_SSTX_P') && A.intersectsArea('/USBC2_SSTX FPC102 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.630000mm)))
+
+(rule "USB1 RX A1 F launch"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC1_SSRX_N' || A.NetName == '/USBC1_SSRX_P') && A.intersectsArea('USB1 RX A1 F launch')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.630000mm)))
+
+(rule "TCP2_TX1 FPC103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('TCP2_TX1 FPC103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.650000mm)))
+
+(rule "/USBC2 FPC102 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC2_DN' || A.NetName == '/USBC2_DP') && A.intersectsArea('/USBC2 FPC102 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.655000mm)))
+
+(rule "/USBC2_SSRX FPC102 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC2_SSRX_N' || A.NetName == '/USBC2_SSRX_P') && A.intersectsArea('/USBC2_SSRX FPC102 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.655000mm)))
+
+(rule "TCP2_TX0 FPC103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('TCP2_TX0 FPC103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.664000mm)))
+
+(rule "GBE_REFCLK FPC103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/GBE_REFCLK_N' || A.NetName == '/GBE_REFCLK_P') && A.intersectsArea('GBE_REFCLK FPC103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.670000mm)))
+
+(rule "TCP2_TXRX1 FPC103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX1_N' || A.NetName == '/TCP2_TXRX1_P') && A.intersectsArea('TCP2_TXRX1 FPC103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.677000mm)))
+
+(rule "/HUB_DS1 FPC102 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/HUB_DS1_DN' || A.NetName == '/HUB_DS1_DP') && A.intersectsArea('/HUB_DS1 FPC102 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.680000mm)))
+
+(rule "/USBC1 FPC102 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC1_DN' || A.NetName == '/USBC1_DP') && A.intersectsArea('/USBC1 FPC102 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.680000mm)))
+
+(rule "/GBE_HOST_RX FPC103 inner escape and local matching"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/GBE_HOST_RX_N' || A.NetName == '/GBE_HOST_RX_P') && A.intersectsArea('/GBE_HOST_RX FPC103 inner escape and local matching')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.690000mm)))
+
+(rule "/GBE_HOST_TX FPC103 inner escape and local matching"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/GBE_HOST_TX_N' || A.NetName == '/GBE_HOST_TX_P') && A.intersectsArea('/GBE_HOST_TX FPC103 inner escape and local matching')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.690000mm)))
+
+(rule "TCP2_TXRX0 FPC103 lands to staggered vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('TCP2_TXRX0 FPC103 lands to staggered vias')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.699000mm)))
+
+(rule "/HUB_DS4 left In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/HUB_DS4_DN' || A.NetName == '/HUB_DS4_DP') && A.intersectsArea('/HUB_DS4 left In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.705000mm)))
+
+(rule "/USBC1_SSRX left In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC1_SSRX_N' || A.NetName == '/USBC1_SSRX_P') && A.intersectsArea('/USBC1_SSRX left In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.705000mm)))
+
+(rule "/USBC1_SSTX FPC102 pads and vias"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/USBC1_SSTX_N' || A.NetName == '/USBC1_SSTX_P') && A.intersectsArea('/USBC1_SSTX FPC102 pads and vias')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.705000mm)))
+
+(rule "/USBC2 left In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC2_DN' || A.NetName == '/USBC2_DP') && A.intersectsArea('/USBC2 left In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.705000mm)))
+
+(rule "/USBC2_SSTX left In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC2_SSTX_N' || A.NetName == '/USBC2_SSTX_P') && A.intersectsArea('/USBC2_SSTX left In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.705000mm)))
+
+(rule "USB1 RX A1 In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC1_SSRX_N' || A.NetName == '/USBC1_SSRX_P') && A.intersectsArea('USB1 RX A1 In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.705000mm)))
+
+(rule "radio lower via fanout"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB_DN' || A.NetName == '/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB_DP') && A.intersectsArea('radio lower via fanout')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.705000mm)))
+
+(rule "/USBC2_SSRX left In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC2_SSRX_N' || A.NetName == '/USBC2_SSRX_P') && A.intersectsArea('/USBC2_SSRX left In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.730000mm)))
+
+(rule "/GBE_REFCLK FPC103 inner escape and local matching"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/GBE_REFCLK_N' || A.NetName == '/GBE_REFCLK_P') && A.intersectsArea('/GBE_REFCLK FPC103 inner escape and local matching')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.737000mm)))
+
+(rule "/GBE_REFCLK paired transition 1 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/GBE_REFCLK_N' || A.NetName == '/GBE_REFCLK_P') && A.intersectsArea('/GBE_REFCLK paired transition 1 In2.Cu')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.750000mm)))
+
+(rule "/GBE_HOST_RX paired transition 1 In2.Cu"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/GBE_HOST_RX_N' || A.NetName == '/GBE_HOST_RX_P') && A.intersectsArea('/GBE_HOST_RX paired transition 1 In2.Cu')")
+    (constraint diff_pair_gap (min 0.152400mm) (opt 0.152400mm) (max 0.751000mm)))
+
+(rule "/HUB_DS1 left In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/HUB_DS1_DN' || A.NetName == '/HUB_DS1_DP') && A.intersectsArea('/HUB_DS1 left In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.755000mm)))
+
+(rule "/USBC1 left In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC1_DN' || A.NetName == '/USBC1_DP') && A.intersectsArea('/USBC1 left In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.755000mm)))
+
+(rule "DFU connector front fanout"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/Internal Services/DFU_CONN_DN' || A.NetName == '/Internal Services/DFU_CONN_DP') && A.intersectsArea('DFU connector front fanout')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.755000mm)))
+
+(rule "/USBC1_SSTX left In2 via bank"
+    (layer "In2.Cu")
+    (condition "(A.NetName == '/USBC1_SSTX_N' || A.NetName == '/USBC1_SSTX_P') && A.intersectsArea('/USBC1_SSTX left In2 via bank')")
+    (constraint diff_pair_gap (min 0.203000mm) (opt 0.203000mm) (max 0.780000mm)))
+
+(rule "EC host U60 pad fanout"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/EC_HOST_USB_DN' || A.NetName == '/EC_HOST_USB_DP') && A.intersectsArea('EC host U60 pad fanout')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 0.905000mm)))
+
+(rule "/TCP2_TX0 FPC103 inner escape and local matching"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/TCP2_TX0_N' || A.NetName == '/TCP2_TX0_P') && A.intersectsArea('/TCP2_TX0 FPC103 inner escape and local matching')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 0.997000mm)))
+
+(rule "/TCP2_TX1 FPC103 inner escape and local matching"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/TCP2_TX1_N' || A.NetName == '/TCP2_TX1_P') && A.intersectsArea('/TCP2_TX1 FPC103 inner escape and local matching')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 1.006000mm)))
+
+(rule "/TCP2_TXRX0 FPC103 inner escape and local matching"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX0_N' || A.NetName == '/TCP2_TXRX0_P') && A.intersectsArea('/TCP2_TXRX0 FPC103 inner escape and local matching')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 1.008000mm)))
+
+(rule "DFU ESD front pad bridges"
+    (layer "F.Cu")
+    (condition "(A.NetName == '/Internal Services/DFU_CONN_DN' || A.NetName == '/Internal Services/DFU_CONN_DP') && A.intersectsArea('DFU ESD front pad bridges')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 1.080000mm)))
+
+(rule "/TCP2_TXRX1 FPC103 inner escape and local matching"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/TCP2_TXRX1_N' || A.NetName == '/TCP2_TXRX1_P') && A.intersectsArea('/TCP2_TXRX1 FPC103 inner escape and local matching')")
+    (constraint diff_pair_gap (min 0.254000mm) (opt 0.254000mm) (max 1.114000mm)))
+
+(rule "EC ISO R200 R201 fanout"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/Internal Services/EC_USB_ISO_DN' || A.NetName == '/Internal Services/EC_USB_ISO_DP') && A.intersectsArea('EC ISO R200 R201 fanout')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 3.105000mm)))
+
+(rule "EC host U61 pad fanout"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/EC_HOST_USB_DN' || A.NetName == '/EC_HOST_USB_DP') && A.intersectsArea('EC host U61 pad fanout')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 3.130000mm)))
+
+(rule "EC ISO U61 pad fanout"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/Internal Services/EC_USB_ISO_DN' || A.NetName == '/Internal Services/EC_USB_ISO_DP') && A.intersectsArea('EC ISO U61 pad fanout')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 3.230000mm)))
+
+(rule "DFU local bottom crossover"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/Internal Services/DFU_CONN_DN' || A.NetName == '/Internal Services/DFU_CONN_DP') && A.intersectsArea('DFU local bottom crossover')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 3.730000mm)))
+
+(rule "EC DFU U61.7 to R204.1 north stub"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/Internal Services/EC_DFU_DN' || A.NetName == '/Internal Services/EC_DFU_DP') && A.intersectsArea('EC DFU U61.7 to R204.1 north stub')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 6.005000mm)))
+
+(rule "EC DFU U61.3 to R203.1 south stub"
+    (layer "B.Cu")
+    (condition "(A.NetName == '/Internal Services/EC_DFU_DN' || A.NetName == '/Internal Services/EC_DFU_DP') && A.intersectsArea('EC DFU U61.3 to R203.1 south stub')")
+    (constraint diff_pair_gap (min 0.203200mm) (opt 0.203200mm) (max 6.030000mm)))

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "center board connector escapes, PCIe fanouts and pair tuning limits",
+  "description": "center board pair geometry and completed signal paths",
   "stackup": "mainboard_stackup_release.json",
   "suites": [
     {
@@ -2137,7 +2137,7 @@
     },
     {
       "schema_version": 1,
-      "scope": "center existing 85 ohm A1 and FPC103 escapes",
+      "scope": "Ethernet host data and clock routing",
       "nominal_gap_mm": 0.1524,
       "maximum_rounding_tolerance_mm": 2e-06,
       "paired_corner_leg_tolerance_mm": 2.5e-05,
@@ -2149,6 +2149,12 @@
           "widths_by_layer": {
             "F.Cu": [
               0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ],
+            "B.Cu": [
+              0.183
             ]
           }
         },
@@ -2156,6 +2162,12 @@
           "stem": "/GBE_HOST_TX",
           "widths_by_layer": {
             "F.Cu": [
+              0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ],
+            "B.Cu": [
               0.183
             ]
           }
@@ -2165,11 +2177,38 @@
           "widths_by_layer": {
             "F.Cu": [
               0.183
+            ],
+            "In2.Cu": [
+              0.114
+            ],
+            "B.Cu": [
+              0.183
             ]
           }
         }
       ],
       "regions": [
+        {
+          "name": "GBE_HOST_RX FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/GBE_HOST_RX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.89207,
+            120.96,
+            321.760001,
+            121.56
+          ],
+          "max_total_length_mm": {
+            "P": 1.979,
+            "N": 1.158
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.979,
+            "N": 1.158
+          },
+          "max_nearest_gap_mm": 0.624
+        },
         {
           "name": "GBE_HOST_RX A1 pad lands",
           "category": "pad_fanout",
@@ -2213,67 +2252,56 @@
           "max_nearest_gap_mm": 0.601
         },
         {
-          "name": "GBE_HOST_RX FPC103 lands to staggered vias",
-          "category": "connector_via_fanout",
+          "name": "/GBE_HOST_RX paired transition 1 In2.Cu",
           "stem": "/GBE_HOST_RX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            319.89207,
-            120.96,
-            321.760001,
-            121.56
-          ],
-          "max_total_length_mm": {
-            "P": 1.979,
-            "N": 1.158
-          },
-          "max_uncoupled_length_mm": {
-            "P": 1.979,
-            "N": 1.158
-          },
-          "max_nearest_gap_mm": 0.624
-        },
-        {
-          "name": "GBE_HOST_TX A1 pad lands",
-          "category": "pad_fanout",
-          "stem": "/GBE_HOST_TX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            207.745001,
-            63.195,
-            208.512301,
-            63.905
-          ],
-          "max_total_length_mm": {
-            "P": 0.812,
-            "N": 0.812
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.807,
-            "N": 0.807
-          },
-          "max_nearest_gap_mm": 0.325
-        },
-        {
-          "name": "GBE_HOST_TX A1 via flare",
+          "layer": "In2.Cu",
           "category": "via_fanout",
-          "stem": "/GBE_HOST_TX",
-          "layer": "F.Cu",
           "bounds_mm": [
-            209.1127,
-            63.195,
-            209.805,
-            63.905
+            217.525,
+            63.925000000000004,
+            219.025,
+            64.67500000000001
           ],
           "max_total_length_mm": {
-            "P": 0.737,
-            "N": 0.378
+            "P": 1.03,
+            "N": 1.483
           },
           "max_uncoupled_length_mm": {
-            "P": 0.731,
-            "N": 0.373
+            "P": 1.005,
+            "N": 1.458
           },
-          "max_nearest_gap_mm": 0.601
+          "max_nearest_gap_mm": 0.751,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "2fba72e9-c8e2-4c8a-b571-e6385e9399ff",
+            "f31fe5d6-cc83-4a09-b7fd-8664c2089087"
+          ]
+        },
+        {
+          "name": "/GBE_HOST_RX FPC103 inner escape and local matching",
+          "stem": "/GBE_HOST_RX",
+          "layer": "In2.Cu",
+          "category": "connector_via_fanout",
+          "bounds_mm": [
+            318.89,
+            121.158507,
+            320.62719699999997,
+            121.670471
+          ],
+          "max_total_length_mm": {
+            "P": 1.017,
+            "N": 1.758
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.007,
+            "N": 1.748
+          },
+          "max_nearest_gap_mm": 0.69,
+          "engineering_reason": "Existing staggered FPC103 vias require this local escape. For HDMI, the short P excursion matches the complete pad-to-pad path, with the connector front launch retained.",
+          "signal_vias": [
+            "ba75f36b-3dda-46fc-8119-9208a18669d0",
+            "d3b7beea-1f59-4220-ae44-1f45e92378c2"
+          ]
         },
         {
           "name": "GBE_HOST_TX FPC103 lands to staggered vias",
@@ -2295,6 +2323,253 @@
             "N": 1.158
           },
           "max_nearest_gap_mm": 0.624
+        },
+        {
+          "name": "/GBE_HOST_TX actual A1 pad pitch escape",
+          "stem": "/GBE_HOST_TX",
+          "layer": "F.Cu",
+          "category": "pad_fanout",
+          "bounds_mm": [
+            207.740001,
+            63.165,
+            208.60999999999999,
+            63.684999999999995
+          ],
+          "max_total_length_mm": {
+            "P": 0.87,
+            "N": 0.865
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.86,
+            "N": 0.855
+          },
+          "max_nearest_gap_mm": 0.321,
+          "engineering_reason": "Fixed A1 pad pitch transitions directly to the nominal differential pitch; endpoints are the actual mapped Mu Ultra pads."
+        },
+        {
+          "name": "/GBE_HOST_TX paired transition 1 F.Cu",
+          "stem": "/GBE_HOST_TX",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            224.92499999999998,
+            63.025,
+            225.675,
+            63.375
+          ],
+          "max_total_length_mm": {
+            "P": 0.38,
+            "N": 0.38
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.355,
+            "N": 0.355
+          },
+          "max_nearest_gap_mm": 0.419,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "7e821a4a-9b88-5a68-928f-3eef3a83fdfa",
+            "f8d5d7be-d0c3-532d-97be-f6380ca525f1"
+          ]
+        },
+        {
+          "name": "/GBE_HOST_TX paired transition 1 In2.Cu",
+          "stem": "/GBE_HOST_TX",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            224.92499999999998,
+            62.725,
+            225.675,
+            63.074999999999996
+          ],
+          "max_total_length_mm": {
+            "P": 0.399,
+            "N": 0.399
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.374,
+            "N": 0.374
+          },
+          "max_nearest_gap_mm": 0.458,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "7e821a4a-9b88-5a68-928f-3eef3a83fdfa",
+            "f8d5d7be-d0c3-532d-97be-f6380ca525f1"
+          ]
+        },
+        {
+          "name": "/GBE_HOST_TX paired transition 2 F.Cu",
+          "stem": "/GBE_HOST_TX",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            225.556418,
+            65.60641799999999,
+            226.272487,
+            66.32248700000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.501,
+            "N": 0.501
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.465,
+            "N": 0.465
+          },
+          "max_nearest_gap_mm": 0.464,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "9bedd8b3-a094-5cbf-ab18-6bd9f4017c33",
+            "8cf181bc-37bd-5547-8cf3-a293518987df"
+          ]
+        },
+        {
+          "name": "/GBE_HOST_TX paired transition 2 In2.Cu",
+          "stem": "/GBE_HOST_TX",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            225.727513,
+            65.777513,
+            226.419187,
+            66.469187
+          ],
+          "max_total_length_mm": {
+            "P": 0.515,
+            "N": 0.515
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.48,
+            "N": 0.48
+          },
+          "max_nearest_gap_mm": 0.513,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "9bedd8b3-a094-5cbf-ab18-6bd9f4017c33",
+            "8cf181bc-37bd-5547-8cf3-a293518987df"
+          ]
+        },
+        {
+          "name": "/GBE_HOST_TX paired transition 3 F.Cu",
+          "stem": "/GBE_HOST_TX",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            210.256418,
+            55.177513000000005,
+            210.972487,
+            55.893582
+          ],
+          "max_total_length_mm": {
+            "P": 0.501,
+            "N": 0.501
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.465,
+            "N": 0.465
+          },
+          "max_nearest_gap_mm": 0.464,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "aacbbc93-4180-5bee-9821-be4f969fc217",
+            "8163edb6-140e-51a4-8356-3290b6092880"
+          ]
+        },
+        {
+          "name": "/GBE_HOST_TX paired transition 3 In2.Cu",
+          "stem": "/GBE_HOST_TX",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            210.427513,
+            55.030813,
+            211.119187,
+            55.722487
+          ],
+          "max_total_length_mm": {
+            "P": 0.515,
+            "N": 0.515
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.48,
+            "N": 0.48
+          },
+          "max_nearest_gap_mm": 0.513,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "aacbbc93-4180-5bee-9821-be4f969fc217",
+            "8163edb6-140e-51a4-8356-3290b6092880"
+          ]
+        },
+        {
+          "name": "/GBE_HOST_TX first transition approach corner",
+          "stem": "/GBE_HOST_TX",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            210.1203,
+            55.757072,
+            210.562,
+            56.042928
+          ],
+          "max_total_length_mm": {
+            "P": 0.309,
+            "N": 0.201
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.309,
+            "N": 0.05
+          },
+          "max_nearest_gap_mm": 0.197,
+          "engineering_reason": "A 0.2714 mm outside-polarity corner immediately adjoins the first staggered via fanout. The nearby fixed launch obstacles require this short bend; it is not an uncoupled trunk."
+        },
+        {
+          "name": "/GBE_HOST_TX FPC103 inner escape and local matching",
+          "stem": "/GBE_HOST_TX",
+          "layer": "In2.Cu",
+          "category": "connector_via_fanout",
+          "bounds_mm": [
+            318.89,
+            122.658507,
+            320.62719699999997,
+            123.170471
+          ],
+          "max_total_length_mm": {
+            "P": 1.017,
+            "N": 1.758
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.007,
+            "N": 1.748
+          },
+          "max_nearest_gap_mm": 0.69,
+          "engineering_reason": "Existing staggered FPC103 vias require this local escape. For HDMI, the short P excursion matches the complete pad-to-pad path, with the connector front launch retained.",
+          "signal_vias": [
+            "0ad29cee-c234-4b71-8522-d8e0b505df03",
+            "1f2b0252-ea62-45ac-800f-0cc5137613ae"
+          ]
+        },
+        {
+          "name": "GBE_REFCLK FPC103 lands to staggered vias",
+          "category": "connector_via_fanout",
+          "stem": "/GBE_REFCLK",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.269257,
+            123.91,
+            321.760001,
+            124.56
+          ],
+          "max_total_length_mm": {
+            "P": 2.646,
+            "N": 1.724
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.646,
+            "N": 1.724
+          },
+          "max_nearest_gap_mm": 0.67
         },
         {
           "name": "GBE_REFCLK A1 pad lands",
@@ -2339,37 +2614,62 @@
           "max_nearest_gap_mm": 0.601
         },
         {
-          "name": "GBE_REFCLK FPC103 lands to staggered vias",
-          "category": "connector_via_fanout",
+          "name": "/GBE_REFCLK paired transition 1 In2.Cu",
           "stem": "/GBE_REFCLK",
-          "layer": "F.Cu",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
           "bounds_mm": [
-            319.269257,
-            123.91,
-            321.760001,
-            124.56
+            217.525,
+            71.425,
+            219.025,
+            72.17500000000001
           ],
           "max_total_length_mm": {
-            "P": 2.646,
-            "N": 1.724
+            "P": 1.003,
+            "N": 1.495
           },
           "max_uncoupled_length_mm": {
-            "P": 2.646,
-            "N": 1.724
+            "P": 0.978,
+            "N": 1.47
           },
-          "max_nearest_gap_mm": 0.67
+          "max_nearest_gap_mm": 0.75,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "bf55f5a5-d908-44e9-9b1d-080ccc8ba49a",
+            "9ebdd1b9-9cc1-4b0d-ad74-0690c9939288"
+          ]
+        },
+        {
+          "name": "/GBE_REFCLK FPC103 inner escape and local matching",
+          "stem": "/GBE_REFCLK",
+          "layer": "In2.Cu",
+          "category": "connector_via_fanout",
+          "bounds_mm": [
+            318.19,
+            124.16566999999999,
+            320.076019,
+            124.67611600000001
+          ],
+          "max_total_length_mm": {
+            "P": 1.102,
+            "N": 1.904
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.092,
+            "N": 1.893
+          },
+          "max_nearest_gap_mm": 0.737,
+          "engineering_reason": "Existing staggered FPC103 vias require this local escape. For HDMI, the short P excursion matches the complete pad-to-pad path, with the connector front launch retained.",
+          "signal_vias": [
+            "c6686119-e4b9-4e45-b74e-6e890d7422dc",
+            "448e995c-2ca8-43aa-aef4-b6104ddcbd7d"
+          ]
         }
-      ],
-      "notes": [
-        "These are the existing pad-to-via escapes. The long board-to-board interfaces remain unrouted.",
-        "Every centerline is clipped to the exact local window. Copper outside all windows stays at nominal coupling.",
-        "No minimum gap, width, clearance, via drill or ground-plane restriction is waived.",
-        "The fixed ceilings include at most 0.016 mm of length margin and 0.006 mm of sampled-gap upper-bound margin over this reviewed geometry."
       ]
     },
     {
       "schema_version": 1,
-      "scope": "center existing 100 ohm A1 and FPC103 escapes",
+      "scope": "HDMI pair routing",
       "nominal_gap_mm": 0.254,
       "maximum_rounding_tolerance_mm": 2e-06,
       "paired_corner_leg_tolerance_mm": 2.5e-05,
@@ -2381,6 +2681,12 @@
           "widths_by_layer": {
             "F.Cu": [
               0.1521
+            ],
+            "In2.Cu": [
+              0.091
+            ],
+            "B.Cu": [
+              0.1521
             ]
           }
         },
@@ -2388,6 +2694,12 @@
           "stem": "/TCP2_TX1",
           "widths_by_layer": {
             "F.Cu": [
+              0.1521
+            ],
+            "In2.Cu": [
+              0.091
+            ],
+            "B.Cu": [
               0.1521
             ]
           }
@@ -2397,6 +2709,12 @@
           "widths_by_layer": {
             "F.Cu": [
               0.1521
+            ],
+            "In2.Cu": [
+              0.091
+            ],
+            "B.Cu": [
+              0.1521
             ]
           }
         },
@@ -2405,53 +2723,17 @@
           "widths_by_layer": {
             "F.Cu": [
               0.1521
+            ],
+            "In2.Cu": [
+              0.091
+            ],
+            "B.Cu": [
+              0.1521
             ]
           }
         }
       ],
       "regions": [
-        {
-          "name": "TCP2_TX0 A1 pad lands",
-          "category": "pad_fanout",
-          "stem": "/TCP2_TX0",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            207.695001,
-            111.195,
-            208.476951,
-            111.905
-          ],
-          "max_total_length_mm": {
-            "P": 0.812,
-            "N": 0.812
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.807,
-            "N": 0.807
-          },
-          "max_nearest_gap_mm": 0.356
-        },
-        {
-          "name": "TCP2_TX0 A1 via flare",
-          "category": "via_fanout",
-          "stem": "/TCP2_TX0",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            209.09805,
-            111.195,
-            209.755,
-            111.905
-          ],
-          "max_total_length_mm": {
-            "P": 0.328,
-            "N": 0.687
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.323,
-            "N": 0.681
-          },
-          "max_nearest_gap_mm": 0.632
-        },
         {
           "name": "TCP2_TX0 FPC103 lands to staggered vias",
           "category": "connector_via_fanout",
@@ -2474,46 +2756,208 @@
           "max_nearest_gap_mm": 0.664
         },
         {
-          "name": "TCP2_TX1 A1 pad lands",
-          "category": "pad_fanout",
-          "stem": "/TCP2_TX1",
+          "name": "/TCP2_TX0 actual A1 pad pitch escape",
+          "stem": "/TCP2_TX0",
           "layer": "F.Cu",
+          "category": "pad_fanout",
           "bounds_mm": [
-            207.745001,
-            108.145,
-            208.476951,
-            108.855
+            206.99,
+            103.66499999999999,
+            207.760001,
+            104.185
           ],
           "max_total_length_mm": {
-            "P": 0.762,
-            "N": 0.762
+            "P": 0.767,
+            "N": 0.764
           },
           "max_uncoupled_length_mm": {
             "P": 0.757,
-            "N": 0.757
+            "N": 0.754
           },
-          "max_nearest_gap_mm": 0.356
+          "max_nearest_gap_mm": 0.353,
+          "engineering_reason": "Fixed A1 pad pitch transitions directly to the nominal differential pitch; endpoints are the actual mapped Mu Ultra pads."
         },
         {
-          "name": "TCP2_TX1 A1 via flare",
-          "category": "via_fanout",
-          "stem": "/TCP2_TX1",
+          "name": "/TCP2_TX0 paired transition 1 F.Cu",
+          "stem": "/TCP2_TX0",
           "layer": "F.Cu",
+          "category": "via_fanout",
           "bounds_mm": [
-            209.14805,
-            108.145,
-            209.805,
-            108.855
+            218.775,
+            116.475,
+            219.425,
+            117.22500000000001
           ],
           "max_total_length_mm": {
-            "P": 0.328,
-            "N": 0.687
+            "P": 0.646,
+            "N": 0.646
           },
           "max_uncoupled_length_mm": {
-            "P": 0.323,
-            "N": 0.681
+            "P": 0.621,
+            "N": 0.621
           },
-          "max_nearest_gap_mm": 0.632
+          "max_nearest_gap_mm": 0.533,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "4528ee2a-8a37-5b1b-88c9-9eaabba17208",
+            "4fb10080-d6b0-5d1a-a06b-7b32026e8d9a"
+          ]
+        },
+        {
+          "name": "/TCP2_TX0 paired transition 1 B.Cu",
+          "stem": "/TCP2_TX0",
+          "layer": "B.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            219.375,
+            116.475,
+            220.025,
+            117.22500000000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.646,
+            "N": 0.646
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.621,
+            "N": 0.621
+          },
+          "max_nearest_gap_mm": 0.533,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "4528ee2a-8a37-5b1b-88c9-9eaabba17208",
+            "4fb10080-d6b0-5d1a-a06b-7b32026e8d9a"
+          ]
+        },
+        {
+          "name": "/TCP2_TX0 paired transition 2 F.Cu",
+          "stem": "/TCP2_TX0",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            208.57751299999998,
+            115.777513,
+            209.318578,
+            116.518578
+          ],
+          "max_total_length_mm": {
+            "P": 0.488,
+            "N": 0.488
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.452,
+            "N": 0.452
+          },
+          "max_nearest_gap_mm": 0.514,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "95fa8840-1f61-57ad-8d67-37cfbd127d8a",
+            "6bb93367-9efc-5902-b962-5385b8864180"
+          ]
+        },
+        {
+          "name": "/TCP2_TX0 paired transition 2 In2.Cu",
+          "stem": "/TCP2_TX0",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            208.403024,
+            115.60302399999999,
+            209.122487,
+            116.32248700000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.499,
+            "N": 0.499
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.463,
+            "N": 0.463
+          },
+          "max_nearest_gap_mm": 0.559,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "95fa8840-1f61-57ad-8d67-37cfbd127d8a",
+            "6bb93367-9efc-5902-b962-5385b8864180"
+          ]
+        },
+        {
+          "name": "/TCP2_TX0 paired transition 3 F.Cu",
+          "stem": "/TCP2_TX0",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            204.625,
+            110.725,
+            205.375,
+            111.375
+          ],
+          "max_total_length_mm": {
+            "P": 0.66,
+            "N": 0.636
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.635,
+            "N": 0.611
+          },
+          "max_nearest_gap_mm": 0.544,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "974b2698-2f3e-5ab8-8ac6-5572e9155d66",
+            "608d914d-1860-5cde-98e3-d714ab3381fb"
+          ]
+        },
+        {
+          "name": "/TCP2_TX0 paired transition 3 In2.Cu",
+          "stem": "/TCP2_TX0",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            204.625,
+            111.32499999999999,
+            205.375,
+            111.97500000000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.67,
+            "N": 0.642
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.645,
+            "N": 0.617
+          },
+          "max_nearest_gap_mm": 0.598,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "974b2698-2f3e-5ab8-8ac6-5572e9155d66",
+            "608d914d-1860-5cde-98e3-d714ab3381fb"
+          ]
+        },
+        {
+          "name": "/TCP2_TX0 FPC103 inner escape and local matching",
+          "stem": "/TCP2_TX0",
+          "layer": "B.Cu",
+          "category": "connector_via_fanout",
+          "bounds_mm": [
+            317.99,
+            114.56263,
+            320.644763,
+            115.739489
+          ],
+          "max_total_length_mm": {
+            "P": 3.001,
+            "N": 2.69
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.991,
+            "N": 2.679
+          },
+          "max_nearest_gap_mm": 0.997,
+          "engineering_reason": "Existing staggered FPC103 vias require this local escape. For HDMI, the short P excursion matches the complete pad-to-pad path, with the connector front launch retained.",
+          "signal_vias": [
+            "72c20c90-85fb-4845-8bd6-24a9256df816",
+            "29288c42-7242-452e-b68e-2eae3a183187"
+          ]
         },
         {
           "name": "TCP2_TX1 FPC103 lands to staggered vias",
@@ -2537,46 +2981,260 @@
           "max_nearest_gap_mm": 0.65
         },
         {
-          "name": "TCP2_TXRX0 A1 pad lands",
-          "category": "pad_fanout",
-          "stem": "/TCP2_TXRX0",
+          "name": "/TCP2_TX1 actual A1 pad pitch escape",
+          "stem": "/TCP2_TX1",
           "layer": "F.Cu",
+          "category": "pad_fanout",
           "bounds_mm": [
-            207.695001,
-            109.695,
-            208.476951,
-            110.405
+            206.99,
+            100.66499999999999,
+            207.760001,
+            101.185
           ],
           "max_total_length_mm": {
-            "P": 0.812,
-            "N": 0.812
+            "P": 0.767,
+            "N": 0.764
           },
           "max_uncoupled_length_mm": {
-            "P": 0.807,
-            "N": 0.807
+            "P": 0.757,
+            "N": 0.754
           },
-          "max_nearest_gap_mm": 0.356
+          "max_nearest_gap_mm": 0.353,
+          "engineering_reason": "Fixed A1 pad pitch transitions directly to the nominal differential pitch; endpoints are the actual mapped Mu Ultra pads."
         },
         {
-          "name": "TCP2_TXRX0 A1 via flare",
-          "category": "via_fanout",
-          "stem": "/TCP2_TXRX0",
+          "name": "/TCP2_TX1 paired transition 1 F.Cu",
+          "stem": "/TCP2_TX1",
           "layer": "F.Cu",
+          "category": "via_fanout",
           "bounds_mm": [
-            209.09805,
-            109.695,
-            209.755,
-            110.405
+            209.341655,
+            123.141655,
+            210.068578,
+            123.868578
           ],
           "max_total_length_mm": {
-            "P": 0.328,
-            "N": 0.687
+            "P": 0.482,
+            "N": 0.482
           },
           "max_uncoupled_length_mm": {
-            "P": 0.323,
-            "N": 0.681
+            "P": 0.446,
+            "N": 0.446
           },
-          "max_nearest_gap_mm": 0.632
+          "max_nearest_gap_mm": 0.485,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "17b8e000-97af-5350-967b-4fd12cdc084c",
+            "c0b8f497-28c7-50a6-8bc6-81dbe2575cef"
+          ]
+        },
+        {
+          "name": "/TCP2_TX1 paired transition 1 In2.Cu",
+          "stem": "/TCP2_TX1",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            209.153024,
+            122.953024,
+            209.858345,
+            123.65834500000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.491,
+            "N": 0.491
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.456,
+            "N": 0.456
+          },
+          "max_nearest_gap_mm": 0.532,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "17b8e000-97af-5350-967b-4fd12cdc084c",
+            "c0b8f497-28c7-50a6-8bc6-81dbe2575cef"
+          ]
+        },
+        {
+          "name": "/TCP2_TX1 paired transition 2 In2.Cu",
+          "stem": "/TCP2_TX1",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            225.245,
+            117.07499999999999,
+            225.955,
+            117.42500000000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.367,
+            "N": 0.367
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.342,
+            "N": 0.342
+          },
+          "max_nearest_gap_mm": 0.497,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "4ff34909-f5c1-5bdc-b10a-b0fef244633d",
+            "4b1d984f-4e25-51da-a52a-1a2976d38804"
+          ]
+        },
+        {
+          "name": "/TCP2_TX1 paired transition 2 B.Cu",
+          "stem": "/TCP2_TX1",
+          "layer": "B.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            225.245,
+            116.77499999999999,
+            225.955,
+            117.125
+          ],
+          "max_total_length_mm": {
+            "P": 0.354,
+            "N": 0.354
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.329,
+            "N": 0.329
+          },
+          "max_nearest_gap_mm": 0.46,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "4ff34909-f5c1-5bdc-b10a-b0fef244633d",
+            "4b1d984f-4e25-51da-a52a-1a2976d38804"
+          ]
+        },
+        {
+          "name": "/TCP2_TX1 paired transition 3 F.Cu",
+          "stem": "/TCP2_TX1",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            217.475,
+            125.54499999999999,
+            218.125,
+            126.25500000000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.646,
+            "N": 0.642
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.617,
+            "N": 0.625
+          },
+          "max_nearest_gap_mm": 0.499,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "b3c374f1-e0d9-58ad-bcc3-97bee2a44549",
+            "5af2c44e-0f2d-582e-b941-a2f20d4503c1"
+          ]
+        },
+        {
+          "name": "/TCP2_TX1 paired transition 3 In2.Cu",
+          "stem": "/TCP2_TX1",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            218.075,
+            125.54499999999999,
+            218.725,
+            126.25500000000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.649,
+            "N": 0.649
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.624,
+            "N": 0.624
+          },
+          "max_nearest_gap_mm": 0.552,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "b3c374f1-e0d9-58ad-bcc3-97bee2a44549",
+            "5af2c44e-0f2d-582e-b941-a2f20d4503c1"
+          ]
+        },
+        {
+          "name": "/TCP2_TX1 paired transition 4 F.Cu",
+          "stem": "/TCP2_TX1",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            202.495,
+            101.875,
+            203.205,
+            102.525
+          ],
+          "max_total_length_mm": {
+            "P": 0.633,
+            "N": 0.654
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.608,
+            "N": 0.629
+          },
+          "max_nearest_gap_mm": 0.508,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "c6bd4a1a-9cdb-5868-89f4-dce2a327a0ca",
+            "e628b753-6a5d-5a98-8f8d-c4ba622cf854"
+          ]
+        },
+        {
+          "name": "/TCP2_TX1 paired transition 4 In2.Cu",
+          "stem": "/TCP2_TX1",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            202.495,
+            102.475,
+            203.205,
+            103.125
+          ],
+          "max_total_length_mm": {
+            "P": 0.638,
+            "N": 0.663
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.613,
+            "N": 0.638
+          },
+          "max_nearest_gap_mm": 0.563,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "c6bd4a1a-9cdb-5868-89f4-dce2a327a0ca",
+            "e628b753-6a5d-5a98-8f8d-c4ba622cf854"
+          ]
+        },
+        {
+          "name": "/TCP2_TX1 FPC103 inner escape and local matching",
+          "stem": "/TCP2_TX1",
+          "layer": "B.Cu",
+          "category": "connector_via_fanout",
+          "bounds_mm": [
+            317.99,
+            116.04325999999999,
+            320.620238,
+            117.21897600000001
+          ],
+          "max_total_length_mm": {
+            "P": 3.02,
+            "N": 2.65
+          },
+          "max_uncoupled_length_mm": {
+            "P": 3.01,
+            "N": 2.639
+          },
+          "max_nearest_gap_mm": 1.006,
+          "engineering_reason": "Existing staggered FPC103 vias require this local escape. For HDMI, the short P excursion matches the complete pad-to-pad path, with the connector front launch retained.",
+          "signal_vias": [
+            "8981c322-7acc-4e39-92ff-ad7584a4f6a8",
+            "d70251c6-5f80-42af-bc75-cd656bc050ba"
+          ]
         },
         {
           "name": "TCP2_TXRX0 FPC103 lands to staggered vias",
@@ -2600,46 +3258,208 @@
           "max_nearest_gap_mm": 0.699
         },
         {
-          "name": "TCP2_TXRX1 A1 pad lands",
-          "category": "pad_fanout",
-          "stem": "/TCP2_TXRX1",
+          "name": "/TCP2_TXRX0 actual A1 pad pitch escape",
+          "stem": "/TCP2_TXRX0",
           "layer": "F.Cu",
+          "category": "pad_fanout",
           "bounds_mm": [
-            207.745001,
-            106.695,
-            208.476951,
-            107.405
+            206.99,
+            102.16499999999999,
+            207.760001,
+            102.685
           ],
           "max_total_length_mm": {
-            "P": 0.762,
-            "N": 0.762
+            "P": 0.767,
+            "N": 0.764
           },
           "max_uncoupled_length_mm": {
             "P": 0.757,
-            "N": 0.757
+            "N": 0.754
           },
-          "max_nearest_gap_mm": 0.356
+          "max_nearest_gap_mm": 0.353,
+          "engineering_reason": "Fixed A1 pad pitch transitions directly to the nominal differential pitch; endpoints are the actual mapped Mu Ultra pads."
         },
         {
-          "name": "TCP2_TXRX1 A1 via flare",
-          "category": "via_fanout",
-          "stem": "/TCP2_TXRX1",
+          "name": "/TCP2_TXRX0 paired transition 1 F.Cu",
+          "stem": "/TCP2_TXRX0",
           "layer": "F.Cu",
+          "category": "via_fanout",
           "bounds_mm": [
-            209.14805,
-            106.695,
-            209.805,
-            107.405
+            217.025,
+            117.875,
+            217.675,
+            118.625
           ],
           "max_total_length_mm": {
-            "P": 0.328,
-            "N": 0.687
+            "P": 0.646,
+            "N": 0.646
           },
           "max_uncoupled_length_mm": {
-            "P": 0.323,
-            "N": 0.681
+            "P": 0.621,
+            "N": 0.621
           },
-          "max_nearest_gap_mm": 0.632
+          "max_nearest_gap_mm": 0.533,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "0d054008-9dc4-5ba8-94a3-54c4aae68b67",
+            "f6e25810-ad96-586f-8343-7f7f4681e4e6"
+          ]
+        },
+        {
+          "name": "/TCP2_TXRX0 paired transition 1 B.Cu",
+          "stem": "/TCP2_TXRX0",
+          "layer": "B.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            217.625,
+            117.875,
+            218.275,
+            118.625
+          ],
+          "max_total_length_mm": {
+            "P": 0.646,
+            "N": 0.646
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.621,
+            "N": 0.621
+          },
+          "max_nearest_gap_mm": 0.533,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "0d054008-9dc4-5ba8-94a3-54c4aae68b67",
+            "f6e25810-ad96-586f-8343-7f7f4681e4e6"
+          ]
+        },
+        {
+          "name": "/TCP2_TXRX0 paired transition 2 F.Cu",
+          "stem": "/TCP2_TXRX0",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            203.525,
+            112.425,
+            204.275,
+            113.075
+          ],
+          "max_total_length_mm": {
+            "P": 0.646,
+            "N": 0.646
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.621,
+            "N": 0.621
+          },
+          "max_nearest_gap_mm": 0.533,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "1eeb05a3-b709-5acd-8978-93e7942c4cc0",
+            "3bcee04f-6944-5339-96b6-5e5cbc13b961"
+          ]
+        },
+        {
+          "name": "/TCP2_TXRX0 paired transition 2 In2.Cu",
+          "stem": "/TCP2_TXRX0",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            203.525,
+            113.02499999999999,
+            204.275,
+            113.67500000000001
+          ],
+          "max_total_length_mm": {
+            "P": 0.659,
+            "N": 0.654
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.633,
+            "N": 0.629
+          },
+          "max_nearest_gap_mm": 0.585,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "1eeb05a3-b709-5acd-8978-93e7942c4cc0",
+            "3bcee04f-6944-5339-96b6-5e5cbc13b961"
+          ]
+        },
+        {
+          "name": "/TCP2_TXRX0 paired transition 3 F.Cu",
+          "stem": "/TCP2_TXRX0",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            209.775,
+            118.07499999999999,
+            210.425,
+            118.825
+          ],
+          "max_total_length_mm": {
+            "P": 0.646,
+            "N": 0.646
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.621,
+            "N": 0.621
+          },
+          "max_nearest_gap_mm": 0.533,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "5a9f6621-28b6-5c1e-a13a-858d617f3447",
+            "aa7c451d-b9ab-5ed5-bedc-d172d044aa8a"
+          ]
+        },
+        {
+          "name": "/TCP2_TXRX0 paired transition 3 In2.Cu",
+          "stem": "/TCP2_TXRX0",
+          "layer": "In2.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            209.17499999999998,
+            118.07499999999999,
+            209.82500000000002,
+            118.825
+          ],
+          "max_total_length_mm": {
+            "P": 0.654,
+            "N": 0.654
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.629,
+            "N": 0.629
+          },
+          "max_nearest_gap_mm": 0.585,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "5a9f6621-28b6-5c1e-a13a-858d617f3447",
+            "aa7c451d-b9ab-5ed5-bedc-d172d044aa8a"
+          ]
+        },
+        {
+          "name": "/TCP2_TXRX0 FPC103 inner escape and local matching",
+          "stem": "/TCP2_TXRX0",
+          "layer": "B.Cu",
+          "category": "connector_via_fanout",
+          "bounds_mm": [
+            317.99,
+            117.550834,
+            320.670609,
+            118.739489
+          ],
+          "max_total_length_mm": {
+            "P": 3.025,
+            "N": 2.705
+          },
+          "max_uncoupled_length_mm": {
+            "P": 3.015,
+            "N": 2.694
+          },
+          "max_nearest_gap_mm": 1.008,
+          "engineering_reason": "Existing staggered FPC103 vias require this local escape. For HDMI, the short P excursion matches the complete pad-to-pad path, with the connector front launch retained.",
+          "signal_vias": [
+            "de9b4cd4-c105-48ea-8955-2cae793b6094",
+            "b75e1f6a-4882-4f21-88f1-2c8b0764e502"
+          ]
         },
         {
           "name": "TCP2_TXRX1 FPC103 lands to staggered vias",
@@ -2661,38 +3481,141 @@
             "N": 1.233
           },
           "max_nearest_gap_mm": 0.677
+        },
+        {
+          "name": "/TCP2_TXRX1 actual A1 pad pitch escape",
+          "stem": "/TCP2_TXRX1",
+          "layer": "F.Cu",
+          "category": "pad_fanout",
+          "bounds_mm": [
+            206.99,
+            99.16499999999999,
+            207.760001,
+            99.685
+          ],
+          "max_total_length_mm": {
+            "P": 0.767,
+            "N": 0.764
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.757,
+            "N": 0.754
+          },
+          "max_nearest_gap_mm": 0.353,
+          "engineering_reason": "Fixed A1 pad pitch transitions directly to the nominal differential pitch; endpoints are the actual mapped Mu Ultra pads."
+        },
+        {
+          "name": "/TCP2_TXRX1 paired transition 1 F.Cu",
+          "stem": "/TCP2_TXRX1",
+          "layer": "F.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            218.375,
+            123.125,
+            219.025,
+            123.875
+          ],
+          "max_total_length_mm": {
+            "P": 0.646,
+            "N": 0.646
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.621,
+            "N": 0.621
+          },
+          "max_nearest_gap_mm": 0.533,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "d5c3b6c3-a49b-50f6-bc00-a91201b464d0",
+            "7c2bc43b-d214-5e5a-a111-894216f5e811"
+          ]
+        },
+        {
+          "name": "/TCP2_TXRX1 paired transition 1 B.Cu",
+          "stem": "/TCP2_TXRX1",
+          "layer": "B.Cu",
+          "category": "via_fanout",
+          "bounds_mm": [
+            218.975,
+            123.125,
+            219.625,
+            123.875
+          ],
+          "max_total_length_mm": {
+            "P": 0.65,
+            "N": 0.646
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.621,
+            "N": 0.629
+          },
+          "max_nearest_gap_mm": 0.533,
+          "engineering_reason": "The fixed manufacturable via pitch and annular copper expand the pair locally; this window ends at the neighboring nominal-pitch trace endpoints.",
+          "signal_vias": [
+            "d5c3b6c3-a49b-50f6-bc00-a91201b464d0",
+            "7c2bc43b-d214-5e5a-a111-894216f5e811"
+          ]
+        },
+        {
+          "name": "/TCP2_TXRX1 FPC103 inner escape and local matching",
+          "stem": "/TCP2_TXRX1",
+          "layer": "B.Cu",
+          "category": "connector_via_fanout",
+          "bounds_mm": [
+            317.99,
+            119.03123599999999,
+            320.677296,
+            120.31305
+          ],
+          "max_total_length_mm": {
+            "P": 3.164,
+            "N": 2.713
+          },
+          "max_uncoupled_length_mm": {
+            "P": 3.154,
+            "N": 2.701
+          },
+          "max_nearest_gap_mm": 1.114,
+          "engineering_reason": "Existing staggered FPC103 vias require this local escape. For HDMI, the short P excursion matches the complete pad-to-pad path, with the connector front launch retained.",
+          "signal_vias": [
+            "ffcf63c0-c01f-4973-8597-51cc86cc1164",
+            "0cfd7d88-10e9-43b2-a206-951c6f2cbbc5"
+          ]
         }
-      ],
-      "notes": [
-        "These are the existing pad-to-via escapes. The long board-to-board interfaces remain unrouted.",
-        "Every centerline is clipped to the exact local window. Copper outside all windows stays at nominal coupling.",
-        "No minimum gap, width, clearance, via drill or ground-plane restriction is waived.",
-        "The fixed ceilings include at most 0.016 mm of length margin and 0.006 mm of sampled-gap upper-bound margin over this reviewed geometry."
       ]
     },
     {
       "schema_version": 1,
-      "scope": "Existing center USB connector escapes; complete interfaces remain unrouted",
+      "scope": "USB pair routing and local EC links",
       "nominal_gap_mm": 0.2032,
+      "nominal_gap_by_layer_mm": {
+        "In2.Cu": 0.203
+      },
       "maximum_rounding_tolerance_mm": 2e-06,
-      "paired_corner_leg_tolerance_mm": 1e-06,
+      "paired_corner_leg_tolerance_mm": 2.5e-05,
       "maximum_sample_step_mm": 0.005,
       "outside_uncoupled_rounding_length_mm": 1e-06,
       "pairs": [
         {
-          "stem": "/HUB_DS4_D",
+          "stem": "/EC_HOST_USB",
           "nets": {
-            "N": "/HUB_DS4_DN",
-            "P": "/HUB_DS4_DP"
+            "N": "/EC_HOST_USB_DN",
+            "P": "/EC_HOST_USB_DP"
           },
           "widths_by_layer": {
             "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
               0.1796
             ]
           }
         },
         {
-          "stem": "/HUB_DS1_D",
+          "stem": "/HUB_DS1",
           "nets": {
             "N": "/HUB_DS1_DN",
             "P": "/HUB_DS1_DP"
@@ -2700,23 +3623,107 @@
           "widths_by_layer": {
             "F.Cu": [
               0.1796
-            ]
-          }
-        },
-        {
-          "stem": "/USBC2_D",
-          "nets": {
-            "N": "/USBC2_DN",
-            "P": "/USBC2_DP"
-          },
-          "widths_by_layer": {
-            "F.Cu": [
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
               0.1796
             ]
           }
         },
         {
-          "stem": "/USBC1_D",
+          "stem": "/HUB_DS4",
+          "nets": {
+            "N": "/HUB_DS4_DN",
+            "P": "/HUB_DS4_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/Internal Services/DFU_CONN",
+          "nets": {
+            "N": "/Internal Services/DFU_CONN_DN",
+            "P": "/Internal Services/DFU_CONN_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/Internal Services/EC_DFU",
+          "nets": {
+            "N": "/Internal Services/EC_DFU_DN",
+            "P": "/Internal Services/EC_DFU_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/Internal Services/EC_USB_ISO",
+          "nets": {
+            "N": "/Internal Services/EC_USB_ISO_DN",
+            "P": "/Internal Services/EC_USB_ISO_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB",
+          "nets": {
+            "N": "/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB_DN",
+            "P": "/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC1",
           "nets": {
             "N": "/USBC1_DN",
             "P": "/USBC1_DP"
@@ -2724,41 +3731,11 @@
           "widths_by_layer": {
             "F.Cu": [
               0.1796
-            ]
-          }
-        },
-        {
-          "stem": "/USBC2_SSTX",
-          "nets": {
-            "N": "/USBC2_SSTX_N",
-            "P": "/USBC2_SSTX_P"
-          },
-          "widths_by_layer": {
-            "F.Cu": [
-              0.1796
-            ]
-          }
-        },
-        {
-          "stem": "/USBC2_SSRX",
-          "nets": {
-            "N": "/USBC2_SSRX_N",
-            "P": "/USBC2_SSRX_P"
-          },
-          "widths_by_layer": {
-            "F.Cu": [
-              0.1796
-            ]
-          }
-        },
-        {
-          "stem": "/USBC1_SSTX",
-          "nets": {
-            "N": "/USBC1_SSTX_N",
-            "P": "/USBC1_SSTX_P"
-          },
-          "widths_by_layer": {
-            "F.Cu": [
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
               0.1796
             ]
           }
@@ -2772,605 +3749,1013 @@
           "widths_by_layer": {
             "F.Cu": [
               0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC1_SSTX",
+          "nets": {
+            "N": "/USBC1_SSTX_N",
+            "P": "/USBC1_SSTX_P"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC2",
+          "nets": {
+            "N": "/USBC2_DN",
+            "P": "/USBC2_DP"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC2_SSRX",
+          "nets": {
+            "N": "/USBC2_SSRX_N",
+            "P": "/USBC2_SSRX_P"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
+            ]
+          }
+        },
+        {
+          "stem": "/USBC2_SSTX",
+          "nets": {
+            "N": "/USBC2_SSTX_N",
+            "P": "/USBC2_SSTX_P"
+          },
+          "widths_by_layer": {
+            "F.Cu": [
+              0.1796
+            ],
+            "In2.Cu": [
+              0.111
+            ],
+            "B.Cu": [
+              0.1796
             ]
           }
         }
       ],
       "regions": [
         {
-          "name": "FPC102 HUB_DS4_D pad launch",
-          "category": "pad_fanout",
-          "stem": "/HUB_DS4_D",
-          "layer": "F.Cu",
+          "name": "/HUB_DS1 left In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/HUB_DS1",
+          "layer": "In2.Cu",
           "bounds_mm": [
-            109.299998,
-            69.549998,
-            109.41720199999999,
-            70.05000199999999
+            110.365957,
+            70.309839,
+            113.01,
+            71.647535
           ],
+          "max_nearest_gap_mm": 0.755,
           "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
+            "P": 1.58,
+            "N": 2.38
           },
           "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
+            "P": 1.58,
+            "N": 2.38
           },
-          "max_nearest_gap_mm": 0.325
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "FPC102 HUB_DS4_D fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/HUB_DS4_D",
+          "name": "/HUB_DS1 FPC102 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/HUB_DS1",
           "layer": "F.Cu",
           "bounds_mm": [
-            110.79421699999997,
-            69.385942,
-            111.700002,
-            69.98020199999999
+            109.05,
+            70.85000000000001,
+            113,
+            71.6
           ],
+          "max_nearest_gap_mm": 0.68,
           "max_total_length_mm": {
-            "P": 0.977,
-            "N": 0.24
+            "P": 2.28,
+            "N": 1.43
           },
           "max_uncoupled_length_mm": {
-            "P": 0.977,
-            "N": 0.24
+            "P": 1.23,
+            "N": 0.38
           },
-          "max_nearest_gap_mm": 0.625
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "FPC102 HUB_DS1_D pad launch",
-          "category": "pad_fanout",
-          "stem": "/HUB_DS1_D",
+          "name": "/HUB_DS4 left In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/HUB_DS4",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            110.654219,
+            68.764354,
+            113.01,
+            70.10000000000001
+          ],
+          "max_nearest_gap_mm": 0.705,
+          "max_total_length_mm": {
+            "P": 1.33,
+            "N": 2.105
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.33,
+            "N": 2.105
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/HUB_DS4 FPC102 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/HUB_DS4",
           "layer": "F.Cu",
           "bounds_mm": [
-            109.299998,
-            71.049998,
-            109.41720199999999,
-            71.55000199999999
+            109.05,
+            69.335944,
+            113,
+            70.1
           ],
+          "max_nearest_gap_mm": 0.63,
           "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
+            "P": 2.53,
+            "N": 1.755
           },
           "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
+            "P": 1.155,
+            "N": 0.38
           },
-          "max_nearest_gap_mm": 0.325
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "FPC102 HUB_DS1_D fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/HUB_DS1_D",
+          "name": "/USBC1 left In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC1",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            110.290286,
+            73.5,
+            113.01,
+            75.09795000000001
+          ],
+          "max_nearest_gap_mm": 0.755,
+          "max_total_length_mm": {
+            "P": 1.63,
+            "N": 2.83
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.605,
+            "N": 2.83
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC1 FPC102 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC1",
           "layer": "F.Cu",
           "bounds_mm": [
-            110.46595499999995,
-            70.89999800000001,
-            111.450002,
-            71.469802
+            109.05,
+            73.85000000000001,
+            113,
+            74.6
           ],
+          "max_nearest_gap_mm": 0.68,
           "max_total_length_mm": {
-            "P": 1.058,
-            "N": 0.262
+            "P": 2.33,
+            "N": 1.355
           },
           "max_uncoupled_length_mm": {
-            "P": 1.058,
-            "N": 0.262
+            "P": 1.355,
+            "N": 0.38
           },
-          "max_nearest_gap_mm": 0.673
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "FPC102 USBC2_D pad launch",
-          "category": "pad_fanout",
-          "stem": "/USBC2_D",
+          "name": "/USBC1_SSRX left In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC1_SSRX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            110.136529,
+            79.49583399999999,
+            113.01,
+            80.83149300000001
+          ],
+          "max_nearest_gap_mm": 0.705,
+          "max_total_length_mm": {
+            "P": 1.88,
+            "N": 2.605
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.88,
+            "N": 2.605
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC1_SSRX FPC102 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC1_SSRX",
           "layer": "F.Cu",
           "bounds_mm": [
-            109.299998,
-            72.549998,
-            109.41720199999999,
-            73.05000199999999
+            109.05,
+            79.996734,
+            113,
+            80.73519999999999
           ],
+          "max_nearest_gap_mm": 0.63,
           "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
+            "P": 2.03,
+            "N": 1.155
           },
           "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
+            "P": 1.43,
+            "N": 0.555
           },
-          "max_nearest_gap_mm": 0.325
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "FPC102 USBC2_D fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC2_D",
-          "layer": "F.Cu",
+          "name": "/USBC1_SSTX left In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC1_SSTX",
+          "layer": "In2.Cu",
           "bounds_mm": [
-            110.64837999999995,
-            72.407533,
-            111.500002,
-            72.98020199999999
+            110.256559,
+            77.99439699999999,
+            113.01,
+            79.33149300000001
           ],
+          "max_nearest_gap_mm": 0.78,
           "max_total_length_mm": {
-            "P": 0.867,
-            "N": 0.274
+            "P": 1.73,
+            "N": 2.48
           },
           "max_uncoupled_length_mm": {
-            "P": 0.867,
-            "N": 0.274
+            "P": 1.73,
+            "N": 2.455
           },
-          "max_nearest_gap_mm": 0.63
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "A1 USBC2_D pad lands",
-          "category": "pad_fanout",
-          "stem": "/USBC2_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            215.074999,
-            65.274998,
-            216.82500299999998,
-            66.075002
-          ],
-          "max_total_length_mm": {
-            "P": 0.853,
-            "N": 0.853
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.711,
-            "N": 0.711
-          },
-          "max_nearest_gap_mm": 0.326
-        },
-        {
-          "name": "A1 USBC2_D fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC2_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            216.969998,
-            64.86999800000001,
-            218.05200200000002,
-            66.730002
-          ],
-          "max_total_length_mm": {
-            "P": 1.108,
-            "N": 0.749
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.685,
-            "N": 0.328
-          },
-          "max_nearest_gap_mm": 0.602
-        },
-        {
-          "name": "FPC102 USBC1_D pad launch",
-          "category": "pad_fanout",
-          "stem": "/USBC1_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            109.299998,
-            74.049998,
-            109.41720199999999,
-            74.55000199999999
-          ],
-          "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
-          },
-          "max_nearest_gap_mm": 0.325
-        },
-        {
-          "name": "FPC102 USBC1_D fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC1_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            110.39028399999995,
-            73.89999800000001,
-            111.400284,
-            74.469802
-          ],
-          "max_total_length_mm": {
-            "P": 1.18,
-            "N": 0.262
-          },
-          "max_uncoupled_length_mm": {
-            "P": 1.18,
-            "N": 0.262
-          },
-          "max_nearest_gap_mm": 0.668
-        },
-        {
-          "name": "A1 USBC1_D pad lands",
-          "category": "pad_fanout",
-          "stem": "/USBC1_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            206.874999,
-            66.024998,
-            208.625003,
-            66.825002
-          ],
-          "max_total_length_mm": {
-            "P": 0.903,
-            "N": 0.903
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.761,
-            "N": 0.761
-          },
-          "max_nearest_gap_mm": 0.326
-        },
-        {
-          "name": "A1 USBC1_D fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC1_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            208.719998,
-            65.61999800000001,
-            209.80200200000002,
-            67.480002
-          ],
-          "max_total_length_mm": {
-            "P": 0.749,
-            "N": 1.108
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.328,
-            "N": 0.685
-          },
-          "max_nearest_gap_mm": 0.602
-        },
-        {
-          "name": "FPC102 USBC2_SSTX pad launch",
-          "category": "pad_fanout",
-          "stem": "/USBC2_SSTX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            109.299998,
-            75.549998,
-            109.41720199999999,
-            76.05000199999999
-          ],
-          "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
-          },
-          "max_nearest_gap_mm": 0.325
-        },
-        {
-          "name": "FPC102 USBC2_SSTX fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC2_SSTX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            110.499998,
-            75.172279,
-            111.925454,
-            75.969802
-          ],
-          "max_total_length_mm": {
-            "P": 0.83,
-            "N": 1.562
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.83,
-            "N": 1.562
-          },
-          "max_nearest_gap_mm": 0.625
-        },
-        {
-          "name": "FPC102 USBC2_SSRX pad launch",
-          "category": "pad_fanout",
-          "stem": "/USBC2_SSRX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            109.299998,
-            77.049998,
-            109.41720199999999,
-            77.55000199999999
-          ],
-          "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
-          },
-          "max_nearest_gap_mm": 0.325
-        },
-        {
-          "name": "FPC102 USBC2_SSRX fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC2_SSRX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            110.61467699999994,
-            76.902079,
-            111.30000199999999,
-            77.57000199999999
-          ],
-          "max_total_length_mm": {
-            "P": 0.712,
-            "N": 0.269
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.712,
-            "N": 0.269
-          },
-          "max_nearest_gap_mm": 0.639
-        },
-        {
-          "name": "A1 USBC2_SSRX pad lands",
-          "category": "pad_fanout",
-          "stem": "/USBC2_SSRX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            215.074999,
-            53.274998,
-            216.82500299999998,
-            54.075002
-          ],
-          "max_total_length_mm": {
-            "P": 0.853,
-            "N": 0.853
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.711,
-            "N": 0.711
-          },
-          "max_nearest_gap_mm": 0.326
-        },
-        {
-          "name": "A1 USBC2_SSRX fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC2_SSRX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            216.969998,
-            52.869998,
-            218.05200200000002,
-            54.730002
-          ],
-          "max_total_length_mm": {
-            "P": 1.108,
-            "N": 0.749
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.685,
-            "N": 0.328
-          },
-          "max_nearest_gap_mm": 0.602
-        },
-        {
-          "name": "FPC102 USBC1_SSTX pad launch",
-          "category": "pad_fanout",
+          "name": "/USBC1_SSTX FPC102 pads and vias",
+          "category": "component_or_via_fanout",
           "stem": "/USBC1_SSTX",
           "layer": "F.Cu",
           "bounds_mm": [
-            109.299998,
-            78.549998,
-            109.41720199999999,
-            79.05000199999999
+            109.05,
+            78.4302,
+            113,
+            79.1
           ],
+          "max_nearest_gap_mm": 0.705,
           "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
+            "P": 2.13,
+            "N": 1.28
           },
           "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
+            "P": 1.33,
+            "N": 0.48
           },
-          "max_nearest_gap_mm": 0.325
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "FPC102 USBC1_SSTX fixed vias",
-          "category": "pad_via_fanout",
+          "name": "/USBC2 left In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC2",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            110.568382,
+            71.981943,
+            113.01,
+            73.32000000000001
+          ],
+          "max_nearest_gap_mm": 0.705,
+          "max_total_length_mm": {
+            "P": 1.53,
+            "N": 2.155
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.53,
+            "N": 2.13
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC2 FPC102 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC2",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.05,
+            72.357535,
+            113,
+            73.1
+          ],
+          "max_nearest_gap_mm": 0.655,
+          "max_total_length_mm": {
+            "P": 2.28,
+            "N": 1.63
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.055,
+            "N": 0.405
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC2_SSRX left In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC2_SSRX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            110.52467899999999,
+            76.50208099999999,
+            113.01,
+            77.97
+          ],
+          "max_nearest_gap_mm": 0.73,
+          "max_total_length_mm": {
+            "P": 1.755,
+            "N": 2.205
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.755,
+            "N": 2.18
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC2_SSRX FPC102 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC2_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.05,
+            76.852081,
+            113,
+            77.61999999999999
+          ],
+          "max_nearest_gap_mm": 0.655,
+          "max_total_length_mm": {
+            "P": 2.08,
+            "N": 1.605
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.88,
+            "N": 0.405
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC2_SSTX left In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC2_SSTX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            110.963176,
+            74.878897,
+            113.01,
+            76.214461
+          ],
+          "max_nearest_gap_mm": 0.705,
+          "max_total_length_mm": {
+            "P": 1.755,
+            "N": 1.105
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.755,
+            "N": 1.105
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC2_SSTX FPC102 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC2_SSTX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            109.05,
+            75.122281,
+            113,
+            76.1
+          ],
+          "max_nearest_gap_mm": 0.63,
+          "max_total_length_mm": {
+            "P": 2.08,
+            "N": 2.78
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.005,
+            "N": 1.68
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/HUB_DS1 FPC103 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/HUB_DS1",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.55,
+            125.2,
+            322.0,
+            126.39999999999999
+          ],
+          "max_nearest_gap_mm": 0.63,
+          "max_total_length_mm": {
+            "P": 2.105,
+            "N": 1.13
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.58,
+            "N": 0.63
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/HUB_DS1 right B via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/HUB_DS1",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            318.7,
+            125.2,
+            321.0,
+            126.8
+          ],
+          "max_nearest_gap_mm": 0.63,
+          "max_total_length_mm": {
+            "P": 1.305,
+            "N": 2.08
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.255,
+            "N": 2.03
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/HUB_DS4 FPC103 pads and vias",
+          "category": "component_or_via_fanout",
+          "stem": "/HUB_DS4",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            319.55,
+            126.7,
+            322.0,
+            127.89999999999999
+          ],
+          "max_nearest_gap_mm": 0.63,
+          "max_total_length_mm": {
+            "P": 2.055,
+            "N": 1.13
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.555,
+            "N": 0.63
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/HUB_DS4 right B via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/HUB_DS4",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            318.7,
+            126.7,
+            321.0,
+            128.3
+          ],
+          "max_nearest_gap_mm": 0.63,
+          "max_total_length_mm": {
+            "P": 1.33,
+            "N": 2.055
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.28,
+            "N": 2.005
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "USB1 RX A1 F launch",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC1_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.7,
+            51.6,
+            218.65,
+            53.15
+          ],
+          "max_nearest_gap_mm": 0.63,
+          "max_total_length_mm": {
+            "P": 1.68,
+            "N": 2.83
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.255,
+            "N": 2.405
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "USB1 RX A1 In2 via bank",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC1_SSRX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            216.2,
+            51.0,
+            218.7,
+            52.61
+          ],
+          "max_nearest_gap_mm": 0.705,
+          "max_total_length_mm": {
+            "P": 1.48,
+            "N": 2.455
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.13,
+            "N": 1.78
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "USB1 preserved A1 launch",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC1",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.5,
+            65.95,
+            210.15,
+            67.25
+          ],
+          "max_nearest_gap_mm": 0.605,
+          "max_total_length_mm": {
+            "P": 1.755,
+            "N": 2.105
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.105,
+            "N": 1.455
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "USB2 preserved A1 launch",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC2",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.7,
+            65.2,
+            218.4,
+            66.5
+          ],
+          "max_nearest_gap_mm": 0.605,
+          "max_total_length_mm": {
+            "P": 0.405,
+            "N": 0.33
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.405,
+            "N": 0.33
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "USB2 RX preserved A1 launch",
+          "category": "component_or_via_fanout",
+          "stem": "/USBC2_SSRX",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            215.7,
+            53.2,
+            218.4,
+            54.5
+          ],
+          "max_nearest_gap_mm": 0.605,
+          "max_total_length_mm": {
+            "P": 2.105,
+            "N": 1.755
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.405,
+            "N": 1.055
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "radio connector pad neck",
+          "category": "component_or_via_fanout",
+          "stem": "/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            108.8,
+            152.2,
+            109.8,
+            152.75
+          ],
+          "max_nearest_gap_mm": 0.28,
+          "max_total_length_mm": {
+            "P": 0.33,
+            "N": 0.33
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.105,
+            "N": 0.105
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "radio lower via fanout",
+          "category": "component_or_via_fanout",
+          "stem": "/Optional Radio Daughterboard Interface/RADIO_CODEC_USB_DB",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            108.65,
+            153.95,
+            110.16,
+            154.98
+          ],
+          "max_nearest_gap_mm": 0.705,
+          "max_total_length_mm": {
+            "P": 0.68,
+            "N": 0.805
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.58,
+            "N": 0.705
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "EC DFU U61.7 to R204.1 north stub",
+          "category": "component_or_via_fanout",
+          "stem": "/Internal Services/EC_DFU",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            167.15,
+            55.65,
+            167.625,
+            57.7
+          ],
+          "max_nearest_gap_mm": 6.005,
+          "max_total_length_mm": {
+            "P": 0.03,
+            "N": 1.98
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.03,
+            "N": 1.98
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "EC DFU U61.3 to R203.1 south stub",
+          "category": "component_or_via_fanout",
+          "stem": "/Internal Services/EC_DFU",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            167.075,
+            61.8,
+            167.85,
+            63.9
+          ],
+          "max_nearest_gap_mm": 6.03,
+          "max_total_length_mm": {
+            "P": 2.155,
+            "N": 0.03
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.155,
+            "N": 0.03
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "EC ISO U61 pad fanout",
+          "category": "component_or_via_fanout",
+          "stem": "/Internal Services/EC_USB_ISO",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            165.4,
+            57.3,
+            167.6,
+            63.51
+          ],
+          "max_nearest_gap_mm": 3.23,
+          "max_total_length_mm": {
+            "P": 3.28,
+            "N": 5.905
+          },
+          "max_uncoupled_length_mm": {
+            "P": 3.255,
+            "N": 5.905
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "EC ISO R200 R201 fanout",
+          "category": "component_or_via_fanout",
+          "stem": "/Internal Services/EC_USB_ISO",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            163.2,
+            58.2,
+            164.5,
+            61.11
+          ],
+          "max_nearest_gap_mm": 1.705,
+          "max_total_length_mm": {
+            "P": 2.63,
+            "N": 1.08
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.605,
+            "N": 1.08
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "EC host U61 pad fanout",
+          "category": "component_or_via_fanout",
+          "stem": "/EC_HOST_USB",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            167.5,
+            57.3,
+            168.9,
+            62.0
+          ],
+          "max_nearest_gap_mm": 3.13,
+          "max_total_length_mm": {
+            "P": 1.73,
+            "N": 3.43
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.605,
+            "N": 3.33
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "EC host U60 pad fanout",
+          "category": "component_or_via_fanout",
+          "stem": "/EC_HOST_USB",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            169.5,
+            60.7,
+            172.4,
+            62.3
+          ],
+          "max_nearest_gap_mm": 0.905,
+          "max_total_length_mm": {
+            "P": 3.155,
+            "N": 2.755
+          },
+          "max_uncoupled_length_mm": {
+            "P": 3.055,
+            "N": 2.28
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "EC host preserved A1 launch",
+          "category": "component_or_via_fanout",
+          "stem": "/EC_HOST_USB",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            207.5,
+            67.3,
+            210.11,
+            68.71
+          ],
+          "max_nearest_gap_mm": 0.605,
+          "max_total_length_mm": {
+            "P": 1.755,
+            "N": 2.105
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.105,
+            "N": 1.455
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "DFU connector front fanout",
+          "category": "component_or_via_fanout",
+          "stem": "/Internal Services/DFU_CONN",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            322.15,
+            211.2,
+            323.8,
+            215.7
+          ],
+          "max_nearest_gap_mm": 0.755,
+          "max_total_length_mm": {
+            "P": 2.18,
+            "N": 3.58
+          },
+          "max_uncoupled_length_mm": {
+            "P": 2.18,
+            "N": 3.58
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "DFU ESD front pad bridges",
+          "category": "component_or_via_fanout",
+          "stem": "/Internal Services/DFU_CONN",
+          "layer": "F.Cu",
+          "bounds_mm": [
+            320.9,
+            209.25,
+            322.7,
+            211.5
+          ],
+          "max_nearest_gap_mm": 1.08,
+          "max_total_length_mm": {
+            "P": 1.855,
+            "N": 1.73
+          },
+          "max_uncoupled_length_mm": {
+            "P": 1.855,
+            "N": 1.73
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "DFU local bottom crossover",
+          "category": "component_or_via_fanout",
+          "stem": "/Internal Services/DFU_CONN",
+          "layer": "B.Cu",
+          "bounds_mm": [
+            320.9,
+            209.5,
+            323.4,
+            215.7
+          ],
+          "max_nearest_gap_mm": 3.73,
+          "max_total_length_mm": {
+            "P": 5.38,
+            "N": 3.48
+          },
+          "max_uncoupled_length_mm": {
+            "P": 5.38,
+            "N": 3.48
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC1 bounded length tuning",
+          "category": "length_tuning",
+          "stem": "/USBC1",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            119.98,
+            73.9460116931033,
+            120.5939766137934,
+            74.527
+          ],
+          "max_nearest_gap_mm": 0.455,
+          "max_total_length_mm": {
+            "P": 0.83,
+            "N": 0.63
+          },
+          "max_uncoupled_length_mm": {
+            "P": 0.78,
+            "N": 0.58
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC1_SSRX bounded length tuning",
+          "category": "length_tuning",
+          "stem": "/USBC1_SSRX",
+          "layer": "In2.Cu",
+          "bounds_mm": [
+            118.98,
+            80.06113400000001,
+            126.64081843816363,
+            80.65517492190817
+          ],
+          "max_nearest_gap_mm": 0.455,
+          "max_total_length_mm": {
+            "P": 9.655,
+            "N": 7.68
+          },
+          "max_uncoupled_length_mm": {
+            "P": 8.005,
+            "N": 6.005
+          },
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
+        },
+        {
+          "name": "/USBC1_SSTX bounded length tuning",
+          "category": "length_tuning",
           "stem": "/USBC1_SSTX",
-          "layer": "F.Cu",
+          "layer": "In2.Cu",
           "bounds_mm": [
-            110.21655699999988,
-            78.480198,
-            111.30000199999999,
-            79.05000199999999
+            127.98,
+            78.37413518041436,
+            128.3809296391713,
+            78.84859999999999
           ],
+          "max_nearest_gap_mm": 0.355,
           "max_total_length_mm": {
-            "P": 1.162,
-            "N": 0.36
+            "P": 0.43,
+            "N": 0.53
           },
           "max_uncoupled_length_mm": {
-            "P": 1.162,
-            "N": 0.36
+            "P": 0.38,
+            "N": 0.48
           },
-          "max_nearest_gap_mm": 0.686
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "FPC102 USBC1_SSRX pad launch",
-          "category": "pad_fanout",
-          "stem": "/USBC1_SSRX",
-          "layer": "F.Cu",
+          "name": "/HUB_DS1 right bounded length tuning",
+          "category": "length_tuning",
+          "stem": "/HUB_DS1",
+          "layer": "B.Cu",
           "bounds_mm": [
-            109.299998,
-            80.049998,
-            109.41720199999999,
-            80.55000199999999
+            312.98,
+            126.05478580338497,
+            313.97525678646014,
+            126.61139999999999
           ],
+          "max_nearest_gap_mm": 0.355,
           "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
+            "P": 1.23,
+            "N": 1.005
           },
           "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
+            "P": 1.005,
+            "N": 0.78
           },
-          "max_nearest_gap_mm": 0.325
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         },
         {
-          "name": "FPC102 USBC1_SSRX fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC1_SSRX",
-          "layer": "F.Cu",
+          "name": "/HUB_DS4 right bounded length tuning",
+          "category": "length_tuning",
+          "stem": "/HUB_DS4",
+          "layer": "B.Cu",
           "bounds_mm": [
-            110.01652699999984,
-            80.046732,
-            111.147932,
-            80.68520199999999
+            312.98,
+            127.51501540705537,
+            313.93433837177855,
+            128.06140000000002
           ],
+          "max_nearest_gap_mm": 0.355,
           "max_total_length_mm": {
-            "P": 1.258,
-            "N": 0.434
+            "P": 1.18,
+            "N": 0.98
           },
           "max_uncoupled_length_mm": {
-            "P": 1.258,
-            "N": 0.433
+            "P": 0.955,
+            "N": 0.755
           },
-          "max_nearest_gap_mm": 0.625
-        },
-        {
-          "name": "A1 USBC1_SSRX pad lands",
-          "category": "pad_fanout",
-          "stem": "/USBC1_SSRX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            215.074999,
-            51.774998,
-            216.82500299999998,
-            52.575002
-          ],
-          "max_total_length_mm": {
-            "P": 0.853,
-            "N": 0.853
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.711,
-            "N": 0.711
-          },
-          "max_nearest_gap_mm": 0.326
-        },
-        {
-          "name": "A1 USBC1_SSRX fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/USBC1_SSRX",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            216.969998,
-            51.369998,
-            218.05200200000002,
-            53.230002
-          ],
-          "max_total_length_mm": {
-            "P": 1.108,
-            "N": 0.749
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.685,
-            "N": 0.328
-          },
-          "max_nearest_gap_mm": 0.602
-        },
-        {
-          "name": "FPC103 HUB_DS4_D pad launch",
-          "category": "pad_fanout",
-          "stem": "/HUB_DS4_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            321.63279800000004,
-            127.049998,
-            321.750002,
-            127.55000199999999
-          ],
-          "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
-          },
-          "max_nearest_gap_mm": 0.325
-        },
-        {
-          "name": "FPC103 HUB_DS4_D fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/HUB_DS4_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            319.902069,
-            126.903198,
-            321.1304820000002,
-            127.55000199999999
-          ],
-          "max_total_length_mm": {
-            "P": 1.377,
-            "N": 0.501
-          },
-          "max_uncoupled_length_mm": {
-            "P": 1.377,
-            "N": 0.499
-          },
-          "max_nearest_gap_mm": 0.625
-        },
-        {
-          "name": "FPC103 HUB_DS1_D pad launch",
-          "category": "pad_fanout",
-          "stem": "/HUB_DS1_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            321.63279800000004,
-            125.549998,
-            321.750002,
-            126.05000199999999
-          ],
-          "max_total_length_mm": {
-            "P": 0.169,
-            "N": 0.121
-          },
-          "max_uncoupled_length_mm": {
-            "P": 0.169,
-            "N": 0.119
-          },
-          "max_nearest_gap_mm": 0.325
-        },
-        {
-          "name": "FPC103 HUB_DS1_D fixed vias",
-          "category": "pad_via_fanout",
-          "stem": "/HUB_DS1_D",
-          "layer": "F.Cu",
-          "bounds_mm": [
-            319.882162,
-            125.403198,
-            321.1196120000002,
-            126.05000199999999
-          ],
-          "max_total_length_mm": {
-            "P": 1.404,
-            "N": 0.491
-          },
-          "max_uncoupled_length_mm": {
-            "P": 1.404,
-            "N": 0.489
-          },
-          "max_nearest_gap_mm": 0.625
+          "bound_basis": "Measured saved geometry rounded upward to 0.025 mm with 0.005 mm additional guard. Minimum gap and all copper outside this local region retain the nominal limits."
         }
-      ],
-      "notes": [
-        "Only the existing pad-to-via copper is present. Passing these coupling limits does not establish complete USB connectivity or length matching.",
-        "FPC102 and FPC103 tracks keep the approved 0.1796 mm width and 0.2032 mm coupled gap. The fanouts preserve their pad contacts and fixed 0.6 mm vias.",
-        "Every line and arc is clipped to each local region. Full copper outside the regions must remain coupled. Length and distance ceilings allow only the measured local transition plus at most 0.005 mm margin.",
-        "No native minimum gap, clearance, width, hole-spacing or layer rule is waived."
       ]
     }
   ],
@@ -3745,6 +5130,2498 @@
       },
       "max_pn_difference_mm": 0.381,
       "via_transition_count": 4
+    },
+    {
+      "name": "/GBE_HOST_RX",
+      "nets": {
+        "P": [
+          "/GBE_HOST_RX_P"
+        ],
+        "N": [
+          "/GBE_HOST_RX_N"
+        ]
+      },
+      "endpoints": {
+        "/GBE_HOST_RX_P": [
+          "A1.64",
+          "FPC103.38"
+        ],
+        "/GBE_HOST_RX_N": [
+          "A1.66",
+          "FPC103.37"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2
+    },
+    {
+      "name": "/GBE_HOST_TX",
+      "nets": {
+        "P": [
+          "/GBE_HOST_TX_P"
+        ],
+        "N": [
+          "/GBE_HOST_TX_N"
+        ]
+      },
+      "endpoints": {
+        "/GBE_HOST_TX_P": [
+          "A1.61",
+          "FPC103.35"
+        ],
+        "/GBE_HOST_TX_N": [
+          "A1.63",
+          "FPC103.34"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 4
+    },
+    {
+      "name": "/GBE_REFCLK",
+      "nets": {
+        "P": [
+          "/GBE_REFCLK_P"
+        ],
+        "N": [
+          "/GBE_REFCLK_N"
+        ]
+      },
+      "endpoints": {
+        "/GBE_REFCLK_P": [
+          "A1.94",
+          "FPC103.32"
+        ],
+        "/GBE_REFCLK_N": [
+          "A1.96",
+          "FPC103.31"
+        ]
+      },
+      "max_pn_difference_mm": 0.381,
+      "via_transition_count": 2
+    },
+    {
+      "name": "/TCP2_TX0",
+      "nets": {
+        "P": [
+          "/TCP2_TX0_P"
+        ],
+        "N": [
+          "/TCP2_TX0_N"
+        ]
+      },
+      "endpoints": {
+        "/TCP2_TX0_P": [
+          "A1.217",
+          "FPC103.50"
+        ],
+        "/TCP2_TX0_N": [
+          "A1.215",
+          "FPC103.49"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 4
+    },
+    {
+      "name": "/TCP2_TX1",
+      "nets": {
+        "P": [
+          "/TCP2_TX1_P"
+        ],
+        "N": [
+          "/TCP2_TX1_N"
+        ]
+      },
+      "endpoints": {
+        "/TCP2_TX1_P": [
+          "A1.205",
+          "FPC103.47"
+        ],
+        "/TCP2_TX1_N": [
+          "A1.203",
+          "FPC103.46"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 5
+    },
+    {
+      "name": "/TCP2_TXRX0",
+      "nets": {
+        "P": [
+          "/TCP2_TXRX0_P"
+        ],
+        "N": [
+          "/TCP2_TXRX0_N"
+        ]
+      },
+      "endpoints": {
+        "/TCP2_TXRX0_P": [
+          "A1.211",
+          "FPC103.44"
+        ],
+        "/TCP2_TXRX0_N": [
+          "A1.209",
+          "FPC103.43"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 4
+    },
+    {
+      "name": "/TCP2_TXRX1",
+      "nets": {
+        "P": [
+          "/TCP2_TXRX1_P"
+        ],
+        "N": [
+          "/TCP2_TXRX1_N"
+        ]
+      },
+      "endpoints": {
+        "/TCP2_TXRX1_P": [
+          "A1.199",
+          "FPC103.41"
+        ],
+        "/TCP2_TXRX1_N": [
+          "A1.197",
+          "FPC103.40"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2
+    },
+    {
+      "name": "Complete USB1 SuperSpeed RX",
+      "nets": {
+        "P": [
+          "/USBC1_SSRX_P"
+        ],
+        "N": [
+          "/USBC1_SSRX_N"
+        ]
+      },
+      "endpoints": {
+        "/USBC1_SSRX_P": [
+          "FPC102.40",
+          "A1.16"
+        ],
+        "/USBC1_SSRX_N": [
+          "FPC102.39",
+          "A1.18"
+        ]
+      },
+      "max_pn_difference_mm": 0.127,
+      "via_transition_count": 2
+    },
+    {
+      "name": "EC ISO fitted local pair",
+      "nets": {
+        "P": [
+          "/Internal Services/EC_USB_ISO_DP"
+        ],
+        "N": [
+          "/Internal Services/EC_USB_ISO_DN"
+        ]
+      },
+      "endpoints": {
+        "/Internal Services/EC_USB_ISO_DP": [
+          "U61.4",
+          "R200.1"
+        ],
+        "/Internal Services/EC_USB_ISO_DN": [
+          "U61.6",
+          "R201.1"
+        ]
+      },
+      "max_pn_difference_mm": 0.5,
+      "via_transition_count": 0
+    },
+    {
+      "name": "EC DFU fitted local pair",
+      "nets": {
+        "P": [
+          "/Internal Services/EC_DFU_DP"
+        ],
+        "N": [
+          "/Internal Services/EC_DFU_DN"
+        ]
+      },
+      "endpoints": {
+        "/Internal Services/EC_DFU_DP": [
+          "U61.3",
+          "R203.1"
+        ],
+        "/Internal Services/EC_DFU_DN": [
+          "U61.7",
+          "R204.1"
+        ]
+      },
+      "max_pn_difference_mm": 0.2,
+      "via_transition_count": 0
     }
-  ]
+  ],
+  "local_usb_paths": {
+    "schema_version": 1,
+    "reviewed_source_sha256": "b768b7237ee55c12bdf3dbbd77cf5083c0d074af99daf89316f2cfaed25645ff",
+    "direct_signal_paths": [
+      {
+        "name": "Complete USB1 SuperSpeed RX",
+        "nets": {
+          "P": [
+            "/USBC1_SSRX_P"
+          ],
+          "N": [
+            "/USBC1_SSRX_N"
+          ]
+        },
+        "endpoints": {
+          "/USBC1_SSRX_P": [
+            "FPC102.40",
+            "A1.16"
+          ],
+          "/USBC1_SSRX_N": [
+            "FPC102.39",
+            "A1.18"
+          ]
+        },
+        "max_pn_difference_mm": 0.127,
+        "via_transition_count": 2
+      },
+      {
+        "name": "EC ISO fitted local pair",
+        "nets": {
+          "P": [
+            "/Internal Services/EC_USB_ISO_DP"
+          ],
+          "N": [
+            "/Internal Services/EC_USB_ISO_DN"
+          ]
+        },
+        "endpoints": {
+          "/Internal Services/EC_USB_ISO_DP": [
+            "U61.4",
+            "R200.1"
+          ],
+          "/Internal Services/EC_USB_ISO_DN": [
+            "U61.6",
+            "R201.1"
+          ]
+        },
+        "max_pn_difference_mm": 0.5,
+        "via_transition_count": 0
+      },
+      {
+        "name": "EC DFU fitted local pair",
+        "nets": {
+          "P": [
+            "/Internal Services/EC_DFU_DP"
+          ],
+          "N": [
+            "/Internal Services/EC_DFU_DN"
+          ]
+        },
+        "endpoints": {
+          "/Internal Services/EC_DFU_DP": [
+            "U61.3",
+            "R203.1"
+          ],
+          "/Internal Services/EC_DFU_DN": [
+            "U61.7",
+            "R204.1"
+          ]
+        },
+        "max_pn_difference_mm": 0.2,
+        "via_transition_count": 0
+      }
+    ],
+    "selected_cases": [
+      {
+        "name": "EC host local far protection pads",
+        "signal_paths": [
+          {
+            "name": "EC host local far protection pads",
+            "nets": {
+              "P": [
+                "/EC_HOST_USB_DP"
+              ],
+              "N": [
+                "/EC_HOST_USB_DN"
+              ]
+            },
+            "endpoints": {
+              "/EC_HOST_USB_DP": [
+                "U61.2",
+                "U60.6"
+              ],
+              "/EC_HOST_USB_DN": [
+                "U61.8",
+                "U60.4"
+              ]
+            },
+            "max_pn_difference_mm": 1.3,
+            "via_transition_count": 0
+          }
+        ],
+        "include_native_item_uuids": [
+          "11db4d6c-1cc8-5038-8195-746762db980b",
+          "158a2c66-a3a0-527e-888d-1328295de41f",
+          "29f95972-7d89-53a6-afde-09718c663972",
+          "2b3492d5-6d19-56d0-a28a-2654d9659d4b",
+          "3cadac75-41cb-5979-84b4-db76280d410f",
+          "4059d91a-5baf-5670-a7d5-5e4a97dc28e1",
+          "44066ac0-0728-5d3d-b51f-ffbd09535557",
+          "47e8fdcd-3e75-529a-b99d-fd9e6e51b559",
+          "56256272-1a1d-5bd6-9c3a-e7e90abbc2ad",
+          "5d2c4d07-6f13-5f04-aeda-788e51bc82a1",
+          "7ac93582-fdea-5f7c-9a4d-33f983c2e18d",
+          "836a466c-dde0-5fc6-8d3c-7495896e2b14",
+          "96f3e00f-2743-5e58-b4ac-d0f7ddd3d3f5",
+          "aed553c6-1bab-5397-ab40-ad5bb5879f97",
+          "b5069ae6-2c28-5ab4-86fd-ce1919185faa",
+          "bbe61157-c731-5727-8b41-1a6c635f88eb",
+          "be92be81-4573-534b-b900-1388c0d60dc7",
+          "cb8ef8b3-4445-54e6-be39-43f6b132276c",
+          "f12d8765-1a5c-5686-8405-395888820db2"
+        ],
+        "omitted_items": [
+          {
+            "id": "2740a67a-857f-4ddf-97cb-c160189200be",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DN",
+            "pad": null
+          },
+          {
+            "id": "41fb2a45-09b0-4787-8cb2-c63de88c1d48",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DN",
+            "pad": null
+          },
+          {
+            "id": "468003f2-0dcf-475c-baa7-6edd36794fb7",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DN",
+            "pad": null
+          },
+          {
+            "id": "b193d40c-ecce-42b7-81bf-79611168d5a4",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DN",
+            "pad": null
+          },
+          {
+            "id": "b4b5c2e0-a2af-4f10-8203-42d6bca9d59f",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DN",
+            "pad": null
+          },
+          {
+            "id": "4ddf52ea-b1ba-4e7f-b7ee-42275925a5c3",
+            "type": "PCB_VIA",
+            "net": "/EC_HOST_USB_DN",
+            "pad": null
+          },
+          {
+            "id": "0216ddc4-e7c0-48c8-8260-36933f1f1c86",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DP",
+            "pad": null
+          },
+          {
+            "id": "216f8f6c-b411-4a90-b7e8-9ac0e5963763",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DP",
+            "pad": null
+          },
+          {
+            "id": "b495e5a9-f877-4f9f-80c7-81c40853947f",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DP",
+            "pad": null
+          },
+          {
+            "id": "d4c79609-7d3f-4e55-bb23-298dd6916240",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DP",
+            "pad": null
+          },
+          {
+            "id": "d82d1339-ce5f-4e1e-a7dc-c254c5f6d3f3",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DP",
+            "pad": null
+          },
+          {
+            "id": "ed4f6e2c-68ad-4cb1-82b0-8863e2574735",
+            "type": "PCB_TRACK",
+            "net": "/EC_HOST_USB_DP",
+            "pad": null
+          },
+          {
+            "id": "2b35d98d-0e9a-4f26-9755-06344190d05b",
+            "type": "PCB_VIA",
+            "net": "/EC_HOST_USB_DP",
+            "pad": null
+          },
+          {
+            "id": "3bb417c3-9d65-53e0-9404-d2bea9652c7f",
+            "type": "PAD",
+            "net": "/EC_HOST_USB_DN",
+            "pad": "A1.79"
+          },
+          {
+            "id": "9da375c1-4c0a-5a11-b5cd-45bd9e76d00d",
+            "type": "PAD",
+            "net": "/EC_HOST_USB_DP",
+            "pad": "A1.81"
+          },
+          {
+            "id": "be17436a-468a-5478-97eb-fa5fe1081c59",
+            "type": "PAD",
+            "net": "/EC_HOST_USB_DP",
+            "pad": "U60.1"
+          },
+          {
+            "id": "046ecf9e-f273-585b-9aa7-8c15f386c6d5",
+            "type": "PAD",
+            "net": "/EC_HOST_USB_DN",
+            "pad": "U60.3"
+          }
+        ],
+        "selection_reason": "Select this complete local route through actual native endpoints. The omitted records are separately checked alternate USB-C/protection-pad branches or intentionally open remote continuation. This does not certify the whole multi-terminal net as a single two-pad path.",
+        "expected_native_pad_connection_proof": "native-connectivity-and-preservation.json",
+        "all_copper_coupling_proof": "coupling-proof.json"
+      },
+      {
+        "name": "J73 A contacts to far protection pads",
+        "signal_paths": [
+          {
+            "name": "J73 A contacts to far protection pads",
+            "nets": {
+              "P": [
+                "/Internal Services/DFU_CONN_DP"
+              ],
+              "N": [
+                "/Internal Services/DFU_CONN_DN"
+              ]
+            },
+            "endpoints": {
+              "/Internal Services/DFU_CONN_DP": [
+                "J73.A6",
+                "U63.1"
+              ],
+              "/Internal Services/DFU_CONN_DN": [
+                "J73.A7",
+                "U63.3"
+              ]
+            },
+            "max_pn_difference_mm": 2.1,
+            "via_transition_count": 2
+          }
+        ],
+        "include_native_item_uuids": [
+          "03846d78-e8f5-52c1-a6d2-cffa4032e188",
+          "085c5958-b9db-56cd-8d0c-9f1fa6d198d5",
+          "0ab44edd-8cd8-57e2-9632-0669a31afb09",
+          "1d1c5b68-adbb-5415-8a6e-466479051107",
+          "24002e4c-3f70-5637-8ac8-a2596b5a917f",
+          "268aec61-3635-5de1-9cb6-07483f98b7d9",
+          "4063f2c6-cce8-56aa-9e40-3c574420806d",
+          "4c532e74-b68d-51cd-b099-983f68c0cba1",
+          "4d6fca5a-0746-552d-9906-4ddf5be4fa40",
+          "52e9f096-fdfb-5989-a085-e20c0b2b2a96",
+          "5398af86-b4c2-565b-848a-1bf42e9bddb8",
+          "71e35919-080e-5914-890b-ece96540072f",
+          "8a439a5d-0787-5238-8ad3-c490a10b42e2",
+          "95f19fe2-4b6d-50e7-8954-6ed0bdfc73b3",
+          "9838f0a2-8c08-5fb1-9946-383c6c077a03",
+          "a363b6ae-e17d-5447-82b8-151dc70b6ab3",
+          "a733ade9-7e55-5f14-bf44-d8d5f52e6474",
+          "adf82d0d-a2cf-5da4-8c91-bf6c6486e529",
+          "b7158a3d-bed1-5d6f-9f1e-fec734c5ef01",
+          "c35a376b-675c-5e92-9a7a-9856c2d85bbe",
+          "c424d75e-1257-5fd6-b113-3405422ce620",
+          "d052471f-9e59-550f-bf16-cc50b73fc3b1",
+          "d07e3f45-e7de-5e46-aa7a-1c3589cebf36",
+          "daa34949-5f7c-5c51-8a6a-c8623e701c88",
+          "e43ac3b0-dd7c-51eb-9778-0303b2627c4e",
+          "eb97c311-25b4-5572-ba3b-3414368a8d81"
+        ],
+        "omitted_items": [
+          {
+            "id": "69e4ce37-0d6b-584b-8a08-2d0ac4f2cdca",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "bb675049-a287-5a61-a38e-f28402be39db",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "d5625ea4-78e1-5e10-b2a5-e2c7cbc07ebf",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "f8673327-d11e-5346-9b17-9e6a5874aa16",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "1d59ea4c-478f-5191-bc5b-2e2bf2f25c36",
+            "type": "PCB_VIA",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "69e5c891-6418-5801-b365-be1eb30ff191",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "c82f29bc-bb7f-5318-a2f4-4a3a649df5f7",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "5d9da830-c57e-5105-bc02-7205e04947e6",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": null
+          },
+          {
+            "id": "70b66a79-cb2e-5b50-9b0b-65f11e83ec21",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": null
+          },
+          {
+            "id": "d25b2e3b-5639-51c0-9338-c6c0eaf15081",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": null
+          },
+          {
+            "id": "c91aeadb-4132-5f46-a9be-3934f0e81ddb",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": "J73.B6"
+          },
+          {
+            "id": "74e49f6d-8ad9-5be8-9893-19e4e06b4723",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": "J73.B7"
+          },
+          {
+            "id": "070f929e-5e2f-5a52-8ffc-87df9f82add2",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": "U63.4"
+          },
+          {
+            "id": "9df94d81-8f16-52ad-9199-cddd11547b26",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": "U63.6"
+          },
+          {
+            "id": "2c0cdfb9-48b7-51ab-82b6-630f30ee59bb",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": "R203.2"
+          },
+          {
+            "id": "8d3a0de4-c46a-5945-b0ba-e258c3a5a250",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": "R204.2"
+          }
+        ],
+        "selection_reason": "Select this complete local route through actual native endpoints. The omitted records are separately checked alternate USB-C/protection-pad branches or intentionally open remote continuation. This does not certify the whole multi-terminal net as a single two-pad path.",
+        "expected_native_pad_connection_proof": "native-connectivity-and-preservation.json",
+        "all_copper_coupling_proof": "coupling-proof.json"
+      },
+      {
+        "name": "J73 B contacts to far protection pads",
+        "signal_paths": [
+          {
+            "name": "J73 B contacts to far protection pads",
+            "nets": {
+              "P": [
+                "/Internal Services/DFU_CONN_DP"
+              ],
+              "N": [
+                "/Internal Services/DFU_CONN_DN"
+              ]
+            },
+            "endpoints": {
+              "/Internal Services/DFU_CONN_DP": [
+                "J73.B6",
+                "U63.1"
+              ],
+              "/Internal Services/DFU_CONN_DN": [
+                "J73.B7",
+                "U63.3"
+              ]
+            },
+            "max_pn_difference_mm": 0.7,
+            "via_transition_count": 2
+          }
+        ],
+        "include_native_item_uuids": [
+          "03846d78-e8f5-52c1-a6d2-cffa4032e188",
+          "085c5958-b9db-56cd-8d0c-9f1fa6d198d5",
+          "1d1c5b68-adbb-5415-8a6e-466479051107",
+          "1d59ea4c-478f-5191-bc5b-2e2bf2f25c36",
+          "24002e4c-3f70-5637-8ac8-a2596b5a917f",
+          "268aec61-3635-5de1-9cb6-07483f98b7d9",
+          "4063f2c6-cce8-56aa-9e40-3c574420806d",
+          "4c532e74-b68d-51cd-b099-983f68c0cba1",
+          "4d6fca5a-0746-552d-9906-4ddf5be4fa40",
+          "52e9f096-fdfb-5989-a085-e20c0b2b2a96",
+          "5398af86-b4c2-565b-848a-1bf42e9bddb8",
+          "69e5c891-6418-5801-b365-be1eb30ff191",
+          "70b66a79-cb2e-5b50-9b0b-65f11e83ec21",
+          "74e49f6d-8ad9-5be8-9893-19e4e06b4723",
+          "95f19fe2-4b6d-50e7-8954-6ed0bdfc73b3",
+          "9838f0a2-8c08-5fb1-9946-383c6c077a03",
+          "a363b6ae-e17d-5447-82b8-151dc70b6ab3",
+          "adf82d0d-a2cf-5da4-8c91-bf6c6486e529",
+          "bb675049-a287-5a61-a38e-f28402be39db",
+          "c35a376b-675c-5e92-9a7a-9856c2d85bbe",
+          "c424d75e-1257-5fd6-b113-3405422ce620",
+          "c82f29bc-bb7f-5318-a2f4-4a3a649df5f7",
+          "c91aeadb-4132-5f46-a9be-3934f0e81ddb",
+          "d07e3f45-e7de-5e46-aa7a-1c3589cebf36",
+          "d25b2e3b-5639-51c0-9338-c6c0eaf15081",
+          "d5625ea4-78e1-5e10-b2a5-e2c7cbc07ebf",
+          "daa34949-5f7c-5c51-8a6a-c8623e701c88",
+          "e43ac3b0-dd7c-51eb-9778-0303b2627c4e",
+          "eb97c311-25b4-5572-ba3b-3414368a8d81"
+        ],
+        "omitted_items": [
+          {
+            "id": "0ab44edd-8cd8-57e2-9632-0669a31afb09",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "69e4ce37-0d6b-584b-8a08-2d0ac4f2cdca",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "b7158a3d-bed1-5d6f-9f1e-fec734c5ef01",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "d052471f-9e59-550f-bf16-cc50b73fc3b1",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "f8673327-d11e-5346-9b17-9e6a5874aa16",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "71e35919-080e-5914-890b-ece96540072f",
+            "type": "PCB_VIA",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": null
+          },
+          {
+            "id": "5d9da830-c57e-5105-bc02-7205e04947e6",
+            "type": "PCB_TRACK",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": null
+          },
+          {
+            "id": "a733ade9-7e55-5f14-bf44-d8d5f52e6474",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": "J73.A6"
+          },
+          {
+            "id": "8a439a5d-0787-5238-8ad3-c490a10b42e2",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": "J73.A7"
+          },
+          {
+            "id": "070f929e-5e2f-5a52-8ffc-87df9f82add2",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": "U63.4"
+          },
+          {
+            "id": "9df94d81-8f16-52ad-9199-cddd11547b26",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": "U63.6"
+          },
+          {
+            "id": "2c0cdfb9-48b7-51ab-82b6-630f30ee59bb",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DP",
+            "pad": "R203.2"
+          },
+          {
+            "id": "8d3a0de4-c46a-5945-b0ba-e258c3a5a250",
+            "type": "PAD",
+            "net": "/Internal Services/DFU_CONN_DN",
+            "pad": "R204.2"
+          }
+        ],
+        "selection_reason": "Select this complete local route through actual native endpoints. The omitted records are separately checked alternate USB-C/protection-pad branches or intentionally open remote continuation. This does not certify the whole multi-terminal net as a single two-pad path.",
+        "expected_native_pad_connection_proof": "native-connectivity-and-preservation.json",
+        "all_copper_coupling_proof": "coupling-proof.json"
+      }
+    ],
+    "full_native_pad_sets": {
+      "/EC_HOST_USB_DN": [
+        "A1.79",
+        "U60.3",
+        "U60.4",
+        "U61.8"
+      ],
+      "/EC_HOST_USB_DP": [
+        "A1.81",
+        "U60.1",
+        "U60.6",
+        "U61.2"
+      ],
+      "/Internal Services/DFU_CONN_DN": [
+        "J73.A7",
+        "J73.B7",
+        "R204.2",
+        "U63.3",
+        "U63.4"
+      ],
+      "/Internal Services/DFU_CONN_DP": [
+        "J73.A6",
+        "J73.B6",
+        "R203.2",
+        "U63.1",
+        "U63.6"
+      ]
+    },
+    "expected_native_geometry": {
+      "0ab44edd-8cd8-57e2-9632-0669a31afb09": {
+        "id": "0ab44edd-8cd8-57e2-9632-0669a31afb09",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.450002,
+          213.235
+        ],
+        "end": [
+          322.450002,
+          212.95
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "24002e4c-3f70-5637-8ac8-a2596b5a917f": {
+        "id": "24002e4c-3f70-5637-8ac8-a2596b5a917f",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.237501,
+          209.535
+        ],
+        "end": [
+          322.4,
+          209.697499
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "69e4ce37-0d6b-584b-8a08-2d0ac4f2cdca": {
+        "id": "69e4ce37-0d6b-584b-8a08-2d0ac4f2cdca",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.4,
+          211.072501
+        ],
+        "end": [
+          322.237501,
+          211.235
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "a363b6ae-e17d-5447-82b8-151dc70b6ab3": {
+        "id": "a363b6ae-e17d-5447-82b8-151dc70b6ab3",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.4,
+          209.697499
+        ],
+        "end": [
+          322.4,
+          210.4
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "b7158a3d-bed1-5d6f-9f1e-fec734c5ef01": {
+        "id": "b7158a3d-bed1-5d6f-9f1e-fec734c5ef01",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.85,
+          212.550002
+        ],
+        "end": [
+          322.85,
+          212.25
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "bb675049-a287-5a61-a38e-f28402be39db": {
+        "id": "bb675049-a287-5a61-a38e-f28402be39db",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          323.200001,
+          214.535
+        ],
+        "end": [
+          323.200001,
+          215.149999
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "d052471f-9e59-550f-bf16-cc50b73fc3b1": {
+        "id": "d052471f-9e59-550f-bf16-cc50b73fc3b1",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.450002,
+          212.95
+        ],
+        "end": [
+          322.85,
+          212.550002
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "d5625ea4-78e1-5e10-b2a5-e2c7cbc07ebf": {
+        "id": "d5625ea4-78e1-5e10-b2a5-e2c7cbc07ebf",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          323.200001,
+          215.149999
+        ],
+        "end": [
+          322.95,
+          215.4
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "f8673327-d11e-5346-9b17-9e6a5874aa16": {
+        "id": "f8673327-d11e-5346-9b17-9e6a5874aa16",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.4,
+          210.4
+        ],
+        "end": [
+          322.4,
+          211.072501
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "1d1c5b68-adbb-5415-8a6e-466479051107": {
+        "id": "1d1c5b68-adbb-5415-8a6e-466479051107",
+        "type": "PCB_VIA",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.4,
+          210.4
+        ],
+        "end": [
+          322.4,
+          210.4
+        ],
+        "width": 0.45,
+        "layers": [
+          "F.Cu",
+          "B.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "In3.Cu",
+          "In4.Cu",
+          "In5.Cu",
+          "In6.Cu"
+        ],
+        "drill": 0.2
+      },
+      "1d59ea4c-478f-5191-bc5b-2e2bf2f25c36": {
+        "id": "1d59ea4c-478f-5191-bc5b-2e2bf2f25c36",
+        "type": "PCB_VIA",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.95,
+          215.4
+        ],
+        "end": [
+          322.95,
+          215.4
+        ],
+        "width": 0.6,
+        "layers": [
+          "F.Cu",
+          "B.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "In3.Cu",
+          "In4.Cu",
+          "In5.Cu",
+          "In6.Cu"
+        ],
+        "drill": 0.3
+      },
+      "71e35919-080e-5914-890b-ece96540072f": {
+        "id": "71e35919-080e-5914-890b-ece96540072f",
+        "type": "PCB_VIA",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.85,
+          212.25
+        ],
+        "end": [
+          322.85,
+          212.25
+        ],
+        "width": 0.45,
+        "layers": [
+          "F.Cu",
+          "B.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "In3.Cu",
+          "In4.Cu",
+          "In5.Cu",
+          "In6.Cu"
+        ],
+        "drill": 0.2
+      },
+      "69e5c891-6418-5801-b365-be1eb30ff191": {
+        "id": "69e5c891-6418-5801-b365-be1eb30ff191",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.95,
+          215.4
+        ],
+        "end": [
+          322.85,
+          215.3
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "95f19fe2-4b6d-50e7-8954-6ed0bdfc73b3": {
+        "id": "95f19fe2-4b6d-50e7-8954-6ed0bdfc73b3",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.25,
+          211.65
+        ],
+        "end": [
+          322.25,
+          210.55
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "adf82d0d-a2cf-5da4-8c91-bf6c6486e529": {
+        "id": "adf82d0d-a2cf-5da4-8c91-bf6c6486e529",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.25,
+          210.55
+        ],
+        "end": [
+          322.4,
+          210.4
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "c82f29bc-bb7f-5318-a2f4-4a3a649df5f7": {
+        "id": "c82f29bc-bb7f-5318-a2f4-4a3a649df5f7",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.85,
+          215.3
+        ],
+        "end": [
+          322.85,
+          212.25
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "e43ac3b0-dd7c-51eb-9778-0303b2627c4e": {
+        "id": "e43ac3b0-dd7c-51eb-9778-0303b2627c4e",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.85,
+          212.25
+        ],
+        "end": [
+          322.25,
+          211.65
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "085c5958-b9db-56cd-8d0c-9f1fa6d198d5": {
+        "id": "085c5958-b9db-56cd-8d0c-9f1fa6d198d5",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          321.162501,
+          209.535
+        ],
+        "end": [
+          321.162501,
+          210.4
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "5398af86-b4c2-565b-848a-1bf42e9bddb8": {
+        "id": "5398af86-b4c2-565b-848a-1bf42e9bddb8",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.05,
+          211.6
+        ],
+        "end": [
+          323.05,
+          211.5
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "5d9da830-c57e-5105-bc02-7205e04947e6": {
+        "id": "5d9da830-c57e-5105-bc02-7205e04947e6",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          321.162501,
+          210.4
+        ],
+        "end": [
+          321.162501,
+          211.235
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "70b66a79-cb2e-5b50-9b0b-65f11e83ec21": {
+        "id": "70b66a79-cb2e-5b50-9b0b-65f11e83ec21",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          322.700002,
+          213.984999
+        ],
+        "end": [
+          323.450001,
+          213.235
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "9838f0a2-8c08-5fb1-9946-383c6c077a03": {
+        "id": "9838f0a2-8c08-5fb1-9946-383c6c077a03",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.450001,
+          213.235
+        ],
+        "end": [
+          323.5,
+          213.185001
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "c35a376b-675c-5e92-9a7a-9856c2d85bbe": {
+        "id": "c35a376b-675c-5e92-9a7a-9856c2d85bbe",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.5,
+          213.185001
+        ],
+        "end": [
+          323.5,
+          212.05
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "d25b2e3b-5639-51c0-9338-c6c0eaf15081": {
+        "id": "d25b2e3b-5639-51c0-9338-c6c0eaf15081",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          322.700002,
+          214.535
+        ],
+        "end": [
+          322.700002,
+          213.984999
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "daa34949-5f7c-5c51-8a6a-c8623e701c88": {
+        "id": "daa34949-5f7c-5c51-8a6a-c8623e701c88",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.5,
+          212.05
+        ],
+        "end": [
+          323.05,
+          211.6
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "268aec61-3635-5de1-9cb6-07483f98b7d9": {
+        "id": "268aec61-3635-5de1-9cb6-07483f98b7d9",
+        "type": "PCB_VIA",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          321.162501,
+          210.4
+        ],
+        "end": [
+          321.162501,
+          210.4
+        ],
+        "width": 0.45,
+        "layers": [
+          "F.Cu",
+          "B.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "In3.Cu",
+          "In4.Cu",
+          "In5.Cu",
+          "In6.Cu"
+        ],
+        "drill": 0.2
+      },
+      "4c532e74-b68d-51cd-b099-983f68c0cba1": {
+        "id": "4c532e74-b68d-51cd-b099-983f68c0cba1",
+        "type": "PCB_VIA",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.05,
+          211.5
+        ],
+        "end": [
+          323.05,
+          211.5
+        ],
+        "width": 0.45,
+        "layers": [
+          "F.Cu",
+          "B.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "In3.Cu",
+          "In4.Cu",
+          "In5.Cu",
+          "In6.Cu"
+        ],
+        "drill": 0.2
+      },
+      "03846d78-e8f5-52c1-a6d2-cffa4032e188": {
+        "id": "03846d78-e8f5-52c1-a6d2-cffa4032e188",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.1,
+          210.4
+        ],
+        "end": [
+          322.55,
+          209.85
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "4063f2c6-cce8-56aa-9e40-3c574420806d": {
+        "id": "4063f2c6-cce8-56aa-9e40-3c574420806d",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          321.8,
+          209.85
+        ],
+        "end": [
+          321.162501,
+          210.4
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "52e9f096-fdfb-5989-a085-e20c0b2b2a96": {
+        "id": "52e9f096-fdfb-5989-a085-e20c0b2b2a96",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          322.55,
+          209.85
+        ],
+        "end": [
+          321.8,
+          209.85
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "c424d75e-1257-5fd6-b113-3405422ce620": {
+        "id": "c424d75e-1257-5fd6-b113-3405422ce620",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.05,
+          211.5
+        ],
+        "end": [
+          323.1,
+          211.1
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "d07e3f45-e7de-5e46-aa7a-1c3589cebf36": {
+        "id": "d07e3f45-e7de-5e46-aa7a-1c3589cebf36",
+        "type": "PCB_TRACK",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.1,
+          211.1
+        ],
+        "end": [
+          323.1,
+          210.4
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "2740a67a-857f-4ddf-97cb-c160189200be": {
+        "id": "2740a67a-857f-4ddf-97cb-c160189200be",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          207.750001,
+          67.7
+        ],
+        "end": [
+          208.425001,
+          67.7
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "41fb2a45-09b0-4787-8cb2-c63de88c1d48": {
+        "id": "41fb2a45-09b0-4787-8cb2-c63de88c1d48",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          208.425001,
+          67.7
+        ],
+        "end": [
+          208.483601,
+          67.7586
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "468003f2-0dcf-475c-baa7-6edd36794fb7": {
+        "id": "468003f2-0dcf-475c-baa7-6edd36794fb7",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          209.5,
+          67.7
+        ],
+        "end": [
+          209.8,
+          67.7
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "b193d40c-ecce-42b7-81bf-79611168d5a4": {
+        "id": "b193d40c-ecce-42b7-81bf-79611168d5a4",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          209.4414,
+          67.7586
+        ],
+        "end": [
+          209.5,
+          67.7
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "b4b5c2e0-a2af-4f10-8203-42d6bca9d59f": {
+        "id": "b4b5c2e0-a2af-4f10-8203-42d6bca9d59f",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          208.483601,
+          67.7586
+        ],
+        "end": [
+          209.4414,
+          67.7586
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "4ddf52ea-b1ba-4e7f-b7ee-42275925a5c3": {
+        "id": "4ddf52ea-b1ba-4e7f-b7ee-42275925a5c3",
+        "type": "PCB_VIA",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          209.8,
+          67.7
+        ],
+        "end": [
+          209.8,
+          67.7
+        ],
+        "width": 0.6,
+        "layers": [
+          "F.Cu",
+          "B.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "In3.Cu",
+          "In4.Cu",
+          "In5.Cu",
+          "In6.Cu"
+        ],
+        "drill": 0.3
+      },
+      "11db4d6c-1cc8-5038-8195-746762db980b": {
+        "id": "11db4d6c-1cc8-5038-8195-746762db980b",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          168.8,
+          59.85
+        ],
+        "end": [
+          168.8,
+          60.4672
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "2b3492d5-6d19-56d0-a28a-2654d9659d4b": {
+        "id": "2b3492d5-6d19-56d0-a28a-2654d9659d4b",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          167.75,
+          57.6
+        ],
+        "end": [
+          167.75,
+          58.8
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "47e8fdcd-3e75-529a-b99d-fd9e6e51b559": {
+        "id": "47e8fdcd-3e75-529a-b99d-fd9e6e51b559",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          169.27928,
+          60.4672
+        ],
+        "end": [
+          169.83534,
+          61.02326
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "7ac93582-fdea-5f7c-9a4d-33f983c2e18d": {
+        "id": "7ac93582-fdea-5f7c-9a4d-33f983c2e18d",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          167.75,
+          58.8
+        ],
+        "end": [
+          168.8,
+          59.85
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "836a466c-dde0-5fc6-8d3c-7495896e2b14": {
+        "id": "836a466c-dde0-5fc6-8d3c-7495896e2b14",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          169.83534,
+          61.02326
+        ],
+        "end": [
+          170.4,
+          60.9625
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "96f3e00f-2743-5e58-b4ac-d0f7ddd3d3f5": {
+        "id": "96f3e00f-2743-5e58-b4ac-d0f7ddd3d3f5",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          168.8,
+          60.4672
+        ],
+        "end": [
+          169.27928,
+          60.4672
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "aed553c6-1bab-5397-ab40-ad5bb5879f97": {
+        "id": "aed553c6-1bab-5397-ab40-ad5bb5879f97",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          170.4,
+          60.9625
+        ],
+        "end": [
+          172.1,
+          60.9625
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "0216ddc4-e7c0-48c8-8260-36933f1f1c86": {
+        "id": "0216ddc4-e7c0-48c8-8260-36933f1f1c86",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          209.2,
+          68.2
+        ],
+        "end": [
+          209.3,
+          68.3
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "216f8f6c-b411-4a90-b7e8-9ac0e5963763": {
+        "id": "216f8f6c-b411-4a90-b7e8-9ac0e5963763",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          208.425001,
+          68.2
+        ],
+        "end": [
+          208.483601,
+          68.1414
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "b495e5a9-f877-4f9f-80c7-81c40853947f": {
+        "id": "b495e5a9-f877-4f9f-80c7-81c40853947f",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          209.141399,
+          68.1414
+        ],
+        "end": [
+          209.2,
+          68.2
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "d4c79609-7d3f-4e55-bb23-298dd6916240": {
+        "id": "d4c79609-7d3f-4e55-bb23-298dd6916240",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          208.483601,
+          68.1414
+        ],
+        "end": [
+          209.141399,
+          68.1414
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "d82d1339-ce5f-4e1e-a7dc-c254c5f6d3f3": {
+        "id": "d82d1339-ce5f-4e1e-a7dc-c254c5f6d3f3",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          209.3,
+          68.3
+        ],
+        "end": [
+          209.3,
+          68.4
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "ed4f6e2c-68ad-4cb1-82b0-8863e2574735": {
+        "id": "ed4f6e2c-68ad-4cb1-82b0-8863e2574735",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          207.750001,
+          68.2
+        ],
+        "end": [
+          208.425001,
+          68.2
+        ],
+        "width": 0.1796,
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "2b35d98d-0e9a-4f26-9755-06344190d05b": {
+        "id": "2b35d98d-0e9a-4f26-9755-06344190d05b",
+        "type": "PCB_VIA",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          209.3,
+          68.4
+        ],
+        "end": [
+          209.3,
+          68.4
+        ],
+        "width": 0.6,
+        "layers": [
+          "F.Cu",
+          "B.Cu",
+          "In1.Cu",
+          "In2.Cu",
+          "In3.Cu",
+          "In4.Cu",
+          "In5.Cu",
+          "In6.Cu"
+        ],
+        "drill": 0.3
+      },
+      "158a2c66-a3a0-527e-888d-1328295de41f": {
+        "id": "158a2c66-a3a0-527e-888d-1328295de41f",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          169.71466,
+          61.85
+        ],
+        "end": [
+          169.90216,
+          62.0375
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "3cadac75-41cb-5979-84b4-db76280d410f": {
+        "id": "3cadac75-41cb-5979-84b4-db76280d410f",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          168.25,
+          60.85
+        ],
+        "end": [
+          168.8,
+          60.85
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "4059d91a-5baf-5670-a7d5-5e4a97dc28e1": {
+        "id": "4059d91a-5baf-5670-a7d5-5e4a97dc28e1",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          169.56466,
+          61.29394
+        ],
+        "end": [
+          169.71466,
+          61.85
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "44066ac0-0728-5d3d-b51f-ffbd09535557": {
+        "id": "44066ac0-0728-5d3d-b51f-ffbd09535557",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          169.90216,
+          62.0375
+        ],
+        "end": [
+          170.4,
+          62.0375
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "56256272-1a1d-5bd6-9c3a-e7e90abbc2ad": {
+        "id": "56256272-1a1d-5bd6-9c3a-e7e90abbc2ad",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          168.25,
+          61.9
+        ],
+        "end": [
+          168.25,
+          60.85
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "b5069ae6-2c28-5ab4-86fd-ce1919185faa": {
+        "id": "b5069ae6-2c28-5ab4-86fd-ce1919185faa",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          168.8,
+          60.85
+        ],
+        "end": [
+          169.12072,
+          60.85
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "bbe61157-c731-5727-8b41-1a6c635f88eb": {
+        "id": "bbe61157-c731-5727-8b41-1a6c635f88eb",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          169.12072,
+          60.85
+        ],
+        "end": [
+          169.56466,
+          61.29394
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "cb8ef8b3-4445-54e6-be39-43f6b132276c": {
+        "id": "cb8ef8b3-4445-54e6-be39-43f6b132276c",
+        "type": "PCB_TRACK",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          170.4,
+          62.0375
+        ],
+        "end": [
+          172.1,
+          62.0375
+        ],
+        "width": 0.1796,
+        "layers": [
+          "B.Cu"
+        ]
+      },
+      "a733ade9-7e55-5f14-bf44-d8d5f52e6474": {
+        "id": "a733ade9-7e55-5f14-bf44-d8d5f52e6474",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.450002,
+          213.235
+        ],
+        "end": [
+          322.450002,
+          213.235
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "J73",
+        "number": "A6",
+        "size": [
+          0.3,
+          0.7
+        ],
+        "angle": 0.0,
+        "box": [
+          322.300002,
+          212.885,
+          322.600002,
+          213.585
+        ]
+      },
+      "8a439a5d-0787-5238-8ad3-c490a10b42e2": {
+        "id": "8a439a5d-0787-5238-8ad3-c490a10b42e2",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          323.450001,
+          213.235
+        ],
+        "end": [
+          323.450001,
+          213.235
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "J73",
+        "number": "A7",
+        "size": [
+          0.3,
+          0.7
+        ],
+        "angle": 0.0,
+        "box": [
+          323.300001,
+          212.885,
+          323.600001,
+          213.585
+        ]
+      },
+      "c91aeadb-4132-5f46-a9be-3934f0e81ddb": {
+        "id": "c91aeadb-4132-5f46-a9be-3934f0e81ddb",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          323.200001,
+          214.535
+        ],
+        "end": [
+          323.200001,
+          214.535
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "J73",
+        "number": "B6",
+        "size": [
+          0.3,
+          0.7
+        ],
+        "angle": 0.0,
+        "box": [
+          323.050001,
+          214.185,
+          323.350001,
+          214.885
+        ]
+      },
+      "74e49f6d-8ad9-5be8-9893-19e4e06b4723": {
+        "id": "74e49f6d-8ad9-5be8-9893-19e4e06b4723",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          322.700002,
+          214.535
+        ],
+        "end": [
+          322.700002,
+          214.535
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "J73",
+        "number": "B7",
+        "size": [
+          0.3,
+          0.7
+        ],
+        "angle": 0.0,
+        "box": [
+          322.550002,
+          214.185,
+          322.850002,
+          214.885
+        ]
+      },
+      "4d6fca5a-0746-552d-9906-4ddf5be4fa40": {
+        "id": "4d6fca5a-0746-552d-9906-4ddf5be4fa40",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.237501,
+          209.535
+        ],
+        "end": [
+          322.237501,
+          209.535
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "U63",
+        "number": "1",
+        "size": [
+          0.5,
+          0.375
+        ],
+        "angle": 270.0,
+        "box": [
+          322.050001,
+          209.285,
+          322.425001,
+          209.785
+        ]
+      },
+      "eb97c311-25b4-5572-ba3b-3414368a8d81": {
+        "id": "eb97c311-25b4-5572-ba3b-3414368a8d81",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          321.162501,
+          209.535
+        ],
+        "end": [
+          321.162501,
+          209.535
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "U63",
+        "number": "3",
+        "size": [
+          0.5,
+          0.375
+        ],
+        "angle": 270.0,
+        "box": [
+          320.975001,
+          209.285,
+          321.350001,
+          209.785
+        ]
+      },
+      "070f929e-5e2f-5a52-8ffc-87df9f82add2": {
+        "id": "070f929e-5e2f-5a52-8ffc-87df9f82add2",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          321.162501,
+          211.235
+        ],
+        "end": [
+          321.162501,
+          211.235
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "U63",
+        "number": "4",
+        "size": [
+          0.5,
+          0.375
+        ],
+        "angle": 270.0,
+        "box": [
+          320.975001,
+          210.985,
+          321.350001,
+          211.485
+        ]
+      },
+      "9df94d81-8f16-52ad-9199-cddd11547b26": {
+        "id": "9df94d81-8f16-52ad-9199-cddd11547b26",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          322.237501,
+          211.235
+        ],
+        "end": [
+          322.237501,
+          211.235
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "U63",
+        "number": "6",
+        "size": [
+          0.5,
+          0.375
+        ],
+        "angle": 270.0,
+        "box": [
+          322.050001,
+          210.985,
+          322.425001,
+          211.485
+        ]
+      },
+      "3bb417c3-9d65-53e0-9404-d2bea9652c7f": {
+        "id": "3bb417c3-9d65-53e0-9404-d2bea9652c7f",
+        "type": "PAD",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          207.750001,
+          67.675
+        ],
+        "end": [
+          207.750001,
+          67.675
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "A1",
+        "number": "79",
+        "size": [
+          0.3,
+          1.75
+        ],
+        "angle": 90.0,
+        "box": [
+          206.875001,
+          67.525,
+          208.625001,
+          67.825
+        ]
+      },
+      "9da375c1-4c0a-5a11-b5cd-45bd9e76d00d": {
+        "id": "9da375c1-4c0a-5a11-b5cd-45bd9e76d00d",
+        "type": "PAD",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          207.750001,
+          68.175
+        ],
+        "end": [
+          207.750001,
+          68.175
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "ref": "A1",
+        "number": "81",
+        "size": [
+          0.3,
+          1.75
+        ],
+        "angle": 90.0,
+        "box": [
+          206.875001,
+          68.025,
+          208.625001,
+          68.325
+        ]
+      },
+      "be92be81-4573-534b-b900-1388c0d60dc7": {
+        "id": "be92be81-4573-534b-b900-1388c0d60dc7",
+        "type": "PAD",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          168.25,
+          61.9
+        ],
+        "end": [
+          168.25,
+          61.9
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "ref": "U61",
+        "number": "2",
+        "size": [
+          1.45,
+          0.3
+        ],
+        "angle": 90.0,
+        "box": [
+          168.1,
+          61.175,
+          168.4,
+          62.625
+        ]
+      },
+      "f12d8765-1a5c-5686-8405-395888820db2": {
+        "id": "f12d8765-1a5c-5686-8405-395888820db2",
+        "type": "PAD",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          167.75,
+          57.6
+        ],
+        "end": [
+          167.75,
+          57.6
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "ref": "U61",
+        "number": "8",
+        "size": [
+          1.45,
+          0.3
+        ],
+        "angle": 90.0,
+        "box": [
+          167.6,
+          56.875,
+          167.9,
+          58.325
+        ]
+      },
+      "2c0cdfb9-48b7-51ab-82b6-630f30ee59bb": {
+        "id": "2c0cdfb9-48b7-51ab-82b6-630f30ee59bb",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "start": [
+          168.825,
+          63.8
+        ],
+        "end": [
+          168.825,
+          63.8
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "ref": "R203",
+        "number": "2",
+        "size": [
+          0.8,
+          0.95
+        ],
+        "angle": 0.0,
+        "box": [
+          168.425,
+          63.325,
+          169.225,
+          64.275
+        ]
+      },
+      "be17436a-468a-5478-97eb-fa5fe1081c59": {
+        "id": "be17436a-468a-5478-97eb-fa5fe1081c59",
+        "type": "PAD",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          170.4,
+          62.0375
+        ],
+        "end": [
+          170.4,
+          62.0375
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "ref": "U60",
+        "number": "1",
+        "size": [
+          0.5,
+          0.375
+        ],
+        "angle": 0.0,
+        "box": [
+          170.15,
+          61.85,
+          170.65,
+          62.225
+        ]
+      },
+      "046ecf9e-f273-585b-9aa7-8c15f386c6d5": {
+        "id": "046ecf9e-f273-585b-9aa7-8c15f386c6d5",
+        "type": "PAD",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          170.4,
+          60.9625
+        ],
+        "end": [
+          170.4,
+          60.9625
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "ref": "U60",
+        "number": "3",
+        "size": [
+          0.5,
+          0.375
+        ],
+        "angle": 0.0,
+        "box": [
+          170.15,
+          60.775,
+          170.65,
+          61.15
+        ]
+      },
+      "5d2c4d07-6f13-5f04-aeda-788e51bc82a1": {
+        "id": "5d2c4d07-6f13-5f04-aeda-788e51bc82a1",
+        "type": "PAD",
+        "net": "/EC_HOST_USB_DN",
+        "start": [
+          172.1,
+          60.9625
+        ],
+        "end": [
+          172.1,
+          60.9625
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "ref": "U60",
+        "number": "4",
+        "size": [
+          0.5,
+          0.375
+        ],
+        "angle": 0.0,
+        "box": [
+          171.85,
+          60.775,
+          172.35,
+          61.15
+        ]
+      },
+      "29f95972-7d89-53a6-afde-09718c663972": {
+        "id": "29f95972-7d89-53a6-afde-09718c663972",
+        "type": "PAD",
+        "net": "/EC_HOST_USB_DP",
+        "start": [
+          172.1,
+          62.0375
+        ],
+        "end": [
+          172.1,
+          62.0375
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "ref": "U60",
+        "number": "6",
+        "size": [
+          0.5,
+          0.375
+        ],
+        "angle": 0.0,
+        "box": [
+          171.85,
+          61.85,
+          172.35,
+          62.225
+        ]
+      },
+      "8d3a0de4-c46a-5945-b0ba-e258c3a5a250": {
+        "id": "8d3a0de4-c46a-5945-b0ba-e258c3a5a250",
+        "type": "PAD",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "start": [
+          165.875,
+          55.75
+        ],
+        "end": [
+          165.875,
+          55.75
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "ref": "R204",
+        "number": "2",
+        "size": [
+          0.8,
+          0.95
+        ],
+        "angle": 180.0,
+        "box": [
+          165.475,
+          55.275,
+          166.275,
+          56.225
+        ]
+      }
+    },
+    "declared_intentional_branches": [
+      {
+        "name": "existing A1 host DP launch, long continuation open",
+        "net": "/EC_HOST_USB_DP",
+        "anchor_pad": "A1.81",
+        "anchor_pad_uuid": "9da375c1-4c0a-5a11-b5cd-45bd9e76d00d",
+        "expected_native_pad_component": [
+          "A1.81"
+        ],
+        "routed_item_uuids": [
+          "0216ddc4-e7c0-48c8-8260-36933f1f1c86",
+          "216f8f6c-b411-4a90-b7e8-9ac0e5963763",
+          "2b35d98d-0e9a-4f26-9755-06344190d05b",
+          "b495e5a9-f877-4f9f-80c7-81c40853947f",
+          "d4c79609-7d3f-4e55-bb23-298dd6916240",
+          "d82d1339-ce5f-4e1e-a7dc-c254c5f6d3f3",
+          "ed4f6e2c-68ad-4cb1-82b0-8863e2574735"
+        ],
+        "bounds_mm": [
+          207.5,
+          67.3,
+          210.11,
+          68.71
+        ],
+        "reason": "Explicit existing unfinished launch or duplicated ESD contact. Its exact object geometry and native endpoint group are fixed in this contract."
+      },
+      {
+        "name": "existing A1 host DN launch, long continuation open",
+        "net": "/EC_HOST_USB_DN",
+        "anchor_pad": "A1.79",
+        "anchor_pad_uuid": "3bb417c3-9d65-53e0-9404-d2bea9652c7f",
+        "expected_native_pad_component": [
+          "A1.79"
+        ],
+        "routed_item_uuids": [
+          "2740a67a-857f-4ddf-97cb-c160189200be",
+          "41fb2a45-09b0-4787-8cb2-c63de88c1d48",
+          "468003f2-0dcf-475c-baa7-6edd36794fb7",
+          "4ddf52ea-b1ba-4e7f-b7ee-42275925a5c3",
+          "b193d40c-ecce-42b7-81bf-79611168d5a4",
+          "b4b5c2e0-a2af-4f10-8203-42d6bca9d59f"
+        ],
+        "bounds_mm": [
+          207.5,
+          67.3,
+          210.11,
+          68.71
+        ],
+        "reason": "Explicit existing unfinished launch or duplicated ESD contact. Its exact object geometry and native endpoint group are fixed in this contract."
+      },
+      {
+        "name": "intentional duplicate ESD DP pad branch",
+        "net": "/Internal Services/DFU_CONN_DP",
+        "anchor_pad": "U63.6",
+        "anchor_pad_uuid": "9df94d81-8f16-52ad-9199-cddd11547b26",
+        "expected_native_pad_component": [
+          "J73.A6",
+          "J73.B6",
+          "U63.1",
+          "U63.6"
+        ],
+        "routed_item_uuids": [
+          "69e4ce37-0d6b-584b-8a08-2d0ac4f2cdca",
+          "f8673327-d11e-5346-9b17-9e6a5874aa16"
+        ],
+        "bounds_mm": [
+          322.0,
+          210.3,
+          322.6,
+          211.5
+        ],
+        "reason": "Explicit existing unfinished launch or duplicated ESD contact. Its exact object geometry and native endpoint group are fixed in this contract."
+      },
+      {
+        "name": "intentional duplicate ESD DN pad branch",
+        "net": "/Internal Services/DFU_CONN_DN",
+        "anchor_pad": "U63.4",
+        "anchor_pad_uuid": "070f929e-5e2f-5a52-8ffc-87df9f82add2",
+        "expected_native_pad_component": [
+          "J73.A7",
+          "J73.B7",
+          "U63.3",
+          "U63.4"
+        ],
+        "routed_item_uuids": [
+          "5d9da830-c57e-5105-bc02-7205e04947e6"
+        ],
+        "bounds_mm": [
+          320.9,
+          210.3,
+          321.4,
+          211.5
+        ],
+        "reason": "Explicit existing unfinished launch or duplicated ESD contact. Its exact object geometry and native endpoint group are fixed in this contract."
+      }
+    ],
+    "unfinished_system_boundaries": [
+      "A1-to-U60",
+      "MCU_USB-to-R200/R201",
+      "R203/R204-to-J73/U63"
+    ],
+    "note": "Local selections are exact and source reviewed. They never waive arbitrary branches or imply that the unfinished system routes are complete."
+  }
 }

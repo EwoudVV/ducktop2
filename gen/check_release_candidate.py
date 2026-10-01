@@ -515,6 +515,8 @@ def run_center_pcie_coupling(pcb: Path, staged: Path, reports: Path, stage: str)
         expected_scopes = Counter(suite["scope"] for suite in expected_suites)
         if limits_document.get("signal_paths"):
             expected_scopes["complete PCIe signal paths"] += 1
+        if limits_document.get("local_usb_paths"):
+            expected_scopes["local USB paths and connector branches"] += 1
         output.unlink(missing_ok=True)
         run_command([
             sys.executable, str(checker.resolve()), "--pcb", str(staged.resolve()),

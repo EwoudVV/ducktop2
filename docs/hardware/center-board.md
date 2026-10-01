@@ -1,9 +1,9 @@
 # center board
 
-updated 14 september 2026. the center board is 227 x 185 mm on the
-approved eight-layer stack. it has 781 footprints and 3,235 pads. the
-nvme and wi-fi pcie routing repairs are complete, but there is still a
-lot of main routing to do before this board can be ordered.
+updated 1 october 2026. the center board is 227 x 185 mm with eight
+layers, 868 footprints and 3,563 pads. the existing pcie, usb, hdmi and
+ethernet routes have been repaired. there is still a lot of main routing
+to do before this board can be ordered.
 
 ## routing so far
 
@@ -13,25 +13,31 @@ the board near the sockets. the repairs include pair spacing, length
 matching, layer transitions, local ground returns and the nearby control
 routes. the repaired signals use F.Cu, In2.Cu and B.Cu.
 
-this checkpoint has 2,863 straight track sections, 33 arcs and 669 vias.
-native connectivity counts 1,725 unconnected items. KiCad's DRC list can
+the board has 4,446 straight track sections, 51 arcs and 723 vias.
+native connectivity counts 1,795 unconnected items. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
-FPC103 pin 5 still has its original unfinished `/PLTRST_SRC_N` reset
-escape. the reset connection to the right board needs routing. the 42 usb
-pair-gap reports are fixed, with checked local pad and via exits. the full
-usb connections still need routing and length matching. power distribution,
-hdmi, the ethernet host link and the remaining main-board connections
-are unfinished.
+the four hdmi pairs and the ethernet controller's pcie data and clock
+connections now reach FPC103. the largest hdmi pair mismatch is 0.052 mm.
+hdmi tx1 has five layer changes per leg to get past the existing m.2
+connections. both legs follow the same layer sequence, with nearby ground
+returns. this is a layout check, not a measured channel result.
+two extra ground stitches at FPC103 bring the longest local connector
+return down from 4.43 mm to 3.18 mm while keeping its shell copper keepout.
 
-the footprint review is current. the symbol filters now name the actual
-packages, and 25 library and footprint-type advisories have exact saved
-reviews. the remaining dangling tracks and vias are still part of the
-unfinished routing.
+usb routes have been moved off In4.Cu and use the matching inner or outer
+trace dimensions. the complete usb-c 1 receive pair is matched within
+0.03 mm. the short ec switch and dfu connections are routed, but the long
+A1-to-U60, MCU_USB-to-R200/R201 and R203/R204-to-J73/U63 connections are
+still open. the separate connector contacts and esd pad branches are
+checked explicitly, so a spare dangling trace cannot pass as a valid branch.
 
-the removed nvme ground stub did not break a return connection. four other
-ground pieces were entirely covered by longer tracks and have been removed.
-that cleanup leaves the copper area and ground-pad/via connections unchanged.
+the refilled board has zero native DRC errors. unrouted connections and
+their warnings remain. a fresh schematic export matches all 868 footprints
+and 3,372 electrical pads. the 698 existing nvme, wi-fi and nearby control
+routing objects were kept unchanged through these repairs.
+a missing 1 mm piece of the nvme rx0 negative trace was also restored
+from the earlier routing. the full receive path now connects again.
 
 ## shape and placement
 
@@ -58,13 +64,16 @@ the positions below use pcb editor coordinates, in mm.
 | H4, wi-fi retainer | 174.800, 133.850 | 0° |
 | FPC102, left signals | 109.350, 71.050 | -90° |
 | FPC103, right signals | 321.750, 127.050 | 90° |
-| J2071, bms power | 219.150, 180.240 | 0° |
+| J2071, bms power | 142.000, 210.398 | -90° |
 | J2073, bms control | 207.050, 181.850 | 180° |
 | RS1, gauge shunt | 196.500, 171.950 | 180° |
 | J41, left oled | 231.600, 181.550 | 180° |
 | J45, right oled | 241.125, 181.550 | 180° |
 | J901, maker connector | 326.850, 42.550 | 180° |
 | J2300, radio interface | 112.800, 154.300 | 0° |
+| C66, usb-c 1 tx capacitor | 204.600, 50.800 | 180° |
+| C67, usb-c 1 tx capacitor | 204.600, 52.050 | 180° |
+| R2444, right signal shield return | 317.500, 116.600 | -90° |
 
 the m.2 retainers line up with their sockets: the local offsets from pad 1
 are 9.25 x 83.55 mm for nvme 2280 and 9.25 x 33.55 mm for wi-fi 2230.
@@ -96,7 +105,8 @@ its mdi pairs use `DIFF_100`. usb uses `DIFF_90` and hdmi uses `DIFF_100`.
 
 the small gap areas around pads, vias and tuning are checked individually.
 `gen/check_center_pcie_coupling.py` checks the local limits and the copper
-outside them, plus the completed pcie paths. use
+outside them, plus the completed pcie, hdmi and usb paths. the local usb
+branch checks also keep track of the deliberately unfinished connections. use
 [build and verify](../build-and-verify.md) for the release checks.
 
 ## assembly work left
