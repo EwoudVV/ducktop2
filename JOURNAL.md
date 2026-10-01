@@ -13,6 +13,8 @@ finished the four hdmi pairs and the ethernet controller’s data and clock conn
 also found a missing 1 mm piece in one of the nvme receive traces. recovered the original segment from an older revision and restored the connection without changing the surrounding routing. cleaned up a small usb shortcut and improved the checks for disconnected paths, unwanted branches and pair spacing.
 the saved board now has zero drc errors, and its connections match the schematic. refreshed the component positions, height information and cable exports for the case. the three moved parts clear the modelled wires, and all 18 wire paths still meet their bend and length limits. there are 1,795 connections left to route on the main board.
 
+images: https://cdn.hackclub.com/01a0f9df-cb7d-7e5f-bbd6-6ba9e2ddb4f2/Screenshot%202026-10-01%20at%2019.49.30.png https://cdn.hackclub.com/01a0f9df-cd88-7933-95b0-f3e3a2529a1a/Screenshot%202026-10-01%20at%2019.49.37.png
+
 # 2026-10-1: rebuild the journal and add the missing pictures
 
 **Total time spent: 2 hours**
