@@ -177,6 +177,7 @@ ec_policy_config_t ec_policy_default_config(void) {
   config.input_current_offset_ma = 0u;
   config.raw_aon_reserve_mw = 0u;
   config.minimum_vsys_mv = 10000u;
+  config.enforce_pack_current_limit = false;
   config.source_efficiency_permille =
       EC_DEFAULT_SOURCE_EFFICIENCY_PERMILLE;
   config.system_reserve_mw = EC_DEFAULT_SYSTEM_RESERVE_MW;
@@ -510,6 +511,13 @@ static void step_validating(ec_controller_t *controller,
   }
   if (!inputs->thermal_ok) {
     enter_fault(controller, source, EC_FAULT_THERMAL);
+    return;
+  }
+  if (source == EC_SOURCE_PACK && controller->config.enforce_pack_current_limit &&
+      (!inputs->pack_current_valid || !inputs->pack_discharge_limit_ma ||
+       inputs->pack_sample_age_ms > 250u ||
+       inputs->pack_current_ma < -(int32_t)inputs->pack_discharge_limit_ma)) {
+    enter_fault(controller, source, EC_FAULT_PACK_TELEMETRY);
     return;
   }
   if (source == EC_SOURCE_PACK && !inputs->pack_telemetry_valid) {
@@ -905,6 +913,13 @@ static void step_active(ec_controller_t *controller, const ec_inputs_t *inputs,
   }
   if (!inputs->thermal_ok) {
     enter_fault(controller, source, EC_FAULT_THERMAL);
+    return;
+  }
+  if (source == EC_SOURCE_PACK && controller->config.enforce_pack_current_limit &&
+      (!inputs->pack_current_valid || !inputs->pack_discharge_limit_ma ||
+       inputs->pack_sample_age_ms > 250u ||
+       inputs->pack_current_ma < -(int32_t)inputs->pack_discharge_limit_ma)) {
+    enter_fault(controller, source, EC_FAULT_PACK_TELEMETRY);
     return;
   }
   if (source == EC_SOURCE_PACK && !inputs->pack_telemetry_valid) {

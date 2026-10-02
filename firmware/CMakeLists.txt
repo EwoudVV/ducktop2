@@ -244,3 +244,37 @@ add_executable(power_profile_tests tests/test_power_profile.c ec/src/ec_policy.c
 target_include_directories(power_profile_tests PRIVATE ec_target ec/include)
 ducktop2_target_defaults(power_profile_tests)
 add_test(NAME power_profile_tests COMMAND power_profile_tests)
+
+# Synthetic envelopes exercise gates and arithmetic; none is a release profile.
+add_executable(isl9241_8a_tests tests/test_isl9241.c tests/i2c_mock.c ec_target/isl9241.c)
+target_include_directories(isl9241_8a_tests PRIVATE ec_target tests)
+target_compile_definitions(isl9241_8a_tests PRIVATE DUCKTOP2_PACK_HARDWARE_REVISION=2 DUCKTOP2_ISL_DC_PROCHOT_MA=8192)
+ducktop2_target_defaults(isl9241_8a_tests)
+add_test(NAME isl9241_8a_tests COMMAND isl9241_8a_tests)
+
+add_executable(pack_current_tests tests/test_pack_current.c)
+target_include_directories(pack_current_tests PRIVATE ec_target)
+target_compile_definitions(pack_current_tests PRIVATE DUCKTOP2_PACK_HARDWARE_REVISION=2 DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED=1 DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE=869 DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE=950 DUCKTOP2_DISCHARGE_OFFSET_MA=100)
+ducktop2_target_defaults(pack_current_tests)
+add_test(NAME pack_current_tests COMMAND pack_current_tests)
+
+add_executable(pack_current_policy_tests tests/test_pack_current_policy.c ec/src/ec_policy.c)
+target_include_directories(pack_current_policy_tests PRIVATE ec/include)
+ducktop2_target_defaults(pack_current_policy_tests)
+add_test(NAME pack_current_policy_tests COMMAND pack_current_policy_tests)
+
+add_executable(ec_app_8a_tests tests/test_ec_app.c tests/i2c_mock.c ec_target/ec_app.c ec_target/ec_app_math.c ec_target/isl9241.c)
+target_include_directories(ec_app_8a_tests PRIVATE ec_target ec/include tests)
+target_compile_definitions(ec_app_8a_tests PRIVATE DUCKTOP2_PACK_HARDWARE_REVISION=2 DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED=1 DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE=869 DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE=950 DUCKTOP2_DISCHARGE_OFFSET_MA=100)
+target_link_libraries(ec_app_8a_tests PRIVATE ducktop2_bq ducktop2_ec_telemetry ducktop2_ec_fan ducktop2_ec_policy)
+ducktop2_target_defaults(ec_app_8a_tests)
+add_test(NAME ec_app_8a_tests COMMAND ec_app_8a_tests)
+
+add_test(NAME pack_profile_compile_tests COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_pack_profile_compile.py --cc ${CMAKE_C_COMPILER})
+
+add_executable(ec_charge_3a_tests tests/test_ec_app.c tests/i2c_mock.c ec_target/ec_app.c ec_target/ec_app_math.c ec_target/isl9241.c)
+target_include_directories(ec_charge_3a_tests PRIVATE ec_target ec/include tests)
+target_compile_definitions(ec_charge_3a_tests PRIVATE DUCKTOP2_PACK_HARDWARE_REVISION=2 DUCKTOP2_PACK_GUARDS_QUALIFIED=1 DUCKTOP2_PACK_QUALIFIED=1 DUCKTOP2_GAUGE_QUALIFIED=1 DUCKTOP2_CHARGER_CURRENT_QUALIFIED=1 DUCKTOP2_CHARGING_QUALIFIED=1 DUCKTOP2_PACK_CHARGE_CURRENT_MA=3000 DUCKTOP2_PACK_CHARGE_VOLTAGE_MV=12528 DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED=1 DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE=869 DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE=950 DUCKTOP2_DISCHARGE_OFFSET_MA=100)
+target_link_libraries(ec_charge_3a_tests PRIVATE ducktop2_bq ducktop2_ec_telemetry ducktop2_ec_fan ducktop2_ec_policy)
+ducktop2_target_defaults(ec_charge_3a_tests)
+add_test(NAME ec_charge_3a_tests COMMAND ec_charge_3a_tests)

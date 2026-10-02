@@ -22,7 +22,7 @@ int main(void)
     assert(i2c_mock.isl_words[0x15]==12528 && i2c_mock.isl_words[0x3f]==200);
     assert(i2c_mock.isl_words[0x3d]==0x2028 && i2c_mock.isl_words[0x4e]==0x4041);
     assert(i2c_mock.isl_words[0x4b]==0x0b40); /* 3.840 V, 85.333 mV per code */
-    assert(i2c_mock.isl_words[0x48]==2048 && (i2c_mock.isl_words[0x3c]&8u));
+    assert(i2c_mock.isl_words[0x48]==ISL9241_DC_THROTTLE_MA && (i2c_mock.isl_words[0x3c]&8u));
     /* Literal SMBus frames catch byte order independently of the word bank. */
     uint8_t limit[2]={0x28,0x11},alert[2]={0x80,0x11};
     i2c_mock_expect_write(9,0x3f,limit,2);i2c_mock_expect_read(9,0x3f,limit,2);
@@ -44,6 +44,17 @@ int main(void)
     i2c_mock.isl_words[0x84]=10;i2c_mock.isl_words[0x85]=20;
     assert(isl9241_read_sample(&t) && t.vbat_mv==11008 && t.vsys_mv==12000);
     assert(t.ibat_ma==-444 && t.battery_present && !t.fault);
+    /* Saturated discharge must never look like a bounded 11.322A sample. */
+    i2c_mock.isl_words[0x84]=254;
+    assert(isl9241_read_sample(&t) && t.ibat_ma==-11278);
+    i2c_mock.isl_words[0x84]=255;t.ibat_ma=123;
+    assert(!isl9241_read_sample(&t) && t.ibat_ma==123);
+    i2c_mock.isl_words[0x84]=0;i2c_mock.isl_words[0x85]=255;
+    assert(!isl9241_read_sample(&t) && t.ibat_ma==123);
+    i2c_mock.isl_words[0x84]=10;i2c_mock.isl_words[0x85]=20;
+    i2c_mock.isl_words[0x48]^=256u;
+    assert(!isl9241_configuration_ok());
+    i2c_mock.isl_words[0x48]^=256u;
     i2c_mock.isl_words[0x91]=0x400;
     assert(isl9241_read_sample(&t) && t.fault);
     i2c_mock.isl_words[0x3d]=0; /* brownout lost the NTC safety configuration */

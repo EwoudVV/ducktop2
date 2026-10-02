@@ -2,6 +2,7 @@
 #define DUCKTOP2_ISL9241_H
 #include <stdbool.h>
 #include <stdint.h>
+#include "board_profile.h"
 
 /* FN8945 Rev.6.00. SMBus words are sent low byte first. Hardware uses
  * 20 mOhm input and 10 mOhm battery shunts, with the default 1x gain. */
@@ -17,7 +18,7 @@
 #define ISL9241_SAMPLE_WAIT_MS 120u
 /* Specified 1.77..2.39 A trip range at 2.048 A, plus external shunt
  * tolerance. PSYS stays enabled so battery mode uses this comparator. */
-#define ISL9241_DC_THROTTLE_MA 2048u
+#define ISL9241_DC_THROTTLE_MA DUCKTOP2_ISL_DC_PROCHOT_MA
 
 typedef enum {
     ISL9241_CHARGE_NONE, ISL9241_CHARGE_TRICKLE,

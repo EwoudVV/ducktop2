@@ -146,16 +146,15 @@ class RevisionCalculations(unittest.TestCase):
         self.assertFalse(named(charge_current_screen(self.center,profile),'0.5A named-point').passed)
 
     def test_pack_trip_uses_environment_bounds_beyond_initial_tolerance(self):
-        values=NetlistValues()
-        values['RS10']='11m 1% 2W'
-        values.parts['RS10']=('WSL2512R0110FEA18','Resistor_SMD:R_2512_6332Metric')
+        values=component_values(Path(__file__).parent/'testdata/bms_current.xml')
         checks=pack_breaker_environment_checks(values)
         self.assertTrue(all(check.passed for check in checks))
         floor=named(checks,'trip floor').value
-        self.assertLess(floor,.040/(.011*1.01))
-        self.assertAlmostEqual(floor,3.2423,places=3)
+        self.assertLess(floor,20e-6*1360/(.003*1.01))
+        self.assertAlmostEqual(floor,8.234731374648112)
         change(values,'RS10','15m','WSL2512R0150FEA18')
-        self.assertFalse(named(pack_breaker_environment_checks(values),'trip floor').passed)
+        with self.assertRaisesRegex(ValueError,'Bourns shunt'):
+            pack_breaker_environment_checks(values)
 
 
 class StandbyMutations(unittest.TestCase):

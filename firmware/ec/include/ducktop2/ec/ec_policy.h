@@ -162,6 +162,7 @@ typedef struct {
   uint16_t input_current_offset_ma;
   uint32_t raw_aon_reserve_mw;
   uint16_t minimum_vsys_mv;
+  bool enforce_pack_current_limit;
   uint16_t source_efficiency_permille;
   uint32_t system_reserve_mw;
   uint32_t standby_reserve_mw;

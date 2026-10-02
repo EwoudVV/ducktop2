@@ -4,6 +4,23 @@ from part_identity import decode, engineering_value, identity_errors
 
 
 class PartIdentity(unittest.TestCase):
+    def test_reviewed_bourns_kelvin_parts_reject_wrong_value_or_package(self):
+        cases = (
+            ('CSS2H-2512K-3L00F', .003, '3mOhm 1% 4W', 'ducktop2:Bourns_CSS2H_2512_Kelvin'),
+            ('CSS4J-4026K-5L00F', .005, '5mOhm 1% 4W', 'ducktop2:Bourns_CSS4J_4026_Kelvin'),
+        )
+        for mpn, value, label, footprint in cases:
+            with self.subTest(mpn=mpn):
+                part = decode(mpn)
+                self.assertAlmostEqual(part.value, value)
+                self.assertEqual((part.tolerance, part.tcr_ppm, part.power_w), (1, 75, 4))
+                self.assertEqual(identity_errors(label, footprint, mpn), [])
+                self.assertTrue(identity_errors('8mOhm 1% 4W', footprint, mpn))
+                self.assertTrue(identity_errors(label, 'Resistor_SMD:R_0603_1608Metric', mpn))
+                self.assertTrue(identity_errors(label.replace('4W', '5W'), footprint, mpn))
+        self.assertTrue(identity_errors(cases[1][2], cases[0][3], cases[1][0]))
+        self.assertTrue(identity_errors('4mOhm 1% 3W', cases[0][3], 'CSS2H-2512K-4L00F'))
+
     def test_metal_strip_values_ranges_and_power(self):
         for mpn, value, watts in (
             ('WSLP25125L000FEA', .005, 3),

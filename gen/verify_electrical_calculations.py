@@ -296,16 +296,140 @@ def metal_strip_bounds(values: NetlistValues, ref: str,
     return nominal*(1-tolerance), nominal*(1+tolerance)
 
 
+BMS_SHUNTS = {
+    'RS10': ('CSS2H-2512K-3L00F', .003, 4.0,
+             'ducktop2:Bourns_CSS2H_2512_Kelvin'),
+    'RS11': ('CSS4J-4026K-5L00F', .005, 4.0,
+             'ducktop2:Bourns_CSS4J_4026_Kelvin'),
+}
+BMS_GUARD_PARTS = {
+    'R2270': 'TNPW06031K00BEEA',
+    'R2271': 'TNPW0603360RBEEA',
+    'R2272': 'TNPW0603562RBEEA',
+}
+
+
+def bms_shunt_bounds(values: NetlistValues, ref: str) -> tuple[float, float]:
+    """Bourns component stress screen, with no invented series bridge.
+
+    CSS2H/CSS4J primary tables: 1% initial,75ppm/K including terminals,
+    1% load life,0.5% solder heat,0.5% thermal shock,1% hot exposure.
+    Use the full part temperature range -55..170C about25C. Summing
+    separate tests is an engineering screen, not a cumulative-life promise.
+    Manufacturer Kelvin land geometry and installed excess pickup need checks.
+    """
+    mpn, nominal, _power, footprint = BMS_SHUNTS[ref]
+    if values.mpn(ref) != mpn or values.parts[ref][1] != footprint:
+        raise ValueError(f'{ref} requires the reviewed Bourns shunt and Kelvin footprint')
+    if not math.isclose(parse_engineering(values[ref]), nominal, rel_tol=1e-9):
+        raise ValueError(f'{ref} label disagrees with its exact order code')
+    values.used.add(ref)
+    error = .01 + 75e-6*145 + .01 + .005 + .005 + .01
+    return nominal*(1-error), nominal*(1+error)
+
+
+def bms_current_budget(values: NetlistValues) -> dict:
+    """Actual selected shunts and LIMIT resistors, independently cornered."""
+    if not isinstance(values, NetlistValues):
+        raise ValueError('BMS current checks require exported part identities')
+    for ref, mpn in [('U11','LTC4368IMS-1#PBF'),('U719','BQ7791500PWR'),
+                     ('U2210','INA300AIDGSR'),('U2211','INA300AIDGSR')]:
+        if values.mpn(ref) != mpn:
+            raise ValueError(f'{ref} current thresholds require {mpn}')
+    lo10, hi10 = bms_shunt_bounds(values, 'RS10')
+    lo11, hi11 = bms_shunt_bounds(values, 'RS11')
+    limits = {}
+    for ref, mpn in BMS_GUARD_PARTS.items():
+        if values.mpn(ref) != mpn:
+            raise ValueError(f'{ref} requires {mpn}')
+        limits[ref] = resistor(values, ref)
+        if not math.isclose(parse_engineering(values[ref]), limits[ref], rel_tol=1e-9):
+            raise ValueError(f'{ref} label disagrees with its order code')
+        # The accepted0.5% envelope includes full-temperature TCR,8000h
+        # endurance and soldering heat. Do not hide a less precise substitute.
+        if values.environment_tolerance(ref, -55, 125) > .005:
+            raise ValueError(f'{ref} exceeds the reviewed LIMIT envelope')
+    def guard(r):
+        return ((19.85e-6*r*.995-.0009)/hi10,
+                (20.15e-6*r*1.005+.0009)/lo10)
+    return {
+        'rs10_ohm': (lo10, hi10), 'rs11_ohm': (lo11, hi11),
+        'discharge_A': guard(limits['R2270']+limits['R2271']),
+        'charge_A': guard(limits['R2272']),
+        'ltc_forward_A': (.040/hi10, .060/lo10),
+        'ltc_reverse_A': (.042/hi10, .058/lo10),
+        'ltc_collapsed_output_A': (.030/hi10, .070/lo10),
+        'bq_ocd_occ_A': (.048/hi11, .072/lo11),
+        'bq_scd_A': (.096/hi11, .144/lo11),
+        'qualification': 'Static component screen only; Kelvin pickup, calibration, startup/ripple, delays, overshoot, cell limits, thermals, pulse SOA and fuse total clearing remain unqualified.',
+    }
+
+
 def pack_breaker_environment_checks(values: NetlistValues) -> list[Check]:
-    """Keep the3A allocation below the forward trip floor after shunt drift."""
-    _,high=metal_strip_bounds(values,'RS10')
-    power=decode(values.mpn('RS10')).power_w
-    return [
-        Check('pack3A allocation below component-environment trip floor',.040/high,'A',3.0,math.inf,
-              'LTC4368 forward40mV minimum; RS10 initial,TCR at-40..100C,load-life and solder heat; dynamic and measurement margins remain unqualified'),
-        Check('pack shunt3A loss at100C component corner',3.0**2*high,'W',0,power*(170-100)/(170-70),
-              'MPN power rating linearly derated70..170C; installed thermal rise and fault pulses require measurement'),
-    ]
+    """Keep8A below the precision guard floor, not the loose LTC threshold."""
+    result = bms_current_budget(values)
+    checks = []
+    for key, label, floor, ceiling in [
+        ('discharge_A', 'INA discharge', 8.2, 10.0),
+        ('charge_A', 'INA charge', 3.2, 4.5),
+        ('ltc_forward_A', 'LTC forward backup', 8.2, 22.0),
+        ('ltc_reverse_A', 'LTC reverse backup', 3.2, 21.0),
+        ('ltc_collapsed_output_A', 'LTC collapsed-output fault', 8.2, 25.0),
+        ('bq_ocd_occ_A', 'BQ OCD/OCC backup', 8.2, 16.0),
+        ('bq_scd_A', 'BQ SCD backup', 16.0, 31.0),
+    ]:
+        low, high = result[key]
+        checks.extend([
+            Check(label+' component-environment trip floor', low, 'A', floor, math.inf,
+                  'Independent component corners; backup trips do not define permitted operation'),
+            Check(label+' component-environment trip ceiling', high, 'A', 0, ceiling,
+                  'Threshold only; fault peak also depends on current slew and unqualified assembly delay'),
+        ])
+    checks.append(Check('pack8A guard static margin', result['discharge_A'][0]-8, 'A', .2, math.inf,
+                        'Minimum precision trip minus8A objective; calibration/ripple/startup must fit within this small margin'))
+    for ref, key in [('RS10','rs10_ohm'),('RS11','rs11_ohm')]:
+        power = BMS_SHUNTS[ref][2]*(170-80)/(170-70)
+        checks.append(Check(ref+'8A component loss at80C terminal rating',64*result[key][1],
+                            'W',0,power,'Shunt component envelope; local ambient<=60C and terminal hotspot<=80C must be measured'))
+    if values.mpn('F1') != '3-101-051':
+        raise ValueError('BMS fuse requires Schurter3-101-05110A; no15A substitution')
+    for ref, mpn in [('R850','RC0603FR-073M3L'),('R854','RC0603FR-07196KL'),
+                     ('R2232','RC0603FR-0747KL'),('R2275','RC0603FR-0747KL')]:
+        if values.mpn(ref) != mpn:
+            raise ValueError(f'{ref} requires {mpn}')
+    bias_r = resistor(values,'R2275')
+    checks.extend([
+        Check('off-state INA common-mode bias lower DC screen',8.4-40e-6*bias_r*1.05,
+              'V',0,36,'Four10uA input loads at zero shunt current; charger/open-fuse/plug transients remain unqualified'),
+        Check('high-side-off deliberate bias leakage',12.6/(bias_r*.95)*1000,
+              'mA',0,.3,'47k fused positive bleed; not a RAW-to-FG ground connection'),
+    ])
+    ready_up = resistor(values,'R2232')*1.05
+    ready_down = resistor(values,'R2233')*.95
+    ready_high = (3.207-5.2e-6*ready_up)*ready_down/(ready_up+ready_down)
+    checks.append(Check('current-latch startup-ready high reserve',ready_high-.7*3.393,
+                        'V',.15,math.inf,
+                        'Two INA2uA input leakages,1uA supervisor and0.2uA buffer allowance;47k pull-up,1M pull-down and supply corners'))
+    ld_voltage = bms_uv_load_detect_voltage(
+        14, resistor(values,'R850'), resistor(values,'R851'), resistor(values,'R848'))
+    checks.append(Check('BQ UV load-removal nominal internal-resistance screen',ld_voltage,
+                        'V',0,1.25,
+                        '14V CHG drive;3.3M RGS,453k RLD,1k RCHG,2k typical driver and200k typical internal LD; not a full internal-resistance tolerance proof'))
+    return checks
+
+
+def bms_uv_load_detect_voltage(chg_v: float, r_gs: float, r_ld: float,
+                               r_chg: float, r_on: float = 2000,
+                               r_internal: float = 200000) -> float:
+    """BQ77915 figure10-6, load removed during UV while CHG remains on.
+
+    RLD_INT200k and CHG on resistance2k are typical-only. This reproduces
+    the divider failure caused by a small RGS, not an assembly guarantee.
+    TI section10.1.1.4 expressly recommends3.3M for UV load-removal recovery.
+    """
+    if chg_v < 0 or min(r_gs,r_ld,r_chg,r_on,r_internal) <= 0:
+        raise ValueError('load-detect screen needs positive resistances')
+    return chg_v*r_internal/(r_gs+r_ld+r_chg+r_on+r_internal)
 
 
 def capacitor_retention_required(nominal: float, initial_tolerance: float,
@@ -923,10 +1047,12 @@ def thermal_supply_budget(feed_ohms: float, values=None) -> dict[str, float]:
     TLV803E 1uA. These simultaneous states overcount real static operation.
     TPS709 gives loaded ground current as typical, not a maximum: allocate
     its 350uA/150mA-load characterization plus 100uA additional reserve here.
+    Both INA300s add150uA each,20.15uA per LIMIT as a separate allowance,
+    and10uA leakage reserve. The ISO7041 allocation already covers all channels.
     The allocation must be measured; this function does not relabel it a limit.
     """
     v=3.393; tr=.001+25e-6*65+.010+.1/10000; tc=.05
-    defaults={'R2201':9.53e3,'R2230':100e3,'R2231':100e3,'R2232':100e3,
+    defaults={'R2201':9.53e3,'R2230':100e3,'R2231':100e3,'R2232':47e3,'R2274':100e3,
               'R2233':1e6,'R2235':100e3,'R2238':100e3}
     for cell in range(3):
         defaults.update({f'R{2210+3*cell}':100e3,f'R{2211+3*cell}':10e3,f'R{2212+3*cell}':10e3})
@@ -935,13 +1061,15 @@ def thermal_supply_budget(feed_ohms: float, values=None) -> dict[str, float]:
     def r(ref):return resistor(values,ref) if values is not None else defaults[ref]
     passive=v/(r('R2201')*(1-tr))
     passive+=sum(v/(sum(r(f'R{2210+3*cell+j}') for j in range(3))*(1-tr)) for cell in range(3))
-    passive+=sum(v/(r(ref)*(1-tc)) for ref in ['R2230','R2231','R2232','R2233','R2235','R2238'])
+    passive+=sum(v/(r(ref)*(1-tc)) for ref in ['R2230','R2231','R2232','R2233','R2235','R2238','R2274'])
     passive+=sum(v/((r(f'R{2240+2*i}')+r(f'R{2241+2*i}'))*(1-tr)) for i in range(4))
-    ic_screen=12*.85e-6+.9e-6+2*50e-6+2*120e-6+395.7e-6+1e-6+3e-6
+    guard_screen=2*150e-6+2*20.15e-6+10e-6
+    ic_screen=12*.85e-6+.9e-6+2*50e-6+2*120e-6+395.7e-6+1e-6+3e-6+guard_screen
     loaded_ldo_allowance=350e-6;additional_allowance=100e-6
     demand=passive+ic_screen+loaded_ldo_allowance+additional_allowance
     rmax=feed_ohms*(1+tc);rmin=feed_ohms*(1-tc)
     return {'passive_current_max_a':passive,'ic_current_screen_a':ic_screen,
+            'current_guard_screen_a':guard_screen,
             'loaded_ldo_ground_current_allowance_a':loaded_ldo_allowance,
             'additional_allowance_a':additional_allowance,'demand_screen_a':demand,
             'available_at_8v4_a':(8.4-(v+1))/rmax,
@@ -1068,52 +1196,19 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
         )
         add_window(checks, "LTC4368 pack acceptance", ("R700", "R701", "R702"),
                    values, 0.5, (8.2, 8.7), (13.2, 13.8))
-        pack_breaker = 0.050 / resistor(values, "RS10")
-        pack_shunt = resistor(values, "RS10")
-        pack_breaker_min = 0.040 / (pack_shunt * 1.01)
-        pack_breaker_max = 0.060 / (pack_shunt * 0.99)
-        bms_shunt = resistor(values, "RS11")
-        bms_ocd_nominal = 0.060 / bms_shunt
-        bms_ocd_min = 0.048 / (bms_shunt * 1.01)
-        bms_ocd_max = 0.072 / (bms_shunt * 0.99)
-        bms_scd_nominal = 0.120 / bms_shunt
-        bms_scd_min = 0.096 / (bms_shunt * 1.01)
-        bms_scd_max = 0.144 / (bms_shunt * 0.99)
-        bms_shunt_power_at_pack_trip = pack_breaker_max ** 2 * bms_shunt
         bms_balance_resistance = resistor(values, "R841")
         bms_balance_nominal = 4.2 / (2.0 * bms_balance_resistance + 12.0)
         bms_balance_worst_max = 4.24 / (2.0 * bms_balance_resistance * 0.99 + 8.0)
         checks.extend([
-            Check("LTC4368 bidirectional pack breaker nominal", pack_breaker, "A", 4.4, 4.7,
-                  "50mV/RS10; nominal forward and reverse magnitude"),
-            Check("LTC4368 breaker IC and initial-shunt minimum", pack_breaker_min, "A", 3.5, 3.7,
-                  "40mV/(RS10*1.01); LTC4368 threshold minimum and shunt +1%"),
-            Check("LTC4368 breaker IC and initial-shunt maximum", pack_breaker_max, "A", 5.4, 5.6,
-                  "60mV/(RS10*0.99); LTC4368 threshold maximum and shunt -1%"),
             Check("LTC4368 nominal VOUT capacitance", capacitor(values, "C725") * 1e6,
                   "uF", 9.9, 10.1,
                   "C725 on PACK_POS_FUSED; datasheet requires at least 1uF effective at VOUT"),
-            Check("BQ7791500 backup overcurrent nominal", bms_ocd_nominal, "A", 7.4, 7.6,
-                  "BQ7791500PWR 60mV OCD threshold / RS11"),
-            Check("BQ7791500 backup overcurrent IC and initial-shunt minimum", bms_ocd_min, "A", 5.9, 6.1,
-                  "48mV/(RS11*1.01); protector threshold minimum and shunt +1%"),
-            Check("BQ7791500 backup overcurrent IC and initial-shunt maximum", bms_ocd_max, "A", 9.0, 9.2,
-                  "72mV/(RS11*0.99); protector threshold maximum and shunt -1%"),
-            Check("BQ7791500 short-circuit nominal", bms_scd_nominal, "A", 14.9, 15.1,
-                  "BQ7791500PWR 120mV SCD threshold / RS11"),
-            Check("BQ7791500 short-circuit IC and initial-shunt minimum", bms_scd_min, "A", 11.8, 12.0,
-                  "96mV/(RS11*1.01); protector threshold minimum and shunt +1%"),
-            Check("BQ7791500 short-circuit IC and initial-shunt maximum", bms_scd_max, "A", 18.0, 18.2,
-                  "144mV/(RS11*0.99); protector threshold maximum and shunt -1%"),
-            Check("BQ7791500 shunt power at initial-tolerance pack trip", bms_shunt_power_at_pack_trip, "W", 0.0, 0.30,
-                  "I(LTC4368 max)^2*RS11; RS11 is rated 2W"),
             Check("BQ7791500 balance current nominal", bms_balance_nominal * 1000.0, "mA", 25.0, 27.0,
                   "4.2V/(2*75R+12R); internal-balance current"),
             Check("BQ7791500 balance worst-case max", bms_balance_worst_max * 1000.0, "mA", 0.0, 30.0,
                   "4.24V/(2*75R*0.99+8R); worst-case high balance current"),
         ])
-        if isinstance(values, NetlistValues):
-            checks.extend(pack_breaker_environment_checks(values))
+        checks.extend(pack_breaker_environment_checks(values))
         if isinstance(values, NetlistValues) and 'U2200' in values:
             checks.extend(bms_thermal_checks(values))
             checks.extend(bms_control_checks(values))
@@ -1488,7 +1583,7 @@ def render_analog_addendum(boards: dict[str, NetlistValues]) -> str:
     if boards["center"].mpn("U2")=="ISL9241IRTZ":
         lines=[line for line in lines if not line.startswith(("the Mu3.3A", "the accepted BQ bootstrap"))]
         lines += ["", "the Mu supply uses a 5.5 A output operating screen at VSYS >=10 V, with 85% efficiency required. the 60 W Mu/display budget leaves room for the fan at the low rail-voltage corner. the resistor-scaled inductor-limit figures are engineering screens, since TI specifies their limits at other operating points. peak-clamp, low-pack, transition-mode and hot-fault behavior remain unmeasured.", "", "the ISL9241 starts at 200 mA input. firmware must restore that limit and disable charging before source transfer. its current shunts, register scaling and source policy are checked separately from actual silicon accuracy. standby startup and current limiting have their own AON report. qualification flags remain off."]
-        lines += ["", "adapter and charging commands now use explicit shunt, gain and offset envelopes. the adapter power budget uses a lower actual-current bound. the rows above check that the firmware defaults cover component drift and the named silicon accuracy points; they do not interpolate a guaranteed accuracy curve. the complete installed transfer function needs qualification before the charger-current gate is enabled. charging also includes the separate trickle-current maximum and the upper regulated-voltage corner.", "", "60 W is the Mu/display cap, not an entitlement from every source. the 3 A pack ceiling cannot bridge a full-load unplug: at 10 V and 85% efficiency the Mu/display cap plus fan alone needs about 7.43 A. an already applied and measured lower load must fit the qualified pack budget before a transfer. exact cells and their charge, discharge and temperature limits are not established by this report."]
+        lines += ["", "adapter and charging commands now use explicit shunt, gain and offset envelopes. the adapter power budget uses a lower actual-current bound. the rows above check that the firmware defaults cover component drift and the named silicon accuracy points; they do not interpolate a guaranteed accuracy curve. the complete installed transfer function needs qualification before the charger-current gate is enabled. charging also includes the separate trickle-current maximum and the upper regulated-voltage corner.", "", "60 W is the Mu/display cap, not an entitlement from every source. the 8 A pack objective remains conditional on the independent BMS, harness and cell qualification; an unplug still needs a measured load budget: at 10 V and 85% efficiency the Mu/display cap plus fan alone needs about 7.43 A. an already applied and measured load must fit the qualified pack budget before a transfer. exact cells and their charge, discharge and temperature limits are not established by this report."]
     return "\n".join(lines)+"\n"
 
 
@@ -1521,6 +1616,7 @@ def render_report(checks: list[Check], netlist: Path, radio_netlist: Path) -> st
         "- capacitor dc bias, temperature, aging, actual module capacitance, harness impedance and regulator compensation must be reconciled with the selected parts. the connected-capacitor check includes reservoirs on the other boards.",
         "- the firmware constants used in arithmetic are requested budgets. this runner does not prove that the target enforces them or that the loads fit them. exact cells, protection, harness and module limits remain separate requirements.",
         "- oscillator and microphone calculations use the explicit stray-capacitance, sensitivity and load assumptions in their equations. startup, noise, clipping and timing still need measurement.",
+        "- BMS current rows are static thresholds. The8A objective leaves a small margin for calibration/ripple/startup. Neither CTR nominal8ms nor INA nominal100us is a guaranteed total shutdown time; R850, FET gate load, pulse SOA and fuse total clearing require physical evidence.",
         "- a desktop pass does not record any physical test as completed. protection fault response, startup, load steps, loop gain, ripple, thermal rise and recovery remain first-article tests.",
         "",
         "## Primary Sources",
@@ -1539,6 +1635,10 @@ def render_report(checks: list[Check], netlist: Path, radio_netlist: Path) -> st
         "- Vishay WSL: https://www.vishay.com/docs/30100/wsl.pdf",
         "- Vishay WSLP: https://www.vishay.com/docs/30122/wslp.pdf",
         "- Vishay TNPW: https://www.vishay.com/docs/28758/tnpw_e3.pdf",
+        "- Bourns CSS2H: https://www.bourns.com/docs/product-datasheets/css2h-2512.pdf",
+        "- Bourns CSS4J: https://www.bourns.com/docs/product-datasheets/css4j-4026.pdf",
+        "- TI INA300: https://www.ti.com/lit/ds/symlink/ina300.pdf",
+        "- Schurter HCF: https://www.schurter.com/en/datasheet/typ_HCF.pdf",
         "- KEMET C0G ordering codes: https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf",
         "- KEMET CER ENG KIT03 component table: https://www.mouser.com/ds/2/212/CER%20ENG%20KITS%2003-1172831.pdf",
         "- Analog Devices LTC4231: https://www.analog.com/media/en/technical-documentation/data-sheets/4231fa.pdf",

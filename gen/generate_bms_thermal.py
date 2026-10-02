@@ -90,7 +90,7 @@ def add_bms_thermal(s):
     part('U2204','TLV803EA29RDBZR','TLV803EA29RDBZR thermal startup hold',80,450,
          'Package_TO_SOT_SMD:SOT-23',{'1':'THERM_READY','2':RAW,'3':BIAS},'TLV803EA29RDBZR')
     cap('C2230','100n 50V thermal supervisor supply',80,470,BIAS)
-    resistor('R2232','100k thermal-ready pull-up',80,485,BIAS,'THERM_READY','RC0603FR-07100KL')
+    resistor('R2232','47k thermal-ready pull-up',80,485,BIAS,'THERM_READY','RC0603FR-0747KL')
     resistor('R2233','1M thermal-ready default-low',80,500,'THERM_READY',RAW,'RC0603FR-071ML')
     part('U2205','SN74AUP2G126DCU','SN74AUP2G126DCUR thermal startup gate',80,540,
          'ducktop2:TI_DCU0008A_VSSOP8',
@@ -110,7 +110,7 @@ def add_bms_thermal(s):
     part('U2206','ISO7041FDBQ','ISO7041FDBQR separate charge/discharge permits; default low',520,425,
          'Package_SO:QSOP-16_3.9x4.9mm_P0.635mm',
          {'1':BIAS,'2':RAW,'3':'THERM_CHG_GATE','4':'THERM_DSG_GATE','5':RAW,
-          '6':'','7':RAW,'8':RAW,'9':CTRL,'10':CTRL,'11':CTRL,
+          '6':'RAW_RETRY','7':RAW,'8':RAW,'9':CTRL,'10':CTRL,'11':'CTRL_RETRY_IN',
           '12':'','13':'THERM_DSG_HEALTH_ISO','14':'THERM_CHG_HEALTH_ISO',
           '15':CTRL,'16':CTRL_VCC},'ISO7041FDBQR')
     cap('C2250','100n 50V raw isolator supply',500,460,BIAS)

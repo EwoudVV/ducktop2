@@ -39,6 +39,15 @@ def engineering_value(token: str) -> float | None:
 
 
 def decode(mpn: str) -> Identity | None:
+    # Reviewed Bourns CSS2H/CSS4J parts. Ratings are at a 70 C terminal;
+    # the board still needs its own temperature and Kelvin-layout checks.
+    bourns = {
+        "CSS2H-2512K-3L00F": (.003, "2512", 4.0),
+        "CSS4J-4026K-5L00F": (.005, "4026", 4.0),
+    }
+    if mpn in bourns:
+        value, size, power = bourns[mpn]
+        return Identity('R', value, size, 1.0, tcr_ppm=75, power_w=power)
     # Vishay 30100, 30122, 30121 and 31057. These are the package
     # sizes reviewed here. A plausible-looking code outside the table is invalid.
     strip = re.fullmatch(r"(WSL|WSLP|WSLT)(1206|2010|2512)(R\d{4}|\dL\d{3}|L\d{4})([DF])(EA|EK)(18)?", mpn)
@@ -142,7 +151,7 @@ def decode(mpn: str) -> Identity | None:
 def identity_errors(value: str, footprint: str, mpn: str) -> list[str]:
     actual = decode(mpn)
     if actual is None:
-        if mpn.startswith(('WSL1206', 'WSLP1206', 'WSL2010', 'WSL2512', 'WSLP2010', 'WSLP2512', 'WSLT2512')):
+        if mpn.startswith(('WSL1206', 'WSLP1206', 'WSL2010', 'WSL2512', 'WSLP2010', 'WSLP2512', 'WSLT2512', 'CSS2H-', 'CSS4J-')):
             return [f"unverified metal-strip code or value outside the published family range: {mpn}"]
         return []
     words = re.sub(r"^DNP\s+", "", value.strip(), flags=re.I).split()
@@ -153,7 +162,14 @@ def identity_errors(value: str, footprint: str, mpn: str) -> list[str]:
     elif not math.isclose(actual.value, declared, rel_tol=1e-9, abs_tol=0):
         errors.append(f"order code specifies {actual.value:g}, label specifies {declared:g}")
     package = re.search(r"(?:^|:)([RC])_(\d{4})_", footprint)
-    if package is None:
+    kelvin_package = {
+        "ducktop2:Bourns_CSS2H_2512_Kelvin": ('R', '2512'),
+        "ducktop2:Bourns_CSS4J_4026_Kelvin": ('R', '4026'),
+    }.get(footprint)
+    if kelvin_package is not None:
+        if kelvin_package != (actual.kind, actual.size):
+            errors.append(f"order code specifies {actual.kind} {actual.size}, footprint is {footprint}")
+    elif package is None:
         errors.append(f"cannot compare the package {footprint!r}")
     elif package[1] != actual.kind or package[2] != actual.size:
         errors.append(f"order code specifies {actual.kind} {actual.size}, footprint is {footprint}")

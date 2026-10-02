@@ -40,6 +40,7 @@ LIBMAP = {
     "Conn_02x20_Odd_Even": "Connector_Generic",
     "BQ76920PW": "ducktop2", "BQ25798": "ducktop2", "BQ24650": "ducktop2",
     "BQ34Z100-G1": "BQ34Z100-G1", "BQ77915": "BQ77915", "LTC4368-1": "LTC4368-1",
+    "INA300AIDGS": "BMS_Current", "BMS_Shunt4": "BMS_Current",
     "LTC4417CGN": "Power_Management", "LTC4418IUF": "LTC4418IUF",
     "TPS26630RGE": "Power_Management",
     "TPS26600RHF": "Power_Management",
@@ -197,7 +198,7 @@ def flatten_extends_symbol(lib_path, base_name, new_name, overrides, out_path):
     return out_path
 
 def symbol_file_for(lib, name):
-    if lib in ("BMS_Thermal", "Keyboard_RGB"):
+    if lib in ("BMS_Thermal", "Keyboard_RGB", "BMS_Current"):
         return os.path.join(SYMDIR, lib + ".kicad_sym")
     local_path = os.path.join(SYMDIR, f"{name}.kicad_sym")
     if os.path.exists(local_path):

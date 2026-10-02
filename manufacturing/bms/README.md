@@ -1,5 +1,11 @@
 # bms
 
+2 october: i'm revising the battery path for stronger unplugged performance.
+the schematic generator now includes the proposed 8 A circuit, but the saved
+BMS schematic, PCB and files below still belong to the previous 3 A design.
+i haven't finished the new startup and fault-recovery circuit or its routing.
+don't build or order the new revision from these files.
+
 29 september: RS10 now uses the verified WSL2512R0110FEA18 ordering code,
 11 milliohms, 1%, 2 W. the assembly BOM and package have been rebuilt and
 checked. the resistor value, pads and all routing are unchanged.

@@ -20,6 +20,8 @@ static inline ec_policy_config_t ec_target_power_config(void)
     c.path_good_timeout_ms=400u;
     /* 5.5A rail allocation includes the fan and divider/current-limit corners. */
     c.normal_mu_edp_budget_mw=60000u;
+    c.enforce_pack_current_limit=
+        DUCKTOP2_PACK_HARDWARE_REVISION==DUCKTOP2_PACK_REV_GUARDED_8A;
     return c;
 }
 #endif

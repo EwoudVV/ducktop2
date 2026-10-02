@@ -157,6 +157,9 @@ bool isl9241_read_sample(isl9241_telemetry_t *sample)
        !read_word(ADC_INPUT_CURRENT,&ibus) || !read_word(ADC_DISCHARGE,&dc) ||
        !read_word(ADC_CHARGE,&cc) || !read_word(INTERRUPT_STATUS,&interrupt)) return false;
     (void)interrupt; /* Reading acknowledges only events that have ended. */
+    /* The highest ADC code may represent any larger current. It cannot be
+     * passed to the power policy as a finite valid discharge measurement. */
+    if ((dc & 255u) == 255u || (cc & 255u) == 255u) return false;
     isl9241_telemetry_t next={0};
     next.vbat_mv=(uint16_t)(((bat>>6)&255u)*64u);
     next.vsys_mv=(uint16_t)(((sys>>6)&255u)*96u);

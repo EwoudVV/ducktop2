@@ -1,6 +1,51 @@
 #ifndef DUCKTOP2_BOARD_PROFILE_H
 #define DUCKTOP2_BOARD_PROFILE_H
 
+/* Explicit assembly selection. Legacy images cannot request the guarded
+ * board's current envelope. Guarded revision means RS10=3mOhm CSS2H,
+ * RS11=5mOhm CSS4J and independent latching INA300 guards through BQ CTR.
+ * Selection alone never enables a load. */
+#define DUCKTOP2_PACK_REV_LEGACY_3A 1u
+#define DUCKTOP2_PACK_REV_GUARDED_8A 2u
+#ifndef DUCKTOP2_PACK_HARDWARE_REVISION
+#define DUCKTOP2_PACK_HARDWARE_REVISION DUCKTOP2_PACK_REV_LEGACY_3A
+#endif
+#ifndef DUCKTOP2_PACK_GUARDS_QUALIFIED
+#define DUCKTOP2_PACK_GUARDS_QUALIFIED 0u
+#endif
+#ifndef DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED
+#define DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED 0u
+#endif
+/* Unresolved installed ADC transfer and dynamic bounds. These zero defaults
+ * are deliberately unusable for a qualified high-current image. */
+#ifndef DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE
+#define DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE 0u
+#endif
+#ifndef DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE
+#define DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE 0u
+#endif
+#ifndef DUCKTOP2_DISCHARGE_OFFSET_MA
+#define DUCKTOP2_DISCHARGE_OFFSET_MA 0u
+#endif
+#ifndef DUCKTOP2_PACK_DYNAMIC_RESERVE_MA
+#define DUCKTOP2_PACK_DYNAMIC_RESERVE_MA 0u
+#endif
+#ifndef DUCKTOP2_ISL_DC_PROCHOT_MA
+#define DUCKTOP2_ISL_DC_PROCHOT_MA 2048u
+#endif
+#ifndef DUCKTOP2_ISL_DC_PROCHOT_QUALIFIED
+#define DUCKTOP2_ISL_DC_PROCHOT_QUALIFIED 0u
+#endif
+#ifndef DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MIN_MA
+#define DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MIN_MA 0u
+#endif
+#ifndef DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MAX_MA
+#define DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MAX_MA 0u
+#endif
+/* Reviewed static INA300 discharge floor, rounded downward. Reserve must
+ * cover ripple, measurement-to-action rise and the real turnoff latency. */
+#define DUCKTOP2_GUARDED_PACK_TRIP_MIN_MA 8234u
+
 /* Qualification switches stay false until the named electrical/assembly
  * evidence is released. These are build inputs, never runtime host grants. */
 #ifndef DUCKTOP2_PACK_QUALIFIED
@@ -143,8 +188,56 @@
 #if DUCKTOP2_IINDPM_CAP_MA < 200 || DUCKTOP2_IINDPM_CAP_MA > 4400 || DUCKTOP2_IINDPM_CAP_MA % 4
 #error "ISL9241 input limit must be 200..4400 mA in 4 mA steps"
 #endif
-#if (DUCKTOP2_PACK_BRIDGE_QUALIFIED || DUCKTOP2_PACK_BOOT_QUALIFIED) && (DUCKTOP2_PACK_USABLE_CURRENT_MA <= DUCKTOP2_PACK_AON_RESERVE_MA || DUCKTOP2_PACK_USABLE_CURRENT_MA > 3000)
-#error "pack load budget must reserve AON current and stay below the BMS low trip corner"
+#if DUCKTOP2_PACK_USABLE_CURRENT_MA < 0 || DUCKTOP2_PACK_DYNAMIC_RESERVE_MA < 0 || DUCKTOP2_PACK_DYNAMIC_RESERVE_MA > 8234 || DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MIN_MA < 0 || DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MAX_MA < 0
+#error "invalid pack current or reserve bounds"
+#endif
+#if DUCKTOP2_PACK_GUARDS_QUALIFIED < 0 || DUCKTOP2_PACK_GUARDS_QUALIFIED > 1 || DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED < 0 || DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED > 1 || DUCKTOP2_ISL_DC_PROCHOT_QUALIFIED < 0 || DUCKTOP2_ISL_DC_PROCHOT_QUALIFIED > 1
+#error "pack qualification fields are 0 or 1"
+#endif
+#if DUCKTOP2_PACK_HARDWARE_REVISION != DUCKTOP2_PACK_REV_LEGACY_3A && DUCKTOP2_PACK_HARDWARE_REVISION != DUCKTOP2_PACK_REV_GUARDED_8A
+#error "unknown pack hardware revision"
+#endif
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_LEGACY_3A
+#if DUCKTOP2_PACK_USABLE_CURRENT_MA > 3000 || DUCKTOP2_ISL_DC_PROCHOT_MA != 2048
+#error "legacy pack revision retains its 3A allocation and 2048mA throttle"
+#endif
+#else
+#if DUCKTOP2_PACK_USABLE_CURRENT_MA > 8000
+#error "guarded pack revision has an 8A continuous design ceiling"
+#endif
+#endif
+/* FN8945 Rev6: default 20m/10m shunts, current gain x1; 0x48 uses
+ * 256mA steps and clamps at 12.8A. No silent rounding or clamping. */
+#if DUCKTOP2_ISL_DC_PROCHOT_MA < 256 || DUCKTOP2_ISL_DC_PROCHOT_MA > 12800 || DUCKTOP2_ISL_DC_PROCHOT_MA % 256
+#error "ISL DC_PROCHOT must be 256..12800mA in 256mA steps"
+#endif
+#if DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE < 0 || DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE < 0 || DUCKTOP2_DISCHARGE_OFFSET_MA < 0 || DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE > 1000 || DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE > 1000 || DUCKTOP2_DISCHARGE_OFFSET_MA > 12800
+#error "invalid discharge measurement envelope"
+#endif
+#if DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED && (!DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE || !DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE)
+#error "discharge sensing requires measured shunt and ADC transfer bounds"
+#endif
+#if DUCKTOP2_ISL_DC_PROCHOT_QUALIFIED && (!DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MIN_MA || DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MIN_MA > DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MAX_MA)
+#error "DC_PROCHOT qualification needs actual minimum and maximum trip bounds"
+#endif
+#if (DUCKTOP2_PACK_BRIDGE_QUALIFIED || DUCKTOP2_PACK_BOOT_QUALIFIED) && DUCKTOP2_PACK_USABLE_CURRENT_MA <= DUCKTOP2_PACK_AON_RESERVE_MA
+#error "pack load budget must reserve AON current"
+#endif
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_GUARDED_8A
+#if DUCKTOP2_CHARGING_QUALIFIED && !DUCKTOP2_PACK_GUARDS_QUALIFIED
+#error "guarded revision charging requires the independent guards to be qualified"
+#endif
+#if DUCKTOP2_PACK_BRIDGE_QUALIFIED || DUCKTOP2_PACK_BOOT_QUALIFIED || (DUCKTOP2_PACK_QUALIFIED && DUCKTOP2_PACK_USABLE_CURRENT_MA > 0)
+#if !DUCKTOP2_PACK_GUARDS_QUALIFIED || !DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED || !DUCKTOP2_ISL_DC_PROCHOT_QUALIFIED || !DUCKTOP2_PACK_DYNAMIC_RESERVE_MA
+#error "8A pack operation requires qualified guards, sensing, throttle and dynamic reserve"
+#endif
+#if DUCKTOP2_PACK_DYNAMIC_RESERVE_MA >= DUCKTOP2_GUARDED_PACK_TRIP_MIN_MA || DUCKTOP2_PACK_USABLE_CURRENT_MA > DUCKTOP2_GUARDED_PACK_TRIP_MIN_MA - DUCKTOP2_PACK_DYNAMIC_RESERVE_MA
+#error "pack allocation and dynamic reserve exceed the static guard floor"
+#endif
+#if DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MIN_MA <= DUCKTOP2_PACK_USABLE_CURRENT_MA || DUCKTOP2_ISL_DC_PROCHOT_ACTUAL_MAX_MA > DUCKTOP2_GUARDED_PACK_TRIP_MIN_MA - DUCKTOP2_PACK_DYNAMIC_RESERVE_MA
+#error "actual throttle bounds must hold steady load and precede the guard with dynamic reserve"
+#endif
+#endif
 #endif
 #if DUCKTOP2_PACK_BRIDGE_QUALIFIED && (!DUCKTOP2_MU_THROTTLE_QUALIFIED || !DUCKTOP2_PACK_QUALIFIED || !DUCKTOP2_GAUGE_QUALIFIED || !DUCKTOP2_PACK_USABLE_CURRENT_MA || !DUCKTOP2_AUX_LOADS_QUALIFIED)
 #error "pack bridge requires qualified pack, gauge and complete load envelope"

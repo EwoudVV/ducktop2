@@ -3394,7 +3394,7 @@ def main() -> int:
                 import fpc_contract as fpc
                 if ref == fpc.BMS_CONTROL_REFS["bms"]:
                     ground = "/CTRL_GND"
-                elif ref == "J2200":
+                elif ref in ("J2200", "J2201"):
                     ground = "/PACK_NEG_RAW"
             expect(net(components, ref, "MP"), ground, f"{ref} hold-down ground domain")
     pin_names = component_pin_names(sync.PROJECTS[args.project][1])
@@ -3403,11 +3403,13 @@ def main() -> int:
         fps, pcb_text = footprint_map()
     if args.project == "bms":
         check_bms_pack(components)
+        check_bms_current_pin_semantics(pin_names)
         check_bms_interconnect(components, bms_side=True)
         if args.schematic_only:
             print("bms schematic design contract checks OK")
         else:
-            print("bms design contract checks OK (PCB checks are center-board only)")
+            check_bms_current_pcb(components, (ROOT/"bms/bms.kicad_pcb").read_text())
+            print("bms design contract checks OK (current-interface PCB pins checked; DRC and Kelvin geometry are separate gates)")
         return 0
 
     check_custom_footprint_sources()
@@ -3593,7 +3595,7 @@ def check_bms_thermal(components):
         'U2205':{'1':'/THERM_READY','2':'/THERM_CHG_HEALTH','3':'/THERM_DSG_PERMIT',
                  '4':raw,'5':'/THERM_DSG_HEALTH','6':'/THERM_CHG_PERMIT','7':'/THERM_READY','8':bias},
         'U2206':{'1':bias,'2':raw,'3':'/THERM_CHG_GATE','4':'/THERM_DSG_GATE','5':raw,
-                 '7':raw,'8':raw,'9':'/CTRL_GND','10':'/CTRL_GND','11':'/CTRL_GND',
+                 '6':'/RAW_RETRY','7':raw,'8':raw,'9':'/CTRL_GND','10':'/CTRL_GND','11':'/CTRL_RETRY_IN',
                  '13':'/THERM_DSG_HEALTH_ISO','14':'/THERM_CHG_HEALTH_ISO','15':'/CTRL_GND','16':'/CTRL_3V3'},
         'U2207':{'1':'/THERM_DSG_HEALTH_ISO','2':'/CTRL_GND','3':'/PACK_PROTECT_OK',
                  '4':'/CTRL_FAULT_LOCAL_N','5':'/CTRL_3V3','6':'/CTRL_FAULT_LOCAL_N'},
@@ -3605,7 +3607,7 @@ def check_bms_thermal(components):
         'R2201':{'1':bias,'2':raw},
     }.items():
         for pin,want in pins.items():expect(net(components,ref,pin),want,f'{ref} thermal pin {pin}')
-    for ref,pins in [('U2200',('3','4')),('U2206',('6','12')),('U2208',('3','4'))]:
+    for ref,pins in [('U2200',('3','4')),('U2206',('12',)),('U2208',('3','4'))]:
         for pin in pins:expect_unconnected(components,ref,pin)
     for cell in range(1,4):
         ref=f'U{2200+cell}';sense=f'/THERM_SENSE_{cell}'
@@ -3680,6 +3682,124 @@ def check_bms_control_domains(components):
         if find(signal)!=control:fail(f'control interface {signal} left its isolated domain')
 
 
+def check_bms_current_pin_semantics(pin_names):
+    """The DGS10 physical pins cannot be relabeled to hide reversed sensing."""
+    expected={'1':'IN+','2':'IN-','3':'LIMIT','4':'ENABLE','5':'~{ALERT}',
+              '6':'LATCH','7':'DELAY','8':'GND','9':'VS','10':'HYS'}
+    for ref in ('U2210','U2211'):
+        for pin,name in expected.items():
+            expect(pin_names.get((ref,pin)),name,f'{ref} physical pin{pin} function')
+
+
+def check_bms_current(components):
+    """Raw current guards, hardware startup inhibit, isolated reset and shunts."""
+    raw='/PACK_NEG_RAW';bias='/THERM_3V3'
+    expect(prop(components,'U11','MPN'),'LTC4368IMS-1#PBF','LTC forward-latch and reverse-threshold variant')
+    for ref,ip,im,health,limit in [
+        ('U2210','/BAT_PROT_SENSE','/PACK_POS_FUSED','/THERM_DSG_HEALTH','/BMS_OC_DSG_LIMIT'),
+        ('U2211','/PACK_POS_FUSED','/BAT_PROT_SENSE','/THERM_CHG_HEALTH','/BMS_OC_CHG_LIMIT'),
+    ]:
+        expect(prop(components,ref,'MPN'),'INA300AIDGSR',f'{ref} exact guard')
+        expect(comp(components,ref).footprint,'Package_SO:MSOP-10_3x3mm_P0.5mm',f'{ref} DGS10 footprint')
+        for pin,want in {'1':ip,'2':im,'3':limit,'4':bias,'5':health,
+                         '6':'/THERM_READY','7':bias,'8':raw,'9':bias}.items():
+            expect(net(components,ref,pin),want,f'{ref} current-guard pin{pin}')
+        expect_unconnected(components,ref,'10')
+        expect(set(comp(components,ref).pin_nets),set(map(str,range(1,11))),f'{ref} complete pin set')
+    for ref,p1,p2,mpn in [
+        ('R2270','/BMS_OC_DSG_LIMIT','/BMS_OC_DSG_LIMIT_MID','TNPW06031K00BEEA'),
+        ('R2271','/BMS_OC_DSG_LIMIT_MID',raw,'TNPW0603360RBEEA'),
+        ('R2272','/BMS_OC_CHG_LIMIT',raw,'TNPW0603562RBEEA'),
+        ('R2273','/RAW_RETRY','/RAW_RETRY_GATE','RC0603FR-071KL'),
+        ('R2274','/RAW_RETRY_GATE',raw,'RC0603FR-07100KL'),
+        ('R2275','/BAT_PROT_VIN','/BAT_PROT_SENSE','RC0603FR-0747KL'),
+        ('R2232',bias,'/THERM_READY','RC0603FR-0747KL'),
+        ('R850','/BMS_CHG_GATE','FG_VSS','RC0603FR-073M3L'),
+        ('R854','/BMS_OCDP',raw,'RC0603FR-07196KL'),
+    ]:
+        expect(prop(components,ref,'MPN'),mpn,f'{ref} reviewed current-path part')
+        expect(comp(components,ref).pin_nets,{'1':p1,'2':p2},f'{ref} exact current-path pins')
+    for ref in ('C2270','C2271'):
+        expect(prop(components,ref,'MPN'),'GRM188R71H104KA93D',f'{ref} exact bypass')
+        expect(comp(components,ref).pin_nets,{'1':bias,'2':raw},f'{ref} raw guard bypass')
+    expect(prop(components,'Q2210','MPN'),'BSS138LT1G','raw latch-reset transistor')
+    expect(comp(components,'Q2210').pin_nets,
+           {'1':'/RAW_RETRY_GATE','2':raw,'3':'/THERM_READY'},'raw reset stays in raw domain')
+    expect(net(components,'U2206','11'),'/CTRL_RETRY_IN','isolated raw reset source')
+    expect(net(components,'U2206','6'),'/RAW_RETRY','isolated raw reset destination')
+    for ref,pin in [('U2204','1'),('U2205','1'),('U2205','7')]:
+        expect(net(components,ref,pin),'/THERM_READY',f'{ref} hardware startup connection')
+    expect(prop(components,'RS10','MPN'),'CSS2H-2512K-3L00F','single3m current shunt')
+    expect(comp(components,'RS10').footprint,'ducktop2:Bourns_CSS2H_2512_Kelvin','RS10 Kelvin land geometry')
+    expect(prop(components,'RS11','MPN'),'CSS4J-4026K-5L00F','four-terminal5m current shunt')
+    expect(comp(components,'RS11').footprint,'ducktop2:Bourns_CSS4J_4026_Kelvin','RS11 Kelvin land geometry')
+    expect(comp(components,'RS11').pin_nets,
+           {'1':raw,'2':'/BMS_SENSE_N','3':'/BMS_RAW_KELVIN','4':'/BMS_FET_KELVIN'},
+           'RS11 force and sense nets stay separate')
+    for sense,want in [('/BMS_RAW_KELVIN',{('RS11','3'),('R845','1')}),
+                       ('/BMS_FET_KELVIN',{('RS11','4'),('R846','1')}),
+                       ('/BMS_OC_DSG_LIMIT_MID',{('R2270','2'),('R2271','1')})]:
+        nodes={(ref,pin) for ref,item in components.items()
+               for pin,value in item.pin_nets.items() if value==sense}
+        expect(nodes,want,f'{sense} dedicated node set')
+    expect(prop(components,'F1','MPN'),'3-101-051','10A HCF exact fuse')
+    expect_value_prefix(components,'F1','10A','HCF fuse value matches exact part')
+    expect(comp(components,'F1').footprint,'ducktop2:Schurter_HCF_8.05x5mm','HCF fuse footprint')
+
+
+def check_bms_current_pcb(components, pcb_text):
+    """Reject native pad-net shortcuts and stale current-interface footprints.
+
+    This is pin/net parity, not a copper-resistance solver. RS10's custom
+    Kelvin fingers must be protected from pours and bulk entry. Resistance
+    extraction must use the actual1.8x3.4mm contact lands, not an equipotential
+    whole custom pad. RS11 sense copper must remain trace-only. Root layout
+    checks and project-aware native DRC prove geometry and copper clearance.
+    """
+    refs={'RS10','RS11','F1','J2','J2201','U2210','U2211','Q2210',
+          'U2204','U2205','U2206','R850','R854','R2232',
+          'C2270','C2271',*(f'R{x}' for x in range(2270,2276))}
+    fps={}
+    # Do not rely on the native serializer's tab indentation. Otherwise an
+    # extra space-indented footprint could evade the duplicate-ref guard.
+    all_footprints=[]
+    for match in re.finditer(r'\(footprint\s+"',pcb_text):
+        end=sync.balanced_end(pcb_text,match.start())
+        block=pcb_text[match.start():end]
+        all_footprints.append(sync.BoardFootprint(
+            match.start(),end,block,
+            sync.extract(r'\(property\s+"Reference"\s+"([^"]+)"',block),
+            sync.extract(r'^\s*\(footprint\s+"([^"]+)"',block)))
+    for fp in all_footprints:
+        if fp.ref not in refs:continue
+        if fp.ref in fps:fail(f'duplicate PCB footprint {fp.ref}')
+        fps[fp.ref]=fp
+    expect(set(fps),refs,'BMS current-interface PCB footprint set')
+    for ref,fp in fps.items():
+        component=comp(components,ref)
+        expect(fp.footprint,component.footprint,f'{ref} PCB current footprint')
+        for name,want in [('Value',component.value),('MPN',component.properties.get('MPN'))]:
+            got=sync.extract(r'\(property\s+"'+name+r'"\s+"([^"]*)"',fp.text)
+            expect(got,want,f'{ref} PCB {name}')
+        counts={};actual={}
+        for _start,_end,pad in sync.pad_blocks(fp.text):
+            pin=sync.pad_name(pad)
+            if not pin:continue
+            counts[pin]=counts.get(pin,0)+1
+            match=re.search(r'\(net(?:\s+\d+)?\s+"([^"\n]*)"\)',pad)
+            value=match.group(1) if match else ''
+            if pin in actual and actual[pin]!=value:fail(f'{ref}.{pin} duplicate pads disagree')
+            actual[pin]=value
+        expected={pin:('' if value.startswith('unconnected-') else value)
+                  for pin,value in component.pin_nets.items()}
+        expect(actual,expected,f'{ref} PCB pad nets')
+        # WAGO has two physical lands per contact, and the tap connector has
+        # two MP lands. RS11 has four independent single terminals.
+        expected_counts={pin:(2 if ref=='J2' or (ref=='J2201' and pin=='MP') else 1)
+                         for pin in expected}
+        expect(counts,expected_counts,f'{ref} PCB physical pad multiplicity')
+
+
 def check_bms_pack(components):
     check_bms_thermal(components)
     check_bms_control_domains(components)
@@ -3692,14 +3812,15 @@ def check_bms_pack(components):
     Q703/Q704 charge/discharge FETs, RS10/RS11 shunts, and the full
     filter/gate/divider/retry network.
     """
-    for pin in ("3",):
-        expect(net(components, "J2", pin), "/PACK_POS_RAW",
-               f"J2 pack-positive pin {pin}")
-    for pin in ("1",):
-        expect(net(components, "J2", pin), "/PACK_NEG_RAW",
-               f"J2 raw pack-negative pin {pin}")
-    expect(net(components, "J2", "4"), "/CELL1_TAP", "J2 cell-1 tap")
-    expect(net(components, "J2", "2"), "/CELL2_TAP", "J2 cell-2 tap")
+    check_bms_current(components)
+    expect(prop(components,'J2','MPN'),'2060-452/998-404','raw pack WAGO exact part')
+    expect(comp(components,'J2').footprint,'ducktop2:WAGO_2060_452_SMD','raw pack WAGO footprint')
+    expect(comp(components,'J2').pin_nets,{'1':'/PACK_POS_RAW','2':'/PACK_NEG_RAW'},'raw pack connector exact pins')
+    expect(prop(components,'J2201','MPN'),'SM02B-GHS-TB(LF)(SN)','midpoint tap connector')
+    expect(comp(components,'J2201').footprint,
+           'Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal','midpoint tap footprint')
+    expect(comp(components,'J2201').pin_nets,
+           {'1':'/CELL1_TAP','2':'/CELL2_TAP','MP':'/PACK_NEG_RAW'},'midpoint taps carry no bulk current')
 
     # Autonomous per-cell primary protection.  These checks deliberately cover
     # physical pin numbers, sense direction, FET orientation, and every strap.
@@ -3712,12 +3833,12 @@ def check_bms_pack(components):
         "11": "/BMS_SRN", "12": "/BMS_DSG_DRV",
         "13": "/BMS_CHG_DRV", "14": "/BMS_LD",
         "16": "/PACK_NEG_RAW", "17": "/BMS_OCDP",
-        "18": "/BMS_TS_UNUSED", "20": "/PACK_NEG_RAW",
+        "18": "/BMS_TS_UNUSED", "19": "/BMS_VTB", "20": "/PACK_NEG_RAW",
         "22": "/BMS_PRES", "23": "/BMS_CTRC",
         "24": "/BMS_CTRD",
     }.items():
         expect(net(components, "U719", pin), want, f"BQ7791500 pin {pin}")
-    for pin in ("15", "19", "21"):
+    for pin in ("15", "21"):
         expect_unconnected(components, "U719", pin)
     expect(comp(components, "U719").footprint,
            "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm", "BQ7791500 exact footprint")
@@ -3729,16 +3850,17 @@ def check_bms_pack(components):
         ("R842", "75R 1%", "/CELL1_TAP", "/BMS_VC1"),
         ("R843", "75R 1%", "/CELL2_TAP", "/BMS_VC2"),
         ("R844", "75R 1%", "/PACK_POS_RAW", "/BMS_VC3_TOP"),
-        ("R845", "100R", "/PACK_NEG_RAW", "/BMS_SRP"),
-        ("R846", "100R", "/BMS_SENSE_N", "/BMS_SRN"),
+        ("R845", "100R", "/BMS_RAW_KELVIN", "/BMS_SRP"),
+        ("R846", "100R", "/BMS_FET_KELVIN", "/BMS_SRN"),
         ("R847", "4.53k 1%", "/BMS_DSG_DRV", "/BMS_DSG_GATE"),
         ("R848", "1k 1%", "/BMS_CHG_DRV", "/BMS_CHG_GATE"),
         ("R849", "1M 5%", "/BMS_DSG_GATE", "/BMS_SENSE_N"),
-        ("R850", "3.3M 5%", "/BMS_CHG_GATE", "FG_VSS"),
+        ("R850", "3.3M 1%", "/BMS_CHG_GATE", "FG_VSS"),
         ("R851", "453k 1%", "/BMS_LD", "FG_VSS"),
         ("R852", "10k 5%", "/PACK_POS_RAW", "/BMS_PRES"),
         ("R853", "10k 1%", "/BMS_TS_UNUSED", "/PACK_NEG_RAW"),
-        ("R854", "604k 1%", "/BMS_OCDP", "/PACK_NEG_RAW"),
+        ("R854", "196k 1%", "/BMS_OCDP", "/PACK_NEG_RAW"),
+        ("R855", "10k 1%", "/BMS_VTB", "/BMS_TS_UNUSED"),
     ):
         expect_value_prefix(components, ref, value, f"{ref} BQ7791500 support value")
         expect(net(components, ref, "1"), p1, f"{ref} BQ7791500 pin 1")
@@ -3757,10 +3879,10 @@ def check_bms_pack(components):
         expect_value_prefix(components, ref, value, f"{ref} BQ7791500 filter value")
         expect(net(components, ref, "1"), p1, f"{ref} BQ7791500 pin 1")
         expect(net(components, ref, "2"), p2, f"{ref} BQ7791500 pin 2")
-    expect_value_prefix(components, "RS11", "8mOhm 1% 2W", "BQ7791500 current shunt")
+    expect_value_prefix(components, "RS11", "5mOhm 1% 4W", "BQ7791500 current shunt")
     expect(net(components, "RS11", "1"), "/PACK_NEG_RAW", "BQ7791500 SRP shunt side")
     expect(net(components, "RS11", "2"), "/BMS_SENSE_N", "BQ7791500 SRN shunt side")
-    expect(prop(components, "RS11", "MPN"), "WSLP25128L000FEA", "BQ7791500 exact shunt")
+    expect(prop(components, "RS11", "MPN"), "CSS4J-4026K-5L00F", "BQ7791500 exact shunt")
     for ref, source, gate in (
         ("Q703", "/BMS_SENSE_N", "/BMS_DSG_GATE"),
         ("Q704", "FG_VSS", "/BMS_CHG_GATE"),
@@ -3789,7 +3911,7 @@ def check_bms_pack(components):
         expect(net(components, ref, "5"), drain, f"{ref} drain")
     expect(net(components, "RS10", "1"), "/BAT_PROT_SENSE", "LTC4368 shunt sense side")
     expect(net(components, "RS10", "2"), "/PACK_POS_FUSED", "LTC4368 shunt output side")
-    expect_value_prefix(components, "RS10", "11mOhm", "LTC4368 bounded-current shunt")
+    expect_value_prefix(components, "RS10", "3mOhm", "LTC4368 bounded-current shunt")
     expect_value_prefix(components, "C725", "10u 25V X7R", "LTC4368 VOUT capacitor")
     expect(net(components, "C725", "1"), "/PACK_POS_FUSED",
            "LTC4368 VOUT capacitor protected rail")

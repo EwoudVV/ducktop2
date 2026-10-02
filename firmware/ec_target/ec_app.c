@@ -2,6 +2,7 @@
 #include "isl9241.h"
 #include "bq34z100.h"
 #include "board_profile.h"
+#include "pack_current.h"
 #include "gpio.h"
 #include "tca9537.h"
 #include <string.h>
@@ -185,6 +186,12 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *teleme
      * same battery shunt, so do not add its budget to this measurement. */
     inputs->pack_current_valid=sample_valid && battery_present;
     inputs->pack_current_ma=sample_valid ? (int32_t)sample.ibat_ma : 0;
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_GUARDED_8A
+    int32_t bounded_current=0;
+    inputs->pack_current_valid=inputs->pack_current_valid &&
+        ec_pack_current_upper_bound(sample.ibat_ma,&bounded_current);
+    inputs->pack_current_ma=inputs->pack_current_valid ? bounded_current : 0;
+#endif
     inputs->pack_voltage_mv=sample_valid ? sample.vbat_mv : 0;
     inputs->pack_sample_age_ms=sample_valid ? now_ms-sample_good_started_ms : UINT32_MAX;
     inputs->vsys_sample_age_ms=sample_valid ? now_ms-sample_good_started_ms : UINT32_MAX;

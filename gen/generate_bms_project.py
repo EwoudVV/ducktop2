@@ -25,6 +25,7 @@ from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, FOOTPRINTS
 from generate_mu_carrier_sheet import root_label, place_bms_control_connector, place_bms_power_connector
 import fpc_contract as fpc
 from generate_bms_thermal import add_bms_thermal
+from generate_bms_current import add_bms_current
 
 BOARD_DIR = os.path.join(PROJDIR, "bms")
 PROJECT_NAME = "bms"
@@ -40,22 +41,24 @@ def build_bms_sheet(sheet_symbol_uuid):
     s.text(20, 40, "the gauge (U10), charger (U2), and ship FET (Q25) stay on the center board.")
 
     # Fuse + pack connector
-    s.place("F1", "Fuse", "5A fast pack fuse: Schurter HCF, 1kA at 125VDC", 170, 60,
+    s.place("F1", "Fuse", "10A fast pack fuse: Schurter HCF, 1kA at 125VDC", 170, 60,
             footprint="ducktop2:Schurter_HCF_8.05x5mm",
             pin_nets={"1": ("PACK_POS_RAW", "local"), "2": ("BAT_PROT_VIN", "local")},
-            extra_props={"Manufacturer": "SCHURTER", "MPN": "3-101-056", "Datasheet": "https://www.schurter.com/en/datasheet/typ_HCF.pdf", "Height": "5 mm", "InterruptRating": "1000 A at 125 VDC, L/R <1 ms"})
-    genlib.LIBMAP.setdefault("Conn_02x02_Odd_Even", "Connector_Generic")
-    s.place("J2", "Conn_02x02_Odd_Even", "3S pack power + cell-tap harness", 170, 80,
-            footprint="Connector_Molex:Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal",
-            pin_nets={
-                "1": ("PACK_NEG_RAW", "local"), "2": ("CELL2_TAP", "local"),
-                "3": ("PACK_POS_RAW", "local"), "4": ("CELL1_TAP", "local"),
-            },
-            extra_props={"Manufacturer": "Molex", "MPN": "43045-0400", "MatingHousing": "43025-0400",
-                "Contacts": "43030-0038 tin 18 AWG", "Wire": "Alpha 6715, 18 AWG, minimum bend radius 8.763 mm",
-                "HarnessPinOrder": "1 raw negative, 2 cell 2 tap, 3 raw positive, 4 cell 1 tap; this is a new keyed harness",
-                "CurrentRatingBasis": "PS-43045: use conservative six-circuit 18 AWG 6.5 A screen; one full-current contact per polarity; 5 A backup fuse",
-                "MatedHeight": "10.29 mm nominal; horizontal exit; independent harness clamp"})
+            extra_props={"Manufacturer": "SCHURTER", "MPN": "3-101-051", "Datasheet": "https://www.schurter.com/en/datasheet/typ_HCF.pdf", "Height": "5 mm", "InterruptRating": "1000 A at 125 VDC, L/R <1 ms"})
+    s.place("J2", "Conn_01x02", "3S raw pack power", 170, 80,
+            footprint="ducktop2:WAGO_2060_452_SMD",
+            pin_nets={"1": ("PACK_POS_RAW", "local"), "2": ("PACK_NEG_RAW", "local")},
+            extra_props={"Manufacturer": "WAGO", "MPN": "2060-452/998-404",
+                "Wire": "Alpha 6715, 18 AWG, minimum bend radius 8.763 mm",
+                "HarnessPinOrder": "1 raw positive, 2 raw negative; midpoint taps use J2201",
+                "CurrentRatingBasis": "9 A terminal rating; 8 A installed path requires temperature and fault tests",
+                "Height": "4.5 mm", "StrainRelief": "separate cable clamp; no load applied to solder joints"})
+    s.place("J2201", "Conn_01x02_MP", "3S midpoint taps: cell 1, cell 2", 170, 112,
+            footprint="Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",
+            pin_nets={"1": ("CELL1_TAP", "local"), "2": ("CELL2_TAP", "local"),
+                      "MP": ("PACK_NEG_RAW", "local")},
+            extra_props={"Manufacturer": "JST", "MPN": "SM02B-GHS-TB(LF)(SN)",
+                "MatingHousing": "GHR-02V-S", "HarnessPinOrder": "1 cell 1 tap, 2 cell 2 tap; no bulk pack current"})
 
 
     # BQ7791500 autonomous primary protector
@@ -71,7 +74,7 @@ def build_bms_sheet(sheet_symbol_uuid):
                 "13": ("BMS_CHG_DRV", "local"), "14": ("BMS_LD", "local"),
                 "15": ("", "nc"), "16": ("PACK_NEG_RAW", "local"),
                 "17": ("BMS_OCDP", "local"), "18": ("BMS_TS_UNUSED", "local"),
-                "19": ("", "nc"), "20": ("PACK_NEG_RAW", "local"),
+                "19": ("BMS_VTB", "local"), "20": ("PACK_NEG_RAW", "local"),
                 "21": ("", "nc"), "22": ("BMS_PRES", "local"),
                 "23": ("BMS_CTRC", "local"), "24": ("BMS_CTRD", "local"),
             },
@@ -105,14 +108,16 @@ def build_bms_sheet(sheet_symbol_uuid):
                 footprint=FOOTPRINTS["C_1u"],
                 pin_nets={"1": (upper, "local"), "2": (lower, "local")})
 
-    s.place("RS11", "R", "8mOhm 1% 2W BQ77915 current shunt", 20, 150,
-            footprint="Resistor_SMD:R_2512_6332Metric",
-            pin_nets={"1": ("PACK_NEG_RAW", "local"), "2": ("BMS_SENSE_N", "local")},
-            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSLP25128L000FEA"})
+    s.place("RS11", "BMS_Shunt4", "5mOhm 1% 4W BQ77915 Kelvin shunt", 20, 150,
+            footprint="ducktop2:Bourns_CSS4J_4026_Kelvin",
+            pin_nets={"1": ("PACK_NEG_RAW", "local"), "2": ("BMS_SENSE_N", "local"),
+                      "3": ("BMS_RAW_KELVIN", "local"), "4": ("BMS_FET_KELVIN", "local")},
+            extra_props={"Manufacturer": "Bourns", "MPN": "CSS4J-4026K-5L00F", "Height": "2.63 mm",
+                         "Datasheet": "https://www.bourns.com/docs/product-datasheets/css4j-4026.pdf"})
     s.place("R845", "R", "100R BQ77915 SRP filter", 20, 160, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_NEG_RAW", "local"), "2": ("BMS_SRP", "local")})
+            pin_nets={"1": ("BMS_RAW_KELVIN", "local"), "2": ("BMS_SRP", "local")})
     s.place("R846", "R", "100R BQ77915 SRN filter", 20, 170, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BMS_SENSE_N", "local"), "2": ("BMS_SRN", "local")})
+            pin_nets={"1": ("BMS_FET_KELVIN", "local"), "2": ("BMS_SRN", "local")})
     s.place("C845", "C", "100n BQ77915 SRP-VSS filter", 20, 180,
             footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("BMS_SRP", "local"), "2": ("PACK_NEG_RAW", "local")})
@@ -144,14 +149,23 @@ def build_bms_sheet(sheet_symbol_uuid):
         ("R847", "4.53k 1% DSG gate resistor", "BMS_DSG_DRV", "BMS_DSG_GATE", 80, 180),
         ("R848", "1k 1% CHG gate resistor", "BMS_CHG_DRV", "BMS_CHG_GATE", 125, 180),
         ("R849", "1M 5% DSG gate-source", "BMS_DSG_GATE", "BMS_SENSE_N", 80, 190),
-        ("R850", "3.3M 5% CHG gate-source", "BMS_CHG_GATE", "FG_VSS", 125, 190),
+        ("R850", "3.3M 1% CHG gate-source; retain UV load-removal recovery", "BMS_CHG_GATE", "FG_VSS", 125, 190),
         ("R851", "453k 1% load-detect resistor", "BMS_LD", "FG_VSS", 80, 200),
         ("R852", "10k 5% PRES normal-mode pull-up", "PACK_POS_RAW", "BMS_PRES", 125, 200),
         ("R853", "10k 1% unused TS to VSS", "BMS_TS_UNUSED", "PACK_NEG_RAW", 80, 210),
-        ("R854", "604k 1% OCD delay program", "BMS_OCDP", "PACK_NEG_RAW", 125, 210),
+        ("R854", "196k 1% OCD delay program", "BMS_OCDP", "PACK_NEG_RAW", 125, 210),
     ):
+        mpn = {"R850": "RC0603FR-073M3L", "R854": "RC0603FR-07196KL"}.get(ref)
         s.place(ref, "R", value, x, y, footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (net_a, "local"), "2": (net_b, "local")})
+                pin_nets={"1": (net_a, "local"), "2": (net_b, "local")},
+                extra_props={"Manufacturer": "Yageo", "MPN": mpn} if mpn else {})
+
+    # TI's pin-18 note replaces the thermistor, not its bias resistor.
+    # The three external probes provide the actual cell-temperature protection.
+    s.place("R855", "R", "10k 1% fixed TS bias", 125, 230,
+            footprint=FOOTPRINTS["R"],
+            pin_nets={"1": ("BMS_VTB", "local"), "2": ("BMS_TS_UNUSED", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
 
     # LTC4368-1 redundant pack protector + reverse FETs
     s.place("U11", "LTC4368-1", "LTC4368IMS-1 bidirectional pack protector", 230, 70,
@@ -180,10 +194,11 @@ def build_bms_sheet(sheet_symbol_uuid):
                 "5": ("BAT_PROT_SENSE", "local"),
             },
             extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    s.place("RS10", "R", "11mOhm 1% 2W LTC4368 bounded pack-current shunt", 335, 60,
-            footprint="Resistor_SMD:R_2512_6332Metric",
+    s.place("RS10", "R", "3mOhm 1% 4W pack-current shunt", 335, 60,
+            footprint="ducktop2:Bourns_CSS2H_2512_Kelvin",
             pin_nets={"1": ("BAT_PROT_SENSE", "local"), "2": ("PACK_POS_FUSED", "local")},
-            extra_props={"Manufacturer": "Vishay Dale", "MPN": "WSL2512R0110FEA18"})
+            extra_props={"Manufacturer": "Bourns", "MPN": "CSS2H-2512K-3L00F", "Height": "0.81 mm",
+                         "Datasheet": "https://www.bourns.com/docs/product-datasheets/css2h-2512.pdf"})
     s.place("C725", "C", "10u 25V X7R LTC4368 VOUT", 390, 60,
             footprint=FOOTPRINTS["C_1u"],
             pin_nets={"1": ("PACK_POS_FUSED", "local"), "2": ("FG_VSS", "local")},
@@ -248,12 +263,14 @@ def build_bms_sheet(sheet_symbol_uuid):
         col, row = k % 2, k // 2
         s.place(ref, "TestPoint", net, 600 + col * 40, 75 + row * 15,
                 footprint=("TestPoint:TestPoint_Pad_1.0x1.0mm" if ref == "TPB5"
+                           else "TestPoint:TestPoint_Pad_D1.0mm" if ref == "TPB13"
                            else FOOTPRINTS["TestPoint_Pad_1.5"]),
                 in_bom=False,
                 pin_nets={"1": (net, "local")},
                 extra_props={"Manufacturer": "-",
                              "Note": "test point, no MPN"})
     add_bms_thermal(s)
+    add_bms_current(s)
     return s
 
 
