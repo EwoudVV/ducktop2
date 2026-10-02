@@ -4,6 +4,15 @@ author: "duck"
 description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
+
+# 2026-10-2: start reworking the bms for more battery power
+
+**Total time spent: 4 hours**
+
+started redesigning the bms around an 8a battery path because the previous 3a limit would restrict the mu ultra too much when unplugged. added lower-resistance current shunts, drew their footprints, and added separate charge and discharge overcurrent detection to the schematic source. also separated the main battery wires from the cell taps and checked the connector ratings and wire clearances.
+found a missing bias resistor in the battery protection circuit that could cause it to shut down after startup, and corrected that in the schematic source. the startup checks also uncovered problems with recovering after a low battery shutdown, so i've been comparing ways to handle that without accidentally bypassing the protection.
+rearranged the draft board to give the power paths more space, moved smaller parts underneath, and removed obsolete routing from the working copy. updated the firmware to distinguish the old and new hardware and reject invalid current readings. the targeted tests and both firmware builds passed. there's still work left on startup, fault recovery and routing before this version can be ordered.
+
 # 2026-10-1: fix the center routing and ground returns
 
 **Total time spent: 3 hours**
