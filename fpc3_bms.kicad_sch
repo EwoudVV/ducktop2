@@ -5,26 +5,164 @@
   (uuid 6a84f83a-ad89-5e33-a4ce-1baf3f9f7c3c)
   (paper "A1")
   (lib_symbols
-(symbol "Conn_01x02_MP:Conn_01x02_MP"
-    (pin_names (offset 1.016) hide)
-    (in_bom yes) (on_board yes)
-    (property "Reference" "J" (at 0 3.81 0) (effects (font (size 1.27 1.27))))
-    (property "Value" "Conn_01x02_MP" (at 0 -6.35 0) (effects (font (size 1.27 1.27))))
-    (property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
-    (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
-    (symbol "Conn_01x02_MP_0_1"
-      (rectangle (start -1.27 1.27) (end 1.27 -3.81)
-        (stroke (width 0.254) (type default)) (fill (type background))))
-    (symbol "Conn_01x02_MP_1_1"
-      (pin passive line (at -5.08 0 0) (length 3.81)
-          (name "Pin_1" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27)))))
-(pin passive line (at -5.08 -2.54 0) (length 3.81)
-          (name "Pin_2" (effects (font (size 1.27 1.27))))
-          (number "2" (effects (font (size 1.27 1.27)))))
-(pin passive line (at 5.08 -1.27 180) (length 3.81)
-      (name "MP" (effects (font (size 1.27 1.27))))
-      (number "MP" (effects (font (size 1.27 1.27)))))))
+(symbol "Connector_Generic:Conn_01x02"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x02"
+			(at 0 -5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x02_1_1"
+			(rectangle
+				(start -1.27 1.27)
+				(end 1.27 -3.81)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(rectangle
+				(start -1.27 0.127)
+				(end 0 -0.127)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(rectangle
+				(start -1.27 -2.413)
+				(end 0 -2.667)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -2.54 0)
+				(length 3.81)
+				(name "Pin_2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 (symbol "Connector_Generic_MountingPin:Conn_01x05_MountingPin"
 		(pin_names
 			(offset 1.016)
@@ -424,165 +562,7 @@
 		)
 		(embedded_fonts no)
 	)
-  (symbol "Connector_Generic:Conn_01x02"
-		(pin_names
-			(offset 1.016)
-			(hide yes)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "J"
-			(at 0 2.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x02"
-			(at 0 -5.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "connector"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "Connector*:*_1x??_*"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(symbol "Conn_01x02_1_1"
-			(rectangle
-				(start -1.27 1.27)
-				(end 1.27 -3.81)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type background)
-				)
-			)
-			(rectangle
-				(start -1.27 0.127)
-				(end 0 -0.127)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 -2.413)
-				(end 0 -2.667)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(pin passive line
-				(at -5.08 0 0)
-				(length 3.81)
-				(name "Pin_1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -2.54 0)
-				(length 3.81)
-				(name "Pin_2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
-)
+  )
 (symbol
   (lib_id "Connector_Generic_MountingPin:Conn_01x05_MountingPin")
   (at 80.01 90.17 0)
@@ -591,7 +571,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid e0789a92-7030-5f05-832f-1bbf593a96f3)
+  (uuid f3741447-634e-554a-a1bd-a9414449c7a3)
   (property "Reference" "J2073" (at 80.01 73.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "isolated bms control" (at 80.01 106.68 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal" (at 80.01 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -603,12 +583,12 @@
   (property "Harness" "28 awg; five straight-numbered wires; separate strain relief; 75 mm length budget" (at 80.01 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "GroundDomain" "center GND" (at 80.01 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/eSH.pdf" (at 80.01 90.17 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d7e0c512-3250-55d3-8de6-fdcb4f3328e0))
-  (pin "2" (uuid 05f1c1ae-34fd-508b-b923-45a0d8458d8f))
-  (pin "3" (uuid 91e80633-65af-5e2b-b805-643e4fdbfbf9))
-  (pin "4" (uuid 6ebfc9d6-fb96-5100-808a-fa9e2bf6c9ab))
-  (pin "5" (uuid 755761c9-49a4-5e2b-aeb6-d5ebb4762a04))
-  (pin "MP" (uuid 8791d943-12c3-527b-87fc-1e4f76109bcd))
+  (pin "1" (uuid 970673ce-eb0f-5ed1-94b3-96190e769863))
+  (pin "2" (uuid 6630e603-1f6b-504a-97be-e4ec8d1725d1))
+  (pin "3" (uuid 2a46b85c-6f31-5397-a392-76671d0268e3))
+  (pin "4" (uuid d7b809b4-2e3b-521d-b748-1c4543a96bd6))
+  (pin "5" (uuid e0789a92-7030-5f05-832f-1bbf593a96f3))
+  (pin "MP" (uuid d7e0c512-3250-55d3-8de6-fdcb4f3328e0))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
@@ -618,29 +598,29 @@
     )
   )
 )
-(hierarchical_label "PACK_FAULT_N"
+(hierarchical_label "PACK_MONITOR_READY"
   (shape bidirectional)
   (at 74.93 85.09 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid b21264fb-8e2f-5c5a-ae1a-a87eb4b2d661)
+  (uuid 05f1c1ae-34fd-508b-b923-45a0d8458d8f)
 )
-(hierarchical_label "PACK_RETRY_PULSE"
+(hierarchical_label "I2C_SCL"
   (shape bidirectional)
   (at 74.93 87.63 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid e0c35064-275e-5d9a-b6df-752e28855c94)
+  (uuid 91e80633-65af-5e2b-b805-643e4fdbfbf9)
 )
 (hierarchical_label "MCU_3V3"
   (shape bidirectional)
   (at 74.93 90.17 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid e2448295-b002-53b3-8932-bde0f674f0a7)
+  (uuid 6ebfc9d6-fb96-5100-808a-fa9e2bf6c9ab)
 )
-(hierarchical_label "PACK_CHG_TEMP_OK"
+(hierarchical_label "I2C_SDA"
   (shape bidirectional)
   (at 74.93 92.71 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid d0d566d1-d88f-5697-9863-b286341b2aef)
+  (uuid 755761c9-49a4-5e2b-aeb6-d5ebb4762a04)
 )
 (symbol
   (lib_id "power:GND")
@@ -650,12 +630,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 70abd61d-364b-5cdc-b8d7-b8f7437af0a3)
+  (uuid 8791d943-12c3-527b-87fc-1e4f76109bcd)
   (property "Reference" "#PWR3301" (at 74.93 92.71 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 74.93 97.79 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 74.93 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 74.93 95.25 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 75d17314-3cc9-58d1-90b8-a31a3fb27b44))
+  (pin "1" (uuid b21264fb-8e2f-5c5a-ae1a-a87eb4b2d661))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
@@ -668,7 +648,7 @@
 (label "GND"
   (at 74.93 95.25 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 867040dc-84d2-571b-85ec-8c4f22e3c7db)
+  (uuid e0c35064-275e-5d9a-b6df-752e28855c94)
 )
 (symbol
   (lib_id "power:GND")
@@ -678,12 +658,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid b319d162-8499-52ae-b0c9-fce22b3a3a0e)
+  (uuid e2448295-b002-53b3-8932-bde0f674f0a7)
   (property "Reference" "#PWR3302" (at 80.01 97.79 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 80.01 102.87 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 80.01 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 80.01 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b5c6dcb6-e68f-5bda-85ab-a8ad363da487))
+  (pin "1" (uuid d0d566d1-d88f-5697-9863-b286341b2aef))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
@@ -696,20 +676,8 @@
 (label "GND"
   (at 80.01 100.33 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 46c270db-472a-53e7-ab45-3a773980971a)
+  (uuid 70abd61d-364b-5cdc-b8d7-b8f7437af0a3)
 )
-
-
-
-
-(text "j2071 carries pack current through the rated power harness. j2073 supplies the isolated control island and its own return." (at 30.48 190.5 0) (effects (font (size 1.27 1.27))) (uuid aa5600f5-2d14-5e17-9a0e-bf3c92c4674a))
-(text "the bms control return never joins raw pack negative or the protected power return. the power return still crosses the center gauge shunt." (at 30.48 199.39 0) (effects (font (size 1.27 1.27))) (uuid 4cd19896-e76b-5d1c-9af8-bf7b0aec6ad1))
-(sheet_instances
-  (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
-    (page "16")
-  )
-)
-  (embedded_fonts no)
 (symbol
   (lib_id "Connector_Generic:Conn_01x02")
   (at 80.01 144.78 0)
@@ -718,7 +686,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 4c7e321a-0faa-5370-8fec-6ce9527cf6b0)
+  (uuid 75d17314-3cc9-58d1-90b8-a31a3fb27b44)
   (property "Reference" "J2071" (at 80.01 135.89 0) (effects (font (size 1.27 1.27))))
   (property "Value" "protected pack power" (at 80.01 153.67 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:WAGO_2060_452_SMD" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -732,8 +700,8 @@
   (property "MatedHeight" "4.5 mm terminal body; reserve release-tool access" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "CurrentRatingBasis" "WAGO 2060, 9 A IEC/UL rating with 18 AWG; assembled temperature still needs testing" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.wago.com/2060-452/998-404" (at 80.01 144.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 4b843587-ffb1-5628-9e14-91beaf8f6921))
-  (pin "2" (uuid f94f3c47-ac63-551e-89f6-cd2db40ef546))
+  (pin "1" (uuid 867040dc-84d2-571b-85ec-8c4f22e3c7db))
+  (pin "2" (uuid b319d162-8499-52ae-b0c9-fce22b3a3a0e))
   (instances
     (project "ducktop2"
       (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
@@ -747,12 +715,20 @@
   (shape bidirectional)
   (at 74.93 144.78 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 70aacdf0-e608-5b20-bd52-838d5b1ffce7)
+  (uuid b5c6dcb6-e68f-5bda-85ab-a8ad363da487)
 )
 (hierarchical_label "PACK_POS_FUSED"
   (shape bidirectional)
   (at 74.93 147.32 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 8bf47c50-9a78-5f64-abaf-9fe3bd37c47f)
+  (uuid 46c270db-472a-53e7-ab45-3a773980971a)
 )
+(text "j2071 carries pack current through the rated power harness. j2073 supplies the isolated control island and its own return." (at 30.48 190.5 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 4c7e321a-0faa-5370-8fec-6ce9527cf6b0))
+(text "the bms control return never joins raw pack negative or the protected power return. the power return still crosses the center gauge shunt." (at 30.48 199.39 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid dcd5972e-506b-5b3e-81fe-39c08cbb8ef8))
+(sheet_instances
+  (path "/46b21d0a-abb0-598b-9ae3-ea30d11d7d3c"
+    (page "16")
+  )
+)
+  (embedded_fonts no)
 )

@@ -14,7 +14,7 @@ def main():
     case('legacy_3a',{'PACK_USABLE_CURRENT_MA':3000})
     case('legacy_8000_unqualified_rejected',{'PACK_USABLE_CURRENT_MA':8000},'legacy pack revision')
     case('legacy_throttle_raise_rejected',{'ISL_DC_PROCHOT_MA':8192},'legacy pack revision')
-    case('unknown_revision',{'PACK_HARDWARE_REVISION':3},'unknown pack hardware revision')
+    case('unknown_revision',{'PACK_HARDWARE_REVISION':4},'unknown pack hardware revision')
     case('negative_current',{'PACK_USABLE_CURRENT_MA':-1},'invalid pack current')
     case('guarded_disabled_8a',{'PACK_HARDWARE_REVISION':2,'PACK_USABLE_CURRENT_MA':8000})
     case('guarded_over_8a',{'PACK_HARDWARE_REVISION':2,'PACK_USABLE_CURRENT_MA':8001},'8A continuous design ceiling')
@@ -22,6 +22,9 @@ def main():
         case('invalid_throttle_'+str(command),{'PACK_HARDWARE_REVISION':2,'ISL_DC_PROCHOT_MA':command},'256..12800mA')
     for command in [256,8192,12800]:
         case('bench_throttle_'+str(command),{'PACK_HARDWARE_REVISION':2,'ISL_DC_PROCHOT_MA':command})
+    case('bq76922_disabled_8a',{'PACK_HARDWARE_REVISION':3,'PACK_USABLE_CURRENT_MA':8000})
+    case('bq76922_pack_without_otp',{'PACK_HARDWARE_REVISION':3,'PACK_QUALIFIED':1},'requires qualified monitor')
+    case('bq76922_over_8a',{'PACK_HARDWARE_REVISION':3,'PACK_USABLE_CURRENT_MA':8001},'8A continuous design ceiling')
     common={'PACK_QUALIFIED':1,'GAUGE_QUALIFIED':1,'MU_THROTTLE_QUALIFIED':1,
             'AUX_LOADS_QUALIFIED':1,'PACK_BOOT_QUALIFIED':1,'PACK_BOOT_BUDGET_MW':10000}
     case('legacy_qualified_3a',dict(common,PACK_USABLE_CURRENT_MA=3000))
@@ -53,10 +56,24 @@ def main():
     case('guarded_charge_3a',dict(charge,PACK_HARDWARE_REVISION=2,PACK_GUARDS_QUALIFIED=1))
     case('guarded_charge_without_guards',dict(charge,PACK_HARDWARE_REVISION=2),'charging requires the independent guards')
     case('charge_over_3a',dict(charge,PACK_CHARGE_CURRENT_MA=3001),'charging requires qualified current')
+    bqcharge=dict(charge,PACK_HARDWARE_REVISION=3,PACK_CHARGE_VOLTAGE_MV=12120,
+        PACK_MONITOR_QUALIFIED=1,PACK_OTP_QUALIFIED=1,PACK_THERMAL_QUALIFIED=1,
+        PACK_DISCHARGE_SENSE_QUALIFIED=1,PACK_CELL_VOLTAGE_QUALIFIED=1,
+        PACK_CHARGE_VOLTAGE_QUALIFIED=1,PACK_CHARGE_TERMINATION_QUALIFIED=1,
+        PACK_CHARGE_MAX_RISE_MV=9,DISCHARGE_SENSE_MIN_PERMILLE=869,
+        DISCHARGE_GAIN_MIN_PERMILLE=950,DISCHARGE_OFFSET_MA=100)
+    case('bq_charge_complete_bounds',bqcharge)
+    case('bq_old_cv_rejected',dict(bqcharge,PACK_CHARGE_VOLTAGE_MV=12528),'12120mV')
+    case('bq_unqualified_high_cv_rejected',{'PACK_HARDWARE_REVISION':3,'PACK_CHARGE_VOLTAGE_MV':12528},'12120mV')
+    for q in ['PACK_CELL_VOLTAGE_QUALIFIED','PACK_CHARGE_VOLTAGE_QUALIFIED','PACK_CHARGE_TERMINATION_QUALIFIED','PACK_CHARGE_MAX_RISE_MV']:
+        case('bq_missing_'+q,dict(bqcharge,**{q:0}),'calibrated cells')
+    case('bq_rise_too_large',dict(bqcharge,PACK_CHARGE_MAX_RISE_MV=10),'calibrated cells')
     qualifiers=['PACK_QUALIFIED','GAUGE_QUALIFIED','CHARGING_QUALIFIED','PACK_BRIDGE_QUALIFIED',
                 'PACK_BOOT_QUALIFIED','EXTERNAL_BOOT_QUALIFIED','CHARGER_CURRENT_QUALIFIED',
                 'MU_THROTTLE_QUALIFIED','AUX_LOADS_QUALIFIED','USB_POWER_QUALIFIED','VSYS_SENSE_QUALIFIED',
-                'PACK_GUARDS_QUALIFIED','PACK_DISCHARGE_SENSE_QUALIFIED','ISL_DC_PROCHOT_QUALIFIED']
+                'PACK_GUARDS_QUALIFIED','PACK_DISCHARGE_SENSE_QUALIFIED','ISL_DC_PROCHOT_QUALIFIED',
+                'PACK_MONITOR_QUALIFIED','PACK_OTP_QUALIFIED','PACK_THERMAL_QUALIFIED',
+                'PACK_CELL_VOLTAGE_QUALIFIED','PACK_CHARGE_VOLTAGE_QUALIFIED','PACK_CHARGE_TERMINATION_QUALIFIED']
     with tempfile.TemporaryDirectory(prefix='ducktop2-pack-profile-') as td:
         src=Path(td)/'profile.c';obj=Path(td)/'profile.o'
         for name,defines,error,defaults in cases:

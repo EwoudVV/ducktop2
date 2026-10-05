@@ -39,7 +39,14 @@ LIBMAP = {
     "Conn_02x30_MP": "Conn_02x30_MP",
     "Conn_02x20_Odd_Even": "Connector_Generic",
     "BQ76920PW": "ducktop2", "BQ25798": "ducktop2", "BQ24650": "ducktop2",
-    "BQ34Z100-G1": "BQ34Z100-G1", "BQ77915": "BQ77915", "LTC4368-1": "LTC4368-1",
+    "BQ34Z100-G1": "BQ34Z100-G1", "BQ77915": "BQ77915", "BQ76922RSN": "BQ76922", "LTC4368-1": "LTC4368-1",
+    "INA381A3DGS": "BMS_Support",
+    "INA381A4DGS": "BMS_Support",
+    "REF3425DBV": "BMS_Support",
+    "TPS3808G30DBV": "BMS_Support",
+    "TPS26600PWP": "BMS_Support",
+    "ISO1640BD": "BMS_Support",
+    "TPS22941DCK": "BMS_Support",
     "INA300AIDGS": "BMS_Current", "BMS_Shunt4": "BMS_Current",
     "LTC4417CGN": "Power_Management", "LTC4418IUF": "LTC4418IUF",
     "TPS26630RGE": "Power_Management",
@@ -74,7 +81,7 @@ LIBMAP = {
     "SY8253ADC": "ducktop2",
     "TPS56637": "TPS56637",
     "LM706A0": "LM706A0",
-    "TLV1864PW": "BMS_Thermal", "TPS70933DBV": "BMS_Thermal",
+    "TLV1864PW": "BMS_Thermal", "TPS70933DBV": "BMS_Thermal", "TPS70950DBV": "BMS_Thermal",
     "SN74AUP2G126DCU": "BMS_Thermal", "ISO7041FDBQ": "BMS_Thermal",
     "ISO7021FD": "BMS_Thermal", "SN74LVC2G07DCK": "BMS_Thermal", "SN74AUP2G07DCK": "BMS_Thermal", "BAT54S_AKC": "BMS_Thermal",
     "SN74LVC1G07DCK": "BMS_Thermal", "Conn_01x06_Thermal_MP": "BMS_Thermal",
@@ -106,7 +113,7 @@ LIBMAP = {
     "74LVC2G07": "74xGxx",
     "74LVC2G32": "74xGxx",
     "74LVC3G34": "74xGxx",
-    "74LVC1G17": "74xGxx",
+    "74LVC1G17": "74xGxx", "TPS22810DBV": "BMS_Support",
     "74AHCT1G126": "74xGxx",
     "TPS2052B": "ducktop2",
     "TPS2592xx": "Power_Management",
@@ -198,7 +205,7 @@ def flatten_extends_symbol(lib_path, base_name, new_name, overrides, out_path):
     return out_path
 
 def symbol_file_for(lib, name):
-    if lib in ("BMS_Thermal", "Keyboard_RGB", "BMS_Current"):
+    if lib in ("BMS_Thermal", "Keyboard_RGB", "BMS_Current", "BQ76922", "BMS_Support", "BMS_Passives"):
         return os.path.join(SYMDIR, lib + ".kicad_sym")
     local_path = os.path.join(SYMDIR, f"{name}.kicad_sym")
     if os.path.exists(local_path):

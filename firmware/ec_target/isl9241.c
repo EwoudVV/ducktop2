@@ -172,6 +172,7 @@ bool isl9241_read_sample(isl9241_telemetry_t *sample)
     next.vbus_present=next.power_good=(info2 & 0x4000u)!=0;
     next.battery_present=(info2 & 0x1000u)==0 && next.vbat_mv>=7500u && next.vbat_mv<=13000u;
     unsigned state=(info2>>8)&15u;
+    next.cv_active=state==6u && ((info1>>13)&3u)==0u;
     next.fault=(status & FATAL_STATUS)!=0 || state==7u || state==9u;
     next.throttled=(info1 & 0x1c00u)!=0;
     if(state==6u && (cc & 255u))

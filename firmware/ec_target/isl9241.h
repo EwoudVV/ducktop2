@@ -12,8 +12,12 @@
 #define ISL9241_CHARGE_CURRENT_MIN_MA 64u
 #define ISL9241_CHARGE_CURRENT_MAX_MA 3000u
 #define ISL9241_CHARGE_VOLTAGE_MIN_MV 10200u
-/* 12.528 V plus the 0.5% regulation high corner remains below 12.6 V. */
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+#define ISL9241_CHARGE_VOLTAGE_MAX_MV BQ76922_CHARGE_CV_MV
+#else
+/* legacy pack setting; the BQ76922 profile has its own lower CV ceiling. */
 #define ISL9241_CHARGE_VOLTAGE_MAX_MV 12528u
+#endif
 #define ISL9241_MIN_SYSTEM_MV 10112u
 #define ISL9241_SAMPLE_WAIT_MS 120u
 /* Specified 1.77..2.39 A trip range at 2.048 A, plus external shunt
@@ -26,6 +30,7 @@ typedef enum {
 } isl9241_charge_status_t;
 typedef struct {
     bool vbus_present, power_good, battery_present, fault, throttled;
+    bool cv_active;
     isl9241_charge_status_t charge_status;
     int16_t ibat_ma, ibus_ma;
     uint16_t vbat_mv, vbus_mv, vsys_mv;

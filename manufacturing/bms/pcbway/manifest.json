@@ -2,34 +2,33 @@
   "schema": 1,
   "status": "CHECKED_FILES_PENDING_FACTORY_REVIEW",
   "board": "bms/bms.kicad_pcb",
-  "source_commit": "7bb45f0046d98bd7284a340080d74d0c7a388e92",
-  "working_tree": false,
+  "source_commit": "f6cafbfba15c38acfb043e0162f1dea39ac6c6d4",
+  "working_tree": true,
   "source_sha256": {
-    "bms/bms.kicad_pcb": "ece7d61301e85f55131c5e5ac32d38a056413b9feabd4bf4709e727e82e22829",
-    "bms/bms.kicad_sch": "d96a0472e10226dd94a3c8007cf3f09b1b3a6c3e093a83d6e0393a8648b76d8c",
-    "bms/bms.kicad_pro": "cc6ac996a9e9c80cd246ee780557ad5d197457eee5ed7cc6eaf912082392db82",
-    "bms/bms.kicad_dru": "37bf5785744034ada850286953d1156b3af6458e2f49bbe53890e8af50aab2ba",
-    "gen/generate_bms_pcbway_package.py": "a1c5904090e915321a492b173c75b1ee0ec2bb2c109bcb4d6deb786e2516dd8a",
-    "gen/bms_fabrication_geometry.py": "200d29a35bc5aa369d27af1fb997790089cf845345406d32372dbce5e20fe644",
-    "gen/check_release_candidate.py": "1b3b24f463f46dbdbe39123499e44e97635a992ff1e4eb113e71bccc19cb6209",
+    "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+    "bms/bms.kicad_sch": "bd1b39b98aad4f32cb30e90ea191e4a0205b433bdf6e78ba1d97e1aaf3e6a8fb",
+    "bms/bms.kicad_pro": "c63cbe90816e1ae51db87eb78e0676f713a7e2cd124d67049aa7d12d0c2e54fe",
+    "bms/bms.kicad_dru": "008961be5c285ad7185c2c6d38d4f5f8d4c9bc5c0f290fc2f74f12414653738d",
+    "gen/generate_bms_pcbway_package.py": "e92179c4e0ddd8406eece9fab6eadd533d6a28f889c666c582e145fa862a77ec",
+    "gen/bms_fabrication_geometry.py": "3bd3a610d6584bc2b8e38bf94c3de4801490047eb4944679e4389b030592e238",
+    "gen/bms_power_paths.py": "4313eefe4aa6e55b3ad9177f61980e0d1f62ae17bf241b19f26b29c577f9bde6",
+    "gen/check_release_candidate.py": "a85e8e2078610d499c3d61332af8410884f2417780bf70b95571baa6f535322e",
     "gen/report_schematic_pcb_eco.py": "5371b80838b7e22723c528abee462d7a962e235dc3c295edd76d94f77fd4b94c",
-    "gen/export_bms_assembly.py": "84ecd5d4c7e8be842f44bad4caa8b9179079254c69c50817a7ca138799797b30",
-    "gen/part_identity.py": "415e9c17d49fdbf58b4f9d575f84d86ebce97d7286b3e3efb9cdc91c9d325eba",
+    "gen/export_bms_assembly.py": "1f45068aff559380736b74d9794b0c2ebe5a35774f1966078b37e92d65c87d6f",
+    "gen/part_identity.py": "146aa6689c1f20ace55386bf23c01dd3a1760f0c691b4106ae08e0ef5a448720",
     "gen/requirements-bms-fabrication.txt": "7889aa641144e8653a86c18ee14b814af94beb75c637fe98431ac8c82d0815d5",
-    "manufacturing/bms/front-assembly.svg": "3d0d04dc5de5aaec63174bc7cdc20ed06f5d0cec51b460d456de5f5f1308d1af",
-    "manufacturing/bms/back-assembly.svg": "d7710859bc016af32ac95db86e1e0a60ea4486c4aa6a96e62bebb30d428cc138",
-    "manufacturing/bms/test-points.csv": "670d3ae61528f6f84f867545be971d52081c2a8ff932f80facf06dfbb74370c7",
-    "manufacturing/bms/assembly-source.json": "7d9592da0a847f0e7fb96ef7d1380d69c820c967383a4f86d8a51cb83c7b30ce",
-    "verification/bms-layout.json": "8e70a450926a96880335eacc1ad534188af31dc6fe9fae41c69d77d7ed7a3efb"
+    "firmware/bq76922/profile.json": "c04c1d7c36b4ef2c79b91b90333935355d67d64159d5e074e32eb1bcf97b70f7",
+    "firmware/bq76922/fixture_profile.py": "283e4dd729c81aa17efc1a2458207d33427eb04038f649d4f82746249fdfeedd",
+    "firmware/ec_target/bq76922_profile.c": "8340f0a3a0eeaecd7e0c787e48c4d822e3a310c218c955f377cb93d82f62079c",
+    "firmware/ec_target/bq76922_profile.h": "b90a95ecb68855461937b74dbff8df5fecce8e42fb4fde890c06305c853773a0",
+    "manufacturing/bms/front-assembly.svg": "34aff882c5d9ad8af0ffabed35b1dde6f07dfaf4a761ecaae0a61952850b4dc0",
+    "manufacturing/bms/back-assembly.svg": "381948c82b977603fdff1850432f115605f07d827f6f233297345b2593ce28df",
+    "manufacturing/bms/test-points.csv": "07601556cdeee5f5eea482e742b4da896f8e9fbb2342609e4e80682be747c646",
+    "manufacturing/bms/assembly-source.json": "4f438d61dc13a61a554224613e65e10c45633dd4a9600dea29583c2c919b7032",
+    "verification/bms-layout.json": "bd28b9be459a20d8d6864ec4ee36d4c6925244dd2fcf0bef167a270e96dd5e5a"
   },
-  "refilled_board_sha256": "ece7d61301e85f55131c5e5ac32d38a056413b9feabd4bf4709e727e82e22829",
-  "restored_warning_categories": [
-    "footprint_filters_mismatch",
-    "footprint_type_mismatch",
-    "missing_courtyard",
-    "track_not_centered_on_via",
-    "tuning_profile_track_geometries"
-  ],
+  "refilled_board_sha256": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+  "restored_warning_categories": [],
   "audit_minimums_mm": {
     "track": 0.1,
     "clearance": 0.1,
@@ -41,10 +40,7 @@
       "errors": 0,
       "unconnected": 0,
       "schematic_mismatches": 0,
-      "warnings": {
-        "track_not_centered_on_via": 19,
-        "lib_footprint_mismatch": 73
-      },
+      "warnings": {},
       "footprint_filter_warnings": [
         {
           "description": "ducktop2:Schurter_HCF_8.05x5mm doesn't match symbol's footprint filters (*Fuse*)",
@@ -52,10 +48,25 @@
             {
               "description": "Footprint F1",
               "pos": {
-                "x": 110.95,
-                "y": 82.15
+                "x": 153.5,
+                "y": 88.5
               },
-              "uuid": "1fe8d715-09c7-4716-8a3f-dab84860811e"
+              "uuid": "28bbacf4-acb4-53cb-a37a-3119fb29a47f"
+            }
+          ],
+          "severity": "warning",
+          "type": "footprint_filters_mismatch"
+        },
+        {
+          "description": "ducktop2:WAGO_2060_452_SMD doesn't match symbol's footprint filters (Connector*:*_1x??_*)",
+          "items": [
+            {
+              "description": "Footprint J2",
+              "pos": {
+                "x": 171.0,
+                "y": 80.0
+              },
+              "uuid": "11ea1bfa-ffcb-5df7-9c0e-a6ebe72ab8eb"
             }
           ],
           "severity": "warning",
@@ -67,10 +78,10 @@
             {
               "description": "Footprint J2072",
               "pos": {
-                "x": 140.15,
-                "y": 68.05
+                "x": 127.8,
+                "y": 65.5
               },
-              "uuid": "4caf133b-4791-4f71-a168-f4288591956c"
+              "uuid": "1fefa50c-d112-5c17-aafc-bbf1d7e4cd28"
             }
           ],
           "severity": "warning",
@@ -82,10 +93,7 @@
       "errors": 0,
       "unconnected": 0,
       "schematic_mismatches": 0,
-      "warnings": {
-        "track_not_centered_on_via": 19,
-        "lib_footprint_mismatch": 73
-      },
+      "warnings": {},
       "footprint_filter_warnings": [
         {
           "description": "ducktop2:Schurter_HCF_8.05x5mm doesn't match symbol's footprint filters (*Fuse*)",
@@ -93,10 +101,25 @@
             {
               "description": "Footprint F1",
               "pos": {
-                "x": 110.95,
-                "y": 82.15
+                "x": 153.5,
+                "y": 88.5
               },
-              "uuid": "1fe8d715-09c7-4716-8a3f-dab84860811e"
+              "uuid": "28bbacf4-acb4-53cb-a37a-3119fb29a47f"
+            }
+          ],
+          "severity": "warning",
+          "type": "footprint_filters_mismatch"
+        },
+        {
+          "description": "ducktop2:WAGO_2060_452_SMD doesn't match symbol's footprint filters (Connector*:*_1x??_*)",
+          "items": [
+            {
+              "description": "Footprint J2",
+              "pos": {
+                "x": 171.0,
+                "y": 80.0
+              },
+              "uuid": "11ea1bfa-ffcb-5df7-9c0e-a6ebe72ab8eb"
             }
           ],
           "severity": "warning",
@@ -108,10 +131,10 @@
             {
               "description": "Footprint J2072",
               "pos": {
-                "x": 140.15,
-                "y": 68.05
+                "x": 127.8,
+                "y": 65.5
               },
-              "uuid": "4caf133b-4791-4f71-a168-f4288591956c"
+              "uuid": "1fefa50c-d112-5c17-aafc-bbf1d7e4cd28"
             }
           ],
           "severity": "warning",
@@ -119,56 +142,107 @@
         }
       ]
     },
+    "all_physical_pads_checked": 608,
+    "electrical_pads_checked": 567,
+    "non_electrical_pad_objects_checked": 41,
     "native_airwires": 0,
     "library_pad_differences": [],
     "parity_passed": true,
     "erc_errors": 0,
     "erc_warnings": {
-      "lib_symbol_mismatch": 89,
-      "ground_pin_not_ground": 3
+      "ground_pin_not_ground": 2
     },
+    "erc_accepted_findings": [
+      {
+        "description": "Pin GND1 not connected to ground net",
+        "items": [
+          {
+            "description": "Symbol U2209 Pin 4 [GND1, Power input, Line]",
+            "pos": {
+              "x": 8.6995,
+              "y": 2.1844
+            },
+            "uuid": "f1d7b309-b10f-5b80-88e5-3e5ed03b2716"
+          }
+        ],
+        "severity": "warning",
+        "type": "ground_pin_not_ground"
+      },
+      {
+        "description": "Pin GND2 not connected to ground net",
+        "items": [
+          {
+            "description": "Symbol U2206 Pin 5 [GND2, Power input, Line]",
+            "pos": {
+              "x": 8.9027,
+              "y": 0.7112
+            },
+            "uuid": "080d08d6-d2f4-56df-924e-daa831f687d0"
+          }
+        ],
+        "severity": "warning",
+        "type": "ground_pin_not_ground"
+      }
+    ],
     "power_path_evidence_matches_geometry": true
   },
   "library_sha256": {
-    "Capacitor_SMD:C_0805_2012Metric": "62775a51fe74ba7f1b572de327bdbd3fc92582721b2abcaa47787865590d89cb",
-    "Capacitor_SMD:C_0603_1608Metric": "fe0dbfefbb181a0466f93a8de52d84ba7b00fcd9acdbb69575f4128a0af4e405",
-    "Package_SO:MSOP-10_3x3mm_P0.5mm": "c179dbee33613027667b07b4dba02648f193fc65f63616c9d73d6f1162c6bb9d",
-    "Resistor_SMD:R_0603_1608Metric": "7190ac4a00125b807e54129ef0d87d87f2a658eeb74d025a7028203419b09f23",
     "ducktop2:CSD18540Q5B_DNK": "11d28fb3aae1887806d62391f51cea28f91a04d940a895249343d24ead38376d",
-    "Package_TO_SOT_SMD:SOT-23-5": "455a3f7c3e5eb5b8847eaa5df23e18651e78ab9f75afd09a0883758a0d901761",
-    "ducktop2:Schurter_HCF_8.05x5mm": "f58487152627bf2a45787a9c98e8bc08f3205fb0249fb8da6e18ce2bce318111",
-    "TestPoint:TestPoint_Pad_1.5x1.5mm": "3bc6d5e42ac6570be508f2534022843f8bf6e4a94c2c0e3f784ba2aef27fcb90",
-    "Capacitor_SMD:C_0402_1005Metric": "0403382fc4583ed510b461b1fa4a36dfaec6f4c0d9b1a67e6b0027837a54e1b5",
-    "ducktop2:WAGO_2060_452_SMD": "d709e65b5a20c046e3e38736a66f6be4c596b6abf820f8ab7b7ccc9c0adbdddb",
-    "Connector_Molex:Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal": "b0a5b9ae879fad87f0d4e2e9aaad172e945fb05057c1dd249af52bd3786e2b22",
-    "Resistor_SMD:R_2512_6332Metric": "abab4bf8eeb3ed03061d8eeb56b542cdac074ce8a0ace0f9b06e933c0b48f297",
+    "Package_TO_SOT_SMD:SOT-353_SC-70-5": "869e17094994ff787b769a2d69512455a2f20950d59dd5c4103026ec413bb88e",
     "TestPoint:TestPoint_Pad_D1.0mm": "6d602c576b4ab0de29fa4cc096f419a62e828ba45ceee30c1263d86b420b2b12",
-    "Package_TO_SOT_SMD:SOT-23": "0d88c86c1b6d8c1aae4aa8c09386264c089d4451a128b6ccd63ed253f4300b15",
-    "Package_TO_SOT_SMD:SOT-363_SC-70-6": "0659d885e00b786968c3ba29152b808777240a91c1fb49ab8d814eb03530115c",
-    "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm": "951159bb3a87997ba4a4f14affd963324813db13d9426715b2a29388369d74ed",
-    "Resistor_SMD:R_0402_1005Metric": "e05c7605248c220836f642ed1f526133edf0374acdfd5bb2631e58b4e377acfb",
-    "Capacitor_SMD:C_1206_3216Metric": "b2e4a08e3aaf40bc587090190c0e3969e962d7ae962c172cce0581ae8327651c",
-    "Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal": "22e7d2c00d937d424a03ed2d4ecb415aece56e5f1fa150e772bf721794450719",
-    "Package_SO:QSOP-16_3.9x4.9mm_P0.635mm": "8e15c2265c1bf146931d275142279487d56188c2662616447564f9eb5c6387fd",
-    "Resistor_SMD:R_1206_3216Metric": "c7320668dc81bbb954cb4f15e4e7a766c120059343d43551468c8f7ccc8fde37",
-    "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm": "074ecb2092b24fa4b4b9cdd7c926fc587b0d7d6d21e7341e57935fd42d36894f",
-    "Package_SO:TSSOP-14_4.4x5mm_P0.65mm": "e4bf82cea6d3b3259ddf42469b1407628ad1181a28ae6f3f340190c0cca31ccd",
+    "Resistor_SMD:R_0603_1608Metric": "7190ac4a00125b807e54129ef0d87d87f2a658eeb74d025a7028203419b09f23",
+    "ducktop2:WAGO_2060_452_SMD": "d709e65b5a20c046e3e38736a66f6be4c596b6abf820f8ab7b7ccc9c0adbdddb",
+    "Capacitor_SMD:C_0603_1608Metric": "fe0dbfefbb181a0466f93a8de52d84ba7b00fcd9acdbb69575f4128a0af4e405",
     "Diode_SMD:D_SOD-323": "03669ee95335b8ad49c3458e5262e7c2fd7ace6fe481bfd00f46b6f2f32abc8a",
+    "ducktop2:Schurter_HCF_8.05x5mm": "f58487152627bf2a45787a9c98e8bc08f3205fb0249fb8da6e18ce2bce318111",
+    "Capacitor_SMD:C_0805_2012Metric": "62775a51fe74ba7f1b572de327bdbd3fc92582721b2abcaa47787865590d89cb",
+    "Diode_SMD:D_SOD-123": "fd16785935b01254e1076f490e12f0f096da73cf087adefce51225585c62557a",
+    "ducktop2:Bourns_CSS4J_4026_Kelvin": "9242268ffdd6c05a2f25531dc2e2e9047ab5e989c8ae3d0acd2fb2cbdab239ea",
+    "ducktop2:HTSSOP16_EP_ThermalVias": "bd833b3934d2060e2cd54fbf694360fba1b22352605c720db738c996a17901ec",
     "Connector_JST:JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal": "090e9bd7350aed224a938b922cc7d49020aa5235cc7e647a82cc3c08f37e881e",
-    "TestPoint:TestPoint_Pad_1.0x1.0mm": "23d45f5fca6994956d56fc13b34b6161edc3ec5adb33567cb8521e6554868643",
+    "Package_TO_SOT_SMD:SOT-23": "0d88c86c1b6d8c1aae4aa8c09386264c089d4451a128b6ccd63ed253f4300b15",
+    "Resistor_SMD:R_0402_1005Metric": "e05c7605248c220836f642ed1f526133edf0374acdfd5bb2631e58b4e377acfb",
+    "Package_TO_SOT_SMD:SOT-23-6": "f341c73aac9dcb553456f68bf3fee3d26eb14acf6d8a1cae82b50418fe1d71ca",
+    "Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal": "22e7d2c00d937d424a03ed2d4ecb415aece56e5f1fa150e772bf721794450719",
+    "Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal": "985f322473c9ef1ab4cf2fd290304dcf3a0c55c7bd7d65f9049b6b1bc3299670",
+    "Capacitor_SMD:C_1206_3216Metric": "b2e4a08e3aaf40bc587090190c0e3969e962d7ae962c172cce0581ae8327651c",
+    "Package_SO:VSSOP-8_3x3mm_P0.65mm": "0911222e671ec47304eb415d513b11545ee599b21052df7b00eb070f21d0911b",
     "Resistor_SMD:R_2010_5025Metric": "5bcbaf3a7798d3d1b8dd2bf0293dad98ef606efa5787149a542c5661c3a59725",
-    "ducktop2:TI_DCU0008A_VSSOP8": "ac2805836d829eb370db61e91d75ce8c2927f7ee0fa253d77810e84aca1aae5b"
+    "Package_SO:MSOP-10_3x3mm_P0.5mm": "c179dbee33613027667b07b4dba02648f193fc65f63616c9d73d6f1162c6bb9d",
+    "Package_TO_SOT_SMD:SOT-23-5": "455a3f7c3e5eb5b8847eaa5df23e18651e78ab9f75afd09a0883758a0d901761",
+    "Capacitor_SMD:C_0402_1005Metric": "0403382fc4583ed510b461b1fa4a36dfaec6f4c0d9b1a67e6b0027837a54e1b5",
+    "ducktop2:TI_DCU0008A_VSSOP8": "ac2805836d829eb370db61e91d75ce8c2927f7ee0fa253d77810e84aca1aae5b",
+    "ducktop2:TI_RSN0032B_WQFN32_4x4mm": "af443cf9b1d7d2c7b22c330ee1fe2a5081e7e8f92ffa0996ac325ef4c3e872a5",
+    "Package_SO:TSSOP-14_4.4x5mm_P0.65mm": "e4bf82cea6d3b3259ddf42469b1407628ad1181a28ae6f3f340190c0cca31ccd",
+    "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm": "074ecb2092b24fa4b4b9cdd7c926fc587b0d7d6d21e7341e57935fd42d36894f",
+    "Resistor_SMD:R_2512_6332Metric": "abab4bf8eeb3ed03061d8eeb56b542cdac074ce8a0ace0f9b06e933c0b48f297"
   },
   "assembly": {
-    "board_components": 125,
-    "smt_components": 124,
-    "through_hole_components": 1,
-    "unique_board_parts": 60,
+    "controller_profile": "BQ76922_2m_UNARMED_PROTOTYPE",
+    "unarmed_prototype": true,
+    "schematic_components": 204,
+    "onboard_footprints": 201,
+    "bare_test_points": 30,
+    "offboard_probes": [
+      "TH2201",
+      "TH2202",
+      "TH2203"
+    ],
+    "dnp_release_links": [
+      "R870",
+      "R871",
+      "R872"
+    ],
+    "board_components": 168,
+    "smt_components": 168,
+    "through_hole_components": 0,
+    "unique_board_parts": 74,
     "loose_fuses_per_board": 0,
-    "top_smt_components": 78,
-    "bottom_smt_components": 46,
-    "smt_pads": 381,
-    "soldered_through_holes": 4
+    "top_smt_components": 54,
+    "bottom_smt_components": 114,
+    "smt_pads": 516,
+    "footprint_thermal_holes": 15,
+    "soldered_through_holes": 0
   },
   "kicad_version": "10.0.4",
   "export_checker_versions": {
@@ -176,5 +250,28 @@
     "gerbonara": "1.6.3"
   },
   "order_submitted": false,
-  "hardware_testing": "pending"
+  "hardware_testing": "pending",
+  "assembly_state": "UNARMED_PROTOTYPE",
+  "operating_ready": false,
+  "programming": {
+    "part": "BQ76922RSNR",
+    "qualification": {
+      "monitor": false,
+      "otp": false,
+      "current_transfer": false,
+      "thermal_windows": false,
+      "cells": false,
+      "pack": false,
+      "gauge": false,
+      "charging": false,
+      "discharge": false
+    },
+    "released_for_ram_test": false,
+    "released_for_otp": false,
+    "released_for_assembly": false,
+    "calibration_qualified": false,
+    "recovery_charging_enabled": false,
+    "unit_factory_trim_capture_required": true,
+    "fixture_programming": "pending per-unit factory capture, RAM tests, OTP approval and CRC readback"
+  }
 }

@@ -39,8 +39,8 @@ with wires. their module bodies are not part of the center-board footprint.
 the floorplan positions remain a packaging sketch until the case mounts
 and cable routes are set.
 
-the BMS is 61.9 x 36.148 mm at its widest bounds. its
-installed outline spans x=154.05 to x=215.95 and y=150.2 to y=186.348,
+the BMS is 80 x 36.148 mm at its widest bounds. its
+installed outline spans x=145 to x=225 and y=150.2 to y=186.348,
 centered at x=185. the small rear extension is tapered. the center board's
 notch is already set for it, with its back at y=148.7, 1.5 mm inside radii,
 and 1.5 mm board clearance. the battery row stays at y=188. this outline is
@@ -48,10 +48,10 @@ in the saved, routed BMS board. the two middle holes were removed for routing;
 the four perimeter supports remain.
 
 the BMS keeps its own mounting points and needs chassis support. the center
-board's H24 moved to (149,148), outside the notch. H22 is now (105,70).
+board's H24 moved to (156.75,145.5), outside the notch. H22 is at (105,70).
 the BMS file uses its original coordinates; the installed translation is
 (+47.35,+91.448), with no rotation. the main component side faces up;
-the isolated-control and raw-probe connectors face down. include their
+all five cable connectors face up. include their
 housings and wire bends below the board. all four BMS supports and fasteners
 must be insulating so they cannot bridge its separate ground domains.
 
@@ -151,6 +151,12 @@ boss geometry, fastening access and electrical isolation in the chassis model.
 the BMS mounting circles are Edge.Cuts geometry. their installed centers are
 in `mechanical/board-datums.json`. radio H1-H4 are (24,24), (136,24), (24,86), and (136,86)
 in the radio frame; they are different parts from center H1-H4.
+
+the wider BMS moves the two left supports 9.05 mm left and the two right
+supports 9.05 mm right. their installed centers are (147.229309,156.248),
+(147.2,163.498), (222.7,156.148) and (223.05,182.398). the circular cutouts
+are about 3.04 mm across. update the case opening and supports from the
+current datum file before printing the case study.
 
 ## cables and access
 

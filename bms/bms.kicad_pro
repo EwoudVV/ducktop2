@@ -43,11 +43,11 @@
           "height": 1.27,
           "width": 1.27
         },
-        "silk_line_width": 0.1,
+        "silk_line_width": 0.15,
         "silk_text_italic": false,
         "silk_text_size_h": 1.0,
         "silk_text_size_v": 1.0,
-        "silk_text_thickness": 0.1,
+        "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
           "border_display_style": 2,
@@ -94,10 +94,10 @@
         "duplicate_footprints": "warning",
         "extra_footprint": "warning",
         "footprint": "error",
-        "footprint_filters_mismatch": "ignore",
+        "footprint_filters_mismatch": "warning",
         "footprint_symbol_field_mismatch": "warning",
         "footprint_symbol_mismatch": "warning",
-        "footprint_type_mismatch": "ignore",
+        "footprint_type_mismatch": "warning",
         "hole_clearance": "error",
         "hole_to_hole": "warning",
         "holes_co_located": "warning",
@@ -111,7 +111,7 @@
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
         "mirrored_text_on_front_layer": "warning",
-        "missing_courtyard": "ignore",
+        "missing_courtyard": "warning",
         "missing_footprint": "warning",
         "missing_tuning_profile": "warning",
         "net_conflict": "warning",
@@ -133,12 +133,12 @@
         "too_many_vias": "error",
         "track_angle": "error",
         "track_dangling": "warning",
-        "track_not_centered_on_via": "ignore",
+        "track_not_centered_on_via": "warning",
         "track_on_post_machined_layer": "error",
         "track_segment_length": "error",
         "track_width": "error",
         "tracks_crossing": "error",
-        "tuning_profile_track_geometries": "ignore",
+        "tuning_profile_track_geometries": "warning",
         "unconnected_items": "error",
         "unresolved_variable": "error",
         "via_dangling": "warning",
@@ -157,7 +157,7 @@
         "min_resolved_spokes": 2,
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
-        "min_text_thickness": 0.08,
+        "min_text_thickness": 0.15,
         "min_through_hole_diameter": 0.2,
         "min_track_width": 0.1,
         "min_via_annular_width": 0.15,
@@ -453,24 +453,68 @@
     "netclass_assignments": null,
     "netclass_patterns": [
       {
-        "netclass": "POWER_MID",
-        "pattern": "/MCU_3V3"
+        "netclass": "BMS_LOGIC",
+        "pattern": "/BQ_*"
       },
       {
-        "netclass": "POWER_HI",
-        "pattern": "/PACK_POS_FUSED"
+        "netclass": "BMS_LOGIC",
+        "pattern": "/BMS_*"
       },
       {
-        "netclass": "POWER_HI",
-        "pattern": "/PACK_NEG_RAW"
+        "netclass": "BMS_LOGIC",
+        "pattern": "/THERM_*"
       },
       {
-        "netclass": "POWER_HI",
-        "pattern": "/FG_VSS"
+        "netclass": "BMS_LOGIC",
+        "pattern": "/PDSG_*"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/CURRENT_*"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/CTRL_*"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/ISO_CTRL_*"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/PACK_I2C_*"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/PACK_MONITOR_*"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/MCU_*"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/CHG_GATE"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/DSG_GATE"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/CHG_DRV_RELEASED"
+      },
+      {
+        "netclass": "BMS_LOGIC",
+        "pattern": "/DSG_DRV_RELEASED"
       },
       {
         "netclass": "POWER_HI",
         "pattern": "/PACK_POS_RAW"
+      },
+      {
+        "netclass": "POWER_HI",
+        "pattern": "/PACK_NEG_RAW"
       },
       {
         "netclass": "POWER_HI",
@@ -482,167 +526,11 @@
       },
       {
         "netclass": "POWER_HI",
-        "pattern": "/BMS_FET_COMMON"
+        "pattern": "/PACK_POS_FUSED"
       },
       {
         "netclass": "POWER_HI",
-        "pattern": "FG_VSS"
-      },
-      {
-        "netclass": "POWER_HI",
-        "pattern": "/BAT_PROT_SENSE"
-      },
-      {
-        "netclass": "POWER_HI",
-        "pattern": "/BMS_SENSE_N"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/CTRL_3V3"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/CTRL_FAULT_LOCAL_N"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/CTRL_GND"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/CTRL_RETRY_IN"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PACK_CHG_TEMP_OK"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PACK_FAULT_N"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PACK_PROTECT_OK"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PACK_RETRY_LOCAL"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PACK_RETRY_LOCAL_GATE"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PACK_RETRY_PULSE"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PROT_CTRL_3V3"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PROT_CTRL_FEED"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/PROT_CTRL_IN"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_3V3"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_CHG_COLD_REF"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_CHG_GATE"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_CHG_HEALTH"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_CHG_HEALTH_ISO"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_CHG_HOT_REF"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_CHG_PERMIT"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_DSG_COLD_REF"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_DSG_GATE"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_DSG_HEALTH"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_DSG_HEALTH_ISO"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_DSG_HOT_REF"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_DSG_PERMIT"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_READY"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_SENSE_1"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_SENSE_2"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/THERM_SENSE_3"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/BMS_RAW_KELVIN"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/BMS_FET_KELVIN"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/BMS_OC_DSG_LIMIT"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/BMS_OC_DSG_LIMIT_MID"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/BMS_OC_CHG_LIMIT"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/RAW_RETRY"
-      },
-      {
-        "netclass": "BMS_LOGIC",
-        "pattern": "/RAW_RETRY_GATE"
+        "pattern": "/FG_VSS"
       }
     ]
   },

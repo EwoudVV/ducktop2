@@ -77,7 +77,7 @@ need checking. see [power revision status](power-revision.md) and
 
 | connection | ends | construction |
 | --- | --- | --- |
-| protected pack power | center J2071 to BMS J2072 | WAGO 2060-452/998-404 terminals, Alpha 6715 18 AWG; 90 mm wire budget |
+| protected pack power | center J2071 to BMS J2072 | WAGO 2060-452/998-404 terminals, Alpha 6715 18 AWG; 120 mm wire budget |
 | isolated control | center J2073 to BMS J2074 | JST SM05B-SRSS-TB headers, SHR-05V-S housings, SSH-003T-P0.2-H contacts; five wires |
 | cell temperature probes | BMS J2200 to three insulated probes | JST SM06B-SRSS-TB header; three separate wire pairs to SEMITEC 104JT-025 probes |
 
@@ -89,10 +89,10 @@ the control cable is also straight-numbered:
 
 | pin | connection |
 | ---: | --- |
-| 1 | PACK_FAULT_N |
-| 2 | PACK_RETRY_PULSE |
+| 1 | PACK_MONITOR_READY |
+| 2 | I2C_SCL, called PACK_I2C_SCL on the BMS |
 | 3 | MCU_3V3 |
-| 4 | PACK_CHG_TEMP_OK |
+| 4 | I2C_SDA, called PACK_I2C_SDA on the BMS |
 | 5 | center GND to the BMS CTRL_GND island |
 
 CTRL_GND is isolated from FG_VSS and raw pack negative on the BMS. do not
@@ -100,11 +100,15 @@ add a ground bridge between those domains. the temperature probes and
 J2200 hold-downs are raw-pack referenced; they do not get a system-ground
 wire. J2200 pairs 1/2, 3/4, and 5/6 serve cells 1, 2, and 3.
 
-J2 is now the four-contact Molex 43045-0400, with a 43025-0400 housing
-and 43030-0038 tin contacts for 18 AWG wire. its new map is 1 raw negative,
-2 cell 2 tap, 3 raw positive and 4 cell 1 tap. the old six-wire harness
-does not match this revision. cell taps stay on the BMS. all routes need to
-include the actual plugs, wire exits, bend clearance, and insulating supports.
+on the replacement BMS, J2 is a two-contact WAGO 2060-452/998-404:
+pin 1 is raw negative and pin 2 is raw positive. the top-side + and - marks
+match this outward-facing terminal. cell taps use J2201,
+a separate JST GH SM02B-GHS-TB header: pin 1 is cell 1 and pin 2 is cell 2.
+the previous four-contact raw-pack cable does not match this board.
+all five BMS cable connectors are on top. J2 and J2201 face the right edge;
+J2072, J2074 and J2200 face the rear edge.
+cell taps stay on the BMS. all routes need to include the wire exits,
+bend clearance, strain relief and insulating supports.
 
 ## other internal cables
 

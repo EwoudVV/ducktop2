@@ -1,422 +1,221 @@
 {
-  "checked_on": "2026-09-29",
+  "checked_on": "2026-10-05",
   "board": "bms/bms.kicad_pcb",
   "working_tree": true,
-  "base_commit": "124b22d",
   "source_sha256": {
-    "bms/bms.kicad_pcb": "ece7d61301e85f55131c5e5ac32d38a056413b9feabd4bf4709e727e82e22829",
-    "bms/bms.kicad_sch": "d96a0472e10226dd94a3c8007cf3f09b1b3a6c3e093a83d6e0393a8648b76d8c",
-    "bms/bms.kicad_pro": "cc6ac996a9e9c80cd246ee780557ad5d197457eee5ed7cc6eaf912082392db82",
-    "bms/bms.kicad_dru": "37bf5785744034ada850286953d1156b3af6458e2f49bbe53890e8af50aab2ba"
+    "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+    "bms/bms.kicad_sch": "bd1b39b98aad4f32cb30e90ea191e4a0205b433bdf6e78ba1d97e1aaf3e6a8fb",
+    "bms/bms.kicad_pro": "c63cbe90816e1ae51db87eb78e0676f713a7e2cd124d67049aa7d12d0c2e54fe",
+    "bms/bms.kicad_dru": "008961be5c285ad7185c2c6d38d4f5f8d4c9bc5c0f290fc2f74f12414653738d"
   },
-  "manufacturing_geometry_sha256": "8d8cc2d3ef48928958896763a43d48ac66ef3850b79629f8522047169fa6ca4a",
+  "manufacturing_geometry_sha256": "5135b8fbece2be8b78c2d5b3c454a6aefff6e61fb5d522129eb1f51566c577e4",
   "native_counts": {
     "native_airwires": 0,
     "copper_layers": 4,
-    "footprints": 149,
-    "tracks": 2187,
-    "vias": 398,
-    "perimeter_holes": 4,
+    "footprints": 201,
+    "tracks": 2100,
+    "vias": 280,
     "thickness_mm": 1.6
   },
   "drc": {
     "errors": 0,
     "unconnected": 0,
     "schematic_mismatches": 0,
-    "warnings": {
-      "lib_footprint_mismatch": 73
-    }
+    "warnings": {},
+    "footprint_filter_warnings": [
+      {
+        "description": "ducktop2:Schurter_HCF_8.05x5mm doesn't match symbol's footprint filters (*Fuse*)",
+        "items": [
+          {
+            "description": "Footprint F1",
+            "pos": {
+              "x": 153.5,
+              "y": 88.5
+            },
+            "uuid": "28bbacf4-acb4-53cb-a37a-3119fb29a47f"
+          }
+        ],
+        "severity": "warning",
+        "type": "footprint_filters_mismatch"
+      },
+      {
+        "description": "ducktop2:WAGO_2060_452_SMD doesn't match symbol's footprint filters (Connector*:*_1x??_*)",
+        "items": [
+          {
+            "description": "Footprint J2",
+            "pos": {
+              "x": 167.85,
+              "y": 80.0
+            },
+            "uuid": "11ea1bfa-ffcb-5df7-9c0e-a6ebe72ab8eb"
+          }
+        ],
+        "severity": "warning",
+        "type": "footprint_filters_mismatch"
+      },
+      {
+        "description": "ducktop2:WAGO_2060_452_SMD doesn't match symbol's footprint filters (Connector*:*_1x??_*)",
+        "items": [
+          {
+            "description": "Footprint J2072",
+            "pos": {
+              "x": 124.0,
+              "y": 68.0
+            },
+            "uuid": "1fefa50c-d112-5c17-aafc-bbf1d7e4cd28"
+          }
+        ],
+        "severity": "warning",
+        "type": "footprint_filters_mismatch"
+      }
+    ]
   },
   "erc": {
     "errors": 0,
     "warnings": {
-      "lib_symbol_mismatch": 89,
-      "ground_pin_not_ground": 3
-    }
+      "ground_pin_not_ground": 2
+    },
+    "accepted_findings": [
+      {
+        "description": "Pin GND1 not connected to ground net",
+        "items": [
+          {
+            "description": "Symbol U2209 Pin 4 [GND1, Power input, Line]",
+            "pos": {
+              "x": 8.6995,
+              "y": 2.1844
+            },
+            "uuid": "f1d7b309-b10f-5b80-88e5-3e5ed03b2716"
+          }
+        ],
+        "severity": "warning",
+        "type": "ground_pin_not_ground"
+      },
+      {
+        "description": "Pin GND2 not connected to ground net",
+        "items": [
+          {
+            "description": "Symbol U2206 Pin 5 [GND2, Power input, Line]",
+            "pos": {
+              "x": 8.9027,
+              "y": 0.7112
+            },
+            "uuid": "080d08d6-d2f4-56df-924e-daa831f687d0"
+          }
+        ],
+        "severity": "warning",
+        "type": "ground_pin_not_ground"
+      }
+    ]
+  },
+  "pin_and_library_parity": {
+    "all_physical_pads_checked": 608,
+    "electrical_pads_checked": 567,
+    "non_electrical_pad_objects_checked": 41,
+    "native_airwires": 0
   },
   "library_pad_differences": [],
-  "preservation": {
-    "footprint_positions_preserved": true,
-    "models_preserved": true,
-    "board_outline_and_drawings_preserved": true,
-    "footprints": 149,
-    "footprint_pads_and_drills_preserved": true,
-    "via_diameters_and_drills_preserved": true,
-    "via_positions_changed": 2,
-    "all_existing_copper_net_assignments_preserved": true,
-    "rs10_order_code_correction": {
-      "bms/bms.kicad_pcb": {
-        "before": "dd0d244608b01ecec602c5e30e3cf1c5987f215a33f1e3862c92a7cc359d7a74",
-        "after": "ece7d61301e85f55131c5e5ac32d38a056413b9feabd4bf4709e727e82e22829",
-        "only_change": "RS10 MPN WSLP2512R0110FEA to WSL2512R0110FEA18"
+  "power_paths": {
+    "paths": {
+      "PACK_POS_RAW": {
+        "minimum_width_mm": 2.8,
+        "sampled_width_mm": 2.833989268377761,
+        "continuous_front_copper": true
       },
-      "bms/bms.kicad_sch": {
-        "before": "495334993aa6a3bda606b0a04b52b351ae8bb6a85379688e7cd1fec76eaebb11",
-        "after": "d96a0472e10226dd94a3c8007cf3f09b1b3a6c3e093a83d6e0393a8648b76d8c",
-        "only_change": "RS10 MPN WSLP2512R0110FEA to WSL2512R0110FEA18"
+      "BAT_PROT_VIN": {
+        "minimum_width_mm": 3,
+        "sampled_width_mm": 3.0,
+        "continuous_front_copper": true
       },
-      "land_review": {
-        "terminal_overlap_min_mm": [
-          0.508,
-          2.926
-        ],
-        "assembly_offset_screen_mm": 0.125,
-        "source": "https://www.vishay.com/doc?31057",
-        "note": "existing lands retain terminal overlap; factory assembly review remains required; copper is unchanged"
+      "PACK_POS_FUSED": {
+        "minimum_width_mm": 3,
+        "sampled_width_mm": 3.0610473102715616,
+        "continuous_front_copper": true
+      },
+      "PACK_NEG_RAW": {
+        "minimum_width_mm": 6.25,
+        "sampled_width_mm": 6.256480879173627,
+        "continuous_front_copper": true
+      },
+      "FG_VSS": {
+        "minimum_width_mm": 3,
+        "sampled_width_mm": 3.0999995240429894,
+        "continuous_front_copper": true
+      },
+      "BAT_PROT_FET_COMMON": {
+        "minimum_width_mm": 5,
+        "sampled_width_mm": 5.0,
+        "continuous_front_copper": true
       }
-    }
-  },
-  "quiet_return": {
-    "connected_groups": 1,
-    "star_cut_groups": 2,
-    "quiet_matches": true,
-    "quiet_pads": 48,
-    "bulk": [
-      [
-        "C2230",
-        "2"
-      ],
-      [
-        "J2",
-        "1"
-      ],
-      [
-        "R2235",
-        "2"
-      ],
-      [
-        "R845",
-        "1"
-      ],
-      [
-        "RS11",
-        "1"
-      ],
-      [
-        "U2204",
-        "2"
-      ]
-    ]
-  },
-  "positive_shunt_pickup_offset_v_at_5_6a": 0.0,
-  "power_screen": {
-    "source_sha256": "dd0d244608b01ecec602c5e30e3cf1c5987f215a33f1e3862c92a7cc359d7a74",
-    "scope": "PCB copper only; fixed terminal potentials; isolated portions of a common connector terminal carry zero model current; connector and component resistance excluded; no temperature rise simulation",
-    "paths": [
-      {
-        "net": "/PACK_POS_RAW",
-        "mesh_mm": 0.1,
-        "nodes": 38985,
-        "resistance_ohm_20c": 0.030336128443093906,
-        "resistance_ohm_80c": 0.03748938752997545,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "J2.3"
-        ],
-        "target_pads": [
-          "F1.1"
-        ],
-        "solver_residual_a_at_1v": 7.736653902330563e-12,
-        "seconds": 0.1696389580029063,
-        "loss_w_80c_at_3a": 0.33740448776977905,
-        "loss_w_80c_at_4.5a": 0.7591600974820029,
-        "loss_w_80c_at_5.6a": 1.17566719294003,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "F1.1": 0.0,
-          "J2.3": 0.16988231928868866,
-          "R844.1": 0.16599070419021028,
-          "TPB1.1": 0.16988231928860612,
-          "R840.1": 0.004961963156731717,
-          "R852.1": 0.12752447711299625
-        },
-        "status": "estimated"
-      },
-      {
-        "net": "/BAT_PROT_VIN",
-        "mesh_mm": 0.1,
-        "nodes": 18648,
-        "resistance_ohm_20c": 0.0054081131811341675,
-        "resistance_ohm_80c": 0.006683346269245605,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "F1.2"
-        ],
-        "target_pads": [
-          "Q11.5"
-        ],
-        "solver_residual_a_at_1v": 3.937549393006377e-12,
-        "seconds": 0.11061491699365433,
-        "loss_w_80c_at_3a": 0.06015011642321044,
-        "loss_w_80c_at_4.5a": 0.1353377619522235,
-        "loss_w_80c_at_5.6a": 0.20958973900354214,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "U11.1": 0.0015434338970771568,
-          "Q11.5": 0.0,
-          "F1.2": 0.03028543381443735,
-          "TPB2.1": 0.0015434338971035935,
-          "R700.1": 0.0015434338970772156,
-          "R707.1": 0.0015434338970799558
-        },
-        "status": "estimated"
-      },
-      {
-        "net": "/BAT_PROT_FET_COMMON",
-        "mesh_mm": 0.1,
-        "nodes": 26843,
-        "resistance_ohm_20c": 0.00788261301186852,
-        "resistance_ohm_80c": 0.009741333160067117,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "Q11.1",
-          "Q11.2",
-          "Q11.3"
-        ],
-        "target_pads": [
-          "Q12.1",
-          "Q12.2",
-          "Q12.3"
-        ],
-        "solver_residual_a_at_1v": 4.923459231226406e-12,
-        "seconds": 0.10026449999713805,
-        "loss_w_80c_at_3a": 0.08767199844060405,
-        "loss_w_80c_at_4.5a": 0.19726199649135912,
-        "loss_w_80c_at_5.6a": 0.30548820789970477,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "Q11.1": 0.04414263286660562,
-          "Q11.2": 0.04414263286660562,
-          "Q11.3": 0.04414263286660562,
-          "TPB4.1": 0.04362169403411737,
-          "Q12.1": 0.0,
-          "Q12.2": 0.0,
-          "Q12.3": 0.0,
-          "C724.2": 0.043852647059816376
-        },
-        "status": "estimated"
-      },
-      {
-        "net": "/BAT_PROT_SENSE",
-        "mesh_mm": 0.1,
-        "nodes": 25765,
-        "resistance_ohm_20c": 0.01658364481470044,
-        "resistance_ohm_80c": 0.020494068262006806,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "Q12.5"
-        ],
-        "target_pads": [
-          "RS10.1"
-        ],
-        "solver_residual_a_at_1v": 5.237968843566184e-12,
-        "seconds": 0.1349294590036152,
-        "loss_w_80c_at_3a": 0.18444661435806126,
-        "loss_w_80c_at_4.5a": 0.4150048823056378,
-        "loss_w_80c_at_5.6a": 0.6426939806965334,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "U11.9": 0.0,
-          "RS10.1": 0.0,
-          "Q12.5": 0.09286841096413934
-        },
-        "status": "estimated"
-      },
-      {
-        "net": "/PACK_POS_FUSED",
-        "mesh_mm": 0.1,
-        "nodes": 22307,
-        "resistance_ohm_20c": 0.012380789719818139,
-        "resistance_ohm_80c": 0.015300179935751257,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "RS10.2"
-        ],
-        "target_pads": [
-          "J2072.1"
-        ],
-        "solver_residual_a_at_1v": 5.5630424253675144e-12,
-        "seconds": 0.14828437499818392,
-        "loss_w_80c_at_3a": 0.13770161942176132,
-        "loss_w_80c_at_4.5a": 0.30982864369896296,
-        "loss_w_80c_at_5.6a": 0.47981364278515937,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "U11.8": 0.06933242243128926,
-          "J2072.1": 0.0,
-          "C725.1": 0.026708271547478582,
-          "TPB3.1": 0.01599800066212028,
-          "RS10.2": 0.06933242243187321
-        },
-        "status": "estimated"
-      },
-      {
-        "net": "/PACK_NEG_RAW",
-        "mesh_mm": 0.1,
-        "nodes": 51579,
-        "resistance_ohm_20c": 0.013526263707189875,
-        "resistance_ohm_80c": 0.016715756689345246,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "J2.1"
-        ],
-        "target_pads": [
-          "RS11.1"
-        ],
-        "solver_residual_a_at_1v": 6.090739789158641e-12,
-        "seconds": 0.4329817079997156,
-        "loss_w_80c_at_3a": 0.1504418102041072,
-        "loss_w_80c_at_4.5a": 0.3384940729592412,
-        "loss_w_80c_at_5.6a": 0.5242061297778668,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "R845.1": 0.0,
-          "C845.2": 0.06578228220648978,
-          "R854.2": 0.06578228220856648,
-          "J2.1": 0.07574707676282891,
-          "RS11.1": 0.0,
-          "C2230.2": 0.021795853983474615,
-          "C847.2": 0.06578228220657008,
-          "C841.2": 0.06578228220655424,
-          "Q2201.2": 0.06578228220510907,
-          "U719.9": 0.06578228220734134,
-          "U719.16": 0.06578228220802523,
-          "U719.20": 0.0657822822077946,
-          "R2235.2": 0.021795853983426518,
-          "C840.2": 0.06578228220655603
-        },
-        "status": "estimated"
-      },
-      {
-        "net": "/BMS_SENSE_N",
-        "mesh_mm": 0.1,
-        "nodes": 1271,
-        "resistance_ohm_20c": 0.0020090769160926885,
-        "resistance_ohm_80c": 0.0024828172529073444,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "RS11.2"
-        ],
-        "target_pads": [
-          "Q703.1",
-          "Q703.2",
-          "Q703.3"
-        ],
-        "solver_residual_a_at_1v": 3.0652976143187437e-12,
-        "seconds": 0.004328625000198372,
-        "loss_w_80c_at_3a": 0.0223453552761661,
-        "loss_w_80c_at_4.5a": 0.05027704937137372,
-        "loss_w_80c_at_5.6a": 0.0778611490511743,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "R849.2": 0.0026255278038401,
-          "Q703.1": 0.0,
-          "Q703.2": 0.0,
-          "Q703.3": 0.0,
-          "RS11.2": 0.011250830730120003,
-          "R846.1": 0.011250830730119354
-        },
-        "status": "estimated"
-      },
-      {
-        "net": "/BMS_FET_COMMON",
-        "mesh_mm": 0.1,
-        "nodes": 10744,
-        "resistance_ohm_20c": 0.01042695379387106,
-        "resistance_ohm_80c": 0.012885629498465856,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "Q703.5"
-        ],
-        "target_pads": [
-          "Q704.5"
-        ],
-        "solver_residual_a_at_1v": 4.2048368146662865e-12,
-        "seconds": 0.023264957999344915,
-        "loss_w_80c_at_3a": 0.11597066548619271,
-        "loss_w_80c_at_4.5a": 0.2609339973439336,
-        "loss_w_80c_at_5.6a": 0.4040933410718892,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "Q703.5": 0.058390941245924,
-          "Q704.5": 0.0
-        },
-        "status": "estimated"
-      },
-      {
-        "net": "FG_VSS",
-        "mesh_mm": 0.1,
-        "nodes": 107199,
-        "resistance_ohm_20c": 0.0022631555384490173,
-        "resistance_ohm_80c": 0.0027968076144152957,
-        "copper_um": 35,
-        "plating_um": 20,
-        "source_pads": [
-          "Q704.1",
-          "Q704.2",
-          "Q704.3"
-        ],
-        "target_pads": [
-          "J2072.2"
-        ],
-        "solver_residual_a_at_1v": 4.230567316752521e-12,
-        "seconds": 0.5665584999951534,
-        "loss_w_80c_at_3a": 0.02517126852973766,
-        "loss_w_80c_at_4.5a": 0.05663535419190974,
-        "loss_w_80c_at_5.6a": 0.08770788678806365,
-        "pad_voltage_relative_to_target_v_at_5.6a": {
-          "C2253.2": 0.0,
-          "U11.4": 0.001269767029276576,
-          "U11.5": 0.001269767029276571,
-          "U2208.2": 0.0,
-          "R709.2": 0.001269766606910923,
-          "C700.2": 0.0012697667963755728,
-          "J2072.2": 0.0,
-          "C725.2": 0.0,
-          "Q704.1": 0.012673671015319646,
-          "Q704.2": 0.012673671015319646,
-          "Q704.3": 0.012673671015319646,
-          "TPB16.1": 0.0,
-          "R850.2": 0.012673640763466217,
-          "C2254.2": 0.0,
-          "R851.2": 0.0,
-          "R702.2": 0.0020425069916809343
-        },
-        "status": "estimated"
-      }
-    ]
+    },
+    "return_domain_overlap_mm2": 0,
+    "isolator_barrier_overlap_mm2": 0,
+    "current_and_temperature_testing": "required on the finished board"
   },
   "cleanup": {
-    "tracks_before": 2812,
-    "tracks_after": 2184,
-    "vias_before": 403,
-    "vias_after": 398,
-    "label_moves": 9,
-    "component_positions_changed": 0,
-    "dangling_track_warnings": 0,
-    "dangling_via_warnings": 0,
-    "copper_sliver_warnings": 0,
-    "silkscreen_warnings": 0
+    "exact_duplicate_tracks_removed": 84,
+    "dangling_tracks": 0,
+    "dangling_vias": 0
   },
-  "manufacturing_status": "see manufacturing/bms/pcbway/manifest.json for the current package checks",
-  "manufacturing_geometry_schema": "native-edge-primitives-v2",
-  "assembly_mask_check": {
-    "moved_vias": {
-      "acb25872-dcc8-4ae9-8493-cedac56cf436": [
-        140.2805,
-        67.55
-      ],
-      "ef23c7e1-1237-45b6-8a15-d9a2f4fe497c": [
-        139.35,
-        68.8
-      ]
-    },
-    "added_short_tracks": 3,
-    "changed_tracks": [
-      "dd0d1887-9fe3-42ca-b8a2-c38dc4acce83",
-      "003ca904-c84d-46c7-9fe4-dd03e89f4b4f"
+  "prototype": {
+    "state": "unarmed",
+    "discharge_target_a": 8,
+    "charge_target_a": 3,
+    "release_links_not_fitted": [
+      "R870",
+      "R871",
+      "R872"
     ],
-    "exposed_via_holes": 0,
-    "via_holes_exposed_by_0_05mm_mask_shift": 0
+    "physical_current_temperature_tests": "required",
+    "cell_and_harness_qualification": "required",
+    "order_submitted": false
+  },
+  "connectors": {
+    "J2": {
+      "position_mm": [
+        171.0,
+        80.0
+      ],
+      "rotation_deg": -90.0,
+      "side": "F.Cu"
+    },
+    "J2072": {
+      "position_mm": [
+        127.8,
+        65.5
+      ],
+      "rotation_deg": 0.0,
+      "side": "F.Cu"
+    },
+    "J2200": {
+      "position_mm": [
+        137.3,
+        62.05
+      ],
+      "rotation_deg": 180.0,
+      "side": "F.Cu"
+    },
+    "J2074": {
+      "position_mm": [
+        109.0,
+        62.5
+      ],
+      "rotation_deg": 180.0,
+      "side": "F.Cu"
+    },
+    "J2201": {
+      "position_mm": [
+        174.15,
+        71.2
+      ],
+      "rotation_deg": 90.0,
+      "side": "F.Cu"
+    }
+  },
+  "battery_terminal": {
+    "reference": "J2",
+    "pin_1": "PACK_NEG_RAW",
+    "pin_2": "PACK_POS_RAW",
+    "top_polarity_marks": true
   }
 }

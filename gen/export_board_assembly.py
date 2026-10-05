@@ -136,7 +136,10 @@ for name, spec in config["boards"].items():
                     bounds.extend(points)
                     dash = ' stroke-dasharray=".7 .5"' if side == "back" else ''
                     svg.append(f'<path d="{path_text(points)}" fill="#ffffff" fill-opacity=".34" stroke="#658875" stroke-width=".15"{dash}/>')
+            fields = {field.GetName(): field.GetText() for field in footprint.GetFields()}
             entries.append({"reference": ref, "position": pos,
+                            "footprint": str(footprint.GetFPID().GetLibNickname()) + ":" + str(footprint.GetFPID().GetLibItemName()),
+                            "manufacturer_part_number": fields.get("MPN", ""),
                             "rotation": (footprint.GetOrientationDegrees()+spec["rotation"]) % 360,
                             "side": "back" if footprint.GetLayer()==pcb.B_Cu else "front",
                             "courtyard": bounds, "courtyards": courtyards})

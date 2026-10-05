@@ -5,6 +5,25 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-05: finish the new bms layout
+
+**Total time spent: 5 hours**
+
+finished the new bms layout! the old 3a limit was too restrictive for the mu ultra, so this version is designed around 8a discharge and up to 3a charging. i switched to the bq76922, used a single 2 milliohm shunt with separate sensing contacts, and reworked the startup circuit. there are separate charge and discharge current limits, plus temperature sensing for all three cells.
+
+fitting it all meant widening the bms to 80 mm and using both sides for the smaller parts. i finished the routing on four layers, cleaned up duplicate tracks and unused ends, and made the main power pours wider. the current-sense connections stay separate from the heavy battery-current paths. i also widened the center-board cutout and moved its nearby mounting point to keep the 1.5 mm gaps around the bms.
+
+i moved all five cable connectors to the top so they are easier to reach. the battery power and cell taps now face the right edge, while the protected output, control cable and temperature probes face the rear edge. that needed some more rerouting, a capacitor move and a couple of test-point moves. turning the battery terminal around also swapped its pin positions, so i updated the schematic, wiring notes and printed polarity marks together.
+
+worked out new power-wire paths around the connectors and nearby parts. the two bms leads come out to about 109 mm and 106 mm, with enough room for their bends. the first route clipped a tall capacitor, so i changed the loop until it cleared the parts and other wires. i also checked the plug-removal space and wrote down the screw-head clearance needed next to the control connector.
+
+added firmware support for the new monitor, including cell-voltage limits, charge termination and handling bad or missing readings. also corrected the keyboard rgb buffer's 3.3v and 5v connections while keeping the switch and led routing.
+
+the saved bms now has zero unconnected items and zero physical drc errors. the schematic connections, footprints and all six main power paths check out too. rebuilt the pcbway files, bom, placements and assembly drawings from that board. the first assembly leaves three drive links out so i can configure it and test startup, current limiting and fault shutdown before connecting the battery pack.
+
+![bms front with the connectors on top](docs/images/journal/2026-10-05-bms-front.png)
+![bms back after routing](docs/images/journal/2026-10-05-bms-back.png)
+
 # 2026-10-2: start reworking the bms for more battery power
 
 **Total time spent: 4 hours**

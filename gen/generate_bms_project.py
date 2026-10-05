@@ -1,292 +1,49 @@
 #!/usr/bin/env python3
-"""Generate the Battery BMS board project (ducktop2 board split, Phase 2.3).
-
-BMS board (on the pack, MacBook-style): J2 pack connector, F1 fuse,
-U719 BQ77915 primary protector + filters, Q703/Q704 charge/discharge
-FETs, U11 LTC4368 + Q11/Q12 + RS10 + divider, pack fault/retry path.
-
-The rated power harness carries PACK_POS_FUSED and FG_VSS. The separate
-control link carries PACK_FAULT_N, PACK_RETRY_PULSE, PACK_CHG_TEMP_OK and
-MCU_3V3. PACK_NEG_RAW stays isolated on this board. The gauge (U10), charger
-(U2), and ship FET (Q25) stay on center.
-
-Reuses the part definitions (nets, footprints, MPNs) from the main
-power_sheet builder, reproduced at fresh coordinates on the BMS sheet.
-"""
-
+"""Build the BMS flat schematic from its monitor, inhibits and isolated controls."""
 import os
 import sys
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(__file__))
-
-import genlib
 import build_ducktop2 as b
-from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope, FOOTPRINTS
-from generate_mu_carrier_sheet import root_label, place_bms_control_connector, place_bms_power_connector
-import fpc_contract as fpc
+import genlib
+from build_ducktop2 import PROJDIR, stable_uuid, uuid_scope
+from generate_bms_monitor import add_bms_monitor
 from generate_bms_thermal import add_bms_thermal
-from generate_bms_current import add_bms_current
+from generate_bms_guards import add_bms_guards
+from generate_bms_startup import add_bms_startup
+from generate_bms_controls import add_bms_controls
 
-BOARD_DIR = os.path.join(PROJDIR, "bms")
-PROJECT_NAME = "bms"
+BOARD_DIR = Path(PROJDIR) / 'bms'
+PROJECT_NAME = 'bms'
 
 
 def build_bms_sheet(sheet_symbol_uuid):
-    s = b.Sheet(f"/{sheet_symbol_uuid}")
-    s.refcounters["#PWR"] = 700
-    s.refcounters["#FLG"] = 700
-
-    s.text(20, 20, "== 3S pack BMS: fuse, primary protector, redundant LTC4368, FETs ==")
-    s.text(20, 30, "Board split Phase 2.3: pack measurement + protection live on the pack board;")
-    s.text(20, 40, "the gauge (U10), charger (U2), and ship FET (Q25) stay on the center board.")
-
-    # Fuse + pack connector
-    s.place("F1", "Fuse", "10A fast pack fuse: Schurter HCF, 1kA at 125VDC", 170, 60,
-            footprint="ducktop2:Schurter_HCF_8.05x5mm",
-            pin_nets={"1": ("PACK_POS_RAW", "local"), "2": ("BAT_PROT_VIN", "local")},
-            extra_props={"Manufacturer": "SCHURTER", "MPN": "3-101-051", "Datasheet": "https://www.schurter.com/en/datasheet/typ_HCF.pdf", "Height": "5 mm", "InterruptRating": "1000 A at 125 VDC, L/R <1 ms"})
-    s.place("J2", "Conn_01x02", "3S raw pack power", 170, 80,
-            footprint="ducktop2:WAGO_2060_452_SMD",
-            pin_nets={"1": ("PACK_POS_RAW", "local"), "2": ("PACK_NEG_RAW", "local")},
-            extra_props={"Manufacturer": "WAGO", "MPN": "2060-452/998-404",
-                "Wire": "Alpha 6715, 18 AWG, minimum bend radius 8.763 mm",
-                "HarnessPinOrder": "1 raw positive, 2 raw negative; midpoint taps use J2201",
-                "CurrentRatingBasis": "9 A terminal rating; 8 A installed path requires temperature and fault tests",
-                "Height": "4.5 mm", "StrainRelief": "separate cable clamp; no load applied to solder joints"})
-    s.place("J2201", "Conn_01x02_MP", "3S midpoint taps: cell 1, cell 2", 170, 112,
-            footprint="Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",
-            pin_nets={"1": ("CELL1_TAP", "local"), "2": ("CELL2_TAP", "local"),
-                      "MP": ("PACK_NEG_RAW", "local")},
-            extra_props={"Manufacturer": "JST", "MPN": "SM02B-GHS-TB(LF)(SN)",
-                "MatingHousing": "GHR-02V-S", "HarnessPinOrder": "1 cell 1 tap, 2 cell 2 tap; no bulk pack current"})
-
-
-    # BQ7791500 autonomous primary protector
-    s.place("U719", "BQ77915", "BQ7791500PWR autonomous 3S primary protector", 80, 105,
-            footprint=FOOTPRINTS["BQ77915"],
-            pin_nets={
-                "1": ("BMS_VDD", "local"), "2": ("BMS_AVDD", "local"),
-                "3": ("BMS_VC3_TOP", "local"), "4": ("BMS_VC3_TOP", "local"),
-                "5": ("BMS_VC3_TOP", "local"), "6": ("BMS_VC2", "local"),
-                "7": ("BMS_VC1", "local"), "8": ("BMS_VC0", "local"),
-                "9": ("PACK_NEG_RAW", "local"), "10": ("BMS_SRP", "local"),
-                "11": ("BMS_SRN", "local"), "12": ("BMS_DSG_DRV", "local"),
-                "13": ("BMS_CHG_DRV", "local"), "14": ("BMS_LD", "local"),
-                "15": ("", "nc"), "16": ("PACK_NEG_RAW", "local"),
-                "17": ("BMS_OCDP", "local"), "18": ("BMS_TS_UNUSED", "local"),
-                "19": ("BMS_VTB", "local"), "20": ("PACK_NEG_RAW", "local"),
-                "21": ("", "nc"), "22": ("BMS_PRES", "local"),
-                "23": ("BMS_CTRC", "local"), "24": ("BMS_CTRD", "local"),
-            },
-            extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "BQ7791500PWR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/bq77915.pdf",
-            })
-    s.place("R840", "R", "1k 1% BQ77915 VDD filter", 20, 35, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_POS_RAW", "local"), "2": ("BMS_VDD", "local")})
-    s.place("C840", "C", "1u 25V X7R BQ77915 VDD", 20, 45, footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("BMS_VDD", "local"), "2": ("PACK_NEG_RAW", "local")})
-    s.place("C841", "C", "1u 10V X7R BQ77915 AVDD", 20, 55, footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("BMS_AVDD", "local"), "2": ("PACK_NEG_RAW", "local")})
-
-    for ref, source, sense, y in (
-        ("R841", "PACK_NEG_RAW", "BMS_VC0", 65),
-        ("R842", "CELL1_TAP", "BMS_VC1", 75),
-        ("R843", "CELL2_TAP", "BMS_VC2", 85),
-        ("R844", "PACK_POS_RAW", "BMS_VC3_TOP", 95),
-    ):
-        s.place(ref, "R", "75R 1% BQ77915 cell/balance filter", 20, y,
-                footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (source, "local"), "2": (sense, "local")})
-    for ref, upper, lower, y in (
-        ("C842", "BMS_VC0", "PACK_NEG_RAW", 105),
-        ("C843", "BMS_VC1", "BMS_VC0", 115),
-        ("C844", "BMS_VC2", "BMS_VC1", 125),
-        ("C848", "BMS_VC3_TOP", "BMS_VC2", 135),
-    ):
-        s.place(ref, "C", "1u 10V X7R BQ77915 internal-balance filter", 20, y,
-                footprint=FOOTPRINTS["C_1u"],
-                pin_nets={"1": (upper, "local"), "2": (lower, "local")})
-
-    s.place("RS11", "BMS_Shunt4", "5mOhm 1% 4W BQ77915 Kelvin shunt", 20, 150,
-            footprint="ducktop2:Bourns_CSS4J_4026_Kelvin",
-            pin_nets={"1": ("PACK_NEG_RAW", "local"), "2": ("BMS_SENSE_N", "local"),
-                      "3": ("BMS_RAW_KELVIN", "local"), "4": ("BMS_FET_KELVIN", "local")},
-            extra_props={"Manufacturer": "Bourns", "MPN": "CSS4J-4026K-5L00F", "Height": "2.63 mm",
-                         "Datasheet": "https://www.bourns.com/docs/product-datasheets/css4j-4026.pdf"})
-    s.place("R845", "R", "100R BQ77915 SRP filter", 20, 160, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BMS_RAW_KELVIN", "local"), "2": ("BMS_SRP", "local")})
-    s.place("R846", "R", "100R BQ77915 SRN filter", 20, 170, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BMS_FET_KELVIN", "local"), "2": ("BMS_SRN", "local")})
-    s.place("C845", "C", "100n BQ77915 SRP-VSS filter", 20, 180,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BMS_SRP", "local"), "2": ("PACK_NEG_RAW", "local")})
-    s.place("C846", "C", "100n BQ77915 differential sense filter", 20, 190,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BMS_SRP", "local"), "2": ("BMS_SRN", "local")})
-    s.place("C847", "C", "100n BQ77915 SRN-VSS filter", 20, 200,
-            footprint=FOOTPRINTS["C_100n"],
-            pin_nets={"1": ("BMS_SRN", "local"), "2": ("PACK_NEG_RAW", "local")})
-
-    # Charge/discharge FETs
-    s.place("Q703", "Q_NMOS_123S_4G_5678D", "CSD18540Q5B BQ77915 discharge FET", 80, 160,
-            footprint=FOOTPRINTS["Q_CSD18540Q5B"],
-            pin_nets={
-                "1": ("BMS_SENSE_N", "local"), "2": ("BMS_SENSE_N", "local"),
-                "3": ("BMS_SENSE_N", "local"), "4": ("BMS_DSG_GATE", "local"),
-                "5": ("BMS_FET_COMMON", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    s.place("Q704", "Q_NMOS_123S_4G_5678D", "CSD18540Q5B BQ77915 charge FET", 125, 160,
-            footprint=FOOTPRINTS["Q_CSD18540Q5B"],
-            pin_nets={
-                "1": ("FG_VSS", "local"), "2": ("FG_VSS", "local"),
-                "3": ("FG_VSS", "local"), "4": ("BMS_CHG_GATE", "local"),
-                "5": ("BMS_FET_COMMON", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    for ref, value, net_a, net_b, x, y in (
-        ("R847", "4.53k 1% DSG gate resistor", "BMS_DSG_DRV", "BMS_DSG_GATE", 80, 180),
-        ("R848", "1k 1% CHG gate resistor", "BMS_CHG_DRV", "BMS_CHG_GATE", 125, 180),
-        ("R849", "1M 5% DSG gate-source", "BMS_DSG_GATE", "BMS_SENSE_N", 80, 190),
-        ("R850", "3.3M 1% CHG gate-source; retain UV load-removal recovery", "BMS_CHG_GATE", "FG_VSS", 125, 190),
-        ("R851", "453k 1% load-detect resistor", "BMS_LD", "FG_VSS", 80, 200),
-        ("R852", "10k 5% PRES normal-mode pull-up", "PACK_POS_RAW", "BMS_PRES", 125, 200),
-        ("R853", "10k 1% unused TS to VSS", "BMS_TS_UNUSED", "PACK_NEG_RAW", 80, 210),
-        ("R854", "196k 1% OCD delay program", "BMS_OCDP", "PACK_NEG_RAW", 125, 210),
-    ):
-        mpn = {"R850": "RC0603FR-073M3L", "R854": "RC0603FR-07196KL"}.get(ref)
-        s.place(ref, "R", value, x, y, footprint=FOOTPRINTS["R"],
-                pin_nets={"1": (net_a, "local"), "2": (net_b, "local")},
-                extra_props={"Manufacturer": "Yageo", "MPN": mpn} if mpn else {})
-
-    # TI's pin-18 note replaces the thermistor, not its bias resistor.
-    # The three external probes provide the actual cell-temperature protection.
-    s.place("R855", "R", "10k 1% fixed TS bias", 125, 230,
-            footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BMS_VTB", "local"), "2": ("BMS_TS_UNUSED", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
-
-    # LTC4368-1 redundant pack protector + reverse FETs
-    s.place("U11", "LTC4368-1", "LTC4368IMS-1 bidirectional pack protector", 230, 70,
-            footprint=FOOTPRINTS["LTC4368-1"],
-            pin_nets={
-                "1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_UV", "local"),
-                "3": ("BAT_PROT_OV", "local"), "4": ("FG_VSS", "local"),
-                "5": ("FG_VSS", "local"), "6": ("BAT_PROT_SHDN", "local"),
-                "7": ("BMS_PROTECT_FAULT_N", "local"), "8": ("PACK_POS_FUSED", "local"),
-                "9": ("BAT_PROT_SENSE", "local"), "10": ("BAT_PROT_GATE", "local"),
-            },
-            extra_props={"Manufacturer": "Analog Devices", "MPN": "LTC4368IMS-1#PBF"})
-    s.place("Q11", "Q_NMOS_123S_4G_5678D", "CSD18540Q5B reverse-pack FET A", 230, 95,
-            footprint=FOOTPRINTS["Q_CSD18540Q5B"],
-            pin_nets={
-                "1": ("BAT_PROT_FET_COMMON", "local"), "2": ("BAT_PROT_FET_COMMON", "local"),
-                "3": ("BAT_PROT_FET_COMMON", "local"), "4": ("BAT_PROT_GATE", "local"),
-                "5": ("BAT_PROT_VIN", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    s.place("Q12", "Q_NMOS_123S_4G_5678D", "CSD18540Q5B reverse-pack FET B", 280, 95,
-            footprint=FOOTPRINTS["Q_CSD18540Q5B"],
-            pin_nets={
-                "1": ("BAT_PROT_FET_COMMON", "local"), "2": ("BAT_PROT_FET_COMMON", "local"),
-                "3": ("BAT_PROT_FET_COMMON", "local"), "4": ("BAT_PROT_GATE", "local"),
-                "5": ("BAT_PROT_SENSE", "local"),
-            },
-            extra_props={"Manufacturer": "Texas Instruments", "MPN": "CSD18540Q5B"})
-    s.place("RS10", "R", "3mOhm 1% 4W pack-current shunt", 335, 60,
-            footprint="ducktop2:Bourns_CSS2H_2512_Kelvin",
-            pin_nets={"1": ("BAT_PROT_SENSE", "local"), "2": ("PACK_POS_FUSED", "local")},
-            extra_props={"Manufacturer": "Bourns", "MPN": "CSS2H-2512K-3L00F", "Height": "0.81 mm",
-                         "Datasheet": "https://www.bourns.com/docs/product-datasheets/css2h-2512.pdf"})
-    s.place("C725", "C", "10u 25V X7R LTC4368 VOUT", 390, 60,
-            footprint=FOOTPRINTS["C_1u"],
-            pin_nets={"1": ("PACK_POS_FUSED", "local"), "2": ("FG_VSS", "local")},
-            extra_props={"Manufacturer": "Murata", "MPN": "GRM21BZ71E106KE15L"})
-    s.place("R700", "R", "3.09M 1% BAT UV/OV top", 335, 70, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_UV", "local")})
-    s.place("R701", "R", "73.2k 1% BAT UV/OV middle", 335, 80, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_UV", "local"), "2": ("BAT_PROT_OV", "local")})
-    s.place("R702", "R", "121k 1% BAT UV/OV bottom", 335, 90, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_OV", "local"), "2": ("FG_VSS", "local")})
-    s.place("R703", "R", "22k LTC4368 CGATE series", 335, 100, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_GATE", "local"), "2": ("BAT_PROT_CGATE", "local")})
-    s.place("C700", "C", "3.3nF >=50V LTC4368 CGATE", 335, 110, footprint=FOOTPRINTS["C_1n"],
-            pin_nets={"1": ("BAT_PROT_CGATE", "local"), "2": ("FG_VSS", "local")})
-    s.place("C724", "C", "4.7nF >=50V pack hot-swap slew", 335, 120, footprint=FOOTPRINTS["C_1n"],
-            pin_nets={"1": ("BAT_PROT_GATE", "local"), "2": ("BAT_PROT_FET_COMMON", "local")})
-    s.place("R707", "R", "100k pack protector SHDN pull-up", 390, 70, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("BAT_PROT_VIN", "local"), "2": ("BAT_PROT_SHDN", "local")})
-    s.place("R708", "R", "100k protected-side LTC fault pull-up", 390, 80, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PROT_CTRL_3V3", "local"), "2": ("BMS_PROTECT_FAULT_N", "local")},
-            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
-    s.place("Q701", "Q_NMOS_SOT23_GSD", "BSS138 pack protector latch reset", 390, 90,
-            footprint=FOOTPRINTS["Q_BSS138"],
-            pin_nets={"1": ("PACK_RETRY_LOCAL_GATE", "local"), "2": ("FG_VSS", "local"),
-                      "3": ("BAT_PROT_SHDN", "local")},
-            extra_props={"Manufacturer": "onsemi", "MPN": "BSS138LT1G"})
-    s.place("R709", "R", "100k pack retry gate pulldown", 390, 100, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("PACK_RETRY_LOCAL_GATE", "local"), "2": ("FG_VSS", "local")})
-
-    # FPC-3 boundary markers
-    s.pwrflag(20, 400, "PACK_POS_FUSED")
-    s.pwrflag(20, 420, "PACK_NEG_RAW")
-    s.pwrflag(20, 440, "FG_VSS")
-    s.fg_vss(30, 440)
-    s.pwrflag(20, 460, "PACK_POS_RAW")
-    s.pwrflag(20, 480, "BAT_PROT_VIN")
-    s.pwrflag(20, 500, "BMS_VDD")
-
-    # the power return and isolated control return use separate wire harnesses.
-    place_bms_control_connector(s, "bms", 490, 250, "local")
-    place_bms_power_connector(s, "bms", 560, 250, "local")
-    s.text(465, 360, "j2072 carries protected pack power and return. j2074 pin 5 and its mounting tabs serve only the isolated ctrl_gnd island.")
-    s.text(465, 370, "never join ctrl_gnd to fg_vss or pack_neg_raw. raw pack negative remains inside the bms and pack harness.")
-
-    # Phase 5 bring-up: test points.  Every rail, protector node and
-    # status line gets a physical 1.5x1.5 mm probe pad on the board so
-    # bring-up (docs/BRINGUP_TEST_PLAN.md) never needs to poke a live
-    # pin.  Value = the net name (the probe target).  One extra FG_VSS
-    # point serves as the scope ground clip.
-    bms_test_points = [
-        ("TPB1", "PACK_POS_RAW"), ("TPB2", "BAT_PROT_VIN"),
-        ("TPB3", "PACK_POS_FUSED"), ("TPB4", "BAT_PROT_FET_COMMON"),
-        ("TPB5", "BAT_PROT_GATE"), ("TPB6", "BAT_PROT_CGATE"),
-        ("TPB7", "PACK_FAULT_N"), ("TPB8", "PACK_RETRY_PULSE"),
-        ("TPB9", "MCU_3V3"), ("TPB10", "BMS_AVDD"),
-        ("TPB11", "BMS_VDD"), ("TPB12", "BMS_SRP"),
-        ("TPB13", "BMS_SRN"), ("TPB14", "BMS_PRES"),
-        ("TPB15", "BMS_LD"), ("TPB16", "FG_VSS"),
-    ]
-    s.text(600, 60, "== Test points (bring-up probing; see BRINGUP_TEST_PLAN.md) ==")
-    for k, (ref, net) in enumerate(bms_test_points):
-        col, row = k % 2, k // 2
-        s.place(ref, "TestPoint", net, 600 + col * 40, 75 + row * 15,
-                footprint=("TestPoint:TestPoint_Pad_1.0x1.0mm" if ref == "TPB5"
-                           else "TestPoint:TestPoint_Pad_D1.0mm" if ref == "TPB13"
-                           else FOOTPRINTS["TestPoint_Pad_1.5"]),
-                in_bom=False,
-                pin_nets={"1": (net, "local")},
-                extra_props={"Manufacturer": "-",
-                             "Note": "test point, no MPN"})
-    add_bms_thermal(s)
-    add_bms_current(s)
+    s = b.Sheet(f'/{sheet_symbol_uuid}')
+    s.refcounters['#PWR'] = 700
+    s.refcounters['#FLG'] = 700
+    prior = {name: genlib.LIBMAP[name] for name in ('R', 'TestPoint')}
+    genlib.LIBMAP.update({name: 'BMS_Passives' for name in prior})
+    try:
+        add_bms_monitor(s)
+        add_bms_thermal(s)
+        add_bms_guards(s)
+        add_bms_startup(s)
+        add_bms_controls(s)
+    finally:
+        genlib.LIBMAP.update(prior)
     return s
 
 
-def main() -> int:
-    os.makedirs(BOARD_DIR, exist_ok=True)
-    sheet_uuid = stable_uuid("bms:sheet:main")
-    with uuid_scope("bms:main"):
-        sheet = build_bms_sheet(sheet_uuid)
-        text = sheet.render(stable_uuid("bms:self:main"), page_number=1, paper="A0")
-    with open(os.path.join(BOARD_DIR, "bms.kicad_sch"), "w", encoding="utf-8") as f:
-        f.write(text)
-
-    # BMS is a single flat sheet; the root is the sheet itself.
-    print(f"wrote bms project (single sheet)")
+def main():
+    BOARD_DIR.mkdir(parents=True, exist_ok=True)
+    with uuid_scope('bms:main'):
+        sheet = build_bms_sheet(stable_uuid('bms:sheet:main'))
+        source = sheet.render(stable_uuid('bms:self:main'), page_number=1, paper='A0')
+    (BOARD_DIR / 'bms.kicad_sch').write_text(source)
+    print('wrote bms schematic')
     return 0
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raise SystemExit(main())

@@ -57,7 +57,7 @@ def main():
     for f in b.GetFootprints():
         pads = []
         for pad in f.Pads():
-            row = {'number': pad.GetNumber(), 'net': pad.GetNetname(),
+            row = {'id': pad.m_Uuid.AsString(), 'number': pad.GetNumber(), 'net': pad.GetNetname(),
                    'position': xy(pad.GetPosition()), 'size': xy(pad.GetSize()),
                    'rotation': pad.GetOrientationDegrees(),
                    'attribute': int(pad.GetAttribute()), 'drill': xy(pad.GetDrillSize()),
@@ -80,7 +80,11 @@ def main():
             'footprint': str(f.GetFPID().GetLibNickname()) + ':' + str(f.GetFPID().GetLibItemName()),
             'position': xy(f.GetPosition()),
             'rotation': f.GetOrientationDegrees(), 'layer': b.GetLayerName(f.GetLayer()),
-            'attributes': f.GetAttributes(), 'pads': pads})
+            'attributes': f.GetAttributes(),
+            'dnp': bool(f.GetAttributes() & p.FP_DNP),
+            'exclude_from_bom': bool(f.GetAttributes() & p.FP_EXCLUDE_FROM_BOM),
+            'exclude_from_positions': bool(f.GetAttributes() & p.FP_EXCLUDE_FROM_POS_FILES),
+            'pads': pads})
         lib, name = str(f.GetFPID().GetLibNickname()), str(f.GetFPID().GetLibItemName())
         folder = root / (lib + '.pretty')
         if not folder.is_dir():
@@ -133,6 +137,9 @@ def main():
     if not b.GetBoardPolygonOutlines(outline, False):
         raise RuntimeError('invalid board outline')
     result['outline'] = polys(outline)
+    result['all_pad_count'] = sum(len(f['pads']) for f in result['footprints'])
+    result['electrical_pad_count'] = sum(bool(pad['polygons'])
+        for f in result['footprints'] for pad in f['pads'])
     result['edge_primitives'].sort(key=lambda item: item['id'])
     output.write_text(json.dumps(result, separators=(',', ':')) + '\n')
     print(json.dumps({k: result[k] for k in ('native_airwires', 'copper_layers',

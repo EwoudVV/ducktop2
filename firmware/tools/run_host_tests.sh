@@ -175,4 +175,34 @@ python3 "$ROOT/tests/test_tps25751_config.py"
 python3 "$ROOT/tests/test_pd_headroom.py"
 python3 "$ROOT/tools/verify_release_contract.py"
 
+
+"$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" \
+    "$ROOT/ec_target/bq76922.c" "$ROOT/ec_target/bq76922_charge.c" "$ROOT/ec_target/bq76922_profile.c" "$ROOT/ec_target/ec_pack_monitor.c" \
+    "$ROOT/tests/test_bq76922.c" -o "$BUILD_DIR/bq76922_tests"
+"$BUILD_DIR/bq76922_tests"
+
+"$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" \
+    "$ROOT/ec_target/bq76922.c" "$ROOT/ec_target/bq76922_charge.c" \
+    "$ROOT/tests/test_bq76922_charge.c" -o "$BUILD_DIR/bq76922_charge_tests"
+"$BUILD_DIR/bq76922_charge_tests"
+
+# synthetic rev3 qualifications are confined to this mocked test executable.
+"$CC_BIN" $COMMON_FLAGS \
+    -DDUCKTOP2_PACK_HARDWARE_REVISION=3 -DDUCKTOP2_PACK_CHARGE_CURRENT_MA=3000 \
+    -DDUCKTOP2_PACK_CHARGE_VOLTAGE_MV=12120 -DDUCKTOP2_PACK_QUALIFIED=1 \
+    -DDUCKTOP2_GAUGE_QUALIFIED=1 -DDUCKTOP2_CHARGER_CURRENT_QUALIFIED=1 -DDUCKTOP2_CHARGING_QUALIFIED=1 \
+    -DDUCKTOP2_PACK_MONITOR_QUALIFIED=1 -DDUCKTOP2_PACK_OTP_QUALIFIED=1 \
+    -DDUCKTOP2_PACK_THERMAL_QUALIFIED=1 -DDUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED=1 \
+    -DDUCKTOP2_PACK_CELL_VOLTAGE_QUALIFIED=1 -DDUCKTOP2_PACK_CHARGE_VOLTAGE_QUALIFIED=1 \
+    -DDUCKTOP2_PACK_CHARGE_TERMINATION_QUALIFIED=1 -DDUCKTOP2_PACK_CHARGE_MAX_RISE_MV=9 \
+    -DDUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE=869 -DDUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE=950 \
+    -DDUCKTOP2_DISCHARGE_OFFSET_MA=100 \
+    -I"$ROOT/ec_target" -I"$ROOT/ec/include" -I"$ROOT/tests" \
+    "$ROOT/ec_target/ec_app.c" "$ROOT/ec_target/ec_app_math.c" "$ROOT/ec_target/isl9241.c" \
+    "$ROOT/ec_target/bq76922.c" "$ROOT/ec_target/bq76922_charge.c" \
+    "$ROOT/ec_target/bq34z100.c" "$ROOT/ec/src/ec_telemetry.c" "$ROOT/ec/src/ec_fan.c" "$ROOT/ec/src/ec_policy.c" \
+    "$ROOT/tests/i2c_mock.c" "$ROOT/tests/test_ec_app_bq_charge.c" -o "$BUILD_DIR/ec_app_bq_charge_tests"
+"$BUILD_DIR/ec_app_bq_charge_tests"
+python3 "$ROOT/tests/test_bq76922_fixture.py"
+
 printf '%s\n' "host tests: PASS ($CC_BIN)"

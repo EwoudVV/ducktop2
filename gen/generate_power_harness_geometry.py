@@ -15,6 +15,7 @@ from shapely.affinity import translate
 R = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(R / "gen"))
 import usb_power_contract as contract
+import fpc_contract as interconnect
 import hashlib
 
 data = json.loads((R / "mechanical/board-datums.json").read_text())["boards"]
@@ -101,6 +102,33 @@ def right_ground(a, b):
         * (1 - smooth((arclength - (arclength[-1] - 19)) / 18))
     )
     return np.column_stack([xy, a[2] + h])
+
+
+def bms_power_loop(a, b, raised):
+    """Enter the rear-facing BMS terminal without bending at its mouth."""
+    a, b = np.array(a), np.array(b)
+    radius, lead = 14, 2
+    turn_radius = 11.75 if raised else 10
+    cx, cy = b[0] - 2 * turn_radius - radius, a[1] - radius
+    assert cx > a[0] + lead and cy > b[1] - lead
+
+    def line(start, end):
+        count = max(2, math.ceil(np.linalg.norm(np.array(end) - start) / .025) + 1)
+        return np.linspace(start, end, count)
+
+    t = np.linspace(math.pi / 2, 0, 1001)
+    first = np.column_stack([cx + radius * np.cos(t), cy + radius * np.sin(t)])
+    top = b[1] - lead
+    middle = line(first[-1], [b[0] - 2 * turn_radius, top])
+    t = np.linspace(math.pi, 2 * math.pi, 2001)
+    turn = np.column_stack([b[0] - turn_radius + turn_radius * np.cos(t), top + turn_radius * np.sin(t)])
+    xy = np.vstack([line(a[:2], first[0])[:-1], first[:-1], middle[:-1],
+                    turn[:-1], line(turn[-1], b[:2])])
+    distance = np.r_[0, np.cumsum(np.linalg.norm(np.diff(xy, axis=0), axis=1))]
+    z = a[2] + (b[2] - a[2]) * smooth((distance - lead) / (distance[-1] - 2 * lead))
+    if raised:
+        z += 3.25 * smooth((distance - 2) / 25) * (1 - smooth((distance - (distance[-1] - 32)) / 30))
+    return np.column_stack([xy, z])
 
 
 def summarize(points, diameter):
@@ -190,12 +218,13 @@ for net in ["FG_VSS", "PACK_POS_FUSED"]:
     ]
     assert all(e["net"] == net for e in ends)
 
-    def profile(x):
-        return 10.3 + 4.7 * smooth((x - 120) / 33) - 0.7 * smooth((x - 170) / 10.45)
-
-    points = straight_pair(
-        ends[0]["point"], ends[1]["point"], lead=0.5, profile=profile
-    )
+    assert np.allclose(ends[0]['direction'], [1, 0, 0])
+    assert np.allclose(ends[1]['direction'], [0, -1, 0])
+    points = bms_power_loop(ends[0]["point"], ends[1]["point"], raised=net == "FG_VSS")
+    start = points[1] - points[0]
+    finish = points[-1] - points[-2]
+    assert np.dot(start / np.linalg.norm(start), ends[0]['direction']) > .9999
+    assert np.dot(finish / np.linalg.norm(finish), -np.array(ends[1]['direction'])) > .9999
     routes.append(
         dict(
             name="bms-" + net,
@@ -281,7 +310,7 @@ for route in routes:
     low, high = (
         (400, 420)
         if route["group"] == "usb5"
-        else (20, 90) if route["group"] == "bms-power" else (20, 100)
+        else (20, interconnect.BMS_POWER_WIRE_LENGTH_BUDGET_MM) if route["group"] == "bms-power" else (20, 100)
     )
     assert low <= route["nominal_cut_length_mm"] <= high, (
         route["name"] + " exceeds its electrical length bounds"
@@ -342,6 +371,11 @@ for name, board in data.items():
             mpn = "XT30PW-F30.G.Y / XT30U-M.G.Y"
             height = 6.0
             service = "reserve 14 mm axial withdrawal and room to grip the housings; release the nearby cable support first"
+        elif f.get("footprint") == "ducktop2:WAGO_2060_452_SMD":
+            assert f.get("manufacturer_part_number") == "2060-452/998-404", "check the raw-pack terminal identity"
+            mpn = "2060-452/998-404"
+            height = 4.5
+            service = "remove the bridge above the release buttons; support the wires and use separate case-mounted strain relief"
         else:
             mpn = "43045-0400 / 43025-0400"
             height = 11.35

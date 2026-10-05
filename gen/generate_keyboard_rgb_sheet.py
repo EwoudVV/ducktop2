@@ -22,8 +22,8 @@ def add_rgb(s, keys):
             extra_props={'Manufacturer':'Lumissil','MPN':DRIVER_MPN,'LCSC':'C2678953'},datasheet=DRIVER_DATASHEET)
     s.place('U321','TCA9517A',BUFFER_MPN,1020,440,footprint=BUFFER_FOOTPRINT,
             pin_nets={str(pin):(net,'local')for pin,net in {
-                1:'KB_RGB_5V',2:'RGB_SCL',3:'RGB_SDA',4:'GND',5:'KB_RGB_5V',
-                6:'I2C_SDA',7:'I2C_SCL',8:'MCU_3V3'}.items()},
+                1:'MCU_3V3',2:'I2C_SCL',3:'I2C_SDA',4:'GND',5:'MCU_3V3',
+                6:'RGB_SDA',7:'RGB_SCL',8:'KB_RGB_5V'}.items()},
             extra_props={'Manufacturer':'Texas Instruments','MPN':BUFFER_MPN,'LCSC':'C201698'},datasheet=BUFFER_DATASHEET)
     def resistor(ref,value,mpn,a,b,x,y):
         s.place(ref,'R',value,x,y,footprint='Resistor_SMD:R_0603_1608Metric',
@@ -42,7 +42,7 @@ def add_rgb(s, keys):
           ('C322','1u 25V RGB VCC','CL10B105KA8NNNC','KB_RGB_5V',710,610,'0603'),
           ('C323','100n 50V RGB VCC','CL10B104KB8NNNC','KB_RGB_5V',760,610,'0603'),
           ('C324','1u 25V RGB PVCC','CL10B105KA8NNNC','KB_RGB_5V',820,610,'0603'),
-          ('C325','100n 50V RGB PVCC / buffer A','CL10B104KB8NNNC','KB_RGB_5V',870,610,'0603'),
+          ('C325','100n 50V RGB PVCC / buffer B','CL10B104KB8NNNC','KB_RGB_5V',870,610,'0603'),
           ('C326','100n 50V RGB startup delay','CL10B104KB8NNNC','RGB_SDB',920,610,'0603')]
     for ref,value,mpn,net,x,y,size in caps:
         fp='Capacitor_SMD:C_0603_1608Metric' if size=='0603' else 'Capacitor_SMD:C_0805_2012Metric'
@@ -54,7 +54,7 @@ def add_rgb(s, keys):
                 pin_nets={'1':(net,'local')})
     s.pwrflag(1060,610,'KB_RGB_5V');s.pwrflag(1100,610,'MCU_3V3')
     s.text(650,710,'J320 pin 29 is the switched 5 V rail. Pin 2 needs mainboard R387 fitted for the I2C buffer.')
-    s.text(650,720,'U321 A side is switched 5 V; B side is 3.3 V. Its power-off isolation keeps the unpowered LED driver off the EC bus.')
+    s.text(650,720,'U321 A side is the main 3.3 V bus; B side is the switched 5 V RGB bus. Its power-off isolation keeps the unpowered LED driver off the EC bus.')
     s.text(650,730,'ADDR1/ADDR2 at VCC select 7-bit address 0x2F. SDB rises through R323/C326; wait 20 ms before setup.')
     s.text(650,740,'R320 limits peak sink current to about 11.3 mA at the datasheet corner: 18 active sinks stay below the cable budget.')
     s.text(650,750,'Keep C322/C323 close to VCC, C324/C325 close to PVCC, and R320 close to ISET. Connect the exposed pad to ground.')

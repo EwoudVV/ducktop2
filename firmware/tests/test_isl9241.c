@@ -19,7 +19,7 @@ int main(void)
     seed();i2c_mock.isl_words[0x4d]=0x4c0b;assert(!isl9241_probe());
     seed();assert(isl9241_init());
     assert(i2c_mock.isl_words[0x14]==0 && i2c_mock.isl_words[0x3e]==0);
-    assert(i2c_mock.isl_words[0x15]==12528 && i2c_mock.isl_words[0x3f]==200);
+    assert(i2c_mock.isl_words[0x15]==ISL9241_CHARGE_VOLTAGE_MAX_MV && i2c_mock.isl_words[0x3f]==200);
     assert(i2c_mock.isl_words[0x3d]==0x2028 && i2c_mock.isl_words[0x4e]==0x4041);
     assert(i2c_mock.isl_words[0x4b]==0x0b40); /* 3.840 V, 85.333 mV per code */
     assert(i2c_mock.isl_words[0x48]==ISL9241_DC_THROTTLE_MA && (i2c_mock.isl_words[0x3c]&8u));
@@ -32,8 +32,14 @@ int main(void)
     assert(!isl9241_set_input_current_ma(4404) && !isl9241_set_input_current_ma(4393));
     assert(!isl9241_program_charge_limits(12600,500));
     assert(!isl9241_program_charge_limits(12528,63));
-    assert(isl9241_program_charge_limits(12528,500));
-    uint16_t mv,ma;assert(isl9241_read_charge_limits(&mv,&ma) && mv==12528 && ma==500);
+    assert(isl9241_program_charge_limits(ISL9241_CHARGE_VOLTAGE_MAX_MV,500));
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    assert(!isl9241_program_charge_limits(12528,500));
+    assert(!isl9241_program_charge_limits(12121,500));
+#else
+    assert(ISL9241_CHARGE_VOLTAGE_MAX_MV==12528);
+#endif
+    uint16_t mv,ma;assert(isl9241_read_charge_limits(&mv,&ma) && mv==ISL9241_CHARGE_VOLTAGE_MAX_MV && ma==500);
     assert(i2c_mock.isl_words[0x3e]==10112);
     assert(isl9241_set_charge_enable(false));
     assert(i2c_mock.isl_words[0x14]==0 && i2c_mock.isl_words[0x3e]==0);
@@ -52,6 +58,11 @@ int main(void)
     i2c_mock.isl_words[0x84]=0;i2c_mock.isl_words[0x85]=255;
     assert(!isl9241_read_sample(&t) && t.ibat_ma==123);
     i2c_mock.isl_words[0x84]=10;i2c_mock.isl_words[0x85]=20;
+    i2c_mock.isl_words[0x4d]=0x460c;i2c_mock.isl_words[0x3a]=0;
+    i2c_mock.isl_words[0x84]=0;i2c_mock.isl_words[0x85]=0;
+    assert(isl9241_read_sample(&t) && t.cv_active && t.charge_status==ISL9241_CHARGE_NONE);
+    i2c_mock.isl_words[0x3a]=0x2000;
+    assert(isl9241_read_sample(&t) && !t.cv_active);
     i2c_mock.isl_words[0x48]^=256u;
     assert(!isl9241_configuration_ok());
     i2c_mock.isl_words[0x48]^=256u;

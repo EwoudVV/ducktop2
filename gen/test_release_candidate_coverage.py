@@ -89,7 +89,7 @@ class Coverage(unittest.TestCase):
         for stage in ('schematic','routing','fabrication','production'):
             self.assertEqual(release.select_pcbs(stage,None),expected)
         self.assertEqual(set(PROJECTS),set(BOARD_PROJECTS))
-        self.assertEqual([item['copper_layers'] for item in BOARD_PROJECTS.values()],[8,8,8,4,2,4])
+        self.assertEqual([item['copper_layers'] for item in BOARD_PROJECTS.values()],[8,8,8,4,4,4])
         for item in BOARD_PROJECTS.values():
             self.assertEqual(release.schematic_for_board(release.ROOT/item['pcb']),release.ROOT/item['schematic'])
 

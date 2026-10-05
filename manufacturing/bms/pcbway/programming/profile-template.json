@@ -1,0 +1,862 @@
+{
+  "part": "BQ76922RSNR",
+  "cell_inputs": [
+    1,
+    2,
+    5
+  ],
+  "i2c_address_7bit": 8,
+  "i2c_bus_hz": 100000,
+  "recovery_charging_enabled": false,
+  "released_for_ram_test": false,
+  "released_for_otp": false,
+  "released_for_assembly": false,
+  "qualification": {
+    "monitor": false,
+    "otp": false,
+    "current_transfer": false,
+    "thermal_windows": false,
+    "cells": false,
+    "pack": false,
+    "gauge": false,
+    "charging": false,
+    "discharge": false
+  },
+  "admission": {
+    "discharge_cell_min_mv": 3100,
+    "normal_charge_cell_min_mv": 3100,
+    "cell_max_mv": 4200,
+    "pack_min_mv": 9000,
+    "current_gain_min_permille": 0,
+    "current_offset_ma": 0,
+    "dynamic_reserve_ma": 0,
+    "discharge_limit_ma": 8000,
+    "charge_limit_ma": 3000,
+    "charge_voltage_mv": 12120,
+    "charge_cell_max_mv": 4100,
+    "charge_spread_max_mv": 30,
+    "cell_voltage_error_mv": 15,
+    "charge_max_rise_mv": 0
+  },
+  "rows": [
+    {
+      "name": "REG1 Config",
+      "address": "0x9236",
+      "length": 1,
+      "bytes": [
+        13
+      ]
+    },
+    {
+      "name": "REG0 Config",
+      "address": "0x9237",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "Comm Type",
+      "address": "0x9239",
+      "length": 1,
+      "bytes": [
+        17
+      ]
+    },
+    {
+      "name": "I2C Address",
+      "address": "0x923A",
+      "length": 1,
+      "bytes": [
+        16
+      ]
+    },
+    {
+      "name": "CFETOFF Pin Config",
+      "address": "0x92FA",
+      "length": 1,
+      "bytes": [
+        2
+      ]
+    },
+    {
+      "name": "DFETOFF Pin Config",
+      "address": "0x92FB",
+      "length": 1,
+      "bytes": [
+        2
+      ]
+    },
+    {
+      "name": "ALERT Pin Config",
+      "address": "0x92FC",
+      "length": 1,
+      "bytes": [
+        138
+      ]
+    },
+    {
+      "name": "TS1 Config",
+      "address": "0x92FD",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "TS2 Config",
+      "address": "0x92FE",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "DA Configuration",
+      "address": "0x9303",
+      "length": 1,
+      "bytes": [
+        5
+      ]
+    },
+    {
+      "name": "Vcell Mode",
+      "address": "0x9304",
+      "length": 2,
+      "bytes": [
+        19,
+        0
+      ]
+    },
+    {
+      "name": "Default Alarm Mask",
+      "address": "0x926D",
+      "length": 2,
+      "bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Mfg Status Init",
+      "address": "0x9343",
+      "length": 2,
+      "bytes": [
+        80,
+        0
+      ]
+    },
+    {
+      "name": "Power Config",
+      "address": "0x9234",
+      "length": 2,
+      "bytes": [
+        130,
+        40
+      ]
+    },
+    {
+      "name": "Enabled Protections A",
+      "address": "0x9261",
+      "length": 1,
+      "bytes": [
+        252
+      ]
+    },
+    {
+      "name": "Enabled Protections B",
+      "address": "0x9262",
+      "length": 1,
+      "bytes": [
+        64
+      ]
+    },
+    {
+      "name": "Enabled Protections C",
+      "address": "0x9263",
+      "length": 1,
+      "bytes": [
+        96
+      ]
+    },
+    {
+      "name": "CHG FET Protections A",
+      "address": "0x9265",
+      "length": 1,
+      "bytes": [
+        152
+      ]
+    },
+    {
+      "name": "CHG FET Protections B",
+      "address": "0x9266",
+      "length": 1,
+      "bytes": [
+        64
+      ]
+    },
+    {
+      "name": "CHG FET Protections C",
+      "address": "0x9267",
+      "length": 1,
+      "bytes": [
+        64
+      ]
+    },
+    {
+      "name": "DSG FET Protections A",
+      "address": "0x9269",
+      "length": 1,
+      "bytes": [
+        228
+      ]
+    },
+    {
+      "name": "DSG FET Protections B",
+      "address": "0x926A",
+      "length": 1,
+      "bytes": [
+        64
+      ]
+    },
+    {
+      "name": "DSG FET Protections C",
+      "address": "0x926B",
+      "length": 1,
+      "bytes": [
+        96
+      ]
+    },
+    {
+      "name": "Enabled PF A",
+      "address": "0x92C0",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "Enabled PF B",
+      "address": "0x92C1",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "Enabled PF C",
+      "address": "0x92C2",
+      "length": 1,
+      "bytes": [
+        7
+      ]
+    },
+    {
+      "name": "Enabled PF D",
+      "address": "0x92C3",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "FET Options",
+      "address": "0x9308",
+      "length": 1,
+      "bytes": [
+        29
+      ]
+    },
+    {
+      "name": "Chg Pump Control",
+      "address": "0x9309",
+      "length": 1,
+      "bytes": [
+        1
+      ]
+    },
+    {
+      "name": "Predischarge Timeout",
+      "address": "0x930E",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "Predischarge Stop Delta",
+      "address": "0x930F",
+      "length": 1,
+      "bytes": [
+        50
+      ]
+    },
+    {
+      "name": "CUV Threshold",
+      "address": "0x9275",
+      "length": 1,
+      "bytes": [
+        60
+      ]
+    },
+    {
+      "name": "CUV Delay",
+      "address": "0x9276",
+      "length": 2,
+      "bytes": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "CUV Recovery Hysteresis",
+      "address": "0x927B",
+      "length": 1,
+      "bytes": [
+        3
+      ]
+    },
+    {
+      "name": "COV Threshold",
+      "address": "0x9278",
+      "length": 1,
+      "bytes": [
+        82
+      ]
+    },
+    {
+      "name": "COV Delay",
+      "address": "0x9279",
+      "length": 2,
+      "bytes": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "COV Recovery Hysteresis",
+      "address": "0x927C",
+      "length": 1,
+      "bytes": [
+        3
+      ]
+    },
+    {
+      "name": "OCC Threshold",
+      "address": "0x9280",
+      "length": 1,
+      "bytes": [
+        7
+      ]
+    },
+    {
+      "name": "OCC Delay",
+      "address": "0x9281",
+      "length": 1,
+      "bytes": [
+        1
+      ]
+    },
+    {
+      "name": "OCD1 Threshold",
+      "address": "0x9282",
+      "length": 1,
+      "bytes": [
+        11
+      ]
+    },
+    {
+      "name": "OCD1 Delay",
+      "address": "0x9283",
+      "length": 1,
+      "bytes": [
+        1
+      ]
+    },
+    {
+      "name": "OCD2 Threshold",
+      "address": "0x9284",
+      "length": 1,
+      "bytes": [
+        11
+      ]
+    },
+    {
+      "name": "OCD2 Delay",
+      "address": "0x9285",
+      "length": 1,
+      "bytes": [
+        1
+      ]
+    },
+    {
+      "name": "SCD Threshold",
+      "address": "0x9286",
+      "length": 1,
+      "bytes": [
+        2
+      ]
+    },
+    {
+      "name": "SCD Delay",
+      "address": "0x9287",
+      "length": 1,
+      "bytes": [
+        1
+      ]
+    },
+    {
+      "name": "CC Gain",
+      "address": "0x91A8",
+      "length": 4,
+      "bytes": [
+        242,
+        65,
+        111,
+        64
+      ],
+      "unit_source": "rescale captured factory CC Gain for nominal2mOhm; calibrate on assembled board before qualification"
+    },
+    {
+      "name": "Capacity Gain",
+      "address": "0x91AC",
+      "length": 4,
+      "bytes": [
+        106,
+        28,
+        136,
+        73
+      ],
+      "unit_source": "rescale captured factory CC Gain for nominal2mOhm; calibrate on assembled board before qualification"
+    },
+    {
+      "name": "Cell 1 Gain",
+      "address": "0x9180",
+      "length": 2,
+      "bytes": [
+        121,
+        48
+      ],
+      "unit_source": "preserve captured factory trim; template shows published nominal"
+    },
+    {
+      "name": "Cell 2 Gain",
+      "address": "0x9182",
+      "length": 2,
+      "bytes": [
+        121,
+        48
+      ],
+      "unit_source": "preserve captured factory trim; template shows published nominal"
+    },
+    {
+      "name": "Cell 5 Gain",
+      "address": "0x9188",
+      "length": 2,
+      "bytes": [
+        121,
+        48
+      ],
+      "unit_source": "preserve captured factory trim; template shows published nominal"
+    },
+    {
+      "name": "Vcell Offset",
+      "address": "0x91B0",
+      "length": 2,
+      "bytes": [
+        0,
+        0
+      ],
+      "unit_source": "preserve captured factory trim; template shows published nominal"
+    },
+    {
+      "name": "Precharge Start Voltage",
+      "address": "0x930A",
+      "length": 2,
+      "bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Precharge Stop Voltage",
+      "address": "0x930C",
+      "length": 2,
+      "bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Protection Configuration",
+      "address": "0x925F",
+      "length": 2,
+      "bytes": [
+        2,
+        0
+      ]
+    },
+    {
+      "name": "Body Diode Threshold",
+      "address": "0x9273",
+      "length": 2,
+      "bytes": [
+        50,
+        0
+      ]
+    },
+    {
+      "name": "SF Alert Mask A",
+      "address": "0x926F",
+      "length": 1,
+      "bytes": [
+        252
+      ]
+    },
+    {
+      "name": "SF Alert Mask B",
+      "address": "0x9270",
+      "length": 1,
+      "bytes": [
+        64
+      ]
+    },
+    {
+      "name": "SF Alert Mask C",
+      "address": "0x9271",
+      "length": 1,
+      "bytes": [
+        96
+      ]
+    },
+    {
+      "name": "PF Alert Mask A",
+      "address": "0x92C4",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "PF Alert Mask B",
+      "address": "0x92C5",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "PF Alert Mask C",
+      "address": "0x92C6",
+      "length": 1,
+      "bytes": [
+        7
+      ]
+    },
+    {
+      "name": "PF Alert Mask D",
+      "address": "0x92C7",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "Balancing Configuration",
+      "address": "0x9335",
+      "length": 1,
+      "bytes": [
+        16
+      ]
+    },
+    {
+      "name": "OCDL Latch Limit",
+      "address": "0x928F",
+      "length": 1,
+      "bytes": [
+        1
+      ]
+    },
+    {
+      "name": "OCDL Counter Dec Delay",
+      "address": "0x9290",
+      "length": 1,
+      "bytes": [
+        255
+      ]
+    },
+    {
+      "name": "OCDL Recovery Time",
+      "address": "0x9291",
+      "length": 1,
+      "bytes": [
+        255
+      ]
+    },
+    {
+      "name": "OCDL Recovery Threshold",
+      "address": "0x9292",
+      "length": 2,
+      "bytes": [
+        255,
+        127
+      ]
+    },
+    {
+      "name": "SCDL Latch Limit",
+      "address": "0x9295",
+      "length": 1,
+      "bytes": [
+        1
+      ]
+    },
+    {
+      "name": "SCDL Counter Dec Delay",
+      "address": "0x9296",
+      "length": 1,
+      "bytes": [
+        255
+      ]
+    },
+    {
+      "name": "SCDL Recovery Time",
+      "address": "0x9297",
+      "length": 1,
+      "bytes": [
+        255
+      ]
+    },
+    {
+      "name": "SCDL Recovery Threshold",
+      "address": "0x9298",
+      "length": 2,
+      "bytes": [
+        255,
+        127
+      ]
+    },
+    {
+      "name": "SCD Recovery Time",
+      "address": "0x9294",
+      "length": 1,
+      "bytes": [
+        255
+      ]
+    },
+    {
+      "name": "OCD Recovery Threshold",
+      "address": "0x928D",
+      "length": 2,
+      "bytes": [
+        255,
+        127
+      ]
+    },
+    {
+      "name": "OCC Recovery Threshold",
+      "address": "0x9288",
+      "length": 2,
+      "bytes": [
+        0,
+        128
+      ]
+    },
+    {
+      "name": "Recovery Time",
+      "address": "0x92AF",
+      "length": 1,
+      "bytes": [
+        3
+      ]
+    },
+    {
+      "name": "Load Detect Active Time",
+      "address": "0x92B4",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "Load Detect Retry Delay",
+      "address": "0x92B5",
+      "length": 1,
+      "bytes": [
+        255
+      ]
+    },
+    {
+      "name": "Load Detect Timeout",
+      "address": "0x92B6",
+      "length": 2,
+      "bytes": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "Shutdown Cell Voltage",
+      "address": "0x923F",
+      "length": 2,
+      "bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Shutdown Stack Voltage",
+      "address": "0x9241",
+      "length": 2,
+      "bytes": [
+        88,
+        2
+      ]
+    },
+    {
+      "name": "Shutdown Temperature",
+      "address": "0x9244",
+      "length": 1,
+      "bytes": [
+        85
+      ]
+    },
+    {
+      "name": "Auto Shutdown Time",
+      "address": "0x9254",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "Cell1 Interconnect",
+      "address": "0x9315",
+      "length": 2,
+      "bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Cell2 Interconnect",
+      "address": "0x9317",
+      "length": 2,
+      "bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Cell5 Interconnect",
+      "address": "0x931D",
+      "length": 2,
+      "bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "CUV Threshold Override",
+      "address": "0x91D4",
+      "length": 2,
+      "bytes": [
+        255,
+        255
+      ]
+    },
+    {
+      "name": "COV Threshold Override",
+      "address": "0x91D6",
+      "length": 2,
+      "bytes": [
+        255,
+        255
+      ]
+    },
+    {
+      "name": "OTINT Threshold",
+      "address": "0x92A3",
+      "length": 1,
+      "bytes": [
+        75
+      ]
+    },
+    {
+      "name": "OTINT Delay",
+      "address": "0x92A4",
+      "length": 1,
+      "bytes": [
+        0
+      ]
+    },
+    {
+      "name": "OTINT Recovery",
+      "address": "0x92A5",
+      "length": 1,
+      "bytes": [
+        65
+      ]
+    }
+  ],
+  "status": "complete prototype register choices; per-unit factory capture, bench calibration, current/voltage/thermal/pulse qualification and releases remain disabled",
+  "source": "TI SLUUCG7 April2024 data-memory map; SLUSE86A comparator accuracy; root-selected prototype targets; factory nominal trim placeholders must be replaced from captured unit",
+  "complete_prototype_register_choices": true,
+  "unit_factory_trim_capture_required": true,
+  "unit_factory_trim_capture_applied": false,
+  "calibration_qualified": false,
+  "shunt": {
+    "mpn": "CSS4J-4026K-2L00F",
+    "nominal_ohm": 0.002,
+    "primary_rating_W": 6
+  },
+  "precision_guards": {
+    "discharge_mpn": "INA381A3IDGSR",
+    "charge_mpn": "INA381A4IDGSR",
+    "reference_mpn": "REF3425IDBVR",
+    "discharge_nominal_A": 9.089848577,
+    "charge_nominal_A": 4.096549072,
+    "status": "conditionalprototype; not8A/3Ainstantaneouscurrentclamps",
+    "reset": "manual CURRENT_CLR raw testpad only; no EC reset"
+  },
+  "raw_supply": {
+    "regin_mpn": "TPS70950DBVR",
+    "regin_setting_V": 5,
+    "series_resistors_mpn": "CRCW2512430RFKEGHP",
+    "series_arrangement": "two430Ohm parallel,215Ohmnominal",
+    "static_load_budget_mA": 12,
+    "reg0_enabled": false,
+    "breg_connection": "REGIN",
+    "reg1_setting_V": 3.3,
+    "reg1_guaranteed_V": [
+      3.0,
+      3.6
+    ]
+  },
+  "predischarge_exit_policy": "voltage completion only; timeout0 must not promote mainDSG into a short",
+  "internal_die_temperature_backup": {
+    "enabled": true,
+    "trip_C": 75,
+    "recovery_C": 65,
+    "delay_s": 0,
+    "mask_bit": "0x40",
+    "nominal_margin_to85C": 10,
+    "guaranteed_temperature_error_C": null,
+    "reason": "independent prototype backup below85C operatingrange; factory/board calibration and hottrip timing remain unqualified"
+  },
+  "monitor_ready_semantics": "powered awake interface and thermal supervisor; fresh I2C direction/fault checks still required",
+  "alert_pin_role": "REG18-powered active-low alarm withzeroAlarmMask, highwhileawake, no alarm acknowledgement",
+  "cell_voltage_qualified": false,
+  "charge_voltage_qualified": false,
+  "termination_qualified": false,
+  "host_charge": {
+    "taper_current_upper_ma": 200,
+    "taper_cell_min_mv": 3980,
+    "taper_cell_sum_min_mv": 12000,
+    "taper_hold_ms": 30000,
+    "recharge_cell_max_mv": 3950,
+    "recharge_hold_ms": 5000,
+    "qualification": "disabled until low-current calibration, cv accuracy, cell offsets, complete sensing-to-inhibit rise and termination/recharge timing are measured",
+    "cv_dwell_max_ms": 7200000,
+    "timeout_semantics": "cumulative fresh qualified enabled cv dwell; pauses retain the budget; completed qualified recharge starts a new budget"
+  }
+}

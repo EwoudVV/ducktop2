@@ -23,7 +23,7 @@ def add_power_control(s):
     bypass('C2641',1280,140)
     part('U2635','PCA9537','TCA9537DGSR power status and AUX control',1240,200,
          'Package_SO:MSOP-10_3x3mm_P0.5mm',{1:'AUX_PATH_EN',2:'CHG_BIAS_GOOD',
-         3:'PACK_CHG_TEMP_OK_IN',4:'MU_PROCHOT_N',5:'GND',6:'NRST_NET',7:'',
+         3:'',4:'MU_PROCHOT_N',5:'GND',6:'NRST_NET',7:'',
          8:'I2C_SCL',9:'I2C_SDA',10:'MCU_3V3'},'TCA9537DGSR')
     bypass('C2642',1200,240)
     r('R2643','100k PROCHOT sense default-low',1280,240,'MU_PROCHOT_N','GND','RC0603FR-07100KL')

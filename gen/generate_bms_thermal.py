@@ -1,8 +1,4 @@
-"""Three raw-referenced cell probes, hardware CTR inhibits and isolated fault.
-
-The provisional temperatures do not qualify the owned AKZYTUE cells. Exact
-electrical corner evidence lives in the private analog review directory.
-"""
+"""Three raw-referenced cell probes and independent temperature inhibits."""
 import build_ducktop2 as b
 
 RAW='PACK_NEG_RAW'
@@ -34,14 +30,22 @@ def add_bms_thermal(s):
 
     s.text(75,295,'== three-cell temperature inhibit: raw reference, independent of firmware ==')
     resistor('R2200','1k 1% 0.75W raw thermal supply limiter',80,320,
-             'PACK_POS_RAW','THERM_RAW_IN','RC2010FK-071KL','Resistor_SMD:R_2010_5025Metric')
+             'PACK_POS_RAW','THERM_RAW_PRE','RC2010FK-071KL','Resistor_SMD:R_2010_5025Metric')
+    part('U2217','TPS22810DBV','TPS22810DBVR thermal supply shutdown',80,395,
+         'Package_TO_SOT_SMD:SOT-23-6',
+         {'1':'THERM_RAW_PRE','2':RAW,'3':'BQ_ALERT_AWAKE','4':'',
+          '5':'THERM_RAW_IN','6':'THERM_RAW_IN'},'TPS22810DBVR')
+    resistor('R2290','390k thermal switch default-off',80,440,
+             'BQ_ALERT_AWAKE',RAW,'RC0603FR-07390KL')
+    cap('C2281','1u 50V thermal switch input',125,410,'THERM_RAW_PRE',
+        mpn='GRM21BR71H105KA12L',footprint='Capacitor_SMD:C_0805_2012Metric')
     cap('C2200','100n 50V thermal regulator input',80,335,'THERM_RAW_IN')
     part('U2200','TPS70933DBV','TPS70933DBVR raw-pack thermal bias',120,330,
          'Package_TO_SOT_SMD:SOT-23-5',{'1':'THERM_RAW_IN','2':RAW,'3':'','4':'','5':BIAS},'TPS70933DBVR')
     cap('C2201','10u 50V thermal bias; require Ceff >=2u',80,350,BIAS,
         mpn='CGA5L1X7R1H106K160AC',footprint='Capacitor_SMD:C_1206_3216Metric')
     resistor('R2201','9.53k 0.1% 25ppm thermal bias fault bleed',80,365,BIAS,RAW,'RT0603BRD079K53L')
-    s.pwrflag(65,380,'THERM_RAW_IN')
+    s.pwrflag(65,380,'THERM_RAW_PRE')
 
     # Shared ratiometric references. Bottoms and tolerances are intentionally
     # identical; each midpoint drives one input on each of the three quads.
@@ -94,76 +98,28 @@ def add_bms_thermal(s):
     resistor('R2233','1M thermal-ready default-low',80,500,'THERM_READY',RAW,'RC0603FR-071ML')
     part('U2205','SN74AUP2G126DCU','SN74AUP2G126DCUR thermal startup gate',80,540,
          'ducktop2:TI_DCU0008A_VSSOP8',
-         {'1':'THERM_READY','2':'THERM_CHG_HEALTH','3':'THERM_DSG_PERMIT',
-          '4':RAW,'5':'THERM_DSG_HEALTH','6':'THERM_CHG_PERMIT','7':'THERM_READY','8':BIAS},'SN74AUP2G126DCUR')
+         {'1':'BMS_PERMIT_READY','2':'THERM_CHG_HEALTH','3':'THERM_DSG_PERMIT',
+          '4':RAW,'5':'THERM_DSG_HEALTH','6':'THERM_CHG_PERMIT','7':'BMS_PERMIT_READY','8':BIAS},'SN74AUP2G126DCUR')
     cap('C2231','100n 50V thermal buffer supply',80,565,BIAS)
     for index,kind in enumerate(['CHG','DSG']):
-        x=200+index*110;gate=f'THERM_{kind}_GATE';ctr=f'BMS_CTR{kind[0]}'
+        x=200+index*110;gate=f'THERM_{kind}_GATE';ctr='BMS_CFETOFF' if kind=='CHG' else 'BMS_DFETOFF'
         resistor(f'R{2234+index*3}','1k thermal CTR gate series',x,520,f'THERM_{kind}_PERMIT',gate,'RC0603FR-071KL')
         resistor(f'R{2235+index*3}','100k thermal CTR gate default-off',x,535,gate,RAW,'RC0603FR-07100KL')
-        resistor(f'R{2236+index*3}','470k 0.1% 25ppm CTR fault pull-up',x,550,'BMS_VDD',ctr,'RT0603BRD07470KL')
+        resistor(f'R{2236+index*3}','10k hardware OFF default-high',x,550,'BMS_OFF_BIAS',ctr,'RC0603FR-0710KL')
         part(f'Q{2200+index}','Q_NMOS_SOT23_GSD',f'BSS138 {kind} thermal CTR pull-down',x+45,535,
              'Package_TO_SOT_SMD:SOT-23',{'1':gate,'2':RAW,'3':ctr},'BSS138LT1G','onsemi')
 
-    # Three ground domains: raw probe/CTR, protected LTC, isolated controls.
-    # The control ground never becomes a parallel pack-current return.
-    part('U2206','ISO7041FDBQ','ISO7041FDBQR separate charge/discharge permits; default low',520,425,
-         'Package_SO:QSOP-16_3.9x4.9mm_P0.635mm',
-         {'1':BIAS,'2':RAW,'3':'THERM_CHG_GATE','4':'THERM_DSG_GATE','5':RAW,
-          '6':'RAW_RETRY','7':RAW,'8':RAW,'9':CTRL,'10':CTRL,'11':'CTRL_RETRY_IN',
-          '12':'','13':'THERM_DSG_HEALTH_ISO','14':'THERM_CHG_HEALTH_ISO',
-          '15':CTRL,'16':CTRL_VCC},'ISO7041FDBQR')
-    cap('C2250','100n 50V raw isolator supply',500,460,BIAS)
-    cap('C2251','100n 50V control-island isolator supply',555,460,CTRL_VCC,CTRL)
-    part('U2207','SN74AUP2G07DCK','SN74AUP2G07DCKR thermal and LTC fault wired-OR',650,425,
-         'Package_TO_SOT_SMD:SOT-363_SC-70-6',
-         {'1':'THERM_DSG_HEALTH_ISO','2':CTRL,'3':'PACK_PROTECT_OK',
-          '4':'CTRL_FAULT_LOCAL_N','5':CTRL_VCC,'6':'CTRL_FAULT_LOCAL_N'},'SN74AUP2G07DCKR')
-    cap('C2252','100n 50V control fault-buffer supply',650,450,CTRL_VCC,CTRL)
-    resistor('R2250','100k isolated discharge-health default-low',600,475,'THERM_DSG_HEALTH_ISO',CTRL,'RC0603FR-07100KL')
-    resistor('R2251','100k isolated charge-permit default-low',650,475,'THERM_CHG_HEALTH_ISO',CTRL,'RC0603FR-07100KL')
-
-    # The LTC-side transceiver is powered locally after F1. Its feed and
-    # reverse-input diode cannot expose the control island to pack voltage.
-    resistor('R2252','2.49k 1% 0.25W protected control supply limiter',80,610,
-             'BAT_PROT_VIN','PROT_CTRL_FEED','RC1206FR-072K49L','Resistor_SMD:R_1206_3216Metric')
-    part('D2200','D_Schottky','BAT54WS protected control reverse-input block',120,610,
-         'Diode_SMD:D_SOD-323',{'1':'PROT_CTRL_IN','2':'PROT_CTRL_FEED'},'BAT54WS-7-F','Diodes Incorporated')
-    cap('C2253','100n 50V protected control regulator input',160,610,'PROT_CTRL_IN','FG_VSS')
-    part('U2208','TPS70933DBV','TPS70933DBVR protected-side local bias',210,620,
-         'Package_TO_SOT_SMD:SOT-23-5',
-         {'1':'PROT_CTRL_IN','2':'FG_VSS','3':'','4':'','5':'PROT_CTRL_3V3'},'TPS70933DBVR')
-    cap('C2254','10u 50V protected local bias; Ceff >=2u',255,610,'PROT_CTRL_3V3','FG_VSS',
-        mpn='CGA5L1X7R1H106K160AC',footprint='Capacitor_SMD:C_1206_3216Metric')
-    resistor('R2253','30.1k 0.1% protected bias minimum load',300,610,'PROT_CTRL_3V3','FG_VSS','RT0603BRD0730K1L')
-    s.pwrflag(160,625,'PROT_CTRL_IN')
-    part('U2209','ISO7021FD','ISO7021FDR LTC fault and retry isolation',410,625,
-         'Package_SO:SOIC-8_3.9x4.9mm_P1.27mm',
-         {'1':'PROT_CTRL_3V3','2':'PACK_RETRY_LOCAL','3':'BMS_PROTECT_FAULT_N','4':'FG_VSS',
-          '5':CTRL,'6':'PACK_PROTECT_OK','7':'CTRL_RETRY_IN','8':CTRL_VCC},'ISO7021FDR')
-    cap('C2255','100n 50V protected transceiver supply',360,650,'PROT_CTRL_3V3','FG_VSS')
-    cap('C2256','100n 50V control transceiver supply',460,650,CTRL_VCC,CTRL)
-    resistor('R2254','1k local retry gate series',360,670,
-             'PACK_RETRY_LOCAL','PACK_RETRY_LOCAL_GATE','ERJ2RKF1001X',
-             footprint='Resistor_SMD:R_0402_1005Metric',manufacturer='Panasonic')
-    resistor('R2255','100k isolated LTC-health default-low',520,610,'PACK_PROTECT_OK',CTRL,'RC0603FR-07100KL')
-    resistor('R2256','3.3k control fault pull-up',520,625,CTRL_VCC,'CTRL_FAULT_LOCAL_N','RC0603FR-073K3L')
-    resistor('R2257','100R 1% 0.25W control-island current limiter',575,610,
-             'MCU_3V3',CTRL_VCC,'RC1206FR-07100RL','Resistor_SMD:R_1206_3216Metric')
-    resistor('R2258','4.7k fault interface current limit',575,625,'CTRL_FAULT_LOCAL_N','PACK_FAULT_N','RC0603FR-074K7L')
-    resistor('R2259','4.7k retry interface current limit',630,610,'PACK_RETRY_PULSE','CTRL_RETRY_IN','RC0603FR-074K7L')
-    resistor('R2264','100k retry input default-low',630,625,'CTRL_RETRY_IN',CTRL,'RC0603FR-07100KL')
-    resistor('R2265','4.7k charge-permit interface current limit',685,610,
-             'THERM_CHG_HEALTH_ISO','PACK_CHG_TEMP_OK','RC0603FR-074K7L')
-    for ref,signal,x in [('D2201','CTRL_RETRY_IN',585),('D2202','THERM_CHG_HEALTH_ISO',670)]:
-        part(ref,'BAT54S_AKC','BAT54S control-island pin clamps',x,665,'Package_TO_SOT_SMD:SOT-23',
-             {'1':CTRL,'2':CTRL_VCC,'3':signal},'BAT54S-7-F','Diodes Incorporated')
-    s.pwrflag(730,620,CTRL);s.pwrflag(730,640,CTRL_VCC)
+    # Either independent raw supply can keep the OFF inputs asserted.
+    for ref,rail,x in [('D2220',BIAS,400),('D2221','BQ_REG1',440)]:
+        part(ref,'D_Schottky','BAT54WS OFF-bias supply OR',x,520,
+             'Diode_SMD:D_SOD-323',{'1':'BMS_OFF_BIAS','2':rail},
+             'BAT54WS-7-F','Diodes Incorporated')
+    cap('C2232','100n 50V OFF-bias bypass',440,550,'BMS_OFF_BIAS')
+    s.pwrflag(485,550,'BMS_OFF_BIAS')
     for index,net in enumerate([BIAS,'THERM_READY','THERM_SENSE_1','THERM_SENSE_2',
-                                'THERM_SENSE_3','BMS_CTRC','BMS_CTRD','PACK_CHG_TEMP_OK']):
+                                'THERM_SENSE_3','BMS_CFETOFF','BMS_DFETOFF','BMS_PERMIT_READY']):
         s.place(f'TPB{20+index}','TestPoint',net,480+(index%4)*55,520+(index//4)*25,
-                footprint=b.FOOTPRINTS['TestPoint_Pad_1.5'],in_bom=False,
+                footprint='TestPoint:TestPoint_Pad_D1.0mm',in_bom=False,
                 pin_nets={'1':(net,'local')},extra_props={'Manufacturer':'-','Note':'thermal validation pad'})
-    s.text(170,580,'provisional charge 10..40C / discharge 0..50C screen; actual cell profile and installed probe response remain unqualified.')
-    s.text(170,588,'discharge faults assert PACK_FAULT_N; charge-only faults lower PACK_CHG_TEMP_OK. no raw-ground bypass.')
-    s.text(170,690,'CTRL_GND belongs only to the isolated control island. Power-return disconnect cannot reach the center through fault/retry pins.')
+    s.text(170,580,'Charge10..40C / discharge0..50C design windows. Cell limits and installed probe response need tests.')
+    s.text(170,590,'Loss of either READY signal removes permission. The hardware inhibit covers main FETs and the startup branch.')

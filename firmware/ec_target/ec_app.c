@@ -5,13 +5,19 @@
 #include "pack_current.h"
 #include "gpio.h"
 #include "tca9537.h"
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+#include "ec_pack_monitor.h"
+#endif
 #include <string.h>
 
 static bool configured, gauge_present, iindpm_applied, battery_present;
 static bool sample_pending, sample_valid, charge_budget_applied, gauge_status_valid;
 static uint16_t iindpm_ma, prepared_source_mv;
 static bool power_io_valid, charger_bias_good, pack_charge_permit, gauge_full;
-static bool throttle_released;
+static bool throttle_released, charge_commanded;
+
+static void inhibit_charge_line(void)
+{ charge_commanded=false; gpio_set_charger_enable(false); }
 static uint32_t power_io_at;
 static uint32_t probe_at, gauge_at, sample_at, sample_good_at, sample_good_started_ms;
 static isl9241_telemetry_t sample;
@@ -19,7 +25,7 @@ static ec_telemetry_inputs_t gauge;
 
 static void charger_lost(void)
 {
-    gpio_set_charger_enable(false);
+    inhibit_charge_line();
     gpio_set_mu_throttle_release(false);
     throttle_released=false;
     configured = iindpm_applied = sample_valid = sample_pending = false;
@@ -35,11 +41,22 @@ void ec_app_init(void)
     prepared_source_mv=0;power_io_at=0;
     probe_at = gauge_at = 0;
     ec_telemetry_inputs_init(&gauge);
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    ec_pack_monitor_init();
+#endif
 }
 
 bool ec_app_charger_configured(void) { return configured; }
 bool ec_app_gauge_present(void) { return gauge_present; }
 bool ec_app_gauge_full(void) { return gauge_status_valid && gauge_full; }
+bool ec_app_charge_complete(void)
+{
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    return ec_pack_monitor_charge_complete();
+#else
+    return ec_app_gauge_full();
+#endif
+}
 bool ec_app_battery_present(void) { return battery_present; }
 bool ec_app_charging_active(void) { return sample_valid && isl9241_is_charge_in_progress(sample.charge_status); }
 
@@ -47,14 +64,20 @@ void ec_app_set_power_control(bool valid,uint8_t inputs,uint32_t now_ms)
 {
     power_io_valid=valid;
     charger_bias_good=valid && (inputs & TCA9537_CHARGER_BIAS_GOOD)!=0;
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    /* Harness pin 4 is now SDA. The old hardware permit has no meaning
+     * on this assembly; fresh BQ FET state provides the directional veto. */
+    pack_charge_permit=valid;
+#else
     pack_charge_permit=valid && (inputs & TCA9537_PACK_CHARGE_PERMIT)!=0;
+#endif
     power_io_at=now_ms;
-    if(!valid || !pack_charge_permit) gpio_set_charger_enable(false);
+    if(!valid || !pack_charge_permit) inhibit_charge_line();
 }
 
 bool ec_app_prepare_source(uint16_t source_mv,uint32_t now_ms)
 {
-    gpio_set_charger_enable(false);
+    inhibit_charge_line();
     gpio_set_mu_throttle_release(false);
     throttle_released=false;charge_budget_applied=false;iindpm_applied=false;
     iindpm_ma=0;
@@ -163,7 +186,7 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *teleme
              * chip. Revalidate that source; a real register reset fails off. */
             if(actual==ISL9241_BOOT_INPUT_MA && isl9241_configuration_ok()) {
                 iindpm_ma=actual;
-                gpio_set_charger_enable(false);charge_budget_applied=false;
+                inhibit_charge_line();charge_budget_applied=false;
             } else charger_lost();
         }
     }
@@ -180,6 +203,17 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *teleme
         gauge_at = now_ms + 100u;
         read_gauge();
     }
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    ec_pack_monitor_poll(now_ms);
+    if (!ec_pack_monitor_charge_step(now_ms, configured && sample_valid && !sample.fault &&
+                                    sample.battery_present && sample.power_good,
+                                    sample_good_started_ms, sample.cv_active, charge_commanded) ||
+        !ec_pack_monitor_charge_allowed(now_ms, DUCKTOP2_PACK_CHARGE_CURRENT_MA)) {
+        inhibit_charge_line();
+        pack_charge_permit = false;
+        if (configured && !isl9241_set_charge_enable(false)) charger_lost();
+    }
+#endif
     *telemetry = gauge;
     /* The continuous ADC's 100 ms battery-voltage period is covered by the
      * 120 ms sampling window. The VSYS standby feed now passes through the
@@ -191,6 +225,12 @@ void ec_app_read_power_inputs(ec_inputs_t *inputs, ec_telemetry_inputs_t *teleme
     inputs->pack_current_valid=inputs->pack_current_valid &&
         ec_pack_current_upper_bound(sample.ibat_ma,&bounded_current);
     inputs->pack_current_ma=inputs->pack_current_valid ? bounded_current : 0;
+#endif
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    int32_t monitor_current = 0;
+    inputs->pack_current_valid = inputs->pack_current_valid &&
+        ec_pack_monitor_current(now_ms, &monitor_current);
+    inputs->pack_current_ma = inputs->pack_current_valid ? monitor_current : 0;
 #endif
     inputs->pack_voltage_mv=sample_valid ? sample.vbat_mv : 0;
     inputs->pack_sample_age_ms=sample_valid ? now_ms-sample_good_started_ms : UINT32_MAX;
@@ -211,7 +251,7 @@ bool ec_app_apply_charger_iindpm_ma(uint16_t ma)
     iindpm_applied = false;
     iindpm_ma = 0;
     if (ma == 0u) {
-        gpio_set_charger_enable(false);
+        inhibit_charge_line();
         /* Zero releases the command; it is not a 0 mA IINDPM register value. */
         if(!configured) return true;
         bool disabled=isl9241_set_charge_enable(false);
@@ -229,13 +269,16 @@ bool ec_app_apply_charger_iindpm_ma(uint16_t ma)
 
 bool ec_app_apply_charge_budget_mw(uint32_t mw)
 {
-    gpio_set_charger_enable(false);
+    inhibit_charge_line();
     charge_budget_applied = false;
     if (mw == 0u) return !configured || isl9241_set_charge_enable(false);
     uint16_t charge_mv = DUCKTOP2_PACK_CHARGE_VOLTAGE_MV;
     if (!DUCKTOP2_CHARGING_QUALIFIED || !DUCKTOP2_PACK_QUALIFIED ||
         !configured || !sample_valid || !battery_present || sample.fault ||
         charge_mv == 0u) return false;
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    if (!ec_pack_monitor_charge_allowed(power_io_at, DUCKTOP2_PACK_CHARGE_CURRENT_MA)) return false;
+#endif
     /* Include regulation error, shunt drift and current-loop error before
      * deriving the command. Qualification must cover the full model envelope. */
     uint32_t high_mv=((uint32_t)charge_mv*1005u+999u)/1000u;
@@ -256,12 +299,18 @@ bool ec_app_apply_charge_budget_mw(uint32_t mw)
 
 bool ec_app_set_charging(bool enable)
 {
-    gpio_set_charger_enable(false);
+    inhibit_charge_line();
     if (!enable) return !configured || isl9241_set_charge_enable(false);
-    if (!DUCKTOP2_CHARGING_QUALIFIED || !power_io_valid || !pack_charge_permit || !gauge_status_valid || ec_app_gauge_full() ||
+    if (!DUCKTOP2_CHARGING_QUALIFIED || !power_io_valid || !pack_charge_permit || !gauge_status_valid || ec_app_charge_complete() ||
         !configured || !charge_budget_applied ||
         !iindpm_applied || !sample_valid || sample.fault || !battery_present ||
         !isl9241_set_charge_enable(true)) return false;
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    if (!ec_pack_monitor_charge_allowed(power_io_at, DUCKTOP2_PACK_CHARGE_CURRENT_MA)) {
+        (void)isl9241_set_charge_enable(false); return false;
+    }
+#endif
+    charge_commanded=true;
     gpio_set_charger_enable(true);
     return true;
 }

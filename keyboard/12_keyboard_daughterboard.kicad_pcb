@@ -26933,7 +26933,7 @@
 			(size 1.625 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "KB_RGB_5V")
+			(net "MCU_3V3")
 			(uuid "ad802033-3d8b-45e2-8593-15e160bbe069")
 		)
 		(pad "2" smd roundrect
@@ -26941,7 +26941,7 @@
 			(size 1.625 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "RGB_SCL")
+			(net "I2C_SCL")
 			(uuid "7e483153-e510-4741-b2c2-9f53d0655e45")
 		)
 		(pad "3" smd roundrect
@@ -26949,7 +26949,7 @@
 			(size 1.625 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "RGB_SDA")
+			(net "I2C_SDA")
 			(uuid "5b845b31-3a3a-4761-b04f-8c90270e9263")
 		)
 		(pad "4" smd roundrect
@@ -26965,7 +26965,7 @@
 			(size 1.625 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "KB_RGB_5V")
+			(net "MCU_3V3")
 			(uuid "2a470d53-0a5e-4590-a37f-292daf8ae415")
 		)
 		(pad "6" smd roundrect
@@ -26973,7 +26973,7 @@
 			(size 1.625 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "I2C_SDA")
+			(net "RGB_SDA")
 			(uuid "6af47cf2-f40e-4eb5-9978-646e5c06fdff")
 		)
 		(pad "7" smd roundrect
@@ -26981,7 +26981,7 @@
 			(size 1.625 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "I2C_SCL")
+			(net "RGB_SCL")
 			(uuid "fb3c31d7-ff6b-4f25-9abc-e44ecceab4c4")
 		)
 		(pad "8" smd roundrect
@@ -26989,7 +26989,7 @@
 			(size 1.625 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "MCU_3V3")
+			(net "KB_RGB_5V")
 			(uuid "c15f835e-c41e-4c24-a244-aeac54bb3962")
 		)
 		(embedded_fonts no)
@@ -27562,7 +27562,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "100n 50V RGB PVCC / buffer A"
+		(property "Value" "100n 50V RGB PVCC / buffer B"
 			(at 0 1.43 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -60702,14 +60702,7 @@
 		(net "KB_RGB_5V")
 		(uuid "586c69f4-4756-44bb-9960-bf95899ff1b7")
 	)
-	(segment
-		(start 286.6125 28.975)
-		(end 288.4 28.975)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "KB_RGB_5V")
-		(uuid "590c78e2-8564-4ca9-b840-d84d9d8d5a80")
-	)
+
 	(segment
 		(start 282.175 34.5)
 		(end 284 34.5)
@@ -60718,14 +60711,7 @@
 		(net "KB_RGB_5V")
 		(uuid "597ad56f-b362-417e-a45f-7cbdc51ebf2c")
 	)
-	(segment
-		(start 285.323312 28.975)
-		(end 286.6125 28.975)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "KB_RGB_5V")
-		(uuid "664e3a69-9803-40e9-ba3f-64fa69dfa00e")
-	)
+
 	(segment
 		(start 279.643338 20.806662)
 		(end 279.70106 20.74894)
@@ -60774,14 +60760,7 @@
 		(net "KB_RGB_5V")
 		(uuid "735e02ee-44e0-4c26-bb99-8f0989e0c86f")
 	)
-	(segment
-		(start 281.65 27.025)
-		(end 280.55 25.925)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "KB_RGB_5V")
-		(uuid "73ee6230-5b0f-4918-862f-657d69011ce4")
-	)
+
 	(segment
 		(start 284.625 25.5)
 		(end 284.625 27.426687)
@@ -60798,14 +60777,7 @@
 		(net "KB_RGB_5V")
 		(uuid "7ae99f1f-8eca-45e0-9ac2-65879d0257c2")
 	)
-	(segment
-		(start 282.3875 27.025)
-		(end 283.694239 27.025)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "KB_RGB_5V")
-		(uuid "82c77fda-7130-422b-912c-4bb63b5547a0")
-	)
+
 	(segment
 		(start 288.04 21.4)
 		(end 287.95 21.49)
@@ -60918,14 +60890,7 @@
 		(net "KB_RGB_5V")
 		(uuid "b62181da-bc90-4d6f-b45b-37b71c3b2344")
 	)
-	(segment
-		(start 282.3875 27.025)
-		(end 281.65 27.025)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "KB_RGB_5V")
-		(uuid "bacbffad-ee8e-499e-bda4-f2a89fc7f0ca")
-	)
+
 	(segment
 		(start 277.6 29.897918)
 		(end 278.097918 29.4)
@@ -67198,14 +67163,7 @@
 		(net "RGB_SCL")
 		(uuid "35141f4f-4964-4a14-83eb-3a19710481f8")
 	)
-	(segment
-		(start 282.3875 27.675)
-		(end 280.65 27.675)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "RGB_SCL")
-		(uuid "38f33384-a964-44f1-a207-066cba2b7a62")
-	)
+
 	(segment
 		(start 287.333664 20.4)
 		(end 286.9075 20.4)
@@ -67238,22 +67196,8 @@
 		(net "RGB_SCL")
 		(uuid "71770db1-60fe-4219-9c3b-0b4ca6690145")
 	)
-	(segment
-		(start 283.425 27.675)
-		(end 283.55 27.8)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "RGB_SCL")
-		(uuid "8b1f1cb2-a240-47eb-9a49-efa8f3c5aa28")
-	)
-	(segment
-		(start 282.3875 27.675)
-		(end 283.425 27.675)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "RGB_SCL")
-		(uuid "9e80b033-86c6-4199-92ab-1230f159c6e7")
-	)
+
+
 	(segment
 		(start 287.967878 20.5)
 		(end 287.807878 20.34)
@@ -67294,14 +67238,7 @@
 		(net "RGB_SCL")
 		(uuid "2533612c-374e-464c-9185-4d31fb643187")
 	)
-	(via
-		(at 283.55 27.8)
-		(size 0.5)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
-		(net "RGB_SCL")
-		(uuid "eee35499-cc92-423d-95d8-e8aa095f4861")
-	)
+
 	(segment
 		(start 283.55 27.8)
 		(end 283.85 27.8)
@@ -67358,14 +67295,7 @@
 		(net "RGB_SCL")
 		(uuid "dee8e0a1-bfaa-4041-a275-b6d84b5b47f3")
 	)
-	(segment
-		(start 282.3875 28.325)
-		(end 283.966206 28.325)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "RGB_SDA")
-		(uuid "013bed0f-578d-475f-8a56-90347a88b9cf")
-	)
+
 	(segment
 		(start 283.966206 28.325)
 		(end 285.366206 29.725)
@@ -67382,14 +67312,7 @@
 		(net "RGB_SDA")
 		(uuid "2e00a63c-e7d3-48dd-baf3-924cc9d0702e")
 	)
-	(segment
-		(start 281.691206 28.325)
-		(end 282.3875 28.325)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "RGB_SDA")
-		(uuid "5d9f5f4c-c2b1-46cb-87f3-3da413e43620")
-	)
+
 	(segment
 		(start 289.05 20.05)
 		(end 288.058062 20.05)
@@ -67486,14 +67409,7 @@
 		(net "RGB_SDA")
 		(uuid "f9bfc867-242e-4641-b300-18a9c2e4ec3a")
 	)
-	(segment
-		(start 281.325 28.691206)
-		(end 281.691206 28.325)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "RGB_SDA")
-		(uuid "fd8da9b7-6898-46f7-912c-e2b93fc26fdc")
-	)
+
 	(via
 		(at 289.270211 19.903801)
 		(size 0.5)
@@ -68526,30 +68442,9 @@
 		(net "MCU_3V3")
 		(uuid "a1367f4f-7276-44db-b204-ac40e5382d8d")
 	)
-	(segment
-		(start 287.714136 26.960864)
-		(end 287.65 27.025)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "MCU_3V3")
-		(uuid "b4ad03d2-9b83-489f-8d4f-c6f16abb6fa5")
-	)
-	(segment
-		(start 287.65 27.025)
-		(end 286.6125 27.025)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "MCU_3V3")
-		(uuid "be8ecb63-af71-43e8-bb16-346185c7508c")
-	)
-	(via
-		(at 287.714136 26.872357)
-		(size 0.5)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
-		(net "MCU_3V3")
-		(uuid "55cfe42f-9a32-4372-87e3-7ef3b713cbe3")
-	)
+
+
+
 	(via
 		(at 283.85 29.15)
 		(size 0.5)
@@ -69222,22 +69117,8 @@
 		(net "KB_R4_C11_RIGHT")
 		(uuid "e9b75afe-9f89-43bb-a80c-53108a8a8b3e")
 	)
-	(segment
-		(start 287.7 28.325)
-		(end 286.6125 28.325)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "I2C_SDA")
-		(uuid "c4486256-a1ba-4d7e-8c0e-eb32bd5c91ae")
-	)
-	(via
-		(at 287.7 28.325)
-		(size 0.5)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
-		(net "I2C_SDA")
-		(uuid "9e2f0072-1693-48df-8b2c-85977b81934e")
-	)
+
+
 	(segment
 		(start 287.702342 27.522253)
 		(end 287.680089 27.5)
@@ -69246,38 +69127,10 @@
 		(net "I2C_SCL")
 		(uuid "185494a3-beca-42d3-9f77-1a3085d9e171")
 	)
-	(segment
-		(start 287.680089 27.5)
-		(end 287.5 27.5)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "I2C_SCL")
-		(uuid "1b074ff0-46b5-4c60-af70-6b12349b1e74")
-	)
-	(segment
-		(start 287.325 27.675)
-		(end 286.6125 27.675)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "I2C_SCL")
-		(uuid "8c4fa32e-92d7-460c-a7da-801a29087b48")
-	)
-	(segment
-		(start 287.5 27.5)
-		(end 287.325 27.675)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "I2C_SCL")
-		(uuid "f229e337-3945-4efb-8cb5-dc4cecd0a8ec")
-	)
-	(via
-		(at 287.702342 27.522253)
-		(size 0.5)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
-		(net "I2C_SCL")
-		(uuid "fcf9b115-7dba-4f30-b59c-a8deb0ec299a")
-	)
+
+
+
+
 	(segment
 		(start 269.9 57.55)
 		(end 272.475 57.55)

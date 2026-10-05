@@ -11,6 +11,9 @@
 #include "usb_hid.h"
 #include "watchdog.h"
 #include "board_profile.h"
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+#include "ec_pack_monitor.h"
+#endif
 #include "power_profile.h"
 #include "source_paths.h"
 #include "tca9537.h"
@@ -116,6 +119,9 @@ static void read_inputs(ec_inputs_t *in, ec_telemetry_inputs_t *telemetry, uint3
     in->radio_db_fault_n = expander && (p1 & (1u<<6)) != 0;
     in->radio_db_power_good = expander && (p1 & (1u<<5)) != 0;
     headphone_present = expander && (p0 & (1u<<2)) != 0;
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    ec_pack_monitor_set_ready(expander, (p0 & U44_PACK_OK) != 0, now);
+#endif
     ec_app_read_power_inputs(in, telemetry, now);
     in->thermal_ok = in->thermal_ok && fan_healthy;
     in->mu_12v_pg = gpio_get_mu_12v_pg();
@@ -143,6 +149,9 @@ static void read_inputs(ec_inputs_t *in, ec_telemetry_inputs_t *telemetry, uint3
     pack->present=DUCKTOP2_PACK_QUALIFIED && ec_app_battery_present() &&
                   (telemetry->valid_flags & EC_TELEMETRY_VALID_PACK_VOLTAGE);
     pack->fault_n=expander && (p0 & U44_PACK_OK);
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+    pack->fault_n = pack->fault_n && ec_pack_monitor_discharge_allowed(now, DUCKTOP2_PACK_USABLE_CURRENT_MA);
+#endif
     pack->path_good=pack->present && pack->fault_n;
     pack->negotiated_voltage_mv=in->pack_voltage_mv;
     uint32_t pack_ma=DUCKTOP2_PACK_USABLE_CURRENT_MA;
@@ -188,8 +197,13 @@ static void read_inputs(ec_inputs_t *in, ec_telemetry_inputs_t *telemetry, uint3
     in->power_limits_applied=host.valid;
     in->applied_mu_edp_budget_mw=host.budget_mw;
     in->request_charger=DUCKTOP2_CHARGING_QUALIFIED && DUCKTOP2_PACK_QUALIFIED &&
-                        pack->fault_n && in->pack_telemetry_valid && !ec_app_gauge_full() &&
-                        expander && (paths.control & TCA9537_PACK_CHARGE_PERMIT) &&
+                        pack->fault_n && in->pack_telemetry_valid && !ec_app_charge_complete() &&
+                        expander &&
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+                        ec_pack_monitor_charge_allowed(now, DUCKTOP2_PACK_CHARGE_CURRENT_MA) &&
+#else
+                        (paths.control & TCA9537_PACK_CHARGE_PERMIT) &&
+#endif
                         ec_host_allows_charging(now);
     in->requested_charge_power_mw=in->request_charger ? 10000u : 0u;
     in->request_audio_amp=host.valid && (host.requests & EC_HOST_REQUEST_SPEAKER) && !headphone_present;
@@ -308,7 +322,13 @@ int main(void)
         if (!usb_power_step(&usb_power,&ur,now)) NVIC_SystemReset();
         ec_host_usb_status_t us=usb_power_status(&usb_power,now);
         ec_host_publish_usb(&us);
+#if DUCKTOP2_PACK_HARDWARE_REVISION == DUCKTOP2_PACK_REV_BQ76922_8A
+        /* The old retry conductor is now SCL. Host retry requests never
+         * emit FET-enable or protection-recovery commands on this board. */
+        bool retry_request=false;
+#else
         bool retry_request=host.valid && (host.requests & EC_HOST_REQUEST_BMS_RETRY);
+#endif
         bool external=controller.active_source!=EC_SOURCE_NONE && controller.active_source!=EC_SOURCE_PACK;
         if (!retry_request) retry_consumed=false;
         if (!retry_active && !retry_consumed && retry_request && external &&

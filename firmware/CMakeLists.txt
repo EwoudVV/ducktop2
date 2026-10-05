@@ -278,3 +278,39 @@ target_compile_definitions(ec_charge_3a_tests PRIVATE DUCKTOP2_PACK_HARDWARE_REV
 target_link_libraries(ec_charge_3a_tests PRIVATE ducktop2_bq ducktop2_ec_telemetry ducktop2_ec_fan ducktop2_ec_policy)
 ducktop2_target_defaults(ec_charge_3a_tests)
 add_test(NAME ec_charge_3a_tests COMMAND ec_charge_3a_tests)
+
+add_executable(bq76922_tests tests/test_bq76922.c ec_target/bq76922_charge.c ec_target/bq76922.c ec_target/bq76922_profile.c ec_target/ec_pack_monitor.c)
+target_include_directories(bq76922_tests PRIVATE ec_target)
+ducktop2_target_defaults(bq76922_tests)
+add_test(NAME bq76922_tests COMMAND bq76922_tests)
+
+add_test(NAME bq76922_fixture_tests COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_bq76922_fixture.py)
+
+add_executable(bq76922_charge_tests tests/test_bq76922_charge.c ec_target/bq76922.c ec_target/bq76922_charge.c)
+target_include_directories(bq76922_charge_tests PRIVATE ec_target)
+ducktop2_target_defaults(bq76922_charge_tests)
+add_test(NAME bq76922_charge_tests COMMAND bq76922_charge_tests)
+
+add_executable(isl9241_bq76922_tests tests/test_isl9241.c tests/i2c_mock.c ec_target/isl9241.c)
+target_include_directories(isl9241_bq76922_tests PRIVATE ec_target tests)
+target_compile_definitions(isl9241_bq76922_tests PRIVATE DUCKTOP2_PACK_HARDWARE_REVISION=3)
+ducktop2_target_defaults(isl9241_bq76922_tests)
+add_test(NAME isl9241_bq76922_tests COMMAND isl9241_bq76922_tests)
+
+add_executable(ec_app_bq_charge_tests tests/test_ec_app_bq_charge.c tests/i2c_mock.c
+    ec_target/ec_app.c ec_target/ec_app_math.c ec_target/isl9241.c
+    ec_target/bq76922.c ec_target/bq76922_charge.c)
+target_include_directories(ec_app_bq_charge_tests PRIVATE ec_target ec/include tests)
+target_compile_definitions(ec_app_bq_charge_tests PRIVATE
+    DUCKTOP2_PACK_HARDWARE_REVISION=3 DUCKTOP2_PACK_CHARGE_CURRENT_MA=3000
+    DUCKTOP2_PACK_CHARGE_VOLTAGE_MV=12120 DUCKTOP2_PACK_QUALIFIED=1
+    DUCKTOP2_GAUGE_QUALIFIED=1 DUCKTOP2_CHARGER_CURRENT_QUALIFIED=1 DUCKTOP2_CHARGING_QUALIFIED=1
+    DUCKTOP2_PACK_MONITOR_QUALIFIED=1 DUCKTOP2_PACK_OTP_QUALIFIED=1
+    DUCKTOP2_PACK_THERMAL_QUALIFIED=1 DUCKTOP2_PACK_DISCHARGE_SENSE_QUALIFIED=1
+    DUCKTOP2_PACK_CELL_VOLTAGE_QUALIFIED=1 DUCKTOP2_PACK_CHARGE_VOLTAGE_QUALIFIED=1
+    DUCKTOP2_PACK_CHARGE_TERMINATION_QUALIFIED=1 DUCKTOP2_PACK_CHARGE_MAX_RISE_MV=9
+    DUCKTOP2_DISCHARGE_SENSE_MIN_PERMILLE=869 DUCKTOP2_DISCHARGE_GAIN_MIN_PERMILLE=950
+    DUCKTOP2_DISCHARGE_OFFSET_MA=100)
+target_link_libraries(ec_app_bq_charge_tests PRIVATE ducktop2_bq ducktop2_ec_telemetry ducktop2_ec_fan ducktop2_ec_policy)
+ducktop2_target_defaults(ec_app_bq_charge_tests)
+add_test(NAME ec_app_bq_charge_tests COMMAND ec_app_bq_charge_tests)

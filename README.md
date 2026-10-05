@@ -25,7 +25,7 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 30 september 2026. the carrier interface is being switched to Mu
+updated 5 october 2026. the carrier interface is being switched to Mu
 Ultra: 226V first, with a later 256V upgrade. the new pin map moves HDMI to
 TCP2, reallocates USB and gives NVMe a real clock-request connection. the
 100 W power circuit is saved, but placement, routing, cooling and hardware
@@ -41,18 +41,21 @@ the connector positions, mounting points and board gaps are preserved.
 the existing PCIe routing is intact. USB, HDMI and Ethernet route repairs
 are in progress, and most main-board routing still remains.
 
-the keyboard now has per-key RGB on four layers, with its schematic and
-placement ready for routing. the previous tracks and pours are cleared. the key positions,
+the keyboard now has per-key RGB on four layers, and routing is underway.
+the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,
 outline and cable connector are unchanged. [keyboard routing notes](keyboard/README.md)
 cover the LEDs, current limit and switch keepouts. the old non-RGB order
 files have been retired. the radio antenna connectors now match the board edge and their
 mechanical drawing. the radio still needs routing.
 
-the four-layer BMS is routed again with the new terminals, raw-pack connector
-and fuse. the routing cleanup is finished, with zero unconnected items and
-zero physical DRC errors. [layout checks](verification/bms-layout.md) cover
-the current saved board. the PCBWay quote package has been regenerated and
-checked against the saved board.
+the four-layer BMS is routed for stronger battery operation, with
+an 8 A discharge target and up to 3 A charging. it now uses a BQ76922,
+independent current guards and a limited startup branch. the 80 mm board
+has zero unconnected items and zero physical DRC findings, including the
+stricter fabrication checks. its first assembly leaves the three drive links
+out for programming and bench tests. the matching center-board cutout is
+saved. [power and battery](docs/hardware/power-and-battery.md) describes the
+circuit and the measurements needed before using it with the cells.
 the three main-board sections are eight layers,
 and most of their routing still remains. [power revision status](docs/hardware/power-revision.md)
 records what is saved and what is still unfinished.
@@ -70,7 +73,7 @@ integration.
 flowchart LR
     L[Left I/O] <-->|signal cable and power wiring| C[Center: Mu, EC, charger, gauge, maker MCU]
     C <-->|signal cable and power wiring| R[Right I/O]
-    B[BMS: protection and balancing] <-->|power and isolated control wiring| C
+    B[BMS: cell monitoring and protection] <-->|power and isolated control wiring| C
     Cells[3S cells and cell taps] --- B
     C --- K[Keyboard]
     C --- Radio[Optional radio and GNSS]
@@ -78,7 +81,8 @@ flowchart LR
 ```
 
 the center charges the whole pack. the BMS monitors the cell taps and
-balances cells locally. the EC and maker controller have separate jobs,
+controls the protection FETs. balancing is disabled in the prototype profile.
+the EC and maker controller have separate jobs,
 and the rest of the laptop is intended to work with the radio board removed.
 
 ## open in KiCad

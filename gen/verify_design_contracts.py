@@ -361,8 +361,41 @@ def check_oled(components, fps=None):
     expect(net(components, "C185", "2"), "GND", "C185 pin 2")
 
 
+def _uses_bq76922_main_interface(components):
+    from verify_power_revision import uses_bq76922_main_interface
+    return uses_bq76922_main_interface(
+        {ref:item.pin_nets for ref,item in components.items()}, components
+    )
+
+
+def check_main_pack_monitor_interface(components):
+    """Center-side READY/I2C and direct charger request, from native pins."""
+    for ref in ("C2260", "R2260", "R2261", "R719", "U2210"):
+        if ref in components:
+            fail(f"retired main-board thermal-permit part {ref} remains")
+    for ref, expected in {
+        "J2073":{"1":"/PACK_MONITOR_READY","2":"/I2C_SCL","3":"/MCU_3V3",
+                  "4":"/I2C_SDA","5":"GND","MP":"GND"},
+        "Q702":{"1":"/CHG_ENABLE","2":"GND","3":"/Power & Battery/CHG_NTC_HOT_GATE"},
+        "R2262":{"1":"/CHG_ENABLE","2":"GND"},
+        "R2263":{"1":"/PACK_MONITOR_READY","2":"GND"},
+        "TP10":{"1":"/PACK_MONITOR_READY"},
+        "U44":{"10":"/PACK_MONITOR_READY"},
+    }.items():
+        for pin, wanted in expected.items():
+            expect(net(components,ref,pin),wanted,f"{ref} monitor-interface pin {pin}")
+    for ref, wanted in {"J2073":"SM05B-SRSS-TB(LF)(SN)","Q702":"BSS138LT1G",
+                        "R2262":"RC0603FR-074K7L","R2263":"RC0603FR-07100KL"}.items():
+        expect(prop(components,ref,"MPN"),wanted,f"{ref} monitor-interface MPN")
+    expect_unconnected(components,"U44","13")
+    expect_unconnected(components,"U2635","3")
+
+
 def check_battery_and_charger(components):
     modern = prop(components, "U2", "MPN") == "ISL9241IRTZ"
+    monitor_interface = _uses_bq76922_main_interface(components)
+    if monitor_interface:
+        check_main_pack_monitor_interface(components)
     # Board split Phase 2.4: the pack protection contracts (J2, F1, U719
     # BQ77915, U11 LTC4368, Q11/Q12, Q703/Q704, RS10/RS11, C725, R700-R709,
     # Q701, C700/C724) moved to the BMS daughterboard (bms/bms.kicad_sch).
@@ -385,7 +418,7 @@ def check_battery_and_charger(components):
         "TP4": "/EC_AON_IN",
         "TP7": "/MCU_3V3",
         "TP9": "/CHG_INT_N",
-        "TP10": "/PACK_FAULT_N",
+        "TP10": "/PACK_MONITOR_READY" if monitor_interface else "/PACK_FAULT_N",
         "TP11": "/AON_FAULT_N",
     }.items():
         expect(comp(components, ref).footprint,
@@ -875,8 +908,8 @@ def check_ec_core(components):
         "4": "/PD1_PATH_EN", "5": "/PD2_PATH_EN",
         "6": "/HP_DETECT",
         "7": ("/PD1_EFUSE_PG" if modern else "/PD1_EFUSE_FAULT_N"), "8": ("/PD2_EFUSE_PG" if modern else "/PD2_EFUSE_FAULT_N"),
-        "9": "/SLS_S3", "10": "/PACK_FAULT_N",
-        "11": "/AUX_FAULT_N", "12": "GND", "13": "/PACK_RETRY_PULSE",
+        "9": "/SLS_S3", "10": "/PACK_MONITOR_READY" if _uses_bq76922_main_interface(components) else "/PACK_FAULT_N",
+        "11": "/AUX_FAULT_N", "12": "GND", "13": None if _uses_bq76922_main_interface(components) else "/PACK_RETRY_PULSE",
         "14": "/AUX_PGOOD", "15": "/MAIN_USB_VALID_N",
         "16": "/MAIN_AUX_VALID_N", "17": "/AON_FAULT_N",
         "18": "/RADIO_DB_PG", "19": "/RADIO_DB_FAULT_N",
@@ -887,7 +920,10 @@ def check_ec_core(components):
     expect(prop(components, "U44", "MPN"), "TCA9539PWR", "source-manager exact MPN")
     expect(prop(components, "U44", "I2CAddress7Bit"), "0x74", "source-manager 7-bit I2C address")
     for pin, want in source_manager_pins.items():
-        expect(net(components, "U44", pin), want, f"TCA9539 source-manager pin {pin}")
+        if want is None:
+            expect_unconnected(components,"U44",pin)
+        else:
+            expect(net(components, "U44", pin), want, f"TCA9539 source-manager pin {pin}")
     expect_value_prefix(components, "R780", "10k", "source-manager interrupt pull-up")
     expect(net(components, "R780", "1"), "/MCU_3V3", "source-manager interrupt pull-up rail")
     expect(net(components, "R780", "2"), "/EC & MCU/SOURCE_MGR_INT_N", "source-manager interrupt signal")
@@ -3556,11 +3592,17 @@ def check_bms_interconnect(components, bms_side=False):
         expect(prop(components, ref, "MPN"), mpn, f"{ref} interconnect part")
     power_map = fpc.BMS_POWER_PINMAP if bms_side else fpc.BMS_POWER_CENTER_PINMAP
     for pin, name in power_map.items():
-        wanted = name if bms_side and name == "FG_VSS" else f"/{name}"
+        legacy = bms_side and prop(components, 'U719', 'MPN') != 'BQ76922RSNR'
+        wanted = name if legacy and name == "FG_VSS" else f"/{name}"
         expect(net(components, power, str(pin)), wanted, f"{power} power pin {pin}")
     if "MP" in comp(components, power).pin_nets:
         fail(f"{power}: spring terminal must not have a mounting-pin net")
-    mapping = fpc.BMS_CONTROL_PINMAP if bms_side else fpc.BMS_CONTROL_CENTER_PINMAP
+    current = prop(components,'U719','MPN') == 'BQ76922RSNR' if bms_side else _uses_bq76922_main_interface(components)
+    if current:
+        mapping = fpc.BMS_CONTROL_PINMAP if bms_side else fpc.BMS_CONTROL_CENTER_PINMAP
+    else:
+        mapping = {1:"PACK_FAULT_N",2:"PACK_RETRY_PULSE",3:"MCU_3V3",4:"PACK_CHG_TEMP_OK",
+                   5:"CTRL_GND" if bms_side else "GND"}
     for pin, name in mapping.items():
         wanted = "GND" if name == "GND" else f"/{name}"
         expect(net(components, control, str(pin)), wanted, f"{control} control pin {pin}")
@@ -3671,14 +3713,16 @@ def check_bms_control_domains(components):
         for node in nodes[1:]:parent[find(node)]=find(nodes[0])
     for ref,item in components.items():
         if ref.startswith(('J','FPC')):continue
-        if ref=='U2206':groups=[range(1,9),range(9,17)]
+        if ref=='U2206' and item.properties.get('MPN')=='ISO1640BDR':groups=[range(1,5),range(5,9)]
+        elif ref=='U2206':groups=[range(1,9),range(9,17)]
         elif ref=='U2209':groups=[range(1,5),range(5,9)]
         else:groups=[item.pin_nets]
         for group in groups:join([item.pin_nets.get(str(pin)) for pin in group])
     control=find('/CTRL_GND')
     for power in ('FG_VSS','/PACK_NEG_RAW','/PACK_POS_RAW','/PACK_POS_FUSED'):
         if find(power)==control:fail(f'control island has a DC path to {power}')
-    for signal in ('/MCU_3V3','/PACK_FAULT_N','/PACK_RETRY_PULSE','/PACK_CHG_TEMP_OK'):
+    signals = ('/MCU_3V3','/PACK_MONITOR_READY','/PACK_I2C_SCL','/PACK_I2C_SDA') if prop(components,'U719','MPN')=='BQ76922RSNR' else ('/MCU_3V3','/PACK_FAULT_N','/PACK_RETRY_PULSE','/PACK_CHG_TEMP_OK')
+    for signal in signals:
         if find(signal)!=control:fail(f'control interface {signal} left its isolated domain')
 
 
@@ -3686,6 +3730,9 @@ def check_bms_current_pin_semantics(pin_names):
     """The DGS10 physical pins cannot be relabeled to hide reversed sensing."""
     expected={'1':'IN+','2':'IN-','3':'LIMIT','4':'ENABLE','5':'~{ALERT}',
               '6':'LATCH','7':'DELAY','8':'GND','9':'VS','10':'HYS'}
+    if pin_names.get(('U2210','2'))=='VS':
+        expected={'1':'IN+','2':'VS','3':'ALERT_N','4':'RESET','5':'GND',
+                  '6':'NC','7':'CMPREF','8':'CMPIN','9':'VOUT','10':'IN-'}
     for ref in ('U2210','U2211'):
         for pin,name in expected.items():
             expect(pin_names.get((ref,pin)),name,f'{ref} physical pin{pin} function')
@@ -3759,6 +3806,9 @@ def check_bms_current_pcb(components, pcb_text):
     refs={'RS10','RS11','F1','J2','J2201','U2210','U2211','Q2210',
           'U2204','U2205','U2206','R850','R854','R2232',
           'C2270','C2271',*(f'R{x}' for x in range(2270,2276))}
+    monitor = prop(components, 'U719', 'MPN') == 'BQ76922RSNR'
+    if monitor:
+        refs = {ref for ref, component in components.items() if component.footprint}
     fps={}
     # Do not rely on the native serializer's tab indentation. Otherwise an
     # extra space-indented footprint could evade the duplicate-ref guard.
@@ -3780,7 +3830,7 @@ def check_bms_current_pcb(components, pcb_text):
         expect(fp.footprint,component.footprint,f'{ref} PCB current footprint')
         for name,want in [('Value',component.value),('MPN',component.properties.get('MPN'))]:
             got=sync.extract(r'\(property\s+"'+name+r'"\s+"([^"]*)"',fp.text)
-            expect(got,want,f'{ref} PCB {name}')
+            expect(got,'' if want is None else want,f'{ref} PCB {name}')
         counts={};actual={}
         for _start,_end,pad in sync.pad_blocks(fp.text):
             pin=sync.pad_name(pad)
@@ -3795,12 +3845,36 @@ def check_bms_current_pcb(components, pcb_text):
         expect(actual,expected,f'{ref} PCB pad nets')
         # WAGO has two physical lands per contact, and the tap connector has
         # two MP lands. RS11 has four independent single terminals.
-        expected_counts={pin:(2 if ref=='J2' or (ref=='J2201' and pin=='MP') else 1)
-                         for pin in expected}
+        if monitor:
+            library, name = component.footprint.split(':', 1)
+            base = (ROOT / 'ducktop2.pretty' if library == 'ducktop2' else
+                    Path('/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints') /
+                    (library + '.pretty'))
+            source = base / (name + '.kicad_mod')
+            if not source.is_file():
+                fail(f'{ref} missing footprint source: {component.footprint}')
+            expected_counts = {}
+            for pin, *_ in source_footprint_pads(source):
+                if pin:
+                    expected_counts[pin] = expected_counts.get(pin, 0) + 1
+        else:
+            expected_counts={pin:(2 if ref=='J2' or (ref=='J2201' and pin=='MP') else 1)
+                             for pin in expected}
         expect(counts,expected_counts,f'{ref} PCB physical pad multiplicity')
 
 
 def check_bms_pack(components):
+    if prop(components,'U719','MPN')=='BQ76922RSNR':
+        from verify_bms_monitor import verify, ContractError
+        parts={ref:{'value':item.value,'footprint':item.footprint,'fields':item.properties,
+                    'attributes':{name for name in ('dnp','exclude_from_bom','exclude_from_board') if name in item.properties},
+                    'pins':item.pin_nets} for ref,item in components.items()}
+        try:
+            verify(parts)
+        except ContractError as error:
+            fail(str(error))
+        check_bms_control_domains(components)
+        return
     check_bms_thermal(components)
     check_bms_control_domains(components)
     # Phase 5: the BMS ground reference is FG_VSS (power-symbol net,

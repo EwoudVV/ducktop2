@@ -178,7 +178,7 @@
 		)
 		(embedded_fonts no)
 	)
-(symbol "Connector_Generic:Conn_02x06_Odd_Even"
+(symbol "Connector_Generic:Conn_01x01"
 		(pin_names
 			(offset 1.016)
 			(hide yes)
@@ -189,7 +189,7 @@
 		(in_pos_files yes)
 		(duplicate_pin_numbers_are_jumpers no)
 		(property "Reference" "J"
-			(at 1.27 7.62 0)
+			(at 0 2.54 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -198,8 +198,8 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x06_Odd_Even"
-			(at 1.27 -10.16 0)
+		(property "Value" "Conn_01x01"
+			(at 0 -2.54 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -230,7 +230,7 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, double row, 02x06, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -252,7 +252,7 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "Connector*:*_2x??_*"
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -263,10 +263,10 @@
 				)
 			)
 		)
-		(symbol "Conn_02x06_Odd_Even_1_1"
+		(symbol "Conn_01x01_1_1"
 			(rectangle
-				(start -1.27 6.35)
-				(end 3.81 -8.89)
+				(start -1.27 1.27)
+				(end 1.27 -1.27)
 				(stroke
 					(width 0.254)
 					(type default)
@@ -276,14 +276,132 @@
 				)
 			)
 			(rectangle
-				(start -1.27 5.207)
-				(end 0 4.953)
+				(start -1.27 0.127)
+				(end 0 -0.127)
 				(stroke
 					(width 0.1524)
 					(type default)
 				)
 				(fill
 					(type none)
+				)
+			)
+			(pin passive line
+				(at -5.08 0 0)
+				(length 3.81)
+				(name "Pin_1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Connector_Generic:Conn_01x03"
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "J"
+			(at 0 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03"
+			(at 0 -5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "connector"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Connector*:*_1x??_*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "Conn_01x03_1_1"
+			(rectangle
+				(start -1.27 3.81)
+				(end 1.27 -3.81)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
 				)
 			)
 			(rectangle
@@ -319,96 +437,8 @@
 					(type none)
 				)
 			)
-			(rectangle
-				(start -1.27 -4.953)
-				(end 0 -5.207)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 -7.493)
-				(end 0 -7.747)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start 3.81 5.207)
-				(end 2.54 4.953)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start 3.81 2.667)
-				(end 2.54 2.413)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start 3.81 0.127)
-				(end 2.54 -0.127)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start 3.81 -2.413)
-				(end 2.54 -2.667)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start 3.81 -4.953)
-				(end 2.54 -5.207)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start 3.81 -7.493)
-				(end 2.54 -7.747)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
 			(pin passive line
-				(at -5.08 5.08 0)
+				(at -5.08 2.54 0)
 				(length 3.81)
 				(name "Pin_1"
 					(effects
@@ -426,7 +456,7 @@
 				)
 			)
 			(pin passive line
-				(at 7.62 5.08 180)
+				(at -5.08 0 0)
 				(length 3.81)
 				(name "Pin_2"
 					(effects
@@ -444,7 +474,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 2.54 0)
+				(at -5.08 -2.54 0)
 				(length 3.81)
 				(name "Pin_3"
 					(effects
@@ -454,168 +484,6 @@
 					)
 				)
 				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 2.54 180)
-				(length 3.81)
-				(name "Pin_4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 0 0)
-				(length 3.81)
-				(name "Pin_5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 0 180)
-				(length 3.81)
-				(name "Pin_6"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "6"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -2.54 0)
-				(length 3.81)
-				(name "Pin_7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 -2.54 180)
-				(length 3.81)
-				(name "Pin_8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -5.08 0)
-				(length 3.81)
-				(name "Pin_9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 -5.08 180)
-				(length 3.81)
-				(name "Pin_10"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "10"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -7.62 0)
-				(length 3.81)
-				(name "Pin_11"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "11"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 -7.62 180)
-				(length 3.81)
-				(name "Pin_12"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "12"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -881,323 +749,7 @@
 		)
 		(embedded_fonts no)
 	)
-  (symbol "Connector_Generic:Conn_01x03"
-		(pin_names
-			(offset 1.016)
-			(hide yes)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "J"
-			(at 0 5.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x03"
-			(at 0 -5.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "connector"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "Connector*:*_1x??_*"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(symbol "Conn_01x03_1_1"
-			(rectangle
-				(start -1.27 3.81)
-				(end 1.27 -3.81)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type background)
-				)
-			)
-			(rectangle
-				(start -1.27 2.667)
-				(end 0 2.413)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 0.127)
-				(end 0 -0.127)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(rectangle
-				(start -1.27 -2.413)
-				(end 0 -2.667)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(pin passive line
-				(at -5.08 2.54 0)
-				(length 3.81)
-				(name "Pin_1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 0 0)
-				(length 3.81)
-				(name "Pin_2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -2.54 0)
-				(length 3.81)
-				(name "Pin_3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
-(symbol "Connector_Generic:Conn_01x01"
-		(pin_names
-			(offset 1.016)
-			(hide yes)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(duplicate_pin_numbers_are_jumpers no)
-		(property "Reference" "J"
-			(at 0 2.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x01"
-			(at 0 -2.54 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "connector"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "Connector*:*_1x??_*"
-			(at 0 0 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(symbol "Conn_01x01_1_1"
-			(rectangle
-				(start -1.27 1.27)
-				(end 1.27 -1.27)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type background)
-				)
-			)
-			(rectangle
-				(start -1.27 0.127)
-				(end 0 -0.127)
-				(stroke
-					(width 0.1524)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(pin passive line
-				(at -5.08 0 0)
-				(length 3.81)
-				(name "Pin_1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
-)
+  )
 (symbol
   (lib_id "Conn_01x41_Signal_SH:Conn_01x41_Signal_SH")
   (at 59.69 299.72 0)
@@ -1206,55 +758,55 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid e1162429-e3d4-5af7-beed-b1aac88beaa6)
+  (uuid e8e2bf5f-ffa8-52a6-baf1-a0c2de8e04b5)
   (property "Reference" "FPC102" (at 59.69 189.23 0) (effects (font (size 1.27 1.27))))
   (property "Value" "Molex5039084120 signal cable" (at 59.69 410.21 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "ducktop2:Molex_5039084120_1x41_P0.50mm_Horizontal" (at 59.69 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 59.69 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Molex" (at 59.69 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "5039084120" (at 59.69 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 2ac9ad9c-211a-54fc-a818-562199004dee))
-  (pin "2" (uuid a1b76567-116a-5c88-b122-f8ac4d22bb8a))
-  (pin "3" (uuid d2e356b4-c947-55a9-9658-b262c504a13a))
-  (pin "4" (uuid 1cfb5c71-eb93-55fb-bada-5eac803c90a2))
-  (pin "5" (uuid 848e32b6-ccd5-52eb-92cc-ec3bc77e8abf))
-  (pin "6" (uuid 8ef0f76e-be5a-593d-b013-43306cdcc6ff))
-  (pin "7" (uuid e8e2bf5f-ffa8-52a6-baf1-a0c2de8e04b5))
-  (pin "8" (uuid 312ce9d6-6486-5bbc-84cd-ff41353eefa6))
-  (pin "9" (uuid e5552ca2-07fc-51a6-a7d1-6e97cbc052c4))
-  (pin "10" (uuid 9938427a-d9fa-5269-8158-0b7bc49ee55c))
-  (pin "11" (uuid 124135b1-a11a-502a-80e6-c4f9ff847c39))
-  (pin "12" (uuid fd0f511a-b8bb-5af3-8f0e-bc5db6ef8f82))
-  (pin "13" (uuid 72dff0f2-40e1-580b-825e-da9a1cb2b13e))
-  (pin "14" (uuid dae25277-e2a1-5eb6-8a3d-fb31dd88e12b))
-  (pin "15" (uuid 0e40b8e3-d6d7-59e5-a2e5-6c2346783892))
-  (pin "16" (uuid 6acb4d3b-42f4-5018-aebf-ccf4090308dc))
-  (pin "17" (uuid 2f6bab34-1728-541c-a8b4-92e00ca18616))
-  (pin "18" (uuid e56fb165-6ce5-5347-a0d4-bb6225265505))
-  (pin "19" (uuid 15f93c59-a26d-514b-8b5f-b545e47ee3e2))
-  (pin "20" (uuid 62f0ad92-9787-577e-8ae0-d1ef4dd337da))
-  (pin "21" (uuid bcc5b30d-739a-5b62-b520-d6b6e1a34fe5))
-  (pin "22" (uuid b9172245-e8de-5fa6-8207-29fb3a13ecd3))
-  (pin "23" (uuid 802e69ae-8c84-503e-89a1-ffacca188ed3))
-  (pin "24" (uuid d9b604c4-712e-5ca7-825e-1280f1a3ba69))
-  (pin "25" (uuid 0268f0bc-bc66-5c57-847a-95a6c92fcd16))
-  (pin "26" (uuid 7db53b8b-3368-5f07-93f5-bc9ca7f15fb0))
-  (pin "27" (uuid df80dc07-0228-5450-ae08-1d10e7a2030f))
-  (pin "28" (uuid 1abade8f-00e3-5b09-a977-d38b657bce26))
-  (pin "29" (uuid 15462c15-6464-5ae3-b435-1741c0040448))
-  (pin "30" (uuid 0b8df510-36ed-545b-a718-1763bd14637f))
-  (pin "31" (uuid 4c0e33f3-fabf-5ef1-bc5b-40b62990f746))
-  (pin "32" (uuid 76eb1ec3-d28d-5ad1-baa0-ba5db1338b29))
-  (pin "33" (uuid d846acbe-5dfb-5397-a317-c3934c89c504))
-  (pin "34" (uuid 0a7357d0-ce2f-577f-b869-95ebfe7d0634))
-  (pin "35" (uuid 068ff8d4-fb95-564c-8453-7928fa94f9e1))
-  (pin "36" (uuid 4ab50933-332f-5543-8ac0-379784b152e6))
-  (pin "37" (uuid e80370db-780c-5671-aef9-15dc5437c126))
-  (pin "38" (uuid 19c90a5a-8da5-5df6-8fd6-ab985a36eb88))
-  (pin "39" (uuid d87d678e-ee7f-51ed-8d60-01d733c975ce))
-  (pin "40" (uuid 244a6018-025c-5516-b6b5-8e4f00d277cb))
-  (pin "41" (uuid d5ce43ba-1a3d-50d5-b14e-baa832260dcc))
-  (pin "SH" (uuid 7637684c-3cf0-579a-a856-692f395f103b))
+  (pin "1" (uuid 312ce9d6-6486-5bbc-84cd-ff41353eefa6))
+  (pin "2" (uuid e5552ca2-07fc-51a6-a7d1-6e97cbc052c4))
+  (pin "3" (uuid 9938427a-d9fa-5269-8158-0b7bc49ee55c))
+  (pin "4" (uuid 124135b1-a11a-502a-80e6-c4f9ff847c39))
+  (pin "5" (uuid fd0f511a-b8bb-5af3-8f0e-bc5db6ef8f82))
+  (pin "6" (uuid 72dff0f2-40e1-580b-825e-da9a1cb2b13e))
+  (pin "7" (uuid dae25277-e2a1-5eb6-8a3d-fb31dd88e12b))
+  (pin "8" (uuid 0e40b8e3-d6d7-59e5-a2e5-6c2346783892))
+  (pin "9" (uuid 6acb4d3b-42f4-5018-aebf-ccf4090308dc))
+  (pin "10" (uuid 2f6bab34-1728-541c-a8b4-92e00ca18616))
+  (pin "11" (uuid e56fb165-6ce5-5347-a0d4-bb6225265505))
+  (pin "12" (uuid 15f93c59-a26d-514b-8b5f-b545e47ee3e2))
+  (pin "13" (uuid 62f0ad92-9787-577e-8ae0-d1ef4dd337da))
+  (pin "14" (uuid bcc5b30d-739a-5b62-b520-d6b6e1a34fe5))
+  (pin "15" (uuid b9172245-e8de-5fa6-8207-29fb3a13ecd3))
+  (pin "16" (uuid 802e69ae-8c84-503e-89a1-ffacca188ed3))
+  (pin "17" (uuid d9b604c4-712e-5ca7-825e-1280f1a3ba69))
+  (pin "18" (uuid 0268f0bc-bc66-5c57-847a-95a6c92fcd16))
+  (pin "19" (uuid 7db53b8b-3368-5f07-93f5-bc9ca7f15fb0))
+  (pin "20" (uuid df80dc07-0228-5450-ae08-1d10e7a2030f))
+  (pin "21" (uuid 1abade8f-00e3-5b09-a977-d38b657bce26))
+  (pin "22" (uuid 15462c15-6464-5ae3-b435-1741c0040448))
+  (pin "23" (uuid 0b8df510-36ed-545b-a718-1763bd14637f))
+  (pin "24" (uuid 4c0e33f3-fabf-5ef1-bc5b-40b62990f746))
+  (pin "25" (uuid 76eb1ec3-d28d-5ad1-baa0-ba5db1338b29))
+  (pin "26" (uuid d846acbe-5dfb-5397-a317-c3934c89c504))
+  (pin "27" (uuid 0a7357d0-ce2f-577f-b869-95ebfe7d0634))
+  (pin "28" (uuid 068ff8d4-fb95-564c-8453-7928fa94f9e1))
+  (pin "29" (uuid 4ab50933-332f-5543-8ac0-379784b152e6))
+  (pin "30" (uuid e80370db-780c-5671-aef9-15dc5437c126))
+  (pin "31" (uuid 19c90a5a-8da5-5df6-8fd6-ab985a36eb88))
+  (pin "32" (uuid d87d678e-ee7f-51ed-8d60-01d733c975ce))
+  (pin "33" (uuid 244a6018-025c-5516-b6b5-8e4f00d277cb))
+  (pin "34" (uuid d5ce43ba-1a3d-50d5-b14e-baa832260dcc))
+  (pin "35" (uuid 7637684c-3cf0-579a-a856-692f395f103b))
+  (pin "36" (uuid c1f372a9-862e-5a11-814c-a5d053c8013d))
+  (pin "37" (uuid 037f48f3-a3ed-50ce-af6e-3621b82f8fc0))
+  (pin "38" (uuid 2e424005-7e22-5228-a83a-f2e483d91e34))
+  (pin "39" (uuid 3d8f4251-e922-5014-a8ab-b85f06f30f0f))
+  (pin "40" (uuid 45825bb0-bf19-56e3-90a8-b62e2b72e4a9))
+  (pin "41" (uuid 82235c8d-9825-5e8f-b374-a6cdc31d0311))
+  (pin "SH" (uuid ba6dd3aa-9dbb-58d9-ac98-28ef65e66bdd))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1268,175 +820,175 @@
   (shape bidirectional)
   (at 54.61 299.72 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid c1f372a9-862e-5a11-814c-a5d053c8013d)
+  (uuid 95c58f3a-7f37-5266-bd6e-be30e9a5c448)
 )
 (hierarchical_label "HUB_PRT_CTL4"
   (shape bidirectional)
   (at 54.61 302.26 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 037f48f3-a3ed-50ce-af6e-3621b82f8fc0)
+  (uuid 05f60d0b-fc1f-5005-94cf-67959db221ce)
 )
 (hierarchical_label "USB_J12_PERMIT"
   (shape bidirectional)
   (at 54.61 304.8 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 2e424005-7e22-5228-a83a-f2e483d91e34)
+  (uuid 7c347a04-feae-5bd4-8a25-13e4cb863f98)
 )
 (hierarchical_label "USB_J11_PERMIT"
   (shape bidirectional)
   (at 54.61 307.34 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 3d8f4251-e922-5014-a8ab-b85f06f30f0f)
+  (uuid 6896602c-d1fb-565d-a1c7-c25645a94884)
 )
 (hierarchical_label "PD2_SOURCE_PG"
   (shape bidirectional)
   (at 54.61 312.42 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 45825bb0-bf19-56e3-90a8-b62e2b72e4a9)
+  (uuid df8e73a7-f006-5c59-9bd6-f15e2fc3410c)
 )
 (hierarchical_label "SERVICE_MUX_RESET_N"
   (shape bidirectional)
   (at 54.61 314.96 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 82235c8d-9825-5e8f-b374-a6cdc31d0311)
+  (uuid 19a452f5-d281-5e81-9d03-fc6ae8e77994)
 )
 (hierarchical_label "PD_PROTECT_FAULT_N"
   (shape bidirectional)
   (at 54.61 317.5 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid ba6dd3aa-9dbb-58d9-ac98-28ef65e66bdd)
+  (uuid 2278dde0-ebc7-52e5-97d7-f777ebf5142e)
 )
 (hierarchical_label "PD1_EFUSE_PG"
   (shape bidirectional)
   (at 54.61 322.58 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 95c58f3a-7f37-5266-bd6e-be30e9a5c448)
+  (uuid 0f9912d5-e2c5-59ae-bc84-0be76e8cbb90)
 )
 (hierarchical_label "PD1_VALID_N"
   (shape bidirectional)
   (at 54.61 325.12 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 05f60d0b-fc1f-5005-94cf-67959db221ce)
+  (uuid 4b3e8768-2869-5fc9-9cc1-13d39d56fa13)
 )
 (hierarchical_label "PD1_PATH_EN"
   (shape bidirectional)
   (at 54.61 327.66 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 7c347a04-feae-5bd4-8a25-13e4cb863f98)
+  (uuid 79df79fd-3af3-5d0f-87d4-e43383561bf5)
 )
 (hierarchical_label "PD1_TCPC_IRQ_N"
   (shape bidirectional)
   (at 54.61 332.74 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 6896602c-d1fb-565d-a1c7-c25645a94884)
+  (uuid e3d548a9-b863-5494-9d6c-c3e6c4d0cfcc)
 )
 (hierarchical_label "PD1_I2C_SDA"
   (shape bidirectional)
   (at 54.61 335.28 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid df8e73a7-f006-5c59-9bd6-f15e2fc3410c)
+  (uuid 3ac19ce1-7c6b-5217-bc96-864de97ff605)
 )
 (hierarchical_label "PD1_I2C_SCL"
   (shape bidirectional)
   (at 54.61 337.82 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 19a452f5-d281-5e81-9d03-fc6ae8e77994)
+  (uuid 1b4b89c4-8560-58b1-82d5-90a395a86f51)
 )
 (hierarchical_label "HUB_DS4_DN"
   (shape bidirectional)
   (at 54.61 342.9 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 2278dde0-ebc7-52e5-97d7-f777ebf5142e)
+  (uuid 1dc1b649-158a-59fa-a67f-732b30f0225c)
 )
 (hierarchical_label "HUB_DS4_DP"
   (shape bidirectional)
   (at 54.61 345.44 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 0f9912d5-e2c5-59ae-bc84-0be76e8cbb90)
+  (uuid 1ad629bb-17e4-5c1a-80ca-4c84af81f441)
 )
 (hierarchical_label "HUB_DS1_DN"
   (shape bidirectional)
   (at 54.61 350.52 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 4b3e8768-2869-5fc9-9cc1-13d39d56fa13)
+  (uuid a5325027-5bbc-5402-9f29-6865221335ad)
 )
 (hierarchical_label "HUB_DS1_DP"
   (shape bidirectional)
   (at 54.61 353.06 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 79df79fd-3af3-5d0f-87d4-e43383561bf5)
+  (uuid 8832e039-e156-57d0-b8d3-9eb74842d77d)
 )
 (hierarchical_label "USBC2_DN"
   (shape bidirectional)
   (at 54.61 358.14 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid e3d548a9-b863-5494-9d6c-c3e6c4d0cfcc)
+  (uuid e976c26e-f5e9-5d33-9d7f-608ed8d7875e)
 )
 (hierarchical_label "USBC2_DP"
   (shape bidirectional)
   (at 54.61 360.68 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 3ac19ce1-7c6b-5217-bc96-864de97ff605)
+  (uuid 196b7110-18bb-54cb-9f7c-be10c32263c7)
 )
 (hierarchical_label "USBC1_DN"
   (shape bidirectional)
   (at 54.61 365.76 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 1b4b89c4-8560-58b1-82d5-90a395a86f51)
+  (uuid b342205d-a1e0-5a55-a0bd-d803d340ea32)
 )
 (hierarchical_label "USBC1_DP"
   (shape bidirectional)
   (at 54.61 368.3 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 1dc1b649-158a-59fa-a67f-732b30f0225c)
+  (uuid 790f8e87-9347-58e6-8fb7-7bbba592249d)
 )
 (hierarchical_label "USBC2_SSTX_N"
   (shape bidirectional)
   (at 54.61 373.38 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 1ad629bb-17e4-5c1a-80ca-4c84af81f441)
+  (uuid facca0ce-3df4-5138-8b07-56cd62bad4c0)
 )
 (hierarchical_label "USBC2_SSTX_P"
   (shape bidirectional)
   (at 54.61 375.92 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid a5325027-5bbc-5402-9f29-6865221335ad)
+  (uuid 971320e1-f5a3-5601-8ad1-b3121811adf3)
 )
 (hierarchical_label "USBC2_SSRX_N"
   (shape bidirectional)
   (at 54.61 381 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 8832e039-e156-57d0-b8d3-9eb74842d77d)
+  (uuid 7d11af38-b145-5f07-9e81-b887939bbd01)
 )
 (hierarchical_label "USBC2_SSRX_P"
   (shape bidirectional)
   (at 54.61 383.54 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid e976c26e-f5e9-5d33-9d7f-608ed8d7875e)
+  (uuid fc6e9f52-5b0d-50ae-831c-34c849a41b50)
 )
 (hierarchical_label "USBC1_SSTX_N"
   (shape bidirectional)
   (at 54.61 388.62 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 196b7110-18bb-54cb-9f7c-be10c32263c7)
+  (uuid 29126289-3901-5425-8e0a-3520fa651517)
 )
 (hierarchical_label "USBC1_SSTX_P"
   (shape bidirectional)
   (at 54.61 391.16 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid b342205d-a1e0-5a55-a0bd-d803d340ea32)
+  (uuid 19d7bc1f-5f2b-523a-a219-825e1d903fe3)
 )
 (hierarchical_label "USBC1_SSRX_N"
   (shape bidirectional)
   (at 54.61 396.24 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 790f8e87-9347-58e6-8fb7-7bbba592249d)
+  (uuid 119a317a-1249-556f-a074-ab3db8fa0300)
 )
 (hierarchical_label "USBC1_SSRX_P"
   (shape bidirectional)
   (at 54.61 398.78 180)
   (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid facca0ce-3df4-5138-8b07-56cd62bad4c0)
+  (uuid 21ed6678-07e9-57f2-8f6f-51c4e3f976e8)
 )
 (symbol
   (lib_id "power:GND")
@@ -1446,12 +998,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 971320e1-f5a3-5601-8ad1-b3121811adf3)
+  (uuid 13a4292a-9486-527f-a2b6-3938e62ab94c)
   (property "Reference" "#PWR3101" (at 54.61 307.34 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 312.42 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 309.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 309.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 7d11af38-b145-5f07-9e81-b887939bbd01))
+  (pin "1" (uuid 2ecce6d0-e91a-5d9c-a20b-9f5e38ee1bef))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1464,7 +1016,7 @@
 (label "GND"
   (at 54.61 309.88 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid fc6e9f52-5b0d-50ae-831c-34c849a41b50)
+  (uuid e9a79d35-c475-5933-9db5-9b2bd9ec15b4)
 )
 (symbol
   (lib_id "power:GND")
@@ -1474,12 +1026,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 29126289-3901-5425-8e0a-3520fa651517)
+  (uuid 10bf0c89-7fdf-51c3-a00c-50e1c8dfad05)
   (property "Reference" "#PWR3102" (at 54.61 317.5 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 322.58 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 320.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 320.04 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 19d7bc1f-5f2b-523a-a219-825e1d903fe3))
+  (pin "1" (uuid 040ac9f6-e984-579d-83e8-9180471db0b7))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1492,7 +1044,7 @@
 (label "GND"
   (at 54.61 320.04 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 119a317a-1249-556f-a074-ab3db8fa0300)
+  (uuid 3b4cc6dd-7cbe-5c69-9dbe-36a7a129129d)
 )
 (symbol
   (lib_id "power:GND")
@@ -1502,12 +1054,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 21ed6678-07e9-57f2-8f6f-51c4e3f976e8)
+  (uuid 53082f6a-6c36-58a7-892a-a4e944e82642)
   (property "Reference" "#PWR3103" (at 54.61 327.66 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 332.74 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 330.2 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 13a4292a-9486-527f-a2b6-3938e62ab94c))
+  (pin "1" (uuid c95c81e1-baee-5652-ac64-e1594e452ad7))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1520,7 +1072,7 @@
 (label "GND"
   (at 54.61 330.2 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2ecce6d0-e91a-5d9c-a20b-9f5e38ee1bef)
+  (uuid 81ac7ba8-83e7-5d27-b9cf-e801119a25d4)
 )
 (symbol
   (lib_id "power:GND")
@@ -1530,12 +1082,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid e9a79d35-c475-5933-9db5-9b2bd9ec15b4)
+  (uuid af4eadb2-dd3a-552f-9f39-c06f997ab7ae)
   (property "Reference" "#PWR3104" (at 54.61 337.82 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 342.9 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 340.36 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 10bf0c89-7fdf-51c3-a00c-50e1c8dfad05))
+  (pin "1" (uuid 36e95002-e7a1-583b-9ed6-a7906c3eeb69))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1548,7 +1100,7 @@
 (label "GND"
   (at 54.61 340.36 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 040ac9f6-e984-579d-83e8-9180471db0b7)
+  (uuid 20f58166-04d1-56f4-aa6a-5b72cd9b1d2f)
 )
 (symbol
   (lib_id "power:GND")
@@ -1558,12 +1110,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 3b4cc6dd-7cbe-5c69-9dbe-36a7a129129d)
+  (uuid b277503d-8ee7-5563-83ec-f146d808be9a)
   (property "Reference" "#PWR3105" (at 54.61 345.44 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 350.52 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 347.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 347.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 53082f6a-6c36-58a7-892a-a4e944e82642))
+  (pin "1" (uuid 15804f88-04d1-54d1-b16e-471b09387dae))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1576,7 +1128,7 @@
 (label "GND"
   (at 54.61 347.98 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c95c81e1-baee-5652-ac64-e1594e452ad7)
+  (uuid 4ed865dd-e95d-5a5d-8a1d-c3990e6f945f)
 )
 (symbol
   (lib_id "power:GND")
@@ -1586,12 +1138,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 81ac7ba8-83e7-5d27-b9cf-e801119a25d4)
+  (uuid b4a8402d-7c30-5045-a3fb-c3929358c269)
   (property "Reference" "#PWR3106" (at 54.61 353.06 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 358.14 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 355.6 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid af4eadb2-dd3a-552f-9f39-c06f997ab7ae))
+  (pin "1" (uuid 84728335-18a7-5f8f-aa71-cf76c03f8eb4))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1604,7 +1156,7 @@
 (label "GND"
   (at 54.61 355.6 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 36e95002-e7a1-583b-9ed6-a7906c3eeb69)
+  (uuid fcfbfec6-3567-53a2-85ee-38233b906b7a)
 )
 (symbol
   (lib_id "power:GND")
@@ -1614,12 +1166,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 20f58166-04d1-56f4-aa6a-5b72cd9b1d2f)
+  (uuid 7c526753-843a-51f7-9fcd-eae25b579bb0)
   (property "Reference" "#PWR3107" (at 54.61 360.68 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 365.76 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 363.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 363.22 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b277503d-8ee7-5563-83ec-f146d808be9a))
+  (pin "1" (uuid 3456aabd-c61c-5ae8-b6c4-9815f17d1001))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1632,7 +1184,7 @@
 (label "GND"
   (at 54.61 363.22 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 15804f88-04d1-54d1-b16e-471b09387dae)
+  (uuid b8411f0d-a6f8-5217-bd85-63b11eb235e0)
 )
 (symbol
   (lib_id "power:GND")
@@ -1642,12 +1194,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 4ed865dd-e95d-5a5d-8a1d-c3990e6f945f)
+  (uuid fe1adf24-6e51-56eb-82cd-0d763ca2c646)
   (property "Reference" "#PWR3108" (at 54.61 368.3 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 373.38 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 370.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 370.84 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b4a8402d-7c30-5045-a3fb-c3929358c269))
+  (pin "1" (uuid 24963bf7-09d6-5426-a474-6eb39542cf6c))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1660,7 +1212,7 @@
 (label "GND"
   (at 54.61 370.84 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 84728335-18a7-5f8f-aa71-cf76c03f8eb4)
+  (uuid ce665f61-2a8c-5021-b6c8-1a7b9b3ef53b)
 )
 (symbol
   (lib_id "power:GND")
@@ -1670,12 +1222,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid fcfbfec6-3567-53a2-85ee-38233b906b7a)
+  (uuid 1b2069d0-8afb-56b7-92f0-be7ac2129c81)
   (property "Reference" "#PWR3109" (at 54.61 375.92 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 381 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 378.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 378.46 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 7c526753-843a-51f7-9fcd-eae25b579bb0))
+  (pin "1" (uuid ecbff41e-ec41-5c84-8ac2-ed2f797092ae))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1688,7 +1240,7 @@
 (label "GND"
   (at 54.61 378.46 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 3456aabd-c61c-5ae8-b6c4-9815f17d1001)
+  (uuid 8938993f-fa65-5e67-b148-b80a49e853ab)
 )
 (symbol
   (lib_id "power:GND")
@@ -1698,12 +1250,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid b8411f0d-a6f8-5217-bd85-63b11eb235e0)
+  (uuid 99ad933e-c690-5155-8fef-9abe0bbb90fc)
   (property "Reference" "#PWR3110" (at 54.61 383.54 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 388.62 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 386.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 386.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid fe1adf24-6e51-56eb-82cd-0d763ca2c646))
+  (pin "1" (uuid be420f3e-29b7-5004-a274-642868fa00b2))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1716,7 +1268,7 @@
 (label "GND"
   (at 54.61 386.08 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 24963bf7-09d6-5426-a474-6eb39542cf6c)
+  (uuid d92285e8-2680-51a2-afca-ba51c7d577d5)
 )
 (symbol
   (lib_id "power:GND")
@@ -1726,12 +1278,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid ce665f61-2a8c-5021-b6c8-1a7b9b3ef53b)
+  (uuid 95aefbf0-dae6-5e13-9844-feeb3ab1531b)
   (property "Reference" "#PWR3111" (at 54.61 391.16 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 396.24 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 393.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 393.7 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 1b2069d0-8afb-56b7-92f0-be7ac2129c81))
+  (pin "1" (uuid ca959d6d-37fd-557c-a335-3bda094f3725))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1744,7 +1296,7 @@
 (label "GND"
   (at 54.61 393.7 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid ecbff41e-ec41-5c84-8ac2-ed2f797092ae)
+  (uuid 21cb35a9-e93d-5f12-a95f-38f852a278a2)
 )
 (symbol
   (lib_id "power:GND")
@@ -1754,12 +1306,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 8938993f-fa65-5e67-b148-b80a49e853ab)
+  (uuid dc9aaf29-698f-51ff-8628-084daf9995a4)
   (property "Reference" "#PWR3112" (at 54.61 398.78 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 54.61 403.86 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 54.61 401.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 54.61 401.32 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 99ad933e-c690-5155-8fef-9abe0bbb90fc))
+  (pin "1" (uuid 09167894-1c8a-506a-ada6-2595ba41f63a))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1772,27 +1324,155 @@
 (label "GND"
   (at 54.61 401.32 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid be420f3e-29b7-5004-a274-642868fa00b2)
+  (uuid 95f42160-7fed-53a3-a8a5-ab4641fe6cc7)
 )
 (label "FPC102_SHELL"
   (at 64.77 403.86 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid d92285e8-2680-51a2-afca-ba51c7d577d5)
+  (uuid cab88505-452c-564b-93f3-cda4941150b9)
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-(text "Power uses the separate rated looms. The signal cable carries no positive supply rails." (at 180.34 309.88 0) (effects (font (size 1.27 1.27))) (uuid 880090e7-fd5a-57ba-ab1c-b8cc773a5f71))
+(symbol
+  (lib_id "Connector_Generic:Conn_01x03")
+  (at 229.87 160.02 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid ea91a8fe-2c0c-55e7-b180-ad73eac2ad47)
+  (property "Reference" "J2430" (at 229.87 151.13 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "left power rails" (at 229.87 168.91 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_453_SMD" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-453/998-404" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 53eb3f72-e227-51ee-b871-824ec8ef487d))
+  (pin "2" (uuid 11340e70-636f-5999-a30b-e2de5952a06e))
+  (pin "3" (uuid c7e27a8f-4efa-5713-9d79-9e4dceceb336))
+  (instances
+    (project "ducktop2"
+      (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
+        (reference "J2430")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "USB_PD_SELECTED"
+  (shape bidirectional)
+  (at 224.79 157.48 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 7faa1592-8698-5287-8dcc-6d923c8b512c)
+)
+(hierarchical_label "PD1_VBUS_RAW"
+  (shape bidirectional)
+  (at 224.79 160.02 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid d2c2028d-875a-59cd-9856-d5b4e9312382)
+)
+(hierarchical_label "VSYS"
+  (shape bidirectional)
+  (at 224.79 162.56 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 98c7015d-055d-52c6-9791-98854d88eb7c)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x03")
+  (at 229.87 185.42 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 0d5d41e5-3c47-54d9-bb85-46c922d03d34)
+  (property "Reference" "J2450" (at 229.87 176.53 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "left power rails" (at 229.87 194.31 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_453_SMD" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-453/998-404" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 01b50d8d-f5d6-511a-a45a-f8049bc36648))
+  (pin "2" (uuid 8d2f425f-2a73-532c-9e17-4a3c36053031))
+  (pin "3" (uuid ce615d29-5e4c-5cb2-84a3-7734c915828e))
+  (instances
+    (project "ducktop2"
+      (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
+        (reference "J2450")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 224.79 182.88 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 9dfabf74-e717-5af5-866a-14ca667e868e)
+)
+(hierarchical_label "SYS_3V3"
+  (shape bidirectional)
+  (at 224.79 185.42 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid e33d954d-d70d-5521-b46b-72d4d075f471)
+)
+(hierarchical_label "AUX_DC_RAW"
+  (shape bidirectional)
+  (at 224.79 187.96 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 34f0086b-458f-5e49-ba9f-70b6cdc0647a)
+)
+(symbol
+  (lib_id "Connector_Generic:Conn_01x01")
+  (at 229.87 209.55 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid fb702aac-d7c1-55e4-b758-a0026dd4c73b)
+  (property "Reference" "J2460" (at 229.87 203.2 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "left power return" (at 229.87 215.9 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "ducktop2:WAGO_2060_451_SMD" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "WAGO" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "2060-451/998-404" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 52475e61-57b7-564c-af04-21b2e4041eb8))
+  (instances
+    (project "ducktop2"
+      (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
+        (reference "J2460")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GND"
+  (at 224.79 209.55 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 7080ba01-0255-57c1-9e72-77a5e6f52369)
+)
+(text "Power uses the separate rated looms. The signal cable carries no positive supply rails." (at 180.34 309.88 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 5cad0aff-cb16-5cd7-b5c3-aeca4e6bb857))
 (symbol
   (lib_id "Device:R")
   (at 110.49 469.9 0)
@@ -1801,7 +1481,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 498fb427-87e2-5467-9ec7-2e5cce7e1007)
+  (uuid 880090e7-fd5a-57ba-ab1c-b8cc773a5f71)
   (property "Reference" "R2442" (at 110.49 467.36 0) (effects (font (size 1.27 1.27))))
   (property "Value" "0.33" (at 110.49 472.44 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 110.49 469.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -1810,8 +1490,8 @@
   (property "MPN" "ERJ3RQFR33V" (at 110.49 469.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://industrial.panasonic.com/ww/products/pt/current-sensing-chip-resistors/models/ERJ3RQFR33V" (at 110.49 469.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Placement" "one at each end of the connector shell; short connections to the adjacent ground plane" (at 110.49 469.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 5d36b359-b451-5cef-b4b0-733b1d8f9d55))
-  (pin "2" (uuid de39356c-e757-5441-b238-37a7cfd4217f))
+  (pin "1" (uuid 498fb427-87e2-5467-9ec7-2e5cce7e1007))
+  (pin "2" (uuid 5d36b359-b451-5cef-b4b0-733b1d8f9d55))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1824,7 +1504,7 @@
 (label "FPC102_SHELL"
   (at 110.49 466.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 7f76cfed-8839-5dc4-bf9a-d7fa1f49716b)
+  (uuid de39356c-e757-5441-b238-37a7cfd4217f)
 )
 (symbol
   (lib_id "power:GND")
@@ -1834,12 +1514,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 7280ac23-cf76-5eca-b5af-23857880cdf7)
+  (uuid 7f76cfed-8839-5dc4-bf9a-d7fa1f49716b)
   (property "Reference" "#PWR3113" (at 110.49 471.17 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 110.49 476.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 110.49 473.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 110.49 473.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b05239b4-300e-5a5c-bbd5-0c9a2f3c0bda))
+  (pin "1" (uuid 7280ac23-cf76-5eca-b5af-23857880cdf7))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1852,7 +1532,7 @@
 (label "GND"
   (at 110.49 473.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid c2280a1a-68a5-5108-afbe-1d2018cea264)
+  (uuid b05239b4-300e-5a5c-bbd5-0c9a2f3c0bda)
 )
 (symbol
   (lib_id "Device:R")
@@ -1862,7 +1542,7 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid d5268b9e-cbec-5722-9a04-53bbaeaf13b3)
+  (uuid c2280a1a-68a5-5108-afbe-1d2018cea264)
   (property "Reference" "R2443" (at 139.7 467.36 0) (effects (font (size 1.27 1.27))))
   (property "Value" "0.33" (at 139.7 472.44 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 139.7 469.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -1871,8 +1551,8 @@
   (property "MPN" "ERJ3RQFR33V" (at 139.7 469.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://industrial.panasonic.com/ww/products/pt/current-sensing-chip-resistors/models/ERJ3RQFR33V" (at 139.7 469.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Placement" "one at each end of the connector shell; short connections to the adjacent ground plane" (at 139.7 469.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 798f3884-2b52-5dfb-b2bf-48f2147cff84))
-  (pin "2" (uuid 99dec613-22a6-5d38-963c-7bda28c6d404))
+  (pin "1" (uuid d5268b9e-cbec-5722-9a04-53bbaeaf13b3))
+  (pin "2" (uuid 798f3884-2b52-5dfb-b2bf-48f2147cff84))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1885,7 +1565,7 @@
 (label "FPC102_SHELL"
   (at 139.7 466.09 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 50e0938e-256d-5303-beef-09ba9261946f)
+  (uuid 99dec613-22a6-5d38-963c-7bda28c6d404)
 )
 (symbol
   (lib_id "power:GND")
@@ -1895,12 +1575,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid 0771b017-2a37-52f5-afe6-459f4ea6bf1d)
+  (uuid 50e0938e-256d-5303-beef-09ba9261946f)
   (property "Reference" "#PWR3114" (at 139.7 471.17 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 139.7 476.25 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 139.7 473.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 139.7 473.71 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 6e86f9bf-42a7-5039-91ed-518490e04ff6))
+  (pin "1" (uuid 0771b017-2a37-52f5-afe6-459f4ea6bf1d))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1913,7 +1593,7 @@
 (label "GND"
   (at 139.7 473.71 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 1a15283c-c066-5b5e-ab18-f76be32066e4)
+  (uuid 6e86f9bf-42a7-5039-91ed-518490e04ff6)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -1923,7 +1603,7 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid b536a088-3762-5deb-9fa5-341ff3baf02e)
+  (uuid 1a15283c-c066-5b5e-ab18-f76be32066e4)
   (property "Reference" "J2441" (at 309.88 127 0) (effects (font (size 1.27 1.27))))
   (property "Value" "main ground strap" (at 309.88 132.08 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm" (at 309.88 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -1932,7 +1612,7 @@
   (property "AssemblyResistance" "each complete strap <=1 mOhm, including pads, vias and joints" (at 309.88 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Assembly" "two independently attached straps per seam; insulate and strain-relieve both" (at 309.88 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.alphawire.com/disteAPI/SpecPDF/DownloadProductSpecPdf?productPartNumber=1230" (at 309.88 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 56525a6d-3913-59ae-8b6d-5bf055ad53d8))
+  (pin "1" (uuid b536a088-3762-5deb-9fa5-341ff3baf02e))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1950,12 +1630,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid b743343b-bec1-572b-9720-03400f64452e)
+  (uuid 56525a6d-3913-59ae-8b6d-5bf055ad53d8)
   (property "Reference" "#PWR3115" (at 309.88 127 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 309.88 132.08 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 309.88 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 309.88 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d36dcb31-7e95-5519-8753-468286987063))
+  (pin "1" (uuid b743343b-bec1-572b-9720-03400f64452e))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -1968,7 +1648,7 @@
 (label "GND"
   (at 309.88 129.54 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2ff8ee73-2dd3-5a5e-9bc6-413319fa2648)
+  (uuid d36dcb31-7e95-5519-8753-468286987063)
 )
 (symbol
   (lib_id "Connector:TestPoint")
@@ -1978,7 +1658,7 @@
   (in_bom no)
   (on_board yes)
   (dnp no)
-  (uuid 5f8aeb9c-ddef-573b-b76f-2db0720bdba7)
+  (uuid 2ff8ee73-2dd3-5a5e-9bc6-413319fa2648)
   (property "Reference" "J2443" (at 345.44 127 0) (effects (font (size 1.27 1.27))))
   (property "Value" "main ground strap" (at 345.44 132.08 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm" (at 345.44 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -1987,7 +1667,7 @@
   (property "AssemblyResistance" "each complete strap <=1 mOhm, including pads, vias and joints" (at 345.44 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Assembly" "two independently attached straps per seam; insulate and strain-relieve both" (at 345.44 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "https://www.alphawire.com/disteAPI/SpecPDF/DownloadProductSpecPdf?productPartNumber=1230" (at 345.44 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid a0cd78e0-3ab4-59c7-a975-ed36a5670f80))
+  (pin "1" (uuid 5f8aeb9c-ddef-573b-b76f-2db0720bdba7))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -2005,12 +1685,12 @@
   (in_bom yes)
   (on_board yes)
   (dnp no)
-  (uuid c0df859c-6ae7-594f-80f4-778a396bb30e)
+  (uuid a0cd78e0-3ab4-59c7-a975-ed36a5670f80)
   (property "Reference" "#PWR3116" (at 345.44 127 0) (effects (font (size 1.27 1.27))))
   (property "Value" "GND" (at 345.44 132.08 0) (effects (font (size 1.27 1.27))))
   (property "Footprint" "" (at 345.44 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 345.44 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 9ec1546d-8ad2-5fec-aeb2-1b8b79c9267f))
+  (pin "1" (uuid c0df859c-6ae7-594f-80f4-778a396bb30e))
   (instances
     (project "ducktop2"
       (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
@@ -2023,155 +1703,14 @@
 (label "GND"
   (at 345.44 129.54 0)
   (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 627953db-9a42-5aba-9a8b-e0e48884e838)
+  (uuid 9ec1546d-8ad2-5fec-aeb2-1b8b79c9267f)
 )
-(text "Both ground straps must be fitted before the signal cable. Keep raw and protected battery returns separate from these main-board grounds." (at 85.09 505.46 0) (effects (font (size 1.27 1.27))) (uuid 662ded5b-486a-512a-aee6-359e25f11855))
-(text "The shell uses two parallel 0.33 ohm returns at each connector. Numbered ground conductors connect directly to the local ground plane." (at 85.09 515.62 0) (effects (font (size 1.27 1.27))) (uuid bb75d7d7-a679-592e-b289-c0e1c1712fd2))
+(text "Both ground straps must be fitted before the signal cable. Keep raw and protected battery returns separate from these main-board grounds." (at 85.09 505.46 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 627953db-9a42-5aba-9a8b-e0e48884e838))
+(text "The shell uses two parallel 0.33 ohm returns at each connector. Numbered ground conductors connect directly to the local ground plane." (at 85.09 515.62 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 662ded5b-486a-512a-aee6-359e25f11855))
 (sheet_instances
   (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
     (page "16")
   )
 )
   (embedded_fonts no)
-(symbol
-  (lib_id "Connector_Generic:Conn_01x03")
-  (at 229.87 160.02 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 95aefbf0-dae6-5e13-9844-feeb3ab1531b)
-  (property "Reference" "J2430" (at 229.87 151.13 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "left power rails" (at 229.87 168.91 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "ducktop2:WAGO_2060_453_SMD" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "WAGO" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "2060-453/998-404" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 862d44ce-9253-5c2c-82c0-73b865c8688a))
-  (pin "2" (uuid 11588578-9947-5a7f-b85b-e8b620020c70))
-  (pin "3" (uuid e2235873-020b-5c16-a3ed-cf49d2a7c02c))
-  (instances
-    (project "ducktop2"
-      (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
-        (reference "J2430")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "USB_PD_SELECTED"
-  (shape bidirectional)
-  (at 224.79 157.48 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 27813491-453a-5eca-af04-2f26ee6c1374)
-)
-(hierarchical_label "PD1_VBUS_RAW"
-  (shape bidirectional)
-  (at 224.79 160.02 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 71bfaa8e-0cd5-5f5f-b59c-f51675cbe08f)
-)
-(hierarchical_label "VSYS"
-  (shape bidirectional)
-  (at 224.79 162.56 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid ce8878bb-fdf8-5bae-8e4f-b1ac0878e50d)
-)
-(symbol
-  (lib_id "Connector_Generic:Conn_01x03")
-  (at 229.87 185.42 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid e8bbed6a-7292-5c31-9dcc-e72844c7f0a8)
-  (property "Reference" "J2450" (at 229.87 176.53 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "left power rails" (at 229.87 194.31 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "ducktop2:WAGO_2060_453_SMD" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "WAGO" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "2060-453/998-404" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 185.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid eb854a47-a6c4-5a70-94ef-fc67cbd7b00e))
-  (pin "2" (uuid 144bf809-acdb-5044-8bd4-7defd52dfbc1))
-  (pin "3" (uuid 5e0442c8-180b-598e-9fbf-f9966946579d))
-  (instances
-    (project "ducktop2"
-      (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
-        (reference "J2450")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 224.79 182.88 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid c8f83d58-402c-5dd4-9562-926c233c2169)
-)
-(hierarchical_label "SYS_3V3"
-  (shape bidirectional)
-  (at 224.79 185.42 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid bdb7e2e9-7299-5845-860c-022c6eb6bd41)
-)
-(hierarchical_label "AUX_DC_RAW"
-  (shape bidirectional)
-  (at 224.79 187.96 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 42e0d47e-d543-5d66-bade-8ce8d97c8540)
-)
-(symbol
-  (lib_id "Connector_Generic:Conn_01x01")
-  (at 229.87 209.55 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid fdac1f92-5b7d-5b9b-9f32-9e117b8d7a5d)
-  (property "Reference" "J2460" (at 229.87 203.2 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "left power return" (at 229.87 215.9 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "ducktop2:WAGO_2060_451_SMD" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "WAGO" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "2060-451/998-404" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.wago.com/2060-453/998-404" (at 229.87 209.55 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 1d357cf4-128f-58cd-a87b-38e150cf32e1))
-  (instances
-    (project "ducktop2"
-      (path "/fda0f7ec-fba4-5555-b406-5bd391986492"
-        (reference "J2460")
-        (unit 1)
-      )
-    )
-  )
-)
-(label "GND"
-  (at 224.79 209.55 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 16cf5851-279f-5d21-b6cb-d6a926efc761)
-)
 )

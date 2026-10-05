@@ -70,4 +70,7 @@
   (lib (name "TPS3700") (type "KiCad") (uri "${KIPRJMOD}/gen/TPS3700.kicad_sym") (options "") (descr "charger bias monitor"))
   (lib (name "LTC4231-1")(type "KiCad")(uri "${KIPRJMOD}/gen/LTC4231-1.kicad_sym")(options "")(descr ""))
   (lib (name "BMS_Current") (type "KiCad") (uri "${KIPRJMOD}/gen/BMS_Current.kicad_sym") (options "") (descr "battery current limits and Kelvin shunt"))
+  (lib (name "BQ76922") (type "KiCad") (uri "${KIPRJMOD}/gen/BQ76922.kicad_sym") (options "") (descr "TI 3-to-5-cell monitor and high-side protector"))
+  (lib (name "BMS_Support") (type "KiCad") (uri "${KIPRJMOD}/gen/BMS_Support.kicad_sym") (options "") (descr "Battery monitor current, startup and isolated controls"))
+  (lib (name "BMS_Passives") (type "KiCad") (uri "${KIPRJMOD}/gen/BMS_Passives.kicad_sym") (options "") (descr "Compact BMS resistors and probe pads"))
 )

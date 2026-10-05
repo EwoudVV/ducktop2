@@ -1,7 +1,7 @@
 """3S NVDC charger, independent charge permission and Mu throttle output."""
 from build_ducktop2 import FOOTPRINTS
 
-HIER = {'I2C_SCL','I2C_SDA','CHG_INT_N','CHG_ENABLE','PACK_CHG_TEMP_OK',
+HIER = {'I2C_SCL','I2C_SDA','CHG_INT_N','CHG_ENABLE','PACK_MONITOR_READY',
         'PACK_FAULT_N','PACK_POS_FUSED','VSYS','MCU_3V3','CASE_PWRBTN_N',
         'MU_PWRBTN_N','MU_PROCHOT_N','MU_PROCHOT_RELEASE'}
 
@@ -106,20 +106,13 @@ def add_charger(s):
     r('R30','4.7k SCL pull-up',930,425,'MCU_3V3','I2C_SCL')
     r('R31','4.7k SDA pull-up',1010,425,'MCU_3V3','I2C_SDA')
 
-    # Hardware inhibit drives the NTC input hot. The fixed 10k state is
-    # released only by both permits. JEITA must be enabled/read back before
-    # any nonzero charge-current or minimum-system-voltage command.
-    part('U2210','74LVC1G08','SN74LVC1G08DBVR',850,465,FOOTPRINTS['SN74LVC1G08DBV'],
-         {1:'CHG_ENABLE',2:'PACK_CHG_TEMP_OK_IN',3:'GND',4:'CHG_ENABLE_THERM',5:'MCU_3V3'},'SN74LVC1G08DBVR')
-    r('R2260','1k temperature-permit input',930,455,'PACK_CHG_TEMP_OK','PACK_CHG_TEMP_OK_IN','RC0603FR-071KL')
-    r('R2261','100k temperature-permit default-low',1010,455,'PACK_CHG_TEMP_OK_IN','GND','RC0603FR-07100KL')
-    r('R2262','4.7k charge-permit default-low',1090,455,'CHG_ENABLE_THERM','GND','RC0603FR-074K7L')
-    c('C2260','100n 50V AND bypass',930,475,'MCU_3V3','GND','GRM188R71H104KA93D')
-    r('R719','100k charge request default-low',1010,475,'CHG_ENABLE','GND')
-    r('R2263','100k pack-fault default-low',1090,475,'PACK_FAULT_N','GND','RC0603FR-07100KL')
+    # EC admission includes verified per-cell and FET state. The BMS has
+    # independent raw-side charge-temperature and overcurrent inhibits.
+    r('R2262','4.7k charge request default-low',1090,455,'CHG_ENABLE','GND','RC0603FR-074K7L')
+    r('R2263','100k monitor-ready default-low',1090,475,'PACK_MONITOR_READY','GND','RC0603FR-07100KL')
     r('R14','100k NTC-inhibit default-on',850,500,'REGN','CHG_NTC_HOT_GATE')
     small_fet('Q700',930,510,'CHG_NTC_HOT_GATE','CHG_NTC')
-    small_fet('Q702',1010,510,'CHG_ENABLE_THERM','CHG_NTC_HOT_GATE')
+    small_fet('Q702',1010,510,'CHG_ENABLE','CHG_NTC_HOT_GATE')
     r('R16','10k fixed-valid NTC resistance',1090,510,'CHG_NTC','GND')
 
     # The module supplies the PROCHOT pull-up. An AON pull-up here would

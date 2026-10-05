@@ -1,10 +1,9 @@
 # power and battery
 
-updated 30 september 2026. the four-layer BMS is routed, including the
-thermal circuit and separate cable connections. the saved board has zero
-unconnected items, zero physical DRC errors and no schematic mismatch.
-[layout checks](../../verification/bms-layout.md) records the copper and
-return-path checks. the cell and assembled-hardware tests below still apply.
+updated 4 october 2026. the four-layer BMS is routed and saved for stronger
+battery operation. it uses a BQ76922 and an 8 A discharge target, with up to
+3 A charging. the first assembly is an unarmed prototype for programming,
+calibration and protection tests.
 [current board status](../../README.md#build-status)
 
 ## Mu Ultra power target
@@ -27,17 +26,25 @@ rail is off or reserving its qualified startup budget. the selector windows
 and firmware accept 5, 9, 15 and 20 V contracts. this behavior has software
 tests; source transitions and charging on the actual boards remain untested.
 
-RS10 on the BMS is 11 milliohms, using WSL2512R0110FEA18. the pack breaker
-is about 4.55 A nominal. the roughly 3.60 A low corner includes the IC and
-initial resistor tolerance only. the broader 100 C component-drift screen
-reduces that figure to about 3.24 A. the target pack operating ceiling stays
-at 3 A, subject to cell, transient and current-measurement qualification.
-copper capacity does not establish the cells' allowed current.
+RS11 is a true four-terminal 2 milliohm CSS4J-4026K-2L00F shunt. separate
+INA381 current guards detect discharge and charging, with nominal fault
+trips around 9.1 A and 4.1 A. those are trip thresholds, not load ratings.
+the BQ76922 also provides overcurrent and short-circuit protection. the
+component calculations are in
+[the BMS verifier](../../gen/verify_bq76922_calculations.py).
 
-battery mode needs a lower combined load budget. unplugging at full adapter
-load also needs a checked fast response, since a software power-limit update
-may arrive after the pack breaker trips. charging, external USB loads and
-processor limits have to share the available input power.
+the 8 A target still needs checks with the actual cells, leads, connectors
+and finished board. adapter transfers and startup need measurements too.
+charging, external USB loads and the processor share the available power.
+
+the new charging profile uses 12.12 V for the pack and stops charging if
+any measured cell exceeds 4.10 V or the cells differ by more than 30 mV.
+this leaves room below the protection trip. charging finishes after 30 seconds
+of confirmed constant-voltage taper; a small adapter's current limit does
+not count as a full battery. the two-hour timeout counts time in the
+constant-voltage phase, so it does not cut off a long bulk charge.
+[charging limits and tests](../../firmware/bq76922/charge-policy.md)
+include the calibration needed before enabling that profile on hardware.
 
 ## cells and responsibilities
 
@@ -45,15 +52,16 @@ i have three AKZYTUE packs and have tested them in series with both cell
 taps connected. their advertised capacity, continuous current, temperature
 limits, and individual protection boards still need qualification for this
 laptop. capacity on a listing is not a measured runtime or energy result.
-the design keeps the existing packs under review. removing their protection
-boards has not been established as a suitable change.
+i want to keep these cells. the proposed pack uses this common BMS, but
+the cells and replacement wiring still need to meet its current limits.
 
 | job | circuit |
 | --- | --- |
-| cell voltage protection and balancing | U719 BQ7791500, on the BMS |
-| primary return disconnect | Q703/Q704 and RS11, on the BMS |
-| bidirectional pack breaker | U11 LTC4368-1, Q11/Q12 and RS10, on the BMS |
-| pack fuse | F1, 5 A Schurter HCF 3-101-056 |
+| cell voltage and native current protection | U719 BQ76922RSNR, on the BMS |
+| charge and discharge disconnect | high-side Q11/Q12 CSD18540Q5B |
+| independent current guards | U2210/U2211 INA381 and RS11, on the BMS |
+| startup current limiting | U2218 TPS26600, with an independent discharge-temperature veto |
+| pack fuse | F1, 10 A Schurter HCF 3-101-051 |
 | cell temperature windows | three insulated probes and the BMS comparator/control circuit |
 | charging and system power path | U2 ISL9241, on the center board |
 | fuel gauge and current measurement | U10 BQ34Z100-G1 and RS1, on the center board |
@@ -67,25 +75,26 @@ the positive path is:
 J2 PACK_POS_RAW
   -> F1
   -> BAT_PROT_VIN
-  -> Q11 / Q12, controlled by LTC4368
-  -> BAT_PROT_SENSE
-  -> RS10, 11 milliohms
+  -> Q11 charge FET
+  -> BAT_PROT_FET_COMMON
+  -> Q12 discharge FET
   -> PACK_POS_FUSED
   -> J2072 pin 1 / J2071 pin 2
   -> center Q25 and charger battery path
 ```
 
-U11's two sense connections must reach the RS10 lands independently of the
-load-current route. keep the FET, shunt and connector current paths wide,
-including their transitions between layers. neither a copper pour nor a
-local signal repair may bypass the fuse, FETs or shunt.
+the FETs share their drains. the limited startup branch runs in parallel
+with them after the fuse. its current is included in the return shunt.
+R870, R871 and R872 are unpopulated drive-release links for fixture testing;
+the normal power path must stay disabled until its configuration and fault
+tests pass. keep the fuse, FET and connector paths wide through their
+narrowest sections, including changes between layers.
 
 the return connections are:
 
 ```
 raw pack negative
-  <-> RS11, 8 milliohms
-  <-> Q703 / Q704
+  <-> RS11, 2 milliohms
   <-> FG_VSS
   <-> J2072 pin 2 / J2071 pin 1
   <-> center gauge shunt RS1
@@ -93,14 +102,15 @@ raw pack negative
 ```
 
 keep the quiet raw reference at the protector separate from load current.
-the FET placements and Kelvin pickups are preserved. the wide power routes
-use copper fills so the signal vias have proper clearance. their load paths
-were checked after refill, including the separate FG_VSS output return.
+the shunt's two sense terminals have separate traces to the monitor and
+current guards. load current must use its force terminals. zero DRC errors
+alone cannot prove those pickups or the filled power-path widths.
 
 raw negative, FG_VSS, CTRL_GND and system GND have different jobs. their
 connections are defined by the protection, isolation and gauge circuits.
-extra ground bonds would bypass those circuits. use insulating BMS
-supports and include test-equipment grounds in the connection review.
+extra ground bonds would bypass those circuits. PDSG_RTN is a separate
+local return for the startup limiter; do not bond it to RAW, FG or CTRL.
+use insulating BMS supports and isolated equipment on the raw service pads.
 
 ## temperature and control
 
@@ -110,11 +120,16 @@ has its own lead-current limiting and filters. the comparator circuit has
 separate charge and discharge windows and checks for open and shorted
 probe connections. its raw-referenced supply works independently of the EC.
 
-charge-temperature permission reaches the EC as PACK_CHG_TEMP_OK.
-discharge faults also assert PACK_FAULT_N. the retry input and status
-signals cross the isolated control interface. that interface uses a
-separate five-wire cable, with center GND connected only to the BMS
-CTRL_GND island. [cable pinouts](cables-and-connectors.md#bms-wiring)
+the temperature and current circuits directly veto the charge and
+discharge FETs through CFETOFF and DFETOFF. their permission also gates the
+limited startup branch. a TPS22810 switches the thermal supply off in deep
+BMS shutdown, while keeping it on through ordinary protection faults.
+
+the five-wire control cable carries PACK_MONITOR_READY, SCL, MCU_3V3, SDA
+and CTRL_GND. readiness means the monitoring supply and thermal supervisor
+are alive. fresh I2C reads provide cell voltages, current, protection flags
+and FET state. it is not an all-faults-clear signal. the control return stays
+separate from both pack returns. [cable pinouts](cables-and-connectors.md#bms-wiring)
 
 the electrical window calculations include the specified probe and
 resistor tolerances. probe attachment, insulation, cell-to-probe temperature
@@ -125,15 +140,10 @@ monitoring has been replaced.
 ## balancing
 
 cell taps stop at the BMS. the center charger supplies current to the whole
-pack, while U719 handles balancing locally. R841 through R844 are 75 ohms,
-with the 1 uF cell-filter network. the unused upper cell inputs connect to
-the top-cell sensing node for this three-cell arrangement.
-
-these parts set a balancing current of roughly 26 mA in the nominal
-calculation. verify balancing behavior with the actual cells, including
-voltage differences, charging state and fault recovery. the protection and
-balance checks are in
-[verify_electrical_calculations.py](../../gen/verify_electrical_calculations.py).
+pack. the BQ76922 uses physical cell inputs 1, 2 and 5 for this three-cell
+stack; unused inputs share the cell-2 node. R841 through R844 are 75 ohms
+with 220 nF cell filters. balancing stays disabled in the initial profile.
+it needs its own cell, temperature and charging checks before use.
 
 ## charging inputs and rails
 
@@ -171,10 +181,9 @@ Kelvin pickup. inspect the filled copper, minimum widths, via transitions,
 connector joints and the separate return domains.
 
 copper loss calculations depend on actual finished copper and hole plating.
-the revised output-return review is conditional on its stated copper and
-assembly limits; it has not been measured on a manufactured board. the
-8 A copper/harness screen is separate from the shunt-set pack protection
-thresholds and does not establish an 8 A operating mode.
+the 8 A target requires measured voltage drop and temperature at the
+narrowest routes, connector joints, shunt and FETs. component fault-trip
+calculations do not establish a safe continuous current for the cells.
 
 the finished hardware still needs cell/cable qualification, gauge
 calibration, trip and recovery tests, source transfer, thermal tests,

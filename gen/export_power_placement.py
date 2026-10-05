@@ -86,6 +86,15 @@ def height(value: float, kind: str, url: str, note: str) -> dict:
 # Nominal dimensions are not promoted to maxima. No height is inferred from a
 # package name, a footprint, a STEP bounding box or an unreviewed substitute.
 MANUFACTURER_HEIGHTS = {
+    'WSLP25125L000FEA': height(0.889, "maximum",
+        'https://www.vishay.com/docs/30122/wslp.pdf',
+        'WSLP2512 H is 0.635 +/- 0.254 mm; maximum 0.889 mm.'),
+    'BQ34Z100PWR-G1': height(1.2, "maximum",
+        'https://www.ti.com/lit/ds/symlink/bq34z100-g1.pdf',
+        'PW0014A TSSOP-14 package outline: 1.2 mm maximum seated height.'),
+    'SM05B-SRSS-TB(LF)(SN)': height(2.95, "nominal",
+        'https://www.jst-mfg.com/product/pdf/eng/eSH.pdf',
+        'Side-entry mated reference height, not a guaranteed maximum; use the 3.2 mm connector envelope for planning.'),
     'GRM1885C1H180JA01': height(0.9, "maximum",
         'https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM1885C1H180JA01-01A.pdf',
         'Murata exact-part sheet: 0.80 +/-0.10 mm body thickness.'),

@@ -38,6 +38,7 @@ void ec_app_init(void);
 bool ec_app_charger_configured(void);
 bool ec_app_gauge_present(void);
 bool ec_app_gauge_full(void);
+bool ec_app_charge_complete(void);
 void ec_app_set_power_control(bool valid, uint8_t inputs, uint32_t now_ms);
 bool ec_app_prepare_source(uint16_t source_mv, uint32_t now_ms);
 void ec_app_update_throttle(bool allow_release, bool battery_mode);

@@ -1031,7 +1031,7 @@ def main():
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "VSYS", "MCU_3V3", "EC_AON_IN", "AUX_DC_ADC", "USB_PD_SELECTED",
         "PD1_VBUS_RAW", "PD2_VBUS_RAW",
-        "PACK_FAULT_N", "PACK_RETRY_PULSE", "PACK_CHG_TEMP_OK", "AUX_FAULT_N", "AUX_PGOOD",
+        "PACK_MONITOR_READY", "AUX_FAULT_N", "AUX_PGOOD",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]
     ec_hier_nets = [
@@ -1057,7 +1057,7 @@ def main():
         "PD1_PATH_EN", "PD2_PATH_EN",
         "PD1_EFUSE_PG", "PD2_EFUSE_PG",
         "RADIO_DB_PWR_EN", "RADIO_DB_PG", "RADIO_DB_FAULT_N", "RADIO_DB_PRESENT_N",
-        "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD",
+        "PACK_MONITOR_READY", "AUX_FAULT_N", "AUX_PGOOD",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]
     mu_hier_nets = [

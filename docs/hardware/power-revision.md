@@ -1,22 +1,25 @@
 # power revision
 
-30 september 2026. this is an unfinished checkpoint for the 100 W input
-and thinner power wiring. the boards are not ready to order.
+4 october 2026. the BMS routing is finished. the 100 W main-board work still
+needs routing and hardware tests, so the complete laptop is not ready to order.
 
-the saved center, left, right and BMS schematics now match their revised
-connector footprints and pin maps. the main power links use WAGO 2060
+the BMS now uses a BQ76922 high-side circuit,
+independent signed current guards and a limited startup branch. the target
+is 8 A discharge and 3 A charging. the 80 mm board fits a wider center
+cutout with the same 1.5 mm gaps. both outlines and the moved center support
+are saved. the BMS has zero native unconnected items and zero physical DRC
+findings with the fabrication checks enabled.
+
+the 100 W main-board revisions use the revised connector footprints and
+pin maps. the main power links use WAGO 2060
 spring terminals. the protected BMS pair uses the two-pole version, and
-the raw-pack input uses a right-angle Molex 43045-0400 with a new four-pin
-map. F1 is now a 5 A Schurter HCF fuse. Alpha 6715 is specified for the
+the replacement BMS raw input uses another two-pole WAGO, with separate
+JST GH cell taps. F1 is a 10 A Schurter HCF fuse in that revision. Alpha 6715 is specified for the
 18 AWG links and Alpha 6716 for the 16 AWG direct USB5 loom.
 
-the BMS routing and cleanup are finished. the saved board has zero
-unconnected items, zero physical DRC errors and no dangling-copper,
-silkscreen or copper-sliver warnings. the quiet return, shunt pickup and
-main current paths were checked again after cleanup. the
-[layout report](../../verification/bms-layout.md) records the checks and
-the remaining library warnings. the main boards remain unfinished.
-the main-board outlines and mounting holes are unchanged. obsolete power
+the [layout report](../../verification/bms-layout.md) covers the new board,
+its filled power paths, isolated returns, footprints and assembly checks.
+the main boards remain unfinished. obsolete power
 tracks and 28 incorrectly assigned MCU escape stubs have been removed.
 the existing PCIe and clock routing is preserved.
 
@@ -92,9 +95,6 @@ the final thickness is still undecided. the saved connector placements now
 have [proposed wire paths and service requirements](power-harness-fit.md).
 raw-pack lead measurements, clamps and the complete assembly check remain.
 
-the BMS quote files under `manufacturing/bms/` have been regenerated and
-checked against the saved board. the assembly review moved two vias clear
-of the WAGO solder openings. RS10 now specifies WSL2512R0110FEA18, a valid
-11 milliohm part. that correction only changes its ordering code, not the
-BMS routing. the rebuilt package passes its source and export checks. factory
-review and physical tests remain.
+the BMS prototype uses CSS4J-4026K-2L00F, 2 milliohms, with separate
+force and sense contacts. the first assembly keeps its drive-release links
+open for fixture tests.

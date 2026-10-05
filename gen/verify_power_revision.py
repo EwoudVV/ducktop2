@@ -13,10 +13,26 @@ M = "/Mu Carrier/"
 E = "/EC & MCU/"
 
 
+def uses_bq76922_main_interface(pin_maps, refs):
+    """Select the new interface from topology, including malformed variants."""
+    status_names = {"/PACK_MONITOR_READY", "/PACK_ALARM_HEALTH"}
+    markers = (("J2073", "1"), ("U44", "10"), ("TP10", "1"))
+    return any(pin_maps.get(ref, {}).get(pin) in status_names for ref, pin in markers) or (
+        "J2073" in refs and "U2210" not in refs
+    )
+
+
 def check(center, left=None, right=None):
     failures = []
     expected_pins = {}
     count = 0
+    monitor_interface = uses_bq76922_main_interface(center.pins, center.parts)
+
+    def absent(v, ref):
+        nonlocal count
+        count += 1
+        if ref in v.parts or ref in v.pins or ref in v:
+            failures.append(f"{ref}: retired main-board thermal-permit part remains")
 
     def pins(v, ref, expected):
         nonlocal count
@@ -167,26 +183,32 @@ def check(center, left=None, right=None):
         ("R2611", P + "CHG_PSYS", "GND"),
         ("R14", P + "REGN", P + "CHG_NTC_HOT_GATE"),
         ("R16", P + "CHG_NTC", "GND"),
-        ("R719", "/CHG_ENABLE", "GND"),
         ("R2612", P + "REGN", P + "CHG_THROTTLE_GATE"),
         ("R13", "/MU_PROCHOT_RELEASE", "GND"),
     ):
         pair(center, ref, first, second)
+    if not monitor_interface:
+        pair(center, "R719", "/CHG_ENABLE", "GND")
     pins(center, "Q700", {1: P + "CHG_NTC_HOT_GATE", 2: "GND", 3: P + "CHG_NTC"})
     pins(
-        center, "Q702", {1: P + "CHG_ENABLE_THERM", 2: "GND", 3: P + "CHG_NTC_HOT_GATE"}
+        center, "Q702", {1: "/CHG_ENABLE" if monitor_interface else P + "CHG_ENABLE_THERM",
+                         2: "GND", 3: P + "CHG_NTC_HOT_GATE"}
     )
-    pins(
-        center,
-        "U2210",
-        {
-            1: "/CHG_ENABLE",
-            2: P + "PACK_CHG_TEMP_OK_IN",
-            3: "GND",
-            4: P + "CHG_ENABLE_THERM",
-            5: "/MCU_3V3",
-        },
-    )
+    if monitor_interface:
+        for ref in ("C2260", "R2260", "R2261", "R719", "U2210"):
+            absent(center, ref)
+        pins(center, "J2073", {1:"/PACK_MONITOR_READY", 2:"/I2C_SCL", 3:"/MCU_3V3",
+                               4:"/I2C_SDA", 5:"GND", "MP":"GND"})
+        mpn(center, "J2073", "SM05B-SRSS-TB(LF)(SN)")
+        footprint(center, "J2073", "Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal")
+        pins(center, "U44", {10:"/PACK_MONITOR_READY", 13:None})
+        pins(center, "TP10", {1:"/PACK_MONITOR_READY"})
+        mpn(center, "Q702", "BSS138LT1G")
+        mpn(center, "R2262", "RC0603FR-074K7L")
+        mpn(center, "R2263", "RC0603FR-07100KL")
+    else:
+        pins(center, "U2210", {1:"/CHG_ENABLE", 2:P+"PACK_CHG_TEMP_OK_IN", 3:"GND",
+                               4:P+"CHG_ENABLE_THERM", 5:"/MCU_3V3"})
     pins(center, "Q2604", {1: P + "CHG_THROTTLE_GATE", 2: "GND", 3: "/MU_PROCHOT_N"})
     pins(
         center,
@@ -214,7 +236,7 @@ def check(center, left=None, right=None):
         {
             1: P + "AUX_PATH_EN",
             2: P + "CHG_BIAS_GOOD",
-            3: P + "PACK_CHG_TEMP_OK_IN",
+            3: None if monitor_interface else P + "PACK_CHG_TEMP_OK_IN",
             4: "/MU_PROCHOT_N",
             5: "GND",
             6: "/NRST_NET",
@@ -289,11 +311,8 @@ def check(center, left=None, right=None):
         ("LED1", P + "CHG_ACOK", P + "STAT_LED_A"),
         ("C10", P + "CHG_INPUT", "GND"),
         ("C11", "/VSYS", "GND"),
-        ("R2260", "/PACK_CHG_TEMP_OK", P + "PACK_CHG_TEMP_OK_IN"),
-        ("R2261", P + "PACK_CHG_TEMP_OK_IN", "GND"),
-        ("R2262", P + "CHG_ENABLE_THERM", "GND"),
-        ("R2263", "/PACK_FAULT_N", "GND"),
-        ("C2260", "/MCU_3V3", "GND"),
+        ("R2262", "/CHG_ENABLE" if monitor_interface else P + "CHG_ENABLE_THERM", "GND"),
+        ("R2263", "/PACK_MONITOR_READY" if monitor_interface else "/PACK_FAULT_N", "GND"),
         ("R2640", P + "REGN", P + "CHG_BIAS_SENSE"),
         ("R2641", P + "CHG_BIAS_SENSE", "GND"),
         ("R2642", "/MCU_3V3", P + "CHG_BIAS_GOOD"),
@@ -324,6 +343,10 @@ def check(center, left=None, right=None):
         ("R758", M + "MU12_ILIM", "GND"),
     ):
         pair(center, ref, a, b)
+    if not monitor_interface:
+        pair(center, "R2260", "/PACK_CHG_TEMP_OK", P + "PACK_CHG_TEMP_OK_IN")
+        pair(center, "R2261", P + "PACK_CHG_TEMP_OK_IN", "GND")
+        pair(center, "C2260", "/MCU_3V3", "GND")
     for i, (driver, gate) in enumerate(
         (
             ("CHG_HS1_DRV", "CHG_HS1_GATE"),
@@ -413,6 +436,7 @@ def check(center, left=None, right=None):
         "failures": failures,
         "expected_pins": expected_pins,
         "physical_tests": "NOT_RUN",
+        "bms_main_interface": "bq76922-ready-i2c" if monitor_interface else "legacy-fault-retry-temperature",
     }
 
 

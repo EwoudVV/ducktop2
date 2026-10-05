@@ -226,8 +226,8 @@ def build(sheet_symbol_uuid, pwr_start=20, flg_start=20):
                 "4": ("PD1_PATH_EN", "hier"), "5": ("PD2_PATH_EN", "hier"),
                 "6": ("HP_DETECT", "hier"), "7": ("PD1_EFUSE_PG", "hier"),
                 "8": ("PD2_EFUSE_PG", "hier"), "9": ("SLS_S3", "hier"),
-                "10": ("PACK_FAULT_N", "hier"), "11": ("AUX_FAULT_N", "hier"),
-                "12": ("GND", "local"), "13": ("PACK_RETRY_PULSE", "hier"),
+                "10": ("PACK_MONITOR_READY", "hier"), "11": ("AUX_FAULT_N", "hier"),
+                "12": ("GND", "local"), "13": ("", "nc"),
                 "14": ("AUX_PGOOD", "hier"), "15": ("MAIN_USB_VALID_N", "hier"),
                 "16": ("MAIN_AUX_VALID_N", "hier"), "17": ("AON_FAULT_N", "hier"),
                 "18": ("RADIO_DB_PG", "hier"), "19": ("RADIO_DB_FAULT_N", "hier"),
@@ -347,7 +347,7 @@ def main():
         "PD1_EFUSE_PG", "PD2_EFUSE_PG",
         "RADIO_DB_PWR_EN", "RADIO_DB_PG", "RADIO_DB_FAULT_N", "RADIO_DB_PRESENT_N",
         "PD1_TCPC_IRQ_N", "PD2_TCPC_IRQ_N", "PD_PROTECT_FAULT_N",
-        "PACK_FAULT_N", "PACK_RETRY_PULSE", "AUX_FAULT_N", "AUX_PGOOD", "AON_FAULT_N",
+        "PACK_MONITOR_READY", "AUX_FAULT_N", "AUX_PGOOD", "AON_FAULT_N",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N",
     ]
     shared_nets = [n for n in ec_hier_nets if n in power_hier_nets]

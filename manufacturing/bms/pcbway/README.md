@@ -1,34 +1,34 @@
-# bms order files
+# bms prototype files
 
-this is the pcbway package for the four-layer bms. the exact source files,
+this package contains checked files for an unarmed BQ76922 prototype. source hashes,
 checks and output hashes are recorded in `manifest.json` and `SHA256SUMS.txt`.
-these are checked prototype files. pcbway has not reviewed or quoted this
-package yet, and no order has been submitted.
+factory review and physical qualification are pending. no order has been
+submitted, and this is not an operating release.
 
 ## uploads
 
-- `bms_GERBERS.zip`: bare-board fabrication files, including separate plated
-  and unplated drills. all four copper layers are included.
-- `BOM.csv`: 125 fitted parts, grouped into 60 part numbers.
-- `CPL.csv`: 124 smt placements, 78 on top and 46 underneath.
-- `through-hole-positions.csv`: J2, fitted from the top.
-- `paste/`: top and bottom stencil artwork. the power-fet stencil windows
-  are intentional. the assembler should review stencil thickness and process.
-- `bms.ipc`: the bare-board electrical test netlist, with 808 records and 73 nets.
+- `bms_GERBERS.zip`: all four copper layers, masks, printing, routed outline,
+  and separate plated and unplated drill files.
+- `BOM.csv`: 168 fitted parts, grouped into 74 part numbers.
+- `CPL.csv`: 168 SMT placements, 54 on top and 114 underneath.
+- `through-hole-positions.csv`: header-only file; no through-hole assembly parts.
+- `not-fitted.csv`: DNP links, bare test points and offboard cell probes.
+- `paste/`: top and bottom stencil artwork. review stencil thickness and
+  power-FET aperture windows before assembly. do not fit the DNP links.
+- `bms.ipc`: electrical test netlist, with 847 records and 99 nets.
 - `assembly/`: both assembly drawings and the test-point map.
-- `previews/`: rendered gerbers for inspection. the gerbers control fabrication.
+- `previews/`: rendered Gerbers for inspection; Gerbers control fabrication.
 
-the cpl uses millimetres, the same absolute origin as the gerbers, positive x
-to the right and positive y up. bottom x coordinates are not mirrored.
-rotations follow kicad. match pin 1 and polarity against the assembly drawings
-when pcbway checks the placement preview. the bottom drawing is viewed from
-underneath; it is not the coordinate convention used by the cpl.
+the CPL uses millimetres, the Gerber absolute origin, positive X right and
+positive Y up. bottom X is not mirrored. rotations follow KiCad. check pin 1
+and polarity against the assembly drawings. the bottom drawing is viewed
+from underneath; that view is separate from the CPL coordinate convention.
 
 ## board settings
 
 | setting | value |
 | --- | --- |
-| outline | 61.900 x 36.148 mm, routed contour |
+| outline | 80.000 x 36.148 mm, routed contour |
 | layers, top to bottom | F.Cu, In1.Cu, In2.Cu, B.Cu |
 | material and nominal thickness | standard FR-4, 1.6 mm |
 | copper | 1 oz on all four layers, including the inner layers |
@@ -37,106 +37,128 @@ underneath; it is not the coordinate convention used by the cpl.
 | smallest track | 0.10 mm |
 | smallest via hole / land | 0.20 / 0.50 mm |
 | via annular ring | at least 0.15 mm |
-| vias | through vias, tented on both sides |
-| filled or capped vias | not required by this layout |
-| impedance control | not required |
+| vias | through vias; see the exposed-pad note for U719 |
+| filled or capped vias | see the exposed-pad review below |
+| impedance control | not requested |
 | electrical test | flying probe against the supplied IPC-D-356 netlist |
 
-the four support holes are unplated circular cutouts in Edge.Cuts. the
-NPTH drill file also contains J2's 3 mm locating hole. retain all five.
+the four support holes are unplated circular cutouts in Edge.Cuts. retain
+all outline cutouts and all holes in the supplied drill files. the dielectric
+entries are indicative, not a custom impedance stackup. quote a standard
+1.6 mm build with 1 oz copper on every layer. the design basis is 35 um
+copper and 20 um barrel plating. confirm the finished copper and minimum
+hole plating; report lower guaranteed thickness for review.
 
-the cad dielectric entries total about 1.626 mm. they are indicative, not a
-custom impedance stackup. quote a standard 1.6 mm build with 1 oz copper on
-every layer. the power checks used 35 um copper and 20 um barrel plating;
-confirm the finished copper and minimum hole plating before releasing it.
-report any lower guaranteed thickness so the power checks can be revisited.
+## assembly and programming
 
-## assembly
+the BQ76922's single 0.2 mm exposed-pad ground via is open within the
+bottom pad's mask opening. its front face is tented, and nominal paste
+does not overlap the hole. the paste edge has no registration margin at
+that location. confirm front-tent closure, stencil alignment and the
+solder-wicking/voiding process before assembly; quote filling or plugging
+if that process cannot be qualified. this is the only intentional
+PCB-via mask opening. its measured geometry is in
+`checks/export-check.json`. the [TI package notes](https://www.ti.com/lit/ds/symlink/bq76922.pdf)
+cover thermal-pad soldering and via treatment.
 
-fit the exact BOM, including the 0.1% thermal resistors and both current
-shunts. substitutions need review. do not replace BQ7791500 with another
-threshold option, or LTC4368-1 with the -2 variant.
 
-RS10 is WSL2512R0110FEA18, 11 milliohms, 1%, 2 W. keep that exact
-resistance and high-power suffix; a 10 milliohm substitute changes the trip
-current. RS11 is WSLP25128L000FEA, 8 milliohms.
+fit the exact BOM, including the precision thermal resistors and shunt.
+substitutions need review. U719 is BQ76922RSNR. RS11 is Bourns CSS4J-4026K-2L00F,
+2 milliohms, 1%, 6 W, with a 2.93 mm maximum body height. F1 is the
+soldered SCHURTER 3-101-051 10 A fuse. J2 and J2072 are SMT WAGO
+2060-452/998-404 terminals. solder both lands for every terminal contact.
+J2 pin 1 is raw negative and pin 2 is raw positive; follow the top-side
+polarity marks. all five cable connectors are on top. keep their edge-facing
+wire exits, plug withdrawal and terminal-button access clear.
 
-F1 is the SCHURTER 3-101-056 HCF fuse, 5 A, fast acting, with a 1000 A
-interrupt rating at 125 VDC under the specified L/R condition. it is an SMT
-part, not a holder or a removable fuse. use the exact part. test pads are
-exposed copper, not components to fit.
+leave R870, R871 and R872 unpopulated. these are the CHG, DSG and PDSG
+gate-drive release links. do not bridge them, fit substitutes, or treat
+bare pads as completed assembly. every test point is exposed copper.
+TH2201, TH2202 and TH2203 are insulated probes fitted to the cells later;
+they are offboard and are not parts for PCB assembly.
 
-the smt count is 381 copper lands. the extra power-fet stencil windows
-are apertures within those lands, not extra components or solder joints.
-there are 4 soldered through holes, excluding vias and locating holes.
-use the supplied paste apertures, check polarity and inspect the power-fet
-joints. use lead-free assembly and component-appropriate reflow profiles.
+there is no permanent MCU on this board. the BQ76922 needs a per-unit
+configuration image in its one-time-programmable memory. the supplied
+`programming/profile-template.json` is a prototype template, not a released
+programming image. capture the actual unit's factory trims before any RAM
+or OTP write. prepare and calibrate that unit's image, test it in RAM with
+simulated cells and faults, and record the image hash, checksum and I2C CRC
+readback. programming, OTP burn and release-link fitting need a separate
+fixture release. this exporter performs none of those actions.
 
-keep the raw, protected and isolated grounds separate. use insulating board
-supports. batteries, probe wiring and the mating cable harnesses are not
-included in this pcb assembly order. no programming is required on the bms.
-powered protection tests will be done during bring-up with simulated cells.
+read back the complete approved image with CRC after programming and after
+repeated cold starts. prove autonomous startup, protection timing, the
+latched startup path, regulator headroom, harness integrity, cell limits,
+current transfer and all three thermal windows before fitting any release
+link. the EC's expected image must match the unit's programmed bytes; load
+its matching firmware image and record that image hash too. the EC runtime
+does not program OTP, configure the monitor or enable the FETs automatically.
+all operating and calibration qualification flags remain false. recovery
+charging remains disabled.
 
-J2 is the right-angle Molex 43045-0400 Micro-Fit header. its mating cable
-uses 43025-0400 and tin 43030-0038 contacts. the plug drawing gives a
-10.81 mm mated height and 11 mm latch envelope above the PCB. reserve the
-plug and cable space shown in the harness notes, including 12.7 mm of free
-wire before bending. the front pin row is 9.80 mm from the board edge;
-Molex allows 10.16 mm maximum. keep the combined header/edge positioning
-error within 0.25 mm toward the edge-clearance limit.
+the fitted SMT count is 516 copper lands. stencil windows within a
+land are not extra components. there are 0 soldered through holes,
+excluding vias and locating holes. inspect the power-FET joints and use
+lead-free assembly with component-appropriate reflow profiles.
+the 15 plated holes within SMT footprints are thermal features,
+not through-hole component placements.
 
-J2072 is the two-pole WAGO 2060-452/998-404. the assembler must solder both
-lands for each contact. its body is 4.5 mm high; the wire and release-tool
-space are separate. the two bottom JST connectors also need cable access.
+keep PACK_NEG_RAW, FG_VSS and CTRL_GND separate. use insulating board
+supports. batteries, probe wiring and mating cable harnesses are not
+included in the PCB assembly. powered protection tests start with simulated
+cells and the release links absent.
 
-pcbway can add process rails and fiducials if their assembly setup needs
-them. send the panel drawing for review; do not change the finished outline,
-mounting holes or component positions. return the unused bare boards.
+PCBWay can propose process rails and fiducials. send the panel drawing for
+review without changing the finished outline, support holes or component
+positions. return the unused bare boards.
 
 ## quantity and quote
 
-compare five bare pcbs with one assembled against five bare pcbs with two
+compare five bare PCBs with one assembled against five bare PCBs with two
 assembled. keep the stackup, parts and shipping choices identical. one is
-enough to start testing; two gives me a spare. there is no confirmed total
-yet. the price needs the parts, assembly setup, attrition, shipping and tax.
+enough to start testing; two gives me a spare. the quote needs the parts,
+assembly setup, attrition, shipping and tax. no total or order is confirmed.
 
-check the sourced BOM, part availability, placement preview, finished copper,
-hole plating and any panel changes before paying. this package records the
-design checks; it does not claim factory acceptance or powered testing.
+check sourced parts, availability, placement preview, finished copper,
+hole plating and proposed panel changes before payment. the design targets
+8 A discharge and at most 3 A charge; these are unqualified allocations.
+a 10 A fuse does not establish a safe pack operating limit.
 
 ## checks and regeneration
 
-the saved and refilled boards passed connectivity, schematic parity and the
-0.10 mm fabrication checks. footprint pads and drills match the libraries.
-all four plotted copper layers match the native geometry within a 2 um
-boundary approximation. drill coordinates match their 1 um export grid.
-mask openings expose no via holes, including a 0.05 mm outward-margin screen
-around the smt mask openings. the stencil openings stay on pads. confirm
-the actual mask registration with pcbway; this screen is a design check.
+both saved and refilled boards passed the full native zero-airwire gate,
+complete schematic parity, library pad/drill checks and 0.10 mm fabrication
+checks. this package records 608 physical pad objects, including
+567 electrical pads and 41 non-electrical paste/mask objects.
+all four plotted copper layers match native geometry within the 2 um
+boundary allowance. drill coordinates match their 1 um export grid. mask
+openings expose no unintended via holes, including the 0.05 mm outward-margin
+screen around SMT openings. the intentional U719 exposed-pad opening is
+recorded separately with its required assembly review. paste stays on pads.
+confirm factory mask and stencil registration.
 
-the refilled report retains these warnings: 19 track_not_centered_on_via, 73 lib_footprint_mismatch.
-no electrical errors, dangling copper or silkscreen violations were waived.
-the existing ERC warnings are recorded separately in the manifest.
-the generic fuse and two-pin connector symbols also retain their library-name
-filter warnings for F1 and J2072. their exact footprints, pads and pin maps
-are checked separately; no netlist mismatch is accepted.
-`checks/layout-checks.json` holds the power-path review. the 3 A pack
-qualification limit remains in force; a 5 A fuse does not raise it.
+physical DRC errors and warnings are zero. only literal footprint-name
+filter messages for the reviewed fuse and WAGO connectors are allowed;
+exact parts, library geometry and pad assignments are checked separately.
+ERC errors are zero. any accepted raw-ground naming warnings are recorded
+with their exact pins in the manifest. `checks/layout-checks.json` is the
+source-bound power-path evidence. none of these checks enables operation.
 
 install `gen/requirements-bms-fabrication.txt` in a local virtual environment.
 run `python gen/generate_bms_pcbway_package.py --output NEW_PACKAGE --work
-NEW_SCRATCH_DIRECTORY` from the project root. both paths should be in this
-project. kicad cli and its pcbnew python are required. keep an old package
-until its replacement has passed. verify a retained package with
+NEW_SCRATCH_DIRECTORY` from the project root after the finished canonical
+board is promoted and its layout evidence and assembly drawings are refreshed.
+keep both paths in this project and keep an old package until its replacement
+passes. verify a retained package with
 `python gen/generate_bms_pcbway_package.py --output manufacturing/bms/pcbway --verify`.
-a source edit makes the old package stale.
+any source edit makes the retained package stale.
 
 ## supplier references
 
-- [pcbway fabrication limits](https://www.pcbway.com/capabilities.html)
-- [pcbway assembly files](https://www.pcbway.com/assembly-file-requirements.html)
-- [pcbway confirms assembly from one piece](https://www.pcbway.com/blog/PCB_Basic_Information/PCBWay_Q_A_003___Common_Questions_for_PCBA_Ordering_01.html)
-- [molex 43045-0400 header](https://www.molex.com/en-us/products/part-detail/430450400)
-- [molex 43025-0400 plug drawing](https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/430/43025/430250400_sd.pdf)
-- [schurter HCF fuse](https://www.schurter.com/en/datasheet/typ_HCF.pdf)
+- [PCBWay fabrication limits](https://www.pcbway.com/capabilities.html)
+- [PCBWay assembly files](https://www.pcbway.com/assembly-file-requirements.html)
+- [PCBWay assembly quantities](https://www.pcbway.com/blog/PCB_Basic_Information/PCBWay_Q_A_003___Common_Questions_for_PCBA_Ordering_01.html)
+- [Bourns CSS4J-4026](https://www.bourns.com/docs/product-datasheets/css4j-4026.pdf)
+- [TI BQ76922](https://www.ti.com/lit/ds/symlink/bq76922.pdf)
+- [SCHURTER HCF fuse](https://www.schurter.com/en/datasheet/typ_HCF.pdf)
 - [WAGO 2060-452](https://www.wago.com/2060-452/998-404)

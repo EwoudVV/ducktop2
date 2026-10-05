@@ -12,6 +12,8 @@ from keyboard_rgb_contract import COPPER_LAYERS, DRIVER_PINS, ISET_OHMS, LED_MPN
 from report_schematic_pcb_eco import compare, parse_schematic
 
 ROOT = Path(__file__).resolve().parents[1]
+EXPECTED_BUFFER_NETS = {'1':'MCU_3V3','2':'I2C_SCL','3':'I2C_SDA','4':'GND',
+                        '5':'MCU_3V3','6':'RGB_SDA','7':'RGB_SCL','8':'KB_RGB_5V'}
 
 
 def require(condition, message):
@@ -114,8 +116,7 @@ def main():
                      'red_register':a['registers'][0], 'green_register':a['registers'][1],
                      'blue_register':a['registers'][2]})
     require(nets('U320') == {str(k):v or '' for k,v in DRIVER_PINS.items()}, 'driver pin mapping changed')
-    require(nets('U321') == {'1':'KB_RGB_5V','2':'RGB_SCL','3':'RGB_SDA','4':'GND',
-                            '5':'KB_RGB_5V','6':'I2C_SDA','7':'I2C_SCL','8':'MCU_3V3'}, 'buffer sides changed')
+    require(nets('U321') == EXPECTED_BUFFER_NETS, 'buffer requires A-side main3.3V, B-side RGB5V and EN3.3V')
     connector = nets('J320')
     for pin, net in {'1':'GND','2':'MCU_3V3','3':'I2C_SCL','4':'I2C_SDA','29':'KB_RGB_5V','30':'GND',
                      '10':'','11':'','12':'','27':'','28':'','MP':''}.items():

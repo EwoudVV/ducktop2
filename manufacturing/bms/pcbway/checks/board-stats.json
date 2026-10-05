@@ -1,67 +1,67 @@
 {
   "metadata": {
-    "date": "2026-09-30T10:42:51",
+    "date": "2026-10-05T09:22:13",
     "generator": "KiCad 10.0.4",
     "project": "bms",
     "board_name": "bms"
   },
   "board": {
     "has_outline": true,
-    "width": "61.9000 mm",
+    "width": "80.0000 mm",
     "height": "36.1480 mm",
-    "area": "2218.809 mm²",
-    "front_component_density": "50.09",
-    "back_component_density": "27.37",
-    "front_copper_area": "1248.459 mm²",
-    "back_copper_area": "1272.107 mm²",
-    "min_track_clearance": "0.1125 mm",
+    "area": "2873.07 mm²",
+    "front_component_density": "37.13",
+    "back_component_density": "32.06",
+    "front_copper_area": "2513.465 mm²",
+    "back_copper_area": "2311.466 mm²",
+    "min_track_clearance": "0.1105 mm",
     "min_track_width": "0.1000 mm",
     "min_drill_diameter": "0.2000 mm",
     "board_thickness": "1.6258 mm",
-    "front_footprint_area": "1111.476 mm²",
-    "back_footprint_area": "607.186 mm²",
-    "front_footprint_density": "50.09",
-    "back_footprint_density": "27.37"
+    "front_footprint_area": "1066.836 mm²",
+    "back_footprint_area": "921.238 mm²",
+    "front_footprint_density": "37.13",
+    "back_footprint_density": "32.06"
   },
   "pads": {
-    "through_hole": 4,
-    "smd": 453,
+    "through_hole": 15,
+    "smd": 593,
     "connector": 0,
-    "npth": 1,
+    "npth": 0,
     "castellated": 0,
     "press_fit": 0
   },
   "vias": {
-    "through": 398,
+    "through": 280,
     "blind": 0,
     "buried": 0,
     "micro": 0
   },
   "components": {
     "tht": {
-      "front": 1,
+      "front": 0,
       "back": 0,
-      "total": 1
+      "total": 0
     },
     "smd": {
-      "front": 78,
-      "back": 46,
-      "total": 124
+      "front": 55,
+      "back": 116,
+      "total": 171
     },
     "unspecified": {
       "front": 17,
-      "back": 7,
-      "total": 24
+      "back": 13,
+      "total": 30
     },
     "total": {
-      "front": 96,
-      "back": 53,
-      "total": 149
+      "front": 72,
+      "back": 129,
+      "total": 201
     }
   },
   "drill_holes": [
     {
-      "count": 260,
+      "count": 266,
       "shape": "Round",
       "x_size": "0.2000 mm",
       "y_size": "0.2000 mm",
@@ -71,32 +71,22 @@
       "stop_layer": "B.Cu"
     },
     {
-      "count": 138,
+      "count": 15,
+      "shape": "Round",
+      "x_size": "0.3000 mm",
+      "y_size": "0.3000 mm",
+      "plated": true,
+      "source": "Pad",
+      "start_layer": "F.Cu",
+      "stop_layer": "B.Cu"
+    },
+    {
+      "count": 14,
       "shape": "Round",
       "x_size": "0.3000 mm",
       "y_size": "0.3000 mm",
       "plated": true,
       "source": "Via",
-      "start_layer": "F.Cu",
-      "stop_layer": "B.Cu"
-    },
-    {
-      "count": 4,
-      "shape": "Round",
-      "x_size": "1.0200 mm",
-      "y_size": "1.0200 mm",
-      "plated": true,
-      "source": "Pad",
-      "start_layer": "F.Cu",
-      "stop_layer": "B.Cu"
-    },
-    {
-      "count": 1,
-      "shape": "Round",
-      "x_size": "3.0000 mm",
-      "y_size": "3.0000 mm",
-      "plated": false,
-      "source": "Pad",
       "start_layer": "F.Cu",
       "stop_layer": "B.Cu"
     }

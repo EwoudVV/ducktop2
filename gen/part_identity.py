@@ -44,10 +44,16 @@ def decode(mpn: str) -> Identity | None:
     bourns = {
         "CSS2H-2512K-3L00F": (.003, "2512", 4.0),
         "CSS4J-4026K-5L00F": (.005, "4026", 4.0),
+        "CSS4J-4026K-2L00F": (.002, "4026", 6.0),
     }
     if mpn in bourns:
         value, size, power = bourns[mpn]
         return Identity('R', value, size, 1.0, tcr_ppm=75, power_w=power)
+    high_power = re.fullmatch(r'CRCW(2512)(\d{3}[RKM])([FD])KEGHP', mpn)
+    if high_power:
+        value = engineering_value(high_power[2])
+        return Identity('R', value, high_power[1], 1.0 if high_power[3] == 'F' else .5,
+                        tcr_ppm=100, power_w=1.5)
     # Vishay 30100, 30122, 30121 and 31057. These are the package
     # sizes reviewed here. A plausible-looking code outside the table is invalid.
     strip = re.fullmatch(r"(WSL|WSLP|WSLT)(1206|2010|2512)(R\d{4}|\dL\d{3}|L\d{4})([DF])(EA|EK)(18)?", mpn)

@@ -40,7 +40,7 @@ def build(sheet_symbol_uuid):
     s.gnd(200, 90)
     s.pwrflag(200, 45, "FG_VSS")
     s.pwrflag(200, 105, "GND")
-    s.text(200, 55, "FPC-3 to BMS: PACK_POS_FUSED / PACK_FAULT_N / PACK_RETRY_PULSE cross here")
+    s.text(200, 55, "FPC-3 to BMS: protected pack power and isolated I2C/alarm cross here")
     # The protected pack rail crosses FPC-3 as PACK_POS_FUSED (BMS LTC4368
     # output). The gauge divider and the charger BAT sense both tap this
     # rail; it was historically named BAT_PROT_VIN here and is reconciled
@@ -340,11 +340,11 @@ def build(sheet_symbol_uuid):
     s.text(380, 38.1, "SMCJ24CA protects the AUX eFuse input. The common LTC4418 window protects the charger input.")
 
     s.text(20, 220, "NOTE: no wires used - connectivity is via matching label names (valid KiCad practice).")
-    s.text(20, 226, "BMS J2: 1 raw negative, 2 cell2 tap, 3 raw positive, 4 cell1 tap. Verify the assembled harness before connecting cells.")
-    s.text(20, 232, "U719 BQ7791500 autonomously protects each cell at 4.20V OV / 2.90V UV and drives back-to-back low-side FETs.")
-    s.text(20, 238, "RS11=8mOhm gives 7.5A nominal OCD and 15A nominal SCD; U11/RS10 and F1 remain independent tighter/secondary protection.")
-    s.text(20, 244, "Three insulated cell probes drive raw-referenced BMS comparators and CTRC/CTRD. U719 TS retains its unused-function strap.")
-    s.text(20, 250, "Charging requires CHG_ENABLE AND isolated PACK_CHG_TEMP_OK. Q700 clamps NTC hot until both permits are present.")
+    s.text(20, 226, "BMS J2 carries raw pack power; J2201 carries the two midpoint taps. Verify connector polarity before connecting cells.")
+    s.text(20, 232, "U719 BQ76922 protects the three cells and drives high-side charge/discharge FETs from its verified configuration.")
+    s.text(20, 238, "RS11 is a four-terminal2mOhm shunt. Independent current guards, native cell/current protection and F1 cover the battery path.")
+    s.text(20, 244, "Three insulated cell probes drive independent raw-referenced charge/discharge inhibits on the BMS.")
+    s.text(20, 250, "Charging requires verified BMS status and bounded EC source/current settings. The raw BMS charge inhibit remains independent.")
     s.text(20, 256, "ISL9241 starts with a 200mA input limit and charging off. Firmware must verify the source and program bounded limits.")
     s.text(20, 263.62, "J190 is the one 7-22V nominal AUX input; TPS26630 protects it before the source selector.")
     s.text(20, 271.24, "AUX current is limited by the released source profile. Solar MPPT is not implemented in this charger driver.")
@@ -370,7 +370,7 @@ def build(sheet_symbol_uuid):
         ("TP4", "EC_AON_IN test", 1280, 505, "EC_AON_IN", "hier"),
         ("TP7", "MCU_3V3 test", 1200, 530, "MCU_3V3", "hier"),
         ("TP9", "CHG_INT_N test", 1280, 530, "CHG_INT_N", "hier"),
-        ("TP10", "PACK_FAULT_N test", 1200, 555, "PACK_FAULT_N", "hier"),
+        ("TP10", "PACK_MONITOR_READY test", 1200, 555, "PACK_MONITOR_READY", "hier"),
         ("TP11", "AON_FAULT_N test", 1280, 555, "AON_FAULT_N", "hier"),
     ]:
         s.place(ref, "TestPoint", label, x, y,
@@ -400,7 +400,7 @@ def main():
         "CASE_PWRBTN_N", "MU_PWRBTN_N",
         "VSYS", "MCU_3V3", "EC_AON_IN", "AUX_DC_ADC", "USB_PD_SELECTED",
         "PD1_VBUS_RAW", "PD2_VBUS_RAW",
-        "PACK_FAULT_N", "PACK_RETRY_PULSE", "PACK_CHG_TEMP_OK", "AUX_FAULT_N", "AUX_PGOOD",
+        "PACK_MONITOR_READY", "AUX_FAULT_N", "AUX_PGOOD",
         "MAIN_USB_VALID_N", "MAIN_AUX_VALID_N", "AON_FAULT_N",
     ]
     sheet_x, sheet_y, sheet_w, sheet_h = 50, 50, 60, 80

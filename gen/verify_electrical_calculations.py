@@ -1686,17 +1686,29 @@ def main() -> None:
     parser.add_argument("--center-netlist",type=Path)
     parser.add_argument("--left-netlist",type=Path)
     parser.add_argument("--right-netlist",type=Path)
+    parser.add_argument("--bms-netlist", type=Path,
+                        help="existing BMS XML netlist; skips export and supports private BQ76922 candidates")
     args = parser.parse_args()
     args.netlist_dir = args.netlist_dir.resolve()
 
     netlist = args.netlist_dir / "electrical_calculations_netlist.xml"
     radio_netlist = args.netlist_dir / "radio_electrical_calculations_netlist.xml"
     boards = {}
+    bq76922_report = None
     if args.project == "bms":
-        bms_sch = ROOT / "bms" / "bms.kicad_sch"
-        netlist = args.netlist_dir / "bms_netlist.xml"
-        export_netlist(bms_sch, netlist)
-        checks = build_checks(component_values(netlist), {}, project="bms")
+        if args.bms_netlist:
+            netlist = args.bms_netlist.resolve()
+        else:
+            bms_sch = ROOT / "bms" / "bms.kicad_sch"
+            netlist = args.netlist_dir / "bms_netlist.xml"
+            export_netlist(bms_sch, netlist)
+        bms_values = component_values(netlist)
+        if bms_values.mpn("U719") == "BQ76922RSNR":
+            from verify_bq76922_calculations import bq76922_checks, render_bq76922_report
+            checks = bq76922_checks(bms_values)
+            bq76922_report = render_bq76922_report
+        else:
+            checks = build_checks(bms_values, {}, project="bms")
     else:
         if args.center_netlist: netlist=args.center_netlist.resolve()
         else: export_netlist(SCHEMATIC, netlist)
@@ -1715,7 +1727,8 @@ def main() -> None:
         checks = build_checks(center_values, component_values(radio_netlist))
         checks.extend(extended_checks(center_values, left_values, right_values))
         boards = {"center": center_values, "left": left_values, "right": right_values}
-    report = render_report(checks, netlist, radio_netlist)
+    report = (bq76922_report(checks, netlist) if bq76922_report
+              else render_report(checks, netlist, radio_netlist))
     if boards:
         report += render_analog_addendum(boards)
     args.output.parent.mkdir(parents=True, exist_ok=True)

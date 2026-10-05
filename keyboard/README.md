@@ -45,8 +45,8 @@ average current per colour is about 1 mA at full brightness.
 the keyboard gets switched 5 V on J320 pin 29. its 3.3 V buffer supply is
 pin 2, through the now-populated R387 on the center board. **keep R386
 unpopulated**, since it bypasses the current-limited switch. U321 is a
-TCA9517A: its A side faces the 5 V driver and its B side faces the 3.3 V
-EC bus. this arrangement uses TI's October 2025 datasheet and keeps the
+TCA9517A: its A side faces the main 3.3 V bus and its B side faces the 5 V
+RGB driver. this keeps the
 unpowered driver isolated. do not swap its sides or put 5 V pull-ups on
 the EC side.
 

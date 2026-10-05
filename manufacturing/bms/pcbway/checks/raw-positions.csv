@@ -1,125 +1,169 @@
 Ref,Val,Package,PosX,PosY,Rot,Side
-"C2200","100n 50V thermal regulator input","C_0603_1608Metric",112.100000,-62.500000,90.000000,bottom
-"C2201","10u 50V thermal bias; require Ceff >=2u","C_1206_3216Metric",113.500000,-69.250000,0.000000,bottom
-"C2212","10n 50V NTC sense filter","C_0603_1608Metric",115.000000,-61.000000,180.000000,bottom
-"C2231","100n 50V thermal buffer supply","C_0603_1608Metric",136.750000,-83.500000,0.000000,bottom
-"C2241","10n 50V thermal reference filter","C_0603_1608Metric",118.000000,-68.000000,0.000000,bottom
-"C2250","100n 50V raw isolator supply","C_0603_1608Metric",138.300000,-93.000000,0.000000,bottom
-"C2251","100n 50V control-island isolator supply","C_0603_1608Metric",148.250000,-92.750000,90.000000,bottom
-"C2255","100n 50V protected transceiver supply","C_0603_1608Metric",165.250000,-77.000000,90.000000,bottom
-"C2256","100n 50V control transceiver supply","C_0603_1608Metric",165.250000,-72.000000,90.000000,bottom
-"D2200","BAT54WS protected control reverse-input block","D_SOD-323",153.000000,-75.500000,-90.000000,bottom
-"D2201","BAT54S control-island pin clamps","SOT-23",157.000000,-71.000000,0.000000,bottom
-"D2202","BAT54S control-island pin clamps","SOT-23",159.000000,-90.000000,0.000000,bottom
-"J2074","isolated bms control","JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal",128.750000,-63.900000,0.000000,bottom
-"J2200","three cell probes: paired 1/2, 3/4, 5/6","JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal",135.250000,-69.500000,180.000000,bottom
-"Q701","BSS138 pack protector latch reset","SOT-23",143.500000,-71.500000,0.000000,bottom
-"Q2200","BSS138 CHG thermal CTR pull-down","SOT-23",134.750000,-89.250000,90.000000,bottom
-"R708","100k protected-side LTC fault pull-up","R_0603_1608Metric",166.500000,-84.500000,0.000000,bottom
-"R2200","1k 1% 0.75W raw thermal supply limiter","R_2010_5025Metric",113.750000,-82.000000,180.000000,bottom
-"R2201","9.53k 0.1% 25ppm thermal bias fault bleed","R_0603_1608Metric",129.250000,-92.250000,90.000000,bottom
-"R2212","10k 0.1% 25ppm NTC return-lead limit","R_0603_1608Metric",129.250000,-68.000000,180.000000,bottom
-"R2213","100k 0.1% 25ppm cell NTC pull-up","R_0603_1608Metric",109.500000,-61.500000,0.000000,bottom
-"R2230","100k thermal charge-health pull-up","R_0603_1608Metric",142.000000,-66.500000,90.000000,bottom
-"R2231","100k thermal discharge-health pull-up","R_0603_1608Metric",128.000000,-72.250000,90.000000,bottom
-"R2236","470k 0.1% 25ppm CTR fault pull-up","R_0603_1608Metric",134.500000,-93.500000,0.000000,bottom
-"R2237","1k thermal CTR gate series","R_0603_1608Metric",123.500000,-93.875000,180.000000,bottom
-"R2238","100k thermal CTR gate default-off","R_0603_1608Metric",119.500000,-91.750000,0.000000,bottom
-"R2239","470k 0.1% 25ppm CTR fault pull-up","R_0603_1608Metric",119.500000,-93.250000,0.000000,bottom
-"R2250","100k isolated discharge-health default-low","R_0603_1608Metric",151.250000,-91.000000,-90.000000,bottom
-"R2251","100k isolated charge-permit default-low","R_0603_1608Metric",150.500000,-93.250000,0.000000,bottom
-"R2252","2.49k 1% 0.25W protected control supply limiter","R_1206_3216Metric",156.500000,-77.250000,0.000000,bottom
-"R2253","30.1k 0.1% protected bias minimum load","R_0603_1608Metric",164.000000,-86.000000,90.000000,bottom
-"R2254","1k local retry gate series","R_0402_1005Metric",141.000000,-72.150000,-90.000000,bottom
-"R2255","100k isolated LTC-health default-low","R_0603_1608Metric",162.750000,-70.000000,0.000000,bottom
-"R2256","3.3k control fault pull-up","R_0603_1608Metric",164.375000,-67.125000,180.000000,bottom
-"R2257","100R 1% 0.25W control-island current limiter","R_1206_3216Metric",154.500000,-92.500000,0.000000,bottom
-"R2259","4.7k retry interface current limit","R_0603_1608Metric",153.500000,-72.000000,0.000000,bottom
-"R2264","100k retry input default-low","R_0603_1608Metric",156.900000,-74.300000,180.000000,bottom
-"R2265","4.7k charge-permit interface current limit","R_0603_1608Metric",153.500000,-89.750000,90.000000,bottom
-"U2200","TPS70933DBVR raw-pack thermal bias","SOT-23-5",113.500000,-65.750000,180.000000,bottom
-"U2201","TLV1864PWR cell 1 thermal windows","TSSOP-14_4.4x5mm_P0.65mm",147.250000,-62.750000,180.000000,bottom
-"U2202","TLV1864PWR cell 2 thermal windows","TSSOP-14_4.4x5mm_P0.65mm",120.350000,-62.950000,0.000000,bottom
-"U2203","TLV1864PWR cell 3 thermal windows","TSSOP-14_4.4x5mm_P0.65mm",137.000000,-63.250000,180.000000,bottom
-"U2204","TLV803EA29RDBZR thermal startup hold","SOT-23",116.250000,-89.250000,90.000000,bottom
-"U2205","SN74AUP2G126DCUR thermal startup gate","TI_DCU0008A_VSSOP8",136.750000,-86.000000,180.000000,bottom
-"U2206","ISO7041FDBQR separate charge/discharge permits; default low","QSOP-16_3.9x4.9mm_P0.635mm",143.750000,-91.250000,0.000000,bottom
-"U2209","ISO7021FDR LTC fault and retry isolation","SOIC-8_3.9x4.9mm_P1.27mm",161.750000,-74.500000,90.000000,bottom
-"C700","3.3nF >=50V LTC4368 CGATE","C_0402_1005Metric",132.750000,-75.600000,90.000000,top
-"C724","4.7nF >=50V pack hot-swap slew","C_0402_1005Metric",113.100000,-71.850000,0.000000,top
-"C725","10u 25V X7R LTC4368 VOUT","C_0805_2012Metric",143.350000,-83.300000,180.000000,top
-"C840","1u 25V X7R BQ77915 VDD","C_0805_2012Metric",122.000000,-80.100000,180.000000,top
-"C841","1u 10V X7R BQ77915 AVDD","C_0805_2012Metric",122.000000,-82.100000,180.000000,top
-"C842","1u 10V X7R BQ77915 internal-balance filter","C_0805_2012Metric",118.600000,-81.600000,180.000000,top
-"C843","1u 10V X7R BQ77915 internal-balance filter","C_0805_2012Metric",126.200000,-74.000000,0.000000,top
-"C844","1u 10V X7R BQ77915 internal-balance filter","C_0805_2012Metric",121.000000,-85.600000,180.000000,top
-"C845","100n BQ77915 SRP-VSS filter","C_0603_1608Metric",126.800000,-76.950000,-90.000000,top
-"C846","100n BQ77915 differential sense filter","C_0603_1608Metric",125.300000,-76.975000,90.000000,top
-"C847","100n BQ77915 SRN-VSS filter","C_0603_1608Metric",123.800000,-76.950000,-90.000000,top
-"C848","1u 10V X7R BQ77915 internal-balance filter","C_0805_2012Metric",124.700000,-82.900000,-90.000000,top
-"C2211","10n 50V NTC sense filter","C_0603_1608Metric",143.750000,-61.500000,180.000000,top
-"C2213","10n 50V NTC sense filter","C_0603_1608Metric",133.500000,-61.750000,180.000000,top
-"C2221","100n 50V comparator supply","C_0603_1608Metric",150.000000,-61.500000,90.000000,top
-"C2222","100n 50V comparator supply","C_0603_1608Metric",124.000000,-61.500000,0.000000,top
-"C2223","100n 50V comparator supply","C_0603_1608Metric",140.400000,-61.500000,180.000000,top
-"C2230","100n 50V thermal supervisor supply","C_0603_1608Metric",116.750000,-86.500000,0.000000,top
-"C2240","10n 50V thermal reference filter","C_0603_1608Metric",113.500000,-59.900000,0.000000,top
-"C2242","10n 50V thermal reference filter","C_0603_1608Metric",138.300000,-59.900000,0.000000,top
-"C2243","10n 50V thermal reference filter","C_0402_1005Metric",147.600000,-59.900000,0.000000,top
-"C2252","100n 50V control fault-buffer supply","C_0603_1608Metric",152.000000,-93.500000,180.000000,top
-"C2253","100n 50V protected control regulator input","C_0603_1608Metric",165.000000,-67.750000,0.000000,top
-"C2254","10u 50V protected local bias; Ceff >=2u","C_1206_3216Metric",167.000000,-72.750000,-90.000000,top
-"F1","5A fast pack fuse: Schurter HCF, 1kA at 125VDC","Schurter_HCF_8.05x5mm",110.950000,-82.150000,-90.000000,top
-"J2072","protected pack power","WAGO_2060_452_SMD",140.150000,-68.050000,90.000000,top
-"Q11","CSD18540Q5B reverse-pack FET A","CSD18540Q5B_DNK",114.450000,-67.375000,-90.000000,top
-"Q12","CSD18540Q5B reverse-pack FET B","CSD18540Q5B_DNK",159.350000,-67.375000,-90.000000,top
-"Q703","CSD18540Q5B BQ77915 discharge FET","CSD18540Q5B_DNK",121.531000,-67.408000,-90.000000,top
-"Q704","CSD18540Q5B BQ77915 charge FET","CSD18540Q5B_DNK",152.235000,-67.405000,-90.000000,top
-"Q2201","BSS138 DSG thermal CTR pull-down","SOT-23",134.500000,-89.000000,0.000000,top
-"R700","3.09M 1% BAT UV/OV top","R_0603_1608Metric",140.850000,-78.700000,0.000000,top
-"R701","73.2k 1% BAT UV/OV middle","R_0603_1608Metric",141.450000,-76.250000,90.000000,top
-"R702","121k 1% BAT UV/OV bottom","R_0603_1608Metric",142.950000,-76.450000,90.000000,top
-"R703","22k LTC4368 CGATE series","R_0603_1608Metric",125.600000,-70.200000,-90.000000,top
-"R707","100k pack protector SHDN pull-up","R_0603_1608Metric",146.200000,-74.050000,90.000000,top
-"R709","100k pack retry gate pulldown","R_0603_1608Metric",137.600000,-73.800000,180.000000,top
-"R840","1k 1% BQ77915 VDD filter","R_0603_1608Metric",122.200000,-83.850000,0.000000,top
-"R841","75R 1% BQ77915 cell/balance filter","R_0603_1608Metric",118.800000,-79.850000,0.000000,top
-"R842","75R 1% BQ77915 cell/balance filter","R_0603_1608Metric",137.000000,-86.550000,180.000000,top
-"R843","75R 1% BQ77915 cell/balance filter","R_0603_1608Metric",124.175000,-85.350000,0.000000,top
-"R844","75R 1% BQ77915 cell/balance filter","R_0603_1608Metric",119.200000,-83.850000,180.000000,top
-"R845","100R BQ77915 SRP filter","R_0603_1608Metric",126.650000,-88.150000,0.000000,top
-"R846","100R BQ77915 SRN filter","R_0603_1608Metric",123.250000,-72.150000,0.000000,top
-"R847","4.53k 1% DSG gate resistor","R_0603_1608Metric",118.000000,-72.900000,90.000000,top
-"R848","1k 1% CHG gate resistor","R_0603_1608Metric",137.150000,-83.550000,0.000000,top
-"R849","1M 5% DSG gate-source","R_0603_1608Metric",120.250000,-72.150000,0.000000,top
-"R850","3.3M 5% CHG gate-source","R_0603_1608Metric",153.250000,-72.400000,180.000000,top
-"R851","453k 1% load-detect resistor","R_0603_1608Metric",137.000000,-85.050000,0.000000,top
-"R852","10k 5% PRES normal-mode pull-up","R_0603_1608Metric",135.900000,-78.800000,180.000000,top
-"R853","10k 1% unused TS to VSS","R_0603_1608Metric",136.150000,-80.300000,180.000000,top
-"R854","604k 1% OCD delay program","R_0603_1608Metric",137.500000,-81.800000,0.000000,top
-"R2210","100k 0.1% 25ppm cell NTC pull-up","R_0603_1608Metric",155.500000,-62.000000,180.000000,top
-"R2211","10k 0.1% 25ppm NTC sense-lead limit","R_0603_1608Metric",158.500000,-62.750000,180.000000,top
-"R2214","10k 0.1% 25ppm NTC sense-lead limit","R_0603_1608Metric",118.000000,-62.500000,0.000000,top
-"R2215","10k 0.1% 25ppm NTC return-lead limit","R_0603_1608Metric",130.500000,-70.000000,180.000000,top
-"R2216","100k 0.1% 25ppm cell NTC pull-up","R_0603_1608Metric",130.250000,-61.750000,0.000000,top
-"R2217","10k 0.1% 25ppm NTC sense-lead limit","R_0402_1005Metric",136.800000,-61.800000,180.000000,top
-"R2218","10k 0.1% 25ppm NTC return-lead limit","R_0603_1608Metric",131.500000,-67.250000,180.000000,top
-"R2232","100k thermal-ready pull-up","R_0603_1608Metric",113.300000,-93.500000,0.000000,top
-"R2233","1M thermal-ready default-low","R_0603_1608Metric",134.500000,-93.000000,0.000000,top
-"R2234","1k thermal CTR gate series","R_0603_1608Metric",124.000000,-91.250000,90.000000,top
-"R2235","100k thermal CTR gate default-off","R_0603_1608Metric",120.750000,-92.000000,0.000000,top
-"R2240","243k 0.1% 25ppm CHG_COLD top","R_0603_1608Metric",116.600000,-59.800000,0.000000,top
-"R2241","499k 0.1% 25ppm thermal reference bottom","R_0603_1608Metric",119.700000,-59.900000,0.000000,top
-"R2242","634k 0.1% 25ppm CHG_HOT top","R_0603_1608Metric",122.800000,-59.900000,0.000000,top
-"R2243","499k 0.1% 25ppm thermal reference bottom","R_0603_1608Metric",125.850000,-60.000000,180.000000,top
-"R2244","147k 0.1% 25ppm DSG_COLD top","R_0603_1608Metric",132.100000,-59.900000,0.000000,top
-"R2245","499k 0.1% 25ppm thermal reference bottom","R_0603_1608Metric",135.200000,-60.000000,180.000000,top
-"R2246","845k 0.1% 25ppm DSG_HOT top","R_0603_1608Metric",141.400000,-59.900000,0.000000,top
-"R2247","499k 0.1% 25ppm thermal reference bottom","R_0603_1608Metric",144.500000,-59.900000,0.000000,top
-"R2258","4.7k fault interface current limit","R_0603_1608Metric",140.750000,-73.750000,0.000000,top
-"RS10","11mOhm 1% 2W LTC4368 bounded pack-current shunt","R_2512_6332Metric",119.050000,-89.300000,180.000000,top
-"RS11","8mOhm 1% 2W BQ77915 current shunt","R_2512_6332Metric",119.050000,-76.700000,0.000000,top
-"U11","LTC4368IMS-1 bidirectional pack protector","MSOP-10_3x3mm_P0.5mm",137.600000,-76.300000,180.000000,top
-"U719","BQ7791500PWR autonomous 3S primary protector","TSSOP-24_4.4x7.8mm_P0.65mm",130.537500,-83.200000,0.000000,top
-"U2207","SN74AUP2G07DCKR thermal and LTC fault wired-OR","SOT-363_SC-70-6",156.000000,-93.250000,0.000000,top
-"U2208","TPS70933DBVR protected-side local bias","SOT-23-5",164.000000,-70.750000,-90.000000,top
+"C724","470n 25V CP1; effective >=100n at11V","C_0603_1608Metric",140.000000,-93.000000,0.000000,bottom
+"C840","1u 25V BAT supply","C_0603_1608Metric",142.400000,-85.700000,0.000000,bottom
+"C841","1u 10V REG18","C_0603_1608Metric",143.500000,-77.800000,90.000000,bottom
+"C845","4.7u 10V REG1; effective >=1u","C_0805_2012Metric",163.000000,-75.000000,90.000000,bottom
+"C846","100n 50V differential current filter","C_0603_1608Metric",141.500000,-77.000000,90.000000,bottom
+"C852","220n 50V cell filter","C_0603_1608Metric",139.000000,-80.000000,0.000000,bottom
+"C853","220n 50V cell filter","C_0603_1608Metric",139.000000,-81.800000,0.000000,bottom
+"C854","220n 50V cell filter","C_0603_1608Metric",139.000000,-83.600000,0.000000,bottom
+"C855","220n 50V cell filter","C_0603_1608Metric",139.000000,-85.400000,0.000000,bottom
+"C880","1u 50V REGIN input","C_0805_2012Metric",160.200000,-83.000000,90.000000,bottom
+"C881","10u 25V REGIN; effective >=2u","C_0805_2012Metric",158.100000,-90.000000,90.000000,bottom
+"C884","220n 50V startup output; effective >=100n","C_0603_1608Metric",120.500000,-84.000000,0.000000,bottom
+"C2201","10u 50V thermal bias; require Ceff >=2u","C_1206_3216Metric",135.500000,-83.000000,90.000000,bottom
+"C2212","10n 50V NTC sense filter","C_0603_1608Metric",153.600000,-66.800000,0.000000,bottom
+"C2213","10n 50V NTC sense filter","C_0603_1608Metric",162.900000,-66.800000,0.000000,bottom
+"C2221","100n 50V comparator supply","C_0603_1608Metric",148.950000,-61.050000,90.000000,bottom
+"C2223","100n 50V comparator supply","C_0603_1608Metric",168.000000,-62.650000,90.000000,bottom
+"C2230","100n 50V thermal supervisor supply","C_0603_1608Metric",118.000000,-75.000000,90.000000,bottom
+"C2231","100n 50V thermal buffer supply","C_0603_1608Metric",127.000000,-80.000000,0.000000,bottom
+"C2232","100n 50V OFF-bias bypass","C_0603_1608Metric",126.000000,-90.000000,0.000000,bottom
+"C2240","10n 50V thermal reference filter","C_0603_1608Metric",148.000000,-70.000000,0.000000,bottom
+"C2241","10n 50V thermal reference filter","C_0603_1608Metric",151.000000,-70.000000,0.000000,bottom
+"C2242","10n 50V thermal reference filter","C_0603_1608Metric",154.000000,-70.000000,0.000000,bottom
+"C2243","10n 50V thermal reference filter","C_0402_1005Metric",156.400000,-70.000000,0.000000,bottom
+"C2250","100n 50V I2C isolator supply","C_0603_1608Metric",108.900000,-80.900000,90.000000,bottom
+"C2251","100n 50V I2C isolator supply","C_0603_1608Metric",98.950000,-80.900000,90.000000,bottom
+"C2253","100n 50V readiness buffer supply","C_0603_1608Metric",126.000000,-88.500000,0.000000,bottom
+"C2255","100n 50V readiness isolator supply","C_0603_1608Metric",126.000000,-91.500000,0.000000,bottom
+"C2256","100n 50V readiness isolator supply","C_0603_1608Metric",98.950000,-86.100000,90.000000,bottom
+"C2270","10n 50V C0G differential filter","C_0603_1608Metric",155.500000,-76.000000,0.000000,bottom
+"C2271","10n 50V C0G differential filter","C_0603_1608Metric",155.500000,-68.500000,0.000000,bottom
+"C2272","1u 10V reference input","C_0603_1608Metric",153.500000,-87.500000,0.000000,bottom
+"C2273","1u 10V reference output","C_0603_1608Metric",156.000000,-88.100000,90.000000,bottom
+"C2274","100n 50V current guard supply","C_0603_1608Metric",160.300000,-78.800000,0.000000,bottom
+"C2275","100n 50V current guard supply","C_0603_1608Metric",123.500000,-90.000000,90.000000,bottom
+"C2276","10n 50V current reference filter","C_0603_1608Metric",155.500000,-82.000000,0.000000,bottom
+"C2277","10n 50V current reference filter","C_0603_1608Metric",152.500000,-75.000000,0.000000,bottom
+"C2278","100n 50V current supervisor supply","C_0603_1608Metric",132.000000,-87.000000,0.000000,bottom
+"C2279","100n 50V readiness logic supply","C_0603_1608Metric",127.000000,-86.000000,0.000000,bottom
+"C2280","100n 50V reference output","C_0603_1608Metric",158.300000,-83.000000,90.000000,bottom
+"D849","BZT52C5V1 startup permit VGS clamp","D_SOD-123",109.000000,-93.500000,0.000000,bottom
+"D2221","BAT54WS OFF-bias supply OR","D_SOD-323",128.500000,-92.000000,90.000000,bottom
+"Q2200","BSS138 CHG thermal CTR pull-down","SOT-23",151.000000,-85.000000,180.000000,bottom
+"Q2201","BSS138 DSG thermal CTR pull-down","SOT-23",155.500000,-93.000000,0.000000,bottom
+"Q2211","ZXMP6A13FTA PDSG signal translator","SOT-23",146.700000,-89.800000,0.000000,bottom
+"R840","100R BAT input filter","R_0603_1608Metric",133.000000,-93.000000,90.000000,bottom
+"R843","75R 1% cell input/balance filter","R_0603_1608Metric",136.500000,-87.350000,-90.000000,bottom
+"R844","75R 1% cell input/balance filter","R_0603_1608Metric",140.500000,-88.800000,0.000000,bottom
+"R845","100R SRP filter","R_0603_1608Metric",139.000000,-77.000000,0.000000,bottom
+"R847","100R gate series","R_0603_1608Metric",137.000000,-93.900000,0.000000,bottom
+"R848","100R gate series","R_0603_1608Metric",129.500000,-87.000000,90.000000,bottom
+"R850","1M gate-source","R_0603_1608Metric",129.000000,-89.500000,0.000000,bottom
+"R852","10k LD sense","R_0603_1608Metric",131.300000,-89.500000,90.000000,bottom
+"R880","430R 1% 1.5W REGIN supply limiter","R_2512_6332Metric",166.000000,-86.500000,0.000000,bottom
+"R881","430R 1% 1.5W REGIN supply limiter","R_2512_6332Metric",166.000000,-90.500000,0.000000,bottom
+"R883","10k TS1 termination","R_0603_1608Metric",140.000000,-74.000000,0.000000,bottom
+"R885","24.9k UVLO bottom","R_0603_1608Metric",111.500000,-90.500000,0.000000,bottom
+"R887","12k 0.1% 25ppm ILIM","R_0603_1608Metric",120.200000,-87.500000,0.000000,bottom
+"R889","100k startup fault pull-up","R_0603_1608Metric",120.700000,-85.900000,0.000000,bottom
+"R890","1k PDSG translator gate","R_0603_1608Metric",142.350000,-91.150000,90.000000,bottom
+"R891","1M translator gate-source","R_0603_1608Metric",148.799999,-92.033333,90.000000,bottom
+"R892","100k startup shutdown top","R_0603_1608Metric",111.500000,-80.500000,0.000000,bottom
+"R2201","9.53k 0.1% 25ppm thermal bias fault bleed","R_0603_1608Metric",132.500000,-76.000000,0.000000,bottom
+"R2210","100k 0.1% 25ppm cell NTC pull-up","R_0603_1608Metric",144.800000,-68.000000,90.000000,bottom
+"R2211","10k 0.1% 25ppm NTC sense-lead limit","R_0603_1608Metric",146.300000,-67.500000,90.000000,bottom
+"R2213","100k 0.1% 25ppm cell NTC pull-up","R_0603_1608Metric",152.100000,-68.500000,0.000000,bottom
+"R2215","10k 0.1% 25ppm NTC return-lead limit","R_0603_1608Metric",150.600000,-67.000000,0.000000,bottom
+"R2216","100k 0.1% 25ppm cell NTC pull-up","R_0603_1608Metric",162.900000,-68.500000,0.000000,bottom
+"R2230","100k thermal charge-health pull-up","R_0603_1608Metric",148.160000,-67.450000,90.000000,bottom
+"R2232","47k thermal-ready pull-up","R_0603_1608Metric",123.750000,-79.250000,90.000000,bottom
+"R2233","1M thermal-ready default-low","R_0603_1608Metric",123.500000,-85.300000,90.000000,bottom
+"R2234","1k thermal CTR gate series","R_0603_1608Metric",141.500000,-81.250000,90.000000,bottom
+"R2235","100k thermal CTR gate default-off","R_0603_1608Metric",148.500000,-86.500000,0.000000,bottom
+"R2236","10k hardware OFF default-high","R_0603_1608Metric",161.000000,-75.000000,90.000000,bottom
+"R2237","1k thermal CTR gate series","R_0603_1608Metric",139.000000,-87.250000,0.000000,bottom
+"R2238","100k thermal CTR gate default-off","R_0603_1608Metric",161.000000,-92.500000,90.000000,bottom
+"R2239","10k hardware OFF default-high","R_0603_1608Metric",150.500000,-89.000000,180.000000,bottom
+"R2240","243k 0.1% 25ppm CHG_COLD top","R_0603_1608Metric",145.500000,-71.000000,90.000000,bottom
+"R2241","499k 0.1% 25ppm thermal reference bottom","R_0603_1608Metric",147.800000,-71.500000,0.000000,bottom
+"R2244","147k 0.1% 25ppm DSG_COLD top","R_0603_1608Metric",156.700000,-67.000000,0.000000,bottom
+"R2246","845k 0.1% 25ppm DSG_HOT top","R_0603_1608Metric",158.800000,-68.500000,0.000000,bottom
+"R2247","499k 0.1% 25ppm thermal reference bottom","R_0603_1608Metric",159.600000,-70.000000,0.000000,bottom
+"R2251","100k raw health default-low","R_0603_1608Metric",111.250000,-89.000000,0.000000,bottom
+"R2258","4.7k readiness output current limit","R_0603_1608Metric",99.450000,-83.800000,0.000000,bottom
+"R2260","4.7k 1% I2C pull-up","R_0603_1608Metric",109.300000,-78.600000,0.000000,bottom
+"R2261","4.7k 1% I2C pull-up","R_0603_1608Metric",124.000000,-82.250000,90.000000,bottom
+"R2266","2.2k 1% I2C pull-up","R_0603_1608Metric",104.500000,-70.500000,0.000000,bottom
+"R2270","10.2k 0.1% 25ppm current limit","R_0603_1608Metric",152.500000,-76.900000,0.000000,bottom
+"R2271","26.7k 0.1% 25ppm current limit","R_0603_1608Metric",160.500000,-80.400000,0.000000,bottom
+"R2272","16.9k 0.1% 25ppm current limit","R_0603_1608Metric",154.000000,-89.800000,90.000000,bottom
+"R2273","31.6k 0.1% 25ppm current limit","R_0603_1608Metric",162.000000,-82.800000,90.000000,bottom
+"R2274","10k current-ready pull-up","R_0603_1608Metric",143.100000,-80.850000,90.000000,bottom
+"R2275","100k current-ready default-low","R_0603_1608Metric",130.250000,-75.750000,90.000000,bottom
+"R2277","100k 180..420ms current hold","R_0603_1608Metric",132.000000,-81.500000,0.000000,bottom
+"R2280","4.99R 0.1% 25ppm sense filter","R_0603_1608Metric",137.000000,-74.000000,0.000000,bottom
+"R2281","4.99R 0.1% 25ppm sense filter","R_0603_1608Metric",158.500000,-76.700000,0.000000,bottom
+"R2282","4.99R 0.1% 25ppm sense filter","R_0603_1608Metric",151.500000,-72.500000,90.000000,bottom
+"R2283","4.99R 0.1% 25ppm sense filter","R_0603_1608Metric",160.500000,-71.500000,0.000000,bottom
+"U708","TPS70950DBVR REGIN supply","SOT-23-5",160.000000,-86.500000,180.000000,bottom
+"U719","BQ76922RSNR three-cell monitor and protector","TI_RSN0032B_WQFN32_4x4mm",147.000000,-81.500000,0.000000,bottom
+"U2200","TPS70933DBVR raw-pack thermal bias","SOT-23-5",133.000000,-79.000000,180.000000,bottom
+"U2201","TLV1864PWR cell 1 thermal windows","TSSOP-14_4.4x5mm_P0.65mm",144.300000,-62.300000,180.000000,bottom
+"U2202","TLV1864PWR cell 2 thermal windows","TSSOP-14_4.4x5mm_P0.65mm",153.600000,-62.300000,0.000000,bottom
+"U2203","TLV1864PWR cell 3 thermal windows","TSSOP-14_4.4x5mm_P0.65mm",162.900000,-62.650000,180.000000,bottom
+"U2204","TLV803EA29RDBZR thermal startup hold","SOT-23",120.500000,-75.500000,90.000000,bottom
+"U2205","SN74AUP2G126DCUR thermal startup gate","TI_DCU0008A_VSSOP8",127.000000,-77.500000,180.000000,bottom
+"U2206","ISO1640BDR BQ I2C isolation","SOIC-8_3.9x4.9mm_P1.27mm",104.000000,-79.000000,0.000000,bottom
+"U2208","SN74LVC1G17DBVR raw readiness buffer","SOT-23-5",119.500000,-90.000000,180.000000,bottom
+"U2209","ISO7021FDR readiness isolation; default low","SOIC-8_3.9x4.9mm_P1.27mm",104.000000,-88.000000,180.000000,bottom
+"U2210","INA381A3IDGSR discharge current latch","MSOP-10_3x3mm_P0.5mm",155.500000,-79.500000,0.000000,bottom
+"U2211","INA381A4IDGSR charge current latch","MSOP-10_3x3mm_P0.5mm",155.500000,-72.500000,180.000000,bottom
+"U2213","REF3425IDBVR current-trip reference","SOT-23-6",155.500000,-84.900000,0.000000,bottom
+"U2214","TPS3808G30DBVR current startup hold","SOT-23-6",132.000000,-84.000000,0.000000,bottom
+"U2215","SN74LVC1G08DBVR temperature/current readiness","SOT-23-5",127.000000,-83.000000,0.000000,bottom
+"C882","100n 25V C0G startup ramp","C_1206_3216Metric",120.000000,-86.500000,90.000000,top
+"C883","1u 50V startup input","C_0805_2012Metric",111.500000,-82.000000,0.000000,top
+"C2200","100n 50V thermal regulator input","C_0603_1608Metric",133.000000,-82.000000,0.000000,top
+"C2211","10n 50V NTC sense filter","C_0603_1608Metric",144.300000,-66.800000,0.000000,top
+"C2222","100n 50V comparator supply","C_0603_1608Metric",148.950000,-63.550000,0.000000,top
+"C2252","100n 50V bus buffer supply","C_0603_1608Metric",100.500000,-86.900000,0.000000,top
+"C2257","1u 10V control input","C_0603_1608Metric",99.450000,-88.900000,0.000000,top
+"C2258","1u 10V control output","C_0603_1608Metric",99.450000,-93.000000,0.000000,top
+"C2281","1u 50V thermal switch input","C_0805_2012Metric",135.750000,-78.250000,-90.000000,top
+"D840","BAT54WS BAT supply reverse block","D_SOD-323",166.000000,-88.500000,0.000000,top
+"D847","BZT52C15 gate-source clamp","D_SOD-123",144.500000,-93.500000,0.000000,top
+"D848","BZT52C15 gate-source clamp","D_SOD-123",128.000000,-92.000000,0.000000,top
+"D2220","BAT54WS OFF-bias supply OR","D_SOD-323",123.500000,-91.000000,90.000000,top
+"F1","10A fast pack fuse","Schurter_HCF_8.05x5mm",153.500000,-88.500000,180.000000,top
+"J2","raw pack power: 1 negative, 2 positive","WAGO_2060_452_SMD",171.000000,-80.000000,-90.000000,top
+"J2072","protected pack power","WAGO_2060_452_SMD",127.800000,-65.500000,0.000000,top
+"J2074","isolated bms control","JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal",109.000000,-62.500000,180.000000,top
+"J2200","three cell probes: paired 1/2, 3/4, 5/6","JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal",137.300000,-62.050000,180.000000,top
+"J2201","cell taps: 1 cell 1, 2 cell 2","JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",174.150000,-71.200000,90.000000,top
+"Q11","CSD18540Q5B high-side charge","CSD18540Q5B_DNK",140.300000,-87.500000,0.000000,top
+"Q12","CSD18540Q5B high-side discharge","CSD18540Q5B_DNK",132.100000,-87.500000,180.000000,top
+"Q2212","BSS138 independent discharge inhibit","SOT-23",110.000000,-91.000000,0.000000,top
+"R841","75R 1% cell input/balance filter","R_0603_1608Metric",142.500000,-75.500000,0.000000,top
+"R842","75R 1% cell input/balance filter","R_0603_1608Metric",160.000000,-61.000000,0.000000,top
+"R846","100R SRN filter","R_0603_1608Metric",140.000000,-79.000000,90.000000,top
+"R849","1M gate-source","R_0603_1608Metric",145.000000,-91.500000,0.000000,top
+"R851","10k PACK sense","R_0603_1608Metric",130.700000,-81.000000,90.000000,top
+"R882","100k reset default-low","R_0603_1608Metric",146.500000,-76.500000,0.000000,top
+"R884","100k UVLO top","R_0603_1608Metric",112.500000,-80.000000,0.000000,top
+"R886","402k latched current-limit mode","R_0603_1608Metric",112.500000,-92.500000,0.000000,top
+"R888","24k 0.1% 25ppm ILIM","R_0603_1608Metric",120.200000,-90.000000,0.000000,top
+"R893","33.2k startup shutdown default-low","R_0603_1608Metric",109.500000,-88.500000,0.000000,top
+"R894","100k startup permit gate series","R_0603_1608Metric",109.000000,-83.000000,90.000000,top
+"R2200","1k 1% 0.75W raw thermal supply limiter","R_2010_5025Metric",137.500000,-74.800000,0.000000,top
+"R2212","10k 0.1% 25ppm NTC return-lead limit","R_0603_1608Metric",146.800000,-66.000000,90.000000,top
+"R2214","10k 0.1% 25ppm NTC sense-lead limit","R_0603_1608Metric",153.800000,-65.500000,0.000000,top
+"R2217","10k 0.1% 25ppm NTC sense-lead limit","R_0402_1005Metric",162.900000,-68.000000,0.000000,top
+"R2218","10k 0.1% 25ppm NTC return-lead limit","R_0603_1608Metric",162.400000,-66.500000,0.000000,top
+"R2231","100k thermal discharge-health pull-up","R_0603_1608Metric",148.660000,-66.349999,90.000000,top
+"R2242","634k 0.1% 25ppm CHG_HOT top","R_0603_1608Metric",148.100000,-72.000000,0.000000,top
+"R2243","499k 0.1% 25ppm thermal reference bottom","R_0603_1608Metric",151.400000,-64.500000,90.000000,top
+"R2245","499k 0.1% 25ppm thermal reference bottom","R_0603_1608Metric",157.000000,-65.500000,0.000000,top
+"R2255","100k control health default-low","R_0603_1608Metric",102.500000,-93.100000,0.000000,top
+"R2262","2.2k 1% I2C pull-up","R_0603_1608Metric",101.300000,-76.800000,0.000000,top
+"R2263","2.2k 1% I2C pull-up","R_0603_1608Metric",98.800000,-77.700000,90.000000,top
+"R2267","2.2k 1% I2C pull-up","R_0603_1608Metric",101.300000,-78.500000,0.000000,top
+"R2276","100k current reset pull-up","R_0603_1608Metric",132.000000,-83.500000,0.000000,top
+"R2278","100k permission default-low","R_0603_1608Metric",129.000000,-78.750000,90.000000,top
+"R2290","390k thermal switch default-off","R_0603_1608Metric",133.100000,-79.250000,0.000000,top
+"RS11","2mOhm 1% 6W four-terminal pack shunt","Bourns_CSS4J_4026_Kelvin",155.350000,-70.300000,180.000000,top
+"U2207","TCA9517AIDGKR isolated-bus buffer","VSSOP-8_3x3mm_P0.65mm",100.500000,-82.500000,-90.000000,top
+"U2216","TPS22941DCKR control supply current limit","SOT-353_SC-70-5",100.500000,-91.000000,0.000000,top
+"U2217","TPS22810DBVR thermal supply shutdown","SOT-23-6",132.000000,-76.700000,0.000000,top
+"U2218","TPS26600PWPR latched startup current limit","HTSSOP16_EP_ThermalVias",114.500000,-86.000000,0.000000,top

@@ -1,12 +1,12 @@
 # bring-up plan
 
-updated 22 september 2026. this is the preparation and test order. the exact
+updated 3 october 2026. this is the preparation and test order. the exact
 power fixtures, limits, connections, and acceptance values still need a
 review against the corrected boards before this becomes a bench procedure.
 
-the BMS routing and fabrication-file checks are finished. its
-[prototype package](../manufacturing/bms/pcbway/README.md) still needs the
-factory quote and review. the center and I/O boards need their remaining routing. see the
+the replacement BMS is being routed for the 8 A target. the retained
+[prototype package](../manufacturing/bms/pcbway/README.md) belongs to the
+previous 3 A circuit. the center and I/O boards need their remaining routing. see the
 [build status](../README.md#build-status).
 
 ## fixture requirements
@@ -47,29 +47,35 @@ connector seating, solder joints, and DNP population. measure resistance and
 diode behavior in both polarities between the specified rails/references.
 record the readings and investigate unexplained low resistance.
 
-use the final BMS assembly drawing to locate the test points. the thermal
-circuit adds TPB20 through TPB27; their identities must match the released
-board and schematic before connecting the fixture.
-
-the original BMS test-point identities are:
+use the final BMS assembly drawing to locate the test points. the replacement
+board's service pads are:
 
 | Point | Net | Point | Net |
 | --- | --- | --- | --- |
-| TPB1 | PACK_POS_RAW | TPB9 | MCU_3V3 |
-| TPB2 | BAT_PROT_VIN | TPB10 | BMS_AVDD |
-| TPB3 | PACK_POS_FUSED | TPB11 | BMS_VDD |
-| TPB4 | BAT_PROT_FET_COMMON | TPB12 | BMS_SRP |
-| TPB5 | BAT_PROT_GATE | TPB13 | BMS_SRN |
-| TPB6 | BAT_PROT_CGATE | TPB14 | BMS_PRES |
-| TPB7 | PACK_FAULT_N | TPB15 | BMS_LD |
-| TPB8 | PACK_RETRY_PULSE | TPB16 | FG_VSS |
+| TPB1 | PACK_POS_RAW | TPB9 | BQ_RST_SHUT |
+| TPB2 | BAT_PROT_VIN | TPB10 | BQ_REG1 |
+| TPB3 | PACK_POS_FUSED | TPB11 | BMS_SRP |
+| TPB4 | BAT_PROT_FET_COMMON | TPB12 | BMS_SRN |
+| TPB5 | PACK_NEG_RAW | TPB13 | BMS_RAW_SCL |
+| TPB6 | FG_VSS | TPB14 | BMS_RAW_SDA |
+| TPB7 | BQ_BAT | TPB15 | BQ_ALERT_AWAKE |
+| TPB8 | BQ_WAKE | TPB16 | BQ_REGIN |
 
 the thermal points are TPB20 THERM_3V3, TPB21 THERM_READY, TPB22..24
-THERM_SENSE_1..3, TPB25 BMS_CTRC, TPB26 BMS_CTRD, and TPB27
-PACK_CHG_TEMP_OK. check these against the final export. the thermal side
-is raw-pack referenced; the control interface uses CTRL_GND.
+THERM_SENSE_1..3, TPB25 BMS_CFETOFF, TPB26 BMS_DFETOFF and TPB27
+BMS_PERMIT_READY. TPB30..32 cover the limited startup branch; TPB33 is
+CURRENT_READY, TPB34 is CURRENT_CLR_N and TPB35 is BMS_CURRENT_REF.
+check the final test-point CSV before connecting anything. these service
+pads are raw-pack referenced, apart from the separately named FG and
+PDSG returns. the control cable uses CTRL_GND.
 
-choose the correct reference for each measurement. TPB16 is the protected
+leave R870, R871 and R872 unpopulated for the first fixture tests. check the
+monitor profile in RAM, preserve its factory trims, verify fault directions
+and cold-start behavior, and read the configuration back before programming
+OTP or closing the drive-release links. the firmware defaults do not approve
+OTP programming or normal battery operation.
+
+choose the correct reference for each measurement. TPB6 is the protected
 return. define the required differential gate/shunt measurements and equivalent test
 maps for the center and I/O boards before assembling them.
 
