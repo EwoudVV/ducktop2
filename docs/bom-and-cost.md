@@ -1,6 +1,6 @@
 # parts and cost
 
-updated 23 september 2026. the split design needs a new per-board quote.
+updated 5 october 2026. the split design needs a new per-board quote.
 there is no reconciled current total yet.
 
 ## what the next estimate needs to cover
@@ -15,8 +15,8 @@ there is no reconciled current total yet.
 | Mu | DFR1294 Ultra 226V initially, or DFR1294-1 development kit; carrier and cooling must also support DFR1295 Ultra 256V |
 | NVMe and Wi-Fi/Bluetooth | Final module identities and capacities |
 | Display | Current AUO panel, final compatible eDP harness, mounting and hinge hardware |
-| Pack | Exact cells and owned stock, harness, connectors, cutoff assemblies, fuse and mounting |
-| Interconnect | Four Molex 503908 signal connectors and their 41/51-contact cables, separate Micro-Fit/XT30 power looms, ground braids, BMS control/probe cables, and keyboard/radio/trackpad cables |
+| Pack | Three owned AKZYTUE 1160100 packs, confirmed listing B0FBRGNCJF; replacement wiring, insulation, connectors, probes, fuse and mounting |
+| Interconnect | Four Molex 503908 signal connectors and their 41/51-contact cables, WAGO auxiliary/BMS power links, direct XT30 USB5 loom, ground braids, BMS control/probe cables, and keyboard/radio/trackpad cables |
 | Case and cooler | Measured design, material/process, fasteners, cold plate, heatpipe, fins, blower |
 | Other costs | Shipping, tax, assembly tooling, test fixtures, and replacement parts |
 
@@ -27,9 +27,10 @@ footprint, DNP, and controlled assembly information. `gen/bom_catalog.py`
 supplies many of the passive identities. component inventory tools turn a
 schematic export into a sourcing report.
 
-the corrected center and I/O source packets have manufacturer and part-number
-fields for their populated board components. run the complete six-board
-inventory again after the BMS integration. include off-board items such as
+the center and I/O boards have manufacturer and part-number fields for all
+1,315 populated sourcing items. the [main-board part selections](hardware/main-board-parts.md)
+record the corrected capacitor codes, body heights and assembly details.
+export a separate BOM for each of the six boards when quoting. include off-board items such as
 probes, fuse/holder assemblies, crimp contacts, housings, braids and wire.
 DNPs and owned assemblies need their intended classification.
 

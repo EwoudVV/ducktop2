@@ -56,7 +56,7 @@ def main():
             edges.append(row)
         for fp in board.GetFootprints():
             row = {'reference': fp.GetReference(), 'value': fp.GetValue(),
-                   'footprint': str(fp.GetFPID()), 'position': xy(fp.GetPosition()),
+                   'footprint': fp.GetFPIDAsString(), 'position': xy(fp.GetPosition()),
                    'rotation': fp.GetOrientationDegrees(),
                    'side': 'back' if fp.IsFlipped() else 'front', 'models': [], 'courtyards': {}}
             fp.BuildCourtyardCaches()

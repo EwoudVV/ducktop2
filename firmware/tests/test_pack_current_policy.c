@@ -1,11 +1,11 @@
-#include "ducktop2/ec/ec_policy.h"
+#include "power_profile.h"
 #include <assert.h>
 #include <stdio.h>
 
 static void fixture(ec_controller_t *c,ec_inputs_t *in)
 {
-    ec_controller_init(c,0,0);ec_inputs_init(in);
-    c->config.enforce_pack_current_limit=true;
+    const ec_policy_config_t config=ec_target_power_config();
+    ec_controller_init(c,&config,0);ec_inputs_init(in);
     in->source_manager_reset_released=in->service_mux_reset_released=true;
     in->service_bus_healthy=in->all_source_paths_off=true;
     in->watchdog_healthy=in->thermal_data_valid=in->thermal_ok=true;

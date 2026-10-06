@@ -1,72 +1,88 @@
 # case prototype
 
-editable CadQuery geometry for the first case fit study. `assembly.json`
-selects the 35 mm compact study. the final thickness is still undecided. the current power connectors and wires
-still conflict with it and remain visible in the CAD. the 73 mm
-`current-hardware` profile is a clearance reference, not the enclosure
-target. PCB files are read, never saved by these scripts.
+editable CadQuery case study using the saved WAGO power revision and the
+80 mm BMS. `assembly.json` selects `guided-harness-study`, currently a
+33.5 mm base to the deck surface. this is a packaging candidate, not a
+verified complete minimum or a manufacturing release.
 
-the exports use the earlier PCB snapshots. the new power connector revision
-has not been regenerated in the case yet.
+the old Micro-Fit arches are gone. all 18 Alpha wire paths are imported
+from the mechanical inputs. the main boards and BMS are lowered together
+by 1.3 mm. all source wire shapes are retained. a real conflict between the
+BMS loops and J2074 remains visible; attempted detours are not adopted.
+the case has
+continuous open guides, split strain-relief clamps and separate supports
+in the gaps between cells. clamps do not rely on solder pads, the keyboard
+carrier, the trackpad bridge or the cells to take cable loads.
 
-open `inspection.html` for the interactive CAD view and `packaging.md` for
-the height stack, exact conflicts, assembly order and measurement list.
-the case is not ready for manufacture.
+the BMS board-edge/plug conflict, braid crossings and detachable-carrier
+service access are unresolved. the current export is for inspection and
+isolated fit coupons, not a complete case build.
 
-start with `hinge-fit.md`, `hinge-datums.json` and the drawings. the first
-small prints are under `exports/hinge-tests/`. the retained Framework models
-and drawings include their source revision, hashes, copyright and license.
+read `packaging.md` before printing. `harness-case-checks.json` records
+actual clashes, conservative height screens and unverified dimensions.
+`thickness-study.json` separates the stack calculation from a complete fit
+claim. no thermal approval is implied for either Mu Ultra variant.
 
-from the repo root:
+## rebuild
+
+to rebuild this pinned case snapshot, use the existing environment:
+
+```sh
+.workbench/layout-env/bin/python mechanical/case-prototype/build.py
+.workbench/layout-env/bin/python mechanical/case-prototype/thickness_study.py
+.workbench/layout-env/bin/python mechanical/case-prototype/check_exports.py
+.workbench/layout-env/bin/python mechanical/case-prototype/finalize_metadata.py
+```
+
+to deliberately replace the PCB snapshot, first review the board changes,
+then run from the project root:
 
 ```sh
 /Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/Current/bin/python3 mechanical/case-prototype/inventory_boards.py
-.workbench/layout-env/bin/python mechanical/case-prototype/hinges.py
-.workbench/layout-env/bin/python mechanical/case-prototype/check_hinges.py
-.workbench/layout-env/bin/python mechanical/case-prototype/draw_hinges.py
+.workbench/layout-env/bin/python mechanical/case-prototype/audit_inputs.py
 .workbench/layout-env/bin/python mechanical/case-prototype/export_pcbs.py
-.workbench/layout-env/bin/python mechanical/case-prototype/build.py --profile compact-study
+.workbench/layout-env/bin/python mechanical/case-prototype/freeze_boards.py
+.workbench/layout-env/bin/python mechanical/case-prototype/build.py
+.workbench/layout-env/bin/python mechanical/case-prototype/thickness_study.py
 .workbench/layout-env/bin/python mechanical/case-prototype/check_exports.py
 .workbench/layout-env/bin/python mechanical/case-prototype/finalize_metadata.py
-.workbench/layout-env/bin/python mechanical/case-prototype/sync_floorplan.py
 ```
 
-use `--profile current-hardware` to inspect the taller saved-hardware
-reference. both configurations rebuild the same stable output paths; there
-is one source tree. `--no-render` skips PNGs but still exports CAD and runs
-the geometry review. refreshing board data is a deliberate step: inspect
-PCB drift and revised outlines/mounts before adopting new electronics.
+`build.py --stage-only` makes a private BRep checkpoint. use
+`inspect_case.py --checks`, `--views` or `--export` to work from that same
+geometry without rebuilding it. the cache rejects a changed configuration
+or inventory. a changed PCB requires a reviewed inventory refresh. the
+scripts never save a PCB or change its routing, placement or outline.
 
 ## files
 
-- `build.py`, `cad.py`, `hinges.py`, `cables.py`, `assembly.json`: editable
-  parametric source and both case configurations.
-- `exports/ducktop2-assembly.step`: named assembly in the documented XY/Z
-  frame, shown open at 105 degrees. the source and viewer supply other poses.
-- `exports/parts/`: separate manufactured STEP parts and print derivatives.
-  large metal reinforcement parts also have split, fit-only STLs. those
-  fragments do not replace the continuous metal load path.
-- `exports/hinge-tests/`, `drawings/`: inexpensive hinge gauges and
-  dimensioned mounting details. start here before printing the full base.
-- `mounting-schedule.csv`, `parts.json`: reference/XYZ/thread/fastener/
-  insulation/status schedule and part inventory.
-- `assembly-checks.json`, `hinge-checks.json`, `cable-checks.json`,
-  `component-coverage.json`: distinct geometry, motion and cable results.
-- `views/`: actual-CAD open, closed, exploded, internal, hinge and section
-  images. visible wire intrusions in the compact view are unresolved clashes.
+- `assembly.json`, `build.py`, `cables.py`, `harness_geometry.py`, `cad.py`
+  and `hinges.py`: editable parameters and construction source.
+- `exports/ducktop2-assembly.step`: named assembly, open at 105 degrees.
+- `exports/parts/`: separate manufactured STEP parts and P1S STL derivatives.
+  split reinforcement STLs are fit gauges, not substitutes for continuous metal.
+- `exports/hinge-tests/` and `drawings/`: the existing small Framework hinge
+  coupons and dimensioned seating details.
+- `mounting-schedule.csv`, `parts.json`, `fastener-summary.json`: mounts,
+  materials, threads, lengths, insulation and fit status.
+- `input-audit.json`, `source-bindings.json`, `board-inventory.json`:
+  exact saved PCB hashes, source commits and transforms. accepted upstream
+  hash differences have a recorded geometry-equivalence check.
+- `installed-power-harness.json`: the case's adopted positive-height paths.
+  the upstream `mechanical/power-harness.json` is not overwritten.
+- `harness-height-study.json`: rejected USB lowering trials.
+- `assembly-checks.json`, `harness-case-checks.json`, `thickness-study.json`
+  and `export-checks.json`: different checks with different limitations.
+- `inspection.html`: self-contained rotating/sectioning CAD viewer.
+- `views/`: actual-CAD open, closed, exploded, harness and section views.
 
-the existing environment uses CadQuery 2.8.0 and VTK. keep `cad.py` and
-`hinges.py` together. changing a parameter and rerunning rebuilds solids,
-STEP, STL and the actual-CAD view. meshes are print derivatives, not the
-editable source. all exported STEP coordinates are millimeters, installed
-X/Y with front +Y and Z positive down from the base bottom. the renderer
-uses the same geometry in a conventional Z-up view, related by a rotation.
+STEP uses installed X/Y with front +Y and Z positive down from the outside
+bottom. the builder/viewer uses X,-Y,height. a 180 degree rotation about X
+connects the frames. no imported part is mirrored.
 
-the original 3.3 kg kit is selected. its drawing label matches, but the
-owned hinges still need the coupon fit and marking check. the panel, cell
-and trackpad measurements remain outstanding. the planned full enclosure
-uses separate load paths for the lid, keyboard, trackpad and batteries.
+the original Framework 13 3.3 kg kit is selected. the retained manufacturer
+references, revision and CC-BY-4.0 license remain under
+`reference/framework13/`. physical hinge matching, panel and battery
+measurements, clamp fit and powered thermal testing are still required.
 
-![35 mm study with current harness conflicts](views/open.png)
-
-![stepped hinge adapters](views/hinge-mounts.png)
+![current guided harness](views/harness-detail.png)

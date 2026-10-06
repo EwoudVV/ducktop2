@@ -13,6 +13,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
+from part_identity import ordering_errors
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_VERIFY = ROOT / "verification" / "generated"
@@ -251,6 +252,8 @@ def main(argv=None) -> None:
                 reasons.append("missing Manufacturer")
             if not item["mpn"]:
                 reasons.append("missing MPN")
+            else:
+                reasons.extend(ordering_errors(item["mpn"]))
         elif item["procurement_class"] != "PCB copper test feature" and not item["assembly_id"]:
             reasons.append("controlled non-MPN item missing AssemblyID")
         if reasons:

@@ -68,6 +68,17 @@ class RevisionCalculations(unittest.TestCase):
         self.assertAlmostEqual(high, .0216125)
         self.assertGreater(high, .020*1.08)
 
+    def test_battery_shunt_loss_uses_the_full_eight_amp_target(self):
+        loss = named(charger(self.center), 'battery-shunt')
+        self.assertAlmostEqual(loss.value, .7236)
+        self.assertTrue(loss.passed)
+
+    def test_old_gate_return_overloads_the_charge_pump(self):
+        change(self.center, 'R2600', '100k BGATE to source', 'RC0603FR-07100KL')
+        check = named(charger(self.center), 'BGATE load')
+        self.assertGreater(check.value, 15)
+        self.assertFalse(check.passed)
+
     def test_charger_precision_strap_and_filter_are_checked(self):
         checks = charger(self.center)
         self.assertTrue(all(check.passed for check in checks))

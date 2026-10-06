@@ -138,7 +138,7 @@
       )
     )
   )
-(symbol "Conn_01x30_FFC_MP:Conn_01x30_FFC_MP"
+(symbol "Keyboard_Connector:FFC_30_Separate_Mounts"
 		(pin_names
 			(offset 1.016)
 			(hide yes)
@@ -212,7 +212,7 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH*"
+		(property "ki_fp_filters" "Keyboard_Connector:Hirose_FH12_30_Separate_Mounts"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -223,7 +223,7 @@
 				)
 			)
 		)
-		(symbol "Conn_01x30_FFC_MP_1_1"
+		(symbol "FFC_30_Separate_Mounts_1_1"
 			(rectangle
 				(start -1.27 36.83)
 				(end 1.27 -39.37)
@@ -1108,14 +1108,32 @@
 			(pin passive line
 				(at 5.08 -40.64 180)
 				(length 2.54)
-				(name "MP"
+				(name "MP1"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "MP"
+				(number "MP1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+(pin passive line
+				(at 5.08 -43.18 180)
+				(length 2.54)
+				(name "MP2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "MP2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -7448,7 +7466,7 @@
 )
 (text "== J320 keyboard FFC / board-to-board connector ==" (at 20.32 335.28 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 4ffd2f84-cdeb-5934-b02e-d5f1609aabba))
 (symbol
-  (lib_id "Conn_01x30_FFC_MP:Conn_01x30_FFC_MP")
+  (lib_id "Keyboard_Connector:FFC_30_Separate_Mounts")
   (at 165.1 400.05 0)
   (unit 1)
   (exclude_from_sim no)
@@ -7458,13 +7476,13 @@
   (uuid 4dc59f84-1ad7-578c-a488-592db414238c)
   (property "Reference" "J320" (at 165.1 353.06 0) (effects (font (size 1.27 1.27))))
   (property "Value" "Keyboard FFC: MX ULP 5x14 matrix on 30-pin EC contract" (at 165.1 447.04 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Footprint" "Keyboard_Connector:Hirose_FH12_30_Separate_Mounts" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Datasheet" "" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Manufacturer" "Hirose" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "MPN" "FH12-30S-0.5SH(55)" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "LCSC" "C506793" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "JLCPCB Part #" "C506793" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Assembly" "connector MP hold-downs are mechanical and netless" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Assembly" "MP1 and MP2 are separate unused mechanical hold-downs" (at 165.1 400.05 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "1" (uuid 304c03cf-f8ae-5fc7-b0eb-4ea2cd809bad))
   (pin "2" (uuid ce1412bf-aa2a-533e-bc24-b5a9d4016669))
   (pin "3" (uuid deeb5098-ba77-5c16-91f4-a2e93176d496))
@@ -7495,7 +7513,8 @@
   (pin "28" (uuid 6d587e3d-4be2-5e76-abd5-fab973ee0236))
   (pin "29" (uuid db7763db-c77f-52c2-a86d-7463326b07f7))
   (pin "30" (uuid cef54a95-2d16-56f6-ad12-5cf48d34f47b))
-  (pin "MP" (uuid 7e1a198e-ac28-54ab-83ef-bf3bd1373b11))
+  (pin "MP1" (uuid 7e1a198e-ac28-54ab-83ef-bf3bd1373b11))
+  (pin "MP2" (uuid bdeec17c-71eb-4a83-a570-6fb64951d63c))
   (instances
     (project "ducktop2"
       (path "/084ae94e-ff56-5524-acb7-9ee516763403"
@@ -13590,4 +13609,5 @@
   )
 )
   (embedded_fonts no)
+(no_connect (at 170.18 443.23) (uuid 90b9f028-c85e-4b61-aa98-f8686e3ae6eb))
 )

@@ -1,100 +1,99 @@
 # power revision
 
-4 october 2026. the BMS routing is finished. the 100 W main-board work still
-needs routing and hardware tests, so the complete laptop is not ready to order.
+updated 5 october 2026. the BMS is routed. the 100 W main boards still need
+routing, the complete case fit and hardware tests before ordering.
 
-the BMS now uses a BQ76922 high-side circuit,
-independent signed current guards and a limited startup branch. the target
-is 8 A discharge and 3 A charging. the 80 mm board fits a wider center
-cutout with the same 1.5 mm gaps. both outlines and the moved center support
-are saved. the BMS has zero native unconnected items and zero physical DRC
-findings with the fabrication checks enabled.
+## current main-board check
 
-the 100 W main-board revisions use the revised connector footprints and
-pin maps. the main power links use WAGO 2060
-spring terminals. the protected BMS pair uses the two-pole version, and
-the replacement BMS raw input uses another two-pole WAGO, with separate
-JST GH cell taps. F1 is a 10 A Schurter HCF fuse in that revision. Alpha 6715 is specified for the
-18 AWG links and Alpha 6716 for the 16 AWG direct USB5 loom.
+all three schematics have zero ERC errors. their numbered pads, nets,
+footprints, values and population attributes match the saved PCBs. KiCad's
+own schematic comparison also passes after correcting the hidden connector
+fields. the short looms specify Alpha 6715, 18 AWG, and the direct USB5 loom
+specifies Alpha 6716, 16 AWG, in both the schematics and boards.
 
-the [layout report](../../verification/bms-layout.md) covers the new board,
-its filled power paths, isolated returns, footprints and assembly checks.
-the main boards remain unfinished. obsolete power
-tracks and 28 incorrectly assigned MCU escape stubs have been removed.
-the existing PCIe and clock routing is preserved.
+| board | footprints | numbered pads checked | native unconnected items |
+| --- | ---: | ---: | ---: |
+| center | 863 | 3,359 | 1,783 |
+| left | 333 | 1,474 | 948 |
+| right | 173 | 746 | 331 |
 
-the ISL9241 charger, TPS552882 Mu supply, input switches and always-on power
-changes are now in the saved main-board schematics and PCBs as well as the
-generators and firmware. the first power placement pass covers 185 center
-parts and 14 parts on each I/O board. it includes a dedicated land pattern
-for the CSD17577Q3A FETs, shorter bootstrap and gate-drive connections, and
-small support parts on the back. the broader MCU, audio and port placement
-pass is also saved. repairs to existing main-board routes are in progress;
-most of the board is still unrouted.
+these counts use copied boards after a native refill. the center and left
+CLI reports stop at 499 unconnected items, so those report lengths are not
+the totals. there were no track/via net changes inferred during native load.
 
-the center pass moved 230 existing footprints and added C2685 beside the
-selector's V2 input. the MCU clocks and bypasses, codec, microphone,
-headphone stage, maker flash and radio interface now follow their actual
-connections. C427 sits at the codec's VDDI output, and the selector INTVCC
-capacitors are less than 0.8 mm from their pins. the programming voltage-sense
-link stays on the front, clear of the Tag-Connect area.
+remaining findings after refill:
 
-C29/C30 use documented 2.2 uF, 16 V X7R parts in the same 0805 footprints.
-C740/C749 keep 100 nF and use the documented 50 V parts already used on
-the board. these choices support short underside connections. the center
-matches all 868 schematic parts and 3,372 numbered pads, with no physical
-DRC errors involving moved or added parts. its 330 remaining physical DRC
-errors and 1,816 unconnected items belong to the unfinished routing work.
-all 698 reviewed PCIe, clock and associated control routing objects are
-preserved. 75 obsolete copper objects are removed with an exact record.
+- center: 174 dangling vias, 83 dangling tracks, 27 silkscreen overlaps and
+  60 silkscreen-over-copper findings.
+- left: 16 footprint-library warnings.
+- right: 3 dangling tracks, 8 dangling vias, 1 silkscreen edge-clearance
+  finding and 26 footprint-library warnings.
 
-the left and right placement pass is saved. 172 left footprints and 38 right
-footprints were moved, including the five added local bypass capacitors.
-the USB protection now follows its own connector, the hub and Ethernet
-bypasses sit near their supply pins, and the power selector has a shorter
-shared-source path. 121 parts moved to the back. each has a checked maximum
-body height of 1.8 mm or less, with a separate 0.3 mm assembly allowance.
-the case still needs checking against those positions and heights.
+the separate pad/drill comparison covers all 1,369 main-board footprints
+and matches their reference libraries. library warnings still need their
+other footprint details and saved review records resolved before release.
+some project checks are disabled, including center library warnings; the
+machine-readable checkpoint lists those settings. no DRC exclusions were
+used. these results are not a fabrication approval.
 
-both I/O boards have zero physical DRC errors and match their schematics.
-the left keeps all its existing copper. the right removes seven obsolete
-crystal segments and adds one short ground connection and via for U2014.
-its missing In3/In6 ground pours are now present. the remaining unconnected
-counts are 948 left and 331 right, so neither board is ready to order.
-library warnings and a few existing right-board dangling items remain.
+ERC warnings remain: 404 center, 106 left and 65 right. all are covered by
+the [symbol and grounded-pin checks](erc-warnings.md); electrical errors
+and unexplained warnings fail. the power check also passes
+478 power-wiring assertions and 167 numerical design checks. the updated
+battery-shunt calculation uses 8 A, giving 0.7236 W at its upper resistance
+corner. it passes the 1.4 W derated component limit used by the calculation.
 
-standby power now uses the system rail for its battery feed, so that current
-passes through the charger's discharge shunt. an LTC4231 adds active current
-limiting and a deliberate reset after a persistent fault. the startup and
-fault calculations still depend on measured load, capacitor and temperature
-limits. the Mu output uses two 16 milliohm shunts in parallel, and its firmware
-budget is now 60 W for the module and display, leaving room for the fan.
-the calculations now include charger current-sense error, precharge, voltage
-tolerance and repeated standby faults. the firmware only uses the guaranteed
-lower input-current bound for its available-power budget. these are design
-checks; the real current, startup, temperature and transient tests remain.
+the [complete center battery-path check](battery-path.md) adds the gauge
+shunt, Q25, wire loss and the shared startup bank. R2600 was loading the
+charger's gate pump too heavily at 100 kohms. it is now 1 Mohm in the same
+footprint, with regression coverage in both the path check and the main
+calculation report. Q25 still needs the specified heat-spreading copper
+and an installed temperature measurement.
 
-both official PD exports now include the 20 V / 5 A sink setting. their register
-data, binaries, C arrays and archives pass the updated checks and 23 configuration
-tests. the firmware host tests, ARM build and linked-image checks pass. no hardware
-has been programmed or tested, and the qualification flags remain off. this
-firmware belongs to the revised power circuit, not the previous board.
+## firmware
 
-the integrated schematic ERC checks have zero errors, with warnings
-remaining. schematic-to-board comparisons pass for the saved power revision.
-the firmware host suite passes all 34 CMake tests, and the ARM build and
-linked-image checks pass. all 63 hardware test rows remain NOT_RUN. the
-main center board still has existing routing and clearance errors, so these
-results are not a routing or fabrication approval.
+the BQ76922 board profile now enables the shared battery-current check during
+startup and operation. previously only the older guarded 8 A profile enabled
+that check; the BQ76922's own monitor check was already present. regression
+tests now use both real profile selections and cover overcurrent, invalid
+current, stale samples and an absent limit.
 
-the case study contains the mounting schedule, Framework hinge supports,
-keyboard and trackpad supports, battery trays, lid, cooling reservations,
-STEP/STL exports and an interactive viewer. its exports still use the
-previous PCB snapshots. the 35 mm study has unresolved harness conflicts;
-the final thickness is still undecided. the saved connector placements now
-have [proposed wire paths and service requirements](power-harness-fit.md).
-raw-pack lead measurements, clamps and the complete assembly check remain.
+all 46 CMake host tests pass, as does the shell test runner. the BQ76922
+revision builds for the EC, with its register definitions, dependency hashes
+and 98 interrupt-vector entries checked. charging, startup and transfer
+qualification flags remain off. no hardware was programmed or tested.
 
-the BMS prototype uses CSS4J-4026K-2L00F, 2 milliohms, with separate
-force and sense contacts. the first assembly keeps its drive-release links
-open for fixture tests.
+the source policy reserves standby power and includes shunt, gain and offset
+bounds before accepting a charger current. it checks applied limits before
+admitting loads. a small adapter can supplement a qualified running battery
+load, and charging uses only the remaining external power. tests cover that
+behavior and the charger losing or reloading its settings.
+
+## board and case work
+
+the ISL9241 charger, TPS552882 Mu supply, input protection and always-on
+circuits are saved in the main-board schematics and placement. the broader
+MCU, audio and port placement pass is also saved. this work corrected hidden
+connector fields and R2600's value/part number. all main-board positions, copper, zones, holes and
+outlines are unchanged. the old and new file hashes are in the checkpoint
+so a mechanical export can distinguish these field changes from movement.
+
+the BMS uses a BQ76922, independent current and temperature guards, and a
+limited startup path. its targets are 8 A discharge and up to 3 A charging.
+the 80 mm board fits the widened center cutout with the existing 1.5 mm gaps.
+its [layout and assembly report](../../verification/bms-layout.md) covers the
+routed board. the first assembly keeps R870, R871 and R872 unpopulated for
+fixture testing; its operating profile is not armed.
+
+the current power links use WAGO 2060 terminals and the separate XT30 USB5
+loom. the raw pack uses a two-pole WAGO plus separate JST GH cell taps.
+the pack fuse is the 10 A Schurter HCF 3-101-051. finished pack dimensions,
+lead exits, strain relief and the complete closed assembly still need to
+agree with the case. the old 35 mm study does not establish the final height.
+
+next is the [power routing order](power-routing.md), after the case fit is
+settled. it covers the switching loops, Kelvin pickups, ground returns and
+checks for each stage. full-load temperatures, voltage drop, stability,
+source transitions and the actual cells remain hardware tests.
+
+[checkpoint data](../../verification/power-revision-checkpoint.json)

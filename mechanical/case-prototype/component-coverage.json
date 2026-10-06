@@ -1,51 +1,51 @@
 {
   "left": {
-    "source_sha256": "01d57d7b7b5bfa0f8024c947bdcfbc33626edd707b1626317d6b098575f86110",
+    "source_sha256": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
     "kicad_returncode": 2,
     "missing_model_paths": [
       "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_A_Receptacle_XKB_U231-091N-4BLRA00-S.step",
       "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_Molex_105450-0101.step",
       "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_Molex_105450-0101.step",
       "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_Molex_105450-0101.step",
-      "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_A_Receptacle_GCT_USB1046.step",
-      "${KICAD10_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Micro-Fit_3.0_43045-1212_2x06_P3.00mm_Vertical.step"
+      "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_A_Receptacle_GCT_USB1046.step"
     ],
     "vrml_models_omitted": 1,
     "scope": "PCB material, fitted available connector/module/support/inductor/fuse/switch/microphone models; most small SMT components omitted",
     "complete_component_assembly": false
   },
   "center": {
-    "source_sha256": "f3af13be5f763422f665713fb967477b04f66f4f65964cc61c6a849b5ccaeb2f",
+    "source_sha256": "7b8b3fc0eaaa33c80654b086594b19dccec68ea9f1eeb76de15b46c909926a6e",
     "kicad_returncode": 2,
     "missing_model_paths": [
       "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_Molex_105450-0101.step",
       "${KICAD10_3DMODEL_DIR}/Connector_Audio.3dshapes/Jack_3.5mm_CUI_SJ1-3535NG_Horizontal.step",
-      "${KICAD10_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical.step",
-      "${KICAD10_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Micro-Fit_3.0_43045-1012_2x05_P3.00mm_Vertical.step",
-      "${KICAD10_3DMODEL_DIR}/Fuse.3dshapes/Fuse_1812_4532Metric.step",
-      "${KICAD10_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Micro-Fit_3.0_43045-1212_2x06_P3.00mm_Vertical.step"
+      "${KICAD10_3DMODEL_DIR}/Fuse.3dshapes/Fuse_1812_4532Metric.step"
     ],
-    "vrml_models_omitted": 4,
+    "vrml_models_omitted": 5,
     "scope": "PCB material, fitted available connector/module/support/inductor/fuse/switch/microphone models; most small SMT components omitted",
     "complete_component_assembly": false
   },
   "right": {
-    "complete_component_assembly": false,
-    "coverage_record_missing": true
-  },
-  "bms": {
-    "source_sha256": "eb147d4bfedfec5447d79759b4612e251e331bac942dba1f9ab51f11f26f3f40",
+    "source_sha256": "2dc8b232debb9de3507809bdd4743ff775f4d1a8b82a4756a764a73887ed018d",
     "kicad_returncode": 0,
     "missing_model_paths": [
-      "${KICAD10_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Micro-Fit_3.0_43650-0224_1x02-1MP_P3.00mm_Vertical.step",
-      "${KICAD10_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Mega-Fit_76829-0006_2x03_P5.70mm_Vertical.step"
+      "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_Molex_105450-0101.step",
+      "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_Molex_105450-0101.step"
     ],
     "vrml_models_omitted": 0,
     "scope": "PCB material, fitted available connector/module/support/inductor/fuse/switch/microphone models; most small SMT components omitted",
     "complete_component_assembly": false
   },
+  "bms": {
+    "source_sha256": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+    "kicad_returncode": 0,
+    "missing_model_paths": [],
+    "vrml_models_omitted": 0,
+    "scope": "PCB material, fitted available connector/module/support/inductor/fuse/switch/microphone models; most small SMT components omitted",
+    "complete_component_assembly": false
+  },
   "keyboard": {
-    "source_sha256": "f33ffae6e6e7192066ee53b051872c056c74b4e3d843ce6c00916949903d43b6",
+    "source_sha256": "dde68ee9f5a772e6e72ff41556725470885d89b2794e609eeac95493c6360097",
     "kicad_returncode": 2,
     "missing_model_paths": [],
     "vrml_models_omitted": 65,

@@ -1,14 +1,56 @@
 {
   "passed": true,
-  "stage": "row-based RGB remap, routing incomplete",
+  "stage": "routing complete, not an order release",
   "footprints": 221,
   "rgb_leds": 65,
   "copper_layers": 4,
   "thickness_mm": 0.8,
-  "tracks_and_vias": 1472,
+  "tracks_and_vias": 4165,
   "copper_pours": 1,
   "switch_keepouts": 65,
-  "native_unconnected": 298,
+  "native_unconnected": 0,
+  "unused_pad_metadata": [
+    {
+      "reference": "J320",
+      "pin": "10",
+      "net": "unconnected-(J320-Pin_10-Pad10)"
+    },
+    {
+      "reference": "J320",
+      "pin": "11",
+      "net": "unconnected-(J320-Pin_11-Pad11)"
+    },
+    {
+      "reference": "J320",
+      "pin": "12",
+      "net": "unconnected-(J320-Pin_12-Pad12)"
+    },
+    {
+      "reference": "J320",
+      "pin": "27",
+      "net": "unconnected-(J320-Pin_27-Pad27)"
+    },
+    {
+      "reference": "J320",
+      "pin": "28",
+      "net": "unconnected-(J320-Pin_28-Pad28)"
+    },
+    {
+      "reference": "J320",
+      "pin": "MP1",
+      "net": "unconnected-(J320-PadMP1)"
+    },
+    {
+      "reference": "J320",
+      "pin": "MP2",
+      "net": "unconnected-(J320-PadMP2)"
+    },
+    {
+      "reference": "U320",
+      "pin": "30",
+      "net": "unconnected-(U320-SYNC-Pad30)"
+    }
+  ],
   "schematic_parity": true,
   "physical_pads_checked": 1096,
   "original_placement_and_outline_preserved": true,
@@ -19,38 +61,196 @@
   "sink_current_ma_at_published_corner": 11.23,
   "eighteen_sink_total_ma_at_published_corner": 202.136,
   "current_calculation_conditions": "IS31FL3743A rev C table: VCC 3.6 V, TA 25 C; 1% ISET resistor. Verify current and temperature on hardware.",
+  "drc_findings": 0,
+  "drc_reported_unconnected_capped": 0,
+  "disabled_pcb_checks": 0,
+  "erc_findings": 0,
+  "checked_date": "2026-10-05",
+  "routing_complete": true,
+  "baseline": {
+    "native_unconnected": 290,
+    "physical_drc_errors": 6,
+    "dangling_tracks": 61,
+    "dangling_vias": 33,
+    "off_centre_via_connections": 4,
+    "silk_edge_clearance": 4,
+    "silk_overlaps": 10,
+    "unused_pad_parity_findings": 8
+  },
+  "physical_drc_errors": 0,
+  "drc_warnings": 0,
+  "schematic_parity_findings": 0,
+  "tracks_and_arcs": 3335,
+  "vias": 830,
+  "local_front_anode_joins_verified": 65,
+  "all_component_poses_and_locks_unchanged": true,
+  "all_pad_and_mounting_geometry_unchanged": true,
+  "support_component_moves": [],
+  "vias_in_U320_exposed_pad": 0,
+  "plotted_keepout_layers": 4,
+  "plotted_keepouts_per_layer": 65,
+  "plotted_keepout_findings": 0,
+  "i2c_spacing_check": {
+    "passed": true,
+    "parallel_length_threshold_mm": 5,
+    "edge_gap_threshold_mm": 0.5,
+    "layers_checked": "same copper layer and adjacent In2.Cu/B.Cu; F.Cu is separated by In1.Cu ground",
+    "findings": []
+  },
+  "mapping_tests_passed": 4,
   "source_sha256": {
-    "keyboard/12_keyboard_daughterboard.kicad_pcb": "2c49464da6eca71d4abd1e67a260c3f268ab11532761d9c1b776cfeadbdf215d",
+    "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
+    "keyboard/12_keyboard_daughterboard.kicad_sch": "3d4eb3da6fd0207077771ca6cc756d9ea3983437d4b2f218252ab0aac7520e9e",
     "keyboard/12_keyboard_daughterboard.kicad_pro": "c8fddc35d05a58979c3284f7d293cf4028417f082ca387697936c64e415db9a4",
     "keyboard/12_keyboard_daughterboard.kicad_dru": "e2fd7634ce4a5ec48c8eceeb249ba6a6dbf0a39a405ab238558834980db62d7b",
-    "keyboard/12_keyboard_daughterboard.kicad_sch": "c40daf53dd10302336023783288c1b2f24abb2715a553bbdabd59f68275c4df8",
-    ".workbench/keyboard-led-remap-20260927/final-netlist.xml": "4c52d326d7f2c1ce3fbd6938e101b838f3457e84cf53b5891dedd3132c9fe1ab",
-    ".workbench/keyboard-led-remap-20260927/candidate-erc.json": "3ca70b065653bdd53ae8ec09e6516b555310c3c7fda8025fda7d21950c719517",
+    "keyboard/fp-lib-table": "8c571ec1fed5305b88d154803b9db5f6e25d75448411a883a30cd1c1e9a1b46b",
+    "keyboard/sym-lib-table": "7a713ce142f9bc79f1537b11df914d688438d628e3f6d3f107b54cede256464f",
+    "keyboard/keyboard-connector.kicad_sym": "5f904ee984e82ec03146f23de9d2deaadb6f73168f09ae3d06a8f0c94926735e",
+    "keyboard/keyboard-connector.pretty/Hirose_FH12_30_Separate_Mounts.kicad_mod": "2b24ee4b19fa7a363b6de5fcee701d073d4d168048c235e5f8264a8a36a8d625",
+    "keyboard/README.md": "20f5a1f3f82d16898b21e2730564544947a833f522b9b0a6e1f1165538f5b676",
+    "keyboard/rgb-key-map.csv": "71597f92eac9b201c9c332b92a2fec98a4831b94022eb778a85ff0a412a2190f",
+    "keyboard/images/rgb-routing-map.png": "9b3c891725cc16e0c7e20d0fe501f6420b5a7ed1ac9fa93f72c400d268873ff5",
     "gen/keyboard_rgb_contract.py": "f397bd3f154b741ea39a0791fa1eacb978b85c8b4f86ce0b6eed7fab9552aa94",
-    "gen/check_keyboard_rgb.py": "570abe1780e81a9c7bbee2adbac21c3053b47136b7be0a2933e1a42f072cdb76",
-    "gen/Keyboard_RGB.kicad_sym": "97db6959fa84a70faa191045b411d9e4bf9a4ad4280e0bb690fc7ee78a8de7e3",
-    "ducktop2.pretty/LED_Everlight_19-337_1616.kicad_mod": "581942a0f7b91b11a4e81590367878a5065df50968723d9e5558e72c3401670b",
-    "ducktop2.pretty/IS31FL3743A_UQFN40.kicad_mod": "886ad92ee72566284799765ae4f662485007d45eb31274839728a467674b6fc2",
-    "firmware/ec_target/keyboard_rgb.c": "9161c19758e1da4b754dd214330efc9cd2ea39689542a44236436a7edd9a4921",
-    "firmware/ec_target/keyboard_rgb_map.h": "afd89bc79c1f4641a82b832bde6f524cf3cc56a4be360b1140bd8a2bc30a71e9"
+    "gen/check_keyboard_rgb.py": "8be603c964dad6e48fc709bd6a9d5ea6d383d997e469993e33c082f5affa8aeb",
+    "firmware/ec_target/keyboard_rgb_map.h": "afd89bc79c1f4641a82b832bde6f524cf3cc56a4be360b1140bd8a2bc30a71e9",
+    "firmware/ec_target/keyboard_rgb.c": "9161c19758e1da4b754dd214330efc9cd2ea39689542a44236436a7edd9a4921"
   },
-  "erc_findings": 0,
-  "routing_preservation": {
+  "pcb_views": [
+    "keyboard/images/routing-front-20261005.png",
+    "keyboard/images/routing-back-20261005.png",
+    "keyboard/images/routing-controller-20261005.png"
+  ],
+  "remaining_before_order": [
+    "prepare the RGB-specific fabrication and assembly package; the passive-keyboard exporter does not support this revision",
+    "confirm the 0.8 mm four-layer stackup and manufacturing limits"
+  ],
+  "first_article_checks": [
+    "physical LED and switch fit",
+    "colour order and per-key mapping",
+    "full-white current and driver temperature",
+    "I2C operation and power sequencing"
+  ],
+  "native_drc_report": {
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-05T20:00:41",
+    "ignored_checks": [],
+    "included_severities": [
+      "error",
+      "warning"
+    ],
+    "kicad_version": "10.0.4",
+    "schematic_parity": [],
+    "source": "12_keyboard_daughterboard.kicad_pcb",
+    "unconnected_items": [],
+    "violations": []
+  },
+  "schematic_erc_report": {
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-05T17:33:52",
+    "ignored_checks": [
+      {
+        "description": "Global label only appears once in the schematic",
+        "key": "single_global_label"
+      },
+      {
+        "description": "Four connection points are joined together",
+        "key": "four_way_junction"
+      },
+      {
+        "description": "SPICE model issue",
+        "key": "simulation_model_issue"
+      },
+      {
+        "description": "Assigned footprint doesn't match footprint filters",
+        "key": "footprint_filter"
+      }
+    ],
+    "included_severities": [
+      "error",
+      "warning"
+    ],
+    "kicad_version": "10.0.4",
+    "sheets": [
+      {
+        "path": "/",
+        "uuid_path": "/084ae94e-ff56-5524-acb7-9ee516763403",
+        "violations": []
+      }
+    ],
+    "source": "12_keyboard_daughterboard.kicad_sch"
+  },
+  "plotted_copper_report": {
     "passed": true,
-    "local_anode_groups_preserved": 65,
-    "led_local_connectivity_checked": 65,
-    "non_led_copper_unchanged": true,
-    "all_vias_preserved": true,
-    "footprint_positions_and_pad_geometry_unchanged": true,
-    "outlines_keepouts_and_zones_unchanged": true
-  },
-  "drc": {
-    "new_physical_errors": 0,
-    "preexisting_errors": 4,
-    "types": {
-      "starved_thermal": 4
+    "keepouts": 65,
+    "layers": {
+      "F_Cu": {
+        "objects": 4169,
+        "objects_touching_keepout_bounds": 13,
+        "violations": [],
+        "source_sha256": "aa9992c42a4ac7b9147851798046ad1101000e40cd2afd7008915c4bbbad40a5",
+        "gerber_bounds_mm": [
+          [
+            18.0005,
+            -79.7995
+          ],
+          [
+            290.4995,
+            -0.8005
+          ]
+        ]
+      },
+      "In1_Cu": {
+        "objects": 831,
+        "objects_touching_keepout_bounds": 1,
+        "violations": [],
+        "source_sha256": "661f95b2afa31f41d69f23cc738f7636ed5ba485a9ded49f9b9bcd9ab0e9346b",
+        "gerber_bounds_mm": [
+          [
+            18.0005,
+            -79.7995
+          ],
+          [
+            290.4995,
+            -0.8005
+          ]
+        ]
+      },
+      "In2_Cu": {
+        "objects": 1642,
+        "objects_touching_keepout_bounds": 12,
+        "violations": [],
+        "source_sha256": "ab3ada19675b5f44fd1f260021152bec0b36891275f6b00ac6cb49a3c4b10411",
+        "gerber_bounds_mm": [
+          [
+            18.0005,
+            -79.7995
+          ],
+          [
+            290.4995,
+            -0.8005
+          ]
+        ]
+      },
+      "B_Cu": {
+        "objects": 1614,
+        "objects_touching_keepout_bounds": 24,
+        "violations": [],
+        "source_sha256": "66f0571adac7f40bf9f491f754c056524cc36fd0ef611b16c029ba299eb163c0",
+        "gerber_bounds_mm": [
+          [
+            18.0005,
+            -79.7995
+          ],
+          [
+            290.5,
+            -0.8005
+          ]
+        ]
+      }
     },
-    "unconnected": 298,
-    "schematic_parity_issues": 0
+    "coordinate_transform": "KiCad board Y to Gerber Cartesian Y",
+    "curve_approximation_mm": 1e-05
   }
 }

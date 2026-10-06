@@ -1,0 +1,55 @@
+{
+  "source_board_sha256": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+  "study_main_top_z_mm": 8,
+  "study_bms_top_z_mm": 12,
+  "hardware_od_mm": 5,
+  "reserved_H24_head_and_washer_height_mm": 2.5,
+  "actual_hardware_verified": false,
+  "minimum_mated_clearance_to_planned_bms_hardware_mm": 0.52,
+  "checked_connectors": [
+    {
+      "ref": "J2",
+      "overlaps_on_bms": [],
+      "minimum_5mm_hardware_gap_mm": 4.500000000000001,
+      "main_parts_below_service_sweep": []
+    },
+    {
+      "ref": "J2072",
+      "overlaps_on_bms": [],
+      "minimum_5mm_hardware_gap_mm": 21.47069099999999,
+      "main_parts_below_service_sweep": []
+    },
+    {
+      "ref": "J2074",
+      "overlaps_on_bms": [],
+      "minimum_5mm_hardware_gap_mm": 2.2206909999999875,
+      "main_parts_below_service_sweep": [
+        {
+          "ref": "H24",
+          "mpn": null,
+          "height": null,
+          "max_allowed_in_study": 3.7
+        }
+      ]
+    },
+    {
+      "ref": "J2200",
+      "overlaps_on_bms": [],
+      "minimum_5mm_hardware_gap_mm": 30.020690999999996,
+      "main_parts_below_service_sweep": []
+    },
+    {
+      "ref": "J2201",
+      "overlaps_on_bms": [],
+      "minimum_5mm_hardware_gap_mm": 0.5200000000000103,
+      "main_parts_below_service_sweep": [
+        {
+          "ref": "R2313",
+          "mpn": "RC0603FR-0710KL",
+          "height": 0.55,
+          "max_allowed_in_study": 3.7
+        }
+      ]
+    }
+  ]
+}

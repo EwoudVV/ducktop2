@@ -10,6 +10,7 @@ from pathlib import Path
 import cadquery as cq
 from cad import HERE, ROOT, box, cylinder, compound, drilling, bounds, export_step, export_stl, render
 import hinges
+from case_inputs import path as input_path
 
 if __name__=='__main__':sys.modules['build']=sys.modules[__name__]
 
@@ -28,8 +29,8 @@ def load_config(profile=None):
 
 CONFIG=load_config()
 INVENTORY=json.loads((HERE/'board-inventory.json').read_text())['boards']
-PLACEMENT=json.loads((ROOT/'mechanical/board-placement.json').read_text())
-CACHE=ROOT/'.workbench/case-prototype/pcb-step'
+PLACEMENT=json.loads(input_path('board-placement.json').read_text())
+CACHE=HERE/'reference/pcb-snapshot' if (HERE/'reference/pcb-snapshot/manifest.json').exists() else ROOT/'.workbench/case-prototype/pcb-step'
 COLORS={'structure':(.60,.68,.73),'deck':(.75,.79,.82),'lid':(.52,.61,.69),
         'supports':(.20,.59,.65),'boards':(.13,.43,.31),'hardware':(.30,.33,.37),
         'panel':(.12,.17,.20),'cells':(.78,.68,.33),'cables':(.80,.30,.16),
@@ -87,8 +88,13 @@ class Model:
     def boards(self):
         coverage={}
         for name,row in INVENTORY.items():
-            sha=hashlib.sha256((ROOT/row['file']).read_bytes()).hexdigest()
-            if sha!=row['sha256']:raise RuntimeError(name+' source changed; review new PCB before refresh')
+            if (CACHE/'manifest.json').exists():
+                record=json.loads((CACHE/'manifest.json').read_text())['boards'][name]
+                assert record['pcb_sha256']==row['sha256'],name+' frozen inventory differs'
+                assert record['step_sha256']==hashlib.sha256((CACHE/(name+'.step')).read_bytes()).hexdigest(),name+' frozen STEP changed'
+            else:
+                sha=hashlib.sha256((ROOT/row['file']).read_bytes()).hexdigest()
+                if sha!=row['sha256']:raise RuntimeError(name+' source changed; review new PCB before refresh')
             s=cq.importers.importStep(str(CACHE/(name+'.step'))).val()
             spec=CONFIG['boards'][name];tx,ty=spec['translation_xy'];z=spec['bottom_height']
             s=s.rotate((0,0,0),(0,0,1),spec['rotation_deg']).translate((tx,-ty,z))
@@ -103,7 +109,9 @@ class Model:
             coverage[name]=json.loads(cov.read_text()) if cov.exists() else {'complete_component_assembly':False,'coverage_record_missing':True}
         # J70/J71 have no model attached in the saved board. Add the existing
         # project body model at the corrected footprint centres, without editing PCB data.
-        dra=cq.importers.importStep(str(ROOT/'ducktop2.3dshapes/DRA818_Castellated.step')).val()
+        dra_file=CACHE/'DRA818_Castellated.step'
+        if not dra_file.exists():dra_file=ROOT/'ducktop2.3dshapes/DRA818_Castellated.step'
+        dra=cq.importers.importStep(str(dra_file)).val()
         dra=dra.rotate((0,0,0),(1,0,0),90)
         for ref in ['J70','J71']:
             f=fp('radio',ref);x,y=installed('radio',f['position'])
@@ -126,7 +134,7 @@ class Model:
         rim=rim.cut(box(x0-1,y0-1,b['rear_wall_top'],x1-x0+2,10-y0+1,50))
         # Rear cooling outlet and radio connector access.
         rim=rim.cut(box(120,y0-1,23,56,wall+2,19))
-        for yy in [133,198]:rim=rim.cut(box(x1-wall-1,yy-6,pcb_top('radio')-4.58,wall+2,12,10))
+        for yy in [133,198]:rim=rim.cut(box(x1-wall-1,yy-11,pcb_top('radio')+.38-11,wall+2,22,22))
         base=base.fuse(rim)
         # Main board isolation: separate nylon male/female supports, no metal
         # boss or screw connects copper domains to the case.
@@ -137,16 +145,20 @@ class Model:
                 x,y=installed(name,hole['position'])
                 post=cylinder(x,y,floor,2.5,z-floor).cut(cylinder(x,y,floor-.1,1.0,z-floor+.2))
                 self.add(name+'-'+ref+'-nylon-support',post,'supports','nylon',False,False)
+                head=cylinder(x,y,pcb_top(name),2.5,.5).fuse(cylinder(x,y,pcb_top(name)+.5,2.25,2))
+                self.add(name+'-'+ref+'-nylon-head-and-washer',head,'hardware','nylon',False,False)
                 base=base.cut(cylinder(x,y,-.1,1.4,floor+.2))
-                self.mount(name+'/'+ref,x,y,z,'base, nylon M2.5 male/female standoff',2.7,'M2.5',z-floor,5,
+                self.mount(name+'/'+ref,x,y,z,'base, nylon M2.5 male/female standoff',2.7,'M2.5',z-floor,4,
                            'nylon screw, support, washer and underside nut; preserve PCB isolation',
-                           'XY/drill verified from saved board; purchased hardware fit pending',washer_thickness_mm=.5,top_thread_engagement_mm=2.9)
+                           'XY/drill verified; short custom insulating support and pullout fit pending',washer_thickness_mm=.5,top_thread_engagement_mm=1.9)
         for i,hole in enumerate(q for q in INVENTORY['bms']['holes'] if q['reference'] is None):
             x,y=installed('bms',hole['position']);z=CONFIG['boards']['bms']['bottom_height']
             p=cylinder(x,y,floor,2.1,z-floor).cut(cylinder(x,y,floor-.1,1,z-floor+.2))
             self.add(f'bms-perimeter-{i+1}-support',p,'supports','nylon',False,False)
+            head=cylinder(x,y,pcb_top('bms'),2.5,.5).fuse(cylinder(x,y,pcb_top('bms')+.5,2.25,2))
+            self.add(f'bms-perimeter-{i+1}-nylon-head-and-washer',head,'hardware','nylon',False,False)
             base=base.cut(cylinder(x,y,-.1,1.4,floor+.2))
-            self.mount(f'bms/edge-hole-{i+1}',x,y,z,'base, 8 mm insulating standoff',round(hole['drill'][0],6),
+            self.mount(f'bms/edge-hole-{i+1}',x,y,z,'base, separate insulating standoff',round(hole['drill'][0],6),
                        'M2.5 proposed',z-floor,5,'all support, screw, washer and nut parts electrically insulating',
                        'four real Edge.Cuts holes; no middle supports; hardware fit pending')
         for ref,height,desc in [('H1',5.5,'Wurth 9774055243R Mu support'),('H2',5.5,'Wurth 9774055243R Mu support'),
@@ -178,7 +190,7 @@ class Model:
             if relief>20:tower=tower.cut(box(xmin+3,-10,10,bb.xlen-6,21,relief-16))
             if side=='left':
                 # Existing F195 holder projects forward of the PCB notch.
-                tower=tower.cut(box(33.96,17.33,4.247,18,8.73,12.16))
+                tower=tower.cut(box(33.96,17.33,4.247+CONFIG['boards']['left']['bottom_height']-6.4,18,8.73,12.16))
             for x,y in bolts:
                 tower=tower.cut(cylinder(x,y,seat-11,1.6,9))
                 pocket=cq.Workplane('XY').polygon(6,5.7/math.cos(math.pi/6)).extrude(2.8).val().translate((x,-y,seat-5.7))
@@ -207,7 +219,7 @@ class Model:
         self.mount('MK430/acoustic-duct',x,y,floor,'base acoustic port and foam gasket',2,'none',4,'none','insulating foam','mic XY verified; port offset/seal acoustic test pending')
         # Seven deck posts outside PCB material. The keyboard carrier stiffens
         # the rear deck span; do not put a centre post through the compute PCB.
-        deck_points=[(-3,12),(361,12),(-3,122),(361,122),(-3,251),(179,251),(361,251)]
+        deck_points=[(-3,12),(361,12),(-3,122),(361,118),(-3,251),(179,251),(361,251)]
         self.deck_points=deck_points
         for i,(x,y) in enumerate(deck_points):
             post=cylinder(x,y,floor,2.5,top-floor-b['deck_thickness'])
@@ -298,6 +310,10 @@ class Model:
             tray=box(x-1.5,c['y']-1.5,floor,c['width']+3,c['depth']+3,1)
             rim=box(x-1.5,c['y']-1.5,floor+1,c['width']+3,c['depth']+3,5).cut(box(x-.3,c['y']-.3,floor+.9,c['width']+.6,c['depth']+.6,6))
             rim=rim.cut(box(x+40,c['y']-2,floor,20,5,8))
+            if i==1:
+                # Front-rim relief for the independently anchored BMS clamp
+                # dogleg. The pouch floor and straps remain intact.
+                rim=rim.cut(box(126.5,186.4,floor+1,9.5,1.7,7))
             tray=tray.fuse(rim)
             for xx in [x+20,x+80]:
                 tab=box(xx-5,248,floor,10,6,1)
@@ -357,7 +373,7 @@ class Model:
                 cup_part=next(p for p in self.parts if p['name']==f'speaker-{i+1}-cup')
                 cup_part['shape']=cup_part['shape'].fuse(hanger).fuse(cup_tab)
                 deck=deck.cut(cylinder(xx,yy,dt-th-.1,1.1,th+.2))
-                self.mount(f'speaker-{i+1}-{j+1}',xx,yy,dt,'speaker cup to deck',2.2,'M2',dt-bottom,45,'cup/pad insulating','depth and acoustic tuning pending')
+                self.mount(f'speaker-{i+1}-{j+1}',xx,yy,dt,'speaker cup to deck',2.2,'M2',dt-bottom,math.ceil((dt-bottom+2)/2)*2,'cup/pad insulating','depth and acoustic tuning pending')
             # Trial grilles are separate from the battery floor.
             for gy in range(6):deck=deck.cut(box(x+3,y+3+5*gy,dt-th-.1,s['width']-6,1.5,th+.2))
         self.split('deck',deck,'deck')
@@ -433,7 +449,7 @@ class Model:
         # A separate cradle carries fan/fin mass; TIM load and Ultra screw pattern
         # remain unresolved, so no invented holes are added to the module.
         x,y,h,w,d,t=c['blower'];cradle=box(x-7,y-7,h-2,w+14,d+14,2)
-        cradle=cradle.cut(cylinder(x+w/2,y+d/2,h-2.1,18,2.2))
+        cradle=cradle.cut(cylinder(x+w/2,y+d/2,h-2.1,19.3,2.2))
         upper=CONFIG['boards']['keyboard']['bottom_height']-4.5
         for i,(xx,yy) in enumerate([(x-5,y-5),(x+w+5,y-5),(x-5,y+d+5),(x+w+5,y+d+5)]):
             cradle=cradle.cut(cylinder(xx,yy,h-2.1,1.1,2.2))
@@ -458,20 +474,28 @@ class Model:
                 if part['name'].startswith('keyboard-carrier-'):part['shape']=part['shape'].cut(cut)
             self.mounts=[row for row in self.mounts if not (row['reference'].startswith('keyboard-pad-') and
                          x-3<row['X_mm']<x+w+3 and y-3<row['Y_mm']<y+d+3)]
-        self.add('pending-100W-power-space',box(*c['pending_power_reserve']),'keepout','reservation',False,False)
+        # Current saved power components replace the obsolete blanket 100 W box.
         self.findings.append('cooler geometry is a reserved volume, not a qualified Ultra cooler; contact, springs and thermal performance for 256V remain open')
 
 
 def main():
     global CONFIG
-    parser=argparse.ArgumentParser();parser.add_argument('--no-render',action='store_true');parser.add_argument('--profile',choices=['compact-study','current-hardware']);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--no-render',action='store_true');parser.add_argument('--stage-only',action='store_true');parser.add_argument('--profile',choices=['guided-harness-study','compact-study','current-hardware']);args=parser.parse_args()
     CONFIG=load_config(args.profile)
+    if not (CACHE/'manifest.json').exists():
+        from audit_inputs import main as audit
+        audit()
     m=Model();m.boards();print('boards loaded',flush=True)
     m.chassis();print('base and hinges built',flush=True)
     m.inputs();print('deck and component supports built',flush=True)
+    from radio_hardware import add as add_radio_hardware
+    add_radio_hardware(m)
     m.lid();m.thermal();print('lid and cooling built',flush=True)
     from cables import add_cables
     add_cables(m)
+    from model_cache import save
+    save(m)
+    if args.stage_only:return
     from deliver import deliver
     deliver(m,render_views=not args.no_render)
 

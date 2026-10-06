@@ -25,10 +25,10 @@ def assembly_step(parts,path):
         col=p.get('color',(.4,.4,.4))
         shape=p['shape'].rotate((0,0,0),(1,0,0),180)
         assy.add(shape,name=p['name'],color=cq.Color(*col[:3]))
-    assy.export(str(path))
+    assy.export(str(path),write_pcurves=False)
 
 
-def deliver(m,render_views=True):
+def deliver(m,render_views=True,checked=False):
     from build import CONFIG, INVENTORY
     # Resolve the final suspension stack in the schedule before writing it.
     # The bolts are not used as solid manufacturing geometry.
@@ -38,8 +38,26 @@ def deliver(m,render_views=True):
         if row['reference'].startswith('cooling-cradle-'):
             row['fastener_length_mm']=round(carrier_bottom-fan_bottom+5.5,1)
             row['status']='low-profile head, 1.5 mm nut engagement; trim to length to clear SW3; thermal test pending'
+    if not checked:
+        from review import review
+        review(m)
     out=HERE/'exports';out.mkdir(exist_ok=True);parts_dir=out/'parts';parts_dir.mkdir(exist_ok=True)
     views=HERE/'views';views.mkdir(exist_ok=True)
+    old_catalog=json.loads((HERE/'parts.json').read_text()) if (HERE/'parts.json').exists() else []
+    active={p['name'] for p in m.parts}
+    # Move only previously catalogued, now-superseded generated parts out of
+    # the export directory. Keep a recoverable copy in the private work area.
+    retired=[]
+    from cad import ROOT
+    archive=ROOT/'.workbench/case-refresh-20261005/superseded-parts'
+    for row in old_catalog:
+        if row.get('manufactured') and row['name'] not in active:
+            for ext in ['.step','.stl','-fit-only-1.stl','-fit-only-2.stl']:
+                path=parts_dir/(row['name']+ext)
+                if path.exists():
+                    archive.mkdir(parents=True,exist_ok=True)
+                    path.replace(archive/path.name);retired.append(path.name)
+    if retired:(archive/'manifest.json').write_text(json.dumps(retired,indent=2)+'\n')
     catalog=[]
     for p in m.parts:
         shape=p['shape'];row={k:v for k,v in p.items() if k not in ['shape','color']}
@@ -63,7 +81,7 @@ def deliver(m,render_views=True):
     (HERE/'parts.json').write_text(json.dumps(catalog,indent=2)+'\n')
     keys=list(dict.fromkeys(k for row in m.mounts for k in row))
     with (HERE/'mounting-schedule.csv').open('w',newline='') as f:
-        writer=csv.DictWriter(f,fieldnames=keys);writer.writeheader();writer.writerows(m.mounts)
+        writer=csv.DictWriter(f,fieldnames=keys,lineterminator='\n');writer.writeheader();writer.writerows(m.mounts)
     (HERE/'cable-checks.json').write_text(json.dumps(m.cable_records,indent=2)+'\n')
     (HERE/'open-findings.json').write_text(json.dumps(m.findings,indent=2)+'\n')
     print('manufactured parts and mounting schedule exported',flush=True)
@@ -81,26 +99,7 @@ def deliver(m,render_views=True):
     template=(HERE/'viewer-template.html').read_text()
     (HERE/'inspection.html').write_text(template.replace('/*ASSEMBLY_DATA*/',json.dumps(payload,separators=(',',':'))))
     print('interactive CAD viewer exported',flush=True)
-    from review import review
-    review(m)
     if render_views:
-        openparts=[posed(p,105) for p in m.parts if p['group']!='keepout']
-        render(openparts,views/'open.png','ducktop2 / current-hardware fit prototype / 105 degrees',direction=(1,-1.7,1.1))
-        closed=[posed(p,0) for p in m.parts if p['group']!='keepout']
-        render(closed,views/'closed.png','closed / current power loom height retained',direction=(1,-1.5,1.0))
-        exploded=[posed(p,90,True) for p in m.parts if p['group']!='keepout']
-        render(exploded,views/'exploded.png','exploded / separate case parts and supports',direction=(1,-1.8,.8))
-        internal=[p for p in m.parts if not p.get('moving') and p['group'] not in ['deck','keepout'] and not p['name'].startswith(('keyboard-carrier','key-travel','trackpad-body'))]
-        render(internal,views/'inside.png','base / preserved PCB geometry, supports and power wire arches',direction=(.15,-.8,1.7))
-        # Thin sections are intersections of actual solids, not illustrative rectangles.
-        sections=[('cooling',205,(1,0,0)),('trackpad-battery',179,(1,0,0)),('power-loom',78,(1,0,0))]
-        for name,x,direction in sections:
-            cut=box(x-.5,-50,-8,1,360,120)
-            scene=[]
-            for p in closed:
-                bb=p['shape'].BoundingBox()
-                if bb.xmin<=x+.5 and bb.xmax>=x-.5:
-                    s=p['shape'].intersect(cut)
-                    if s.Volume()>.0001:scene.append({'shape':s,'color':p['color']})
-            if scene:render(scene,views/(name+'-section.png'),f'X={x} mm / {name} section / actual CAD',direction=(1,0,.001),size=(1500,850))
+        from inspect_case import views as render_current_views
+        render_current_views(m)
         print('open, closed, exploded, internal and section views rendered',flush=True)

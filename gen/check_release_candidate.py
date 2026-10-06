@@ -701,6 +701,16 @@ def run_static_checks(tempdir: Path) -> tuple[int, int]:
             (netlist.with_suffix('.parity.json')).write_text(json.dumps(parity,indent=2)+'\n')
             if not parity['passed']:failures+=1
             print(f"{name} independent pad parity: {'PASS' if parity['passed'] else 'FAIL'}; {parity['counts']['physical_pads_checked']} physical pads")
+            warning_board = {'center': 'center', 'left_io': 'left', 'right_io': 'right'}.get(name)
+            if warning_board:
+                erc = netlist.with_suffix('.erc.json')
+                warning_review = netlist.with_suffix('.erc-review.json')
+                run_command([cli, 'sch', 'erc', '--severity-all', '--format', 'json',
+                             '--output', str(erc), str(schematic)], schematic.parent, f'{name} ERC')
+                run_command(['python3', 'gen/verify_erc_warnings.py', '--board', warning_board,
+                             '--schematic', str(schematic), '--netlist', str(netlist),
+                             '--erc', str(erc), '--output', str(warning_review)],
+                            copy_root, f'{name} ERC warning review')
             for comp in parse_schematic(tree):
                 fields=comp.get('fields',{});excluded=bool(comp['attributes'] & {'dnp','exclude_from_bom'})
                 missing=[] if excluded else [key for key in ('Manufacturer','MPN') if not fields.get(key,'').strip()]

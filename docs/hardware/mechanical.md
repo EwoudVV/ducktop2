@@ -15,7 +15,7 @@ main-board coordinates below were checked on 10 september 2026.
 | --- | --- | --- |
 | Mu Ultra 226V / 256V | Shared 69.6 x 60 mm module format and Ultra cooler family | Measured cooler contact, clearances and thermal validation covering both variants |
 | AUO B160QAN03.K panel | 352 x 227 mm | Thickness, protrusions, bezel offsets, mounting, connector datum |
-| Three cells | 100 x 60 mm each | Exact identity, thickness, tabs, wiring, cutoff boards, clearance allowance |
+| Three cells | AKZYTUE 1160100, confirmed purchase B0FBRGNCJF; 100 x 60 mm measured, 11 mm thickness listed | Measured maximum thickness, tabs, replacement wiring and clearance allowance |
 | RGB keyboard | Four-layer 273.5 x 80.0 x 0.8 mm PCB, original key positions retained | First-article LED/switch fit, keycaps/plate, fastening, stiffness |
 | JOMAA trackpad | 140 x 105 mm | Height, travel, mounting, plug and bend clearance |
 | Speakers | 38 x 18 mm each in plan view | Depth, fastening, acoustic volume and openings |
@@ -23,8 +23,15 @@ main-board coordinates below were checked on 10 september 2026.
 the cell footprints come from the recorded measurements in the
 [old battery-band layout](../../reference/floorplans/floorplan_revC_battery_band.json).
 the archived measurement notes at commit `8bd7a2d` explicitly confirm
-100 x 60 mm per cell, while leaving thickness and tabs unmeasured. the
-10 mm thickness in the case study is still an assumption.
+100 x 60 mm per cell, while leaving thickness and tabs unmeasured.
+the [confirmed purchase listing](https://www.amazon.com/dp/B0FBRGNCJF),
+checked on 5 october 2026, specifies 100 x 60 x 11 mm and 50 mm supplied
+leads. use 11 mm as the nominal thickness for case planning. the earlier
+10 mm case assumption is too small for that listed dimension. the listing
+does not separate the pouch, wrapping and protection-board dimensions or
+give a maximum thickness tolerance. final clearance still needs the actual
+pack measurement, insulation and swelling allowance. the supplied lead
+length does not define the replacement harness.
 
 ## packaging
 
@@ -51,8 +58,8 @@ the BMS keeps its own mounting points and needs chassis support. the center
 board's H24 moved to (156.75,145.5), outside the notch. H22 is at (105,70).
 the BMS file uses its original coordinates; the installed translation is
 (+47.35,+91.448), with no rotation. the main component side faces up;
-all five cable connectors face up. include their
-housings and wire bends below the board. all four BMS supports and fasteners
+all five cable connectors are on top. include their complete housings,
+wire bends and removal space above the board. all four BMS supports and fasteners
 must be insulating so they cannot bridge its separate ground domains.
 
 the radio outline is about 120 x 70 mm in its own layout frame. its installed
@@ -174,7 +181,7 @@ pack fuse, module screws, programming points, and replaceable cables.
 | Work | Evidence needed |
 | --- | --- |
 | Panel and hinges | Dimensioned parts, pivot/sweep, fasteners, connector and bezel geometry |
-| Pack | Cell identity/ratings, thickness, tabs, wiring, cutoff assemblies and clearance |
+| Pack | Cell ratings, measured maximum thickness, tabs, replacement wiring and clearance |
 | Mu and cooling | Complete seated height stack, contact/flatness, airflow and thermal measurements |
 | Keyboard and trackpad | Actual deck height, mounting stiffness, click travel and clearance |
 | Split-board support | Common assembly model with PCB revisions and installed transforms |

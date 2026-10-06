@@ -1,33 +1,11 @@
 #!/usr/bin/env python3
-"""
-Spec-keyed procurement catalog for the Ducktop2 main board.
+"""Main-board manufacturer and part-number assignments.
 
-Sources (highest authority first):
-  1. gen/apply_bom_catalog.py reviewed per-ref assignments (2026-08-01).
-  2. verification/BOM_MPN_ASSIGNMENTS.md reviewed Murata GRM hold suggestions
-     (2026-07-30) for the intentional capacitor holds.
-  3. MCP-verified alternates (LCSC spec search, 2026-08-01) recorded in
-     ALTERNATES for dual sourcing only; never stamped.
+Reference assignments preserve choices that depend on the circuit. Spec lookup
+covers additional passives only when value, package and ratings are unambiguous.
+Alternates are listed for sourcing and are never selected automatically.
 
-The catalog is inverted from per-ref assignments into spec keys so that the
-generators can stamp Manufacturer/MPN at Sheet.place() time and regeneration
-can never lose procurement identity again (the fix for commit c329f95 which
-wiped the post-processing patches of commit 57008c8).
-
-Rules:
-  - Every reviewed ref resolves by reference (REF_FALLBACKS), so stamping is
-    deterministic and exact even in the release gate's temp copy where
-    verification/ is emptied.
-  - The inverted SPEC_CATALOG (value+footprint driven) covers refs unknown to
-    the reviewed dicts so future passives get stamped automatically.
-  - A spec key that maps to more than one reviewed part is not used for spec
-    lookup; such refs keep their own reviewed part.
-  - Refs whose value string cannot be parsed resolve by reference.
-  - No reviewed part is ever silently changed (REF_OVERRIDES documents the
-    one intentional unification).
-
-Run as a script for a coverage self-test:
-  python3 gen/bom_catalog.py
+Run python3 gen/bom_catalog.py to check assignment coverage.
 """
 
 from __future__ import annotations
@@ -48,50 +26,50 @@ GAP_CSV = ROOT / "verification" / "generated" / "bom_release_gaps.csv"
 # =============================================================================
 # 1.  INTENTIONAL-HOLD PARTS  (verification/BOM_MPN_ASSIGNMENTS.md, 2026-07-30)
 # =============================================================================
-# These refs were deliberately left unassigned by apply_bom_catalog.py pending
-# review; the reviewed Murata GRM suggestions below close them out.
+# Additional reference assignments, including complete capacitor order codes.
+# Current capacitor selections: docs/hardware/main-board-parts.md.
 HOLD_PARTS: dict[str, tuple[str, str]] = {
     # (ref) -> (manufacturer, mpn)
     # -- 02_ec_mcu.kicad_sch --
     "C29":  ("Murata", "GRM21BR60J225ME01"),  # 2.2u 0805 X5R 6.3V VCAP_1 (ST mandatory low-ESR)
     "C30":  ("Murata", "GRM21BR60J225ME01"),  # 2.2u 0805 X5R 6.3V VCAP_2 (ST mandatory low-ESR)
-    "C290": ("Murata", "GRM188R71H103KA01"),  # 10n 0603 X7R 50V VDDA high-frequency
+    "C290": ('KEMET', 'C0603C103K5RACTU'),  # 10n 0603 X7R 50V VDDA high-frequency
     "C292": ("Murata", "GRM1555C1H560JA01"),  # 56p 0402 C0G 50V +/-5% feed-forward
     # -- 15_system_audio.kicad_sch --
-    "C414": ("Murata", "GRM1885C1H180JA01"),  # 18p 0603 C0G 50V +/-5% hub crystal load
-    "C415": ("Murata", "GRM1885C1H180JA01"),
-    "C420": ("Murata", "GRM1885C1H180JA01"),  # 18p codec crystal load
-    "C421": ("Murata", "GRM1885C1H180JA01"),
-    "C430": ("Murata", "GRM188R71H473KA01"),  # 47n 0603 X7R 50V L DAC out-of-band shunt
-    "C431": ("Murata", "GRM188R71H473KA01"),  # 47n R DAC out-of-band shunt
-    "C432": ("Murata", "GRM21BR71H105KA01"),  # 1u 0805 X7R 50V L positive-input AC coupling
-    "C433": ("Murata", "GRM21BR71H105KA01"),  # 1u R positive-input AC coupling
-    "C434": ("Murata", "GRM21BR71H105KA01"),  # 1u L negative-input AC reference
-    "C435": ("Murata", "GRM21BR71H105KA01"),  # 1u R negative-input AC reference
-    "C442": ("Murata", "GRM155R71H102KA01"),  # 1n 0402 X7R 50V speaker EMI shunt
-    "C443": ("Murata", "GRM155R71H102KA01"),
-    "C444": ("Murata", "GRM155R71H102KA01"),
-    "C445": ("Murata", "GRM155R71H102KA01"),
-    "C453": ("Murata", "GRM1885C1H122JA01"),  # 1.2n 0603 C0G 50V +/-5% feedback low-pass
-    "C454": ("Murata", "GRM31CR61C475KA01"),  # 4.7u 1206 X5R 16V mic gain-leg AC coupling
-    "C455": ("Murata", "GRM31CR61C475KA01"),  # 4.7u mic to PCM2900 VINL
-    "C456": ("Murata", "GRM31CR61C475KA01"),  # 4.7u mic to PCM2900 VINR
+    "C414": ('KEMET', 'C0603C180J5GACTU'),  # 18p 0603 C0G 50V +/-5% hub crystal load
+    "C415": ('KEMET', 'C0603C180J5GACTU'),
+    "C420": ('KEMET', 'C0603C180J5GACTU'),  # 18p codec crystal load
+    "C421": ('KEMET', 'C0603C180J5GACTU'),
+    "C430": ('KEMET', 'C0603C473K5RACTU'),  # 47n 0603 X7R 50V L DAC out-of-band shunt
+    "C431": ('KEMET', 'C0603C473K5RACTU'),  # 47n R DAC out-of-band shunt
+    "C432": ('TDK', 'C2012X7R1H105K125AB'),  # 1u 0805 X7R 50V L positive-input AC coupling
+    "C433": ('TDK', 'C2012X7R1H105K125AB'),  # 1u R positive-input AC coupling
+    "C434": ('TDK', 'C2012X7R1H105K125AB'),  # 1u L negative-input AC reference
+    "C435": ('TDK', 'C2012X7R1H105K125AB'),  # 1u R negative-input AC reference
+    "C442": ('Murata', 'GRM155R71H102KA01D'),  # 1n 0402 X7R 50V speaker EMI shunt
+    "C443": ('Murata', 'GRM155R71H102KA01D'),
+    "C444": ('Murata', 'GRM155R71H102KA01D'),
+    "C445": ('Murata', 'GRM155R71H102KA01D'),
+    "C453": ('Murata', 'GRM1885C1H122JA01D'),  # 1.2n 0603 C0G 50V +/-5% feedback low-pass
+    "C454": ('Murata', 'GRM319R61C475KA88D'),  # 4.7u 1206 X5R 16V mic gain-leg AC coupling
+    "C455": ('Murata', 'GRM319R61C475KA88D'),  # 4.7u mic to PCM2900 VINL
+    "C456": ('Murata', 'GRM319R61C475KA88D'),  # 4.7u mic to PCM2900 VINR
     # -- 16_gigabit_ethernet.kicad_sch --
-    "C515": ("Murata", "GRM1555C1H120JA01"),  # 12p 0402 C0G 50V +/-5% crystal load
-    "C516": ("Murata", "GRM1555C1H120JA01"),
+    "C515": ('Murata', 'GRM1555C1H120JA01J'),  # 12p 0402 C0G 50V +/-5% crystal load
+    "C516": ('Murata', 'GRM1555C1H120JA01J'),
     # -- 01_power_battery.kicad_sch --
     "C700": ("Murata", "GRM155R71H332KA01"),  # 3.3n 0402 X7R 50V LTC4368 CGATE
-    "C720": ("Murata", "GRM21BR71H105KA01"),  # 1u 0805 X7R 50V AUX input
+    "C720": ('TDK', 'C2012X7R1H105K125AB'),  # 1u 0805 X7R 50V AUX input
     "C724": ("Murata", "GRM155R71H472KA01"),  # 4.7n 0402 X7R 50V pack hot-swap slew
     "C799": ("Murata", "GRM155R71H332KA01"),  # 3.3n 0402 X7R 50V AON eFuse dVdt
     # -- 03_mu_carrier.kicad_sch --
-    "C767": ("Murata", "GRM188R71H103KA01"),  # 10n 0603 X7R 50V DITH/SYNC spreading
+    "C767": ('KEMET', 'C0603C103K5RACTU'),  # 10n 0603 X7R 50V DITH/SYNC spreading
     "C770": ("Murata", "GRM188R71H104KA93D"),  # 100n 0603 X7R 50V current-sense filter (majority-collapsed)
     "C771": ("Murata", "GRM188R71H472KA01"),  # 4.7n 0603 X7R 50V COMP
     "C772": ("Murata", "GRM1885C1H101JA01"),  # 100p 0603 C0G 50V +/-5% COMP HF
     "C773": ("Murata", "GRM188R71H104KA93D"),  # 100n 0603 X7R 50V UVLO noise filter (majority-collapsed)
-    "C774": ("Murata", "GRM188R71H103KA01"),  # 10n 0603 X7R 50V PG deglitch
-    "C775": ("Murata", "GRM188R71H103KA01"),  # 10n 0603 X7R 50V CC deglitch
+    "C774": ('KEMET', 'C0603C103K5RACTU'),  # 10n 0603 X7R 50V PG deglitch
+    "C775": ('KEMET', 'C0603C103K5RACTU'),  # 10n 0603 X7R 50V CC deglitch
     # -- 2026-08-13 additions (DFU port, PCIe endpoint buck, SIO pads, RTC) --
     "C778": ("Murata", "GRM188R71H104KA93D"),  # 100n 0603 X7R 50V PCIe endpoint buck VIN HF
     "C779": ("TDK", "C1608X7R1C104K080AA"),  # 100n 0603 X7R 16V PCIe endpoint buck BOOT (matches U7 BOOT C47)
@@ -105,31 +83,31 @@ HOLD_PARTS: dict[str, tuple[str, str]] = {
     "R787": ("Yageo", "RC0603FR-07100KL"),  # 100k TPS56637 EN high (host-active gate)
     "R788": ("Yageo", "RC0603FR-07100KL"),  # 100k TPS56637 EN low
     # -- 14_maker_mcu.kicad_sch --
-    "C902": ("Murata", "GRM155R61A475KE15"),  # 4.7u 0402 X5R 10V flash bulk
-    "C911": ("Murata", "GRM155R61A475KE15"),  # 4.7u VREG input
-    "C912": ("Murata", "GRM155R61A475KE15"),  # 4.7u 1V1 output
-    "C913": ("Murata", "GRM155R61A475KE15"),  # 4.7u VREG_AVDD
-    "C917": ("Murata", "GRM155R61A475KE15"),  # 4.7u ADC_AVDD filter
-    "C918": ("Murata", "GRM1555C1H150JA01"),  # 15p 0402 C0G 50V +/-5% XIN load
-    "C919": ("Murata", "GRM1555C1H150JA01"),  # 15p XOUT load
+    "C902": ('TDK', 'C1005X5R1A475K050BC'),  # 4.7u 0402 X5R 10V flash bulk
+    "C911": ('TDK', 'C1005X5R1A475K050BC'),  # 4.7u VREG input
+    "C912": ('TDK', 'C1005X5R1A475K050BC'),  # 4.7u 1V1 output
+    "C913": ('TDK', 'C1005X5R1A475K050BC'),  # 4.7u VREG_AVDD
+    "C917": ('TDK', 'C1005X5R1A475K050BC'),  # 4.7u ADC_AVDD filter
+    "C918": ('Murata', 'GRM1555C1H150JA01D'),  # 15p 0402 C0G 50V +/-5% XIN load
+    "C919": ('Murata', 'GRM1555C1H150JA01D'),  # 15p XOUT load
     # -- 09_radio_daughterboard_interface.kicad_sch --
-    "C2300": ("Murata", "GRM155R71H472KA01"),  # 4.7n 0402 X7R 50V radio eFuse controlled rise
+    "C2300": ('Murata', 'GRM155R71H472KA01D'),  # 4.7n 0402 X7R 50V radio eFuse controlled rise
     # -- 15_system_audio.kicad_sch (uncovered in the 2026-07-30 review; closed out
     #    consistent with the design's own AC-coupling precedent C432-C435) --
-    "C457": ("Murata", "GRM21BR71H474KA01"),  # 0.47u 0805 X7R 50V L input AC coupling
-    "C458": ("Murata", "GRM21BR71H474KA01"),  # 0.47u L INP AC-ground reference
-    "C459": ("Murata", "GRM21BR71H474KA01"),  # 0.47u R input AC coupling
-    "C460": ("Murata", "GRM21BR71H474KA01"),  # 0.47u R INP AC-ground reference
-    "C461": ("Murata", "GRM21BR71H105KA01"),  # 1u 0805 X7R 50V charge-pump flying CPP-CPN
-    "C462": ("Murata", "GRM21BR71H105KA01"),  # 1u CPVSS negative-rail decoupling
-    "C463": ("Murata", "GRM21BR71H105KA01"),  # 1u VDD pin 12 analog bypass
-    "C464": ("Murata", "GRM21BR71H105KA01"),  # 1u VDD pin 20 charge-pump supply bypass
+    "C457": ('Murata', 'GRM21BR71H474KA88L'),  # 0.47u 0805 X7R 50V L input AC coupling
+    "C458": ('Murata', 'GRM21BR71H474KA88L'),  # 0.47u L INP AC-ground reference
+    "C459": ('Murata', 'GRM21BR71H474KA88L'),  # 0.47u R input AC coupling
+    "C460": ('Murata', 'GRM21BR71H474KA88L'),  # 0.47u R INP AC-ground reference
+    "C461": ('TDK', 'C2012X7R1H105K125AB'),  # 1u 0805 X7R 50V charge-pump flying CPP-CPN
+    "C462": ('TDK', 'C2012X7R1H105K125AB'),  # 1u CPVSS negative-rail decoupling
+    "C463": ('TDK', 'C2012X7R1H105K125AB'),  # 1u VDD pin 12 analog bypass
+    "C464": ('TDK', 'C2012X7R1H105K125AB'),  # 1u VDD pin 20 charge-pump supply bypass
     "C465": ("Murata", "GRM188R71H104KA93D"),  # 100n 0603 X7R 50V VDD high-frequency bypass
 }
 
 
 # =============================================================================
-# 2.  MCP-VERIFIED ALTERNATES  (LCSC spec search, 2026-08-01)  -- dual sourcing
+# 2.  SOURCING ALTERNATES  (LCSC spec search, 2026-08-01)  -- dual sourcing
 # =============================================================================
 # Legacy MPN string searches return 0 results at LCSC; spec searches verified
 # these high-stock alternates for the canonical GRM/Yageo parts above.
@@ -238,7 +216,7 @@ def parse_spec(value: str, footprint: str):
 # =============================================================================
 # Ref-level part corrections that supersede the reviewed dicts.  R433 was
 # assigned RC0603FR-071K00L; RC0603FR-071K00L and RC0603FR-071KL are the same
-# Yageo part (4-digit vs 3-digit E96 code) — unify to the majority form.
+# Yageo part (4-digit vs 3-digit E96 code); unify to the majority form.
 REF_OVERRIDES: dict[str, tuple[str, str]] = {
     "R433": ("Yageo", "RC0603FR-071KL"),
 }

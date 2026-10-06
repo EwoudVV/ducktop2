@@ -56,8 +56,31 @@ def main():
     def pose(f):
         return (f.GetPosition().x, f.GetPosition().y, f.GetOrientationDegrees(), f.GetLayer())
 
+    unused_pins = {'J320': {'10', '11', '12', '27', '28', 'MP1', 'MP2'},
+                   'U320': {'30'}}
+    unused_nets = {(node.get('ref'), node.get('pin')): net.get('name')
+                   for net in xml.findall('./nets/net') for node in net.findall('node')
+                   if node.get('pin') in unused_pins.get(node.get('ref'), set())}
+    unused_metadata = []
+    for ref, pins in unused_pins.items():
+        for pin in sorted(pins):
+            pads = [pad for pad in fps[ref].Pads() if pad.GetNumber() == pin]
+            require(len(pads) == 1, ref+' pin '+pin+' must have one isolated pad')
+            pad = pads[0]
+            expected = unused_nets.get((ref, pin), '')
+            require(expected.startswith('unconnected-') and pad.GetNetname() == expected,
+                    ref+' pin '+pin+' unused net differs from the fresh schematic')
+            require(pad.IsNoConnectPad(), ref+' pin '+pin+' must be marked no-connect')
+            require(not any(t.GetNetname() == expected for t in board.GetTracks()),
+                    ref+' pin '+pin+' must not have copper routing')
+            require(not any(z.GetNetname() == expected for z in board.Zones()),
+                    ref+' pin '+pin+' must not have a copper zone')
+            unused_metadata.append({'reference':ref, 'pin':pin, 'net':expected})
+
     def nets(ref):
-        return {pad.GetNumber(): pad.GetNetname() for pad in fps[ref].Pads() if pad.GetNumber()}
+        return {pad.GetNumber(): ('' if pad.GetNumber() in unused_pins.get(ref, set())
+                                 else pad.GetNetname())
+                for pad in fps[ref].Pads() if pad.GetNumber()}
 
     def point(v):
         return (v.x/1e6, v.y/1e6)
@@ -119,7 +142,7 @@ def main():
     require(nets('U321') == EXPECTED_BUFFER_NETS, 'buffer requires A-side main3.3V, B-side RGB5V and EN3.3V')
     connector = nets('J320')
     for pin, net in {'1':'GND','2':'MCU_3V3','3':'I2C_SCL','4':'I2C_SDA','29':'KB_RGB_5V','30':'GND',
-                     '10':'','11':'','12':'','27':'','28':'','MP':''}.items():
+                     '10':'','11':'','12':'','27':'','28':'','MP1':'','MP2':''}.items():
         require(connector[pin] == net, 'J320 pin '+pin+' changed')
     for i in range(5): require(connector[str(5+i)] == f'KB_ROW{i}', 'matrix row contact changed')
     for i in range(14): require(connector[str(13+i)] == f'KB_COL{i}', 'matrix column contact changed')
@@ -149,6 +172,7 @@ def main():
               'footprints':len(fps),'rgb_leds':65,'copper_layers':board.GetCopperLayerCount(),'thickness_mm':.8,
               'tracks_and_vias':tracks,'copper_pours':pours,'switch_keepouts':keepouts,
               'native_unconnected':board.GetConnectivity().GetUnconnectedCount(False),
+              'unused_pad_metadata':unused_metadata,
               'schematic_parity':parity['passed'],'physical_pads_checked':parity['counts']['physical_pads_checked'],
               'original_placement_and_outline_preserved':bool(args.baseline),
               'led_pad_minimum_area_margin_mm':round(pad_margin,6),

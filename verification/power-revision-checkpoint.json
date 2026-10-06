@@ -1,0 +1,706 @@
+{
+  "status": "unfinished",
+  "date": "2026-10-05",
+  "kicad_version": "10.0.4",
+  "scope": "main-board power, component identities, copied-board refills, connector fields, gate return, battery-path sizing and firmware",
+  "schematic_board_parity": {
+    "center": {
+      "passed": true,
+      "board": "ducktop2-center.kicad_pcb",
+      "board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+      "refilled_copy_sha256": "5c661ba45f5146f39553f7aa9b520e4945a3751f3ab32afcc1ba96b78788f9af",
+      "footprints": 863,
+      "numbered_pads": 3359,
+      "copper_layers": 8,
+      "native_airwires": 1783,
+      "tracks_and_vias": 5205,
+      "native_net_inferences": 0,
+      "schematic_netlist_sha256": "ec65bc7c6be067876fc29061666fcf4e4faebae03ab628e8d928e41ccf612195",
+      "library_pad_drill_comparison": {
+        "footprints_checked": 863,
+        "differences": 0
+      },
+      "native_checks_source_board_sha256": "7b8b3fc0eaaa33c80654b086594b19dccec68ea9f1eeb76de15b46c909926a6e",
+      "native_results_basis": "Earlier native refill and DRC; all non-procurement CAD content is unchanged after the part-field update."
+    },
+    "left_io": {
+      "passed": true,
+      "board": "left_io/left_io.kicad_pcb",
+      "board_sha256": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
+      "refilled_copy_sha256": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
+      "footprints": 333,
+      "numbered_pads": 1474,
+      "copper_layers": 8,
+      "native_airwires": 948,
+      "tracks_and_vias": 219,
+      "native_net_inferences": 0,
+      "schematic_netlist_sha256": "1bbdb57de62d51a113bf4ee800b5867aeecb2acf2f0ad7d7833d2b3d6e3096dd",
+      "library_pad_drill_comparison": {
+        "footprints_checked": 333,
+        "differences": 0
+      }
+    },
+    "right_io": {
+      "passed": true,
+      "board": "right_io/right_io.kicad_pcb",
+      "board_sha256": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
+      "refilled_copy_sha256": "2dc8b232debb9de3507809bdd4743ff775f4d1a8b82a4756a764a73887ed018d",
+      "footprints": 173,
+      "numbered_pads": 746,
+      "copper_layers": 8,
+      "native_airwires": 331,
+      "tracks_and_vias": 341,
+      "native_net_inferences": 0,
+      "schematic_netlist_sha256": "2f7780a0ac03ffa3b2b0db3cbf0646364d0de06c6e0719e83ec91f6e22581b17",
+      "library_pad_drill_comparison": {
+        "footprints_checked": 173,
+        "differences": 0
+      },
+      "native_checks_source_board_sha256": "2dc8b232debb9de3507809bdd4743ff775f4d1a8b82a4756a764a73887ed018d",
+      "native_results_basis": "Earlier native refill and DRC; all non-procurement CAD content is unchanged after the part-field update."
+    }
+  },
+  "erc": {
+    "center": {
+      "errors": 0,
+      "warnings": 404,
+      "ignored_checks": [
+        {
+          "description": "Global label only appears once in the schematic",
+          "key": "single_global_label"
+        },
+        {
+          "description": "Four connection points are joined together",
+          "key": "four_way_junction"
+        },
+        {
+          "description": "SPICE model issue",
+          "key": "simulation_model_issue"
+        },
+        {
+          "description": "Assigned footprint doesn't match footprint filters",
+          "key": "footprint_filter"
+        }
+      ]
+    },
+    "left_io": {
+      "errors": 0,
+      "warnings": 106,
+      "ignored_checks": [
+        {
+          "description": "Global label only appears once in the schematic",
+          "key": "single_global_label"
+        },
+        {
+          "description": "Four connection points are joined together",
+          "key": "four_way_junction"
+        },
+        {
+          "description": "SPICE model issue",
+          "key": "simulation_model_issue"
+        },
+        {
+          "description": "Assigned footprint doesn't match footprint filters",
+          "key": "footprint_filter"
+        }
+      ]
+    },
+    "right_io": {
+      "errors": 0,
+      "warnings": 65,
+      "ignored_checks": [
+        {
+          "description": "Global label only appears once in the schematic",
+          "key": "single_global_label"
+        },
+        {
+          "description": "Four connection points are joined together",
+          "key": "four_way_junction"
+        },
+        {
+          "description": "SPICE model issue",
+          "key": "simulation_model_issue"
+        },
+        {
+          "description": "Assigned footprint doesn't match footprint filters",
+          "key": "footprint_filter"
+        }
+      ]
+    }
+  },
+  "drc": {
+    "center": {
+      "saved_findings": {
+        "via_dangling": 199,
+        "track_dangling": 83,
+        "silk_overlap": 27,
+        "silk_over_copper": 60
+      },
+      "refilled_findings": {
+        "via_dangling": 174,
+        "track_dangling": 83,
+        "silk_overlap": 27,
+        "silk_over_copper": 60
+      },
+      "saved_schematic_parity_findings": 0,
+      "refilled_schematic_parity_findings": 0,
+      "reported_unconnected_items": 499,
+      "report_is_capped": true,
+      "ignored_rules": [
+        "footprint_filters_mismatch",
+        "footprint_type_mismatch",
+        "lib_footprint_mismatch",
+        "missing_courtyard",
+        "track_not_centered_on_via",
+        "tuning_profile_track_geometries"
+      ],
+      "excluded_items": 0
+    },
+    "left_io": {
+      "saved_findings": {
+        "lib_footprint_mismatch": 16
+      },
+      "refilled_findings": {
+        "lib_footprint_mismatch": 16
+      },
+      "saved_schematic_parity_findings": 0,
+      "refilled_schematic_parity_findings": 0,
+      "reported_unconnected_items": 499,
+      "report_is_capped": true,
+      "ignored_rules": [
+        "footprint_filters_mismatch",
+        "footprint_type_mismatch",
+        "missing_courtyard",
+        "track_not_centered_on_via",
+        "tuning_profile_track_geometries"
+      ],
+      "excluded_items": 0
+    },
+    "right_io": {
+      "saved_findings": {
+        "track_dangling": 3,
+        "via_dangling": 8,
+        "silk_edge_clearance": 1,
+        "lib_footprint_mismatch": 26
+      },
+      "refilled_findings": {
+        "track_dangling": 3,
+        "via_dangling": 8,
+        "silk_edge_clearance": 1,
+        "lib_footprint_mismatch": 26
+      },
+      "saved_schematic_parity_findings": 0,
+      "refilled_schematic_parity_findings": 0,
+      "reported_unconnected_items": 331,
+      "report_is_capped": false,
+      "ignored_rules": [
+        "footprint_filters_mismatch",
+        "footprint_type_mismatch",
+        "missing_courtyard",
+        "track_not_centered_on_via",
+        "tuning_profile_track_geometries"
+      ],
+      "excluded_items": 0
+    }
+  },
+  "connector_fields": {
+    "center": {
+      "previous_board_sha256": "4b9ab011ac624576d31d75becca2d9c1f921c180dd9f5220136dd3f5642c227e",
+      "updated_board_sha256": "82b8cfd967cd70acc0053ab865e28228625da3196a296e2afdc5aa5055411350",
+      "non_property_contents_sha256": "04d8c7954a5609ac5d645ba7ae324541735bf77e0cf5b347213270a35433c52e",
+      "geometry_and_routing_unchanged": true,
+      "updated_fields": {
+        "J2071": [
+          "MatingHousing",
+          "Contacts",
+          "Wire",
+          "Harness",
+          "MatedHeight",
+          "CurrentRatingBasis",
+          "Datasheet"
+        ],
+        "J2430": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2432": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2450": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2452": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2460": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2462": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ]
+      }
+    },
+    "left_io": {
+      "previous_board_sha256": "3499effa27ff141a0cebc4ac7929f0bec0777861d0c7ebfdd9b790beb7825343",
+      "updated_board_sha256": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
+      "non_property_contents_sha256": "101e2ed55bd843f2cec47c8fd65fb9d253d4592fd0813eda4f4f0aa1badde003",
+      "geometry_and_routing_unchanged": true,
+      "updated_fields": {
+        "J2431": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2434": [
+          "Wire",
+          "CurrentRatingBasis",
+          "MatedEnvelope"
+        ],
+        "J2451": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2461": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ]
+      }
+    },
+    "right_io": {
+      "previous_board_sha256": "a9977a14a190f8afcc0c1334cdbf92d7da6b7722dc7ebd4f046e842fb733ff5b",
+      "updated_board_sha256": "2dc8b232debb9de3507809bdd4743ff775f4d1a8b82a4756a764a73887ed018d",
+      "non_property_contents_sha256": "14e418c6f1e81596668b6012603132f1a0b7d51c91a86cbcaa736defd2fc1a27",
+      "geometry_and_routing_unchanged": true,
+      "updated_fields": {
+        "J2433": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2435": [
+          "Wire",
+          "CurrentRatingBasis",
+          "MatedEnvelope"
+        ],
+        "J2453": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ],
+        "J2463": [
+          "Wire",
+          "Assembly",
+          "HarnessPinOrder",
+          "CurrentRatingBasis",
+          "ReturnAcceptance",
+          "MatedHeight",
+          "Datasheet"
+        ]
+      }
+    }
+  },
+  "layout_changed": false,
+  "routing_added": false,
+  "physical_tests": "NOT_RUN",
+  "power_wiring_checks": {
+    "passed": 478,
+    "failures": 0
+  },
+  "electrical_calculations": {
+    "passed": 167,
+    "failed": 0,
+    "battery_shunt_discharge_current_a": 8,
+    "battery_shunt_loss_upper_w": 0.7236,
+    "battery_shunt_derated_power_w": 1.4,
+    "resistance_temperature_max_C": 100
+  },
+  "firmware": {
+    "host_cmake_tests": {
+      "passed": 46,
+      "failed": 0
+    },
+    "shell_runner": "PASS",
+    "bq76922_arm": {
+      "register_layout": "PASS",
+      "dependency_hashes": "PASS",
+      "linked_vector_entries": 98,
+      "device_irqs": 81,
+      "elf_sha256": "8cec269e104fd0294ef3212713efb2cb37f0eab54552b4a4ab05c3be07f7cb3b",
+      "hardware_execution": "not performed"
+    },
+    "qualification_flags_changed": false,
+    "current_limit_regression_reproduced_before_fix": true,
+    "current_limit_profiles_tested": [
+      2,
+      3
+    ]
+  },
+  "calculation_tests": {
+    "passed": 29,
+    "failed": 0
+  },
+  "power_contract_tests": {
+    "passed": 17,
+    "failed": 0
+  },
+  "source_hashes": {
+    "02_ec_mcu.kicad_sch": "6c72a7ef885fe53ea9ce894e536bbf10bc506f2a40ddcddb770c3878ed98bbbe",
+    "12_keyboard_interface.kicad_sch": "3aadbe7d1ea4b35cde758675486ec27d14b01bcee9fa509740e7e258fc0d0c0a",
+    "14_maker_mcu.kicad_sch": "b4677b862f0e9cc00dee72867cfb350ca7d40216c7fec01d04f47d042b52ee51",
+    "01_power_battery.kicad_sch": "722a95c2b8ed392d9e43151020fb820b4a5a419f3a6dc4dca2a69db12df92adb",
+    "08_internal_services.kicad_sch": "c821de22f8f035f12a9e50c05c95378a2a5c039dd2dfd771ec440999501d5880",
+    "07_radio_oled_gps.kicad_sch": "9d6bd2dfa59f2ab59ad05bb78ec1de0a288794e2f3fef16b6885173ed12e17bc",
+    "03_mu_carrier.kicad_sch": "b3240b043cc46e2e72e55b355d92e2e1e666be58e553923e4d1407ecf6b025ee",
+    "fpc2_right.kicad_sch": "cb7e334ed1cbd051dde28a9297c853bc1e1383c2389a73b7c86736530cfe51ad",
+    "fpc3_bms.kicad_sch": "1d21e153c8952543e6b58776c0216fbc969be1b4160d50933b0807c24c0f8c5a",
+    "fpc1_left.kicad_sch": "2a37a7c5a2b614c26cee552b422df64dc87ecb9f9c8f8846b8612b86071360fd",
+    "ducktop2.kicad_sch": "428f1180e4b25a9636c20ab7f471431af7a3748e4235b9f7454269a991729d86",
+    "15_system_audio.kicad_sch": "4fe720da7ec56deddb7bb441690d700935aea6e181842b0cfe0727f1ed15bd82",
+    "09_radio_daughterboard_interface.kicad_sch": "9c8aba9a1f491c507fd4cc05ad0f74d75ab015ab06e480806c1a9f5b7c38b2f4",
+    "ducktop2-center.kicad_pcb": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+    "left_io/left_io.kicad_pcb": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
+    "right_io/right_io.kicad_pcb": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
+    "left_io/left_io.kicad_sch": "682bb96962a867c07255fcd3134ec4011522bc5a8390dfc08d11a68ab7fbf011",
+    "right_io/right_io.kicad_sch": "23c77544a61f4c93a23d65299a386594004980ea632c39e36219ea6160878367",
+    "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+    "bms/bms.kicad_sch": "bd1b39b98aad4f32cb30e90ea191e4a0205b433bdf6e78ba1d97e1aaf3e6a8fb",
+    "right_io/right_eth.kicad_sch": "fa9d48b51b8a1bd26e58a12ba76377e3812e7ccf39eebcea354ec9f1353986df"
+  },
+  "changed_support_files_sha256": {
+    "firmware/ec_target/power_profile.h": "2533d30136062fa84b69b544187bd855a65fd20905f3191069ce0dd0bb347b2e",
+    "firmware/tests/test_pack_current_policy.c": "69622eea4b9b5edeb0d0ecae1d064a753250538550a303a086dc50f3d22b8b59",
+    "firmware/CMakeLists.txt": "95523ab370a50e19dad93af7c7bae807119152f381b5c834f1f13c65e042ddaf",
+    "firmware/tools/run_host_tests.sh": "9e11d50abfabcc4104453c90acf0a50b353d5b31e088efca0f345cbc7c340475",
+    "gen/verify_100w_calculations.py": "81ca9ed3d3823ec750ba96cd554cd6c70575b2b680a67398717be6e7341491c6",
+    "gen/test_100w_calculations.py": "506fe037d5a8eac06911f0bb7e0f946cccc56d19178e23e95d6f5bf949160302",
+    "gen/generate_isl9241_charger.py": "a6ab978ee7a4bfd236de680ef3133e7051bce11dfbc5e59e15e34e4934332801",
+    "gen/verify_battery_path.py": "00a0e0b5fa0b1b74f4569f719da2904c76569204a5ed9b9d0ae8aec7ea8b611f",
+    "gen/test_battery_path.py": "89c1d5a91a0ed43be12b9f175b09b5bb5f26fd261fff2d5a3d1bb0b80ce7bc32",
+    "gen/testdata/battery_path.json": "737059c43a1533a2e5ae3202ddd7ec9c9cfec40985827628641282e41d8523a1",
+    "gen/testdata/power_100w/center.xml": "f05252b71566ca58b4b5e2e091ab31f80c9b7d849e85e4538ab4258a1557647f",
+    "gen/verify_erc_warnings.py": "93e1a3e2c0eca0c7d2d4203968978ff6c1dc4c0b5b7325472787e5d87b83ccb4",
+    "gen/test_erc_warnings.py": "9876f7a3ef2f4dac1ea0b7008c091db779a3487b632532393be9835a35e3815d",
+    "gen/check_schematic.py": "01b4339eb864c135716ac18a2dd341fd9409d08ab207a0773f43702c6eb0ad45",
+    "gen/check_release_candidate.py": "397f2b37d6e4c387dd55483aa9bc379eb0fcee0844c95a610dbd481e3bbceec1",
+    "verification/erc-symbols.json": "7c7c4efd9e9925c46f2ba017e3e8250654f2b22043d4f2f127bd211190206a35",
+    "gen/bom_catalog.py": "08df150fb2f00d339ae155a729e4ae9cec2196c703c38781820c9e9badcbea37",
+    "gen/part_identity.py": "56656bc1f4effc845c475cfea11bd199eb3519611e8a13d6123646b012aee906",
+    "gen/test_part_identity.py": "d9147380a48f87eba5a8cffd2883abe7f98a59f4c498b2155d21f2e6707f4d18",
+    "gen/export_power_placement.py": "c845a7fcf0f80120ebc609540a8246c2dde4aaea78b2b456eb373b9c041dc7df",
+    "gen/generate_component_inventory.py": "57060c0451bf4efad5ed0d96b03f23cf5f39d1f6d9739d3ee7d206e062b56ee7",
+    "gen/generate_internal_services_sheet.py": "1da2107876cb6160cfe0e5e40198c1b7b35a616fb87994191bcd19c6dbb37390"
+  },
+  "remaining": [
+    "main-board routing and listed DRC findings",
+    "final footprint review records, silkscreen and assembly checks",
+    "manufacturer stackup, finished copper and plated-hole limits",
+    "case fit, cooling, clamps and complete pack/lead dimensions",
+    "cells, charge/discharge limits, thermal behavior, source transfers and hardware qualification"
+  ],
+  "component_value_changes": [
+    {
+      "file": "01_power_battery.kicad_sch",
+      "before_sha256": "2e46358376a625bbc686e925e8105834f3661e304e0f1e70c0b66a863edba117",
+      "after_sha256": "ea2d280360d1607ea598476e981da600da7de113a164b5d496c7cb2abe7e077f",
+      "reference": "R2600",
+      "value": [
+        "100k BGATE to source",
+        "1M BGATE to source"
+      ],
+      "MPN": [
+        "RC0603FR-07100KL",
+        "RC0603FR-071ML"
+      ],
+      "placement_and_copper_unchanged": true
+    },
+    {
+      "file": "ducktop2-center.kicad_pcb",
+      "before_sha256": "82b8cfd967cd70acc0053ab865e28228625da3196a296e2afdc5aa5055411350",
+      "after_sha256": "7b8b3fc0eaaa33c80654b086594b19dccec68ea9f1eeb76de15b46c909926a6e",
+      "reference": "R2600",
+      "value": [
+        "100k BGATE to source",
+        "1M BGATE to source"
+      ],
+      "MPN": [
+        "RC0603FR-07100KL",
+        "RC0603FR-071ML"
+      ],
+      "placement_and_copper_unchanged": true
+    }
+  ],
+  "battery_path": {
+    "passed": true,
+    "numeric_checks": 9,
+    "regression_tests": 8,
+    "metrics": {
+      "discharge_A": 8.0,
+      "charge_A": 3.0,
+      "gate_load_at_2V_uA": 2.2052631578947364,
+      "gate_bleed_at_5V_uA": 5.2631578947368425,
+      "shunt_resistance_temperature_C": [
+        -40,
+        170
+      ],
+      "shunt_power_derating_ambient_C": 100,
+      "RS1_ohm": [
+        0.00379525,
+        0.00620475
+      ],
+      "RS2601_ohm": [
+        0.008641250000000001,
+        0.011358749999999999
+      ],
+      "Q25_hot_resistance_screen_ohm": 0.0064,
+      "Q25_loss_screen_W": 0.4096,
+      "Q25_required_theta_JA_at_85C_air_for_125C_junction_C_per_W": 97.65625,
+      "Q25_junction_screen_at_100C_case_C": 100.6144,
+      "center_component_drop_at_8A_mV": 191.708,
+      "center_component_loss_at_8A_W": 1.533664,
+      "protected_wire_pair_drop_at_8A_mV": 57.6,
+      "protected_wire_pair_loss_at_8A_W": 0.4608,
+      "minimum_protected_pack_voltage_for_10V_VSYS_before_contacts_and_copper_V": 10.249308,
+      "gauge_differential_range_current_at_shunt_high_A": 20.14585599742133,
+      "startup_allocated_capacitance_uF": 695.3585,
+      "startup_load_allocation_A": 0.8,
+      "startup_stack_V": 12.6,
+      "startup_initial_bank_uF": 512.2520000000001,
+      "startup_ramp_screen_ms": 14.342191687196113,
+      "startup_peak_screen_A": 1.8320003134920635,
+      "Q25_diode_startup_energy_screen_mJ": 26.27489966710655
+    },
+    "netlist_sha256": {
+      "center": "58f7fbe7180eee2368fb7b2e4095f73a9a65df2d24745acdb59ee7376a37479b",
+      "left": "664c8ceef0f56719a56f7c6f57cc8666c4d95aa974e6e78f2d14a871e79c257a",
+      "right": "cc945f146342c75fcd20efd5fdec307ad8b67e121d740a64a66606e371f0ee9a",
+      "bms": "78663afd4e202f149732ebc2db86eced96946c39ba6ff3a6ceb1f158c484d84c"
+    },
+    "not_qualified": [
+      "BGATE must reach at least 4.5V above Q25 source before a sustained heavy load; a 2V pump test point does not specify the entire ramp",
+      "Q25 hot resistance, installed copper thermal resistance and neighboring heat sources",
+      "complete protected loop resistance, including four wire terminations, solder and PCB necks",
+      "complete startup input load versus voltage and installed capacitance over temperature",
+      "TPS26600 short and startup energy at 3S; thermal latch has no guaranteed maximum fault duration",
+      "BMS handoff, fault peak, repeated pulses, fuse clearing and gauge input excursions",
+      "cell, raw-pack wiring and operating-profile qualification"
+    ]
+  },
+  "erc_warning_review": {
+    "date": "2026-10-05",
+    "passed": true,
+    "warnings_classified": 575,
+    "unexplained": 0,
+    "legacy_error_exemptions_removed": 15,
+    "regression_tests": 13,
+    "center_schematic_self_check": "PASS",
+    "boards": {
+      "center": {
+        "erc_errors": 0,
+        "erc_warnings": 404,
+        "classified": {
+          "verified_symbol_template": 404
+        },
+        "unexpected": 0,
+        "board_parity": true,
+        "numbered_pads": 3359,
+        "netlist_sha256": "ec65bc7c6be067876fc29061666fcf4e4faebae03ab628e8d928e41ccf612195"
+      },
+      "left": {
+        "erc_errors": 0,
+        "erc_warnings": 106,
+        "classified": {
+          "verified_symbol_template": 99,
+          "unused_pd_gpio_ground": 6,
+          "redriver_aeq_ground_strap": 1
+        },
+        "unexpected": 0,
+        "board_parity": true,
+        "numbered_pads": 1474,
+        "netlist_sha256": "1bbdb57de62d51a113bf4ee800b5867aeecb2acf2f0ad7d7833d2b3d6e3096dd"
+      },
+      "right": {
+        "erc_errors": 0,
+        "erc_warnings": 65,
+        "classified": {
+          "verified_symbol_template": 59,
+          "unused_pd_gpio_ground": 6
+        },
+        "unexpected": 0,
+        "board_parity": true,
+        "numbered_pads": 746,
+        "netlist_sha256": "2f7780a0ac03ffa3b2b0db3cbf0646364d0de06c6e0719e83ec91f6e22581b17"
+      }
+    },
+    "cad_changed": false,
+    "native_erc_rules_changed": false,
+    "template_contract_sha256": "7c7c4efd9e9925c46f2ba017e3e8250654f2b22043d4f2f127bd211190206a35"
+  },
+  "component_identity_review": {
+    "date": "2026-10-05",
+    "passed": true,
+    "missing_resistor_identities_fixed": [
+      "R450",
+      "R451"
+    ],
+    "incomplete_capacitor_codes_fixed": 41,
+    "discontinued_capacitor_replaced": "C2606",
+    "capacitor_instances_updated": 42,
+    "generator_identities_checked": 44,
+    "regression_tests": 84,
+    "electrical_checks": 167,
+    "power_wiring_checks": 478,
+    "battery_path_checks": 9,
+    "populated_sourcing_items": {
+      "center": 823,
+      "left": 326,
+      "right": 166
+    },
+    "missing_identities": 0,
+    "incomplete_murata_codes": 0,
+    "non_procurement_cad_unchanged": true,
+    "changed_cad": [
+      {
+        "file": "01_power_battery.kicad_sch",
+        "before_sha256": "ea2d280360d1607ea598476e981da600da7de113a164b5d496c7cb2abe7e077f",
+        "after_sha256": "722a95c2b8ed392d9e43151020fb820b4a5a419f3a6dc4dca2a69db12df92adb",
+        "non_procurement_fingerprint": "45dde99370826eab8e5b4e7d5f0ebb035658cdc028f8f33e6d9846f5f6982ece",
+        "unchanged": true
+      },
+      {
+        "file": "02_ec_mcu.kicad_sch",
+        "before_sha256": "1050febf8c8ae783b938f4c8d61384638f3077ecb48bd282202d1cd0975cebab",
+        "after_sha256": "6c72a7ef885fe53ea9ce894e536bbf10bc506f2a40ddcddb770c3878ed98bbbe",
+        "non_procurement_fingerprint": "fbbcf5616c8d33b2a7fdb741ed9e30f43ac447965f6919f50e8a22d16fedaf02",
+        "unchanged": true
+      },
+      {
+        "file": "03_mu_carrier.kicad_sch",
+        "before_sha256": "7a2d74d1a07aa09f20792a617e5372e2fc23e487af6633f939cfc5ac08ff9263",
+        "after_sha256": "b3240b043cc46e2e72e55b355d92e2e1e666be58e553923e4d1407ecf6b025ee",
+        "non_procurement_fingerprint": "0239aeb2593bfe82ae430ff9aabe96948fe7ef5705d10d7f7eab9b9e8185942f",
+        "unchanged": true
+      },
+      {
+        "file": "08_internal_services.kicad_sch",
+        "before_sha256": "05991024c2c8c473de95927a6f4aa30286f8db4084264657afa55cdf0ca5ab4a",
+        "after_sha256": "c821de22f8f035f12a9e50c05c95378a2a5c039dd2dfd771ec440999501d5880",
+        "non_procurement_fingerprint": "ea2fb8338ec4c0e89dcd6b4501a5f80923a7548eb6bda6539ce4c8b385ec390f",
+        "unchanged": true
+      },
+      {
+        "file": "09_radio_daughterboard_interface.kicad_sch",
+        "before_sha256": "6982a59306b2cf9d15fb8c66fe6e41c14402b8aca99ba15a359c0ef05c6416b9",
+        "after_sha256": "9c8aba9a1f491c507fd4cc05ad0f74d75ab015ab06e480806c1a9f5b7c38b2f4",
+        "non_procurement_fingerprint": "9a6b2647e206c1833b23f0ee9f1ef0689f8298cc232bbabbd8dfbea1e5d2660e",
+        "unchanged": true
+      },
+      {
+        "file": "14_maker_mcu.kicad_sch",
+        "before_sha256": "b54c085083892c8779c36e6cf4b8e8aceb1b866af70681d6a50bf997cece4056",
+        "after_sha256": "b4677b862f0e9cc00dee72867cfb350ca7d40216c7fec01d04f47d042b52ee51",
+        "non_procurement_fingerprint": "80ccc45fdf198f5287fbff58bb2c4942068fde2d71e61a38fc282a598ef2a677",
+        "unchanged": true
+      },
+      {
+        "file": "15_system_audio.kicad_sch",
+        "before_sha256": "612d452ca74a231a32362695cf60b7651c560126d312ec9ffa12f26adbc1fcf5",
+        "after_sha256": "4fe720da7ec56deddb7bb441690d700935aea6e181842b0cfe0727f1ed15bd82",
+        "non_procurement_fingerprint": "e7c6e98da7757f2a12f07cef056c53d40a489719443bb77934b63107e67fecc5",
+        "unchanged": true
+      },
+      {
+        "file": "ducktop2-center.kicad_pcb",
+        "before_sha256": "7b8b3fc0eaaa33c80654b086594b19dccec68ea9f1eeb76de15b46c909926a6e",
+        "after_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+        "non_procurement_fingerprint": "9deffc41dccfbb7600483d888b4f33c3e042265da1f6dc1aad5dc116d62075b8",
+        "unchanged": true
+      },
+      {
+        "file": "right_io/right_eth.kicad_sch",
+        "before_sha256": "54a0c742a3b7f53bba51bb7785c3195273bd4a0b1fdc13bc34f9cb4564ad6107",
+        "after_sha256": "fa9d48b51b8a1bd26e58a12ba76377e3812e7ccf39eebcea354ec9f1353986df",
+        "non_procurement_fingerprint": "ed9a2e71121ddce3117a9d5d72a552983ef3a26e3c6bea01e18d7c1eb5572a1b",
+        "unchanged": true
+      },
+      {
+        "file": "right_io/right_io.kicad_pcb",
+        "before_sha256": "2dc8b232debb9de3507809bdd4743ff775f4d1a8b82a4756a764a73887ed018d",
+        "after_sha256": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
+        "non_procurement_fingerprint": "bde4e242e5d4f417beafc1fcca9a2974be486a8660c2822be8c6cb3d9563a16f",
+        "unchanged": true
+      }
+    ],
+    "component_height_gaps_closed": 23,
+    "document": "docs/hardware/main-board-parts.md",
+    "exports": {
+      "mechanical/component-placement.json": "3081ef459bf528e4355de7eb827580f1863c371369dbea5e3ea06b25a1fccfc4",
+      "mechanical/component-placement.csv": "d42aa30e5876b59c4b55de154445f8d6f6cb8a2059a0d607a57d9e4d7227f7fa",
+      "mechanical/power-placement.json": "8bdf15c7ba18e8ac0fc3c921da2fbb30a6e600d46691d70e353ed2d3c816de19",
+      "mechanical/power-placement.csv": "0ac1ff59994a76ac267511e4be52c398b69c4859e737b43f8c287300a6b4fe49"
+    },
+    "limits": [
+      "No sourcing quote or stock guarantee.",
+      "RP2350 A4 stepping and fuse/holder purchasing lines remain assembly requirements.",
+      "Confirm the RP2350 reference lands and stencil with the assembler.",
+      "DC-bias capacitance and regulator response still require prototype validation.",
+      "Main-board routing and full assembly fit are unfinished."
+    ]
+  }
+}

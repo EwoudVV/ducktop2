@@ -1104,7 +1104,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R61A475KE15"
+		(property "MPN" "C1005X5R1A475K050BC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -1116,7 +1116,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3932,7 +3932,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3945,7 +3945,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R61A475KE15"
+		(property "MPN" "C1005X5R1A475K050BC"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4289,7 +4289,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -4301,7 +4301,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -5978,7 +5978,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1885C1H180JA01"
+		(property "MPN" "C0603C180J5GACTU"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -5990,7 +5990,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -6308,6 +6308,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2161c094-7b90-42f4-8602-54c7c2326cce")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07100KL"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "15d053b4-5070-5e82-bc4c-ca522b8a6991")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0b2aaeff-3422-59c0-b29c-dc8f1138de22")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10585,7 +10607,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1555C1H150JA01"
+		(property "MPN" "GRM1555C1H150JA01D"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -13011,7 +13033,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -13023,7 +13045,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -14156,7 +14178,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -14202,7 +14224,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -14214,11 +14236,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "21d69eb3-7bdb-4d6f-a202-92e0cb6080b6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "674aed76-a750-518a-8cc5-01493701996d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e7121eef-87ab-50a5-a5b1-0c96c80f3ac2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0e8cec78-3b47-574c-9726-371d6b982e8b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "275fe2e0-27ac-543a-b422-dae3fcc2f077")
 			(effects
 				(font
 					(size 1 1)
@@ -19437,7 +19507,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -19449,7 +19519,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -22076,7 +22146,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R71H102KA01"
+		(property "MPN" "GRM155R71H102KA01D"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -22677,7 +22747,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -22723,7 +22793,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -22735,11 +22805,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "934ce22b-c4d6-44dc-aa71-358f746d8cb6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "87d62f08-4217-5bd1-8112-bf9977f77266")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "36746e51-9844-552c-aee0-895cc8d790b7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cde85dbb-b4f5-549f-9584-a9b299e87ca5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "74c6803d-2a07-54e8-ae2d-f3aff58a34ae")
 			(effects
 				(font
 					(size 1 1)
@@ -26098,7 +26216,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -26110,7 +26228,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -26823,7 +26941,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1885C1H122JA01"
+		(property "MPN" "GRM1885C1H122JA01D"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -39119,7 +39237,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -39131,7 +39249,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -43925,7 +44043,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R71H102KA01"
+		(property "MPN" "GRM155R71H102KA01D"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -58282,7 +58400,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -58294,7 +58412,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -58464,7 +58582,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM31CR61C475KA01"
+		(property "MPN" "GRM319R61C475KA88D"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -70014,7 +70132,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM188R71H473KA01"
+		(property "MPN" "C0603C473K5RACTU"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -70026,7 +70144,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -71733,7 +71851,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-452/998-404"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -71779,7 +71897,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm"
+		(property "Wire" "Alpha 6715 RD005/BK005, 18 AWG; minimum bend radius 8.763 mm"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -71796,6 +71914,66 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1abdf86a-a30b-42d8-b1c7-0b5c7274e317")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatingHousing" "bare wire"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1849286f-99ed-5e96-bd3d-59871fe86533")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Contacts" "spring contact"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6d4b0b0b-329a-5f0e-830a-b275ac86bb7d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Harness" "center: 1 FG_VSS, 2 PACK_POS_FUSED; BMS: 1 PACK_POS_FUSED, 2 FG_VSS"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "aca7511e-b374-5d7a-8a9a-60617fc5144b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; reserve release-tool access"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3257d8c5-4489-596b-be83-799b67dbd856")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "WAGO 2060, 9 A IEC/UL rating with 18 AWG; assembled temperature still needs testing"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "143f25ad-dddf-500e-8d14-a771def07536")
 			(effects
 				(font
 					(size 1 1)
@@ -74308,7 +74486,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R61A475KE15"
+		(property "MPN" "C1005X5R1A475K050BC"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -74320,7 +74498,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -79379,7 +79557,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -79425,7 +79603,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -79437,11 +79615,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f3e093a0-f065-4a96-ad4f-8fe7c503b8a1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "43b942fa-7579-572b-93d0-9c31781593de")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ec455a76-204c-5bd9-b50e-057faa453f78")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c0d2a3ad-fef2-53fe-83cf-bf11e2bb8dc2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3703013b-ba29-5521-ba9c-56beb120d00f")
 			(effects
 				(font
 					(size 1 1)
@@ -80644,7 +80870,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1555C1H150JA01"
+		(property "MPN" "GRM1555C1H150JA01D"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -81452,7 +81678,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -81465,7 +81691,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R61A475KE15"
+		(property "MPN" "C1005X5R1A475K050BC"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -82580,7 +82806,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM188R71H473KA01"
+		(property "MPN" "C0603C473K5RACTU"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -82592,7 +82818,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -86272,7 +86498,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM188R71H103KA01"
+		(property "MPN" "C0603C103K5RACTU"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -86284,7 +86510,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -87890,7 +88116,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H474KA01"
+		(property "MPN" "GRM21BR71H474KA88L"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -88605,7 +88831,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R61A475KE15"
+		(property "MPN" "C1005X5R1A475K050BC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -88617,7 +88843,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -91853,6 +92079,28 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "37a04108-4d31-4a86-bd2d-5f6837403e27")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0710KL"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b72dd7fe-ef68-560a-8a95-cb39484ccd2c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Yageo"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b44140be-a273-5576-9186-7e16a4d0c567")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -96821,7 +97069,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -96867,7 +97115,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -96879,11 +97127,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0f752a7e-f4be-409f-8a24-caf65149a4f2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5241e615-6673-59be-8db5-59ed7cd0af0c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1c1e10a8-3827-575f-9ded-dc384257c636")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b00fd5aa-6ee1-52d1-a080-155556243c69")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "503c2eac-1322-5153-8fa0-dae3e7b86866")
 			(effects
 				(font
 					(size 1 1)
@@ -101365,7 +101661,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -101377,7 +101673,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -108691,7 +108987,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -108703,7 +108999,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -109609,7 +109905,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1885C1H180JA01"
+		(property "MPN" "C0603C180J5GACTU"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -109621,7 +109917,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -110853,7 +111149,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H474KA01"
+		(property "MPN" "GRM21BR71H474KA88L"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -113074,7 +113370,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H474KA01"
+		(property "MPN" "GRM21BR71H474KA88L"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -116602,7 +116898,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1885C1H180JA01"
+		(property "MPN" "C0603C180J5GACTU"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -116614,7 +116910,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -119214,7 +119510,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H474KA01"
+		(property "MPN" "GRM21BR71H474KA88L"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -121284,7 +121580,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R71H102KA01"
+		(property "MPN" "GRM155R71H102KA01D"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -124164,7 +124460,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -124210,7 +124506,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -124222,11 +124518,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "338088d1-3b68-4540-8179-49b2aba52581")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "53d6e85d-0aa0-5422-bb9e-ebccfdf8d410")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ff97b434-33e2-501c-8d12-9c06f089d01b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e7bc0319-f4d7-5e73-b5f2-cc45cd611459")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "73237ed2-de12-5104-ba53-1cb2fda4694a")
 			(effects
 				(font
 					(size 1 1)
@@ -130111,7 +130455,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R71H102KA01"
+		(property "MPN" "GRM155R71H102KA01D"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -132791,7 +133135,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71H105KA01"
+		(property "MPN" "C2012X7R1H105K125AB"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -132803,7 +133147,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "TDK"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -133815,7 +134159,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -133861,7 +134205,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -133873,11 +134217,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2d56bca7-73c5-4231-a638-036f8fb4df1f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ddcb99dc-a6c6-511e-8428-6827c8f9c0ee")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "34706231-5b8c-5208-b859-420f9c88e101")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f62a6a20-97d5-5acd-9b06-2229a889fcfd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f5ac4bf9-bf12-5019-a123-a5c72bc32822")
 			(effects
 				(font
 					(size 1 1)
@@ -142893,7 +143285,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1885C1H180JA01"
+		(property "MPN" "C0603C180J5GACTU"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -142905,7 +143297,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -150711,7 +151103,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM31CR61C475KA01"
+		(property "MPN" "GRM319R61C475KA88D"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -152486,7 +152878,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM155R71H472KA01"
+		(property "MPN" "GRM155R71H472KA01D"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -155134,7 +155526,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "100k BGATE to source"
+		(property "Value" "1M BGATE to source"
 			(at 0 -1.43 180)
 			(layer "B.Fab")
 			(uuid "5e5ad045-0eaf-4839-8af6-dc3891d56eab")
@@ -155185,7 +155577,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "RC0603FR-07100KL"
+		(property "MPN" "RC0603FR-071ML"
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
@@ -176547,7 +176939,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM188R71H103KA01"
+		(property "MPN" "C0603C103K5RACTU"
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
@@ -176560,7 +176952,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
@@ -178699,7 +179091,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM188R71H473KA61D"
+		(property "MPN" "C0603C473K5RACTU"
 			(at 0 0 135)
 			(layer "B.Fab")
 			(hide yes)
@@ -178712,7 +179104,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 135)
 			(layer "B.Fab")
 			(hide yes)
@@ -181644,7 +182036,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM188R71H103KA01"
+		(property "MPN" "C0603C103K5RACTU"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -181657,7 +182049,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -193039,7 +193431,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM188R71H103KA01"
+		(property "MPN" "C0603C103K5RACTU"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -193052,7 +193444,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "KEMET"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -197847,7 +198239,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM31CR61C475KA01"
+		(property "MPN" "GRM319R61C475KA88D"
 			(at 0 0 270)
 			(layer "B.Fab")
 			(hide yes)

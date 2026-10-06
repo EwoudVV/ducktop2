@@ -86,10 +86,12 @@ def build(sheet_symbol_uuid):
             extra_props={"Manufacturer": "Texas Instruments", "MPN": "SN74LVC1G07DCKR"})
     s.place("R450", "R", "100k trackpad enable pull-down", 740, 265.43,
             footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("TRACKPAD_EN", "local"), "2": ("GND", "local")})
+            pin_nets={"1": ("TRACKPAD_EN", "local"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-07100KL"})
     s.place("R451", "R", "10k hub trackpad fault pull-up", 740, 307.34,
             footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("SYS_3V3", "hier"), "2": ("HUB_TRACKPAD_OC_N", "hier")})
+            pin_nets={"1": ("SYS_3V3", "hier"), "2": ("HUB_TRACKPAD_OC_N", "hier")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
     for ref, y in (("C451", 280.67), ("C2091", 322.58)):
         s.place(ref, "C", "100n trackpad logic bypass", 740, y,
                 footprint=FOOTPRINTS["C_100n"],

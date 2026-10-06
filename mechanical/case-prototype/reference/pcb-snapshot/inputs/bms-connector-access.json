@@ -1,0 +1,248 @@
+{
+  "units": "mm",
+  "coordinates": "installed board XY, viewed from above",
+  "board": "bms/bms.kicad_pcb",
+  "board_sha256": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+  "connectors": [
+    {
+      "reference": "J2",
+      "manufacturer_part_number": "2060-452/998-404",
+      "side": "top",
+      "installed_anchor_xy_mm": [
+        218.35,
+        171.448
+      ],
+      "rotation_deg": 270.0,
+      "exit_direction_xy": [
+        1.0,
+        0.0
+      ],
+      "installed_mated_polygon_mm": [
+        [
+          224.9,
+          167.498
+        ],
+        [
+          224.9,
+          175.398
+        ],
+        [
+          211.8,
+          175.398
+        ],
+        [
+          211.8,
+          167.498
+        ]
+      ],
+      "installed_withdrawal_polygon_mm": null,
+      "reserved_height_above_pcb_mm": 4.5,
+      "service": "top access to spring buttons; separate wire clamps"
+    },
+    {
+      "reference": "J2072",
+      "manufacturer_part_number": "2060-452/998-404",
+      "side": "top",
+      "installed_anchor_xy_mm": [
+        175.15,
+        156.948
+      ],
+      "rotation_deg": 0.0,
+      "exit_direction_xy": [
+        0.0,
+        -1.0
+      ],
+      "installed_mated_polygon_mm": [
+        [
+          171.2,
+          150.398
+        ],
+        [
+          179.1,
+          150.398
+        ],
+        [
+          179.1,
+          163.498
+        ],
+        [
+          171.2,
+          163.498
+        ]
+      ],
+      "installed_withdrawal_polygon_mm": null,
+      "reserved_height_above_pcb_mm": 4.5,
+      "service": "top access to spring buttons; separate wire clamps"
+    },
+    {
+      "reference": "J2074",
+      "manufacturer_part_number": "SM05B-SRSS-TB(LF)(SN)",
+      "side": "top",
+      "installed_anchor_xy_mm": [
+        156.35,
+        153.948
+      ],
+      "rotation_deg": 180.0,
+      "exit_direction_xy": [
+        0.0,
+        -1.0
+      ],
+      "installed_mated_polygon_mm": [
+        [
+          160.75,
+          157.228
+        ],
+        [
+          151.95,
+          157.228
+        ],
+        [
+          151.95,
+          149.118
+        ],
+        [
+          160.75,
+          149.118
+        ]
+      ],
+      "installed_withdrawal_polygon_mm": [
+        [
+          159.6,
+          154.623
+        ],
+        [
+          153.1,
+          154.623
+        ],
+        [
+          153.1,
+          144.123
+        ],
+        [
+          159.6,
+          144.123
+        ]
+      ],
+      "reserved_height_above_pcb_mm": 3.2,
+      "service": "5 mm axial housing withdrawal; finger, latch and wire space additional"
+    },
+    {
+      "reference": "J2200",
+      "manufacturer_part_number": "SM06B-SRSS-TB(LF)(SN)",
+      "side": "top",
+      "installed_anchor_xy_mm": [
+        184.65,
+        153.498
+      ],
+      "rotation_deg": 180.0,
+      "exit_direction_xy": [
+        0.0,
+        -1.0
+      ],
+      "installed_mated_polygon_mm": [
+        [
+          189.55,
+          156.778
+        ],
+        [
+          179.75,
+          156.778
+        ],
+        [
+          179.75,
+          148.668
+        ],
+        [
+          189.55,
+          148.668
+        ]
+      ],
+      "installed_withdrawal_polygon_mm": [
+        [
+          188.4,
+          154.173
+        ],
+        [
+          180.9,
+          154.173
+        ],
+        [
+          180.9,
+          143.673
+        ],
+        [
+          188.4,
+          143.673
+        ]
+      ],
+      "reserved_height_above_pcb_mm": 3.2,
+      "service": "5 mm axial housing withdrawal; finger, latch and wire space additional"
+    },
+    {
+      "reference": "J2201",
+      "manufacturer_part_number": "SM02B-GHS-TB(LF)(SN)",
+      "side": "top",
+      "installed_anchor_xy_mm": [
+        221.5,
+        162.648
+      ],
+      "rotation_deg": 90.0,
+      "exit_direction_xy": [
+        1.0,
+        0.0
+      ],
+      "installed_mated_polygon_mm": [
+        [
+          218.3,
+          166.128
+        ],
+        [
+          218.3,
+          159.168
+        ],
+        [
+          226.5,
+          159.168
+        ],
+        [
+          226.5,
+          166.128
+        ]
+      ],
+      "installed_withdrawal_polygon_mm": [
+        [
+          218.3,
+          164.773
+        ],
+        [
+          218.3,
+          160.523
+        ],
+        [
+          231.5,
+          160.523
+        ],
+        [
+          231.5,
+          164.773
+        ]
+      ],
+      "reserved_height_above_pcb_mm": 4.6,
+      "service": "5 mm axial housing withdrawal; finger, latch and wire space additional"
+    }
+  ],
+  "dimensions": "manufacturer reference dimensions with planning allowances; not measured plugs",
+  "case_fit_verified": false,
+  "clamps_fitted": false,
+  "notes": [
+    "remove the bridge above the BMS before releasing wires or plugs",
+    "support the board independently of the cable clamps",
+    "withdrawal can pass above the adjacent main board; include its parts and fasteners in the Z check",
+    "the 8 mm main-board and 12 mm BMS top surfaces are study positions, not fixed case requirements"
+  ],
+  "sources": [
+    "https://www.jst-mfg.com/product/pdf/eng/eSH.pdf",
+    "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+    "https://www.wago.com/2060-452/998-404"
+  ]
+}

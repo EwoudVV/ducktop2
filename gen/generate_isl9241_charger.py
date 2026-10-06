@@ -65,7 +65,9 @@ def add_charger(s):
     # startup; charging is controlled in the opposite direction by BGATE.
     nfet('Q25','CSD17575Q3 battery power-path FET',1090,210,
          'CHG_BGATE','PACK_POS_FUSED','CHG_SRN','CSD17575Q3',FOOTPRINTS['Q_CSD17575Q3'])
-    r('R2600','100k BGATE to source',1090,240,'CHG_BGATE','PACK_POS_FUSED')
+    # The BGATE pump guarantees only 15uA at +2V. A 100k return alone
+    # draws 20uA there; 1M leaves drive margin in the same footprint.
+    r('R2600','1M BGATE to source',1090,240,'CHG_BGATE','PACK_POS_FUSED','RC0603FR-071ML')
 
     # VDD and VDDP come from the protected adapter or the system rail.
     for ref,x,source in (('D2600',850,'CHG_INPUT'),('D2601',930,'VSYS')):
@@ -94,7 +96,7 @@ def add_charger(s):
     c('C2605','22n 50V C0G forward compensation',930,385,'CHG_COMPF_RC','GND',
       'C0805C223J5GACTU','C_0805','KEMET')
     r('R2609','1k reverse compensation',1010,385,'CHG_COMPR','CHG_COMPR_RC','RC0402FR-071KL',fp='Resistor_SMD:R_0402_1005Metric')
-    c('C2606','47n 50V X7R reverse compensation',1090,385,'CHG_COMPR_RC','GND','GRM188R71H473KA61D')
+    c('C2606','47n 50V X7R reverse compensation',1090,385,'CHG_COMPR_RC','GND','C0603C473K5RACTU',maker='KEMET')
     r('R2610','4.53k current monitor filter',850,405,'CHG_IMON','CHG_IMON_FILTER','RC0402FR-074K53L',fp='Resistor_SMD:R_0402_1005Metric')
     c('C2607','220n 50V X7R current monitor',930,405,'CHG_IMON_FILTER','GND','GRM188R71H224KAC4D')
     r('R2611','20k PSYS monitor load',1010,405,'CHG_PSYS','GND','RC0402FR-0720KL',fp='Resistor_SMD:R_0402_1005Metric')

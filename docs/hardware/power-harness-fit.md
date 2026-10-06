@@ -4,6 +4,12 @@
 wire paths are a case-layout input, not a finished cable assembly or an
 approved case thickness.
 
+the complete case study found interference between both BMS power wires,
+the BMS board and the J2074 plug. the current paths cannot be installed.
+the earlier bend, length and selected component checks did not include
+the BMS substrate or its mated control plug. keep the board fabrication
+on hold until the cable approach and final connector placement are settled.
+
 - [wire paths and connector coordinates](../../mechanical/power-harness.json)
 - [top view](../../mechanical/power-harness.png)
 - [pin maps and parts](cables-and-connectors.md)
@@ -43,15 +49,45 @@ routing and the complete cable assembly still need finishing.
 ## clearance above components
 
 the component export includes manufacturer height limits for the audio
-codec, speaker amplifier, crystals, fuse, ferrites and small capacitors
-under the proposed wire paths. the latest height check covers 13 parts
-at 15 crossings. all clear the wires with a separate 0.3 mm assembly
-allowance; the smallest remaining gap in this group is 3.90 mm at Y900.
+codec, speaker amplifier, crystals, fuse, ferrites and small capacitors.
+the complete case check includes the guides around the wires. it finds
+only 7.361 mm available at C797, whose maximum body height is 8.0 mm.
+that courtyard-based screen is short by 0.639 mm. check the actual body
+and revise the route or guide before treating this crossing as clear.
 
-i still need exact dimension drawings for C430/C431, C434 and C917's
-stored Murata part numbers. the wire paths allow a body height of 3.45 mm
-at C917 and at least 9.75 mm at the other three parts after the assembly
-allowance. keep those limits when choosing or checking the fitted parts.
+the [completed capacitor selections](main-board-parts.md) resolve seven
+previously unknown crossings in the saved case report, across six parts.
+C430/C431 are at most 0.95 mm high, C434 is 1.45 mm, and C911/C913/C917
+are 0.65 mm. the smallest remaining clearance in this group is 2.617 mm
+at C917, using the case's guide envelope and existing allowances. this
+reconciles the new part data with the saved routes; it does not clear the
+BMS, braid or service conflicts.
+
+## conflicts in the current case study
+
+the case snapshot and current six boards have the same outlines, mounting
+holes, footprint positions and model transforms. the newer center and
+right part-number fields and keyboard routing do not remove these fit
+problems. the [case report](../../mechanical/case-prototype/harness-case-checks.json)
+retains the actual intersections.
+
+- the protected positive wire crosses the BMS edge near X145, Y174.567,
+  H9.615. the board occupies H9.1..10.7. the current guide and body
+  allowance need the wire centerline at least H12.426 at that edge.
+- both BMS loops intersect J2074's mated plug. moving J2074 by +7 mm X
+  is only a candidate; it does not solve the low board-edge approach.
+- three braid locations intersect four guide carriers. seven solder-joint
+  clearance conflicts remain. retain all four electrical seam bonds when
+  revising the guides and fasteners.
+- twelve service-envelope conflicts remain. the USB carriers need removable
+  upper sections so plugs and terminal buttons can be reached without
+  dismantling the complete main-board row.
+
+first revise the BMS wire approach and check the board, plug, mounting
+hardware, C797, other wires and guides together. then settle any connector
+movement and repeat the electrical, routing and fabrication checks if a
+PCB changes. the reported 33.5 mm deck height and 44.8 mm closed printed
+case are study dimensions, not the final thickness target.
 
 ## wire space
 
@@ -119,10 +155,10 @@ routes still need to be included in the complete assembly clearance check.
 
 ## still needed from the complete assembly
 
-the old planner records three user-measured 100 x 60 mm cells. it explicitly
-leaves thickness and tabs unmeasured. the case's 10 mm thickness is an
-assumption. measure the complete finished packs, including their wiring
-and insulation.
+the old planner records three user-measured 100 x 60 mm cells. the confirmed
+purchase listing specifies 11 mm thickness, so the old 10 mm assumption is
+too small. measure the complete finished packs, including their replacement
+wiring and insulation; the listing gives no maximum-thickness tolerance.
 
 the case work still needs the actual clamps, fasteners, insertion/removal
 paths, signal cables, measured packs, cooling and keyboard/trackpad supports

@@ -14,7 +14,7 @@
     "left-hinge-tower": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 3.2e-05
+      "volume_delta_mm3": 0.00019
     },
     "right-hinge-base-steel-plate": {
       "valid": true,
@@ -24,7 +24,7 @@
     "right-hinge-tower": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.000324
+      "volume_delta_mm3": 0.000322
     },
     "base-splice-1": {
       "valid": true,
@@ -44,27 +44,27 @@
     "base-splice-4": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.000274
+      "volume_delta_mm3": 8e-06
     },
     "base-11": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.000323
+      "volume_delta_mm3": 0.000101
     },
     "base-12": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.00033
+      "volume_delta_mm3": 0.000306
     },
     "base-21": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.000323
+      "volume_delta_mm3": 8.4e-05
     },
     "base-22": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 9.1e-05
+      "volume_delta_mm3": 0.00024
     },
     "keyboard-clip-1": {
       "valid": true,
@@ -164,7 +164,7 @@
     "deck-12": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.00039
+      "volume_delta_mm3": 0.00024
     },
     "deck-21": {
       "valid": true,
@@ -174,7 +174,7 @@
     "deck-22": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.00044
+      "volume_delta_mm3": 0.00019
     },
     "left-lid-steel-plate": {
       "valid": true,
@@ -284,46 +284,232 @@
     "blower-fit-cradle": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.00048
+      "volume_delta_mm3": 0.000175
     },
-    "cable-clamp-1": {
+    "harness-left-J2430-cap": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 3.7e-05
+      "volume_delta_mm3": 0.000269
     },
-    "cable-clamp-1-pedestal": {
+    "harness-left-J2430-liner-1": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.000239
+      "volume_delta_mm3": 0.00026
     },
-    "cable-clamp-2": {
+    "harness-left-J2430-liner-2": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 3.7e-05
+      "volume_delta_mm3": 0.00026
     },
-    "cable-clamp-2-pedestal": {
+    "harness-left-J2430-liner-3": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 0.000239
+      "volume_delta_mm3": 0.00026
     },
-    "cable-clamp-3": {
+    "harness-left-J2450-cap": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 3.7e-05
+      "volume_delta_mm3": 0.000266
     },
-    "cable-clamp-4": {
+    "harness-left-J2450-liner-1": {
       "valid": true,
       "solids": 1,
-      "volume_delta_mm3": 3.7e-05
+      "volume_delta_mm3": 0.000182
+    },
+    "harness-left-J2450-liner-2": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000183
+    },
+    "harness-left-J2450-liner-3": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000182
+    },
+    "harness-left-J2460-cap": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 9.3e-05
+    },
+    "harness-left-J2460-liner-1": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.00032
+    },
+    "harness-right-main-power-cap": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 4.7e-05
+    },
+    "harness-right-main-power-liner-1": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000429
+    },
+    "harness-right-main-power-liner-2": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.00043
+    },
+    "harness-right-main-power-liner-3": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.00043
+    },
+    "harness-right-main-power-liner-4": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000422
+    },
+    "harness-right-main-power-liner-5": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000423
+    },
+    "harness-right-main-power-liner-6": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000422
+    },
+    "harness-right-J2462-cap": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000237
+    },
+    "harness-right-J2462-liner-1": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000218
+    },
+    "harness-USB-left-cap": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.0002
+    },
+    "harness-USB-left-liner-1": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000448
+    },
+    "harness-USB-left-liner-2": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000266
+    },
+    "harness-USB-right-cap": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000172
+    },
+    "harness-USB-right-liner-1": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000151
+    },
+    "harness-USB-right-liner-2": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000343
+    },
+    "harness-BMS-cap": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000484
+    },
+    "harness-BMS-liner-1": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000248
+    },
+    "harness-BMS-liner-2": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000479
+    },
+    "harness-left-J2430-carrier": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000184
+    },
+    "harness-left-J2450-carrier": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 5.2e-05
+    },
+    "harness-left-J2460-carrier": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 3e-06
+    },
+    "harness-right-main-power-carrier": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 9.7e-05
+    },
+    "harness-right-J2462-carrier": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000281
+    },
+    "harness-BMS-carrier": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000554
+    },
+    "harness-USB-left-carrier": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000727
+    },
+    "harness-USB-right-carrier": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.013174
+    },
+    "harness-raw-J2-pedestal": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000238
+    },
+    "harness-raw-J2-cap": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000237
+    },
+    "harness-raw-J2-liner-1": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000366
+    },
+    "harness-raw-J2-liner-2": {
+      "valid": true,
+      "solids": 1,
+      "volume_delta_mm3": 0.000366
     }
   },
   "print_files": {
+    "harness-USB-left-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        13.616,
+        2.292
+      ]
+    },
     "lid-shell-22.stl": {
       "watertight": true,
       "size_mm": [
         185.0,
         136.0,
         7.0
+      ]
+    },
+    "harness-right-main-power-carrier.stl": {
+      "watertight": true,
+      "size_mm": [
+        18.848,
+        29.6,
+        9.082
       ]
     },
     "rear-spine-fit-only-2.stl": {
@@ -348,6 +534,14 @@
         31.3,
         43.3,
         7.0
+      ]
+    },
+    "harness-USB-right-liner-1.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        3.132,
+        3.224
       ]
     },
     "right-lid-seat-1.stl": {
@@ -390,6 +584,22 @@
         6.6
       ]
     },
+    "harness-right-J2462-carrier.stl": {
+      "watertight": true,
+      "size_mm": [
+        35.041,
+        30.167,
+        10.609
+      ]
+    },
+    "harness-USB-right-liner-2.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.789,
+        3.252
+      ]
+    },
     "right-lid-seat-2.stl": {
       "watertight": true,
       "size_mm": [
@@ -404,6 +614,14 @@
         6.0,
         6.0,
         1.6
+      ]
+    },
+    "harness-right-J2462-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        8.6,
+        1.876
       ]
     },
     "left-lid-seat-2.stl": {
@@ -422,20 +640,20 @@
         17.6
       ]
     },
-    "cable-clamp-1-pedestal.stl": {
-      "watertight": true,
-      "size_mm": [
-        14.0,
-        8.0,
-        1.0
-      ]
-    },
     "base-splice-1.stl": {
       "watertight": true,
       "size_mm": [
         20.0,
         20.0,
         3.0
+      ]
+    },
+    "harness-left-J2450-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        16.6,
+        1.876
       ]
     },
     "left-lid-steel-plate.stl": {
@@ -467,7 +685,7 @@
       "size_mm": [
         33.0,
         36.0,
-        22.6
+        21.1
       ]
     },
     "left-lid-seat-1.stl": {
@@ -494,6 +712,14 @@
         3.0
       ]
     },
+    "harness-right-main-power-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        29.6,
+        2.989
+      ]
+    },
     "bezel-21.stl": {
       "watertight": true,
       "size_mm": [
@@ -510,12 +736,44 @@
         7.0
       ]
     },
+    "harness-BMS-carrier.stl": {
+      "watertight": true,
+      "size_mm": [
+        57.525,
+        64.778,
+        14.173
+      ]
+    },
+    "harness-left-J2450-liner-3.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.504
+      ]
+    },
+    "harness-left-J2450-liner-2.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.504
+      ]
+    },
     "deck-12.stl": {
       "watertight": true,
       "size_mm": [
         185.0,
         141.0,
         2.4
+      ]
+    },
+    "harness-left-J2430-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        16.6,
+        1.876
       ]
     },
     "left-hinge-base-steel-plate.stl": {
@@ -534,6 +792,14 @@
         2.0
       ]
     },
+    "harness-USB-right-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        13.62,
+        2.059
+      ]
+    },
     "keyboard-carrier-21.stl": {
       "watertight": true,
       "size_mm": [
@@ -542,12 +808,12 @@
         6.1
       ]
     },
-    "cable-clamp-4.stl": {
+    "harness-left-J2450-liner-1.stl": {
       "watertight": true,
       "size_mm": [
-        12.0,
-        6.0,
-        3.0
+        5.2,
+        2.433,
+        2.504
       ]
     },
     "deck-11.stl": {
@@ -556,6 +822,22 @@
         185.0,
         105.0,
         2.4
+      ]
+    },
+    "harness-left-J2460-carrier.stl": {
+      "watertight": true,
+      "size_mm": [
+        12.586,
+        8.6,
+        7.699
+      ]
+    },
+    "harness-left-J2430-liner-2.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.573
       ]
     },
     "lid-print-splice-1.stl": {
@@ -571,15 +853,39 @@
       "size_mm": [
         185.0,
         141.0,
-        32.6
+        31.1
       ]
     },
-    "cable-clamp-1.stl": {
+    "harness-left-J2430-liner-3.stl": {
       "watertight": true,
       "size_mm": [
-        12.0,
-        6.0,
-        3.0
+        5.2,
+        2.433,
+        2.573
+      ]
+    },
+    "harness-USB-left-liner-1.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        4.87,
+        3.778
+      ]
+    },
+    "harness-raw-J2-liner-1.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.431
+      ]
+    },
+    "harness-raw-J2-pedestal.stl": {
+      "watertight": true,
+      "size_mm": [
+        7.0,
+        34.852,
+        10.6
       ]
     },
     "cell-1-tray.stl": {
@@ -590,12 +896,12 @@
         6.0
       ]
     },
-    "cable-clamp-3.stl": {
+    "harness-left-J2430-liner-1.stl": {
       "watertight": true,
       "size_mm": [
-        12.0,
-        6.0,
-        3.0
+        5.2,
+        2.433,
+        2.573
       ]
     },
     "lid-print-splice-2.stl": {
@@ -619,7 +925,7 @@
       "size_mm": [
         185.0,
         141.0,
-        32.6
+        31.1
       ]
     },
     "lid-print-splice-3.stl": {
@@ -630,12 +936,20 @@
         2.0
       ]
     },
-    "cable-clamp-2.stl": {
+    "harness-USB-left-liner-2.stl": {
       "watertight": true,
       "size_mm": [
-        12.0,
-        6.0,
-        3.0
+        5.2,
+        4.87,
+        4.057
+      ]
+    },
+    "harness-raw-J2-liner-2.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.431
       ]
     },
     "base-22.stl": {
@@ -643,7 +957,31 @@
       "size_mm": [
         185.0,
         141.0,
-        32.6
+        31.1
+      ]
+    },
+    "harness-BMS-liner-1.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        3.762
+      ]
+    },
+    "harness-left-J2450-carrier.stl": {
+      "watertight": true,
+      "size_mm": [
+        10.773,
+        16.6,
+        7.722
+      ]
+    },
+    "harness-left-J2460-liner-1.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.906,
+        2.533
       ]
     },
     "base-21.stl": {
@@ -651,7 +989,15 @@
       "size_mm": [
         185.0,
         141.0,
-        32.6
+        31.1
+      ]
+    },
+    "harness-BMS-liner-2.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.536
       ]
     },
     "blower-fit-cradle.stl": {
@@ -662,12 +1008,28 @@
         2.0
       ]
     },
+    "harness-left-J2460-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        8.6,
+        1.876
+      ]
+    },
     "right-lid-steel-plate.stl": {
       "watertight": true,
       "size_mm": [
         43.0,
         31.0,
         3.0
+      ]
+    },
+    "harness-USB-left-carrier.stl": {
+      "watertight": true,
+      "size_mm": [
+        116.253,
+        84.977,
+        19.934
       ]
     },
     "lid-cross-rail-fit-only-2.stl": {
@@ -683,7 +1045,7 @@
       "size_mm": [
         33.0,
         36.0,
-        21.7
+        20.2
       ]
     },
     "keyboard-carrier-11.stl": {
@@ -718,12 +1080,28 @@
         3.0
       ]
     },
+    "harness-left-J2430-carrier.stl": {
+      "watertight": true,
+      "size_mm": [
+        19.77,
+        16.6,
+        7.798
+      ]
+    },
     "deck-22.stl": {
       "watertight": true,
       "size_mm": [
         185.0,
         141.0,
         2.4
+      ]
+    },
+    "harness-raw-J2-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        12.6,
+        1.876
       ]
     },
     "keyboard-clip-3.stl": {
@@ -750,6 +1128,14 @@
         6.0
       ]
     },
+    "harness-USB-right-carrier.stl": {
+      "watertight": true,
+      "size_mm": [
+        123.75,
+        182.3,
+        19.934
+      ]
+    },
     "bezel-11.stl": {
       "watertight": true,
       "size_mm": [
@@ -758,12 +1144,44 @@
         0.8
       ]
     },
+    "harness-right-main-power-liner-1.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.571
+      ]
+    },
     "keyboard-clip-2.stl": {
       "watertight": true,
       "size_mm": [
         6.0,
         6.0,
         1.6
+      ]
+    },
+    "harness-right-main-power-liner-3.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.571
+      ]
+    },
+    "harness-right-J2462-liner-1.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.807,
+        2.526
+      ]
+    },
+    "harness-right-main-power-liner-2.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        2.571
       ]
     },
     "bezel-12.stl": {
@@ -790,6 +1208,14 @@
         1.6
       ]
     },
+    "harness-right-main-power-liner-6.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        3.205
+      ]
+    },
     "lid-shell-11.stl": {
       "watertight": true,
       "size_mm": [
@@ -806,14 +1232,6 @@
         1.6
       ]
     },
-    "cable-clamp-2-pedestal.stl": {
-      "watertight": true,
-      "size_mm": [
-        14.0,
-        8.0,
-        1.0
-      ]
-    },
     "keyboard-clip-6.stl": {
       "watertight": true,
       "size_mm": [
@@ -822,12 +1240,36 @@
         1.6
       ]
     },
+    "harness-BMS-cap.stl": {
+      "watertight": true,
+      "size_mm": [
+        6.0,
+        12.6,
+        3.37
+      ]
+    },
+    "harness-right-main-power-liner-5.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        3.205
+      ]
+    },
     "lid-shell-12.stl": {
       "watertight": true,
       "size_mm": [
         185.0,
         136.0,
         7.0
+      ]
+    },
+    "harness-right-main-power-liner-4.stl": {
+      "watertight": true,
+      "size_mm": [
+        5.2,
+        2.433,
+        3.205
       ]
     },
     "keyboard-clip-7.stl": {
@@ -841,7 +1283,7 @@
   },
   "assembly": {
     "valid": true,
-    "solids": 709,
-    "expected_solids": 709
+    "solids": 761,
+    "expected_solids": 761
   }
 }

@@ -5192,7 +5192,7 @@
 				)
 			)
 		)
-		(property "CurrentRatingBasis" "AMASS 2025V0: 20 A at up to 85 K rise; project return design 8 A, qualification <=80 C"
+		(property "CurrentRatingBasis" "AMASS 2025V0: 20 A at up to 85 K rise; project return design 10 A with 16 AWG wire, qualification <=80 C"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5264,7 +5264,7 @@
 				)
 			)
 		)
-		(property "MatedEnvelope" "23.10 x 13.60 x 5.75 mm conservative; reserve sleeve and 18.80 mm wire bend radius"
+		(property "MatedEnvelope" "23.10 x 13.60 x 5.75 mm conservative; reserve sleeve and 10.541 mm wire bend radius"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5300,7 +5300,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 5857 RD005/BK005; 18 AWG 19/30 silver-plated copper, PTFE"
+		(property "Wire" "Alpha 6716 RD005/BK005; 16 AWG 26/30 tinned copper, mPPE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -10089,7 +10089,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -10135,7 +10135,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -10147,11 +10147,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7d1c7f22-fe1e-4d05-9f9f-1c4f6b729493")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a44e4bea-7962-55cc-82d3-9112874dd660")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e419b9f8-b8b7-5abc-8c89-cecd997ad87c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "97a537d3-483f-5c1e-a018-45c6852f883b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "39d1ad15-0244-5eca-9ab4-fd86033cbefd")
 			(effects
 				(font
 					(size 1 1)
@@ -23313,7 +23361,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -23359,7 +23407,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -23371,11 +23419,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "fdf63534-14ad-4805-8449-cd9026e8a944")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9d5b1687-cdff-5b90-84e7-1bd04b8ac893")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0648d67a-8c9d-51f9-83ed-08178577a0ec")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2c66060d-f3fd-54b2-996d-8a05df601a75")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0cdd7bc6-976e-5149-9b03-a575c1fd5ed4")
 			(effects
 				(font
 					(size 1 1)
@@ -30165,7 +30261,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.wago.com/2060-453/998-404"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -30211,7 +30307,7 @@
 				)
 			)
 		)
-		(property "Wire" "Alpha 6715, 18 AWG; strip 7..9 mm; hold the button for stranded wire"
+		(property "Wire" "Alpha 6715, 18 AWG 16/30 tinned copper; no ferrule"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -30223,11 +30319,59 @@
 				)
 			)
 		)
-		(property "HarnessPinOrder" "match rail labels in the numbered harness drawing"
+		(property "HarnessPinOrder" "match rail names in the harness drawing; each three-pole group reverses at the center board"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "df95085d-95b1-4fc4-8a12-0cf07d4fb297")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Assembly" "strip 7..9 mm; hold the button to insert or remove stranded wire; never solder-tin the wire end"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "11ebf79e-0f89-5c92-ad0b-5b76cf3a25e0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "CurrentRatingBasis" "9 A IEC and UL; the 10 A ground-cut screen requires both seam braids installed and covers one open braid"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b62d3366-052e-53c9-bf46-92572feb8f08")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ReturnAcceptance" "remaining complete braid <=1 mOhm; each return wire >=0.12 mOhm cold; terminal current <=8.93 A at a 10 A cut"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "dc7d58c6-20c8-51b0-b7ef-2c7a87338eba")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MatedHeight" "4.5 mm terminal body; wire and release-tool envelopes are separate"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f71e49fa-ee19-5306-b93d-830348090cf9")
 			(effects
 				(font
 					(size 1 1)
@@ -38512,7 +38656,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM1555C1H120JA01"
+		(property "MPN" "GRM1555C1H120JA01J"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -41400,7 +41544,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM1555C1H120JA01"
+		(property "MPN" "GRM1555C1H120JA01J"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")

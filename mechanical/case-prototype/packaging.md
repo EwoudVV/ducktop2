@@ -1,239 +1,265 @@
-# case packaging
+# current-board packaging study
 
-the active model is the **35 mm compact study**. it does not fit the saved
-power harnesses. their bodies and wires are kept in the assembly so the
-conflicts can be inspected. `current-hardware` is the 73 mm clearance
-reference, selected through the same CAD source. neither profile is ready
-for a full case print or CNC order.
+the active candidate is a 370 x 282 mm base with a 33.5 mm deck height.
+it is not ready for a full case print, powered operation or a CNC order.
+the case now uses the saved connector redesign, not the old vertical
+Micro-Fit and Mega-Fit assumptions. there is no supported complete minimum
+yet: the battery, trackpad, panel, cooler and several signal harnesses still
+have unresolved dimensions or qualifications.
 
-the base is 370 x 282 mm. the saved main boards already span 358 mm. the
-extra 6 mm on either side carries walls and deck posts outside the boards.
-the extra depth provides a rear hinge area and space beyond the cells,
-which already end at Y=248. the previous 358 x 248 outside target cannot
-contain those parts plus walls and mounting structure.
+the case width keeps the real 358 mm PCB span and both 1.5 mm seams. the
+additional 6 mm on each side carries the walls and deck posts. board
+material comes from native KiCad STEP exports of the saved Edge.Cuts,
+including the notches and holes, rather than rectangular stand-ins.
 
-## datums and board poses
+## assembly datums
 
-all dimensions are millimeters. the assembly STEP keeps the installed
-board X/Y coordinates, with front at positive Y. Z=0 is the outside bottom
-plane of the base; positive Z points down. a part at height 8 therefore
-has Z=-8. the CAD builder and viewer use X,-Y,height and rotate the whole
-assembly 180 degrees about X for export. imported parts are never mirrored.
+all dimensions are millimeters. H is height above the outside bottom;
+the exported STEP coordinate is Z=-H. harness inputs use X,Y,H. construction
+uses X,-Y,H, followed by a 180 degree X rotation for export. the two
+transforms are rotations, not reflections.
 
-| board | native-to-installed translation X,Y | rotation in placement convention | bottom height, compact | top height, compact |
-| --- | --- | --- | ---: | ---: |
-| left | 0, 0 | 0 | 6.4 | 8.0 |
-| center | -30.550001, -36.55 | 0 | 6.4 | 8.0 |
-| right | 0, 0 | 0 | 6.4 | 8.0 |
-| BMS | +47.35, +91.448 | 0 | 10.4 | 12.0 |
-| keyboard | +24.75, +19.7 | 0 | 31.0 | 31.8 |
-| radio | +376, +90 | -90 | 20.0 | 21.6 |
+| board | native-to-installed XY translation | rotation | bottom H | top H |
+| --- | --- | ---: | ---: | ---: |
+| left | 0, 0 | 0 | 5.1 | 6.7 |
+| center | -30.550001, -36.55 | 0 | 5.1 | 6.7 |
+| right | 0, 0 | 0 | 5.1 | 6.7 |
+| BMS | 47.35, 91.448 | 0 | 9.1 | 10.7 |
+| keyboard | 24.75, 19.7 | 0 | 29.5 | 30.3 |
+| radio | 376, 90 | -90 | 20.0 | 21.6 |
 
-the first four XY transforms are the saved assembly baseline. their Z
-positions and both keyboard/radio poses are proposed. all six source hashes
-are in `board-inventory.json`; rebuilding refuses a changed PCB until the
-inventory has been refreshed and reviewed. the native KiCad export retains
-the real notches, arcs and drilled holes. the center is not placed at its
-raw file coordinates.
+the BMS is 80 x 36.148 mm at X145..225, Y150.2..186.348. it sits in the
+center board's wider front cutout, not beneath the center board. all five
+connectors are on top. the 4 mm relative lift is retained for withdrawal
+over the adjacent main board and its hardware, not for obsolete underside
+plugs. the older notch rectangle in `board-placement.json` is not used.
 
-the BMS occupies X154.05..215.95, Y150.2..186.348, beside the center PCB in
-its cutout. it is raised 4 mm relative to the main boards for underside
-control/probe plugs. it is not stacked underneath the center board.
+`input-audit.json` records the current hashes and each file's last commit.
+some source inputs still carry earlier hashes because the electronics work
+resaved metadata. the audit compares outlines, holes, footprint poses,
+model transforms, pad positions and courtyards before accepting this.
+no board geometry is silently adjusted to fit the case.
 
-the keyboard is centered at X42.25..315.75, Y20..100. its carrier uses
-edge clips and underside pads outside the saved backside courtyards. no
-holes are added to the keyboard. the right edge has a cable-release opening.
-actual pad contact, keycap sizes, key travel and carrier deflection need a
-first-article check.
+## height budget
 
-the optional radio occupies X286..356, Y110..230. its four H1-H4 supports
-hang from the removable deck. its SMA axes face +X through the right side
-at Y133 and Y198, height 21.98 in the compact profile. the connectors'
-underside reaches height 18.02. that is only 1.62 mm above the assumed
-cell thickness plus swelling allowance. measure the complete packs before
-keeping this pose. the two DRA818 bodies use the existing 35.6 x 19 x 4 mm
-project model at J70/J71; their saved footprints had no attached model.
-the 20 mm diameter, 45 mm long SMA tool/plug corridors are allowances,
-not a selected antenna model. external antennas are required for this
-aluminum-case arrangement; internal antenna placement is not qualified.
+`thickness-study.json` calculates the stack directly from the active
+parameters. 33.5 mm is the smallest half-millimeter trial satisfying these
+particular stack allowances. it is not a proof that every unmeasured part
+fits, or that a different cooler/harness arrangement cannot be thinner.
 
-## what sets the height
-
-| stack | compact-model height above the base bottom | status |
+| driver | required deck height or clearance | basis |
 | --- | ---: | --- |
-| main PCB top | 8.0 | 1.6 mm board, proposed 4 mm insulating supports |
-| Mu/socket model top | about 17.74 | current PCB model placement; no cooler included |
-| cold plate | 18..20 | proposed contact envelope, TIM and fastening unverified |
-| flat heatpipe | 20.5..23.5 | proposed envelope |
-| fin top | 24 | proposed fin envelope, not a thermal result |
-| Delta BFB04512HHA-CZ0T body | 17..27.3 | manufacturer lists 45 x 45 x 10.3 mm; sample/mount fit pending |
-| keyboard carrier | 26.5..28.5 | manufactured carrier geometry |
-| keyboard PCB | 31..31.8 | saved 0.8 mm board, proposed Z |
-| key envelope top | 36.3 | assumed 4.5 mm above PCB; actual caps/travel pending |
-| deck top | 35 | compact target |
-| trackpad bridge bottom | 24.5 | separate load path to deck |
-| trackpad body | 30..35 | assumed 5 mm thickness |
-| cell body top | 13.4 | assumes 10 mm complete thickness and 1 mm pad |
-| cell swelling reservation top | 16.4 | assumption, not a pack specification |
-| current Micro-Fit mated body top | 25.64 | before wire bends |
-| current individual power-wire arch top | about 62.36 | 100 mm wires, 17.78 mm radius, actual pin positions |
-| BMS protected-power mated body top | 29.56 | before wire bends |
-| BMS raw Mega-Fit mated body top | 28.78 | before wire bends |
+| positioned USB wire below trackpad bridge | 33.454 mm deck | 22.454 wire envelope, 0.5 clearance, 2.5 bridge, 2 free space, 1 click travel, 5 trackpad |
+| blower and intake below keyboard | 33.3 mm deck | fan bottom 15.7, body 10.3 +0.3, 3 intake gap, 4 keyboard-to-deck offset |
+| actual selected bridge to wire envelope | 0.546 mm | 23.0 bridge underside minus 22.454 positioned wire |
+| selected fan envelope to keyboard PCB | 3.2 mm | 29.5 minus 26.3 |
+| main underside component to floor | 0.6 mm | reviewed 1.8 maximum body +0.3 planning allowance |
+| lowest modeled left pin tail to floor | 0.537 mm | after a separate 0.3 planning allowance |
+| panel face to assumed key tops, closed | 2.0 mm | actual assembly coordinates, assumed panel/key thicknesses |
+| panel face to radio screw heads, closed | 1.3 mm | modeled 2 mm head envelope above the deck |
 
-the power wire arches cross the compact keyboard carrier by about 35.86 mm.
-even the bare BMS plug bodies cross the trackpad bridge by 5.06 mm and
-4.28 mm. a shorter enclosure cannot fix those conflicts by itself.
+the keyboard has no saved backside footprints over the fan inlet. its
+carrier has a clearance opening there. this geometric intake gap does not
+qualify airflow, pressure drop, noise or thermal capacity.
 
-an optimistic current-harness stack is 62.36 mm to the highest individual
-wire, 1 mm clearance, 2 mm carrier, 2.5 mm backside component space,
-0.8 mm keyboard PCB and 4.5 mm key envelope: 73.16 mm to the keys. this
-still does not resolve the wire-bundle crossings. after a horizontal-exit
-power change, the module/cold-plate/heatpipe/keyboard stack is roughly
-34 mm to the keys with the stated allowances. that is the basis for the
-35 mm deck study, not a promise that the pending power/cooling design fits.
+33 mm leaves only about 0.046 mm under the trackpad bridge and 2.7 mm above
+the maximum fan body. it fails the stated 0.5 and 3 mm allowances. a 32 mm
+base intersects the current USB envelope under that bridge. simply lowering
+the USB front run by 1..5 mm causes wire-to-wire conflicts in the tested
+routes. those rejected paths are recorded, not installed.
 
-the height after connector changes is still controlled by cooling, the
-keyboard carrier and key stack. the fan part recorded at J52 is
-[Delta BFB04512HHA-CZ0T](https://www.delta-fan.com/technology/BFB04512HHA-CZ0T.html),
-45 x 45 x 10.3 +/-0.3 mm. the revision-00 drawing gives three 2.8 mm
-mounting holes on a 38.5 mm pattern. the cradle includes this pattern with
-M2 through-bolts and washers; the centered 3.25 mm body-edge datum needs a
-sample check. its body has a clearance window in the keyboard carrier;
-the 0.8 mm keyboard PCB stays intact. the remaining intake plenum under the
-keyboard is small. the cold plate/heatpipe/fins still need an Ultra cooler
-design, and neither airflow, recirculation nor 256V thermal capacity is qualified.
-the older N305 cooler is not used.
+the deck number is not the closed laptop thickness. assumed keys reach
+H34.8. the printed lid and its external splice plates reach H44.8 when
+closed; the 5 mm feet make that 49.8 mm overall. a one-piece production
+lid can remove the external print splices, but that has not been released
+as a thinner CNC design.
 
-the pending 100 W power reservation remains visible as a separate volume.
-it overlaps parts of the compact support stack. its component heights and
-placement have to be agreed with the power layout before enclosure height
-is frozen. this mechanical work does not restore or implement that redesign.
+## guides and strain relief
 
-## connector changes to review
+all 18 routed wires retain the source path under one rigid -1.3 mm height
+translation. the saved BMS paths cross the BMS board edge and the J2074 mated plug envelope:
+the upstream BMS crossing report screened center-board parts, not that
+BMS-side plug. the baseline remains visible and is not assembly-ready.
+all 18 paths pass their bend, length and wire-separation checks, which
+does not make the connector/body collision disappear.
 
-these are proposals, not edits to the saved boards. keep the signal maps,
-return-domain isolation, current rating and electrical qualification with
-the electronics work.
+case-only detours were investigated. wider concentric turns avoided J2074
+but ran into the BMS perimeter hardware or C797. alternate vertical profiles
+and BMS heights did not clear the conservative body and wire constraints
+in the tested parameter ranges. those candidates are not installed.
 
-| location | current constraint | concrete mechanical proposal |
+one concrete electronics proposal for the plug conflict is to move BMS J2074 by +7 mm in X,
+from installed anchor (156.35,153.948) to (163.35,153.948), keeping its
+orientation. the nominal mated outline would move from X151.95..160.75
+to X158.95..167.75, Y149.118..157.228. this separates it from the original
+left loop legs. its pads, routing, neighboring components, full withdrawal
+envelope and control cable length need electronics review. this is a
+proposal, not an applied change or proof that a PCB change is unavoidable.
+it does not fix the separate low approach across the BMS board edge.
+a revised vertical approach or another fully checked harness route is
+still required. do not treat the BMS carrier as an approved installation.
+
+the protected positive centerline first crosses X145 at approximately
+Y174.567, H9.615. that is inside the BMS substrate, which occupies
+H9.1..10.7. with the current guide radius and 0.3 mm body clearance, the
+centerline needs H12.426 or more before that crossing. passing over J2074
+at its current XY would instead require H15.626 or more. either change
+needs a new bend/length/all-wire check; simply raising the enclosure does
+not change this conflict.
+the independent separation check uses 0.2 mm allowance on each wire plus
+0.05 mm sampling allowance. its minimum is about 0.642 mm. dimensions and
+pin maps remain in `docs/hardware/cables-and-connectors.md` and
+`docs/hardware/power-harness-fit.md`.
+
+the WAGO body envelopes are 4.5 mm high. short wires are Alpha 6715;
+the direct USB pair is Alpha 6716. the 18-wire set does not include a
+finished raw battery harness.
+
+the four required Alpha 1230 seam bonds are also shown separately: J2440/41,
+J2442/43, J2444/45 and J2446/47. each uses the documented 20 mm starting cut
+and 4.7625 x0.508 mm nominal section, with a 1 mm solder-joint reservation.
+their geometry and independent retention are not qualified. the seam-web
+crossings are included in the fit report, not hidden or omitted from the
+electrical return scheme. the guide feet need relief and retention designed
+around these braids as well as the insulated wires.
+
+the guide channels use 0.15 mm radial fit clearance and 0.4 mm walls.
+these are fit-coupon dimensions, not a tolerance capability claim for a
+P1S. open channels follow the real curved paths. split clamp caps have
+stepped parting faces so each wire can be removed independently of its
+height. slit TPU liners have a provisional 0.025 mm radial grip; screws
+close against hard stops. measure the wire and tune the liner before a
+pull test. do not rely on friction calculated from an unmeasured TPU part.
+
+the seam pedestals have 1 mm webs within the existing 1.5 mm gaps. their
+feet attach from beneath the case. the USB guide has additional ribbed
+supports through the spaces between cells, not through their bodies.
+the BMS power clamp has a dogleg support through the left inter-cell gap,
+clear of the H23 head and the BMS board. the six adjacent right-side wires
+share one stepped comb, avoiding the overlap between two separate clamps.
+these hold the harness independently of the removable input deck. the
+right support includes open-bottom raw-lead crossing slots. its reduced
+section and every long guide require a deflection test under a dressed
+harness: the curve assumption is only valid if the wires stay within
+the recorded 0.2 mm position allowance.
+
+the J2 fixture is separate from the BMS supports. its short straight
+pigtails illustrate only the known connector exit and local clamp fit.
+J2 pin 1 is negative at Y169.448; pin 2 is positive at Y173.448. finished
+pack lead exits, usable lengths, pack outline and any splice insulation
+must be measured before completing that route. nothing connects the BMS
+return domains through mounting hardware.
+
+## mounts and service order
+
+the mounting schedule retains all 13 isolated main-board mounts and all
+four current BMS Edge.Cuts holes. H24 is at X156.75, Y145.5. the main
+supports are short custom insulating parts; the proposed M2.5 x4 top
+screws give 1.9 mm engagement after the 1.6 PCB and 0.5 washer. this short
+engagement needs a physical pullout test. BMS screws, washers, supports and
+underside fasteners remain insulating. modeled top hardware is at most
+5 mm in diameter with a 2.5 mm head/washer stack.
+
+Mu H1/H2 stay M2 module supports, not chassis mounts. H3/H4 remain card
+retainers. radio H1-H4 are in the radio's own coordinate system. all mount
+locations, thread choices and unverified lengths are in
+`mounting-schedule.csv`.
+
+radio retention now includes screw, washer and nut envelopes. the proposed
+M2 x16 screws are trimmed to 15.5 mm, with 6 mm insulating washers and
+1.5 mm nut engagement. their length is limited by the closed lid above
+and the packs below, not rounded up to an arbitrary 20 mm screw.
+
+1. fit the rear spine, hinge towers and captured nuts before their adapters.
+2. fit case-mounted harness feet, insulating PCB supports and the bare boards.
+   check that feet do not touch backside parts or copper.
+3. install the wire guides and liners. lay in each numbered wire, make the
+   terminal connections while supporting the wire, then close the clamps.
+4. inspect polarity and independent return isolation before connecting cells.
+5. fit cooling hardware only after resolving the Ultra contact and retention
+   design. keep its load off the cells and signal connectors.
+6. install the input assemblies and removable deck last. the trackpad bridge
+   takes clicking and palm loads through the deck, not through the packs.
+7. for service, disconnect external power and the packs first. open the lid,
+   unplug the input modules as needed and remove the deck/keyboard/bridge.
+   remove the relevant clamp cap before releasing a terminal. the fixed
+   pedestal stays in the case while the wire is supported.
+8. XT30 needs 14 mm axial withdrawal. its nearby guide section must be
+   removed first. BMS SH/GH housings need their saved 5 mm withdrawal
+   envelopes plus real latch/finger access. use the interference report;
+   removing a cap alone does not guarantee the fixed carrier clears a plug.
+
+top button/tool corridors and BMS withdrawal volumes are explicit keepouts.
+the check distinguishes a closed assembly from the service state. full
+finger ergonomics and exact driver head choices still require coupons.
+
+the present USB guide carriers are not service-complete. their upper rails
+obstruct several button/withdrawal corridors, while their seam feet are
+captured under the PCB edges. removing only the deck and clamp caps is not
+enough. the next carrier revision needs upper sections that detach from
+feet left in the case. do not call full board-row removal a normal cable
+service operation. the exact blocked corridors are retained in the report.
+
+both prototype speaker cups sit in the left palm area. this avoids the
+USB turn and optional radio corridor without making the base taller. their
+close stereo spacing and acoustic behavior are not a final audio layout.
+
+## hinges, lid and cooling
+
+the actual handed Framework 13 assemblies, their coaxial pivots, stepped
+seats, tapped steel adapters, sleeves and rear/lid reinforcement are kept.
+the source drawings are revision 0, dated 2023-06-27, from Framework's
+published reference commit. the user selected the original 3.3 kg kit;
+physical markings and coupon seating still need confirmation.
+
+`assembly-checks.json` samples 0..180 degrees in 2 degree steps against
+the current fixed assembly, including wires and guides. it reports actual
+collision angles rather than treating the hinge's own stop as case travel.
+sampling does not prove continuous collision freedom between poses.
+
+the eDP annular bend corridor and service-slack bay remain reservations,
+not a solved constant-length cable. actual display connector position,
+dynamic bend specification, strain relief and full-motion pinch testing
+are open. therefore the lid motion is not cable-qualified even if the
+rigid-part sweep is clear.
+
+both 226V and 256V use the same corrected Mu Ultra module/socket geometry
+in this study. no N305 cooler is used. the Delta fan has a modeled cradle
+and attachment holes. the cold plate, heatpipe and fin stack are still
+proposed envelopes, not a released or thermally tested Ultra cooler. their
+contact interface, mounting load, airflow path and capacity for each CPU
+must be resolved before the 33.5 mm candidate can become a complete fit.
+
+lid mass/COM and stability calculations remain assumption-based. the
+original 3.3 kg product label is not a supported-lid-mass specification.
+use the existing hinge coupons and a restrained dummy lid for holding
+torque and mounting-load tests before a complete print.
+
+## measurements still needed
+
+| item | known basis | still open |
 | --- | --- | --- |
-| J2430/J2431, 12 contacts | vertical 43045-1212 and tall 18 AWG return loops | review a right-angle 12-contact header, with both exits aimed along a free board corridor rather than into the 1.5 mm seam |
-| J2432/J2433, 10 contacts | vertical 43045-1012 and tall return loops | same change for the 10-contact pair; lay the bend in XY and retain the numbered-wire map |
-| center J2071 / BMS J2072 | 17.56 mm vertical mated stack; 15.51 mm origin separation | review right-angle two-contact parts and an in-plane route; target complete body/wire envelope below height 23.5 in the trackpad area |
-| BMS J2 | raw-pack plug already exceeds the bridge underside before bends | review a horizontal-entry raw-pack connector or a separately strain-relieved low-profile termination, preserving the existing circuit requirements |
+| PCB outlines, holes and footprint poses | saved board files | fabrication tolerances and first-article fit |
+| WAGO 4.5 mm bodies and wire OD/bend data | retained manufacturer/electronics inputs | spring-tool access and assembled wire position |
+| panel 352 x227 | recorded plan dimensions | complete thickness, brackets, connector, mass and COM |
+| three packs 100 x60 | recorded footprints | finished thickness, tabs, lead exits, usable lengths and swelling specification |
+| trackpad 140 x105 | recorded footprint | complete body, connector, mounting features and click travel |
+| keyboard | saved 273.5 x80 PCB and switch poses | keycap height/travel and support deflection |
+| speakers and OLEDs | recorded/assumed module envelopes | complete bodies, fasteners, cable exits and acoustic cavities |
+| Ultra cooling | corrected module STEP and selected fan dimensions | complete cooling assembly and tests on both CPUs |
 
-Molex [43045-1210](https://www.molex.com/en-us/products/part-detail/430451210)
-and [43045-1010](https://www.molex.com/en-us/products/part-detail/430451010)
-are concrete dimensional candidates: 12/10 contacts, right angle, 10.29 mm
-listed mated height. [43650-0203](https://www.molex.com/en-us/products/part-detail/436500203)
-is a two-contact right-angle candidate listed at 6.98 mm. verify exact
-plating/contact combinations, current derating, footprints, plug length,
-latch access and horizontal keepouts. these are not drop-in substitutions.
-their bodies have not replaced the current parts in the CAD.
+the 11 mm pack shown in CAD uses the nominal listing recorded in the
+current hardware notes, not a measured maximum. the current radio pose
+allows roughly 11.0 mm finished pack thickness
+after the chosen padding, 3 mm swelling reservation and 0.5 mm clearance.
+the trackpad bridge permits more, about 16.1 mm under the same assumptions.
+the radio, not the trackpad, therefore limits the illustrated right pack.
+do not substitute these allowances for actual pack measurements.
 
-the current mated-plug solids are conservative envelopes around the saved
-pin locations, using the recorded 17.64/17.56 mm stack heights. they are
-not detailed manufacturer latch/shell STEP models. several connector STEP
-files are missing from the installed KiCad library. exact housing outlines,
-latch motion and external plug overmoulds remain part of the fit checks.
+## frozen PCB snapshot
 
-the 75 mm BMS wire budget cannot use the same 17.78 mm-radius arch assumed
-for the main looms: that screen needs about 122.6 mm. the visible BMS
-candidate uses a 7 mm radius and therefore needs a specifically qualified
-flexible wire, or the connector/route change above. individual main-loom
-arches also intersect one another. their bend calculations do not establish
-that the complete numbered bundle can be assembled.
-
-## hinge and lid load path
-
-the OEM hinges bolt to independent 3 mm steel adapters. captured M3 nuts
-in the base towers and a continuous rear spine carry the base loads. the
-lid adapters use stepped sleeves into a continuous aluminum cross rail.
-the left/right 1.3/2.2 mm base offsets and the small inner M1.6 lid tab
-are retained. details, original screw sizes and coupon hardware are in
-`hinge-fit.md` and `drawings/hinge-left.svg` / `hinge-right.svg`.
-
-the rear walls are relieved for the lid heel. the upper tower support sits
-under the forward base foot, leaving space behind the axis. a slot in the
-lower lid rail and bezel provides an eDP passage. the 10 mm radius bend
-corridor is separate from the shaft, and a planar 52 x 21 x 6 mm bay holds
-the service-loop allowance. the required pay-out allowance is about
-31.4 mm over 180 degrees, plus 25 mm service slack. connector positions,
-vendor bend limits and the actual constant-length cable still need fitting.
-
-the complete lid estimate is around 0.88 kg using the CAD volumes,
-material-density assumptions, a 0.4 kg panel assumption and 40 g for cables,
-gaskets and screws. `assembly-checks.json` contains the current calculated
-mass, center of mass, angle-dependent gravity torque and a separate base
-stability screen. near-horizontal torque is about 1.0 N*m. the original
-hinges must be tested with a dummy lid and added weights. the printed
-torque unit in the Framework drawing is ambiguous; no marketplace mass
-rating is inferred. use a temporary prop during the first loaded tests.
-
-## assembly and access
-
-1. print and check the small hinge gauges first. compare the owned kit's
-   hole positions, steps, rivets and markings. fit the screws without the panel.
-2. join the four base tiles with the underside splice plates. install the
-   rear metal spine, tower foot bolts and underside nuts. the tower access
-   bores are used before the hinge adapter plates are installed.
-   the left tower has a relief for the saved F195 fuse holder. remove the
-   hinge adapter before withdrawing F195 unless the actual tool/withdrawal
-   path has been proven with the shorter M3 x 6 adapter screws.
-3. load the captured M3 nuts into the tower pockets and fit the steel
-   adapter plates. use the full continuous metal spine for lid-load tests;
-   the split metal-part STLs are fit gauges only.
-4. fit insulating main-board supports and all four BMS supports. install
-   the main boards and BMS with insulating fasteners. keep H1/H2 Mu and
-   H3/H4 M.2 supports as their own assemblies. check solder-tail clearance.
-5. fit ground braids, signal FFCs, power wiring, underside BMS control/probe
-   harnesses and the pack fuse access. this step cannot be completed in the
-   compact profile with the currently modelled power harnesses.
-6. fit the cell trays and their outside tabs. dress the tabs, tap wires and
-   probes using measured complete pack outlines. straps retain the trays
-   without compressing the pouches. no palm or click load goes through them.
-7. assemble the removable deck separately: keyboard carrier/pads/clips,
-   independent trackpad bridge, OLED trays, speaker cups and optional radio
-   suspension. the radio antennas and SMA plugs must be removable before
-   lifting the deck. check all long screw tips against lower components.
-8. fit the cooler cradle and selected cooling parts. establish TIM contact,
-   fastener loads and airflow using the actual Ultra parts before powered use.
-9. join the lid tiles, install the cross rail and stepped hinge seats, then
-   install the hinges with the panel absent. this exposes all three lid
-   fasteners. install the panel on soft perimeter pads and shoulder stops,
-   then fit the removable bezel. screws must not load the LCD glass.
-10. hold the lid at 90 degrees while installing the two base screws per
-    hinge. install the eDP cable with clamps on both sides and service slack.
-    check the full travel by hand with a dummy cable before using the panel.
-11. connect the deck harnesses with a supported service loop, lower the
-    deck and tighten its perimeter screws. verify keyboard deflection,
-    trackpad click travel, cable release access and cell clearance.
-12. weigh the base/lid and measure the actual center of mass and hinge
-    holding force. repeat fit checks with the real plugs and cables before
-    thermal testing or ordering a machined case.
-
-the seven deck screws are accessed from above. board screws require the
-deck to be removed. the BMS underside connectors require the BMS to be
-lifted after its power has been isolated. the lid hinge screws require the
-panel/bezel to be removed. the mounting CSV records reference, XYZ, mating
-part, hole/thread, support height, screw length, insulation and status.
-
-## measured, manufacturer and assumed
-
-no new physical measurements were taken for this model.
-
-- saved-board data: outlines, holes, placement, footprint references and
-  model transforms, verified against all six SHA-256 hashes.
-- manufacturer reference: Framework STEP/drawing geometry, part numbers,
-  revision and fastener guide; the corrected Mu Ultra/socket model;
-  retained connector/wire dimensions cited in the hardware documents.
-- recorded owned-part plan sizes: panel 352 x 227, cells 100 x 60 each,
-  trackpad 140 x 105, speakers 38 x 18. these were not remeasured here.
-- assumptions: panel thickness/mass/flanges/connector; complete pack
-  thickness/tabs/protection boards/mass/swelling; trackpad thickness,
-  click mechanism and plug datum; speaker depth/cavity/retention; OLED
-  module mounting; keycaps; cooler/TIM/fan hardware; all proposed Z poses.
-
-the `views/` sections come from intersections of the actual CAD solids.
-`component-coverage.json` lists missing or omitted PCB models. a clean
-case sweep does not prove component, wire-bundle or thermal qualification.
+`reference/pcb-snapshot/` pins the six reviewed native STEP exports,
+inventory and source records. this prevents concurrent electronics saves
+from silently changing the case halfway through a build. the live project
+PCBs remain untouched. the exact snapshot hashes, rather than a claim
+about the latest live working tree, identify this mechanical revision.

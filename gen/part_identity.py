@@ -39,6 +39,18 @@ def engineering_value(token: str) -> float | None:
 
 
 def decode(mpn: str) -> Identity | None:
+    # Exact capacitor selections; sources and body heights are in
+    # docs/hardware/main-board-parts.md. These are nominal, zero-bias values.
+    capacitors = {
+        'C2012X7R1H105K125AB': (1e-6, '0805', 10, 50),
+        'C1005X5R1A475K050BC': (4.7e-6, '0402', 10, 10),
+        'C0603C103K5RACTU': (10e-9, '0603', 10, 50),
+        'C0603C180J5GACTU': (18e-12, '0603', 5, 50),
+        'C0603C473K5RACTU': (47e-9, '0603', 10, 50),
+    }
+    if mpn in capacitors:
+        value, size, tolerance, voltage = capacitors[mpn]
+        return Identity('C', value, size, tolerance, voltage)
     # Reviewed Bourns CSS2H/CSS4J parts. Ratings are at a 70 C terminal;
     # the board still needs its own temperature and Kelvin-layout checks.
     bourns = {
@@ -152,6 +164,16 @@ def decode(mpn: str) -> Identity | None:
                    "1J": 63, "2A": 100, "2D": 200, "2E": 250}.get(capacitor[3])
         return Identity("C", value, size, {"J": 5, "K": 10, "M": 20}.get(capacitor[5]), voltage)
     return None
+
+
+def ordering_errors(mpn: str) -> list[str]:
+    """Catch incomplete Murata MLCC codes without claiming stock or lifecycle."""
+    if re.fullmatch(r'(?:GRM|GCM|GRT)[A-Z0-9]{7}\d{3}[A-Z][A-Z0-9]{3}', mpn):
+        return ['missing Murata packaging suffix; the base code is not a complete order code']
+    if mpn.startswith(('GRM', 'GCM', 'GRT')) and not re.fullmatch(
+            r'(?:GRM|GCM|GRT)[A-Z0-9]{7}\d{3}[A-Z][A-Z0-9]{3}[A-Z]', mpn):
+        return ['incomplete or malformed Murata MLCC order code']
+    return []
 
 
 def identity_errors(value: str, footprint: str, mpn: str) -> list[str]:

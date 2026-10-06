@@ -36,13 +36,13 @@ JSON_PATH = ROOT / "mechanical/power-placement.json"
 REVIEWED_GROUPS = {
     "center": {
         "charger": """
-            C10 C11 C2260 C2600 C2601 C2602 C2603 C2604 C2605 C2606 C2607
+            C10 C11 C2600 C2601 C2602 C2603 C2604 C2605 C2606 C2607
             C2608 C2609 C7 C701 C702 C703 C704 C705 C706 C707 C708 C709 C710
             C711 C712 C713 C714 C8 C9 D2600 D2601 L1 LED1 Q25 Q2600 Q2601
-            Q2602 Q2603 Q2604 Q2605 Q700 Q702 R12 R13 R14 R16 R18 R2260
-            R2261 R2262 R2263 R2600 R2601 R2602 R2603 R2604 R2605 R2606
-            R2607 R2608 R2609 R2610 R2611 R2612 R704 R706 R719 RS2600
-            RS2601 U2 U2210
+            Q2602 Q2603 Q2604 Q2605 Q700 Q702 R12 R13 R14 R16 R18
+            R2262 R2263 R2600 R2601 R2602 R2603 R2604 R2605 R2606
+            R2607 R2608 R2609 R2610 R2611 R2612 R704 R706 RS2600
+            RS2601 U2
         """.split(),
         "standby": """
             C2620 C2621 C2622 C2650 C2651 C2660 C2661 C2662 C795 C796 C797
@@ -76,7 +76,7 @@ REVIEWED_GROUPS = {
         """.split(),
     },
 }
-EXPECTED_COUNTS = {"center": 185, "left": 14, "right": 14}
+EXPECTED_COUNTS = {"center": 180, "left": 14, "right": 14}
 
 
 def height(value: float, kind: str, url: str, note: str) -> dict:
@@ -86,6 +86,39 @@ def height(value: float, kind: str, url: str, note: str) -> dict:
 # Nominal dimensions are not promoted to maxima. No height is inferred from a
 # package name, a footprint, a STEP bounding box or an unreviewed substitute.
 MANUFACTURER_HEIGHTS = {
+    'C2012X7R1H105K125AB': height(1.45, "maximum",
+        'https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C2012X7R1H105K125AB',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'C0603C103K5RACTU': height(0.9, "maximum",
+        'https://search.kemet.com/download/specsheet/C0603C103K5RACTU',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'GRM155R71H472KA01D': height(0.55, "maximum",
+        'https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71H472KA01-01A.pdf',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'C1005X5R1A475K050BC': height(0.65, "maximum",
+        'https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C1005X5R1A475K050BC',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'GRM1555C1H150JA01D': height(0.55, "maximum",
+        'https://statics3.seeedstudio.com/images/opl/datasheet/302010041.pdf',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'C0603C180J5GACTU': height(0.87, "maximum",
+        'https://search.kemet.com/download/specsheet/C0603C180J5GACTU',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'C0603C473K5RACTU': height(0.95, "maximum",
+        'https://search.kemet.com/download/specsheet/C0603C473K5RACTU',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'GRM1885C1H122JA01D': height(0.9, "maximum",
+        'https://www.murata.com/en-us/products/productdetail?partno=GRM1885C1H122JA01%23',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'GRM319R61C475KA88D': height(0.95, "maximum",
+        'https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2504.ashx?cvid=20250523010405000000&la=en',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'GRM21BR71H474KA88L': height(1.35, "maximum",
+        'https://docs.rs-online.com/d898/0900766b81423ca7.pdf',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
+    'GRM1555C1H120JA01J': height(0.55, "maximum",
+        'https://www.mouser.com/datasheet/2/281/1/GRM1555C1H120JA01_01A-1982584.pdf',
+        'Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.'),
     'WSLP25125L000FEA': height(0.889, "maximum",
         'https://www.vishay.com/docs/30122/wslp.pdf',
         'WSLP2512 H is 0.635 +/- 0.254 mm; maximum 0.889 mm.'),
@@ -435,6 +468,8 @@ def transform(point: list[float], placement: dict) -> list[float]:
 
 def read_native_board(name: str, source: Path, all_components: bool = False) -> dict:
     """Read one board per process; do not retain pcbnew objects across boards."""
+    import wx
+    app = wx.GetApp() or wx.App(False)
     import pcbnew as pcb
 
     def xy(point):
@@ -484,6 +519,8 @@ def read_native_board(name: str, source: Path, all_components: bool = False) -> 
 
 
 def read_boards(config: dict, all_components: bool = False) -> dict:
+    from check_release_candidate import find_kicad_python
+    python = find_kicad_python()
     result = {}
     for name in REVIEWED_GROUPS:
         spec = config["boards"][name]
@@ -491,7 +528,7 @@ def read_boards(config: dict, all_components: bool = False) -> dict:
             raise ValueError(f"{name}: define the mounting-flip transform before exporting this board")
         source = ROOT / spec["file"]
         process = subprocess.run(
-            [sys.executable, str(Path(__file__).resolve()), "--read-board", name, str(source)]
+            [python, str(Path(__file__).resolve()), "--read-board", name, str(source)]
             + (["--all-components"] if all_components else []),
             text=True, capture_output=True,
         )

@@ -1,0 +1,78 @@
+{
+  "units": "mm",
+  "status": "conditional stack budget, not a certified complete arrangement",
+  "active_base_height": 33.5,
+  "smallest_half_mm_stack_candidate": 33.5,
+  "limiting_deck_heights": {
+    "power_wires_under_trackpad": 33.45410064492239,
+    "blower_intake_under_keyboard": 33.3,
+    "heatpipe_under_carrier": 31.2
+  },
+  "trials": [
+    {
+      "base_deck_height_mm": 30,
+      "stack_budget_pass": false,
+      "wire_envelope_to_bridge_mm": -2.954100644922388,
+      "fan_tolerance_envelope_to_keyboard_mm": -0.3000000000000007
+    },
+    {
+      "base_deck_height_mm": 31,
+      "stack_budget_pass": false,
+      "wire_envelope_to_bridge_mm": -1.9541006449223879,
+      "fan_tolerance_envelope_to_keyboard_mm": 0.6999999999999993
+    },
+    {
+      "base_deck_height_mm": 32,
+      "stack_budget_pass": false,
+      "wire_envelope_to_bridge_mm": -0.9541006449223879,
+      "fan_tolerance_envelope_to_keyboard_mm": 1.6999999999999993
+    },
+    {
+      "base_deck_height_mm": 33,
+      "stack_budget_pass": false,
+      "wire_envelope_to_bridge_mm": 0.045899355077612114,
+      "fan_tolerance_envelope_to_keyboard_mm": 2.6999999999999993
+    },
+    {
+      "base_deck_height_mm": 33.5,
+      "stack_budget_pass": true,
+      "wire_envelope_to_bridge_mm": 0.5458993550776121,
+      "fan_tolerance_envelope_to_keyboard_mm": 3.1999999999999993
+    },
+    {
+      "base_deck_height_mm": 34,
+      "stack_budget_pass": true,
+      "wire_envelope_to_bridge_mm": 1.0458993550776121,
+      "fan_tolerance_envelope_to_keyboard_mm": 3.6999999999999993
+    },
+    {
+      "base_deck_height_mm": 35,
+      "stack_budget_pass": true,
+      "wire_envelope_to_bridge_mm": 2.045899355077612,
+      "fan_tolerance_envelope_to_keyboard_mm": 4.699999999999999
+    }
+  ],
+  "main_top_height": 6.699999999999999,
+  "bms_top_height": 10.7,
+  "floor": 2.4,
+  "minimum_planned_main_board_underside_component_gap": 0.5999999999999996,
+  "left_modeled_pin_tail_gap_after_0_3_allowance": 0.5369999999999997,
+  "key_top_height": 34.8,
+  "closed_outer_height_without_feet": 44.8,
+  "closed_outer_height_with_5mm_feet": 49.8,
+  "panel_to_keys": 2.0,
+  "panel_to_radio_screw_heads": 1.2999999999999972,
+  "battery_finished_thickness_measured": false,
+  "maximum_cell_thickness_under_trackpad_budget": 16.1,
+  "maximum_cell_thickness_under_radio_budget": 10.999999999999998,
+  "complete_minimum_supported": false,
+  "unresolved": [
+    "complete cells, lead exits and usable lengths",
+    "trackpad thickness, click mechanism and connector",
+    "panel thickness, mass and harness endpoint",
+    "Ultra cold plate and fastening",
+    "226V and 256V thermal/airflow tests",
+    "guide deflection and clamp pull tests",
+    "signal cable dressing and hinge flex behavior"
+  ]
+}

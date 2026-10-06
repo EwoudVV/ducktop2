@@ -259,9 +259,16 @@ ducktop2_target_defaults(pack_current_tests)
 add_test(NAME pack_current_tests COMMAND pack_current_tests)
 
 add_executable(pack_current_policy_tests tests/test_pack_current_policy.c ec/src/ec_policy.c)
-target_include_directories(pack_current_policy_tests PRIVATE ec/include)
+target_include_directories(pack_current_policy_tests PRIVATE ec_target ec/include)
+target_compile_definitions(pack_current_policy_tests PRIVATE DUCKTOP2_PACK_HARDWARE_REVISION=2)
 ducktop2_target_defaults(pack_current_policy_tests)
 add_test(NAME pack_current_policy_tests COMMAND pack_current_policy_tests)
+
+add_executable(pack_current_policy_bq76922_tests tests/test_pack_current_policy.c ec/src/ec_policy.c)
+target_include_directories(pack_current_policy_bq76922_tests PRIVATE ec_target ec/include)
+target_compile_definitions(pack_current_policy_bq76922_tests PRIVATE DUCKTOP2_PACK_HARDWARE_REVISION=3)
+ducktop2_target_defaults(pack_current_policy_bq76922_tests)
+add_test(NAME pack_current_policy_bq76922_tests COMMAND pack_current_policy_bq76922_tests)
 
 add_executable(ec_app_8a_tests tests/test_ec_app.c tests/i2c_mock.c ec_target/ec_app.c ec_target/ec_app_math.c ec_target/isl9241.c)
 target_include_directories(ec_app_8a_tests PRIVATE ec_target ec/include tests)

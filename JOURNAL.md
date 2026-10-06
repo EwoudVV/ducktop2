@@ -5,6 +5,30 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-05: finish the keyboard routing and work on the case and power
+
+**Total time spent: 6 hours**
+
+finished routing the rgb keyboard! connected the remaining led feeds, colour channels, switch matrix and power wiring. cleaned up the old track ends and unused vias, fixed the ground connections around the led driver, and moved the i2c clock away from the long led-current traces. all 65 switches and leds stayed in their original positions. the board went from 290 unconnected items to zero, with no drc errors or warnings left.
+
+also fixed the keyboard connector's unused mounting-pad definitions so kicad doesn't ask for a connection between them. cleaned up the silkscreen and checked the actual copper plots against all 65 switch keepouts on all four layers. the keyboard still needs its own rgb assembly files, and the leds will need to go on before the switches.
+
+![routing around the keyboard led driver and connector, with the signal layers overlaid](docs/images/journal/2026-10-05-keyboard-controller-routing.png)
+
+updated the case around the wider bms and the lower power connectors. added all 18 power wires, the four ground braids between boards, continuous wire guides, separate clamps and the hardware for the radio board. rebuilt the editable cad and printable parts, and checked the lid through a 0 to 180 degree sweep in 2 degree steps with the framework hinges included. the rigid parts clear in those sampled positions, but the moving display cable still needs a proper route and strain relief.
+
+![power wires, ground braids and the new guide carriers](docs/images/journal/2026-10-05-case-wire-guides.png)
+
+the full case model caught things my earlier cable check missed. the positive bms wire passes through the board edge, both power loops hit the control plug, and some guide carriers obstruct the braids or make the connectors hard to unplug. the wires meet their bend and length limits, but they obviously can't be assembled like this. the current printed version is also 44.8 mm thick when closed, without feet, which is much thicker than i want. i need to sort out the wire approach and removable guides before settling the case height or ordering the bms.
+
+![the bms power loops and control-plug interference in the case model](docs/images/journal/2026-10-05-bms-case-guides.png)
+
+went through the main-board power circuit too. changed the battery mosfet's gate-to-source resistor from 100k to 1m because the old value could pull too much current from the charger's weak gate drive. fixed the firmware so the new bq76922 version also uses the pack-current limit, then checked both battery hardware versions. checked the losses in the shunts, battery mosfet and protected power leads at 8a, along with startup capacitance and the power-wire specifications. the firmware tests and arm build passed; temperatures and fault shutdown still need testing on hardware.
+
+filled in two missing resistor part numbers and corrected 42 capacitor selections, including incomplete ordering codes and a discontinued part. checked their values, packages and maximum heights, which filled 23 gaps in the case data. went through the schematic warnings and removed old error exceptions instead of letting them hide new mistakes. all three main boards match their schematics and have zero erc errors, although main-board routing is still unfinished.
+
+also saved the old journal pictures in the repo and fixed the image formatting so they actually show up while scrolling. kept the existing entries, dates and hours the same.
+
 # 2026-10-05: finish the new bms layout
 
 **Total time spent: 5 hours**
@@ -22,6 +46,7 @@ added firmware support for the new monitor, including cell-voltage limits, charg
 the saved bms now has zero unconnected items and zero physical drc errors. the schematic connections, footprints and all six main power paths check out too. rebuilt the pcbway files, bom, placements and assembly drawings from that board. the first assembly leaves three drive links out so i can configure it and test startup, current limiting and fault shutdown before connecting the battery pack.
 
 ![bms front with the connectors on top](docs/images/journal/2026-10-05-bms-front.png)
+
 ![bms back after routing](docs/images/journal/2026-10-05-bms-back.png)
 
 # 2026-10-2: start reworking the bms for more battery power
@@ -41,7 +66,11 @@ finished the four hdmi pairs and the ethernet controller’s data and clock conn
 also found a missing 1 mm piece in one of the nvme receive traces. recovered the original segment from an older revision and restored the connection without changing the surrounding routing. cleaned up a small usb shortcut and improved the checks for disconnected paths, unwanted branches and pair spacing.
 the saved board now has zero drc errors, and its connections match the schematic. refreshed the component positions, height information and cable exports for the case. the three moved parts clear the modelled wires, and all 18 wire paths still meet their bend and length limits. there are 1,795 connections left to route on the main board.
 
-images: https://cdn.hackclub.com/01a0f9df-cb7d-7e5f-bbd6-6ba9e2ddb4f2/Screenshot%202026-10-01%20at%2019.49.30.png https://cdn.hackclub.com/01a0f9df-cd88-7933-95b0-f3e3a2529a1a/Screenshot%202026-10-01%20at%2019.49.37.png
+images:
+
+![fix the center routing and ground returns](docs/images/journal/imported/2026-10-01-01.png)
+
+![fix the center routing and ground returns](docs/images/journal/imported/2026-10-01-02.png)
 
 # 2026-10-1: rebuild the journal and add the missing pictures
 
@@ -49,7 +78,9 @@ images: https://cdn.hackclub.com/01a0f9df-cb7d-7e5f-bbd6-6ba9e2ddb4f2/Screenshot
 
 put the journal back together after the forge database incident. restored the missing entries, expanded the old short lists into proper devlogs, and added pictures from the saved boards, schematics and firmware. all 91 entries now have images. i kept the dates and recorded hours, removed the extra process commentary, and saved both keyboard timelapse links in their matching entries.
 
-image: ![hc cdn](https://cdn.hackclub.com/01a0f7c8-eac0-78b2-a227-a5a97765b5e5/Screenshot%202026-10-01%20at%2010.05.23.png)
+image:
+
+![hc cdn](docs/images/journal/imported/2026-10-01-03.png)
 
 # 2026-09-30: rework the board placement and fix more power stuff
 
@@ -59,7 +90,13 @@ i stopped trying to keep everything on top and did a much bigger placement pass 
 i also integrated the revised 100 W power circuit, corrected the charger current limits and standby-current handling, added missing bypass capacitors, and made a proper footprint for the power MOSFETs. i checked the maximum heights of all 392 underside parts and exported their positions for the case design. the BMS manufacturing package was regenerated and checked too.
 the schematics and board connections match, both I/O boards have zero physical DRC errors, and the firmware passes all 34 host tests and its ARM build. the center board still has routing errors to fix.
 
-images: ![image.png](https://cdn.hackclub.com/01a0f4b6-bee1-7dd2-b181-0124cfafe835/image.png)![image.png](https://cdn.hackclub.com/01a0f4b7-2686-7600-a9a2-4de267322587/image.png)![image.png](https://cdn.hackclub.com/01a0f4b7-c2f3-7f3e-9e4b-9a92a46cf959/image.png)
+images:
+
+![image.png](docs/images/journal/imported/2026-09-30-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-30-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-30-03.png)
 
 # 2026-09-29: work on standby power and update the pd configs
 
@@ -67,7 +104,9 @@ images: ![image.png](https://cdn.hackclub.com/01a0f4b6-bee1-7dd2-b181-0124cfafe8
 
 worked on the 100 W power redesign, mainly the standby supply and Mu regulator. added controlled startup and current limiting to the standby circuit, and changed its battery feed so that current goes through the charger’s measurement shunt. checked component tolerances and corrected several resistor ordering codes. the Mu supply now has two current-sense resistors in parallel, and i adjusted its power budget to leave enough room for the fan.
 also exported fresh 20 V / 5 A configurations for both USB-C controllers and checked the generated files. corrected the BMS shunt part number and rebuilt its assembly package without changing the routing. the firmware tests and ARM build pass. main-board placement is still unfinished, especially around the charger’s gate-drive and bootstrap parts, so those changes haven’t been applied to the saved main boards yet. no new routing was added.
-image: ![image.png](https://cdn.hackclub.com/01a0efc6-5c2e-71a8-8fb6-01ceb362e8d0/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-09-29-01.png)
 
 # 2026-09-29: more keyboard routing
 
@@ -75,7 +114,9 @@ image: ![image.png](https://cdn.hackclub.com/01a0efc6-5c2e-71a8-8fb6-01ceb362e8d
 
 did some keyboard routing! rerouted the updated led signals and power stuff.
 this was done yesterday, just forgot to devlog
-image: ![image.png](https://cdn.hackclub.com/01a0efc1-3d85-7710-8166-5ba21a2227ec/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-09-29-02.png)
 
 [lapse](https://lapse.hackclub.com/timelapse/cNIGQ1WzACUJ)
 
@@ -86,7 +127,7 @@ image: ![image.png](https://cdn.hackclub.com/01a0efc1-3d85-7710-8166-5ba21a2227e
 finished the bms routing after the connector and fuse changes, then cleaned up the weird bends and dangling tracks across the board. merged the tiny straight segments, removed unused vias, and replaced the old battery connector tail with a shorter connection. there are now 628 fewer track segments, without moving any components or mounting holes.
 fixed the supervisor ground return and current-sense pickup, checked all nine power paths, moved nine clipped labels and removed the last copper sliver. the saved board now has zero unconnected items, physical drc errors, dangling-copper warnings or silkscreen warnings. the pad and drill checks pass too. updated the layout report and readme, and pushed everything. the pcbway files still need regenerating for this revision before ordering.
 
-![image.png](https://cdn.hackclub.com/01a0e923-ffd7-7e82-9126-2c65b2d049aa/image.png)
+![image.png](docs/images/journal/imported/2026-09-28-01.png)
 
 # 2026-09-27: sort out the keyboard leds and fix more bms routing
 
@@ -95,7 +136,7 @@ fixed the supervisor ground return and current-sense pickup, checked all nine po
 the keyboard led wiring was crossing everywhere, so i changed the assignments to follow the actual rows and nearby columns. updated the schematic, pcb, firmware mapping and wiring reference together. kept all 65 local led joins, all 264 vias and the existing switch, power and i2c routing. only removed or trimmed old led links that conflicted with the new assignments. the mapping tests pass, and the keyboard still has four existing ground thermal errors to fix while routing.
 also continued repairing the bms around the connector changes. brought it from 85 unconnected items down to 5, restored more control and power connections, and extended the pours into the unused space near the edges. moved and shrank the current-sense test point and removed several vias that were cutting through the main power copper. compared the power paths against the previous board and checked each saved revision. the latest bms has zero physical drc errors, but still needs the last connections and final checks on the sensing and return paths before it is ready to order.
 
-![image.png](https://cdn.hackclub.com/01a0e51e-22b9-7be2-a4ab-f8d3c7724e75/image.png)
+![image.png](docs/images/journal/imported/2026-09-27-01.png)
 
 # 2026-09-26: work on the power redesign and case
 
@@ -106,7 +147,7 @@ changed the tall power connectors to low-profile WAGO terminals and updated the 
 expanded the case study into a full assembly with base and lid pieces, revised Framework hinge supports, keyboard and trackpad supports, battery trays, speaker and OLED mounts, and cooling reservations. added STEP/STL exports, mounting and fastener schedules, an interactive viewer, and open, closed, exploded and section views. the study exposed how much space the old plugs and wire bends needed. the final thickness is still undecided, and the case exports need updating for the revised connectors.
 the firmware host tests and all 19 power tests pass. all four updated schematics have zero ERC errors and match their PCB pin assignments. saved everything as a checkpoint and marked the previous BMS manufacturing files as outdated. routing, harness clearance and physical testing still need finishing.
 
-![image.png](https://cdn.hackclub.com/01a0dfe2-2960-74cb-a88f-0815222d30cb/image.png)
+![image.png](docs/images/journal/imported/2026-09-26-01.png)
 
 # 2026-09-26: start the case with the actual hinge mounts
 
@@ -115,7 +156,7 @@ the firmware host tests and all 19 power tests pass. all four updated schematics
 imported the original Framework 13 hinge models and revision-00 drawings. the left and right mounts are different: their base seating faces are 1.3 and 2.2 mm below the shared axis. the lid has stepped faces too. made separate backing plates, spacers and small printed fit gauges for both sides. the editable source, STEP files, STLs and dimensioned mount drawings are together in mechanical/case-prototype.
 the replacement photos were useful here. the three lid screws are two M2 screws and one smaller M1.6 screw. the extra large hole is part of the Framework display mounting arrangement. the two base screws use the middle round and slotted holes, not the outer locating holes. the new plates have their own chassis bolts, clear of the hinge screw heads.
 
-![image.png](https://cdn.hackclub.com/01a0de16-3aae-7fc4-8980-43c5b14e48ac/image.png)
+![image.png](docs/images/journal/imported/2026-09-26-02.png)
 
 # 2026-09-25: fix charging without the os and sort out the mu model
 
@@ -124,7 +165,7 @@ the replacement photos were useful here. the three lid screws are two M2 screws 
 fixed the mu ultra model so it sits correctly in the socket, without changing the actual board placement or routing. also fixed the charging logic so it doesn't depend on the OS being running. added checks for charging during startup, shutdown, missing load readings and temperature faults.
 expanded the power calculator to account for converter limits and battery assistance. all software tests and the firmware build passed. the bigger 100w power redesign is drafted and saved, but still needs integration and board changes before it's ready.
 
-![image.png](https://cdn.hackclub.com/01a0db14-1962-7f1c-bd83-7a2260e7e4d4/image.png)
+![image.png](docs/images/journal/imported/2026-09-25-01.png)
 
 # 2026-09-24: start switching the carrier to mu ultra
 
@@ -133,14 +174,17 @@ expanded the power calculator to account for converter limits and battery assist
 started converting the carrier to the mu ultra, with the 226v first and room to upgrade to the 256v later. checked all 260 module contacts, moved the usb connections that changed, and moved hdmi to TCP2. pin 136 used to be ground but is now reserved, so that connection is gone. also replaced the nvme clock-request pull-down with the proper connection to the module.
 changed the internal usb hub from two ports to three so the trackpad can share it with the audio codec and optional radio. made the hub footprint match the manufacturer’s drawing and placed the trackpad power-control parts. removed 51 obsolete trace/via items around the changed connections, while keeping the rest of the routing and existing component positions.
 the schematic checks and 13 interface tests passed, and both boards’ pad connections match their schematics. there’s still routing and existing DRC issues to finish. decided on 100w usb-c input, but the charger, 12v supply and safe transition to battery power still need redesigning. the bms and keyboard are unchanged.
-image: ![image.png](https://cdn.hackclub.com/01a0d5e2-19a8-78be-ab90-9b54ebf7b8fc/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-09-24-01.png)
 
 # 2026-09-23: keyboard routing
 
 **Total time spent: 1 hour**
 
 did some routing on the keyboard. did the switches, mcu, and led power, but not yet led signal.
-![image.png](https://cdn.hackclub.com/01a0cfe4-15ad-78ab-98d3-2944ba79d0ae/image.png)
+
+![image.png](docs/images/journal/imported/2026-09-23-01.png)
 
 [lapse](https://lapse.hackclub.com/timelapse/IrWANT44CM27)
 
@@ -169,6 +213,7 @@ exported and checked all four copper layers, drills, stencil files, the electric
 the saved board still has zero physical drc errors, zero unconnected items and no schematic mismatches. all 28 power-path cases passed. bundled everything with assembly drawings, order settings and file checksums. the notes ask for prices for one and two assembled boards. i still need to get the parts and manufacturing details confirmed with pcbway before paying.
 
 ![BMS front prepared for PCBWay on 22 september 2026](docs/images/journal/2026-09-22-bms-front.png)
+
 ![BMS back prepared for PCBWay on 22 september 2026](docs/images/journal/2026-09-22-bms-back.png)
 
 # 2026-09-21: finished bms routing!!
@@ -182,6 +227,7 @@ i also reworked some power copper so the signal vias have enough clearance, then
 cleaned up the silkscreen and test-point numbers, added front and back assembly drawings, exported previews, and updated the mechanical files and docs. i also wrote down the remaining warnings so i can refer back to them when i get the board made.
 
 ![BMS front after routing on 21 september 2026](docs/images/journal/2026-09-21-bms-front.png)
+
 ![BMS back after routing on 21 september 2026](docs/images/journal/2026-09-21-bms-back.png)
 
 # 2026-09-20: more bms routing
@@ -221,21 +267,31 @@ i grouped the work into smaller sessions and kept the original dates and individ
 **Total time spent: 1 hour**
 
 worked on the bms thermal and control wiring and added nine connections. it still has 44 unconnected items, with no physical drc errors. also fixed the c2243 and r2254 datasheet links so they survive schematic generation. all 13 thermal tests passed. the generator fixes are committed, and the unfinished routing is saved locally.
-![image.png](https://cdn.hackclub.com/01a0b1d0-285f-77fe-9d2b-c9baa8bb3703/image.png)
+
+![image.png](docs/images/journal/imported/2026-09-18-01.png)
 
 # 2026-09-16: more routing: diff pairs + stm32
 
 **Total time spent: 1 hour**
 
 I realized that i did not need to have a whole bunch of grounded stitching vias in between the differential pairs, and i could have just run a ground trace between them, so that's what i did. also did some routing for the stm32, mostly the keyboard nets.
-screenshots: ![image.png](https://cdn.hackclub.com/01a0ac70-f6e3-75b8-b58d-57d1b7f6683a/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-1e37-7bca-bcf5-92ebb4256f29/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-3ee3-7403-be03-c81e1c5b4886/image.png)![image.png](https://cdn.hackclub.com/01a0ac71-6618-7479-94a5-9f860795def2/image.png)
+screenshots:
+
+![image.png](docs/images/journal/imported/2026-09-16-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-16-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-16-03.png)
+
+![image.png](docs/images/journal/imported/2026-09-16-04.png)
 
 # 2026-09-16: nextpcb sponsor!
 
 **Total time spent: 10 minutes**
 
 added nextpcb to the repo's sponsors section with their official logo and a link to their site. they're supporting pcb manufacturing and assembly for ducktop2.
-![image.png](https://cdn.hackclub.com/01a0aa19-004f-772c-8e63-c053212d5e7e/image.png)
+
+![image.png](docs/images/journal/imported/2026-09-16-05.png)
 
 # 2026-09-15: more routing
 
@@ -243,7 +299,8 @@ added nextpcb to the repo's sponsors section with their official logo and a link
 
 routed a lot of differential pairs, including gigabit ethernet and usb3 port, to the lattepanda mu. also did some miscellaneous routing.
 i forgot to start my lapse after like 15 minutes, so lapse only shows 50 minutes :(
-![image.png](https://cdn.hackclub.com/01a0a778-5296-75d3-84d0-2cfef724890c/image.png)
+
+![image.png](docs/images/journal/imported/2026-09-15-01.png)
 
 # 2026-09-14: put a lot of work into the bms and fixed the usb stuff
 
@@ -252,7 +309,19 @@ i forgot to start my lapse after like 15 minutes, so lapse only shows 50 minutes
 fixed the 42 usb spacing issues on the center board, corrected the m.2 socket and microphone models, and cleaned up stale footprint warnings. i also investigated the missing ground segment. it was an overlapping stub, so removing it hadn't broken the return path.
 most of this session went into the bms: temperature interlocks, isolated controls, the reset circuit and ground returns. some routes passed the normal checks but interrupted important copper paths, so i reworked those and compared the current paths before and after. i also checked smaller resistor and capacitor packages and updated their source definitions. the bms routing is still unfinished, so it isn't ready to order yet.
 
-screenshots: ![image.png](https://cdn.hackclub.com/01a0a1a9-cb19-751d-8837-10939e93d8a2/image.png)![image.png](https://cdn.hackclub.com/01a0a1a9-e5af-7a3a-8361-3989a1dc7640/image.png)![image.png](https://cdn.hackclub.com/01a0a1aa-0aea-7d0c-bd47-e1c45108a213/image.png)![image.png](https://cdn.hackclub.com/01a0a1aa-2a7d-7fc3-80a3-92872410e5d9/image.png)![image.png](https://cdn.hackclub.com/01a0a1aa-4c87-7977-8b9b-e385e3eb6aa2/image.png)![image.png](https://cdn.hackclub.com/01a0a1aa-81ba-7731-a964-bcae3956b353/image.png)
+screenshots:
+
+![image.png](docs/images/journal/imported/2026-09-14-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-14-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-14-03.png)
+
+![image.png](docs/images/journal/imported/2026-09-14-04.png)
+
+![image.png](docs/images/journal/imported/2026-09-14-05.png)
+
+![image.png](docs/images/journal/imported/2026-09-14-06.png)
 
 # 2026-09-13: fix the pcie routing and ground layers
 
@@ -262,14 +331,24 @@ reworked the nvme and wifi pcie routing. the fast signals now use F.Cu, In2.Cu a
 fixed placement collisions and the maker supply trace that crossed its switching keepout. corrected the ethernet controller's pcie link to the 85 ohm netclass, while keeping its mdi pairs at 100 ohms. added checks for complete pair lengths, local fanouts and spacing further along each trace. all 12 pcie paths pass the layout checks, and all 49 tests passed.
 updated the board documentation and assembly coordinates, keeping the 358 mm span and both 1.5 mm board gaps. saved and reopened the board to verify the changes survived correctly. there are still 1,725 unconnected items and 42 usb spacing findings to work through. the full assembly export also needs the existing bms connector mismatch resolved.
 
-screenshots: ![image.png](https://cdn.hackclub.com/01a09c07-55e5-7f60-a3ce-c0dd5a8d76f0/image.png)![image.png](https://cdn.hackclub.com/01a09c07-77c6-726a-8476-2915a4094eb3/image.png)![image.png](https://cdn.hackclub.com/01a09c07-c8a0-76a1-96fa-7d2436d5e0a7/image.png)
+screenshots:
+
+![image.png](docs/images/journal/imported/2026-09-13-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-13-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-13-03.png)
 
 # 2026-09-13: length matched pcie diff pairs
 
 **Total time spent: 30 minutes**
 
 I forgot to do length matching on the pcie differential pairs last time, so i did it now. luckily it wasnt too much work, because kicad has a very helpful tool for this.
-screenshot: ![image.png](https://cdn.hackclub.com/01a09a7a-cbc8-7020-a8d0-80245c8ff7db/image.png)![image.png](https://cdn.hackclub.com/01a09a7a-fdb1-7c5e-8cb9-02117fc967f2/image.png)
+screenshot:
+
+![image.png](docs/images/journal/imported/2026-09-13-04.png)
+
+![image.png](docs/images/journal/imported/2026-09-13-05.png)
 
 # 2026-09-12: finish wifi routing and do fpc routing
 
@@ -277,14 +356,25 @@ screenshot: ![image.png](https://cdn.hackclub.com/01a09a7a-cbc8-7020-a8d0-80245c
 
 i finished the wifi routing, with the leftover stuff that wasnt part of the diff pairs, and the main thing i did now was both io fpc connectors. i routed a fanout of vias, and then i had to put ground lines through them as well, which was hard and annoying. i couldnt put the ground vias on the other side because the spec sheet of the connector says there needs to be a keepout there.
 screenshots:
-![image.png](https://cdn.hackclub.com/01a097b9-920a-75a4-9757-afb81dfcb68d/image.png)![image.png](https://cdn.hackclub.com/01a097b9-b020-74bc-b1c1-cb9c6429cdca/image.png)![image.png](https://cdn.hackclub.com/01a097b9-d0ed-79f3-b395-d41d5ff13941/image.png)
+
+![image.png](docs/images/journal/imported/2026-09-12-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-12-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-12-03.png)
 
 # 2026-09-12: Routed the diff pairs for the nvme
 
 **Total time spent: 1.5 hours**
 
 i routed the differential pairs, 4 total because 4 lanes, of the pcie3 nvme ssd. i had to use some vias for shifting layers, but i did my best to keep everything in their pairs. i also did the gnd stitching of the lattepanda, and added the coupling capacitors for the pcie lanes.
-images: ![image.png](https://cdn.hackclub.com/01a0965a-6405-7440-81f2-12dc98443ecf/image.png)![image.png](https://cdn.hackclub.com/01a0965a-9e48-73d8-961d-963e89f0d228/image.png)![image.png](https://cdn.hackclub.com/01a0965a-b620-7a9f-82db-05393e690eec/image.png)
+images:
+
+![image.png](docs/images/journal/imported/2026-09-12-04.png)
+
+![image.png](docs/images/journal/imported/2026-09-12-05.png)
+
+![image.png](docs/images/journal/imported/2026-09-12-06.png)
 
 # 2026-09-11: more routing, more checking
 
@@ -292,7 +382,17 @@ images: ![image.png](https://cdn.hackclub.com/01a0965a-6405-7440-81f2-12dc98443e
 
 did more maker mcu routing, continued the bms thermal and control routing, including a smaller test point to make room for the comparator signals. the first temperature channel repair has passed its local checks, and the cell-monitor connections are being rebuilt around it. the cable now is a compact soldered one for the board seams and bms.
 
-images: ![image.png](https://cdn.hackclub.com/01a0927b-a4e7-76e5-8df7-a3133809aa2c/image.png)![image.png](https://cdn.hackclub.com/01a0927c-726f-7408-b4dd-666ed6aa2340/image.png)![image.png](https://cdn.hackclub.com/01a0927c-9e45-7050-a2d4-2aeadc26c867/image.png)![image.png](https://cdn.hackclub.com/01a0927c-dc0d-7b6d-a1b9-36a28f56fe1f/image.png)![image.png](https://cdn.hackclub.com/01a0927d-1dc2-798d-b391-58c5b657984c/image.png)
+images:
+
+![image.png](docs/images/journal/imported/2026-09-11-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-11-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-11-03.png)
+
+![image.png](docs/images/journal/imported/2026-09-11-04.png)
+
+![image.png](docs/images/journal/imported/2026-09-11-05.png)
 
 # 2026-09-11: did some center board routing
 
@@ -300,7 +400,15 @@ images: ![image.png](https://cdn.hackclub.com/01a0927b-a4e7-76e5-8df7-a3133809aa
 
 I did some routing for the keybaord FFC connector (the 1k resistors), and also some routing for the maker mcu gpio pins.
 
-screenshots: ![image.png](https://cdn.hackclub.com/01a090f6-6fda-7765-8fbb-2e0754340826/image.png)![image.png](https://cdn.hackclub.com/01a090f6-8dc4-70c2-a681-094ce0c58372/image.png)![image.png](https://cdn.hackclub.com/01a090f6-c898-766a-a8f3-08beac6e475e/image.png)![image.png](https://cdn.hackclub.com/01a090f6-fc76-7ca8-9eb6-2854b35496aa/image.png)
+screenshots:
+
+![image.png](docs/images/journal/imported/2026-09-11-06.png)
+
+![image.png](docs/images/journal/imported/2026-09-11-07.png)
+
+![image.png](docs/images/journal/imported/2026-09-11-08.png)
+
+![image.png](docs/images/journal/imported/2026-09-11-09.png)
 
 # 2026-09-10: did a lot of work, on the center and right board
 
@@ -311,7 +419,13 @@ corrected hdmi pairs and usb routing on the right board. the radio’s component
 cleaned up more outdated documentation and tightened the board checks. reviewed footprint differences are now tied to the actual saved components, so later changes need another review. all 159 design tests pass, and the left, center, right and radio boards pass their board-level preparation checks.
 the mechanical exporter now follows the actual pcb outlines and includes connectors on the underside. this also caught a proposed cable connector sitting beyond the shortened right board, so that placement was rejected. bms routing and the final power-cable fit are still unfinished, and those trials are kept separate from the saved boards.
 
-images: ![image.png](https://cdn.hackclub.com/01a08d84-4489-7b85-b5c1-880328fe6189/image.png) ![image.png](https://cdn.hackclub.com/01a08d85-01a6-79bc-827f-b313c70a80a6/image.png)![image.png](https://cdn.hackclub.com/01a08d85-2a2e-78fa-b1d0-5580223b3ad0/image.png)
+images:
+
+![image.png](docs/images/journal/imported/2026-09-10-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-10-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-10-03.png)
 
 # 2026-09-09: left board changes!
 
@@ -322,7 +436,9 @@ also cleaned up the footprint copies and crowded reference labels. the checks co
 spent more time checking the power limits and firmware behavior. the two usbc power controllers now have separate configurations for their actual ports. USB startup allowance is now 5.6 A, with 5.5 A steady, and losing the system supply leaves the USB power fault latched until it can be cleared safely. the design/import tests and firmware host tests pass; hardware testing still needs to happen.
 fixed an import bug too: chips drawn across multiple schematic units could end up with broken component links on the PCB. those links now survive a normal save. my newer HDMI and USB routing on the right board is saved as well. the remaining center, right, and BMS revisions still need integration and checking, so there’s more to do before routing readiness or ordering boards.
 
-image: ![image.png](https://cdn.hackclub.com/01a0889c-8ede-7164-ade9-5d88fae6aafc/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-09-09-01.png)
 
 # 2026-09-09: started on the hdmi routing
 
@@ -330,7 +446,11 @@ image: ![image.png](https://cdn.hackclub.com/01a0889c-8ede-7164-ade9-5d88fae6aaf
 
 i did some hdmi routing. only the front layer to start. mostly all resistors/capacitors/diodes done, and ground planes.
 
-images: ![image.png](https://cdn.hackclub.com/01a08686-5018-73b4-a73a-3786f0d6f898/image.png)![image.png](https://cdn.hackclub.com/01a08686-7ad4-763d-adb6-e2f4c6f5c49c/image.png)
+images:
+
+![image.png](docs/images/journal/imported/2026-09-09-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-09-03.png)
 
 # 2026-09-08: fixed a whole bunch of stuff from an audit
 
@@ -343,11 +463,17 @@ spent quite a bit of time on the connections between boards too. the revised des
 the bms is still being reworked. a power-path check caught new signal routing breaking up the main battery return plane in the test layout. that version has not been applied. the return path needs to stay wide and continuous while the temperature sensing and isolated controls are added.
 also moved several connectors and both m.2 sockets to positions that make more sense for the laptop. those positions are saved now, but the card supports, cable access, and nearby components still need another fit check. the remaining main-board routing hasn’t started.
 
-images: ![image.png](https://cdn.hackclub.com/01a082c7-d06a-7c43-a760-4b9f2679363f/image.png)
-![image.png](https://cdn.hackclub.com/01a082c8-0e44-7c9d-a8e4-51cf00c01273/image.png)
-![image.png](https://cdn.hackclub.com/01a082c8-5b6b-7cf3-a45d-e529e60236a8/image.png)
-![image.png](https://cdn.hackclub.com/01a082c8-946c-7aa6-98cb-dee32462ceba/image.png)
-![image.png](https://cdn.hackclub.com/01a082c8-f000-79db-99d8-eec59b225a40/image.png)
+images:
+
+![image.png](docs/images/journal/imported/2026-09-08-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-08-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-08-03.png)
+
+![image.png](docs/images/journal/imported/2026-09-08-04.png)
+
+![image.png](docs/images/journal/imported/2026-09-08-05.png)
 
 # 2026-09-07: fixed a whole bunch of stuff to prepare for center board routing
 
@@ -359,7 +485,9 @@ i also regrouped the regulator capacitors, feedback networks, inductors, crystal
 the remaining work included cleaning up reference labels, restoring 18 connector mounting-pad grounds, fixing usb net names so kicad recognizes the differential pairs, and replacing obsolete routing keepouts. i also fixed an editing-tool bug that removed component models during rotation.
 all 5,197 checked pads match their schematics, all 27 regression tests pass, and all 67 (shush) electrical calculations pass. the center board is clean apart from its 2,038 airwires. i preserved the existing left-board and bms copper. routing is next, including correcting the left board’s existing usb widths and spacing.
 
-layout diagram: ![image.png](https://cdn.hackclub.com/01a07bb6-e3e9-743e-89d1-eb532020e2b5/image.png)
+layout diagram:
+
+![image.png](docs/images/journal/imported/2026-09-07-01.png)
 
 # 2026-09-06: changed oled connections, doing more stuff to make the routing ready
 
@@ -367,7 +495,7 @@ layout diagram: ![image.png](https://cdn.hackclub.com/01a07bb6-e3e9-743e-89d1-eb
 
 switched both oleds to wired connectors and moved the maker header beside the mu. fixed the copper-edge errors, cleaned up 37 placements, and tested the layer rules. center board drc is down from 158 to 61 errors; routing still needs doing.
 
-![image.png](https://cdn.hackclub.com/01a07765-7bde-7c10-92ec-07346f6e9836/image.png)
+![image.png](docs/images/journal/imported/2026-09-06-01.png)
 
 # 2026-09-06: did more stuff to prepare for center board routing
 
@@ -375,7 +503,9 @@ switched both oleds to wired connectors and moved the maker header beside the mu
 
 fixed the center board checks and documented what still needs work. corrected the board selection, net-name parsing, selector pin review, and test-point generation. added 20 regression tests.
 
-diagram showing clearance violations: ![image.png](https://cdn.hackclub.com/01a076e0-3efa-7be1-8200-1fde458e3d3a/image.png)
+diagram showing clearance violations:
+
+![image.png](docs/images/journal/imported/2026-09-06-02.png)
 
 # 2026-09-05: finish bms routing
 
@@ -386,27 +516,42 @@ finished the 4-layer bms routing. fixed the shunt sense paths and battery refere
 this took a lot of time because i already made the board as compact as i could, so i had to squeeze the new stuff in.
 
 screenshots of each layer:
-![image.png](https://cdn.hackclub.com/01a073a6-9048-7082-94d6-53b0e83836f3/image.png)
-![image.png](https://cdn.hackclub.com/01a073a6-bb19-744f-87be-656d787aa879/image.png)
-![image.png](https://cdn.hackclub.com/01a073a7-1d06-7e2b-930d-75ea6e5ffb24/image.png)
-![image.png](https://cdn.hackclub.com/01a073a7-4f0c-7bfe-899f-6fef67b0c379/image.png)
+
+![image.png](docs/images/journal/imported/2026-09-05-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-05-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-05-03.png)
+
+![image.png](docs/images/journal/imported/2026-09-05-04.png)
+
 render:
-![image.png](https://cdn.hackclub.com/01a073a7-a22c-71e5-b1bb-8f9ce35d2bbd/image.png)
-![image.png](https://cdn.hackclub.com/01a073a7-f8cb-76e4-9ba0-f12984ad3366/image.png)
+
+![image.png](docs/images/journal/imported/2026-09-05-05.png)
+
+![image.png](docs/images/journal/imported/2026-09-05-06.png)
 
 # 2026-09-05: clean up file structure and update documentation
 
 **Total time spent: 1 hour**
 
 i noticed the documentation was getting really outdated, as far as one month, and because i have made so much progress since then, it looks confusing. so, i updated all the documentation, and also cleaned up the file structure because it was messy.
-structure image: ![image.png](https://cdn.hackclub.com/01a0714b-6cee-7a22-875c-1106cb16ec58/image.png)
+structure image:
+
+![image.png](docs/images/journal/imported/2026-09-05-07.png)
 
 # 2026-09-04: 1/4 PCBs routed: BMS board routed!
 
 **Total time spent: 5 hours**
 
 I routed the BMS board. I kept in mind the trace thicknesses, because a lot of power will go through this. I had 2 uninterrupted ground zones in the inner 2 layers, and another two on the top and bottom. I also added stiching vias. Also there are mounting holes.
-Images: ![image.png](https://cdn.hackclub.com/01a06d38-73ad-7ae8-888b-2f76c6792516/image.png) ![image.png](https://cdn.hackclub.com/01a06d38-15cd-7c46-b633-3fdd64733ecf/image.png) ![image.png](https://cdn.hackclub.com/01a06d38-e662-782f-9ffe-5e293bdf5a61/image.png)
+Images:
+
+![image.png](docs/images/journal/imported/2026-09-04-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-04-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-04-03.png)
 
 # 2026-09-03: Finished and prepared the BMS pcb daughterboard for routing, and some other stuff
 
@@ -420,7 +565,9 @@ Images: ![image.png](https://cdn.hackclub.com/01a06d38-73ad-7ae8-888b-2f76c67925
 
 starting routing now
 
-image: ![image.png](docs/images/journal/history/2026-09-03-bms-placement-and-test-points.png)
+image:
+
+![image.png](docs/images/journal/history/2026-09-03-bms-placement-and-test-points.png)
 
 # 2026-09-02: I had someone audit the whole project (big thanks to them, they found a lot of stuff!) and fixed them
 
@@ -437,7 +584,15 @@ right now:
 - 6/6 connectors good
 - 0 shadow nets anywhere, ERC 0 x4
 
-images: ![image.png](https://cdn.hackclub.com/01a063ef-f55d-7c44-8241-8cc7a00cc101/image.png) ![image.png](https://cdn.hackclub.com/01a063f0-4abb-7da3-86b9-256b37882fc8/image.png) ![image.png](https://cdn.hackclub.com/01a063f0-8b43-7976-a5ff-e136b3a243ec/image.png) ![image.png](https://cdn.hackclub.com/01a063f0-d2ed-7eb3-b87e-5bc52f36aa95/image.png)
+images:
+
+![image.png](docs/images/journal/imported/2026-09-02-01.png)
+
+![image.png](docs/images/journal/imported/2026-09-02-02.png)
+
+![image.png](docs/images/journal/imported/2026-09-02-03.png)
+
+![image.png](docs/images/journal/imported/2026-09-02-04.png)
 
 # 2026-08-31: fixed an fpc connector issue
 
@@ -447,16 +602,26 @@ i found a problem. the fpc-1 and fpc-2 connectors are a part that doesn't exist.
 i replaced replaced both with the fh41-68s-0.5sh(05). 68 pins, and its a shielded ffc connector so the usb3/hdmi/gbe pairs get a shielded cable, which was the intent anyway. both pin maps are good (fpc-1 uses 1-53, fpc-2 uses 1-61). new footprint derived from kicad's fh41-30s, new 68-pin symbol, solder-hold pads tied to gnd as the shield return, cable spec updated. updated the nets as well.
 i also fixed some smaller stuff, like the placement of some components, clearing the shorts and other drc violations.
 screenshots:
-left io new fpc: ![image.png](https://cdn.hackclub.com/01a05810-569f-7cdc-b635-67d12af9d067/image.png)
-right io new fpc: ![image.png](https://cdn.hackclub.com/01a05810-9b77-7fc5-8a3b-d255848b156c/image.png)
-also updated on the main board: ![image.png](https://cdn.hackclub.com/01a05812-d01b-7f4d-9e83-1be18cbbbc22/image.png)
+left io new fpc:
+
+![image.png](docs/images/journal/imported/2026-08-31-01.png)
+
+right io new fpc:
+
+![image.png](docs/images/journal/imported/2026-08-31-02.png)
+
+also updated on the main board:
+
+![image.png](docs/images/journal/imported/2026-08-31-03.png)
 
 # 2026-08-30: wired up fpc connectors
 
 **Total time spent: 5 hours**
 
 every new daughterboards schematic has its hirose connector on it: fpc-1 and fpc-2 are 100-pin, fpc-3 is 30-pin, and all the boundary nets run through them. about to start routing!
-image: ![image.png](https://cdn.hackclub.com/01a0540f-7fe8-72c2-862e-d4ceb2ab4763/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-08-30-01.png)
 
 # 2026-08-30: made all .pcb files
 
@@ -467,10 +632,21 @@ pcbnew's python wrapper corrupts its own type table after a few hundred by-value
 drc: zero shorts on all three daughterboards, zero clearances on bms, all the remaining violations are pre existing footprint level stuff that's also on the original board. center board went from 51 shorts to 17 and none of those involve re placed parts. also generated the FH12-100S footprint (derived from the 50-pin, 100 pads, MP tabs) since kiCad doesn't ship one, and sorted out that kicad-cli resolves project rules from the cwd, which took way too long to figure out.
 
 pcb screenshots:
-main board:![image.png](https://cdn.hackclub.com/01a052bd-bdf4-7b2e-9065-1365d9742e35/image.png)
-left io board: ![image.png](https://cdn.hackclub.com/01a052be-4f9b-7ff1-bf6f-5930085ea273/image.png)
-right io board: ![image.png](https://cdn.hackclub.com/01a052be-cdac-7f9c-b18c-c9c345943fca/image.png)
-bms board: ![image.png](https://cdn.hackclub.com/01a052bf-5ab8-78bd-972e-e6aab283b037/image.png)
+main board:
+
+![image.png](docs/images/journal/imported/2026-08-30-02.png)
+
+left io board:
+
+![image.png](docs/images/journal/imported/2026-08-30-03.png)
+
+right io board:
+
+![image.png](docs/images/journal/imported/2026-08-30-04.png)
+
+bms board:
+
+![image.png](docs/images/journal/imported/2026-08-30-05.png)
 
 # 2026-08-29: center board got cut down
 
@@ -481,7 +657,9 @@ the hard part was the boundary. every net that crosses an fpc now has to exist o
 the verification system had to be rebuilt for four boards. the contract checker now takes a --project flag and runs the right checks against the right netlist, pd1 contracts on the left board, pd2/hdmi/gbe on the right, pack protection on the bms, everything else on center. same for the closure audit and the electrical calculations.
 the trim exposed 2 bugs. the daughterboard roots were placing their fpc boundary labels at arbitrary coordinates instead of on the sheet-pin endpoints, so the left and right boards internal wiring never actually connected to their own roots, the netlists showed the pd1 vbus rail as an orphan. and there was a duplicate ground pwrflag sitting on the same spot in the power sheet from my earlier edit, which the erc caught.
 
-image: ![image.png](https://cdn.hackclub.com/01a04f62-da9f-7f2d-9dc3-81e7f27977da/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-08-29-01.png)
 
 # 2026-08-29: bms board!!
 
@@ -489,7 +667,9 @@ image: ![image.png](https://cdn.hackclub.com/01a04f62-da9f-7f2d-9dc3-81e7f27977d
 
 the bms board has schematics now. 45 components. the protector filter networks. the bq77915 needs a divider and caps per cell tap, and the ltc4368 needs its uv/ov divider, gate slew network, and the whole fault/retry path.
 the board has the fuse, pack connector, both protectors (bq77915 primary + ltc4368 redundant), all four fets, both shunts, and the charge/discharge gate network.the fuel gauge is still on the center board, its i2c and alert lines go to the ec and the source manager, so it's electrically center bound even though it's battery stuff. the charger and ship fet stay center too. what crosses to center is just the pack terminals, fault lines, and 3v3: six nets on fpc-3.
-schematic image:![image.png](https://cdn.hackclub.com/01a04d8b-8873-7785-bc58-6ae7269bb790/image.png)
+schematic image:
+
+![image.png](docs/images/journal/imported/2026-08-29-02.png)
 
 # 2026-08-28: right I/O board!!
 
@@ -497,7 +677,15 @@ schematic image:![image.png](https://cdn.hackclub.com/01a04d8b-8873-7785-bc58-6a
 
 the right board (right_io/) has pd2 (u42), j11/j12 (already usb2), the hdmi chain, and gigabit ethernet. added to its own schematics and subproject.
 
-schematic screenshots: ![image.png](https://cdn.hackclub.com/01a04aad-9b86-74c4-b7c9-11e74763bedd/image.png)![image.png](https://cdn.hackclub.com/01a04aad-d4d7-738b-9755-ca4129571c8b/image.png)![image.png](https://cdn.hackclub.com/01a04aad-ff87-7c43-93ca-e20bdb208125/image.png)![image.png](https://cdn.hackclub.com/01a04aae-3524-7949-bed3-0aeb6034b237/image.png)
+schematic screenshots:
+
+![image.png](docs/images/journal/imported/2026-08-28-01.png)
+
+![image.png](docs/images/journal/imported/2026-08-28-02.png)
+
+![image.png](docs/images/journal/imported/2026-08-28-03.png)
+
+![image.png](docs/images/journal/imported/2026-08-28-04.png)
 
 # 2026-08-28: left I/O board!!
 
@@ -506,7 +694,13 @@ schematic screenshots: ![image.png](https://cdn.hackclub.com/01a04aad-9b86-74c4-
 the left board project exists now. it's a standalone kicad project in left_io/ with its own root schematic and two sheets, holding the hub, the pd1 chain, all five left ports, the usb-a cluster, the ss muxes, and the aux screw terminal — 261 components total.
 the aux screw terminal (j190) lives on the left board but its protection chain, fuse, tvs, reverse fet, the whole efuse, stays on center next to the vsys or-ing where it belongs. only the raw AUX_DC_RAW crosses the fpc. second, the left sheets are big because they reuse the main board's full layouts, that's fine for now, a compaction pass can come later.
 
-schematic screenshots: ![image.png](https://cdn.hackclub.com/01a04a06-a744-7335-806b-70d252e030aa/image.png)![image.png](https://cdn.hackclub.com/01a04a06-dc35-7b70-867f-cf2253f66e1d/image.png)![image.png](https://cdn.hackclub.com/01a04a07-0933-7700-ae05-c586b4ac1110/image.png)
+schematic screenshots:
+
+![image.png](docs/images/journal/imported/2026-08-28-05.png)
+
+![image.png](docs/images/journal/imported/2026-08-28-06.png)
+
+![image.png](docs/images/journal/imported/2026-08-28-07.png)
 
 # 2026-08-28: starting schematic edits
 
@@ -515,7 +709,9 @@ schematic screenshots: ![image.png](https://cdn.hackclub.com/01a04a06-a744-7335-
 first schematic edit for the split. the right-side usb-c ports (j11 and j12) are losing their super-speed lanes, because after the split there's no usb3 host port left on that side of the board, the mu has only one usb3 host, and it's feeding the left hub. so j11/j12 keep pd charging (15v sink, 5v/0.9a source) and usb2 data, but their ss pins are now no-connect.
 the work was mostly in the generators. j11's port lost its tusb1142 redriver and the whole ss coupling/esd chain. j12 lost its hd3ss6126 orientation mux. the hub's ds1 and ds4 ports became usb2-only, their ss pins (7/8/10/11 and 36/37/39/40) are retired to nc, keeping only the d+/d- pairs that feed the ports' usb2.
 net result: 16 ss nets deleted, and the schematic gate is back to pass — closure 1574/0, contracts ok, erc 0, and the pin review table at 2602/2602 all pass.
-image: ![image.png](https://cdn.hackclub.com/01a049ce-d680-7cdf-b744-73d644c38625/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-08-28-08.png)
 
 # 2026-08-28: connectors picked, cuts validated, boards scaffolded
 
@@ -524,7 +720,9 @@ image: ![image.png](https://cdn.hackclub.com/01a049ce-d680-7cdf-b744-73d644c3862
 first, the fpc connectors. the obvious move was to stay in the hirose fh12 family, i already have that for the radio and keyboard (j2300, j310), so one family, one footprint style, one supplier. fpc-1 and fpc-2 get 100-pin versions, fpc-3 gets the same 30-pin part already in the BOM. the important thing i realized is that the impedance for the high-speed pairs is a cable spec, not a connector spec, the fh12 is just a 0.5mm interface, and the 90/100-ohm sections come from ordering impedance-controlled shielded ffc. so the connector decision is boring, which is exactly what you want.
 then i validated the cut lines against the actual mechanicals. left cut at x=70 clears the left mounting holes and the hinge notch with 22mm of connector space. right cut at x=300 keeps the right holes and hinge notch with 54mm of space. no hole straddles a cut, which would have been a nightmare for the chassis.
 next up is the actual schematic surgery: j11/j12 go usb2-only, the hub and pd1 chain move to the left board, pd2+hdmi+gbe move right, and the bms sheet gets built. that's the real work.
-image: ![image.png](https://cdn.hackclub.com/01a0499a-58b7-7725-b349-d5f355002ad4/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-08-28-09.png)
 
 # 2026-08-28: worked out the specs of the split. 4 boards, 3 fpc connectors.
 
@@ -539,7 +737,9 @@ the results surprised me a little:
 the pd controllers had to be split by function, not by side. pd1 chain goes left with the left ports, pd2 chain goes right with j11/j12. and i confirmed that j11/j12 going usb2-only kills 16 super-speed nets that would have been a nightmare to route across two fpc boundaries.
 one thing i didnt do for good reason: no vsys, no vbus_raw, no pphv over any fpc. only sys3v3 and usb_port5v cross, and those are the low-current class. running 8.6a of vsys through an ffc would need like 18 pins and would drop voltage anyway.
 the spec is committed and frozen. next is picking the actual ffc connectors, validating the cut lines against the mounting holes, and then the schematic work.
-image: ![image.png](https://cdn.hackclub.com/01a04970-aae1-7313-9f65-4255538c6313/image.png)
+image:
+
+![image.png](docs/images/journal/imported/2026-08-28-10.png)
 
 # 2026-08-28: Big change: splitting the PCB into multiple daughterboards.
 
@@ -557,14 +757,17 @@ the rule that kept me honest: nothing high-current crosses an fpc. no vsys, no v
 the connectors stay exactly where they are today, the only electrical change is the two right-side usb-c ports become usb2. i'd rather have 5 usb3 ports that are actually good than 7 ports where half are running super-speed lanes across 300mm of fpc.
 this is a big layout job — moving the hub and pd chain to the left board, redoing zones for 4 boards, three fpc connectors — but it fixes the actual problems (decoupling, hub fanout, respin cost) instead of papering over them.
 
-mock up of the splits: ![image.png](https://cdn.hackclub.com/01a0490a-68b1-773a-9575-819af38c85ab/image.png)
+mock up of the splits:
+
+![image.png](docs/images/journal/imported/2026-08-28-11.png)
 
 # 2026-08-27: LattePanda MU power and ground routing
 
 **Total time spent: 15 minutes**
 
 wired all the gnd stitching vias to the lattepanda mu, and also the 12 volt net. also routed miscellaneous nets.
-![image.png](https://cdn.hackclub.com/01a04484-f2fa-772a-8d0f-dda4058154a3/image.png)
+
+![image.png](docs/images/journal/imported/2026-08-27-01.png)
 
 # 2026-07-02: initial project setup
 
@@ -1024,19 +1227,34 @@ wrote up how the power islands should be arranged on the inner power layer. the 
 
 i documented that arrangement for the routing work, including how the separate rails should stay distinct. this was a planning and documentation session for the power layer; the pictures show the board i was using while working it out.
 
-![Screenshot_2026-08-27_at_13.50.28.png](https://cdn.hackclub.com/01a0445c-9019-7fef-a079-2795fc54d2f0/Screenshot_2026-08-27_at_13.50.28.png)
-![Screenshot_2026-08-27_at_13.50.36.png](https://cdn.hackclub.com/01a0445c-88bf-7293-b4a7-17e53fc211ac/Screenshot_2026-08-27_at_13.50.36.png)
-![Screenshot_2026-08-27_at_13.50.49.png](https://cdn.hackclub.com/01a0445c-878e-7920-8afe-d62ad111fe86/Screenshot_2026-08-27_at_13.50.49.png)
-![Screenshot_2026-08-27_at_13.51.02.png](https://cdn.hackclub.com/01a0445c-8918-78fa-be9e-9139f733ea99/Screenshot_2026-08-27_at_13.51.02.png)
-![Screenshot_2026-08-27_at_13.51.15.png](https://cdn.hackclub.com/01a0445c-7acf-7d15-9243-0419b7d7638e/Screenshot_2026-08-27_at_13.51.15.png)
-![Screenshot_2026-08-27_at_13.51.28.png](https://cdn.hackclub.com/01a0445c-8a39-7c83-b561-85f4c6efb3ca/Screenshot_2026-08-27_at_13.51.28.png)
-![Screenshot_2026-08-27_at_13.51.41.png](https://cdn.hackclub.com/01a0445c-8b4e-7ffc-91fc-97281ed9fed2/Screenshot_2026-08-27_at_13.51.41.png)
-![Screenshot_2026-08-27_at_13.51.57.png](https://cdn.hackclub.com/01a0445c-85a5-7275-a78a-80709adb04cf/Screenshot_2026-08-27_at_13.51.57.png)
-![Screenshot_2026-08-27_at_13.52.21.png](https://cdn.hackclub.com/01a0445c-7a63-76e6-9e95-feeab91d41ed/Screenshot_2026-08-27_at_13.52.21.png)
-![Screenshot_2026-08-27_at_13.52.32.png](https://cdn.hackclub.com/01a0445c-8615-796c-9c15-28fc8250076e/Screenshot_2026-08-27_at_13.52.32.png)
-![Screenshot_2026-08-27_at_13.52.47.png](https://cdn.hackclub.com/01a0445c-84f4-7e82-9686-8d427443ac1f/Screenshot_2026-08-27_at_13.52.47.png)
-![Screenshot_2026-08-27_at_13.52.55.png](https://cdn.hackclub.com/01a0445c-89b1-7123-9c68-9b411397cba0/Screenshot_2026-08-27_at_13.52.55.png)
-![Screenshot_2026-08-27_at_13.53.03.png](https://cdn.hackclub.com/01a0445c-8bbd-73d3-a4c2-9e4ed64f2fc4/Screenshot_2026-08-27_at_13.53.03.png)
-![Screenshot_2026-08-27_at_13.53.44.png](https://cdn.hackclub.com/01a0445c-8733-761b-82ca-6d1c6f7adbe8/Screenshot_2026-08-27_at_13.53.44.png)
-![Screenshot_2026-08-27_at_13.54.28.png](https://cdn.hackclub.com/01a0445c-8bf5-7077-bd14-64a2bf529805/Screenshot_2026-08-27_at_13.54.28.png)
-![Screenshot_2026-08-27_at_13.54.37.png](https://cdn.hackclub.com/01a0445c-82f6-7259-9a74-9089135c7363/Screenshot_2026-08-27_at_13.54.37.png)
+![Screenshot_2026-08-27_at_13.50.28.png](docs/images/journal/imported/2026-08-27-02.png)
+
+![Screenshot_2026-08-27_at_13.50.36.png](docs/images/journal/imported/2026-08-27-03.png)
+
+![Screenshot_2026-08-27_at_13.50.49.png](docs/images/journal/imported/2026-08-27-04.png)
+
+![Screenshot_2026-08-27_at_13.51.02.png](docs/images/journal/imported/2026-08-27-05.png)
+
+![Screenshot_2026-08-27_at_13.51.15.png](docs/images/journal/imported/2026-08-27-06.png)
+
+![Screenshot_2026-08-27_at_13.51.28.png](docs/images/journal/imported/2026-08-27-07.png)
+
+![Screenshot_2026-08-27_at_13.51.41.png](docs/images/journal/imported/2026-08-27-08.png)
+
+![Screenshot_2026-08-27_at_13.51.57.png](docs/images/journal/imported/2026-08-27-09.png)
+
+![Screenshot_2026-08-27_at_13.52.21.png](docs/images/journal/imported/2026-08-27-10.png)
+
+![Screenshot_2026-08-27_at_13.52.32.png](docs/images/journal/imported/2026-08-27-11.png)
+
+![Screenshot_2026-08-27_at_13.52.47.png](docs/images/journal/imported/2026-08-27-12.png)
+
+![Screenshot_2026-08-27_at_13.52.55.png](docs/images/journal/imported/2026-08-27-13.png)
+
+![Screenshot_2026-08-27_at_13.53.03.png](docs/images/journal/imported/2026-08-27-14.png)
+
+![Screenshot_2026-08-27_at_13.53.44.png](docs/images/journal/imported/2026-08-27-15.png)
+
+![Screenshot_2026-08-27_at_13.54.28.png](docs/images/journal/imported/2026-08-27-16.png)
+
+![Screenshot_2026-08-27_at_13.54.37.png](docs/images/journal/imported/2026-08-27-17.png)

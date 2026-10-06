@@ -1,9 +1,35 @@
 import unittest
 
-from part_identity import decode, engineering_value, identity_errors
+from part_identity import decode, engineering_value, identity_errors, ordering_errors
 
 
 class PartIdentity(unittest.TestCase):
+    def test_capacitor_base_code_is_not_an_order_code(self):
+        for code in ('GRM21BR71H105KA01', 'GRM1555C1H150JA01',
+                     'GRM1885C1H122JA01', 'GRM155R61A475KE15'):
+            with self.subTest(code=code):
+                self.assertIsNotNone(decode(code))
+                self.assertTrue(ordering_errors(code))
+        for code in ('GRM1555C1H150JA01D', 'GRM1555C1H120JA01J',
+                     'GRM21BR71H474KA88L', 'C0603C473K5RACTU'):
+            self.assertEqual(ordering_errors(code), [])
+        self.assertTrue(ordering_errors('GRM1555C1H150JA01#'))
+
+    def test_replacement_caps_reject_wrong_values_packages_and_ratings(self):
+        for mpn, label, package in (
+            ('C2012X7R1H105K125AB', '1u 50V 10%', 'Capacitor_SMD:C_0805_2012Metric'),
+            ('C1005X5R1A475K050BC', '4.7u 10V 10%', 'ducktop2:C_0402_RP2350_Regulator'),
+            ('C0603C103K5RACTU', '10n 50V 10%', 'Capacitor_SMD:C_0603_1608Metric'),
+            ('C0603C180J5GACTU', '18p 50V 5%', 'Capacitor_SMD:C_0603_1608Metric'),
+            ('C0603C473K5RACTU', '47n 50V 10%', 'Capacitor_SMD:C_0603_1608Metric'),
+        ):
+            with self.subTest(mpn=mpn):
+                self.assertEqual(identity_errors(label, package, mpn), [])
+                self.assertTrue(identity_errors('100u 100V 1%', package, mpn))
+                self.assertTrue(identity_errors(label, 'Capacitor_SMD:C_1206_3216Metric', mpn))
+                self.assertTrue(identity_errors(label + ' 100V', package, mpn))
+                self.assertTrue(identity_errors(label.replace('10%', '1%').replace('5%', '1%'), package, mpn))
+
     def test_reviewed_bourns_kelvin_parts_reject_wrong_value_or_package(self):
         cases = (
             ('CSS2H-2512K-3L00F', .003, '3mOhm 1% 4W', 'ducktop2:Bourns_CSS2H_2512_Kelvin'),

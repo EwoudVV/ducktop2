@@ -82,6 +82,11 @@ the CLI can exit successfully while reporting violations unless
 `--exit-code-violations` is requested. zero unconnected items proves only
 connectivity under the board's current pad-net assignments.
 
+[the main-board ERC warning check](hardware/erc-warnings.md) verifies cached
+symbol definitions and the documented PD/redriver ground ties. all electrical
+errors fail. unknown warnings, changed symbol pins and changed controller
+settings also fail. the raw warnings remain visible in KiCad.
+
 ## schematic-to-board comparison
 
 compare physical reference, pad number, and assigned net against the fresh

@@ -1,6 +1,6 @@
 # i/o power looms and ground bounds
 
-30 september 2026. these are the loom and return-current limits for the
+updated 5 october 2026. these are the loom and return-current limits for the
 100 W power revision. the calculation passes with the conditions below;
 the assembled harnesses and operating profiles have not been qualified.
 [power revision status](power-revision.md) records the board checkpoint.
@@ -64,8 +64,9 @@ cut-length allowances, clamps and service access. 20..100 mm and
 400..420 mm are electrical bounds, not finished cut lists. 420 mm remains
 the nominal direct-loom cut target. the complete installed route still
 needs a fit check after power placement; a flat plan view does not prove
-case clearance. protected BMS power uses its separate WAGO 2060-452 link,
-and the raw pack uses the four-contact Molex 43045-0400 map in the
+case clearance. protected BMS power uses its separate WAGO 2060-452 link.
+the raw pack uses another two-pole WAGO, with the cell taps on a separate
+JST GH connector. use the current pin maps in the
 [cable document](cables-and-connectors.md#bms-wiring).
 
 ## voltage and input power
@@ -247,8 +248,9 @@ constraints remain separate in
 [signal_interconnect_contract.py](../../gen/signal_interconnect_contract.py).
 
 externally imposed ground-loop current, ESD and electrical faults are
-outside this normal-load sum. the current pack fuse is the 5 A Schurter
-HCF, not an instantaneous 5 A clamp. use the actual source fault current,
+outside this normal-load sum. the current pack fuse is the 10 A Schurter
+HCF 3-101-051. its marking does not set the instantaneous fault current.
+use the actual source fault current,
 fuse clearing-time and total-energy bounds, capacitor discharge, background
 load and temperature when checking braid and small-conductor pulses.
 that fault-energy and ESD qualification remains open.

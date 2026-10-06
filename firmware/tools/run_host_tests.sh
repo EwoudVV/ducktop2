@@ -172,6 +172,13 @@ COMMON_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Werror"
 python3 "$ROOT/tests/test_tps25751_config.py"
 "$CC_BIN" $COMMON_FLAGS -I"$ROOT/ec_target" -I"$ROOT/ec/include" "$ROOT/ec/src/ec_policy.c" "$ROOT/tests/test_power_profile.c" -o "$BUILD_DIR/power_profile_tests"
 "$BUILD_DIR/power_profile_tests"
+for PACK_TEST_REVISION in 2 3; do
+    "$CC_BIN" $COMMON_FLAGS -DDUCKTOP2_PACK_HARDWARE_REVISION="$PACK_TEST_REVISION" \
+        -I"$ROOT/ec_target" -I"$ROOT/ec/include" \
+        "$ROOT/ec/src/ec_policy.c" "$ROOT/tests/test_pack_current_policy.c" \
+        -o "$BUILD_DIR/pack_current_policy_$PACK_TEST_REVISION"
+    "$BUILD_DIR/pack_current_policy_$PACK_TEST_REVISION"
+done
 python3 "$ROOT/tests/test_pd_headroom.py"
 python3 "$ROOT/tools/verify_release_contract.py"
 

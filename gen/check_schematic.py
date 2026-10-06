@@ -7,7 +7,7 @@ import re
 import subprocess
 import sys
 import tempfile
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 
 
@@ -40,141 +40,10 @@ EXPECTED_SHEETS = [
     "15_system_audio.kicad_sch",
 ]
 
-# These symbols are stock KiCad `extends` variants.  The generator deliberately
-# embeds their complete flattened parent geometry so generated schematics are
-# self-contained, which makes KiCad compare the flattened copy against the
-# property-only stock child and report lib_symbol_mismatch.  Match the complete
-# warning signature and reference so no unrelated warning can pass unnoticed.
-ALLOWED_ERC_WARNINGS = Counter({
-    (
-        "warning", "lib_symbol_mismatch",
-        "Symbol '74AHCT1G126' doesn't match copy in library '74xGxx'",
-        ("Symbol U311 [74AHCT1G126]",),
-    ): 1,
-    (
-        "warning", "lib_symbol_mismatch",
-        "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
-        ("Symbol U123 [TPD4E05U06DQA]",),
-    ): 1,
-    (
-        "warning", "lib_symbol_mismatch",
-        "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
-        ("Symbol U133 [TPD4E05U06DQA]",),
-    ): 1,
-    (
-        "warning", "lib_symbol_mismatch",
-        "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
-        ("Symbol U143 [TPD4E05U06DQA]",),
-    ): 1,
-    (
-        "warning", "lib_symbol_mismatch",
-        "Symbol 'TLV9061xDBV' doesn't match copy in library 'Amplifier_Operational'",
-        ("Symbol U431 [TLV9061xDBV]",),
-    ): 1,
-})
-
-# Board split Phase 2.4: the FPC boundary signals moved to the left/right
-# daughterboards.  Their center-side receivers are now driven across the FPCs
-# (and by the FPC connector symbols added in Phase 4), so KiCad reports the
-# inputs as undriven.  Each allowed entry is pinned to the exact physical
-# signal and reference so any NEW undriven input still fails the check.
-for pin, name in (
-    ("16", "HSIO0_RX+"), ("18", "HSIO0_RX-"),
-    ("22", "HSIO1_RX+"), ("24", "HSIO1_RX-"),
-    ("64", "HSIO6_RX+"), ("66", "HSIO6_RX-"),
-    ("102", "~{CLKREQ4}"), ("187", "TCP2_HPD"),
-):
-    ALLOWED_ERC_WARNINGS[(
-        "error", "pin_not_driven",
-        "Input pin not driven by any Output pins",
-        (f"Symbol A1 Pin {pin} [{name}, Input, Line]",),
-    )] += 1
-# U15 (LTC4418 PD selector) V1 input: the selector moved to the left board,
-# so its center-side power input is only connected through the FPC boundary.
-ALLOWED_ERC_WARNINGS[(
-    "error", "power_pin_not_driven",
-    "Input Power pin not driven by any Output Power pins",
-    ("Symbol U15 Pin 17 [V1, Power input, Line]",),
-)] += 1
-
-# Board split Phase 2.4 FPC boundary labels: each root-level hier label on the
-# center connects to exactly one center-side pin today; the other side is the
-# FPC connector symbol added in Phase 4.  Allowlist these exact label names so
-# any OTHER isolated label still fails the check.
-_FPC_BOUNDARY_LABELS = [
-    "AUX_DC_RAW", "GBE_CLKREQ_N", "GBE_HOST_RX_N", "GBE_HOST_RX_P",
-    "GBE_HOST_TX_N", "GBE_HOST_TX_P", "GBE_REFCLK_N", "GBE_REFCLK_P",
-    "PACK_RETRY_PULSE", "PD1_EFUSE_FAULT_N", "PD1_I2C_SCL", "PD1_I2C_SDA",
-    "PD1_PATH_EN", "PD1_TCPC_IRQ_N", "PD1_VALID_N", "PD1_VBUS_RAW",
-    "PD2_EFUSE_FAULT_N", "PD2_I2C_SCL", "PD2_I2C_SDA", "PD2_PATH_EN",
-    "PD2_TCPC_IRQ_N", "PD2_VALID_N", "PD2_VBUS_RAW",
-    "TCP2_DDC_SCL", "TCP2_DDC_SDA", "TCP2_HPD",
-    "TCP2_TX0_N", "TCP2_TX0_P", "TCP2_TX1_N", "TCP2_TX1_P",
-    "TCP2_TXRX0_N", "TCP2_TXRX0_P", "TCP2_TXRX1_N", "TCP2_TXRX1_P",
-    "USBC1_DN", "USBC1_DP", "USBC1_SSRX_N", "USBC1_SSRX_P",
-    "USBC1_SSTX_N", "USBC1_SSTX_P",
-    "USBC2_DN", "USBC2_DP", "USBC2_SSRX_N", "USBC2_SSRX_P",
-    "USBC2_SSTX_N", "USBC2_SSTX_P",
-]
-for _label in _FPC_BOUNDARY_LABELS:
-    for _kind in ("Hierarchical Label", "Label"):
-        ALLOWED_ERC_WARNINGS[(
-            "warning", "isolated_pin_label",
-            "Label connected to only one pin",
-            (f"{_kind} '{_label}'",),
-        )] += 1
-
-# Board split Phase 2.4 pass-through FPC nets: HUB_DS1_DP/DM cross FPC-1 and
-# FPC-2 through the center with no center-side component; FG_VSS and
-# PACK_POS_FUSED are FPC-3 boundary nets whose center-side host is the gauge/
-# ship-FET only; USB_PD_SELECTED and USB_PORT_5V are consumed by the left
-# board's selector now.  Their root labels are Phase 4 connector placeholders.
-for _label in ("HUB_DS1_DN", "HUB_DS1_DP", "FG_VSS", "PACK_POS_FUSED",
-               "USB_PD_SELECTED", "USB_PORT_5V"):
-    ALLOWED_ERC_WARNINGS[(
-        "error", "label_dangling",
-        "Label not connected",
-        (f"Label '{_label}'",),
-    )] += 1
-
-# The user-facing maker header adds eight more instances of the same flattened
-# stock TPD4E05U06 variant. Keep the allowlist reference-specific so a warning
-# on any other symbol or failure mode still fails the check.
-for ref in ("U914", "U915", "U916", "U917", "U918", "U919", "U920", "U921",
-            "U1745", "U1765", "U1785"):
-    ALLOWED_ERC_WARNINGS[(
-        "warning", "lib_symbol_mismatch",
-        "Symbol 'TPD4E05U06DQA' doesn't match copy in library 'Power_Protection'",
-        (f"Symbol {ref} [TPD4E05U06DQA]",),
-    )] += 1
-
-# The TPS25751A unused GPIO/USB pins and the TUSB1142 GPIO-mode SDA strap are
-# tied to ground exactly as required by their datasheets. KiCad reports the
-# intentional connection only because the global GND PWR_FLAG is a power-output
-# pin. Keep every allowed warning tied to one physical reference and pin.
-for ref in ("U41", "U42"):
-    for pin, name in (
-        ("5", "GPIO0/LD1"), ("6", "GPIO1"), ("7", "GPIO2/LD2"),
-        ("13", "GPIO11"), ("19", "GPIO3"),
-        ("27", "GPIO5/USB_N"),
-    ):
-        ALLOWED_ERC_WARNINGS[(
-            "warning", "pin_to_pin",
-            "Pins of type Bidirectional and Power output are connected",
-            (
-                "Symbol #FLG005 Pin 1 [Power output, Line]",
-                f"Symbol {ref} Pin {pin} [{name}, Bidirectional, Line]",
-            ),
-        )] += 1
-for ref in ("U2000", "U2010"):
-    ALLOWED_ERC_WARNINGS[(
-        "warning", "pin_to_pin",
-        "Pins of type Bidirectional and Power output are connected",
-        (
-            "Symbol #FLG005 Pin 1 [Power output, Line]",
-            f"Symbol {ref} Pin 22 [AEQENZ/SDA, Bidirectional, Line]",
-        ),
-    )] += 1
+# Warning classification checks the actual cached symbol, net and controller
+# configuration. Electrical errors are never exempted.
+from verify_erc_warnings import SchematicIndex, classify, report_items
+from verify_electrical_calculations import component_values
 
 
 def fail(message):
@@ -197,38 +66,6 @@ def find_kicad_cli():
         except (FileNotFoundError, subprocess.CalledProcessError):
             continue
     fail("could not find kicad-cli; set KICAD_CLI")
-
-
-def collect_erc_items(path):
-    data = json.loads(path.read_text())
-    items = []
-
-    def walk(value):
-        if isinstance(value, dict):
-            if "severity" in value and ("description" in value or "message" in value):
-                items.append(value)
-            for child in value.values():
-                walk(child)
-        elif isinstance(value, list):
-            for child in value:
-                walk(child)
-
-    walk(data)
-    return items
-
-
-def erc_signature(item):
-    child_descriptions = tuple(sorted(
-        child.get("description", "")
-        for child in item.get("items", [])
-        if isinstance(child, dict)
-    ))
-    return (
-        item.get("severity", ""),
-        item.get("type", ""),
-        item.get("description") or item.get("message") or "",
-        child_descriptions,
-    )
 
 
 def iter_symbol_blocks(text):
@@ -486,25 +323,19 @@ def main(argv=None):
     kicad_cli = find_kicad_cli()
     with tempfile.TemporaryDirectory(prefix="ducktop2_self_check_") as temp_dir:
         erc_path = Path(temp_dir) / "erc.json"
-        run([kicad_cli, "sch", "erc", "--format", "json", "--output", str(erc_path), "ducktop2.kicad_sch"])
-        erc_items = collect_erc_items(erc_path)
-        actual = Counter(erc_signature(item) for item in erc_items)
-        unexpected = actual - ALLOWED_ERC_WARNINGS
-        if unexpected:
-            for signature, count in unexpected.items():
-                severity, item_type, description, children = signature
-                print(
-                    f"{count}x {severity} {item_type}: {description}; items={children}",
-                    file=sys.stderr,
-                )
-            fail(f"ERC reported {sum(unexpected.values())} unexpected violation(s)")
-        if erc_items:
-            print(
-                f"ERC: 0 errors, {len(erc_items)} classified intentional warning(s)"
-            )
-
-        netlist_path = Path(temp_dir) / "ducktop2.net"
-        run([kicad_cli, "sch", "export", "netlist", "--output", str(netlist_path), "ducktop2.kicad_sch"])
+        netlist_path = Path(temp_dir) / "ducktop2.xml"
+        run([kicad_cli, "sch", "export", "netlist", "--format", "kicadxml",
+             "--output", str(netlist_path), "ducktop2.kicad_sch"])
+        run([kicad_cli, "sch", "erc", "--severity-all", "--format", "json",
+             "--output", str(erc_path), "ducktop2.kicad_sch"])
+        review = classify(report_items(erc_path),
+                          SchematicIndex(PROJDIR / "ducktop2.kicad_sch"),
+                          component_values(netlist_path), "center")
+        if not review["passed"]:
+            for item in review["unexpected"][:40]:
+                print(f"{item['severity']} {item['type']}: {item['description']}", file=sys.stderr)
+            fail(f"ERC reported {len(review['unexpected'])} unexplained violation(s)")
+        print(f"ERC: 0 errors, {len(review['accepted'])} verified warning(s)")
 
     print("ducktop2 schematic self-check OK")
 

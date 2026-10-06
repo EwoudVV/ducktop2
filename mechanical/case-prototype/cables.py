@@ -1,173 +1,346 @@
-"""Explicit plug envelopes, numbered wire curves and hinge cable reservations."""
+"""Current power wires, continuous guides and independent case-mounted clamps.
+
+Inputs use installed X,Y,H (H up). geom() converts to construction X,-Y,H.
+STEP export rotates the whole assembly, giving X,Y,-H. No parts are mirrored.
+"""
+import json
 import math
+import hashlib
+from functools import wraps
 import numpy as np
 import cadquery as cq
-from cad import box, cylinder, compound
+from cad import HERE,ROOT,box,cylinder,compound,render
+from harness_geometry import paths
+from case_inputs import path as input_path
 
 
-def arch(a,b,z1,z2,r,length,wire_radius,hidden=8):
-    """Exact tangent circular arcs between upward vertical wire exits.
+def cached_geometry(fn):
+    @wraps(fn)
+    def wrapper(*args):
+        payload=json.dumps([np.asarray(a).tolist() for a in args],separators=(',',':'))
+        key=hashlib.sha256((fn.__name__+'-v3'+payload).encode()).hexdigest()
+        folder=ROOT/'.workbench/case-prototype/harness-brep';folder.mkdir(parents=True,exist_ok=True)
+        path=folder/(key+'.brep')
+        if path.exists():return cq.Shape.importBrep(str(path))
+        result=fn(*args)
+        if not result.isValid():raise ValueError(fn.__name__+' produced an invalid solid')
+        result.exportBrep(str(path))
+        return result
+    return wrapper
 
-    Extra vertical lead accommodates unequal connector heights. The 2D curve
-    lies in the plane joining the actual numbered pin locations.
+
+def geom(points):
+    return [cq.Vector(float(x),float(-y),float(h)) for x,y,h in points]
+
+
+def path_edge(points):
+    return cq.Edge.makeSplineApprox(geom(points),tol=.008,minDeg=3,maxDeg=6)
+
+
+@cached_geometry
+def tube(points,radius,inner=None):
+    edge=path_edge(points);origin=edge.startPoint();direction=edge.tangentAt(0)
+    outer=cq.Wire.makeCircle(radius,origin,direction)
+    holes=[cq.Wire.makeCircle(inner,origin,direction)] if inner else []
+    try:
+        s=cq.Solid.sweep(outer,holes,edge,True,False,mode=cq.Wire.assembleEdges([edge.translate((0,0,10))]))
+        if s.isValid():return s
+    except Exception:pass
+    a=loft_path(points,lambda o,n,h,u:cq.Wire.makeCircle(radius,o,n))
+    if inner:a=a.cut(loft_path(points,lambda o,n,h,u:cq.Wire.makeCircle(inner,o,n)))
+    return a
+
+
+def loft_path(points,profile):
+    # Ruled stations no farther than 1 mm apart. At the tightest 9 mm bend,
+    # the centerline chord error is below 0.014 mm, within guide clearance.
+    p=np.array(points);s=np.r_[0,np.cumsum(np.linalg.norm(np.diff(p,axis=0),axis=1))]
+    at=np.linspace(0,s[-1],int(math.ceil(s[-1]))+1)
+    q=np.column_stack([np.interp(at,s,p[:,i]) for i in range(3)])
+    v=geom(q);profiles=[]
+    for i,o in enumerate(v):
+        normal=(v[min(i+1,len(v)-1)]-v[max(0,i-1)]).normalized()
+        horizontal=cq.Vector(-normal.y,normal.x,0).normalized();up=normal.cross(horizontal).normalized()
+        profiles.append(profile(o,normal,horizontal,up))
+    return cq.Solid.makeLoft(profiles,ruled=True)
+
+
+def sweep_rect(points,x0,z0,width,height):
+    edge=path_edge(points);normal=edge.tangentAt(0)
+    horizontal=cq.Vector(-normal.y,normal.x,0).normalized()
+    plane=cq.Plane(edge.startPoint(),xDir=horizontal,normal=normal)
+    profile=cq.Workplane(plane).moveTo(x0,z0).rect(width,height,centered=False).val()
+    return cq.Solid.sweep(profile,[],edge,True,False)
+
+
+@cached_geometry
+def guide(points,od,clearance,wall):
+    r=od/2+clearance;outer=r+wall
+    edge=path_edge(points);normal=edge.tangentAt(0)
+    horizontal=cq.Vector(-normal.y,normal.x,0).normalized()
+    up=normal.cross(horizontal).normalized();origin=edge.startPoint()
+    def p(radius,angle):
+        a=math.radians(angle)
+        return origin+horizontal.multiply(radius*math.cos(a))+up.multiply(radius*math.sin(a))
+    # Single closed C-profile avoids a coincident swept-slot boolean. Its
+    # 90 degree opening faces up throughout the near-horizontal cable run.
+    profile=cq.Wire.assembleEdges([
+        cq.Edge.makeThreePointArc(p(outer,135),p(outer,270),p(outer,405)),
+        cq.Edge.makeLine(p(outer,405),p(r,405)),
+        cq.Edge.makeThreePointArc(p(r,405),p(r,270),p(r,135)),
+        cq.Edge.makeLine(p(r,135),p(outer,135))])
+    try:
+        solid=cq.Solid.sweep(profile,[],edge,True,False,mode=cq.Wire.assembleEdges([edge.translate((0,0,10))]))
+        if solid.isValid():return solid
+    except Exception:pass
+    def station(o,n,h,u):
+        def v(R,a):return o+h.multiply(R*math.cos(math.radians(a)))+u.multiply(R*math.sin(math.radians(a)))
+        return cq.Wire.assembleEdges([cq.Edge.makeThreePointArc(v(outer,135),v(outer,270),v(outer,405)),
+            cq.Edge.makeLine(v(outer,405),v(r,405)),cq.Edge.makeThreePointArc(v(r,405),v(r,270),v(r,135)),
+            cq.Edge.makeLine(v(r,135),v(outer,135))])
+    return loft_path(points,station)
+
+
+def polygon_prism(points,h,height):
+    return cq.Workplane('XY').polyline([(x,-y) for x,y in points]).close().extrude(height).val().translate((0,0,h))
+
+
+def nearest_x(route,x):
+    p=np.array(route['points']);return p[np.argmin(abs(p[:,0]-x))]
+
+
+def strain_clamp(m,name,route_rows,anchor_x,front_gap=False,foot_x=None,dogleg=False):
+    """Split clamp on a separate insulating seam pedestal.
+
+    Rigid bores clear maximum wire OD. Replaceable slit TPU liners provide
+    grip; hard stops prevent uncontrolled screw compression. No PCB holes or
+    copper hold-down pads carry cable pull loads.
     """
-    a=np.array([a[0],-a[1]]);b=np.array([b[0],-b[1]])
-    distance=float(np.linalg.norm(b-a));u=(b-a)/distance
-    zbase=max(z1,z2);extra=abs(z2-z1);free=length-hidden-extra
-    if distance>=2*r:
-        minimum=math.pi*r+distance-2*r
-        segments=[('arc',(r,0),math.pi,math.pi/2),('line',(r,r),(distance-r,r)),('arc',(distance-r,0),math.pi/2,0)]
-    else:
-        alpha=math.acos((distance/2+r)/(2*r));h=math.sqrt(4*r*r-(distance/2+r)**2)
-        minimum=r*(math.pi+4*alpha)
-        segments=[('arc',(-r,0),0,alpha),('arc',(distance/2,h),math.pi+alpha,-alpha),('arc',(distance+r,0),math.pi-alpha,math.pi)]
-    if free<minimum:
-        return None,[],{'fits_length':False,'minimum_cut_length_mm':minimum+hidden+extra,'requested_cut_length_mm':length,'pin_span_mm':distance,'bend_radius_mm':r}
-    leg=(free-minimum)/2
-    def pt(x,z):return cq.Vector(float(a[0]+u[0]*x),float(a[1]+u[1]*x),float(zbase+leg+z))
-    edges=[];sample=[]
-    first=cq.Vector(float(a[0]),float(a[1]),z1);start=pt(0,0)
-    if (start-first).Length>1e-6:edges.append(cq.Edge.makeLine(first,start))
-    sample.extend([first.toTuple(),start.toTuple()])
-    for seg in segments:
-        if seg[0]=='line':
-            q1=pt(*seg[1]);q2=pt(*seg[2])
-            if (q2-q1).Length>1e-6:edges.append(cq.Edge.makeLine(q1,q2))
-            sample.extend([q1.toTuple(),q2.toTuple()])
-        else:
-            _,(cx,cz),ang1,ang2=seg
-            f=lambda t:pt(cx+r*math.cos(t),cz+r*math.sin(t))
-            edges.append(cq.Edge.makeThreePointArc(f(ang1),f((ang1+ang2)/2),f(ang2)))
-            sample.extend(f(t).toTuple() for t in np.linspace(ang1,ang2,50))
-    end=pt(distance,0);last=cq.Vector(float(b[0]),float(b[1]),z2)
-    if (last-end).Length>1e-6:edges.append(cq.Edge.makeLine(end,last))
-    sample.extend([end.toTuple(),last.toTuple()])
-    path=cq.Wire.assembleEdges(edges)
-    profile=cq.Wire.makeCircle(wire_radius,first,cq.Vector(0,0,1))
-    solid=cq.Solid.sweep(profile,[],path,True,False)
-    return solid,sample,{'fits_length':True,'cut_length_mm':length,'hidden_allowance_mm':hidden,
-        'exposed_length_mm':path.Length(),'minimum_bend_radius_mm':r,'pin_span_mm':distance,
-        'max_height_mm':solid.BoundingBox().zmax,'curve':'tangent circular arcs; bundle not independently routed'}
+    from build import CONFIG
+    print('building '+name,flush=True)
+    foot_x=anchor_x if foot_x is None else foot_x
+    pts=[nearest_x(r,anchor_x) for r in route_rows]
+    ylo=min(p[1] for p in pts)-4.3;yhi=max(p[1] for p in pts)+4.3
+    zlo=min(p[2]-r['wire_od_mm']/2 for p,r in zip(pts,route_rows))-1
+    split=max(p[2] for p in pts)+.05;top=max(p[2]+r['wire_od_mm']/2 for p,r in zip(pts,route_rows))+1
+    floor=CONFIG['base']['floor'];width=6
+    screw_length=math.floor((top-zlo-.2)*2)/2
+    # A stepped parting line opens each bore at its own wire height, including
+    # the vertically separated USB pair. No wire is trapped in a closed bore.
+    bands=sorted(zip(pts,route_rows),key=lambda q:q[0][1])
+    body=None;cap=None
+    for i,(pt,row) in enumerate(bands):
+        low=ylo if i==0 else (bands[i-1][0][1]+pt[1])/2
+        high=yhi if i==len(bands)-1 else (pt[1]+bands[i+1][0][1])/2
+        level=float(pt[2])
+        bs=box(anchor_x-width/2,low,zlo,width,high-low,level-zlo)
+        cs=box(anchor_x-width/2,low,level,width,high-low,top-level)
+        body=bs if body is None else body.fuse(bs)
+        cap=cs if cap is None else cap.fuse(cs)
+    liners=[]
+    for p,r in zip(pts,route_rows):
+        arr=np.array(r['points']);take=arr[(arr[:,0]>=anchor_x-4)&(arr[:,0]<=anchor_x+4)]
+        if len(take)<3:take=arr
+        bore=tube(take,r['wire_od_mm']/2+.35)
+        if not hasattr(m,'clamp_bores'):m.clamp_bores={}
+        m.clamp_bores.setdefault(name,[]).append(bore)
+        body=body.cut(bore);cap=cap.cut(bore)
+        liner=tube(take,r['wire_od_mm']/2+.34,r['wire_od_mm']/2-.025)
+        liner=liner.intersect(box(anchor_x-2.6,ylo,zlo,5.2,yhi-ylo,top-zlo))
+        # Slit liner can open around an already terminated wire.
+        liner=liner.cut(box(anchor_x-3,p[1]-.07,p[2],6,.14,4))
+        liners.append(liner)
+    footwidth=6 if dogleg else 7
+    foot=box(foot_x-footwidth/2,190 if front_gap else ylo,floor,footwidth,10 if front_gap else yhi-ylo,2)
+    web=box(foot_x-2,192,floor+1.8,4,4,zlo-floor-.8) if front_gap else box(foot_x-.5,ylo,floor+1.8,1,yhi-ylo,zlo-floor-1.8)
+    if not front_gap and foot_x!=anchor_x:
+        web=web.fuse(box(min(foot_x-.5,anchor_x-3),ylo,7.0,abs(anchor_x-foot_x)+1,yhi-ylo,split-7.0))
+    if dogleg:
+        body=body.fuse(box(anchor_x-3,yhi-3,zlo,6,187.5-yhi+3,1))
+        body=body.fuse(box(foot_x-2,186,zlo,anchor_x+5-foot_x,1.5,1))
+        body=body.fuse(box(foot_x-2,186,zlo,4,10,1))
+    elif front_gap:body=body.fuse(box(anchor_x-3,yhi-3,zlo,6,196-yhi+3,1))
+    body=body.fuse(web).fuse(foot)
+    for yy in [ylo+1.7,yhi-1.7]:
+        body=body.cut(cylinder(anchor_x,yy,zlo-.1,.8,split-zlo+.2))
+        cap=cap.cut(cylinder(anchor_x,yy,split-.1,1.1,top-split+.2))
+        m.mount(name+f'-cap-{yy:.2f}',anchor_x,yy,top,'split clamp to insulating pedestal',2.2,'M2',split-zlo,screw_length,
+                'TPU liner; dielectric pedestal; independent of PCB','trim nylon screw to listed length; verify blind engagement and pullout in coupon')
+        m.add(name+f'-cap-screw-{yy:.2f}',cylinder(anchor_x,yy,top-screw_length,1,screw_length).fuse(cylinder(anchor_x,yy,top,2,2)),
+              'hardware','nylon',False,False,harness_fastener=True,service_removable=True)
+        m.add(name+f'-driver-access-{yy:.2f}',cylinder(anchor_x,yy,top+2,2.5,18),'keepout','service reservation',False,False,service=True)
+        fy=(192 if yy<=(ylo+yhi)/2 else 198) if front_gap else yy
+        body=body.cut(cylinder(foot_x,fy,floor-.1,.8,2.2))
+        for q in m.parts:
+            if q['name'].startswith('base-') and q['group']=='structure':q['shape']=q['shape'].cut(cylinder(foot_x,fy,-.1,1.1,floor+.2))
+        m.mount(name+f'-floor-{fy:.2f}',foot_x,fy,floor+2,'pedestal foot to base from underside',2.2,'M2',2,4,
+                'insulating pedestal; heads outside electronics','2 mm pilot engagement; coupon pull test before fitting wires')
+    m.add(name+'-pedestal',body,'supports',harness_part=True)
+    m.add(name+'-cap',cap,'supports',harness_part=True,service_removable=True)
+    for i,s in enumerate(liners):m.add(name+f'-liner-{i+1}',s,'supports','TPU',harness_part=True,intentional_wire_grip=True)
+    return body
+
+
+def middle_support(m,label,rows,x):
+    """Ribbed cantilever from the gap between cells, not from their surfaces."""
+    from build import CONFIG
+    floor=CONFIG['base']['floor'];pts=[nearest_x(r,x) for r in rows]
+    support_top=min(p[2]-r['wire_od_mm']/2-.55 for p,r in zip(pts,rows))-.15
+    y0=min(p[1] for p in pts)-2
+    beam=box(x-5,y0,support_top-4.5,10,198-y0,4.5)
+    if label=='right':
+        # Open-bottom crossing slots preserve the known J2 straight exit.
+        # The residual beam ligament is a fit-test item, not a load approval.
+        for yy in [169.448,173.448]:
+            beam=beam.cut(box(x-6,yy-1.2,support_top-4.6,12,2.4,14.2-(support_top-4.6)))
+    column=box(x-3,192,floor+1.8,6,6,support_top-floor-1.8)
+    foot=box(x-4,190,floor,8,12,2)
+    beam=beam.fuse(column).fuse(foot)
+    for p,r in zip(pts,rows):
+        bottom=p[2]-r['wire_od_mm']/2-.55
+        boss=box(x-2,p[1]-2,support_top-.1,4,4,bottom-support_top+.6)
+        arr=np.array(r['points']);local=arr[(arr[:,0]>=x-4)&(arr[:,0]<=x+4)]
+        boss=boss.cut(tube(local,r['wire_od_mm']/2+.15))
+        beam=beam.fuse(boss)
+    for yy in [192,200]:
+        beam=beam.cut(cylinder(x,yy,floor-.1,.8,2.2))
+        for p in m.parts:
+            if p['name'].startswith('base-') and p['group']=='structure':p['shape']=p['shape'].cut(cylinder(x,yy,-.1,1.1,floor+.2))
+        m.mount(f'USB-{label}-middle-anchor-{yy}',x,yy,floor+2,'independent USB guide rib to floor in cell gap',2.2,'M2',2,4,
+                'all dielectric; no cell contact','fit and deflection test under dressed-wire load required')
+    m.add('harness-USB-'+label+'-middle-rib',beam,'supports',harness_part=True)
+
+
+def integrate_guides(m,groups):
+    """Turn intersecting guide/pedestal seats into real manufactured carriers.
+
+    Only deliberate mating pairs are fused. Crossings between unrelated
+    routes stay separate and are reported by the collision checks.
+    """
+    jobs=[]
+    for group in ['left-J2430','left-J2450','left-J2460','right-main-power','right-J2462','bms-power']:
+        prefix='harness-BMS' if group=='bms-power' else 'harness-'+group
+        names={r['name'] for r in groups[group]}
+        jobs.append((prefix,[p for p in m.parts if p.get('guide_for') in names or p['name']==prefix+'-pedestal']))
+    for side,suffix in [('left','-1'),('right','-2')]:
+        prefix='harness-USB-'+side
+        jobs.append((prefix,[p for p in m.parts if (p.get('guide_for','').startswith('usb5-') and p['name'].endswith(suffix)) or p['name'] in [prefix+'-pedestal',prefix+'-middle-rib']]))
+    for name,pieces in jobs:
+        if not pieces:continue
+        shape=pieces[0]['shape']
+        for p in pieces[1:]:shape=shape.fuse(p['shape'])
+        for bore in m.clamp_bores[name]:shape=shape.cut(bore)
+        cap=next(p for p in m.parts if p['name']==name+'-cap')
+        shape=shape.cut(cap['shape'])
+        if name=='harness-USB-left':shape=clean_left_usb_trim(shape)
+        if name=='harness-left-J2450':
+            # Native center-board connector corner, plus 0.3 mm clearance.
+            shape=shape.cut(box(72.9,116.25,6.4,18.7,6.2,2.637))
+            for p in pieces:
+                if p['name'].endswith('-pedestal'):
+                    p['shape']=p['shape'].cut(box(72.9,116.25,6.4,18.7,6.2,2.637))
+        removed={p['name'] for p in pieces}
+        m.parts=[p for p in m.parts if p['name'] not in removed]
+        m.add(name+'-carrier',shape,'supports',harness_part=True,integrated_from=sorted(removed))
+        if not hasattr(m,'collision_primitives'):m.collision_primitives={}
+        m.collision_primitives[name+'-carrier']=[p['shape'] for p in pieces]
+
+
+def clean_left_usb_trim(shape):
+    """Remove only a tiny detached chip left by the cap-relief boolean."""
+    solids=shape.Solids()
+    if len(solids)==1:return shape
+    main=[s for s in solids if s.Volume()>.2]
+    chips=[s for s in solids if s.Volume()<=.2]
+    if len(main)!=1 or not chips or any(s.BoundingBox().DiagonalLength>2 for s in chips):
+        raise ValueError('USB carrier has a real disconnected piece, not a trim chip')
+    return main[0]
 
 
 def add_cables(m):
-    from build import CONFIG,fp,installed,pcb_top,stroke
-    c=CONFIG['cables']
-    for name,ends,count in [('left',[('center','J2430'),('left','J2431')],12),('right',[('center','J2432'),('right','J2433')],10)]:
-        data=[]
-        for board,ref in ends:
-            f=fp(board,ref);pins={p['number']:installed(board,p['position']) for p in f['pads'] if p['number'].isdigit()}
-            data.append(pins)
-            pts=list(pins.values());xmin=min(p[0] for p in pts)-4.5;xmax=max(p[0] for p in pts)+4.5
-            ymin=min(p[1] for p in pts)-4.5;ymax=max(p[1] for p in pts)+4.5
-            plug=box(xmin,ymin,pcb_top(board),xmax-xmin,ymax-ymin,c['microfit_mated_height'])
-            # Individual exit bores make pin numbering visible in the housing envelope.
-            for px,py in pts:plug=plug.cut(cylinder(px,py,pcb_top(board)+10,1,8))
-            m.add(ref+'-mated-housing-envelope',plug,'hardware','reference',False,False)
-        wires=[]
-        for pin in range(1,count+1):
-            a=data[0][str(pin)];b=data[1][str(pin)]
-            shape,samples,record=arch(a,b,pcb_top(ends[0][0])+c['microfit_mated_height'],pcb_top(ends[1][0])+c['microfit_mated_height'],
-                          c['microfit_bend_radius'],c['microfit_wire_length'],c['microfit_wire_radius'],c['hidden_crimp_allowance'])
-            record.update(loom=name,pin=pin,a_xy=a,b_xy=b,reference_parts=[x[1] for x in ends])
-            m.cable_records.append(record)
-            if shape:
-                m.add(f'{name}-loom-wire-{pin}',shape,'cables','wire',False,False)
-                wires.append((pin,np.array(samples)))
-        # Conservative sampled centre-distance screen, excluding shared housing exits.
-        conflicts=[]
-        for i,(pin,a) in enumerate(wires):
-            for pin2,b in wires[i+1:]:
-                d=float(np.linalg.norm(a[:,None,:]-b[None,:,:],axis=2).min())
-                if d<2*c['microfit_wire_radius']+.3:
-                    conflicts.append({'pins':[pin,pin2],'sampled_center_distance_mm':round(d,3)})
-        m.cable_records.append({'loom':name,'bundle_clearance_screen':conflicts,'passed':not conflicts,
-                               'boundary':'sampled independently calculated wires; no bundle routing qualification'})
-        if conflicts:m.findings.append(f'{name} Micro-Fit loom: {len(conflicts)} wire-pair clearance conflicts in independent arches; dress/replace harness before loaded assembly')
-    # BMS connector bodies follow the retained drawing bounds, not a thin generic line.
-    ends=[('center','J2071'),('bms','J2072')];pins=[]
-    for board,ref in ends:
-        f=fp(board,ref);x,y=installed(board,f['position'])
-        plug=box(x-4.265,y-4.82,pcb_top(board),8.53,9.64,c['bms_mated_height'])
-        m.add(ref+'-mated-envelope',plug,'hardware','reference',False,False)
-        pins.append({p['number']:installed(board,p['position']) for p in f['pads'] if p['number'].isdigit()})
-    for pin in ['1','2']:
-        a=pins[0][pin];b=pins[1][pin]
-        _,_,strict=arch(a,b,pcb_top('center')+17.56,pcb_top('bms')+17.56,17.78,75,.889)
-        shape,samples,proposed=arch(a,b,pcb_top('center')+17.56,pcb_top('bms')+17.56,7,75,.925)
-        proposed.update(loom='BMS',pin=pin,status='candidate 7 mm radius ONLY; wire selection and bend rating unresolved',alpha3253_screen=strict)
-        m.cable_records.append(proposed)
-        if shape:m.add('BMS-proposed-flex-wire-'+pin,shape,'cables','reference',False,False)
-    m.findings.append('BMS 75 mm budget does not accommodate the 17.78 mm Alpha 3253 arch. Displayed 7 mm candidate requires a qualified flexible wire or connector/routing change.')
-    # Six-position raw pack Mega-Fit and outgoing cable reservation.
-    f=fp('bms','J2');x,y=installed('bms',f['position'])
-    pts=[installed('bms',v) for ring in f['courtyards']['front'] for v in ring]
-    if pts:
-        xmin=min(v[0] for v in pts);xmax=max(v[0] for v in pts);ymin=min(v[1] for v in pts);ymax=max(v[1] for v in pts)
-        m.add('BMS-MegaFit-plug-reservation',box(xmin,ymin,pcb_top('bms'),xmax-xmin,ymax-ymin,16.78),'hardware','reference',False,False)
-        m.add('BMS-cell-tap-wire-bends',box(xmin,ymin,pcb_top('bms')+16.78,xmax-xmin,20,20),'keepout','reservation',False,False)
-    # Underside control/raw probe sockets are separate, insulated routes below BMS.
-    for ref in ['J2074','J2200']:
-        f=fp('bms',ref);x,y=installed('bms',f['position'])
-        m.add(ref+'-underside-plug-and-bend',box(x-5,y-4,3.4,10,12,7),'keepout','reservation',False,False)
-    # Direct USB power route: real connector endpoints, rounded-corner budget remains in docs.
-    a=installed('left',fp('left','J2434')['position']);b=installed('right',fp('right','J2435')['position'])
-    m.add('USB5-direct-loom-corridor',compound([box(a[0],a[1]-2,16,270-a[0],4,5),box(268,b[1],16,4,a[1]-b[1],5),box(270,b[1]-2,16,b[0]-270,4,5)]),'keepout','reservation',False,False)
-    # Hinge cable bend volume and slack bay. A 180-degree sweep pays out pi*R.
-    h=CONFIG['hinges'];hx=63;hy=h['pivot_y'];hh=h['pivot_height'];r=max(10,c['edp_min_bend_radius'])
-    torus=cq.Solid.makeTorus(r,c['edp_bundle_diameter']/2+1,cq.Vector(hx,-hy,hh),cq.Vector(1,0,0))
-    m.add('eDP-dynamic-bend-corridor',torus,'keepout','reservation',False,False)
-    m.add('eDP-service-slack-bay',box(66,2,17,52,21,6),'keepout','reservation',False,False)
-    route=[(210,-10,18),(175,12,22),(95,-10,20),(63,14,max(8,hh-10)),(63,20,hh)]
-    m.add('eDP-base-route-datum',stroke(route,1.5),'cables','reference',False,False)
-    m.add('eDP-lid-route-datum',stroke([(63,-hy-12,hh+7),(63,-hy-27,hh+12),(75,-hy-30,hh+12)],1.5),'cables','reference',True,False)
-    m.cable_records.append({'loom':'eDP','dynamic_bend_radius_mm':r,'bundle_diameter_mm':3,
-        'sweep_length_change_bound_mm':math.pi*r,'required_service_slack_mm':math.pi*r+c['edp_service_slack'],
-        'slack_bay_mm':[52,21,6],'status':'planar slack loop corridor and pay-out allowance only; connector datums, vendor flex radius and constant-length harness fit pending',
-        'route_waypoints_are_not_a_released_harness':True})
-    # Cable clamp bodies have a soft-lined channel; fastening never uses connector pads.
-    dt=CONFIG['base']['deck_top'];rear=CONFIG['base']['rear_wall_top'];floor=CONFIG['base']['floor']
-    for i,(x,y,z) in enumerate([(63,-16,max(floor+1,rear-6)),(93,-16,max(floor+1,min(30,rear-6))),(108,139,dt-16),(268,112,dt-19)]):
-        clamp=box(x-6,y-3,z,12,6,3)
-        clamp=clamp.cut(box(x-2,y-4,z-.1,4,8,2))
-        for xx in [x-4.5,x+4.5]:clamp=clamp.cut(cylinder(xx,y,z-.1,1.1,3.2))
-        m.add(f'cable-clamp-{i+1}',clamp,'supports')
-        for xx in [x-4.5,x+4.5]:m.mount(f'cable-clamp-{i+1}-{xx}',xx,y,z+3,'soft-lined clamp to separate bracket',2.2,'M2',3,6,'insulating liner','bracket position and service loop fit pending')
-        if i<2:
-            stand=box(x-7,y-4,floor,14,8,z-floor)
-            for xx in [x-4.5,x+4.5]:stand=stand.cut(cylinder(xx,y,floor-.1,.8,z-floor+.2))
-            m.add(f'cable-clamp-{i+1}-pedestal',stand,'supports')
-            m.mount(f'cable-clamp-{i+1}-pedestal',x,y,floor,'pedestal bonded to rear spine after cable fitting',0,'none',z-floor,'adhesive','insulating','bond preparation and pull test pending')
-    m.findings.append('eDP lines are route datums, not a constant-length flex simulation; the annular corridor and slack bay must be fitted with the actual cable')
-    # Other harnesses use actual board connector datums. Their module-side
-    # ends and smooth dressing are still provisional and are labelled as routes.
-    def guide(name,points,r=.7,detail='route corridor; exact cable and bend fit pending'):
-        pts=[(x,-y,z) for x,y,z in points]
-        m.add(name+'-route',stroke(pts,r),'routes','reference',False,False)
-        length=sum(math.dist(a,b) for a,b in zip(points,points[1:]))
-        m.cable_records.append({'loom':name,'waypoints_X_Y_height_mm':points,'polyline_length_mm':length,
-                               'status':detail,'not_a_cut_length':True})
-    def anchor(board,ref,z):return [*installed(board,fp(board,ref)['position']),z]
-    for name,a,b,width in [('left-signal',('left','FPC101'),('center','FPC102'),20.5),('right-signal',('center','FPC103'),('right','FPC104'),25.5)]:
-        pa=anchor(*a,pcb_top(a[0])+4);pb=anchor(*b,pcb_top(b[0])+4)
-        guide(name,[pa,[(pa[0]+pb[0])/2,pa[1],19],pb],.3,
-              f'Molex 51 +/-2 mm shielded cable, {width} mm contact-span reference; exit/insertion and bend shape unmeasured')
-        m.add(name+'-ribbon-width-envelope',box(min(pa[0],pb[0]),pa[1]-width/2,12,abs(pb[0]-pa[0]),width,7),'keepout','reservation',False,False)
-    kh=CONFIG['boards']['keyboard']['bottom_height']
-    guide('keyboard-30-pin',[anchor('center','J310',10),[110,49,14],[110,49,kh-5.5],[321,61,kh-5.5],[321,61,kh+2],anchor('keyboard','J320',kh+2)],.6,
-          'route above cooling and below carrier, then through right-hand release window; FFC width, bends and continuity pending')
-    guide('radio-30-pin',[anchor('center','J2300',10),[85,128,16],[274,128,16],[280,170,18],anchor('radio','J1',pcb_top('radio')+2)],.6,
-          'FFC ends from saved boards; approach radio from its left edge; width, fold and exact length pending')
-    guide('BMS-control',[anchor('center','J2073',10.95),[176.5,149.45,10.95],[176.5,149.45,6.5],anchor('bms','J2074',7.45)],.4,
-          'under-board control route through 1.5 mm notch clearance; 75 mm budget, smooth bends and pin map require fit/continuity test')
-    guide('trackpad-USB',[anchor('center','J58',9),[141,161,16],[108,139,dt-14],[100,181,dt-4],[109,190,dt-3]],1.3,
-          'J58 solder lands are fixed; trackpad left-side USB-C endpoint is an explicit assumption; strain relief required before solder joints')
-    for i,(ref,(x,y)) in enumerate(zip(['J41','J45'],CONFIG['oled']['xy'])):
-        guide(f'oled-{i+1}',[anchor('center',ref,12),[235,140,16],[360,140,17],[360,150,dt-6.5],[x+13.65,y-2,dt-5]],.65,
-              'four-wire GH harness, routed around radio edge; OLED connector location and tray entry pending')
-    for i,x in enumerate(CONFIG['cells']['x']):
-        guide(f'cell-temperature-{i+1}',[anchor('bms','J2200',7.45),[182.6,184,7.45],[x+50,185,15],[x+50,206,14.2]],.4,
-              'insulated probe pair; dress along tray edges with a loose lead to the cell surface, pending full pack measurement')
+    from build import CONFIG,pcb_top,stroke
+    data=paths(CONFIG);m.harness=data
+    if not all(data[k] for k in ['all_bend_pass','all_length_pass','all_separation_pass']):
+        raise ValueError('case harness variant fails bend, length or wire-separation checks; do not export its guides')
+    (HERE/'installed-power-harness.json').write_text(json.dumps(data,indent=2)+'\n')
+    c=CONFIG['cables'];dz=data['uniform_height_change_mm']
+    m.cable_records.extend([{k:v for k,v in p.items() if k!='points'} for p in data['routes']])
+    for t in data['terminals']:
+        if not t['parts'].startswith('2060-'):continue
+        x,y,z=t['pcb_anchor_xyz'];a=math.radians(t['rotation_deg']);n=int(t['parts'].split('-')[1][:3])-450
+        width=3.9+4*(n-1);pts=[]
+        for u,v in [(-width/2,-6.55),(width/2,-6.55),(width/2,6.55),(-width/2,6.55)]:
+            pts.append([x+u*math.cos(a)+v*math.sin(a),y-u*math.sin(a)+v*math.cos(a)])
+        m.add(t['board']+'-'+t['reference']+'-WAGO-body-envelope',polygon_prism(pts,z+dz,4.5),
+              'hardware','manufacturer envelope',False,False,terminal=True)
+        m.add(t['board']+'-'+t['reference']+'-button-tool-access',polygon_prism(pts,z+dz+4.5,18),
+              'keepout','service reservation',False,False,service=True)
+    for r in data['routes']:
+        print('sweeping '+r['name'],flush=True)
+        p=np.array(r['points']);wire=tube(p,r['wire_od_mm']/2)
+        m.add(r['name']+'-power-wire',wire,'cables','Alpha 6716' if r['group']=='usb5' else 'Alpha 6715',
+              False,False,power_wire=True,wire_name=r['name'])
+        ss=np.r_[0,np.cumsum(np.linalg.norm(np.diff(p,axis=0),axis=1))]
+        trim=3 if r['group']!='usb5' else 6;useful=p[(ss>=trim)&(ss<=ss[-1]-trim)]
+        g=guide(useful,r['wire_od_mm'],c['guide_radial_clearance'],c['guide_wall'])
+        if r['group']=='usb5' or g.BoundingBox().xlen>244:
+            for i,(xx,ww) in enumerate([(0,179),(179,250)]):
+                piece=g.intersect(box(xx,0,0,ww,260,60))
+                m.add(r['name']+f'-guide-{i+1}',piece,'supports',harness_part=True,guide_for=r['name'])
+        else:m.add(r['name']+'-guide',g,'supports',harness_part=True,guide_for=r['name'])
+    print('18 source wire sweeps and continuous open guides built',flush=True)
+    groups={}
+    for r in data['routes']:groups.setdefault(r['group'],[]).append(r)
+    groups['right-main-power']=groups['right-J2432']+groups['right-J2452']
+    for group in ['left-J2430','left-J2450','left-J2460','right-main-power','right-J2462']:
+        if group=='left-J2460':strain_clamp(m,'harness-'+group,groups[group],74,foot_x=70.75)
+        else:strain_clamp(m,'harness-'+group,groups[group],70.75 if group.startswith('left') else 299.25)
+    for xx,label in [(70.75,'left'),(299.25,'right')]:strain_clamp(m,'harness-USB-'+label,groups['usb5'],xx)
+    strain_clamp(m,'harness-BMS',groups['bms-power'],132,front_gap=True,foot_x=124,dogleg=True)
+    middle_support(m,'left',groups['usb5'],113)
+    middle_support(m,'right',groups['usb5'],235)
+    integrate_guides(m,groups)
+    raw=[]
+    for pin,yy in [(1,169.448),(2,173.448)]:
+        pp=np.column_stack([np.linspace(224.9,253,121),np.full(121,yy),np.full(121,pcb_top('bms')+2.3)])
+        row={'points':pp.tolist(),'wire_od_mm':1.7526}
+        raw.append(row)
+        m.add(f'raw-J2-pin-{pin}-partial-pigtail',tube(pp,1.7526/2),'routes','unmeasured full harness',False,False)
+    strain_clamp(m,'harness-raw-J2',raw,247,front_gap=True)
+    access=json.loads(input_path('bms-connector-access.json').read_text())
+    for con in access['connectors']:
+        if '2060' not in con['manufacturer_part_number']:
+            m.add('bms-'+con['reference']+'-mated-envelope',polygon_prism(con['installed_mated_polygon_mm'],pcb_top('bms'),con['reserved_height_above_pcb_mm']),
+                  'hardware','manufacturer envelope',False,False,terminal=True)
+        if con['installed_withdrawal_polygon_mm']:
+            m.add('bms-'+con['reference']+'-withdrawal',polygon_prism(con['installed_withdrawal_polygon_mm'],pcb_top('bms'),con['reserved_height_above_pcb_mm']),
+                  'keepout','service reservation',False,False,service=True)
+    for board,sign in [('left',1),('right',-1)]:
+        e=next(e for e in groups['usb5'][0]['ends'] if e['board']==board);x,y,h=e['point']
+        m.add(board+'-XT30-14mm-withdrawal',box(x if sign>0 else x-14,y-7,pcb_top(board),14,14,6),
+              'keepout','service reservation',False,False,service=True)
+    m.add('raw-pack-J2-wire-exit-reservation',box(224.9,167,pcb_top('bms'),24,10,8),'keepout','unmeasured raw pack route',False,False)
+    m.findings.append('J2 pin 1 is raw negative and pin 2 raw positive. Raw-pack, taps and probes need battery lead/exit measurements; no completed route is claimed.')
+    h=CONFIG['hinges'];hy=h['pivot_y'];hh=h['pivot_height'];r=max(10,c['edp_min_bend_radius'])
+    m.add('eDP-dynamic-bend-corridor',cq.Solid.makeTorus(r,c['edp_bundle_diameter']/2+1,cq.Vector(63,-hy,hh),cq.Vector(1,0,0)),
+          'keepout','reservation',False,False)
+    m.add('eDP-service-slack-bay',box(66,2,16,52,21,6),'keepout','reservation',False,False)
+    m.add('eDP-base-route-datum',stroke([(210,-10,17),(175,12,21),(95,10,19),(63,14,hh-10),(63,20,hh)],1.5),'routes','unverified route',False,False)
+    m.add('eDP-lid-route-datum',stroke([(63,-hy-12,hh+7),(63,-hy-27,hh+12),(75,-hy-30,hh+12)],1.5),'routes','unverified route',True,False)
+    m.cable_records.append({'loom':'eDP','minimum_bend_corridor_radius_mm':r,'required_slack_mm':math.pi*r+c['edp_service_slack'],
+                            'status':'corridor only; actual cable, constant-length sweep and lid endpoint unknown'})
     for i,y in enumerate([133,198]):
-        wrench=cq.Solid.makeCylinder(10,45,cq.Vector(356,-y,pcb_top('radio')+.38),cq.Vector(1,0,0))
-        m.add(f'SMA-{i+1}-plug-and-wrench-access',wrench,'keepout','reservation',False,False)
+        m.add(f'SMA-{i+1}-plug-and-wrench-access',cq.Solid.makeCylinder(10,45,cq.Vector(356,-y,pcb_top('radio')+.38),cq.Vector(1,0,0)),
+              'keepout','service reservation',False,False,service=True)
+    m.findings.extend(['Guide bores and TPU clamp liners require calibration and pull tests; +/-0.2 mm wire position is not a loose-wire guarantee.',
+                       'The eDP corridor is not a constant-length flex simulation. No pinch-free cable qualification is claimed.',
+                       'Small signal harnesses, keyboard FFC, OLED, speaker and trackpad cable ends still need measured dressing and independent retention.'])
+    from ground_braids import add as add_ground_braids
+    add_ground_braids(m)
+
+
+if __name__=='__main__':
+    from build import Model
+    m=Model();add_cables(m)
+    render([p for p in m.parts if p['group'] not in ['keepout','routes']],HERE/'views/harness-detail.png',
+           'saved WAGO / Alpha harness with independent split clamps',direction=(.2,-.6,1.5))

@@ -114,6 +114,19 @@ def aon_buck(v):
         Check('TPS62933 local output bank',(c(v,'C39')+c(v,'C291'))*1e6,'uF',43,45,'nominal44uF; effective-capacitance requirement in addendum'),
     ]
 
+def gate_return(v):
+    # FN8945 Rev6 gives 15uA minimum at BGATE = VBAT + 2V. Q25's
+    # 100nA maximum gate leakage is specified at 25C. This point does
+    # not establish the drive current over the complete hot gate ramp.
+    rlow=r(v,'R2600')*(1-v.environment_tolerance('R2600'))
+    return [
+        Check('BGATE load at the 2 V drive test point',(2/rlow+.1e-6)*1e6,
+              'uA',0,7.5,'2V/R2600(low) + 100nA; retain half the 15uA specified minimum for charging the gate'),
+        Check('R2600 selected source return',r(v,'R2600'),'Ohm',1e6,1e6,
+              '1M replacement for the overloaded 100k gate return'),
+    ]
+
+
 def charger(v):
     input_low,input_high=metal_strip_bounds(v,'RS2600')
     battery_low,battery_high=metal_strip_bounds(v,'RS2601')
@@ -126,8 +139,8 @@ def charger(v):
         Check('ISL9241 PROG environment maximum',strap*(1+strap_tol),'Ohm',2187.9,2232.1,'Renesas Table13; firmware separately rejects any INFO2 strap code other than12'),
         Check('ISL9241 PROG filter settling',strap*(1+strap_tol)*c(v,'C2602')*(1+v.tolerance('C2602'))*1.003*1e6,'us',0,40,'Renesas requires PROG R*C below40us; resistor environment and C0G initial/TCR corners'),
         Check('ISL9241 input-shunt 4.4A loss',4.4**2*input_high,'W',0,2*(170-100)/(170-70),'actual WSL initial/TCR at100C/load-life/soldering terms; 2W rating derated to100C'),
-        Check('ISL9241 battery-shunt 4A loss',4**2*battery_high,'W',0,2*(170-100)/(170-70),'actual WSLP initial/TCR at100C/load-life/soldering terms; conservatively use2W label, physical temperature unmeasured'),
-    ]+adapter_current_screen(v)+charge_current_screen(v)
+        Check('ISL9241 battery-shunt 8A loss',8**2*battery_high,'W',0,2*(170-100)/(170-70),'8A discharge target; actual WSLP initial/TCR at100C/load-life/soldering terms; conservatively use2W label, physical temperature unmeasured'),
+    ]+gate_return(v)+adapter_current_screen(v)+charge_current_screen(v)
 
 def pd_switch(name,v,base):
     current=1460/r(v,f'R{base+3}')+.11
