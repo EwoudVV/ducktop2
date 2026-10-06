@@ -1,30 +1,85 @@
 # power harness fit
 
-5 october 2026. the connector positions are saved on the boards. the
-wire paths are a case-layout input, not a finished cable assembly or an
-approved case thickness.
-
-the complete case study found interference between both BMS power wires,
-the BMS board and the J2074 plug. the current paths cannot be installed.
-the earlier bend, length and selected component checks did not include
-the BMS substrate or its mated control plug. keep the board fabrication
-on hold until the cable approach and final connector placement are settled.
+6 october 2026. the BMS power leads now clear the board edge and control
+plug with the existing connector positions. the case uses revised guides,
+removable USB rails and reliefs for the ground braids. this is a checked
+CAD arrangement, not a physical fit or thermal qualification.
 
 - [wire paths and connector coordinates](../../mechanical/power-harness.json)
-- [top view](../../mechanical/power-harness.png)
+- [BMS route and height view](../../mechanical/bms-power-route.png)
+- [wire and body checks](../../mechanical/power-harness-checks.json)
+- [case clearance results](../../mechanical/case-prototype/harness-case-checks.json)
 - [pin maps and parts](cables-and-connectors.md)
 - [electrical acceptance limits](io-power-qualification.md)
 - [component positions and heights](../../mechanical/component-placement.csv)
 
-run `python gen/generate_power_harness_geometry.py` after refreshing the
-board datums. it checks the source-board hashes, bend radii, wire lengths
-and separation between the modelled wires. a stale board export stops it.
+## BMS power leads
+
+both wires leave the center terminal straight, turn around the left and
+rear of the crowded area, then enter the rear-facing BMS terminal. the
+return has a smoother height transition so the fitted CAD curve also
+meets the wire bend limit. J2074 stays at its saved position; the proposed
+7 mm connector move is unnecessary for these paths. no PCB geometry or
+routing changed.
+
+| lead | modeled cut length, including two 8 mm stripped ends | minimum inside bend radius in the fitted CAD |
+| --- | ---: | ---: |
+| FG_VSS protected return | 126.6 mm | 9.27 mm |
+| protected positive | 119.6 mm | 11.92 mm |
+
+the electrical length allowance is now 130 mm per wire. using the existing
+30 milliohm/metre hot-resistance acceptance limit, both wires contribute
+at most 62.4 mV drop and 0.499 W loss at 8 A. contacts, solder and PCB
+copper are additional. [the battery-path calculation](battery-path.md)
+uses the same length constant as the geometry checks.
+
+the routing check covers the center and BMS substrates, mated BMS plugs,
+withdrawal envelopes, mounting hardware, manufacturer component heights
+and the other sixteen power wires. it measures bend radius on the fitted
+CAD edge, rather than relying only on the original sampled curve.
+
+clearance includes 0.2 mm wire-position allowance, 0.15 mm guide fit,
+0.4 mm guide walls, 0.3 mm body clearance and a separate sampling/curve
+allowance. the closest two BMS wires have about 0.67 mm surface separation
+after the wire allowances. their guide walls share one carrier.
+
+J58 reserves 4 mm above the PCB for the soldered trackpad cable and
+insulation. H24 and the BMS mounting points reserve 2.5 mm for screw heads
+and washers. these are assembly limits to check on the fitted parts.
+the raw-pack leads, taps, probe leads and control cable are separate from
+the eighteen-wire power model.
+
+## guides, braids and service
+
+the clamps use split TPU liners and hard stops. their parting surfaces
+follow the local wire height so a rising cable is not trapped in a closed
+bore. the BMS clamp has an offset screw lug that leaves room for the wire
+bend and its screwdriver.
+
+the left power and return wires share a carrier. the left and right
+carriers have windows around the required seam braids and their 1 mm
+solder-joint reservations. local pockets in the right carrier clear U904
+and C2069, including their maximum heights and an added 0.3 mm allowance.
+all four electrical ground bonds remain in place.
+
+the USB guide rails lift off their fixed feet after releasing two screws
+at each cell-gap post. narrow locating blades lift through the board
+seams; the wider feet stay below the PCBs. this lets the plugs and terminal
+buttons be reached without removing the complete main-board row. the
+release screws have at least 2.5 mm modeled thread engagement. only their
+intended threaded volumes are excluded from the collision results.
+
+remove the deck and input assemblies first, then the relevant clamp cap,
+liners and detachable rail. support each wire while releasing its WAGO
+terminal. allow the full 14 mm XT30 withdrawal and the SH/GH housing
+withdrawal space. screw, liner and guide fit still need printed coupons,
+pull tests and a dressed-harness deflection check.
 
 ## connector positions
 
-these are installed top-view coordinates in mm, using the same origin as
-the board layout. rotations follow KiCad. the full component export above
-includes the revised placement on both sides of the main boards.
+installed top-view coordinates use the same origin as the board layout.
+rotations follow KiCad. the component export includes both sides of the
+boards.
 
 | board | part | x | y | rotation / side |
 | --- | --- | ---: | ---: | --- |
@@ -35,157 +90,56 @@ includes the revised placement on both sides of the main boards.
 | right | J2453, auxiliary rails | 320.55 | 64.50 | 90, front |
 | right | J2463, return | 324.55 | 115.40 | 90, front |
 
-the right auxiliary wires now run above the signal connectors in the top
-view. the separate return goes around their front ends. J2463's plastic
-body projects about 0.35 mm beyond the front PCB edge; its solder lands
-remain on the board. allow for the housing and its tolerance in the case.
-U1760 is underneath the right board at x332.8, y48.7. its maximum body
-height is 1.45 mm; reserve 1.75 mm below the solder plane with the 0.3 mm
-assembly allowance. check that against the case floor and supports.
+the right auxiliary wires run above the signal connectors in top view.
+the separate return goes around their front ends. J2463 projects about
+0.35 mm beyond the front PCB edge; its solder lands remain on the board.
+U1760 is underneath the right board at x332.8, y48.7. reserve 1.75 mm below
+its solder plane for the 1.45 mm maximum body and 0.3 mm assembly allowance.
 
-the revised power circuit and component placement are saved. the main-board
-routing and the complete cable assembly still need finishing.
+all five BMS cable connectors are on top. J2072, J2074 and J2200 face
+rearward; J2 and J2201 face right. J2 is the two-contact WAGO at
+(218.35,171.448): pin 1 is raw negative, pin 2 is raw positive. J2201
+carries the two taps. mounting hardware must not join the return domains.
 
-## clearance above components
+## wire and case limits
 
-the component export includes manufacturer height limits for the audio
-codec, speaker amplifier, crystals, fuse, ferrites and small capacitors.
-the complete case check includes the guides around the wires. it finds
-only 7.361 mm available at C797, whose maximum body height is 8.0 mm.
-that courtyard-based screen is short by 0.639 mm. check the actual body
-and revise the route or guide before treating this crossing as clear.
+the short looms use Alpha 6715, 18 AWG, with 1.7526 mm maximum OD. the
+direct USB pair uses Alpha 6716, 16 AWG, at 2.1082 mm maximum OD. the
+current manufacturer pages specify a 5D bend radius; the design checks
+the inside radius with another 1% margin. the older 10D figure remains
+visible as a separate sensitivity result.
 
-the [completed capacitor selections](main-board-parts.md) resolve seven
-previously unknown crossings in the saved case report, across six parts.
-C430/C431 are at most 0.95 mm high, C434 is 1.45 mm, and C911/C913/C917
-are 0.65 mm. the smallest remaining clearance in this group is 2.617 mm
-at C917, using the case's guide envelope and existing allowances. this
-reconciles the new part data with the saved routes; it does not clear the
-BMS, braid or service conflicts.
+WAGO stripped ends are 8 mm within the specified 7..9 mm range. main-board
+links retain their 20..100 mm limits. the USB wires retain 400..420 mm,
+including a provisional 2 mm inside each solder cup. verify cut lengths
+and stripped ends on a sample before making an assembly template.
 
-## conflicts in the current case study
+the source harness uses main-board top planes at 8 mm and BMS top at
+12 mm. the current case translates all four boards down by 1.3 mm. these
+are study datums, not a final case-height requirement. changing the
+relative board heights requires new wire paths.
 
-the case snapshot and current six boards have the same outlines, mounting
-holes, footprint positions and model transforms. the newer center and
-right part-number fields and keyboard routing do not remove these fit
-problems. the [case report](../../mechanical/case-prototype/harness-case-checks.json)
-retains the actual intersections.
+lowering the USB front run by 0.5 or 1 mm passes the wire-only checks with
+the new BMS route. 1.5 and 2 mm fail separation. none of those lower
+variants is installed: the current blower and its intake allowance still
+require a 33.5 mm deck in half-millimeter steps. complete cooling,
+trackpad and lid dimensions are needed before choosing a thinner stack.
 
-- the protected positive wire crosses the BMS edge near X145, Y174.567,
-  H9.615. the board occupies H9.1..10.7. the current guide and body
-  allowance need the wire centerline at least H12.426 at that edge.
-- both BMS loops intersect J2074's mated plug. moving J2074 by +7 mm X
-  is only a candidate; it does not solve the low board-edge approach.
-- three braid locations intersect four guide carriers. seven solder-joint
-  clearance conflicts remain. retain all four electrical seam bonds when
-  revising the guides and fasteners.
-- twelve service-envelope conflicts remain. the USB carriers need removable
-  upper sections so plugs and terminal buttons can be reached without
-  dismantling the complete main-board row.
+the three owned packs are 100 x 60 mm in the saved measurements. their
+confirmed listing gives 11 mm nominal thickness, with no maximum tolerance.
+measure the finished packs, insulation, tabs and replacement lead exits.
+the complete raw-pack harness still has no qualified route.
 
-first revise the BMS wire approach and check the board, plug, mounting
-hardware, C797, other wires and guides together. then settle any connector
-movement and repeat the electrical, routing and fabrication checks if a
-PCB changes. the reported 33.5 mm deck height and 44.8 mm closed printed
-case are study dimensions, not the final thickness target.
+## rebuild and verify
 
-## wire space
-
-the model uses main-board top surfaces at z = 8 mm and a BMS top surface
-at z = 12 mm, measured above the outside bottom of the case. these came
-from the case study and can change. they are not a thickness requirement.
-
-the short looms use Alpha 6715, 18 AWG, with 1.7526 mm maximum outside
-diameter. the direct USB pair uses Alpha 6716, 16 AWG, at 2.1082 mm maximum.
-the current manufacturer pages specify a 5D minimum bend radius. the model
-checks the inside radius of each curve, plus a 1% numerical allowance.
-the old 2010 6715 sheet said 10D; that separate sensitivity result remains
-in the geometry file.
-
-the WAGO links use 8 mm stripped ends within the allowed 7..9 mm range.
-the main-board links fit the existing 20..100 mm electrical bounds.
-the protected BMS leads have modelled cut lengths of 108.7 mm for FG_VSS
-and 106.1 mm for positive, within a 120 mm budget. their minimum inside
-bend radii are 10.46 and 9.12 mm. the loops enter the rear-facing terminal
-straight, with separate guides keeping the wires apart. the direct USB wires fit the
-400..420 mm bounds, including a provisional 2 mm hidden at each solder cup.
-confirm that allowance on a soldered sample before making a cut template.
-
-the long pair has gentle service loops and different heights at the
-crossover. the BMS pair now follows its actual connector endpoints, with
-2 mm straight exits and a smooth rise between the two board heights.
-its wire envelope reaches 17.95 mm above the study datum. repeat the full
-component and case clearance check with the final clamps and supports.
-
-the wire model allows 0.2 mm position error around each path. guides and
-strain relief have to hold that shape; loose hand-dressed wires are not
-proven to fit by this calculation. the highest wire reaches about 23.75 mm
-above the case datum before adding a clamp. do not use that number to
-declare the 35 mm case study valid.
-
-keep both Alpha 1230 ground braids across each seam. their nominal section
-is 4.7625 x 0.508 mm. reserve up to 1 mm above the PCB at their soldered
-attachments and check the finished joints. the electrical requirement is
-still at most 1 milliohm for each complete connection, including its joints.
-
-## plugs, access and strain relief
-
-the WAGO bodies are 4.5 mm high. their release buttons need access with the
-keyboard or bridge removed. support the wires while releasing them; do
-not pull against the soldered terminals. clamps must attach independently
-to the case or a removable support, not to components or battery cells.
-
-reserve 6 mm above the PCB for the complete XT30 connection and 14 mm of
-axial withdrawal space. grip its housing when unplugging it. insulate the
-solder cups separately and release the cable support before removal.
-
-the raw-pack connector J2 is now a two-contact WAGO 2060-452/998-404,
-4.5 mm high, at installed XY (218.35,171.448), facing right. pin 1 is raw
-negative and pin 2 is raw positive; J2201 carries the two cell taps separately. leave access above
-the release buttons and use separate strain relief. the cells' lead exit
-positions and usable lead lengths are still missing, so the raw-pack cable
-has no finished route.
-all five BMS cable connectors are now on top. J2072, J2074 and J2200
-face rearward; J2 and J2201 face right.
-[plug and withdrawal envelopes](../../mechanical/bms-connector-access.json)
-and [connector-clearance checks](../../mechanical/bms-connector-clearances.json)
-record the installed positions and reference dimensions. remove the bridge
-for button, latch and housing access. the control and temperature cable
-routes still need to be included in the complete assembly clearance check.
-
-## still needed from the complete assembly
-
-the old planner records three user-measured 100 x 60 mm cells. the confirmed
-purchase listing specifies 11 mm thickness, so the old 10 mm assumption is
-too small. measure the complete finished packs, including their replacement
-wiring and insulation; the listing gives no maximum-thickness tolerance.
-
-the case work still needs the actual clamps, fasteners, insertion/removal
-paths, signal cables, measured packs, cooling and keyboard/trackpad supports
-checked together. repeat the component-height check if parts or wire paths
-move. resistance, temperature and fault tests remain
-separate requirements; the hardware qualification flags are still off.
+refresh the native board datums with `gen/export_board_assembly.py`, then
+run `gen/generate_power_harness_geometry.py` and `gen/check_power_harness.py`
+in the layout environment. the checks reject changed source boards or
+routing inputs. the case's pinned inputs must then be refreshed deliberately.
+see the [case rebuild instructions](../../mechanical/case-prototype/README.md).
 
 ## drawings used
 
 - [Alpha 6715](https://www.alphawire.com/en/products/wire/ecogen/ecowire/6715) and [6716](https://www.alphawire.com/en/products/wire/ecogen/ecowire/6716)
-- [Alpha 1230 braid](https://www.alphawire.com/products/accessories/fit-wire-management/braid/1230)
+- [WAGO 2060 two-contact terminal](https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-452_998-404)
 - [AMASS XT30PW-F30 drawing](https://www.china-amass.net/uploads/31.XT30PW-F30-SPEC-2025V0.pdf)
-
-for the revised BMS pair, the maximum modelled wire envelope is 17.95 mm
-above the case study origin. that is about 5.95 mm above its 12 mm PCB
-top datum. the wire-to-wire screen keeps at least 0.65 mm after sampling
-and positioning allowances. these curves require guides and separate
-strain relief; loose wires are not constrained to the model.
-
-the 120 mm per-wire allowance adds at most 57.6 mV drop and 0.461 W
-combined wire loss at 8 A if the finished wire meets the existing
-30 milliohm/metre hot-resistance criterion. contacts and solder joints
-are additional and still need measurement.
-
-[the BMS wire-height check](../../mechanical/bms-wire-clearances.json) covers
-19 component and support crossings. H24 needs a low screw head and washer:
-2.5 mm is reserved, against a 3.7 mm limit under the control-plug withdrawal
-path at the study heights. the closest mated connector clears a planned
-5 mm mounting-hardware diameter by 0.52 mm. verify the actual hardware
-and guides when fitting the case.

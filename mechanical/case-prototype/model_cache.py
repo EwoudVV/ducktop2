@@ -6,6 +6,15 @@ from cad import ROOT,HERE
 CACHE=ROOT/'.workbench/case-prototype/assembly-brep'
 
 
+def geometry_inputs():
+    paths=[HERE/name for name in ['build.py','cad.py','cables.py','service_carriers.py',
+        'ground_braids.py','harness_geometry.py','hinges.py','radio_hardware.py','case_inputs.py']]
+    paths += [HERE/'reference/pcb-snapshot/manifest.json']
+    paths += list((HERE/'reference/pcb-snapshot/inputs').glob('*.json'))
+    return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(paths) if p.is_file()}
+
+
 def save(m):
     from build import CONFIG,load_config
     assert CONFIG==load_config(CONFIG['selected_profile']),'configuration changed during the build; rebuild before caching'
@@ -19,6 +28,7 @@ def save(m):
         path=name+'-substrate.brep';shape.exportBrep(str(CACHE/path));boards[name]=path
     payload={'configuration':CONFIG,'parts':rows,'board_material':boards,'mounts':m.mounts,'findings':m.findings,
              'cable_records':m.cable_records,'harness':m.harness,
+             'geometry_inputs_sha256':geometry_inputs(),
              'config_sha256':hashlib.sha256((HERE/'assembly.json').read_bytes()).hexdigest(),
              'inventory_sha256':hashlib.sha256((HERE/'board-inventory.json').read_bytes()).hexdigest()}
     primitives={}
@@ -34,6 +44,7 @@ def save(m):
 def load():
     from build import Model,load_config
     d=json.loads((CACHE/'model.json').read_text())
+    assert all(d.get('geometry_inputs_sha256',{}).get(name)==digest for name,digest in geometry_inputs().items()),'CAD cache sources or mechanical inputs changed; rebuild'
     assert d.get('configuration')==load_config(),'CAD cache configuration must be rebuilt'
     for name,file in [('config','assembly.json'),('inventory','board-inventory.json')]:
         assert d[name+'_sha256']==hashlib.sha256((HERE/file).read_bytes()).hexdigest(), 'CAD cache is stale'

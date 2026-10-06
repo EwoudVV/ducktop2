@@ -77,7 +77,7 @@ need checking. see [power revision status](power-revision.md) and
 
 | connection | ends | construction |
 | --- | --- | --- |
-| protected pack power | center J2071 to BMS J2072 | WAGO 2060-452/998-404 terminals, Alpha 6715 18 AWG; 120 mm wire budget |
+| protected pack power | center J2071 to BMS J2072 | WAGO 2060-452/998-404 terminals, Alpha 6715 18 AWG; 130 mm wire budget |
 | isolated control | center J2073 to BMS J2074 | JST SM05B-SRSS-TB headers, SHR-05V-S housings, SSH-003T-P0.2-H contacts; five wires |
 | cell temperature probes | BMS J2200 to three insulated probes | JST SM06B-SRSS-TB header; three separate wire pairs to SEMITEC 104JT-025 probes |
 

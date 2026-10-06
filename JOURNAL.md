@@ -5,6 +5,26 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-06: fix the bms cables and make the guides removable
+
+**Total time spent: 2 hours**
+
+fixed the bms power wire routes in the case model. the old route met the wire bend limits, but the positive lead actually passed through the board edge and both loops hit the control plug. changed the approach so the wires go around the left and rear of the crowded area before entering the bms terminal. managed to keep every connector and all six pcbs exactly where they were, so this didn't need another pcb redesign.
+
+the return lead comes out to about 126.6 mm and the positive lead to 119.6 mm, including the stripped ends. changed the length allowance to 130 mm and recalculated the resistance: at 8a, the two leads together account for up to 62.4 mv of drop and about half a watt of heat, before the contacts and solder joints. also changed the return wire's rise because fitting the cad curve made one bend tighter than the original path. the actual fitted curve now meets the bend limit too.
+
+![the revised bms wire paths and their height through each loop](docs/images/journal/2026-10-06-bms-wire-paths.png)
+
+reworked the guides and clamps around that route. the usb guide rails now lift off their fixed feet after removing two screws at each support, so i can reach the terminal buttons and unplug the connectors without taking out the whole row of boards. made the clamp halves follow the rising wires, moved a bms clamp screw away from the bend, and added windows around the four ground braids. the right carrier also needed small pockets over two nearby components.
+
+checked the assembled geometry against the wires, plugs, screws, tool access and component heights. filled in more missing heights from the actual part drawings instead of guessing from the footprints. the modeled wire, guide, braid and service clashes are now gone, including the component-height conflicts. the lid also clears the fixed parts at every 2 degree step from closed to fully open.
+
+![the revised bms guides, cable loops and offset clamp screw](docs/images/journal/2026-10-06-bms-cable-fit.png)
+
+rebuilt the editable case, step assembly, separate parts and viewer. found a pinched edge where a raised clamp boss touched the cap wall, which made two stl meshes non-manifold even though their step solids were valid. left a proper 0.4 mm wall there and exported them again. all 99 step part files reopen correctly, and all 101 stls are watertight and fit within the printer allowance.
+
+also tried lowering the usb wires to make the case thinner. dropping them by 0.5 or 1 mm works in the wire checks, but larger drops bring them too close to the bms leads. the blower and its intake space still keep the current deck at 33.5 mm, and the current printable case model is 44.8 mm thick when closed. that's still too thick for the finished laptop. i need to work on the cooling stack, confirm the remaining part and cable heights, and measure the finished packs and trackpad before settling the case dimensions.
+
 # 2026-10-05: finish the keyboard routing and work on the case and power
 
 **Total time spent: 6 hours**

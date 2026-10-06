@@ -1,130 +1,8 @@
 {
-  "power_wire_collisions": [
-    {
-      "wire": "bms-FG_VSS-power-wire",
-      "part": "bms-pcb-and-available-models",
-      "overlap_mm3": 0.4935
-    },
-    {
-      "wire": "bms-FG_VSS-power-wire",
-      "part": "bms-J2074-mated-envelope",
-      "overlap_mm3": 2.8385
-    },
-    {
-      "wire": "bms-PACK_POS_FUSED-power-wire",
-      "part": "bms-pcb-and-available-models",
-      "overlap_mm3": 38.0721
-    },
-    {
-      "wire": "bms-PACK_POS_FUSED-power-wire",
-      "part": "bms-J2074-mated-envelope",
-      "overlap_mm3": 19.0505
-    }
-  ],
-  "guide_case_collisions": [
-    {
-      "guide": "harness-left-J2430-carrier",
-      "part": "ground-braid-left-2",
-      "overlap_mm3": 1.11
-    },
-    {
-      "guide": "harness-left-J2460-carrier",
-      "part": "ground-braid-left-2",
-      "overlap_mm3": 2.665
-    },
-    {
-      "guide": "harness-right-main-power-carrier",
-      "part": "ground-braid-right-1",
-      "overlap_mm3": 0.786
-    },
-    {
-      "guide": "harness-right-J2462-carrier",
-      "part": "ground-braid-right-2",
-      "overlap_mm3": 2.419
-    },
-    {
-      "guide": "harness-BMS-carrier",
-      "part": "bms-pcb-and-available-models",
-      "overlap_mm3": 36.996
-    },
-    {
-      "guide": "harness-BMS-carrier",
-      "part": "bms-J2074-mated-envelope",
-      "overlap_mm3": 19.858
-    }
-  ],
-  "service_conflicts": [
-    {
-      "access": "center-J2462-button-tool-access",
-      "part": "harness-USB-right-carrier",
-      "overlap_mm3": 32.867
-    },
-    {
-      "access": "center-J2071-button-tool-access",
-      "part": "harness-USB-left-carrier",
-      "overlap_mm3": 355.5
-    },
-    {
-      "access": "center-J2432-button-tool-access",
-      "part": "harness-USB-right-carrier",
-      "overlap_mm3": 47.486
-    },
-    {
-      "access": "center-J2450-button-tool-access",
-      "part": "harness-USB-left-carrier",
-      "overlap_mm3": 13.125
-    },
-    {
-      "access": "center-J2452-button-tool-access",
-      "part": "harness-USB-right-carrier",
-      "overlap_mm3": 62.953
-    },
-    {
-      "access": "bms-J2072-button-tool-access",
-      "part": "harness-USB-left-carrier",
-      "overlap_mm3": 11.031
-    },
-    {
-      "access": "bms-J2074-withdrawal",
-      "part": "bms-FG_VSS-power-wire",
-      "overlap_mm3": 1.05
-    },
-    {
-      "access": "bms-J2074-withdrawal",
-      "part": "bms-PACK_POS_FUSED-power-wire",
-      "overlap_mm3": 15.847
-    },
-    {
-      "access": "bms-J2074-withdrawal",
-      "part": "harness-BMS-carrier",
-      "overlap_mm3": 17.209
-    },
-    {
-      "access": "bms-J2201-withdrawal",
-      "part": "harness-USB-right-carrier",
-      "overlap_mm3": 22.657
-    },
-    {
-      "access": "left-XT30-14mm-withdrawal",
-      "part": "harness-USB-left-carrier",
-      "overlap_mm3": 103.796
-    },
-    {
-      "access": "right-XT30-14mm-withdrawal",
-      "part": "harness-USB-right-carrier",
-      "overlap_mm3": 153.915
-    }
-  ],
-  "known_height_clearance_conflicts": [
-    {
-      "wire": "bms-FG_VSS",
-      "part": "center/C797",
-      "maximum_component_height_below_guide_mm": 7.361,
-      "courtyard_screen_not_exact_body": true,
-      "height_mm": 8.0,
-      "planning_gap_mm": -0.639
-    }
-  ],
+  "power_wire_collisions": [],
+  "guide_case_collisions": [],
+  "service_conflicts": [],
+  "known_height_clearance_conflicts": [],
   "unverified_height_limits": [
     {
       "wire": "right-PCIE_3V3",
@@ -158,32 +36,14 @@
     },
     {
       "wire": "bms-FG_VSS",
-      "part": "center/H24",
-      "maximum_component_height_below_guide_mm": 6.6303,
+      "part": "center/J58",
+      "maximum_component_height_below_guide_mm": 4.0406,
       "courtyard_screen_not_exact_body": true
     },
     {
       "wire": "bms-PACK_POS_FUSED",
-      "part": "center/H24",
-      "maximum_component_height_below_guide_mm": 3.7894,
-      "courtyard_screen_not_exact_body": true
-    },
-    {
-      "wire": "usb5-GND",
-      "part": "center/C430",
-      "maximum_component_height_below_guide_mm": 9.6209,
-      "courtyard_screen_not_exact_body": true
-    },
-    {
-      "wire": "usb5-GND",
-      "part": "center/C431",
-      "maximum_component_height_below_guide_mm": 9.6209,
-      "courtyard_screen_not_exact_body": true
-    },
-    {
-      "wire": "usb5-GND",
-      "part": "center/C434",
-      "maximum_component_height_below_guide_mm": 9.6209,
+      "part": "center/J58",
+      "maximum_component_height_below_guide_mm": 4.3112,
       "courtyard_screen_not_exact_body": true
     },
     {
@@ -224,12 +84,6 @@
     },
     {
       "wire": "usb5-GND",
-      "part": "center/LED1",
-      "maximum_component_height_below_guide_mm": 9.6209,
-      "courtyard_screen_not_exact_body": true
-    },
-    {
-      "wire": "usb5-GND",
       "part": "center/TP6",
       "maximum_component_height_below_guide_mm": 9.6209,
       "courtyard_screen_not_exact_body": true
@@ -260,32 +114,8 @@
     },
     {
       "wire": "usb5-USB_PORT_5V",
-      "part": "center/C430",
-      "maximum_component_height_below_guide_mm": 12.8209,
-      "courtyard_screen_not_exact_body": true
-    },
-    {
-      "wire": "usb5-USB_PORT_5V",
       "part": "center/C779",
       "maximum_component_height_below_guide_mm": 12.8209,
-      "courtyard_screen_not_exact_body": true
-    },
-    {
-      "wire": "usb5-USB_PORT_5V",
-      "part": "center/C911",
-      "maximum_component_height_below_guide_mm": 4.2725,
-      "courtyard_screen_not_exact_body": true
-    },
-    {
-      "wire": "usb5-USB_PORT_5V",
-      "part": "center/C913",
-      "maximum_component_height_below_guide_mm": 3.552,
-      "courtyard_screen_not_exact_body": true
-    },
-    {
-      "wire": "usb5-USB_PORT_5V",
-      "part": "center/C917",
-      "maximum_component_height_below_guide_mm": 3.2671,
       "courtyard_screen_not_exact_body": true
     },
     {
@@ -363,43 +193,7 @@
   ],
   "component_height_vs_structure": [],
   "harness_internal_clashes": [],
-  "braid_joint_clearance_conflicts": [
-    {
-      "braid": "ground-braid-left-2-joint-allowance",
-      "part": "harness-left-J2430-carrier",
-      "overlap_mm3": 4.39
-    },
-    {
-      "braid": "ground-braid-left-2-joint-allowance",
-      "part": "harness-left-J2460-carrier",
-      "overlap_mm3": 6.63
-    },
-    {
-      "braid": "ground-braid-left-2-joint-allowance",
-      "part": "harness-left-J2430-cap-screw-67.35",
-      "overlap_mm3": 0.213
-    },
-    {
-      "braid": "ground-braid-left-2-joint-allowance",
-      "part": "harness-left-J2460-cap-screw-72.53",
-      "overlap_mm3": 0.338
-    },
-    {
-      "braid": "ground-braid-right-1-joint-allowance",
-      "part": "harness-right-main-power-carrier",
-      "overlap_mm3": 4.471
-    },
-    {
-      "braid": "ground-braid-right-1-joint-allowance",
-      "part": "harness-right-main-power-cap-screw-44.90",
-      "overlap_mm3": 0.03
-    },
-    {
-      "braid": "ground-braid-right-2-joint-allowance",
-      "part": "harness-right-J2462-carrier",
-      "overlap_mm3": 4.763
-    }
-  ],
+  "braid_joint_clearance_conflicts": [],
   "scope": "BRep checks, with pre-fusion carrier pieces as a conservative superset; carrier hits may include subsequently relieved material. Courtyard-height checks are conservative too. No physical fit approval.",
   "phase": "complete",
   "service_removed_first": [

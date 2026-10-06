@@ -35,8 +35,8 @@ CSD17575Q3; neither shunt needs a larger part for the calculated normal load.
 | RS1, WSLP25125L000FEA | 6.205 milliohm upper corner | 0.397 W | 49.6 mV |
 | RS2601, WSLP2512R0100FEA | 11.359 milliohm upper corner | 0.727 W | 90.9 mV |
 | Q25 | 6.4 milliohm hot sizing assumption | 0.410 W | 51.2 mV |
-| both protected power wires | 120 mm each, 30 milliohm/metre hot acceptance limit | 0.461 W | 57.6 mV |
-| total above | excludes contacts, solder and PCB copper | 1.994 W | 249.3 mV |
+| both protected power wires | 130 mm each, 30 milliohm/metre hot acceptance limit | 0.499 W | 62.4 mV |
+| total above | excludes contacts, solder and PCB copper | 2.033 W | 254.1 mV |
 
 the shunt resistance bounds include initial tolerance, TCR through 170 °C,
 and the existing endurance/soldering stress allowances. their power check

@@ -8,7 +8,7 @@ import json
 import numpy as np
 from shapely.geometry import Polygon,Point,LineString
 from shapely.ops import unary_union
-from cad import HERE,ROOT,box
+from cad import HERE,ROOT,box,cylinder
 from case_inputs import path as input_path
 
 
@@ -48,6 +48,11 @@ def check(m):
             prefix=g['name'].removesuffix('-carrier').removesuffix('-pedestal').removesuffix('-cap')
             if p.get('harness_fastener') and p['name'].startswith(prefix+'-'):continue
             v=volume(g['shape'],p['shape'])
+            if v>.05 and p.get('thread_host')==g['name']:
+                x,y=p['thread_axis_xy_mm'];lo,hi=p['thread_height_range_mm']
+                contact=cylinder(x,y,lo,p['thread_radius_mm'],hi-lo)
+                overlap=g['shape'].intersect(p['shape'])
+                v=max(0,overlap.cut(contact).Volume())
             if v>.05:results['guide_case_collisions'].append({'guide':g['name'],'part':p['name'],'overlap_mm3':round(v,3)})
     for i,g in enumerate(guides):
         for p in guides[i+1:]:

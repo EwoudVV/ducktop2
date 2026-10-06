@@ -109,7 +109,7 @@ def nearest_x(route,x):
     p=np.array(route['points']);return p[np.argmin(abs(p[:,0]-x))]
 
 
-def strain_clamp(m,name,route_rows,anchor_x,front_gap=False,foot_x=None,dogleg=False):
+def strain_clamp(m,name,route_rows,anchor_x,front_gap=False,foot_x=None,dogleg=False,width=6,y_bounds=None,low_screw_xy=None,low_screw_axis_x=None):
     """Split clamp on a separate insulating seam pedestal.
 
     Rigid bores clear maximum wire OD. Replaceable slit TPU liners provide
@@ -121,9 +121,11 @@ def strain_clamp(m,name,route_rows,anchor_x,front_gap=False,foot_x=None,dogleg=F
     foot_x=anchor_x if foot_x is None else foot_x
     pts=[nearest_x(r,anchor_x) for r in route_rows]
     ylo=min(p[1] for p in pts)-4.3;yhi=max(p[1] for p in pts)+4.3
+    if y_bounds:
+        ylo=min(ylo,y_bounds[0]);yhi=max(yhi,y_bounds[1])
     zlo=min(p[2]-r['wire_od_mm']/2 for p,r in zip(pts,route_rows))-1
     split=max(p[2] for p in pts)+.05;top=max(p[2]+r['wire_od_mm']/2 for p,r in zip(pts,route_rows))+1
-    floor=CONFIG['base']['floor'];width=6
+    floor=CONFIG['base']['floor']
     screw_length=math.floor((top-zlo-.2)*2)/2
     # A stepped parting line opens each bore at its own wire height, including
     # the vertically separated USB pair. No wire is trapped in a closed bore.
@@ -133,22 +135,46 @@ def strain_clamp(m,name,route_rows,anchor_x,front_gap=False,foot_x=None,dogleg=F
         low=ylo if i==0 else (bands[i-1][0][1]+pt[1])/2
         high=yhi if i==len(bands)-1 else (pt[1]+bands[i+1][0][1])/2
         level=float(pt[2])
-        bs=box(anchor_x-width/2,low,zlo,width,high-low,level-zlo)
-        cs=box(anchor_x-width/2,low,level,width,high-low,top-level)
+        # The split follows the wire height through the clamp. A flat split
+        # can leave a closed bore when the wire is climbing into a bend.
+        arr=np.array(row['points']);xs=np.linspace(anchor_x-width/2,anchor_x+width/2,17)
+        near=arr[(arr[:,0]>=anchor_x-width)&(arr[:,0]<=anchor_x+width)]
+        xx,index=np.unique(near[:,0],return_index=True);zz=near[index,2]
+        levels=np.interp(xs,xx,zz)
+        def band(bottom,upper):
+            sections=[]
+            for x,z in zip(xs,levels):
+                lo=zlo if bottom else z
+                hi=z if upper else top
+                sections.append(cq.Wire.makePolygon([cq.Vector(x,-low,lo),cq.Vector(x,-high,lo),
+                    cq.Vector(x,-high,hi),cq.Vector(x,-low,hi)],close=True))
+            return cq.Solid.makeLoft(sections,ruled=True)
+        bs=band(True,True);cs=band(False,False)
         body=bs if body is None else body.fuse(bs)
         cap=cs if cap is None else cap.fuse(cs)
+    screws=[(anchor_x,ylo+1.7),(anchor_x,yhi-1.7)]
+    if low_screw_axis_x is not None:screws[0]=(low_screw_axis_x,ylo+1.7)
+    if low_screw_xy:
+        screws[0]=low_screw_xy
+        x,y=low_screw_xy
+        body=body.fuse(box(x-2.3,y-2.3,zlo,4.6,4.6,split-zlo))
+        cap=cap.fuse(box(x-2.3,y-2.3,split,4.6,4.6,top-split))
+        # Keep a finite cap wall beside the raised boss. A boss tangent to
+        # the 4 mm clamp edge creates a pinched, non-manifold mesh edge.
+        for x,y in screws:body=body.fuse(cylinder(x,y,zlo,1.6,split-zlo))
+        cap=cap.cut(body)
     liners=[]
     for p,r in zip(pts,route_rows):
-        arr=np.array(r['points']);take=arr[(arr[:,0]>=anchor_x-4)&(arr[:,0]<=anchor_x+4)]
+        arr=np.array(r['points']);take=arr[(arr[:,0]>=anchor_x-width/2-1)&(arr[:,0]<=anchor_x+width/2+1)]
         if len(take)<3:take=arr
         bore=tube(take,r['wire_od_mm']/2+.35)
         if not hasattr(m,'clamp_bores'):m.clamp_bores={}
         m.clamp_bores.setdefault(name,[]).append(bore)
         body=body.cut(bore);cap=cap.cut(bore)
         liner=tube(take,r['wire_od_mm']/2+.34,r['wire_od_mm']/2-.025)
-        liner=liner.intersect(box(anchor_x-2.6,ylo,zlo,5.2,yhi-ylo,top-zlo))
+        liner=liner.intersect(box(anchor_x-width/2+.4,ylo,zlo,width-.8,yhi-ylo,top-zlo))
         # Slit liner can open around an already terminated wire.
-        liner=liner.cut(box(anchor_x-3,p[1]-.07,p[2],6,.14,4))
+        liner=liner.cut(box(anchor_x-width/2,p[1]-.07,p[2],width,.14,4))
         liners.append(liner)
     footwidth=6 if dogleg else 7
     foot=box(foot_x-footwidth/2,190 if front_gap else ylo,floor,footwidth,10 if front_gap else yhi-ylo,2)
@@ -156,19 +182,19 @@ def strain_clamp(m,name,route_rows,anchor_x,front_gap=False,foot_x=None,dogleg=F
     if not front_gap and foot_x!=anchor_x:
         web=web.fuse(box(min(foot_x-.5,anchor_x-3),ylo,7.0,abs(anchor_x-foot_x)+1,yhi-ylo,split-7.0))
     if dogleg:
-        body=body.fuse(box(anchor_x-3,yhi-3,zlo,6,187.5-yhi+3,1))
+        body=body.fuse(box(anchor_x-width/2,yhi-3,zlo,width,187.5-yhi+3,1))
         body=body.fuse(box(foot_x-2,186,zlo,anchor_x+5-foot_x,1.5,1))
         body=body.fuse(box(foot_x-2,186,zlo,4,10,1))
     elif front_gap:body=body.fuse(box(anchor_x-3,yhi-3,zlo,6,196-yhi+3,1))
     body=body.fuse(web).fuse(foot)
-    for yy in [ylo+1.7,yhi-1.7]:
-        body=body.cut(cylinder(anchor_x,yy,zlo-.1,.8,split-zlo+.2))
-        cap=cap.cut(cylinder(anchor_x,yy,split-.1,1.1,top-split+.2))
-        m.mount(name+f'-cap-{yy:.2f}',anchor_x,yy,top,'split clamp to insulating pedestal',2.2,'M2',split-zlo,screw_length,
+    for sx,yy in screws:
+        body=body.cut(cylinder(sx,yy,zlo-.1,.8,top-zlo+.2))
+        cap=cap.cut(cylinder(sx,yy,zlo-.1,1.1,top-zlo+.2))
+        m.mount(name+f'-cap-{yy:.2f}',sx,yy,top,'split clamp to insulating pedestal',2.2,'M2',split-zlo,screw_length,
                 'TPU liner; dielectric pedestal; independent of PCB','trim nylon screw to listed length; verify blind engagement and pullout in coupon')
-        m.add(name+f'-cap-screw-{yy:.2f}',cylinder(anchor_x,yy,top-screw_length,1,screw_length).fuse(cylinder(anchor_x,yy,top,2,2)),
+        m.add(name+f'-cap-screw-{yy:.2f}',cylinder(sx,yy,top-screw_length,1,screw_length).fuse(cylinder(sx,yy,top,2,2)),
               'hardware','nylon',False,False,harness_fastener=True,service_removable=True)
-        m.add(name+f'-driver-access-{yy:.2f}',cylinder(anchor_x,yy,top+2,2.5,18),'keepout','service reservation',False,False,service=True)
+        m.add(name+f'-driver-access-{yy:.2f}',cylinder(sx,yy,top+2,2.5,18),'keepout','service reservation',False,False,service=True)
         fy=(192 if yy<=(ylo+yhi)/2 else 198) if front_gap else yy
         body=body.cut(cylinder(foot_x,fy,floor-.1,.8,2.2))
         for q in m.parts:
@@ -193,8 +219,8 @@ def middle_support(m,label,rows,x):
         # The residual beam ligament is a fit-test item, not a load approval.
         for yy in [169.448,173.448]:
             beam=beam.cut(box(x-6,yy-1.2,support_top-4.6,12,2.4,14.2-(support_top-4.6)))
-    column=box(x-3,192,floor+1.8,6,6,support_top-floor-1.8)
-    foot=box(x-4,190,floor,8,12,2)
+    column=box(x-5,192,floor+1.8,10,6,support_top-floor-1.8)
+    foot=box(x-6,190,floor,12,12,2)
     beam=beam.fuse(column).fuse(foot)
     for p,r in zip(pts,rows):
         bottom=p[2]-r['wire_od_mm']/2-.55
@@ -218,7 +244,7 @@ def integrate_guides(m,groups):
     routes stay separate and are reported by the collision checks.
     """
     jobs=[]
-    for group in ['left-J2430','left-J2450','left-J2460','right-main-power','right-J2462','bms-power']:
+    for group in ['left-main-power','left-J2450','right-main-power','right-J2462','bms-power']:
         prefix='harness-BMS' if group=='bms-power' else 'harness-'+group
         names={r['name'] for r in groups[group]}
         jobs.append((prefix,[p for p in m.parts if p.get('guide_for') in names or p['name']==prefix+'-pedestal']))
@@ -239,11 +265,39 @@ def integrate_guides(m,groups):
             for p in pieces:
                 if p['name'].endswith('-pedestal'):
                     p['shape']=p['shape'].cut(box(72.9,116.25,6.4,18.7,6.2,2.637))
+        # Leave a continuous bridge above each braid, with the supporting
+        # legs on either side of its solder-joint reservation.
+        braid_y={'harness-left-main-power':70.,'harness-right-main-power':42.5,
+                 'harness-right-J2462':114.}.get(name)
+        if braid_y is not None:
+            gap=box(50 if name.startswith('harness-left') else 280,braid_y-2.78125,6.35,40,5.5625,1.75)
+            shape=shape.cut(gap)
+            for p in pieces:p['shape']=p['shape'].cut(gap)
+        if name=='harness-right-main-power':
+            from build import CONFIG
+            from shapely.geometry import Polygon
+            targets={('center','U904'),('right','C2069')}
+            parts=json.loads(input_path('component-placement.json').read_text())['parts']
+            for row in parts:
+                if (row['board'],row['reference']) not in targets:continue
+                if row['side']!='front' or row['height_kind']!='maximum':
+                    raise ValueError('recheck the right carrier pocket for '+row['reference'])
+                height=row['height_mm']+.3
+                low=CONFIG['boards'][row['board']]['bottom_height']+row['board_thickness_mm']-.1
+                for ring in row['courtyards_installed_mm']['front']:
+                    region=Polygon(ring['outer'],ring['holes']).buffer(.3)
+                    pocket=polygon_prism(list(region.exterior.coords),low,height+.1)
+                    shape=shape.cut(pocket)
+                    for p in pieces:p['shape']=p['shape'].cut(pocket)
         removed={p['name'] for p in pieces}
         m.parts=[p for p in m.parts if p['name'] not in removed]
         m.add(name+'-carrier',shape,'supports',harness_part=True,integrated_from=sorted(removed))
         if not hasattr(m,'collision_primitives'):m.collision_primitives={}
         m.collision_primitives[name+'-carrier']=[p['shape'] for p in pieces]
+        if name.startswith('harness-USB-'):
+            from service_carriers import split_usb_carrier
+            split_usb_carrier(m,name,70.75 if name.endswith('left') else 299.25,
+                              113 if name.endswith('left') else 237)
 
 
 def clean_left_usb_trim(shape):
@@ -292,13 +346,17 @@ def add_cables(m):
     groups={}
     for r in data['routes']:groups.setdefault(r['group'],[]).append(r)
     groups['right-main-power']=groups['right-J2432']+groups['right-J2452']
-    for group in ['left-J2430','left-J2450','left-J2460','right-main-power','right-J2462']:
-        if group=='left-J2460':strain_clamp(m,'harness-'+group,groups[group],74,foot_x=70.75)
-        else:strain_clamp(m,'harness-'+group,groups[group],70.75 if group.startswith('left') else 299.25)
+    groups['left-main-power']=groups['left-J2430']+groups['left-J2460']
+    strain_clamp(m,'harness-left-main-power',groups['left-main-power'],74,foot_x=70.75)
+    strain_clamp(m,'harness-left-J2450',groups['left-J2450'],70.75)
+    strain_clamp(m,'harness-right-main-power',groups['right-main-power'],299.25,
+                 y_bounds=(36.4,72.8),low_screw_axis_x=300.)
+    strain_clamp(m,'harness-right-J2462',groups['right-J2462'],299.25,y_bounds=(109.5,120.))
     for xx,label in [(70.75,'left'),(299.25,'right')]:strain_clamp(m,'harness-USB-'+label,groups['usb5'],xx)
-    strain_clamp(m,'harness-BMS',groups['bms-power'],132,front_gap=True,foot_x=124,dogleg=True)
+    strain_clamp(m,'harness-BMS',groups['bms-power'],129,front_gap=True,foot_x=124,
+                 dogleg=True,width=4,y_bounds=(161.2,176.),low_screw_xy=(125.8,161.8))
     middle_support(m,'left',groups['usb5'],113)
-    middle_support(m,'right',groups['usb5'],235)
+    middle_support(m,'right',groups['usb5'],237)
     integrate_guides(m,groups)
     raw=[]
     for pin,yy in [(1,169.448),(2,173.448)]:

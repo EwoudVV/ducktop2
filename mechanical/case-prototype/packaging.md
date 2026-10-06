@@ -64,9 +64,11 @@ qualify airflow, pressure drop, noise or thermal capacity.
 
 33 mm leaves only about 0.046 mm under the trackpad bridge and 2.7 mm above
 the maximum fan body. it fails the stated 0.5 and 3 mm allowances. a 32 mm
-base intersects the current USB envelope under that bridge. simply lowering
-the USB front run by 1..5 mm causes wire-to-wire conflicts in the tested
-routes. those rejected paths are recorded, not installed.
+base intersects the current USB envelope under that bridge. lowering the USB front run by 0.5 or 1 mm passes the updated wire-only
+checks, but the blower still needs 33.3 mm before half-millimeter rounding.
+1.5 and 2 mm drops fail wire separation. the selected arrangement keeps
+the original USB height; lower guides and a thinner cooler still need their
+own fit and thermal work.
 
 the deck number is not the closed laptop thickness. assumed keys reach
 H34.8. the printed lid and its external splice plates reach H44.8 when
@@ -76,36 +78,27 @@ as a thinner CNC design.
 
 ## guides and strain relief
 
-all 18 routed wires retain the source path under one rigid -1.3 mm height
-translation. the saved BMS paths cross the BMS board edge and the J2074 mated plug envelope:
-the upstream BMS crossing report screened center-board parts, not that
-BMS-side plug. the baseline remains visible and is not assembly-ready.
-all 18 paths pass their bend, length and wire-separation checks, which
-does not make the connector/body collision disappear.
+all 18 wires use the saved connector positions. the source harness and
+all four boards share a rigid -1.3 mm height translation in this case.
 
-case-only detours were investigated. wider concentric turns avoided J2074
-but ran into the BMS perimeter hardware or C797. alternate vertical profiles
-and BMS heights did not clear the conservative body and wire constraints
-in the tested parameter ranges. those candidates are not installed.
+the revised BMS leads turn around the left and rear of the crowded area,
+then enter J2072 from the rear. they clear the board substrate, J2074,
+C797, L1 and the other wires. the positive lead is about 119.6 mm including
+stripped ends; the return is 126.6 mm. the electrical allowance is 130 mm
+each. the fitted CAD inside bend radii are 11.92 and 9.27 mm, above the
+8.85 mm project limit. a smooth return-wire rise avoids the tighter bend
+introduced by fitting a single spline through the old transition.
 
-one concrete electronics proposal for the plug conflict is to move BMS J2074 by +7 mm in X,
-from installed anchor (156.35,153.948) to (163.35,153.948), keeping its
-orientation. the nominal mated outline would move from X151.95..160.75
-to X158.95..167.75, Y149.118..157.228. this separates it from the original
-left loop legs. its pads, routing, neighboring components, full withdrawal
-envelope and control cable length need electronics review. this is a
-proposal, not an applied change or proof that a PCB change is unavoidable.
-it does not fix the separate low approach across the BMS board edge.
-a revised vertical approach or another fully checked harness route is
-still required. do not treat the BMS carrier as an approved installation.
+no connector, mounting hole, outline or PCB route moved. J2074 remains at
+its saved location. the previous 7 mm move is no longer needed for the
+power harness.
 
-the protected positive centerline first crosses X145 at approximately
-Y174.567, H9.615. that is inside the BMS substrate, which occupies
-H9.1..10.7. with the current guide radius and 0.3 mm body clearance, the
-centerline needs H12.426 or more before that crossing. passing over J2074
-at its current XY would instead require H15.626 or more. either change
-needs a new bend/length/all-wire check; simply raising the enclosure does
-not change this conflict.
+wire, guide, braid-joint and connector-service intersections are clear in
+the current model. so are the known component-height screens. the right
+carrier has local relief pockets over U904 and C2069; both are front-side
+parts beneath its overhang. their courtyards and maximum heights get an
+additional 0.3 mm allowance.
+
 the independent separation check uses 0.2 mm allowance on each wire plus
 0.05 mm sampling allowance. its minimum is about 0.642 mm. dimensions and
 pin maps remain in `docs/hardware/cables-and-connectors.md` and
@@ -118,16 +111,17 @@ finished raw battery harness.
 the four required Alpha 1230 seam bonds are also shown separately: J2440/41,
 J2442/43, J2444/45 and J2446/47. each uses the documented 20 mm starting cut
 and 4.7625 x0.508 mm nominal section, with a 1 mm solder-joint reservation.
-their geometry and independent retention are not qualified. the seam-web
-crossings are included in the fit report, not hidden or omitted from the
-electrical return scheme. the guide feet need relief and retention designed
-around these braids as well as the insulated wires.
+the guide feet now have windows around all three previously obstructed
+braid locations, with 0.4 mm space around the nominal solder reservations.
+the formed braid shape, soldered joints and retention under case flex still
+need physical checks. no electrical return bond was removed to gain space.
 
 the guide channels use 0.15 mm radial fit clearance and 0.4 mm walls.
 these are fit-coupon dimensions, not a tolerance capability claim for a
 P1S. open channels follow the real curved paths. split clamp caps have
-stepped parting faces so each wire can be removed independently of its
-height. slit TPU liners have a provisional 0.025 mm radial grip; screws
+parting faces that follow each wire's height through the clamp. clearance
+holes run through the full cap thickness. the BMS cap has an offset screw
+lug clear of both the bend and screwdriver path. slit TPU liners have a provisional 0.025 mm radial grip; screws
 close against hard stops. measure the wire and tune the liner before a
 pull test. do not rely on friction calculated from an unmeasured TPU part.
 
@@ -135,8 +129,8 @@ the seam pedestals have 1 mm webs within the existing 1.5 mm gaps. their
 feet attach from beneath the case. the USB guide has additional ribbed
 supports through the spaces between cells, not through their bodies.
 the BMS power clamp has a dogleg support through the left inter-cell gap,
-clear of the H23 head and the BMS board. the six adjacent right-side wires
-share one stepped comb, avoiding the overlap between two separate clamps.
+clear of the H23 head and the BMS board. the six adjacent right-side wires share one stepped comb. the left
+power and return wires share a carrier with a window for their nearby braid.
 these hold the harness independently of the removable input deck. the
 right support includes open-bottom raw-lead crossing slots. its reduced
 section and every long guide require a deflection test under a dressed
@@ -187,18 +181,22 @@ and the packs below, not rounded up to an arbitrary 20 mm screw.
 8. XT30 needs 14 mm axial withdrawal. its nearby guide section must be
    removed first. BMS SH/GH housings need their saved 5 mm withdrawal
    envelopes plus real latch/finger access. use the interference report;
-   removing a cap alone does not guarantee the fixed carrier clears a plug.
+   release the two cell-gap screws and lift the USB upper rail before
+   withdrawing a plug; the lower feet stay in the case.
 
 top button/tool corridors and BMS withdrawal volumes are explicit keepouts.
 the check distinguishes a closed assembly from the service state. full
 finger ergonomics and exact driver head choices still require coupons.
 
-the present USB guide carriers are not service-complete. their upper rails
-obstruct several button/withdrawal corridors, while their seam feet are
-captured under the PCB edges. removing only the deck and clamp caps is not
-enough. the next carrier revision needs upper sections that detach from
-feet left in the case. do not call full board-row removal a normal cable
-service operation. the exact blocked corridors are retained in the report.
+the USB carriers now have detachable upper sections. their narrow blades
+locate in fixed seam feet, and two nylon M2 screws at each cell-gap post
+hold the rail down with at least 2.5 mm thread engagement. the checker
+allows only the designed shaft engagement inside each named post; it
+continues checking the rest of the screw for interference.
+
+the final service check includes the BMS screwdriver corridor and right
+XT30 withdrawal. neither requires removing the main-board row. actual
+tool and finger access, pilot fit and pull strength still need coupons.
 
 both prototype speaker cups sit in the left palm area. this avoids the
 USB turn and optional radio corridor without making the base taller. their

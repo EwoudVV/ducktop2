@@ -105,30 +105,8 @@ def right_ground(a, b):
 
 
 def bms_power_loop(a, b, raised):
-    """Enter the rear-facing BMS terminal without bending at its mouth."""
-    a, b = np.array(a), np.array(b)
-    radius, lead = 14, 2
-    turn_radius = 11.75 if raised else 10
-    cx, cy = b[0] - 2 * turn_radius - radius, a[1] - radius
-    assert cx > a[0] + lead and cy > b[1] - lead
-
-    def line(start, end):
-        count = max(2, math.ceil(np.linalg.norm(np.array(end) - start) / .025) + 1)
-        return np.linspace(start, end, count)
-
-    t = np.linspace(math.pi / 2, 0, 1001)
-    first = np.column_stack([cx + radius * np.cos(t), cy + radius * np.sin(t)])
-    top = b[1] - lead
-    middle = line(first[-1], [b[0] - 2 * turn_radius, top])
-    t = np.linspace(math.pi, 2 * math.pi, 2001)
-    turn = np.column_stack([b[0] - turn_radius + turn_radius * np.cos(t), top + turn_radius * np.sin(t)])
-    xy = np.vstack([line(a[:2], first[0])[:-1], first[:-1], middle[:-1],
-                    turn[:-1], line(turn[-1], b[:2])])
-    distance = np.r_[0, np.cumsum(np.linalg.norm(np.diff(xy, axis=0), axis=1))]
-    z = a[2] + (b[2] - a[2]) * smooth((distance - lead) / (distance[-1] - 2 * lead))
-    if raised:
-        z += 3.25 * smooth((distance - 2) / 25) * (1 - smooth((distance - (distance[-1] - 32)) / 30))
-    return np.column_stack([xy, z])
+    from bms_harness_geometry import power_loop
+    return power_loop(a, b, "FG_VSS" if raised else "PACK_POS_FUSED")
 
 
 def summarize(points, diameter):
@@ -322,6 +300,9 @@ result = {
     "units": "mm",
     "coordinates": "installed board XY; Z above the outside bottom of the case",
     "source_sha256": {v["file"]: v["sha256"] for v in data.values()},
+    "generator_sources_sha256": {name: hashlib.sha256((R/name).read_bytes()).hexdigest() for name in [
+        "gen/generate_power_harness_geometry.py", "gen/bms_harness_geometry.py",
+        "gen/fpc_contract.py", "gen/usb_power_contract.py", "mechanical/bms-harness-routing.json"]},
     "study_board_top_z": tops,
     "board_heights_are_fixed_requirements": False,
     "wire_position_allowance_mm": 0.2,

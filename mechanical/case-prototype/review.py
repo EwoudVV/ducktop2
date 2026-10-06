@@ -81,6 +81,8 @@ def review(m):
             _CURVES[id(p['shape'])]=(pts,r['wire_od_mm']/2+.5)
         if p['name'] in getattr(m,'collision_primitives',{}):
             pieces=m.collision_primitives[p['name']];_PRIMITIVES[id(p['shape'])]=pieces
+            if p.get('primitives_are_full_parts'):
+                continue
             # integrate_guides retains creation order: guide sections precede
             # their pedestal and middle rib. These are exact pre-fusion solids.
             n=sum('-guide' in name for name in p['integrated_from'])
@@ -90,7 +92,8 @@ def review(m):
                 points=np.vstack([np.array(r['points']) for r in routes]);points[:,1]*=-1
                 radius=max(r['wire_od_mm']/2 for r in routes)+CONFIG['cables']['guide_radial_clearance']+CONFIG['cables']['guide_wall']+.5
                 for s in pieces[:n]:_CURVES[id(s)]=(points,radius)
-    family={r['name']:('right-main' if r['group'] in ['right-J2432','right-J2452'] else r['group']) for r in m.harness['routes']}
+    family={r['name']:('right-main' if r['group'] in ['right-J2432','right-J2452'] else
+                      'left-main' if r['group'] in ['left-J2430','left-J2460'] else r['group']) for r in m.harness['routes']}
     outer=CONFIG['cables']['guide_radial_clearance']+CONFIG['cables']['guide_wall']
     foreign=[p['surface_gap_after_position_and_sampling_mm']+.4-2*outer-.016 for p in m.harness['pairs'] if family[p['a']]!=family[p['b']]]
     wire_guide=min(p['surface_gap_after_position_and_sampling_mm']+.2-outer-.016 for p in m.harness['pairs'])
@@ -123,6 +126,10 @@ def review(m):
         m.findings.append('Connector service paths remain obstructed after removing the deck and clamp caps. The one-piece USB carriers need a detachable upper section; their seam feet are captured beneath the boards. See harness-case-checks.json before treating this as serviceable.')
     if detailed['unverified_height_limits']:
         m.findings.append(str(len(detailed['unverified_height_limits']))+' wire/component height limits remain unverified; nominal STEP coverage is incomplete.')
+    if not detailed['braid_joint_clearance_conflicts'] and not any(
+            'ground-braid' in p.get('part','') for p in detailed['guide_case_collisions']):
+        m.findings[:]=[line for line in m.findings if not line.startswith('All four required Alpha 1230 seam braids')]
+        m.findings.append('All four seam braids and their 1 mm solder reservations clear the guide carriers. Confirm the formed braid shape, soldered joints and retention under case flex on a sample.')
     hardware=[p for p in m.parts if p.get('manufactured') and not p.get('moving')]
     for p in hardware:
         for name,s in m.board_material.items():

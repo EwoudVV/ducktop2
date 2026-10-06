@@ -431,8 +431,8 @@
     "gen/verify_100w_calculations.py": "81ca9ed3d3823ec750ba96cd554cd6c70575b2b680a67398717be6e7341491c6",
     "gen/test_100w_calculations.py": "506fe037d5a8eac06911f0bb7e0f946cccc56d19178e23e95d6f5bf949160302",
     "gen/generate_isl9241_charger.py": "a6ab978ee7a4bfd236de680ef3133e7051bce11dfbc5e59e15e34e4934332801",
-    "gen/verify_battery_path.py": "00a0e0b5fa0b1b74f4569f719da2904c76569204a5ed9b9d0ae8aec7ea8b611f",
-    "gen/test_battery_path.py": "89c1d5a91a0ed43be12b9f175b09b5bb5f26fd261fff2d5a3d1bb0b80ce7bc32",
+    "gen/verify_battery_path.py": "db664b47c2a1cebcf3ab27e7f25d80d9fcc59d768be99abecf57df9157a710a9",
+    "gen/test_battery_path.py": "de20635747e01f64245b6a858e4bf6371af8205e28386d0e2991759c90639b3b",
     "gen/testdata/battery_path.json": "737059c43a1533a2e5ae3202ddd7ec9c9cfec40985827628641282e41d8523a1",
     "gen/testdata/power_100w/center.xml": "f05252b71566ca58b4b5e2e091ab31f80c9b7d849e85e4538ab4258a1557647f",
     "gen/verify_erc_warnings.py": "93e1a3e2c0eca0c7d2d4203968978ff6c1dc4c0b5b7325472787e5d87b83ccb4",
@@ -443,9 +443,14 @@
     "gen/bom_catalog.py": "08df150fb2f00d339ae155a729e4ae9cec2196c703c38781820c9e9badcbea37",
     "gen/part_identity.py": "56656bc1f4effc845c475cfea11bd199eb3519611e8a13d6123646b012aee906",
     "gen/test_part_identity.py": "d9147380a48f87eba5a8cffd2883abe7f98a59f4c498b2155d21f2e6707f4d18",
-    "gen/export_power_placement.py": "c845a7fcf0f80120ebc609540a8246c2dde4aaea78b2b456eb373b9c041dc7df",
+    "gen/export_power_placement.py": "e8c68dc71a71f0ecbb0f4d9ffb1be0dab46f71be729e6f48f6f314a57132610b",
     "gen/generate_component_inventory.py": "57060c0451bf4efad5ed0d96b03f23cf5f39d1f6d9739d3ee7d206e062b56ee7",
-    "gen/generate_internal_services_sheet.py": "1da2107876cb6160cfe0e5e40198c1b7b35a616fb87994191bcd19c6dbb37390"
+    "gen/generate_internal_services_sheet.py": "1da2107876cb6160cfe0e5e40198c1b7b35a616fb87994191bcd19c6dbb37390",
+    "gen/fpc_contract.py": "7d766c8a435dd39fbf1a0ef73733132521c2958c8cc333a02af4e1f93f30183b",
+    "gen/bms_harness_geometry.py": "96cd21ef148588c43ea1a82c3cdf488965d072ddb496c8d4ed83af63ff9ebf72",
+    "gen/check_power_harness.py": "6833ee9180122635a85e2df1769f53122896ecba63aee2739de24e34fd835f57",
+    "gen/test_power_harness.py": "6c80b317d6662b402e0f125c4fb52131e0a4b1e2dc33e0638d8e8689c33a50fc",
+    "gen/generate_power_harness_geometry.py": "c5e7e5cec2c9886daf345b74bfaac199059de0db05db5531b597ae7902749dae"
   },
   "remaining": [
     "main-board routing and listed DRC findings",
@@ -489,7 +494,7 @@
   "battery_path": {
     "passed": true,
     "numeric_checks": 9,
-    "regression_tests": 8,
+    "regression_tests": 9,
     "metrics": {
       "discharge_A": 8.0,
       "charge_A": 3.0,
@@ -514,9 +519,10 @@
       "Q25_junction_screen_at_100C_case_C": 100.6144,
       "center_component_drop_at_8A_mV": 191.708,
       "center_component_loss_at_8A_W": 1.533664,
-      "protected_wire_pair_drop_at_8A_mV": 57.6,
-      "protected_wire_pair_loss_at_8A_W": 0.4608,
-      "minimum_protected_pack_voltage_for_10V_VSYS_before_contacts_and_copper_V": 10.249308,
+      "protected_wire_pair_drop_at_8A_mV": 62.4,
+      "protected_wire_length_budget_mm_each": 130,
+      "protected_wire_pair_loss_at_8A_W": 0.4992,
+      "minimum_protected_pack_voltage_for_10V_VSYS_before_contacts_and_copper_V": 10.254108,
       "gauge_differential_range_current_at_shunt_high_A": 20.14585599742133,
       "startup_allocated_capacitance_uF": 695.3585,
       "startup_load_allocation_A": 0.8,
@@ -540,7 +546,8 @@
       "TPS26600 short and startup energy at 3S; thermal latch has no guaranteed maximum fault duration",
       "BMS handoff, fault peak, repeated pulses, fuse clearing and gauge input excursions",
       "cell, raw-pack wiring and operating-profile qualification"
-    ]
+    ],
+    "wire_length_update_date": "2026-10-06"
   },
   "erc_warning_review": {
     "date": "2026-10-05",
@@ -690,10 +697,10 @@
     "component_height_gaps_closed": 23,
     "document": "docs/hardware/main-board-parts.md",
     "exports": {
-      "mechanical/component-placement.json": "3081ef459bf528e4355de7eb827580f1863c371369dbea5e3ea06b25a1fccfc4",
-      "mechanical/component-placement.csv": "d42aa30e5876b59c4b55de154445f8d6f6cb8a2059a0d607a57d9e4d7227f7fa",
-      "mechanical/power-placement.json": "8bdf15c7ba18e8ac0fc3c921da2fbb30a6e600d46691d70e353ed2d3c816de19",
-      "mechanical/power-placement.csv": "0ac1ff59994a76ac267511e4be52c398b69c4859e737b43f8c287300a6b4fe49"
+      "mechanical/component-placement.json": "5dc18cebe5c016df5b231b8884225e178ab4116b102efca0a2dac5f461c6da4f",
+      "mechanical/component-placement.csv": "c9d37320461746ba94d8be2d5b9ffb4d69f4bc328a9b96a89f3b486bbabcfd4a",
+      "mechanical/power-placement.json": "1f628568733a7d0eb70a9e13975678bab4d784719919b44b01bfe4db0515d39d",
+      "mechanical/power-placement.csv": "ddf523a37363b06c88938d3757511607e6f74249eb0bb95da86b4edcf539c5c3"
     },
     "limits": [
       "No sourcing quote or stock guarantee.",
@@ -701,6 +708,37 @@
       "Confirm the RP2350 reference lands and stencil with the assembler.",
       "DC-bias capacitance and regulator response still require prototype validation.",
       "Main-board routing and full assembly fit are unfinished."
-    ]
+    ],
+    "export_refresh_date": "2026-10-06"
+  },
+  "power_harness_update": {
+    "date": "2026-10-06",
+    "PCB_files_unchanged": true,
+    "wire_check_passed": true,
+    "wire_length_budget_mm_each": 130,
+    "wire_paths": [
+      {
+        "wire": "bms-FG_VSS",
+        "cut_length_mm": 126.578,
+        "CAD_minimum_inside_radius_mm": 9.27048,
+        "required_inside_radius_mm": 8.85063
+      },
+      {
+        "wire": "bms-PACK_POS_FUSED",
+        "cut_length_mm": 119.645,
+        "CAD_minimum_inside_radius_mm": 11.91608,
+        "required_inside_radius_mm": 8.85063
+      }
+    ],
+    "wire_check_file": "mechanical/power-harness-checks.json",
+    "case_check_file": "mechanical/case-prototype/harness-case-checks.json",
+    "wire_pair_drop_at_8A_mV": 62.4,
+    "wire_pair_loss_at_8A_W": 0.4992,
+    "case_geometry_is_not_physical_qualification": true,
+    "case_geometry_checks_passed": true,
+    "manufactured_STEP_parts": 99,
+    "watertight_STLs": 101,
+    "unverified_other_wire_component_height_limits": 31,
+    "physical_fit_verified": false
   }
 }

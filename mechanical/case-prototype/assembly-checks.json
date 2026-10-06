@@ -3,7 +3,7 @@
   "status": "current-board packaging candidate; physical measurements and Ultra cooling qualification remain open",
   "checks": {
     "analytic_guide_clearances": {
-      "different_carriers_minimum_outer_envelope_gap_mm": -0.018827123661595765,
+      "different_carriers_minimum_outer_envelope_gap_mm": 0.823297828531504,
       "wire_to_other_guide_minimum_gap_mm": 0.2758049786513388,
       "CAD_approximation_allowance_mm": 0.016,
       "method": "continuous-path sampling bound plus circular enclosing radii; same-carrier guide walls are intentionally fused; pedestal and rib checks still use BRep geometry"
@@ -34,42 +34,48 @@
     "maximum_sampled_collision_free_angle_from_closed": 180,
     "current_power_wires_vs_closed_case": [
       {
+        "wire": "left-USB_PD_SELECTED-power-wire",
+        "part": "harness-left-main-power-carrier",
+        "closed_overlap_mm3": 5.387
+      },
+      {
+        "wire": "left-PD1_VBUS_RAW-power-wire",
+        "part": "harness-left-main-power-carrier",
+        "closed_overlap_mm3": 5.387
+      },
+      {
+        "wire": "left-VSYS-power-wire",
+        "part": "harness-left-main-power-carrier",
+        "closed_overlap_mm3": 5.387
+      },
+      {
         "wire": "left-GND-power-wire",
-        "part": "harness-left-J2460-carrier",
+        "part": "harness-left-main-power-carrier",
         "closed_overlap_mm3": 5.791
+      },
+      {
+        "wire": "bms-PACK_POS_FUSED-power-wire",
+        "part": "harness-BMS-carrier",
+        "closed_overlap_mm3": 0.194
       }
     ],
     "eDP_bend_corridor_vs_moving_parts_closed": [],
     "eDP_corridor_note": "annulus is rotationally invariant about the hinge axis; this checks its space, not constant-length cable behavior",
-    "known_component_model_vs_support": [
-      {
-        "board": "bms-pcb-and-available-models",
-        "part": "harness-BMS-carrier",
-        "overlap_mm3": 36.996
-      }
-    ],
+    "known_component_model_vs_support": [],
     "cell_to_trackpad_bridge_gap_mm": 5.600000000000001,
     "closed_key_to_panel_gap_mm": 2.0,
     "closed_radio_screw_to_panel_gap_mm": 1.2999999999999972,
     "detailed_harness_report": "harness-case-checks.json"
   },
-  "collisions": [
-    {
-      "part": "harness-BMS-carrier",
-      "board": "bms",
-      "substrate_overlap_mm3": 32.8356
-    }
-  ],
+  "collisions": [],
   "limitations": [
     "cooler geometry is a reserved volume, not a qualified Ultra cooler; contact, springs and thermal performance for 256V remain open",
     "J2 pin 1 is raw negative and pin 2 raw positive. Raw-pack, taps and probes need battery lead/exit measurements; no completed route is claimed.",
     "Guide bores and TPU clamp liners require calibration and pull tests; +/-0.2 mm wire position is not a loose-wire guarantee.",
     "The eDP corridor is not a constant-length flex simulation. No pinch-free cable qualification is claimed.",
     "Small signal harnesses, keyboard FFC, OLED, speaker and trackpad cable ends still need measured dressing and independent retention.",
-    "All four required Alpha 1230 seam braids are shown at their actual solder lands. Their clamp integration and soldered shapes remain unresolved; do not omit them to make the case fit.",
-    "The saved protected-power BMS loops hit the BMS board/connector assembly, including J2074. This is an unresolved physical conflict, despite passing bend, length and wire-separation checks.",
-    "Connector service paths remain obstructed after removing the deck and clamp caps. The one-piece USB carriers need a detachable upper section; their seam feet are captured beneath the boards. See harness-case-checks.json before treating this as serviceable.",
-    "39 wire/component height limits remain unverified; nominal STEP coverage is incomplete.",
+    "31 wire/component height limits remain unverified; nominal STEP coverage is incomplete.",
+    "All four seam braids and their 1 mm solder reservations clear the guide carriers. Confirm the formed braid shape, soldered joints and retention under case flex on a sample.",
     "power-wire/case clashes remain; see exact part pairs before accepting this candidate"
   ],
   "lid_mass_and_loads": {
@@ -387,7 +393,7 @@
   "complete_arrangement_supported": false,
   "not_ready_reason": "owned-part measurements, guide pull/fit tests, signal-cable dressing and both Ultra thermal qualifications remain outstanding",
   "config_sha256": "3500b9d6508d2cbfd499da67fdd430dbeb7ce4d8799410b98e057c6e8fba565e",
-  "inventory_sha256": "4b2c412deec28a9bcad064007fb29ebb2db43f8b063bceb81dc2c5078fd6a71f",
+  "inventory_sha256": "483f35bb3236877e841e96c6f9e68dde5fa4fb96372bdfb820d7e92112fc70c2",
   "fastener_length_screen": {
     "blower_suspension_length_mm": 14.8,
     "nut_engagement_mm": 1.5,

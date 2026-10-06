@@ -62,7 +62,10 @@ def paths(config):
         radius=1/max(curvature.max(),1e-12);od=route['wire_od_mm']
         length=float(np.linalg.norm(np.diff(q,axis=0),axis=1).sum())
         hidden=4 if route['group']=='usb5' else 16
-        low,high=(400,420) if route['group']=='usb5' else (20,120 if route['group']=='bms-power' else 100)
+        from sys import path as module_paths
+        if str(ROOT/'gen') not in module_paths:module_paths.insert(0,str(ROOT/'gen'))
+        from fpc_contract import BMS_POWER_WIRE_LENGTH_BUDGET_MM
+        low,high=(400,420) if route['group']=='usb5' else (20,BMS_POWER_WIRE_LENGTH_BUDGET_MM if route['group']=='bms-power' else 100)
         ends=[]
         for e in route['ends']:
             e=dict(e);e['point']=list(e['point']);e['point'][2]+=dz;ends.append(e)

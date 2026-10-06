@@ -11,16 +11,16 @@
     },
     "center": {
       "file": "ducktop2-center.kicad_pcb",
-      "snapshot_sha256": "7b8b3fc0eaaa33c80654b086594b19dccec68ea9f1eeb76de15b46c909926a6e",
+      "snapshot_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "live_sha256_at_metadata_check": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
-      "live_matches_snapshot": false,
+      "live_matches_snapshot": true,
       "frozen_geometry_file": "reference/pcb-snapshot/center.step"
     },
     "right": {
       "file": "right_io/right_io.kicad_pcb",
-      "snapshot_sha256": "2dc8b232debb9de3507809bdd4743ff775f4d1a8b82a4756a764a73887ed018d",
+      "snapshot_sha256": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
       "live_sha256_at_metadata_check": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
-      "live_matches_snapshot": false,
+      "live_matches_snapshot": true,
       "frozen_geometry_file": "reference/pcb-snapshot/right.step"
     },
     "bms": {
@@ -32,9 +32,9 @@
     },
     "keyboard": {
       "file": "keyboard/12_keyboard_daughterboard.kicad_pcb",
-      "snapshot_sha256": "dde68ee9f5a772e6e72ff41556725470885d89b2794e609eeac95493c6360097",
-      "live_sha256_at_metadata_check": "2420b4372f9caf6a93c4b396c8951c30d49c2d5757aa3014be3950a11343151f",
-      "live_matches_snapshot": false,
+      "snapshot_sha256": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
+      "live_sha256_at_metadata_check": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
+      "live_matches_snapshot": true,
       "frozen_geometry_file": "reference/pcb-snapshot/keyboard.step"
     },
     "radio": {
@@ -53,25 +53,27 @@
     "build.py": "471208d381d95ed6f1e9d29dc20dfbce1b79b15bab26b5331fd842c6e422bc57",
     "ground_braids.py": "b7b6ccef1832d0e87aa3534eb3ee037d31244d72dec45c42a7b881b51611f585",
     "check_hinges.py": "1c7e2bc4adac2a2c7325c9480ccc1647569da95893d3946249df55feceacb03b",
+    "service_carriers.py": "0ae9f787da099c85e26dbdca2c251169b78bb092cf3197034b4ad66547cfc786",
     "export_pcbs.py": "80d5adc264893b672c4fe7e2e247604bb15a8ccd6c8440eb89b70135548672c4",
-    "harness_geometry.py": "3c5fe23c021a259c5201827872ef01b12e48af7660f0ceb56df0c90815814641",
+    "harness_geometry.py": "adfe13ac074b911f7f5ef5f9487fa95449ac0b916926d61234e1b7da1669da06",
     "freeze_boards.py": "bc2c3461805f48f82fffc18a2cdec2efa6e57a229096ee6fa4ed7676e09aeae7",
     "hinges.py": "7a4803a568a0c45ab77072926ae41a667eab80a0c85196a26dfa173812b75f8a",
+    "check_thinner_harness.py": "b903677822504f6718446c489cde7512906d1931897082c7617a13dd34ec73f8",
     "finalize_metadata.py": "0184f0c0f91afd8db37df5068257c65f1125b54f56dccf79abd11f6b0ca041a6",
-    "audit_inputs.py": "a9534f52a65b4e172ccf1ab7e388aae67558dfdcc849dbbed20fb513b2acb0b3",
-    "review.py": "d57471feefed66da55a8d1c6038409b1764e03321245914b38efcc8e65aab500",
+    "audit_inputs.py": "8904494e52712ef7115c1b65592e54778a98ea464364467ed7cf7f1ae02b0622",
+    "review.py": "40d7afa1ee2c7bdfaddac02efe1ad967eb12745c8a152827c285b78c11f0a8f5",
     "sync_floorplan.py": "eea99f00ce9dffd6590fea0eadeb9e89dca3e28e3399702741e5072bc4daf3c2",
-    "inspect_case.py": "b8858b3407274d33dec28fd8440c2ae1349797a51b77b5e6676109ecb21ea5f1",
+    "inspect_case.py": "405bcf04645f2a4d4d145f7b2fe9304ca4714b46e8363d4041e510dd5363bd89",
     "check_exports.py": "48d9b1b46fe487a348a6e235b9d65799bb893ceeb1fb01c3004b388021cfe4fa",
     "draw_hinges.py": "a3e9ca5752343cad671f138c9f4c7deb915cd1f5aae55ccc56041ab5956cfa3c",
     "case_inputs.py": "96a2cabded138177c1237eb411260619bf30299b35cc9ee0d985c5a15b8d4ffb",
     "cad.py": "4a356ff6f8c32fa71761980d8f8ea55bf92395b6d3d894cdb8f4232a3a81d96f",
     "thickness_study.py": "02b2100777b99fe00cf8093fc59887a0724383f8dca538b8238bdabd8ad800f8",
-    "cables.py": "febf89f7e3dd050bba44a0a4b1f658744fd67a0434c5ee1093badd312ddeae8d",
+    "cables.py": "927d0109000e99d63d5e4e259bf6c966a28e01425d3f167aa02dc4b36e054355",
     "deliver.py": "18ba95661539f66b09e08fc988f38f97f7ce7da930510abe9867d43a40d60c0d",
     "radio_hardware.py": "7b445ad946393b2b038533c2b665ae263283adce5e0939a525c9b0f3f4c9832a",
-    "model_cache.py": "5f64a16af5c23320f15315e929ea2636cf37e672c7e725d9b7031a489148f218",
-    "clearance_review.py": "f3bc5121d7b8ae04c8805d4bf43f084502d0436ff28fb6d88ccecd065509bf7f"
+    "model_cache.py": "fe7a8bf8874f4afb356dcc6b2531315d69a606e1c056f1c21b330c4073618a6d",
+    "clearance_review.py": "3d48e0572834ca7a414a516635cb2e7775e6bd6fe170019785e13ddb9629147b"
   },
   "assembly_config_sha256": "3500b9d6508d2cbfd499da67fdd430dbeb7ce4d8799410b98e057c6e8fba565e"
 }

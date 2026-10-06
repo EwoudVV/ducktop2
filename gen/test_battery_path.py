@@ -3,6 +3,7 @@ import copy
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 from verify_battery_path import inspect
 from verify_electrical_calculations import NetlistValues
@@ -36,6 +37,17 @@ class BatteryPathTests(unittest.TestCase):
         self.assertFalse(result['passed'])
         self.assertIn('BGATE load at the 2 V drive test point', result['failures'])
         self.assertGreater(result['metrics']['gate_load_at_2V_uA'], 15)
+
+    def test_longer_harness_cannot_reuse_the_old_voltage_drop(self):
+        with patch('fpc_contract.BMS_POWER_WIRE_LENGTH_BUDGET_MM',130):
+            short=inspect(*self.boards)['metrics']
+        with patch('fpc_contract.BMS_POWER_WIRE_LENGTH_BUDGET_MM',260):
+            long=inspect(*self.boards)['metrics']
+        self.assertAlmostEqual(short['protected_wire_pair_drop_at_8A_mV'],62.4)
+        self.assertAlmostEqual(short['protected_wire_pair_loss_at_8A_W'],.4992)
+        self.assertAlmostEqual(long['protected_wire_pair_drop_at_8A_mV'],124.8)
+        self.assertGreater(long['minimum_protected_pack_voltage_for_10V_VSYS_before_contacts_and_copper_V'],
+                           short['minimum_protected_pack_voltage_for_10V_VSYS_before_contacts_and_copper_V'])
 
     def test_q25_body_diode_cannot_be_reversed(self):
         self.boards[0].pins['Q25']['5'] = '/PACK_POS_FUSED'

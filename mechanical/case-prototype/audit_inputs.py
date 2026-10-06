@@ -42,7 +42,8 @@ def main():
                                     'upstream_harness_sha256':expected,'geometry_sha256':gh,
                                     'uncommitted':bool(subprocess.check_output(['git','diff','--name-only','--',r['file']],cwd=ROOT,text=True).strip()),
                                     'harness_geometry_unchanged':True}
-    for f in ['board-datums.json','component-placement.json','power-harness.json','bms-connector-access.json','bms-connector-clearances.json','bms-wire-clearances.json']:
+    for f in ['board-datums.json','component-placement.json','power-harness.json','bms-harness-routing.json',
+              'power-harness-checks.json','bms-connector-access.json','bms-connector-clearances.json']:
         result['upstream_inputs'][f]=digest(ROOT/'mechanical'/f)
     result['notes']=['Upstream hash differences accepted only after exact saved outline, hole, footprint pose, model transform, pad position and courtyard comparison. Electrical value text is not a geometric datum. R2600 changed from 100k to 1M without a footprint or pose change. Electronics remain untouched.',
                      'board-placement.json BMS notch metadata is older than the current Edge.Cuts. The case uses the actual board geometry, not that stale rectangle.']

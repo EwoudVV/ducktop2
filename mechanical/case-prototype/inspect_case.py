@@ -9,7 +9,7 @@ from deliver import posed,deliver
 def views(m):
     from build import CONFIG
     out=HERE/'views';out.mkdir(exist_ok=True)
-    visible=[{**p,'color':(.88,.12,.10)} if p['name']=='bms-J2074-mated-envelope' else p for p in m.parts if p['group'] not in ['keepout','routes']]
+    visible=[p for p in m.parts if p['group'] not in ['keepout','routes']]
     # These are the same conservative height envelopes used by the checker,
     # not substitute manufacturer body models. Keep their color distinct.
     import json
@@ -22,7 +22,7 @@ def views(m):
                 visible.append({'name':row['reference']+'-height-envelope','shape':polygon_prism(ring['outer'],pcb_top('center'),row['height_mm']),
                                 'color':(.95,.65,.15,.65),'group':'boards','moving':False})
     render([posed(p,105) for p in visible],out/'open.png',f"current boards / {CONFIG['base']['deck_top']} mm base candidate / 105 degrees",direction=(1,-1.7,1.1))
-    render(visible,out/'closed.png','closed / all retained geometry / physical fit still pending',direction=(1,-1.5,1))
+    render(visible,out/'closed.png','closed case study / prototype geometry',direction=(1,-1.5,1))
     harness=[p for p in visible if p.get('harness_part') or p.get('power_wire') or p.get('terminal') or p.get('harness_fastener') or p.get('braid')]
     render(harness,out/'harness-detail.png','18 routed wires / independent guides and strain relief',direction=(.1,-.65,1.5))
     # This close-up keeps the PCB, clamps and actual enlarged BMS notch visible.
@@ -32,7 +32,7 @@ def views(m):
         if p.get('moving') or p['group'] in ['deck','inputs'] or p['name']=='trackpad-bridge':continue
         if bbox_overlap(p['shape'],clip):
             scene.append(p)
-    render(scene,out/'bms-guides.png','BMS guides / red: unresolved J2074 plug clearance',direction=(.3,-.6,1.5),focus=((178,-165,12),60))
+    render(scene,out/'bms-guides.png','BMS power leads / current connectors and revised guides',direction=(.3,-.6,1.5),focus=((155,-156,12),54))
     internal=[p for p in visible if not p.get('moving') and p['group'] not in ['deck','inputs'] and not p['name'].startswith('keyboard-')]
     render(internal,out/'inside.png','current PCB geometry / harness carriers anchored outside the cells',direction=(.15,-.8,1.7))
     for label,x in [('cooling',132.45),('compute-keyboard',205),('trackpad-battery',179),('power-loom',166)]:

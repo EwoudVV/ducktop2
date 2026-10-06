@@ -1,0 +1,211 @@
+{
+  "passed": true,
+  "failures": [],
+  "BMS_routes": [
+    {
+      "wire": "bms-FG_VSS",
+      "cut_length_mm": 126.578,
+      "CAD_minimum_inside_radius_mm": 9.27048,
+      "required_inside_radius_mm": 8.85063,
+      "closest_bodies": [
+        {
+          "part": "center/L1",
+          "remaining_clearance_mm": 0.07566,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/J58",
+          "remaining_clearance_mm": 0.14143,
+          "uses_assembly_reservation": true
+        },
+        {
+          "part": "center/substrate",
+          "remaining_clearance_mm": 0.3327,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "bms/substrate",
+          "remaining_clearance_mm": 0.3327,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/MK430",
+          "remaining_clearance_mm": 0.35264,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/LED430",
+          "remaining_clearance_mm": 0.37742,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/R435",
+          "remaining_clearance_mm": 0.49072,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/J2073",
+          "remaining_clearance_mm": 1.1327,
+          "uses_assembly_reservation": true
+        },
+        {
+          "part": "center/C450",
+          "remaining_clearance_mm": 2.53659,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/Q2660",
+          "remaining_clearance_mm": 2.89856,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/RS2660",
+          "remaining_clearance_mm": 3.26038,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/R2662",
+          "remaining_clearance_mm": 3.31019,
+          "uses_assembly_reservation": false
+        }
+      ]
+    },
+    {
+      "wire": "bms-PACK_POS_FUSED",
+      "cut_length_mm": 119.645,
+      "CAD_minimum_inside_radius_mm": 11.91608,
+      "required_inside_radius_mm": 8.85063,
+      "closest_bodies": [
+        {
+          "part": "center/J58",
+          "remaining_clearance_mm": 0.07344,
+          "uses_assembly_reservation": true
+        },
+        {
+          "part": "center/L1",
+          "remaining_clearance_mm": 0.07454,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/C797",
+          "remaining_clearance_mm": 0.16605,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/substrate",
+          "remaining_clearance_mm": 0.33266,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "bms/substrate",
+          "remaining_clearance_mm": 0.3327,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/J2073",
+          "remaining_clearance_mm": 1.1431,
+          "uses_assembly_reservation": true
+        },
+        {
+          "part": "center/R435",
+          "remaining_clearance_mm": 2.64527,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/U62",
+          "remaining_clearance_mm": 3.2665,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/U410",
+          "remaining_clearance_mm": 3.41859,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/LED430",
+          "remaining_clearance_mm": 3.48629,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/U64",
+          "remaining_clearance_mm": 3.71872,
+          "uses_assembly_reservation": false
+        },
+        {
+          "part": "center/C434",
+          "remaining_clearance_mm": 3.94515,
+          "uses_assembly_reservation": false
+        }
+      ]
+    }
+  ],
+  "closest_wire_pairs": [
+    {
+      "a": "bms-FG_VSS",
+      "b": "bms-PACK_POS_FUSED",
+      "wire_surface_gap_after_allowances_mm": 0.66862,
+      "guide_envelope_gap_mm": -0.03138
+    },
+    {
+      "a": "bms-FG_VSS",
+      "b": "usb5-GND",
+      "wire_surface_gap_after_allowances_mm": 1.52329,
+      "guide_envelope_gap_mm": 0.82329
+    },
+    {
+      "a": "bms-PACK_POS_FUSED",
+      "b": "usb5-GND",
+      "wire_surface_gap_after_allowances_mm": 1.56793,
+      "guide_envelope_gap_mm": 0.86793
+    },
+    {
+      "a": "bms-FG_VSS",
+      "b": "usb5-USB_PORT_5V",
+      "wire_surface_gap_after_allowances_mm": 3.56273,
+      "guide_envelope_gap_mm": 2.86273
+    },
+    {
+      "a": "bms-PACK_POS_FUSED",
+      "b": "usb5-USB_PORT_5V",
+      "wire_surface_gap_after_allowances_mm": 4.73642,
+      "guide_envelope_gap_mm": 4.03642
+    },
+    {
+      "a": "left-MCU_3V3",
+      "b": "bms-FG_VSS",
+      "wire_surface_gap_after_allowances_mm": 52.16041,
+      "guide_envelope_gap_mm": 51.46041
+    },
+    {
+      "a": "left-SYS_3V3",
+      "b": "bms-FG_VSS",
+      "wire_surface_gap_after_allowances_mm": 52.95224,
+      "guide_envelope_gap_mm": 52.25224
+    },
+    {
+      "a": "left-AUX_DC_RAW",
+      "b": "bms-FG_VSS",
+      "wire_surface_gap_after_allowances_mm": 53.93735,
+      "guide_envelope_gap_mm": 53.23735
+    }
+  ],
+  "unverified_height_limits": [],
+  "assembly_reservations_used": [
+    "center/J2073",
+    "center/J58"
+  ],
+  "notes": [
+    "Courtyards are conservative body envelopes. Mounting hardware and dressed cable reservations need physical confirmation.",
+    "Body checks include 0.3 mm clearance, 0.2 mm positioning, 0.15 mm guide fit, 0.4 mm guide walls and 0.041 mm interpolation/sampling allowance.",
+    "CAD curvature is sampled at 10,000 parameter positions on the actual fitted wire edge.",
+    "Guide carriers, clamps, screws and the full case are checked separately in the case assembly."
+  ],
+  "physical_fit_verified": false,
+  "source_sha256": {
+    "mechanical/power-harness.json": "4016ffe4a1134de1758c097b28634249fb27f55597dac49b82fbe762f8fc7d0b",
+    "mechanical/board-datums.json": "eb7fe026fb0b33a691bc3c35ab325eea04b916b3411f6c935033a79a3d3c9db5",
+    "mechanical/component-placement.json": "5dc18cebe5c016df5b231b8884225e178ab4116b102efca0a2dac5f461c6da4f",
+    "mechanical/bms-connector-access.json": "63ac4ffa038947f686031fa7795131dd20af9955ba6e19e8313f035b2f982bfe",
+    "mechanical/bms-harness-routing.json": "13fc3978a1c76499755d111ff25b8e0e856beca4a2281e94b04179f82a49fa22"
+  }
+}

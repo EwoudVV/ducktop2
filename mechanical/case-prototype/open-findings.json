@@ -4,9 +4,7 @@
   "Guide bores and TPU clamp liners require calibration and pull tests; +/-0.2 mm wire position is not a loose-wire guarantee.",
   "The eDP corridor is not a constant-length flex simulation. No pinch-free cable qualification is claimed.",
   "Small signal harnesses, keyboard FFC, OLED, speaker and trackpad cable ends still need measured dressing and independent retention.",
-  "All four required Alpha 1230 seam braids are shown at their actual solder lands. Their clamp integration and soldered shapes remain unresolved; do not omit them to make the case fit.",
-  "The saved protected-power BMS loops hit the BMS board/connector assembly, including J2074. This is an unresolved physical conflict, despite passing bend, length and wire-separation checks.",
-  "Connector service paths remain obstructed after removing the deck and clamp caps. The one-piece USB carriers need a detachable upper section; their seam feet are captured beneath the boards. See harness-case-checks.json before treating this as serviceable.",
-  "39 wire/component height limits remain unverified; nominal STEP coverage is incomplete.",
+  "31 wire/component height limits remain unverified; nominal STEP coverage is incomplete.",
+  "All four seam braids and their 1 mm solder reservations clear the guide carriers. Confirm the formed braid shape, soldered joints and retention under case flex on a sample.",
   "power-wire/case clashes remain; see exact part pairs before accepting this candidate"
 ]

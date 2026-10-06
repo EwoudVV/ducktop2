@@ -92,7 +92,8 @@ def inspect(center, left, right, bms):
     q25_r_hot_screen = .0032 * 2.0
     q25_loss = DISCHARGE_A ** 2 * q25_r_hot_screen
     component_r = rs1_high + rs2_high + q25_r_hot_screen
-    wire_r = 2 * .120 * .030
+    from fpc_contract import BMS_POWER_WIRE_LENGTH_BUDGET_MM
+    wire_r = 2 * BMS_POWER_WIRE_LENGTH_BUDGET_MM / 1000 * .030
     checks.append(Check("protected WAGO operating current", DISCHARGE_A,
                         "A", 0, 9, "9A published terminal rating with the specified 18AWG; assembled temperature remains a test"))
 
@@ -143,6 +144,7 @@ def inspect(center, left, right, bms):
             "center_component_drop_at_8A_mV": DISCHARGE_A * component_r * 1000,
             "center_component_loss_at_8A_W": DISCHARGE_A ** 2 * component_r,
             "protected_wire_pair_drop_at_8A_mV": DISCHARGE_A * wire_r * 1000,
+            "protected_wire_length_budget_mm_each": BMS_POWER_WIRE_LENGTH_BUDGET_MM,
             "protected_wire_pair_loss_at_8A_W": DISCHARGE_A ** 2 * wire_r,
             "minimum_protected_pack_voltage_for_10V_VSYS_before_contacts_and_copper_V": 10 + DISCHARGE_A * (component_r + wire_r),
             "gauge_differential_range_current_at_shunt_high_A": .125 / rs1_high,

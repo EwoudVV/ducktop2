@@ -1,0 +1,36 @@
+{
+  "units": "mm",
+  "status": "case-fit cable paths; guides and full assembly require validation",
+  "bms_to_center_height_difference_mm": 4.0,
+  "height_knot_fractions": [0.22, 0.43, 0.66, 0.84],
+  "wire_position_allowance_mm": 0.2,
+  "guide_radial_clearance_mm": 0.15,
+  "guide_wall_mm": 0.4,
+  "body_clearance_mm": 0.3,
+  "routes": {
+    "PACK_POS_FUSED": {
+      "turn_radius_mm": 19.358,
+      "first_radius_mm": 14.426,
+      "terminal_lead_mm": 3.289,
+      "height_above_start_mm": [3.857, 5.107, 5.183, 5.340]
+    },
+    "FG_VSS": {
+      "height_profile": "quintic",
+      "turn_radius_mm": 22.846,
+      "first_radius_mm": 11.458,
+      "terminal_lead_mm": 2.968,
+      "height_above_start_mm": [7.059, 5.566, 5.421, 6.456]
+    }
+  },
+  "assembly_reservations_mm": {
+    "center/J58": 4.0,
+    "center/TP2660": 1.0,
+    "center/TP2661": 1.0
+  },
+  "notes": [
+    "J58 reserves space for the soldered trackpad cable and insulation; confirm the dressed lead height on the assembled board.",
+    "The endpoint straight sections protect the WAGO mouths from a bend starting at the terminal.",
+    "A common board-height translation is allowed. Changing the relative BMS height needs a new route check.",
+    "The four guide-height knots are measured above the center-terminal wire axis, not a fixed case datum."
+  ]
+}

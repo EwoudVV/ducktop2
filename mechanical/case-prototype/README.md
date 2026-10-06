@@ -5,21 +5,19 @@ editable CadQuery case study using the saved WAGO power revision and the
 33.5 mm base to the deck surface. this is a packaging candidate, not a
 verified complete minimum or a manufacturing release.
 
-the old Micro-Fit arches are gone. all 18 Alpha wire paths are imported
-from the mechanical inputs. the main boards and BMS are lowered together
-by 1.3 mm. all source wire shapes are retained. a real conflict between the
-BMS loops and J2074 remains visible; attempted detours are not adopted.
-the case has
-continuous open guides, split strain-relief clamps and separate supports
-in the gaps between cells. clamps do not rely on solder pads, the keyboard
-carrier, the trackpad bridge or the cells to take cable loads.
+all 18 power-wire paths use the current connectors. the revised BMS pair
+clears the board edge, J2074 and C797 without moving a PCB part. the case
+has open guides, split clamps, braid windows and detachable USB rails.
+fixed feet stay below the boards or between cells when a rail is removed.
 
-the BMS board-edge/plug conflict, braid crossings and detachable-carrier
-service access are unresolved. the current export is for inspection and
-isolated fit coupons, not a complete case build.
+the saved model clears the wire, guide, braid, service and known-component
+height screens, including the sampled hinge sweep. physical dimensions,
+clamp strength, several other component heights, signal cables and cooling
+remain unqualified. use the model for inspection and fit coupons before a
+complete case build.
 
 read `packaging.md` before printing. `harness-case-checks.json` records
-actual clashes, conservative height screens and unverified dimensions.
+solid intersections, conservative height screens and unverified dimensions.
 `thickness-study.json` separates the stack calculation from a complete fit
 claim. no thermal approval is implied for either Mu Ultra variant.
 
@@ -30,6 +28,7 @@ to rebuild this pinned case snapshot, use the existing environment:
 ```sh
 .workbench/layout-env/bin/python mechanical/case-prototype/build.py
 .workbench/layout-env/bin/python mechanical/case-prototype/thickness_study.py
+.workbench/layout-env/bin/python mechanical/case-prototype/check_thinner_harness.py
 .workbench/layout-env/bin/python mechanical/case-prototype/check_exports.py
 .workbench/layout-env/bin/python mechanical/case-prototype/finalize_metadata.py
 ```
@@ -44,6 +43,7 @@ then run from the project root:
 .workbench/layout-env/bin/python mechanical/case-prototype/freeze_boards.py
 .workbench/layout-env/bin/python mechanical/case-prototype/build.py
 .workbench/layout-env/bin/python mechanical/case-prototype/thickness_study.py
+.workbench/layout-env/bin/python mechanical/case-prototype/check_thinner_harness.py
 .workbench/layout-env/bin/python mechanical/case-prototype/check_exports.py
 .workbench/layout-env/bin/python mechanical/case-prototype/finalize_metadata.py
 ```
