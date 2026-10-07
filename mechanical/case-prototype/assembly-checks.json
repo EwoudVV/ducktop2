@@ -3,8 +3,8 @@
   "status": "current-board packaging candidate; physical measurements and Ultra cooling qualification remain open",
   "checks": {
     "analytic_guide_clearances": {
-      "different_carriers_minimum_outer_envelope_gap_mm": 0.823297828531504,
-      "wire_to_other_guide_minimum_gap_mm": 0.2758049786513388,
+      "different_carriers_minimum_outer_envelope_gap_mm": 0.34081633414262846,
+      "wire_to_other_guide_minimum_gap_mm": 0.2757953201458576,
       "CAD_approximation_allowance_mm": 0.016,
       "method": "continuous-path sampling bound plus circular enclosing radii; same-carrier guide walls are intentionally fused; pedestal and rib checks still use BRep geometry"
     },
@@ -22,6 +22,470 @@
     "main_chassis_mounts": 13,
     "BMS_supports": 4,
     "radio_supports": 4,
+    "cooling_geometry": {
+      "units": "mm",
+      "cooling_body_collisions": [],
+      "internal_cooling_collisions": [],
+      "inlet_obstructions": [],
+      "inlet_gap_mm": 3,
+      "inlet_start_above_bottom_mm": 26.3,
+      "scope": "nominal solids and a conservative inlet volume excluding the three corner fasteners; fan orientation, exact inlet shape and installed airflow need physical confirmation",
+      "spreader_hardware_selected": false,
+      "heatpipe_supplier_qualified": false,
+      "TIM_compression_verified": false,
+      "both_CPU_thermal_tests_complete": false,
+      "manufacturing_ready": false,
+      "unverified_component_height_screens": [
+        {
+          "part": "center/C32",
+          "mpn": "C0603C100C5GACTU",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C34",
+          "mpn": "C0603C689C5GACTU",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C35",
+          "mpn": "C0603C689C5GACTU",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C446",
+          "mpn": "T520B107M010ATE070",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C447",
+          "mpn": "T520B107M010ATE070",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C447",
+          "mpn": "T520B107M010ATE070",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C764",
+          "mpn": "GRM31CZ71C226ME15L",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C764",
+          "mpn": "GRM31CZ71C226ME15L",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C765",
+          "mpn": "GCM188L81H104KA57D",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C766",
+          "mpn": "GCM188L81H104KA57D",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C766",
+          "mpn": "GCM188L81H104KA57D",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/C783",
+          "mpn": "GRM188R60J105KA01D",
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/D190",
+          "mpn": "SMCJ24CA-E3/57T",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/F200",
+          "mpn": "1206L075/16WR",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/F200",
+          "mpn": "1206L075/16WR",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/FPC102",
+          "mpn": "5039084120",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/H1",
+          "mpn": "9774055243R",
+          "near": "cooling-cold_plate-reservation",
+          "conservative_height_limit_mm": 9.937,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/H2",
+          "mpn": "9774055243R",
+          "near": "cooling-cold_plate-reservation",
+          "conservative_height_limit_mm": 9.937,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/H4",
+          "mpn": "M2XC4X2.5+C2.7X1.5",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/H4",
+          "mpn": "M2XC4X2.5+C2.7X1.5",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/H21",
+          "mpn": null,
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/H21",
+          "mpn": null,
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J4",
+          "mpn": "TC2030-CTX-NL cable target",
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J4",
+          "mpn": "TC2030-CTX-NL cable target",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J40",
+          "mpn": "MDT420E01001",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J40",
+          "mpn": "MDT420E01001",
+          "near": "blower-cradle-suspension-4",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J40",
+          "mpn": "MDT420E01001",
+          "near": "fan-through-screw-2",
+          "conservative_height_limit_mm": 5.2,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J40",
+          "mpn": "MDT420E01001",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J52",
+          "mpn": "SM04B-GHS-TB",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J52",
+          "mpn": "SM04B-GHS-TB",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J53",
+          "mpn": "SM02B-GHS-TB",
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J53",
+          "mpn": "SM02B-GHS-TB",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J56",
+          "mpn": "SM02B-GHS-TB",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J2441",
+          "mpn": null,
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/J2441",
+          "mpn": null,
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/RS750",
+          "mpn": "ERJ8CWFR016V",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/RS750",
+          "mpn": "ERJ8CWFR016V",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/RS2670",
+          "mpn": "ERJ8CWFR016V",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/RS2670",
+          "mpn": "ERJ8CWFR016V",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/SW3",
+          "mpn": "B3S-1000",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/SW3",
+          "mpn": "B3S-1000",
+          "near": "blower-cradle-suspension-3",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/SW3",
+          "mpn": "B3S-1000",
+          "near": "fan-through-screw-3",
+          "conservative_height_limit_mm": 5.2,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/SW3",
+          "mpn": "B3S-1000",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/TP1",
+          "mpn": null,
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/TP1",
+          "mpn": null,
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/TP8",
+          "mpn": null,
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/U7",
+          "mpn": "TPS56637RPAR",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/U45",
+          "mpn": "TCA9548APWR",
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/U45",
+          "mpn": "TCA9548APWR",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/U400",
+          "mpn": "USB2513BT-I/M2",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/U750",
+          "mpn": "TPS552882RPMR",
+          "near": "cooling-blower-reservation",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/U750",
+          "mpn": "TPS552882RPMR",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/Y1",
+          "mpn": "J32SMX-K-F-G-I-8M0",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/Y2",
+          "mpn": "X1A000141000612",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/Y400",
+          "mpn": "ABM8-24.000MHZ-10-1-U-T",
+          "near": "blower-cradle-suspension-1",
+          "conservative_height_limit_mm": 8.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "center/Y400",
+          "mpn": "ABM8-24.000MHZ-10-1-U-T",
+          "near": "blower-fit-cradle",
+          "conservative_height_limit_mm": 6.7,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "left/FPC101",
+          "mpn": "5039084120",
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "left/H12",
+          "mpn": null,
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "left/H12",
+          "mpn": null,
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "left/J2440",
+          "mpn": null,
+          "near": "cooling-heatpipe-reservation",
+          "conservative_height_limit_mm": 12.037,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        },
+        {
+          "part": "left/J2440",
+          "mpn": null,
+          "near": "cooling-fins-reservation",
+          "conservative_height_limit_mm": 4.5,
+          "basis": "saved courtyard below actual cooling material, including 0.3 mm assembly space"
+        }
+      ],
+      "assembly_height_reservations": [
+        "center/J310",
+        "center/TP10",
+        "center/TP11",
+        "center/TP13",
+        "center/TP15",
+        "center/TP2",
+        "center/TP3",
+        "center/TP4",
+        "center/TP7",
+        "center/TP9",
+        "center/U4"
+      ],
+      "module_contact_basis": "A1 uses nominal official module and cooler geometry in cooling-datums.json; package tolerances, TIM compression and clamping loads remain unqualified.",
+      "source_sha256": {
+        "assembly.json": "be424e14bab5a0795826e58608ce6116cba5f4d8b8c18b81ce3eada4136f4e84",
+        "cooling.py": "61eed138e80a927d8681e2ccb18d2a3af2c6fe24af83f69c79544c63a9e19b00",
+        "cooling-datums.json": "3e459e6ca6901a1a836e4e8bc68895ca72535cad596ee1e858838230a9f5b84c",
+        "cooling_review.py": "d25ba138cf5ba409b757399183d014bcdf38928ba1680239a47db1666b6d5cbe",
+        "height-allowances.json": "465f1733b57012ed1acb13aa1279b5ef817654bf585c20067c4d8612816a249d"
+      }
+    },
     "case_sweep": {
       "range": [
         0,
@@ -392,14 +856,12 @@
   "physical_tests_complete": false,
   "complete_arrangement_supported": false,
   "not_ready_reason": "owned-part measurements, guide pull/fit tests, signal-cable dressing and both Ultra thermal qualifications remain outstanding",
-  "config_sha256": "392853efc467e496387f8dd6609c7dd81031d92dfef9ea20787c4b5370ad8673",
+  "config_sha256": "be424e14bab5a0795826e58608ce6116cba5f4d8b8c18b81ce3eada4136f4e84",
   "inventory_sha256": "483f35bb3236877e841e96c6f9e68dde5fa4fb96372bdfb820d7e92112fc70c2",
   "fastener_length_screen": {
     "blower_suspension_length_mm": 14.8,
     "nut_engagement_mm": 1.5,
     "lowest_suspension_screw_tip_height_mm": 12.2,
-    "nearby_SW3_model_top_height_mm": 11.036999999999999,
-    "tip_to_SW3_height_difference_mm": 1.163,
-    "status": "nominal geometry screen; actual bolt head, nut, tip and backside keyboard fit pending"
+    "status": "nominal geometry screen at the saved blower XY; check fastener bodies against nearby parts and verify the complete installed hardware"
   }
 }

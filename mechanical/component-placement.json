@@ -6,7 +6,7 @@
   },
   "scope": "all main-board footprints",
   "generator": "gen/export_power_placement.py",
-  "generator_sha256": "6a130379c4796fcbb7c299faef359ba628bd532d6894eb5fd9e6006fc61d6bf0",
+  "generator_sha256": "13cc8d4a1e38b3614ed85cfd6fe8e109a866e356db72fef9f18d72bbdc73eeed",
   "sources": {
     "board_placement": {
       "file": "mechanical/board-placement.json",
@@ -309,11 +309,65 @@
     "right": 173
   },
   "height_counts": {
-    "unverified": 289,
-    "verified_maximum": 1078,
-    "verified_nominal": 2
+    "unverified": 279,
+    "verified_maximum": 1087,
+    "verified_nominal": 3
   },
   "height_data": {
+    "XGL6030-103MEC": {
+      "value_mm": 3.1,
+      "kind": "maximum",
+      "source_url": "https://www.coilcraft.com/pdfs/xgl6030.pdf",
+      "basis": "Document 1635, 19 February 2026, pages 1 and 2: 3.1 mm maximum height and the exact -103MEC ordering row."
+    },
+    "STM32F407VGT6": {
+      "value_mm": 1.4,
+      "kind": "nominal",
+      "source_url": "https://www.st.com/en/microcontrollers-microprocessors/stm32f407vg.html",
+      "basis": "Exact orderable part maps to LQFP100 14 x 14 x 1.4 mm. This published nominal package thickness is not promoted to a maximum seated height."
+    },
+    "TPS62933DRLR": {
+      "value_mm": 0.6,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tps62933.pdf",
+      "basis": "DRL0008A package outline, page 48: 0.6 mm maximum seated height."
+    },
+    "TPS26630RGER": {
+      "value_mm": 1.0,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tps2663.pdf",
+      "basis": "RGE0024H package outline, page 52: 1.0 mm maximum seated height."
+    },
+    "TCA9539PWR": {
+      "value_mm": 1.2,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tca9539.pdf",
+      "basis": "PW0024A package outline, page 46: 1.2 mm maximum seated height."
+    },
+    "SN74AHCT1G126DBVR": {
+      "value_mm": 1.45,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/sn74ahct1g126.pdf",
+      "basis": "DBV0005A package outline, page 21: 1.45 mm maximum seated height."
+    },
+    "1N5819HW-7-F": {
+      "value_mm": 1.35,
+      "kind": "maximum",
+      "source_url": "https://www.diodes.com/datasheet/download/1N5819HW.pdf",
+      "basis": "DS30217 revision 22-2, April 2026, page 4: SOD123 A is 1.35 mm maximum."
+    },
+    "TNPW0603300KBYEA": {
+      "value_mm": 0.55,
+      "kind": "maximum",
+      "source_url": "https://www.vishay.com/doc?28758",
+      "basis": "TNPW e3 package dimensions: TNPW0603 H is 0.45 +/-0.10 mm; resistance and packaging codes do not change this outline."
+    },
+    "TNPW0603332KBYEA": {
+      "value_mm": 0.55,
+      "kind": "maximum",
+      "source_url": "https://www.vishay.com/doc?28758",
+      "basis": "TNPW e3 package dimensions: TNPW0603 H is 0.45 +/-0.10 mm; resistance and packaging codes do not change this outline."
+    },
     "ERJ3RQFR33V": {
       "value_mm": 0.55,
       "kind": "maximum",
@@ -28717,11 +28771,11 @@
       "installed_rotation_deg": 180.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 1.35,
+      "height_source_url": "https://www.diodes.com/datasheet/download/1N5819HW.pdf",
+      "local_body_max_outer_z_mm": 1.35,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -28731,7 +28785,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Diodes Incorporated",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "DS30217 revision 22-2, April 2026, page 4: SOD123 A is 1.35 mm maximum.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -38615,11 +38669,11 @@
       "installed_rotation_deg": 90.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 3.1,
+      "height_source_url": "https://www.coilcraft.com/pdfs/xgl6030.pdf",
+      "local_body_max_outer_z_mm": 3.1,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -38629,7 +38683,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Coilcraft",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "Document 1635, 19 February 2026, pages 1 and 2: 3.1 mm maximum height and the exact -103MEC ordering row.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -55097,11 +55151,11 @@
       "installed_rotation_deg": 90.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 0.55,
+      "height_source_url": "https://www.vishay.com/doc?28758",
+      "local_body_max_outer_z_mm": 0.55,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -55111,7 +55165,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Vishay",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "TNPW e3 package dimensions: TNPW0603 H is 0.45 +/-0.10 mm; resistance and packaging codes do not change this outline.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -56315,11 +56369,11 @@
       "installed_rotation_deg": 90.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 0.55,
+      "height_source_url": "https://www.vishay.com/doc?28758",
+      "local_body_max_outer_z_mm": 0.55,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -56329,7 +56383,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Vishay",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "TNPW e3 package dimensions: TNPW0603 H is 0.45 +/-0.10 mm; resistance and packaging codes do not change this outline.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -81167,12 +81221,12 @@
       "installed_rotation_deg": 0.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
+      "height_status": "verified_nominal",
+      "height_kind": "nominal",
+      "height_mm": 1.4,
+      "height_source_url": "https://www.st.com/en/microcontrollers-microprocessors/stm32f407vg.html",
       "local_body_max_outer_z_mm": null,
-      "local_body_nominal_outer_z_mm": null,
+      "local_body_nominal_outer_z_mm": 1.4,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
       "study_solder_plane_z_mm": null,
@@ -81181,7 +81235,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "STMicroelectronics",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "Exact orderable part maps to LQFP100 14 x 14 x 1.4 mm. This published nominal package thickness is not promoted to a maximum seated height.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -81382,11 +81436,11 @@
       "installed_rotation_deg": 90.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 0.6,
+      "height_source_url": "https://www.ti.com/lit/ds/symlink/tps62933.pdf",
+      "local_body_max_outer_z_mm": 0.6,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -81396,7 +81450,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Texas Instruments",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "DRL0008A package outline, page 48: 0.6 mm maximum seated height.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -81794,11 +81848,11 @@
       "installed_rotation_deg": 180.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 1.0,
+      "height_source_url": "https://www.ti.com/lit/ds/symlink/tps2663.pdf",
+      "local_body_max_outer_z_mm": 1.0,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -81808,7 +81862,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Texas Instruments",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "RGE0024H package outline, page 52: 1.0 mm maximum seated height.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -82183,11 +82237,11 @@
       "installed_rotation_deg": 180.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 1.2,
+      "height_source_url": "https://www.ti.com/lit/ds/symlink/tca9539.pdf",
+      "local_body_max_outer_z_mm": 1.2,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -82197,7 +82251,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Texas Instruments",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "PW0024A package outline, page 46: 1.2 mm maximum seated height.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -83533,11 +83587,11 @@
       "installed_rotation_deg": 180.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 1.45,
+      "height_source_url": "https://www.ti.com/lit/ds/symlink/sn74ahct1g126.pdf",
+      "local_body_max_outer_z_mm": 1.45,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -83547,7 +83601,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Texas Instruments",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "DBV0005A package outline, page 21: 1.45 mm maximum seated height.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -123402,11 +123456,11 @@
       "installed_rotation_deg": 0.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 1.2,
+      "height_source_url": "https://www.ti.com/lit/ds/symlink/tca9539.pdf",
+      "local_body_max_outer_z_mm": 1.2,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
@@ -123416,7 +123470,7 @@
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
       "manufacturer": "Texas Instruments",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "PW0024A package outline, page 46: 1.2 mm maximum seated height.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [

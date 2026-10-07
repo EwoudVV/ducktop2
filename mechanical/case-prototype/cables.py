@@ -227,7 +227,10 @@ def middle_support(m,label,rows,x):
         bottom=p[2]-r['wire_od_mm']/2-.55
         boss=box(x-2,p[1]-2,support_top-.1,4,4,bottom-support_top+.6)
         arr=np.array(r['points']);local=arr[(arr[:,0]>=x-4)&(arr[:,0]<=x+4)]
-        boss=boss.cut(tube(local,r['wire_od_mm']/2+.15))
+        # The continuous guide sets the 0.15 mm cable fit. Give the rib
+        # another 0.10 mm so its separately fitted bore does not leave
+        # nearly coincident spline faces when joined to the guide.
+        boss=boss.cut(tube(local,r['wire_od_mm']/2+.25))
         beam=beam.fuse(boss)
     for yy in [192,200]:
         beam=beam.cut(cylinder(x,yy,floor-.1,.8,2.2))

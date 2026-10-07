@@ -443,7 +443,7 @@
     "gen/bom_catalog.py": "08df150fb2f00d339ae155a729e4ae9cec2196c703c38781820c9e9badcbea37",
     "gen/part_identity.py": "56656bc1f4effc845c475cfea11bd199eb3519611e8a13d6123646b012aee906",
     "gen/test_part_identity.py": "d9147380a48f87eba5a8cffd2883abe7f98a59f4c498b2155d21f2e6707f4d18",
-    "gen/export_power_placement.py": "6a130379c4796fcbb7c299faef359ba628bd532d6894eb5fd9e6006fc61d6bf0",
+    "gen/export_power_placement.py": "13cc8d4a1e38b3614ed85cfd6fe8e109a866e356db72fef9f18d72bbdc73eeed",
     "gen/generate_component_inventory.py": "57060c0451bf4efad5ed0d96b03f23cf5f39d1f6d9739d3ee7d206e062b56ee7",
     "gen/generate_internal_services_sheet.py": "1da2107876cb6160cfe0e5e40198c1b7b35a616fb87994191bcd19c6dbb37390",
     "gen/fpc_contract.py": "7d766c8a435dd39fbf1a0ef73733132521c2958c8cc333a02af4e1f93f30183b",
@@ -775,6 +775,50 @@
       "mechanical/case-prototype/harness-case-checks.json": "c8b8ba25f38a2b842258989d4cdcd1f03f7da24bcec04990df752cebb00aabe2",
       "mechanical/case-prototype/assembly-checks.json": "03e6e1abff98792cb810ccb02738270e3cafef3e74ea2250d196bde4d7124cce",
       "mechanical/case-prototype/export-checks.json": "c50ce16576ef880b315f785bfed243aac9074c5a3c12a69d268a280a86971e57"
+    }
+  },
+  "cooling_fit_update": {
+    "date": "2026-10-07",
+    "PCB_files_unchanged": true,
+    "main_routing_added": false,
+    "deck_height_mm": 33.5,
+    "blower_pose_retained": true,
+    "fan_support_moved_to_xy_mm": [
+      170,
+      50
+    ],
+    "fin_count": 54,
+    "USB_front_run_lowered_mm": 0.5,
+    "modeled_cooling_collisions": 0,
+    "inlet_obstructions": 0,
+    "unverified_cooling_height_footprints": 37,
+    "physical_fit_verified": false,
+    "thermal_performance_verified": false,
+    "trackpad_purchase_url": "https://www.aliexpress.us/item/3256808869212952.html",
+    "trackpad_thickness_measured": false,
+    "case_tests": {
+      "stack_geometry_regressions": 3,
+      "component_height_regressions": 8,
+      "BMS_harness_regressions": 4
+    },
+    "source_sha256": {
+      "mechanical/case-prototype/assembly.json": "be424e14bab5a0795826e58608ce6116cba5f4d8b8c18b81ce3eada4136f4e84",
+      "mechanical/case-prototype/cooling.py": "61eed138e80a927d8681e2ccb18d2a3af2c6fe24af83f69c79544c63a9e19b00",
+      "mechanical/case-prototype/cooling-datums.json": "3e459e6ca6901a1a836e4e8bc68895ca72535cad596ee1e858838230a9f5b84c",
+      "mechanical/case-prototype/cooling-checks.json": "03b43126bfdd9d3132a3c6ae2b0fe1c6ccb02b40e522fb1be31c3e6d7a44f660",
+      "mechanical/case-prototype/stack_geometry.py": "1b782b0e5e9de1fc17c9ef2266a18f81e569f164c71566b778c6d48bedad96d0",
+      "mechanical/case-prototype/installed-power-harness.json": "ad2e95a096ee239672ea590e36fa21926ae2fd04205edaecb985ca8628648c35",
+      "mechanical/component-placement.json": "bbcf93d8296a2cb8a46cba9e80a57a63844b97ee69314714a2dc25ddb8693f88",
+      "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832"
+    },
+    "STEP_parts_checked": 99,
+    "watertight_STLs": 101,
+    "rib_bore_relief_mm": 0.1,
+    "report_sha256": {
+      "mechanical/case-prototype/assembly-checks.json": "f6db186c03857e3fc6206f2e2ba7ba4207627de80f68b6a8d6285420f77b86d9",
+      "mechanical/case-prototype/harness-case-checks.json": "c0a1cdb82c0e2d025a255a489a20191c9e024a8fe3f04bfd6d4a18c80b712c86",
+      "mechanical/case-prototype/cooling-checks.json": "03b43126bfdd9d3132a3c6ae2b0fe1c6ccb02b40e522fb1be31c3e6d7a44f660",
+      "mechanical/case-prototype/export-checks.json": "3e0540a6949d8a29c57df1571e0ff10b889143e9657f226a3b8cd7b50abccde4"
     }
   }
 }

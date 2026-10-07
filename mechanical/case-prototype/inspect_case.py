@@ -44,6 +44,7 @@ def views(m):
                       'color':(.95,.65,.15,.8),'group':'boards','moving':False})
     render(scene,out/'right-power-guide.png','shortened PD2 guide / amber = R2045 height and assembly space',
            direction=(.5,-.8,1.2),focus=((304,-56,8.5),12),size=(1500,1000))
+    cooling_views(m)
     internal=[p for p in visible if not p.get('moving') and p['group'] not in ['deck','inputs'] and not p['name'].startswith('keyboard-')]
     render(internal,out/'inside.png','current PCB geometry / harness carriers anchored outside the cells',direction=(.15,-.8,1.7))
     for label,x in [('cooling',132.45),('compute-keyboard',205),('trackpad-battery',179),('power-loom',166)]:
@@ -58,8 +59,27 @@ def views(m):
     render([posed(p,90,True) for p in visible],out/'exploded.png','exploded / separate manufactured parts and supports',direction=(1,-1.8,.8))
 
 
+def cooling_views(m):
+    out=HERE/'views';out.mkdir(exist_ok=True)
+    cooling=[]
+    for p in m.parts:
+        if p['group']=='cooling' or p['name'].startswith(('blower-','fan-through')):
+            q=dict(p)
+            if 'blower-reservation' in p['name']:q['color']=(.24,.27,.30)
+            if 'fins-reservation' in p['name']:q['color']=(.67,.71,.74)
+            if 'heatpipe-reservation' in p['name']:q['color']=(.87,.49,.23)
+            cooling.append(q)
+    for name in ['left','center']:
+        cooling.append({'shape':m.board_material[name],'color':(.13,.43,.31),'group':'boards','moving':False})
+    render(cooling,out/'cooling-layout.png','cooling fit study / wider fins and stepped CPU/memory spreader',
+           direction=(.25,-.65,1.5),focus=((146,-41,16),75),size=(1600,1050))
+    plate=next(p for p in m.parts if p['name']=='cooling-cold_plate-reservation')
+    render([plate],out/'cooling-spreader.png','spreader underside / CPU and memory contact study',
+           direction=(.4,-.6,-1),size=(1300,950))
+
+
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--views',action='store_true');p.add_argument('--checks',action='store_true');p.add_argument('--export',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--views',action='store_true');p.add_argument('--checks',action='store_true');p.add_argument('--export',action='store_true');p.add_argument('--cooling-views',action='store_true');a=p.parse_args()
     m=load();print('staged assembly loaded',flush=True)
     if a.checks:
         from review import review
@@ -71,6 +91,13 @@ if __name__=='__main__':
         height_checks=json.loads((HERE/'harness-case-checks.json').read_text())
         for name,digest in height_checks['height_check_sources_sha256'].items():
             assert hashlib.sha256((HERE/name).read_bytes()).hexdigest()==digest,'height assumptions changed: rerun checks before exporting'
+        thermal=json.loads((HERE/'cooling-checks.json').read_text())
+        for name,digest in thermal['source_sha256'].items():
+            assert hashlib.sha256((HERE/name).read_bytes()).hexdigest()==digest,'cooling inputs changed: rerun checks before exporting'
+        for key in ['cooling_body_collisions','internal_cooling_collisions','inlet_obstructions']:
+            assert not thermal[key], 'resolve '+key+' before exporting'
+        assert not record['checks']['case_sweep']['collisions'],'resolve lid sweep conflicts before exporting'
         m.findings=list(dict.fromkeys(record['limitations']))
         deliver(m,render_views=False,checked=True)
     if a.views:views(m)
+    if a.cooling_views:cooling_views(m)

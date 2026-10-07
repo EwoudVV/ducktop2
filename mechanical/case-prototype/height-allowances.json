@@ -103,6 +103,83 @@
       "height_mm": 1.0,
       "basis": "Bare copper test pad using the existing 1 mm solder reservation. No pin or permanent test wire is fitted. Probe access is separate.",
       "source": "../bms-harness-routing.json: assembly_reservations_mm"
+    },
+    "center/TP2": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP3": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP4": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP7": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP9": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP10": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP11": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP13": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP15": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/U4": {
+      "mpn": "STM32F407VGT6",
+      "footprint": "Package_QFP:LQFP-100_14x14mm_P0.5mm",
+      "height_mm": 2.0,
+      "basis": "Chosen seated-part reservation above the published 1.4 mm nominal LQFP body; confirm the complete seated maximum before manufacture.",
+      "source": "https://www.st.com/en/microcontrollers-microprocessors/stm32f407vg.html"
+    },
+    "center/J310": {
+      "mpn": "FH12-30S-0.5SH(55)",
+      "footprint": "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
+      "height_mm": 3.0,
+      "basis": "Connector and flat cable reservation; verify the mated flex and latch. The blower must be removed to service this keyboard connector.",
+      "source": "https://www.hirose.com/en/product/p/CL0586-0525-1-55"
     }
   }
 }

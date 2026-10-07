@@ -72,13 +72,19 @@ def paths(config):
         unchanged=not changed_bms and (route['group']!='usb5' or config['cables'].get('usb_front_drop',0)==0)
         saved=p[::10] if changed_bms else p
         if not np.array_equal(saved[-1],p[-1]):saved=np.vstack([saved,p[-1]])
+        if not unchanged:
+            import cadquery as cq
+            edge=cq.Edge.makeSplineApprox([cq.Vector(float(x),float(-y),float(z)) for x,y,z in saved],
+                                         tol=.008,minDeg=3,maxDeg=6)
+            radius=1/max(max(edge.curvatures(np.linspace(0,1,10000),mode='parameter')),1e-12)
+            length=edge.Length()
         rows.append({**route,'ends':ends,'points':saved.tolist(),
                      'exposed_length_mm':length,'nominal_cut_length_mm':round(length+hidden,1),
                      'minimum_inside_radius_mm':route['minimum_inside_radius_mm'] if unchanged else float(radius-od/2),
                      'minimum_centerline_radius_mm':route['minimum_centerline_radius_mm'] if unchanged else float(radius),
                      'bend_5d_pass':route['bend_5d_pass'] if unchanged else bool(radius-od/2>=5*od*1.01),
                      'bend_10d_pass':route['bend_10d_pass'] if unchanged else bool(radius-od/2>=10*od*1.01),
-                     'bend_basis':'unchanged source curve under rigid Z translation' if unchanged else 'new dense spline derivative check',
+                     'bend_basis':'unchanged source curve under rigid Z translation' if unchanged else 'actual fitted CAD spline; curvature sampled at 10000 parameter stations',
                      'case_route_change':'case-specific turns around J2074 and perimeter hardware; see assembly.json for radii and ground lift' if changed_bms else None,
                      'sparse_interpolant_inside_radius_diagnostic_mm':float(radius-od/2),
                      'length_pass':bool(low<=length+hidden<=high),

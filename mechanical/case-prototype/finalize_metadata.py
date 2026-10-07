@@ -36,9 +36,7 @@ def main():
         row.update(combined_COM_y_mm=total,rear_margin_mm=total-yr,minimum_base_kg_against_rear_tip=max(0,mass*(yr-yl)/(yb-yr)))
     report['fastener_length_screen']={'blower_suspension_length_mm':round(upper-fan+5.5,1),
         'nut_engagement_mm':1.5,'lowest_suspension_screw_tip_height_mm':fan-3.5,
-        'nearby_SW3_model_top_height_mm':CONFIG['boards']['center']['bottom_height']+5.937,
-        'tip_to_SW3_height_difference_mm':round(fan-3.5-(CONFIG['boards']['center']['bottom_height']+5.937),3),
-        'status':'nominal geometry screen; actual bolt head, nut, tip and backside keyboard fit pending'}
+        'status':'nominal geometry screen at the saved blower XY; check fastener bodies against nearby parts and verify the complete installed hardware'}
     (HERE/'assembly-checks.json').write_text(json.dumps(report,indent=2)+'\n')
     sources={}
     for name,row in INVENTORY.items():
@@ -52,6 +50,8 @@ def main():
               'cad_sources':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in HERE.glob('*.py')},
               'assembly_config_sha256':hashlib.sha256((HERE/'assembly.json').read_bytes()).hexdigest()}
     manifest['height_allowances_sha256']=hashlib.sha256((HERE/'height-allowances.json').read_bytes()).hexdigest()
+    manifest['cooling_datums_sha256']=hashlib.sha256((HERE/'cooling-datums.json').read_bytes()).hexdigest()
+    manifest['cooling_checks_sha256']=hashlib.sha256((HERE/'cooling-checks.json').read_bytes()).hexdigest()
     (HERE/'source-bindings.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('schedule lengths, fastener quantities, signed lid loads and six frozen PCB bindings recorded')
 

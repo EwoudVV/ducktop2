@@ -10,6 +10,12 @@ clears the board edge, J2074 and C797 without moving a PCB part. the case
 has open guides, split clamps, braid windows and detachable USB rails.
 fixed feet stay below the boards or between cells when a rail is removed.
 
+the cooling study now has separate CPU and memory contact levels, the
+three Mu Ultra mounting datums, a wider fin bank and a heatpipe path
+around the fan. the fan stays at its original position because lower
+trials hit the existing power parts. `cooling-fit.md` describes the geometry,
+part-sourcing requirements and remaining measurements.
+
 the saved model clears the wire, guide, braid, service and known-component
 height screens, including the sampled hinge sweep. physical dimensions,
 clamp strength, several other component heights, signal cables and cooling
@@ -65,6 +71,11 @@ scripts never save a PCB or change its routing, placement or outline.
   and `hinges.py`: editable parameters and construction source.
 - `component_heights.py`, `height-allowances.json`, `component-heights.md`:
   height calculations, explicit assembly space and source drawings.
+- `cooling.py`, `cooling-datums.json`, `cooling_review.py`, `cooling-checks.json`:
+  contact and mounting geometry, cooling-body and inlet checks, and unresolved
+  component-height data. these do not qualify thermal performance.
+- `stack_geometry.py`: wire and open-guide height beneath the actual trackpad
+  support area, including the guide ends and the 0.5 mm lower USB front run.
 - `exports/ducktop2-assembly.step`: named assembly, open at 105 degrees.
 - `exports/parts/`: separate manufactured STEP parts and P1S STL derivatives.
   split reinforcement STLs are fit gauges, not substitutes for continuous metal.

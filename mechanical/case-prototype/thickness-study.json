@@ -4,54 +4,113 @@
   "active_base_height": 33.5,
   "smallest_half_mm_stack_candidate": 33.5,
   "limiting_deck_heights": {
-    "power_wires_under_trackpad": 33.45410064492239,
+    "power_wires_and_guides_under_trackpad": 33.319995699125656,
     "blower_intake_under_keyboard": 33.3,
-    "heatpipe_under_carrier": 31.2
+    "heatpipe_under_carrier": 31.037
   },
   "trials": [
     {
       "base_deck_height_mm": 30,
       "stack_budget_pass": false,
-      "wire_envelope_to_bridge_mm": -2.954100644922388,
+      "wire_envelope_to_bridge_mm": -2.819995699125652,
       "fan_tolerance_envelope_to_keyboard_mm": -0.3000000000000007
     },
     {
       "base_deck_height_mm": 31,
       "stack_budget_pass": false,
-      "wire_envelope_to_bridge_mm": -1.9541006449223879,
+      "wire_envelope_to_bridge_mm": -1.819995699125652,
       "fan_tolerance_envelope_to_keyboard_mm": 0.6999999999999993
     },
     {
       "base_deck_height_mm": 32,
       "stack_budget_pass": false,
-      "wire_envelope_to_bridge_mm": -0.9541006449223879,
+      "wire_envelope_to_bridge_mm": -0.8199956991256521,
       "fan_tolerance_envelope_to_keyboard_mm": 1.6999999999999993
     },
     {
       "base_deck_height_mm": 33,
       "stack_budget_pass": false,
-      "wire_envelope_to_bridge_mm": 0.045899355077612114,
+      "wire_envelope_to_bridge_mm": 0.18000430087434793,
       "fan_tolerance_envelope_to_keyboard_mm": 2.6999999999999993
     },
     {
       "base_deck_height_mm": 33.5,
       "stack_budget_pass": true,
-      "wire_envelope_to_bridge_mm": 0.5458993550776121,
+      "wire_envelope_to_bridge_mm": 0.6800043008743479,
       "fan_tolerance_envelope_to_keyboard_mm": 3.1999999999999993
     },
     {
       "base_deck_height_mm": 34,
       "stack_budget_pass": true,
-      "wire_envelope_to_bridge_mm": 1.0458993550776121,
+      "wire_envelope_to_bridge_mm": 1.180004300874348,
       "fan_tolerance_envelope_to_keyboard_mm": 3.6999999999999993
     },
     {
       "base_deck_height_mm": 35,
       "stack_budget_pass": true,
-      "wire_envelope_to_bridge_mm": 2.045899355077612,
+      "wire_envelope_to_bridge_mm": 2.180004300874348,
       "fan_tolerance_envelope_to_keyboard_mm": 4.699999999999999
     }
   ],
+  "local_trackpad_cable_envelope": {
+    "trackpad_support_xy_mm": [
+      103.0,
+      138.0,
+      255.0,
+      253.0
+    ],
+    "crossings": [
+      {
+        "wire": "bms-FG_VSS",
+        "surface": "wire",
+        "top_height_mm": 18.820609220040843
+      },
+      {
+        "wire": "bms-FG_VSS",
+        "surface": "open_guide",
+        "top_height_mm": 18.952855546001757
+      },
+      {
+        "wire": "bms-PACK_POS_FUSED",
+        "surface": "wire",
+        "top_height_mm": 15.25977107081191
+      },
+      {
+        "wire": "bms-PACK_POS_FUSED",
+        "surface": "open_guide",
+        "top_height_mm": 15.434374384726798
+      },
+      {
+        "wire": "usb5-GND",
+        "surface": "wire",
+        "top_height_mm": 19.002652778938987
+      },
+      {
+        "wire": "usb5-GND",
+        "surface": "open_guide",
+        "top_height_mm": 19.120441610096137
+      },
+      {
+        "wire": "usb5-USB_PORT_5V",
+        "surface": "wire",
+        "top_height_mm": 22.202568666276335
+      },
+      {
+        "wire": "usb5-USB_PORT_5V",
+        "surface": "open_guide",
+        "top_height_mm": 22.319995699125652
+      }
+    ],
+    "limiting_crossing": {
+      "wire": "usb5-USB_PORT_5V",
+      "surface": "open_guide",
+      "top_height_mm": 22.319995699125652
+    },
+    "position_allowance_mm": 0.2,
+    "curve_allowance_mm": 0.025,
+    "sampling_step_mm": 0.05,
+    "scope": "power wires and open guides beneath the support; full carriers, fasteners, parts and signal cables require separate solid checks"
+  },
   "main_top_height": 6.699999999999999,
   "bms_top_height": 10.7,
   "floor": 2.4,

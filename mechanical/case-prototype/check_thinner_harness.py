@@ -4,6 +4,7 @@ import math
 from cad import HERE
 from build import load_config
 from harness_geometry import paths
+from stack_geometry import stack_limits
 
 
 def main():
@@ -14,14 +15,16 @@ def main():
     rows=[]
     for drop in (0,.5,1.,1.5,2.):
         c['cables']['usb_front_drop']=drop;h=paths(c)
-        wire_limit=max(r['max_wire_height_mm'] for r in h['routes'])+.5+bridge_drop
+        limits,local=stack_limits(c,h)
+        wire_limit=limits['power_wires_and_guides_under_trackpad']
         rows.append({'usb_front_drop_mm':drop,
             **{k:v for k,v in h.items() if k.startswith('all_') or k=='minimum_wire_separation_mm'},
             'lowest_pair':min(h['pairs'],key=lambda p:p['surface_gap_after_position_and_sampling_mm']),
             'wire_stack_deck_limit_mm':wire_limit,'blower_stack_deck_limit_mm':fan_limit,
-            'half_mm_stack_candidate':math.ceil(max(wire_limit,fan_limit)*2)/2})
+            'half_mm_stack_candidate':math.ceil(max(limits.values())*2)/2,
+            'local_trackpad_cable_envelope':local})
     result={'status':'wire-only trials; lower variants were not adopted as case geometry','trials':rows,
-        'conclusion':'The present blower intake stack still needs a 33.5 mm deck in half-millimeter steps. Lower cable variants also need fresh guide/body checks before use.'}
+        'conclusion':'These trials use the cable and open-guide surfaces beneath the trackpad support. A lower stack still needs complete carrier, component, service and cooling checks.'}
     (HERE/'harness-height-study.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(rows,indent=2))
 

@@ -120,6 +120,9 @@ def review(m):
     assert report['checks']['radio_supports']==4
     from clearance_review import check
     detailed=check(m)
+    from cooling_review import check as check_cooling
+    thermal=check_cooling(m)
+    report['checks']['cooling_geometry']=thermal
     if detailed['power_wire_collisions']:
         m.findings.append('The saved protected-power BMS loops hit the BMS board/connector assembly, including J2074. This is an unresolved physical conflict, despite passing bend, length and wire-separation checks.')
     if detailed['service_conflicts']:

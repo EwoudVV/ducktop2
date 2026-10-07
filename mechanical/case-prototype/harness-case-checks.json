@@ -22,7 +22,7 @@
     "source PCB component solder seating"
   ],
   "height_check_sources_sha256": {
-    "height-allowances.json": "227cca192d8b177ada9b22148218839402c559e5f2b00f37a2961768117ddb0b",
+    "height-allowances.json": "465f1733b57012ed1acb13aa1279b5ef817654bf585c20067c4d8612816a249d",
     "component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664",
     "clearance_review.py": "d460d8f854f28d1f8c1e1346172f2fd524ceb3b8c4317d87757bdb832e573e37"
   },
@@ -131,6 +131,83 @@
         "height_mm": 1.0,
         "basis": "Bare copper test pad using the existing 1 mm solder reservation. No pin or permanent test wire is fitted. Probe access is separate.",
         "source": "../bms-harness-routing.json: assembly_reservations_mm"
+      },
+      "center/TP2": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/TP3": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/TP4": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/TP7": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/TP9": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/TP10": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/TP11": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/TP13": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/TP15": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare test pad beneath the cooling study, with 1 mm solder allowance. No permanent pin or lead; remove the cooler before probing.",
+        "source": "saved PCB test-pad geometry"
+      },
+      "center/U4": {
+        "mpn": "STM32F407VGT6",
+        "footprint": "Package_QFP:LQFP-100_14x14mm_P0.5mm",
+        "height_mm": 2.0,
+        "basis": "Chosen seated-part reservation above the published 1.4 mm nominal LQFP body; confirm the complete seated maximum before manufacture.",
+        "source": "https://www.st.com/en/microcontrollers-microprocessors/stm32f407vg.html"
+      },
+      "center/J310": {
+        "mpn": "FH12-30S-0.5SH(55)",
+        "footprint": "Connector_FFC-FPC:Hirose_FH12-30S-0.5SH_1x30-1MP_P0.50mm_Horizontal",
+        "height_mm": 3.0,
+        "basis": "Connector and flat cable reservation; verify the mated flex and latch. The blower must be removed to service this keyboard connector.",
+        "source": "https://www.hirose.com/en/product/p/CL0586-0525-1-55"
       }
     }
   },
@@ -944,7 +1021,7 @@
     {
       "wire": "usb5-GND",
       "part": "center/C183",
-      "maximum_component_height_below_guide_mm": 10.2597,
+      "maximum_component_height_below_guide_mm": 9.7597,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.6500000000000001,
@@ -953,12 +1030,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/grm21br71a105ka01.pdf",
       "note": "Exact Murata drawing, page1: T=1.25+/-0.10mm; L packaging explicitly listed.",
-      "planning_gap_mm": 8.6097
+      "planning_gap_mm": 8.1097
     },
     {
       "wire": "usb5-GND",
       "part": "center/C401",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1,
@@ -967,12 +1044,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://docs.rs-online.com/aab4/0900766b813d2ca8.pdf",
       "note": "Murata GRM31CR71E106KA12# drawing, mirrored by RS: thickness 1.6+/-0.2mm; L packaging included.",
-      "planning_gap_mm": 7.3459
+      "planning_gap_mm": 6.8459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C430",
-      "maximum_component_height_below_guide_mm": 9.4561,
+      "maximum_component_height_below_guide_mm": 8.9561,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -981,12 +1058,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/C0603C473K5RACTU",
       "note": "Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.",
-      "planning_gap_mm": 8.2061
+      "planning_gap_mm": 7.7061
     },
     {
       "wire": "usb5-GND",
       "part": "center/C431",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -995,12 +1072,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/C0603C473K5RACTU",
       "note": "Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.",
-      "planning_gap_mm": 8.1959
+      "planning_gap_mm": 7.6959
     },
     {
       "wire": "usb5-GND",
       "part": "center/C434",
-      "maximum_component_height_below_guide_mm": 9.523,
+      "maximum_component_height_below_guide_mm": 9.023,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.75,
@@ -1009,12 +1086,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C2012X7R1H105K125AB",
       "note": "Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.",
-      "planning_gap_mm": 7.773
+      "planning_gap_mm": 7.273
     },
     {
       "wire": "usb5-GND",
       "part": "center/C440",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.2,
@@ -1023,12 +1100,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2506.ashx?cvid=20250805040419000000&la=ja-jp",
       "note": "Exact GRM188R71H104KA93 manufacturer table row:T size max0.9mm; indexed primary content (direct download failed)",
-      "planning_gap_mm": 8.2459
+      "planning_gap_mm": 7.7459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C442",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1037,12 +1114,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/en-sg/products/productdetail?partno=GRM155R71H102KA01D",
       "note": "Exact manufacturer product specifications: T=0.50+/-0.05mm; D packaging explicitly listed.",
-      "planning_gap_mm": 8.5959
+      "planning_gap_mm": 8.0959
     },
     {
       "wire": "usb5-GND",
       "part": "center/C701",
-      "maximum_component_height_below_guide_mm": 10.3602,
+      "maximum_component_height_below_guide_mm": 9.8602,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1051,12 +1128,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 8.1602
+      "planning_gap_mm": 7.6602
     },
     {
       "wire": "usb5-GND",
       "part": "center/C702",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1065,12 +1142,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 7.2459
+      "planning_gap_mm": 6.7459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C703",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1079,12 +1156,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 7.2459
+      "planning_gap_mm": 6.7459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C704",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1093,12 +1170,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 7.2459
+      "planning_gap_mm": 6.7459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C705",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1107,12 +1184,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 7.2459
+      "planning_gap_mm": 6.7459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C777",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1121,12 +1198,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 7.2459
+      "planning_gap_mm": 6.7459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C778",
-      "maximum_component_height_below_guide_mm": 10.3539,
+      "maximum_component_height_below_guide_mm": 9.8539,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.2,
@@ -1135,7 +1212,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2506.ashx?cvid=20250805040419000000&la=ja-jp",
       "note": "Exact GRM188R71H104KA93 manufacturer table row:T size max0.9mm; indexed primary content (direct download failed)",
-      "planning_gap_mm": 9.1539
+      "planning_gap_mm": 8.6539
     },
     {
       "wire": "usb5-GND",
@@ -1168,7 +1245,7 @@
     {
       "wire": "usb5-GND",
       "part": "center/C2280",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 3.0,
@@ -1177,12 +1254,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/en-global/api/pdfdownloadapi?cate=luCeramicCapacitorsSMD&partno=GRM32ER71E226KE15%23",
       "note": "ExactMurata product sheet dated2025-07-30: T=2.5+/-0.2mm. Exceeds1.8mm provisional backsideallocation; C2303muststayF.",
-      "planning_gap_mm": 6.4459
+      "planning_gap_mm": 5.9459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C2286",
-      "maximum_component_height_below_guide_mm": 9.6224,
+      "maximum_component_height_below_guide_mm": 9.1224,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.2,
@@ -1191,12 +1268,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2506.ashx?cvid=20250805040419000000&la=ja-jp",
       "note": "Exact GRM188R71H104KA93 manufacturer table row:T size max0.9mm; indexed primary content (direct download failed)",
-      "planning_gap_mm": 8.4224
+      "planning_gap_mm": 7.9224
     },
     {
       "wire": "usb5-GND",
       "part": "center/C2360",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 3.0,
@@ -1205,12 +1282,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/en-global/api/pdfdownloadapi?cate=luCeramicCapacitorsSMD&partno=GRM32ER71E226KE15%23",
       "note": "ExactMurata product sheet dated2025-07-30: T=2.5+/-0.2mm. Exceeds1.8mm provisional backsideallocation; C2303muststayF.",
-      "planning_gap_mm": 6.4459
+      "planning_gap_mm": 5.9459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C2361",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.2,
@@ -1219,12 +1296,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2506.ashx?cvid=20250805040419000000&la=ja-jp",
       "note": "Exact GRM188R71H104KA93 manufacturer table row:T size max0.9mm; indexed primary content (direct download failed)",
-      "planning_gap_mm": 8.2459
+      "planning_gap_mm": 7.7459
     },
     {
       "wire": "usb5-GND",
       "part": "center/C2362",
-      "maximum_component_height_below_guide_mm": 10.2919,
+      "maximum_component_height_below_guide_mm": 9.7919,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -1233,12 +1310,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/C0603C224K5RACTU",
       "note": "Exact KEMET generated part specification dated2026-02-04: T=0.80+/-0.15mm.",
-      "planning_gap_mm": 9.0419
+      "planning_gap_mm": 8.5419
     },
     {
       "wire": "usb5-GND",
       "part": "center/C2363",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.17,
@@ -1247,12 +1324,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://static.chipdip.ru/lib/165/DOC028165738.pdf",
       "note": "Exact KEMET generated part drawing, page1: T=0.80+/-0.07mm.",
-      "planning_gap_mm": 8.2759
+      "planning_gap_mm": 7.7759
     },
     {
       "wire": "usb5-GND",
       "part": "center/C2412",
-      "maximum_component_height_below_guide_mm": 9.83,
+      "maximum_component_height_below_guide_mm": 9.8287,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.2,
@@ -1261,12 +1338,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2506.ashx?cvid=20250805040419000000&la=ja-jp",
       "note": "Exact GRM188R71H104KA93 manufacturer table row:T size max0.9mm; indexed primary content (direct download failed)",
-      "planning_gap_mm": 8.63
+      "planning_gap_mm": 8.6287
     },
     {
       "wire": "usb5-GND",
       "part": "center/C2609",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 8.3,
@@ -1275,12 +1352,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://util01.industrial.panasonic.com/ea/utilities/ds/chr-vw/EEHZK1V101XP",
       "note": "ZK series, 1 September 2025, standard D8 outline: L=7.7+/-0.3mm. XP is the standard version.",
-      "planning_gap_mm": 1.1459
+      "planning_gap_mm": 0.6459
     },
     {
       "wire": "usb5-GND",
       "part": "center/F400",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.55,
@@ -1289,12 +1366,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.littelfuse.com/~/media/electronics/datasheets/resettable_ptcs/littelfuse_ptc_1812l_datasheet.pdf.pdf",
       "note": "Littelfuse 1812L150/16 dimension C is 0.75 to 1.25 mm. DR is the listed ordering suffix.",
-      "planning_gap_mm": 7.8959
+      "planning_gap_mm": 7.3959
     },
     {
       "wire": "usb5-GND",
       "part": "center/H24",
-      "maximum_component_height_below_guide_mm": 9.4641,
+      "maximum_component_height_below_guide_mm": 8.9641,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.8,
@@ -1302,12 +1379,12 @@
       "physical_fit_verified": false,
       "note": "The case models a 0.5 mm washer and 2.0 mm nylon screw head, with 0.3 mm additional clearance.",
       "source": "build.py: main-board nylon head and washer",
-      "planning_gap_mm": 6.6641
+      "planning_gap_mm": 6.1641
     },
     {
       "wire": "usb5-GND",
       "part": "center/J2073",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 3.2,
@@ -1315,7 +1392,7 @@
       "physical_fit_verified": false,
       "note": "Existing 3.2 mm reservation above the 2.95 mm nominal mated SH height. Confirm plug, solder seating and dressed control wires; the nominal catalogue height is not a maximum.",
       "source": "https://www.jst-mfg.com/product/pdf/eng/eSH.pdf",
-      "planning_gap_mm": 6.2459
+      "planning_gap_mm": 5.7459
     },
     {
       "wire": "usb5-GND",
@@ -1333,7 +1410,7 @@
     {
       "wire": "usb5-GND",
       "part": "center/J2450",
-      "maximum_component_height_below_guide_mm": 7.7294,
+      "maximum_component_height_below_guide_mm": 7.3734,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 4.8,
@@ -1341,7 +1418,7 @@
       "physical_fit_verified": false,
       "note": "Published 4.5 mm body plus 0.3 mm assembly space. The case also checks terminal bodies and separate release-tool envelopes.",
       "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404",
-      "planning_gap_mm": 2.9294
+      "planning_gap_mm": 2.5734
     },
     {
       "wire": "usb5-GND",
@@ -1372,7 +1449,7 @@
     {
       "wire": "usb5-GND",
       "part": "center/L1",
-      "maximum_component_height_below_guide_mm": 10.1154,
+      "maximum_component_height_below_guide_mm": 9.6154,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 6.3,
@@ -1381,12 +1458,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.coilcraft.com/pdfs/ShortFormCatalog.pdf",
       "note": "XGL1060 dimension C maximum: 6.0mm.",
-      "planning_gap_mm": 3.8154
+      "planning_gap_mm": 3.3154
     },
     {
       "wire": "usb5-GND",
       "part": "center/L420",
-      "maximum_component_height_below_guide_mm": 9.4538,
+      "maximum_component_height_below_guide_mm": 8.9538,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -1395,12 +1472,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/system/files/dam/doc/product/emc/emc/beads/catalog/beads_commercial_power_mpz1608_en.pdf",
       "note": "TDK MPZ1608S221A body thickness is 0.80 +/-0.15 mm; packaging is specified separately.",
-      "planning_gap_mm": 8.2038
+      "planning_gap_mm": 7.7038
     },
     {
       "wire": "usb5-GND",
       "part": "center/L421",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -1409,12 +1486,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/system/files/dam/doc/product/emc/emc/beads/catalog/beads_commercial_power_mpz1608_en.pdf",
       "note": "TDK MPZ1608S221A body thickness is 0.80 +/-0.15 mm; packaging is specified separately.",
-      "planning_gap_mm": 8.1959
+      "planning_gap_mm": 7.6959
     },
     {
       "wire": "usb5-GND",
       "part": "center/L1702",
-      "maximum_component_height_below_guide_mm": 9.5084,
+      "maximum_component_height_below_guide_mm": 9.0084,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 6.3,
@@ -1423,12 +1500,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.coilcraft.com/pdfs/xgl1060.pdf",
       "note": "Document 1735, 19 February 2026, pages 1 and 3: exact ordering row and 6.0 mm maximum height for the E termination.",
-      "planning_gap_mm": 3.2084
+      "planning_gap_mm": 2.7084
     },
     {
       "wire": "usb5-GND",
       "part": "center/LED1",
-      "maximum_component_height_below_guide_mm": 10.2638,
+      "maximum_component_height_below_guide_mm": 9.7638,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.15,
@@ -1437,12 +1514,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.kingbrightusa.com/images/catalog/spec/apt1608sgc.pdf",
       "note": "V.22B package drawing, page 1: 0.75 mm height with the stated +/-0.1 mm tolerance.",
-      "planning_gap_mm": 9.1138
+      "planning_gap_mm": 8.6138
     },
     {
       "wire": "usb5-GND",
       "part": "center/Q2623",
-      "maximum_component_height_below_guide_mm": 10.3077,
+      "maximum_component_height_below_guide_mm": 9.8077,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.4000000000000001,
@@ -1451,12 +1528,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/csd19537q3.pdf",
       "note": "SLPS549B, section 7.1 Q3 package dimensions: A=1.10mm maximum.",
-      "planning_gap_mm": 8.9077
+      "planning_gap_mm": 8.4077
     },
     {
       "wire": "usb5-GND",
       "part": "center/R40",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1465,12 +1542,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "Vishay TNPUe3 dimensions page8: TNPU0603e3 H=0.45+/-0.10mm; dimensions independent of resistance value.",
-      "planning_gap_mm": 8.5959
+      "planning_gap_mm": 8.0959
     },
     {
       "wire": "usb5-GND",
       "part": "center/R41",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1479,12 +1556,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "Vishay TNPUe3 dimensions page8: TNPU0603e3 H=0.45+/-0.10mm; dimensions independent of resistance value.",
-      "planning_gap_mm": 8.5959
+      "planning_gap_mm": 8.0959
     },
     {
       "wire": "usb5-GND",
       "part": "center/R183",
-      "maximum_component_height_below_guide_mm": 10.1138,
+      "maximum_component_height_below_guide_mm": 9.6138,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1493,12 +1570,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 9.2638
+      "planning_gap_mm": 8.7638
     },
     {
       "wire": "usb5-GND",
       "part": "center/R421",
-      "maximum_component_height_below_guide_mm": 9.7008,
+      "maximum_component_height_below_guide_mm": 9.2008,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1507,12 +1584,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 8.8508
+      "planning_gap_mm": 8.3508
     },
     {
       "wire": "usb5-GND",
       "part": "center/R706",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1521,12 +1598,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification, mirrored by Mouser: H=0.45+/-0.10mm.",
-      "planning_gap_mm": 8.5959
+      "planning_gap_mm": 8.0959
     },
     {
       "wire": "usb5-GND",
       "part": "center/R789",
-      "maximum_component_height_below_guide_mm": 9.4587,
+      "maximum_component_height_below_guide_mm": 8.9587,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1535,7 +1612,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 8.6087
+      "planning_gap_mm": 8.1087
     },
     {
       "wire": "usb5-GND",
@@ -1610,7 +1687,7 @@
     {
       "wire": "usb5-GND",
       "part": "center/R2283",
-      "maximum_component_height_below_guide_mm": 10.5507,
+      "maximum_component_height_below_guide_mm": 10.0507,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1619,12 +1696,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 9.7007
+      "planning_gap_mm": 9.2007
     },
     {
       "wire": "usb5-GND",
       "part": "center/R2360",
-      "maximum_component_height_below_guide_mm": 10.0541,
+      "maximum_component_height_below_guide_mm": 9.5543,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1633,12 +1710,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "TNPU0603 e3 dimensions table, page 8: H0.45\u00b10.10mm; family dimensions apply across resistance values",
-      "planning_gap_mm": 9.2041
+      "planning_gap_mm": 8.7043
     },
     {
       "wire": "usb5-GND",
       "part": "center/R2361",
-      "maximum_component_height_below_guide_mm": 9.7198,
+      "maximum_component_height_below_guide_mm": 9.2199,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1647,12 +1724,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 8.8698
+      "planning_gap_mm": 8.3699
     },
     {
       "wire": "usb5-GND",
       "part": "center/R2362",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1661,12 +1738,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "Vishay TNPUe3 dimensions page8: TNPU0603e3 H=0.45+/-0.10mm; dimensions independent of resistance value.",
-      "planning_gap_mm": 8.5959
+      "planning_gap_mm": 8.0959
     },
     {
       "wire": "usb5-GND",
       "part": "center/R2428",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 9.4332,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1675,12 +1752,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 8.5959
+      "planning_gap_mm": 8.5832
     },
     {
       "wire": "usb5-GND",
       "part": "center/R2662",
-      "maximum_component_height_below_guide_mm": 9.543,
+      "maximum_component_height_below_guide_mm": 9.043,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.189,
@@ -1689,12 +1766,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/30100/wsl.pdf",
       "note": "WSL1206 dimensions: H=0.635+/-0.254mm.",
-      "planning_gap_mm": 8.354
+      "planning_gap_mm": 7.854
     },
     {
       "wire": "usb5-GND",
       "part": "center/RS2600",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.189,
@@ -1703,12 +1780,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/doc?31057",
       "note": "WSL2512...18 dimensions: H=0.635+/-0.254mm.",
-      "planning_gap_mm": 8.2569
+      "planning_gap_mm": 7.7569
     },
     {
       "wire": "usb5-GND",
       "part": "center/RS2601",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.189,
@@ -1717,12 +1794,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/30122/wslp.pdf",
       "note": "WSLP2512 dimensions: H=0.635+/-0.254mm.",
-      "planning_gap_mm": 8.2569
+      "planning_gap_mm": 7.7569
     },
     {
       "wire": "usb5-GND",
       "part": "center/RS2620",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.189,
@@ -1731,7 +1808,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/doc?31057",
       "note": "WSL2512...18 dimensions: H=0.635+/-0.254mm.",
-      "planning_gap_mm": 8.2569
+      "planning_gap_mm": 7.7569
     },
     {
       "wire": "usb5-GND",
@@ -1749,7 +1826,7 @@
     {
       "wire": "usb5-GND",
       "part": "center/TP2660",
-      "maximum_component_height_below_guide_mm": 10.5938,
+      "maximum_component_height_below_guide_mm": 10.0938,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.0,
@@ -1757,12 +1834,12 @@
       "physical_fit_verified": false,
       "note": "Bare copper test pad using the existing 1 mm solder reservation. No pin or permanent test wire is fitted. Probe access is separate.",
       "source": "../bms-harness-routing.json: assembly_reservations_mm",
-      "planning_gap_mm": 9.5938
+      "planning_gap_mm": 9.0938
     },
     {
       "wire": "usb5-GND",
       "part": "center/TP2661",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.0,
@@ -1770,12 +1847,12 @@
       "physical_fit_verified": false,
       "note": "Bare copper test pad using the existing 1 mm solder reservation. No pin or permanent test wire is fitted. Probe access is separate.",
       "source": "../bms-harness-routing.json: assembly_reservations_mm",
-      "planning_gap_mm": 8.4459
+      "planning_gap_mm": 7.9459
     },
     {
       "wire": "usb5-GND",
       "part": "center/U6",
-      "maximum_component_height_below_guide_mm": 9.4616,
+      "maximum_component_height_below_guide_mm": 8.9616,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.3,
@@ -1784,12 +1861,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/lm706a0.pdf",
       "note": "RRX0029B outline, page 53: 1.0 mm maximum seated height.",
-      "planning_gap_mm": 8.1616
+      "planning_gap_mm": 7.6616
     },
     {
       "wire": "usb5-GND",
       "part": "center/U420",
-      "maximum_component_height_below_guide_mm": 9.4487,
+      "maximum_component_height_below_guide_mm": 8.9487,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.1,
@@ -1798,12 +1875,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/tpa2012d2.pdf",
       "note": "TI RTJ0020D outline: 0.8 mm maximum height for the RTJ WQFN-20 package.",
-      "planning_gap_mm": 8.3487
+      "planning_gap_mm": 7.8487
     },
     {
       "wire": "usb5-GND",
       "part": "center/U773",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 8.9459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.3,
@@ -1812,7 +1889,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/lm706a0.pdf",
       "note": "RRX0029B outline, page 53: 1.0 mm maximum seated height.",
-      "planning_gap_mm": 8.1459
+      "planning_gap_mm": 7.6459
     },
     {
       "wire": "usb5-GND",
@@ -1831,7 +1908,7 @@
     {
       "wire": "usb5-GND",
       "part": "center/U2412",
-      "maximum_component_height_below_guide_mm": 9.4459,
+      "maximum_component_height_below_guide_mm": 9.4371,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.75,
@@ -1840,7 +1917,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf",
       "note": "DBV0005A package outline: 1.45mm maximum.",
-      "planning_gap_mm": 7.6959
+      "planning_gap_mm": 7.6871
     },
     {
       "wire": "usb5-GND",
@@ -1859,7 +1936,7 @@
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C420",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.17,
@@ -1868,12 +1945,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/C0603C180J5GACTU",
       "note": "Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.",
-      "planning_gap_mm": 11.4759
+      "planning_gap_mm": 10.9759
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C421",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.17,
@@ -1882,12 +1959,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/C0603C180J5GACTU",
       "note": "Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.",
-      "planning_gap_mm": 11.4759
+      "planning_gap_mm": 10.9759
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C430",
-      "maximum_component_height_below_guide_mm": 12.6633,
+      "maximum_component_height_below_guide_mm": 12.1633,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -1896,12 +1973,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/C0603C473K5RACTU",
       "note": "Manufacturer exact-part dimensions: maximum body thickness including the positive tolerance; solder allowance is separate.",
-      "planning_gap_mm": 11.4133
+      "planning_gap_mm": 10.9133
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C441",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1,
@@ -1910,12 +1987,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://docs.rs-online.com/aab4/0900766b813d2ca8.pdf",
       "note": "Murata GRM31CR71E106KA12# drawing, mirrored by RS: thickness 1.6+/-0.2mm; L packaging included.",
-      "planning_gap_mm": 10.5459
+      "planning_gap_mm": 10.0459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C443",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1924,12 +2001,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/en-sg/products/productdetail?partno=GRM155R71H102KA01D",
       "note": "Exact manufacturer product specifications: T=0.50+/-0.05mm; D packaging explicitly listed.",
-      "planning_gap_mm": 11.7959
+      "planning_gap_mm": 11.2959
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C704",
-      "maximum_component_height_below_guide_mm": 12.7742,
+      "maximum_component_height_below_guide_mm": 12.2742,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1938,12 +2015,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 10.5742
+      "planning_gap_mm": 10.0742
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C705",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1952,12 +2029,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 10.4459
+      "planning_gap_mm": 9.9459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C746",
-      "maximum_component_height_below_guide_mm": 12.4867,
+      "maximum_component_height_below_guide_mm": 12.0202,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 8.3,
@@ -1966,12 +2043,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://util01.industrial.panasonic.com/ea/utilities/ds/chr-vw/EEHZK1V101XP",
       "note": "ZK series, 1 September 2025, standard D8 outline: L=7.7+/-0.3mm. XP is the standard version.",
-      "planning_gap_mm": 4.1867
+      "planning_gap_mm": 3.7202
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C777",
-      "maximum_component_height_below_guide_mm": 13.0916,
+      "maximum_component_height_below_guide_mm": 12.5916,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.1999999999999997,
@@ -1980,12 +2057,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC",
       "note": "Thickness 1.60mm, +0.30/-0.10mm.",
-      "planning_gap_mm": 10.8916
+      "planning_gap_mm": 10.3916
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C779",
-      "maximum_component_height_below_guide_mm": 12.6915,
+      "maximum_component_height_below_guide_mm": 12.1915,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -1994,7 +2071,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/datasheet/3/76/1/GRM155R71E473KA88-01A.pdf",
       "note": "Murata reference sheet dated 25 December 2024, page 2, mirrored by Mouser: T is 0.50 +/-0.05 mm; D packaging is listed.",
-      "planning_gap_mm": 11.8415
+      "planning_gap_mm": 11.3415
     },
     {
       "wire": "usb5-USB_PORT_5V",
@@ -2055,7 +2132,7 @@
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2280",
-      "maximum_component_height_below_guide_mm": 13.1383,
+      "maximum_component_height_below_guide_mm": 12.6383,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 3.0,
@@ -2064,12 +2141,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/en-global/api/pdfdownloadapi?cate=luCeramicCapacitorsSMD&partno=GRM32ER71E226KE15%23",
       "note": "ExactMurata product sheet dated2025-07-30: T=2.5+/-0.2mm. Exceeds1.8mm provisional backsideallocation; C2303muststayF.",
-      "planning_gap_mm": 10.1383
+      "planning_gap_mm": 9.6383
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2281",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.2,
@@ -2078,12 +2155,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2506.ashx?cvid=20250805040419000000&la=ja-jp",
       "note": "Exact GRM188R71H104KA93 manufacturer table row:T size max0.9mm; indexed primary content (direct download failed)",
-      "planning_gap_mm": 11.4459
+      "planning_gap_mm": 10.9459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2282",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -2092,12 +2169,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/C0603C224K5RACTU",
       "note": "Exact KEMET generated part specification dated2026-02-04: T=0.80+/-0.15mm.",
-      "planning_gap_mm": 11.3959
+      "planning_gap_mm": 10.8959
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2283",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.17,
@@ -2106,12 +2183,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://static.chipdip.ru/lib/165/DOC028165738.pdf",
       "note": "Exact KEMET generated part drawing, page1: T=0.80+/-0.07mm.",
-      "planning_gap_mm": 11.4759
+      "planning_gap_mm": 10.9759
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2285",
-      "maximum_component_height_below_guide_mm": 14.0673,
+      "maximum_component_height_below_guide_mm": 13.5673,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 4.6,
@@ -2120,12 +2197,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/T520X337M010ATE010",
       "note": "Exact-part specification: H is 4.0 +/-0.3 mm for the X case.",
-      "planning_gap_mm": 9.4673
+      "planning_gap_mm": 8.9673
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2361",
-      "maximum_component_height_below_guide_mm": 13.9596,
+      "maximum_component_height_below_guide_mm": 13.4596,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.2,
@@ -2134,12 +2211,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2506.ashx?cvid=20250805040419000000&la=ja-jp",
       "note": "Exact GRM188R71H104KA93 manufacturer table row:T size max0.9mm; indexed primary content (direct download failed)",
-      "planning_gap_mm": 12.7596
+      "planning_gap_mm": 12.2596
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2362",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -2148,12 +2225,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://search.kemet.com/download/specsheet/C0603C224K5RACTU",
       "note": "Exact KEMET generated part specification dated2026-02-04: T=0.80+/-0.15mm.",
-      "planning_gap_mm": 11.3959
+      "planning_gap_mm": 10.8959
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2412",
-      "maximum_component_height_below_guide_mm": 12.7076,
+      "maximum_component_height_below_guide_mm": 12.7058,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.2,
@@ -2162,12 +2239,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.murata.com/-/media/webrenewal/tool/library/common-pdf/dynamic-model/component-list-d-mlcc-2506.ashx?cvid=20250805040419000000&la=ja-jp",
       "note": "Exact GRM188R71H104KA93 manufacturer table row:T size max0.9mm; indexed primary content (direct download failed)",
-      "planning_gap_mm": 11.5076
+      "planning_gap_mm": 11.5058
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2608",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 8.3,
@@ -2176,12 +2253,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://util01.industrial.panasonic.com/ea/utilities/ds/chr-vw/EEHZK1V101XP",
       "note": "ZK series, 1 September 2025, standard D8 outline: L=7.7+/-0.3mm. XP is the standard version.",
-      "planning_gap_mm": 4.3459
+      "planning_gap_mm": 3.8459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/C2609",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 8.3,
@@ -2190,12 +2267,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://util01.industrial.panasonic.com/ea/utilities/ds/chr-vw/EEHZK1V101XP",
       "note": "ZK series, 1 September 2025, standard D8 outline: L=7.7+/-0.3mm. XP is the standard version.",
-      "planning_gap_mm": 4.3459
+      "planning_gap_mm": 3.8459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/J10",
-      "maximum_component_height_below_guide_mm": 12.8818,
+      "maximum_component_height_below_guide_mm": 12.8814,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 5.0,
@@ -2203,7 +2280,7 @@
       "physical_fit_verified": false,
       "note": "Socket envelope chosen above the published 4.2 mm nominal height. Confirm the seated socket; this does not cover the full SSD or its insertion sweep.",
       "source": "https://www.amphenol-cs.com/product/mdt420m01001.html",
-      "planning_gap_mm": 7.8818
+      "planning_gap_mm": 7.8814
     },
     {
       "wire": "usb5-USB_PORT_5V",
@@ -2221,7 +2298,7 @@
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/J2073",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 3.2,
@@ -2229,7 +2306,7 @@
       "physical_fit_verified": false,
       "note": "Existing 3.2 mm reservation above the 2.95 mm nominal mated SH height. Confirm plug, solder seating and dressed control wires; the nominal catalogue height is not a maximum.",
       "source": "https://www.jst-mfg.com/product/pdf/eng/eSH.pdf",
-      "planning_gap_mm": 9.4459
+      "planning_gap_mm": 8.9459
     },
     {
       "wire": "usb5-USB_PORT_5V",
@@ -2247,7 +2324,7 @@
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/J2450",
-      "maximum_component_height_below_guide_mm": 12.0552,
+      "maximum_component_height_below_guide_mm": 11.6163,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 4.8,
@@ -2255,7 +2332,7 @@
       "physical_fit_verified": false,
       "note": "Published 4.5 mm body plus 0.3 mm assembly space. The case also checks terminal bodies and separate release-tool envelopes.",
       "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404",
-      "planning_gap_mm": 7.2552
+      "planning_gap_mm": 6.8163
     },
     {
       "wire": "usb5-USB_PORT_5V",
@@ -2286,7 +2363,7 @@
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/L421",
-      "maximum_component_height_below_guide_mm": 12.7801,
+      "maximum_component_height_below_guide_mm": 12.2801,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.25,
@@ -2295,12 +2372,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://product.tdk.com/en/system/files/dam/doc/product/emc/emc/beads/catalog/beads_commercial_power_mpz1608_en.pdf",
       "note": "TDK MPZ1608S221A body thickness is 0.80 +/-0.15 mm; packaging is specified separately.",
-      "planning_gap_mm": 11.5301
+      "planning_gap_mm": 11.0301
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/Q25",
-      "maximum_component_height_below_guide_mm": 12.6476,
+      "maximum_component_height_below_guide_mm": 12.1476,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.4000000000000001,
@@ -2309,12 +2386,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/csd17575q3.pdf",
       "note": "SLPS489A, section 7.1 Q3 package dimensions: A=1.10mm maximum.",
-      "planning_gap_mm": 11.2476
+      "planning_gap_mm": 10.7476
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/Q2620",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.4000000000000001,
@@ -2323,12 +2400,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/csd19537q3.pdf",
       "note": "SLPS549B, section 7.1 Q3 package dimensions: A=1.10mm maximum.",
-      "planning_gap_mm": 11.2459
+      "planning_gap_mm": 10.7459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/Q2622",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.4000000000000001,
@@ -2337,12 +2414,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/csd19537q3.pdf",
       "note": "SLPS549B, section 7.1 Q3 package dimensions: A=1.10mm maximum.",
-      "planning_gap_mm": 11.2459
+      "planning_gap_mm": 10.7459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/Q2623",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.4000000000000001,
@@ -2351,12 +2428,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/csd19537q3.pdf",
       "note": "SLPS549B, section 7.1 Q3 package dimensions: A=1.10mm maximum.",
-      "planning_gap_mm": 11.2459
+      "planning_gap_mm": 10.7459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R420",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2365,12 +2442,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 11.7959
+      "planning_gap_mm": 11.2959
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R421",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2379,12 +2456,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 11.7959
+      "planning_gap_mm": 11.2959
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R785",
-      "maximum_component_height_below_guide_mm": 13.426,
+      "maximum_component_height_below_guide_mm": 12.926,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2393,12 +2470,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "Vishay TNPUe3 dimensions page8: TNPU0603e3 H=0.45+/-0.10mm; dimensions independent of resistance value.",
-      "planning_gap_mm": 12.576
+      "planning_gap_mm": 12.076
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R786",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2407,12 +2484,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "Vishay TNPUe3 dimensions page8: TNPU0603e3 H=0.45+/-0.10mm; dimensions independent of resistance value.",
-      "planning_gap_mm": 11.7959
+      "planning_gap_mm": 11.2959
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R787",
-      "maximum_component_height_below_guide_mm": 13.5575,
+      "maximum_component_height_below_guide_mm": 13.0575,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2421,12 +2498,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 12.7075
+      "planning_gap_mm": 12.2075
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R797",
-      "maximum_component_height_below_guide_mm": 12.6772,
+      "maximum_component_height_below_guide_mm": 12.1772,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2435,12 +2512,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "TNPU0603 e3 dimensions: H=0.45+/-0.10mm.",
-      "planning_gap_mm": 11.8272
+      "planning_gap_mm": 11.3272
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R798",
-      "maximum_component_height_below_guide_mm": 13.5414,
+      "maximum_component_height_below_guide_mm": 13.0414,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2449,7 +2526,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "Vishay TNPUe3 dimensions page8: TNPU0603e3 H=0.45+/-0.10mm; dimensions independent of resistance value.",
-      "planning_gap_mm": 12.6914
+      "planning_gap_mm": 12.1914
     },
     {
       "wire": "usb5-USB_PORT_5V",
@@ -2496,7 +2573,7 @@
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R2280",
-      "maximum_component_height_below_guide_mm": 12.9342,
+      "maximum_component_height_below_guide_mm": 12.4342,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2505,12 +2582,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "TNPU0603 e3 dimensions table, page 8: H0.45\u00b10.10mm; family dimensions apply across resistance values",
-      "planning_gap_mm": 12.0842
+      "planning_gap_mm": 11.5842
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R2281",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2519,12 +2596,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 11.7959
+      "planning_gap_mm": 11.2959
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R2282",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2533,12 +2610,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
       "note": "Vishay TNPUe3 dimensions page8: TNPU0603e3 H=0.45+/-0.10mm; dimensions independent of resistance value.",
-      "planning_gap_mm": 11.7959
+      "planning_gap_mm": 11.2959
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R2283",
-      "maximum_component_height_below_guide_mm": 13.4463,
+      "maximum_component_height_below_guide_mm": 12.9463,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2547,12 +2624,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 12.5963
+      "planning_gap_mm": 12.0963
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R2361",
-      "maximum_component_height_below_guide_mm": 12.651,
+      "maximum_component_height_below_guide_mm": 12.151,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2561,12 +2638,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 11.801
+      "planning_gap_mm": 11.301
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/R2428",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.6332,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 0.8500000000000001,
@@ -2575,12 +2652,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
       "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
-      "planning_gap_mm": 11.7959
+      "planning_gap_mm": 11.7832
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/RS2601",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.189,
@@ -2589,12 +2666,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/docs/30122/wslp.pdf",
       "note": "WSLP2512 dimensions: H=0.635+/-0.254mm.",
-      "planning_gap_mm": 11.4569
+      "planning_gap_mm": 10.9569
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/RS2620",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.189,
@@ -2603,12 +2680,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.vishay.com/doc?31057",
       "note": "WSL2512...18 dimensions: H=0.635+/-0.254mm.",
-      "planning_gap_mm": 11.4569
+      "planning_gap_mm": 10.9569
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/TP6",
-      "maximum_component_height_below_guide_mm": 13.0889,
+      "maximum_component_height_below_guide_mm": 13.0885,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.0,
@@ -2616,12 +2693,12 @@
       "physical_fit_verified": false,
       "note": "Bare copper test pad, with 1 mm reserved for incidental solder. No pin or permanent test wire is fitted. Probe access is separate.",
       "source": "saved PCB test-pad geometry",
-      "planning_gap_mm": 12.0889
+      "planning_gap_mm": 12.0885
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/TP2660",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.0,
@@ -2629,12 +2706,12 @@
       "physical_fit_verified": false,
       "note": "Bare copper test pad using the existing 1 mm solder reservation. No pin or permanent test wire is fitted. Probe access is separate.",
       "source": "../bms-harness-routing.json: assembly_reservations_mm",
-      "planning_gap_mm": 11.6459
+      "planning_gap_mm": 11.1459
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/TP2661",
-      "maximum_component_height_below_guide_mm": 13.3757,
+      "maximum_component_height_below_guide_mm": 12.8757,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.0,
@@ -2642,12 +2719,12 @@
       "physical_fit_verified": false,
       "note": "Bare copper test pad using the existing 1 mm solder reservation. No pin or permanent test wire is fitted. Probe access is separate.",
       "source": "../bms-harness-routing.json: assembly_reservations_mm",
-      "planning_gap_mm": 12.3757
+      "planning_gap_mm": 11.8757
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/U410",
-      "maximum_component_height_below_guide_mm": 12.7562,
+      "maximum_component_height_below_guide_mm": 12.2562,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 2.3,
@@ -2656,12 +2733,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/pcm2900c.pdf",
       "note": "TI DB0028A outline: 2.0 mm maximum seated height for the DB SSOP-28 package.",
-      "planning_gap_mm": 10.4562
+      "planning_gap_mm": 9.9562
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/U773",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.3,
@@ -2670,7 +2747,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/lm706a0.pdf",
       "note": "RRX0029B outline, page 53: 1.0 mm maximum seated height.",
-      "planning_gap_mm": 11.3459
+      "planning_gap_mm": 10.8459
     },
     {
       "wire": "usb5-USB_PORT_5V",
@@ -2703,7 +2780,7 @@
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/U2412",
-      "maximum_component_height_below_guide_mm": 12.7805,
+      "maximum_component_height_below_guide_mm": 12.774,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.75,
@@ -2712,12 +2789,12 @@
       "basis": "manufacturer_maximum",
       "source": "https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf",
       "note": "DBV0005A package outline: 1.45mm maximum.",
-      "planning_gap_mm": 11.0305
+      "planning_gap_mm": 11.024
     },
     {
       "wire": "usb5-USB_PORT_5V",
       "part": "center/Y410",
-      "maximum_component_height_below_guide_mm": 12.6459,
+      "maximum_component_height_below_guide_mm": 12.1459,
       "limiting_surface": "guide",
       "courtyard_screen_not_exact_body": true,
       "height_mm": 1.3,
@@ -2726,7 +2803,7 @@
       "basis": "manufacturer_maximum",
       "source": "https://abracon.com/datasheets/ABM8G-106-12.000MHz-T.pdf",
       "note": "Abracon exact-part outline, page 2: 1.0 mm maximum body height.",
-      "planning_gap_mm": 11.3459
+      "planning_gap_mm": 10.8459
     },
     {
       "wire": "usb5-USB_PORT_5V",
@@ -2763,7 +2840,7 @@
     "all_bend_pass": true,
     "all_length_pass": true,
     "all_separation_pass": true,
-    "minimum_wire_separation_mm": 0.6418049786513388
+    "minimum_wire_separation_mm": 0.6417953201458576
   },
   "guide_fit_tolerance_mm": 0.15,
   "physical_fit_verified": false

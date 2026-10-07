@@ -4,18 +4,17 @@ import json
 import math
 from cad import HERE
 from build import CONFIG
+from stack_geometry import stack_limits
 
 
 def main():
     c=CONFIG;b=c['base'];t=c['trackpad'];h=c['hinges'];k=c['keyboard']
     wires=json.loads((HERE/'installed-power-harness.json').read_text())
-    wiretop=max(r['max_wire_height_mm'] for r in wires['routes'])
+    limits,local=stack_limits(c,wires)
+    wiretop=local['limiting_crossing']['top_height_mm']
     bridge_drop=t['thickness']+t['click_travel']+t['under_clearance']+2.5
     fan=c['cooling']['blower'];fan_top=fan[2]+fan[5]+c['cooling'].get('blower_height_tolerance',.3)
     keyboard_to_deck=b['deck_top']-c['boards']['keyboard']['bottom_height']
-    limits={'power_wires_under_trackpad':wiretop+.5+bridge_drop,
-            'blower_intake_under_keyboard':fan_top+c['cooling'].get('intake_plenum',3)+keyboard_to_deck,
-            'heatpipe_under_carrier':c['cooling']['heatpipe'][2]+c['cooling']['heatpipe'][5]+.5+4.5+keyboard_to_deck}
     tests=[]
     for height in [30,31,32,33,33.5,34,35]:
         tests.append({'base_deck_height_mm':height,'stack_budget_pass':height>=max(limits.values()),
@@ -24,6 +23,7 @@ def main():
     result={'units':'mm','status':'conditional stack budget, not a certified complete arrangement',
             'active_base_height':b['deck_top'],'smallest_half_mm_stack_candidate':math.ceil(max(limits.values())*2)/2,
             'limiting_deck_heights':limits,'trials':tests,
+            'local_trackpad_cable_envelope':local,
             'main_top_height':c['boards']['center']['bottom_height']+1.6,
             'bms_top_height':c['boards']['bms']['bottom_height']+1.6,
             'floor':b['floor'],'minimum_planned_main_board_underside_component_gap':c['boards']['center']['bottom_height']-2.1-b['floor'],

@@ -5,6 +5,26 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-07: work on the cooler fit and cable clearances
+
+**Total time spent: 2 hours**
+
+worked through the cooling layout around the mu ultra. checked the official module and cooler models to get the cpu and memory contact levels and the three mounting points. replaced the flat cold-plate block with a stepped spreader, with separate space for the cpu interface and memory pads. i still need to choose the pad material and mounting hardware, then check the pad compression.
+
+tried lowering the blower, but those positions hit the fuse holder, inductors or tall power capacitors. putting the fins behind the hinge line also made the bezel hit them as the lid opened. kept the fan at its original position and made the fin bank wider so it could sit ahead of the hinge without losing the planned fin area. changed the heatpipe path around the fan, added the slots through the fins, and moved one fan-support post out of its way.
+
+![the cooler fit study, with the smaller board components hidden](docs/images/journal/2026-10-07-cooling-layout.png)
+
+fixed the trackpad height calculation too. it now checks the wires and open guide lips that actually pass underneath the trackpad support. lowered the front usb power run by 0.5 mm, then checked the real cad bend radii, wire lengths and separation again. the deck stays at 33.5 mm. i still need the trackpad's complete thickness and connector measurements before trying to make the case thinner.
+
+![the stepped cpu and memory contact surfaces](docs/images/journal/2026-10-07-cooling-spreader.png)
+
+checked the cooling parts against the available pcb models, wire guides, inlet space and the full lid movement. also wrote down the component heights i still need to confirm. the pcb layouts stayed unchanged throughout this pass.
+
+the solid checks passed, but the print-file check caught an open mesh at the join between a usb guide and its support rib. gave the rib opening another 0.1 mm of clearance so it doesn't create tiny slivers against the guide's separately fitted curve. the guide still sets the cable fit. rebuilt the files again: all 99 step parts reopen correctly and all 101 stls are watertight. the 15 calculation and geometry regression tests pass too.
+
+this is still a rough cooling design. i need to pick an actual heatpipe and duct arrangement, then test the complete cooler with both the 226v and 256v.
+
 # 2026-10-06: check part heights and clear the cable guides
 
 **Total time spent: 1 hour**

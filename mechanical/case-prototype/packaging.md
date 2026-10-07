@@ -49,9 +49,9 @@ fits, or that a different cooler/harness arrangement cannot be thinner.
 
 | driver | required deck height or clearance | basis |
 | --- | ---: | --- |
-| positioned USB wire below trackpad bridge | 33.454 mm deck | 22.454 wire envelope, 0.5 clearance, 2.5 bridge, 2 free space, 1 click travel, 5 trackpad |
+| local USB wire and guide below trackpad bridge | 33.320 mm deck | 22.320 local envelope, 0.5 clearance, 2.5 bridge, 2 free space, 1 click travel, 5 trackpad |
 | blower and intake below keyboard | 33.3 mm deck | fan bottom 15.7, body 10.3 +0.3, 3 intake gap, 4 keyboard-to-deck offset |
-| actual selected bridge to wire envelope | 0.546 mm | 23.0 bridge underside minus 22.454 positioned wire |
+| selected bridge to wire/guide envelope | 0.680 mm | 23.0 bridge underside minus 22.320 local envelope |
 | selected fan envelope to keyboard PCB | 3.2 mm | 29.5 minus 26.3 |
 | main underside component to floor | 0.6 mm | reviewed 1.8 maximum body +0.3 planning allowance |
 | lowest modeled left pin tail to floor | 0.537 mm | after a separate 0.3 planning allowance |
@@ -62,13 +62,12 @@ the keyboard has no saved backside footprints over the fan inlet. its
 carrier has a clearance opening there. this geometric intake gap does not
 qualify airflow, pressure drop, noise or thermal capacity.
 
-33 mm leaves only about 0.046 mm under the trackpad bridge and 2.7 mm above
-the maximum fan body. it fails the stated 0.5 and 3 mm allowances. a 32 mm
-base intersects the current USB envelope under that bridge. lowering the USB front run by 0.5 or 1 mm passes the updated wire-only
-checks, but the blower still needs 33.3 mm before half-millimeter rounding.
-1.5 and 2 mm drops fail wire separation. the selected arrangement keeps
-the original USB height; lower guides and a thinner cooler still need their
-own fit and thermal work.
+33 mm leaves about 0.180 mm under the trackpad bridge and 2.7 mm above
+the maximum fan body. it fails the stated 0.5 and 3 mm allowances. the
+selected arrangement lowers the USB front run by 0.5 mm and checks the
+actual fitted CAD bend radius. the height budget includes the open guide
+lips only where they pass beneath the support. other drop amounts remain
+separate trials in `harness-height-study.json`.
 
 the deck number is not the closed laptop thickness. assumed keys reach
 H34.8. the printed lid and its external splice plates reach H44.8 when
@@ -235,10 +234,14 @@ rigid-part sweep is clear.
 
 both 226V and 256V use the same corrected Mu Ultra module/socket geometry
 in this study. no N305 cooler is used. the Delta fan has a modeled cradle
-and attachment holes. the cold plate, heatpipe and fin stack are still
-proposed envelopes, not a released or thermally tested Ultra cooler. their
-contact interface, mounting load, airflow path and capacity for each CPU
-must be resolved before the 33.5 mm candidate can become a complete fit.
+and attachment holes. it stays at (122,52), bottom H15.7, after lower
+placements conflicted with the existing power parts. the contact plate
+now has separate CPU and memory landings and the official three-point
+mounting pattern. a wider 54-fin bank stays ahead of the hinge line, and
+the revised heatpipe clears the fan supports. one support moves to (170,50).
+these are still proposed cooling parts. thermal interfaces, mounting load,
+heatpipe supply, ducting and capacity for each CPU need qualification.
+see `cooling-fit.md` and `cooling-checks.json` for dimensions and limits.
 
 lid mass/COM and stability calculations remain assumption-based. the
 original 3.3 kg product label is not a supported-lid-mass specification.

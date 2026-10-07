@@ -137,11 +137,12 @@ the source harness uses main-board top planes at 8 mm and BMS top at
 are study datums, not a final case-height requirement. changing the
 relative board heights requires new wire paths.
 
-lowering the USB front run by 0.5 or 1 mm passes the wire-only checks with
-the new BMS route. 1.5 and 2 mm fail separation. none of those lower
-variants is installed: the current blower and its intake allowance still
-require a 33.5 mm deck in half-millimeter steps. complete cooling,
-trackpad and lid dimensions are needed before choosing a thinner stack.
+the case now lowers the USB front run by 0.5 mm. bend radius and cut length
+use the actual fitted CAD curves. the stack calculation includes the open
+guide lips beneath the trackpad support, rather than a wire's highest
+point anywhere on the board. the current candidate retains a 33.5 mm
+deck. complete cooling, trackpad and lid dimensions are needed before
+choosing a thinner stack; see the [cooling fit notes](../../mechanical/case-prototype/cooling-fit.md).
 
 the three owned packs are 100 x 60 mm in the saved measurements. their
 confirmed listing gives 11 mm nominal thickness, with no maximum tolerance.

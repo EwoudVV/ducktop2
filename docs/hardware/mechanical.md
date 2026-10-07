@@ -1,12 +1,14 @@
 # mechanical layout
 
 the original base and lid target was 358 x 248 mm. the saved main boards
-already span 358 mm before case walls. the first editable
+already span 358 mm before case walls. the current editable
 [case study](../../mechanical/case-prototype/README.md) uses a 370 x 282 mm
-base envelope and a 35 mm deck-height target. the current vertical power
-plugs and wire loops do not fit that compact target. the 73 mm profile is
-retained as a clearance reference. measured parts, cooling, cable dressing
-and the pending power layout still control the final size.
+base envelope and a 33.5 mm deck. it includes the current WAGO power
+connections, guided wire paths and removable supports. the printed study
+is still 44.8 mm thick when closed without feet. measured parts, cooling
+and the complete cable routes still control the final size. the
+[cooling fit notes](../../mechanical/case-prototype/cooling-fit.md) record
+the stepped spreader and the limits of the current fan placement.
 main-board coordinates below were checked on 10 september 2026.
 
 ## recorded parts

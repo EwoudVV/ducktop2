@@ -13,9 +13,68 @@
         "surface_gap_after_position_and_sampling_mm": 0.6418049786513388,
         "pass": true
       },
-      "wire_stack_deck_limit_mm": 33.45410064492239,
+      "wire_stack_deck_limit_mm": 33.58426527940956,
       "blower_stack_deck_limit_mm": 33.3,
-      "half_mm_stack_candidate": 33.5
+      "half_mm_stack_candidate": 34.0,
+      "local_trackpad_cable_envelope": {
+        "trackpad_support_xy_mm": [
+          103.0,
+          138.0,
+          255.0,
+          253.0
+        ],
+        "crossings": [
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "wire",
+            "top_height_mm": 18.820609220040843
+          },
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "open_guide",
+            "top_height_mm": 18.952855546001757
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "wire",
+            "top_height_mm": 15.25977107081191
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "open_guide",
+            "top_height_mm": 15.434374384726798
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "wire",
+            "top_height_mm": 19.30409981369302
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "open_guide",
+            "top_height_mm": 19.38426980139436
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "wire",
+            "top_height_mm": 22.504095291708218
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "open_guide",
+            "top_height_mm": 22.584265279409557
+          }
+        ],
+        "limiting_crossing": {
+          "wire": "usb5-USB_PORT_5V",
+          "surface": "open_guide",
+          "top_height_mm": 22.584265279409557
+        },
+        "position_allowance_mm": 0.2,
+        "curve_allowance_mm": 0.025,
+        "sampling_step_mm": 0.05,
+        "scope": "power wires and open guides beneath the support; full carriers, fasteners, parts and signal cables require separate solid checks"
+      }
     },
     {
       "usb_front_drop_mm": 0.5,
@@ -29,9 +88,68 @@
         "surface_gap_after_position_and_sampling_mm": 0.6417953201458576,
         "pass": true
       },
-      "wire_stack_deck_limit_mm": 33.45410038738241,
+      "wire_stack_deck_limit_mm": 33.319995699125656,
       "blower_stack_deck_limit_mm": 33.3,
-      "half_mm_stack_candidate": 33.5
+      "half_mm_stack_candidate": 33.5,
+      "local_trackpad_cable_envelope": {
+        "trackpad_support_xy_mm": [
+          103.0,
+          138.0,
+          255.0,
+          253.0
+        ],
+        "crossings": [
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "wire",
+            "top_height_mm": 18.820609220040843
+          },
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "open_guide",
+            "top_height_mm": 18.952855546001757
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "wire",
+            "top_height_mm": 15.25977107081191
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "open_guide",
+            "top_height_mm": 15.434374384726798
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "wire",
+            "top_height_mm": 19.002652778938987
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "open_guide",
+            "top_height_mm": 19.120441610096137
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "wire",
+            "top_height_mm": 22.202568666276335
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "open_guide",
+            "top_height_mm": 22.319995699125652
+          }
+        ],
+        "limiting_crossing": {
+          "wire": "usb5-USB_PORT_5V",
+          "surface": "open_guide",
+          "top_height_mm": 22.319995699125652
+        },
+        "position_allowance_mm": 0.2,
+        "curve_allowance_mm": 0.025,
+        "sampling_step_mm": 0.05,
+        "scope": "power wires and open guides beneath the support; full carriers, fasteners, parts and signal cables require separate solid checks"
+      }
     },
     {
       "usb_front_drop_mm": 1.0,
@@ -45,9 +163,68 @@
         "surface_gap_after_position_and_sampling_mm": 0.5740917397114612,
         "pass": true
       },
-      "wire_stack_deck_limit_mm": 33.45410038738241,
+      "wire_stack_deck_limit_mm": 33.05572611884175,
       "blower_stack_deck_limit_mm": 33.3,
-      "half_mm_stack_candidate": 33.5
+      "half_mm_stack_candidate": 33.5,
+      "local_trackpad_cable_envelope": {
+        "trackpad_support_xy_mm": [
+          103.0,
+          138.0,
+          255.0,
+          253.0
+        ],
+        "crossings": [
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "wire",
+            "top_height_mm": 18.820609220040843
+          },
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "open_guide",
+            "top_height_mm": 18.952855546001757
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "wire",
+            "top_height_mm": 15.25977107081191
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "open_guide",
+            "top_height_mm": 15.434374384726798
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "wire",
+            "top_height_mm": 18.70179016313628
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "open_guide",
+            "top_height_mm": 18.856613418797906
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "wire",
+            "top_height_mm": 21.901860519989587
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "open_guide",
+            "top_height_mm": 22.055726118841747
+          }
+        ],
+        "limiting_crossing": {
+          "wire": "usb5-USB_PORT_5V",
+          "surface": "open_guide",
+          "top_height_mm": 22.055726118841747
+        },
+        "position_allowance_mm": 0.2,
+        "curve_allowance_mm": 0.025,
+        "sampling_step_mm": 0.05,
+        "scope": "power wires and open guides beneath the support; full carriers, fasteners, parts and signal cables require separate solid checks"
+      }
     },
     {
       "usb_front_drop_mm": 1.5,
@@ -61,9 +238,68 @@
         "surface_gap_after_position_and_sampling_mm": 0.08396721790781629,
         "pass": false
       },
-      "wire_stack_deck_limit_mm": 33.45410038738241,
+      "wire_stack_deck_limit_mm": 32.79145804649991,
       "blower_stack_deck_limit_mm": 33.3,
-      "half_mm_stack_candidate": 33.5
+      "half_mm_stack_candidate": 33.5,
+      "local_trackpad_cable_envelope": {
+        "trackpad_support_xy_mm": [
+          103.0,
+          138.0,
+          255.0,
+          253.0
+        ],
+        "crossings": [
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "wire",
+            "top_height_mm": 18.820609220040843
+          },
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "open_guide",
+            "top_height_mm": 18.952855546001757
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "wire",
+            "top_height_mm": 15.25977107081191
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "open_guide",
+            "top_height_mm": 15.434374384726798
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "wire",
+            "top_height_mm": 18.401548934634334
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "open_guide",
+            "top_height_mm": 18.592785227499682
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "wire",
+            "top_height_mm": 21.60143048942342
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "open_guide",
+            "top_height_mm": 21.791458046499912
+          }
+        ],
+        "limiting_crossing": {
+          "wire": "usb5-USB_PORT_5V",
+          "surface": "open_guide",
+          "top_height_mm": 21.791458046499912
+        },
+        "position_allowance_mm": 0.2,
+        "curve_allowance_mm": 0.025,
+        "sampling_step_mm": 0.05,
+        "scope": "power wires and open guides beneath the support; full carriers, fasteners, parts and signal cables require separate solid checks"
+      }
     },
     {
       "usb_front_drop_mm": 2.0,
@@ -77,10 +313,69 @@
         "surface_gap_after_position_and_sampling_mm": -0.4159246203162393,
         "pass": false
       },
-      "wire_stack_deck_limit_mm": 33.45410038738241,
+      "wire_stack_deck_limit_mm": 32.527186958273944,
       "blower_stack_deck_limit_mm": 33.3,
-      "half_mm_stack_candidate": 33.5
+      "half_mm_stack_candidate": 33.5,
+      "local_trackpad_cable_envelope": {
+        "trackpad_support_xy_mm": [
+          103.0,
+          138.0,
+          255.0,
+          253.0
+        ],
+        "crossings": [
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "wire",
+            "top_height_mm": 18.820609220040843
+          },
+          {
+            "wire": "bms-FG_VSS",
+            "surface": "open_guide",
+            "top_height_mm": 18.952855546001757
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "wire",
+            "top_height_mm": 15.25977107081191
+          },
+          {
+            "wire": "bms-PACK_POS_FUSED",
+            "surface": "open_guide",
+            "top_height_mm": 15.434374384726798
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "wire",
+            "top_height_mm": 18.10162537911206
+          },
+          {
+            "wire": "usb5-GND",
+            "surface": "open_guide",
+            "top_height_mm": 18.328957036201455
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "wire",
+            "top_height_mm": 21.301760993325892
+          },
+          {
+            "wire": "usb5-USB_PORT_5V",
+            "surface": "open_guide",
+            "top_height_mm": 21.52718695827394
+          }
+        ],
+        "limiting_crossing": {
+          "wire": "usb5-USB_PORT_5V",
+          "surface": "open_guide",
+          "top_height_mm": 21.52718695827394
+        },
+        "position_allowance_mm": 0.2,
+        "curve_allowance_mm": 0.025,
+        "sampling_step_mm": 0.05,
+        "scope": "power wires and open guides beneath the support; full carriers, fasteners, parts and signal cables require separate solid checks"
+      }
     }
   ],
-  "conclusion": "The present blower intake stack still needs a 33.5 mm deck in half-millimeter steps. Lower cable variants also need fresh guide/body checks before use."
+  "conclusion": "These trials use the cable and open-guide surfaces beneath the trackpad support. A lower stack still needs complete carrier, component, service and cooling checks."
 }

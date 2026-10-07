@@ -6,7 +6,7 @@
   },
   "scope": "reviewed power groups",
   "generator": "gen/export_power_placement.py",
-  "generator_sha256": "6a130379c4796fcbb7c299faef359ba628bd532d6894eb5fd9e6006fc61d6bf0",
+  "generator_sha256": "13cc8d4a1e38b3614ed85cfd6fe8e109a866e356db72fef9f18d72bbdc73eeed",
   "sources": {
     "board_placement": {
       "file": "mechanical/board-placement.json",
@@ -313,6 +313,60 @@
     "unverified": 14
   },
   "height_data": {
+    "XGL6030-103MEC": {
+      "value_mm": 3.1,
+      "kind": "maximum",
+      "source_url": "https://www.coilcraft.com/pdfs/xgl6030.pdf",
+      "basis": "Document 1635, 19 February 2026, pages 1 and 2: 3.1 mm maximum height and the exact -103MEC ordering row."
+    },
+    "STM32F407VGT6": {
+      "value_mm": 1.4,
+      "kind": "nominal",
+      "source_url": "https://www.st.com/en/microcontrollers-microprocessors/stm32f407vg.html",
+      "basis": "Exact orderable part maps to LQFP100 14 x 14 x 1.4 mm. This published nominal package thickness is not promoted to a maximum seated height."
+    },
+    "TPS62933DRLR": {
+      "value_mm": 0.6,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tps62933.pdf",
+      "basis": "DRL0008A package outline, page 48: 0.6 mm maximum seated height."
+    },
+    "TPS26630RGER": {
+      "value_mm": 1.0,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tps2663.pdf",
+      "basis": "RGE0024H package outline, page 52: 1.0 mm maximum seated height."
+    },
+    "TCA9539PWR": {
+      "value_mm": 1.2,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tca9539.pdf",
+      "basis": "PW0024A package outline, page 46: 1.2 mm maximum seated height."
+    },
+    "SN74AHCT1G126DBVR": {
+      "value_mm": 1.45,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/sn74ahct1g126.pdf",
+      "basis": "DBV0005A package outline, page 21: 1.45 mm maximum seated height."
+    },
+    "1N5819HW-7-F": {
+      "value_mm": 1.35,
+      "kind": "maximum",
+      "source_url": "https://www.diodes.com/datasheet/download/1N5819HW.pdf",
+      "basis": "DS30217 revision 22-2, April 2026, page 4: SOD123 A is 1.35 mm maximum."
+    },
+    "TNPW0603300KBYEA": {
+      "value_mm": 0.55,
+      "kind": "maximum",
+      "source_url": "https://www.vishay.com/doc?28758",
+      "basis": "TNPW e3 package dimensions: TNPW0603 H is 0.45 +/-0.10 mm; resistance and packaging codes do not change this outline."
+    },
+    "TNPW0603332KBYEA": {
+      "value_mm": 0.55,
+      "kind": "maximum",
+      "source_url": "https://www.vishay.com/doc?28758",
+      "basis": "TNPW e3 package dimensions: TNPW0603 H is 0.45 +/-0.10 mm; resistance and packaging codes do not change this outline."
+    },
     "ERJ3RQFR33V": {
       "value_mm": 0.55,
       "kind": "maximum",

@@ -438,9 +438,20 @@ class Model:
         c=CONFIG['cooling']
         for name in ['cold_plate','heatpipe','fins','blower']:
             shape=box(*c[name])
+            if c.get('stepped_spreader') and name=='cold_plate':
+                from cooling import spreader
+                shape=spreader(c,pcb_top('center'))
+            if c.get('rear_heatpipe_route') and name=='heatpipe':
+                from cooling import heatpipe
+                shape=heatpipe(c)
             if name=='fins':
                 x,y,h,w,d,t=c[name]
-                shape=compound([box(x,y,h,w,d,1)]+[box(x+2+2*i,y,h+1,.5,d,t-1) for i in range(23)])
+                count=c.get('fin_count',23);pitch=c.get('fin_pitch_mm',2);fin_t=c.get('fin_thickness_mm',.5)
+                if 2+(count-1)*pitch+fin_t>w:raise ValueError('fin bank exceeds the available width')
+                shape=compound([box(x,y,h,w,d,1)]+[box(x+2+pitch*i,y,h+1,fin_t,d,t-1) for i in range(count)])
+                if c.get('rear_heatpipe_route'):
+                    from cooling import heatpipe
+                    shape=shape.cut(heatpipe(c))
             if name=='blower':
                 x,y,h,w,d,t=c[name]
                 for xx,yy in [(x+41.75,y+3.25),(x+41.75,y+41.75),(x+3.25,y+41.75)]:
@@ -451,7 +462,21 @@ class Model:
         x,y,h,w,d,t=c['blower'];cradle=box(x-7,y-7,h-2,w+14,d+14,2)
         cradle=cradle.cut(cylinder(x+w/2,y+d/2,h-2.1,19.3,2.2))
         upper=CONFIG['boards']['keyboard']['bottom_height']-4.5
-        for i,(xx,yy) in enumerate([(x-5,y-5),(x+w+5,y-5),(x-5,y+d+5),(x+w+5,y+d+5)]):
+        anchors=c.get('blower_cradle_anchors_xy',[(x-5,y-5),(x+w+5,y-5),(x-5,y+d+5),(x+w+5,y+d+5)])
+        for xx,yy in anchors:
+            # Short outer ears connect displaced anchors to the cradle.
+            near_x=min(max(xx,x-5),x+w+5);near_y=min(max(yy,y-5),y+d+5)
+            if abs(xx-near_x)+abs(yy-near_y)>1e-6:
+                cradle=cradle.fuse(box(min(xx,near_x)-3,min(yy,near_y)-3,h-2,abs(xx-near_x)+6,abs(yy-near_y)+6,2))
+        for ref in c.get('blower_cradle_component_reliefs',[]):
+            from cables import polygon_prism
+            from shapely.geometry import Polygon
+            row=next(p for p in json.loads(input_path('component-placement.json').read_text())['parts'] if p['board']=='center' and p['reference']==ref)
+            if row['height_kind']!='maximum':raise ValueError('missing maximum height for blower relief '+ref)
+            for ring in row['courtyards_installed_mm']['front']:
+                area=Polygon(ring['outer']).buffer(.3)
+                cradle=cradle.cut(polygon_prism(list(area.exterior.coords),pcb_top('center')-.1,row['height_mm']+.4))
+        for i,(xx,yy) in enumerate(anchors):
             cradle=cradle.cut(cylinder(xx,yy,h-2.1,1.1,2.2))
             if upper>h:
                 post=cylinder(xx,yy,h,2.2,upper-h).cut(cylinder(xx,yy,h-.1,1.1,upper-h+.2))
@@ -466,8 +491,9 @@ class Model:
             self.mount(f'Delta-blower-{i+1}',xx,yy,h-2,'Delta BFB04512HHA-CZ0T through-bolt to cradle, washer and nut above',2.8,'M2 chosen with washers',2,15,
                        'fan plastic frame; clear of PCB','manufacturer 38.5 mm three-hole pattern, body-centering datum and sample fit pending',head_diameter_mm=4.5,head_height_mm=1.5)
         self.add('blower-fit-cradle',cradle,'supports')
-        if h+t>upper:
-            # The low carrier needs a window around the real 10.3 mm fan body.
+        if h+t+c.get('blower_height_tolerance',.3)+c.get('intake_plenum',3)>upper:
+            # The carrier must also leave the inlet plenum open when the
+            # fan body itself happens to fit below it.
             # Keep the PCB intact and retain contact pads outside this window.
             cut=box(x-1,y-1,upper-.1,w+2,d+2,10)
             for part in self.parts:
