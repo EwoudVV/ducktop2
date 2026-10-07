@@ -12,6 +12,7 @@ CAD arrangement, not a physical fit or thermal qualification.
 - [pin maps and parts](cables-and-connectors.md)
 - [electrical acceptance limits](io-power-qualification.md)
 - [component positions and heights](../../mechanical/component-placement.csv)
+- [component clearance details](../../mechanical/case-prototype/component-heights.md)
 
 ## BMS power leads
 
@@ -61,6 +62,23 @@ carriers have windows around the required seam braids and their 1 mm
 solder-joint reservations. local pockets in the right carrier clear U904
 and C2069, including their maximum heights and an added 0.3 mm allowance.
 all four electrical ground bonds remain in place.
+
+the left carrier has another pocket above center R2443, and the right
+USB carrier has one above U913. these also include 0.3 mm around the
+courtyard and above the manufacturer's maximum height.
+
+the right PD2 guide stops 5 mm before J2433's wire entrance, 2 mm earlier
+than the other short guides. this leaves room over R2045 while retaining
+the nearby clamp. the wire path, cut length and terminal position are
+unchanged. the exposed wire section is still included in the clearance check.
+
+the height screen uses the round guide profile, the real guide ends and
+maximum component heights with 0.3 mm assembly space. it also includes
+the 0.15 mm guide fit, 0.4 mm wall, 0.2 mm wire-position allowance and
+sampling/curve allowance. all 189 wire/component crossings have a height
+basis and clear the chosen allowances. fourteen footprints use explicit
+assembly reservations for connectors, joints, pads or hardware. those
+reservations still need confirmation on the fitted assembly.
 
 the USB guide rails lift off their fixed feet after releasing two screws
 at each cell-gap post. narrow locating blades lift through the board

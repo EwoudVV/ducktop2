@@ -19,4 +19,4 @@ def add(m):
         m.mount('braid/'+name,center,y,h,ar+' / '+br+' solder lands',0,'none',0,'none',
                 'main ground bond, never a BMS support or case screw','20 mm starting cut; finished joints and independent retention not qualified',
                 nominal_width_mm=4.7625,nominal_thickness_mm=.508)
-    m.findings.append('All four required Alpha 1230 seam braids are shown at their actual solder lands. Their clamp integration and soldered shapes remain unresolved; do not omit them to make the case fit.')
+    m.findings.append('All four Alpha 1230 seam braids retain their solder lands and guide windows. The 1 mm joint envelope still needs confirmation on the soldered assembly, including strain relief under case flex.')

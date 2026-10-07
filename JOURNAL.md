@@ -5,6 +5,20 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-06: check part heights and clear the cable guides
+
+**Total time spent: 1 hour**
+
+went through the missing component heights around the power cables. there were 31 missing-height entries, but some were the same part underneath different wires. looked up the exact manufacturer drawings and added maximum heights for nine more part numbers, including the hdmi power switch, maker mcu, voltage regulators and endpoint inductor. kept the plug, solder-joint and screw allowances separate because those still depend on how the laptop is assembled.
+
+found a tight spot above a resistor beside the right power connector. the wire had enough room, but its printed guide extended too far towards the connector. shortened that end by 2 mm so the plastic stays clear while the nearby clamp still holds the wire. also cut small pockets in the left main carrier and right usb carrier above two components that were missing from the height data.
+
+![the shortened power-wire guide beside the resistor clearance area](docs/images/journal/2026-10-06-guide-clearance.png)
+
+improved the clearance calculation to follow the round guides and their actual ends. it now checks the bare wire beyond each guide too, and includes the guide wall, fit tolerance, wire positioning and 0.3 mm of component assembly space. all 189 wire/component crossings have a height basis and clear those allowances. fourteen footprints use chosen space for assembly, so i still need to check those with the actual plugs, solder joints and hardware. the eight regression tests and four bms harness tests pass.
+
+rebuilt the case and checked the wires, carriers, ground braids, connector access and lid movement again. the modeled clashes are gone. all 99 step parts reopen correctly and all 101 stls are watertight. every pcb and all 18 wire paths stayed unchanged. the closest guide still needs a careful physical fit check, and the cooling and trackpad stack are the next things to work on before making the case thinner.
+
 # 2026-10-06: fix the bms cables and make the guides removable
 
 **Total time spent: 2 hours**

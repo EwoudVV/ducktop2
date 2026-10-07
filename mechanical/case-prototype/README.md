@@ -16,6 +16,11 @@ clamp strength, several other component heights, signal cables and cooling
 remain unqualified. use the model for inspection and fit coupons before a
 complete case build.
 
+the power-wire height screen now covers 189 crossings. manufacturer maxima
+and chosen assembly reservations are recorded separately in
+`component-heights.md` and `height-allowances.json`. the PD2 guide ends
+2 mm earlier near right-board R2045; its wire path is unchanged.
+
 read `packaging.md` before printing. `harness-case-checks.json` records
 solid intersections, conservative height screens and unverified dimensions.
 `thickness-study.json` separates the stack calculation from a complete fit
@@ -58,6 +63,8 @@ scripts never save a PCB or change its routing, placement or outline.
 
 - `assembly.json`, `build.py`, `cables.py`, `harness_geometry.py`, `cad.py`
   and `hinges.py`: editable parameters and construction source.
+- `component_heights.py`, `height-allowances.json`, `component-heights.md`:
+  height calculations, explicit assembly space and source drawings.
 - `exports/ducktop2-assembly.step`: named assembly, open at 105 degrees.
 - `exports/parts/`: separate manufactured STEP parts and P1S STL derivatives.
   split reinforcement STLs are fit gauges, not substitutes for continuous metal.

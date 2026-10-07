@@ -12,6 +12,7 @@ import cadquery as cq
 from cad import HERE,ROOT,box,cylinder,compound,render
 from harness_geometry import paths
 from case_inputs import path as input_path
+from component_heights import guided_points
 
 
 def cached_geometry(fn):
@@ -273,15 +274,19 @@ def integrate_guides(m,groups):
             gap=box(50 if name.startswith('harness-left') else 280,braid_y-2.78125,6.35,40,5.5625,1.75)
             shape=shape.cut(gap)
             for p in pieces:p['shape']=p['shape'].cut(gap)
-        if name=='harness-right-main-power':
+        targets={
+            'harness-right-main-power':{('center','U904'),('right','C2069')},
+            'harness-left-main-power':{('center','R2443')},
+            'harness-USB-right':{('center','U913')},
+        }.get(name,set())
+        if targets:
             from build import CONFIG
             from shapely.geometry import Polygon
-            targets={('center','U904'),('right','C2069')}
             parts=json.loads(input_path('component-placement.json').read_text())['parts']
             for row in parts:
                 if (row['board'],row['reference']) not in targets:continue
                 if row['side']!='front' or row['height_kind']!='maximum':
-                    raise ValueError('recheck the right carrier pocket for '+row['reference'])
+                    raise ValueError('recheck '+name+' pocket for '+row['reference'])
                 height=row['height_mm']+.3
                 low=CONFIG['boards'][row['board']]['bottom_height']+row['board_thickness_mm']-.1
                 for ring in row['courtyards_installed_mm']['front']:
@@ -334,8 +339,7 @@ def add_cables(m):
         p=np.array(r['points']);wire=tube(p,r['wire_od_mm']/2)
         m.add(r['name']+'-power-wire',wire,'cables','Alpha 6716' if r['group']=='usb5' else 'Alpha 6715',
               False,False,power_wire=True,wire_name=r['name'])
-        ss=np.r_[0,np.cumsum(np.linalg.norm(np.diff(p,axis=0),axis=1))]
-        trim=3 if r['group']!='usb5' else 6;useful=p[(ss>=trim)&(ss<=ss[-1]-trim)]
+        useful=guided_points(r,c)
         g=guide(useful,r['wire_od_mm'],c['guide_radial_clearance'],c['guide_wall'])
         if r['group']=='usb5' or g.BoundingBox().xlen>244:
             for i,(xx,ww) in enumerate([(0,179),(179,250)]):

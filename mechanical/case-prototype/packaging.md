@@ -99,6 +99,18 @@ carrier has local relief pockets over U904 and C2069; both are front-side
 parts beneath its overhang. their courtyards and maximum heights get an
 additional 0.3 mm allowance.
 
+the left main carrier has the same type of pocket over center R2443,
+and the right USB carrier has one over center U913. both use the newly
+confirmed manufacturer maxima, with 0.3 mm vertical and lateral clearance.
+
+the right PD2 guide ends 5 mm before J2433 instead of 3 mm, leaving
+assembly space over R2045. the wire and clamp remain in place. the height
+check covers the bare wire beyond each guide end as well as the guide
+itself, using the round cross-section and separate fit, wall, position
+and curve allowances. all 189 wire/component crossings have a recorded
+height basis. fourteen footprints use assembly reservations that still
+need a physical check. dimensions and sources are in `component-heights.md`.
+
 the independent separation check uses 0.2 mm allowance on each wire plus
 0.05 mm sampling allowance. its minimum is about 0.642 mm. dimensions and
 pin maps remain in `docs/hardware/cables-and-connectors.md` and

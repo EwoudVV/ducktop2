@@ -443,7 +443,7 @@
     "gen/bom_catalog.py": "08df150fb2f00d339ae155a729e4ae9cec2196c703c38781820c9e9badcbea37",
     "gen/part_identity.py": "56656bc1f4effc845c475cfea11bd199eb3519611e8a13d6123646b012aee906",
     "gen/test_part_identity.py": "d9147380a48f87eba5a8cffd2883abe7f98a59f4c498b2155d21f2e6707f4d18",
-    "gen/export_power_placement.py": "e8c68dc71a71f0ecbb0f4d9ffb1be0dab46f71be729e6f48f6f314a57132610b",
+    "gen/export_power_placement.py": "6a130379c4796fcbb7c299faef359ba628bd532d6894eb5fd9e6006fc61d6bf0",
     "gen/generate_component_inventory.py": "57060c0451bf4efad5ed0d96b03f23cf5f39d1f6d9739d3ee7d206e062b56ee7",
     "gen/generate_internal_services_sheet.py": "1da2107876cb6160cfe0e5e40198c1b7b35a616fb87994191bcd19c6dbb37390",
     "gen/fpc_contract.py": "7d766c8a435dd39fbf1a0ef73733132521c2958c8cc333a02af4e1f93f30183b",
@@ -738,7 +738,43 @@
     "case_geometry_checks_passed": true,
     "manufactured_STEP_parts": 99,
     "watertight_STLs": 101,
-    "unverified_other_wire_component_height_limits": 31,
-    "physical_fit_verified": false
+    "unverified_other_wire_component_height_limits": 0,
+    "physical_fit_verified": false,
+    "assembly_height_reservations_requiring_physical_confirmation": 14
+  },
+  "case_height_update": {
+    "date": "2026-10-06",
+    "manufacturer_maximum_MPNs_added": 9,
+    "classified_wire_component_crossings": 189,
+    "unverified_wire_component_height_limits": 0,
+    "assembly_reservation_footprints": 14,
+    "physical_fit_verified": false,
+    "PCB_files_unchanged": true,
+    "wire_paths_unchanged": true,
+    "guide_changes": [
+      "PD2 guide ends 5 mm before right J2433, previously 3 mm",
+      "left main carrier pocket over center R2443",
+      "right USB carrier pocket over center U913"
+    ],
+    "tests": {
+      "component_height_regressions": 8,
+      "BMS_harness_regressions": 4
+    },
+    "sources_sha256": {
+      "gen/export_power_placement.py": "6a130379c4796fcbb7c299faef359ba628bd532d6894eb5fd9e6006fc61d6bf0",
+      "mechanical/component-placement.json": "35528c2f92ec291ec54001938e471369eba398b13d7dc44d460ecd51763a00f3",
+      "mechanical/power-harness-checks.json": "92e652e3246e7521d2fedbca71d6aad162c91c675292cc63c118accfd83400c6",
+      "mechanical/case-prototype/component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664",
+      "mechanical/case-prototype/height-allowances.json": "227cca192d8b177ada9b22148218839402c559e5f2b00f37a2961768117ddb0b",
+      "mechanical/case-prototype/cables.py": "6b31161dc73b42d45628a4fbb6c38083c31b5a989df5e495ed4fce1967302c95"
+    },
+    "case_clearance_checks_passed": true,
+    "manufactured_STEP_parts": 99,
+    "watertight_STLs": 101,
+    "report_sha256": {
+      "mechanical/case-prototype/harness-case-checks.json": "c8b8ba25f38a2b842258989d4cdcd1f03f7da24bcec04990df752cebb00aabe2",
+      "mechanical/case-prototype/assembly-checks.json": "03e6e1abff98792cb810ccb02738270e3cafef3e74ea2250d196bde4d7124cce",
+      "mechanical/case-prototype/export-checks.json": "c50ce16576ef880b315f785bfed243aac9074c5a3c12a69d268a280a86971e57"
+    }
   }
 }

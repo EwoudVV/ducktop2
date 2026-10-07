@@ -51,6 +51,7 @@ def main():
               'manufacturing_ready':False,'owned_part_measurements_complete':False,
               'cad_sources':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in HERE.glob('*.py')},
               'assembly_config_sha256':hashlib.sha256((HERE/'assembly.json').read_bytes()).hexdigest()}
+    manifest['height_allowances_sha256']=hashlib.sha256((HERE/'height-allowances.json').read_bytes()).hexdigest()
     (HERE/'source-bindings.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('schedule lengths, fastener quantities, signed lid loads and six frozen PCB bindings recorded')
 

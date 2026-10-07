@@ -5,11 +5,11 @@ Unknown heights stay unknown. A clean BRep intersection check is not a
 complete assembly approval when some parts lack models or measurements.
 """
 import json
-import numpy as np
-from shapely.geometry import Polygon,Point,LineString
-from shapely.ops import unary_union
+import hashlib
+from shapely.geometry import Polygon
 from cad import HERE,ROOT,box,cylinder
 from case_inputs import path as input_path
+from component_heights import resolve, screen_routes
 
 
 def check(m):
@@ -82,13 +82,19 @@ def check(m):
     print('guide and service BRep checks complete',flush=True)
     checkpoint('guide and service checks complete')
     parts=json.loads(input_path('component-placement.json').read_text())['parts']
+    height_settings=json.loads((HERE/'height-allowances.json').read_text())
+    results['height_check_sources_sha256']={name:hashlib.sha256((HERE/name).read_bytes()).hexdigest()
+        for name in ['height-allowances.json','component_heights.py','clearance_review.py']}
+    results['height_allowances']=height_settings
     from cables import polygon_prism
     structures=[p for p in m.parts if (p.get('manufactured') or p['group']=='cooling') and not p.get('moving') and not p.get('intentional_wire_grip')]
     for p in parts:
-        if p['dnp'] or p['height_mm'] is None:continue
+        if p['dnp']:continue
+        limit=resolve(p,height_settings)
+        if limit is None:continue
         rings=p['courtyards_installed_mm'][p['side']]
         if not rings:continue
-        height=p['height_mm']+(p['planning_allowance_mm'] or 0)
+        height=limit['height_mm']
         h=pcb_top(p['board']) if p['side']=='front' else CONFIG['boards'][p['board']]['bottom_height']-height
         # This is a conservative courtyard-height volume. Report it separately
         # from actual BRep body collisions, never as a verified physical clash.
@@ -101,26 +107,10 @@ def check(m):
             for s in candidates:
                 v=volume(envelope,s['shape'])
                 if v>.02:results['component_height_vs_structure'].append({'component':p['board']+'/'+p['reference'],'structure':s['name'],
-                    'overlap_mm3':round(v,3),'screen':'courtyard x manufacturer height plus planning allowance; body-fit check needed'})
-    for row in m.harness['routes']:
-        pts=np.array(row['points']);radius=row['wire_od_mm']/2+.2+CONFIG['cables']['guide_wall']+.025
-        line=LineString(pts[:,:2]).buffer(radius)
-        for p in parts:
-            if p['side']!='front' or p['dnp']:continue
-            if any(e['board']==p['board'] and e['ref']==p['reference'] for e in row['ends']):continue
-            rings=p['courtyards_installed_mm']['front']
-            if not rings:continue
-            area=unary_union([Polygon(r['outer'],r['holes']) for r in rings])
-            if not line.intersects(area):continue
-            near=np.array([area.distance(Point(x,y))<=radius for x,y in pts[:,:2]])
-            if not near.any():continue
-            allowed=float(pts[near,2].min()-radius-pcb_top(p['board']))
-            record={'wire':row['name'],'part':p['board']+'/'+p['reference'],'maximum_component_height_below_guide_mm':round(allowed,4),
-                    'courtyard_screen_not_exact_body':True}
-            if p['height_mm'] is None:results['unverified_height_limits'].append(record)
-            else:
-                gap=allowed-p['height_mm']-(p['planning_allowance_mm'] or 0)
-                if gap<0:results['known_height_clearance_conflicts'].append({**record,'height_mm':p['height_mm'],'planning_gap_mm':round(gap,4)})
+                    'overlap_mm3':round(v,3),'height_basis':limit['basis'],
+                    'screen':'courtyard x reviewed height and assembly allowance; exact body-fit check needed'})
+    results.update(screen_routes(m.harness['routes'],parts,
+        {name:pcb_top(name) for name in CONFIG['boards']},CONFIG['cables'],height_settings))
     # Backside limits apply to the whole main-board floor, not only components
     # present in the partial native STEP export.
     back=[p for p in parts if p['side']=='back' and not p['dnp']]

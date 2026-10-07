@@ -8,7 +8,8 @@ CACHE=ROOT/'.workbench/case-prototype/assembly-brep'
 
 def geometry_inputs():
     paths=[HERE/name for name in ['build.py','cad.py','cables.py','service_carriers.py',
-        'ground_braids.py','harness_geometry.py','hinges.py','radio_hardware.py','case_inputs.py']]
+        'ground_braids.py','harness_geometry.py','hinges.py','radio_hardware.py','case_inputs.py',
+        'component_heights.py']]
     paths += [HERE/'reference/pcb-snapshot/manifest.json']
     paths += list((HERE/'reference/pcb-snapshot/inputs').glob('*.json'))
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()

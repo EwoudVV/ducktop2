@@ -6,7 +6,7 @@
   },
   "scope": "reviewed power groups",
   "generator": "gen/export_power_placement.py",
-  "generator_sha256": "e8c68dc71a71f0ecbb0f4d9ffb1be0dab46f71be729e6f48f6f314a57132610b",
+  "generator_sha256": "6a130379c4796fcbb7c299faef359ba628bd532d6894eb5fd9e6006fc61d6bf0",
   "sources": {
     "board_placement": {
       "file": "mechanical/board-placement.json",
@@ -313,6 +313,66 @@
     "unverified": 14
   },
   "height_data": {
+    "ERJ3RQFR33V": {
+      "value_mm": 0.55,
+      "kind": "maximum",
+      "source_url": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDN0000/AOA0000C313.pdf",
+      "basis": "Current-sensing thick-film catalogue, 29 September 2023, page 5: ERJ3R thickness T is 0.45 +/-0.10 mm."
+    },
+    "T520X337M010ATE010": {
+      "value_mm": 4.3,
+      "kind": "maximum",
+      "source_url": "https://search.kemet.com/download/specsheet/T520X337M010ATE010",
+      "basis": "Exact-part specification: H is 4.0 +/-0.3 mm for the X case."
+    },
+    "TPS22948DCKR": {
+      "value_mm": 1.1,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tps22948.pdf",
+      "basis": "DCK0006A outline, page 18: 1.1 mm maximum seated height."
+    },
+    "CC0402KRX7R9BB183": {
+      "value_mm": 0.55,
+      "kind": "maximum",
+      "source_url": "https://yageogroup.com/download/specsheet/CC0402KRX7R9BB183",
+      "basis": "Exact-part sheet, 6 October 2026, page 1: T is 0.50 +/-0.05 mm."
+    },
+    "GRM155R71E473KA88D": {
+      "value_mm": 0.55,
+      "kind": "maximum",
+      "source_url": "https://www.mouser.com/datasheet/3/76/1/GRM155R71E473KA88-01A.pdf",
+      "basis": "Murata reference sheet dated 25 December 2024, page 2, mirrored by Mouser: T is 0.50 +/-0.05 mm; D packaging is listed."
+    },
+    "LM706A0RRXR": {
+      "value_mm": 1.0,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/lm706a0.pdf",
+      "basis": "RRX0029B outline, page 53: 1.0 mm maximum seated height."
+    },
+    "RP2350A (A4 stepping)": {
+      "value_mm": 0.9,
+      "kind": "maximum",
+      "source_url": "https://datasheets.raspberrypi.com/rp2350/rp2350-product-brief.pdf",
+      "basis": "Product brief, page 6, 60QFN physical specification: A is 0.90 mm maximum. The A4 stepping requirement is retained."
+    },
+    "SN74CB3T3245PWR": {
+      "value_mm": 1.2,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/sn74cb3t3245.pdf",
+      "basis": "PW0020A outline, page 24: 1.2 mm maximum seated height for PWR; the DGS outline belongs to another package."
+    },
+    "XGL1060-822MEC": {
+      "value_mm": 6.0,
+      "kind": "maximum",
+      "source_url": "https://www.coilcraft.com/pdfs/xgl1060.pdf",
+      "basis": "Document 1735, 19 February 2026, pages 1 and 3: exact ordering row and 6.0 mm maximum height for the E termination."
+    },
+    "MDT420M01001": {
+      "value_mm": 4.2,
+      "kind": "nominal",
+      "source_url": "https://www.amphenol-cs.com/product/mdt420m01001.html",
+      "basis": "Exact-part product page gives H=4.2 mm. No maximum is inferred from this nominal value; the case reserves 5.0 mm for the socket."
+    },
     "SiSS4409DN-T1-GE3": {
       "value_mm": 0.83,
       "kind": "maximum",

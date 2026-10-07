@@ -33,6 +33,17 @@ def views(m):
         if bbox_overlap(p['shape'],clip):
             scene.append(p)
     render(scene,out/'bms-guides.png','BMS power leads / current connectors and revised guides',direction=(.3,-.6,1.5),focus=((155,-156,12),54))
+    scene=[];clip=box(289,45,0,39,25,20)
+    for p in visible:
+        if p.get('moving') or p['group'] in ['deck','inputs'] or p['name']=='trackpad-bridge':continue
+        if bbox_overlap(p['shape'],clip):scene.append(p)
+    row=next(p for p in json.loads(input_path('component-placement.json').read_text())['parts']
+             if p['board']=='right' and p['reference']=='R2045')
+    for ring in row['courtyards_installed_mm']['front']:
+        scene.append({'shape':polygon_prism(ring['outer'],pcb_top('right'),row['height_mm']+.3),
+                      'color':(.95,.65,.15,.8),'group':'boards','moving':False})
+    render(scene,out/'right-power-guide.png','shortened PD2 guide / amber = R2045 height and assembly space',
+           direction=(.5,-.8,1.2),focus=((304,-56,8.5),12),size=(1500,1000))
     internal=[p for p in visible if not p.get('moving') and p['group'] not in ['deck','inputs'] and not p['name'].startswith('keyboard-')]
     render(internal,out/'inside.png','current PCB geometry / harness carriers anchored outside the cells',direction=(.15,-.8,1.7))
     for label,x in [('cooling',132.45),('compute-keyboard',205),('trackpad-battery',179),('power-loom',166)]:
@@ -57,6 +68,9 @@ if __name__=='__main__':
         import json,hashlib
         record=json.loads((HERE/'assembly-checks.json').read_text())
         assert record.get('config_sha256')==hashlib.sha256((HERE/'assembly.json').read_bytes()).hexdigest(),'run current checks before exporting'
+        height_checks=json.loads((HERE/'harness-case-checks.json').read_text())
+        for name,digest in height_checks['height_check_sources_sha256'].items():
+            assert hashlib.sha256((HERE/name).read_bytes()).hexdigest()==digest,'height assumptions changed: rerun checks before exporting'
         m.findings=list(dict.fromkeys(record['limitations']))
         deliver(m,render_views=False,checked=True)
     if a.views:views(m)

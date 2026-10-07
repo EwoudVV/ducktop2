@@ -1,0 +1,108 @@
+{
+  "units": "mm",
+  "manufacturer_assembly_allowance_mm": 0.3,
+  "wire_position_allowance_mm": 0.2,
+  "guide_curve_allowance_mm": 0.025,
+  "sampling_step_mm": 0.05,
+  "status": "Assembly reservations are dimensions to meet during assembly, not measured heights or manufacturer maxima. Cable dressing and probe access still need checking.",
+  "reservations": {
+    "center/J2073": {
+      "mpn": "SM05B-SRSS-TB(LF)(SN)",
+      "footprint": "Connector_JST:JST_SH_SM05B-SRSS-TB_1x05-1MP_P1.00mm_Horizontal",
+      "height_mm": 3.2,
+      "basis": "Existing 3.2 mm reservation above the 2.95 mm nominal mated SH height. Confirm plug, solder seating and dressed control wires; the nominal catalogue height is not a maximum.",
+      "source": "https://www.jst-mfg.com/product/pdf/eng/eSH.pdf"
+    },
+    "center/H24": {
+      "mpn": null,
+      "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+      "height_mm": 2.8,
+      "basis": "The case models a 0.5 mm washer and 2.0 mm nylon screw head, with 0.3 mm additional clearance.",
+      "source": "build.py: main-board nylon head and washer"
+    },
+    "center/J10": {
+      "mpn": "MDT420M01001",
+      "footprint": "ducktop2:Amphenol_MDT420M01001_H4.2",
+      "height_mm": 5.0,
+      "basis": "Socket envelope chosen above the published 4.2 mm nominal height. Confirm the seated socket; this does not cover the full SSD or its insertion sweep.",
+      "source": "https://www.amphenol-cs.com/product/mdt420m01001.html"
+    },
+    "center/J54": {
+      "mpn": "SM02B-GHS-TB",
+      "footprint": "Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",
+      "height_mm": 4.6,
+      "basis": "Side-entry GH header and mated plug reservation, as used for the BMS GH connector. The catalogue's nominal drawing is not a guaranteed maximum. Thermistor wires and latch access remain separate.",
+      "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf"
+    },
+    "center/J58": {
+      "mpn": null,
+      "footprint": "ducktop2:USB2_Trackpad_Cable_SolderPads_1x04_P2.54mm",
+      "height_mm": 4.0,
+      "basis": "Existing 4 mm allowance for the dressed trackpad cable, solder and insulation. Confirm the complete installed termination.",
+      "source": "../bms-harness-routing.json: assembly_reservations_mm"
+    },
+    "center/J2432": {
+      "mpn": "2060-453/998-404",
+      "footprint": "ducktop2:WAGO_2060_453_SMD",
+      "height_mm": 4.8,
+      "basis": "Published 4.5 mm body plus 0.3 mm assembly space. The case also checks terminal bodies and separate release-tool envelopes.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404"
+    },
+    "center/J2450": {
+      "mpn": "2060-453/998-404",
+      "footprint": "ducktop2:WAGO_2060_453_SMD",
+      "height_mm": 4.8,
+      "basis": "Published 4.5 mm body plus 0.3 mm assembly space. The case also checks terminal bodies and separate release-tool envelopes.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404"
+    },
+    "center/J2452": {
+      "mpn": "2060-453/998-404",
+      "footprint": "ducktop2:WAGO_2060_453_SMD",
+      "height_mm": 4.8,
+      "basis": "Published 4.5 mm body plus 0.3 mm assembly space. The case also checks terminal bodies and separate release-tool envelopes.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404"
+    },
+    "center/J2462": {
+      "mpn": "2060-451/998-404",
+      "footprint": "ducktop2:WAGO_2060_451_SMD",
+      "height_mm": 4.8,
+      "basis": "2060 body reservation of 4.5 mm plus 0.3 mm assembly space; button-tool space is checked separately.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-451_998-404"
+    },
+    "center/J2446": {
+      "mpn": null,
+      "footprint": "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm",
+      "height_mm": 1.0,
+      "basis": "Existing 1 mm finished braid and solder-joint reservation. Nominal braid thickness is 0.508 mm; solder and formed shape need a physical check.",
+      "source": "ground_braids.py: right-2 joint allowance"
+    },
+    "right/J2447": {
+      "mpn": null,
+      "footprint": "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm",
+      "height_mm": 1.0,
+      "basis": "Existing 1 mm finished braid and solder-joint reservation. Nominal braid thickness is 0.508 mm; solder and formed shape need a physical check.",
+      "source": "ground_braids.py: right-2 joint allowance"
+    },
+    "center/TP6": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 1.0,
+      "basis": "Bare copper test pad, with 1 mm reserved for incidental solder. No pin or permanent test wire is fitted. Probe access is separate.",
+      "source": "saved PCB test-pad geometry"
+    },
+    "center/TP2660": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "height_mm": 1.0,
+      "basis": "Bare copper test pad using the existing 1 mm solder reservation. No pin or permanent test wire is fitted. Probe access is separate.",
+      "source": "../bms-harness-routing.json: assembly_reservations_mm"
+    },
+    "center/TP2661": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "height_mm": 1.0,
+      "basis": "Bare copper test pad using the existing 1 mm solder reservation. No pin or permanent test wire is fitted. Probe access is separate.",
+      "source": "../bms-harness-routing.json: assembly_reservations_mm"
+    }
+  }
+}
