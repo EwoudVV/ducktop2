@@ -5,6 +5,22 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-08: check the parts underneath the cooler
+
+**Total time spent: 1 hour**
+
+went through the component heights around the cooler. there were 37 footprints without enough height information, so i looked up the capacitor, regulator, crystal, switch and mounting-part drawings. added dimensions for 22 part numbers and kept the plug, screw and solder allowances separate from the manufacturer maximums. the boards already have enough space for this arrangement, so none of the components needed moving.
+
+changed the cooling check to show the space above each component, including the fan screws. it follows the actual underside of the fins, heatpipe and supports, so an opening in the cooler doesn't get treated as solid material. added tests for cutouts, low protrusions and assembly allowances too.
+
+![the space above the hall-switch plug, with its height allowance in orange](docs/images/journal/2026-10-08-hall-plug-clearance.png)
+
+the tightest spot is above the hall-switch plug under the fins, with 0.2 mm left after its reserved assembly height. the inter-board connectors have 0.4 mm left, and the reset switch has 0.7 mm below the nearby fan screw. wrote down the screw-length limit and which parts need the cooler removed for access. i still need to check the real plugs and complete screw stacks against those allowances.
+
+![the reset-switch height allowance below the fan support and screw](docs/images/journal/2026-10-08-reset-switch-clearance.png)
+
+all 240 cooling crossings now have a height basis and clear the model. the 189 power-wire crossings and lid movement still pass too, along with 23 geometry tests. reopened the existing exports and checked all 99 step parts and 101 stls. the pcb layouts, cable paths and case shape stayed the same. this fills in the missing height information, but the cooler still needs an actual heatpipe, mounting hardware and thermal testing.
+
 # 2026-10-07: work on the cooler fit and cable clearances
 
 **Total time spent: 2 hours**

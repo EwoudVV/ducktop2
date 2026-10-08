@@ -1,5 +1,35 @@
 # component clearance around the power wires
 
+8 october update: the separate cooling screen now covers 240 crossings
+over 154 footprints, with no missing height basis. see `cooling-fit.md`
+for the tight locations and the assemblies that still need measuring.
+the power-wire screen below still has 189 crossings.
+
+the added manufacturer limits are saved by exact part number in
+`gen/export_power_placement.py`, with a drawing URL and dimension basis.
+
+| part | maximum height |
+| --- | ---: |
+| C0603C100C5GACTU, C0603C689C5GACTU | 0.87 mm |
+| T520B107M010ATE070 | 2.00 mm |
+| GRM31CZ71C226ME15L | 1.90 mm |
+| GCM188L81H104KA57D, GRM188R60J105KA01D | 0.90 mm |
+| SMCJ24CA-E3/57T | 2.62 mm |
+| 1206L075/16WR | 1.25 mm |
+| 9774055243R, above seating shoulder | 5.60 mm |
+| ERJ8CWFR016V | 0.75 mm |
+| B3S-1000 | 4.50 mm |
+| TPS56637RPAR, TPS552882RPMR, USB2513BT-I/M2 | 1.00 mm |
+| TCA9548APWR | 1.20 mm |
+| J32SMX-K-F-G-I-8M0, ABM8-24.000MHZ-10-1-U-T | 0.80 mm |
+| X1A000141000612 | 0.90 mm |
+
+manufacturer maxima receive the same 0.3 mm assembly allowance. nominal
+connector heights stay nominal, with their installed-space reservations
+recorded separately in `height-allowances.json`. pad reservations do not
+provide probe access through the cooler; remove it before programming or
+probing the covered targets.
+
 6 october 2026. the 31 missing-height records covered 21 footprints, with
 several repeated under different wires. the wider clearance screen also
 picked up R2443, C2285 and J2073. all 189 current wire/component crossings

@@ -5,6 +5,54 @@ layout beneath it. the trackpad's complete height is still needed before
 lowering the deck. the cooling parts are a fit study, not a finished or
 thermally tested heatsink.
 
+## component heights, 8 october
+
+the cooling screen now includes 240 crossings over 154 footprints. the
+37 footprints that previously lacked a height basis now have either a
+manufacturer maximum or a separate assembly reservation. 27 footprints
+in the full screen still use reservations, including connectors, screw
+stacks, bare pads and the MCU. those dimensions have to be met during
+assembly; they are not measurements of finished hardware.
+
+the check uses the actual underside of each cooling part above the saved
+courtyard, including cutouts. it includes the fan screws and counts the
+assembly allowance once. there are no missing height entries or negative
+margins in this screen. the boards and cooler geometry have not moved.
+
+| location | height including assembly space | remaining gap |
+| --- | ---: | ---: |
+| J53 hall-switch plug below fins | 4.60 mm reservation | 0.20 mm |
+| FPC101/FPC102 below fins | 4.40 mm reservation | 0.40 mm |
+| J40 socket below fan screw | 5.00 mm reservation | 0.50 mm |
+| SW3 reset switch below fan screw | 4.50 mm maximum +0.30 mm | 0.70 mm |
+| H1/H2 complete module fastening stack | 9.50 mm reservation | 0.737 mm |
+
+the [JST GH drawing](https://www.jst-mfg.com/product/pdf/eng/eGH.pdf) lists
+a nominal 4.25 mm side-entry header. J52, J53 and J56 use the existing
+4.6 mm installed-plug reservation. the
+[Molex connectors](https://www.molex.com/en-us/products/part-detail/5039084120)
+have a nominal 3.75 mm mated height. their 4.4 mm reservation adds room for
+seating and clearance. confirm the actual plugs and cable bends before
+making the fin bank.
+
+[SW3](https://components.omron.com/eu-en/system/files/2024-10/datasheet_pdf/A204-E1.pdf)
+is 4.3 +/-0.2 mm high. the fan screw must still be cut to the recorded
+length. extra screw length would consume the 0.7 mm margin. remove the
+fan and cradle to operate the reset switch or service the Wi-Fi card.
+the J40 result covers the socket only, not the complete card, antenna
+plugs or its insertion path.
+
+the [Mu standoffs](https://www.we-online.com/components/products/datasheet/9774055243R.pdf)
+are 5.5 +/-0.1 mm above the PCB seating shoulder. H1/H2 reserve 9.5 mm for
+the complete module and retaining screw stack. H4 reserves 6.3 mm for the
+Wi-Fi retainer stack. choose the actual screws and check these complete
+assemblies before machining the spreader. the module's three cooler
+mounting points remain a separate fastening problem.
+
+![J53 height reservation below the fin bank](views/cooling-j53-clearance.png)
+
+![reset switch and fan screw clearance](views/cooling-sw3-clearance.png)
+
 ## blower and fin bank
 
 the existing Delta BFB04512HHA-CZ0T stays at (122,52) in the installed top

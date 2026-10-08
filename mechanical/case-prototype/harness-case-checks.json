@@ -22,7 +22,7 @@
     "source PCB component solder seating"
   ],
   "height_check_sources_sha256": {
-    "height-allowances.json": "465f1733b57012ed1acb13aa1279b5ef817654bf585c20067c4d8612816a249d",
+    "height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
     "component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664",
     "clearance_review.py": "d460d8f854f28d1f8c1e1346172f2fd524ceb3b8c4317d87757bdb832e573e37"
   },
@@ -208,6 +208,118 @@
         "height_mm": 3.0,
         "basis": "Connector and flat cable reservation; verify the mated flex and latch. The blower must be removed to service this keyboard connector.",
         "source": "https://www.hirose.com/en/product/p/CL0586-0525-1-55"
+      },
+      "center/J52": {
+        "mpn": "SM04B-GHS-TB",
+        "footprint": "Connector_JST:JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal",
+        "height_mm": 4.6,
+        "basis": "Side-entry GH header and seated plug, using the existing 4.6 mm assembly reservation. The 4.25 mm catalogue height is nominal. Wire bends, latch operation and the full cable route need separate checks.",
+        "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf"
+      },
+      "center/J53": {
+        "mpn": "SM02B-GHS-TB",
+        "footprint": "Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",
+        "height_mm": 4.6,
+        "basis": "Side-entry GH header and seated plug, using the existing 4.6 mm assembly reservation. The 4.25 mm catalogue height is nominal. Wire bends, latch operation and the full cable route need separate checks.",
+        "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf"
+      },
+      "center/J56": {
+        "mpn": "SM02B-GHS-TB",
+        "footprint": "Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",
+        "height_mm": 4.6,
+        "basis": "Side-entry GH header and seated plug, using the existing 4.6 mm assembly reservation. The 4.25 mm catalogue height is nominal. Wire bends, latch operation and the full cable route need separate checks.",
+        "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf"
+      },
+      "center/FPC102": {
+        "mpn": "5039084120",
+        "footprint": "ducktop2:Molex_5039084120_1x41_P0.50mm_Horizontal",
+        "height_mm": 4.4,
+        "basis": "Reserved installed height above the 3.75 mm nominal mated connector. Includes 0.65 mm for seating and clearance, not a manufacturer maximum. Release movement and dressed cable remain separate.",
+        "source": "https://www.molex.com/en-us/products/part-detail/5039084120"
+      },
+      "left/FPC101": {
+        "mpn": "5039084120",
+        "footprint": "ducktop2:Molex_5039084120_1x41_P0.50mm_Horizontal",
+        "height_mm": 4.4,
+        "basis": "Reserved installed height above the 3.75 mm nominal mated connector. Includes 0.65 mm for seating and clearance, not a manufacturer maximum. Release movement and dressed cable remain separate.",
+        "source": "https://www.molex.com/en-us/products/part-detail/5039084120"
+      },
+      "center/J40": {
+        "mpn": "MDT420E01001",
+        "footprint": "ducktop2:Amphenol_MDT420E01001_H4.2",
+        "height_mm": 5.0,
+        "basis": "Socket-only reservation above the 4.2 mm nominal height. The complete Wi-Fi card, antenna plugs and insertion/removal motion are not covered.",
+        "source": "https://www.amphenol-cs.com/product/mdt420e01001.html"
+      },
+      "center/H1": {
+        "mpn": "9774055243R",
+        "footprint": "ducktop2:Wurth_9774055243R_M2_H5.5",
+        "height_mm": 9.5,
+        "basis": "Chosen maximum installed stack for spacer, module PCB, retaining screw and clearance. The spacer itself is 5.6 mm maximum; the complete fastening stack must be selected and measured against this budget before cooler fabrication.",
+        "source": "https://www.we-online.com/components/products/datasheet/9774055243R.pdf"
+      },
+      "center/H2": {
+        "mpn": "9774055243R",
+        "footprint": "ducktop2:Wurth_9774055243R_M2_H5.5",
+        "height_mm": 9.5,
+        "basis": "Chosen maximum installed stack for spacer, module PCB, retaining screw and clearance. The spacer itself is 5.6 mm maximum; the complete fastening stack must be selected and measured against this budget before cooler fabrication.",
+        "source": "https://www.we-online.com/components/products/datasheet/9774055243R.pdf"
+      },
+      "center/H4": {
+        "mpn": "M2XC4X2.5+C2.7X1.5",
+        "footprint": "ducktop2:SMT_Standoff_M2_H2.5_C4_Tail2.7x1.5",
+        "height_mm": 6.3,
+        "basis": "Chosen complete Wi-Fi retainer budget for the nominal 2.5 mm spacer, card, screw head and clearance. Exact card thickness and screw selection remain open; this is not a measured assembly.",
+        "source": "build.py: center/H4 card retainer"
+      },
+      "center/H21": {
+        "mpn": null,
+        "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+        "height_mm": 2.8,
+        "basis": "The case models a 0.5 mm washer and 2.0 mm nylon screw head, with 0.3 mm additional clearance.",
+        "source": "build.py: main-board nylon head and washer"
+      },
+      "left/H12": {
+        "mpn": null,
+        "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+        "height_mm": 2.8,
+        "basis": "The case models a 0.5 mm washer and 2.0 mm nylon screw head, with 0.3 mm additional clearance.",
+        "source": "build.py: main-board nylon head and washer"
+      },
+      "center/J4": {
+        "mpn": "TC2030-CTX-NL cable target",
+        "footprint": "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical",
+        "height_mm": 1.0,
+        "basis": "Bare contact pads with 1 mm reserved for solder. No permanently fitted header or probe. The cooler must be removed for vertical test or programming access.",
+        "source": "saved PCB pad geometry"
+      },
+      "center/TP1": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare contact pads with 1 mm reserved for solder. No permanently fitted header or probe. The cooler must be removed for vertical test or programming access.",
+        "source": "saved PCB pad geometry"
+      },
+      "center/TP8": {
+        "mpn": null,
+        "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+        "height_mm": 1.0,
+        "basis": "Bare contact pads with 1 mm reserved for solder. No permanently fitted header or probe. The cooler must be removed for vertical test or programming access.",
+        "source": "saved PCB pad geometry"
+      },
+      "center/J2441": {
+        "mpn": null,
+        "footprint": "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm",
+        "height_mm": 1.0,
+        "basis": "Existing 1 mm finished braid and solder-joint reservation. Nominal braid thickness is 0.508 mm; verify the formed solder joint and service access on a sample.",
+        "source": "ground_braids.py: left-1 joint allowance"
+      },
+      "left/J2440": {
+        "mpn": null,
+        "footprint": "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm",
+        "height_mm": 1.0,
+        "basis": "Existing 1 mm finished braid and solder-joint reservation. Nominal braid thickness is 0.508 mm; verify the formed solder joint and service access on a sample.",
+        "source": "ground_braids.py: left-1 joint allowance"
       }
     }
   },

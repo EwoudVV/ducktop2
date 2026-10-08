@@ -18,7 +18,7 @@ part-sourcing requirements and remaining measurements.
 
 the saved model clears the wire, guide, braid, service and known-component
 height screens, including the sampled hinge sweep. physical dimensions,
-clamp strength, several other component heights, signal cables and cooling
+clamp strength, complete card and cable assemblies, signal cables and cooling
 remain unqualified. use the model for inspection and fit coupons before a
 complete case build.
 
@@ -26,6 +26,11 @@ the power-wire height screen now covers 189 crossings. manufacturer maxima
 and chosen assembly reservations are recorded separately in
 `component-heights.md` and `height-allowances.json`. the PD2 guide ends
 2 mm earlier near right-board R2045; its wire path is unchanged.
+
+the cooling screen covers 240 crossings over 154 footprints. all have a
+height basis, with 27 footprints using explicit assembly reservations.
+the narrowest margin is 0.2 mm above J53's reserved plug space. the
+connector, screw and card stacks still need physical fit checks.
 
 read `packaging.md` before printing. `harness-case-checks.json` records
 solid intersections, conservative height screens and unverified dimensions.
@@ -72,8 +77,8 @@ scripts never save a PCB or change its routing, placement or outline.
 - `component_heights.py`, `height-allowances.json`, `component-heights.md`:
   height calculations, explicit assembly space and source drawings.
 - `cooling.py`, `cooling-datums.json`, `cooling_review.py`, `cooling-checks.json`:
-  contact and mounting geometry, cooling-body and inlet checks, and unresolved
-  component-height data. these do not qualify thermal performance.
+  contact and mounting geometry, cooling-body and inlet checks, and each
+  component's remaining height margin. these do not qualify thermal performance.
 - `stack_geometry.py`: wire and open-guide height beneath the actual trackpad
   support area, including the guide ends and the 0.5 mm lower USB front run.
 - `exports/ducktop2-assembly.step`: named assembly, open at 105 degrees.

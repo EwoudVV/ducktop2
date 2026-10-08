@@ -9,6 +9,10 @@ is still 44.8 mm thick when closed without feet. measured parts, cooling
 and the complete cable routes still control the final size. the
 [cooling fit notes](../../mechanical/case-prototype/cooling-fit.md) record
 the stepped spreader and the limits of the current fan placement.
+the cooling height screen covers 154 footprints, with separate dimensions
+for bare components and reserved space for plugs, solder and screw stacks.
+the closest reserved gap is 0.2 mm at the hall-switch connector. measure
+the complete assemblies before making the cooler.
 main-board coordinates below were checked on 10 september 2026.
 
 ## recorded parts

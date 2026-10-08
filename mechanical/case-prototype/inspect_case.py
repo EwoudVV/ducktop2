@@ -78,8 +78,49 @@ def cooling_views(m):
            direction=(.4,-.6,-1),size=(1300,950))
 
 
+def cooling_clearance_views(m):
+    import json
+    from case_inputs import path as input_path
+    from component_heights import resolve
+    from cables import polygon_prism
+    from build import pcb_top
+    from review import bbox_overlap
+    out=HERE/'views';out.mkdir(exist_ok=True)
+    settings=json.loads((HERE/'height-allowances.json').read_text())
+    parts=json.loads(input_path('component-placement.json').read_text())['parts']
+    report=json.loads((HERE/'cooling-checks.json').read_text())
+    for slug,key,near,clip,direction in [
+        ('cooling-j53-clearance','center/J53','cooling-fins-reservation',
+         box(79,12,5,12,15,20),(.7,-1,.5)),
+        ('cooling-sw3-clearance','center/SW3','fan-through-screw-3',
+         box(113,91,5,16,16,25),(.8,-1,.35))]:
+        scene=[]
+        targets=[p for p in m.parts if p['group']=='cooling' or p['name'].startswith(('blower-','fan-through'))]
+        for p in targets:
+            if not bbox_overlap(p['shape'],clip):continue
+            shape=p['shape'].intersect(clip)
+            if shape.Volume()>.001:scene.append({'shape':shape,'color':(.58,.63,.67,.65)})
+        for board in ['left','center']:
+            shape=m.board_material[board].intersect(clip)
+            if shape.Volume()>.001:scene.append({'shape':shape,'color':(.13,.43,.31)})
+        for p in parts:
+            if p['side']!='front' or p['dnp']:continue
+            limit=resolve(p,settings)
+            if limit is None:continue
+            for ring in p['courtyards_installed_mm']['front']:
+                shape=polygon_prism(ring['outer'],pcb_top(p['board']),limit['height_mm'])
+                if not bbox_overlap(shape,clip):continue
+                shape=shape.intersect(clip)
+                if shape.Volume()<.001:continue
+                color=(.96,.59,.10) if p['board']+'/'+p['reference']==key else (.15,.65,.57,.65)
+                scene.append({'shape':shape,'color':color})
+        row=next(r for r in report['component_height_crossings'] if r['part']==key and r['near']==near)
+        title=f"{key.split('/')[1]} / amber = height + assembly space / remaining gap {row['planning_gap_mm']:.2f} mm"
+        render(scene,out/(slug+'.png'),title,direction=direction,size=(1500,1050))
+
+
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--views',action='store_true');p.add_argument('--checks',action='store_true');p.add_argument('--export',action='store_true');p.add_argument('--cooling-views',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--views',action='store_true');p.add_argument('--checks',action='store_true');p.add_argument('--export',action='store_true');p.add_argument('--cooling-views',action='store_true');p.add_argument('--cooling-clearances',action='store_true');a=p.parse_args()
     m=load();print('staged assembly loaded',flush=True)
     if a.checks:
         from review import review
@@ -94,10 +135,11 @@ if __name__=='__main__':
         thermal=json.loads((HERE/'cooling-checks.json').read_text())
         for name,digest in thermal['source_sha256'].items():
             assert hashlib.sha256((HERE/name).read_bytes()).hexdigest()==digest,'cooling inputs changed: rerun checks before exporting'
-        for key in ['cooling_body_collisions','internal_cooling_collisions','inlet_obstructions']:
+        for key in ['cooling_body_collisions','internal_cooling_collisions','inlet_obstructions','known_component_height_conflicts']:
             assert not thermal[key], 'resolve '+key+' before exporting'
         assert not record['checks']['case_sweep']['collisions'],'resolve lid sweep conflicts before exporting'
         m.findings=list(dict.fromkeys(record['limitations']))
         deliver(m,render_views=False,checked=True)
     if a.views:views(m)
     if a.cooling_views:cooling_views(m)
+    if a.cooling_clearances:cooling_clearance_views(m)

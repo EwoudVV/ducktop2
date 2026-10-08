@@ -820,5 +820,55 @@
       "mechanical/case-prototype/cooling-checks.json": "03b43126bfdd9d3132a3c6ae2b0fe1c6ccb02b40e522fb1be31c3e6d7a44f660",
       "mechanical/case-prototype/export-checks.json": "3e0540a6949d8a29c57df1571e0ff10b889143e9657f226a3b8cd7b50abccde4"
     }
+  },
+  "cooling_height_update": {
+    "date": "2026-10-08",
+    "PCB_files_unchanged": true,
+    "case_geometry_unchanged": true,
+    "main_routing_added": false,
+    "new_manufacturer_part_entries": 22,
+    "new_manufacturer_maximum_entries": 18,
+    "new_nominal_entries": 4,
+    "new_assembly_reservations": 16,
+    "height_export_records_updated": 41,
+    "native_placement_records_preserved": 1369,
+    "previous_missing_height_footprints": 37,
+    "unverified_cooling_height_footprints": 0,
+    "cooling_component_crossings": 240,
+    "cooling_component_footprints": 154,
+    "cooling_assembly_reservation_footprints": 27,
+    "known_component_height_conflicts": 0,
+    "minimum_reserved_height_margin_mm": 0.2,
+    "physical_fit_verified": false,
+    "thermal_performance_verified": false,
+    "case_tests": {
+      "cooling_height_regressions": 8,
+      "component_height_regressions": 8,
+      "stack_geometry_regressions": 3,
+      "BMS_harness_regressions": 4
+    },
+    "existing_exports_reopened": {
+      "STEP_parts": 99,
+      "watertight_STLs": 101,
+      "assembly_solids": 797
+    },
+    "source_sha256": {
+      "gen/export_power_placement.py": "1f266c69059b3f770decd9fac5773d61fba51a9c77dbf59ed0b7524b1b7cd33f",
+      "gen/test_case_cooling_heights.py": "f125a068a16015c2c51199bb95318eddeafd9168f2e223a14c0d9acb897c3a40",
+      "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+      "mechanical/power-placement.json": "13c8febf59e67e7731d3aa1f5445a7802c165308bb0edb1ea3b5015b25a62549",
+      "mechanical/power-harness-checks.json": "290338efa0dc241427174403b3b8f94746328e78a94914ede7a9df05e11f99f3",
+      "mechanical/case-prototype/cooling_review.py": "9255fa89a3cf542200570a4b3f6566491775138e5fdce35893314cbd135652eb",
+      "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
+      "mechanical/case-prototype/inspect_case.py": "792094aba0ff9936e7ea25b53fe845f25d62667114a98c7025757c2f23e778a4",
+      "mechanical/case-prototype/source-bindings.json": "23850d1b5644519210a5abd76388ab79cfa7e99f55f757fa25e3467b60cb765b",
+      "mechanical/case-prototype/reference/pcb-snapshot/manifest.json": "9fee31bb82621dbebe4d04e49780e43573476e4a36dd65c8d0b024f2e909d576"
+    },
+    "report_sha256": {
+      "mechanical/case-prototype/cooling-checks.json": "e43b6f34b3f8d54cd03ce9bc1eb0c9454a4f1e779ba8b6ef80d0376277258711",
+      "mechanical/case-prototype/harness-case-checks.json": "6f751398c2379da5dfdc0f945b9a01e64ac8fb0a85bff1bb5053acc5c28bba46",
+      "mechanical/case-prototype/assembly-checks.json": "07e16ddd1a3a3ccd41b708d7e68422cadbcb862cad4b1aa22a6dd2f92a0e0faf",
+      "mechanical/case-prototype/export-checks.json": "3e0540a6949d8a29c57df1571e0ff10b889143e9657f226a3b8cd7b50abccde4"
+    }
   }
 }

@@ -6,7 +6,7 @@
   },
   "scope": "reviewed power groups",
   "generator": "gen/export_power_placement.py",
-  "generator_sha256": "13cc8d4a1e38b3614ed85cfd6fe8e109a866e356db72fef9f18d72bbdc73eeed",
+  "generator_sha256": "1f266c69059b3f770decd9fac5773d61fba51a9c77dbf59ed0b7524b1b7cd33f",
   "sources": {
     "board_placement": {
       "file": "mechanical/board-placement.json",
@@ -309,10 +309,142 @@
     "right": 14
   },
   "height_counts": {
-    "verified_maximum": 194,
-    "unverified": 14
+    "verified_maximum": 200,
+    "unverified": 8
   },
   "height_data": {
+    "C0603C100C5GACTU": {
+      "value_mm": 0.87,
+      "kind": "maximum",
+      "source_url": "https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf",
+      "basis": "C1003_C0G, 20 February 2025: page 5 maps the C0603C 10 pF, 50 V capacitance/voltage row to CF thickness; page 10 gives CF as 0.80 +/-0.07 mm."
+    },
+    "C0603C689C5GACTU": {
+      "value_mm": 0.87,
+      "kind": "maximum",
+      "source_url": "https://search.kemet.com/download/specsheet/C0603C689C5GACTU",
+      "basis": "Exact-part sheet, page 1: body thickness T is 0.80 +/-0.07 mm."
+    },
+    "T520B107M010ATE070": {
+      "value_mm": 2.0,
+      "kind": "maximum",
+      "source_url": "https://search.kemet.com/download/specsheet/T520B107M010ATE070",
+      "basis": "Exact-part sheet, page 1: B-case height H is 1.9 +/-0.1 mm."
+    },
+    "GRM31CZ71C226ME15L": {
+      "value_mm": 1.9,
+      "kind": "maximum",
+      "source_url": "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM31CZ71C226ME15-01A.pdf",
+      "basis": "Reference sheet, 25 June 2026, page 2: thickness T is 1.6 +/-0.3 mm; L packaging is listed."
+    },
+    "GCM188L81H104KA57D": {
+      "value_mm": 0.9,
+      "kind": "maximum",
+      "source_url": "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GCM188L81H104KA57-01A.pdf",
+      "basis": "Reference sheet, 7 April 2026, page 2: thickness T is 0.8 +/-0.1 mm; D packaging is listed."
+    },
+    "GRM188R60J105KA01D": {
+      "value_mm": 0.9,
+      "kind": "maximum",
+      "source_url": "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM188R60J105KA01-01A.pdf",
+      "basis": "Reference sheet, 14 June 2026, page 2: thickness T is 0.8 +/-0.1 mm; D packaging is listed."
+    },
+    "SMCJ24CA-E3/57T": {
+      "value_mm": 2.62,
+      "kind": "maximum",
+      "source_url": "https://www.vishay.com/docs/88394/smcj.pdf",
+      "basis": "Document 88394, 9 January 2024, page 5: DO-214AB seated height is 2.06 to 2.62 mm."
+    },
+    "1206L075/16WR": {
+      "value_mm": 1.25,
+      "kind": "maximum",
+      "source_url": "https://www.littelfuse.com/assetdocs/resettable-ptcs-1206l-datasheet?assetguid=2b6a1515-d4ee-4c83-8bd4-152b4901b8f5",
+      "basis": "1206L series, 26 February 2024, page 4: the 1206L075/16 row gives C maximum 1.25 mm and the WR ordering code."
+    },
+    "9774055243R": {
+      "value_mm": 5.6,
+      "kind": "maximum",
+      "source_url": "https://www.we-online.com/components/products/datasheet/9774055243R.pdf",
+      "basis": "Revision 001.001, 31 December 2025, page 1: length L above the seating shoulder is 5.5 +/-0.1 mm. The 1.4 mm tail goes into the PCB; module and screw heights are separate."
+    },
+    "ERJ8CWFR016V": {
+      "value_mm": 0.75,
+      "kind": "maximum",
+      "source_url": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDN0000/AOA0000C313.pdf",
+      "basis": "29 September 2023 outline, ERJ8CW 10 to 16 milliohm row: thickness T is 0.65 +/-0.10 mm."
+    },
+    "B3S-1000": {
+      "value_mm": 4.5,
+      "kind": "maximum",
+      "source_url": "https://components.omron.com/eu-en/system/files/2024-10/datasheet_pdf/A204-E1.pdf",
+      "basis": "A204-E1, page 2, B3S-1000 without ground terminal: actuator height is 4.3 +/-0.2 mm."
+    },
+    "TPS56637RPAR": {
+      "value_mm": 1.0,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tps56637.pdf",
+      "basis": "RPA0010A outline, page 28: 1.0 mm maximum seated height."
+    },
+    "TCA9548APWR": {
+      "value_mm": 1.2,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tca9548a.pdf",
+      "basis": "PW0024A outline, page 36: 1.2 mm maximum seated height; DGS belongs to a different package."
+    },
+    "USB2513BT-I/M2": {
+      "value_mm": 1.0,
+      "kind": "maximum",
+      "source_url": "https://ww1.microchip.com/downloads/en/devicedoc/00001692c.pdf",
+      "basis": "DS00001692C, page 48: 36SQFN-3706-6x6B overall A maximum 1.00 mm. Page 55 identifies M2 as this SQFN package."
+    },
+    "TPS552882RPMR": {
+      "value_mm": 1.0,
+      "kind": "maximum",
+      "source_url": "https://www.ti.com/lit/ds/symlink/tps552882.pdf",
+      "basis": "RPM0026A outline, page 38: 1.0 mm maximum seated height."
+    },
+    "J32SMX-K-F-G-I-8M0": {
+      "value_mm": 0.8,
+      "kind": "maximum",
+      "source_url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/7432/JQG_DB_Q-J32SMX_250618_online.pdf",
+      "basis": "Jauch manufacturer sheet, 18 June 2025, page 1, mirrored by DigiKey: J32SMX side view gives 0.8 mm maximum; ordering table covers K/F/G/I at 8 MHz."
+    },
+    "X1A000141000612": {
+      "value_mm": 0.9,
+      "kind": "maximum",
+      "source_url": "https://download.epsondevice.com/td/pdf/brief/FC-135R_en.pdf",
+      "basis": "FC-135R family X1A000141, external dimensions: 0.9 mm maximum. Electrical and packaging suffixes do not change the family outline."
+    },
+    "ABM8-24.000MHZ-10-1-U-T": {
+      "value_mm": 0.8,
+      "kind": "maximum",
+      "source_url": "https://abracon.com/Resonators/abm8.pdf",
+      "basis": "ABM8 outline, page 2: 0.80 mm maximum height; do not use an ABM8G or ABM8A substitute outline."
+    },
+    "5039084120": {
+      "value_mm": 3.75,
+      "kind": "nominal",
+      "source_url": "https://www.molex.com/en-us/products/part-detail/5039084120",
+      "basis": "Exact product page lists 3.75 mm mated height. Maximum tolerance and cable dressing are not established by that nominal specification."
+    },
+    "MDT420E01001": {
+      "value_mm": 4.2,
+      "kind": "nominal",
+      "source_url": "https://www.amphenol-cs.com/product/mdt420e01001.html",
+      "basis": "Exact E-key product page gives H=4.2 mm nominal. The full Wi-Fi card, antenna cables and insertion sweep are separate."
+    },
+    "SM02B-GHS-TB": {
+      "value_mm": 4.25,
+      "kind": "nominal",
+      "source_url": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+      "basis": "GH catalogue, page 3, side-entry header: nominal 4.25 mm height. Case reservations also cover solder seating and the mated plug."
+    },
+    "SM04B-GHS-TB": {
+      "value_mm": 4.25,
+      "kind": "nominal",
+      "source_url": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+      "basis": "GH catalogue, page 3, side-entry header: nominal 4.25 mm height. Case reservations also cover solder seating and the mated plug."
+    },
     "XGL6030-103MEC": {
       "value_mm": 3.1,
       "kind": "maximum",
@@ -4173,21 +4305,21 @@
       "installed_rotation_deg": 0.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 1.9,
+      "height_source_url": "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM31CZ71C226ME15-01A.pdf",
+      "local_body_max_outer_z_mm": 1.9,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
       "study_solder_plane_z_mm": 8.0,
-      "study_body_max_outer_z_mm": null,
+      "study_body_max_outer_z_mm": 9.9,
       "study_body_nominal_outer_z_mm": null,
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Murata",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "Reference sheet, 25 June 2026, page 2: thickness T is 1.6 +/-0.3 mm; L packaging is listed.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -4260,21 +4392,21 @@
       "installed_rotation_deg": 180.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 0.9,
+      "height_source_url": "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GCM188L81H104KA57-01A.pdf",
+      "local_body_max_outer_z_mm": 0.9,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
       "study_solder_plane_z_mm": 8.0,
-      "study_body_max_outer_z_mm": null,
+      "study_body_max_outer_z_mm": 8.9,
       "study_body_nominal_outer_z_mm": null,
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Murata",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "Reference sheet, 7 April 2026, page 2: thickness T is 0.8 +/-0.1 mm; D packaging is listed.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -4347,21 +4479,21 @@
       "installed_rotation_deg": 180.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 0.9,
+      "height_source_url": "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GCM188L81H104KA57-01A.pdf",
+      "local_body_max_outer_z_mm": 0.9,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
       "study_solder_plane_z_mm": 8.0,
-      "study_body_max_outer_z_mm": null,
+      "study_body_max_outer_z_mm": 8.9,
       "study_body_nominal_outer_z_mm": null,
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Murata",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "Reference sheet, 7 April 2026, page 2: thickness T is 0.8 +/-0.1 mm; D packaging is listed.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -16484,21 +16616,21 @@
       "installed_rotation_deg": 0.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 0.75,
+      "height_source_url": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDN0000/AOA0000C313.pdf",
+      "local_body_max_outer_z_mm": 0.75,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
       "study_solder_plane_z_mm": 8.0,
-      "study_body_max_outer_z_mm": null,
+      "study_body_max_outer_z_mm": 8.75,
       "study_body_nominal_outer_z_mm": null,
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Panasonic",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "29 September 2023 outline, ERJ8CW 10 to 16 milliohm row: thickness T is 0.65 +/-0.10 mm.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -16919,21 +17051,21 @@
       "installed_rotation_deg": 0.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 0.75,
+      "height_source_url": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDN0000/AOA0000C313.pdf",
+      "local_body_max_outer_z_mm": 0.75,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
       "study_solder_plane_z_mm": 8.0,
-      "study_body_max_outer_z_mm": null,
+      "study_body_max_outer_z_mm": 8.75,
       "study_body_nominal_outer_z_mm": null,
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Panasonic",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "29 September 2023 outline, ERJ8CW 10 to 16 milliohm row: thickness T is 0.65 +/-0.10 mm.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
@@ -17930,21 +18062,21 @@
       "installed_rotation_deg": 0.0,
       "board_thickness_mm": 1.6,
       "local_solder_plane_z_mm": 0.0,
-      "height_status": "unverified",
-      "height_kind": null,
-      "height_mm": null,
-      "height_source_url": null,
-      "local_body_max_outer_z_mm": null,
+      "height_status": "verified_maximum",
+      "height_kind": "maximum",
+      "height_mm": 1.0,
+      "height_source_url": "https://www.ti.com/lit/ds/symlink/tps552882.pdf",
+      "local_body_max_outer_z_mm": 1.0,
       "local_body_nominal_outer_z_mm": null,
       "planning_allowance_mm": null,
       "local_planning_outer_z_mm": null,
       "study_solder_plane_z_mm": 8.0,
-      "study_body_max_outer_z_mm": null,
+      "study_body_max_outer_z_mm": 9.0,
       "study_body_nominal_outer_z_mm": null,
       "study_planning_outer_z_mm": null,
       "source_board_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
       "manufacturer": "Texas Instruments",
-      "height_basis": "No reviewed manufacturer height for this MPN.",
+      "height_basis": "RPM0026A outline, page 38: 1.0 mm maximum seated height.",
       "planning_allowance_basis": null,
       "courtyards_native_mm": {
         "front": [
