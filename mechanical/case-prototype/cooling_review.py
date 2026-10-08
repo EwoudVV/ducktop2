@@ -111,11 +111,15 @@ def check(m):
     targets=cold+[p for p in fixed if p['name'].startswith(('blower-','fan-through'))]
     result.update(screen_component_heights(parts,targets,
                   {p['board']:pcb_top(p['board']) for p in parts},settings))
+    if c.get('heatpipe_part'):
+        from cooling_selection import check as check_selection
+        result['selected_heatpipe']=check_selection(CONFIG)
     result['module_contact_basis']='A1 uses nominal official module and cooler geometry in cooling-datums.json; package tolerances, TIM compression and clamping loads remain unqualified.'
     result['source_sha256']={name:hashlib.sha256((HERE/name).read_bytes()).hexdigest()
                              for name in ['assembly.json','cooling.py','cooling-datums.json','cooling_review.py','height-allowances.json',
                                           'component_heights.py','reference/pcb-snapshot/manifest.json',
-                                          'reference/pcb-snapshot/inputs/component-placement.json']}
+                                          'reference/pcb-snapshot/inputs/component-placement.json',
+                                          'cooling-parts.json','cooling_selection.py']}
     (HERE/'cooling-checks.json').write_text(json.dumps(result,indent=2)+'\n')
     print('cooling checks', {k:len(result[k]) for k in ['cooling_body_collisions','internal_cooling_collisions','inlet_obstructions',
                                                      'known_component_height_conflicts','unverified_component_height_screens']},flush=True)

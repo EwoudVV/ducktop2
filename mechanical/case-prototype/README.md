@@ -16,6 +16,11 @@ around the fan. the fan stays at its original position because lower
 trials hit the existing power parts. `cooling-fit.md` describes the geometry,
 part-sourcing requirements and remaining measurements.
 
+the pipe fit now uses the full 200 mm ATS-HP-F7L200S65W-018 and its
+published size tolerances. `cooling-parts.json` lists the prototype
+materials. the flat-pipe forming method and processor spring load still
+need supplier data. `drawings/heatpipe-route.svg` shows the proposed route.
+
 the saved model clears the wire, guide, braid, service and known-component
 height screens, including the sampled hinge sweep. physical dimensions,
 clamp strength, complete card and cable assemblies, signal cables and cooling
@@ -27,7 +32,7 @@ and chosen assembly reservations are recorded separately in
 `component-heights.md` and `height-allowances.json`. the PD2 guide ends
 2 mm earlier near right-board R2045; its wire path is unchanged.
 
-the cooling screen covers 240 crossings over 154 footprints. all have a
+the cooling screen covers 247 crossings over 154 footprints. all have a
 height basis, with 27 footprints using explicit assembly reservations.
 the narrowest margin is 0.2 mm above J53's reserved plug space. the
 connector, screw and card stacks still need physical fit checks.
@@ -79,6 +84,8 @@ scripts never save a PCB or change its routing, placement or outline.
 - `cooling.py`, `cooling-datums.json`, `cooling_review.py`, `cooling-checks.json`:
   contact and mounting geometry, cooling-body and inlet checks, and each
   component's remaining height margin. these do not qualify thermal performance.
+- `cooling-parts.json`, `cooling_selection.py`, `draw_cooling_route.py`:
+  part identities, catalogue limits, stock-length checks and the route drawing.
 - `stack_geometry.py`: wire and open-guide height beneath the actual trackpad
   support area, including the guide ends and the 0.5 mm lower USB front run.
 - `exports/ducktop2-assembly.step`: named assembly, open at 105 degrees.

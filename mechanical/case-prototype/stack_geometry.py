@@ -44,5 +44,5 @@ def stack_limits(config,harness):
     pipe=config['cooling']['heatpipe']
     limits={'power_wires_and_guides_under_trackpad':ceiling+.5+bridge_drop,
             'blower_intake_under_keyboard':fan[2]+fan[5]+config['cooling'].get('blower_height_tolerance',.3)+config['cooling'].get('intake_plenum',3)+offset,
-            'heatpipe_under_carrier':pipe[2]+pipe[5]+.5+4.5+offset}
+            'heatpipe_under_carrier':pipe[2]+pipe[5]+config['cooling'].get('heatpipe_height_tolerance_mm',0)+config['cooling'].get('heatpipe_upper_clearance_mm',0)+.5+4.5+offset}
     return limits,local

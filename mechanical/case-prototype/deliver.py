@@ -98,6 +98,8 @@ def deliver(m,render_views=True,checked=False):
              'findings':m.findings,'configuration':CONFIG}
     template=(HERE/'viewer-template.html').read_text()
     (HERE/'inspection.html').write_text(template.replace('/*ASSEMBLY_DATA*/',json.dumps(payload,separators=(',',':'))))
+    from model_cache import bind_viewer_meshes
+    bind_viewer_meshes(m)
     print('interactive CAD viewer exported',flush=True)
     if render_views:
         from inspect_case import views as render_current_views

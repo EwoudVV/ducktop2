@@ -51,6 +51,7 @@ def main():
               'assembly_config_sha256':hashlib.sha256((HERE/'assembly.json').read_bytes()).hexdigest()}
     manifest['height_allowances_sha256']=hashlib.sha256((HERE/'height-allowances.json').read_bytes()).hexdigest()
     manifest['cooling_datums_sha256']=hashlib.sha256((HERE/'cooling-datums.json').read_bytes()).hexdigest()
+    manifest['cooling_parts_sha256']=hashlib.sha256((HERE/'cooling-parts.json').read_bytes()).hexdigest()
     manifest['cooling_checks_sha256']=hashlib.sha256((HERE/'cooling-checks.json').read_bytes()).hexdigest()
     (HERE/'source-bindings.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('schedule lengths, fastener quantities, signed lid loads and six frozen PCB bindings recorded')

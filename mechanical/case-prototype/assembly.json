@@ -56,12 +56,12 @@
           2.0
         ],
         "heatpipe": [
-          54.95,
-          8.95,
+          58.44355,
+          7.4,
           19.037,
-          161.1,
-          44.1,
-          3.0
+          181.55645,
+          53.2,
+          3.5
         ],
         "fins": [
           60,
@@ -81,16 +81,16 @@
         ],
         "blower_height_tolerance": 0.3,
         "intake_plenum": 3,
-        "status": "current fan pose retained after lower trials hit existing power parts; stepped CPU/memory contact, wider fins and revised heatpipe are a fit study; hardware sourcing and thermal tests remain open",
+        "status": "stock-pipe fit candidate with maximum size and length allowances; forming, mounting loads and thermal performance still need confirmation",
         "stepped_spreader": true,
         "spreader_thickness_mm": 2.0,
         "rear_heatpipe_route": true,
-        "heatpipe_turn_radius_mm": 18.0,
+        "heatpipe_turn_radius_mm": 27.0,
         "heatpipe_bend_start_xy": [
-          190.0,
-          49.0
+          202.0,
+          55.0
         ],
-        "heatpipe_end_x_mm": 59.0,
+        "heatpipe_end_x_mm": 58.44355,
         "heatpipe_end_y_mm": 13.0,
         "blower_cradle_component_reliefs": [],
         "fin_count": 54,
@@ -114,7 +114,19 @@
             102
           ]
         ],
-        "heatpipe_width_mm": 8.1
+        "heatpipe_width_mm": 11.2,
+        "heatpipe_turn_angle_deg": 60.0,
+        "heatpipe_hot_end_xy": [
+          240.0,
+          55.0
+        ],
+        "heatpipe_nominal_length_mm": 200.0,
+        "heatpipe_length_tolerance_mm": 4.0,
+        "heatpipe_width_tolerance_mm": 0.5,
+        "heatpipe_height_tolerance_mm": 0.5,
+        "heatpipe_position_allowance_mm": 0.2,
+        "heatpipe_upper_clearance_mm": 0.3,
+        "heatpipe_part": "ATS-HP-F7L200S65W-018"
       }
     },
     "current-hardware": {},

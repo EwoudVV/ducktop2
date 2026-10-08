@@ -60,6 +60,7 @@ def views(m):
 
 
 def cooling_views(m):
+    from build import CONFIG
     out=HERE/'views';out.mkdir(exist_ok=True)
     cooling=[]
     for p in m.parts:
@@ -71,7 +72,8 @@ def cooling_views(m):
             cooling.append(q)
     for name in ['left','center']:
         cooling.append({'shape':m.board_material[name],'color':(.13,.43,.31),'group':'boards','moving':False})
-    render(cooling,out/'cooling-layout.png','cooling fit study / wider fins and stepped CPU/memory spreader',
+    label='cooling fit / 200 mm stock pipe with size and length allowances' if CONFIG['cooling'].get('heatpipe_part') else 'cooling fit study / wider fins and stepped CPU/memory spreader'
+    render(cooling,out/'cooling-layout.png',label,
            direction=(.25,-.65,1.5),focus=((146,-41,16),75),size=(1600,1050))
     plate=next(p for p in m.parts if p['name']=='cooling-cold_plate-reservation')
     render([plate],out/'cooling-spreader.png','spreader underside / CPU and memory contact study',
@@ -137,9 +139,13 @@ if __name__=='__main__':
             assert hashlib.sha256((HERE/name).read_bytes()).hexdigest()==digest,'cooling inputs changed: rerun checks before exporting'
         for key in ['cooling_body_collisions','internal_cooling_collisions','inlet_obstructions','known_component_height_conflicts']:
             assert not thermal[key], 'resolve '+key+' before exporting'
+        assert not thermal.get('selected_heatpipe',{}).get('pipe_mount_envelope_conflicts',[]),'resolve processor mount space before exporting'
         assert not record['checks']['case_sweep']['collisions'],'resolve lid sweep conflicts before exporting'
         m.findings=list(dict.fromkeys(record['limitations']))
         deliver(m,render_views=False,checked=True)
+    if a.views or a.cooling_views or a.cooling_clearances:
+        from model_cache import preload_viewer_meshes
+        preload_viewer_meshes(m)
     if a.views:views(m)
     if a.cooling_views:cooling_views(m)
     if a.cooling_clearances:cooling_clearance_views(m)

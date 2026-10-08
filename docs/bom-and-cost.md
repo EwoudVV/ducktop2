@@ -1,6 +1,6 @@
 # parts and cost
 
-updated 5 october 2026. the split design needs a new per-board quote.
+updated 8 october 2026. the split design needs a new per-board quote.
 there is no reconciled current total yet.
 
 ## what the next estimate needs to cover
@@ -42,6 +42,15 @@ DFR1294-1 includes the 226V compute module, Mini Carrier Board and Ultra
 active cooler. do not also count a separate DFR1294 module or FIT1049 cooler
 when quoting that kit. NVMe storage and a suitable power supply are separate.
 the Mini Carrier is for development; the finished laptop uses its custom boards.
+
+the [cooler parts](../mechanical/case-prototype/cooling-parts.json) now include
+a stock ATS-HP-F7L200S65W-018 pipe candidate. the observed single-part price
+was [$5.68 at DigiKey](https://www.digikey.com/en/products/detail/advanced-thermal-solutions-inc/ATS-HP-F7L200S65W-018/5049701)
+on 8 october, before forming, shipping and tax. that
+is not a price for a complete cooler. the spreader, fins, duct, forming
+and assembly still need quotes. request small memory-pad samples instead
+of budgeting a full 9-inch sheet. do not count another FIT1049 if it comes
+with the module kit; it is also the reference for the custom spring mount.
 
 ## ownership and sponsorship
 

@@ -870,5 +870,73 @@
       "mechanical/case-prototype/assembly-checks.json": "07e16ddd1a3a3ccd41b708d7e68422cadbcb862cad4b1aa22a6dd2f92a0e0faf",
       "mechanical/case-prototype/export-checks.json": "3e0540a6949d8a29c57df1571e0ff10b889143e9657f226a3b8cd7b50abccde4"
     }
+  },
+  "stock_heatpipe_update": {
+    "date": "2026-10-08",
+    "PCB_files_unchanged": true,
+    "wire_paths_unchanged": true,
+    "main_routing_added": false,
+    "heatpipe_part": "ATS-HP-F7L200S65W-018",
+    "nominal_length_mm": 200,
+    "length_tolerance_mm": 4,
+    "nominal_width_height_mm": [
+      11.2,
+      3.5
+    ],
+    "maximum_fit_width_height_mm": [
+      12.1,
+      4.3
+    ],
+    "centerline_bend_radius_mm": 27,
+    "opposed_bend_angles_deg": [
+      60,
+      -60
+    ],
+    "deck_height_mm": 33.5,
+    "cooling_component_crossings": 247,
+    "cooling_component_footprints": 154,
+    "missing_cooling_heights": 0,
+    "cooling_collisions": 0,
+    "mount_reservation_collisions": 0,
+    "lid_sweep_collisions": 0,
+    "case_tests": {
+      "stock_pipe_geometry": 6,
+      "cooling_heights": 8,
+      "component_heights": 8,
+      "stack_geometry": 3,
+      "BMS_harness": 4
+    },
+    "formed_pipe_capacity_verified": false,
+    "processor_mount_hardware_released": false,
+    "module_clamp_load_verified": false,
+    "thermal_performance_verified": false,
+    "source_sha256": {
+      "mechanical/case-prototype/assembly.json": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824",
+      "mechanical/case-prototype/cooling.py": "29143f0ef782f2815999ed2183b28651ada4cdc9ac269c4cf1c68a8e90a692ea",
+      "mechanical/case-prototype/cooling-parts.json": "844ce7bbe557896883bc2ef6755ac2477581c6d3db5511411af8795597399860",
+      "mechanical/case-prototype/cooling_selection.py": "3466b13495393fc641619ffe14294bc0b69910ee98decef89c30b0d75079a986",
+      "mechanical/case-prototype/cooling_review.py": "6e03f691d8292f3513c9b46281f7b985220904a0a43612c75c6466e4e2a80882",
+      "mechanical/case-prototype/stack_geometry.py": "2a0206afa84d2c347608d8d6aeecfac4811c0ee0bb2d4c03431d385827d15110",
+      "mechanical/case-prototype/draw_cooling_route.py": "61e17a06f41fa42a32f55d1909357ff12bb22093ef232cd99208928fa14c2f90",
+      "mechanical/case-prototype/cooling-checks.json": "9c2750cc26dbbf90025d8d9ea3824d2c09d2b47da001c136ff852a501f3da6fc",
+      "mechanical/case-prototype/assembly-checks.json": "f87aee5f16121d2cf817d753f1cd3b69d4ddc45d5181a03bef3273aedfc63337",
+      "mechanical/case-prototype/harness-case-checks.json": "6f751398c2379da5dfdc0f945b9a01e64ac8fb0a85bff1bb5053acc5c28bba46",
+      "mechanical/case-prototype/source-bindings.json": "e7ed1b7f2a530a4718a4882fa2f01b37bd6140111cc718cf5c6630975a139baf",
+      "mechanical/case-prototype/export-checks.json": "3e0540a6949d8a29c57df1571e0ff10b889143e9657f226a3b8cd7b50abccde4",
+      "mechanical/case-prototype/thickness-study.json": "6a7e8a110759d25e02ba786cdf404de0bff52a5158aa870e6634d6b995a76a53",
+      "mechanical/case-prototype/model_cache.py": "7aa54b540947dfc9574e27d02113e02157332d1b4dcc0bb9bbc4661206141562",
+      "mechanical/case-prototype/deliver.py": "38261b22578bf0f4c295ae60788bd6acb3c27ee404fb3a4269347bb1a49ba29b",
+      "mechanical/case-prototype/inspect_case.py": "f374ba1bfd0ba941d52719a320d722d619988de1ff7a6bc2388abfd2b33ad594"
+    },
+    "verified_exports": {
+      "STEP_parts": 99,
+      "watertight_STLs": 101,
+      "assembly_solids": 797
+    },
+    "render_cache_hash_checks": {
+      "current_export_reused": true,
+      "stale_hash_rejected": true,
+      "native_CAD_checks_use_mesh_cache": false
+    }
   }
 }

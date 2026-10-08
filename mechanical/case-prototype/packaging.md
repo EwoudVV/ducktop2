@@ -51,6 +51,7 @@ fits, or that a different cooler/harness arrangement cannot be thinner.
 | --- | ---: | --- |
 | local USB wire and guide below trackpad bridge | 33.320 mm deck | 22.320 local envelope, 0.5 clearance, 2.5 bridge, 2 free space, 1 click travel, 5 trackpad |
 | blower and intake below keyboard | 33.3 mm deck | fan bottom 15.7, body 10.3 +0.3, 3 intake gap, 4 keyboard-to-deck offset |
+| stock heatpipe below carrier | 32.337 mm deck | pipe bottom 19.037, body 3.5 +0.5 tolerance +0.3 assembly space, 0.5 gap, 4.5 carrier, 4 keyboard-to-deck offset |
 | selected bridge to wire/guide envelope | 0.680 mm | 23.0 bridge underside minus 22.320 local envelope |
 | selected fan envelope to keyboard PCB | 3.2 mm | 29.5 minus 26.3 |
 | main underside component to floor | 0.6 mm | reviewed 1.8 maximum body +0.3 planning allowance |
@@ -238,9 +239,13 @@ and attachment holes. it stays at (122,52), bottom H15.7, after lower
 placements conflicted with the existing power parts. the contact plate
 now has separate CPU and memory landings and the official three-point
 mounting pattern. a wider 54-fin bank stays ahead of the hinge line, and
-the revised heatpipe clears the fan supports. one support moves to (170,50).
-these are still proposed cooling parts. thermal interfaces, mounting load,
-heatpipe supply, ducting and capacity for each CPU need qualification.
+the revised stock-pipe route clears the fan supports, including the post
+at (170,50). the pipe candidate is ATS-HP-F7L200S65W-018, retaining its
+full 200 mm length with two 60 degree turns. the CAD includes its maximum
+size and length tolerances. these are still proposed cooling parts.
+thermal interfaces, mounting load, forming, ducting and capacity for each
+CPU need qualification. the FIT1049 spring assembly remains the mounting
+reference until its force and dimensions are known.
 see `cooling-fit.md` and `cooling-checks.json` for dimensions and limits.
 
 lid mass/COM and stability calculations remain assumption-based. the

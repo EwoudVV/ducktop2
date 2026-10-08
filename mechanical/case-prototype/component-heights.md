@@ -1,6 +1,6 @@
 # component clearance around the power wires
 
-8 october update: the separate cooling screen now covers 240 crossings
+8 october update: the separate cooling screen now covers 247 crossings
 over 154 footprints, with no missing height basis. see `cooling-fit.md`
 for the tight locations and the assemblies that still need measuring.
 the power-wire screen below still has 189 crossings.

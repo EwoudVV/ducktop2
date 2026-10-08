@@ -5,6 +5,24 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-08: fit a stock heatpipe around the fan
+
+**Total time spent: 2 hours**
+
+picked the ATS-HP-F7L200S65W-018 heatpipe and worked its full 200 mm length into the cooling layout. it is wider and thicker than the previous shape, so i included the manufacturer's width, thickness and length tolerances in the model. kept both sealed ends intact, with the extra length allowance at the fin end.
+
+the first route hit the left hinge support and a fan-support post. changed where the bends start and used two 60 degree turns with 27 mm centerline radii. that got the pipe clear of the supports and left space around all three processor mounting points. the boards and fan stayed where they were, and the deck is still 33.5 mm.
+
+![the full-length heatpipe route and its space around the mounting points](docs/images/journal/2026-10-08-stock-heatpipe-route.png)
+
+also looked through the thermal-interface and fastening options. picked MX-6 to try on the cpu, small Tflex HD330 samples for the memory contacts, and 8329TCM for the separate pipe-to-metal joints. the permanent adhesive stays away from the processor and memory. the original FIT1049 cooler uses spring screws, but the published drawings don't give their force or the full screw and post dimensions. i need those before finishing the custom mount.
+
+![the wider pipe envelope and matching slots through the fins](docs/images/journal/2026-10-08-stock-heatpipe-cad.png)
+
+the enlarged pipe clears the component-height and mounting-space checks. there are now 247 cooling crossings over 154 footprints, and the 189 power-wire crossings still pass. the lid clears the assembly through its sampled movement too, and all 29 geometry tests pass. regenerated the case files, then reopened all 99 step parts and checked that all 101 stls are watertight. also made the image renders reuse the viewer's existing mesh data, with file and source hashes to reject old versions, which saves rebuilding the same display geometry for every view.
+
+the pipe supplier still needs to confirm this bend shape and how much heat it can move. after that, i can test the complete cooler with its duct and fan.
+
 # 2026-10-08: check the parts underneath the cooler
 
 **Total time spent: 1 hour**

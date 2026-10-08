@@ -443,7 +443,7 @@ class Model:
                 shape=spreader(c,pcb_top('center'))
             if c.get('rear_heatpipe_route') and name=='heatpipe':
                 from cooling import heatpipe
-                shape=heatpipe(c)
+                shape=heatpipe(c,tolerance=True)
             if name=='fins':
                 x,y,h,w,d,t=c[name]
                 count=c.get('fin_count',23);pitch=c.get('fin_pitch_mm',2);fin_t=c.get('fin_thickness_mm',.5)
@@ -451,7 +451,7 @@ class Model:
                 shape=compound([box(x,y,h,w,d,1)]+[box(x+2+pitch*i,y,h+1,fin_t,d,t-1) for i in range(count)])
                 if c.get('rear_heatpipe_route'):
                     from cooling import heatpipe
-                    shape=shape.cut(heatpipe(c))
+                    shape=shape.cut(heatpipe(c,tolerance=True))
             if name=='blower':
                 x,y,h,w,d,t=c[name]
                 for xx,yy in [(x+41.75,y+3.25),(x+41.75,y+41.75),(x+3.25,y+41.75)]:

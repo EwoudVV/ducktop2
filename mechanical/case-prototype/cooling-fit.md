@@ -1,13 +1,13 @@
 # cooling and trackpad fit
 
-7 october 2026. this pass keeps the 33.5 mm deck while improving the cooling
+8 october 2026. this pass keeps the 33.5 mm deck while improving the cooling
 layout beneath it. the trackpad's complete height is still needed before
 lowering the deck. the cooling parts are a fit study, not a finished or
 thermally tested heatsink.
 
 ## component heights, 8 october
 
-the cooling screen now includes 240 crossings over 154 footprints. the
+the cooling screen now includes 247 crossings over 154 footprints. the
 37 footprints that previously lacked a height basis now have either a
 manufacturer maximum or a separate assembly reservation. 27 footprints
 in the full screen still use reservations, including connectors, screw
@@ -17,7 +17,8 @@ assembly; they are not measurements of finished hardware.
 the check uses the actual underside of each cooling part above the saved
 courtyard, including cutouts. it includes the fan screws and counts the
 assembly allowance once. there are no missing height entries or negative
-margins in this screen. the boards and cooler geometry have not moved.
+margins in the saved height pass. the boards and cooler mounting points
+stay fixed; the stock heatpipe update below changes the pipe and fin slots.
 
 | location | height including assembly space | remaining gap |
 | --- | ---: | ---: |
@@ -76,11 +77,40 @@ the old 50 x46 x12 mm reservation. matching surface area alone does not
 establish equal cooling: pressure drop, airflow distribution and the
 bonded heatpipe contact still need checking.
 
-the proposed flattened heatpipe uses an 8.1 x3 mm envelope and two 18 mm
-centreline-radius bends. it runs around the fan and through slots in the
-fin bank. these are supplier requirements to check, not confirmed capacity
-or bending limits for a purchased part. the nominal 0.1 mm gap above the
-spreader reserves its bonding layer.
+the pipe candidate is now
+[ATS-HP-F7L200S65W-018](https://www.qats.com/DataSheet/ATS-HP-F7L200S65W-018),
+200 mm long and nominally 11.2 x3.5 mm. the catalogue gives +/-2% length,
++/-0.5 mm width and +/-0.5 mm height. the CAD reserves the full maximum
+size, another 0.2 mm in plan and 0.3 mm above it. the fin slots use that
+same envelope. those generous fit slots are not finished bond-joint
+dimensions; machine the final mating surfaces to the measured formed pipe.
+
+two 60 degree turns at 27 mm centreline radius retain the complete 200 mm
+length. the hot end is at (240,55), the first tangent is (202,55), and
+the nominal cold end is (58.444,13). length variation stays at the cold
+end, with both sealed ends intact. the hot end avoids all three processor
+mount reservations. the wider pipe changes neither the fan position nor
+the 33.5 mm deck.
+
+the catalogue's radius guidance does not approve this particular flat,
+in-plane forming operation. get the supplier's bend method and finished
+capacity before making it. the [route drawing](drawings/heatpipe-route.svg)
+records the proposed shape. the nominal 0.1 mm gap above the spreader
+reserves a metal-to-metal bonding layer.
+
+`cooling-parts.json` records the exact candidates and their source links.
+MX-6 ACTCP00080A is the removable CPU compound candidate. Tflex HD330
+0.75 mm is the memory-pad sample candidate, cut into two 12.4 x7 mm pieces.
+the model's 0.5 mm memory gap would compress nominal material by one third.
+that is a geometry calculation, not an approved load. measure the actual
+gaps and obtain the thin-pad force data before fitting it. the published
+curves for thicker pads cannot establish that force.
+
+MG Chemicals 8329TCM-6ML is the prototype pipe-to-metal adhesive candidate.
+its current data sheet gives 1.3 W/mK. keep this bond on the separate
+cooling assembly, away from the removable CPU and memory interfaces.
+joint thickness, surface preparation and thermal cycling need a sample
+test. it does not make the pipe or fins structurally self-supporting.
 
 ## Mu Ultra contact and mounting
 
@@ -99,6 +129,16 @@ the module holes are nominally 3.2 mm. the spreader study uses 2.2 mm
 clearance holes on that pattern; the final spring, screw, bushing and
 support stack still needs choosing. do not transfer the fan cradle's
 fastener specification to the processor mount.
+
+the [FIT1049 installation instructions](https://docs.lattepanda.com/content/mu_ultra_edition/get_started/)
+show three spring screws engaging threaded posts on the cooler. the
+instructions do not specify the spring rate, installed force, stop
+geometry or allowable package load. FIT1049 is the reference assembly for
+those measurements. do not replace it with ordinary screws or call the
+custom mount finished. the current upper hardware reservations are 6.5 mm
+in diameter at each mounting point, not selected fasteners or a checked
+driver-access path. the cooler still mounts to the module before that
+assembly is installed on the carrier.
 
 the plate now has separate CPU and memory landings. the CPU landing
 follows the official cooler's contact area and leaves a nominal 0.101 mm

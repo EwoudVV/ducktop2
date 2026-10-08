@@ -82,6 +82,20 @@
         {
           "part": "center/C39",
           "mpn": "GRM32ER71E226KE15L",
+          "near": "cooling-heatpipe-reservation",
+          "available_height_mm": 12.337,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 3.0,
+          "manufacturer_maximum_mm": 2.7,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.murata.com/en-global/api/pdfdownloadapi?cate=luCeramicCapacitorsSMD&partno=GRM32ER71E226KE15%23",
+          "note": "ExactMurata product sheet dated2025-07-30: T=2.5+/-0.2mm. Exceeds1.8mm provisional backsideallocation; C2303muststayF.",
+          "planning_gap_mm": 9.337
+        },
+        {
+          "part": "center/C39",
+          "mpn": "GRM32ER71E226KE15L",
           "near": "cooling-fins-reservation",
           "available_height_mm": 4.8,
           "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
@@ -950,6 +964,19 @@
         {
           "part": "center/FPC102",
           "mpn": "5039084120",
+          "near": "cooling-heatpipe-reservation",
+          "available_height_mm": 12.337,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 4.4,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Reserved installed height above the 3.75 mm nominal mated connector. Includes 0.65 mm for seating and clearance, not a manufacturer maximum. Release movement and dressed cable remain separate.",
+          "source": "https://www.molex.com/en-us/products/part-detail/5039084120",
+          "planning_gap_mm": 7.937
+        },
+        {
+          "part": "center/FPC102",
+          "mpn": "5039084120",
           "near": "cooling-fins-reservation",
           "available_height_mm": 4.8,
           "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
@@ -1302,6 +1329,20 @@
           "source": "https://www.coilcraft.com/pdfs/ShortFormCatalog.pdf",
           "note": "XGL1060 dimension C maximum: 6.0mm.",
           "planning_gap_mm": 0.7
+        },
+        {
+          "part": "center/Q13",
+          "mpn": "CSD19537Q3",
+          "near": "cooling-heatpipe-reservation",
+          "available_height_mm": 12.337,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 1.4000000000000001,
+          "manufacturer_maximum_mm": 1.1,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.ti.com/lit/ds/symlink/csd19537q3.pdf",
+          "note": "SLPS549B, section 7.1 Q3 package dimensions: A=1.10mm maximum.",
+          "planning_gap_mm": 10.937
         },
         {
           "part": "center/Q13",
@@ -2202,6 +2243,20 @@
         {
           "part": "center/R714",
           "mpn": "RC0603FR-0731RL",
+          "near": "cooling-heatpipe-reservation",
+          "available_height_mm": 12.337,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 11.487
+        },
+        {
+          "part": "center/R714",
+          "mpn": "RC0603FR-0731RL",
           "near": "cooling-fins-reservation",
           "available_height_mm": 4.8,
           "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
@@ -2212,6 +2267,20 @@
           "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
           "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
           "planning_gap_mm": 3.95
+        },
+        {
+          "part": "center/R715",
+          "mpn": "RC0603FR-0710KL",
+          "near": "cooling-heatpipe-reservation",
+          "available_height_mm": 12.337,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 11.487
         },
         {
           "part": "center/R715",
@@ -2324,6 +2393,20 @@
           "source": "https://www.vishay.com/doc?28758",
           "note": "TNPW e3 package dimensions: TNPW0603 H is 0.45 +/-0.10 mm; resistance and packaging codes do not change this outline.",
           "planning_gap_mm": 3.95
+        },
+        {
+          "part": "center/R740",
+          "mpn": "TNPU060397K6HZEN00",
+          "near": "cooling-heatpipe-reservation",
+          "available_height_mm": 12.337,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.vishay.com/docs/28779/tnpue3.pdf",
+          "note": "Vishay TNPUe3 dimensions page8: TNPU0603e3 H=0.45+/-0.10mm; dimensions independent of resistance value.",
+          "planning_gap_mm": 11.487
         },
         {
           "part": "center/R740",
@@ -3287,6 +3370,19 @@
         {
           "part": "left/FPC101",
           "mpn": "5039084120",
+          "near": "cooling-heatpipe-reservation",
+          "available_height_mm": 12.337,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 4.4,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Reserved installed height above the 3.75 mm nominal mated connector. Includes 0.65 mm for seating and clearance, not a manufacturer maximum. Release movement and dressed cable remain separate.",
+          "source": "https://www.molex.com/en-us/products/part-detail/5039084120",
+          "planning_gap_mm": 7.937
+        },
+        {
+          "part": "left/FPC101",
+          "mpn": "5039084120",
           "near": "cooling-fins-reservation",
           "available_height_mm": 4.8,
           "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
@@ -3380,16 +3476,45 @@
         "left/H12",
         "left/J2440"
       ],
+      "selected_heatpipe": {
+        "part": "ATS-HP-F7L200S65W-018",
+        "length_mm": 200.0,
+        "radius_mm": 27.0,
+        "bend_angle_deg": 59.99999999999999,
+        "middle_straight_mm": 17.32050807568878,
+        "hot_straight_mm": 38.0,
+        "cold_straight_mm": 88.13082415969495,
+        "cold_end_xy_mm": [
+          58.44354999810096,
+          13.0
+        ],
+        "sampled_centerline_length_mm": 199.998879,
+        "minimum_inside_radius_at_maximum_width_mm": 21.15,
+        "maximum_envelope_width_mm": 12.1,
+        "maximum_envelope_height_mm": 4.3,
+        "condenser_end_extension_for_length_tolerance_mm": 4.0,
+        "ideal_hot_region_overlap_mm": 53.1034,
+        "ideal_cold_region_overlap_mm": 114.934,
+        "ideal_effective_length_mm": 115.9813,
+        "straight_catalogue_comparison_W": 78.81,
+        "capacity_scope": "catalogue comparison only; continuous contact spans are assumed. Forming, orientation, actual bond area, sealed ends, temperature and fin/airflow losses are not qualified.",
+        "pipe_mount_envelope_conflicts": [],
+        "mount_scope": "three 6.5 mm diameter upper reservations, not selected fasteners or complete access paths",
+        "formed_pipe_capacity_verified": false,
+        "module_clamp_load_verified": false
+      },
       "module_contact_basis": "A1 uses nominal official module and cooler geometry in cooling-datums.json; package tolerances, TIM compression and clamping loads remain unqualified.",
       "source_sha256": {
-        "assembly.json": "be424e14bab5a0795826e58608ce6116cba5f4d8b8c18b81ce3eada4136f4e84",
-        "cooling.py": "61eed138e80a927d8681e2ccb18d2a3af2c6fe24af83f69c79544c63a9e19b00",
+        "assembly.json": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824",
+        "cooling.py": "29143f0ef782f2815999ed2183b28651ada4cdc9ac269c4cf1c68a8e90a692ea",
         "cooling-datums.json": "3e459e6ca6901a1a836e4e8bc68895ca72535cad596ee1e858838230a9f5b84c",
-        "cooling_review.py": "9255fa89a3cf542200570a4b3f6566491775138e5fdce35893314cbd135652eb",
+        "cooling_review.py": "6e03f691d8292f3513c9b46281f7b985220904a0a43612c75c6466e4e2a80882",
         "height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
         "component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664",
         "reference/pcb-snapshot/manifest.json": "9fee31bb82621dbebe4d04e49780e43573476e4a36dd65c8d0b024f2e909d576",
-        "reference/pcb-snapshot/inputs/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6"
+        "reference/pcb-snapshot/inputs/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+        "cooling-parts.json": "844ce7bbe557896883bc2ef6755ac2477581c6d3db5511411af8795597399860",
+        "cooling_selection.py": "3466b13495393fc641619ffe14294bc0b69910ee98decef89c30b0d75079a986"
       }
     },
     "case_sweep": {
@@ -3762,7 +3887,7 @@
   "physical_tests_complete": false,
   "complete_arrangement_supported": false,
   "not_ready_reason": "owned-part measurements, guide pull/fit tests, signal-cable dressing and both Ultra thermal qualifications remain outstanding",
-  "config_sha256": "be424e14bab5a0795826e58608ce6116cba5f4d8b8c18b81ce3eada4136f4e84",
+  "config_sha256": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824",
   "inventory_sha256": "483f35bb3236877e841e96c6f9e68dde5fa4fb96372bdfb820d7e92112fc70c2",
   "fastener_length_screen": {
     "blower_suspension_length_mm": 14.8,
