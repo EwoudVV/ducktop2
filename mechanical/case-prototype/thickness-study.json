@@ -117,8 +117,47 @@
   "minimum_planned_main_board_underside_component_gap": 0.5999999999999996,
   "left_modeled_pin_tail_gap_after_0_3_allowance": 0.5369999999999997,
   "key_top_height": 34.8,
-  "closed_outer_height_without_feet": 44.8,
+  "closed_outer_height_without_feet": 47.8,
   "closed_outer_height_with_5mm_feet": 49.8,
+  "closed_upper_extent_from_base_bottom": 44.8,
+  "below_base_bottom_without_feet_mm": 3.0,
+  "saved_closed_envelopes": {
+    "without_feet": {
+      "bottom_H_mm": -3.0,
+      "top_H_mm": 44.8,
+      "height_mm": 47.8,
+      "lowest_parts": [
+        "base-splice-1",
+        "base-splice-2",
+        "base-splice-3",
+        "base-splice-4"
+      ],
+      "highest_parts": [
+        "lid-print-splice-1",
+        "lid-print-splice-2",
+        "lid-print-splice-3",
+        "lid-print-splice-4"
+      ]
+    },
+    "with_feet": {
+      "bottom_H_mm": -5.0,
+      "top_H_mm": 44.8,
+      "height_mm": 49.8,
+      "lowest_parts": [
+        "rubber-foot-1",
+        "rubber-foot-2",
+        "rubber-foot-3",
+        "rubber-foot-4"
+      ],
+      "highest_parts": [
+        "lid-print-splice-1",
+        "lid-print-splice-2",
+        "lid-print-splice-3",
+        "lid-print-splice-4"
+      ]
+    },
+    "scope": "saved closed-position solids; includes the underside joining plates and excludes service/route reservations"
+  },
   "panel_to_keys": 2.0,
   "panel_to_radio_screw_heads": 1.2999999999999972,
   "battery_finished_thickness_measured": false,

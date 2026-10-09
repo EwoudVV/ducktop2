@@ -1,5 +1,12 @@
 # radio daughterboard
 
+9 october 2026: this is now planned as an external plug-in accessory so the
+laptop can have a thinner, flush clamshell case. the radio, GNSS receiver
+and separate radio audio codec stay together. the saved electronics still
+use the internal 30-pin interface below; converting power, audio and
+controls to an external cable is a separate design change. no external
+connector or cable is released yet.
+
 the radio/GNSS/audio board is removable. i want the rest of the laptop to
 work while it is absent or being revised, including normal system audio,
 the microphone, charging, and boot.

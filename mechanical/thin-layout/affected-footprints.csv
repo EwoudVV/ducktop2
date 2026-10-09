@@ -1,0 +1,210 @@
+reservation,board,reference,side,dnp,value,height_mm,height_status
+left,center,C20,back,False,100n,0.9,verified_maximum
+left,center,C21,back,False,100n,0.9,verified_maximum
+left,center,C22,back,False,100n,0.9,verified_maximum
+left,center,C23,back,False,100n,0.9,verified_maximum
+left,center,C24,back,False,100n,0.9,verified_maximum
+left,center,C26,front,False,4.7u (bulk),1.4,verified_maximum
+left,center,C28,back,False,1u (VDDA),1.35,verified_maximum
+left,center,C29,back,False,"2.2u (VCAP_1, mandatory)",1.35,verified_maximum
+left,center,C30,back,False,"2.2u (VCAP_2, mandatory)",1.35,verified_maximum
+left,center,C31,back,False,100n,0.9,verified_maximum
+left,center,C33,front,False,10p C0G 0.25pF HSE load,0.87,verified_maximum
+left,center,C36,front,False,10u 50V X7R VIN,1.9,verified_maximum
+left,center,C37,front,False,100n 50V X7R VIN HF,0.9,verified_maximum
+left,center,C38,front,False,100n (BOOT cap),0.9,verified_maximum
+left,center,C39,front,False,22u 25V X7R MCU_3V3 output; TI characterized part,2.7,verified_maximum
+left,center,C202,back,False,100n thermal ADC filter,0.9,verified_maximum
+left,center,C207,back,False,100n Mu thermal ADC filter,0.9,verified_maximum
+left,center,C208,back,False,100n EC USB switch local,0.9,verified_maximum
+left,center,C209,front,False,3.9n fan FG filter,,unverified
+left,center,C290,back,False,10n (VDDA high-frequency),0.9,verified_maximum
+left,center,C291,front,False,22u 25V X7R MCU_3V3 output; TI characterized part,2.7,verified_maximum
+left,center,C318,front,True,100n DNP keyboard 3V3 reserve,,unverified
+left,center,C319,front,False,10u keyboard RGB switched-output bulk,1.8,verified_maximum
+left,center,C322,back,False,100n keyboard RGB switch input,0.9,verified_maximum
+left,center,C323,back,False,100n keyboard RGB switch output,0.9,verified_maximum
+left,center,C324,back,False,100n keyboard RGB buffer local,0.9,verified_maximum
+left,center,C403,back,False,10u radio-codec host VBUS,1.8,verified_maximum
+left,center,C405,front,False,100n VDDA33 pin 5,0.9,verified_maximum
+left,center,C406,front,False,100n VDDA33 pin 10,0.9,verified_maximum
+left,center,C407,front,False,100n VDDA33 pin 29,0.9,verified_maximum
+left,center,C408,front,False,100n VDDA33 pin 36,0.9,verified_maximum
+left,center,C409,front,False,100n VDD33 pin 15,0.9,verified_maximum
+left,center,C410,front,False,100n VDD33 pin 23,0.9,verified_maximum
+left,center,C411,front,False,1u shared hub 3V3 bulk,1.35,verified_maximum
+left,center,C412,front,False,100n CRFILT low-ESR,0.9,verified_maximum
+left,center,C413,front,False,100n PLLFILT low-ESR,0.9,verified_maximum
+left,center,C414,front,False,18p C0G 5% hub crystal load,0.87,verified_maximum
+left,center,C415,front,False,18p C0G 5% hub crystal load,0.87,verified_maximum
+left,center,C416,back,False,100n reset supervisor local,0.9,verified_maximum
+left,center,C722,front,False,10u 50V X7R AUX output,1.9,verified_maximum
+left,center,C753,front,False,1u 50V X5R input,0.9,verified_maximum
+left,center,C762,front,False,100u 35V hybrid output bulk,8.0,verified_maximum
+left,center,C764,front,False,22u 16V X7R VCC mandatory; effective >4.7u,1.9,verified_maximum
+left,center,C765,front,False,100n 50V X8L bootstrap,0.9,verified_maximum
+left,center,C766,front,False,100n 50V X8L bootstrap,0.9,verified_maximum
+left,center,C769,front,True,DNP 2.2n 250V X7R switch-node snubber,,unverified
+left,center,C771,back,False,10n 50V C0G COMP,0.9,verified_maximum
+left,center,C772,back,False,100p 50V C0G COMP HF,0.55,verified_maximum
+left,center,C774,back,False,10n PG deglitch,0.9,verified_maximum
+left,center,C780,front,False,100n source-manager local,0.9,verified_maximum
+left,center,C2610,front,False,100u 35V hybrid output bulk,8.0,verified_maximum
+left,center,C2640,back,False,1u 50V soft start; about 145ms nominal,0.9,verified_maximum
+left,center,C2643,back,False,100n 50V bypass,0.9,verified_maximum
+left,center,C2670,front,False,100n 50V local VCC bypass,0.55,verified_maximum
+left,center,D190,front,False,SMCJ24CA bidirectional AUX surge clamp,2.62,verified_maximum
+left,center,D1824,front,False,1N5819HW RTC supply from MCU_3V3,1.35,verified_maximum
+left,center,D2640,back,False,BAT54S AUX ADC rail clamps,1.1,verified_maximum
+left,center,F200,front,False,750mA 16V fan polyfuse,1.25,verified_maximum
+left,center,J56,front,False,Mu heatsink/spreader NTC,4.25,verified_nominal
+left,center,J310,front,False,Mainboard keyboard FFC to MX ULP daughterboard,,unverified
+left,center,L3,front,False,10uH 20% 6.2A Isat30; 1.5A rail envelope,3.1,verified_maximum
+left,center,L750,front,False,6.8uH 18.4A Isat30 / 10.9A Irms20; 6mm max,6.0,verified_maximum
+left,center,Q13,front,False,CSD19537Q3 100V AUX reverse FET,1.1,verified_maximum
+left,center,Q62,back,False,2N7002 DFU-mode USB mux force-enable,1.11,verified_maximum
+left,center,Q200,back,False,2N7002KT1G fan PWM open-drain sink,1.11,verified_maximum
+left,center,Q2610,front,False,CSD17577Q3A buck FET,0.9,verified_maximum
+left,center,Q2644,back,False,BSS138 AUX discharge,1.12,verified_maximum
+left,center,R31,front,False,4.7k SDA pull-up,0.55,verified_maximum
+left,center,R32,back,False,10k,0.55,verified_maximum
+left,center,R35,back,False,62.4k 0.02% 5ppm MCU_3V3 FB hi,0.55,verified_maximum
+left,center,R36,back,False,20.0k 0.02% 5ppm MCU_3V3 FB lo,0.55,verified_maximum
+left,center,R37,front,False,0R HSE drive/tuning position,0.55,verified_maximum
+left,center,R193,front,False,1k AUX ADC series,0.55,verified_maximum
+left,center,R200,back,False,22R USB DP series,0.55,verified_maximum
+left,center,R201,back,False,22R USB DM series,0.55,verified_maximum
+left,center,R202,back,False,10k EC USB default-disconnect pull-up,0.55,verified_maximum
+left,center,R203,back,False,22R DFU USB DP series,0.55,verified_maximum
+left,center,R204,back,False,22R DFU USB DM series,0.55,verified_maximum
+left,center,R206,back,False,8.2k fan FG pull-up,0.55,verified_maximum
+left,center,R207,back,False,100R fan PWM gate series,0.55,verified_maximum
+left,center,R208,back,False,100k gate pull-down; fan defaults full speed,0.55,verified_maximum
+left,center,R209,front,False,10k lid pull-up,0.55,verified_maximum
+left,center,R210,back,False,10k thermal divider pull-up,0.55,verified_maximum
+left,center,R215,front,False,10k Mu thermal pull-up,0.55,verified_maximum
+left,center,R256,front,False,10k trackpad fault pull-up,0.55,verified_maximum
+left,center,R360,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R361,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R362,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R363,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R364,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R365,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R366,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R367,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R368,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R369,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R370,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R371,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R372,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R373,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R374,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R375,front,False,100R keyboard RGB data series,0.55,verified_maximum
+left,center,R376,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R377,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R378,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R379,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R380,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R381,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R382,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R383,front,False,1k keyboard matrix series,0.55,verified_maximum
+left,center,R384,front,False,100R keyboard I2C SCL series,0.55,verified_maximum
+left,center,R385,front,False,100R keyboard I2C SDA series,0.55,verified_maximum
+left,center,R386,front,True,0R DNP DO-NOT-FIT keyboard 5V protection bypass,,unverified
+left,center,R387,front,False,0R keyboard RGB bus-buffer supply,0.55,verified_maximum
+left,center,R388,back,False,66.5k 1% keyboard RGB 0.40A ILIM,0.55,verified_maximum
+left,center,R389,back,False,100k keyboard RGB enable default-off,0.55,verified_maximum
+left,center,R390,back,False,10k keyboard RGB fault pull-up,0.55,verified_maximum
+left,center,R391,back,False,100k keyboard RGB data default-low,0.55,verified_maximum
+left,center,R400,back,False,12.0k 1% USB transceiver RBIAS,0.55,verified_maximum
+left,center,R401,back,False,10k reset open-drain pull-up,0.55,verified_maximum
+left,center,R402,back,False,100k NON_REM1 strap high,0.55,verified_maximum
+left,center,R403,back,False,100k NON_REM0 strap low,0.55,verified_maximum
+left,center,R404,back,False,100k CFG_SEL0 strap low,0.55,verified_maximum
+left,center,R405,back,False,100k CFG_SEL1 strap low,0.55,verified_maximum
+left,center,R408,back,False,10k port 1 OC_N noise-margin pull-up,0.55,verified_maximum
+left,center,R409,back,False,10k port 3 OC_N noise-margin pull-up,0.55,verified_maximum
+left,center,R417,back,False,0R physical internal-host VBUS-valid link,0.55,verified_maximum
+left,center,R714,front,False,31R AUX reverse-FET pulldown gate,0.55,verified_maximum
+left,center,R715,front,False,10k AUX eFuse FLT pull-up,0.55,verified_maximum
+left,center,R739,front,False,332k 0.1% 10ppm AUX PGOOD threshold top,0.55,verified_maximum
+left,center,R752,back,False,49.9R FB isolation,0.55,verified_maximum
+left,center,R753,back,False,102k 0.1% 10ppm 12V FB high,0.55,verified_maximum
+left,center,R755,back,False,15k 1% COMP series,0.4,verified_maximum
+left,center,R758,back,False,26.7k 1% inductor limit; about 12.4A nominal,0.55,verified_maximum
+left,center,R762,back,False,100k PG pull-up,0.55,verified_maximum
+left,center,R765,front,True,DNP 2.2R 0.25W switch-node snubber,,unverified
+left,center,R767,front,False,100k MU_12V_ENABLE reset pulldown,0.55,verified_maximum
+left,center,R780,front,False,10k source-manager INT pull-up,0.55,verified_maximum
+left,center,R2310,front,False,10k VHF PTT inactive,0.55,verified_maximum
+left,center,R2315,front,False,100k UHF internal antenna,0.55,verified_maximum
+left,center,R2317,front,False,100k UHF UART idle-high while absent,0.55,verified_maximum
+left,center,R2319,front,False,100k GNSS reset released while absent,0.55,verified_maximum
+left,center,R2320,front,False,100k VHF RX default low while daughterboard absent,0.55,verified_maximum
+left,center,R2324,front,False,100k GNSS TX default low while daughterboard absent,0.55,verified_maximum
+left,center,R2325,front,False,100k GNSS PPS default low while daughterboard absent,0.55,verified_maximum
+left,center,R2644,back,False,10k AUX permission series,0.55,verified_maximum
+left,center,R2645,back,False,47k AUX permission default-off,0.55,verified_maximum
+left,center,R2646,front,False,1k 1W switched AUX discharge,0.65,verified_maximum
+left,center,R2647,back,False,100k discharge gate default-low,0.55,verified_maximum
+left,center,U4,front,False,STM32F407VGTx,1.4,verified_nominal
+left,center,U5,front,False,TPS62933DRLR,0.6,verified_maximum
+left,center,U12,front,False,TPS26630RGER 3A AUX eFuse / surge cutoff,1.0,verified_maximum
+left,center,U44,front,False,TCA9539PWR resettable source manager @0x74,1.2,verified_maximum
+left,center,U60,back,False,USBLC6-2P6 EC USB ESD,0.62,verified_maximum
+left,center,U61,back,False,TS3USB30EDGSR EC USB host-state isolation,1.1,verified_maximum
+left,center,U310,front,False,TPS2553D keyboard RGB 5V switch 0.40A nominal,1.45,verified_maximum
+left,center,U311,front,False,SN74AHCT1G126 keyboard RGB 3V3-to-5V buffer,1.45,verified_maximum
+left,center,U400,front,False,USB2513BT-I/M2 three-port HS multi-TT hub,1.0,verified_maximum
+left,center,U401,front,False,TLV803EA29RDBZR 2.93V reset supervisor,1.12,verified_maximum
+left,center,U402,front,False,TPS2052BDR dual 500mA USB power switch,,unverified
+left,center,U750,front,False,TPS552882RPMR 12V buck-boost,1.0,verified_maximum
+left,center,U2644,back,False,SN74LVC1G04DBVR AUX discharge,1.45,verified_maximum
+left,center,Y400,front,False,ABM8-24.000MHZ-10-1-U-T 24MHz 10pF CL,0.8,verified_maximum
+right,center,C178,front,False,1u OLED B local,1.35,verified_maximum
+right,center,C179,front,False,100n OLED B local,0.9,verified_maximum
+right,center,C2070,front,False,100n 50V DFU clamp bypass,0.9,verified_maximum
+right,center,C2412,front,False,100n,0.9,verified_maximum
+right,center,J73,front,False,Rear USB-C EC firmware programming port (UFP/DFU),,unverified
+right,center,J421,front,False,"Right 8-ohm BTL speaker; pin 1 +, pin 2 -",4.25,verified_nominal
+right,center,R205,back,False,5.1k USB-C CC1 Rd (UFP),0.55,verified_maximum
+right,center,R211,back,False,5.1k USB-C CC2 Rd (UFP),0.55,verified_maximum
+right,center,SW1,front,False,Reset,4.5,verified_maximum
+right,center,SW4,front,False,BOOT0 (DFU),4.5,verified_maximum
+right,center,U63,front,False,USBLC6-2P6 EC DFU USB ESD,0.62,verified_maximum
+radio_forward,center,C178,front,False,1u OLED B local,1.35,verified_maximum
+radio_forward,center,C179,front,False,100n OLED B local,0.9,verified_maximum
+radio_forward,center,C782,front,False,22u 25V endpoint output; TI characterized part,2.7,verified_maximum
+radio_forward,center,C794,front,False,1u internal host VBUS switch input,0.9,verified_maximum
+radio_forward,center,C830,front,False,10u internal host VBUS output,,unverified
+radio_forward,center,C831,front,False,100n TPS3897 VCC bypass,,unverified
+radio_forward,center,C832,front,False,1u endpoint switch input,0.9,verified_maximum
+radio_forward,center,C833,front,False,22n 50V C0G 5% endpoint slew; parallel pair,1.2,verified_maximum
+radio_forward,center,C2070,front,False,100n 50V DFU clamp bypass,0.9,verified_maximum
+radio_forward,center,C2284,front,False,330u 10V endpoint local reservoir,4.3,verified_maximum
+radio_forward,center,C2287,front,False,22u 25V endpoint output; TI characterized part,2.7,verified_maximum
+radio_forward,center,C2289,front,False,22n 50V C0G 5% endpoint slew; parallel pair,1.2,verified_maximum
+radio_forward,center,C2412,front,False,100n,0.9,verified_maximum
+radio_forward,center,H26,front,False,M2.5 isolated mainboard mounting hole,,unverified
+radio_forward,center,J73,front,False,Rear USB-C EC firmware programming port (UFP/DFU),,unverified
+radio_forward,center,J421,front,False,"Right 8-ohm BTL speaker; pin 1 +, pin 2 -",4.25,verified_nominal
+radio_forward,center,R205,back,False,5.1k USB-C CC1 Rd (UFP),0.55,verified_maximum
+radio_forward,center,R211,back,False,5.1k USB-C CC2 Rd (UFP),0.55,verified_maximum
+radio_forward,center,R769,front,False,100k MU_HOST_ACTIVE fail-low,0.55,verified_maximum
+radio_forward,center,R773,front,False,43.2k 1% internal host VBUS 0.61A ILIM,0.55,verified_maximum
+radio_forward,center,R774,front,False,10k internal host VBUS fault pull-up,0.55,verified_maximum
+radio_forward,center,R775,front,False,10k internal host VBUS valid pull-up,0.55,verified_maximum
+radio_forward,center,R777,front,False,78.7k 1% VBUS sense top divider,0.55,verified_maximum
+radio_forward,center,R778,front,False,10.0k 1% VBUS sense bottom divider,0.55,verified_maximum
+radio_forward,center,R2290,front,False,100R 1% 0.25W endpoint QOD discharge,,unverified
+radio_forward,center,R2291,front,False,100k endpoint load-switch PG pull-up,0.55,verified_maximum
+radio_forward,center,R2428,front,False,10k,0.55,verified_maximum
+radio_forward,center,SW1,front,False,Reset,4.5,verified_maximum
+radio_forward,center,SW4,front,False,BOOT0 (DFU),4.5,verified_maximum
+radio_forward,center,TP2280,front,False,PCIE_LOAD_PG,,unverified
+radio_forward,center,U63,front,False,USBLC6-2P6 EC DFU USB ESD,0.62,verified_maximum
+radio_forward,center,U770,front,False,TPS2553DDBVR internal host VBUS 0.61A,1.45,verified_maximum
+radio_forward,center,U771,front,False,TPS3897ADRYR internal VBUS supervisor (always-powered),,unverified
+radio_forward,center,U772,front,False,TPS22992SRXNR endpoint slew and short protection,,unverified
+radio_forward,center,U2412,front,False,SN74LVC1G08DBVR SYS5 PG and actual VBUS qualify,1.45,verified_maximum
+radio_forward,right,J2463,front,False,right power return,,unverified

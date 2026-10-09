@@ -5,6 +5,40 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-09: make the lid and base line up
+
+decided to keep the radio as an external accessory. that gets the radio board, gps and its mounting hardware out of the laptop, and leaves more room for the cooler. i also really don't want a lip at the front or a chunk sticking out behind the screen. checked the old case and found that the base was 8 mm deeper than the lid, so i shortened the rear of the base instead of making the lid or front bigger.
+
+the lid and base now share the same 370 x 274 mm outline. the keyboard, trackpad and front edge stayed where they were. made a separate case model with a 25 mm deck and 33.3 mm closed height without feet. also caught a mistake in the old thickness calculation: it left out the 3 mm joining plates underneath, so the old printed model was actually 47.8 mm without feet. the thinner version still needs changes inside before it can be assembled at its target height.
+
+![the shorter base and matching lid edges](docs/images/journal/2026-10-09-flush-case-closed.png)
+
+moved the framework hinge axes 5 mm rearward and rebuilt their supports. the first motion check caught the hinge leaves hitting the rear wall, so i enlarged those openings and added a small bevel to the lower lid rim. the final sweep has no rigid overlaps through 142 degrees at the checked 2 degree intervals. it starts touching at 144 degrees, so the opening stop still needs sorting out. also trimmed the lid reinforcement to keep it inside the matching outline.
+
+![the old rear ledge compared with the matching outlines](docs/images/journal/2026-10-09-flush-case-outline.png)
+
+kept the real boards and power wiring in the model to see what the lower deck hits. it exposed five overlaps around the usb power wires and their carriers. rerouted that pair behind the keyboard, keeping the plug positions the same. the wires now come out around 338 and 349 mm instead of 403 and 415 mm. kept a raised crossover where the wires need to swap sides, outside the keyboard and trackpad supports.
+
+![the old loops and the shorter usb power path](docs/images/journal/2026-10-09-usb-power-path.png)
+
+replaced the long supports under the trackpad with short removable brackets beside the keyboard. included the clamp screws in the fit checks, filled in the missing capacitor and ic height information, and added small pockets above U913 and C924 in the right clamp. the wire bends and separation pass, and the rebuilt usb assembly has no detected solid or component-envelope conflicts. i still need to fit actual wires, test the snap guides and check that the supports hold up under load.
+
+also caught the support generator treating plated bms holes as mounts; it now only uses the four perimeter mounts. checked the faster clearance calculation against 20 guide/carrier meshes and reopened both step exports. updated the readme pictures too. all six pcb files stayed unchanged. the space reserved for the fan still overlaps the center pcb, and the cooler contact shape still overlaps the module. the external radio connection and actual cooler still need designing.
+
+# 2026-10-08: compare thinner cooling layouts
+
+looked at how to make the laptop thinner instead of just trying to fit everything around the existing fan position. compared the complete framework 13 cooler with a separate thin blower and fin bank on the right. checked the published cooler drawings, the mu contact heights and the actual component positions on both sides of the boards.
+
+the area beside the mu is really crowded. a fan pocket there would affect 158 populated footprints and 441 track/via items, including some of the fast signals. the right-side pocket only affects 11 footprints and 87 track/via items, all on the service usb and ground nets. it also gives the fan a direct side exhaust. saved the exact affected parts and made separate cad reservations so i could compare the layouts without changing the pcbs.
+
+![the two cooling layouts over the saved boards](docs/images/journal/2026-10-08-thinner-cooling-layouts.png)
+
+worked through the rest of the thickness too. a thinner fan on its own barely helps because the wires under the trackpad and the radio over the battery still set the height. the full framework cooler came out around 36 mm closed in the height budget. the more involved custom layout was around 33 mm, but that also needs thinner supports, different cable paths and a better place for the radio. those are targets, not a finished fit.
+
+![where the thickness comes from in each layout](docs/images/journal/2026-10-08-thickness-options.png)
+
+also looked at a lower mu socket, but the underside clearance gets tight and it needs a proper compatibility check before using it. kept the existing socket and boards unchanged. the actual battery, trackpad and panel thicknesses still matter, and neither cooler has been tested on the complete laptop yet.
+
 # 2026-10-08: fit a stock heatpipe around the fan
 
 **Total time spent: 2 hours**

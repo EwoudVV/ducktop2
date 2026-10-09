@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-09",
+  "units": "mm",
+  "scope": "extra component dimensions below the revised USB power path; assembly space is applied separately",
+  "manufacturer_maximums": {
+    "T530D227M010ATE006": {
+      "height_mm": 3.1,
+      "source": "https://search.kemet.com/download/specsheet/T530D227M010ATE006",
+      "basis": "Exact part sheet, generated 2 March 2026: H is 2.8 +/-0.3 mm."
+    },
+    "MSASU21GBB7225KTNA01": {
+      "height_mm": 1.45,
+      "source": "https://ds.yuden.co.jp/TYCOMPAS/or/detail?pn=MSASU21GBB7225KTNA01&u=M",
+      "basis": "Exact part page: T is 1.25 +0.20/-0.00 mm."
+    },
+    "RC1206FR-07100RL": {
+      "height_mm": 0.65,
+      "source": "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L",
+      "basis": "RC_L package table: RC1206 height is 0.55 +/-0.10 mm."
+    },
+    "ERJ8CWFR010V": {
+      "height_mm": 0.75,
+      "source": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDN0000/AOA0000C313.pdf",
+      "basis": "ERJ8CW 10 to 16 milliohm outline: thickness T is 0.65 +/-0.10 mm."
+    },
+    "ERJ8CWFR013V": {
+      "height_mm": 0.75,
+      "source": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDN0000/AOA0000C313.pdf",
+      "basis": "ERJ8CW 10 to 16 milliohm outline: thickness T is 0.65 +/-0.10 mm."
+    },
+    "LTC4418IUF#PBF": {
+      "height_mm": 0.8,
+      "source": "https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4418.pdf",
+      "basis": "Revision A, page 29, UF20 package 05-08-1710: height is 0.75 +/-0.05 mm."
+    },
+    "SN74LVC3G34DCUR": {
+      "height_mm": 0.9,
+      "source": "https://www.ti.com/lit/ds/symlink/sn74lvc3g34.pdf",
+      "basis": "DCU0008A package outline 4225266/A, September 2014: maximum height 0.9 mm."
+    },
+    "TPS22992SRXNR": {
+      "height_mm": 0.8,
+      "source": "https://www.ti.com/lit/ds/symlink/tps22992.pdf",
+      "basis": "RXN0008A package outline 4225935/A, May 2020: maximum height 0.8 mm."
+    }
+  },
+  "reservations": {
+    "center/C924": {
+      "mpn": "C1608X7R1C104K080AA",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "height_mm": 1.5,
+      "basis": "Conservative installed-height limit including solder. TDK catalogue B11 page 36 lists the base C1608X7R1C104K at 0.80 +/-0.10 mm. The current full-ordering-code page was unavailable; confirm the fitted part remains within this 1.5 mm allocation.",
+      "source": "https://www.mouser.com/datasheet/2/400/tdk_mlcc_us_catalog_b11-22025.pdf"
+    },
+    "center/TP2280": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_1.5x1.5mm",
+      "height_mm": 1.0,
+      "basis": "Bare pad with the existing 1 mm incidental solder allowance. No permanent pin or test lead; remove the USB guide before probing.",
+      "source": "saved PCB pad geometry"
+    },
+    "center/H3": {
+      "mpn": "M2XC4X2.5+C2.7X1.5",
+      "footprint": "ducktop2:SMT_Standoff_M2_H2.5_C4_Tail2.7x1.5",
+      "height_mm": 6.0,
+      "basis": "Maximum allowed installed space for the M.2 retainer, card, washer and screw. This is an assembly limit to verify on the selected hardware, not a manufacturer dimension.",
+      "source": "case mounting schedule: 2.5 mm M.2 retainer; final card and screw stack must fit within 6 mm above the host PCB"
+    }
+  }
+}

@@ -72,7 +72,9 @@ separate trials in `harness-height-study.json`.
 
 the deck number is not the closed laptop thickness. assumed keys reach
 H34.8. the printed lid and its external splice plates reach H44.8 when
-closed; the 5 mm feet make that 49.8 mm overall. a one-piece production
+closed. the base joining plates extend down to H-3, making the closed
+model 47.8 mm without feet. the 5 mm feet make that 49.8 mm overall.
+the earlier 44.8 mm figure missed those underside plates. a one-piece production
 lid can remove the external print splices, but that has not been released
 as a thinner CNC design.
 

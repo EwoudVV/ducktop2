@@ -1,5 +1,10 @@
 # case prototype
 
+this is the earlier case, kept as the checked harness and hinge reference.
+the [flush case candidate](../flush-case/README.md) has the matching lid/base
+outline and external radio. this model measures 47.8 mm closed without feet,
+including its underside joining plates, or 49.8 mm with the 5 mm feet.
+
 editable CadQuery case study using the saved WAGO power revision and the
 80 mm BMS. `assembly.json` selects `guided-harness-study`, currently a
 33.5 mm base to the deck surface. this is a packaging candidate, not a

@@ -5,6 +5,14 @@ plug with the existing connector positions. the case uses revised guides,
 removable USB rails and reliefs for the ground braids. this is a checked
 CAD arrangement, not a physical fit or thermal qualification.
 
+the separate [flush case](../../mechanical/flush-case/README.md) now has a
+shorter USB power route behind the keyboard. its calculated ground/5 V
+cut lengths are 338.2/348.9 mm, and the guide rails attach to removable
+keyboard-carrier tabs. it retains the 420 mm electrical length ceiling.
+the 400–420 mm USB cutting range and cell-gap carriers described below
+belong to the earlier case. the other sixteen power paths are unchanged
+apart from the common board-height translation.
+
 - [wire paths and connector coordinates](../../mechanical/power-harness.json)
 - [BMS route and height view](../../mechanical/bms-power-route.png)
 - [wire and body checks](../../mechanical/power-harness-checks.json)

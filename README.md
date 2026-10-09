@@ -1,7 +1,12 @@
 # Ducktop2
 
-<img width="820" height="833" alt="image" src="https://github.com/user-attachments/assets/9345a4b7-7898-459d-a0e5-621a216b712b" />
-<img width="1109" height="804" alt="image" src="https://github.com/user-attachments/assets/f92274c8-3593-47c7-84d2-15d226b0aad5" />
+![ducktop2 case open, with the radio outside the laptop](mechanical/flush-case/views/open.png)
+![ducktop2 case closed, with matching lid and base edges](mechanical/flush-case/views/closed.png)
+
+current case model, 9 october 2026. the lid and base share a 370 x 274 mm
+outline, and the radio is planned as an external accessory. i'm aiming for
+33.3 mm closed without feet, but the wiring and cooler still need more work
+before everything fits. [case CAD and fit notes](mechanical/flush-case/README.md)
 
 i'm building a 16-inch x86 laptop around the LattePanda Mu Ultra. i wanted the
 exposed hardware and flexibility of a cyberdeck in something i could
@@ -21,7 +26,7 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 - a 3S battery, USB-C PD charging from either side, and AUX/DC input
 - STM32F407 for laptop control and a separate RP2350 with protected maker GPIO
 - two status OLEDs, speakers, a headphone jack, and a microphone
-- optional VHF/UHF radio, GNSS, and a separate radio audio path
+- optional external VHF/UHF radio and GNSS accessory, with its own audio path
 
 ## build status
 
@@ -76,7 +81,7 @@ flowchart LR
     B[BMS: cell monitoring and protection] <-->|power and isolated control wiring| C
     Cells[3S cells and cell taps] --- B
     C --- K[Keyboard]
-    C --- Radio[Optional radio and GNSS]
+    C --- Radio[Optional external radio and GNSS]
     C -->|Mu onboard eDP| Panel[Internal display]
 ```
 
@@ -114,7 +119,7 @@ board can replace existing routing.
 | `ducktop2.pretty/`, `Module_LattePanda.pretty/`, `ducktop2.3dshapes/` | Shared footprints and models |
 | `docs/hardware/` | Circuit, cable, display, and mechanical documentation |
 | `firmware/` | EC/maker code, tests, and firmware release records |
-| `mechanical/` | Current floorplan and layout planner |
+| `mechanical/` | Floorplan, case CAD, layout planner and fit checks |
 | `reference/` | Source/reference designs and retained generator inputs |
 | `manufacturing/` | Board packages, quotes, and manufacturing requirements |
 | `verification/` | Hardware validation record and ignored generated checks |

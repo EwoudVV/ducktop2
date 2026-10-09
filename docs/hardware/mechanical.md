@@ -1,11 +1,12 @@
 # mechanical layout
 
 the original base and lid target was 358 x 248 mm. the saved main boards
-already span 358 mm before case walls. the current editable
+already span 358 mm before case walls. the earlier editable
 [case study](../../mechanical/case-prototype/README.md) uses a 370 x 282 mm
 base envelope and a 33.5 mm deck. it includes the current WAGO power
 connections, guided wire paths and removable supports. the printed study
-is still 44.8 mm thick when closed without feet. measured parts, cooling
+is still 47.8 mm thick when closed without feet, including the 3 mm
+underside joining plates omitted from the earlier 44.8 mm figure. measured parts, cooling
 and the complete cable routes still control the final size. the
 [cooling fit notes](../../mechanical/case-prototype/cooling-fit.md) record
 the stepped spreader and the limits of the current fan placement.
@@ -14,6 +15,32 @@ for bare components and reserved space for plugs, solder and screw stacks.
 the closest reserved gap is 0.2 mm at the hall-switch connector. measure
 the complete assemblies before making the cooler.
 main-board coordinates below were checked on 10 september 2026.
+
+the separate [thin-layout comparison](../../mechanical/thin-layout/README.md)
+examines a complete laptop cooler and a right-side fan pocket. its roughly
+33–36 mm closed budgets need revised supports, wiring and radio packaging.
+they are conditional targets, and do not replace the saved case geometry.
+
+## case shape
+
+9 october 2026: the lid and base need the same nominal outer outline when
+closed, with aligned front, rear and side edges. no front ledge and no
+rear cooling extension or fixed shelf behind the screen when it is open.
+the hinge and exhaust arrangement needs to work within that shape.
+the radio belongs in an external plug-in accessory, with its GNSS receiver
+and radio audio hardware. keep the keyboard and trackpad in their saved
+positions. the external electrical interface still needs designing.
+
+the saved case does not meet this yet. its base is 370 x 282 mm, spanning
+Y=-26 to 256. the closed lid is 370 x 274 mm, spanning Y=-18 to 256 after
+the hinge offset. that leaves an 8 mm rear ledge. the next case revision
+needs a shared lid/base outline and a new hinge-motion and exhaust check.
+the earlier CAD remains available as a fit reference. the separate
+[flush case revision](../../mechanical/flush-case/README.md) shortens the
+base to the lid's depth and moves the hinges rearward. the boards stay
+fixed, while the USB power pair now runs behind the keyboard with shorter
+removable guides. its modeled clearance checks pass; the cooler and actual
+hardware fit still need work.
 
 ## recorded parts
 
