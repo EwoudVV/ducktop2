@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "source_hashes": {
-    "mechanical/flush-case/verify_usb_bounds.py": "74e5d9a08ba6a04808f0e8c6cdad66a2bbc149eb263f1bda611436ad5b59eade",
-    "mechanical/flush-case/usb_collision.py": "599bf456da172156a717a80fbc2724c907e7e04228a0fae47f49935565599d18",
-    "mechanical/flush-case/usb_harness.py": "f3b1c31e25092720b913f7070d37e762456117f73dab41f873c338734c896427",
-    "mechanical/flush-case/assembly.json": "ac2e7a8be67a45e797c391bf42cfb9939f44acf4572234d3d1149a76f6023fd7",
-    "mechanical/flush-case/usb-harness.json": "c3da0f02cdf349397a626430d545f3bd8efdb464517dd95f10d6f2a6d21ee68f",
+    "mechanical/flush-case/verify_usb_bounds.py": "bfa6d8d0344d5d4e9c49906eacf0e38e00fc2c0afa23ac026e512df41eba3fac",
+    "mechanical/flush-case/usb_collision.py": "f39fbd1a947d1dbca9c1d11e1310865a090272a6351ef8d9ae6193690d663b70",
+    "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
+    "mechanical/flush-case/assembly.json": "0b25b127b614e6a6a44d64efc240870c7970611999bac99c5d460e1286f25468",
+    "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
     "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
     "mechanical/case-prototype/component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664"
   },
@@ -14,15 +14,15 @@
   "checks": [
     {
       "part": "usb5-GND-full-guide",
-      "sampled_vertices": 89441,
-      "minimum_box_margin_mm": 0.243716,
+      "sampled_vertices": 88402,
+      "minimum_box_margin_mm": 0.243502,
       "vertices_outside_bounds": 0,
       "pass": true
     },
     {
       "part": "usb5-USB_PORT_5V-full-guide",
-      "sampled_vertices": 93118,
-      "minimum_box_margin_mm": 0.245586,
+      "sampled_vertices": 94747,
+      "minimum_box_margin_mm": 0.245966,
       "vertices_outside_bounds": 0,
       "pass": true
     },
@@ -140,14 +140,14 @@
     },
     {
       "part": "harness-USB-left-carrier",
-      "sampled_vertices": 78799,
+      "sampled_vertices": 78263,
       "minimum_box_margin_mm": 0.1,
       "vertices_outside_bounds": 0,
       "pass": true
     },
     {
       "part": "harness-USB-right-carrier",
-      "sampled_vertices": 117093,
+      "sampled_vertices": 119039,
       "minimum_box_margin_mm": 0.1,
       "vertices_outside_bounds": 0,
       "pass": true

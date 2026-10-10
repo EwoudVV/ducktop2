@@ -1,6 +1,6 @@
 # flush case with an external radio
 
-9 october 2026. the lid and base now use the same 370 x 274 mm rounded
+10 october 2026. the lid and base now use the same 370 x 274 mm rounded
 outline. the front stays at Y256; the rear of the base moves from Y-26 to
 Y-18. that removes the old 8 mm rear ledge without adding a front lip.
 the keyboard and trackpad stay in their saved positions.
@@ -54,12 +54,14 @@ uses the earlier remote-cooler budget, a 1.2 mm bottom/deck and a 1 mm lid
 skin. the screen has a nominal 2 mm gap above the keycap envelopes when
 closed. cell padding and the 3 mm swelling space are retained.
 
-**the internal assembly does not fit this height yet.** the two remaining
-modeled overlaps are the fan pocket and the CPU cooler reservation.
+the recorded internal solid checks now have no detected overlaps. the
+cooler also clears 33 component-height crossings across 27 footprints;
+14 use explicit installed-height allocations. physical fit, support loads,
+the CPU clamp, complete cable set and thermal performance remain untested.
 
 the USB power run now passes behind the keyboard instead of looping under
 the trackpad. the connector positions stay fixed. the calculated cut
-lengths are 338.2 mm for ground and 348.9 mm for 5 V, including the same
+lengths are 338.3 mm for ground and 349.2 mm for 5 V, including the same
 provisional 2 mm inside each solder cup. the old 400–420 mm cutting range
 is superseded for this case; the 420 mm electrical maximum stays in place.
 fit the actual wires before treating these calculated lengths as a cutting
@@ -67,9 +69,9 @@ template.
 
 ![the shorter USB power path](views/usb-path-comparison.png)
 
-the pair runs close to the same height under the keyboard. a local raised
-crossover sits outside the keyboard and trackpad supports. the minimum
-inside bend radii are 13.17 and 12.38 mm, above the 10.65 mm design limit
+the pair drops locally below the heatpipes. a raised crossover remains
+outside the keyboard and trackpad supports. the minimum
+inside bend radii are 13.17 and 12.02 mm, above the 10.65 mm design limit
 for the selected 16 AWG wire. all checked wire separations retain at least
 0.5 mm after the position, curve and sampling allowances.
 
@@ -87,18 +89,19 @@ areas. the C924 allowance is deliberately conservative because only the
 older TDK family table was available. physical component and fastener fit
 still need checking. `usb-clearances.json` records the scope and limits.
 
-the low right-side fan also overlaps the unchanged center board. the
-[cooling comparison](../thin-layout/README.md) identifies the proposed
-cutout, 11 affected footprints and 87 track/via items. the red cutout in
-the viewer is only a proposed change. the STEP keeps the current board so
-the conflict remains visible. the rough CPU-cooler volume also overlaps
-module components and needs a properly stepped contact plate and mount.
+the smaller Delta BFB04512HHA-DV52 sits beyond the center-board edge. the
+circular cutout from the earlier comparison is no longer used, and none
+of its 11 affected components or 87 track/via items were changed. two
+250 mm ATS pipes sit in recessed channels in a stepped copper plate.
+shallow carrier reliefs clear their maximum size and position allowances.
+the fin stack has a continuous collector, including beneath the fins past
+the shorter pipe-end limit. [parts and cooling details](cooling.md)
 
-![boards, retained wiring and the proposed fan pocket](views/inside.png)
+![boards, revised power guides and the right-side cooler](views/inside.png)
 
-the fan and fin volumes are reservations. there is no manufactured pipe
-route, proven fan/fin pairing, CPU clamp-load specification or complete
-thermal test. the side exhaust and bottom inlet are initial openings,
+the fan uses manufacturer CAD; the plate, pipes and fin stack are prototype
+geometry. the formed pipes, fan/fin pairing and CPU clamp load have not
+been qualified. the side exhaust and bottom inlet are initial openings,
 without a finished shroud or grille. normal port slots are deliberately
 oversized until their mating plugs and service clearances are settled.
 
@@ -119,11 +122,18 @@ motion and strain relief need rebuilding around the new hinge positions.
   revised paths, part dimensions/allocations and the USB fit results.
 - `usb-bound-validation.json`: 20 sampled CAD checks covering the guide
   bounds and added carrier material; this is not a continuous-surface proof.
+- `cooler.json`, `remote_cooler.py` and `cooler-checks.json`: cooler parts,
+  generated geometry, size/position envelopes and height checks.
+- `cooler-part-heights.json`: sourced dimensions and explicit installed
+  height allocations. allocations are not manufacturer measurements.
+- `cooler-airflow.json`: delivered-airflow target, not measured performance.
+- `draw_cooler.py` and `cooler-exports.json`: close-up views and the separate
+  cooler STEP, tied to the checked CAD sources.
 - `exports/closed.step`: the editable CAD assembly kept in git. the build
   also produces `exports/open.step` locally; that duplicate pose is ignored.
 - `exports.json`: saved export hashes and STEP reopen results.
-- `inspection.html`: interactive CAD viewer, including the retained wires
-  and the unapplied board-cutout reservation.
+- `inspection.html`: interactive CAD viewer, including the cooler and
+  revised power guides.
 
 run `build.py` using the project's CadQuery environment. `--cached` uses
 the checked candidate BReps in `.workbench`; changed source or configuration
@@ -137,9 +147,9 @@ threading or removing terminated wires. the fixed feet clear the modeled
 connector service envelopes after the upper rails are removed. the dressed
 harness and actual assembly sequence still need a physical check.
 
-these exports are for inspection. the opening stop, two remaining cooling
-overlaps, board changes, complete signal/raw-pack harnesses, support
-stiffness and physical measurements need resolving before making the case.
+these exports are for inspection. the opening stop, fan/fin mounts, ducting,
+CPU clamp, complete signal/raw-pack harnesses, support stiffness and physical
+measurements need resolving before making the case.
 
 Framework Computer Inc's original hinge geometry is used under CC BY 4.0.
 the unmodified reference files, [source records](../case-prototype/reference/framework13/sources.json)

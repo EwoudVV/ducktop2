@@ -31,16 +31,19 @@ the radio belongs in an external plug-in accessory, with its GNSS receiver
 and radio audio hardware. keep the keyboard and trackpad in their saved
 positions. the external electrical interface still needs designing.
 
-the saved case does not meet this yet. its base is 370 x 282 mm, spanning
+the earlier case did not meet this. its base is 370 x 282 mm, spanning
 Y=-26 to 256. the closed lid is 370 x 274 mm, spanning Y=-18 to 256 after
-the hinge offset. that leaves an 8 mm rear ledge. the next case revision
-needs a shared lid/base outline and a new hinge-motion and exhaust check.
+the hinge offset. that left an 8 mm rear ledge.
 the earlier CAD remains available as a fit reference. the separate
 [flush case revision](../../mechanical/flush-case/README.md) shortens the
 base to the lid's depth and moves the hinges rearward. the boards stay
 fixed, while the USB power pair now runs behind the keyboard with shorter
-removable guides. its modeled clearance checks pass; the cooler and actual
-hardware fit still need work.
+removable guides. the 10 october revision uses a 45 mm blower beside the
+center board, a stepped contact plate and two full-length heatpipes.
+the recorded cooler and power-guide clearance checks pass without a board
+cutout or component moves. fan/fin supports, ducting, CPU clamp load and
+physical thermal tests still need work. see the
+[current cooling notes](../../mechanical/flush-case/cooling.md).
 
 ## recorded parts
 

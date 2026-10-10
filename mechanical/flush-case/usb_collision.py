@@ -71,6 +71,10 @@ class Checks:
         elif name=='keyboard-carrier-reservation':
             result=[{'shape':box(41.25,19,20,275.5,82,1),'subset':False}]
             result += [{'shape':box(x-5,99,20,10,10,1),'subset':False} for x in [130,225]]
+        elif 'remote_pipe_offset' in part:
+            # Keep the registered extrusion object instead of a new Solids()
+            # wrapper, so its conservative planar bound remains available.
+            result=[{'shape':part['shape'],'subset':True}]
         else:
             result=[{'shape':s,'subset':True} for s in part['shape'].Solids()]
         self.pieces[name]=result
@@ -79,7 +83,15 @@ class Checks:
     def curve_might_meet(self,piece,shape):
         lo,hi=self.envelope(piece['curve'],piece['guide'],piece['clip'])
         b=shape.BoundingBox();a=np.array([b.xmin,b.ymin,b.zmin]);z=np.array([b.xmax,b.ymax,b.zmax])
-        return bool(np.any(np.all((hi>a+.001)&(lo<z-.001),axis=1)))
+        mask=np.all((hi>a+.001)&(lo<z-.001),axis=1)
+        if not mask.any():return False
+        import remote_cooler
+        plan=remote_cooler.planar_bound(shape)
+        if plan is not None:
+            from shapely import box as boxes,intersects
+            lo,hi=lo[mask],hi[mask]
+            return bool(np.any(intersects(plan,boxes(lo[:,0],-hi[:,1],hi[:,0],-lo[:,1]))))
+        return True
 
     def volume(self,a,b):
         if not bbox_overlap(a['shape'],b['shape']):return 0

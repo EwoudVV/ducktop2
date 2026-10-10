@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-10",
+  "heat_W": 40,
+  "fan_electrical_budget_W": 3.12,
+  "total_exhaust_air_heat_budget_W": 43.12,
+  "assumed_inlet_C": 35,
+  "assumed_air_density_kg_m3": 1.145,
+  "assumed_air_specific_heat_J_kgK": 1006.0,
+  "selected_maximum_bulk_air_rise_K": 30.0,
+  "required_delivered_flow_m3_min": 0.07486955993297853,
+  "required_delivered_flow_CFM": 2.6439935185219787,
+  "approximate_typical_fan_pressure_at_required_flow_Pa": 56.60569811415354,
+  "fan_curve_test_temperature_C": 25,
+  "fan_curve_temperature_derated": false,
+  "basis": "Q = mass flow times specific heat times bulk air temperature rise. The 40 W cooler budget and maximum 3.12 W fan input are both counted in the exhaust air. Fan pressure is interpolated from an approximate reading of the supplier plot.",
+  "scope": "An airflow acceptance target only. This does not predict the installed operating point, heatpipe transport, sink temperature, junction temperature, noise or throttling. Test the complete duct and fin stack.",
+  "installed_flow_measured": false,
+  "thermal_performance_verified": false,
+  "source_hashes": {
+    "cooler.json": "9915158e8d71e9df442f8ca10e0d8a12d3d4b5bd72da61d1034452e5ed4bc2a4",
+    "airflow_budget.py": "5a5f36d1a725b699d5c078f3c378d99135ec1eb521f686817fa2f6892dcbff3f"
+  }
+}

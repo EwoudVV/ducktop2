@@ -1,5 +1,10 @@
 # making the laptop thinner
 
+10 october update: the [current case](../flush-case/cooling.md) uses a
+45 mm blower beyond the center-board edge. it avoids the circular cutout
+and component moves studied below. this comparison remains the earlier
+layout and thickness study, not the current cooler selection.
+
 8 october 2026, with the old-case thickness corrected on 9 october. the
 saved printed case is 47.8 mm closed without feet. the earlier 44.8 mm
 figure omitted the 3 mm joining plates below the base datum.

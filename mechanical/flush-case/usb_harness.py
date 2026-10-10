@@ -83,6 +83,12 @@ def make_paths(case):
             if positive:
                 bridge=smooth((p[:,0]-235)/25)*smooth((p[:,1]-94)/20)
                 p[:,2]+=3.6*bridge
+            if case.get('usb_heatpipe_crossing'):
+                dip=case['usb_heatpipe_crossing']
+                weight=smooth((p[:,0]-dip['x_start'])/(dip['x_full']-dip['x_start']))
+                weight*=smooth((p[:,1]-dip['rear_start_y'])/(dip['rear_full_y']-dip['rear_start_y']))
+                weight*=smooth((dip['front_end_y']-p[:,1])/(dip['front_end_y']-dip['front_full_y']))
+                p[:,2]-=dip['drop_mm']*weight
             edge=path_edge(p)
             radius_min=1/max(max(edge.curvatures(np.linspace(0,1,20000),mode='parameter')),1e-12)
             endpoint_error=max((edge.startPoint()-cq.Vector(*[p[0,0],-p[0,1],p[0,2]])).Length,
@@ -100,7 +106,7 @@ def make_paths(case):
                      length_basis='shorter case route; 2 mm provisional hidden length at each solder cup. Final cut length needs a dressed sample.',
                      bend_basis='actual fitted CAD spline, 20000 curvature stations; 1 percent margin on 5D inside radius')
             if not r['bend_5d_pass'] or not r['within_existing_420mm_electrical_max'] or endpoint_error>.01:
-                raise ValueError(r['name']+' fails its geometric limits')
+                raise ValueError(r['name']+' fails its geometric limits: '+json.dumps({k:r[k] for k in ['minimum_inside_radius_mm','nominal_cut_length_mm','endpoint_fit_error_mm']}))
         r.pop('sparse_interpolant_inside_radius_diagnostic_mm',None)
         r['max_wire_height_mm']=float(p[:,2].max()+r['wire_od_mm']/2+.2+.025)
         r['points']=p.tolist();rows.append(r)
@@ -121,7 +127,7 @@ def make_paths(case):
     if any(not r['pass'] for r in pairs) or heights['known_height_clearance_conflicts'] or heights['unverified_height_limits']:
         raise ValueError('USB route clearance failed: '+json.dumps({'pairs':[r for r in pairs if not r['pass']],**heights}))
     return {'source':'mechanical/case-prototype/installed-power-harness.json','source_sha256':digest(path),
-            'date':'2026-10-09','coordinate_frame':'installed X,Y,+H; export uses Z=-H',
+            'date':case['date'],'coordinate_frame':'installed X,Y,+H; export uses Z=-H',
             'source_height_change_mm':dz,'routes':usb,'other_routes':rows[:-2] if all(r['group']=='usb5' for r in rows[-2:]) else [r for r in rows if r['group']!='usb5'],
             'pairs':pairs,**heights,'physical_fit_verified':False,
             'wire_source':'https://www.alphawire.com/Products/wire/ecogen/ecowire/6716',

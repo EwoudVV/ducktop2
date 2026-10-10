@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "source_hashes": {
     "mechanical/case-prototype/build.py": "e0f9cd653ca4f809b2c848afc9c9cab42a8950da9cb38069c4c71395af467246",
     "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
@@ -31,18 +31,24 @@
     "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
     "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
     "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-    "mechanical/flush-case/assembly.json": "ac2e7a8be67a45e797c391bf42cfb9939f44acf4572234d3d1149a76f6023fd7",
-    "mechanical/flush-case/build.py": "282460084c4c4c94c3e16ef65ebefc1912f640530d3d3cffcc27411035a529c2",
-    "mechanical/flush-case/usb_harness.py": "f3b1c31e25092720b913f7070d37e762456117f73dab41f873c338734c896427",
-    "mechanical/flush-case/usb_clearances.py": "25f7638e5905f6bceca160b6b74b0d03590928168681402846e61452ec3217ea",
-    "mechanical/flush-case/usb_collision.py": "599bf456da172156a717a80fbc2724c907e7e04228a0fae47f49935565599d18",
+    "mechanical/flush-case/assembly.json": "0b25b127b614e6a6a44d64efc240870c7970611999bac99c5d460e1286f25468",
+    "mechanical/flush-case/build.py": "c9083b995784e591eace5d2b4c915641d9e04a348752a51b4c2a5979624a7c8b",
+    "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
+    "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
+    "mechanical/flush-case/usb_collision.py": "f39fbd1a947d1dbca9c1d11e1310865a090272a6351ef8d9ae6193690d663b70",
     "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
-    "mechanical/flush-case/usb-harness.json": "c3da0f02cdf349397a626430d545f3bd8efdb464517dd95f10d6f2a6d21ee68f",
+    "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
     "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
-    "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c"
+    "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
+    "mechanical/flush-case/remote_cooler.py": "44b3603cb4915f39c6191eba0119fcfa86b02b9338424d6b63c5efa938716686",
+    "mechanical/flush-case/cooler.json": "9915158e8d71e9df442f8ca10e0d8a12d3d4b5bd72da61d1034452e5ed4bc2a4",
+    "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
+    "mechanical/flush-case/check_cooler.py": "834fb23815c278f048e983eeca4d2fb4f67cd4289a0fa2730796b995e7df3d70",
+    "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
+    "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de"
   },
   "configuration": {
-    "date": "2026-10-09",
+    "date": "2026-10-10",
     "units": "mm",
     "status": "separate external-radio case candidate; unfinished wiring, cooling and support details remain visible",
     "outline": {
@@ -105,35 +111,44 @@
     },
     "cooling": {
       "fan_center": [
-        309,
-        152
+        321,
+        146.5
       ],
-      "fan_radius": 32.5,
-      "fan_bottom_H": 1.8,
-      "fan_height_with_allowance": 6,
+      "fan_radius": 22.5,
+      "fan_bottom_H": 5.9,
+      "fan_height_with_allowance": 10.6,
       "fan_inlet_height": 3,
-      "board_pocket_radius": 34,
       "fins_xywh": [
-        343,
-        119.6,
-        19,
-        64.8
+        344.5,
+        123,
+        18,
+        52
       ],
-      "fins_height": 6.54,
+      "fins_height": 14.1,
       "CPU_contact_top_H": 13.386,
-      "CPU_cooling_height_budget": 6
+      "CPU_cooling_height_budget": 7.1
     },
     "notes": [
       "Base and lid use the same nominal rounded outline. The front remains at Y256. The previous rear base strip from Y-26 to Y-18 is removed.",
       "No forward radio or trackpad relocation is used. The radio and GNSS move to an external accessory; its external electrical interface is not designed here.",
-      "All PCB files remain unchanged. The fan pocket is only a proposed board cutout, and its 11 affected footprints still need moving.",
-      "The USB power pair uses a shorter path behind the keyboard, with its crossover outside the input supports. Other power paths retain their lowered board datum. All clamp screw envelopes are included.",
+      "All PCB files remain unchanged. The smaller fan sits beyond the center-board edge; the former circular board cutout is not used.",
+      "The USB power pair passes behind the keyboard and drops locally beneath the heatpipes. Terminal positions remain fixed. All clamp screw envelopes are included.",
       "The USB guide rails attach to removable keyboard-carrier tabs. Endpoint seam clamps take plug pull loads. Carrier stiffness, fastener fit and dressed-harness deflection still need physical tests.",
-      "The pipe corridor is not a manufactured heatpipe. Cooling capacity, fan/shroud details, CPU clamp load and electrical fan interface remain unqualified.",
+      "Two 250 mm catalogue heatpipes and a stepped contact plate replace the rough cooler volume. Forming, final bonds, duct airflow, mounts and CPU clamp load still need qualification.",
       "Cell maximum thickness, trackpad/plug dimensions and panel thickness/mass still need measurement. The 11 mm cells, 5 mm trackpad and 3.5 mm panel remain assumptions or nominal listing values.",
       "Thin panels, the keyboard carrier and hinge supports need structural design and load tests. This is not a fabrication or print release.",
       "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement."
-    ]
+    ],
+    "usb_heatpipe_crossing": {
+      "drop_mm": 3.0,
+      "x_start": 245,
+      "x_full": 275,
+      "rear_start_y": 43,
+      "rear_full_y": 73,
+      "front_full_y": 101,
+      "front_end_y": 141
+    },
+    "cooling_layout": "right-delta-dual-pipe-v1"
   },
   "closed_outline_mm": {
     "base": [
@@ -751,18 +766,7 @@
       "fixed_rear_projection_mm": 0
     }
   ],
-  "internal_interferences": [
-    {
-      "new": "fan-body-reservation",
-      "existing": "center-pcb-and-available-models",
-      "overlap_mm3": 1645.686
-    },
-    {
-      "new": "CPU-cooler-height-budget",
-      "existing": "center-pcb-and-available-models",
-      "overlap_mm3": 95.0731
-    }
-  ],
+  "internal_interferences": [],
   "hinge_supports": [
     {
       "reference": "harness-USB-left-cap-146.35",
@@ -926,17 +930,17 @@
     }
   ],
   "USB_harness_checks": {
-    "date": "2026-10-09",
+    "date": "2026-10-10",
     "solid_conflicts": [],
-    "conservative_bound_rejections": 2479,
-    "exact_contact_checks": 8,
+    "conservative_bound_rejections": 2498,
+    "exact_contact_checks": 9,
     "rigid_component_height_conflicts": [],
     "unverified_rigid_component_heights": [],
     "fixed_feet_service_conflicts": [],
     "route_component_crossings": 117,
     "route_unknown_heights": [],
     "route_height_conflicts": [],
-    "smallest_wire_gap_after_allowances_mm": 0.9849129232440941,
+    "smallest_wire_gap_after_allowances_mm": 0.9379104365594833,
     "nominal_geometry_pass": true,
     "scope": "new USB physical parts versus retained rigid CAD and raw-pack exit reservation; extra clamp/support material uses front and back component height envelopes; fixed feet checked after removing the deck, keyboard carrier and USB upper rails",
     "guide_screen": "sampled cable-channel bounds include position, curve and sample-spacing allowances. Added bracket/clamp material is checked separately; potential contacts are confirmed against final solids. Detected overlap volumes may be from actual subsets, not the total union volume.",
@@ -949,6 +953,862 @@
       "complete signal, raw-pack, tap and probe harnesses"
     ]
   },
+  "cooler_checks": {
+    "date": "2026-10-10",
+    "source_hashes": {
+      "mechanical/case-prototype/build.py": "e0f9cd653ca4f809b2c848afc9c9cab42a8950da9cb38069c4c71395af467246",
+      "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
+      "mechanical/case-prototype/cad.py": "4a356ff6f8c32fa71761980d8f8ea55bf92395b6d3d894cdb8f4232a3a81d96f",
+      "mechanical/case-prototype/case_inputs.py": "96a2cabded138177c1237eb411260619bf30299b35cc9ee0d985c5a15b8d4ffb",
+      "mechanical/case-prototype/component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664",
+      "mechanical/case-prototype/cooling-datums.json": "3e459e6ca6901a1a836e4e8bc68895ca72535cad596ee1e858838230a9f5b84c",
+      "mechanical/case-prototype/cooling-parts.json": "844ce7bbe557896883bc2ef6755ac2477581c6d3db5511411af8795597399860",
+      "mechanical/case-prototype/cooling.py": "29143f0ef782f2815999ed2183b28651ada4cdc9ac269c4cf1c68a8e90a692ea",
+      "mechanical/case-prototype/ground_braids.py": "fa507327ab81c7fce12c927e457d45cad39828075c99f261c51c036d85c646cd",
+      "mechanical/case-prototype/harness_geometry.py": "5ec731368f04b256bb156fb27b9a94135696e66084a305ee3a8bfa39decd5672",
+      "mechanical/case-prototype/hinges.py": "7a4803a568a0c45ab77072926ae41a667eab80a0c85196a26dfa173812b75f8a",
+      "mechanical/case-prototype/radio_hardware.py": "7b445ad946393b2b038533c2b665ae263283adce5e0939a525c9b0f3f4c9832a",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-connector-access.json": "63ac4ffa038947f686031fa7795131dd20af9955ba6e19e8313f035b2f982bfe",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-connector-clearances.json": "44b86748076583801b4a0412c393a6cbd1c37a448112275532dbea5f9b37d819",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-harness-routing.json": "13fc3978a1c76499755d111ff25b8e0e856beca4a2281e94b04179f82a49fa22",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/board-datums.json": "eb7fe026fb0b33a691bc3c35ab325eea04b916b3411f6c935033a79a3d3c9db5",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/board-placement.json": "e732be977147f2d878bd38e04bdaed0645e22ea4aa8a79bd3412431380ddfe7e",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/power-harness-checks.json": "290338efa0dc241427174403b3b8f94746328e78a94914ede7a9df05e11f99f3",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/power-harness.json": "4016ffe4a1134de1758c097b28634249fb27f55597dac49b82fbe762f8fc7d0b",
+      "mechanical/case-prototype/reference/pcb-snapshot/manifest.json": "9fee31bb82621dbebe4d04e49780e43573476e4a36dd65c8d0b024f2e909d576",
+      "mechanical/case-prototype/service_carriers.py": "0ae9f787da099c85e26dbdca2c251169b78bb092cf3197034b4ad66547cfc786",
+      "mechanical/case-prototype/assembly.json": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824",
+      "mechanical/case-prototype/board-inventory.json": "483f35bb3236877e841e96c6f9e68dde5fa4fb96372bdfb820d7e92112fc70c2",
+      "left_io/left_io.kicad_pcb": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
+      "ducktop2-center.kicad_pcb": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+      "right_io/right_io.kicad_pcb": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
+      "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+      "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
+      "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
+      "mechanical/flush-case/assembly.json": "0b25b127b614e6a6a44d64efc240870c7970611999bac99c5d460e1286f25468",
+      "mechanical/flush-case/build.py": "c9083b995784e591eace5d2b4c915641d9e04a348752a51b4c2a5979624a7c8b",
+      "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
+      "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
+      "mechanical/flush-case/usb_collision.py": "f39fbd1a947d1dbca9c1d11e1310865a090272a6351ef8d9ae6193690d663b70",
+      "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
+      "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
+      "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+      "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
+      "mechanical/flush-case/remote_cooler.py": "44b3603cb4915f39c6191eba0119fcfa86b02b9338424d6b63c5efa938716686",
+      "mechanical/flush-case/cooler.json": "9915158e8d71e9df442f8ca10e0d8a12d3d4b5bd72da61d1034452e5ed4bc2a4",
+      "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
+      "mechanical/flush-case/check_cooler.py": "834fb23815c278f048e983eeca4d2fb4f67cd4289a0fa2730796b995e7df3d70",
+      "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
+      "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de"
+    },
+    "configuration": {
+      "date": "2026-10-10",
+      "status": "prototype cooling layout; no thermal or mounting-load qualification",
+      "fan": {
+        "part": "BFB04512HHA-DV52",
+        "manufacturer": "Delta Electronics",
+        "drawing": "https://www.delta-fan.com/Download/Spec/BFB04512HHA-DV52.pdf",
+        "drawing_revision": "04, 2 April 2025",
+        "model_url": "https://www.delta-fan.com/Download/3D/BFB04512HHA-DV52.stp",
+        "xy": [
+          298.5,
+          124.0
+        ],
+        "bottom_H": 5.9,
+        "body_mm": [
+          45.0,
+          45.0,
+          10.3
+        ],
+        "maximum_body_mm": [
+          45.5,
+          45.5,
+          10.6
+        ],
+        "position_allowance_mm": 0.2,
+        "upper_inlet_space_mm": 3.0,
+        "mount_pitch_mm": 38.5,
+        "mount_hole_diameter_mm": 2.8,
+        "rated_voltage_V": 12,
+        "specification_voltage_range_V": [
+          5.0,
+          13.5
+        ],
+        "current_A": {
+          "typical": 0.14,
+          "maximum": 0.26
+        },
+        "power_W": {
+          "typical": 1.68,
+          "maximum": 3.12
+        },
+        "free_air_m3_min": {
+          "typical": 0.102,
+          "minimum": 0.083
+        },
+        "shutoff_pressure_mmH2O": {
+          "typical": 15.2,
+          "minimum": 11.53
+        },
+        "typical_curve_m3_min_mmH2O": [
+          [
+            0,
+            15.2
+          ],
+          [
+            0.02,
+            13.5
+          ],
+          [
+            0.04,
+            11.1
+          ],
+          [
+            0.06,
+            8.3
+          ],
+          [
+            0.08,
+            4.9
+          ],
+          [
+            0.1,
+            0.15
+          ],
+          [
+            0.102,
+            0
+          ]
+        ],
+        "curve_basis": "approximate manual reading of the manufacturer P-Q plot; not a guaranteed minimum curve",
+        "wire_map": {
+          "black": "GND",
+          "red": "12V",
+          "white": "FG",
+          "yellow": "PWM"
+        },
+        "control": {
+          "PWM_Hz": 25000,
+          "minimum_start_duty_percent": 35,
+          "tach_pulses_per_rev": 2,
+          "floating_PWM": "full speed"
+        },
+        "lead_length_mm": {
+          "nominal": 150,
+          "tolerance": 10
+        },
+        "lead_gauge_AWG": 32,
+        "selection_note": "The former CZ0T listing is bulk/non-stocked. DV52 has a single-unit distributor listing and its own current drawing and CAD. Availability must be checked again before buying.",
+        "listing": "https://www.mouser.ca/ProductDetail/Delta-Electronics/BFB04512HHA-DV52?qs=%2FW4LtXOBxKt2G4BsUBcB%252BQ%3D%3D"
+      },
+      "pipes": {
+        "part": "ATS-HP-F6L250S50W-023",
+        "manufacturer": "Advanced Thermal Solutions",
+        "quantity": 2,
+        "drawing": "https://www.qats.com/DataSheet/ATS-HP-F6L250S50W-023",
+        "drawing_revision": "R9-0918",
+        "stock_length_mm": 250.0,
+        "length_tolerance_mm": 5.0,
+        "width_mm": 8.0,
+        "width_tolerance_mm": 0.5,
+        "height_mm": 3.0,
+        "height_tolerance_mm": 0.5,
+        "position_allowance_mm": 0.2,
+        "vertical_position_allowance_mm": 0.1,
+        "catalogue_Qt_W_m": 9.34,
+        "catalogue_minimum_radius_for_6mm_mm": 18,
+        "hot_center_x": 209.5,
+        "hot_start_y": 30.0,
+        "first_tangent_y": 60.0,
+        "cold_center_x": 353.5,
+        "centerline_radius_mm": 30.0,
+        "lane_offsets_mm": [
+          -4.5,
+          4.5
+        ],
+        "bottom_H": 16.537,
+        "clearance_above_maximum_mm": 0.3,
+        "forming_approved": false,
+        "formed_capacity_verified": false,
+        "note": "Both sealed ends remain intact. Two opposite turns lie in the broad-face plane. The supplier must approve this forming process and the finished transport capacity; the catalogue radius table alone does not approve it."
+      },
+      "plate": {
+        "material": "copper",
+        "thickness_mm": 2.0,
+        "groove_floor_H": 16.437,
+        "CPU_TIM": "MX-6 ACTCP00080A, retained sample candidate",
+        "memory_TIM": "Tflex HD330 0.75 mm, retained sample candidate",
+        "nominal_bondline_mm": 0.1,
+        "mount_reference": "DFRobot FIT1049, three existing module mounting points",
+        "clamp_load_verified": false,
+        "manufacturing_ready": false
+      },
+      "fins": {
+        "material": "copper",
+        "xywh": [
+          344.5,
+          123.0,
+          18.0,
+          52.0
+        ],
+        "bottom_H": 5.9,
+        "top_H": 20.0,
+        "count": 48,
+        "thickness_mm": 0.3,
+        "note": "Custom fin stack. Slot sizes are fit allowances, not finished solder or adhesive joints. Air distribution, pressure drop and production method need a physical sample."
+      },
+      "thermal_screen": {
+        "heat_W": 40,
+        "heat_basis": "37 W processor maximum turbo plus a provisional 3 W local allowance; a design case, not a changed firmware limit",
+        "inlet_C": 35,
+        "package_surface_target_C": 85,
+        "note": "A preliminary thermal budget cannot prove sustained CPU performance or junction temperature."
+      },
+      "PCB_changes_applied": false,
+      "fan_endpoint_schematic_updated": false,
+      "physical_fit_verified": false,
+      "thermal_performance_verified": false
+    },
+    "nominal_rigid_conflicts": [],
+    "size_position_and_inlet_conflicts": [],
+    "internal_cooler_conflicts": [],
+    "component_height_screen": {
+      "unverified_component_height_screens": [],
+      "component_height_crossings": [
+        {
+          "part": "center/H1",
+          "mpn": "9774055243R",
+          "near": "stepped-copper-plate",
+          "available_height_mm": 10.237,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 9.5,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Chosen maximum installed stack for spacer, module PCB, retaining screw and clearance. The spacer itself is 5.6 mm maximum; the complete fastening stack must be selected and measured against this budget before cooler fabrication.",
+          "source": "https://www.we-online.com/components/products/datasheet/9774055243R.pdf",
+          "planning_gap_mm": 0.737
+        },
+        {
+          "part": "center/H2",
+          "mpn": "9774055243R",
+          "near": "stepped-copper-plate",
+          "available_height_mm": 10.237,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 9.5,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Chosen maximum installed stack for spacer, module PCB, retaining screw and clearance. The spacer itself is 5.6 mm maximum; the complete fastening stack must be selected and measured against this budget before cooler fabrication.",
+          "source": "https://www.we-online.com/components/products/datasheet/9774055243R.pdf",
+          "planning_gap_mm": 0.737
+        },
+        {
+          "part": "center/FPC103",
+          "mpn": "5039085120",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 4.4,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Installed connector, cable-end seating and assembly allowance. The exact connector has 3.75 mm nominal mated height; confirm the complete fitted cable remains within 4.4 mm.",
+          "source": "https://www.molex.com/en-us/products/part-detail/5039085120",
+          "planning_gap_mm": 6.537
+        },
+        {
+          "part": "center/FPC103",
+          "mpn": "5039085120",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 4.4,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Installed connector, cable-end seating and assembly allowance. The exact connector has 3.75 mm nominal mated height; confirm the complete fitted cable remains within 4.4 mm.",
+          "source": "https://www.molex.com/en-us/products/part-detail/5039085120",
+          "planning_gap_mm": 6.537
+        },
+        {
+          "part": "center/H3",
+          "mpn": "M2XC4X2.5+C2.7X1.5",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 6.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Maximum allowed installed space for the M.2 retainer, card, washer and screw. This is an assembly limit to verify on the selected hardware, not a manufacturer dimension.",
+          "source": "case mounting schedule: 2.5 mm M.2 retainer; final card and screw stack must fit within 6 mm above the host PCB",
+          "planning_gap_mm": 4.937
+        },
+        {
+          "part": "center/J10",
+          "mpn": "MDT420M01001",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 5.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Socket envelope chosen above the published 4.2 mm nominal height. Confirm the seated socket; this does not cover the full SSD or its insertion sweep.",
+          "source": "https://www.amphenol-cs.com/product/mdt420m01001.html",
+          "planning_gap_mm": 5.937
+        },
+        {
+          "part": "center/J10",
+          "mpn": "MDT420M01001",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 5.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Socket envelope chosen above the published 4.2 mm nominal height. Confirm the seated socket; this does not cover the full SSD or its insertion sweep.",
+          "source": "https://www.amphenol-cs.com/product/mdt420m01001.html",
+          "planning_gap_mm": 5.937
+        },
+        {
+          "part": "center/J2462",
+          "mpn": "2060-451/998-404",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 4.8,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "2060 body reservation of 4.5 mm plus 0.3 mm assembly space; button-tool space is checked separately.",
+          "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-451_998-404",
+          "planning_gap_mm": 6.137
+        },
+        {
+          "part": "center/R2444",
+          "mpn": "ERJ3RQFR33V",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://industrial.panasonic.com/cdbs/www-data/pdf/RDN0000/AOA0000C313.pdf",
+          "note": "Current-sensing thick-film catalogue, 29 September 2023, page 5: ERJ3R thickness T is 0.45 +/-0.10 mm.",
+          "planning_gap_mm": 10.087
+        },
+        {
+          "part": "right/C165",
+          "mpn": "GRM155R71C472KA01D",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 1.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Conservative installed capacitor-and-solder allocation for this exact part and saved 0402 footprint. This is not a claimed manufacturer maximum; confirm the fitted part stays below 1.0 mm.",
+          "source": "saved component identity and footprint",
+          "planning_gap_mm": 9.937
+        },
+        {
+          "part": "right/C501",
+          "mpn": "GRM155R71C224KA12D",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 1.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Conservative installed capacitor-and-solder allocation for this exact part and saved 0402 footprint. This is not a claimed manufacturer maximum; confirm the fitted part stays below 1.0 mm.",
+          "source": "saved component identity and footprint",
+          "planning_gap_mm": 9.937
+        },
+        {
+          "part": "right/C502",
+          "mpn": "GRM155R71C224KA12D",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 1.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Conservative installed capacitor-and-solder allocation for this exact part and saved 0402 footprint. This is not a claimed manufacturer maximum; confirm the fitted part stays below 1.0 mm.",
+          "source": "saved component identity and footprint",
+          "planning_gap_mm": 9.937
+        },
+        {
+          "part": "right/C503",
+          "mpn": "GRM155R71C224KA12D",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 1.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Conservative installed capacitor-and-solder allocation for this exact part and saved 0402 footprint. This is not a claimed manufacturer maximum; confirm the fitted part stays below 1.0 mm.",
+          "source": "saved component identity and footprint",
+          "planning_gap_mm": 9.937
+        },
+        {
+          "part": "right/C506",
+          "mpn": "GRM155R71C104KA88D",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.murata.com/en-global/api/pdfdownloadapi?cate=luCeramicCapacitorsSMD&partno=GRM155R71C104KA88%23",
+          "note": "Exact manufacturer product sheet: T=0.50+/-0.05mm; packaging code is separate from chip dimensional control code.",
+          "planning_gap_mm": 10.087
+        },
+        {
+          "part": "right/C513",
+          "mpn": "GRM155R71C104KA88D",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.murata.com/en-global/api/pdfdownloadapi?cate=luCeramicCapacitorsSMD&partno=GRM155R71C104KA88%23",
+          "note": "Exact manufacturer product sheet: T=0.50+/-0.05mm; packaging code is separate from chip dimensional control code.",
+          "planning_gap_mm": 10.087
+        },
+        {
+          "part": "right/FPC104",
+          "mpn": "5039085120",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 4.4,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Installed connector, cable-end seating and assembly allowance. The exact connector has 3.75 mm nominal mated height; confirm the complete fitted cable remains within 4.4 mm.",
+          "source": "https://www.molex.com/en-us/products/part-detail/5039085120",
+          "planning_gap_mm": 6.537
+        },
+        {
+          "part": "right/FPC104",
+          "mpn": "5039085120",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 4.4,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Installed connector, cable-end seating and assembly allowance. The exact connector has 3.75 mm nominal mated height; confirm the complete fitted cable remains within 4.4 mm.",
+          "source": "https://www.molex.com/en-us/products/part-detail/5039085120",
+          "planning_gap_mm": 6.537
+        },
+        {
+          "part": "right/H17",
+          "mpn": null,
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 4.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Maximum allocated screw-head and washer stack above the PCB. The screw is not selected; qualify its fit and load before assembly.",
+          "source": "saved M2.5 mounting footprint and case support",
+          "planning_gap_mm": 6.937
+        },
+        {
+          "part": "right/H17",
+          "mpn": null,
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 4.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Maximum allocated screw-head and washer stack above the PCB. The screw is not selected; qualify its fit and load before assembly.",
+          "source": "saved M2.5 mounting footprint and case support",
+          "planning_gap_mm": 6.937
+        },
+        {
+          "part": "right/J500",
+          "mpn": "JXD1-1022NL",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 9.940000000000001,
+          "manufacturer_maximum_mm": 9.64,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://yageogroup.com/content/datasheet/asset/file/DATASHEET_J513",
+          "note": "J513.C, 28 May 2026, page 2: recessed PCB seating plane to top is 9.39 mm; default tolerance is +/-0.25 mm. The 11.30 mm dimension includes material below that seating plane.",
+          "planning_gap_mm": 0.997
+        },
+        {
+          "part": "right/J500",
+          "mpn": "JXD1-1022NL",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 9.940000000000001,
+          "manufacturer_maximum_mm": 9.64,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://yageogroup.com/content/datasheet/asset/file/DATASHEET_J513",
+          "note": "J513.C, 28 May 2026, page 2: recessed PCB seating plane to top is 9.39 mm; default tolerance is +/-0.25 mm. The 11.30 mm dimension includes material below that seating plane.",
+          "planning_gap_mm": 0.997
+        },
+        {
+          "part": "right/Q50",
+          "mpn": "BSS138LT1G",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 1.4200000000000002,
+          "manufacturer_maximum_mm": 1.12,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.alldatasheet.com/html-pdf/115982/ONSEMI/BSS138LT1G/1119/5/BSS138LT1G.html",
+          "note": "ONSemiconductor exactBSS138LT1G drawing page5, case318-08issueAH: heightC max0.044in, printed1.11mm. Drawing statesinchcontrols;0.044x25.4=1.1176mm, conservativelyroundedup to1.12mm. NotinferredfromcachedBSS138nonLsheet.",
+          "planning_gap_mm": 9.517
+        },
+        {
+          "part": "right/R165",
+          "mpn": "RC0402FR-072K2L",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.7,
+          "manufacturer_maximum_mm": 0.4,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_51_ROHS_P",
+          "note": "Yageo RC_L product specification, page 4: RC0402 H=0.35+/-0.05mm across resistance values.",
+          "planning_gap_mm": 10.237
+        },
+        {
+          "part": "right/R169",
+          "mpn": "RC0402FR-07100KL",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.7,
+          "manufacturer_maximum_mm": 0.4,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_51_ROHS_P",
+          "note": "Yageo RC_L product specification, page 4: RC0402 H=0.35+/-0.05mm across resistance values.",
+          "planning_gap_mm": 10.237
+        },
+        {
+          "part": "right/R502",
+          "mpn": "RC0402FR-0710KL",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.7,
+          "manufacturer_maximum_mm": 0.4,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_51_ROHS_P",
+          "note": "Yageo RC_L product specification, page 4: RC0402 H=0.35+/-0.05mm across resistance values.",
+          "planning_gap_mm": 10.237
+        },
+        {
+          "part": "right/R502",
+          "mpn": "RC0402FR-0710KL",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.7,
+          "manufacturer_maximum_mm": 0.4,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_51_ROHS_P",
+          "note": "Yageo RC_L product specification, page 4: RC0402 H=0.35+/-0.05mm across resistance values.",
+          "planning_gap_mm": 10.237
+        },
+        {
+          "part": "right/R505",
+          "mpn": "RC0402FR-07470RL",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.7,
+          "manufacturer_maximum_mm": 0.4,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_51_ROHS_P",
+          "note": "Yageo RC_L product specification, page 4: RC0402 H=0.35+/-0.05mm across resistance values.",
+          "planning_gap_mm": 10.237
+        },
+        {
+          "part": "right/R2043",
+          "mpn": "RC0603FR-074K7L",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 10.087
+        },
+        {
+          "part": "right/R2044",
+          "mpn": "RC0603FR-074K7L",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 10.087
+        },
+        {
+          "part": "right/U55",
+          "mpn": "TPS22975NDSGR",
+          "near": "heatpipe-2-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 1.1,
+          "manufacturer_maximum_mm": 0.8,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.ti.com/lit/ds/symlink/tps22975.pdf",
+          "note": "DSG0008A WSON outline 4218900/E, August 2022: 0.8 mm maximum height.",
+          "planning_gap_mm": 9.837
+        },
+        {
+          "part": "right/U500",
+          "mpn": "RTL8111H-CG-RH",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 2.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Conservative installed QFN and solder allocation. The exact ordering-code height has not been verified; confirm the fitted part stays below 2.0 mm.",
+          "source": "saved RTL8111H-CG-RH identity and QFN-32 footprint",
+          "planning_gap_mm": 8.937
+        },
+        {
+          "part": "right/U502",
+          "mpn": "D3V3XA4B10LP-7",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 0.905,
+          "manufacturer_maximum_mm": 0.605,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.diodes.com/datasheet/download/D3V3XA4B10LP.pdf",
+          "note": "DS40860 revision 2-2, page 4: dimension A is 0.605 mm maximum for U-DFN2510-10.",
+          "planning_gap_mm": 10.032
+        },
+        {
+          "part": "right/Y500",
+          "mpn": "ECS-250-8-33-AGN-TR",
+          "near": "heatpipe-1-upper-clearance",
+          "available_height_mm": 10.937,
+          "screen": "saved courtyard against the conservative plan of a constant-height pipe extrusion",
+          "height_mm": 1.5,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Conservative installed crystal and solder allocation. No ECX-33Q height is transferred to this different ordering code; confirm the fitted part stays below 1.5 mm.",
+          "source": "saved ECS-250-8-33-AGN-TR identity and 3225 footprint",
+          "planning_gap_mm": 9.437
+        }
+      ],
+      "known_component_height_conflicts": [],
+      "assembly_height_reservations": [
+        "center/FPC103",
+        "center/H1",
+        "center/H2",
+        "center/H3",
+        "center/J10",
+        "center/J2462",
+        "right/C165",
+        "right/C501",
+        "right/C502",
+        "right/C503",
+        "right/FPC104",
+        "right/H17",
+        "right/U500",
+        "right/Y500"
+      ]
+    },
+    "pipe_routes": [
+      {
+        "analytic_length_mm": 250.0,
+        "bend_radii_mm": [
+          34.5,
+          25.5
+        ],
+        "cold_straight_mm": 41.752220392306214,
+        "cold_end_xy_mm": [
+          349.0,
+          161.7522203923062
+        ],
+        "sampled_length_mm": 249.99992605949765,
+        "lane_offset_mm": -4.5,
+        "minimum_inside_radius_mm": 21.25,
+        "ideal_hot_contact_span_mm": 51.08903825833846,
+        "ideal_cold_contact_span_mm": 38.752220392306214,
+        "ideal_effective_length_mm": 205.07937067467765,
+        "straight_catalogue_comparison_W": 45.54334241066239
+      },
+      {
+        "analytic_length_mm": 250.0,
+        "bend_radii_mm": [
+          25.5,
+          34.5
+        ],
+        "cold_straight_mm": 41.752220392306214,
+        "cold_end_xy_mm": [
+          358.0,
+          161.7522203923062
+        ],
+        "sampled_length_mm": 249.99992605949768,
+        "lane_offset_mm": 4.5,
+        "minimum_inside_radius_mm": 21.25,
+        "ideal_hot_contact_span_mm": 52.67067093377892,
+        "ideal_cold_contact_span_mm": 38.752220392306214,
+        "ideal_effective_length_mm": 204.28855433695742,
+        "straight_catalogue_comparison_W": 45.71964410984292
+      }
+    ],
+    "pipe_mount_space_conflicts": [],
+    "nominal_geometry_pass": true,
+    "part_bounds_construction_frame": {
+      "delta-blower": [
+        298.5,
+        -169.0,
+        5.9,
+        343.5,
+        -124.0,
+        16.2
+      ],
+      "blower-size-and-position-allowance": [
+        298.05,
+        -169.45,
+        5.7,
+        343.95,
+        -123.55,
+        16.7
+      ],
+      "blower-inlet-space": [
+        298.05,
+        -169.45,
+        16.7,
+        343.95,
+        -123.55,
+        19.7
+      ],
+      "heatpipe-1": [
+        201.0,
+        -161.75222,
+        16.537,
+        353.0,
+        -30.0,
+        19.537
+      ],
+      "heatpipe-1-size-and-position-allowance": [
+        200.55,
+        -166.95222,
+        16.437,
+        353.45,
+        -29.8,
+        20.137
+      ],
+      "heatpipe-1-upper-clearance": [
+        200.55,
+        -166.95222,
+        16.437,
+        353.45,
+        -29.8,
+        20.437
+      ],
+      "heatpipe-2": [
+        210.0,
+        -161.75222,
+        16.537,
+        362.0,
+        -30.0,
+        19.537
+      ],
+      "heatpipe-2-size-and-position-allowance": [
+        209.55,
+        -166.95222,
+        16.437,
+        362.45,
+        -29.8,
+        20.137
+      ],
+      "heatpipe-2-upper-clearance": [
+        209.55,
+        -166.95222,
+        16.437,
+        362.45,
+        -29.8,
+        20.437
+      ],
+      "stepped-copper-plate": [
+        184.3,
+        -79.8,
+        13.487,
+        235.8,
+        -10.2,
+        17.737
+      ],
+      "slotted-copper-fin-stack": [
+        344.5,
+        -175.0,
+        5.9,
+        362.5,
+        -123.0,
+        20.0
+      ],
+      "CPU-mount-1-space": [
+        186.5,
+        -29.16,
+        15.737,
+        193.0,
+        -22.66,
+        19.237
+      ],
+      "CPU-mount-2-space": [
+        186.5,
+        -65.81,
+        15.737,
+        193.0,
+        -59.31,
+        19.237
+      ],
+      "CPU-mount-3-space": [
+        227.13,
+        -47.49,
+        15.737,
+        233.63,
+        -40.99,
+        19.237
+      ]
+    },
+    "PCB_changes_applied": false,
+    "fan_endpoint_schematic_updated": false,
+    "physical_fit_verified": false,
+    "formed_pipe_capacity_verified": false,
+    "CPU_clamp_load_verified": false,
+    "thermal_performance_verified": false,
+    "manufacturing_ready": false,
+    "limits": [
+      "Nominal PCB models do not replace the component-height screen.",
+      "The keyboard carrier is a reservation; openings need structural and underside-component checks.",
+      "Continuous hot/cold spans are assumed only for the catalogue heatpipe comparison.",
+      "The fan harness, cooler mounts, duct, inlet supply and final joint geometry are unfinished."
+    ]
+  },
   "radio_internal": false,
   "PCB_files_unchanged": true,
   "complete_fit_verified": false,
@@ -958,10 +1818,10 @@
   "limitations": [
     "Base and lid use the same nominal rounded outline. The front remains at Y256. The previous rear base strip from Y-26 to Y-18 is removed.",
     "No forward radio or trackpad relocation is used. The radio and GNSS move to an external accessory; its external electrical interface is not designed here.",
-    "All PCB files remain unchanged. The fan pocket is only a proposed board cutout, and its 11 affected footprints still need moving.",
-    "The USB power pair uses a shorter path behind the keyboard, with its crossover outside the input supports. Other power paths retain their lowered board datum. All clamp screw envelopes are included.",
+    "All PCB files remain unchanged. The smaller fan sits beyond the center-board edge; the former circular board cutout is not used.",
+    "The USB power pair passes behind the keyboard and drops locally beneath the heatpipes. Terminal positions remain fixed. All clamp screw envelopes are included.",
     "The USB guide rails attach to removable keyboard-carrier tabs. Endpoint seam clamps take plug pull loads. Carrier stiffness, fastener fit and dressed-harness deflection still need physical tests.",
-    "The pipe corridor is not a manufactured heatpipe. Cooling capacity, fan/shroud details, CPU clamp load and electrical fan interface remain unqualified.",
+    "Two 250 mm catalogue heatpipes and a stepped contact plate replace the rough cooler volume. Forming, final bonds, duct airflow, mounts and CPU clamp load still need qualification.",
     "Cell maximum thickness, trackpad/plug dimensions and panel thickness/mass still need measurement. The 11 mm cells, 5 mm trackpad and 3.5 mm panel remain assumptions or nominal listing values.",
     "Thin panels, the keyboard carrier and hinge supports need structural design and load tests. This is not a fabrication or print release.",
     "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement."

@@ -54,6 +54,9 @@ def inputs():
             data[str(p.relative_to(ROOT))]=sha(p)
         for p in [ROOT/'mechanical/component-placement.json',BASE/'height-allowances.json']:
             data[str(p.relative_to(ROOT))]=sha(p)
+    if C.get('cooling_layout'):
+        for name in ['remote_cooler.py','cooler.json','cooler-part-heights.json','check_cooler.py','reference/delta-fan-source.json','reference/BFB04512HHA-DV52.step']:
+            p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
     return data
 
 
@@ -114,7 +117,9 @@ def fresh_model():
     cx,cy=C['cooling']['fan_center'];rr=C['cooling']['fan_radius']
     body=body.cut(cylinder(cx,cy,-.1,rr-4,floor+.2))
     fx,fy,fw,fd=C['cooling']['fins_xywh']
-    walls=walls.cut(box(o['x_max']-b['wall']-.1,fy-.5,1.8,2,fd+1,7))
+    exhaust_bottom=C['cooling']['fan_bottom_H'] if C.get('cooling_layout') else 1.8
+    exhaust_height=C['cooling']['fins_height']+.5 if C.get('cooling_layout') else 7
+    walls=walls.cut(box(o['x_max']-b['wall']-.1,fy-.5,exhaust_bottom-.25,2,fd+1,exhaust_height))
     # Existing ports stay in their current XY positions. Generous service slots
     # keep the shape study from claiming finished connector openings.
     walls=walls.cut(box(o['x_min']-.1,18,4,2,139,14))
@@ -131,6 +136,9 @@ def fresh_model():
     kh=C['keyboard']['carrier_bottom_H']
     carrier=box(41.25,19,kh,275.5,82,1).cut(box(306,50,kh-.1,24,23,1.2))
     if C.get('usb_power_route'):carrier=usb_harness.carrier_tabs(carrier)
+    if C.get('cooling_layout'):
+        import remote_cooler
+        carrier=remote_cooler.carrier_reliefs(carrier)
     add('keyboard-carrier-reservation',carrier,'supports')
     tp=dt-t['body_thickness'];support=tp-t['click_travel']-t['under_clearance']-t['support_thickness']
     add('trackpad-body-reservation',box(t['x'],t['y'],tp,t['width'],t['depth'],t['body_thickness']),'inputs')
@@ -193,12 +201,14 @@ def fresh_model():
     bezel=bezel.cut(box(o['x_min']-1,hy-4,ph-1,width+2,31,2))
     add('bezel',bezel,'lid',True)
     co=C['cooling'];fh=co['fan_bottom_H']
-    add('fan-body-reservation',cylinder(cx,cy,fh,rr,co['fan_height_with_allowance']),'cooling')
-    add('fan-intake-space',cylinder(cx,cy,fh+co['fan_height_with_allowance'],rr,co['fan_inlet_height']),'keepout')
-    add('fin-reservation',box(fx,fy,fh,fw,fd,co['fins_height']),'cooling')
-    add('CPU-cooler-height-budget',box(193,30,co['CPU_contact_top_H'],33,31,co['CPU_cooling_height_budget']),'cooling')
-    # Keep the current board in the assembly. The red notch is an unapplied change.
-    add('proposed-fan-cutout',cylinder(cx,cy,3.9,co['board_pocket_radius'],1.6),'changes')
+    if C.get('cooling_layout'):
+        parts.extend(remote_cooler.make_parts(C))
+    else:
+        add('fan-body-reservation',cylinder(cx,cy,fh,rr,co['fan_height_with_allowance']),'cooling')
+        add('fan-intake-space',cylinder(cx,cy,fh+co['fan_height_with_allowance'],rr,co['fan_inlet_height']),'keepout')
+        add('fin-reservation',box(fx,fy,fh,fw,fd,co['fins_height']),'cooling')
+        add('CPU-cooler-height-budget',box(193,30,co['CPU_contact_top_H'],33,31,co['CPU_cooling_height_budget']),'cooling')
+        add('proposed-fan-cutout',cylinder(cx,cy,3.9,co['board_pocket_radius'],1.6),'changes')
     assert before==inputs(),'source files changed during build'
     CACHE.mkdir(parents=True,exist_ok=True);rows=[]
     for i,p in enumerate(parts):
@@ -211,6 +221,9 @@ def fresh_model():
 def load_model():
     d=json.loads((CACHE/'model.json').read_text());assert d['source_hashes']==inputs(),'candidate cache stale'
     parts=[{**{k:v for k,v in p.items() if k!='brep'},'shape':cq.Shape.importBrep(str(CACHE/p['brep']))} for p in d['parts']]
+    if C.get('cooling_layout'):
+        import remote_cooler
+        remote_cooler.register_shapes(parts)
     return parts,d['source_hashes'],d['hinge_supports']
 
 
@@ -233,6 +246,7 @@ def check(parts,before,mounts):
     obstacles=[p for p in fixed if p['group'] in ['boards','wiring','cells','inputs']]
     candidates=[p for p in fixed if p['group'] in ['shell','deck','supports','cooling']]
     for p in candidates:
+        if p.get('remote_cooler'):continue # Dedicated size, cable and height checks below.
         for q in obstacles:
             if C.get('usb_power_route') and q['name'].startswith(('usb5-','harness-USB-')):continue
             if not bbox_overlap(p['shape'],q['shape']):continue
@@ -242,6 +256,10 @@ def check(parts,before,mounts):
     if C.get('usb_power_route'):
         import usb_clearances
         usb_checks=usb_clearances.check(parts,C)
+    cooler_checks=None
+    if C.get('cooling_layout'):
+        import check_cooler
+        cooler_checks=check_cooler.evaluate(parts,C,before.copy(),draw=False)
     h=C['hinges'];o=C['outline'];l=C['lid']
     # This geometric check detects a fixed rear platform behind the open lid's
     # back plane, rather than assuming that equal closed outlines are sufficient.
@@ -283,7 +301,7 @@ def check(parts,before,mounts):
                            'last_clear_sample_before_first_collision_deg':sweep[0]['angle_deg']-2 if sweep else 180,
                            'scope':'new rigid shell, panel reservation and actual OEM hinge parts versus retained PCB models, power harness and candidate supports; OEM internal bearing contact excluded'},
             'rear_projection_screen':no_shelf,'internal_interferences':internals,'hinge_supports':mounts,
-            'USB_harness_checks':usb_checks,
+            'USB_harness_checks':usb_checks,'cooler_checks':cooler_checks,
             'radio_internal':False,'PCB_files_unchanged':before==inputs(),'complete_fit_verified':False,
             'thermal_performance_verified':False,'structural_load_verified':False,'manufacturing_ready':False,
             'limitations':C['notes']}
@@ -298,7 +316,7 @@ def views(parts):
     render(visible,out/'closed.png','flush clamshell candidate / 370 x 274 mm / internal fit unfinished',direction=(1,-1.6,.75),size=(1750,1100))
     render([pose(p,105) for p in visible],out/'open.png','external radio / same lid and base outline / 105 degrees',direction=(1,-1.8,1.2),size=(1750,1200))
     inside=[p for p in parts if not p['moving'] and p['group'] not in ['shell','deck','inputs','keepout'] and not p['name'].startswith(('keyboard','trackpad'))]
-    render(inside,out/'inside.png','retained boards and wiring / red = proposed cutout / radio removed',direction=(.1,-.25,1.6),size=(1700,1150))
+    render(inside,out/'inside.png','right-side cooler and retained boards / no board cutout / radio external',direction=(.1,-.25,1.6),size=(1700,1150))
     section=[];clip=box(1,-30,0,65,62,50)
     for p in visible:
         if bbox_overlap(p['shape'],clip):
@@ -339,9 +357,9 @@ def export(parts):
         data.append({'name':p['name'],'group':p['group'],'moving':p['moving'],'color':list(p['color']),
                      'v':[[round(v,4) for v in q.toTuple()] for q in verts],'f':[list(t) for t in triangles]})
     config=copy.deepcopy(C);config['selected_profile']='flush-external-radio'
-    payload={'parts':data,'pivot':[0,-C['hinges']['pivot_y'],C['hinges']['pivot_height']],'findings':C['notes'],'configuration':config}
+    payload={'parts':data,'pivot':[0,-C['hinges']['pivot_y'],C['hinges']['pivot_height']],'findings':C['notes'],'configuration':config,'source_hashes':inputs()}
     template=(BASE/'viewer-template.html').read_text().replace('ducktop2 / case prototype','ducktop2 / flush case')
-    template=template.replace('370 × 282 mm base','370 × 274 mm matching outlines').replace('Current power wires are shown, including unresolved clashes.','Retained power wires and unapplied fan cutout are shown; see checks.json for clashes.')
+    template=template.replace('370 × 282 mm base','370 × 274 mm matching outlines').replace('Current power wires are shown, including unresolved clashes.','Right-side cooler and revised power guides; mounting and thermal tests remain unfinished.')
     (HERE/'inspection.html').write_text(template.replace('/*ASSEMBLY_DATA*/',json.dumps(payload,separators=(',',':'))))
 
 

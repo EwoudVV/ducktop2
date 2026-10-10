@@ -5,6 +5,28 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-10: fit the cooler without cutting the motherboard
+
+**Total time spent: 2 hours**
+
+managed to fit the cooler into the thinner case model without cutting the motherboard! the earlier fan pocket would have affected 11 components and 87 track/via items. tried a smaller 45 mm blower farther to the right, beside the center board, and found a position that clears the boards, power clamps and oleds. the case stays at the 33.3 mm closed-height target, with the same lid and base outline.
+
+the old fan variant was listed in bulk quantities, so picked the Delta BFB04512HHA-DV52 as the new candidate. checked its own drawing, model and electrical requirements. it still uses 12 V, the same wire functions and the existing pwm/tach circuit. its leads will need an extension to reach the header from this position.
+
+![the stepped plate, two full-length pipes and separate blower](docs/images/journal/2026-10-10-remote-cooler-parts.png)
+
+changed to two thinner 250 mm heatpipes and recessed them into the copper contact plate. kept the full pipe lengths and both sealed ends. the plate has separate cpu and memory contact faces, and the fins share a continuous copper collector. included the pipe width, thickness and length tolerances, plus room around the three processor mounting points.
+
+the first pipe route hit the usb power guides. gave the wires a gentle dip under the pipes while keeping both connectors in place. the whole paths still meet the bend and separation limits, with about 0.48 mm left at the tightest component after the allowances. also relieved the underside of the keyboard-carrier model for the pipes at maximum size.
+
+![the usb power guides passing below the heatpipes](docs/images/journal/2026-10-10-cooler-wire-crossing.png)
+
+checked the ethernet jack's recessed height and filled in the missing height records along the route. kept the actual manufacturer dimensions separate from the space allowed for complete plugs, screw heads and fitted parts. checked 33 places where the cooler passes over components, and they all have room in the model. the rebuilt power guides have no detected clashes either. checked the pipe lengths and clearance envelopes, then reopened both full case exports and the separate cooler assembly. all six pcb files stayed unchanged.
+
+![the separate cpu and memory contact faces under the plate](docs/images/journal/2026-10-10-cooler-contact.png)
+
+worked out an airflow test target too. with 40 W from the cooler and up to 3.12 W from the fan, keeping the exhaust air rise to 30 degrees needs about 2.64 cfm of actual airflow. that still needs a test with the finished fins and duct. next are the fan and fin supports, shroud and cpu clamp details. the pipes also need their bend shape approved before forming them, and i haven't built or thermally tested this cooler yet.
+
 # 2026-10-09: make the lid and base line up
 
 decided to keep the radio as an external accessory. that gets the radio board, gps and its mounting hardware out of the laptop, and leaves more room for the cooler. i also really don't want a lip at the front or a chunk sticking out behind the screen. checked the old case and found that the base was 8 mm deeper than the lid, so i shortened the rear of the base instead of making the lid or front bigger.

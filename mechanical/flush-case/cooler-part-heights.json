@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-10",
+  "scope": "additional heights below the right-side cooler; manufacturer dimensions and installed-height allocations are separate",
+  "manufacturer_maximums": {
+    "JXD1-1022NL": {
+      "height_mm": 9.64,
+      "source": "https://yageogroup.com/content/datasheet/asset/file/DATASHEET_J513",
+      "basis": "J513.C, 28 May 2026, page 2: recessed PCB seating plane to top is 9.39 mm; default tolerance is +/-0.25 mm. The 11.30 mm dimension includes material below that seating plane."
+    },
+    "TPS22975NDSGR": {
+      "height_mm": 0.8,
+      "source": "https://www.ti.com/lit/ds/symlink/tps22975.pdf",
+      "basis": "DSG0008A WSON outline 4218900/E, August 2022: 0.8 mm maximum height."
+    },
+    "D3V3XA4B10LP-7": {
+      "height_mm": 0.605,
+      "source": "https://www.diodes.com/datasheet/download/D3V3XA4B10LP.pdf",
+      "basis": "DS40860 revision 2-2, page 4: dimension A is 0.605 mm maximum for U-DFN2510-10."
+    }
+  },
+  "reservations": {
+    "center/FPC103": {
+      "mpn": "5039085120",
+      "footprint": "ducktop2:Molex_5039085120_1x51_P0.50mm_Horizontal",
+      "height_mm": 4.4,
+      "basis": "Installed connector, cable-end seating and assembly allowance. The exact connector has 3.75 mm nominal mated height; confirm the complete fitted cable remains within 4.4 mm.",
+      "source": "https://www.molex.com/en-us/products/part-detail/5039085120"
+    },
+    "right/FPC104": {
+      "mpn": "5039085120",
+      "footprint": "ducktop2:Molex_5039085120_1x51_P0.50mm_Horizontal",
+      "height_mm": 4.4,
+      "basis": "Installed connector, cable-end seating and assembly allowance. The exact connector has 3.75 mm nominal mated height; confirm the complete fitted cable remains within 4.4 mm.",
+      "source": "https://www.molex.com/en-us/products/part-detail/5039085120"
+    },
+    "right/H17": {
+      "mpn": null,
+      "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
+      "height_mm": 4.0,
+      "basis": "Maximum allocated screw-head and washer stack above the PCB. The screw is not selected; qualify its fit and load before assembly.",
+      "source": "saved M2.5 mounting footprint and case support"
+    },
+    "right/C165": {
+      "mpn": "GRM155R71C472KA01D",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "height_mm": 1.0,
+      "basis": "Conservative installed capacitor-and-solder allocation for this exact part and saved 0402 footprint. This is not a claimed manufacturer maximum; confirm the fitted part stays below 1.0 mm.",
+      "source": "saved component identity and footprint"
+    },
+    "right/C501": {
+      "mpn": "GRM155R71C224KA12D",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "height_mm": 1.0,
+      "basis": "Conservative installed capacitor-and-solder allocation for this exact part and saved 0402 footprint. This is not a claimed manufacturer maximum; confirm the fitted part stays below 1.0 mm.",
+      "source": "saved component identity and footprint"
+    },
+    "right/C502": {
+      "mpn": "GRM155R71C224KA12D",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "height_mm": 1.0,
+      "basis": "Conservative installed capacitor-and-solder allocation for this exact part and saved 0402 footprint. This is not a claimed manufacturer maximum; confirm the fitted part stays below 1.0 mm.",
+      "source": "saved component identity and footprint"
+    },
+    "right/C503": {
+      "mpn": "GRM155R71C224KA12D",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "height_mm": 1.0,
+      "basis": "Conservative installed capacitor-and-solder allocation for this exact part and saved 0402 footprint. This is not a claimed manufacturer maximum; confirm the fitted part stays below 1.0 mm.",
+      "source": "saved component identity and footprint"
+    },
+    "right/U500": {
+      "mpn": "RTL8111H-CG-RH",
+      "footprint": "Package_DFN_QFN:QFN-32-1EP_4x4mm_P0.4mm_EP2.65x2.65mm",
+      "height_mm": 2.0,
+      "basis": "Conservative installed QFN and solder allocation. The exact ordering-code height has not been verified; confirm the fitted part stays below 2.0 mm.",
+      "source": "saved RTL8111H-CG-RH identity and QFN-32 footprint"
+    },
+    "right/Y500": {
+      "mpn": "ECS-250-8-33-AGN-TR",
+      "footprint": "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm",
+      "height_mm": 1.5,
+      "basis": "Conservative installed crystal and solder allocation. No ECX-33Q height is transferred to this different ordering code; confirm the fitted part stays below 1.5 mm.",
+      "source": "saved ECS-250-8-33-AGN-TR identity and 3225 footprint"
+    }
+  },
+  "physical_fit_verified": false
+}

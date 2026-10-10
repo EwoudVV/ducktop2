@@ -7,8 +7,10 @@ CAD arrangement, not a physical fit or thermal qualification.
 
 the separate [flush case](../../mechanical/flush-case/README.md) now has a
 shorter USB power route behind the keyboard. its calculated ground/5 V
-cut lengths are 338.2/348.9 mm, and the guide rails attach to removable
-keyboard-carrier tabs. it retains the 420 mm electrical length ceiling.
+cut lengths are 338.3/349.2 mm after the 10 october change, and the guide
+rails attach to removable keyboard-carrier tabs. the pair drops locally
+beneath the heatpipes, with 0.48 mm minimum component-height margin after
+the stated allowances. it retains the 420 mm electrical length ceiling.
 the 400–420 mm USB cutting range and cell-gap carriers described below
 belong to the earlier case. the other sixteen power paths are unchanged
 apart from the common board-height translation.

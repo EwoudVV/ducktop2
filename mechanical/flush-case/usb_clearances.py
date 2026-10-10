@@ -85,7 +85,7 @@ def check(parts,case):
             if not bbox_overlap(p['shape'],q['shape']):continue
             volume=intersection_volume(p['shape'],q['shape'])
             if volume>.01:service.append({'fixed_foot':p['name'],'access':q['name'],'overlap_mm3':round(volume,4)})
-    result={'date':'2026-10-09','solid_conflicts':clashes,
+    result={'date':case['date'],'solid_conflicts':clashes,
             'conservative_bound_rejections':checker.bound_rejections,'exact_contact_checks':checker.exact_checks,
             'rigid_component_height_conflicts':conflicts,'unverified_rigid_component_heights':unknown,
             'fixed_feet_service_conflicts':service,

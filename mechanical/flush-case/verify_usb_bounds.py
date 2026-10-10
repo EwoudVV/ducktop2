@@ -70,7 +70,7 @@ def main():
                  (np.array([bracket-5.1,-125.9,0]),np.array([bracket+5.1,-100.9,26]))]
         test(p['name'],p['shape'],[checker.envelope(r['name'],True) for r in data['routes']],regions)
     assert before=={p:sha(ROOT/p) for p in before},'sources changed during bound verification'
-    result={'date':'2026-10-09','source_hashes':before,'mesh_deflection_mm':.05,'angular_tolerance':.1,
+    result={'date':case['date'],'source_hashes':before,'mesh_deflection_mm':.05,'angular_tolerance':.1,
             'checks':rows,'all_sampled_vertices_covered':all(r['pass'] for r in rows),
             'scope':'sampled CAD surface validation of channel bounds and non-channel crop coverage; not a continuous-surface or manufacturing-tolerance proof'}
     (HERE/'usb-bound-validation.json').write_text(json.dumps(result,indent=2)+'\n')

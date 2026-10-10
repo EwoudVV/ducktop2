@@ -1,29 +1,103 @@
 {
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "units": "mm",
   "status": "separate external-radio case candidate; unfinished wiring, cooling and support details remain visible",
-  "outline": {"x_min": -6, "x_max": 364, "y_min": -18, "y_max": 256, "corner_radius": 5},
-  "base": {"floor": 1.2, "wall": 1.2, "deck_top": 25, "deck_thickness": 1.2},
-  "hinges": {"pivot_x": [30, 328], "pivot_y": -15, "pivot_height": 19.3, "view_angle": 105, "check_step_deg": 2, "requested_opening_deg": null},
-  "lid": {"skin": 1, "back_inner_height_from_axis": 13, "rim_bottom_height_from_axis": 8, "rim_thickness": 1.2, "rear_lower_bevel": 1.2,
-          "panel_x": 3, "panel_y": 20, "panel_width": 352, "panel_depth": 227, "panel_thickness": 3.5, "panel_back_height_from_axis": 12.5},
-  "boards": {"main_bottom_H": 3.9, "bms_bottom_H": 7.9, "keyboard_bottom_H": 21, "radio_internal": false},
+  "outline": {
+    "x_min": -6,
+    "x_max": 364,
+    "y_min": -18,
+    "y_max": 256,
+    "corner_radius": 5
+  },
+  "base": {
+    "floor": 1.2,
+    "wall": 1.2,
+    "deck_top": 25,
+    "deck_thickness": 1.2
+  },
+  "hinges": {
+    "pivot_x": [
+      30,
+      328
+    ],
+    "pivot_y": -15,
+    "pivot_height": 19.3,
+    "view_angle": 105,
+    "check_step_deg": 2,
+    "requested_opening_deg": null
+  },
+  "lid": {
+    "skin": 1,
+    "back_inner_height_from_axis": 13,
+    "rim_bottom_height_from_axis": 8,
+    "rim_thickness": 1.2,
+    "rear_lower_bevel": 1.2,
+    "panel_x": 3,
+    "panel_y": 20,
+    "panel_width": 352,
+    "panel_depth": 227,
+    "panel_thickness": 3.5,
+    "panel_back_height_from_axis": 12.5
+  },
+  "boards": {
+    "main_bottom_H": 3.9,
+    "bms_bottom_H": 7.9,
+    "keyboard_bottom_H": 21,
+    "radio_internal": false
+  },
   "usb_power_route": "behind-keyboard-v1",
-  "keyboard": {"carrier_thickness": 1, "carrier_bottom_H": 20},
-  "trackpad": {"x": 109, "y": 143, "width": 140, "depth": 105, "body_thickness": 5, "click_travel": 1,
-               "under_clearance": 0.5, "support_thickness": 1},
-  "cooling": {"fan_center": [309, 152], "fan_radius": 32.5, "fan_bottom_H": 1.8, "fan_height_with_allowance": 6,
-              "fan_inlet_height": 3, "board_pocket_radius": 34, "fins_xywh": [343, 119.6, 19, 64.8], "fins_height": 6.54,
-              "CPU_contact_top_H": 13.386, "CPU_cooling_height_budget": 6},
+  "keyboard": {
+    "carrier_thickness": 1,
+    "carrier_bottom_H": 20
+  },
+  "trackpad": {
+    "x": 109,
+    "y": 143,
+    "width": 140,
+    "depth": 105,
+    "body_thickness": 5,
+    "click_travel": 1,
+    "under_clearance": 0.5,
+    "support_thickness": 1
+  },
+  "cooling": {
+    "fan_center": [
+      321,
+      146.5
+    ],
+    "fan_radius": 22.5,
+    "fan_bottom_H": 5.9,
+    "fan_height_with_allowance": 10.6,
+    "fan_inlet_height": 3,
+    "fins_xywh": [
+      344.5,
+      123,
+      18,
+      52
+    ],
+    "fins_height": 14.1,
+    "CPU_contact_top_H": 13.386,
+    "CPU_cooling_height_budget": 7.1
+  },
   "notes": [
     "Base and lid use the same nominal rounded outline. The front remains at Y256. The previous rear base strip from Y-26 to Y-18 is removed.",
     "No forward radio or trackpad relocation is used. The radio and GNSS move to an external accessory; its external electrical interface is not designed here.",
-    "All PCB files remain unchanged. The fan pocket is only a proposed board cutout, and its 11 affected footprints still need moving.",
-    "The USB power pair uses a shorter path behind the keyboard, with its crossover outside the input supports. Other power paths retain their lowered board datum. All clamp screw envelopes are included.",
+    "All PCB files remain unchanged. The smaller fan sits beyond the center-board edge; the former circular board cutout is not used.",
+    "The USB power pair passes behind the keyboard and drops locally beneath the heatpipes. Terminal positions remain fixed. All clamp screw envelopes are included.",
     "The USB guide rails attach to removable keyboard-carrier tabs. Endpoint seam clamps take plug pull loads. Carrier stiffness, fastener fit and dressed-harness deflection still need physical tests.",
-    "The pipe corridor is not a manufactured heatpipe. Cooling capacity, fan/shroud details, CPU clamp load and electrical fan interface remain unqualified.",
+    "Two 250 mm catalogue heatpipes and a stepped contact plate replace the rough cooler volume. Forming, final bonds, duct airflow, mounts and CPU clamp load still need qualification.",
     "Cell maximum thickness, trackpad/plug dimensions and panel thickness/mass still need measurement. The 11 mm cells, 5 mm trackpad and 3.5 mm panel remain assumptions or nominal listing values.",
     "Thin panels, the keyboard carrier and hinge supports need structural design and load tests. This is not a fabrication or print release.",
     "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement."
-  ]
+  ],
+  "usb_heatpipe_crossing": {
+    "drop_mm": 3.0,
+    "x_start": 245,
+    "x_full": 275,
+    "rear_start_y": 43,
+    "rear_full_y": 73,
+    "front_full_y": 101,
+    "front_end_y": 141
+  },
+  "cooling_layout": "right-delta-dual-pipe-v1"
 }

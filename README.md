@@ -3,10 +3,12 @@
 ![ducktop2 case open, with the radio outside the laptop](mechanical/flush-case/views/open.png)
 ![ducktop2 case closed, with matching lid and base edges](mechanical/flush-case/views/closed.png)
 
-current case model, 9 october 2026. the lid and base share a 370 x 274 mm
+current case model, 10 october 2026. the lid and base share a 370 x 274 mm
 outline, and the radio is planned as an external accessory. i'm aiming for
-33.3 mm closed without feet, but the wiring and cooler still need more work
-before everything fits. [case CAD and fit notes](mechanical/flush-case/README.md)
+33.3 mm closed without feet. the right-side cooler and power guides now
+clear the saved geometry, with no board cutout. i still need to finish the
+cooler mounts and ducting, then check the real parts.
+[case CAD and fit notes](mechanical/flush-case/README.md)
 
 i'm building a 16-inch x86 laptop around the LattePanda Mu Ultra. i wanted the
 exposed hardware and flexibility of a cyberdeck in something i could
