@@ -31,8 +31,8 @@
     "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
     "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
     "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-    "mechanical/flush-case/assembly.json": "0b25b127b614e6a6a44d64efc240870c7970611999bac99c5d460e1286f25468",
-    "mechanical/flush-case/build.py": "c9083b995784e591eace5d2b4c915641d9e04a348752a51b4c2a5979624a7c8b",
+    "mechanical/flush-case/assembly.json": "dbb1e8a79da9edd31ec1b16971f9ac28fbfccd92b3a8d5782531a360bafdfb03",
+    "mechanical/flush-case/build.py": "833f81cb5481b60b48c054fcc38deec047642596955814804eb6be01de4c324d",
     "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
     "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
     "mechanical/flush-case/usb_collision.py": "f39fbd1a947d1dbca9c1d11e1310865a090272a6351ef8d9ae6193690d663b70",
@@ -40,22 +40,28 @@
     "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
     "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
     "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
-    "mechanical/flush-case/remote_cooler.py": "44b3603cb4915f39c6191eba0119fcfa86b02b9338424d6b63c5efa938716686",
-    "mechanical/flush-case/cooler.json": "9915158e8d71e9df442f8ca10e0d8a12d3d4b5bd72da61d1034452e5ed4bc2a4",
+    "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
+    "mechanical/flush-case/cooler.json": "2d3198f6c33a6ced0ee503baf48b0fe853054e126ac553e14517b5e9b132a4dd",
     "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
-    "mechanical/flush-case/check_cooler.py": "834fb23815c278f048e983eeca4d2fb4f67cd4289a0fa2730796b995e7df3d70",
+    "mechanical/flush-case/check_cooler.py": "0dc6dde5a083e641b1e042a97200a694d97d83b50d120faf7103ed50e440e704",
+    "mechanical/flush-case/cooler_hardware.py": "cc3327f16622004ad18130c2d25504af927e4343c5d024b4e2c9cd48cfd3cc73",
+    "mechanical/flush-case/hardware_checks.py": "0a5d540808528f14e24bc89a4d4be2aee60e0f66462c9d6de26ca688d468cbc8",
+    "mechanical/flush-case/cooler-hardware.json": "7417a8edc8fa6129171759fbe4c726951be2549ef4eb2e7dbb05cadbb302bd37",
     "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
     "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de",
-    "mechanical/flush-case/draw_cooler.py": "7fac67918ccb293d5a8fa3530ff37470e4f3175dda105f23fcbac9d4ea07cd61"
+    "mechanical/flush-case/draw_cooler.py": "b7ec90e09b0f5cd0e4bea3759807724cf48b6ab37f47ef747f28719f885e3c51"
   },
   "outputs": {
-    "views/remote-cooler.png": "9b28f3fe2c52a92da1c338be05cd3ab98699b5ddb11a1cee84e8a35e5b88d4ab",
-    "views/remote-cooler-parts.png": "2ed4b2d0ba06e2c68b6d52407405aa81ce5660227f95ef6fe1627d27f74a09f3",
-    "views/pipe-wire-clearance.png": "267da79252386cc1670148f368025fa103dcca665656f60e67b2cf03e756493f",
+    "views/remote-cooler.png": "048a1777eaf9b43eb05a54adfee4641c3ffead81d94554be0b64a1c64b2279aa",
+    "views/remote-cooler-parts.png": "91873713162fb279f1081a563f4ba5e026841207fdd251dc1ef5881f0cc28b27",
+    "views/pipe-wire-clearance.png": "a8ce2c1a118ea8a0147e91a7dc30f9e1ce841e90b7da6a1d67e7c9d49f05a34f",
     "views/cooler-contact.png": "f84e684ee8231686f299f4aaeff4e09d4ab1e04382c1c33908dd4a31e0cf3331",
-    "exports/remote-cooler.step": "84b06100a2bbaa90152a03919d00c795280272313a24fa8c67cb746bde5e5e26"
+    "views/cooler-mounts.png": "6b24ac903d495aba582485e0830e7be0c7d1564219fb8d0ed60ce8ddf968acc8",
+    "views/cooler-air-path.png": "2a2fc1cb03f948d779a4b6aee1a997ac17944af3939937d453a2ce2be5783aa7",
+    "views/cooler-intake.png": "23ecf70e8efe28a116d8ee2d7c5d110aaba882e2851849e95879636cfc0e0925",
+    "exports/remote-cooler.step": "067c6ef0dce84c2e7b7f5cbdb8438b776506ffcab5435b55be806e573ea47242"
   },
   "STEP_reopens": true,
-  "STEP_solids": 7,
+  "STEP_solids": 44,
   "scope": "actual CAD renders and inspection assembly; not machining or assembly instructions"
 }

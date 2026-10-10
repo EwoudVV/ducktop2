@@ -109,7 +109,11 @@ def fan_model(c):
     s=cq.importers.importStep(str(path)).val()
     assert s.isValid()
     x,y=c['fan']['xy']
-    return s.rotate((0,0,0),(1,0,0),90).translate((x+22.5,-y-22.5,c['fan']['bottom_H']))
+    s=s.rotate((0,0,0),(1,0,0),90).translate((x+22.5,-y-22.5,c['fan']['bottom_H']))
+    if c['fan'].get('inlet_direction')=='down':
+        pivot=(x+22.5,-y-22.5,c['fan']['bottom_H']+c['fan']['body_mm'][2]/2)
+        s=s.rotate(pivot,(pivot[0],pivot[1]+1,pivot[2]),180)
+    return s
 
 
 def carrier_reliefs(carrier):
@@ -130,10 +134,17 @@ def make_parts(case, fan_shape=None):
     add('delta-blower', nominal_fan, (.22, .24, .26))
     allowance = fan['position_allowance_mm']
     mw, md, mt = fan['maximum_body_mm']
-    maximum_fan = box(x-(mw-w)/2-allowance, y-(md-d)/2-allowance, h-allowance,
-                      mw+2*allowance, md+2*allowance, mt+2*allowance)
+    lower=fan.get('bottom_tolerance_H',[h-allowance,h+allowance])[0]
+    upper=fan.get('bottom_tolerance_H',[h-allowance,h+allowance])[1]+mt
+    maximum_fan = box(x-(mw-w)/2-allowance, y-(md-d)/2-allowance, lower,
+                      mw+2*allowance, md+2*allowance, upper-lower)
     add('blower-size-and-position-allowance', maximum_fan, (.8,.4,.2,.22), 'keepout')
-    inlet = box(x-.45, y-.45, h+mt+allowance, mw+.4, md+.4, fan['upper_inlet_space_mm'])
+    if fan.get('inlet_direction')=='down':
+        import cooler_hardware
+        hardware=cooler_hardware.config();a=hardware['intake'];ix,iy=a['centre_xy']
+        inlet=cylinder(ix,iy,a['cross_rib_top_H'],fan['inlet_radius_mm'],lower-a['cross_rib_top_H'])
+    else:
+        inlet = box(x-.45, y-.45, h+mt+allowance, mw+.4, md+.4, fan['upper_inlet_space_mm'])
     add('blower-inlet-space', inlet, (.3,.6,.9,.2), 'keepout')
     datums = json.loads((BASE / 'cooling-datums.json').read_text())
     plate = spreader({'spreader_thickness_mm': c['plate']['thickness_mm']}, case['boards']['main_bottom_H']+1.6)
@@ -173,11 +184,19 @@ def make_parts(case, fan_shape=None):
     # the shorter stock-length limit. Every fin has a conductive path.
     collector=box(fx,fy,c['plate']['groove_floor_H']-1,fw,fd,1)
     stack=compound(fins).fuse(collector)
+    if c.get('hardware_enabled'):
+        import cooler_hardware
+        stack=cooler_hardware.fin_retention(stack,fin)
+        for offset in pipe['lane_offsets_mm']:
+            stack=stack.cut(pipe_solid(pipe,offset,envelope=True))
     assert stack.isValid() and len(stack.Solids())==1, 'fin stack needs one connected collector'
     add('slotted-copper-fin-stack', stack, (.67,.40,.23))
     # The stock cooler provides the three-point pattern, but the spring
     # rate, travel stops and package-load limit are not publicly specified.
     for i,(mx,my) in enumerate(datums['cooler_mount_centers_xy_mm'], 1):
         add(f'CPU-mount-{i}-space', cylinder(mx,my,15.737,3.25,3.5), (.3,.5,.8,.25), 'keepout')
+    if c.get('hardware_enabled'):
+        parts.extend(cooler_hardware.parts(case,fan,fin,pipe,fin_shape=stack,
+                     pipe_shapes=[p['shape'] for p in parts if p['name'] in ['heatpipe-1','heatpipe-2']]))
     register_shapes(parts)
     return parts

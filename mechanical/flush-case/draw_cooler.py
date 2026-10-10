@@ -73,15 +73,34 @@ def main():
         s=p['shape'].intersect(crop)
         if s.Volume()>.001:contact.append({**p,'shape':s})
     render(contact,HERE/'views/cooler-contact.png','contact plate underside / prototype gaps / clamp hardware unfinished',direction=(-1,.5,-1.5),size=(1450,1050))
+    local=box(294,115,-.1,70,70,24);hardware=[]
+    base=next(p for p in parts if p['name']=='base-floor')
+    hardware.append({**base,'shape':base['shape'].intersect(local)})
+    for p in physical:
+        s=p['shape'].intersect(local)
+        if s.Volume()>.001:hardware.append({**p,'shape':s})
+    exploded=[]
+    for p in hardware:
+        s=p['shape']
+        if p['name']=='delta-blower' or p['name'].startswith(('fan-screw-','fan-washer-')):
+            s=s.translate((0,0,12))
+        exploded.append({**p,'shape':s})
+    render(exploded,HERE/'views/cooler-mounts.png','fan lifted 12 mm for inspection / separate spacers / retained fin duct',direction=(.75,-1,1.15),size=(1650,1200))
+    half=box(294,115,-.1,70,35.2,24);section=[]
+    for p in hardware:
+        s=p['shape'].intersect(half)
+        if s.Volume()>.001:section.append({**p,'shape':s})
+    render(section,HERE/'views/cooler-air-path.png','section through the bottom inlet and side exhaust / prototype seals',direction=(.08,-1,.24),size=(1700,1050))
+    render(hardware,HERE/'views/cooler-intake.png','base intake grille / two fin screws accessible from underneath',direction=(.35,-.45,-1.4),size=(1500,1100))
     export_step(compound(p['shape'] for p in physical),HERE/'exports/remote-cooler.step')
     reopened=cq.importers.importStep(str(HERE/'exports/remote-cooler.step')).val()
     assert reopened.isValid()
-    outputs=['views/remote-cooler.png','views/remote-cooler-parts.png','views/pipe-wire-clearance.png','views/cooler-contact.png','exports/remote-cooler.step']
+    outputs=['views/remote-cooler.png','views/remote-cooler-parts.png','views/pipe-wire-clearance.png','views/cooler-contact.png','views/cooler-mounts.png','views/cooler-air-path.png','views/cooler-intake.png','exports/remote-cooler.step']
     report={'date':case['date'],'source_hashes':{**result['source_hashes'],str(Path(__file__).relative_to(ROOT)):sha(Path(__file__))},
             'outputs':{p:sha(HERE/p) for p in outputs},'STEP_reopens':True,'STEP_solids':len(reopened.Solids()),
             'scope':'actual CAD renders and inspection assembly; not machining or assembly instructions'}
     (HERE/'cooler-exports.json').write_text(json.dumps(report,indent=2)+'\n')
-    print('Saved four cooler views and a reopened STEP assembly.',flush=True)
+    print('Saved seven cooler views and a reopened STEP assembly.',flush=True)
 
 
 if __name__=='__main__':main()

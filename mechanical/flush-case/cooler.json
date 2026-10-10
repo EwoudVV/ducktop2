@@ -7,28 +7,124 @@
     "drawing": "https://www.delta-fan.com/Download/Spec/BFB04512HHA-DV52.pdf",
     "drawing_revision": "04, 2 April 2025",
     "model_url": "https://www.delta-fan.com/Download/3D/BFB04512HHA-DV52.stp",
-    "xy": [298.5, 124.0],
-    "bottom_H": 5.9,
-    "body_mm": [45.0, 45.0, 10.3],
-    "maximum_body_mm": [45.5, 45.5, 10.6],
+    "xy": [
+      298.5,
+      124.0
+    ],
+    "bottom_H": 6.4,
+    "body_mm": [
+      45.0,
+      45.0,
+      10.3
+    ],
+    "maximum_body_mm": [
+      45.5,
+      45.5,
+      10.6
+    ],
     "position_allowance_mm": 0.2,
     "upper_inlet_space_mm": 3.0,
     "mount_pitch_mm": 38.5,
     "mount_hole_diameter_mm": 2.8,
     "rated_voltage_V": 12,
-    "specification_voltage_range_V": [5.0, 13.5],
-    "current_A": {"typical": 0.14, "maximum": 0.26},
-    "power_W": {"typical": 1.68, "maximum": 3.12},
-    "free_air_m3_min": {"typical": 0.102, "minimum": 0.083},
-    "shutoff_pressure_mmH2O": {"typical": 15.20, "minimum": 11.53},
-    "typical_curve_m3_min_mmH2O": [[0, 15.20], [0.02, 13.5], [0.04, 11.1], [0.06, 8.3], [0.08, 4.9], [0.10, 0.15], [0.102, 0]],
+    "specification_voltage_range_V": [
+      5.0,
+      13.5
+    ],
+    "current_A": {
+      "typical": 0.14,
+      "maximum": 0.26
+    },
+    "power_W": {
+      "typical": 1.68,
+      "maximum": 3.12
+    },
+    "free_air_m3_min": {
+      "typical": 0.102,
+      "minimum": 0.083
+    },
+    "shutoff_pressure_mmH2O": {
+      "typical": 15.2,
+      "minimum": 11.53
+    },
+    "typical_curve_m3_min_mmH2O": [
+      [
+        0,
+        15.2
+      ],
+      [
+        0.02,
+        13.5
+      ],
+      [
+        0.04,
+        11.1
+      ],
+      [
+        0.06,
+        8.3
+      ],
+      [
+        0.08,
+        4.9
+      ],
+      [
+        0.1,
+        0.15
+      ],
+      [
+        0.102,
+        0
+      ]
+    ],
     "curve_basis": "approximate manual reading of the manufacturer P-Q plot; not a guaranteed minimum curve",
-    "wire_map": {"black": "GND", "red": "12V", "white": "FG", "yellow": "PWM"},
-    "control": {"PWM_Hz": 25000, "minimum_start_duty_percent": 35, "tach_pulses_per_rev": 2, "floating_PWM": "full speed"},
-    "lead_length_mm": {"nominal": 150, "tolerance": 10},
+    "wire_map": {
+      "black": "GND",
+      "red": "12V",
+      "white": "FG",
+      "yellow": "PWM"
+    },
+    "control": {
+      "PWM_Hz": 25000,
+      "minimum_start_duty_percent": 35,
+      "tach_pulses_per_rev": 2,
+      "floating_PWM": "full speed"
+    },
+    "lead_length_mm": {
+      "nominal": 150,
+      "tolerance": 10
+    },
     "lead_gauge_AWG": 32,
     "selection_note": "The former CZ0T listing is bulk/non-stocked. DV52 has a single-unit distributor listing and its own current drawing and CAD. Availability must be checked again before buying.",
-    "listing": "https://www.mouser.ca/ProductDetail/Delta-Electronics/BFB04512HHA-DV52?qs=%2FW4LtXOBxKt2G4BsUBcB%252BQ%3D%3D"
+    "listing": "https://www.mouser.ca/ProductDetail/Delta-Electronics/BFB04512HHA-DV52?qs=%2FW4LtXOBxKt2G4BsUBcB%252BQ%3D%3D",
+    "inlet_direction": "down",
+    "outlet_direction": "+X",
+    "mount_centres_xy": [
+      [
+        301.75,
+        127.25
+      ],
+      [
+        301.75,
+        165.75
+      ],
+      [
+        340.25,
+        165.75
+      ]
+    ],
+    "mount_ear_lower_H": 13.2,
+    "mount_ear_upper_H": 16.7,
+    "inlet_center_xy": [
+      322.5,
+      150.2
+    ],
+    "inlet_radius_mm": 15.25,
+    "orientation_note": "Rotate the imported fan 180 degrees about its installed Y axis. This points the real outlet toward the fins and the inlet down; no mirror operation is used.",
+    "bottom_tolerance_H": [
+      5.7,
+      7.1
+    ]
   },
   "pipes": {
     "part": "ATS-HP-F6L250S50W-023",
@@ -51,7 +147,10 @@
     "first_tangent_y": 60.0,
     "cold_center_x": 353.5,
     "centerline_radius_mm": 30.0,
-    "lane_offsets_mm": [-4.5, 4.5],
+    "lane_offsets_mm": [
+      -4.5,
+      4.5
+    ],
     "bottom_H": 16.537,
     "clearance_above_maximum_mm": 0.3,
     "forming_approved": false,
@@ -71,7 +170,12 @@
   },
   "fins": {
     "material": "copper",
-    "xywh": [344.5, 123.0, 18.0, 52.0],
+    "xywh": [
+      344.5,
+      123.0,
+      18.0,
+      52.0
+    ],
     "bottom_H": 5.9,
     "top_H": 20.0,
     "count": 48,
@@ -88,5 +192,6 @@
   "PCB_changes_applied": false,
   "fan_endpoint_schematic_updated": false,
   "physical_fit_verified": false,
-  "thermal_performance_verified": false
+  "thermal_performance_verified": false,
+  "hardware_enabled": true
 }

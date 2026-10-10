@@ -11,8 +11,11 @@ the fan candidate is Delta BFB04512HHA-DV52. its
 [current drawing](https://www.delta-fan.com/Download/Spec/BFB04512HHA-DV52.pdf)
 gives a 45 x 45 x 10.3 mm body, with 45.5 x 45.5 x 10.6 mm maximum dimensions.
 the model uses Delta's own STEP, with a separate size and position allowance.
-its rear-left corner is at X298.5, Y124 and its bottom is H5.9. the inlet
-keeps 3 mm of space above the maximum installed body.
+its rear-left corner is at X298.5, Y124 and its nominal bottom is H6.4.
+the earlier orientation had its real outlet facing away from the fins.
+rotating the fan around its installed Y axis fixes that and puts the inlet
+underneath. the model is rotated, not mirrored. the base now has an intake
+grille and a short gasketed boot below that opening.
 
 the old CZ0T distributor listing was non-stocked with a large minimum
 quantity. DV52 has a single-unit listing, although stock and price need
@@ -39,8 +42,55 @@ flatness and the actual thermal-interface gaps still need testing.
 the custom fin stack occupies X344.5–362.5, Y123–175, H5.9–20.0. its 48
 copper fins are 0.3 mm thick and share a continuous 1 mm collector. that
 connects the fins past the end of a shorter pipe too. the pipe slots are
-clearance envelopes, not finished solder joints. the fan outlet still needs
-a sealed transition into the fins and an inlet path with enough open area.
+clearance envelopes, not finished solder joints. a separate cowl, inlet
+baffle and removable foil bridge now join the fan outlet to the fins.
+the top, bottom and case-exit seals close those bypass routes in the model.
+split seals fill the openings around the pipes and mounting tabs after
+assembly. seal materials and leakage still need testing on the real cooler.
+
+## mounting and air path
+
+![fan supports and fin duct](views/cooler-mounts.png)
+
+three short bosses in the base hold M2 inserts. separate 7.7 mm tubular
+spacers support the fan ears, with M2 x 14 screws and washers from above.
+the narrower spacers clear the fan casing. the nominal thread engagement
+is 2.5 mm, leaving 2 mm after a 0.5 mm stack allowance. insert dimensions,
+pilot fit, screw torque and heated pull strength still need checking.
+
+two M2 x 8 screws enter from underneath and engage solid copper tabs on
+the fin stack. each stack has a 3.6 mm insulating spacer, a 0.8 mm duct
+ear and a 0.3 mm insulating washer. this retains the duct without relying
+on tape. the front floor slot helps alignment; it is not a free thermal
+expansion joint once tightened. the supports need a heated creep and
+thermal-cycle test before choosing final materials and torque.
+
+![section through the intake and exhaust](views/cooler-air-path.png)
+
+the base grille has 432.2 mm² of open area, about 52% of its circular
+opening. the rib above it leaves at least 3.7 mm under the fan within the
+current height allowance. the outlet window is 255 mm², the fin exit has
+516.3 mm² of open area and the corresponding case opening has 733.2 mm².
+these are CAD sections, not measured airflow. the inlet still needs at
+least 3 mm underneath the laptop. feet that provide that space have not
+been selected, and the 33.3 mm height remains the figure without feet.
+
+the intake gasket has 2.0 to 3.4 mm of installed space across the fan
+height allowance. a 4 mm closed-cell silicone sheet would compress by
+15 to 50%. the actual grade and force curve must support that range
+without distorting the fan or losing the seal.
+
+the fin/pipe assembly slides into the cowl from the exhaust side on the
+bench, before fitting the baffle and installing the cooler. 41 positions
+at 0.5 mm spacing show no nominal interference. fan replacement needs the
+deck and both OLED modules removed, the lead disconnected and the foil
+bridge peeled back. the three fan screws are then accessible, and 16
+sampled positions over a 30 mm lift show no collision. these sampled
+checks do not prove continuous movement or tolerance fit.
+
+hardware sources, coordinates and the CPU measurements still needed are
+in [cooler-mounts.md](cooler-mounts.md). `cooler-checks.json` contains the
+open-area, access and component-height results.
 
 ## wiring and keyboard clearance
 
@@ -89,10 +139,11 @@ get the forming process and capacity confirmed before making the cooler.
 
 ## what is still needed
 
-the fan, fin-stack supports and duct are not finished mounts. the CPU
-mounting pattern is known, but the FIT1049 spring, screw, stop dimensions
-and allowable package load are still needed. the custom plate is not ready
-to clamp onto the module. keep the factory cooler as the reference.
+the fan and fin-stack supports now have a complete nominal mounting stack,
+but their materials, loads and fit are untested. the CPU mounting pattern
+is known, but the FIT1049 spring, screw, stop dimensions and allowable
+package load are still needed. the reference cooler is not on hand yet.
+the custom plate is not ready to clamp onto the module.
 
 the complete cooler needs a heater test before trying it on the module,
 followed by testing with both processor variants and the assembled laptop.

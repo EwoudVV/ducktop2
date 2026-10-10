@@ -8,6 +8,9 @@ from shapely import covers, points
 
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE))
+# Both case directories contain build.py. Keep the shared baseline first,
+# even when another test already imported remote_cooler in this process.
+sys.path.insert(0,str(HERE.parent/'case-prototype'))
 import remote_cooler as cooler
 from usb_collision import Checks
 

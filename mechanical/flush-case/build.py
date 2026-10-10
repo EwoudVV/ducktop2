@@ -55,7 +55,7 @@ def inputs():
         for p in [ROOT/'mechanical/component-placement.json',BASE/'height-allowances.json']:
             data[str(p.relative_to(ROOT))]=sha(p)
     if C.get('cooling_layout'):
-        for name in ['remote_cooler.py','cooler.json','cooler-part-heights.json','check_cooler.py','reference/delta-fan-source.json','reference/BFB04512HHA-DV52.step']:
+        for name in ['remote_cooler.py','cooler.json','cooler-part-heights.json','check_cooler.py','cooler_hardware.py','hardware_checks.py','cooler-hardware.json','reference/delta-fan-source.json','reference/BFB04512HHA-DV52.step']:
             p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
     return data
 
@@ -115,9 +115,16 @@ def fresh_model():
         walls=walls.cut(box(hx-27,o['y_min']-.1,hh-8.5,54,7,15.5))
     # The candidate has a direct side exhaust and bottom inlet.
     cx,cy=C['cooling']['fan_center'];rr=C['cooling']['fan_radius']
-    body=body.cut(cylinder(cx,cy,-.1,rr-4,floor+.2))
+    if C.get('cooling_layout'):
+        import cooler_hardware
+        body=cooler_hardware.floor_shape(body,C)
+    else:
+        body=body.cut(cylinder(cx,cy,-.1,rr-4,floor+.2))
     fx,fy,fw,fd=C['cooling']['fins_xywh']
-    exhaust_bottom=C['cooling']['fan_bottom_H'] if C.get('cooling_layout') else 1.8
+    if C.get('cooling_layout'):
+        import remote_cooler
+        exhaust_bottom=remote_cooler.config()['fins']['bottom_H']
+    else:exhaust_bottom=1.8
     exhaust_height=C['cooling']['fins_height']+.5 if C.get('cooling_layout') else 7
     walls=walls.cut(box(o['x_max']-b['wall']-.1,fy-.5,exhaust_bottom-.25,2,fd+1,exhaust_height))
     # Existing ports stay in their current XY positions. Generous service slots

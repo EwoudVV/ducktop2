@@ -101,8 +101,12 @@ the shorter pipe-end limit. [parts and cooling details](cooling.md)
 
 the fan uses manufacturer CAD; the plate, pipes and fin stack are prototype
 geometry. the formed pipes, fan/fin pairing and CPU clamp load have not
-been qualified. the side exhaust and bottom inlet are initial openings,
-without a finished shroud or grille. normal port slots are deliberately
+been qualified. the fan now faces its outlet toward the fins and draws
+through a grille in the base. separate spacers hold it above the intake
+boot; the fin screws also retain a gasketed duct. [mounting and access](cooler-mounts.md)
+are modeled, with physical material, seal and load tests still needed.
+the intake requires at least 3 mm under the base, so the final feet will
+add to the 33.3 mm case height. normal port slots are deliberately
 oversized until their mating plugs and service clearances are settled.
 
 the packs still use the 11 mm listed thickness, the trackpad uses an
@@ -126,6 +130,8 @@ motion and strain relief need rebuilding around the new hinge positions.
   generated geometry, size/position envelopes and height checks.
 - `cooler-part-heights.json`: sourced dimensions and explicit installed
   height allocations. allocations are not manufacturer measurements.
+- `cooler-hardware.json`, `cooler_hardware.py` and `hardware_checks.py`:
+  fan spacers, fin and duct retention, grille, seals and sampled access checks.
 - `cooler-airflow.json`: delivered-airflow target, not measured performance.
 - `draw_cooler.py` and `cooler-exports.json`: close-up views and the separate
   cooler STEP, tied to the checked CAD sources.
@@ -147,8 +153,8 @@ threading or removing terminated wires. the fixed feet clear the modeled
 connector service envelopes after the upper rails are removed. the dressed
 harness and actual assembly sequence still need a physical check.
 
-these exports are for inspection. the opening stop, fan/fin mounts, ducting,
-CPU clamp, complete signal/raw-pack harnesses, support stiffness and physical
+these exports are for inspection. the opening stop, CPU clamp, fan/fin
+mounting loads, duct materials, complete signal/raw-pack harnesses and physical
 measurements need resolving before making the case.
 
 Framework Computer Inc's original hinge geometry is used under CC BY 4.0.

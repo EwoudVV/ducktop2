@@ -6,8 +6,9 @@
 current case model, 10 october 2026. the lid and base share a 370 x 274 mm
 outline, and the radio is planned as an external accessory. i'm aiming for
 33.3 mm closed without feet. the right-side cooler and power guides now
-clear the saved geometry, with no board cutout. i still need to finish the
-cooler mounts and ducting, then check the real parts.
+clear the saved geometry, with no board cutout. the fan and fins now have
+separate supports, with a bottom intake grille and a duct to the side.
+the cpu clamp and real material, load and cooling tests are still needed.
 [case CAD and fit notes](mechanical/flush-case/README.md)
 
 i'm building a 16-inch x86 laptop around the LattePanda Mu Ultra. i wanted the

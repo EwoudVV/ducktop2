@@ -77,7 +77,7 @@ def cooler_plan(part):
 
 def evaluate(parts, case, sources, draw=True):
     c = remote_cooler.config()
-    for p in [HERE/'cooler.json',HERE/'remote_cooler.py',HERE/'check_cooler.py',
+    for p in [HERE/'cooler.json',HERE/'remote_cooler.py',HERE/'check_cooler.py',HERE/'cooler_hardware.py',HERE/'hardware_checks.py',HERE/'cooler-hardware.json',
               HERE/'reference/delta-fan-source.json',HERE/'reference/BFB04512HHA-DV52.step',
               ROOT/'mechanical/component-placement.json',BASE/'cooling-datums.json',
               HERE/'usb-part-heights.json',HERE/'cooler-part-heights.json',BASE/'height-allowances.json']:
@@ -86,7 +86,7 @@ def evaluate(parts, case, sources, draw=True):
     remote_cooler.register_shapes(new)
     print('cooler solids built',flush=True)
     fixed = [p for p in parts if not p.get('moving') and not p.get('remote_cooler') and p['group'] not in ['cooling','changes','keepout']]
-    rigid=[];allowances=[];internal=[]
+    rigid=[];allowances=[];internal=[];service=[]
     pieces=[]
     for p in fixed:
         if not p['name'].startswith(('usb5-','harness-USB-')) or p.get('power_wire') or p.get('intentional_wire_grip'):continue
@@ -102,6 +102,15 @@ def evaluate(parts, case, sources, draw=True):
     wire_checks=Checks(parts+new,case,cable_data,pieces)
     for p in new:
         if p['name'].startswith('CPU-mount'):continue
+        if p.get('service'):
+            removed=[];remaining=[]
+            for q in fixed+[r for r in new if r['group']=='cooling']:
+                if not bbox_overlap(p['shape'],q['shape']):continue
+                v=intersection_volume(p['shape'],q['shape'])
+                if v>.01:
+                    (removed if q['name'] in p['service_removes'] else remaining).append({'part':q['name'],'overlap_mm3':round(v,5)})
+            service.append({'access':p['name'],'remove_before_access':p['service_removes'],'blocked_before_removal':removed,'conflicts_after_removal':remaining})
+            continue
         for q in fixed:
             if not bbox_overlap(p['shape'],q['shape']):continue
             if q['group']=='wiring':volume=wire_checks.volume(q,p)
@@ -123,7 +132,7 @@ def evaluate(parts, case, sources, draw=True):
             h=extra['manufacturer_maximums'][part['mpn']]
             part.update(height_mm=h['height_mm'],height_kind='maximum',height_status='verified_maximum',height_source_url=h['source'],height_basis=h['basis'])
     settings['reservations'].update(extra['reservations'])
-    targets=[p for p in new if p['name'].endswith('-upper-clearance') or p['name'] in ['blower-size-and-position-allowance','blower-inlet-space','stepped-copper-plate','slotted-copper-fin-stack']]
+    targets=[p for p in new if p['name'].endswith('-upper-clearance') or p['name'] in ['blower-size-and-position-allowance','blower-inlet-space','stepped-copper-plate','slotted-copper-fin-stack'] or (p.get('cooler_hardware') and p['group']=='cooling')]
     print('checking component heights',flush=True)
     heights=screen_heights(table,targets,{b:case['boards']['main_bottom_H']+1.6 for b in ['left','center','right']},settings)
     pipe=c['pipes'];routes=[]
@@ -148,11 +157,14 @@ def evaluate(parts, case, sources, draw=True):
             if not q['name'].startswith('CPU-mount'):continue
             v=intersection_volume(p['shape'],q['shape']) if bbox_overlap(p['shape'],q['shape']) else 0
             if v>.001:mount_conflicts.append({'pipe':p['name'],'mount':q['name'],'overlap_mm3':v})
-    report={'date':c['date'],'source_hashes':sources,'configuration':c,
+    import hardware_checks
+    hardware=hardware_checks.evaluate(parts,case,c)
+    report={'date':c['date'],'source_hashes':sources,'configuration':c,'hardware_and_air_path':hardware,
             'nominal_rigid_conflicts':rigid,'size_position_and_inlet_conflicts':allowances,
             'internal_cooler_conflicts':internal,'component_height_screen':heights,
             'pipe_routes':routes,'pipe_mount_space_conflicts':mount_conflicts,
-            'nominal_geometry_pass':not(rigid or allowances or internal or mount_conflicts or heights['known_component_height_conflicts'] or heights['unverified_component_height_screens']),
+            'service_checks':service,
+            'nominal_geometry_pass':hardware['nominal_geometry_pass'] and not(rigid or allowances or internal or mount_conflicts or heights['known_component_height_conflicts'] or heights['unverified_component_height_screens'] or any(r['conflicts_after_removal'] for r in service)),
             'part_bounds_construction_frame':{p['name']:bounds(p['shape']) for p in new},
             'PCB_changes_applied':False,'fan_endpoint_schematic_updated':False,
             'physical_fit_verified':False,'formed_pipe_capacity_verified':False,
@@ -161,7 +173,8 @@ def evaluate(parts, case, sources, draw=True):
             'limits':['Nominal PCB models do not replace the component-height screen.',
                       'The keyboard carrier is a reservation; openings need structural and underside-component checks.',
                       'Continuous hot/cold spans are assumed only for the catalogue heatpipe comparison.',
-                      'The fan harness, cooler mounts, duct, inlet supply and final joint geometry are unfinished.']}
+                      'The supports and air path are prototype geometry. Material, fastening loads, seal compression and installed airflow need physical tests.',
+                      'The CPU clamp, fan harness, external inlet clearance and final thermal joints remain unfinished.']}
     (HERE/'cooler-checks.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ['nominal_rigid_conflicts','size_position_and_inlet_conflicts','internal_cooler_conflicts','pipe_mount_space_conflicts']},indent=2),flush=True)
     print('Height conflicts:',len(heights['known_component_height_conflicts']),'missing:',len(heights['unverified_component_height_screens']),flush=True)

@@ -5,6 +5,28 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-10: mount the cooler and add its air duct
+
+**Total time spent: 2 hours**
+
+worked on how the smaller cooler will actually attach to the case. caught an orientation mistake in the fan model: its outlet was facing away from the fins. rotated it so the outlet faces the right edge and the intake faces down, then checked the openings and mounting holes against the manufacturer's model. raised it slightly to leave room for the mounting tolerances without changing the case height.
+
+gave the fan three separate spacers and screws, with inserts in short bosses in the base. the first full-width posts hit the casing, so split them into wider bases and narrower spacers. added two bottom-access screws for solid tabs on the copper fin stack. those screws also hold the duct through insulating spacers and washers, so the duct doesn't depend on tape to stay in place.
+
+![the fan lifted to show its spacers and the separate fin supports](docs/images/journal/2026-10-10-cooler-mounts.png)
+
+made the intake grille, a short boot under the fan and a cowl around the fins. added the outlet baffle, removable bridge and seals around the pipes and mounting tabs. the first grille export accidentally filled the opening during a boolean join, which the open-area check caught. fixed that and ended up with about 432 mm² of open grille area, with at least 3.7 mm under the fan in the current height allowance.
+
+![section through the bottom intake and side exhaust](docs/images/journal/2026-10-10-cooler-air-path.png)
+
+checked the assembly sequence too. the fins and pipes slide into the duct on the bench before it goes in the case. the fan can be lifted out in the model after removing the deck, both oleds, its screws and the short outlet bridge. checked the screw access, thread engagement and the new parts against the board geometry and component heights. fixed two small seal overlaps around the rear fin screw and closed its clearance with a removable sealing bead.
+
+![the intake grille and fin screws from underneath](docs/images/journal/2026-10-10-cooler-intake.png)
+
+ran all 12 geometry tests and checked the complete assembly again. there are no detected internal clashes in the saved model, and both full case exports and the separate cooler export reopen properly.
+
+the case stays at 33.3 mm closed without feet, and none of the pcbs changed. the intake still needs at least 3 mm underneath the base, so that has to be included when choosing the feet. i don't have the official cooler yet, so the cpu clamp is still only a space reservation. its spring force and mounting stops need proper measurements and load data. the inserts, duct material, seals and complete cooler also need physical fit and heat tests before making the final assembly.
+
 # 2026-10-10: fit the cooler without cutting the motherboard
 
 **Total time spent: 2 hours**

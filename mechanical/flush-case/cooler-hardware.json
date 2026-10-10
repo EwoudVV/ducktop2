@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-10",
+  "status": "prototype supports, grille and duct; material, torque, seal and thermal tests are not complete",
+  "fan_posts": {
+    "centres_xy": [
+      [
+        301.75,
+        127.25
+      ],
+      [
+        301.75,
+        165.75
+      ],
+      [
+        340.25,
+        165.75
+      ]
+    ],
+    "top_H": 13.2,
+    "radius_mm": 3.1,
+    "insert_length_mm": 3,
+    "insert_body_allocation_mm": 3.6,
+    "pre_install_pilot_trial_mm": 3.2,
+    "insert_candidate": "CNC Kitchen M2 x 3",
+    "insert_source": "https://cnckitchenus.store/products/heat-set-insert-m2-x-3-100-pieces",
+    "insert_note": "3 mm length is published. The 3.6 mm body and 3.2 mm pilot are fit allocations to verify on the purchased inserts and a printed coupon. The assembly model leaves room for the installed insert, not the smaller pre-install hole.",
+    "screw": "M2 x 14, ISO 7045 / DIN 7985H, A2 stainless",
+    "screw_source": "https://www.westfieldfasteners.co.uk/Bolts-Screws-Metric/Machine-Screw-Phillips-Pan-M2x14-A2-Stainless.html",
+    "head_diameter_allocation_mm": 4.0,
+    "head_height_allocation_mm": 1.8,
+    "washer_diameter_mm": 4.5,
+    "washer_thickness_mm": 0.3,
+    "nominal_thread_engagement_mm": 2.5,
+    "pull_and_hot_creep_verified": false,
+    "base_top_H": 5.5,
+    "spacer_radius_mm": 2.4,
+    "spacer_height_mm": 7.7,
+    "screw_length_mm": 14,
+    "assembly_note": "Install the inserts in the short floor bosses before fitting the separate tubular spacers. The narrower spacers clear the fan casing; do not replace them with full-width posts.",
+    "screw_head_basis": "Supplier lists 4.0 mm head diameter and 1.6 mm height. The model reserves 1.8 mm height; exact delivered head and length tolerances need checking."
+  },
+  "fin_mounts": {
+    "centres_xy": [
+      [
+        353.5,
+        121.5
+      ],
+      [
+        353.5,
+        179.0
+      ]
+    ],
+    "end_plate_thickness_mm": 1.5,
+    "tab_width_mm": 8.0,
+    "tab_thickness_mm": 2.5,
+    "spacer_height_mm": 3.6,
+    "spacer_diameter_mm": 6,
+    "spacer_bore_mm": 2.4,
+    "spacer_material": "machined G10/FR4 candidate; verify the actual material and finished height",
+    "screw": "M2 x 8, DIN 965H / ISO 7046-2, A2 stainless",
+    "screw_source": "https://www.accu.co.uk/phillips-countersunk-screws/65899-SIK-M2-8-A2",
+    "head_diameter_max_mm": 3.8,
+    "head_height_mm": 1.2,
+    "nominal_thread_engagement_mm": 2.1,
+    "front_slot_length_mm": 3.2,
+    "note": "Bottom-access screws engage solid copper tabs, not individual fins. Each screw clamps a 3.6 mm lower insulating spacer, 0.8 mm duct ear and 0.3 mm upper insulating washer. The front floor slot aids assembly alignment; it is not a freely sliding joint after tightening.",
+    "torque_and_thermal_cycling_verified": false,
+    "upper_washer_thickness_mm": 0.3
+  },
+  "intake": {
+    "centre_xy": [
+      322.5,
+      150.2
+    ],
+    "floor_opening_radius_mm": 16.2,
+    "boot_inner_radius_mm": 16,
+    "boot_outer_radius_mm": 18.2,
+    "boot_top_H": 3.7,
+    "grille_pitch_mm": 5,
+    "grille_bar_width_mm": 1.2,
+    "cross_rib_width_mm": 2,
+    "cross_rib_top_H": 2,
+    "seal_free_thickness_mm": 4,
+    "seal_material": "closed-cell silicone sponge allocation; exact grade and force curve not selected",
+    "fan_bottom_range_H": [
+      5.7,
+      7.1
+    ],
+    "minimum_external_gap_mm": 3,
+    "note": "The fan bottom range reserves body, mounting-tab and support-height variation. The seal has 2.0 to 3.4 mm installed space, or 15 to 50 percent compression of a 4 mm sheet. Confirm this range and force with the chosen material."
+  },
+  "duct": {
+    "fan_outlet_window_xyzh": [
+      343.5,
+      126.5,
+      7.7,
+      34,
+      7.5
+    ],
+    "baffle_x": 344.05,
+    "baffle_thickness_mm": 0.25,
+    "baffle_material": "thin heat-resistant insulating sheet allocation; select and test the actual grade",
+    "rear_Y": 120.7,
+    "front_Y": 177.3,
+    "wall_mm": 0.8,
+    "bottom_H": 4.8,
+    "floor_thickness_mm": 0.8,
+    "roof_bottom_H": 20.7,
+    "roof_thickness_mm": 0.8,
+    "foil_bridge_thickness_mm": 0.05,
+    "note": "A removable foil bridge seals the short fan-to-baffle gap. The baffle, cowl seams and pipe penetrations need leak testing. The model provides a flow path, not uniform fin flow or a pressure-drop prediction.",
+    "retention": "Two integral ears share the fin-stack screws and sit between insulating spacers and washers. Printed creep, tab strength and screw torque need a heated sample test.",
+    "split_seals": "Soft split seals cover the pipe-entry and copper-tab slots after bench assembly. Their displayed holes follow nominal parts; actual compression and adhesive overlaps need qualification.",
+    "screw_passage_seals": "Applied removable gasket compound fills the clearance between the M2 screws and 2.4 mm duct-ear bores. Material must be noncorrosive and suitable for the measured temperature. Renew after fin screw removal."
+  },
+  "CPU_clamp_hardware_available": false,
+  "CPU_clamp_load_verified": false,
+  "structural_load_verified": false,
+  "thermal_performance_verified": false,
+  "manufacturing_ready": false
+}
