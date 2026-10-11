@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10",
+  "date": "2026-10-11",
   "source_hashes": {
     "mechanical/case-prototype/build.py": "e0f9cd653ca4f809b2c848afc9c9cab42a8950da9cb38069c4c71395af467246",
     "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
@@ -31,13 +31,13 @@
     "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
     "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
     "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-    "mechanical/flush-case/assembly.json": "da2d83ca33ca7142601177615c65a2537999a39f71905524700769bea1a8839e",
-    "mechanical/flush-case/build.py": "5942e8cdcad1627f13eaf5c1669cbd3a791c0ce423d2c6be75f0018b8b4637b0",
+    "mechanical/flush-case/assembly.json": "28572518d2c35073d36a7afd76966cb284ae818f49a5294b5a0d487ab750cfbf",
+    "mechanical/flush-case/build.py": "19b11a02fcc5d66149a4399a48cf6cd44b021cb7cea5ebbfc3024147176594f1",
     "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
     "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
     "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
     "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
-    "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
+    "mechanical/flush-case/usb-harness.json": "01d326da336dfd3aaa25d383a956acfd04754df702e876240742e8e17c77df4c",
     "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
     "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
     "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
@@ -55,6 +55,10 @@
     "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
     "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
     "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e",
+    "mechanical/flush-case/lid_stops.py": "0e7106b3e1445bbc2603bf9c1a51e71617bac210bd5a6da43e77e2d2f9a4998f",
+    "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
+    "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
+    "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6",
     "mechanical/flush-case/draw_cooler.py": "28f3c04c99a8f7a99b329021df7ce4976643cff860408026a3bdb5e12ba2cf51"
   },
   "outputs": {
@@ -65,7 +69,7 @@
     "views/cooler-mounts.png": "b01b35870698463f77556dc1a1500475f1eff92df914a8d787364a3777f8ac0e",
     "views/cooler-air-path.png": "f95b60dced506b52d795068233d5743e2b4a0fb954ddffe3cdea55a5cfe9f267",
     "views/cooler-intake.png": "40cc1b35071417d6bda4e9e1e727bd7a928ae0b146272e80ff4b192b3196d26a",
-    "exports/remote-cooler.step": "9432bd449acebff292c4cdffc017e5ec1ef04c6792a0947c510617408d13499e"
+    "exports/remote-cooler.step": "5d493b7a42695ce9f1be66b319306fe513578791adec12e729004cfd82c84154"
   },
   "STEP_reopens": true,
   "STEP_solids": 45,

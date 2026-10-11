@@ -5,6 +5,32 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-11: stop the lid at 135 degrees
+
+**Total time spent: 3 hours**
+
+chose a 135 degree opening for the case. the framework hinges can open much farther, but the lid rim starts hitting the base around 144 degrees in this layout. relying on that contact would put the load into the thin shell, so made separate stops that attach to the rear reinforcements.
+
+put one stop just inside each hinge, with a curved steel tab on the lid and a fixed aluminium block on the base. kept them inside the matching lid and base outline, without adding height or a rear ledge. thickened the curved tabs near their roots and gave them wider mounting feet. made local openings in the deck and rear wall so the tabs can move through the whole opening range.
+
+![the closed stop with the lid screws recessed into the backing](docs/images/journal/2026-10-11-lid-stop-closed.png)
+
+added the screws and washers to check how the parts actually fit together. the first lid screws went in from underneath, but their heads caught the fixed blocks partway through opening. changed those to countersunk screws fitted from the outer side of the lid backing plate, before putting on the lid skin. the base blocks each use four screws into raised bosses on the rear reinforcement.
+
+checked the screw lengths against the washer thicknesses and the available thread depth. the lid screws stay inside the mounting feet and the base screws stop above the bottom panel. also documented which holes are clearance holes and which are threaded, since the larger cavities used to show installed screws in the assembly are not the tap-drill sizes.
+
+![the curved lid tab meeting the fixed block at 135 degrees](docs/images/journal/2026-10-11-lid-stop-open.png)
+
+checked the whole case at 69 opening positions from closed to 135 degrees. in the model, both stops have a gap just before the limit, touch at 135, and block further motion immediately after it. there are no unwanted solid overlaps at those positions. also checked access to all twelve screws with the lid at 105 degrees and the deck and lid skin removed.
+
+![tool clearance with the deck and lid skin removed](docs/images/journal/2026-10-11-lid-stop-access.png)
+
+the close-ups showed that the mounting bores went unnecessarily deep into the curved tabs, so shortened them to preserve that material. added a regression test for that, along with the earlier screw-head collision and the exact opening limit. all 34 geometry tests pass. the body stays at 33.3 mm without feet, all six pcb files are unchanged, and the display-cable study now uses the same 135 degree opening.
+
+rebuilt the full case and checked that the step exports reopen properly. saved separate close-ups of the stop and its mounting hardware, and limited the interactive viewer to the intended 135 degree opening.
+
+the metal stops still need to be made and tested. i need to check the actual screw seating and joint strength, then try the opening and load tests with a dummy lid before fitting the display. one side can touch first, so the load cannot just be divided equally between the two stops. a printed copy would be useful for checking fit, but not for proving the finished stop can take an impact.
+
 # 2026-10-11: work out the display cable around the hinge
 
 **Total time spent: 2 hours**

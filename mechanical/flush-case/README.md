@@ -1,6 +1,6 @@
 # flush case with an external radio
 
-10 october 2026. the lid and base now use the same 370 x 274 mm rounded
+11 october 2026. the lid and base now use the same 370 x 274 mm rounded
 outline. the front stays at Y256; the rear of the base moves from Y-26 to
 Y-18. that removes the old 8 mm rear ledge without adding a front lip.
 the keyboard and trackpad stay in their saved positions.
@@ -24,15 +24,18 @@ plate plane. the backing member is trimmed inside the lid outline. there
 are no external splice plates on this lid.
 
 the rear wall has local openings for the hinge motion. a small bevel on
-the lower rear lid rim gives it more room as it opens. the CAD is swept
-from closed to 180 degrees in 2 degree steps. there are no detected rigid
-overlaps through 142 degrees; the first is at 144 degrees. the lower rim
-has 1.38 mm nominal clearance at 135 degrees and 0.62 mm at 140 degrees.
-`checks.json` records detected overlaps above 0.01 mm³. these samples are
-not a continuous-motion or manufacturing-tolerance proof.
-the case geometry does not yet support using the OEM hinge's
-full opening stop. an intended opening angle, a suitable mechanical stop
-or further hinge enclosure changes still need resolving before manufacture.
+the lower rear lid rim gives it more room as it opens. the intended opening
+is now 135 degrees, with two metal stop prototypes attached to the rear
+reinforcements. their curved lid tabs meet fixed blocks inside the existing
+outline. the screw heads sit in the backing plate, clear of the moving gap.
+
+[lid stops and mounting details](lid-stops.md) covers the parts, tool access
+and load-test requirements. the full CAD sweep runs from closed to 135 degrees
+in 2 degree steps, plus the exact endpoint. separate overtravel samples check
+that the intended stop faces make contact. `checks.json` records unwanted
+overlaps above 0.01 mm³; `lid-stop-checks.json` records the contact gaps and
+fastener checks. this does not establish impact strength or an assembled
+opening tolerance.
 
 ![actual Framework hinge with the new seat supports](views/hinge-detail.png)
 
@@ -41,7 +44,7 @@ new shell, support and hinge parts against that outline. a separate rear
 projection check looks for a fixed platform behind the tilted screen at
 normal viewing angles. the measured base/lid outline mismatch is zero,
 and no retained modeled part protrudes outside it when closed. no fixed
-rear platform projects behind the lid at the checked 90–140 degree views.
+rear platform projects behind the lid at the checked 90–135 degree views.
 these geometric checks do not establish hinge
 holding torque, lid stiffness, screw strength or cable flex life.
 
@@ -128,6 +131,12 @@ the exact panel; its cable motion and strain relief are not qualified.
 - `build.py`: separate case construction and checks; it reads the verified
   earlier case cache and refuses changed PCB/source hashes.
 - `checks.json`: outline bounds, opening sweep and remaining interferences.
+- `lid-stop-hardware.json`, `lid_stops.py` and `lid_stop_checks.py`: the
+  135 degree stop prototype, mounting changes, contact and tool-access checks.
+- `lid-stop-checks.json`, `lid-stops.md` and `exports/lid-stops.step`: results,
+  assembly notes and a separate inspection model.
+- `verify_lid_stop_exports.py` and `lid-stop-exports.json`: STEP reopen checks,
+  close-up hashes and the viewer opening limit.
 - `usb-harness.json`, `usb-part-heights.json` and `usb-clearances.json`:
   revised paths, part dimensions/allocations and the USB fit results.
 - `usb-bound-validation.json`: 20 sampled CAD checks covering the guide
@@ -168,7 +177,7 @@ threading or removing terminated wires. the fixed feet clear the modeled
 connector service envelopes after the upper rails are removed. the dressed
 harness and actual assembly sequence still need a physical check.
 
-these exports are for inspection. the opening stop, CPU clamp, fan/fin
+these exports are for inspection. the stop loads, CPU clamp, fan/fin
 mounting loads, duct materials, complete signal/raw-pack harnesses and physical
 measurements need resolving before making the case.
 

@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10",
+  "date": "2026-10-11",
   "source_hashes": {
     "mechanical/case-prototype/build.py": "e0f9cd653ca4f809b2c848afc9c9cab42a8950da9cb38069c4c71395af467246",
     "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
@@ -31,13 +31,13 @@
     "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
     "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
     "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-    "mechanical/flush-case/assembly.json": "da2d83ca33ca7142601177615c65a2537999a39f71905524700769bea1a8839e",
-    "mechanical/flush-case/build.py": "5942e8cdcad1627f13eaf5c1669cbd3a791c0ce423d2c6be75f0018b8b4637b0",
+    "mechanical/flush-case/assembly.json": "28572518d2c35073d36a7afd76966cb284ae818f49a5294b5a0d487ab750cfbf",
+    "mechanical/flush-case/build.py": "19b11a02fcc5d66149a4399a48cf6cd44b021cb7cea5ebbfc3024147176594f1",
     "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
     "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
     "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
     "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
-    "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
+    "mechanical/flush-case/usb-harness.json": "01d326da336dfd3aaa25d383a956acfd04754df702e876240742e8e17c77df4c",
     "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
     "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
     "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
@@ -54,10 +54,14 @@
     "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
     "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
     "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
-    "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e"
+    "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e",
+    "mechanical/flush-case/lid_stops.py": "0e7106b3e1445bbc2603bf9c1a51e71617bac210bd5a6da43e77e2d2f9a4998f",
+    "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
+    "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
+    "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6"
   },
   "configuration": {
-    "date": "2026-10-10",
+    "date": "2026-10-11",
     "units": "mm",
     "status": "separate external-radio case candidate; unfinished wiring, cooling and support details remain visible",
     "outline": {
@@ -82,7 +86,7 @@
       "pivot_height": 19.3,
       "view_angle": 105,
       "check_step_deg": 2,
-      "requested_opening_deg": null
+      "requested_opening_deg": 135
     },
     "lid": {
       "skin": 1,
@@ -146,7 +150,7 @@
       "The blower outlet faces the fins and its inlet faces the base grille. Separate supports carry the fan and fin stack. The CPU clamp, materials, seals and thermal performance still need qualification.",
       "Cell maximum thickness, trackpad/plug dimensions and panel thickness/mass still need measurement. The 11 mm cells, 5 mm trackpad and 3.5 mm panel remain assumptions or nominal listing values.",
       "Thin panels, the keyboard carrier and hinge supports need structural design and load tests. This is not a fabrication or print release.",
-      "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement.",
+      "Two metal stop prototypes set a nominal 135 degree opening. The movement check includes that endpoint. Stop strength, fastener seating, tolerances and repeated impacts still need physical qualification.",
       "Five SJ5344 feet add 4.1 mm nominal height. The 3.1 mm intake-gap budget includes unmeasured compression and floor-deflection allowances; verify the loaded warm assembly.",
       "The four fan leads use a JST GH pre-crimped extension, staggered insulated splices, a carrier guide and a separate floor clamp. Dressed fit and pull, heat and electrical tests are still required."
     ],
@@ -161,7 +165,8 @@
     },
     "cooling_layout": "right-delta-dual-pipe-v1",
     "feet": "SJ5344-five-feet",
-    "fan_harness": "J52-GH-DV52-v1"
+    "fan_harness": "J52-GH-DV52-v1",
+    "lid_stops": "rear-metal-135-v1"
   },
   "closed_outline_mm": {
     "base": [
@@ -346,13 +351,13 @@
       "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
       "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
       "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-      "mechanical/flush-case/assembly.json": "da2d83ca33ca7142601177615c65a2537999a39f71905524700769bea1a8839e",
-      "mechanical/flush-case/build.py": "5942e8cdcad1627f13eaf5c1669cbd3a791c0ce423d2c6be75f0018b8b4637b0",
+      "mechanical/flush-case/assembly.json": "28572518d2c35073d36a7afd76966cb284ae818f49a5294b5a0d487ab750cfbf",
+      "mechanical/flush-case/build.py": "19b11a02fcc5d66149a4399a48cf6cd44b021cb7cea5ebbfc3024147176594f1",
       "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
       "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
       "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
       "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
-      "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
+      "mechanical/flush-case/usb-harness.json": "01d326da336dfd3aaa25d383a956acfd04754df702e876240742e8e17c77df4c",
       "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
       "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
       "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
@@ -369,7 +374,11 @@
       "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
       "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
       "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
-      "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e"
+      "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e",
+      "mechanical/flush-case/lid_stops.py": "0e7106b3e1445bbc2603bf9c1a51e71617bac210bd5a6da43e77e2d2f9a4998f",
+      "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
+      "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
+      "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6"
     },
     "configuration": {
       "date": "2026-10-10",
@@ -1230,552 +1239,422 @@
     ],
     "nominal_geometry_pass": true
   },
+  "lid_stop_checks": {
+    "date": "2026-10-11",
+    "source_hashes": {
+      "mechanical/case-prototype/build.py": "e0f9cd653ca4f809b2c848afc9c9cab42a8950da9cb38069c4c71395af467246",
+      "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
+      "mechanical/case-prototype/cad.py": "4a356ff6f8c32fa71761980d8f8ea55bf92395b6d3d894cdb8f4232a3a81d96f",
+      "mechanical/case-prototype/case_inputs.py": "96a2cabded138177c1237eb411260619bf30299b35cc9ee0d985c5a15b8d4ffb",
+      "mechanical/case-prototype/component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664",
+      "mechanical/case-prototype/cooling-datums.json": "3e459e6ca6901a1a836e4e8bc68895ca72535cad596ee1e858838230a9f5b84c",
+      "mechanical/case-prototype/cooling-parts.json": "844ce7bbe557896883bc2ef6755ac2477581c6d3db5511411af8795597399860",
+      "mechanical/case-prototype/cooling.py": "29143f0ef782f2815999ed2183b28651ada4cdc9ac269c4cf1c68a8e90a692ea",
+      "mechanical/case-prototype/ground_braids.py": "fa507327ab81c7fce12c927e457d45cad39828075c99f261c51c036d85c646cd",
+      "mechanical/case-prototype/harness_geometry.py": "5ec731368f04b256bb156fb27b9a94135696e66084a305ee3a8bfa39decd5672",
+      "mechanical/case-prototype/hinges.py": "7a4803a568a0c45ab77072926ae41a667eab80a0c85196a26dfa173812b75f8a",
+      "mechanical/case-prototype/radio_hardware.py": "7b445ad946393b2b038533c2b665ae263283adce5e0939a525c9b0f3f4c9832a",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-connector-access.json": "63ac4ffa038947f686031fa7795131dd20af9955ba6e19e8313f035b2f982bfe",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-connector-clearances.json": "44b86748076583801b4a0412c393a6cbd1c37a448112275532dbea5f9b37d819",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-harness-routing.json": "13fc3978a1c76499755d111ff25b8e0e856beca4a2281e94b04179f82a49fa22",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/board-datums.json": "eb7fe026fb0b33a691bc3c35ab325eea04b916b3411f6c935033a79a3d3c9db5",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/board-placement.json": "e732be977147f2d878bd38e04bdaed0645e22ea4aa8a79bd3412431380ddfe7e",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/power-harness-checks.json": "290338efa0dc241427174403b3b8f94746328e78a94914ede7a9df05e11f99f3",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/power-harness.json": "4016ffe4a1134de1758c097b28634249fb27f55597dac49b82fbe762f8fc7d0b",
+      "mechanical/case-prototype/reference/pcb-snapshot/manifest.json": "9fee31bb82621dbebe4d04e49780e43573476e4a36dd65c8d0b024f2e909d576",
+      "mechanical/case-prototype/service_carriers.py": "0ae9f787da099c85e26dbdca2c251169b78bb092cf3197034b4ad66547cfc786",
+      "mechanical/case-prototype/assembly.json": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824",
+      "mechanical/case-prototype/board-inventory.json": "483f35bb3236877e841e96c6f9e68dde5fa4fb96372bdfb820d7e92112fc70c2",
+      "left_io/left_io.kicad_pcb": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
+      "ducktop2-center.kicad_pcb": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+      "right_io/right_io.kicad_pcb": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
+      "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+      "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
+      "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
+      "mechanical/flush-case/assembly.json": "28572518d2c35073d36a7afd76966cb284ae818f49a5294b5a0d487ab750cfbf",
+      "mechanical/flush-case/build.py": "19b11a02fcc5d66149a4399a48cf6cd44b021cb7cea5ebbfc3024147176594f1",
+      "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
+      "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
+      "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
+      "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
+      "mechanical/flush-case/usb-harness.json": "01d326da336dfd3aaa25d383a956acfd04754df702e876240742e8e17c77df4c",
+      "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+      "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
+      "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
+      "mechanical/flush-case/cooler.json": "2d3198f6c33a6ced0ee503baf48b0fe853054e126ac553e14517b5e9b132a4dd",
+      "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
+      "mechanical/flush-case/check_cooler.py": "4b5941c29dee07db63f0a08ee60783b9d01ac60e89a124cdb9cb73b5bbf62274",
+      "mechanical/flush-case/cooler_hardware.py": "b48a8e95e309d03336ef138b7e32b663e11837f4b5c5c8fac7d241a6f0c18512",
+      "mechanical/flush-case/hardware_checks.py": "a711e3d6b391fcbba1c06779ac5792dc3f57b18323c66a2bbe46186f0977ded4",
+      "mechanical/flush-case/cooler-hardware.json": "53260e58c9254ad94aa7def1a6a6508bc256a71dc2d6f1f90e79ffffa9d1fd0e",
+      "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
+      "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de",
+      "mechanical/flush-case/feet.json": "a73510651f2bc399a1aabce246bdde8b6996324c3b1c3d9527ebe76932636c69",
+      "mechanical/flush-case/case_feet.py": "2ad5930f376f68f53ee5641aa9bc5a1e4d267352d6cda91bc92e01491ad1a4be",
+      "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
+      "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
+      "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
+      "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e",
+      "mechanical/flush-case/lid_stops.py": "0e7106b3e1445bbc2603bf9c1a51e71617bac210bd5a6da43e77e2d2f9a4998f",
+      "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
+      "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
+      "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6"
+    },
+    "configuration": {
+      "date": "2026-10-11",
+      "status": "135 degree metal stop prototype; fit checked in CAD, loads not qualified",
+      "requested_opening_deg": 135,
+      "user_confirmed_opening": true,
+      "axis_y_mm": -15,
+      "axis_H_mm": 19.3,
+      "centres_X_mm": [
+        68,
+        290
+      ],
+      "tab_width_mm": 10,
+      "tab_inner_radius_mm": 10.5,
+      "tab_outer_radius_mm": 14.3,
+      "tab_upper_outer_radius_mm": 17,
+      "contact_inner_radius_mm": 7.7,
+      "block_outer_radius_mm": 9.8,
+      "contact_face_direction_YH": [
+        4.5,
+        7.2
+      ],
+      "root_foot_xywh_relative_to_centre": [
+        -9,
+        -5.5,
+        18,
+        5
+      ],
+      "root_foot_bottom_H": 24.3,
+      "root_foot_thickness_mm": 5,
+      "backing_bottom_H": 29.3,
+      "backing_top_H": 32.3,
+      "base_boss_radius_mm": 4,
+      "base_boss_top_H": 7.2,
+      "base_wing_top_H": 10.2,
+      "base_mounts_relative_XY": [
+        [
+          -17,
+          -12.5
+        ],
+        [
+          -17,
+          -4.5
+        ],
+        [
+          17,
+          -12.5
+        ],
+        [
+          17,
+          -4.5
+        ]
+      ],
+      "lid_mounts_relative_XY": [
+        [
+          -5,
+          -3
+        ],
+        [
+          5,
+          -3
+        ]
+      ],
+      "base_screw": {
+        "description": "M3 x 8 ISO 7380-1 button head, eight total",
+        "length_mm": 8,
+        "length_tolerance_mm": 0.29,
+        "head_max_diameter_mm": 5.7,
+        "head_max_height_mm": 1.65,
+        "head_height_allocation_mm": 1.8,
+        "source": "https://www.westfieldfasteners.co.uk/Standards/ScrewBolt_SHBtn_M.pdf"
+      },
+      "base_washer": {
+        "description": "M3 DIN 433 / ISO 7092 stainless, eight total",
+        "outside_diameter_mm": 6,
+        "inside_diameter_mm": 3.2,
+        "thickness_mm": 0.5,
+        "thickness_range_mm": [
+          0.45,
+          0.55
+        ],
+        "part_reference": "Ettinger 003.01.039",
+        "source": "https://www.ettinger.de/en/product-datasheet/f891308e688fe98aa3fc3e33a869b97d/create",
+        "tolerance_reference": "https://ratnaveer.com/washer.asp?id=31"
+      },
+      "lid_screw": {
+        "description": "M3 x 6 ISO 10642 countersunk, four total; fit from the outer side before the lid skin",
+        "length_mm": 6,
+        "length_tolerance_mm": 0.24,
+        "theoretical_head_diameter_allocation_mm": 6.72,
+        "maximum_head_height_mm": 1.86,
+        "actual_head_max_diameter_mm": 5.81,
+        "seating_and_stack_budget_mm": 0.5,
+        "source": "https://www.westfieldfasteners.co.uk/Standards/ScrewBolt-SHCsk-M.pdf",
+        "seat_note": "The CAD cone covers the theoretical head profile. Match the real countersink to the purchased screw so its top is flush or below the backing plate. The cone is not a finished machining instruction."
+      },
+      "clearance_hole_diameter_mm": 3.2,
+      "assembly_thread_cavity_diameter_mm": 3.05,
+      "thread_pitch_mm": 0.5,
+      "tap_pilot_nominal_diameter_mm": 2.5,
+      "service": {
+        "lid_angle_deg": 105,
+        "driver_shaft_diameter_mm": 4,
+        "driver_shaft_length_mm": 45,
+        "handle_diameter_mm": 12,
+        "handle_length_mm": 35,
+        "remove_first": [
+          "deck",
+          "lid-skin"
+        ],
+        "note": "A straight 2 mm hex tool with the stated shaft and handle envelope is required. The lid screws are covered by the lid skin after assembly."
+      },
+      "materials": {
+        "tabs_and_lid_backing": "steel prototype; final grade, forming/machining and surface treatment not qualified",
+        "blocks_and_base_reinforcement": "aluminium prototype; final alloy, threads and load capacity not qualified"
+      },
+      "physical_fit_verified": false,
+      "stop_load_verified": false,
+      "manufacturing_ready": false
+    },
+    "requested_opening_deg": 135,
+    "nominal_first_contact_deg": 135,
+    "same_frame_conflicts": [],
+    "contact_samples": [
+      {
+        "side": "left",
+        "angle_deg": 0,
+        "gap_mm": 0.6,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "left",
+        "angle_deg": 90,
+        "gap_mm": 0.7,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "left",
+        "angle_deg": 130,
+        "gap_mm": 0.6710992,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "left",
+        "angle_deg": 134,
+        "gap_mm": 0.1343835,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "left",
+        "angle_deg": 134.9,
+        "gap_mm": 0.013439,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "left",
+        "angle_deg": 135,
+        "gap_mm": 0.0,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "left",
+        "angle_deg": 135.1,
+        "gap_mm": 0.0,
+        "overlap_mm3": 0.3207043
+      },
+      {
+        "side": "left",
+        "angle_deg": 136,
+        "gap_mm": 0.0,
+        "overlap_mm3": 3.2070425
+      },
+      {
+        "side": "left",
+        "angle_deg": 140,
+        "gap_mm": 0.0,
+        "overlap_mm3": 16.0352125
+      },
+      {
+        "side": "right",
+        "angle_deg": 0,
+        "gap_mm": 0.6,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "right",
+        "angle_deg": 90,
+        "gap_mm": 0.7,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "right",
+        "angle_deg": 130,
+        "gap_mm": 0.6710992,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "right",
+        "angle_deg": 134,
+        "gap_mm": 0.1343835,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "right",
+        "angle_deg": 134.9,
+        "gap_mm": 0.013439,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "right",
+        "angle_deg": 135,
+        "gap_mm": 0.0,
+        "overlap_mm3": 0
+      },
+      {
+        "side": "right",
+        "angle_deg": 135.1,
+        "gap_mm": 0.0,
+        "overlap_mm3": 0.3207043
+      },
+      {
+        "side": "right",
+        "angle_deg": 136,
+        "gap_mm": 0.0,
+        "overlap_mm3": 3.2070425
+      },
+      {
+        "side": "right",
+        "angle_deg": 140,
+        "gap_mm": 0.0,
+        "overlap_mm3": 16.0352125
+      }
+    ],
+    "fastener_stacks": {
+      "base_nominal_engagement_mm": 4.500000000000001,
+      "base_engagement_screw_and_washer_range_mm": [
+        4.16,
+        4.84
+      ],
+      "base_tip_to_floor_after_screw_and_washer_tolerances_mm": 1.16,
+      "lid_nominal_engagement_mm": 3.0000000000000036,
+      "lid_engagement_with_length_and_seating_budget_mm": [
+        2.26,
+        3.74
+      ],
+      "lid_tip_to_root_bottom_minimum_mm": 1.26,
+      "limits": "Engagement excludes thread lead-in loss. Base machining tolerances, preload, thread strength and locking method still need qualification."
+    },
+    "driver_access": {
+      "opening_deg": 105,
+      "remove_first": [
+        "deck",
+        "lid-skin"
+      ],
+      "tools": 12,
+      "conflicts": []
+    },
+    "component_height_screen": {
+      "component_height_crossings": [],
+      "unverified_height_limits": [],
+      "height_conflicts": [],
+      "scope": "Front courtyards and resolved heights; no physical fit or tolerance proof."
+    },
+    "stop_geometry_pass": true,
+    "physical_fit_verified": false,
+    "stop_load_verified": false,
+    "manufacturing_ready": false,
+    "limits": [
+      "The main case report contains the full rigid movement check through 135 degrees, including the endpoint.",
+      "Overtravel contact is checked only for each intended tab/block pair; it is not an allowed opening range.",
+      "Screw shapes are clearance envelopes. Threads, countersink seating, locking, preload and torque need physical qualification.",
+      "No impact rating, hand load, fatigue life, hinge holding capacity or tolerance-qualified maximum angle is established."
+    ]
+  },
   "nominal_closed_height_with_feet_mm": 37.4,
   "screen_to_key_nominal_gap_mm": 2.0,
   "hinge_sweep": {
     "sample_range_deg": [
       0,
-      180
+      135
+    ],
+    "sample_angles_deg": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44,
+      46,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58,
+      60,
+      62,
+      64,
+      66,
+      68,
+      70,
+      72,
+      74,
+      76,
+      78,
+      80,
+      82,
+      84,
+      86,
+      88,
+      90,
+      92,
+      94,
+      96,
+      98,
+      100,
+      102,
+      104,
+      106,
+      108,
+      110,
+      112,
+      114,
+      116,
+      118,
+      120,
+      122,
+      124,
+      126,
+      128,
+      130,
+      132,
+      134,
+      135
     ],
     "step_deg": 2,
-    "collisions": [
-      {
-        "angle_deg": 144,
-        "hits": [
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.523
-          }
-        ]
-      },
-      {
-        "angle_deg": 146,
-        "hits": [
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 130.7244
-          }
-        ]
-      },
-      {
-        "angle_deg": 148,
-        "hits": [
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 368.7161
-          }
-        ]
-      },
-      {
-        "angle_deg": 150,
-        "hits": [
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 657.8691
-          }
-        ]
-      },
-      {
-        "angle_deg": 152,
-        "hits": [
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 973.8171
-          }
-        ]
-      },
-      {
-        "angle_deg": 154,
-        "hits": [
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 24.9012
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 1178.8495
-          }
-        ]
-      },
-      {
-        "angle_deg": 156,
-        "hits": [
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.1557
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.1557
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 160.3926
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 98.8453
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 1192.9801
-          }
-        ]
-      },
-      {
-        "angle_deg": 158,
-        "hits": [
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.7861
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.7861
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 438.9228
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 283.2626
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 973.0151
-          }
-        ]
-      },
-      {
-        "angle_deg": 160,
-        "hits": [
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.5681
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.5681
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 863.7574
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 447.8219
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 529.9782
-          }
-        ]
-      },
-      {
-        "angle_deg": 162,
-        "hits": [
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.1683
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.1683
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1199.5945
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 459.9897
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 173.9204
-          }
-        ]
-      },
-      {
-        "angle_deg": 164,
-        "hits": [
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.3451
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.3451
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1338.3781
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 456.337
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 17.6978
-          }
-        ]
-      },
-      {
-        "angle_deg": 166,
-        "hits": [
-          {
-            "moving": "left-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.2489
-          },
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.0198
-          },
-          {
-            "moving": "right-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.2489
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.0198
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1326.1084
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 453.137
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 15.0181
-          }
-        ]
-      },
-      {
-        "angle_deg": 168,
-        "hits": [
-          {
-            "moving": "left-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.1535
-          },
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.8434
-          },
-          {
-            "moving": "right-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.1535
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.8434
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1312.6945
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 450.4404
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 14.7336
-          }
-        ]
-      },
-      {
-        "angle_deg": 170,
-        "hits": [
-          {
-            "moving": "left-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.4864
-          },
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.0252
-          },
-          {
-            "moving": "right-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.4864
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.0252
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1301.8727
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 448.2643
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 14.7309
-          }
-        ]
-      },
-      {
-        "angle_deg": 172,
-        "hits": [
-          {
-            "moving": "left-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 4.171
-          },
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.4026
-          },
-          {
-            "moving": "right-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 4.171
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.4026
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1296.0101
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 446.6155
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 14.9457
-          }
-        ]
-      },
-      {
-        "angle_deg": 174,
-        "hits": [
-          {
-            "moving": "left-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 5.409
-          },
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.3496
-          },
-          {
-            "moving": "right-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 5.409
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 2.3496
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1293.3279
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 445.4977
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 15.3566
-          }
-        ]
-      },
-      {
-        "angle_deg": 176,
-        "hits": [
-          {
-            "moving": "left-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 5.7587
-          },
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.8574
-          },
-          {
-            "moving": "right-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 5.7587
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.8574
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1291.5336
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 444.9151
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 15.9654
-          }
-        ]
-      },
-      {
-        "angle_deg": 178,
-        "hits": [
-          {
-            "moving": "left-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 5.6728
-          },
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.0267
-          },
-          {
-            "moving": "right-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 5.6728
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 1.0267
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1286.7985
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 444.8748
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 16.7925
-          }
-        ]
-      },
-      {
-        "angle_deg": 180,
-        "hits": [
-          {
-            "moving": "left-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 5.2953
-          },
-          {
-            "moving": "left-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.1982
-          },
-          {
-            "moving": "right-lid-seat-1",
-            "fixed": "base-walls",
-            "overlap_mm3": 5.2953
-          },
-          {
-            "moving": "right-lid-seat-2",
-            "fixed": "base-walls",
-            "overlap_mm3": 0.1982
-          },
-          {
-            "moving": "rear-lid-backing-member",
-            "fixed": "base-walls",
-            "overlap_mm3": 1282.2885
-          },
-          {
-            "moving": "lid-skin",
-            "fixed": "base-walls",
-            "overlap_mm3": 445.388
-          },
-          {
-            "moving": "lid-rim",
-            "fixed": "base-walls",
-            "overlap_mm3": 17.8772
-          }
-        ]
-      }
-    ],
-    "last_clear_sample_before_first_collision_deg": 142,
+    "collisions": [],
+    "last_clear_sample_before_first_collision_deg": 135,
     "scope": "new rigid shell, panel reservation and actual OEM hinge parts versus retained PCB models, power harness and candidate supports; OEM internal bearing contact excluded"
   },
   "rear_projection_screen": [
@@ -1800,12 +1679,6 @@
     {
       "angle_deg": 135,
       "lid_skin_frontmost_Y_at_deck_H": -39.03477631085022,
-      "base_rear_Y": -18,
-      "fixed_rear_projection_mm": 0
-    },
-    {
-      "angle_deg": 140,
-      "lid_skin_frontmost_Y_at_deck_H": -41.957817547342586,
       "base_rear_Y": -18,
       "fixed_rear_projection_mm": 0
     }
@@ -1971,12 +1844,44 @@
       "y": 13,
       "top_H": 14.100000000000001,
       "note": "new support; bolt access and load capacity need checking"
+    },
+    {
+      "lid_stop_change": {
+        "part": "base-walls",
+        "volume_before_mm3": 27786.9599,
+        "volume_after_mm3": 26423.6639,
+        "solids": 2
+      }
+    },
+    {
+      "lid_stop_change": {
+        "part": "deck",
+        "volume_before_mm3": 70653.8518,
+        "volume_after_mm3": 69127.4518,
+        "solids": 1
+      }
+    },
+    {
+      "lid_stop_change": {
+        "part": "rear-base-reinforcement",
+        "volume_before_mm3": 18798.0,
+        "volume_after_mm3": 17436.0756,
+        "solids": 3
+      }
+    },
+    {
+      "lid_stop_change": {
+        "part": "rear-lid-backing-member",
+        "volume_before_mm3": 30899.7095,
+        "volume_after_mm3": 30706.6861,
+        "solids": 1
+      }
     }
   ],
   "USB_harness_checks": {
-    "date": "2026-10-10",
+    "date": "2026-10-11",
     "solid_conflicts": [],
-    "conservative_bound_rejections": 2572,
+    "conservative_bound_rejections": 2578,
     "exact_contact_checks": 21,
     "rigid_component_height_conflicts": [],
     "unverified_rigid_component_heights": [],
@@ -2030,13 +1935,13 @@
       "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
       "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
       "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-      "mechanical/flush-case/assembly.json": "da2d83ca33ca7142601177615c65a2537999a39f71905524700769bea1a8839e",
-      "mechanical/flush-case/build.py": "5942e8cdcad1627f13eaf5c1669cbd3a791c0ce423d2c6be75f0018b8b4637b0",
+      "mechanical/flush-case/assembly.json": "28572518d2c35073d36a7afd76966cb284ae818f49a5294b5a0d487ab750cfbf",
+      "mechanical/flush-case/build.py": "19b11a02fcc5d66149a4399a48cf6cd44b021cb7cea5ebbfc3024147176594f1",
       "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
       "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
       "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
       "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
-      "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
+      "mechanical/flush-case/usb-harness.json": "01d326da336dfd3aaa25d383a956acfd04754df702e876240742e8e17c77df4c",
       "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
       "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
       "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
@@ -2053,7 +1958,11 @@
       "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
       "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
       "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
-      "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e"
+      "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e",
+      "mechanical/flush-case/lid_stops.py": "0e7106b3e1445bbc2603bf9c1a51e71617bac210bd5a6da43e77e2d2f9a4998f",
+      "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
+      "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
+      "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6"
     },
     "configuration": {
       "date": "2026-10-10",
@@ -3389,8 +3298,9 @@
     "The blower outlet faces the fins and its inlet faces the base grille. Separate supports carry the fan and fin stack. The CPU clamp, materials, seals and thermal performance still need qualification.",
     "Cell maximum thickness, trackpad/plug dimensions and panel thickness/mass still need measurement. The 11 mm cells, 5 mm trackpad and 3.5 mm panel remain assumptions or nominal listing values.",
     "Thin panels, the keyboard carrier and hinge supports need structural design and load tests. This is not a fabrication or print release.",
-    "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement.",
+    "Two metal stop prototypes set a nominal 135 degree opening. The movement check includes that endpoint. Stop strength, fastener seating, tolerances and repeated impacts still need physical qualification.",
     "Five SJ5344 feet add 4.1 mm nominal height. The 3.1 mm intake-gap budget includes unmeasured compression and floor-deflection allowances; verify the loaded warm assembly.",
     "The four fan leads use a JST GH pre-crimped extension, staggered insulated splices, a carrier guide and a separate floor clamp. Dressed fit and pull, heat and electrical tests are still required."
-  ]
+  ],
+  "nominal_opening_geometry_pass": true
 }

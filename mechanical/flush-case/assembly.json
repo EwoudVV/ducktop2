@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10",
+  "date": "2026-10-11",
   "units": "mm",
   "status": "separate external-radio case candidate; unfinished wiring, cooling and support details remain visible",
   "outline": {
@@ -24,7 +24,7 @@
     "pivot_height": 19.3,
     "view_angle": 105,
     "check_step_deg": 2,
-    "requested_opening_deg": null
+    "requested_opening_deg": 135
   },
   "lid": {
     "skin": 1,
@@ -88,7 +88,7 @@
     "The blower outlet faces the fins and its inlet faces the base grille. Separate supports carry the fan and fin stack. The CPU clamp, materials, seals and thermal performance still need qualification.",
     "Cell maximum thickness, trackpad/plug dimensions and panel thickness/mass still need measurement. The 11 mm cells, 5 mm trackpad and 3.5 mm panel remain assumptions or nominal listing values.",
     "Thin panels, the keyboard carrier and hinge supports need structural design and load tests. This is not a fabrication or print release.",
-    "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement.",
+    "Two metal stop prototypes set a nominal 135 degree opening. The movement check includes that endpoint. Stop strength, fastener seating, tolerances and repeated impacts still need physical qualification.",
     "Five SJ5344 feet add 4.1 mm nominal height. The 3.1 mm intake-gap budget includes unmeasured compression and floor-deflection allowances; verify the loaded warm assembly.",
     "The four fan leads use a JST GH pre-crimped extension, staggered insulated splices, a carrier guide and a separate floor clamp. Dressed fit and pull, heat and electrical tests are still required."
   ],
@@ -103,5 +103,6 @@
   },
   "cooling_layout": "right-delta-dual-pipe-v1",
   "feet": "SJ5344-five-feet",
-  "fan_harness": "J52-GH-DV52-v1"
+  "fan_harness": "J52-GH-DV52-v1",
+  "lid_stops": "rear-metal-135-v1"
 }

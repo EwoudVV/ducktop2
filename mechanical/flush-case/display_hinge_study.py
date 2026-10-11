@@ -177,6 +177,7 @@ def height_screen(points):
 
 def main():
     saved,case,sources=check_cooler.load_case();c=config()
+    case_sources=sources.copy()
     original,case_changes=study_case_parts(saved)
     assert sha(ROOT/'ducktop2-center.kicad_pcb')==c['source_center_PCB_sha256']
     assert case['hinges']['pivot_y']==-15 and case['hinges']['pivot_height']==19.3
@@ -191,7 +192,10 @@ def main():
         for q in [v for v in physical if not v.get('moving')]:
             v,where=overlap(n['shape'],q['shape'])
             if v>.01:fixed.append({'new':n['name'],'part':q['name'],'overlap_mm3':round(v,4),'where':where})
-    for angle in range(0,141,2):
+    maximum=c['opening_study_degrees'][1]
+    assert maximum==case['hinges']['requested_opening_deg']
+    samples=sorted(set(range(0,maximum+1,c['opening_step_degrees']))|{maximum})
+    for angle in samples:
         for n in new:
             pn=pose(n,angle)
             for q in physical:
@@ -215,7 +219,7 @@ def main():
     tangent=np.gradient(p,stations,axis=0);second=np.gradient(tangent,stations,axis=0)
     curvature=np.linalg.norm(np.cross(tangent,second),axis=1)/np.linalg.norm(tangent,axis=1)**3
     sampled_radius=1/float(curvature.max())
-    angle=math.radians(140);r=c['maximum_dressed_bundle_diameter_mm']/2;length=c['axial_free_span_mm']
+    angle=math.radians(maximum);r=c['maximum_dressed_bundle_diameter_mm']/2;length=c['axial_free_span_mm']
     pitch=c['fixed_anchor_xyH'][0]-c['lid_anchor_xyH_closed'][0]
     assert abs(pitch-c['anchor_grip_length_mm']-length)<1e-9,'free flex length excludes both half-grips'
     report={'date':c['date'],'source_hashes':sources,'configuration':c,
@@ -224,8 +228,8 @@ def main():
             'base_centerline_length_mm':round(float(lengths.sum()),3),
             'sampled_minimum_base_centerline_radius_mm':round(sampled_radius,3),
             'sampled_minimum_base_inside_radius_mm':round(sampled_radius-r,3),
-            'axial_centerline_length_mm':pitch,'unclamped_axial_length_mm':length,'relative_end_rotation_degrees':140,
-            'average_rotation_per_length_degrees_per_mm':140/length,
+            'axial_centerline_length_mm':pitch,'unclamped_axial_length_mm':length,'relative_end_rotation_degrees':maximum,'opening_sample_angles_deg':samples,
+            'average_rotation_per_length_degrees_per_mm':maximum/length,
             'outer_helix_geometric_extra_length_mm':math.sqrt(length*length+(r*angle)**2)-length,
             'helix_note':'Illustrative outer path at 1.5 mm radius with uniformly distributed twist. This is not a material strain or fatigue prediction; actual wire lay, sliding, slack and strain concentration are unknown.',
             'proposed_case_reliefs':case_changes,'saved_full_case_changed':False,
@@ -236,6 +240,7 @@ def main():
     print('static conflicts',len(fixed),'opening conflicts',len(sweep),'internal conflicts',len(internal),flush=True)
     # The existing viewer provides meshes from the same checked source set.
     raw=(HERE/'inspection.html').read_text();data,_=json.JSONDecoder().raw_decode(raw.split('const DATA=',1)[1])
+    assert data['source_hashes']==case_sources,'rebuild the case viewer before drawing the cable study'
     meshes={v['name']:v for v in data['parts']}
     for q in saved:
         m=meshes[q['name']];_MESHES[id(q['shape'])]=(q['shape'],([cq.Vector(*v) for v in m['v']],m['f']))
@@ -248,13 +253,13 @@ def main():
             if not bbox_overlap(q['shape'],crop):continue
             s=q['shape'].intersect(crop)
             if s.Solids():context.append({**q,'shape':s,'color':(*q['color'][:3],.22)})
-    for angle in [0,105,140]:
+    for angle in [0,105,maximum]:
         scene=[pose(q,angle) for q in context]+[pose(q,angle) for q in new[2:]]
         render(scene,HERE/f'views/display-hinge-{angle}.png',f'hinge-axis cable study at {angle} degrees / proposed rear reliefs / 50 mm free span',(.45,-1,.8),(1550,1050))
     dest=HERE/'exports/display-hinge-study.step'
     export_step(compound(q['shape'] for q in new+context),dest)
     reopened=cq.importers.importStep(str(dest)).val();assert reopened.isValid()
-    outputs=['views/display-base-route.png',*[f'views/display-hinge-{a}.png' for a in [0,105,140]],'exports/display-hinge-study.step']
+    outputs=['views/display-base-route.png',*[f'views/display-hinge-{a}.png' for a in [0,105,maximum]],'exports/display-hinge-study.step']
     report['outputs']={name:sha(HERE/name) for name in outputs};report['STEP_reopens']=True;report['STEP_solids']=len(reopened.Solids())
     for path,h in sources.items():assert sha(ROOT/path)==h,path
     out.write_text(json.dumps(report,indent=2)+'\n')

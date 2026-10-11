@@ -45,9 +45,9 @@ the first bend. the clamps are split concepts for a soft lined grip.
 their liners, fasteners, grip pressure and mounting strength are unfinished.
 
 the cable centerline on the hinge axis stays in the same place as the lid
-rotates. the cable material still twists. over the 0 to 140 degree study
-range, the average relative rotation is 2.8 degrees per millimetre of free
-cable. a simple outer helix at 1.5 mm radius would need about 0.134 mm more
+rotates. the cable material still twists. over the 0 to 135 degree study
+range, the average relative rotation is 2.7 degrees per millimetre of free
+cable. a simple outer helix at 1.5 mm radius would need about 0.125 mm more
 length than the axis. that is an illustration of why a fixed centerline
 is not proof of zero conductor strain. actual wire lay, slack, sliding
 and concentrated strain at the grip edges all matter.
@@ -84,18 +84,17 @@ rounding, a cover or boot over the opening, pull retention and structural
 strength still need designing around the selected harness. no extra front
 lip, rear platform or case height is added by this study.
 
-`display-hinge-checks.json` records solid contacts through 140 degrees in
-2 degree steps, component-height crossings, source hashes and output
-hashes. the opening range is a study condition; the case's physical stop
-has not been established. the samples do not establish continuous-motion
+`display-hinge-checks.json` records solid contacts through 135 degrees in
+2 degree steps, with the 135 degree endpoint added, component-height crossings, source hashes and output
+hashes. the range now matches the case stop prototype. the stop load and
+assembled opening tolerance still need physical checks. the samples do not establish continuous-motion
 clearance, fatigue life, or fit under manufacturing tolerances.
 
 the saved study has no detected static, opening-motion or internal solid
 contacts at those samples. all 13 component-height crossings clear their
 manufacturer maximums plus the assembly allowances; the smallest calculated
 gap is 1.18 mm. the base centerline is 118.57 mm long, ending at the fixed
-grip center. that is only part of the harness. all 27 geometry tests pass,
-and the separate 15-solid STEP reopens correctly.
+grip center. that is only part of the harness. the separate STEP is reopened and checked after export.
 
 ## files and remaining information
 

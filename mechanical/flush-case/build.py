@@ -63,6 +63,9 @@ def inputs():
     if C.get('fan_harness'):
         for name in ['fan-harness.json','fan-harness-heights.json','fan_harness.py','fan_harness_checks.py']:
             p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
+    if C.get('lid_stops'):
+        for name in ['lid_stops.py','lid_stop_checks.py','lid-stop-hardware.json','fan-harness-heights.json','display-part-heights.json']:
+            p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
     return data
 
 
@@ -230,6 +233,10 @@ def fresh_model():
         add('CPU-cooler-height-budget',box(193,30,co['CPU_contact_top_H'],33,31,co['CPU_cooling_height_budget']),'cooling')
         add('proposed-fan-cutout',cylinder(cx,cy,3.9,co['board_pocket_radius'],1.6),'changes')
     if C.get('fan_harness'):parts.extend(fan_harness.make_parts())
+    if C.get('lid_stops'):
+        import lid_stops
+        parts,stop_changes=lid_stops.adapt_case(parts,C)
+        mount_rows.extend({'lid_stop_change':row} for row in stop_changes)
     assert before==inputs(),'source files changed during build'
     CACHE.mkdir(parents=True,exist_ok=True);rows=[]
     for i,p in enumerate(parts):
@@ -252,7 +259,9 @@ def check(parts,before,mounts):
     fixed=[p for p in parts if not p.get('moving') and p['group'] not in ['keepout','changes']]
     moving=[p for p in parts if p.get('moving')]
     sweep=[]
-    for angle in range(0,181,C['hinges']['check_step_deg']):
+    import lid_stops
+    opening_samples=lid_stops.angles(C)
+    for angle in opening_samples:
         hits=[]
         for p in moving:
             s=pose(p,angle)['shape']
@@ -291,11 +300,13 @@ def check(parts,before,mounts):
     if C.get('fan_harness'):
         import fan_harness_checks
         fan_checks=fan_harness_checks.check(parts,C,before.copy())
+    import lid_stop_checks
+    stop_checks=lid_stop_checks.evaluate(parts,C,before.copy())
     h=C['hinges'];o=C['outline'];l=C['lid']
     # This geometric check detects a fixed rear platform behind the open lid's
     # back plane, rather than assuming that equal closed outlines are sufficient.
     no_shelf=[]
-    for angle in [90,105,120,135,140]:
+    for angle in [90,105,120,135]:
         skin=pose(next(p for p in parts if p['name']=='lid-skin'),angle)['shape']
         # Intersect a thin horizontal slab at deck level. If the lid is entirely
         # above it, use the projected rear heel at its lowest edge instead.
@@ -327,17 +338,18 @@ def check(parts,before,mounts):
             'other_parts_outside_nominal_outline':perimeter,
             'lid_rim_to_base_wall_nominal_gap_mm':rim_gaps,
             'closed_height_without_feet_mm':h['pivot_height']+l['back_inner_height_from_axis']+l['skin'],
-            'feet_checks':feet_checks,'fan_harness_checks':fan_checks,
+            'feet_checks':feet_checks,'fan_harness_checks':fan_checks,'lid_stop_checks':stop_checks,
             'nominal_closed_height_with_feet_mm':feet_checks['nominal_closed_height_with_feet_mm'] if feet_checks else None,
             'screen_to_key_nominal_gap_mm':h['pivot_height']+l['panel_back_height_from_axis']-l['panel_thickness']-(C['boards']['keyboard_bottom_H']+.8+4.5),
-            'hinge_sweep':{'sample_range_deg':[0,180],'step_deg':C['hinges']['check_step_deg'],'collisions':sweep,
-                           'last_clear_sample_before_first_collision_deg':sweep[0]['angle_deg']-2 if sweep else 180,
+            'hinge_sweep':{'sample_range_deg':[0,C['hinges']['requested_opening_deg']],'sample_angles_deg':opening_samples,'step_deg':C['hinges']['check_step_deg'],'collisions':sweep,
+                           'last_clear_sample_before_first_collision_deg':max([a for a in opening_samples if a<sweep[0]['angle_deg']],default=None) if sweep else opening_samples[-1],
                            'scope':'new rigid shell, panel reservation and actual OEM hinge parts versus retained PCB models, power harness and candidate supports; OEM internal bearing contact excluded'},
             'rear_projection_screen':no_shelf,'internal_interferences':internals,'hinge_supports':mounts,
             'USB_harness_checks':usb_checks,'cooler_checks':cooler_checks,
             'radio_internal':False,'PCB_files_unchanged':before==inputs(),'complete_fit_verified':False,
             'thermal_performance_verified':False,'structural_load_verified':False,'manufacturing_ready':False,
             'limitations':C['notes']}
+    result['nominal_opening_geometry_pass']=not sweep and not internals and stop_checks['stop_geometry_pass']
     (HERE/'checks.json').write_text(json.dumps(result,indent=2)+'\n')
     print('internal interference pairs',len(internals),flush=True)
     return result
@@ -356,6 +368,8 @@ def views(parts):
             s=p['shape'].intersect(clip)
             if s.Volume()>.001:section.append({**p,'shape':s})
     render(section,out/'hinge-detail.png','left Framework hinge / new rear position and supports',direction=(1,.8,.9),size=(1550,1100))
+    import lid_stop_checks
+    lid_stop_checks.draw(parts)
     fig,axs=plt.subplots(1,2,figsize=(14,6),facecolor='#faf9f5')
     for ax,title,base_y,lid_y in [(axs[0],'saved case',-26,-18),(axs[1],'flush candidate',-18,-18)]:
         ax.add_patch(Rectangle((-6,base_y),370,256-base_y,fc='#809795',alpha=.45,ec='#244c46',lw=2))
@@ -393,6 +407,9 @@ def export(parts):
     payload={'parts':data,'pivot':[0,-C['hinges']['pivot_y'],C['hinges']['pivot_height']],'findings':C['notes'],'configuration':config,'source_hashes':inputs()}
     template=(BASE/'viewer-template.html').read_text().replace('ducktop2 / case prototype','ducktop2 / flush case')
     template=template.replace('370 × 282 mm base','370 × 274 mm matching outlines').replace('Current power wires are shown, including unresolved clashes.','Right-side cooler and revised power guides; mounting and thermal tests remain unfinished.')
+    maximum=C['hinges']['requested_opening_deg']
+    template=template.replace('setAngle(180)','setAngle('+str(maximum)+')').replace('>180°</button>','>'+str(maximum)+'°</button>').replace('max="180"','max="'+str(maximum)+'"')
+    template=template.replace('function setAngle(v){angle=v;', 'function setAngle(v){v=Math.max(0,Math.min('+str(maximum)+',v));angle=v;')
     (HERE/'inspection.html').write_text(template.replace('/*ASSEMBLY_DATA*/',json.dumps(payload,separators=(',',':'))))
 
 
