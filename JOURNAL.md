@@ -5,6 +5,34 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-10: wire the fan and add the feet
+
+**Total time spent: 1 hour**
+
+worked out how to connect the smaller blower to the motherboard. the fan comes with 32 awg leads, which are too small for the contacts in the existing jst gh connector. picked four factory-crimped 28 awg leads and the matching housing, then worked out the staggered splices and heatshrink. all four extension wires are black, so both ends need pin labels before they go into the housing. checked the pin order against the actual pcb too.
+
+the first cable route ran into the power wiring. moved the crossing forward of the heatpipes and raised it over the power guides, then brought it back down beside the fan. also found that the case model only had the m.2 sockets and retainers, without the full card areas. added space for the complete 2280 ssd and 2230 wifi card, using the existing 6 mm height limit above the motherboard. raised the middle cable run to clear that space while keeping it under the pipes.
+
+![the fan lead route and reserved m.2 card spaces](docs/images/journal/2026-10-10-fan-route.png)
+
+added five guides to the keyboard carrier so the wire has support along the route, especially at the raised crossing. made a separate brace beside the fan for the splice section. it shares an existing fan screw, with a spacer shortened by 1 mm to make room for the brace without lifting the fan. the first brace link clipped the wire as it turned around the front, so raised that link over the bend.
+
+made a removable clamp at the fan end, with a soft liner and two screws. checked the connector withdrawal space and screwdriver access. getting to j52 still means exposing it under the keyboard, so the guides and clamp need releasing before taking out the fan and loom. the cut lengths include room for the splices and wire hidden in the housing, but they still need checking against a dressed sample before trimming.
+
+![the removable clamp and fan support brace](docs/images/journal/2026-10-10-fan-clamp.png)
+
+picked five 3m sj5344 feet, with an extra support beside the intake. they clear the grille and the two fin screws underneath. the body stays at 33.3 mm closed, or 37.4 mm with the nominal 4.1 mm feet. allowing for the published size tolerance, plus separate compression and floor-deflection budgets, leaves 3.1 mm under the intake. those last two allowances need a measurement with the warm, loaded laptop.
+
+![the five feet and clear bottom intake](docs/images/journal/2026-10-10-feet-underneath.png)
+
+fixed the clearance check so it includes the new carrier guides, and added tests for the hollow liner and floor clipping. all 19 tests pass. the saved model has no detected internal clashes, and the wire, guide, card-space and access checks pass within their recorded limits. the route comes out to about 340 mm, with a 5.47 mm minimum inside bend radius and 1.17 mm minimum wire spacing after the allowances. none of the pcb files changed.
+
+went back over the motherboard components beneath both m.2 cards too. checked all 611 populated top-side courtyards against the reserved areas. the wifi area only contains its socket and retainer. c837's courtyard slightly crosses the expanded ssd box, but its nominal body and pads stay outside, so left it in place. saved a close-up with the calculated gaps. the exact cards and antenna plugs still need their own fit check.
+
+![the m.2 card spaces and c837 beside the ssd](docs/images/journal/2026-10-10-m2-card-clearance.png)
+
+the actual loom still needs continuity, voltage-drop, pull and heat tests. the guide liners have to fit the measured bundle, and the chosen cards need to stay inside the reserved space. i also still need the official cooler's mounting measurements and load data before finishing the cpu clamp.
+
 # 2026-10-10: mount the cooler and add its air duct
 
 **Total time spent: 2 hours**

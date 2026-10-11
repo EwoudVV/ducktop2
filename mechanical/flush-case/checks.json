@@ -31,11 +31,11 @@
     "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
     "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
     "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-    "mechanical/flush-case/assembly.json": "dbb1e8a79da9edd31ec1b16971f9ac28fbfccd92b3a8d5782531a360bafdfb03",
-    "mechanical/flush-case/build.py": "833f81cb5481b60b48c054fcc38deec047642596955814804eb6be01de4c324d",
+    "mechanical/flush-case/assembly.json": "da2d83ca33ca7142601177615c65a2537999a39f71905524700769bea1a8839e",
+    "mechanical/flush-case/build.py": "5942e8cdcad1627f13eaf5c1669cbd3a791c0ce423d2c6be75f0018b8b4637b0",
     "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
     "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
-    "mechanical/flush-case/usb_collision.py": "f39fbd1a947d1dbca9c1d11e1310865a090272a6351ef8d9ae6193690d663b70",
+    "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
     "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
     "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
     "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
@@ -43,12 +43,18 @@
     "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
     "mechanical/flush-case/cooler.json": "2d3198f6c33a6ced0ee503baf48b0fe853054e126ac553e14517b5e9b132a4dd",
     "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
-    "mechanical/flush-case/check_cooler.py": "0dc6dde5a083e641b1e042a97200a694d97d83b50d120faf7103ed50e440e704",
-    "mechanical/flush-case/cooler_hardware.py": "cc3327f16622004ad18130c2d25504af927e4343c5d024b4e2c9cd48cfd3cc73",
-    "mechanical/flush-case/hardware_checks.py": "0a5d540808528f14e24bc89a4d4be2aee60e0f66462c9d6de26ca688d468cbc8",
-    "mechanical/flush-case/cooler-hardware.json": "7417a8edc8fa6129171759fbe4c726951be2549ef4eb2e7dbb05cadbb302bd37",
+    "mechanical/flush-case/check_cooler.py": "4b5941c29dee07db63f0a08ee60783b9d01ac60e89a124cdb9cb73b5bbf62274",
+    "mechanical/flush-case/cooler_hardware.py": "b48a8e95e309d03336ef138b7e32b663e11837f4b5c5c8fac7d241a6f0c18512",
+    "mechanical/flush-case/hardware_checks.py": "a711e3d6b391fcbba1c06779ac5792dc3f57b18323c66a2bbe46186f0977ded4",
+    "mechanical/flush-case/cooler-hardware.json": "53260e58c9254ad94aa7def1a6a6508bc256a71dc2d6f1f90e79ffffa9d1fd0e",
     "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
-    "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de"
+    "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de",
+    "mechanical/flush-case/feet.json": "a73510651f2bc399a1aabce246bdde8b6996324c3b1c3d9527ebe76932636c69",
+    "mechanical/flush-case/case_feet.py": "2ad5930f376f68f53ee5641aa9bc5a1e4d267352d6cda91bc92e01491ad1a4be",
+    "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
+    "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
+    "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
+    "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e"
   },
   "configuration": {
     "date": "2026-10-10",
@@ -140,7 +146,9 @@
       "The blower outlet faces the fins and its inlet faces the base grille. Separate supports carry the fan and fin stack. The CPU clamp, materials, seals and thermal performance still need qualification.",
       "Cell maximum thickness, trackpad/plug dimensions and panel thickness/mass still need measurement. The 11 mm cells, 5 mm trackpad and 3.5 mm panel remain assumptions or nominal listing values.",
       "Thin panels, the keyboard carrier and hinge supports need structural design and load tests. This is not a fabrication or print release.",
-      "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement."
+      "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement.",
+      "Five SJ5344 feet add 4.1 mm nominal height. The 3.1 mm intake-gap budget includes unmeasured compression and floor-deflection allowances; verify the loaded warm assembly.",
+      "The four fan leads use a JST GH pre-crimped extension, staggered insulated splices, a carrier guide and a separate floor clamp. Dressed fit and pull, heat and electrical tests are still required."
     ],
     "usb_heatpipe_crossing": {
       "drop_mm": 3.0,
@@ -151,7 +159,9 @@
       "front_full_y": 101,
       "front_end_y": 141
     },
-    "cooling_layout": "right-delta-dual-pipe-v1"
+    "cooling_layout": "right-delta-dual-pipe-v1",
+    "feet": "SJ5344-five-feet",
+    "fan_harness": "J52-GH-DV52-v1"
   },
   "closed_outline_mm": {
     "base": [
@@ -190,6 +200,1037 @@
     "140": 0.61551
   },
   "closed_height_without_feet_mm": 33.3,
+  "feet_checks": {
+    "part": "3M Bumpon SJ5344",
+    "configuration": {
+      "date": "2026-10-10",
+      "part": "3M Bumpon SJ5344",
+      "small_pack": "SJ5344BL, 16 pieces",
+      "quantity": 5,
+      "source": "https://www.3m.co.uk/3M/en_GB/p/dc/v100720231/",
+      "drawing": "https://multimedia.3m.com/mws/media/117314O/3m-bumpon-protective-products-molded-shapes-colored-and-clear.pdf",
+      "drawing_page": 2,
+      "diameter_mm": 19.1,
+      "height_mm": 4.1,
+      "dimension_tolerance_mm": 0.5,
+      "adhesive": "A-20 acrylic, factory applied",
+      "centres_xy": [
+        [
+          12,
+          0
+        ],
+        [
+          346,
+          0
+        ],
+        [
+          12,
+          236
+        ],
+        [
+          346,
+          236
+        ],
+        [
+          343,
+          190
+        ]
+      ],
+      "position_allowance_mm": 0.5,
+      "compression_budget_mm": 0.25,
+      "local_floor_deflection_budget_mm": 0.25,
+      "required_intake_gap_mm": 3.0,
+      "geometry_basis": "Cylindrical outer envelopes at the published nominal size, not an OEM surface model. Dimensions include the foot without its release liner.",
+      "budget_basis": "Published dimensional tolerance plus separate design budgets for loaded compression and local floor deflection. The two load budgets are not measured properties.",
+      "fit_note": "Four perimeter feet plus one beside the intake. Apply to clean, flat, fully finished bonding areas. Verify adhesion on the actual case material and measure the loaded intake gap after warming the assembly.",
+      "adhesion_verified": false,
+      "loaded_gap_verified": false,
+      "manufacturing_ready": false
+    },
+    "foot_checks": [
+      {
+        "foot": 1,
+        "centre_xy": [
+          12,
+          0
+        ],
+        "minimum_edge_margin_mm": 7.7,
+        "missing_floor_bond_area_mm2": 0,
+        "plan_gap_to_intake_mm": 318.421
+      },
+      {
+        "foot": 2,
+        "centre_xy": [
+          346,
+          0
+        ],
+        "minimum_edge_margin_mm": 7.7,
+        "missing_floor_bond_area_mm2": 0,
+        "plan_gap_to_intake_mm": 125.527
+      },
+      {
+        "foot": 3,
+        "centre_xy": [
+          12,
+          236
+        ],
+        "minimum_edge_margin_mm": 7.7,
+        "missing_floor_bond_area_mm2": 0,
+        "plan_gap_to_intake_mm": 295.636
+      },
+      {
+        "foot": 4,
+        "centre_xy": [
+          346,
+          236
+        ],
+        "minimum_edge_margin_mm": 7.7,
+        "missing_floor_bond_area_mm2": 0,
+        "plan_gap_to_intake_mm": 62.46
+      },
+      {
+        "foot": 5,
+        "centre_xy": [
+          343,
+          190
+        ],
+        "minimum_edge_margin_mm": 10.7,
+        "missing_floor_bond_area_mm2": 0,
+        "plan_gap_to_intake_mm": 18.269
+      }
+    ],
+    "service_conflicts": [],
+    "conditional_minimum_intake_gap_mm": 3.1,
+    "nominal_closed_height_with_feet_mm": 37.4,
+    "foot_height_tolerance_only_max_closed_height_mm": 37.9,
+    "nominal_geometry_pass": true,
+    "loaded_gap_verified": false,
+    "adhesion_verified": false,
+    "structural_load_verified": false,
+    "limits": [
+      "The 0.25 mm compression and 0.25 mm local floor-deflection budgets require loaded measurements.",
+      "Clearance is for a hard flat surface; soft surfaces can block the inlet.",
+      "Foot adhesion, rocking, case stiffness and the complete mass distribution need a physical test."
+    ]
+  },
+  "fan_harness_checks": {
+    "date": "2026-10-10",
+    "source_hashes": {
+      "mechanical/case-prototype/build.py": "e0f9cd653ca4f809b2c848afc9c9cab42a8950da9cb38069c4c71395af467246",
+      "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
+      "mechanical/case-prototype/cad.py": "4a356ff6f8c32fa71761980d8f8ea55bf92395b6d3d894cdb8f4232a3a81d96f",
+      "mechanical/case-prototype/case_inputs.py": "96a2cabded138177c1237eb411260619bf30299b35cc9ee0d985c5a15b8d4ffb",
+      "mechanical/case-prototype/component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664",
+      "mechanical/case-prototype/cooling-datums.json": "3e459e6ca6901a1a836e4e8bc68895ca72535cad596ee1e858838230a9f5b84c",
+      "mechanical/case-prototype/cooling-parts.json": "844ce7bbe557896883bc2ef6755ac2477581c6d3db5511411af8795597399860",
+      "mechanical/case-prototype/cooling.py": "29143f0ef782f2815999ed2183b28651ada4cdc9ac269c4cf1c68a8e90a692ea",
+      "mechanical/case-prototype/ground_braids.py": "fa507327ab81c7fce12c927e457d45cad39828075c99f261c51c036d85c646cd",
+      "mechanical/case-prototype/harness_geometry.py": "5ec731368f04b256bb156fb27b9a94135696e66084a305ee3a8bfa39decd5672",
+      "mechanical/case-prototype/hinges.py": "7a4803a568a0c45ab77072926ae41a667eab80a0c85196a26dfa173812b75f8a",
+      "mechanical/case-prototype/radio_hardware.py": "7b445ad946393b2b038533c2b665ae263283adce5e0939a525c9b0f3f4c9832a",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-connector-access.json": "63ac4ffa038947f686031fa7795131dd20af9955ba6e19e8313f035b2f982bfe",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-connector-clearances.json": "44b86748076583801b4a0412c393a6cbd1c37a448112275532dbea5f9b37d819",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-harness-routing.json": "13fc3978a1c76499755d111ff25b8e0e856beca4a2281e94b04179f82a49fa22",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/board-datums.json": "eb7fe026fb0b33a691bc3c35ab325eea04b916b3411f6c935033a79a3d3c9db5",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/board-placement.json": "e732be977147f2d878bd38e04bdaed0645e22ea4aa8a79bd3412431380ddfe7e",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/power-harness-checks.json": "290338efa0dc241427174403b3b8f94746328e78a94914ede7a9df05e11f99f3",
+      "mechanical/case-prototype/reference/pcb-snapshot/inputs/power-harness.json": "4016ffe4a1134de1758c097b28634249fb27f55597dac49b82fbe762f8fc7d0b",
+      "mechanical/case-prototype/reference/pcb-snapshot/manifest.json": "9fee31bb82621dbebe4d04e49780e43573476e4a36dd65c8d0b024f2e909d576",
+      "mechanical/case-prototype/service_carriers.py": "0ae9f787da099c85e26dbdca2c251169b78bb092cf3197034b4ad66547cfc786",
+      "mechanical/case-prototype/assembly.json": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824",
+      "mechanical/case-prototype/board-inventory.json": "483f35bb3236877e841e96c6f9e68dde5fa4fb96372bdfb820d7e92112fc70c2",
+      "left_io/left_io.kicad_pcb": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
+      "ducktop2-center.kicad_pcb": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+      "right_io/right_io.kicad_pcb": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
+      "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+      "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
+      "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
+      "mechanical/flush-case/assembly.json": "da2d83ca33ca7142601177615c65a2537999a39f71905524700769bea1a8839e",
+      "mechanical/flush-case/build.py": "5942e8cdcad1627f13eaf5c1669cbd3a791c0ce423d2c6be75f0018b8b4637b0",
+      "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
+      "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
+      "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
+      "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
+      "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
+      "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+      "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
+      "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
+      "mechanical/flush-case/cooler.json": "2d3198f6c33a6ced0ee503baf48b0fe853054e126ac553e14517b5e9b132a4dd",
+      "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
+      "mechanical/flush-case/check_cooler.py": "4b5941c29dee07db63f0a08ee60783b9d01ac60e89a124cdb9cb73b5bbf62274",
+      "mechanical/flush-case/cooler_hardware.py": "b48a8e95e309d03336ef138b7e32b663e11837f4b5c5c8fac7d241a6f0c18512",
+      "mechanical/flush-case/hardware_checks.py": "a711e3d6b391fcbba1c06779ac5792dc3f57b18323c66a2bbe46186f0977ded4",
+      "mechanical/flush-case/cooler-hardware.json": "53260e58c9254ad94aa7def1a6a6508bc256a71dc2d6f1f90e79ffffa9d1fd0e",
+      "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
+      "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de",
+      "mechanical/flush-case/feet.json": "a73510651f2bc399a1aabce246bdde8b6996324c3b1c3d9527ebe76932636c69",
+      "mechanical/flush-case/case_feet.py": "2ad5930f376f68f53ee5641aa9bc5a1e4d267352d6cda91bc92e01491ad1a4be",
+      "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
+      "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
+      "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
+      "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e"
+    },
+    "configuration": {
+      "date": "2026-10-10",
+      "status": "prototype harness layout; dressed fit, splice pull strength and electrical operation are untested",
+      "fan": "Delta BFB04512HHA-DV52",
+      "fan_drawing": "https://www.delta-fan.com/Download/Spec/BFB04512HHA-DV52.pdf",
+      "header": "J52, JST SM04B-GHS-TB",
+      "housing": "JST GHR-04V-S",
+      "connector_drawing": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+      "precrimp_lead": "JST AGHGH28K305",
+      "lead_quantity": 4,
+      "lead_drawing": "https://gam-gec.com/wp-content/uploads/2018/10/GAM-048.pdf",
+      "lead_inside_length_mm": 304.8,
+      "lead_length_tolerance_mm": 5.0,
+      "lead_gauge_AWG": 28,
+      "lead_wire": "UL1571, black; factory SSHL-002T-P0.2 contacts",
+      "factory_fan_lead_gauge_AWG": 32,
+      "factory_fan_lead_length_mm": 150,
+      "factory_fan_lead_tolerance_mm": 10,
+      "pins": [
+        {
+          "pin": 1,
+          "net": "GND",
+          "fan_colour": "black",
+          "factory_run_to_splice_mm": 55
+        },
+        {
+          "pin": 2,
+          "net": "/Internal Services/FAN_12V",
+          "fan_colour": "red",
+          "factory_run_to_splice_mm": 61
+        },
+        {
+          "pin": 3,
+          "net": "/FAN_TACH",
+          "fan_colour": "white",
+          "factory_run_to_splice_mm": 67
+        },
+        {
+          "pin": 4,
+          "net": "/Internal Services/FAN_PWM_CONN",
+          "fan_colour": "yellow",
+          "factory_run_to_splice_mm": 73
+        }
+      ],
+      "lead_labels": "All four extension leads are black. Mark pin numbers at both ends before assembly and check continuity against the saved PCB pin map.",
+      "splice_lap_allowance_mm": 3.0,
+      "header_hidden_wire_allowance_mm": 4.0,
+      "splice_heatshrink": "TE Raychem RNF-3000-1.5/0.5-0-SP",
+      "heatshrink_source": "https://www.te.com/en/product-5677554004.html",
+      "heatshrink_expanded_ID_min_mm": 1.5,
+      "heatshrink_recovered_ID_max_mm": 0.5,
+      "heatshrink_length_each_mm": 12,
+      "maximum_bare_splice_diameter_mm": 1.25,
+      "maximum_finished_bundle_OD_mm": 3.2,
+      "maximum_splice_region_OD_mm": 5.2,
+      "wire_position_allowance_mm": 0.2,
+      "curve_allowance_mm": 0.025,
+      "minimum_inside_bend_radius_mm": 5.0,
+      "bend_basis": "Static dressing limit chosen at five times the 1 mm maximum individual-lead insulation diameter. It is a design requirement for these separate leads, not a published flex-life rating.",
+      "bundle_basis": "The CAD represents maximum dressed envelopes, not four exact wire surfaces. Measure the sleeved bundle and splices; these limits must hold for the shown route to fit.",
+      "fan_exit_xyH": [
+        330.1,
+        169,
+        10
+      ],
+      "fan_exit_basis": "Nominal lead opening identified in the manufacturer STEP and drawing. The factory-installed exit is screened against the real housing; its small entry region is exempt from the coarse rectangular maximum-body box.",
+      "clamp": {
+        "x": 314.5,
+        "screw_y": [
+          174,
+          184
+        ],
+        "cap_bottom_H": 12.2,
+        "cap_top_H": 15.2,
+        "insert_top_H": 11.0,
+        "insert_length_mm": 3,
+        "insert_body_allocation_mm": 3.6,
+        "screw_length_mm": 8,
+        "washer_thickness_mm": 0.3
+      },
+      "header_guide": {
+        "x": 148,
+        "y": 70,
+        "wire_H": 14.0,
+        "grip_length_mm": 6,
+        "mouth_width_mm": 2.7,
+        "arm_thickness_mm": 0.6
+      },
+      "electrical": {
+        "maximum_current_A": 0.26,
+        "assembled_power_loop_resistance_limit_ohm_at_25C": 0.5,
+        "maximum_drop_at_test_current_V": 0.13,
+        "PWM_Hz": 25000,
+        "tach_pulses_per_revolution": 2,
+        "physical_tests_complete": false
+      },
+      "saved_board_endpoint": "BFB04512HHA-CZ0T; the candidate uses the same saved electrical pin map. No schematic, PCB or firmware changes are made by this case layout.",
+      "source_center_PCB_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+      "physical_fit_verified": false,
+      "strain_relief_verified": false,
+      "manufacturing_ready": false,
+      "layout_datums": {
+        "main_bottom_H": 3.9,
+        "bms_bottom_H": 7.9,
+        "carrier_bottom_H": 20,
+        "floor_mm": 1.2,
+        "fan_xy": [
+          298.5,
+          124.0
+        ],
+        "fan_bottom_H": 6.4
+      },
+      "carrier_guides": [
+        {
+          "xy": [
+            148,
+            70
+          ],
+          "wire_H": 14.0
+        },
+        {
+          "xy": [
+            172,
+            95
+          ],
+          "wire_H": 14.0
+        },
+        {
+          "xy": [
+            214,
+            95
+          ],
+          "wire_H": 14.0
+        },
+        {
+          "xy": [
+            242,
+            104.8951
+          ],
+          "wire_H": 14.0
+        },
+        {
+          "xy": [
+            277,
+            107
+          ],
+          "wire_H": 21.15
+        }
+      ],
+      "splice_support": "Printed brace on the existing front-inner fan post; replaces 1 mm of spacer height and supports the splice region beside the fan. Guide fit, stiffness and creep require a sample.",
+      "guide_fit_requirement": "Fit removable liners or sleeves to the measured loom so it stays within the 0.2 mm positioning budget. Maximum bundle diameters are not the actual finished dimensions.",
+      "card_spaces": [
+        {
+          "name": "NVMe-2280",
+          "xywh": [
+            189.0,
+            85.85,
+            87.6,
+            23.0
+          ],
+          "bottom_above_host_PCB_mm": 1.0,
+          "top_above_host_PCB_mm": 6.0
+        },
+        {
+          "name": "WiFi-2230",
+          "xywh": [
+            140.75,
+            85.800001,
+            37.6,
+            23.0
+          ],
+          "bottom_above_host_PCB_mm": 1.0,
+          "top_above_host_PCB_mm": 6.0
+        }
+      ],
+      "card_space_basis": "Conservative plan boxes around the saved J10/H3 and J40/H4 datums, including the existing 6 mm installed card/retainer height limit. These are selection envelopes, not measured cards; antenna plugs, thermal accessories and insertion motion need separate confirmation."
+    },
+    "solid_conflicts": [],
+    "internal_conflicts": [],
+    "card_space_support_conflicts": [],
+    "component_heights": {
+      "component_height_crossings": [
+        {
+          "wire": "fan",
+          "part": "center/FPC103",
+          "maximum_component_height_below_guide_mm": 14.3707,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 4.4,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Installed connector, cable-end seating and assembly allowance. The exact connector has 3.75 mm nominal mated height; confirm the complete fitted cable remains within 4.4 mm.",
+          "source": "https://www.molex.com/en-us/products/part-detail/5039085120",
+          "planning_gap_mm": 9.9707
+        },
+        {
+          "wire": "fan",
+          "part": "center/J10",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 5.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Socket envelope chosen above the published 4.2 mm nominal height. Confirm the seated socket; this does not cover the full SSD or its insertion sweep.",
+          "source": "https://www.amphenol-cs.com/product/mdt420m01001.html",
+          "planning_gap_mm": 1.65
+        },
+        {
+          "wire": "fan",
+          "part": "center/J40",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 5.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Socket-only reservation above the 4.2 mm nominal height. The complete Wi-Fi card, antenna plugs and insertion/removal motion are not covered.",
+          "source": "https://www.amphenol-cs.com/product/mdt420e01001.html",
+          "planning_gap_mm": 1.65
+        },
+        {
+          "wire": "fan",
+          "part": "center/J73",
+          "maximum_component_height_below_guide_mm": 6.726,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 5.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Installed receptacle allocation only. The supplier brief gives its 1.58 mm contact centre, not a complete maximum body height. Confirm the finished receptacle within 5 mm above the board. No USB plug is included; release the nearby harness for programming-port service.",
+          "source": "https://www.molex.com/content/dam/molex/molex-dot-com/en_us/pdf/product-briefs/987652-2683.pdf",
+          "planning_gap_mm": 1.726
+        },
+        {
+          "wire": "fan",
+          "part": "center/J310",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 3.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Connector and flat cable reservation; verify the mated flex and latch. The blower must be removed to service this keyboard connector.",
+          "source": "https://www.hirose.com/en/product/p/CL0586-0525-1-55",
+          "planning_gap_mm": 3.65
+        },
+        {
+          "wire": "fan",
+          "part": "center/J421",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 4.6,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Side-entry GH connector and seated housing allocation, using the same 4.6 mm limit as the other GH service plugs. The speaker lead dressing and withdrawal path are not covered.",
+          "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+          "planning_gap_mm": 2.05
+        },
+        {
+          "wire": "fan",
+          "part": "center/J2446",
+          "maximum_component_height_below_guide_mm": 13.8,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 1.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Existing 1 mm finished braid and solder-joint reservation. Nominal braid thickness is 0.508 mm; solder and formed shape need a physical check.",
+          "source": "ground_braids.py: right-2 joint allowance",
+          "planning_gap_mm": 12.8
+        },
+        {
+          "wire": "fan",
+          "part": "center/R360",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8
+        },
+        {
+          "wire": "fan",
+          "part": "center/R361",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8
+        },
+        {
+          "wire": "fan",
+          "part": "center/R363",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8
+        },
+        {
+          "wire": "fan",
+          "part": "center/R364",
+          "maximum_component_height_below_guide_mm": 7.165,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 6.315
+        },
+        {
+          "wire": "fan",
+          "part": "center/R365",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8
+        },
+        {
+          "wire": "fan",
+          "part": "center/R367",
+          "maximum_component_height_below_guide_mm": 6.7124,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8624
+        },
+        {
+          "wire": "fan",
+          "part": "center/R369",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8
+        },
+        {
+          "wire": "fan",
+          "part": "center/R370",
+          "maximum_component_height_below_guide_mm": 7.6519,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 6.8019
+        },
+        {
+          "wire": "fan",
+          "part": "center/R372",
+          "maximum_component_height_below_guide_mm": 6.9978,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 6.1478
+        },
+        {
+          "wire": "fan",
+          "part": "center/R376",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8
+        },
+        {
+          "wire": "fan",
+          "part": "center/R378",
+          "maximum_component_height_below_guide_mm": 7.605,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 6.755
+        },
+        {
+          "wire": "fan",
+          "part": "center/R379",
+          "maximum_component_height_below_guide_mm": 6.6539,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8039
+        },
+        {
+          "wire": "fan",
+          "part": "center/R380",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8
+        },
+        {
+          "wire": "fan",
+          "part": "center/R382",
+          "maximum_component_height_below_guide_mm": 7.5867,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 6.7367
+        },
+        {
+          "wire": "fan",
+          "part": "center/R383",
+          "maximum_component_height_below_guide_mm": 6.7746,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.9246
+        },
+        {
+          "wire": "fan",
+          "part": "center/R384",
+          "maximum_component_height_below_guide_mm": 6.6542,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 5.8042
+        },
+        {
+          "wire": "fan",
+          "part": "center/R385",
+          "maximum_component_height_below_guide_mm": 7.6158,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification v7, page 4: H=0.45+/-0.10mm across resistance values, including zero-ohm jumpers.",
+          "planning_gap_mm": 6.7658
+        },
+        {
+          "wire": "fan",
+          "part": "center/R387",
+          "maximum_component_height_below_guide_mm": 7.6158,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 0.8500000000000001,
+          "manufacturer_maximum_mm": 0.55,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.mouser.com/catalog/specsheets/RC0603.pdf",
+          "note": "Yageo RC0603 product specification page4: H=0.45+/-0.10mm. F/J tolerance and zero-ohm resistor options share the RC0603 mechanical dimensions.",
+          "planning_gap_mm": 6.7658
+        },
+        {
+          "wire": "fan",
+          "part": "center/SW1",
+          "maximum_component_height_below_guide_mm": 7.4838,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 4.8,
+          "manufacturer_maximum_mm": 4.5,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://components.omron.com/eu-en/system/files/2024-10/datasheet_pdf/A204-E1.pdf",
+          "note": "A204-E1, page 2, B3S-1000 without ground terminal: actuator height is 4.3 +/-0.2 mm.",
+          "planning_gap_mm": 2.6838
+        },
+        {
+          "wire": "fan",
+          "part": "center/TP6",
+          "maximum_component_height_below_guide_mm": 15.2256,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 1.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Bare copper test pad, with 1 mm reserved for incidental solder. No pin or permanent test wire is fitted. Probe access is separate.",
+          "source": "saved PCB test-pad geometry",
+          "planning_gap_mm": 14.2256
+        },
+        {
+          "wire": "fan",
+          "part": "center/U310",
+          "maximum_component_height_below_guide_mm": 6.65,
+          "limiting_surface": "wire",
+          "courtyard_screen_not_exact_body": true,
+          "height_mm": 1.75,
+          "manufacturer_maximum_mm": 1.45,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://www.ti.com/lit/ds/symlink/tps2553.pdf",
+          "note": "DBV0006A package outline, page 41: 1.45mm max",
+          "planning_gap_mm": 4.9
+        }
+      ],
+      "unverified_height_limits": [],
+      "known_height_clearance_conflicts": []
+    },
+    "larger_envelope_heights": {
+      "unverified_component_height_screens": [],
+      "component_height_crossings": [
+        {
+          "part": "center/H3",
+          "mpn": "M2XC4X2.5+C2.7X1.5",
+          "near": "fan-carrier-guide",
+          "available_height_mm": 14.5,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 6.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Maximum allowed installed space for the M.2 retainer, card, washer and screw. This is an assembly limit to verify on the selected hardware, not a manufacturer dimension.",
+          "source": "case mounting schedule: 2.5 mm M.2 retainer; final card and screw stack must fit within 6 mm above the host PCB",
+          "planning_gap_mm": 8.5
+        },
+        {
+          "part": "center/J10",
+          "mpn": "MDT420M01001",
+          "near": "fan-carrier-guide",
+          "available_height_mm": 6.6,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 5.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Socket envelope chosen above the published 4.2 mm nominal height. Confirm the seated socket; this does not cover the full SSD or its insertion sweep.",
+          "source": "https://www.amphenol-cs.com/product/mdt420m01001.html",
+          "planning_gap_mm": 1.6
+        },
+        {
+          "part": "center/J40",
+          "mpn": "MDT420E01001",
+          "near": "fan-carrier-guide",
+          "available_height_mm": 6.6,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 5.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Socket-only reservation above the 4.2 mm nominal height. The complete Wi-Fi card, antenna plugs and insertion/removal motion are not covered.",
+          "source": "https://www.amphenol-cs.com/product/mdt420e01001.html",
+          "planning_gap_mm": 1.6
+        },
+        {
+          "part": "center/J421",
+          "mpn": "SM02B-GHS-TB",
+          "near": "fan-splice-envelope",
+          "available_height_mm": 7.8743,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 4.6,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Side-entry GH connector and seated housing allocation, using the same 4.6 mm limit as the other GH service plugs. The speaker lead dressing and withdrawal path are not covered.",
+          "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+          "planning_gap_mm": 3.2743
+        },
+        {
+          "part": "center/J421",
+          "mpn": "SM02B-GHS-TB",
+          "near": "fan-splice-support-brace",
+          "available_height_mm": 6.7,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 4.6,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Side-entry GH connector and seated housing allocation, using the same 4.6 mm limit as the other GH service plugs. The speaker lead dressing and withdrawal path are not covered.",
+          "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+          "planning_gap_mm": 2.1
+        },
+        {
+          "part": "center/SW1",
+          "mpn": "B3S-1000",
+          "near": "fan-splice-envelope",
+          "available_height_mm": 6.5305,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 4.8,
+          "manufacturer_maximum_mm": 4.5,
+          "assembly_allowance_mm": 0.3,
+          "basis": "manufacturer_maximum",
+          "source": "https://components.omron.com/eu-en/system/files/2024-10/datasheet_pdf/A204-E1.pdf",
+          "note": "A204-E1, page 2, B3S-1000 without ground terminal: actuator height is 4.3 +/-0.2 mm.",
+          "planning_gap_mm": 1.7305
+        },
+        {
+          "part": "center/TP6",
+          "mpn": null,
+          "near": "fan-carrier-guide",
+          "available_height_mm": 14.2523,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 1.0,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Bare copper test pad, with 1 mm reserved for incidental solder. No pin or permanent test wire is fitted. Probe access is separate.",
+          "source": "saved PCB test-pad geometry",
+          "planning_gap_mm": 13.2523
+        }
+      ],
+      "known_component_height_conflicts": [],
+      "assembly_height_reservations": [
+        "center/H3",
+        "center/J10",
+        "center/J40",
+        "center/J421",
+        "center/TP6"
+      ]
+    },
+    "wire_separation_checks": [
+      {
+        "wire": "usb5-GND",
+        "gap_after_allowances_mm": 4.1108,
+        "pass": true
+      },
+      {
+        "wire": "usb5-USB_PORT_5V",
+        "gap_after_allowances_mm": 1.1746,
+        "pass": true
+      },
+      {
+        "wire": "left-USB_PD_SELECTED",
+        "gap_after_allowances_mm": 65.9033,
+        "pass": true
+      },
+      {
+        "wire": "left-PD1_VBUS_RAW",
+        "gap_after_allowances_mm": 65.9033,
+        "pass": true
+      },
+      {
+        "wire": "left-VSYS",
+        "gap_after_allowances_mm": 65.9033,
+        "pass": true
+      },
+      {
+        "wire": "left-MCU_3V3",
+        "gap_after_allowances_mm": 79.8255,
+        "pass": true
+      },
+      {
+        "wire": "left-SYS_3V3",
+        "gap_after_allowances_mm": 77.8108,
+        "pass": true
+      },
+      {
+        "wire": "left-AUX_DC_RAW",
+        "gap_after_allowances_mm": 75.9306,
+        "pass": true
+      },
+      {
+        "wire": "left-GND",
+        "gap_after_allowances_mm": 62.3187,
+        "pass": true
+      },
+      {
+        "wire": "right-SYS_5V",
+        "gap_after_allowances_mm": 58.8242,
+        "pass": true
+      },
+      {
+        "wire": "right-PD2_VBUS_RAW",
+        "gap_after_allowances_mm": 54.973,
+        "pass": true
+      },
+      {
+        "wire": "right-PD2_VBUS_GATED",
+        "gap_after_allowances_mm": 51.142,
+        "pass": true
+      },
+      {
+        "wire": "right-MCU_3V3",
+        "gap_after_allowances_mm": 46.0641,
+        "pass": true
+      },
+      {
+        "wire": "right-PCIE_3V3",
+        "gap_after_allowances_mm": 42.276,
+        "pass": true
+      },
+      {
+        "wire": "right-SYS_3V3",
+        "gap_after_allowances_mm": 38.5253,
+        "pass": true
+      },
+      {
+        "wire": "right-GND",
+        "gap_after_allowances_mm": 7.3737,
+        "pass": true
+      },
+      {
+        "wire": "bms-FG_VSS",
+        "gap_after_allowances_mm": 26.7332,
+        "pass": true
+      },
+      {
+        "wire": "bms-PACK_POS_FUSED",
+        "gap_after_allowances_mm": 29.9302,
+        "pass": true
+      }
+    ],
+    "service_checks": [
+      {
+        "access": "fan-J52-withdrawal-space",
+        "remove_first": [
+          "deck",
+          "keyboard-pcb-and-available-models",
+          "keyboard-carrier-reservation",
+          "key-travel-and-cap-envelopes"
+        ],
+        "moving_parts": [
+          "fan-J52-plug-envelope",
+          "fan-loom-envelope"
+        ],
+        "conflicts_after_removal": []
+      },
+      {
+        "access": "fan-clamp-driver-1",
+        "remove_first": [
+          "deck",
+          "oled-1-module",
+          "oled-2-module"
+        ],
+        "moving_parts": [],
+        "conflicts_after_removal": []
+      },
+      {
+        "access": "fan-clamp-driver-2",
+        "remove_first": [
+          "deck",
+          "oled-1-module",
+          "oled-2-module"
+        ],
+        "moving_parts": [],
+        "conflicts_after_removal": []
+      }
+    ],
+    "nominal_route_length_mm": 340.116,
+    "minimum_centerline_bend_radius_mm": 7.074,
+    "minimum_inside_bundle_bend_radius_mm": 5.474,
+    "cut_schedule": [
+      {
+        "pin": 1,
+        "net": "GND",
+        "fan_colour": "black",
+        "factory_run_to_splice_mm": 55,
+        "factory_wire_nominal_cut_mm": 58.0,
+        "extension_from_crimp_back_nominal_cut_mm": 292.12,
+        "stock_length_pass": true
+      },
+      {
+        "pin": 2,
+        "net": "/Internal Services/FAN_12V",
+        "fan_colour": "red",
+        "factory_run_to_splice_mm": 61,
+        "factory_wire_nominal_cut_mm": 64.0,
+        "extension_from_crimp_back_nominal_cut_mm": 286.12,
+        "stock_length_pass": true
+      },
+      {
+        "pin": 3,
+        "net": "/FAN_TACH",
+        "fan_colour": "white",
+        "factory_run_to_splice_mm": 67,
+        "factory_wire_nominal_cut_mm": 70.0,
+        "extension_from_crimp_back_nominal_cut_mm": 280.12,
+        "stock_length_pass": true
+      },
+      {
+        "pin": 4,
+        "net": "/Internal Services/FAN_PWM_CONN",
+        "fan_colour": "yellow",
+        "factory_run_to_splice_mm": 73,
+        "factory_wire_nominal_cut_mm": 76.0,
+        "extension_from_crimp_back_nominal_cut_mm": 274.12,
+        "stock_length_pass": true
+      }
+    ],
+    "physical_fit_verified": false,
+    "electrical_tests_complete": false,
+    "strain_relief_verified": false,
+    "manufacturing_ready": false,
+    "limits": [
+      "Maximum dressed envelopes are modeled; individual wires, twist and solder-joint surfaces are not exact CAD.",
+      "The factory exit alone is exempt from the coarse rectangular blower allowance. The real housing is still checked.",
+      "The brace shares the fan mounting interface; only that bounded corner is exempt from the coarse body box.",
+      "The bounded J52 wire-entry aperture is an intentional connector interface. Withdrawal checks move the plug rather than treating its initial position as an obstacle.",
+      "J73 and J421 use explicit installed-height allocations. The programming plug and speaker cable still need service checks.",
+      "Cut dimensions include provisional lap and hidden-wire allowances; dress and measure the actual leads before final trimming.",
+      "The carrier guide and clamp require material, pull, heat and assembly tests. The case and keyboard removal sequence remains a prototype."
+    ],
+    "nominal_geometry_pass": true
+  },
+  "nominal_closed_height_with_feet_mm": 37.4,
   "screen_to_key_nominal_gap_mm": 2.0,
   "hinge_sweep": {
     "sample_range_deg": [
@@ -935,8 +1976,8 @@
   "USB_harness_checks": {
     "date": "2026-10-10",
     "solid_conflicts": [],
-    "conservative_bound_rejections": 2520,
-    "exact_contact_checks": 9,
+    "conservative_bound_rejections": 2572,
+    "exact_contact_checks": 21,
     "rigid_component_height_conflicts": [],
     "unverified_rigid_component_heights": [],
     "fixed_feet_service_conflicts": [],
@@ -989,11 +2030,11 @@
       "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
       "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
       "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-      "mechanical/flush-case/assembly.json": "dbb1e8a79da9edd31ec1b16971f9ac28fbfccd92b3a8d5782531a360bafdfb03",
-      "mechanical/flush-case/build.py": "833f81cb5481b60b48c054fcc38deec047642596955814804eb6be01de4c324d",
+      "mechanical/flush-case/assembly.json": "da2d83ca33ca7142601177615c65a2537999a39f71905524700769bea1a8839e",
+      "mechanical/flush-case/build.py": "5942e8cdcad1627f13eaf5c1669cbd3a791c0ce423d2c6be75f0018b8b4637b0",
       "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
       "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
-      "mechanical/flush-case/usb_collision.py": "f39fbd1a947d1dbca9c1d11e1310865a090272a6351ef8d9ae6193690d663b70",
+      "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
       "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
       "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
       "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
@@ -1001,12 +2042,18 @@
       "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
       "mechanical/flush-case/cooler.json": "2d3198f6c33a6ced0ee503baf48b0fe853054e126ac553e14517b5e9b132a4dd",
       "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
-      "mechanical/flush-case/check_cooler.py": "0dc6dde5a083e641b1e042a97200a694d97d83b50d120faf7103ed50e440e704",
-      "mechanical/flush-case/cooler_hardware.py": "cc3327f16622004ad18130c2d25504af927e4343c5d024b4e2c9cd48cfd3cc73",
-      "mechanical/flush-case/hardware_checks.py": "0a5d540808528f14e24bc89a4d4be2aee60e0f66462c9d6de26ca688d468cbc8",
-      "mechanical/flush-case/cooler-hardware.json": "7417a8edc8fa6129171759fbe4c726951be2549ef4eb2e7dbb05cadbb302bd37",
+      "mechanical/flush-case/check_cooler.py": "4b5941c29dee07db63f0a08ee60783b9d01ac60e89a124cdb9cb73b5bbf62274",
+      "mechanical/flush-case/cooler_hardware.py": "b48a8e95e309d03336ef138b7e32b663e11837f4b5c5c8fac7d241a6f0c18512",
+      "mechanical/flush-case/hardware_checks.py": "a711e3d6b391fcbba1c06779ac5792dc3f57b18323c66a2bbe46186f0977ded4",
+      "mechanical/flush-case/cooler-hardware.json": "53260e58c9254ad94aa7def1a6a6508bc256a71dc2d6f1f90e79ffffa9d1fd0e",
       "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
-      "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de"
+      "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de",
+      "mechanical/flush-case/feet.json": "a73510651f2bc399a1aabce246bdde8b6996324c3b1c3d9527ebe76932636c69",
+      "mechanical/flush-case/case_feet.py": "2ad5930f376f68f53ee5641aa9bc5a1e4d267352d6cda91bc92e01491ad1a4be",
+      "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
+      "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
+      "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
+      "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e"
     },
     "configuration": {
       "date": "2026-10-10",
@@ -1220,7 +2267,9 @@
       ],
       "minimum_internal_inlet_gap_mm": 3.7,
       "required_external_inlet_gap_mm": 3,
-      "external_gap_provided_by_selected_feet": false,
+      "external_gap_provided_by_selected_feet": true,
+      "conditional_external_gap_mm": 3.1,
+      "loaded_external_gap_verified": false,
       "nominal_fan_outlet_open_area_mm2": 255.0,
       "nominal_fin_exit_open_area_mm2": 516.313,
       "nominal_case_exit_open_area_mm2": 733.2,
@@ -1249,17 +2298,33 @@
       "fan_replacement": {
         "remove_first": [
           "deck",
+          "fan-J52-plug-envelope",
+          "fan-clamp-screw-1",
+          "fan-clamp-screw-2",
+          "fan-clamp-washer-1",
+          "fan-clamp-washer-2",
+          "fan-loom-envelope",
           "fan-outlet-foil-bridge",
           "fan-screw-1",
           "fan-screw-2",
           "fan-screw-3",
+          "fan-splice-support-brace",
+          "fan-strain-cap",
+          "fan-strain-liner",
           "fan-washer-1",
           "fan-washer-2",
           "fan-washer-3",
+          "key-travel-and-cap-envelopes",
+          "keyboard-carrier-reservation",
+          "keyboard-pcb-and-available-models",
           "oled-1-module",
           "oled-2-module"
         ],
-        "disconnect_first": "fan lead extension; route and connector still to be defined",
+        "disconnect_first": "J52, carrier guide and fan-end clamp; lift the disconnected loom with the fan",
+        "moving_parts": [
+          "delta-blower",
+          "fan-splice-support-brace"
+        ],
         "positions": 16,
         "step_mm": 2,
         "vertical_travel_mm": 30,
@@ -1311,6 +2376,19 @@
           "note": "Chosen maximum installed stack for spacer, module PCB, retaining screw and clearance. The spacer itself is 5.6 mm maximum; the complete fastening stack must be selected and measured against this budget before cooler fabrication.",
           "source": "https://www.we-online.com/components/products/datasheet/9774055243R.pdf",
           "planning_gap_mm": 0.737
+        },
+        {
+          "part": "center/J421",
+          "mpn": "SM02B-GHS-TB",
+          "near": "fan-splice-support-brace",
+          "available_height_mm": 6.7,
+          "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+          "height_mm": 4.6,
+          "basis": "assembly_reservation",
+          "physical_fit_verified": false,
+          "note": "Side-entry GH connector and seated housing allocation, using the same 4.6 mm limit as the other GH service plugs. The speaker lead dressing and withdrawal path are not covered.",
+          "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+          "planning_gap_mm": 2.1
         },
         {
           "part": "center/FPC103",
@@ -1739,6 +2817,7 @@
         "center/H3",
         "center/J10",
         "center/J2462",
+        "center/J421",
         "right/C165",
         "right/C501",
         "right/C502",
@@ -2021,7 +3100,7 @@
         5.5,
         304.15,
         -163.35,
-        13.2
+        12.2
       ],
       "fan-washer-2": [
         299.5,
@@ -2270,6 +3349,14 @@
         364.0,
         -122.5,
         20.25
+      ],
+      "fan-splice-support-brace": [
+        288.6,
+        -172.5,
+        11.468806,
+        304.15,
+        -146.727285,
+        18.0
       ]
     },
     "PCB_changes_applied": false,
@@ -2302,6 +3389,8 @@
     "The blower outlet faces the fins and its inlet faces the base grille. Separate supports carry the fan and fin stack. The CPU clamp, materials, seals and thermal performance still need qualification.",
     "Cell maximum thickness, trackpad/plug dimensions and panel thickness/mass still need measurement. The 11 mm cells, 5 mm trackpad and 3.5 mm panel remain assumptions or nominal listing values.",
     "Thin panels, the keyboard carrier and hinge supports need structural design and load tests. This is not a fabrication or print release.",
-    "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement."
+    "The hinge motion is screened through 180 degrees. A usable opening and physical stop must be chosen from the actual clearance result and user requirement.",
+    "Five SJ5344 feet add 4.1 mm nominal height. The 3.1 mm intake-gap budget includes unmeasured compression and floor-deflection allowances; verify the loaded warm assembly.",
+    "The four fan leads use a JST GH pre-crimped extension, staggered insulated splices, a carrier guide and a separate floor clamp. Dressed fit and pull, heat and electrical tests are still required."
   ]
 }

@@ -12,7 +12,7 @@ outside of the base floor. the STEP export uses Z = -H.
 | front inner screw | X301.75, Y165.75 |
 | front outer screw | X340.25, Y165.75 |
 | short base bosses | radius 3.1 mm, top H5.5 |
-| separate tubular spacers | 4.8 mm outside diameter, 7.7 mm long |
+| separate tubular spacers | 4.8 mm outside diameter; two 7.7 mm, front-inner 6.7 mm plus the 1 mm wire brace |
 | lower fan-ear seats | H13.2 |
 | upper fan ears | H16.7 nominal |
 | washers | 4.5 mm outside diameter, 0.3 mm thick, size allocation |
@@ -67,9 +67,10 @@ edge. fit the insulating washers, baffle and seals before installing the
 unit. the final CPU attachment sequence depends on the spring hardware.
 
 the two fin screws are accessible from underneath. to replace the fan,
-remove the deck and both OLED modules, disconnect its extension and peel
-back the short outlet bridge. remove the three fan screws and washers,
-then lift the fan off its spacers. the nominal model clears a 30 mm lift
+remove the deck and both OLED modules, expose J52 under the keyboard,
+release the carrier guide and fan-end clamp, and disconnect the harness.
+peel back the short outlet bridge. remove the three fan screws and washers,
+then lift the fan, wire-support brace and disconnected loom off the spacers. the nominal model clears a 30 mm lift
 at the sampled positions. wiring slack and real tool access still need
 checking with the parts in hand.
 

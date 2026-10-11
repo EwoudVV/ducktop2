@@ -49,7 +49,8 @@ holding torque, lid stiffness, screw strength or cable flex life.
 
 ![open case candidate](views/open.png)
 
-the deck is 25 mm high and the closed model is 33.3 mm without feet. this
+the deck is 25 mm high and the closed model is 33.3 mm without feet,
+or 37.4 mm with the five nominal 4.1 mm feet. this
 uses the earlier remote-cooler budget, a 1.2 mm bottom/deck and a 1 mm lid
 skin. the screen has a nominal 2 mm gap above the keycap envelopes when
 closed. cell padding and the 3 mm swelling space are retained.
@@ -105,8 +106,10 @@ been qualified. the fan now faces its outlet toward the fins and draws
 through a grille in the base. separate spacers hold it above the intake
 boot; the fin screws also retain a gasketed duct. [mounting and access](cooler-mounts.md)
 are modeled, with physical material, seal and load tests still needed.
-the intake requires at least 3 mm under the base, so the final feet will
-add to the 33.3 mm case height. normal port slots are deliberately
+the intake requires at least 3 mm under the base. the selected SJ5344 feet
+leave a conditional 3.1 mm gap after dimensional tolerance and the proposed
+compression and deflection budgets. that needs a warm, loaded measurement.
+normal port slots are deliberately
 oversized until their mating plugs and service clearances are settled.
 
 the packs still use the 11 mm listed thickness, the trackpad uses an
@@ -133,6 +136,15 @@ motion and strain relief need rebuilding around the new hinge positions.
 - `cooler-hardware.json`, `cooler_hardware.py` and `hardware_checks.py`:
   fan spacers, fin and duct retention, grille, seals and sampled access checks.
 - `cooler-airflow.json`: delivered-airflow target, not measured performance.
+- `fan-harness.json`, `fan_harness.py` and `fan-harness-checks.json`: J52
+  pin map, extension parts, dressed envelopes, supports and fit checks.
+- `feet.json` and `case_feet.py`: five foot positions, bonding-area checks
+  and the loaded-clearance budget. the compression and sag figures are allocations.
+- `fan-wiring.md`, `draw_fan_harness.py` and `fan-harness-exports.json`:
+  assembly notes, close-up views and the separate harness inspection STEP.
+- `m2-fit.md`, `check_card_clearance.py` and `m2-card-clearance.json`:
+  the saved component placement beneath both card areas, including the
+  close C837 courtyard. exact cards and their removal paths still need checking.
 - `draw_cooler.py` and `cooler-exports.json`: close-up views and the separate
   cooler STEP, tied to the checked CAD sources.
 - `exports/closed.step`: the editable CAD assembly kept in git. the build

@@ -1,0 +1,177 @@
+{
+  "date": "2026-10-10",
+  "status": "prototype harness layout; dressed fit, splice pull strength and electrical operation are untested",
+  "fan": "Delta BFB04512HHA-DV52",
+  "fan_drawing": "https://www.delta-fan.com/Download/Spec/BFB04512HHA-DV52.pdf",
+  "header": "J52, JST SM04B-GHS-TB",
+  "housing": "JST GHR-04V-S",
+  "connector_drawing": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+  "precrimp_lead": "JST AGHGH28K305",
+  "lead_quantity": 4,
+  "lead_drawing": "https://gam-gec.com/wp-content/uploads/2018/10/GAM-048.pdf",
+  "lead_inside_length_mm": 304.8,
+  "lead_length_tolerance_mm": 5.0,
+  "lead_gauge_AWG": 28,
+  "lead_wire": "UL1571, black; factory SSHL-002T-P0.2 contacts",
+  "factory_fan_lead_gauge_AWG": 32,
+  "factory_fan_lead_length_mm": 150,
+  "factory_fan_lead_tolerance_mm": 10,
+  "pins": [
+    {
+      "pin": 1,
+      "net": "GND",
+      "fan_colour": "black",
+      "factory_run_to_splice_mm": 55
+    },
+    {
+      "pin": 2,
+      "net": "/Internal Services/FAN_12V",
+      "fan_colour": "red",
+      "factory_run_to_splice_mm": 61
+    },
+    {
+      "pin": 3,
+      "net": "/FAN_TACH",
+      "fan_colour": "white",
+      "factory_run_to_splice_mm": 67
+    },
+    {
+      "pin": 4,
+      "net": "/Internal Services/FAN_PWM_CONN",
+      "fan_colour": "yellow",
+      "factory_run_to_splice_mm": 73
+    }
+  ],
+  "lead_labels": "All four extension leads are black. Mark pin numbers at both ends before assembly and check continuity against the saved PCB pin map.",
+  "splice_lap_allowance_mm": 3.0,
+  "header_hidden_wire_allowance_mm": 4.0,
+  "splice_heatshrink": "TE Raychem RNF-3000-1.5/0.5-0-SP",
+  "heatshrink_source": "https://www.te.com/en/product-5677554004.html",
+  "heatshrink_expanded_ID_min_mm": 1.5,
+  "heatshrink_recovered_ID_max_mm": 0.5,
+  "heatshrink_length_each_mm": 12,
+  "maximum_bare_splice_diameter_mm": 1.25,
+  "maximum_finished_bundle_OD_mm": 3.2,
+  "maximum_splice_region_OD_mm": 5.2,
+  "wire_position_allowance_mm": 0.2,
+  "curve_allowance_mm": 0.025,
+  "minimum_inside_bend_radius_mm": 5.0,
+  "bend_basis": "Static dressing limit chosen at five times the 1 mm maximum individual-lead insulation diameter. It is a design requirement for these separate leads, not a published flex-life rating.",
+  "bundle_basis": "The CAD represents maximum dressed envelopes, not four exact wire surfaces. Measure the sleeved bundle and splices; these limits must hold for the shown route to fit.",
+  "fan_exit_xyH": [
+    330.1,
+    169,
+    10
+  ],
+  "fan_exit_basis": "Nominal lead opening identified in the manufacturer STEP and drawing. The factory-installed exit is screened against the real housing; its small entry region is exempt from the coarse rectangular maximum-body box.",
+  "clamp": {
+    "x": 314.5,
+    "screw_y": [
+      174,
+      184
+    ],
+    "cap_bottom_H": 12.2,
+    "cap_top_H": 15.2,
+    "insert_top_H": 11.0,
+    "insert_length_mm": 3,
+    "insert_body_allocation_mm": 3.6,
+    "screw_length_mm": 8,
+    "washer_thickness_mm": 0.3
+  },
+  "header_guide": {
+    "x": 148,
+    "y": 70,
+    "wire_H": 14.0,
+    "grip_length_mm": 6,
+    "mouth_width_mm": 2.7,
+    "arm_thickness_mm": 0.6
+  },
+  "electrical": {
+    "maximum_current_A": 0.26,
+    "assembled_power_loop_resistance_limit_ohm_at_25C": 0.5,
+    "maximum_drop_at_test_current_V": 0.13,
+    "PWM_Hz": 25000,
+    "tach_pulses_per_revolution": 2,
+    "physical_tests_complete": false
+  },
+  "saved_board_endpoint": "BFB04512HHA-CZ0T; the candidate uses the same saved electrical pin map. No schematic, PCB or firmware changes are made by this case layout.",
+  "source_center_PCB_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+  "physical_fit_verified": false,
+  "strain_relief_verified": false,
+  "manufacturing_ready": false,
+  "layout_datums": {
+    "main_bottom_H": 3.9,
+    "bms_bottom_H": 7.9,
+    "carrier_bottom_H": 20,
+    "floor_mm": 1.2,
+    "fan_xy": [
+      298.5,
+      124.0
+    ],
+    "fan_bottom_H": 6.4
+  },
+  "carrier_guides": [
+    {
+      "xy": [
+        148,
+        70
+      ],
+      "wire_H": 14.0
+    },
+    {
+      "xy": [
+        172,
+        95
+      ],
+      "wire_H": 14.0
+    },
+    {
+      "xy": [
+        214,
+        95
+      ],
+      "wire_H": 14.0
+    },
+    {
+      "xy": [
+        242,
+        104.8951
+      ],
+      "wire_H": 14.0
+    },
+    {
+      "xy": [
+        277,
+        107
+      ],
+      "wire_H": 21.15
+    }
+  ],
+  "splice_support": "Printed brace on the existing front-inner fan post; replaces 1 mm of spacer height and supports the splice region beside the fan. Guide fit, stiffness and creep require a sample.",
+  "guide_fit_requirement": "Fit removable liners or sleeves to the measured loom so it stays within the 0.2 mm positioning budget. Maximum bundle diameters are not the actual finished dimensions.",
+  "card_spaces": [
+    {
+      "name": "NVMe-2280",
+      "xywh": [
+        189.0,
+        85.85,
+        87.6,
+        23.0
+      ],
+      "bottom_above_host_PCB_mm": 1.0,
+      "top_above_host_PCB_mm": 6.0
+    },
+    {
+      "name": "WiFi-2230",
+      "xywh": [
+        140.75,
+        85.800001,
+        37.6,
+        23.0
+      ],
+      "bottom_above_host_PCB_mm": 1.0,
+      "top_above_host_PCB_mm": 6.0
+    }
+  ],
+  "card_space_basis": "Conservative plan boxes around the saved J10/H3 and J40/H4 datums, including the existing 6 mm installed card/retainer height limit. These are selection envelopes, not measured cards; antenna plugs, thermal accessories and insertion motion need separate confirmation."
+}

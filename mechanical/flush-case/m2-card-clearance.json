@@ -1,0 +1,129 @@
+{
+  "source_hashes": {
+    "mechanical/flush-case/check_card_clearance.py": "6758fb86c20d6079ae2b282d9c16950f560b78015d05af100d799ee77e5847f8",
+    "ducktop2-center.kicad_pcb": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+    "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+    "mechanical/board-placement.json": "e732be977147f2d878bd38e04bdaed0645e22ea4aa8a79bd3412431380ddfe7e",
+    "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6"
+  },
+  "screened_front_components": 611,
+  "missing_courtyards": [],
+  "cards": [
+    {
+      "card": {
+        "name": "NVMe-2280",
+        "xywh": [
+          189.0,
+          85.85,
+          87.6,
+          23.0
+        ],
+        "bottom_above_host_PCB_mm": 1.0,
+        "top_above_host_PCB_mm": 6.0
+      },
+      "courtyard_overlaps": [
+        {
+          "reference": "C837",
+          "overlap_mm2": 0.172082,
+          "mating_interface": false,
+          "nominal_fab_gap_mm": 0.266667,
+          "pad_bbox_gap_mm": 0.191667,
+          "nominal_fab_overlap_mm2": 0.0,
+          "maximum_body_and_assembly_tolerances_verified": false
+        },
+        {
+          "reference": "H3",
+          "overlap_mm2": 29.11346,
+          "mating_interface": true
+        },
+        {
+          "reference": "J10",
+          "overlap_mm2": 2012.70695,
+          "mating_interface": true
+        }
+      ]
+    },
+    {
+      "card": {
+        "name": "WiFi-2230",
+        "xywh": [
+          140.75,
+          85.800001,
+          37.6,
+          23.0
+        ],
+        "bottom_above_host_PCB_mm": 1.0,
+        "top_above_host_PCB_mm": 6.0
+      },
+      "courtyard_overlaps": [
+        {
+          "reference": "H4",
+          "overlap_mm2": 29.11346,
+          "mating_interface": true
+        },
+        {
+          "reference": "J40",
+          "overlap_mm2": 862.70695,
+          "mating_interface": true
+        }
+      ]
+    }
+  ],
+  "C837_native_geometry": {
+    "reference": "C837",
+    "position": [
+      221.900001,
+      146.066667
+    ],
+    "fab_rectangles": [
+      [
+        [
+          222.700001,
+          146.466667
+        ],
+        [
+          221.100001,
+          145.666667
+        ]
+      ]
+    ],
+    "pad_boxes": [
+      {
+        "number": "1",
+        "center": [
+          222.675001,
+          146.066667
+        ],
+        "size": [
+          0.9,
+          0.95
+        ],
+        "rotation": 180.0
+      },
+      {
+        "number": "2",
+        "center": [
+          221.125001,
+          146.066667
+        ],
+        "size": [
+          0.9,
+          0.95
+        ],
+        "rotation": 180.0
+      }
+    ]
+  },
+  "scope": "Static plan screen using saved courtyards and nominal C837 Fab geometry. The card boxes are selection limits, not measured modules.",
+  "unqualified": [
+    "C837 maximum body and assembly position",
+    "exact SSD and Wi-Fi models, underside parts and board thickness",
+    "socket, 2.5 mm retainer and screw assembly tolerances",
+    "Wi-Fi antenna plugs and lead bends",
+    "card insertion and removal motion"
+  ],
+  "physical_fit_verified": false,
+  "outputs": {
+    "views/m2-card-clearance.png": "bcc1b12be61309763a771c7f371406679fbd352eebf11dadce0d8e935966a76c"
+  }
+}

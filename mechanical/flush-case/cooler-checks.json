@@ -31,11 +31,11 @@
     "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
     "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
     "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-    "mechanical/flush-case/assembly.json": "dbb1e8a79da9edd31ec1b16971f9ac28fbfccd92b3a8d5782531a360bafdfb03",
-    "mechanical/flush-case/build.py": "833f81cb5481b60b48c054fcc38deec047642596955814804eb6be01de4c324d",
+    "mechanical/flush-case/assembly.json": "da2d83ca33ca7142601177615c65a2537999a39f71905524700769bea1a8839e",
+    "mechanical/flush-case/build.py": "5942e8cdcad1627f13eaf5c1669cbd3a791c0ce423d2c6be75f0018b8b4637b0",
     "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
     "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
-    "mechanical/flush-case/usb_collision.py": "f39fbd1a947d1dbca9c1d11e1310865a090272a6351ef8d9ae6193690d663b70",
+    "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
     "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
     "mechanical/flush-case/usb-harness.json": "31f3ba9d6fc0fae8a1213869965eace3160e6adaf809861d1619f0aed98b050c",
     "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
@@ -43,12 +43,18 @@
     "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
     "mechanical/flush-case/cooler.json": "2d3198f6c33a6ced0ee503baf48b0fe853054e126ac553e14517b5e9b132a4dd",
     "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
-    "mechanical/flush-case/check_cooler.py": "0dc6dde5a083e641b1e042a97200a694d97d83b50d120faf7103ed50e440e704",
-    "mechanical/flush-case/cooler_hardware.py": "cc3327f16622004ad18130c2d25504af927e4343c5d024b4e2c9cd48cfd3cc73",
-    "mechanical/flush-case/hardware_checks.py": "0a5d540808528f14e24bc89a4d4be2aee60e0f66462c9d6de26ca688d468cbc8",
-    "mechanical/flush-case/cooler-hardware.json": "7417a8edc8fa6129171759fbe4c726951be2549ef4eb2e7dbb05cadbb302bd37",
+    "mechanical/flush-case/check_cooler.py": "4b5941c29dee07db63f0a08ee60783b9d01ac60e89a124cdb9cb73b5bbf62274",
+    "mechanical/flush-case/cooler_hardware.py": "b48a8e95e309d03336ef138b7e32b663e11837f4b5c5c8fac7d241a6f0c18512",
+    "mechanical/flush-case/hardware_checks.py": "a711e3d6b391fcbba1c06779ac5792dc3f57b18323c66a2bbe46186f0977ded4",
+    "mechanical/flush-case/cooler-hardware.json": "53260e58c9254ad94aa7def1a6a6508bc256a71dc2d6f1f90e79ffffa9d1fd0e",
     "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
-    "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de"
+    "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de",
+    "mechanical/flush-case/feet.json": "a73510651f2bc399a1aabce246bdde8b6996324c3b1c3d9527ebe76932636c69",
+    "mechanical/flush-case/case_feet.py": "2ad5930f376f68f53ee5641aa9bc5a1e4d267352d6cda91bc92e01491ad1a4be",
+    "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
+    "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
+    "mechanical/flush-case/fan_harness.py": "610155af007d9f4f54c8cce86cf5a03533835dd2dcdce63c1061d14165468a97",
+    "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e"
   },
   "configuration": {
     "date": "2026-10-10",
@@ -262,7 +268,9 @@
     ],
     "minimum_internal_inlet_gap_mm": 3.7,
     "required_external_inlet_gap_mm": 3,
-    "external_gap_provided_by_selected_feet": false,
+    "external_gap_provided_by_selected_feet": true,
+    "conditional_external_gap_mm": 3.1,
+    "loaded_external_gap_verified": false,
     "nominal_fan_outlet_open_area_mm2": 255.0,
     "nominal_fin_exit_open_area_mm2": 516.313,
     "nominal_case_exit_open_area_mm2": 733.2,
@@ -291,17 +299,33 @@
     "fan_replacement": {
       "remove_first": [
         "deck",
+        "fan-J52-plug-envelope",
+        "fan-clamp-screw-1",
+        "fan-clamp-screw-2",
+        "fan-clamp-washer-1",
+        "fan-clamp-washer-2",
+        "fan-loom-envelope",
         "fan-outlet-foil-bridge",
         "fan-screw-1",
         "fan-screw-2",
         "fan-screw-3",
+        "fan-splice-support-brace",
+        "fan-strain-cap",
+        "fan-strain-liner",
         "fan-washer-1",
         "fan-washer-2",
         "fan-washer-3",
+        "key-travel-and-cap-envelopes",
+        "keyboard-carrier-reservation",
+        "keyboard-pcb-and-available-models",
         "oled-1-module",
         "oled-2-module"
       ],
-      "disconnect_first": "fan lead extension; route and connector still to be defined",
+      "disconnect_first": "J52, carrier guide and fan-end clamp; lift the disconnected loom with the fan",
+      "moving_parts": [
+        "delta-blower",
+        "fan-splice-support-brace"
+      ],
       "positions": 16,
       "step_mm": 2,
       "vertical_travel_mm": 30,
@@ -353,6 +377,19 @@
         "note": "Chosen maximum installed stack for spacer, module PCB, retaining screw and clearance. The spacer itself is 5.6 mm maximum; the complete fastening stack must be selected and measured against this budget before cooler fabrication.",
         "source": "https://www.we-online.com/components/products/datasheet/9774055243R.pdf",
         "planning_gap_mm": 0.737
+      },
+      {
+        "part": "center/J421",
+        "mpn": "SM02B-GHS-TB",
+        "near": "fan-splice-support-brace",
+        "available_height_mm": 6.7,
+        "screen": "saved courtyard below actual cooling material; assembly space is included in the resolved height",
+        "height_mm": 4.6,
+        "basis": "assembly_reservation",
+        "physical_fit_verified": false,
+        "note": "Side-entry GH connector and seated housing allocation, using the same 4.6 mm limit as the other GH service plugs. The speaker lead dressing and withdrawal path are not covered.",
+        "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+        "planning_gap_mm": 2.1
       },
       {
         "part": "center/FPC103",
@@ -781,6 +818,7 @@
       "center/H3",
       "center/J10",
       "center/J2462",
+      "center/J421",
       "right/C165",
       "right/C501",
       "right/C502",
@@ -1063,7 +1101,7 @@
       5.5,
       304.15,
       -163.35,
-      13.2
+      12.2
     ],
     "fan-washer-2": [
       299.5,
@@ -1312,6 +1350,14 @@
       364.0,
       -122.5,
       20.25
+    ],
+    "fan-splice-support-brace": [
+      288.6,
+      -172.5,
+      11.468806,
+      304.15,
+      -146.727285,
+      18.0
     ]
   },
   "PCB_changes_applied": false,

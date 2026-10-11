@@ -8,6 +8,9 @@ outline, and the radio is planned as an external accessory. i'm aiming for
 33.3 mm closed without feet. the right-side cooler and power guides now
 clear the saved geometry, with no board cutout. the fan and fins now have
 separate supports, with a bottom intake grille and a duct to the side.
+the five selected feet bring the nominal total to 37.4 mm. the fan lead
+extension has a route and removable clamp; the loaded intake gap and
+finished wiring still need a physical check.
 the cpu clamp and real material, load and cooling tests are still needed.
 [case CAD and fit notes](mechanical/flush-case/README.md)
 

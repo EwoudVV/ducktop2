@@ -1,0 +1,19 @@
+{
+  "manufacturer_maximums": {},
+  "reservations": {
+    "center/J73": {
+      "mpn": "105450-0101",
+      "footprint": "Connector_USB:USB_C_Receptacle_Molex_105450-0101",
+      "height_mm": 5.0,
+      "basis": "Installed receptacle allocation only. The supplier brief gives its 1.58 mm contact centre, not a complete maximum body height. Confirm the finished receptacle within 5 mm above the board. No USB plug is included; release the nearby harness for programming-port service.",
+      "source": "https://www.molex.com/content/dam/molex/molex-dot-com/en_us/pdf/product-briefs/987652-2683.pdf"
+    },
+    "center/J421": {
+      "mpn": "SM02B-GHS-TB",
+      "footprint": "Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",
+      "height_mm": 4.6,
+      "basis": "Side-entry GH connector and seated housing allocation, using the same 4.6 mm limit as the other GH service plugs. The speaker lead dressing and withdrawal path are not covered.",
+      "source": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf"
+    }
+  }
+}

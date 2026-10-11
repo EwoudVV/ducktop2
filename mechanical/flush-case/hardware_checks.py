@@ -53,21 +53,35 @@ def evaluate(parts,case,c):
     # This only checks fan replacement, not removal of the complete CPU unit.
     remove={'deck','oled-1-module','oled-2-module','fan-outlet-foil-bridge'}
     remove.update(f'fan-{kind}-{i}' for kind in ['screw','washer'] for i in range(1,4))
+    if case.get('fan_harness'):
+        remove.update(['keyboard-pcb-and-available-models','keyboard-carrier-reservation','key-travel-and-cap-envelopes',
+                       'fan-loom-envelope','fan-J52-plug-envelope','fan-strain-cap','fan-strain-liner'])
+        remove.update(f'fan-clamp-{kind}-{i}' for kind in ['screw','washer'] for i in range(1,3))
+        remove.add('fan-splice-support-brace')
     fixed=[p for p in parts if not p.get('moving') and p['group'] not in ['keepout','changes']
            and p['name'] not in remove|{'delta-blower'}]
     lift=[]
+    lifted=[('delta-blower',fan)]
+    if case.get('fan_harness'):lifted.append(('fan-splice-support-brace',by_name['fan-splice-support-brace']['shape']))
     for rise in range(0,31,2):
-        s=fan.translate((0,0,rise))
-        for p in fixed:
-            if not bbox_overlap(s,p['shape']):continue
-            volume=intersection_volume(s,p['shape'])
-            if volume>.01:lift.append({'lift_mm':rise,'part':p['name'],'overlap_mm3':round(volume,5)})
+        for name,shape in lifted:
+            s=shape.translate((0,0,rise))
+            for p in fixed:
+                if not bbox_overlap(s,p['shape']):continue
+                volume=intersection_volume(s,p['shape'])
+                if volume>.01:lift.append({'lift_mm':rise,'moving_part':name,'part':p['name'],'overlap_mm3':round(volume,5)})
     gap=a['fan_bottom_range_H'][0]-a['cross_rib_top_H']
+    external_gap=None
+    if case.get('feet'):
+        import case_feet
+        external_gap=case_feet.gap_budget()
     result={
         'intake_sections':sections,
         'minimum_internal_inlet_gap_mm':round(gap,3),
         'required_external_inlet_gap_mm':a['minimum_external_gap_mm'],
-        'external_gap_provided_by_selected_feet':False,
+        'external_gap_provided_by_selected_feet':external_gap is not None and external_gap>=a['minimum_external_gap_mm'],
+        'conditional_external_gap_mm':round(external_gap,3) if external_gap is not None else None,
+        'loaded_external_gap_verified':False,
         'nominal_fan_outlet_open_area_mm2':round(outlet_free,3),
         'nominal_fin_exit_open_area_mm2':round(fin_free,3),
         'nominal_case_exit_open_area_mm2':round(case_free,3),
@@ -78,8 +92,8 @@ def evaluate(parts,case,c):
         'fin_support_to_tab_gap_mm':round(bottom-stack,6),
         'fin_screw_nominal_engagement_mm':mount['nominal_thread_engagement_mm'],
         'bench_cowl_assembly':{'axis':'+X out / -X in','positions':41,'step_mm':.5,'travel_mm':20,'conflicts':slide},
-        'fan_replacement':{'remove_first':sorted(remove),'disconnect_first':'fan lead extension; route and connector still to be defined',
-                           'positions':16,'step_mm':2,'vertical_travel_mm':30,'conflicts':lift},
+        'fan_replacement':{'remove_first':sorted(remove),'disconnect_first':'J52, carrier guide and fan-end clamp; lift the disconnected loom with the fan' if case.get('fan_harness') else 'fan lead extension; route and connector still to be defined',
+                           'moving_parts':[name for name,shape in lifted],'positions':16,'step_mm':2,'vertical_travel_mm':30,'conflicts':lift},
         'CPU_clamp_hardware_available':False,'CPU_clamp_load_verified':False,
         'fastener_strength_verified':False,'duct_pressure_drop_verified':False,
         'seal_material_qualified':False,'manufacturing_ready':False,

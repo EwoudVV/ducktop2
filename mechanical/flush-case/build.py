@@ -57,6 +57,12 @@ def inputs():
     if C.get('cooling_layout'):
         for name in ['remote_cooler.py','cooler.json','cooler-part-heights.json','check_cooler.py','cooler_hardware.py','hardware_checks.py','cooler-hardware.json','reference/delta-fan-source.json','reference/BFB04512HHA-DV52.step']:
             p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
+    if C.get('feet'):
+        for name in ['feet.json','case_feet.py']:
+            p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
+    if C.get('fan_harness'):
+        for name in ['fan-harness.json','fan-harness-heights.json','fan_harness.py','fan_harness_checks.py']:
+            p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
     return data
 
 
@@ -120,6 +126,9 @@ def fresh_model():
         body=cooler_hardware.floor_shape(body,C)
     else:
         body=body.cut(cylinder(cx,cy,-.1,rr-4,floor+.2))
+    if C.get('fan_harness'):
+        import fan_harness
+        body=fan_harness.floor_shape(body)
     fx,fy,fw,fd=C['cooling']['fins_xywh']
     if C.get('cooling_layout'):
         import remote_cooler
@@ -132,6 +141,9 @@ def fresh_model():
     walls=walls.cut(box(o['x_min']-.1,18,4,2,139,14))
     walls=walls.cut(box(o['x_max']-b['wall']-.1,15,3.5,2,100,15.5))
     add('base-floor',body,'shell');add('base-walls',walls,'shell')
+    if C.get('feet'):
+        import case_feet
+        parts.extend(case_feet.parts())
     deck=rounded_slab(dt-b['deck_thickness'],b['deck_thickness'])
     deck=deck.cut(box(41.75,19.5,dt-3,274.5,81,4)).cut(box(306,50,dt-3,23,23,4))
     t=C['trackpad'];deck=deck.cut(box(t['x']-.5,t['y']-.5,dt-3,t['width']+1,t['depth']+1,4))
@@ -146,6 +158,7 @@ def fresh_model():
     if C.get('cooling_layout'):
         import remote_cooler
         carrier=remote_cooler.carrier_reliefs(carrier)
+    if C.get('fan_harness'):carrier=fan_harness.carrier_shape(carrier)
     add('keyboard-carrier-reservation',carrier,'supports')
     tp=dt-t['body_thickness'];support=tp-t['click_travel']-t['under_clearance']-t['support_thickness']
     add('trackpad-body-reservation',box(t['x'],t['y'],tp,t['width'],t['depth'],t['body_thickness']),'inputs')
@@ -216,6 +229,7 @@ def fresh_model():
         add('fin-reservation',box(fx,fy,fh,fw,fd,co['fins_height']),'cooling')
         add('CPU-cooler-height-budget',box(193,30,co['CPU_contact_top_H'],33,31,co['CPU_cooling_height_budget']),'cooling')
         add('proposed-fan-cutout',cylinder(cx,cy,3.9,co['board_pocket_radius'],1.6),'changes')
+    if C.get('fan_harness'):parts.extend(fan_harness.make_parts())
     assert before==inputs(),'source files changed during build'
     CACHE.mkdir(parents=True,exist_ok=True);rows=[]
     for i,p in enumerate(parts):
@@ -257,7 +271,10 @@ def check(parts,before,mounts):
         for q in obstacles:
             if C.get('usb_power_route') and q['name'].startswith(('usb5-','harness-USB-')):continue
             if not bbox_overlap(p['shape'],q['shape']):continue
-            v=intersection_volume(p['shape'],q['shape'])
+            if p['name']=='base-floor' and q['name']=='fan-loom-envelope':
+                from fan_harness_checks import floor_cable_overlap
+                v=floor_cable_overlap(p['shape'],q['shape'])
+            else:v=intersection_volume(p['shape'],q['shape'])
             if v>.01:internals.append({'new':p['name'],'existing':q['name'],'overlap_mm3':round(v,4)})
     usb_checks=None
     if C.get('usb_power_route'):
@@ -267,6 +284,13 @@ def check(parts,before,mounts):
     if C.get('cooling_layout'):
         import check_cooler
         cooler_checks=check_cooler.evaluate(parts,C,before.copy(),draw=False)
+    feet_checks=None;fan_checks=None
+    if C.get('feet'):
+        import case_feet
+        feet_checks=case_feet.check(parts,C)
+    if C.get('fan_harness'):
+        import fan_harness_checks
+        fan_checks=fan_harness_checks.check(parts,C,before.copy())
     h=C['hinges'];o=C['outline'];l=C['lid']
     # This geometric check detects a fixed rear platform behind the open lid's
     # back plane, rather than assuming that equal closed outlines are sufficient.
@@ -303,6 +327,8 @@ def check(parts,before,mounts):
             'other_parts_outside_nominal_outline':perimeter,
             'lid_rim_to_base_wall_nominal_gap_mm':rim_gaps,
             'closed_height_without_feet_mm':h['pivot_height']+l['back_inner_height_from_axis']+l['skin'],
+            'feet_checks':feet_checks,'fan_harness_checks':fan_checks,
+            'nominal_closed_height_with_feet_mm':feet_checks['nominal_closed_height_with_feet_mm'] if feet_checks else None,
             'screen_to_key_nominal_gap_mm':h['pivot_height']+l['panel_back_height_from_axis']-l['panel_thickness']-(C['boards']['keyboard_bottom_H']+.8+4.5),
             'hinge_sweep':{'sample_range_deg':[0,180],'step_deg':C['hinges']['check_step_deg'],'collisions':sweep,
                            'last_clear_sample_before_first_collision_deg':sweep[0]['angle_deg']-2 if sweep else 180,

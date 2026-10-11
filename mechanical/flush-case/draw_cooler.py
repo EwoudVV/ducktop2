@@ -30,6 +30,7 @@ def render(parts,path,title,direction,size,focus=None):
         mapper=vtk.vtkPolyDataMapper();mapper.SetInputConnection(normals.GetOutputPort())
         actor=vtk.vtkActor();actor.SetMapper(mapper)
         actor.GetProperty().SetColor(*p['color'][:3]);actor.GetProperty().SetSpecular(.2)
+        if len(p['color'])>3:actor.GetProperty().SetOpacity(p['color'][3])
         scene.AddActor(actor)
     camera=scene.GetActiveCamera();camera.ParallelProjectionOn();camera.SetViewUp(0,0,1)
     camera.SetPosition(*direction);camera.SetFocalPoint(0,0,0)

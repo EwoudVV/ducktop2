@@ -74,7 +74,8 @@ def parts(case,fan,fin,pipe,fin_shape=None,pipe_shapes=None):
     for i,(x,y) in enumerate(p['centres_xy'],1):
         top=p['base_top_H'];length=p['insert_length_mm']
         add(f'fan-insert-{i}',annulus(x,y,top-length,p['insert_body_allocation_mm']/2,1,length),(.63,.49,.2))
-        add(f'fan-spacer-{i}',annulus(x,y,top,p['spacer_radius_mm'],1.1,p['spacer_height_mm']),(.45,.49,.5))
+        recess=p.get('spacer_recess_by_index_mm',{}).get(str(i),0) if case.get('fan_harness') else 0
+        add(f'fan-spacer-{i}',annulus(x,y,top,p['spacer_radius_mm'],1.1,p['spacer_height_mm']-recess),(.45,.49,.5))
         seat=fan['mount_ear_upper_H'];washer_top=seat+p['washer_thickness_mm']
         add(f'fan-washer-{i}',annulus(x,y,seat,p['washer_diameter_mm']/2,1.1,p['washer_thickness_mm']),(.6,.62,.65))
         screw=cylinder(x,y,washer_top-p['screw_length_mm'],1,p['screw_length_mm']).fuse(cylinder(x,y,washer_top,p['head_diameter_allocation_mm']/2,p['head_height_allocation_mm']))

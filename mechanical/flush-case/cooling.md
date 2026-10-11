@@ -72,8 +72,10 @@ opening. the rib above it leaves at least 3.7 mm under the fan within the
 current height allowance. the outlet window is 255 mm², the fin exit has
 516.3 mm² of open area and the corresponding case opening has 733.2 mm².
 these are CAD sections, not measured airflow. the inlet still needs at
-least 3 mm underneath the laptop. feet that provide that space have not
-been selected, and the 33.3 mm height remains the figure without feet.
+least 3 mm underneath the laptop. five 4.1 mm SJ5344 feet now provide a
+3.1 mm conditional gap after the stated tolerance, compression and floor
+deflection budgets. the loaded gap needs measuring. the body remains
+33.3 mm without feet, or 37.4 mm nominal including them.
 
 the intake gasket has 2.0 to 3.4 mm of installed space across the fan
 height allowance. a 4 mm closed-cell silicone sheet would compress by
@@ -83,8 +85,9 @@ without distorting the fan or losing the seal.
 the fin/pipe assembly slides into the cowl from the exhaust side on the
 bench, before fitting the baffle and installing the cooler. 41 positions
 at 0.5 mm spacing show no nominal interference. fan replacement needs the
-deck and both OLED modules removed, the lead disconnected and the foil
-bridge peeled back. the three fan screws are then accessible, and 16
+deck and both OLED modules removed, plus access under the keyboard to
+disconnect J52 and release the carrier guide. remove the fan-end clamp
+cap and peel back the foil bridge. the three fan screws are then accessible, and 16
 sampled positions over a 30 mm lift show no collision. these sampled
 checks do not prove continuous movement or tolerance fit.
 
@@ -104,9 +107,11 @@ the pipes room at maximum size. this does not qualify a thin flat sheet as
 a finished keyboard support. its material, remaining thickness, insulation,
 underside component clearances and stiffness all need checking together.
 
-the fan needs an extension to reach J52. the stock leads are 150 +/-10 mm
-and 32 AWG. choose a proper splice and connector pigtail, with strain relief,
-rather than assuming those leads can reach or fit the header contacts.
+the fan uses four JST GH pre-crimped 28 AWG extension leads and individually
+insulated splices to its 150 +/-10 mm, 32 AWG factory wires. a guide beneath
+the keyboard carrier and a separate removable floor clamp support the
+loom. [fan wiring and feet](fan-wiring.md) records the pin map, parts,
+dressing limits and remaining physical checks.
 
 the DV52 requirements match the existing J52 circuit: fused 12 V, up to
 0.26 A, open-drain 25 kHz PWM and open-collector tachometer output at two

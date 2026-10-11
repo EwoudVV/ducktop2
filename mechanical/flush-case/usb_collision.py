@@ -71,6 +71,9 @@ class Checks:
         elif name=='keyboard-carrier-reservation':
             result=[{'shape':box(41.25,19,20,275.5,82,1),'subset':False}]
             result += [{'shape':box(x-5,99,20,10,10,1),'subset':False} for x in [130,225]]
+            if self.case.get('fan_harness'):
+                import fan_harness
+                result += [{'shape':s,'subset':True} for s in fan_harness.carrier_guide().Solids()]
         elif 'remote_pipe_offset' in part:
             # Keep the registered extrusion object instead of a new Solids()
             # wrapper, so its conservative planar bound remains available.

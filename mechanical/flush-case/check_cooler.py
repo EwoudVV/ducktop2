@@ -113,7 +113,10 @@ def evaluate(parts, case, sources, draw=True):
             continue
         for q in fixed:
             if not bbox_overlap(p['shape'],q['shape']):continue
-            if q['group']=='wiring':volume=wire_checks.volume(q,p)
+            if q['name']=='fan-loom-envelope' and p['name']=='blower-size-and-position-allowance':
+                import fan_harness
+                volume=sum(intersection_volume(s.cut(fan_harness.factory_exit_zone()),p['shape']) for s in q['shape'].Solids())
+            elif q['group']=='wiring':volume=wire_checks.volume(q,p)
             else:volume=intersection_volume(p['shape'],q['shape'])
             if volume>.01:
                 row={'cooler':p['name'],'other':q['name'],'overlap_mm3':round(volume,5)}
@@ -132,6 +135,8 @@ def evaluate(parts, case, sources, draw=True):
             h=extra['manufacturer_maximums'][part['mpn']]
             part.update(height_mm=h['height_mm'],height_kind='maximum',height_status='verified_maximum',height_source_url=h['source'],height_basis=h['basis'])
     settings['reservations'].update(extra['reservations'])
+    if case.get('fan_harness'):
+        settings['reservations'].update(json.loads((HERE/'fan-harness-heights.json').read_text())['reservations'])
     targets=[p for p in new if p['name'].endswith('-upper-clearance') or p['name'] in ['blower-size-and-position-allowance','blower-inlet-space','stepped-copper-plate','slotted-copper-fin-stack'] or (p.get('cooler_hardware') and p['group']=='cooling')]
     print('checking component heights',flush=True)
     heights=screen_heights(table,targets,{b:case['boards']['main_bottom_H']+1.6 for b in ['left','center','right']},settings)
