@@ -5,6 +5,28 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-11: work out the display cable around the hinge
+
+**Total time spent: 2 hours**
+
+went back through the display wiring before trying to fit the cable into the thinner case. the notes still pointed to the original mu, so checked all 40 contacts against the mu ultra documentation. the map is the same, including the logic and backlight supplies. saved the current reference and kept the panel-side connections separate, since the exact panel drawing still isn't available.
+
+located the display connector in the module model and worked out which way the cable leaves it. the first route crossed the usb power wire and its support. brought it closer to the mu, then bent it around the maker header. checking the actual headphone-jack drawing showed that the route needed more clearance there, so changed the approach again to stay outside both rear connectors. used two larger bends to enter the narrow gap beside the module supports.
+
+![the display cable path around the module and rear connectors](docs/images/journal/2026-10-11-display-base-route.png)
+
+the old circular cable space would stick out past the shortened rear edge. tried a straight section along the hinge axis instead, held by separate grips on the base and lid. accounted for the cable inside the grips so there is actually 50 mm free between them, and kept the first bends outside the clamped sections. the centerline stays in place as the lid opens, but the wires still twist. that needs a suitable cable construction and a real cycle test.
+
+![the two grip concepts and free section with the lid open](docs/images/journal/2026-10-11-display-hinge-open.png)
+
+made a separate fit study with the deck opening and rear-wall reliefs that the moving grip and lid tail need. the first subtraction didn't remove the wall properly where two cutters overlapped. fixed that by applying the cuts separately and added a check that the material is actually gone. kept the existing case outline and height, and left the pcb files and component positions alone.
+
+![the proposed cable space and openings with the lid closed](docs/images/journal/2026-10-11-display-hinge-closed.png)
+
+looked up the missing capacitor, inductor, fuse, amplifier and jack heights too. the route clears all 13 component-height crossings, and the final study has no detected solid contacts from closed to 140 degrees at the checked 2 degree steps. all 27 geometry tests pass, including checks for the free cable length, bends outside the grips, and the cable pieces joining correctly. exported the close-ups and reopened the separate step file.
+
+this is still a partial harness design. the full case export keeps its existing rear wall and deck until the cable construction is settled. i need the panel connector position and pin map, the complete plug dimensions, and the cable maker's bend and twist limits before choosing the final cable and grip details. the openings also need edge treatment and a cover, and none of this has been built or flex-tested yet.
+
 # 2026-10-10: wire the fan and add the feet
 
 **Total time spent: 1 hour**

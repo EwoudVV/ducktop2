@@ -5,7 +5,7 @@ been tested at 2560x1600 and 120 Hz using the Intehill controller. the
 finished laptop is intended to connect it directly to the Mu's onboard eDP
 connector, removing the separate monitor controller and external cable loop.
 
-updated 4 september 2026. the final harness remains pending in
+updated 11 october 2026. the final harness remains pending in
 [`direct_edp_harness_release.json`](../../manufacturing/direct_edp_harness_release.json).
 the known panel test does not validate a new Mu-to-panel cable.
 
@@ -13,7 +13,7 @@ the known panel test does not validate a new Mu-to-panel cable.
 
 | End | Recorded identification | Status |
 | --- | --- | --- |
-| Mu | I-PEX CABLINE-VS 40-pin, 0.5 mm pitch; module documentation names the 20455 family | Module-side family/pin table recorded; inspect exact installed suffix and pin-1 datum |
+| Mu Ultra | I-PEX CABLINE-VS 40-pin, 0.5 mm pitch; module documentation names 20455-040E | All 40 contacts checked against the Ultra documentation; exact installed suffix and pin-1 datum still need confirmation |
 | Panel | Possible I-PEX CABLINE-CA II 20682-040E-02, 40-pin, 0.4 mm pitch | Secondary-catalog association only; not confirmed for the owned panel |
 
 the recorded CABLINE-VS cable-side family is 20453, with matching housing
@@ -30,8 +30,10 @@ for the suspected CA II panel connector.
 
 ## module-side contact reference
 
-this is the retained Mu-side reference map. panel destination contacts are
-still unresolved. do not infer a 1:1 wiring order from the shared pin count.
+all 40 contact names and directions match the original Mu reference. the
+table below is now checked against the Mu Ultra documentation. panel
+destination contacts are still unresolved; the shared pin count does not
+establish a 1:1 cable.
 
 | Mu contact(s) | Signal | Required panel connection |
 | --- | --- | --- |
@@ -49,12 +51,13 @@ still unresolved. do not infer a 1:1 wiring order from the shared pin count.
 | 33 | BL_PWM | Panel brightness PWM |
 | 36-39 | BL_PWR | Panel backlight-power contacts, subject to confirmed limits |
 
-source: [official Mu pinouts](https://github.com/LattePandaTeam/LattePanda-Mu/blob/main/Electricals/Pinouts/README.md).
-the local upstream reference is [`reference/lattepanda/Pinouts.md`](../../reference/lattepanda/Pinouts.md).
+source: [official Mu Ultra pinouts](https://github.com/LattePandaTeam/LattePanda-Mu-Ultra/blob/8dbe7f9f4fec959ac0394cef9a78c958e5154067/Electricals/Pinouts/README.md).
+the checked contact list, source revision and file hash are in
+[`mu-ultra-edp-pinout.json`](../../reference/lattepanda/mu-ultra-edp-pinout.json).
 
 ## power and link requirements
 
-the Mu reference defines LCD_VCC as 3.3 V and BL_PWR as following the module
+the Mu Ultra reference defines LCD_VCC as 3.3 V and BL_PWR as following the module
 input voltage. the custom center design supplies regulated `MU_12V`.
 that makes the exact panel's permitted backlight voltage and startup sequence
 part of the harness review; the selected rail alone does not settle them.
@@ -68,6 +71,29 @@ or a two-lane arrangement without panel evidence.
 the panel's logic and backlight voltage/current limits, inrush, enable/PWM
 levels and timing, HPD behavior, sequencing, connector orientation, and full
 contact map remain part of the unresolved panel-side record.
+
+## hinge movement and connector access
+
+the earlier 8 mm bend radius and 3 mm bundle were layout assumptions. the
+[I-PEX plug drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-VS_PLUG_CABLE_ASSEMBLY_20453C38.pdf)
+requires at least 1 mm of straight cable at the termination and says to
+confirm bend radius with I-PEX or the harness maker. the small reference
+bend drawn there is not a repeated-flex rating for this 40-wire assembly.
+
+the [handling manual](https://www.i-pex.com/sites/default/files/downloads/pdf/MANUAL_CABLINE-VS_HIM-08004-08EN.pdf)
+also requires restraint to keep pulling and repeated bending loads away
+from the cable termination. use separate fixed-side and lid-side strain
+relief, with the moving cable between them. leave access to release the
+pull bar and withdraw the plug parallel to the module. do not use the
+individual wires to unplug it.
+
+the flush case has different hinge positions from the earlier model.
+its final cable must be checked throughout the chosen opening range;
+the old ring-shaped reservation is not a solved cable route or a length
+to order. a straight section along the hinge axis is one option to check
+with the harness maker. it needs a torsion-rated construction, and a
+constant centerline length does not mean the individual conductors see
+no strain.
 
 ## what to do before ordering the harness
 
@@ -89,8 +115,9 @@ only when the corresponding evidence exists.
 
 ## references
 
-- [Mu power guide](https://docs.lattepanda.com/content/mu_edition/design_guide_power/)
-- [Mu specifications](https://docs.lattepanda.com/content/mu_edition/specification/)
+- [Mu Ultra specifications](https://docs.lattepanda.com/content/mu_ultra_edition/specification/)
+- [Mu to Mu Ultra migration guide](https://docs.lattepanda.com/content/mu_ultra_edition/migration_guide_mu_to_mu_ultra/)
+- [Mu Ultra contact reference](https://github.com/LattePandaTeam/LattePanda-Mu-Ultra/blob/8dbe7f9f4fec959ac0394cef9a78c958e5154067/Electricals/Pinouts/README.md)
 - [I-PEX CABLINE-VS](https://www.i-pex.com/product/cabline-vs)
 - [I-PEX CABLINE-CA II](https://www.i-pex.com/product/cabline-ca-II)
 - [I-PEX 82691 drawing](https://www.i-pex.com/sites/default/files/downloads/pdf/2D_MCX_HARNESS_CABLINE-VS_40P_HARNESS_82691C0.pdf)

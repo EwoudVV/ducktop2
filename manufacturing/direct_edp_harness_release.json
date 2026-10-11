@@ -1,7 +1,7 @@
 {
   "status": "PENDING",
   "panel": "AUO B160QAN03.K HW0A",
-  "mu_endpoint": "I-PEX CABLINE-VS 40-pin",
+  "mu_endpoint": "I-PEX CABLINE-VS 40-pin; published reference 20455-040E, exact installed suffix unconfirmed",
   "panel_endpoint": null,
   "harness_mpn_or_controlled_drawing": null,
   "length_mm": null,
@@ -11,5 +11,10 @@
   "hinge_cycle_test_evidence": null,
   "approved_by": null,
   "approved_utc": null,
-  "note": "APPROVED requires exact connector datums, all 40 conductors, panel rail limits, cable construction, and live 2560x1600 120 Hz validation."
+  "note": "APPROVED requires exact connector datums, all 40 contact assignments, panel rail limits, cable construction, and live 2560x1600 120 Hz validation. Hinge bend or torsion limits must come from the selected harness supplier; the earlier 8 mm radius and 3 mm bundle were layout assumptions.",
+  "mu_module": "LattePanda Mu Ultra 226V / 256V",
+  "mu_contact_reference": "reference/lattepanda/mu-ultra-edp-pinout.json",
+  "mu_contact_reference_checked_on": "2026-10-11",
+  "mechanical_cable_limits_verified": false,
+  "panel_connector_datum_mm": null
 }

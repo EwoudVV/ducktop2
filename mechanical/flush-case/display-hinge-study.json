@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-11",
+  "status": "partial cable-space and strain-relief study; cable construction and panel end are unconfirmed",
+  "coordinate_frame": "installed X, Y and height above the base bottom, in mm",
+  "source_center_PCB_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+  "module_connector_body_bounds_xyH": [
+    235.8199999,
+    45.415,
+    12.237,
+    239.7700001,
+    71.665,
+    13.2870001
+  ],
+  "module_connector_basis": "Nominal solid in the saved native PCB export, matched to the 26.25 x 3.95 x 1.05 mm connector shell in the official Mu Ultra STEP. The module drawing identifies the connector at this edge; cable exit is +X.",
+  "module_plug_and_full_pullbar_sweep_verified": false,
+  "fanout_start_xyH": [
+    245.9,
+    58.54,
+    13.3
+  ],
+  "fanout_end_xyH": [
+    258,
+    58.54,
+    13.3
+  ],
+  "fanout_start_width_mm": 28.6,
+  "maximum_dressed_bundle_diameter_mm": 3.0,
+  "position_allowance_mm": 0.3,
+  "curve_allowance_mm": 0.05,
+  "static_centerline_turn_radius_mm": 10,
+  "radius_basis": "Space-study requirement only. The I-PEX 20453 revision 38 drawing says to confirm bend radius with the harness maker; it does not establish this assembly's static or repeated-flex limit.",
+  "fanout_basis": "Available tapering space, not an approved wire lay or connector assembly. The complete terminated plug, fanout and first bend must be drawn by the harness maker.",
+  "fixed_anchor_xyH": [
+    225,
+    -15,
+    19.3
+  ],
+  "lid_anchor_xyH_closed": [
+    163,
+    -15,
+    19.3
+  ],
+  "axial_free_span_mm": 50,
+  "axis_y_mm": -15,
+  "axis_height_mm": 19.3,
+  "opening_study_degrees": [
+    0,
+    140
+  ],
+  "opening_step_degrees": 2,
+  "opening_basis": "Study range below the current case's first detected rigid contact at 144 degrees. No physical stop or rated opening is established here.",
+  "anchor_basis": "Split, lined clamp concepts with separate fixed and moving supports. Their dimensions are study geometry; material, preload, mounting hardware, pull strength and cable-crush limits are unqualified.",
+  "panel_endpoint": null,
+  "full_harness_length_mm": null,
+  "conductor_map_complete": false,
+  "vendor_bend_and_torsion_limits_confirmed": false,
+  "physical_fit_verified": false,
+  "manufacturing_ready": false,
+  "axial_anchor_pitch_mm": 62,
+  "anchor_grip_length_mm": 12,
+  "lid_tail_straight_before_bend_mm": 8,
+  "case_changes_scope": "The reliefs are applied only to the separate display-hinge study, not to the saved full case.",
+  "grip_bore_diameter_mm": 3.7,
+  "grip_liner_status": "Fit the liner to the measured cable and supplier compression limit; no clamping pressure is established by the study."
+}

@@ -116,8 +116,11 @@ the packs still use the 11 mm listed thickness, the trackpad uses an
 unmeasured 5 mm body and 1 mm click travel, and the display uses an
 unmeasured 3.5 mm thickness. actual part measurements can change the
 required height. the thin keyboard support is a space reservation, not
-a qualified flat plate to place against its underside components. eDP
-motion and strain relief need rebuilding around the new hinge positions.
+a qualified flat plate to place against its underside components. the
+[display-cable study](display-hinge.md) now covers a partial Mu-to-hinge
+route, separate grip concepts and their proposed rear openings. the full
+case still needs those changes reconciled with a selected harness and
+the exact panel; its cable motion and strain relief are not qualified.
 
 ## files
 
