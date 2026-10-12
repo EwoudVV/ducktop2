@@ -101,7 +101,7 @@ def geometry():
     return _GEOMETRY
 
 
-def carrier_guide():
+def clip_profiles():
     # Long independent arms can flex sideways; the central stop limits lift.
     def clip(x,y,length,rotation):
         s=box(-2.5,-length/2,19.5,5,length,.6)
@@ -124,8 +124,13 @@ def carrier_guide():
 
 
 def carrier_shape(carrier):
-    for shape in carrier_guide().Solids():carrier=carrier.fuse(shape)
-    return carrier
+    import fan_guide_mounts
+    return fan_guide_mounts.carrier_shape(carrier)
+
+
+def carrier_guide():
+    import fan_guide_mounts
+    return compound(fan_guide_mounts.guides())
 
 
 def fan_wire_brace():
@@ -210,5 +215,7 @@ def make_parts():
         add(f'fan-clamp-screw-{i}',screw,(.42,.44,.47))
         add(f'fan-clamp-driver-{i}',cylinder(x,y,seat+1.8,3,20),(.3,.6,.9,.2),'keepout',service=True,
             service_removes=['deck','oled-1-module','oled-2-module'])
+    import fan_guide_mounts
+    rows.extend(fan_guide_mounts.parts())
     rows.extend(card_spaces())
     return rows

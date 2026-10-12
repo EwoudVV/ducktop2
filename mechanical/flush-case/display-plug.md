@@ -57,11 +57,12 @@ to the other in 2 degree steps. that is a clearance study, not an instruction
 to force an actual bar through 180 degrees. follow the connector supplier's
 handling instructions on the confirmed part.
 
-the service layout uses a 105 degree lid opening. remove the deck, keyboard
-and its carrier for access, first disconnecting or releasing the fan and
-USB guides attached to the carrier. release the display cable's fixed jaw
-and free the loom before unplugging it. the full keyboard-removal sequence
-and the space needed to handle the dressed cable still need a physical check.
+the service layout uses a 105 degree lid opening. remove the deck and
+keyboard first, then support and unfasten the five fan guides and two USB
+brackets before lifting the carrier. [keyboard removal details](keyboard-service.md)
+release the display cable's fixed jaw
+and free the loom before unplugging it. the finished keyboard retention,
+FFC route and dressed-cable handling still need a physical check.
 
 ![the plug after a straight 5 mm withdrawal](views/display-plug-withdrawn.png)
 

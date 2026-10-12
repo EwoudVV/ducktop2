@@ -1,0 +1,526 @@
+{
+  "date": "2026-10-12",
+  "source_hashes": {
+    "mechanical/case-prototype/build.py": "e0f9cd653ca4f809b2c848afc9c9cab42a8950da9cb38069c4c71395af467246",
+    "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
+    "mechanical/case-prototype/cad.py": "4a356ff6f8c32fa71761980d8f8ea55bf92395b6d3d894cdb8f4232a3a81d96f",
+    "mechanical/case-prototype/case_inputs.py": "96a2cabded138177c1237eb411260619bf30299b35cc9ee0d985c5a15b8d4ffb",
+    "mechanical/case-prototype/component_heights.py": "764debf6df4610fce184ae31869aec283bb6788b9c5ddf884d145fa230ef4664",
+    "mechanical/case-prototype/cooling-datums.json": "3e459e6ca6901a1a836e4e8bc68895ca72535cad596ee1e858838230a9f5b84c",
+    "mechanical/case-prototype/cooling-parts.json": "844ce7bbe557896883bc2ef6755ac2477581c6d3db5511411af8795597399860",
+    "mechanical/case-prototype/cooling.py": "29143f0ef782f2815999ed2183b28651ada4cdc9ac269c4cf1c68a8e90a692ea",
+    "mechanical/case-prototype/ground_braids.py": "fa507327ab81c7fce12c927e457d45cad39828075c99f261c51c036d85c646cd",
+    "mechanical/case-prototype/harness_geometry.py": "5ec731368f04b256bb156fb27b9a94135696e66084a305ee3a8bfa39decd5672",
+    "mechanical/case-prototype/hinges.py": "7a4803a568a0c45ab77072926ae41a667eab80a0c85196a26dfa173812b75f8a",
+    "mechanical/case-prototype/radio_hardware.py": "7b445ad946393b2b038533c2b665ae263283adce5e0939a525c9b0f3f4c9832a",
+    "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-connector-access.json": "63ac4ffa038947f686031fa7795131dd20af9955ba6e19e8313f035b2f982bfe",
+    "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-connector-clearances.json": "44b86748076583801b4a0412c393a6cbd1c37a448112275532dbea5f9b37d819",
+    "mechanical/case-prototype/reference/pcb-snapshot/inputs/bms-harness-routing.json": "13fc3978a1c76499755d111ff25b8e0e856beca4a2281e94b04179f82a49fa22",
+    "mechanical/case-prototype/reference/pcb-snapshot/inputs/board-datums.json": "eb7fe026fb0b33a691bc3c35ab325eea04b916b3411f6c935033a79a3d3c9db5",
+    "mechanical/case-prototype/reference/pcb-snapshot/inputs/board-placement.json": "e732be977147f2d878bd38e04bdaed0645e22ea4aa8a79bd3412431380ddfe7e",
+    "mechanical/case-prototype/reference/pcb-snapshot/inputs/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+    "mechanical/case-prototype/reference/pcb-snapshot/inputs/power-harness-checks.json": "290338efa0dc241427174403b3b8f94746328e78a94914ede7a9df05e11f99f3",
+    "mechanical/case-prototype/reference/pcb-snapshot/inputs/power-harness.json": "4016ffe4a1134de1758c097b28634249fb27f55597dac49b82fbe762f8fc7d0b",
+    "mechanical/case-prototype/reference/pcb-snapshot/manifest.json": "9fee31bb82621dbebe4d04e49780e43573476e4a36dd65c8d0b024f2e909d576",
+    "mechanical/case-prototype/service_carriers.py": "0ae9f787da099c85e26dbdca2c251169b78bb092cf3197034b4ad66547cfc786",
+    "mechanical/case-prototype/assembly.json": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824",
+    "mechanical/case-prototype/board-inventory.json": "483f35bb3236877e841e96c6f9e68dde5fa4fb96372bdfb820d7e92112fc70c2",
+    "left_io/left_io.kicad_pcb": "1d211afd97d09a3de45bbd9076da1762a1e9867fe0a56400e39669fb8ecede56",
+    "ducktop2-center.kicad_pcb": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
+    "right_io/right_io.kicad_pcb": "aa7db06bacd66b06abe2bbc9ae576ecb93346764a554900320c4384b30250dc3",
+    "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
+    "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
+    "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
+    "mechanical/flush-case/assembly.json": "f04d10686523e3fa31ad42b8257ab8fe693a53e3a1003e4262ed3a663261377f",
+    "mechanical/flush-case/build.py": "f54341b94f98a99720027c7660819dfbf585692435d75f5b8501e9e1902c90d1",
+    "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
+    "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
+    "mechanical/flush-case/usb_collision.py": "b4b8dff2c8fff5fddc759760c5c704a4882bc4b39c3ea4719b6c5e73bf28ca74",
+    "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
+    "mechanical/flush-case/usb-harness.json": "928acf5ef1b3267719e5742f9d1f8412ca96586ea9077b6c024842635a51879c",
+    "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
+    "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
+    "mechanical/flush-case/remote_cooler.py": "fc5eb3b5b75f1dc6a8d554349b6b0487b48d31ef527094facac520de646a2e37",
+    "mechanical/flush-case/cooler.json": "e9ce53a6898136a8c610eb2b95a1d7d88e3dc8851eec2aa3fef3591816daec0a",
+    "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
+    "mechanical/flush-case/check_cooler.py": "4b5941c29dee07db63f0a08ee60783b9d01ac60e89a124cdb9cb73b5bbf62274",
+    "mechanical/flush-case/cooler_hardware.py": "b48a8e95e309d03336ef138b7e32b663e11837f4b5c5c8fac7d241a6f0c18512",
+    "mechanical/flush-case/hardware_checks.py": "a711e3d6b391fcbba1c06779ac5792dc3f57b18323c66a2bbe46186f0977ded4",
+    "mechanical/flush-case/cooler-hardware.json": "53260e58c9254ad94aa7def1a6a6508bc256a71dc2d6f1f90e79ffffa9d1fd0e",
+    "mechanical/flush-case/reference/delta-fan-source.json": "b8257e879fd0bfdb7563f6068977a5b319e9bb4a16fe866aebd041807c4bdcfa",
+    "mechanical/flush-case/reference/BFB04512HHA-DV52.step": "60f9157f6bcb9d5d62eb900bee9bf0c90f419de071aa6b7d4abd11a5912717de",
+    "mechanical/flush-case/feet.json": "a73510651f2bc399a1aabce246bdde8b6996324c3b1c3d9527ebe76932636c69",
+    "mechanical/flush-case/case_feet.py": "2ad5930f376f68f53ee5641aa9bc5a1e4d267352d6cda91bc92e01491ad1a4be",
+    "mechanical/flush-case/fan-harness.json": "5bef91199350b5f7625dbe0eeedc1d6bf8de3d5069d41f8393551905efdee1a6",
+    "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
+    "mechanical/flush-case/fan_harness.py": "e8c246b98500a395a88e7b48fb4ef72699b44dc0e5ff21c0c2d6ca6d4c8b822e",
+    "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e",
+    "mechanical/flush-case/fan_guide_mounts.py": "b13a36b05a62f8dae7274b64a1bca3083e4bad32e67b15e6bc5bb47b397a81a2",
+    "mechanical/flush-case/fan-guide-mounts.json": "e6ba5feeba7e160173951beb85c6c03125e6b73750f14d69a1824fd9d344ae41",
+    "mechanical/flush-case/lid_stops.py": "0e7106b3e1445bbc2603bf9c1a51e71617bac210bd5a6da43e77e2d2f9a4998f",
+    "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
+    "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
+    "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6",
+    "mechanical/flush-case/keyboard_service.py": "259a9a5a8e75e515694b1dfa8e164c23c21fb8cc889b4b80d6527eb7997204e9",
+    "mechanical/flush-case/keyboard-service.json": "095755ec5f00df1947699c35c6756e565dc21a72ae97b13bab730138e07b94ec",
+    "mechanical/flush-case/display_hinge_study.py": "952ec8022bf882069d6fc28f47aaba42ff773cfb7c9c00123660e3b7a62c6728",
+    "mechanical/flush-case/display-hinge-study.json": "220ad23cbe6bb48760bd8936c9e48ac5bb3357fcb3f048b3c487b9798c0aa2bc",
+    "mechanical/flush-case/display_grips.py": "c45518f17b0ea4bc628e5eb01911af0b8218e3e58e81a56792435f25381c0f66",
+    "mechanical/flush-case/display-grip-hardware.json": "64d242b046d893eb807175dfe744788756ec014de130b832a20f64e782fac998",
+    "mechanical/flush-case/display_plug.py": "ad9ecdce2f7a178ca09e66ef8c4fd83e66c625eeb835a8f84c1b069eb65ec90b",
+    "mechanical/flush-case/display-plug.json": "c5ee04eb1db8487265abda2bd03126a85a7efc07f737fe3185071e81d6f4cb79",
+    "mechanical/flush-case/display_plug_checks.py": "030ff4a6822710eec8dc5bbf8cb1c6c4309ac0a5dd3652a6865d4901577efc2d",
+    "mechanical/flush-case/draw_cooler.py": "28f3c04c99a8f7a99b329021df7ce4976643cff860408026a3bdb5e12ba2cf51",
+    "mechanical/flush-case/draw_fan_harness.py": "8faf377a1f24299b591b68e45fa09cd8f3c707d4c4a29160aec9a2af30ec23a9",
+    "mechanical/flush-case/reference/display-connector/pull-bar.brep": "d40bd3695e455e26fb99f6248bf61889fb37553d30ef455088c5148ed90e9952",
+    "mechanical/flush-case/reference/display-connector/native-port.brep": "e2afb544fdf026008d4903bd67f0364335a9bca5d8942bccadea3b4bdc978921",
+    "mechanical/flush-case/reference/display-connector/plug-body.brep": "9f5eb5303b296bb266a46218590269fbe75dc15c5efa05e544567215343f00bc",
+    "mechanical/flush-case/reference/display-connector/sources.json": "a9838a9869be0a48ce0b3be45d122c93ba26761d849c8ae9d4a51a0536ea1abe"
+  },
+  "configuration": {
+    "date": "2026-10-12",
+    "status": "nominal removal study; complete retention and flexible wiring unfinished",
+    "lid_angle_deg": 105,
+    "lift_mm": 30,
+    "lift_step_mm": 0.5,
+    "J320": {
+      "part": "Hirose FH12-30S-0.5SH(55)",
+      "footprint_center_xy_mm": [
+        310.6,
+        60.95
+      ],
+      "keyboard_PCB_top_H": 21.8,
+      "drawing_reference_open_height_above_PCB_mm": 4.8,
+      "open_height_allocation_above_PCB_mm": 5.0,
+      "upper_actuator_space_xyHwhd_mm": [
+        307,
+        50,
+        24,
+        9.2,
+        22,
+        2.8
+      ],
+      "external_FFC_space_xyHwhd_mm": [
+        316,
+        51.5,
+        22,
+        14,
+        19,
+        0.7
+      ],
+      "finger_center_start_xyH_mm": [
+        313,
+        60.95,
+        29.8
+      ],
+      "finger_radius_mm": 6,
+      "finger_length_mm": 20,
+      "drawing": "https://www.hirose.com/en/product/p/CL0586-0525-1-55",
+      "handling": "https://www.hirose.com/en/product/series/FH12/documents?path=%2Fapi%2Fv1%2Fseries%2FFH12%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN",
+      "handling_note": "Use a thumb or index finger as shown for the bottom-contact type. Do not use a fingernail or a thin tool. Release the actuator before withdrawing the FFC parallel to the PCB.",
+      "scope": "The upper and external boxes allocate access space. They do not model the internal latch mechanism, establish a tolerance fit, or specify the complete flexible cable. The finger cylinder is a planning allowance, not an ergonomic qualification.",
+      "reference_drawing_number": "EDC3-150229-11",
+      "reference_drawing_revision": "17, 2022-04-01",
+      "reference_drawing_sha256": "de1944fedf887b3a441469ebf2579383218f0a25e55dd9ee497352fff7fd95a8",
+      "reference_drawing_note": "The retained family drawing gives the reference open-actuator envelope. The current product page confirms the 30-position bottom-contact 2 mm body; this is not a measurement of the assembled keyboard."
+    },
+    "missing_physical_interfaces": [
+      "deck fasteners and attached input-device wiring",
+      "keyboard edge retention and finished carrier structure",
+      "J310-to-J320 FFC route and parking position",
+      "temporary support of the detached fan guides and USB rails"
+    ],
+    "physical_service_verified": false,
+    "manufacturing_ready": false
+  },
+  "removal_stages": [
+    {
+      "stage": "deck",
+      "moving_parts": [
+        "deck"
+      ],
+      "remove_first": [],
+      "lift_samples_mm": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0,
+        12.5,
+        13.0,
+        13.5,
+        14.0,
+        14.5,
+        15.0,
+        15.5,
+        16.0,
+        16.5,
+        17.0,
+        17.5,
+        18.0,
+        18.5,
+        19.0,
+        19.5,
+        20.0,
+        20.5,
+        21.0,
+        21.5,
+        22.0,
+        22.5,
+        23.0,
+        23.5,
+        24.0,
+        24.5,
+        25.0,
+        25.5,
+        26.0,
+        26.5,
+        27.0,
+        27.5,
+        28.0,
+        28.5,
+        29.0,
+        29.5,
+        30.0
+      ],
+      "collision_count": 0
+    },
+    {
+      "stage": "keyboard",
+      "moving_parts": [
+        "keyboard-pcb-and-available-models",
+        "key-travel-and-cap-envelopes"
+      ],
+      "remove_first": [
+        "deck"
+      ],
+      "lift_samples_mm": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0,
+        12.5,
+        13.0,
+        13.5,
+        14.0,
+        14.5,
+        15.0,
+        15.5,
+        16.0,
+        16.5,
+        17.0,
+        17.5,
+        18.0,
+        18.5,
+        19.0,
+        19.5,
+        20.0,
+        20.5,
+        21.0,
+        21.5,
+        22.0,
+        22.5,
+        23.0,
+        23.5,
+        24.0,
+        24.5,
+        25.0,
+        25.5,
+        26.0,
+        26.5,
+        27.0,
+        27.5,
+        28.0,
+        28.5,
+        29.0,
+        29.5,
+        30.0
+      ],
+      "collision_count": 0
+    },
+    {
+      "stage": "carrier",
+      "moving_parts": [
+        "keyboard-carrier-reservation"
+      ],
+      "remove_first": [
+        "deck",
+        "keyboard-pcb-and-available-models",
+        "key-travel-and-cap-envelopes",
+        "keyboard-fan-guide-screw-1",
+        "keyboard-fan-guide-screw-2",
+        "keyboard-fan-guide-screw-3",
+        "keyboard-fan-guide-screw-4",
+        "keyboard-fan-guide-screw-5",
+        "harness-USB-left-keyboard-screw",
+        "harness-USB-right-keyboard-screw"
+      ],
+      "lift_samples_mm": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0,
+        12.5,
+        13.0,
+        13.5,
+        14.0,
+        14.5,
+        15.0,
+        15.5,
+        16.0,
+        16.5,
+        17.0,
+        17.5,
+        18.0,
+        18.5,
+        19.0,
+        19.5,
+        20.0,
+        20.5,
+        21.0,
+        21.5,
+        22.0,
+        22.5,
+        23.0,
+        23.5,
+        24.0,
+        24.5,
+        25.0,
+        25.5,
+        26.0,
+        26.5,
+        27.0,
+        27.5,
+        28.0,
+        28.5,
+        29.0,
+        29.5,
+        30.0
+      ],
+      "collision_count": 0
+    }
+  ],
+  "screw_access": [
+    {
+      "screw": "keyboard-fan-guide-screw-1",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-fan-guide-screw-2",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-fan-guide-screw-3",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-fan-guide-screw-4",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-fan-guide-screw-5",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "harness-USB-left-keyboard-screw",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "harness-USB-right-keyboard-screw",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    }
+  ],
+  "J320_access": [
+    {
+      "space": "J320-upper-actuator-space",
+      "collisions": []
+    },
+    {
+      "space": "J320-external-FFC-space",
+      "collisions": []
+    },
+    {
+      "space": "J320-finger-space",
+      "collisions": []
+    }
+  ],
+  "collisions": [],
+  "modeled_removal_sequence_clear": true,
+  "display_study_context": {
+    "proposed_reliefs": [
+      {
+        "part": "base-walls",
+        "removed_volume_mm3": 579.6,
+        "cut_bounds_construction_xyz": [
+          [
+            135.0,
+            16.6,
+            12.25,
+            173.0,
+            18.1,
+            24.25
+          ],
+          [
+            161.0,
+            16.7,
+            17.2,
+            236.0,
+            17.0,
+            21.4
+          ]
+        ]
+      },
+      {
+        "part": "deck",
+        "removed_volume_mm3": 959.76,
+        "cut_bounds_construction_xyz": [
+          [
+            130.0,
+            -0.6,
+            23.5,
+            173.0,
+            19.0,
+            25.3
+          ]
+        ]
+      },
+      {
+        "part": "base-walls",
+        "volume_before_mm3": 25844.0639,
+        "volume_after_mm3": 25051.5119
+      },
+      {
+        "part": "rear-base-reinforcement",
+        "volume_before_mm3": 17436.0756,
+        "volume_after_mm3": 18060.4275
+      },
+      {
+        "part": "rear-lid-backing-member",
+        "volume_before_mm3": 30706.6861,
+        "volume_after_mm3": 30666.1289
+      }
+    ],
+    "scope": "The display grip and rear-guard changes are applied locally, as in the separate display study. The fan-guide mounts are in the main case."
+  },
+  "thread_contact_exclusion": "Only each original USB screw host cylinder at its recorded thread axis, radius and height is cleared for the unscrewing check. The rest of each guide rail remains an obstacle.",
+  "physical_service_verified": false,
+  "complete_keyboard_mounting_verified": false,
+  "manufacturing_ready": false,
+  "limits": [
+    "The keyboard FFC must be disconnected and parked before any keyboard lift. Its complete installed route and parking space are not modeled.",
+    "Deck retention, attached input-device cables and keyboard edge retention are unfinished. This is not a full disassembly release.",
+    "Secure the detached guides and both USB rails on temporary insulating supports before lifting the carrier. Their unsupported weight and cable deflection are not qualified.",
+    "Removal is sampled at 0.5 mm intervals. This does not prove continuous-motion clearance or tolerance fit.",
+    "The J320 spaces are access allocations above and outside the closed connector. They do not simulate latch internals or establish hand fit.",
+    "The carrier and guide arms need stiffness, thread, pull and warm-service tests in the chosen insulating material."
+  ],
+  "STEP_export": {
+    "file": "exports/keyboard-service.step",
+    "reopens": true,
+    "solids": 11
+  },
+  "outputs": {
+    "views/keyboard-guide-mounts.png": "1d7b3ee2adffe6609acae57c2a683f3461703fc698d501c057c6668fc9d7aec3",
+    "views/keyboard-carrier-release.png": "60d36b89eac46f92539a1f3ac889feb5ae4953a1d83131125ff633b304928936",
+    "views/keyboard-guide-detail.png": "31ff5cf77aa21c10646b9d7aaacd8dcc0c6ae9c5d18e0d873d42aaac3bc1a049",
+    "views/keyboard-ffc-access.png": "1947e8399d0e2425b0f41beff4e91a732247bc095a7e8370d1cc5c16828e46b9",
+    "exports/keyboard-service.step": "b8c631aeb2d168a1fde3bd4294ea63930882d24e09f6255bc80f3defd998d446"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-12",
+  "status": "nominal removal study; complete retention and flexible wiring unfinished",
+  "lid_angle_deg": 105,
+  "lift_mm": 30,
+  "lift_step_mm": 0.5,
+  "J320": {
+    "part": "Hirose FH12-30S-0.5SH(55)",
+    "footprint_center_xy_mm": [
+      310.6,
+      60.95
+    ],
+    "keyboard_PCB_top_H": 21.8,
+    "drawing_reference_open_height_above_PCB_mm": 4.8,
+    "open_height_allocation_above_PCB_mm": 5.0,
+    "upper_actuator_space_xyHwhd_mm": [
+      307,
+      50,
+      24,
+      9.2,
+      22,
+      2.8
+    ],
+    "external_FFC_space_xyHwhd_mm": [
+      316,
+      51.5,
+      22,
+      14,
+      19,
+      0.7
+    ],
+    "finger_center_start_xyH_mm": [
+      313,
+      60.95,
+      29.8
+    ],
+    "finger_radius_mm": 6,
+    "finger_length_mm": 20,
+    "drawing": "https://www.hirose.com/en/product/p/CL0586-0525-1-55",
+    "handling": "https://www.hirose.com/en/product/series/FH12/documents?path=%2Fapi%2Fv1%2Fseries%2FFH12%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN",
+    "handling_note": "Use a thumb or index finger as shown for the bottom-contact type. Do not use a fingernail or a thin tool. Release the actuator before withdrawing the FFC parallel to the PCB.",
+    "scope": "The upper and external boxes allocate access space. They do not model the internal latch mechanism, establish a tolerance fit, or specify the complete flexible cable. The finger cylinder is a planning allowance, not an ergonomic qualification.",
+    "reference_drawing_number": "EDC3-150229-11",
+    "reference_drawing_revision": "17, 2022-04-01",
+    "reference_drawing_sha256": "de1944fedf887b3a441469ebf2579383218f0a25e55dd9ee497352fff7fd95a8",
+    "reference_drawing_note": "The retained family drawing gives the reference open-actuator envelope. The current product page confirms the 30-position bottom-contact 2 mm body; this is not a measurement of the assembled keyboard."
+  },
+  "missing_physical_interfaces": [
+    "deck fasteners and attached input-device wiring",
+    "keyboard edge retention and finished carrier structure",
+    "J310-to-J320 FFC route and parking position",
+    "temporary support of the detached fan guides and USB rails"
+  ],
+  "physical_service_verified": false,
+  "manufacturing_ready": false
+}

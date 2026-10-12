@@ -5,6 +5,28 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-12: give the keyboard carrier removable wire guides
+
+**Total time spent: 1 hour**
+
+checked how the keyboard and its carrier come out of the thin case, since they cover the fan and display connectors. the deck and keyboard cleared the surrounding parts in the model, but lifting the carrier caught the fan wires after only 0.5 mm. the five wire guides were part of the carrier, so taking the whole thing out would pull against the loom.
+
+![the separate fan guides and their mounts along the carrier edge](docs/images/journal/2026-10-12-keyboard-guides.png)
+
+made the guides separate pieces and kept the wire route where it was. each guide has an arm leading to an M2 screw at the front edge, plus a small rectangular key to stop it turning. the screw heads sit outside the keyboard pcb and below the deck. the raised crossover needed a shorter carrier tab so the guide stayed connected while the carrier could lift past it.
+
+checked the screw dimensions and included the full length tolerance. that caught a small contact between the longest screw and the fourth guide, below the end of its bore. extended the clearance bore and added a test for all five screw fits. the guides still need a proper thread, pull and warm-fit test in the chosen material.
+
+![the carrier lifted away while the guides and fan loom stay in position](docs/images/journal/2026-10-12-keyboard-carrier-release.png)
+
+worked through the removal order with the lid at 105 degrees. disconnect the keyboard ribbon and remove the keyboard, support the loose guides and usb rails, then remove the five guide screws and the two usb bracket screws. the carrier can lift away without opening the guide mouths or moving the fan wires. checked each 30 mm lift in 0.5 mm steps, along with driver access and withdrawal for all seven screws.
+
+also checked the space above the keyboard connector latch and in front of the ribbon exit. used the hirose drawing for the open-latch allowance and left room for finger access. the actual ribbon route and its parked position still need finishing, so the access model is not a complete cable layout.
+
+![latch, finger and ribbon clearance at J320](docs/images/journal/2026-10-12-keyboard-ffc-access.png)
+
+rebuilt the case, saved close-ups and reopened the separate step export. the removal study has no detected contacts at the checked positions, and all 56 geometry tests pass. the body stays 33.3 mm without feet, and none of the pcbs or their routing changed. i still need to finish the keyboard retention, the thin carrier structure and a way to support the loose guides during real servicing before treating the case as ready to make.
+
 # 2026-10-12: make room for the display plug beside the cooler
 
 **Total time spent: 2 hours**

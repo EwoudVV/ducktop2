@@ -69,11 +69,9 @@ class Checks:
                 shape=cq.Shape.importBrep(str(model_cache.CACHE/file)).translate((0,0,self.dz))
                 result.append({'shape':shape,'subset':False})
         elif name=='keyboard-carrier-reservation':
-            result=[{'shape':box(41.25,19,20,275.5,82,1),'subset':False}]
-            result += [{'shape':box(x-5,99,20,10,10,1),'subset':False} for x in [130,225]]
-            if self.case.get('fan_harness'):
-                import fan_harness
-                result += [{'shape':s,'subset':True} for s in fan_harness.carrier_guide().Solids()]
+            # The fan guides are separate parts. Use this actual cut plate so
+            # the new tabs and locating holes stay in every carrier check.
+            result=[{'shape':part['shape'],'subset':True}]
         elif 'remote_pipe_offset' in part:
             # Keep the registered extrusion object instead of a new Solids()
             # wrapper, so its conservative planar bound remains available.

@@ -51,8 +51,12 @@ limit above the motherboard. the earlier model only contained the sockets
 and retainers. these are selection volumes, not measurements of the cards;
 confirm the chosen modules, antenna plugs and service motion separately.
 
-five guides on the keyboard carrier support the loop, middle run and
-raised crossover. their arms release sideways. a separate brace beside
+five removable guides support the loop, middle run and raised crossover.
+each now bolts to a front carrier tab, with a locating key to keep it aligned.
+the carrier can lift off them while the supported loom stays in place.
+[guide mounts and keyboard removal](keyboard-service.md) the clip mouths
+still need a material and fit test before releasing wires from them.
+a separate brace beside
 the fan supports the splice region and shares the front-inner fan mount.
 its 1 mm plate replaces the top millimetre of that spacer, keeping the
 fan at the same height. the separate floor clamp holds the fan end, with a
@@ -71,11 +75,12 @@ fit removable guide liners or sleeves to the measured loom so it stays
 within the 0.2 mm positioning budget. the maximum bundle diameters are
 not a substitute for measuring the actual finished harness.
 
-fan replacement now includes the cable: expose J52 by removing the
-keyboard assembly and carrier, release the guides, unplug the housing,
+fan replacement now includes the cable: disconnect the keyboard FFC and
+remove the keyboard first, support and detach the fan guides and USB rails,
+then lift the carrier to expose J52. release the guide mouths and unplug the housing,
 then remove the fan clamp cap and outlet bridge. remove the fan screws
-and lift out the fan, brace and disconnected harness. the exact keyboard removal
-sequence still depends on its finished support and cables.
+and lift out the fan, brace and disconnected harness. the finished keyboard
+retention, FFC route and temporary service supports still need a physical check.
 
 J73 and J421 use explicit installed-height allocations in this route.
 release the nearby harness before servicing the programming port or

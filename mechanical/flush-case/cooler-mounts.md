@@ -67,8 +67,9 @@ edge. fit the insulating washers, baffle and seals before installing the
 unit. the final CPU attachment sequence depends on the spring hardware.
 
 the two fin screws are accessible from underneath. to replace the fan,
-remove the deck and both OLED modules, expose J52 under the keyboard,
-release the carrier guide and fan-end clamp, and disconnect the harness.
+follow the [keyboard removal sequence](keyboard-service.md) to expose J52.
+remove both OLED modules, release the cable from the detached guides and
+fan-end clamp, and disconnect the harness.
 peel back the short outlet bridge. remove the three fan screws and washers,
 then lift the fan, wire-support brace and disconnected loom off the spacers. the nominal model clears a 30 mm lift
 at the sampled positions. wiring slack and real tool access still need

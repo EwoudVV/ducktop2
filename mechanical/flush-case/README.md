@@ -130,6 +130,11 @@ family, locking-bar swing and removal space. its 1.7 mm cooling-plate edge
 relief is already included in the full case. the actual module connector
 suffix remains unconfirmed until the module arrives.
 
+the fan-wire guides now detach from the keyboard carrier at five front
+screws. the carrier can lift away while the supported guides and loom stay
+in place. [keyboard removal and access](keyboard-service.md) records the
+sequence and the unfinished retention, FFC and service-support details.
+
 ## files
 
 - `assembly.json`: dimensions and remaining assumptions.

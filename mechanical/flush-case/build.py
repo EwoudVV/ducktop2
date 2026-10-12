@@ -61,7 +61,7 @@ def inputs():
         for name in ['feet.json','case_feet.py']:
             p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
     if C.get('fan_harness'):
-        for name in ['fan-harness.json','fan-harness-heights.json','fan_harness.py','fan_harness_checks.py']:
+        for name in ['fan-harness.json','fan-harness-heights.json','fan_harness.py','fan_harness_checks.py','fan_guide_mounts.py','fan-guide-mounts.json']:
             p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
     if C.get('lid_stops'):
         for name in ['lid_stops.py','lid_stop_checks.py','lid-stop-hardware.json','fan-harness-heights.json','display-part-heights.json']:

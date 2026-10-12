@@ -43,13 +43,19 @@ class FanLiner(unittest.TestCase):
         wire=box(0,14,8,25,1,1)
         self.assertLess(floor_cable_overlap(floor,wire),1e-6)
 
-    def test_carrier_bounds_include_added_crossover_guide(self):
+    def test_bounds_follow_carrier_and_separate_crossover_guide(self):
         from usb_collision import Checks
         from cad import box
+        from review import intersection_volume
+        import fan_guide_mounts
         checker=Checks.__new__(Checks);checker.pieces={};checker.case={'fan_harness':True};checker.old={};checker.rigid={}
-        part={'name':'keyboard-carrier-reservation','shape':box(41.25,19,20,275.5,82,1)}
-        probe=box(276.9,102.9,20.7,.2,.2,.2)
-        self.assertTrue(any(p['shape'].intersect(probe).Volume()>.007 for p in checker.get_pieces(part)))
+        part={'name':'keyboard-carrier-reservation','shape':fan_guide_mounts.carrier_shape(box(41.25,19,20,275.5,82,1))}
+        tab=box(273,103,20.5,.2,.2,.2)
+        self.assertTrue(any(intersection_volume(p['shape'],tab)>.007 for p in checker.get_pieces(part)))
+        ring=box(276.9,106.9,23.2,.2,.2,.1)
+        self.assertTrue(all(intersection_volume(p['shape'],ring)<1e-6 for p in checker.get_pieces(part)))
+        guide=next(p for p in fan_guide_mounts.parts() if p['name']=='keyboard-fan-guide-5')
+        self.assertTrue(any(intersection_volume(p['shape'],ring)>.003 for p in checker.get_pieces(guide)))
 
     def test_translated_liner_core_and_volume(self):
         p=[[310,179,11.5],[314,179,11.5],[318,179,11.5]]
