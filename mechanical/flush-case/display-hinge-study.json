@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-11",
+  "date": "2026-10-12",
   "status": "partial display harness study with removable grip hardware and a rear cable guard",
   "coordinate_frame": "installed X, Y and height above the base bottom, in mm",
   "source_center_PCB_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
@@ -16,7 +16,7 @@
   "fanout_start_xyH": [
     245.9,
     58.54,
-    13.3
+    12.772
   ],
   "fanout_end_xyH": [
     258,
@@ -61,5 +61,7 @@
   "lid_tail_straight_before_bend_mm": 8,
   "case_changes_scope": "The reliefs are applied only to the separate display-hinge study, not to the saved full case.",
   "grip_bore_diameter_mm": 3.7,
-  "grip_liner_status": "3.7 mm outside / 3.1 mm inside split lining prototype around the 3 mm cable budget. It has 0.1 mm diametral clearance and is not a qualified friction clamp."
+  "grip_liner_status": "3.7 mm outside / 3.1 mm inside split lining prototype around the 3 mm cable budget. It has 0.1 mm diametral clearance and is not a qualified friction clamp.",
+  "module_plug_reference": "display-plug.json",
+  "module_plug_check_scope": "A documented connector-family reference is positioned at the saved port datum. Exact installed part identity, mating compatibility and physical operation remain unconfirmed."
 }

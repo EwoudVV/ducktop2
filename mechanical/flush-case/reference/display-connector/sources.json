@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-12",
+  "manufacturer_reference": "I-PEX CABLINE-VS 40-position family geometry",
+  "archive_url": "https://www.i-pex.com/sites/default/files/downloads/zip/40p_CABLINE-VS_STEP.zip",
+  "archive_sha256": "151c6a6824414c561544a6a570fcaba063376f5b80a1ac076242e6adbe827e9b",
+  "archive_model_date": "2012-01-24",
+  "models": [
+    "20453-x40T-x3C+20455-040E-xxC_MATING_STEP_R8R6_ALL.STEP",
+    "20453-x40T-x2C+20455-040E-xxC_MATING_STEP_R8R6_ALL.STEP"
+  ],
+  "derivation": "Plug-without-bar extracted from the mated assembly. The bar is the with-bar plug minus that body; the body has no material outside the with-bar assembly. Both saved parts pass BRep validity checks. The native port fragment comes from the checked case geometry.",
+  "bar_difference_volume_mm3": 9.657865982415945,
+  "plug_without_bar_difference_mm3": 0,
+  "native_port_source": "ducktop2.3dshapes/LattePanda_Mu_Ultra_H8.0_Horizontal.step",
+  "native_source_sha256": "cd5897d1e0a8d9edd0e3443f8b042313647ce2f6998d1084656a0aa1b80b284a",
+  "native_port_frame": "construction X,-Y,+H from the saved case",
+  "native_port_product_label": "LV0504-40-0010RA-G3_9_1",
+  "native_plug_placeholder": "LV0505-401GB_ASM_9_ASM_1_ASM",
+  "native_plug_placeholder_solids": 0,
+  "native_port_note": "This product label does not confirm the purchased module connector supplier or suffix. Only the receptacle has solid geometry in the upstream assembly.",
+  "latest_drawing_references": [
+    "https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-VS_PLUG_CABLE_ASSEMBLY_20453C38.pdf",
+    "https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-VS_RECEPTACLE_20455C35.pdf",
+    "https://www.i-pex.com/sites/default/files/downloads/pdf/2D_CABLINE-VS_PLUG_PULL_BAR_2576C15.pdf"
+  ],
+  "files": [
+    {
+      "file": "plug-body.brep",
+      "sha256": "9f5eb5303b296bb266a46218590269fbe75dc15c5efa05e544567215343f00bc"
+    },
+    {
+      "file": "pull-bar.brep",
+      "sha256": "d40bd3695e455e26fb99f6248bf61889fb37553d30ef455088c5148ed90e9952"
+    },
+    {
+      "file": "native-port.brep",
+      "sha256": "e2afb544fdf026008d4903bd67f0364335a9bca5d8942bccadea3b4bdc978921"
+    }
+  ],
+  "physical_part_identity_verified": false,
+  "compatibility_verified": false,
+  "supplier_receptacle_solid_valid": false,
+  "supplier_receptacle_handling": "The mated-assembly receptacle solid fails the CAD kernel validity check, including after a shape-fix attempt. It is not retained or substituted into the case. Alignment uses its outer bounds, checked against the current 20455 drawing; the saved native module port remains in the model."
+}

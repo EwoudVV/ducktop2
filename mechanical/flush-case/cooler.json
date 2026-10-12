@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10",
+  "date": "2026-10-12",
   "status": "prototype cooling layout; no thermal or mounting-load qualification",
   "fan": {
     "part": "BFB04512HHA-DV52",
@@ -166,7 +166,22 @@
     "nominal_bondline_mm": 0.1,
     "mount_reference": "DFRobot FIT1049, three existing module mounting points",
     "clamp_load_verified": false,
-    "manufacturing_ready": false
+    "manufacturing_ready": false,
+    "display_connector_relief": {
+      "xywh_mm": [
+        234.1,
+        43.5,
+        3.0,
+        30.0
+      ],
+      "inside_radius_mm": 0.5,
+      "purpose": "clear the display connector locking-bar access and upper swing space",
+      "depth_into_previous_edge_mm": 1.7,
+      "minimum_hole_edge_ligament_mm": 2.62,
+      "minimum_mount_reservation_gap_mm": 0.47,
+      "contact_and_pipe_geometry_changed": false,
+      "physical_fit_verified": false
+    }
   },
   "fins": {
     "material": "copper",

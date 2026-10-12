@@ -22,6 +22,17 @@ def config():
     return json.loads((HERE / 'cooler.json').read_text())
 
 
+def plate_connector_relief(plate, specification=None):
+    spec=specification if specification is not None else config()['plate'].get('display_connector_relief')
+    if not spec:return plate
+    x,y,w,d=spec['xywh_mm'];b=plate.BoundingBox()
+    cutter=box(x,y,b.zmin-.1,w,d,b.zlen+.2)
+    cutter=cq.Workplane(obj=cutter).edges('|Z').fillet(spec['inside_radius_mm']).val()
+    result=plate.cut(cutter)
+    assert result.isValid() and len(result.Solids())==1,'the connector relief must leave one connected plate'
+    return result
+
+
 def pipe_path(spec, offset, length=None):
     """Two tangent quarter circles, with equal total length for both lanes."""
     radius = spec['centerline_radius_mm']
@@ -162,6 +173,7 @@ def make_parts(case, fan_shape=None):
         slot = limit.translate((0,0,c['plate']['groove_floor_H']-bb.zmin))
         slots.append(slot)
         plate = plate.cut(slot)
+    plate=plate_connector_relief(plate,c['plate'].get('display_connector_relief'))
     add('stepped-copper-plate', plate, (.68,.39,.22))
     fx, fy, fw, fd = fin['xywh']
     pitch = (fd-fin['thickness_mm'])/(fin['count']-1)

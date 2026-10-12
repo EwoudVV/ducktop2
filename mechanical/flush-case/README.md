@@ -1,6 +1,6 @@
 # flush case with an external radio
 
-11 october 2026. the lid and base now use the same 370 x 274 mm rounded
+12 october 2026. the lid and base now use the same 370 x 274 mm rounded
 outline. the front stays at Y256; the rear of the base moves from Y-26 to
 Y-18. that removes the old 8 mm rear ledge without adding a front lip.
 the keyboard and trackpad stay in their saved positions.
@@ -125,6 +125,10 @@ route, removable lined jaws, mounting hardware, a rear guard and their
 proposed openings. [grip and guard details](display-grips.md) the full
 case still needs those changes reconciled with a selected harness and
 the exact panel; its cable motion and strain relief are not qualified.
+the [module-side plug study](display-plug.md) adds the documented connector
+family, locking-bar swing and removal space. its 1.7 mm cooling-plate edge
+relief is already included in the full case. the actual module connector
+suffix remains unconfirmed until the module arrives.
 
 ## files
 

@@ -10,6 +10,8 @@ import check_cooler
 import usb_harness
 import display_grips
 import display_grip_checks
+import display_plug
+import display_plug_checks
 from cad import box, compound, bounds, export_step, _MESHES
 from cables import tube
 from component_heights import screen_routes, resolve
@@ -36,7 +38,11 @@ def route_points():
         t=np.linspace(a,b,math.ceil(abs(b-a)*r/.2)+1)
         v=np.c_[x+r*np.cos(t),y+r*np.sin(t),np.full(len(t),h)]
         p.extend(v[1:] if p else v)
-    line(c['fanout_start_xyH'],c['fanout_end_xyH'])
+    tail=display_plug.config()['reference_cable_stub_end_xyH_mm']
+    line(tail,c['fanout_start_xyH'])
+    start=np.array(c['fanout_start_xyH']);end=np.array(c['fanout_end_xyH'])
+    for u in np.linspace(0,1,62)[1:]:
+        q=start+(end-start)*u;q[2]=start[2]+(end[2]-start[2])*(3*u*u-2*u*u*u);p.append(q)
     arc(258,48.54,10,math.pi/2,0,13.3)
     first=len(p)-1;radius=14;angle=math.acos(1-24.5/(2*radius))
     for t in np.linspace(0,angle,105)[1:]:
@@ -74,19 +80,19 @@ def anchor(x,moving):
 def geometry():
     c=config();p=route_points();r=c['maximum_dressed_bundle_diameter_mm']/2+c['position_allowance_mm']
     assert abs(r-1.8)<1e-9,'resize the grip and fanout after changing the cable envelope'
-    assert c['fanout_start_xyH']==[245.9,58.54,13.3] and c['fanout_end_xyH']==[258,58.54,13.3]
+    assert c['fanout_start_xyH']==[245.9,58.54,12.772] and c['fanout_end_xyH']==[258,58.54,13.3]
     assert c['fanout_start_width_mm']==28.6,'redraw the tapered fanout for its new width'
     ax=c['fixed_anchor_xyH'][0];bx=c['lid_anchor_xyH_closed'][0]
     start=np.argmin(np.linalg.norm(p-np.array(c['fanout_end_xyH']),axis=1));roundp=p[start:]
     model_points=np.vstack([roundp[::2],roundp[-1:]])
     model_points=model_points[np.r_[True,np.linalg.norm(np.diff(model_points,axis=0),axis=1)>1e-8]]
-    fanout=cq.Workplane('XY').polyline([(245.9,-44.24),(245.9,-72.84),(258,-60.34),(258,-56.74)]).close().extrude(3.6).val().translate((0,0,11.5))
+    fanout=cq.Workplane('XY').polyline([(243.92,-44.24),(243.92,-72.84),(258,-60.34),(258,-56.74)]).close().extrude(3.6).val().translate((0,0,11.5))
     span=cq.Solid.makeCylinder(r,ax-bx,cq.Vector(bx,15,19.3),cq.Vector(1,0,0))
     new=[{'name':'display-flat-fanout-space','shape':fanout,'moving':False,'color':(.95,.45,.12)},
          {'name':'display-base-bundle-space','shape':tube(model_points,r),'moving':False,'color':(.95,.45,.12)},
          {'name':'display-axis-flex-space','shape':span,'moving':False,'color':(.65,.28,.7)},
          {'name':'display-lid-tail-space','shape':tube(lid_tail(),r),'moving':True,'color':(.95,.45,.12)}]
-    new+=anchor(ax,False)+anchor(bx,True)+display_grips.guard()
+    new+=anchor(ax,False)+anchor(bx,True)+display_grips.guard()+display_plug.geometry()
     assert all(n['shape'].isValid() for n in new)
     return new,p
 
@@ -145,9 +151,10 @@ def height_screen(points):
                 p.update(height_mm=h['height_mm'],height_kind='maximum',height_status='verified_maximum',
                          height_source_url=h['source'],height_basis=h['basis'])
     settings.update(sampling_step_mm=.2,wire_position_allowance_mm=.3,guide_curve_allowance_mm=.05)
-    part={'name':'display-base-bundle','points':points.tolist(),'wire_od_mm':3,'ends':[{'board':'center','ref':'A1'}]}
+    start=np.argmin(np.linalg.norm(points-np.array(config()['fanout_end_xyH']),axis=1))
+    part={'name':'display-base-bundle','points':points[start:].tolist(),'wire_od_mm':3,'ends':[{'board':'center','ref':'A1'}]}
     out=screen_routes([part],table,{'left':5.5,'center':5.5,'right':5.5},{'guide_radial_clearance':0,'guide_wall':0},settings)
-    fanout=Polygon([(245.9,44.24),(245.9,72.84),(258,60.34),(258,56.74)])
+    fanout=Polygon([(243.92,44.24),(243.92,72.84),(258,60.34),(258,56.74)])
     extra=[]
     for p in table:
         if p['dnp'] or p['side']!='front' or (p['board']=='center' and p['reference']=='A1'):continue
@@ -169,15 +176,18 @@ def main():
     assert sha(ROOT/'ducktop2-center.kicad_pcb')==c['source_center_PCB_sha256']
     assert case['hinges']['pivot_y']==-15 and case['hinges']['pivot_height']==19.3
     assert case['boards']['main_bottom_H']==3.9
-    for path in [Path(__file__),HERE/'display-hinge-study.json',HERE/'display-part-heights.json',HERE/'draw_cooler.py',
+    for path in [*display_plug.REFERENCE.glob('*.brep'),display_plug.REFERENCE/'sources.json',HERE/'display-plug.json',HERE/'display_plug.py',HERE/'display_plug_checks.py',Path(__file__),HERE/'display-hinge-study.json',HERE/'display-part-heights.json',HERE/'draw_cooler.py',
                  ROOT/'reference/lattepanda/mu-ultra-edp-pinout.json',HERE/'display_grips.py',HERE/'display-grip-hardware.json',HERE/'display_grip_checks.py']:
         sources[str(path.relative_to(ROOT))]=sha(path)
     new,p=geometry();fixed=[];sweep=[];internal=[]
     physical=[q for q in original if not q.get('service') and q['group'] not in ['keepout','changes']]
+    plug_checker=display_plug_checks.CollisionCheck([display_plug.strip_native_port(q) for q in physical],case)
     for n in [q for q in new if not q.get('moving')]:
         print('static check',n['name'],flush=True)
         for q in [v for v in physical if not v.get('moving')]:
-            v,where=overlap(n['shape'],q['shape'])
+            obstacle=display_plug.obstacle_for(n,q)
+            if n.get('display_plug'):v,where=plug_checker.volume(n,obstacle),[]
+            else:v,where=overlap(n['shape'],obstacle['shape'])
             if v>.01:fixed.append({'new':n['name'],'part':q['name'],'overlap_mm3':round(v,4),'where':where})
     maximum=c['opening_study_degrees'][1]
     assert maximum==case['hinges']['requested_opening_deg']
@@ -194,6 +204,7 @@ def main():
             for q in new[i+1:]:
                 if n['name'].endswith('-space') and q['name'].endswith('-space'):continue
                 if display_grips.allocated_liner_overlap(n,q):continue
+                if n.get('display_plug') and q.get('display_plug'):continue
                 if angle and n.get('moving',False)==q.get('moving',False):continue
                 # The axis-aligned circular envelope is itself unchanged by
                 # the lid rotation. Its relative grip fit is checked at zero.
@@ -202,6 +213,7 @@ def main():
                 if v>.01:internal.append({'angle':angle,'new':n['name'],'part':q['name'],'overlap_mm3':round(v,4),'where':where})
         if angle%20==0:print('opening',angle,flush=True)
     hardware=display_grip_checks.evaluate(saved,original,new,case,pose,overlap)
+    plug_checks=display_plug_checks.evaluate(original,case,pose)
     heights=height_screen(p)
     lengths=np.linalg.norm(np.diff(p,axis=0),axis=1)
     stations=np.r_[0,np.cumsum(lengths)]
@@ -212,7 +224,7 @@ def main():
     pitch=c['fixed_anchor_xyH'][0]-c['lid_anchor_xyH_closed'][0]
     assert abs(pitch-c['anchor_grip_length_mm']-length)<1e-9,'free flex length excludes both half-grips'
     report={'date':c['date'],'source_hashes':sources,'configuration':c,
-            'static_solid_conflicts':fixed,'opening_solid_conflicts':sweep,'internal_solid_conflicts':internal,'height_screen':heights,'mounting_hardware':hardware,
+            'static_solid_conflicts':fixed,'opening_solid_conflicts':sweep,'internal_solid_conflicts':internal,'height_screen':heights,'mounting_hardware':hardware,'module_plug_checks':plug_checks,
             'internal_check_scope':'Common-frame pairs and pairs with the rotation-invariant axis cylinder are checked once. Other moving-versus-fixed pairs use the full opening sample range. Adjacent volumes representing the same continuous cable are not treated as independent physical parts.',
             'base_centerline_length_mm':round(float(lengths.sum()),3),
             'sampled_minimum_base_centerline_radius_mm':round(sampled_radius,3),
@@ -221,8 +233,9 @@ def main():
             'average_rotation_per_length_degrees_per_mm':maximum/length,
             'outer_helix_geometric_extra_length_mm':math.sqrt(length*length+(r*angle)**2)-length,
             'helix_note':'Illustrative outer path at 1.5 mm radius with uniformly distributed twist. This is not a material strain or fatigue prediction; actual wire lay, sliding, slack and strain concentration are unknown.',
-            'proposed_case_reliefs':case_changes,'saved_full_case_changed':False,
-            'proposed_geometry_solid_clear':not fixed and not sweep and not internal and hardware['nominal_hardware_geometry_pass'],
+            'proposed_case_reliefs':case_changes,'display_rear_reliefs_applied_to_full_case':False,
+            'cooler_plate_relief_applied_to_full_case':bool(json.loads((HERE/'cooler.json').read_text())['plate'].get('display_connector_relief')),
+            'proposed_geometry_solid_clear':not fixed and not sweep and not internal and hardware['nominal_hardware_geometry_pass'] and plug_checks['nominal_external_geometry_pass'],
             'component_height_screen_clear':not heights['unverified_height_limits'] and not heights['known_height_clearance_conflicts'] and all(v['height'] is not None and v['gap_mm']>=0 for v in heights['flat_fanout_crossings']),
             'full_harness_length_mm':None,'physical_fit_verified':False,'manufacturing_ready':False}
     out=HERE/'display-hinge-checks.json';out.write_text(json.dumps(report,indent=2)+'\n')
@@ -244,17 +257,18 @@ def main():
             s=q['shape'].intersect(crop)
             if s.Solids():context.append({**q,'shape':s,'color':(*q['color'][:3],.22)})
     for angle in [0,105,maximum]:
-        scene=[pose(q,angle) for q in context]+[pose(q,angle) for q in new[2:]]
+        scene=[pose(q,angle) for q in context]+[pose(q,angle) for q in new[2:] if not q.get('display_plug')]
         render(scene,HERE/f'views/display-hinge-{angle}.png',f'hinge-axis cable study at {angle} degrees / proposed rear reliefs / 50 mm free span',(.45,-1,.8),(1550,1050))
+    plug_export=display_plug_checks.draw(original,render,HERE)
     dest=HERE/'exports/display-hinge-study.step'
     export_step(compound(q['shape'] for q in new+context),dest)
     reopened=cq.importers.importStep(str(dest)).val();assert reopened.isValid()
-    outputs=['views/display-base-route.png',*[f'views/display-hinge-{a}.png' for a in [0,105,maximum]],'exports/display-hinge-study.step','views/display-base-grip.png','views/display-lid-grip.png','views/display-grips-and-guard.png']
-    report['outputs']={name:sha(HERE/name) for name in outputs};report['STEP_reopens']=True;report['STEP_solids']=len(reopened.Solids())
+    outputs=['views/display-base-route.png',*[f'views/display-hinge-{a}.png' for a in [0,105,maximum]],'exports/display-hinge-study.step','views/display-base-grip.png','views/display-lid-grip.png','views/display-grips-and-guard.png',*[f'views/display-plug-{s}.png' for s in ['seated','unlocked','withdrawn','access']],'exports/display-plug-study.step']
+    report['outputs']={name:sha(HERE/name) for name in outputs};report['STEP_reopens']=True;report['STEP_solids']=len(reopened.Solids());report['module_plug_export']=plug_export
     for path,h in sources.items():assert sha(ROOT/path)==h,path
     out.write_text(json.dumps(report,indent=2)+'\n')
     print('hardware geometry pass',hardware['nominal_hardware_geometry_pass'],flush=True)
-    print('saved cable study, seven views and reopened STEP',flush=True)
+    print('saved cable study, connector close-ups and reopened STEP files',flush=True)
 
 
 if __name__=='__main__':main()

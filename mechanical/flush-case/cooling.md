@@ -1,6 +1,6 @@
 # right-side cooler
 
-10 october 2026. this layout uses a smaller blower beside the center board
+12 october 2026. this layout uses a smaller blower beside the center board
 instead of cutting a large circular pocket into it. the case still has a
 25 mm deck and a 33.3 mm closed-height target. the keyboard, trackpad and
 board outlines stay in their existing positions.
@@ -38,6 +38,12 @@ existing Mu/FIT1049 registration. recessed pipe channels leave 0.7 mm of
 copper above the main underside. the nominal metal-to-pipe bond space is
 0.1 mm. these are prototype dimensions: plate stiffness, bond thickness,
 flatness and the actual thermal-interface gaps still need testing.
+
+a rounded 1.7 mm edge relief now leaves room beside the display connector
+for its locking bar and access at both ends. the CPU and memory contacts,
+pipe channels and three mounting reservations remain intact. the nearest
+screw hole keeps 2.62 mm of edge material. this relief is included in the
+full case export. [display-plug fit and removal](display-plug.md)
 
 the custom fin stack occupies X344.5–362.5, Y123–175, H5.9–20.0. its 48
 copper fins are 0.3 mm thick and share a continuous 1 mm collector. that

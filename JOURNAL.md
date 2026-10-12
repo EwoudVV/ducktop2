@@ -5,6 +5,26 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-12: make room for the display plug beside the cooler
+
+**Total time spent: 2 hours**
+
+worked on the display connection at the mu end. the module model had the socket, but its plug was only an empty placeholder, so the cable route did not show the whole connection. added the documented i-pex plug and locking bar from the manufacturer's cad, then lined them up with the socket in the saved module model.
+
+![the display plug beside the relieved copper plate](docs/images/journal/2026-10-12-display-plug-seated.png)
+
+checked the locking bar and how to unplug the cable. the seated parts fit, but the cooling plate took up the extra space above the bar and blocked access at its ends. cut a shallow rounded recess into the plate edge, 1.7 mm deep. kept the cpu and memory contact faces, both pipe channels and all three mounting areas. the closest screw hole still has 2.62 mm of copper between it and the new edge.
+
+![the locking bar raised with room beside the plate](docs/images/journal/2026-10-12-display-plug-unlocked.png)
+
+joined the cable route to the plug's actual wire ends. it now leaves straight for 1.98 mm before rising gently into the fanout. checked a 5 mm straight withdrawal with the bar raised, plus space to reach both ends after taking out the keyboard and its carrier. the fixed cable grip has to be released first so unplugging does not pull against it. also checked the bar through its modeled swing and the complete cable study through the case's 135 degree opening.
+
+![the plug withdrawn straight out of its socket](docs/images/journal/2026-10-12-display-plug-withdrawn.png)
+
+rebuilt the case with the plate recess, refreshed the cooler and cable views, and reopened the step exports. the combined study has no unwanted solid contacts at the checked positions, all 13 component-height crossings clear, and all 51 geometry tests pass. the body stays 33.3 mm without feet, with the same lid and base outline. none of the pcbs changed.
+
+i do not have the mu ultra yet, so the plug is still a reference for the documented connector family. i need to confirm the actual part and pin orientation when it arrives. the panel end and the finished cable construction still need confirming too. this settles more of the space around the connection, but the real cable, grip fit, repeated lid movement and cooler still need physical testing.
+
 # 2026-10-11: mount the display cable grips and add a rear guard
 
 **Total time spent: 1 hour**

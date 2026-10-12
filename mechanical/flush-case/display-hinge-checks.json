@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-11",
+  "date": "2026-10-12",
   "source_hashes": {
     "mechanical/case-prototype/build.py": "e0f9cd653ca4f809b2c848afc9c9cab42a8950da9cb38069c4c71395af467246",
     "mechanical/case-prototype/cables.py": "5a26dab2ffc553032e99a20f384c457e3e0ba58eccb15edd5df7cb7b23737832",
@@ -31,17 +31,17 @@
     "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
     "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
     "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-    "mechanical/flush-case/assembly.json": "28572518d2c35073d36a7afd76966cb284ae818f49a5294b5a0d487ab750cfbf",
+    "mechanical/flush-case/assembly.json": "f04d10686523e3fa31ad42b8257ab8fe693a53e3a1003e4262ed3a663261377f",
     "mechanical/flush-case/build.py": "19b11a02fcc5d66149a4399a48cf6cd44b021cb7cea5ebbfc3024147176594f1",
     "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
     "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
     "mechanical/flush-case/usb_collision.py": "364d8e41e1ecc589938ff25ba466fdd08eca1d5f6f54fceabb1cc6d227aca8a7",
     "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
-    "mechanical/flush-case/usb-harness.json": "01d326da336dfd3aaa25d383a956acfd04754df702e876240742e8e17c77df4c",
+    "mechanical/flush-case/usb-harness.json": "928acf5ef1b3267719e5742f9d1f8412ca96586ea9077b6c024842635a51879c",
     "mechanical/component-placement.json": "19c59ea2928aa31da40f7c0391799edff8312af731d4bdb882f516690fa91df6",
     "mechanical/case-prototype/height-allowances.json": "93887a5bb5275dd5889be4190041b7803b3d9dc2fdbe637740f7c3a18078962c",
-    "mechanical/flush-case/remote_cooler.py": "d4b0285e22f07334a34837f7c680a41ac05bd7c14def0f201761213399412e75",
-    "mechanical/flush-case/cooler.json": "2d3198f6c33a6ced0ee503baf48b0fe853054e126ac553e14517b5e9b132a4dd",
+    "mechanical/flush-case/remote_cooler.py": "fc5eb3b5b75f1dc6a8d554349b6b0487b48d31ef527094facac520de646a2e37",
+    "mechanical/flush-case/cooler.json": "e9ce53a6898136a8c610eb2b95a1d7d88e3dc8851eec2aa3fef3591816daec0a",
     "mechanical/flush-case/cooler-part-heights.json": "e1a1f29f5a323f4cac02fce700e8b4d6f05c823767aec4d68feea5eda0c3a133",
     "mechanical/flush-case/check_cooler.py": "4b5941c29dee07db63f0a08ee60783b9d01ac60e89a124cdb9cb73b5bbf62274",
     "mechanical/flush-case/cooler_hardware.py": "b48a8e95e309d03336ef138b7e32b663e11837f4b5c5c8fac7d241a6f0c18512",
@@ -59,8 +59,15 @@
     "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
     "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
     "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6",
-    "mechanical/flush-case/display_hinge_study.py": "dae6c894e166881ede799a55a8faad0939245cc5d17d382b1bc27e9a44a10c7a",
-    "mechanical/flush-case/display-hinge-study.json": "ed83e7ab23dec4f3b4d49b658289c13bdb0defbb2abbf8441b68537fb9418266",
+    "mechanical/flush-case/reference/display-connector/pull-bar.brep": "d40bd3695e455e26fb99f6248bf61889fb37553d30ef455088c5148ed90e9952",
+    "mechanical/flush-case/reference/display-connector/native-port.brep": "e2afb544fdf026008d4903bd67f0364335a9bca5d8942bccadea3b4bdc978921",
+    "mechanical/flush-case/reference/display-connector/plug-body.brep": "9f5eb5303b296bb266a46218590269fbe75dc15c5efa05e544567215343f00bc",
+    "mechanical/flush-case/reference/display-connector/sources.json": "a9838a9869be0a48ce0b3be45d122c93ba26761d849c8ae9d4a51a0536ea1abe",
+    "mechanical/flush-case/display-plug.json": "86f78a0f57f1ae71a1851ff02847a26b50b30b9b58f81725346081f2130ef7d0",
+    "mechanical/flush-case/display_plug.py": "ad9ecdce2f7a178ca09e66ef8c4fd83e66c625eeb835a8f84c1b069eb65ec90b",
+    "mechanical/flush-case/display_plug_checks.py": "030ff4a6822710eec8dc5bbf8cb1c6c4309ac0a5dd3652a6865d4901577efc2d",
+    "mechanical/flush-case/display_hinge_study.py": "952ec8022bf882069d6fc28f47aaba42ff773cfb7c9c00123660e3b7a62c6728",
+    "mechanical/flush-case/display-hinge-study.json": "220ad23cbe6bb48760bd8936c9e48ac5bb3357fcb3f048b3c487b9798c0aa2bc",
     "mechanical/flush-case/draw_cooler.py": "28f3c04c99a8f7a99b329021df7ce4976643cff860408026a3bdb5e12ba2cf51",
     "reference/lattepanda/mu-ultra-edp-pinout.json": "0a4a7cf0dbffe99e6d5ba72d1b2ec9a668df2130200a0e55e82798d3c65e12f7",
     "mechanical/flush-case/display_grips.py": "c45518f17b0ea4bc628e5eb01911af0b8218e3e58e81a56792435f25381c0f66",
@@ -68,7 +75,7 @@
     "mechanical/flush-case/display_grip_checks.py": "0ff17ab3d20a74cc0e6ed1a20853980c2d6caa47e1d69b3b18f041a34cc11132"
   },
   "configuration": {
-    "date": "2026-10-11",
+    "date": "2026-10-12",
     "status": "partial display harness study with removable grip hardware and a rear cable guard",
     "coordinate_frame": "installed X, Y and height above the base bottom, in mm",
     "source_center_PCB_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
@@ -85,7 +92,7 @@
     "fanout_start_xyH": [
       245.9,
       58.54,
-      13.3
+      12.772
     ],
     "fanout_end_xyH": [
       258,
@@ -130,7 +137,9 @@
     "lid_tail_straight_before_bend_mm": 8,
     "case_changes_scope": "The reliefs are applied only to the separate display-hinge study, not to the saved full case.",
     "grip_bore_diameter_mm": 3.7,
-    "grip_liner_status": "3.7 mm outside / 3.1 mm inside split lining prototype around the 3 mm cable budget. It has 0.1 mm diametral clearance and is not a qualified friction clamp."
+    "grip_liner_status": "3.7 mm outside / 3.1 mm inside split lining prototype around the 3 mm cable budget. It has 0.1 mm diametral clearance and is not a qualified friction clamp.",
+    "module_plug_reference": "display-plug.json",
+    "module_plug_check_scope": "A documented connector-family reference is positioned at the saved port datum. Exact installed part identity, mating compatibility and physical operation remain unconfirmed."
   },
   "static_solid_conflicts": [],
   "opening_solid_conflicts": [],
@@ -585,8 +594,1156 @@
       "The cable guard covers the straight section; the moving-tail opening is not sealed."
     ]
   },
+  "module_plug_checks": {
+    "configuration": {
+      "date": "2026-10-12",
+      "status": "documented connector-family fit study; exact installed suffix and pin-1 orientation unconfirmed",
+      "reference_origin_construction_xyz_mm": [
+        238.32,
+        -58.54,
+        12.257
+      ],
+      "reference_rotations_deg": {
+        "X_first": 90,
+        "Z_second": -90
+      },
+      "native_receptacle_bounds_construction_xyz_mm": [
+        235.82,
+        -71.665,
+        12.237,
+        239.77,
+        -45.415,
+        13.287
+      ],
+      "native_receptacle_volume_mm3": 44.1766113234,
+      "bar_pivot_reference_xyz_mm": [
+        0,
+        0.455,
+        -2.115
+      ],
+      "bar_pivot_basis": "X-axis through the wire centre. The CAD crossbar centre is Y0.455,Z2.835. The drawing's 4.40 mm inner spacing plus 0.55 mm uncoated wire diameter gives 4.95 mm centre spacing, placing the pivot at Z-2.115. Internal latch deformation is not modeled.",
+      "bar_swing_study_deg": [
+        0,
+        180
+      ],
+      "bar_swing_step_deg": 2,
+      "bar_swing_scope": "Enclosure clearance through both horizontal positions; follow the supplier's handling sequence on the actual part rather than forcing an assumed travel limit.",
+      "upper_swing_space_xyHwhd_mm": [
+        234.8,
+        44.4,
+        13.4,
+        11.3,
+        28.3,
+        5.0
+      ],
+      "upper_swing_space_scope": "An additional room allocation above the seated connector. The lower seating region is covered by the nominal part check, not by this box. This is not a full manufacturing-tolerance proof.",
+      "withdrawal_distance_mm": 5,
+      "withdrawal_step_mm": 0.5,
+      "withdrawal_bar_angle_deg": 90,
+      "service_lid_angle_deg": 105,
+      "service_remove": [
+        "deck",
+        "keyboard-pcb-and-available-models",
+        "key-travel-and-cap-envelopes",
+        "keyboard-carrier-reservation"
+      ],
+      "service_prerequisites": "Release the display base jaw and free the loom before unplugging. Disconnect or release the fan/USB guides attached to the keyboard carrier before removing it. The complete keyboard removal sequence and dressed-cable handling still need a physical check.",
+      "tool_shaft_diameter_mm": 2,
+      "tool_shaft_height_mm": 30,
+      "tool_handle_diameter_mm": 8,
+      "tool_handle_height_mm": 20,
+      "access_points_xyH_mm": {
+        "left_shell_end": [
+          241.2,
+          45.5,
+          13.45
+        ],
+        "right_shell_end": [
+          241.2,
+          71.5,
+          13.45
+        ],
+        "left_bar_end": [
+          235.49,
+          47.2,
+          13.45
+        ],
+        "right_bar_end": [
+          235.49,
+          69.88,
+          13.45
+        ]
+      },
+      "access_note": "Clearance corridors for narrow insulating tools. Their size and position do not define an approved pressing tool, force, or a safe contact point on an unconfirmed connector.",
+      "reference_cable_stub_end_xyH_mm": [
+        243.92,
+        58.54,
+        12.772
+      ],
+      "reference_cable_stub_height_range_H_mm": [
+        12.587,
+        12.957
+      ],
+      "reference_cable_stub_span_Y_mm": [
+        48.605,
+        68.475
+      ],
+      "physical_part_identity_verified": false,
+      "pin_1_orientation_verified": false,
+      "connector_interchangeability_verified": false,
+      "full_latch_mechanism_verified": false,
+      "physical_service_verified": false,
+      "manufacturing_ready": false
+    },
+    "external_collisions": [],
+    "bar_swing_samples": [
+      {
+        "angle_deg": 0,
+        "bounds_construction_xyz": [
+          235.18,
+          -72.315,
+          12.406989,
+          240.706685,
+          -44.765,
+          13.017011
+        ]
+      },
+      {
+        "angle_deg": 2,
+        "bounds_construction_xyz": [
+          235.183023,
+          -72.315,
+          12.437079,
+          240.706683,
+          -44.765,
+          13.189833
+        ]
+      },
+      {
+        "angle_deg": 4,
+        "bounds_construction_xyz": [
+          235.192087,
+          -72.315,
+          12.437162,
+          240.706679,
+          -44.765,
+          13.362413
+        ]
+      },
+      {
+        "angle_deg": 6,
+        "bounds_construction_xyz": [
+          235.207177,
+          -72.315,
+          12.437516,
+          240.706674,
+          -44.765,
+          13.534542
+        ]
+      },
+      {
+        "angle_deg": 8,
+        "bounds_construction_xyz": [
+          235.228271,
+          -72.315,
+          12.437677,
+          240.706669,
+          -44.765,
+          13.706016
+        ]
+      },
+      {
+        "angle_deg": 10,
+        "bounds_construction_xyz": [
+          235.25534,
+          -72.315,
+          12.437828,
+          240.706666,
+          -44.765,
+          13.876632
+        ]
+      },
+      {
+        "angle_deg": 12,
+        "bounds_construction_xyz": [
+          235.288348,
+          -72.315,
+          12.437968,
+          240.706665,
+          -44.765,
+          14.046186
+        ]
+      },
+      {
+        "angle_deg": 14,
+        "bounds_construction_xyz": [
+          235.327208,
+          -72.315,
+          12.438098,
+          240.706668,
+          -44.765,
+          14.214458
+        ]
+      },
+      {
+        "angle_deg": 16,
+        "bounds_construction_xyz": [
+          235.371866,
+          -72.315,
+          12.43822,
+          240.706676,
+          -44.765,
+          14.381281
+        ]
+      },
+      {
+        "angle_deg": 18,
+        "bounds_construction_xyz": [
+          235.422324,
+          -72.315,
+          12.438335,
+          240.706689,
+          -44.765,
+          14.546491
+        ]
+      },
+      {
+        "angle_deg": 20,
+        "bounds_construction_xyz": [
+          235.478526,
+          -72.315,
+          12.438448,
+          240.706708,
+          -44.765,
+          14.7099
+        ]
+      },
+      {
+        "angle_deg": 22,
+        "bounds_construction_xyz": [
+          235.540407,
+          -72.315,
+          12.43856,
+          240.706733,
+          -44.765,
+          14.871291
+        ]
+      },
+      {
+        "angle_deg": 24,
+        "bounds_construction_xyz": [
+          235.607894,
+          -72.315,
+          12.438685,
+          240.706766,
+          -44.765,
+          15.030413
+        ]
+      },
+      {
+        "angle_deg": 26,
+        "bounds_construction_xyz": [
+          235.680906,
+          -72.315,
+          12.438822,
+          240.706805,
+          -44.765,
+          15.187049
+        ]
+      },
+      {
+        "angle_deg": 28,
+        "bounds_construction_xyz": [
+          235.759354,
+          -72.315,
+          12.438961,
+          240.706851,
+          -44.765,
+          15.341011
+        ]
+      },
+      {
+        "angle_deg": 30,
+        "bounds_construction_xyz": [
+          235.843139,
+          -72.315,
+          12.43909,
+          240.706904,
+          -44.765,
+          15.492116
+        ]
+      },
+      {
+        "angle_deg": 32,
+        "bounds_construction_xyz": [
+          235.932157,
+          -72.315,
+          12.439205,
+          240.706962,
+          -44.765,
+          15.640184
+        ]
+      },
+      {
+        "angle_deg": 34,
+        "bounds_construction_xyz": [
+          236.026296,
+          -72.315,
+          12.439299,
+          240.707025,
+          -44.765,
+          15.785043
+        ]
+      },
+      {
+        "angle_deg": 36,
+        "bounds_construction_xyz": [
+          236.125451,
+          -72.315,
+          12.439372,
+          240.707091,
+          -44.765,
+          15.926502
+        ]
+      },
+      {
+        "angle_deg": 38,
+        "bounds_construction_xyz": [
+          236.229425,
+          -72.315,
+          12.439427,
+          240.707161,
+          -44.765,
+          16.064446
+        ]
+      },
+      {
+        "angle_deg": 40,
+        "bounds_construction_xyz": [
+          236.338124,
+          -72.315,
+          12.439469,
+          240.707233,
+          -44.765,
+          16.198755
+        ]
+      },
+      {
+        "angle_deg": 42,
+        "bounds_construction_xyz": [
+          236.45145,
+          -72.315,
+          12.439509,
+          240.707304,
+          -44.765,
+          16.329179
+        ]
+      },
+      {
+        "angle_deg": 44,
+        "bounds_construction_xyz": [
+          236.56927,
+          -72.315,
+          12.439558,
+          240.707375,
+          -44.765,
+          16.455557
+        ]
+      },
+      {
+        "angle_deg": 46,
+        "bounds_construction_xyz": [
+          236.691391,
+          -72.315,
+          12.439612,
+          240.707444,
+          -44.765,
+          16.577782
+        ]
+      },
+      {
+        "angle_deg": 48,
+        "bounds_construction_xyz": [
+          236.8177,
+          -72.315,
+          12.439663,
+          240.707506,
+          -44.765,
+          16.69567
+        ]
+      },
+      {
+        "angle_deg": 50,
+        "bounds_construction_xyz": [
+          236.948076,
+          -72.315,
+          12.439714,
+          240.707564,
+          -44.765,
+          16.809046
+        ]
+      },
+      {
+        "angle_deg": 52,
+        "bounds_construction_xyz": [
+          237.082355,
+          -72.315,
+          12.439765,
+          240.707619,
+          -44.765,
+          16.917774
+        ]
+      },
+      {
+        "angle_deg": 54,
+        "bounds_construction_xyz": [
+          237.220369,
+          -72.315,
+          12.439816,
+          240.707673,
+          -44.765,
+          17.021728
+        ]
+      },
+      {
+        "angle_deg": 56,
+        "bounds_construction_xyz": [
+          237.361944,
+          -72.315,
+          12.439867,
+          240.70773,
+          -44.765,
+          17.120787
+        ]
+      },
+      {
+        "angle_deg": 58,
+        "bounds_construction_xyz": [
+          237.506914,
+          -72.315,
+          12.439918,
+          240.707804,
+          -44.765,
+          17.214839
+        ]
+      },
+      {
+        "angle_deg": 60,
+        "bounds_construction_xyz": [
+          237.655094,
+          -72.315,
+          12.439968,
+          240.707917,
+          -44.765,
+          17.303779
+        ]
+      },
+      {
+        "angle_deg": 62,
+        "bounds_construction_xyz": [
+          237.806257,
+          -72.315,
+          12.440018,
+          240.708044,
+          -44.765,
+          17.38751
+        ]
+      },
+      {
+        "angle_deg": 64,
+        "bounds_construction_xyz": [
+          237.960192,
+          -72.315,
+          12.440066,
+          240.70818,
+          -44.765,
+          17.465918
+        ]
+      },
+      {
+        "angle_deg": 66,
+        "bounds_construction_xyz": [
+          238.116712,
+          -72.315,
+          12.440112,
+          240.708315,
+          -44.765,
+          17.538988
+        ]
+      },
+      {
+        "angle_deg": 68,
+        "bounds_construction_xyz": [
+          238.275666,
+          -72.315,
+          12.440157,
+          240.70844,
+          -44.765,
+          17.60658
+        ]
+      },
+      {
+        "angle_deg": 70,
+        "bounds_construction_xyz": [
+          238.436907,
+          -72.315,
+          12.440199,
+          240.708553,
+          -44.765,
+          17.668496
+        ]
+      },
+      {
+        "angle_deg": 72,
+        "bounds_construction_xyz": [
+          238.600243,
+          -72.315,
+          12.440238,
+          240.708665,
+          -44.765,
+          17.724715
+        ]
+      },
+      {
+        "angle_deg": 74,
+        "bounds_construction_xyz": [
+          238.765471,
+          -72.315,
+          12.440273,
+          240.70878,
+          -44.765,
+          17.775222
+        ]
+      },
+      {
+        "angle_deg": 76,
+        "bounds_construction_xyz": [
+          238.932385,
+          -72.315,
+          12.440303,
+          240.708902,
+          -44.765,
+          17.81997
+        ]
+      },
+      {
+        "angle_deg": 78,
+        "bounds_construction_xyz": [
+          239.100774,
+          -72.315,
+          12.440329,
+          240.709032,
+          -44.765,
+          17.858868
+        ]
+      },
+      {
+        "angle_deg": 80,
+        "bounds_construction_xyz": [
+          239.270436,
+          -72.315,
+          12.440348,
+          240.709173,
+          -44.765,
+          17.891812
+        ]
+      },
+      {
+        "angle_deg": 82,
+        "bounds_construction_xyz": [
+          239.441169,
+          -72.315,
+          12.440361,
+          240.709667,
+          -44.765,
+          17.918773
+        ]
+      },
+      {
+        "angle_deg": 84,
+        "bounds_construction_xyz": [
+          239.612645,
+          -72.315,
+          12.440365,
+          240.709484,
+          -44.765,
+          17.939823
+        ]
+      },
+      {
+        "angle_deg": 86,
+        "bounds_construction_xyz": [
+          239.784735,
+          -72.315,
+          12.440359,
+          240.709653,
+          -44.765,
+          17.954913
+        ]
+      },
+      {
+        "angle_deg": 88,
+        "bounds_construction_xyz": [
+          239.957255,
+          -72.315,
+          12.440335,
+          240.709826,
+          -44.765,
+          17.963977
+        ]
+      },
+      {
+        "angle_deg": 90,
+        "bounds_construction_xyz": [
+          240.129989,
+          -72.315,
+          12.440315,
+          240.740011,
+          -44.765,
+          17.967
+        ]
+      },
+      {
+        "angle_deg": 92,
+        "bounds_construction_xyz": [
+          240.160162,
+          -72.315,
+          12.440317,
+          240.912833,
+          -44.765,
+          17.963977
+        ]
+      },
+      {
+        "angle_deg": 94,
+        "bounds_construction_xyz": [
+          240.160337,
+          -72.315,
+          12.440321,
+          241.085413,
+          -44.765,
+          17.954913
+        ]
+      },
+      {
+        "angle_deg": 96,
+        "bounds_construction_xyz": [
+          240.160516,
+          -72.315,
+          12.440326,
+          241.257542,
+          -44.765,
+          17.939823
+        ]
+      },
+      {
+        "angle_deg": 98,
+        "bounds_construction_xyz": [
+          240.160333,
+          -72.315,
+          12.440331,
+          241.429016,
+          -44.765,
+          17.918729
+        ]
+      },
+      {
+        "angle_deg": 100,
+        "bounds_construction_xyz": [
+          240.160828,
+          -72.315,
+          12.440334,
+          241.599632,
+          -44.765,
+          17.89166
+        ]
+      },
+      {
+        "angle_deg": 102,
+        "bounds_construction_xyz": [
+          240.160968,
+          -72.315,
+          12.440335,
+          241.769186,
+          -44.765,
+          17.858652
+        ]
+      },
+      {
+        "angle_deg": 104,
+        "bounds_construction_xyz": [
+          240.161098,
+          -72.315,
+          12.440332,
+          241.937458,
+          -44.765,
+          17.819792
+        ]
+      },
+      {
+        "angle_deg": 106,
+        "bounds_construction_xyz": [
+          240.16122,
+          -72.315,
+          12.440324,
+          242.104281,
+          -44.765,
+          17.775134
+        ]
+      },
+      {
+        "angle_deg": 108,
+        "bounds_construction_xyz": [
+          240.161335,
+          -72.315,
+          12.440311,
+          242.269491,
+          -44.765,
+          17.724676
+        ]
+      },
+      {
+        "angle_deg": 110,
+        "bounds_construction_xyz": [
+          240.161448,
+          -72.315,
+          12.440292,
+          242.4329,
+          -44.765,
+          17.668474
+        ]
+      },
+      {
+        "angle_deg": 112,
+        "bounds_construction_xyz": [
+          240.16156,
+          -72.315,
+          12.440267,
+          242.594291,
+          -44.765,
+          17.606593
+        ]
+      },
+      {
+        "angle_deg": 114,
+        "bounds_construction_xyz": [
+          240.161685,
+          -72.315,
+          12.440234,
+          242.753413,
+          -44.765,
+          17.539106
+        ]
+      },
+      {
+        "angle_deg": 116,
+        "bounds_construction_xyz": [
+          240.161822,
+          -72.315,
+          12.440195,
+          242.910049,
+          -44.765,
+          17.466094
+        ]
+      },
+      {
+        "angle_deg": 118,
+        "bounds_construction_xyz": [
+          240.161961,
+          -72.315,
+          12.440149,
+          243.064011,
+          -44.765,
+          17.387646
+        ]
+      },
+      {
+        "angle_deg": 120,
+        "bounds_construction_xyz": [
+          240.16209,
+          -72.315,
+          12.440096,
+          243.215116,
+          -44.765,
+          17.303861
+        ]
+      },
+      {
+        "angle_deg": 122,
+        "bounds_construction_xyz": [
+          240.162205,
+          -72.315,
+          12.440038,
+          243.363184,
+          -44.765,
+          17.214843
+        ]
+      },
+      {
+        "angle_deg": 124,
+        "bounds_construction_xyz": [
+          240.162299,
+          -72.315,
+          12.439975,
+          243.508043,
+          -44.765,
+          17.120704
+        ]
+      },
+      {
+        "angle_deg": 126,
+        "bounds_construction_xyz": [
+          240.162372,
+          -72.315,
+          12.439909,
+          243.649502,
+          -44.765,
+          17.021549
+        ]
+      },
+      {
+        "angle_deg": 128,
+        "bounds_construction_xyz": [
+          240.162427,
+          -72.315,
+          12.439839,
+          243.787446,
+          -44.765,
+          16.917575
+        ]
+      },
+      {
+        "angle_deg": 130,
+        "bounds_construction_xyz": [
+          240.162469,
+          -72.315,
+          12.439767,
+          243.921755,
+          -44.765,
+          16.808876
+        ]
+      },
+      {
+        "angle_deg": 132,
+        "bounds_construction_xyz": [
+          240.162509,
+          -72.315,
+          12.439696,
+          244.052179,
+          -44.765,
+          16.69555
+        ]
+      },
+      {
+        "angle_deg": 134,
+        "bounds_construction_xyz": [
+          240.162558,
+          -72.315,
+          12.439625,
+          244.178557,
+          -44.765,
+          16.57773
+        ]
+      },
+      {
+        "angle_deg": 136,
+        "bounds_construction_xyz": [
+          240.162612,
+          -72.315,
+          12.439556,
+          244.300782,
+          -44.765,
+          16.455609
+        ]
+      },
+      {
+        "angle_deg": 138,
+        "bounds_construction_xyz": [
+          240.162663,
+          -72.315,
+          12.439494,
+          244.41867,
+          -44.765,
+          16.3293
+        ]
+      },
+      {
+        "angle_deg": 140,
+        "bounds_construction_xyz": [
+          240.162714,
+          -72.315,
+          12.439436,
+          244.532046,
+          -44.765,
+          16.198924
+        ]
+      },
+      {
+        "angle_deg": 142,
+        "bounds_construction_xyz": [
+          240.162765,
+          -72.315,
+          12.439381,
+          244.640774,
+          -44.765,
+          16.064645
+        ]
+      },
+      {
+        "angle_deg": 144,
+        "bounds_construction_xyz": [
+          240.162816,
+          -72.315,
+          12.439327,
+          244.744728,
+          -44.765,
+          15.926631
+        ]
+      },
+      {
+        "angle_deg": 146,
+        "bounds_construction_xyz": [
+          240.162867,
+          -72.315,
+          12.43927,
+          244.843787,
+          -44.765,
+          15.785056
+        ]
+      },
+      {
+        "angle_deg": 148,
+        "bounds_construction_xyz": [
+          240.162918,
+          -72.315,
+          12.439196,
+          244.937839,
+          -44.765,
+          15.640086
+        ]
+      },
+      {
+        "angle_deg": 150,
+        "bounds_construction_xyz": [
+          240.162968,
+          -72.315,
+          12.439083,
+          245.026779,
+          -44.765,
+          15.491906
+        ]
+      },
+      {
+        "angle_deg": 152,
+        "bounds_construction_xyz": [
+          240.163018,
+          -72.315,
+          12.438956,
+          245.11051,
+          -44.765,
+          15.340743
+        ]
+      },
+      {
+        "angle_deg": 154,
+        "bounds_construction_xyz": [
+          240.163066,
+          -72.315,
+          12.43882,
+          245.188918,
+          -44.765,
+          15.186808
+        ]
+      },
+      {
+        "angle_deg": 156,
+        "bounds_construction_xyz": [
+          240.163112,
+          -72.315,
+          12.438685,
+          245.261988,
+          -44.765,
+          15.030288
+        ]
+      },
+      {
+        "angle_deg": 158,
+        "bounds_construction_xyz": [
+          240.163157,
+          -72.315,
+          12.43856,
+          245.32958,
+          -44.765,
+          14.871334
+        ]
+      },
+      {
+        "angle_deg": 160,
+        "bounds_construction_xyz": [
+          240.163199,
+          -72.315,
+          12.438447,
+          245.391496,
+          -44.765,
+          14.710093
+        ]
+      },
+      {
+        "angle_deg": 162,
+        "bounds_construction_xyz": [
+          240.163238,
+          -72.315,
+          12.438335,
+          245.447715,
+          -44.765,
+          14.546757
+        ]
+      },
+      {
+        "angle_deg": 164,
+        "bounds_construction_xyz": [
+          240.163273,
+          -72.315,
+          12.43822,
+          245.498222,
+          -44.765,
+          14.381529
+        ]
+      },
+      {
+        "angle_deg": 166,
+        "bounds_construction_xyz": [
+          240.163303,
+          -72.315,
+          12.438098,
+          245.54297,
+          -44.765,
+          14.214615
+        ]
+      },
+      {
+        "angle_deg": 168,
+        "bounds_construction_xyz": [
+          240.163329,
+          -72.315,
+          12.437968,
+          245.581868,
+          -44.765,
+          14.046226
+        ]
+      },
+      {
+        "angle_deg": 170,
+        "bounds_construction_xyz": [
+          240.163348,
+          -72.315,
+          12.437827,
+          245.614812,
+          -44.765,
+          13.876564
+        ]
+      },
+      {
+        "angle_deg": 172,
+        "bounds_construction_xyz": [
+          240.163361,
+          -72.315,
+          12.437677,
+          245.641773,
+          -44.765,
+          13.705831
+        ]
+      },
+      {
+        "angle_deg": 174,
+        "bounds_construction_xyz": [
+          240.163365,
+          -72.315,
+          12.437516,
+          245.662823,
+          -44.765,
+          13.534355
+        ]
+      },
+      {
+        "angle_deg": 176,
+        "bounds_construction_xyz": [
+          240.163359,
+          -72.315,
+          12.437347,
+          245.677913,
+          -44.765,
+          13.362265
+        ]
+      },
+      {
+        "angle_deg": 178,
+        "bounds_construction_xyz": [
+          240.163335,
+          -72.315,
+          12.437079,
+          245.686977,
+          -44.765,
+          13.189745
+        ]
+      },
+      {
+        "angle_deg": 180,
+        "bounds_construction_xyz": [
+          240.163315,
+          -72.315,
+          12.406989,
+          245.69,
+          -44.765,
+          13.017011
+        ]
+      }
+    ],
+    "nominal_bar_radius_upper_bound_mm": 5.26384,
+    "nominal_highest_bar_H_mm": 17.967,
+    "reference_receptacle_bounds": [
+      235.82,
+      -71.665,
+      12.237,
+      239.77,
+      -45.415,
+      13.237
+    ],
+    "native_receptacle_bounds": [
+      235.82,
+      -71.665,
+      12.237,
+      239.77,
+      -45.415,
+      13.287
+    ],
+    "native_port_excluded_from_mating_check": true,
+    "excluded_interface_scope": "Only the uniquely identified native port solid is excluded for this bought connector-family reference. The module PCB and every other module component remain checked. This does not verify interchangeability with the installed connector.",
+    "tool_corridors_checked": 4,
+    "service_remove": [
+      "deck",
+      "key-travel-and-cap-envelopes",
+      "keyboard-carrier-reservation",
+      "keyboard-pcb-and-available-models"
+    ],
+    "withdrawal_steps": 11,
+    "fully_unmated_X_gap_mm": 2.23,
+    "bound_rejections": 1089,
+    "nominal_external_geometry_pass": true,
+    "physical_part_identity_verified": false,
+    "pin_1_orientation_verified": false,
+    "physical_service_verified": false,
+    "manufacturing_ready": false,
+    "limits": [
+      "The reference archive predates the latest drawings and is used for family packaging only.",
+      "Bar rotation uses a drawing-derived pivot. Internal latch and hinge contact, release force and elastic deformation are outside this enclosure check.",
+      "The upper room allocation covers space above the connector, not all possible manufacturing variation at the mating interface.",
+      "Release the base jaw and free the loom before unplugging; wire strain during manipulation is not predicted.",
+      "The keyboard/carrier removal sequence and actual insulating-tool contact points need a physical check."
+    ]
+  },
   "internal_check_scope": "Common-frame pairs and pairs with the rotation-invariant axis cylinder are checked once. Other moving-versus-fixed pairs use the full opening sample range. Adjacent volumes representing the same continuous cable are not treated as independent physical parts.",
-  "base_centerline_length_mm": 118.573,
+  "base_centerline_length_mm": 120.567,
   "sampled_minimum_base_centerline_radius_mm": 10.0,
   "sampled_minimum_base_inside_radius_mm": 8.5,
   "axial_centerline_length_mm": 62,
@@ -719,22 +1876,33 @@
       "volume_after_mm3": 30666.1289
     }
   ],
-  "saved_full_case_changed": false,
+  "display_rear_reliefs_applied_to_full_case": false,
+  "cooler_plate_relief_applied_to_full_case": true,
   "proposed_geometry_solid_clear": true,
   "component_height_screen_clear": true,
   "full_harness_length_mm": null,
   "physical_fit_verified": false,
   "manufacturing_ready": false,
   "outputs": {
-    "views/display-base-route.png": "39f0f90f3b12434a1f0f7e4059ed445d67565fb37e206d805393b900a99ce84f",
+    "views/display-base-route.png": "ec3f5dc53de546e56f77c07ee208707f46b23906dbc538741172e84a6066324f",
     "views/display-hinge-0.png": "94525c518d1dcfd4926739866f4e92340b92508a86695106060b6f3871799452",
     "views/display-hinge-105.png": "389ad0a4cce71d67ff6f816320c069cf58b25e42b90b24f999b2b418c140b520",
     "views/display-hinge-135.png": "314b82e3ef6f69bea99cdc2aa2d7ebf9e670a3f3469611ef95a82e7c62ae69fb",
-    "exports/display-hinge-study.step": "c8284bf5c18892383ea652dab382efe899bcde97200b7bda9fd8d007b629b20a",
+    "exports/display-hinge-study.step": "f86e9e80f5521ee553983381731d3d7c8f906e3ef0c1ab6b3bd3fbe7e73b5abf",
     "views/display-base-grip.png": "b54a5fd0313365c9b59ea56290cb724acc2fc17196b0cf8271eaed7905f59829",
     "views/display-lid-grip.png": "4ab590cdca814d22992dc94103b2798607fd4c34aba3f950bd4be95ff2087d28",
-    "views/display-grips-and-guard.png": "95f509b67fab2c1ad212ab1e83cbaefc3112254b881fcc6dd4f8b994bd3d73e7"
+    "views/display-grips-and-guard.png": "95f509b67fab2c1ad212ab1e83cbaefc3112254b881fcc6dd4f8b994bd3d73e7",
+    "views/display-plug-seated.png": "4219519a56bd8b8f7dd533a6946c53f6962ad23c25b9ab618b9fb93ce7463983",
+    "views/display-plug-unlocked.png": "9b2c83cb96d0bb41cc293416c3c6cb2d11995e0b6667e510dc2bcc35076a44b5",
+    "views/display-plug-withdrawn.png": "c92db9e2a39bdf8f8d6d9ea5b896edb4bdb70bde2c2ebe588a50a7227430f390",
+    "views/display-plug-access.png": "320e377f61e0d4747d81e7417768b1fb702f6b496b9555fbc8e08ec051bcf73d",
+    "exports/display-plug-study.step": "9cd8bad53497ca40ca2bcc74b4aeb4b2a4de354383f40911df0624bb0703824a"
   },
   "STEP_reopens": true,
-  "STEP_solids": 32
+  "STEP_solids": 34,
+  "module_plug_export": {
+    "file": "exports/display-plug-study.step",
+    "solids": 27,
+    "reopens": true
+  }
 }

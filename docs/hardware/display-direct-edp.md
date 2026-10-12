@@ -5,7 +5,7 @@ been tested at 2560x1600 and 120 Hz using the Intehill controller. the
 finished laptop is intended to connect it directly to the Mu's onboard eDP
 connector, removing the separate monitor controller and external cable loop.
 
-updated 11 october 2026. the final harness remains pending in
+updated 12 october 2026. the final harness remains pending in
 [`direct_edp_harness_release.json`](../../manufacturing/direct_edp_harness_release.json).
 the known panel test does not validate a new Mu-to-panel cable.
 
@@ -94,6 +94,14 @@ to order. a straight section along the hinge axis is one option to check
 with the harness maker. it needs a torsion-rated construction, and a
 constant centerline length does not mean the individual conductors see
 no strain.
+
+the [module-side fit study](../../mechanical/flush-case/display-plug.md)
+now includes the documented connector-family plug, locking bar, straight
+5 mm withdrawal and access with the keyboard and carrier removed. a small
+edge relief in the cooling plate clears the added access space. the cable
+reservation joins the reference wire ends with 1.98 mm straight before the
+fanout. these are nominal packaging checks. the module is not on hand, and
+neither the exact installed suffix nor the complete harness is confirmed.
 
 ## what to do before ordering the harness
 

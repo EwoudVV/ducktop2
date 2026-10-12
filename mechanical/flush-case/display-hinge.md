@@ -18,8 +18,9 @@ requirements. [electrical and connector notes](../../docs/hardware/display-direc
 the connector shell is located from the official module model within the
 saved PCB export. its nominal installed bounds are X235.82 to 239.77,
 Y45.42 to 71.67 and H12.24 to 13.29. the cable exits toward +X. the model's
-supplier name differs from the published I-PEX reference, so the exact
-installed suffix and pin-1 orientation still need checking.
+part labels differ from the published I-PEX reference and its plug placeholder
+has no solid geometry. those labels do not confirm the supplier. the exact
+installed suffix and pin-1 orientation still need checking when the module arrives.
 
 the first route hit the USB power wire and its support. the revised path
 turns nearer the Mu and uses two 14 mm-radius bends to pass left of J901
@@ -30,8 +31,12 @@ not pass the conservative component-height check.
 the tapered fanout and 3 mm dressed bundle are space limits for a harness
 maker to check. a 0.3 mm position allowance is included. the shape does
 not specify how to gather the wires or prove their individual bend radii.
-the complete mating plug, pull bar and unplugging motion also need their
-own model. do not order a cable from these centerline points.
+the documented connector-family plug and bar now have a separate fit study,
+including a straight withdrawal and tool access with the keyboard removed.
+the cable space joins its wire ends with a 1.98 mm straight section before
+rising into the fanout. a small cooling-plate relief clears the bar-end
+access space. [plug geometry and service details](display-plug.md)
+do not order a cable from these centerline points.
 
 ## moving section
 
@@ -97,7 +102,7 @@ clearance, fatigue life, or fit under manufacturing tolerances.
 the saved study has no detected static, opening-motion or internal solid
 contacts at those samples. all 13 component-height crossings clear their
 manufacturer maximums plus the assembly allowances; the smallest calculated
-gap is 1.18 mm. the base centerline is 118.57 mm long, ending at the fixed
+gap is 1.18 mm. the base centerline is 120.57 mm long, ending at the fixed
 grip center. that is only part of the harness. the separate STEP is reopened and checked after export.
 
 ## files and remaining information
@@ -108,6 +113,8 @@ grip center. that is only part of the harness. the separate STEP is reopened and
   datums. the construction details also live in the Python source.
 - `display-grips.md`, `display_grips.py` and `display_grip_checks.py` cover
   the mounting hardware, protective lining, guard and service checks.
+- `display-plug.md`, `display_plug.py` and `display_plug_checks.py` cover the
+  connector-family reference, plate relief, bar motion and module-side access.
 - `display-part-heights.json` records five exact-part height limits used
   in the route check, separately from assembly allowances.
 - `exports/display-hinge-study.step` contains the partial cable geometry,
@@ -117,7 +124,7 @@ to finish the cable, obtain the exact panel drawing and contact map, logic
 and backlight current limits, connector position, and the selected
 harness maker's bend and twist limits. agree the wire construction and
 power-conductor sizes before freezing the fanout, clamps or full length.
-then check the full plug and panel tail, service access, the mechanical
+then check the confirmed plug and panel tail, physical service access, the mechanical
 opening stop, continuity and isolation, image stability at 2560x1600
 120 Hz, and repeated lid movement. the PCB files and component positions
 are unchanged by this work.
