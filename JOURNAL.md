@@ -5,6 +5,28 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-12: add keyboard mounts and check the space underneath
+
+**Total time spent: 2 hours**
+
+worked on how the keyboard actually stays in the thin case. replaced the thin carrier placeholder with a 1.2 mm stainless plate, a separate insulating film, eight edge clips and four brackets to the case. added a small insulated stop at an existing motherboard mounting hole to limit movement in the middle. it still needs a load test to see how stiff the whole keyboard feels.
+
+![the steel carrier with its clips and four case brackets](docs/images/journal/2026-10-12-keyboard-mounts.png)
+
+cut openings for all 195 switch locating holes and the 65 mechanism areas. the heat pipes now pass through windows in the plate. widened the cuts slightly to get rid of small disconnected metal scraps. checked the hole size and edge distance for the pressed nuts, including one front clip that needed moving 1 mm to keep enough metal around its nut. the plate alone comes to about 184 g, so there is a weight tradeoff here.
+
+![one removable clip holding the keyboard edge](docs/images/journal/2026-10-12-keyboard-edge-clip.png)
+
+added the complete screws, washers and nuts, then checked access and removal. moved a rear clip away from the headphone jack after checking its full height. the keyboard, film and carrier can lift out in order, with the cable guides supported separately. checked all 19 screw paths and reopened the updated step models. all 61 geometry tests pass.
+
+![a side bracket attaching the carrier to the case](docs/images/journal/2026-10-12-keyboard-case-support.png)
+
+checking the parts underneath caught something the existing 3d models missed: the two upright aux fuse holders also need room for the fuses plugged into them. the complete assembly allowance crosses the carrier and keyboard, so i need to resolve those before making this. also checked the space below the switch locating holes. the tightest spot allows 0.69 mm of pin projection after leaving a small gap, but i still need the actual pin measurement.
+
+![the red full-fuse height allowance crossing the keyboard stack at F190](docs/images/journal/2026-10-12-keyboard-fuse-f190.png)
+
+the body stays 33.3 mm without feet and keeps the matching lid and base outline. the keyboard sits 0.327 mm higher in the case to make room for the steel and film, leaving a nominal 1.673 mm screen gap. none of the six pcbs or their routing changed. saved the mounts, fit notes and close-ups, with the fuse clearance, switch fit, insulation and warm load tests still to finish.
+
 # 2026-10-12: give the keyboard carrier removable wire guides
 
 **Total time spent: 1 hour**

@@ -3,7 +3,7 @@
 12 october 2026. the lid and base now use the same 370 x 274 mm rounded
 outline. the front stays at Y256; the rear of the base moves from Y-26 to
 Y-18. that removes the old 8 mm rear ledge without adding a front lip.
-the keyboard and trackpad stay in their saved positions.
+the keyboard and trackpad keep their saved XY positions.
 
 ![matching lid and base](views/closed.png)
 
@@ -55,10 +55,13 @@ holding torque, lid stiffness, screw strength or cable flex life.
 the deck is 25 mm high and the closed model is 33.3 mm without feet,
 or 37.4 mm with the five nominal 4.1 mm feet. this
 uses the earlier remote-cooler budget, a 1.2 mm bottom/deck and a 1 mm lid
-skin. the screen has a nominal 2 mm gap above the keycap envelopes when
+skin. the screen has a nominal 1.673 mm gap above the keycap envelopes when
 closed. cell padding and the 3 mm swelling space are retained.
 
-the recorded internal solid checks now have no detected overlaps. the
+the recorded modeled-solid checks have no detected overlaps. the complete
+upright AUX fuse assemblies still conflict with the new keyboard stack
+in the component-height screen. [keyboard mounts and fit issues](keyboard-mounts.md)
+the
 cooler also clears 33 component-height crossings across 27 footprints;
 14 use explicit installed-height allocations. physical fit, support loads,
 the CPU clamp, complete cable set and thermal performance remain untested.
@@ -97,7 +100,7 @@ the smaller Delta BFB04512HHA-DV52 sits beyond the center-board edge. the
 circular cutout from the earlier comparison is no longer used, and none
 of its 11 affected components or 87 track/via items were changed. two
 250 mm ATS pipes sit in recessed channels in a stepped copper plate.
-shallow carrier reliefs clear their maximum size and position allowances.
+through-windows in the steel carrier clear their size and position allowances.
 the fin stack has a continuous collector, including beneath the fins past
 the shorter pipe-end limit. [parts and cooling details](cooling.md)
 
@@ -118,8 +121,9 @@ oversized until their mating plugs and service clearances are settled.
 the packs still use the 11 mm listed thickness, the trackpad uses an
 unmeasured 5 mm body and 1 mm click travel, and the display uses an
 unmeasured 3.5 mm thickness. actual part measurements can change the
-required height. the thin keyboard support is a space reservation, not
-a qualified flat plate to place against its underside components. the
+required height. the keyboard now has a steel carrier, insulating film,
+eight edge clips and four case brackets. the upright AUX fuses and switch
+pin projection still need resolving before making that assembly. the
 [display-cable study](display-hinge.md) now covers a partial Mu-to-hinge
 route, removable lined jaws, mounting hardware, a rear guard and their
 proposed openings. [grip and guard details](display-grips.md) the full
@@ -133,9 +137,15 @@ suffix remains unconfirmed until the module arrives.
 the fan-wire guides now detach from the keyboard carrier at five front
 screws. the carrier can lift away while the supported guides and loom stay
 in place. [keyboard removal and access](keyboard-service.md) records the
-sequence and the unfinished retention, FFC and service-support details.
+sequence, removable retention, and unfinished FFC and service-support details.
 
 ## files
+
+- `keyboard-mounts.md`, `keyboard-mounts.json` and `keyboard_mounts.py`:
+  carrier material, insulation, clips, case brackets and center stop.
+- `keyboard-mount-checks.json` and `keyboard-part-heights.json`: mounting
+  checks, height sources and the unresolved complete-fuse fit.
+- `exports/keyboard-mounts.step`: separate carrier and mounting hardware.
 
 - `assembly.json`: dimensions and remaining assumptions.
 - `build.py`: separate case construction and checks; it reads the verified

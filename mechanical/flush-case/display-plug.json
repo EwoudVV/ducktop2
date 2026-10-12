@@ -1,37 +1,129 @@
 {
   "date": "2026-10-12",
   "status": "documented connector-family fit study; exact installed suffix and pin-1 orientation unconfirmed",
-  "reference_origin_construction_xyz_mm": [238.32, -58.54, 12.257],
-  "reference_rotations_deg": {"X_first": 90, "Z_second": -90},
-  "native_receptacle_bounds_construction_xyz_mm": [235.82, -71.665, 12.237, 239.77, -45.415, 13.287],
+  "reference_origin_construction_xyz_mm": [
+    238.32,
+    -58.54,
+    12.257
+  ],
+  "reference_rotations_deg": {
+    "X_first": 90,
+    "Z_second": -90
+  },
+  "native_receptacle_bounds_construction_xyz_mm": [
+    235.82,
+    -71.665,
+    12.237,
+    239.77,
+    -45.415,
+    13.287
+  ],
   "native_receptacle_volume_mm3": 44.1766113234,
-  "bar_pivot_reference_xyz_mm": [0, 0.455, -2.115],
+  "bar_pivot_reference_xyz_mm": [
+    0,
+    0.455,
+    -2.115
+  ],
   "bar_pivot_basis": "X-axis through the wire centre. The CAD crossbar centre is Y0.455,Z2.835. The drawing's 4.40 mm inner spacing plus 0.55 mm uncoated wire diameter gives 4.95 mm centre spacing, placing the pivot at Z-2.115. Internal latch deformation is not modeled.",
-  "bar_swing_study_deg": [0, 180],
+  "bar_swing_study_deg": [
+    0,
+    180
+  ],
   "bar_swing_step_deg": 2,
   "bar_swing_scope": "Enclosure clearance through both horizontal positions; follow the supplier's handling sequence on the actual part rather than forcing an assumed travel limit.",
-  "upper_swing_space_xyHwhd_mm": [234.8, 44.4, 13.4, 11.3, 28.3, 5.0],
+  "upper_swing_space_xyHwhd_mm": [
+    234.8,
+    44.4,
+    13.4,
+    11.3,
+    28.3,
+    5.0
+  ],
   "upper_swing_space_scope": "An additional room allocation above the seated connector. The lower seating region is covered by the nominal part check, not by this box. This is not a full manufacturing-tolerance proof.",
   "withdrawal_distance_mm": 5,
   "withdrawal_step_mm": 0.5,
   "withdrawal_bar_angle_deg": 90,
   "service_lid_angle_deg": 105,
-  "service_remove": ["deck", "keyboard-pcb-and-available-models", "key-travel-and-cap-envelopes", "keyboard-carrier-reservation"],
-  "service_prerequisites": "Remove the deck and keyboard, then support and unfasten the five fan guides and two USB brackets before lifting the carrier. Release the display base jaw and free its loom before unplugging. Keyboard retention, the FFC route, temporary service supports and dressed-cable handling still need a physical check; see keyboard-service.md.",
+  "service_remove": [
+    "deck",
+    "keyboard-pcb-and-available-models",
+    "key-travel-and-cap-envelopes",
+    "keyboard-insulating-sheet",
+    "keyboard-carrier-reservation",
+    "keyboard-edge-clip-1",
+    "keyboard-edge-clip-2",
+    "keyboard-edge-clip-3",
+    "keyboard-edge-clip-4",
+    "keyboard-edge-clip-5",
+    "keyboard-edge-clip-6",
+    "keyboard-edge-clip-7",
+    "keyboard-edge-clip-8",
+    "keyboard-clip-screw-1",
+    "keyboard-clip-screw-2",
+    "keyboard-clip-screw-3",
+    "keyboard-clip-screw-4",
+    "keyboard-clip-screw-5",
+    "keyboard-clip-screw-6",
+    "keyboard-clip-screw-7",
+    "keyboard-clip-screw-8",
+    "keyboard-clip-nut-1",
+    "keyboard-clip-nut-2",
+    "keyboard-clip-nut-3",
+    "keyboard-clip-nut-4",
+    "keyboard-clip-nut-5",
+    "keyboard-clip-nut-6",
+    "keyboard-clip-nut-7",
+    "keyboard-clip-nut-8",
+    "keyboard-carrier-screw-1",
+    "keyboard-carrier-screw-2",
+    "keyboard-carrier-screw-3",
+    "keyboard-carrier-screw-4",
+    "keyboard-carrier-washer-1",
+    "keyboard-carrier-washer-2",
+    "keyboard-carrier-washer-3",
+    "keyboard-carrier-washer-4"
+  ],
+  "service_prerequisites": "Remove the deck, release the keyboard FFC and eight retention clips, and remove the keyboard and insulating film. Support and unfasten the five fan guides and two USB brackets, remove the four carrier-mount screws and washers, then lift the carrier with its pressed-in clip nuts. Release the display base jaw and free its loom before unplugging. See keyboard-service.md; flexible wiring and physical service fit are not verified.",
   "tool_shaft_diameter_mm": 2,
   "tool_shaft_height_mm": 30,
   "tool_handle_diameter_mm": 8,
   "tool_handle_height_mm": 20,
   "access_points_xyH_mm": {
-    "left_shell_end": [241.2, 45.5, 13.45],
-    "right_shell_end": [241.2, 71.5, 13.45],
-    "left_bar_end": [235.49, 47.2, 13.45],
-    "right_bar_end": [235.49, 69.88, 13.45]
+    "left_shell_end": [
+      241.2,
+      45.5,
+      13.45
+    ],
+    "right_shell_end": [
+      241.2,
+      71.5,
+      13.45
+    ],
+    "left_bar_end": [
+      235.49,
+      47.2,
+      13.45
+    ],
+    "right_bar_end": [
+      235.49,
+      69.88,
+      13.45
+    ]
   },
   "access_note": "Clearance corridors for narrow insulating tools. Their size and position do not define an approved pressing tool, force, or a safe contact point on an unconfirmed connector.",
-  "reference_cable_stub_end_xyH_mm": [243.92, 58.54, 12.772],
-  "reference_cable_stub_height_range_H_mm": [12.587, 12.957],
-  "reference_cable_stub_span_Y_mm": [48.605, 68.475],
+  "reference_cable_stub_end_xyH_mm": [
+    243.92,
+    58.54,
+    12.772
+  ],
+  "reference_cable_stub_height_range_H_mm": [
+    12.587,
+    12.957
+  ],
+  "reference_cable_stub_span_Y_mm": [
+    48.605,
+    68.475
+  ],
   "physical_part_identity_verified": false,
   "pin_1_orientation_verified": false,
   "connector_interchangeability_verified": false,

@@ -35,16 +35,17 @@ class FanGuideMounts(unittest.TestCase):
 
     def test_longest_screw_and_thread_runout_are_included(self):
         c=mounts.config()['screw'];s=mounts.screw(148,105.5).BoundingBox()
-        self.assertAlmostEqual(s.zmin,16.76,places=5)
-        self.assertAlmostEqual(s.zmax,23,places=5)
-        usable=21-c['underhead_thread_runout_allocation_mm']-(21-c['nominal_shank_length_mm']+c['length_tolerance_mm'])
+        self.assertAlmostEqual(s.zmin,16.96,places=5)
+        self.assertAlmostEqual(s.zmax,23.2,places=5)
+        seat=mounts.config()['carrier_top_H']
+        usable=min(20,seat-c['underhead_thread_runout_allocation_mm'])-(seat-c['nominal_shank_length_mm']+c['length_tolerance_mm'])
         self.assertAlmostEqual(usable,c['minimum_full_thread_overlap_mm'],places=5)
         self.assertGreater(usable,2.5)
         for guide,(x,y) in zip(mounts.guides(),mounts.config()['mounts_xy_mm']):
             self.assertLess(intersection_volume(guide,mounts.screw(x,y)),.01)
 
     def test_heads_clear_the_existing_keyboard_board(self):
-        board=box(42.25,20,21,273.5,80,.8)
+        board=box(42.25,20,21.327,273.5,80,.8)
         for x,y in mounts.config()['mounts_xy_mm']:
             self.assertLess(intersection_volume(board,mounts.screw(x,y)),.01)
 

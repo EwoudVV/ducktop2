@@ -135,7 +135,7 @@ def make_paths(case):
             'limits':{'wire_position_each_mm':.2,'curve_each_mm':.025,'sampling_pair_mm':.05,'minimum_wire_surface_gap_mm':.5}}
 
 
-def guide_bracket(model,side,rows,x):
+def guide_bracket(model,side,rows,x,seat_H=21):
     ys=[float(np.array(r['points'])[np.argmin(abs(np.array(r['points'])[:,0]-x)),1]) for r in rows]
     low=min(float(np.array(r['points'])[np.argmin(abs(np.array(r['points'])[:,0]-x)),2])-r['wire_od_mm']/2-.55 for r in rows)-.15
     rear_y=105.5
@@ -149,13 +149,13 @@ def guide_bracket(model,side,rows,x):
         boss=boss.cut(tube(local,r['wire_od_mm']/2+.25))
         arm=arm.fuse(boss)
     model.add('harness-USB-'+side+'-keyboard-bracket',arm,'supports',harness_part=True)
-    model.add('harness-USB-'+side+'-keyboard-screw',cylinder(x,rear_y,17,1,4).fuse(cylinder(x,rear_y,21,2,2)),
+    model.add('harness-USB-'+side+'-keyboard-screw',cylinder(x,rear_y,seat_H-4,1,4).fuse(cylinder(x,rear_y,seat_H,2,2)),
               'hardware','nylon',False,False,harness_fastener=True,service_removable=True,
               thread_host='harness-USB-'+side+'-carrier',thread_axis_xy_mm=[x,rear_y],
-              thread_height_range_mm=[17,20],thread_radius_mm=1.)
-    model.mount('USB-'+side+'-keyboard-bracket',x,rear_y,21,'removable guide bracket below keyboard-carrier tab',
-                2.2,'M2',3,4,'insulating bracket; plug pull loads go into separate seam clamps',
-                'head space 2 mm; thread and deflection test required',minimum_thread_engagement_mm=3)
+              thread_height_range_mm=[seat_H-4,20],thread_radius_mm=1.)
+    model.mount('USB-'+side+'-keyboard-bracket',x,rear_y,seat_H,'removable guide bracket below keyboard-carrier tab',
+                2.2,'M2',20-(seat_H-4),4,'insulating bracket; plug pull loads go into separate seam clamps',
+                'head space 2 mm; thread and deflection test required',minimum_thread_engagement_mm=20-(seat_H-4))
 
 
 def build_parts(case,data):
@@ -175,7 +175,8 @@ def build_parts(case,data):
                 model.add(r['name']+'-guide-'+side,full.intersect(box(x,0,0,w,260,40)),
                           'supports',harness_part=True,guide_for=r['name'])
         for side,x in [('left',70.75),('right',299.25)]:strain_clamp(model,'harness-USB-'+side,rows,x)
-        for side,x in [('left',130),('right',225)]:guide_bracket(model,side,rows,x)
+        seat=case['keyboard']['carrier_bottom_H']+case['keyboard']['carrier_thickness']
+        for side,x in [('left',130),('right',225)]:guide_bracket(model,side,rows,x,seat)
         for side,seam_x in [('left',70.75),('right',299.25)]:
             prefix='harness-USB-'+side
             pieces=[p for p in model.parts if p['name'].endswith('-guide-'+side) or p['name'] in [prefix+'-pedestal',prefix+'-keyboard-bracket']]
@@ -216,9 +217,9 @@ def build_parts(case,data):
     return model.parts,model.mounts
 
 
-def carrier_tabs(carrier):
+def carrier_tabs(carrier,top_H=21):
     for x in [130,225]:
-        carrier=carrier.fuse(box(x-5,99,20,10,10,1)).cut(cylinder(x,105.5,19.9,1.1,1.2))
+        carrier=carrier.fuse(box(x-5,99,20,10,10,top_H-20)).cut(cylinder(x,105.5,19.9,1.1,top_H-19.8))
     return carrier
 
 

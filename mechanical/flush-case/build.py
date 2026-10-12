@@ -66,6 +66,10 @@ def inputs():
     if C.get('lid_stops'):
         for name in ['lid_stops.py','lid_stop_checks.py','lid-stop-hardware.json','fan-harness-heights.json','display-part-heights.json']:
             p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
+    if C.get('keyboard_mounts'):
+        for name in ['keyboard_mounts.py','keyboard-mounts.json']:
+            p=HERE/name;data[str(p.relative_to(ROOT))]=sha(p)
+        p=ROOT/'ducktop2.pretty/Cherry_MX_ULP_SMD.kicad_mod';data[str(p.relative_to(ROOT))]=sha(p)
     return data
 
 
@@ -102,8 +106,8 @@ def fresh_model():
         name=p['name']
         if C.get('usb_power_route') and name.startswith(('usb5-','harness-USB-')):continue
         if name in [n+'-pcb-and-available-models' for n in ['left','center','right','bms']]:translated(p,-1.2,'boards')
-        elif name=='keyboard-pcb-and-available-models':translated(p,-8.5,'boards')
-        elif name=='key-travel-and-cap-envelopes':translated(p,-8.5,'inputs')
+        elif name=='keyboard-pcb-and-available-models':translated(p,C['boards']['keyboard_bottom_H']-OLD['boards']['keyboard']['bottom_height'],'boards')
+        elif name=='key-travel-and-cap-envelopes':translated(p,C['boards']['keyboard_bottom_H']-OLD['boards']['keyboard']['bottom_height'],'inputs')
         elif name.startswith('cell-') and p['group']=='cells':translated(p,-1.2,'cells')
         elif name.startswith('oled-') and p['group']=='inputs':translated(p,-8.5,'inputs')
         elif name.startswith('speaker-') and p['group']=='inputs':translated(p,-8.5,'inputs')
@@ -143,6 +147,9 @@ def fresh_model():
     # keep the shape study from claiming finished connector openings.
     walls=walls.cut(box(o['x_min']-.1,18,4,2,139,14))
     walls=walls.cut(box(o['x_max']-b['wall']-.1,15,3.5,2,100,15.5))
+    if C.get('keyboard_mounts'):
+        import keyboard_mounts
+        walls=keyboard_mounts.wall_shape(walls)
     add('base-floor',body,'shell');add('base-walls',walls,'shell')
     if C.get('feet'):
         import case_feet
@@ -156,13 +163,20 @@ def fresh_model():
         deck=deck.cut(box(x-.2,y-.2,dt-3,OLD['oled']['width']+.4,OLD['oled']['depth']+.4,4))
     add('deck',deck,'deck')
     kh=C['keyboard']['carrier_bottom_H']
-    carrier=box(41.25,19,kh,275.5,82,1).cut(box(306,50,kh-.1,24,23,1.2))
-    if C.get('usb_power_route'):carrier=usb_harness.carrier_tabs(carrier)
-    if C.get('cooling_layout'):
-        import remote_cooler
-        carrier=remote_cooler.carrier_reliefs(carrier)
-    if C.get('fan_harness'):carrier=fan_harness.carrier_shape(carrier)
-    add('keyboard-carrier-reservation',carrier,'supports')
+    if C.get('keyboard_mounts'):
+        carrier,film=keyboard_mounts.plate_and_film()
+        assert abs(C['boards']['keyboard_bottom_H']-21.327)<1e-8
+        add('keyboard-carrier-reservation',carrier,'supports',color=(.57,.61,.63),keyboard_mount=True)
+        add('keyboard-insulating-sheet',film,'supports',color=(.7,.49,.18,.7),keyboard_mount=True)
+        parts.extend(keyboard_mounts.hardware_parts())
+    else:
+        carrier=box(41.25,19,kh,275.5,82,1).cut(box(306,50,kh-.1,24,23,1.2))
+        if C.get('usb_power_route'):carrier=usb_harness.carrier_tabs(carrier)
+        if C.get('cooling_layout'):
+            import remote_cooler
+            carrier=remote_cooler.carrier_reliefs(carrier)
+        if C.get('fan_harness'):carrier=fan_harness.carrier_shape(carrier)
+        add('keyboard-carrier-reservation',carrier,'supports')
     tp=dt-t['body_thickness'];support=tp-t['click_travel']-t['under_clearance']-t['support_thickness']
     add('trackpad-body-reservation',box(t['x'],t['y'],tp,t['width'],t['depth'],t['body_thickness']),'inputs')
     add('trackpad-motion-reservation',box(t['x'],t['y'],tp-t['click_travel'],t['width'],t['depth'],t['body_thickness']+t['click_travel']),'keepout')

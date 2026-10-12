@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-12",
+  "status": "keyboard retention and mounting prototype; physical load and fit tests required",
+  "carrier": {
+    "material": "1.2 mm annealed 304 stainless steel; confirm HRB 90 maximum for SP clinch nuts",
+    "bottom_H": 20,
+    "thickness_mm": 1.2,
+    "elastic_modulus_GPa": 200,
+    "density_g_cm3": 7.9,
+    "material_source": "https://www.outokumpu.com/en/products/product-ranges/core/core-304-4301",
+    "insulating_film": "DuPont Kapton 500HN, 0.127 mm nominal, without added adhesive thickness",
+    "film_thickness_mm": 0.127,
+    "film_source": "https://www.dupont.com/content/dam/dupont/amer/us/en/ei-transformation/public/documents/en/EI-10206-Kapton-HN-Data-Sheet.pdf",
+    "keyboard_bottom_H": 21.327,
+    "pin_hole_radial_allowance_mm": 0.4,
+    "film_hole_radial_allowance_mm": 0.25,
+    "mechanism_window_note": "The PCB copper-exclusion rectangles are conservatively continued through the steel. This is an additional carrier precaution, not a claim that the PCB drawing specifies a backing-plate construction.",
+    "pin_projection_below_PCB_mm": null,
+    "pin_projection_verified": false
+  },
+  "side_supports": {
+    "locations": [
+      [
+        "left",
+        35
+      ],
+      [
+        "left",
+        70
+      ],
+      [
+        "right",
+        35
+      ],
+      [
+        "right",
+        73
+      ]
+    ],
+    "material": "1.5 mm aluminum, HRB 80 maximum for the selected S clinch nuts",
+    "root_x_mm": [
+      -0.5,
+      358.5
+    ],
+    "carrier_x_mm": [
+      37,
+      321
+    ],
+    "bar_bottom_H": 18.5,
+    "bar_thickness_mm": 1.5,
+    "bar_width_mm": 8,
+    "clinch_pad_radius_mm": 5.2,
+    "root_fasteners": "four M2 x 4 pan screws, four small washers and four captive DIN 934 M2 nuts",
+    "carrier_fasteners": "four M2 x 5 pan screws, four small washers and four PEM S-M2-1 nuts",
+    "root_nut_AF_mm": 4,
+    "root_nut_height_max_mm": 1.6,
+    "root_nut_source": "https://www.westfieldfasteners.co.uk/Standards/Nut_Hex_M.html",
+    "pan_screw_head_diameter_max_mm": 4,
+    "pan_screw_head_height_allocation_mm": 2,
+    "pan_screw_length_tolerance_mm": 0.24,
+    "washer_OD_mm": 4.5,
+    "washer_ID_mm": 2.2,
+    "washer_thickness_mm": 0.3,
+    "washer_note": "Fit allocation to match the purchased washer. The mounting joints are clamped, not qualified thermal-expansion slides."
+  },
+  "retention": {
+    "rear_clip_xy_mm": [
+      [
+        60,
+        16.5
+      ],
+      [
+        132,
+        16.5
+      ],
+      [
+        168,
+        16.5
+      ],
+      [
+        312,
+        16.5
+      ]
+    ],
+    "front_clip_xy_mm": [
+      [
+        60,
+        103.5
+      ],
+      [
+        120,
+        103.5
+      ],
+      [
+        205,
+        103.5
+      ],
+      [
+        305,
+        104.5
+      ]
+    ],
+    "material": "insulating clips; select material after warm fit and load tests",
+    "toe_bottom_H": 22.2,
+    "toe_thickness_mm": 1.2,
+    "nominal_capture_gap_mm": 0.073,
+    "nominal_edge_locator_gap_mm": 0.25,
+    "screws": "eight M2 x 6 DIN 965 countersunk screws",
+    "screw_length_tolerance_mm": 0.24,
+    "actual_head_diameter_max_mm": 3.8,
+    "head_height_max_mm": 1.2,
+    "theoretical_cone_diameter_allocation_mm": 4.4,
+    "head_note": "The cone covers the theoretical 90 degree profile. Match the actual countersink and seating height to the purchased screw.",
+    "nuts": "eight PEM SP-M2-1 in the steel carrier",
+    "clinch_hole_mm": 4.22,
+    "clinch_hole_plus_tolerance_mm": 0.08,
+    "clinch_minimum_center_to_edge_mm": 4.8,
+    "clinch_body_diameter_max_mm": 6.6,
+    "clinch_body_height_max_mm": 1.75,
+    "clinch_shank_diameter_max_mm": 4.2,
+    "clinch_shank_height_max_mm": 0.97,
+    "clinch_minimum_sheet_thickness_mm": 1.0,
+    "clinch_source": "https://www.pemnet.com/eu/wp-content/uploads/sites/9/2022/06/cldata.pdf",
+    "clip_fit_note": "Measure the assembled PCB, film and clips before tightening. Adjust the clip seating height rather than forcing a warped or thicker board into the nominal gap. Deburr the metal and confirm electrical isolation."
+  },
+  "center_stop": {
+    "board_mount": "center/H22",
+    "xy_mm": [
+      105,
+      70
+    ],
+    "spacer": "Harwin R20-3001202",
+    "body_length_mm": 12,
+    "body_length_tolerance_mm": 0.1,
+    "male_stud_length_mm": 4,
+    "male_stud_length_tolerance_mm": 0.2,
+    "female_thread_minimum_mm": 4,
+    "AF_max_mm": 4,
+    "cap_top_H": 19.7,
+    "nominal_carrier_gap_mm": 0.3,
+    "cap_screw": "M2 x 5 DIN 965 countersunk",
+    "source": "https://www.harwin.com/products/R20-3001202",
+    "drawing": "https://content.harwin.com/asset/707b1fef-ee94-4c79-a1ed-3a0d197aafde/DRG-01984-Technical-Drawing-Datasheet-R20-300-pdf.pdf",
+    "note": "Replace the ordinary H22 mounting screw with this spacer. The existing PCB mounting pad is backed by the base support. Set the insulating cap to the measured 0.2-0.4 mm unloaded gap; this is a local deflection stop, not a plate-stiffness qualification."
+  },
+  "typing_stiffness_verified": false,
+  "thermal_cycle_verified": false,
+  "physical_retention_verified": false,
+  "manufacturing_ready": false
+}

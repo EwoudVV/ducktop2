@@ -108,7 +108,7 @@ under the pipes. the bend and component-height checks still apply to the
 whole wires. calculated cutting lengths include the same provisional
 2 mm hidden at each solder cup; fit a dressed sample before cutting a batch.
 
-shallow reliefs in the underside of the keyboard-carrier reservation give
+through-windows in the 1.2 mm steel keyboard carrier give
 the pipes room at maximum size. this does not qualify a thin flat sheet as
 a finished keyboard support. its material, remaining thickness, insulation,
 underside component clearances and stiffness all need checking together.

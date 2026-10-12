@@ -31,9 +31,9 @@
     "bms/bms.kicad_pcb": "a25dbf78d7ca34360700031acba9c12ba1fc96114e8ed7719d47179f25ac5166",
     "keyboard/12_keyboard_daughterboard.kicad_pcb": "3ea153bf23165d45630b0d99e8de53a6b8f292488cd35a280e9e193b7a3dca73",
     "radio_daughterboard/radio_daughterboard.kicad_pcb": "5bd1299f27b27992523267726386ec0bdd964265b803029e130fe06802a8be29",
-    "mechanical/flush-case/assembly.json": "f04d10686523e3fa31ad42b8257ab8fe693a53e3a1003e4262ed3a663261377f",
-    "mechanical/flush-case/build.py": "f54341b94f98a99720027c7660819dfbf585692435d75f5b8501e9e1902c90d1",
-    "mechanical/flush-case/usb_harness.py": "5f75c3ca0b937c5a8a91256662517c4f9235852d3403b02349291d6512d411d1",
+    "mechanical/flush-case/assembly.json": "77113f7812cae6c44b50db67965ddeb135f5d9bc29f13256f73a673a6b64937f",
+    "mechanical/flush-case/build.py": "57eb251a910a6f9c4ca5943c5f25bec1b7642e030d627edc9673c84df621d441",
+    "mechanical/flush-case/usb_harness.py": "9bc112e744304b78c7b9989c9d21afc4aa7fae35636311f0a802ff8a6c453358",
     "mechanical/flush-case/usb_clearances.py": "c609de97bded2921164ca25c15fd9097838d75a51b67250f206c41464faec9a9",
     "mechanical/flush-case/usb_collision.py": "b4b8dff2c8fff5fddc759760c5c704a4882bc4b39c3ea4719b6c5e73bf28ca74",
     "mechanical/flush-case/usb-part-heights.json": "7d9d29db89542785ace4bd12d12eddc54d6c75523e08e7989ffc0761b4351c66",
@@ -55,20 +55,23 @@
     "mechanical/flush-case/fan-harness-heights.json": "27e100cbfafbd3b53bff37ee5ed7dec46a9389ce30a53290a791317c21521445",
     "mechanical/flush-case/fan_harness.py": "e8c246b98500a395a88e7b48fb4ef72699b44dc0e5ff21c0c2d6ca6d4c8b822e",
     "mechanical/flush-case/fan_harness_checks.py": "7b752eb9f69253aeea7fbf3c50bb3e5cdd6b3cfaddda2d65bb17bb33c556bc2e",
-    "mechanical/flush-case/fan_guide_mounts.py": "b13a36b05a62f8dae7274b64a1bca3083e4bad32e67b15e6bc5bb47b397a81a2",
-    "mechanical/flush-case/fan-guide-mounts.json": "e6ba5feeba7e160173951beb85c6c03125e6b73750f14d69a1824fd9d344ae41",
+    "mechanical/flush-case/fan_guide_mounts.py": "f4a96a3a13e1c896ddc9f02fdac7eedf8e88dfea01446185b7f7131bc4da65d6",
+    "mechanical/flush-case/fan-guide-mounts.json": "5b4c2cb30be414e1e23b4e9739c30ab849949afc3c9abd41b64353079626be89",
     "mechanical/flush-case/lid_stops.py": "0e7106b3e1445bbc2603bf9c1a51e71617bac210bd5a6da43e77e2d2f9a4998f",
     "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
     "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
     "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6",
-    "mechanical/flush-case/keyboard_service.py": "259a9a5a8e75e515694b1dfa8e164c23c21fb8cc889b4b80d6527eb7997204e9",
-    "mechanical/flush-case/keyboard-service.json": "095755ec5f00df1947699c35c6756e565dc21a72ae97b13bab730138e07b94ec",
+    "mechanical/flush-case/keyboard_mounts.py": "2102ab6cc129859418e61d2e456dc8bf1cec32011f79467f43c83c17ee588244",
+    "mechanical/flush-case/keyboard-mounts.json": "6f0bcf66eefa74931db7737a3450a58078c17737f68d9d74e247f88545e5583f",
+    "ducktop2.pretty/Cherry_MX_ULP_SMD.kicad_mod": "46c47833cd3dc73636a02985f3a85c8c0ce2a86d4981a59e87f94ae2bd615e2d",
+    "mechanical/flush-case/keyboard_service.py": "1234293cbb9d3cc5b1478c4f579e8ed0330454b35283281de3be2cb48a849a80",
+    "mechanical/flush-case/keyboard-service.json": "b2d4deb47affe07ea1268da917dc3790459f97f8b373c51334faa1ab977c59eb",
     "mechanical/flush-case/display_hinge_study.py": "952ec8022bf882069d6fc28f47aaba42ff773cfb7c9c00123660e3b7a62c6728",
     "mechanical/flush-case/display-hinge-study.json": "220ad23cbe6bb48760bd8936c9e48ac5bb3357fcb3f048b3c487b9798c0aa2bc",
     "mechanical/flush-case/display_grips.py": "c45518f17b0ea4bc628e5eb01911af0b8218e3e58e81a56792435f25381c0f66",
     "mechanical/flush-case/display-grip-hardware.json": "64d242b046d893eb807175dfe744788756ec014de130b832a20f64e782fac998",
     "mechanical/flush-case/display_plug.py": "ad9ecdce2f7a178ca09e66ef8c4fd83e66c625eeb835a8f84c1b069eb65ec90b",
-    "mechanical/flush-case/display-plug.json": "c5ee04eb1db8487265abda2bd03126a85a7efc07f737fe3185071e81d6f4cb79",
+    "mechanical/flush-case/display-plug.json": "3f8cf477da02a393f3a01b6fd0edc04e62b3a538b3090db0fee0c265fd688da1",
     "mechanical/flush-case/display_plug_checks.py": "030ff4a6822710eec8dc5bbf8cb1c6c4309ac0a5dd3652a6865d4901577efc2d",
     "mechanical/flush-case/draw_cooler.py": "28f3c04c99a8f7a99b329021df7ce4976643cff860408026a3bdb5e12ba2cf51",
     "mechanical/flush-case/draw_fan_harness.py": "8faf377a1f24299b591b68e45fa09cd8f3c707d4c4a29160aec9a2af30ec23a9",
@@ -79,7 +82,7 @@
   },
   "configuration": {
     "date": "2026-10-12",
-    "status": "nominal removal study; complete retention and flexible wiring unfinished",
+    "status": "retention and mounting geometry added; flexible wiring and physical qualification unfinished",
     "lid_angle_deg": 105,
     "lift_mm": 30,
     "lift_step_mm": 0.5,
@@ -89,13 +92,13 @@
         310.6,
         60.95
       ],
-      "keyboard_PCB_top_H": 21.8,
+      "keyboard_PCB_top_H": 22.127,
       "drawing_reference_open_height_above_PCB_mm": 4.8,
       "open_height_allocation_above_PCB_mm": 5.0,
       "upper_actuator_space_xyHwhd_mm": [
         307,
         50,
-        24,
+        24.327,
         9.2,
         22,
         2.8
@@ -103,7 +106,7 @@
       "external_FFC_space_xyHwhd_mm": [
         316,
         51.5,
-        22,
+        22.327,
         14,
         19,
         0.7
@@ -111,7 +114,7 @@
       "finger_center_start_xyH_mm": [
         313,
         60.95,
-        29.8
+        30.127
       ],
       "finger_radius_mm": 6,
       "finger_length_mm": 20,
@@ -126,9 +129,9 @@
     },
     "missing_physical_interfaces": [
       "deck fasteners and attached input-device wiring",
-      "keyboard edge retention and finished carrier structure",
       "J310-to-J320 FFC route and parking position",
-      "temporary support of the detached fan guides and USB rails"
+      "temporary support of the detached fan guides and USB rails",
+      "physical switch-pin and keycap dimensions; loaded and warm retention fit"
     ],
     "physical_service_verified": false,
     "manufacturing_ready": false
@@ -212,7 +215,114 @@
         "key-travel-and-cap-envelopes"
       ],
       "remove_first": [
-        "deck"
+        "deck",
+        "keyboard-edge-clip-1",
+        "keyboard-edge-clip-2",
+        "keyboard-edge-clip-3",
+        "keyboard-edge-clip-4",
+        "keyboard-edge-clip-5",
+        "keyboard-edge-clip-6",
+        "keyboard-edge-clip-7",
+        "keyboard-edge-clip-8",
+        "keyboard-clip-screw-1",
+        "keyboard-clip-screw-2",
+        "keyboard-clip-screw-3",
+        "keyboard-clip-screw-4",
+        "keyboard-clip-screw-5",
+        "keyboard-clip-screw-6",
+        "keyboard-clip-screw-7",
+        "keyboard-clip-screw-8"
+      ],
+      "lift_samples_mm": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0,
+        12.5,
+        13.0,
+        13.5,
+        14.0,
+        14.5,
+        15.0,
+        15.5,
+        16.0,
+        16.5,
+        17.0,
+        17.5,
+        18.0,
+        18.5,
+        19.0,
+        19.5,
+        20.0,
+        20.5,
+        21.0,
+        21.5,
+        22.0,
+        22.5,
+        23.0,
+        23.5,
+        24.0,
+        24.5,
+        25.0,
+        25.5,
+        26.0,
+        26.5,
+        27.0,
+        27.5,
+        28.0,
+        28.5,
+        29.0,
+        29.5,
+        30.0
+      ],
+      "collision_count": 0
+    },
+    {
+      "stage": "film",
+      "moving_parts": [
+        "keyboard-insulating-sheet"
+      ],
+      "remove_first": [
+        "deck",
+        "keyboard-pcb-and-available-models",
+        "key-travel-and-cap-envelopes",
+        "keyboard-edge-clip-1",
+        "keyboard-edge-clip-2",
+        "keyboard-edge-clip-3",
+        "keyboard-edge-clip-4",
+        "keyboard-edge-clip-5",
+        "keyboard-edge-clip-6",
+        "keyboard-edge-clip-7",
+        "keyboard-edge-clip-8",
+        "keyboard-clip-screw-1",
+        "keyboard-clip-screw-2",
+        "keyboard-clip-screw-3",
+        "keyboard-clip-screw-4",
+        "keyboard-clip-screw-5",
+        "keyboard-clip-screw-6",
+        "keyboard-clip-screw-7",
+        "keyboard-clip-screw-8"
       ],
       "lift_samples_mm": [
         0.0,
@@ -282,19 +392,52 @@
     {
       "stage": "carrier",
       "moving_parts": [
-        "keyboard-carrier-reservation"
+        "keyboard-carrier-reservation",
+        "keyboard-clip-nut-1",
+        "keyboard-clip-nut-2",
+        "keyboard-clip-nut-3",
+        "keyboard-clip-nut-4",
+        "keyboard-clip-nut-5",
+        "keyboard-clip-nut-6",
+        "keyboard-clip-nut-7",
+        "keyboard-clip-nut-8"
       ],
       "remove_first": [
         "deck",
         "keyboard-pcb-and-available-models",
         "key-travel-and-cap-envelopes",
+        "keyboard-insulating-sheet",
+        "keyboard-edge-clip-1",
+        "keyboard-edge-clip-2",
+        "keyboard-edge-clip-3",
+        "keyboard-edge-clip-4",
+        "keyboard-edge-clip-5",
+        "keyboard-edge-clip-6",
+        "keyboard-edge-clip-7",
+        "keyboard-edge-clip-8",
+        "keyboard-clip-screw-1",
+        "keyboard-clip-screw-2",
+        "keyboard-clip-screw-3",
+        "keyboard-clip-screw-4",
+        "keyboard-clip-screw-5",
+        "keyboard-clip-screw-6",
+        "keyboard-clip-screw-7",
+        "keyboard-clip-screw-8",
         "keyboard-fan-guide-screw-1",
         "keyboard-fan-guide-screw-2",
         "keyboard-fan-guide-screw-3",
         "keyboard-fan-guide-screw-4",
         "keyboard-fan-guide-screw-5",
         "harness-USB-left-keyboard-screw",
-        "harness-USB-right-keyboard-screw"
+        "harness-USB-right-keyboard-screw",
+        "keyboard-carrier-screw-1",
+        "keyboard-carrier-screw-2",
+        "keyboard-carrier-screw-3",
+        "keyboard-carrier-screw-4",
+        "keyboard-carrier-washer-1",
+        "keyboard-carrier-washer-2",
+        "keyboard-carrier-washer-3",
+        "keyboard-carrier-washer-4"
       ],
       "lift_samples_mm": [
         0.0,
@@ -425,6 +568,240 @@
       "collisions": [],
       "withdrawal_mm": 6,
       "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-clip-screw-1",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 8,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-clip-screw-2",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 8,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-clip-screw-3",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 8,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-clip-screw-4",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 8,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-clip-screw-5",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 8,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-clip-screw-6",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 8,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-clip-screw-7",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 8,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-clip-screw-8",
+      "remove_first": [
+        "deck"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 8,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-carrier-screw-1",
+      "remove_first": [
+        "deck",
+        "keyboard-pcb-and-available-models",
+        "key-travel-and-cap-envelopes",
+        "keyboard-insulating-sheet",
+        "keyboard-edge-clip-1",
+        "keyboard-edge-clip-2",
+        "keyboard-edge-clip-3",
+        "keyboard-edge-clip-4",
+        "keyboard-edge-clip-5",
+        "keyboard-edge-clip-6",
+        "keyboard-edge-clip-7",
+        "keyboard-edge-clip-8",
+        "keyboard-clip-screw-1",
+        "keyboard-clip-screw-2",
+        "keyboard-clip-screw-3",
+        "keyboard-clip-screw-4",
+        "keyboard-clip-screw-5",
+        "keyboard-clip-screw-6",
+        "keyboard-clip-screw-7",
+        "keyboard-clip-screw-8"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-carrier-screw-2",
+      "remove_first": [
+        "deck",
+        "keyboard-pcb-and-available-models",
+        "key-travel-and-cap-envelopes",
+        "keyboard-insulating-sheet",
+        "keyboard-edge-clip-1",
+        "keyboard-edge-clip-2",
+        "keyboard-edge-clip-3",
+        "keyboard-edge-clip-4",
+        "keyboard-edge-clip-5",
+        "keyboard-edge-clip-6",
+        "keyboard-edge-clip-7",
+        "keyboard-edge-clip-8",
+        "keyboard-clip-screw-1",
+        "keyboard-clip-screw-2",
+        "keyboard-clip-screw-3",
+        "keyboard-clip-screw-4",
+        "keyboard-clip-screw-5",
+        "keyboard-clip-screw-6",
+        "keyboard-clip-screw-7",
+        "keyboard-clip-screw-8"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-carrier-screw-3",
+      "remove_first": [
+        "deck",
+        "keyboard-pcb-and-available-models",
+        "key-travel-and-cap-envelopes",
+        "keyboard-insulating-sheet",
+        "keyboard-edge-clip-1",
+        "keyboard-edge-clip-2",
+        "keyboard-edge-clip-3",
+        "keyboard-edge-clip-4",
+        "keyboard-edge-clip-5",
+        "keyboard-edge-clip-6",
+        "keyboard-edge-clip-7",
+        "keyboard-edge-clip-8",
+        "keyboard-clip-screw-1",
+        "keyboard-clip-screw-2",
+        "keyboard-clip-screw-3",
+        "keyboard-clip-screw-4",
+        "keyboard-clip-screw-5",
+        "keyboard-clip-screw-6",
+        "keyboard-clip-screw-7",
+        "keyboard-clip-screw-8"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    },
+    {
+      "screw": "keyboard-carrier-screw-4",
+      "remove_first": [
+        "deck",
+        "keyboard-pcb-and-available-models",
+        "key-travel-and-cap-envelopes",
+        "keyboard-insulating-sheet",
+        "keyboard-edge-clip-1",
+        "keyboard-edge-clip-2",
+        "keyboard-edge-clip-3",
+        "keyboard-edge-clip-4",
+        "keyboard-edge-clip-5",
+        "keyboard-edge-clip-6",
+        "keyboard-edge-clip-7",
+        "keyboard-edge-clip-8",
+        "keyboard-clip-screw-1",
+        "keyboard-clip-screw-2",
+        "keyboard-clip-screw-3",
+        "keyboard-clip-screw-4",
+        "keyboard-clip-screw-5",
+        "keyboard-clip-screw-6",
+        "keyboard-clip-screw-7",
+        "keyboard-clip-screw-8"
+      ],
+      "collisions": [],
+      "withdrawal_mm": 6,
+      "withdrawal_collisions": 0
+    }
+  ],
+  "clip_removal": [
+    {
+      "clip": "keyboard-edge-clip-1",
+      "lift_mm": 10,
+      "samples": 21,
+      "collision_count": 0
+    },
+    {
+      "clip": "keyboard-edge-clip-2",
+      "lift_mm": 10,
+      "samples": 21,
+      "collision_count": 0
+    },
+    {
+      "clip": "keyboard-edge-clip-3",
+      "lift_mm": 10,
+      "samples": 21,
+      "collision_count": 0
+    },
+    {
+      "clip": "keyboard-edge-clip-4",
+      "lift_mm": 10,
+      "samples": 21,
+      "collision_count": 0
+    },
+    {
+      "clip": "keyboard-edge-clip-5",
+      "lift_mm": 10,
+      "samples": 21,
+      "collision_count": 0
+    },
+    {
+      "clip": "keyboard-edge-clip-6",
+      "lift_mm": 10,
+      "samples": 21,
+      "collision_count": 0
+    },
+    {
+      "clip": "keyboard-edge-clip-7",
+      "lift_mm": 10,
+      "samples": 21,
+      "collision_count": 0
+    },
+    {
+      "clip": "keyboard-edge-clip-8",
+      "lift_mm": 10,
+      "samples": 21,
+      "collision_count": 0
     }
   ],
   "J320_access": [
@@ -483,8 +860,8 @@
       },
       {
         "part": "base-walls",
-        "volume_before_mm3": 25844.0639,
-        "volume_after_mm3": 25051.5119
+        "volume_before_mm3": 27004.0182,
+        "volume_after_mm3": 26211.4662
       },
       {
         "part": "rear-base-reinforcement",
@@ -505,22 +882,23 @@
   "manufacturing_ready": false,
   "limits": [
     "The keyboard FFC must be disconnected and parked before any keyboard lift. Its complete installed route and parking space are not modeled.",
-    "Deck retention, attached input-device cables and keyboard edge retention are unfinished. This is not a full disassembly release.",
+    "Deck retention and attached input-device cables are unfinished. The new keyboard retention still needs actual stack, keycap, load and warm-fit tests. This is not a full disassembly release.",
     "Secure the detached guides and both USB rails on temporary insulating supports before lifting the carrier. Their unsupported weight and cable deflection are not qualified.",
     "Removal is sampled at 0.5 mm intervals. This does not prove continuous-motion clearance or tolerance fit.",
     "The J320 spaces are access allocations above and outside the closed connector. They do not simulate latch internals or establish hand fit.",
-    "The carrier and guide arms need stiffness, thread, pull and warm-service tests in the chosen insulating material."
+    "The carrier insulation, printed clips and guide arms need stiffness, thread, pull and warm-service tests.",
+    "Driver envelopes cover access above the head. They do not simulate the bit/recess engagement of the countersunk screws."
   ],
   "STEP_export": {
     "file": "exports/keyboard-service.step",
     "reopens": true,
-    "solids": 11
+    "solids": 19
   },
   "outputs": {
-    "views/keyboard-guide-mounts.png": "1d7b3ee2adffe6609acae57c2a683f3461703fc698d501c057c6668fc9d7aec3",
-    "views/keyboard-carrier-release.png": "60d36b89eac46f92539a1f3ac889feb5ae4953a1d83131125ff633b304928936",
-    "views/keyboard-guide-detail.png": "31ff5cf77aa21c10646b9d7aaacd8dcc0c6ae9c5d18e0d873d42aaac3bc1a049",
-    "views/keyboard-ffc-access.png": "1947e8399d0e2425b0f41beff4e91a732247bc095a7e8370d1cc5c16828e46b9",
-    "exports/keyboard-service.step": "b8c631aeb2d168a1fde3bd4294ea63930882d24e09f6255bc80f3defd998d446"
+    "views/keyboard-guide-mounts.png": "b0cf48c81b4da63a003793f5ae3ff95b3246d63838c2e9402d504581e13d2642",
+    "views/keyboard-carrier-release.png": "0e4c14655c3b2bfa8f7eee194425574a689fc6a2f23f109ff4410dcd32e405da",
+    "views/keyboard-guide-detail.png": "8e8e85f799da4156906bd10dea0898cd39446a7aa232ab64cee47628a102278b",
+    "views/keyboard-ffc-access.png": "d0e245336b4c067a1e16a8c164907f95963b4b5ba828e38f00d7cc195d1e62ed",
+    "exports/keyboard-service.step": "afaa3aa0f45f0fc8ef31c19322d33459c2386f7aa3de8851752435e6956f5510"
   }
 }

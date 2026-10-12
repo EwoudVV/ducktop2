@@ -26,7 +26,7 @@ the five screws are [M2 x 4 Phillips pan heads](https://www.westfieldfasteners.c
 the CAD allows a 4 mm head diameter, 2 mm head height and the full 4.24 mm
 maximum shank length. the nominal guide boss is 3 mm deep. allowing for
 the short end of the screw tolerance and 1.1 mm under-head thread runout
-leaves 2.66 mm of full-thread overlap. the clearance bores show the installed
+leaves 2.56 mm of full-thread overlap. the clearance bores show the installed
 screw envelope; they are not finished tap-drill dimensions.
 
 ![one guide arm, its screw and locating key](views/keyboard-guide-detail.png)
@@ -45,13 +45,16 @@ collision report.
    input-device wiring before removing the deck. those attachment details
    are still unfinished in this thin case.
 3. release the keyboard FFC at J320 and park it clear of the carrier.
-   release the keyboard's edge retention, then lift the keyboard out.
-   the finished retention hardware and complete FFC route still need designing.
+   remove the eight edge-clip screws and clips, then lift the keyboard out.
+   lift the separate insulating film next. the complete FFC route and
+   parked position still need designing.
 4. secure the five fan guides and both USB rails on temporary insulating
    supports. remove the five new guide screws and the two existing USB
    bracket screws at X130 and X225, Y105.5. do not let loose guide pieces
    hang from the wires.
-5. lift the carrier vertically off its locating keys. the fan loom and
+5. remove the four carrier-to-bracket screws and their washers. the
+   brackets remain attached to the case. lift the carrier vertically off
+   its locating keys, with its eight pressed nuts still fitted. the fan loom and
    guides stay in place. this exposes J52 and the module display connector.
 
 ![the carrier lifted away from the retained guides and fan loom](views/keyboard-carrier-release.png)
@@ -81,11 +84,12 @@ length, bend limits or parked position.
 
 ## checks and saved files
 
-`keyboard_service.py` checks the deck, keyboard and carrier lift in 0.5 mm
-steps over 30 mm. it also checks the seven driver paths, the screw
-withdrawals and the J320 access spaces. the display grip and guard geometry
+`keyboard_service.py` checks the deck, keyboard, insulating film and carrier
+lift in 0.5 mm steps over 30 mm, plus eight clip removals over 10 mm.
+it also checks 19 driver paths, the screw withdrawals and the J320 access spaces. the display grip and guard geometry
 is included using the same proposed rear reliefs as the display study.
-the separate STEP contains the carrier, five guides and five screws.
+the separate STEP contains 19 solids: the carrier, eight pressed clip nuts,
+five guides and five guide screws.
 
 - `fan-guide-mounts.json` records the positions and screw allowances.
 - `fan_guide_mounts.py` makes the separate guides, locating features and carrier tabs.
@@ -93,6 +97,8 @@ the separate STEP contains the carrier, five guides and five screws.
 - `keyboard-service-checks.json` records contacts, source hashes and image/export hashes.
 - `exports/keyboard-service.step` is the separate inspection model.
 
-the full keyboard mount and flexible wiring remain unfinished. the existing
+the [keyboard mounts](keyboard-mounts.md) now have a defined removal order.
+the upright AUX fuse clearance, switch-pin height, load tests and flexible
+wiring still need resolving. the existing
 0.8 mm PCB, its routing and component positions are unchanged. this change
 adds no case height, front lip or rear ledge.

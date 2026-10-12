@@ -1,0 +1,378 @@
+{
+  "date": "2026-10-12",
+  "scope": "Additional heights below the full keyboard carrier. Measured or manufacturer maximums and provisional installed-height allocations stay separate. A failed fuse allocation is an open fit issue, not permission to shrink the envelope.",
+  "manufacturer_maximums": {
+    "HD3SS6126RUAR": {
+      "height_mm": 0.8,
+      "source": "https://www.ti.com/lit/ds/symlink/hd3ss6126.pdf",
+      "basis": "RUA0042A package outline maximum height. Assembly space is added separately by the checker."
+    },
+    "PCA9306DCTR": {
+      "height_mm": 1.3,
+      "source": "https://www.ti.com/lit/ds/symlink/pca9306.pdf",
+      "basis": "DCT0008A package outline maximum height. Assembly space is added separately by the checker."
+    },
+    "TPS2052BDR": {
+      "height_mm": 1.75,
+      "source": "https://www.ti.com/lit/ds/symlink/tps2052b.pdf",
+      "basis": "D0008A package outline maximum height. Assembly space is added separately by the checker."
+    },
+    "TPS25810RVCR": {
+      "height_mm": 0.8,
+      "source": "https://www.ti.com/lit/ds/symlink/tps25810.pdf",
+      "basis": "RVC0020A package outline maximum height. Assembly space is added separately by the checker."
+    },
+    "TPS62821DLCR": {
+      "height_mm": 1,
+      "source": "https://www.ti.com/lit/ds/symlink/tps62821.pdf",
+      "basis": "DLC0008B package outline maximum height. Assembly space is added separately by the checker."
+    },
+    "TPS25751ADREFR": {
+      "height_mm": 0.8,
+      "source": "https://www.ti.com/lit/ds/symlink/tps25751.pdf",
+      "basis": "REF0038A package outline maximum height. Assembly space is added separately by the checker."
+    },
+    "CAT24C256WI-GT3": {
+      "height_mm": 1.75,
+      "source": "https://www.onsemi.com/pdf/datasheet/cat24c256-d.pdf",
+      "basis": "CAT24C256 SOIC W ordering option, case 751BD, dimension A maximum. Separate assembly allowance applies."
+    },
+    "USB7206C-I/KDX": {
+      "height_mm": 0.9,
+      "source": "https://ww1.microchip.com/downloads/aemDocuments/documents/UNG/ProductDocuments/DataSheets/USB7206C-Data-Sheet-00003850.pdf",
+      "basis": "100-VQFN package drawing C04-407, figure 10-2: overall height A maximum 0.90 mm."
+    },
+    "XAL7070-222MEC": {
+      "height_mm": 7,
+      "source": "https://www.coilcraft.com/getmedia/1ba55433-bcc8-4838-9b21-382f497e12e0/xal7070.pdf",
+      "basis": "Document 856-1, revised 25 February 2026: mounted height 7.0 mm maximum. Checker also adds 0.3 mm assembly allowance."
+    },
+    "GRM1555C1H271JA01D": {
+      "height_mm": 0.55,
+      "source": "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM1555C1H271JA01-01A.pdf",
+      "basis": "Reference sheet thickness T 0.5 +/-0.05 mm. Packaging suffix D does not change body size."
+    },
+    "T520D107M010ATE070": {
+      "height_mm": 3.1,
+      "source": "https://content.kemet.com/datasheets/KEM_T2074_T520.pdf",
+      "basis": "T520 dimensional table, D case: H 2.8 +/-0.3 mm. Separate assembly allowance applies."
+    },
+    "T520D157M010ATE025": {
+      "height_mm": 3.1,
+      "source": "https://content.kemet.com/datasheets/KEM_T2074_T520.pdf",
+      "basis": "T520 dimensional table, D case: H 2.8 +/-0.3 mm. Separate assembly allowance applies."
+    }
+  },
+  "reservations": {
+    "center/C47": {
+      "mpn": "C1608X7R1C104K080AA",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "center/C209": {
+      "mpn": "GRM1555C1H392JA01D",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "center/C900": {
+      "mpn": "JMK107BB7475MA-T",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "center/C923": {
+      "mpn": "GRM1885C1H121JA01D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "center/C925": {
+      "mpn": "C1608X7R1C104K080AA",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "center/C926": {
+      "mpn": "C1608X7R1C104K080AA",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "center/C2307": {
+      "mpn": "GRM21BR71E105KA12L",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "center/F190": {
+      "mpn": "0297003.WXNV + 3568",
+      "footprint": "Fuse:Fuseholder_Blade_Mini_Keystone_3568",
+      "height_mm": 17.5,
+      "basis": "17.5 mm installed fuse-and-holder screening allocation. Keystone catalog page 48 gives holder body 7.37 mm; Littelfuse 297 sheet gives an 8.8 mm plastic body above its blades. Their simple 16.17 mm sum is an estimate, not an established mated maximum. Do not use the bare holder as the complete assembly. The final seated height, fuse tolerances and extraction access need confirmation.",
+      "source": "https://www.keystone-europe.com/wp-content/uploads/2025/08/fuse-clips-contacts-holders.pdf"
+    },
+    "center/J16": {
+      "mpn": "SM03B-SRSS-TB",
+      "footprint": "Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal",
+      "height_mm": 4.0,
+      "basis": "4 mm installed SH header and seated housing allocation. Confirm the actual cable dressing and service access.",
+      "source": "https://www.jst-mfg.com/product/pdf/eng/eSH.pdf"
+    },
+    "center/J902": {
+      "mpn": "TC2030-CTX-NL cable target",
+      "footprint": "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical",
+      "height_mm": 0.1,
+      "basis": "Bare PCB target with 0.1 mm surface allowance; no fitted pin, header or programming cable in the closed operating assembly. Service probes are separate.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "center/J2430": {
+      "mpn": "2060-453/998-404",
+      "footprint": "ducktop2:WAGO_2060_453_SMD",
+      "height_mm": 4.8,
+      "basis": "Retain the existing 4.5 mm terminal-body reservation plus 0.3 mm assembly space. Button access and wire routes are checked separately.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404"
+    },
+    "center/J2443": {
+      "mpn": null,
+      "footprint": "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm",
+      "height_mm": 1,
+      "basis": "Existing 1 mm finished braid and solder-joint reservation; braid stock is nominally 0.508 mm. Verify the finished joint, insulation and formed braid.",
+      "source": "mechanical/case-prototype/ground_braids.py"
+    },
+    "center/J2444": {
+      "mpn": null,
+      "footprint": "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm",
+      "height_mm": 1,
+      "basis": "Existing 1 mm finished braid and solder-joint reservation; braid stock is nominally 0.508 mm. Verify the finished joint, insulation and formed braid.",
+      "source": "mechanical/case-prototype/ground_braids.py"
+    },
+    "center/J2460": {
+      "mpn": "2060-451/998-404",
+      "footprint": "ducktop2:WAGO_2060_451_SMD",
+      "height_mm": 4.8,
+      "basis": "Retain the existing 4.5 mm terminal-body reservation plus 0.3 mm assembly space. Button access and wire routes are checked separately.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-451_998-404"
+    },
+    "center/L901": {
+      "mpn": "AOTA-B201610S3R3-101-T",
+      "footprint": "ducktop2:Abracon_AOTA-B201610S3R3-101-T_RP2350",
+      "height_mm": 1.5,
+      "basis": "1.5 mm installed allocation around the documented 2.0 x 1.6 x 1.0 mm part; includes solder and fit allowance.",
+      "source": "https://abracon.com/datasheets/AOTA-B201610S3R3-101-T.pdf"
+    },
+    "center/TP12": {
+      "mpn": null,
+      "footprint": "TestPoint:TestPoint_Pad_D1.0mm",
+      "height_mm": 0.1,
+      "basis": "Bare PCB target with 0.1 mm surface allowance; no fitted pin, header or programming cable in the closed operating assembly. Service probes are separate.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "left/C2028": {
+      "mpn": "T521V686M025ATE050",
+      "footprint": "Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D",
+      "height_mm": 4.0,
+      "basis": "4 mm installed polymer capacitor and solder allocation. Confirm the exact V-case dimensions and landing pattern before assembly.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "left/C2413": {
+      "mpn": "GRM1885C1H472JA01D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "left/D1808": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "left/D1809": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "left/D1811": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "left/D1812": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "left/F195": {
+      "mpn": "0297003.WXNV + 3568",
+      "footprint": "Fuse:Fuseholder_Blade_Mini_Keystone_3568",
+      "height_mm": 17.5,
+      "basis": "17.5 mm installed fuse-and-holder screening allocation. Keystone catalog page 48 gives holder body 7.37 mm; Littelfuse 297 sheet gives an 8.8 mm plastic body above its blades. Their simple 16.17 mm sum is an estimate, not an established mated maximum. Do not use the bare holder as the complete assembly. The final seated height, fuse tolerances and extraction access need confirmation.",
+      "source": "https://www.keystone-europe.com/wp-content/uploads/2025/08/fuse-clips-contacts-holders.pdf"
+    },
+    "left/J22": {
+      "mpn": "105450-0101",
+      "footprint": "Connector_USB:USB_C_Receptacle_Molex_105450-0101",
+      "height_mm": 5,
+      "basis": "5 mm installed receptacle allocation, consistent with the programming-port allowance. Confirm the seated connector; mating plug and external withdrawal space are separate.",
+      "source": "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/105/105450/1054500101_sd.pdf"
+    },
+    "left/J23": {
+      "mpn": "105450-0101",
+      "footprint": "Connector_USB:USB_C_Receptacle_Molex_105450-0101",
+      "height_mm": 5,
+      "basis": "5 mm installed receptacle allocation, consistent with the programming-port allowance. Confirm the seated connector; mating plug and external withdrawal space are separate.",
+      "source": "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/105/105450/1054500101_sd.pdf"
+    },
+    "left/J2431": {
+      "mpn": "2060-453/998-404",
+      "footprint": "ducktop2:WAGO_2060_453_SMD",
+      "height_mm": 4.8,
+      "basis": "Retain the existing 4.5 mm terminal-body reservation plus 0.3 mm assembly space. Button access and wire routes are checked separately.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404"
+    },
+    "left/J2442": {
+      "mpn": null,
+      "footprint": "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm",
+      "height_mm": 1,
+      "basis": "Existing 1 mm finished braid and solder-joint reservation; braid stock is nominally 0.508 mm. Verify the finished joint, insulation and formed braid.",
+      "source": "mechanical/case-prototype/ground_braids.py"
+    },
+    "left/J2461": {
+      "mpn": "2060-451/998-404",
+      "footprint": "ducktop2:WAGO_2060_451_SMD",
+      "height_mm": 4.8,
+      "basis": "Retain the existing 4.5 mm terminal-body reservation plus 0.3 mm assembly space. Button access and wire routes are checked separately.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-451_998-404"
+    },
+    "left/R1790": {
+      "mpn": "RC1206FR-07249RL",
+      "footprint": "Resistor_SMD:R_1206_3216Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "left/U1783": {
+      "mpn": "TPD1S514-1YZR",
+      "footprint": "ducktop2:Texas_TPD1S514_YZ_WCSP-12_1.99x1.29mm_P0.5mm",
+      "height_mm": 1.5,
+      "basis": "1.5 mm installed WCSP and solder allocation. Confirm actual assembled height; no shipping-box dimensions are used.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1s514.pdf"
+    },
+    "right/C2040": {
+      "mpn": "GRM21BR72A104KA01L",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "right/C2041": {
+      "mpn": "GRM21BR71A824KA01L",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "right/C2414": {
+      "mpn": "GRM1885C1H472JA01D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "height_mm": 2.0,
+      "basis": "2 mm installed body and solder allocation for the saved 0402, 0603, 0805 or 1206 part. This is a conservative design limit, not a manufacturer maximum.",
+      "source": "saved part identity and footprint; physical installed height must be checked"
+    },
+    "right/D153": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "right/D154": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "right/D155": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "right/D156": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "right/D157": {
+      "mpn": "TPD1E0B04DPLR",
+      "footprint": "Diode_SMD:D_0201_0603Metric",
+      "height_mm": 1,
+      "basis": "1 mm installed 0201 DPL device and solder allocation. The DPY height and shipping-reel dimensions are not used as the DPL maximum.",
+      "source": "https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf"
+    },
+    "right/J11": {
+      "mpn": "105450-0101",
+      "footprint": "Connector_USB:USB_C_Receptacle_Molex_105450-0101",
+      "height_mm": 5,
+      "basis": "5 mm installed receptacle allocation, consistent with the programming-port allowance. Confirm the seated connector; mating plug and external withdrawal space are separate.",
+      "source": "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/105/105450/1054500101_sd.pdf"
+    },
+    "right/J30": {
+      "mpn": "208658-1001",
+      "footprint": "Connector_Video:HDMI_A_Molex_208658-1001_Horizontal",
+      "height_mm": 8,
+      "basis": "8 mm installed HDMI receptacle allocation. This is a fit budget, not a manufacturer maximum. External plug and withdrawal space remain separate.",
+      "source": "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/208/208658/2086581001_sd.pdf"
+    },
+    "right/J2433": {
+      "mpn": "2060-453/998-404",
+      "footprint": "ducktop2:WAGO_2060_453_SMD",
+      "height_mm": 4.8,
+      "basis": "Retain the existing 4.5 mm terminal-body reservation plus 0.3 mm assembly space. Button access and wire routes are checked separately.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404"
+    },
+    "right/J2435": {
+      "mpn": "XT30PW-F30.G.Y",
+      "footprint": "ducktop2:AMASS_XT30PW-F30_G_Y",
+      "height_mm": 6.3,
+      "basis": "Retain the existing 6 mm mated XT30 body allocation plus 0.3 mm assembly space. Wires, strain relief and connector withdrawal are separate.",
+      "source": "https://www.china-amass.net/uploads/31.XT30PW-F30-SPEC-2025V0.pdf"
+    },
+    "right/J2445": {
+      "mpn": null,
+      "footprint": "Connector_Wire:SolderWirePad_1x01_SMD_5x10mm",
+      "height_mm": 1,
+      "basis": "Existing 1 mm finished braid and solder-joint reservation; braid stock is nominally 0.508 mm. Verify the finished joint, insulation and formed braid.",
+      "source": "mechanical/case-prototype/ground_braids.py"
+    },
+    "right/J2453": {
+      "mpn": "2060-453/998-404",
+      "footprint": "ducktop2:WAGO_2060_453_SMD",
+      "height_mm": 4.8,
+      "basis": "Retain the existing 4.5 mm terminal-body reservation plus 0.3 mm assembly space. Button access and wire routes are checked separately.",
+      "source": "https://www.wago.com/global/pcb-interconnect/pcb-terminal-block/p/2060-453_998-404"
+    }
+  },
+  "fuse_dimension_source": "https://www.littelfuse.com/assetdocs/littelfuse_datasheet_297_mini32v.pdf?assetguid=42c9dd21-a88e-4328-8e67-2f832444faf1",
+  "physical_fit_verified": false
+}

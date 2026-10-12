@@ -42,12 +42,12 @@
   "boards": {
     "main_bottom_H": 3.9,
     "bms_bottom_H": 7.9,
-    "keyboard_bottom_H": 21,
+    "keyboard_bottom_H": 21.327,
     "radio_internal": false
   },
   "usb_power_route": "behind-keyboard-v1",
   "keyboard": {
-    "carrier_thickness": 1,
+    "carrier_thickness": 1.2,
     "carrier_bottom_H": 20
   },
   "trackpad": {
@@ -91,7 +91,8 @@
     "Two metal stop prototypes set a nominal 135 degree opening. The movement check includes that endpoint. Stop strength, fastener seating, tolerances and repeated impacts still need physical qualification.",
     "Five SJ5344 feet add 4.1 mm nominal height. The 3.1 mm intake-gap budget includes unmeasured compression and floor-deflection allowances; verify the loaded warm assembly.",
     "The four fan leads use a JST GH pre-crimped extension, staggered insulated splices, a carrier guide and a separate floor clamp. Dressed fit and pull, heat and electrical tests are still required.",
-    "A shallow rounded relief in the copper plate clears the display connector access. CPU and memory contact areas, pipe channels and mounting reservations are retained; physical fit and thermal performance still need tests."
+    "A shallow rounded relief in the copper plate clears the display connector access. CPU and memory contact areas, pipe channels and mounting reservations are retained; physical fit and thermal performance still need tests.",
+    "The keyboard has a 1.2 mm steel carrier, 0.127 mm insulating film, eight edge clips, four case-supported brackets and a local support stop. Pin projection, loaded stiffness and warm assembly fit still need physical checks."
   ],
   "usb_heatpipe_crossing": {
     "drop_mm": 3.0,
@@ -105,5 +106,6 @@
   "cooling_layout": "right-delta-dual-pipe-v1",
   "feet": "SJ5344-five-feet",
   "fan_harness": "J52-GH-DV52-v1",
-  "lid_stops": "rear-metal-135-v1"
+  "lid_stops": "rear-metal-135-v1",
+  "keyboard_mounts": "steel-carrier-side-supports-v1"
 }

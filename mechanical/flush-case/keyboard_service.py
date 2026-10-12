@@ -8,6 +8,7 @@ import check_cooler
 import display_hinge_study as display
 import display_plug_checks
 import fan_guide_mounts as mounts
+import keyboard_mounts
 from cad import box, cylinder, compound, export_step, _MESHES
 
 HERE=Path(__file__).resolve().parent
@@ -15,6 +16,11 @@ ROOT=HERE.parents[1]
 KEYBOARD=['keyboard-pcb-and-available-models','key-travel-and-cap-envelopes']
 SCREWS=[f'keyboard-fan-guide-screw-{i}' for i in range(1,6)]+[
     'harness-USB-left-keyboard-screw','harness-USB-right-keyboard-screw']
+CLIPS=[f'keyboard-edge-clip-{i}' for i in range(1,9)]
+CLIP_SCREWS=[f'keyboard-clip-screw-{i}' for i in range(1,9)]
+CARRIER_SCREWS=[f'keyboard-carrier-screw-{i}' for i in range(1,5)]
+CARRIER_WASHERS=[f'keyboard-carrier-washer-{i}' for i in range(1,5)]
+CARRIER_NUTS=[f'keyboard-clip-nut-{i}' for i in range(1,9)]
 
 
 def sha(path):
@@ -62,8 +68,9 @@ def evaluate(saved,case,sources):
     steps=[round(i*c['lift_step_mm'],5) for i in range(round(c['lift_mm']/c['lift_step_mm'])+1)]
     for stage,names,removed in [
         ('deck',['deck'],[]),
-        ('keyboard',KEYBOARD,['deck']),
-        ('carrier',['keyboard-carrier-reservation'],['deck',*KEYBOARD,*SCREWS]),
+        ('keyboard',KEYBOARD,['deck',*CLIPS,*CLIP_SCREWS]),
+        ('film',['keyboard-insulating-sheet'],['deck',*KEYBOARD,*CLIPS,*CLIP_SCREWS]),
+        ('carrier',['keyboard-carrier-reservation',*CARRIER_NUTS],['deck',*KEYBOARD,'keyboard-insulating-sheet',*CLIPS,*CLIP_SCREWS,*SCREWS,*CARRIER_SCREWS,*CARRIER_WASHERS]),
     ]:
         moving=compound(byname[n]['shape'] for n in names)
         obstacles=[p for p in physical if p['name'] not in names+removed]
@@ -73,23 +80,33 @@ def evaluate(saved,case,sources):
         row={'stage':stage,'moving_parts':names,'remove_first':removed,'lift_samples_mm':steps,'collision_count':len(hits)-before}
         stages.append(row);print('service lift',stage,row['collision_count'],'collisions',flush=True)
 
+    clip_removal=[]
+    for name in CLIPS:
+        before=len(hits);obstacles=[p for p in physical if p['name'] not in ['deck',name,*CLIP_SCREWS]]
+        for i in range(21):test(name+f'-lift-{i}',byname[name]['shape'].translate((0,0,i*.5)),obstacles,'clip-lift',lift_mm=i*.5)
+        clip_removal.append({'clip':name,'lift_mm':10,'samples':21,'collision_count':len(hits)-before})
     access=[]
-    for name in SCREWS:
+    for name in [*SCREWS,*CLIP_SCREWS,*CARRIER_SCREWS]:
         screw=byname[name]
+        companions=[];removed=['deck'];seat=mounts.config()['carrier_top_H'];travel=6
         if name.startswith('keyboard-fan-guide-screw-'):
             x,y=mounts.config()['mounts_xy_mm'][int(name.rsplit('-',1)[1])-1]
+        elif name.startswith('keyboard-clip-screw-'):
+            x,y,_=keyboard_mounts.CLIPS[int(name.rsplit('-',1)[1])-1];seat=23.4;travel=8
+        elif name.startswith('keyboard-carrier-screw-'):
+            i=int(name.rsplit('-',1)[1]);side,y=keyboard_mounts.SUPPORTS[i-1];x=37 if side=='left' else 321
+            seat=21.5;companions=[f'keyboard-carrier-washer-{i}'];removed+=KEYBOARD+['keyboard-insulating-sheet',*CLIPS,*CLIP_SCREWS]
         else:
             x,y=screw['thread_axis_xy_mm']
-        obstacles=[p for p in physical if p['name'] not in ['deck',name]]
-        # Include the bit's travel through the screw head as well as the shaft.
-        tool=mounts.driver(x,y).fuse(cylinder(x,y,21,2,2))
+        obstacles=[p for p in physical if p['name'] not in [*removed,name,*companions]]
+        tool=cylinder(x,y,seat,2,20).fuse(cylinder(x,y,seat+20,4,20))
         found=test(name+'-driver',tool,obstacles,'driver-access')
-        access.append({'screw':name,'remove_first':['deck'],'collisions':found})
-        obstacles=[thread_obstacle(screw,p) for p in physical if p['name'] not in ['deck',*KEYBOARD,name]]
-        travel=mounts.config()['service']['screw_withdrawal_mm']
+        access.append({'screw':name,'remove_first':removed,'collisions':found})
+        obstacles=[thread_obstacle(screw,p) for p in physical if p['name'] not in [*removed,name,*companions]]
+        moving=compound([screw['shape'],*[byname[n]['shape'] for n in companions]])
         before=len(hits)
         for i in range(round(travel/.5)+1):
-            test(name+f'-withdraw-{i}',screw['shape'].translate((0,0,i*.5)),obstacles,'screw-withdrawal',lift_mm=i*.5)
+            test(name+f'-withdraw-{i}',moving.translate((0,0,i*.5)),obstacles,'screw-withdrawal',lift_mm=i*.5)
         access[-1]['withdrawal_mm']=travel
         access[-1]['withdrawal_collisions']=len(hits)-before
         print('service screw',name,len(found),len(hits)-before,flush=True)
@@ -99,17 +116,18 @@ def evaluate(saved,case,sources):
         found=test(p['name'],p['shape'],[v for v in physical if v['name']!='deck'],'J320-access')
         latch.append({'space':p['name'],'collisions':found})
     result={'date':c['date'],'source_hashes':sources,'configuration':c,'removal_stages':stages,
-            'screw_access':access,'J320_access':latch,'collisions':hits,
+            'screw_access':access,'clip_removal':clip_removal,'J320_access':latch,'collisions':hits,
             'modeled_removal_sequence_clear':not hits,
             'display_study_context':{'proposed_reliefs':reliefs,'scope':'The display grip and rear-guard changes are applied locally, as in the separate display study. The fan-guide mounts are in the main case.'},
             'thread_contact_exclusion':'Only each original USB screw host cylinder at its recorded thread axis, radius and height is cleared for the unscrewing check. The rest of each guide rail remains an obstacle.',
             'physical_service_verified':False,'complete_keyboard_mounting_verified':False,'manufacturing_ready':False,
             'limits':['The keyboard FFC must be disconnected and parked before any keyboard lift. Its complete installed route and parking space are not modeled.',
-                      'Deck retention, attached input-device cables and keyboard edge retention are unfinished. This is not a full disassembly release.',
+                      'Deck retention and attached input-device cables are unfinished. The new keyboard retention still needs actual stack, keycap, load and warm-fit tests. This is not a full disassembly release.',
                       'Secure the detached guides and both USB rails on temporary insulating supports before lifting the carrier. Their unsupported weight and cable deflection are not qualified.',
                       'Removal is sampled at 0.5 mm intervals. This does not prove continuous-motion clearance or tolerance fit.',
                       'The J320 spaces are access allocations above and outside the closed connector. They do not simulate latch internals or establish hand fit.',
-                      'The carrier and guide arms need stiffness, thread, pull and warm-service tests in the chosen insulating material.']}
+                      'The carrier insulation, printed clips and guide arms need stiffness, thread, pull and warm-service tests.',
+                      'Driver envelopes cover access above the head. They do not simulate the bit/recess engagement of the countersunk screws.']}
     return result,parts
 
 
@@ -118,15 +136,15 @@ def draw(parts):
     from draw_fan_harness import crop_shape
     region=box(139,63,10,147,49,43);context=[]
     for p in parts:
-        if p.get('moving') or p.get('service') or p['group'] in ['keepout','changes'] or p['name'] in ['deck',*KEYBOARD]:continue
+        if p.get('moving') or p.get('service') or p['group'] in ['keepout','changes'] or p['name'] in ['deck',*KEYBOARD,'keyboard-insulating-sheet',*CLIPS,*CLIP_SCREWS]:continue
         shape=crop_shape(p['shape'],region)
         if shape is not None:context.append({**p,'shape':shape})
     seated=[{**p,'color':(*p['color'][:3],.25)} if p['name']=='keyboard-carrier-reservation' else p for p in context]
     render(seated,HERE/'views/keyboard-guide-mounts.png','five removable fan guides / screws accessible at the front',(.2,-.6,1.1),(1550,1050))
     released=[]
     for p in context:
-        if p['name'] in SCREWS:continue
-        if p['name']=='keyboard-carrier-reservation':p={**p,'shape':p['shape'].translate((0,0,12)),'color':(*p['color'][:3],.3)}
+        if p['name'] in [*SCREWS,*CARRIER_SCREWS,*CARRIER_WASHERS]:continue
+        if p['name'] in ['keyboard-carrier-reservation',*CARRIER_NUTS]:p={**p,'shape':p['shape'].translate((0,0,12)),'color':(*p['color'][:3],.3)}
         released.append(p)
     render(released,HERE/'views/keyboard-carrier-release.png','carrier lifted 12 mm / guides and loom remain in place',(.25,-.6,1),(1550,1050))
     close=box(142,65,11,14,47,17);scene=[]
@@ -140,10 +158,10 @@ def draw(parts):
         shape=crop_shape(p['shape'],region)
         if shape is not None:scene.append({**p,'shape':shape})
     render(scene+j320_spaces(),HERE/'views/keyboard-ffc-access.png','J320 latch and cable access / deck removed',(.5,-1,.8),(1550,1050))
-    selected=[p for p in parts if p['name']=='keyboard-carrier-reservation' or p['name'].startswith('keyboard-fan-guide-')]
+    selected=[p for p in parts if p['name'] in ['keyboard-carrier-reservation',*CARRIER_NUTS] or p['name'].startswith('keyboard-fan-guide-')]
     dest=HERE/'exports/keyboard-service.step';export_step(compound(p['shape'] for p in selected),dest)
     reopened=cq.importers.importStep(str(dest)).val()
-    assert reopened.isValid() and len(reopened.Solids())==11
+    assert reopened.isValid() and len(reopened.Solids())==19
     return {'file':str(dest.relative_to(HERE)),'reopens':True,'solids':len(reopened.Solids())}
 
 

@@ -1,10 +1,52 @@
 {
   "date": "2026-10-12",
   "status": "removable fan guide prototype; material and load tests required",
-  "mounts_xy_mm": [[148, 105.5], [172, 105.5], [214, 105.5], [242, 105.5], [277, 102.5]],
-  "guide_arm_ends_xy_mm": [[148, 70], [172, 95], [214, 95], [242, 102.9], [277, 105.35]],
+  "mounts_xy_mm": [
+    [
+      148,
+      105.5
+    ],
+    [
+      172,
+      105.5
+    ],
+    [
+      214,
+      105.5
+    ],
+    [
+      242,
+      105.5
+    ],
+    [
+      277,
+      102.5
+    ]
+  ],
+  "guide_arm_ends_xy_mm": [
+    [
+      148,
+      70
+    ],
+    [
+      172,
+      95
+    ],
+    [
+      214,
+      95
+    ],
+    [
+      242,
+      102.9
+    ],
+    [
+      277,
+      105.35
+    ]
+  ],
   "carrier_bottom_H": 20,
-  "carrier_top_H": 21,
+  "carrier_top_H": 21.2,
   "guide_boss_bottom_H": 17,
   "guide_boss_radius_mm": 2.5,
   "arm_bottom_H": 19,
@@ -18,12 +60,17 @@
     "head_max_height_mm": 1.72,
     "head_height_allocation_mm": 2,
     "underhead_thread_runout_allocation_mm": 1.1,
-    "minimum_full_thread_overlap_mm": 2.66,
+    "minimum_full_thread_overlap_mm": 2.56,
     "source": "https://www.westfieldfasteners.co.uk/Bolts-Screws-Metric/M2-Screw-Phillips-Pan-4-A2-Stainless.html",
     "tolerance_source": "https://www.westfieldfasteners.co.uk/Standards/ScrewBolt_PhilRaPan_M.pdf",
     "hole_note": "The CAD bore clears the installed thread envelope. It is not a finished pilot or tap drill. Confirm the thread process, torque and heated pull strength in the selected insulating material."
   },
-  "locating_key": {"width_mm": 1.6, "length_mm": 2, "height_above_seat_mm": 0.6, "side_gap_mm": 0.1},
+  "locating_key": {
+    "width_mm": 1.6,
+    "length_mm": 2,
+    "height_above_seat_mm": 0.6,
+    "side_gap_mm": 0.1
+  },
   "service": {
     "lid_angle_deg": 105,
     "lift_mm": 30,
@@ -31,7 +78,15 @@
     "screw_withdrawal_mm": 6,
     "driver_shaft_diameter_mm": 4,
     "driver_handle_diameter_mm": 8,
-    "sequence": ["isolate all power", "remove the deck and release its attached devices and wiring", "release J320 and park the keyboard FFC clear of the carrier", "release the keyboard retention and lift out the keyboard", "remove the five fan-guide screws and two USB bracket screws", "support the loose guides and loom, then lift the carrier vertically", "access J52 and the module display connector"],
+    "sequence": [
+      "isolate all power",
+      "remove the deck and release its attached devices and wiring",
+      "release J320 and park the keyboard FFC clear of the carrier",
+      "release the keyboard retention and lift out the keyboard",
+      "remove the five fan-guide screws and two USB bracket screws",
+      "support the loose guides and loom, then lift the carrier vertically",
+      "access J52 and the module display connector"
+    ],
     "limits": "The deck attachments, keyboard retention and full FFC route are unfinished. The lift checks cover the retained CAD only. Support the detached guides without loading the fan wires; this requires a dressed physical service trial."
   },
   "physical_service_verified": false,

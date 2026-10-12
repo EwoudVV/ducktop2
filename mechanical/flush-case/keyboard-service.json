@@ -1,6 +1,6 @@
 {
   "date": "2026-10-12",
-  "status": "nominal removal study; complete retention and flexible wiring unfinished",
+  "status": "retention and mounting geometry added; flexible wiring and physical qualification unfinished",
   "lid_angle_deg": 105,
   "lift_mm": 30,
   "lift_step_mm": 0.5,
@@ -10,13 +10,13 @@
       310.6,
       60.95
     ],
-    "keyboard_PCB_top_H": 21.8,
+    "keyboard_PCB_top_H": 22.127,
     "drawing_reference_open_height_above_PCB_mm": 4.8,
     "open_height_allocation_above_PCB_mm": 5.0,
     "upper_actuator_space_xyHwhd_mm": [
       307,
       50,
-      24,
+      24.327,
       9.2,
       22,
       2.8
@@ -24,7 +24,7 @@
     "external_FFC_space_xyHwhd_mm": [
       316,
       51.5,
-      22,
+      22.327,
       14,
       19,
       0.7
@@ -32,7 +32,7 @@
     "finger_center_start_xyH_mm": [
       313,
       60.95,
-      29.8
+      30.127
     ],
     "finger_radius_mm": 6,
     "finger_length_mm": 20,
@@ -47,9 +47,9 @@
   },
   "missing_physical_interfaces": [
     "deck fasteners and attached input-device wiring",
-    "keyboard edge retention and finished carrier structure",
     "J310-to-J320 FFC route and parking position",
-    "temporary support of the detached fan guides and USB rails"
+    "temporary support of the detached fan guides and USB rails",
+    "physical switch-pin and keycap dimensions; loaded and warm retention fit"
   ],
   "physical_service_verified": false,
   "manufacturing_ready": false
