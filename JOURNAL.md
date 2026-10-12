@@ -5,6 +5,28 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-11: mount the display cable grips and add a rear guard
+
+**Total time spent: 1 hour**
+
+worked on the display cable hardware in the thinner case. the previous shapes showed where the cable would go, but the grips still needed proper mounts and removable caps. kept their positions and the 50 mm free section between them, then added mounting feet, screw holes and flush cap screws. the fixed pedestal bolts to the rear base reinforcement, and the moving saddle attaches to the lid backing.
+
+![the fixed cable jaw and its wider mounting foot](docs/images/journal/2026-10-11-display-base-grip.png)
+
+made split liners with flared entrances so the cable does not sit directly against the metal edges. the caps close against the saddles, and both can come off without threading a terminated connector through the grip. thickened the lid mounting tongue and checked the screw lengths against the available thread depth. the outer lid screws go in before the lid skin is fitted.
+
+![the lid-side jaw, lower cap and backing attachment](docs/images/journal/2026-10-11-display-lid-grip.png)
+
+added a removable rear guard around the straight cable section. the first right mounting screw was too close to the cable bend. moving it helped the installed fit, but the washer still crossed the cable as it lifted out. moved that mount farther forward and checked the complete screw and washer withdrawal. also notched the pedestal foot to clear the new guard support.
+
+the guard cannot lift straight through the cable, so worked out a rearward removal path instead. its screws come out with the lid open and the deck removed. then the lid closes and the guard slides 20 mm out the back. reopening the lid gives access to the jaws. checked those movements in 0.5 mm steps, including the cap and liner moving together. one liner caught a thin strip above the rear opening, so opened that section up to the underside of the deck.
+
+![the two jaws and removable guard around the straight section](docs/images/journal/2026-10-11-display-cable-guard.png)
+
+checked all ten screw positions, the mounting bosses, both cap removals and the full opening range from closed to 135 degrees. the finished study has no unwanted solid contacts at the checked positions, and all 42 geometry tests pass. saved the hardware list, assembly sequence and close-ups, then reopened the separate step export. the proposed parts fit within the same closed outline and 33.3 mm case height, without changing any of the pcbs.
+
+the liner fit is still provisional. its 3.1 mm bore has a little clearance around the 3 mm cable budget, so it does not prove pull retention yet. i need the actual dressed cable and its compression limits before setting the final fit, then pull and flex tests to make sure it holds without damaging the wires. the moving-tail opening still needs its final closure too. kept these changes in the display fit study until the cable is settled, so the main case export has not been cut for them yet.
+
 # 2026-10-11: stop the lid at 135 degrees
 
 **Total time spent: 3 hours**

@@ -8,6 +8,8 @@ import cadquery as cq
 import numpy as np
 import check_cooler
 import usb_harness
+import display_grips
+import display_grip_checks
 from cad import box, compound, bounds, export_step, _MESHES
 from cables import tube
 from component_heights import screen_routes, resolve
@@ -66,24 +68,7 @@ def lid_tail():
 
 
 def anchor(x,moving):
-    # These split shapes reserve a broad lined grip. Screw and insert
-    # details depend on the actual loom and its permitted compression.
-    bore=cq.Solid.makeCylinder(config()['grip_bore_diameter_mm']/2,12.2,cq.Vector(x-6.1,15,19.3),cq.Vector(1,0,0))
-    if moving:
-        saddle=box(x-6,-17.5,19.3,12,12,2.6).cut(bore)
-        saddle=saddle.fuse(box(x-6,-11.5,21.9,12,6,5.9),box(x-9,-12,27.8,18,12,1.5))
-        cap=box(x-6,-17.5,16.4,12,12,2.9).cut(bore)
-    else:
-        saddle=box(x-6,-17.5,16.7,12,12,2.6).cut(bore)
-        saddle=saddle.fuse(box(x-6,-11.5,4.2,12,6,12.5))
-        cap=box(x-6,-17.5,19.3,12,12,2.9).cut(bore)
-    role='lid' if moving else 'base'
-    # Open the back of the lined grip rather than thinning the whole case
-    # wall around it. The opening is narrower than the nominal 3 mm loom.
-    rear=box(x-7,-30,0,14,13.5,34)
-    saddle=saddle.cut(rear);cap=cap.cut(rear)
-    return [{'name':f'display-{role}-anchor-saddle','shape':saddle,'moving':moving,'color':(.17,.51,.65)},
-            {'name':f'display-{role}-anchor-cap','shape':cap,'moving':moving,'color':(.33,.68,.77)}]
+    return display_grips.anchor(x,moving)
 
 
 def geometry():
@@ -101,7 +86,7 @@ def geometry():
          {'name':'display-base-bundle-space','shape':tube(model_points,r),'moving':False,'color':(.95,.45,.12)},
          {'name':'display-axis-flex-space','shape':span,'moving':False,'color':(.65,.28,.7)},
          {'name':'display-lid-tail-space','shape':tube(lid_tail(),r),'moving':True,'color':(.95,.45,.12)}]
-    new+=anchor(ax,False)+anchor(bx,True)
+    new+=anchor(ax,False)+anchor(bx,True)+display_grips.guard()
     assert all(n['shape'].isValid() for n in new)
     return new,p
 
@@ -127,7 +112,7 @@ def overlap(a,b):
 def study_case_parts(parts):
     """Apply explicit rear reliefs to a local copy of the case geometry."""
     cuts={
-        'deck':[box(130,-19,23.5,43,14.5,1.8)],
+        'deck':[box(130,-19,23.5,43,19.6,1.8)],
         'base-walls':[
             box(135,-18.1,12.25,38,1.5,12),
             box(161,-17.0,17.2,75,0.3,4.2),
@@ -145,6 +130,8 @@ def study_case_parts(parts):
         records.append({'part':p['name'],'removed_volume_mm3':round(p['shape'].Volume()-shape.Volume(),4),
                         'cut_bounds_construction_xyz':[bounds(cut) for cut in cuts[p['name']]]})
         result.append({**p,'shape':shape})
+    result,hardware_changes=display_grips.adapt_case(result)
+    records.extend(hardware_changes)
     return result,records
 
 
@@ -183,7 +170,7 @@ def main():
     assert case['hinges']['pivot_y']==-15 and case['hinges']['pivot_height']==19.3
     assert case['boards']['main_bottom_H']==3.9
     for path in [Path(__file__),HERE/'display-hinge-study.json',HERE/'display-part-heights.json',HERE/'draw_cooler.py',
-                 ROOT/'reference/lattepanda/mu-ultra-edp-pinout.json']:
+                 ROOT/'reference/lattepanda/mu-ultra-edp-pinout.json',HERE/'display_grips.py',HERE/'display-grip-hardware.json',HERE/'display_grip_checks.py']:
         sources[str(path.relative_to(ROOT))]=sha(path)
     new,p=geometry();fixed=[];sweep=[];internal=[]
     physical=[q for q in original if not q.get('service') and q['group'] not in ['keepout','changes']]
@@ -206,6 +193,7 @@ def main():
         for i,n in enumerate(new):
             for q in new[i+1:]:
                 if n['name'].endswith('-space') and q['name'].endswith('-space'):continue
+                if display_grips.allocated_liner_overlap(n,q):continue
                 if angle and n.get('moving',False)==q.get('moving',False):continue
                 # The axis-aligned circular envelope is itself unchanged by
                 # the lid rotation. Its relative grip fit is checked at zero.
@@ -213,6 +201,7 @@ def main():
                 v,where=overlap(pose(n,angle)['shape'],pose(q,angle)['shape'])
                 if v>.01:internal.append({'angle':angle,'new':n['name'],'part':q['name'],'overlap_mm3':round(v,4),'where':where})
         if angle%20==0:print('opening',angle,flush=True)
+    hardware=display_grip_checks.evaluate(saved,original,new,case,pose,overlap)
     heights=height_screen(p)
     lengths=np.linalg.norm(np.diff(p,axis=0),axis=1)
     stations=np.r_[0,np.cumsum(lengths)]
@@ -223,7 +212,7 @@ def main():
     pitch=c['fixed_anchor_xyH'][0]-c['lid_anchor_xyH_closed'][0]
     assert abs(pitch-c['anchor_grip_length_mm']-length)<1e-9,'free flex length excludes both half-grips'
     report={'date':c['date'],'source_hashes':sources,'configuration':c,
-            'static_solid_conflicts':fixed,'opening_solid_conflicts':sweep,'internal_solid_conflicts':internal,'height_screen':heights,
+            'static_solid_conflicts':fixed,'opening_solid_conflicts':sweep,'internal_solid_conflicts':internal,'height_screen':heights,'mounting_hardware':hardware,
             'internal_check_scope':'Common-frame pairs and pairs with the rotation-invariant axis cylinder are checked once. Other moving-versus-fixed pairs use the full opening sample range. Adjacent volumes representing the same continuous cable are not treated as independent physical parts.',
             'base_centerline_length_mm':round(float(lengths.sum()),3),
             'sampled_minimum_base_centerline_radius_mm':round(sampled_radius,3),
@@ -233,7 +222,7 @@ def main():
             'outer_helix_geometric_extra_length_mm':math.sqrt(length*length+(r*angle)**2)-length,
             'helix_note':'Illustrative outer path at 1.5 mm radius with uniformly distributed twist. This is not a material strain or fatigue prediction; actual wire lay, sliding, slack and strain concentration are unknown.',
             'proposed_case_reliefs':case_changes,'saved_full_case_changed':False,
-            'proposed_geometry_solid_clear':not fixed and not sweep and not internal,
+            'proposed_geometry_solid_clear':not fixed and not sweep and not internal and hardware['nominal_hardware_geometry_pass'],
             'component_height_screen_clear':not heights['unverified_height_limits'] and not heights['known_height_clearance_conflicts'] and all(v['height'] is not None and v['gap_mm']>=0 for v in heights['flat_fanout_crossings']),
             'full_harness_length_mm':None,'physical_fit_verified':False,'manufacturing_ready':False}
     out=HERE/'display-hinge-checks.json';out.write_text(json.dumps(report,indent=2)+'\n')
@@ -247,7 +236,8 @@ def main():
     from draw_cooler import render
     nearby=[q for q in original if not q.get('moving') and q['group'] in ['boards','cooling','wiring','supports'] and not q['name'].startswith('keyboard')]
     render(nearby+new,HERE/'views/display-base-route.png','display cable space / proposed anchors / panel end unconfirmed',(.1,-.3,1.5),(1550,1050),focus=((233,-30,15),69))
-    crop=box(129,-18,0,109,36,34);context=[]
+    display_grip_checks.draw(original,new,pose,render,HERE)
+    crop=box(129,-18,0,123,36,34);context=[]
     for q in physical:
         if q.get('moving') or q['name'] in ['base-floor','base-walls','deck']:
             if not bbox_overlap(q['shape'],crop):continue
@@ -259,11 +249,12 @@ def main():
     dest=HERE/'exports/display-hinge-study.step'
     export_step(compound(q['shape'] for q in new+context),dest)
     reopened=cq.importers.importStep(str(dest)).val();assert reopened.isValid()
-    outputs=['views/display-base-route.png',*[f'views/display-hinge-{a}.png' for a in [0,105,maximum]],'exports/display-hinge-study.step']
+    outputs=['views/display-base-route.png',*[f'views/display-hinge-{a}.png' for a in [0,105,maximum]],'exports/display-hinge-study.step','views/display-base-grip.png','views/display-lid-grip.png','views/display-grips-and-guard.png']
     report['outputs']={name:sha(HERE/name) for name in outputs};report['STEP_reopens']=True;report['STEP_solids']=len(reopened.Solids())
     for path,h in sources.items():assert sha(ROOT/path)==h,path
     out.write_text(json.dumps(report,indent=2)+'\n')
-    print('saved cable study, four views and reopened STEP',flush=True)
+    print('hardware geometry pass',hardware['nominal_hardware_geometry_pass'],flush=True)
+    print('saved cable study, seven views and reopened STEP',flush=True)
 
 
 if __name__=='__main__':main()

@@ -1,8 +1,8 @@
 # display cable around the hinge
 
 this is a partial route from the Mu Ultra toward the lid. it includes the
-space for the cable, two strain-relief concepts and the rear openings they
-would need. the panel connector position and the finished harness are not
+space for the cable, two removable lined jaws, their mounting hardware and
+a rear cable guard. the panel connector position and the finished harness are not
 confirmed, so there is no full cable length or released cable drawing yet.
 
 ![the proposed cable path beside the Mu and around the rear connectors](views/display-base-route.png)
@@ -41,8 +41,10 @@ the proposed fixed grip is centered at X225, Y-15, H19.3. the lid grip is
 at X163 on the same hinge axis when closed. their centers are 62 mm apart;
 the two 12 mm grips leave 50 mm of cable free between their inner edges.
 the lid tail stays straight through its grip and for another 2 mm before
-the first bend. the clamps are split concepts for a soft lined grip.
-their liners, fasteners, grip pressure and mounting strength are unfinished.
+the first bend. the jaws now have flush cap screws, reinforcement mounts and replaceable
+lining. the lining currently clears the nominal cable; its gripping
+pressure and pull retention still need establishing with the real loom.
+[mounting and removal details](display-grips.md)
 
 the cable centerline on the hinge axis stays in the same place as the lid
 rotates. the cable material still twists. over the 0 to 135 degree study
@@ -73,16 +75,18 @@ the complete case export still has its previous wall and deck geometry.
 
 | proposed cut | installed extent, mm |
 | --- | --- |
-| rear deck opening | X130 to 173, Y-19 to -4.5, H23.5 to 25.3 |
+| rear deck opening | X130 to 173, Y-19 to 0.6, H23.5 to 25.3 |
 | opening for the lid-side anchor and tail | X135 to 173, Y-18.1 to -16.6, H12.25 to 24.25 |
 | inner wall relief beside the axis section | X161 to 236, Y-17.0 to -16.7, H17.2 to 21.4 |
+| removable guard opening | X173.8 to 244.2, Y-18.1 to -16.5, H13.8 to 24.0 |
 
-the last cut removes 0.2 mm from the existing inner wall face, leaving
-1.0 mm of wall outside the through-opening. the grip has an open rear
-profile rather than requiring a deeper pocket behind the cable. edge
-rounding, a cover or boot over the opening, pull retention and structural
-strength still need designing around the selected harness. no extra front
-lip, rear platform or case height is added by this study.
+the narrow inner-wall relief leaves 1.0 mm of wall where the larger
+openings do not overlap it. the new guard opening reaches the underside
+of the deck so the upper liner can lift out with its cap. the guard has
+rounded edges and slides rearward for removal with the lid closed.
+the moving-tail opening remains unsealed. the actual lining, pull retention
+and a final cover for that moving section still need the finished harness.
+no front lip, rear platform or case height is added by this study.
 
 `display-hinge-checks.json` records solid contacts through 135 degrees in
 2 degree steps, with the 135 degree endpoint added, component-height crossings, source hashes and output
@@ -102,6 +106,8 @@ grip center. that is only part of the harness. the separate STEP is reopened and
   close-up views and separate STEP from the saved case.
 - `display-hinge-study.json` records the cable-space assumptions and anchor
   datums. the construction details also live in the Python source.
+- `display-grips.md`, `display_grips.py` and `display_grip_checks.py` cover
+  the mounting hardware, protective lining, guard and service checks.
 - `display-part-heights.json` records five exact-part height limits used
   in the route check, separately from assembly allowances.
 - `exports/display-hinge-study.step` contains the partial cable geometry,

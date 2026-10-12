@@ -59,14 +59,17 @@
     "mechanical/flush-case/lid_stop_checks.py": "2783639c3ce3cdcb4605cfd87bcf96e19043931888cd501726e0652032d434e5",
     "mechanical/flush-case/lid-stop-hardware.json": "c90308731b8dd87e7506447d592d8662fe2192ba7cca93159ce7c2badb964cf5",
     "mechanical/flush-case/display-part-heights.json": "fdc11f6b9ce2467b0b0cb8ae7ff7d65ab53d32ec9228db689b719b59bb525ae6",
-    "mechanical/flush-case/display_hinge_study.py": "0bd148052f9a35db41b579bb35b937c78cf5eb16991c8d0aa7427ce632b6336c",
-    "mechanical/flush-case/display-hinge-study.json": "1cf657b78aba4dbe0a7fd53b1d4f528f499e779bc4c02a8a2eaf0ea4968eda8b",
+    "mechanical/flush-case/display_hinge_study.py": "dae6c894e166881ede799a55a8faad0939245cc5d17d382b1bc27e9a44a10c7a",
+    "mechanical/flush-case/display-hinge-study.json": "ed83e7ab23dec4f3b4d49b658289c13bdb0defbb2abbf8441b68537fb9418266",
     "mechanical/flush-case/draw_cooler.py": "28f3c04c99a8f7a99b329021df7ce4976643cff860408026a3bdb5e12ba2cf51",
-    "reference/lattepanda/mu-ultra-edp-pinout.json": "0a4a7cf0dbffe99e6d5ba72d1b2ec9a668df2130200a0e55e82798d3c65e12f7"
+    "reference/lattepanda/mu-ultra-edp-pinout.json": "0a4a7cf0dbffe99e6d5ba72d1b2ec9a668df2130200a0e55e82798d3c65e12f7",
+    "mechanical/flush-case/display_grips.py": "c45518f17b0ea4bc628e5eb01911af0b8218e3e58e81a56792435f25381c0f66",
+    "mechanical/flush-case/display-grip-hardware.json": "64d242b046d893eb807175dfe744788756ec014de130b832a20f64e782fac998",
+    "mechanical/flush-case/display_grip_checks.py": "0ff17ab3d20a74cc0e6ed1a20853980c2d6caa47e1d69b3b18f041a34cc11132"
   },
   "configuration": {
     "date": "2026-10-11",
-    "status": "partial cable-space and strain-relief study; cable construction and panel end are unconfirmed",
+    "status": "partial display harness study with removable grip hardware and a rear cable guard",
     "coordinate_frame": "installed X, Y and height above the base bottom, in mm",
     "source_center_PCB_sha256": "1f8469644c7f396e62069525d7b60a98bafe331bfb508eb586e19875fcdce00a",
     "module_connector_body_bounds_xyH": [
@@ -115,7 +118,7 @@
     ],
     "opening_step_degrees": 2,
     "opening_basis": "User-selected 135 degree opening, matching the saved stop prototype. Loads and the assembled opening tolerance still need qualification.",
-    "anchor_basis": "Split, lined clamp concepts with separate fixed and moving supports. Their dimensions are study geometry; material, preload, mounting hardware, pull strength and cable-crush limits are unqualified.",
+    "anchor_basis": "Split metal jaw prototypes with flush screws, reinforcement mounts and removable lining. Cable compression, pull retention and mounting loads still need qualification.",
     "panel_endpoint": null,
     "full_harness_length_mm": null,
     "conductor_map_complete": false,
@@ -127,7 +130,7 @@
     "lid_tail_straight_before_bend_mm": 8,
     "case_changes_scope": "The reliefs are applied only to the separate display-hinge study, not to the saved full case.",
     "grip_bore_diameter_mm": 3.7,
-    "grip_liner_status": "Fit the liner to the measured cable and supplier compression limit; no clamping pressure is established by the study."
+    "grip_liner_status": "3.7 mm outside / 3.1 mm inside split lining prototype around the 3 mm cable budget. It has 0.1 mm diametral clearance and is not a qualified friction clamp."
   },
   "static_solid_conflicts": [],
   "opening_solid_conflicts": [],
@@ -321,6 +324,267 @@
     "known_height_clearance_conflicts": [],
     "flat_fanout_crossings": []
   },
+  "mounting_hardware": {
+    "driver_access": [
+      {
+        "fastener": "display-base-cap-screw-0",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck"
+        ],
+        "driver_origin_xyH": [
+          222,
+          -8.5,
+          22.2
+        ],
+        "local_direction_H": 1
+      },
+      {
+        "fastener": "display-base-cap-screw-1",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck"
+        ],
+        "driver_origin_xyH": [
+          228,
+          -8.5,
+          22.2
+        ],
+        "local_direction_H": 1
+      },
+      {
+        "fastener": "display-base-mount-screw-0",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck",
+          "display-guard-screw-0",
+          "display-guard-screw-1",
+          "display-guard-washer-0",
+          "display-guard-washer-1",
+          "display-rear-guard"
+        ],
+        "driver_origin_xyH": [
+          216.5,
+          -8.5,
+          9.2
+        ],
+        "local_direction_H": 1
+      },
+      {
+        "fastener": "display-base-mount-screw-1",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck",
+          "display-guard-screw-0",
+          "display-guard-screw-1",
+          "display-guard-washer-0",
+          "display-guard-washer-1",
+          "display-rear-guard"
+        ],
+        "driver_origin_xyH": [
+          233.5,
+          -8.5,
+          9.2
+        ],
+        "local_direction_H": 1
+      },
+      {
+        "fastener": "display-lid-cap-screw-0",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck"
+        ],
+        "driver_origin_xyH": [
+          160,
+          -8.5,
+          16.4
+        ],
+        "local_direction_H": -1
+      },
+      {
+        "fastener": "display-lid-cap-screw-1",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck"
+        ],
+        "driver_origin_xyH": [
+          166,
+          -8.5,
+          16.4
+        ],
+        "local_direction_H": -1
+      },
+      {
+        "fastener": "display-lid-mount-screw-0",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck",
+          "lid-skin"
+        ],
+        "driver_origin_xyH": [
+          158,
+          -2.8,
+          32.3
+        ],
+        "local_direction_H": 1
+      },
+      {
+        "fastener": "display-lid-mount-screw-1",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck",
+          "lid-skin"
+        ],
+        "driver_origin_xyH": [
+          168,
+          -2.8,
+          32.3
+        ],
+        "local_direction_H": 1
+      },
+      {
+        "fastener": "display-guard-screw-0",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck"
+        ],
+        "driver_origin_xyH": [
+          178,
+          -10.5,
+          17.6
+        ],
+        "local_direction_H": 1
+      },
+      {
+        "fastener": "display-guard-screw-1",
+        "opening_deg": 105,
+        "remove_first": [
+          "deck"
+        ],
+        "driver_origin_xyH": [
+          239,
+          -3.5,
+          17.6
+        ],
+        "local_direction_H": 1
+      }
+    ],
+    "driver_conflicts": [],
+    "screw_extraction_conflicts": [],
+    "screw_extraction_travel_mm": 12,
+    "screw_extraction_step_mm": 0.5,
+    "cap_removal": [
+      {
+        "role": "base",
+        "opening_deg": 105,
+        "travel_mm": 8,
+        "step_mm": 0.5,
+        "local_direction_H": 1,
+        "removed_parts": [
+          "deck",
+          "display-base-anchor-cap",
+          "display-base-cap-screw-0",
+          "display-base-cap-screw-1",
+          "display-base-liner-upper"
+        ]
+      },
+      {
+        "role": "lid",
+        "opening_deg": 105,
+        "travel_mm": 8,
+        "step_mm": 0.5,
+        "local_direction_H": -1,
+        "removed_parts": [
+          "deck",
+          "display-lid-anchor-cap",
+          "display-lid-cap-screw-0",
+          "display-lid-cap-screw-1",
+          "display-lid-liner-lower"
+        ]
+      }
+    ],
+    "cap_removal_conflicts": [],
+    "guard_removal": {
+      "opening_deg": 0,
+      "rearward_travel_mm": 20,
+      "step_mm": 0.5,
+      "remove_first": [
+        "deck",
+        "display-guard-screw-0",
+        "display-guard-screw-1",
+        "display-guard-washer-0",
+        "display-guard-washer-1",
+        "display-rear-guard"
+      ],
+      "conflicts": [],
+      "sequence": "Open to 105 degrees, remove the deck and both guard screws/washers, then close the lid before sliding the guard rearward. Reopen to work on the jaws."
+    },
+    "added_reinforcement_material": [
+      {
+        "host": "rear-base-reinforcement",
+        "added_volume_mm3": 644.1557
+      }
+    ],
+    "added_material_conflicts": [],
+    "liner_fit": [
+      {
+        "part": "display-base-liner-lower",
+        "cable_overlap_mm3": 0,
+        "nominal_radial_gap_mm": 0.05,
+        "solids": 1,
+        "valid": true
+      },
+      {
+        "part": "display-base-liner-upper",
+        "cable_overlap_mm3": 0,
+        "nominal_radial_gap_mm": 0.05,
+        "solids": 1,
+        "valid": true
+      },
+      {
+        "part": "display-lid-liner-lower",
+        "cable_overlap_mm3": 0,
+        "nominal_radial_gap_mm": 0.05,
+        "solids": 1,
+        "valid": true
+      },
+      {
+        "part": "display-lid-liner-upper",
+        "cable_overlap_mm3": 0,
+        "nominal_radial_gap_mm": 0.05,
+        "solids": 1,
+        "valid": true
+      }
+    ],
+    "liner_fit_pass": true,
+    "liner_collision_scope": "The 0.3 mm cable-position allowance overlaps the lining inside its two defined jaws. Those exact pairs use the separate 3 mm nominal cable gauge; all other solid pairs remain checked.",
+    "mount_stack_mm": {
+      "cap_screw_nominal_engagement": 5.1,
+      "base_mount_nominal_engagement": 3,
+      "lid_mount_nominal_engagement": 3,
+      "guard_screw_nominal_engagement": 4.5,
+      "lid_mount_engagement_after_length_and_seating_budget": 2.46,
+      "lid_mount_tip_to_tongue_bottom_after_length_and_seating_budget": 0.46
+    },
+    "closed_outline_or_height_excess": [],
+    "component_height_screen": {
+      "unverified_component_height_screens": [],
+      "component_height_crossings": [],
+      "known_component_height_conflicts": [],
+      "assembly_height_reservations": [],
+      "front_courtyards_in_plan_bounds": 0
+    },
+    "nominal_hardware_geometry_pass": true,
+    "pull_retention_verified": false,
+    "cable_crush_limit_verified": false,
+    "manufacturing_ready": false,
+    "limits": [
+      "Nominal sampled movements do not prove continuous clearance or fit across manufacturing tolerances.",
+      "The lining currently has clearance; friction, compression, material and pull retention must be established with the selected cable.",
+      "Thread engagement does not include incomplete lead threads and does not establish joint strength.",
+      "The cable guard covers the straight section; the moving-tail opening is not sealed."
+    ]
+  },
   "internal_check_scope": "Common-frame pairs and pairs with the rotation-invariant axis cylinder are checked once. Other moving-versus-fixed pairs use the full opening sample range. Adjacent volumes representing the same continuous cable are not treated as independent physical parts.",
   "base_centerline_length_mm": 118.573,
   "sampled_minimum_base_centerline_radius_mm": 10.0,
@@ -427,17 +691,32 @@
     },
     {
       "part": "deck",
-      "removed_volume_mm3": 696.6,
+      "removed_volume_mm3": 959.76,
       "cut_bounds_construction_xyz": [
         [
           130.0,
-          4.5,
+          -0.6,
           23.5,
           173.0,
           19.0,
           25.3
         ]
       ]
+    },
+    {
+      "part": "base-walls",
+      "volume_before_mm3": 25844.0639,
+      "volume_after_mm3": 25051.5119
+    },
+    {
+      "part": "rear-base-reinforcement",
+      "volume_before_mm3": 17436.0756,
+      "volume_after_mm3": 18060.4275
+    },
+    {
+      "part": "rear-lid-backing-member",
+      "volume_before_mm3": 30706.6861,
+      "volume_after_mm3": 30666.1289
     }
   ],
   "saved_full_case_changed": false,
@@ -447,12 +726,15 @@
   "physical_fit_verified": false,
   "manufacturing_ready": false,
   "outputs": {
-    "views/display-base-route.png": "9e14eacf5225ffc392a02f04051ef6658ddbdbe18e54beb6a6a811f9f045342a",
-    "views/display-hinge-0.png": "d979af04a4a8d32028c606d2cdb280e21381850a6ea9063c6c41f61ffddced5b",
-    "views/display-hinge-105.png": "2fd30542ec728e1cbc8784a9a78b8c97940913565adab1fda64e62c256ac4bb6",
-    "views/display-hinge-135.png": "a210253067ee10b4dd0eeb95c947795b0a74c4ccd13f3791c1d4b69fe5157951",
-    "exports/display-hinge-study.step": "4c5e95519a1d6fe3b0de0b928deb9f144b5727f639aa8b612661604403230801"
+    "views/display-base-route.png": "39f0f90f3b12434a1f0f7e4059ed445d67565fb37e206d805393b900a99ce84f",
+    "views/display-hinge-0.png": "94525c518d1dcfd4926739866f4e92340b92508a86695106060b6f3871799452",
+    "views/display-hinge-105.png": "389ad0a4cce71d67ff6f816320c069cf58b25e42b90b24f999b2b418c140b520",
+    "views/display-hinge-135.png": "314b82e3ef6f69bea99cdc2aa2d7ebf9e670a3f3469611ef95a82e7c62ae69fb",
+    "exports/display-hinge-study.step": "c8284bf5c18892383ea652dab382efe899bcde97200b7bda9fd8d007b629b20a",
+    "views/display-base-grip.png": "b54a5fd0313365c9b59ea56290cb724acc2fc17196b0cf8271eaed7905f59829",
+    "views/display-lid-grip.png": "4ab590cdca814d22992dc94103b2798607fd4c34aba3f950bd4be95ff2087d28",
+    "views/display-grips-and-guard.png": "95f509b67fab2c1ad212ab1e83cbaefc3112254b881fcc6dd4f8b994bd3d73e7"
   },
   "STEP_reopens": true,
-  "STEP_solids": 15
+  "STEP_solids": 32
 }

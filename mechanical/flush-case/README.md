@@ -121,7 +121,8 @@ unmeasured 3.5 mm thickness. actual part measurements can change the
 required height. the thin keyboard support is a space reservation, not
 a qualified flat plate to place against its underside components. the
 [display-cable study](display-hinge.md) now covers a partial Mu-to-hinge
-route, separate grip concepts and their proposed rear openings. the full
+route, removable lined jaws, mounting hardware, a rear guard and their
+proposed openings. [grip and guard details](display-grips.md) the full
 case still needs those changes reconciled with a selected harness and
 the exact panel; its cable motion and strain relief are not qualified.
 
