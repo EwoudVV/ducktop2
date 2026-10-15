@@ -1,5 +1,10 @@
 # keyboard carrier and mounts
 
+15 october update: F190/F195 have been replaced on the working boards.
+their [local fit check](../../docs/hardware/aux-input.md) clears the carrier.
+the complete model and images on this page retain the 12 october PCB
+snapshot. the switch-pin measurement and physical load tests remain open.
+
 12 october 2026. the keyboard now has eight removable edge clips, four
 brackets to the case and a center stop. the carrier is a 1.2 mm stainless
 sheet with a separate 0.127 mm insulating film. this is still a fit
@@ -83,7 +88,7 @@ will stay stiff under typing or a palm load.
 
 ## fit issues to finish
 
-F190 and F195 need the complete fuse-and-holder height checked. the
+the following describes the old F190/F195 assemblies in this snapshot. the
 Keystone 3568 holder is nominally 7.37 mm high and the Littelfuse 297
 plastic fuse body is 8.8 mm above its blades. adding those gives 16.17 mm
 before tolerances, but the exact seating overlap still needs confirmation.

@@ -47,7 +47,7 @@ check the regulator ripple and load-step response on the assembled board.
 
 - R450 is Yageo RC0603FR-07100KL, 100k in 0603. R451 is RC0603FR-0710KL, 10k in 0603. both now have manufacturer and part-number fields in the schematic, board and generator.
 - U901 requires RP2350A A4 silicon. keep that requirement on the assembly order and confirm the supplied stepping; a quote for an unspecified RP2350A is insufficient.
-- F190 and F195 each mean two purchased items: Littelfuse 0297003.WXNV and Keystone 3568. keep the fuse and holder separate in the purchasing BOM.
+- F190 and F195 each use one Bel 0678H5000-02 SMD fuse. the old Littelfuse 0297003.WXNV and Keystone 3568 assemblies are removed. [AUX input details](aux-input.md) cover the current budget, footprint and fault-test requirements.
 - the three AKZYTUE 1160100 packs are already owned. their confirmed listing is B0FBRGNCJF; the supplier lists 100 x 60 x 11 mm. the replacement wiring and finished insulated pack envelope still need measurements.
 
 ## verification

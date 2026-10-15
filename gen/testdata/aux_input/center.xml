@@ -1,0 +1,346 @@
+<?xml version='1.0' encoding='utf-8'?>
+<export version="E">
+  <components>
+    <comp ref="C723">
+      <value>100n AUX eFuse dVdT approx 50ms at 24V</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM188R71H104KA93D" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>5667874a-e51a-575f-94ac-ae95505df49a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D190">
+      <value>SMCJ24CA bidirectional AUX surge clamp</value>
+      <footprint>Diode_SMD:D_SMC</footprint>
+      <fields>
+        <field name="Manufacturer">Vishay</field>
+        <field name="MPN">SMCJ24CA-E3/57T</field>
+        <field name="Footprint">Diode_SMD:D_SMC</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="D_TVS" description="Bidirectional transient-voltage-suppression diode" />
+      <property name="Manufacturer" value="Vishay" />
+      <property name="MPN" value="SMCJ24CA-E3/57T" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="diode TVS thyrector" />
+      <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>2a0fbc05-3bb9-551d-b535-7be28e514273</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D711">
+      <value>SS310 3A 100V AUX standby feed</value>
+      <footprint>Diode_SMD:D_SMA</footprint>
+      <fields>
+        <field name="Manufacturer">Diodes Incorporated</field>
+        <field name="MPN">SS310-13-F</field>
+        <field name="Footprint">Diode_SMD:D_SMA</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="D_Schottky" description="Schottky diode" />
+      <property name="Manufacturer" value="Diodes Incorporated" />
+      <property name="MPN" value="SS310-13-F" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="diode Schottky" />
+      <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>8b2a29a7-5cfe-5bf2-b3c2-007584d68990</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F190">
+      <value>5A AUX backup fuse: Bel 0678H5000-02</value>
+      <footprint>ducktop2:Bel_0678H_3912</footprint>
+      <datasheet>https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-0678h-series.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Bel Fuse</field>
+        <field name="MPN">0678H5000-02</field>
+        <field name="Footprint">ducktop2:Bel_0678H_3912</field>
+        <field name="Datasheet">https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-0678h-series.pdf</field>
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="Fuse" description="Fuse" />
+      <property name="Manufacturer" value="Bel Fuse" />
+      <property name="MPN" value="0678H5000-02" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="fuse" />
+      <property name="ki_fp_filters" value="*Fuse*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>bb3adc38-acd3-5eed-8840-288500083b92</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q13">
+      <value>CSD19537Q3 100V AUX reverse FET</value>
+      <footprint>ducktop2:CSD19537Q3_DQG</footprint>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">CSD19537Q3</field>
+        <field name="Footprint">ducktop2:CSD19537Q3_DQG</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Q_NMOS_123S_4G_5678D" part="Q_NMOS_123S_4G_5678D" description="N-channel power MOSFET with NexFET pinout: 1-3 source, 4 gate, unified drain land 5 (physical contacts 5-8)" />
+      <property name="Manufacturer" value="Texas Instruments" />
+      <property name="MPN" value="CSD19537Q3" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>7e642703-abf8-5eb9-b921-02faa5930a7e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+            <pin num="3" />
+            <pin num="4" />
+            <pin num="5" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R191">
+      <value>470k 1% AUX ADC top</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-07470KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor" />
+      <property name="Manufacturer" value="Yageo" />
+      <property name="MPN" value="RC0603FR-07470KL" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="R res resistor" />
+      <property name="ki_fp_filters" value="R_* ducktop2:Panasonic_ERJ8CW_10to16m_Center" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>fc3ffa3a-658d-5133-8abd-774745977cdd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R710">
+      <value>6.04k 1% AUX 3A current limit</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-076K04L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor" />
+      <property name="Manufacturer" value="Yageo" />
+      <property name="MPN" value="RC0603FR-076K04L" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="R res resistor" />
+      <property name="ki_fp_filters" value="R_* ducktop2:Panasonic_ERJ8CW_10to16m_Center" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>3a78a83d-9b15-5245-bfa2-8010f1f7f484</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U12">
+      <value>TPS26630RGER 3A AUX eFuse / surge cutoff</value>
+      <footprint>Package_DFN_QFN:Texas_RGE0024H_VQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias</footprint>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">TPS26630RGER</field>
+        <field name="Footprint">Package_DFN_QFN:Texas_RGE0024H_VQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Power_Management" part="TPS26630RGE" description="60V, 6A Power Limiting, Surge Protection Industrial eFuse, Adjustable Overvoltage cut-off, Active Current Limiting, VQFN-24" />
+      <property name="Manufacturer" value="Texas Instruments" />
+      <property name="MPN" value="TPS26630RGER" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="efuse protection switch" />
+      <property name="ki_fp_filters" value="Texas*RGE0024H*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>c3cd3ce8-ed6d-5144-a355-48259eb77bd8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+            <pin num="3" />
+            <pin num="4" />
+            <pin num="6" />
+            <pin num="7" />
+            <pin num="12" />
+            <pin num="11" />
+            <pin num="19" />
+            <pin num="20" />
+            <pin num="21" />
+            <pin num="5" />
+            <pin num="25" />
+            <pin num="8" />
+            <pin num="22" />
+            <pin num="23" />
+            <pin num="24" />
+            <pin num="17" />
+            <pin num="18" />
+            <pin num="15" />
+            <pin num="14" />
+            <pin num="16" />
+            <pin num="13" />
+            <pin num="10" />
+            <pin num="9" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <nets>
+    <net code="7" name="/AUX_DC_RAW" class="POWER_HI">
+      <node ref="F190" pin="1" pintype="passive" />
+    </net>
+    <net code="8" name="/AUX_FAULT_N" class="Default">
+      <node ref="U12" pin="14" pinfunction="~{FLT}_14" pintype="open_collector" />
+    </net>
+    <net code="9" name="/AUX_PGOOD" class="Default">
+      <node ref="U12" pin="16" pinfunction="PGOOD_16" pintype="output" />
+    </net>
+    <net code="457" name="/Power &amp; Battery/AON_RAW" class="Default">
+      <node ref="D711" pin="1" pinfunction="K_1" pintype="passive" />
+    </net>
+    <net code="461" name="/Power &amp; Battery/AUX_DC_DIV" class="Default">
+      <node ref="R191" pin="2" pintype="passive" />
+    </net>
+    <net code="462" name="/Power &amp; Battery/AUX_DC_FUSED" class="POWER_HI">
+      <node ref="D190" pin="1" pinfunction="A1_1" pintype="passive" />
+      <node ref="D711" pin="2" pinfunction="A_2" pintype="passive" />
+      <node ref="F190" pin="2" pintype="passive" />
+      <node ref="Q13" pin="5" pinfunction="D(5-8)_5" pintype="passive" />
+      <node ref="R191" pin="1" pintype="passive" />
+      <node ref="U12" pin="1" pinfunction="IN_1" pintype="power_in" />
+      <node ref="U12" pin="2" pinfunction="IN_2" pintype="passive" />
+    </net>
+    <net code="463" name="/Power &amp; Battery/AUX_DC_PROTECTED" class="POWER_HI">
+      <node ref="U12" pin="17" pinfunction="OUT_17" pintype="power_out" />
+      <node ref="U12" pin="18" pinfunction="OUT_18" pintype="passive" />
+    </net>
+    <net code="466" name="/Power &amp; Battery/AUX_EFUSE_BGATE" class="Default">
+      <node ref="Q13" pin="4" pinfunction="G_4" pintype="input" />
+      <node ref="U12" pin="3" pinfunction="B_GATE_3" pintype="output" />
+    </net>
+    <net code="467" name="/Power &amp; Battery/AUX_EFUSE_DRV" class="Default">
+      <node ref="U12" pin="4" pinfunction="DRV_4" pintype="output" />
+    </net>
+    <net code="468" name="/Power &amp; Battery/AUX_EFUSE_DVDT" class="Default">
+      <node ref="C723" pin="1" pintype="passive" />
+      <node ref="U12" pin="9" pinfunction="dVdT_9" pintype="passive" />
+    </net>
+    <net code="469" name="/Power &amp; Battery/AUX_EFUSE_ILIM" class="Default">
+      <node ref="R710" pin="1" pintype="passive" />
+      <node ref="U12" pin="10" pinfunction="ILIM_10" pintype="passive" />
+    </net>
+    <net code="470" name="/Power &amp; Battery/AUX_EFUSE_IN_SYS" class="POWER_HI">
+      <node ref="Q13" pin="1" pinfunction="S_1" pintype="passive" />
+      <node ref="Q13" pin="2" pinfunction="S_2" pintype="passive" />
+      <node ref="Q13" pin="3" pinfunction="S_3" pintype="passive" />
+      <node ref="U12" pin="5" pinfunction="IN_SYS_5" pintype="power_in" />
+    </net>
+    <net code="471" name="/Power &amp; Battery/AUX_EFUSE_OV" class="Default">
+      <node ref="U12" pin="7" pinfunction="OVP_7" pintype="input" />
+    </net>
+    <net code="473" name="/Power &amp; Battery/AUX_EFUSE_SHDN" class="Default">
+      <node ref="U12" pin="12" pinfunction="~{SHDN}_12" pintype="input" />
+    </net>
+    <net code="474" name="/Power &amp; Battery/AUX_EFUSE_UV" class="Default">
+      <node ref="U12" pin="6" pinfunction="UVLO_6" pintype="input" />
+    </net>
+    <net code="476" name="/Power &amp; Battery/AUX_PGTH" class="Default">
+      <node ref="U12" pin="15" pinfunction="PGTH_15" pintype="input" />
+    </net>
+    <net code="685" name="GND" class="Default">
+      <node ref="C723" pin="2" pintype="passive" />
+      <node ref="D190" pin="2" pinfunction="A2_2" pintype="passive" />
+      <node ref="R710" pin="2" pintype="passive" />
+      <node ref="U12" pin="11" pinfunction="MODE_11" pintype="input" />
+      <node ref="U12" pin="25" pinfunction="GND_25" pintype="passive" />
+      <node ref="U12" pin="8" pinfunction="GND_8" pintype="power_in" />
+    </net>
+    <net code="879" name="unconnected-(U12-IMON-Pad13)" class="Default">
+      <node ref="U12" pin="13" pinfunction="IMON_13" pintype="output+no_connect" />
+    </net>
+    <net code="880" name="unconnected-(U12-NC-Pad19)" class="Default">
+      <node ref="U12" pin="19" pinfunction="NC_19" pintype="no_connect" />
+    </net>
+    <net code="881" name="unconnected-(U12-NC-Pad20)" class="Default">
+      <node ref="U12" pin="20" pinfunction="NC_20" pintype="no_connect" />
+    </net>
+    <net code="882" name="unconnected-(U12-NC-Pad21)" class="Default">
+      <node ref="U12" pin="21" pinfunction="NC_21" pintype="no_connect" />
+    </net>
+    <net code="883" name="unconnected-(U12-NC-Pad22)" class="Default">
+      <node ref="U12" pin="22" pinfunction="NC_22" pintype="no_connect" />
+    </net>
+    <net code="884" name="unconnected-(U12-NC-Pad23)" class="Default">
+      <node ref="U12" pin="23" pinfunction="NC_23" pintype="no_connect" />
+    </net>
+    <net code="885" name="unconnected-(U12-NC-Pad24)" class="Default">
+      <node ref="U12" pin="24" pinfunction="NC_24" pintype="no_connect" />
+    </net>
+  </nets>
+</export>

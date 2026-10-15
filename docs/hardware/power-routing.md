@@ -7,10 +7,16 @@ the copper in the working boards has not been changed by this check.
 
 ## before routing
 
-finish the case check around the current component positions, wire exits,
-mounting hardware and cooling. keep the center cutout, 1.5 mm seams and
-connector access clear. a connector's body height alone is not its installed
-height with wires and a release tool.
+settle the electrical interfaces and check the component, wire-exit and
+cooler envelopes before locking placement. detailed case brackets can follow
+that stable layout. keep checking the center cutout, 1.5 mm seams and
+connector access as the boards change. a connector's body height alone is
+not its installed height with wires and a release tool.
+
+F190 and F195 now use low-profile SMD backup fuses. their land pattern is
+saved, but the AUX routes are still open. size the copper and transitions
+for the fault-clearing requirements as well as normal load. a 5 A fuse
+does not provide a sharp 5 A current ceiling. [AUX limits and fault tests](aux-input.md)
 
 confirm the finished copper thickness, hole plating and eight-layer stackup
 with the board manufacturer before sizing the power pours and via banks.

@@ -1,5 +1,12 @@
 # flush case with an external radio
 
+15 october update: the working center and left PCBs now use low-profile
+AUX fuses. the [local replacement check](../../docs/hardware/aux-input.md)
+leaves 11.02 mm to the keyboard carrier at both sites. the complete case
+export below still uses the 12 october PCB snapshot with the old holders;
+it will need refreshing after the board layout is settled. its source-hash
+checks deliberately reject the changed working PCBs.
+
 12 october 2026. the lid and base now use the same 370 x 274 mm rounded
 outline. the front stays at Y256; the rear of the base moves from Y-26 to
 Y-18. that removes the old 8 mm rear ledge without adding a front lip.

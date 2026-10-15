@@ -86,6 +86,9 @@ def height(value: float, kind: str, url: str, note: str) -> dict:
 # Nominal dimensions are not promoted to maxima. No height is inferred from a
 # package name, a footprint, a STEP bounding box or an unreviewed substitute.
 MANUFACTURER_HEIGHTS = {
+    '0678H5000-02': height(3.18, "maximum",
+        'https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-0678h-series.pdf',
+        'Bel 0678H, July 2026, page 4: height 3.05 +/-0.13 mm. Plating/packaging code 02 is silver plated, tape and reel. Assembly allowance is separate.'),
     'C0603C100C5GACTU': height(.87, "maximum",
         'https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf',
         'C1003_C0G, 20 February 2025: page 5 maps the C0603C 10 pF, 50 V capacitance/voltage row to CF thickness; page 10 gives CF as 0.80 +/-0.07 mm.'),

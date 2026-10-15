@@ -71,15 +71,13 @@ def build_left_pd_sheet(sheet_symbol_uuid):
             "ssrx_p": "USBC1_SSRX_P", "ssrx_n": "USBC1_SSRX_N",
         }, x0=20.32, y0=50.8, rbase=2000, cbase=2000, ubase=2000, dbase=2100, ebase=2080, pp5v_net=usb_power.PP5V_NETS["J21"])
     pwrin.add_pd_selector(s)
-    # AUX/SOLAR input terminal, the raw terminal lives on the left board;
-    # the protection chain (fuse/TVS/reverse FET/efuse) stays on the center
-    # board where the VSYS OR-ing is. AUX_DC_RAW crosses FPC-1.
-    # Phase 5: the source-side fuse protects the FPC-1 AUX segment; the
-    # center board keeps its own F190 + protection chain downstream.
-    s.place("F195", "Fuse", "3A MINI AUX source fuse: Littelfuse 0297003.WXNV",
-            640.08, 50.8, footprint=FOOTPRINTS["Fuse_Pack_Blade_Mini"],
+    # F195 protects the AUX wire to the center board. F190 precedes the
+    # center TVS, reverse protection, eFuse and standby branch.
+    from aux_input_contract import FUSE_FOOTPRINT, FUSE_DATASHEET, fuse_properties
+    s.place("F195", "Fuse", "5A AUX source fuse: Bel 0678H5000-02",
+            640.08, 50.8, footprint=FUSE_FOOTPRINT,
             pin_nets={"1": ("AUX_DC_TERM", "local"), "2": ("AUX_DC_RAW", "hier")},
-            extra_props={"Manufacturer": "Littelfuse / Keystone", "MPN": "0297003.WXNV + 3568"})
+            extra_props=fuse_properties(), datasheet=FUSE_DATASHEET)
     s.place("J190", "Conn_01x02", "AUX/SOLAR protected screw terminal 6-22V nominal",
             680, 50.8, footprint=FOOTPRINTS["Terminal_01x02_5.08"],
             pin_nets={"1": ("AUX_DC_TERM", "local"), "2": ("GND", "local")},

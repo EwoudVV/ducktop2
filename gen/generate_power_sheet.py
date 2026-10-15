@@ -114,10 +114,11 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("VBUS_COMBINED", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D"})
 
-    s.place("F190", "Fuse", "3A MINI AUX input fuse: Littelfuse 0297003.WXNV", *c4.next(),
-            footprint=FOOTPRINTS["Fuse_Pack_Blade_Mini"],
+    from aux_input_contract import FUSE_FOOTPRINT, FUSE_DATASHEET, fuse_properties
+    s.place("F190", "Fuse", "5A AUX backup fuse: Bel 0678H5000-02", *c4.next(),
+            footprint=FUSE_FOOTPRINT,
             pin_nets={"1": ("AUX_DC_RAW", "hier"), "2": ("AUX_DC_FUSED", "local")},
-            extra_props={"Manufacturer": "Littelfuse / Keystone", "MPN": "0297003.WXNV + 3568"})
+            extra_props=fuse_properties(), datasheet=FUSE_DATASHEET)
     s.place("D190", "D_TVS", "SMCJ24CA bidirectional AUX surge clamp", *c4.next(), footprint=FOOTPRINTS["D_TVS"],
             pin_nets={"1": ("AUX_DC_FUSED", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Vishay", "MPN": "SMCJ24CA-E3/57T"})

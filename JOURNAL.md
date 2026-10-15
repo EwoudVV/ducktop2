@@ -5,6 +5,28 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-15: lower the aux fuses and check the input limits
+
+**Total time spent: 1 hour**
+
+went back to the electronics, starting with the two aux input fuses that were too tall under the keyboard. checked what each one protects before choosing replacements. the left fuse protects the wire between boards, and the center one is ahead of the surge protection, reverse-protection fet, electronic current limiter and standby feed.
+
+replaced the blade fuse holders with bel 0678H surface-mount fuses. checked the dc breaking rating, temperature curve, pad dimensions and startup considerations instead of choosing only by size. these need soldering to replace now. the maximum body height is 3.18 mm, with 3.48 mm allowed including assembly space, instead of the old 17.5 mm fuse-and-holder allowance.
+
+![the old holder pads and the new SMD footprint at F190](docs/images/journal/2026-10-15-aux-f190-footprint.png)
+
+kept both body centers where they were and updated the schematics, generators, part numbers and footprints together. removed the two short traces that only joined duplicate pads on the old center holder. moved the reference labels beside the new footprints and refilled the existing pours. the other components and routes stayed in place.
+
+the new fuses are rated 5 A, but that is backup protection, not a new operating-current setting. kept the electronic limiter at about 3 A and the initial firmware setting at 500 mA. added a check that rejects aux source settings above 3 A. also tested the input budget at several voltages, including the standby current and measurement tolerances, so the charger cannot use the whole allowance by itself.
+
+![the new F190 height allowance below the keyboard carrier](docs/images/journal/2026-10-15-aux-f190-height.png)
+
+checked both replacements against the saved case geometry. each leaves 11.02 mm to the keyboard carrier, without changing the case height. updated the component-height export and saved the local fit results. the complete case model still has its older pcb snapshot, so marked that clearly instead of rebuilding more case details while the board layout is still changing.
+
+both schematics still have zero electrical errors and match the boards. there are no new DRC findings, all 167 electrical calculations pass, and the seven new aux tests and 46 firmware host tests pass. the existing main-board routing is still unfinished.
+
+also wrote down the fault tests this needs before use. a fuse's breaking rating does not tell me how quickly it opens, and its typical melting figure is not a guaranteed total-clearing limit. the finished copper, startup pulses, hot operation and current-limited fault sources still need checking on hardware.
+
 # 2026-10-12: add keyboard mounts and check the space underneath
 
 **Total time spent: 2 hours**

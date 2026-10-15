@@ -98,6 +98,11 @@
 #ifndef DUCKTOP2_AUX_QUALIFIED_CURRENT_MA
 #define DUCKTOP2_AUX_QUALIFIED_CURRENT_MA 500u
 #endif
+/* Total AUX source budget, including the separately reserved standby load.
+ * The 5 A backup fuses do not authorize 5 A operating current. */
+#if DUCKTOP2_AUX_QUALIFIED_CURRENT_MA < 0 || DUCKTOP2_AUX_QUALIFIED_CURRENT_MA > 3000
+#error "AUX qualified source current must stay within 0..3000mA"
+#endif
 #ifndef DUCKTOP2_PD_ALLOW_20V
 #define DUCKTOP2_PD_ALLOW_20V 1
 #endif

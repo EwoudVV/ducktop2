@@ -11,6 +11,10 @@ def main():
     def case(name,defines=None,error=None,default_asserts=False):
         cases.append((name,defines or {},error,default_asserts))
     case('defaults_locked',default_asserts=True)
+    for current in [0, 500, 3000]:
+        case('aux_source_budget_'+str(current),{'AUX_QUALIFIED_CURRENT_MA':current})
+    for current in [-1, 3001, 5000]:
+        case('aux_over_budget_'+str(current),{'AUX_QUALIFIED_CURRENT_MA':current},'AUX qualified source current')
     case('legacy_3a',{'PACK_USABLE_CURRENT_MA':3000})
     case('legacy_8000_unqualified_rejected',{'PACK_USABLE_CURRENT_MA':8000},'legacy pack revision')
     case('legacy_throttle_raise_rejected',{'ISL_DC_PROCHOT_MA':8192},'legacy pack revision')

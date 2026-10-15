@@ -1,5 +1,11 @@
 # power revision
 
+15 october 2026: the [AUX fuse revision](aux-input.md) replaces F190/F195
+with low-profile Bel 0678H5000-02 parts and adds a 3 A firmware source-budget
+ceiling. the 500 mA initial setting stays unchanged. its separate record
+covers the new PCB hashes, unchanged DRC findings and local case fit.
+the 5 october table below remains the earlier full-power checkpoint.
+
 updated 5 october 2026. the BMS is routed. the 100 W main boards still need
 routing, the complete case fit and hardware tests before ordering.
 
@@ -91,8 +97,9 @@ the pack fuse is the 10 A Schurter HCF 3-101-051. finished pack dimensions,
 lead exits, strain relief and the complete closed assembly still need to
 agree with the case. the old 35 mm study does not establish the final height.
 
-next is the [power routing order](power-routing.md), after the case fit is
-settled. it covers the switching loops, Kelvin pickups, ground returns and
+next is the [power routing order](power-routing.md), once the electrical
+interfaces and required component/cable envelopes are settled. it covers
+the switching loops, Kelvin pickups, ground returns and
 checks for each stage. full-load temperatures, voltage drop, stability,
 source transitions and the actual cells remain hardware tests.
 

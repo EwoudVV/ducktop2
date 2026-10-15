@@ -27,6 +27,20 @@ int main(void)
         assert(ec_policy_pd_input_power_mw(&cfg,voltages[v],offered)<=floor*low/1000);
     }
     ec_policy_config_t bad=cfg;bad.input_shunt_min_permille=0;
+    /* AUX is measured locally. Both fuses carry charger plus standby current,
+     * so the raw standby reservation must be subtracted before IINDPM. */
+    const unsigned aux_voltages[]={7000,9000,12000,15000,20000,22000};
+    for(unsigned v=0;v<6;v++) for(unsigned offered=500;offered<=3000;offered+=100) {
+        unsigned mv=aux_voltages[v];
+        unsigned cmd=ec_policy_source_iindpm_ma(&cfg,EC_SOURCE_AUX,mv,offered);
+        if(!cmd) continue;
+        unsigned floor=mv*95/100-150;
+        unsigned reserve=(6500000u+floor-1)/floor;
+        unsigned high=(1025u*cmd+50000u+918u)/919u;
+        assert(cmd%4==0 && cmd>=200);
+        assert(high+reserve+cfg.iindpm_margin_ma<=offered);
+        assert(high<2500); /* below the conservative AUX eFuse low corner */
+    }
     assert(ec_policy_source_iindpm_ma(&bad,EC_SOURCE_PD1,20000,5000)==0);
     bad=cfg;bad.input_current_gain_max_permille=999;
     assert(ec_policy_source_iindpm_ma(&bad,EC_SOURCE_PD1,20000,5000)==0);

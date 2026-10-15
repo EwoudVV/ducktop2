@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<export version="E">
+  <components>
+    <comp ref="F195">
+      <value>5A AUX source fuse: Bel 0678H5000-02</value>
+      <footprint>ducktop2:Bel_0678H_3912</footprint>
+      <datasheet>https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-0678h-series.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Bel Fuse</field>
+        <field name="MPN">0678H5000-02</field>
+        <field name="Footprint">ducktop2:Bel_0678H_3912</field>
+        <field name="Datasheet">https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-0678h-series.pdf</field>
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="Fuse" description="Fuse" />
+      <property name="Manufacturer" value="Bel Fuse" />
+      <property name="MPN" value="0678H5000-02" />
+      <property name="Sheetname" value="PD1 Dual-Role" />
+      <property name="Sheetfile" value="left_pd.kicad_sch" />
+      <property name="ki_keywords" value="fuse" />
+      <property name="ki_fp_filters" value="*Fuse*" />
+      <sheetpath names="/PD1 Dual-Role/" tstamps="/c0b61100-162c-5129-baf8-026904cbc11a/" />
+      <tstamps>ed2c5ec8-11c8-589b-9a2b-5154c813919f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J190">
+      <value>AUX/SOLAR protected screw terminal 6-22V nominal</value>
+      <footprint>TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal</footprint>
+      <fields>
+        <field name="Manufacturer">Phoenix Contact</field>
+        <field name="MPN">1715022</field>
+        <field name="Footprint">TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)" />
+      <property name="Manufacturer" value="Phoenix Contact" />
+      <property name="MPN" value="1715022" />
+      <property name="Sheetname" value="PD1 Dual-Role" />
+      <property name="Sheetfile" value="left_pd.kicad_sch" />
+      <property name="ki_keywords" value="connector" />
+      <property name="ki_fp_filters" value="Connector*:*_1x??_*" />
+      <sheetpath names="/PD1 Dual-Role/" tstamps="/c0b61100-162c-5129-baf8-026904cbc11a/" />
+      <tstamps>aa4e1125-b871-5647-b705-aa91833f1e5f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <nets>
+    <net code="1" name="/AUX_DC_RAW" class="POWER_HI">
+      <node ref="F195" pin="2" pintype="passive" />
+    </net>
+    <net code="10" name="/PD1 Dual-Role/AUX_DC_TERM" class="POWER_HI">
+      <node ref="F195" pin="1" pintype="passive" />
+      <node ref="J190" pin="1" pinfunction="Pin_1_1" pintype="passive" />
+    </net>
+    <net code="220" name="GND" class="Default">
+      <node ref="J190" pin="2" pinfunction="Pin_2_2" pintype="passive" />
+    </net>
+  </nets>
+</export>
