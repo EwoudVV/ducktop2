@@ -1,5 +1,10 @@
 # power revision
 
+16 october 2026, placement: the [charger and Mu supply pass](converter-placement.md)
+moves the input shunt closer, adjusts two local capacitors and opens the
+Mu switching corridor. seven footprints changed; no routing changed.
+the native unconnected count and all physical DRC findings are unchanged.
+
 16 october 2026: fixed the [Mu power-good circuit](mu-power-good.md).
 removed the conflicting MCU pull-downs, derived PG from the actual 12 V
 rail and replaced the host-active gate with a Schmitt-input part. R2671

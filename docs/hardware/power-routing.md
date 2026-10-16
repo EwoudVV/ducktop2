@@ -1,9 +1,13 @@
 # routing the main-board power
 
-5 october 2026. this is the routing order for the saved 100 W circuit.
+16 october 2026. this is the routing order for the saved 100 W circuit.
 the main boards are still eight layers. the BMS is a separate four-layer
 board. the [current counts](power-revision.md) come from refilled copies;
 the copper in the working boards has not been changed by this check.
+
+the [converter placement pass](converter-placement.md) brings the charger
+input shunt closer and opens the Mu switching-node corridor. it changes
+seven footprint placements and adds no routing.
 
 ## before routing
 
@@ -53,9 +57,11 @@ opposite the FETs; keep the power FETs, inductor and local power capacitors
 on the same side.
 
 - input loop: C701 through C705, Q2600 drain and Q2601 source/ground.
-  use the closest capacitors for the switching return; C10 is bulk storage.
+  use the closest capacitors for the switching return. C10 is the local
+  1 uF bypass, now positioned closer to the low-side return.
 - output loop: C706 through C710, Q2603 drain and Q2602 source/ground.
-  C11/C2608/C2609 add storage but do not replace the local ceramic loop.
+  C11 is the local 1 uF bypass. C706 is the nearest 10 uF ceramic;
+  C2608/C2609 provide bulk storage.
 - SW1 joins Q2600 source, Q2601 drain and L1 pad 1. SW2 joins Q2603 source,
   Q2602 drain and L1 pad 2. keep these areas compact while retaining enough
   copper for current and heat.
@@ -65,6 +71,8 @@ on the same side.
   capacitors, not ground bypasses.
 - RS2600 is 20 milliohms. take separate sense connections from its pads to
   CSIP through R2607 and to CSIN. C2603 belongs at the controller end.
+  RS2600 is now at 219.8, 156.5 mm with its CHG_INPUT pad beside Q2600.
+  take the Kelvin pair from the shunt itself, not from the nearby FET feed.
 - RS2601 is 10 milliohms. CSOP connects to its VSYS end and CSON to CHG_SRN.
   use separate Kelvin pickups and keep C2604 local to U2. neither sense trace
   should carry the load current between Q25 and VSYS.
@@ -94,6 +102,12 @@ keep the input capacitor return beside Q2611's ground pads. keep the
 boost output loop between U750's output/PGND pads and the closest output
 capacitors. do not make those loops travel through a remote ground via or
 the bulk capacitors first. keep both switching-node areas small.
+
+C765/C766 are now vertical beside the north edge of U750, at 149.8/153.8,
+113.65 mm. the 3.05 mm copper-pad gap between them leaves room for the
+SW2 connection. this is placement space, not a specified track width or
+current rating. keep each bootstrap connection and switch return together;
+the returns to the IC are slightly longer than in the previous placement.
 
 RS750 and RS2670 are parallel 16 milliohm resistors. use broad, balanced
 connections to their common input and output ends. take the ISP/ISN sense

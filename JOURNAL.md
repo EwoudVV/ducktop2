@@ -5,6 +5,24 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-16: tighten up the charger and 12v placement
+
+**Total time spent: 1 hour**
+
+worked through the charger and 12v supply placement before starting their routing. compared the two switching stages with the datasheet layouts, especially the local capacitors, gate connections and current-sense paths. the charger input shunt was sitting way off to the side, beyond the capacitor bank.
+
+moved it beside the input fet. the gap between their copper pads is now 1.30 mm instead of 9.90 mm, and the direct distance to the controller's sense pin drops from 19.47 mm to 8.89 mm. moved the two nearby wi-fi control resistors underneath to make room, keeping them close to their buffer. also brought the small input bypass and the nearest output ceramic closer to their ground returns.
+
+![the charger input shunt and local capacitors before and after](docs/images/journal/2026-10-16-charger-placement.png)
+
+rotated the two bootstrap capacitors beside the mu's 12v regulator. their old arrangement left only 0.60 mm between the pads where the switching connection needs to pass. there is now 3.05 mm. the return connections are a little longer, so they still need careful routing beside the bootstrap connections. kept the inductor, fets, controller and feedback parts in place.
+
+![more room between the bootstrap capacitors and the 12v regulator](docs/images/journal/2026-10-16-mu-bootstrap-placement.png)
+
+checked the underside resistors against the current floor height, including the body-height and assembly allowance. they have 1.85 mm of space in that model. updated the component-position exports and routing notes. seven footprints moved, with no new tracks, vias or net changes. the board still matches the schematic, and the physical DRC findings and unconnected count are unchanged.
+
+also fixed the board-checking scripts repeatedly opening a separate python app and asking to reopen its windows on macOS. the batch tools now run without starting a desktop application. reran the exports and checked all 1,370 main-board component entries against the saved boards.
+
 # 2026-10-16: fix the mu power-good signal
 
 **Total time spent: 1 hour**

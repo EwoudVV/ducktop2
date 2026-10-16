@@ -8,11 +8,7 @@ import sys
 
 
 def main():
-    # The geometry export uses no window or text rendering. Batch builds can
-    # skip wx startup, which can wait on macOS session-restoration dialogs.
-    if '--headless' not in sys.argv[3:]:
-        import wx
-        app = wx.App(False)
+    # Board geometry does not need a GUI application.
     import pcbnew as p
     source, output = map(Path, sys.argv[1:3])
     root = Path(__file__).resolve().parents[1]

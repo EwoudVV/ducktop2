@@ -11,10 +11,6 @@ import math
 import sys
 from pathlib import Path
 
-if '--headless' not in sys.argv:
-    import wx
-    app = wx.App(False)
-    wx.Log.EnableLogging(False)
 import pcbnew as pcb
 import fpc_contract as interconnect
 

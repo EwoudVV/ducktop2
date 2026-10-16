@@ -88,8 +88,7 @@ def find_kicad_python() -> str:
 
 
 def native_board_stats(pcb: Path, python: str | None = None) -> dict:
-    code="""import json,sys,wx
-app=wx.App(False)
+    code="""import json,sys
 import pcbnew as p
 b=p.LoadBoard(sys.argv[1]);b.BuildConnectivity();tracks=list(b.GetTracks())
 print(json.dumps(dict(footprints=len(list(b.GetFootprints())),copper_layers=b.GetCopperLayerCount(),

@@ -2,8 +2,6 @@
 """Check the radio SMA slot datum and complete on-board copper lands."""
 from __future__ import annotations
 import json,sys
-import wx
-app=wx.App(False)
 import pcbnew as p
 
 def check(path):

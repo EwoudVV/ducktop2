@@ -161,8 +161,6 @@ ANCHORS.update({
 
 def flip_footprint_to_back(board_path: Path, ref: str) -> None:
     script = """
-import wx
-app = wx.App(False)
 import pcbnew
 import sys
 

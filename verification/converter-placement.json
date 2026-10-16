@@ -1,0 +1,201 @@
+{
+  "date": "2026-10-16",
+  "scope": "charger and Mu converter placement before routing",
+  "baseline_commit": "e170841e40164d759a2fc937e746f31749d11e84",
+  "source_sha256": {
+    "ducktop2-center.kicad_pcb": "08bf8f6bebc9bdc0bc439e0e6fa92caa2965a95ad72f240d9a47c8711c3cde4b",
+    "01_power_battery.kicad_sch": "e1b24054da5c09a5fa1d22b4e731b86b261b9e894d3e44ff047a768139f473ea",
+    "03_mu_carrier.kicad_sch": "9006cc7c4ae644d95b53932012702b83ffc26ec3b299f6be04636e1011fec1c5",
+    "gen/export_power_placement.py": "d83d6fa0a4e4c39c7043f51d2408086830661e46d882407b5780bcdc2227e288",
+    "mechanical/power-placement.csv": "7e3163e74073349fae3895fb2f9ececa4fc19f43b5db21bda6b61610a4bd784e",
+    "mechanical/power-placement.json": "52aa3aec76c323ed60a310a3674389e15f211e886efdfe0994af70886a03802a",
+    "mechanical/component-placement.csv": "b8d33f1e417e1a8a08373158bab803003778a5d8815ae29e00b393e3f5917166",
+    "mechanical/component-placement.json": "8bd9b3963f55cb46c47ceabf5ad9e4686a6bb2809313198e20bdec2a53f1f6ab",
+    "mechanical/case-prototype/assembly.json": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824"
+  },
+  "moves": {
+    "RS2600": {
+      "before": {
+        "x": 231.0,
+        "y": 155.5,
+        "rotation": 180.0,
+        "side": "F.Cu"
+      },
+      "after": {
+        "x": 219.8,
+        "y": 156.5,
+        "rotation": 180,
+        "side": "F.Cu"
+      }
+    },
+    "R199": {
+      "before": {
+        "x": 222.325,
+        "y": 155.55,
+        "rotation": 0.0,
+        "side": "F.Cu"
+      },
+      "after": {
+        "x": 217.2,
+        "y": 154.5,
+        "rotation": 0,
+        "side": "B.Cu"
+      }
+    },
+    "R198": {
+      "before": {
+        "x": 225.325,
+        "y": 155.55,
+        "rotation": 0.0,
+        "side": "F.Cu"
+      },
+      "after": {
+        "x": 220.5,
+        "y": 154.5,
+        "rotation": 0,
+        "side": "B.Cu"
+      }
+    },
+    "C10": {
+      "before": {
+        "x": 219.0,
+        "y": 161.75,
+        "rotation": -90.0,
+        "side": "F.Cu"
+      },
+      "after": {
+        "x": 218.9,
+        "y": 162.6,
+        "rotation": -90,
+        "side": "F.Cu"
+      }
+    },
+    "C706": {
+      "before": {
+        "x": 194.25,
+        "y": 154.5,
+        "rotation": -90.0,
+        "side": "F.Cu"
+      },
+      "after": {
+        "x": 194.25,
+        "y": 156.25,
+        "rotation": -90,
+        "side": "F.Cu"
+      }
+    },
+    "C765": {
+      "before": {
+        "x": 150.25,
+        "y": 114.5,
+        "rotation": 180.0,
+        "side": "F.Cu"
+      },
+      "after": {
+        "x": 149.8,
+        "y": 113.65,
+        "rotation": 90,
+        "side": "F.Cu"
+      }
+    },
+    "C766": {
+      "before": {
+        "x": 153.3,
+        "y": 114.5,
+        "rotation": 180.0,
+        "side": "F.Cu"
+      },
+      "after": {
+        "x": 153.8,
+        "y": 113.65,
+        "rotation": 90,
+        "side": "F.Cu"
+      }
+    }
+  },
+  "geometry_metrics_mm": {
+    "before": {
+      "input_shunt_to_high_fet_gap_mm": 9.9028,
+      "input_shunt_to_CSIN_pin_center_distance_mm": 19.4702,
+      "input_local_cap_positive_gap_mm": 0.625,
+      "input_local_cap_ground_gap_mm": 1.7837,
+      "output_local_10u_positive_gap_mm": 3.1135,
+      "output_local_10u_ground_gap_mm": 3.7908,
+      "mu_bootstrap_copper_gap_mm": 0.6,
+      "mu_boot1_cap_pin_center_distance_mm": 1.3946,
+      "mu_boot2_cap_pin_center_distance_mm": 1.9711,
+      "mu_boot1_return_pin_center_distance_mm": 1.7706,
+      "mu_boot2_return_pin_center_distance_mm": 1.4983
+    },
+    "after": {
+      "input_shunt_to_high_fet_gap_mm": 1.3,
+      "input_shunt_to_CSIN_pin_center_distance_mm": 8.8857,
+      "input_local_cap_positive_gap_mm": 0.525,
+      "input_local_cap_ground_gap_mm": 1.0363,
+      "output_local_10u_positive_gap_mm": 2.85,
+      "output_local_10u_ground_gap_mm": 2.9706,
+      "mu_bootstrap_copper_gap_mm": 3.05,
+      "mu_boot1_cap_pin_center_distance_mm": 2.124,
+      "mu_boot2_cap_pin_center_distance_mm": 1.8451,
+      "mu_boot1_return_pin_center_distance_mm": 3.1106,
+      "mu_boot2_return_pin_center_distance_mm": 3.5435
+    }
+  },
+  "measurement_basis": "Native copper-pad polygon gaps and separately named pad-center distances. These are not routed lengths, inductance estimates or measured electrical performance.",
+  "checks": {
+    "physical_drc_errors": 0,
+    "physical_drc_warnings": 344,
+    "new_or_changed_drc_findings": 0,
+    "native_schematic_parity_findings": 0,
+    "physical_pad_parity": true,
+    "baseline_native_stats": {
+      "footprints": 864,
+      "copper_layers": 8,
+      "native_airwires": 1786,
+      "segments": 4481,
+      "vias": 722,
+      "thickness_mm": 1.6,
+      "board_sha256": "b2b780faf281c06a2940c88d8174823a5c79ec153b4755bfd670f4e2c1cf520b"
+    },
+    "final_native_stats": {
+      "footprints": 864,
+      "copper_layers": 8,
+      "native_airwires": 1786,
+      "segments": 4481,
+      "vias": 722,
+      "thickness_mm": 1.6,
+      "board_sha256": "08bf8f6bebc9bdc0bc439e0e6fa92caa2965a95ad72f240d9a47c8711c3cde4b"
+    },
+    "all_tracks_and_vias_preserved": true,
+    "board_outline_and_holes_preserved": true,
+    "other_footprint_blocks_preserved": true,
+    "power_export_parts": 209,
+    "all_component_export_parts": 1370,
+    "headless_tool_regression_tests": 2
+  },
+  "backside_floor_screen": {
+    "refs": [
+      "R198",
+      "R199"
+    ],
+    "profile": "guided-harness-study",
+    "pcb_underside_mm": 5.1,
+    "floor_surface_mm": 2.4,
+    "resistor_body_max_mm": 0.55,
+    "assembly_allowance_mm": 0.3,
+    "clearance_mm": 1.85,
+    "complete_case_collision_check": false
+  },
+  "hardware_qualified": false,
+  "manufacturing_ready": false,
+  "sources": [
+    {
+      "url": "https://www.renesas.com/en/document/dst/isl9241-datasheet",
+      "document": "FN8945 rev 6, section 9"
+    },
+    {
+      "url": "https://www.ti.com/lit/ds/symlink/tps552882.pdf",
+      "document": "SLVSFC5, section 10"
+    }
+  ]
+}

@@ -254,8 +254,6 @@ def promote(candidate: Path, output: Path, replace: bool):
 
 def native_worker(board_path: Path, out: Path, library_root: Path):
     """This branch runs only under KiCad's Python. It saves paste copies only."""
-    import wx
-    app = wx.App(False)
     import pcbnew as p
     board = p.LoadBoard(str(board_path))
     board.BuildConnectivity()

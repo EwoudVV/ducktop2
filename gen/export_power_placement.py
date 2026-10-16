@@ -59,7 +59,7 @@ REVIEWED_GROUPS = {
             C760 C761 C762 C763 C764 C765 C766 C767 C768 C769 C770 C771 C772
             C773 C774 C775 L750 Q2610 Q2611 Q750 Q751 R2613 R2614 R750
             R751 R752 R753 R754 R755 R756 R757 R758 R759 R760 R761 R762
-            R763 R764 R765 R766 RS2670 RS750 U750
+            R763 R764 R765 R766 R2671 RS2670 RS750 U750
         """.split(),
         "ec_soft_start": ["C2640"],
     },
@@ -76,7 +76,7 @@ REVIEWED_GROUPS = {
         """.split(),
     },
 }
-EXPECTED_COUNTS = {"center": 180, "left": 14, "right": 14}
+EXPECTED_COUNTS = {"center": 181, "left": 14, "right": 14}
 
 
 def height(value: float, kind: str, url: str, note: str) -> dict:
@@ -621,8 +621,6 @@ def transform(point: list[float], placement: dict) -> list[float]:
 
 def read_native_board(name: str, source: Path, all_components: bool = False) -> dict:
     """Read one board per process; do not retain pcbnew objects across boards."""
-    import wx
-    app = wx.GetApp() or wx.App(False)
     import pcbnew as pcb
 
     def xy(point):

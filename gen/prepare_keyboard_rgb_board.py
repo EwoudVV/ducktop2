@@ -34,9 +34,6 @@ def main():
     args=parser.parse_args()
     if args.source.resolve()==args.output.resolve():
         raise ValueError('write a checked candidate before replacing the saved board')
-    import wx
-    app=wx.App(False)
-    wx.Log.EnableLogging(False)
     import pcbnew as p
     board=p.LoadBoard(str(args.source))
     board.SetCopperLayerCount(COPPER_LAYERS)

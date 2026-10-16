@@ -32,9 +32,6 @@ def main():
     parser.add_argument('--drc', type=Path, help='fresh native DRC JSON for this board')
     parser.add_argument('--erc', type=Path, help='fresh schematic ERC JSON')
     args = parser.parse_args()
-    import wx
-    app = wx.App(False)
-    wx.Log.EnableLogging(False)
     import pcbnew as p
     board = p.LoadBoard(str(args.board))
     board.BuildConnectivity()

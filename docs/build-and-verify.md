@@ -1,6 +1,6 @@
 # build and verify
 
-updated 8 september 2026. these are the entry points for checking the working
+updated 16 october 2026. these are the entry points for checking the working
 files. the latest results and known checker failures are in [current status](../README.md#build-status).
 
 ## before running anything
@@ -21,6 +21,11 @@ use the KiCad Python for pcbnew work. regular `python3` is used by the
 schematic generators and most text/netlist checks. some generator files use
 newer Python syntax, so the bundled KiCad Python is not interchangeable with
 system Python for every script.
+
+the batch PCB tools load `pcbnew` without creating a `wx.App`. they do not
+need desktop windows. starting a GUI application here can trigger macOS's
+Python window-recovery dialog and leave a check waiting for a click. keep
+these jobs headless; use KiCad itself to view the board.
 
 ## routing setup
 

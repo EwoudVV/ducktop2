@@ -129,8 +129,7 @@ def native_python(explicit=None):
 
 def export_board(pcb,stems,python=None,net_names=()):
  before=file_sha(pcb)
- code=r'''import sys,json,hashlib,wx
-app=wx.App(False);wx.Log.EnableLogging(False)
+ code=r'''import sys,json,hashlib
 import pcbnew as p
 path=sys.argv[1];stems=set(json.loads(sys.argv[2]));net_names=set(json.loads(sys.argv[3]));b=p.LoadBoard(path)
 if b is None:raise RuntimeError('could not load board')

@@ -17,11 +17,6 @@ def reference_key(reference):
 
 
 def main():
-    if "--headless" not in sys.argv:
-        import wx
-
-        app = wx.App(False)
-        wx.Log.EnableLogging(False)
     import pcbnew as p
 
     root = Path(__file__).resolve().parents[1]
