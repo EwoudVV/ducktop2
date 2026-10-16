@@ -1,0 +1,322 @@
+{
+  "date": "2026-10-16",
+  "scope": "input selection, always-on supply and battery-sense placement before routing",
+  "baseline_commit": "550a9fa7c2ff1ad32a1054297900d63221a4524a",
+  "source_sha256": {
+    "ducktop2-center.kicad_pcb": "3266a669d3637a95e8866cdf397072c111073357fbe58d01e4b2d77d72800995",
+    "ducktop2-center.kicad_pro": "487c13cd88c4eb504869d6792b64991314997f175774d6cc6e079cbb56b3dab3",
+    "ducktop2-center.kicad_dru": "8c877cd0cfec51570aa007e203c216d436ab25bad551bcb2ccaa7568ec20889d",
+    "01_power_battery.kicad_sch": "4f38aff85ae78554c2802552798127d454f6ca028307a05e7f003b9e6bbaef18",
+    "gen/generate_power_sheet.py": "c17bf424aed6ec3ee123aab7ba8c905935908f4b4fc7a013924117fb0f228fcc",
+    "gen/verify_power_revision.py": "f3cfff915814735c3da9fa81bfc9a9bd631e7ff768b7a3fa0d45d36b64427e9f",
+    "gen/verify_design_contracts.py": "b2963facfbcbc406611dab96dd41929119969b3e19fb339bc7e2d6dc56e20c1f",
+    "gen/generate_pin_review_table.py": "955853895db1bbbfb819f36eee1b2c8a96c1f0db930ac399003576fee249d0cc",
+    "gen/export_power_placement.py": "d83d6fa0a4e4c39c7043f51d2408086830661e46d882407b5780bcdc2227e288",
+    "mechanical/component-placement.csv": "233986479846154fd72ccf3b553ceb9cbffb1f530a916e4c70ad895d92becb5e",
+    "mechanical/component-placement.json": "81188ae9e5925353ab411d75ae8dbcf2856379895a9095a6d8bcfc9a113ea97b",
+    "mechanical/power-placement.csv": "55e7b6f4f4799ff54df4a643aaf91896df3254f17de8c6ad535b625f31d4619b",
+    "mechanical/power-placement.json": "d736b180358c7fae83afae3952a608edd74e7b11d7914f05a35a8f8ec1a5a0ef",
+    "mechanical/case-prototype/assembly.json": "4ba830c107577589b3e5d5dec1911d3a9d6cf9aec8bf1a33cfdd42c05caa7824"
+  },
+  "changes": {
+    "C2620": {
+      "before": {
+        "x": 146.058536,
+        "y": 159.780785,
+        "rotation_deg": 0.0,
+        "side": "B.Cu"
+      },
+      "after": {
+        "x": 143.5,
+        "y": 159.45,
+        "rotation_deg": 180,
+        "side": "B.Cu"
+      }
+    },
+    "C2621": {
+      "before": {
+        "x": 146.058536,
+        "y": 165.780785,
+        "rotation_deg": 0.0,
+        "side": "B.Cu"
+      },
+      "after": {
+        "x": 143.5,
+        "y": 165.45,
+        "rotation_deg": 180,
+        "side": "B.Cu"
+      }
+    },
+    "C2650": {
+      "before": {
+        "x": 146.058536,
+        "y": 171.780785,
+        "rotation_deg": 0.0,
+        "side": "B.Cu"
+      },
+      "after": {
+        "x": 143.5,
+        "y": 171.45,
+        "rotation_deg": 180,
+        "side": "B.Cu"
+      }
+    },
+    "R183": {
+      "before": {
+        "x": 199.910001,
+        "y": 181.675,
+        "rotation_deg": 90.0,
+        "side": "F.Cu"
+      },
+      "after": {
+        "x": 201.160001,
+        "y": 180.1,
+        "rotation_deg": 90,
+        "side": "F.Cu"
+      }
+    },
+    "C2686": {
+      "added": true,
+      "after": {
+        "x": 181.7,
+        "y": 156.3,
+        "rotation_deg": 180,
+        "side": "B.Cu"
+      }
+    },
+    "C2687": {
+      "added": true,
+      "after": {
+        "x": 186.3,
+        "y": 152.7,
+        "rotation_deg": 90,
+        "side": "B.Cu"
+      }
+    },
+    "C2688": {
+      "added": true,
+      "after": {
+        "x": 130.4,
+        "y": 182.0,
+        "rotation_deg": 0,
+        "side": "B.Cu"
+      }
+    }
+  },
+  "labels": {
+    "C747": "U15 VS2 value label corrected without changing its net",
+    "C743": "reference moved clear of the new C2688 footprint"
+  },
+  "geometry_metrics_mm": {
+    "before": {
+      "C2620": {
+        "vcap_pin_distance_mm": 1.650871506060063,
+        "anode_pin_distance_mm": 4.722094570158563,
+        "combined_straight_line_distance_mm": 6.372966076218626
+      },
+      "C2621": {
+        "vcap_pin_distance_mm": 1.650871506060063,
+        "anode_pin_distance_mm": 4.722094570158563,
+        "combined_straight_line_distance_mm": 6.372966076218626
+      },
+      "C2650": {
+        "vcap_pin_distance_mm": 1.650871506060063,
+        "anode_pin_distance_mm": 4.722094570158563,
+        "combined_straight_line_distance_mm": 6.372966076218626
+      },
+      "R183": {
+        "filtered_end_to_C181_pin1_mm": 3.296209944769886,
+        "filtered_end_to_gauge_pin9_mm": 2.0609479008456284
+      }
+    },
+    "after": {
+      "C2620": {
+        "vcap_pin_distance_mm": 1.8851806942572036,
+        "anode_pin_distance_mm": 1.8851806942572036,
+        "combined_straight_line_distance_mm": 3.770361388514407
+      },
+      "C2621": {
+        "vcap_pin_distance_mm": 1.8851806942572036,
+        "anode_pin_distance_mm": 1.8851806942572036,
+        "combined_straight_line_distance_mm": 3.770361388514407
+      },
+      "C2650": {
+        "vcap_pin_distance_mm": 1.8851806942572036,
+        "anode_pin_distance_mm": 1.8851806942572036,
+        "combined_straight_line_distance_mm": 3.770361388514407
+      },
+      "R183": {
+        "filtered_end_to_C181_pin1_mm": 1.4749999999999943,
+        "filtered_end_to_gauge_pin9_mm": 1.7984385588615523
+      }
+    },
+    "added_bypasses": {
+      "C2686": {
+        "supply_pin_distance_mm": 1.3255036401311917,
+        "side": "B.Cu"
+      },
+      "C2687": {
+        "supply_pin_distance_mm": 1.7714203481954918,
+        "side": "B.Cu"
+      },
+      "C2688": {
+        "supply_pin_distance_mm": 1.176062349538082,
+        "side": "B.Cu"
+      }
+    }
+  },
+  "measurement_basis": "Straight-line pad-center distances in board XY. These are not routed lengths. Opposite-side connections also require vias through the board.",
+  "checks": {
+    "physical_drc_errors": 0,
+    "physical_drc_warnings": 342,
+    "new_drc_findings": 0,
+    "resolved_drc_findings": 2,
+    "resolved_drc_types": {
+      "silk_overlap": 1,
+      "silk_over_copper": 1
+    },
+    "remaining_drc_types": {
+      "via_dangling": 174,
+      "track_dangling": 83,
+      "silk_overlap": 26,
+      "silk_over_copper": 59
+    },
+    "ignored_drc_checks": [
+      {
+        "description": "Footprint has no courtyard defined",
+        "key": "missing_courtyard"
+      },
+      {
+        "description": "Track endpoint not centered on via",
+        "key": "track_not_centered_on_via"
+      },
+      {
+        "description": "Tuning profile track geometries",
+        "key": "tuning_profile_track_geometries"
+      },
+      {
+        "description": "Footprint doesn't match symbol's footprint filters",
+        "key": "footprint_filters_mismatch"
+      },
+      {
+        "description": "Footprint component type doesn't match footprint pads",
+        "key": "footprint_type_mismatch"
+      },
+      {
+        "description": "Footprint doesn't match copy in library",
+        "key": "lib_footprint_mismatch"
+      }
+    ],
+    "native_schematic_parity_findings": 0,
+    "physical_pad_parity": {
+      "duplicate_board_refs": [],
+      "duplicate_schematic_refs": [],
+      "missing_components": [],
+      "extra_components": [],
+      "footprint_changes": [],
+      "value_changes": [],
+      "attribute_changes": [],
+      "pad_net_changes": [],
+      "missing_pin_pads": [],
+      "unexpected_pads": [],
+      "combined_drain_pins": [],
+      "split_net_names": {},
+      "merged_net_names": {},
+      "counts": {
+        "duplicate_board_refs": 0,
+        "duplicate_schematic_refs": 0,
+        "missing_components": 0,
+        "extra_components": 0,
+        "footprint_changes": 0,
+        "value_changes": 0,
+        "attribute_changes": 0,
+        "pad_net_changes": 0,
+        "missing_pin_pads": 0,
+        "unexpected_pads": 0,
+        "combined_drain_pins": 0,
+        "split_net_names": 0,
+        "merged_net_names": 0,
+        "schematic_components": 867,
+        "board_footprints": 867,
+        "physical_pads_checked": 3366
+      },
+      "passed": true
+    },
+    "erc": {
+      "verified_symbol_template": 406
+    },
+    "erc_classification_passed": true,
+    "power_wiring_checks": 496,
+    "electrical_calculations_passed": 173,
+    "pin_contract_rows": 2073,
+    "pin_contract_failures": 0,
+    "schematic_design_contracts_passed": true,
+    "power_regression_tests_passed": 17,
+    "battery_regression_tests_passed": 9,
+    "headless_tool_tests_passed": 2,
+    "final_native_stats": {
+      "footprints": 867,
+      "copper_layers": 8,
+      "native_airwires": 1792,
+      "segments": 4481,
+      "vias": 722,
+      "thickness_mm": 1.6,
+      "board_sha256": "3266a669d3637a95e8866cdf397072c111073357fbe58d01e4b2d77d72800995"
+    },
+    "tracks_vias_outline_and_holes_preserved": true,
+    "other_footprint_blocks_preserved": true,
+    "power_export_parts": 209,
+    "all_component_export_parts": 1373,
+    "full_case_collision_check_run": false,
+    "hardware_tests_run": false
+  },
+  "standby": {
+    "status": "PASS_WITH_UNMEASURED_LIMITS",
+    "active_limit_A": [
+      0.681341719077568,
+      1.0638297872340425
+    ],
+    "recharge_s": 0.011025190622967834,
+    "timer_s": [
+      0.0176256,
+      0.09659999999999999
+    ],
+    "unmeasured": [
+      "complete standby load, including both OLED modules",
+      "4.05 V minimum at the buck under the permitted source/load states",
+      "at least 80 percent buck efficiency over the standby envelope",
+      "effective capacitance and timer range over temperature and age",
+      "initial pass-FET case at or below 100 C and timer capacitors at or below 85 C",
+      "gate-loop stability, repeated source transitions and BMS/PROCHOT response",
+      "gate discharge including the200nC intrinsic-charge screen and fault overshoot",
+      "timer accumulation across repeated overload pulses; independent single pulses do not cover this",
+      "load-side short discharges the input reservoir without either upstream limiter controlling that initial pulse"
+    ]
+  },
+  "battery_path": {
+    "passed": true,
+    "checks": 9,
+    "scope": "component sizing and wiring; no operating or fabrication qualification"
+  },
+  "new_capacitor_floor_screen": {
+    "refs": [
+      "C2686",
+      "C2687",
+      "C2688"
+    ],
+    "body_max_mm": 0.9,
+    "underside_assembly_allowance_mm": 0.3,
+    "case_pcb_underside_z_mm": 5.1,
+    "case_floor_top_z_mm": 2.4,
+    "local_clearance_mm": 1.5,
+    "scope": "Height comparison against the existing case datum; no refreshed full case collision check."
+  },
+  "sources": [
+    "https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4418.pdf",
+    "https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4368.pdf",
+    "https://www.analog.com/media/en/technical-documentation/data-sheets/ltc4231.pdf",
+    "https://www.ti.com/lit/ds/symlink/lm74700-q1.pdf",
+    "https://www.ti.com/lit/ds/symlink/tps62933.pdf"
+  ],
+  "release_status": "Routing incomplete; source-transfer, startup, thermal and complete mechanical validation still required."
+}

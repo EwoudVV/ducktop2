@@ -379,10 +379,13 @@ def check(center, left=None, right=None):
     # SN74LVC1G08 SCES217AA 8.3/8.4.
     # LTC4418 Rev A figures 7/8: each selector needs its own local input bypass.
     bypass(center, "C2685", P + "SEL_STAGE2", "GRM188R71H104KA93D")
+    bypass(center, "C2686", "/PD2_VBUS_GATED", "GRM188R71H104KA93D")
+    bypass(center, "C2687", P + "ST2_USB_FET_COMMON", "GRM188R71H104KA93D")
+    bypass(center, "C2688", P + "VBUS_COMBINED", "GRM188R71H104KA93D")
     bypass(center, "C740", P + "MAIN_SEL_INTVCC", "GRM188R71H104KA93D")
     bypass(center, "C749", P + "ST2_SEL_INTVCC", "GRM188R71H104KA93D")
-    pins(center, "U15", {8: "GND", 10: P + "MAIN_SEL_INTVCC", 16: P + "SEL_STAGE2", 21: "GND"})
-    pins(center, "U16", {8: "GND", 10: P + "ST2_SEL_INTVCC", 21: "GND"})
+    pins(center, "U15", {8: "GND", 10: P + "MAIN_SEL_INTVCC", 15: P + "VBUS_COMBINED", 16: P + "SEL_STAGE2", 21: "GND"})
+    pins(center, "U16", {8: "GND", 10: P + "ST2_SEL_INTVCC", 14: P + "ST2_USB_FET_COMMON", 17: "/PD2_VBUS_GATED", 21: "GND"})
     if right is not None:
         bypass(right, "C2680", "/SYS_3V3", "GRT188R61H105ME13D")
         mpn(right, "U55", "TPS22975NDSGR")

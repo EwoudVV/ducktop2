@@ -5,6 +5,22 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-16: tidy up the input selection and standby supply
+
+**Total time spent: 1 hour**
+
+went through the input selectors, always-on supply and battery measurement circuit. found two connections on the second input selector that had no local bypass capacitors: its input and the common-source connection between the switching fets. added 100nf 50v capacitors for both, plus a small local output bypass for the first selector. put all three underneath, near the controller pins, and checked the space below them against the current case floor.
+
+![the three new selector bypass capacitors, with front copper shown faintly for context](docs/images/journal/2026-10-16-source-bypasses.png)
+
+also moved and rotated the three charge-pump capacitors in the standby circuit. they now line up with the two controller pins they connect to. the combined straight-line distance for each pair of connections drops from 6.37 mm to 3.77 mm, with a much shorter return. these are still placement measurements, since i haven't routed these circuits yet.
+
+![the three charge-pump capacitors before and after moving them](docs/images/journal/2026-10-16-standby-capacitors.png)
+
+moved the battery-gauge filter resistor closer to its capacitor, bringing that pad-to-pad distance from 3.30 mm to 1.48 mm. corrected a capacitor label that named the wrong selector stage and removed two old schematic notes from the previous battery-protection circuit. the battery return still goes through the current-sense resistor.
+
+updated the schematic, parts checks and component-position exports together. all 496 power wiring checks, 173 electrical calculations and 2,073 pin checks pass. the board matches the schematic and has no new physical DRC findings. four existing parts moved and three were added, with all tracks and vias kept. the new capacitors add six unrouted connections. startup, switching between supplies and temperatures still need testing once the board is built.
+
 # 2026-10-16: tighten up the charger and 12v placement
 
 **Total time spent: 1 hour**

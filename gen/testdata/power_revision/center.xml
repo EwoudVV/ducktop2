@@ -834,6 +834,96 @@
         <field name="MPN">TPS552882RPMR</field>
       </fields>
     </comp>
+    <comp ref="C2686">
+      <value>100n 50V U16 V1 local</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="DecouplingFor">U16 V1</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM188R71H104KA93D" />
+      <property name="DecouplingFor" value="U16 V1" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>70157c3d-8e01-51f3-86bc-62858b751471</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2687">
+      <value>100n 50V U16 VS1 local</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="DecouplingFor">U16 VS1</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM188R71H104KA93D" />
+      <property name="DecouplingFor" value="U16 VS1" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>bb3d5f81-682c-566b-a581-462a854dfa5f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2688">
+      <value>100n 50V U15 VOUT local</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="DecouplingFor">U15 VOUT</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM188R71H104KA93D" />
+      <property name="DecouplingFor" value="U15 VOUT" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>d53f75b2-7f0c-57f6-9558-8ed4178c18d7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
   </components>
   <nets>
     <net name="/AUDIO_AMP_EC_EN">
@@ -1363,6 +1453,7 @@
     </net>
     <net name="/PD2_VBUS_GATED">
       <node ref="U16" pin="17" />
+      <node ref="C2686" pin="1" pintype="passive" />
     </net>
     <net name="/PD_PROTECT_FAULT_N">
       <node ref="A1" pin="129" />
@@ -1645,6 +1736,7 @@
     </net>
     <net name="/Power &amp; Battery/ST2_USB_FET_COMMON">
       <node ref="U16" pin="14" />
+      <node ref="C2687" pin="1" pintype="passive" />
     </net>
     <net name="/Power &amp; Battery/ST2_USB_GATE">
       <node ref="U16" pin="13" />
@@ -1693,6 +1785,7 @@
       <node ref="R2607" pin="1" />
       <node ref="RS2600" pin="1" />
       <node ref="U15" pin="15" />
+      <node ref="C2688" pin="1" pintype="passive" />
     </net>
     <net name="/RADIO_DB_PWR_EN">
       <node ref="U4" pin="91" />
@@ -2010,6 +2103,9 @@
       <node ref="U750" pin="10" />
       <node ref="U750" pin="24" />
       <node ref="U750" pin="9" />
+      <node ref="C2686" pin="2" pintype="passive" />
+      <node ref="C2687" pin="2" pintype="passive" />
+      <node ref="C2688" pin="2" pintype="passive" />
     </net>
     <net name="unconnected-(A1-BIOS_SEL#-Pad133)">
       <node ref="A1" pin="133" />

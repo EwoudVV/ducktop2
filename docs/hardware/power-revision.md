@@ -1,5 +1,13 @@
 # power revision
 
+16 october 2026, input and standby: added three local selector bypasses,
+aligned the three charge-pump capacitors and moved the gauge filter resistor
+closer. [placement and checks](source-standby-placement.md) cover the saved
+changes. the center now has 867 footprints and 1,792 native unconnected
+items, including the six new capacitor pads. no tracks or vias changed.
+there are zero physical DRC errors, 342 existing warnings and no new
+findings. all 496 power-wiring checks and 173 electrical calculations pass.
+
 16 october 2026, placement: the [charger and Mu supply pass](converter-placement.md)
 moves the input shunt closer, adjusts two local capacitors and opens the
 Mu switching corridor. seven footprints changed; no routing changed.

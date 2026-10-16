@@ -9,6 +9,11 @@ the [converter placement pass](converter-placement.md) brings the charger
 input shunt closer and opens the Mu switching-node corridor. it changes
 seven footprint placements and adds no routing.
 
+the following [input and standby pass](source-standby-placement.md) adds
+three selector bypasses, brings the charge-pump capacitors across their
+controller pins and shortens the battery-gauge filter connection. these
+parts still need routing.
+
 ## before routing
 
 settle the electrical interfaces and check the component, wire-exit and
@@ -130,6 +135,20 @@ U15/U16 select the external input before the charger. preserve the separate
 raw feeds that can start the always-on supply before the EC enables a main
 input. standby's battery feed comes from VSYS so it passes through the
 charger battery shunt.
+
+C2686 bypasses U16 V1, C2687 bypasses its VS1 common-source node and C2688
+bypasses U15 VOUT. all three are on the back. put the transitions close to
+their front-side controller pins and keep their ground returns local.
+C747 belongs to U15 VS2; its old stage-two label was wrong.
+
+C2620/C2621/C2650 now sit directly above U2620/U2621/U2650. route each
+VCAP connection with its ANODE return, keeping the charge-pump loop close
+to the controller. do not return these capacitors to ground. the input
+and output sense connections must pick up at the corresponding FET pads.
+
+R183 now lines up with C181 beside U10. keep both gauge sense paths away
+from the switching nodes and take dedicated pickups from RS1. the ground
+side of that shunt is a measurement connection as well as a load return.
 
 U2660 uses RS2660/R2662 in parallel and Q2660 for standby current limiting.
 use balanced force connections to the resistor pair, dedicated sense

@@ -8,3 +8,8 @@ reviewed CSD17577Q3A_DNH footprint associations, C2685, and the selector's
 local regulator bypasses. the tests deliberately mutate
 these records to make sure a missing bypass, wrong rail, wrong package or
 wrong ordering code fails the contract.
+
+the center fixture also includes C2686, C2687 and C2688 from the native
+16 october 2026 export. these cover U16 V1/VS1 and U15 VOUT. the older
+battery-interface records remain here so both interface variants can be
+tested explicitly.

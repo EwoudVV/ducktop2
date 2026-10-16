@@ -10,6 +10,7 @@ from verify_power_revision import check
 
 FIXTURES = Path(__file__).parent / "testdata/power_revision"
 CAPS = ((0, "C2685"), (0, "C740"), (0, "C749"),
+        (0, "C2686"), (0, "C2687"), (0, "C2688"),
         (1, "C2682"), (1, "C2683"), (1, "C2684"),
         (2, "C2680"), (2, "C2681"))
 FETS = ("Q2600", "Q2601", "Q2602", "Q2603", "Q2610", "Q2611")
@@ -75,7 +76,7 @@ class PowerRevisionContracts(unittest.TestCase):
                     self.assert_ref_fails(ref)
 
     def test_ic_supply_pins_cannot_move_off_the_bypass_rail(self):
-        for board, ref, pins in ((0, "U15", ("10", "16")), (0, "U16", ("10",)),
+        for board, ref, pins in ((0, "U15", ("10", "15", "16")), (0, "U16", ("10", "14", "17")),
                                  (2, "U55", ("1", "2", "4")),
                                  (2, "U2016", ("5",)), (1, "U2006", ("5",)),
                                  (1, "U1800", ("1",)), (1, "U1803", ("1",))):

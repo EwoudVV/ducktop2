@@ -402,6 +402,8 @@ def load_contracts() -> None:
         ("C747", "ST2_MAIN_FET_COMMON"), ("C748", "SEL_STAGE2"),
         ("C749", "ST2_SEL_INTVCC"), ("C715", "ST2_SEL_TMR"),
         ("C746", "VBUS_COMBINED"), ("C2685", "SEL_STAGE2"),
+        ("C2686", "/PD2_VBUS_GATED"), ("C2687", "ST2_USB_FET_COMMON"),
+        ("C2688", "VBUS_COMBINED"),
     ):
         add(ref, 1, selector_net(net), "Selector bypass, hold-up, or timer capacitor.", selector)
         add(ref, 2, "GND", "Selector capacitor return.", selector)

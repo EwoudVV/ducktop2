@@ -290,7 +290,7 @@ def build(sheet_symbol_uuid):
         ("C743", "100n 50V USB VS1 local", "USB_MAIN_FET_COMMON", 475, 292.8, "C_100n", "GRM188R71H104KA93D"),
         ("C744", "100n 50V stage2 V2 local", "AUX_DC_PROTECTED", 515, 292.8, "C_100n", "GRM188R71H104KA93D"),
         ("C745", "100n 50V AUX VS2 local", "ST2_AUX_FET_COMMON", 555, 292.8, "C_100n", "GRM188R71H104KA93D"),
-        ("C747", "100n 50V stage2 VS1 local", "ST2_MAIN_FET_COMMON", 635, 292.8, "C_100n", "GRM188R71H104KA93D"),
+        ("C747", "100n 50V U15 VS2 local", "ST2_MAIN_FET_COMMON", 635, 292.8, "C_100n", "GRM188R71H104KA93D"),
         ("C748", "100n 50V stage2 out local", "SEL_STAGE2", 615, 275, "C_100n", "GRM188R71H104KA93D"),
         ("C749", "100n 50V stage2 INTVCC", "ST2_SEL_INTVCC", 475, 505, "C_100n", "GRM188R71H104KA93D"),
     ):
@@ -318,6 +318,16 @@ def build(sheet_symbol_uuid):
             pin_nets={"1": ("SEL_STAGE2", "local"), "2": ("GND", "local")},
             extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D",
                          "DecouplingFor": "U15 V2"})
+    for ref, role, net, kind, x, y in (
+        ("C2686", "U16 V1", "PD2_VBUS_GATED", "hier", 635, 520),
+        ("C2687", "U16 VS1", "ST2_USB_FET_COMMON", "local", 710, 520),
+        ("C2688", "U15 VOUT", "VBUS_COMBINED", "local", 685.8, 292.8),
+    ):
+        s.place(ref, "C", f"100n 50V {role} local", x, y,
+                footprint=FOOTPRINTS["C_100n"], text_right=True,
+                pin_nets={"1": (net, kind), "2": ("GND", "local")},
+                extra_props={"Manufacturer": "Murata", "MPN": "GRM188R71H104KA93D",
+                             "DecouplingFor": role})
 
     s.gnd(400, 120)
     # The switched rails are physically driven through passive external FETs;
@@ -352,8 +362,8 @@ def build(sheet_symbol_uuid):
     s.text(20, 286.48, "AUX_DC_ADC measures the protected input so firmware can detect droop and reduce charger input current.")
     s.text(20, 294.1, "RS2600 is the 20mOhm input shunt. RS2601 is the separate 10mOhm battery-current shunt; both need Kelvin routing.")
     s.text(20, 301.72, "Q25 is the ISL9241 battery-path FET. Battery standby comes through VSYS and the discharge shunt; disabling Mu keeps button wake available.")
-    s.text(20, 309.34, "U11 accepts about 8.45-13.57V nominal; 11mOhm RS10 gives 4.55A nominal and <=5.51A worst-case trips.")
-    s.text(20, 316.96, "The charger NTC pin receives a hardware inhibit from the BMS permit. The fixed 10k state is not a cell-temperature measurement.")
+    s.text(20, 309.34, "Pack protection is on the BMS. J2071 receives PACK_POS_FUSED and FG_VSS; return current reaches GND through RS1.")
+    s.text(20, 316.96, "CHG_ENABLE releases the NTC inhibit after qualified pack checks. The fixed 10k state is not a cell-temperature measurement.")
     s.text(20, 324.58, "STARTUP: keep Mu enable low and PROCHOT asserted. Read TCPC PD Status 0x40 and active PDO/RDO 0x34/0x35 before selecting a source.")
     s.text(20, 332.2, "Require the qualified VSYS threshold before Mu enable and confirm MU_12V_PG. Source, charger, watchdog or PG faults revoke enable; profile gates remain off until qualified.")
     s.text(20, 339.82, "The charger watchdog stays enabled. JEITA, source limits and throttle settings must be read back before the hardware gates are released.")

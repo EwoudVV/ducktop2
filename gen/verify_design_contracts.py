@@ -676,6 +676,10 @@ def check_battery_and_charger(components):
         expect_value_prefix(components, "C2685", "100n 50V", "U15 V2 local bypass")
         expect(net(components, "C2685", "1"), net(components, "U15", "16"), "U15 V2 bypass supply")
         expect(net(components, "C2685", "2"), "GND", "U15 V2 bypass return")
+        for ref, ic, pin in (("C2686", "U16", "17"), ("C2687", "U16", "14"), ("C2688", "U15", "15")):
+            expect_value_prefix(components, ref, "100n 50V", f"{ref} selector local bypass")
+            expect(net(components, ref, "1"), net(components, ic, pin), f"{ref} local supply")
+            expect(net(components, ref, "2"), "GND", f"{ref} local return")
 
     if prop(components, "U2", "MPN") == "ISL9241IRTZ":
         from verify_aon_power import inspect as inspect_aon
