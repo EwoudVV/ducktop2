@@ -1,11 +1,22 @@
 # power revision
 
+16 october 2026, main-board power placement: moved 31 existing parts,
+added five local capacitors and corrected the three TPD1S514 footprints
+from 0.5 mm to 0.4 mm pitch. revised both PD regulator capacitor banks
+and repaired the right CC control paths through their nearby capacitors.
+[placements, parts and checks](mainboard-power-placement.md) cover the
+combined work, including the system 3.3 V and left USB5 capacitor moves.
+all three boards have zero physical DRC errors and match their schematics.
+native unconnected counts are 1,798 center, 948 left and 331 right.
+all 545 power-wiring checks, 177 calculations and 2,079 center pin checks
+pass. routing and assembled-hardware testing still remain.
+
 16 october 2026, input and standby: added three local selector bypasses,
 aligned the three charge-pump capacitors and moved the gauge filter resistor
 closer. [placement and checks](source-standby-placement.md) cover the saved
-changes. the center now has 867 footprints and 1,792 native unconnected
+changes. that saved center had 867 footprints and 1,792 native unconnected
 items, including the six new capacitor pads. no tracks or vias changed.
-there are zero physical DRC errors, 342 existing warnings and no new
+that pass had zero physical DRC errors, 342 existing warnings and no new
 findings. all 496 power-wiring checks and 173 electrical calculations pass.
 
 16 october 2026, placement: the [charger and Mu supply pass](converter-placement.md)
@@ -29,7 +40,7 @@ the 5 october table below remains the earlier full-power checkpoint.
 updated 5 october 2026. the BMS is routed. the 100 W main boards still need
 routing, the complete case fit and hardware tests before ordering.
 
-## current main-board check
+## 5 october main-board check
 
 all three schematics have zero ERC errors. their numbered pads, nets,
 footprints, values and population attributes match the saved PCBs. KiCad's

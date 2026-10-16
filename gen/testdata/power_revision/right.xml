@@ -43,6 +43,158 @@
         <field name="MPN">TPS22975NDSGR</field>
       </fields>
     </comp>
+    <comp ref="U42">
+      <value>TPS25751AD USB-PD DRP controller</value>
+      <footprint>Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps25751a.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">TPS25751ADREFR</field>
+        <field name="PortPolicy">DRP;HOST_DATA_ONLY;5_9_15V_3A_20V_5A_SINK;5V_900MA_SOURCE;DEFAULT_RP</field>
+        <field name="EEPROMContract">U2012_PROGRAM_WITH_VERSIONED_TPS25751_IMAGE</field>
+        <field name="EEPROMSource">firmware/tps25751a/ducktop2_pd2_config.json</field>
+        <field name="ADCStrap">SAFE_MODE_ADDR_0X21</field>
+        <field name="Footprint">Package_DFN_QFN:Texas_REF0038A_WQFN-38-2EP_6x4mm_P0.4</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps25751a.pdf</field>
+        <field name="Description" />
+      </fields>
+      <libsource lib="TPS25751AD" part="TPS25751AD" description="USB Type-C and USB PD 3.2 controller with integrated source and sink power paths, AD variant, REF VQFN-40" />
+      <property name="Manufacturer" value="Texas Instruments" />
+      <property name="MPN" value="TPS25751ADREFR" />
+      <property name="PortPolicy" value="DRP;HOST_DATA_ONLY;5_9_15V_3A_20V_5A_SINK;5V_900MA_SOURCE;DEFAULT_RP" />
+      <property name="EEPROMContract" value="U2012_PROGRAM_WITH_VERSIONED_TPS25751_IMAGE" />
+      <property name="EEPROMSource" value="firmware/tps25751a/ducktop2_pd2_config.json" />
+      <property name="ADCStrap" value="SAFE_MODE_ADDR_0X21" />
+      <property name="Sheetname" value="PD2 Dual-Role" />
+      <property name="Sheetfile" value="right_pd.kicad_sch" />
+      <property name="ki_keywords" value="Texas Instruments TPS25751AD USB Type-C PD DRP" />
+      <sheetpath names="/PD2 Dual-Role/" tstamps="/37367af8-d35a-52ce-9a32-1764ce5de36b/" />
+      <tstamps>9b3cf5d3-352b-58a3-acd6-ea89403c11de</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+            <pin num="3" />
+            <pin num="4" />
+            <pin num="5" />
+            <pin num="6" />
+            <pin num="7" />
+            <pin num="8" />
+            <pin num="9" />
+            <pin num="10" />
+            <pin num="11" />
+            <pin num="12" />
+            <pin num="13" />
+            <pin num="14" />
+            <pin num="15" />
+            <pin num="16" />
+            <pin num="17" />
+            <pin num="18" />
+            <pin num="19" />
+            <pin num="39" />
+            <pin num="40" />
+            <pin num="38" />
+            <pin num="37" />
+            <pin num="36" />
+            <pin num="34" />
+            <pin num="32" />
+            <pin num="31" />
+            <pin num="30" />
+            <pin num="29" />
+            <pin num="28" />
+            <pin num="27" />
+            <pin num="26" />
+            <pin num="23" />
+            <pin num="20" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2060">
+      <value>10u 25V X7R</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM31CR71E106KA12L</field>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM31CR71E106KA12L" />
+      <property name="Sheetname" value="PD2 Dual-Role" />
+      <property name="Sheetfile" value="right_pd.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/PD2 Dual-Role/" tstamps="/37367af8-d35a-52ce-9a32-1764ce5de36b/" />
+      <tstamps>6bc1f645-5603-5bb8-833e-8ea972458304</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2061">
+      <value>4.7u 25V X7R</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM31CR71E475KA88L</field>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM31CR71E475KA88L" />
+      <property name="Sheetname" value="PD2 Dual-Role" />
+      <property name="Sheetfile" value="right_pd.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/PD2 Dual-Role/" tstamps="/37367af8-d35a-52ce-9a32-1764ce5de36b/" />
+      <tstamps>4815ad1c-6fbc-5b2f-a065-2aa2f9659968</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2693">
+      <value>4.7u 25V X7R</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM31CR71E475KA88L</field>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM31CR71E475KA88L" />
+      <property name="Sheetname" value="PD2 Dual-Role" />
+      <property name="Sheetfile" value="right_pd.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/PD2 Dual-Role/" tstamps="/37367af8-d35a-52ce-9a32-1764ce5de36b/" />
+      <tstamps>fe1cd2b7-6f77-54c5-9904-53c6ef3f2e12</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
   </components>
   <nets>
     <net name="/HDMI/HDMI_3V3_SWITCH_CT">
@@ -54,6 +206,7 @@
     </net>
     <net name="/MCU_3V3">
       <node ref="R2096" pin="1" />
+      <node ref="U42" pin="38" pinfunction="VIN_3V3_38" pintype="power_in" />
     </net>
     <net name="/MU_HOST_ACTIVE">
       <node ref="U55" pin="3" />
@@ -72,9 +225,11 @@
     </net>
     <net name="/PD2 Dual-Role/PD2_GPIO_ATTACH">
       <node ref="U2016" pin="2" />
+      <node ref="U42" pin="36" pinfunction="GPIO7_36" pintype="bidirectional" />
     </net>
     <net name="/PD2 Dual-Role/PD2_GPIO_DFP">
       <node ref="U2016" pin="1" />
+      <node ref="U42" pin="26" pinfunction="GPIO4/USB_P_26" pintype="bidirectional" />
     </net>
     <net name="/PD2 Dual-Role/PD2_HOST_ATTACHED">
       <node ref="U2016" pin="4" />
@@ -85,6 +240,7 @@
       <node ref="U721" pin="2" />
       <node ref="U721" pin="25" />
       <node ref="U721" pin="3" />
+      <node ref="U42" pin="20" pinfunction="PPHV_(20-22)_20" pintype="passive" />
     </net>
     <net name="/PD2_EFUSE_PG">
       <node ref="R2096" pin="2" />
@@ -121,9 +277,73 @@
       <node ref="U721" pin="26" />
       <node ref="U721" pin="4" />
       <node ref="U721" pin="5" />
+      <node ref="U42" pin="11" pinfunction="GND_11" pintype="power_in" />
+      <node ref="U42" pin="12" pinfunction="GND_12" pintype="power_in" />
+      <node ref="U42" pin="13" pinfunction="GPIO11_13" pintype="bidirectional" />
+      <node ref="U42" pin="14" pinfunction="GND_14" pintype="power_in" />
+      <node ref="U42" pin="19" pinfunction="GPIO3_19" pintype="bidirectional" />
+      <node ref="U42" pin="2" pinfunction="ADCIN1_2" pintype="input" />
+      <node ref="U42" pin="27" pinfunction="GPIO5/USB_N_27" pintype="bidirectional" />
+      <node ref="U42" pin="3" pinfunction="ADCIN2_3" pintype="input" />
+      <node ref="U42" pin="31" pinfunction="GND_31" pintype="power_in" />
+      <node ref="U42" pin="39" pinfunction="GND_39" pintype="power_in" />
+      <node ref="U42" pin="5" pinfunction="GPIO0/LD1_5" pintype="bidirectional" />
+      <node ref="U42" pin="6" pinfunction="GPIO1_6" pintype="bidirectional" />
+      <node ref="U42" pin="7" pinfunction="GPIO2/LD2_7" pintype="bidirectional" />
+      <node ref="C2060" pin="2" pintype="passive" />
+      <node ref="C2061" pin="2" pintype="passive" />
+      <node ref="C2693" pin="2" pintype="passive" />
     </net>
     <net name="unconnected-(U721-ITIMER-Pad7)">
       <node ref="U721" pin="7" />
+    </net>
+    <net code="1" name="/PD2 Dual-Role/PD2_CC1_SYS">
+      <node ref="U42" pin="28" pinfunction="CC1_28" pintype="bidirectional" />
+    </net>
+    <net code="2" name="/PD2 Dual-Role/PD2_CC2_SYS">
+      <node ref="U42" pin="29" pinfunction="CC2_29" pintype="bidirectional" />
+    </net>
+    <net code="3" name="/PD2 Dual-Role/PD2_DRAIN_THERMAL">
+      <node ref="U42" pin="15" pinfunction="DRAIN_15" pintype="passive" />
+      <node ref="U42" pin="30" pinfunction="DRAIN_30" pintype="passive" />
+      <node ref="U42" pin="40" pinfunction="DRAIN_40" pintype="passive" />
+    </net>
+    <net code="4" name="/PD2 Dual-Role/PD2_EEPROM_IRQ_N">
+      <node ref="U42" pin="18" pinfunction="I2Cc_IRQ_18" pintype="input" />
+    </net>
+    <net code="5" name="/PD2 Dual-Role/PD2_EEPROM_SCL">
+      <node ref="U42" pin="17" pinfunction="I2Cc_SCL_17" pintype="output" />
+    </net>
+    <net code="6" name="/PD2 Dual-Role/PD2_EEPROM_SDA">
+      <node ref="U42" pin="16" pinfunction="I2Cc_SDA_16" pintype="bidirectional" />
+    </net>
+    <net code="7" name="/PD2 Dual-Role/PD2_GPIO_FLIP">
+      <node ref="U42" pin="37" pinfunction="GPIO6_37" pintype="bidirectional" />
+    </net>
+    <net code="8" name="/PD2 Dual-Role/PD2_LDO1V5">
+      <node ref="U42" pin="4" pinfunction="LDO_1V5_4" pintype="power_out" />
+      <node ref="C2061" pin="1" pintype="passive" />
+      <node ref="C2693" pin="1" pintype="passive" />
+    </net>
+    <net code="9" name="/PD2 Dual-Role/PD2_LDO3V3">
+      <node ref="U42" pin="1" pinfunction="LDO_3V3_1" pintype="power_out" />
+      <node ref="C2060" pin="1" pintype="passive" />
+    </net>
+    <net code="10" name="/PD2 Dual-Role/PD2_PP5V_GATED">
+      <node ref="U42" pin="34" pinfunction="PP5V_(34-35)_34" pintype="power_in" />
+    </net>
+    <net code="11" name="/PD2_I2C_SCL">
+      <node ref="U42" pin="9" pinfunction="I2Ct_SCL_9" pintype="input" />
+    </net>
+    <net code="12" name="/PD2_I2C_SDA">
+      <node ref="U42" pin="8" pinfunction="I2Ct_SDA_8" pintype="bidirectional" />
+    </net>
+    <net code="13" name="/PD2_TCPC_IRQ_N">
+      <node ref="U42" pin="10" pinfunction="I2Ct_IRQ_10" pintype="open_collector" />
+    </net>
+    <net code="14" name="/PD2_VBUS_RAW">
+      <node ref="U42" pin="23" pinfunction="VBUS_IN_(23-25)_23" pintype="power_in" />
+      <node ref="U42" pin="32" pinfunction="VBUS_(32-33)_32" pintype="passive" />
     </net>
   </nets>
 </export>

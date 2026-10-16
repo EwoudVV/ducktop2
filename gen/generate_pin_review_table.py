@@ -2135,6 +2135,11 @@ def load_current_architecture_overrides() -> None:
             "Current JST connector symbols and board-ground contract")
 
 
+    for ref, rail in (("C2689", "/PD1_VBUS_RAW"), ("C2690", "/PD2_VBUS_RAW"), ("C2691", "/VSYS")):
+        add(ref, 1, rail, "Local standby input bypass.", "TI LM74700-Q1 supply and layout guidance")
+        add(ref, 2, "GND", "Standby input bypass return.", "TI LM74700-Q1 supply and layout guidance")
+
+
 def export_netlist() -> None:
     NETLIST.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(

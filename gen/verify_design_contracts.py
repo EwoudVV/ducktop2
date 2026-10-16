@@ -208,6 +208,11 @@ def rounded_pad_set(pads: list[tuple[str, float, float, float | None]]):
 
 
 def check_custom_footprint_sources() -> None:
+    from generate_tpd1s514_footprint import NAME as tpd_name
+    from verify_tpd1s514_footprint import validate as validate_tpd
+    tpd = validate_tpd((ROOT / "ducktop2.pretty" / (tpd_name + ".kicad_mod")).read_text())
+    if not tpd["passed"]:
+        fail("TPD1S514 YZ0012-C01 land pattern: " + "; ".join(tpd["errors"]))
     m2_standoff_path = (
         ROOT / "ducktop2.pretty" /
         "SMT_Standoff_M2_H2.5_C4_Tail2.7x1.5.kicad_mod"
@@ -1903,6 +1908,9 @@ def check_five_port_usb_c_architecture(components, pd_sheet: str = "Power Inputs
             expect(prop(components, f"U{base + 2}", "EnableState"),
                    "HS_OE_GND_NORMAL_OPERATION", f"{jref} mux enable contract")
         expect_contains(comp(components, f"U{base + 3}").value, "TPD1S514", f"{jref} VBUS OVP")
+        expect(comp(components, f"U{base + 3}").footprint,
+               "ducktop2:Texas_TPD1S514_YZ0012_1.99x1.29mm_P0.4mm",
+               f"{jref} TPD1S514 0.4mm ball-grid land pattern")
         expect(net(components, f"U{base + 3}", "B3"), local(f"J{jref[1:]}_VBUS"),
                f"{jref} protected connector VBUS")
         for pin in ("A4", "A9", "B4", "B9"):

@@ -1515,6 +1515,22 @@ def build_checks(values: dict[str, str], radio_values: dict[str, str],
     return checks
 
 
+def pd_regulator_capacitance_checks(values: NetlistValues, port: int) -> list[Check]:
+    """Upper capacitance corners; biased lower limits are reported separately."""
+    ref = "U41" if port == 1 else "U42"
+    result = []
+    for pin, name, ceiling in (("1", "LDO3V3", 25), ("4", "LDO1V5", 12)):
+        rail = values.pins[ref][pin]
+        caps = values.capacitors_on(rail)
+        if not caps:
+            raise ValueError(f"{ref}.{pin} has no fitted regulator capacitors")
+        upper = sum(capacitor(values, c) * (1 + values.tolerance(c)) * 1.15 for c in caps)
+        result.append(Check(f"PD{port} {name} capacitance upper corner", upper * 1e6,
+                            "uF", 0, ceiling,
+                            "all fitted rail capacitors; initial tolerance and +15% X7R temperature corner; no DC-bias reduction assumed"))
+    return result
+
+
 def render_analog_addendum(boards: dict[str, NetlistValues]) -> str:
     lines = ["", "## analog coverage and qualification limits", "",
              "these are calculations from native netlists and manufacturer order codes. "
@@ -1532,6 +1548,10 @@ def render_analog_addendum(boards: dict[str, NetlistValues]) -> str:
         ("center", "U6 VCC", ("C2360",), 4.7e-6),
         ("center", "U773 VCC", ("C2280",), 4.7e-6),
         ("left", "U1703 VCC", ("C1860",), 4.7e-6),
+        ("left", "PD1 LDO3V3", ("C2020",), 5e-6),
+        ("left", "PD1 LDO1V5", ("C2021", "C2692"), 4.5e-6),
+        ("right", "PD2 LDO3V3", ("C2060",), 5e-6),
+        ("right", "PD2 LDO1V5", ("C2061", "C2693"), 4.5e-6),
     ]:
         values=boards[board]
         nominal=sum(capacitor(values, ref) for ref in refs)
@@ -1726,6 +1746,8 @@ def main() -> None:
         left_values = component_values(left_netlist)
         checks = build_checks(center_values, component_values(radio_netlist))
         checks.extend(extended_checks(center_values, left_values, right_values))
+        checks.extend(pd_regulator_capacitance_checks(left_values, 1))
+        checks.extend(pd_regulator_capacitance_checks(right_values, 2))
         boards = {"center": center_values, "left": left_values, "right": right_values}
     report = (bq76922_report(checks, netlist) if bq76922_report
               else render_report(checks, netlist, radio_netlist))

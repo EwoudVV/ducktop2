@@ -46,7 +46,7 @@ REVIEWED_GROUPS = {
         """.split(),
         "standby": """
             C2620 C2621 C2622 C2650 C2651 C2660 C2661 C2662 C795 C796 C797
-            C798 C799 D2620 D711 Q2620 Q2621 Q2622 Q2623 Q2650 Q2660 R2620
+            C798 C799 C2689 C2690 C2691 D2620 D711 Q2620 Q2621 Q2622 Q2623 Q2650 Q2660 R2620
             R2661 R2662 R2663 R2664 R781 R795 R796 R797 R798 R799 RS2620
             RS2660 TP2660 TP2661 U2620 U2621 U2650 U2660 U718
         """.split(),
@@ -76,7 +76,7 @@ REVIEWED_GROUPS = {
         """.split(),
     },
 }
-EXPECTED_COUNTS = {"center": 181, "left": 14, "right": 14}
+EXPECTED_COUNTS = {"center": 184, "left": 14, "right": 14}
 
 
 def height(value: float, kind: str, url: str, note: str) -> dict:
@@ -86,6 +86,12 @@ def height(value: float, kind: str, url: str, note: str) -> dict:
 # Nominal dimensions are not promoted to maxima. No height is inferred from a
 # package name, a footprint, a STEP bounding box or an unreviewed substitute.
 MANUFACTURER_HEIGHTS = {
+    'TPD1S514-1YZR': height(.625, "maximum",
+        'https://www.ti.com/lit/ds/symlink/tpd1s514.pdf',
+        'SLVSCF6F, page 25, YZ0012-C01 drawing 4221703/A: 0.625mm maximum seated height. The ordering table maps TPD1S514-1YZR to this package.'),
+    'GRM31CR71E106KA12L': height(1.8, "maximum",
+        'https://ds.murata.com/simsurfing/mlcc.html?oripartnumbers=%5B%22GRM31CR71E106KA12L%22%5D&partnumbers=%5B%22GRM31CR71E106KA12%22%5D',
+        'Murata SimSurfing product table, updated 2 September 2026: exact GRM31CR71E106KA12 row, 10uF, 25V, X7R, 1206, maximum thickness 1.8mm; L is the packaging suffix.'),
     '0678H5000-02': height(3.18, "maximum",
         'https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-0678h-series.pdf',
         'Bel 0678H, July 2026, page 4: height 3.05 +/-0.13 mm. Plating/packaging code 02 is silver plated, tape and reel. Assembly allowance is separate.'),
@@ -546,6 +552,9 @@ MANUFACTURER_HEIGHTS = {
 # These dimensions are specified for the manufacturer's whole series, rather
 # than inferred from a generic footprint or another manufacturer's package.
 FAMILY_HEIGHTS = {
+    r"RC1206FR-07[0-9RKM]+L": height(.65, "maximum",
+        'https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L',
+        'Yageo RC_L package table: RC1206 height is 0.55 +/-0.10mm; the mechanical outline is shared across resistance values.'),
     r"RT0603[A-Z]{3}[0-9]{2}[0-9RKM]+L": height(0.55, "maximum",
         'https://www.datasheets.com/yageo/RT0603BRD0710RL/datasheet.pdf',
         'Yageo RT manufacturer product specificationv9 page4: RT0603 H=0.45+/-0.10mm; dimensions independent of resistance value.'),

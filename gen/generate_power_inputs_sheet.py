@@ -300,16 +300,18 @@ def add_dual_role_port(s, *, port, jref, host, x0, y0, rbase, cbase, ubase, dbas
         capacitor(s, f"C{cbase + 16 + index}", "10n 50V connector VBUS HF",
                   x0 + 254 + index * 12.7, y0 + 149.86, raw_vbus, kind="hier",
                   footprint="C_0402", mpn="GRM155R71H103KA88D")
-    capacitor(s, f"C{cbase + 20}", "6.8u 25V X7R TPS25751A LDO3V3; verify >=5u effective",
-              x0 + 63.5, y0 + 91.44, ldo3v3, footprint="C_1206", mpn="GRM31CR71E685KA88L")
-    capacitor(s, f"C{cbase + 21}", "10u 16V X7R TPS25751A LDO1V5; verify 4.5-12u effective",
-              x0 + 76.2, y0 + 91.44, ldo1v5, footprint="C_1206", mpn="GRM31CR71C106KA01L")
-    capacitor(s, f"C{cbase + 22}", "10u TPS25751A VIN3V3", x0 + 88.9, y0 + 91.44,
-              "MCU_3V3", kind="hier", footprint="C_10u", mpn="GRM31CR71A106KA01L")
-    capacitor(s, f"C{cbase + 23}", "270p C0G CC1 total-capacitance component", x0 + 101.6, y0 + 91.44,
-              cc1_s, footprint="C_0402", mpn="GRM1555C1H271JA01D")
-    capacitor(s, f"C{cbase + 24}", "270p C0G CC2 total-capacitance component", x0 + 114.3, y0 + 91.44,
-              cc2_s, footprint="C_0402", mpn="GRM1555C1H271JA01D")
+    capacitor(s, f"C{cbase + 20}", "10u 25V X7R",
+              x0 + 63.5, y0 + 233.68, ldo3v3, footprint="C_1206", mpn="GRM31CR71E106KA12L", text_right=True)
+    capacitor(s, f"C{cbase + 21}", "4.7u 25V X7R",
+              x0 + 93.98, y0 + 233.68, ldo1v5, footprint="C_1206", mpn="GRM31CR71E475KA88L", text_right=True)
+    capacitor(s, f"C{2691 + port}", "4.7u 25V X7R",
+              x0 + 124.46, y0 + 233.68, ldo1v5, footprint="C_1206", mpn="GRM31CR71E475KA88L", text_right=True)
+    capacitor(s, f"C{cbase + 22}", "10u 10V X7R", x0 + 154.94, y0 + 233.68,
+              "MCU_3V3", kind="hier", footprint="C_10u", mpn="GRM31CR71A106KA01L", text_right=True)
+    capacitor(s, f"C{cbase + 23}", "270p C0G", x0 + 185.42, y0 + 233.68,
+              cc1_s, footprint="C_0402", mpn="GRM1555C1H271JA01D", text_right=True)
+    capacitor(s, f"C{cbase + 24}", "270p C0G", x0 + 215.9, y0 + 233.68,
+              cc2_s, footprint="C_0402", mpn="GRM1555C1H271JA01D", text_right=True)
     for index, x in enumerate((20.32, 35.56)):
         s.place(f"C{cbase + 25 + index}", "C_Polarized", "100u 10V PP5V source bulk",
                 x0 + x, y0 + 195.58, footprint="Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D",

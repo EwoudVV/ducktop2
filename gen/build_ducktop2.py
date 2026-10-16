@@ -205,7 +205,7 @@ FOOTPRINTS = {
     "TUSB1142": "Package_DFN_QFN:Texas_RNQ0040A_WQFN-40-1EP_6x4mm_P0.4mm_EP4.7x2.7mm_ThermalVias",
     "SN74LVC2G07DCK": "Package_TO_SOT_SMD:SOT-363_SC-70-6",
     "TPD4S201": "Package_DFN_QFN:Texas_RUK0020B_WQFN-20-1EP_3x3mm_P0.4mm_EP1.7x1.7mm_ThermalVias",
-    "TPD1S514_YZ": "ducktop2:Texas_TPD1S514_YZ_WCSP-12_1.99x1.29mm_P0.5mm",
+    "TPD1S514_YZ": "ducktop2:Texas_TPD1S514_YZ0012_1.99x1.29mm_P0.4mm",
     "TVS2200DRV": "Package_SON:WSON-6-1EP_2x2mm_P0.65mm_EP1x1.6mm",
     "SST26VF016B": "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm",
     "CAT24C256": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",

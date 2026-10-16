@@ -87,6 +87,8 @@ def add_aon_input(s):
         )
         mosfet(f"Q{2620+index}", 745, y, source, stem + "_GATE", "AON_RAW")
         cap(f"C{2620+index}", "100n 50V charge pump", 810, y, stem + "_VCAP", source)
+        cap(f"C{2689+index}", f"100n 50V PD{index+1} standby input bypass",
+            860, y, source, "GND")
 
     part(
         "U718",
@@ -258,6 +260,7 @@ def add_aon_input(s):
     )
     mosfet("Q2650", 745, 730, "VSYS", "AON_SYS_GATE", "AON_RAW")
     cap("C2650", "100n 50V charge pump", 810, 730, "AON_SYS_VCAP", "VSYS")
+    cap("C2691", "100n 50V VSYS standby input bypass", 860, 730, "VSYS", "GND")
     cap(
         "C2651",
         "1u 50V protected input bypass",

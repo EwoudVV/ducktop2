@@ -924,6 +924,90 @@
         </unit>
       </units>
     </comp>
+    <comp ref="C2689">
+      <value>100n 50V PD1 standby input bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM188R71H104KA93D" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>c9ad84dd-1388-54be-af35-2bbd10e2ede3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2690">
+      <value>100n 50V PD2 standby input bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM188R71H104KA93D" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>5f95f6ae-b013-566e-8c05-abd2b3605ed3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2691">
+      <value>100n 50V VSYS standby input bypass</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="Murata" />
+      <property name="MPN" value="GRM188R71H104KA93D" />
+      <property name="Sheetname" value="Power &amp; Battery" />
+      <property name="Sheetfile" value="01_power_battery.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/Power &amp; Battery/" tstamps="/577b7ab7-60d3-5949-82f8-bb269dce837a/" />
+      <tstamps>eed646ff-6f2e-5c42-be2f-e30bab59fc4c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
   </components>
   <nets>
     <net name="/AUDIO_AMP_EC_EN">
@@ -1914,6 +1998,7 @@
       <node ref="RS2601" pin="1" />
       <node ref="U2" pin="2" />
       <node ref="U750" pin="3" />
+      <node ref="C2691" pin="1" pintype="passive" />
     </net>
     <net name="/WIFI_CLKREQ_N">
       <node ref="A1" pin="100" />
@@ -2106,6 +2191,9 @@
       <node ref="C2686" pin="2" pintype="passive" />
       <node ref="C2687" pin="2" pintype="passive" />
       <node ref="C2688" pin="2" pintype="passive" />
+      <node ref="C2689" pin="2" pintype="passive" />
+      <node ref="C2690" pin="2" pintype="passive" />
+      <node ref="C2691" pin="2" pintype="passive" />
     </net>
     <net name="unconnected-(A1-BIOS_SEL#-Pad133)">
       <node ref="A1" pin="133" />
@@ -2487,6 +2575,12 @@
     </net>
     <net name="unconnected-(U2644-NC-Pad1)">
       <node ref="U2644" pin="1" />
+    </net>
+    <net code="1" name="/PD1_VBUS_RAW">
+      <node ref="C2689" pin="1" pintype="passive" />
+    </net>
+    <net code="2" name="/PD2_VBUS_RAW">
+      <node ref="C2690" pin="1" pintype="passive" />
     </net>
   </nets>
 </export>

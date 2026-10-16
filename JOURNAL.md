@@ -5,6 +5,33 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-16: sort out the main-board power placement
+
+**Total time spent: 2 hours**
+
+went through the power placement across all three main boards. lined up the system 3.3v input capacitors and brought the small usb 5v bypass onto the front beside its regulator. then regrouped the left usb-c port's current limiter, bulk capacitor, overvoltage protection and discharge resistor. those parts were spread below and beside the port, which would have made the power path unnecessarily long. they now sit together above it, with the existing data routing kept in place.
+
+![the left usb-c power circuit before and after moving the parts together](docs/images/journal/2026-10-16-usb-port-power-placement.png)
+
+found a much bigger problem while comparing the protection chips with their drawings. all three TPD1S514 footprints had 0.5 mm pad spacing, but the actual part uses 0.4 mm. corrected the library and all three placed footprints, including the copper, solder mask and stencil openings. removed the wrong library footprint and updated the generator so it cannot put that version back. the pad names and connections stay the same.
+
+![the old and corrected protection-chip footprints at the same scale](docs/images/journal/2026-10-16-tpd1s514-footprint.png)
+
+reworked the local capacitors around both usb-c PD controllers. moved the regulator and power-input bypasses closer, using the back where that gives a shorter connection. replaced the regulator capacitor selections with documented murata parts. the 1.5v outputs now have two 4.7uf capacitors each. that keeps their upper tolerance and temperature corner below the controller's 12uf maximum. the lower effective capacitance still needs checking with bias and aging included.
+
+![the revised capacitor values on the left PD schematic](docs/images/journal/2026-10-16-pd-capacitor-schematic.png)
+
+![front and back views of the capacitors around both PD controllers](docs/images/journal/2026-10-16-pd-local-capacitors.png)
+
+kept the CC capacitors on the same side as their controller and repaired the already-routed right-side connections through them. both signal paths are continuous, and both capacitor returns reach controller ground. added one ground via for the moved capacitor and removed the old ground stubs. the rest of the tracks and vias are unchanged. also added three 100nf input bypasses beside the standby controllers, since their supplies come in over the wiring between boards.
+
+![the system 3.3v input capacitors before and after](docs/images/journal/2026-10-16-system-3v3-input-placement.png)
+
+31 existing parts moved and five capacitors were added. kept the connectors, outlines, mounting points and inner ground planes in place. checked the changed component envelopes against the saved thin-case geometry, including the underside space and lid movement, with no collisions found. also cleaned up the affected board labels and gave the PD capacitors separate rows on the schematic so their labels are readable.
+
+all three saved boards match their schematics and have zero physical DRC errors. all 545 power-wiring checks, 177 electrical calculations and 2,079 center pin checks pass. updated the component exports and saved the results with the board hashes. the main boards still have plenty of unrouted connections, and the supplies will need startup and load testing once assembled.
+
+
 # 2026-10-16: tidy up the input selection and standby supply
 
 **Total time spent: 1 hour**

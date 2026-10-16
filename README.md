@@ -36,7 +36,7 @@ direct eDP and puts power, ports, and laptop controls on custom boards.
 
 ## build status
 
-updated 5 october 2026. the carrier interface is being switched to Mu
+updated 16 october 2026. the carrier interface is being switched to Mu
 Ultra: 226V first, with a later 256V upgrade. the new pin map moves HDMI to
 TCP2, reallocates USB and gives NVMe a real clock-request connection. the
 100 W power circuit is saved, but placement, routing, cooling and hardware
@@ -49,10 +49,13 @@ saved on all three main boards. the new placement pass uses both sides:
 local capacitors sit near their actual supply pins, USB protection follows
 its connector, and the audio and maker circuits have been regrouped.
 the connector positions, mounting points and board gaps are preserved.
-the existing PCIe routing is intact. USB, HDMI and Ethernet route repairs
-are in progress, and most main-board routing still remains.
+the existing PCIe routing is intact. the latest pass moves 31 power parts,
+adds five local capacitors, repairs the right USB-C control routes and
+corrects three USB protection footprints to their proper 0.4 mm pitch.
+[placement and checks](docs/hardware/mainboard-power-placement.md) cover
+those changes. most main-board routing still remains.
 
-the keyboard now has per-key RGB on four layers, and routing is underway.
+the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,
 outline and cable connector are unchanged. [keyboard routing notes](keyboard/README.md)
 cover the LEDs, current limit and switch keepouts. the old non-RGB order

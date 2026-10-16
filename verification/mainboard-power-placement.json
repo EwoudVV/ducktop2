@@ -1,0 +1,1551 @@
+{
+  "date": "2026-10-16",
+  "baseline_commit": "b09b74f4421231668577b09069b14696ab787beb",
+  "scope": "Main-board power placement and local decoupling; corrected USB overvoltage footprints; repair of existing right USB-C CC control routes. Main-board routing is unfinished.",
+  "existing_placements_changed": 31,
+  "capacitors_added": 5,
+  "boards": {
+    "center": {
+      "file": "ducktop2-center.kicad_pcb",
+      "sha256": "fc9dc41d23aa6cbf0cee1974fb592eac5a4ef2e4f59b9926bd13a7a68cae7826",
+      "candidate_geometry_identical": true,
+      "footprints": 870,
+      "unconnected": 1798,
+      "outline_and_fixed_anchors_preserved": true,
+      "unrelated_footprint_geometry_preserved": true,
+      "retained_copper_unchanged": 5203,
+      "removed_copper": 0,
+      "added_copper": 0,
+      "reference_plane_difference_mm2": {
+        "In1.Cu": 0.0,
+        "In3.Cu": 0.0,
+        "In6.Cu": 0.0
+      },
+      "drc_errors": 0,
+      "drc_warnings": {
+        "via_dangling": 174,
+        "track_dangling": 83,
+        "silk_over_copper": 2
+      },
+      "native_schematic_parity_findings": 0,
+      "locks_preserved": 867
+    },
+    "left": {
+      "file": "left_io/left_io.kicad_pcb",
+      "sha256": "63d3e9c789ed37db2fb11fb6be110e11af701a5e889ceff5c3dbe72316bc8b0f",
+      "candidate_geometry_identical": true,
+      "footprints": 334,
+      "unconnected": 948,
+      "outline_and_fixed_anchors_preserved": true,
+      "unrelated_footprint_geometry_preserved": true,
+      "retained_copper_unchanged": 219,
+      "removed_copper": 0,
+      "added_copper": 0,
+      "reference_plane_difference_mm2": {
+        "In1.Cu": 0.0,
+        "In3.Cu": 0.0,
+        "In6.Cu": 0.0
+      },
+      "drc_errors": 0,
+      "drc_warnings": {
+        "lib_footprint_mismatch": 16
+      },
+      "native_schematic_parity_findings": 0,
+      "locks_preserved": 333
+    },
+    "right": {
+      "file": "right_io/right_io.kicad_pcb",
+      "sha256": "9090e64374138b11380dc4b16b3b5b94a3328b79dcd8e61a7e0279b6618d11a2",
+      "candidate_geometry_identical": true,
+      "footprints": 174,
+      "unconnected": 331,
+      "outline_and_fixed_anchors_preserved": true,
+      "unrelated_footprint_geometry_preserved": true,
+      "retained_copper_unchanged": 324,
+      "removed_copper": 17,
+      "added_copper": 28,
+      "reference_plane_difference_mm2": {
+        "In1.Cu": 0.0,
+        "In3.Cu": 0.0,
+        "In6.Cu": 0.0
+      },
+      "drc_errors": 0,
+      "drc_warnings": {
+        "track_dangling": 3,
+        "via_dangling": 8,
+        "silk_edge_clearance": 1,
+        "lib_footprint_mismatch": 26
+      },
+      "native_schematic_parity_findings": 0,
+      "locks_preserved": 173
+    }
+  },
+  "placements": {
+    "center": {
+      "C2689": {
+        "added": true,
+        "after": {
+          "x": 140.1,
+          "y": 162,
+          "rotation_deg": 270,
+          "side": "B.Cu"
+        },
+        "value": "100n 50V PD1 standby input bypass",
+        "mpn": "GRM188R71H104KA93D",
+        "value_before": "100n 50V PD1 standby input bypass",
+        "mpn_before": "GRM188R71H104KA93D"
+      },
+      "C2690": {
+        "added": true,
+        "after": {
+          "x": 140.1,
+          "y": 168,
+          "rotation_deg": 270,
+          "side": "B.Cu"
+        },
+        "value": "100n 50V PD2 standby input bypass",
+        "mpn": "GRM188R71H104KA93D",
+        "value_before": "100n 50V PD2 standby input bypass",
+        "mpn_before": "GRM188R71H104KA93D"
+      },
+      "C2691": {
+        "added": true,
+        "after": {
+          "x": 140.1,
+          "y": 174,
+          "rotation_deg": 270,
+          "side": "B.Cu"
+        },
+        "value": "100n 50V VSYS standby input bypass",
+        "mpn": "GRM188R71H104KA93D",
+        "value_before": "100n 50V VSYS standby input bypass",
+        "mpn_before": "GRM188R71H104KA93D"
+      },
+      "C46": {
+        "before": {
+          "x": 132.875001,
+          "y": 63.35,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 129.745001,
+          "y": 61.7,
+          "rotation_deg": 180,
+          "side": "F.Cu"
+        },
+        "value": "10u 50V X7R TPS56637 VIN",
+        "mpn": "CGA5L1X7R1H106K160AC"
+      },
+      "C790": {
+        "before": {
+          "x": 128.625001,
+          "y": 62.6,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 129.745001,
+          "y": 58.7,
+          "rotation_deg": 180,
+          "side": "F.Cu"
+        },
+        "value": "10u 50V X7R TPS56637 VIN",
+        "mpn": "CGA5L1X7R1H106K160AC"
+      },
+      "C791": {
+        "before": {
+          "x": 130.625001,
+          "y": 63.35,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 129.745001,
+          "y": 64.2,
+          "rotation_deg": 180,
+          "side": "F.Cu"
+        },
+        "value": "100n 50V X7R TPS56637 VIN HF",
+        "mpn": "GRM188R71H104KA93D"
+      }
+    },
+    "left": {
+      "U1740": {
+        "before": {
+          "x": 16.2875,
+          "y": 84.3,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 20.0,
+          "y": 56.7,
+          "rotation_deg": 90,
+          "side": "F.Cu"
+        },
+        "value": "TPS2553DDBVR 1.3A USB branch",
+        "mpn": "TPS2553DDBVR",
+        "value_before": "TPS2553DDBVR 1.3A USB branch",
+        "mpn_before": "TPS2553DDBVR"
+      },
+      "R1740": {
+        "before": {
+          "x": 16.2875,
+          "y": 80.6625,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 20,
+          "y": 53.0,
+          "rotation_deg": 90,
+          "side": "F.Cu"
+        },
+        "value": "19.1k 1% TPS2553 VBUS plus VCONN ILIM",
+        "mpn": "RC0603FR-0719K1L",
+        "value_before": "19.1k 1% TPS2553 VBUS plus VCONN ILIM",
+        "mpn_before": "RC0603FR-0719K1L"
+      },
+      "C1740": {
+        "before": {
+          "x": 13.0875,
+          "y": 85.4375,
+          "rotation_deg": 180.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 20,
+          "y": 60.0,
+          "rotation_deg": 0,
+          "side": "F.Cu"
+        },
+        "value": "100n branch input",
+        "mpn": "GRM188R71H104KA93D",
+        "value_before": "100n branch input",
+        "mpn_before": "GRM188R71H104KA93D"
+      },
+      "C1742": {
+        "before": {
+          "x": 10.3375,
+          "y": 80.1625,
+          "rotation_deg": 180.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 10.2,
+          "y": 55.4,
+          "rotation_deg": 0,
+          "side": "F.Cu"
+        },
+        "value": "150u 10V TPS25810 input reservoir",
+        "mpn": "T520D157M010ATE025",
+        "value_before": "150u 10V TPS25810 input reservoir",
+        "mpn_before": "T520D157M010ATE025"
+      },
+      "U1743": {
+        "before": {
+          "x": 24.0,
+          "y": 85.5,
+          "rotation_deg": 0.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 10,
+          "y": 59.2,
+          "rotation_deg": 0,
+          "side": "F.Cu"
+        },
+        "value": "TPD1S514-1YZR 5.9V VBUS OVP",
+        "mpn": "TPD1S514-1YZR",
+        "value_before": "TPD1S514-1YZR 5.9V VBUS OVP",
+        "mpn_before": "TPD1S514-1YZR"
+      },
+      "C1751": {
+        "before": {
+          "x": 21.25,
+          "y": 85.5,
+          "rotation_deg": 180.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 7.15,
+          "y": 58.9,
+          "rotation_deg": 180,
+          "side": "F.Cu"
+        },
+        "value": "1u TPD1S514 VBUS_POWER stability",
+        "mpn": "GRM188R71A105KA61D",
+        "value_before": "1u TPD1S514 VBUS_POWER stability",
+        "mpn_before": "GRM188R71A105KA61D"
+      },
+      "R1750": {
+        "before": {
+          "x": 36.79875,
+          "y": 62.3,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 12,
+          "y": 61.35,
+          "rotation_deg": 0,
+          "side": "F.Cu"
+        },
+        "value": "249R 0.25W TPS25810 OUT discharge",
+        "mpn": "RC1206FR-07249RL",
+        "value_before": "249R 0.25W TPS25810 OUT discharge",
+        "mpn_before": "RC1206FR-07249RL"
+      },
+      "C2015": {
+        "before": {
+          "x": 7.725,
+          "y": 39.775,
+          "rotation_deg": 90.0,
+          "side": "B.Cu"
+        },
+        "after": {
+          "x": 43.5,
+          "y": 30.2,
+          "rotation_deg": 0,
+          "side": "B.Cu"
+        },
+        "value": "4.7u 25V raw VBUS; pre-attach total below 10uF",
+        "mpn": "GRM31CR71E475KA88L",
+        "value_before": "4.7u 25V raw VBUS; pre-attach total below 10uF",
+        "mpn_before": "GRM31CR71E475KA88L"
+      },
+      "C2020": {
+        "before": {
+          "x": 33.2,
+          "y": 24.225,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 31.75,
+          "y": 27.1,
+          "rotation_deg": 180,
+          "side": "F.Cu"
+        },
+        "value": "10u 25V X7R",
+        "mpn": "GRM31CR71E106KA12L",
+        "value_before": "6.8u 25V X7R TPS25751A LDO3V3; verify >=5u effective",
+        "mpn_before": "GRM31CR71E685KA88L"
+      },
+      "C2021": {
+        "before": {
+          "x": 29.475,
+          "y": 25.375,
+          "rotation_deg": 180.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 31.75,
+          "y": 30.0,
+          "rotation_deg": 180,
+          "side": "F.Cu"
+        },
+        "value": "4.7u 25V X7R",
+        "mpn": "GRM31CR71E475KA88L",
+        "value_before": "10u 16V X7R TPS25751A LDO1V5; verify 4.5-12u effective",
+        "mpn_before": "GRM31CR71C106KA01L"
+      },
+      "C2025": {
+        "before": {
+          "x": 29.87,
+          "y": 29.015,
+          "rotation_deg": 180.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 31.1,
+          "y": 41.1,
+          "rotation_deg": 270,
+          "side": "F.Cu"
+        },
+        "value": "100u 10V PP5V source bulk",
+        "mpn": "T520D107M010ATE070",
+        "value_before": "100u 10V PP5V source bulk",
+        "mpn_before": "T520D107M010ATE070"
+      },
+      "C2027": {
+        "before": {
+          "x": 35.125,
+          "y": 21.3,
+          "rotation_deg": 90.0,
+          "side": "B.Cu"
+        },
+        "after": {
+          "x": 36.87,
+          "y": 25.0,
+          "rotation_deg": 90,
+          "side": "B.Cu"
+        },
+        "value": "10u PP5V local ceramic",
+        "mpn": "GRM31CR71A106KA01L",
+        "value_before": "10u PP5V local ceramic",
+        "mpn_before": "GRM31CR71A106KA01L"
+      },
+      "C2023": {
+        "before": {
+          "x": 41.97,
+          "y": 27.265,
+          "rotation_deg": -90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 39.5,
+          "y": 25.3,
+          "rotation_deg": 90,
+          "side": "F.Cu"
+        },
+        "value": "270p C0G",
+        "mpn": "GRM1555C1H271JA01D",
+        "value_before": "270p C0G CC1 total-capacitance component",
+        "mpn_before": "GRM1555C1H271JA01D"
+      },
+      "C2024": {
+        "before": {
+          "x": 43.07,
+          "y": 27.265,
+          "rotation_deg": -90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 38.3,
+          "y": 25.3,
+          "rotation_deg": 90,
+          "side": "F.Cu"
+        },
+        "value": "270p C0G",
+        "mpn": "GRM1555C1H271JA01D",
+        "value_before": "270p C0G CC2 total-capacitance component",
+        "mpn_before": "GRM1555C1H271JA01D"
+      },
+      "R2013": {
+        "before": {
+          "x": 35.875,
+          "y": 25.7,
+          "rotation_deg": 90.0,
+          "side": "B.Cu"
+        },
+        "after": {
+          "x": 37.5,
+          "y": 21.2,
+          "rotation_deg": 180,
+          "side": "B.Cu"
+        },
+        "value": "100k mux FLIP input default-low",
+        "mpn": "RC0603FR-07100KL",
+        "value_before": "100k mux FLIP input default-low",
+        "mpn_before": "RC0603FR-07100KL"
+      },
+      "R2018": {
+        "before": {
+          "x": 41.275,
+          "y": 28.85,
+          "rotation_deg": -90.0,
+          "side": "B.Cu"
+        },
+        "after": {
+          "x": 43.5,
+          "y": 32.8,
+          "rotation_deg": 0,
+          "side": "B.Cu"
+        },
+        "value": "100k DFP-role input default-low",
+        "mpn": "RC0603FR-07100KL",
+        "value_before": "100k DFP-role input default-low",
+        "mpn_before": "RC0603FR-07100KL"
+      },
+      "R2005": {
+        "before": {
+          "x": 33.85,
+          "y": 29.375,
+          "rotation_deg": 0.0,
+          "side": "B.Cu"
+        },
+        "after": {
+          "x": 31.25,
+          "y": 28.8,
+          "rotation_deg": 90,
+          "side": "B.Cu"
+        },
+        "value": "10k TCPC IRQ pull-up",
+        "mpn": "RC0603FR-0710KL",
+        "value_before": "10k TCPC IRQ pull-up",
+        "mpn_before": "RC0603FR-0710KL"
+      },
+      "C2692": {
+        "added": true,
+        "after": {
+          "x": 33.9,
+          "y": 28.55,
+          "rotation_deg": 90,
+          "side": "B.Cu"
+        },
+        "value": "4.7u 25V X7R",
+        "mpn": "GRM31CR71E475KA88L",
+        "value_before": "4.7u 25V X7R LDO1V5; parallel bank 9.4u",
+        "mpn_before": "GRM31CR71E475KA88L"
+      },
+      "C1711": {
+        "before": {
+          "x": 22.283333,
+          "y": 76.25,
+          "rotation_deg": 180.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 29,
+          "y": 70.8,
+          "rotation_deg": 0,
+          "side": "F.Cu"
+        },
+        "value": "10u 50V USB5 input",
+        "mpn": "CGA5L1X7R1H106K160AC"
+      },
+      "C1712": {
+        "before": {
+          "x": 30.783333,
+          "y": 74.0,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 29,
+          "y": 73.4,
+          "rotation_deg": 0,
+          "side": "F.Cu"
+        },
+        "value": "10u 50V USB5 input",
+        "mpn": "CGA5L1X7R1H106K160AC"
+      },
+      "C1713": {
+        "before": {
+          "x": 27.225,
+          "y": 77.1,
+          "rotation_deg": 180.0,
+          "side": "B.Cu"
+        },
+        "after": {
+          "x": 28.75,
+          "y": 75.55,
+          "rotation_deg": 0,
+          "side": "F.Cu"
+        },
+        "value": "100n 50V USB5 input HF",
+        "mpn": "GRM188R71H104KA93D"
+      },
+      "C1866": {
+        "before": {
+          "x": 27.033333,
+          "y": 71.75,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 26.2,
+          "y": 65.4,
+          "rotation_deg": 0,
+          "side": "F.Cu"
+        },
+        "value": "DNP 68u 25V input damping option",
+        "mpn": "T521V686M025ATE050"
+      }
+    },
+    "right": {
+      "C2060": {
+        "before": {
+          "x": 340.35,
+          "y": 19.575,
+          "rotation_deg": 180.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 344.7,
+          "y": 24.325,
+          "rotation_deg": 0,
+          "side": "B.Cu"
+        },
+        "value": "10u 25V X7R",
+        "mpn": "GRM31CR71E106KA12L",
+        "value_before": "6.8u 25V X7R TPS25751A LDO3V3; verify >=5u effective",
+        "mpn_before": "GRM31CR71E685KA88L"
+      },
+      "C2064": {
+        "before": {
+          "x": 331.25,
+          "y": 39.05,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 339.3,
+          "y": 27.0,
+          "rotation_deg": 270,
+          "side": "F.Cu"
+        },
+        "value": "270p C0G",
+        "mpn": "GRM1555C1H271JA01D",
+        "value_before": "270p C0G CC2 total-capacitance component",
+        "mpn_before": "GRM1555C1H271JA01D"
+      },
+      "C2067": {
+        "before": {
+          "x": 325.5,
+          "y": 37.0,
+          "rotation_deg": 180.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 338.4,
+          "y": 27.9,
+          "rotation_deg": 270,
+          "side": "B.Cu"
+        },
+        "value": "10u PP5V local ceramic",
+        "mpn": "GRM31CR71A106KA01L",
+        "value_before": "10u PP5V local ceramic",
+        "mpn_before": "GRM31CR71A106KA01L"
+      },
+      "C2069": {
+        "before": {
+          "x": 303.02,
+          "y": 38.65,
+          "rotation_deg": 0.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 333.725,
+          "y": 22.4,
+          "rotation_deg": 180,
+          "side": "F.Cu"
+        },
+        "value": "100n 50V PPHV local",
+        "mpn": "GRM188R71H104KA93D",
+        "value_before": "100n 50V PPHV local",
+        "mpn_before": "GRM188R71H104KA93D"
+      },
+      "U2016": {
+        "before": {
+          "x": 335.35,
+          "y": 26.2,
+          "rotation_deg": 180.0,
+          "side": "B.Cu"
+        },
+        "after": {
+          "x": 333.5,
+          "y": 26.2,
+          "rotation_deg": 0,
+          "side": "B.Cu"
+        },
+        "value": "SN74LVC1G08 DFP and attached qualifier",
+        "mpn": "SN74LVC1G08DBVR",
+        "value_before": "SN74LVC1G08 DFP and attached qualifier",
+        "mpn_before": "SN74LVC1G08DBVR"
+      },
+      "C2063": {
+        "before": {
+          "x": 342.5,
+          "y": 30.0,
+          "rotation_deg": 90.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 337.0,
+          "y": 27.0,
+          "rotation_deg": 270,
+          "side": "F.Cu"
+        },
+        "value": "270p C0G",
+        "mpn": "GRM1555C1H271JA01D",
+        "value_before": "270p C0G CC1 total-capacitance component",
+        "mpn_before": "GRM1555C1H271JA01D"
+      },
+      "C2681": {
+        "before": {
+          "x": 335.35,
+          "y": 27.1,
+          "rotation_deg": 0.0,
+          "side": "F.Cu"
+        },
+        "after": {
+          "x": 334.3,
+          "y": 27.3,
+          "rotation_deg": 90,
+          "side": "F.Cu"
+        },
+        "value": "100n 50V qualifier bypass",
+        "mpn": "GRM188R71H104KA93D",
+        "value_before": "100n 50V qualifier bypass",
+        "mpn_before": "GRM188R71H104KA93D"
+      },
+      "C2693": {
+        "added": true,
+        "after": {
+          "x": 344.7,
+          "y": 21.3,
+          "rotation_deg": 0,
+          "side": "B.Cu"
+        },
+        "value": "4.7u 25V X7R",
+        "mpn": "GRM31CR71E475KA88L",
+        "value_before": "4.7u 25V X7R LDO1V5; parallel bank 9.4u",
+        "mpn_before": "GRM31CR71E475KA88L"
+      }
+    }
+  },
+  "capacitor_part_changes": {
+    "C2020": {
+      "board": "left",
+      "before_mpn": "GRM31CR71E685KA88L",
+      "after_mpn": "GRM31CR71E106KA12L",
+      "value": "10u 25V X7R"
+    },
+    "C2021": {
+      "board": "left",
+      "before_mpn": "GRM31CR71C106KA01L",
+      "after_mpn": "GRM31CR71E475KA88L",
+      "value": "4.7u 25V X7R"
+    },
+    "C2060": {
+      "board": "right",
+      "before_mpn": "GRM31CR71E685KA88L",
+      "after_mpn": "GRM31CR71E106KA12L",
+      "value": "10u 25V X7R"
+    },
+    "C2061": {
+      "board": "right",
+      "before_mpn": "GRM31CR71C106KA01L",
+      "after_mpn": "GRM31CR71E475KA88L",
+      "value": "4.7u 25V X7R"
+    }
+  },
+  "tpd1s514": {
+    "source": "https://www.ti.com/lit/ds/symlink/tpd1s514.pdf",
+    "drawing": "4221703/A, YZ0012-C01",
+    "refs": {
+      "left": [
+        "U1743",
+        "U1783"
+      ],
+      "right": [
+        "U1763"
+      ]
+    },
+    "library_file": "ducktop2.pretty/Texas_TPD1S514_YZ0012_1.99x1.29mm_P0.4mm.kicad_mod",
+    "library_sha256": "9fa853c8b9927f91a52b091e5df86072fceeb5bb21b21ea579a9bd3d01334257",
+    "checks": {
+      "library": {
+        "passed": true,
+        "errors": [],
+        "pitch_mm": 0.4,
+        "copper_diameter_mm": 0.225,
+        "mask_opening_mm": 0.3,
+        "nominal_mask_web_mm": 0.1,
+        "paste_size_mm": 0.25,
+        "paste_radius_mm": 0.05,
+        "stencil_reference_mm": 0.1
+      },
+      "U1783": {
+        "passed": true,
+        "errors": [],
+        "pitch_mm": 0.4,
+        "copper_diameter_mm": 0.225,
+        "mask_opening_mm": 0.3,
+        "nominal_mask_web_mm": 0.1,
+        "paste_size_mm": 0.25,
+        "paste_radius_mm": 0.05,
+        "stencil_reference_mm": 0.1
+      },
+      "U1743": {
+        "passed": true,
+        "errors": [],
+        "pitch_mm": 0.4,
+        "copper_diameter_mm": 0.225,
+        "mask_opening_mm": 0.3,
+        "nominal_mask_web_mm": 0.1,
+        "paste_size_mm": 0.25,
+        "paste_radius_mm": 0.05,
+        "stencil_reference_mm": 0.1
+      },
+      "U1763": {
+        "passed": true,
+        "errors": [],
+        "pitch_mm": 0.4,
+        "copper_diameter_mm": 0.225,
+        "mask_opening_mm": 0.3,
+        "nominal_mask_web_mm": 0.1,
+        "paste_size_mm": 0.25,
+        "paste_radius_mm": 0.05,
+        "stencil_reference_mm": 0.1
+      }
+    }
+  },
+  "cc_repair": {
+    "removed_segment_count": 17,
+    "added_segment_count": 27,
+    "added_via_count": 1,
+    "ground_vias_removed": 0,
+    "all_cc_routes_on": "F.Cu",
+    "continuity": [
+      {
+        "controller_pin": "28",
+        "capacitor": "C2063",
+        "protector_pin": "12",
+        "native_continuity": true,
+        "ground_to_controller_ground": true
+      },
+      {
+        "controller_pin": "29",
+        "capacitor": "C2064",
+        "protector_pin": "11",
+        "native_continuity": true,
+        "ground_to_controller_ground": true
+      }
+    ],
+    "scope": "Existing PD2 CC1/CC2 control routes, two former C2063 ground stubs and the moved C2064 ground return. No other copper changed."
+  },
+  "checks": {
+    "schematic_contracts": [
+      "center",
+      "left",
+      "right"
+    ],
+    "electrical_calculations_passed": 177,
+    "power_wiring_checks_passed": 545,
+    "center_pin_checks_passed": 2079,
+    "power_tests_passed": 21,
+    "calculation_tests_passed": 17,
+    "tpd_footprint_tests_passed": 6,
+    "power_component_export_rows": 212,
+    "complete_component_export_rows": 1378,
+    "erc": {
+      "center": {
+        "passed": true,
+        "unexpected": [],
+        "counts": {
+          "verified_symbol_template": 406
+        }
+      },
+      "left": {
+        "passed": true,
+        "unexpected": [],
+        "counts": {
+          "verified_symbol_template": 99,
+          "unused_pd_gpio_ground": 6,
+          "redriver_aeq_ground_strap": 1
+        }
+      },
+      "right": {
+        "passed": true,
+        "unexpected": [],
+        "counts": {
+          "verified_symbol_template": 59,
+          "unused_pd_gpio_ground": 6
+        }
+      }
+    }
+  },
+  "case_clearance": {
+    "scope": "Changed main-board courtyard-height envelopes against the frozen 33.3mm flush-case geometry. This is a local delta check, not a regenerated assembly or physical fit approval.",
+    "cache_manifest_sha256": "1166ac3ddac6983691292b82a15ec6ac4aa7d6eb82c4683d5661d5d4a896e904",
+    "case_config_sha256": "77113f7812cae6c44b50db67965ddeb135f5d9bc29f13256f73a673a6b64937f",
+    "expected_changed_inputs": [
+      "left_io/left_io.kicad_pcb",
+      "ducktop2-center.kicad_pcb",
+      "right_io/right_io.kicad_pcb",
+      "mechanical/component-placement.json"
+    ],
+    "board_sources_sha256": {
+      "center": "fc9dc41d23aa6cbf0cee1974fb592eac5a4ef2e4f59b9926bd13a7a68cae7826",
+      "left": "63d3e9c789ed37db2fb11fb6be110e11af701a5e889ceff5c3dbe72316bc8b0f",
+      "right": "9090e64374138b11380dc4b16b3b5b94a3328b79dcd8e61a7e0279b6618d11a2"
+    },
+    "component_rows": [
+      {
+        "board": "center",
+        "ref": "C706",
+        "mpn": "GRM31CR71E106KA12L",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.6
+      },
+      {
+        "board": "center",
+        "ref": "RS2600",
+        "mpn": "WSL2512R0200FEA18",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.189,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.689
+      },
+      {
+        "board": "center",
+        "ref": "F190",
+        "mpn": "0678H5000-02",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 3.48,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 8.98
+      },
+      {
+        "board": "center",
+        "ref": "C790",
+        "mpn": "CGA5L1X7R1H106K160AC",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 2.1999999999999997,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.699999999999999
+      },
+      {
+        "board": "center",
+        "ref": "R199",
+        "mpn": "RC0603FR-07100KL",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 3.05,
+        "top_H": 3.9,
+        "floor_gap_mm": 1.8499999999999999
+      },
+      {
+        "board": "center",
+        "ref": "C766",
+        "mpn": "GCM188L81H104KA57D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "center",
+        "ref": "C765",
+        "mpn": "GCM188L81H104KA57D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "center",
+        "ref": "C10",
+        "mpn": "GRT188R61H105ME13D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "center",
+        "ref": "R198",
+        "mpn": "RC0603FR-07100KL",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 3.05,
+        "top_H": 3.9,
+        "floor_gap_mm": 1.8499999999999999
+      },
+      {
+        "board": "center",
+        "ref": "R183",
+        "mpn": "RC0603FR-07100RL",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.35
+      },
+      {
+        "board": "center",
+        "ref": "U769",
+        "mpn": "SN74LVC1G97DBVR",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.75,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.25
+      },
+      {
+        "board": "center",
+        "ref": "C46",
+        "mpn": "CGA5L1X7R1H106K160AC",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 2.1999999999999997,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.699999999999999
+      },
+      {
+        "board": "center",
+        "ref": "C791",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "center",
+        "ref": "C2650",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "center",
+        "ref": "C2620",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "center",
+        "ref": "R762",
+        "mpn": "RC0603FR-0727K4L",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 3.05,
+        "top_H": 3.9,
+        "floor_gap_mm": 1.8499999999999999
+      },
+      {
+        "board": "center",
+        "ref": "C2621",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "center",
+        "ref": "R2671",
+        "mpn": "RC0603FR-0710KL",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 3.05,
+        "top_H": 3.9,
+        "floor_gap_mm": 1.8499999999999999
+      },
+      {
+        "board": "center",
+        "ref": "C2686",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "center",
+        "ref": "C2687",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "center",
+        "ref": "C2688",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "center",
+        "ref": "C2689",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "center",
+        "ref": "C2690",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "center",
+        "ref": "C2691",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.7,
+        "top_H": 3.9000000000000004,
+        "floor_gap_mm": 1.5000000000000002
+      },
+      {
+        "board": "left",
+        "ref": "R1750",
+        "mpn": "RC1206FR-07249RL",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.95,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.45
+      },
+      {
+        "board": "left",
+        "ref": "C2021",
+        "mpn": "GRM31CR71E475KA88L",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.6
+      },
+      {
+        "board": "left",
+        "ref": "C1742",
+        "mpn": "T520D157M010ATE025",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 3.4,
+        "height_basis": "manufacturer maximum from the saved case height record plus 0.3mm",
+        "bottom_H": 5.5,
+        "top_H": 8.9
+      },
+      {
+        "board": "left",
+        "ref": "C1711",
+        "mpn": "CGA5L1X7R1H106K160AC",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 2.1999999999999997,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.699999999999999
+      },
+      {
+        "board": "left",
+        "ref": "C2023",
+        "mpn": "GRM1555C1H271JA01D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum from the saved case height record plus 0.3mm",
+        "bottom_H": 5.5,
+        "top_H": 6.35
+      },
+      {
+        "board": "left",
+        "ref": "C1712",
+        "mpn": "CGA5L1X7R1H106K160AC",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 2.1999999999999997,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.699999999999999
+      },
+      {
+        "board": "left",
+        "ref": "C2020",
+        "mpn": "GRM31CR71E106KA12L",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.6
+      },
+      {
+        "board": "left",
+        "ref": "U1783",
+        "mpn": "TPD1S514-1YZR",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.925,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.425
+      },
+      {
+        "board": "left",
+        "ref": "C1751",
+        "mpn": "GRM188R71A105KA61D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "left",
+        "ref": "C2024",
+        "mpn": "GRM1555C1H271JA01D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum from the saved case height record plus 0.3mm",
+        "bottom_H": 5.5,
+        "top_H": 6.35
+      },
+      {
+        "board": "left",
+        "ref": "U1743",
+        "mpn": "TPD1S514-1YZR",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.925,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.425
+      },
+      {
+        "board": "left",
+        "ref": "F195",
+        "mpn": "0678H5000-02",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 3.48,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 8.98
+      },
+      {
+        "board": "left",
+        "ref": "R1740",
+        "mpn": "RC0603FR-0719K1L",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.35
+      },
+      {
+        "board": "left",
+        "ref": "U1740",
+        "mpn": "TPS2553DDBVR",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.75,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.25
+      },
+      {
+        "board": "left",
+        "ref": "C2025",
+        "mpn": "T520D107M010ATE070",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 3.4,
+        "height_basis": "manufacturer maximum from the saved case height record plus 0.3mm",
+        "bottom_H": 5.5,
+        "top_H": 8.9
+      },
+      {
+        "board": "left",
+        "ref": "C1740",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "left",
+        "ref": "R2005",
+        "mpn": "RC0603FR-0710KL",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 3.05,
+        "top_H": 3.9,
+        "floor_gap_mm": 1.8499999999999999
+      },
+      {
+        "board": "left",
+        "ref": "R2013",
+        "mpn": "RC0603FR-07100KL",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 3.05,
+        "top_H": 3.9,
+        "floor_gap_mm": 1.8499999999999999
+      },
+      {
+        "board": "left",
+        "ref": "C2027",
+        "mpn": "GRM31CR71A106KA01L",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 1.7999999999999998,
+        "top_H": 3.9,
+        "floor_gap_mm": 0.5999999999999999
+      },
+      {
+        "board": "left",
+        "ref": "C2015",
+        "mpn": "GRM31CR71E475KA88L",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 1.7999999999999998,
+        "top_H": 3.9,
+        "floor_gap_mm": 0.5999999999999999
+      },
+      {
+        "board": "left",
+        "ref": "R2018",
+        "mpn": "RC0603FR-07100KL",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 3.05,
+        "top_H": 3.9,
+        "floor_gap_mm": 1.8499999999999999
+      },
+      {
+        "board": "left",
+        "ref": "C1713",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "left",
+        "ref": "C2692",
+        "mpn": "GRM31CR71E475KA88L",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 1.7999999999999998,
+        "top_H": 3.9,
+        "floor_gap_mm": 0.5999999999999999
+      },
+      {
+        "board": "right",
+        "ref": "U1763",
+        "mpn": "TPD1S514-1YZR",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.925,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.425
+      },
+      {
+        "board": "right",
+        "ref": "C2063",
+        "mpn": "GRM1555C1H271JA01D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum from the saved case height record plus 0.3mm",
+        "bottom_H": 5.5,
+        "top_H": 6.35
+      },
+      {
+        "board": "right",
+        "ref": "C2681",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "right",
+        "ref": "C2067",
+        "mpn": "GRM31CR71A106KA01L",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 1.7999999999999998,
+        "top_H": 3.9,
+        "floor_gap_mm": 0.5999999999999999
+      },
+      {
+        "board": "right",
+        "ref": "C2064",
+        "mpn": "GRM1555C1H271JA01D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 0.8500000000000001,
+        "height_basis": "manufacturer maximum from the saved case height record plus 0.3mm",
+        "bottom_H": 5.5,
+        "top_H": 6.35
+      },
+      {
+        "board": "right",
+        "ref": "C2061",
+        "mpn": "GRM31CR71E475KA88L",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 7.6
+      },
+      {
+        "board": "right",
+        "ref": "C2060",
+        "mpn": "GRM31CR71E106KA12L",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 1.7999999999999998,
+        "top_H": 3.9,
+        "floor_gap_mm": 0.5999999999999999
+      },
+      {
+        "board": "right",
+        "ref": "C2069",
+        "mpn": "GRM188R71H104KA93D",
+        "layer": "F.Cu",
+        "height_with_allowance_mm": 1.2,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 5.5,
+        "top_H": 6.7
+      },
+      {
+        "board": "right",
+        "ref": "U2016",
+        "mpn": "SN74LVC1G08DBVR",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 1.75,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 2.15,
+        "top_H": 3.9,
+        "floor_gap_mm": 0.95
+      },
+      {
+        "board": "right",
+        "ref": "C2693",
+        "mpn": "GRM31CR71E475KA88L",
+        "layer": "B.Cu",
+        "height_with_allowance_mm": 2.1,
+        "height_basis": "manufacturer maximum plus 0.3mm assembly allowance",
+        "bottom_H": 1.7999999999999998,
+        "top_H": 3.9,
+        "floor_gap_mm": 0.5999999999999999
+      }
+    ],
+    "unknown_heights": [],
+    "physical_hits": [],
+    "service_hits": [],
+    "exact_intersections_tested": 143,
+    "moving_angles_deg": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44,
+      46,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58,
+      60,
+      62,
+      64,
+      66,
+      68,
+      70,
+      72,
+      74,
+      76,
+      78,
+      80,
+      82,
+      84,
+      86,
+      88,
+      90,
+      92,
+      94,
+      96,
+      98,
+      100,
+      102,
+      104,
+      106,
+      108,
+      110,
+      112,
+      114,
+      116,
+      118,
+      120,
+      122,
+      124,
+      126,
+      128,
+      130,
+      132,
+      134,
+      135
+    ],
+    "physical_fit_verified": false
+  },
+  "limitations": [
+    "The three main boards remain unrouted in many areas; zero physical DRC errors does not mean routing is complete.",
+    "PD capacitor lower effective values still require DC bias, aging and assembled-hardware qualification.",
+    "Case checks cover changed component envelopes against saved flush-case solids, not a rebuilt or physically verified complete assembly.",
+    "No fabrication package or hardware operation is approved by this placement pass."
+  ],
+  "schematic_sha256": {
+    "01_power_battery.kicad_sch": "6da95d8631971bcd9a370d51ea76baf2568e948bcc173b8635a509ad71812add",
+    "left_io/left_pd.kicad_sch": "173d3157114900d2d36995770a3f21325cd47c2b9011318978f18a52fcb5e18f",
+    "left_io/left_usb.kicad_sch": "7fc35bc32d68b44f54331c3caee9e3b5630a402926c72f08fc49460b012cccfc",
+    "right_io/right_pd.kicad_sch": "dab2c8f29d0315367a77501df8fd7c23170c7d3d36cd0c75913a7877a89889fd"
+  }
+}

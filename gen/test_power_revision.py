@@ -4,16 +4,19 @@ from pathlib import Path
 import copy
 import unittest
 
-from verify_electrical_calculations import component_values
+from verify_electrical_calculations import component_values, pd_regulator_capacitance_checks
 from verify_power_revision import check
 
 
 FIXTURES = Path(__file__).parent / "testdata/power_revision"
 CAPS = ((0, "C2685"), (0, "C740"), (0, "C749"),
         (0, "C2686"), (0, "C2687"), (0, "C2688"),
+        (0, "C2689"), (0, "C2690"), (0, "C2691"),
         (1, "C2682"), (1, "C2683"), (1, "C2684"),
         (2, "C2680"), (2, "C2681"))
 FETS = ("Q2600", "Q2601", "Q2602", "Q2603", "Q2610", "Q2611")
+PD_CAPS = ((1, "C2020"), (1, "C2021"), (1, "C2692"),
+           (2, "C2060"), (2, "C2061"), (2, "C2693"))
 
 
 def monitor_center_fixture():
@@ -56,6 +59,40 @@ class PowerRevisionContracts(unittest.TestCase):
 
     def test_center_only_call_does_not_require_side_boards(self):
         self.assertEqual(check(self.boards[0])["failures"], [])
+
+    def test_pd_regulator_banks_require_each_capacitor_and_correct_return(self):
+        for board, ref in PD_CAPS:
+            for pin in ("1", "2"):
+                with self.subTest(ref=ref, pin=pin):
+                    self.setUp()
+                    self.boards[board].pins[ref][pin] = "wrong_rail"
+                    self.assert_ref_fails(ref)
+            with self.subTest(ref=ref, missing=True):
+                self.setUp()
+                del self.boards[board].pins[ref]
+                self.assert_ref_fails(ref)
+
+    def test_pd_regulator_ordering_codes_and_packages_are_checked(self):
+        for board, ref in PD_CAPS:
+            with self.subTest(ref=ref):
+                self.setUp()
+                self.boards[board].parts[ref] = ("GRM31CR71E685KA88L", "Capacitor_SMD:C_0603_1608Metric")
+                self.assert_ref_fails(ref)
+
+    def test_pd_regulator_upper_corners_pass(self):
+        for port in (1, 2):
+            self.assertTrue(all(c.passed for c in pd_regulator_capacitance_checks(self.boards[port], port)))
+
+    def test_single_10u_core_capacitor_exceeds_temperature_corner(self):
+        for port, main, parallel in ((1, "C2021", "C2692"), (2, "C2061", "C2693")):
+            with self.subTest(port=port):
+                self.setUp()
+                v = self.boards[port]
+                v[main] = "10u 25V X7R"
+                v.parts[main] = ("GRM31CR71E106KA12L", v.parts[main][1])
+                del v.pins[parallel]
+                rows = pd_regulator_capacitance_checks(v, port)
+                self.assertFalse(next(c for c in rows if "LDO1V5" in c.name).passed)
 
     def test_each_new_bypass_is_required(self):
         for board, ref in CAPS:

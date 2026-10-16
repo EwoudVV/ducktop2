@@ -43,7 +43,7 @@ MODELS_CORRECT = {
     "Texas_RPA0010A_VQFN-HR-10_3x3mm",
     "Texas_RPW0010A_VQFN-HR-10_2x2mm",
     "Texas_RYQ0021A_VQFN-HR-21_3x5mm",
-    "Texas_TPD1S514_YZ_WCSP-12_1.99x1.29mm_P0.5mm",
+    "Texas_TPD1S514_YZ0012_1.99x1.29mm_P0.4mm",
     "Wurth_9774055243R",
     "SMT_Standoff_12mm",
     "SMT_Standoff_7mm",

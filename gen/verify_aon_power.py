@@ -151,8 +151,13 @@ def inspect(netlist: Path, limits: AonLimits = AonLimits()) -> dict:
         ("C798", "/EC_AON_IN", "GND"),
         ("C2650", POWER + "AON_SYS_VCAP", "/VSYS"),
         ("C2651", POWER + "AON_PROTECTED", "GND"),
+        ("C2689", "/PD1_VBUS_RAW", "GND"),
+        ("C2690", "/PD2_VBUS_RAW", "GND"),
+        ("C2691", "/VSYS", "GND"),
     ):
         pins(ref, {1: a, 2: b})
+    for ref in ("C2689", "C2690", "C2691"):
+        identity(ref, "GRM188R71H104KA93D")
     pins("RS2620", {1: POWER + "AON_PROTECT_SENSE", 2: POWER + "AON_PROTECTED"})
     pins(
         "U2660",

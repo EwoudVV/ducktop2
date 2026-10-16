@@ -382,6 +382,9 @@ def check(center, left=None, right=None):
     bypass(center, "C2686", "/PD2_VBUS_GATED", "GRM188R71H104KA93D")
     bypass(center, "C2687", P + "ST2_USB_FET_COMMON", "GRM188R71H104KA93D")
     bypass(center, "C2688", P + "VBUS_COMBINED", "GRM188R71H104KA93D")
+    bypass(center, "C2689", "/PD1_VBUS_RAW", "GRM188R71H104KA93D")
+    bypass(center, "C2690", "/PD2_VBUS_RAW", "GRM188R71H104KA93D")
+    bypass(center, "C2691", "/VSYS", "GRM188R71H104KA93D")
     bypass(center, "C740", P + "MAIN_SEL_INTVCC", "GRM188R71H104KA93D")
     bypass(center, "C749", P + "ST2_SEL_INTVCC", "GRM188R71H104KA93D")
     pins(center, "U15", {8: "GND", 10: P + "MAIN_SEL_INTVCC", 15: P + "VBUS_COMBINED", 16: P + "SEL_STAGE2", 21: "GND"})
@@ -416,6 +419,22 @@ def check(center, left=None, right=None):
             failures.append(ref + ": missing PPHV net")
             continue
         prefix = raw.rsplit("/", 1)[0] + "/"
+        tcpc = "U41" if port == 1 else "U42"
+        pins(v, tcpc, {1: prefix + f"PD{port}_LDO3V3",
+                       4: prefix + f"PD{port}_LDO1V5"})
+        for cap, rail, order_code in (
+            ("C2020" if port == 1 else "C2060", "LDO3V3", "GRM31CR71E106KA12L"),
+            ("C2021" if port == 1 else "C2061", "LDO1V5", "GRM31CR71E475KA88L"),
+            ("C2692" if port == 1 else "C2693", "LDO1V5", "GRM31CR71E475KA88L"),
+        ):
+            pair(v, cap, prefix + f"PD{port}_" + rail, "GND")
+            mpn(v, cap, order_code)
+            footprint(v, cap, "Capacitor_SMD:C_1206_3216Metric")
+            count += 1
+            errors = identity_errors(v.get(cap, ""), v.parts.get(cap, ("", ""))[1], v.mpn(cap))
+            if v.get(cap, "").lstrip().upper().startswith("DNP"):
+                errors.append("PD regulator bypass must be fitted")
+            if errors: failures.append(f"{cap}: " + "; ".join(errors))
         out = f"/PD{port}_VBUS_GATED" if port == 2 else prefix + f"PD{port}_VBUS_GATED"
         mpn(v, ref, "TPS259827ONRGER")
         mpn(v, "R2086" if port == 1 else "R2096", "RC0603FR-07150KL")

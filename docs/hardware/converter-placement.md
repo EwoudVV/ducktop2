@@ -1,8 +1,52 @@
-# charger and mu supply placement
+# converter placement
 
-16 october 2026. moved seven footprints before routing the power stages.
-the parts, pad assignments, outlines, holes and existing tracks/vias are
-unchanged. the center still has 1,786 native unconnected items.
+16 october 2026. these notes cover the system 3.3 V and left USB 5 V
+capacitors, plus the earlier charger and Mu supply changes. the latest
+[main-board power pass](mainboard-power-placement.md) also covers the
+PD controllers, USB protection footprints and standby inputs.
+
+## system 3.3 V and USB 5 V
+
+C46, C790 and C791 now line up above U7 with their VIN ends on the right
+and ground ends on the left. C791's straight pad-center distance to U7's
+power-ground pad drops from 4.00 to 2.11 mm. its VIN distance changes from
+2.08 to 2.01 mm. route a broad local return to PGND; a nearby MODE or AGND
+pin on the same net is not a substitute for the power return.
+
+![system 3.3 V input placement](../images/journal/2026-10-16-system-3v3-input-placement.png)
+
+left C1713 moves from the back to the front, above U1703's VIN and PGND
+pins. each straight connection is about 1.55 mm. the old XY sum was
+slightly shorter, but it also needed connections between opposite board
+sides. C1711/C1712 now line up behind the small bypass. C1866 moves out
+of that space and remains an unpopulated input-damping option.
+
+![USB 5 V input placement](../images/journal/2026-10-16-usb5-input-placement.png)
+
+| board | reference | X, mm | Y, mm | rotation |
+| --- | --- | ---: | ---: | ---: |
+| center | C46 | 129.745001 | 61.7 | 180 degrees |
+| center | C790 | 129.745001 | 58.7 | 180 degrees |
+| center | C791 | 129.745001 | 64.2 | 180 degrees |
+| left | C1711 | 29 | 70.8 | 0 degrees |
+| left | C1712 | 29 | 73.4 | 0 degrees |
+| left | C1713 | 28.75 | 75.55 | 0 degrees |
+| left | C1866 | 26.2 | 65.4 | 0 degrees |
+
+all seven end on the front. coordinates are in each board's native frame.
+U6 SYS_5V and U773 PCIe power retain their placements and existing routes.
+their feedback, compensation and sense paths still need the local returns
+and dedicated pickups described in the routing notes.
+
+these seven moves preserve their values, pad assignments and existing
+tracks/vias. the broader pass includes schematic and local CC-route
+repairs; its [saved record](../../verification/mainboard-power-placement.json)
+has the current counts and source hashes for all three boards.
+
+these distances describe placement, not routed loop lengths or measured
+switching performance. the input-return guidance comes from
+[TPS56637 section 10](https://www.ti.com/lit/ds/symlink/tps56637.pdf) and
+[LM706x0 section 7.4](https://www.ti.com/lit/ds/symlink/lm70660.pdf).
 
 ## charger
 
@@ -51,15 +95,15 @@ all coordinates below use the native PCB frame, viewed from the front.
 
 the two underside resistors each have a 0.55 mm maximum body height, plus
 the existing 0.30 mm assembly allowance. the selected case study puts the
-PCB underside at 5.1 mm and the floor surface at 2.4 mm, leaving 1.85 mm
+PCB underside at H3.9 and the floor surface at H1.2, leaving 1.85 mm
 under these parts. this checks the floor only. the complete case model
 still needs its PCB snapshot refreshed and a full collision check.
 
-## checks and routing requirements
+## earlier charger and Mu checks
 
-the candidate and starting boards have identical physical DRC findings:
+the first placement pass had identical physical DRC findings before and after:
 zero errors and 344 existing warnings. native schematic comparison and
-the explicit pad/net comparison pass. native connectivity remains at
+the explicit pad/net comparison passed. native connectivity stayed at
 1,786 unconnected items, with 4,481 segments/arcs and 722 vias.
 
 the source hashes, moves and measured pad gaps are in

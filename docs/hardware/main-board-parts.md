@@ -1,6 +1,9 @@
 # main-board part selections
 
-5 october 2026. this pass fills in R450/R451 and replaces 41 incomplete
+the [16 october power placement pass](mainboard-power-placement.md) updates
+the PD regulator capacitor banks and three USB protection footprints.
+
+5 october 2026: filled in R450/R451 and replaced 41 incomplete
 capacitor codes plus the discontinued C2606 part. the changes cover 42
 capacitors on the center and right boards. capacitance, circuit ratings,
 footprints, placement and copper are unchanged.
@@ -52,8 +55,8 @@ check the regulator ripple and load-step response on the assembled board.
 
 ## verification
 
-all 44 corrected identities survive generation. the three main boards
-have 1,315 populated physical sourcing items, with no missing manufacturer
+the 5 october check covered all 44 corrected identities and
+1,315 populated physical sourcing items, with no missing manufacturer
 or part-number fields and no incomplete Murata codes. this is an identity
 check, not proof of supplier stock or a completed assembly quote.
 

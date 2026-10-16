@@ -1,7 +1,7 @@
 # center board
 
-updated 1 october 2026. the center board is 227 x 185 mm with eight
-layers, 868 footprints and 3,563 pads. the existing pcie, usb, hdmi and
+updated 16 october 2026. the center board is 227 x 185 mm with eight
+layers, 870 footprints and 3,563 pads. the existing pcie, usb, hdmi and
 ethernet routes have been repaired. there is still a lot of main routing
 to do before this board can be ordered.
 
@@ -13,8 +13,8 @@ the board near the sockets. the repairs include pair spacing, length
 matching, layer transitions, local ground returns and the nearby control
 routes. the repaired signals use F.Cu, In2.Cu and B.Cu.
 
-the board has 4,446 straight track sections, 51 arcs and 723 vias.
-native connectivity counts 1,795 unconnected items. KiCad's DRC list can
+the board has 4,430 straight track sections, 51 arcs and 722 vias.
+native connectivity counts 1,798 unconnected items. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
 the four hdmi pairs and the ethernet controller's pcie data and clock
@@ -33,8 +33,7 @@ still open. the separate connector contacts and esd pad branches are
 checked explicitly, so a spare dangling trace cannot pass as a valid branch.
 
 the refilled board has zero native DRC errors. unrouted connections and
-their warnings remain. a fresh schematic export matches all 868 footprints
-and 3,372 electrical pads. the 698 existing nvme, wi-fi and nearby control
+their warnings remain. the current schematic export matches the saved footprint and pad nets. the 698 existing nvme, wi-fi and nearby control
 routing objects were kept unchanged through these repairs.
 a missing 1 mm piece of the nvme rx0 negative trace was also restored
 from the earlier routing. the full receive path now connects again.
@@ -48,9 +47,9 @@ y=36.55 to y=221.55. the installed layout uses the center translation
 the center back at x=71.5 to x=298.5, with 1.5 mm gaps to both i/o boards
 and a 358 mm board span before case walls.
 
-the bms notch is 64.9 mm wide with 1.5 mm inside radii. its editor side
-walls are x=183.10 and x=248.00, and its back is at y=185.25. in the
-installed frame those become x=152.55 and x=217.45, with the back at
+the bms notch is 83 mm wide with 1.5 mm inside radii. its editor side
+walls are x=174.05 and x=257.05, and its back is at y=185.25. in the
+installed frame those become x=143.5 and x=226.5, with the back at
 y=148.7. the notch opens through the front edge.
 
 the positions below use pcb editor coordinates, in mm.
@@ -84,6 +83,10 @@ matches its pads and acoustic port.
 RS1 separates `FG_VSS` from system `GND`. its sense filters and gauge
 inputs need short kelvin connections. return wiring must respect the
 shunt and the separate bms control island.
+
+the latest [power placement changes](mainboard-power-placement.md) leave
+all center-board tracks and vias intact. the complete current placement
+export is [component-placement.csv](../../mechanical/component-placement.csv).
 
 ## routing setup
 

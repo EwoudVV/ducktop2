@@ -12,7 +12,7 @@ lists the issues that remain before an order package can be prepared.
 | Right I/O | `right_io/right_io.kicad_pcb` | Eight-layer layout; confirm the actual order against the approved stackup |
 | BMS | `bms/bms.kicad_pcb` | Four layers; [checked PCBWay package](bms/pcbway/README.md). Quote and factory review pending. |
 | Radio | `radio_daughterboard/radio_daughterboard.kicad_pcb` | Four-layer placement board; fabrication details still to finalize |
-| Keyboard | `keyboard/12_keyboard_daughterboard.kicad_pcb` | Existing separate two-layer rev A package |
+| Keyboard | `keyboard/12_keyboard_daughterboard.kicad_pcb` | Four-layer RGB board; confirm the final 0.8 mm stackup and RGB assembly package |
 
 the old monolith and the older quote package are reference material. do not
 use them as a substitute for packages from the current split-board files.

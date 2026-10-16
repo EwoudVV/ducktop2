@@ -3,16 +3,16 @@
 16 october 2026. this is the routing order for the saved 100 W circuit.
 the main boards are still eight layers. the BMS is a separate four-layer
 board. the [current counts](power-revision.md) come from refilled copies;
-the copper in the working boards has not been changed by this check.
+the existing right CC control paths were repaired in the latest pass;
+all other tracks and vias were preserved.
 
-the [converter placement pass](converter-placement.md) brings the charger
-input shunt closer and opens the Mu switching-node corridor. it changes
-seven footprint placements and adds no routing.
-
-the following [input and standby pass](source-standby-placement.md) adds
-three selector bypasses, brings the charge-pump capacitors across their
-controller pins and shortens the battery-gauge filter connection. these
-parts still need routing.
+the [main-board power placement pass](mainboard-power-placement.md)
+includes both PD controllers, the left USB source circuit, standby inputs
+and the remaining rail capacitors. it also corrects the three TPD1S514
+land patterns. the earlier [converter changes](converter-placement.md)
+bring the charger input shunt closer and open the Mu switching corridor.
+the [input and standby changes](source-standby-placement.md) cover the
+selector bypasses, charge-pump capacitors and battery-gauge filter.
 
 ## before routing
 
@@ -167,6 +167,31 @@ uses Alpha 6716, 16 AWG. join the WAGO rails by net name, since the numbered
 three-pole groups reverse at the center. use both ground braids at each
 seam and retain the separate USB5 enable, monitoring and fault circuits.
 [loom and return limits](io-power-qualification.md)
+
+## system and endpoint rails
+
+U7's C791 input bypass now sits across the VIN and PGND side of the IC,
+with C46/C790 aligned behind it. connect the capacitor ground ends back to
+PGND pin 9 with a broad local path and nearby ground vias. keep the
+feedback divider's quiet return to AGND separate from that switching
+current until the local ground connection. keep L5's SW connection short
+and wide, and give the output capacitors a direct ground return.
+
+U6, U773 and left U1703 use LM706A0. keep their capacitor returns local to
+the PGND pins and connect the exposed pads to the ground planes with
+thermal vias. take separate, paired sense connections from the parallel
+output shunts. route the bootstrap return to SW4; do not join that pin to
+the high-current SW1/SW2/SW3 path on the PCB. keep feedback and compensation
+connections away from the switching nodes.
+
+left C1713 is now on the front beside U1703's input pins. C1711/C1712 are
+aligned behind it, and the optional C1866 footprint stays DNP. the new
+placement permits a same-side input loop; the tracks and ground copper
+still need designing. [positions and close-ups](converter-placement.md)
+
+[TPS56637 layout](https://www.ti.com/lit/ds/symlink/tps56637.pdf) and
+[LM706x0 layout](https://www.ti.com/lit/ds/symlink/lm70660.pdf) show the
+local power returns, sense pickups and thermal connections.
 
 ## after routing
 
