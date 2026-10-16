@@ -1175,12 +1175,20 @@ def check_mu_carrier(components, pin_names):
         expect_value_prefix(components, ref, value, f"{ref} Mu power/status bias")
         expect(net(components, ref, "1"), pin1, f"{ref} pin 1")
         expect(net(components, ref, "2"), pin2, f"{ref} pin 2")
-    expect_contains(comp(components, "U769").value, "SN74LVC1G08", "qualified host-active gate")
+    expect_contains(comp(components, "U769").value, "SN74LVC1G97", "Schmitt qualified host-active gate")
+    expect(prop(components, "U769", "MPN"), "SN74LVC1G97DBVR", "host-active Schmitt gate order code")
     for pin, want in {
-        "1": "/MU_S0_HIGH", "2": "/MU_12V_PG", "3": "GND",
-        "4": "/MU_HOST_ACTIVE", "5": "/MCU_3V3",
+        "1": "GND", "2": "GND", "3": "/MU_12V_PG",
+        "4": "/MU_HOST_ACTIVE", "5": "/MCU_3V3", "6": "/MU_S0_HIGH",
     }.items():
         expect(net(components, "U769", pin), want, f"U769 qualified host-active pin {pin}")
+    for ref, value, pin1, pin2 in (
+        ("R762", "27.4k", "/MU_12V", "/MU_12V_PG"),
+        ("R2671", "10k", "/MU_12V_PG", "GND"),
+    ):
+        expect_value_prefix(components, ref, value, f"{ref} Mu rail-derived PG")
+        expect(net(components, ref, "1"), pin1, f"{ref} PG pin 1")
+        expect(net(components, ref, "2"), pin2, f"{ref} PG pin 2")
     expect_value_prefix(components, "R769", "100k", "MU_HOST_ACTIVE fail-low bias")
     expect(net(components, "R769", "1"), "/MU_HOST_ACTIVE", "MU_HOST_ACTIVE fail-low signal")
     expect(net(components, "R769", "2"), "GND", "MU_HOST_ACTIVE fail-low return")

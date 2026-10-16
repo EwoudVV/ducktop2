@@ -8796,7 +8796,213 @@
 		)
 		(embedded_fonts no)
 	)
-  )
+  (symbol "74xGxx:74LVC1G97"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "U"
+			(at -5.08 10.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC1G97"
+			(at 7.62 -10.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/sg/scyt129e/scyt129e.pdf"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Configurable Multi-Function Single Gate, Low-Voltage CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "Configurable Single Gate LVC CMOS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT* SC*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "74LVC1G97_0_1"
+			(rectangle
+				(start -7.62 7.62)
+				(end 7.62 -7.62)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "74LVC1G97_1_1"
+			(pin input line
+				(at -12.7 0 0)
+				(length 5.08)
+				(name "IN1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 -12.7 90)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -12.7 5.08 0)
+				(length 5.08)
+				(name "IN0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "Y"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 12.7 270)
+				(length 5.08)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -12.7 -5.08 0)
+				(length 5.08)
+				(name "IN2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+)
 (text "== A1 LattePanda Mu Ultra carrier core ==" (at 20.32 20.32 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid 3db8d879-af77-577d-8f19-a8b513726984))
 (symbol
   (lib_id "Module_LattePanda_Ultra:LattePanda_Mu_Ultra")
@@ -13979,180 +14185,21 @@
   (effects (font (size 1.27 1.27)) (justify left bottom))
   (uuid d947577b-c612-5395-a38d-d448d8011e76)
 )
-(symbol
-  (lib_id "Device:R")
-  (at 839.47 270.51 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 78681ffb-3ead-506e-b4ca-1886038268fa)
-  (property "Reference" "R768" (at 839.47 267.97 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10k LattePanda PSON required pull-up" (at 839.47 273.05 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 839.47 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 839.47 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "ReferenceCircuit" "LattePanda Mu Power Control and Status design guide" (at 839.47 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://docs.lattepanda.com/content/mu_edition/design_guide_pwctl_stat/" (at 839.47 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 839.47 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RC0603FR-0710KL" (at 839.47 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid d3cfa42b-aab9-5378-88dc-68536d57ce6d))
-  (pin "2" (uuid ef03f36c-7aa3-5f1f-a0a0-3bef73cf9391))
-  (instances
-    (project "ducktop2"
-      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
-        (reference "R768")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 839.47 266.7 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 367cc783-38cc-51d2-a563-7e924d00543e)
-)
-(hierarchical_label "MU_S0_HIGH"
-  (shape bidirectional)
-  (at 839.47 274.32 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 53ad2d34-84f8-5fbd-93ea-11c7b319faa6)
-)
-(symbol
-  (lib_id "74xGxx:74LVC1G08")
-  (at 839.47 289.56 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 9a87dac1-e2fb-5d78-b276-927496cc71ef)
-  (property "Reference" "U769" (at 839.47 273.05 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "SN74LVC1G08DBVR qualified host-active AND" (at 839.47 306.07 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 839.47 289.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 839.47 289.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Texas Instruments" (at 839.47 289.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "SN74LVC1G08DBVR" (at 839.47 289.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf" (at 839.47 289.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "LogicContract" "MU_HOST_ACTIVE=MU_S0_HIGH_AND_MU_12V_PG" (at 839.47 289.56 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid de06d9ee-bd74-5208-aa97-2ede1c52062a))
-  (pin "2" (uuid b667d544-2bc8-5b34-aa4d-c1bc758fad0c))
-  (pin "3" (uuid c1d11e92-e71d-5635-82fe-ed15e8b58f83))
-  (pin "4" (uuid e9b2a346-b55d-5191-b4ba-137f04dd406b))
-  (pin "5" (uuid 3f833c3a-4925-5582-bd4f-1ec16f0cb6d4))
-  (instances
-    (project "ducktop2"
-      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
-        (reference "U769")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "MU_S0_HIGH"
-  (shape bidirectional)
-  (at 824.23 287.02 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 37c58786-a409-516b-8834-3ee23eea9ca6)
-)
-(hierarchical_label "MU_12V_PG"
-  (shape bidirectional)
-  (at 824.23 292.1 180)
-  (effects (font (size 1.27 1.27)) (justify right bottom))
-  (uuid 47312ad3-5790-5ab2-83c4-565b52eefe62)
-)
-(label "GND"
-  (at 839.47 299.72 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 5214c74f-cf2a-560f-a63b-fa71b9caffc0)
-)
-(hierarchical_label "MU_HOST_ACTIVE"
-  (shape bidirectional)
-  (at 852.17 289.56 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 119d178b-20f5-5ba8-b2c1-d0abc5baa193)
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 839.47 279.4 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 6f4bb2f5-f3ea-569e-91a3-db6367e4c51b)
-)
-(symbol
-  (lib_id "Device:C")
-  (at 859.79 299.72 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid d3f526c4-c772-5adb-8710-b5edd4f4c14f)
-  (property "Reference" "C793" (at 859.79 297.18 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100n qualified host-active gate local" (at 859.79 302.26 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 859.79 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 859.79 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Murata" (at 859.79 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "GRM188R71H104KA93D" (at 859.79 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 4319a7db-6ef9-5e7e-bf54-8f5bc9f9dd7e))
-  (pin "2" (uuid bcb65c70-a5da-52cd-aed8-44bb19221da3))
-  (instances
-    (project "ducktop2"
-      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
-        (reference "C793")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 859.79 295.91 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 047c2e21-4c50-5a2e-b2b5-4ed1503783ce)
-)
-(label "GND"
-  (at 859.79 303.53 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2c6e2f5d-5d0e-554d-9be2-b480b5cf454e)
-)
-(symbol
-  (lib_id "Device:R")
-  (at 839.47 309.88 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 91c05678-1444-5094-a45e-7c6c7587e749)
-  (property "Reference" "R769" (at 839.47 307.34 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k MU_HOST_ACTIVE fail-low" (at 839.47 312.42 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 839.47 309.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 839.47 309.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 839.47 309.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RC0603FR-07100KL" (at 839.47 309.88 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid 8a82c8ef-2457-5750-a429-5e3070472e0f))
-  (pin "2" (uuid 7a262cc9-7680-5b13-924a-f6b691d37967))
-  (instances
-    (project "ducktop2"
-      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
-        (reference "R769")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "MU_HOST_ACTIVE"
-  (shape bidirectional)
-  (at 839.47 306.07 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 2fc16111-19fc-5a84-bc20-8887499cfe30)
-)
-(label "GND"
-  (at 839.47 313.69 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid f9b4c907-0735-5018-9d6e-d087a8532b79)
-)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (symbol
   (lib_id "TPS2553D:TPS2553D")
   (at 900.43 325.12 0)
@@ -16464,81 +16511,12 @@
   (uuid 95f37406-da53-55ac-a7ab-91d7a076ef4c)
 )
 (text "endpoint: local module-loop L <=150nH; total post-switch C <=2mF including board parts; 5A DC plus <=0.4A inrush; qualify transients." (at 759.46 789.94 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid fa8d38a6-1900-52be-a8f7-f790e6280eda))
-(symbol
-  (lib_id "Device:R")
-  (at 740.41 270.51 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 0b6cea30-0cfb-59a0-bf23-6f25a485d4d1)
-  (property "Reference" "R762" (at 740.41 267.97 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "100k PG pull-up" (at 740.41 273.05 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 740.41 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 740.41 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "Yageo" (at 740.41 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "RC0603FR-07100KL" (at 740.41 270.51 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid ea589931-cafe-5679-a49f-7e0c207002ff))
-  (pin "2" (uuid c0355e79-efc1-593e-a590-aab05d041e7c))
-  (instances
-    (project "ducktop2"
-      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
-        (reference "R762")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "MCU_3V3"
-  (shape bidirectional)
-  (at 740.41 266.7 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 49ef9f1b-a45f-54b4-8c92-a53ceeabf6d4)
-)
-(hierarchical_label "MU_12V_PG"
-  (shape bidirectional)
-  (at 740.41 274.32 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 991b67e0-2b62-5a89-b26c-2cc3df3628ee)
-)
-(symbol
-  (lib_id "Device:C")
-  (at 740.41 279.4 0)
-  (unit 1)
-  (exclude_from_sim no)
-  (in_bom yes)
-  (on_board yes)
-  (dnp no)
-  (uuid 2e339c69-1226-554d-9940-686d7fc0a77b)
-  (property "Reference" "C774" (at 740.41 276.86 0) (effects (font (size 1.27 1.27))))
-  (property "Value" "10n PG deglitch" (at 740.41 281.94 0) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 740.41 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 740.41 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Manufacturer" "KEMET" (at 740.41 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "MPN" "C0603C103K5RACTU" (at 740.41 279.4 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid b99a49a6-a2eb-5c02-a2a9-4ec2cd495518))
-  (pin "2" (uuid 1b3dc260-22d4-5e86-b74f-0870cfbd9ba8))
-  (instances
-    (project "ducktop2"
-      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
-        (reference "C774")
-        (unit 1)
-      )
-    )
-  )
-)
-(hierarchical_label "MU_12V_PG"
-  (shape bidirectional)
-  (at 740.41 275.59 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid b2e218f2-8a55-5103-bd03-2aff3e1e906a)
-)
-(label "GND"
-  (at 740.41 283.21 0)
-  (effects (font (size 1.27 1.27)) (justify left bottom))
-  (uuid 84bb0841-37c1-5a35-a58a-761350244624)
-)
+
+
+
+
+
+
 (symbol
   (lib_id "Device:R")
   (at 740.41 289.56 0)
@@ -17731,4 +17709,296 @@
   )
 )
   (embedded_fonts no)
+(text "Mu power-good and host permission" (at 1159.51 279.4 0) (effects (font (size 1.27 1.27)) (justify left)) (uuid f689ae17-d677-57a7-9589-8db8dc900a87))
+(symbol
+  (lib_id "Device:R")
+  (at 1179.83 350.52 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 78681ffb-3ead-506e-b4ca-1886038268fa)
+  (property "Reference" "R768" (at 1184.91 349.25 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Value" "10k LattePanda PSON required pull-up" (at 1184.91 351.79 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 1179.83 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 1179.83 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "ReferenceCircuit" "LattePanda Mu Power Control and Status design guide" (at 1179.83 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://docs.lattepanda.com/content/mu_edition/design_guide_pwctl_stat/" (at 1179.83 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 1179.83 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 1179.83 350.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1c245526-d409-5ab8-87d4-c5ad9f2746ac))
+  (pin "2" (uuid ea9a6e74-23c4-5deb-945d-83bde0e0dfa0))
+  (instances
+    (project "ducktop2"
+      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
+        (reference "R768")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 1179.83 346.71 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 261255fe-97f6-528e-bea1-9a30628babab)
+)
+(hierarchical_label "MU_S0_HIGH"
+  (shape bidirectional)
+  (at 1179.83 354.33 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 60ff0816-d937-51f3-897d-1365fc175ebd)
+)
+(symbol
+  (lib_id "74xGxx:74LVC1G97")
+  (at 1259.84 379.73 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 9a87dac1-e2fb-5d78-b276-927496cc71ef)
+  (property "Reference" "U769" (at 1259.84 360.68 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "SN74LVC1G97DBVR Schmitt host-active AND" (at 1259.84 398.78 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 1259.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 1259.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Texas Instruments" (at 1259.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "SN74LVC1G97DBVR" (at 1259.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc1g97.pdf" (at 1259.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "LogicContract" "MU_HOST_ACTIVE=MU_S0_HIGH_AND_MU_12V_PG" (at 1259.84 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid a70b6d8f-85e0-580e-9967-f077a110ed3d))
+  (pin "2" (uuid 3a28e960-69eb-559d-95a5-e2b2d0eb7d3c))
+  (pin "3" (uuid cadfe591-2db3-52dc-844b-f836f2526209))
+  (pin "4" (uuid b4d3728d-0d8d-58f0-a42f-e5523a4a3b5b))
+  (pin "5" (uuid 74af11f2-a631-511d-93a6-8cf4155793b1))
+  (pin "6" (uuid 63902afc-822a-5b2d-b0c3-34c833615e1b))
+  (instances
+    (project "ducktop2"
+      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
+        (reference "U769")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "GND"
+  (at 1247.14 379.73 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 1c8f8a14-b865-5713-ad34-f7d560493886)
+)
+(label "GND"
+  (at 1259.84 392.43 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e41cdc8f-ffd0-5041-b6b9-f4cd33dd878d)
+)
+(hierarchical_label "MU_12V_PG"
+  (shape bidirectional)
+  (at 1247.14 374.65 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid 7bab9afa-5e1b-52b6-8a29-796dde98b9ec)
+)
+(hierarchical_label "MU_HOST_ACTIVE"
+  (shape bidirectional)
+  (at 1272.54 379.73 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 49e5f7e5-177d-59e5-b415-594bb01e9106)
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 1259.84 367.03 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c3893c0a-7fe3-5569-ae86-972e8a9a3f06)
+)
+(hierarchical_label "MU_S0_HIGH"
+  (shape bidirectional)
+  (at 1247.14 384.81 180)
+  (effects (font (size 1.27 1.27)) (justify right bottom))
+  (uuid e09e0fdd-cc52-5e44-a3f7-47373d604164)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 1339.85 379.73 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid d3f526c4-c772-5adb-8710-b5edd4f4c14f)
+  (property "Reference" "C793" (at 1344.93 378.46 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Value" "100n qualified host-active gate local" (at 1344.93 381 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 1339.85 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 1339.85 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Murata" (at 1339.85 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "GRM188R71H104KA93D" (at 1339.85 379.73 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 929d5adc-c980-5d66-9f78-6629e32e2ede))
+  (pin "2" (uuid 5bc72a03-c386-553c-8e9c-ee0855ce0154))
+  (instances
+    (project "ducktop2"
+      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
+        (reference "C793")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MCU_3V3"
+  (shape bidirectional)
+  (at 1339.85 375.92 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid ab4416b7-a29d-5b1c-b7ae-f333cdf3963c)
+)
+(label "GND"
+  (at 1339.85 383.54 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 9de0d345-d3cf-5ff7-8faf-a046678e9b25)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 1339.85 420.37 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 91c05678-1444-5094-a45e-7c6c7587e749)
+  (property "Reference" "R769" (at 1344.93 419.1 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Value" "100k MU_HOST_ACTIVE fail-low" (at 1344.93 421.64 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 1339.85 420.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 1339.85 420.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 1339.85 420.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-07100KL" (at 1339.85 420.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 63f26069-e168-52ff-bd30-bddc3b71fc69))
+  (pin "2" (uuid cfebeb04-6362-507b-940f-998b9167099c))
+  (instances
+    (project "ducktop2"
+      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
+        (reference "R769")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MU_HOST_ACTIVE"
+  (shape bidirectional)
+  (at 1339.85 416.56 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 220cb275-6f19-5ba7-bcec-3e643dee2f6d)
+)
+(label "GND"
+  (at 1339.85 424.18 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid a5bdc4a1-2c06-584f-9631-9da91f2b1336)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 1179.83 299.72 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 0b6cea30-0cfb-59a0-bf23-6f25a485d4d1)
+  (property "Reference" "R762" (at 1184.91 298.45 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Value" "27.4k PG divider top" (at 1184.91 300.99 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 1179.83 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 1179.83 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 1179.83 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0727K4L" (at 1179.83 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 97879ea9-4c01-54e7-af46-8e7f1e8870fa))
+  (pin "2" (uuid 0c5c58f6-c9f0-50d4-bd36-8ef4b3f024db))
+  (instances
+    (project "ducktop2"
+      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
+        (reference "R762")
+        (unit 1)
+      )
+    )
+  )
+)
+(label "MU_12V"
+  (at 1179.83 295.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 5664eaab-36a7-5eb4-8572-3af854330065)
+)
+(hierarchical_label "MU_12V_PG"
+  (shape bidirectional)
+  (at 1179.83 303.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e6df9be8-69fc-50f9-8095-7981771638c1)
+)
+(symbol
+  (lib_id "Device:R")
+  (at 1239.52 299.72 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid b3d6bb10-f8f1-5fb2-ab9e-7453d847fa14)
+  (property "Reference" "R2671" (at 1244.6 298.45 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Value" "10k PG divider bottom" (at 1244.6 300.99 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 1239.52 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 1239.52 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "Yageo" (at 1239.52 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "RC0603FR-0710KL" (at 1239.52 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 87156957-e99b-5491-a71f-6cd022041dc9))
+  (pin "2" (uuid 4849245a-76b3-57dd-9a83-51984ad73846))
+  (instances
+    (project "ducktop2"
+      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
+        (reference "R2671")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MU_12V_PG"
+  (shape bidirectional)
+  (at 1239.52 295.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid e5adf7c9-bb20-5f31-9603-43cda7237856)
+)
+(label "GND"
+  (at 1239.52 303.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 6d85fab1-f13f-5265-adef-95ffcbc4b0e3)
+)
+(symbol
+  (lib_id "Device:C")
+  (at 1300.48 299.72 0)
+  (unit 1)
+  (exclude_from_sim no)
+  (in_bom yes)
+  (on_board yes)
+  (dnp no)
+  (uuid 2e339c69-1226-554d-9940-686d7fc0a77b)
+  (property "Reference" "C774" (at 1305.56 298.45 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Value" "10n PG deglitch" (at 1305.56 300.99 0) (effects (font (size 1.27 1.27)) (justify left)))
+  (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 1300.48 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 1300.48 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Manufacturer" "KEMET" (at 1300.48 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "MPN" "C0603C103K5RACTU" (at 1300.48 299.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid 1e78dabb-c0f6-54a1-9db9-97c2afacb739))
+  (pin "2" (uuid 65c4eb69-bbed-5090-8d78-01453443c1ff))
+  (instances
+    (project "ducktop2"
+      (path "/7f3572a2-a529-5ef0-93eb-27f85c0119a9"
+        (reference "C774")
+        (unit 1)
+      )
+    )
+  )
+)
+(hierarchical_label "MU_12V_PG"
+  (shape bidirectional)
+  (at 1300.48 295.91 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid 232e739d-88d5-5d33-a37b-00a2f891324b)
+)
+(label "GND"
+  (at 1300.48 303.53 0)
+  (effects (font (size 1.27 1.27)) (justify left bottom))
+  (uuid c84648b0-1f14-5a74-9ae1-58b28bad107b)
+)
 )

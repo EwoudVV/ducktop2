@@ -490,29 +490,30 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
             pin_nets={"1": ("VSYS", "hier"), "2": ("MU12_FORCE_OFF", "local")})
     s.place("R767", "R", "100k MU_12V_ENABLE reset pulldown", 840, 260, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU_12V_ENABLE", "hier"), "2": ("GND", "local")})
-    s.place("R768", "R", "10k LattePanda PSON required pull-up", 840, 270, footprint=FOOTPRINTS["R"],
+    s.text(1160, 280, "Mu power-good and host permission")
+    s.place("R768", "R", "10k LattePanda PSON required pull-up", 1180, 350, footprint=FOOTPRINTS["R"], text_right=True,
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MU_S0_HIGH", "hier")},
             extra_props={
                 "ReferenceCircuit": "LattePanda Mu Power Control and Status design guide",
                 "Datasheet": "https://docs.lattepanda.com/content/mu_edition/design_guide_pwctl_stat/",
             })
-    s.place("U769", "74LVC1G08", "SN74LVC1G08DBVR qualified host-active AND", 840, 290,
-            footprint=FOOTPRINTS["SN74LVC1G08DBV"],
+    # In1=0 makes the mux function In0 AND In2. Schmitt inputs accept
+    # the filtered PG edge and the module's pulled-up status signal.
+    s.place("U769", "74LVC1G97", "SN74LVC1G97DBVR Schmitt host-active AND", 1260, 380,
+            footprint="Package_TO_SOT_SMD:SOT-23-6",
             pin_nets={
-                "1": ("MU_S0_HIGH", "hier"), "2": ("MU_12V_PG", "hier"),
-                "3": ("GND", "local"), "4": ("MU_HOST_ACTIVE", "hier"),
-                "5": ("MCU_3V3", "hier"),
+                "1": ("GND", "local"), "2": ("GND", "local"),
+                "3": ("MU_12V_PG", "hier"), "4": ("MU_HOST_ACTIVE", "hier"),
+                "5": ("MCU_3V3", "hier"), "6": ("MU_S0_HIGH", "hier"),
             }, extra_props={
-                "Manufacturer": "Texas Instruments", "MPN": "SN74LVC1G08DBVR",
-                "Datasheet": "https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf",
+                "Manufacturer": "Texas Instruments", "MPN": "SN74LVC1G97DBVR",
+                "Datasheet": "https://www.ti.com/lit/ds/symlink/sn74lvc1g97.pdf",
                 "LogicContract": "MU_HOST_ACTIVE=MU_S0_HIGH_AND_MU_12V_PG",
             })
-    # Readability: C793 sat 10 mm below U769 with overlapping body bboxes.
-    # Moved +20 mm right to clear the AND gate. Nets unchanged.
-    s.place("C793", "C", "100n qualified host-active gate local", 860, 300,
+    s.place("C793", "C", "100n qualified host-active gate local", 1340, 380, text_right=True,
             footprint=FOOTPRINTS["C_100n"],
             pin_nets={"1": ("MCU_3V3", "hier"), "2": ("GND", "local")})
-    s.place("R769", "R", "100k MU_HOST_ACTIVE fail-low", 840, 310,
+    s.place("R769", "R", "100k MU_HOST_ACTIVE fail-low", 1340, 420, text_right=True,
             footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU_HOST_ACTIVE", "hier"), "2": ("GND", "local")})
 
@@ -593,9 +594,15 @@ def build(sheet_symbol_uuid, pwr_start=400, flg_start=400):
 
     from generate_pcie_power import add_pcie_power
     add_pcie_power(s)
-    s.place("R762", "R", "100k PG pull-up", 740, 270, footprint=FOOTPRINTS["R"],
-            pin_nets={"1": ("MCU_3V3", "hier"), "2": ("MU_12V_PG", "hier")})
-    s.place("C774", "C", "10n PG deglitch", 740, 280, footprint=FOOTPRINTS["C_100n"],
+    # Derive the high level from the measured rail, not always-on 3V3.
+    # R2671 holds PG low with MU_12V absent even if U750 is high impedance.
+    s.place("R762", "R", "27.4k PG divider top", 1180, 300, footprint=FOOTPRINTS["R"], text_right=True,
+            pin_nets={"1": ("MU_12V", "local"), "2": ("MU_12V_PG", "hier")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0727K4L"})
+    s.place("R2671", "R", "10k PG divider bottom", 1240, 300, footprint=FOOTPRINTS["R"], text_right=True,
+            pin_nets={"1": ("MU_12V_PG", "hier"), "2": ("GND", "local")},
+            extra_props={"Manufacturer": "Yageo", "MPN": "RC0603FR-0710KL"})
+    s.place("C774", "C", "10n PG deglitch", 1300, 300, footprint=FOOTPRINTS["C_100n"], text_right=True,
             pin_nets={"1": ("MU_12V_PG", "hier"), "2": ("GND", "local")})
     s.place("R763", "R", "100k CC pull-up", 740, 290, footprint=FOOTPRINTS["R"],
             pin_nets={"1": ("MU12_VCC", "local"), "2": ("MU12_CC_N", "local")})

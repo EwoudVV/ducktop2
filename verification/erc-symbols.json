@@ -56,6 +56,11 @@
       "generated_symbol_sha256": "7d7b40c46d52a1adf951d8f67a2fb3fcb5852968b4881acc31523f060a0babaf",
       "stock_library_sha256": "9ac4f95a67353239c21a6be6ae36ada8a859e0d7b6471799240580a391b2b577",
       "reason": "stock inherited symbol flattened with the same pins and fields"
+    },
+    "74xGxx:74LVC1G97": {
+      "stock_library_sha256": "5bad2387ab24a71cff0a43562218f21e047f421e4f7ddf9e610e77ceb7baac0f",
+      "generated_symbol_sha256": "b6085a986057a522b8eca6003e15746a04d001e3545228b99e2230c84c32ab1d",
+      "reason": "The generator flattens the stock 74LVC1G57 inheritance and strips display fields. The six pin numbers and names match TI SCES416N; In1 tied low selects In0 AND In2."
     }
   }
 }

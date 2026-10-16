@@ -872,12 +872,19 @@ def load_contracts() -> None:
     }.items():
         add("U7", pin, net, "TPS56637 6A-class SYS_3V3 converter pin contract.", tps5)
     add_nc("U7", 5, "TPS56637 NC pin intentionally left unconnected.", tps5)
-    host_active = "TI SN74LVC1G08 datasheet plus Ducktop2 qualified-host-state contract"
+    host_active = "TI SN74LVC1G97 datasheet; In1=0 selects In0 AND In2 with Schmitt inputs"
     for pin, net in {
-        1: "/MU_S0_HIGH", 2: "/MU_12V_PG", 3: "GND",
-        4: "/MU_HOST_ACTIVE", 5: "/MCU_3V3",
+        1: "GND", 2: "GND", 3: "/MU_12V_PG",
+        4: "/MU_HOST_ACTIVE", 5: "/MCU_3V3", 6: "/MU_S0_HIGH",
     }.items():
         add("U769", pin, net, "Host-dependent loads enable only when Mu S0 and the regulated Mu rail are both valid.", host_active)
+    for ref, first, second in (
+        ("R762", "/MU_12V", "/MU_12V_PG"),
+        ("R2671", "/MU_12V_PG", "GND"),
+        ("C774", "/MU_12V_PG", "GND"),
+    ):
+        add(ref, 1, first, "Rail-derived power-good divider and filter.", host_active)
+        add(ref, 2, second, "Defined off-state return for the filtered PG signal.", host_active)
     internal_vbus = "TI TPS2553D and TPS3897ADRYR datasheets plus Ducktop2 always-powered internal-host VBUS contract"
     for pin, net in {
         1: "/SYS_5V", 2: "GND", 3: "/MU_HOST_ACTIVE",

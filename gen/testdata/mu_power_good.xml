@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='utf-8'?>
+<export version="E">
+  <components>
+    <comp ref="C774">
+      <value>10n PG deglitch</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">KEMET</field>
+        <field name="MPN">C0603C103K5RACTU</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor" />
+      <property name="Manufacturer" value="KEMET" />
+      <property name="MPN" value="C0603C103K5RACTU" />
+      <property name="Sheetname" value="Mu Carrier" />
+      <property name="Sheetfile" value="03_mu_carrier.kicad_sch" />
+      <property name="ki_keywords" value="cap capacitor" />
+      <property name="ki_fp_filters" value="C_*" />
+      <sheetpath names="/Mu Carrier/" tstamps="/7f3572a2-a529-5ef0-93eb-27f85c0119a9/" />
+      <tstamps>2e339c69-1226-554d-9940-686d7fc0a77b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R762">
+      <value>27.4k PG divider top</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0727K4L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor" />
+      <property name="Manufacturer" value="Yageo" />
+      <property name="MPN" value="RC0603FR-0727K4L" />
+      <property name="Sheetname" value="Mu Carrier" />
+      <property name="Sheetfile" value="03_mu_carrier.kicad_sch" />
+      <property name="ki_keywords" value="R res resistor" />
+      <property name="ki_fp_filters" value="R_* ducktop2:Panasonic_ERJ8CW_10to16m_Center" />
+      <sheetpath names="/Mu Carrier/" tstamps="/7f3572a2-a529-5ef0-93eb-27f85c0119a9/" />
+      <tstamps>0b6cea30-0cfb-59a0-bf23-6f25a485d4d1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R2671">
+      <value>10k PG divider bottom</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet" />
+        <field name="Description" />
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor" />
+      <property name="Manufacturer" value="Yageo" />
+      <property name="MPN" value="RC0603FR-0710KL" />
+      <property name="Sheetname" value="Mu Carrier" />
+      <property name="Sheetfile" value="03_mu_carrier.kicad_sch" />
+      <property name="ki_keywords" value="R res resistor" />
+      <property name="ki_fp_filters" value="R_* ducktop2:Panasonic_ERJ8CW_10to16m_Center" />
+      <sheetpath names="/Mu Carrier/" tstamps="/7f3572a2-a529-5ef0-93eb-27f85c0119a9/" />
+      <tstamps>e6df9be8-69fc-50f9-8095-7981771638c1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1" />
+            <pin num="2" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U769">
+      <value>SN74LVC1G97DBVR Schmitt host-active AND</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/sn74lvc1g97.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="MPN">SN74LVC1G97DBVR</field>
+        <field name="LogicContract">MU_HOST_ACTIVE=MU_S0_HIGH_AND_MU_12V_PG</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23-6</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/sn74lvc1g97.pdf</field>
+        <field name="Description" />
+      </fields>
+      <libsource lib="74xGxx" part="74LVC1G97" description="Configurable Multi-Function Single Gate, Low-Voltage CMOS" />
+      <property name="Manufacturer" value="Texas Instruments" />
+      <property name="MPN" value="SN74LVC1G97DBVR" />
+      <property name="LogicContract" value="MU_HOST_ACTIVE=MU_S0_HIGH_AND_MU_12V_PG" />
+      <property name="Sheetname" value="Mu Carrier" />
+      <property name="Sheetfile" value="03_mu_carrier.kicad_sch" />
+      <property name="ki_keywords" value="Configurable Single Gate LVC CMOS" />
+      <property name="ki_fp_filters" value="SOT* SC*" />
+      <sheetpath names="/Mu Carrier/" tstamps="/7f3572a2-a529-5ef0-93eb-27f85c0119a9/" />
+      <tstamps>9a87dac1-e2fb-5d78-b276-927496cc71ef</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="3" />
+            <pin num="1" />
+            <pin num="6" />
+            <pin num="5" />
+            <pin num="2" />
+            <pin num="4" />
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <nets>
+    <net code="143" name="/MCU_3V3" class="POWER_MID">
+      <node ref="U769" pin="5" pinfunction="VCC_5" pintype="power_in" />
+    </net>
+    <net code="146" name="/MU_12V" class="POWER_HI">
+      <node ref="R762" pin="1" pintype="passive" />
+    </net>
+    <net code="148" name="/MU_12V_PG" class="Default">
+      <node ref="C774" pin="1" pintype="passive" />
+      <node ref="R2671" pin="1" pintype="passive" />
+      <node ref="R762" pin="2" pintype="passive" />
+      <node ref="U769" pin="3" pinfunction="IN0_3" pintype="input" />
+    </net>
+    <net code="149" name="/MU_HOST_ACTIVE" class="Default">
+      <node ref="U769" pin="4" pinfunction="Y_4" pintype="output" />
+    </net>
+    <net code="154" name="/MU_S0_HIGH" class="Default">
+      <node ref="U769" pin="6" pinfunction="IN2_6" pintype="input" />
+    </net>
+    <net code="685" name="GND" class="Default">
+      <node ref="C774" pin="2" pintype="passive" />
+      <node ref="R2671" pin="2" pintype="passive" />
+      <node ref="U769" pin="1" pinfunction="IN1_1" pintype="input" />
+      <node ref="U769" pin="2" pinfunction="GND_2" pintype="power_in" />
+    </net>
+  </nets>
+</export>

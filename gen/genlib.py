@@ -108,6 +108,7 @@ LIBMAP = {
     "TPA6130A2": "TPA6130A2",
     "AudioJack3_SwitchTR": "Connector_Audio",
     "74LVC1G08": "74xGxx",
+    "74LVC1G97": "74xGxx",
     "74LVC1G373": "74xGxx",
     "74LVC2G04": "74xGxx",
     "74LVC2G07": "74xGxx",

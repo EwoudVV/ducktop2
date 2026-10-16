@@ -1,5 +1,12 @@
 # power revision
 
+16 october 2026: fixed the [Mu power-good circuit](mu-power-good.md).
+removed the conflicting MCU pull-downs, derived PG from the actual 12 V
+rail and replaced the host-active gate with a Schmitt-input part. R2671
+is added beside the existing filter. no existing footprint moved and no
+routing changed. the center now has 1,786 native unconnected items;
+all 173 electrical calculations and 47 firmware host tests pass.
+
 15 october 2026: the [AUX fuse revision](aux-input.md) replaces F190/F195
 with low-profile Bel 0678H5000-02 parts and adds a 3 A firmware source-budget
 ceiling. the 500 mA initial setting stays unchanged. its separate record

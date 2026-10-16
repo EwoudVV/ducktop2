@@ -5,6 +5,20 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-16: fix the mu power-good signal
+
+**Total time spent: 1 hour**
+
+went through the charger startup and the mu's 12v supply. found a problem with the signal that tells the controller the supply is ready. the firmware had an internal pull-down enabled against a 100k pull-up. with typical values that only gives about 0.94v, so a working supply could still look like it had failed to start.
+
+removed that pull-down and changed the circuit so its high level comes from the actual 12v output. changed R762 to 27.4k and added a 10k resistor to ground beside the existing filter capacitor. this also gives the signal a low level when the rail is off, without relying on the regulator's output during shutdown. removed the unnecessary internal pull-down on the mu's status input too.
+
+![the new power-good divider and the replacement Schmitt gate](docs/images/journal/2026-10-16-mu-power-good.png)
+
+also caught that the filter was feeding a gate that needs fast input edges. replaced it with a Schmitt-input part and checked the pinout and truth table so it still only enables the host loads when both signals are high. updated its footprint in the same position and spread this section out on the schematic so the labels are readable. no existing components moved on the pcb and no tracks or vias changed.
+
+checked the divider across the supply range, resistor tolerances and leakage, then added tests for incorrect connections, the old resistor value and the wrong gate. added a test that runs the actual GPIO setup and confirmed the old firmware fails it. all 47 firmware tests, 173 electrical calculations and 478 power wiring checks pass. the board still matches the schematic and has no new DRC findings. the real startup, shutdown and fault waveforms will need checking once the hardware is assembled.
+
 # 2026-10-15: lower the aux fuses and check the input limits
 
 **Total time spent: 1 hour**

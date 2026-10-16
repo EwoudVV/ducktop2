@@ -138,6 +138,13 @@ target_include_directories(fan_math_tests PRIVATE ec_target)
 ducktop2_target_defaults(fan_math_tests)
 add_test(NAME fan_math_tests COMMAND fan_math_tests)
 
+add_executable(gpio_init_tests tests/test_gpio_init.c ec_target/fan_math.c)
+target_include_directories(gpio_init_tests PRIVATE ec_target)
+target_include_directories(gpio_init_tests SYSTEM PRIVATE
+    vendor/cmsis-device-f4/Include vendor/cmsis-core/CMSIS/Core/Include)
+ducktop2_target_defaults(gpio_init_tests)
+add_test(NAME gpio_init_tests COMMAND gpio_init_tests)
+
 add_executable(ec_app_math_tests tests/test_ec_app_math.c ec_target/ec_app_math.c)
 target_include_directories(ec_app_math_tests PRIVATE ec_target ec/include)
 ducktop2_target_defaults(ec_app_math_tests)

@@ -228,11 +228,12 @@ void gpio_init_all(void)
     /* PE13: MU_12V_ENABLE - Output, push-pull, low (off) */
     GPIOE->MODER   |= GPIO_MODER_OUTPUT << (13 * 2);
 
-    /* PE14: MU_S0_HIGH - Input, pull-down */
-    GPIOE->PUPDR   |= GPIO_PUPDR_PD << (14 * 2);
+    /* PE14: MU_S0_HIGH - R768 supplies the module's required pull-up. */
+    GPIOE->PUPDR   &= ~(3u << (14 * 2));
 
-    /* PE15: MU_12V_PG - Input, pull-down */
-    GPIOE->PUPDR   |= GPIO_PUPDR_PD << (15 * 2);
+    /* PE15: MU_12V_PG - R762/R2671 set both levels, including rail-off.
+     * An internal pull-down loads the divider and can hide a valid rail. */
+    GPIOE->PUPDR   &= ~(3u << (15 * 2));
 }
 
 bool gpio_get_lid_open(void) { return (GPIOE->IDR & (1u << 10)) != 0u; }

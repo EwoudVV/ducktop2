@@ -201,12 +201,58 @@ def mu_operating(v):
         Check('Mu COMP HF capacitor',c(v,'C772')*1e12,'pF',99,101,'C0G100pF nominal'),
     ]
 
+def mu_power_good(v):
+    """Rail-derived PG with independent resistor and leakage corners.
+
+    The 4.5V Schmitt threshold limits are a deliberately high screening
+    bound for the 3.0..3.6V receiver supply, not a new TI specification.
+    Scope the actual start, fault and discharge edges during bring-up.
+    """
+    expected = {
+        'R762': {'1': '/MU_12V', '2': '/MU_12V_PG'},
+        'R2671': {'1': '/MU_12V_PG', '2': 'GND'},
+        'C774': {'1': '/MU_12V_PG', '2': 'GND'},
+        'U769': {'1': 'GND', '2': 'GND', '3': '/MU_12V_PG',
+                 '4': '/MU_HOST_ACTIVE', '5': '/MCU_3V3', '6': '/MU_S0_HIGH'},
+    }
+    for ref, pins in expected.items():
+        if v.pins.get(ref) != pins:
+            raise ValueError(f'{ref}: Mu power-good connectivity changed')
+    if v.mpn('U769') != 'SN74LVC1G97DBVR':
+        raise ValueError('Mu power-good requires the reviewed Schmitt gate')
+    top, bottom = r(v, 'R762'), r(v, 'R2671')
+    tt, bt = v.environment_tolerance('R762'), v.environment_tolerance('R2671')
+    parallel_max = 1/(1/(top*(1+tt)) + 1/(bottom*(1+bt)))
+    # Use the full allowed rail range, wider than the calculated DC setpoint.
+    # 3uA STM32 FT + 5uA U769 + 100nA U750 PG; independent directions.
+    leakage = 8.1e-6
+    high_min = 11.4*bottom*(1-bt)/(top*(1+tt)+bottom*(1-bt)) - leakage*parallel_max
+    high_max = 12.6*bottom*(1+bt)/(top*(1-tt)+bottom*(1+bt)) + leakage*parallel_max
+    off_max = leakage*bottom*(1+bt)
+    sink_max = 12.6/(top*(1-tt)) + leakage
+    tau_max = parallel_max*c(v, 'C774')*1.3  # 10% initial + 15% X7R, rounded up
+    return [
+        Check('Mu PG high at minimum rail', high_min, 'V', 2.74, math.inf,
+              '11.4V; independent RC5% environment corners; 8.1uA leakage; conservative4.5V Schmitt upper threshold screen'),
+        Check('Mu PG maximum including leakage', high_max, 'V', 0, 3.9,
+              '12.6V; below STM32 FT VDD+4 even with VDD=0; disable internal pulls; U769 input limit5.5V and U750 PG limit6V'),
+        Check('Mu PG with absent rail and released regulator output', off_max, 'V', 0, .6,
+              'R2671 holds low with rail absent; .6V is below STM32 VIL at3V and Schmitt falling thresholds'),
+        Check('Mu PG asserted-low sink load', sink_max*1000, 'mA', 0, 4,
+              'TPS552882 PG VOL<=0.2V at4mA; static load plus worst-direction input leakage'),
+        Check('Mu PG filter maximum time constant', tau_max*1000, 'ms', 0, .2,
+              'resistor high corners and30% capacitance screen; far below20ms power-good timeout; measure converter startup separately'),
+        Check('Mu PG divider worst top-resistor power', 12.6**2/(top*(1-tt))*1000, 'mW', 0, 20,
+              'PG asserted low gives the greatest top-resistor dissipation'),
+    ]
+
+
 def mu_rail(v):
     vlo,vhi=mu_voltage_corners(v);slow,shigh=mu_shunt_bounds(v)
     budget=int(re.search(r'normal_mu_edp_budget_mw\s*=\s*(\d+)',(ROOT/'firmware/ec_target/power_profile.h').read_text())[1])/1000
     fan=vhi*.26
     uvlo,uvhi=divider_corners(r(v,'R759'),r(v,'R760'),v.environment_tolerance('R759'),v.environment_tolerance('R760'),1.20,1.26)
-    return [
+    return mu_power_good(v) + [
         Check('TPS552882 MU rail minimum',vlo,'V',11.4,12.6,'1.188V plus divider and100nA leakage corners'),
         Check('TPS552882 MU rail maximum',vhi,'V',11.4,12.6,'1.212V plus divider and100nA leakage corners'),
         Check('Mu nominal output-current limit',.050/(1/(1/r(v,'RS750')+1/r(v,'RS2670'))),'A',6.24,6.26,'50mV across two parallel16m shunts'),

@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-16",
+  "scope": "Mu power-good bias, filtered-input compatibility and startup GPIO configuration",
+  "baseline_commit": "886f3cde2bae3162c811060368eb191da3cc9c4f",
+  "source_sha256": {
+    "03_mu_carrier.kicad_sch": "9006cc7c4ae644d95b53932012702b83ffc26ec3b299f6be04636e1011fec1c5",
+    "ducktop2-center.kicad_pcb": "b2b780faf281c06a2940c88d8174823a5c79ec153b4755bfd670f4e2c1cf520b",
+    "firmware/ec_target/gpio.c": "09f057c0625d318e42ed8371c53321ec77d9ac49b3c282fdb584a38c069278a7",
+    "firmware/tests/test_gpio_init.c": "1c3da01b753870b3b6197f860cc219e17565d51aa472eab288672f9cb5f82f92",
+    "gen/generate_mu_carrier_sheet.py": "5794b79135a9be69dcadb50dc71716b876bc1a96bc96cf19ab756428d0173616",
+    "gen/verify_100w_calculations.py": "1ee35075ca16dcd3a36a858e8528defd30613bb0b323bd37f95c0cbec28d6a6e",
+    "gen/verify_design_contracts.py": "73e8a3a988bd5a2c3c64b5f7b0891cbf9339e6ccf1c752e7a9e1955508d51d9e",
+    "gen/generate_pin_review_table.py": "4ff9a2fc407d40aab8048be58a21230df9f94e0b4cfd68d9d0040293a5ddfa5d",
+    "gen/test_mu_power_good.py": "f8f910e039e7ded0764624c2a7bfd0090d23caf145f34681627acec82438f54a",
+    "gen/testdata/mu_power_good.xml": "ffafdc1719cbf31c3eddfb63630361da055ab6e9c9aba2661ff9f7c139cdcfec",
+    "verification/erc-symbols.json": "fce60fa7381086c5954fbc74d5d38c638b7d81e5f8d05dd8dc997528e6d1a54a"
+  },
+  "board_changes": {
+    "changed_existing_footprints": [
+      "R762",
+      "U769"
+    ],
+    "added_footprints": [
+      "R2671"
+    ],
+    "existing_footprints_moved": 0,
+    "tracks_added_removed_changed": 0,
+    "vias_added_removed_changed": 0,
+    "outline_changes": 0,
+    "refilled_zones": 0,
+    "physical_errors": 0,
+    "physical_warnings": 344,
+    "new_or_changed_drc_findings": 0,
+    "native_unconnected": 1786,
+    "native_unconnected_before": 1783,
+    "native_schematic_parity": 0
+  },
+  "schematic_layout_refs": [
+    "R762",
+    "R2671",
+    "C774",
+    "U769",
+    "R768",
+    "C793",
+    "R769"
+  ],
+  "saved_placements_mm": {
+    "R762": {
+      "x": 150.129602,
+      "y": 115.315074,
+      "rotation_deg": 180,
+      "side": "bottom"
+    },
+    "R2671": {
+      "x": 150.129602,
+      "y": 112.315074,
+      "rotation_deg": 0,
+      "side": "bottom"
+    },
+    "U769": {
+      "x": 287.2375,
+      "y": 77.55,
+      "rotation_deg": 0,
+      "side": "top"
+    }
+  },
+  "checks": {
+    "center_erc_errors": 0,
+    "center_erc_library_warnings": 406,
+    "unexplained_erc_warnings": 0,
+    "power_wiring_assertions": 478,
+    "power_wiring_failures": 0,
+    "electrical_calculations_passed": 173,
+    "power_good_regression_tests_passed": 7,
+    "firmware_host_tests_passed": 47,
+    "old_gpio_code_rejected_by_regression_test": true,
+    "arm_build_passed": true,
+    "arm_text_bytes": 53968,
+    "arm_data_bytes": 44,
+    "arm_bss_bytes": 10552,
+    "pin_review_passed": 2067
+  },
+  "power_good_calculations": [
+    {
+      "name": "Mu PG high at minimum rail",
+      "value": 2.7675835081862754,
+      "unit": "V",
+      "low": 2.74,
+      "high": null,
+      "equation": "11.4V; independent RC5% environment corners; 8.1uA leakage; conservative4.5V Schmitt upper threshold screen",
+      "passed": true
+    },
+    {
+      "name": "Mu PG maximum including leakage",
+      "value": 3.6839901685816803,
+      "unit": "V",
+      "low": 0,
+      "high": 3.9,
+      "equation": "12.6V; below STM32 FT VDD+4 even with VDD=0; disable internal pulls; U769 input limit5.5V and U750 PG limit6V",
+      "passed": true
+    },
+    {
+      "name": "Mu PG with absent rail and released regulator output",
+      "value": 0.08505,
+      "unit": "V",
+      "low": 0,
+      "high": 0.6,
+      "equation": "R2671 holds low with rail absent; .6V is below STM32 VIL at3V and Schmitt falling thresholds",
+      "passed": true
+    },
+    {
+      "name": "Mu PG asserted-low sink load",
+      "value": 0.49215685747214755,
+      "unit": "mA",
+      "low": 0,
+      "high": 4,
+      "equation": "TPS552882 PG VOL<=0.2V at4mA; static load plus worst-direction input leakage",
+      "passed": true
+    },
+    {
+      "name": "Mu PG filter maximum time constant",
+      "value": 0.10000267379679144,
+      "unit": "ms",
+      "low": 0,
+      "high": 0.2,
+      "equation": "resistor high corners and30% capacitance screen; far below20ms power-good timeout; measure converter startup separately",
+      "passed": true
+    },
+    {
+      "name": "Mu PG divider worst top-resistor power",
+      "value": 6.099116404149059,
+      "unit": "mW",
+      "low": 0,
+      "high": 20,
+      "equation": "PG asserted low gives the greatest top-resistor dissipation",
+      "passed": true
+    }
+  ],
+  "hardware_tests_run": false,
+  "manufacturing_ready": false,
+  "hardware_followup": [
+    "scope MU_12V, PG, S0 and HOST_ACTIVE during cold and hot startup",
+    "check shutdown, residual rail discharge, startup timeout and lost PG",
+    "qualify charger source changes and battery supplement",
+    "measure converter loop response and installed temperature"
+  ],
+  "sources": [
+    {
+      "part": "STM32F407VG",
+      "url": "https://www.st.com/resource/en/datasheet/dm00037051.pdf",
+      "document": "DS8626 rev 12, March 2026"
+    },
+    {
+      "part": "TPS552882",
+      "url": "https://www.ti.com/lit/ds/symlink/tps552882.pdf",
+      "document": "SLVSFC5, November 2020"
+    },
+    {
+      "part": "SN74LVC1G97",
+      "url": "https://www.ti.com/lit/ds/symlink/sn74lvc1g97.pdf",
+      "document": "SCES416N, January 2017"
+    },
+    {
+      "part": "SN74LVC1G08",
+      "url": "https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf",
+      "document": "SCES217AA, August 2026"
+    },
+    {
+      "part": "ISL9241",
+      "url": "https://www.renesas.com/en/document/dst/isl9241-datasheet",
+      "document": "FN8945 rev 6, October 2025"
+    }
+  ]
+}
