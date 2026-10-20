@@ -57,10 +57,15 @@ those changes.
 
 20 october: the charger and the Mu supply are routed, including both
 controllers and a VSYS island on In4. their local parts were re-placed so the
-fine-pitch controller pins could escape cleanly. DRC has no new findings and
-the unconnected count dropped from 1,798 to 1,568.
+fine-pitch controller pins could escape cleanly.
 [charger and Mu supply routing](docs/hardware/charger-and-mu-routing.md)
-has the details. most of the main-board routing still remains.
+has the details. the input selectors, battery path, fuel gauge and
+always-on chain are routed locally as well; both selectors moved to the back
+and the gauge shunt now sits beside the battery terminal.
+[input and battery routing](docs/hardware/input-and-battery-routing.md)
+covers that pass. DRC has no new findings and the unconnected count dropped
+from 1,798 to 1,308. the long feeds from the side terminals and most of the
+main-board routing still remain.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

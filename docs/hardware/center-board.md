@@ -15,10 +15,12 @@ routes. the repaired signals use F.Cu, In2.Cu and B.Cu.
 
 the charger and Mu supply are routed too, including both controllers and
 a VSYS island on In4. [charger and Mu supply routing](charger-and-mu-routing.md)
-covers the copper and the parts that moved for it.
+covers the copper and the parts that moved for it. the input selectors,
+battery path, gauge and always-on chain followed;
+[input and battery routing](input-and-battery-routing.md) covers that pass.
 
-the board has 5,019 straight track sections, 51 arcs and 935 vias.
-native connectivity counts 1,568 unconnected items. KiCad's DRC list can
+the board has 5,659 straight track sections, 51 arcs and 1,165 vias.
+native connectivity counts 1,308 unconnected items. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
 the four hdmi pairs and the ethernet controller's pcie data and clock
@@ -69,7 +71,7 @@ the positions below use pcb editor coordinates, in mm.
 | FPC103, right signals | 321.750, 127.050 | 90° |
 | J2071, bms power | 142.000, 210.398 | -90° |
 | J2073, bms control | 207.050, 181.850 | 180° |
-| RS1, gauge shunt | 196.500, 171.950 | 180° |
+| RS1, gauge shunt | 131.000, 205.400 | 90° |
 | J41, left oled | 231.600, 181.550 | 180° |
 | J45, right oled | 241.125, 181.550 | 180° |
 | J901, maker connector | 326.850, 42.550 | 180° |

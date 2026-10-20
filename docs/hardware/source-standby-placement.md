@@ -1,5 +1,9 @@
 # input selection and standby placement
 
+20 october 2026: the selector parts and the gauge filter moved again when
+they were routed. [input and battery routing](input-and-battery-routing.md)
+has their current positions; the table below is the 16 october placement.
+
 16 october 2026. added three local bypass capacitors, moved four existing
 parts and corrected two stale power-sheet notes. the center board stays
 eight layers. tracks, vias, connectors, mounting holes and outlines are

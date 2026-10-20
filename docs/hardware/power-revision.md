@@ -1,5 +1,13 @@
 # power revision
 
+20 october 2026, routing: the [input selectors, battery path, gauge and
+always-on chain](input-and-battery-routing.md) are routed locally. both
+selector stages moved to the back, RS1 and the gauge moved beside J2071 and
+the battery positive runs to Q25 on In4 and In5. 53 parts moved. the center
+board still matches its schematic and has no new physical DRC findings. its
+native unconnected count drops from 1,568 to 1,308. the long feeds from the
+side terminals and the EC control lines are still open.
+
 20 october 2026, routing: the [charger and Mu supply](charger-and-mu-routing.md)
 are routed, including both controllers and a VSYS island on In4. 36 parts
 moved to let the fine-pitch controller pins escape. the center board still

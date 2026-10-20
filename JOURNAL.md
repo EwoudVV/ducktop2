@@ -5,6 +5,30 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-20: route the input selectors, battery path and standby supply
+
+**Total time spent: 2 hours**
+
+moved on to the input side of the power routing. the first thing that stood out was how far the input power had to travel. the two input selectors were on opposite sides of the board: U16 sat right next to the charger, but U15 was down in the bottom-left corner. power from the right usb-c port or the aux input went through U16, then about 60 mm west to U15, then about 95 mm back east to the charger. there was no room on the front next to U16 because the wi-fi card sits over that area, so i moved both selector stages to the back as one block, right behind where U16 was.
+
+each stage now has its two pairs of back-to-back fets in columns, inputs at the top and outputs at the bottom, with the controller between them. the link between the two stages is a short strip instead of a 60 mm run. U16's divider resistors were also spread 10 to 15 mm away from the pins they set, so both stages got their dividers in a row right above the pins. the controller has all its gate and source pins on one edge, so one gate and one source connection per stage hop through an inner layer.
+
+![both selector stages on the back and the combined input running to the charger](docs/images/journal/2026-10-20-input-selector-block.png)
+
+the combined output goes down to two inner layers, runs north of the charger's vias and comes back up into a pour on the outer end of the charger's input shunt. that keeps the current away from the sense pickup on the inner edge. the 100uf hold-up capacitor moved onto the front above the selectors. i checked a few spots against the case first, and the ones further east ran into the battery wires.
+
+the battery side had a similar problem. the bms end of the battery cable sits right under the battery fet, but the terminal on the center board is in the bottom-left corner, and the gauge shunt was about 60 mm away from it. moving the terminal would have meant redoing the harness and case guides i already checked, so i kept it where it is and moved the gauge shunt and the whole gauge circuit next to it instead. now the 8a return goes through a short pour under the terminal and straight into the ground planes through 16 vias. three of the gauge's resistors had also been sitting 30 to 80 mm from the gauge, so the whole group finally sits together.
+
+![battery strip on In4 and the gauge beside the battery terminal](docs/images/journal/2026-10-20-battery-path.png)
+
+the positive side runs on two wide strips on In4 and In5, around a mounting hole's keepout and up into the battery fet's pours. i had to pull back the edge of the vsys area on In4 to make room. from the filled copper it's roughly 2 milliohms for both strips together, so about 16 mv at 8a. that wasn't in the battery-path budget before.
+
+![the always-on supply, front and back](docs/images/journal/2026-10-20-standby-chain.png)
+
+then routed the always-on chain where it already sat: the three inputs that start the standby supply, the breaker and the current limiter. the power nodes got their own pours, and the breaker and limiter take their sense connections straight from the inner edges of their shunts. the standby supply line now runs about 100 mm on In5 up to the little buck that powers the ec, and i flipped that buck's bootstrap capacitor around so it doesn't cross the switch node.
+
+cleaned up the new routing the same way as the charger and gave the moved parts proper labels. DRC has no new findings and the board still matches the schematic. the unconnected count went from 1,568 to 1,308, and all 139 parts that moved since the 16th clear the case model. the long feeds from the side power terminals and the aux input are still open, along with the control lines to the ec. those come next with the In4 power layout.
+
 # 2026-10-20: route the charger and the mu 12v supply
 
 **Total time spent: 2 hours**

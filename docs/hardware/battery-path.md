@@ -70,6 +70,11 @@ whether to start or transfer the running laptop to battery.
 
 ## sensing and layout
 
+20 october: RS1 and the gauge now sit beside J2071, and the positive side
+runs to Q25 on two inner-layer strips. the routed strips are estimated at
+about 2 milliohms, roughly 16 mV at 8 A, on top of the table above.
+[input and battery routing](input-and-battery-routing.md) has the layout.
+
 RS1 produces at most 49.64 mV in the 8 A discharge screen and 18.61 mV at
 3 A charge, within the gauge's +/-125 mV recommended differential range.
 its SRP pickup belongs on the FG_VSS side, and SRN on the system-ground

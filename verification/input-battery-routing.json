@@ -1,0 +1,1161 @@
+{
+  "date": "2026-10-20",
+  "baseline_commit": "2e0ab19990922356f3225da86c195966bfd75759",
+  "scope": "Local routing of the LTC4418 input selectors (U15/U16), the battery path from J2071 to Q25 with the gauge shunt RS1 and fuel gauge U10, and the always-on chain (U2620/U2621/U2650, U718, U2660, Q2660) up to the standby buck U5. Feeds from the side WAGO terminals and the AUX eFuse, and the EC control lines, are unfinished.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "beb34ec79f131754c0e7368ee6a9521f1f8af1f193f43cf9cfe6057e6a414e6b",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "tracks": [
+      5070,
+      5710
+    ],
+    "vias": [
+      935,
+      1165
+    ],
+    "zones_and_rule_areas": [
+      189,
+      220
+    ]
+  },
+  "parts_moved": [
+    {
+      "ref": "C180",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        193.549,
+        181.275
+      ],
+      "to": [
+        114.6,
+        201.1
+      ],
+      "rotation": [
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "ref": "C181",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        201.16,
+        177.025
+      ],
+      "to": [
+        126.4,
+        205.1
+      ],
+      "rotation": [
+        90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C182",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        196.549,
+        181.175
+      ],
+      "to": [
+        114.6,
+        206.2
+      ],
+      "rotation": [
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "ref": "C183",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        196.799,
+        183.0
+      ],
+      "to": [
+        114.6,
+        208.15
+      ],
+      "rotation": [
+        0.0,
+        180.0
+      ]
+    },
+    {
+      "ref": "C2685",
+      "side": [
+        "B",
+        "B"
+      ],
+      "from": [
+        127.4,
+        181.2
+      ],
+      "to": [
+        184.6,
+        147.9
+      ],
+      "rotation": [
+        -90.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "C2686",
+      "side": [
+        "B",
+        "B"
+      ],
+      "from": [
+        181.7,
+        156.3
+      ],
+      "to": [
+        169.9,
+        137.6
+      ],
+      "rotation": [
+        180.0,
+        180.0
+      ]
+    },
+    {
+      "ref": "C2687",
+      "side": [
+        "B",
+        "B"
+      ],
+      "from": [
+        186.3,
+        152.7
+      ],
+      "to": [
+        170.9,
+        140.8
+      ],
+      "rotation": [
+        90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C2688",
+      "side": [
+        "B",
+        "B"
+      ],
+      "from": [
+        130.4,
+        182.0
+      ],
+      "to": [
+        183.0,
+        162.2
+      ],
+      "rotation": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "C38",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        168.65,
+        69.05
+      ],
+      "to": [
+        168.65,
+        69.05
+      ],
+      "rotation": [
+        -90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C715",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        185.2,
+        161.413
+      ],
+      "to": [
+        176.05,
+        139.6
+      ],
+      "rotation": [
+        0.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C740",
+      "side": [
+        "B",
+        "B"
+      ],
+      "from": [
+        127.4,
+        185.15
+      ],
+      "to": [
+        177.3,
+        157.05
+      ],
+      "rotation": [
+        180.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C741",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        121.9,
+        181.55
+      ],
+      "to": [
+        176.05,
+        153.8
+      ],
+      "rotation": [
+        90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C742",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        126.6,
+        178.9
+      ],
+      "to": [
+        171.0,
+        150.6
+      ],
+      "rotation": [
+        90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C743",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        130.7,
+        182.05
+      ],
+      "to": [
+        170.9,
+        155.0
+      ],
+      "rotation": [
+        0.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C744",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        182.3,
+        158.763
+      ],
+      "to": [
+        191.9,
+        137.9
+      ],
+      "rotation": [
+        -90.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "C745",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        184.7,
+        149.05
+      ],
+      "to": [
+        191.4,
+        142.6
+      ],
+      "rotation": [
+        0.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C746",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        129.95,
+        173.8
+      ],
+      "to": [
+        181.5,
+        155.0
+      ],
+      "rotation": [
+        90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C747",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        130.7,
+        183.55
+      ],
+      "to": [
+        191.4,
+        156.8
+      ],
+      "rotation": [
+        0.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "C748",
+      "side": [
+        "B",
+        "B"
+      ],
+      "from": [
+        184.6,
+        154.95
+      ],
+      "to": [
+        179.4,
+        147.9
+      ],
+      "rotation": [
+        -90.0,
+        180.0
+      ]
+    },
+    {
+      "ref": "C749",
+      "side": [
+        "B",
+        "B"
+      ],
+      "from": [
+        187.8,
+        155.9
+      ],
+      "to": [
+        177.3,
+        142.85
+      ],
+      "rotation": [
+        -90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "Q21",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        134.42,
+        182.37
+      ],
+      "to": [
+        173.5,
+        154.4
+      ],
+      "rotation": [
+        0.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "Q22",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        127.2,
+        187.8
+      ],
+      "to": [
+        173.5,
+        159.05
+      ],
+      "rotation": [
+        -90.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "Q23",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        190.015,
+        158.048
+      ],
+      "to": [
+        188.5,
+        140.2
+      ],
+      "rotation": [
+        -90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "Q24",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        188.7,
+        151.6
+      ],
+      "to": [
+        188.5,
+        144.85
+      ],
+      "rotation": [
+        0.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "Q26",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        180.92,
+        154.87
+      ],
+      "to": [
+        173.5,
+        140.2
+      ],
+      "rotation": [
+        -90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "Q27",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        184.7,
+        152.05
+      ],
+      "to": [
+        173.5,
+        144.85
+      ],
+      "rotation": [
+        -90.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "Q28",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        133.515,
+        189.798
+      ],
+      "to": [
+        188.5,
+        154.4
+      ],
+      "rotation": [
+        0.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "Q29",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        131.2,
+        186.1
+      ],
+      "to": [
+        188.5,
+        159.05
+      ],
+      "rotation": [
+        0.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "R180",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        122.05,
+        148.55
+      ],
+      "to": [
+        110.9,
+        202.8
+      ],
+      "rotation": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "R181",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        221.85,
+        148.75
+      ],
+      "to": [
+        110.9,
+        201.1
+      ],
+      "rotation": [
+        90.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "R182",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        191.188,
+        177.55
+      ],
+      "to": [
+        114.6,
+        202.8
+      ],
+      "rotation": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "R183",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        201.16,
+        180.1
+      ],
+      "to": [
+        128.2,
+        206.65
+      ],
+      "rotation": [
+        90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "R184",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        201.16,
+        173.95
+      ],
+      "to": [
+        128.2,
+        203.55
+      ],
+      "rotation": [
+        -90.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "R185",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        191.188,
+        179.025
+      ],
+      "to": [
+        114.6,
+        204.5
+      ],
+      "rotation": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "R186",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        191.688,
+        175.225
+      ],
+      "to": [
+        114.6,
+        199.4
+      ],
+      "rotation": [
+        90.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "R189",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        117.55,
+        145.55
+      ],
+      "to": [
+        119.0,
+        202.35
+      ],
+      "rotation": [
+        0.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "R730",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        124.1,
+        179.85
+      ],
+      "to": [
+        177.4,
+        151.85
+      ],
+      "rotation": [
+        180.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "R731",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        120.15,
+        182.8
+      ],
+      "to": [
+        178.9,
+        151.85
+      ],
+      "rotation": [
+        -90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "R732",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        123.15,
+        185.55
+      ],
+      "to": [
+        180.4,
+        151.85
+      ],
+      "rotation": [
+        -90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "R733",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        177.35,
+        150.35
+      ],
+      "to": [
+        181.9,
+        137.55
+      ],
+      "rotation": [
+        -90.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "R734",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        177.4,
+        152.8
+      ],
+      "to": [
+        183.4,
+        137.55
+      ],
+      "rotation": [
+        0.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "R735",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        174.9,
+        150.05
+      ],
+      "to": [
+        184.9,
+        137.55
+      ],
+      "rotation": [
+        180.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "R741",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        184.75,
+        159.964
+      ],
+      "to": [
+        177.4,
+        137.55
+      ],
+      "rotation": [
+        0.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "R742",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        187.2,
+        160.913
+      ],
+      "to": [
+        178.9,
+        137.55
+      ],
+      "rotation": [
+        -90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "R743",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        174.9,
+        148.55
+      ],
+      "to": [
+        180.4,
+        137.55
+      ],
+      "rotation": [
+        180.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "R744",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        123.35,
+        182.35
+      ],
+      "to": [
+        181.9,
+        151.85
+      ],
+      "rotation": [
+        -90.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "R745",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        121.65,
+        184.05
+      ],
+      "to": [
+        183.4,
+        151.85
+      ],
+      "rotation": [
+        -90.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "R746",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        124.65,
+        187.05
+      ],
+      "to": [
+        184.9,
+        151.85
+      ],
+      "rotation": [
+        -90.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "R855",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        202.66,
+        175.45
+      ],
+      "to": [
+        123.4,
+        201.4
+      ],
+      "rotation": [
+        -90.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "RS1",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        196.5,
+        171.95
+      ],
+      "to": [
+        131.0,
+        205.4
+      ],
+      "rotation": [
+        180.0,
+        90.0
+      ]
+    },
+    {
+      "ref": "U10",
+      "side": [
+        "F",
+        "F"
+      ],
+      "from": [
+        196.55,
+        177.55
+      ],
+      "to": [
+        120.5,
+        204.5
+      ],
+      "rotation": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "ref": "U15",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        126.55,
+        183.05
+      ],
+      "to": [
+        181.0,
+        157.1
+      ],
+      "rotation": [
+        0.0,
+        -90.0
+      ]
+    },
+    {
+      "ref": "U16",
+      "side": [
+        "F",
+        "B"
+      ],
+      "from": [
+        185.7,
+        156.763
+      ],
+      "to": [
+        181.0,
+        142.9
+      ],
+      "rotation": [
+        90.0,
+        -90.0
+      ]
+    }
+  ],
+  "parts_removed": [],
+  "copper_removed": [],
+  "zone_changes": [
+    "In4 VSYS power island: south edge pulled back to make room for the battery strip; it still covers the RS2601 VSYS end and the system bulk capacitor vias"
+  ],
+  "checks": {
+    "drc_new_findings_against_start": 0,
+    "drc_existing_warnings": {
+      "via_dangling": 174,
+      "track_dangling": 83,
+      "silk_over_copper": 2
+    },
+    "native_unconnected": [
+      1568,
+      1308
+    ],
+    "schematic_parity": {
+      "passed": true,
+      "components": 870,
+      "physical_pads": 3372,
+      "pad_net_changes": 0
+    },
+    "placement_exports": {
+      "power_rows": 212,
+      "component_rows": 1378,
+      "match": true
+    },
+    "via_net_audit": "every via added in this pass keeps its intended net after refill; only the planned nets remain split",
+    "reference_labels": {
+      "back_silkscreen": 42,
+      "fab_layer": 11
+    },
+    "cleanup_segments": [
+      697,
+      567
+    ]
+  },
+  "copper_estimates": {
+    "basis": "resistance from filled zone area along the path length, 1 oz copper, not a field solve or measurement",
+    "rows": [
+      {
+        "path": "battery positive, In4 strip",
+        "mohm": 3.9
+      },
+      {
+        "path": "battery positive, In5 strip",
+        "mohm": 4.0
+      },
+      {
+        "path": "battery positive, both strips in parallel",
+        "mohm": 2.0,
+        "drop_mV_at_8A": 16
+      },
+      {
+        "path": "combined input corridor, In2 and In5 in parallel",
+        "mohm": 3.9,
+        "drop_mV_at_5A": 20
+      }
+    ]
+  },
+  "via_banks_estimate": {
+    "basis": "0.6/0.3 mm vias, rough current allocation per path; hole plating unconfirmed",
+    "rows": [
+      {
+        "path": "battery positive at J2071",
+        "net": "PACK_POS_FUSED",
+        "vias": 40,
+        "current_A": 8,
+        "per_via_A": 0.2
+      },
+      {
+        "path": "battery positive at Q25",
+        "net": "PACK_POS_FUSED",
+        "vias": 24,
+        "current_A": 8,
+        "per_via_A": 0.33,
+        "note": "plus 5 vias from the charger pass"
+      },
+      {
+        "path": "RS1 ground end",
+        "net": "GND",
+        "vias": 16,
+        "current_A": 8,
+        "per_via_A": 0.5
+      },
+      {
+        "path": "battery return, front to back pour",
+        "net": "FG_VSS",
+        "vias": 6,
+        "current_A": 4,
+        "per_via_A": 0.67
+      },
+      {
+        "path": "combined input at the selectors",
+        "net": "VBUS_COMBINED",
+        "vias": 8,
+        "current_A": 5,
+        "per_via_A": 0.63
+      },
+      {
+        "path": "combined input at RS2600",
+        "net": "VBUS_COMBINED",
+        "vias": 14,
+        "current_A": 5,
+        "per_via_A": 0.36
+      }
+    ]
+  },
+  "case_clearance": {
+    "components_screened": 139,
+    "unknown_heights": [],
+    "physical_hits": [],
+    "service_hits": [],
+    "exact_intersections": 381,
+    "physical_fit_verified": false
+  },
+  "still_open": [
+    "USB_PD_SELECTED and PD1_VBUS_RAW from J2430",
+    "PD2_VBUS_GATED and PD2_VBUS_RAW from J2432",
+    "AUX_DC_PROTECTED from U12 and AUX_DC_FUSED to D711",
+    "MAIN_USB_VALID_N, MAIN_AUX_VALID_N, PD2_VALID_N, AON_FAULT_N to the EC, BQ_ALERT, I2C and MCU_3V3 at the gauge",
+    "TP2 on PACK_POS_FUSED"
+  ],
+  "limitations": [
+    "Copper and via numbers are estimates; finished copper and hole plating still need confirming with the fabricator.",
+    "Measure the battery path drop and RS1 temperature at 8 A on the first boards.",
+    "Eleven reference labels in the dense selector divider rows and the gauge group only fit on the fab layer."
+  ]
+}

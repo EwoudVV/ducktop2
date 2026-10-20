@@ -2,7 +2,11 @@
 
 20 october 2026: steps 1 and 2 are routed. the [charger and Mu supply routing](charger-and-mu-routing.md)
 covers both power stages, both controllers, the In4 VSYS island and the
-part moves they needed. steps 3 to 6 are next.
+part moves they needed. steps 3 and 4 are routed locally too: the
+[input, battery and standby routing](input-and-battery-routing.md) moves
+both input selectors to the back, puts RS1 and the gauge beside J2071 and
+runs the battery positive to Q25 on In4 and In5. the long feeds from the
+side terminals and steps 5 and 6 are next.
 
 16 october 2026. this is the routing order for the saved 100 W circuit.
 the main boards are still eight layers. the BMS is a separate four-layer
@@ -141,8 +145,9 @@ input. standby's battery feed comes from VSYS so it passes through the
 charger battery shunt.
 
 C2686 bypasses U16 V1, C2687 bypasses its VS1 common-source node and C2688
-bypasses U15 VOUT. all three are on the back. put the transitions close to
-their front-side controller pins and keep their ground returns local.
+bypasses U15 VOUT. since 20 october both selector stages, their FETs and
+these capacitors sit together on the back; see the
+[input and battery routing](input-and-battery-routing.md).
 C747 belongs to U15 VS2; its old stage-two label was wrong.
 
 C2620/C2621/C2650 now sit directly above U2620/U2621/U2650. route each
@@ -150,7 +155,8 @@ VCAP connection with its ANODE return, keeping the charge-pump loop close
 to the controller. do not return these capacitors to ground. the input
 and output sense connections must pick up at the corresponding FET pads.
 
-R183 now lines up with C181 beside U10. keep both gauge sense paths away
+RS1, U10 and the gauge filter now sit beside J2071, with the sense pickups
+taken from RS1's inner pad edges. keep both gauge sense paths away
 from the switching nodes and take dedicated pickups from RS1. the ground
 side of that shunt is a measurement connection as well as a load return.
 
