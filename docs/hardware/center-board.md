@@ -1,6 +1,6 @@
 # center board
 
-updated 16 october 2026. the center board is 227 x 185 mm with eight
+updated 20 october 2026. the center board is 227 x 185 mm with eight
 layers, 870 footprints and 3,563 pads. the existing pcie, usb, hdmi and
 ethernet routes have been repaired. there is still a lot of main routing
 to do before this board can be ordered.
@@ -13,8 +13,12 @@ the board near the sockets. the repairs include pair spacing, length
 matching, layer transitions, local ground returns and the nearby control
 routes. the repaired signals use F.Cu, In2.Cu and B.Cu.
 
-the board has 4,430 straight track sections, 51 arcs and 722 vias.
-native connectivity counts 1,798 unconnected items. KiCad's DRC list can
+the charger and Mu supply are routed too, including both controllers and
+a VSYS island on In4. [charger and Mu supply routing](charger-and-mu-routing.md)
+covers the copper and the parts that moved for it.
+
+the board has 5,019 straight track sections, 51 arcs and 935 vias.
+native connectivity counts 1,568 unconnected items. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
 the four hdmi pairs and the ethernet controller's pcie data and clock

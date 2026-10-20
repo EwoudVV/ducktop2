@@ -1,0 +1,864 @@
+{
+ "date": "2026-10-20",
+ "baseline_commit": "2a351e60e4047920b3ea85742251b7d433689063",
+ "scope": "Routing of the ISL9241 charger (U2) and TPS552882 Mu supply (U750): power stages, controllers, local parts, In4 VSYS island, and the part moves they needed. Feeds leaving these areas, the remaining rails and the EC control lines are unfinished.",
+ "board": {
+  "pcb": "ducktop2-center.kicad_pcb",
+  "sha256": "a6cdcad8993f6e93e4672b981dd46f680b6a6ccbeca726b2d072ae731263d6be",
+  "schematic": "ducktop2.kicad_sch"
+ },
+ "copper_counts": {
+  "tracks": [
+   4481,
+   5070
+  ],
+  "vias": [
+   722,
+   935
+  ],
+  "zones_and_rule_areas": [
+   147,
+   189
+  ]
+ },
+ "parts_moved": [
+  {
+   "ref": "C8",
+   "side": [
+    "B",
+    "F"
+   ],
+   "from": [
+    205.255,
+    160.272
+   ],
+   "to": [
+    204.0,
+    158.9
+   ],
+   "rotation": [
+    45.0,
+    0.0
+   ]
+  },
+  {
+   "ref": "C12",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    203.525,
+    158.562
+   ],
+   "to": [
+    224.6,
+    156.0
+   ],
+   "rotation": [
+    -90.0,
+    -90.0
+   ]
+  },
+  {
+   "ref": "C764",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    156.529,
+    117.635
+   ],
+   "to": [
+    156.73,
+    117.63
+   ],
+   "rotation": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "ref": "C759",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    152.07,
+    121.94
+   ],
+   "to": [
+    152.07,
+    122.25
+   ],
+   "rotation": [
+    180.0,
+    180.0
+   ]
+  },
+  {
+   "ref": "C756",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    153.178,
+    120.259
+   ],
+   "to": [
+    151.6,
+    120.57
+   ],
+   "rotation": [
+    180.0,
+    180.0
+   ]
+  },
+  {
+   "ref": "C765",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    149.8,
+    113.65
+   ],
+   "to": [
+    149.8,
+    113.65
+   ],
+   "rotation": [
+    90.0,
+    -90.0
+   ]
+  },
+  {
+   "ref": "C755",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    147.976,
+    116.211
+   ],
+   "to": [
+    148.15,
+    117.0
+   ],
+   "rotation": [
+    180.0,
+    180.0
+   ]
+  },
+  {
+   "ref": "R2614",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    147.5,
+    117.5
+   ],
+   "to": [
+    146.5,
+    118.6
+   ],
+   "rotation": [
+    180.0,
+    90.0
+   ]
+  },
+  {
+   "ref": "Q2611",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    143.75,
+    116.3
+   ],
+   "to": [
+    143.75,
+    116.6
+   ],
+   "rotation": [
+    90.0,
+    90.0
+   ]
+  },
+  {
+   "ref": "C7",
+   "side": [
+    "B",
+    "F"
+   ],
+   "from": [
+    209.728,
+    159.755
+   ],
+   "to": [
+    211.6,
+    159.4
+   ],
+   "rotation": [
+    135.0,
+    0.0
+   ]
+  },
+  {
+   "ref": "R763",
+   "side": [
+    "F",
+    "F"
+   ],
+   "from": [
+    147.65,
+    119.8
+   ],
+   "to": [
+    148.0,
+    119.8
+   ],
+   "rotation": [
+    -90.0,
+    -90.0
+   ]
+  },
+  {
+   "ref": "C2603",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    210.844,
+    159.113
+   ],
+   "to": [
+    211.7,
+    157.4
+   ],
+   "rotation": [
+    135.0,
+    180.0
+   ]
+  },
+  {
+   "ref": "R2601",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    210.182,
+    165.621
+   ],
+   "to": [
+    221.6,
+    166.3
+   ],
+   "rotation": [
+    135.0,
+    180.0
+   ]
+  },
+  {
+   "ref": "C2602",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    207.134,
+    166.113
+   ],
+   "to": [
+    210.368,
+    167.223
+   ],
+   "rotation": [
+    135.0,
+    -61.0
+   ]
+  },
+  {
+   "ref": "C711",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    204.156,
+    163.887
+   ],
+   "to": [
+    201.709,
+    163.895
+   ],
+   "rotation": [
+    180.0,
+    -167.0
+   ]
+  },
+  {
+   "ref": "C2604",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    203.818,
+    162.379
+   ],
+   "to": [
+    202.025,
+    161.073
+   ],
+   "rotation": [
+    -90.0,
+    -104.0
+   ]
+  },
+  {
+   "ref": "C770",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    153.95,
+    118.85
+   ],
+   "to": [
+    152.95,
+    119.2
+   ],
+   "rotation": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "ref": "C2605",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    202.862,
+    166.245
+   ],
+   "to": [
+    203.161,
+    169.053
+   ],
+   "rotation": [
+    -90.0,
+    -125.0
+   ]
+  },
+  {
+   "ref": "D2601",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    210.272,
+    168.712
+   ],
+   "to": [
+    227.6,
+    166.6
+   ],
+   "rotation": [
+    -45.0,
+    -45.0
+   ]
+  },
+  {
+   "ref": "R750",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    152.8,
+    120.5
+   ],
+   "to": [
+    152.8,
+    121.1
+   ],
+   "rotation": [
+    90.0,
+    90.0
+   ]
+  },
+  {
+   "ref": "R757",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    149.95,
+    119.75
+   ],
+   "to": [
+    157.2,
+    120.2
+   ],
+   "rotation": [
+    180.0,
+    90.0
+   ]
+  },
+  {
+   "ref": "R704",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    205.136,
+    164.887
+   ],
+   "to": [
+    199.773,
+    163.907
+   ],
+   "rotation": [
+    180.0,
+    10.0
+   ]
+  },
+  {
+   "ref": "C774",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    150.105,
+    113.815
+   ],
+   "to": [
+    151.1,
+    113.82
+   ],
+   "rotation": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "ref": "C2606",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    205.219,
+    168.803
+   ],
+   "to": [
+    204.329,
+    173.689
+   ],
+   "rotation": [
+    -45.0,
+    -107.0
+   ]
+  },
+  {
+   "ref": "C772",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    154.4,
+    116.5
+   ],
+   "to": [
+    155.0,
+    113.9
+   ],
+   "rotation": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "ref": "R2610",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    202.255,
+    163.978
+   ],
+   "to": [
+    203.767,
+    165.842
+   ],
+   "rotation": [
+    180.0,
+    -140.0
+   ]
+  },
+  {
+   "ref": "R2671",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    150.13,
+    112.315
+   ],
+   "to": [
+    151.13,
+    112.32
+   ],
+   "rotation": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "ref": "C2607",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    200.345,
+    163.728
+   ],
+   "to": [
+    201.766,
+    167.346
+   ],
+   "rotation": [
+    90.0,
+    -141.0
+   ]
+  },
+  {
+   "ref": "R18",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    208.952,
+    166.18
+   ],
+   "to": [
+    209.573,
+    168.111
+   ],
+   "rotation": [
+    -45.0,
+    -72.0
+   ]
+  },
+  {
+   "ref": "R2608",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    205.022,
+    165.995
+   ],
+   "to": [
+    204.71,
+    166.842
+   ],
+   "rotation": [
+    180.0,
+    -125.0
+   ]
+  },
+  {
+   "ref": "R762",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    150.13,
+    115.315
+   ],
+   "to": [
+    151.13,
+    115.32
+   ],
+   "rotation": [
+    180.0,
+    180.0
+   ]
+  },
+  {
+   "ref": "R2611",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    202.798,
+    162.43
+   ],
+   "to": [
+    202.849,
+    164.997
+   ],
+   "rotation": [
+    90.0,
+    -153.0
+   ]
+  },
+  {
+   "ref": "D2600",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    212.326,
+    168.015
+   ],
+   "to": [
+    224.9,
+    166.6
+   ],
+   "rotation": [
+    -45.0,
+    -45.0
+   ]
+  },
+  {
+   "ref": "R2602",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    211.846,
+    160.886
+   ],
+   "to": [
+    209.6,
+    156.2
+   ],
+   "rotation": [
+    45.0,
+    180.0
+   ]
+  },
+  {
+   "ref": "R2609",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    206.07,
+    167.202
+   ],
+   "to": [
+    205.615,
+    167.785
+   ],
+   "rotation": [
+    -135.0,
+    -112.0
+   ]
+  },
+  {
+   "ref": "R2607",
+   "side": [
+    "B",
+    "B"
+   ],
+   "from": [
+    212.64,
+    158.66
+   ],
+   "to": [
+    213.55,
+    157.4
+   ],
+   "rotation": [
+    180.0,
+    180.0
+   ]
+  }
+ ],
+ "parts_removed": [],
+ "copper_removed": [
+  "three unconnected legacy GND vias and one stub under the new C756 and R757 positions"
+ ],
+ "checks": {
+  "drc_new_findings_against_start": 0,
+  "drc_existing_warnings": {
+   "via_dangling": 174,
+   "track_dangling": 83,
+   "silk_over_copper": 2
+  },
+  "native_unconnected": [
+   1798,
+   1568
+  ],
+  "schematic_parity": {
+   "passed": true,
+   "components": 870,
+   "physical_pads": 3372,
+   "pad_net_changes": 0
+  },
+  "placement_exports": {
+   "power_rows": 212,
+   "component_rows": 1378,
+   "match": true
+  },
+  "via_net_audit": "every via added in this pass reads back on its intended net after commit and refill",
+  "u2_exposed_pad_vias": 9,
+  "u750_pgnd_bar_vias": 2
+ },
+ "via_banks_estimate": {
+  "basis": "full 1.6 mm via length, 20 um hole plating (unconfirmed), rough current allocation per path",
+  "rows": [
+   {
+    "path": "charger output",
+    "net": "VSYS",
+    "vias": 14,
+    "parallel_mohm": 0.104,
+    "current_A": 9.0,
+    "per_via_A": 0.64
+   },
+   {
+    "path": "charger system bulk",
+    "net": "VSYS",
+    "vias": 7,
+    "parallel_mohm": 0.209,
+    "current_A": 8.0,
+    "per_via_A": 1.14
+   },
+   {
+    "path": "battery shunt system end",
+    "net": "VSYS",
+    "vias": 7,
+    "parallel_mohm": 0.209,
+    "current_A": 8.0,
+    "per_via_A": 1.14
+   },
+   {
+    "path": "battery FET drain",
+    "net": "CHG_SRN",
+    "vias": 8,
+    "parallel_mohm": 0.182,
+    "current_A": 8.0,
+    "per_via_A": 1.0
+   },
+   {
+    "path": "Mu buck input",
+    "net": "VSYS",
+    "vias": 9,
+    "parallel_mohm": 0.162,
+    "current_A": 6.0,
+    "per_via_A": 0.67
+   },
+   {
+    "path": "Mu SW1 FET node",
+    "net": "MU12_SW1",
+    "vias": 3,
+    "parallel_mohm": 0.487,
+    "current_A": 6.0,
+    "per_via_A": 2.0
+   },
+   {
+    "path": "Mu SW1 inductor",
+    "net": "MU12_SW1",
+    "vias": 7,
+    "parallel_mohm": 0.209,
+    "current_A": 6.0,
+    "per_via_A": 0.86
+   },
+   {
+    "path": "Mu input bulk",
+    "net": "VSYS",
+    "vias": 3,
+    "parallel_mohm": 0.487,
+    "current_A": 2.0,
+    "per_via_A": 0.67
+   },
+   {
+    "path": "charger input ground",
+    "net": "GND",
+    "vias": 17,
+    "parallel_mohm": 0.086,
+    "current_A": 5.0,
+    "per_via_A": 0.29
+   },
+   {
+    "path": "charger output ground",
+    "net": "GND",
+    "vias": 11,
+    "parallel_mohm": 0.133,
+    "current_A": 9.0,
+    "per_via_A": 0.82
+   },
+   {
+    "path": "Mu low-side source",
+    "net": "GND",
+    "vias": 2,
+    "parallel_mohm": 0.876,
+    "current_A": 2.8,
+    "per_via_A": 1.4
+   },
+   {
+    "path": "Mu power ground",
+    "net": "GND",
+    "vias": 5,
+    "parallel_mohm": 0.398,
+    "current_A": 6.0,
+    "per_via_A": 1.2
+   },
+   {
+    "path": "Mu input capacitor ground",
+    "net": "GND",
+    "vias": 7,
+    "parallel_mohm": 0.25,
+    "current_A": 6.0,
+    "per_via_A": 0.86
+   }
+  ]
+ },
+ "case_clearance": {
+  "components_screened": 90,
+  "unknown_heights": [],
+  "physical_hits": [],
+  "service_hits": [],
+  "exact_intersections": 246,
+  "physical_fit_verified": false
+ },
+ "limitations": [
+  "Mu SW1 has 3 vias at the FETs and the low-side source has 2; check their temperature on the first boards.",
+  "U2 exposed pad and U750 PGND bar have vias in pads; confirm plugging or paste windowing with the fabricator.",
+  "Hole plating and finished copper are not yet confirmed for this order.",
+  "TPS552882 compensation and both converters need assembled-board measurements.",
+  "VBUS_COMBINED, PACK_POS_FUSED, MU_12V distribution, remaining VSYS loads and EC control lines are still open."
+ ]
+}

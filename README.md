@@ -53,7 +53,14 @@ the existing PCIe routing is intact. the latest pass moves 31 power parts,
 adds five local capacitors, repairs the right USB-C control routes and
 corrects three USB protection footprints to their proper 0.4 mm pitch.
 [placement and checks](docs/hardware/mainboard-power-placement.md) cover
-those changes. most main-board routing still remains.
+those changes.
+
+20 october: the charger and the Mu supply are routed, including both
+controllers and a VSYS island on In4. their local parts were re-placed so the
+fine-pitch controller pins could escape cleanly. DRC has no new findings and
+the unconnected count dropped from 1,798 to 1,568.
+[charger and Mu supply routing](docs/hardware/charger-and-mu-routing.md)
+has the details. most of the main-board routing still remains.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

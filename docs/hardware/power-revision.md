@@ -1,5 +1,12 @@
 # power revision
 
+20 october 2026, routing: the [charger and Mu supply](charger-and-mu-routing.md)
+are routed, including both controllers and a VSYS island on In4. 36 parts
+moved to let the fine-pitch controller pins escape. the center board still
+matches its schematic and has no new physical DRC findings. its native
+unconnected count drops from 1,798 to 1,568. the input path, the rest of the
+rails and the control lines are still open.
+
 16 october 2026, main-board power placement: moved 31 existing parts,
 added five local capacitors and corrected the three TPD1S514 footprints
 from 0.5 mm to 0.4 mm pitch. revised both PD regulator capacitor banks

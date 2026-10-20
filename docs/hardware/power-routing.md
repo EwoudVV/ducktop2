@@ -1,5 +1,9 @@
 # routing the main-board power
 
+20 october 2026: steps 1 and 2 are routed. the [charger and Mu supply routing](charger-and-mu-routing.md)
+covers both power stages, both controllers, the In4 VSYS island and the
+part moves they needed. steps 3 to 6 are next.
+
 16 october 2026. this is the routing order for the saved 100 W circuit.
 the main boards are still eight layers. the BMS is a separate four-layer
 board. the [current counts](power-revision.md) come from refilled copies;

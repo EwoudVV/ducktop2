@@ -5,6 +5,30 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-10-20: route the charger and the mu 12v supply
+
+**Total time spent: 2 hours**
+
+started routing the main-board power, beginning with the charger. gave the power stage its own pours on the front: the input loop, both switch nodes, the charger output, the two power grounds, the system bulk capacitors and the battery fet. kept the switch nodes small and between the fets and the inductor. the input capacitors' grounds share one pour with the low-side fet and drop into the ground planes through 17 vias. added a VSYS island on In4 over the charger, with a strip running over to the mu's 12v supply. the charger output reaches it through 14 vias. the controller's exposed pad got nine thermal vias, where the datasheet asks for at least five.
+
+![the charger power stage on the front and the VSYS island on In4](docs/images/journal/2026-10-20-charger-power-stage.png)
+
+the charger controller was the hard part. it has 0.4 mm pins, and with the old placement there was no way to get traces out of them. several small parts sat right in front of the pins, and the parts around the chip were in a different order from the pins they connect to, so the routes would have had to cross. moved 21 parts. the two bootstrap capacitors went to the front inside their switch-node pours, the input-sense filter and the driver-supply filter resistor moved north-east out of the gate-drive path, and the compensation, current-monitor and battery-sense parts now follow the pin order around the south-west side.
+
+the gate drives are 0.3 mm. each high-side drive runs beside its switch-node return on the back, and the two low-side drives cross on In5 right above a ground plane. on the north-east side i placed the fan-out vias one at a time in an arc about 2 mm from the pins, since nothing else fit. both current-sense pairs run as kelvin pairs from the inner edges of their shunts. the battery-side sense via needed a keepout on In4 so it would not join the VSYS island.
+
+![the charger controller fan-out on the back](docs/images/journal/2026-10-20-charger-controller-fanout.png)
+
+then did the mu's 12v supply, following TI's layout for the TPS552882. the buck fets' gate pins face the inductor, so the first switch node crosses to it on a back-side pour, with 3 vias at the fets and 7 at the inductor. the boost output capacitor now sits right under the power ground and output pins. the analog ground goes through its own via to a small island on the back. all the quiet parts return there, and it only meets power ground at the VCC capacitor. moved 15 parts to make this work and removed three old ground vias that were under their new spots.
+
+![the mu 12v supply on the front and back](docs/images/journal/2026-10-20-mu-supply.png)
+
+after that i went back over the signal routing, because some traces were changing width for no reason. merged straight sections, replaced runs of small bends with straight or single 45 degree runs, and gave each net one width wherever the clearance allows. narrower sections are only left at the 0.4 mm pins. 445 track segments became 365.
+
+also found a nasty problem along the way. KiCad changes the net of a via with no track attached to whatever copper it touches. 33 power vias inside their pours had quietly become ground vias, and DRC didn't catch it because the pours cleared around them. put them all back on their proper nets and gave every new via a short track, so it can't happen again. added that to the build notes too.
+
+the board has no new DRC findings and still matches the schematic. the unconnected count went from 1,798 to 1,568. 90 changed parts were checked against the thin case, including the lid movement, with no collisions. the tightest spots are the 3 switch-node vias at the mu fets and the 2 vias under the low-side fet's source, so i'll check their temperature on the first boards. i still need to ask NextPCB about plugging the vias in the two controller pads, and the 12v compensation needs testing once it's assembled. next is the input path from the usb-c selectors and the battery connector into the charger.
+
 # 2026-10-16: sort out the main-board power placement
 
 **Total time spent: 2 hours**

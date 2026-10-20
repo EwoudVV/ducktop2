@@ -275,8 +275,13 @@ that is recovery of a starting point, not restoration of current manual work.
 
 pcbnew operations that remove and re-add parts have previously failed through
 SWIG object corruption. use fresh subprocesses where the scripts require it.
-initialize wx for headless reads when needed, and reject a `None` result
-from `LoadBoard`.
+keep reads headless without a `wx.App`, and reject a `None` result from
+`LoadBoard`.
+
+KiCad changes the net of a via that has no track attached to whatever copper
+it touches. a stitching or bank via placed inside a pour can end up on the
+wrong net without a DRC finding. give every new via a short track to its pad
+or pour, and check via nets after each change.
 
 read files before opening them for writing. never combine a truncating open
 with a nested read of the same path. after any branch/stash operation,
