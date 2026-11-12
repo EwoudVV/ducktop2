@@ -67,6 +67,12 @@ covers that pass. DRC has no new findings and the unconnected count dropped
 from 1,798 to 1,308. the long feeds from the side terminals and most of the
 main-board routing still remain.
 
+12 november: the open nets are now split into slow digital lines, which
+can be routed in bulk, and nets that need hand routing. the first batch,
+the 15 ec control nets, is routed: 49 of 53 connections, with the last four
+pads boxed in by power copper. [ec control routing](docs/hardware/ec-control-routing.md)
+has the split, the rules and the checks. the unconnected count is now 1,259.
+
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,
 outline and cable connector are unchanged. [keyboard routing notes](keyboard/README.md)

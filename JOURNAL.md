@@ -5,6 +5,26 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-12: route the ec control lines
+
+**Total time spent: 2 hours**
+
+the last routing pass went slowly, and some of it came out sloppy. a lot of what's left is simple slow signals, so before routing more i split the 433 nets that still had gaps into two groups. one is everything that needs care: high-speed pairs, power rails, inductors, shunts, switch nodes, sense lines, audio, crystals and rf. that's 186 nets. the other is slow digital lines like status, enable, interrupt, reset and I2C, 247 nets that can be routed in bulk. i tried an existing autorouter on the slow group first, but it never got through a pass on this board, so i set up a batch router for just that group instead.
+
+it follows the board's rules: 0.2 mm tracks, small vias, all the clearances, and every other net's copper counts as an obstacle. In2 runs east-west and In5 north-south, and the outer layers are mostly kept for getting out of the pads. the first version had a few real mistakes, like branches that could end up disconnected after the tracks were straightened, and tracks only kept 0.25 mm from holes when the board rule is 0.3. i fixed those before it touched the board, and now every track and via gets checked with exact geometry afterwards. that check caught two vias that were 0.03 mm too close to existing tracks, and they got rerouted.
+
+![the 15 ec control nets, with In2 east-west and In5 north-south](docs/images/journal/2026-11-12-ec-lines-overview.png)
+
+the first batch was the 15 ec control nets: the selector and charger status lines, the gauge alert, I2C, reset and the mu power-good and prochot lines. 49 of the 53 connections got routed in about two minutes, about 2.5 m of track with 79 vias. the charger was the tricky spot. it's turned 45 degrees and has 0.4 mm pins, so near the pads the router checks against the exact pad shapes instead of the grid. without that, none of its control pins could get out.
+
+![fan-out around the ec and U44](docs/images/journal/2026-11-12-ec-fanout.png)
+
+four pads are still boxed in by copper from the power passes. two I2C pins on the charger share one gap between its power pours, and only one track fits. pin 117 on the mu socket has C783 sitting right at the end of the pad. pin 7 on U15 is stuck behind a ground via i put there last time. those need small hand fixes.
+
+![the charger end, with the control pins escaping on the back](docs/images/journal/2026-11-12-charger-end.png)
+
+DRC has no new findings, the board still matches the schematic and the unconnected count went from 1,308 to 1,259. no parts moved. it's not perfect yet: there are 26 tiny jogs where tracks leave a via or pad, and one of the I2C lines spends 27 mm on the outer layers. next is the rest of the slow group, then the power feeds by hand.
+
 # 2026-10-20: route the input selectors, battery path and standby supply
 
 **Total time spent: 2 hours**

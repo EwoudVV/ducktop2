@@ -1,5 +1,11 @@
 # power revision
 
+12 november 2026, routing: the [ec control lines](ec-control-routing.md)
+are routed, 49 of 53 connections. no parts moved. the center board still
+matches its schematic and has no new physical DRC findings. its native
+unconnected count drops from 1,308 to 1,259. the side-terminal feeds are
+still open.
+
 20 october 2026, routing: the [input selectors, battery path, gauge and
 always-on chain](input-and-battery-routing.md) are routed locally. both
 selector stages moved to the back, RS1 and the gauge moved beside J2071 and

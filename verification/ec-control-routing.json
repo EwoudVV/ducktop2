@@ -1,0 +1,234 @@
+{
+  "date": "2026-11-12",
+  "baseline_commit": "a5932ff48540a683b19458726351ea319a2c8e1f",
+  "scope": "Routing of the 15 EC control nets in the slow-digital group: selector and charger status lines, gauge alert, I2C, reset, Mu power-good and prochot. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "c369a18921c4add3045208b7f8f3870f8682369a37a3a16df3cf2f68b8cf1fe5",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "net_split": {
+    "basis": "schematic pin types, net names and parts on each net",
+    "special_attention": {
+      "nets": 186,
+      "open_connections": 905
+    },
+    "slow_digital": {
+      "nets": 247,
+      "open_connections": 394
+    }
+  },
+  "copper_counts": {
+    "tracks": [
+      5710,
+      6061
+    ],
+    "vias": [
+      1165,
+      1244
+    ],
+    "zones_and_rule_areas": [
+      220,
+      220
+    ]
+  },
+  "added": {
+    "track_segments": 351,
+    "vias": 79,
+    "track_width_mm": 0.2,
+    "via_mm": [
+      0.45,
+      0.2
+    ],
+    "length_mm": 2492
+  },
+  "nets": [
+    {
+      "net": "I2C_SCL",
+      "connections": 9,
+      "routed": 8,
+      "vias": 14,
+      "track_segments": 75
+    },
+    {
+      "net": "I2C_SDA",
+      "connections": 9,
+      "routed": 8,
+      "vias": 10,
+      "track_segments": 57
+    },
+    {
+      "net": "NRST_NET",
+      "connections": 8,
+      "routed": 8,
+      "vias": 9,
+      "track_segments": 46
+    },
+    {
+      "net": "MU_PROCHOT_N",
+      "connections": 4,
+      "routed": 3,
+      "vias": 4,
+      "track_segments": 16
+    },
+    {
+      "net": "CHG_INT_N",
+      "connections": 3,
+      "routed": 3,
+      "vias": 6,
+      "track_segments": 27
+    },
+    {
+      "net": "MU_12V_PG",
+      "connections": 3,
+      "routed": 3,
+      "vias": 11,
+      "track_segments": 24
+    },
+    {
+      "net": "AON_FAULT_N",
+      "connections": 2,
+      "routed": 2,
+      "vias": 4,
+      "track_segments": 10
+    },
+    {
+      "net": "MAIN_AUX_VALID_N",
+      "connections": 2,
+      "routed": 1,
+      "vias": 0,
+      "track_segments": 6
+    },
+    {
+      "net": "MAIN_USB_VALID_N",
+      "connections": 2,
+      "routed": 2,
+      "vias": 2,
+      "track_segments": 13
+    },
+    {
+      "net": "MU_PROCHOT_RELEASE",
+      "connections": 2,
+      "routed": 2,
+      "vias": 5,
+      "track_segments": 21
+    },
+    {
+      "net": "PD2_VALID_N",
+      "connections": 2,
+      "routed": 2,
+      "vias": 6,
+      "track_segments": 17
+    },
+    {
+      "net": "AUX_PATH_EN",
+      "connections": 2,
+      "routed": 2,
+      "vias": 4,
+      "track_segments": 13
+    },
+    {
+      "net": "CHG_BIAS_GOOD",
+      "connections": 2,
+      "routed": 2,
+      "vias": 2,
+      "track_segments": 7
+    },
+    {
+      "net": "CHG_THROTTLE_GATE",
+      "connections": 2,
+      "routed": 2,
+      "vias": 0,
+      "track_segments": 4
+    },
+    {
+      "net": "BQ_ALERT",
+      "connections": 1,
+      "routed": 1,
+      "vias": 2,
+      "track_segments": 15
+    }
+  ],
+  "not_routed": [
+    {
+      "pads": [
+        "U2.21",
+        "U2.22"
+      ],
+      "nets": [
+        "I2C_SDA",
+        "I2C_SCL"
+      ],
+      "reason": "one gap and one via spot between the charger power pours on the back; only one track fits"
+    },
+    {
+      "pads": [
+        "A1.117"
+      ],
+      "nets": [
+        "MU_PROCHOT_N"
+      ],
+      "reason": "C783 at the end of the pad, neighbouring tracks on both sides, no via spot"
+    },
+    {
+      "pads": [
+        "U15.7"
+      ],
+      "nets": [
+        "MAIN_AUX_VALID_N"
+      ],
+      "reason": "ground via on pin 8 and the pin 6 track box it in"
+    }
+  ],
+  "parts_moved": [],
+  "parts_removed": [],
+  "copper_removed": [],
+  "zone_changes": [
+    "refilled only"
+  ],
+  "checks": {
+    "drc_new_findings_against_start": 0,
+    "drc_start": "same board refilled the same way, no new copper",
+    "drc_existing_warnings": {
+      "via_dangling": 174,
+      "track_dangling": 83,
+      "silk_over_copper": 2
+    },
+    "exact_clearance_problems": 0,
+    "native_unconnected": [
+      1308,
+      1259
+    ],
+    "schematic_parity": {
+      "passed": true,
+      "components": 870,
+      "physical_pads": 3372,
+      "pad_net_changes": 0
+    },
+    "placement_exports": {
+      "power_rows": 212,
+      "component_rows": 1378,
+      "match": true,
+      "note": "regenerated; only the source board hash changed"
+    },
+    "via_net_audit": "all 79 new vias keep their nets after refill"
+  },
+  "quality": {
+    "detour_over_shortest_tree_max": 0.24,
+    "outer_layer_mm_max_net": [
+      "I2C_SDA",
+      26.9
+    ],
+    "short_pieces_under_0_15mm": 26
+  },
+  "case_clearance": "no parts moved; nothing new to screen",
+  "still_open": [
+    "U2.21 and U2.22 on I2C, A1.117 on MU_PROCHOT_N, U15.7 on MAIN_AUX_VALID_N",
+    "the rest of the slow-digital group",
+    "the special-attention group, including the long power feeds from the side terminals and the AUX eFuse"
+  ],
+  "limitations": [
+    "Unrouted special-attention pads only get a 1 mm keep-away; nothing reserves room for the power feeds still to come.",
+    "26 track pieces under 0.15 mm, mostly one-cell jogs where a track leaves a via or pad."
+  ]
+}
