@@ -1,0 +1,174 @@
+{
+  "date": "2026-11-12",
+  "baseline_commit": "ca234acbad9f0a272e20d43bfacf6a95558fa3b2",
+  "scope": "Ground fan-out for loose GND pads, then the remaining slow-digital nets. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "568c4bbee0d167a9926fff2a6f36aa4e4dd65eaba7454d9ac096cdf3c5d50510",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "tracks": [
+      6114,
+      10061
+    ],
+    "vias": [
+      1257,
+      2174
+    ],
+    "zones_and_rule_areas": [
+      220,
+      220
+    ]
+  },
+  "ground_fanout": {
+    "open_connections": 364,
+    "pads_given_via": 307,
+    "pads_given_exposed_pad_stub": 17,
+    "gnd_pieces": [
+      365,
+      49
+    ],
+    "via_sizes_mm": [
+      [
+        0.6,
+        0.3
+      ],
+      [
+        0.5,
+        0.25
+      ],
+      [
+        0.45,
+        0.2
+      ]
+    ],
+    "stub_mm": 0.3,
+    "rules": [
+      "via lands inside the adjacent ground plane fill (In1 for F, In6 for B), 0.35 mm in from its edge",
+      "at least 0.15 mm off its own pad, within 0.9 mm (1.6 mm for four ec decoupling caps)",
+      "no via under the body of a chip with an exposed pad, except inside the exposed ground pad",
+      "no via inside another part's escape ring",
+      "MK430 left out (acoustic port)"
+    ],
+    "left": [
+      "U771.2",
+      "C912.2",
+      "C445.2",
+      "J2073.MP",
+      "J54.MP",
+      "U4.20",
+      "U4.27",
+      "J53.MP",
+      "SW1.2",
+      "C913.2",
+      "C39.2",
+      "J16.MP",
+      "J16.MP",
+      "C911.2",
+      "C2283.2",
+      "J420.MP",
+      "U901.47",
+      "SW901.2",
+      "SW3.2",
+      "C209.2",
+      "U44.21",
+      "C444.2",
+      "MK430.2",
+      "MK430.4",
+      "U2300.2",
+      "SW2.2",
+      "C906.2",
+      "C909.2",
+      "C208.2",
+      "C202.2",
+      "Q901.2",
+      "C903.2",
+      "C908.2",
+      "U2302.3",
+      "C905.2",
+      "C935.2",
+      "C914.2",
+      "C907.2",
+      "U2303.5",
+      "U2305.2",
+      "Q62.2",
+      "C781.2",
+      "C29.2",
+      "C915.2"
+    ]
+  },
+  "slow_group": {
+    "nets": 232,
+    "open_connections": 341,
+    "routed": 239,
+    "nets_fully_connected": 134,
+    "track_m": 10.73,
+    "vias": 610,
+    "median_detour": 1.22,
+    "rules_added": [
+      "escape rings: 0.7 mm around pads of fine-pitch parts reserved for their own nets",
+      "no tracks inside the pin ring or vias under the body of chips with an exposed pad",
+      "soft costs added and capped at 6x instead of multiplied",
+      "special-attention signal nets keep their direct path open",
+      "vias in another part's courtyard cost more",
+      "footprint rule areas (FPC102/FPC103 shell exclusions, J4/J902 via keep-outs, MK430) respected",
+      "special pads that lost every via spot within 1.5 mm got a reserved spot and the slow nets were rerouted (71 reservations)",
+      "arc tracks checked as arcs"
+    ]
+  },
+  "checks": {
+    "drc_new_findings_against_start": 0,
+    "drc_note": "against the board before this pass, both refilled with the project rules beside the board file",
+    "exact_clearance_problems": 0,
+    "native_unconnected": [
+      1255,
+      700
+    ],
+    "schematic_parity": {
+      "passed": true,
+      "components": 870,
+      "physical_pads": 3372,
+      "pad_net_changes": 0
+    },
+    "placement_exports": {
+      "power_rows": 212,
+      "component_rows": 1378,
+      "match": true,
+      "note": "regenerated; only the source board hash changed"
+    },
+    "via_net_audit": "all 917 new vias keep their nets after refill"
+  },
+  "special_pads_without_via_spot": [
+    "R906.1",
+    "U913.13",
+    "U4.12",
+    "U4.13",
+    "U4.70",
+    "U4.71",
+    "U4.75",
+    "C913.1",
+    "C911.1",
+    "U901.6",
+    "U6.5",
+    "U420.14",
+    "U400.29",
+    "C909.2",
+    "C24.1",
+    "C30.1",
+    "R200.2",
+    "Q62.2",
+    "U906.2"
+  ],
+  "still_open": [
+    "102 slow-group connections, mostly pins walled in by parts placed right in front of fine-pitch rows (U901, U4, FPC102, FPC103, U44)",
+    "44 ground pads",
+    "power rails other than ground (In4 power map)",
+    "high-speed pairs and other special-attention nets"
+  ],
+  "limitations": [
+    "333 track pieces under 0.15 mm, mostly one-cell jogs at vias and pads",
+    "ground stubs are straight at any angle, not on 45 degree lines",
+    "16 slow nets are more than twice their shortest length; some use up to 20 vias"
+  ]
+}

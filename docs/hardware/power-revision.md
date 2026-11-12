@@ -1,5 +1,12 @@
 # power revision
 
+12 november 2026, routing: [ground fan-out and slow signals](slow-signal-routing.md).
+324 loose ground pads got a via into the planes, and 239 more slow-signal
+connections are routed. no parts moved. the center board still matches its
+schematic and has no new physical DRC findings. its native unconnected
+count drops from 1,255 to 700. the power rails other than ground are still
+open; they come with the In4 power map.
+
 12 november 2026, routing: the [ec control lines](ec-control-routing.md)
 are routed, all 53 connections. CHG_SRN's In5 run now sits under the VSYS
 sense run on In2, and CHG_ACOK is rerouted, to make room at the charger's

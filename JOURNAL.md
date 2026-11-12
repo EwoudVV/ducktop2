@@ -5,6 +5,26 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-12: ground fan-out and the rest of the slow signals
+
+**Total time spent: 2 hours**
+
+with the ec lines done, i went after the rest of the slow group in one go: 232 nets with 341 open connections. before routing them i looked at what was left in the special-attention group, and most of it was ground: 364 pads sitting on their own with nothing taking them down to the planes. that part is mechanical, so it went first. every loose ground pad gets a via right beside it on a short stub, landing in the ground plane next to its side of the board, with the usual 0.6/0.3 via where it fits. a ground pin next to its chip's exposed pad gets a stub to that pad instead. 324 pads got one, and ground went from 365 separate pieces to 49.
+
+![ground fan-out: a via beside each loose ground pad](docs/images/journal/2026-11-12-ground-fanout.png)
+
+the first full run of the slow group took about 20 minutes and looked fine from far away, but up close it had bad habits. it ran tracks inside the pin ring of the maker mcu, between the pins and the exposed pad, and put vias under the chip. a couple of short nets looped around half the board because the extra costs for special pads, high-speed tracks and corridors multiplied on top of each other. it also routed through the shell copper exclusions on the two fpc connectors, which live inside the footprints and weren't in my export. and other nets ran along the pin rows of the ec and the mcu and walled their pins in.
+
+so i added rules and ran it again. nothing routes inside the pin ring of a chip with an exposed pad. the extra costs add up and are capped. footprint keep-outs count. and there's an escape ring around every fine-pitch part: within 0.7 mm of its pads, only that part's own nets can route or put vias. after routing, any special-attention pad that lost its last via spot got that spot reserved, and the slow nets in the way were rerouted. arcs on the board get checked as arcs now too, after one track ended up 0.01 mm from a curved wi-fi trace.
+
+![the slow signal group, routed](docs/images/journal/2026-11-12-slow-group-overview.png)
+
+239 of the 341 connections are routed, about 10.7 m of track with 610 vias, and 134 of the 232 nets are fully connected. most of what's left are pins walled in by parts placed right in front of fine-pitch rows. on the maker mcu, the bottom row faces two resistors 0.6 mm away, which leaves room for one track and six pins need out. around the ec it's the resistors and the old tracks below its bottom row. those need small placement moves before they can route.
+
+![around the ec, U44 and the usb hub](docs/images/journal/2026-11-12-slow-group-ec.png)
+
+DRC has no new findings, the board still matches the schematic, and the unconnected count went from 1,255 to 700. no parts moved. 19 special-attention pads, like the ec's crystal and usb pins and a few decoupling pads, no longer have a via spot within 1.5 mm, so they need a look before i route them.
+
 # 2026-11-12: fix the four boxed-in ec pads
 
 **Total time spent: 1 hour**
