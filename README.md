@@ -71,7 +71,8 @@ main-board routing still remain.
 can be routed in bulk, and nets that need hand routing. the first batch,
 the 15 ec control nets, is routed: 49 of 53 connections, with the last four
 pads boxed in by power copper. [ec control routing](docs/hardware/ec-control-routing.md)
-has the split, the rules and the checks. the unconnected count is now 1,259.
+has the split, the rules and the checks. the four boxed-in pads were fixed
+the same day, so all 53 are routed. the unconnected count is now 1,255.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

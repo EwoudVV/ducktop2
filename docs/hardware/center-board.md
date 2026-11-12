@@ -18,11 +18,12 @@ a VSYS island on In4. [charger and Mu supply routing](charger-and-mu-routing.md)
 covers the copper and the parts that moved for it. the input selectors,
 battery path, gauge and always-on chain followed;
 [input and battery routing](input-and-battery-routing.md) covers that pass.
-the ec control lines came next, 49 of 53 connections;
-[ec control routing](ec-control-routing.md) lists the four pads still boxed in.
+the ec control lines came next, all 53 connections;
+[ec control routing](ec-control-routing.md) covers them and the fixes for
+the four pads that were boxed in.
 
-the board has 6,010 straight track sections, 51 arcs and 1,244 vias.
-native connectivity counts 1,259 unconnected items. KiCad's DRC list can
+the board has 6,063 straight track sections, 51 arcs and 1,257 vias.
+native connectivity counts 1,255 unconnected items. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
 the four hdmi pairs and the ethernet controller's pcie data and clock

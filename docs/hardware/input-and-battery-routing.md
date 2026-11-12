@@ -114,7 +114,7 @@ about 4 milliohms, roughly 20 mV at 5 A.
   from the right, AUX_DC_PROTECTED and AUX_DC_FUSED from the AUX side.
 - the EC lines: the three VALID outputs, the AON fault line, the gauge
   alert, I2C and the gauge's 3.3 V. also TP2 at the top edge. (12 november:
-  the EC lines are routed apart from U15.7, see [ec control routing](ec-control-routing.md).
+  the EC lines are routed, see [ec control routing](ec-control-routing.md).
   the gauge's 3.3 V and TP2 are still open.)
 - confirm hole plating with NextPCB before trusting the via numbers.
 - measure the battery path drop and RS1's temperature at 8 A on the first

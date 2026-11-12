@@ -1,10 +1,10 @@
 {
   "date": "2026-11-12",
   "baseline_commit": "a5932ff48540a683b19458726351ea319a2c8e1f",
-  "scope": "Routing of the 15 EC control nets in the slow-digital group: selector and charger status lines, gauge alert, I2C, reset, Mu power-good and prochot. Copper only; no parts moved.",
+  "scope": "Routing of the 15 EC control nets in the slow-digital group, then fixes for the four pads the first pass could not reach. Copper only; no parts moved.",
   "board": {
     "pcb": "ducktop2-center.kicad_pcb",
-    "sha256": "c369a18921c4add3045208b7f8f3870f8682369a37a3a16df3cf2f68b8cf1fe5",
+    "sha256": "c7c4b652935689f20fa08e185567a8fbdba6aa52d30b80a037199b4d933854c2",
     "schematic": "ducktop2.kicad_sch"
   },
   "net_split": {
@@ -21,11 +21,11 @@
   "copper_counts": {
     "tracks": [
       5710,
-      6061
+      6114
     ],
     "vias": [
       1165,
-      1244
+      1257
     ],
     "zones_and_rule_areas": [
       220,
@@ -149,37 +149,6 @@
       "track_segments": 15
     }
   ],
-  "not_routed": [
-    {
-      "pads": [
-        "U2.21",
-        "U2.22"
-      ],
-      "nets": [
-        "I2C_SDA",
-        "I2C_SCL"
-      ],
-      "reason": "one gap and one via spot between the charger power pours on the back; only one track fits"
-    },
-    {
-      "pads": [
-        "A1.117"
-      ],
-      "nets": [
-        "MU_PROCHOT_N"
-      ],
-      "reason": "C783 at the end of the pad, neighbouring tracks on both sides, no via spot"
-    },
-    {
-      "pads": [
-        "U15.7"
-      ],
-      "nets": [
-        "MAIN_AUX_VALID_N"
-      ],
-      "reason": "ground via on pin 8 and the pin 6 track box it in"
-    }
-  ],
   "parts_moved": [],
   "parts_removed": [],
   "copper_removed": [],
@@ -197,7 +166,8 @@
     "exact_clearance_problems": 0,
     "native_unconnected": [
       1308,
-      1259
+      1259,
+      1255
     ],
     "schematic_parity": {
       "passed": true,
@@ -211,7 +181,8 @@
       "match": true,
       "note": "regenerated; only the source board hash changed"
     },
-    "via_net_audit": "all 79 new vias keep their nets after refill"
+    "via_net_audit": "all 79 + 15 new vias keep their nets after refill",
+    "drc_note": "each step against the board before it, both refilled with the project rules next to the board file"
   },
   "quality": {
     "detour_over_shortest_tree_max": 0.24,
@@ -223,12 +194,60 @@
   },
   "case_clearance": "no parts moved; nothing new to screen",
   "still_open": [
-    "U2.21 and U2.22 on I2C, A1.117 on MU_PROCHOT_N, U15.7 on MAIN_AUX_VALID_N",
     "the rest of the slow-digital group",
     "the special-attention group, including the long power feeds from the side terminals and the AUX eFuse"
   ],
   "limitations": [
     "Unrouted special-attention pads only get a 1 mm keep-away; nothing reserves room for the power feeds still to come.",
-    "26 track pieces under 0.15 mm, mostly one-cell jogs where a track leaves a via or pad."
-  ]
+    "26 track pieces under 0.15 mm in the first pass, mostly one-cell jogs where a track leaves a via or pad.",
+    "The I2C_SDA fan-out via at U2 sits 0.2 mm from the SW1 pour on F after refill."
+  ],
+  "first_pass": {
+    "commit": "8049ce3fc4206f72f4ed375d80fec0dbf38be931",
+    "connections": [
+      49,
+      53
+    ],
+    "native_unconnected": [
+      1308,
+      1259
+    ]
+  },
+  "pad_fixes": {
+    "U15.7": "not boxed in by exact geometry; the router grid margin hid a 0.225 mm gap to the pin 8 ground via. holes now checked exactly near pads.",
+    "A1.117": "0.15 mm escape west, then south between C783 and A1.119, via below C783. C783 unchanged.",
+    "U2.21-24": "CHG_SRN In5 run moved under the VSYS In2 sense run; four-pin fan-out found by exhaustive via-spot search with exact clearances; CHG_ACOK and the U2.23 prochot branch rerouted; LED1 end of CHG_ACOK kept.",
+    "switch_node_keepaway": "router cost x6 within 1.5 mm of switching or bootstrap copper on the same layer; I2C lines moved off the front between the charger inductors.",
+    "removed_items": 15,
+    "added": {
+      "tracks": 66,
+      "vias": 15
+    },
+    "nets": {
+      "MAIN_AUX_VALID_N": [
+        117.2,
+        3
+      ],
+      "MU_PROCHOT_N": [
+        102.6,
+        6
+      ],
+      "I2C_SDA": [
+        26.9,
+        3
+      ],
+      "I2C_SCL": [
+        21.9,
+        2
+      ],
+      "CHG_SRN": [
+        19.6,
+        0
+      ],
+      "CHG_ACOK": [
+        8.2,
+        1
+      ]
+    }
+  }
 }

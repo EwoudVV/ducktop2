@@ -5,6 +5,20 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-12: fix the four boxed-in ec pads
+
+**Total time spent: 1 hour**
+
+went back for the four pads the batch router couldn't reach. two of them turned out easier than they looked. pin 7 on U15 wasn't really boxed in at all: a track straight out of the pad clears the ground via on pin 8 by 0.225 mm, and the router's grid margin just hid that gap. it now checks holes exactly near the pads as well as copper, and the pin drops to a via right after the pad. pin 117 on the mu socket goes into the small gap between the pad and C783, turns down between C783 and the next pin on a thin track, and drops through a via under the capacitor. C783 didn't have to move.
+
+the charger was the real problem. its two battery-sense lines ran as parallel diagonals under the chip, one on In5 and one on In2, and the In5 one passed right under the control pins. every via in front of the pins had to clear both, so there was room for three vias and four pins that needed one. i moved the In5 sense line to sit directly under the In2 one, so the pair now follows one path, which is better for it anyway. that opened up the space in front of the pins. then i searched every via spot for a fan-out that clears everything exactly, and pins 21, 23 and 24 each got their own via, with 22 running down the back. the adapter LED line and the prochot branch got rerouted to make room.
+
+![the four pads that were boxed in, now connected](docs/images/journal/2026-11-12-pad-fixes.png)
+
+the first reroute ran both I2C lines down the front between the charger's two inductors, which is legal but not a place for I2C. so now the router keeps tracks well away from switch nodes on the same layer, and the I2C lines go down on the inner layers between the ground planes instead.
+
+all 53 ec control connections are routed now. DRC has no new findings, the board still matches the schematic, and the unconnected count went from 1,259 to 1,255. no parts moved. the I2C data via at the charger still sits 0.2 mm from the switch-node pour on the front, so that's the closest these lines get to it.
+
 # 2026-11-12: route the ec control lines
 
 **Total time spent: 2 hours**
