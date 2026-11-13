@@ -4,17 +4,17 @@
   "scope": "Ground fan-out for loose GND pads, then the remaining slow-digital nets. Copper only; no parts moved.",
   "board": {
     "pcb": "ducktop2-center.kicad_pcb",
-    "sha256": "568c4bbee0d167a9926fff2a6f36aa4e4dd65eaba7454d9ac096cdf3c5d50510",
+    "sha256": "3ddb0c00e3685cda584f3ea617a0bb9519d74970100aa3c0a269df7b02761472",
     "schematic": "ducktop2.kicad_sch"
   },
   "copper_counts": {
     "tracks": [
       6114,
-      10061
+      10993
     ],
     "vias": [
       1257,
-      2174
+      2350
     ],
     "zones_and_rule_areas": [
       220,
@@ -123,7 +123,8 @@
     "exact_clearance_problems": 0,
     "native_unconnected": [
       1255,
-      700
+      700,
+      660
     ],
     "schematic_parity": {
       "passed": true,
@@ -170,5 +171,60 @@
     "333 track pieces under 0.15 mm, mostly one-cell jogs at vias and pads",
     "ground stubs are straight at any angle, not on 45 degree lines",
     "16 slow nets are more than twice their shortest length; some use up to 20 vias"
-  ]
+  ],
+  "reroute_2026_11_13": {
+    "baseline_commit": "84b3f6cfa8aff0d9a0a8187490c6f07002d6301b",
+    "ripped_nets": 105,
+    "removed_items": 3270,
+    "added": {
+      "tracks": 3903,
+      "vias": 653
+    },
+    "fanouts": {
+      "found": 74,
+      "vias_kept": 31,
+      "via_dropped_unused": 43
+    },
+    "router_changes": [
+      "start from existing vias wired to a cluster",
+      "exact via spots within 1.5 mm of own pads",
+      "fan-out under QFP bodies (no exposed pad)",
+      "board outline arcs followed"
+    ],
+    "reserved_escapes": 116,
+    "open_slow_connections": [
+      102,
+      62
+    ],
+    "slow_nets_fully_connected": [
+      134,
+      171
+    ],
+    "native_unconnected": [
+      700,
+      660
+    ],
+    "checks": {
+      "drc_new_errors": 0,
+      "drc_new_warnings": "2 via_dangling: older escape vias (KB_COL8, MAKER_GPIO5) back to one-layer, as before the slow pass",
+      "exact_clearance_problems": 0,
+      "schematic_parity": "passes",
+      "via_net_audit": "all 653 new vias keep their nets",
+      "placement_exports": "only the board hash changed"
+    },
+    "special_pads_lost_last_via_spot": [
+      "C908.1",
+      "C913.2",
+      "R907.2",
+      "U2300.2",
+      "U46.5",
+      "U901.30"
+    ],
+    "placement_problems_left": {
+      "U4": 16,
+      "U901": 9,
+      "U400": 3,
+      "others": 34
+    }
+  }
 }

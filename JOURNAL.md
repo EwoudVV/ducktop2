@@ -5,6 +5,22 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-13: reroute the slow signals with fan-outs first
+
+**Total time spent: 2 hours**
+
+went in to move the parts in front of the pins that were still walled in, but when i checked each pocket properly, placement was rarely the real problem. mostly it was the order things got routed in. nets that happened to go first took the escape room next to the ec, the maker mcu and the fpc connectors, and the pins that came later had nowhere left to go. the fpc pins were even sillier: each one already had a little stub and via from earlier work, but the router only started from pads, and the pads themselves are boxed in.
+
+so instead of moving parts, i ripped up the 105 slow nets that had copper near those parts and did them again in a better order. first a fan-out: every pin still on its own whose partner is more than 4 mm away gets a stub and a via before anything else routes there, and on the ec, which is a QFP without an exposed pad, that via can go under the body. then the routing, which can now also start from vias already wired to a pin, and checks via spots near the pins exactly instead of with the grid allowance. fan-outs it didn't use came out again.
+
+![around the ec, with fan-outs under the QFP body](docs/images/journal/2026-11-13-slow-reroute-ec.png)
+
+that took the open slow connections from 102 to 62, with 171 of the 232 nets now fully connected, and the unconnected count from 700 to 660. the fpc103 pins are all done now. afterwards i checked again that no special-attention pad had lost its last via spot to the new routes, and reserved those spots and rerouted around them where it had. six still lost theirs, mostly maker decoupling pads.
+
+![FPC103: the routes start from the vias beside the pins](docs/images/journal/2026-11-13-slow-reroute-fpc103.png)
+
+i also found that the board outline's arcs, the corners of the bms cutout, were being treated as straight lines, which let one route get too close to a corner. that's fixed. DRC has no new errors and the board still matches the schematic. what's left are the real placement problems: a pocket inside the ec formed by two of its own routes with resistors under the bottom row, the maker mcu's bottom pins facing the crystal and debug resistors 0.6 mm away, and the usb hub's strap resistors sitting almost on their pins. those need decisions, not blind moves.
+
 # 2026-11-12: ground fan-out and the rest of the slow signals
 
 **Total time spent: 2 hours**

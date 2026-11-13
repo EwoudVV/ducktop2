@@ -24,8 +24,8 @@ the four pads that were boxed in. then the ground fan-out and most of the
 other slow lines; [slow signals and ground fan-out](slow-signal-routing.md)
 has the rules and the pins that are still walled in.
 
-the board has 10,010 straight track sections, 51 arcs and 2,174 vias.
-native connectivity counts 700 unconnected items. KiCad's DRC list can
+the board has 10,942 straight track sections, 51 arcs and 2,350 vias.
+native connectivity counts 660 unconnected items. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
 the four hdmi pairs and the ethernet controller's pcie data and clock

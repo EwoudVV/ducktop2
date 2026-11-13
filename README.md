@@ -75,7 +75,9 @@ has the split, the rules and the checks. the four boxed-in pads were fixed
 the same day, so all 53 are routed. after that came a ground fan-out (a via
 beside every loose ground pad) and the rest of the slow lines: 239 of their
 341 open connections. [slow signals and ground fan-out](docs/hardware/slow-signal-routing.md)
-lists what is still walled in. the unconnected count is now 700.
+lists what is still walled in. on 13 november the slow group near the dense
+parts was rerouted with fan-outs first, leaving 62 pins open. the
+unconnected count is now 660.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

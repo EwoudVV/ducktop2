@@ -1,5 +1,10 @@
 # power revision
 
+13 november 2026, routing: the slow nets near the ec, the maker mcu and the
+fpc connectors were rerouted with fan-outs first ([slow signals](slow-signal-routing.md#reroute-with-fan-outs-first-13-november)).
+no parts moved. the center board still matches its schematic and has no
+new physical DRC errors. its native unconnected count drops from 700 to 660.
+
 12 november 2026, routing: [ground fan-out and slow signals](slow-signal-routing.md).
 324 loose ground pads got a via into the planes, and 239 more slow-signal
 connections are routed. no parts moved. the center board still matches its

@@ -87,43 +87,87 @@ new rules since the ec pass:
 
 ![the maker header and its mcu](../images/journal/2026-11-12-slow-group-maker.png)
 
+## reroute with fan-outs first (13 november)
+
+i went in to move the parts in front of the walled-in pins, but checking
+each pocket showed that placement was rarely the real problem:
+
+- most pins were walled in by routing order. nets that happened to route
+  first took the escape room next to U4, U901 and the fpc connectors, and
+  the pins routed later had nowhere left to go.
+- the pins on FPC102 and FPC103 already had a short stub and a via each
+  from earlier work, but the router only started from pads, and the pads
+  themselves are boxed in by their neighbours.
+- six of U4's bottom pins open into a closed triangle inside the QFP,
+  formed by two ec routes and two vias, with the inner layers under it
+  full.
+
+so instead of moving parts, i ripped up the 105 slow nets that had copper
+near the dense parts and routed them again in a better order:
+
+- fan-out first: every slow pin on those parts that is still on its own,
+  with its partner more than 4 mm away, gets a stub and a via before
+  anything else routes there. on a QFP like the ec the via may go under
+  the body. 74 found a spot; the 43 the router didn't end up using were
+  removed again.
+- a net can now start from the vias already wired to its pads, not only
+  from the pads.
+- via spots within 1.5 mm of a net's own pads are checked exactly instead
+  of with the grid allowance.
+- every special-attention pad that lost its last via spot against the
+  board before this pass got that spot reserved, and the nets in the way
+  were rerouted. 116 spots are reserved in total.
+- the board outline's arcs (the BMS cutout corners) are now followed
+  properly; before, one route came too close to a curved corner.
+
+| | before | after |
+| --- | ---: | ---: |
+| open slow connections | 102 | 62 |
+| slow nets fully connected | 134 of 232 | 171 of 232 |
+| native unconnected items | 700 | 660 |
+
+![slow signals, rerouted with fan-outs first](../images/journal/2026-11-13-slow-reroute-overview.png)
+
+![FPC103: the routes start from the vias beside the pins](../images/journal/2026-11-13-slow-reroute-fpc103.png)
+
+![around the ec, with fan-outs under the QFP body](../images/journal/2026-11-13-slow-reroute-ec.png)
+
 ## not routed
 
-102 connections are still open. almost all of them are pins walled in by
-copper or parts that were there before this pass:
+62 slow pads are still on their own:
 
 | part | open pins | what's in the way |
 | --- | ---: | --- |
-| U901 (maker mcu) | 17 | the bottom row faces R906 and R919 only 0.6 mm away; that fits one track for six pins. the rest sit behind its decoupling parts |
-| U4 (ec) | 14 | the bottom and right rows face R2310, R2320, C209 and the existing tracks around them |
-| FPC102, FPC103 | 15 | the shell copper exclusion and the pins' neighbours leave no way out for these |
-| U44 | 6 | pins between the existing routing on both sides |
-| A1, U400, others | about 50 | single pins in the same kind of pocket |
+| U4 (ec) | 16 | the closed pocket inside the QFP formed by the MU_12V_PG and PD2_VALID_N routes, and R2310, R2320 and C209 right under the bottom row |
+| U901 (maker mcu) | 9 | the bottom row faces R906 and R919 0.6 mm away, with R918 and the crystal Y900 behind them; the left pins sit behind U910 and their own fan-outs |
+| U400 (usb hub) | 3 | the strap resistors R402 and R403 sit 0.4 mm from their pins |
+| others | 34 | single pins or resistor ends in tight spots |
 
-these need small placement moves (mostly resistors and capacitors right in
-front of fine-pitch pins) before they can be routed. the hub straps R402
-and R403 sit 0.4 mm from their U400 pins, which is too close to bridge
-straight across.
+these are the real placement problems. the ones at U4 and U901 involve
+the crystal and debug resistors and the ec's existing routes, so they
+need a decision rather than a blind move.
 
 ## checks
 
 | check | result |
 | --- | --- |
-| physical DRC | zero new findings against the board before this pass, refilled the same way |
+| physical DRC | zero new findings against the board before each pass, refilled the same way. after the reroute, two older escape vias (KB_COL8, MAKER_GPIO5) are back to touching copper on one layer only, as they were before the slow pass |
 | exact clearance | no problems, all new copper against the old and itself, arcs checked as arcs |
-| native unconnected items | 1,255 before, 700 now |
+| native unconnected items | 1,255 before, 700 after the first pass, 660 after the reroute |
 | schematic parity | passes: 870 parts, 3,372 physical pads, no net, value or footprint changes |
-| via nets | all 917 new vias keep their nets after refill |
+| via nets | all new vias keep their nets after refill (917 in the first pass, 653 in the reroute) |
 | placement exports | regenerated; only the board hash changed, all 212 power rows and 1,378 component rows still match |
 | case | no parts moved, so nothing new to screen |
 
 ## weak spots
 
-- 19 special-attention pads have no via spot within 1.5 mm any more,
-  mostly to the ground fan-out: the ec's crystal pins U4.12/13 and usb
-  pins U4.70/71 with R200, decoupling pads C24, C30, C909, C911, C913,
-  and a few others. the crystal and usb lines will likely run on the
-  surface anyway, but the power pads need a look before routing them.
+- after the first pass, 19 special-attention pads had no via spot within
+  1.5 mm any more, mostly to the ground fan-out: the ec's crystal pins
+  U4.12/13 and usb pins U4.70/71 with R200, decoupling pads C24, C30,
+  C909, C911, C913 and a few others. the reroute took the last spot of 6
+  more that it couldn't give back: C908.1, C913.2, R907.2, U2300.2, U46.5
+  and U901.30. the crystal and usb lines will likely run on the surface
+  anyway, but the power pads need a look before routing them.
 - 333 track pieces under 0.15 mm, mostly one-cell jogs at vias and pads.
 - ground stubs run straight from the pad to the via at whatever angle
   that is, not on 45 degree lines.
