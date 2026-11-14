@@ -132,46 +132,122 @@ near the dense parts and routed them again in a better order:
 
 ![around the ec, with fan-outs under the QFP body](../images/journal/2026-11-13-slow-reroute-ec.png)
 
+## clean reroute (13 november, second pass)
+
+the routes above connected, but they looked messy: staircases, long runs
+on the outer layers, routes hopping between layers, and nets wandering
+around instead of running in neat lanes. the older routing on these nets
+had the same problem. so i took all of it out and routed the slow group
+again with a different method, written up in
+[how the slow lines get routed](routing-method.md). in short:
+
+- everything the router had put down since the ec pass came out, ground
+  fan-out included. the older slow runs from before the power routing
+  stayed but got straightened in place, and the hand fixes for the boxed-in
+  ec pads stayed as they were.
+- fan-out vias sit on a 0.5 mm grid and only where they have free lanes out
+  on the inner layers. older escape vias next to boxed-in pins (FPC102,
+  FPC103) get a short inner stub to the nearest free lane.
+- long runs go on In2 east to west and In5 north to south on that grid, so
+  they line up as buses. nets share lanes at a rising price for 20 rounds
+  before the rest is settled one at a time.
+- what the grid can't do goes to the fine router, with the outer layers
+  four times the price away from the pads and bends and vias costed.
+- the 48 worst nets by a cleanliness score got routed again with strict
+  costs, in groups that don't overlap; a net only kept the new route if it
+  connected as much and was clearly cleaner. two more fill passes then went
+  after the connections that were still open.
+- every run between two fixed points is replaced by the simplest 45 degree
+  shape that clears the rules, or a version with fewer bends found in a
+  narrow corridor around it. dead ends, unused fan-outs and 47 exact
+  duplicate track pieces (some on GND, VSYS, CHG_SRN and CHG_BIAS_OR, left
+  over from earlier work) are gone.
+- via room next to special-attention pads is kept free the whole way: 231
+  reserved escape spots (pads, stubs and via spots) are keep-out areas for
+  every step, and a repair loop reserves and clears any pad that still lost
+  its last spot. the first try skipped this and took the last via spot of
+  64 special pads, including the usb pairs on FPC102, which is why it
+  didn't go in.
+- no new vias in outer-layer pours of other nets. one ground via split the
+  small SEL_STAGE2 pour on the back in two; the check caught it.
+
+| | committed board | now |
+| --- | ---: | ---: |
+| native unconnected items | 660 | 649 |
+| open slow connections | 62 | 68 |
+| slow nets fully connected | 187 of 248 | 182 of 248 |
+| open ground connections | 48 | 31 |
+| slow-net track | 17.9 m | 20.2 m |
+| bends per 100 mm of track | 23.3 | 15.9 |
+| track on the outer layers | 15% | 13% |
+| track pieces under 0.3 mm | 1,120 | 512 |
+| vias per 100 mm of track | 5.7 | 6.2 |
+| special pads with no via spot left | | 5 |
+
+the slow group ended up six connections short of the committed board, but
+the board as a whole has eleven fewer open items, mostly ground, and every
+special pad but five still has the via room it had on the committed board.
+the extra vias per length mostly come from the lane grid changing layer
+at its turns.
+
+![slow-net copper on the committed board](../images/journal/2026-11-13-clean-reroute-before.png)
+
+![slow-net copper after the clean reroute](../images/journal/2026-11-13-clean-reroute-after.png)
+
+![around the ec, before](../images/journal/2026-11-13-clean-reroute-ec-before.png)
+
+![around the ec, after](../images/journal/2026-11-13-clean-reroute-ec-after.png)
+
+![the maker mcu, before](../images/journal/2026-11-13-clean-reroute-maker-before.png)
+
+![the maker mcu, after](../images/journal/2026-11-13-clean-reroute-maker-after.png)
+
 ## not routed
 
-62 slow pads are still on their own:
+68 slow connections are still open:
 
 | part | open pins | what's in the way |
 | --- | ---: | --- |
-| U4 (ec) | 16 | the closed pocket inside the QFP formed by the MU_12V_PG and PD2_VALID_N routes, and R2310, R2320 and C209 right under the bottom row |
-| U901 (maker mcu) | 9 | the bottom row faces R906 and R919 0.6 mm away, with R918 and the crystal Y900 behind them; the left pins sit behind U910 and their own fan-outs |
-| U400 (usb hub) | 3 | the strap resistors R402 and R403 sit 0.4 mm from their pins |
-| others | 34 | single pins or resistor ends in tight spots |
+| U4 (ec) | 20 | no fan-out spot with a free lane out, and no free way out on the surface |
+| FPC103 | 8 | boxed in by their neighbours on the front |
+| U400 (usb hub) | 5 | the strap resistors R402 and R403 sit 0.4 mm from their pins |
+| U911 | 4 | no fan-out spot with a free lane out |
+| J2300 | 3 | no fan-out spot with a free lane out |
+| others | 28 | single pins or resistor ends, two each at U901, U910 and U45 |
 
-these are the real placement problems. the ones at U4 and U901 involve
-the crystal and debug resistors and the ec's existing routes, so they
-need a decision rather than a blind move.
+ground still has 31 loose pads: the maker mcu decoupling on the back
+under U901 (C903 to C915, C935), mounting and shell pads (A1, J16, J2073,
+J420, J53, J54, H2), the second pad of SW1, SW2, SW3 and SW901, the
+microphone MK430 and a few caps. the mounting and shell pads want a look
+by hand anyway.
 
 ## checks
 
 | check | result |
 | --- | --- |
-| physical DRC | zero new findings against the board before each pass, refilled the same way. after the reroute, two older escape vias (KB_COL8, MAKER_GPIO5) are back to touching copper on one layer only, as they were before the slow pass |
-| exact clearance | no problems, all new copper against the old and itself, arcs checked as arcs |
-| native unconnected items | 1,255 before, 700 after the first pass, 660 after the reroute |
+| physical DRC | zero new findings against the committed board, refilled the same way |
+| exact clearance | no problems: 5,174 new track pieces and 1,544 new vias against everything, arcs checked as arcs, track to hole included |
+| native unconnected items | 660 before, 649 after |
+| special-pad via room | 787 special pads checked against the committed board: 5 have no via spot within 1.5 mm, see weak spots |
 | schematic parity | passes: 870 parts, 3,372 physical pads, no net, value or footprint changes |
-| via nets | all new vias keep their nets after refill (917 in the first pass, 653 in the reroute) |
-| placement exports | regenerated; only the board hash changed, all 212 power rows and 1,378 component rows still match |
+| via nets | every new via keeps its net after refill |
+| placement exports | regenerated; only the board hash changed, all 1,378 component rows still match |
 | case | no parts moved, so nothing new to screen |
 
 ## weak spots
 
-- after the first pass, 19 special-attention pads had no via spot within
-  1.5 mm any more, mostly to the ground fan-out: the ec's crystal pins
-  U4.12/13 and usb pins U4.70/71 with R200, decoupling pads C24, C30,
-  C909, C911, C913 and a few others. the reroute took the last spot of 6
-  more that it couldn't give back: C908.1, C913.2, R907.2, U2300.2, U46.5
-  and U901.30. the crystal and usb lines will likely run on the surface
-  anyway, but the power pads need a look before routing them.
-- 333 track pieces under 0.15 mm, mostly one-cell jogs at vias and pads.
-- ground stubs run straight from the pad to the via at whatever angle
-  that is, not on 45 degree lines.
-- 16 slow nets are more than twice their shortest length, and some nets
-  change layers a lot (up to 20 vias).
+- five special pads lost their last via spot: C909.2 and U4.27 (ground,
+  both already left for hand work), U6.14 (BUCK5_RT, it only had one),
+  U901.22 (MAKER_XOUT, a crystal pin, which usually stays on the surface) and
+  U906.8 (MAKER_USB_DN, which had 17). the maker usb pair needs a look
+  before it gets routed.
+- the keyboard matrix nets run from the ec to the keyboard resistors in
+  long runs that change layer at their turns. most have one to five vias,
+  but KB_COL5, KB_ROW0, KB_ROW1, KB_ROW5 and KB_ROW6 have 11 to 16.
+- 73 track pieces aren't on 45 or 90 degrees. 54 of them start at a pad
+  centre that isn't on the 0.05 mm grid, and 50 are within 5 degrees, but
+  23 are clearly angled stubs worth tidying by hand.
+- the U4 pin ring needs a decision: either move some of the hand-fixed
+  pads' copper or accept surface routing for the last ec pins.
 - nothing reserves room for the power feeds and the other rails yet;
   they come with the In4 power map.

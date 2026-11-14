@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-13",
+  "baseline_commit": "b723eff",
+  "scope": "All slow-group routing and the ground fan-out redone: lane-grid trunks on In2/In5, fan-outs with lanes out, fine router for the rest, quality gate, cleanup, and escape room kept free for special-attention pads. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "d18960f014632224d96adce8f1e0ae8ae0635eb275d7a2d80d97b7f4239c902f",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "straight_tracks": [
+      10942,
+      10588
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      2350,
+      2661
+    ]
+  },
+  "connectivity": {
+    "native_unconnected": [
+      660,
+      649
+    ],
+    "slow_open_connections": [
+      62,
+      68
+    ],
+    "slow_nets_fully_connected_of_248": [
+      187,
+      182
+    ],
+    "ground_open_connections": [
+      48,
+      31
+    ]
+  },
+  "slow_net_copper": {
+    "length_mm": [
+      17885,
+      20169
+    ],
+    "pieces": [
+      5626,
+      4881
+    ],
+    "vias": [
+      1024,
+      1255
+    ],
+    "bends_per_100mm": [
+      23.3,
+      15.9
+    ],
+    "vias_per_100mm": [
+      5.7,
+      6.2
+    ],
+    "outer_layer_share": [
+      0.15,
+      0.13
+    ],
+    "pieces_under_0_3mm": [
+      1120,
+      512
+    ],
+    "off_angle_pieces": 73
+  },
+  "method": "docs/hardware/routing-method.md",
+  "reserved_escapes_non_ground": 231,
+  "exact_duplicate_pieces_removed": 47,
+  "checks": {
+    "drc_new_findings_vs_committed_refilled": 0,
+    "exact_clearance_problems": 0,
+    "new_track_pieces_checked": 5174,
+    "new_vias_checked": 1544,
+    "track_to_hole_problems": 0,
+    "new_vias_without_net": 0,
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; only source_board_sha256 changed",
+    "special_pads_checked": 787
+  },
+  "special_pads_without_via_spot": [
+    "C909.2",
+    "U4.27",
+    "U6.14",
+    "U901.22",
+    "U906.8"
+  ],
+  "still_open": [
+    "68 slow connections: U4 20, FPC103 8, U400 5, U911 4, J2300 3, 28 others",
+    "31 ground connections (maker mcu decoupling under U901, mounting and shell pads, switch second pads, MK430)",
+    "power rails other than ground (In4 power map)",
+    "high-speed pairs and other special-attention nets"
+  ],
+  "limitations": [
+    "KB_COL5, KB_ROW0, KB_ROW1, KB_ROW5 and KB_ROW6 use 11 to 16 vias",
+    "73 track pieces not on 45 or 90 degrees, 23 of them clearly angled",
+    "U906.8 (MAKER_USB_DN) has no via spot within 1.5 mm"
+  ]
+}

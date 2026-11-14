@@ -5,6 +5,28 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-13: redo the slow routing so it's actually clean
+
+**Total time spent: 2 hours**
+
+the reroute from this morning connected things, but up close it was a mess: staircases, long runs on the outer layers, routes hopping between layers for no reason and nets wandering around instead of running in neat lines. the routing from earlier days had the same problem. so i took all of it out and did the slow group again with a different method.
+
+the long runs now go on a lane grid: In2 runs east to west and In5 north to south, on a 0.5 mm grid, so parallel routes sit at an even pitch and read like buses. turns and vias cost extra, and the nets share lanes at a rising price for a bunch of rounds before they settle, instead of the first net grabbing the best path. pins get a stub and a via onto that grid first, and only where the via has free lanes out, since a via with no way out is useless. the older escape vias next to the boxed-in fpc pins get a short inner stub to the nearest lane. whatever the grid can't do goes to the fine router, which now pays four times as much for the outer layers away from the pads.
+
+![slow-net copper before](docs/images/journal/2026-11-13-clean-reroute-before.png)
+
+![slow-net copper after](docs/images/journal/2026-11-13-clean-reroute-after.png)
+
+after that every net gets a score for vias, outer-layer track, bends and detour, and the worst 48 got rerouted with strict costs, keeping the new version only where it was clearly cleaner and connected just as much. then a cleanup pass replaces every run between two fixed points with the simplest 45 degree shape that fits, which also straightened the older runs that were still there. it also found 47 track pieces sitting exactly on top of copies of themselves from earlier work.
+
+![the maker mcu, before](docs/images/journal/2026-11-13-clean-reroute-maker-before.png)
+
+![the maker mcu, after](docs/images/journal/2026-11-13-clean-reroute-maker-after.png)
+
+my first full try looked great but took the last via spot from 64 special pads, the usb pairs on fpc102 among them, so it didn't go in. now the via spots next to special pads are keep-out areas for every step, and a repair loop finds any pad that still lost its spot and clears it. a ground via also split the small SEL_STAGE2 pour on the back in two, so new vias stay out of other nets' pours now.
+
+the result: bends per 100 mm of track went from 23 to 16, pieces under 0.3 mm from 1,120 to 512, and the unconnected count from 660 to 649. ground is better (31 open instead of 48), the slow group is six connections behind (68 instead of 62). the ec pin ring is the big one left with 20 pins, then fpc103 and the usb hub. five special pads still lost their via room, and the maker usb DN pin is the one i need to look at. DRC has no new findings and the board still matches the schematic. i wrote the method down so later routing follows the same rules.
+
 # 2026-11-13: reroute the slow signals with fan-outs first
 
 **Total time spent: 2 hours**
