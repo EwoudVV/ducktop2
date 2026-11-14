@@ -54,7 +54,13 @@ every net afterwards.
    straight line, one bend, or straight, diagonal, straight. if none fits,
    a search inside a narrow corridor around the old run looks for a
    version with fewer bends. vias and junctions never move in this step.
-9. **via room check.** every special-attention pad is compared with the
+9. **targeted rip-up.** for connections an earlier board had made and the
+   new one hasn't, the earlier route near the open pin shows where the
+   escape has to go. the nets whose copper sits there (within 4 mm of the
+   pin) are ripped, the open pins routed first, then the ripped nets, and
+   two fill passes pick up whatever that pushed out. it is only kept if no
+   net ends up worse.
+10. **via room check.** every special-attention pad is compared with the
    committed board. a pad that lost its last via spot within 1.5 mm gets
    its best old spot reserved, only the new pieces sitting in it are cut,
    and the cut nets are routed again around it. this repeats until it
@@ -73,6 +79,11 @@ every net afterwards.
   that part may route or put vias.
 - no vias under a chip with an exposed pad, except ground vias inside the
   exposed ground pad.
+- pads that share a name with other pads on the same part (shell and
+  mounting pads, some switch pins) are left alone by the automatic steps:
+  connectivity can't tell which of them is loose.
+- no track pieces left lying entirely inside their own pad, and no exact
+  duplicates.
 - every new piece of copper is checked against the board rules with exact
   geometry before it stays, and the finished board is checked with
   KiCad's DRC against the board before the pass, refilled the same way.

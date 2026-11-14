@@ -5,6 +5,22 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-14: close the gap on the slow lines
+
+**Total time spent: 2 hours**
+
+the clean reroute left the slow group six connections behind the board from before it, which bugged me, because those connections had been made once, so there was a way through. for each of the 31 nets that used to be connected and isn't now, i looked at where its old route left the open pin, ripped the nets whose new copper was sitting in that spot (39 of them, only within 4 mm of the pin), routed the open pins first and then the ripped nets around them.
+
+that fixed 21 nets on its own but broke more of the ripped ones, so on its own it was a step back. two fill passes after it sorted that out, the second one in the router's negotiated mode where all the open nets push each other around until they fit. after that nothing was worse than before and the slow group ended at 61 open, one better than two days ago, with 646 unconnected items on the whole board. i tried a second round, but the router got stuck on one net for hours, so i stopped it.
+
+![slow-net copper after closing the gap](docs/images/journal/2026-11-14-gap-closed-overview.png)
+
+i also redid the five keyboard nets with the most vias on their own, but the via room repair afterwards put most of those vias back, so KB_ROW5 and KB_ROW6 still have 15 and 16. the last clearly angled stubs got squared into a straight leg and a 45, and the repair loop for special pads ran again, so only 3 are short of via room now.
+
+![FPC103](docs/images/journal/2026-11-14-gap-closed-fpc103.png)
+
+the checks found two silly things. the module and connector shells and the switches have several pads with the same name, and the ground step couldn't tell which one was loose, so every repair round stacked another stub and via on the first one, up to eleven on a single pad. 95 of those are gone and pads that share a name are left for hand work now. there were also 153 little bits of track lying completely inside their own pads, leftovers from old stubs, which are gone too. DRC has no new findings and the board still matches the schematic. what's left is mostly the ec pin ring with 17 open pins, and that needs a decision rather than more routing.
+
 # 2026-11-13: redo the slow routing so it's actually clean
 
 **Total time spent: 2 hours**

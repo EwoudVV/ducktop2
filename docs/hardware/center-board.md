@@ -1,6 +1,6 @@
 # center board
 
-updated 13 november 2026. the center board is 227 x 185 mm with eight
+updated 14 november 2026. the center board is 227 x 185 mm with eight
 layers, 870 footprints and 3,563 pads. the existing pcie, usb, hdmi and
 ethernet routes have been repaired. there is still a lot of main routing
 to do before this board can be ordered.
@@ -27,8 +27,8 @@ routing was then redone cleaner, on a lane grid on the inner layers;
 [how the slow lines get routed](routing-method.md) covers the method that
 later passes should follow too.
 
-the board has 10,588 straight track sections, 51 arcs and 2,661 vias.
-native connectivity counts 649 unconnected items. KiCad's DRC list can
+the board has 10,101 straight track sections, 51 arcs and 2,733 vias.
+native connectivity counts 646 unconnected items. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
 the four hdmi pairs and the ethernet controller's pcie data and clock

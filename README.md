@@ -80,7 +80,9 @@ parts was rerouted with fan-outs first, leaving 62 pins open. later that day
 all of the slow-line routing was redone in a cleaner way, with long runs in
 lanes on the inner layers and the via room next to special pads kept free;
 [how the slow lines get routed](docs/hardware/routing-method.md) has the
-method. the unconnected count is now 649.
+method. on 14 november the pins that routing had left open were won back with
+a targeted rip-up, so the slow group is ahead of where it was (61 open
+instead of 62). the unconnected count is now 646.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

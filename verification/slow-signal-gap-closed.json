@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-14",
+  "baseline_commit": "93c7c3e",
+  "scope": "Targeted rip-up for slow connections the earlier board had made, fill passes, keyboard nets redone, angled pieces squared, stacked ground stubs on shared-name pads and in-pad leftovers removed, via room for special pads repaired. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "95371fb9b692b3add466185ee5472b75c1514736a52ea82651a8a15a62518ec1",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "straight_tracks": [
+      10588,
+      10101
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      2661,
+      2733
+    ]
+  },
+  "connectivity": {
+    "native_unconnected": {
+      "before_clean_reroute": 660,
+      "after_clean_reroute": 649,
+      "now": 646
+    },
+    "slow_open": {
+      "before_clean_reroute": 62,
+      "after_clean_reroute": 68,
+      "now": 61
+    },
+    "slow_nets_fully_connected_of_248": {
+      "before_clean_reroute": 187,
+      "after_clean_reroute": 182,
+      "now": 187
+    },
+    "ground_open": {
+      "before_clean_reroute": 48,
+      "after_clean_reroute": 31,
+      "now": 31
+    }
+  },
+  "slow_net_copper_now": {
+    "length_mm": 19094,
+    "pieces": 4470,
+    "vias": 1228,
+    "bends_per_100mm": 14.8,
+    "vias_per_100mm": 6.4,
+    "outer_layer_share": 0.13,
+    "pieces_under_0_3mm": 417,
+    "clearly_off_angle": 1
+  },
+  "rip_up": {
+    "nets_targeted": 31,
+    "nets_ripped_around_them": 39,
+    "radius_mm": 4
+  },
+  "removed": {
+    "stacked_ground_stubs_on_shared_name_pads": 95,
+    "slow_net_pieces_inside_own_pad": 153
+  },
+  "checks": {
+    "drc_new_findings_vs_board_before_clean_reroute": 0,
+    "exact_clearance_problems": 0,
+    "new_track_pieces_checked": 4841,
+    "new_vias_checked": 1455,
+    "track_to_hole_problems": 0,
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; only source_board_sha256 changed",
+    "special_pads_checked": 787
+  },
+  "special_pads_without_via_spot": [
+    "C909.2",
+    "U901.22",
+    "U906.8"
+  ],
+  "still_open": [
+    "61 slow connections: U4 17, FPC103 8, U911 5, U400 4, J2300 2, U901 2, 23 others",
+    "31 ground connections"
+  ],
+  "limitations": [
+    "KB_ROW5 and KB_ROW6 use 15 and 16 vias; I2C_SCL 36 and I2C_SDA 33",
+    "U906.8 (MAKER_USB_DN) has no via spot within 1.5 mm"
+  ]
+}
