@@ -5,6 +5,22 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-14: ec pins on the surface and the loose ground pads
+
+**Total time spent: 2 hours**
+
+the last ec pins were still open, so i let them run on the front. they're all slow lines (enables, interrupts, uart, i2c) and the front sits right on top of the In1 ground plane, so that's fine electrically, as long as they keep away from the crystal, the usb pins and the high-speed stuff, which the router already does. i ripped out the slow copper within a few mm of every open pin and the whole ec pin ring, and routed everything that touched together in the router's negotiated mode, where the nets push each other around until they fit. it broke a few nets on the way, but two fill passes after it brought those back and the slow group went from 61 open to 51. a second round only shuffled things around, so i kept the first.
+
+![around the ec with surface routes allowed](docs/images/journal/2026-11-14-surface-ec-u4.png)
+
+ground went from 31 open to 13. the escape step can now strap a loose ground pad to a nearby ground pad or an existing ground via instead of always adding a new via, and it picks the right pad when a part has several with the same name. the maker mcu decoupling caps on the back now strap to the back of U901's exposed pad, which already has nine thermal vias in the footprint. what's left is a handful of boxed-in caps, a mounting hole and the microphone.
+
+i tried redoing the 32 nets with the most vias too. that saved 97 vias but left 3 connections open, so i went with connections and only kept the two nets whose cleaner route fit. the maker usb pin that had no via room turned out not to need one, the pair changes layer near U900 instead. the board is at 623 unconnected now, DRC has no new findings and it still matches the schematic.
+
+![slow-net copper now](docs/images/journal/2026-11-14-surface-ec-overview.png)
+
+i also wrote two docs for using the router on other boards, a handoff and a step by step workflow with the checks. the 15 ec pins that are still open need a planned fan-out for the whole chip, every side escaping together, not more routing passes.
+
 # 2026-11-14: close the gap on the slow lines
 
 **Total time spent: 2 hours**

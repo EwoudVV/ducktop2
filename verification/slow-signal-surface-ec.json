@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-14",
+  "baseline_commit": "73fad69",
+  "scope": "Open slow pins rerouted with the front layer allowed (local rip-up, negotiated routing, fills), loose ground pads strapped to planes, nearby ground pads or ground vias, two nets cleaned up, via room for special pads repaired, dead ends pruned. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "0bf5d7fb49e95f8826d46454a36f334a05e37395de13c91ac6aacee73427d388",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "straight_tracks": [
+      10101,
+      10581
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      2733,
+      2823
+    ]
+  },
+  "connectivity": {
+    "native_unconnected": [
+      646,
+      623
+    ],
+    "slow_open": [
+      61,
+      51
+    ],
+    "slow_nets_fully_connected_of_248": [
+      187,
+      197
+    ],
+    "ground_open": [
+      31,
+      13
+    ]
+  },
+  "slow_net_copper": {
+    "bends_per_100mm": [
+      14.8,
+      15.2
+    ],
+    "vias_per_100mm": [
+      6.4,
+      6.5
+    ],
+    "outer_layer_share": [
+      0.13,
+      0.15
+    ],
+    "pieces_under_0_3mm": [
+      417,
+      492
+    ]
+  },
+  "checks": {
+    "drc_new_findings_vs_board_before_clean_reroute": 0,
+    "exact_clearance_problems": 0,
+    "new_track_pieces_checked": 5236,
+    "new_vias_checked": 1546,
+    "track_to_hole_problems": 0,
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; only source_board_sha256 changed"
+  },
+  "special_pads_without_via_spot": {
+    "C29.2": "ground, already connected",
+    "C909.2": "ground, already connected",
+    "U4.27": "ground, already connected",
+    "C908.2": "ground, boxed in",
+    "U901.22": "crystal pin, front to R906",
+    "U906.8": "usb pair changes layer near U900",
+    "C905.1": "via in pad up to U901.11 when the maker core supply is routed"
+  },
+  "still_open": [
+    "51 slow connections: U4 15, FPC103 7, U911 5, U901 3, J2300 2, 19 others",
+    "13 ground: C2283, C444, C445, C908, U60, H2, MK430"
+  ]
+}

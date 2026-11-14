@@ -254,32 +254,85 @@ two cleanups came out of the checks:
 
 ![FPC103](../images/journal/2026-11-14-gap-closed-fpc103.png)
 
+## surface routes and the rest (14 november, later)
+
+the open ec pins are all slow digital lines: enables, interrupts, uart and
+i2c. running those on the front is fine electrically, because the front
+sits right over the In1 ground plane and the router still keeps away from
+the high-speed tracks, the ec crystal and usb pins and the reserved
+escapes. so the front is allowed now, without the extra cost away from the
+pads.
+
+- **local rip-up:** every slow copper piece within 2.5 mm of an open pin,
+  and in the whole ec pin ring, came out (137 nets touched). everything it
+  cut was routed again together in the router's negotiated mode, followed
+  by two fill passes. that took the open slow connections from 61 to 51.
+  a second round on the ten nets it broke on the way only reshuffled
+  things (54), so i kept the first.
+- **ground:** the ground escape can now also strap a pad to a nearby ground
+  pad or an existing ground via, and picks shared-name pads by position.
+  19 of the 24 loose ground pads are connected now, including the maker mcu
+  decoupling caps under U901, which strap to the back of its exposed pad
+  (that pad already has nine thermal vias).
+- **vias:** the 32 two- and three-pin nets with the most vias were redone
+  together. that saved 97 vias but left 3 more connections open, so i put
+  back the fully connected version and only swapped in the two nets whose
+  cleaner route fit (7 vias saved).
+- **checks:** the via room repair ran again and a long dead-end branch on
+  KB_ROW6 was pruned.
+- **U906.8:** it doesn't need a via of its own. the maker usb pair runs
+  from the Mu module on the front to U900 and U906, both on the back, so it
+  changes layer once near U900, whose pins still have room.
+
+| | committed before | now |
+| --- | ---: | ---: |
+| native unconnected items | 646 | 623 |
+| open slow connections | 61 | 51 |
+| slow nets fully connected | 187 of 248 | 197 |
+| open ground connections | 31 | 13 |
+| bends per 100 mm of track | 14.8 | 15.2 |
+| track on the outer layers | 13% | 15% |
+| track pieces under 0.3 mm | 417 | 492 |
+| vias per 100 mm of track | 6.4 | 6.5 |
+
+the extra connections cost a little tidiness: more track on the front
+around the ec and a few more vias from the negotiated pass.
+
+![slow-net copper with surface routes allowed](../images/journal/2026-11-14-surface-ec-overview.png)
+
+![around the ec](../images/journal/2026-11-14-surface-ec-u4.png)
+
+![the maker mcu](../images/journal/2026-11-14-surface-ec-maker.png)
+
 ## not routed
 
-61 slow connections are still open:
+51 slow connections are still open:
 
 | part | open pins | what's in the way |
 | --- | ---: | --- |
-| U4 (ec) | 17 | no fan-out spot with a free lane out, and no free way out on the surface |
-| FPC103 | 8 | boxed in by their neighbours on the front |
-| U911 | 5 | no fan-out spot with a free lane out |
-| U400 (usb hub) | 4 | the strap resistors R402 and R403 sit 0.4 mm from their pins |
-| J2300, U901 | 2 each | no fan-out spot with a free lane out |
-| others | 23 | single pins or resistor ends in tight spots |
+| U4 (ec) | 15 | boxed in on the front by the neighbouring pins' stubs, the hand-fixed pads and the reserved crystal and usb escapes, with the inner layers under the pin ring full |
+| FPC103 | 7 | boxed in by their neighbours on the front |
+| U911 | 5 | no free way out on any layer |
+| U901 (maker mcu) | 3 | no free way out on any layer |
+| J2300 | 2 | no free way out on any layer |
+| others | 19 | single pins or resistor ends in tight spots |
 
-ground still has 31 loose pads: the maker mcu decoupling on the back
-under U901 (C903 to C908, C912, C914, C915, C935), the shared-name pads on
-A1, J16, J53, J54, J420, J2073, SW1, SW2, SW3 and SW901, the mounting hole
-H2, the microphone MK430 and C444, C445, C2283 and U60.
+the last ec pins need a planned fan-out for the whole QFP rather than more
+routing passes: every side's pins escaping together, alternating inward and
+outward.
+
+ground has 13 open connections left: C2283, C444, C445, C908 and U60
+(boxed in), the mounting hole H2 and the microphone MK430, which stay for
+hand work.
 
 ## checks
 
 | check | result |
 | --- | --- |
 | physical DRC | zero new findings against the board before the clean reroute, refilled the same way |
-| exact clearance | no problems: all copper that wasn't on that board (4,841 track pieces, 1,455 vias) checked against everything, arcs checked as arcs, track to hole included |
-| native unconnected items | 660 before the clean reroute, 646 now |
-| special-pad via room | 787 special pads checked against the board before the clean reroute: 3 have no via spot within 1.5 mm |
+| exact clearance | no problems: all copper that wasn't on that board (5,236 track pieces, 1,546 vias) checked against everything, arcs checked as arcs, track to hole included |
+| native unconnected items | 660 before the clean reroute, 623 now |
+| special-pad via room | 7 special pads have no via spot within 1.5 mm, all accounted for under weak spots |
 | schematic parity | passes: 870 parts, 3,372 physical pads, no net, value or footprint changes |
 | via nets | every new via keeps its net after refill |
 | placement exports | regenerated; only the board hash changed, all 1,378 component rows still match |
@@ -287,16 +340,16 @@ H2, the microphone MK430 and C444, C445, C2283 and U60.
 
 ## weak spots
 
-- three special pads have no via spot within 1.5 mm: C909.2 (ground, left
-  for hand work), U901.22 (MAKER_XOUT, a crystal pin, which usually stays
-  on the surface) and U906.8 (MAKER_USB_DN, which had 17). the maker usb
-  pair needs a look before it gets routed.
-- the keyboard matrix nets run from the ec to the keyboard resistors
-  through the busiest part of the board. KB_ROW5 and KB_ROW6 have 15 and
-  16 vias, and some multi-pin nets have more (I2C_SCL 36, I2C_SDA 33).
-- vias per length went up a little: the lane grid changes layer at its
-  turns.
-- the ec pin ring needs a decision: either move some of the hand-fixed
-  pads' copper or accept surface routing for the last ec pins.
+- seven special pads have no via spot within 1.5 mm:
+  - C29.2, C909.2 and U4.27 are ground pads that are already connected.
+  - C908.2 is one of the boxed-in ground pads.
+  - U901.22 (MAKER_XOUT) goes to R906 on the front.
+  - U906.8 (MAKER_USB_DN) changes layer near U900 instead.
+  - C905.1 (MAKER_3V3_CORE) sits on the back right under U901.11, so
+    it's meant to get a via straight up through its pad when the maker
+    core supply is routed.
+- the busiest multi-pin nets have a lot of vias (I2C_SCL 36, I2C_SDA 31,
+  INTERNAL_USB_VBUS_VALID 30, NRST_NET 28).
+- there is more track on the front around the ec than before.
 - nothing reserves room for the power feeds and the other rails yet;
   they come with the In4 power map.

@@ -82,7 +82,10 @@ lanes on the inner layers and the via room next to special pads kept free;
 [how the slow lines get routed](docs/hardware/routing-method.md) has the
 method. on 14 november the pins that routing had left open were won back with
 a targeted rip-up, so the slow group is ahead of where it was (61 open
-instead of 62). the unconnected count is now 646.
+instead of 62). the unconnected count is now 646. later the same day the open ec pins were
+allowed onto the front layer and the loose ground pads were strapped to
+nearby ground, which brought the slow group to 51 open, ground to 13 and the
+unconnected count to 623.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,
