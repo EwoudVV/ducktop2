@@ -90,6 +90,12 @@ the ground pads that were only tied to each other got their way to the
 planes, and a new cleanup pass takes out vias where nets hop over one
 track. the slow group is at 39 open, ground at 8 and the unconnected count
 at 606.
+later that day the special-attention nets got their own passes: the short
+links (crystals, caps, series and bias resistors), the light power rails
+as 0.3 to 0.4 mm trees and the sense lines kept away from the switch nodes.
+the unconnected count is at 386. [special nets](docs/hardware/special-net-routing.md)
+has the rules and what's left, starting with the ec's own supply, vcap and
+crystal pins.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

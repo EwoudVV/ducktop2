@@ -5,6 +5,22 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-15: special nets, the short links and the light rails
+
+**Total time spent: 3 hours**
+
+with the slow lines done, almost everything still open on the center board was special nets, so i went after those. most of them turned out to be short: a chip pin to its own cap, a crystal to its load caps, a series or current-limit resistor a few mm away. those are safe to route in bulk as long as each kind gets its own rules, so i sorted them into groups. crystals get 0.2 mm and vias are made really expensive, the usb series resistors stay on the outer layers at the exact pair width, supply pins get 0.3 mm, the amp outputs and the fan and wi-fi feeds 0.5 mm. the short ones go first so every cap gets its direct path before anything long comes through, and anything that wanders more than about twice the distance it needs gets thrown out.
+
+![new special-net copper](docs/images/journal/2026-11-15-special-nets-overview.png)
+
+after that i did the light power rails like MCU_3V3 and the maker 3.3 V as 0.3 to 0.4 mm trees. they carry half an amp or less, so with 1 oz copper the drop stays at a few tens of mV. the bigger ones like the amp's 5 V and the radio board supply didn't fit as tracks and will come with the In4 power map. the long sense lines (thermistors, dividers, dac and headphone outputs) went in last, and i added a keep-away to the router so they stay 2 mm from every switch node and power inductor on every layer.
+
+halfway through i found a bug that was boxing in a lot of the special pads. the via reservations that keep room free next to special pads were also blocking the pad's own net, so when it was finally that net's turn its pad was walled in by its own reserved spot. fixing that joined another 53 connections. the board went from 606 unconnected to 386, DRC has no new findings and it still matches the schematic.
+
+![around the ec](docs/images/journal/2026-11-15-special-nets-ec.png)
+
+the big thing left is the ec itself. five of its VDD pins, both VCAP pins, the two crystal inputs and the usb D+ are still open. their caps are right under them on the back, they just need a via each, but the slow lines' fan-out vias took every spot, so that's going to be hand work. i also tried redoing that corner with the crystals and supply first, but it lost more slow lines than it won, so i kept the board as it was. pairs, the big rails and the converter layouts are next after that.
+
 # 2026-11-15: thinner tracks, ground islands and hops
 
 **Total time spent: 2 hours**

@@ -77,6 +77,25 @@ every net afterwards.
    and the cut nets are routed again around it. this repeats until it
    stops finding anything.
 
+## special nets
+
+the special-attention nets get their own passes once the slow lines are
+in. [special nets](special-net-routing.md) has the details.
+
+1. **local links first.** every open special connection up to 8 mm long
+   (a pin to its cap, series resistor or crystal) is routed in groups,
+   each with its own width: crystals 0.2 mm with vias made very dear, pair
+   resistors at the pair's exact outer-layer width on the front or back
+   only, supply pins 0.3 mm, amp outputs and the fan and wi-fi feeds
+   0.5 mm, the rest 0.2 mm.
+2. **the light rails.** MCU_3V3, MAKER_3V3_CORE and the other rails that
+   carry half an amp or less are routed as trees at 0.3 to 0.4 mm.
+3. **long sense lines.** routed last, kept at least 2 mm from every switch
+   node and power inductor on every layer.
+4. while a group routes, its own via reservations are lifted; everyone
+   else's stay. a route that detours more than about twice the distance it
+   covers is dropped.
+
 ## rules every step keeps
 
 - the board rules: 0.15 mm track clearance, 0.18 mm via to track, 0.2 mm

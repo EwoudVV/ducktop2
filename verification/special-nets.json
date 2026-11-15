@@ -1,0 +1,137 @@
+{
+  "date": "2026-11-15",
+  "baseline_commit": "e8353fe",
+  "scope": "Special-attention nets: local links per group with their own widths and rules, light power rails as 0.3 to 0.4 mm trees, long sense lines kept 2 mm from switch nodes and power inductors, via reservations lifted for the group being routed, via room repaired, slow-net copper straightened, squared and pruned. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "42318f463b411f2791347cc7fc2e78b03a7416d45e215c6a46c19e4698173dad",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "straight_tracks": [
+      10795,
+      11724
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      2853,
+      3010
+    ]
+  },
+  "connectivity": {
+    "native_unconnected": [
+      606,
+      386
+    ],
+    "nets_worse": [],
+    "open_links_by_class": {
+      "power class": [
+        289,
+        174
+      ],
+      "sense, feedback or analog": [
+        67,
+        31
+      ],
+      "power pin": [
+        46,
+        27
+      ],
+      "power rail": [
+        26,
+        17
+      ],
+      "crystal": [
+        24,
+        11
+      ],
+      "inductor, fuse or shunt": [
+        15,
+        8
+      ],
+      "audio": [
+        14,
+        2
+      ],
+      "high-speed pair": [
+        57,
+        50
+      ],
+      "high-speed": [
+        8,
+        8
+      ],
+      "switching or bootstrap": [
+        3,
+        1
+      ],
+      "slow lines": [
+        39,
+        39
+      ],
+      "ground": [
+        8,
+        8
+      ]
+    }
+  },
+  "groups": {
+    "crystals": "0.2 mm, vias very dear",
+    "pair resistors": "0.1796 mm, F.Cu and B.Cu only",
+    "amp outputs, fan, wi-fi supply": "0.5 mm",
+    "supply pins": "0.3 mm",
+    "signals": "0.2 mm",
+    "light rails": "0.3 to 0.4 mm",
+    "detour limit": "about 2x the straight distance for crystals and pairs, 2.5x for the rest",
+    "switch-node keep-away": "2 mm on every layer"
+  },
+  "mcu_3v3": {
+    "pads_on_source_tree": 81,
+    "farthest_ohm": 0.623,
+    "ec_pins_ohm": [
+      0.207,
+      0.379
+    ],
+    "still_open": 30
+  },
+  "checks": {
+    "drc_new_findings_vs_board_before_clean_reroute": 0,
+    "exact_clearance_problems": 0,
+    "new_track_pieces_checked": 968,
+    "new_vias_checked": 157,
+    "track_to_hole_problems": 0,
+    "sensitive_track_near_switch_nodes_mm": [
+      2.5,
+      245.3
+    ],
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; only source_board_sha256 changed"
+  },
+  "special_pads_without_via_spot": {
+    "C29.2": "ground, connected",
+    "C909.2": "ground, connected",
+    "U4.27": "ground, connected",
+    "C908.2": "ground, boxed in",
+    "U901.22": "crystal pin, front to R906",
+    "U906.8": "usb pair changes layer near U900",
+    "C905.1": "via in pad to U901.11 with the maker core supply",
+    "U420.19": "AMP_IN_LN, open, the pair needs routing together",
+    "R31.1": "listed by the baseline check but connected now"
+  },
+  "still_open_highlights": [
+    "ec pins: VDD 19, 21, 22, 50, 75; VCAP 49, 73; HSE_IN 12; LSE_IN 8; usb D+ 71",
+    "usb and superspeed pairs",
+    "heavy rails: POWER_HI, AUDIO_5V, RADIO_DB_5V, KB_FFC_5V",
+    "converter power stages and kelvin sense",
+    "speaker lines",
+    "39 slow lines",
+    "8 ground"
+  ],
+  "tried_and_dropped": [
+    "rip slow copper along open special links and route specials first: +5 special links, slow lines didn't refill cleanly",
+    "ec crystal and supply priority redo: +2 ec supply pins but 4 slow lines lost"
+  ]
+}
