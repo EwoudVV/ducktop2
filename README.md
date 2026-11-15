@@ -94,8 +94,9 @@ later that day the special-attention nets got their own passes: the short
 links (crystals, caps, series and bias resistors), the light power rails
 as 0.3 to 0.4 mm trees and the sense lines kept away from the switch nodes.
 the unconnected count is at 386. [special nets](docs/hardware/special-net-routing.md)
-has the rules and what's left, starting with the ec's own supply, vcap and
-crystal pins.
+has the rules and what's left. after that the ec's own pins were done one by
+one: all its supply pins, both crystals and one vcap are connected now, and
+the unconnected count is at 362.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

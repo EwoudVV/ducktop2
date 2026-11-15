@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-15",
+  "baseline_commit": "a5205a9",
+  "scope": "EC (U4) supply, VCAP and crystal pins: via spots scanned against the board rules, escapes placed directly and exact-checked, VREF+ strapped to VDDA, crystal paths cleared and routed first, moved slow lines rerouted, ground re-escaped, stale via reservations dropped, special passes rerun with the cleaned reservations. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "7a6eaeb383787ac79bbca0c7a5ad28d2d2172467e69bf4829feeac4a17193523",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "straight_tracks": [
+      11724,
+      11795
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      3010,
+      3019
+    ]
+  },
+  "connectivity": {
+    "native_unconnected": [
+      386,
+      362
+    ],
+    "open_ec_pins": [
+      27,
+      20
+    ],
+    "ec_supply_pins_open": [
+      7,
+      0
+    ],
+    "ec_crystal_pins_open": [
+      3,
+      0
+    ],
+    "vcap_pins_open": [
+      2,
+      1
+    ],
+    "mcu_3v3_open_links": [
+      30,
+      14
+    ],
+    "nets_worse": [
+      "SOURCE_MGR_INT_N (U4.7)",
+      "MU_PWRBTN_N (U4.23)",
+      "KB_COL8 (U4.55)",
+      "KB_COL7 (U4.88)"
+    ]
+  },
+  "ec_supply_resistance_from_L3_ohm": {
+    "U4.100": 0.207,
+    "U4.11": 0.46,
+    "U4.19": 0.465,
+    "U4.21": 0.473,
+    "U4.22": 0.473,
+    "U4.28": 0.379,
+    "U4.50": 0.1
+  },
+  "reservations": {
+    "before": 298,
+    "stale_dropped": 192
+  },
+  "checks": {
+    "drc_new_findings_vs_board_before_clean_reroute": 0,
+    "exact_clearance_problems": 0,
+    "new_track_pieces_checked": 369,
+    "new_vias_checked": 37,
+    "track_to_hole_problems": 0,
+    "sensitive_track_near_switch_nodes_mm": 0.0,
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; only source_board_sha256 changed",
+    "special_pads_still_open_without_via_spot": [
+      "U4.49 VCAP1 (In4 ground track)",
+      "C908.2 GND",
+      "C905.1 MAKER_3V3_CORE",
+      "U906.8 MAKER_USB_DN"
+    ]
+  },
+  "still_open_on_the_ec": [
+    "VCAP1 pin 49: In4 ground track in every via spot",
+    "usb D+ pin 71: C30 ground pad and the D- via",
+    "slow pins 7, 15, 18, 23, 31-36, 42, 43, 55, 64, 66, 67, 69, 81, 88"
+  ]
+}

@@ -95,6 +95,9 @@ in. [special nets](special-net-routing.md) has the details.
 4. while a group routes, its own via reservations are lifted; everyone
    else's stay. a route that detours more than about twice the distance it
    covers is dropped.
+5. reservations are only kept for pads that are still open. a connected
+   pad's reservation keeps a spot free for nobody and walls in its
+   neighbours.
 
 ## rules every step keeps
 

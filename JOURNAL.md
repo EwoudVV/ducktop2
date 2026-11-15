@@ -5,6 +5,20 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-15: the ec's supply and crystal pins
+
+**Total time spent: 2 hours**
+
+the ec still had its own supply, vcap and crystal pins open, and it can't run without those, so this time i went at them one pin at a time instead of with another big pass. for every open pin i checked every via spot within 2 mm against the board rules (the via, the stub from the pin and the stub on the back to its cap), and sorted whatever was in the way into slow lines that can be moved, ground fan-out that can get a new via, and stuff that has to stay. a couple of pins had a free spot the whole time and the router just never took it, so those got their stub and via placed directly and checked exactly. VREF+ is strapped to VDDA on the front since they're the same rail.
+
+![the ec supply and crystal nets](docs/images/journal/2026-11-15-ec-pins-supply.png)
+
+the crystals were blocked by a ground via sitting right between U4 and Y1 and a slow line that wandered across in front of Y2, so those got moved and the crystals routed first. while digging into why pin 8 still wouldn't leave, i found that 192 of the 298 via reservations were for pads that had been connected since. they kept their spots free for nobody, and one of them was right where LSE_IN needed to go. reservations now only stay for pads that are still open.
+
+every VDD pin, VREF+, VDDA, both crystals and VCAP2 are connected now, and the supply pins are 0.1 to 0.47 ohm from the buck. it cost four slow ec lines that ended up boxed in where the supply escapes went (MU_PWRBTN_N is the important one), but those are normal escapes to do by hand, unlike a via under a supply pin. VCAP1 is still blocked by a long ground track on In4 from older work, so i left that one for now. the board is at 362 unconnected, DRC has no new findings and it still matches the schematic.
+
+![everything this round changed around U4](docs/images/journal/2026-11-15-ec-pins-new.png)
+
 # 2026-11-15: special nets, the short links and the light rails
 
 **Total time spent: 3 hours**

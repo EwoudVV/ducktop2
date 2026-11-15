@@ -104,14 +104,15 @@ tried and dropped:
 
 ## weak spots
 
-- **the ec still needs hand work on its own pins.** VDD pins 19, 21, 22,
-  50 and 75, VCAP1 (pin 49) and VCAP2 (pin 73), HSE_IN (pin 12), LSE_IN
-  (pin 8) and the usb D+ (pin 71) are open. their caps sit right under them
-  on the back, 0.35 to 1.4 mm away (C21, C28, C23, C24, C29, C30); each one
-  only needs a via at the end of its pin, but the slow lines' fan-out vias
-  next to them hold every spot. the crystal inputs are boxed in on the front
-  by the routes around Y1 and Y2. this is the most important hand job left:
-  the ec doesn't run without its supply pins, vcap caps and crystal.
+- **the ec still has two special pins open.** VCAP1 (pin 49) needs a via
+  to C29 on the back, and every spot near it is blocked by a 43 mm ground
+  track on In4 from older work; whether that In4 ground network is still
+  needed decides how this one gets done. the usb D+ (pin 71) is boxed in by
+  C30's ground pad and the D- leg's own via, so it goes with routing that
+  pair properly.
+- four slow ec lines are open where the supply escapes went: pins 7, 23,
+  55 and 88 (see above). MU_PWRBTN_N is the one that matters most, it's how
+  the ec turns the Mu on.
 - MCU_3V3 takes the long way from L3 to the ec. a short direct strap from
   L3's output to the ec's cap cluster would make the ec's supply path much
   shorter.
@@ -122,6 +123,54 @@ tried and dropped:
   only routes found wandered too far.
 - RADIO_CODEC_USB_VBUS_HOST only found a 119 mm detour for a 4 mm link,
   so it stays open.
+
+## the ec's own pins (15 november, later)
+
+the ec (U4) had its supply, vcap and crystal pins open: the caps sit right
+under the pins on the back, so each pin only needs a via at its end, but
+the slow lines' fan-out vias held those spots. this pass did it pin by pin:
+
+- for every open supply, vcap and usb pin, every via spot within 2 mm was
+  checked against the board rules: the via itself, the stub from the pin
+  and the stub on the back to the cap. whatever was in the way got sorted
+  into slow copper (can be ripped and routed again), ground fan-out (can be
+  re-escaped) and fixed copper (pads, special nets, earlier hand work).
+- spots with nothing fixed in the way got a 0.2 mm stub, a via and a stub to
+  the cap, placed directly and checked exactly. VREF+ (pin 21) is strapped
+  to VDDA (pin 22) on the front, since they're the same rail.
+- the crystal paths were cleared of a ground via and a slow line that had
+  been routed in front of Y2, and the crystals routed first.
+- the slow lines that were moved were routed back, the ground pads that
+  lost their via got a new one.
+
+two more things turned up on the way:
+- 192 of the 298 via reservations were for pads that had been connected
+  since. they still kept their spots free for nobody, and one of them sat
+  right where LSE_IN had to leave pin 8. reservations are now only kept for
+  pads that are still open, and the via room repair drops them the same
+  way.
+- RADIO_VHF_PTT_N and the hand-routed segment under pin 50 could be moved;
+  a 43 mm ground track on In4 that blocks VCAP1 is part of an older ground
+  network on that layer, so it stayed.
+
+| | before | now |
+| --- | ---: | ---: |
+| native unconnected items | 386 | 362 |
+| open ec pins | 27 | 20 |
+| ec supply pins open (VDD, VREF+, VDDA) | 7 | 0 |
+| ec crystal pins open | 3 | 0 |
+| vcap pins open | 2 | 1 |
+| MCU_3V3 open links | 30 | 14 |
+
+the ec's supply pins are 0.1 to 0.47 ohm from L3 now, so 10 to 47 mV at
+100 mA.
+
+![the ec supply and crystal nets](../images/journal/2026-11-15-ec-pins-supply.png)
+
+this traded four slow ec lines that are now boxed in where the supply
+escapes went: SOURCE_MGR_INT_N (pin 7), MU_PWRBTN_N (pin 23), KB_COL8
+(pin 55) and KB_COL7 (pin 88). they're ordinary escapes to route by hand,
+unlike a via right under a supply pin.
 
 ## not routed by this pass
 
