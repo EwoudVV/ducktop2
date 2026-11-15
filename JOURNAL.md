@@ -5,6 +5,16 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-15: old ground traces off In4, vcap1 done
+
+**Total time spent: 1 hour**
+
+VCAP1 was the last ec pin that really matters, and every via spot next to it was blocked by a ground trace on In4. turns out it was part of the ground traces i ran between the diff pairs back in september, instead of a whole row of stitching vias. the pairs moved off In4 a while ago, so those 182 traces (almost 1.4 m of them) weren't guarding anything anymore, and most of their ends just stopped in open space. i took them all out. nothing loses a connection, ground has three solid planes anyway, and it cleared up some of the old dangling track warnings too. In4 is pretty much empty now except for the VSYS island and the battery strip, which is good for the power map later.
+
+![the ec supply, vcap and crystal nets](docs/images/journal/2026-11-15-ec-vcap1.png)
+
+with that gone VCAP1 got its via and a straight stub to C29 on the back, so every supply, vcap and crystal pin on the ec is connected now. the router also found its way again for two of the keyboard columns that got boxed in last time, and two more ec lines. the board is at 357 unconnected, DRC has no new findings and it still matches the schematic. MU_PWRBTN_N and SOURCE_MGR_INT_N are the ec lines i still want to fix by hand, and the usb D+ goes with the pair routing.
+
 # 2026-11-15: the ec's supply and crystal pins
 
 **Total time spent: 2 hours**

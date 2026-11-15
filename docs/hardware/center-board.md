@@ -27,8 +27,10 @@ routing was then redone cleaner, on a lane grid on the inner layers;
 [how the slow lines get routed](routing-method.md) covers the method that
 later passes should follow too.
 
-the board has 11,795 straight track sections, 51 arcs and 3,019 vias.
-native connectivity counts 362 unconnected items. KiCad's DRC list can
+the board has 11,655 straight track sections, 51 arcs and 3,033 vias.
+native connectivity counts 357 unconnected items. In4 carries the VSYS
+island, the battery strip and a few short VSYS and wi-fi pieces; the old
+ground guard traces from when the usb pairs ran there are gone. KiCad's DRC list can
 stop at 499, so use the native count when checking routing progress.
 
 the four hdmi pairs and the ethernet controller's pcie data and clock

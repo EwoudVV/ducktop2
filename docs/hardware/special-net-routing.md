@@ -104,15 +104,12 @@ tried and dropped:
 
 ## weak spots
 
-- **the ec still has two special pins open.** VCAP1 (pin 49) needs a via
-  to C29 on the back, and every spot near it is blocked by a 43 mm ground
-  track on In4 from older work; whether that In4 ground network is still
-  needed decides how this one gets done. the usb D+ (pin 71) is boxed in by
+- **the ec has one special pin open:** the usb D+ (pin 71) is boxed in by
   C30's ground pad and the D- leg's own via, so it goes with routing that
   pair properly.
-- four slow ec lines are open where the supply escapes went: pins 7, 23,
-  55 and 88 (see above). MU_PWRBTN_N is the one that matters most, it's how
-  the ec turns the Mu on.
+- two slow ec lines are open where the supply escapes went: SOURCE_MGR_INT_N
+  (pin 7) and MU_PWRBTN_N (pin 23). MU_PWRBTN_N is the one that matters
+  most, it's how the ec turns the Mu on.
 - MCU_3V3 takes the long way from L3 to the ec. a short direct strap from
   L3's output to the ec's cap cluster would make the ec's supply path much
   shorter.
@@ -149,9 +146,8 @@ two more things turned up on the way:
   right where LSE_IN had to leave pin 8. reservations are now only kept for
   pads that are still open, and the via room repair drops them the same
   way.
-- RADIO_VHF_PTT_N and the hand-routed segment under pin 50 could be moved;
-  a 43 mm ground track on In4 that blocks VCAP1 is part of an older ground
-  network on that layer, so it stayed.
+- the hand-routed RADIO_VHF_PTT_N segment under pin 50 could be moved and
+  routed again.
 
 | | before | now |
 | --- | ---: | ---: |
@@ -171,6 +167,33 @@ this traded four slow ec lines that are now boxed in where the supply
 escapes went: SOURCE_MGR_INT_N (pin 7), MU_PWRBTN_N (pin 23), KB_COL8
 (pin 55) and KB_COL7 (pin 88). they're ordinary escapes to route by hand,
 unlike a via right under a supply pin.
+
+### the old ground traces on In4
+
+the via spots next to VCAP1 were all blocked by a 0.2 mm ground track on
+In4. it belonged to a 1,390 mm network of 182 ground traces from 16
+september, when the usb pairs still ran on In4 and a ground trace between
+them replaced the stitching vias. the pairs have since moved to F, In2 and
+B, so the traces guarded nothing any more, and 15 of their 20 ends stopped
+in open space. they're all removed: no net loses a connection (ground
+neither, it has three solid planes), DRC has no new findings and 13 of the
+old dangling-track warnings are gone. In4 is now free apart from the VSYS
+island, the battery strip and a few short VSYS and wi-fi pieces, ready for
+the power map.
+
+that freed VCAP1: a via just inside the pin ring with a straight stub to
+C29 on the back. a slow line that had to move for it routed straight back,
+and with In4 clear the router also got KB_COL7 and KB_COL8 back and
+connected RADIO_UHF_RF_SEL_3V3 (pin 18) and TRACKPAD_FAULT_N (pin 36).
+
+| | before | now |
+| --- | ---: | ---: |
+| native unconnected items | 362 | 357 |
+| open ec pins | 20 | 15 |
+| vcap pins open | 1 | 0 |
+| open slow connections | 41 | 37 |
+
+![the ec supply, vcap and crystal nets](../images/journal/2026-11-15-ec-vcap1.png)
 
 ## not routed by this pass
 

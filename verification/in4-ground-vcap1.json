@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-15",
+  "baseline_commit": "5cc6e27",
+  "scope": "Removed the orphaned In4 ground guard traces (182 pieces, 1390 mm, from 16 September when the pairs ran on In4), connected VCAP1 with a via and a straight stub to C29, rerouted the moved slow segment, and routed the open slow lines again. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "542755a73fee800993dc65ce4acc570738e07ed99df1286ea95c75ca5ef34e95",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "straight_tracks": [
+      11795,
+      11655
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      3019,
+      3033
+    ]
+  },
+  "in4_ground_traces_removed": {
+    "pieces": 182,
+    "length_mm": 1390,
+    "ends_in_open_space": 15,
+    "ground_connectivity_change": 0,
+    "dangling_track_warnings": [
+      82,
+      69
+    ]
+  },
+  "connectivity": {
+    "native_unconnected": [
+      362,
+      357
+    ],
+    "nets_worse": [],
+    "newly_connected": [
+      "VCAP1_NODE",
+      "KB_COL7",
+      "KB_COL8",
+      "RADIO_UHF_RF_SEL_3V3",
+      "TRACKPAD_FAULT_N"
+    ],
+    "open_ec_pins": [
+      20,
+      15
+    ],
+    "open_slow": [
+      41,
+      37
+    ]
+  },
+  "checks": {
+    "drc_new_findings_vs_board_before_clean_reroute": 0,
+    "exact_clearance_problems": 0,
+    "new_track_pieces_checked": 78,
+    "new_vias_checked": 14,
+    "track_to_hole_problems": 0,
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; only source_board_sha256 changed",
+    "special_pads_still_open_without_via_spot": [
+      "C908.2 GND",
+      "C905.1 MAKER_3V3_CORE",
+      "U906.8 MAKER_USB_DN"
+    ]
+  },
+  "still_open_on_the_ec": [
+    "usb D+ pin 71",
+    "SOURCE_MGR_INT_N pin 7",
+    "MU_PWRBTN_N pin 23",
+    "slow pins 15, 31-35, 42, 43, 64, 66, 67, 69, 81"
+  ]
+}
