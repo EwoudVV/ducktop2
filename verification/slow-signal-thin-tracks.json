@@ -1,0 +1,100 @@
+{
+  "date": "2026-11-15",
+  "baseline_commit": "694b03a",
+  "scope": "Open slow lines filled with 0.15 mm track and a 0.01 mm router raster allowance, ground islands taken down to the planes, hop cleanup (hops over one track replaced by moving that track), via room for special pads repaired, straightened, squared and pruned. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "41b2c104922d499cfdb69c56d1f3093a69008b1db1498e6fda8e6299c7f66897",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "straight_tracks": [
+      10581,
+      10795
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      2823,
+      2853
+    ]
+  },
+  "connectivity": {
+    "native_unconnected": [
+      623,
+      606
+    ],
+    "slow_open": [
+      51,
+      39
+    ],
+    "slow_nets_fully_connected_of_248": [
+      197,
+      209
+    ],
+    "ground_open": [
+      13,
+      8
+    ],
+    "nets_worse": []
+  },
+  "slow_net_copper": {
+    "bends_per_100mm": [
+      15.2,
+      15.4
+    ],
+    "vias_per_100mm": [
+      6.5,
+      6.3
+    ],
+    "outer_layer_share": [
+      0.15,
+      0.16
+    ],
+    "pieces_under_0_3mm": [
+      492,
+      526
+    ],
+    "pieces_0_15mm_wide": [
+      6,
+      280
+    ]
+  },
+  "hop_cleanup": {
+    "hops_found": 70,
+    "groups_kept": 2,
+    "vias_saved": 7
+  },
+  "checks": {
+    "drc_new_findings_vs_board_before_clean_reroute": 0,
+    "exact_clearance_problems": 0,
+    "new_track_pieces_checked": 341,
+    "new_vias_checked": 45,
+    "track_to_hole_problems": 0,
+    "new_vias_without_net_after_refill": 0,
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; only source_board_sha256 changed"
+  },
+  "special_pads_without_via_spot": {
+    "C29.2": "ground, already connected",
+    "C909.2": "ground, already connected",
+    "U4.27": "ground, already connected",
+    "C908.2": "ground, boxed in",
+    "U901.22": "crystal pin, front to R906",
+    "U906.8": "usb pair changes layer near U900",
+    "C905.1": "via in pad up to U901.11 when the maker core supply is routed"
+  },
+  "still_open": [
+    "39 slow connections: U4 16, U901 7, FPC102/FPC103 6, U400 3, J2300 3, 4 others",
+    "8 ground: C2283, C444, C445, C908, U60, H2, MK430 (2)"
+  ],
+  "tried_and_dropped": [
+    "whole ec area redone with all pins escaping first at 0.15 mm: 55 open after fills",
+    "planned fan-out per part for U901, U400, J2300, U911, FPC103: no gain",
+    "negotiated local rip-up around the ec and the maker mcu: fewer connections or new DRC findings",
+    "C908.2 ground via: MAKER_SPI_MOSI can't route back past it",
+    "redo of the nets with the most vias: most lose a connection"
+  ]
+}

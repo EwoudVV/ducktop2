@@ -85,7 +85,11 @@ a targeted rip-up, so the slow group is ahead of where it was (61 open
 instead of 62). the unconnected count is now 646. later the same day the open ec pins were
 allowed onto the front layer and the loose ground pads were strapped to
 nearby ground, which brought the slow group to 51 open, ground to 13 and the
-unconnected count to 623.
+unconnected count to 623. on 15 november the fills moved to 0.15 mm track,
+the ground pads that were only tied to each other got their way to the
+planes, and a new cleanup pass takes out vias where nets hop over one
+track. the slow group is at 39 open, ground at 8 and the unconnected count
+at 606.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

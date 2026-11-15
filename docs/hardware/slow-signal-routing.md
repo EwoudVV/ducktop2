@@ -304,35 +304,99 @@ around the ec and a few more vias from the negotiated pass.
 
 ![the maker mcu](../images/journal/2026-11-14-surface-ec-maker.png)
 
+## thinner tracks, ground islands and hops (15 november)
+
+- **0.15 mm tracks:** the fills on the open slow lines now lay 0.15 mm
+  track instead of 0.2 mm. these are slow digital lines carrying a few
+  milliamps, so the width doesn't matter electrically, and 0.15 mm is a
+  normal width for any fab. it lets a route squeeze between pins and
+  vias where 0.2 mm didn't fit. the router's raster allowance went from
+  0.03 mm to 0.01 mm as well; that only changes how close the search
+  dares to go, every piece is still checked against the real board rules.
+  that took the slow group from 51 open to 39. 280 pieces are 0.15 mm
+  now, the rest stays 0.2 mm.
+- **ground islands:** five groups of ground pads were tied to each other
+  by copper but never reached the planes: U773's exposed pad and pins,
+  the A1 ground pins, the caps on U901 pin 47, C905/C935 and C778/R776.
+  each one now gets a single via or a strap to a pad that is on the
+  planes. ground went from 13 open to 8.
+- **hops:** a net routed early along a layer makes every later net that
+  crosses it on that layer drop through two vias to get past it. a new
+  cleanup pass finds those hops, takes them out so the crossing nets run
+  straight, and sends the one blocking track round on another layer
+  instead. it's kept only where it saves vias with no net worse. this
+  board has few of them because the lanes keep In2 east-west and In5
+  north-south, so it saved 7 vias here.
+- **C914:** the strap for the C905/C935 island took the last via spot of
+  C914.1 (the maker 1V1 cap), so the island is strapped from C935 instead
+  and C914.1 has its room back.
+
+![a hop group before and after](../images/journal/2026-11-15-hop-cleanup.png)
+
+| | committed before | now |
+| --- | ---: | ---: |
+| native unconnected items | 623 | 606 |
+| open slow connections | 51 | 39 |
+| slow nets fully connected | 197 of 248 | 209 |
+| open ground connections | 13 | 8 |
+| vias on the board | 2,823 | 2,853 |
+| bends per 100 mm of track | 15.2 | 15.4 |
+| vias per 100 mm of slow track | 6.5 | 6.3 |
+| track on the outer layers | 15% | 16% |
+| track pieces under 0.3 mm | 492 | 526 |
+
+tried and dropped, because they ended worse:
+- redoing the whole ec area with every pin escaping first, at 0.15 mm:
+  still 55 open after the fills.
+- a planned fan-out per part for U901, U400, J2300, U911 and FPC103 at
+  the new width: no gain on any of them.
+- negotiated local rip-up rounds around the ec and the maker mcu: they
+  either lost connections or left new DRC findings.
+- freeing C908.2: it gets its ground via, but MAKER_SPI_MOSI can't get
+  back past it.
+- redoing the nets with the most vias: most of them would lose a
+  connection.
+
+![slow-net copper with 0.15 mm fills](../images/journal/2026-11-15-thin-tracks-overview.png)
+
+![around the ec](../images/journal/2026-11-15-thin-tracks-u4.png)
+
+![the maker mcu](../images/journal/2026-11-15-thin-tracks-maker.png)
+
 ## not routed
 
-51 slow connections are still open:
+39 slow connections are still open:
 
-| part | open pins | what's in the way |
+| part | open | what's in the way |
 | --- | ---: | --- |
-| U4 (ec) | 15 | boxed in on the front by the neighbouring pins' stubs, the hand-fixed pads and the reserved crystal and usb escapes, with the inner layers under the pin ring full |
-| FPC103 | 7 | boxed in by their neighbours on the front |
-| U911 | 5 | no free way out on any layer |
-| U901 (maker mcu) | 3 | no free way out on any layer |
-| J2300 | 2 | no free way out on any layer |
-| others | 19 | single pins or resistor ends in tight spots |
+| U4 (ec) | 16 | the slow copper of its own neighbours on the front and under the pin ring |
+| U901 (maker mcu) | 7 | no free way out of the 0.4 mm pin ring on any layer |
+| FPC102, FPC103 | 6 | long runs across the board that find no free path at the connector end |
+| U400 (usb hub) | 3 | no free way out on any layer |
+| J2300 | 3 | no free way out on any layer |
+| others | 4 | maker header lines and one resistor end in tight spots |
 
-the last ec pins need a planned fan-out for the whole QFP rather than more
-routing passes: every side's pins escaping together, alternating inward and
-outward.
+the ec is not held up by the usb pairs under it. with only the usb pairs
+taken out of the area, 4 of its 19 stuck pins could escape; with only the
+slow copper taken out, 16 could. so moving the pairs wouldn't help much.
+the problem is the order: the ec's pins are boxed in by the routes of
+other slow nets. a full redo of the area with all pins escaping first was
+tried twice and connected less, so the last ec pins are left for hand
+routing.
 
-ground has 13 open connections left: C2283, C444, C445, C908 and U60
-(boxed in), the mounting hole H2 and the microphone MK430, which stay for
-hand work.
+ground has 8 open connections left: C2283 (blocked by the U773 escape
+reservation), C444 and C445 (right next to the H24 mounting hole keepout),
+C908 (see above), U60 (between its own usb pair), the mounting hole H2
+and the microphone MK430, which stay for hand work.
 
 ## checks
 
 | check | result |
 | --- | --- |
 | physical DRC | zero new findings against the board before the clean reroute, refilled the same way |
-| exact clearance | no problems: all copper that wasn't on that board (5,236 track pieces, 1,546 vias) checked against everything, arcs checked as arcs, track to hole included |
-| native unconnected items | 660 before the clean reroute, 623 now |
-| special-pad via room | 7 special pads have no via spot within 1.5 mm, all accounted for under weak spots |
+| exact clearance | no problems: all copper that wasn't on the committed board (341 track pieces, 45 vias) checked against everything, arcs checked as arcs, track to hole included |
+| native unconnected items | 623 on the committed board, 606 now; no net has fewer connections than before |
+| special-pad via room | the same 7 special pads as before have no via spot within 1.5 mm, all accounted for under weak spots |
 | schematic parity | passes: 870 parts, 3,372 physical pads, no net, value or footprint changes |
 | via nets | every new via keeps its net after refill |
 | placement exports | regenerated; only the board hash changed, all 1,378 component rows still match |
@@ -349,7 +413,8 @@ hand work.
     it's meant to get a via straight up through its pad when the maker
     core supply is routed.
 - the busiest multi-pin nets have a lot of vias (I2C_SCL 36, I2C_SDA 31,
-  INTERNAL_USB_VBUS_VALID 30, NRST_NET 28).
+  NRST_NET 28, INTERNAL_USB_VBUS_VALID 26).
 - there is more track on the front around the ec than before.
+- the slow routing now mixes 0.2 mm and 0.15 mm track.
 - nothing reserves room for the power feeds and the other rails yet;
   they come with the In4 power map.

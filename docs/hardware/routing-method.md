@@ -13,7 +13,9 @@ every net afterwards.
 1. **ground first.** every loose ground pad gets a short stub and a via
    into the plane next to its side (In1 for the front, In6 for the back).
    if there is no spot within reach of a straight stub, a small search on
-   a 0.1 mm grid finds a short stub with as few bends as it can.
+   a 0.1 mm grid finds a short stub with as few bends as it can. groups of
+   ground pads that are tied to each other but not to the planes get one
+   via (or a strap to a pad that is on the planes) per group.
 2. **fan-outs.** every slow pin that needs to leave its layer gets a stub
    and a via. the via sits on a 0.5 mm grid (the lane grid, below) and must
    have at least two free lanes out on the inner layers, or the long runs
@@ -40,7 +42,10 @@ every net afterwards.
    via 4 mm.
 6. **gap fill.** the connections still open get another pass with a
    bigger search budget, then one in the router's negotiated mode, where
-   all open nets route together and push each other out of the way.
+   all open nets route together and push each other out of the way. the
+   fills lay 0.15 mm track (plenty for slow lines, and it fits between
+   pins and vias where 0.2 mm doesn't), and they repeat while they still
+   gain.
 7. **quality gate.** every net gets a score: vias per connection, outer
    layer track far from its pads, bends per 10 mm, and length against the
    shortest tree between its pads. the worst ones are ripped in groups
@@ -54,13 +59,19 @@ every net afterwards.
    straight line, one bend, or straight, diagonal, straight. if none fits,
    a search inside a narrow corridor around the old run looks for a
    version with fewer bends. vias and junctions never move in this step.
-9. **targeted rip-up.** for connections an earlier board had made and the
+9. **hop cleanup.** a net routed early along a layer makes every later
+   net that crosses it there drop through two vias to get past it. where
+   several nets hop over the same track, the hops come out, the crossing
+   nets run straight, and the one blocking track goes round on another
+   layer instead. a group is only kept when it saves vias with no net
+   worse.
+10. **targeted rip-up.** for connections an earlier board had made and the
    new one hasn't, the earlier route near the open pin shows where the
    escape has to go. the nets whose copper sits there (within 4 mm of the
    pin) are ripped, the open pins routed first, then the ripped nets, and
    two fill passes pick up whatever that pushed out. it is only kept if no
    net ends up worse.
-10. **via room check.** every special-attention pad is compared with the
+11. **via room check.** every special-attention pad is compared with the
    committed board. a pad that lost its last via spot within 1.5 mm gets
    its best old spot reserved, only the new pieces sitting in it are cut,
    and the cut nets are routed again around it. this repeats until it

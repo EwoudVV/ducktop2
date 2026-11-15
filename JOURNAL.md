@@ -5,6 +5,24 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-15: thinner tracks, ground islands and hops
+
+**Total time spent: 2 hours**
+
+the slow lines were stuck at 51 open, so i tried a lot of things and kept what actually helped. the big one was letting the fills use 0.15 mm track instead of 0.2 mm. these are slow digital lines, so the width doesn't matter electrically, and 0.15 mm is a normal width for any fab, but it fits between pins and vias where 0.2 mm didn't. i also let the router search closer to other copper (everything still gets checked against the real rules after). together that brought the slow group from 51 open to 39.
+
+![slow-net copper with the 0.15 mm fills](docs/images/journal/2026-11-15-thin-tracks-overview.png)
+
+i also found five groups of ground pads that were tied to each other but never actually reached the ground planes, like the exposed pad on U773 and a few caps around the maker mcu. each one got a via or a strap to a pad that's on the planes, so ground went from 13 open to 8. one of those straps ate the last via spot of a maker 1V1 cap, so i strapped that island from the other cap instead.
+
+the other board was showing rows of nets each jumping two vias over one long track, so i wrote a cleanup pass for that. a net routed early along a layer makes every net that crosses it later hop over it, and nothing ever went back to move the one track instead. the pass takes the hops out, lets the crossing nets run straight and sends the blocking track round on another layer, and only keeps it if it saves vias without losing a connection. this board doesn't have many hops because the lanes keep In2 and In5 in opposite directions, so it only saved 7 vias here, but it should do a lot more on the other boards. i also added a way to give every layer its own direction in the router so it doesn't happen in the first place.
+
+![a hop group before and after](docs/images/journal/2026-11-15-hop-cleanup.png)
+
+a lot of stuff didn't pay off: redoing the whole ec area with every pin escaping first, a planned fan-out for each of the busy parts, more local rip-ups and freeing the last boxed-in ground cap. i also checked if the usb pairs under the ec were what kept its last pins in, but they're not, it's the other slow lines around it, so i'm not moving them. the last ec pins will be done by hand. the board is at 606 unconnected now, DRC has no new findings and it still matches the schematic.
+
+![around the ec](docs/images/journal/2026-11-15-thin-tracks-u4.png)
+
 # 2026-11-14: ec pins on the surface and the loose ground pads
 
 **Total time spent: 2 hours**
