@@ -5,6 +5,41 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-16: In4 power map, a lot of links and the first real usb pairs
+
+**Total time spent: 12 hours**
+
+big one. the board went from 357 unconnected to 125. i stopped doing one net at a time and just kept going until most of what's left needs an actual design call.
+
+first In4 became the power map. every rail got its own pour on In4 under the parts it feeds (SYS_3V3 on the west, SYS_5V in two islands, PCIE_3V3 on the east, PCIE_3V3_IN, MAKER_3V3_CORE in the maker corner, plus the VSYS island and battery strip that were already there), and every pad of that rail above the pour drops to it with a short stub and a via. that alone took SYS_3V3 from 36 open to 23 and MAKER_3V3_CORE from 19 to 3. the light rails between the drops went in as small trees, 0.3 mm for supply pins up to 0.6 mm for AUDIO_5V and the radio 5 V.
+
+![the In4 power map](docs/images/journal/2026-11-16-in4-power-map.png)
+
+after that the loose pieces of nets got short exact links, each one checked against everything already on the board. where a link had to cut a slow line i ripped the slow copper and routed it again, and only dropped the links whose slow lines didn't come back. the FPC102 shell tabs are all joined now (that was 11 open on its own), the codec and hub crystals are done, and SYS5_PRE_SENSE (the 4.5 A path from L4 to the shunt) got a pour instead of thin tracks, with its kelvin line going round L4 on the back.
+
+then i split the rest into four jobs that each worked on their own copy of the board with the same rules (nothing gets worse, exact clearance clean, no new DRC findings): power, the maker corner, slow and sense lines, and the usb pairs. each result got replayed onto the newest merged board and checked again before the next one went on. where two of them wanted the same spot (the slow lines and the new pairs did, a few times) the later one either got rerouted or left out.
+
+- power: AUDIO_5V went from 13 open to 1, MCU_3V3 from 14 to 1, the radio and wi-fi supplies are done, and the high current paths that didn't need an island change are now wide strips on the back: PD1_VBUS_RAW and USB_PD_SELECTED at 2.5 mm, VSYS to the endpoint buck, and a 2 mm AUX_DC_PROTECTED trunk (about 24 mohm). the SYS_5V top island finally has a feed too.
+- maker corner: the qspi lines except two, the crystal, MAKER_1V1 and the header outputs.
+- slow and sense: SOURCE_MGR_INT_N and RADIO_UHF_RF_SEL_3V3 on the ec are back, plus the dac outputs, the left speaker lines and a bunch of keyboard and radio lines.
+- usb pairs: six pairs routed as real coupled pairs at the exact width and gap, including USBC1 which has to go all the way round the east side of the Mu socket.
+
+![everything this push added](docs/images/journal/2026-11-16-push-overview.png)
+
+a few things to be honest about. MAKER_SPI_MOSI and MAKER_GPIO4 got worse: the MAKER_3V3_CORE drops took their via spots and they never came back. three pair fan-out segments have a tiny 4 to 10 um bend, because KiCad 10 flags any two parallel P/N segments as a pair gap problem even when they're millimetres apart and not coupled at all. and there's no skew tuning on the pairs yet (USBC1 is 3 mm off).
+
+what's left mostly needs me to decide things: carving a VSYS strip out of the SYS_3V3 island for the 3.3 V buck input, the same for MU_12V through the VSYS island, moving the aux dc fuse and clamp next to the efuse, the PD2 harness, a few tiny part moves that free walled-in pins, and some test pads that should just move. the board still matches the schematic and DRC has no new findings.
+
+# 2026-11-15: MU_PWRBTN_N back on its old path
+
+**Total time spent: 1 hour**
+
+MU_PWRBTN_N is how the ec turns the Mu on, so having it open was kind of a big deal. it lost its connection when its first segment had to move for the VDDA via, and then the rest of it got pruned as a dead end. turns out its old route from two commits back still fit almost everywhere, so i put 47 of its 48 pieces back, moved eight newer slow pieces that had wandered into that corridor, and added a short bridge round the VDDA via.
+
+![MU_PWRBTN_N from the ec to the Mu socket, the power switch and D716](docs/images/journal/2026-11-15-mu-pwrbtn.png)
+
+the catch is that the bridge needs the same gap under the pins that RADIO_UHF_RF_SEL_3V3 used, and only one of them fits, so MU_PWRBTN_N keeps it and the radio line is open again. SOURCE_MGR_INT_N and KB_ROW6 are the same kind of one-or-the-other one corner up. the count stays at 357.
+
 # 2026-11-15: old ground traces off In4, vcap1 done
 
 **Total time spent: 1 hour**

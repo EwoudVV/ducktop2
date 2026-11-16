@@ -1,0 +1,166 @@
+{
+  "date": "2026-11-16",
+  "baseline_commit": "c522121",
+  "scope": "MU_PWRBTN_N back on its old route (15 november, uncommitted until now), then In4 power islands with pad drops, light rail trees, exact A* links with rip and reroute, the SYS5_PRE_SENSE pour and kelvin line, and four parallel jobs (power, maker corner, slow and sense lines, usb pairs) replayed one at a time onto the merged board. Copper only; no parts moved.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "4d2342afab70b1b12dd2e56b7a56545ceb89a119155692456d640512cd70893f",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "counted_with": "pcbnew GetTracks classes (earlier records counted 165 '(via' entries that are not vias)",
+    "straight_tracks": [
+      11706,
+      13404
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      2879,
+      3202
+    ]
+  },
+  "in4_islands_mm2": {
+    "SYS_5V": 8959,
+    "PCIE_3V3": 8845,
+    "SYS_3V3": 6907,
+    "VSYS": 2993,
+    "MAKER_3V3_CORE": 2601,
+    "PACK_POS_FUSED": 1176,
+    "PCIE_3V3_IN": 853
+  },
+  "connectivity": {
+    "native_unconnected": [
+      357,
+      125
+    ],
+    "chain": {
+      "in4 islands and light rails": [
+        357,
+        279
+      ],
+      "exact links and rip-reroute links": [
+        279,
+        227
+      ],
+      "power job part 1": [
+        227,
+        209
+      ],
+      "SYS_5V pieces, maker job, ground drops": [
+        209,
+        186
+      ],
+      "power job part 2": [
+        186,
+        165
+      ],
+      "power job part 3": [
+        165,
+        161
+      ],
+      "usb pairs": [
+        161,
+        141
+      ],
+      "power job part 4": [
+        141,
+        140
+      ],
+      "slow and sense job": [
+        140,
+        125
+      ]
+    },
+    "nets_better": 79,
+    "nets_worse": {
+      "MAKER_SPI_MOSI": [
+        0,
+        1
+      ],
+      "MAKER_GPIO4": [
+        0,
+        1
+      ],
+      "why": "MAKER_3V3_CORE island drops took their via spots (MAKER_3V3_CORE 19 -> 1 over the push)"
+    },
+    "left_out_at_merge": [
+      "I2C_SCL",
+      "AUX_DC_DIV",
+      "AUDIO_MIC_EN",
+      "GNSS_UART_RX"
+    ]
+  },
+  "high_current_copper": {
+    "PD1_VBUS_RAW": "2.5 mm B strip, 90 mm",
+    "USB_PD_SELECTED": "2.5 mm B strip, 78 mm",
+    "VSYS_U773_input": "2.5 mm B strip from the In4 VSYS island",
+    "AUX_DC_PROTECTED": "2.0 mm B 73 mm, 5 vias, 1.5 mm F, 0.95 mm neck 2.3 mm at C722.1, about 24 mohm",
+    "SYS_5V_top_island_feed": "0.6 mm, 55 mm, 3 vias",
+    "SYS5_PRE_SENSE": "F pour L4.2 to RS2360/RS2361"
+  },
+  "usb_pairs_coupled": {
+    "USBC1": [
+      111.6,
+      114.6
+    ],
+    "RADIO_CODEC_USB_HOST": [
+      83.4,
+      84.9
+    ],
+    "USBC2_SSRX": [
+      32.9,
+      32.8
+    ],
+    "USBC2_SSTX": [
+      15.7,
+      15.9
+    ],
+    "USBC1_SSTX": [
+      13.9,
+      14.6
+    ],
+    "USBC1_SSTX_RAW": [
+      5.5,
+      4.4
+    ]
+  },
+  "diff_pair_kinks": {
+    "segments": 3,
+    "nets": [
+      "CODEC_USB_DN",
+      "RADIO_CODEC_USB_DB_DP",
+      "USBC1_DN"
+    ],
+    "size_um": "4 to 10",
+    "why": "KiCad 10 checks every parallel P/N segment pair at any distance; these are uncoupled fan-out legs more than twice the pair gap apart"
+  },
+  "checks": {
+    "drc_new_findings_vs_reference": 0,
+    "exact_clearance_problems": 0,
+    "track_to_hole_problems": 0,
+    "exact_check_scope": "every merge's new copper against the board it was replayed on, and the finish pass against the board before it",
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; only source_board_sha256 changed",
+    "vias_in_pads_added": [
+      "U310.1 to C322.1",
+      "C2283.2",
+      "C39.2",
+      "C208.2 (U44.21 ground)"
+    ]
+  },
+  "needs_a_decision": [
+    "VSYS to U7 and J2430.3 (carve SYS_3V3 on In4)",
+    "MU_12V to A1 (carve VSYS on In4)",
+    "AUX_DC input chain placement",
+    "PD2 harness or ideal diode placement",
+    "AUDIO_5V for U425 from SYS_5V",
+    "test pads TP2 TP3 TP5 TP13",
+    "C444/C445 in the H24 keep-out",
+    "small part moves R900/R901, R959-R961, R918, R2349, C434/C435, C721 or R711",
+    "hand-routed fan-outs at U773, U6.14, U2300.9",
+    "pair skew tuning areas"
+  ]
+}

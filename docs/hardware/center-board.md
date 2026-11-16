@@ -1,6 +1,6 @@
 # center board
 
-updated 14 november 2026. the center board is 227 x 185 mm with eight
+updated 16 november 2026. the center board is 227 x 185 mm with eight
 layers, 870 footprints and 3,563 pads. the existing pcie, usb, hdmi and
 ethernet routes have been repaired. there is still a lot of main routing
 to do before this board can be ordered.
@@ -27,11 +27,16 @@ routing was then redone cleaner, on a lane grid on the inner layers;
 [how the slow lines get routed](routing-method.md) covers the method that
 later passes should follow too.
 
-the board has 11,655 straight track sections, 51 arcs and 3,033 vias.
-native connectivity counts 357 unconnected items. In4 carries the VSYS
-island, the battery strip and a few short VSYS and wi-fi pieces; the old
-ground guard traces from when the usb pairs ran there are gone. KiCad's DRC list can
-stop at 499, so use the native count when checking routing progress.
+the board has 13,404 straight track sections, 51 arcs and 3,202 vias.
+native connectivity counts 125 unconnected items. In4 is the power map:
+islands for SYS_3V3, SYS_5V, PCIE_3V3, PCIE_3V3_IN, MAKER_3V3_CORE and
+VSYS plus the battery strip, with every rail pad above them dropped to
+its island. the first usb pairs are routed as coupled pairs, and the
+high current input paths that don't need an island change run as wide
+strips on the back. [special nets](special-net-routing.md) covers that
+push and lists what's left, including the design calls it needs.
+KiCad's DRC list can stop at 499, so use the native count when checking
+routing progress.
 
 the four hdmi pairs and the ethernet controller's pcie data and clock
 connections now reach FPC103. the largest hdmi pair mismatch is 0.052 mm.

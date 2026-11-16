@@ -98,6 +98,15 @@ has the rules and what's left. after that the ec's own pins were done one by
 one: all its supply pins, both crystals and both vcaps are connected now.
 the old ground guard traces on In4 are gone (the usb pairs they guarded moved
 off that layer long ago), and the unconnected count is at 357.
+MU_PWRBTN_N, the line the ec uses to turn the Mu on, is connected again on its
+old route.
+on 15 and 16 november In4 became the power map (islands for SYS_3V3, SYS_5V,
+PCIE_3V3, PCIE_3V3_IN, MAKER_3V3_CORE and VSYS), then the loose pieces got short
+exact links, and the rest went in four parallel jobs: power, the maker corner,
+slow and sense lines, and the first usb pairs routed as real coupled pairs. the
+unconnected count is at 125. what's left mostly needs design calls (carving
+islands, a few part moves, the aux input chain), listed in
+[special nets](docs/hardware/special-net-routing.md).
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,
