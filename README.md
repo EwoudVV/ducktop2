@@ -107,6 +107,10 @@ slow and sense lines, and the first usb pairs routed as real coupled pairs. the
 unconnected count is at 125. what's left mostly needs design calls (carving
 islands, a few part moves, the aux input chain), listed in
 [special nets](docs/hardware/special-net-routing.md).
+on 19 november In4 got three carved strips (VSYS to the 3.3 V buck, MU_12V to the
+Mu socket and the fused aux input), the hub's two long usb pairs reached FPC103,
+and VSYS, MU_12V, MCU_3V3 and ground are all one piece now. the unconnected count
+is at 103.
 
 the keyboard has per-key RGB on four layers and its routing is complete.
 the RGB buffer has separate 3.3 V and 5 V supplies. the key positions,

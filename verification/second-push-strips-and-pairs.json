@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-19",
+  "baseline_commit": "57ede21",
+  "scope": "Second push: In4 strips for VSYS to U7, MU_12V to A1 and the fused aux input; U773 fan-out redone; small part moves (C434/C435 swap, C445, C2283, R191, R192, R2349); SYS_5V feed to U770; HUB_DS1 and HUB_DS4 as coupled pairs to FPC103; slow and sense lines left out at the last merge.",
+  "board": {
+    "pcb": "ducktop2-center.kicad_pcb",
+    "sha256": "374954980b990c01f5e66436cc24b205e577d4142557a6f0c02620c4ca934f9d",
+    "schematic": "ducktop2.kicad_sch"
+  },
+  "copper_counts": {
+    "counted_with": "pcbnew GetTracks classes",
+    "straight_tracks": [
+      13404,
+      13751
+    ],
+    "arcs": [
+      51,
+      51
+    ],
+    "vias": [
+      3202,
+      3297
+    ]
+  },
+  "parts_moved": {
+    "C434": "swapped with C435, (176.2, 171.8) rot 180",
+    "C435": "(172.5, 171.6) rot 180",
+    "C445": "(183.3, 180.55) rot -90, out of the H24 keep-out",
+    "C2283": "0.25 mm south to (247.8, 163.2)",
+    "R191": "(135.1, 86.6)",
+    "R192": "(137.0, 81.6)",
+    "R2349": "5.5 mm west to (106.3, 146.7) rot 90"
+  },
+  "in4_strips": {
+    "VSYS U7 strip": "3 x 47.4 mm, x 129-132, y 57.2-104.6, priority 11 over SYS_3V3; about 8-9 mohm",
+    "MU_12V strip": "3 mm, converter output along y 116.5-119.5 to A1's 12 V row, priority 12 over VSYS; about 11-12 mohm",
+    "AUX_DC_FUSED strip": "4.2-6 mm, F190.2 along y 98.4-102.9 to Q13 at x 189-195, priority 13; about 12 mohm",
+    "islands_still_one_piece": [
+      "SYS_3V3",
+      "VSYS",
+      "SYS_5V"
+    ]
+  },
+  "connectivity": {
+    "native_unconnected": [
+      125,
+      103
+    ],
+    "nets_better": 18,
+    "nets_worse": [],
+    "chain": {
+      "power U770 feed": [
+        125,
+        124
+      ],
+      "signals push 2": [
+        124,
+        117
+      ],
+      "maker MCU_3V3": [
+        117,
+        117
+      ],
+      "power strips (AUX_DC_DIV out for a while)": [
+        117,
+        115
+      ],
+      "maker C445": [
+        115,
+        114
+      ],
+      "power aux strip and U773": [
+        114,
+        107
+      ],
+      "hub pairs": [
+        107,
+        103
+      ],
+      "finish pass": [
+        103,
+        103
+      ]
+    },
+    "not_taken": {
+      "SPK_R_P/N": "only fit 0.49-1.26 mm from charger sense lines",
+      "U4 escape re-plan": "63 of 69 slots, but 10-18 other ec lines lost per run",
+      "THERM_SKIN_ADC J54 run": "clashed with the hub pairs at merge"
+    }
+  },
+  "usb_pairs_coupled": {
+    "HUB_DS1": [
+      179.5,
+      180.3
+    ],
+    "HUB_DS4": [
+      172.8,
+      173.5
+    ]
+  },
+  "checks": {
+    "drc_new_findings_vs_reference": 0,
+    "exact_clearance_problems": 0,
+    "track_to_hole_problems": 0,
+    "schematic_parity": "passed: 870 parts, 3372 physical pads, no net, value or footprint changes",
+    "placement_exports": "regenerated; source_board_sha256 and the seven moved parts changed"
+  }
+}

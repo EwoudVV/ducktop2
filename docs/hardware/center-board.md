@@ -1,6 +1,6 @@
 # center board
 
-updated 16 november 2026. the center board is 227 x 185 mm with eight
+updated 19 november 2026. the center board is 227 x 185 mm with eight
 layers, 870 footprints and 3,563 pads. the existing pcie, usb, hdmi and
 ethernet routes have been repaired. there is still a lot of main routing
 to do before this board can be ordered.
@@ -27,11 +27,12 @@ routing was then redone cleaner, on a lane grid on the inner layers;
 [how the slow lines get routed](routing-method.md) covers the method that
 later passes should follow too.
 
-the board has 13,404 straight track sections, 51 arcs and 3,202 vias.
-native connectivity counts 125 unconnected items. In4 is the power map:
+the board has 13,751 straight track sections, 51 arcs and 3,297 vias.
+native connectivity counts 103 unconnected items. In4 is the power map:
 islands for SYS_3V3, SYS_5V, PCIE_3V3, PCIE_3V3_IN, MAKER_3V3_CORE and
 VSYS plus the battery strip, with every rail pad above them dropped to
-its island. the first usb pairs are routed as coupled pairs, and the
+its island, and strips carved in for VSYS to U7, MU_12V to the Mu socket
+and the fused aux input. the first usb pairs are routed as coupled pairs, and the
 high current input paths that don't need an island change run as wide
 strips on the back. [special nets](special-net-routing.md) covers that
 push and lists what's left, including the design calls it needs.

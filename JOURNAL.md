@@ -5,6 +5,26 @@ description: "An open-source 16-inch laptop designed from scratch."
 created_at: "2026-08-26"
 ---
 
+# 2026-11-19: carving the In4 islands, the aux input and the hub pairs
+
+**Total time spent: 4 hours**
+
+second push, 125 down to 103. this one was mostly about the things i'd been putting off because they meant changing earlier work.
+
+the big one was carving strips into the In4 islands. the 3.3 V buck (U7) had its input caps joined but nothing feeding them, so now there's a 3 mm VSYS strip cut through the SYS_3V3 island straight up to it, and the VSYS pin of the left power connector drops into the same strip. the Mu's 12 V got the same treatment: a 3 mm strip through the VSYS island from the converter to the socket. both islands they cut through are still one piece, i checked that with the connectivity and not just by looking. VSYS and MU_12V are fully connected now.
+
+![the In4 power map with the three new strips](docs/images/journal/2026-11-19-in4-power-map.png)
+
+the aux dc input got a 4 to 6 mm strip on In4 too, from the fuse to the reverse fet at the efuse, about 12 mohm. it had to run right under the edge of the VSYS island, because any lower and it would've cut off a pocket of SYS_3V3 next to the new U7 strip. the divider moved next to the fuse. the efuse's own input pins and the main aux input from the connector still don't have a way in though, that needs another look at the parts round U12.
+
+a few small part moves went in: two amp input caps swapped places so the amp inputs don't cross anymore, a radio resistor moved over 5.5 mm, the comp cap at the pcie buck moved 0.25 mm so its config, rt and the pcie kelvin sense line could get out, and C445 moved out of the mounting hole keep-out, which connected the last open ground pad. ground is one piece now. some of the moves i wanted turned out not to fit once they were actually checked (courtyards and pads in the way), so those stayed put.
+
+the hub's two long usb pairs go all the way to FPC103 now as proper coupled pairs, about 175 mm each. that needed a fix in the pair router for when a pair arrives at its end on a different layer than the pads.
+
+![everything this push added](docs/images/journal/2026-11-19-push2-overview.png)
+
+i didn't take the right speaker lines: they only fit by running right past the charger's current sense lines, less than half a mm away in one spot, and class-d switching next to a sense line is asking for trouble. a full re-plan of the ec's pin escapes also didn't pay off, the bottom-left corner of the ec is just packed with decoupling. the board still matches the schematic and DRC has no new findings.
+
 # 2026-11-16: In4 power map, a lot of links and the first real usb pairs
 
 **Total time spent: 12 hours**

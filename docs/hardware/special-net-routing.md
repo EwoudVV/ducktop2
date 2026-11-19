@@ -373,7 +373,9 @@ vias in pads: U310.1 drops straight into C322.1 under it on the back,
 and C2283.2, C39.2 and C208.2 (for U44.21) got vias in their ground
 pads. the board already had 59 of those, mostly ground cap pads.
 
-### what's left, and what needs a decision
+### what's left, and what needs a decision (16 november)
+
+the second push below took care of part of this list.
 
 these need a design call before they can be routed well:
 - **VSYS to U7** (the SYS_3V3 buck, about 3 A in) and the VSYS pin of
@@ -414,3 +416,130 @@ corner, and the ec pins that are one-or-the-other with a neighbour
 (HSE_XTAL_OUT, KB_COL11, KB_COL3, PD1_VALID_N, HUB_CFG_SEL0). no pair has
 skew tuning yet: USBC1's DP is 3.0 mm shorter than DN and
 RADIO_CODEC_USB_HOST's 1.5 mm, mostly from the inside leg at the bends.
+
+## second push: the island carves and the rest of the power (19 november)
+
+125 to 103 unconnected, with the design calls from the list above made
+as follows.
+
+![copper added in the second push, existing copper dimmed](../images/journal/2026-11-19-push2-overview.png)
+
+### two strips carved into In4
+
+- **VSYS for U7:** a 3 x 47 mm VSYS strip at x 129 to 132 runs from the
+  VSYS island up to U7's input caps, laid over the SYS_3V3 island with a
+  higher priority. U7's input group connects through 6 vias, and the VSYS
+  pin of J2430 through a 2.5 mm stub and 6 vias. SYS_3V3 is still one
+  piece; two of its drops that sat in the strip moved next to it. about 8
+  to 9 mohm, so under 30 mV at 3 A.
+- **MU_12V:** a 3 mm strip carved out of the VSYS island from the 12 V
+  converter's output along y 116.5 to 119.5 to the Mu socket's 12 V row.
+  VSYS stays one piece. about 11 to 12 mohm. the via banks are 5 at the
+  converter and 7 at A1, which is boxed in by the pcie pairs.
+
+VSYS, MU_12V and the test pad TP3 are fully connected now.
+
+### the aux input
+
+- **AUX_DC_FUSED** runs as a 4.2 to 6 mm In4 strip from F190 along y 98.4
+  to 102.9, just under the VSYS island's edge, to Q13 at x 189 to 195.
+  any lower band would cut off a SYS_3V3 pocket next to the U7 strip.
+  about 12 mohm, 60 mV at 5 A. the strip has 5 vias at F190 and 3 at Q13.5.
+- **the divider:** R191 and R192 moved next to F190.2, and AUX_DC_DIV was
+  rerouted from there.
+- **still open** (AUX_DC_FUSED went from 5 open to 2):
+  - U12's input pins: no via spot next to them, and the F link to Q13.5
+    doesn't fit even at 0.4 mm.
+  - the D711 standby branch: it routes, but cuts 11 slow lines.
+  - AUX_DC_RAW from J2450 to F190: the F190 end is boxed in by the
+    USB_PD_SELECTED strip and the U7 strip.
+  - AUX_EFUSE_DRV.
+
+### local fixes and small moves
+
+- U773: C2283 moved 0.25 mm south, BUCKPE_CONFIG and BUCKPE_RT were
+  redone at 0.2 mm, and U773.12 is joined to R785.1. the PCIE_PRE_SENSE
+  kelvin runs from U773.11 to the shunt pad RS2281.1 at 0.15 mm, 2.4 mm
+  from L1702's courtyard.
+- C434 and C435 swapped places, which untangles the amp inputs
+  (AMP_IN_LN). R2349 moved 5.5 mm west (RADIO_UHF_SQL_DB).
+- C445 moved out of the H24 mounting hole keep-out, so its ground pad,
+  the last open one, is connected. GND is one piece now.
+- the other small moves from the list didn't fit once checked:
+  - R900/R901 with C910: their courtyards would overlap.
+  - R959 to R961: they'd land on the adc fan-out vias.
+  - R918: it would land on Y900's pad.
+  - C2363: it would land on R40.
+- SYS_5V reaches U770 now: 0.9 mm, 78 mm, about 21 mohm, from the top
+  island. MCU_3V3's last two caps (C174/C175) are joined, so MCU_3V3 is
+  one tree.
+
+### the hub's long pairs
+
+HUB_DS1 and HUB_DS4 go from the hub all the way to FPC103 as coupled
+pairs at the exact DIFF_90 width and gap: 179.5 / 180.3 mm and
+172.8 / 173.5 mm, 4 vias per leg. HUB_DS1 needed a fix in how the pair
+router joins a pair's ends when it arrives on a layer the end pads
+aren't on.
+
+### signals
+
+I2C_SCL, AUDIO_MIC_EN and GNSS_UART_RX are back (they were left out at
+the last merge), plus AMP_IN_LN and RADIO_UHF_SQL_DB through the moves
+above.
+
+### tried and not taken
+
+- **the right speaker lines:** both legs only fit past the charger, 0.49
+  to 1.26 mm from its sense lines (CHG_SRN, CHG_DCIN, CHG_NTC_HOT_GATE).
+  class-d switching that close to a current sense line isn't worth it,
+  and there's no other way from the amp to J421: the battery pour fills
+  In5 along the south edge.
+- **a joint re-plan of the ec's escapes:** a slot planner placed escapes
+  for 63 of 69 pins, but every run left 10 to 18 other ec lines with no
+  route. the bottom-left corner of U4 (pins 23 to 30) is walled in by
+  MCU_3V3 and ground decoupling copper and the HUB_DS4 pair. it needs
+  lanes reserved for the far ends and room for a few pins, which means
+  moving some decoupling.
+- **THERM_SKIN_ADC's run from J54:** it routed on an earlier board but
+  ran into the new pairs at merge.
+
+![the In4 power map with the three new strips](../images/journal/2026-11-19-in4-power-map.png)
+
+### checks
+
+| check | result |
+| --- | --- |
+| physical DRC | zero new findings against the reference report, courtyards included |
+| exact clearance | every merge's new copper checked against the board it landed on: no problems, no track to hole problems |
+| native connectivity | 125 to 103; 18 nets better, none worse |
+| schematic parity | passes: 870 parts, 3,372 physical pads, no net, value or footprint changes |
+| placement exports | regenerated; the board hash and the seven moved parts changed (C434, C435, C445, C2283, R191, R192, R2349) |
+| copper | 13,751 straight track sections, 51 arcs and 3,297 vias |
+
+### what's left after this push
+
+needs a design call or a part move:
+- **PD2_VBUS_RAW and PD2_VBUS_GATED:** swap the harness pinout, or move
+  Q2621/U2621.
+- **AUDIO_5V for U425:** feed it from SYS_5V through its own ferrite.
+- **test pads TP2 and TP13:** they're 125 and 150 mm from their rails.
+- **SPK_R:** needs room at the charger, or J421 closer to the amp.
+- **the bottom-left corner of the ec:** move some decoupling so the slow
+  pins there can escape.
+- **FPC103:** its hand-placed fan-out vias and the ground comb leave no
+  room for the six control lines that end there.
+- **U12's input pins:** a placement look round U12 and Q13.
+- **AUX_DC_RAW:** a second SYS_3V3 carve along x 123 to 127.6.
+- **BUCK5_RT:** move the U6 SYS_5V In5 trunk about 0.5 mm west, or R40
+  and C2363 together.
+- **the maker corner pins:** QSPI SD1/SCLK, the J901 adc lines, SWCLK,
+  and the MAKER_USB pairs.
+
+copper only, ready for the next pass:
+- TRACKPAD_USB and SYSTEM_DAC_USB: move the HUB_PLLFILT via about 1 mm
+  north.
+- WIFI_USB: re-net the dead stubs from an old pinout at A1.82/84.
+- EC_HOST_USB: feed U60.5 from the west to free a via-pair spot.
+- USBC2: it needs a RADIO_UHF_PD_N via, so it waits for the ec corner.
+- THERM_SKIN_ADC's J54 run.
